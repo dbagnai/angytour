@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BagniLbl" xml:space="preserve">
+    <value>Baths</value>
+  </data>
+  <data name="CamereLbl" xml:space="preserve">
+    <value>Locals</value>
+  </data>
+  <data name="Caratteristiche" xml:space="preserve">
+    <value>Main Features</value>
+  </data>
+  <data name="Classe" xml:space="preserve">
+    <value>Cle</value>
+  </data>
+  <data name="Codice" xml:space="preserve">
+    <value>Ref.</value>
+  </data>
+  <data name="Condizioni" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="Contratto" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="Dati" xml:space="preserve">
+    <value>Main info</value>
+  </data>
+  <data name="Descrizione" xml:space="preserve">
+    <value>Property description</value>
+  </data>
+  <data name="Ipe" xml:space="preserve">
+    <value>Epe</value>
+  </data>
+  <data name="Metratura" xml:space="preserve">
+    <value>Square footage</value>
+  </data>
+  <data name="Nome" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="pagerAvanti" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="pagerIndietro" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="pagerTotale" xml:space="preserve">
+    <value>Article found</value>
+  </data>
+  <data name="Posizione" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Prezzo" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Proposte" xml:space="preserve">
+    <value>Real estate proposals</value>
+  </data>
+  <data name="Riservato" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="selectComune" xml:space="preserve">
+    <value>Comune</value>
+  </data>
+  <data name="selectdettaglicondizione" xml:space="preserve">
+    <value>Select Conditions</value>
+  </data>
+  <data name="selectdettaglimetrature" xml:space="preserve">
+    <value>Select Square meters</value>
+  </data>
+  <data name="selectdettagliprezzi" xml:space="preserve">
+    <value>Select Price Range</value>
+  </data>
+  <data name="selectdettaglitipocontratto" xml:space="preserve">
+    <value>Select Contract</value>
+  </data>
+  <data name="selectdettaglitiporisorse" xml:space="preserve">
+    <value>Select Type</value>
+  </data>
+  <data name="selectGeneric" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="selectNazione" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="selectProvincia" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="selectRegione" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Simili" xml:space="preserve">
+    <value>Real estate proposals</value>
+  </data>
+  <data name="Stampa" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Terreno" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="Tipologia" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UMipe" xml:space="preserve">
+    <value>Kwh/m*year</value>
+  </data>
+  <data name="UMsuperficie" xml:space="preserve">
+    <value>(smq)</value>
+  </data>
+  <data name="UMTerreno" xml:space="preserve">
+    <value>(ha)</value>
+  </data>
+  <data name="Valuta" xml:space="preserve">
+    <value>€</value>
+  </data>
+  <data name="Articolo" xml:space="preserve">
+    <value>Article</value>
+  </data>
+  <data name="Quantita" xml:space="preserve">
+    <value>N.</value>
+  </data>
+  <data name="testoCarelloesaurito" xml:space="preserve">
+    <value>Sold</value>
+  </data>
+  <data name="testoInseriscicarrello" xml:space="preserve">
+    <value>&lt;i class="fa fa-cart-plus"&gt;&lt;/i&gt;Cart</value>
+  </data>
+  <data name="testoLeggi" xml:space="preserve">
+    <value>Read&gt;&gt;</value>
+  </data>
+  <data name="testoSconto" xml:space="preserve">
+    <value>Discount</value>
+  </data>
+  <data name="TestoPubblicatodata" xml:space="preserve">
+    <value>published </value>
+  </data>
+</root>

@@ -1,0 +1,1002 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.IO;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using WelcomeLibrary.UF;
+using WelcomeLibrary.DOM;
+using WelcomeLibrary.DAL;
+
+public partial class AspNetPages_RisultatiProdotti : CommonPage
+{
+    public string PageGuid
+    {
+        get { return ViewState["PageGuid"] != null ? (string)(ViewState["PageGuid"]) : ""; }
+        set { ViewState["PageGuid"] = value; }
+    }
+    public string Pagina
+    {
+        get { return Session["Pagina"] != null ? (string)(Session["Pagina"]) : "1"; }
+        set { Session["Pagina"] = value; }
+    }
+    public DataTable dt
+    {
+        get { return ViewState["DataTable"] != null ? (DataTable)(ViewState["DataTable"]) : new DataTable(); }
+        set { ViewState["DataTable"] = value; }
+    }
+
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
+    public string Tipologia
+    {
+        get { return ViewState["Tipologia"] != null ? (string)(ViewState["Tipologia"]) : ""; }
+        set { ViewState["Tipologia"] = value; }
+    }
+    public string Provincia
+    {
+        get { return ViewState["Provincia"] != null ? (string)(ViewState["Provincia"]) : ""; }
+        set { ViewState["Provincia"] = value; }
+    }
+    public string Regione
+    {
+        get { return ViewState["Regione"] != null ? (string)(ViewState["Regione"]) : ""; }
+        set { ViewState["Regione"] = value; }
+    }
+    public string FasciaPrezzo
+    {
+        get { return ViewState["FasciaPrezzo"] != null ? (string)(ViewState["FasciaPrezzo"]) : ""; }
+        set { ViewState["FasciaPrezzo"] = value; }
+    }
+    public string Mesefiltro
+    {
+        get { return ViewState["Mesefiltro"] != null ? (string)(ViewState["Mesefiltro"]) : ""; }
+        set { ViewState["Mesefiltro"] = value; }
+    }
+    public string Giornofiltro
+    {
+        get { return ViewState["Giornofiltro"] != null ? (string)(ViewState["Giornofiltro"]) : ""; }
+        set { ViewState["Giornofiltro"] = value; }
+    }
+    public string Comune
+    {
+        get { return ViewState["Comune"] != null ? (string)(ViewState["Comune"]) : ""; }
+        set { ViewState["Comune"] = value; }
+    }
+
+
+    public string Categoria2liv
+    {
+        get { return ViewState["Categoria2liv"] != null ? (string)(ViewState["Categoria2liv"]) : ""; }
+        set { ViewState["Categoria2liv"] = value; }
+    }
+    public string testoricerca
+    {
+        get { return ViewState["testoricerca"] != null ? (string)(ViewState["testoricerca"]) : ""; }
+        set { ViewState["testoricerca"] = value; }
+    }
+    public string mese
+    {
+        get { return ViewState["mese"] != null ? (string)(ViewState["mese"]) : ""; }
+        set { ViewState["mese"] = value; }
+    }
+    public string anno
+    {
+        get { return ViewState["anno"] != null ? (string)(ViewState["anno"]) : ""; }
+        set { ViewState["anno"] = value; }
+    }
+    public string Categoria
+    {
+        get { return ViewState["Categoria"] != null ? (string)(ViewState["Categoria"]) : ""; }
+        set { ViewState["Categoria"] = value; }
+    }
+    public string Annata
+    {
+        get { return ViewState["Annata"] != null ? (string)(ViewState["Annata"]) : ""; }
+        set { ViewState["Annata"] = value; }
+    }
+
+    public bool Vetrina
+    {
+        get { return ViewState["Vetrina"] != null ? (bool)(ViewState["Vetrina"]) : false; }
+        set { ViewState["Vetrina"] = value; }
+    }
+    public string Ordinamento
+    {
+        get { return ViewState["Ordinamento"] != null ? (string)(ViewState["Ordinamento"]) : ""; }
+        set { ViewState["Ordinamento"] = value; }
+    }
+
+    public string Caratteristica1
+    {
+        get { return ViewState["Caratteristica1"] != null ? (string)(ViewState["Caratteristica1"]) : ""; }
+        set { ViewState["Caratteristica1"] = value; }
+    }
+    public string Caratteristica2
+    {
+        get { return ViewState["Caratteristica2"] != null ? (string)(ViewState["Caratteristica2"]) : ""; }
+        set { ViewState["Caratteristica2"] = value; }
+    }
+
+    public string Caratteristica3
+    {
+        get { return ViewState["Caratteristica3"] != null ? (string)(ViewState["Caratteristica3"]) : ""; }
+        set { ViewState["Caratteristica3"] = value; }
+    }
+    public string Caratteristica4
+    {
+        get { return ViewState["Caratteristica4"] != null ? (string)(ViewState["Caratteristica4"]) : ""; }
+        set { ViewState["Caratteristica4"] = value; }
+    }
+    public string Caratteristica5
+    {
+        get { return ViewState["Caratteristica5"] != null ? (string)(ViewState["Caratteristica5"]) : ""; }
+        set { ViewState["Caratteristica5"] = value; }
+    }
+    public string PercorsoComune
+    {
+        get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
+        set { ViewState["PercorsoComune"] = value; }
+    }
+    public string PercorsoFiles
+    {
+        get { return ViewState["PercorsoFiles"] != null ? (string)(ViewState["PercorsoFiles"]) : ""; }
+        set { ViewState["PercorsoFiles"] = value; }
+    }
+    public string PercorsoAssolutoApplicazione
+    {
+        get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
+        set { ViewState["PercorsoAssolutoApplicazione"] = value; }
+    }
+    //Vediamo l'agenzia del''immobile
+    //AgenziaCollection agenziegestite_pagina = new AgenziaCollection();
+    protected void Timer1_Tick(object sender, EventArgs e)
+    {
+        //bannersDM banDM = new bannersDM();
+        //dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb,Lingua);
+        //AdRotator1.DataSource = dt;
+        //AdRotator1.DataBind();
+    }
+
+
+    int progressivosepara = 0;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!IsPostBack)
+            {
+                //http://localhost:8888/test/articoli/rif000002-I-testoperindicizzazione.aspx
+
+                PageGuid = System.Guid.NewGuid().ToString();
+
+                //Creo l'equivalente di ~/ nel ViewState per usarlo nel javascript della pagina
+                PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
+                PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
+                PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
+
+                //Prendiamo i dati dalla querystring (Lingua) o dal Context ( caso di url rewriting )
+                Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
+                Regione = CaricaValoreMaster(Request, Session, "Regione", false);
+                Provincia = CaricaValoreMaster(Request, Session, "Provincia", false, "");
+                Comune = CaricaValoreMaster(Request, Session, "Comune", false);
+                Categoria = CaricaValoreMaster(Request, Session, "Categoria", false);
+                Mesefiltro = CaricaValoreMaster(Request, Session, "Mesefiltro", false);
+                Giornofiltro = CaricaValoreMaster(Request, Session, "Giornofiltro", false);
+                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
+                if (Categoria2liv == "all") Categoria2liv = "";
+
+                Annata = CaricaValoreMaster(Request, Session, "Annata", false);
+                Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
+                Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", false);
+                Caratteristica3 = CaricaValoreMaster(Request, Session, "Caratteristica3", false);
+                Caratteristica4 = CaricaValoreMaster(Request, Session, "Caratteristica4", false);
+                Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
+                FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
+                Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
+
+                bool tmpbool = false;
+                bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
+                Vetrina = tmpbool;
+
+                //Aggiungo la lingua al pager se presente nella querystring
+                //PagerRisultati.NavigateUrl += "?Lingua=" + Lingua;
+                //Impostiamo anche gli altri parametri di ricerca
+                Tipologia = CaricaValoreMaster(Request, Session, "Tipologia", false);
+                string tmp = "";
+                tmp = CaricaValoreMaster(Request, Session, "mese", false);
+                if (!string.IsNullOrEmpty(tmp)) mese = tmp;
+                tmp = CaricaValoreMaster(Request, Session, "anno", false);
+                if (!string.IsNullOrEmpty(tmp)) anno = tmp;
+
+                tmp = CaricaValoreMaster(Request, Session, "testoricerca", false);
+                if (!string.IsNullOrEmpty(tmp)) testoricerca = tmp;
+
+                CaricaControlliJS();
+
+                #region SEZIONE MASTERPAGE GESTIONE
+
+                //if (!string.IsNullOrEmpty(Tipologia))
+                //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, Tipologia, false, Lingua);
+                //else
+                //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
+
+
+                //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
+                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezionicatalogo", false, lit, Lingua, true);
+
+#if false  //Tasto per andare alla lista categorie del catalogo
+                HtmlGenericControl divLinkcontainer = (HtmlGenericControl)Master.FindControl("divLinkcontainer");
+                divLinkcontainer.Visible = true;
+                HtmlAnchor linkListacategorie = (HtmlAnchor)Master.FindControl("linkListacategorie");
+                linkListacategorie.HRef = Resources.Common.linkCatalogo;
+                linkListacategorie.InnerHtml = Resources.Common.testolinkSezioniCatalogo; 
+#endif
+#if false
+                Panel p = (Panel)Master.FindControl("pnlRicerca");
+                if (p != null)
+                {
+                    p.Visible = true;
+                    Master.CaricaDatiDdlCaratteristiche(Lingua, Caratteristica1, Caratteristica2, Caratteristica3, Caratteristica4, FasciaPrezzo, Vetrina);
+                    Master.CaricaDdlOrdinamento(Ordinamento);
+                }
+                
+#endif 
+                //CAmbio colore alla barra in alto
+                //HtmlGenericControl divBackMenu = (HtmlGenericControl)Master.FindControl("divBckMenu");
+                //divBackMenu.Attributes["style"] = "background-color:#f56f28";
+                //HtmlGenericControl divMobileUl = (HtmlGenericControl)Master.FindControl("mobilenav1");
+                //divMobileUl.Attributes["style"] = "background-color:#f56f28";
+
+                #endregion
+
+                //In caso di richiesta specifica di una pagina dei risultati la prendo dalla querystring
+                Pagina = CaricaValoreMaster(Request, Session, "Pagina", true, "1");
+                //Pagina = "1";
+                //int _p = 0;
+                //if (int.TryParse(Pagina, out _p))
+                //{ PagerRisultati.CurrentPage = _p; }
+
+                //AssociaDati();
+
+                SettaVisualizzazione();
+
+            }
+            else
+            {
+            }
+        }
+        catch (Exception err)
+        {
+            // output.Text = err.Message;
+        }
+    }
+    private void SettaVisualizzazione()
+    {
+        string cattipo = Tipologia;
+        ClientScriptManager cs = Page.ClientScript;
+        Literal lit = null;
+        switch (Tipologia)
+        {
+            case "rif000001":
+                if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                ModificaFiltroJS(); //Inserisce nell'objfiltro della session i valori di filtraggio
+                string svetrina = "";
+                if (Vetrina) svetrina = "true";
+                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "');";
+                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+                {
+                    cs.RegisterStartupScript(this.GetType(), "clist1", controllist2, true);
+                }
+                SettaTestoIniziale();
+                AssociaDatiSocial(null);
+                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
+                break;
+
+            default:
+                AssociaDati();
+                break;
+        }
+    }
+    private void ModificaFiltroJS()
+    {
+        //GESTIONE DEI FILTRI MEDIANTE LA SESSIONE ( RIPRENDO DALLA SESSIONE I VALORI PER IL FILTRO )
+        Dictionary<string, string> objvalue = new Dictionary<string, string>();
+        string sobjvalue = "";
+        if (Session["objfiltro"] != null)
+        {
+            sobjvalue = Session["objfiltro"].ToString();
+            objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
+            if (objvalue == null) objvalue = new Dictionary<string, string>();
+        }
+        //AGIORNIAMO IL CONTENITORE OBJFILTRO USATO DALL'HANDLE PER IL FILTRO
+        //ddlCaratteristica1
+        //ddlRegione
+        //ddlCategoria
+        if (Categoria != "")
+        {
+            objvalue["categoria"] = Categoria;
+            objvalue["ddlCategoria"] = Categoria;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlCategoria"))
+            {
+                objvalue["categoria"] = objvalue["ddlCategoria"];
+                Categoria = objvalue["ddlCategoria"];
+            }
+        }
+        if (Regione != "")
+        {
+            objvalue["regione"] = Regione;
+            objvalue["ddlRegione"] = Regione;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlRegione"))
+            {
+                objvalue["regione"] = objvalue["ddlRegione"];
+                Regione = objvalue["ddlRegione"];
+            }
+        }
+        if (Caratteristica1 != "")
+        {
+            objvalue["caratteristica1"] = Caratteristica1;
+            objvalue["hidCaratteristica1"] = Caratteristica1;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("hidCaratteristica1"))
+            {
+                objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
+                Caratteristica1 = objvalue["hidCaratteristica1"];
+            }
+        }
+
+
+        if (Caratteristica2 != "")
+        {
+            objvalue["caratteristica2"] = Caratteristica2;
+            objvalue["hidCaratteristica2"] = Caratteristica2;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("hidCaratteristica2"))
+            {
+                objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
+                Caratteristica2 = objvalue["hidCaratteristica2"];
+            }
+        }
+
+        sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
+        Session.Add("objfiltro", sobjvalue);
+
+    }
+    public void CaricaControlliJS()
+    {
+        ClientScriptManager cs = Page.ClientScript;
+
+        //Carico la galleria in masterpage corretta
+        string controllistBanHead = "";
+        if (Tipologia == "")
+            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+        else
+            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + Tipologia + "',false,2000,300);";
+
+        if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        {
+            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
+        }
+    }
+    protected string estraititolo(object testotitolo)
+    {
+        if (testotitolo == null) return "";
+        string titolo1 = testotitolo.ToString();
+        string titolo2 = "";
+        int i = testotitolo.ToString().IndexOf("\n");
+        if (i != -1)
+        {
+            titolo1 = testotitolo.ToString().Substring(0, i);
+            if (testotitolo.ToString().Length >= i + 1)
+                titolo2 = testotitolo.ToString().Substring(i + 1);
+        }
+        return titolo1;
+    }
+    protected string estraisottotitolo(object testotitolo)
+    {
+        if (testotitolo == null) return "";
+        string titolo1 = testotitolo.ToString();
+        string titolo2 = "<br/>";
+        int i = testotitolo.ToString().IndexOf("\n");
+        if (i != -1)
+        {
+            titolo1 = testotitolo.ToString().Substring(0, i);
+            if (testotitolo.ToString().Length >= i + 1)
+                titolo2 = testotitolo.ToString().Substring(i + 1);
+        }
+        return titolo2;
+    }
+    private void AssociaDati()
+    {
+        //btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
+        //btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+
+        //Eseguiamo la ricerca richiesta
+        //Prendiamo la lista completa delle offerte con tutti dati relativi
+        //filtrandoli in base ai parametri richiesti
+        OfferteCollection offerte = new OfferteCollection();
+        string regione = Regione;
+        string provincia = Provincia;
+        string comune = Comune;
+        string tipologia = Tipologia;
+        string fasciadiprezzo = FasciaPrezzo;
+        string categoria = Categoria;
+        string categoria2liv = Categoria2liv;
+        string annata = Annata;
+        string caratteristica1 = Caratteristica1;
+        string caratteristica2 = Caratteristica2;
+        string caratteristica3 = Caratteristica3;
+        string caratteristica4 = Caratteristica4;
+        string caratteristica5 = Caratteristica5;
+        string ordinamento = Ordinamento;
+
+        //btnNexth.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
+        //btnPrevh.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+
+        //btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
+        //btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+
+        //InizializzaEtichette();
+
+        #region Versione con db ACCESS
+        List<OleDbParameter> parColl = new List<OleDbParameter>();
+#if true
+
+        if (provincia != "")
+        {
+            OleDbParameter p1 = new OleDbParameter("@CodicePROVINCIA", provincia);
+            parColl.Add(p1);
+        }
+        if (comune != "")
+        {
+            OleDbParameter p2 = new OleDbParameter("@CodiceCOMUNE", comune);
+            parColl.Add(p2);
+        }
+        if (tipologia != "" && tipologia != "-")
+        {
+            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologia);
+            parColl.Add(p3);
+        }
+        if (regione != "" && regione != "-")
+        {
+            OleDbParameter p4 = new OleDbParameter("@CodiceREGIONE", regione);
+            parColl.Add(p4);
+        }
+        double PrezzoMin = double.MinValue;
+        double PrezzoMax = double.MaxValue;
+        if (!string.IsNullOrWhiteSpace(fasciadiprezzo))
+        {
+            Fascediprezzo _selfascia = Utility.Fascediprezzo.Find(delegate (Fascediprezzo tmp) { return (tmp.Lingua == Lingua && tmp.Codice == fasciadiprezzo && tmp.CodiceTipologiaCollegata == tipologia); });
+            if (_selfascia != null)
+            {
+                PrezzoMin = _selfascia.PrezzoMin;
+                PrezzoMax = _selfascia.PrezzoMax;
+            }
+            OleDbParameter p5 = new OleDbParameter("@PrezzoMin", PrezzoMin);
+            parColl.Add(p5);
+            OleDbParameter p6 = new OleDbParameter("@PrezzoMax", PrezzoMax);
+            parColl.Add(p6);
+        }
+        if (categoria != "")
+        {
+            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", categoria);
+            parColl.Add(p7);
+        }
+
+        if (annata != "" && annata != "0")
+        {
+            OleDbParameter pannata = new OleDbParameter("@Anno", annata);
+            parColl.Add(pannata);
+        }
+        if (caratteristica1 != "" && caratteristica1 != "0")
+        {
+            OleDbParameter pcaratteristica1 = new OleDbParameter("@Caratteristica1", caratteristica1);
+            parColl.Add(pcaratteristica1);
+        }
+        if (caratteristica2 != "" && caratteristica2 != "0")
+        {
+            OleDbParameter pcaratteristica2 = new OleDbParameter("@Caratteristica2", caratteristica2);
+            parColl.Add(pcaratteristica2);
+        }
+        if (caratteristica3 != "" && caratteristica3 != "0")
+        {
+            OleDbParameter pcaratteristica3 = new OleDbParameter("@Caratteristica3", caratteristica3);
+            parColl.Add(pcaratteristica3);
+        }
+        if (caratteristica4 != "" && caratteristica4 != "0")
+        {
+            OleDbParameter pcaratteristica4 = new OleDbParameter("@Caratteristica4", caratteristica4);
+            parColl.Add(pcaratteristica4);
+        }
+        if (caratteristica5 != "" && caratteristica5 != "0")
+        {
+            OleDbParameter pcaratteristica5 = new OleDbParameter("@Caratteristica5", caratteristica5);
+            parColl.Add(pcaratteristica5);
+        }
+
+        if (Vetrina != false)
+        {
+            OleDbParameter pvetrina = new OleDbParameter("@Vetrina", Vetrina);
+            parColl.Add(pvetrina);
+        }
+
+        if (categoria2liv != "")
+        {
+            OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", categoria2liv);
+            parColl.Add(p8);
+        }
+        if (testoricerca.Trim() != "")
+        {
+            testoricerca = testoricerca.Replace(" ", "%");
+            OleDbParameter p8 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+            parColl.Add(p8);
+        }
+        if (Mesefiltro.Trim() != "")//|| anno.Trim() != "")
+        {
+            int _a = 0;
+            int.TryParse(anno, out _a);
+            int _m = 0;
+            int.TryParse(Mesefiltro, out _m);
+            if (_a != 0)
+            {
+                OleDbParameter p8 = new OleDbParameter("@annofiltro", _a);
+                parColl.Add(p8);
+            }
+            if (_m != 0)
+            {
+                OleDbParameter p9 = new OleDbParameter("@mesefiltro", _m);
+                parColl.Add(p9);
+            }
+
+        }
+        if (Giornofiltro.Trim() != "")
+        {
+            int _g = 0;
+            int.TryParse(Giornofiltro, out _g);
+            if (_g != 0)
+            {
+                OleDbParameter pgiorno = new OleDbParameter("@giornofiltro", _g);
+                parColl.Add(pgiorno);
+            }
+        }
+        //Prezzo //Data1
+
+        offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua, null, ordinamento);// "CodiceCategoria"
+        //offerte.RemoveAll(c => (Convert.ToInt32((c.CodiceTipologia.Substring(3))) < 100)); //Togliamo i risultati del blog ( andrebbero tolti nel filtro a monte)
+
+        if (offerte != null && offerte.Count > 0)
+            AssociaDatiSocial(offerte[0]);
+
+        SettaTestoIniziale();
+
+
+#endif
+        #endregion
+
+        Pager<Offerte> p = new Pager<Offerte>();
+        if (offerte != null && offerte.Count > PagerRisultati.PageSize)
+        {
+            pnlPager.Visible = true;
+
+        }
+        else
+            pnlPager.Visible = false;
+        p = new Pager<Offerte>(offerte, true, this.Page, PageGuid + PagerRisultati.ClientID);
+        PagerRisultati.TotalRecords = p.Count;
+        //Se sono nel catalogo eventi cerco di impostare tra i risultati di ricerca la data odierna come data di partenza
+        try
+        {
+            PagerRisultati.CurrentPage = Convert.ToInt32(Pagina);
+            //PagerRisultatiLow.CurrentPage = Convert.ToInt32(Pagina);
+        }
+        catch
+        {
+            Pagina = "1";
+        }
+        AssociaDatiRepeater(p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize));
+    }
+
+    protected void AssociaDatiRepeater(List<Offerte> list)
+    {
+        progressivosepara = 1;
+        switch (Tipologia)
+        {
+            case "rif000001":
+                Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litPortfolioRivals3b, Lingua, "", list, "", "1f809f");
+                //  Master.CaricaContenutiPortfolioRivalBordered(Tipologia, litPortfolioRivals3b, Lingua, "", list);
+
+                break;
+            default:
+                rptProdotti.DataSource = list;
+                rptProdotti.DataBind();
+                break;
+        }
+    }
+    protected void AssociaDatiSocial(Offerte data)
+    {
+        WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
+
+
+
+        WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
+        string testolink = "";
+        if (sezione != null)
+            testolink = sezione.Descrizione;
+        string sezionedescrizione = "";
+        if (!string.IsNullOrEmpty(Categoria))
+        {
+            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
+            if (categoriaprodotto != null)
+            {
+                sezionedescrizione += categoriaprodotto.Descrizione;
+                testolink = sezionedescrizione;
+            }
+        }
+        if (sezione != null)
+            sezionedescrizione += " " + sezione.Descrizione;
+
+        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Resources.Common.testoPosizionebase) + " " + Nome);
+
+        if (data != null)
+        {
+            string descrizione = data.DescrizionebyLingua(Lingua);
+            string denominazione = data.DenominazionebyLingua(Lingua);
+
+            //Titolo e descrizione pagina
+            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
+            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
+            //Opengraph per facebook
+            ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Nome).Trim();
+            simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true))).Replace("<br/>", " ").Trim(); ;
+            ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
+            //((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+            if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
+                ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+            else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
+                ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
+        }
+
+        string linkcanonico =
+          CreaLinkRoutes(null, false, Lingua, testolink.Trim(), "", Tipologia);
+        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
+        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+    }
+
+
+    private void SettaTestoIniziale()
+    {
+
+        WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
+        WelcomeLibrary.DOM.TipologiaOfferte sezione_inlingua = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
+        if (sezione != null)
+        {
+            EvidenziaSelezione(sezione.Descrizione);
+
+            string titolopagina = sezione_inlingua.Descrizione.ToUpper();
+            litNomePagina.Text = titolopagina;
+            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
+            Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
+            if (catselected != null)
+            {
+                litNomePagina.Text += " " + catselected.Descrizione.ToUpper();
+            }
+
+            string htmlPage = "";
+            if (GetGlobalResourceObject("Common", "testo" + Tipologia) != null)
+                htmlPage = GetGlobalResourceObject("Common", "testo" + Tipologia).ToString();
+            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
+                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            string strigaperricerca = ""; //Request.Url.AbsolutePath
+            if (!string.IsNullOrEmpty(Categoria))
+                strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
+            Contenuti content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
+            if (content == null && !string.IsNullOrEmpty(titolopagina))
+            {
+                strigaperricerca = "/" + Tipologia + "/" + CleanUrl(titolopagina); //Request.Url.AbsolutePath
+                content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
+            }
+            if (content != null && content.Id != 0)
+            {
+                htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
+
+            }
+            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
+            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 90, true)).Replace("<br/>", " ").Trim());
+            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
+
+            litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
+        }
+    }
+
+
+    protected void EvidenziaSelezione(string testolink)
+    {
+        HtmlAnchor linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink));
+
+
+        try
+        {
+            if (linkmenu != null)
+            {
+                linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
+                linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
+            }
+            linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink + "high"));
+
+        }
+        catch { }
+
+        try
+        {
+            if (linkmenu != null)
+            {
+                linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
+                linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
+            }
+
+        }
+        catch { }
+        try
+        {
+            linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink + "Lateral"));
+            if (linkmenu != null)
+            {
+                linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
+                linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
+            }
+        }
+        catch { }
+    }
+
+    protected bool ControlloVisibilita(object fotos)
+    {
+        bool ret = true;
+        if (fotos == null || ((AllegatiCollection)fotos).Count <= 0) ret = false;
+        bool onlypdf = (fotos != null && ((AllegatiCollection)fotos).Count > 0 && !((AllegatiCollection)fotos).Exists(c => (c.NomeFile.ToString().ToLower().EndsWith("jpg") || c.NomeFile.ToString().ToLower().EndsWith("gif") || c.NomeFile.ToString().ToLower().EndsWith("png"))));
+        if (onlypdf) ret = false;
+        return ret;
+    }
+
+    protected bool ControlloVideo(object NomeAnteprima, object linkVideo)
+    {
+        bool ret = false;
+        //"http://www.youtube.com/embed/Z9lwY9arkj8"
+        if ((NomeAnteprima == null || NomeAnteprima == "") && (linkVideo != null && ((string)linkVideo) != ""))
+            ret = true;
+        return ret;
+    }
+    protected string SorgenteVideo(object linkVideo)
+    {
+        string ret = "";
+        //"http://www.youtube.com/embed/Z9lwY9arkj8"
+
+        if (linkVideo != null && linkVideo != "")
+            ret = linkVideo.ToString();
+        return ret;
+    }
+    //    protected void ImgAnt_PreRender(object sender, EventArgs e)
+    //    {
+    //        int maxwidth = 465;
+    //        int maxheight = 310;
+    //        try
+    //        {
+    //#if true
+    //            //Meglio testare prma se l'immagine esiste invece di fare try catch
+    //            if (File.Exists(Server.MapPath(((Image)sender).ImageUrl)))
+    //            {
+    //                using (System.Drawing.Image tmp = System.Drawing.Image.FromFile(Server.MapPath(((Image)sender).ImageUrl)))
+    //                {
+    //                    if (tmp.Width >= tmp.Height)
+    //                    {
+    //                        ((Image)sender).Width = maxwidth;
+    //                        int altezza = tmp.Height * maxwidth / tmp.Width;
+
+    //                        if (altezza < maxheight)
+    //                            ((Image)sender).Height = altezza;
+    //                        else
+    //                        {
+    //                            //((HtmlGenericControl)(((Image)sender).Parent)).Attributes["style"] = "height:" + maxheight + "px;overflow: hidden; float: left; margin:  5px";
+    //                            //((Image)sender).Height = maxheight;
+    //                            //((Image)sender).Width = tmp.Width * maxheight / tmp.Height;
+
+
+    //                        }
+
+    //                    }
+    //                    else
+    //                    {
+    //                        ((Image)sender).Height = maxheight;
+    //                        int larghezza = tmp.Width * maxheight / tmp.Height;
+    //                        if (larghezza < maxwidth)
+    //                            ((Image)sender).Width = larghezza;
+    //                        else
+    //                        {
+    //                            ((Image)sender).Width = maxwidth;
+    //                            ((Image)sender).Height = tmp.Height * maxwidth / tmp.Width;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            else
+    //            {//File inesistente
+    //                ((Image)sender).Width = maxwidth;
+    //                ((Image)sender).Height = maxheight;
+    //            }
+    //#endif
+
+    //        }
+    //        catch
+    //        { }
+
+
+    //    }
+    protected bool VerificaPresenzaPrezzo(object prezzo)
+    {
+        bool ret = false;
+        if (prezzo != null && (double)prezzo != 0)
+            ret = true;
+        return ret;
+    }
+    protected string TestoSezione(string codicetipologia, bool solotitolo = false, bool nosezione = false)
+    {
+        string ret = "";
+        WelcomeLibrary.DOM.TipologiaOfferte sezione =
+              WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
+        if (sezione != null)
+        {
+            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            if (nosezione) addtext = "";
+            ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
+
+            if (solotitolo)
+                ret = sezione.Descrizione;
+        }
+
+        return ret;
+    }
+
+
+    protected string ComponiUrl(object NomeAnteprima, string CodiceOfferta, string idOfferta)
+    {
+
+        string ritorno = "";
+        if (NomeAnteprima != null && CodiceOfferta != "" && idOfferta != "")
+        {
+            ritorno = PercorsoFiles + "/" + CodiceOfferta + "/" + idOfferta;
+            if (NomeAnteprima.ToString().ToLower().StartsWith("ant"))
+                NomeAnteprima = NomeAnteprima.ToString().Remove(0, 3);
+            ritorno += "/" + NomeAnteprima.ToString();
+            //string anteprima = ScalaImmagineImmobile(ritorno, NomeAnteprima.ToString(), Server);
+            //if (!string.IsNullOrEmpty(anteprima))
+            //    ritorno = anteprima;
+        }
+        return ritorno;
+
+    }
+
+    public string SeparaRows()
+    {
+        string ritorno = "";
+        int elementiperriga = 3;
+        if (((progressivosepara) % elementiperriga) == 0)//&& i != totalefoto1)
+            ritorno += "</div><div class=\"row\">";
+        progressivosepara += 1;
+        return ritorno;
+    }
+
+
+    protected void btnInsertcart(object sender, EventArgs e)
+    {
+
+
+        string Idtext = ((LinkButton)sender).CommandArgument.ToString();
+        int idprodotto = 0;
+        int.TryParse(Idtext, out idprodotto);
+        string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString());
+        int quantita = 0;
+        int.TryParse(q, out quantita);
+        quantita += 1;//Incremento
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+
+        //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
+        AggiornaVisualizzazioneDatiCarrello();
+        AssociaDati();
+
+
+    }
+
+    private void AggiornaVisualizzazioneDatiCarrello()
+    {
+        //  this.Master.VisualizzaCarrello();
+    }
+
+    #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
+    protected void btnPrev_click(object sender, EventArgs e)
+    {
+        int pag = PagerRisultati.CurrentPage;
+        pag++;
+        if (pag > PagerRisultati.totalPages) pag = PagerRisultati.totalPages;
+        Pagina = pag.ToString();
+        //Session["Pagina"] = Pagina;
+        AssociaDati();
+    }
+
+    protected void btnNext_click(object sender, EventArgs e)
+    {
+
+        int pag = PagerRisultati.CurrentPage;
+        pag--;
+        if (pag < 1) pag = 1;
+        Pagina = pag.ToString();
+        //Session["Pagina"] = Pagina;
+
+        AssociaDati();
+    }
+    protected void PagerRisultati_PageCommand(object sender, string PageNum)
+    {
+        PagerRisultati.CurrentPage = Convert.ToInt32(PageNum);
+        Pagina = PageNum;
+        //Session["Pagina"] = Pagina;
+
+        Pager<Offerte> p = new Pager<Offerte>();
+        if (p.LoadFromCache(this, PageGuid + PagerRisultati.ClientID))
+        {
+            AssociaDatiRepeater(p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize));
+        }
+        else
+        {
+            AssociaDati();
+        }
+    }
+    protected void PagerRisultati_PageGroupClickNext(object sender, string spare)
+    {
+
+        //PagerRisultatiLow.nGruppoPagine += 1;
+
+    }
+    protected void PagerRisultati_PageGroupClickPrev(object sender, string spare)
+    {
+        //PagerRisultatiLow.nGruppoPagine -= 1;
+
+
+    }
+    protected void PagerRisultatiLow_PageGroupClickNext(object sender, string spare)
+    {
+        PagerRisultati.nGruppoPagine += 1;
+
+    }
+    protected void PagerRisultatiLow_PageGroupClickPrev(object sender, string spare)
+    {
+        PagerRisultati.nGruppoPagine -= 1;
+
+    }
+
+
+
+    #endregion
+
+
+}

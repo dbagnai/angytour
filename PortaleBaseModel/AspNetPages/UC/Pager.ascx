@@ -1,0 +1,37 @@
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Pager.ascx.cs" Inherits="UC_Pager"
+    EnableTheming="true" %>
+<div id="divFullGridPagerNVS" runat="server">
+    <table id="pagerOuterTable" class="pagerOuterTable_b" runat="server">
+        <tr>
+            <td align="right">
+                <font face="HelveticaNeueLTStd55Roman" size="1" color="#44444E">
+                    <asp:Label runat="server" ID="lblTotals" Text="<%$ Resources: Common, PagerPagina %>" /></font> <font color="#339900"
+                        face="HelveticaNeueLTStd55Roman" style="font-size: 9pt"><b>
+                            <asp:Literal ID="CurrentPageLiteral" runat="server" /></b></font>
+                <asp:Literal ID="TotalsLiteral" Visible="false" runat="server" />
+                <font face="HelveticaNeueLTStd55Roman" size="1" color="#44444E">
+                    <asp:Label runat="server" ID="lblTotals2" Text="<%$ Resources: Common, PagerDi %>" /></font> <b><font face="HelveticaNeueLTStd55Roman"
+                        color="#44444E" style="font-size: 9pt">
+                        <asp:Literal ID="TotalPagesLiteral" runat="server" />
+                    </font></b>
+                <asp:Label runat="server" ID="lblTotals3" Text="" />
+            </td>
+            <td class="pageFirstLast_b" style="text-align: right;" width="14px" id="tdPrev" runat="server"
+                align="right">
+                <asp:ImageButton ID="prevBtn" runat="server" ImageUrl="~/AspNetPages/Immagini/nav_leftarr.gif">
+                </asp:ImageButton>
+            </td>
+            <td>
+                <table id="pagerInnerTable" cellpadding="2" cellspacing="1" runat="server" align="center">
+                    <tr>
+                    </tr>
+                </table>
+            </td>
+            <td class="pageFirstLast_b" id="tdNext" style="text-align: left;" width="14px" runat="server"
+                align="left">
+                <asp:ImageButton ID="nextBtn" runat="server" ImageUrl="~/AspNetPages/Immagini/nav_rightarr.gif">
+                </asp:ImageButton>
+            </td>
+        </tr>
+    </table>
+</div>

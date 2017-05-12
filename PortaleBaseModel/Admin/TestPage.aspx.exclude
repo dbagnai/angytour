@@ -1,0 +1,39 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TestPage.aspx.cs" Inherits="Admin_TestPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Pagina di sviluppo</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:Button ID="btn_Test" runat="server" Text="Carica Immobili su db" OnClick="btn_Test_Click" />
+        <table cellspacing="6" style="width: 90%; font-size: 8pt; font-family: Arial">
+            <tr>
+                <td style="border: none; padding: 0 0 0 0">
+                    <asp:DropDownList ID="ddlRegione" Width="99%" AutoPostBack="true" runat="server"
+                        AppendDataBoundItems="true" OnSelectedIndexChanged="ddlRegione_SelectedIndexChanged" />
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 0 0 0 0">
+                    <asp:DropDownList ID="ddlProvincia" Width="99%" runat="server" AppendDataBoundItems="true" />
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 0 0 0 0">
+                    <asp:TextBox ID="txtComune" Width="96%" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btn_Test1" runat="server" Text="Cerca Agenzie" OnClick="btn_Test1_Click" />
+                    <asp:Button ID="btn_Test2" runat="server" Text="Carica Statistiche" OnClick="btn_Test2_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,703 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AreaContenuti_MasterPage" %>
+
+<!DOCTYPE html>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Administration</title>
+
+    <meta name="description" content="top menu &amp; navigation" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="mainacestyle" />
+    <link rel="stylesheet" href="assets/css/style.css" class="ace-main-stylesheet" id="newstyle" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="assets/css/ace-ie.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="assets/js/ace-extra.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+            .pagination > li {
+                display: inline;
+            }
+
+                .pagination > li > a,
+                .pagination > li > span {
+                    float: left;
+                    padding: 4px 12px;
+                    line-height: 1.428571429;
+                    text-decoration: none;
+                    background-color: #ffffff;
+                    border: 1px solid #dddddd;
+                    border-left-width: 0;
+                }
+
+                .pagination > li:first-child > a,
+                .pagination > li:first-child > span {
+                    border-left-width: 1px;
+                    border-bottom-left-radius: 4px;
+                    border-top-left-radius: 4px;
+                }
+
+                .pagination > li:last-child > a,
+                .pagination > li:last-child > span {
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                }
+
+                .pagination > li > a:hover,
+                .pagination > li > a:focus,
+                .pagination > .active > a,
+                .pagination > .active > span {
+                    background-color: #f5f5f5;
+                }
+
+            .pagination > .active > a,
+            .pagination > .active > span {
+                color: #999999;
+                cursor: default;
+            }
+
+            .pagination > .disabled > span,
+            .pagination > .disabled > a,
+            .pagination > .disabled > a:hover,
+            .pagination > .disabled > a:focus {
+                color: #999999;
+                cursor: not-allowed;
+                background-color: #ffffff;
+            }
+
+        .pagination-large > li > a,
+        .pagination-large > li > span {
+            padding: 14px 16px;
+            font-size: 18px;
+        }
+
+        .pagination-large > li:first-child > a,
+        .pagination-large > li:first-child > span {
+            border-bottom-left-radius: 6px;
+            border-top-left-radius: 6px;
+        }
+
+        .pagination-large > li:last-child > a,
+        .pagination-large > li:last-child > span {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .pagination-small > li > a,
+        .pagination-small > li > span {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .pagination-small > li:first-child > a,
+        .pagination-small > li:first-child > span {
+            border-bottom-left-radius: 3px;
+            border-top-left-radius: 3px;
+        }
+
+        .pagination-small > li:last-child > a,
+        .pagination-small > li:last-child > span {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        a {
+            color: #000;
+        }
+
+        .blue {
+            color: #428bca !important;
+        }
+
+        .table > thead > tr > th {
+            background-color: #428bca;
+            color: #fff;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="no-skin">
+    <form id="form1" runat="server">
+
+        <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
+            AsyncPostBackErrorMessage="Errore generico. Contattare HelpDesk" AsyncPostBackTimeout="400"
+            EnablePartialRendering="true"
+            EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
+            <Scripts>
+                <%--<asp:ScriptReference Path="~/js/_jq.js" NotifyScriptLoaded="true" />--%>
+                <asp:ScriptReference Path="~/js/jquery-2.1.3.min.js" NotifyScriptLoaded="true" />
+                <%--<asp:ScriptReference Path="~/Scripts/jquery-1.10.1.min.js" NotifyScriptLoaded="true" />--%>
+                <asp:ScriptReference Path="~/Scripts/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/Scripts/tinymce/tinymce.min.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.prettyPhoto.js" />
+            </Scripts>
+        </Ajax:ToolkitScriptManager>
+
+        <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
+            <script type="text/javascript">
+                try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+            </script>
+
+            <div class="navbar-container" id="navbar-container">
+
+                <div class="navbar-header pull-left">
+                    <a href="<%$ Resources:Common, LinkHome %>" runat="server" class="navbar-brand">
+                        <img runat="server" id="imgLogo" src="Immagini/logowebmouse.png" height="50" />
+                    </a>
+
+                    <!-- /section:basics/navbar.layout.brand -->
+                    <!-- #section:basics/navbar.toggle -->
+                    <button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+                        <span class="sr-only">Toggle user menu</span>
+
+
+                    </button>
+
+                    <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">
+                        <span class="sr-only">Toggle sidebar</span>
+
+                        <span class="icon-bar"></span>
+
+                        <span class="icon-bar"></span>
+
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- /section:basics/navbar.toggle -->
+                </div>
+                <div class="navbar-header text-center" style="width: 100%; position: absolute; top: 30px; color: #fff;">
+                    <asp:Literal ID="litTrial" runat="server"></asp:Literal>
+                </div>
+                <div class="navbar-header pull-right">
+                    <a href="<%$ Resources:Common, LinkHome %>" runat="server" class="navbar-brand" style="margin-top: 10px;">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+                </div>
+
+            </div>
+            <!-- /.navbar-container -->
+        </div>
+
+        <!-- /section:basics/navbar.layout -->
+        <div class="main-container" id="main-container">
+            <script type="text/javascript">
+                try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+            </script>
+
+            <!-- #section:basics/sidebar.horizontal -->
+            <div id="sidebar" class="sidebar h-sidebar navbar-collapse collapse">
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+                </script>
+
+
+
+                <ul class="nav nav-list">
+                    <li id="tagDefault" runat="server" class="hover">
+                        <a href="Default.aspx">
+                            <i class="menu-icon fa fa-tachometer"></i>
+                            <span class="menu-text">Dashboard </span>
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li id="tagOfferteProdotti" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">Gestione Sezione Contenuti
+                            </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+
+                            <asp:Repeater ID="rptTipologia" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneOfferte.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            <asp:Label CssClass="menu-text" ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <asp:Repeater ID="rptCustom" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneOfferte.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+
+                            <asp:Repeater ID="rptCatalogo" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                                <asp:Repeater ID="rptCatalogoCategorie" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("CodiceTipologia").ToString() + "&CodiceProdotto="+ Eval("CodiceProdotto").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                        </ul>
+                    </li>
+
+                    <li id="tagPagineStatiche" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-list"></i>
+                            <span class="menu-text">Gestione Pagine Statiche </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="hover">
+                                <a id="linkPaginestatiche" href="#" runat="server">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <asp:Label ID="Titolopaginestatiche" CssClass="menu-text" runat="server" Text=""></asp:Label>
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li id="tagBanner" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">Gestione Gelleria e Banner
+                            </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu submenu-new ">
+
+                            <li>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <ul class="submenu display-active">
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-home">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Home</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Ristorante</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                                   <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate camere</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Listini</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                                <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-5">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Menu</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                           
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                     <%--       <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000001">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate catalogo</span></a>
+                                                <b class="arrow"></b>
+                                            </li>--%>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000003">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate eventi e promo</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                                  <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000004">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Piatti</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000002">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Blog</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+
+
+                                            <%-- <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000012">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Gallery</span></a>
+                                                <b class="arrow"></b>
+                                            </li>--%>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <%--  <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Spot Bassa 1</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-2">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Spot Bassa 2</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-3">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Spot Bassa 3</span></a>
+                                                <b class="arrow"></b>
+                                            </li>--%>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-contatti">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Contatti</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <ul class="submenu display-active">
+
+
+                                            <%--   <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-destra">Gestione Banner  Promo Destra</a><br />
+                                            </li>--%>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Principale</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner area BLog</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-catalogo">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner area Catalogo</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-section1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner generico (test parallax )</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia Home ( per mobile )</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia 1</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia2">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia 2</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia3">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia 3</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia4">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia 4</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-testata">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Video Testata</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-banner1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Video Banner</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li id="tagContatti" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-user"></i>
+                            <span class="menu-text">Gestione Clienti </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="hover">
+                                <a href="GestioneNewsletter.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Newsletter</span></a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="hover">
+                                <a href="GestioneClienti.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Anagrafica Clienti</span></a>
+                                <b class="arrow"></b>
+                            </li>
+                            <%--     <li class="hover">
+                                <a href="StoricoOrdini.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Storico Ordini
+                                    </span></a>
+                                <b class="arrow"></b>
+                            </li>--%>
+                        </ul>
+                    </li>
+
+
+                </ul>
+                <!-- /.nav-list -->
+                <!-- #section:basics/sidebar.layout.minimize -->
+                <!-- /section:basics/sidebar.layout.minimize -->
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+                </script>
+            </div>
+
+            <div class="main-content">
+                <div class="main-content-inner">
+                    <div class="page-content">
+                        <div class="page-header">
+                            <h1>
+                                <asp:Literal runat="server" ID="lblTitleSection"></asp:Literal>
+                                <small>
+                                    <asp:Label runat="server" ID="output" CssClass="red"></asp:Label>
+                                </small>
+                            </h1>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                        <span class="bigger-120">
+                            <span class="blue bolder">WebMouse</span>
+                            Consulting &copy; 2016
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div>
+    </form>
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='assets/js/jquery1x.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!-- ace scripts -->
+    <script src="assets/js/ace/elements.scroller.js"></script>
+    <script src="assets/js/ace/elements.colorpicker.js"></script>
+    <script src="assets/js/ace/elements.fileinput.js"></script>
+    <script src="assets/js/ace/elements.typeahead.js"></script>
+    <script src="assets/js/ace/elements.wysiwyg.js"></script>
+    <script src="assets/js/ace/elements.spinner.js"></script>
+    <script src="assets/js/ace/elements.treeview.js"></script>
+    <script src="assets/js/ace/elements.wizard.js"></script>
+    <script src="assets/js/ace/elements.aside.js"></script>
+    <script src="assets/js/ace/ace.js"></script>
+    <script src="assets/js/ace/ace.ajax-content.js"></script>
+    <script src="assets/js/ace/ace.touch-drag.js"></script>
+    <script src="assets/js/ace/ace.sidebar.js"></script>
+    <script src="assets/js/ace/ace.sidebar-scroll-1.js"></script>
+    <script src="assets/js/ace/ace.submenu-hover.js"></script>
+    <script src="assets/js/ace/ace.widget-box.js"></script>
+    <script src="assets/js/ace/ace.settings.js"></script>
+    <script src="assets/js/ace/ace.settings-rtl.js"></script>
+    <script src="assets/js/ace/ace.settings-skin.js"></script>
+    <script src="assets/js/ace/ace.widget-on-reload.js"></script>
+    <script src="assets/js/ace/ace.searchbox-autocomplete.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var $sidebar = $('.sidebar').eq(0);
+            if (!$sidebar.hasClass('h-sidebar')) return;
+
+            $(document).on('settings.ace.top_menu', function (ev, event_name, fixed) {
+                if (event_name !== 'sidebar_fixed') return;
+
+                var sidebar = $sidebar.get(0);
+                var $window = $(window);
+
+                //return if sidebar is not fixed or in mobile view mode
+                var sidebar_vars = $sidebar.ace_sidebar('vars');
+                if (!fixed || (sidebar_vars['mobile_view'] || sidebar_vars['collapsible'])) {
+                    $sidebar.removeClass('lower-highlight');
+                    //restore original, default marginTop
+                    sidebar.style.marginTop = '';
+
+                    $window.off('scroll.ace.top_menu')
+                    return;
+                }
+
+
+                var done = false;
+                $window.on('scroll.ace.top_menu', function (e) {
+
+                    var scroll = $window.scrollTop();
+                    scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
+                    if (scroll > 17) scroll = 17;
+
+
+                    if (scroll > 16) {
+                        if (!done) {
+                            $sidebar.addClass('lower-highlight');
+                            done = true;
+                        }
+                    }
+                    else {
+                        if (done) {
+                            $sidebar.removeClass('lower-highlight');
+                            done = false;
+                        }
+                    }
+
+                    sidebar.style['marginTop'] = (17 - scroll) + 'px';
+                }).triggerHandler('scroll.ace.top_menu');
+
+            }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+
+            $(window).on('resize.ace.top_menu', function () {
+                $(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+            });
+
+
+        });
+    </script>
+
+</body>
+</html>

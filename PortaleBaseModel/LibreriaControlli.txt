@@ -1,0 +1,268 @@
+I PARAMETRI CONTENITORE E NOME DEL CONTROLLO ( secondo e terzo parametro ) DEVONO SEMPRE ESSERE DIVERSI PER PIU' CONTROLLI SULLA STESSA PAGINA
+
+-------------------------------------------------------
+CONTENUTI TIPO SCROLLER		 -> injectScrollerAndLoad					-
+--------------------------------------------------------
+
+ELEMENTO SCROLLER CON SFONDO PARTICOLARE (es.  VINI )
+<script>// <![CDATA[
+injectScrollerAndLoad("owlscrollerVini1.html","divContainer1", "carouselInject1","", "rif000003", "", false, true, 12);
+// ]]></script>
+  <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
+		<div class="col-sm-12">
+			<div class="title-block clearfix">
+				<div class="row" style="text-align: center; padding-bottom: 30px; padding-top: 40px; margin-bottom: 0px; line-height: 40px; color: #444">
+				   LINK CON TITOLO DI SEZIONE
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+		<div id="divContainer1">&nbsp;</div>
+	</div>
+</div>
+
+SCROLLER CONTENUTI STANDARD NEWS
+<script>// <![CDATA[
+  injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject2","", "rif000002", "", false, false, 12);
+// ]]></script>
+  <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
+		<div class="col-sm-12">
+			<div class="title-block clearfix">
+				<div class="row" style="text-align: center; padding-bottom: 30px; padding-top: 40px; margin-bottom: 0px; line-height: 40px; color: #444">
+				   LINK CON TITOLO DI SEZIONE
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+		<div id="divContainer1">&nbsp;</div>
+	</div>
+</div>
+
+ 
+SCROLLER CONTENUTI STANDARD NEWS ( Con selezione di categoria )
+<script>// <![CDATA[
+injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject1","", "rif000002", "prod000006", true, false, 6);
+// ]]></script>
+  <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
+		<div class="col-sm-12">
+			<div class="title-block clearfix">
+				<div class="row" style="text-align: center; padding-bottom: 30px; padding-top: 40px; margin-bottom: 0px; line-height: 40px; color: #444">
+				   LINK CON TITOLO DI SEZIONE
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+		<div id="divContainer1">&nbsp;</div>
+	</div>
+</div>
+ 
+ 
+ //VERSIONE SCROLLER DELLE RUBRICHE
+
+ <script>// <![CDATA[
+injectScrollerAndLoad("owlscrollerOfferte1.html","divContainer1", "carouselInject5","", "rif000009", "", true, false, 6, 1);
+// ]]></script>
+  <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
+		<div class="col-sm-12">
+			<div class="title-block clearfix">
+				<div class="row" style="text-align: center; padding-bottom: 30px; padding-top: 40px; margin-bottom: 0px; line-height: 40px; color: #444">
+				   LINK CON TITOLO DI SEZIONE
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+		<div id="divContainer1">&nbsp;</div>
+	</div>
+</div>
+       
+------------------------------------------------------------------------------------
+CONTENUTI ISOTOPE ELEMENTS TIPO PORTFOLIO (inserire div del pager se settato il parametro true apposito !)   -> injectPortfolioAndLoad
+------------------------------------------------------------------------------------
+
+ //CONTENUTI PER TESTATA PORTFOLIO TIPO BANNER MURO
+ <script>// <![CDATA[
+ //string control6 = "injectPortfolioAndLoad("isotopeOfferte.html","divContainer1", "portfolio1", 1, 6, false, "", "rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 6);
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+
+//PORTFOLIO A DUE ELEMENTI ( es news a due elementi)
+  <script>// <![CDATA[
+injectPortfolioAndLoad("isotopeOfferte2.html","divContainer1", "portfolio3", 1, 12, false, "", "rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 12);
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+
+
+NEWS ELEMENTO SINGOLO CON FOTO SINISTRA E TESTO  DESTRA
+ <script>// <![CDATA[
+  injectPortfolioAndLoad("isotopeOfferte4.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", true, false, "","" + testoricerca + "");
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+
+PORTFOLIO A 1 ELEMENTO PER LATERALE (ES. OFFERTE)
+ <script>// <![CDATA[
+  injectPortfolioAndLoad("isotopeOfferte5.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", false, true, "6","" + testoricerca + "");
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+  
+PORTFOLIO A 3 ELEMENTI CON FONDINO ( STILE VINI)
+ <script>// <![CDATA[
+ injectPortfolioAndLoad("isotopeVini.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+      
+PORTFOLIO STANDARD A 3 ELEMENTI (ES. OFFERTE)
+ <script>// <![CDATA[
+ injectPortfolioAndLoad("isotopeOfferte1.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
+// ]]></script>
+  <div id="divContainer1Title"></div>
+<div id="divContainer1">&nbsp;</div>
+  <div id="divContainer1Pager"></div>
+
+
+
+-------------------------------------
+CONTENUTI SCHEDA DETTAGLIO	 -> injectandloadgenericcontent						-
+-------------------------------------
+ <script>// <![CDATA[
+injectandloadgenericcontent("schedadetails.html","divContainer1", "divitemdettagli",true,true, "" + idofferta + "");
+     // ]]></script>         	  
+  <div id="divContainer1" style="position: relative; display: none"></div>
+	
+	
+-------------------------------------
+BANNERS GENERIC/JARALLAX FULL	 -> injectandloadgenericbanner						-
+-------------------------------------
+
+FULL BANNER JARALLAX
+<script>// <![CDATA[
+injectandloadgenericbanner('bannerimagefull.html','divContainer1', 'bansect1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','banners-section1',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>
+
+-------------------------------------
+ BANNER JARALLAX   SMALL -> injectandloadgenericbanner
+------------------------------------
+   
+<script>// <![CDATA[
+injectandloadgenericbanner('bannerparallax.html','divContainer1', 'bansect1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','banners-section1',false);
+// ]]></script> 
+<div id="divContainer1">&nbsp;</div>
+
+---------------------------
+
+-------------------------------------
+BANNERS   testate / revolution slider	 -> injectSliderAndLoadBanner						-
+-------------------------------------
+<script>// <![CDATA[
+injectSliderAndLoadBanner('sliderBanner.html','divContainer1', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,1000); 
+// ]]></script> 	
+	<div id="divContainer1" style="margin: 0px auto; position: relative; display: none" class="hidden-xs">&nbsp;</div>
+	
+	
+//Style testo per testata slider da inseire nel testo del banner in amministrazione
+<div class="bigtext">Titolo</div>
+<div class="smalltext">Sottotitolo</div>
+	
+-----------------------------------------------------------------
+BANNERS   testate  per mobile	 -> injectFasciaAndLoadBanner	-
+-----------------------------------------------------------------
+
+//Banner testate mobile cycle tipo fascia 
+<script>// <![CDATA[
+injectFasciaAndLoadBanner('bannerFascia3.html','divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia-home',false); 
+// ]]></script> 
+<div id="divContainerHeadmobile1"style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>&nbsp;</div>
+
+//Style testo per testata mobile da inseire nel testo del banner in amministrazione
+<div class="big2 blackcolor">Titolo</div>
+<div class="small2 blackcolor">Sottotitolo</div><br/>
+butt:(I/web/ristorante-1|Il Ristorante)
+
+---------------------------------------------------------------------------------------------------------
+//Banner testate tipo cycle 100% LARGHEZZA
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+ injectFasciaAndLoadBanner('bannerFascialarge.html','divContainer1', 'bannerfasciahead', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','header-home',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>
+
+---------------------------------------------------------------------------------------------------------
+BANNER   ( immagine sinistra )  FASCIA E TESTO LATERALE	 -> injectFasciaAndLoadBanner	
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+ injectFasciaAndLoadBanner('bannerFascia2.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>
+
+//Style testo per testata mobile da inseire nel testo del banner in amministrazione
+<div class="big2 blackcolor">Titolo</div>
+<div class="small2 blackcolor">Sottotitolo</div><br/>
+butt:(I/web/ristorante-1|Il Ristorante)
+
+---------------------------------------------------------------------------------------------------------
+BANNER    ( immagine destra )  FASCIA E TESTO LATERALE	 -> injectFasciaAndLoadBanner	
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+ injectFasciaAndLoadBanner('bannerFascia3.html','divContainer1', 'bannerfascia2', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia2',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>
+
+//Style testo per testata mobile da inseire nel testo del banner in amministrazione
+<div class="big2 blackcolor">Titolo</div>
+<div class="small2 blackcolor">Sottotitolo</div><br/>
+butt:(I/web/ristorante-1|Il Ristorante)
+
+
+
+---------------------------------------------------------------------------------------------------------
+//BANNERS A FASCIA COMPLETA 100% Larghezza ( TIPO DIVISORE )											-
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+ injectFasciaAndLoadBanner('bannerFascia.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>
+
+---------------------------------------------------------------------------------------------------------
+BANNER CON ISOTOPE PORTFOLIO ( NAVIGAZIONE )	 -> injectPortfolioAndLoadBanner						-
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divContainer1', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-portfolio-sezioni',false);
+// ]]></script>
+<div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 0px auto; display: none">
+<div id="divContainer1" style="background-color: transparent"></div>
+</div>
+
+---------------------------------------------------------------------------------------------------------
+BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )	 -> injectPortfolioAndLoadBanner						-
+---------------------------------------------------------------------------------------------------------
+ <script>// <![CDATA[
+ injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainer1', 'portlistBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);
+// ]]></script>
+<div id="divContainer1">&nbsp;</div>	   
+
+		
+------------------------ DA FARE ----------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------
+VIDEO BANNER  TESTATA E BANNER RIPORTARE in procedura javascript con handler da codice master.cs	-
+------------------------------------------------------------------------------------------------------	
+	   
+

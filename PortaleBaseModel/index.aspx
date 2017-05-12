@@ -1,0 +1,46 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
+    CodeFile="index.aspx.cs" Inherits="index" %>
+
+<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center">
+            <asp:Literal Text="" ID="litNomePagina" runat="server" />
+
+            <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
+
+        </div>
+    </div>
+
+    <%-- <!--=== Breadcrumbs ===-->
+        <div class="breadcrumbs">
+            <div class="container">
+                <h1 class="pull-left">Login</h1>
+                <p></p>
+                <ul class="pull-right breadcrumb">
+                    <li><a href="<%$ Resources:Common, LinkHome %>" runat="server">
+                        <asp:Literal Text="<%$ Resources:Common, testoHome %>" runat="server" /></a></li>
+                    <li class="active">da creare link pagina</li>
+                </ul>
+            </div>
+        </div>
+        <!--/breadcrumbs-->
+        <!--=== End Breadcrumbs ===-->--%>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+</asp:Content>
+<asp:Content ID="Content8" ContentPlaceHolderID="ContentPlaceHolderJs" runat="Server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //injectScrollerAndLoad("owlscrollerOfferte.html","divJSScrollerContainer1", "carouselInject1","", "rif000002", "prod000006", true, true, 6);
+            //injectScrollerAndLoad("owlscrollerOfferte.html","divJSScrollerContainer2", "carouselInject2","", "rif000003", "", true, true, 6);
+            //injectPortfolioAndLoad("isotopeOfferte.html","divJSIsotopeContainer1", "portfolio1", 1, 20, false,"", "rif000003", "", true, true, 12);
+        });
+    </script>
+</asp:Content>
+
+

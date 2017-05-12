@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Andes';
+    src: url('fonts/Andes.eot');
+    src: url('fonts/Andes.eot') format('embedded-opentype'),
+         url('fonts/Andes.woff2') format('woff2'),
+         url('fonts/Andes.woff') format('woff'),
+         url('fonts/Andes.ttf') format('truetype'),
+         url('fonts/Andes.svg#Andes') format('svg');
+}

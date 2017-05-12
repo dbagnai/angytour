@@ -1,0 +1,33 @@
+﻿body {
+}
+.page-title h2 {
+    color:#0d4e96;
+}
+
+.navbar-default .navbar-brand {
+      padding: 10px 5px 25px;
+      width:280px;
+      background-color: #ffffff;
+}
+.chengelogopadding { 
+    /*Calsse che viene aggiunta per posizionare l'immagine del logo cbpAnimatedHeader.js */
+    padding-top: 25px;
+}
+@media (max-width: 767px) {
+ .chengelogopadding {
+     /*Calsse che viene aggiunta per posizionare l'immagine del logo cbpAnimatedHeader.js */
+      padding: 0px;
+}
+    .navbar-default .navbar-brand {
+        padding: 40px 10px 0px;
+        width: 190px;
+        background-color: #ffffff;
+    }
+}
+
+#header::after {
+  
+  background-color: rgba(67, 74, 84, 0.2);/*INtraduce una velatura sull'immagine di header*/
+}
+
+ 

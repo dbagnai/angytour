@@ -1,0 +1,58 @@
+﻿ <!-- Scroller  -->
+<div style="padding-bottom: 20px; display: none">
+    <div class="row" style="min-height: 400px; padding-top: 0px; padding-bottom: 0px; text-align: center">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 0px">
+            <div style="position:absolute;left:0px;top:-30px;display:none">
+                <a class="owl-btn prev-v2" id="replaceidprev"><i style="color: #1f8b74" class="fa fa-chevron-left"></i></a>
+            </div>
+            <div style="position:absolute;left:30px;top:-30px;display:none">
+                <a class="owl-btn next-v2" id="replaceidnext"><i style="color: #1f8b74" class="fa fa-chevron-right"></i></a>
+            </div>
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+                <div class="owl-slider-v2" id="replaceid">
+                    <div class="item" style="padding:8px;margin:14px;border:3px solid #eceded;overflow:hidden;position:relative;">
+                        <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
+                        <div style="border: none; box-shadow: none">
+                            <div style="border: none; box-shadow: none" class="feature">
+                                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                    <div class="feature-image img-overlay" style="width:230px;height:210px">
+                                        <img src="/images/dummylogo.png" alt="" class="bind lazy" mybind="Id" />
+                                        <div class="item-img-overlay">
+                                        </div>
+                                    </div>
+                                </a>
+                                <div style="padding-top:10px;padding-bottom:0px;border-top:none;height:150px;text-align:center;overflow:hidden" class="feature-content">
+                                    <h3 style="margin-bottom:0px;font-size:1.5rem;font-weight:600;margin-bottom:0px;color:#eceded;min-height:50px">
+                                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                        </a>
+                                    </h3>
+                                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                    </a>
+                                    <!--<p style="font-size:0.8rem;" class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" format="formatdescrizione"></p>-->
+                                    <!--<span class="bind" mybind="Id" myvalue="descrizione" myvalue1="250" format="formatdescrizione"></span><br />-->
+                                    <!--<span class="bind" style="font-size:1rem" mybind="Caratteristica6" format="frmcaratteristica6"></span><br />
+                                    <span class="bind" style="font-size:0.8rem" mybind="Caratteristica1" format="frmcaratteristica1"></span><br />
+                                    <span style="font-size:0.8rem" class="bind" mybind="Caratteristica3" format="frmcaratteristica3"></span><br />-->
+                                </div>
+                                <div class="pull-left" style="font-size:2rem;margin-top:3px;color:#444">
+                                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><br />
+                                    <span style="font-size:0.6em;text-decoration:line-through;color:#ccc" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div>
+                                <!--<div class="pull-right bind" mybind="Id" mybind1="Qta_vendita" format="formatbtncarrello"></div>-->
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--<div class="feature-details">
+                               <div class="pull-left">
+                                    <span style="font-size:0.8rem" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

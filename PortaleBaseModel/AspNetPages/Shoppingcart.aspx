@@ -1,0 +1,212 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" CodeFile="Shoppingcart.aspx.cs" Inherits="AspNetPages_Shoppingcart" %>
+
+<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>
+                <asp:Label Style="font-size: 1.4em; color: red;padding-top:10px;" ID="output" runat="server" Text=""></asp:Label></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
+
+            <div class="widget shop-selections">
+                <h3>
+                    <asp:Literal runat="server" Text='<%$ Resources: Common, CarrelloSelezioneArticoli %>'></asp:Literal></h3>
+                <table class="table table-cart">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td class="cart-product">
+                                <asp:Literal runat="server" Text='<%$ Resources: Common, CarrelloArticolo %>'></asp:Literal>
+                            </td>
+                            <td class="cart-quantity">
+                                <asp:Literal runat="server" Text='<%$ Resources: Common, CarrelloQuantita %>'></asp:Literal></td>
+                            <td class="cart-total">
+                                <asp:Literal runat="server" Text='<%$ Resources: Common, CarrelloTotale %>'></asp:Literal></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <asp:Repeater ID="rptProdotti" runat="server" ViewStateMode="Enabled">
+                            <ItemTemplate>
+                                <tr>
+                                    <td class="cart-remove">
+                                        <asp:LinkButton runat="server" ID="btnDelete"
+                                            OnClick="btnDelete" CommandArgument='<%# Eval("id_prodotto") %>'>
+                                                  <i class="fa fa-2x fa-times"></i></asp:LinkButton>
+                                    </td>
+                                    <td class="cart-product">
+                                        <a id="a3" runat="server"
+                                            href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                            target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
+                                            class="product-thumb pull-left">
+                                            <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
+                                                runat="server" Style="width: auto; height: auto; max-width: 100px; max-height: 100px;"
+                                                ImageUrl='<%#  CommonPage.ComponiUrlAnteprima(Eval("Offerta.FotoCollection_M.FotoAnteprima"),Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.Id").ToString()) %>'
+                                                Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
+                                        </a>
+                                        <div class="product-details">
+                                            <h3 class="product-name">
+                                                <a id="a1" runat="server"
+                                                    href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                    target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>
+                                                    <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
+                                                        runat="server"></asp:Literal>
+                                                </a>
+                                            </h3>
+                                            <div class="product-categories muted">
+                                                <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) %>
+                                            </div>
+                                            <div class="product-categories muted">
+                                                <%# CommonPage.TestoCaratteristica(1,Eval("Offerta.Caratteristica2").ToString(),Lingua) %>
+                                            </div>
+
+
+                                            <%-- <div class="product-categories muted">
+                                                        <%# TestoSezione(Eval("Offerta.CodiceTipologia").ToString()) %>
+                                                    </div>--%>
+                                            <b class="product-price ">
+                                                <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzo") ) %>'
+                                                    Text='<%#  Eval("Numero").ToString() + "&times" +      String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Offerta.Prezzo")) + " €" %>'></asp:Literal>
+                                                <em>
+                                                    <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzolistino") ) %>'
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Offerta.Prezzolistino")) + " €" %>'></asp:Literal>
+                                                </em>
+                                            </b>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="cart-quantity" style="margin: 0px auto">
+                                            <div class="input-group">
+                                                <b class="input-group-btn">
+                                                    <asp:LinkButton runat="server" ID="btnSottrai" Style="width: 40px"
+                                                        OnClick="btnDecrement" class="btn btn-small" CommandArgument='<%# Eval("id_prodotto") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
+                                                </b>
+
+                                                <input runat="server" class="form-control text-center" style="width: 50px"
+                                                    id="txtQuantita" type="text" value='<%# Eval("Numero") %>'>
+
+                                                <b class="input-group-btn">
+                                                    <asp:LinkButton runat="server" ID="btnAggiungi" runat="server" Style="width: 40px"
+                                                        OnClick="btnIncrement" class="btn btn-small" CommandArgument='<%# Eval("id_prodotto") %>'>
+                                                        <i class="fa fa-plus"></i>
+                                                    </asp:LinkButton>
+                                                </b>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </td>
+                                    <td class="cart-total">
+                                        <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
+                                    </td>
+                                </tr>
+
+
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="widget shop-shipping" style="display: none">
+                <h3>
+                    <asp:Literal Text="<%$ Resources: Common,CarrelloCalcolaTotaleSpedizione %>" runat="server" /></h3>
+                <div class="form-group">
+                    <asp:DropDownList ID="ddlNazione"
+                        CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
+                </div>
+                <div class="form-row row">
+                    <span class="col-lg-4">
+                        <%--    <input type="text" class="form-control" placeholder="State / county">--%>
+                    </span>
+                    <span class="col-lg-4">
+                        <%--<input type="text" class="form-control" placeholder="Postcode / Zip">--%>
+                    </span>
+                    <span class="col-lg-3">
+                        <asp:LinkButton class="btn btn-default btn-block" Text="<%$ Resources: Common,CarrelloRicalcolaTotaleSpedizione %>" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server" />
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <%--<div class="widget">
+                        <h3>Coupon Code</h3>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Place promotion code here..">
+                            <b class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    Apply
+                                </button>
+                            </b>
+                        </div>
+                    </div>--%>
+            <div class="widget">
+                <h3>
+                    <asp:Literal Text="<%$ Resources: Common, CarrelloRiepilogo %>" runat="server" /></h3>
+                <asp:Repeater runat="server" ID="rptTotali">
+                    <ItemTemplate>
+                        <table class="table table-summary">
+                            <tbody>
+                                <tr class="cart-subtotal">
+                                    <th>
+                                        <asp:Literal Text="<%$ Resources: Common, CarrelloTotaleRiepilogo %>" runat="server" /></th>
+                                    <td><span class="amount">
+                                        <asp:Literal ID="lblPrezzo" runat="server"
+                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleOrdine")) + " €" %>'></asp:Literal>
+                                    </span></td>
+                                </tr>
+                                <%--<tr class="shipping">
+                                    <th>
+                                        <asp:Literal Text="<%$ Resources: Common, CarrelloTotaleSmaltimento %>" runat="server" /></th>
+                                    <td>
+                                        <asp:Literal ID="Literal3" runat="server"
+                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSmaltimento")) + " €" %>'></asp:Literal></td>
+                                </tr>--%>
+                                <tr class="shipping">
+                                    <th>
+                                        <asp:Literal Text="<%$ Resources: Common, CarrelloTotaleSpedizione %>" runat="server" /></th>
+                                    <td>
+                                        <asp:Literal ID="Literal1" runat="server"
+                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSpedizione")) + " €" %>'></asp:Literal></td>
+                                </tr>
+                                <tr class="total">
+                                    <th>
+                                        <asp:Literal Text="<%$ Resources: Common, CarrelloTotaleOrdine %>" runat="server" /></th>
+                                    <td>
+                                        <span class="amount">
+                                            <asp:Literal ID="Literal2" runat="server"
+                                                Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",(double)Eval("TotaleSmaltimento") + (double)Eval("TotaleSpedizione") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto")    ) + " €" %>'></asp:Literal>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <%-- <button class="btn btn-default btn-block">
+                            Update totals
+                        </button>--%>
+                <a class="btn btn-large btn-success btn-block"
+                    id="A7" runat="server" href="<%$ Resources:Common, LinkOrder %>">
+                    <asp:Literal Text="<%$ Resources: Common, TestoProcediOrdine %>" runat="server" />
+                </a><br /><br />
+                        <a class="btn btn-large btn-success btn-block"
+                    id="A2" runat="server" href="<%$ Resources:Common, LinkOrderNoregistrazione %>">
+                    <asp:Literal Text="<%$ Resources: Common, TestoProcediOrdineNoregistrazione %>" runat="server" />
+                </a>
+
+
+                
+
+            </div>
+        </div>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
+  <channel>
+    <title>Albergo Ristorante Il Pozzetto Piatti</title>
+    <link>http://localhost:52646</link>
+    <description>Ristorante e Bed and Breakfast tradizionale in Umbria</description>
+    <lastBuildDate>Fri, 12 May 2017 17:52:35 GMT</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <sy:updateBase>2017-05-12T17:52+02:00</sy:updateBase>
+    <language>it-IT</language>
+    <item>
+      <title>Antipasto umbro
+Il pozzetto Cod: 730</title>
+      <link>http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730</link>
+      <guid isPermaLink="true">http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730</guid>
+      <pubDate>Wed, 10 May 2017 18:56:32 +02:00</pubDate>
+      <category>Piatti</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/730/antipasto2.jpg" alt="Antipasto umbro
+Il pozzetto" width="350" /><p>In quis ultricies nisl. Duis porta sollicitudin aliquet. Aliquam erat volutpat. Pellentesque maximus mattis varius. Duis in quam facilisis, tincidunt nulla ac, elementum massa. Sed feugiat neque ultrices quam facilisis, a pulvinar augue tristique. Pellentesque iaculis bibendum eros. Nulla varius, massa quis porta gravida, mi justo vestibulum diam, eget efficitur odio justo ut sem. Duis consectetur </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730"><em>Antipasto umbro
+Il pozzetto</em></a>.</p>]]></description>
+    </item>
+  </channel>
+</rss>

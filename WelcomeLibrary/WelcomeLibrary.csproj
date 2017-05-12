@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83832BBC-64AD-4F93-9726-9678C027EA80}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WelcomeLibrary</RootNamespace>
+    <AssemblyName>WelcomeLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>snKey.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\Librerie Programmazione\ZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\bannersDM.cs" />
+    <Compile Include="DAL\CardsDM.cs" />
+    <Compile Include="DAL\ClientiDM.cs" />
+    <Compile Include="DAL\contenutiDM.cs" />
+    <Compile Include="DAL\dbDataAccess.cs" />
+    <Compile Include="DAL\eCommerceDM.cs" />
+    <Compile Include="DAL\mailingDM.cs" />
+    <Compile Include="DAL\offerteDM.cs" />
+    <Compile Include="DAL\statisticheDM.cs" />
+    <Compile Include="DAL\StruttureDM.cs" />
+    <Compile Include="DOM\AllegatiCollection.cs" />
+    <Compile Include="DOM\Allegato.cs" />
+    <Compile Include="DOM\Carrello.cs" />
+    <Compile Include="DOM\CarrelloCollection.cs" />
+    <Compile Include="DOM\Comune.cs" />
+    <Compile Include="DOM\ComuneCollection.cs" />
+    <Compile Include="DOM\Contenuti.cs" />
+    <Compile Include="DOM\ContenutiCollection.cs" />
+    <Compile Include="DOM\Banners.cs" />
+    <Compile Include="DOM\BannersCollection.cs" />
+    <Compile Include="DOM\Cat1Offerte.cs" />
+    <Compile Include="DOM\Cat1OfferteCollection.cs" />
+    <Compile Include="DOM\Card.cs" />
+    <Compile Include="DOM\CardCollection.cs" />
+    <Compile Include="DOM\Cliente.cs" />
+    <Compile Include="DOM\ClienteCollection.cs" />
+    <Compile Include="DOM\Annunci.cs" />
+    <Compile Include="DOM\AnnunciCollection.cs" />
+    <Compile Include="DOM\ParametroGenericoCollection.cs" />
+    <Compile Include="DOM\ParametroGenerico.cs" />
+    <Compile Include="DOM\statistiche.cs" />
+    <Compile Include="DOM\StatisticheCollection.cs" />
+    <Compile Include="DOM\TipologiaAnnunciCollection.cs" />
+    <Compile Include="DOM\TipologiaAnnunci.cs" />
+    <Compile Include="DOM\MailCollection.cs" />
+    <Compile Include="DOM\Mail.cs" />
+    <Compile Include="DOM\enumclass.cs" />
+    <Compile Include="DOM\FasceDiPrezzoCollection.cs" />
+    <Compile Include="DOM\FasceDiPrezzo.cs" />
+    <Compile Include="DOM\SProdottoCollection.cs" />
+    <Compile Include="DOM\ProdottoCollection.cs" />
+    <Compile Include="DOM\SProdotto.cs" />
+    <Compile Include="DOM\Prodotto.cs" />
+    <Compile Include="DOM\Offerte_link_cat1Collection.cs" />
+    <Compile Include="DOM\Offerte_link_cat1.cs" />
+    <Compile Include="DOM\Offerte.cs" />
+    <Compile Include="DOM\OfferteCollection.cs" />
+    <Compile Include="DOM\Struttura.cs" />
+    <Compile Include="DOM\StrutturaCollection.cs" />
+    <Compile Include="DOM\Tabrif.cs" />
+    <Compile Include="DOM\TabrifCollection.cs" />
+    <Compile Include="DOM\TipologiaContenuti.cs" />
+    <Compile Include="DOM\TipologiaContenutiCollection.cs" />
+    <Compile Include="DOM\Province.cs" />
+    <Compile Include="DOM\ProvinceCollection.cs" />
+    <Compile Include="DOM\TipologiaOfferte.cs" />
+    <Compile Include="DOM\TipologiaOfferteCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="STATIC\Global.cs" />
+    <Compile Include="UF\CachingModule.cs" />
+    <Compile Include="UF\dataManagement.cs" />
+    <Compile Include="UF\GenericComparer.cs" />
+    <Compile Include="UF\GenericFunc.cs" />
+    <Compile Include="UF\HandlerHelper.cs" />
+    <Compile Include="UF\handlers.cs" />
+    <Compile Include="UF\htmlToText.cs" />
+    <Compile Include="UF\IListRandomExtensions.cs" />
+    <Compile Include="UF\ImageProcessing.cs" />
+    <Compile Include="UF\Log.cs" />
+    <Compile Include="UF\PagerGeneric.cs" />
+    <Compile Include="UF\paypalfunctions.cs" />
+    <Compile Include="UF\RemotePost.cs" />
+    <Compile Include="UF\SitemapManager.cs" />
+    <Compile Include="UF\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="snKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DBL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="JRO">
+      <Guid>{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

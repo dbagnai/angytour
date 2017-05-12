@@ -1,0 +1,2277 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using WelcomeLibrary.UF;
+using WelcomeLibrary.DOM;
+using WelcomeLibrary.DAL;
+using System.Collections.Generic;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Data.OleDb;
+
+public partial class _IscrivitiSocio : CommonPage
+{
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
+
+    public string PercorsoComune
+    {
+        get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
+        set { ViewState["PercorsoComune"] = value; }
+    }
+    public string PercorsoFiles
+    {
+        get { return ViewState["PercorsoFiles"] != null ? (string)(ViewState["PercorsoFiles"]) : ""; }
+        set { ViewState["PercorsoFiles"] = value; }
+    }
+    public string PercorsoAssolutoApplicazione
+    {
+        get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
+        set { ViewState["PercorsoAssolutoApplicazione"] = value; }
+    }
+    public string Azione
+    {
+        get { return ViewState["Azione"] != null ? (string)(ViewState["Azione"]) : ""; }
+        set { ViewState["Azione"] = value; }
+    }
+    public string SubAct
+    {
+        get { return ViewState["SubAct"] != null ? (string)(ViewState["SubAct"]) : ""; }
+        set { ViewState["SubAct"] = value; }
+    }
+    public string ID_cliente
+    {
+        get { return ViewState["ID_cliente"] != null ? (string)(ViewState["ID_cliente"]) : ""; }
+        set { ViewState["ID_cliente"] = value; }
+    }
+    public string ID_offerta
+    {
+        get { return ViewState["ID_offerta"] != null ? (string)(ViewState["ID_offerta"]) : ""; }
+        set { ViewState["ID_offerta"] = value; }
+    }
+    public string ID_contenuto
+    {
+        get { return ViewState["ID_contenuto"] != null ? (string)(ViewState["ID_contenuto"]) : ""; }
+        set { ViewState["ID_contenuto"] = value; }
+    }
+    public string originalsid
+    {
+        get { return ViewState["originalsid"] != null ? (string)(ViewState["originalsid"]) : ""; }
+        set { ViewState["originalsid"] = value; }
+    }
+
+    public Dictionary<string, string> trattamenti
+    {
+        get { return ViewState["trattamenti"] != null ? (Dictionary<string, string>)(ViewState["trattamenti"]) : new Dictionary<string, string>(); }
+        set { ViewState["trattamenti"] = value; }
+    }
+
+    public string TipologiaOfferte
+    {
+        get { return ViewState["TipologiaOfferte"] != null ? (string)(ViewState["TipologiaOfferte"]) : ""; }
+        set { ViewState["TipologiaOfferte"] = value; }
+    }
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        try
+        {
+            if (!IsPostBack)
+            {
+                PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
+                PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
+                TipologiaOfferte = "rif000100"; //Codifica fissa per i soci
+
+                //Prendiamo i dati dalla querystring
+                Lingua = CaricaValoreMaster(Request, Session, "Lingua");
+                Azione = CaricaValoreMaster(Request, Session, "Azione");
+                SubAct = CaricaValoreMaster(Request, Session, "SubAct");
+
+                //Carico il session id originale della richiesta di iscrizione per ricaricare il carrello
+                originalsid = CaricaValoreMaster(Request, Session, "sid");
+
+                ID_cliente = CaricaValoreMaster(Request, Session, "ID_cliente");
+                //Lo uso per mandare la mail relativa all'offerta richiesta al termine della validazione
+                ID_offerta = CaricaValoreMaster(Request, Session, "ID_offerta");
+                //Lo uso per mandare la mail relativa alla struttura richiesta al termine della validazione
+                ID_contenuto = CaricaValoreMaster(Request, Session, "ID_contenuto");
+
+                Literal lit = (Literal)Master.FindControl("litBanner1");
+                if (lit != null) Master.CaricaBannerCarousel("TBL_BANNERS_GENERALE", 0, 0, "banner-destra1", false, lit, Lingua);
+                lit = (Literal)Master.FindControl("litBanner2");
+                if (lit != null) Master.CaricaBannerCarousel("TBL_BANNERS_GENERALE", 0, 0, "banner-destra2", false, lit, Lingua);
+                lit = (Literal)Master.FindControl("litBanner3");
+                if (lit != null) Master.CaricaBannerCarousel("TBL_BANNERS_GENERALE", 0, 0, "banner-destra3", false, lit, Lingua);
+                lit = (Literal)Master.FindControl("litbannerdestra4");
+                if (lit != null) Master.CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-destra4", false, lit, Lingua);
+                lit = (Literal)Master.FindControl("litbannerdestra5");
+                if (lit != null) Master.CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-destra5", false, lit, Lingua);
+                lit = (Literal)Master.FindControl("litbannerdestra6");
+                if (lit != null) Master.CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-destra6", false, lit, Lingua);
+
+
+                CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
+                CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
+                CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+                CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+                CaricaListaTrattamenti();//Memorizzo la lista dei trattamenti
+                VisualizzaTrattamenti("");
+
+                VisualizzaBoolfields("");
+                VisualizzaTblinterventi("");
+
+                litDescrizioneIscrivi.Text = ReplaceAbsoluteLinks(GetGlobalResourceObject("Common", "testoIscrizionesocio").ToString());
+                EvidenziaSelezione("Iscriviti");
+
+            }
+            else
+            {
+                output.Text = "";
+                lblRisposta.Text = "";
+                lblRisposta.Visible = false;
+                plhRisposta.Visible = false;
+                plhForm.Visible = true;
+            }
+
+        }
+        catch (Exception err)
+        {
+            output.Text = err.Message;
+        }
+
+    }
+    protected void EvidenziaSelezione(string testolink)
+    {
+
+        try
+        {
+            HtmlAnchor linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink));
+            if (linkmenu != null)
+            {
+                linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#999999");
+            }
+            linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink + "high"));
+            if (linkmenu != null)
+            {
+                ((HtmlGenericControl)linkmenu.Parent).Attributes.Add("class", "active");
+                ((HtmlGenericControl)linkmenu.Parent.Parent).Attributes["class"] += " active";
+            }
+        }
+        catch { }
+    }
+    /// <summary>
+    /// Memorizza nel db i dati del socio aspirante
+    /// ed invia la mail alla segreteria ed al socio per presa in carico
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnInvia_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Offerte socio = CaricaDatiSocioDaForm(); //Leggo i dati del cliente dal form
+
+#if false //Blocco la verifica del certificato di equipollenza se non presente l'anno di specializzazione in c.plastica
+            if (string.IsNullOrEmpty(socio.Annospecializzazione_dts.Trim()))
+            {
+                if (!UploadCEQUIP.HasFile)
+                {
+                    switch (Lingua)
+                    {
+                        case "I":
+                            output.Text = ("Errore procedura di iscrizione.Inserire certificato equipollenza o anno specializzazione chirurgia plastica. ");
+                            break;
+                        case "GB":
+                            output.Text = ("Error during application.Inserire certificato equipollenza o anno specializzazione chirurgia plastica.");
+                            break;
+                    }
+                    return;
+                }
+
+            }
+            
+#endif
+
+            //COntrollo spunte
+            if (radCarriera1.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera1);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera1);
+                        break;
+                }
+                return;
+            }
+            if (radCarriera2.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera3);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera3);
+                        break;
+                }
+                return;
+            }
+            if (radCarriera3.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera3b);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera3b);
+                        break;
+                }
+                return;
+            }
+            if (radCarriera4.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera4);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera4);
+                        break;
+                }
+                return;
+            }
+            if (radCarriera5.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera5);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera5);
+                        break;
+                }
+                return;
+            }
+
+
+            if (radIntervento1op1.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento1.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento1.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op1.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento1.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento1.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op2.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento2.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento2.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op2.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento2.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento2.Text);
+                        break;
+                }
+                return;
+            }
+
+            if (radIntervento1op3.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento3.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento3.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op3.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento3.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento3.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op4.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento4.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento4.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op4.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento4.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento4.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op5.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento5.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento5.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op5.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento5.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento5.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op6.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento6.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento6.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op6.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento6.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento6.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op7.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento7.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento7.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op7.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento7.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento7.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op8.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento8.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento8.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op8.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento8.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento8.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento1op9.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 1 operatore : " + litIntervento9.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value first operator for : " + litIntervento9.Text);
+                        break;
+                }
+                return;
+            }
+            if (radIntervento2op9.SelectedIndex == -1)
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        output.Text = ("Selezionare valore interventi 2 operatore : " + litIntervento9.Text);
+                        break;
+                    case "GB":
+                        output.Text = ("Select value second operator for : " + litIntervento9.Text);
+                        break;
+                }
+                return;
+            }
+            socio.DataInserimento = System.DateTime.Now;
+            if (!InserisciSocio(socio))
+            {
+                switch (Lingua)
+                {
+                    case "I":
+                        VisualizzaRisposta("Errore procedura di iscrizione. Contattataci direttamente per telefono o email per completare il processo. ");
+                        break;
+                    case "GB":
+                        VisualizzaRisposta("Error during application. Contact us with email or phone to complete the procedure");
+                        break;
+                }
+                return;
+            }
+
+
+            //Devo adesso procedere a mandare la mail alla segreteria
+            //ed al cliente della presa in carico della richiesta di iscrizione
+            string esitoinvio = InviaMailRichiestaIscrizione(socio);
+            if (string.IsNullOrWhiteSpace(esitoinvio))
+                VisualizzaRisposta(GetGlobalResourceObject("Common", "testoRispostaRichiestaIscrizione").ToString());
+            else
+            {
+                VisualizzaRisposta(esitoinvio);
+                return;
+            }
+
+        }
+        catch (Exception err)
+        {
+            output.Text = err.Message + " <br/> ";
+            switch (Lingua)
+            {
+                case "I":
+                    VisualizzaRisposta("Errore procedura di iscrizione. Contattataci direttamente per telefono o email per completare il processo. ");
+                    break;
+                case "GB":
+                    VisualizzaRisposta("Error during application. Contact us with email or phone to complete the procedure");
+                    break;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Invia la mail di avvenuta registrazione al cliente e alla segreteria  
+    /// </summary>
+    /// <param name="cliente"></param>
+    /// <returns></returns>
+    private string InviaMailRichiestaIscrizione(Offerte aderente)
+    {
+        string ret = "";
+        try
+        {
+            string SoggettoMail = Nome + " : " + "Mail di richiesta iscrizione alla'associazione  / Subscription request do Aicpe.";
+
+            //Dati per la mail
+            string nomeaderente = aderente.Cognome_dts + " " + aderente.Nome_dts;
+            string Mailaderente = aderente.Emailriservata_dts;
+            string Descrizione = GetGlobalResourceObject("Common", "testoMailAdesione1").ToString() + "<br/><br/>";
+            Descrizione += "----------------------------------------------------------------------------------<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + aderente.Nome_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto3").ToString() + " " + aderente.Cognome_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto13").ToString() + " " + aderente.Datanascita_dts.ToShortDateString() + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto60").ToString() + " " + aderente.Pivacf_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoS1").ToString() + " " + aderente.Sociopresentatore1_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoS2").ToString() + " " + aderente.Sociopresentatore2_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoEmailp").ToString() + " " + aderente.Email + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoEmailr").ToString() + " " + aderente.Emailriservata_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoSitointernet").ToString() + " " + aderente.Website + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "Fax").ToString() + " " + aderente.Fax + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoTelefonoPriv").ToString() + " " + aderente.Telefonoprivato_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoAnnoL").ToString() + " " + aderente.Annolaurea_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzazioneanno").ToString() + " " + aderente.Annospecializzazione_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzazionealtre").ToString() + " " + aderente.Altrespecializzazioni_dts + "<br/>";
+
+            if (!string.IsNullOrEmpty(aderente.locordine_dts))
+            {
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoAlbo1").ToString() + " " + aderente.locordine_dts + "<br/>";
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoAlbo2").ToString() + " " + aderente.niscrordine_dts + "<br/>";
+            }
+            if (!string.IsNullOrEmpty(aderente.annofrequenza_dts))
+            {
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi2").ToString() + " " + aderente.annofrequenza_dts + "<br/>";
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi3").ToString() + " " + aderente.nomeuniversita_dts + " ";
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi4").ToString() + " " + aderente.dettagliuniversita_dts + "<br/>";
+            }
+
+            Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == aderente.Caratteristica1.ToString(); });
+            if (Car1 != null)
+                Descrizione += GetGlobalResourceObject("Common", "FormTestoCategoriaprofessionale").ToString() + " " + Car1.Campo1 + "<br/>";
+            string valore = "No";
+            if (aderente.SocioIsaps_dts) valore = "Si";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoSocioisaps").ToString() + " " + valore + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormtestoSocioaltra").ToString() + " " + aderente.Socioaltraassociazione_dts + "<br/>";
+            Tabrif Car3 = Utility.Caratteristiche[2].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == aderente.Caratteristica3.ToString(); });
+            if (Car3 != null)
+                Descrizione += GetGlobalResourceObject("Common", "TestoCategoriasocio").ToString() + " " + Car3.Campo1 + "<br/>";
+            valore = "No";
+
+            //SEZIONE DATI AGGIUNTI
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera1").ToString() + " " + radCarriera1.SelectedItem.Text + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera2").ToString() + " " + txtTextfield1_dts.Text + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera3").ToString() + " " + radCarriera2.SelectedItem.Text + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera3b").ToString() + " " + radCarriera3.SelectedItem.Text + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera4").ToString() + " " + radCarriera4.SelectedItem.Text + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera5").ToString() + " " + radCarriera5.SelectedItem.Text + "<br/>";
+
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera7").ToString() + "<br/>";
+            //Primo operatore
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera8").ToString() + "<br/>";
+            Descrizione += litIntervento1.Text + ": ";
+            Descrizione += radIntervento1op1.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento2.Text + ": ";
+            Descrizione += radIntervento1op2.SelectedItem.Text + "<br/>";
+
+            Descrizione += litIntervento3.Text + ": ";
+            Descrizione += radIntervento1op3.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento4.Text + ": ";
+            Descrizione += radIntervento1op4.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento5.Text + ": ";
+            Descrizione += radIntervento1op5.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento6.Text + ": ";
+            Descrizione += radIntervento1op6.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento7.Text + ": ";
+            Descrizione += radIntervento1op7.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento8.Text + ": ";
+            Descrizione += radIntervento1op8.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento9.Text + ": ";
+            Descrizione += radIntervento1op9.SelectedItem.Text + "<br/>";
+
+            //Secondo operatore
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera9").ToString() + "<br/>";
+            Descrizione += litIntervento1.Text + ": ";
+            Descrizione += radIntervento2op1.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento2.Text + ": ";
+            Descrizione += radIntervento2op2.SelectedItem.Text + "<br/>";
+
+            Descrizione += litIntervento3.Text + ": ";
+            Descrizione += radIntervento2op3.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento4.Text + ": ";
+            Descrizione += radIntervento2op4.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento5.Text + ": ";
+            Descrizione += radIntervento2op5.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento6.Text + ": ";
+            Descrizione += radIntervento2op6.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento7.Text + ": ";
+            Descrizione += radIntervento2op7.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento8.Text + ": ";
+            Descrizione += radIntervento2op8.SelectedItem.Text + "<br/>";
+            Descrizione += litIntervento9.Text + ": ";
+            Descrizione += radIntervento2op9.SelectedItem.Text + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera10").ToString() + "<br/>";
+
+
+            if (aderente.AccettazioneStatuto_dts) valore = "Si";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoAccettazionestatuto").ToString() + " " + valore + "<br/>";
+            valore = "No";
+            if (aderente.Certificazione_dts) valore = "Si";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoCertificazione").ToString() + " " + valore + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzoposta").ToString() + " " + aderente.Indirizzo + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzofatt").ToString() + " " + aderente.indirizzofatt_dts + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoRicfatt").ToString() + " " + aderente.ricfatt_dts + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo1").ToString() + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione1_dts + "<br/>";
+            Tabrif nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE1_dts; });
+            string nomenazione = aderente.CodiceNAZIONE1_dts;
+            if (nazione != null)
+                nomenazione = nazione.Campo1;
+            string nomeregione = NomeRegione(aderente.CodiceREGIONE1_dts, Lingua);
+            string nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA1_dts, Lingua);
+            string nomecomune = aderente.CodiceCOMUNE1_dts;
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via1_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap1_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono1_dts + "<br/>";
+
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo2").ToString() + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione2_dts + "<br/>";
+            nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE2_dts; });
+            nomenazione = aderente.CodiceNAZIONE2_dts;
+            if (nazione != null)
+                nomenazione = nazione.Campo1;
+            nomeregione = NomeRegione(aderente.CodiceREGIONE2_dts, Lingua);
+            nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA2_dts, Lingua);
+            nomecomune = aderente.CodiceCOMUNE2_dts;
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via2_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap2_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono2_dts + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo3").ToString() + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione3_dts + "<br/>";
+            nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE3_dts; });
+            nomenazione = aderente.CodiceNAZIONE3_dts;
+            if (nazione != null)
+                nomenazione = nazione.Campo1;
+            nomeregione = NomeRegione(aderente.CodiceREGIONE3_dts, Lingua);
+            nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA3_dts, Lingua);
+            nomecomune = aderente.CodiceCOMUNE2_dts;
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+
+            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via3_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap3_dts + "<br/>";
+            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono3_dts + "<br/>";
+
+
+            Descrizione += "----------------------------------------------------------------------------------<br/><br/>";
+
+            Descrizione += "<br/>" + GetGlobalResourceObject("Common", "TestoCredits").ToString() + "<br/>";
+
+            Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailaderente, nomeaderente);
+
+            string SoggettoMailPerGestore = "Richiesta nuova adesione socio tramite il sito web";
+
+            Utility.invioMailGenerico(Nome, Email, SoggettoMailPerGestore, Descrizione, Email, Nome);
+        }
+        catch (Exception err)
+        {
+            ret = "Errore invio mail di conferma.Contattare l'assistenza./Error sending confirmation mail contact us directly.";
+
+        }
+        return ret;
+    }
+
+
+    private void VisualizzaRisposta(string p)
+    {
+        plhRisposta.Visible = true;
+        plhForm.Visible = false;
+        switch (Lingua)
+        {
+            case "I":
+                //lblRisposta.Text = "Grazie per l'interesse mostrato nelle nostre proproste.";
+                lblRisposta.Text = p;
+                break;
+            case "GB":
+                //lblRisposta.Text = " Thanks for the interest showen for our proposal.";
+                lblRisposta.Text = p;
+                break;
+        }
+        lblRisposta.Visible = true;
+    }
+
+
+    protected Offerte CaricaDatiSocioDaForm()
+    {
+        Offerte updrecord = new Offerte();
+        updrecord.CodiceTipologia = TipologiaOfferte;
+
+        int tmpcoll = 0;
+        tmpcoll = 0;
+        if (Int32.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
+            updrecord.Caratteristica1 = tmpcoll;
+        tmpcoll = 0;
+        if (Int32.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
+            updrecord.Caratteristica2 = tmpcoll;
+        tmpcoll = 0;
+        if (Int32.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+            updrecord.Caratteristica3 = tmpcoll;
+        //tmpcoll = 0;
+        //if (Int32.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+        //    updrecord.Caratteristica4 = tmpcoll;
+        //tmpcoll = 0;
+        //if (Int32.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+        //    updrecord.Caratteristica5 = tmpcoll;
+        //if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+        //    updrecord.Caratteristica6 = tmpcoll;
+
+
+        updrecord.Indirizzo = Server.HtmlEncode(txtIndirizzo.Text);
+        updrecord.Email = txtEmail.Text;
+        updrecord.Website = txtWebsite.Text;
+        updrecord.Telefono = txtTelefono.Text;
+        updrecord.Fax = txtFax.Text;
+
+        // ----------SEZIONE DETTAGLIO------------------------------
+        updrecord.Nome_dts = txtNome_dts.Text;
+        updrecord.Cognome_dts = txtCognome_dts.Text;
+        DateTime _tmpdate = System.DateTime.MinValue;
+        if (!DateTime.TryParse(txtDatanascita_dts.Text, out _tmpdate))
+            _tmpdate = System.DateTime.MinValue;
+        updrecord.Datanascita_dts = _tmpdate;
+
+        updrecord.indirizzofatt_dts = txtindirizzofatt_dts.Text;
+        //updrecord.noteriservate_dts = txtnoteriservate_dts.Text;
+        updrecord.ricfatt_dts = radricfatt_dts.SelectedValue;
+
+        updrecord.Pivacf_dts = txtPivacf_dts.Text;
+        updrecord.Sociopresentatore1_dts = txtSociopresentatore1_dts.Text;
+        updrecord.Sociopresentatore2_dts = txtSociopresentatore2_dts.Text;
+        updrecord.Telefonoprivato_dts = txtTelefonoprivato_dts.Text;
+        updrecord.Annolaurea_dts = txtAnnolaurea_dts.Text;
+        updrecord.Annospecializzazione_dts = txtAnnospecializzazione_dts.Text;
+        updrecord.Altrespecializzazioni_dts = txtAltrespecializzazioni_dts.Text;
+        updrecord.Socioaltraassociazione_dts = txtSocioaltraassociazione_dts.Text;
+        updrecord.Emailriservata_dts = txtEmailriservata_dts.Text;
+
+        bool _b = false;
+        bool.TryParse(radSocioSicpre_dts.SelectedValue, out _b);
+        updrecord.SocioSicpre_dts = _b; //chkSocioSicpre_dts.Checked;
+        _b = false;
+        bool.TryParse(radSocioIsaps_dts.SelectedValue, out _b);
+        updrecord.SocioIsaps_dts = _b;// chkSocioIsaps_dts.Checked;
+
+        updrecord.AccettazioneStatuto_dts = chkAccettazioneStatuto_dts.Checked;
+        updrecord.Certificazione_dts = chkCertificazione_dts.Checked;
+
+        //funzioni split e reconstruct!!!!!!
+        updrecord.Trattamenticollegati_dts = Creastringatrattamenti();
+
+        updrecord.Boolfields_dts = CreastringaBoolfields();
+        updrecord.Interventieseguiti_dts = CreastringTblinterventi();
+
+        //Nuovi dati aggiunti alla scheda
+        updrecord.locordine_dts = txtLocordine_dts.Text;
+        updrecord.niscrordine_dts = txtNiscrordine_dts.Text;
+        updrecord.annofrequenza_dts = txtannofrequenza_dts.Text;
+        updrecord.nomeuniversita_dts = txtnomeuniversita_dts.Text;
+        updrecord.dettagliuniversita_dts = txtdettagliuniversita_dts.Text;
+        updrecord.Textfield1_dts = txtTextfield1_dts.Text;
+
+        //Indirizzo1
+        updrecord.Nomeposizione1_dts = txtNomeposizione1_dts.Text;
+        updrecord.Via1_dts = txtVia1_dts.Value;
+        updrecord.Cap1_dts = txtCap1_dts.Value;
+        updrecord.Telefono1_dts = txtTelefono1_dts.Value;
+        double _tmpdbl = 0;
+        double.TryParse(txtLatitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Latitudine1_dts = _tmpdbl;
+        _tmpdbl = 0;
+        double.TryParse(txtLongitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Longitudine1_dts = _tmpdbl;
+        updrecord.CodiceNAZIONE1_dts = ddlCodiceNAZIONE1_dts.SelectedValue;
+        updrecord.CodiceREGIONE1_dts = txtCodiceREGIONE1_dts.Value;
+        updrecord.CodicePROVINCIA1_dts = txtCodicePROVINCIA1_dts.Value;
+        updrecord.CodiceCOMUNE1_dts = txtCodiceCOMUNE1_dts.Value;
+
+        //Indirizzo2
+        updrecord.Nomeposizione2_dts = txtNomeposizione2_dts.Text;
+        updrecord.Via2_dts = txtVia2_dts.Value;
+        updrecord.Cap2_dts = txtCap2_dts.Value;
+        updrecord.Telefono2_dts = txtTelefono2_dts.Value;
+
+        _tmpdbl = 0;
+        double.TryParse(txtLatitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Latitudine2_dts = _tmpdbl;
+        _tmpdbl = 0;
+        double.TryParse(txtLongitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Longitudine2_dts = _tmpdbl;
+        updrecord.CodiceNAZIONE2_dts = ddlCodiceNAZIONE2_dts.SelectedValue;
+        updrecord.CodiceREGIONE2_dts = txtCodiceREGIONE2_dts.Value;
+        updrecord.CodicePROVINCIA2_dts = txtCodicePROVINCIA2_dts.Value;
+        updrecord.CodiceCOMUNE2_dts = txtCodiceCOMUNE2_dts.Value;
+
+        //Indirizzo3
+        updrecord.Nomeposizione3_dts = txtNomeposizione3_dts.Text;
+        updrecord.Via3_dts = txtVia3_dts.Value;
+        updrecord.Cap3_dts = txtCap3_dts.Value;
+        updrecord.Telefono3_dts = txtTelefono3_dts.Value;
+
+        _tmpdbl = 0;
+        double.TryParse(txtLatitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Latitudine3_dts = _tmpdbl;
+        _tmpdbl = 0;
+        double.TryParse(txtLongitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+        updrecord.Longitudine3_dts = _tmpdbl;
+        updrecord.CodiceNAZIONE3_dts = ddlCodiceNAZIONE3_dts.SelectedValue;
+        updrecord.CodiceREGIONE3_dts = txtCodiceREGIONE3_dts.Value;
+        updrecord.CodicePROVINCIA3_dts = txtCodicePROVINCIA3_dts.Value;
+        updrecord.CodiceCOMUNE3_dts = txtCodiceCOMUNE3_dts.Value;
+
+
+        //Campi di Preimpostazione del SOCIO Come da valutare
+        updrecord.Bloccoaccesso_dts = true;
+        updrecord.Archiviato = true;
+        updrecord.Abilitacontatto = true;
+
+        return updrecord;
+
+    }
+
+    protected bool InserisciSocio(Offerte updrecord)
+    {
+        bool stato = false;
+        //----------------------------------------------------------
+        //VERIFICA PER LA CREAZIONE DELL'UTENTE
+        //----------------------------------------------------------
+        string username = updrecord.Cognome_dts.Replace(" ", "").Trim().ToLower() + updrecord.Nome_dts.Replace(" ", "").Trim().ToLower();
+        if (VerificaPresenzaUtente(username))
+        {
+            output.Text = "Attenzione già presente utente con stesso Nome e Cognome. Verificare";
+            return false;
+        }
+        //Verifichiamo se socio già inserito
+        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        string testoricerca = updrecord.Emailriservata_dts.Replace(" ", "%");
+        OleDbParameter p7 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+        parColl.Add(p7);
+        if (TipologiaOfferte != "")
+        {
+            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
+            parColl.Add(p3);
+        }
+        OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
+        if (offerte != null && offerte.Count > 0)
+        {
+            output.Text = "Attenzione già presente utente con stessa email. Verificare";
+            return false;
+        }
+
+        try
+        {
+            //--------INSERISCO IL SOCIO NEL SB---------------
+            offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+            offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+            stato = true;
+        }
+        catch (Exception err)
+        {
+
+            output.Text += err.Message;
+            if (err.InnerException != null)
+                output.Text += err.InnerException.Message;
+            stato = false;
+        }
+        try
+        {
+            //AGGIORNO I FILES ALLEGATI AL SOCIO
+            AggiornaAllegati(updrecord.Id.ToString()); //Inserisco i file che devo in allegato
+        }
+        catch (Exception err)
+        {
+            output.Text += err.Message;
+            if (err.InnerException != null)
+                output.Text += err.InnerException.Message;
+            stato = false;
+        }
+        //Per creare l'utente del membership ( lo lascio fare alla segretieria in seguito )
+        //string username = "";
+        //string password = "";
+        //CreaUtenteAssociato(updrecord, ref username, ref password); // non lo faccio è compito della segreteria
+        return stato;
+    }
+    private void AggiornaAllegati(string idrecord)
+    {
+        CaricaFile(UploadCv, "CV", idrecord);
+        CaricaFile(UploadCEQUIP, "CEQUIP", idrecord);
+        CaricaFile(UploadRitratto, "Ritratto", idrecord);
+
+    }
+    private void CaricaFile(FileUpload UploadControl, string DescrizioneFile, string idrecord)
+    {
+        try
+        {
+            //Controlliamo se ho selezionato un record
+            if (idrecord == null || idrecord == "")
+            {
+                output.Text += "Selezionare un elemento per associare il file";
+                return;
+            }
+            int idSelected = 0;
+            if (!Int32.TryParse(idrecord, out idSelected))
+            {
+                output.Text += "Selezionare un elemento per associare il file";
+                return;
+            }
+
+            //Verifichiamo la presenza del percorso di destinazione altrimenti lo creiamo
+            //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
+            string pathDestinazione = Server.MapPath(PercorsoFiles + "/" + TipologiaOfferte + "/" + idrecord);
+            if (!Directory.Exists(pathDestinazione))
+                Directory.CreateDirectory(pathDestinazione);
+
+            //-------------------------------------
+            //Carichiamoci il file
+            //-------------------------------------
+            if (UploadControl.HasFile)
+            {
+                if (UploadControl.PostedFile.ContentLength > 10000000)
+                {
+
+                    output.Text += "Il File non può essere caricato perché supera 10MB!";
+                }
+                else
+                {
+                    //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
+                    string NomeCorretto = UploadControl.FileName.Replace("+", "");
+                    NomeCorretto = NomeCorretto.Replace("%", "");
+                    NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
+                    //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
+                    if (System.IO.File.Exists(pathDestinazione))
+                    {
+                        output.Text += ("Il File non può essere caricato perché già presente sul server!");
+                    }
+                    else
+                    {
+                        Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                        if (UploadControl.PostedFile.ContentType == "image/jpeg" || UploadControl.PostedFile.ContentType == "image/pjpeg" || UploadControl.PostedFile.ContentType == "image/gif")
+                        {
+                            int maxheight = 800;
+                            int maxwidth = 1000;
+                            bool ridimensiona = true;
+                            //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
+                            if (ResizeAndSave(UploadControl.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
+                            {
+                                //Creiamo l'anteprima Piccola per usi in liste
+                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 150, 150, pathDestinazione + "\\", "Ant" + NomeCorretto);
+                                //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
+                                //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
+                                try
+                                {
+                                    try
+                                    {
+                                        bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, DescrizioneFile);
+                                    }
+                                    catch (Exception errins)
+                                    {
+                                        output.Text = errins.Message;
+                                    }
+
+                                    //   output.Text += "Foto Inserita Correttamente<br/>";
+
+
+                                }
+                                catch (Exception error)
+                                {
+                                    //CANCELLO LA FOTO UPLOADATA
+                                    if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                                    if (System.IO.File.Exists(pathDestinazione + "\\" + "Ant" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + "Ant" + NomeCorretto);
+                                    //AGGIORNO IL DETAILSVIEW
+                                    output.Text = error.Message;
+                                }
+                            }
+                            else { output.Text += ("La foto non è stata caricata! (Problema nel caricamento)"); }
+                        }
+                        else if (UploadControl.PostedFile.ContentType == "application/pdf")
+                        {
+
+                            //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
+                            UploadControl.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
+                            try
+                            {
+                                try
+                                {
+                                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, DescrizioneFile);
+                                }
+                                catch (Exception errins)
+                                {
+                                    output.Text = errins.Message;
+                                }
+
+                                //  output.Text += "Documento Inserito Correttamente<br/>";
+
+                            }
+                            catch (Exception error)
+                            {
+                                //CANCELLO IL FILE UPLOADATO
+                                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                                //AGGIORNO IL DETAILSVIEW
+                                output.Text = error.Message;
+                            }
+                        }
+                        else
+                        {
+
+                            //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
+                            UploadControl.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
+                            try
+                            {
+                                try
+                                {
+                                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, DescrizioneFile);
+                                }
+                                catch (Exception errins)
+                                {
+                                    output.Text = errins.Message;
+                                }
+
+                                //    output.Text += "Documento Inserito Correttamente<br/>";
+
+                            }
+                            catch (Exception error)
+                            {
+                                //CANCELLO IL FILE UPLOADATO
+                                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                                //AGGIORNO IL DETAILSVIEW
+                                output.Text = error.Message;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        catch (Exception errorecaricamento)
+        {
+            output.Text += errorecaricamento.Message;
+            if (errorecaricamento.InnerException != null)
+                output.Text += errorecaricamento.InnerException.Message;
+
+        }
+    }
+    protected void CreaAnteprima(string filePath, int Altezza, int Larghezza, string pathAnteprime, string nomeAnteprima)
+    {
+        string PathTempAnteprime = pathAnteprime;
+        System.Drawing.Imaging.ImageFormat imgF = null;
+        //System.IO.File.Exists(PathTempAnteprime);
+        if (!System.IO.Directory.Exists(PathTempAnteprime))
+        {
+            System.IO.Directory.CreateDirectory(PathTempAnteprime);
+        }
+        // throw new Exception("Cartella temporanea di destinazione per l'anteprima non trovata!");
+
+        using (System.IO.FileStream file = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
+        {
+            using (System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(file))
+            {
+                int altezzaStream = bmpStream.Height;
+                int larghezzaStream = bmpStream.Width;
+                if (altezzaStream <= larghezzaStream)
+                    Altezza = Convert.ToInt32((double)Larghezza / (double)larghezzaStream * (double)altezzaStream);
+                else
+                    Larghezza = Convert.ToInt32((double)Altezza / (double)altezzaStream * (double)larghezzaStream);
+                System.Drawing.Bitmap img = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(Larghezza, Altezza));
+                switch (System.IO.Path.GetExtension(filePath).ToLower())
+                {
+                    case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
+                    case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
+                    case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
+                    default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
+                }
+
+                img.Save(PathTempAnteprime + nomeAnteprima, imgF);
+            }
+            file.Close();
+        }
+        if (!System.IO.File.Exists(PathTempAnteprime + nomeAnteprima))
+            output.Text += ("Anteprima Allegato non salvata correttamente!");
+
+    }
+    private bool ResizeAndSave(System.IO.Stream imgStr, int Width, int Height, string Filename, bool ridimensiona)
+    {
+        try
+        {
+            using (System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(imgStr))
+            {
+                if (ridimensiona == true)
+                {
+                    //CREO LE DIMENSIONI DELLA FOTO SALVATA IN BASE AL RAPORTO ORIGINALE DI ASPETTO
+                    int altezzaStream = bmpStream.Height; //altezza foto originale
+                    int larghezzaStream = bmpStream.Width; //larghezza foto originale
+                    if (altezzaStream <= larghezzaStream)
+                        Height = Convert.ToInt32(((double)Width / (double)larghezzaStream) * (double)altezzaStream);
+                    else
+                        Width = Convert.ToInt32(((double)Height / (double)altezzaStream) * (double)larghezzaStream);
+
+                    //FINE CALCOLO ----------------------------------------------------------
+                }
+
+                using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
+                {
+
+                    System.Drawing.Bitmap img_filtrata = img_orig;
+                    //FILTRI CONTRASTO BRIGHTNESS/contrast/sturation
+                    //img_filtrata = ImageProcessing.applicaSaturationCorrection(img_filtrata, 0.05);
+                    img_filtrata = ImageProcessing.applicaBrightness(img_filtrata, 0.03);
+                    //img_filtrata = ImageProcessing.applicaContrast(img_filtrata, 0.75);
+                    //img_filtrata = ImageProcessing.applicaAdaptiveSmoothing(img_filtrata);
+                    //img_filtrata = ImageProcessing.applicaConservativeSmoothing(img_filtrata);
+                    //img_filtrata = ImageProcessing.applicaHSLFilter(img_filtrata, 0.87, 0.075);
+                    //img_filtrata = ImageProcessing.applicaGaussianBlur(img_filtrata, 1, 5);
+                    //img_filtrata = ImageProcessing.applicaMediano(img_filtrata, 4);
+                    // ImageProcessing.NoiseRemoval(img_filtrata);
+                    //img_filtrata = ImageProcessing.MeanFilter(img_filtrata, 2);
+                    img_filtrata = ImageProcessing.applicaResizeBilinear(img_filtrata, Width, Height); //resisze
+                    //img_filtrata = ImageProcessing.applicaResizeBicubic(img_filtrata, Width, Height); //resisze
+
+                    using (System.Drawing.Bitmap img = img_filtrata)
+                    {
+                        System.Drawing.Imaging.ImageFormat imgF = null;
+                        switch (System.IO.Path.GetExtension(Filename).ToLower())
+                        {
+                            case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
+                            case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
+                            case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
+                            default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
+                        }
+                        //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
+                        {
+                            // Create an Encoder object based on the GUID for the Quality parameter category.
+                            ImageCodecInfo jgpEncoder = GetEncoder(imgF);
+                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                            // Create an EncoderParameters object.
+                            // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 85L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                            myEncoderParameters.Param[0] = myEncoderParameter;
+                            img.Save(Filename, jgpEncoder, myEncoderParameters);
+                        }
+                        else
+                            img.Save(Filename, imgF);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+    private ImageCodecInfo GetEncoder(ImageFormat format)
+    {
+        ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+        foreach (ImageCodecInfo codec in codecs)
+        {
+            if (codec.FormatID == format.Guid)
+            {
+                return codec;
+            }
+        }
+        return null;
+    }
+
+    protected void CaricaListaTrattamenti(string codicetrattamenti = "rif000101")
+    {
+        offerteDM offDM = new offerteDM();
+        List<Offerte> lista = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicetrattamenti, "", false, "", false, "DenominazioneI");
+        trattamenti = new Dictionary<string, string>();
+        lista.ForEach(o => trattamenti.Add(o.Id.ToString(), o.DenominazioneI));
+    }
+    protected void VisualizzaTrattamenti(string lista)
+    {
+        List<string> idlist = new List<string>(lista.Split(','));
+        cbtrattamentilist.Items.Clear();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        foreach (KeyValuePair<string, string> kv in trattamenti)
+        {
+            //<input type="checkbox" id="" value="" />
+            if (idlist.Contains(kv.Key))
+            {
+                //   sb.Append("<input type=\"checkbox\" id=\"id_" + kv.Key + "\"    value=\"true\" >" + kv.Value +"</input>");
+                ListItem l = new ListItem(kv.Value, kv.Key);
+                l.Selected = true;
+                cbtrattamentilist.Items.Add(l);
+            }
+            else
+            {
+                //  sb.Append("<input type=\"checkbox\" id=\"id_" + kv.Key + "\"  value=\"false\" >" + kv.Value + "</input>");
+                ListItem l = new ListItem(kv.Value, kv.Key);
+                l.Selected = false;
+                cbtrattamentilist.Items.Add(l);
+            }
+        }
+
+
+    }
+    protected string Creastringatrattamenti()
+    {
+        string ret = "";
+        foreach (ListItem o in cbtrattamentilist.Items)
+        {
+            if (o.Selected == true)
+                ret += o.Value.ToString() + ",";
+        }
+        ret = ret.TrimEnd(',');
+        return ret;
+    }
+
+
+
+    private string CreastringTblinterventi()
+    {
+        string ret = "";
+        string testo = litIntervento1.Text;
+        ret += testo + ",";
+        string valuefind = "";
+        foreach (ListItem o in radIntervento1op1.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op1.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        //////////
+        testo = litIntervento2.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op2.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op2.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        ////////////
+        testo = litIntervento3.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op3.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op3.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        /////////////
+        testo = litIntervento4.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op4.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op4.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        ////////////
+        testo = litIntervento5.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op5.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op5.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        /////////
+        testo = litIntervento6.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op6.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op6.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        ////////////
+        testo = litIntervento7.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op7.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op7.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        /////////
+        testo = litIntervento8.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op8.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op8.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        ///////////
+        testo = litIntervento9.Text;
+        ret += testo + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento1op9.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind + ",";
+        valuefind = "";
+        foreach (ListItem o in radIntervento2op9.Items)
+        {
+            if (o.Selected == true)
+            {
+                valuefind = o.Value.ToString();
+            }
+        }
+        ret += valuefind; //All'ultmi non metto la virgola finale
+
+        return ret;
+    }
+    private void VisualizzaTblinterventi(string lista)
+    {
+
+        List<string> statuslist = new List<string>(lista.Split(','));
+        //Abbiamo Testointervento,valoreselezionato operatore1, valoreselezionato operatore2 .....
+        string intervento = litIntervento1.Text;
+        int indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op1.SelectedValue = statuslist[indice + 1];
+                else
+                    radIntervento1op1.ClearSelection();
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op1.SelectedValue = statuslist[indice + 2];
+                else
+                    radIntervento2op1.ClearSelection();
+            }
+        }
+        else
+        {
+            radIntervento1op1.ClearSelection();
+            radIntervento2op1.ClearSelection();
+        }
+
+        intervento = litIntervento2.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op2.SelectedValue = statuslist[indice + 1];
+                else
+                    radIntervento1op2.ClearSelection();
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op2.SelectedValue = statuslist[indice + 2];
+                else
+                    radIntervento2op2.ClearSelection();
+            }
+        }
+        else
+        {
+            radIntervento1op2.ClearSelection();
+            radIntervento2op2.ClearSelection();
+        }
+
+
+        intervento = litIntervento3.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op3.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op3.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op3.ClearSelection();
+            radIntervento2op3.ClearSelection();
+        }
+
+        intervento = litIntervento4.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op4.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op4.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op4.ClearSelection();
+            radIntervento2op4.ClearSelection();
+        }
+
+
+        intervento = litIntervento5.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op5.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op5.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op5.ClearSelection();
+            radIntervento2op5.ClearSelection();
+        }
+
+        intervento = litIntervento6.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op6.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op6.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op6.ClearSelection();
+            radIntervento2op6.ClearSelection();
+        }
+
+        intervento = litIntervento7.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op7.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op7.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op7.ClearSelection();
+            radIntervento2op7.ClearSelection();
+        }
+
+        intervento = litIntervento8.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op8.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op8.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op8.ClearSelection();
+            radIntervento2op8.ClearSelection();
+        }
+        intervento = litIntervento9.Text;
+        indice = statuslist.FindIndex(a => a.ToString() == intervento);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 3)
+            {
+                if (!string.IsNullOrEmpty(statuslist[indice + 1]))
+                    radIntervento1op9.SelectedValue = statuslist[indice + 1];
+                if (!string.IsNullOrEmpty(statuslist[indice + 2]))
+                    radIntervento2op9.SelectedValue = statuslist[indice + 2];
+            }
+        }
+        else
+        {
+            radIntervento1op9.ClearSelection();
+            radIntervento2op9.ClearSelection();
+        }
+    }
+
+
+    private void VisualizzaBoolfields(string lista)
+    {
+        List<string> statuslist = new List<string>(lista.Split(','));
+
+        bool stato = false;
+        string controlidtoset = "radCarriera1";
+        radCarriera1.Items.Clear();
+        int indice = statuslist.FindIndex(a => a.ToString() == controlidtoset);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 2)
+                bool.TryParse(statuslist[indice + 1], out stato);
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = stato;
+            radCarriera1.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = !stato;
+            radCarriera1.Items.Add(l);
+        }
+        else
+        {
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = false;
+            radCarriera1.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = false;
+            radCarriera1.Items.Add(l);
+        }
+
+        stato = false;
+        controlidtoset = "radCarriera2";
+        radCarriera2.Items.Clear();
+        indice = statuslist.FindIndex(a => a.ToString() == controlidtoset);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 2)
+                bool.TryParse(statuslist[indice + 1], out stato);
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = stato;
+            radCarriera2.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = !stato;
+            radCarriera2.Items.Add(l);
+        }
+        else
+        {
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = false;
+            radCarriera2.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = false;
+            radCarriera2.Items.Add(l);
+        }
+
+        stato = false;
+        controlidtoset = "radCarriera3";
+        radCarriera3.Items.Clear();
+        indice = statuslist.FindIndex(a => a.ToString() == controlidtoset);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 2)
+                bool.TryParse(statuslist[indice + 1], out stato);
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = stato;
+            radCarriera3.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = !stato;
+            radCarriera3.Items.Add(l);
+        }
+        else
+        {
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = false;
+            radCarriera3.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = false;
+            radCarriera3.Items.Add(l);
+        }
+
+        stato = false;
+        controlidtoset = "radCarriera4";
+        radCarriera4.Items.Clear();
+        indice = statuslist.FindIndex(a => a.ToString() == controlidtoset);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 2)
+                bool.TryParse(statuslist[indice + 1], out stato);
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = stato;
+            radCarriera4.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = !stato;
+            radCarriera4.Items.Add(l);
+        }
+        else
+        {
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = false;
+            radCarriera4.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = false;
+            radCarriera4.Items.Add(l);
+        }
+
+        stato = false;
+        controlidtoset = "radCarriera5";
+        radCarriera5.Items.Clear();
+        indice = statuslist.FindIndex(a => a.ToString() == controlidtoset);
+        if (indice != -1)
+        {
+            if (statuslist.Count >= indice + 2)
+                bool.TryParse(statuslist[indice + 1], out stato);
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = stato;
+            radCarriera5.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = !stato;
+            radCarriera5.Items.Add(l);
+        }
+        else
+        {
+            ListItem l = new ListItem("Si", "True");
+            l.Selected = false;
+            radCarriera5.Items.Add(l);
+            l = new ListItem("No", "False");
+            l.Selected = false;
+            radCarriera5.Items.Add(l);
+        }
+    }
+    private string CreastringaBoolfields()
+    {
+        string ret = "";
+
+        foreach (ListItem o in radCarriera1.Items)
+        {
+            if (o.Selected == true)
+            {
+                ret += "radCarriera1,";
+                ret += o.Value.ToString() + ",";
+            }
+        }
+        foreach (ListItem o in radCarriera2.Items)
+        {
+            if (o.Selected == true)
+            {
+                ret += "radCarriera2,";
+                ret += o.Value.ToString() + ",";
+            }
+        }
+        foreach (ListItem o in radCarriera3.Items)
+        {
+            if (o.Selected == true)
+            {
+                ret += "radCarriera3,";
+                ret += o.Value.ToString() + ",";
+            }
+        }
+        foreach (ListItem o in radCarriera4.Items)
+        {
+            if (o.Selected == true)
+            {
+                ret += "radCarriera4,";
+                ret += o.Value.ToString() + ",";
+            }
+        }
+        foreach (ListItem o in radCarriera5.Items)
+        {
+            if (o.Selected == true)
+            {
+                ret += "radCarriera5,";
+                ret += o.Value.ToString() + ",";
+            }
+        }
+        ret = ret.TrimEnd(',');
+
+
+        return ret;
+    }
+
+
+
+    #region CARICA LISTE CARATTERISTICHE
+
+    private void CaricaDatiDdlCaratteristiche(int p1, int p2, int p3, int p4, int p5, int p6)
+    {
+
+        //Riempio la ddl 
+        List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        ddlCaratteristica1.Items.Clear();
+        ddlCaratteristica1.Items.Insert(0, "Seleziona car1");
+        ddlCaratteristica1.Items[0].Value = "0";
+        ddlCaratteristica1.DataSource = Car1;
+        ddlCaratteristica1.DataTextField = "Campo1";
+        ddlCaratteristica1.DataValueField = "Codice";
+        ddlCaratteristica1.DataBind();
+        try
+        {
+            ddlCaratteristica1.SelectedValue = p1.ToString();
+        }
+        catch { }
+
+
+        //Riempio la ddl  
+        List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        ddlCaratteristica2.Items.Clear();
+        ddlCaratteristica2.Items.Insert(0, "Seleziona car2");
+        ddlCaratteristica2.Items[0].Value = "0";
+        ddlCaratteristica2.DataSource = Car2;
+        ddlCaratteristica2.DataTextField = "Campo1";
+        ddlCaratteristica2.DataValueField = "Codice";
+        ddlCaratteristica2.DataBind();
+        try
+        {
+            ddlCaratteristica2.SelectedValue = p2.ToString();
+        }
+        catch { }
+
+
+        //Riempio la ddl  
+        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        ddlCaratteristica3.Items.Clear();
+        ddlCaratteristica3.Items.Insert(0, "Seleziona car3");
+        ddlCaratteristica3.Items[0].Value = "0";
+        ddlCaratteristica3.DataSource = Car3;
+        ddlCaratteristica3.DataTextField = "Campo1";
+        ddlCaratteristica3.DataValueField = "Codice";
+        ddlCaratteristica3.DataBind();
+        try
+        {
+            ddlCaratteristica3.SelectedValue = p3.ToString();
+        }
+        catch { }
+
+
+    }
+
+    #endregion
+
+    #region GESTIONE CASELLE LOCALIZZAZIONE VERSIONE 2
+
+    public void CaricaDllLocalizzazione(string valorenaz, string valorereg, string valorepr, string valoreco, DropDownList dnaz, DropDownList dreg, DropDownList dpro, DropDownList dcom, HtmlInputControl txtRE, HtmlInputControl txtPR, HtmlInputControl txtCO)
+    {
+        //Riempimento a cascata
+        RiempiDdlNazione(valorenaz, dnaz);
+        RiempiDdlRegione(valorereg, dnaz, dreg, txtRE);
+        RiempiDdlProvincia(valorepr, dnaz, dreg, dpro, txtPR);
+        RiempiDdlComune(valoreco, dnaz, dreg, dpro, dcom, txtCO);
+    }
+
+    private void RiempiDdlNazione(string valore, DropDownList dnaz)
+    {
+        List<Tabrif> nazioni = Utility.Nazioni.FindAll(delegate(Tabrif _nz) { return _nz.Lingua == "I"; });
+        nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
+        dnaz.Items.Clear();
+        foreach (Tabrif n in nazioni)
+        {
+            ListItem i = new ListItem(n.Campo1, n.Codice);
+            dnaz.Items.Add(i);
+        }
+        try
+        {
+            dnaz.SelectedValue = valore.ToUpper();
+        }
+        catch { AggiungiNazione(valore, dnaz); }
+    }
+    private void RiempiDdlRegione(string valore, DropDownList dnaz, DropDownList dreg, HtmlInputControl txtRE)
+    {
+        bool found = false;
+        dreg.Items.Clear();
+        dreg.Items.Insert(0, Resources.Common.ddlTuttiregione.ToString());
+        dreg.Items[0].Value = "";
+        txtRE.Value = valore;
+        if (dnaz.SelectedValue == "IT")
+        {
+            WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
+            List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
+            if (provincelingua != null)
+            {
+                provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
+                List<string> codiciregione = new List<string>();
+                foreach (Province item in provincelingua)
+                {
+                    if (item.Lingua == "I")
+                        if (!codiciregione.Contains(item.Codice))
+                            codiciregione.Add(item.Codice);
+                }
+                foreach (string c in codiciregione)
+                {
+                    Province p = provincelingua.Find(_p => _p.Codice == c);
+                    if (!regioni.Exists(delegate(Province tmp) { return (tmp.Regione == p.Regione); }))
+                        regioni.Add(p);
+                }
+            }
+            foreach (Province r in regioni)
+            {
+                ListItem i = new ListItem(r.Regione, r.Codice);
+                dreg.Items.Add(i);
+            }
+
+            if (dreg.Items.FindByValue(valore) != null)
+            {
+                dreg.SelectedValue = valore;
+                found = true;
+            }
+            //else
+            //{
+            //    AggiungiRegione(valore, dreg);
+            //}
+
+        }
+        if (found && !string.IsNullOrEmpty(valore.Trim()))
+        {
+            dreg.Visible = true;
+            txtRE.Visible = false;
+        }
+        else
+        {
+            dreg.Visible = true;
+            txtRE.Visible = true;
+        }
+
+    }
+    private void RiempiDdlProvincia(string valore, DropDownList dnaz, DropDownList dreg, DropDownList dpro, HtmlInputControl txtPR)
+    {
+        bool found = false;
+        dpro.Items.Clear();
+        dpro.Items.Insert(0, Resources.Common.ddlTuttiprovincia.ToString());
+        dpro.Items[0].Value = "";
+        txtPR.Value = valore;
+        if (dreg.SelectedValue != "" && dnaz.SelectedValue == "IT")
+        {
+            Province _tmp = Utility.ElencoProvince.Find(delegate(Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == dreg.SelectedValue); });
+            if (_tmp != null)
+            {
+                List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.Lingua == Lingua && tmp.CodiceRegione == _tmp.CodiceRegione && _tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
+                provincelingua.Sort(new GenericComparer<Province>("Provincia", System.ComponentModel.ListSortDirection.Ascending));
+                foreach (Province r in provincelingua)
+                {
+                    ListItem i = new ListItem(r.Provincia, r.Codice);
+                    dpro.Items.Add(i);
+                }
+            }
+            if (dpro.Items.FindByValue(valore) != null)
+            {
+                dpro.SelectedValue = valore;
+                found = true;
+            }
+            //else
+            //{
+            //    AggiungiProvincia(valore, dpro);
+            //}
+        }
+        if (found && !string.IsNullOrEmpty(valore.Trim()))
+        {
+            dpro.Visible = true;
+            txtPR.Visible = false;
+        }
+        else
+        {
+            dpro.Visible = true;
+            txtPR.Visible = true;
+        }
+    }
+    private void RiempiDdlComune(string valore, DropDownList dnaz, DropDownList dreg, DropDownList dpro, DropDownList dcom, HtmlInputControl txtCO)
+    {
+        bool found = false;
+        dcom.Items.Clear();
+        dcom.Items.Insert(0, "Seleziona Comune");
+        dcom.Items[0].Value = "";
+        txtCO.Value = valore;
+        if (dpro.SelectedValue != "" && dnaz.SelectedValue == "IT")
+        {
+            List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate(WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == dpro.SelectedValue); });
+            if (comunilingua != null)
+            {
+                comunilingua.Sort(new GenericComparer<Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
+                foreach (Comune r in comunilingua)
+                {
+                    ListItem i = new ListItem(r.Nome, r.Nome);
+                    dcom.Items.Add(i);
+                }
+            }
+
+            if (dcom.Items.FindByValue(valore) != null)
+            {
+                dcom.SelectedValue = valore;
+                found = true;
+            }
+            //else AggiungiComune(valore, dcom);
+
+        }
+        if (found && !string.IsNullOrEmpty(valore.Trim()))
+        {
+            dcom.Visible = true;
+            txtCO.Visible = false;
+        }
+        else
+        {
+            dcom.Visible = true;
+            txtCO.Visible = true;
+        }
+    }
+    protected string AggiungiNazione(string codice, DropDownList dnaz)
+    {
+        try
+        {
+            //Se il valore non esiste lo aggiungo 
+            ListItem selli = new ListItem(codice, codice);
+            if (dnaz.Items.FindByValue(codice) == null)
+            {
+                dnaz.Items.Add(selli);
+                dnaz.SelectedValue = codice;
+            }
+            else
+                dnaz.SelectedValue = codice;
+        }
+        catch { }
+        return codice;
+    }
+    protected string AggiungiRegione(string codice, DropDownList dreg)
+    {
+        try
+        {
+            //Se il valore non esiste lo aggiungo 
+            ListItem selli = new ListItem(codice, codice);
+            if (dreg.Items.FindByValue(codice) == null)
+            {
+                dreg.Items.Add(selli);
+                dreg.SelectedValue = codice;
+            }
+            else
+                dreg.SelectedValue = codice;
+        }
+        catch { }
+
+        return codice;
+    }
+    protected string AggiungiProvincia(string codice, DropDownList dpro)
+    {
+        try
+        {
+            //Se il valore non esiste lo aggiungo 
+            ListItem selli = new ListItem(codice, codice);
+            if (dpro.Items.FindByValue(codice) == null)
+            {
+                dpro.Items.Add(selli);
+                dpro.SelectedValue = codice;
+            }
+            else
+                dpro.SelectedValue = codice;
+        }
+        catch { }
+
+        return codice;
+    }
+    protected string AggiungiComune(string codice, DropDownList dcom)
+    {
+
+        try
+        {
+            //Se il valore non esiste lo aggiungo 
+            ListItem selli = new ListItem(codice, codice);
+            if (dcom.Items.FindByValue(codice) == null)
+            {
+                dcom.Items.Add(selli);
+                dcom.SelectedValue = codice;
+            }
+            else
+                dcom.SelectedValue = codice;
+        }
+        catch { }
+
+        return codice;
+    }
+
+    protected void ddlCodiceNAZIONE1_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(value, "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
+    }
+    protected void ddlCodiceREGIONE1_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE1_dts.SelectedValue, value, "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
+    }
+    protected void ddlCodicePROVINCIA1_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE1_dts.SelectedValue, ddlCodiceREGIONE1_dts.SelectedValue, value, "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
+    }
+    protected void ddlCodiceCOMUNE1_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE1_dts.SelectedValue, ddlCodiceREGIONE1_dts.SelectedValue, ddlCodicePROVINCIA1_dts.SelectedValue, value, ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
+    }
+
+    protected void ddlCodiceNAZIONE2_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(value, "", "", "", ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
+    }
+    protected void ddlCodiceREGIONE2_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE2_dts.SelectedValue, value, "", "", ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
+    }
+    protected void ddlCodicePROVINCIA2_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE2_dts.SelectedValue, ddlCodiceREGIONE2_dts.SelectedValue, value, "", ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
+    }
+    protected void ddlCodiceCOMUNE2_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE2_dts.SelectedValue, ddlCodiceREGIONE2_dts.SelectedValue, ddlCodicePROVINCIA2_dts.SelectedValue, value, ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
+    }
+
+    protected void ddlCodiceNAZIONE3_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(value, "", "", "", ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+    }
+    protected void ddlCodiceREGIONE3_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE3_dts.SelectedValue, value, "", "", ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+    }
+    protected void ddlCodicePROVINCIA3_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE3_dts.SelectedValue, ddlCodiceREGIONE3_dts.SelectedValue, value, "", ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+    }
+    protected void ddlCodiceCOMUNE3_dts_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = ((DropDownList)sender).SelectedValue;
+        CaricaDllLocalizzazione(ddlCodiceNAZIONE3_dts.SelectedValue, ddlCodiceREGIONE3_dts.SelectedValue, ddlCodicePROVINCIA3_dts.SelectedValue, value, ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+    }
+
+    #endregion
+
+    #region FUNZIONI  GESTIONE UTENTI
+
+    protected bool VerificaPresenzaUtente(string username)
+    {
+        bool ret = false;
+        MembershipUserCollection mucoll = Membership.FindUsersByName(username);
+        if (mucoll != null && mucoll.Count > 0)
+        {
+            ret = true;
+        }
+        return ret;
+    }
+
+    protected bool CreaUtenteAssociato(Offerte socio, ref string NomeUtente, ref string password)
+    {
+        bool esito = true;
+        try
+        {
+            if (socio != null && !string.IsNullOrWhiteSpace(socio.Cognome_dts + socio.Nome_dts) && socio.Id != 0)
+            {
+                //Generiamo la password di accesso
+                //password = Membership.GeneratePassword(6, 0);
+                password = WelcomeLibrary.UF.RandomPassword.Generate(8);
+
+                MembershipUserCollection mucoll = Membership.FindUsersByName(socio.Cognome_dts + socio.Nome_dts);
+                if (mucoll == null || mucoll.Count == 0)
+                {
+
+                    //Creiamo l'utente ( username = password riservata )
+                    //NomeUtente = socio.Emailriservata_dts;
+                    NomeUtente = socio.Cognome_dts + socio.Nome_dts;
+                    Membership.CreateUser(NomeUtente, password);
+
+                    //associamo l'utente al ruolo
+                    Roles.AddUserToRole(NomeUtente, "Socio");
+
+                    ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
+                    prof.IdSocio = socio.Id.ToString();
+                    prof.Save();
+
+                    ////Stampo a video i dati dell'username e password Appena Creati
+                    output.Text += "User: " + NomeUtente + " Psw: " + password;
+                    //Username.Visible = true;
+                    //Username.Text = NomeUtente;
+                    //Password.Visible = true;
+                    //Password.Text = password;
+                }
+                else
+                {
+                    output.Text += "Utente non creato già presente in archivio.";
+                    esito = false;
+                }
+            }
+        }
+        catch (Exception error)
+        {
+            output.Text += error.Message;
+            if (error.InnerException != null)
+                output.Text += error.InnerException.Message.ToString();
+            esito = false;
+        }
+        return esito;
+    }
+
+    #endregion
+
+}

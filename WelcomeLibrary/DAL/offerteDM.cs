@@ -1,0 +1,4756 @@
+﻿using System;
+using System.Data;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Text;
+using WelcomeLibrary.DOM;
+using System.Xml;
+using WelcomeLibrary.UF;
+
+namespace WelcomeLibrary.DAL
+{
+    public class offerteDM
+    {
+        private string _tblarchivio = "TBL_ATTIVITA";
+        public string Tblarchivio
+        {
+            get { return _tblarchivio; }
+            set { _tblarchivio = value; }
+        }
+        private string _tblarchiviodettaglio = "TBL_ATTIVITA_DETAIL";
+
+        public offerteDM()
+        { }
+        public offerteDM(string nometabella)
+        {
+            Tblarchivio = nometabella;
+        }
+
+
+        /// <summary>
+        /// Carica le offerte in base ai parametri passati in parColl
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="parColl"></param>
+        /// <param name="maxrecord"></param>
+        /// <returns></returns>
+        public OfferteCollection CaricaOfferteFiltrate(string connection, List<OleDbParameter> parColl, string maxrecord = "", string LinguaFiltro = "", bool? filtrocatalogo = null,
+            string campoordinamento = "", bool includiarchiviati = false)
+        {
+            OfferteCollection list = new OfferteCollection();
+            if (connection == null || connection == "") return list;
+            //if (parColl == null || parColl.Count < 2) return list;
+
+            Offerte item;
+            try
+            {
+                List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+                string query = "";
+                if (string.IsNullOrEmpty(maxrecord))
+                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+                else
+                    query = "SELECT  TOP " + maxrecord + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts ";
+
+                //Inseriamo il codice di join per la pabella dettagli
+                query += "";
+
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id"; }))
+                {
+                    OleDbParameter pidvalue = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id"; });
+                    _parUsed.Add(pidvalue);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Id like @Id ";
+                    else
+                        query += " AND Id like @Id  ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@IdList"; }))
+                {
+                    OleDbParameter pidlist = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@IdList"; });
+                    string listaid = pidlist.Value.ToString();
+
+                    string[] listaarray = listaid.Split(',');
+                    if (listaarray != null && listaarray.Length > 0)
+                    {
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE Id in (    ";
+                        else
+                            query += " AND  Id in (      ";
+                        foreach (string codice in listaarray)
+                        {
+                            if (!string.IsNullOrEmpty(codice.Trim()))
+                                query += " " + codice + " ,";
+                        }
+                        query = query.TrimEnd(',') + " ) ";
+                    }
+                }
+
+                //Per ogni parametro vedo se esiste e lo inserisco nello script
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; }))
+                {
+                    OleDbParameter pnaz = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
+                    _parUsed.Add(pnaz);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
+                    else
+                        query += " AND  ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
+                {
+                    OleDbParameter preg = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; });
+                    _parUsed.Add(preg);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
+                    else
+                        query += " AND  ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
+                }
+                //Per ogni parametro vedo se esiste e lo inserisco nello script
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; }))
+                {
+                    OleDbParameter pprov = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; });
+                    _parUsed.Add(pprov);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA ) ";
+                    else
+                        query += " AND  ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA )   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; }))
+                {
+                    OleDbParameter pcom = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; });
+                    _parUsed.Add(pcom);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE ) ";
+                    else
+                        query += " AND  ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE )   ";
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; }))
+                {
+
+                    OleDbParameter ptip = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; });
+                    if (!ptip.Value.ToString().Contains(","))
+                    {
+                        _parUsed.Add(ptip);
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                        else
+                            query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+                    }
+                    else
+                    {
+                        string[] codici = ptip.Value.ToString().Split(',');
+                        if (codici != null && codici.Length > 0)
+                        {
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE CodiceTIPOLOGIA in (    ";
+                            else
+                                query += " AND  CodiceTIPOLOGIA in (      ";
+                            foreach (string codice in codici)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    query += " '" + codice + "' ,";
+                            }
+                            query = query.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_collegato"; }))
+                {
+                    OleDbParameter pId_collegato = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_collegato"; });
+                    _parUsed.Add(pId_collegato);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Id_collegato like @Id_collegato ";
+                    else
+                        query += " AND Id_collegato like @Id_collegato  ";
+                }
+
+                if (filtrocatalogo != null)
+                    if (filtrocatalogo.Value) //Filtro i codicditipologia compresi tra 100 e 199 ( catalogo ) rispetto agli atri
+                    {
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=100) and  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<200)) ";
+                        else
+                            query += " AND (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=100) and  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<200)) ";
+                    }
+                    else
+                    {
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<100) or  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=200)) ";
+                        else
+                            query += " AND  (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<100) or  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=200)) ";
+                    }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; }))
+                {
+                    OleDbParameter _pabilc = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; });
+                    OleDbParameter pabilc = new OleDbParameter(_pabilc.ParameterName, _pabilc.Value);
+
+                    _parUsed.Add(pabilc);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Abilitacontatto = @Abilitacontatto ";
+                    else
+                        query += " AND Abilitacontatto = @Abilitacontatto ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Archiviato"; }))
+                {
+                    OleDbParameter _parch = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Archiviato"; });
+                    OleDbParameter parch = new OleDbParameter(_parch.ParameterName, _parch.Value);
+
+                    _parUsed.Add(parch);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Archiviato = @Archiviato ";
+                    else
+                        query += " AND Archiviato = @Archiviato ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; }))
+                {
+                    OleDbParameter _parch = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; });
+                    try
+                    {
+                        bool _par = Convert.ToBoolean(_parch.Value);
+
+                        if (_par)
+                        {
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (Qta_vendita > 0 or Qta_vendita is null)  ";
+                            else
+                                query += " AND (Qta_vendita > 0 or Qta_vendita is null)  ";
+                        }
+                        else
+                        {
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (Qta_vendita <= 0 and Qta_vendita is not null)  ";
+                            else
+                                query += " AND (Qta_vendita <= 0 and Qta_vendita is not null)  ";
+                        }
+
+                    }
+                    catch { }
+
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; }))
+                {
+                    OleDbParameter ppmin = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
+                    _parUsed.Add(ppmin);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Prezzo >= @PrezzoMin ";
+                    else
+                        query += " AND Prezzo >= @PrezzoMin  ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
+                {
+                    OleDbParameter ppmax = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
+                    _parUsed.Add(ppmax);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE  Prezzo <= @PrezzoMax  ";
+                    else
+                        query += " AND  Prezzo <= @PrezzoMax   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
+                {
+                    OleDbParameter pcat = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
+                    _parUsed.Add(pcat);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE CodiceCategoria like @CodiceCategoria ";
+                    else
+                        query += " AND CodiceCategoria like @CodiceCategoria  ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; }))
+                {
+                    OleDbParameter pcat2liv = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; });
+                    _parUsed.Add(pcat2liv);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE CodiceCategoria2Liv like @CodiceCategoria2Liv ";
+                    else
+                        query += " AND CodiceCategoria2Liv like @CodiceCategoria2Liv  ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Vetrina"; }))
+                {
+                    OleDbParameter vetrina = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Vetrina"; });
+                    _parUsed.Add(vetrina);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Vetrina = @Vetrina ";
+                    else
+                        query += " AND  Vetrina = @Vetrina   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@promozioni"; }))
+                {
+                    OleDbParameter promozione = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@promozioni"; });
+                    _parUsed.Add(promozione);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Promozione = @promozioni ";
+                    else
+                        query += " AND  Promozione = @promozioni   ";
+                }
+
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
+                {
+                    OleDbParameter Caratteristica1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
+                    _parUsed.Add(Caratteristica1);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica1 = @Caratteristica1 ";
+                    else
+                        query += " AND  Caratteristica1 = @Caratteristica1   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; }))
+                {
+                    OleDbParameter Caratteristica2 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; });
+                    _parUsed.Add(Caratteristica2);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica2 = @Caratteristica2 ";
+                    else
+                        query += " AND  Caratteristica2 = @Caratteristica2   ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; }))
+                {
+                    OleDbParameter Caratteristica3 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; });
+                    _parUsed.Add(Caratteristica3);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica3 = @Caratteristica3 ";
+                    else
+                        query += " AND  Caratteristica3 = @Caratteristica3   ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; }))
+                {
+                    OleDbParameter Caratteristica4 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; });
+                    _parUsed.Add(Caratteristica4);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica4 = @Caratteristica4 ";
+                    else
+                        query += " AND  Caratteristica4 = @Caratteristica4  ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; }))
+                {
+                    OleDbParameter Caratteristica5 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; });
+                    _parUsed.Add(Caratteristica5);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica5 = @Caratteristica5 ";
+                    else
+                        query += " AND  Caratteristica5 = @Caratteristica5 ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; }))
+                {
+                    OleDbParameter Caratteristica6 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; });
+                    _parUsed.Add(Caratteristica6);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Caratteristica6 = @Caratteristica6 ";
+                    else
+                        query += " AND  Caratteristica6 = @Caratteristica6 ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Anno"; }))
+                {
+                    OleDbParameter Carannao = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Anno"; });
+                    _parUsed.Add(Carannao);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Anno = @Anno ";
+                    else
+                        query += " AND  Anno = @Anno   ";
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@testoricerca"; }))
+                {
+                    OleDbParameter testoricerca = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@testoricerca"; });
+                    _parUsed.Add(testoricerca);
+                    if (!query.ToLower().Contains("where"))
+                    {
+                        query += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
+                        query += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
+                        query += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
+                        query += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
+                    }
+                    else
+                    {
+                        query += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
+                        query += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
+                        query += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
+                        query += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
+                    }
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; }))
+                {
+                    OleDbParameter stringafiltropagamenti = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; });
+                    _parUsed.Add(stringafiltropagamenti);
+                    if (!query.ToLower().Contains("where"))
+                    {
+                        query += " WHERE ( Pagamenti_dts like @stringafiltropagamenti ) ";
+                    }
+                    else
+                    {
+                        query += " AND  ( Pagamenti_dts like @stringafiltropagamenti )   ";
+                    }
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; }))
+                {
+                    OleDbParameter stringafiltrotrattamenti = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; });
+                    _parUsed.Add(stringafiltrotrattamenti);
+                    if (!query.ToLower().Contains("where"))
+                    {
+                        query += " WHERE ( Trattamenticollegati_dts like @stringafiltrotrattamenti ) ";
+                    }
+                    else
+                    {
+                        query += " AND  ( Trattamenticollegati_dts like @stringafiltrotrattamenti )   ";
+                    }
+                }
+
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio"; })
+                    && parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine"; }))
+                {
+                    OleDbParameter _datainizio = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio"; });
+                    OleDbParameter datainizio = new OleDbParameter(_datainizio.ParameterName, _datainizio.Value);
+                    _parUsed.Add(datainizio);
+
+                    OleDbParameter _datafine = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine"; });
+                    OleDbParameter datafine = new OleDbParameter(_datafine.ParameterName, _datafine.Value);
+                    _parUsed.Add(datafine);
+
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE  ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
+                    else
+                        query += " AND   ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; })
+              && parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine1"; }))
+                {
+                    OleDbParameter _datainizio1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; });
+                    OleDbParameter datainizio1 = new OleDbParameter(_datainizio1.ParameterName, _datainizio1.Value);
+                    _parUsed.Add(datainizio1);
+
+                    OleDbParameter _datafine1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine1"; });
+                    OleDbParameter datafine1 = new OleDbParameter(_datafine1.ParameterName, _datafine1.Value);
+                    _parUsed.Add(datafine1);
+
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE  ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
+                    else
+                        query += " AND   ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
+                }
+
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@annofiltro"; }))
+                {
+                    OleDbParameter _annofiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@annofiltro"; });
+                    OleDbParameter annofiltro = new OleDbParameter(_annofiltro.ParameterName, _annofiltro.Value);
+                    _parUsed.Add(_annofiltro);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (((Year([DataInserimento]))=@annofiltro))  ";
+                    else
+                        query += " AND  (((Year([DataInserimento]))=@annofiltro))    ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
+                {
+                    OleDbParameter _mesefiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
+                    OleDbParameter mesefiltro = new OleDbParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
+                    _parUsed.Add(mesefiltro);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (((Month([DataInserimento]))=@mesefiltro))  ";
+                    else
+                        query += " AND  (((Month([DataInserimento]))=@mesefiltro))    ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
+                {
+                    OleDbParameter _giornofiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
+                    OleDbParameter giornofiltro = new OleDbParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
+                    _parUsed.Add(giornofiltro);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (((Day([DataInserimento]))=@giornofiltro))  ";
+                    else
+                        query += " AND  (((Day([DataInserimento]))=@giornofiltro))    ";
+                }
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
+                {
+                    OleDbParameter _Bloccoaccesso_dts = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; });
+
+                    OleDbParameter Bloccoaccesso_dts = new OleDbParameter(_Bloccoaccesso_dts.ParameterName, _Bloccoaccesso_dts.Value);
+                    // Bloccoaccesso_dts.DbType = DbType.Boolean;
+                    _parUsed.Add(_Bloccoaccesso_dts);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE ( Bloccoaccesso_dts=@Bloccoaccesso_dts )  ";
+                    else
+                        query += " AND  ( Bloccoaccesso_dts=@Bloccoaccesso_dts )    ";
+                }
+
+
+                if (!String.IsNullOrEmpty(LinguaFiltro))
+                {
+                    switch (LinguaFiltro)
+                    {
+                        case "GB":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE ( DenominazioneGB <> '' and DenominazioneGB is not null )  ";
+                            else
+                                query += " AND  ( DenominazioneGB <> ''  and DenominazioneGB is not null )    ";
+                            break;
+                        case "RU":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE ( DenominazioneRU <> '' and DenominazioneRU is not null )  ";
+                            else
+                                query += " AND  ( DenominazioneRU <> ''  and DenominazioneRU is not null )    ";
+                            break;
+                    }
+                }
+                if (!includiarchiviati)
+                {
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (Archiviato = false)  ";
+                    else
+                        query += " AND  (Archiviato = false)    ";
+                }
+
+
+                if (campoordinamento == "")
+                    query += "  order BY DataInserimento Desc, Id Desc  ";
+                else
+                    query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+
+                     
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerte :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+
+        /// <summary>
+        /// le offerte collegate ad un certo id identificativo
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codicetipologia"></param>
+        /// <returns></returns>
+        public OfferteCollection CaricaOfferteCollegate(string connection, string idcollegato, string maxofferte = "", bool randomize = false, string LinguaFiltro = "", bool includiarchiviati = false, string campoordinamento = "")
+        {
+            if (connection == null || connection == "") return null;
+            if (idcollegato == null || idcollegato == "") return null;
+            OfferteCollection list = new OfferteCollection();
+            Offerte item;
+            try
+            {
+                string query = "";
+
+                if (string.IsNullOrEmpty(maxofferte))
+                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where Id_collegato=@Id_collegato ";
+                else
+                    query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where Id_collegato=@Id_collegato  ";
+
+
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@Id_collegato", idcollegato);//OleDbType.VarChar
+                parColl.Add(p1);
+
+                if (!String.IsNullOrEmpty(LinguaFiltro))
+                {
+                    switch (LinguaFiltro)
+                    {
+                        case "GB":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneGB <> '' and DenominazioneGB is not null)  ";
+                            else
+                                query += " AND  (DenominazioneGB <> ''  and DenominazioneGB is not null)    ";
+                            break;
+                        case "RU":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneRU <> '' and DenominazioneRU is not null)  ";
+                            else
+                                query += " AND  (DenominazioneRU <> ''  and DenominazioneRU is not null)    ";
+                            break;
+                    }
+                }
+                if (!includiarchiviati)
+                {
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (Archiviato = false)  ";
+                    else
+                        query += " AND  (Archiviato = false)    ";
+                }
+
+                if (randomize)
+                {
+                    query += "ORDER BY rnd(INT(NOW*id)-NOW*id), Id Desc";
+                }
+                else
+                {
+                    if (campoordinamento == "")
+                        query += "  order BY DataInserimento Desc, Id Desc  ";
+                    else
+                        query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+                }
+
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+
+
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerte :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Carica la lista completa ordinata per data di registrazione delle offerte
+        /// in base al codice tipologia indicato
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codicetipologia"></param>
+        /// <returns></returns>
+        public OfferteCollection CaricaOffertePerCodice(string connection, string codicetipologia, string maxofferte = "", bool randomize = false, string LinguaFiltro = "", bool includiarchiviati = false, string campoordinamento = "", bool filtradisponibili = false)
+        {
+            if (connection == null || connection == "") return null;
+            if (codicetipologia == null || codicetipologia == "") return null;
+            OfferteCollection list = new OfferteCollection();
+            Offerte item;
+            try
+            {
+                string query = "";
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+
+                if (!codicetipologia.Contains(","))
+                {
+                    if (string.IsNullOrEmpty(maxofferte))
+                        query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where CodiceTIPOLOGIA=@CodiceTIPOLOGIA ";
+                    else
+                        query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceTIPOLOGIA=@CodiceTIPOLOGIA  ";
+                    OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", codicetipologia);//OleDbType.VarChar
+                    parColl.Add(p1);
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(maxofferte))
+                        query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+                    else
+                        query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts   ";
+
+
+
+                    string[] codici = codicetipologia.Split(',');
+                    if (codici != null && codici.Length > 0)
+                    {
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE CodiceTIPOLOGIA in (    ";
+                        else
+                            query += " AND  CodiceTIPOLOGIA in (      ";
+                        foreach (string codice in codici)
+                        {
+                            if (!string.IsNullOrEmpty(codice.Trim()))
+                                query += " '" + codice + "' ,";
+                        }
+                        query = query.TrimEnd(',') + " ) ";
+                    }
+                }
+
+
+
+                if (!String.IsNullOrEmpty(LinguaFiltro))
+                {
+                    switch (LinguaFiltro)
+                    {
+                        case "GB":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneGB <> '' and DenominazioneGB is not null)  ";
+                            else
+                                query += " AND  (DenominazioneGB <> ''  and DenominazioneGB is not null)    ";
+                            break;
+                        case "RU":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneRU <> '' and DenominazioneRU is not null)  ";
+                            else
+                                query += " AND  (DenominazioneRU <> ''  and DenominazioneRU is not null)    ";
+                            break;
+                    }
+                }
+
+                if (!includiarchiviati)
+                {
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (Archiviato = false)  ";
+                    else
+                        query += " AND  (Archiviato = false)    ";
+                }
+
+                if (filtradisponibili)
+                {
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE (Qta_vendita > 0 or Qta_vendita is null)  ";
+                    else
+                        query += " AND (Qta_vendita > 0 or Qta_vendita is null)  ";
+                }
+
+                if (randomize)
+                {
+                    query += "ORDER BY rnd(INT(NOW*id)-NOW*id), ID Desc";
+                }
+                else
+                {
+
+                    if (campoordinamento == "")
+                        query += "  order BY DataInserimento Desc, Id Desc  ";
+                    else
+                        query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+                }
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+
+
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+
+
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerte :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Ricarica un'offerta specifica in base al codice prodotto univoco dell'articolo ( si suppone che per ogni codice ci sia un solo prodotto in tabella )
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idOfferta"></param>
+        /// <returns></returns>
+        public Offerte CaricaOffertaPerCodiceProdotto(string connection, string codiceProdotto)
+        {
+            if (connection == null || connection == "") return null;
+            if (codiceProdotto == null || codiceProdotto == "") return null;
+            Offerte item = null;
+
+            try
+            {
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto=@CodiceProdotto order BY DataInserimento Desc";
+
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", codiceProdotto);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+
+
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+                        return (item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerta :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+        /// <summary>
+        /// Ricarica un'offerta specifica in base all'id
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idOfferta"></param>
+        /// <returns></returns>
+        public Offerte CaricaOffertaPerId(string connection, string idOfferta)
+        {
+            if (connection == null || connection == "") return null;
+            if (idOfferta == null || idOfferta == "") return null;
+            OfferteCollection list = new OfferteCollection();
+            Offerte item = null;
+
+            try
+            {
+
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ID=@ID order BY DataInserimento Desc";
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@ID", idOfferta);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+
+                        return (item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerta :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+
+        /// <summary>
+        /// Ricarica un'offerta specifica in base all'id
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idOfferta"></param>
+        /// <returns></returns>
+        public Offerte CaricaOffertaPerTestourl(string connection, string testoricerca)
+        {
+            if (connection == null || connection == "") return null;
+            if (testoricerca == null || testoricerca == "") return null;
+            OfferteCollection list = new OfferteCollection();
+            Offerte item = null;
+
+            try
+            {
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@Titolo", "%" + testoricerca + "%");//OleDbType.VarChar
+                parColl.Add(p1);
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ( DENOMINAZIONEI like @Titolo or DENOMINAZIONEGB like @Titolo or DENOMINAZIONERU like @Titolo ) order BY DataInserimento Desc";
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
+                        if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
+                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+
+                        if (!reader["Pivacf_dts"].Equals(DBNull.Value))
+                            item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
+                        if (!reader["Nome_dts"].Equals(DBNull.Value))
+                            item.Nome_dts = reader.GetString(reader.GetOrdinal("Nome_dts"));
+                        if (!reader["Cognome_dts"].Equals(DBNull.Value))
+                            item.Cognome_dts = reader.GetString(reader.GetOrdinal("Cognome_dts"));
+                        if (!reader["Datanascita_dts"].Equals(DBNull.Value))
+                            item.Datanascita_dts = reader.GetDateTime(reader.GetOrdinal("Datanascita_dts"));
+                        if (!reader["Sociopresentatore1_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore1_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore1_dts"));
+                        if (!reader["Sociopresentatore2_dts"].Equals(DBNull.Value))
+                            item.Sociopresentatore2_dts = reader.GetString(reader.GetOrdinal("Sociopresentatore2_dts"));
+                        if (!reader["Telefonoprivato_dts"].Equals(DBNull.Value))
+                            item.Telefonoprivato_dts = reader.GetString(reader.GetOrdinal("Telefonoprivato_dts"));
+                        if (!reader["Annolaurea_dts"].Equals(DBNull.Value))
+                            item.Annolaurea_dts = reader.GetString(reader.GetOrdinal("Annolaurea_dts"));
+                        if (!reader["Annospecializzazione_dts"].Equals(DBNull.Value))
+                            item.Annospecializzazione_dts = reader.GetString(reader.GetOrdinal("Annospecializzazione_dts"));
+                        if (!reader["Altrespecializzazioni_dts"].Equals(DBNull.Value))
+                            item.Altrespecializzazioni_dts = reader.GetString(reader.GetOrdinal("Altrespecializzazioni_dts"));
+                        if (!reader["SocioSicpre_dts"].Equals(DBNull.Value))
+                            item.SocioSicpre_dts = reader.GetBoolean(reader.GetOrdinal("SocioSicpre_dts"));
+                        if (!reader["SocioIsaps_dts"].Equals(DBNull.Value))
+                            item.SocioIsaps_dts = reader.GetBoolean(reader.GetOrdinal("SocioIsaps_dts"));
+                        if (!reader["Socioaltraassociazione_dts"].Equals(DBNull.Value))
+                            item.Socioaltraassociazione_dts = reader.GetString(reader.GetOrdinal("Socioaltraassociazione_dts"));
+                        if (!reader["Trattamenticollegati_dts"].Equals(DBNull.Value))
+                            item.Trattamenticollegati_dts = reader.GetString(reader.GetOrdinal("Trattamenticollegati_dts"));
+                        if (!reader["AccettazioneStatuto_dts"].Equals(DBNull.Value))
+                            item.AccettazioneStatuto_dts = reader.GetBoolean(reader.GetOrdinal("AccettazioneStatuto_dts"));
+
+                        if (!reader["Certificazione_dts"].Equals(DBNull.Value))
+                            item.Certificazione_dts = reader.GetBoolean(reader.GetOrdinal("Certificazione_dts"));
+                        if (!reader["Emailriservata_dts"].Equals(DBNull.Value))
+                            item.Emailriservata_dts = reader.GetString(reader.GetOrdinal("Emailriservata_dts"));
+
+                        if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE1_dts"));
+                        if (!reader["CodiceREGIONE1_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE1_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE1_dts"));
+                        if (!reader["CodicePROVINCIA1_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA1_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA1_dts"));
+                        if (!reader["CodiceCOMUNE1_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE1_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE1_dts"));
+
+                        if (!reader["CodiceNAZIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE2_dts"));
+                        if (!reader["CodiceREGIONE2_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE2_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE2_dts"));
+                        if (!reader["CodicePROVINCIA2_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA2_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA2_dts"));
+                        if (!reader["CodiceCOMUNE2_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE2_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE2_dts"));
+
+                        if (!reader["CodiceNAZIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceNAZIONE3_dts"));
+                        if (!reader["CodiceREGIONE3_dts"].Equals(DBNull.Value))
+                            item.CodiceREGIONE3_dts = reader.GetString(reader.GetOrdinal("CodiceREGIONE3_dts"));
+                        if (!reader["CodicePROVINCIA3_dts"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA3_dts = reader.GetString(reader.GetOrdinal("CodicePROVINCIA3_dts"));
+                        if (!reader["CodiceCOMUNE3_dts"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE3_dts = reader.GetString(reader.GetOrdinal("CodiceCOMUNE3_dts"));
+
+                        if (!reader["Latitudine1_dts"].Equals(DBNull.Value))
+                            item.Latitudine1_dts = reader.GetDouble(reader.GetOrdinal("Latitudine1_dts"));
+                        if (!reader["Longitudine1_dts"].Equals(DBNull.Value))
+                            item.Longitudine1_dts = reader.GetDouble(reader.GetOrdinal("Longitudine1_dts"));
+                        if (!reader["Latitudine2_dts"].Equals(DBNull.Value))
+                            item.Latitudine2_dts = reader.GetDouble(reader.GetOrdinal("Latitudine2_dts"));
+                        if (!reader["Longitudine2_dts"].Equals(DBNull.Value))
+                            item.Longitudine2_dts = reader.GetDouble(reader.GetOrdinal("Longitudine2_dts"));
+                        if (!reader["Latitudine3_dts"].Equals(DBNull.Value))
+                            item.Latitudine3_dts = reader.GetDouble(reader.GetOrdinal("Latitudine3_dts"));
+                        if (!reader["Longitudine3_dts"].Equals(DBNull.Value))
+                            item.Longitudine3_dts = reader.GetDouble(reader.GetOrdinal("Longitudine3_dts"));
+
+                        if (!reader["Bloccoaccesso_dts"].Equals(DBNull.Value))
+                            item.Bloccoaccesso_dts = reader.GetBoolean(reader.GetOrdinal("Bloccoaccesso_dts"));
+
+
+                        if (!reader["Via1_dts"].Equals(DBNull.Value))
+                            item.Via1_dts = reader.GetString(reader.GetOrdinal("Via1_dts"));
+                        if (!reader["Cap1_dts"].Equals(DBNull.Value))
+                            item.Cap1_dts = reader.GetString(reader.GetOrdinal("Cap1_dts"));
+                        if (!reader["Nomeposizione1_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione1_dts = reader.GetString(reader.GetOrdinal("Nomeposizione1_dts"));
+                        if (!reader["Telefono1_dts"].Equals(DBNull.Value))
+                            item.Telefono1_dts = reader.GetString(reader.GetOrdinal("Telefono1_dts"));
+
+
+                        if (!reader["Via2_dts"].Equals(DBNull.Value))
+                            item.Via2_dts = reader.GetString(reader.GetOrdinal("Via2_dts"));
+                        if (!reader["Cap2_dts"].Equals(DBNull.Value))
+                            item.Cap2_dts = reader.GetString(reader.GetOrdinal("Cap2_dts"));
+                        if (!reader["Nomeposizione2_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione2_dts = reader.GetString(reader.GetOrdinal("Nomeposizione2_dts"));
+                        if (!reader["Telefono2_dts"].Equals(DBNull.Value))
+                            item.Telefono2_dts = reader.GetString(reader.GetOrdinal("Telefono2_dts"));
+
+                        if (!reader["Via3_dts"].Equals(DBNull.Value))
+                            item.Via3_dts = reader.GetString(reader.GetOrdinal("Via3_dts"));
+                        if (!reader["Cap3_dts"].Equals(DBNull.Value))
+                            item.Cap3_dts = reader.GetString(reader.GetOrdinal("Cap3_dts"));
+                        if (!reader["Nomeposizione3_dts"].Equals(DBNull.Value))
+                            item.Nomeposizione3_dts = reader.GetString(reader.GetOrdinal("Nomeposizione3_dts"));
+                        if (!reader["Telefono3_dts"].Equals(DBNull.Value))
+                            item.Telefono3_dts = reader.GetString(reader.GetOrdinal("Telefono3_dts"));
+
+                        if (!reader["Pagamenti_dts"].Equals(DBNull.Value))
+                            item.Pagamenti_dts = reader.GetString(reader.GetOrdinal("Pagamenti_dts"));
+
+
+                        if (!reader["ricfatt_dts"].Equals(DBNull.Value))
+                            item.ricfatt_dts = reader.GetString(reader.GetOrdinal("ricfatt_dts"));
+
+                        if (!reader["indirizzofatt_dts"].Equals(DBNull.Value))
+                            item.indirizzofatt_dts = reader.GetString(reader.GetOrdinal("indirizzofatt_dts"));
+
+                        if (!reader["noteriservate_dts"].Equals(DBNull.Value))
+                            item.noteriservate_dts = reader.GetString(reader.GetOrdinal("noteriservate_dts"));
+
+                        if (!reader["niscrordine_dts"].Equals(DBNull.Value))
+                            item.niscrordine_dts = reader.GetString(reader.GetOrdinal("niscrordine_dts"));
+                        if (!reader["locordine_dts"].Equals(DBNull.Value))
+                            item.locordine_dts = reader.GetString(reader.GetOrdinal("locordine_dts"));
+                        if (!reader["annofrequenza_dts"].Equals(DBNull.Value))
+                            item.annofrequenza_dts = reader.GetString(reader.GetOrdinal("annofrequenza_dts"));
+                        if (!reader["nomeuniversita_dts"].Equals(DBNull.Value))
+                            item.nomeuniversita_dts = reader.GetString(reader.GetOrdinal("nomeuniversita_dts"));
+                        if (!reader["dettagliuniversita_dts"].Equals(DBNull.Value))
+                            item.dettagliuniversita_dts = reader.GetString(reader.GetOrdinal("dettagliuniversita_dts"));
+                        if (!reader["Boolfields_dts"].Equals(DBNull.Value))
+                            item.Boolfields_dts = reader.GetString(reader.GetOrdinal("Boolfields_dts"));
+                        if (!reader["Textfield1_dts"].Equals(DBNull.Value))
+                            item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
+                        if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
+                            item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
+
+
+                        return (item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento offerta :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+
+        /// <summary>
+        /// Carica la lista dei comuni distinti presenti in base ai record presenti nella tabella articoli
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public List<string> CaricaListaComuniPresenti(string connection, string codiceTipologia)
+        {
+            List<string> list = new List<string>();
+            if (connection == null || connection == "") return list;
+            List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+            try
+            {
+                string query = "SELECT DISTINCT CodiceCOMUNE FROM " + Tblarchivio;
+
+                if (!string.IsNullOrEmpty(codiceTipologia))
+                {
+                    OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", codiceTipologia);
+                    _parUsed.Add(ptip);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                    else
+                        query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+                }
+                query += " order BY codiceCOMUNE ";
+
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        // item = new Offerte();
+                        string comune = reader.GetString(reader.GetOrdinal("codiceCOMUNE"));
+                        if (!list.Exists(c => c.ToString().ToLower() == comune.ToLower()))
+                        {
+                            list.Add(comune);
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Lettura tabella articoli :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Conta gli articoli per anno/mese e ne ritorno il numero per ogni coppia
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public Dictionary<string, Dictionary<string, string>> ContaPerAnnoMese(string connection, string LinguaFiltro = "", string filtrotipologie = "", string filtrocategoria = "")
+        {
+            Dictionary<string, Dictionary<string, string>> list = new Dictionary<string, Dictionary<string, string>>();
+            if (connection == null || connection == "") return list;
+
+            try
+            {
+                string query = "";
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                //OleDbParameter p1 = new OleDbParameter("@CodiceTipologia", CodTipologia);//OleDbType.VarChar
+                //parColl.Add(p1);
+                if (string.IsNullOrEmpty(filtrotipologie))
+                {
+                    query = "SELECT Month([Datainserimento]) AS mese,Year([Datainserimento]) AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
+                }
+                else
+                {
+                    query = "SELECT Month([Datainserimento]) AS mese,Year([Datainserimento]) AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
+
+
+                    string[] codici = filtrotipologie.Split(',');
+                    if (codici != null && codici.Length > 0)
+                    {
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE CodiceTIPOLOGIA in (    ";
+                        else
+                            query += " AND  CodiceTIPOLOGIA in (      ";
+                        foreach (string codice in codici)
+                        {
+                            if (!string.IsNullOrEmpty(codice.Trim()))
+                                query += " '" + codice + "' ,";
+                        }
+                        query = query.TrimEnd(',') + " ) ";
+                    }
+
+
+                    if (!string.IsNullOrEmpty(filtrocategoria))
+                    {
+                        OleDbParameter p1 = new OleDbParameter("@CodiceCategoria", filtrocategoria);//OleDbType.VarChar
+                        parColl.Add(p1);
+                        if (!query.ToLower().Contains("where"))
+                            query += " WHERE CodiceCategoria like @CodiceCategoria ";
+                        else
+                            query += " AND CodiceCategoria like @CodiceCategoria  ";
+                    }
+
+
+                }
+
+            //    query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
+               query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
+
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        // item = new Offerte();
+                        int anno = reader.GetInt16(reader.GetOrdinal("anno"));
+                        int mese = reader.GetInt16(reader.GetOrdinal("mese"));
+                        int numero = reader.GetInt32(reader.GetOrdinal("numero"));
+
+                        if (!list.ContainsKey(anno.ToString()))
+                        {
+                            list.Add(anno.ToString(), new Dictionary<string, string>());
+                            list[anno.ToString()].Add(mese.ToString(), numero.ToString());
+                        }
+                        else
+                        {
+                            if (!list[anno.ToString()].ContainsKey(mese.ToString()))
+                                list[anno.ToString()].Add(mese.ToString(), numero.ToString());
+                            else
+                            {
+                                list[anno.ToString()][mese.ToString()] = numero.ToString();
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Lettura tabella articoli :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+
+        /// <summary>
+        /// Funzione che carica la lista dei sotto prodotti che hanno una certa categoria prodotto
+        /// </summary>
+        /// <param name="connection">Connessione</param>
+        /// <param name="CodProdotto">Codice Categoria Prodotto richiesto</param>
+        /// <returns></returns>
+        public OfferteCollection CaricaSottoprodottiPerCodiceProdotto(string connection, string CodiceCategoria)
+        {
+            OfferteCollection list = new OfferteCollection();
+            if (connection == null || connection == "") return list;
+            if (CodiceCategoria == null || CodiceCategoria == "") return list;
+
+            Offerte item;
+
+            try
+            {
+                string query = "SELECT * FROM " + _tblarchivio + " where CodiceCategoria like @CodiceCategoria and archiviato='false' order BY DataInserimento Desc";
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@CodiceCategoria", CodiceCategoria);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        item = new Offerte();
+                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        if (!reader["Id_collegato"].Equals(DBNull.Value))
+                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+
+                        if (!reader["Autore"].Equals(DBNull.Value))
+                            item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
+
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["Data1"].Equals(DBNull.Value))
+                            item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
+                        if (!reader["DescrizioneGB"].Equals(DBNull.Value))
+                            item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                        if (!reader["DescrizioneI"].Equals(DBNull.Value))
+                            item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                        if (!reader["DENOMINAZIONEGB"].Equals(DBNull.Value))
+                            item.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                        if (!reader["DENOMINAZIONEI"].Equals(DBNull.Value))
+                            item.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+
+                        if (!reader["Campo1I"].Equals(DBNull.Value))
+                            item.Campo1I = reader.GetString(reader.GetOrdinal("Campo1I"));
+                        if (!reader["Campo1GB"].Equals(DBNull.Value))
+                            item.Campo1GB = reader.GetString(reader.GetOrdinal("Campo1GB"));
+                        if (!reader["Campo2I"].Equals(DBNull.Value))
+                            item.Campo2I = reader.GetString(reader.GetOrdinal("Campo2I"));
+                        if (!reader["Campo2GB"].Equals(DBNull.Value))
+                            item.Campo2GB = reader.GetString(reader.GetOrdinal("Campo2GB"));
+
+                        if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                            item.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                        if (!reader["DescrizioneRU"].Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
+                            item.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+                        if (!reader["Campo1RU"].Equals(DBNull.Value))
+                            item.Campo1RU = reader.GetString(reader.GetOrdinal("Campo1RU"));
+                        if (!reader["Campo2RU"].Equals(DBNull.Value))
+                            item.Campo2RU = reader.GetString(reader.GetOrdinal("Campo2RU"));
+
+
+                        if (!reader["XmlValue"].Equals(DBNull.Value))
+                            item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+
+                        if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                        if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                        if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                        if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                        if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                        if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                        if (!reader["Anno"].Equals(DBNull.Value))
+                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+
+
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["linkVideo"].Equals(DBNull.Value))
+                            item.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                            item.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                        if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                            item.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+
+                        if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                            item.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                        if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                            item.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                        if (!reader["EMAIL"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                        if (!reader["FAX"].Equals(DBNull.Value))
+                            item.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                        if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                        if (!reader["TELEFONO"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                        if (!reader["WEBSITE"].Equals(DBNull.Value))
+                            item.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                            item.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                        if (!reader["Vetrina"].Equals(DBNull.Value))
+                            item.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                        if (!reader["Abilitacontatto"].Equals(DBNull.Value))
+                            item.Abilitacontatto = reader.GetBoolean(reader.GetOrdinal("Abilitacontatto"));
+                        if (!reader["Archiviato"].Equals(DBNull.Value))
+                            item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
+
+                        if (!reader["Qta_vendita"].Equals(DBNull.Value))
+                            item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+                        if (!reader["Promozione"].Equals(DBNull.Value))
+                            item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
+
+                        if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                        else
+                            item.FotoCollection_M.Schema = "";
+                        if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                        else
+                            item.FotoCollection_M.Valori = "";
+                        //Creo la lista delle foto
+                        item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento Sottoprodotti :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Torna il conteggio delle categorie e sottocategorie raggruppate ( Categoria->Sottocategoria->numero elementi )
+        /// filtrati per codice tipologia
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="CodiceCategoria"></param>
+        /// <returns></returns>
+        public Dictionary<string, Dictionary<string, int>> ContaProdottiSottoprodotti(string connection, string CodiceTipologia)
+        {
+            Dictionary<string, Dictionary<string, int>> list = new Dictionary<string, Dictionary<string, int>>();
+            if (connection == null || connection == "") return list;
+            //KeyValuePair<string, KeyValuePair<string, int>> _kv = new KeyValuePair<string, KeyValuePair<string, int>>();
+            Dictionary<string, int> _sprodotti = new Dictionary<string, int>();
+            try
+            {
+                string query = "SELECT CodiceCategoria,CodiceCategoria2Liv,count(CodiceCategoria2Liv) as totsottoprodotti FROM " + _tblarchivio + " WHERE   archiviato='false' and CodiceTIPOLOGIA = @CodiceTIPOLOGIA group by CodiceCategoria,CodiceCategoria2Liv";
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", CodiceTipologia);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+                    while (reader.Read())
+                    {
+                        if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                        {
+                            string codicecategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                            if (!list.ContainsKey(codicecategoria))
+                            {
+                                _sprodotti = new Dictionary<string, int>();
+                                if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value) && !reader["totsottoprodotti"].Equals(DBNull.Value))
+                                {
+                                    string codicecategoria2liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt32(reader.GetOrdinal("totsottoprodotti")));
+                                    list.Add(codicecategoria, _sprodotti);
+                                }
+                            }
+                            else
+                            {
+                                _sprodotti = list[codicecategoria];
+                                if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value) && !reader["totsottoprodotti"].Equals(DBNull.Value))
+                                {
+                                    string codicecategoria2liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt32(reader.GetOrdinal("totsottoprodotti")));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Conteggio prodotti/sprodotti :" + error.Message, error);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Ricrea la list delle foto a partire dalle stringhe schema e valori
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public AllegatiCollection CaricaAllegatiFoto(AllegatiCollection list)
+        {
+            Allegato item;
+            string Schema = list.Schema;
+            string Value = list.Valori;
+            int i = 0;
+            int j = 0;
+            int start = 0;
+            int end = 0;
+            bool flagprimafoto = false;
+            while (start < Schema.Length)
+            {
+                item = new Allegato();
+                //LEGGIAMO LO SCHEMA PER IL NOMEALLEGATO
+                start = Schema.IndexOf(":S:", start) + 3;
+                end = Schema.IndexOf(":", start);
+                if (end == -1) return list;
+                i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                start = end + 1;
+                end = Schema.IndexOf(":", start);
+                j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                start = end + 1;
+                //LEGGIAMO IL VALORE (NOMEALLEGATO)
+                item.NomeFile = Value.Substring(i, j);
+                if (!Value.Substring(i, j).ToLower().StartsWith("http://"))
+                    item.NomeAnteprima = "Ant" + Value.Substring(i, j);
+                else
+                    item.NomeAnteprima = Value.Substring(i, j);
+
+                //LEGGIAMO LO SCHEMA PER LA DESCRIZIONE ALLEGATO
+                start = Schema.IndexOf(":S:", start) + 3;
+                end = Schema.IndexOf(":", start);
+                i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                start = end + 1;
+                end = Schema.IndexOf(":", start);
+                j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                start = end + 1;
+                //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                item.Descrizione = Value.Substring(i, j);
+                //LA CARTELLA PER LE FOTO E' SEMPRE LA STESSA
+                item.Cartella = "";
+                //Inserisco il percorso per la foto di anteprima
+                if (!flagprimafoto && item.NomeAnteprima != "Ant" && item.NomeAnteprima != "")
+                {
+                    if (!(item.Descrizione.Trim().ToString().ToLower() == "cv" || item.Descrizione.Trim().ToString().ToLower() == "cequip"))
+                    {
+                        flagprimafoto = true;
+                        list.FotoAnteprima = item.NomeAnteprima;
+                    }
+                }
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Dalla lista delle foto riproduce le stringhe Schema e Valori
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public AllegatiCollection CreaStringheAllegati(AllegatiCollection list)
+        {
+            //Impacchettiamo gli allegati creando le strinche schema / valori
+            //esempio schema Foto1:S:0:13:Descr1:S:13:7:Foto2:S:20:13:Descr2:S:33:7:
+            int pos = 0; //Posizione iniziale per lo schema
+            int n = 0;
+            list.Schema = "";
+            list.Valori = "";
+            int len = 0;
+            foreach (Allegato item in list)
+            {
+                n += 1;
+
+                //INSERISCO NOME FILE 
+                len = item.NomeFile.Length;
+                item.NomeFile.Replace(":S:", "SSS");//Elimina eventuali presenze
+                //del carattere di separazione dal nomefile
+                list.Schema += "All" + n + ":S:" + pos + ":" + len + ":";
+                list.Valori += item.NomeFile;
+                pos += len;
+
+                //INSERISCO DESCRIZIONE
+                len = item.Descrizione.Length;
+                item.Descrizione.Replace(":S:", "SSS");//Elimina eventuali presenze
+                //del carattere di separazione dalla descrizione
+                list.Schema += "Des" + n + ":S:" + pos + ":" + len + ":";
+                list.Valori += item.Descrizione;
+                pos += len;
+            }
+
+            return list;
+        }
+
+        public bool modificaFoto(string connection, int idOfferta, string nomefile, string descrizione)
+        {
+            if (connection == "") return false;
+            if (idOfferta == 0) return false;
+            //Carico le foto preesistenti nel db
+            AllegatiCollection FotoColl = this.getListaFotobyId(connection, idOfferta);
+            if (FotoColl != null)
+            {
+                //ALCUNI CONTROLLI SULL'ESISTENZA DELLA FOTO DA INSERIRE
+                Allegato F1 = (FotoColl).FindLast(delegate (Allegato agtemp) { return agtemp.NomeFile == nomefile; });
+                if (F1 == null) //FOTO TROVATA GIA' ESISTENTE nel db
+                {
+                    return false;
+                }
+                //MODIFICHIAMO LA FOTO NELLA COLLECTION
+
+                F1.NomeFile = nomefile;
+                F1.Descrizione = descrizione;
+
+                //RIFORMIAMO LE STRINGHE schema e valori
+                //PER IL SALVATAGGIO NEL DB
+                FotoColl = this.CreaStringheAllegati(FotoColl);
+
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                parColl.Add(p2);
+                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                parColl.Add(p4);
+                string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento Foto Offerte :" + error.Message, error);
+                }
+
+            }
+            return true;
+        }
+
+        public bool insertFoto(string connection, int idOfferta, string nomefile, string descrizione)
+        {
+            if (connection == "") return false;
+            if (idOfferta == 0) return false;
+            //Carico le foto preesistenti nel db
+            AllegatiCollection FotoColl = this.getListaFotobyId(connection, idOfferta);
+            if (FotoColl != null)
+            {
+                //ALCUNI CONTROLLI SULL'ESISTENZA DELLA FOTO DA INSERIRE
+                Allegato F1 = (FotoColl).FindLast(delegate (Allegato agtemp) { return agtemp.NomeFile == nomefile; });
+                if (F1 != null) //FOTO TROVATA GIA' ESISTENTE nel db
+                {
+                    return false;
+                }
+                //AGGIUNGIAMO LA FOTO ALLA COLLECTION
+                Allegato tmp = new Allegato();
+                tmp.NomeFile = nomefile;
+                tmp.Descrizione = descrizione;
+                FotoColl.Add(tmp);
+                //RIFORMIAMO LE STRINGHE schema e valori
+                //PER IL SALVATAGGIO NEL DB
+                FotoColl = this.CreaStringheAllegati(FotoColl);
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                parColl.Add(p2);
+                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                parColl.Add(p4);
+                string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento Foto Offerte :" + error.Message, error);
+                }
+
+            }
+            return true;
+        }
+
+        public bool CancellaFoto(string connection, int idOfferta, string nomefile, string descrizione, string pathfile)
+        {
+
+            if (connection == "") return false;
+            if (idOfferta == 0) return false;
+            //Carico le foto preesistenti nel db
+            AllegatiCollection FotoColl = this.getListaFotobyId(connection, idOfferta);
+            if (FotoColl != null)
+            {
+
+                try
+                {
+                    //CONTROLLO SULL'ESISTENZA DELLA FOTO DA CANCELLARE
+                    Allegato F1 = (FotoColl).FindLast(delegate (Allegato agtemp) { return agtemp.NomeFile == nomefile; });
+                    if (F1 == null) //FOTO non TROVATA nel db
+                    {
+                        return false;
+                    }
+                    //RIMUOVIAMO LA FOTO DALLA COLLECTION
+                    FotoColl.Remove(F1);
+                    //RIFORMIAMO LE STRINGHE schema e valori
+                    //PER IL SALVATAGGIO NEL DB
+                    FotoColl = this.CreaStringheAllegati(FotoColl);
+                    List<OleDbParameter> parColl = new List<OleDbParameter>();
+                    OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                    parColl.Add(p1);
+                    OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                    parColl.Add(p2);
+                    //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                    //parColl.Add(p3);
+                    OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                    parColl.Add(p4);
+                    string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+
+                    //ESEGUIAMO LA CANCELLAZIONE FISICA
+                    //DEI FILE IMMAGINE E ANTEPRIMA DAL SERVER
+                    if (System.IO.File.Exists(pathfile + "\\" + nomefile)) System.IO.File.Delete(pathfile + "\\" + nomefile);
+                    if (System.IO.File.Exists(pathfile + "\\" + "Ant" + nomefile)) System.IO.File.Delete(pathfile + "\\" + "Ant" + nomefile);
+
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Cancella Foto:" + error.Message, error);
+                }
+
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Carica la collection delle foto a partire dall'id del record dell'offerta passata
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idContenuto"></param>
+        /// <returns></returns>
+        public AllegatiCollection getListaFotobyId(string connection, int idOfferta)
+        {
+            if (connection == null || connection == "") { return null; };
+            if (idOfferta == null || idOfferta == 0) { return null; };
+
+            string query = "SELECT [FotoSchema],[FotoValori] FROM " + Tblarchivio + " where ID=@idOfferta";
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            OleDbParameter p1 = new OleDbParameter("@idOfferta", idOfferta);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            Offerte item = new Offerte();
+            using (reader)
+            {
+                if (reader == null) { return null; };
+                if (reader.HasRows == false)
+                    return null;
+                while (reader.Read())
+                {
+                    item = new Offerte();
+                    item.Id = idOfferta;
+                    //  CARICHIAMO 
+                    //FOTO ALLEGATE
+                    if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                        item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                    else
+                        item.FotoCollection_M.Schema = "";
+                    if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                        item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                    else
+                        item.FotoCollection_M.Valori = "";
+                    item.FotoCollection_M = this.CaricaAllegatiFoto(item.FotoCollection_M);
+                    return item.FotoCollection_M; ; //Ritorna solo 1 record
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Inserisce un record in tabella OFFERTE
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void InsertOfferta(string connessione,
+        Offerte item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbParameter p2 = new OleDbParameter("@DENOMINAZIONEI", item.DenominazioneI);
+            parColl.Add(p2);
+            OleDbParameter p3 = new OleDbParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
+            parColl.Add(p3);
+            OleDbParameter p4 = new OleDbParameter("@DescrizioneI", item.DescrizioneI);
+            parColl.Add(p4);
+            OleDbParameter p5 = new OleDbParameter("@DescrizioneGB", item.DescrizioneGB);
+            parColl.Add(p5);
+
+            string schema = "";
+            if (item.FotoCollection_M.Schema != null)
+                schema = item.FotoCollection_M.Schema;
+
+            string valori = "";
+            if (item.FotoCollection_M.Valori != null)
+                valori = item.FotoCollection_M.Valori;
+
+            OleDbParameter p6 = new OleDbParameter("@FotoSchema", schema);
+            parColl.Add(p6);
+            OleDbParameter p7 = new OleDbParameter("@FotoValori", valori);
+            parColl.Add(p7);
+
+            OleDbParameter p8 = new OleDbParameter("@CodiceCOMUNE", item.CodiceComune);
+            parColl.Add(p8);
+            OleDbParameter p9 = new OleDbParameter("@CodicePROVINCIA", item.CodiceProvincia);
+            parColl.Add(p9);
+            OleDbParameter p10 = new OleDbParameter("@CodiceREGIONE", item.CodiceRegione);
+            parColl.Add(p10);
+            OleDbParameter p11 = new OleDbParameter("@DATITECNICII", item.DatitecniciI);
+            parColl.Add(p11);
+            OleDbParameter p12 = new OleDbParameter("@DATITECNICIGB", item.DatitecniciGB);
+            parColl.Add(p12);
+            OleDbParameter p13 = new OleDbParameter("@EMAIL", item.Email);
+            parColl.Add(p13);
+            OleDbParameter p14 = new OleDbParameter("@FAX", item.Fax);
+            parColl.Add(p14);
+            OleDbParameter p15 = new OleDbParameter("@INDIRIZZO", item.Indirizzo);
+            parColl.Add(p15);
+            OleDbParameter p16 = new OleDbParameter("@TELEFONO", item.Telefono);
+            parColl.Add(p16);
+            OleDbParameter p17 = new OleDbParameter("@WEBSITE", item.Website);
+            parColl.Add(p17);
+            OleDbParameter p18 = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            //p18.OleDbType = OleDbType.Date;
+            parColl.Add(p18);
+            OleDbParameter pdata1 = new OleDbParameter("@data1", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Data1));
+            parColl.Add(pdata1);
+
+            OleDbParameter p19 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+            parColl.Add(p19);
+            OleDbParameter p20a = new OleDbParameter("@CodiceCategoria", item.CodiceCategoria);
+            parColl.Add(p20a);
+            OleDbParameter p20 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
+            parColl.Add(p20);
+            OleDbParameter p21 = new OleDbParameter("@Prezzo", item.Prezzo);
+            parColl.Add(p21);
+            OleDbParameter p22 = new OleDbParameter("@PrezzoListino", item.PrezzoListino);
+            parColl.Add(p22);
+            OleDbParameter p23 = new OleDbParameter("@Vetrina", item.Vetrina);
+            parColl.Add(p23);
+            OleDbParameter pabcon = new OleDbParameter("@Abilitacontatto", item.Abilitacontatto);
+            parColl.Add(pabcon);
+            OleDbParameter pvideo = new OleDbParameter("@linkVideo", item.linkVideo);
+            parColl.Add(pvideo);
+
+            OleDbParameter pcampo1i = new OleDbParameter("@Campo1I", item.Campo1I);
+            parColl.Add(pcampo1i);
+            OleDbParameter pcampoi2 = new OleDbParameter("@Campo2I", item.Campo2I);
+            parColl.Add(pcampoi2);
+            OleDbParameter pcampo1gb = new OleDbParameter("@Campo1GB", item.Campo1GB);
+            parColl.Add(pcampo1gb);
+            OleDbParameter pcampo2gb = new OleDbParameter("@Campo2GB", item.Campo2GB);
+            parColl.Add(pcampo2gb);
+
+            OleDbParameter pcar1i = new OleDbParameter("@Caratteristica1", item.Caratteristica1);
+            parColl.Add(pcar1i);
+            OleDbParameter pcar2i = new OleDbParameter("@Caratteristica2", item.Caratteristica2);
+            parColl.Add(pcar2i);
+            OleDbParameter pcar3i = new OleDbParameter("@Caratteristica3", item.Caratteristica3);
+            parColl.Add(pcar3i);
+            OleDbParameter pcar4i = new OleDbParameter("@Caratteristica4", item.Caratteristica4);
+            parColl.Add(pcar4i);
+            OleDbParameter pcar5i = new OleDbParameter("@Caratteristica5", item.Caratteristica5);
+            parColl.Add(pcar5i);
+            OleDbParameter pcar6i = new OleDbParameter("@Caratteristica6", item.Caratteristica6);
+            parColl.Add(pcar6i);
+
+            OleDbParameter pcaranno = new OleDbParameter("@Anno", item.Anno);
+            parColl.Add(pcaranno);
+            OleDbParameter parch = new OleDbParameter("@Archiviato", item.Archiviato);
+            parColl.Add(parch);
+
+            OleDbParameter pidcoll = new OleDbParameter("@Id_collegato", item.Id_collegato);
+            parColl.Add(pidcoll);
+            OleDbParameter pidcollsub = new OleDbParameter("@Id_dts_collegato", item.Id_dts_collegato);
+            parColl.Add(pidcollsub);
+
+            OleDbParameter pautore = new OleDbParameter("@Autore", item.Autore);
+            parColl.Add(pautore);
+
+            OleDbParameter pxmlvalue = new OleDbParameter("@xmlvalue", item.Xmlvalue);
+            parColl.Add(pxmlvalue);
+
+            OleDbParameter p3ru = new OleDbParameter("@DENOMINAZIONERU", item.DenominazioneRU);
+            parColl.Add(p3ru);
+            OleDbParameter p5ru = new OleDbParameter("@DescrizioneRU", item.DescrizioneRU);
+            parColl.Add(p5ru);
+            OleDbParameter p12ru = new OleDbParameter("@DATITECNICIRU", item.DatitecniciRU);
+            parColl.Add(p12ru);
+            OleDbParameter pcampo1ru = new OleDbParameter("@Campo1RU", item.Campo1RU);
+            parColl.Add(pcampo1ru);
+            OleDbParameter pcampo2ru = new OleDbParameter("@Campo2RU", item.Campo2RU);
+            parColl.Add(pcampo2ru);
+
+            OleDbParameter pqtavendita = new OleDbParameter();
+            if (item.Qta_vendita == null)
+                pqtavendita = new OleDbParameter("@Qta_vendita", DBNull.Value);
+            else
+                pqtavendita = new OleDbParameter("@Qta_vendita", item.Qta_vendita.Value);
+            parColl.Add(pqtavendita);
+
+            OleDbParameter pPromozione = new OleDbParameter("@Promozione", item.Promozione);
+            parColl.Add(pPromozione);
+
+
+
+            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,Qta_vendita,Promozione  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@Qta_vendita,@Promozione )";
+            try
+            {
+                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento Offerte :" + error.Message, error);
+            }
+            return;
+        }
+
+        public void InsertOffertaCollegata(string connessione,
+     Offerte item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            OleDbParameter AccettazioneStatuto_dts = new OleDbParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
+            parColl.Add(AccettazioneStatuto_dts);
+            OleDbParameter Altrespecializzazioni_dts = new OleDbParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
+            parColl.Add(Altrespecializzazioni_dts);
+            OleDbParameter Annolaurea_dts = new OleDbParameter("@Annolaurea_dts", item.Annolaurea_dts);
+            parColl.Add(Annolaurea_dts);
+            OleDbParameter Annospecializzazione_dts = new OleDbParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
+            parColl.Add(Annospecializzazione_dts);
+            OleDbParameter Bloccoaccesso_dts = new OleDbParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
+            parColl.Add(Bloccoaccesso_dts);
+            OleDbParameter Cap1_dts = new OleDbParameter("@Cap1_dts", item.Cap1_dts);
+            parColl.Add(Cap1_dts);
+            OleDbParameter Cap2_dts = new OleDbParameter("@Cap2_dts", item.Cap2_dts);
+            parColl.Add(Cap2_dts);
+            OleDbParameter Cap3_dts = new OleDbParameter("@Cap3_dts", item.Cap3_dts);
+            parColl.Add(Cap3_dts);
+            OleDbParameter Certificazione_dts = new OleDbParameter("@Certificazione_dts", item.Certificazione_dts);
+            parColl.Add(Certificazione_dts);
+            OleDbParameter CodiceCOMUNE1_dts = new OleDbParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
+            parColl.Add(CodiceCOMUNE1_dts);
+            OleDbParameter CodiceCOMUNE2_dts = new OleDbParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
+            parColl.Add(CodiceCOMUNE2_dts);
+            OleDbParameter CodiceCOMUNE3_dts = new OleDbParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
+            parColl.Add(CodiceCOMUNE3_dts);
+            OleDbParameter CodiceNAZIONE1_dts = new OleDbParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
+            parColl.Add(CodiceNAZIONE1_dts);
+            OleDbParameter CodiceNAZIONE2_dts = new OleDbParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
+            parColl.Add(CodiceNAZIONE2_dts);
+            OleDbParameter CodiceNAZIONE3_dts = new OleDbParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
+            parColl.Add(CodiceNAZIONE3_dts);
+            OleDbParameter CodicePROVINCIA1_dts = new OleDbParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
+            parColl.Add(CodicePROVINCIA1_dts);
+            OleDbParameter CodicePROVINCIA2_dts = new OleDbParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
+            parColl.Add(CodicePROVINCIA2_dts);
+            OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
+            parColl.Add(CodicePROVINCIA3_dts);
+
+            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Datanascita_dts));
+            parColl.Add(Datanascita_dts);
+
+            OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
+            parColl.Add(CodiceREGIONE1_dts);
+            OleDbParameter CodiceREGIONE2_dts = new OleDbParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
+            parColl.Add(CodiceREGIONE2_dts);
+            OleDbParameter CodiceREGIONE3_dts = new OleDbParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
+            parColl.Add(CodiceREGIONE3_dts);
+            OleDbParameter Cognome_dts = new OleDbParameter("@Cognome_dts", item.Cognome_dts);
+            parColl.Add(Cognome_dts);
+
+            OleDbParameter Emailriservata_dts = new OleDbParameter("@Emailriservata_dts", item.Emailriservata_dts);
+            parColl.Add(Emailriservata_dts);
+            OleDbParameter Latitudine1_dts = new OleDbParameter("@Latitudine1_dts", item.Latitudine1_dts);
+            parColl.Add(Latitudine1_dts);
+
+            OleDbParameter Latitudine2_dts = new OleDbParameter("@Latitudine2_dts", item.Latitudine2_dts);
+            parColl.Add(Latitudine2_dts);
+            OleDbParameter Latitudine3_dts = new OleDbParameter("@Latitudine3_dts", item.Latitudine3_dts);
+            parColl.Add(Latitudine3_dts);
+            OleDbParameter Longitudine1_dts = new OleDbParameter("@Longitudine1_dts", item.Longitudine1_dts);
+            parColl.Add(Longitudine1_dts);
+            OleDbParameter Longitudine2_dts = new OleDbParameter("@Longitudine2_dts", item.Longitudine2_dts);
+            parColl.Add(Longitudine2_dts);
+
+            OleDbParameter Longitudine3_dts = new OleDbParameter("@Longitudine3_dts", item.Longitudine3_dts);
+            parColl.Add(Longitudine3_dts);
+            OleDbParameter Nome_dts = new OleDbParameter("@Nome_dts", item.Nome_dts);
+            parColl.Add(Nome_dts);
+            OleDbParameter Nomeposizione1_dts = new OleDbParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
+            parColl.Add(Nomeposizione1_dts);
+            OleDbParameter Nomeposizione2_dts = new OleDbParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
+            parColl.Add(Nomeposizione2_dts);
+            OleDbParameter Nomeposizione3_dts = new OleDbParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
+            parColl.Add(Nomeposizione3_dts);
+            OleDbParameter Pivacf_dts = new OleDbParameter("@Pivacf_dts", item.Pivacf_dts);
+            parColl.Add(Pivacf_dts);
+
+            OleDbParameter Socioaltraassociazione_dts = new OleDbParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
+            parColl.Add(Socioaltraassociazione_dts);
+            OleDbParameter SocioIsaps_dts = new OleDbParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
+            parColl.Add(SocioIsaps_dts);
+
+            OleDbParameter Sociopresentatore1_dts = new OleDbParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
+            parColl.Add(Sociopresentatore1_dts);
+
+            OleDbParameter Sociopresentatore2_dts = new OleDbParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
+            parColl.Add(Sociopresentatore2_dts);
+
+            OleDbParameter SocioSicpre_dts = new OleDbParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
+            parColl.Add(SocioSicpre_dts);
+            OleDbParameter Telefono1_dts = new OleDbParameter("@Telefono1_dts", item.Telefono1_dts);
+            parColl.Add(Telefono1_dts);
+            OleDbParameter Telefono2_dts = new OleDbParameter("@Telefono2_dts", item.Telefono2_dts);
+            parColl.Add(Telefono2_dts);
+            OleDbParameter Telefono3_dts = new OleDbParameter("@Telefono3_dts", item.Telefono3_dts);
+            parColl.Add(Telefono3_dts);
+            OleDbParameter Telefonoprivato_dts = new OleDbParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
+            parColl.Add(Telefonoprivato_dts);
+
+            OleDbParameter Trattamenticollegati_dts = new OleDbParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
+            parColl.Add(Trattamenticollegati_dts);
+            OleDbParameter Via1_dts = new OleDbParameter("@Via1_dts", item.Via1_dts);
+            parColl.Add(Via1_dts);
+            OleDbParameter Via2_dts = new OleDbParameter("@Via2_dts", item.Via2_dts);
+            parColl.Add(Via2_dts);
+
+            OleDbParameter Via3_dts = new OleDbParameter("@Via3_dts", item.Via3_dts);
+            parColl.Add(Via3_dts);
+
+            OleDbParameter Pagamenti_dts = new OleDbParameter("@Pagamenti_dts", item.Pagamenti_dts);
+            parColl.Add(Pagamenti_dts);
+
+
+            OleDbParameter ricfatt_dts = new OleDbParameter("@ricfatt_dts", item.ricfatt_dts);
+            parColl.Add(ricfatt_dts);
+            OleDbParameter noteriservate_dts = new OleDbParameter("@noteriservate_dts", item.noteriservate_dts);
+            parColl.Add(noteriservate_dts);
+            OleDbParameter indirizzofatt_dts = new OleDbParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
+            parColl.Add(indirizzofatt_dts);
+
+            OleDbParameter niscrordine_dts = new OleDbParameter("@niscrordine_dts", item.niscrordine_dts);
+            parColl.Add(niscrordine_dts);
+            OleDbParameter locordine_dts = new OleDbParameter("@locordine_dts", item.locordine_dts);
+            parColl.Add(locordine_dts);
+            OleDbParameter annofrequenza_dts = new OleDbParameter("@annofrequenza_dts", item.annofrequenza_dts);
+            parColl.Add(annofrequenza_dts);
+            OleDbParameter nomeuniversita_dts = new OleDbParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
+            parColl.Add(nomeuniversita_dts);
+            OleDbParameter dettagliuniversita_dts = new OleDbParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
+            parColl.Add(dettagliuniversita_dts);
+            OleDbParameter Boolfields_dts = new OleDbParameter("@Boolfields_dts", item.Boolfields_dts);
+            parColl.Add(Boolfields_dts);
+            OleDbParameter Textfield1_dts = new OleDbParameter("@Textfield1_dts", item.Textfield1_dts);
+            parColl.Add(Textfield1_dts);
+            OleDbParameter Interventieseguiti_dts = new OleDbParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
+            parColl.Add(Interventieseguiti_dts);
+            // niscrordine_dts
+            //locordine_dts
+            //annofrequenza_dts
+            //nomeuniversita_dts
+            //dettagliuniversita_dts
+            //Boolfields_dts
+            //Textfield1_dts
+            //Interventieseguiti_dts
+
+            string query = "INSERT INTO " + _tblarchiviodettaglio + " ([AccettazioneStatuto_dts],[Altrespecializzazioni_dts],[Annolaurea_dts],[Annospecializzazione_dts],[Bloccoaccesso_dts],[Cap1_dts],[Cap2_dts],[Cap3_dts],[Certificazione_dts],[CodiceCOMUNE1_dts],[CodiceCOMUNE2_dts],[CodiceCOMUNE3_dts],[CodiceNAZIONE1_dts],[CodiceNAZIONE2_dts],[CodiceNAZIONE3_dts],[CodicePROVINCIA1_dts],[CodicePROVINCIA2_dts],[CodicePROVINCIA3_dts],[Datanascita_dts],[CodiceREGIONE1_dts],[CodiceREGIONE2_dts],[CodiceREGIONE3_dts],[Cognome_dts],[Emailriservata_dts],[Latitudine1_dts],Latitudine2_dts,Latitudine3_dts,Longitudine1_dts,Longitudine2_dts,Longitudine3_dts,Nome_dts,Nomeposizione1_dts,Nomeposizione2_dts,Nomeposizione3_dts,Pivacf_dts,Socioaltraassociazione_dts,SocioIsaps_dts,Sociopresentatore1_dts,Sociopresentatore2_dts,SocioSicpre_dts,Telefono1_dts,Telefono2_dts,Telefono3_dts,Telefonoprivato_dts,Trattamenticollegati_dts,Via1_dts,Via2_dts,Via3_dts,Pagamenti_dts,ricfatt_dts,noteriservate_dts,indirizzofatt_dts,niscrordine_dts,locordine_dts,annofrequenza_dts,nomeuniversita_dts,dettagliuniversita_dts,Boolfields_dts,Textfield1_dts,Interventieseguiti_dts) VALUES (@AccettazioneStatuto_dts,@Altrespecializzazioni_dts,@Annolaurea_dts,@Annospecializzazione_dts,@Bloccoaccesso_dts,@Cap1_dts,@Cap2_dts,@Cap3_dts,@Certificazione_dts,@CodiceCOMUNE1_dts,@CodiceCOMUNE2_dts,@CodiceCOMUNE3_dts,@CodiceNAZIONE1_dts,@CodiceNAZIONE2_dts,@CodiceNAZIONE3_dts,@CodicePROVINCIA1_dts,@CodicePROVINCIA2_dts,@CodicePROVINCIA3_dts,@Datanascita_dts,@CodiceREGIONE1_dts,@CodiceREGIONE2_dts,@CodiceREGIONE3_dts,@Cognome_dts,@Emailriservata_dts,@Latitudine1_dts,@Latitudine2_dts,@Latitudine3_dts,@Longitudine1_dts,@Longitudine2_dts,@Longitudine3_dts,@Nome_dts,@Nomeposizione1_dts,@Nomeposizione2_dts,@Nomeposizione3_dts,@Pivacf_dts,@Socioaltraassociazione_dts,@SocioIsaps_dts,@Sociopresentatore1_dts,@Sociopresentatore2_dts,@SocioSicpre_dts,@Telefono1_dts,@Telefono2_dts,@Telefono3_dts,@Telefonoprivato_dts,@Trattamenticollegati_dts,@Via1_dts,@Via2_dts,@Via3_dts,@Pagamenti_dts,@ricfatt_dts,@noteriservate_dts,@indirizzofatt_dts,@niscrordine_dts,@locordine_dts,@annofrequenza_dts,@nomeuniversita_dts,@dettagliuniversita_dts,@Boolfields_dts,@Textfield1_dts,@Interventieseguiti_dts)";
+            try
+            {
+                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                item.Id_dts_collegato = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db per il record collegato
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento Offerte :" + error.Message, error);
+            }
+            return;
+
+        }
+        /// <summary>
+        /// Aggiorna un record in tabella Offerte
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void UpdateOfferta(string connessione,
+            Offerte item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            //OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceOfferta);//OleDbType.VarChar
+            //parColl.Add(p1);
+            OleDbParameter p1 = new OleDbParameter("@DENOMINAZIONEI", item.DenominazioneI);
+            parColl.Add(p1);
+            OleDbParameter p2 = new OleDbParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
+            parColl.Add(p2);
+            OleDbParameter p3 = new OleDbParameter("@DescrizioneI", item.DescrizioneI);
+            parColl.Add(p3);
+            OleDbParameter p4 = new OleDbParameter("@DescrizioneGB", item.DescrizioneGB);
+            parColl.Add(p4);
+            string schema = "";
+            if (item.FotoCollection_M.Schema != null)
+                schema = item.FotoCollection_M.Schema;
+
+            string valori = "";
+            if (item.FotoCollection_M.Valori != null)
+                valori = item.FotoCollection_M.Valori;
+
+            OleDbParameter pschema = new OleDbParameter("@FotoSchema", schema);
+            parColl.Add(pschema);
+            OleDbParameter pvalori = new OleDbParameter("@FotoValori", valori);
+            parColl.Add(pvalori);
+
+            OleDbParameter p5 = new OleDbParameter("@CodiceCOMUNE", item.CodiceComune);
+            parColl.Add(p5);
+            OleDbParameter p6 = new OleDbParameter("@CodicePROVINCIA", item.CodiceProvincia);
+            parColl.Add(p6);
+            OleDbParameter p7 = new OleDbParameter("@CodiceREGIONE", item.CodiceRegione);
+            parColl.Add(p7);
+            OleDbParameter p8 = new OleDbParameter("@DATITECNICII", item.DatitecniciI);
+            parColl.Add(p8);
+            OleDbParameter p9 = new OleDbParameter("@DATITECNICIGB", item.DatitecniciGB);
+            parColl.Add(p9);
+            OleDbParameter p10 = new OleDbParameter("@EMAIL", item.Email);
+            parColl.Add(p10);
+            OleDbParameter p11 = new OleDbParameter("@FAX", item.Fax);
+            parColl.Add(p11);
+            OleDbParameter p12 = new OleDbParameter("@INDIRIZZO", item.Indirizzo);
+            parColl.Add(p12);
+            OleDbParameter p13 = new OleDbParameter("@TELEFONO", item.Telefono);
+            parColl.Add(p13);
+            OleDbParameter p14 = new OleDbParameter("@WEBSITE", item.Website);
+            parColl.Add(p14);
+            OleDbParameter pdata = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            //pdata.DbType = System.Data.DbType.DateTime;
+            parColl.Add(pdata);
+            OleDbParameter pdata1 = new OleDbParameter("@data1", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Data1));
+            //pdata.DbType = System.Data.DbType.DateTime;
+            parColl.Add(pdata1);
+
+
+            OleDbParameter p17 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+            parColl.Add(p17);
+            OleDbParameter p18a = new OleDbParameter("@CodiceCategoria", item.CodiceCategoria);
+            parColl.Add(p18a);
+            OleDbParameter p18 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
+            parColl.Add(p18);
+            OleDbParameter p19 = new OleDbParameter("@Prezzo", item.Prezzo);
+            parColl.Add(p19);
+            OleDbParameter p20 = new OleDbParameter("@PrezzoListino", item.PrezzoListino);
+            parColl.Add(p20);
+            OleDbParameter p21 = new OleDbParameter("@Vetrina", item.Vetrina);
+            parColl.Add(p21);
+
+            OleDbParameter pabilc = new OleDbParameter("@Abilitacontatto", item.Abilitacontatto);
+            parColl.Add(pabilc);
+            OleDbParameter pvideo = new OleDbParameter("@linkVideo", item.linkVideo);
+            parColl.Add(pvideo);
+            OleDbParameter pcampo1i = new OleDbParameter("@Campo1I", item.Campo1I);
+            parColl.Add(pcampo1i);
+            OleDbParameter pcampoi2 = new OleDbParameter("@Campo2I", item.Campo2I);
+            parColl.Add(pcampoi2);
+            OleDbParameter pcampo1gb = new OleDbParameter("@Campo1GB", item.Campo1GB);
+            parColl.Add(pcampo1gb);
+            OleDbParameter pcampo2gb = new OleDbParameter("@Campo2GB", item.Campo2GB);
+            parColl.Add(pcampo2gb);
+            OleDbParameter pcar1i = new OleDbParameter("@Caratteristica1", item.Caratteristica1);
+            parColl.Add(pcar1i);
+            OleDbParameter pcar2i = new OleDbParameter("@Caratteristica2", item.Caratteristica2);
+            parColl.Add(pcar2i);
+            OleDbParameter pcar3i = new OleDbParameter("@Caratteristica3", item.Caratteristica3);
+            parColl.Add(pcar3i);
+            OleDbParameter pcar4i = new OleDbParameter("@Caratteristica4", item.Caratteristica4);
+            parColl.Add(pcar4i);
+            OleDbParameter pcar5i = new OleDbParameter("@Caratteristica5", item.Caratteristica5);
+            parColl.Add(pcar5i);
+            OleDbParameter pcar6i = new OleDbParameter("@Caratteristica6", item.Caratteristica6);
+            parColl.Add(pcar6i);
+
+            OleDbParameter pcaranno = new OleDbParameter("@Anno", item.Anno);
+            parColl.Add(pcaranno);
+            OleDbParameter parch = new OleDbParameter("@Archiviato", item.Archiviato);
+            parColl.Add(parch);
+            OleDbParameter pidcoll = new OleDbParameter("@Id_collegato", item.Id_collegato);
+            parColl.Add(pidcoll);
+            OleDbParameter pidcollsub = new OleDbParameter("@Id_dts_collegato", item.Id_dts_collegato);
+            parColl.Add(pidcollsub);
+
+
+            OleDbParameter pautore = new OleDbParameter("@Autore", item.Autore);
+            parColl.Add(pautore);
+            OleDbParameter pxmlValue = new OleDbParameter("@xmlValue", item.Xmlvalue);
+            parColl.Add(pxmlValue);
+
+
+            OleDbParameter p3ru = new OleDbParameter("@DENOMINAZIONERU", item.DenominazioneRU);
+            parColl.Add(p3ru);
+            OleDbParameter p5ru = new OleDbParameter("@DescrizioneRU", item.DescrizioneRU);
+            parColl.Add(p5ru);
+            OleDbParameter p12ru = new OleDbParameter("@DATITECNICIRU", item.DatitecniciRU);
+            parColl.Add(p12ru);
+            OleDbParameter pcampo1ru = new OleDbParameter("@Campo1RU", item.Campo1RU);
+            parColl.Add(pcampo1ru);
+            OleDbParameter pcampo2ru = new OleDbParameter("@Campo2RU", item.Campo2RU);
+            parColl.Add(pcampo2ru);
+            OleDbParameter pqtavendita = new OleDbParameter();
+            if (item.Qta_vendita == null)
+                pqtavendita = new OleDbParameter("@Qta_vendita", DBNull.Value);
+            else
+                pqtavendita = new OleDbParameter("@Qta_vendita", item.Qta_vendita.Value);
+            parColl.Add(pqtavendita);
+
+            OleDbParameter pPromozione = new OleDbParameter("@Promozione", item.Promozione);
+            parColl.Add(pPromozione);
+
+            OleDbParameter p16 = new OleDbParameter("@Id", item.Id);
+            parColl.Add(p16);
+            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori, [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU,  [Qta_vendita]=@Qta_vendita,[Promozione]=@Promozione   WHERE [Id]=@Id ";
+
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, aggiornamento :" + error.Message, error);
+            }
+            return;
+        }
+
+
+        public void UpdateOffertaCollegata(string connessione,
+         Offerte item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            OleDbParameter AccettazioneStatuto_dts = new OleDbParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
+            parColl.Add(AccettazioneStatuto_dts);
+            OleDbParameter Altrespecializzazioni_dts = new OleDbParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
+            parColl.Add(Altrespecializzazioni_dts);
+            OleDbParameter Annolaurea_dts = new OleDbParameter("@Annolaurea_dts", item.Annolaurea_dts);
+            parColl.Add(Annolaurea_dts);
+            OleDbParameter Annospecializzazione_dts = new OleDbParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
+            parColl.Add(Annospecializzazione_dts);
+            OleDbParameter Bloccoaccesso_dts = new OleDbParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
+            parColl.Add(Bloccoaccesso_dts);
+            OleDbParameter Cap1_dts = new OleDbParameter("@Cap1_dts", item.Cap1_dts);
+            parColl.Add(Cap1_dts);
+            OleDbParameter Cap2_dts = new OleDbParameter("@Cap2_dts", item.Cap2_dts);
+            parColl.Add(Cap2_dts);
+            OleDbParameter Cap3_dts = new OleDbParameter("@Cap3_dts", item.Cap3_dts);
+            parColl.Add(Cap3_dts);
+            OleDbParameter Certificazione_dts = new OleDbParameter("@Certificazione_dts", item.Certificazione_dts);
+            parColl.Add(Certificazione_dts);
+            OleDbParameter CodiceCOMUNE1_dts = new OleDbParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
+            parColl.Add(CodiceCOMUNE1_dts);
+            OleDbParameter CodiceCOMUNE2_dts = new OleDbParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
+            parColl.Add(CodiceCOMUNE2_dts);
+            OleDbParameter CodiceCOMUNE3_dts = new OleDbParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
+            parColl.Add(CodiceCOMUNE3_dts);
+            OleDbParameter CodiceNAZIONE1_dts = new OleDbParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
+            parColl.Add(CodiceNAZIONE1_dts);
+            OleDbParameter CodiceNAZIONE2_dts = new OleDbParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
+            parColl.Add(CodiceNAZIONE2_dts);
+            OleDbParameter CodiceNAZIONE3_dts = new OleDbParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
+            parColl.Add(CodiceNAZIONE3_dts);
+            OleDbParameter CodicePROVINCIA1_dts = new OleDbParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
+            parColl.Add(CodicePROVINCIA1_dts);
+            OleDbParameter CodicePROVINCIA2_dts = new OleDbParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
+            parColl.Add(CodicePROVINCIA2_dts);
+            OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
+            parColl.Add(CodicePROVINCIA3_dts);
+
+            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Datanascita_dts));
+            parColl.Add(Datanascita_dts);
+
+            OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
+            parColl.Add(CodiceREGIONE1_dts);
+            OleDbParameter CodiceREGIONE2_dts = new OleDbParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
+            parColl.Add(CodiceREGIONE2_dts);
+            OleDbParameter CodiceREGIONE3_dts = new OleDbParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
+            parColl.Add(CodiceREGIONE3_dts);
+            OleDbParameter Cognome_dts = new OleDbParameter("@Cognome_dts", item.Cognome_dts);
+            parColl.Add(Cognome_dts);
+
+            OleDbParameter Emailriservata_dts = new OleDbParameter("@Emailriservata_dts", item.Emailriservata_dts);
+            parColl.Add(Emailriservata_dts);
+            OleDbParameter Latitudine1_dts = new OleDbParameter("@Latitudine1_dts", item.Latitudine1_dts);
+            parColl.Add(Latitudine1_dts);
+
+            OleDbParameter Latitudine2_dts = new OleDbParameter("@Latitudine2_dts", item.Latitudine2_dts);
+            parColl.Add(Latitudine2_dts);
+            OleDbParameter Latitudine3_dts = new OleDbParameter("@Latitudine3_dts", item.Latitudine3_dts);
+            parColl.Add(Latitudine3_dts);
+            OleDbParameter Longitudine1_dts = new OleDbParameter("@Longitudine1_dts", item.Longitudine1_dts);
+            parColl.Add(Longitudine1_dts);
+            OleDbParameter Longitudine2_dts = new OleDbParameter("@Longitudine2_dts", item.Longitudine2_dts);
+            parColl.Add(Longitudine2_dts);
+
+            OleDbParameter Longitudine3_dts = new OleDbParameter("@Longitudine3_dts", item.Longitudine3_dts);
+            parColl.Add(Longitudine3_dts);
+            OleDbParameter Nome_dts = new OleDbParameter("@Nome_dts", item.Nome_dts);
+            parColl.Add(Nome_dts);
+            OleDbParameter Nomeposizione1_dts = new OleDbParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
+            parColl.Add(Nomeposizione1_dts);
+            OleDbParameter Nomeposizione2_dts = new OleDbParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
+            parColl.Add(Nomeposizione2_dts);
+            OleDbParameter Nomeposizione3_dts = new OleDbParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
+            parColl.Add(Nomeposizione3_dts);
+            OleDbParameter Pivacf_dts = new OleDbParameter("@Pivacf_dts", item.Pivacf_dts);
+            parColl.Add(Pivacf_dts);
+
+            OleDbParameter Socioaltraassociazione_dts = new OleDbParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
+            parColl.Add(Socioaltraassociazione_dts);
+            OleDbParameter SocioIsaps_dts = new OleDbParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
+            parColl.Add(SocioIsaps_dts);
+
+            OleDbParameter Sociopresentatore1_dts = new OleDbParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
+            parColl.Add(Sociopresentatore1_dts);
+
+            OleDbParameter Sociopresentatore2_dts = new OleDbParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
+            parColl.Add(Sociopresentatore2_dts);
+
+            OleDbParameter SocioSicpre_dts = new OleDbParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
+            parColl.Add(SocioSicpre_dts);
+            OleDbParameter Telefono1_dts = new OleDbParameter("@Telefono1_dts", item.Telefono1_dts);
+            parColl.Add(Telefono1_dts);
+            OleDbParameter Telefono2_dts = new OleDbParameter("@Telefono2_dts", item.Telefono2_dts);
+            parColl.Add(Telefono2_dts);
+            OleDbParameter Telefono3_dts = new OleDbParameter("@Telefono3_dts", item.Telefono3_dts);
+            parColl.Add(Telefono3_dts);
+            OleDbParameter Telefonoprivato_dts = new OleDbParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
+            parColl.Add(Telefonoprivato_dts);
+
+            OleDbParameter Trattamenticollegati_dts = new OleDbParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
+            parColl.Add(Trattamenticollegati_dts);
+            OleDbParameter Via1_dts = new OleDbParameter("@Via1_dts", item.Via1_dts);
+            parColl.Add(Via1_dts);
+            OleDbParameter Via2_dts = new OleDbParameter("@Via2_dts", item.Via2_dts);
+            parColl.Add(Via2_dts);
+
+            OleDbParameter Via3_dts = new OleDbParameter("@Via3_dts", item.Via3_dts);
+            parColl.Add(Via3_dts);
+
+            OleDbParameter Pagamenti_dts = new OleDbParameter("@Pagamenti_dts", item.Pagamenti_dts);
+            parColl.Add(Pagamenti_dts);
+
+            OleDbParameter ricfatt_dts = new OleDbParameter("@ricfatt_dts", item.ricfatt_dts);
+            parColl.Add(ricfatt_dts);
+            OleDbParameter noteriservate_dts = new OleDbParameter("@noteriservate_dts", item.noteriservate_dts);
+            parColl.Add(noteriservate_dts);
+            OleDbParameter indirizzofatt_dts = new OleDbParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
+            parColl.Add(indirizzofatt_dts);
+
+            OleDbParameter niscrordine_dts = new OleDbParameter("@niscrordine_dts", item.niscrordine_dts);
+            parColl.Add(niscrordine_dts);
+            OleDbParameter locordine_dts = new OleDbParameter("@locordine_dts", item.locordine_dts);
+            parColl.Add(locordine_dts);
+            OleDbParameter annofrequenza_dts = new OleDbParameter("@annofrequenza_dts", item.annofrequenza_dts);
+            parColl.Add(annofrequenza_dts);
+            OleDbParameter nomeuniversita_dts = new OleDbParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
+            parColl.Add(nomeuniversita_dts);
+            OleDbParameter dettagliuniversita_dts = new OleDbParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
+            parColl.Add(dettagliuniversita_dts);
+            OleDbParameter Boolfields_dts = new OleDbParameter("@Boolfields_dts", item.Boolfields_dts);
+            parColl.Add(Boolfields_dts);
+            OleDbParameter Textfield1_dts = new OleDbParameter("@Textfield1_dts", item.Textfield1_dts);
+            parColl.Add(Textfield1_dts);
+            OleDbParameter Interventieseguiti_dts = new OleDbParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
+            parColl.Add(Interventieseguiti_dts);
+
+            OleDbParameter Id_dts = new OleDbParameter("@Id_dts", item.Id_dts_collegato);
+            parColl.Add(Id_dts);
+            string query = "UPDATE " + _tblarchiviodettaglio + " SET AccettazioneStatuto_dts=@AccettazioneStatuto_dts,Altrespecializzazioni_dts=@Altrespecializzazioni_dts,Annolaurea_dts=@Annolaurea_dts,Annospecializzazione_dts=@Annospecializzazione_dts,Bloccoaccesso_dts=@Bloccoaccesso_dts,Cap1_dts=@Cap1_dts,Cap2_dts=@Cap2_dts,Cap3_dts=@Cap3_dts,Certificazione_dts=@Certificazione_dts,CodiceCOMUNE1_dts=@CodiceCOMUNE1_dts,CodiceCOMUNE2_dts=@CodiceCOMUNE2_dts,CodiceCOMUNE3_dts=@CodiceCOMUNE3_dts,CodiceNAZIONE1_dts=@CodiceNAZIONE1_dts,CodiceNAZIONE2_dts=@CodiceNAZIONE2_dts,CodiceNAZIONE3_dts=@CodiceNAZIONE3_dts,CodicePROVINCIA1_dts=@CodicePROVINCIA1_dts,CodicePROVINCIA2_dts=@CodicePROVINCIA2_dts,CodicePROVINCIA3_dts=@CodicePROVINCIA3_dts,Datanascita_dts=@Datanascita_dts,CodiceREGIONE1_dts=@CodiceREGIONE1_dts,CodiceREGIONE2_dts=@CodiceREGIONE2_dts,CodiceREGIONE3_dts=@CodiceREGIONE3_dts,Cognome_dts=@Cognome_dts,Emailriservata_dts=@Emailriservata_dts,Latitudine1_dts=@Latitudine1_dts,Latitudine2_dts=@Latitudine2_dts,Latitudine3_dts=@Latitudine3_dts,Longitudine1_dts=@Longitudine1_dts,Longitudine2_dts=@Longitudine2_dts,Longitudine3_dts=@Longitudine3_dts,Nome_dts=@Nome_dts,Nomeposizione1_dts=@Nomeposizione1_dts,Nomeposizione2_dts=@Nomeposizione2_dts,Nomeposizione3_dts=@Nomeposizione3_dts,Pivacf_dts=@Pivacf_dts,Socioaltraassociazione_dts=@Socioaltraassociazione_dts,SocioIsaps_dts=@SocioIsaps_dts,Sociopresentatore1_dts=@Sociopresentatore1_dts,Sociopresentatore2_dts=@Sociopresentatore2_dts,SocioSicpre_dts=@SocioSicpre_dts,Telefono1_dts=@Telefono1_dts,Telefono2_dts=@Telefono2_dts,Telefono3_dts=@Telefono3_dts,Telefonoprivato_dts=@Telefonoprivato_dts,Trattamenticollegati_dts=@Trattamenticollegati_dts,Via1_dts=@Via1_dts,Via2_dts=@Via2_dts,Via3_dts=@Via3_dts,Pagamenti_dts=@Pagamenti_dts,ricfatt_dts=@ricfatt_dts,noteriservate_dts=@noteriservate_dts,indirizzofatt_dts=@indirizzofatt_dts, niscrordine_dts=@niscrordine_dts, locordine_dts=@locordine_dts,annofrequenza_dts=@annofrequenza_dts, nomeuniversita_dts=@nomeuniversita_dts,dettagliuniversita_dts=@dettagliuniversita_dts, Boolfields_dts=@Boolfields_dts, Textfield1_dts=@Textfield1_dts, Interventieseguiti_dts=@Interventieseguiti_dts WHERE [Id_dts]=@Id_dts ";
+
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, aggiornamento :" + error.Message, error);
+            }
+            return;
+
+        }
+        public void DeleteOfferta(string connessione,
+                 Offerte item)
+        {
+
+            try
+            {
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                if (connessione == null || connessione == "") return;
+                if (item == null || item.Id == 0) return;
+                OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+                parColl.Add(p1);
+                string query = "DELETE FROM " + _tblarchivio + " WHERE ([ID]=@id)";
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+
+                if (item.Id_dts_collegato != 0)
+                {
+                    List<OleDbParameter> parCollsub = new List<OleDbParameter>();
+                    OleDbParameter pidsub = new OleDbParameter("@id_dts", item.Id_dts_collegato);//OleDbType.VarChar
+                    parCollsub.Add(pidsub);
+                    query = "DELETE FROM " + _tblarchiviodettaglio + " WHERE ([ID_DTS]=@id_dts)";
+                    dbDataAccess.ExecuteStoredProcListOle(query, parCollsub, connessione);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione  :" + error.Message, error);
+            }
+            return;
+        }
+
+
+        public string AggiornaCaratteristicaDaFile(string connessione, string tablename, string inputfile)
+        {
+            string ret = "";
+            string line = "";
+            System.IO.FileStream fs = new System.IO.FileStream(inputfile, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            fs.Close();
+            fs.Dispose();
+            // Read the file and display it line by line.
+            using (System.IO.StreamReader file =
+                new System.IO.StreamReader(inputfile))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    string lineread = line;
+                }
+                file.Close();
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Inserisce o aggiorna i dati nel db per le caratteristiche delle offerte
+        /// Aggiorna se passato id diverso da zero altrimenti inserisce
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void InserisciAggiornaCaratteristica(string connessione, Tabrif item, string tablename)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+            OleDbParameter p1 = new OleDbParameter("@Descrizione", item.Campo1);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbParameter p21 = new OleDbParameter("@CodiceTipo", item.Codice);
+            parColl.Add(p21);
+            OleDbParameter p8 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            parColl.Add(p8);
+
+            OleDbParameter pclink = new OleDbParameter("@relatedCodiceTipo", item.Campo2);//OleDbType.VarChar
+            parColl.Add(pclink);
+
+            OleDbParameter ps1 = new OleDbParameter("@Spare1", item.Campo3);//OleDbType.VarChar
+            parColl.Add(ps1);
+            OleDbParameter ps2 = new OleDbParameter("@Spare2", item.Campo4);//OleDbType.VarChar
+            parColl.Add(ps2);
+            OleDbParameter ps3 = new OleDbParameter("@Spare3", item.Campo5);//OleDbType.VarChar
+            parColl.Add(ps3);
+            OleDbParameter ps4 = new OleDbParameter("@Spare4", item.Campo6);//OleDbType.VarChar
+            parColl.Add(ps4);
+            OleDbParameter ps5 = new OleDbParameter("@Spare5", item.Campo7);//OleDbType.VarChar
+            parColl.Add(ps5);
+
+            string query = "";
+            if (item.Id != "")
+            {
+                //UPdate
+                query = "UPDATE " + tablename + " SET Descrizione=@Descrizione,CodiceTipo=@CodiceTipo,Lingua=@Lingua,RelatedCodiceTipo = @RelatedCodiceTipo ";
+                query += ",Spare1=@Spare1,Spare2=@Spare2,Spare3=@Spare3,Spare4=@Spare4,Spare5=@Spare5 ";
+                query += " WHERE [Id] = " + item.Id;
+            }
+            else
+            {
+                //Insert
+                query = "INSERT INTO  " + tablename + " (Descrizione,CodiceTipo,Lingua,RelatedCodiceTipo,Spare1,Spare2,Spare3,Spare4,Spare5)";
+                query += " values ( ";
+                query += "@Descrizione,@CodiceTipo,@Lingua,@RelatedCodiceTipo,@Spare1,@Spare2,@Spare3,@Spare4,@Spare5 )";
+            }
+
+            try
+            {
+                int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                if (item.Id == "") item.Id = retID.ToString(); // se era insert memorizzo l'id del cliente appena inserito
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento/aggiornamento caratteristiche offerta :" + error.Message, error);
+            }
+            return;
+        }
+
+
+        //Cancella una caratteristica controllando se utilizzata o meno
+        public string DeleteCaratteristica(string connessione, Tabrif item, string tablename)
+        {
+            string ret = "";
+            string testocaratteristica = tablename.Replace("dbo_TBLRIF_", "");
+            List<string> idused = CaricaListaIdCaratteristiche(connessione, "", testocaratteristica);
+            if (item == null || item.Codice == "") return "";
+
+            if (idused.Exists(i => i == item.Codice)) return "Codice utilizzato, rimovere i riferimenti prima della cancellazione.";
+
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            OleDbParameter pcod = new OleDbParameter("@Codice", item.Codice);//OleDbType.VarChar
+            parColl.Add(pcod);
+            string query = "DELETE FROM " + tablename + " WHERE Codice=@Codice";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione caratteristica  :" + error.Message, error);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Carica la lista delle caratteristiche distinte presenti in base ai valori dei record presenti nella tabella articoli
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public List<string> CaricaListaIdCaratteristiche(string connection, string codiceTipologia = "", string Campocaratteristica = "Caratteristica1")
+        {
+            List<string> list = new List<string>();
+            if (connection == null || connection == "") return list;
+            List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+            try
+            {
+                string query = "SELECT DISTINCT " + Campocaratteristica + " FROM " + Tblarchivio;
+
+                //if (!string.IsNullOrEmpty(codiceTipologia))
+                //{
+                //    OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", codiceTipologia);
+                //    _parUsed.Add(ptip);
+                //    if (!query.ToLower().Contains("where"))
+                //        query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                //    else
+                //        query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+                //}
+                query += " order BY " + Campocaratteristica;
+
+                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        // item = new Offerte();
+                        string caratteristica = "";
+                        if (!reader[Campocaratteristica].Equals(DBNull.Value))
+                            caratteristica = reader.GetInt32(reader.GetOrdinal(Campocaratteristica)).ToString();
+                        if (!list.Exists(c => c.ToString().ToLower() == caratteristica.ToLower()))
+                        {
+                            list.Add(caratteristica);
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Lettura tabella articoli :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        #region GESTIONE CATEGORIE E SOTTOCATEGORIE
+
+
+        /// <summary>
+        /// Carica e restituisce dalla tbl riperimento prodotto l'ultimo creato ( è il codice categoria )
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codiceprodotto"></param>
+        /// <returns></returns>
+        public Prodotto CaricaUltimoProdotto(string connection)
+        {
+            if (connection == null || connection == "") return null;
+            Prodotto item = new Prodotto();
+
+            try
+            {
+                string query = "SELECT TOP 1 * FROM dbo_TBLRIF_PRODOTTO order BY CodiceProdotto Desc";
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+
+                        item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        item.Descrizione = reader.GetString(reader.GetOrdinal("Descrizione"));
+                        item.Lingua = reader.GetString(reader.GetOrdinal("Lingua"));
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento Prodotti :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+        /// <summary>
+        /// Funzione che prende l'ultimo codice presente nel database e ne crea uno aggiuntivo per i prodotti
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codicetipologia"></param>
+        /// <returns></returns>
+        public string CreareCodiceAggiornatoProdotto(string connection)
+        {
+            //Carico l'ultimo prodotto inserito
+            Prodotto Prodotto = CaricaUltimoProdotto(connection);
+            string codice = "";
+            if (Prodotto != null)
+            {
+                codice = Prodotto.CodiceProdotto;
+            }
+
+
+            //Hol'ultimo e ne creo uno nuovo
+            if (!string.IsNullOrEmpty(codice))
+            {
+
+                //Funzione che calcola il codice nuovo del sotto prodotto
+                string tmp_cod = codice.Substring(4);
+                int int_cod = 0;
+                int.TryParse(tmp_cod, out int_cod);
+                int_cod = int_cod + 1;
+
+                codice = "prod" + string.Format("{0:000000}", int_cod);
+            }
+            else
+            {
+                codice = "prod000001";
+            }
+
+            return codice;
+        }
+        /// <summary>
+        /// Funzione che prende l'ultimo codice presente nel database e ne crea uno aggiuntivo per le categorie 2 liv
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codicetipologia"></param>
+        /// <returns></returns>
+        public string CreareCodiceAggiornatoSottoprodotto(string connection)
+        {
+            //Carico l'ultimo prodotto inserito
+            SProdotto SottoProdotto = CaricaUltimoSottoProdotto(connection);
+            string codice = "";
+            if (SottoProdotto != null) { codice = SottoProdotto.CodiceSProdotto; }
+
+
+            //Hol'ultimo e ne creo uno nuovo
+            if (!string.IsNullOrEmpty(codice))
+            {
+
+                //Funzione che calcola il codice nuovo del sotto prodotto
+                string tmp_cod = codice.Substring(5);
+                int int_cod = 0;
+                int.TryParse(tmp_cod, out int_cod);
+                int_cod = int_cod + 1;
+
+                codice = "sprod" + string.Format("{0:000000}", int_cod);
+            }
+            else
+            {
+                codice = "sprod000001";
+            }
+
+            return codice;
+        }
+        /// <summary>
+        /// torna l'ultimo sottoprodotto ( cat 2 livello ) dalla tabella di riferimento
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codiceprodotto"></param>
+        /// <returns></returns>
+        public SProdotto CaricaUltimoSottoProdotto(string connection)
+        {
+            if (connection == null || connection == "") return null;
+            SProdotto item = new SProdotto();
+
+            try
+            {
+                string query = "SELECT TOP 1 * FROM dbo_TBLRIF_SOTTOPRODOTTO order BY CodiceSottoProdotto Desc";
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        if (!reader["CodiceSottoProdotto"].Equals(DBNull.Value))
+                            item.CodiceSProdotto = reader.GetString(reader.GetOrdinal("CodiceSottoProdotto"));
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        item.Descrizione = reader.GetString(reader.GetOrdinal("Descrizione"));
+                        item.Lingua = reader.GetString(reader.GetOrdinal("Lingua"));
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento SottoProdotti :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+        /// <summary>
+        /// Aggiorna un record in tabella riferimento categorie 1 liv ( prodotto )
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void UpdateProdotto(string connessione,
+            Prodotto item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            if (item.Lingua == "I")
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p2);
+                OleDbParameter p3 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p4);
+
+
+                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTipologia , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua ";
+
+
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento categoria prodotto in Italiano :" + error.Message, error);
+                }
+            }
+            else
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p2);
+                OleDbParameter p3 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p4);
+
+
+                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTipologia , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua";
+
+
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento categoria prodotto in Inglese :" + error.Message, error);
+                }
+            }
+            return;
+        }
+
+        /// <summary>
+        /// Inserisce un record in tabella riferimento categorie 1 liv
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void InsertProdotto(string connessione, Prodotto item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            if (item.Lingua == "I")
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p4);
+                string nuovocodiceprodotto = CreareCodiceAggiornatoProdotto(connessione);
+                OleDbParameter p2 = new OleDbParameter("@CodiceProdotto", nuovocodiceprodotto);
+                parColl.Add(p2);
+                item.CodiceProdotto = nuovocodiceprodotto;
+            }
+            else
+            {
+                //se il prodotto non è in italiano, siamo al secodno inserimento quindi nell'altra lingua e gli devo assegnare lo stesso codice prodotto
+                Prodotto tmp_item = CaricaUltimoProdotto(connessione);
+                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p4);
+                OleDbParameter p2 = new OleDbParameter("@CodiceProdotto", tmp_item.CodiceProdotto);
+                parColl.Add(p2);
+            }
+
+
+            string query = "INSERT INTO dbo_TBLRIF_PRODOTTO ([CodiceTipologia],[Lingua],[Descrizione],[CodiceProdotto]) VALUES (@CodiceTIPOLOGIA,@Lingua,@Descrizione,@CodiceProdotto)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento categoria Prodotto :" + error.Message, error);
+            }
+
+            return;
+        }
+
+        /// <summary>
+        /// Cancella dalla tabella di riferimento prodotti col codice indicato e anche dalla tabella sottoprodotti
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void DeleteProdotto(string connessione,
+          Prodotto item, bool controllapresenza = true)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "" || string.IsNullOrEmpty(item.CodiceProdotto)) return;
+
+            if (controllapresenza)
+            {
+                //Verifichiamo che nella categoria prodotti non siano presenti prodotti in quella categoria/sottocategoria
+                OleDbParameter pprov = new OleDbParameter("@CodicePROVINCIA", "%");
+                parColl.Add(pprov);
+                OleDbParameter pcom = new OleDbParameter("@CodiceCOMUNE", "%");
+                parColl.Add(pcom);
+                OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", "%");
+                parColl.Add(ptip);
+                OleDbParameter preg = new OleDbParameter("@CodiceREGIONE", "%");
+                parColl.Add(preg);
+                OleDbParameter prmin = new OleDbParameter("@PrezzoMin", "0");
+                parColl.Add(prmin);
+                OleDbParameter prmax = new OleDbParameter("@PrezzoMax", double.MaxValue);
+                parColl.Add(prmax);
+                OleDbParameter pcat = new OleDbParameter("@CodiceCategoria", item.CodiceProdotto);
+                parColl.Add(pcat);
+                OleDbParameter pcat2 = new OleDbParameter("@CodiceCategoria2Liv", "%");
+                parColl.Add(pcat2);
+                OfferteCollection offerte = this.CaricaOfferteFiltrate(connessione, parColl);
+                if (offerte != null && offerte.Count > 0)
+                {
+                    throw new ApplicationException("Errore, cancellazione Prodotto  : Presenti prodotti con la categoria selezionata, rimuovere prima della cancellazione", null);
+                }
+            }
+
+            //Qui devi cancellare dalle tabelle prodotto e dalla tabella sottoprodotti ...
+            parColl = new List<OleDbParameter>();
+            OleDbParameter p1prod = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl.Add(p1prod);
+            string query = "DELETE FROM dbo_TBLRIF_PRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione SottoProdotto  :" + error.Message, error);
+            }
+
+            parColl = new List<OleDbParameter>();
+            OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl.Add(p1);
+            query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione SottoProdotto  :" + error.Message, error);
+            }
+
+
+            return;
+        }
+
+
+        /// <summary>
+        /// Inserisce un record in tabella Categorie 2 livello ( sottoprodotti )
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void InsertSottoProdotto(string connessione, SProdotto item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            if (item.Lingua == "I")
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p4);
+                string nuovocodicesottoprodotto = CreareCodiceAggiornatoSottoprodotto(connessione);
+                OleDbParameter p2 = new OleDbParameter("@CodiceSottoprodotto", CreareCodiceAggiornatoSottoprodotto(connessione));
+                parColl.Add(p2);
+                item.CodiceSProdotto = nuovocodicesottoprodotto;
+            }
+            else
+            {
+                //se il prodotto non è in italiano, siamo al secodno inserimento quindi nell'altra lingua e gli devo assegnare lo stesso codice prodotto
+                SProdotto tmp_item = CaricaUltimoSottoProdotto(connessione);
+                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p4);
+                OleDbParameter p2 = new OleDbParameter("@CodiceSottoprodotto", tmp_item.CodiceSProdotto);
+                parColl.Add(p2);
+            }
+
+
+            string query = "INSERT INTO dbo_TBLRIF_SOTTOPRODOTTO ([CodiceProdotto],[Lingua],[Descrizione],[CodiceSottoprodotto]) VALUES (@CodiceProdotto,@Lingua,@Descrizione,@CodiceSottoprodotto)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento SottoProdotto :" + error.Message, error);
+            }
+
+            return;
+        }
+
+        /// <summary>
+        /// Cancella un record in tabella di riferimento dei Sottoprodotti ( categoria 2liv )
+        /// controllando che non ci siano prodotti in tale sottocategoria nella TBL_ATTIVITA
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void DeleteSottoProdotto(string connessione,
+            SProdotto item, bool controllapresenza = true)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "" || string.IsNullOrEmpty(item.CodiceProdotto) || string.IsNullOrEmpty(item.CodiceSProdotto)) return;
+
+
+            if (controllapresenza)
+            {
+                //Verifichiamo che nella categoria sottoprodotti non siano presenti prodotti in quella categoria/sottocategoria
+                OleDbParameter pprov = new OleDbParameter("@CodicePROVINCIA", "%");
+                parColl.Add(pprov);
+                OleDbParameter pcom = new OleDbParameter("@CodiceCOMUNE", "%");
+                parColl.Add(pcom);
+                OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", "%");
+                parColl.Add(ptip);
+                OleDbParameter preg = new OleDbParameter("@CodiceREGIONE", "%");
+                parColl.Add(preg);
+                OleDbParameter prmin = new OleDbParameter("@PrezzoMin", "0");
+                parColl.Add(prmin);
+                OleDbParameter prmax = new OleDbParameter("@PrezzoMax", double.MaxValue);
+                parColl.Add(prmax);
+                OleDbParameter pcat = new OleDbParameter("@CodiceCategoria", item.CodiceProdotto);
+                parColl.Add(pcat);
+                OleDbParameter pcat2 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceSProdotto);
+                parColl.Add(pcat2);
+                OfferteCollection offerte = this.CaricaOfferteFiltrate(connessione, parColl);
+                if (offerte != null && offerte.Count > 0)
+                {
+                    throw new ApplicationException("Errore, cancellazione SottoProdotto  : Presenti prodotti con la sottocategoria selezionata, rimuovere prima della cancellazione", null);
+                }
+            }
+
+            parColl = new List<OleDbParameter>();
+            OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+            parColl.Add(p3);
+            string query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto AND CodiceSottoprodotto=@CodiceSottoprodotto  ";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione SottoProdotto  :" + error.Message, error);
+            }
+
+
+            return;
+        }
+
+
+        /// <summary>
+        /// Aggiorna un record in tabella Sottoprodotto
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void UpdateSottoProdotto(string connessione,
+            SProdotto item)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+
+            if (item.Lingua == "I")
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p2);
+                OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p4);
+
+
+                string query = "UPDATE dbo_TBLRIF_SOTTOPRODOTTO SET [CodiceProdotto]=@CodiceProdotto , [Descrizione]=@Descrizione WHERE CodiceSottoprodotto=@CodiceSottoprodotto AND Lingua= @Lingua ";
+
+
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento SottoProdotto in Italiano :" + error.Message, error);
+                }
+            }
+            else
+            {
+                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                parColl.Add(p1);
+                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                parColl.Add(p2);
+                OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+                parColl.Add(p3);
+                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                parColl.Add(p4);
+
+
+                string query = "UPDATE dbo_TBLRIF_SOTTOPRODOTTO SET [CodiceProdotto]=@CodiceProdotto , [Descrizione]=@Descrizione WHERE CodiceSottoprodotto=@CodiceSottoprodotto AND Lingua= @Lingua";
+
+
+                try
+                {
+                    dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                }
+                catch (Exception error)
+                {
+                    throw new ApplicationException("Errore, aggiornamento categoria 2liv SottoProdotto in Inglese :" + error.Message, error);
+                }
+            }
+            return;
+        }
+
+        #endregion
+
+        #region CREAZIONE FEED
+
+        /// <summary>
+        /// Wrapper per lingua italiana per la creazione del feed in italiano
+        /// </summary>
+        public void CreaRssFeed_I()
+        {
+            CreaRssFeed("I");
+        }
+        public void CreaRssFeedPerCategoria_I()
+        {
+            foreach (TipologiaOfferte item in Utility.TipologieOfferte)
+            {
+                CreaRssFeed("I", item.Codice);
+            }
+        }
+        /// <summary>
+        /// Wrapper per lingua inglese per la creazione del feed in inglese
+        /// </summary>
+        public void CreaRssFeed_GB()
+        {
+            CreaRssFeed("GB");
+        }
+        public void CreaRssFeedPerCategoria_GB()
+        {
+            foreach (TipologiaOfferte item in Utility.TipologieOfferte)
+            {
+                CreaRssFeed("GB", item.Codice);
+            }
+        }
+        /// <summary>
+        /// Wrapper per lingua inglese per la creazione del feed in inglese
+        /// </summary>
+        public void CreaRssFeed_RU()
+        {
+            CreaRssFeed("RU");
+        }
+        public void CreaRssFeedPerCategoria_RU()
+        {
+            foreach (TipologiaOfferte item in Utility.TipologieOfferte)
+            {
+                CreaRssFeed("RU", item.Codice);
+            }
+        }
+
+        /// <summary>
+        /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )
+        /// </summary>
+        public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "Albergo Ristorante Il Pozzetto", string descrizione = "Ristorante e Bed and Breakfast tradizionale in Umbria")
+        {
+            //string Lingua = "I";
+            string Lingua = Lng;
+
+
+            string titolofeed = titolo;
+            TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == FiltroTipologia); });
+            if (item != null)
+                titolofeed += " " + item.Descrizione;
+            string descrizionefeed = descrizione;
+            string logfilename = "LogRss.txt";
+            //string stringabase = "articoli/";
+            System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+
+            string PathFileXml = WelcomeLibrary.STATIC.Global.percorsoFisicoComune; //Percorsi fisico comune per l'appoggio dell'xml per il feed
+
+            //string NomeAgenzia = ConfigurationManager.AppSettings["NomeAgenzia"].ToString();
+            Messaggi.Add("Messaggio", "");
+            Messaggi["Messaggio"] = "Creazione rss feed xml " + System.DateTime.Now.ToString() + " \r\n";
+
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+
+            List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
+            parColl = new List<System.Data.OleDb.OleDbParameter>();
+            offerteDM offDM = new offerteDM();
+            WelcomeLibrary.DOM.OfferteCollection lista = new WelcomeLibrary.DOM.OfferteCollection();
+
+            //Carichiamo la lista contenuto presenti 
+            try
+            {
+                //Carichiamo in memoria tutti le ultime 1000 news ( eventualmente x tipologia )
+                if (!string.IsNullOrEmpty(FiltroTipologia))
+                {
+                    OleDbParameter filtrotipologia = new OleDbParameter("@CodiceTIPOLOGIA", FiltroTipologia);
+                    parColl.Add(filtrotipologia);
+                }
+                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua);
+            }
+            catch (Exception error)
+            {
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore caricamento news per feed rss: " + error.Message + " \r\n";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+            }
+            //PREPARIAMO IL FILE XML DA FORNIRE AL PORTALE
+            try
+            {
+                //-------------------------------------------------------------------------------------------------------------
+                //QUI creo L'XML PER IL PROGRAMMA DI VISUALIZZAZIONE
+                //System.IO.FileStream str = new System.IO.FileStream(Server.MapPath(basevetrinadir + immobile.Codice + ".xml"), System.IO.FileMode.Create);
+                System.IO.FileStream str = new System.IO.FileStream(PathFileXml + "\\RSSfeed" + FiltroTipologia + Lng + ".xml", System.IO.FileMode.Create);
+                using (str)
+                {
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(str, System.Text.Encoding.Default);
+                    writer.Formatting = Formatting.Indented;
+                    // aggiungo l'intestazione XML 
+                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    // apro la root rss  
+
+                    //writer.WriteStartElement("rss xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\" version=\"2.0\"");
+                    writer.WriteStartElement("rss");
+                    writer.WriteAttributeString("xmlns:sy", "http://purl.org/rss/1.0/modules/syndication/");
+                    writer.WriteAttributeString("version", "2.0");
+
+                    writer.WriteStartElement("channel");
+                    //Intestazione del feed
+                    writer.WriteElementString("title", titolofeed);
+                    writer.WriteElementString("link", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                    writer.WriteElementString("description", descrizionefeed);
+                    //writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyyy-MM-ddTHH:mm:ss+01:00"));
+                    writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "ddd, dd MMM yyyy HH:mm:ss 'GMT'"));
+                    writer.WriteElementString("sy:updatePeriod", "daily");
+                    writer.WriteElementString("sy:updateFrequency", "1");
+                    writer.WriteElementString("sy:updateBase", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyy-MM-ddTHH:mmzzz"));
+                    //writer.WriteElementString("language", "en-EN");
+                    writer.WriteElementString("language", "it-IT");
+                    //Creaiamo il feed degli immobili
+                    foreach (Offerte _new in lista)
+                    {
+                        if (_new == null || string.IsNullOrEmpty(_new.Id.ToString())) continue;
+                        writer.WriteStartElement("item");
+
+                        string testoperindice = _new.DenominazionebyLingua(Lingua);
+
+                        //TITOLO SCHEDA
+                        writer.WriteElementString("title", testoperindice.Replace("-", " ") + " Cod: " + _new.Id.ToString());
+
+                        //LINK A SCHEDA
+                        string UrlCompleto = "";
+                        //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testoperindice + ".aspx";
+                        UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testoperindice, _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, true);
+
+                        writer.WriteElementString("link", UrlCompleto);
+
+                        writer.WriteStartElement("guid");
+                        writer.WriteAttributeString("isPermaLink", "true");
+                        writer.WriteValue(UrlCompleto);
+                        writer.WriteEndElement();
+
+                        //<pubDate>
+                        writer.WriteStartElement("pubDate");
+                        writer.WriteValue(System.Xml.XmlConvert.ToString(_new.DataInserimento, "ddd, dd MMM yyyy HH:mm:ss zzz"));
+                        writer.WriteEndElement();
+
+                        //Categoria
+                        //<category>
+                        item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == _new.CodiceTipologia); });
+                        if (item != null)
+                        {
+                            writer.WriteStartElement("category");
+                            writer.WriteValue(item.Descrizione);
+                            writer.WriteEndElement();
+                        }
+
+                        //DESCRIZIONE
+                        string linkimmagine = ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                        StringBuilder sb = new StringBuilder();
+                        if (_new.FotoCollection_M != null)
+                            sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testoperindice + "\" width=\"350\" />");
+                        string descrizionenotizia = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 400)));
+
+                        sb.Append("<p>" + descrizionenotizia + "</p>");
+                        sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testoperindice + "</em></a>.</p>");
+                        writer.WriteStartElement("description");
+                        writer.WriteCData(sb.ToString());
+                        //writer.WriteRaw("<![CDATA[Questo è un test con caratteri <>]]>");
+                        writer.WriteEndElement();
+
+                        //TAG ITEM
+                        writer.WriteEndElement();
+                    }
+
+                    //Chiudo tag channel
+                    writer.WriteEndElement();
+                    // chiudo tag rss 
+                    writer.WriteEndElement();
+                    // scrivo a video e chiudo lo stream 
+                    writer.Flush();
+                    writer.Close();
+                    str.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file rss xml : " + error.Message + " \r\n";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+            }
+            Messaggi["Messaggio"] = "Fine Creazione feed xml rss " + System.DateTime.Now.ToString() + " \r\n";
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+
+        }
+
+        public static string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false)
+        {
+            string ritorno = "";
+            string physpath = "";
+            if (NomeAnteprima != null)
+                if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
+                {
+                    if (CodiceTipologia != "" && idOfferta != "")
+                        if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
+                        {
+                            ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
+                            physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
+                            //Così ritorno l'immagine non di anteprima ma quella pieno formato
+                            if (NomeAnteprima.ToString().StartsWith("Ant"))
+                                ritorno += "/" + NomeAnteprima.ToString().Remove(0, 3);
+                            else
+                                ritorno += "/" + NomeAnteprima.ToString();
+                            //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
+                            //string anteprimaimmagine = CommonPage.ScalaImmagine(ritorno, null, physpath);
+                            //if (anteprimaimmagine != "" && !noanteprima) ritorno = anteprimaimmagine;
+                            //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
+                        }
+                        else
+                            ritorno = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
+                }
+                else
+                    ritorno = NomeAnteprima.ToString();
+
+            return ritorno;
+        }
+
+        /// <summary>
+        /// Rimpiazza link:(www.sitodavadere.it) con un link html
+        /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
+        /// <param name="strIn"></param>
+        /// <returns></returns>
+        public static String ReplaceLinks(string strIn)
+        {
+            string ret = strIn;
+            int a = strIn.ToLower().IndexOf("link:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = dati[0];
+                        testourl = dati[1];
+                    }
+                    strIn = strIn.Replace(origtext, "<a style=\"font-weight:bold\" href=\"http://" + url + "\" target=\"_blank\">" + testourl + "</a>");
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il link:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("link:(");
+            }
+            ret = strIn;
+            return ret;
+
+        }
+
+        #endregion
+    }
+}

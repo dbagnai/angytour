@@ -1,0 +1,504 @@
+﻿/* RESET CSS >> not necessary. This CSS allows to reset the browser CSS values
+----------------------------------------------------------------------------------------------------*/
+ 
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+:focus {
+	outline: 0;
+}
+
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+ 
+/* RESET CSS >> end
+----------------------------------------------------------------------------------------------------*/
+
+
+/*clearfix*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+/*clearfix*/
+
+
+/* Simplebooking >>
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container {
+	width: 750px;
+	font-size: 11px;
+	font-family:Arial, Helvetica, sans-serif;
+	position:relative;
+	height:75px;
+}
+
+#simplebooking-container a img {
+	border:none;
+} 
+
+#simplebooking-container form {
+	float:left;
+}
+
+#simplebooking-container a {
+	color: #000;
+	text-decoration:none;
+}
+
+#simplebooking-container input, 
+#simplebooking-container select {
+	border: #666 solid 1px;
+	color: #101923;
+	padding: 1% 1% 1% 0;
+	margin: 0 0.5% 0 0;
+	font-size: 0.9em;
+	background:#fff;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	-ms-border-radius: 4px;
+}
+
+#simplebooking-container select > option {
+	padding: 0;
+	margin:0;
+	-moz-padding-start: 0;
+	-webkit-padding-start: 0px;
+	-moz-padding-end: 0;
+	-webkit-padding-end: 0px;
+}
+
+#simplebooking-container input {
+	width: 80%;
+	padding: 2% 1%;
+}
+
+#Calendario0,
+#Calendario1 {
+    position: relative;
+    top: 4px;
+}
+
+#Calendario0, 
+#Calendario1 {
+  width: 16px;
+  height: 16px;
+}
+
+.mono #Calendario0, 
+.mono #Calendario1 {
+  position: absolute;
+  top: auto; 
+  left: 80%;
+  bottom: 4px;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+}
+
+#simplebooking-container input:focus, 
+#simplebooking-container select:focus {
+	box-shadow: 0 0 5px #E2E2E2;
+	-moz-box-shadow: 0 0 5px #E2E2E2;
+	-webkit-box-shadow: 0 0 5px #E2E2E2;
+	-o-box-shadow: 0 0 5px #E2E2E2;
+	-ms-box-shadow: 0 0 5px #E2E2E2;
+}
+
+#simplebooking-container label {
+	display: block;
+	padding: 0 0 3px;
+}
+
+
+#simplebooking-container .arrival-departure select {
+	width:26.5%;
+}
+
+#simplebooking-container select > option {
+	border: none;
+	padding: 0;
+	margin:0;
+}
+
+
+#simplebooking-container .arrival-departure select.year {
+	width:31.5%;
+}
+
+#simplebooking-container .col-1 select {
+	width: 96%;
+	padding: 4% 1% 4% 3%;
+	text-align:left;
+}
+
+
+#simplebooking-container .button-search input {
+	margin: 8px 0 0 0;
+	text-align: center;
+	padding: 6px 1%;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 0 #000;
+	width:100%;
+	color:#fff;
+	margin: 0 auto;
+	display:block;
+	cursor:pointer;
+	background: #40720E; /* old browsers */
+	background: -moz-linear-gradient(top, #40720E  0%, #5CAF36 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #40720E ), color-stop(100%, #5CAF36 )); /* webkit */
+	background: -ms-gradient(linear, left top, left bottom, color-stop(0%, #40720E ), color-stop(100%, #5CAF36 )); /* ie9 */
+ -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40720E', endColorstr='#5CAF36', GradientType=0 ); /* ie7,ie6 */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40720E', endColorstr='#5CAF36', GradientType=0 ); /* ie8 */
+}
+
+#simplebooking-container .button-search input:hover {
+	background: #2E5903; /* old browsers */
+	background: -moz-linear-gradient(top, #2E5903 0%, #5A9122 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2E5903), color-stop(100%, #40720E)); /* webkit */
+	background: -ms-gradient(linear, left top, left bottom, color-stop(0%, #2E5903), color-stop(100%, #40720E)); /* ie9 */
+	 -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2E5903', endColorstr='#40720E', GradientType=0 ); /* ie7,ie6 */
+}
+
+*:first-child + html #simplebooking-container .sb-search-form .button-search input:hover,
+* html #simplebooking-container .sb-search-form .button-search input:hover  {
+	 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2E5903', endColorstr='#40720E', GradientType=0 ); /* ie8 */
+}
+
+#simplebooking-container a {
+	text-decoration:underline;
+}
+
+#simplebooking-container a:hover,
+#simplebooking-container .sb a {
+	text-decoration: none;
+}
+
+#simplebooking-container a img {
+	border: none;
+	text-decoration:none;
+}
+
+#simplebooking-container .booking-form-container {
+	padding: 0.5% 1%;
+	border: solid 1px #cccccc;
+	border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-o-border-radius: 4px 4px 0 0;
+	-ms-border-radius: 4px 4px 0 0;
+	background:#f5f5f5;
+	margin:0;
+	width:98%;
+	float:left;
+	position:relative;
+}
+
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container .col-1,
+#simplebooking-container .col-2,
+#simplebooking-container .col-3,
+#simplebooking-container .col-4,
+#simplebooking-container .col-5,
+#simplebooking-container .col-6,
+#simplebooking-container .col-7,
+#simplebooking-container .col-14 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+#simplebooking-container .first {
+	margin-left: 0;
+}
+
+#simplebooking-container .last {
+	margin-right: 0;
+}
+
+
+
+/* Grid >> 14 Columns
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container .col-1 {
+	width:6.142%;
+}
+
+#simplebooking-container .col-2 {
+	width:13.286%;
+}
+
+#simplebooking-container .col-3 {
+	width:20.426%;
+}
+
+#simplebooking-container .col-3 .col-1 {
+    margin: 0 1% 4% 0;
+    width: 32.33%;
+	display:block;
+}
+
+#simplebooking-container .col-3 .col-3,
+#simplebooking-container .col-1 .col-1 {
+	width:100%;
+	margin:0;
+	padding: 0 0 0.5%;
+}
+
+#simplebooking-container .col-4 {
+	width:27.568%;
+}
+
+#simplebooking-container .col-5 {
+	 width:34.71%; 
+}
+
+#simplebooking-container .col-6 {
+	width:41.852%;
+}
+
+#simplebooking-container .col-7 {
+	width:48.994%;
+}
+
+#simplebooking-container .col-14 {
+	width:99%;
+}
+
+#simplebooking-container .button-search {
+	margin-top:5px;
+}
+
+#simplebooking-container  #label-promocode   {
+	float:left;
+	margin-right: 8px;
+}
+
+#simplebooking-container  #code   {
+	float:left;
+	width: 75px;
+}
+
+
+/* INFO
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container .info {
+	overflow:hidden;
+	line-height: 25px;
+	height: 25px;
+	text-align:center;
+	background: #E2E2E2;
+	border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+	-o-border-radius: 0 0 4px 4px;
+	-ms-border-radius: 0 0 4px 4px;
+	float:left;
+	width:98%;
+	padding: 4px 1%;
+	text-align:left;
+	border: solid 1px #cccccc;
+	border-top:0;
+}
+
+*:first-child + html #simplebooking-container .info,
+*:first-child + html #simplebooking-container .info,
+* html #simplebooking-container .info,
+* html #simplebooking-container .info  {
+	line-height:20px;
+	height: 25px;
+}
+
+#simplebooking-container  .info .sb {
+	text-align:center;
+	float:right;
+}
+
+
+#simplebooking-container .kids-container .sb a {
+    display: block;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    text-decoration: none;
+}
+
+#simplebooking-container .sb #label-info-ssl {
+    float: left;
+}
+
+
+#simplebooking-container .ssl a {
+	display:block;
+	float:left;
+}
+
+#simplebooking-container .simplebooking-link {
+	width: 33.333%;
+}
+
+#simplebooking-container .simplebooking-link a {
+	text-decoration:none;
+}
+
+
+#simplebooking-container .arrival-departure {
+	white-space:nowrap;
+}
+
+/*specifics layouts kidsage-hor >> 
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container  .kids-container {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index: 10000;
+}
+
+#simplebooking-container  .kids-container .col-14,
+#simplebooking-container #kidsage-hor  .col-3 .col-3, 
+#simplebooking-container #kidsage-hor  .col-1 .col-1 {
+	width:100%;
+	margin: 0;
+}
+
+
+#simplebooking-container #kidsage-hor .col-4 {
+	width:23.571%;
+}
+
+#simplebooking-container #kidsage-hor .col-3 {
+	width:19.429%;
+}
+
+
+#simplebooking-container .col-3 .occupazione-camera {
+	padding: 1% 1% 4%;
+    border-top: 1px solid #CCCCCC;
+	margin-top: 4%;
+}
+
+*:first-child + html #simplebooking-container .col-3 .occupazione-camera,
+* html #simplebooking-container .col-3 .occupazione-camera  {
+	padding: 2% 1% 4%;
+	margin-top: 7%;
+}
+
+#simplebooking-container .age {
+	padding:5% 0 0;
+	clear:right;
+}
+
+#simplebooking-container .col-3 .rooms-adults-kids {
+	clear:both;
+}
+
+
+
+
+
+/* specifics layouts standard-hor >> 
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container #standard-hor .arrival-departure {
+	width: 25.571%; /*2% +*/
+}
+
+#simplebooking-container #standard-hor .persons-rooms {
+	width: 8.143%; /*3% +*/
+}
+
+#simplebooking-container #standard-hor .persons-rooms select {
+	width: 80%;
+}
+
+#simplebooking-container #standard-hor .button-search {
+	width: 27.714%; /*- 6%*/ 
+}
+
+
+
+
+
+/* specifics layouts promo-nights-hor >> 
+----------------------------------------------------------------------------------------------------*/
+#simplebooking-container #promo-nights-hor .nights-persons-rooms {
+	width: 26.568%;
+}
+
+*:first-child + html #simplebooking-container #promo-nights-hor .nights-persons-rooms,
+* html #simplebooking-container #promo-nights-hor .nights-persons-rooms  {
+	width: 25.568%;
+}
+
+#simplebooking-container  #promo-nights-hor .nights-persons-rooms select {
+	width: 85%;
+}
+
+#simplebooking-container #promo-nights-hor .col-4 .col-1 {
+    margin: 0 1.5%;
+    width: 30.33%;
+	display:block;
+}
+
+*:first-child + html #simplebooking-container #promo-nights-hor .col-4 .col-1 ,
+* html #simplebooking-container #promo-nights-hor .col-4 .col-1   {
+    margin: 0 0 0 1.5%;
+}
+
+#simplebooking-container #promo-nights-hor .button-search {
+	width: 29.568%;
+}
+
+
+
+/*Kids*/
+#simplebooking-container #promo-nights-hor .adults-kids {
+	width: 23.568%;
+}
+
+#simplebooking-container #promo-nights-hor .kids-rooms-nights {
+	width: 7.142%;
+}
+
+#simplebooking-container #promo-nights-hor .occupazione-camera {
+	padding: 1% 1% 4%;
+    border-top: 1px solid #CCCCCC;
+	margin-top: 4%;
+}

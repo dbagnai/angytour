@@ -1,0 +1,74 @@
+﻿
+<div id="replaceid" class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
+    <h1 itemprop="name" style="margin-bottom:4px">
+        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+            <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
+            </span>
+        </a>
+    </h1>
+    <div class="blog-post-details" runat="server" id="divPostDetails">
+
+        <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-left">
+            <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
+                <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+            </div>
+            <div class="clearfix"></div>
+            <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
+                <em>
+                    <span style="text-decoration: line-through;font-size:0.9rem;color:#aaa;padding-left:5px;padding-right:5px" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                </em>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="blog-post-details-item blog-post-details-item-left">
+            <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
+            <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
+            <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
+            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
+            <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
+        </div>
+
+        <div class="blog-post-details-item blog-post-details-item-left">
+            <span class="bind" mybind="CodiceRegione" format="frmregione2"></span>
+            <span class="bind" mybind="CodiceProvincia" format="frmprovincia2"></span>
+            <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
+        </div>
+    </div>
+    <!-- Placeholder per la owl gallery -->
+    <div id="plhGallery"></div>
+
+    <div class="responsive-video" style="display: none">
+        <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
+    </div>
+
+
+
+    <p>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <div class="addthis_inline_share_toolbox"></div>
+    </p>
+    <div mybind="Id" class="bind files-list" style="display:none"></div>
+
+    <div class="blog-post-body" style="text-align: justify" itemprop="description">
+        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span><br />
+        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="bind buttonstyle" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoRichiedi1" format="formatlabelresource"></span></a>
+        </div>
+        <div class="col-sm-4">
+            <a class="bind buttonstyle" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="Stampa" format="formatlabelresource"></span></a>
+        </div>
+        <div class="col-sm-4">
+            <a class="bind buttonstyle" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoIndietro" format="formatlabelresource"></span></a>
+
+        </div>
+    </div>
+
+</div>
+<hr />
+

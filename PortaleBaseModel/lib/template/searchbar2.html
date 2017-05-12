@@ -1,0 +1,40 @@
+﻿
+<li>
+
+    <select id="ddlCategoria" name="ddlCategoria" class="form-control searchdropdown" style="width: 160px"
+            mybind="Categoria"></select>
+
+</li>
+
+<li>
+
+    <select id="ddlRegione" name="ddlRegione" class="form-control searchdropdown" style="width: 160px"
+            mybind="Regione"></select>
+</li>
+<!--<li>
+
+
+        <select id="ddlCaratteristica1" name="ddlCaratteristica1" class="form-control searchdropdown" style="width: 180px"
+                mybind="Caratteristica1"></select>
+
+</li>-->
+<li>
+    <div id="divAutocomplete" style="position:relative;width:160px ;margin:0px auto">
+        <input id="txthidCaratteristica1" type="text" class="form-control" placeholder="Autore" style="width: 160px" />
+        <input type="hidden" id="hidCaratteristica1" class="searchval" />
+    </div>
+</li>
+<li>
+    <div id="divAutocomplete1" style="position:relative;width:160px ;margin:0px auto">
+        <input id="txthidCaratteristica2" type="text" class="form-control" placeholder="Galleria" style="width: 160px" />
+        <input type="hidden" id="hidCaratteristica2" class="searchval" />
+    </div>
+</li>
+
+
+<li>
+    <button type="button" onclick="javascript:Visualizzalistadati()" class="form-control divbuttonstylegray" style="max-width:180px;padding:2px 15px 2px 15px">Cerca</button>
+</li>
+<!--<li>
+    <button type="button" onclick="javascript:JsSvuotaSession(this)" class="form-control divbuttonstyle" style="max-width:180px;padding:2px 15px 2px 15px">svuota</button>
+</li>-->

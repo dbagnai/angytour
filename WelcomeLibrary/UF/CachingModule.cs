@@ -1,0 +1,77 @@
+﻿using System;
+using System.Web;
+
+namespace WelcomeLibrary.UF
+{
+    public class CachingModule : IHttpModule
+    {
+        /// <summary>
+        /// Il modulo dovrà essere configurato nel file Web.config del
+        /// Web e registrato con IIS prima di poter essere utilizzato. Per ulteriori informazioni
+        /// visitare il sito all'indirizzo: http://go.microsoft.com/?linkid=8101007
+        /// </summary>
+        #region IHttpModule Members
+
+        public void Dispose()
+        {
+            //Inserire qui il codice di pulizia.
+        }
+
+        public void Init(HttpApplication context)
+        {
+            // Segue un esempio di come gestire l'evento LogRequest e fornire la relativa 
+            // implementazione della registrazione personalizzata
+            context.PreSendRequestHeaders += this.SetDefaultCacheHeader;
+        }
+
+        #endregion
+        private void SetDefaultCacheHeader(object sender, EventArgs eventArgs)
+        {
+            double secondsduration = 36000;
+            bool nocache = false;
+            string finalpath = HttpContext.Current.Request.Url.AbsolutePath;
+            if (finalpath.ToLower().EndsWith(".ashx"))
+                nocache = true;
+            if(HttpContext.Current.Response.ContentType == "text/plain")
+                nocache = true;
+            if (HttpContext.Current.Response.ContentType == "text/html")
+                nocache = true;
+
+            if (!nocache)
+            {
+                HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
+                HttpContext.Current.Response.Cache.SetMaxAge(TimeSpan.FromSeconds(secondsduration));
+                HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddSeconds(secondsduration));
+            }
+            else
+            {
+                DisableClientCaching();
+            }
+        }
+        public void OnLogRequest(Object source, EventArgs e)
+        {
+            //La logica della registrazione personalizzata può essere inserita qui
+        }
+
+
+        private void DisableClientCaching()
+        {
+            // Do any of these result in META tags e.g. <META HTTP-EQUIV="Expire" CONTENT="-1">
+            // HTTP Headers or both?
+
+            HttpContext.Current.Response.Cache.SetAllowResponseInBrowserHistory(false);
+
+            // Does this only work for IE?
+            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            // Is this required for FireFox? Would be good to do this without magic strings.
+            // Won't it overwrite the previous setting
+            HttpContext.Current.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+            HttpContext.Current.Response.AppendHeader("Pragma", "no-cache"); // HTTP 1.0.
+            HttpContext.Current.Response.AppendHeader("Expires", "0"); // Proxies.
+            // Why is it necessary to explicitly call SetExpires. Presume it is still better than calling
+            // Response.Headers.Add( directly
+            HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddYears(-1));
+        }
+    }
+}

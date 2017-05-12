@@ -1,0 +1,249 @@
+﻿/*
+	========================================
+	JESSICA ONE PAGE RESUME THEME
+	========================================
+	
+	@author			: @_TemplateNinja
+	@version		: v1.3
+	@date-create	: 09/04/2014
+	@last-update	: 03/18/2015
+	@file-name		: skin.less
+
+*/
+/*
+	========================================
+	TABLE OF CONTENT
+	========================================
+	
+	[1. IMPORT SOURCE]
+	[2. GLOBAL STYLE]
+	[3. BUTTON]
+	[4. TYPHOGRAPHY]
+	[5. PAGINATION]
+	[6. NAVBAR]
+	[7. SERVICE]
+	[8. ABOUT]
+	[9. WORK]
+	[10. BLOG]
+	[11. FOOTER]
+
+*/
+/*
+	==================
+	[1. IMPORT SOURCE]
+	==================
+*/
+/*
+	========================================
+	JESSICA ONE PAGE RESUME THEME
+	========================================
+	
+	@author			: @_TemplateNinja
+	@version		: v1.3
+	@date-create	: 09/04/2014
+	@last-update	: 03/18/2015
+	@file-name		: variables.less
+
+*/
+/*
+	========================================
+	TABLE OF CONTENT
+	========================================
+	
+	[1. URL]
+	[2. FONT]
+	[3. COLOR]
+	[4. MIXIN]
+
+*/
+/*
+	============================
+	[1. URL]
+	*
+	* ex : @{imgurl}/your-image-name.jpg
+	*
+	============================
+    
+*/
+/*
+	============================
+	[2. FONT]
+	============================
+*/
+/*
+	============================
+	[3. COLOR]
+	============================
+*/
+/*
+	============================
+	[4. MIXIN]
+	============================
+*/
+/* 
+	==================
+	[2. GLOBAL STYLE]
+	==================
+*/
+::-moz-selection {
+  background-color: #f7941e;
+}
+::-webkit-selection {
+  background-color: #f7941e;
+}
+::selection {
+  background-color: #f7941e;
+}
+a {
+  color: #f7941e;
+}
+/*
+	==================
+	[3. BUTTON]
+	==================
+*/
+.btn-standardopj {
+  background-color: #f7941e;
+  border-color: #f7941e;
+}
+/*
+	==================
+	[4. TYPHOGRAPHY]
+	==================
+*/
+.text-color {
+  color: #f7941e;
+}
+.page-title h2::after {
+  content: '';
+  background-color: #f7941e;
+}
+/*
+	==================
+	[5. PAGINATION]
+	==================
+*/
+.pagination > li > a,
+.pagination > li > span {
+  color: #f7941e;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #f7941e;
+  border-color: #f7941e;
+}
+/*
+	==================
+	[6. NAVBAR]
+	==================
+*/
+.navbar-default .navbar-brand {
+  background-color: #f7941e;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  background-color: #f7941e;
+}
+@media screen and (max-width: 767px) {
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    position: relative;
+    color: #f7941e;
+  }
+}
+.navbar-default .navbar-nav > li > a:hover::after,
+.navbar-default .navbar-nav > li > a:focus::after {
+  content: '';
+  background-color: #f7941e;
+}
+@media screen and (max-width: 767px) {
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover {
+    position: relative;
+    color: #f7941e;
+  }
+}
+.navbar-default .navbar-nav > .active > a::after,
+.navbar-default .navbar-nav > .active > a:hover::after {
+  content: '';
+  background-color: #f7941e;
+}
+.navbar-default.navbar-scroll .navbar-nav > li > a:hover,
+.navbar-default.navbar-scroll .navbar-nav > li > a:focus {
+  color: #f7941e;
+}
+.navbar-default.navbar-scroll .navbar-nav > .active a,
+.navbar-default.navbar-scroll .navbar-nav > .active a:hover {
+  color: #f7941e;
+}
+/* dropdown menu */
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #f7941e;
+}
+.dropdown-menu > .active > a::after,
+.dropdown-menu > .active > a:hover .dropdown-menu > .active > a::after,
+.dropdown-menu > .active > a:focus .dropdown-menu > .active > a::after {
+  content: '';
+  background-color: #f7941e;
+}
+/*
+	==================
+	[7. SERVICE]
+	==================
+*/
+.service-content .service-icon {
+  background-color: #f7941e;
+}
+/*
+	==================
+	[8. ABOUT]
+	==================
+*/
+.chartbox .percent {
+  color: #f7941e;
+}
+.edubox:hover {
+  border-color: #f7941e;
+}
+.edubox:hover > h4 {
+  color: #f7941e;
+}
+/*
+	==================
+	[9. WORK]
+	==================
+*/
+/* modal */
+.modal-work .modal-content .page-title h2::after {
+  content: '';
+  background-color: #f7941e;
+}
+.modal-work .modal-close:hover::before,
+.modal-work .modal-close:focus::before,
+.modal-work .modal-close:hover::after,
+.modal-work .modal-close:focus::after {
+  content: '';
+  background-color: #f7941e;
+}
+/*
+	==================
+	[10. BLOG]
+	==================
+*/
+.blog-container .blog-content h3:hover .blog-container .blog-content h3::before {
+  content: '';
+  background-color: #f7941e;
+}
+/*
+	==================
+	[11. FOOTER]
+	==================
+*/
+.footer .footer-box .footer-icon {
+  background-color: #f7941e;
+}

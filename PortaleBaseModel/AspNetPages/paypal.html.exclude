@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body style="background-color: transparent">
+
+    <form target="_blank"  action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick" />
+        <input type="hidden" name="business" value="aicpe.tesoreria@gmail.com" />
+        <input type="hidden" name="lc" value="IT" />
+        <input type="hidden" name="return" value="http://www.aicpe.org/aspnetpages/PagamentoResponse.aspx?esito=true" />
+        <input type="hidden" name="cancel_return" value="http://www.aicpe.org/aspnetpages/PagamentoResponse.aspx?esito=false" />
+        <input type="hidden" name="item_name" value="Registrazione - rinnovo iscrizione" />
+        <input type="hidden" name="button_subtype" value="services" />
+        <input type="hidden" name="no_note" value="0" />
+        <input type="hidden" name="currency_code" value="EUR" />
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest" />
+        <table border="0">
+            <tr>
+                <td>
+                    <input type="hidden" name="on0" value="Anni" />Età
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="os0">
+                        <option value="Fino a 35 anni (compresi)">Fino a 35 anni (compresi) €200,00 EUR + 3,40%</option>
+                        <option value="Sopra i 35 anni" selected="selected">Sopra i 35 anni €450,00 EUR + 3,40%</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="currency_code" value="EUR" />
+        <input type="hidden" name="option_select0" value="Fino a 35 anni (compresi)" />
+        <input type="hidden" name="option_amount0" value="206.8" />
+        <input type="hidden" name="option_select1" value="Sopra i 35 anni" />
+        <input type="hidden" name="option_amount1" value="465.3" />
+        <input type="hidden" name="option_index" value="0" />
+        <input type="image" name="submit" src="https://www.paypalobjects.com/it_IT/IT/i/btn/btn_buynowCC_LG.gif" alt="PayPal - Il metodo rapido, affidabile e innovativo per pagare e farsi pagare." />
+        <img src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
+    </form>
+</body>
+</html>

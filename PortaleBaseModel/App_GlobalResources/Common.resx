@@ -1,0 +1,1559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GoogleConversione" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkHome" xml:space="preserve">
+    <value>~/I/Home</value>
+  </data>
+  <data name="linkHomeCambio" xml:space="preserve">
+    <value>~/GB/Home</value>
+  </data>
+  <data name="testoCambio" xml:space="preserve">
+    <value>ENG</value>
+  </data>
+  <data name="linkHomeCambio1" xml:space="preserve">
+    <value>~/GB/Home</value>
+  </data>
+  <data name="testoCambio1" xml:space="preserve">
+    <value>ENG</value>
+  </data>
+  <data name="linkHomeCambio2" xml:space="preserve">
+    <value>~/RU/Home</value>
+  </data>
+  <data name="testoCambio2" xml:space="preserve">
+    <value>RU</value>
+  </data>
+  <data name="linkHomeEn" xml:space="preserve">
+    <value>~/GB/Home</value>
+  </data>
+  <data name="linkHomeIta" xml:space="preserve">
+    <value>~/I/Home</value>
+  </data>
+  <data name="testoIta" xml:space="preserve">
+    <value>ita</value>
+  </data>
+  <data name="testoEn" xml:space="preserve">
+    <value>eng</value>
+  </data>
+  <data name="TestoCerca" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="TestoRichiediPacchetto" xml:space="preserve">
+    <value>Richiedi informazioni</value>
+  </data>
+  <data name="TestoPrenotaContent" xml:space="preserve">
+    <value>Compila il form con i dati richiesti, ti contatteremo per fornirti le disponibilità e procedere con la tua richiesta.</value>
+  </data>
+  <data name="testoPreventivi" xml:space="preserve">
+    <value>Preventivi</value>
+  </data>
+  <data name="linkPreventivi" xml:space="preserve">
+    <value>~/Aspnetpages/Content_Tipo3.aspx?TipoContenuto=Preventivi&amp;Lingua=I</value>
+  </data>
+  <data name="LinkDovesiamo" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Dovesiamo</value>
+  </data>
+  <data name="testoDovesiamo" xml:space="preserve">
+    <value>Dove siamo</value>
+  </data>
+  <data name="LinkContatti" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Contatti</value>
+  </data>
+  <data name="TestoContatti" xml:space="preserve">
+    <value>Contatti</value>
+  </data>
+  <data name="LinkPrenota" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Prenota</value>
+  </data>
+  <data name="TestoPrenota" xml:space="preserve">
+    <value>Prenota</value>
+  </data>
+  <data name="TestoContattaciLateral" xml:space="preserve">
+    <value>Contatti</value>
+  </data>
+  <data name="testoLoginReturn" xml:space="preserve">
+    <value>Area Utenti</value>
+  </data>
+  <data name="testoLoginNew" xml:space="preserve">
+    <value>Richiesta di iscrizione</value>
+  </data>
+  <data name="testoLoginNewExplain" xml:space="preserve">
+    <value>
+    Invia la tua richiesta di iscrizione seguendo la procedura registrazione.</value>
+  </data>
+  <data name="testoLoginForget" xml:space="preserve">
+    <value>Non me la ricordo</value>
+  </data>
+  <data name="testoLoginNewCreateSocio" xml:space="preserve">
+    <value>Richiedi iscrizione</value>
+  </data>
+  <data name="testoLoginNewCreate" xml:space="preserve">
+    <value>Iscriviti al sito</value>
+  </data>
+  <data name="testoLoginAccedi" xml:space="preserve">
+    <value>Accedi</value>
+  </data>
+  <data name="testoLoginUtente" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="testoLoginDisconnetti" xml:space="preserve">
+    <value>Disconnetti Utente</value>
+  </data>
+  <data name="TestoRiservata" xml:space="preserve">
+    <value>Accesso Area Riservata</value>
+  </data>
+  <data name="PagerDi" xml:space="preserve">
+    <value> di </value>
+  </data>
+  <data name="PagerPagina" xml:space="preserve">
+    <value>Pagina </value>
+  </data>
+  <data name="Linklogin" xml:space="preserve">
+    <value>~/Login.aspx?Lingua=I</value>
+  </data>
+  <data name="TestoLogin" xml:space="preserve">
+    <value>Accesso Utenti</value>
+  </data>
+  <data name="testoIndietro" xml:space="preserve">
+    <value>Indietro </value>
+  </data>
+  <data name="PagerTesto1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PagerTesto2" xml:space="preserve">
+    <value>risultati trovati - </value>
+  </data>
+  <data name="PagerTesto3" xml:space="preserve">
+    <value>pagine totali</value>
+  </data>
+  <data name="PagerTesto4" xml:space="preserve">
+    <value>AVANTI &gt;</value>
+  </data>
+  <data name="PagerTesto5" xml:space="preserve">
+    <value>INDIETRO &lt;</value>
+  </data>
+  <data name="testoConsenso1" xml:space="preserve">
+    <value>Acconsento alla ricezione di mail relative alle offerte e promozioni sui prodotti e gli eventi.</value>
+  </data>
+  <data name="testoPrivacy" xml:space="preserve">
+    <value>Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003)</value>
+  </data>
+  <data name="chkPrivacy" xml:space="preserve">
+    <value>Acconsento al trattamento dei miei dati personali </value>
+  </data>
+  <data name="FormTestoPeriododa" xml:space="preserve">
+    <value>Data di Arrivo</value>
+  </data>
+  <data name="FormTestoPeriodoa" xml:space="preserve">
+    <value>Data di Partenza</value>
+  </data>
+  <data name="FormTestoAdulti" xml:space="preserve">
+    <value>Adulti</value>
+  </data>
+  <data name="FormTestoBambini" xml:space="preserve">
+    <value>Bambini (2-12)</value>
+  </data>
+  <data name="FormTestoLocations" xml:space="preserve">
+    <value>Alloggio</value>
+  </data>
+  <data name="FormTestoInfanti" xml:space="preserve">
+    <value>Infanti (0-2)</value>
+  </data>
+  <data name="FormTesto10" xml:space="preserve">
+    <value>Indirizzo</value>
+  </data>
+  <data name="FormTesto10Err" xml:space="preserve">
+    <value>indirizzo Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto11" xml:space="preserve">
+    <value>Telefono</value>
+  </data>
+  <data name="FormTesto11Err" xml:space="preserve">
+    <value>Telefono Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto12" xml:space="preserve">
+    <value>Professione</value>
+  </data>
+  <data name="FormTesto12Err" xml:space="preserve">
+    <value>Professione Obbligatoria&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto13" xml:space="preserve">
+    <value>Data di nascita</value>
+  </data>
+  <data name="FormTesto13Err" xml:space="preserve">
+    <value>Data di nascita Obbligatoria&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto2" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="FormTesto2Err" xml:space="preserve">
+    <value>Nome Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto3" xml:space="preserve">
+    <value>Cognome</value>
+  </data>
+  <data name="FormTesto3Err" xml:space="preserve">
+    <value>Cognome Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto4" xml:space="preserve">
+    <value>Indirizzo Email</value>
+  </data>
+  <data name="FormTesto4Err" xml:space="preserve">
+    <value>Email Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto5" xml:space="preserve">
+    <value>Nazione</value>
+  </data>
+  <data name="FormTesto5Err" xml:space="preserve">
+    <value>Nazione Obbligatoria&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto6" xml:space="preserve">
+    <value>Regione</value>
+  </data>
+  <data name="FormTesto6Err" xml:space="preserve">
+    <value>Regione Obbligatoria&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto7" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="FormTesto7Err" xml:space="preserve">
+    <value>Provincia Obbligatoria&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto8" xml:space="preserve">
+    <value>Comune</value>
+  </data>
+  <data name="FormTesto8Err" xml:space="preserve">
+    <value>Comune Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto9" xml:space="preserve">
+    <value>Cap</value>
+  </data>
+  <data name="FormTesto9Err" xml:space="preserve">
+    <value>Cap Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="TestoInvio" xml:space="preserve">
+    <value>Invia richiesta</value>
+  </data>
+  <data name="testoMailValidazione1" xml:space="preserve">
+    <value>&lt;b&gt;Riepilogo dati richiesta attivazione servizio del portale.&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="TitoloVerifica" xml:space="preserve">
+    <value>Verifica stato carta</value>
+  </data>
+  <data name="testoLinkValidazioneRichiesta" xml:space="preserve">
+    <value>&lt;b&gt;Concludi la richiesta della card cliccando su questo link.&lt;/b&gt;</value>
+  </data>
+  <data name="TestoRichiestaCorretto" xml:space="preserve">
+    <value>Richiesta inviata correttamente.</value>
+  </data>
+  <data name="TestoRispAttivaCliente" xml:space="preserve">
+    <value>Validazione cliente correttamente effettuata, iscrizione avvenuta.</value>
+  </data>
+  <data name="testoRispostaMailRichiestaCard" xml:space="preserve">
+    <value>Abbiamo inviato un'email all'indirizzo specificato per permettere la validazione dell'identità della richiesta.&lt;br/&gt; Per completare la procedura di richiesta della card, controllare la propria casella postale e &lt;b&gt;cliccare sull'apposito link di conferma&lt;/b&gt; presente in fondo alla mail.</value>
+  </data>
+  <data name="TitoloRichiedi" xml:space="preserve">
+    <value>Iscriviti al sito web</value>
+  </data>
+  <data name="testoMailRichiestacard0" xml:space="preserve">
+    <value>Mail di validazione per Richiesta Card. Confermare cliccando sul link in fondo alla mail.</value>
+  </data>
+  <data name="testoMailRichiestacard1" xml:space="preserve">
+    <value>&lt;b&gt;Riepilogo dati richiesta card per offerta.&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto17" xml:space="preserve">
+    <value>Messaggio</value>
+  </data>
+  <data name="FormTesto17Err" xml:space="preserve">
+    <value>Testo del messaggio obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16s" xml:space="preserve">
+    <value>Denominazione e/o Ragione Sociale</value>
+  </data>
+  <data name="FormTesto16sErr" xml:space="preserve">
+    <value>Denominazione e/o Ragione Sociale Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16" xml:space="preserve">
+    <value>Cognome o Rag.Sociale</value>
+  </data>
+  <data name="FormTesto16Err" xml:space="preserve">
+    <value>Cognome o Rag. Soc. obbligatori&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16l" xml:space="preserve">
+    <value>Cognome e/o Ragione Sociale</value>
+  </data>
+  <data name="FormTesto16lErr" xml:space="preserve">
+    <value>Cognome e/o Ragione Sociale Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto17s" xml:space="preserve">
+    <value>P.Iva e/o Codice Fiscale</value>
+  </data>
+  <data name="FormTesto17sErr" xml:space="preserve">
+    <value>P.Iva e/o Codice Fiscale Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto18" xml:space="preserve">
+    <value>Offerta 2</value>
+  </data>
+  <data name="FormTesto18Err" xml:space="preserve">
+    <value>Offerta 2 Obbligatorio&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto21" xml:space="preserve">
+    <value>&lt;font style="color: #e2277c; font-size: 120%"&gt;Scegli L'offerta&lt;/font&gt;</value>
+  </data>
+  <data name="testoPagamento" xml:space="preserve">
+    <value>&lt;font style="color: #e2277c; font-size: 120%"&gt;Modalità di Pagamento&lt;/font&gt;</value>
+  </data>
+  <data name="TitoloInserisci" xml:space="preserve">
+    <value>Adesione Portale</value>
+  </data>
+  <data name="TitoloInserisci2" xml:space="preserve">
+    <value>Inserisci i dati della tua struttura, questi sono necessari per la corretta registrazione ______________</value>
+  </data>
+  <data name="FormTesto22" xml:space="preserve">
+    <value>Cellulare</value>
+  </data>
+  <data name="FormTesto23" xml:space="preserve">
+    <value>Tipologia di Adesione</value>
+  </data>
+  <data name="FormTesto24" xml:space="preserve">
+    <value>Modalità di pagamento</value>
+  </data>
+  <data name="FormTesto25" xml:space="preserve">
+    <value>Tipologia Attività</value>
+  </data>
+  <data name="FormTesto25Err" xml:space="preserve">
+    <value>Tipologia Attività Commerciale Obbligatoria &lt;br/&gt;</value>
+  </data>
+  <data name="testoLinkValidazioneRichiestaStruttura" xml:space="preserve">
+    <value>&lt;b&gt;Concludi la richiesta di Iscrizione cliccando su questo link.&lt;/b&gt;</value>
+  </data>
+  <data name="testoMailRichiestaStruttura1" xml:space="preserve">
+    <value>Mail di validazione per Richiesta Inserimento Attività. Confermare cliccando sul link in fondo alla mail.</value>
+  </data>
+  <data name="testoMailRichiestaStruttura2" xml:space="preserve">
+    <value>&lt;b&gt;Riepilogo dati richiesta inserimento attività commerciale. &lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="TestoRichiediStruttura" xml:space="preserve">
+    <value>Sono interessato ad iscrivere la mia attività commerciale al servizio.</value>
+  </data>
+  <data name="TestoRichiediStruttura1" xml:space="preserve">
+    <value>Sono interessato all'adesione al servizio come strutura che mette a disposizione sconti e offerte vantaggiose agli aderenti.</value>
+  </data>
+  <data name="TestoRispAttivaStruttura" xml:space="preserve">
+    <value>Validazione Struttura correttamente effettuata.</value>
+  </data>
+  <data name="testoRispostaMailRichiestaStruttura" xml:space="preserve">
+    <value>Abbiamo inviato un'email all'indirizzo specificato per permettere la validazione dell'identità della richiesta.&lt;br/&gt; Per completare la procedura di richiesta di iscrizione, controllare la propria casella postale e &lt;b&gt;cliccare sull'apposito link di conferma&lt;/b&gt; presente in fondo alla mail.</value>
+  </data>
+  <data name="TestoScorriPager" xml:space="preserve">
+    <value>Clicca sui numeri per scorrere le news</value>
+  </data>
+  <data name="testoDatiMancanti" xml:space="preserve">
+    <value>Rilevati dati mancanti, completare il form per l'invio.</value>
+  </data>
+  <data name="Testotestimonianze" xml:space="preserve">
+    <value>Inviaci la tua esperienza</value>
+  </data>
+  <data name="TestoDisponibilita" xml:space="preserve">
+    <value>Richiedi Informazioni</value>
+  </data>
+  <data name="TestoRichiedi" xml:space="preserve">
+    <value>Richiedi</value>
+  </data>
+  <data name="TestoTooltipElenco" xml:space="preserve">
+    <value>Vedi dettaglio</value>
+  </data>
+  <data name="oggettoMailInserimentoOfferta" xml:space="preserve">
+    <value>Una nuova offerta è presente nel portale. Visitaci per valutarla.</value>
+  </data>
+  <data name="TestoLinkAOfferta" xml:space="preserve">
+    <value>Vedi la scheda dell'offerta sul portale.</value>
+  </data>
+  <data name="TestoUnsubscribe" xml:space="preserve">
+    <value>Se non vuoi più ricevere mail ed eliminare la sottoscrizione alla nostra newsletter, clicca su questo link.</value>
+  </data>
+  <data name="TitoloPrezzo" xml:space="preserve">
+    <value>Prezzo</value>
+  </data>
+  <data name="TitoloPrezzoApartire" xml:space="preserve">
+    <value>A partire da </value>
+  </data>
+  <data name="TitoloPrezzounita" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgIscriviti" xml:space="preserve">
+    <value>~/images/BannerIscriviti.png</value>
+  </data>
+  <data name="LinkIscrivitisocio" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkIscriviti" xml:space="preserve">
+    <value>~/AspNetPages/Iscriviti.aspx?Lingua=I</value>
+  </data>
+  <data name="TestoIscrivi" xml:space="preserve">
+    <value>Sono interessato all'adesione al sito web.</value>
+  </data>
+  <data name="testoPromozioni" xml:space="preserve">
+    <value>Vedi le nostre promozioni</value>
+  </data>
+  <data name="testoRubriche" xml:space="preserve">
+    <value>Leggi le nostre Rubriche</value>
+  </data>
+  <data name="TestoIscrizioneCorretta" xml:space="preserve">
+    <value>Iscrizione al sito web correttamente eseguita.</value>
+  </data>
+  <data name="testoLinkValidazioneIscrizione" xml:space="preserve">
+    <value>&lt;b&gt;Concludi l'iscrizione al sito web cliccando su questo link.&lt;/b&gt;</value>
+  </data>
+  <data name="testoMailIscrizione0" xml:space="preserve">
+    <value>Mail di validazione per iscrizione al sito web. Confermare cliccando sul link in fondo alla mail.</value>
+  </data>
+  <data name="testoMailIscrizione1" xml:space="preserve">
+    <value>&lt;b&gt;Riepilogo dati richiesta di iscrizione al sito web.&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="testoRispostaMailIscrizione" xml:space="preserve">
+    <value>Abbiamo inviato un'email all'indirizzo specificato per permettere la validazione dell'identità della richiesta.&lt;br/&gt; Per completare la procedura, controllare la propria casella postale e &lt;b&gt;cliccare sull'apposito link di conferma&lt;/b&gt; presente in fondo alla mail.</value>
+  </data>
+  <data name="testoMailAdesione" xml:space="preserve">
+    <value>Richiesta iscrizione.</value>
+  </data>
+  <data name="testoMailAdesione1" xml:space="preserve">
+    <value>&lt;b&gt;Riepilogo dati di adesione. &lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="testoRispostaRichiestaIscrizione" xml:space="preserve">
+    <value>Richiesta correttamente inviata. Sarete contattati al più presto dalla segreteria per procedere con la richiesta di iscrizione.</value>
+  </data>
+  <data name="testoRispostaRichiestaServizio" xml:space="preserve">
+    <value>Richiesta correttamente inviata. Sarete contattati al più presto dalla segreteria per procedere.</value>
+  </data>
+  <data name="FormTestoPass" xml:space="preserve">
+    <value>Password di accesso al sito web</value>
+  </data>
+  <data name="TitoloIscrivi" xml:space="preserve">
+    <value>Compilazione dati ultimazione adesione</value>
+  </data>
+  <data name="TestoIscrivi1" xml:space="preserve">
+    <value>&lt;br/&gt;Segui le istruzioni per concludere la procedura.</value>
+  </data>
+  <data name="chkPosta" xml:space="preserve">
+    <value>Bollettino C/c postale N. _____________ - Intestato a: _________________ - Loc. ____________________ – 53045 Montepulciano - Causale: iscrizione _____________________</value>
+  </data>
+  <data name="chkBonifico" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkContanti" xml:space="preserve">
+    <value>contanti</value>
+  </data>
+  <data name="chkGratuito" xml:space="preserve">
+    <value>nessuno</value>
+  </data>
+  <data name="testoPrivacy1" xml:space="preserve">
+    <value>Trattamento dati in base all’art. 10 della legge 675/96. L’interessato gode dei diritti di cui all’art. 13 Legge 675/96 e Decreto Legislativo nr. 196/2003. I dati
+potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla promozione e pubblicità del nostro portale.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Fax:</value>
+  </data>
+  <data name="Telefono" xml:space="preserve">
+    <value>Telefono:</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Sito Web:</value>
+  </data>
+  <data name="Rubriche" xml:space="preserve">
+    <value>RUBRICHE</value>
+  </data>
+  <data name="SelezionePrezzo" xml:space="preserve">
+    <value>Seleziona Fascia di Prezzo</value>
+  </data>
+  <data name="EsitoNegativovalidazioneCliente" xml:space="preserve">
+    <value>Cliente non presente o non valido eseguire la procedura di registrazione e validazione.</value>
+  </data>
+  <data name="EsitoPositivovalidazioneCliente" xml:space="preserve">
+    <value>Cliente valido e correttamente registrato.</value>
+  </data>
+  <data name="testoLogo" xml:space="preserve">
+    <value>Web Mouse</value>
+  </data>
+  <data name="testoSottologo1" xml:space="preserve">
+    <value>web</value>
+  </data>
+  <data name="testoSottologo2" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="testoSottologo3" xml:space="preserve">
+    <value>comunicazione</value>
+  </data>
+  <data name="TestoContattaci" xml:space="preserve">
+    <value> &lt;br /&gt;&lt;br /&gt;
+      
+       &lt;font style="font-weight: 500;"&gt;Per porci un quesito riempi il form e inviacelo direttamente da questa pagina.&lt;br /&gt;
+       &lt;/font&gt;
+       
+ </value>
+  </data>
+  <data name="testoContinua" xml:space="preserve">
+    <value>Leggi..</value>
+  </data>
+  <data name="TestoHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="TitoloDescrizione" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="TitoloInformazioni" xml:space="preserve">
+    <value>Informazioni</value>
+  </data>
+  <data name="lngItaliano" xml:space="preserve">
+    <value>Leggi in Italiano</value>
+  </data>
+  <data name="lngEnglish" xml:space="preserve">
+    <value>Read in English</value>
+  </data>
+  <data name="imgItaliano" xml:space="preserve">
+    <value>~/images/italiano.png</value>
+  </data>
+  <data name="imgenglish" xml:space="preserve">
+    <value>~/images/english.png</value>
+  </data>
+  <data name="imgTastoRichiedi" xml:space="preserve">
+    <value>~/images/btnInfoI_free.png</value>
+  </data>
+  <data name="txtTastoNext" xml:space="preserve">
+    <value>SUCCESSIVI</value>
+  </data>
+  <data name="txtTastoPrev" xml:space="preserve">
+    <value>PRECEDENTI</value>
+  </data>
+  <data name="txtTastoNextPartners" xml:space="preserve">
+    <value>SUCCESSIVI</value>
+  </data>
+  <data name="txtTastoPrevPartners" xml:space="preserve">
+    <value>PRECEDENTI</value>
+  </data>
+  <data name="TestoVediScheda" xml:space="preserve">
+    <value>VEDI</value>
+  </data>
+  <data name="LinkArchivio" xml:space="preserve">
+    <value>~/AspNetPages/Archivio.aspx?Lingua=I</value>
+  </data>
+  <data name="TestoArchivio" xml:space="preserve">
+    <value>ARCHIVIO</value>
+  </data>
+  <data name="wmarkCerca" xml:space="preserve">
+    <value>Digita il termine da cercare</value>
+  </data>
+  <data name="social_condividi" xml:space="preserve">
+    <value>Condividi nei social network&amp;nbsp;&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="social_like" xml:space="preserve">
+    <value>Indicaci il tuo apprezzamento nei social network&amp;nbsp;&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="titoloNewspercategoria" xml:space="preserve">
+    <value>ULTIMI ARTICOLI PER CATEGORIA</value>
+  </data>
+  <data name="titoloNewsultime" xml:space="preserve">
+    <value>ULTIMI ARRIVATI</value>
+  </data>
+  <data name="footerTitle1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="footerTitle2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="footerTitle3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="footerTitle4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkDisclaimer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoDisclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="TestoPrivacyperlink" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="ddlTuttiregione" xml:space="preserve">
+    <value>Seleziona regione</value>
+  </data>
+  <data name="TitoloListaArticoli" xml:space="preserve">
+    <value>Lista Completa</value>
+  </data>
+  <data name="TestoPubblicatodata" xml:space="preserve">
+    <value>pubblicato il </value>
+  </data>
+  <data name="TestoPubblica" xml:space="preserve">
+    <value>PER LA TUA PUBBLICITA'</value>
+  </data>
+  <data name="titleCercaTesto" xml:space="preserve">
+    <value>Cerca nel sito</value>
+  </data>
+  <data name="titleMain" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto Città della Pieve Perugia Moiano</value>
+  </data>
+  <data name="TestoHomeIndex" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto</value>
+  </data>
+  <data name="descMain" xml:space="preserve">
+    <value>Venite al ristorante Albergo Il Pozzetto per gustare la cucina Umbra o pernottare nelle nostre accoglienti camere.</value>
+  </data>
+  <data name="descFooter" xml:space="preserve">
+    <value>
+</value>
+  </data>
+  <data name="descMain1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="barbutton2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="barbutton3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="barbutton4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoContattaciFooter" xml:space="preserve">
+    <value>&lt;span style="font-size:2em"&gt;
+      Vuoi Informazioni?&lt;/span&gt;
+&lt;h3 class="h3-section-title"&gt;Invia adesso la tua richiesta.&lt;/h3&gt;</value>
+  </data>
+  <data name="_linkFacebook" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkPinterest" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkTwitter" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkGoogle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkYoutube" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkInstagram" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkTripadvisor" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkFoursquare" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkVkontakte" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkLinkedin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoRichiesta" xml:space="preserve">
+    <value>RICHIEDI INFORMAZIONI</value>
+  </data>
+  <data name="testoSezione" xml:space="preserve">
+    <value>sezione </value>
+  </data>
+  <data name="testoSeguici" xml:space="preserve">
+    <value>Seguici su </value>
+  </data>
+
+  <data name="testoid1" xml:space="preserve">
+    <value>Ristorante</value>
+  </data>
+  <data name="testoid2" xml:space="preserve">
+    <value>Camere</value>
+  </data>
+
+  <data name="testoid4" xml:space="preserve">
+    <value>Listini</value>
+  </data>
+  <data name="testoid5" xml:space="preserve">
+    <value>Menù</value>
+  </data>
+  <data name="testoid6" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoid7" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoid8" xml:space="preserve">
+    <value>Listino</value>
+  </data>
+  <data name="testoid9" xml:space="preserve">
+    <value>Bed &amp; Breakfast</value>
+  </data>
+  <data name="testoid10" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="testoid11" xml:space="preserve">
+    <value>Info</value>
+  </data>
+
+  <data name="testoidUrl1" xml:space="preserve">
+    <value>Ristorante</value>
+  </data>
+  <data name="testoidUrl2" xml:space="preserve">
+    <value>Camere</value>
+  </data>
+    <data name="testoidUrl4" xml:space="preserve">
+    <value>Listini</value>
+  </data>
+  <data name="testoidUrl5" xml:space="preserve">
+    <value>Menù</value>
+  </data>
+  <data name="testoidUrl6" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl7" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl8" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl9" xml:space="preserve">
+    <value>Alloggi</value>
+  </data>
+  <data name="testoidUrl10" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="testoidUrl11" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="testoBlog" xml:space="preserve">
+    <value>Scopri le nostre attività</value>
+  </data>
+  <data name="testoBlogcategorie" xml:space="preserve">
+    <value>Guarda tutte le rubriche</value>
+  </data>
+  <data name="testoCatalogo" xml:space="preserve">
+    <value>Prodotti</value>
+  </data>
+  <data name="testolinkSezioniCatalogo" xml:space="preserve">
+    <value>Vedi le sezioni catalogo</value>
+  </data>
+  <data name="testoPrivacypolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="LinkShoppingcart" xml:space="preserve">
+    <value>~/Aspnetpages/Shoppingcart.aspx?Lingua=I</value>
+  </data>
+  <data name="TestoShoppingcart" xml:space="preserve">
+    <value>Carrello</value>
+  </data>
+  <data name="LinkOrder" xml:space="preserve">
+    <value>~/Aspnetpages/Orderpage.aspx?Lingua=I</value>
+  </data>
+  <data name="LinkOrderNoregistrazione" xml:space="preserve">
+    <value>~/Aspnetpages/Orderpage.aspx?Lingua=I&amp;reg=false</value>
+  </data>
+  <data name="TestoAddShoppingcart" xml:space="preserve">
+    <value>+/- Per inserire nel carrello</value>
+  </data>
+  <data name="TestoCatalogo1" xml:space="preserve">
+    <value>Offerte</value>
+  </data>
+  <data name="TestoShop" xml:space="preserve">
+    <value>Negozio</value>
+  </data>
+  <data name="TestoProcess" xml:space="preserve">
+    <value>Gestione ordine</value>
+  </data>
+  <data name="TestoProfile" xml:space="preserve">
+    <value>Accesso</value>
+  </data>
+  <data name="TestoPanel1" xml:space="preserve">
+    <value>Ultimi articoli</value>
+  </data>
+  <data name="TestoPanel2" xml:space="preserve">
+    <value>Ultime Proposte</value>
+  </data>
+  <data name="TestoPanel3" xml:space="preserve">
+    <value>In vetrina</value>
+  </data>
+  <data name="TestoCercaBlog" xml:space="preserve">
+    <value>Cerca ....</value>
+  </data>
+  <data name="TestoInseriscimail" xml:space="preserve">
+    <value>Email ....</value>
+  </data>
+  <data name="TestoInseriscinome" xml:space="preserve">
+    <value>Inserisci il tuo nome ....</value>
+  </data>
+  <data name="testoLogoHead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoSottoLogoHead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoSubtitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titoloNewsletter" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="TestoNewsletterForm" xml:space="preserve">
+    <value>Inserisci la tua mail e ricevi le promozioni esclusive.</value>
+  </data>
+  <data name="titoloNewsletter1" xml:space="preserve">
+    <value>Spunta qui per ricervere la newsletter con le promozioni esclusive.</value>
+  </data>
+  <data name="TestoBtnNewsletter" xml:space="preserve">
+    <value>Invia</value>
+  </data>
+  <data name="wmarkData" xml:space="preserve">
+    <value>Data di nascita</value>
+  </data>
+  <data name="wmarkEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="wmarkNome" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="erroreAdesione" xml:space="preserve">
+    <value>Il cliente ha già aderito alla newsletter specificata!</value>
+  </data>
+  <data name="erroreAdesioneMail" xml:space="preserve">
+    <value>Mail origine newsletter non identificata</value>
+  </data>
+  <data name="erroreValidazione" xml:space="preserve">
+    <value>Cliente non validato o mail non riconosciuta, impossibile inviare mail adesione.</value>
+  </data>
+  <data name="FormTesto14" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="FormTesto20" xml:space="preserve">
+    <value>PIVA/CF</value>
+  </data>
+  <data name="FormTesto20Err" xml:space="preserve">
+    <value>Piva/Cf Obbligatorio</value>
+  </data>
+  <data name="privacydetail" xml:space="preserve">
+    <value>OpenWindow('PrivacyI.htm','','scrollbars=yes,width=600,height=400')</value>
+  </data>
+  <data name="rispostaUnsubscribe" xml:space="preserve">
+    <value>Siete stati correttamente rimossi dalla lista per l'invio delle newsletters</value>
+  </data>
+  <data name="testoAdesione" xml:space="preserve">
+    <value>Adesione all'offerta/newsletter.</value>
+  </data>
+  <data name="testoRispostaMailAdesione" xml:space="preserve">
+    <value>Grazie per aver aderito all'offerta.</value>
+  </data>
+  <data name="titleIscriviti" xml:space="preserve">
+    <value>Iscrizioni newsletter</value>
+  </data>
+  <data name="testoIscrizioneNewsletter" xml:space="preserve">
+    <value>Per iscriversi alla newsletter è necessario verificare la titolarità della e-mail inserita.&lt;br/&gt;</value>
+  </data>
+  <data name="testoMailIscrizione" xml:space="preserve">
+    <value>Iscrizione utente a newsletter</value>
+  </data>
+  <data name="testoMailIscrizioneNoOk" xml:space="preserve">
+    <value>Errore invio richiesta iscrizione newsletter, contattare il gestore per maggiori informazioni.</value>
+  </data>
+  <data name="testoMailIscrizioneOK" xml:space="preserve">
+    <value>Inviata correttamente la richiesta di iscrizione. </value>
+  </data>
+  <data name="ddlTuttiprovincia" xml:space="preserve">
+    <value>Seleziona Provincia</value>
+  </data>
+  <data name="testoRicercaCatalogo" xml:space="preserve">
+    <value>Ricerca Prodotti</value>
+  </data>
+  <data name="testoCatalogo2" xml:space="preserve">
+    <value>Catalogo</value>
+  </data>
+  <data name="imgCatalogo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgCatalogo1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgCatalogo2" xml:space="preserve">
+    <value />
+  </data>
+  
+  <data name="TestoPromoContent" xml:space="preserve">
+    <value>Iscriviti alla nostra newsletter e ricevi le migliori informazioni.</value>
+  </data>
+  <data name="titoloCatalogoConsigliati" xml:space="preserve">
+    <value>Vedi anche</value>
+  </data>
+  <data name="titoloCollegati" xml:space="preserve">
+    <value>Gli altri vini</value>
+  </data>
+  <data name="selezionaNazione" xml:space="preserve">
+    <value>Seleziona nazione</value>
+  </data>
+  <data name="testoAggiornacarrello" xml:space="preserve">
+    <value>Aggiorna carrello</value>
+  </data>
+  <data name="testoInseriscicarrello" xml:space="preserve">
+    <value>Inserisci nel carrello</value>
+  </data>
+  <data name="testoRimuovicarrello" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="testoCarrello" xml:space="preserve">
+    <value>Carrello acquisti</value>
+  </data>
+  <data name="CarrelloArticolo" xml:space="preserve">
+    <value>Articolo</value>
+  </data>
+  <data name="CarrelloQuantita" xml:space="preserve">
+    <value>Quantità</value>
+  </data>
+  <data name="CarrelloTotale" xml:space="preserve">
+    <value>Totale</value>
+  </data>
+  <data name="CarrelloRiepilogo" xml:space="preserve">
+    <value>Riepilogo Carrello</value>
+  </data>
+  <data name="CarrelloTotaleRiepilogo" xml:space="preserve">
+    <value>Totale Carrello</value>
+  </data>
+  <data name="CarrelloTotaleSpedizione" xml:space="preserve">
+    <value>Totale Spedizione</value>
+  </data>
+  <data name="CarrelloTotaleSmaltimento" xml:space="preserve">
+    <value>Totale Smaltimento</value>
+  </data>
+
+  <data name="CarrelloCalcolaTotaleSpedizione" xml:space="preserve">
+    <value>Costi Spedizione</value>
+  </data>
+  <data name="CarrelloRicalcolaTotaleSpedizione" xml:space="preserve">
+    <value>Ricalcola Costi Spedizione</value>
+  </data>
+  <data name="CarrelloTotaleOrdine" xml:space="preserve">
+    <value>Totale Ordine</value>
+  </data>
+  <data name="CarrelloSelezioneArticoli" xml:space="preserve">
+    <value>Prodotti selezionati</value>
+  </data>
+  <data name="TestoProcediOrdine" xml:space="preserve">
+    <value>Ordine con registrazione</value>
+  </data>
+  <data name="TestoProcediOrdineNoregistrazione" xml:space="preserve">
+    <value>Procedura ordine rapido</value>
+  </data>
+  <data name="TestoPagamentoOrdine" xml:space="preserve">
+    <value>Completamento ordine</value>
+  </data>
+  <data name="titoloUltimeBlog" xml:space="preserve">
+    <value>Ultime dal blog</value>
+  </data>
+  <data name="IndirizzoFatturazione" xml:space="preserve">
+    <value>Indirizzo Fatturazione</value>
+  </data>
+  <data name="IndirizzoSpedizione" xml:space="preserve">
+    <value>Indirizzo Spedizione</value>
+  </data>
+  <data name="testochkSpedizione" xml:space="preserve">
+    <value>Uguale all'indirizzo di fatturazione</value>
+  </data>
+  <data name="testoMetodopagamento" xml:space="preserve">
+    <value>Metodo di pagamento</value>
+  </data>
+  <data name="testoRichiestalogin" xml:space="preserve">
+    <value>News Esegui l'accesso all'area medici, oppure registrati per procedere.</value>
+  </data>
+  <data name="testoNote" xml:space="preserve">
+    <value>Note per il tuo ordine, i.e. informazioni per la consegna.</value>
+  </data>
+  <data name="txtPagamento" xml:space="preserve">
+    <value>Selezionare una modalità di pagamento.</value>
+  </data>
+  <data name="chkbacs" xml:space="preserve">
+    <value>
+      Fai il tuo pagamento tramite conto corrente bancario.&lt;br/&gt;
+      Attendi la conferma da parte nostra dei dati d'odine completi per
+      procedere al bonifico seguendo le istruzioni di dettaglio indicate nella mail.
+      Il tuo ordine non verrà spedito fino alla ricezione dei fondi sul nostro conto.&lt;br/&gt;</value>
+  </data>
+  <data name="chkpaypal" xml:space="preserve">
+    <value>
+      Paga tramite PayPal/Carta di credito; puoi anche pagare con la tua carta di credito se non hai un profilo Paypal
+      con questa opzione.
+       PAGAMENTO SICURO CON CARTA DI CREDITO/PAYPAL </value>
+  </data>
+  <data name="chkpayway" xml:space="preserve">
+    <value>
+      Paga tramite Carta di credito;
+       PAGAMENTO SICURO CON CARTA DI CREDITO PAYWAY </value>
+  </data>
+  <data name="txtpayway" xml:space="preserve">
+    <value>Carta di credito sistema Payway</value>
+  </data>
+  <data name="txtbacs" xml:space="preserve">
+    <value>Bonifico</value>
+  </data>
+  <data name="txtpaypal" xml:space="preserve">
+    <value>Paypal/Carta</value>
+  </data>
+  <data name="OrdineSoggettomailRichiesta" xml:space="preserve">
+    <value>Richiesta d'ordine tramite </value>
+  </data>
+  <data name="OrdineSoggettomailRiepilogo" xml:space="preserve">
+    <value>Riepilogo Ordine Effettuato su </value>
+  </data>
+  <data name="TestoConfermaOrdine" xml:space="preserve">
+    <value>Sarete ricontattati nel più breve tempo possibile per concludere la procedura d'ordine.</value>
+  </data>
+  <data name="TestoSaluti" xml:space="preserve">
+    <value>Cordiali Saluti,</value>
+  </data>
+  <data name="OrdineEsegui" xml:space="preserve">
+    <value>Esegui Ordine</value>
+  </data>
+
+  <data name="txtOrdineannullato" xml:space="preserve">
+    <value>Annullato</value>
+  </data>
+  <data name="txtOrdinenonpagato" xml:space="preserve">
+    <value>In attesa pagamento</value>
+  </data>
+  <data name="txtOrdinepagato" xml:space="preserve">
+    <value>Pagato</value>
+  </data>
+  <data name="forgetRequest1" xml:space="preserve">
+    <value>
+      Inserisci la tua email per ricevere la tua password o altrimenti registrati al sito web per accedere ai servizi</value>
+  </data>
+  <data name="forgetResponse1" xml:space="preserve">
+    <value>
+      Di seguito un riepilogo dei tuoi dati e la nuova pass di accesso.</value>
+  </data>
+  <data name="forgetResponse2" xml:space="preserve">
+    <value>
+      Inviata mail per il recupero della password, controlla la tua casella postale.</value>
+  </data>
+  <data name="forgetResponse3" xml:space="preserve">
+    <value>
+      Email utente non trovata, inserisci la tua email di registrazione nel campo username oppure registrati al sito web per accedere ai servizi.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>
+    Completa tutti i campi richiesti per procedere con l'ordine</value>
+  </data>
+  <data name="defRispostaOrdine" xml:space="preserve">
+    <value>Verificare la corretta esecuzione della procedura contattando l'esercente. Impossibile verificare la corretta esecuzione della transazione.</value>
+  </data>
+  <data name="risposta_4" xml:space="preserve">
+    <value>TRANSAZIONE NON AVVENUTA.</value>
+  </data>
+  <data name="risposta_5" xml:space="preserve">
+    <value>Ordine Confermato, transazione correttamente avvenuta.&lt;br/&gt;Vi contatteremo al più presto per concludere la procedura e per la spedizione del materiale.&lt;br/&gt;
+    Vi ringraziamo per la preferenza accordataci.</value>
+  </data>
+  <data name="risposta_6" xml:space="preserve">
+    <value>ERRORE TRANSAZIONE NON AVVENUTA (GET SHIPPING DETAILS ERROR)</value>
+  </data>
+  <data name="risposta_7" xml:space="preserve">
+    <value>ERRORE TRANSAZIONE NON AVVENUTA (DO EXPRESS CHECKOUT ERROR)</value>
+  </data>
+  <data name="testoSconto" xml:space="preserve">
+    <value>Sconto Applicato</value>
+  </data>
+  <data name="TestoSupplementoSpedizioni" xml:space="preserve">
+    <value>IMPORTANTE! Selezionare questa voce se spedizione Italia verso Isole, Isole Minori o Venezia Lagunare&lt;br/&gt;( Previsto Supplemento Spedizione Obbligatorio )</value>
+  </data>
+  <data name="testoTrasmissione" xml:space="preserve">
+    <value>Trasmissione</value>
+  </data>
+  <data name="testoTipologiavettura" xml:space="preserve">
+    <value>Tipologia</value>
+  </data>
+  <data name="TestoVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="titleNewsletter" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="LinkInfoeorari" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GoogleCalcolapercorso" xml:space="preserve">
+    <value>Calcola Percorso Stradale</value>
+  </data>
+  <data name="GooglePartenza" xml:space="preserve">
+    <value>Partenza da:</value>
+  </data>
+  <data name="GooglePin1" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto&lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG&lt;br/&gt; Tel. +39 0578294014&lt;br/&gt;info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="GoogleUrl1" xml:space="preserve">
+    <value>https://goo.gl/maps/W3DYx3UvLJL2</value>
+  </data>
+  <data name="GooglePosizione1" xml:space="preserve">
+    <value>43.0170417,12.017582</value>
+  </data>
+  <data name="GooglePin2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GoogleUrl2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GooglePosizione2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtFooter" xml:space="preserve">
+    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+     </value>
+  </data>
+  <data name="TestoCredits1" xml:space="preserve">
+    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+      </value>
+  </data>
+  <data name="TestoRaggiungerci" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ContentError" xml:space="preserve">
+    <value>Pagina non trovata</value>
+  </data>
+  <data name="testoMessage" xml:space="preserve">
+    <value>INSERISCI QUI IL TUO MESSAGGIO O RICHIESTA</value>
+  </data>
+  <data name="testoData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="testoGiorni" xml:space="preserve">
+    <value>Giorni</value>
+  </data>
+  <data name="testoPosizionebase" xml:space="preserve">
+    <value>Città della Pieve Moiano Perugia Umbria</value>
+  </data>
+  <data name="testoAttivita" xml:space="preserve">
+    <value>SCOPRI LE NOSTRE ATTIVITA'</value>
+  </data>
+  <data name="emailaddress" xml:space="preserve">
+    <value>info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="testoTelfisso" xml:space="preserve">
+    <value>+390577848546</value>
+  </data>
+  <data name="iconCelltext" xml:space="preserve">
+    <value>tel:+390578294014</value>
+  </data>
+  <data name="iconMaptext" xml:space="preserve">
+    <value>
+   &lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+    </value>
+  </data>
+  <data name="iconEmailtext" xml:space="preserve">
+    <value>
+     info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="testoTelmobile" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter1" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="testoFooter2" xml:space="preserve">
+    <value>Attività</value>
+  </data>
+  <data name="testoFooter3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormOrdinamento" xml:space="preserve">
+    <value>Ordina Per</value>
+  </data>
+  <data name="txttitleVertical" xml:space="preserve">
+    <value>Prenotazioni e disponibilità</value>
+  </data>
+  <data name="txtVerticalCamere" xml:space="preserve">
+    <value>Camere</value>
+  </data>
+  <data name="txtVerticalAppartamenti" xml:space="preserve">
+    <value>Appartamenti</value>
+  </data>
+  <data name="txtVerticalTipologia" xml:space="preserve">
+    <value>Tipologia</value>
+  </data>
+  <data name="titleVerticalButton" xml:space="preserve">
+    <value>Prenota</value>
+  </data>
+  <data name="txtVerticalLingua" xml:space="preserve">
+    <value>itIT</value>
+  </data>
+  <data name="txtVerticalDataarrivo" xml:space="preserve">
+    <value>Data di arrivo</value>
+  </data>
+  <data name="txtVerticalDatapartenza" xml:space="preserve">
+    <value>Data partenza</value>
+  </data>
+  <data name="txtVerticalNotti" xml:space="preserve">
+    <value>Notti</value>
+  </data>
+ 
+  
+  <data name="txtIscrizioneErrore" xml:space="preserve">
+    <value>Errore procedura di iscrizione. Contattataci direttamente per telefono o email per completare il processo.</value>
+  </data>
+  <data name="txtMailError" xml:space="preserve">
+    <value>Errore invio mail</value>
+  </data>
+  <data name="txtOrdineCorretto" xml:space="preserve">
+    <value>&lt;div&gt;&lt;br/&gt;Ordine inviato correttamente. &lt;br/&gt;Sarete contattati a breve dal nostro personale.&lt;/div&gt;</value>
+  </data>
+  <data name="txtOrdineErrore" xml:space="preserve">
+    <value>Errore invio ordine.</value>
+  </data>
+  <data name="txtPrivacyError" xml:space="preserve">
+    <value>Impossibile inviare Email senza Autorizzazione per la Privacy.</value>
+  </data>
+  <data name="txtValidateVerifica" xml:space="preserve">
+    <value>Cliente già esistente, richiedici la password se non la ricordi.</value>
+  </data>
+  <data name="txtValidazioneError" xml:space="preserve">
+    <value>Errore procedura validazione cliente. Contattataci direttamente per telefono o email per completare il processo.</value>
+  </data>
+  
+  <data name="txtOrdineRiprova" xml:space="preserve">
+    <value>&lt;b&gt;Riprova il pagamento&lt;/b&gt;</value>
+  </data>
+  <data name="testoCarellosuperamentoquantita" xml:space="preserve">
+    <value>Raggiunta disponibilità articolo</value>
+  </data>
+  <data name="testoCarelloesaurito" xml:space="preserve">
+    <value>Articolo Esaurito</value>
+  </data>
+  <data name="testoCarelloindisponibile" xml:space="preserve">
+    <value>Articolo esaurito al momento</value>
+  </data>
+  
+  <data name="testoIscrizione" xml:space="preserve">
+    <value>registrati al sito</value>
+  </data>
+  <data name="imgCarrello1" xml:space="preserve">
+    <value>~/images/img-carrello.png</value>
+  </data>
+
+  <data name="testoBtnCodiceSconto" xml:space="preserve">
+    <value>Applica Sconto</value>
+  </data>
+  <data name="TitleCodiceSconto" xml:space="preserve">
+    <value>Se hai un codice sconto inseriscilo ( Opzionale ) </value>
+  </data>
+  <data name="testoErrCodiceSconto" xml:space="preserve">
+    <value>Errore codice Sconto non valido</value>
+  </data>
+  
+  <data name="txtcontanti" xml:space="preserve">
+    <value>Contrassegno</value>
+  </data>
+  <data name="txtEstero" xml:space="preserve">
+    <value>&lt;b&gt;Fai il tuo pagamento sicuro con carta di credito&lt;/b&gt;</value>
+  </data>
+  <data name="testoFormPagamento" xml:space="preserve">
+    <value>&lt;em&gt;Procedi adesso e paga in tutta sicurezza con Paypal o con carta di credito&lt;/em&gt;</value>
+  </data>
+
+  <data name="testoCaptcha" xml:space="preserve">
+    <value>Spuntare la verifica captcha per procedere.</value>
+  </data>
+  <data name="imgRssfeed" xml:space="preserve">
+    <value>~/images/rss.png</value>
+  </data>
+  <data name="_linkRss" xml:space="preserve">
+    <value>RSSfeedI.xml</value>
+  </data>
+  <data name="TestoMappa" xml:space="preserve">
+    <value>Sitemap</value>
+  </data>
+  <data name="imgEmail" xml:space="preserve">
+    <value>~/images/emaillogo.gif</value>
+  </data>
+  <data name="imgCarrello" xml:space="preserve">
+    <value>~/images/img-carrello.png</value>
+  </data>
+  <data name="LinkContattistampa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkWebmouse" xml:space="preserve">
+    <value> http://www.webmouse.sm</value>
+  </data>
+  <data name="selCaratteristica1" xml:space="preserve">
+    <value>Seleziona Marca</value>
+  </data>
+  <data name="selCaratteristica2" xml:space="preserve">
+    <value>Seleziona Modello</value>
+  </data>
+  <data name="selCaratteristica3" xml:space="preserve">
+    <value>Tipologia</value>
+  </data>
+  <data name="selCaratteristica4" xml:space="preserve">
+    <value>Seleziona Alimentazione</value>
+  </data>
+  <data name="selLocation" xml:space="preserve">
+    <value>Seleziona Collocazione</value>
+  </data>
+  <data name="selProdotti" xml:space="preserve">
+    <value>Seleziona Livello 1</value>
+  </data>
+  <data name="selSProdotti" xml:space="preserve">
+    <value>Seleziona Livello 2</value>
+  </data>
+  <data name="TitleProdottiGest" xml:space="preserve">
+    <value>Gestione Livello 1</value>
+  </data>
+  <data name="TitleSottProdottiGest" xml:space="preserve">
+    <value>Gestione Livello 2</value>
+  </data>
+  <data name="ddlTutticategoria" xml:space="preserve">
+    <value>Seleziona Tipologia</value>
+  </data>
+  <data name="_linkSkype" xml:space="preserve">
+    <value>callto:pinco.pallino</value>
+  </data>
+  <data name="imgFacebook" xml:space="preserve">
+    <value>~/images/social/facebook-25x25.jpg</value>
+  </data>
+  <data name="imgTwitter" xml:space="preserve">
+    <value>~/images/social/twitter-footer.png</value>
+  </data>
+  <data name="imgGoogle" xml:space="preserve">
+    <value>~/images/social/googleplus-footer.png</value>
+  </data>
+  <data name="imgYoutube" xml:space="preserve">
+    <value>~/images/social/youtube-footer.png</value>
+  </data>
+  <data name="imgInstagram" xml:space="preserve">
+    <value>~/images/social/instagram-footer.png</value>
+  </data>
+  <data name="imgPinterest" xml:space="preserve">
+    <value>~/images/social/pinterest-footer.png</value>
+  </data>
+  <data name="imgTripadvisor" xml:space="preserve">
+    <value>~/images/social/tripadvisor-footer.png</value>
+  </data>
+  <data name="imgFoursquare" xml:space="preserve">
+    <value>~/images/social/foursquare-footer.png</value>
+  </data>
+  <data name="testoNotelegali" xml:space="preserve">
+    <value>Note legali </value>
+  </data>
+  <data name="LinkIscrizioneerinnovi" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkSoci" xml:space="preserve">
+    <value>~/elenco/I/rif000100/soci-associazione</value>
+  </data>
+  <data name="TestoSoci" xml:space="preserve">
+    <value>Soci</value>
+  </data>
+  <data name="LinkForum" xml:space="preserve">
+    <value>~/forum/I/rif001000/forum-soci</value>
+  </data>
+  <data name="TestoForum" xml:space="preserve">
+    <value>Forum Soci</value>
+  </data>
+  <data name="TestoSchedaSocio" xml:space="preserve">
+    <value>Vai al profilo personale</value>
+  </data>
+  <data name="LinkCondizionigenerali" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlTuttiGenere" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="ddlTuttiCar1" xml:space="preserve">
+    <value>Tipo di Pneumatico</value>
+  </data>
+  <data name="ddlTuttiCar2" xml:space="preserve">
+    <value>Indice Velocità</value>
+  </data>
+  <data name="ddlTuttiCarDim" xml:space="preserve">
+    <value>Dimensioni del Pneumatico</value>
+  </data>
+  <data name="ddlTuttiCar3" xml:space="preserve">
+    <value>Larghezza</value>
+  </data>
+  <data name="ddlTuttiCar4" xml:space="preserve">
+    <value>Rapporto</value>
+  </data>
+  <data name="ddlTuttiCar5" xml:space="preserve">
+    <value>Diametro</value>
+  </data>
+  <data name="ddlTuttiMese" xml:space="preserve">
+    <value>Seleziona mese</value>
+  </data>
+  <data name="ddlTuttiComune" xml:space="preserve">
+    <value>Seleziona località</value>
+  </data>
+  <data name="TestoLinkAStruttura" xml:space="preserve">
+    <value>Vedi la scheda della struttura sul portale.</value>
+  </data>
+  <data name="oggettoMailInserimentoStruttura" xml:space="preserve">
+    <value>Una nuova struttura è entrata nel portale. Valuta l'offerta.</value>
+  </data>
+  <data name="testoPress" xml:space="preserve">
+    <value>Area Stampa</value>
+  </data>
+  <data name="htmlBookingpage" xml:space="preserve">
+    <value>~/Htmlpage_it.html</value>
+  </data>
+  <data name="titleHomebar1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoAssociarsi" xml:space="preserve">
+    <value>Come associarsi</value>
+  </data>
+  <data name="txttitlePacchetti" xml:space="preserve">
+    <value>Prenota la tua vacanza</value>
+  </data>
+
+  <data name="txttitleCatalogo" xml:space="preserve">
+    <value>I nostri prodotti</value>
+  </data>
+  <data name="imgTastoCerca" xml:space="preserve">
+    <value>~/images/btnCercaI.png</value>
+  </data>
+</root>

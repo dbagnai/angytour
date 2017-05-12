@@ -1,0 +1,220 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.Security;
+using WelcomeLibrary.UF;
+using WelcomeLibrary.DAL;
+using WelcomeLibrary.DOM;
+using System.Text;
+using System.IO;
+
+public partial class AreaContenuti_GestioneCodici : System.Web.UI.Page
+{
+    public string PageGuid
+    {
+        get { return ViewState["PageGuid"] != null ? (string)(ViewState["PageGuid"]) : ""; }
+        set { ViewState["PageGuid"] = value; }
+    }
+    public string Pagina
+    {
+        get { return ViewState["Pagina"] != null ? (string)(ViewState["Pagina"]) : ""; }
+        set { ViewState["Pagina"] = value; }
+    }
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            PageGuid = System.Guid.NewGuid().ToString();
+        }
+
+        //output.Text = Membership.GeneratePassword(20, 0);
+        // output.Text = System.Guid.NewGuid().ToString();
+        //output.Text = RandomPassword.Generate(20);
+
+
+        //Fare funzoione che cancella i codici non attivati generati oltre un anno addietro!!!
+    }
+
+    #region PARTE RELATIVA ALLA PAGINAZIONE E SELEZIONE DEL REPEATER
+
+    protected void PagerRisultati_PageCommand(object sender, string PageNum)
+    {
+        PagerRisultati.CurrentPage = Convert.ToInt32(PageNum);
+        Pagina = PageNum;
+        Pager<Card> p = new Pager<Card>();
+        if (p.LoadFromCache(this, PageGuid + PagerRisultati.ClientID))
+        {
+            rptCards.DataSource = p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+            rptCards.DataBind();
+        }
+        else
+            carica_click(null, null);
+    }
+    protected void PagerRisultati_PageGroupClickNext(object sender, string spare)
+    {
+
+        //PagerRisultatiLow.nGruppoPagine += 1;
+
+    }
+    protected void PagerRisultati_PageGroupClickPrev(object sender, string spare)
+    {
+        //PagerRisultatiLow.nGruppoPagine -= 1;
+
+
+    }
+    protected void PagerRisultatiLow_PageGroupClickNext(object sender, string spare)
+    {
+        PagerRisultati.nGruppoPagine += 1;
+
+    }
+    protected void PagerRisultatiLow_PageGroupClickPrev(object sender, string spare)
+    {
+        PagerRisultati.nGruppoPagine -= 1;
+
+    }
+    #endregion
+
+    protected void genera_click(object sender, EventArgs e)
+    {
+        try
+        {
+            CardsDM cDM = new CardsDM();
+            int ncodici = 0;
+            int.TryParse(txtNumeroCodici.Text, out ncodici);
+            List<string> codici = cDM.GeneraNuoviCodici(ncodici);
+            lblCodici.Text = "";
+            foreach (string c in codici)
+            {
+                lblCodici.Text += c + "<br/>";
+            }
+        }
+        catch (Exception err)
+        {
+            output.Text = "Errore nella generazione nuovi codici : " + err.Message;
+        }
+    }
+
+    protected void elimina_click(object sender, EventArgs e)
+    {
+        try
+        {
+            CardsDM cDM = new CardsDM();
+            cDM.CancellaCodiciScaduti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, 12);
+
+        }
+        catch (Exception err)
+        {
+            output.Text = "Errore nella cancellazione vecchi codici : " + err.Message;
+        }
+    }
+    protected void carica_click(object sender, EventArgs e)
+    {
+        CardsDM cDM = new CardsDM();
+
+        CardCollection cards = cDM.CaricaCardFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, radAttivate.SelectedValue, radAssegnate.SelectedValue, radScadute.SelectedValue);
+        Pager<Card> p = new Pager<Card>(cards, true, this.Page, PageGuid + PagerRisultati.ClientID);
+        PagerRisultati.TotalRecords = p.Count;
+        //PagerRisultatiLow.TotalRecords = p.Count;
+        try
+        {
+            PagerRisultati.CurrentPage = Convert.ToInt32(Pagina);
+            //PagerRisultatiLow.CurrentPage = Convert.ToInt32(Pagina);
+
+        }
+        catch { }
+        rptCards.DataSource = p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize); ;
+        //rptCards.DataSource = cards;
+        rptCards.DataBind();
+
+
+    }
+    protected void aggiorna_click(object sender, EventArgs e)
+    {
+        CardsDM cDM = new CardsDM();
+        CardCollection cards = new CardCollection();
+        Card card = new Card();
+        foreach (RepeaterItem item in rptCards.Items)
+        {
+            if (item != null)
+            {
+                card = new Card();
+                card.AssegnatoACard = ((CheckBox)item.FindControl("chkAssegnazione")).Checked;
+                card.Id_card = Convert.ToInt32(((Literal)item.FindControl("litID_CARD")).Text);
+                cards.Add(card);
+            }
+        }
+        cDM.AggiornaAssegnazioniCard(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cards);
+
+    }
+    protected void attivacodice_click(object sender, EventArgs e)
+    {
+        CardsDM cDM = new CardsDM();
+        WelcomeLibrary.DOM.enumclass.StatoCard response = cDM.AttivaCodice(txtCodiceAttiva.Text);
+
+        if (response == WelcomeLibrary.DOM.enumclass.StatoCard.attivata)
+            lblAttiva.Text = "Card correttamente attivata";
+        else if (response == WelcomeLibrary.DOM.enumclass.StatoCard.attiva)
+            lblAttiva.Text = "Errore! Card già " + response.ToString();
+        else
+            lblAttiva.Text = "Errore! Card  " + response.ToString();
+
+
+    }
+    protected void verificacodice_click(object sender, EventArgs e)
+    {
+        CardsDM cDM = new CardsDM();
+        WelcomeLibrary.DOM.enumclass.StatoCard response = cDM.VerificaValiditaCodice(txtCodiceVerifica.Text);
+        if (response == WelcomeLibrary.DOM.enumclass.StatoCard.attiva)
+            lblVerifica.Text = "Card attiva";
+        else
+            lblVerifica.Text = "Errore! Card " + response.ToString();
+    }
+    protected void stampa_click(object sender, EventArgs e)
+    {
+        CardsDM cDM = new CardsDM();
+        CardCollection cards = cDM.CaricaCardFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, radAttivate.SelectedValue, radAssegnate.SelectedValue, radScadute.SelectedValue);
+
+      //  EnableEventValidation = false;
+        rptCards.DataSource = cards;
+        rptCards.DataBind();
+        StringBuilder sb = new StringBuilder();
+        StringWriter tw = new StringWriter(sb);
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        rptCards.RenderControl(hw);
+        string htmltable = sb.ToString();
+        //EnableEventValidation = true;
+
+        Session.Add("datistampa", htmltable);
+        string javaopen = " window.open('../AspNetPages/formStampa.aspx', '_blank');";
+        //string javaopen = "OpenWin()";
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "jo", javaopen, true);
+    }
+    #region METODI CHE PERMETTONO L'UTILIZZO DI RENDERCONTROL DURANTE UN POSTBACK USATI NELLA FUNZIONE DI STAMPA
+    public override bool EnableEventValidation
+    {
+        get { return false; }
+        set { /* Do nothing */}
+    }
+    public override void VerifyRenderingInServerForm(Control control) //Evito che il render control server side mi dial l'errore per la verifica dell form
+    {
+        return;
+    }
+    #endregion
+
+    protected bool CalcolaScadenza(object dataattivazione, object duratagg)
+    {
+        bool ret = false;
+
+        if (dataattivazione != null)
+        {
+            if (((DateTime)dataattivazione).AddDays((int)duratagg) < System.DateTime.Now)
+                ret = true;
+        }
+
+        return ret;
+
+    }
+}

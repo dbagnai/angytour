@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class IndexOnePage : CommonPage
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        try
+        {
+            if (!IsPostBack)
+            {
+                string conversione = CaricaValoreMaster(Request, Session, "conversione");
+                if (conversione == "true")
+                {
+                    Visualizzarisposta();
+                    return;
+                }
+
+            }
+            else
+            {
+                output.Text = "";
+                lblRisposta.Text = "";
+                lblRisposta.Visible = false;
+            }
+        }
+        catch (Exception err)
+        {
+            output.Text = err.Message;
+        }
+    }
+
+
+
+    protected void btnSubmit_click(object sender, EventArgs e)
+    {
+        try
+        {
+            //Prepariamo e inviamo il mail
+            string nomemittente = author.Value;
+            string mittenteMail = email.Value;
+
+
+            string nomedestinatario = Nome;
+            string maildestinatario = Email;
+            int idperstatistiche = 0;
+            string tipo = "informazioni";
+            string SoggettoMail = "Richiesta " + tipo + " da " + nomemittente + " tramite il sito web " + Nome;
+            string Descrizione = message.Value.Replace("\r", "<br/>") + " <br/> ";
+
+            Descrizione += " <br/> Telefono Cliente:" + phone.Value + " Email Cliente: " + mittenteMail;
+            Descrizione += " <br/> Confermo l'autorizzazione al trattamento dei miei dati personali (D.Lgs 196/2003)";
+
+            if (chkPrivacy.Checked)
+            {
+                WelcomeLibrary.UF.Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+
+                //Registro la statistica di contatto
+                WelcomeLibrary.DOM.Statistiche stat = new WelcomeLibrary.DOM.Statistiche();
+                stat.Data = DateTime.Now;
+                stat.EmailDestinatario = maildestinatario;
+                stat.EmailMittente = mittenteMail;
+                stat.Idattivita = idperstatistiche;
+                stat.Testomail = nomemittente + "<br/>" + SoggettoMail + "<br/>" + Descrizione;
+                stat.TipoContatto = WelcomeLibrary.DOM.enumclass.TipoContatto.invioemail.ToString();
+                stat.Url = "";
+                WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
+
+                Response.Redirect(Request.Url + "?conversione=true");
+
+            }
+            else
+            {
+ 
+            }
+
+        }
+        catch (Exception err)
+        {
+            output.Text = err.Message + " <br/> ";
+
+        }
+    }
+
+    protected void Visualizzarisposta()
+    {
+        lblRisposta.Text = "Grazie per l'interesse mostrato nelle nostre proproste.";
+        lblRisposta.Text += Resources.Common.GoogleConversione;
+        lblRisposta.Visible = true;
+
+    }
+}

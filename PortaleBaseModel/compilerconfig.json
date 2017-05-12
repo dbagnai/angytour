@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "css/opj/skin.css",
+    "inputFile": "css/opj/skin.less"
+  },
+  {
+    "outputFile": "css/opj/style.css",
+    "inputFile": "css/opj/style.less"
+  },
+  {
+    "outputFile": "css/opj/variables.css",
+    "inputFile": "css/opj/variables.less"
+  }
+]

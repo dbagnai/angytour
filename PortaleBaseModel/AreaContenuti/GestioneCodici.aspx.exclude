@@ -1,0 +1,164 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GestioneCodici.aspx.cs" Inherits="AreaContenuti_GestioneCodici"
+    Theme="Tema2012" %>
+
+<%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body style="font-size: 13px; background-color: #ccc; padding: 10px 10px 10px 10px">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
+            AsyncPostBackErrorMessage="Errore generico. Contattare HelpDesk" AsyncPostBackTimeout="400"
+            EnablePartialRendering="true" EnablePageMethods="true" EnableScriptLocalization="true"
+            EnableScriptGlobalization="true">
+            <Scripts>
+                <asp:ScriptReference Path="~/aspnetpages/JS/jquery-1.4.3.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/aspnetpages/JS/jquery.cycle.all.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/Scripts/jquery.maphilight.min.js" NotifyScriptLoaded="true" />
+            </Scripts>
+        </asp:ScriptManager>
+        <script type="text/javascript">
+            function SelectAllBox() {
+
+                var rowchkcontainer = $(".selectorchk");
+                if (rowchkcontainer != null) {
+                    for (i = 0; i < rowchkcontainer.length; i++) {
+                        if (rowchkcontainer[i].children != null) {
+                            rowchkcontainer[i].children[0].checked = !rowchkcontainer[i].children[0].checked;
+                        }
+                    }
+                }
+            }
+
+        </script>
+        <div style="background-color: White; padding: 10px 10px 10px 10px">
+            <div style="width: 100%; height: 30px; background-color: #2e3192;color:white; text-align: center; margin: 0px 0px; padding: 0px 0px">
+                <h2>
+                    <asp:Literal ID="litTitle" runat="server" Text="Sezione privata amministrazione"></asp:Literal></h2>
+            </div>
+            <a href="Default.aspx" style="font-size: 15px">Torna a pagina di selezione</a>
+            <br />
+            <asp:Literal ID="output" Text="" runat="server" />
+            <h2>Generazione nuovi codici card</h2>
+            Numero di nuovi codici da generare:
+        <asp:TextBox ID="txtNumeroCodici" runat="server" Text="10"></asp:TextBox>
+            <asp:Button Text="Genera Nuovi Codici" OnClick="genera_click" runat="server" /><br />
+            <br />
+            <asp:Label ID="lblCodici" runat="server"></asp:Label><br />
+            <hr />
+            <br />
+            <h2>Verifica stato codice card</h2>
+            Inserire il codice da verificare:
+        <asp:TextBox ID="txtCodiceVerifica" runat="server" Text=""></asp:TextBox>
+            <asp:Button ID="btnVerifica" Text="Verifica stato Codice" OnClick="verificacodice_click"
+                runat="server" /><br />
+            <asp:Label ID="lblVerifica" runat="server"></asp:Label><br />
+            <hr />
+            <br />
+            <br />
+            <h2>Attiva codice card</h2>
+            Inserire il codice da attivare:
+        <asp:TextBox ID="txtCodiceAttiva" runat="server" Text=""></asp:TextBox>
+            <asp:Button ID="btnAttiva" Text="Attiva Codice" OnClick="attivacodice_click" runat="server" /><br />
+            <asp:Label ID="lblAttiva" runat="server"></asp:Label><br />
+            <hr />
+            <br />
+            <br />
+            <h2>Visualizzazione codici card in archivio</h2>
+            <br />
+            <asp:RadioButtonList ID="radAttivate" runat="server" Style="float: left" RepeatDirection="Vertical"
+                BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
+                <asp:ListItem Text="Tutte" Value="tutte" Selected="True" />
+                <asp:ListItem Text="Solo attivate" Value="si" />
+                <asp:ListItem Text="Solo non attivate" Value="no" />
+            </asp:RadioButtonList>
+            <asp:RadioButtonList ID="radAssegnate" runat="server" Style="float: left" RepeatDirection="Vertical"
+                BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
+                <asp:ListItem Text="Tutte" Value="tutte" />
+                <asp:ListItem Text="Solo assegnate a card" Value="si" />
+                <asp:ListItem Text="Solo non assegnate a card" Value="no" Selected="True" />
+            </asp:RadioButtonList>
+            <asp:RadioButtonList ID="radScadute" Style="float: left" runat="server" RepeatDirection="Vertical"
+                BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
+                <asp:ListItem Text="Tutte" Value="tutte" Selected="True" />
+                <asp:ListItem Text="Solo Attivate scadute" Value="si" />
+                <asp:ListItem Text="Solo Attivate non scadute" Value="no" />
+            </asp:RadioButtonList>
+            <asp:Button Style="float: left" ID="btnCaricaCodici" Height="75" Text="Visualizza la lista card in archivio"
+                OnClick="carica_click" ToolTip="Visualizza la lista card nell'archivio" runat="server" />
+            <asp:Button Style="float: left" ID="btnStampaCodici" Height="75" Text="Stampa" OnClick="stampa_click"
+                ToolTip="Stamma lista card selezionate" runat="server" />
+            <br />
+            <br />
+            <div style="clear: both"></div>
+              <UC:PagerEx ID="PagerRisultati" runat="server" NavigateUrl="" PageSize="50" CurrentPage="1"
+                                    TotalRecords="0" dimensioneGruppo="20" nGruppoPagine="1" OnPageCommand="PagerRisultati_PageCommand"
+                                    OnPageGroupClickNext="PagerRisultati_PageGroupClickNext" OnPageGroupClickPrev="PagerRisultati_PageGroupClickPrev" />
+                      
+            <div style="clear: both">
+                <asp:Repeater ID="rptCards" runat="server">
+                    <HeaderTemplate>
+                        <table style="width: 800px; text-align: center; border: 1px Solid Black">
+                            <thead>
+                                <tr style="background-color: Gray; color: white">
+                                    <td style="width: 80px">ID CARD
+                                    </td>
+                                    <td>CODICE CARD
+                                    </td>
+                                    <td style="width: 80px">DATA GENERAZ.
+                                    </td>
+                                    <td style="width: 80px">DATA ATTIV.
+                                    </td>
+                                    <td style="width: 80px">SCADUTA
+                                    </td>
+                                    <td style="width: 80px">ASSEGNATI<br />
+                                        <input onclick="SelectAllBox()" type="button" value="Inverti selez." />
+                                    </td>
+                                </tr>
+                            </thead>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr style="border-right: 1px Solid Black">
+                            <td style="width: 80px;">
+                                <asp:Literal ID="litID_CARD" Text='<%# Eval("ID_CARD").ToString() %>' runat="server" />
+                            </td>
+                            <td>
+                                <asp:Literal ID="Literal1" Text='<%# Eval("CodiceCard") %>' runat="server" />
+                            </td>
+                            <td style="width: 80px;">
+                                <asp:Literal ID="Literal2" Text='<%# ((DateTime)Eval("DataGenerazione")).ToShortDateString() %>'
+                                    runat="server" />
+                            </td>
+                            <td style="width: 80px;">
+                                <asp:Literal ID="Literal3" Text='<%# (Eval("DataAttivazione")==null)?"":((DateTime)Eval("DataAttivazione")).ToShortDateString() %>'
+                                    runat="server" />
+                            </td>
+                            <td style="width: 80px;">
+                                <asp:CheckBox Checked='<%# CalcolaScadenza( Eval("DataAttivazione"), Eval("DurataGG") ) %>'
+                                    Enabled="false" runat="server" />
+                            </td>
+                            <td style="width: 80px;">
+                                <asp:CheckBox ID="chkAssegnazione" class="selectorchk" Checked='<%# Eval("AssegnatoACard") %>'
+                                    runat="server" />
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+            <br />
+            <asp:Button ID="btnAggiorna" Width="250" Text="Aggiorna Assegnazioni a Card" OnClick="aggiorna_click"
+                ToolTip="Aggiorna i codici che vengono assegnati alle card per la stampa" runat="server" />
+            <br />
+            <br />
+            <asp:Button ID="btnPulizia" Width="250" Text="Elimina Codici non attivati scaduti"
+                OnClick="elimina_click" ToolTip="Elimina i codici non attivati con datagenerazione superiore ad 1 anno"
+                runat="server" />
+        </div>
+    </form>
+</body>
+</html>

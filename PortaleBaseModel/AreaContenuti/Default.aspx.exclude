@@ -1,0 +1,152 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="AreaContenuti_Default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Area Gestione Contenuti e Offerte</title>
+</head>
+<body style="font-size: 15px; background-color: #ccc; width: 98%; padding: 10px 10px 10px 10px">
+    <form id="form1" runat="server">
+        <div style="background-color: White; padding: 10px 10px 10px 10px" class="loginStyle">
+            <div style="width: 100%; height: 30px; background-color: #2e3192; color: white; text-align: center; margin: 0px 0px; padding: 0px 0px">
+                <h2>
+                    <asp:Literal ID="litTrial" runat="server"></asp:Literal>
+                </h2>
+                <h2>
+                    <asp:Literal ID="litTitle" runat="server" Text="Sezione privata amministrazione"></asp:Literal></h2>
+            </div>
+            <asp:Literal ID="output" runat="server"></asp:Literal>
+            <br />
+            <a id="A1" href="<%$ Resources:Common, LinkHome %>" runat="server">Torna A HomePage Portale</a>
+            <%--   <h2>
+            Sezione Gestione Contenuti</h2>--%>
+            <ul>
+                <%--   <li><a href="GestioneContenuti.aspx?CodiceContenuto=con000001">Gestione
+                <%= WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con000001"); }).Descrizione %></a><br /></li>
+            <li><a href="GestioneContenuti.aspx?CodiceContenuto=con000002">Gestione
+                <%= WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con000002"); }).Descrizione %><br /></a>
+            </li>
+            <li><a href="GestioneContenuti.aspx?CodiceContenuto=con000003">Gestione
+                <%= WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con000003"); }).Descrizione %><br /></a>
+            </li>--%>
+                <%-- <li><a href="GestioneContenuti.aspx?CodiceContenuto=con000001">Gestione
+                <%= WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con000001"); }).Descrizione %><br />
+            </a></li>
+            <li><a href="GestioneContenuti.aspx?CodiceContenuto=con000002">Gestione
+                <%= WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con000002"); }).Descrizione%><br />
+            </a></li>--%>
+                <%-- <asp:Repeater ID="rptContenutiLink" runat="server">
+                <ItemTemplate>
+                    <li><a id="A2" href='<%# "GestioneContenuti.aspx?CodiceContenuto=" +  Eval("Codice").ToString() %>'
+                        runat="server">
+                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a><br />
+                    </li>
+                </ItemTemplate>
+            </asp:Repeater>--%>
+            </ul>
+
+            <h2>Gestione Sezioni Contenuti</h2>
+            <ul>
+                <asp:Repeater ID="rptTipologia" runat="server">
+                    <ItemTemplate>
+                        <li><a href="GestioneOfferte.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a><br />
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ul>
+
+            <ul>
+                <asp:Repeater ID="rptCustom" runat="server">
+                    <ItemTemplate>
+                        <li><a href="GestioneOfferte.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a><br />
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+
+         
+                <asp:Repeater ID="rptCatalogo" runat="server">
+                    <ItemTemplate>
+                        <li><a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a><br />
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ul>
+            <%--  <h2>Gestione Soci</h2>
+            <ul>
+                <asp:Repeater ID="rptCustom" runat="server" >
+                    <ItemTemplate>
+                        <li><a href="GestioneSoci.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a><br />
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+
+            </ul>--%>
+            <asp:Panel runat="server" ID="pnlStatiche">
+                <h2>Gestione Pagine statiche</h2>
+                <a id="linkPaginestatiche" href=""
+                    runat="server">
+                    <asp:Label ID="Titolopaginestatiche" runat="server" Text=""></asp:Label></a>
+            </asp:Panel>
+
+            <h2>Sezione Galleria e Banners Pubblicitari
+            </h2>
+            <%--   <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=sfondiscroller">Gestione
+            SFONDI sito</a><br />--%>
+            <br />
+          
+
+            <br />
+
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-home">Gestione Testate Home</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">Gestione Testate  Il ristorante</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">Gestione Testate  Lo chef</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">Gestione Testate  Menù</a><br />
+        <%--    <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">Gestione Testate Realizzazioni</a><br />--%>
+
+       
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000002">Gestione Testate Blog</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000003">Gestione Testate Eventi</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000004">Gestione Testate Servizi</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000009">Gestione Testate Promozioni</a><br />
+           <%-- <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000101">Gestione Testate Commenti</a><br />--%>
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000012">Gestione Testate Gallery</a><br />
+
+
+            <%-- <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-12">Gestione Testate newsletter</a><br />--%>
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-contatti">Gestione Testate contatti</a><br />
+            <br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-1">Gestione Banner  Spot Bassa 1</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-2">Gestione Banner Spot Bassa 2</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-3">Gestione Banner Spot Bassa 3</a><br />
+            <br />
+            <%--<a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">Gestione Banner Sezioni Blog</a><br />--%>
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">Gestione Banner Sezioni Sito</a><br />
+            <%--<a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-menu">Gestione Banner Sezioni Menu</a><br />--%>
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-siti">Gestione Banner Sezioni Siti web</a><br />
+            <br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">Gestione Banner Fascia1</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia2">Gestione Banner Fascia2</a><br />
+            <br />
+            <br />
+              <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-testata">Gestione Video Testata</a><br />
+            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-banner1">Gestione Video Banner</a><br />
+            <%-- 
+            <br />
+            <br />
+                         <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-links">Gestione Banner Links</a><br />--%>
+            <%-- <h2>
+            Sezione Gestione Codici Card
+        </h2>
+        <a href="GestioneCodici.aspx">Gestione Codici Card</a>--%>
+            <br />
+            <h2>Sezione Gestione clienti</h2>
+            <a href="GestioneNewsletter.aspx">Gestione Newsletter</a><br />
+            <a href="GestioneClienti.aspx">Gestione Anagrafiche clienti</a><br />
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿body {
+}
+
+.display-active {
+    display: block !important;
+}
+
+.newLi.hover a {
+    border-top: none !important;
+}
+
+.newLi.hover:hover a {
+    border-top: none !important;
+    background-color: #eaeaea !important;
+    color: #1f1f1f !important;
+}
+
+.nav-pills > li > a {
+    background: #fff;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #1f1f1f !important;
+}
+
+.tab-content {
+    padding: 0;
+}
+
+.col-sm-2.item-text{
+    padding-top:10px;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .sidebar.h-sidebar .nav-list > li.hover > .submenu-new {
+        top: 100%;
+        left: 1px;
+        margin-top: auto;
+        margin-left: -2px;
+        width: 400px;
+        z-index: 1026;
+    }
+}

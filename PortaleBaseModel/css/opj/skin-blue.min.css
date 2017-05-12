@@ -1,0 +1,23 @@
+::-moz-selection{background-color:#0d4e96}
+::-webkit-selection{background-color:#0d4e96}
+::selection{background-color:#0d4e96}
+a{color:#0d4e96}
+.btn-standardopj{background-color:#0d4e96;border-color:#0d4e96}
+.text-color{color:#0d4e96}
+.page-title h2::after{content:'';background-color:#0d4e96}
+.pagination>li>a,.pagination>li>span{color:#0d4e96}
+.pagination>.active>a,.pagination>.active>span,.pagination>.active>a:hover,.pagination>.active>span:hover,.pagination>.active>a:focus,.pagination>.active>span:focus{background-color:#0d4e96;border-color:#0d4e96}
+.navbar-default .navbar-brand{background-color:#fff}.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus{background-color:#fff}
+@media screen and (max-width:767px){.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:focus{position:relative;color:#0d4e96}}.navbar-default .navbar-nav>li>a:hover::after,.navbar-default .navbar-nav>li>a:focus::after{content:'';background-color:#fff}
+@media screen and (max-width:767px){.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:hover{position:relative;color:#0d4e96}}.navbar-default .navbar-nav>.active>a::after,.navbar-default .navbar-nav>.active>a:hover::after{content:'';background-color:#0d4e96}
+.navbar-default.navbar-scroll .navbar-nav>li>a:hover,.navbar-default.navbar-scroll .navbar-nav>li>a:focus{color:#0d4e96}
+.navbar-default.navbar-scroll .navbar-nav>.active a,.navbar-default.navbar-scroll .navbar-nav>.active a:hover{color:#0d4e96}
+.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus{background-color:#0d4e96}
+.dropdown-menu>.active>a::after,.dropdown-menu>.active>a:hover .dropdown-menu>.active>a::after,.dropdown-menu>.active>a:focus .dropdown-menu>.active>a::after{content:'';background-color:#0d4e96}
+.trattamenti-content .trattamenti-icon{background-color:#0d4e96}
+.chartbox .percent{color:#0d4e96}
+.edubox:hover{border-color:#0d4e96}.edubox:hover>h4{color:#0d4e96}
+.modal-work .modal-content .page-title h2::after{content:'';background-color:#0d4e96}
+.modal-work .modal-close:hover::before,.modal-work .modal-close:focus::before,.modal-work .modal-close:hover::after,.modal-work .modal-close:focus::after{content:'';background-color:#0d4e96}
+.blog-container .blog-content h3:hover .blog-container .blog-content h3::before{content:'';background-color:#0d4e96}
+.footer .footer-box .footer-icon{background-color:#0d4e96}

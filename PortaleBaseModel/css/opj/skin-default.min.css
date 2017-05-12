@@ -1,0 +1,23 @@
+::-moz-selection{background-color:#ef4034}
+::-webkit-selection{background-color:#ef4034}
+::selection{background-color:#ef4034}
+a{color:#ef4034}
+.btn-standardopj{background-color:#ef4034;border-color:#ef4034}
+.text-color{color:#ef4034}
+.page-title h2::after{content:'';background-color:#ef4034}
+.pagination>li>a,.pagination>li>span{color:#ef4034}
+.pagination>.active>a,.pagination>.active>span,.pagination>.active>a:hover,.pagination>.active>span:hover,.pagination>.active>a:focus,.pagination>.active>span:focus{background-color:#ef4034;border-color:#ef4034}
+.navbar-default .navbar-brand{background-color:#ef4034}.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus{background-color:#ef4034}
+@media screen and (max-width:767px){.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:focus{position:relative;color:#ef4034}}.navbar-default .navbar-nav>li>a:hover::after,.navbar-default .navbar-nav>li>a:focus::after{content:'';background-color:#ef4034}
+@media screen and (max-width:767px){.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:hover{position:relative;color:#ef4034}}.navbar-default .navbar-nav>.active>a::after,.navbar-default .navbar-nav>.active>a:hover::after{content:'';background-color:#ef4034}
+.navbar-default.navbar-scroll .navbar-nav>li>a:hover,.navbar-default.navbar-scroll .navbar-nav>li>a:focus{color:#ef4034}
+.navbar-default.navbar-scroll .navbar-nav>.active a,.navbar-default.navbar-scroll .navbar-nav>.active a:hover{color:#ef4034}
+.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus{background-color:#ef4034}
+.dropdown-menu>.active>a::after,.dropdown-menu>.active>a:hover .dropdown-menu>.active>a::after,.dropdown-menu>.active>a:focus .dropdown-menu>.active>a::after{content:'';background-color:#ef4034}
+.service-content .service-icon{background-color:#ef4034}
+.chartbox .percent{color:#ef4034}
+.edubox:hover{border-color:#ef4034}.edubox:hover>h4{color:#ef4034}
+.modal-work .modal-content .page-title h2::after{content:'';background-color:#ef4034}
+.modal-work .modal-close:hover::before,.modal-work .modal-close:focus::before,.modal-work .modal-close:hover::after,.modal-work .modal-close:focus::after{content:'';background-color:#ef4034}
+.blog-container .blog-content h3:hover .blog-container .blog-content h3::before{content:'';background-color:#ef4034}
+.footer .footer-box .footer-icon{background-color:#ef4034}

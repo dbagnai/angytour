@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Simple Booking Syncro Box &#8482; - Horizontal Box Standard</title>
+    <!-- SB SYNCRO BOX HEAD - START: insert the following code block on the head section of your page -->
+    <link type="text/css" href="/css/horizontal-box-style.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://www.simplebooking.it/search-box-script.axd?IDA=3446"></script>
+    <script type="text/javascript">
+        var SBParameters = {
+            CodLang: 'EN'
+        };
+    </script>
+    <!-- SB SYNCRO BOX HEAD - END -->
+</head>
+<body>
+    <!-- SB SYNCRO BOX BODY FORM - START: insert the following line on the head section  of your page -->
+    <div id="simplebooking-container" class="clearfix">
+        <!--kids-container-->
+        <div class="kids-container col-14">
+            <div id="kidsage-hor" class="booking-form-container">
+                <form id="frm" name="frm" class="sb-search-form col-14" onsubmit="return false" action="" method="post" >
+
+                    <div class="first col-4 arrival-departure">
+                        <label id="label-checkin">Data Arrivo: </label>
+                        <input type="text" name="txtArrivalDate" id="txtArrivalDate" onclick="fPopCalendar('hdnDataArrivo');" readonly="readonly" />
+                        <input type="hidden" name="hdnDataArrivo" id="hdnDataArrivo" />
+                        <a id="Calendario0" href="javascript:void(0);" onclick="fPopCalendar('hdnDataArrivo');"><img height="16" alt="" src="http://www.simplebooking.it/scripts/box_layouts/ico_calendario.gif" width="16" border="0" /></a>
+                    </div>
+
+                    <div class="col-4 arrival-departure">
+                        <label id="label-checkout">Data Partenza: </label>
+                        <input type="text" name="txtDepartureDate" id="txtDepartureDate" onclick="fPopCalendar('hdnDataPartenza');" readonly="readonly" />
+                        <input type="hidden" name="hdnDataPartenza" id="hdnDataPartenza" />
+                        <a id="Calendario1" href="javascript:void(0);" onclick="fPopCalendar('hdnDataPartenza');"><img height="16" alt="" src="http://www.simplebooking.it/scripts/box_layouts/ico_calendario.gif" width="16" border="0" /></a>
+                    </div>
+
+                    <div class="persons-rooms last col-1">
+                        <label id="label-numrooms">Camere: </label>
+                        <select id="ddlCamere" name="ddlCamere"><option value=""></option></select>
+                    </div>
+
+                    <div class="col-3 rooms-adults-kids">
+                        <div id="dvCam1" class="col-3">
+                            <div class="adults col-1">
+                                <label id="label-numpersons1">Persone: </label>
+                                <select id="Cam1Adulti" name="Cam1Adulti"><option value=""></option></select>
+                            </div>
+                        </div>
+
+                        <div id="dvCam2" class="col-3 rooms-adults-kids">
+                            <div id="label-roomallocation2" class="occupazione-camera">Ospiti camera #2</div>
+                            <div class="adults col-1">
+                                <label id="label-numpersons2">Persone: </label>
+                                <select id="Cam2Adulti" name="Cam2Adulti"><option value=""></option></select>
+                            </div>
+                        </div>
+
+                        <div id="dvCam3" class="col-3 rooms-adults-kids">
+                            <div id="label-roomallocation3" class="occupazione-camera">Ospiti camera #3</div>
+                            <div class="adults col-1">
+                                <label id="label-numpersons3">Persone: </label>
+                                <select id="Cam3Adulti" name="Cam3Adulti"><option value=""></option></select>
+                            </div>
+                        </div>
+
+                        <div id="dvCam4" class="col-3 rooms-adults-kids">
+                            <div id="label-roomallocation4" class="occupazione-camera" style="float: none;">Ospiti camera #4</div>
+                            <div class="adults col-1">
+                                <label id="label-numpersons4">Persone: </label>
+                                <select id="Cam4Adulti" name="Cam4Adulti"><option value=""></option></select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-4 first button-search last">
+                        <input id="btnSearch" name="btnSearch" type="button" value="Verifica Disponibilità" class="submit" />
+                    </div>
+                </form>
+            </div>
+ 
+        <!--kids-container-->
+    </div>
+    <!-- SB SYNCRO BOX BODY FORM - END -->
+</body>
+</html>

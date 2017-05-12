@@ -1,0 +1,64 @@
+﻿ <!-- Scroller  -->
+<div class="container" style="padding-bottom: 20px; display: none">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="title-block clearfix">
+                <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 5px;line-height:35px">
+                    <span id="titlespan"></span>
+                    <script type="text/javascript">
+                        $("#titlespan").html(GetResourcesValue("Simili"));
+                    </script>
+                    <a class="owl-btn prev-v2" id="carouselInject1prev"><i style="color: #33332e" class="fa fa-chevron-left"></i></a>
+                    <a class="owl-btn next-v2" id="carouselInject1next"><i style="color: #33332e" class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="min-height: 400px; padding-top: 0px; padding-bottom: 0px; text-align: center">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 0px">
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+                <div class="owl-slider-v2" id="carouselInject1">
+                    <div class="item" style="padding: 0px; margin:15px 5px 15px 5px">
+                        <div style="border: none; box-shadow: none" class="feature animated" data-animtype="fadeInUp" data-animrepeat="0" data-animspeed="1s" data-animdelay="0.4s">
+                            <div style="border: none; box-shadow: none" class="feature">
+                                <a class="portfolio-zoom bind" target="_self" href="link" title="titolo" mybind="id">
+                                    <div class="feature-image img-overlay" style="max-height: 220px">
+                                        <img src="/images/dummylogo.png" alt="" class="bind" mybind="id_allegati" />
+                                        <div class="item-img-overlay">
+                                            <div class="item_img_overlay_content">
+                                                <span class="pull-right bind" mybind="Prezzo1" mybind2="nascondiprezzo" format="frmprezzo"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="feature-content">
+                                    <a class="bind" target="_self" href="link" title="titolo" mybind="id">
+                                        <h3 style="margin-bottom: 0px">
+                                            <span class="bind" mybind="name"></span>
+                                        </h3>
+                                        <span class="bind" mybind="idtipologia" format="frmtiporisorsa"></span>
+                                        <span class="bind" mybind="idcontratto" format="frmcontratto"></span>
+                                        <span class="bind" mybind="codiceREGIONE" format="frmregione"></span>
+                                        <span class="bind" mybind="codicePROVINCIA" format="frmprovincia"></span>
+                                        <br />
+                                    </a>
+                                    <a class="bind" target="_self" href="link" title="titolo" mybind="id">
+                                        <span class="bind" mybind="id.titolo"></span>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="feature-details">
+                                    <span class="pull-right bind" mybind="Superficie1" format="frmsuperficie"></span>
+                                    <span class="pull-right bind" mybind="Camere" format="frmcamere"></span>
+                                    <span class="pull-right bind" mybind="bagni" format="frmbagni"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fine scroller   -->

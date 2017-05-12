@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class AreaContenuti_Default : CommonPage
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["Errore"] != null && Request.QueryString["Errore"] != "")
+            { output.Text = Request.QueryString["Errore"].ToString(); }
+
+
+            List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) > 1) && (Convert.ToInt32(t.Codice.Substring(3)) <= 12));
+            //Tipologie.AddRange( WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) == 199));
+
+            // Tipologie.RemoveAll(delegate(WelcomeLibrary.DOM.TipologiaOfferte _t) { return _t.Codice == "rif000100"; });
+            rptTipologia.DataSource = Tipologie;
+            rptTipologia.DataBind();
+
+            List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
+            rptCatalogo.DataSource = Catalogo;
+            rptCatalogo.DataBind();
+
+        //Commenti
+            //List<WelcomeLibrary.DOM.TipologiaOfferte> list = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 101 && Convert.ToInt32(t.Codice.Substring(3)) <= 101);
+            //rptCustom.DataSource = list;
+            //rptCustom.DataBind();
+
+            //List<WelcomeLibrary.DOM.TipologiaContenuti> contenuti = WelcomeLibrary.UF.Utility.TipologieContenuti.FindAll(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I"); });
+            //rptContenutiLink.DataSource = contenuti;
+            //rptContenutiLink.DataBind();
+
+
+            //List<WelcomeLibrary.DOM.TipologiaAnnunci> Annunci = WelcomeLibrary.UF.Utility.TipologieAnnunci.FindAll(delegate(WelcomeLibrary.DOM.TipologiaAnnunci tmp) { return (tmp.Lingua == "I"); });
+
+            //rptTipoannunci.DataSource = Annunci;
+            //rptTipoannunci.DataBind();
+
+            //Controllo contenuti pagine statiche
+            WelcomeLibrary.DOM.TipologiaContenuti paginestatiche = WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate(WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con001000"); });
+            linkPaginestatiche.HRef = "GestioneContenuti.aspx?CodiceContenuto=" + paginestatiche.Codice;
+            Titolopaginestatiche.Text = paginestatiche.Descrizione;
+
+
+        }
+
+
+        litTrial.Text = WelcomeLibrary.STATIC.Global.TestTrial();
+
+    }
+}

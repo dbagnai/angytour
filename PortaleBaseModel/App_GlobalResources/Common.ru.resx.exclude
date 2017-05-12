@@ -1,0 +1,1106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GoogleConversione" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkHome" xml:space="preserve">
+    <value>~/RU/Home</value>
+  </data>
+  <data name="linkHomeEn" xml:space="preserve">
+    <value>~/GB/Home</value>
+  </data>
+  <data name="linkHomeIta" xml:space="preserve">
+    <value>~/I/Home</value>
+  </data>
+  <data name="testoIta" xml:space="preserve">
+    <value>Ита</value>
+  </data>
+  <data name="testoEn" xml:space="preserve">
+    <value>анг</value>
+  </data>
+  <data name="TestoCerca" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="TestoRichiediPacchetto" xml:space="preserve">
+    <value>Спросите информаций</value>
+  </data>
+  <data name="TestoPrenotaContent" xml:space="preserve">
+    <value>
+      Fill the form with requested info, we will contacts to give availability and proceed with your request.</value>
+  </data>
+  <data name="testoPreventivi" xml:space="preserve">
+    <value>Расчетная стоимость</value>
+  </data>
+  <data name="linkPreventivi" xml:space="preserve">
+    <value>~/Aspnetpages/Content_Tipo3.aspx?TipoContenuto=Preventivi&amp;Lingua=RU</value>
+  </data>
+  <data name="LinkDovesiamo" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=RU&amp;TipoContenuto=Dovesiamo</value>
+  </data>
+  <data name="testoDovesiamo" xml:space="preserve">
+    <value>Где мы</value>
+  </data>
+  <data name="LinkContatti" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=RU&amp;TipoContenuto=Contatti</value>
+  </data>
+  <data name="TestoContatti" xml:space="preserve">
+    <value>Kонтакты</value>
+  </data>
+  <data name="LinkPrenota" xml:space="preserve">
+    <value>~/AspNetPages/Content_Tipo3.aspx?Lingua=RU&amp;TipoContenuto=Prenota</value>
+  </data>
+  <data name="TestoPrenota" xml:space="preserve">
+    <value>Book</value>
+  </data>
+  <data name="TestoContattaciLateral" xml:space="preserve">
+    <value>Kонтакты</value>
+  </data>
+  <data name="testoLoginReturn" xml:space="preserve">
+    <value>Зона пользователя</value>
+  </data>
+  <data name="testoLoginNew" xml:space="preserve">
+    <value>Запрос на подписку</value>
+  </data>
+  <data name="testoLoginNewExplain" xml:space="preserve">
+    <value>Отправить  запрос на подписку следуя процедуру.</value>
+  </data>
+  <data name="testoLoginForget" xml:space="preserve">
+    <value>Забыт</value>
+  </data>
+  <data name="testoLoginNewCreateSocio" xml:space="preserve">
+    <value>Запрос на подписку</value>
+  </data>
+  <data name="testoLoginNewCreate" xml:space="preserve">
+    <value>Подписаться на сайт</value>
+  </data>
+  <data name="testoLoginAccedi" xml:space="preserve">
+    <value>Доступ</value>
+  </data>
+  <data name="testoLoginUtente" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="testoLoginDisconnetti" xml:space="preserve">
+    <value>Отключение пользователя</value>
+  </data>
+  <data name="TestoRiservata" xml:space="preserve">
+    <value>Зарезервированная зона доступа</value>
+  </data>
+  <data name="PagerDi" xml:space="preserve">
+    <value>из</value>
+  </data>
+  <data name="PagerPagina" xml:space="preserve">
+    <value>Cтраница</value>
+  </data>
+  <data name="Linklogin" xml:space="preserve">
+    <value>~/Login.aspx?Lingua=RU</value>
+  </data>
+  <data name="TestoLogin" xml:space="preserve">
+    <value>Зарезервированная зона</value>
+  </data>
+  <data name="testoIndietro" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="PagerTesto1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PagerTesto2" xml:space="preserve">
+    <value>Hайдено результатов - </value>
+  </data>
+  <data name="PagerTesto3" xml:space="preserve">
+    <value>Всего страниц</value>
+  </data>
+  <data name="PagerTesto4" xml:space="preserve">
+    <value>Следующий</value>
+  </data>
+  <data name="PagerTesto5" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="testoConsenso1" xml:space="preserve">
+    <value>Я даю согласие на получение сообщений электронной почты, связанные с предложениями и продвижению товара и событий.</value>
+  </data>
+  <data name="testoPrivacy" xml:space="preserve">
+    <value>Я даю согласие на обработку моих персональных данных, как (196/2003)</value>
+  </data>
+  <data name="chkPrivacy" xml:space="preserve">
+    <value>Я даю согласие на обработку моих личных данных</value>
+  </data>
+  <data name="FormTestoPeriododa" xml:space="preserve">
+    <value>Arrival</value>
+  </data>
+  <data name="FormTestoPeriodoa" xml:space="preserve">
+    <value>Departure</value>
+  </data>
+  <data name="FormTestoAdulti" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="FormTestoBambini" xml:space="preserve">
+    <value>Childrens (2-12)</value>
+  </data>
+  <data name="FormTestoLocations" xml:space="preserve">
+    <value>Accommodation</value>
+  </data>
+  <data name="FormTestoInfanti" xml:space="preserve">
+    <value>Infants (0-2)</value>
+  </data>
+  <data name="FormTesto10" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="FormTesto10Err" xml:space="preserve">
+    <value>Адрес Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto11" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="FormTesto11Err" xml:space="preserve">
+    <value>Телефон Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto2" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="FormTesto2Err" xml:space="preserve">
+    <value>Имя Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto3" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="FormTesto3Err" xml:space="preserve">
+    <value>Фамилия Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto4" xml:space="preserve">
+    <value>Адрес электронной почты</value>
+  </data>
+  <data name="FormTesto4Err" xml:space="preserve">
+    <value>Адрес электронной почты Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto5" xml:space="preserve">
+    <value>Страна</value>
+  </data>
+  <data name="FormTesto5Err" xml:space="preserve">
+    <value>Страна Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto6" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="FormTesto6Err" xml:space="preserve">
+    <value>Регион Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto7" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="FormTesto7Err" xml:space="preserve">
+    <value>Область Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto8" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="FormTesto8Err" xml:space="preserve">
+    <value>Город Обязательно
+&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto9" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="FormTesto9Err" xml:space="preserve">
+    <value>Zip Required&lt;br/&gt;</value>
+  </data>
+  <data name="TestoInvio" xml:space="preserve">
+    <value>Послать</value>
+  </data>
+  <data name="testoMailValidazione1" xml:space="preserve">
+    <value>&lt;b&gt;Сводка данных для активации веб-службы.&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="TestoRichiestaCorretto" xml:space="preserve">
+    <value>Запрос успешно отправлен.</value>
+  </data>
+  <data name="TestoRispAttivaCliente" xml:space="preserve">
+    <value>Проверка клиента выполнена правильно, пользователь зарегистрирован.</value>
+  </data>
+  <data name="TitoloRichiedi" xml:space="preserve">
+    <value>Подписаться на сайт</value>
+  </data>
+  <data name="FormTesto17" xml:space="preserve">
+    <value>Сообщение*</value>
+  </data>
+  <data name="FormTesto17Err" xml:space="preserve">
+    <value>Сообщение Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16s" xml:space="preserve">
+    <value>Имя / O Название компании</value>
+  </data>
+  <data name="FormTesto16sErr" xml:space="preserve">
+    <value>Имя / O Название компании Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16" xml:space="preserve">
+    <value>Имя / O Название компании</value>
+  </data>
+  <data name="FormTesto16Err" xml:space="preserve">
+    <value>Имя / O Название компании Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto16l" xml:space="preserve">
+    <value>Имя / O Название компании</value>
+  </data>
+  <data name="FormTesto16lErr" xml:space="preserve">
+    <value>Имя / O Название компании Обязательно&lt;br/&gt;</value>
+  </data>
+  <data name="FormTesto17s" xml:space="preserve">
+    <value>НДС а/о Налоговый кодекс</value>
+  </data>
+  <data name="FormTesto17sErr" xml:space="preserve">
+    <value>НДС а/о Налоговый кодекс Обязательно*&lt;br/&gt;</value>
+  </data>
+  <data name="testoPagamento" xml:space="preserve">
+    <value>&lt;font style="color: #e2277c; font-size: 120%"&gt;Cпособ оплаты
+&lt;/font&gt;</value>
+  </data>
+  <data name="TitoloInserisci" xml:space="preserve">
+    <value>Подписка на сайт</value>
+  </data>
+  <data name="FormTesto22" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="TestoScorriPager" xml:space="preserve">
+    <value>Нажмите номер, чтобы увидеть содержимое</value>
+  </data>
+  <data name="testoDatiMancanti" xml:space="preserve">
+    <value>Неполные данные обнаружены, заполните бланк, чтобы Неполные данные обнаружены, заполните бланк, чтобы отправить</value>
+  </data>
+  <data name="Testotestimonianze" xml:space="preserve">
+    <value>Отправте свое мнение</value>
+  </data>
+  <data name="TestoDisponibilita" xml:space="preserve">
+    <value>Спросите информаций</value>
+  </data>
+  <data name="TestoRichiedi" xml:space="preserve">
+    <value>Order now</value>
+  </data>
+  <data name="TestoTooltipElenco" xml:space="preserve">
+    <value>Смотрите подробности</value>
+  </data>
+  <data name="TestoUnsubscribe" xml:space="preserve">
+    <value>Если вы больше не хотите получать электронную почту и удалить подписку на нашу рассылку, нажмите на эту ссылку.</value>
+  </data>
+  <data name="TitoloPrezzo" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="TitoloPrezzoApartire" xml:space="preserve">
+    <value>Из</value>
+  </data>
+  <data name="TestoIscrizioneCorretta" xml:space="preserve">
+    <value>Подписка на сайт сделано правильно.</value>
+  </data>
+  <data name="testoLinkValidazioneIscrizione" xml:space="preserve">
+    <value>&lt;b&gt;Завершится регистрация на сайте, перейдя по этой ссылке.
+.&lt;/b&gt;</value>
+  </data>
+  <data name="testoMailIscrizione0" xml:space="preserve">
+    <value>Email проверки для регистрации на сайте. Подтвердите, нажав на ссылку в нижней части сообщения электронной почты.</value>
+  </data>
+  <data name="testoMailIscrizione1" xml:space="preserve">
+    <value>&lt;b&gt;"Сводные данные по подписке на сайте.
+".&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="testoRispostaMailIscrizione" xml:space="preserve">
+    <value>Мы послали по электронной почте по адресу, указанному разрешить проверку идентичности запроса. Для завершения процедуры, проверьте ваш почтовый ящик и &lt;br/&gt; нажмите на ссылку для подтверждения в нижней части сообщения.</value>
+  </data>
+  <data name="testoMailAdesione" xml:space="preserve">
+    <value>Запрос на подписку</value>
+  </data>
+  <data name="testoMailAdesione1" xml:space="preserve">
+    <value>&lt;b&gt;Сводные данные по подписке..&lt;/b&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="testoRispostaRichiestaIscrizione" xml:space="preserve">
+    <value>Запрос отправлен. В ближайшее время с вами свяжется наш  секретариат чтобы продолжить с вашим приложением.</value>
+  </data>
+  <data name="FormTestoPass" xml:space="preserve">
+    <value>Пароль доступа</value>
+  </data>
+  <data name="TitoloIscrivi" xml:space="preserve">
+    <value>Заполните данные подписки</value>
+  </data>
+  <data name="TestoIscrivi1" xml:space="preserve">
+    <value>&lt;br/&gt;Следуйте инструкциям, чтобы закончить.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Эл. адрес:</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Факс:</value>
+  </data>
+  <data name="Telefono" xml:space="preserve">
+    <value>Телефон:</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Электронная страница.</value>
+  </data>
+  <data name="Rubriche" xml:space="preserve">
+    <value>SECTIONS</value>
+  </data>
+  <data name="TestoContattaci" xml:space="preserve">
+    <value> &lt;br /&gt;&lt;br /&gt;
+      
+       &lt;font style="font-weight: 500;"&gt;
+       Для того, чтобы задать нам вопрос заполнить бланк и отправить с этой страницы.
+&lt;br /&gt;
+       &lt;/font&gt;
+       
+ </value>
+  </data>
+  <data name="testoContinua" xml:space="preserve">
+    <value>Прочитайте больше...</value>
+  </data>
+  <data name="TestoHome" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="txtTastoNext" xml:space="preserve">
+    <value>СЛЕДУЮЩИЙ</value>
+  </data>
+  <data name="txtTastoPrev" xml:space="preserve">
+    <value>ПРЕД</value>
+  </data>
+  <data name="wmarkCerca" xml:space="preserve">
+    <value>Поиск...</value>
+  </data>
+  <data name="social_condividi" xml:space="preserve">
+    <value>Доля в социальной сети &amp;nbsp;&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="social_like" xml:space="preserve">
+    <value>Скажите, если вы любите&amp;nbsp;&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="titoloNewspercategoria" xml:space="preserve">
+    <value>ПОСЛЕДНИЙ для категории</value>
+  </data>
+  <data name="titoloNewsultime" xml:space="preserve">
+    <value>Новинка</value>
+  </data>
+  <data name="footerTitle1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="footerTitle2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkDisclaimer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoDisclaimer" xml:space="preserve">
+    <value>Oтказ</value>
+  </data>
+  <data name="TestoPrivacyperlink" xml:space="preserve">
+    <value>Конфиденциальность</value>
+  </data>
+  <data name="ddlTuttiregione" xml:space="preserve">
+    <value>Выберите регион</value>
+  </data>
+  <data name="TestoPubblicatodata" xml:space="preserve">
+    <value>Опубликован в</value>
+  </data>
+  <data name="titleCercaTesto" xml:space="preserve">
+    <value>Поиск на веб-сайте</value>
+  </data>
+  <data name="selLocation" xml:space="preserve">
+    <value>Выбор места</value>
+  </data>
+  <data name="titleMain" xml:space="preserve">
+    <value>Aгентствo по недвижимости Tamagnini Тоскана Италия</value>
+  </data>
+  <data name="_linkFacebook" xml:space="preserve">
+    <value>https://www.facebook.com/immobiliaretamagnini.it/?fref=ts</value>
+  </data>
+  <data name="_linkPinterest" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkTwitter" xml:space="preserve">
+    <value>https://twitter.com/tamagninireales</value>
+  </data>
+  <data name="_linkGoogle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkYoutube" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkInstagram" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkTripadvisor" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkFoursquare" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkVkontakte" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_linkLinkedin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoRichiesta" xml:space="preserve">
+    <value>Спросите информаций</value>
+  </data>
+  <data name="testoSezione" xml:space="preserve">
+    <value>Pаздел</value>
+  </data>
+  <data name="testoSeguici" xml:space="preserve">
+    <value>Следовать по</value>
+  </data>
+  <data name="testoid1" xml:space="preserve">
+    <value>Агенство</value>
+  </data>
+  <data name="testoBlog" xml:space="preserve">
+    <value>Discover our activities</value>
+  </data>
+  <data name="testoListini" xml:space="preserve">
+    <value>Prices list</value>
+  </data>
+  <data name="testoBlogcategorie" xml:space="preserve">
+    <value>Увидеть все</value>
+  </data>
+  <data name="testoCatalogo" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="testolinkSezioniCatalogo" xml:space="preserve">
+    <value>См каталог</value>
+  </data>
+  <data name="LinkShoppingcart" xml:space="preserve">
+    <value>~/Aspnetpages/Shoppingcart.aspx?Lingua=RU</value>
+  </data>
+  <data name="TestoShoppingcart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="LinkOrder" xml:space="preserve">
+    <value>~/Aspnetpages/Orderpage.aspx?Lingua=RU</value>
+  </data>
+  <data name="TestoCatalogo1" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="TestoShop" xml:space="preserve">
+    <value>Shop</value>
+  </data>
+  <data name="TestoProcess" xml:space="preserve">
+    <value>Cистемный администратор</value>
+  </data>
+  <data name="TestoProfile" xml:space="preserve">
+    <value>Доступ</value>
+  </data>
+  <data name="TestoPanel1" xml:space="preserve">
+    <value>Последнй</value>
+  </data>
+  <data name="TestoPanel2" xml:space="preserve">
+    <value>Последние предложения</value>
+  </data>
+  <data name="TestoPanel3" xml:space="preserve">
+    <value>Особенности</value>
+  </data>
+  <data name="TestoCercaBlog" xml:space="preserve">
+    <value>Поиск…</value>
+  </data>
+  <data name="TestoInseriscimail" xml:space="preserve">
+    <value>Вставьте вашу электронную почту ....</value>
+  </data>
+  <data name="TestoInseriscinome" xml:space="preserve">
+    <value>Вставьте ваше имя ....</value>
+  </data>
+  <data name="testoLogoHead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoSottoLogoHead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoSubtitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titoloNewsletter" xml:space="preserve">
+    <value>Дайте нам вашу электронную почту</value>
+  </data>
+  <data name="TestoNewsletterForm" xml:space="preserve">
+    <value>Получить предварительный просмотр всех последних новостей о мероприятиях, предложениях и событиях.</value>
+  </data>
+  <data name="titoloNewsletter1" xml:space="preserve">
+    <value>Выберите для получения новостей и информации о мероприятий, предложений и событий.</value>
+  </data>
+  <data name="TestoBtnNewsletter" xml:space="preserve">
+    <value>Послать</value>
+  </data>
+  <data name="wmarkEmail" xml:space="preserve">
+    <value>Эл. адрес</value>
+  </data>
+  <data name="wmarkNome" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="erroreAdesione" xml:space="preserve">
+    <value>Клиенты уже подписались на указанный newsletter !</value>
+  </data>
+  <data name="erroreAdesioneMail" xml:space="preserve">
+    <value>Неопознанный изначальный эл.адрес для newsletter</value>
+  </data>
+  <data name="erroreValidazione" xml:space="preserve">
+    <value>Клиент не является действительным или непризнанным электронной почты, не может отправить электронную почту членства.</value>
+  </data>
+  <data name="FormTesto14" xml:space="preserve">
+    <value>Заметки</value>
+  </data>
+  <data name="FormTesto20" xml:space="preserve">
+    <value>НДС а/о Налоговый кодекс</value>
+  </data>
+  <data name="FormTesto20Err" xml:space="preserve">
+    <value>НДС а/о Налоговый кодекс Обязательно</value>
+  </data>
+  <data name="privacydetail" xml:space="preserve">
+    <value>OpenWindow('PrivacyGB.htm','','scrollbars=yes,width=600,height=400')</value>
+  </data>
+  <data name="rispostaUnsubscribe" xml:space="preserve">
+    <value>Вы были успешно удалены из списка для рассылки информационных newsletters</value>
+  </data>
+  <data name="testoAdesione" xml:space="preserve">
+    <value>Принятие предложения /  newsletter.</value>
+  </data>
+  <data name="testoRispostaMailAdesione" xml:space="preserve">
+    <value>Благодарим Вас за то, что приняли предложение.</value>
+  </data>
+  <data name="titleIscriviti" xml:space="preserve">
+    <value>Подписаться на новостную рассылку</value>
+  </data>
+  <data name="testoIscrizioneNewsletter" xml:space="preserve">
+    <value>Чтобы подписаться на рассылку, вам необходимо подтвердить право собственности на электронную почту.</value>
+  </data>
+  <data name="testoMailIscrizione" xml:space="preserve">
+    <value>Подписка на новости</value>
+  </data>
+  <data name="testoMailIscrizioneNoOk" xml:space="preserve">
+    <value>Ошибка при отправке запроса на подписку бюллетень, свяжитесь с нами для получения дополнительной информации.</value>
+  </data>
+  <data name="testoMailIscrizioneOK" xml:space="preserve">
+    <value>Успешно подачa заявки.</value>
+  </data>
+  <data name="ddlTuttiprovincia" xml:space="preserve">
+    <value>Выберите область</value>
+  </data>
+  <data name="testoRicercaCatalogo" xml:space="preserve">
+    <value>Поиск продуктов</value>
+  </data>
+  <data name="testoCatalogo2" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="imgCatalogo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgCatalogo1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgCatalogo2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoPromoContent" xml:space="preserve">
+    <value>Подпишитесь на нашу рассылку и получить лучшую информацию.</value>
+  </data>
+  <data name="titoloCatalogoConsigliati" xml:space="preserve">
+    <value>Похожие содержания</value>
+  </data>
+  <data name="titoloCollegati" xml:space="preserve">
+    <value>Близкие по теме содержания</value>
+  </data>
+  <data name="selezionaNazione" xml:space="preserve">
+    <value>Выберите страну</value>
+  </data>
+  <data name="testoAggiornacarrello" xml:space="preserve">
+    <value>Update cart</value>
+  </data>
+  <data name="testoInseriscicarrello" xml:space="preserve">
+    <value>Insert in cart</value>
+  </data>
+  <data name="testoRimuovicarrello" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="testoCarrello" xml:space="preserve">
+    <value>Shop Cart</value>
+  </data>
+  <data name="CarrelloArticolo" xml:space="preserve">
+    <value>Article</value>
+  </data>
+  <data name="CarrelloQuantita" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="CarrelloTotale" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="CarrelloRiepilogo" xml:space="preserve">
+    <value>Cart summary</value>
+  </data>
+  <data name="CarrelloTotaleRiepilogo" xml:space="preserve">
+    <value>Cart total</value>
+  </data>
+  <data name="CarrelloTotaleSpedizione" xml:space="preserve">
+    <value>Expedition costs</value>
+  </data>
+  <data name="CarrelloCalcolaTotaleSpedizione" xml:space="preserve">
+    <value>Expediotion costs</value>
+  </data>
+  <data name="CarrelloRicalcolaTotaleSpedizione" xml:space="preserve">
+    <value>Calculate expedition costs</value>
+  </data>
+  <data name="CarrelloTotaleOrdine" xml:space="preserve">
+    <value>Order total</value>
+  </data>
+  <data name="CarrelloSelezioneArticoli" xml:space="preserve">
+    <value>Products selected</value>
+  </data>
+  <data name="TestoProcediOrdine" xml:space="preserve">
+    <value>Продолжить с заказом</value>
+  </data>
+  <data name="TestoPagamentoOrdine" xml:space="preserve">
+    <value>Заказ полный</value>
+  </data>
+  <data name="titoloUltimeBlog" xml:space="preserve">
+    <value>Последнее из блога</value>
+  </data>
+  <data name="IndirizzoFatturazione" xml:space="preserve">
+    <value>Billing address</value>
+  </data>
+  <data name="IndirizzoSpedizione" xml:space="preserve">
+    <value>Expedition address</value>
+  </data>
+  <data name="testochkSpedizione" xml:space="preserve">
+    <value>Same as billing address</value>
+  </data>
+  <data name="testoMetodopagamento" xml:space="preserve">
+    <value>Cпособ оплаты</value>
+  </data>
+  <data name="testoRichiestalogin" xml:space="preserve">
+    <value>Войдите или зарегистрируйтесь, чтобы продолжить.</value>
+  </data>
+  <data name="testoNote" xml:space="preserve">
+    <value>Примечания.</value>
+  </data>
+  <data name="txtPagamento" xml:space="preserve">
+    <value>Select payement method</value>
+  </data>
+  <data name="chkbacs" xml:space="preserve">
+    <value>
+Make payment through bank account .&lt;br/&gt;
+Wait for confirmation from our side to
+proceed with bank tranfer, following the instructions in the mail with details .
+Your order will not be Shipped Until the receipt of funds on our account.</value>
+  </data>
+  <data name="chkpaypal" xml:space="preserve">
+    <value>Pay by PayPal / Credit Card; you can also pay with your credit card without a Paypal profile
+       with this option.
+        SECURE PAYMENT WITH CREDIT / CARD PAYPAL</value>
+  </data>
+  <data name="txtbacs" xml:space="preserve">
+    <value>Bank transfer</value>
+  </data>
+  <data name="txtpaypal" xml:space="preserve">
+    <value>Paypal/Card</value>
+  </data>
+  <data name="OrdineSoggettomailRichiesta" xml:space="preserve">
+    <value>Order request from </value>
+  </data>
+  <data name="OrdineSoggettomailRiepilogo" xml:space="preserve">
+    <value>Order summary </value>
+  </data>
+  <data name="TestoConfermaOrdine" xml:space="preserve">
+    <value>You will be contacted as soon as possible to conclude the order process.</value>
+  </data>
+  <data name="TestoSaluti" xml:space="preserve">
+    <value>Предложения</value>
+  </data>
+  <data name="OrdineEsegui" xml:space="preserve">
+    <value>Make order</value>
+  </data>
+  <data name="TitlePresentazione" xml:space="preserve">
+    <value>Aгентствo по недвижимости Tamagnini</value>
+  </data>
+  <data name="txtOrdineannullato" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="txtOrdinenonpagato" xml:space="preserve">
+    <value>Awaiting payement</value>
+  </data>
+  <data name="txtOrdinepagato" xml:space="preserve">
+    <value>Payed</value>
+  </data>
+  <data name="forgetRequest1" xml:space="preserve">
+    <value>
+Enter your email to receive the password or otherwise register to the website to access the services.</value>
+  </data>
+  <data name="forgetResponse1" xml:space="preserve">
+    <value>      
+Here is a summary of your data and the new access pass.</value>
+  </data>
+  <data name="forgetResponse2" xml:space="preserve">
+    <value>   
+Email sent for password recovery , check your mailbox .</value>
+  </data>
+  <data name="forgetResponse3" xml:space="preserve">
+    <value>
+Email not found , please enter your registered email for the username or register to the website to access the services.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Заполните все необходимые зоны, чтобы продолжить оформление заказа</value>
+  </data>
+  <data name="defRispostaOrdine" xml:space="preserve">
+    <value>  
+Check the correct execution of the procedure by contacting the operator. Unable to verify the correct execution of the transaction .</value>
+  </data>
+  <data name="risposta_4" xml:space="preserve">
+    <value>TRANSACTION NOT COMPLETED.</value>
+  </data>
+  <data name="risposta_5" xml:space="preserve">
+    <value>Order confirmed, payement correctly executed.&lt;br/&gt;
+We will contact you soon to complete the process and for the delivery of the material &lt;br/&gt;
+   We thank you for your preference.</value>
+  </data>
+  <data name="risposta_6" xml:space="preserve">
+    <value>ERROR PAYEMEND NOT EXECUTED (GET SHIPPING DETAILS ERROR)</value>
+  </data>
+  <data name="risposta_7" xml:space="preserve">
+    <value>ERROR TRANSACTION NOT COMPLETED (DO EXPRESS CHECKOUT ERROR)</value>
+  </data>
+  <data name="testoSconto" xml:space="preserve">
+    <value>Проложенная скидка</value>
+  </data>
+  <data name="TestoSupplementoSpedizioni" xml:space="preserve">
+    <value>IMPORTANT! 
+Select this when shipping to Italy Islands , smaller islands and Venice Lagoon&lt;br/&gt;(
+Delivery expected Supplement Required )</value>
+  </data>
+  <data name="TestoVideo" xml:space="preserve">
+    <value>Bидео</value>
+  </data>
+  <data name="titleNewsletter" xml:space="preserve">
+    <value>Новостная рассылка</value>
+  </data>
+  <data name="LinkInfoeorari" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GoogleCalcolapercorso" xml:space="preserve">
+    <value>Трассировка</value>
+  </data>
+  <data name="GooglePartenza" xml:space="preserve">
+    <value>Из:</value>
+  </data>
+  <data name="GooglePin1" xml:space="preserve">
+    <value>Immobiliare Tamagnini Real Estate&lt;br/&gt;Via Roma, 10 53047 Sarteano (SI) Tuscany Italy&lt;br/&gt;Tel.0578 267158 Fax.0578 268854 e-mail:info@immobiliaretamagnini.it Web:www.immobiliaretamagnini.it</value>
+  </data>
+  <data name="GoogleUrl1" xml:space="preserve">
+    <value>https://goo.gl/maps/qy3GNPEqGeL2</value>
+  </data>
+  <data name="GooglePosizione1" xml:space="preserve">
+    <value>42.9899519,11.869551</value>
+  </data>
+  <data name="GooglePin2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GoogleUrl2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GooglePosizione2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtFooter" xml:space="preserve">
+    <value>Aгентствo по недвижимости Tamagnini Real Estate &lt;br/&gt; Via Roma, 10 53047 Sarteano (SI) Тоскана Италия &lt;br/&gt; Ph.0578 267158 Fax.0578 268854 электронная почта: info@immobiliaretamagnini.it Веб: www.immobiliaretamagnini.it</value>
+  </data>
+  <data name="TestoCredits1" xml:space="preserve">
+    <value>&lt;font style="font-weight:600"&gt;Aгентствo по недвижимости Tamagnini
+&lt;/font&gt;&lt;br/&gt;
+        &lt;br/&gt;Via Roma, 10 53047 Sarteano (SI) Тоскана Италия&lt;br/&gt;Ph.0578 267158 Fax.0578 268854 электронная почта: info@immobiliaretamagnini.it Веб: www.immobiliaretamagnini.it
+&lt;br/&gt;&lt;br/&gt;</value>
+  </data>
+  <data name="TestoRaggiungerci" xml:space="preserve">
+    <value> 
+    </value>
+  </data>
+  <data name="testoMessage" xml:space="preserve">
+    <value>Перенесите сюда ВАШИ Запросы:</value>
+  </data>
+  <data name="testoData" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="testoGiorni" xml:space="preserve">
+    <value>Дней</value>
+  </data>
+  <data name="testoPosizionebase" xml:space="preserve">
+    <value>Тоскана Сиена Италия</value>
+  </data>
+  <data name="testoAttivita" xml:space="preserve">
+    <value>DISCOVER OUR ACTIVITIES</value>
+  </data>
+  <data name="emailaddress" xml:space="preserve">
+    <value>info@immobiliaretamagnini.it</value>
+  </data>
+  <data name="testoTelfisso" xml:space="preserve">
+    <value>+39 0578267158</value>
+  </data>
+  <data name="testoTelmobile" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter1" xml:space="preserve">
+    <value>Cвязи</value>
+  </data>
+  <data name="testoFooter2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormOrdinamento" xml:space="preserve">
+    <value>Заказать по</value>
+  </data>
+  <data name="txtVerticalTipologia" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="titleVerticalButton" xml:space="preserve">
+    <value>Зарегистрировать</value>
+  </data>
+  <data name="txtVerticalLingua" xml:space="preserve">
+    <value>enEN</value>
+  </data>
+  <data name="txtVerticalDataarrivo" xml:space="preserve">
+    <value>Дата прибытия</value>
+  </data>
+  <data name="txtVerticalDatapartenza" xml:space="preserve">
+    <value>Дата отбытия</value>
+  </data>
+  <data name="txtVerticalNotti" xml:space="preserve">
+    <value>nights</value>
+  </data>
+  <data name="txttitleBlog" xml:space="preserve">
+    <value>Блог</value>
+  </data>
+  <data name="TestoHomeIndex" xml:space="preserve">
+    <value>Aгентствo по недвижимости Tamagnini</value>
+  </data>
+  <data name="TestoArchivio" xml:space="preserve">
+    <value>АРХИВ</value>
+  </data>
+  <data name="descMain" xml:space="preserve">
+    <value>Агество по недвижимости  Tamagnini сделано в Италии, загородные дома, роскошные виллы, курорты и СПА, исторические здания и фермы, поместья с виноградниками и виноделами, оливковые рощи.</value>
+  </data>
+  <data name="descMain1" xml:space="preserve">
+    <value> 
+ </value>
+  </data>
+  <data name="barbutton2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="barbutton3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="barbutton4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoContattaciFooter" xml:space="preserve">
+    <value>&lt;span style="font-size:2em"&gt;
+      Свяжитесь с нами.&lt;/span&gt;
+&lt;h3 class="h3-section-title"&gt;Свяжитесь с нами. Если вы хотите получить информацию о недвижимости для продажи или покупки, пожалуйста, свяжитесь с нами сейчас
+&lt;/h3&gt;</value>
+  </data>
+  <data name="CarrelloTotaleSmaltimento" xml:space="preserve">
+    <value>Disposal total cost</value>
+  </data>
+  <data name="chkBonifico" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkContanti" xml:space="preserve">
+    <value>cash</value>
+  </data>
+  <data name="chkGratuito" xml:space="preserve">
+    <value>none</value>
+  </data>
+  <data name="ContentError" xml:space="preserve">
+    <value>Страница не найдена</value>
+  </data>
+  <data name="ddlTutticategoria" xml:space="preserve">
+    <value>Выберите тип</value>
+  </data>
+  <data name="ddlTuttiComune" xml:space="preserve">
+    <value>Выберите Местность</value>
+  </data>
+  <data name="ddlTuttiMese" xml:space="preserve">
+    <value>Выберите месяц</value>
+  </data>
+  <data name="EsitoNegativovalidazioneCliente" xml:space="preserve">
+    <value>Заказчик не найден, перейти на подписку на сайт и на  проверку</value>
+  </data>
+  <data name="EsitoPositivovalidazioneCliente" xml:space="preserve">
+    <value>Клиент правильно зарегистрирован</value>
+  </data>
+  <data name="LinkArchivio" xml:space="preserve">
+    <value>~/AspNetPages/Archivio.aspx?Lingua=RU</value>
+  </data>
+  <data name="SelezionePrezzo" xml:space="preserve">
+    <value>Выберите Диапазон цен</value>
+  </data>
+  <data name="_linkRss" xml:space="preserve">
+    <value>RSSfeedI.xml</value>
+  </data>
+  <data name="_linkSkype" xml:space="preserve">
+    <value>callto:pinco.pallino</value>
+  </data>
+  <data name="linkHomeCambio1" xml:space="preserve">
+    <value>~/I/Home</value>
+  </data>
+  <data name="linkHomeCambio2" xml:space="preserve">
+    <value>~/GB/Home</value>
+  </data>
+  <data name="testoCambio1" xml:space="preserve">
+    <value>Ита</value>
+  </data>
+  <data name="testoCambio2" xml:space="preserve">
+    <value>Анг</value>
+  </data>
+  <data name="txtIscrizioneErrore" xml:space="preserve">
+    <value>Ошибка во время применения. Свяжитесь с нами по электронной почте или по телефону, чтобы завершить процедуру</value>
+  </data>
+  <data name="txtMailError" xml:space="preserve">
+    <value>Ошибка при отправке эл. почты</value>
+  </data>
+  <data name="txtOrdineCorretto" xml:space="preserve">
+    <value>&lt;div&gt;&lt;br/&gt;Order Sent.&lt;br/&gt;You'll be contacted as soon as possible.&lt;/div&gt;</value>
+  </data>
+  <data name="txtOrdineErrore" xml:space="preserve">
+    <value>Error Sending Order.</value>
+  </data>
+  <data name="txtPrivacyError" xml:space="preserve">
+    <value>Конфиденциальный подход не выбран, невозможно отправить почту.</value>
+  </data>
+  <data name="txtValidateVerifica" xml:space="preserve">
+    <value>Клиент уже присутствует, обратитесь к нам за новым проходом, если вы потеряли его.</value>
+  </data>
+  <data name="txtValidazioneError" xml:space="preserve">
+    <value>Ошибка при проверке подлинности клиента. Свяжитесь с нами по электронной почте или по телефону, чтобы завершить процедуру</value>
+  </data>
+</root>

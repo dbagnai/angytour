@@ -1,0 +1,168 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using GELibraryRemoto.UF;
+using GELibraryRemoto.DOM;
+using GELibraryRemoto.DAL;
+using System.IO;
+using System.Collections.Generic;
+
+public partial class Admin_TestPage : CommonPage
+{
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
+
+    public string PercorsoComune
+    {
+        get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
+        set { ViewState["PercorsoComune"] = value; }
+    }
+    public string PercorsoImmobili
+    {
+        get { return ViewState["PercorsoImmobili"] != null ? (string)(ViewState["PercorsoImmobili"]) : ""; }
+        set { ViewState["PercorsoImmobili"] = value; }
+    }
+    public string PercorsoAssolutoApplicazione
+    {
+        get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
+        set { ViewState["PercorsoAssolutoApplicazione"] = value; }
+    }
+    //Vediamo l'agenzia del''immobile
+    AgenziaCollection agenziegestite_pagina = new AgenziaCollection();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        //Non volendo caricare nel viewstate, ad ogni postback devo aggiornare la lista agenzie
+        //leggendo dal file xml ( pesentuccio senza usare sql , ma col file xml -> da migliorare )
+        agenziegestite_pagina = AgenzieGestite;
+
+        if (!IsPostBack)
+        {
+            //Creo l'equivalente di ~/ nel ViewState per usarlo nel javascript della pagina
+            PercorsoAssolutoApplicazione = pathassoluto;
+            if (Posizione == "Locale")
+            {
+                PercorsoComune = PercorsoComuneLocale();
+                PercorsoImmobili = PercorsoLocale();
+            }
+            else
+            {
+                PercorsoComune = PercorsoComuneRemoto();
+                PercorsoImmobili = PercorsoRemoto();
+            }
+            //Prendiamo i dati dalla querystring (Lingua)
+            if (Request.QueryString["Lingua"] != null && Request.QueryString["Lingua"] != "")
+            { Lingua = Request.QueryString["Lingua"].ToString(); }
+            
+            this.CaricaDatiDdlRicerca();
+        }
+
+    }
+
+    /// <summary>
+    /// Questa aggiorna la tabella immobili del db cancellandola per la lingua
+    /// indicata e riscrivendola da zero
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btn_Test_Click(object sender, EventArgs e)
+    {
+        string errori = immDMpage.AggiornaDbDaFilesXml(Server.MapPath(PercorsoImmobili), Lingua, agenziegestite_pagina);
+
+    }
+    /// <summary>
+    /// Testa codice di selezione agenzie
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btn_Test1_Click(object sender, EventArgs e)
+    {
+        AgenziaCollection agenzie = FunzioniUtilità.GetAgenziaByIndirizzo(ddlRegione.SelectedValue ,ddlProvincia.SelectedValue, txtComune.Text, agenziegestite_pagina);
+
+        System.Random rnd = new Random();
+        int casuale = rnd.Next(0, agenzie.Count - 1);
+
+        PortaleDM portDM = new PortaleDM();
+        portDM.InsertStatisticaRichieste(agenzie[casuale].identificatore,"","","","","","");
+
+    }
+
+    protected void btn_Test2_Click(object sender, EventArgs e)
+    {
+        AgenziaCollection agenzie = FunzioniUtilità.GetAgenziaByIndirizzo(ddlRegione.SelectedValue, ddlProvincia.SelectedValue, txtComune.Text, agenziegestite_pagina);
+        PortaleDM portDM = new PortaleDM();
+        Agenzia selezionata = portDM.SelezionaAgenziaInBaseAStatistiche(agenzie);
+        
+
+
+    }
+
+    protected void ddlRegione_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //Carichiamo le province per la regione indicata
+        TabrifCollection Province = FunzioniUtilità.CreaListaProvinceDaFileXML(Server.MapPath(PercorsoComune + "/Province.xml"));
+        List<Tabrif> provincelingua = Province.FindAll(delegate(Tabrif tmp) { return (tmp.Lingua == Lingua && tmp.Campo1 == ((DropDownList)(sender)).SelectedValue); });
+        ddlProvincia.Items.Clear();
+        ddlProvincia.Items.Insert(0, TestoTuttiProvincia(Lingua));
+        ddlProvincia.Items[0].Value = "";
+        ddlProvincia.DataSource = provincelingua;
+        ddlProvincia.DataTextField = "Campo2";
+        ddlProvincia.DataValueField = "Campo2";
+        ddlProvincia.DataBind();
+    }
+    private void CaricaDatiDdlRicerca()
+    {
+        //Prendiamo i valori attualmente selezionati
+       
+        string Regione = ddlRegione.SelectedValue;
+        string Provincia = ddlProvincia.SelectedValue;
+     
+
+
+        //Devo caricare i valori nelle ddl
+        TabrifCollection Province = FunzioniUtilità.CreaListaProvinceDaFileXML(Server.MapPath(PercorsoComune + "/Province.xml"));
+      
+        //Regioni (Selezioniamo quelle distinte per la lingua selezionata)
+        TabrifCollection regioni = new TabrifCollection();
+        foreach (Tabrif item in Province)
+        {
+            if (item.Lingua == Lingua)
+                if (!regioni.Exists(delegate(Tabrif tmp) { return (tmp.Campo1 == item.Campo1); }))
+                    regioni.Add(item);
+        }
+        ddlRegione.Items.Clear();
+        ddlRegione.Items.Insert(0, TestoTuttiRegione(Lingua));
+        ddlRegione.Items[0].Value = "";
+        ddlRegione.DataSource = regioni;
+        ddlRegione.DataTextField = "Campo1";
+        ddlRegione.DataValueField = "Campo1";
+        ddlRegione.DataBind();
+        ddlRegione.SelectedValue = Regione;
+
+        //Province
+        ddlProvincia.Items.Clear();
+        ddlProvincia.Items.Insert(0, TestoTuttiProvincia(Lingua));
+        ddlProvincia.Items[0].Value = "";
+        if (Regione != "")
+        {
+            List<Tabrif> provincelingua = Province.FindAll(delegate(Tabrif tmp) { return (tmp.Lingua == Lingua && tmp.Campo1 == ddlRegione.SelectedValue); });
+            ddlProvincia.DataSource = provincelingua;
+            ddlProvincia.DataTextField = "Campo2";
+            ddlProvincia.DataValueField = "Campo2";
+            ddlProvincia.DataBind();
+            ddlProvincia.SelectedValue = Provincia;
+        }
+
+    }
+
+}
