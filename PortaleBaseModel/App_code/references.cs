@@ -294,10 +294,10 @@ public class references
                 if ((!string.IsNullOrEmpty(testotitolo)))
                 {
 
-                    bool upd = false;
-                    bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+                    //bool upd = false;
+                    //bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
 
-                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, upd);
+                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     //linklist.Add(link);
                     if (!retdict.ContainsKey(idact))
                     {
@@ -438,7 +438,7 @@ public class references
                 string link = "";
                 if ((!string.IsNullOrEmpty(testotitolo)))
                 {
-                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, true);
+                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     linklist.Add(link);
                 }
             }
@@ -523,6 +523,9 @@ public class references
         WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = Server.MapPath("~");
         WelcomeLibrary.STATIC.Global.versionforcache = ConfigurationManager.AppSettings["versionforcache"].ToString();
 
+        bool upd = false;
+        bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+        WelcomeLibrary.STATIC.Global.UpdateUrl = upd;
         //------------------------------------------------------------------------------------------------
         WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
 

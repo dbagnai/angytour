@@ -305,10 +305,10 @@ public class CommonPage : Page
     {
 
         bool gen = false;
-        bool upd = false;
         bool.TryParse(ConfigurationManager.AppSettings["generaUrlrewrited"], out gen);
-        bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
-        string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", gen, upd);
+        //bool upd = false;
+        //bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+        string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
         return link;//.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
     }
 

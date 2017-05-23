@@ -157,17 +157,17 @@
             string Lingua = "I";
             WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
             //Questa è da rivedere in base al codice tipologia !!!!!
-            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             Lingua = "GB";
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
-            Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             //Lingua = "RU";
             //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
-            //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
             //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             // references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
@@ -274,7 +274,7 @@
                 {
                     return;
                 }
-            
+
 
                 string appaddress = "";
                 if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
@@ -294,6 +294,40 @@
                         appaddress = appaddress.Replace(query, "");
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////
+                System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+                Messaggi.Add("Messaggio", "");
+                if (appaddress == "")//Caso di chiamata strana fallback
+                {
+                    Messaggi["Messaggio"] += " Errore global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
+                    Messaggi["Messaggio"] += " Errore global init AbsolutePath : " + System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Errore global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
+                    Messaggi["Messaggio"] += " Errore global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+                    Messaggi["Messaggio"] += " Errore global init server appaddress : " + appaddress;
+                    WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+
+                    //string appaddress = "http://" + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+                    //if (!HttpContext.Current.Request.Url.IsDefaultPort)
+                    //    appaddress += ":" + HttpContext.Current.Request.Url.Port.ToString();
+                    //string basedir = "";
+                    //if (HttpContext.Current.Request.ApplicationPath.ToString() != "/")
+                    //    basedir = HttpContext.Current.Request.ApplicationPath.ToString();
+                    //appaddress += basedir;
+                }
+                else
+                {
+                    Messaggi["Messaggio"] += " Global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
+                    Messaggi["Messaggio"] += " Global init AbsolutePath : " + System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
+                    Messaggi["Messaggio"] += " Global init Query : " + System.Web.HttpContext.Current.Request.Url.Query; ;
+                    Messaggi["Messaggio"] += " Global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+                    Messaggi["Messaggio"] += " Global init server appaddress : " + appaddress;
+                    WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+
+                }
+                //////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
                 /////////////////////////////////////////////////

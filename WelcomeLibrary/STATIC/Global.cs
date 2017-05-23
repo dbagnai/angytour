@@ -12,7 +12,12 @@ namespace WelcomeLibrary.STATIC
             get { return _NomeConnessioneDb; }
             set { _NomeConnessioneDb = value; }
         }
-
+        private static bool _updateUrl = false;
+        public static bool UpdateUrl
+        {
+            get { return _updateUrl; }
+            set { _updateUrl = value; }
+        }
         private static string _PercorsoContenuti;
         public static string PercorsoContenuti
         {

@@ -7,6 +7,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Lora:400,700);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+ 
 
 html {
     font-family: 'Raleway';
@@ -2262,6 +2263,18 @@ Portfoli Single ( da rival )
 .rev-slider-full {
     max-height: 1000px;
 }
+    .rev-slider-full .slotholder:after {
+        width: 100%;
+        height: 100%;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        z-index: 1;
+        background: rgba(0,0,0,0);
+    }
+
 
     .rev-slider-full .button {
         /*background-color: #4a4b4c;*/

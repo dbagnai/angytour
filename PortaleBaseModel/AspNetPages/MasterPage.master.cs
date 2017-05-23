@@ -1209,7 +1209,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             destinationliteral.Parent.Visible = false;
 
     }
-
     public void CaricaContenutiPortfolioRivalSubtext(string tipologiadacaricare, Literal destinationliteral, string Lingua, string numerodacaricare = "6", List<Offerte> passedlist = null, string versione = "", string Color = "1f809f")
     {
 
@@ -1358,8 +1357,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             destinationliteral.Parent.Visible = false;
 
     }
-
-
     public void CaricaBannersPortfolioRival(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua, bool overtext = false, int maxelements = 0, int margin = 0)
     {
 
@@ -1450,8 +1447,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         else
             destinationliteral.Parent.Visible = false;
     }
-
-
     public void CaricaUltimiPostScrollerTipo1(Literal destinationliteral, Literal titleliteral, string tipologiadacaricare, string lingua, bool visualizzadata = true, bool visualizzaprezzo = false, OfferteCollection listtoshow = null, string maxtoshow = "6", string Color = "1f809f")
     {
         offerteDM offDM = new offerteDM();
@@ -1849,8 +1844,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
     public void CaricaDdlOrdinamento(string value = "")
     {
-
-
         //string tipi = Resources.Common.listaServizi;
         Dictionary<string, string> dict = new Dictionary<string, string>();
         //string[] tipiarray = tipi.Split(',');
@@ -1964,7 +1957,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         chkPromo.Checked = promozioni;
     }
-
     protected void ddlCaratteristica1_SelectedIndexChanged(object sender, EventArgs e)
     {
         CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);

@@ -88,7 +88,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                     if (CodiceTipologia != "")
                         Session["Tipologia"] = CodiceTipologia;
                     AssociaDatiSocial(item);
-
                 }
 
                 //INTEGRAZIONE PER VISUALIZZAZIONE DATI IN BASE A TESTO DI RICERCA

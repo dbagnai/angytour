@@ -13,7 +13,7 @@ namespace WelcomeLibrary.UF
     {
 
         /// <summary>
-        /// Rigenera tutti i link nella tabella di urlrewriting
+        /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
         /// </summary>
         public static void RigeneraLinkSezioniUrlrewrited()
         {
@@ -90,8 +90,6 @@ namespace WelcomeLibrary.UF
                 }
             return ListaLink;
         }
-
-
 
         public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "", string regione = "", string annofiltro = "", string mesefiltro = "", bool generaUrlrewrited = false, bool updateTableurlrewriting = false, Dictionary<string, string> addparms = null)
         {

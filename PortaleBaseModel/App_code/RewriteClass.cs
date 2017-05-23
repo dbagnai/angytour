@@ -46,6 +46,7 @@ public class GenericRouteHandler : IRouteHandler
 
         if (destinationselector == null) destinationselector = "";
         if (textmatch == null || textmatch.ToLower() == "home") return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
+
         //Carichiamo la destinazione ed i paramentri in base al testmatch ....
         string calledurl = textmatch;
         if (!string.IsNullOrEmpty(destinationselector))

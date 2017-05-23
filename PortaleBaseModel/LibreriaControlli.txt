@@ -91,50 +91,50 @@ CONTENUTI ISOTOPE ELEMENTS TIPO PORTFOLIO (inserire div del pager se settato il 
  <script>// <![CDATA[
  //string control6 = "injectPortfolioAndLoad("isotopeOfferte.html","divContainer1", "portfolio1", 1, 6, false, "", "rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 6);
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
 
 //PORTFOLIO A DUE ELEMENTI ( es news a due elementi)
   <script>// <![CDATA[
 injectPortfolioAndLoad("isotopeOfferte2.html","divContainer1", "portfolio3", 1, 12, false, "", "rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 12);
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
 
 
 NEWS ELEMENTO SINGOLO CON FOTO SINISTRA E TESTO  DESTRA
  <script>// <![CDATA[
   injectPortfolioAndLoad("isotopeOfferte4.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", true, false, "","" + testoricerca + "");
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
 
 PORTFOLIO A 1 ELEMENTO PER LATERALE (ES. OFFERTE)
  <script>// <![CDATA[
   injectPortfolioAndLoad("isotopeOfferte5.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", false, true, "6","" + testoricerca + "");
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
   
 PORTFOLIO A 3 ELEMENTI CON FONDINO ( STILE VINI)
  <script>// <![CDATA[
  injectPortfolioAndLoad("isotopeVini.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
       
 PORTFOLIO STANDARD A 3 ELEMENTI (ES. OFFERTE)
  <script>// <![CDATA[
  injectPortfolioAndLoad("isotopeOfferte1.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
 // ]]></script>
-  <div id="divContainer1Title"></div>
+  <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
-  <div id="divContainer1Pager"></div>
+  <div id="divContainer1Pager">&nbsp;</div> 
 
 
 
@@ -144,7 +144,7 @@ CONTENUTI SCHEDA DETTAGLIO	 -> injectandloadgenericcontent						-
  <script>// <![CDATA[
 injectandloadgenericcontent("schedadetails.html","divContainer1", "divitemdettagli",true,true, "" + idofferta + "");
      // ]]></script>         	  
-  <div id="divContainer1" style="position: relative; display: none"></div>
+  <div id="divContainer1" style="position: relative; display: none">&nbsp;</div> 
 	
 	
 -------------------------------------
@@ -189,7 +189,7 @@ BANNERS   testate  per mobile	 -> injectFasciaAndLoadBanner	-
 <script>// <![CDATA[
 injectFasciaAndLoadBanner('bannerFascia3.html','divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia-home',false); 
 // ]]></script> 
-<div id="divContainerHeadmobile1"style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>&nbsp;</div>
+<div id="divContainerHeadmobile1"style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg">&nbsp;</div> &nbsp;</div>
 
 //Style testo per testata mobile da inseire nel testo del banner in amministrazione
 <div class="big2 blackcolor">Titolo</div>
@@ -247,11 +247,11 @@ BANNER CON ISOTOPE PORTFOLIO ( NAVIGAZIONE )	 -> injectPortfolioAndLoadBanner			
 injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divContainer1', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-portfolio-sezioni',false);
 // ]]></script>
 <div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 0px auto; display: none">
-<div id="divContainer1" style="background-color: transparent"></div>
+<div id="divContainer1" style="background-color: transparent">&nbsp;</div> 
 </div>
 
 ---------------------------------------------------------------------------------------------------------
-BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )	 -> injectPortfolioAndLoadBanner						-
+BANNER CON ISOTOPE PORTFOLIOv SINGOLO ELEMENTO ( PROMO DESTRA )	 -> injectPortfolioAndLoadBanner						-
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
  injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainer1', 'portlistBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);
