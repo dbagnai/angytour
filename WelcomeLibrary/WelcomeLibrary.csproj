@@ -78,16 +78,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge">
-      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.dll</HintPath>
+      <HintPath>..\References\AForge.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Imaging">
-      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.Imaging.dll</HintPath>
+      <HintPath>..\References\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Math">
-      <HintPath>..\..\..\Librerie Programmazione\Aforge\AForge.Math.dll</HintPath>
+      <HintPath>..\References\AForge.Math.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\..\Librerie Programmazione\ZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
