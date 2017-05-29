@@ -712,15 +712,7 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="titleCercaTesto" xml:space="preserve">
     <value>Cerca nel sito</value>
   </data>
-  <data name="titleMain" xml:space="preserve">
-    <value>Ristorante Albergo Il Pozzetto Città della Pieve Perugia Moiano</value>
-  </data>
-  <data name="TestoHomeIndex" xml:space="preserve">
-    <value>Ristorante Albergo Il Pozzetto</value>
-  </data>
-  <data name="descMain" xml:space="preserve">
-    <value>Venite al ristorante Albergo Il Pozzetto per gustare la cucina Umbra o pernottare nelle nostre accoglienti camere.</value>
-  </data>
+
   <data name="descFooter" xml:space="preserve">
     <value>
 </value>
@@ -782,68 +774,6 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
     <value>Seguici su </value>
   </data>
 
-  <data name="testoid1" xml:space="preserve">
-    <value>Ristorante</value>
-  </data>
-  <data name="testoid2" xml:space="preserve">
-    <value>Camere</value>
-  </data>
-
-  <data name="testoid4" xml:space="preserve">
-    <value>Listini</value>
-  </data>
-  <data name="testoid5" xml:space="preserve">
-    <value>Menù</value>
-  </data>
-  <data name="testoid6" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="testoid7" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="testoid8" xml:space="preserve">
-    <value>Listino</value>
-  </data>
-  <data name="testoid9" xml:space="preserve">
-    <value>Bed &amp; Breakfast</value>
-  </data>
-  <data name="testoid10" xml:space="preserve">
-    <value>Blog</value>
-  </data>
-  <data name="testoid11" xml:space="preserve">
-    <value>Info</value>
-  </data>
-
-  <data name="testoidUrl1" xml:space="preserve">
-    <value>Ristorante</value>
-  </data>
-  <data name="testoidUrl2" xml:space="preserve">
-    <value>Camere</value>
-  </data>
-    <data name="testoidUrl4" xml:space="preserve">
-    <value>Listini</value>
-  </data>
-  <data name="testoidUrl5" xml:space="preserve">
-    <value>Menù</value>
-  </data>
-  <data name="testoidUrl6" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="testoidUrl7" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="testoidUrl8" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="testoidUrl9" xml:space="preserve">
-    <value>Alloggi</value>
-  </data>
-  <data name="testoidUrl10" xml:space="preserve">
-    <value>Blog</value>
-  </data>
-  <data name="testoidUrl11" xml:space="preserve">
-    <value>Info</value>
-  </data>
   <data name="testoBlog" xml:space="preserve">
     <value>Scopri le nostre attività</value>
   </data>
@@ -997,7 +927,7 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="imgCatalogo2" xml:space="preserve">
     <value />
   </data>
-  
+
   <data name="TestoPromoContent" xml:space="preserve">
     <value>Iscriviti alla nostra newsletter e ricevi le migliori informazioni.</value>
   </data>
@@ -1198,40 +1128,6 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="LinkInfoeorari" xml:space="preserve">
     <value />
   </data>
-  <data name="GoogleCalcolapercorso" xml:space="preserve">
-    <value>Calcola Percorso Stradale</value>
-  </data>
-  <data name="GooglePartenza" xml:space="preserve">
-    <value>Partenza da:</value>
-  </data>
-  <data name="GooglePin1" xml:space="preserve">
-    <value>Ristorante Albergo Il Pozzetto&lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG&lt;br/&gt; Tel. +39 0578294014&lt;br/&gt;info@ristoranteilpozzetto.it</value>
-  </data>
-  <data name="GoogleUrl1" xml:space="preserve">
-    <value>https://goo.gl/maps/W3DYx3UvLJL2</value>
-  </data>
-  <data name="GooglePosizione1" xml:space="preserve">
-    <value>43.0170417,12.017582</value>
-  </data>
-  <data name="GooglePin2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GoogleUrl2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GooglePosizione2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtFooter" xml:space="preserve">
-    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
-  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
-     </value>
-  </data>
-  <data name="TestoCredits1" xml:space="preserve">
-    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
-  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
-      </value>
-  </data>
   <data name="TestoRaggiungerci" xml:space="preserve">
     <value />
   </data>
@@ -1247,60 +1143,8 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="testoGiorni" xml:space="preserve">
     <value>Giorni</value>
   </data>
-  <data name="testoPosizionebase" xml:space="preserve">
-    <value>Città della Pieve Moiano Perugia Umbria</value>
-  </data>
   <data name="testoAttivita" xml:space="preserve">
     <value>SCOPRI LE NOSTRE ATTIVITA'</value>
-  </data>
-  <data name="emailaddress" xml:space="preserve">
-    <value>info@ristoranteilpozzetto.it</value>
-  </data>
-  <data name="testoTelfisso" xml:space="preserve">
-    <value>+390577848546</value>
-  </data>
-  <data name="iconCelltext" xml:space="preserve">
-    <value>tel:+390578294014</value>
-  </data>
-  <data name="iconMaptext" xml:space="preserve">
-    <value>
-   &lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
-  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
-    </value>
-  </data>
-  <data name="iconEmailtext" xml:space="preserve">
-    <value>
-     info@ristoranteilpozzetto.it</value>
-  </data>
-  <data name="testoTelmobile" xml:space="preserve">
-    <value />
-  </data>
-  <data name="testoFooter1" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="testoFooter2" xml:space="preserve">
-    <value>Attività</value>
-  </data>
-  <data name="testoFooter3" xml:space="preserve">
-    <value />
-  </data>
-  <data name="testoFooter4" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TestoMenu1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TestoMenu2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TestoMenu3" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TestoMenu4" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TestoMenu5" xml:space="preserve">
-    <value />
   </data>
   <data name="FormOrdinamento" xml:space="preserve">
     <value>Ordina Per</value>
@@ -1332,8 +1176,8 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="txtVerticalNotti" xml:space="preserve">
     <value>Notti</value>
   </data>
- 
-  
+
+
   <data name="txtIscrizioneErrore" xml:space="preserve">
     <value>Errore procedura di iscrizione. Contattataci direttamente per telefono o email per completare il processo.</value>
   </data>
@@ -1355,7 +1199,7 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="txtValidazioneError" xml:space="preserve">
     <value>Errore procedura validazione cliente. Contattataci direttamente per telefono o email per completare il processo.</value>
   </data>
-  
+
   <data name="txtOrdineRiprova" xml:space="preserve">
     <value>&lt;b&gt;Riprova il pagamento&lt;/b&gt;</value>
   </data>
@@ -1368,7 +1212,7 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="testoCarelloindisponibile" xml:space="preserve">
     <value>Articolo esaurito al momento</value>
   </data>
-  
+
   <data name="testoIscrizione" xml:space="preserve">
     <value>registrati al sito</value>
   </data>
@@ -1385,7 +1229,7 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="testoErrCodiceSconto" xml:space="preserve">
     <value>Errore codice Sconto non valido</value>
   </data>
-  
+
   <data name="txtcontanti" xml:space="preserve">
     <value>Contrassegno</value>
   </data>
@@ -1556,4 +1400,164 @@ potranno essere comunicati ai soggetti preposti alla gestione finalizzata alla p
   <data name="imgTastoCerca" xml:space="preserve">
     <value>~/images/btnCercaI.png</value>
   </data>
+
+
+  <data name="testoid1" xml:space="preserve">
+    <value>Ristorante</value>
+  </data>
+  <data name="testoid2" xml:space="preserve">
+    <value>Camere</value>
+  </data>
+
+  <data name="testoid4" xml:space="preserve">
+    <value>Listini</value>
+  </data>
+  <data name="testoid5" xml:space="preserve">
+    <value>Menù</value>
+  </data>
+  <data name="testoid6" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoid7" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoid8" xml:space="preserve">
+    <value>Listino</value>
+  </data>
+  <data name="testoid9" xml:space="preserve">
+    <value>Bed &amp; Breakfast</value>
+  </data>
+  <data name="testoid10" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="testoid11" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="testoidUrl1" xml:space="preserve">
+    <value>Ristorante</value>
+  </data>
+  <data name="testoidUrl2" xml:space="preserve">
+    <value>Camere</value>
+  </data>
+  <data name="testoidUrl4" xml:space="preserve">
+    <value>Listini</value>
+  </data>
+  <data name="testoidUrl5" xml:space="preserve">
+    <value>Menù</value>
+  </data>
+  <data name="testoidUrl6" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl7" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl8" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="testoidUrl9" xml:space="preserve">
+    <value>Alloggi</value>
+  </data>
+  <data name="testoidUrl10" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="testoidUrl11" xml:space="preserve">
+    <value>Info</value>
+  </data>
+
+  <data name="titleMain" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto Città della Pieve Perugia Moiano</value>
+  </data>
+  <data name="TestoHomeIndex" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto</value>
+  </data>
+  <data name="descMain" xml:space="preserve">
+    <value>Venite al ristorante Albergo Il Pozzetto per gustare la cucina Umbra o pernottare nelle nostre accoglienti camere.</value>
+  </data>
+  <data name="GoogleCalcolapercorso" xml:space="preserve">
+    <value>Calcola Percorso Stradale</value>
+  </data>
+  <data name="GooglePartenza" xml:space="preserve">
+    <value>Partenza da:</value>
+  </data>
+  <data name="GooglePin1" xml:space="preserve">
+    <value>Ristorante Albergo Il Pozzetto&lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG&lt;br/&gt; Tel. +39 0578294014&lt;br/&gt;info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="GoogleUrl1" xml:space="preserve">
+    <value>https://goo.gl/maps/W3DYx3UvLJL2</value>
+  </data>
+  <data name="GooglePosizione1" xml:space="preserve">
+    <value>43.0170417,12.017582</value>
+  </data>
+  <data name="GooglePin2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GoogleUrl2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GooglePosizione2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtFooter" xml:space="preserve">
+    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+     </value>
+  </data>
+  <data name="TestoCredits1" xml:space="preserve">
+    <value>&lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+      </value>
+  </data>
+  <data name="testoPosizionebase" xml:space="preserve">
+    <value>Città della Pieve Moiano Perugia Umbria</value>
+  </data>
+  <data name="emailaddress" xml:space="preserve">
+    <value>info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="testoTelfisso" xml:space="preserve">
+    <value>+390577848546</value>
+  </data>
+  <data name="iconCelltext" xml:space="preserve">
+    <value>tel:+390578294014</value>
+  </data>
+  <data name="iconMaptext" xml:space="preserve">
+    <value>
+   &lt;font style="font-weight:600"&gt;Ristorante Albergo Il Pozzetto &lt;/font&gt;
+  &lt;br/&gt;Via Stradone, 178, 06062 Città della Pieve PG Tel. +39 0578294014 info@ristoranteilpozzetto.it
+    </value>
+  </data>
+  <data name="iconEmailtext" xml:space="preserve">
+    <value>
+     info@ristoranteilpozzetto.it</value>
+  </data>
+  <data name="testoTelmobile" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter1" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="testoFooter2" xml:space="preserve">
+    <value>Attività</value>
+  </data>
+  <data name="testoFooter3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="testoFooter4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TestoMenu5" xml:space="preserve">
+    <value />
+  </data>
+
 </root>

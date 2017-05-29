@@ -122,7 +122,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     private void CaricaMenu()
     {
-
+        //carichiamo i link per le pagine dinamiche in base al tbl rif attività
         CaricaMenuContenuti(4, 4, rptTipologieLink1High); //Inserisco il link  nel menu
         CaricaMenuContenuti(4, 4, rptTipologieLink1); //Inserisco il link  nel menu
         CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
@@ -134,7 +134,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1High, "prod000013,prod000014,prod000015"); //Inserisco il link  nel menu
         //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1); //Inserisco il link  nel menu
  
-
+        //Carica i link menu per le pagine statiche in base all'id in tabella
         CaricaMenuLinkContenuti(1);
         CaricaMenuLinkContenuti(2);
         CaricaMenuLinkContenuti(4);
@@ -668,134 +668,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         Response.Redirect(linkverifica);
     }
 
-    public void CaricaBannersFascia(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
-    {
 
-        bannersDM banDM = new bannersDM(Tbl_sezione);
-        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
-        if ((dt != null) && (dt.Rows.Count > 0))
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-            sb.Append("<div class=\"cycle-slideshow\" data-cycle-timeout=\"3000\" data-cycle-speed=\"2000\" data-cycle-pause-on-hover=\"true\"  data-cycle-slides=\"> div\" style=\"height:auto\"  >");
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                //CARICAMENTO DATI DB
-                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
-                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                string target = "_blank";
-                string link = dt.Rows[i]["NavigateUrl"].ToString();
-                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
-                {
-                    target = "_self";
-                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
-                }
-
-                //sb.Append("<a onclick=\"javascript:JsSvuotaSession(this)\" target=" + target + " href=\"" + link + "\" data-cycle-title=\"\" data-cycle-desc=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
-                //sb.Append("<img style=\"width: 100%; height: auto\"  src=\"" + pathimmagine + "\" alt=\"\" />\r\n");
-                //sb.Append("</a>\r\n");
-#if false
-                sb.Append("<div class=\"section-content section-px\" style=\"background-image: url('" + pathimmagine + "');\">");
-                sb.Append("               <div class=\"container\">");
-                sb.Append("                   <div class=\"row\" style=\"padding-top: 5%; padding-bottom: 10%; padding-left: 10%; padding-right: 10%;\">");
-                sb.Append("                       <div class=\" col-md-6 col-sm-6 col-lg-8 col-xs-12\">");
-                sb.Append("                           <div class=\"testimonial-big\">");
-                sb.Append("                               <div class=\"testimonial-big-text animated fadeInRight animatedVisi\" data-speed=\"1s\" data-animrepeat=\"1\" data-animtype=\"fadeInRight\" data-delay=\"0s\">");
-                sb.Append("                                   <br />");
-                sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(dt.Rows[i]["AlternateText"].ToString())));
-                sb.Append("                                   <br />");
-                sb.Append("                               </div>");
-                sb.Append("                           </div>");
-                sb.Append("                       </div>");
-                sb.Append("                   </div>");
-                sb.Append("               </div>");
-                sb.Append("           </div>"); 
-#endif
-
-                sb.Append("          <div class=\"section-content section-px\"   style=\"background-image: url('" + pathimmagine + "');\">");
-                sb.Append("               <div class=\"container\">");
-                sb.Append("                   <div class=\"row\" style=\"padding-top: 10%; padding-bottom: 10%; padding-left: 2%; padding-right: 2%;\">");
-                sb.Append("                       <div class=\" col-sm-offset-1 col-sm-10 col-xs-12\">");
-
-                sb.Append("                           <div class=\"testimonial-big\">");
-                sb.Append("                               <div class=\"testimonial-big-text\">");
-                sb.Append("                                   <br/>");
-                sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(dt.Rows[i]["AlternateText"].ToString())));
-                sb.Append("                                   <br/>");
-                sb.Append("                               </div>");
-                sb.Append("                           </div>");
-                sb.Append("                       </div>");
-                sb.Append("                   </div>");
-                sb.Append("               </div>");
-                sb.Append("           </div>");
-
-            }
-            sb.Append("           </div>");
-
-            destinationliteral.Text = sb.ToString();
-        }
-    }
-
-
-    public void CaricaBannersStriscia(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
-    {
-
-        //<div class="cycle-slideshow" style="width: 100%; clear: left; overflow: hidden" data-cycle-timeout="3000" data-cycle-speed="2000" data-cycle-pause-on-hover="true" data-cycle-slides="> a">
-        //   <a href="yourPage1.html"  data-cycle-desc="Wood Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/marketaccess.jpg" ></a>
-        //    <a href="yourPage2.html"  data-cycle-desc="Sky Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/market-access-1.jpg" ></a>
-        //    <a href="yourPage3.html"  data-cycle-desc="Earth Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/rete-commerciale.jpg" ></a>
-        //    <div class="cycle-overlay"></div>
-        //</div>
-        bannersDM banDM = new bannersDM(Tbl_sezione);
-
-        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
-
-        if ((dt != null) && (dt.Rows.Count > 0))
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" <div class=\"cycle-slideshow\" style=\"margin-top:10px;margin-bottom:10px;");
-            if (maxwidth == 0)
-                sb.Append("width: 100%;");
-            else
-                sb.Append("width: " + maxwidth.ToString() + "px;");
-            if (maxheight == 0)
-                sb.Append("height:auto;");
-            else
-                sb.Append("height:" + maxheight.ToString() + "px;");
-            sb.Append("overflow: hidden\" data-cycle-timeout=\"3000\" data-cycle-speed=\"2000\" data-cycle-pause-on-hover=\"true\" data-cycle-slides=\"> a\"> ");
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                //CARICAMENTO DATI DB
-                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
-                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                string target = "_blank";
-                string link = dt.Rows[i]["NavigateUrl"].ToString();
-                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
-                {
-                    target = "_self";
-                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
-                }
-                //////////////////////////////////////
-                sb.Append("	 <a onclick=\"javascript:JsSvuotaSession(this)\" target=" + target + " href=\"" + link + "\" data-cycle-desc=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
-                sb.Append("<img style=\"width: 100%; height: auto\"  src=\"" + pathimmagine + "\" alt=\"\" />\r\n");
-                sb.Append("</a>\r\n");
-
-                //sb.Append("<div class=\"cycle-overlay\">\r\n");
-                //sb.Append("</div>\r\n");
-
-
-
-            }
-            sb.Append("</div>\r\n");
-
-            destinationliteral.Text = sb.ToString();
-            // destinationliteral.Parent.Visible = true;
-
-        }
-        //else
-        //    destinationliteral.Parent.Visible = false;
-    }
 
 #if false
     public void CaricaBannersPortfolio(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
@@ -892,17 +765,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
 #endif
-
-    protected bool ControlloVisibilita(object fotos)
-    {
-        bool ret = true;
-        if (fotos == null || ((AllegatiCollection)fotos).Count <= 0) ret = false;
-        bool onlypdf = (fotos != null && ((AllegatiCollection)fotos).Count > 0 && !((AllegatiCollection)fotos).Exists(c => (c.NomeFile.ToString().ToLower().EndsWith("jpg") || c.NomeFile.ToString().ToLower().EndsWith("gif") || c.NomeFile.ToString().ToLower().EndsWith("png"))));
-        if (onlypdf) ret = false;
-        return ret;
-    }
-
-
 #if false
     /// <summary>
     /// Carica dal db la tipologia indicata e la formatta per il portfolio
@@ -1025,6 +887,218 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
 #endif
+#if false
+    public void CaricaBannerHomegallery(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, string Lingua)
+    {
+        //http://www.orbis-ingenieria.com/code/documentation/documentation.html#!/install
+        bannersDM banDM = new bannersDM(Tbl_sezione);
+        WelcomeLibrary.HtmlToText cv = new WelcomeLibrary.HtmlToText();
+        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
+
+        if ((dt != null) && (dt.Rows.Count > 0))
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+#if true
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                string target = "_blank";
+
+                string link = dt.Rows[i]["NavigateUrl"].ToString();
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
+                {
+                    target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+
+                sb.Append("<li data-transition=\"fade\" data-slotamount=\"7\" data-masterspeed=\"300\" ");
+                if (!string.IsNullOrEmpty(link))
+                    sb.Append("data-link=\"" + link + "\"");
+                sb.Append("> \r\n");
+
+                string dummyimage = "~/images/dummy.png".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                //  sb.Append("	                <a target=" + target + " href=\"" + link + "\" title=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
+                sb.Append("<img data-bgfit=\"contain\" data-bgposition=\"center center\"  src=\"" + dummyimage + "\" data-lazyload=\"" + pathimmagine + "\"   alt=\"" + cv.Convert(dt.Rows[i]["AlternateText"].ToString()).Trim() + "\" ");
+                sb.Append("    />");
+                //alt=\"rev-full1\" data-fullwidthcentering=\"on\"
+                //  sb.Append("</a>");
+
+
+
+                if (dt.Rows[i]["AlternateText"].ToString() != "")
+                {
+                    string testoover = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(dt.Rows[i]["AlternateText"].ToString());
+
+                    //sb.Append("<div class=\"tp-caption slider-text-description\" ");
+                    sb.Append("<div class=\"tp-caption slider-text-description\" ");
+                    sb.Append(" data-x=\"center\" ");
+                    sb.Append(" data-y=\"center\"  ");
+                    sb.Append(" data-hoffset=\"0\"  ");
+                    sb.Append(" data-voffset=\"0\"  ");
+
+                    //sb.Append(" data-x=\"150\" ");
+                    //sb.Append(" data-y=\"50\"  ");
+                    sb.Append("  data-speed=\"1600\"  ");
+                    sb.Append(" data-start=\"1500\"  ");
+                    sb.Append(" data-easing=\"Power4.easeOut\"  ");
+                    sb.Append(" data-endspeed=\"300\"  ");
+                    sb.Append(" data-endeasing=\"Power1.easeIn\"  >");
+                    sb.Append(CommonPage.ReplaceLinks(testoover));
+                    //sb.Append(" <a target=" + target + " href=\"" + link + "\" title=\"" + dt.Rows[i]["AlternateText"].ToString() + "\"  class=\"button btn-flat\">"
+                    //         + WelcomeLibrary.UF.Utility.SostituisciTestoACapo(dt.Rows[i]["Alternatetext"].ToString()) + "</a>");
+                    sb.Append("</div> ");
+                }
+                sb.Append("</li>");
+            }
+#endif
+            homeSlides.Text = sb.ToString();
+            homegallery.Visible = true;
+        }
+        else
+        {
+            homegallery.Visible = false;
+            VerticalSpacer.Style.Add(HtmlTextWriterStyle.Height, "135px"); //Senza testata -> spazio verticale per il menu
+        }
+
+    } 
+#endif
+    public void CaricaBannersFascia(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
+    {
+
+        bannersDM banDM = new bannersDM(Tbl_sezione);
+        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
+        if ((dt != null) && (dt.Rows.Count > 0))
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            sb.Append("<div class=\"cycle-slideshow\" data-cycle-timeout=\"3000\" data-cycle-speed=\"2000\" data-cycle-pause-on-hover=\"true\"  data-cycle-slides=\"> div\" style=\"height:auto\"  >");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                //CARICAMENTO DATI DB
+                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                string target = "_blank";
+                string link = dt.Rows[i]["NavigateUrl"].ToString();
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
+                {
+                    target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+
+                //sb.Append("<a onclick=\"javascript:JsSvuotaSession(this)\" target=" + target + " href=\"" + link + "\" data-cycle-title=\"\" data-cycle-desc=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
+                //sb.Append("<img style=\"width: 100%; height: auto\"  src=\"" + pathimmagine + "\" alt=\"\" />\r\n");
+                //sb.Append("</a>\r\n");
+#if false
+                sb.Append("<div class=\"section-content section-px\" style=\"background-image: url('" + pathimmagine + "');\">");
+                sb.Append("               <div class=\"container\">");
+                sb.Append("                   <div class=\"row\" style=\"padding-top: 5%; padding-bottom: 10%; padding-left: 10%; padding-right: 10%;\">");
+                sb.Append("                       <div class=\" col-md-6 col-sm-6 col-lg-8 col-xs-12\">");
+                sb.Append("                           <div class=\"testimonial-big\">");
+                sb.Append("                               <div class=\"testimonial-big-text animated fadeInRight animatedVisi\" data-speed=\"1s\" data-animrepeat=\"1\" data-animtype=\"fadeInRight\" data-delay=\"0s\">");
+                sb.Append("                                   <br />");
+                sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(dt.Rows[i]["AlternateText"].ToString())));
+                sb.Append("                                   <br />");
+                sb.Append("                               </div>");
+                sb.Append("                           </div>");
+                sb.Append("                       </div>");
+                sb.Append("                   </div>");
+                sb.Append("               </div>");
+                sb.Append("           </div>"); 
+#endif
+
+                sb.Append("          <div class=\"section-content section-px\"   style=\"background-image: url('" + pathimmagine + "');\">");
+                sb.Append("               <div class=\"container\">");
+                sb.Append("                   <div class=\"row\" style=\"padding-top: 10%; padding-bottom: 10%; padding-left: 2%; padding-right: 2%;\">");
+                sb.Append("                       <div class=\" col-sm-offset-1 col-sm-10 col-xs-12\">");
+
+                sb.Append("                           <div class=\"testimonial-big\">");
+                sb.Append("                               <div class=\"testimonial-big-text\">");
+                sb.Append("                                   <br/>");
+                sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(dt.Rows[i]["AlternateText"].ToString())));
+                sb.Append("                                   <br/>");
+                sb.Append("                               </div>");
+                sb.Append("                           </div>");
+                sb.Append("                       </div>");
+                sb.Append("                   </div>");
+                sb.Append("               </div>");
+                sb.Append("           </div>");
+
+            }
+            sb.Append("           </div>");
+
+            destinationliteral.Text = sb.ToString();
+        }
+    }
+    public void CaricaBannersStriscia(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
+    {
+
+        //<div class="cycle-slideshow" style="width: 100%; clear: left; overflow: hidden" data-cycle-timeout="3000" data-cycle-speed="2000" data-cycle-pause-on-hover="true" data-cycle-slides="> a">
+        //   <a href="yourPage1.html"  data-cycle-desc="Wood Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/marketaccess.jpg" ></a>
+        //    <a href="yourPage2.html"  data-cycle-desc="Sky Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/market-access-1.jpg" ></a>
+        //    <a href="yourPage3.html"  data-cycle-desc="Earth Lake Nature Preserve"><img style="width: 100%; height: auto" src="public/banners/rete-commerciale.jpg" ></a>
+        //    <div class="cycle-overlay"></div>
+        //</div>
+        bannersDM banDM = new bannersDM(Tbl_sezione);
+
+        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
+
+        if ((dt != null) && (dt.Rows.Count > 0))
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(" <div class=\"cycle-slideshow\" style=\"margin-top:10px;margin-bottom:10px;");
+            if (maxwidth == 0)
+                sb.Append("width: 100%;");
+            else
+                sb.Append("width: " + maxwidth.ToString() + "px;");
+            if (maxheight == 0)
+                sb.Append("height:auto;");
+            else
+                sb.Append("height:" + maxheight.ToString() + "px;");
+            sb.Append("overflow: hidden\" data-cycle-timeout=\"3000\" data-cycle-speed=\"2000\" data-cycle-pause-on-hover=\"true\" data-cycle-slides=\"> a\"> ");
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                //CARICAMENTO DATI DB
+                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                string target = "_blank";
+                string link = dt.Rows[i]["NavigateUrl"].ToString();
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
+                {
+                    target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+                //////////////////////////////////////
+                sb.Append("	 <a onclick=\"javascript:JsSvuotaSession(this)\" target=" + target + " href=\"" + link + "\" data-cycle-desc=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
+                sb.Append("<img style=\"width: 100%; height: auto\"  src=\"" + pathimmagine + "\" alt=\"\" />\r\n");
+                sb.Append("</a>\r\n");
+
+                //sb.Append("<div class=\"cycle-overlay\">\r\n");
+                //sb.Append("</div>\r\n");
+
+
+
+            }
+            sb.Append("</div>\r\n");
+
+            destinationliteral.Text = sb.ToString();
+            // destinationliteral.Parent.Visible = true;
+
+        }
+        //else
+        //    destinationliteral.Parent.Visible = false;
+    }
+    protected bool ControlloVisibilita(object fotos)
+    {
+        bool ret = true;
+        if (fotos == null || ((AllegatiCollection)fotos).Count <= 0) ret = false;
+        bool onlypdf = (fotos != null && ((AllegatiCollection)fotos).Count > 0 && !((AllegatiCollection)fotos).Exists(c => (c.NomeFile.ToString().ToLower().EndsWith("jpg") || c.NomeFile.ToString().ToLower().EndsWith("gif") || c.NomeFile.ToString().ToLower().EndsWith("png"))));
+        if (onlypdf) ret = false;
+        return ret;
+    }
     public void CaricaContenutiPortfolioRival(string tipologiadacaricare, Literal destinationliteral, string Lingua, string numerodacaricare = "6", List<Offerte> passedlist = null)
     {
 
@@ -1599,6 +1673,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         else
             destinationliteral.Parent.Visible = false;
     }
+
     public void CaricaVideoSection(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua, string tipo = "module")
     {
 
@@ -1745,90 +1820,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         }
     }
-#if false
-    public void CaricaBannerHomegallery(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, string Lingua)
-    {
-        //http://www.orbis-ingenieria.com/code/documentation/documentation.html#!/install
-        bannersDM banDM = new bannersDM(Tbl_sezione);
-        WelcomeLibrary.HtmlToText cv = new WelcomeLibrary.HtmlToText();
-        dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
-
-        if ((dt != null) && (dt.Rows.Count > 0))
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-#if true
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                string pathimmagine = dt.Rows[i]["ImageUrl"].ToString();
-                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                string target = "_blank";
-
-                string link = dt.Rows[i]["NavigateUrl"].ToString();
-                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
-                {
-                    target = "_self";
-                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
-                }
-
-                sb.Append("<li data-transition=\"fade\" data-slotamount=\"7\" data-masterspeed=\"300\" ");
-                if (!string.IsNullOrEmpty(link))
-                    sb.Append("data-link=\"" + link + "\"");
-                sb.Append("> \r\n");
-
-                string dummyimage = "~/images/dummy.png".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
-                //  sb.Append("	                <a target=" + target + " href=\"" + link + "\" title=\"" + dt.Rows[i]["AlternateText"].ToString() + "\" >");
-                sb.Append("<img data-bgfit=\"contain\" data-bgposition=\"center center\"  src=\"" + dummyimage + "\" data-lazyload=\"" + pathimmagine + "\"   alt=\"" + cv.Convert(dt.Rows[i]["AlternateText"].ToString()).Trim() + "\" ");
-                sb.Append("    />");
-                //alt=\"rev-full1\" data-fullwidthcentering=\"on\"
-                //  sb.Append("</a>");
-
-
-
-                if (dt.Rows[i]["AlternateText"].ToString() != "")
-                {
-                    string testoover = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(dt.Rows[i]["AlternateText"].ToString());
-
-                    //sb.Append("<div class=\"tp-caption slider-text-description\" ");
-                    sb.Append("<div class=\"tp-caption slider-text-description\" ");
-                    sb.Append(" data-x=\"center\" ");
-                    sb.Append(" data-y=\"center\"  ");
-                    sb.Append(" data-hoffset=\"0\"  ");
-                    sb.Append(" data-voffset=\"0\"  ");
-
-                    //sb.Append(" data-x=\"150\" ");
-                    //sb.Append(" data-y=\"50\"  ");
-                    sb.Append("  data-speed=\"1600\"  ");
-                    sb.Append(" data-start=\"1500\"  ");
-                    sb.Append(" data-easing=\"Power4.easeOut\"  ");
-                    sb.Append(" data-endspeed=\"300\"  ");
-                    sb.Append(" data-endeasing=\"Power1.easeIn\"  >");
-                    sb.Append(CommonPage.ReplaceLinks(testoover));
-                    //sb.Append(" <a target=" + target + " href=\"" + link + "\" title=\"" + dt.Rows[i]["AlternateText"].ToString() + "\"  class=\"button btn-flat\">"
-                    //         + WelcomeLibrary.UF.Utility.SostituisciTestoACapo(dt.Rows[i]["Alternatetext"].ToString()) + "</a>");
-                    sb.Append("</div> ");
-                }
-                sb.Append("</li>");
-            }
-#endif
-            homeSlides.Text = sb.ToString();
-            homegallery.Visible = true;
-        }
-        else
-        {
-            homegallery.Visible = false;
-            VerticalSpacer.Style.Add(HtmlTextWriterStyle.Height, "135px"); //Senza testata -> spazio verticale per il menu
-        }
-
-    } 
-#endif
     protected void btnsearch_Click(object sender, EventArgs e)
     {
         //testoricerca
         string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
         Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
-
         Response.Redirect(link);
     }
     protected void btnUsatoCerca_Click(object sender, EventArgs e)
