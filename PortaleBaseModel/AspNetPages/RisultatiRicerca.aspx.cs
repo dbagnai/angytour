@@ -243,9 +243,6 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         Literal lit = null;
         ModificaFiltroJS();
 
-
-
-
         switch (Tipologia)
         {
             case "rif000002":
@@ -270,7 +267,13 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 if (!JavaInjection)
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                    string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
+                    //string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
+
+
+                    string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
+
+                   
+
                     if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                     {
                         cs.RegisterStartupScript(this.GetType(), "clist1", controllist1, true);
