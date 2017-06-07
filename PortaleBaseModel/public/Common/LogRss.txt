@@ -25817,3 +25817,888 @@
  <Data>12/05/2017 17:52:37</Data>
 <Messaggio>Fine Creazione feed xml rss 12/05/2017 17:52:37 
 </Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>The process cannot access the file 'D:\ORC\WebMouse\CMS\baseSiteRev1\PortaleBaseModel\public\Common\LogRss.txt' because it is being used by another process.
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>The process cannot access the file 'D:\ORC\WebMouse\CMS\baseSiteRev1\PortaleBaseModel\public\Common\LogRss.txt' because it is being used by another process.
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.26 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 16.38.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 16.38.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.25 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>The process cannot access the file 'D:\ORC\WebMouse\CMS\baseSiteRev1\PortaleBaseModel\public\Common\LogRss.txt' because it is being used by another process.
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>The process cannot access the file 'D:\ORC\WebMouse\CMS\baseSiteRev1\PortaleBaseModel\public\Common\LogRss.txt' because it is being used by another process.
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>The process cannot access the file 'D:\ORC\WebMouse\CMS\baseSiteRev1\PortaleBaseModel\public\Common\LogRss.txt' because it is being used by another process.
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.26</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.26 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Creazione rss feed xml 24/05/2017 17.20.27 
+</Messaggio>
+ <Data>24/05/2017 17.20.27</Data>
+<Messaggio>Fine Creazione feed xml rss 24/05/2017 17.20.27 
+</Messaggio>

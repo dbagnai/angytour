@@ -3555,3 +3555,15 @@
 <Messaggio>httplocalhost52646Generato sitemap  12/05/2017 17:52:33</Messaggio>
  <Data>12/05/2017 17:52:33</Data>
 <Messaggio>httplocalhost52646Generato sitemap  12/05/2017 17:52:33Terminato Aggiornamento  12/05/2017 17:52:33</Messaggio>
+ <Data>24/05/2017 16.37.26</Data>
+<Messaggio> Application start : 24/05/2017 16.37.19</Messaggio>
+ <Data>24/05/2017 16.37.26</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/05/2017 16.38.26</Messaggio>
+ <Data>24/05/2017 16.38.26</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/05/2017 16.38.26Terminato Aggiornamento  24/05/2017 16.38.26</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/05/2017 17.20.25</Messaggio>
+ <Data>24/05/2017 17.20.25</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/05/2017 17.20.25Terminato Aggiornamento  24/05/2017 17.20.25</Messaggio>
