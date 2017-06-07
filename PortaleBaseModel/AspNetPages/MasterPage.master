@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <%--    <meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
+    <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
     <meta id="metaKeyw" runat="server" name="Keywords" content="" />
@@ -102,7 +102,6 @@
         </script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
         <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>"></script>--%>
-
         <!-- MENU --->
         <div class="fixedtop" id="divTop" runat="server" visible="false">
             <div class="container" style="padding: 0px">
@@ -205,68 +204,67 @@
                 <a style="color: #555; padding: 8px" runat="server" href="<%$ Resources:Common, linkHomeCambio %>" title="<%$ Resources:Common, testoCambio %>">
                     <%= Resources.Common.testoCambio.ToUpper()%></a>
             </div>
-            <div style="position: absolute;top:15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px;z-index:1">
-            <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+390578294014 ">
-              <i class="fa fa-2x fa-phone"></i> </a>
-        </div>
+            <div style="position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+390578294014 ">
+                    <i class="fa fa-2x fa-phone"></i></a>
+            </div>
+            <div style="width: 100%;position:relative">
+                <div style="max-width: 1600px; margin: 0px auto; position: relative">
+                    <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
+                        <a class="menuzord-brand" runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
+                            <div id="divlogo" class="fulllogobckdark"></div>
+                            <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />--%>
+                        </a>
+                        <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
 
-        <div style="max-width: 1600px; margin: 0px auto; position: relative">
-
-            <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
-                <a class="menuzord-brand" runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
-                    <div id="divlogo" class="fulllogobckdark"></div>
-                    <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />--%>
-                </a>
-                <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
-
-                    <%--    <li runat="server" id="liHome">
+                            <%--    <li runat="server" id="liHome">
                         <a id="linkHomeHigh" runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
                             <%= Resources.Common.TestoHome %>
                         </a>
                     </li>--%>
 
-                    <li runat="server">
-                        <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid1 %>">
-                            <%= Resources.Common.testoid1 %>
-                        </a>
-                    </li>
+                            <li runat="server">
+                                <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid1 %>">
+                                    <%= Resources.Common.testoid1 %>
+                                </a>
+                            </li>
 
-                    <li>
-                        <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= Resources.Common.testoid9 %></a>
-                        <ul class="dropdown">
-                            <li runat="server">
-                                <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid2 %>">
-                                    <%= Resources.Common.testoid2 %>
-                                </a>
+                            <li>
+                                <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= Resources.Common.testoid9 %></a>
+                                <ul class="dropdown">
+                                    <li runat="server">
+                                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid2 %>">
+                                            <%= Resources.Common.testoid2 %>
+                                        </a>
+                                    </li>
+                                    <li runat="server">
+                                        <a id="linkid4High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid4 %>">
+                                            <%= Resources.Common.testoid4 %>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li runat="server">
-                                <a id="linkid4High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid4 %>">
-                                    <%= Resources.Common.testoid4 %>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <%--   <li runat="server">
+                            <%--   <li runat="server">
                             <%= CreaLinkPersonalizzato(Resources.Common.TestoPanel3,"rif000001","Vetrina=true") %>
                         </li>--%>
-                    <li runat="server">
-                        <asp:Repeater ID="rptTipologieLink1High" runat="server"
-                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                            <ItemTemplate>
-                                <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                    runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                            <li runat="server">
+                                <asp:Repeater ID="rptTipologieLink1High" runat="server"
+                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                                    <ItemTemplate>
+                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </li>
+                            <li runat="server">
+                                <a id="linkid5High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid5 %>">
+                                    <%= Resources.Common.testoid5 %>
                                 </a>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </li>
-                    <li runat="server">
-                        <a id="linkid5High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid5 %>">
-                            <%= Resources.Common.testoid5 %>
-                        </a>
-                    </li>
+                            </li>
 
-                    <%--<asp:Repeater ID="rptTipologieLink1High" runat="server"
+                            <%--<asp:Repeater ID="rptTipologieLink1High" runat="server"
                         OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
                         <ItemTemplate>
                             <li>
@@ -277,32 +275,32 @@
                             </li>
                         </ItemTemplate>
                     </asp:Repeater>--%>
-                    <li runat="server">
-                        <asp:Repeater ID="rptTipologieLink3High" runat="server"
-                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                            <ItemTemplate>
-                                <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                    runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                </a>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </li>
+                            <li runat="server">
+                                <asp:Repeater ID="rptTipologieLink3High" runat="server"
+                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                                    <ItemTemplate>
+                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </li>
 
-                    <li runat="server">
-                        <asp:Repeater ID="rptTipologieLink2High" runat="server"
-                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                            <ItemTemplate>
-                                <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                    runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                </a>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </li>
+                            <li runat="server">
+                                <asp:Repeater ID="rptTipologieLink2High" runat="server"
+                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                                    <ItemTemplate>
+                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </li>
 
 
-                    <%--  <li runat="server">
+                            <%--  <li runat="server">
 
                          
                             <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= Resources.Common.testoid10 %></a>
@@ -324,11 +322,11 @@
                             </ul>
                         </li>--%>
 
-                    <li runat="server">
-                        <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, linkContatti %>" title="<%$ Resources:Common, testoContatti %>">
-                            <span class="label-nav"><%= Resources.Common.TestoContatti %>   </span>
-                        </a>
-                        <%-- <a id="linkid11high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%=  Resources.Common.testoid11 %></a>
+                            <li runat="server">
+                                <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, linkContatti %>" title="<%$ Resources:Common, testoContatti %>">
+                                    <span class="label-nav"><%= Resources.Common.TestoContatti %>   </span>
+                                </a>
+                                <%-- <a id="linkid11high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%=  Resources.Common.testoid11 %></a>
                         <ul class="dropdown">
                             <li></li>
                             <li>
@@ -344,18 +342,19 @@
                                 </div>
                             </li>
                         </ul>--%>
-                    </li>
-                    <li class="search" style="float: right;" runat="server" visible="false">
-                        <div style="padding-top: 5px; padding-left: 10px">
-                            <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder="<%$ Resources: Common, TestoCerca %>" />
-                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text="<%$ Resources: Common, TestoCerca %>" runat="server" ClientIDMode="Static" />
-                        </div>
-                    </li>
+                            </li>
+                            <li class="search" style="float: right;" runat="server" visible="false">
+                                <div style="padding-top: 5px; padding-left: 10px">
+                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder="<%$ Resources: Common, TestoCerca %>" />
+                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text="<%$ Resources: Common, TestoCerca %>" runat="server" ClientIDMode="Static" />
+                                </div>
+                            </li>
 
-                    <li style="height: 1px" class="scrollable-fix"></li>
-                </ul>
+                            <li style="height: 1px" class="scrollable-fix"></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
         </div>
         <%--   <div class="fixednav1" id="mainnav1">
             <div id="menuzord1" class="menuzord sec-menu menuzord-responsive white">
@@ -363,19 +362,16 @@
                 </ul>
             </div>
         </div>--%>
-
         <!-- FINE MENU --->
         <div class="body-wrapper" style="padding-top: 0px">
-            <div id="VerticalSpacer" clientidmode="static" style="height: 60px;" runat="server"></div>
+            <div id="VerticalSpacer" clientidmode="static" style="height: 72px;" runat="server"></div>
             <div id="divSliderBanner" style="margin: 0px auto; position: relative; display: none" class="hidden-xs"></div>
             <div id="divContainerBannerhome" style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>
             <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <%-- <div class="videocontainer"></div>--%>
-
             <div id="divJSIsotopeContainer1" style="max-width: 1600px; margin: 0px auto"></div>
-
             <div style="max-width: 1400px; margin: 0px auto; position: relative">
                 <div id="divJSIsotopeContainer2Title" style="display: none">
                     <div class="row" style="margin: 0px">
@@ -419,18 +415,11 @@
                     <a onclick="JsSvuotaSession(this)" runat="server" id="linkListacategorie" href="#"></a>
                 </div>
             </div>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
-
-
             <%-- <div  class="home-section">
             <iframe src="https://player.vimeo.com/video/22605011?color=ffffff&title=0&byline=0&portrait=0&autoplay=1&controls=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>--%>
-
-
-
-
+              </div>--%>
             <div class="container" style="text-align: center">
                 <div class="row" runat="server" id="divRicerca">
                     <div class="col-sm-12" style="text-align: center">
@@ -490,7 +479,6 @@
                     <br />
                 </div>
             </asp:Panel>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
             </asp:ContentPlaceHolder>
             <div class="container">
@@ -509,16 +497,12 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderIndextext" runat="server">
             </asp:ContentPlaceHolder>
-
             <div id="divJSScrollerContainer2"></div>
             <asp:Literal ID="lblPlacebannerfascia1" Text="" runat="server" />
             <asp:Literal Text="" ID="literalVideoBanner" runat="server" />
-
             <asp:Literal ID="lblPlacebannerfascia2" Text="" runat="server" />
-
             <div id="divContainerBanner1" style="display: none;"></div>
             <span id="divContainerSection" style="display: none;"></span>
-
             <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
                 <div id="divScrollerjs1Title" class="row" style="display: none; background-color: #f2ece6;">
                     <div class="col-sm-12">
@@ -533,12 +517,9 @@
                     <div id="divScrollerjs1"></div>
                 </div>
             </div>
-
-
             <div id="divContainerBanner2" style="display: none;"></div>
             <div id="divContainerBanner3" style="display: none;"></div>
             <div id="divContainerBanner4" style="display: none;"></div>
-
             <div style="margin: 0px auto; padding-left: 10px; padding-right: 10px;">
                 <div id="divScrollerjs2Title" class="row" style="display: none; background-color: #f2ece6;">
                     <div class="col-sm-12">
@@ -553,7 +534,6 @@
                     <div id="divScrollerjs2"></div>
                 </div>
             </div>
-
             <div runat="server" id="divnavigazione0" style="background-color: transparent">
                 <div class="row" style="padding: 0px; margin: 0px;">
                     <div class="col-sm-12" style="padding: 0px; margin: 0px;">
@@ -720,15 +700,12 @@
                     </div>
                 </div>
             </div>
-
             <div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
                 <div id="divnavigazioneJs1" style="background-color: transparent"></div>
             </div>
-
             <div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 0px auto; display: none">
                 <div id="divnavigazioneJs0" style="background-color: transparent"></div>
             </div>
-
             <div style="background-color: #fff; padding-top: 30px; padding-bottom: 0px; text-align: center" id="divContattiMaster" runat="server" visible="false">
                 <div class="container">
                     <div class="row">
@@ -767,7 +744,7 @@
                 </div>
 
             </div>
-            <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="true">
+            <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
                 <div style="height: 100%; width: 100%; position: relative">
                     <div id="map1" style="height: 410px; width: 100%">
                     </div>
@@ -979,8 +956,6 @@
             </div>
         </footer>
 
-
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/_jquery.placeholder.js") %>"></script>
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/minified/jquery-ui.min.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
@@ -1019,7 +994,7 @@
         <!--DEFIANTJS to query json obkects-->
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>"></script>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/jarallax.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/script.js")%>"></script>
