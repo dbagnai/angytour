@@ -4528,12 +4528,13 @@ namespace WelcomeLibrary.DAL
         /// <summary>
         /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )
         /// </summary>
-        public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "Albergo Ristorante Il Pozzetto", string descrizione = "Ristorante e Bed and Breakfast tradizionale in Umbria")
+        public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
         {
+            titolo = ( System.Configuration.ConfigurationManager.AppSettings["Nome"]  ?? "");
+            descrizione = ( System.Configuration.ConfigurationManager.AppSettings["Descrizione"] ?? "");
+
             //string Lingua = "I";
             string Lingua = Lng;
-
-
             string titolofeed = titolo;
             TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == FiltroTipologia); });
             if (item != null)

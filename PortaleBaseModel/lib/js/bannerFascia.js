@@ -35,7 +35,7 @@ function injectFasciaAndLoadBannerinner(type, container, controlid, page, pagesi
 
     //Correggo l'id dei controlli del template per l'inzializzazione dello scroller con id univoca e corretta
     $('#' + container).html('');
-    $('#' + container + 'Title').show();
+    //$('#' + container + 'Title').show();
 
     $('#' + container).load(templateHtml, function () {
         $('#' + container).find("[id^=replaceid]").each(function (index, text) {
@@ -56,6 +56,7 @@ function injectFasciaAndLoadBannerinner(type, container, controlid, page, pagesi
         globalObject[controlid + "pagerdata"] = pagerdata;
 
         var params = {};
+        params.containerid = container;
         params.maxelement = maxelement;
         params.listShow = listShow;
         params.tblsezione = tblsezione;
@@ -134,12 +135,18 @@ function renderFasciaNotPagedBanner(localObjects, controlid) {
 function BindFasciaBanner(el, localObjects) {
 
     var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
+    var data = objcomplete["datalist"];
+    var objfiltrotmp = {};
+    objfiltrotmp = globalObject[el + "params"];
+
     if (!data.length) {
         $('#' + el).html('');
+        console.log($('#' + objfiltrotmp.containerid));
+        $('#' + objfiltrotmp.containerid).html('');
         return;
     }
 
+    $('#' + objfiltrotmp.containerid).parent().show();
     var str = $($('#' + el)[0]).outerHTML();
     //$('#' + el).parent().parent().show();
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
@@ -165,24 +172,23 @@ function BindFasciaBanner(el, localObjects) {
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj.wrap('<p>').parent(), data[j], localObjects, "",
-                    function (ret) {
-                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                        $('#' + el).append(ret.html()) + "\r\n";
-                    });
+            function (ret) {
+                //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                $('#' + el).append(ret.html()) + "\r\n";
+            });
     }
+
 
     $(document).on('cycle-post-initialize', '.newslider', function (event) {
         calcAspectRatio(el);
+        console.log('post-ini' + ' ' + el);
     });
-
     $(window).on("orientationchange", function (event) {
         calcAspectRatio(el);
     });
-
     jQuery(document).ready(function () {
-        //$('.cycle-slideshow').cycle();
-        $('#' + el).cycle();
-        //$('#' + el).html(htmlout);
+    $('#' + el).cycle();
+        calcAspectRatio(el);
     });
 
     CleanHtml($('#' + el));
@@ -191,56 +197,57 @@ function BindFasciaBanner(el, localObjects) {
 
 function calcAspectRatio(el) {
     if (el != null) {
+        $('#' + el).parent().show();
+        //$('#' + el).parent().attr("style", "display:block;");
+
         setTimeout(function () {
-            $('#' + el).parent().show();
-            $('#' + el).parent().attr("style", "display:block;");
-          var img = $('#' + el + ' .imgBanner');
-            var divtesto = $('#' + el + ' .divTesto');
-            var divtesto2 = $('#' + el + ' .divTesto2');
-            //console.log((divtesto).parent().outerHeight());
-            if ($(window).width() > 1023) {
-                if (img.height() > 0 && img.height() != (divtesto).parent().outerHeight()) {
-                    if (img.height() > (divtesto).parent().outerHeight()) {
-                        //console.log($('#' + el)[0].id + "(true): " + img.height() + " " + (divtesto).parent().outerHeight());
-                        var paddvert = (img.height() - $(divtesto).parent().outerHeight()) / 2;
-                        divtesto.css('padding-top', paddvert);
-                        divtesto.css('padding-bottom', paddvert);
-                        if ((divtesto).parent().outerHeight() != null && (divtesto).parent().outerHeight() != 0)
-                            divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight());
-                        else divtesto.parent().parent().parent().parent().css('height', img.height());
-                    }
-                    else {
-                        //console.log($('#' + el)[0].id + "(false): " + img.height() + " " + (divtesto).parent().outerHeight());
-                        divtesto.css('padding-top', 20);
-                        divtesto.css('padding-bottom', 20);
-                        img.css('height', (divtesto).parent().outerHeight());
-                        img.css('width', 'auto');
-                        img.css('margin-left', (img.parent().width() - img.width()) / 2);
-                        img.css('margin-right', (img.parent().width() - img.width()) / 2);
+        var img = $('#' + el + ' .imgBanner');
+        var divtesto = $('#' + el + ' .divTesto');
+        var divtesto2 = $('#' + el + ' .divTesto2');
+        //console.log((divtesto).parent().outerHeight());
+        if ($(window).width() > 1023) {
+            console.log('abefore ' + el + ' imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
+            if (img.height() > 0 && Math.abs(img.height() - (divtesto).parent().outerHeight()) > 10) {
+                if (img.height() > (divtesto).parent().outerHeight()) {
+                    console.log('a ' + el + ' imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
+                    //console.log($('#' + el)[0].id + "(true): " + img.height() + " " + (divtesto).parent().outerHeight());
+                    var paddvert = (img.height() - $(divtesto).parent().outerHeight()) / 2;
+                    divtesto.css('padding-top', paddvert);
+                    divtesto.css('padding-bottom', paddvert);
+                    if ((divtesto).parent().outerHeight() != null && (divtesto).parent().outerHeight() != 0)
                         divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight());
-                    }
+                    else divtesto.parent().parent().parent().parent().css('height', img.height());
                 }
-            } else //In modo mobile xs
-            {
-                if (img.height() > 0) {
-                    //console.log($('#' + el)[0].id + "(mobile): " + img.height() + " " + (divtesto).parent().outerHeight());
-                    if (divtesto2.length > 0) {
-                        if (((divtesto2).children(":first")).length > 0 && (divtesto2).children(":first")[0].innerHTML == '')
-                            divtesto2.parent().parent().parent().parent().css('height', img.height());
-                        else
-                            divtesto2.parent().parent().parent().parent().css('height', (divtesto2).parent().outerHeight() + img.height());
-                    }
-                    else {
-                        if (((divtesto).children(":first")).length > 0 && (divtesto).children(":first")[0].innerHTML == '')
-                            divtesto.parent().parent().parent().parent().css('height', img.height());
-                        else
-                            divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight() + img.height());
-                    }
+                else {
+                    console.log('b ' + el + 'imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
+                    //console.log($('#' + el)[0].id + "(false): " + img.height() + " " + (divtesto).parent().outerHeight());
+                    divtesto.css('padding-top', 20);
+                    divtesto.css('padding-bottom', 20);
+                    img.css('height', (divtesto).parent().outerHeight());
+                    img.css('width', 'auto');
+                    img.css('margin-left', (img.parent().width() - img.width()) / 2);
+                    img.css('margin-right', (img.parent().width() - img.width()) / 2);
+                    divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight());
                 }
             }
-
-        }, 300);
+        } else //In modo mobile xs
+        {
+            if (img.height() > 0) {
+                //console.log($('#' + el)[0].id + "(mobile): " + img.height() + " " + (divtesto).parent().outerHeight());
+                if (divtesto2.length > 0) {
+                    if (((divtesto2).children(":first")).length > 0 && (divtesto2).children(":first")[0].innerHTML == '')
+                        divtesto2.parent().parent().parent().parent().css('height', img.height());
+                    else
+                        divtesto2.parent().parent().parent().parent().css('height', (divtesto2).parent().outerHeight() + img.height());
+                }
+                else {
+                    if (((divtesto).children(":first")).length > 0 && (divtesto).children(":first")[0].innerHTML == '')
+                        divtesto.parent().parent().parent().parent().css('height', img.height());
+                    else
+                        divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight() + img.height());
+                }
+            }
+        }
+        }, 200);
     }
-
 };
- 
