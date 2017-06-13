@@ -1449,11 +1449,11 @@ Portfolio ( da rival )
 }
 
 .works-grid-1 .work-item {
-    width: 100%;
+    width: 99.999%;
 }
 
 .works-grid-2 .work-item {
-    width: 50%;
+    width: 49.999%;
 }
 
 .works-grid-3 .work-item {
@@ -1465,11 +1465,11 @@ Portfolio ( da rival )
 }
 
 .works-grid-4 .work-item {
-    width: 25%;
+    width: 24.999%;
 }
 
 .works-grid-5 .work-item {
-    width: 20%;
+    width: 19.99%;
 }
 
 .works-grid-6 .work-item {
@@ -1480,30 +1480,27 @@ Portfolio ( da rival )
     .works-grid-6 .work-item {
         width: 33.333%;
     }
-    .works-grid-4 .work-item {
-        width: 33.333%;
-    }
 }
 
-@media (min-width: 499px) and (max-width: 840px) {
+@media (min-width: 499px) and (max-width: 949px) {
     .works-grid-2 .work-item {
-        width: 50%;
+        width: 49.999%;
     }
 
     .works-grid-3 .work-item {
-        width: 50%;
+        width: 49.999%;
     }
 
     .container .works-grid-3 .work-item {
-        width: 50%;
+        width: 49.999%;
     }
 
     .works-grid-4 .work-item {
-        width: 50%;
+        width: 49.999%;
     }
 
     .works-grid-5 .work-item {
-        width: 50%;
+        width: 49.999%;
     }
 
     .works-grid-6 .work-item {
@@ -1513,29 +1510,30 @@ Portfolio ( da rival )
 
 @media (max-width: 499px) {
     .works-grid-2 .work-item {
-        width: 100%;
+        width: 99.999%;
     }
 
     .works-grid-3 .work-item {
-        width: 99.6%;
+        width: 99.999%;
     }
 
     .container .works-grid-3 .work-item {
-        width: 99.6%;
+        width: 99.999%;
     }
 
     .works-grid-4 .work-item {
-        width: 99%;
+        width: 99.999%;
     }
 
     .works-grid-5 .work-item {
-        width: 100%;
+        width: 99.999%;
     }
 
     .works-grid-6 .work-item {
-        width: 100%;
+        width: 99.999%;
     }
 }
+
 
 .work-content-bordered {
     border: 5px solid #eceded;
