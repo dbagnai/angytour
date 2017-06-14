@@ -116,6 +116,7 @@
                             convert_urls: false,
                             relative_urls: false,
                             forced_root_block: false,
+                            verify_html: false,
                             plugins: [
                                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",

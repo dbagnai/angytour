@@ -136,10 +136,10 @@ function BindScroller(el, localObjects, container) {
     setTimeout(function () {
         var scrollertype = globalObject[el + "params"].scrollertype;
         switch (scrollertype) {
-            case 1:
+            case "1":
                 ScrollerInit1(el);
                 break;
-            case 2:
+            case "2":
                 ScrollerInit2(el);
                 break;
             default:

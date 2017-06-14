@@ -12,7 +12,7 @@ function injectScrollerAndLoadBannerinner(type, container, controlid, listShow, 
 
     //Correggo l'id dei controlli del template per l'inzializzazione dello scroller univoca e corretta
     $('#' + container).html('');
-    $('#' + container + 'Title').show();
+    //$('#' + container + 'Title').show();
     $('#' + container).load(templateHtml, function () {
         $('#' + container).find("[id^=replaceid]").each(function (index, text) {
             var currentid = $(this).prop("id");
@@ -22,7 +22,8 @@ function injectScrollerAndLoadBannerinner(type, container, controlid, listShow, 
 
 
         var params = {};
-        params.maxelement = maxelement;
+        params.container = container;/*Inserisco il nome dle container nei parametri per uso successivo nel binding*/
+         params.maxelement = maxelement;
         params.listShow = listShow;
         params.scrollertype = scrollertype;
         params.tblsezione = tblsezione;
@@ -85,8 +86,13 @@ function BindScrollerBanner(el, localObjects) {
         return;
     }
 
+    var objfiltrotmp = {};
+    objfiltrotmp = globalObject[el + "params"];
+    var container = objfiltrotmp.container;
+    $('#' + container).parent().show();
+    //$('#' + el).parent().parent().parent().parent().parent().show();
+
     var str = $('#' + el)[0].innerHTML;
-    $('#' + el).parent().parent().parent().parent().show();
 
 
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
@@ -122,14 +128,17 @@ function BindScrollerBanner(el, localObjects) {
         var scrollertype = globalObject[el + "params"].scrollertype;
         console.log(scrollertype);
         switch (scrollertype) {
-            case 1:
+            case "1":
                 ScrollerInitBanner1(el);
                 break;
-            case 2:
+            case "2":
                 ScrollerInitBanner2(el);
                 break;
-            case 3:
+            case "3":
                 ScrollerInitBanner3(el);
+                break;
+            case "4":
+                ScrollerInitBanner4(el);
                 break;
             default:
                 ScrollerInitBanner(el);
@@ -189,6 +198,29 @@ function ScrollerInitBanner2(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [3],
+            autoPlay: 5000,
+            itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
+            itemsTablet: [979, 2], // items between 600 and 0;
+            itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+            slideSpeed: 1000
+        });
+
+        // Custom Navigation Events
+        jQuery("#" + controlid + "next").click(function () {
+            owl.trigger('owl.next');
+        })
+        jQuery("#" + controlid + "prev").click(function () {
+            owl.trigger('owl.prev');
+        })
+    });
+};
+
+
+function ScrollerInitBanner4(controlid) {
+    jQuery(document).ready(function () {
+        var owl = jQuery("#" + controlid);
+        owl.owlCarousel({
+            items: [6],
             autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
