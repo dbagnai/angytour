@@ -275,7 +275,6 @@
                     return;
                 }
 
-
                 string appaddress = "";
                 if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
                 {
@@ -284,6 +283,15 @@
                     {
                         appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
                         appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
+                    }
+                    else
+                    {
+                        pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(HttpContext.Current.Server.UrlDecode(System.Web.HttpContext.Current.Request.Url.AbsolutePath));
+                        if (pathpos != -1)
+                        {
+                            appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
+                            appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
+                        }
                     }
                 }
                 else
@@ -294,50 +302,42 @@
                         appaddress = appaddress.Replace(query, "");
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
-
-                //////////////////////////////////////////////////////////////////////////////////////////////////////
                 System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
                 Messaggi.Add("Messaggio", "");
                 if (appaddress == "")//Caso di chiamata strana fallback
                 {
                     Messaggi["Messaggio"] += " Errore global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
-                    Messaggi["Messaggio"] += " Errore global init AbsolutePath : " + System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Errore global init AbsolutePath : " +
+                    System.Web.HttpContext.Current.Request.Url.AbsolutePath;
                     Messaggi["Messaggio"] += " Errore global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
                     Messaggi["Messaggio"] += " Errore global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
                     Messaggi["Messaggio"] += " Errore global init server appaddress : " + appaddress;
                     WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-
-                    //string appaddress = "http://" + System.Web.HttpContext.Current.Request.Url.Host.ToString();
-                    //if (!HttpContext.Current.Request.Url.IsDefaultPort)
-                    //    appaddress += ":" + HttpContext.Current.Request.Url.Port.ToString();
-                    //string basedir = "";
-                    //if (HttpContext.Current.Request.ApplicationPath.ToString() != "/")
-                    //    basedir = HttpContext.Current.Request.ApplicationPath.ToString();
-                    //appaddress += basedir;
                 }
                 else
                 {
                     Messaggi["Messaggio"] += " Global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
-                    Messaggi["Messaggio"] += " Global init AbsolutePath : " + System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Global init AbsolutePath : " +
+                 System.Web.HttpContext.Current.Request.Url.AbsolutePath;
                     Messaggi["Messaggio"] += " Global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
                     Messaggi["Messaggio"] += " Global init Query : " + System.Web.HttpContext.Current.Request.Url.Query; ;
                     Messaggi["Messaggio"] += " Global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
                     Messaggi["Messaggio"] += " Global init server appaddress : " + appaddress;
                     WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-
                 }
-                //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-                /////////////////////////////////////////////////
                 WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
                 WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
+
+
+
+
+
                 s_InitializedAlready = true;
             }
         }
     }
-
 
     /// <summary>
     /// Funzione di replace con regexp
