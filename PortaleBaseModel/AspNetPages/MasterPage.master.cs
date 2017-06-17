@@ -105,7 +105,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         {
             if (!System.Web.HttpContext.Current.Request.Url.ToString().StartsWith("https:"))
             {
-                Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString().Replace("http:", "https:"));
+                Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString().Replace("http:", "https:"),true);
             }
 
         }
@@ -113,7 +113,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         {
             if (!System.Web.HttpContext.Current.Request.Url.ToString().StartsWith("http:"))
             {
-                Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString().Replace("https:", "http:"));
+                Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString().Replace("https:", "http:"),true);
             }
         }
     }

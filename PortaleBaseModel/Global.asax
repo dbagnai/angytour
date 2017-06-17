@@ -246,15 +246,14 @@
 
     void Application_BeginRequest(Object source, EventArgs e)
     {
-        if (System.Configuration.ConfigurationManager.AppSettings["enableHttps"] == "true")
-            if (HttpContext.Current.Request.IsSecureConnection.Equals(false))
-            {
-                Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
-            }
+        //if (System.Configuration.ConfigurationManager.AppSettings["enableHttps"] == "true")
+        //    if (HttpContext.Current.Request.IsSecureConnection.Equals(false))
+        //    {
+        //        Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
+        //    }
 
         HttpApplication app = (HttpApplication)source;
         HttpContext context = app.Context;
-        // Attempt to peform first request initialization
         FirstRequestInitialization.Initialize(context);
     }
     class FirstRequestInitialization
@@ -274,6 +273,7 @@
                 {
                     return;
                 }
+
 
                 string appaddress = "";
                 if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
@@ -302,6 +302,11 @@
                         appaddress = appaddress.Replace(query, "");
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
+
+                if (System.Configuration.ConfigurationManager.AppSettings["enableHttps"] == "true")
+                    appaddress = appaddress.ToLower().Replace("http:", "https:");
+
+
                 System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
                 Messaggi.Add("Messaggio", "");
                 if (appaddress == "")//Caso di chiamata strana fallback
@@ -329,11 +334,6 @@
 
                 WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
                 WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
-
-
-
-
-
                 s_InitializedAlready = true;
             }
         }
