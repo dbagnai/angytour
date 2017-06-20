@@ -71,6 +71,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         {
             ControllaHttp();
 
+            DataBind();
+
             linkFi1.Href = CommonPage.ReplaceAbsoluteLinks("~/images/favicon.ico");
             linkFi2.Href = CommonPage.ReplaceAbsoluteLinks("~/images/favicon.png");
 
@@ -95,6 +97,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             // SettaTestoIniziale("Home");
             VisualizzaTotaliCarrello();
             LoadJavascriptVariables();
+
 
         }
     }

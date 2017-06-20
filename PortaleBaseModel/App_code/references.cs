@@ -566,13 +566,20 @@ public class references
         WelcomeLibrary.UF.Utility.CaricaListaStaticaProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
         WelcomeLibrary.UF.Utility.CaricaListaStaticaSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
 
-        //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
-        //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "tipologie.xml"));
-        //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "province.xml"));
-    }
+         //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
+         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "tipologie.xml"));
+         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "province.xml"));
 
+        WelcomeLibrary.UF.ResourceManagement.LoadResources();
 
-    public static string NomeRegione(string codiceprovincia, string Lingua)
+   }
+
+   public static string ResMan(string Gruppo, string Lingua, string Chiave, string Categoria = "")
+   {
+      return WelcomeLibrary.UF.ResourceManagement.ReadKey(Gruppo, Lingua, Chiave, Categoria).Valore;
+   }
+
+   public static string NomeRegione(string codiceprovincia, string Lingua)
     {
         string ritorno = "";
         Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codiceprovincia); });

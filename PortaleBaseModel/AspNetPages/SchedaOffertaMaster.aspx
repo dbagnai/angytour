@@ -864,7 +864,7 @@
                                         </ul>
                                     </div>
                                     <div class="blog-post-featured-img img-overlay" runat="server"
-                                        style="max-height: 200px; overflow: hidden" visible='<%#  !ControlloVideo ( Eval("FotoCollection_M.FotoAnteprima") ) %>'>
+                                        style="max-height: 200px; overflow: hidden" visible='<%#  !ControlloVideo(Eval("FotoCollection_M.FotoAnteprima")) %>'>
                                         <a id="a3" runat="server" onclick="javascript:JsSvuotaSession(this)"
                                             href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>

@@ -90,7 +90,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotopeBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js"))%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/archivio.js"  + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js"))%>"></script>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/searchcontrol1.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>"></script>--%>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/searchcontrol1.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>--%>
         <script>
             pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
             initLingua('<%= Lingua %>');
@@ -101,98 +101,99 @@
             });
         </script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
-        <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>"></script>--%>
+        <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>--%>
         <!-- MENU --->
+
         <div class="fixedtop" id="divTop" runat="server" visible="false">
             <div class="container" style="padding: 0px">
                 <div class="pull-left">
-                    <a runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
+                    <a runat="server" href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' title='<%# references.ResMan("Common",Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                         <img style="height: 60px" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />
                     </a>
                 </div>
                 <div class="pull-left" style="padding-top: 2px; display: none">
-                    <a runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
+                    <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />
                     </a>
                 </div>
                 <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; display: none; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
-                    <a style="color: White; padding: 8px" runat="server" href="<%$ Resources:Common, linkHomeCambio %>" title="<%$ Resources:Common, testoCambio %>">
-                        <%= Resources.Common.testoCambio.ToUpper()%></a>
-                    <%--  <a runat="server" href="<%$ Resources:Common, LinkHomeIta %>" title="<%$ Resources:Common, testoIta %>">
-                        <asp:Literal Text="<%$ Resources: Common, testoIta %>" runat="server" /></a> | 
-                                        <a runat="server" href="<%$ Resources:Common, LinkHomeEn %>" title="<%$ Resources:Common, testoEn %>">
-                                            <asp:Literal Text="<%$ Resources: Common, testoEn %>" runat="server" /></a>
-                                    <a style="color: black" runat="server" href="<%$ Resources:Common, LinkHomeIta %>" title="<%$ Resources:Common, testoIta %>">
-                                        <asp:Literal Text="<%$ Resources: Common, testoIta %>" runat="server" /></a>
-                                    <a style="color: black" runat="server" href="<%$ Resources:Common, LinkHomeEn %>" title="<%$ Resources:Common, testoEn %>">
-                                        <asp:Literal Text="<%$ Resources: Common, testoEn %>" runat="server" /></a>--%>
+                    <a style="color: White; padding: 8px" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHomeCambio") %>' title='<%# references.ResMan("Common", Lingua,"testoCambio") %>'>
+                        <%# references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                    <%--  <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
+                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a> | 
+                                        <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
+                                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>
+                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a>
+                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>--%>
                 </div>
                 <div runat="server" visible="false" class="form-search pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 180px; position: relative">
                     <div class="input-group">
-                        <input class="form-control input-small" style="width: 100%;" type="text" placeholder="<%$ Resources: Common, TestoCerca %>" runat="server" id="Text1" />
+                        <input class="form-control input-small" style="width: 100%;" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" id="Text1" />
                         <b class="input-group-btn">
-                            <asp:Button OnClick="btnsearch_Click" ID="buttonSearch" class="btn btn-default btn-xs" Text="<%$ Resources: Common, TestoCerca %>" runat="server" ClientIDMode="Static" />
+                            <asp:Button OnClick="btnsearch_Click" ID="buttonSearch" class="btn btn-default btn-xs" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
                         </b>
                     </div>
                 </div>
                 <div class="pull-right hidden-xs" style="padding-left: 8px; padding-top: 3px;">
-                    <i class="fa fa-phone"></i><a href="<%= "tel:" + Resources.Common.testoTelfisso%>">
-                        <span style="color: #fff; font-weight: 400"><%= Resources.Common.testoTelfisso%>
+                    <i class="fa fa-phone"></i><a href="<%# "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
+                        <span style="color: #fff; font-weight: 400"><%# references.ResMan("Common", Lingua,"testoTelfisso") %>
                         </span></a>
                 </div>
                 <div class="pull-right hidden-xs" style="padding-left: 3px; padding-top: 0px;">
                     <div class="social-icons-small pull-right" style="display: block">
                         <ul style="float: right">
                             <li style="float: right">
-                                <a href="<%$ Resources:Common, _linkFacebook %>" runat="server" target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
+                                <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>' runat="server" target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
                             </li>
                             <li style="float: right">
-                                <a href="<%$ Resources:Common, _linktwitter %>" runat="server" target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
+                                <a href='<%# references.ResMan("Common", Lingua,"_linktwitter") %>' runat="server" target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
                             </li>
-                            <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href="<%$ Resources:Common, _linkGoogle %>" target="_blank" runat="server" data-original-title="googleplus">googleplus</a></li>
+                            <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%# references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" runat="server" data-original-title="googleplus">googleplus</a></li>
                         </ul>
 
 
-                        <%--    <a href="<%$ Resources:Common, _linkFacebook %>" runat="server" target="_blank" style="color: #fff;">
-                            <img style="max-width: 30px" runat="server" src="<%$ Resources: Common, imgFacebook %>" />
+                        <%--    <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>" runat="server" target="_blank" style="color: #fff;">
+                            <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgFacebook") %>" />
                         </a>--%>
-                        <%--<a href="<%$ Resources:Common, _linkTwitter %>" runat="server" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" runat="server" src="<%$ Resources: Common, imgTwitter %>" />
+                        <%--<a href='<%# references.ResMan("Common", Lingua,"_linkTwitter") %>" runat="server" target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgTwitter") %>" />
                             </a>
-                            <a href="<%$ Resources:Common, _linkLinkedin %>" runat="server" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" runat="server" src="<%$ Resources: Common, imgLinkedin %>" />
+                            <a href='<%# references.ResMan("Common", Lingua,"_linkLinkedin") %>" runat="server" target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgLinkedin") %>" />
                             </a>--%>
                     </div>
 
 
                     <div id="containerCarrello" class="pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: none">
                         <a class="btn btn-default btn-small pull-right"
-                            id="A6" runat="server" href="<%$ Resources:Common, LinkShoppingcart %>">
+                            id="A6" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
                             <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems" />
                         </a>
                         <ul class="dropdown-menu dropdown-cart">
                             <li>
                                 <ul class="products-list-mini"
-                                    id="ContainerCarrelloDetails" runat="server" title='' style="height: 400px; width: 100%; overflow-y: scroll; overflow-x: hidden">
+                                    id="ContainerCarrelloDetails" runat="server" title="" style="height: 400px; width: 100%; overflow-y: scroll; overflow-x: hidden">
                                 </ul>
                             </li>
                             <li class="divider"></li>
-                            <li><a id="A4" runat="server" href="<%$ Resources:Common, LinkShoppingcart %>">
-                                <asp:Literal ID="Literal11" runat="server" Text="<%$ Resources:Common, TestoShoppingcart %>" /></a></li>
+                            <li><a id="A4" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
+                                <asp:Literal ID="Literal11" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoShoppingcart") %>' /></a></li>
                             <li class="divider"></li>
                             <li><a
-                                id="A9" runat="server" href="<%$ Resources:Common, LinkOrder %>">
-                                <asp:Literal Text="<%$ Resources: Common, TestoProcediOrdine %>" runat="server" />
+                                id="A9" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrder") %>'>
+                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdine") %>' runat="server" />
                             </a></li>
                             <li class="divider"></li>
                             <li><a
-                                id="A1" runat="server" href="<%$ Resources:Common, LinkOrderNoregistrazione %>">
-                                <asp:Literal Text="<%$ Resources: Common, TestoProcediOrdineNoregistrazione %>" runat="server" />
+                                id="A1" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrderNoregistrazione") %>'>
+                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>' runat="server" />
                             </a></li>
                         </ul>
                         <button type="button" class="btn btn-default btn-small dropdown-toggle pull-right triggerdata" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
                             <span class="caret"></span>
-                            <img runat="server" alt="carrello" src="<%$ Resources:Common, imgCarrello %>" style="width: 25px; border: none" />
+                            <img runat="server" alt="carrello" src='<%# references.ResMan("Common", Lingua,"imgCarrello") %>' style="width: 25px; border: none" />
                         </button>
                     </div>
 
@@ -201,8 +202,8 @@
         </div>
         <div class="fixednav" id="mainnav">
             <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
-                <a style="color: #555; padding: 8px" runat="server" href="<%$ Resources:Common, linkHomeCambio %>" title="<%$ Resources:Common, testoCambio %>">
-                    <%= Resources.Common.testoCambio.ToUpper()%></a>
+                <a style="color: #555; padding: 8px" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHomeCambio") %>' title='<%# references.ResMan("Common", Lingua,"testoCambio") %>'>
+                    <%# references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
             <div style="position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+390578294014 ">
@@ -211,41 +212,41 @@
             <div style="width: 100%;position:relative">
                 <div style="max-width: 1600px; margin: 0px auto; position: relative">
                     <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
-                        <a class="menuzord-brand" runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
+                        <a class="menuzord-brand" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                             <div id="divlogo" class="fulllogobckdark"></div>
                             <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />--%>
                         </a>
                         <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
 
                             <%--    <li runat="server" id="liHome">
-                        <a id="linkHomeHigh" runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
-                            <%= Resources.Common.TestoHome %>
+                        <a id="linkHomeHigh" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>" onclick="JsSvuotaSession(this)">
+                            <%# references.ResMan("Common", Lingua,"TestoHome") %>
                         </a>
                     </li>--%>
 
                             <li runat="server">
-                                <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid1 %>">
-                                    <%= Resources.Common.testoid1 %>
+                                <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
+                                    <%# references.ResMan("Common", Lingua,"testoid1") %>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= Resources.Common.testoid9 %></a>
+                                <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid9") %></a>
                                 <ul class="dropdown">
                                     <li runat="server">
-                                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid2 %>">
-                                            <%= Resources.Common.testoid2 %>
+                                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid2") %>'>
+                                            <%# references.ResMan("Common", Lingua,"testoid2") %>
                                         </a>
                                     </li>
                                     <li runat="server">
-                                        <a id="linkid4High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid4 %>">
-                                            <%= Resources.Common.testoid4 %>
+                                        <a id="linkid4High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid4") %>'>
+                                            <%# references.ResMan("Common", Lingua,"testoid4") %>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <%--   <li runat="server">
-                            <%= CreaLinkPersonalizzato(Resources.Common.TestoPanel3,"rif000001","Vetrina=true") %>
+                            <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"TestoPanel3"),"rif000001","Vetrina=true") %>
                         </li>--%>
                             <li runat="server">
                                 <asp:Repeater ID="rptTipologieLink1High" runat="server"
@@ -259,8 +260,8 @@
                                 </asp:Repeater>
                             </li>
                             <li runat="server">
-                                <a id="linkid5High" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid5 %>">
-                                    <%= Resources.Common.testoid5 %>
+                                <a id="linkid5High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid5") %>'>
+                                    <%# references.ResMan("Common", Lingua,"testoid5") %>
                                 </a>
                             </li>
 
@@ -303,7 +304,7 @@
                             <%--  <li runat="server">
 
                          
-                            <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= Resources.Common.testoid10 %></a>
+                            <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid10") %></a>
 
                             <ul class="dropdown">
 
@@ -323,30 +324,30 @@
                         </li>--%>
 
                             <li runat="server">
-                                <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, linkContatti %>" title="<%$ Resources:Common, testoContatti %>">
-                                    <span class="label-nav"><%= Resources.Common.TestoContatti %>   </span>
+                                <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkContatti") %>' title='<%# references.ResMan("Common", Lingua,"testoContatti") %>'>
+                                    <span class="label-nav"><%# references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                                 </a>
-                                <%-- <a id="linkid11high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%=  Resources.Common.testoid11 %></a>
+                                <%-- <a id="linkid11high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid11") %></a>
                         <ul class="dropdown">
                             <li></li>
                             <li>
-                                <a id="linkDovesiamoHigh" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, linkDovesiamo %>" title="<%$ Resources:Common, testoDovesiamo %>">
-                                    <span class="label-nav"><%= Resources.Common.testoDovesiamo %>   </span>
+                                <a id="linkDovesiamoHigh" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkDovesiamo" %>' title='<%# references.ResMan("Common", Lingua,"testoDovesiamo") %>">
+                                    <span class="label-nav"><%# references.ResMan("Common", Lingua,"testoDovesiamo") %>   </span>
                                 </a>
                             </li>
 
                             <li class="search" style="float: right;" runat="server" visible="false">
                                 <div style="padding-top: 5px; padding-left: 10px">
-                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder="<%$ Resources: Common, TestoCerca %>" />
-                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text="<%$ Resources: Common, TestoCerca %>" runat="server" ClientIDMode="Static" />
+                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>" />
+                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>" runat="server" ClientIDMode="Static" />
                                 </div>
                             </li>
                         </ul>--%>
                             </li>
                             <li class="search" style="float: right;" runat="server" visible="false">
                                 <div style="padding-top: 5px; padding-left: 10px">
-                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder="<%$ Resources: Common, TestoCerca %>" />
-                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text="<%$ Resources: Common, TestoCerca %>" runat="server" ClientIDMode="Static" />
+                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
+                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
                                 </div>
                             </li>
 
@@ -378,7 +379,7 @@
                         <div class="col-sm-12">
                             <div class="title-block clearfix">
                                 <div class="row" style="text-align: center; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; border-bottom: 1px solid #33332e; line-height: 40px; color: #33332e">
-                                    <%= Resources.Common.TestoPanel3  %>
+                                    <%# references.ResMan("Common", Lingua,"TestoPanel3")  %>
                                 </div>
                             </div>
                         </div>
@@ -432,7 +433,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <br />
-                            <h2><%= Resources.Common.testoRicercaCatalogo %></h2>
+                            <h2><%# references.ResMan("Common", Lingua,"testoRicercaCatalogo") %></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -457,7 +458,7 @@
                             </asp:DropDownList>
                         </div>
                         <div class="col-sm-2">
-                            <asp:CheckBox Text="<%$ Resources: Common, TestoMenu1 %>" runat="server" Checked="false" ID="chkPromo" />
+                            <asp:CheckBox Text='<%# references.ResMan("Common", Lingua,"TestoMenu1") %>' runat="server" Checked="false" ID="chkPromo" />
 
                         </div>
 
@@ -473,7 +474,7 @@
 
                     <div class="row">
                         <br />
-                        <asp:Button class="divbuttonstyle" Text="<%$ Resources: Common, testoCerca %>" runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" />
+                        <asp:Button class="divbuttonstyle" Text='<%# references.ResMan("Common", Lingua,"testoCerca") %>' runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" />
                     </div>
                     <br />
                     <br />
@@ -714,27 +715,27 @@
                         </div>
 
                         <div class="col-sm-5">
-                            <asp:Literal Text="<%$ Resources: Common, TestoContattaciFooter %>" runat="server" />
-                            <%--      <a href="<%= Resources.Common.iconCelltext %>"><%= Resources.Common.iconCelltext %></a>--%>
+                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoContattaciFooter") %>' runat="server" />
+                            <%--      <a href="<%# references.ResMan("Common", Lingua,"iconCelltext") %>"><%# references.ResMan("Common", Lingua,"iconCelltex")t %></a>--%>
 
-                            <%--  <a href="<%= Resources.Common.GoogleUrl1 %>" target="_blank"><%= Resources.Common.iconMaptext %></a>--%>
-                            <span><%= Resources.Common.iconEmailtext %></span>
+                            <%--  <a href="<%# references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%# references.ResMan("Common", Lingua,"iconMaptext") %></a>--%>
+                            <span><%# references.ResMan("Common", Lingua,"iconEmailtext") %></span>
                             <br />
                             <br />
-                            <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder="<%$ Resources: Common, FormTesto2 %>" runat="server" id="txtContactName" />
+                            <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
                             <br />
                             <br />
                             <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
                             <br />
                             <br />
-                            <textarea style="background-color: #ffffff" rows="4" cols="5" class="subscribe-input text-input form-control" name="q" validationgroup="contattifooter" placeholder="<%$ Resources: Common, FormTesto17 %>" runat="server" id="txtContactMessage" />
+                            <textarea style="background-color: #ffffff" rows="4" cols="5" class="subscribe-input text-input form-control" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                             <br />
-                            <button style="float: right; border: solid 1px #fff; background-color: #33332e; color: #fff; width: 150px" class="form-control" runat="server" validationgroup="contattifooter" onserverclick="btnContatti1_Click"><%= Resources.Common.TestoInvio %></button>
+                            <button style="float: right; border: solid 1px #fff; background-color: #33332e; color: #fff; width: 150px" class="form-control" runat="server" validationgroup="contattifooter" onserverclick="btnContatti1_Click"><%# references.ResMan("Common", Lingua,"TestoInvio") %></button>
                             <div style="clear: both"></div>
-                            <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px; float: right" Checked="true" Text="<%$ Resources: Common, testoPrivacy %>" /><br />
+                            <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px; float: right" Checked="true" Text='<%# references.ResMan("Common", Lingua,"testoPrivacy") %>' /><br />
                             <div style="clear: both"></div>
-                            <asp:RequiredFieldValidator Font-Size="10px" ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
-                            <asp:RequiredFieldValidator Font-Size="10px" ErrorMessage="<%$ Resources: Common, FormTesto4Err %>" ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
+                            <asp:RequiredFieldValidator Font-Size="10px" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
+                            <asp:RequiredFieldValidator Font-Size="10px" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
                             <div style="font-weight: 300; font-size: 10px; color: red">
                                 <asp:Literal Text="" ID="outputContact" runat="server" />
                             </div>
@@ -758,26 +759,26 @@
                     <div class="footer-wrapper">
                         <div class="row">
                             <div class="col-sm-4 footer-col">
-                                <a runat="server" href="<%$ Resources:Common, LinkHome %>" title="<%$ Resources:Common, testoHomeIndex %>" onclick="JsSvuotaSession(this)">
+                                <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                                     <img src="<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png")%>" style="width: 80%; margin: 0 auto" alt="" />
                                 </a>
                                 <br />
                                 <asp:Panel runat="server" ID="pnlNewsletterHome" Visible="false">
                                     <div class="footer-title">
-                                        <asp:Literal Text="<%$ Resources: Common, titoloNewsletter %>" runat="server" />
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"titoloNewsletter") %>' runat="server" />
                                     </div>
                                     <div class="footer-content">
 
                                         <p>
-                                            <asp:Literal Text="<%$ Resources: Common, TestoNewsletterForm %>" runat="server" />
+                                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoNewsletterForm") %>' runat="server" />
                                         </p>
                                         <%--     <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
                                             <br />
                                             <br />--%>
                                         <input type="text" style="background-color: #ffffff; width: 75%; height: 36px" name="q" class="subscribe-input text-input form-control pull-left" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
 
-                                        <button class="btn btn-blue btn-sm pull-left" style="width: 20%" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= Resources.Common.TestoBtnNewsletter %></button>
-                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
+                                        <button class="btn btn-blue btn-sm pull-left" style="width: 20%" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%# references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
+                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
 
 
                                     </div>
@@ -786,41 +787,41 @@
                             <div class="col-sm-offset-2 col-sm-3 footer-col">
 
                                 <div class="footer-title">
-                                    <%= Resources.Common.testoFooter1%>
+                                    <%# references.ResMan("Common", Lingua,"testoFooter1") %>
                                 </div>
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
                                         <li runat="server">
-                                            <a id="linkHome" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, linkHome %>" title="<%$ Resources:Common, testoHome %>">
+                                            <a id="linkHome" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHome") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal2" runat="server" Text="<%$ Resources:Common, testoHome %>" />
+                                                    <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoHome") %>' />
                                                 </span>
                                             </a>
                                         </li>
 
                                         <li runat="server">
-                                            <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid1 %>">
+                                            <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources:Common, testoid1 %>" /></span>
+                                                    <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid1") %>' /></span>
                                             </a>
                                         </li>
 
                                         <li runat="server">
-                                            <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid2 %>">
+                                            <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid2") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal4" runat="server" Text="<%$ Resources:Common, testoid2 %>" /></span>
+                                                    <asp:Literal ID="Literal4" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid2") %>' /></span>
                                             </a>
                                         </li>
                                         <li runat="server">
-                                            <a id="linkid4" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid4 %>">
+                                            <a id="linkid4" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid4") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal6" runat="server" Text="<%$ Resources:Common, testoid4 %>" /></span>
+                                                    <asp:Literal ID="Literal6" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid4") %>' /></span>
                                             </a>
                                         </li>
                                         <li runat="server">
-                                            <a id="linkid5" onclick="JsSvuotaSession(this)" runat="server" href="#" title="<%$ Resources:Common, testoid5 %>">
+                                            <a id="linkid5" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid5") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal7" runat="server" Text="<%$ Resources:Common, testoid5 %>" /></span>
+                                                    <asp:Literal ID="Literal7" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid5") %>' /></span>
                                             </a>
                                         </li>
                                         <asp:Repeater ID="rptTipologieLink1" runat="server"
@@ -867,9 +868,9 @@
                                             </ItemTemplate>
                                         </asp:Repeater>--%>
                                         <li>
-                                            <a id="linkContatti" onclick="JsSvuotaSession(this)" runat="server" href="<%$ Resources:Common, LinkContatti %>" title="<%$ Resources:Common, testoContatti %>">
+                                            <a id="linkContatti" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkContatti") %>' title='<%# references.ResMan("Common", Lingua,"testoContatti") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources:Common, testoContatti %>" />
+                                                    <asp:Literal ID="Literal3" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoContatti") %>' />
                                                 </span>
                                             </a>
                                         </li>
@@ -894,33 +895,33 @@
                         <div class="social-icons pull-right" style="display: block">
                             <ul style="float: right">
                                 <li style="float: right">
-                                    <a href="<%$ Resources:Common, _linkFacebook %>" runat="server" target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
+                                    <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>' runat="server" target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
                                 </li>
                                 <li style="float: right">
-                                    <a href="<%$ Resources:Common, _linktwitter %>" runat="server" target="_blank" class="social-media-icon twitter-icon" data-original-title="twitter">twitter</a>
+                                    <a href='<%# references.ResMan("Common", Lingua,"_linktwitter") %>' runat="server" target="_blank" class="social-media-icon twitter-icon" data-original-title="twitter">twitter</a>
                                 </li>
 
 
-                                <li style="float: right"><a class="social-media-icon googleplus-icon" href="<%$ Resources:Common, _linkGoogle %>" target="_blank" runat="server"><i class="fa fa-google-plus"></i></a></li>
+                                <li style="float: right"><a class="social-media-icon googleplus-icon" href='<%# references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" runat="server"><i class="fa fa-google-plus"></i></a></li>
 
                                 <%--      <li style="float: right">
-                                        <a href="<%$ Resources:Common, _linkgoogle %>" runat="server" target="_blank" class="social-media-icon googleplus-icon" data-original-title="googleplus">googleplus</a>
+                                        <a href='<%# references.ResMan("Common", Lingua,"_linkgoogle") %>" runat="server" target="_blank" class="social-media-icon googleplus-icon" data-original-title="googleplus">googleplus</a>
                                     </li>
                                     
                                     <li style="float: right">
-                                        <a href="<%$ Resources:Common, _linkyoutube %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
+                                        <a href='<%# references.ResMan("Common", Lingua,"_linkyoutube") %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
                                     </li>
 
                               
                                             <li>
-                                            <a href="<%$ Resources:Common, _linkLinkedin %>" runat="server" target="_blank"><i class="fa fa-linkedin" style="color: white; padding-left: 5px; padding-right: 5px"></i></a>
+                                            <a href='<%# references.ResMan("Common", Lingua,"_linkLinkedin") %>" runat="server" target="_blank"><i class="fa fa-linkedin" style="color: white; padding-left: 5px; padding-right: 5px"></i></a>
                                         </li>
                                        
                                         <li>
-                                            <a href="<%$ Resources:Common, _linkpinterest %>" runat="server" target="_blank" class="social-media-icon pininterest-icon" data-original-title="pininterest">pininterest</a>
+                                            <a href='<%# references.ResMan("Common", Lingua,"_linkpinterest") %>" runat="server" target="_blank" class="social-media-icon pininterest-icon" data-original-title="pininterest">pininterest</a>
                                         </li>
                                         <li>
-                                            <a href="<%$ Resources:Common, _linktripadvisor %>" runat="server" target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
+                                            <a href='<%# references.ResMan("Common", Lingua,"_linktripadvisor") %>" runat="server" target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
                                         </li>--%>
                             </ul>
                         </div>
@@ -935,17 +936,17 @@
                             <div class="col-ld-12" style="text-align: center">
 
                                 <p style="font-size: 1.2em; padding-top: 10px;">
-                                    <asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:Common, txtFooter %>" /><br />
-                                    <a id="linkLogin" runat="server" href="<%$ Resources:Common, Linklogin %>">
-                                        <asp:Literal ID="Literal9" runat="server" Text="<%$ Resources:Common, Testologin %>" /></a>
+                                    <asp:Literal ID="Literal5" runat="server" Text='<%# references.ResMan("Common", Lingua,"txtFooter") %>' /><br />
+                                    <a id="linkLogin" runat="server" href='<%# references.ResMan("Common", Lingua,"Linklogin") %>'>
+                                        <asp:Literal ID="Literal9" runat="server" Text='<%# references.ResMan("Common", Lingua,"Testologin") %>' /></a>
 
-                                    <a runat="server" target="_blank" href="<%$ Resources: Common, linkWebmouse %>">Project by Web Mouse Consulting srl</a>
+                                    <a runat="server" target="_blank" href='<%# references.ResMan("Common", Lingua,"linkWebmouse") %>'>Project by Web Mouse Consulting srl</a>
                                 </p>
 
                                 <%-- <div class="pull-right">
                                     <p style="font-size: 1.2em; padding-top: 10px">
-                                        <a id="A3" href="<%$ Resources:Common, _linkFacebook %>" runat="server" target="_blank" style="padding-left: 5px; padding-right: 5px">
-                                            <asp:Literal ID="Literal10" runat="server" Text="<%$ Resources:Common, testoSeguici %>" /><i class="fa fa-facebook"></i></a>
+                                        <a id="A3" href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>" runat="server" target="_blank" style="padding-left: 5px; padding-right: 5px">
+                                            <asp:Literal ID="Literal10" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoSeguici") %>" /><i class="fa fa-facebook"></i></a>
                                     </p>
                                 </div>--%>
                                 <div class="clearfix"></div>
@@ -969,7 +970,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.easing.1.3.js")%>"></script>
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.easytabs.js")%>"></scrip<t>--%>
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.infinitescroll.js")%>"></script>--%>
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.isotope.js") %>"></script>--%>
+        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.isotope.js") %>'></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/imagesloaded.pkgd.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/isotope.pkgd.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.prettyPhoto.js")%>"></script>
@@ -994,7 +995,7 @@
         <!--DEFIANTJS to query json obkects-->
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'></script>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/jarallax.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/script.js")%>"></script>
