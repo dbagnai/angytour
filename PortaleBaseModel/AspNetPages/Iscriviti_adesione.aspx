@@ -18,7 +18,7 @@
                     }
                 </script>
                 <div style="height: 40px; font-size: 28px">
-                    <asp:Literal ID="litMainContent" Text="<%$ Resources:Common,titleIscriviti %>"
+                    <asp:Literal ID="litMainContent" Text='<%# references.ResMan("Common", Lingua,"titleIscriviti") %>'
                         runat="server" />
                 </div>
                 <br />
@@ -31,9 +31,9 @@
 
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal2" runat="server" Text='<%$ Resources:Common,FormTesto2 %>' />
+                            <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtNome"
-                                ErrorMessage='<%$ Resources:Common,FormTesto2Err %>' Text="*" ValidationGroup="MailInfo" />
+                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Text="*" ValidationGroup="MailInfo" />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtNome" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -41,9 +41,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal3" runat="server" Text='<%$ Resources:Common,FormTesto3 %>' />
+                            <asp:Literal ID="Literal3" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtCognome"
-                                ErrorMessage='<%$ Resources:Common,FormTesto3Err %>' Text="*" ValidationGroup="MailInfo" />
+                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' Text="*" ValidationGroup="MailInfo" />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtCognome" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -51,9 +51,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal5" runat="server" Text='<%$ Resources:Common,FormTesto4 %>' />
+                            <asp:Literal ID="Literal5" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtEmail"
-                                ErrorMessage='<%$ Resources:Common,FormTesto4Err %>' Text="*" ValidationGroup="MailInfo" />
+                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtEmail" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -61,9 +61,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal6" runat="server" Text='<%$ Resources:Common,FormTesto10 %>' />
+                            <asp:Literal ID="Literal6" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtIndirizzo"
-                                ErrorMessage='<%$ Resources:Common,FormTesto10Err %>' Text="*" ValidationGroup="MailInfo" />
+                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto10Err") %>' Text="*" ValidationGroup="MailInfo" />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtIndirizzo" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -71,9 +71,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal8" runat="server" Text='<%$ Resources:Common,FormTesto11 %>' />
+                            <asp:Literal ID="Literal8" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtTelefono"
-                                ErrorMessage='<%$ Resources:Common,FormTesto11Err %>' Text="*" ValidationGroup="MailInfo" />
+                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' Text="*" ValidationGroup="MailInfo" />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtTelefono" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -82,7 +82,7 @@
 
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">
-                            <asp:Literal ID="Literal4" runat="server" Text='<%$ Resources:Common,FormTesto14 %>' />
+                            <asp:Literal ID="Literal4" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto14") %>' />
                         </div>
                         <div class="col-sm-9">
                             <asp:TextBox ID="txtDescrizione" 
@@ -92,11 +92,11 @@
                     <div class="row">
                         <div class="col-sm-3" style="text-align: right">&nbsp;</div>
                         <div class="col-sm-9">
-                            <asp:CheckBox ID="chkPrivacy" runat="server" Checked="true" Text='<%$ Resources:Common,chkPrivacy %>' />
-                            <a id="linkPrivacy" runat="server" onclick='<%$ Resources:Common,privacydetail %>'
+                            <asp:CheckBox ID="chkPrivacy" runat="server" Checked="true" Text='<%# references.ResMan("Common", Lingua,"chkPrivacy") %>' />
+                            <a id="linkPrivacy" runat="server" onclick='<%# references.ResMan("Common", Lingua,"privacydetail") %>'
                                 href="javascript:;">(D.Lgs 196/2003)</a>
                             <br />
-                            <asp:CheckBox ID="chkConsensoMail" runat="server" Width="480" Checked="true" Text='<%$ Resources:Common,testoConsenso1 %>' />
+                            <asp:CheckBox ID="chkConsensoMail" runat="server" Width="480" Checked="true" Text='<%# references.ResMan("Common", Lingua,"testoConsenso1") %>' />
                             <br />
                             <br />
                             <asp:Button ID="btnInvia" runat="server" Text="Invia" CausesValidation="true" UseSubmitBehavior="false"

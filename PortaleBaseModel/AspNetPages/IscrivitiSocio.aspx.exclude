@@ -28,7 +28,7 @@
                         <div class="col-sm-6">
                             <strong>
                                 <asp:Label ID="Label31" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />*
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>"
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>'
                                     ControlToValidate="txtNome_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtNome_dts" runat="server"></asp:TextBox>
 
@@ -36,7 +36,7 @@
                         <div class="col-sm-6">
                             <strong>
                                 <asp:Label ID="Label32" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />*
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>"
+                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>'
                                           ControlToValidate="txtCognome_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                             </strong>
                             <br />
@@ -64,7 +64,7 @@
                         <div class="col-sm-6">
                             <strong>
                                 <asp:Label ID="Label35" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoS1") %>' />* 
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS1Err") %>"
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS1Err") %>'
                                         ControlToValidate="txtSociopresentatore1_dts" runat="server" Text="*" Font-Size="Large" ValidationGroup="Insertvalidate" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSociopresentatore1_dts" runat="server"></asp:TextBox>
                             <br />
@@ -73,7 +73,7 @@
                         <div class="col-sm-6">
                             <strong>
                                 <asp:Label ID="Label36" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoS2") %>' />*
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS2Err") %>"
+                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS2Err") %>'
                                           ControlToValidate="txtSociopresentatore2_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                             </strong>
                             <br />
@@ -314,7 +314,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label54" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5")  %>" /></strong><br />
+                                <asp:Label ID="Label54" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5")  %>' /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera5" runat="server" RepeatDirection="Horizontal">
@@ -326,13 +326,13 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label55" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5b")  %>" /></strong><br />
+                                <asp:Label ID="Label55" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5b")  %>' /></strong><br />
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label56" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera6")  %>" /></strong><br />
+                                <asp:Label ID="Label56" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera6")  %>' /></strong><br />
                         </div>
                     </div>
                     <%-- QUI VA INSERITA LA TABELLA CON LA STATISTICA INTERVENTI Interventieseguiti_dts--%>
@@ -341,17 +341,17 @@
                             <tr>
                                 <td>
                                     <strong>
-                                        <asp:Label ID="Label58" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera7")  %>" /></strong>
+                                        <asp:Label ID="Label58" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera7")  %>' /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label59" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8")  %>" /></strong>
+                                        <asp:Label ID="Label59" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8")  %>' /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label60" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9")  %>" /></strong>
+                                        <asp:Label ID="Label60" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9")  %>' /></strong>
 
                                 </td>
                             </tr>
@@ -379,19 +379,19 @@
                                     <asp:Literal ID="litIntervento1" Text="Blefaroplastica" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op1" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op1" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -400,19 +400,19 @@
                                     <asp:Literal ID="litIntervento2" Text="Rinoplastica" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op2" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op2" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -421,19 +421,19 @@
                                     <asp:Literal ID="litIntervento3" Text="Face-Lifting" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op3" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op3" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -442,19 +442,19 @@
                                     <asp:Literal ID="litIntervento4" Text="Otoplastica" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op4" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op4" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -463,19 +463,19 @@
                                     <asp:Literal ID="litIntervento5" Text="Mastoplastica Additiva" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op5" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op5" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -484,19 +484,19 @@
                                     <asp:Literal ID="litIntervento6" Text="Mastopessi" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op6" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op6" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -505,19 +505,19 @@
                                     <asp:Literal ID="litIntervento7" Text="Mastoplastica Riduttiva" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op7" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op7" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -526,19 +526,19 @@
                                     <asp:Literal ID="litIntervento8" Text="Addominoplastica" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op8" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op8" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -547,19 +547,19 @@
                                     <asp:Literal ID="litIntervento9" Text="Liposuzione" runat="server" /></td>
                                 <td colspan="4">
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento1op9" runat="server"  RepeatDirection="Horizontal" RepeatLayout="Table"    RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera8d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera8d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                              <td colspan="4">
 
                                 <asp:RadioButtonList CssClass="table table-bordered" ID="radIntervento2op9" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table"   RepeatColumns="4">
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9a  %>" Value="1" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9b %>" Value="2" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9c  %>" Value="3" />
-                                    <asp:ListItem Text="<%$  Resources: Common, FormTestoCarriera9d %>" Value="4" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9a") %>' Value="1" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9b") %>' Value="2" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9c") %>' Value="3" />
+                                    <asp:ListItem Text='<%= references.ResMan("Common", Lingua,"FormTestoCarriera9d") %>' Value="4" />
                                 </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -639,7 +639,8 @@
                                 }
                             </script>
                             <br />
-                            <i>Dichiaro di aver letto,compreso ed accettato  <a target="_blank" runat="server" href='<%$ Resources:Common,linkStatuto  %>'>lo statuto dell’AICPE ed il codice etico</a> e mi impegno a rispettarli, cosciente delle sanzioni in caso di non osservanza
+                            <i>Dichiaro di aver letto,compreso ed accettato  
+                                <a target="_blank" runat="server" href='<%# references.ResMan("Common", Lingua,"linkStatuto")  %>'>lo statuto dell’AICPE ed il codice etico</a> e mi impegno a rispettarli, cosciente delle sanzioni in caso di non osservanza
                             </i>
                         </div>
                     </div>
@@ -1013,7 +1014,7 @@
                     </asp:UpdatePanel>
                     <div class="row" style="margin-bottom: 5px; padding-right: 20px">
                         <div class="pull-right">
-                            <asp:Button ToolTip="Invia Form" ValidationGroup="Insertvalidate" Text='<%# references.ResMan("Common", Lingua,"TestoInvio") %>"
+                            <asp:Button ToolTip="Invia Form" ValidationGroup="Insertvalidate" Text='<%# references.ResMan("Common", Lingua,"TestoInvio") %>'
                                 ID="btninvia" runat="server" CssClass="btn btn-success" OnClick="btnInvia_Click" />
 
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server" DisplayAfter="0" DynamicLayout="false"

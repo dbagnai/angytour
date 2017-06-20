@@ -187,6 +187,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                 plhForm.Visible = true;
             }
 
+         DataBind();
         }
         catch (Exception err)
         {

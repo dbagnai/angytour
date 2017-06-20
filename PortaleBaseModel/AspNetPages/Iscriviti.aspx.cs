@@ -143,6 +143,7 @@ public partial class _Iscriviti : CommonPage
                 plhForm.Visible = true;
             }
 
+            DataBind();
         }
         catch (Exception err)
         {
