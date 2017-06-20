@@ -164,7 +164,7 @@
                                 <%--        <p>
                                 <asp:LinkButton runat="server"
                                     class="btn btn-success pull-right" OnClick="btnInsertcart" CommandArgument='<%# Eval("Id") %>'>
-                                   <asp:Literal text="<%$ Resources: Common, testoInseriscicarrello %>" runat="server" />  <i class="icon-shopping-cart"></i>
+                                   <asp:Literal text="<%$ Resources:Common,testoInseriscicarrello %>" runat="server" />  <i class="icon-shopping-cart"></i>
                                 </asp:LinkButton>
                                 <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'
                                     Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €" %>'></asp:Literal>
@@ -185,7 +185,7 @@
             <asp:Panel runat="server" ID="pnlPager" Visible="false">
                 <div class="row">
                     <div class="pull-left">
-                        <asp:Button ID="btnPrev" class="button divbuttonstyle" Text="<%$ Resources: Common, txtTastoPrev %>"
+                        <asp:Button ID="btnPrev" class="button divbuttonstyle" Text="<%$ Resources:Common,txtTastoPrev %>"
                             runat="server" OnClick="btnPrev_click" />
                     </div>
                     <div class="pull-left">
@@ -197,7 +197,7 @@
 
                     </div>
                     <div class="pull-left">
-                        <asp:Button ID="btnNext" class="button divbuttonstyle" Text="<%$ Resources: Common, txtTastoNext   %>"
+                        <asp:Button ID="btnNext" class="button divbuttonstyle" Text="<%$ Resources:Common,txtTastoNext   %>"
                             runat="server" OnClick="btnNext_click" />
                     </div>
                 </div>

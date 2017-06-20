@@ -5,12 +5,12 @@
         <tr>
             <td align="right">
                 <font face="HelveticaNeueLTStd55Roman" size="1" color="#44444E">
-                    <asp:Label runat="server" ID="lblTotals" Text="<%$ Resources: Common, PagerPagina %>" /></font> <font color="#339900"
+                    <asp:Label runat="server" ID="lblTotals" Text="<%$ Resources:Common,PagerPagina %>" /></font> <font color="#339900"
                         face="HelveticaNeueLTStd55Roman" style="font-size: 9pt"><b>
                             <asp:Literal ID="CurrentPageLiteral" runat="server" /></b></font>
                 <asp:Literal ID="TotalsLiteral" Visible="false" runat="server" />
                 <font face="HelveticaNeueLTStd55Roman" size="1" color="#44444E">
-                    <asp:Label runat="server" ID="lblTotals2" Text="<%$ Resources: Common, PagerDi %>" /></font> <b><font face="HelveticaNeueLTStd55Roman"
+                    <asp:Label runat="server" ID="lblTotals2" Text="<%$ Resources:Common,PagerDi %>" /></font> <b><font face="HelveticaNeueLTStd55Roman"
                         color="#44444E" style="font-size: 9pt">
                         <asp:Literal ID="TotalPagesLiteral" runat="server" />
                     </font></b>

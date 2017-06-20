@@ -169,7 +169,7 @@
 
                             <asp:TextBox runat="server" Width="100%" ID="txtinputCerca" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" TargetControlID="txtinputCerca"
-                                runat="server" WatermarkText="<%$ Resources: Common, wmarkCerca %>">
+                                runat="server" WatermarkText="<%$ Resources:Common,wmarkCerca %>">
                             </Ajax:TextBoxWatermarkExtender>
                             <asp:TextBox runat="server" ID="txtinputmese" Visible="false" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" TargetControlID="txtinputmese"
@@ -381,7 +381,7 @@
                             <strong>
                                 <asp:Label ID="Label35" runat="server" Text="Socio Presentatore Effettivo 1*" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSociopresentatore1_dts" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage="<%$ Resources: Common, FormTestoS1Err %>"
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage="<%$ Resources:Common,FormTestoS1Err %>"
                                 ControlToValidate="txtSociopresentatore1_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                             <br />
                             <i>inserire i nominativi dei due soci presentatori</i>
@@ -390,7 +390,7 @@
                             <strong>
                                 <asp:Label ID="Label36" runat="server" Text="Socio Presentatore Effettivo 2*" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSociopresentatore2_dts" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage="<%$ Resources: Common, FormTestoS2Err %>"
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage="<%$ Resources:Common,FormTestoS2Err %>"
                                 ControlToValidate="txtSociopresentatore2_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                         </div>
                     </div>--%>
@@ -491,12 +491,12 @@
                     <%--  <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label43" runat="server" Text="<%$ Resources: Common, FormTestoAlbo1 %>" /></strong>
+                                <asp:Label ID="Label43" runat="server" Text="<%$ Resources:Common,FormTestoAlbo1 %>" /></strong>
                             <asp:TextBox Width="20%" ID="txtLocordine_dts" runat="server"></asp:TextBox>
 
 
                             <strong>
-                                <asp:Label ID="Label44" runat="server" Text="<%$ Resources: Common, FormTestoAlbo2 %>" /></strong>
+                                <asp:Label ID="Label44" runat="server" Text="<%$ Resources:Common,FormTestoAlbo2 %>" /></strong>
                             <asp:TextBox Width="20%" ID="txtNiscrordine_dts" runat="server"></asp:TextBox>
 
                         </div>
@@ -504,17 +504,17 @@
                     <%-- <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label46" runat="server" Text="<%$ Resources: Common, FormTestoSpecializzandi1 %>" />
+                                <asp:Label ID="Label46" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi1 %>" />
                             </strong>
                             <br />
-                            <asp:Label ID="Label47" runat="server" Text="<%$ Resources: Common, FormTestoSpecializzandi2 %>" />
+                            <asp:Label ID="Label47" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi2 %>" />
                             <asp:TextBox Width="10%" ID="txtannofrequenza_dts" runat="server"></asp:TextBox>
                             <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" TargetControlID="txtannofrequenza_dts"
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
 
-                            <asp:Label ID="Label48" runat="server" Text="<%$ Resources: Common, FormTestoSpecializzandi3 %>" />
+                            <asp:Label ID="Label48" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi3 %>" />
                             <asp:TextBox Width="15%" ID="txtnomeuniversita_dts" runat="server"></asp:TextBox>
-                            <asp:Label ID="Label45" runat="server" Text="<%$ Resources: Common, FormTestoSpecializzandi4 %>" />
+                            <asp:Label ID="Label45" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi4 %>" />
                             <asp:TextBox Width="15%" ID="txtdettagliuniversita_dts" runat="server"></asp:TextBox><br />
                         </div>
                     </div>--%>
@@ -559,7 +559,7 @@
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label42" runat="server" Text="<%$ Resources: Common, FormTestoSocioaltra %>" /></strong><br />
+                                <asp:Label ID="Label42" runat="server" Text="<%$ Resources:Common,FormTestoSocioaltra %>" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSocioaltraassociazione_dts" runat="server"></asp:TextBox><br />
                             <i>Inserire i nomi delle associazione separati da una virgola</i>
                         </div>
@@ -570,7 +570,7 @@
                     <%--   <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999; border-top: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label49" runat="server" Text="<%$ Resources: Common, FormTestoCarriera1 %>" /></strong><br />
+                                <asp:Label ID="Label49" runat="server" Text="<%$ Resources:Common,FormTestoCarriera1 %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera1" runat="server" RepeatDirection="Horizontal">
@@ -582,7 +582,7 @@
                     <%--    <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label50" runat="server" Text="<%$ Resources: Common, FormTestoCarriera2 %>" /></strong><br />
+                                <asp:Label ID="Label50" runat="server" Text="<%$ Resources:Common,FormTestoCarriera2 %>" /></strong><br />
                         </div>
                         <div class="col-sm-6">
                             <asp:TextBox Width="90%" Height="100px" TextMode="MultiLine" ID="txtTextfield1_dts" runat="server"></asp:TextBox>
@@ -591,7 +591,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label51" runat="server" Text="<%$ Resources: Common, FormTestoCarriera3 %>" /></strong><br />
+                                <asp:Label ID="Label51" runat="server" Text="<%$ Resources:Common,FormTestoCarriera3 %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera2" runat="server" RepeatDirection="Horizontal">
@@ -603,7 +603,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label52" runat="server" Text="<%$ Resources: Common, FormTestoCarriera3b %>" /></strong><br />
+                                <asp:Label ID="Label52" runat="server" Text="<%$ Resources:Common,FormTestoCarriera3b %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera3" runat="server" RepeatDirection="Horizontal">
@@ -615,7 +615,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label53" runat="server" Text="<%$ Resources: Common, FormTestoCarriera4 %>" /></strong><br />
+                                <asp:Label ID="Label53" runat="server" Text="<%$ Resources:Common,FormTestoCarriera4 %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera4" runat="server" RepeatDirection="Horizontal">
@@ -627,7 +627,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label54" runat="server" Text="<%$ Resources: Common, FormTestoCarriera5  %>" /></strong><br />
+                                <asp:Label ID="Label54" runat="server" Text="<%$ Resources:Common,FormTestoCarriera5  %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera5" runat="server" RepeatDirection="Horizontal">
@@ -639,13 +639,13 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label55" runat="server" Text="<%$ Resources: Common, FormTestoCarriera5b  %>" /></strong><br />
+                                <asp:Label ID="Label55" runat="server" Text="<%$ Resources:Common,FormTestoCarriera5b  %>" /></strong><br />
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label56" runat="server" Text="<%$ Resources: Common, FormTestoCarriera6  %>" /></strong><br />
+                                <asp:Label ID="Label56" runat="server" Text="<%$ Resources:Common,FormTestoCarriera6  %>" /></strong><br />
                         </div>
                     </div>
                     
@@ -655,17 +655,17 @@
                             <tr>
                                 <td>
                                     <strong>
-                                        <asp:Label ID="Label58" runat="server" Text="<%$ Resources: Common, FormTestoCarriera7  %>" /></strong>
+                                        <asp:Label ID="Label58" runat="server" Text="<%$ Resources:Common,FormTestoCarriera7  %>" /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label59" runat="server" Text="<%$ Resources: Common, FormTestoCarriera8  %>" /></strong>
+                                        <asp:Label ID="Label59" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8  %>" /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label60" runat="server" Text="<%$ Resources: Common, FormTestoCarriera9  %>" /></strong>
+                                        <asp:Label ID="Label60" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9  %>" /></strong>
 
                                 </td>
                             </tr>
@@ -866,7 +866,7 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label57" runat="server" Text="<%$ Resources: Common, FormTestoCarriera10 %>" /></strong><br />
+                                <asp:Label ID="Label57" runat="server" Text="<%$ Resources:Common,FormTestoCarriera10 %>" /></strong><br />
                             <br />
                         </div>
                     </div>--%>
@@ -1631,7 +1631,7 @@
                                             <td>
                                                 <div>
                                                     <h2>
-                                                        <asp:Label runat="server" ID="TitleProdotti" Text='<%$ Resources: Common,TitleProdottiGest %>'></asp:Label></h2>
+                                                        <asp:Label runat="server" ID="TitleProdotti" Text='<%$ Resources:Common,TitleProdottiGest %>'></asp:Label></h2>
                                                 </div>
                                                 <table cellpadding="0" cellspacing="0">
                                                     <tr>
@@ -1688,7 +1688,7 @@
                                                 <div style="margin-left: 50px; border-left: 1px solid #000000; padding-left: 10px;">
                                                     <div>
                                                         <h2>
-                                                            <asp:Label runat="server" ID="TitleSottoprodotti" Text='<%$ Resources: Common,TitleSottProdottiGest %>'></asp:Label></h2>
+                                                            <asp:Label runat="server" ID="TitleSottoprodotti" Text='<%$ Resources:Common,TitleSottProdottiGest %>'></asp:Label></h2>
                                                     </div>
                                                     <table>
                                                         <tr>

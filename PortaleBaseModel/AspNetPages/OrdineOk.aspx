@@ -13,7 +13,7 @@
         <br />
         <br />
         <h4>
-            <asp:Label Style="font-size: 1.6em; color: black" Text="<%$ Resources: Common, defRispostaOrdine %>" runat="server" ID="output" />
+            <asp:Label Style="font-size: 1.6em; color: black" Text="<%$ Resources:Common,defRispostaOrdine %>" runat="server" ID="output" />
         </h4>
 
                  

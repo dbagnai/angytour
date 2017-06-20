@@ -32,21 +32,21 @@
             data-animrepeat="0"
             data-speed="1s"
             data-delay="0.2s">
-            <asp:Literal Text="<%$ Resources: Common, titoloNewsletter %>" runat="server" />
+            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"titoloNewsletterc") %>' runat="server" />
         </h2>
         <div class="section-subscribe animated" data-animtype="flipInX"
             data-animrepeat="0"
             data-speed="1s"
             data-delay="0.5s">
             <p>
-                <asp:Literal Text="<%$ Resources: Common, TestoNewsletterForm %>" runat="server" />
+                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoNewsletterForm") %>' runat="server" />
             </p>
             <input type="text" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
             <br />
             <br />
             <input type="text" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
             <button class="subscribe-button icon-email-plane" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter_Click"></button>
-            <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
+            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
         </div>
     </asp:Panel>
 

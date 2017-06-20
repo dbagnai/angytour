@@ -91,6 +91,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
                 SettaTestoPagina();
 
+                DataBind();
             }
             //else
             //{

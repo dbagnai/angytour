@@ -149,12 +149,12 @@
         <div class="row" style="display: none">
             <div class="col-md-6">
                 <asp:Button ID="btnNexth"
-                    Text="<%$ Resources: Common, txtTastoNext %>" class="button btn-flat"
+                    Text="<%$ Resources:Common,txtTastoNext %>" class="button btn-flat"
                     runat="server" OnClick="btnNext_click" />
             </div>
             <div class="col-md-6">
                 <div class="pull-right">
-                    <asp:Button ID="btnPrevh" class="button btn-flat" Text="<%$ Resources: Common, txtTastoPrev %>"
+                    <asp:Button ID="btnPrevh" class="button btn-flat" Text="<%$ Resources:Common,txtTastoPrev %>"
                         runat="server" OnClick="btnPrev_click" />
                 </div>
             </div>
@@ -187,7 +187,7 @@
 
                         <div class="blog-post-details">
                             <div class="blog-post-details-item blog-post-details-item-left icon-calendar" runat="server" visible='<%# ControllaVisibilitaPerCodice(Eval("CodiceTipologia").ToString()) %>'>
-                                <asp:Literal ID="Literal2" Text="<%$ Resources: Common, TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
+                                <asp:Literal ID="Literal2" Text="<%$ Resources:Common,TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
                                     Text='<%# string.Format("{0:dd/MM/yyyy}", Eval("DataInserimento")) + TestoSezione(Eval("CodiceTipologia").ToString()) %>'
                                     runat="server" />
                             </div>
@@ -214,7 +214,7 @@
                                                 href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                                 <span>
-                                                    <asp:Literal Text="<%$ Resources: Common, testoContinua %>" runat="server" /></span></a>
+                                                    <asp:Literal Text="<%$ Resources:Common,testoContinua %>" runat="server" /></span></a>
                                             <%-- <a href="#" class="icon-facebook"></a>
                                     <a href="#" class="icon-twitter-alt"></a>
                                     <a href="#" class="icon-google"></a>
@@ -244,7 +244,7 @@
                             <a id="a8" runat="server"
                                 href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput( Eval("Denominazione" + Lingua).ToString()) %>'>
-                                <asp:Literal Text="<%$ Resources: Common, testoContinua %>" runat="server" />
+                                <asp:Literal Text="<%$ Resources:Common,testoContinua %>" runat="server" />
                             </a>
                         </div>
                         <!-- //Read More// -->
@@ -257,7 +257,7 @@
         <asp:Panel runat="server" ID="pnlPager" Visible="false">
             <div class="row">
                 <div class="pull-left">
-                    <asp:Button ID="btnPrev" class="button divbuttonstyle" Text="<%$ Resources: Common, txtTastoPrev %>"
+                    <asp:Button ID="btnPrev" class="button divbuttonstyle" Text="<%$ Resources:Common,txtTastoPrev %>"
                         runat="server" OnClick="btnPrev_click" />
                 </div>
                 <div class="pull-left">
@@ -269,7 +269,7 @@
 
                 </div>
                 <div class="pull-left">
-                    <asp:Button ID="btnNext" class="button divbuttonstyle" Text="<%$ Resources: Common, txtTastoNext   %>"
+                    <asp:Button ID="btnNext" class="button divbuttonstyle" Text="<%$ Resources:Common,txtTastoNext   %>"
                         runat="server" OnClick="btnNext_click" />
                 </div>
             </div>
@@ -281,7 +281,7 @@
             <div class="sidebar-block" runat="server" id="divSearch" visible="false">
                 <div class="sidebar-content tags blog-search">
                     <div class="input-group">
-                        <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources: Common, TestoCercaBlog %>" runat="server" id="inputCerca" />
+                        <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources:Common,TestoCercaBlog %>" runat="server" id="inputCerca" />
                         <span class="input-group-addon">
                             <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
                         </span>
@@ -349,7 +349,7 @@
                                             <%-- <asp:Literal ID="lblBrDesc" Text='<%#  ReplaceLinks(WelcomeLibrary.UF.Utility.SostituisciTestoACapo( ConteggioCaratteri(   Eval("Descrizione" + Lingua).ToString() ,200,true  )  ) , false) %>'
                                             runat="server"></asp:Literal>--%>
                                             <i class="fa fa-calendar"></i>
-                                            <asp:Literal ID="Literal2" Text="<%$ Resources: Common, TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
+                                            <asp:Literal ID="Literal2" Text="<%$ Resources:Common,TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
                                                 Text='<%# string.Format("{0:dd/MM/yyyy}", Eval("DataInserimento")) + TestoSezione(Eval("CodiceTipologia").ToString()) %>'
                                                 runat="server" />
                                         </span>

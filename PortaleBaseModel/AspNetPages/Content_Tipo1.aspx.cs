@@ -81,6 +81,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
                 InzializzaTestoPagina(content);
                 InizializzaSeo();
+               DataBind();
             }
             else
             {

@@ -231,7 +231,7 @@
                             href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="color: #fff; font-size: 13px; font-weight: bold">
-                                <asp:Literal Text="<%$ Resources: Common, TestoVediScheda %>" runat="server" />
+                                <asp:Literal Text="<%$ Resources:Common,TestoVediScheda %>" runat="server" />
                             </div>
                         </a>
                     </div>
@@ -269,7 +269,7 @@
                         <a id="a3" runat="server" href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="color: #af1016; font-size: 1.2em; font-weight: 700">
-                                <asp:Literal Text="<%$ Resources: Common, TestoVediScheda %>" runat="server" />
+                                <asp:Literal Text="<%$ Resources:Common,TestoVediScheda %>" runat="server" />
                             </div>
                         </a>
                     </div>
@@ -280,7 +280,7 @@
         <asp:Panel runat="server" ID="pnlPager" Style="padding: 0px">
             <div class="row">
                 <div class="col-sm-3">
-                    <asp:Button ID="btnNext" class="button btn-flat" Text="<%$ Resources: Common, txtTastoNext %>"
+                    <asp:Button ID="btnNext" class="button btn-flat" Text="<%$ Resources:Common,txtTastoNext %>"
                         runat="server" OnClick="btnNext_click" />
                 </div>
                 <div class="col-sm-6">
@@ -293,7 +293,7 @@
 
                 </div>
                 <div class="col-sm-3">
-                    <asp:Button ID="btnPrev" class="button btn-flat" Text="<%$ Resources: Common, txtTastoPrev %>"
+                    <asp:Button ID="btnPrev" class="button btn-flat" Text="<%$ Resources:Common,txtTastoPrev %>"
                         runat="server" OnClick="btnPrev_click" />
                 </div>
             </div>
@@ -337,9 +337,9 @@
                                         <button class="divbuttonstyle" runat="server" validationgroup="contatti" onserverclick="btnContatti1_Click"><%= Resources.Common.TestoInvio %></button>
                                         <div style="clear: both"></div>
                                         <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="contatti" ControlToValidate="txtContactName" runat="server" />
-                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto16lErr %>" ValidationGroup="contatti" ControlToValidate="txtContactCognome" runat="server" />
-                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto4Err %>" ValidationGroup="contatti" ControlToValidate="txtContactEmail" runat="server" />
+                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto2Err %>" ValidationGroup="contatti" ControlToValidate="txtContactName" runat="server" />
+                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto16lErr %>" ValidationGroup="contatti" ControlToValidate="txtContactCognome" runat="server" />
+                                        <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto4Err %>" ValidationGroup="contatti" ControlToValidate="txtContactEmail" runat="server" />
                                         <div style="font-weight: 300; font-size: 10px; color: red">
                                             <asp:Literal Text="" ID="outputContact" runat="server" />
                                         </div>

@@ -188,7 +188,7 @@
                         </div>
                         <div class="form-group">
 
-                            <a href="<%$ resources: Common, LinkIscrivitisocio %>" class="btn btn-block btn-primary"
+                            <a href="<%$ Resources:Common,LinkIscrivitisocio %>" class="btn btn-block btn-primary"
                                 runat="server" id="btnIscriviti">
                                 <asp:Literal ID="Literal2" runat="server" Text="<%$ Resources:Common, testoLoginNewCreateSocio %>" /></a>
                         </div>

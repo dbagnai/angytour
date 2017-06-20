@@ -155,7 +155,7 @@
                                 <asp:LinkButton runat="server" ID="btnAggiungi" runat="server"
                                     OnClick="btnIncrement" class="btn" CommandArgument='<%# Eval("Id")%>'>
                                 </asp:LinkButton>
-                                <asp:LinkButton runat="server" Text="<%$ Resources: Common, testoAggiornacarrello %>" class="btn-u btn-u-dark" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id")%>'>
+                                <asp:LinkButton runat="server" Text="<%$ Resources:Common,testoAggiornacarrello %>" class="btn-u btn-u-dark" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id")%>'>
                                 </asp:LinkButton>--%>
                             </div>
                             <%--   <asp:UpdatePanel runat="server">
@@ -243,9 +243,9 @@
 
                                     <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= Resources.Common.TestoInvio %></button>
                                     <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
-                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto16lErr %>" ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
-                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto4Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
+                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto2Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
+                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto16lErr %>" ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
+                                    <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto4Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
                                     <div style="font-weight: 300; font-size: 10px; color: red">
                                         <asp:Literal Text="" ID="outputContact" runat="server" />
                                     </div>
@@ -352,7 +352,7 @@
                 <div class="sidebar-block" runat="server" visible="false">
                     <div class="sidebar-content tags blog-search">
                         <div class="input-group">
-                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources: Common, TestoCercaBlog %>" runat="server" id="inputCerca" />
+                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources:Common,TestoCercaBlog %>" runat="server" id="inputCerca" />
                             <span class="input-group-addon">
                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button icon-search" runat="server" clientidmode="Static" />
                             </span>
@@ -399,9 +399,9 @@
                                                 <button id="btnFormContatto" class="btn btn-brown btn-lg btn-block" runat="server" validationgroup="contattilateral1" onserverclick="btnContatti1_Click"><%= Resources.Common.TestoInvio %></button>
                                                 <div style="clear: both"></div>
                                                 <asp:CheckBox ID="chkContactPrivacy1" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto2Err %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactName1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto16lErr %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactCognome1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources: Common, FormTesto4Err %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactEmail1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto2Err %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactName1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto16lErr %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactCognome1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto4Err %>" ValidationGroup="contattilateral1" ControlToValidate="txtContactEmail1" runat="server" />
                                                 <div style="font-weight: 300; font-size: 10px; color: red">
                                                     <asp:Literal Text="" ID="outputContact1" runat="server" />
                                                 </div>
@@ -444,7 +444,7 @@
                                                 <%-- <asp:Literal ID="lblBrDesc" Text='<%#  ReplaceLinks(WelcomeLibrary.UF.Utility.SostituisciTestoACapo( ConteggioCaratteri(   Eval("Descrizione" + Lingua).ToString() ,200,true  )  ) , false) %>'
                                             runat="server"></asp:Literal>--%>
                                                 <i class="fa fa-calendar"></i>
-                                                <asp:Literal ID="Literal2" Text="<%$ Resources: Common, TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
+                                                <asp:Literal ID="Literal2" Text="<%$ Resources:Common,TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
                                                     Text='<%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("DataInserimento")) + TestoSezione(Eval("CodiceTipologia").ToString())%>'
                                                     runat="server" />
                                             </div>
