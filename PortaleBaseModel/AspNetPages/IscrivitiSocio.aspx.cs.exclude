@@ -143,6 +143,8 @@ public partial class _IscrivitiSocio : CommonPage
                 plhForm.Visible = true;
             }
 
+            DataBind();
+
         }
         catch (Exception err)
         {

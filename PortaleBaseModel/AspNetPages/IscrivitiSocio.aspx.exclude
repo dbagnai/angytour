@@ -5,7 +5,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPageUn.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css") %>' />
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
 </asp:Content>
@@ -27,16 +27,16 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label31" runat="server" Text="<%$ Resources:Common,FormTesto2 %>" />*
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Font-Size="Large" ErrorMessage="<%$ Resources:Common,FormTesto2Err %>"
+                                <asp:Label ID="Label31" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />*
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>"
                                     ControlToValidate="txtNome_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtNome_dts" runat="server"></asp:TextBox>
 
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label32" runat="server" Text="<%$ Resources:Common,FormTesto3 %>" />*
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Font-Size="Large" ErrorMessage="<%$ Resources:Common,FormTesto3Err %>"
+                                <asp:Label ID="Label32" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />*
+                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Font-Size="Large" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>"
                                           ControlToValidate="txtCognome_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                             </strong>
                             <br />
@@ -48,14 +48,14 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label33" runat="server" Text="<%$ Resources:Common,wmarkData %>" /></strong><br />
+                                <asp:Label ID="Label33" runat="server" Text='<%# references.ResMan("Common", Lingua,"wmarkData") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtDatanascita_dts" runat="server"></asp:TextBox>
                             <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtDatanascita_dts">
                             </Ajax:CalendarExtender>
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label34" runat="server" Text="<%$ Resources:Common,FormTesto60 %>" /></strong><br />
+                                <asp:Label ID="Label34" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto60") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtPivacf_dts" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -63,8 +63,8 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label35" runat="server" Text="<%$ Resources:Common,FormTestoS1 %>" />* 
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage="<%$ Resources:Common,FormTestoS1Err %>"
+                                <asp:Label ID="Label35" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoS1") %>' />* 
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS1Err") %>"
                                         ControlToValidate="txtSociopresentatore1_dts" runat="server" Text="*" Font-Size="Large" ValidationGroup="Insertvalidate" /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSociopresentatore1_dts" runat="server"></asp:TextBox>
                             <br />
@@ -72,8 +72,8 @@
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label36" runat="server" Text="<%$ Resources:Common,FormTestoS2 %>" />*
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage="<%$ Resources:Common,FormTestoS2Err %>"
+                                <asp:Label ID="Label36" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoS2") %>' />*
+                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoS2Err") %>"
                                           ControlToValidate="txtSociopresentatore2_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                             </strong>
                             <br />
@@ -84,21 +84,21 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label37" runat="server" Text="<%$ Resources:Common,FormTestoEmailp %>" /></strong><br />
+                                <asp:Label ID="Label37" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoEmailp") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtEmail" runat="server"></asp:TextBox>
                             <br />
-                            <i><%= Resources.Common.FormTestoEmailp %></i>
+                            <i><%= references.ResMan("Common", Lingua,"FormTestoEmailp") %></i>
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label38" runat="server" Text="<%$ Resources:Common,FormTestoSitointernet %>" /></strong><br />
+                                <asp:Label ID="Label38" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSitointernet") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtWebsite" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label1" runat="server" Text="<%$ Resources:Common,FormTestoEmailr %>" /></strong><br />
+                                <asp:Label ID="Label1" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoEmailr") %>' /></strong><br />
                             <asp:TextBox runat="server" ID="txtEmailriservata_dts" /><br />
                             <i>Un indirizzo e-mail valido. Il sistema invierà tutte le e-mail a questo indirizzo. L'indirizzo e-mail non sarà pubblico e verrà utilizzato soltanto se desideri ricevere una nuova password o se vuoi ricevere notizie e avvisi via e-mail.</i>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ErrorMessage="Email riservata Obbligatoria"
@@ -116,7 +116,7 @@
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label5" runat="server" Text="<%$ Resources:Common,FormTestoTelefonoPriv %>" /></strong><br />
+                                <asp:Label ID="Label5" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoTelefonoPriv") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtTelefonoprivato_dts" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ErrorMessage="Telefono privato obbligatorio"
                                 ControlToValidate="txtTelefonoprivato_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
@@ -126,14 +126,14 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label6" runat="server" Text="<%$ Resources:Common,FormTestoAnnoL %>" /></strong><br />
+                                <asp:Label ID="Label6" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoAnnoL") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtAnnolaurea_dts" runat="server"></asp:TextBox><br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ErrorMessage="Anno laurea obbligatorio"
                                 ControlToValidate="txtAnnolaurea_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label7" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzazioneanno %>" /></strong><br />
+                                <asp:Label ID="Label7" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzazioneanno") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtAnnospecializzazione_dts" runat="server"></asp:TextBox>
                             <br />
                             <i>Nel caso di non specializzazione caricare il certificato di equipollenza ( sotto )</i>
@@ -143,7 +143,7 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label39" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzazionealtre %>" /></strong><br />
+                                <asp:Label ID="Label39" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzazionealtre") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtAltrespecializzazioni_dts" runat="server"></asp:TextBox><br />
                         </div>
                         <div class="col-sm-6">
@@ -161,12 +161,12 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label43" runat="server" Text="<%$ Resources:Common,FormTestoAlbo1 %>" /></strong>
+                                <asp:Label ID="Label43" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoAlbo1") %>' /></strong>
                             <asp:TextBox Width="20%" ID="txtLocordine_dts" runat="server"></asp:TextBox>
 
 
                             <strong>
-                                <asp:Label ID="Label44" runat="server" Text="<%$ Resources:Common,FormTestoAlbo2 %>" /></strong>
+                                <asp:Label ID="Label44" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoAlbo2") %>' /></strong>
                             <asp:TextBox Width="20%" ID="txtNiscrordine_dts" runat="server"></asp:TextBox>
 
                         </div>
@@ -174,18 +174,18 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label46" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi1 %>" />
+                                <asp:Label ID="Label46" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzandi1") %>' />
                             </strong>
                             <br />
                                <strong>
-                            <asp:Label ID="Label47" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi2 %>" />   </strong>
+                            <asp:Label ID="Label47" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzandi2") %>' />   </strong>
                             <asp:TextBox Width="10%" ID="txtannofrequenza_dts" runat="server"></asp:TextBox>
                             <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" TargetControlID="txtannofrequenza_dts"
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
 
-                             <strong>  <asp:Label ID="Label48" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi3 %>" />   </strong>
+                             <strong>  <asp:Label ID="Label48" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzandi3") %>' />   </strong>
                             <asp:TextBox Width="15%" ID="txtnomeuniversita_dts" runat="server"></asp:TextBox>
-                             <strong>  <asp:Label ID="Label45" runat="server" Text="<%$ Resources:Common,FormTestoSpecializzandi4 %>" />   </strong>
+                             <strong>  <asp:Label ID="Label45" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSpecializzandi4") %>' />   </strong>
                             <asp:TextBox Width="15%" ID="txtdettagliuniversita_dts" runat="server"></asp:TextBox><br />
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label23" runat="server" Text="<%$ Resources:Common,FormTestoCategoriaprofessionale %>" /></strong><br />
+                                <asp:Label ID="Label23" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCategoriaprofessionale") %>' /></strong><br />
                             <asp:DropDownList Width="90%" AppendDataBoundItems="true" ID="ddlCaratteristica1" runat="server" />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ErrorMessage="Categoria Professionale obbligatoria"
                                 ControlToValidate="ddlCaratteristica1" runat="server" Text="*" ValidationGroup="Insertvalidate" />
@@ -223,7 +223,7 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label41" runat="server" Text="<%$ Resources:Common,FormTestoSocioisaps %>" /></strong><br />
+                                <asp:Label ID="Label41" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSocioisaps") %>' /></strong><br />
                             <asp:RadioButtonList ID="radSocioIsaps_dts" runat="server">
                                 <asp:ListItem Text="Si" Value="True" />
                                 <asp:ListItem Text="No" Value="False" />
@@ -234,7 +234,7 @@
                         </div>
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label42" runat="server" Text="<%$ Resources:Common,FormTestoSocioaltra %>" /></strong><br />
+                                <asp:Label ID="Label42" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoSocioaltra") %>' /></strong><br />
                             <asp:TextBox Width="90%" ID="txtSocioaltraassociazione_dts" runat="server"></asp:TextBox><br />
                             <i>Inserire i nomi delle associazione separati da una virgola</i>
                         </div>
@@ -243,8 +243,8 @@
                     <div class="row" style="margin-bottom: 5px; display: none">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label27" runat="server" Text="<%$ Resources:Common,TestoCategoriasocio %>" /></strong><br />
-                            ( <a target="_blank" href='<%= ReplaceAbsoluteLinks( Resources.Common.LinkStatuto  + "#summary77")  %>'><%= Resources.Common.TestoStatuto %> </a>)
+                                <asp:Label ID="Label27" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoCategoriasocio") %>' /></strong><br />
+                            ( <a target="_blank" href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkStatuto")  + "#summary77")  %>'><%= references.ResMan("Common", Lingua,"TestoStatuto") %> </a>)
                         <asp:DropDownList Width="90%" AppendDataBoundItems="true" ID="ddlCaratteristica3" runat="server" />
                             <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ErrorMessage="indicazione categoria socio Aicpe Obbligatoria"
                                 ControlToValidate="ddlCaratteristica3" runat="server" Text="*" ValidationGroup="Insertvalidate" />--%>
@@ -257,7 +257,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999; border-top: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label49" runat="server" Text="<%$ Resources:Common,FormTestoCarriera1 %>" /></strong><br />
+                                <asp:Label ID="Label49" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera1") %>' /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera1" runat="server" RepeatDirection="Horizontal">
@@ -269,7 +269,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-6">
                             <strong>
-                                <asp:Label ID="Label50" runat="server" Text="<%$ Resources:Common,FormTestoCarriera2 %>" /></strong><br />
+                                <asp:Label ID="Label50" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera2") %>' /></strong><br />
                         </div>
                         <div class="col-sm-6">
                             <asp:TextBox Width="90%" Height="100px" TextMode="MultiLine" ID="txtTextfield1_dts" runat="server"></asp:TextBox>
@@ -278,7 +278,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label51" runat="server" Text="<%$ Resources:Common,FormTestoCarriera3 %>" /></strong><br />
+                                <asp:Label ID="Label51" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera3") %>' /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera2" runat="server" RepeatDirection="Horizontal">
@@ -290,7 +290,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label52" runat="server" Text="<%$ Resources:Common,FormTestoCarriera3b %>" /></strong><br />
+                                <asp:Label ID="Label52" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera3b") %>' /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera3" runat="server" RepeatDirection="Horizontal">
@@ -302,7 +302,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label53" runat="server" Text="<%$ Resources:Common,FormTestoCarriera4 %>" /></strong><br />
+                                <asp:Label ID="Label53" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera4") %>' /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera4" runat="server" RepeatDirection="Horizontal">
@@ -314,7 +314,7 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-8">
                             <strong>
-                                <asp:Label ID="Label54" runat="server" Text="<%$ Resources:Common,FormTestoCarriera5  %>" /></strong><br />
+                                <asp:Label ID="Label54" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5")  %>" /></strong><br />
                         </div>
                         <div class="col-sm-4">
                             <asp:RadioButtonList ID="radCarriera5" runat="server" RepeatDirection="Horizontal">
@@ -326,13 +326,13 @@
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label55" runat="server" Text="<%$ Resources:Common,FormTestoCarriera5b  %>" /></strong><br />
+                                <asp:Label ID="Label55" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera5b")  %>" /></strong><br />
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 5px; border-bottom: 1px solid #999999">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label56" runat="server" Text="<%$ Resources:Common,FormTestoCarriera6  %>" /></strong><br />
+                                <asp:Label ID="Label56" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera6")  %>" /></strong><br />
                         </div>
                     </div>
                     <%-- QUI VA INSERITA LA TABELLA CON LA STATISTICA INTERVENTI Interventieseguiti_dts--%>
@@ -341,38 +341,38 @@
                             <tr>
                                 <td>
                                     <strong>
-                                        <asp:Label ID="Label58" runat="server" Text="<%$ Resources:Common,FormTestoCarriera7  %>" /></strong>
+                                        <asp:Label ID="Label58" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera7")  %>" /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label59" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8  %>" /></strong>
+                                        <asp:Label ID="Label59" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8")  %>" /></strong>
 
                                 </td>
                                 <td colspan="4">
                                     <strong>
-                                        <asp:Label ID="Label60" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9  %>" /></strong>
+                                        <asp:Label ID="Label60" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9")  %>" /></strong>
 
                                 </td>
                             </tr>
                            <%-- <tr>
                                 <td></td>
                                 <td><strong>
-                                    <asp:Label ID="Label61" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8a  %>" /></strong> </td>
+                                    <asp:Label ID="Label61" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8a  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label62" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8b  %>" /></strong> </td>
+                                    <asp:Label ID="Label62" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8b  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label63" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8c  %>" /></strong> </td>
+                                    <asp:Label ID="Label63" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8c  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label64" runat="server" Text="<%$ Resources:Common,FormTestoCarriera8d  %>" /></strong> </td>
+                                    <asp:Label ID="Label64" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera8d  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label65" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9a  %>" /></strong> </td>
+                                    <asp:Label ID="Label65" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9a  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label66" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9b  %>" /></strong> </td>
+                                    <asp:Label ID="Label66" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9b  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label67" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9c  %>" /></strong> </td>
+                                    <asp:Label ID="Label67" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9c  %>" /></strong> </td>
                                 <td><strong>
-                                    <asp:Label ID="Label68" runat="server" Text="<%$ Resources:Common,FormTestoCarriera9d  %>" /></strong> </td>
+                                    <asp:Label ID="Label68" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera9d  %>" /></strong> </td>
                             </tr>--%>
                             <tr>
                                 <td>
@@ -570,7 +570,7 @@
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
                             <strong>
-                                <asp:Label ID="Label57" runat="server" Text="<%$ Resources:Common,FormTestoCarriera10 %>" /></strong><br />
+                                <asp:Label ID="Label57" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoCarriera10") %>' /></strong><br />
                             <br />
                         </div>
                     </div>
@@ -629,7 +629,7 @@
 
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
-                            <strong><%= Resources.Common.FormTestoAccettazionestatuto %></strong>
+                            <strong><%= references.ResMan("Common", Lingua,"FormTestoAccettazionestatuto") %></strong>
                             <asp:CheckBox Text="" runat="server" ID="chkAccettazioneStatuto_dts" Checked="false" />
                             <asp:CustomValidator ID="CustomValidator1" Text="*" ErrorMessage="Accettazione statuto Obbligatoria" runat="server"
                                 ClientValidationFunction="chkAccettazioneStatuto_dts_ClientValidate" ValidationGroup="Insertvalidate"></asp:CustomValidator>
@@ -645,7 +645,7 @@
                     </div>
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-12">
-                            <strong><%= Resources.Common.FormTestoCertificazione %></strong>
+                            <strong><%= references.ResMan("Common", Lingua,"FormTestoCertificazione") %></strong>
                             <asp:CheckBox Text="" runat="server" ID="chkCertificazione_dts" Checked="false" />
                             <asp:CustomValidator ID="CustomValidator2" Text="*" ErrorMessage="Accettazione Certificazione Dati Obbligatoria" runat="server"
                                 ClientValidationFunction="chkCertificazione_dts_ClientValidate" ValidationGroup="Insertvalidate"></asp:CustomValidator>
@@ -661,7 +661,7 @@
 
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
-                            <strong><%= Resources.Common.FormTestoIndirizzoposta %></strong><br />
+                            <strong><%= references.ResMan("Common", Lingua,"FormTestoIndirizzoposta") %></strong><br />
                             <asp:TextBox Width="90%" Height="100px" TextMode="MultiLine" ID="txtIndirizzo" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15" ErrorMessage="Indirizzo privato Obbligatorio"
                                 ControlToValidate="txtIndirizzo" runat="server" Text="*" ValidationGroup="Insertvalidate" />
@@ -669,14 +669,14 @@
                     </div>
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-sm-6">
-                            <strong><%= Resources.Common.FormTestoIndirizzofatt %></strong><br />
+                            <strong><%= references.ResMan("Common", Lingua,"FormTestoIndirizzofatt") %></strong><br />
                             <asp:TextBox Width="90%" Height="100px" TextMode="MultiLine" ID="txtindirizzofatt_dts" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ErrorMessage="indicazione indirizzo per ricevuta Obbligatoria"
                                 ControlToValidate="txtindirizzofatt_dts" runat="server" Text="*" ValidationGroup="Insertvalidate" />
                         </div>
                         <div class="col-sm-6" style="display: none">
                             <strong>
-                                <asp:Label ID="Label11" runat="server" Text="<%$ Resources:Common,FormTestoRicfatt %>" /></strong><br />
+                                <asp:Label ID="Label11" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoRicfatt") %>' /></strong><br />
                             <asp:RadioButtonList ID="radricfatt_dts" runat="server">
                                 <asp:ListItem Text="Ricevuta" Value="Ricevuta" Selected="True" />
                                 <asp:ListItem Text="Fattura" Value="Fattura" />
@@ -699,10 +699,10 @@
                         <ContentTemplate>
                             <asp:Panel runat="server" ID="pnlIndirizzo1">
                                 <div class="row" style="border: 1px solid White; margin: 1%; padding: 20px">
-                                    <h3><%= Resources.Common.FormTestoIndirizzo1 %></h3>
+                                    <h3><%= references.ResMan("Common", Lingua,"FormTestoIndirizzo1") %></h3>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <%= Resources.Common.FormTestoNomePosizione %><br />
+                                            <%= references.ResMan("Common", Lingua,"FormTestoNomePosizione") %><br />
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:TextBox Width="60%" runat="server" ID="txtNomeposizione1_dts" /><br />
@@ -710,7 +710,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto5 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto5") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceNAZIONE1_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceNAZIONE1_dts_OnSelectedIndexChanged"
@@ -722,7 +722,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto6 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto6") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceREGIONE1_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceREGIONE1_dts_OnSelectedIndexChanged"
@@ -737,7 +737,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto7 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto7") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodicePROVINCIA1_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodicePROVINCIA1_dts_OnSelectedIndexChanged"
@@ -752,7 +752,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto8 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto8") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceCOMUNE1_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceCOMUNE1_dts_OnSelectedIndexChanged"
@@ -767,7 +767,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTestoVia %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTestoVia") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtVia1_dts" style="width: 60%" runat="server" value="" />
@@ -777,7 +777,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto9 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto9") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtCap1_dts" style="width: 60%" runat="server" value="" />
@@ -787,7 +787,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto11 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto11") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtTelefono1_dts" style="width: 60%" runat="server" value="" />
@@ -812,10 +812,10 @@
 
                             <asp:Panel runat="server" ID="pnlIndirizzo2">
                                 <div class="row" style="border: 1px solid White; margin: 1%; padding: 20px">
-                                    <h3><%= Resources.Common.FormTestoIndirizzo2 %></h3>
+                                    <h3><%= references.ResMan("Common", Lingua,"FormTestoIndirizzo2") %></h3>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <%= Resources.Common.FormTestoNomePosizione %><br />
+                                            <%= references.ResMan("Common", Lingua,"FormTestoNomePosizione") %><br />
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:TextBox Width="60%" runat="server" ID="txtNomeposizione2_dts" /><br />
@@ -824,7 +824,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto5 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto5") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceNAZIONE2_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceNAZIONE2_dts_OnSelectedIndexChanged"
@@ -835,7 +835,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto6 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto6") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceREGIONE2_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceREGIONE2_dts_OnSelectedIndexChanged"
@@ -847,7 +847,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto7 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto7") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodicePROVINCIA2_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodicePROVINCIA2_dts_OnSelectedIndexChanged"
@@ -858,7 +858,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto8 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto8") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceCOMUNE2_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceCOMUNE2_dts_OnSelectedIndexChanged"
@@ -870,7 +870,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTestoVia %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTestoVia") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtVia2_dts" style="width: 60%" runat="server" value="" />
@@ -878,7 +878,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto9 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto9") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtCap2_dts" style="width: 60%" runat="server" value="" />
@@ -886,7 +886,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto11 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto11") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtTelefono2_dts" style="width: 60%" runat="server" value="" />
@@ -911,10 +911,10 @@
                             </asp:Panel>
                             <asp:Panel runat="server" ID="Panel2">
                                 <div class="row" style="border: 1px solid White; margin: 1%; padding: 20px">
-                                    <h3><%= Resources.Common.FormTestoIndirizzo3 %></h3>
+                                    <h3><%= references.ResMan("Common", Lingua,"FormTestoIndirizzo3") %></h3>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <%= Resources.Common.FormTestoNomePosizione %><br />
+                                            <%= references.ResMan("Common", Lingua,"FormTestoNomePosizione") %><br />
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:TextBox Width="60%" runat="server" ID="txtNomeposizione3_dts" /><br />
@@ -923,7 +923,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto5 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto5") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceNAZIONE3_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceNAZIONE3_dts_OnSelectedIndexChanged"
@@ -934,7 +934,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto6 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto6") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceREGIONE3_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceREGIONE3_dts_OnSelectedIndexChanged"
@@ -946,7 +946,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto7 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto7") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodicePROVINCIA3_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodicePROVINCIA3_dts_OnSelectedIndexChanged"
@@ -957,7 +957,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto8 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto8") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <asp:DropDownList runat="server" Width="60%" ID="ddlCodiceCOMUNE3_dts" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCodiceCOMUNE3_dts_OnSelectedIndexChanged"
@@ -969,7 +969,7 @@
 
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTestoVia %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTestoVia") %></strong>
 
                                         </div>
                                         <div class="col-sm-8">
@@ -978,7 +978,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto9 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto9") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtCap3_dts" style="width: 60%" runat="server" value="" />
@@ -986,7 +986,7 @@
                                     </div>
                                     <div class="row" style="margin-bottom: 5px">
                                         <div class="col-sm-4">
-                                            <strong><%= Resources.Common.FormTesto11 %></strong>
+                                            <strong><%= references.ResMan("Common", Lingua,"FormTesto11") %></strong>
                                         </div>
                                         <div class="col-sm-8">
                                             <input id="txtTelefono3_dts" style="width: 60%" runat="server" value="" />
@@ -1013,7 +1013,7 @@
                     </asp:UpdatePanel>
                     <div class="row" style="margin-bottom: 5px; padding-right: 20px">
                         <div class="pull-right">
-                            <asp:Button ToolTip="Invia Form" ValidationGroup="Insertvalidate" Text="<%$ Resources:Common,TestoInvio %>"
+                            <asp:Button ToolTip="Invia Form" ValidationGroup="Insertvalidate" Text='<%# references.ResMan("Common", Lingua,"TestoInvio") %>"
                                 ID="btninvia" runat="server" CssClass="btn btn-success" OnClick="btnInvia_Click" />
 
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server" DisplayAfter="0" DynamicLayout="false"
