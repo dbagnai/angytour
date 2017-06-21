@@ -39,7 +39,7 @@
                         <div class="col-sm-12">
                             <asp:TextBox runat="server" ID="txtinputCerca" Width="100%" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" TargetControlID="txtinputCerca"
-                                runat="server" WatermarkText="<%$ Resources:Common,wmarkCerca %>">
+                                runat="server" WatermarkText='<%# references.ResMan("Common", Lingua,"wmarkCerca") %>'>
                             </Ajax:TextBoxWatermarkExtender>
                         </div>
                     </div>

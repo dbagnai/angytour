@@ -112,6 +112,8 @@ public partial class AreaRiservata_Default : CommonPage
 
                 InizializzaTestiPagina();
                 AssociaDati();
+
+               DataBind();
             }
             else
             {

@@ -13,6 +13,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         set { ViewState["Lingua"] = value; }
     }
 
+   // dice samuele : ma che ci fai con questa sotto???
     CommonPage CommonPage = new CommonPage();
     protected void Page_Load(object sender, EventArgs e)
     {

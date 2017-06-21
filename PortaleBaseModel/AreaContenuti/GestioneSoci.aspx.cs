@@ -95,13 +95,18 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         get { return ViewState["trattamenti"] != null ? (Dictionary<string, string>)(ViewState["trattamenti"]) : new Dictionary<string, string>(); }
         set { ViewState["trattamenti"] = value; }
     }
+   public string Lingua
+   {
+      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+      set { ViewState["Lingua"] = value; }
+   }
 
 
-
-    protected void Page_Load(object sender, EventArgs e)
+   protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
             PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
 
@@ -144,7 +149,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             if (ControllaRuolo(User.Identity.Name, "Socio"))
                 ImpostaVisualizzazioneSocio();
 
-
+            DataBind();
         }
         else
         {

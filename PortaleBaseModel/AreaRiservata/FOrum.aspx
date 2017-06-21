@@ -69,7 +69,7 @@
                                 <div class="sidebar-block" style="display: block">
                                     <div class="sidebar-content tags blog-search">
                                         <div class="input-group">
-                                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources:Common,TestoCercaBlog %>" runat="server" id="inputCerca">
+                                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                                             <span class="input-group-addon">
                                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button icon-search" runat="server" clientidmode="Static" />
                                             </span>
@@ -392,7 +392,7 @@
                                     <div class="desc" style="display: none;">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
-                                                <textarea id="txtDescrizioneI_post" runat="server" class="inputnoback" runat="server" rows="10"> <%#  Eval("Descrizione" + Lingua).ToString()  %> </textarea>
+                                                <textarea id="txtDescrizioneI_post" runat="server" class="inputnoback" rows="10"> <%#  Eval("Descrizione" + Lingua).ToString()  %> </textarea>
                                             </div>
                                         </div>
                                         <div style="width: 100%; border-bottom: 1px solid #ccc; margin-top: 5px; margin-bottom: 10px"></div>
@@ -494,7 +494,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <textarea id="txtDescrizioneI_post" runat="server" class="inputnoback" runat="server" rows="10"> <%#  Eval("Descrizione" + Lingua).ToString()  %> </textarea>
+                                                                <textarea id="txtDescrizioneI_post" runat="server" class="inputnoback" rows="10"> <%#  Eval("Descrizione" + Lingua).ToString()  %> </textarea>
                                                             </div>
                                                         </div>
                                                         <div style="width: 100%; border-bottom: 1px solid #ccc; margin-top: 5px; margin-bottom: 10px"></div>
@@ -561,7 +561,7 @@
                         <asp:Panel runat="server" ID="pnlPager">
                             <div class="row" style="padding: 0px">
                                 <div class="col-sm-3">
-                                    <asp:Button ID="btnNext" class="button btn-flat" Text="<%$ Resources:Common,txtTastoNext %>"
+                                    <asp:Button ID="btnNext" class="button btn-flat" Text='<%# references.ResMan("Common", Lingua,"txtTastoNext") %>'
                                         runat="server" OnClick="btnNext_click" />
                                 </div>
                                 <div class="col-sm-6">
@@ -574,7 +574,7 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:Button ID="btnPrev" class="button btn-flat" Text="<%$ Resources:Common,txtTastoPrev %>"
+                                    <asp:Button ID="btnPrev" class="button btn-flat" Text='<%# references.ResMan("Common", Lingua,"txtTastoPrev") %>'
                                         runat="server" OnClick="btnPrev_click" />
                                 </div>
                             </div>

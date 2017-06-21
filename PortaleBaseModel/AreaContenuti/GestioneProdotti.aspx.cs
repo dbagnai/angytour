@@ -86,10 +86,18 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         get { return ViewState["CodiceSottoProdottoRicerca"] != null ? (string)(ViewState["CodiceSottoProdottoRicerca"]) : ""; }
         set { ViewState["CodiceSottoProdottoRicerca"] = value; }
     }
-    protected void Page_Load(object sender, EventArgs e)
+   public string Lingua
+   {
+      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+      set { ViewState["Lingua"] = value; }
+   }
+
+   protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
+
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
             PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
 
@@ -115,6 +123,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             this.CaricaDati();
             ImpostaDettaglioSolaLettura(true);
 
+            DataBind();
         }
         else
         {
