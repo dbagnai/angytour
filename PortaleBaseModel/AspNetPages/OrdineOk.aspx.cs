@@ -92,6 +92,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             }
             /////////////////////////////////////////////////////////////////
 
+            DataBind();
 
         }
     }

@@ -129,7 +129,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 Literal lit = null;
 
-
+                DataBind();
             }
             else
             {

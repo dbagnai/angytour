@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="<%= Categoria=="prod000037"?"divbuttonstylered":"divbuttonstyle" %>" style="font-size: 0.8em; padding: 4px; margin-bottom: 3px">
-                        <%= "<a  href=\"" +  GeneraBackLink()  + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + Resources.Common.testoIndietro + "</a>" %>
+                        <%= "<a  href=\"" +  GeneraBackLink()  + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common",Lingua,"testoIndietro") + "</a>" %>
                     </div>
                 </div>
             </div>
@@ -520,7 +520,7 @@
                                         <asp:Label ID="lbldescri" runat="server" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo( CommonPage.ReplaceLinks( Eval("Descrizione" + Lingua).ToString()) ) %>'></asp:Label>
                                     </p>
                                     <%--<p>
-                                                <%# Resources.Common.TestoCategoriasocio.ToString() + ": " + TestoCaratteristica(2,Eval("Caratteristica3").ToString(),Lingua) %>
+                                                <%# references.ResMan("Common", Lingua,"TestoCategoriasocio") + ": " + TestoCaratteristica(2,Eval("Caratteristica3").ToString(),Lingua) %>
                                             </p>--%>
                                     <p>
                                         <asp:Literal ID="Literal5" Text='<%#  ControlloVuoto("Tel:", Eval("Telefono").ToString() )%>'
@@ -560,7 +560,7 @@
                                 <%-- <div class="pull-right" runat="server" id="div1" visible='<%# AttivaContatto(Eval("Abilitacontatto")) %>'>
                                 <a id="A2" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta"  + "&Lingua=" + Lingua %>'
                                     target="_blank" title="" class="button btn-flat">
-                                    <asp:Literal Text="<%$ Resources:Common,TestoDisponibilita  %>" runat="server" />
+                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoDisponibilita  %>" runat="server" />
                                 </a>
                             </div>--%>
 
@@ -629,7 +629,7 @@
                                     <div class="clearfix"></div>
                                     <div class="blog-post-details-item blog-post-details-item-left" runat="server" visible='<%# ControllaVisibilitaPerCodice(Eval("CodiceTipologia").ToString()) %>'>
                                         <meta itemprop="datePublished" content='<%#  string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("DataInserimento")) %>'>
-                                        &nbsp;<asp:Literal ID="Literal10" Text="<%$ Resources:Common,TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal11"
+                                        &nbsp;<asp:Literal ID="Literal10" Text='<%# references.ResMan("Common", Lingua,"TestoPubblicatodata")  %>' runat="server" /><asp:Literal ID="Literal11"
                                             Text='<%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("DataInserimento"))   %>'
                                             runat="server" />
                                         <asp:Label ID="Literal14" itemprop="articleSection"
@@ -709,10 +709,10 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <%= "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>" + Resources.Basetext.Stampa + "</a>"%>
+                                            <%= "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>" + references.ResMan("BaseText", Lingua,"Stampa") + "</a>"%>
                                         </div>
                                         <div class="col-sm-4">
-                                            <%= "<a class=\"buttonstyle\"    href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + Resources.Common.testoIndietro + "</a>"%>
+                                            <%= "<a class=\"buttonstyle\"    href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>"%>
                                         </div>
                                     </div>
 
@@ -741,7 +741,7 @@
                                             <div class="ui-form">
                                                 <!-- Heading -->
                                                 <h3 class="h3-sidebar-title sidebar-title">
-                                                    <%= Resources.Common.TestoDisponibilita %>
+                                                    <%= references.ResMan("Common", Lingua,"TestoDisponibilita") %>
                                                 </h3>
                                                 <!-- Form -->
 
@@ -769,11 +769,11 @@
                                                 </div>
 
 
-                                                <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= Resources.Common.TestoInvio %></button>
+                                                <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
                                                 <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto2Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto16lErr %>" ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto4Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
                                                 <div style="font-weight: 300; font-size: 10px; color: red">
                                                     <asp:Literal Text="" ID="outputContact" runat="server" />
                                                 </div>
@@ -805,7 +805,8 @@
                                 <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 5px;">
                                     <div class="headline pull-left">
                                         <h2>
-                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>
+                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>--%>
+                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua, "titoloCollegati"): references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>
                                     </div>
                                     <a class="owl-btn prev-v2 pull-left" id="carousel2cprev"><i style="color: #33332e" class="fa fa-chevron-left"></i></a>
@@ -850,7 +851,7 @@
                                             <li runat="server" visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'>
                                                 <span style="font-weight: 500">
                                                     <asp:Literal ID="lblPrezzo" runat="server"
-                                                        Text='<%#  Resources.Common.TitoloPrezzo  + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €<br/><br/>" %>'></asp:Literal></span>
+                                                        Text='<%# references.ResMan("Common", Lingua,"TitoloPrezzo")  + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €<br/><br/>" %>'></asp:Literal></span>
                                             </li>
                                             <li runat="server" visible='<%# ControllaVisibilitaPerCodice(Eval("CodiceTipologia").ToString()) %>'>
                                                 <asp:Literal ID="Literal2" Text="pubblicato il " runat="server" /><asp:Literal ID="Literal3"
@@ -864,7 +865,7 @@
                                         </ul>
                                     </div>
                                     <div class="blog-post-featured-img img-overlay" runat="server"
-                                        style="max-height: 200px; overflow: hidden" visible='<%#  !ControlloVideo(Eval("FotoCollection_M.FotoAnteprima")) %>'>
+                                        style="max-height: 200px; overflow: hidden" visible='<%# !ControlloVideo(Eval("FotoCollection_M.FotoAnteprima")) %>'>
                                         <a id="a3" runat="server" onclick="javascript:JsSvuotaSession(this)"
                                             href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
@@ -902,7 +903,7 @@
                 <div class="sidebar-block" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
                         <div class="input-group">
-                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder="<%$ Resources:Common,TestoCercaBlog %>" runat="server" id="inputCerca" />
+                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                             <span class="input-group-addon">
                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button icon-reload" runat="server" clientidmode="Static" />
                             </span>
@@ -924,7 +925,7 @@
                                             <div class="ui-form">
                                                 <!-- Heading -->
                                                 <h3 class="h3-sidebar-title sidebar-title">
-                                                    <%= Resources.Common.TestoDisponibilita %>
+                                                    <%= references.ResMan("Common", Lingua,"TestoDisponibilita") %>
                                                 </h3>
                                                 <!-- Form -->
                                                 <!-- UI Input -->
@@ -949,13 +950,13 @@
                                                     <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage1" />
                                                 </div>
 
-                                                <button id="btnFormContatto1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti1_Click"><%= Resources.Common.TestoInvio %></button>
+                                                <button id="btnFormContatto1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
 
                                                 <div style="clear: both"></div>
                                                 <asp:CheckBox ID="chkContactPrivacy1" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto2Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactName1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto16lErr %>" ValidationGroup="contattilateral" ControlToValidate="txtContactCognome1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage="<%$ Resources:Common,FormTesto4Err %>" ValidationGroup="contattilateral" ControlToValidate="txtContactEmail1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail1" runat="server" />
                                                 <div style="font-weight: 300; font-size: 10px; color: red">
                                                     <asp:Literal Text="" ID="outputContact1" runat="server" />
                                                 </div>
@@ -1004,7 +1005,7 @@
                     <div class="col-sm-12">
                         <div class="subtitle-block clearfix">
                             <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
-                                <%= Resources.Common.TestoPanel1  %>
+                                <%= references.ResMan("Common", Lingua,"TestoPanel1")  %>
                             </div>
                         </div>
                     </div>
@@ -1012,7 +1013,7 @@
                 <div id="divLatestpostContainer"></div>
                 <div id="divLatestpostContainerPager"></div>
                 <div class="sidebar-block" runat="server" id="divLatestPost" visible="false">
-                    <h3 class="h3-sidebar-title sidebar-title"><%=  Resources.Common.TestoPanel1 %>
+                    <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common", Lingua,"TestoPanel1") %>
                     </h3>
                     <div class="sidebar-content">
                         <ul class="posts-list">
@@ -1039,7 +1040,7 @@
                                                 <%-- <asp:Literal ID="lblBrDesc" Text='<%#  ReplaceLinks(WelcomeLibrary.UF.Utility.SostituisciTestoACapo( ConteggioCaratteri(   Eval("Descrizione" + Lingua).ToString() ,200,true  )  ) , false) %>'
                                             runat="server"></asp:Literal>--%>
                                                 <i class="fa fa-calendar"></i>
-                                                <asp:Literal ID="Literal2" Text="<%$ Resources:Common,TestoPubblicatodata  %>" runat="server" /><asp:Literal ID="Literal3"
+                                                <asp:Literal ID="Literal2" Text='<%# references.ResMan("Common", Lingua,"TestoPubblicatodata") %>' runat="server" /><asp:Literal ID="Literal3"
                                                     Text='<%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("DataInserimento")) + TestoSezione(Eval("CodiceTipologia").ToString()) %>'
                                                     runat="server" />
                                             </span>
@@ -1060,7 +1061,7 @@
                 </div>
                 <!-- Sidebar Block -->
                 <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
-                    <h3 class="h3-sidebar-title sidebar-title"><%= Resources.Common.TestoArchivio %>
+                    <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common", Lingua,"TestoArchivio") %>
                     </h3>
                     <div class="sidebar-content" style="overflow-y: auto" id="divArchivioList">
 
@@ -1115,7 +1116,8 @@
                                 <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
                                     <div class="pull-left lead">
                                         <h2 style="margin-bottom:3px">
-                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>
+                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>--%>
+                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>
                                     </div>
                                 </div>

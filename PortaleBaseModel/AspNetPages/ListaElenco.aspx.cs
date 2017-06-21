@@ -100,9 +100,11 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
                 AssociaDati();
 
-                //Inizializziamo le etichette dei controlli in base alla lingua
-                //InizializzaEtichette();
-                //InizializzaMeta();
+               //Inizializziamo le etichette dei controlli in base alla lingua
+               //InizializzaEtichette();
+               //InizializzaMeta();
+
+               DataBind();
             }
             else
             {

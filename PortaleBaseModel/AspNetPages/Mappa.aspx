@@ -28,7 +28,7 @@
             </asp:TreeView>
             <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
             <div style="font-size: 14pt; color: #2e3192; margin-left: 10px; margin-top: 10px; margin-bottom: 10px;">
-                <asp:Literal ID="Literal1" Text='<%$ Resources:Common,TitoloListaArticoli %>' runat="server" />
+                <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"TitoloListaArticoli") %>'  />
             </div>
         </div>
     </div>

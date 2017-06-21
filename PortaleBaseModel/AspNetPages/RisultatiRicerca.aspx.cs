@@ -195,6 +195,8 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 LoadJavascriptVariables();
                 SettaVisualizzazione();
                 // CaricaControlliJS();
+
+                DataBind();
             }
             else
             {

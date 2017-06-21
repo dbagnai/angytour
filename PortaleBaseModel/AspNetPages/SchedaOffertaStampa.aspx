@@ -1,7 +1,8 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="SchedaOffertaStampa.aspx.cs"
     EnableTheming="true" Inherits="_SchedaOffertaStampa" %>
 
-<%@ Register Src="~/AspNetPages/UC/Pager.ascx" TagName="Pager" TagPrefix="UC" %>
+<%--<%@ Register Src="~/AspNetPages/UC/Pager.ascx" TagName="Pager" TagPrefix="UC" %>--%>
+<%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="Pager" TagPrefix="UC" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -33,7 +34,7 @@
         </script>
         <asp:Label ID="output" runat="server"></asp:Label>
         <%--<img id="Img1" style="border: none" alt="" runat="server"
-        src="<%$ Resources:Common, imgLogo %>" width="380" />--%>
+        src='<%= references.ResMan("Common", Lingua,"imgLogo") %>" width="380" />--%>
         <div style="width: 100%; height: 100px; padding-top: 30px; padding-bottom: 30px; margin-bottom: 10px; text-align: center; background: url(../images/SiteSpecific/sfondohead.jpg) repeat-x top left">
             <img src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png")%>'
                 style="width: 100%; max-width: 300px;" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />
@@ -100,7 +101,7 @@
                 </div>
                 <div style="width: 100%; text-align: center; border-top: 2px solid #ccc; font-size: 12px">
                     <br />
-                    <asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:Common, txtFooter %>" />
+                    <asp:Literal ID="Literal5" runat="server" Text='<%# references.ResMan("Common", Lingua,"txtFooter") %>' />
                     <br />
                     <br />
                 </div>

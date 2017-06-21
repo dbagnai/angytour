@@ -67,6 +67,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
 
+               DataBind();
 
 
             }

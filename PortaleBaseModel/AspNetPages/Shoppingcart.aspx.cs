@@ -50,6 +50,8 @@ public partial class AspNetPages_Shoppingcart : CommonPage
 
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
+
+               DataBind();
             }
             else
             {

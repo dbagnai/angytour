@@ -131,38 +131,40 @@ public partial class _SchedaProdotto : CommonPage
                 SettaTestoIniziale();
 
 
-                #region SEZIONE MASTERPAGE GESTIONE
+               #region SEZIONE MASTERPAGE GESTIONE
 
-                //if (!string.IsNullOrEmpty(CodiceTipologia))
-                //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, CodiceTipologia, false, Lingua);
-                //else
-                //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
-                //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "spento", false, Lingua);
+               //if (!string.IsNullOrEmpty(CodiceTipologia))
+               //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, CodiceTipologia, false, Lingua);
+               //else
+               //    Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
+               //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "spento", false, Lingua);
 
 
 
-                //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
-                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezionicatalogo", false, lit, Lingua,true);
+               //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
+               //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezionicatalogo", false, lit, Lingua,true);
 
-#if false
-                Panel p = (Panel)Master.FindControl("pnlRicerca");
-                if (p != null)
-                {
-                    p.Visible = true;
-                    Master.CaricaDatiDdlCaratteristiche(Lingua, Caratteristica1, Caratteristica2, Caratteristica3, Caratteristica4, FasciaPrezzo);
-                    Master.CaricaDdlOrdinamento(Ordinamento);
-                } 
-#endif
+   #if false
+                     Panel p = (Panel)Master.FindControl("pnlRicerca");
+                     if (p != null)
+                     {
+                        p.Visible = true;
+                        Master.CaricaDatiDdlCaratteristiche(Lingua, Caratteristica1, Caratteristica2, Caratteristica3, Caratteristica4, FasciaPrezzo);
+                        Master.CaricaDdlOrdinamento(Ordinamento);
+                     } 
+   #endif
 
-                //CAmbio colore alla barra in alto
-                //HtmlGenericControl divBackMenu = (HtmlGenericControl)Master.FindControl("divBckMenu");
-                //divBackMenu.Attributes["style"] = "background-color:#f56f28";
-                //HtmlGenericControl divMobileUl = (HtmlGenericControl)Master.FindControl("mobilenav1");
-                //divMobileUl.Attributes["style"] = "background-color:#f56f28";
-                //    btnFormContatto.Attributes.Add("class", "btn btn-orange btn-lg btn-block");
-                #endregion
-                //    AssociaRubricheConsigliati();
-                //   CaricaUltimiPost(CodiceTipologia, "");
+               //CAmbio colore alla barra in alto
+               //HtmlGenericControl divBackMenu = (HtmlGenericControl)Master.FindControl("divBckMenu");
+               //divBackMenu.Attributes["style"] = "background-color:#f56f28";
+               //HtmlGenericControl divMobileUl = (HtmlGenericControl)Master.FindControl("mobilenav1");
+               //divMobileUl.Attributes["style"] = "background-color:#f56f28";
+               //    btnFormContatto.Attributes.Add("class", "btn btn-orange btn-lg btn-block");
+               #endregion
+               //    AssociaRubricheConsigliati();
+               //   CaricaUltimiPost(CodiceTipologia, "");
+
+               DataBind();
             }
             else
             {

@@ -55,12 +55,12 @@ public partial class AspNetPages_Mappa : CommonPage
                 ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
 
                 InzializzaTestoPagina();
-                //InizializzaMeta();
+               //InizializzaMeta();
 
-                //Carico la galleria in masterpage corretta
-                //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
-               
+               //Carico la galleria in masterpage corretta
+               //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
 
+               DataBind();
             }
             else
             {

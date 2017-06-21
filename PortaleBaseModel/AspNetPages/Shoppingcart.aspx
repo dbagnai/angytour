@@ -16,18 +16,18 @@
 
             <div class="widget shop-selections">
                 <h3>
-                    <asp:Literal runat="server" Text='<%$ Resources:Common,CarrelloSelezioneArticoli %>'></asp:Literal></h3>
+                    <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,",CarrelloSelezioneArticoli") %>'></asp:Literal></h3>
                 <table class="table table-cart">
                     <thead>
                         <tr>
                             <td></td>
                             <td class="cart-product">
-                                <asp:Literal runat="server" Text='<%$ Resources:Common,CarrelloArticolo %>'></asp:Literal>
+                                <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,",CarrelloArticolo") %>'></asp:Literal>
                             </td>
                             <td class="cart-quantity">
-                                <asp:Literal runat="server" Text='<%$ Resources:Common,CarrelloQuantita %>'></asp:Literal></td>
+                                <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,",CarrelloQuantita") %>'></asp:Literal></td>
                             <td class="cart-total">
-                                <asp:Literal runat="server" Text='<%$ Resources:Common,CarrelloTotale %>'></asp:Literal></td>
+                                <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,",CarrelloTotale") %>'></asp:Literal></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,10 +89,10 @@
                                                 </b>
 
                                                 <input runat="server" class="form-control text-center" style="width: 50px"
-                                                    id="txtQuantita" type="text" value='<%# Eval("Numero") %>'>
+                                                    id="txtQuantita" type="text" value='<%# Eval("Numero") %>' />
 
                                                 <b class="input-group-btn">
-                                                    <asp:LinkButton runat="server" ID="btnAggiungi" runat="server" Style="width: 40px"
+                                                    <asp:LinkButton runat="server" ID="btnAggiungi" Style="width: 40px"
                                                         OnClick="btnIncrement" class="btn btn-small" CommandArgument='<%# Eval("id_prodotto") %>'>
                                                         <i class="fa fa-plus"></i>
                                                     </asp:LinkButton>
@@ -115,7 +115,7 @@
             </div>
             <div class="widget shop-shipping" style="display: none">
                 <h3>
-                    <asp:Literal Text="<%$ Resources:Common,CarrelloCalcolaTotaleSpedizione %>" runat="server" /></h3>
+                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %>' runat="server" /></h3>
                 <div class="form-group">
                     <asp:DropDownList ID="ddlNazione"
                         CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
@@ -128,7 +128,7 @@
                         <%--<input type="text" class="form-control" placeholder="Postcode / Zip">--%>
                     </span>
                     <span class="col-lg-3">
-                        <asp:LinkButton class="btn btn-default btn-block" Text="<%$ Resources:Common,CarrelloRicalcolaTotaleSpedizione %>" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server" />
+                        <asp:LinkButton class="btn btn-default btn-block" Text='<%# references.ResMan("Common", Lingua,"CarrelloRicalcolaTotaleSpedizione") %>' OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server" />
                     </span>
                 </div>
             </div>
@@ -149,14 +149,14 @@
                     </div>--%>
             <div class="widget">
                 <h3>
-                    <asp:Literal Text="<%$ Resources:Common,CarrelloRiepilogo %>" runat="server" /></h3>
+                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloRiepilogo") %>' runat="server" /></h3>
                 <asp:Repeater runat="server" ID="rptTotali">
                     <ItemTemplate>
                         <table class="table table-summary">
                             <tbody>
                                 <tr class="cart-subtotal">
                                     <th>
-                                        <asp:Literal Text="<%$ Resources:Common,CarrelloTotaleRiepilogo %>" runat="server" /></th>
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %>' runat="server" /></th>
                                     <td><span class="amount">
                                         <asp:Literal ID="lblPrezzo" runat="server"
                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleOrdine")) + " €" %>'></asp:Literal>
@@ -164,21 +164,21 @@
                                 </tr>
                                 <%--<tr class="shipping">
                                     <th>
-                                        <asp:Literal Text="<%$ Resources:Common,CarrelloTotaleSmaltimento %>" runat="server" /></th>
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleSmaltimento %>" runat="server" /></th>
                                     <td>
                                         <asp:Literal ID="Literal3" runat="server"
                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSmaltimento")) + " €" %>'></asp:Literal></td>
                                 </tr>--%>
                                 <tr class="shipping">
                                     <th>
-                                        <asp:Literal Text="<%$ Resources:Common,CarrelloTotaleSpedizione %>" runat="server" /></th>
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %>' runat="server" /></th>
                                     <td>
                                         <asp:Literal ID="Literal1" runat="server"
                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSpedizione")) + " €" %>'></asp:Literal></td>
                                 </tr>
                                 <tr class="total">
                                     <th>
-                                        <asp:Literal Text="<%$ Resources:Common,CarrelloTotaleOrdine %>" runat="server" /></th>
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %>' runat="server" /></th>
                                     <td>
                                         <span class="amount">
                                             <asp:Literal ID="Literal2" runat="server"
@@ -194,12 +194,12 @@
                             Update totals
                         </button>--%>
                 <a class="btn btn-large btn-success btn-block"
-                    id="A7" runat="server" href="<%$ Resources:Common, LinkOrder %>">
-                    <asp:Literal Text="<%$ Resources:Common,TestoProcediOrdine %>" runat="server" />
+                    id="A7" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrder") %>'>
+                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdine") %>' runat="server" />
                 </a><br /><br />
                         <a class="btn btn-large btn-success btn-block"
-                    id="A2" runat="server" href="<%$ Resources:Common, LinkOrderNoregistrazione %>">
-                    <asp:Literal Text="<%$ Resources:Common,TestoProcediOrdineNoregistrazione %>" runat="server" />
+                    id="A2" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrderNoregistrazione") %>'>
+                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>' runat="server" />
                 </a>
 
 

@@ -66,17 +66,21 @@ public partial class _SchedaOffertaStampa : CommonPage
                 //Prendiamo la lista completa degli immobili con tutti dati relativi
                 //filtrandoli in base ai parametri richiesti
                 this.AssociaDati();
-                #endregion
+            #endregion
 
-                //Inizializziamo le etichette dei controlli in base alla lingua
-                //InizializzaEtichette();
-                //InizializzaLink();
-            }
-            else
+               //Inizializziamo le etichette dei controlli in base alla lingua
+               //InizializzaEtichette();
+               //InizializzaLink();
+
+               DataBind();
+
+         }
+         else
             {
                 output.Text = "";
 
             }
+
 
         }
         catch (Exception err)

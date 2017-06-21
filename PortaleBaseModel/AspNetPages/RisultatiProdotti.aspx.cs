@@ -273,6 +273,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
 
                 SettaVisualizzazione();
 
+                DataBind();
             }
             else
             {
