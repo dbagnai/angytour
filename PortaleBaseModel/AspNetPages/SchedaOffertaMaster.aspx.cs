@@ -741,7 +741,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += "<h4 style=\"margin-bottom:3px;padding-bottom:2px\"><strong>" + socio.Nomeposizione1_dts + "</strong></h4> ";
             html += socio.Via1_dts + "<br/> ";
             html += socio.Cap1_dts + " " + socio.CodiceCOMUNE1_dts + " (" + descrizione + ")<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono1_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono1_dts + "<br/> ";
         }
         descrizione = "";
         _p = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice.ToLower() == socio.CodicePROVINCIA2_dts); });
@@ -751,7 +751,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += "<h4 style=\"margin-bottom:3px;padding-bottom:2px\"><strong>" + socio.Nomeposizione2_dts + "</strong></h4> ";
             html += socio.Via2_dts + "<br/> ";
             html += socio.Cap2_dts + " " + socio.CodiceCOMUNE2_dts + " (" + descrizione + ")<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono2_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono2_dts + "<br/> ";
         }
 
         descrizione = "";
@@ -762,7 +762,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += "<h4 style=\"margin-bottom:3px;padding-bottom:2px\"><strong>" + socio.Nomeposizione3_dts + "</strong></h4> ";
             html += socio.Via3_dts + "<br/> ";
             html += socio.Cap3_dts + " " + socio.CodiceCOMUNE3_dts + " (" + descrizione + ")<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono3_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono3_dts + "<br/> ";
         }
         if (socio.CodiceNAZIONE1_dts.ToLower() != "it")
         {
@@ -771,7 +771,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += socio.CodiceNAZIONE1_dts + "<br/> ";
             html += socio.Via1_dts + "<br/> ";
             html += socio.Cap1_dts + " " + socio.CodiceCOMUNE1_dts + " <br/> " + socio.CodicePROVINCIA1_dts + " <br/> " + socio.CodiceREGIONE1_dts + "<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono1_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono1_dts + "<br/> ";
 
         }
         if (socio.CodiceNAZIONE2_dts.ToLower() != "it")
@@ -781,7 +781,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += socio.CodiceNAZIONE2_dts + "<br/> ";
             html += socio.Via2_dts + "<br/> ";
             html += socio.Cap2_dts + " " + socio.CodiceCOMUNE2_dts + " <br/> " + socio.CodicePROVINCIA2_dts + " <br/> " + socio.CodiceREGIONE2_dts + "<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono2_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono2_dts + "<br/> ";
 
         }
         if (socio.CodiceNAZIONE3_dts.ToLower() != "it")
@@ -791,12 +791,12 @@ public partial class _SchedaOffertaMaster : CommonPage
             html += socio.CodiceNAZIONE3_dts + "<br/> ";
             html += socio.Via3_dts + "<br/> ";
             html += socio.Cap3_dts + " " + socio.CodiceCOMUNE3_dts + " <br/> " + socio.CodicePROVINCIA3_dts + " <br/> " + socio.CodiceREGIONE3_dts + "<br/> ";
-            html += Resources.Common.Telefono + " " + socio.Telefono3_dts + "<br/> ";
+            html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono3_dts + "<br/> ";
 
         } 
 #endif
 
-        Province _p = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice.ToLower() == socio.CodicePROVINCIA1_dts); });
+      Province _p = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice.ToLower() == socio.CodicePROVINCIA1_dts); });
         if (_p != null)
         {
             descrizione = _p.SiglaProvincia;
@@ -811,13 +811,13 @@ public partial class _SchedaOffertaMaster : CommonPage
     {
         string ret = "";
         if (CodiceTipologia == "rif000008" || CodiceTipologia == "rif000009")
-            ret = Resources.Common.TestoPrenota;
+            ret = references.ResMan("Common",Lingua, "TestoPrenota");
         else
-            //    ret = Resources.Common.TestoRichiedi;
+            //    ret = references.ResMan("Common",Lingua,"TestoRichiedi;
             ////else if ( CodiceTipologia == "rif000001" || CodiceTipologia == "rif000004")
-            ////    ret = Resources.Common.TestoDisponibilita;
+            ////    ret = references.ResMan("Common",Lingua,"TestoDisponibilita;
             //else
-            ret = Resources.Common.TestoDisponibilita;
+            ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
 
 
         return ret;
@@ -1313,10 +1313,10 @@ public partial class _SchedaOffertaMaster : CommonPage
     protected string ImpostaIntroPrezzo(string codicetipologia)
     {
         string ret = "";
-        //  if (codicetipologia == "rif000002") ret = Resources.Common.TitoloPrezzoApartire;
-        //    if (codicetipologia == "rif000001") ret = Resources.Common.TitoloPrezzo + " ";
+      //  if (codicetipologia == "rif000002") ret = references.ResMan("Common",Lingua,"TitoloPrezzoApartire");
+      //    if (codicetipologia == "rif000001") ret = references.ResMan("Common",Lingua,"TitoloPrezzo") + " ";
 
-        return ret;
+      return ret;
     }
 
 
@@ -1478,14 +1478,14 @@ public partial class _SchedaOffertaMaster : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-                outputContact.Text = Resources.Common.txtPrivacyError.ToString();
+                outputContact.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1493,7 +1493,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-            outputContact.Text += Resources.Common.txtMailError.ToString();
+            outputContact.Text += references.ResMan("Common",Lingua, "txtMailError");
         }
     }
 
@@ -1539,14 +1539,14 @@ public partial class _SchedaOffertaMaster : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-                outputContact1.Text = Resources.Common.txtPrivacyError.ToString();
+                outputContact1.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1554,7 +1554,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         catch (Exception err)
         {
             outputContact1.Text = err.Message + " <br/> ";
-            outputContact1.Text += Resources.Common.txtMailError.ToString();
+            outputContact1.Text += references.ResMan("Common",Lingua, "txtMailError");
         }
     }
 }

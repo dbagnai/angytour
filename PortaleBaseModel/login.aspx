@@ -57,7 +57,7 @@
             </label>
             <div style="padding: 50px;">
                 <h3>
-                    <asp:Literal Text="<%$ Resources : Common, testoLoginReturn %>" runat="server" /></h3>
+                    <asp:Literal Text='<%# references.ResMan("Common",Lingua,"testoLoginReturn") %>' runat="server" /></h3>
                 <hr />
                 <asp:LoginView ID="LogView1" runat="server">
                     <AnonymousTemplate>
@@ -66,7 +66,7 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label for="email" class="col-sm-3 control-label">
-                                        <asp:Literal Text="<%$ Resources : Common, testoLoginUtente %>" runat="server" /></label>
+                                        <asp:Literal Text='<%# references.ResMan("Common",Lingua,"testoLoginUtente") %>' runat="server" /></label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="inputName" runat="server" name="inputName" placeholder="Username">
                                     </div>
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label for="password" class="col-sm-3 control-label">Password</label>
                                     <div class="col-sm-9">
-                                       <%-- <a runat="server" onserverclick="btnForget_Click" class="pull-right"><%= Resources.Common.testoLoginForget %></a>--%>
+                                       <%-- <a runat="server" onserverclick="btnForget_Click" class="pull-right"><%= references.ResMan("Common",Lingua,"testoLoginForget") %></a>--%>
                                         <input type="password" placeholder="Password" class="form-control" runat="server" id="inputPassword">
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-9">
                                         <asp:Button OnClick="loginbtn_Click" class="btn btn-small btn-primary pull-right"
-                                            Text="<%$ Resources : Common, testoLoginAccedi %>" runat="server" />
+                                            Text='<%# references.ResMan("Common",Lingua,"testoLoginAccedi") %>' runat="server" />
                                         <br />
                                         <label class="alert-danger alert-block">
                                             <asp:Label Font-Size="Medium" ID="outputlogin" runat="server" Text=""></asp:Label>
@@ -115,7 +115,7 @@
                                 <a runat="server" alt="" class="btn btn-default btn-small" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />--%>
                               <%--  <br />
-                                <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(Resources.Common.LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
+                                <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                              --%>   <br />
                                 <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
                                     LoginText="" />
@@ -124,16 +124,16 @@
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="Socio">
                             <ContentTemplate>
-                                <%-- <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(Resources.Common.LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
+                                <%-- <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
                               <%--  <br />
-                                <a runat="server" class="btn btn-block btn-primary" alt="" href="<%$ Resources : Common, LinkSchedaSocio %>" id="lnkOrdrpage">
-                                    <asp:Literal Text="<%$ Resources : Common, TestoSchedaSocio %>" runat="server" />
+                                <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkSchedaSocio") %>' id="lnkOrdrpage">
+                                    <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoSchedaSocio %>" runat="server" />
                                 </a>
                                 <br />--%>
 
                                 <br />
-                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="<%$ Resources : Common, testoLoginDisconnetti %>"
+                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'
                                     LoginText="" />
                                 <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                             </ContentTemplate>
@@ -142,12 +142,12 @@
                             <ContentTemplate>
                                 <%--  <a runat="server" alt="" href="~/AreaRiservata/default.aspx" id="lnkAdminPage">Home
                             Area Riservata</a><br /><br />--%>
-                                <a runat="server" class="btn btn-block btn-primary" alt="" href="<%$ Resources : Common, LinkOrder %>" id="lnkOrdrpage">
-                                    <asp:Literal Text="<%$ Resources : Common, TestoProcediOrdine %>" runat="server" />
+                                <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkOrder") %>' id="lnkOrdrpage">
+                                    <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoProcediOrdine") %>' runat="server" />
                                 </a>
                                 <br />
                                 <br />
-                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="<%$ Resources : Common, testoLoginDisconnetti %>"
+                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'
                                     LoginText="" />
                                 <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                             </ContentTemplate>
@@ -161,7 +161,7 @@
                                 <%-- <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />
                                 <br />--%>
-                                <%-- <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(Resources.Common.LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
+                                <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
                                 <br />
                                 <br />
@@ -188,9 +188,9 @@
                         </div>
                         <div class="form-group">
 
-                            <a href="<%$ Resources:Common,LinkIscrivitisocio %>" class="btn btn-block btn-primary"
+                            <a href='<%# references.ResMan("Common",Lingua,"LinkIscrivitisocio") %>' class="btn btn-block btn-primary"
                                 runat="server" id="btnIscriviti">
-                                <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNewCreateSocio" %>' /></a>
+                                <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNewCreateSocio") %>' /></a>
                         </div>
                     </div>
                 </div>--%>

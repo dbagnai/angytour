@@ -228,7 +228,7 @@ public partial class _SchedaProdotto : CommonPage
             //{
             //    litSezione.Text += " " + catselected.Descrizione.ToUpper();
             //}
-            //  litSezione.Text = Resources.Common.testoUsato;
+            //  litSezione.Text = references.ResMan("Common",Lingua,"testoUsato");
 
             string htmlPage = "";
             if (GetGlobalResourceObject("Common", "testo" + CodiceTipologia) != null)
@@ -278,8 +278,8 @@ public partial class _SchedaProdotto : CommonPage
     protected string ImpostaIntroPrezzo(string codicetipologia)
     {
         string ret = "";
-        // if (codicetipologia == "rif000002") ret = Resources.Common.TitoloPrezzoApartire + " ";
-        if (codicetipologia == "rif000001") ret = Resources.Common.TitoloPrezzo + " ";
+        // if (codicetipologia == "rif000002") ret = references.ResMan("Common",Lingua,"TitoloPrezzoApartire + " ";
+        if (codicetipologia == "rif000001") ret = references.ResMan("Common",Lingua, "TitoloPrezzo") + " ";
 
         return ret;
     }
@@ -482,29 +482,29 @@ public partial class _SchedaProdotto : CommonPage
             sb.Append("<div class=\"col-sm-6\">");
             Tabrif cf1 = Utility.Caratteristiche[2].Find(c => c.Codice == item.Caratteristica3.ToString() && c.Lingua == Lingua);
             if (cf1 != null)
-                sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoTipologiavettura + " </span>" + cf1.Campo1);
+                sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoTipologiavettura") + " </span>" + cf1.Campo1);
             sb.Append("<br/\">");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoImmatricolazione + " </span>" + string.Format("{0:dd/MM/yyyy}", Eval("Data1")));
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoImmatricolazione") + " </span>" + string.Format("{0:dd/MM/yyyy}", Eval("Data1")));
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "cylinderCapacity");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoCilindrata + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoCilindrata") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
             Tabrif cf = Utility.Caratteristiche[3].Find(c => c.Codice == item.Caratteristica4.ToString() && c.Lingua == Lingua);
             if (cf != null)
-                sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoAlimentazione + " </span>" + cf.Campo1);
+                sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoAlimentazione") + " </span>" + cf.Campo1);
 
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "transmission");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoTrasmissione + " </span>" + val.Campo1);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoTrasmissione") + " </span>" + val.Campo1);
 
             sb.Append("</div>");
             sb.Append("<div class=\"col-sm-6\">");
             sb.Append("<span class=\"h3-body-title-1 \">Codice </span>" + item.CodiceProdotto);
             sb.Append("<br/\">"); val = CommonPage.ReadXmlSinglevalue(item.Xmlvalue, "mainData", "mileage");
-            sb.Append("<span class=\"h3-body-title-1 \">" + Resources.Common.testoChilometraggio + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1 \">" + references.ResMan("Common",Lingua,"testoChilometraggio") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "enginePower");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoPotenza + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoPotenza") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
 
             List<Tabrif> colordata = ReadColorvalue(item.Xmlvalue);
@@ -513,11 +513,11 @@ public partial class _SchedaProdotto : CommonPage
                 tmp = colordata[0].Campo1;
             if (colordata != null && colordata.Count > 1)
                 tmp += " " + colordata[1].Campo1;
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoColore + " </span>" + tmp);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoColore + " </span>" + tmp);
 
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "bodyStyle");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoCategoriaveicolo + " </span>" + val.Campo1);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoCategoriaveicolo") + " </span>" + val.Campo1);
 
             sb.Append("</div>");
             sb.Append("</div>");
@@ -536,7 +536,7 @@ public partial class _SchedaProdotto : CommonPage
     
 #endif
 
-    protected void AssociaDati()
+   protected void AssociaDati()
     {
         //Carichiamo l'immobile a partire dal codice dello stesso e dalla lingua
         OfferteCollection offerte = new OfferteCollection();
@@ -887,10 +887,10 @@ public partial class _SchedaProdotto : CommonPage
     {
         string ret = "";
         if (CodiceTipologia == "rif000001")
-            ret = Resources.Common.TestoRichiedi;
-        //ret = Resources.Common.TestoDisponibilita;
-        else
-            ret = Resources.Common.TestoDisponibilita;
+            ret = references.ResMan("Common",Lingua, "TestoRichiedi");
+         //ret = references.ResMan("Common",Lingua,"TestoDisponibilita");
+         else
+            ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
 
 
         return ret;
@@ -1211,14 +1211,14 @@ public partial class _SchedaProdotto : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-                outputContact.Text = Resources.Common.txtPrivacyError.ToString();
+            outputContact.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1226,7 +1226,7 @@ public partial class _SchedaProdotto : CommonPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-            outputContact.Text += Resources.Common.txtMailError.ToString();
+         outputContact.Text += references.ResMan("Common", Lingua, "txtMailError");
         }
     }
 
@@ -1272,14 +1272,14 @@ public partial class _SchedaProdotto : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-                outputContact1.Text = Resources.Common.txtPrivacyError.ToString();
+               outputContact1.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1287,7 +1287,7 @@ public partial class _SchedaProdotto : CommonPage
         catch (Exception err)
         {
             outputContact1.Text = err.Message + " <br/> ";
-            outputContact1.Text += Resources.Common.txtMailError.ToString();
+            outputContact1.Text += references.ResMan("Common",Lingua, "txtMailError");
         }
     }
 

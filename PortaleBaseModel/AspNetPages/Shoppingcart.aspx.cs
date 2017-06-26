@@ -174,7 +174,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = Resources.Common.testoCarellosuperamentoquantita;
+            output.Text = references.ResMan("Common",Lingua,"testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = "0";
         //AggiornaVisualizzazioneDatiCarrello();
@@ -198,7 +198,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = Resources.Common.testoCarellosuperamentoquantita;
+            output.Text = references.ResMan("Common",Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = quantita.ToString();
 
@@ -233,7 +233,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = Resources.Common.testoCarellosuperamentoquantita;
+            output.Text = references.ResMan("Common",Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = quantita.ToString();
 

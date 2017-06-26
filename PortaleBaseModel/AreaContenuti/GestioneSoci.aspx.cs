@@ -1959,7 +1959,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 //string idsocio = getidsocio(User.Identity.Name);
 
                 string Descrizione = "";
-                Descrizione = Resources.Specific.testoModificaSocio + "<br/><br/>";
+                Descrizione = references.ResMan("Specific",Lingua,"testoModificaSocio") + "<br/><br/>";
                 Descrizione += datimodificati + "<br/>";
 
 
@@ -1988,11 +1988,11 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             string Descrizione = "";
             if (statoArchivio)
             {
-                Descrizione = Resources.Specific.testoArchivioOff + "<br/>";
+                Descrizione = references.ResMan("Specific",Lingua,"testoArchivioOff") + "<br/>";
             }
             else
             {
-                Descrizione = Resources.Specific.testoArchivioOn + "<br/>";
+                Descrizione = references.ResMan("Specific",Lingua,"testoArchivioOn") + "<br/>";
             }
 
             Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + socio.Nome_dts + "<br/>";
@@ -2017,12 +2017,12 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
 #endif
-    /// <summary>
-    /// Cancella il record selezionato nell'elenco
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void btnCancella_Click(object sender, EventArgs e)
+   /// <summary>
+   /// Cancella il record selezionato nell'elenco
+   /// </summary>
+   /// <param name="sender"></param>
+   /// <param name="e"></param>
+   protected void btnCancella_Click(object sender, EventArgs e)
     {
         btnAggiorna.Text = "Modifica";
         btnAggiorna.ValidationGroup = "";

@@ -47,6 +47,7 @@ public partial class login : CommonPage
     protected void loginbtn_Click(object sender, EventArgs e)
     {
 
+
         HtmlInputText usr = (HtmlInputText)LogView1.Controls[0].Controls[0].FindControl("inputName");
         HtmlInputText psw = (HtmlInputText)LogView1.Controls[0].Controls[0].FindControl("inputPassword");
         Label outlogin = (Label)LogView1.Controls[0].Controls[0].FindControl("outputlogin");
@@ -60,9 +61,9 @@ public partial class login : CommonPage
 
         if (Membership.ValidateUser(username, password))
         {
-            //FormsAuthentication.LoginUrl = Resources.Common.Linklogin;
-            //FormsAuthentication.DefaultUrl
-            FormsAuthentication.RedirectFromLoginPage(username, false);
+         //FormsAuthentication.LoginUrl = references.ResMan("Common",Lingua,"Linklogin");
+         //FormsAuthentication.DefaultUrl
+         FormsAuthentication.RedirectFromLoginPage(username, false);
             //FormsAuthentication.Authenticate(username, password);
         }
         else
@@ -79,7 +80,7 @@ public partial class login : CommonPage
         HtmlInputText usr = (HtmlInputText)LogView1.Controls[0].Controls[0].FindControl("inputName");
         if (string.IsNullOrEmpty(usr.Value.Trim()))
         {
-            output.Text = Resources.Common.forgetRequest1;
+            output.Text = references.ResMan("Common",Lingua, "forgetRequest1");
         }
         else
             InviaMailForgetSocio(usr.Value);
@@ -157,13 +158,13 @@ public partial class login : CommonPage
 
                         //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + GetGlobalResourceObject("Common", "testoLinkValidazioneAttivazione").ToString() + "<br/>";
                         Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
-                        output.Text = Resources.Common.forgetResponse2;
+                        output.Text = references.ResMan("Common",Lingua, "forgetResponse2");
                     }
 
                 }
             }
             else
-                output.Text = Resources.Common.forgetResponse3;
+                output.Text = references.ResMan("Common",Lingua, "forgetResponse3");
 
         }
         catch (Exception err)
@@ -234,13 +235,13 @@ public partial class login : CommonPage
 
                     //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + GetGlobalResourceObject("Common", "testoLinkValidazioneAttivazione").ToString() + "<br/>";
                     Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
-                    output.Text = Resources.Common.forgetResponse2;
+                    output.Text = references.ResMan("Common",Lingua, "forgetResponse2");
 
 
                 }
             }
             else
-                output.Text = Resources.Common.forgetResponse3;
+                output.Text = references.ResMan("Common",Lingua, "forgetResponse3");
 
         }
         catch (Exception err)

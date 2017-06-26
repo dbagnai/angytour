@@ -342,29 +342,29 @@ public partial class _SchedaOffertaStampa : CommonPage
             sb.Append("<div class=\"col-sm-6\">");
             Tabrif cf1 = Utility.Caratteristiche[2].Find(c => c.Codice == item.Caratteristica3.ToString() && c.Lingua == Lingua);
             if (cf1 != null)
-                sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoTipologiavettura + " </span>" + cf1.Campo1);
+                sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoTipologiavettura") + " </span>" + cf1.Campo1);
             sb.Append("<br/\">");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoImmatricolazione + " </span>" + string.Format("{0:dd/MM/yyyy}", Eval("Data1")));
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoImmatricolazione") + " </span>" + string.Format("{0:dd/MM/yyyy}", Eval("Data1")));
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "cylinderCapacity");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoCilindrata + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoCilindrata") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
             Tabrif cf = Utility.Caratteristiche[3].Find(c => c.Codice == item.Caratteristica4.ToString() && c.Lingua == Lingua);
             if (cf != null)
-                sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoAlimentazione + " </span>" + cf.Campo1);
+                sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoAlimentazione") + " </span>" + cf.Campo1);
 
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "transmission");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoTrasmissione + " </span>" + val.Campo1);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoTrasmissione") + " </span>" + val.Campo1);
 
             sb.Append("</div>");
             sb.Append("<div class=\"col-sm-6\">");
             sb.Append("<span class=\"h3-body-title-1 \">Codice </span>" + item.CodiceProdotto);
             sb.Append("<br/\">"); val = CommonPage.ReadXmlSinglevalue(item.Xmlvalue, "mainData", "mileage");
-            sb.Append("<span class=\"h3-body-title-1 \">" + Resources.Common.testoChilometraggio + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1 \">" + references.ResMan("Common",Lingua,"testoChilometraggio") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "enginePower");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoPotenza + " </span>" + val.Campo1 + " " + val.Campo2);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoPotenza") + " </span>" + val.Campo1 + " " + val.Campo2);
             sb.Append("<br/\">");
 
             List<Tabrif> colordata = ReadColorvalue(item.Xmlvalue);
@@ -373,11 +373,11 @@ public partial class _SchedaOffertaStampa : CommonPage
                 tmp = colordata[0].Campo1;
             if (colordata != null && colordata.Count > 1)
                 tmp += " " + colordata[1].Campo1;
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoColore + " </span>" + tmp);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoColore") + " </span>" + tmp);
 
             sb.Append("<br/\">");
             val = ReadXmlSinglevalue(item.Xmlvalue, "mainData", "bodyStyle");
-            sb.Append("<span class=\"h3-body-title-1\">" + Resources.Common.testoCategoriaveicolo + " </span>" + val.Campo1);
+            sb.Append("<span class=\"h3-body-title-1\">" + references.ResMan("Common",Lingua,"testoCategoriaveicolo") + " </span>" + val.Campo1);
 
             sb.Append("</div>");
             sb.Append("</div>");
