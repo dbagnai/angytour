@@ -98,7 +98,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     protected void btnCodiceSconto_Click(object sender, EventArgs e)
     {
         string insertedcode = txtCodiceSconto.Text;
-        string validcode = ConfigurationManager.AppSettings["codicesconto"].ToString();
+        string validcode = ConfigManagement.ReadKey("codicesconto");
         if (insertedcode == validcode)
         {
             Session.Add("codicesconto", validcode);
@@ -425,7 +425,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Pagato = false; //Valorizzato solo alla ricezione del pagamento prima della spedizione o tramite la procedura con pagamento anticipato
                 totali.Urlpagamento = "";
 
-                double percentualeanticipo = Convert.ToDouble(ConfigurationManager.AppSettings["percAnticipoPagamento"]);
+                double percentualeanticipo = Convert.ToDouble(ConfigManagement.ReadKey("percAnticipoPagamento"));
                 //Prepariamo i valori per la chiamata a Paypal
                 Session.Add("cliente_" + CodiceOrdine, cliente); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
                 Session.Add("totali_" + CodiceOrdine, totali); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
@@ -438,10 +438,10 @@ public partial class AspNetPages_Orderpage : CommonPage
                 {
                     ///////////////////////SEZIONE IMPOSTAZIONE PAYWAY//////////////////////////////
                     //CREIAMO IL FORM PER IL POST PER PAYWAY
-                    string merchantid = ConfigurationManager.AppSettings["merchantid"].ToString();
-                    string urlpagamentosoar = ConfigurationManager.AppSettings["urlsoar"].ToString();
+                    string merchantid = ConfigManagement.ReadKey("merchantid");
+                    string urlpagamentosoar = ConfigManagement.ReadKey("urlsoar");
                     RemotePost remotepost = new RemotePost();
-                    remotepost.test = Convert.ToBoolean(ConfigurationManager.AppSettings["testsoar"]);//IMPOSTO LA MODALITA' DI TEST DEL SISTEMA DI PAGAMENTO DA WEB CONFIG 
+                    remotepost.test = Convert.ToBoolean(ConfigManagement.ReadKey("testsoar"));//IMPOSTO LA MODALITA' DI TEST DEL SISTEMA DI PAGAMENTO DA WEB CONFIG 
                     remotepost.Url = urlpagamentosoar;// 
                     remotepost.Add("MID", merchantid);//id mercante fornito da soar
                     remotepost.Add("OID", CodiceOrdine);//codice dell'ordine attuale identificativo
@@ -479,8 +479,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                     //Procediamo con l'odine su paypal
                     //Valori impostazione paypal
                     string Encodedidordine = dataManagement.EncodeToBase64(CodiceOrdine);
-                    string returl = (ConfigurationManager.AppSettings["returlPaypal"].ToString()) + Encodedidordine;
-                    string cancelurl = (ConfigurationManager.AppSettings["cancelurlPaypal"].ToString()) + Encodedidordine + "&error=true";
+                    string returl = (ConfigManagement.ReadKey("returlPaypal")) + Encodedidordine;
+                    string cancelurl = (ConfigManagement.ReadKey("cancelurlPaypal")) + Encodedidordine + "&error=true";
                     //if (!returl.ToLower().StartsWith(PercorsoAssolutoApplicazione.ToLower()))
                     //    returl = PercorsoAssolutoApplicazione + "/" + returl;
                     //if (!cancelurl.ToLower().StartsWith(PercorsoAssolutoApplicazione.ToLower()))
@@ -489,7 +489,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     //Formattiamo i dati per paypal per le descrizioni e il totale ordine
                     MemorizzaDatiPerPaypal(percentualeanticipo, totali, prodotti, ref paypaldatas);
                     //eseguiamo la procedura di pagamento su paypal
-                    bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
+                    bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
                     EseguiCheckOutPaypal(returl, cancelurl, paypaldatas, authandcapturemode); // da traspormare in auth and capture true succesivamente
                 }
                 if (modalita == "bacs") //PAGAMENTO CON BONIFICO
@@ -957,10 +957,10 @@ public partial class AspNetPages_Orderpage : CommonPage
         // https://developer.paypal.com/docs/classic/express-checkout/ht_ec-singleAuthPayment-curl-etc/
         //https://ppmts.custhelp.com/app/answers/detail/a_id/939/kw/PayPal%20Express%20Checkout%20Payment%20Actions
 
-        string user = ConfigurationManager.AppSettings["userPaypal"].ToString();
-        string pwd = ConfigurationManager.AppSettings["pwdPaypal"].ToString();
-        string signature = ConfigurationManager.AppSettings["signaturePaypal"].ToString();
-        bool sandbox = Convert.ToBoolean(ConfigurationManager.AppSettings["sandboxPaypal"]);
+        string user = ConfigManagement.ReadKey("userPaypal");
+        string pwd = ConfigManagement.ReadKey("pwdPaypal");
+        string signature = ConfigManagement.ReadKey("signaturePaypal");
+        bool sandbox = Convert.ToBoolean(ConfigManagement.ReadKey("sandboxPaypal"));
         NVPAPICaller test = new NVPAPICaller(user, pwd, signature, returnurl, cancelurl, sandbox);
 
         string retMsg = "";

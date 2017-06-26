@@ -63,13 +63,13 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     protected string ImageBasePath()
     {
         string ret = "";
-        ret = ReplaceAbsoluteLinks(ConfigurationManager.AppSettings["ImageRoot"]);
+        ret = ReplaceAbsoluteLinks(ConfigManagement.ReadKey("ImageRoot"));
         return ret;
     }
 
     protected void btnCaricafile_Click(object sender, EventArgs e)
     {
-        string percorsoImmagini = ConfigurationManager.AppSettings["ImageRoot"];
+        string percorsoImmagini = ConfigManagement.ReadKey("ImageRoot");
         string Nome = upFile.FileName;
         int maxdimx = 300;
         int maxdimy = 300;
@@ -739,7 +739,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 #if false
     protected void ajaxFileUpload_OnUploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
     {
-        string fullPath = ConfigurationManager.AppSettings["ImageRoot"] + e.FileName;
+        string fullPath = ConfigManagement.ReadKey("ImageRoot") + e.FileName;
 
         // Save your File
         htmlExtender.AjaxFileUpload.SaveAs(Server.MapPath(fullPath));

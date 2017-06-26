@@ -41,17 +41,17 @@ public class CommonPage : Page
     private static string _deflanguage;
     public static string deflanguage
     {
-        get { return ConfigurationManager.AppSettings["deflanguage"].ToString(); }
+        get { return ConfigManagement.ReadKey("deflanguage"); }
     }
     private string _Email;
     public string Email
     {
-        get { return ConfigurationManager.AppSettings["Email"].ToString(); }
+        get { return ConfigManagement.ReadKey("Email"); }
     }
     private string _Nome;
     public string Nome
     {
-        get { return ConfigurationManager.AppSettings["Nome"].ToString(); }
+        get { return ConfigManagement.ReadKey("Nome"); }
     }
 
     public struct PrezziStruct
@@ -305,9 +305,9 @@ public class CommonPage : Page
     {
 
         bool gen = false;
-        bool.TryParse(ConfigurationManager.AppSettings["generaUrlrewrited"], out gen);
+        bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
         //bool upd = false;
-        //bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+        //bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"], out upd);
         string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
         return link;//.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
     }
@@ -1469,8 +1469,8 @@ public class CommonPage : Page
         double _tmpauto = 0;
         double _tmpmoto = 0;
 
-        double.TryParse(ConfigurationManager.AppSettings["PFUauto"].ToString(), out _tmpauto);
-        double.TryParse(ConfigurationManager.AppSettings["PFUmoto"].ToString(), out _tmpmoto);
+        double.TryParse(ConfigManagement.ReadKey("PFUauto"), out _tmpauto);
+        double.TryParse(ConfigManagement.ReadKey("PFUmoto"), out _tmpmoto);
 
         foreach (Carrello c in ColItem)
         {
@@ -1510,8 +1510,8 @@ public class CommonPage : Page
     private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello)
     {
         double valoresconto = 0;
-        string percentualesconto = ConfigurationManager.AppSettings["percentualesconto"].ToString();
-        if (Session["codicesconto"] != null && Session["codicesconto"].ToString() == ConfigurationManager.AppSettings["codicesconto"].ToString())
+        string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
+        if (Session["codicesconto"] != null && Session["codicesconto"].ToString() == ConfigManagement.ReadKey("codicesconto"))
         {
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
@@ -1530,9 +1530,9 @@ public class CommonPage : Page
         //    totalearticoli += c.Numero;
         //}
         if (supplementospedizione) //Supplemento isole supplementoSpedizioni
-            spesespedizione = Convert.ToDouble(ConfigurationManager.AppSettings["supplementoSpedizioni"]);
+            spesespedizione = Convert.ToDouble(ConfigManagement.ReadKey("supplementoSpedizioni"));
         if (contrassegno) //Supplemento isole supplementoSpedizioni
-            spesespedizione = Convert.ToDouble(ConfigurationManager.AppSettings["supplementoContrassegno"]);
+            spesespedizione = Convert.ToDouble(ConfigManagement.ReadKey("supplementoContrassegno"));
 
         //supplementoContrassegno
 
@@ -1543,9 +1543,9 @@ public class CommonPage : Page
             //    break;
             default:
                 //if (totalearticoli <= 3)
-                if (totaleordine - totalesconto <= Convert.ToDouble(ConfigurationManager.AppSettings["sogliaSpedizioni"]))
+                if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
                 {
-                    spesespedizione += Convert.ToDouble(ConfigurationManager.AppSettings["costobaseSpedizioni"]); ;
+                    spesespedizione += Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni")); 
                 }
                 break;
         }

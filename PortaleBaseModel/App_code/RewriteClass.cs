@@ -8,6 +8,7 @@ using System.Web.UI;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Configuration;
+using WelcomeLibrary.UF;
 
 /// <summary>
 /// Descrizione di riepilogo per RouteHandler
@@ -28,7 +29,7 @@ public class GenericRouteHandler : IRouteHandler
         string textmatch = requestContext.RouteData.Values["textmatch"] as string;
         string destinationselector = requestContext.RouteData.Values["destinationselector"] as string;
         string Lingua = requestContext.RouteData.Values["Lingua"] as string;
-        if (Lingua == null) HttpContext.Current.Items["Lingua"] = ConfigurationManager.AppSettings["deflanguage"].ToString();
+        if (Lingua == null) HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
         switch (Lingua.ToUpper())
         {
             case "I":
@@ -36,7 +37,7 @@ public class GenericRouteHandler : IRouteHandler
             case "RU":
                 break;
             default:
-                HttpContext.Current.Items["Lingua"] = ConfigurationManager.AppSettings["deflanguage"].ToString();
+                HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
                Pathdestinazione = "~/Error.aspx";
                 return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 //return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));

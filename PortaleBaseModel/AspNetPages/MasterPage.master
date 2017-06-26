@@ -108,12 +108,12 @@
             <div class="container" style="padding: 0px">
                 <div class="pull-left">
                     <a runat="server" href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' title='<%# references.ResMan("Common",Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                        <img style="height: 60px" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />
+                        <img style="height: 60px" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
                     </a>
                 </div>
                 <div class="pull-left" style="padding-top: 2px; display: none">
                     <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                        <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />
+                        <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
                     </a>
                 </div>
                 <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; display: none; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
@@ -214,7 +214,7 @@
                     <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
                         <a class="menuzord-brand" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                             <div id="divlogo" class="fulllogobckdark"></div>
-                            <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= ConfigurationManager.AppSettings["Nome"].ToString()%>" />--%>
+                            <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                         </a>
                         <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
 

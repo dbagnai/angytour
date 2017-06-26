@@ -200,9 +200,9 @@
        //Carico la memoria statica per la modalità trial del portale
        //se suparato la data di scadenza di prova allora ativo lamodalità trial del prodotto
        //Calcolo l'hash
-       //string hash = WelcomeLibrary.STATIC.Global.MD5GenerateHashWithSecret(ConfigurationManager.AppSettings["trialkey"].ToString());
+       //string hash = WelcomeLibrary.STATIC.Global.MD5GenerateHashWithSecret(ConfigManagement.ReadKey("trialkey"));
        string nome = CommonPage.getFirstName("webmaster");
-       string code = ConfigurationManager.AppSettings["trialkey"].ToString();
+       string code = WelcomeLibrary.UF.ConfigManagement.ReadKey("trialkey");
        if (nome == "17169") code = "";
        if (!WelcomeLibrary.STATIC.Global.MD5CheckHashWithSecret(code, WelcomeLibrary.STATIC.Global.Codicesblocco))
        {
@@ -219,8 +219,8 @@
            //-----------------------------------------------------------------------
            //Inizializzazione Timer per gestione attività schedulate da applicazione
            //-----------------------------------------------------------------------
-           //StartHour = System.Configuration.ConfigurationManager.AppSettings["OraStartRiepiloghi"].ToString();
-           //StartDay = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GiornoStartRiepiloghi"]);
+           //StartHour = System.Configuration.ConfigManagement.ReadKey("OraStartRiepiloghi"].ToString();
+           //StartDay = Convert.ToInt32(System.Configuration.ConfigManagement.ReadKey("GiornoStartRiepiloghi"]);
            //-----------------------------------------------------------------------
            //Inizializzazione Timer per gestione attvità schedulate da applicazione
            //-----------------------------------------------------------------------
@@ -246,7 +246,7 @@
 
    void Application_BeginRequest(Object source, EventArgs e)
    {
-       //if (System.Configuration.ConfigurationManager.AppSettings["enableHttps"] == "true")
+       //if (System.Configuration.ConfigManagement.ReadKey("enableHttps"] == "true")
        //    if (HttpContext.Current.Request.IsSecureConnection.Equals(false))
        //    {
        //        Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
@@ -303,7 +303,7 @@
                    appaddress = appaddress.ToLower().TrimEnd('/');
                }
 
-               if (System.Configuration.ConfigurationManager.AppSettings["enableHttps"] == "true")
+               if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps") == "true")
                    appaddress = appaddress.ToLower().Replace("http:", "https:");
 
 

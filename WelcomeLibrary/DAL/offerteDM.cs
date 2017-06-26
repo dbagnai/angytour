@@ -4530,8 +4530,8 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
         {
-            titolo = ( System.Configuration.ConfigurationManager.AppSettings["Nome"]  ?? "");
-            descrizione = ( System.Configuration.ConfigurationManager.AppSettings["Descrizione"] ?? "");
+            titolo = ( ConfigManagement.ReadKey("Nome")  ?? "");
+            descrizione = (ConfigManagement.ReadKey("Descrizione") ?? "");
 
             //string Lingua = "I";
             string Lingua = Lng;
@@ -4546,7 +4546,7 @@ namespace WelcomeLibrary.DAL
 
             string PathFileXml = WelcomeLibrary.STATIC.Global.percorsoFisicoComune; //Percorsi fisico comune per l'appoggio dell'xml per il feed
 
-            //string NomeAgenzia = ConfigurationManager.AppSettings["NomeAgenzia"].ToString();
+            //string NomeAgenzia = ConfigManagement.ReadKey("NomeAgenzia");
             Messaggi.Add("Messaggio", "");
             Messaggi["Messaggio"] = "Creazione rss feed xml " + System.DateTime.Now.ToString() + " \r\n";
 

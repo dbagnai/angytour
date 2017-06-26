@@ -382,68 +382,68 @@ namespace WelcomeLibrary.UF
 
 
 
-        public static Dictionary<string, string> ReadXmlAttributesOfElement(ref Exception errorret, string element = "mailSettings", string elementliv1 = "smtpbase", string elementliv2 = "network", string elementliv3 = "")
-        {
-            Dictionary<string, string> values = new Dictionary<string, string>();
-            try
-            {
-                string webConfigFile = System.IO.Path.Combine(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione, "web.config");
-                System.Xml.XmlTextReader webConfigReader = new System.Xml.XmlTextReader(new System.IO.StreamReader(webConfigFile));
-                webConfigReader.WhitespaceHandling = WhitespaceHandling.None;
-                //if ((webConfigReader.ReadToFollowing("configuration/mailSettings/" + "mailingbase" + "/network")))
-                //    Label1.Text += webConfigReader.GetAttribute("host");
+        //public static Dictionary<string, string> ReadXmlAttributesOfElement(ref Exception errorret, string element = "mailSettings", string elementliv1 = "s
+        //{
+        //    Dictionary<string, string> values = new Dictionary<string, string>();
+        //    try
+        //    {
+        //        string webConfigFile = System.IO.Path.Combine(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione, "web.config");
+        //        System.Xml.XmlTextReader webConfigReader = new System.Xml.XmlTextReader(new System.IO.StreamReader(webConfigFile));
+        //        webConfigReader.WhitespaceHandling = WhitespaceHandling.None;
+        //        //if ((webConfigReader.ReadToFollowing("configuration/mailSettings/" + "mailingbase" + "/network")))
+        //        //    Label1.Text += webConfigReader.GetAttribute("host");
 
-                while (webConfigReader.ReadToFollowing(element))
-                {
-                    //if (webConfigReader.Depth == 1) //Carico solo gli elementi di primo livello
-                    if (elementliv1 != "")
-                        webConfigReader.ReadToDescendant(elementliv1);
+        //        while (webConfigReader.ReadToFollowing(element))
+        //        {
+        //            //if (webConfigReader.Depth == 1) //Carico solo gli elementi di primo livello
+        //            if (elementliv1 != "")
+        //                webConfigReader.ReadToDescendant(elementliv1);
 
-                    if (elementliv1 != "" && elementliv2 != "")
-                        webConfigReader.ReadToDescendant(elementliv2);
+        //            if (elementliv1 != "" && elementliv2 != "")
+        //                webConfigReader.ReadToDescendant(elementliv2);
 
-                    if (elementliv1 != "" && elementliv2 != "" && elementliv3 != "")
-                        webConfigReader.ReadToDescendant(elementliv3);
-                    //string host = webConfigReader.GetAttribute("host");
-                    //string username = webConfigReader.GetAttribute("userName");
-                    //string password = webConfigReader.GetAttribute("password");
-                    //string attributes = "";
+        //            if (elementliv1 != "" && elementliv2 != "" && elementliv3 != "")
+        //                webConfigReader.ReadToDescendant(elementliv3);
+        //            //string host = webConfigReader.GetAttribute("host");
+        //            //string username = webConfigReader.GetAttribute("userName");
+        //            //string password = webConfigReader.GetAttribute("password");
+        //            //string attributes = "";
 
-                    //ALTRA LETTURA ATTRIBUTI
-                    if (webConfigReader.HasAttributes)
-                    {
-                        for (int i = 0; i < webConfigReader.AttributeCount; i++)
-                        {
-                            webConfigReader.MoveToAttribute(i);
-                            string n = webConfigReader.Name;
-                            string v = webConfigReader.Value;
-                            if (!values.ContainsKey(n))
-                            {
-                                values.Add(n, v);
-                                //  attributes += ("Nam: " + webConfigReader.Name + ", Value: " + webConfigReader.Value);
-                            }
-                        }
-                    }
+        //            //ALTRA LETTURA ATTRIBUTI
+        //            if (webConfigReader.HasAttributes)
+        //            {
+        //                for (int i = 0; i < webConfigReader.AttributeCount; i++)
+        //                {
+        //                    webConfigReader.MoveToAttribute(i);
+        //                    string n = webConfigReader.Name;
+        //                    string v = webConfigReader.Value;
+        //                    if (!values.ContainsKey(n))
+        //                    {
+        //                        values.Add(n, v);
+        //                        //  attributes += ("Nam: " + webConfigReader.Name + ", Value: " + webConfigReader.Value);
+        //                    }
+        //                }
+        //            }
 
-                    //PER GLI ATTRIBUTI  DEL NODO LI LEGGO TUTTI E LI CONCATENO
-                    //int numAttributes = webConfigReader.AttributeCount;
-                    //for (int i = 0; i < numAttributes; i++)
-                    //{
-                    //    attributes += (webConfigReader.GetAttribute(i)) + "|";
+        //            //PER GLI ATTRIBUTI  DEL NODO LI LEGGO TUTTI E LI CONCATENO
+        //            //int numAttributes = webConfigReader.AttributeCount;
+        //            //for (int i = 0; i < numAttributes; i++)
+        //            //{
+        //            //    attributes += (webConfigReader.GetAttribute(i)) + "|";
 
-                    //}
-                    //attributes = attributes.TrimEnd('|');
-                    string valore = webConfigReader.ReadString();
+        //            //}
+        //            //attributes = attributes.TrimEnd('|');
+        //            string valore = webConfigReader.ReadString();
 
-                    webConfigReader.Close();
-                }
-            }
-            catch (Exception error)
-            {
-                errorret = error;
-            }
-            return values;
-        }
+        //            webConfigReader.Close();
+        //        }
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        errorret = error;
+        //    }
+        //    return values;
+        //}mtpbase", string elementliv2 = "network", string elementliv3 = "")
 
         public static bool invioMailGenerico(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
           string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
@@ -681,8 +681,10 @@ namespace WelcomeLibrary.UF
                 //Dictionary<string, string> attrvalues3 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", "smtpbase", "network"); //Stringa standard
 
                 Exception errret = null;
-                Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
-                if (mailvalues.ContainsKey("host"))
+            //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
+            // 2016 06 26 si prende da TBL_Config
+            Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, "mailSettings"); //Stringa da web config
+            if (mailvalues.ContainsKey("host"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", mailvalues["host"]);
                 if (mailvalues.ContainsKey("port"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", mailvalues["port"]);
@@ -963,7 +965,10 @@ namespace WelcomeLibrary.UF
                     if (sectionName != "")
                     {
                         Exception errret = null;
-                        Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
+                        //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
+                        // 2016 06 26 si prende da TBL_Config
+                        Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, "mailSettings"); //Stringa da web config
+
                         //    SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);//Protetto in medium trust
                         if (mailvalues != null)
                         {

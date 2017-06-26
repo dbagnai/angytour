@@ -103,12 +103,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
 #if true
         //CON UNA CHIAMATA GetExpressCheckoutDetails col token originale HttpContext.Current.Session["token"]  
         //prendo i dettagli del pagante da memorizzare o utilizzare per le email
-        string user = ConfigurationManager.AppSettings["userPaypal"].ToString();
-        string pwd = ConfigurationManager.AppSettings["pwdPaypal"].ToString();
-        string signature = ConfigurationManager.AppSettings["signaturePaypal"].ToString();
-        bool sandbox = Convert.ToBoolean(ConfigurationManager.AppSettings["sandboxPaypal"]);
-        //string returl = (ConfigurationManager.AppSettings["returlPaypal"].ToString()) + Encodedidordine + "&details=true";  
-        //string cancelurl = (ConfigurationManager.AppSettings["cancelurlPaypal"].ToString()) + Encodedidordine + "&error=true";  + "&error=true";
+        string user = ConfigManagement.ReadKey("userPaypal");
+        string pwd = ConfigManagement.ReadKey("pwdPaypal");
+        string signature = ConfigManagement.ReadKey("signaturePaypal");
+        bool sandbox = Convert.ToBoolean(ConfigManagement.ReadKey("sandboxPaypal"));
+        //string returl = (ConfigManagement.ReadKey("returlPaypal") + Encodedidordine + "&details=true";  
+        //string cancelurl = (ConfigManagement.ReadKey("cancelurlPaypal"))) + Encodedidordine + "&error=true";  + "&error=true";
         NVPAPICaller test = new NVPAPICaller(user, pwd, signature, "", "", sandbox);
         string payerid = "";
         string shipaddress = "";
@@ -118,7 +118,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         string firstname = "";
         string lastname = "";
 
-        bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
+        bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
         if (HttpContext.Current.Session["token"] != null)
         {
             //Chiamo paypal GetExpressCheckoutDetails per avere il payerid e procedere
@@ -190,7 +190,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         //Qui devo scrivere nella tabella ordini
         //i dati qui memorizzati ( TBL_CARRELLO_ORDINI )
-        //bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
+        //bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
         //if (!authandcapturemode)
         //    totali.Pagato = true; //Nel caso di transazione paypal con carta in modalità diretta!! la setto pagata!!!
         totali.Pagato = true;
@@ -310,7 +310,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         totali.Pagato = true;
         //Qui devo scrivere nella tabella ordini
         //i dati qui memorizzati ( TBL_CARRELLO_ORDINI )
-        //bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
+        //bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
         //if (!authandcapturemode)
         //    totali.Pagato = true; //Nel caso di transazione paypal con carta in modalità diretta!! la setto pagata!!!
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);

@@ -202,22 +202,22 @@ public partial class _executetasks : CommonPage
         string UrlSorgente = WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/automotive.it-IT.xml";
 
         ParseXmlFile(Server, UrlSorgente, codicedestinazione
-                          , System.Configuration.ConfigurationManager.AppSettings["Web_Numerocontenuti"].ToString());
+                          , ConfigManagement.ReadKey("Web_Numerocontenuti"));
 
     }
 
     void AggiornaContenutiDaWeb(string UrlSorgente, string codicedestinazione)
     {
         CommonPage.GetContentFromWeb(Server, UrlSorgente, codicedestinazione
-                           , System.Configuration.ConfigurationManager.AppSettings["Web_Numerocontenuti"].ToString());
+                           , ConfigManagement.ReadKey("Web_Numerocontenuti"));
     }
     private void AggiornaContenutiDaWeb()
     {
         //http://www.eoipso.it/rss/comunicati/rss_122.xml //--> rif000061
         //http://www.eoipso.it/rss/rassegnestampa/rss_122.xml //--> rif000060
 
-        AggiornaContenutiDaWeb("http://www.eoipso.it/rss/comunicati/rss_122.xml", System.Configuration.ConfigurationManager.AppSettings["Web_CodiceDestinazioneComunicati"].ToString()); //Comunicati
-        AggiornaContenutiDaWeb("http://www.eoipso.it/rss/rassegnestampa/rss_122.xml", System.Configuration.ConfigurationManager.AppSettings["Web_CodiceDestinazioneRassegna"].ToString()); //Comunicati
+        AggiornaContenutiDaWeb("http://www.eoipso.it/rss/comunicati/rss_122.xml", ConfigManagement.ReadKey("Web_CodiceDestinazioneComunicati")); //Comunicati
+        AggiornaContenutiDaWeb("http://www.eoipso.it/rss/rassegnestampa/rss_122.xml", ConfigManagement.ReadKey("Web_CodiceDestinazioneRassegna")); //Comunicati
     }
 
     /// <summary>

@@ -295,7 +295,7 @@ public class references
                 {
 
                     //bool upd = false;
-                    //bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+                    //bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"), out upd);
 
                     link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     //linklist.Add(link);
@@ -529,29 +529,29 @@ public class references
     {
 
         //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
-        if (ConfigurationManager.AppSettings["Posizione"].ToString() == "Remoto")
+        if (ConfigManagement.ReadKey("Posizione") == "Remoto")
         {
-            WelcomeLibrary.STATIC.Global.PercorsoContenuti = "~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Files";
-            WelcomeLibrary.STATIC.Global.PercorsoComune = "~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common";
+            WelcomeLibrary.STATIC.Global.PercorsoContenuti = "~" + ConfigManagement.ReadKey("DataDir") + "/Files";
+            WelcomeLibrary.STATIC.Global.PercorsoComune = "~" + ConfigManagement.ReadKey("DataDir") + "/Common";
             WelcomeLibrary.STATIC.Global.percorsoFisicoComune = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune);
             WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoContenuti);
         }
         WelcomeLibrary.UF.MemoriaDisco.physiclogdir = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune);
-        WelcomeLibrary.STATIC.Global.percorsoapp = ConfigurationManager.AppSettings["percorsoapp"].ToString();
-        WelcomeLibrary.STATIC.Global.percorsocdn = ConfigurationManager.AppSettings["percorsocdn"].ToString();
-        WelcomeLibrary.STATIC.Global.percorsoimg = ConfigurationManager.AppSettings["percorsoimg"].ToString();
-        WelcomeLibrary.STATIC.Global.percorsoexp = ConfigurationManager.AppSettings["percorsoexp"].ToString();
+        WelcomeLibrary.STATIC.Global.percorsoapp = ConfigManagement.ReadKey("percorsoapp");
+        WelcomeLibrary.STATIC.Global.percorsocdn = ConfigManagement.ReadKey("percorsocdn");
+        WelcomeLibrary.STATIC.Global.percorsoimg = ConfigManagement.ReadKey("percorsoimg");
+        WelcomeLibrary.STATIC.Global.percorsoexp = ConfigManagement.ReadKey("percorsoexp");
         WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = Server.MapPath("~");
-        WelcomeLibrary.STATIC.Global.versionforcache = ConfigurationManager.AppSettings["versionforcache"].ToString();
+        WelcomeLibrary.STATIC.Global.versionforcache = ConfigManagement.ReadKey("versionforcache");
 
         bool upd = false;
-        bool.TryParse(ConfigurationManager.AppSettings["updateTableurlrewriting"], out upd);
+        bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"), out upd);
         WelcomeLibrary.STATIC.Global.UpdateUrl = upd;
         //------------------------------------------------------------------------------------------------
         WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
 
         WelcomeLibrary.STATIC.Global.usecdn = false;
-        string susecdn = ConfigurationManager.AppSettings["usecdn"].ToString();
+        string susecdn = ConfigManagement.ReadKey("usecdn");
         bool tmpcdn = false;
         bool.TryParse(susecdn, out tmpcdn);
         WelcomeLibrary.STATIC.Global.usecdn = tmpcdn;
@@ -588,8 +588,10 @@ public class references
         WelcomeLibrary.UF.Utility.CaricaListaStaticaSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
 
          //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
-         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "tipologie.xml"));
-         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigurationManager.AppSettings["DataDir"].ToString() + "/Common/" + "province.xml"));
+         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
+         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
+
+        WelcomeLibrary.UF.ConfigManagement.LoadConfig();
 
         WelcomeLibrary.UF.ResourceManagement.LoadResources();
 
