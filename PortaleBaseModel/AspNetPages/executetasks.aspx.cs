@@ -373,9 +373,11 @@ public partial class _executetasks : CommonPage
             if (m.Lingua != "I")
                 culturename = "en";
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
-            string value = HttpContext.references.ResMan("Common",Lingua,"TestoUnsubscribe", ci).ToString();
-            //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
-            value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
+            //string value = HttpContext.references.ResMan("Common", m.Lingua,"TestoUnsubscribe", ci).ToString();
+            string value = references.ResMan("Common", m.Lingua, "TestoUnsubscribe");
+
+         //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
+         value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
 
             //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
             if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)

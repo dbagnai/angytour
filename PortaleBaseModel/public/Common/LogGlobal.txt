@@ -83,3 +83,7 @@ Parameter name: key 20/06/2017 13.47.50</Messaggio>
 <Messaggio> Errore aggiornamento in app start: Object reference not set to an instance of an object. 20/06/2017 16.37.40</Messaggio>
  <Data>20/06/2017 16.37.40</Data>
 <Messaggio> Errore aggiornamento in app start: Object reference not set to an instance of an object. 20/06/2017 16.37.40Terminato Aggiornamento  20/06/2017 16.37.40</Messaggio>
+ <Data>26/06/2017 12.36.08</Data>
+<Messaggio> Application start : 26/06/2017 12.36.00</Messaggio>
+ <Data>26/06/2017 12.36.08</Data>
+<Messaggio> Global init original path: http://localhost:52646/AspNetPages/RisultatiProdotti.aspx Global init AbsolutePath : /AspNetPages/RisultatiProdotti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>

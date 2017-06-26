@@ -27,14 +27,23 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         get { return Session["id_cliente"] != null ? (string)(Session["id_cliente"]) : ""; }
         set { Session["id_cliente"] = value; }
     }
-    protected void Page_Load(object sender, EventArgs e)
+   public string Lingua
+   {
+      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : CommonPage.deflanguage; }
+      set { ViewState["Lingua"] = value; }
+   }
+
+   protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             AutoCompleteExtender1.ContextKey = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
             PageGuid = System.Guid.NewGuid().ToString();
             id_cliente = CaricaValoreMaster(Request, Session, "id_cliente", true, "");
-            CaricaOrdini();
+            CommonPage CommonPage = new CommonPage();
+            Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+
+         CaricaOrdini();
         }
     }
 
@@ -44,7 +53,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         if (item == null) return "";
         TotaliCarrello i = (TotaliCarrello)item;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(references.ResMan("Common",Lingua,"txt" + i.Modalitapagamento).ToString());
+        sb.Append(references.ResMan("Common", Lingua,"txt" + i.Modalitapagamento).ToString());
         return sb.ToString();
     }
 

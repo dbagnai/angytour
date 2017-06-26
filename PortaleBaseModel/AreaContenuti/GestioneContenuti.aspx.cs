@@ -586,12 +586,12 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     mail.Tipomailing = (Int32)enumclass.TipoMailing.AvvisoNuovaofferta;
                     mail.NoteInvio = "";
 
-                    mail.SoggettoMail = references.ResMan("Common",Lingua,"oggettoMailInserimentoOfferta").ToString();
-                    mail.TestoMail = references.ResMan("Common",Lingua,"testoMailInserimentoOfferta").ToString() + "<br/>";
+                    mail.SoggettoMail = references.ResMan("Common",mail.Lingua,"oggettoMailInserimentoOfferta");
+                    mail.TestoMail = references.ResMan("Common", mail.Lingua,"testoMailInserimentoOfferta") + "<br/>";
 
                     //Mettiamo anche il link alla pagina specifica dell'offerta appena inserita
                     string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/SchedaContenuto.aspx?Lingua=" + c.Lingua.ToUpper() + "&idContenuto=" + item.Id + "&CodiceContenuto=" + item.CodiceContenuto;
-                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common",Lingua,"TestoLinkAOfferta").ToString() + "<br/>";
+                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", c.Lingua.ToUpper(),"TestoLinkAOfferta").ToString() + "<br/>";
 
                     mDM.InserisciAggiornaMail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, mail); //Inseriamo nel db per l'invio
 
