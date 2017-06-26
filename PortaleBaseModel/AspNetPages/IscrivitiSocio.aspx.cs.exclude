@@ -130,7 +130,7 @@ public partial class _IscrivitiSocio : CommonPage
                 VisualizzaBoolfields("");
                 VisualizzaTblinterventi("");
 
-                litDescrizioneIscrivi.Text = ReplaceAbsoluteLinks(GetGlobalResourceObject("Common", "testoIscrizionesocio").ToString());
+                litDescrizioneIscrivi.Text = ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"testoIscrizionesocio").ToString());
                 EvidenziaSelezione("Iscriviti");
 
             }
@@ -527,7 +527,7 @@ public partial class _IscrivitiSocio : CommonPage
             //ed al cliente della presa in carico della richiesta di iscrizione
             string esitoinvio = InviaMailRichiestaIscrizione(socio);
             if (string.IsNullOrWhiteSpace(esitoinvio))
-                VisualizzaRisposta(GetGlobalResourceObject("Common", "testoRispostaRichiestaIscrizione").ToString());
+                VisualizzaRisposta(references.ResMan("Common",Lingua,"testoRispostaRichiestaIscrizione").ToString());
             else
             {
                 VisualizzaRisposta(esitoinvio);
@@ -566,60 +566,60 @@ public partial class _IscrivitiSocio : CommonPage
             //Dati per la mail
             string nomeaderente = aderente.Cognome_dts + " " + aderente.Nome_dts;
             string Mailaderente = aderente.Emailriservata_dts;
-            string Descrizione = GetGlobalResourceObject("Common", "testoMailAdesione1").ToString() + "<br/><br/>";
+            string Descrizione = references.ResMan("Common",Lingua,"testoMailAdesione1").ToString() + "<br/><br/>";
             Descrizione += "----------------------------------------------------------------------------------<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + aderente.Nome_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto3").ToString() + " " + aderente.Cognome_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto13").ToString() + " " + aderente.Datanascita_dts.ToShortDateString() + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto60").ToString() + " " + aderente.Pivacf_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoS1").ToString() + " " + aderente.Sociopresentatore1_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoS2").ToString() + " " + aderente.Sociopresentatore2_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoEmailp").ToString() + " " + aderente.Email + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoEmailr").ToString() + " " + aderente.Emailriservata_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoSitointernet").ToString() + " " + aderente.Website + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "Fax").ToString() + " " + aderente.Fax + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoTelefonoPriv").ToString() + " " + aderente.Telefonoprivato_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoAnnoL").ToString() + " " + aderente.Annolaurea_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzazioneanno").ToString() + " " + aderente.Annospecializzazione_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzazionealtre").ToString() + " " + aderente.Altrespecializzazioni_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto2").ToString() + " " + aderente.Nome_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto3").ToString() + " " + aderente.Cognome_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto13").ToString() + " " + aderente.Datanascita_dts.ToShortDateString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto60").ToString() + " " + aderente.Pivacf_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoS1").ToString() + " " + aderente.Sociopresentatore1_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoS2").ToString() + " " + aderente.Sociopresentatore2_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoEmailp").ToString() + " " + aderente.Email + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoEmailr").ToString() + " " + aderente.Emailriservata_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoSitointernet").ToString() + " " + aderente.Website + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + aderente.Telefono + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"Fax").ToString() + " " + aderente.Fax + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoTelefonoPriv").ToString() + " " + aderente.Telefonoprivato_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoAnnoL").ToString() + " " + aderente.Annolaurea_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoSpecializzazioneanno").ToString() + " " + aderente.Annospecializzazione_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoSpecializzazionealtre").ToString() + " " + aderente.Altrespecializzazioni_dts + "<br/>";
 
             if (!string.IsNullOrEmpty(aderente.locordine_dts))
             {
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoAlbo1").ToString() + " " + aderente.locordine_dts + "<br/>";
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoAlbo2").ToString() + " " + aderente.niscrordine_dts + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoAlbo1").ToString() + " " + aderente.locordine_dts + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoAlbo2").ToString() + " " + aderente.niscrordine_dts + "<br/>";
             }
             if (!string.IsNullOrEmpty(aderente.annofrequenza_dts))
             {
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi2").ToString() + " " + aderente.annofrequenza_dts + "<br/>";
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi3").ToString() + " " + aderente.nomeuniversita_dts + " ";
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoSpecializzandi4").ToString() + " " + aderente.dettagliuniversita_dts + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoSpecializzandi2").ToString() + " " + aderente.annofrequenza_dts + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoSpecializzandi3").ToString() + " " + aderente.nomeuniversita_dts + " ";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoSpecializzandi4").ToString() + " " + aderente.dettagliuniversita_dts + "<br/>";
             }
 
             Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == aderente.Caratteristica1.ToString(); });
             if (Car1 != null)
-                Descrizione += GetGlobalResourceObject("Common", "FormTestoCategoriaprofessionale").ToString() + " " + Car1.Campo1 + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"FormTestoCategoriaprofessionale").ToString() + " " + Car1.Campo1 + "<br/>";
             string valore = "No";
             if (aderente.SocioIsaps_dts) valore = "Si";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoSocioisaps").ToString() + " " + valore + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormtestoSocioaltra").ToString() + " " + aderente.Socioaltraassociazione_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoSocioisaps").ToString() + " " + valore + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormtestoSocioaltra").ToString() + " " + aderente.Socioaltraassociazione_dts + "<br/>";
             Tabrif Car3 = Utility.Caratteristiche[2].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == aderente.Caratteristica3.ToString(); });
             if (Car3 != null)
-                Descrizione += GetGlobalResourceObject("Common", "TestoCategoriasocio").ToString() + " " + Car3.Campo1 + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"TestoCategoriasocio").ToString() + " " + Car3.Campo1 + "<br/>";
             valore = "No";
 
             //SEZIONE DATI AGGIUNTI
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera1").ToString() + " " + radCarriera1.SelectedItem.Text + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera2").ToString() + " " + txtTextfield1_dts.Text + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera3").ToString() + " " + radCarriera2.SelectedItem.Text + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera3b").ToString() + " " + radCarriera3.SelectedItem.Text + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera4").ToString() + " " + radCarriera4.SelectedItem.Text + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera5").ToString() + " " + radCarriera5.SelectedItem.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera1").ToString() + " " + radCarriera1.SelectedItem.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera2").ToString() + " " + txtTextfield1_dts.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera3").ToString() + " " + radCarriera2.SelectedItem.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera3b").ToString() + " " + radCarriera3.SelectedItem.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera4").ToString() + " " + radCarriera4.SelectedItem.Text + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera5").ToString() + " " + radCarriera5.SelectedItem.Text + "<br/>";
 
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera7").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera7").ToString() + "<br/>";
             //Primo operatore
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera8").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera8").ToString() + "<br/>";
             Descrizione += litIntervento1.Text + ": ";
             Descrizione += radIntervento1op1.SelectedItem.Text + "<br/>";
             Descrizione += litIntervento2.Text + ": ";
@@ -641,7 +641,7 @@ public partial class _IscrivitiSocio : CommonPage
             Descrizione += radIntervento1op9.SelectedItem.Text + "<br/>";
 
             //Secondo operatore
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera9").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera9").ToString() + "<br/>";
             Descrizione += litIntervento1.Text + ": ";
             Descrizione += radIntervento2op1.SelectedItem.Text + "<br/>";
             Descrizione += litIntervento2.Text + ": ";
@@ -662,22 +662,22 @@ public partial class _IscrivitiSocio : CommonPage
             Descrizione += litIntervento9.Text + ": ";
             Descrizione += radIntervento2op9.SelectedItem.Text + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCarriera10").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCarriera10").ToString() + "<br/>";
 
 
             if (aderente.AccettazioneStatuto_dts) valore = "Si";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoAccettazionestatuto").ToString() + " " + valore + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoAccettazionestatuto").ToString() + " " + valore + "<br/>";
             valore = "No";
             if (aderente.Certificazione_dts) valore = "Si";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoCertificazione").ToString() + " " + valore + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoCertificazione").ToString() + " " + valore + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzoposta").ToString() + " " + aderente.Indirizzo + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzofatt").ToString() + " " + aderente.indirizzofatt_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoIndirizzoposta").ToString() + " " + aderente.Indirizzo + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoIndirizzofatt").ToString() + " " + aderente.indirizzofatt_dts + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoRicfatt").ToString() + " " + aderente.ricfatt_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoRicfatt").ToString() + " " + aderente.ricfatt_dts + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo1").ToString() + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione1_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoIndirizzo1").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione1_dts + "<br/>";
             Tabrif nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE1_dts; });
             string nomenazione = aderente.CodiceNAZIONE1_dts;
             if (nazione != null)
@@ -685,18 +685,18 @@ public partial class _IscrivitiSocio : CommonPage
             string nomeregione = NomeRegione(aderente.CodiceREGIONE1_dts, Lingua);
             string nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA1_dts, Lingua);
             string nomecomune = aderente.CodiceCOMUNE1_dts;
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto8").ToString() + " " + nomecomune + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via1_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap1_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono1_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoVia").ToString() + " " + aderente.Via1_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto9").ToString() + " " + aderente.Cap1_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + aderente.Telefono1_dts + "<br/>";
 
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo2").ToString() + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione2_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoIndirizzo2").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione2_dts + "<br/>";
             nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE2_dts; });
             nomenazione = aderente.CodiceNAZIONE2_dts;
             if (nazione != null)
@@ -704,17 +704,17 @@ public partial class _IscrivitiSocio : CommonPage
             nomeregione = NomeRegione(aderente.CodiceREGIONE2_dts, Lingua);
             nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA2_dts, Lingua);
             nomecomune = aderente.CodiceCOMUNE2_dts;
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto8").ToString() + " " + nomecomune + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via2_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap2_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono2_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoVia").ToString() + " " + aderente.Via2_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto9").ToString() + " " + aderente.Cap2_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + aderente.Telefono2_dts + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoIndirizzo3").ToString() + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione3_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoIndirizzo3").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoNomePosizione").ToString() + " " + aderente.Nomeposizione3_dts + "<br/>";
             nazione = Utility.Nazioni.Find(delegate(Tabrif _nz) { return _nz.Lingua == "I" && _nz.Codice == aderente.CodiceNAZIONE3_dts; });
             nomenazione = aderente.CodiceNAZIONE3_dts;
             if (nazione != null)
@@ -722,19 +722,19 @@ public partial class _IscrivitiSocio : CommonPage
             nomeregione = NomeRegione(aderente.CodiceREGIONE3_dts, Lingua);
             nomeprovincia = NomeProvincia(aderente.CodicePROVINCIA3_dts, Lingua);
             nomecomune = aderente.CodiceCOMUNE2_dts;
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + nomenazione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + nomeregione + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + nomecomune + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto5").ToString() + " " + nomenazione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto6").ToString() + " " + nomeregione + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto7").ToString() + " " + nomeprovincia + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto8").ToString() + " " + nomecomune + "<br/>";
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTestoVia").ToString() + " " + aderente.Via3_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + aderente.Cap3_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + aderente.Telefono3_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTestoVia").ToString() + " " + aderente.Via3_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto9").ToString() + " " + aderente.Cap3_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + aderente.Telefono3_dts + "<br/>";
 
 
             Descrizione += "----------------------------------------------------------------------------------<br/><br/>";
 
-            Descrizione += "<br/>" + GetGlobalResourceObject("Common", "TestoCredits").ToString() + "<br/>";
+            Descrizione += "<br/>" + references.ResMan("Common",Lingua,"TestoCredits").ToString() + "<br/>";
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailaderente, nomeaderente);
 

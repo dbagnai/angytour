@@ -220,8 +220,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
         //VISUALIZZIAMO IL TESTO CARICANDOLO OPPORTUNAMENTE
         string htmlPage = "";
-        if (GetGlobalResourceObject("Common", "testo" + TipoContenuto) != null)
-            htmlPage = "<h2>" + GetGlobalResourceObject("Common", "testo" + TipoContenuto).ToString() + "</h2>";
+        if (references.ResMan("Common",Lingua,"testo" + TipoContenuto) != null)
+            htmlPage = "<h2>" + references.ResMan("Common",Lingua,"testo" + TipoContenuto).ToString() + "</h2>";
         string strigaperricerca = Request.Url.AbsolutePath + "?" + Request.QueryString;
         if (strigaperricerca.LastIndexOf("&idOfferta=") != -1)
             strigaperricerca = strigaperricerca.Substring(0, strigaperricerca.LastIndexOf("&idOfferta="));

@@ -78,7 +78,7 @@ public partial class _executetasks : CommonPage
                         ClientiDM cliDM = new ClientiDM();
                         //idCliente
                         cliDM.unsubscribeCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idCliente);
-                        litMainContent.Text = GetGlobalResourceObject("Common", "rispostaUnsubscribe").ToString();
+                        litMainContent.Text = references.ResMan("Common",Lingua,"rispostaUnsubscribe").ToString();
                         break;
                     case "aggiornacontenutiweb":
                         AggiornaContenutiDaWeb();
@@ -373,7 +373,7 @@ public partial class _executetasks : CommonPage
             if (m.Lingua != "I")
                 culturename = "en";
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
-            string value = HttpContext.GetGlobalResourceObject("Common", "TestoUnsubscribe", ci).ToString();
+            string value = HttpContext.references.ResMan("Common",Lingua,"TestoUnsubscribe", ci).ToString();
             //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
             value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
 
@@ -425,10 +425,10 @@ public partial class _executetasks : CommonPage
             string Mailcliente = m.Cliente.Email;
             string Descrizione = m.TestoMail + "<br/><br/>";
             string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/RichiediCard.aspx?Lingua=" + m.Lingua.ToUpper();
-            Descrizione += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + GetGlobalResourceObject("Common", "TitoloRichiedi").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common",Lingua,"TitoloRichiedi").ToString() + "<br/><br/><br/>";
 
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + GetGlobalResourceObject("Common", "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
@@ -472,7 +472,7 @@ public partial class _executetasks : CommonPage
             string Mailcliente = m.Cliente.Email;
             string Descrizione = m.TestoMail + "<br/><br/><br/>";
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + GetGlobalResourceObject("Common", "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
             m.NoteInvio = "Invio eseguito correttamente.";
@@ -515,7 +515,7 @@ public partial class _executetasks : CommonPage
             string Descrizione = m.TestoMail + "<br/><br/>";
 
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + GetGlobalResourceObject("Common", "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
             m.NoteInvio = "Invio eseguito correttamente.";

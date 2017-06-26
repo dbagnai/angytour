@@ -378,7 +378,7 @@ namespace WelcomeLibrary.UF
                         ritorno = testo.Substring(0, invio) + " " + testoAggiunto;
                     else
                         ritorno = testo.Substring(0, caratteri) + " " + testoAggiunto;
-                    // GetGlobalResourceObject("Common", "testoContinua").ToString()
+                    // references.ResMan("Common",Lingua,"testoContinua").ToString()
                 }
             }
             return ritorno;

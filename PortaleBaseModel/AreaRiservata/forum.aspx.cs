@@ -159,8 +159,8 @@ public partial class AreaRiservata_Default : CommonPage
             litNomePagina.Text = titolopagina;
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + Tipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Tipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
         }
     }

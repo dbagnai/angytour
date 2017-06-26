@@ -31,7 +31,7 @@ public partial class AspNetPages_PagamentoResponse : CommonPage
          if (esito == "true")
              output.Text = "Pagamento correttamente avvenuto. Correctly payed";
          else
-             output.Text = GetGlobalResourceObject("Common", "risposta_4").ToString() + "<br/>";
+             output.Text = references.ResMan("Common",Lingua,"risposta_4").ToString() + "<br/>";
 
          //Prendiamo i dati dalla querystring
          Lingua = CaricaValoreMaster(Request, Session, "Lingua",false,deflanguage);

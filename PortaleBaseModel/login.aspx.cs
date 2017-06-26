@@ -134,29 +134,29 @@ public partial class login : CommonPage
                         string Mailcliente = Details.Emailriservata_dts;
                         string Descrizione = "<br/>";
 
-                        Descrizione += GetGlobalResourceObject("Common", "forgetResponse1").ToString() + "<br/><br/>";
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + Details.Nome_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto3").ToString() + " " + Details.Cognome_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto4").ToString() + " " + Details.Emailriservata_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        Descrizione += GetGlobalResourceObject("Common", "FormTestoPass").ToString() + " " + newpassword + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"forgetResponse1").ToString() + "<br/><br/>";
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto2").ToString() + " " + Details.Nome_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto3").ToString() + " " + Details.Cognome_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto4").ToString() + " " + Details.Emailriservata_dts + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTestoPass").ToString() + " " + newpassword + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
                         ////Province p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate(Province _p) { return _p.Codice == cliente.CodiceREGIONE; });
                         ////if (p != null)
-                        ////    Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        ////    Descrizione += references.ResMan("Common",Lingua,"FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
                         ////p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate(Province _p) { return _p.Codice == cliente.CodicePROVINCIA; });
                         ////if (p != null)
-                        ////    Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + p.Provincia + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        ////    Descrizione += references.ResMan("Common",Lingua,"FormTesto7").ToString() + " " + p.Provincia + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
                         ////Comune c = WelcomeLibrary.UF.Utility.ElencoComuni.Find(delegate(Comune _p) { return _p.Nome.ToLower() == cliente.CodiceCOMUNE.ToLower(); });
                         //if (c != null)
-                        //    Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //    Descrizione += references.ResMan("Common",Lingua,"FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
-                        //Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        //Descrizione += GetGlobalResourceObject("Common", "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        //Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        //Descrizione += GetGlobalResourceObject("Common", "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                        //Descrizione += GetGlobalResourceObject("Common", "FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //Descrizione += references.ResMan("Common",Lingua,"FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //Descrizione += references.ResMan("Common",Lingua,"FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //Descrizione += references.ResMan("Common",Lingua,"FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        //Descrizione += references.ResMan("Common",Lingua,"FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
-                        //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + GetGlobalResourceObject("Common", "testoLinkValidazioneAttivazione").ToString() + "<br/>";
+                        //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + references.ResMan("Common",Lingua,"testoLinkValidazioneAttivazione").ToString() + "<br/>";
                         Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
                         output.Text = references.ResMan("Common",Lingua, "forgetResponse2");
                     }
@@ -209,31 +209,31 @@ public partial class login : CommonPage
                     string Mailcliente = cliente.Email;
                     string Descrizione = "<br/>";
 
-                    Descrizione += GetGlobalResourceObject("Common", "forgetResponse1").ToString() + "<br/><br/>";
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTestoPass").ToString() + " " + newpassword + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"forgetResponse1").ToString() + "<br/><br/>";
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTestoPass").ToString() + " " + newpassword + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
                     Province p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate(Province _p) { return _p.Codice == cliente.CodiceREGIONE; });
                     if (p != null)
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
                     p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate(Province _p) { return _p.Codice == cliente.CodicePROVINCIA; });
                     if (p != null)
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto7").ToString() + " " + p.Provincia + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto7").ToString() + " " + p.Provincia + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
                     Comune c = WelcomeLibrary.UF.Utility.ElencoComuni.Find(delegate(Comune _p) { return _p.Nome.ToLower() == cliente.CodiceCOMUNE.ToLower(); });
                     if (c != null)
-                        Descrizione += GetGlobalResourceObject("Common", "FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                        Descrizione += references.ResMan("Common",Lingua,"FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-                    Descrizione += GetGlobalResourceObject("Common", "FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+                    Descrizione += references.ResMan("Common",Lingua,"FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
 
-                    //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + GetGlobalResourceObject("Common", "testoLinkValidazioneAttivazione").ToString() + "<br/>";
+                    //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + references.ResMan("Common",Lingua,"testoLinkValidazioneAttivazione").ToString() + "<br/>";
                     Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
                     output.Text = references.ResMan("Common",Lingua, "forgetResponse2");
 

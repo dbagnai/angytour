@@ -643,11 +643,11 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         string categoria = Categoria;
         string categoria2liv = Categoria2liv;
 
-        //btnNexth.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
-        //btnPrevh.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+        //btnNexth.Text = references.ResMan("Common",Lingua,"txtTastoNext").ToString();
+        //btnPrevh.Text = references.ResMan("Common",Lingua,"txtTastoPrev").ToString();
 
-        //btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
-        //btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+        //btnNext.Text = references.ResMan("Common",Lingua,"txtTastoNext").ToString();
+        //btnPrev.Text = references.ResMan("Common",Lingua,"txtTastoPrev").ToString();
 
         //InizializzaEtichette();
         #region Versione con db ACCESS
@@ -783,10 +783,10 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             }
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + Tipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Tipologia).ToString();
-            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
 
             string strigaperricerca = "";
             Contenuti content = null;
@@ -1067,7 +1067,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 

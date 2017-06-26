@@ -203,8 +203,8 @@ public partial class index : CommonPage
     private void SettaTestoIniziale(string sezione)
     {
         string htmlPage = "";
-        if (GetGlobalResourceObject("Common", "Content" + sezione) != null)
-            htmlPage = ReplaceLinks(GetGlobalResourceObject("Common", "Content" + sezione).ToString());
+        if (references.ResMan("Common",Lingua,"Content" + sezione) != null)
+            htmlPage = ReplaceLinks(references.ResMan("Common",Lingua,"Content" + sezione).ToString());
         litTextHeadPage.Text = htmlPage;
         string strigaperricerca = sezione;
         //strigaperricerca = Request.Url.AbsolutePath;

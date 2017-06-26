@@ -80,9 +80,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             pathassoluto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
             if (string.IsNullOrWhiteSpace(metaTitle.Text))
-                metaTitle.Text += GetGlobalResourceObject("Common", "titleMain").ToString().Replace("<br/>", " ").Trim();
+                metaTitle.Text += references.ResMan("Common",Lingua,"titleMain").ToString().Replace("<br/>", " ").Trim();
             if (string.IsNullOrWhiteSpace(metaDesc.Content))
-                metaDesc.Content += GetGlobalResourceObject("Common", "descMain").ToString().Replace("<br/>", " ").Trim();
+                metaDesc.Content += references.ResMan("Common",Lingua,"descMain").ToString().Replace("<br/>", " ").Trim();
             //Prendiamo i dati dalla querystring
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
@@ -334,7 +334,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session, "link1", false, qstring));
 
@@ -351,7 +351,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == codicetipologia && tmp.CodiceProdotto == codicecategoria)); });
         if (catselected != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologiaCategoria(codicetipologia, codicecategoria, Lingua, Session, "link1", false));
             if (solotitolo)
@@ -548,8 +548,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         if (litTextHeadPage.Text == "")
         {
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "Content" + sezione) != null)
-                htmlPage = CommonPage.ReplaceLinks(GetGlobalResourceObject("Common", "Content" + sezione).ToString());
+            if (references.ResMan("Common",Lingua,"Content" + sezione) != null)
+                htmlPage = CommonPage.ReplaceLinks(references.ResMan("Common",Lingua,"Content" + sezione).ToString());
             litTextHeadPage.Text = htmlPage;
             string strigaperricerca = sezione;
             //strigaperricerca = Request.Url.AbsolutePath;

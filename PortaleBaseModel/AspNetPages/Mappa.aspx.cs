@@ -77,7 +77,7 @@ public partial class AspNetPages_Mappa : CommonPage
 
     protected void InzializzaTestoPagina()
     {
-        string tmp = GetGlobalResourceObject("Common", "Testo" + ContenutoPagina).ToString();
+        string tmp = references.ResMan("Common",Lingua,"Testo" + ContenutoPagina).ToString();
         try
         {
             tmp = tmp.Substring(0, tmp.IndexOf("</font>")) + tmp.Substring(tmp.IndexOf("</font>")).ToLower();

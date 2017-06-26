@@ -1239,10 +1239,12 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             if (m.Lingua != "I")
                 culturename = "en";
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
-            string value = HttpContext.GetGlobalResourceObject("CommonBase", "TestoUnsubscribe", ci).ToString();
+         //string value = HttpContext.GetGlobalResourceObject("CommonBase", "TestoUnsubscribe", ci).ToString();
+         
+         string value = references.ResMan("CommonBase", m.Lingua,"TestoUnsubscribe");
 
-            //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
-            if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
+         //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
+         if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
                 Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
             else
                 Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";

@@ -432,8 +432,8 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     }
     private void AssociaDati()
     {
-        //btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
-        //btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+        //btnNext.Text = references.ResMan("Common",Lingua,"txtTastoNext").ToString();
+        //btnPrev.Text = references.ResMan("Common",Lingua,"txtTastoPrev").ToString();
 
         //Eseguiamo la ricerca richiesta
         //Prendiamo la lista completa delle offerte con tutti dati relativi
@@ -454,11 +454,11 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string caratteristica5 = Caratteristica5;
         string ordinamento = Ordinamento;
 
-        //btnNexth.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
-        //btnPrevh.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+        //btnNexth.Text = references.ResMan("Common",Lingua,"txtTastoNext").ToString();
+        //btnPrevh.Text = references.ResMan("Common",Lingua,"txtTastoPrev").ToString();
 
-        //btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNext").ToString();
-        //btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrev").ToString();
+        //btnNext.Text = references.ResMan("Common",Lingua,"txtTastoNext").ToString();
+        //btnPrev.Text = references.ResMan("Common",Lingua,"txtTastoPrev").ToString();
 
         //InizializzaEtichette();
 
@@ -706,10 +706,10 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             }
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + Tipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Tipologia).ToString();
-            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
             string strigaperricerca = ""; //Request.Url.AbsolutePath
             if (!string.IsNullOrEmpty(Categoria))
                 strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
@@ -868,7 +868,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 

@@ -805,7 +805,7 @@
                                 <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 5px;">
                                     <div class="headline pull-left">
                                         <h2>
-                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>--%>
+                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
                                             <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua, "titoloCollegati"): references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>
                                     </div>
@@ -1116,7 +1116,7 @@
                                 <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
                                     <div class="pull-left lead">
                                         <h2 style="margin-bottom:3px">
-                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  GetGlobalResourceObject("Common", "titoloCollegati").ToString(): GetGlobalResourceObject("Common", "titoloCatalogoConsigliati").ToString() %>--%>
+                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
                                             <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>
                                     </div>

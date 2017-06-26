@@ -142,7 +142,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                     string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                     string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                    output.Text = GetGlobalResourceObject("Common", "risposta_7").ToString() + " Error" + errcode + "<br/>";
+                    output.Text = references.ResMan("Common",Lingua,"risposta_7").ToString() + " Error" + errcode + "<br/>";
                     output.Text += desc + "<br/>";
                     output.Text += desc2 + "<br/>";
                 }
@@ -155,7 +155,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                 string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                 string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                output.Text = GetGlobalResourceObject("Common", "risposta_6").ToString() + " Error" + errcode + "<br/>";
+                output.Text = references.ResMan("Common",Lingua,"risposta_6").ToString() + " Error" + errcode + "<br/>";
                 output.Text += desc + "<br/>";
                 output.Text += desc2 + "<br/>";
             }
@@ -415,7 +415,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<tr><td><br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €";
         TestoMail += "<br/><br/>TOTALE COMPLESSIVO: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-        TestoMail += "<tr><td><br/>MODALITA' DI PAGAMENTO: " + GetGlobalResourceObject("Common", "chk" + totali.Modalitapagamento).ToString();
+        TestoMail += "<tr><td><br/>MODALITA' DI PAGAMENTO: " + references.ResMan("Common",Lingua,"chk" + totali.Modalitapagamento).ToString();
 
         //chiudo tabella e riga relativa
         TestoMail += "</td></tr></table></td><tr/>";
@@ -436,7 +436,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail = "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"600\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
         TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
         //Testo mail
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/> " + GetGlobalResourceObject("Common", "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
+        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/> " + references.ResMan("Common",Lingua,"OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
         TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> :" + "<br/>";
 
         TestoMail += "<br/>Fatturazione : <br/> ";
@@ -489,17 +489,17 @@ public partial class AspNetPages_OrdineOk : CommonPage
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<tr><td><br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
         TestoMail += "Totale ordine: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-        TestoMail += "<tr><td><br/>Metodo di pagamento: " + GetGlobalResourceObject("Common", "chk" + totali.Modalitapagamento).ToString();
+        TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common",Lingua,"chk" + totali.Modalitapagamento).ToString();
 
         //chiudo tabella e riga relativa
         TestoMail += "</td></tr></table></td><tr/>";
 
         //testo di chiusura
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + GetGlobalResourceObject("Common", "TestoConfermaOrdine").ToString();
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + GetGlobalResourceObject("Common", "TestoSaluti").ToString() + "<br/>" + GetGlobalResourceObject("Common", "TestoHomeIndex").ToString() + "</td></td> <br/><br/><br/>";
+        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + references.ResMan("Common",Lingua,"TestoConfermaOrdine").ToString();
+        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + references.ResMan("Common",Lingua,"TestoSaluti").ToString() + "<br/>" + references.ResMan("Common",Lingua,"TestoHomeIndex").ToString() + "</td></td> <br/><br/><br/>";
 
         //Inserisco il footer con i dati
-        TestoMail += "<tr><td style='text-align:center; font-family:Calibri; font-size:14px; color:#252626;'><br/><br/>" + GetGlobalResourceObject("Common", "txtFooter").ToString();
+        TestoMail += "<tr><td style='text-align:center; font-family:Calibri; font-size:14px; color:#252626;'><br/><br/>" + references.ResMan("Common",Lingua,"txtFooter").ToString();
 
         TestoMail += "</td></tr></table></div>";
 

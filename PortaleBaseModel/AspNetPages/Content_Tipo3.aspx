@@ -356,7 +356,7 @@
                             </div>
                             <div style="margin-left: 10px; font-size: 14px;">
                                 <input id="Button1" style="box-shadow: none"
-                                    type="button" value="<%= GetGlobalResourceObject("Common","GoogleCalcolapercorso").ToString() %>" onclick="return Button1_onclick()" />
+                                    type="button" value="<%= references.ResMan("Common",Lingua,"GoogleCalcolapercorso").ToString() %>" onclick="return Button1_onclick()" />
                             </div>
                         </div>
                         <div id="directionpanel" style="height: auto; width: 96%; padding-bottom: 10px">

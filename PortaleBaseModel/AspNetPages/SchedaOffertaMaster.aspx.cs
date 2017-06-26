@@ -193,10 +193,10 @@ public partial class _SchedaOffertaMaster : CommonPage
             //}
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + CodiceTipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + CodiceTipologia).ToString();
-            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + CodiceTipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + CodiceTipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
 
             string strigaperricerca = "";
 #if false
@@ -1377,7 +1377,7 @@ public partial class _SchedaOffertaMaster : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 

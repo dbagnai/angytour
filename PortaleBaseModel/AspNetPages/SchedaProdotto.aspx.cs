@@ -231,10 +231,10 @@ public partial class _SchedaProdotto : CommonPage
             //  litSezione.Text = references.ResMan("Common",Lingua,"testoUsato");
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + CodiceTipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + CodiceTipologia).ToString();
-            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + CodiceTipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + CodiceTipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
 
             string strigaperricerca = "";
             strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
@@ -994,7 +994,7 @@ public partial class _SchedaProdotto : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + GetGlobalResourceObject("Common", "testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 
@@ -1124,7 +1124,7 @@ public partial class _SchedaProdotto : CommonPage
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
-        //((Literal)Master.FindControl("litProdottiCarrello")).Text = nprodotti.ToString() + GetGlobalResourceObject("CommonBase", "testoCarrello1").ToString();
+        //((Literal)Master.FindControl("litProdottiCarrello")).Text = nprodotti.ToString() + references.ResMan("CommonBase",Lingua,"testoCarrello1").ToString();
         //AssociaDati();
 
     }

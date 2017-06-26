@@ -975,12 +975,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     mail.Tipomailing = (Int32)enumclass.TipoMailing.AvvisoInserimentoStruttura;
                     mail.NoteInvio = "";
 
-                    mail.SoggettoMail = GetGlobalResourceObject("Common", "oggettoMailInserimentoStruttura").ToString();
-                    mail.TestoMail = GetGlobalResourceObject("Common", "testoMailInserimentoStruttura").ToString() + "<br/>";
+                    mail.SoggettoMail = references.ResMan("Common",Lingua,"oggettoMailInserimentoStruttura").ToString();
+                    mail.TestoMail = references.ResMan("Common",Lingua,"testoMailInserimentoStruttura").ToString() + "<br/>";
 
                     //Mettiamo anche il link alla pagina specifica della struttura appena inserita
                     string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/SchedaOfferta.aspx?Lingua=" + c.Lingua.ToUpper() + "&idOfferta=" + item.Id + "&CodiceTipologia=" + item.CodiceTipologia; //idOfferta=38&CodiceTipologia=rif000002&Lingua=I
-                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + GetGlobalResourceObject("Common", "TestoLinkAStruttura").ToString() + "<br/>";
+                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common",Lingua,"TestoLinkAStruttura").ToString() + "<br/>";
 
                     mDM.InserisciAggiornaMail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, mail); //Inseriamo nel db per l'invio
 

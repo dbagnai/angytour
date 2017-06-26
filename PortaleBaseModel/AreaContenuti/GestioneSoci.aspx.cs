@@ -1964,7 +1964,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
 
-                Descrizione += GetGlobalResourceObject("Common", "testoCredits").ToString() + "<br/>";
+                Descrizione += references.ResMan("Common",Lingua,"testoCredits").ToString() + "<br/>";
                 Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Email, Nome);
             }
             catch (Exception err)
@@ -1995,10 +1995,10 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 Descrizione = references.ResMan("Specific",Lingua,"testoArchivioOn") + "<br/>";
             }
 
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto2").ToString() + " " + socio.Nome_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto3").ToString() + " " + socio.Cognome_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "FormTesto4").ToString() + " " + socio.Emailriservata_dts + "<br/>";
-            Descrizione += GetGlobalResourceObject("Common", "testoCredits").ToString() + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto2").ToString() + " " + socio.Nome_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto3").ToString() + " " + socio.Cognome_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"FormTesto4").ToString() + " " + socio.Emailriservata_dts + "<br/>";
+            Descrizione += references.ResMan("Common",Lingua,"testoCredits").ToString() + "<br/>";
 
 #if false//DEBUG!!!!! TOGLIERE PRIMA DI ONLINE!!!!!  MANDA TUTTE LE EMAIL AL GESTORE E NON AL SOCIO
             Mailaderente = Email;

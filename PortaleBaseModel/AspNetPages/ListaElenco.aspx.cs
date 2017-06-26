@@ -174,7 +174,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            ret += " " + GetGlobalResourceObject("Common", "testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
+            ret += " " + references.ResMan("Common",Lingua,"testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
         }
         return ret;
     }
@@ -290,8 +290,8 @@ public partial class AspNetPages_ListaElenco : CommonPage
         //filtrandoli in base ai parametri richiesti
         OfferteCollection offerte = new OfferteCollection();
         string tipologia = Tipologia;
-        btnNext.Text = GetGlobalResourceObject("Common", "txtTastoNextPartners").ToString();
-        btnPrev.Text = GetGlobalResourceObject("Common", "txtTastoPrevPartners").ToString();
+        btnNext.Text = references.ResMan("Common",Lingua,"txtTastoNextPartners").ToString();
+        btnPrev.Text = references.ResMan("Common",Lingua,"txtTastoPrevPartners").ToString();
 
         //InizializzaEtichette();
         #region Versione con db ACCESS
@@ -603,11 +603,11 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
 
             string htmlPage = "";
-            if (GetGlobalResourceObject("Common", "testo" + Tipologia) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Tipologia).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
 
-            if (GetGlobalResourceObject("Common", "testo" + Categoria) != null)
-                htmlPage = GetGlobalResourceObject("Common", "testo" + Categoria).ToString();
+            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
             string strigaperricerca = ""; //Request.Url.AbsolutePath
             if (!string.IsNullOrEmpty(Categoria))
                 strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath

@@ -1,12 +1,12 @@
 
 
 //Queste variabili le inietto dal codebehind
-//var GooglePosizione1 = '<%= GetGlobalResourceObject("Common",  "GooglePosizione1" ).ToString()  %>';
-//var googleurl1 = '<%= GetGlobalResourceObject("Common",  "GoogleUrl1" ).ToString()  %>';
-//var googlepin1 = '<%= GetGlobalResourceObject("Common",  "GooglePin1" ).ToString()  %>';
-//var GooglePosizione2 = '<%= GetGlobalResourceObject("Common",  "GooglePosizione2" ).ToString()  %>';
-//var googleurl2 = '<%= GetGlobalResourceObject("Common",  "GoogleUrl2" ).ToString()  %>';
-//var googlepin2 = '<%= GetGlobalResourceObject("Common",  "GooglePin2" ).ToString()  %>';
+//var GooglePosizione1 = '<%= references.ResMan("Common",Lingua, "GooglePosizione1" ).ToString()  %>';
+//var googleurl1 = '<%= references.ResMan("Common",Lingua, "GoogleUrl1" ).ToString()  %>';
+//var googlepin1 = '<%= references.ResMan("Common",Lingua, "GooglePin1" ).ToString()  %>';
+//var GooglePosizione2 = '<%= references.ResMan("Common",Lingua, "GooglePosizione2" ).ToString()  %>';
+//var googleurl2 = '<%= references.ResMan("Common",Lingua, "GoogleUrl2" ).ToString()  %>';
+//var googlepin2 = '<%= references.ResMan("Common",Lingua, "GooglePin2" ).ToString()  %>';
 
 var googleposlat1 = "";
 var googleposlng1 = "";

@@ -169,7 +169,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
     private void InizializzaSeo()
     {
-        string testourlpagina = GetGlobalResourceObject("Common", "testoidUrl" + idContenuto).ToString();
+        string testourlpagina = references.ResMan("Common",Lingua,"testoidUrl" + idContenuto).ToString();
 
         string linkcanonico = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testourlpagina), idContenuto, "con001000");
         // string linkcanonico = "~/Informazioni/" + Lingua + "/" + ContenutoPagina + "/" + CaricaValoreMaster(Request, Session, "testoindice"); ;
@@ -424,7 +424,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         /////////////////////////////////////////////////////
         if (!string.IsNullOrEmpty(ContenutoPagina))
         {
-            string tmp = GetGlobalResourceObject("Common", "Testo" + ContenutoPagina).ToString();
+            string tmp = references.ResMan("Common",Lingua,"Testo" + ContenutoPagina).ToString();
             litNomeContenuti.Text = tmp;
             litMainContent.Text = ReplaceAbsoluteLinks(ReplaceLinks(GetLocalResourceObject("Testo" + ContenutoPagina).ToString()));
             //Titolo e descrizione pagina
@@ -497,9 +497,9 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             else
             {
                 if (invio != -1)
-                    ritorno = testo.Substring(0, invio) + "..." + GetGlobalResourceObject("Common", "testoContinua").ToString();
+                    ritorno = testo.Substring(0, invio) + "..." + references.ResMan("Common",Lingua,"testoContinua").ToString();
                 else
-                    ritorno = testo.Substring(0, caratteri) + "..." + GetGlobalResourceObject("Common", "testoContinua").ToString();
+                    ritorno = testo.Substring(0, caratteri) + "..." + references.ResMan("Common",Lingua,"testoContinua").ToString();
             }
         }
         return ritorno;

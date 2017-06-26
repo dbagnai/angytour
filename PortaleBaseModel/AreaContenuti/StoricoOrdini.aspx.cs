@@ -44,7 +44,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         if (item == null) return "";
         TotaliCarrello i = (TotaliCarrello)item;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(GetGlobalResourceObject("Common", "txt" + i.Modalitapagamento).ToString());
+        sb.Append(references.ResMan("Common",Lingua,"txt" + i.Modalitapagamento).ToString());
         return sb.ToString();
     }
 
@@ -70,9 +70,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         sb.Append("\">");
 
         if (!i.Pagato)
-            sb.Append(GetGlobalResourceObject("Common", "txtOrdinenonpagato").ToString());
+            sb.Append(references.ResMan("Common",Lingua,"txtOrdinenonpagato").ToString());
         else
-            sb.Append(GetGlobalResourceObject("Common", "txtOrdinepagato").ToString());
+            sb.Append(references.ResMan("Common",Lingua,"txtOrdinepagato").ToString());
         //    txtOrdineannullato
 
         sb.Append("</span>");
