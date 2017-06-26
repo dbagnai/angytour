@@ -394,31 +394,31 @@ public class references
       return dict;
     }
 
-   // da far vedere a daniele
-   public static Dictionary<string, Dictionary<string, string>> GetResourcesByLinguaOld(string lingua = "I")
-   {
-      System.Globalization.CultureInfo ci = setCulture(lingua);
-      Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
-      //Ricerca con ResourceManager creando un metodo che trova tutti i link che contengono
-      //le tipologie in questione
-      System.Resources.ResourceSet rset2 = Resources.Basetext.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
-      //System.Resources.ResourceSet rset2 = references.ResMan("BaseText", Lingua, sourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
-      // Create an IDictionaryEnumerator to read the data in the ResourceSet.
-      System.Collections.IDictionaryEnumerator id2 = rset2.GetEnumerator();
-      // Iterate through the ResourceSet and display the contents to the console. 
+   // da far vedere a daniele commentata sennò senza file risorse non compila
+   //public static Dictionary<string, Dictionary<string, string>> GetResourcesByLinguaOld(string lingua = "I")
+   //{
+   //   System.Globalization.CultureInfo ci = setCulture(lingua);
+   //   Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
+   //   //Ricerca con ResourceManager creando un metodo che trova tutti i link che contengono
+   //   //le tipologie in questione
+   //   System.Resources.ResourceSet rset2 = Resources.Basetext.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
+   //   //System.Resources.ResourceSet rset2 = references.ResMan("BaseText", Lingua, sourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
+   //   // Create an IDictionaryEnumerator to read the data in the ResourceSet.
+   //   System.Collections.IDictionaryEnumerator id2 = rset2.GetEnumerator();
+   //   // Iterate through the ResourceSet and display the contents to the console. 
 
-      while (id2.MoveNext())
-      {
-         if (!dict.ContainsKey(lingua))
-            dict.Add(lingua, new Dictionary<string, string>());
-         if (!dict[lingua].ContainsKey(id2.Key.ToString()))
-         {
-            dict[lingua].Add(id2.Key.ToString(), HttpContext.GetGlobalResourceObject("Basetext", id2.Key.ToString(), ci).ToString());
-         }
-      }
-      id2.Reset();
-      return dict;
-   }
+   //   while (id2.MoveNext())
+   //   {
+   //      if (!dict.ContainsKey(lingua))
+   //         dict.Add(lingua, new Dictionary<string, string>());
+   //      if (!dict[lingua].ContainsKey(id2.Key.ToString()))
+   //      {
+   //         dict[lingua].Add(id2.Key.ToString(), HttpContext.GetGlobalResourceObject("Basetext", id2.Key.ToString(), ci).ToString());
+   //      }
+   //   }
+   //   id2.Reset();
+   //   return dict;
+   //}
 
    public static void CreaSitemapImmobili(HttpServerUtility Server, string tipologia)
     {
