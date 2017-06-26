@@ -32,8 +32,8 @@
         <h1 class="pull-left">Login</h1>
         <p></p>
         <ul class="pull-right breadcrumb">
-            <li><a href="<%$ Resources:Common, LinkHome %>" runat="server">
-                <asp:Literal Text="<%$ Resources:Common, testoHome %>" runat="server" /></a></li>
+            <li><a href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' runat="server">
+                <asp:Literal Text='<%# references.ResMan("Common",Lingua,"testoHome") %>' runat="server" /></a></li>
             <li class="active">da creare link pagina</li>
         </ul>
     </div>
@@ -181,16 +181,16 @@
                 <div class="form-horizontal">
                     <div class="form-group">
                         <h3>
-                            <asp:Literal ID="Literal11" runat="server" Text="<%$ Resources:Common, testoLoginNew %>" /></h3>
+                            <asp:Literal ID="Literal11" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNew") %>' /></h3>
                         <hr>
                         <div class="form-group">
-                            <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources:Common, testoLoginNewExplain %>" />
+                            <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNewExplain") %>' />
                         </div>
                         <div class="form-group">
 
                             <a href="<%$ Resources:Common,LinkIscrivitisocio %>" class="btn btn-block btn-primary"
                                 runat="server" id="btnIscriviti">
-                                <asp:Literal ID="Literal2" runat="server" Text="<%$ Resources:Common, testoLoginNewCreateSocio %>" /></a>
+                                <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNewCreateSocio" %>' /></a>
                         </div>
                     </div>
                 </div>--%>

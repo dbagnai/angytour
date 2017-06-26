@@ -800,7 +800,7 @@
                                         <td>
                                             <div>
                                                 <h2>
-                                                    <asp:Label runat="server" ID="TitleProdotti" Text='<%$ Resources:Common,TitleProdottiGest %>'></asp:Label></h2>
+                                                    <asp:Label runat="server" ID="TitleProdotti" Text='<%# references.ResMan("Common",Lingua,"TitleProdottiGest") %>'></asp:Label></h2>
                                             </div>
                                             <table cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -868,7 +868,7 @@
                                             <div style="margin-left: 50px; border-left: 1px solid #000000; padding-left: 10px;">
                                                 <div>
                                                     <h2>
-                                                        <asp:Label runat="server" ID="TitleSottoprodotti" Text='<%$ Resources:Common,TitleSottProdottiGest %>'></asp:Label></h2>
+                                                        <asp:Label runat="server" ID="TitleSottoprodotti" Text='<%# references.ResMan("Common",Lingua,"TitleSottProdottiGest") %>'></asp:Label></h2>
                                                 </div>
                                                 <table>
                                                     <tr>

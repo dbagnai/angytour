@@ -569,12 +569,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     {
         ClientScriptManager cs = Page.ClientScript;
 
-        String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", Resources.Common.GooglePosizione1);
-        scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", Resources.Common.GoogleUrl1);
-        scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", Resources.Common.GooglePin1);
-        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", Resources.Common.GoogleUrl2);
-        scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", Resources.Common.GoogleUrl2);
-        scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", Resources.Common.GooglePin2);
+        String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common",Lingua, "GooglePosizione1"));
+        scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", references.ResMan("Common",Lingua, "GoogleUrl1"));
+        scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", references.ResMan("Common",Lingua, "GooglePin1"));
+        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common",Lingua, "GoogleUrl2"));
+        scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", references.ResMan("Common",Lingua, "GoogleUrl2"));
+        scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", references.ResMan("Common",Lingua, "GooglePin2"));
         scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");
         scriptRegVariables += "; " + string.Format("var idmapcontainer1 = 'map1'");
         scriptRegVariables += "; " + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
@@ -638,12 +638,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 stat.Url = "";
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&conversione=true");
 
             }
             else
             {
-                outputContact.Text = Resources.Common.txtPrivacyError.ToString();
+                outputContact.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -651,7 +651,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-            outputContact.Text += Resources.Common.txtMailError.ToString();
+            outputContact.Text += references.ResMan("Common",Lingua, "txtMailError");
         }
     }
 
@@ -871,7 +871,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     string prezzolistino = "";
                     if (_o.PrezzoListino != 0)
                         prezzolistino = "<span style=\"text-decoration: line-through;font-size:0.9em;color:#aaa;padding-left:10px;padding-right:10px\">" + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.PrezzoListino) + "</span>";
-                    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + Resources.Common.TitoloPrezzo + " "
+                    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + references.ResMan("Common",Lingua,"TitoloPrezzo + " "
                         + prezzolistino
                         + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo) + "</div>");
                     sb.Append("<br/>\r\n");
@@ -1158,7 +1158,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append(titolo2);
                 if (_o.Prezzo != 0)
                 {
-                    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + Resources.Common.TitoloPrezzo + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo) + "</div>");
+                    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + references.ResMan("Common",Lingua, "TitoloPrezzo") + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo) + "</div>");
                 }
                 sb.Append("         </div>\r\n");
                 sb.Append("     </div>\r\n");
@@ -1242,7 +1242,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //sb.Append(titolo2);
                 //if (_o.Prezzo != 0)
                 //{
-                //    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + Resources.Common.TitoloPrezzo + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:0.00}", _o.Prezzo) + "</div>");
+                //    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + references.ResMan("Common",Lingua,"TitoloPrezzo + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:0.00}", _o.Prezzo) + "</div>");
                 //}
                 //sb.Append("         </div>\r\n");
                 //sb.Append("     </div>\r\n");
@@ -1255,7 +1255,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     sb.Append("<br/>\r\n");
                     string prezzolistino = "";
 
-                    sb.Append("<div style=\"font-weight:500;font-size:1.4em\">" + Resources.Common.TitoloPrezzo + "<br/> "
+                    sb.Append("<div style=\"font-weight:500;font-size:1.4em\">" + references.ResMan("Common",Lingua, "TitoloPrezzo") + "<br/> "
                         + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo) + "</div>");
                     if (_o.PrezzoListino != 0)
                         prezzolistino = "<span style=\"text-decoration: line-through;font-size:0.9em;color:#aaa;padding-rigth:10px\">" + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.PrezzoListino) + "</span>" + "<br/> ";
@@ -1349,7 +1349,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //sb.Append(titolo2);
                 //if (_o.Prezzo != 0)
                 //{
-                //    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + Resources.Common.TitoloPrezzo + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:0.00}", _o.Prezzo) + "</div>");
+                //    sb.Append("<div style=\"font-weight:500;font-size:1.2em\">" + references.ResMan("Common",Lingua,"TitoloPrezzo + ": " + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:0.00}", _o.Prezzo) + "</div>");
                 //}
                 //sb.Append("         </div>\r\n");
                 //sb.Append("     </div>\r\n");
@@ -1394,7 +1394,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //sb.Append("<br/>\r\n");
                 //sb.Append("   <div  style=\"border-top:1px solid #ccc;margin-top:0px\"></div>\r\n");
 
-                //sb.Append("<div class=\"pull-right\" style=\"font-weight:500\">" + Resources.Common.TestoTooltipElenco + "</div>\r\n");
+                //sb.Append("<div class=\"pull-right\" style=\"font-weight:500\">" + references.ResMan("Common",Lingua,"TestoTooltipElenco + "</div>\r\n");
 
                 //sb.Append("<br/>\r\n");
                 sb.Append("     </div>\r\n");
@@ -1404,12 +1404,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 {
                     sb.Append("<div style=\"font-weight:500;float:left\">");
                     string prezzolistino = "";
-                    prezzolistino = Resources.Common.TitoloPrezzo + " ";
+                    prezzolistino = references.ResMan("Common",Lingua, "TitoloPrezzo") + " ";
                     sb.Append("<div style=\"font-weight:500;font-size:1.2em;padding-right:10px;color:#" + Color + "\">" + prezzolistino
                         + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo));
                     //Testo intro prezzo
                     if (_o.CodiceTipologia == "rif000001")
-                        sb.Append(" " + Resources.Common.TitoloPrezzounita);
+                        sb.Append(" " + references.ResMan("Common",Lingua, "TitoloPrezzounita"));
 
                     if (_o.PrezzoListino != 0)
                         sb.Append("<br/>" + "<span style=\"text-decoration: line-through;font-size:0.9em;color:#aaa;padding-left:10px;padding-right:10px\">" + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.PrezzoListino) + "</span>");
@@ -1614,7 +1614,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     sb.Append("<div class=\"feature-share\">\r\n");
 
                     sb.Append("<a onclick=\"javascript:JsSvuotaSession(this)\"  title=\"\"  target=\"" + target + "\" href=\"" + link + "\">");
-                    sb.Append(Resources.Common.testoContinua);
+                    sb.Append(references.ResMan("Common",Lingua, "testoContinua"));
                     sb.Append("</a>\r\n");
 
 
@@ -1635,12 +1635,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                         //sb.Append("<div class=\"feature-details\">\r\n");
                         sb.Append("<div style=\"font-weight:500\">");
                         string prezzolistino = "";
-                        prezzolistino = Resources.Common.TitoloPrezzo + " ";
+                        prezzolistino = references.ResMan("Common",Lingua, "TitoloPrezzo") + " ";
                         sb.Append("<div style=\"font-weight:500;font-size:1.4em;padding-right:10px;color:#" + Color + "\">" + prezzolistino
                             + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.Prezzo));
                         //Testo intro prezzo
                         if (_o.CodiceTipologia == "rif000001")
-                            sb.Append(" " + Resources.Common.TitoloPrezzounita);
+                            sb.Append(" " + references.ResMan("Common",Lingua, "TitoloPrezzounita"));
 
                         if (_o.PrezzoListino != 0)
                             sb.Append("<br/>" + "<span style=\"text-decoration: line-through;font-size:0.9em;color:#aaa;padding-left:10px;padding-right:10px\">" + "<i class=\"fa fa-eur\"></i> " + string.Format("{0:##,###.00}", _o.PrezzoListino) + "</span>");
@@ -1839,25 +1839,25 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         Session["FasciaPrezzo"] = ddlFascePrezzo.SelectedValue;
         Session["Vetrina"] = chkPromo.Checked;
         Session["Ordinamento"] = ddlOrdinamento.SelectedValue;
-        //  Response.Redirect(Resources.Common.linkUsato);
+        //  Response.Redirect(references.ResMan("Common",Lingua,"linkUsato);
     }
     public void CaricaDdlOrdinamento(string value = "")
     {
-        //string tipi = Resources.Common.listaServizi;
+        //string tipi = references.ResMan("Common",Lingua,"listaServizi;
         Dictionary<string, string> dict = new Dictionary<string, string>();
         //string[] tipiarray = tipi.Split(',');
         //foreach (string s in tipiarray)
         //{
         //    dict.Add(s, s);
         //}
-        dict.Add(Resources.Common.FormOrdinamento.ToString(), "");
+        dict.Add(references.ResMan("Common",Lingua, "FormOrdinamento"), "");
         dict.Add("Data Inserimento", "DataInserimento");
         dict.Add("Prezzo", "Prezzo");
         dict.Add("Data Immatricolazione", "Data1");
 
         ddlOrdinamento.Items.Clear();
         //ddlOrdinamento.AppendDataBoundItems = true;
-        //ddlOrdinamento.Items.Insert(0, Resources.Common.FormOrdinamento.ToString());
+        //ddlOrdinamento.Items.Insert(0, references.ResMan("Common",Lingua,"FormOrdinamento.ToString());
         //ddlOrdinamento.Items[0].Value = "";
         ddlOrdinamento.DataSource = dict;
         ddlOrdinamento.DataTextField = "Key";
@@ -1880,7 +1880,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //Riempio la ddl 
         List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
         ddlCaratteristica1.Items.Clear();
-        ddlCaratteristica1.Items.Insert(0, Resources.Common.selCaratteristica1);
+        ddlCaratteristica1.Items.Insert(0, references.ResMan("Common",Lingua, "selCaratteristica1"));
         ddlCaratteristica1.Items[0].Value = "0";
         ddlCaratteristica1.DataSource = Car1;
         ddlCaratteristica1.DataTextField = "Campo1";
@@ -1896,7 +1896,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //Riempio la ddl  ( collegandola alla caratteristica 1 )
         List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Campo2 == p1.ToString(); });
         ddlCaratteristica2.Items.Clear();
-        ddlCaratteristica2.Items.Insert(0, Resources.Common.selCaratteristica2);
+        ddlCaratteristica2.Items.Insert(0, references.ResMan("Common",Lingua, "selCaratteristica2"));
         ddlCaratteristica2.Items[0].Value = "0";
         ddlCaratteristica2.DataSource = Car2;
         ddlCaratteristica2.DataTextField = "Campo1";
@@ -1911,7 +1911,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
         ddlCaratteristica3.Items.Clear();
-        ddlCaratteristica3.Items.Insert(0, Resources.Common.selCaratteristica3);
+        ddlCaratteristica3.Items.Insert(0, references.ResMan("Common",Lingua, "selCaratteristica3"));
         ddlCaratteristica3.Items[0].Value = "0";
         ddlCaratteristica3.DataSource = Car3;
         ddlCaratteristica3.DataTextField = "Campo1";
@@ -1927,7 +1927,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //Riempio la ddl  
         List<Tabrif> Car4 = Utility.Caratteristiche[3].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
         ddlCaratteristica4.Items.Clear();
-        ddlCaratteristica4.Items.Insert(0, Resources.Common.selCaratteristica4);
+        ddlCaratteristica4.Items.Insert(0, references.ResMan("Common",Lingua, "selCaratteristica4"));
         ddlCaratteristica4.Items[0].Value = "0";
         ddlCaratteristica4.DataSource = Car4;
         ddlCaratteristica4.DataTextField = "Campo1";
@@ -1942,7 +1942,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         List<Fascediprezzo> prezzi = Utility.Fascediprezzo.FindAll(fp => fp.Lingua == Lingua && fp.CodiceTipologiaCollegata == "rif000100");
         ddlFascePrezzo.Items.Clear();
-        ddlFascePrezzo.Items.Insert(0, Resources.Common.SelezionePrezzo);
+        ddlFascePrezzo.Items.Insert(0, references.ResMan("Common",Lingua, "SelezionePrezzo"));
         ddlFascePrezzo.Items[0].Value = "0";
         ddlFascePrezzo.DataSource = prezzi;
         ddlFascePrezzo.DataTextField = "Descrizione";

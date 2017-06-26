@@ -88,10 +88,10 @@ public partial class AspNetPages_Orderpage : CommonPage
         switch (Lingua)
         {
             case "I":
-                output.Text = "<div><br/>Ordine inviato correttamente. <br/>Sarete contattati a breve dal nostro personale.</div> " + Resources.Common.GoogleConversione;
+                output.Text = "<div><br/>Ordine inviato correttamente. <br/>Sarete contattati a breve dal nostro personale.</div> " + references.ResMan("Common",Lingua, "GoogleConversione");
                 break;
             case "GB":
-                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + Resources.Common.GoogleConversione;
+                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common",Lingua, "GoogleConversione");
                 break;
         }
     }
@@ -515,11 +515,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                     {
                         //Inviamo le email di conferma al portale ed al cliente
                         //Invio la mail per il fornitore
-                        string SoggettoMailFornitore = Resources.Common.OrdineSoggettomailRichiesta + Nome;
+                        string SoggettoMailFornitore = references.ResMan("Common",Lingua, "OrdineSoggettomailRichiesta") + Nome;
                         TestoMail = CreaMailPerFornitore(totali, prodotti);
                         Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
                         //Invia la mail per il cliente
-                        string SoggettoMailCliente = Resources.Common.OrdineSoggettomailRiepilogo + Nome;
+                        string SoggettoMailCliente = references.ResMan("Common",Lingua, "OrdineSoggettomailRiepilogo") + Nome;
                         TestoMail = CreaMailCliente(totali, prodotti);
                         Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
                     }
@@ -914,7 +914,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         //Aggiungo un elemento per smaltimnto
         //dettagliitem = new List<string>();
         //dettagliitem.Add("");
-        //dettagliitem.Add(Resources.Common.CarrelloTotaleSmaltimento); //Descrizione elemento
+        //dettagliitem.Add(references.ResMan("Common",Lingua,"CarrelloTotaleSmaltimento); //Descrizione elemento
         //dettagliitem.Add("");
         //dettagliitem.Add(totali.TotaleSmaltimento.ToString());
         //dettagliitem.Add("1");//Quantità
@@ -925,7 +925,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         //Aggiungo un elemento per spesespedizione
         dettagliitem = new List<string>();
         dettagliitem.Add("");
-        dettagliitem.Add(Resources.Common.CarrelloTotaleSpedizione); //Descrizione elemento
+        dettagliitem.Add(references.ResMan("Common",Lingua, "CarrelloTotaleSpedizione")); //Descrizione elemento")
         dettagliitem.Add("");
         dettagliitem.Add(totali.TotaleSpedizione.ToString());
         dettagliitem.Add("1");//Quantità
@@ -936,7 +936,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         //aggiungo elemento per scontp
         dettagliitem = new List<string>();
         dettagliitem.Add("");
-        dettagliitem.Add(Resources.Common.testoSconto);//Descrizione elemento
+        dettagliitem.Add(references.ResMan("Common",Lingua, "testoSconto"));//Descrizione elemento
         dettagliitem.Add("");
         dettagliitem.Add("-" + totali.TotaleSconto.ToString());
         dettagliitem.Add("1");//Quantità

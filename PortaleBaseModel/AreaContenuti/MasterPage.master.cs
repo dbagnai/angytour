@@ -109,6 +109,8 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
             }
 
             litTrial.Text = WelcomeLibrary.STATIC.Global.TestTrial();
+
+         DataBind();
         }
         catch (Exception errore)
         {

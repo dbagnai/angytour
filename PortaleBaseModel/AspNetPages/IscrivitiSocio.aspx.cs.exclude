@@ -210,10 +210,10 @@ public partial class _IscrivitiSocio : CommonPage
                 switch (Lingua)
                 {
                     case "I":
-                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera1);
+                        output.Text = ("Selezionare valore: " + references.ResMan("Common",Lingua,"FormTestoCarriera1"));
                         break;
                     case "GB":
-                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera1);
+                        output.Text = ("Select value: " + references.ResMan("Common",Lingua,"FormTestoCarriera1"));
                         break;
                 }
                 return;
@@ -223,10 +223,10 @@ public partial class _IscrivitiSocio : CommonPage
                 switch (Lingua)
                 {
                     case "I":
-                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera3);
+                        output.Text = ("Selezionare valore: " + references.ResMan("Common",Lingua,"FormTestoCarriera3"));
                         break;
                     case "GB":
-                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera3);
+                        output.Text = ("Select value: " + references.ResMan("Common",Lingua,"FormTestoCarriera3"));
                         break;
                 }
                 return;
@@ -236,10 +236,10 @@ public partial class _IscrivitiSocio : CommonPage
                 switch (Lingua)
                 {
                     case "I":
-                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera3b);
+                        output.Text = ("Selezionare valore: " + references.ResMan("Common",Lingua,"FormTestoCarriera3b"));
                         break;
                     case "GB":
-                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera3b);
+                        output.Text = ("Select value: " + references.ResMan("Common",Lingua,"FormTestoCarriera3b"));
                         break;
                 }
                 return;
@@ -249,10 +249,10 @@ public partial class _IscrivitiSocio : CommonPage
                 switch (Lingua)
                 {
                     case "I":
-                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera4);
+                        output.Text = ("Selezionare valore: " + references.ResMan("Common",Lingua,"FormTestoCarriera4"));
                         break;
                     case "GB":
-                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera4);
+                        output.Text = ("Select value: " + references.ResMan("Common",Lingua,"FormTestoCarriera4"));
                         break;
                 }
                 return;
@@ -262,10 +262,10 @@ public partial class _IscrivitiSocio : CommonPage
                 switch (Lingua)
                 {
                     case "I":
-                        output.Text = ("Selezionare valore: " + Resources.Common.FormTestoCarriera5);
+                        output.Text = ("Selezionare valore: " + references.ResMan("Common",Lingua,"FormTestoCarriera5"));
                         break;
                     case "GB":
-                        output.Text = ("Select value: " + Resources.Common.FormTestoCarriera5);
+                        output.Text = ("Select value: " + references.ResMan("Common",Lingua,"FormTestoCarriera5"));
                         break;
                 }
                 return;
@@ -1939,7 +1939,7 @@ public partial class _IscrivitiSocio : CommonPage
     {
         bool found = false;
         dreg.Items.Clear();
-        dreg.Items.Insert(0, Resources.Common.ddlTuttiregione.ToString());
+        dreg.Items.Insert(0, references.ResMan("Common",Lingua,"ddlTuttiregione"));
         dreg.Items[0].Value = "";
         txtRE.Value = valore;
         if (dnaz.SelectedValue == "IT")
@@ -1996,7 +1996,7 @@ public partial class _IscrivitiSocio : CommonPage
     {
         bool found = false;
         dpro.Items.Clear();
-        dpro.Items.Insert(0, Resources.Common.ddlTuttiprovincia.ToString());
+        dpro.Items.Insert(0, references.ResMan("Common",Lingua,"ddlTuttiprovincia"));
         dpro.Items[0].Value = "";
         txtPR.Value = valore;
         if (dreg.SelectedValue != "" && dnaz.SelectedValue == "IT")

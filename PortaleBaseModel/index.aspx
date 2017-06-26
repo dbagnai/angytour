@@ -22,8 +22,8 @@
                 <h1 class="pull-left">Login</h1>
                 <p></p>
                 <ul class="pull-right breadcrumb">
-                    <li><a href="<%$ Resources:Common, LinkHome %>" runat="server">
-                        <asp:Literal Text="<%$ Resources:Common, testoHome %>" runat="server" /></a></li>
+                    <li><a href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' runat="server">
+                        <asp:Literal Text='<%# references.ResMan("Common",Lingua,"testoHome") %>' runat="server" /></a></li>
                     <li class="active">da creare link pagina</li>
                 </ul>
             </div>

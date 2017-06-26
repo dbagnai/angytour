@@ -58,5 +58,7 @@ public partial class AreaContenuti_Default : CommonPage
 
         litTrial.Text = WelcomeLibrary.STATIC.Global.TestTrial();
 
+		DataBind();
+
     }
 }

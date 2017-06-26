@@ -858,7 +858,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             sezionedescrizione += " " + sezione.Descrizione;
 
 
-        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Resources.Common.testoPosizionebase) + " " + Nome);
+        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common",Lingua, "testoPosizionebase")) + " " + Nome);
 
         if (data != null)
         {

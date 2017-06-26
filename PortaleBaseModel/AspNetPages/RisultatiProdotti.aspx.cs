@@ -241,8 +241,8 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 HtmlGenericControl divLinkcontainer = (HtmlGenericControl)Master.FindControl("divLinkcontainer");
                 divLinkcontainer.Visible = true;
                 HtmlAnchor linkListacategorie = (HtmlAnchor)Master.FindControl("linkListacategorie");
-                linkListacategorie.HRef = Resources.Common.linkCatalogo;
-                linkListacategorie.InnerHtml = Resources.Common.testolinkSezioniCatalogo; 
+                linkListacategorie.HRef = references.ResMan("Common",Lingua,"linkCatalogo;
+                linkListacategorie.InnerHtml = references.ResMan("Common",Lingua,"testolinkSezioniCatalogo; 
 #endif
 #if false
                 Panel p = (Panel)Master.FindControl("pnlRicerca");
@@ -659,7 +659,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         if (sezione != null)
             sezionedescrizione += " " + sezione.Descrizione;
 
-        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Resources.Common.testoPosizionebase) + " " + Nome);
+        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common",Lingua, "testoPosizionebase")) + " " + Nome);
 
         if (data != null)
         {

@@ -38,6 +38,8 @@ public partial class login : CommonPage
                 Session.Remove("Errororder");
             }
 
+         // se utilizzi le risorse fare dataBind
+         DataBind();
         }
 
 

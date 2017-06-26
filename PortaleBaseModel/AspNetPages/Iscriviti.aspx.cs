@@ -335,7 +335,7 @@ public partial class _Iscriviti : CommonPage
                 RicaricaCarrello();
 
                 //Infine nascondo il form di richiesta e visualizzo il messaggio di stato!!!!!
-                ret = Resources.Common.TestoRispAttivaCliente;
+                ret = references.ResMan("Common",Lingua, "TestoRispAttivaCliente");
                 //Inviamo la mail relativa all'avvenuta attivazione al cliente e alla società per inviare la mail
                 string esitoinvio = InviaMailValidatoCliente(tmp_Cliente, password);
                 if (string.IsNullOrWhiteSpace(esitoinvio))
@@ -400,7 +400,7 @@ public partial class _Iscriviti : CommonPage
         catch (Exception err)
         {
             output.Text = err.Message + " <br/> ";
-            VisualizzaRisposta(Resources.Common.txtValidazioneError.ToString());
+            VisualizzaRisposta(references.ResMan("Common",Lingua,"txtValidazioneError"));
 
         }
 
@@ -499,9 +499,9 @@ public partial class _Iscriviti : CommonPage
     //}
     private void InzializzaEtichette()
     {
-        chkPrivacy.Text = Resources.Common.testoPrivacy;
-        Summary.HeaderText = Resources.Common.testoDatiMancanti;
-        btnInvia.Text = Resources.Common.TestoBtnNewsletter;
+        chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
+        Summary.HeaderText = references.ResMan("Common",Lingua, "testoDatiMancanti");
+        btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
     }
     protected void RiempiFormConDatiTest()
     {
@@ -570,15 +570,14 @@ public partial class _Iscriviti : CommonPage
             Cliente dbCliente = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cliente.Email);
             if (dbCliente != null && dbCliente.Id_cliente != 0) //Cliente esistente
             {
-                output.Text = Resources.Common.txtValidateVerifica;
+                output.Text = references.ResMan("Common",Lingua, "txtValidateVerifica");
                 
             }
 #endif
 
             if (!chkPrivacy.Checked)
             {
-                output.Text = Resources.Common.txtPrivacyError.ToString();
-
+               output.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
             }
             //////////////////////////////////////////////////////////////////////////////
             //Prendiamo l'ip del client
@@ -633,7 +632,7 @@ public partial class _Iscriviti : CommonPage
         catch (Exception err)
         {
             output.Text = err.Message + " <br/> ";
-            VisualizzaRisposta(Resources.Common.txtIscrizioneErrore.ToString());
+            VisualizzaRisposta(references.ResMan("Common", Lingua, "txtIscrizioneErrore"));
         }
     }
     /// <summary>

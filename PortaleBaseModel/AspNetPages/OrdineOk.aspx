@@ -17,7 +17,7 @@
         </h4>
 
                  
-         <button type="button" style="float:right" class="btn btn-purple btn-small" onclick="javascript:window.location.assign('<%=ReplaceAbsoluteLinks(Resources.Common.LinkOrderNoregistrazione)  %>')"><%= Resources.Common.txtOrdineRiprova %></button>
+         <button type="button" style="float:right" class="btn btn-purple btn-small" onclick="javascript:window.location.assign('<%=ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkOrderNoregistrazione"))  %>')"><%= references.ResMan("Common",Lingua,"txtOrdineRiprova") %></button>
     </div>
 
 </asp:Content>

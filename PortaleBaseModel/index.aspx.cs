@@ -26,7 +26,10 @@ public partial class index : CommonPage
                 CaricaControlliJS();
                 SettaTestoIniziale("Home");
                 InizializzaSeo();
-                //PulisciRegistrazionitemporanee();
+            //PulisciRegistrazionitemporanee();
+
+            // se utilizzi le risorse abilita il databind
+            //DataBind();
             }
         }
         catch (Exception err)

@@ -159,7 +159,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         if (TipoContenuto == "Prenota")
         {
             ddlLocations.Items.Clear();
-            ListItem li = new ListItem(Resources.Common.selLocation, "");
+            ListItem li = new ListItem(references.ResMan("Common",Lingua, "selLocation"), "");
             ddlLocations.Items.Add(li);
             //Inseriamo la lista delle locations 
             OfferteCollection list = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodiceTipologia);
@@ -180,7 +180,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         }
 #endif
 
-        txtDescrizione.Text += addtext + Resources.Common.testoMessage + "\r\n";
+        txtDescrizione.Text += addtext + references.ResMan("Common",Lingua, "testoMessage") + "\r\n";
 
         EvidenziaSelezione(TipoContenuto);
 
@@ -487,7 +487,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             }
             else
             {
-                output.Text = Resources.Common.txtPrivacyError;
+                output.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -495,13 +495,13 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         catch (Exception err)
         {
             output.Text = err.Message + " <br/> ";
-            lblRisposta.Text = Resources.Common.txtMailError;
+            lblRisposta.Text = references.ResMan("Common",Lingua, "txtMailError");
         }
     }
     //private void CaricaDdlservizi(string value = "")
     //{
 
-    //    string tipi = Resources.Common.listaServizi;
+    //    string tipi = references.ResMan("Common",Lingua,"listaServizi;
     //    Dictionary<string, string> dict = new Dictionary<string, string>();
     //    string[] tipiarray = tipi.Split(',');
     //    foreach (string s in tipiarray)
@@ -510,7 +510,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
     //    }
 
     //    ddlListaservizi.Items.Clear();
-    //    ddlListaservizi.Items.Insert(0, Resources.Common.FormListaServizi.ToString());
+    //    ddlListaservizi.Items.Insert(0, references.ResMan("Common",Lingua,"FormListaServizi.ToString());
     //    ddlListaservizi.Items[0].Value = "";
     //    ddlListaservizi.DataSource = dict;
     //    ddlListaservizi.DataTextField = "Key";
@@ -529,7 +529,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
     //private void CaricaDdlsedi(string value = "")
     //{
 
-    //    string tipi = Resources.Common.listaSedi;
+    //    string tipi = references.ResMan("Common",Lingua,"listaSedi;
     //    Dictionary<string, string> dict = new Dictionary<string, string>();
     //    string[] tipiarray = tipi.Split(',');
     //    foreach (string s in tipiarray)
@@ -538,7 +538,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
     //    }
 
     //    ddlSedi.Items.Clear();
-    //    ddlSedi.Items.Insert(0, Resources.Common.FormListaSedi.ToString());
+    //    ddlSedi.Items.Insert(0, references.ResMan("Common",Lingua,"FormListaSedi.ToString());
     //    ddlSedi.Items[0].Value = "";
     //    ddlSedi.DataSource = dict;
     //    ddlSedi.DataTextField = "Key";
@@ -562,9 +562,9 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
     protected void Visualizzarisposta()
     {
 
-        lblRisposta.Text = Resources.Common.TestoRichiestaCorretto;
+        lblRisposta.Text = references.ResMan("Common",Lingua, "TestoRichiestaCorretto");
 
-        lblRisposta.Text += Resources.Common.GoogleConversione;
+        lblRisposta.Text += references.ResMan("Common",Lingua, "GoogleConversione");
         plhRisposta.Visible = true;
         lblRisposta.Visible = true;
 

@@ -8,7 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
     <div style="text-align: center">
         <h2>
-            <%= ReplaceAbsoluteLinks(ReplaceLinks( Resources.Common.ContentError ) ) %>
+            <%= ReplaceAbsoluteLinks(ReplaceLinks(references.ResMan("Common",Lingua,"ContentError") ) ) %>
         </h2>
     </div>
 </asp:Content>

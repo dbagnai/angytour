@@ -378,7 +378,7 @@
 
             <!-- Sidebar Block -->
             <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
-                <h3 class="h3-sidebar-title sidebar-title"><%= Resources.Common.TestoArchivio %>
+                <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common",Lingua,"TestoArchivio") %>
                 </h3>
                 <div class="sidebar-content"  style="overflow-y: auto" id="divArchivioList">
                     <asp:Repeater ID="rptArchivio" runat="server">

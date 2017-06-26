@@ -422,7 +422,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         //regioni.Sort(new GenericComparer<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending));
         ddlRegione.Items.Clear();
-        ddlRegione.Items.Insert(0, Resources.Common.ddlTuttiregione);
+        ddlRegione.Items.Insert(0, references.ResMan("Common",Lingua,"ddlTuttiregione"));
         ddlRegione.Items[0].Value = "";
         ddlRegione.DataSource = regioni;
         ddlRegione.DataTextField = "Regione";
@@ -435,7 +435,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         catch { }
         //Province
         ddlProvincia.Items.Clear();
-        ddlProvincia.Items.Insert(0, Resources.Common.ddlTuttiprovincia);
+        ddlProvincia.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiprovincia"));
         ddlProvincia.Items[0].Value = "";
         if (Regione != "")
         {
@@ -458,7 +458,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         //Comuni
         ddlComune.Items.Clear();
-        ddlComune.Items.Insert(0, Resources.Common.ddlTuttiComune);
+        ddlComune.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiComune"));
         ddlComune.Items[0].Value = "";
         if (Provincia != "")
         {
@@ -486,7 +486,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdotto.Items.Clear();
-        ddlProdotto.Items.Insert(0, Resources.Common.selProdotti);
+        ddlProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
         ddlProdotto.Items[0].Value = "";
         ddlProdotto.DataSource = prodotti;
         ddlProdotto.DataTextField = "Descrizione";
@@ -502,7 +502,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdotto.SelectedValue)); });
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlSottoProdotto.Items.Clear();
-        ddlSottoProdotto.Items.Insert(0, Resources.Common.selSProdotti);
+        ddlSottoProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
         ddlSottoProdotto.Items[0].Value = "";
         ddlSottoProdotto.DataSource = sprodotti;
         ddlSottoProdotto.DataTextField = "Descrizione";
@@ -1628,7 +1628,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd1.Items.Clear();
-        ddlProdottoNewProd1.Items.Insert(0, Resources.Common.selProdotti);
+        ddlProdottoNewProd1.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
         ddlProdottoNewProd1.Items[0].Value = "";
         ddlProdottoNewProd1.DataSource = prodotti;
         ddlProdottoNewProd1.DataTextField = "Descrizione";
@@ -1643,7 +1643,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewProd.Items.Clear();
-        ddlTipologiaNewProd.Items.Insert(0, Resources.Common.selSProdotti);
+        ddlTipologiaNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
         ddlTipologiaNewProd.Items[0].Value = "";
         ddlTipologiaNewProd.DataSource = Tipologie;
         ddlTipologiaNewProd.DataTextField = "Descrizione";
@@ -1672,7 +1672,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd.Items.Clear();
-        ddlProdottoNewProd.Items.Insert(0, Resources.Common.selProdotti);
+        ddlProdottoNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
         ddlProdottoNewProd.Items[0].Value = "";
         ddlProdottoNewProd.DataSource = prodotti;
         ddlProdottoNewProd.DataTextField = "Descrizione";
@@ -1691,7 +1691,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdottoNewSProd.Items.Clear();
-        ddlProdottoNewSProd.Items.Insert(0, Resources.Common.selSProdotti);
+        ddlProdottoNewSProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
         ddlProdottoNewSProd.Items[0].Value = "";
         ddlProdottoNewSProd.DataSource = sprodotti;
         ddlProdottoNewSProd.DataTextField = "Descrizione";
@@ -1708,7 +1708,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewSottProd.Items.Clear();
-        ddlTipologiaNewSottProd.Items.Insert(0, Resources.Common.selSProdotti);
+        ddlTipologiaNewSottProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
         ddlTipologiaNewSottProd.Items[0].Value = "";
         ddlTipologiaNewSottProd.DataSource = Tipologie;
         ddlTipologiaNewSottProd.DataTextField = "Descrizione";

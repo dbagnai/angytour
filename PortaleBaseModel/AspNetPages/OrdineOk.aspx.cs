@@ -183,9 +183,9 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = Resources.Common.risposta_5;
+            output.Text = references.ResMan("Common",Lingua, "risposta_5");
         }
-        output.Text += " " + Resources.Common.GoogleConversione;
+        output.Text += " " + references.ResMan("Common",Lingua, "GoogleConversione");
 #if true
 
         //Qui devo scrivere nella tabella ordini
@@ -228,11 +228,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Inviamo le email di conferma al portale ed al cliente
             string TestoMail = "";
             //Invio la mail per il fornitore
-            string SoggettoMailFornitore = Resources.Common.OrdineSoggettomailRichiesta + Nome;
+            string SoggettoMailFornitore = references.ResMan("Common",Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
             Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
-            string SoggettoMailCliente = Resources.Common.OrdineSoggettomailRiepilogo + Nome;
+            string SoggettoMailCliente = references.ResMan("Common",Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
         }
@@ -302,7 +302,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = Resources.Common.risposta_5;
+            output.Text = references.ResMan("Common",Lingua, "risposta_5");
         }
 
         //Siccome tutto a buon fine -> setto pagato ( in realtà nella modalità con accettazione
@@ -327,11 +327,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Inviamo le email di conferma al portale ed al cliente
             string TestoMail = "";
             //Invio la mail per il fornitore
-            string SoggettoMailFornitore = Resources.Common.OrdineSoggettomailRichiesta + Nome;
+            string SoggettoMailFornitore = references.ResMan("Common",Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
             Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
-            string SoggettoMailCliente = Resources.Common.OrdineSoggettomailRiepilogo + Nome;
+            string SoggettoMailCliente = references.ResMan("Common",Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
         }

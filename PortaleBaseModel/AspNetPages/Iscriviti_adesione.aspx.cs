@@ -97,7 +97,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                 CaricaControlliJS();
 
                 //Titololetto di sezione e presentazione
-                RptDescrizione.Text = Resources.Common.TestoIscrivi;
+                RptDescrizione.Text = references.ResMan("Common",Lingua, "TestoIscrivi");
 
                 // CaricaDatiDdlRicerca("it", "", "", "", "", "");
                 InzializzaEtichette();
@@ -112,7 +112,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                     int.TryParse(idNewsletter, out id);
                     Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
                     //Titololetto di sezione e presentazione
-                    litMainContent.Text = Resources.Common.TitoloIscrivi;
+                    litMainContent.Text = references.ResMan("Common",Lingua, "TitoloIscrivi");
                     if (mail != null)
                     {
                         //Intestazione per il form di adesione all'offerta
@@ -255,7 +255,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                 cmd.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref tmp_Cliente);
 
                 //Infine nascondo il form di richiesta e visualizzo il messaggio di stato!!!!!
-                VisualizzaRisposta(Resources.Common.TestoRispAttivaCliente);
+                VisualizzaRisposta(references.ResMan("Common",Lingua, "TestoRispAttivaCliente"));
                 //Inviamo la mail relativa all'avvenuta attivazione al cliente e alla società per inviare la mail
                 string esitoinvio = InviaMailValidatoCliente(tmp_Cliente);
                 if (string.IsNullOrWhiteSpace(esitoinvio))
@@ -308,7 +308,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
         {
             output.Text = err.Message + " <br/> ";
 
-            VisualizzaRisposta(Resources.Common.txtValidazioneError.ToString());
+            VisualizzaRisposta(references.ResMan("Common",Lingua, "txtValidazioneError"));
         }
 
     }
@@ -322,9 +322,9 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
     //}
     private void InzializzaEtichette()
     {
-        chkPrivacy.Text = Resources.Common.testoPrivacy;
-        Summary.HeaderText = Resources.Common.testoDatiMancanti;
-        btnInvia.Text = Resources.Common.TestoBtnNewsletter;
+        chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
+        Summary.HeaderText = references.ResMan("Common",Lingua, "testoDatiMancanti");
+        btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
     }
     protected void RiempiFormConDatiTest()
     {
@@ -383,7 +383,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
             Cliente cliente = CaricaDatiClienteDaForm(); //Leggo i dati del cliente dal form
             if (!chkPrivacy.Checked)
             {
-                output.Text = Resources.Common.txtPrivacyError;
+                output.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
             }
             //////////////////////////////////////////////////////////////////////////////
             //Prendiamo l'ip del client
@@ -486,7 +486,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
         {
             output.Text = err.Message + " <br/> ";
 
-            VisualizzaRisposta(Resources.Common.txtIscrizioneErrore.ToString());
+            VisualizzaRisposta(references.ResMan("Common", Lingua, "txtIscrizioneErrore"));
         }
     }
     /// <summary>

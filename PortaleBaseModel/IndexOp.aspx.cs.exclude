@@ -90,7 +90,7 @@ public partial class IndexOnePage : CommonPage
     protected void Visualizzarisposta()
     {
         lblRisposta.Text = "Grazie per l'interesse mostrato nelle nostre proproste.";
-        lblRisposta.Text += Resources.Common.GoogleConversione;
+        lblRisposta.Text += references.ResMan("Common",Lingua,"GoogleConversione");
         lblRisposta.Visible = true;
 
     }

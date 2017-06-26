@@ -7,8 +7,16 @@ using System.Web.UI.WebControls;
 
 public partial class CookiePolicy : CommonPage
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
+   public string Lingua
+   {
+      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : CommonPage.deflanguage; }
+      set { ViewState["Lingua"] = value; }
+   }
 
+   protected void Page_Load(object sender, EventArgs e)
+    {
+      CommonPage CommonPage = new CommonPage();
+      Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+      DataBind();
     }
 }

@@ -819,12 +819,12 @@ public partial class AspNetPages_ListaElenco : CommonPage
                 WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(Resources.Common.LinkContatti) + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&conversione=true");
 
             }
             else
             {
-                outputContact.Text = Resources.Common.txtPrivacyError.ToString();
+                outputContact.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -832,7 +832,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-            outputContact.Text += Resources.Common.txtMailError.ToString();
+            outputContact.Text += references.ResMan("Common",Lingua, "txtMailError");
         }
     }
 

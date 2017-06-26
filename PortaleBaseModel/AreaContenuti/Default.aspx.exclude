@@ -17,7 +17,7 @@
             </div>
             <asp:Literal ID="output" runat="server"></asp:Literal>
             <br />
-            <a id="A1" href="<%$ Resources:Common, LinkHome %>" runat="server">Torna A HomePage Portale</a>
+            <a id="A1" href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' runat="server">Torna A HomePage Portale</a>
             <%--   <h2>
             Sezione Gestione Contenuti</h2>--%>
             <ul>

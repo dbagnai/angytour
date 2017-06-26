@@ -176,7 +176,7 @@
             <div class="navbar-container" id="navbar-container">
 
                 <div class="navbar-header pull-left">
-                    <a href="<%$ Resources:Common, LinkHome %>" runat="server" class="navbar-brand">
+                    <a href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' runat="server" class="navbar-brand">
                         <img runat="server" id="imgLogo" src="Immagini/logowebmouse.png" height="50" />
                     </a>
 
@@ -204,7 +204,7 @@
                     <asp:Literal ID="litTrial" runat="server"></asp:Literal>
                 </div>
                 <div class="navbar-header pull-right">
-                    <a href="<%$ Resources:Common, LinkHome %>" runat="server" class="navbar-brand" style="margin-top: 10px;">
+                    <a href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' runat="server" class="navbar-brand" style="margin-top: 10px;">
                         <i class="fa fa-sign-out"></i>
                     </a>
                 </div>

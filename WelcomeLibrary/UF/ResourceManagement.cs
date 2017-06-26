@@ -15,9 +15,11 @@ namespace WelcomeLibrary.UF
 
       public static Dictionary<string, Categoria> Items = new Dictionary<string, Categoria>();
    
-
       public static ResourceItem ReadKey(string Gruppo, string Lingua, string Chiave, string categoria = "")
       {
+         if (!string.IsNullOrEmpty(Chiave))
+            Chiave = Chiave.ToLower();         
+
          ResourceItem ret = new ResourceItem() { Gruppo = "", Categoria = "", Lingua = "", Chiave = "", Valore = "", Comment = "" }; // per evitare cose spiacevoli ritorno un oggetto vuoto
          if (Items.ContainsKey(Gruppo))
          {
@@ -33,6 +35,28 @@ namespace WelcomeLibrary.UF
                   }
                }
 
+            }
+         }
+
+         return ret;
+      }
+
+      public static List<ResourceItem> ReadItemsByLingua(string _gruppo, string _lingua)
+      {
+         List<ResourceItem> ret = new List<ResourceItem>();
+         if (Items.ContainsKey(_gruppo))
+         {
+            foreach (var categoria in Items[_gruppo])
+            {
+               if (Items[_gruppo][categoria.Key].ContainsKey(_lingua))
+               {
+                  var resources = Items[_gruppo][categoria.Key][_lingua];
+                  foreach (var m in resources)
+                  {
+                     ret.Add(m.Value);
+                     
+                  }
+               }
             }
          }
 
@@ -68,6 +92,9 @@ namespace WelcomeLibrary.UF
                   item.Chiave = reader["Chiave"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Chiave"));
                   item.Valore = reader["Valore"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Valore"));
                   item.Comment = reader["Comment"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Comment"));
+
+                  // case non sensitive
+                  item.Chiave = item.Chiave.ToLower();
 
                   //if (item.Lingua == "GB")
                   //{
