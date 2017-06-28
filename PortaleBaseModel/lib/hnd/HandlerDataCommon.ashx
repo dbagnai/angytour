@@ -87,6 +87,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             string pagesize = pars.ContainsKey("pagesize") ? pars["pagesize"] : "10";
             string enablepager = pars.ContainsKey("enablepager") ? pars["enablepager"] : "true";
             Dictionary<string, string> res = new Dictionary<string, string>();
+            Dictionary<string, string> filtri = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
 
             switch (q)
             {
@@ -230,6 +231,45 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     HttpContext.Current.Session.Clear();
                     result = "svuotata sessione";
                     break;
+
+                case "caricaConfig":
+
+                    List<ConfigItem> retconfig = new List<ConfigItem>();
+                    
+                    retconfig = ConfigManagement.ReadAsList(filtri);
+                    if (retconfig == null || retconfig.Count == 0)
+                        retconfig.Add(new ConfigItem());
+
+                    //Dictionary<string, string> dictconfig  =  filterDictionaryConfig(filtri);
+
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(retconfig, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+
+                    break;
+                case "updateconfig":
+                    string itemdata = pars.ContainsKey("itemdata") ? pars["itemdata"] : "";
+                    List<ConfigItem> list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ConfigItem>>(itemdata
+                    , new JsonSerializerSettings()
+                    {
+                        DateFormatString = "dd/MM/yyyy HH:mm:ss",
+                        //DateFormatString = "dd/MM/yyyy",
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None
+                    });
+                    //Chiamiamo l'aggiornamento di tutti i dati
+                    //ConfigDM cDM = new ConfigDM();
+                    //result = cDM.AggiornaConfigList(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref list);
+                    result = ConfigManagement.AggiornaConfigList( ref list);
+                    
+                    break;
+
+
                 case "initresources":/*Caricamento delle risorse di testo per lingua*/
                                      //System.Globalization.CultureInfo ci = references.setCulture(lingua);
                     Dictionary<string, Dictionary<string, string>> dict = references.GetResourcesByLingua(lingua);
@@ -360,8 +400,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     //////////////////////////////////////////////////////////////////////
                     //recupero i parametri che mi servono da objfiltro
-                    //////////////////////////////////////////////////////////////////////
-                    Dictionary<string, string> filtri = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
+                    //////////////////////////////////////////////////////////////////////                    
                     Dictionary<string, string> value = new Dictionary<string, string>();
                     value = filterData(lingua, filtri, page, pagesize, enablepager);
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(value, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()

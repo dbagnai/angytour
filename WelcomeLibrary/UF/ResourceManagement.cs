@@ -21,6 +21,7 @@ namespace WelcomeLibrary.UF
             Chiave = Chiave.ToLower();         
 
          ResourceItem ret = new ResourceItem() { Gruppo = "", Categoria = "", Lingua = "", Chiave = "", Valore = "", Comment = "" }; // per evitare cose spiacevoli ritorno un oggetto vuoto
+
          if (Items.ContainsKey(Gruppo))
          {
             if (Items[Gruppo].ContainsKey(categoria))

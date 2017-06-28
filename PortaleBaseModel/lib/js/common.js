@@ -737,6 +737,10 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     //else
                     //    $(this).val('');
 
+                    if ($(this).is("label")) {
+                        $(this).attr("value", dataitem[proprarr[0]]);
+                        $(this).html(dataitem[proprarr[0]]);
+                    }
                     if ($(this).is("input") && $(this).attr('type') == 'checkbox') {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).prop("checked", dataitem[proprarr[0]]);
@@ -748,6 +752,10 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).attr("value", dataitem[proprarr[0]]);
                         else
                             $(this).attr("value", '');
+
+                        if ($(this).attr("idbind") != null)
+                            $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
+
                     }
                     else if ($(this).is("button") && $(this).hasClass('select')) {
                         var idscheda = dataitem[proprarr[0]];
@@ -1519,7 +1527,31 @@ function formatvalue(localObjects, valore, prop, callback) {
 }
 
 //CARICAMENTO DATI --------------------------------------------------------------------------------------
+function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallonend) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+    var page = page || "";
+    var pagesize = pagesize || "";
+    var enablepager = enablepager || false;
 
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro) },
+        success: function (result) {
+            callback(result, functiontocallonend);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText, function () { });
+        }
+    });
+}
 
 function caricaDatiServerArchivio(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";

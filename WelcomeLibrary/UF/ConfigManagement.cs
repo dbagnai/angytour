@@ -16,6 +16,7 @@ namespace WelcomeLibrary.UF
       public static string ReadKey(string chiave)
       {
          string ret = "";
+         chiave = chiave.ToLower();
 
          foreach (var item in Items)
          {
@@ -41,8 +42,8 @@ namespace WelcomeLibrary.UF
             var cat = Items[categoria];
             foreach (var kv in cat)
             {
-               if (!ret.ContainsKey(kv.Value.Chiave))
-               ret.Add(kv.Value.Chiave, kv.Value.Valore);
+               if (!ret.ContainsKey(kv.Value.Codice))
+               ret.Add(kv.Value.Codice, kv.Value.Valore);
             }
          }
          else
@@ -53,12 +54,66 @@ namespace WelcomeLibrary.UF
          return ret;
       }
 
+      public static string AggiornaConfigList(ref List<ConfigItem> list)
+      {
+         string query = "";
+         string err = "";
+
+         string connessione = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
+         foreach (ConfigItem item in list)
+         {
+            if (connessione == null || connessione == "") return err;
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+
+            OleDbParameter p2 = new OleDbParameter("@Codice", item.Codice);
+            parColl.Add(p2);
+            OleDbParameter p3 = new OleDbParameter("@Valore", item.Valore);
+            parColl.Add(p3);
+            OleDbParameter p4 = new OleDbParameter("@PIva", item.Gruppo);
+            parColl.Add(p4);
+
+
+            if (item.Id != 0)
+            {
+               //Aggiorno
+               query = "UPDATE [TBL_CONFIG] SET Codice=@Codice" + ",Valore=@Valore" + ",Gruppo=@Gruppo" + "";
+               query += " WHERE [Id] = " + item.Id + " ";
+            }
+            try
+            {
+               int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+               LoadConfig();
+            }
+            catch (Exception error)
+            {
+               err += "Errore, inserimento/aggiornamento config :" + error.Message;
+
+               //throw new ApplicationException("Errore, inserimento/aggiornamento config :" + error.Message, error);
+            }
+         }
+         return err;
+      }
+
+      public static List<ConfigItem> ReadAsList(Dictionary<string,string> filtri)
+      {
+         List<ConfigItem> ret = new List<ConfigItem>();
+
+         foreach (var item in Items)
+         {
+            foreach (var kv in item.Value)
+            {
+               ret.Add(kv.Value);
+            }
+         }
+
+         return ret;
+      }
       public static void LoadConfig()
       {
          Items.Clear();
 
          string connection = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
-         string query = "SELECT ID, Categoria,Chiave,Valore FROM TBL_Config";
+         string query = "SELECT ID, Gruppo,Codice,Valore FROM TBL_Config";
 
          try
          {
@@ -74,24 +129,24 @@ namespace WelcomeLibrary.UF
                {
                   ConfigItem item = new ConfigItem();
 
-                  item.id = reader.GetInt32(reader.GetOrdinal("ID"));
+                  item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
 
-                  item.Categoria = reader["Categoria"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Categoria"));
-                  item.Chiave = reader["Chiave"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Chiave"));
+                  item.Gruppo = reader["Gruppo"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Gruppo"));
+                  item.Codice = reader["Codice"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Codice"));
                   item.Valore = reader["Valore"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Valore"));
 
                   // case non sensitive
-                  item.Chiave = item.Chiave.ToLower();
+                  item.Codice = item.Codice.ToLower();
 
-                  if (Items.ContainsKey(item.Categoria))
+                  if (Items.ContainsKey(item.Gruppo))
                   {
-                     Items[item.Categoria].Add(item.Chiave, item);
+                     Items[item.Gruppo].Add(item.Codice, item);
                   }
                   else
                   {
                      ConfigSection csItem = new ConfigSection();
-                     csItem.Add(item.Chiave, item);
-                     Items.Add(item.Categoria, csItem);
+                     csItem.Add(item.Codice, item);
+                     Items.Add(item.Gruppo, csItem);
                   
 
                   }              
@@ -111,9 +166,9 @@ namespace WelcomeLibrary.UF
 
    public class ConfigItem
    {
-      public int id { get; set; }
-      public string Categoria { get; set; }
-      public string Chiave { get; set; }
+      public int Id { get; set; }
+      public string Gruppo { get; set; }
+      public string Codice { get; set; }
       public string Valore { get; set; }
    }
 

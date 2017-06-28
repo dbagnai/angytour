@@ -527,9 +527,14 @@ public class references
 
     public static void CaricaMemoriaStatica(HttpServerUtility Server)
     {
+      WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
 
-        //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
-        if (ConfigManagement.ReadKey("Posizione") == "Remoto")
+      WelcomeLibrary.UF.ConfigManagement.LoadConfig();
+
+         WelcomeLibrary.UF.ResourceManagement.LoadResources();
+
+      //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
+      if (ConfigManagement.ReadKey("Posizione") == "Remoto")
         {
             WelcomeLibrary.STATIC.Global.PercorsoContenuti = "~" + ConfigManagement.ReadKey("DataDir") + "/Files";
             WelcomeLibrary.STATIC.Global.PercorsoComune = "~" + ConfigManagement.ReadKey("DataDir") + "/Common";
@@ -548,7 +553,6 @@ public class references
         bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"), out upd);
         WelcomeLibrary.STATIC.Global.UpdateUrl = upd;
         //------------------------------------------------------------------------------------------------
-        WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
 
         WelcomeLibrary.STATIC.Global.usecdn = false;
         string susecdn = ConfigManagement.ReadKey("usecdn");
@@ -590,10 +594,6 @@ public class references
          //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
          //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
          //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
-
-        WelcomeLibrary.UF.ConfigManagement.LoadConfig();
-
-        WelcomeLibrary.UF.ResourceManagement.LoadResources();
 
    }
 

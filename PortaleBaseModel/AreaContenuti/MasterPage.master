@@ -167,6 +167,26 @@
                 <asp:ScriptReference Path="~/Scripts/jquery.prettyPhoto.js" />
             </Scripts>
         </Ajax:ToolkitScriptManager>
+      
+
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
+        <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
+        <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css")%>" rel="stylesheet" type="text/css" media="screen" />
+        <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
+
+
+          <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js")+ CommonPage.AppendModTime(Server,"~/lib/js/common.js")%>"></script>
+        <script>
+            var pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
+            initLingua('I');
+            loadref(initLingua, 'I');
+        </script>
 
         <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
             <script type="text/javascript">
@@ -549,6 +569,12 @@
                                     </span></a>
                                 <b class="arrow"></b>
                             </li>--%>
+                                 <li class="hover">
+                                <a href="ConfigPage.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Parametri Config</span></a>
+                                <b class="arrow"></b>
+                            </li>
                         </ul>
                     </li>
 
