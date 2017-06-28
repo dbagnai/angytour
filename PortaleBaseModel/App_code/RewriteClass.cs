@@ -29,8 +29,14 @@ public class GenericRouteHandler : IRouteHandler
         string textmatch = requestContext.RouteData.Values["textmatch"] as string;
         string destinationselector = requestContext.RouteData.Values["destinationselector"] as string;
         string Lingua = requestContext.RouteData.Values["Lingua"] as string;
-        if (Lingua == null) HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
-        switch (Lingua.ToUpper())
+
+         if (Lingua == null)
+         {
+            HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
+            Lingua = ConfigManagement.ReadKey("deflanguage");
+         }
+
+      switch (Lingua.ToUpper())
         {
             case "I":
             case "GB":

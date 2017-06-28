@@ -8,6 +8,8 @@
 <head runat="server">
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="metaRobots" id="meta1" content="noindex,nofollow" runat="Server" />
+
     <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
         @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600);

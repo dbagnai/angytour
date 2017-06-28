@@ -34,7 +34,7 @@ namespace WelcomeLibrary.UF
       }
       public static Dictionary<string,string> ReadSection(ref Exception errorret, string categoria)
       {
-         Dictionary<string, string> ret = new Dictionary<string, string();
+         Dictionary<string, string> ret = new Dictionary<string, string>();
 
          if (Items.ContainsKey(categoria))
          {

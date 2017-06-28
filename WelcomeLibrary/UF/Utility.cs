@@ -698,7 +698,7 @@ namespace WelcomeLibrary.UF
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", mailvalues["password"]);
 
 
-#if false
+            #if false
                 if (sectionName != "")
                 {
                     SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);
@@ -740,7 +740,8 @@ namespace WelcomeLibrary.UF
                 //        objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
                 //}
                 //------------------------------
-#endif
+
+             #endif
 
 
                 int ntentativi = 3;
@@ -904,7 +905,7 @@ namespace WelcomeLibrary.UF
                         //CREAZIONE DELLE VIEW DELLA MAIL
                         AlternateView htmlView;
                         htmlView = AlternateView.CreateAlternateViewFromString(
-        Descrizione, Encoding.UTF8, "text/html");//.Replace("\r\n", "<br/>")
+                           Descrizione, Encoding.UTF8, "text/html");//.Replace("\r\n", "<br/>")
 
                         //htmlView.ContentType = new System.Net.Mime.ContentType("text/html"); //Encoding.UTF8,
                         //htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit;
@@ -941,8 +942,8 @@ namespace WelcomeLibrary.UF
                         //  string simpletext = ConvertHtmlToPlainText(Descrizione);
 
                         AlternateView textView =
-                  System.Net.Mail.AlternateView.CreateAlternateViewFromString(
-                  simpletext);
+                           System.Net.Mail.AlternateView.CreateAlternateViewFromString(
+                           simpletext);
                         textView.ContentType = new System.Net.Mime.ContentType("text/plain");
                         textView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit;
                         objMail.AlternateViews.Add(textView);

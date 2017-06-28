@@ -5,3 +5,9 @@
 <Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
  <Data>26/06/2017 17.47.29</Data>
 <Messaggio>httplocalhost52646Generato sitemap  26/06/2017 17.47.29</Messaggio>
+ <Data>28/06/2017 10.16.41</Data>
+<Messaggio> Application start : 28/06/2017 10.16.29</Messaggio>
+ <Data>28/06/2017 10.16.41</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>28/06/2017 10.17.41</Data>
+<Messaggio>httplocalhost52646Generato sitemap  28/06/2017 10.17.41</Messaggio>

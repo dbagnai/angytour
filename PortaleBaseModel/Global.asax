@@ -77,10 +77,11 @@
                //CREAZIONE DEI FEED RSS-----------------------------------------------------------------
                System.Threading.Thread trUpdaterssFeed_I = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_I);
                trUpdaterssFeed_I.Start();
-               System.Threading.Thread trUpdaterssFeed_GB = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_GB);
-               trUpdaterssFeed_GB.Start();
-               System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
-               trUpdaterssFeed_RU.Start();
+
+               //System.Threading.Thread trUpdaterssFeed_GB = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_GB);
+               //trUpdaterssFeed_GB.Start();
+               //System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
+               //trUpdaterssFeed_RU.Start();
 
                //---------------------------------------------------------------------------------------
                //---------------------------------------------------------------------------------------
@@ -155,15 +156,15 @@
            //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
 
            string Lingua = "I";
-           WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
+           WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
            //Questa è da rivedere in base al codice tipologia !!!!!
-           List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
+           List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
-           Lingua = "GB";
-           offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
-           Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
-           references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+           //Lingua = "GB";
+           //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
+           //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
+           //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
            //Lingua = "RU";
            //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
@@ -226,7 +227,7 @@
            //-----------------------------------------------------------------------
            When = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString());
            //Every = 0.01; //Ciclo di esecuzione in ore
-           Every = 0.7; //Ciclo di esecuzione in ore
+           Every = 4; //Ciclo di esecuzione in ore
            StartTimer();
 
            //Creo una variabile per la scrittura dei messaggi nel file di log

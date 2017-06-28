@@ -9,7 +9,8 @@
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html runat="server" id="htmltag">
 <head runat="server">
     <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
     <title runat="server" id="metaTitle"></title>
@@ -29,7 +30,7 @@
     <meta property="fb:admins" content="100000889151299" />
     <%--<meta property="fb:app_id" content="435846069925856" />--%>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <meta name="metaRobots" id="metaRobots" content="index,follow" runat="Server" />
+    <meta name="metaRobots" id="metaRobots" content="index,follow" runat="Server" />    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />

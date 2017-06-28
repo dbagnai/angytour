@@ -76,6 +76,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             linkFi1.Href = CommonPage.ReplaceAbsoluteLinks("~/images/favicon.ico");
             linkFi2.Href = CommonPage.ReplaceAbsoluteLinks("~/images/favicon.png");
 
+            htmltag.Attributes["xml:lang"] = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+
             //Creo l'equivalente di ~/ nel ViewState per usarlo nel javascript della pagina
             pathassoluto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
