@@ -4,408 +4,409 @@
 <%@ Import Namespace="System.Web.Routing" %>
 
 <script RunAt="server">
-   public static string percorsoFisicoImmobili;
-   //Variabili per Timer per esecuzione compiti schedulati 
-   public static DateTime When;
-   public static double Every;
-   private System.Timers.Timer OpTimer;
-   /// <summary>
-   /// Funzione di Inizializzazione del Timer per la schedulazione delle opearazioni
-   /// </summary>
-   private void StartTimer()
-   {
-       while (When <= DateTime.Now)
-       {
-           When = When.AddHours(Every);
-       }
-       OpTimer = new System.Timers.Timer(GetInterval());
-       OpTimer.AutoReset = false; //Il timer non riparte automaticamente dopo l'evento ontimer
-       OpTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent); //Imposto il delegato per l'evento ontimer
-       OpTimer.Enabled = true; //Faccio partire il timer
-   }
-   /// <summary>
-   /// Ritorna il numero di millisecondi da adesso all'orario prestabilito per l'esecuzione dell'evento
-   /// del timer OnTimer
-   /// </summary>
-   /// <returns></returns>
-   private double GetInterval()
-   {
-       TimeSpan diff = When.Subtract(DateTime.Now);
+    public static string percorsoFisicoImmobili;
+    //Variabili per Timer per esecuzione compiti schedulati 
+    public static DateTime When;
+    public static double Every;
+    private System.Timers.Timer OpTimer;
+    /// <summary>
+    /// Funzione di Inizializzazione del Timer per la schedulazione delle opearazioni
+    /// </summary>
+    private void StartTimer()
+    {
+        while (When <= DateTime.Now)
+        {
+            When = When.AddHours(Every);
+        }
+        OpTimer = new System.Timers.Timer(GetInterval());
+        OpTimer.AutoReset = false; //Il timer non riparte automaticamente dopo l'evento ontimer
+        OpTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent); //Imposto il delegato per l'evento ontimer
+        OpTimer.Enabled = true; //Faccio partire il timer
+    }
+    /// <summary>
+    /// Ritorna il numero di millisecondi da adesso all'orario prestabilito per l'esecuzione dell'evento
+    /// del timer OnTimer
+    /// </summary>
+    /// <returns></returns>
+    private double GetInterval()
+    {
+        TimeSpan diff = When.Subtract(DateTime.Now);
 
-       //ricalcolo l'intervallo del timer per multipli della cadenza 
-       //successivamente all'istante attuale
-       if (diff.TotalMinutes < 0)
-       {
-           while (When <= DateTime.Now)
-           {
-               When = When.AddHours(Every);
-           }
-           diff = When.Subtract(DateTime.Now);
-           // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
-       }
+        //ricalcolo l'intervallo del timer per multipli della cadenza 
+        //successivamente all'istante attuale
+        if (diff.TotalMinutes < 0)
+        {
+            while (When <= DateTime.Now)
+            {
+                When = When.AddHours(Every);
+            }
+            diff = When.Subtract(DateTime.Now);
+            // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
+        }
 
-       //risultato in millisecondi 
-       return diff.Ticks / 10000;
-   }
-   /// <summary>
-   /// Evento relativo a OpTimer per l'esecuzione delle operazioni agli intervalli stabiliti
-   /// </summary>
-   /// <param name="source"></param>
-   /// <param name="e"></param>
-   public void OnTimedEvent(object source, System.Timers.ElapsedEventArgs e)
-   {
-       //Creo una variabile per la scrittura dei messaggi nel file di log
-       System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
-       Messaggi.Add("Messaggio", "");
+        //risultato in millisecondi 
+        return diff.Ticks / 10000;
+    }
+    /// <summary>
+    /// Evento relativo a OpTimer per l'esecuzione delle operazioni agli intervalli stabiliti
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="e"></param>
+    public void OnTimedEvent(object source, System.Timers.ElapsedEventArgs e)
+    {
+        //Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "");
 
-       //---------------------------------------------
-       //Operazioni varie da eseguire 
-       //iterazione con database ecc. 
-       //---------------------------------------------
-       try
-       {
-           //Dalla cartella degli immobili aggiorno il db sql su cui vengono fatte le ricerche
-           Messaggi["Messaggio"] += "Inizio aggiornamenti " + System.DateTime.Now.ToString() + "\r\n";
-           //qui devo fare l'aggiornamento del db In remoto
-           WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
+        //---------------------------------------------
+        //Operazioni varie da eseguire 
+        //iterazione con database ecc. 
+        //---------------------------------------------
+        try
+        {
+            //Dalla cartella degli immobili aggiorno il db sql su cui vengono fatte le ricerche
+            Messaggi["Messaggio"] += "Inizio aggiornamenti " + System.DateTime.Now.ToString() + "\r\n";
+            //qui devo fare l'aggiornamento del db In remoto
+            WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
 
-           if (!WelcomeLibrary.UF.MemoriaDisco.EsisteFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt"))
-           {
-               //Creo il file di controllo per avitare avvi multipli del processo
-               string ret = WelcomeLibrary.UF.MemoriaDisco.CreaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, System.DateTime.Now.ToString(), "NowTrasferingIndirectMode.txt");
+            if (!WelcomeLibrary.UF.MemoriaDisco.EsisteFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt"))
+            {
+                //Creo il file di controllo per avitare avvi multipli del processo
+                string ret = WelcomeLibrary.UF.MemoriaDisco.CreaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, System.DateTime.Now.ToString(), "NowTrasferingIndirectMode.txt");
 
-               //CREAZIONE DEI FEED RSS-----------------------------------------------------------------
-               System.Threading.Thread trUpdaterssFeed_I = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_I);
-               trUpdaterssFeed_I.Start();
+                //CREAZIONE DEI FEED RSS-----------------------------------------------------------------
+                System.Threading.Thread trUpdaterssFeed_I = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_I);
+                trUpdaterssFeed_I.Start();
 
-               //System.Threading.Thread trUpdaterssFeed_GB = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_GB);
-               //trUpdaterssFeed_GB.Start();
-               //System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
-               //trUpdaterssFeed_RU.Start();
+                //System.Threading.Thread trUpdaterssFeed_GB = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_GB);
+                //trUpdaterssFeed_GB.Start();
+                //System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
+                //trUpdaterssFeed_RU.Start();
 
-               //---------------------------------------------------------------------------------------
-               //---------------------------------------------------------------------------------------
-               //AGGIORNIAMO ANCHE LA SITEMAP
-               System.Threading.Thread trUpdateSitemap = new System.Threading.Thread(CreaSitemps);
-               trUpdateSitemap.Start();
-               //---------------------------------------------------------------------------------------
-           }
-           else
-           {
-               System.IO.FileInfo fi = new System.IO.FileInfo(WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\" + "NowTrasferingIndirectMode.txt");
-               if (fi != null)
-               {
-                   if (((TimeSpan)(System.DateTime.Today - fi.CreationTime.Date)).Days >= 2)
-                   {
-                       //Elimino il file in quanto probabilmente si è interrotto il processo in modo imprevisto   
-                       fi.Delete();
-                   }
-               }
-           }
+                //---------------------------------------------------------------------------------------
+                //---------------------------------------------------------------------------------------
+                //AGGIORNIAMO ANCHE LA SITEMAP
+                System.Threading.Thread trUpdateSitemap = new System.Threading.Thread(CreaSitemps);
+                trUpdateSitemap.Start();
+                //---------------------------------------------------------------------------------------
+            }
+            else
+            {
+                System.IO.FileInfo fi = new System.IO.FileInfo(WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\" + "NowTrasferingIndirectMode.txt");
+                if (fi != null)
+                {
+                    if (((TimeSpan)(System.DateTime.Today - fi.CreationTime.Date)).Days >= 2)
+                    {
+                        //Elimino il file in quanto probabilmente si è interrotto il processo in modo imprevisto   
+                        fi.Delete();
+                    }
+                }
+            }
 
-       }
-       catch (Exception errore)
-       {
-           //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
-           Messaggi["Messaggio"] += " Errore avvio aggiornamento feed: " + errore.Message + " " + System.DateTime.Now.ToString();
-           if (errore.InnerException != null)
-               Messaggi["Messaggio"] += " Errore interno aggiornamento feed : " + errore.InnerException.Message.ToString() + " " + System.DateTime.Now.ToString();
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
-       }
-       //---------------------------------------------
+        }
+        catch (Exception errore)
+        {
+            //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
+            Messaggi["Messaggio"] += " Errore avvio aggiornamento feed: " + errore.Message + " " + System.DateTime.Now.ToString();
+            if (errore.InnerException != null)
+                Messaggi["Messaggio"] += " Errore interno aggiornamento feed : " + errore.InnerException.Message.ToString() + " " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
+        }
+        //---------------------------------------------
 
-       //Reimposto l'esecuzione tra Every ore rispetto alla data di ultima esecuzione
-       When = When.AddHours(Every);
-       //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato 
-       //con il tempo - potrebbe sballare
-       OpTimer.Interval = (Double)GetInterval();
-       OpTimer.Start();
-   }
-   public void CreaSitemps()
-   {
-       //Creo una variabile per la scrittura dei messaggi nel file di log
-       System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
-       Messaggi.Add("Messaggio", "");
+        //Reimposto l'esecuzione tra Every ore rispetto alla data di ultima esecuzione
+        When = When.AddHours(Every);
+        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato 
+        //con il tempo - potrebbe sballare
+        OpTimer.Interval = (Double)GetInterval();
+        OpTimer.Start();
+    }
+    public void CreaSitemps()
+    {
+        //Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "");
 
-       try
-       {
+        try
+        {
 
-           string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
-           string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
-           string host = percorsoBase.Replace(".", "");
-           host = host.Replace(":", "");
-           host = host.Replace("/", "");
-           Messaggi["Messaggio"] += host.ToLower();
+            string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
+            string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
+            string host = percorsoBase.Replace(".", "");
+            host = host.Replace(":", "");
+            host = host.Replace("/", "");
+            Messaggi["Messaggio"] += host.ToLower();
 
-           //Carichiamo la lista delle offerte totale
-           WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
-           List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
-           parColl = new List<System.Data.OleDb.OleDbParameter>();
-           //System.Data.OleDb.OleDbParameter ptipo = new System.Data.OleDb.OleDbParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
-           //parColl.Add(ptipo);
+            //Carichiamo la lista delle offerte totale
+            WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
+            List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
+            parColl = new List<System.Data.OleDb.OleDbParameter>();
+            //System.Data.OleDb.OleDbParameter ptipo = new System.Data.OleDb.OleDbParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
+            //parColl.Add(ptipo);
 
-           //VA' CREATO UN FILTRO PER LA GENERAZIONE
-           //rif000001-rif000050 ( rubriche da 0 a 50 ) ( elenco tipo blog + scheda ) -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+            //VA' CREATO UN FILTRO PER LA GENERAZIONE
+            //rif000001-rif000050 ( rubriche da 0 a 50 ) ( elenco tipo blog + scheda ) -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
 
-           //rif000051 -rif000060 -> non ci sono le schede ma solo le liste con i pdf (lista elenco!!) NON CI SONO LE SCHEDE SINGOLE!! MA SOLO LE LISTE
-           //rif000061 -> per  i comunicati stmapa come blog -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+            //rif000051 -rif000060 -> non ci sono le schede ma solo le liste con i pdf (lista elenco!!) NON CI SONO LE SCHEDE SINGOLE!! MA SOLO LE LISTE
+            //rif000061 -> per  i comunicati stmapa come blog -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
 
-           //rif000100 soci -> schede CreaLinkGenerico //CreaLinkGenerico(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
-           //rif000101 -> trattaemtni   schede indirizzabili a  href='<%# CreaLinkRicercaprodotti(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,false) %>'
+            //rif000100 soci -> schede CreaLinkGenerico //CreaLinkGenerico(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+            //rif000101 -> trattaemtni   schede indirizzabili a  href='<%# CreaLinkRicercaprodotti(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,false) %>'
 
-           //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
+            //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
 
-           string Lingua = "I";
-           WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
-           //Questa è da rivedere in base al codice tipologia !!!!!
-           List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
-           references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+            string Lingua = "I";
+            WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+            //Questa è da rivedere in base al codice tipologia !!!!!
+            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
-           //Lingua = "GB";
-           //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
-           //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
-           //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+            //Lingua = "GB";
+            //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
+            //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
+            //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
-           //Lingua = "RU";
-           //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
-           //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
-           //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+            //Lingua = "RU";
+            //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
+            //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
+            //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
-           // references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
+            // references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
 
-           Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-       }
-       catch (Exception errore)
-       {
-           //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
-           Messaggi["Messaggio"] += " Errore aggiornamento in app start: " + errore.Message + " " + System.DateTime.Now.ToString();
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-       }
-       finally
-       {
-           //Rimuovo il file di accesso per la concorrenza
-           string retfa = WelcomeLibrary.UF.MemoriaDisco.EliminaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt");
-           //Creare un file di log con il successo/fallimento di tutte le operazioni
-           Messaggi["Messaggio"] += "Terminato Aggiornamento  " + System.DateTime.Now.ToString();
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
-       }
-   }
-
-
-   void Application_Start(object sender, EventArgs e)
-   {
-       System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
-       Messaggi.Add("Messaggio", "");
-       Messaggi["Messaggio"] += " Application start : " + System.DateTime.Now.ToString();
-       //Carico la memoria statica per la modalità trial del portale
-       //se suparato la data di scadenza di prova allora ativo lamodalità trial del prodotto
-       //Calcolo l'hash
-       //string hash = WelcomeLibrary.STATIC.Global.MD5GenerateHashWithSecret(ConfigManagement.ReadKey("trialkey"));
-       string nome = CommonPage.getFirstName("webmaster");
-       string code = WelcomeLibrary.UF.ConfigManagement.ReadKey("trialkey");
-       if (nome == "17169") code = "";
-       if (!WelcomeLibrary.STATIC.Global.MD5CheckHashWithSecret(code, WelcomeLibrary.STATIC.Global.Codicesblocco))
-       {
-           WelcomeLibrary.STATIC.Global.Trial = true;
-       }
-
-       try
-       {
-           //CaricaMemoriaStatica();
-           references.CaricaMemoriaStatica(Server);
-           WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();//rigenera i link per le tipologie/categorie e sottocategorie per url rewriting
-                                                                             //TESTIAMO LE ROUTE PER I LINK USER FRIENDLY
-           RegisterRoutes(System.Web.Routing.RouteTable.Routes);
-           //-----------------------------------------------------------------------
-           //Inizializzazione Timer per gestione attività schedulate da applicazione
-           //-----------------------------------------------------------------------
-           //StartHour = System.Configuration.ConfigManagement.ReadKey("OraStartRiepiloghi"].ToString();
-           //StartDay = Convert.ToInt32(System.Configuration.ConfigManagement.ReadKey("GiornoStartRiepiloghi"]);
-           //-----------------------------------------------------------------------
-           //Inizializzazione Timer per gestione attvità schedulate da applicazione
-           //-----------------------------------------------------------------------
-           When = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString());
-           //Every = 0.01; //Ciclo di esecuzione in ore
-           Every = 4; //Ciclo di esecuzione in ore
-           StartTimer();
-
-           //Creo una variabile per la scrittura dei messaggi nel file di log
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
+            Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+        }
+        catch (Exception errore)
+        {
+            //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
+            Messaggi["Messaggio"] += " Errore aggiornamento in app start: " + errore.Message + " " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+        }
+        finally
+        {
+            //Rimuovo il file di accesso per la concorrenza
+            string retfa = WelcomeLibrary.UF.MemoriaDisco.EliminaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt");
+            //Creare un file di log con il successo/fallimento di tutte le operazioni
+            Messaggi["Messaggio"] += "Terminato Aggiornamento  " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
+        }
+    }
 
 
-       }
-       catch (Exception errore)
-       {
-           Messaggi["Messaggio"] += " Errore aggiornamento portale: " + errore.Message + " " + System.DateTime.Now.ToString();
-           if (errore.InnerException != null)
-               Messaggi["Messaggio"] += " Errore aggiornamento portale: " + errore.InnerException.Message + " " + System.DateTime.Now.ToString();
-           WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
-
-       }
-   }
-
-   void Application_BeginRequest(Object source, EventArgs e)
-   {
-       //if (System.Configuration.ConfigManagement.ReadKey("enableHttps"] == "true")
-       //    if (HttpContext.Current.Request.IsSecureConnection.Equals(false))
-       //    {
-       //        Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
-       //    }
-
-       HttpApplication app = (HttpApplication)source;
-       HttpContext context = app.Context;
-       FirstRequestInitialization.Initialize(context);
-   }
-   class FirstRequestInitialization
-   {
-       private static bool s_InitializedAlready = false;
-       private static object s_lock = new Object();
-       // Initialize only on the first request
-       public static void Initialize(HttpContext context)
-       {
-           if (s_InitializedAlready)
-           {
-               return;
-           }
-           lock (s_lock)
-           {
-               if (s_InitializedAlready)
-               {
-                   return;
-               }
+    void Application_Start(object sender, EventArgs e)
+    {
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "");
+        Messaggi["Messaggio"] += " Application start : " + System.DateTime.Now.ToString();
 
 
-               string appaddress = "";
-               if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
-               {
-                   int pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(System.Web.HttpContext.Current.Request.Url.AbsolutePath);
-                   if (pathpos != -1)
-                   {
-                       appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
-                       appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
-                   }
-                   else
-                   {
-                       pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(HttpContext.Current.Server.UrlDecode(System.Web.HttpContext.Current.Request.Url.AbsolutePath));
-                       if (pathpos != -1)
-                       {
-                           appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
-                           appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
-                       }
-                   }
-               }
-               else
-               {
-                   appaddress = System.Web.HttpContext.Current.Request.Url.ToString();
-                   string query = System.Web.HttpContext.Current.Request.Url.Query;
-                   if (!string.IsNullOrEmpty(query))
-                       appaddress = appaddress.Replace(query, "");
-                   appaddress = appaddress.ToLower().TrimEnd('/');
-               }
+        try
+        {
+            //CaricaMemoriaStatica();
+            references.CaricaMemoriaStatica(Server);
+            WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();//rigenera i link per le tipologie/categorie e sottocategorie per url rewriting
+            //Carico la memoria statica per la modalità trial del portale
+            //se suparato la data di scadenza di prova allora ativo lamodalità trial del prodotto
+            //Calcolo l'hash
+            //string hash = WelcomeLibrary.STATIC.Global.MD5GenerateHashWithSecret(ConfigManagement.ReadKey("trialkey"));
+            string nome = CommonPage.getFirstName("webmaster");
+            string code = WelcomeLibrary.UF.ConfigManagement.ReadKey("trialkey");
+            if (nome == "17169") code = "";
+            if (!WelcomeLibrary.STATIC.Global.MD5CheckHashWithSecret(code, WelcomeLibrary.STATIC.Global.Codicesblocco))
+            {
+                WelcomeLibrary.STATIC.Global.Trial = true;
+            }
 
-               if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps") == "true")
-                   appaddress = appaddress.ToLower().Replace("http:", "https:");
+            RegisterRoutes(System.Web.Routing.RouteTable.Routes);
+            //-----------------------------------------------------------------------
+            //Inizializzazione Timer per gestione attività schedulate da applicazione
+            //-----------------------------------------------------------------------
+            //StartHour = System.Configuration.ConfigManagement.ReadKey("OraStartRiepiloghi"].ToString();
+            //StartDay = Convert.ToInt32(System.Configuration.ConfigManagement.ReadKey("GiornoStartRiepiloghi"]);
+            //-----------------------------------------------------------------------
+            //Inizializzazione Timer per gestione attvità schedulate da applicazione
+            //-----------------------------------------------------------------------
+            When = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString());
+            //Every = 0.01; //Ciclo di esecuzione in ore
+            Every = 4; //Ciclo di esecuzione in ore
+            StartTimer();
 
-
-               System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
-               Messaggi.Add("Messaggio", "");
-               if (appaddress == "")//Caso di chiamata strana fallback
-               {
-                   Messaggi["Messaggio"] += " Errore global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
-                   Messaggi["Messaggio"] += " Errore global init AbsolutePath : " +
-                   System.Web.HttpContext.Current.Request.Url.AbsolutePath;
-                   Messaggi["Messaggio"] += " Errore global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
-                   Messaggi["Messaggio"] += " Errore global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
-                   Messaggi["Messaggio"] += " Errore global init server appaddress : " + appaddress;
-                   WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-               }
-               else
-               {
-                   Messaggi["Messaggio"] += " Global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
-                   Messaggi["Messaggio"] += " Global init AbsolutePath : " +
-                System.Web.HttpContext.Current.Request.Url.AbsolutePath;
-                   Messaggi["Messaggio"] += " Global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
-                   Messaggi["Messaggio"] += " Global init Query : " + System.Web.HttpContext.Current.Request.Url.Query; ;
-                   Messaggi["Messaggio"] += " Global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
-                   Messaggi["Messaggio"] += " Global init server appaddress : " + appaddress;
-                   WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
-               }
+            //Creo una variabile per la scrittura dei messaggi nel file di log
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
 
 
-               WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
-               WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
-               s_InitializedAlready = true;
-           }
-       }
-   }
+        }
+        catch (Exception errore)
+        {
+            Messaggi["Messaggio"] += " Errore aggiornamento portale: " + errore.Message + " " + System.DateTime.Now.ToString();
+            if (errore.InnerException != null)
+                Messaggi["Messaggio"] += " Errore aggiornamento portale: " + errore.InnerException.Message + " " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
 
-   /// <summary>
-   /// Funzione di replace con regexp
-   /// </summary>
-   /// <param name="pattern"></param>
-   /// <param name="complete"></param>
-   /// <param name="replacement"></param>
-   /// <returns></returns>
-   public static string RegexReplace(string pattern, string complete, string replacement)
-   {
+        }
+    }
 
-       //string pattern = "\\s+";
-       string tmpValue = pattern.Replace("/", "\\/");
-       tmpValue = tmpValue.Replace("?", "\\?");
-       string patternComplete = tmpValue + "$";
-       Regex rgx = new Regex(patternComplete);
-       string result = rgx.Replace(complete, replacement);
-       return result;
-   }
+    void Application_BeginRequest(Object source, EventArgs e)
+    {
+        //if (System.Configuration.ConfigManagement.ReadKey("enableHttps"] == "true")
+        //    if (HttpContext.Current.Request.IsSecureConnection.Equals(false))
+        //    {
+        //        Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
+        //    }
 
-   void RegisterRoutes(System.Web.Routing.RouteCollection routes)
-   {
-
-       //routes.Add("Generic", new System.Web.Routing.Route("{textmatch}", new GenericRouteHandler()));
-       routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
-       routes.Add("Generic2", new System.Web.Routing.Route("{Lingua}/{destinationselector}/{textmatch}", new GenericRouteHandler()));
-       routes.MapPageRoute(
-           "HomeRoute",
-           "",
-           "~/Index.aspx"
-       );
-
-       //Fall back per tutti i link in route che non hanno il . all'interno
-       routes.Add(new Route("{textmatch}",
-      new RouteValueDictionary { { "textmatch", "default" } },
-      new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
-      new GenericRouteHandler()));
+        HttpApplication app = (HttpApplication)source;
+        HttpContext context = app.Context;
+        FirstRequestInitialization.Initialize(context);
+    }
+    class FirstRequestInitialization
+    {
+        private static bool s_InitializedAlready = false;
+        private static object s_lock = new Object();
+        // Initialize only on the first request
+        public static void Initialize(HttpContext context)
+        {
+            if (s_InitializedAlready)
+            {
+                return;
+            }
+            lock (s_lock)
+            {
+                if (s_InitializedAlready)
+                {
+                    return;
+                }
 
 
-   }
+                string appaddress = "";
+                if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
+                {
+                    int pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(System.Web.HttpContext.Current.Request.Url.AbsolutePath);
+                    if (pathpos != -1)
+                    {
+                        appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
+                        appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
+                    }
+                    else
+                    {
+                        pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(HttpContext.Current.Server.UrlDecode(System.Web.HttpContext.Current.Request.Url.AbsolutePath));
+                        if (pathpos != -1)
+                        {
+                            appaddress = System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, pathpos);
+                            appaddress += HttpContext.Current.Request.ApplicationPath.ToString().ToLower().TrimEnd('/');
+                        }
+                    }
+                }
+                else
+                {
+                    appaddress = System.Web.HttpContext.Current.Request.Url.ToString();
+                    string query = System.Web.HttpContext.Current.Request.Url.Query;
+                    if (!string.IsNullOrEmpty(query))
+                        appaddress = appaddress.Replace(query, "");
+                    appaddress = appaddress.ToLower().TrimEnd('/');
+                }
 
-   void Application_End(object sender, EventArgs e)
-   {
-       //  Codice eseguito all'arresto dell'applicazione
-
-   }
-
-   void Application_Error(object sender, EventArgs e)
-   {
-       // Codice eseguito in caso di errore non gestito
-
-   }
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps") == "true")
+                    appaddress = appaddress.ToLower().Replace("http:", "https:");
 
 
-   void Session_Start(object sender, EventArgs e)
-   {
-       // Codice eseguito all'avvio di una nuova sessione
+                System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+                Messaggi.Add("Messaggio", "");
+                if (appaddress == "")//Caso di chiamata strana fallback
+                {
+                    Messaggi["Messaggio"] += " Errore global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
+                    Messaggi["Messaggio"] += " Errore global init AbsolutePath : " +
+                    System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Errore global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
+                    Messaggi["Messaggio"] += " Errore global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+                    Messaggi["Messaggio"] += " Errore global init server appaddress : " + appaddress;
+                    WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+                }
+                else
+                {
+                    Messaggi["Messaggio"] += " Global init original path: " + System.Web.HttpContext.Current.Request.Url.ToString();
+                    Messaggi["Messaggio"] += " Global init AbsolutePath : " +
+                 System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+                    Messaggi["Messaggio"] += " Global init ApplicationPath : " + HttpContext.Current.Request.ApplicationPath.ToString();
+                    Messaggi["Messaggio"] += " Global init Query : " + System.Web.HttpContext.Current.Request.Url.Query; ;
+                    Messaggi["Messaggio"] += " Global init server host : " + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+                    Messaggi["Messaggio"] += " Global init server appaddress : " + appaddress;
+                    WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+                }
 
-   }
 
-   void Session_End(object sender, EventArgs e)
-   {
-       // Codice eseguito al termine di una sessione. 
-       // Nota: l'evento Session_End viene generato solo quando la modalità sessionstate
-       // è impostata su InProc nel file Web.config. Se la modalità è impostata su StateServer 
-       // o SQLServer, l'evento non viene generato.
+                WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
+                WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
+                s_InitializedAlready = true;
+            }
+        }
+    }
 
-   }
+    /// <summary>
+    /// Funzione di replace con regexp
+    /// </summary>
+    /// <param name="pattern"></param>
+    /// <param name="complete"></param>
+    /// <param name="replacement"></param>
+    /// <returns></returns>
+    public static string RegexReplace(string pattern, string complete, string replacement)
+    {
+
+        //string pattern = "\\s+";
+        string tmpValue = pattern.Replace("/", "\\/");
+        tmpValue = tmpValue.Replace("?", "\\?");
+        string patternComplete = tmpValue + "$";
+        Regex rgx = new Regex(patternComplete);
+        string result = rgx.Replace(complete, replacement);
+        return result;
+    }
+
+    void RegisterRoutes(System.Web.Routing.RouteCollection routes)
+    {
+
+        //routes.Add("Generic", new System.Web.Routing.Route("{textmatch}", new GenericRouteHandler()));
+        routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
+        routes.Add("Generic2", new System.Web.Routing.Route("{Lingua}/{destinationselector}/{textmatch}", new GenericRouteHandler()));
+        routes.MapPageRoute(
+            "HomeRoute",
+            "",
+            "~/Index.aspx"
+        );
+
+        //Fall back per tutti i link in route che non hanno il . all'interno
+        routes.Add(new Route("{textmatch}",
+       new RouteValueDictionary { { "textmatch", "default" } },
+       new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
+       new GenericRouteHandler()));
+
+
+    }
+
+    void Application_End(object sender, EventArgs e)
+    {
+        //  Codice eseguito all'arresto dell'applicazione
+
+    }
+
+    void Application_Error(object sender, EventArgs e)
+    {
+        // Codice eseguito in caso di errore non gestito
+
+    }
+
+
+    void Session_Start(object sender, EventArgs e)
+    {
+        // Codice eseguito all'avvio di una nuova sessione
+
+    }
+
+    void Session_End(object sender, EventArgs e)
+    {
+        // Codice eseguito al termine di una sessione. 
+        // Nota: l'evento Session_End viene generato solo quando la modalità sessionstate
+        // è impostata su InProc nel file Web.config. Se la modalità è impostata su StateServer 
+        // o SQLServer, l'evento non viene generato.
+
+    }
 
 </script>
