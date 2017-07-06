@@ -122,7 +122,7 @@ function BindArchivio(localObjects, el) {
         //var innerHtml = jquery_obj.html();
         var containeritem = jquery_obj.empty();/*optgroup*/
         var containerSelect = $(outerhtml).html(''); /*select vuota*/
-        var sel = baseresources[lng]["selectGeneric"];
+        var sel = baseresources[lng]["selectgeneric"];
 
         //appendo optgroup alla select
         var tempOptionGroup = containeritem.clone();

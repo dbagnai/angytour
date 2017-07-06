@@ -498,7 +498,7 @@ function GetResourcesValue(key, data) {
 /*------------FUNZIONI RIEMPIMENTO DDL ------------------------------------------------*/
 function fillDDLArray(container, jsonDictionary, selectionText, selectionVaue, nameKey, nameValue) {
     try {
-        var sel = baseresources[lng]["selectGeneric"];
+        var sel = baseresources[lng]["selectgeneric"];
         if (selectionText != null) sel = selectionText;
         var $select = $(container).clone();
         if ($select.length) {
@@ -537,7 +537,7 @@ function initDdl(q, ddlid, selecttext, selectvalue, selectedvalue, lng, filter1,
 function fillDDL(ddlID, jsonDictionary, selectionText, selectionVaue, selectedvalue) {
     try {
         // console.log("fiiDDL: " + ddlID + ",deftext:" + selectionText + ",defval:" + selectionVaue + ",selval:" + selectedvalue)
-        var sel = baseresources[lng]["selectGeneric"];
+        var sel = baseresources[lng]["selectgeneric"];
         if (selectionText != null) sel = selectionText;
         var $select = $('#' + ddlID);
         if ($select.length) {
@@ -674,27 +674,27 @@ function GestioneDdlGeo(idcaller, lng, seln, selr, selp, selc, idddln, idddlr, i
 
     if (callerid == 'all') {
         //console.log(seln + "," + selr + "," + selp + "," + selc);
-        initDdl('fillddlnazioni', idddln, baseresources[lng]["selectNazione"], '', seln, lng);
-        initDdl('fillddlregioni', idddlr, baseresources[lng]["selectRegione"], '', selr, lng, seln);
-        initDdl('fillddlprovince', iddlp, baseresources[lng]["selectProvincia"], '', selp, lng, seln, selr);
-        initDdl('fillddlcomuni', idddlc, baseresources[lng]["selectComune"], '', selc, lng, seln, selp);
+        initDdl('fillddlnazioni', idddln, baseresources[lng]["selectnazione"], '', seln, lng);
+        initDdl('fillddlregioni', idddlr, baseresources[lng]["selectregione"], '', selr, lng, seln);
+        initDdl('fillddlprovince', iddlp, baseresources[lng]["selectprovincia"], '', selp, lng, seln, selr);
+        initDdl('fillddlcomuni', idddlc, baseresources[lng]["selectcomune"], '', selc, lng, seln, selp);
     }
     else {
         var flagcascade = false;
         if (callerid == idddln) {
-            initDdl('fillddlnazioni', idddln, baseresources[lng]["selectNazione"], '', seln, lng);
+            initDdl('fillddlnazioni', idddln, baseresources[lng]["selectnazione"], '', seln, lng);
             if (cascade == 'cascade') flagcascade = true;
         }
         if (callerid == idddlr || flagcascade) {
-            initDdl('fillddlregioni', idddlr, baseresources[lng]["selectRegione"], '', selr, lng, seln);
+            initDdl('fillddlregioni', idddlr, baseresources[lng]["selectregione"], '', selr, lng, seln);
             if (cascade == 'cascade') flagcascade = true;
         }
         if (callerid == iddlp || flagcascade) {
-            initDdl('fillddlprovince', iddlp, baseresources[lng]["selectProvincia"], '', selp, lng, seln, selr);
+            initDdl('fillddlprovince', iddlp, baseresources[lng]["selectprovincia"], '', selp, lng, seln, selr);
             if (cascade == 'cascade') flagcascade = true;
         }
         if (callerid == idddlc || flagcascade) {
-            initDdl('fillddlcomuni', idddlc, baseresources[lng]["selectComune"], '', selc, lng, seln, selp);
+            initDdl('fillddlcomuni', idddlc, baseresources[lng]["selectcomune"], '', selc, lng, seln, selp);
         }
     }
 
@@ -1210,7 +1210,7 @@ function CompleteUrlListFilesDesc(localObjects, idallegati, anteprima, usecdn, c
 
 function formatprezzoofferta(localObjects, valore, prop, callback) {
     var retstring = "";
-    var unit = baseresources[lng]["Valuta"];
+    var unit = baseresources[lng]["valuta"];
     var controllo = localObjects["resultinfo"][prop[0]];
     if (controllo == "true") {
         if (valore[0] != '0')
@@ -1257,8 +1257,8 @@ function formatsubtitle(localObjects, valore, prop, callback) {
 
 function formatbtncarrello(localObjects, valore, prop, callback) {
     var retstring = "";
-    var testoCarelloesaurito = baseresources[lng]["testoCarelloesaurito"];
-    var testoInseriscicarrello = baseresources[lng]["testoInseriscicarrello"];
+    var testoCarelloesaurito = baseresources[lng]["testocarelloesaurito"];
+    var testoInseriscicarrello = baseresources[lng]["testoinseriscicarrello"];
     var id = valore[0];
     var qtavendita = valore[1];
 
@@ -1319,7 +1319,7 @@ function formattestoreplace(localObjects, valore, prop, callback) {
 function formatlabelsconto(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
-        var testosconto = baseresources[lng]["testoSconto"];
+        var testosconto = baseresources[lng]["testosconto"];
         // <div class="csstransforms prod_discount">Sconto 20%</div>
         var prezzo = valore[0];
         var prezzolistino = valore[1];
@@ -1339,7 +1339,7 @@ function formatlabelresource(localObjects, valore, prop, callback) {
 
         var controllo = localObjects["resultinfo"][prop[1]];
         if (controllo == "true" || controllo == null) { 
-            retstring = baseresources[lng][prop[0]];
+            retstring = baseresources[lng][prop[0].toLowerCase()];
         }
     } catch (e) { };
     callback(retstring);

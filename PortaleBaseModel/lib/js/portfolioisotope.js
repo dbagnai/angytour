@@ -335,14 +335,14 @@ function renderPager(controlid, callback) {
     var totalrecords = globalObject[controlid + "pagerdata"].totalrecords;
     var pagesnumber = Math.ceil(totalrecords / pagesize);
 
-    $('#' + controlid + 'btnNextPage')[0].innerHTML = baseresources[lng]["pagerAvanti"];
-    $('#' + controlid + 'btnPrevPage')[0].innerHTML = baseresources[lng]["pagerIndietro"];
+    $('#' + controlid + 'btnNextPage')[0].innerHTML = baseresources[lng]["pageravanti"];
+    $('#' + controlid + 'btnPrevPage')[0].innerHTML = baseresources[lng]["pagerindietro"];
 
     if (page > pagesnumber) page = pagesnumber;
     if (page < 1) page = 1;
     globalObject[controlid + "pagerdata"].page = page;
 
-    $("#" + controlid + "spantotals")[0].innerHTML = baseresources[lng]["pagerTotale"] + " " + totalrecords + "<br/>";
+    $("#" + controlid + "spantotals")[0].innerHTML = baseresources[lng]["pagertotale"] + " " + totalrecords + "<br/>";
     $("#" + controlid + "divactpage")[0].innerHTML = page + "/" + pagesnumber;
     if (pagesnumber > 1)
         $('#' + controlid + 'divPager').show();

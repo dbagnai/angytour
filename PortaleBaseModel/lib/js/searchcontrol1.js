@@ -163,7 +163,7 @@ function FillSearchControls(objfiltro) {
                     /*Se passo il filtro presetto i valori*/
                     if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
                         selectedvalueact = objfiltroint[idcontrollo];
-                    FillAndSelectRef(proprarr[0], lng, idcontrollo, baseresources[lng]["select" + proprarr[0]], '', selectedvalueact, filter);
+                    FillAndSelectRef(proprarr[0], lng, idcontrollo, baseresources[lng]["select" + proprarr[0].toLocaleLowerCase()], '', selectedvalueact, filter);
                     break;//Oggetto di secondo livello non implementato per ora
                 case 2:
                     break;
@@ -292,15 +292,15 @@ function combinedselect(callerid, command, lng, val1, val2, val3, val4, val5, id
     if (command == 'all') {
         //Per startup set
         if ($('#' + id1) != null)
-            FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind")], '', val1, "");
+            FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind").toLowerCase()], '', val1, "");
         if ($('#' + id2) != null)
-            FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind")], '', val2, val1);
+            FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind").toLowerCase()], '', val2, val1);
         if ($('#' + id3) != null)
-            FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind")], '', val3, val2);
+            FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind").toLowerCase()], '', val3, val2);
         if ($('#' + id4) != null)
-            FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind")], '', val4, val3);
+            FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind").toLowerCase()], '', val4, val3);
         if ($('#' + id5) != null)
-            FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind")], '', val5, val4);
+            FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind").toLowerCase()], '', val5, val4);
     }
     else {
         var flagcascade = false;
@@ -308,35 +308,35 @@ function combinedselect(callerid, command, lng, val1, val2, val3, val4, val5, id
             if (callerid == id1) {
                 var actval = $('#' + id1)[0].value;
                 if (flagcascade) actval = '';
-                FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind")], '', actval, "");
+                FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind").toLowerCase()], '', actval, "");
                 flagcascade = true;
             }
         if ($('#' + id2) != null && $('#' + id2).length > 0)
             if (callerid == id2 || flagcascade) {
                 var actval = $('#' + id2)[0].value;
                 if (flagcascade) actval = '';
-                FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind")], '', actval, $('#' + id1)[0].value);
+                FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind").toLowerCase()], '', actval, $('#' + id1)[0].value);
                 flagcascade = true;
             }
         if ($('#' + id3) != null && $('#' + id3).length > 0)
             if (callerid == id3 || flagcascade) {
                 var actval = $('#' + id3)[0].value;
                 if (flagcascade) actval = '';
-                FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind")], '', actval, $('#' + id2)[0].value);
+                FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind").toLowerCase()], '', actval, $('#' + id2)[0].value);
                 flagcascade = true;
             }
         if ($('#' + id4) != null && $('#' + id4).length > 0)
             if (callerid == id4 || flagcascade) {
                 var actval = $('#' + id4)[0].value;
                 if (flagcascade) actval = '';
-                FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind")], '', actval, $('#' + id3)[0].value);
+                FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind").toLowerCase()], '', actval, $('#' + id3)[0].value);
                 flagcascade = true;
             }
         if ($('#' + id5) != null && $('#' + id5).length > 0)
             if (callerid == id5 || flagcascade) {
                 var actval = $('#' + id5)[0].value;
                 if (flagcascade) actval = '';
-                FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind")], '', actval, $('#' + id4)[0].value);
+                FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind").toLowerCase()], '', actval, $('#' + id4)[0].value);
                 flagcascade = true;
             }
 
