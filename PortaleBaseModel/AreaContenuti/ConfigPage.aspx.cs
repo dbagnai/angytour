@@ -11,4 +11,8 @@ public partial class AreaContenuti_ConfigPage : CommonPage
     {
 
     }
+    protected void reset_Click(object sender, EventArgs e)
+    {
+        System.Web.HttpRuntime.UnloadAppDomain();
+    }
 }
