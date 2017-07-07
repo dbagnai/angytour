@@ -269,6 +269,43 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     
                     break;
 
+                case "caricaresources":
+
+                    List<ResourceItem> retresource = new List<ResourceItem>();
+                    
+                    retresource = ResourceManagement.ReadItemsByLingua(lingua);
+                    if (retresource == null || retresource.Count == 0)
+                        retresource.Add(new ResourceItem());
+
+                    //Dictionary<string, string> dictconfig  =  filterDictionaryConfig(filtri);
+
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(retresource, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+
+                    break;
+                case "updateresources":
+                    string itemdataresource = pars.ContainsKey("itemdata") ? pars["itemdata"] : "";
+                    List<ResourceItem> listresource = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResourceItem>>(itemdataresource
+                    , new JsonSerializerSettings()
+                    {
+                        DateFormatString = "dd/MM/yyyy HH:mm:ss",
+                        //DateFormatString = "dd/MM/yyyy",
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None
+                    });
+                    //Chiamiamo l'aggiornamento di tutti i dati
+                    //ConfigDM cDM = new ConfigDM();
+                    //result = cDM.AggiornaConfigList(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref list);
+                    result = ResourceManagement.AggiornaResourceList( ref listresource);
+                    
+                    break;
+
 
                 case "initresources":/*Caricamento delle risorse di testo per lingua*/
                                      //System.Globalization.CultureInfo ci = references.setCulture(lingua);

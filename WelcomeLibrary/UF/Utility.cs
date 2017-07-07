@@ -1024,7 +1024,18 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
+		  public static string HtmlEncode(string text)
+		  {
+			  string result;
+			  using (StringWriter sw = new StringWriter())
+			  {
+				  var x = new System.Web.UI.HtmlTextWriter(sw);
+				  x.WriteEncodedText(text);
+				  result = sw.ToString();
+			  }
+			  return result;
 
+		  }
 #if false
 
         public static bool invioMailGenericoAegis(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,

@@ -106,11 +106,11 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                     lblTitleSection.Text = "DASHBOARD";
                 }
 
-            }
+					 DataBind();
+				}
 
             litTrial.Text = WelcomeLibrary.STATIC.Global.TestTrial();
 
-         DataBind();
         }
         catch (Exception errore)
         {

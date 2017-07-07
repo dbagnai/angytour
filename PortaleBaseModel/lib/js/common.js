@@ -757,6 +757,16 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
 
                     }
+                    if ($(this).is("textarea")) {
+                        if (dataitem.hasOwnProperty(proprarr[0]))
+                            $(this).text(dataitem[proprarr[0]]);
+                        else
+                            $(this).text('');
+
+                        if ($(this).attr("idbind") != null)
+                            $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
+
+                    }
                     else if ($(this).is("button") && $(this).hasClass('select')) {
                         var idscheda = dataitem[proprarr[0]];
                         var prop = [];
@@ -1339,7 +1349,7 @@ function formatlabelresource(localObjects, valore, prop, callback) {
 
         var controllo = localObjects["resultinfo"][prop[1]];
         if (controllo == "true" || controllo == null) { 
-            retstring = baseresources[lng][prop[0].toLowerCase()];
+            retstring = baseresources[lng][prop[0]];
         }
     } catch (e) { };
     callback(retstring);
@@ -1543,6 +1553,32 @@ function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallone
         type: "POST",
         //async: false,
         data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro) },
+        success: function (result) {
+            callback(result, functiontocallonend);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText, function () { });
+        }
+    });
+}
+
+function caricaParametriRisorseServer(lng, objfiltro, callback, functiontocallonend) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+    var page = page || "";
+    var pagesize = pagesize || "";
+    var enablepager = enablepager || false;
+
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'caricaresources', 'objfiltro': JSON.stringify(objfiltro) },
         success: function (result) {
             callback(result, functiontocallonend);
         },

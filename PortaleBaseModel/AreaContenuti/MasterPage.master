@@ -569,10 +569,16 @@
                                     </span></a>
                                 <b class="arrow"></b>
                             </li>--%>
-                                 <li class="hover">
+                            <li class="hover">
                                 <a href="ConfigPage.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Parametri Config</span></a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="hover">
+                                <a href="ResourcePage.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Risorse</span></a>
                                 <b class="arrow"></b>
                             </li>
                         </ul>

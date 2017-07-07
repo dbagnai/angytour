@@ -87,3 +87,11 @@ Parameter name: key 20/06/2017 13.47.50</Messaggio>
 <Messaggio> Application start : 26/06/2017 12.36.00</Messaggio>
  <Data>26/06/2017 12.36.08</Data>
 <Messaggio> Global init original path: http://localhost:52646/AspNetPages/RisultatiProdotti.aspx Global init AbsolutePath : /AspNetPages/RisultatiProdotti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>07/07/2017 11.37.06</Data>
+<Messaggio> Application start : 07/07/2017 11.36.18</Messaggio>
+ <Data>07/07/2017 11.37.06</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>07/07/2017 11.38.23</Data>
+<Messaggio>httplocalhost52646Generato sitemap  07/07/2017 11.38.23</Messaggio>
+ <Data>07/07/2017 11.38.23</Data>
+<Messaggio>httplocalhost52646Generato sitemap  07/07/2017 11.38.23Terminato Aggiornamento  07/07/2017 11.38.23</Messaggio>

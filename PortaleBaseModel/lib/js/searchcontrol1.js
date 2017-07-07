@@ -163,7 +163,7 @@ function FillSearchControls(objfiltro) {
                     /*Se passo il filtro presetto i valori*/
                     if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
                         selectedvalueact = objfiltroint[idcontrollo];
-                    FillAndSelectRef(proprarr[0], lng, idcontrollo, baseresources[lng]["select" + proprarr[0].toLocaleLowerCase()], '', selectedvalueact, filter);
+                    FillAndSelectRef(proprarr[0], lng, idcontrollo, baseresources[lng]["select" + proprarr[0].toLowerCase()], '', selectedvalueact, filter);
                     break;//Oggetto di secondo livello non implementato per ora
                 case 2:
                     break;

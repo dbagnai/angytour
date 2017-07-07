@@ -171,9 +171,7 @@
 
     </script>
     <h1>Parametri configurazione</h1>
-
-      <asp:Button Text="Restart sito e aggiorna" ID="reset" OnClick="reset_Click" runat="server" />
-
+	<asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
     <span style="font-size: 1rem" id="results"></span>
     <%-- <h5>Codice Sconto</h5>
             <input class="form-control bind" mybind="prova" maxlength="20" style="width: 90px" />
