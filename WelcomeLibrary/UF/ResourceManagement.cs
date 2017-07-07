@@ -47,7 +47,7 @@ namespace WelcomeLibrary.UF
 				}
 			}
 
-			System.Diagnostics.Debug.Print("ReadKey : gruppo:" + Gruppo + " categoria:" + categoria + " Lingua:" + Lingua + " chiave:" + Chiave + " valore:" + ret.Valore + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+			//System.Diagnostics.Debug.Print("ReadKey : gruppo:" + Gruppo + " categoria:" + categoria + " Lingua:" + Lingua + " chiave:" + Chiave + " valore:" + ret.Valore + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
 
 			return ret;
 		}
@@ -57,6 +57,7 @@ namespace WelcomeLibrary.UF
 
 			_lingua = _lingua.ToLower();
 			List<ResourceItem> ret = new List<ResourceItem>();
+			
 			DateTime st = DateTime.Now;
 			foreach (var _gruppoItem in Items)
 			{
@@ -75,7 +76,7 @@ namespace WelcomeLibrary.UF
 				}
 			}
 
-			System.Diagnostics.Debug.Print("Lingua:" + _lingua + " valore:" + ret.Count + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+			//System.Diagnostics.Debug.Print("Lingua:" + _lingua + " valore:" + ret.Count + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
 			return ret;
 		}
 		public static List<ResourceItem> ReadItemsByLingua(string _gruppo, string _lingua)
@@ -100,7 +101,7 @@ namespace WelcomeLibrary.UF
 				}
 			}
 
-			System.Diagnostics.Debug.Print("gruppo:" + _gruppo + " Lingua:" + _lingua + " valore:" + ret.Count + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+			//System.Diagnostics.Debug.Print("gruppo:" + _gruppo + " Lingua:" + _lingua + " valore:" + ret.Count + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
 			return ret;
 		}
 
@@ -220,7 +221,7 @@ namespace WelcomeLibrary.UF
 				throw new ApplicationException("Errore Caricamento Tabella Risorse :" + error.Message, error);
 			}
 
-			System.Diagnostics.Debug.Print("Lettura risorse:" + Items.Count.ToString() + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+			//System.Diagnostics.Debug.Print("Lettura risorse:" + Items.Count.ToString() + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
 		}
 
 		public static string AggiornaResourceList(ref List<ResourceItem> list)
