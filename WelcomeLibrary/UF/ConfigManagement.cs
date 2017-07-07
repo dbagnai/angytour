@@ -33,13 +33,15 @@ namespace WelcomeLibrary.UF
 			return ret;
 
 		}
-		public static Dictionary<string, string> ReadSection(ref Exception errorret, string categoria)
+		public static Dictionary<string, string> ReadSection(ref Exception errorret, string gruppo)
 		{
 			Dictionary<string, string> ret = new Dictionary<string, string>();
 
-			if (Items.ContainsKey(categoria))
+            gruppo = gruppo.ToLower();
+
+            if (Items.ContainsKey(gruppo))
 			{
-				var cat = Items[categoria];
+				var cat = Items[gruppo];
 				foreach (var kv in cat)
 				{
 					if (!ret.ContainsKey(kv.Value.Codice))
@@ -48,7 +50,7 @@ namespace WelcomeLibrary.UF
 			}
 			else
 			{
-				errorret = new Exception("Sezione " + categoria + " non trovata");
+				errorret = new Exception("Sezione " + gruppo + " non trovata");
 			}
 
 			return ret;
@@ -135,8 +137,9 @@ namespace WelcomeLibrary.UF
 						item.Codice = reader["Codice"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Codice"));
 						item.Valore = reader["Valore"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Valore"));
 
-						// case non sensitive
-						item.Codice = item.Codice.ToLower();
+                        // case non sensitive
+                        item.Gruppo = item.Gruppo.ToLower();
+                        item.Codice = item.Codice.ToLower();
 
 						if (Items.ContainsKey(item.Gruppo))
 						{

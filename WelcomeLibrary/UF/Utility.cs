@@ -381,8 +381,8 @@ namespace WelcomeLibrary.UF
         }
 
 
-
-      public static Dictionary<string, string> ReadXmlAttributesOfElement(ref Exception errorret, string element = "mailSettings", string elementliv1 = "smtpbase", string elementliv2 = "network", string elementliv3 = "")
+#if fase
+        public static Dictionary<string, string> ReadXmlAttributesOfElement(ref Exception errorret, string element = "mailSettings", string elementliv1 = "smtpbase", string elementliv2 = "network", string elementliv3 = "")
       {
          Dictionary<string, string> values = new Dictionary<string, string>();
          try
@@ -445,6 +445,7 @@ namespace WelcomeLibrary.UF
          return values;
       }
       
+#endif
 
         public static bool invioMailGenerico(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
           string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
@@ -681,25 +682,26 @@ namespace WelcomeLibrary.UF
                 //Dictionary<string, string> attrvalues2 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", "mailing", "network"); //Stringa standard
                 //Dictionary<string, string> attrvalues3 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", "smtpbase", "network"); //Stringa standard
 
+
                 Exception errret = null;
             //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
             // 2016 06 26 si prende da TBL_Config
-            Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, "mailSettings"); //Stringa da web config
+            Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, sectionName); //Stringa da web config                
             if (mailvalues.ContainsKey("host"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", mailvalues["host"]);
                 if (mailvalues.ContainsKey("port"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", mailvalues["port"]);
-                if (mailvalues.ContainsKey("enableSsl") && mailvalues["enableSsl"] == "true")
+                if (mailvalues.ContainsKey("enablessl") && mailvalues["enablessl"] == "true")
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
                 objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
                 objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
-                if (mailvalues.ContainsKey("userName"))
-                    objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", mailvalues["userName"]);
+                if (mailvalues.ContainsKey("username"))
+                    objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", mailvalues["username"]);
                 if (mailvalues.ContainsKey("password"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", mailvalues["password"]);
 
 
-            #if false
+#if false
                 if (sectionName != "")
                 {
                     SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);
@@ -742,7 +744,7 @@ namespace WelcomeLibrary.UF
                 //}
                 //------------------------------
 
-             #endif
+#endif
 
 
                 int ntentativi = 3;
@@ -969,7 +971,7 @@ namespace WelcomeLibrary.UF
                         Exception errret = null;
                         //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
                         // 2016 06 26 si prende da TBL_Config
-                        Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, "mailSettings"); //Stringa da web config
+                        Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, sectionName); //Stringa da web config
 
                         //    SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);//Protetto in medium trust
                         if (mailvalues != null)
@@ -981,8 +983,8 @@ namespace WelcomeLibrary.UF
                             cli.Port = port;
                             //mailvalues["defaultCredentials"];
                             //  cli.UseDefaultCredentials = section.Network.DefaultCredentials;
-                            cli.Credentials = new System.Net.NetworkCredential(mailvalues["userName"], mailvalues["password"]);
-                            if (mailvalues.ContainsKey("enableSsl") && mailvalues["enableSsl"] == "true")
+                            cli.Credentials = new System.Net.NetworkCredential(mailvalues["username"], mailvalues["password"]);
+                            if (mailvalues.ContainsKey("enablessl") && mailvalues["enablessl"] == "true")
                                 cli.EnableSsl = true;
                             //if (section.Network.TargetName != null)
                             //    cli.TargetName = section.Network.TargetName;
@@ -1024,18 +1026,19 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
-		  public static string HtmlEncode(string text)
-		  {
-			  string result;
-			  using (StringWriter sw = new StringWriter())
-			  {
-				  var x = new System.Web.UI.HtmlTextWriter(sw);
-				  x.WriteEncodedText(text);
-				  result = sw.ToString();
-			  }
-			  return result;
+        public static string HtmlEncode(string text)
+        {
+            string result;
+            using (StringWriter sw = new StringWriter())
+            {
+                var x = new System.Web.UI.HtmlTextWriter(sw);
+                x.WriteEncodedText(text);
+                result = sw.ToString();
+            }
+            return result;
 
-		  }
+        }
+
 #if false
 
         public static bool invioMailGenericoAegis(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
@@ -1412,11 +1415,11 @@ namespace WelcomeLibrary.UF
         //}
 
 
-        #region GESTIONE CARICAMENTO CONTENENTI DATI RELATIVI ALLE VARIE TABELLE DI RIFERIMTNTO
+#region GESTIONE CARICAMENTO CONTENENTI DATI RELATIVI ALLE VARIE TABELLE DI RIFERIMTNTO
 
         public static void CaricaMemoriaStaticaCaratteristiche(string codicetipologia, bool removenotpresent = true)
         {
-            #region CARICAMENTO DELLE TABELLE DI RIFERIMENTO PER LE CARATTERISTICHE!!
+#region CARICAMENTO DELLE TABELLE DI RIFERIMENTO PER LE CARATTERISTICHE!!
             Caratteristiche = new List<WelcomeLibrary.DOM.TabrifCollection>();
             //Caratteristica1
             Caratteristiche.Add(CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1"));
@@ -1483,7 +1486,7 @@ namespace WelcomeLibrary.UF
                         idtoremove.Add(t.Codice);
                 foreach (string id in idtoremove) Caratteristiche[5].RemoveAll(c => c.Codice == id);
             }
-            #endregion
+#endregion
 
         }
 
@@ -2694,7 +2697,7 @@ ZW	Zimbabwe
         }
 
 
-        #endregion
+#endregion
 
 
         public static string SostituisciTestoACapo(string testo)
