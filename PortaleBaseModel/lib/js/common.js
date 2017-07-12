@@ -741,13 +741,13 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         $(this).attr("value", dataitem[proprarr[0]]);
                         $(this).html(dataitem[proprarr[0]]);
                     }
-                    if ($(this).is("input") && $(this).attr('type') == 'checkbox') {
+                    else if ($(this).is("input") && $(this).attr('type') == 'checkbox') {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).prop("checked", dataitem[proprarr[0]]);
                         else
                             $(this).prop("checked", false);
                     }
-                    if ($(this).is("input") && ($(this).attr('type') == 'text' || $(this).attr('type') == null)) {
+                    else if ($(this).is("input") && ($(this).attr('type') == 'text' || $(this).attr('type') == null)) {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).attr("value", dataitem[proprarr[0]]);
                         else
@@ -757,7 +757,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
 
                     }
-                    if ($(this).is("textarea")) {
+                    else if ($(this).is("textarea")) {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).text(dataitem[proprarr[0]]);
                         else
@@ -1595,7 +1595,7 @@ function caricaParametriRisorseServer(lng, objfiltro, callback, functiontocallon
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'caricaresources', 'objfiltro': JSON.stringify(objfiltro) },
+        data: { 'q': 'caricaresources', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
         success: function (result) {
             callback(result, functiontocallonend);
         },
@@ -1965,6 +1965,24 @@ if (typeof Array.prototype.contains !== 'function') {
         }
         return false;
     }
+
+}
+
+
+function getCopy(objectToCopy) {
+    var copy = {};
+
+    for (var prop in objectToCopy) {
+        if (typeof (objectToCopy[prop]) === "object") {
+            copy[prop] = getCopy(objectToCopy[prop]);
+        }
+        else {
+            copy[prop] = null;
+        }
+    }
+
+    return copy;
+
 
 }
 var sortBy = (function () {

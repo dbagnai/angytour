@@ -147,6 +147,60 @@
             background-color: #428bca;
             color: #fff;
         }
+
+
+        /* ==========================================================================
+   Page Loader
+============================================================================= */
+
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            background: #fafafa;
+        }
+
+        @keyframes page-loader {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes page-loader {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            min-width: 24px;
+            min-height: 24px;
+        }
+
+            .spinner:before {
+                content: 'Loading…';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 40px;
+                height: 40px;
+                margin-top: -20px;
+                margin-left: -20px;
+            }
+
+            .spinner:not(:required):before {
+                content: '';
+                border-radius: 50%;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                border-top: 2px solid #333;
+                border-right: 2px solid transparent;
+                animation: page-loader .6s linear infinite;
+                -webkit-animation: page-loader .6s linear infinite;
+            }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -167,7 +221,7 @@
                 <asp:ScriptReference Path="~/Scripts/jquery.prettyPhoto.js" />
             </Scripts>
         </Ajax:ToolkitScriptManager>
-      
+
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
@@ -175,7 +229,7 @@
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
 
 
-          <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
@@ -235,6 +289,11 @@
 
         <!-- /section:basics/navbar.layout -->
         <div class="main-container" id="main-container">
+
+            <div class="loader" style="display: none">
+                <div class="spinner"></div>
+            </div>
+
             <script type="text/javascript">
                 try { ace.settings.check('main-container', 'fixed') } catch (e) { }
             </script>
@@ -302,7 +361,7 @@
                                 </ItemTemplate>
                             </asp:Repeater>
 
-                                <asp:Repeater ID="rptCatalogoCategorie" runat="server">
+                            <asp:Repeater ID="rptCatalogoCategorie" runat="server">
                                 <ItemTemplate>
                                     <li class="hover">
                                         <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("CodiceTipologia").ToString() + "&CodiceProdotto="+ Eval("CodiceProdotto").ToString() %>">
@@ -363,7 +422,7 @@
                                                     <span class="menu-text">Testate Ristorante</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                                   <li class="newLi hover">
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate camere</span></a>
@@ -375,17 +434,17 @@
                                                     <span class="menu-text">Testate Listini</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                                <li class="newLi hover">
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-5">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Menu</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                           
+
                                             <li>
                                                 <hr style="margin: 2px 0" />
                                             </li>
-                                     <%--       <li class="newLi hover">
+                                            <%--       <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000001">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate catalogo</span></a>
@@ -397,7 +456,7 @@
                                                     <span class="menu-text">Testate eventi e promo</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                                  <li class="newLi hover">
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000004">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Piatti</span></a>
@@ -476,11 +535,11 @@
                                                     <span class="menu-text">Banner area Catalogo</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            
+
                                             <li>
                                                 <hr style="margin: 2px 0" />
                                             </li>
-                                            
+
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-section1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -635,7 +694,7 @@
 
     <!--[if !IE]> -->
     <script type="text/javascript">
-        window.jQuery || document.write("<script src='assets/js/jquery.js'>" + "<" + "/script>");
+                    window.jQuery || document.write("<script src='assets/js/jquery.js'>" + "<" + "/script>");
     </script>
 
     <!-- <![endif]-->

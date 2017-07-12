@@ -293,6 +293,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     , new JsonSerializerSettings()
                     {
                         DateFormatString = "dd/MM/yyyy HH:mm:ss",
+                           NullValueHandling = NullValueHandling.Ignore,
                         //DateFormatString = "dd/MM/yyyy",
                         MissingMemberHandling = MissingMemberHandling.Ignore,
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,

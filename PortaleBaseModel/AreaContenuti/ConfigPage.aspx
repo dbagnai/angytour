@@ -10,6 +10,8 @@
         var jsondetailsobj = {};
         var dataarray = [];
 
+        var templatehtml = null;
+
         //function fillsampledata() {
         //    jsondetailsobj = {};
         //    jsondetailsobj.inpCodicesconto = "aa.aa";
@@ -18,6 +20,8 @@
         //}
 
         function getdata() {
+            $(".loader").show();
+
             //Chiamre server per leggere dati e Riempire ->
             // jsondetailsobj = {};
             var objfiltrotmp = {};
@@ -25,6 +29,8 @@
             caricaParametriConfigServer(lng, objfiltrotmp,
                 function (result, callafterfilter) {
                     try {
+                        $(".loader").fadeOut("slow");
+
                         // qui devi riempire correttamente il datarray
                         //jsondetailsobj = JSON.parse(result);
                         //dataarray[0] = jsondetailsobj;
@@ -41,6 +47,7 @@
 
         /* UPDATE DEL RECORD -----------------------------------------------------------*/
         function updateData() {
+            $(".loader").fadeIn("slow");
             var jsondetailstxt = JSON.stringify(dataarray);
             if (jsondetailstxt != '' && jsondetailstxt != null) {
                 $.ajax({
@@ -59,10 +66,12 @@
         }
         function OnCompleteupdateDetail(result) {
             try {
+                $(".loader").fadeOut("slow");
                 sendmessage('Richiesta Aggiornamento Completata.', result);
                 $("#results").html('Richiesta Aggiornamento Completata.' + result);
             }
             catch (e) {
+                $(".loader").fadeOut("slow");
                 //  sendmessage(e, '');
                 $("#results").html(e);
 
@@ -70,6 +79,7 @@
         }
         function OnFailupdateDetail(result) {
             //sendmessage('Richiesta Aggiornamento Fallita.', result.responseText);
+            $(".loader").fadeOut("slow");
             $("#results").html('Richiesta Aggiornamento Fallita.' + ' ' + result.responseText);
 
         }
@@ -193,8 +203,9 @@
     <div class="row" id="row1">
         <div class="col-sm-6">
             <div>
-                <label class="bind" mybind="Id"></label>
-                <label class="bind" mybind="Codice"></label>
+                <label class="bind" mybind="Id"></label>|
+                <label class="bind" mybind="Codice"></label>|
+                <label class="bind" mybind="Gruppo"></label>|
                 <input class="form-control bind" mybind="Valore" idbind="Id" maxlength="20" style="width: 80%" />
             </div>
         </div>
