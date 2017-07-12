@@ -175,7 +175,7 @@
                 templatehtml = str;
             } else str = templatehtml;
             var jquery_obj = $(str);
-             
+
 
             var container = $('#' + containerid);
             $(container).html('');
@@ -191,7 +191,7 @@
 
     </script>
     <h1>Parametri configurazione</h1>
-	<asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
+    <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
     <span style="font-size: 1rem" id="results"></span>
     <%-- <h5>Codice Sconto</h5>
             <input class="form-control bind" mybind="prova" maxlength="20" style="width: 90px" />
@@ -200,20 +200,25 @@
     <div class="row">
         <h3>Sezione Config</h3>
     </div>
-    <div class="row" id="row1">
-        <div class="col-sm-6">
-            <div>
-                <label class="bind" mybind="Id"></label>|
-                <label class="bind" mybind="Codice"></label>|
-                <label class="bind" mybind="Gruppo"></label>|
+    <div style="background-color: #ddd; padding: 20px">
+        <div class="row" id="row1">
+            <div class="col-sm-12">
+                <div>
+                    <label class="bind" mybind="Id"></label>
+                    |
+                <label class="bind" mybind="Codice"></label>
+                    |
+                <label class="bind" mybind="Gruppo"></label>
+                    |
                 <input class="form-control bind" mybind="Valore" idbind="Id" maxlength="20" style="width: 80%" />
+                </div>
             </div>
         </div>
-    </div>
-    <p>&nbsp;</p>
-    <div class="row">
-        <div class="col-sm-6">
-            <button class="btn btn-primary" type="button" onclick="javascript:updateData()">Memorizza</button>
+        <p>&nbsp;</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="button" onclick="javascript:updateData()">Memorizza</button>
+            </div>
         </div>
     </div>
 
