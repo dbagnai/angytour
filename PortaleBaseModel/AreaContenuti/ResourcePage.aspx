@@ -7,33 +7,46 @@
 
 
     <script type="text/javascript">
-        var jsondetailsobj = {};
+
+        var templatehtml = null;
         var dataarray = [];
         var dataarrayUpdated = [];
-        //var skeleton = null;
-
-        //function fillsampledata() {
-        //    jsondetailsobj = {};
-        //    jsondetailsobj.inpCodicesconto = "aa.aa";
-        //    jsondetailsobj.inpPercentualesconto = "bbb.b";
-        //    dataarray.push(jsondetailsobj);
-        //}
+        var dataarrayInsert = null;
+        var newitem = null;
+        jQuery(document).ready(function () {
+            loadref(getdata, 'I');
+        });
 
         function getdata() {
+            $(".loader").show();
+            var $select = $('#ddlLingue');
+            if ($('#ddlLingue option').length == 0) {
+                fillDDL("ddlLingue", jsonlanguages, "Seleziona Lingua", "", "I");
+            }
+
             //Chiamre server per leggere dati e Riempire ->
             // jsondetailsobj = {};
             var objfiltrotmp = {};
             objfiltrotmp["Gruppo"] = "";
-            caricaParametriRisorseServer(lng, objfiltrotmp,
+            caricaParametriRisorseServer($select.val(), objfiltrotmp,
                 function (result, callafterfilter) {
                     try {
+                        $(".loader").fadeOut("slow");
+
                         // qui devi riempire correttamente il datarray
                         //jsondetailsobj = JSON.parse(result);
                         //dataarray[0] = jsondetailsobj;
-
+                        dataarrayInsert = null;
                         dataarrayUpdated = [];
                         dataarray = JSON.parse(result);
-                        if (dataarray.length>0) skeleton = getCopy(dataarray[0]);
+                        if (dataarray.length > 0) {
+                            newitem = getCopy(dataarray[0]);
+                            SetInsertValues();
+                        }
+                        console.log(dataarray);
+                        console.log(dataarrayInsert);
+                        console.log(dataarrayUpdated);
+
                         callafterfilter("row1", "row1", dataarray)
 
                     }
@@ -43,25 +56,27 @@
 
         }
 
-     
-        function getCopy(objectToCopy) {
-            var copy = {};
+        function SetInsertValues() {
+            var select1 = $('#newchiave');
+            var select2 = $('#newgruppo');
+            var select3 = $('#newvalore');
 
-            for (var prop in objectToCopy) {
-                if (typeof (objectToCopy[prop]) === "object") {
-                    copy[prop] = getCopy(objectToCopy[prop]);
-                }
-                else {
-                    copy[prop] = null;
-                }
-            }
+            select1.attr("value", newitem["Chiave"] != null ? newitem["Chiave"] : '');
+            select2.attr("value", newitem["Gruppo"] != null ? newitem["Gruppo"] : '');
+            select3.attr("value", newitem["Valore"] != null ? newitem["Valore"] : '');
 
-            return copy;
         }
 
         /* UPDATE DEL RECORD -----------------------------------------------------------*/
         function updateData() {
+            $(".loader").fadeIn("slow");
+
             var jsondetailstxt = JSON.stringify(dataarrayUpdated);
+
+            if (dataarrayInsert != null && dataarrayInsert != []) // per insert
+                jsondetailstxt = JSON.stringify(dataarrayInsert);
+
+
             if (jsondetailstxt != '' && jsondetailstxt != null) {
                 $.ajax({
                     type: "POST",
@@ -79,16 +94,23 @@
         }
         function OnCompleteupdateDetail(result) {
             try {
+                getdata(); //Ricarico il tutto
+
+
                 sendmessage('Richiesta Aggiornamento Completata.', result);
                 $("#results").html('Richiesta Aggiornamento Completata.' + result);
             }
             catch (e) {
+                $(".loader").fadeOut("slow");
+
                 //  sendmessage(e, '');
                 $("#results").html(e);
 
             }
         }
         function OnFailupdateDetail(result) {
+            $(".loader").fadeOut("slow");
+
             //sendmessage('Richiesta Aggiornamento Fallita.', result.responseText);
             $("#results").html('Richiesta Aggiornamento Fallita.' + ' ' + result.responseText);
 
@@ -98,15 +120,37 @@
         function deletedata()
         { }
 
+        function insertdata() {
+            var $select = $('#ddlLingue');
+            if (newitem == null) {
+                sendmessage('Errore valore inserimanto non impostato.', '');
+                return;
+            }
 
+            newitem["Lingua"] = $select.val();
+            /*Controllo se tutti valori ok*/
+            if (newitem["Lingua"] == null || newitem["Lingua"] == '') {
+                sendmessage('Errore Lingua non impostata.', '');
+                return;
+            }
+            if (newitem["Gruppo"] == null || newitem["Gruppo"] == '') {
+                sendmessage('Errore Gruppo non impostato.', '');
+                return;
+            }
+            if (newitem["Chiave"] == null || newitem["Chiave"] == '') {
+                sendmessage('Errore Chiave non impostata.', '');
+                return;
+            }
+            dataarrayInsert = [];
+            dataarrayInsert.push(newitem);
+            updateData();
 
-        jQuery(document).ready(function () {
+            console.log(newitem);
+            console.log(dataarrayInsert);
+            sendmessage('Richiesta inserimento in corso.', '');
 
-            getdata();
-            //   fillsampledata();
-            // databind("row1", "row1", dataarray);
+        }
 
-        });
 
         function bindchangeevent() {
             $('textarea').on("input propertychange", function () {
@@ -139,14 +183,16 @@
                                 //}
                                 if ($(el).is("input")) {
                                     if ($(el).attr('type') == 'checkbox')
-                                        jsondetailsobj[proprarr[0]] = el.checked;
+                                        newitem[proprarr[0]] = el.checked;
                                     else
-                                        jsondetailsobj[proprarr[0]] = el.value.trim();
+                                        newitem[proprarr[0]] = el.value.trim();
                                 }
                                 if ($(el).is("select"))
-                                    jsondetailsobj[proprarr[0]] = el.value.trim();
+                                    newitem[proprarr[0]] = el.value.trim();
                                 if ($(el).is("textarea"))
-                                    jsondetailsobj[proprarr[0]] = el.value.trim();
+                                    newitem[proprarr[0]] = el.value.trim();
+
+
                                 break;
                         }
                     }
@@ -187,20 +233,31 @@
             {
                 if (dataarrayUpdated[j]["Id"] == Number(idbind)) {
                     dataarrayUpdated[j] = dataItem;
+                    trovato = true;
                     break;
                 }
             }
             if (!trovato)
                 dataarrayUpdated.push(dataItem);
         }
+
         function databind(containerid, templateid, data) {
             if (!data.length) {
                 // $('#' + el).html(''); 
                 //$('#' + objfiltrotmp.containerid).html('');
+                $('#' + containerid).html('');
                 return;
             }
+            //Memorizzo il template per i successivi binding
             var str = $($('#' + templateid)[0]).html();
+            if (templatehtml == null) {
+                str = $($('#' + templateid)[0]).html();
+                templatehtml = str;
+            } else str = templatehtml;
+
             var jquery_obj = $(str);
+
+
             var container = $('#' + containerid);
             $(container).html('');
             for (var j = 0; j < data.length; j++) {
@@ -216,27 +273,57 @@
 
     </script>
     <h1>Parametri configurazione</h1>
-	<asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
-    <span style="font-size: 1rem" id="results"></span>
-    <%-- <h5>Codice Sconto</h5>
-            <input class="form-control bind" mybind="prova" maxlength="20" style="width: 90px" />
-            <h5>Percentuale Sconto</h5>
-            <input class="form-control bind" mybind="prova2" style="width: 90px" />--%>
+    <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
+
+
+    <select id="ddlLingue" onchange="getdata()"></select><br />
+    <span style="font-size:2rem" id="results"></span>
+
+
     <div class="row">
         <h3>Sezione Risorse</h3>
     </div>
-    <div class="row" id="row1">
-        <div class="col-sm-12">
-            <div>
-                <label class="bind" mybind="Id"></label>
-                <label class="bind" mybind="Chiave"></label>
-                <%--<input class="form-control bind" mybind="Valore" idbind="Id" maxlength="20" style="width: 80%" />--%>
-                <textarea class="form-control bind" mybind="Valore" idbind="Id" rows="4" style="width: 80%" ></textarea>
+    <div style="background-color: #ccc; padding: 20px">
+        <h2>Inserisci nuova voce:</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <b>Chiave</b>
+                <input class="form-control" id="newchiave" mybind="Chiave" maxlength="20" style="width: 80%" />
+                <b>Gruppo</b>
+                <input class="form-control" id="newgruppo" mybind="Gruppo" maxlength="20" style="width: 80%" />
+            </div>
+            <div class="col-sm-6">
+                <b>Valore</b>
+                <textarea class="form-control" id="newvalore" mybind="Valore" rows="4" style="width: 80%"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="button" onclick="javascript:insertdata()">Aggiungi</button>
             </div>
         </div>
     </div>
     <p>&nbsp;</p>
-    <div class="row" id="bottone">
+        <div style="background-color: #ddd; padding: 20px">
+            <h2>Aggiorna valori presenti</h2>
+    <div class="row" id="row1">
+        <div class="col-sm-12">
+            <div>
+                |<label class="bind" mybind="Id"></label>
+                |<label class="bind" mybind="Chiave"></label>
+                |<label class="bind" mybind="Gruppo"></label>|
+                |<label class="bind" mybind="Lingua"></label>|
+                |<label class="bind" mybind="Categoria"></label>|
+             <%--   |<label class="bind" mybind="Comment"></label>|--%>
+                <textarea class="form-control bind" mybind="Valore" idbind="Id" rows="4" style="width: 80%"></textarea>
+            </div>
+        </div>
+    </div>
+    </div>
+    <p>&nbsp;</p>
+
+
+    <div class="row">
         <div class="col-sm-6">
             <button class="btn btn-primary" type="button" onclick="javascript:updateData()">Memorizza</button>
         </div>

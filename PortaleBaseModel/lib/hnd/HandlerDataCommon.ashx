@@ -75,7 +75,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             List<ResultAutocomplete> lra = new List<ResultAutocomplete>();
             int irecs = 0;
 
-
             string lingua = pars.ContainsKey("lng") ? pars["lng"] : "I";
             string filter1 = pars.ContainsKey("filter1") ? pars["filter1"] : "";
             string filter2 = pars.ContainsKey("filter2") ? pars["filter2"] : "";
@@ -300,8 +299,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         PreserveReferencesHandling = PreserveReferencesHandling.None
                     });
                     //Chiamiamo l'aggiornamento di tutti i dati
-                    //ConfigDM cDM = new ConfigDM();
-                    //result = cDM.AggiornaConfigList(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref list);
                     result = ResourceManagement.AggiornaResourceList( ref listresource);
                     
                     break;

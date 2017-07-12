@@ -151,12 +151,22 @@
 
         function databind(containerid, templateid, data) {
             if (!data.length) {
+                $('#' + containerid).html('');
+
                 // $('#' + el).html(''); 
                 //$('#' + objfiltrotmp.containerid).html('');
                 return;
             }
+
+            //Memorizzo il template per i successivi binding
             var str = $($('#' + templateid)[0]).html();
+            if (templatehtml == null) {
+                str = $($('#' + templateid)[0]).html();
+                templatehtml = str;
+            } else str = templatehtml;
             var jquery_obj = $(str);
+             
+
             var container = $('#' + containerid);
             $(container).html('');
             for (var j = 0; j < data.length; j++) {

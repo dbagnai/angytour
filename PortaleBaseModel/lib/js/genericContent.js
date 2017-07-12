@@ -108,9 +108,29 @@ function bindgenericcontent(el, localObjects) {
         inizializzaFlexsliderGallery(el, container);
     });
     CleanHtml($('#' + container));
-
+    reinitaddthis();
 
 };
+
+function reinitaddthis()
+{
+    //    addthis.init()
+    $('#atstbx').remove();
+    //addthis.toolbox('.addthis_toolbox');
+    if (typeof addthis !== 'undefined') { addthis.layers.refresh(); }
+
+    //if (window.addthis) {
+    //    window.addthis = null;
+    //    window._adr = null;
+    //    window._atc = null;
+    //    window._atd = null;
+    //    window._ate = null;
+    //    window._atr = null;
+    //    window._atw = null;
+    //}
+   // return $.getScript("http://s7.addthis.com/js/300/addthis_widget.js#pubid=sdive");
+}
+
 /*--- FLEXLIDER GALLERY -------http://www.woothemes.com/flexslider/-----------*/
 function injectFlexsliderControls(controlid, container) {
     $("#" + container).load("/lib/template/" + "flexslidergallery.html", function () {

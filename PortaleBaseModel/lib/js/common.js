@@ -1083,21 +1083,25 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     prop[1] = $(this).attr("myvalue1");
                                 if ($(this).attr("myvalue2") != null)
                                     prop[2] = $(this).attr("myvalue2");
-
                                 window[formatfunc](localObjects, valore, prop, function (ret) {
-                                    // valore = ret;
                                     if (ret != null && Array.isArray(ret) && ret.length > 0)
                                         valore = ret[0];
                                     else
                                         valore = ret;
                                 });
                             }
-                            $(this).html(valore);
+                            if (valore == "true" || valore == "false") {
+                                if (valore == "true")
+                                    $(this).hide();
+                            }
+                            else
+                                $(this).html(valore);
                             //$(this).html(dataitem[proprarr[0]]);
                         }
                         else
                             $(this).html('');
                     }
+
 
                     break;
                 case 2: //Oggetto bind di 2 livelli
@@ -1218,6 +1222,19 @@ function CompleteUrlListFilesDesc(localObjects, idallegati, anteprima, usecdn, c
     callback(arrayfiles);
 }
 
+function frmvisibility(localObjects, valore, prop, callback) {
+    var retstring = "false";
+    try {
+        var object = localObjects["linkloaded"];
+        if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
+            var contenuto = object[valore[0]][prop[0]];
+            if (contenuto != null && contenuto != '') {
+                retstring = "true";
+            }
+        }
+    } catch (e) { };
+    callback(retstring);
+}
 function formatprezzoofferta(localObjects, valore, prop, callback) {
     var retstring = "";
     var unit = baseresources[lng]["valuta"];
@@ -1349,7 +1366,7 @@ function formatlabelresource(localObjects, valore, prop, callback) {
 
         var controllo = localObjects["resultinfo"][prop[1]];
         if (controllo == "true" || controllo == null) { 
-            retstring = baseresources[lng][prop[0]];
+            retstring = baseresources[lng][prop[0].toLowerCase()];
         }
     } catch (e) { };
     callback(retstring);

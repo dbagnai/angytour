@@ -177,19 +177,34 @@ function BindFasciaBanner(el, localObjects) {
                 $('#' + el).append(ret.html()) + "\r\n";
             });
     }
-
-
-    $(document).on('cycle-post-initialize', '.newslider', function (event) {
-        calcAspectRatio(el);
-        console.log('post-ini' + ' ' + el);
-    });
+    $('#' + el).cycle();
+    calcAspectRatio(el);
     $(window).on("orientationchange", function (event) {
         calcAspectRatio(el);
     });
-    jQuery(document).ready(function () {
-    $('#' + el).cycle();
+    $(window).resize(function () {
         calcAspectRatio(el);
     });
+
+    var counter = 0;
+    var looper = setInterval(function () {
+        calcAspectRatio(el);
+        counter++;
+        if (counter >= 5) {
+            clearInterval(looper);
+        };
+        console.log('recalcsize-ini' + ' ' + el);
+    }, 2000);
+
+    //$(document).on('cycle-post-initialize', '.newslider', function (event) {
+    //    calcAspectRatio(el);
+    //    console.log('post-ini' + ' ' + el);
+    //});
+
+    //jQuery(document).ready(function () {
+    // $('#' + el).cycle();
+    //    calcAspectRatio(el);
+    //});
 
     CleanHtml($('#' + el));
 
@@ -200,54 +215,65 @@ function calcAspectRatio(el) {
         $('#' + el).parent().show();
         //$('#' + el).parent().attr("style", "display:block;");
 
-        setTimeout(function () {
+        //setTimeout(function () {
         var img = $('#' + el + ' .imgBanner');
         var divtesto = $('#' + el + ' .divTesto');
         var divtesto2 = $('#' + el + ' .divTesto2');
+
         //console.log((divtesto).parent().outerHeight());
         if ($(window).width() > 1023) {
-            console.log('abefore ' + el + ' imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
-            if (img.height() > 0 && Math.abs(img.height() - (divtesto).parent().outerHeight()) > 10) {
-                if (img.height() > (divtesto).parent().outerHeight()) {
-                    console.log('a ' + el + ' imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
-                    //console.log($('#' + el)[0].id + "(true): " + img.height() + " " + (divtesto).parent().outerHeight());
-                    var paddvert = (img.height() - $(divtesto).parent().outerHeight()) / 2;
-                    divtesto.css('padding-top', paddvert);
-                    divtesto.css('padding-bottom', paddvert);
-                    if ((divtesto).parent().outerHeight() != null && (divtesto).parent().outerHeight() != 0)
-                        divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight());
-                    else divtesto.parent().parent().parent().parent().css('height', img.height());
+
+            divtesto.each(function (index, text) {
+                console.log('abefore ' + el + ' imgheight:' + img.height() + ' testoheight:' + ($(this)).parent().outerHeight())
+                if (img.height() > 0 && Math.abs(img.height() - ($(this)).parent().outerHeight()) > 10) {
+                    if (img.height() > ($(this)).parent().outerHeight()) {
+                        console.log('a ' + el + ' imgheight:' + img.height() + ' testoheight:' + ($(this)).parent().outerHeight())
+                        //console.log($('#' + el)[0].id + "(true): " + img.height() + " " + ($(this)).parent().outerHeight());
+                        var paddvert = (img.height() - ($(this)).parent().outerHeight()) / 2;
+                        $(this).css('padding-top', paddvert);
+                        $(this).css('padding-bottom', paddvert);
+                        if (($(this)).parent().outerHeight() != null && ($(this)).parent().outerHeight() != 0)
+                            $(this).parent().parent().parent().parent().css('height', ($(this)).parent().outerHeight());
+                        else $(this).parent().parent().parent().parent().css('height', img.height());
+                    }
+                    else {
+                        console.log('b ' + el + 'imgheight:' + img.height() + ' testoheight:' + ($(this)).parent().outerHeight())
+                        //console.log($('#' + el)[0].id + "(false): " + img.height() + " " + ($(this)).parent().outerHeight());
+                        $(this).css('padding-top', 20);
+                        $(this).css('padding-bottom', 20);
+                        img.css('height', ($(this)).parent().outerHeight());
+                        img.css('width', 'auto');
+                        img.css('margin-left', (img.parent().width() - img.width()) / 2);
+                        img.css('margin-right', (img.parent().width() - img.width()) / 2);
+                        $(this).parent().parent().parent().parent().css('height', ($(this)).parent().outerHeight());
+                    }
                 }
-                else {
-                    console.log('b ' + el + 'imgheight:' + img.height() + ' testoheight:' + (divtesto).parent().outerHeight())
-                    //console.log($('#' + el)[0].id + "(false): " + img.height() + " " + (divtesto).parent().outerHeight());
-                    divtesto.css('padding-top', 20);
-                    divtesto.css('padding-bottom', 20);
-                    img.css('height', (divtesto).parent().outerHeight());
-                    img.css('width', 'auto');
-                    img.css('margin-left', (img.parent().width() - img.width()) / 2);
-                    img.css('margin-right', (img.parent().width() - img.width()) / 2);
-                    divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight());
-                }
-            }
+            });
+
         } else //In modo mobile xs
         {
-            if (img.height() > 0) {
-                //console.log($('#' + el)[0].id + "(mobile): " + img.height() + " " + (divtesto).parent().outerHeight());
-                if (divtesto2.length > 0) {
-                    if (((divtesto2).children(":first")).length > 0 && (divtesto2).children(":first")[0].innerHTML == '')
-                        divtesto2.parent().parent().parent().parent().css('height', img.height());
-                    else
-                        divtesto2.parent().parent().parent().parent().css('height', (divtesto2).parent().outerHeight() + img.height());
+
+            divtesto2.each(function (index, text) {
+                if (img.height() > 0) {
+                    //console.log($('#' + el)[0].id + "(mobile): " + img.height() + " " + (divtesto).parent().outerHeight());
+                    if ($(this).length > 0) {
+                        if ((($(this)).children(":first")).length > 0 && ($(this)).children(":first")[0].innerHTML == '')
+                            $(this).parent().parent().parent().parent().css('height', img.height());
+                        else
+                            $(this).parent().parent().parent().parent().css('height', ($(this)).parent().outerHeight() + img.height());
+                    }
+                    else {
+                        if (((divtesto).children(":first")).length > 0 && (divtesto).children(":first")[0].innerHTML == '')
+                            divtesto.parent().parent().parent().parent().css('height', img.height());
+                        else
+                            divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight() + img.height());
+                    }
                 }
-                else {
-                    if (((divtesto).children(":first")).length > 0 && (divtesto).children(":first")[0].innerHTML == '')
-                        divtesto.parent().parent().parent().parent().css('height', img.height());
-                    else
-                        divtesto.parent().parent().parent().parent().css('height', (divtesto).parent().outerHeight() + img.height());
-                }
-            }
+            });
+
         }
-        }, 200);
+        //}, 400);
+
+
     }
 };

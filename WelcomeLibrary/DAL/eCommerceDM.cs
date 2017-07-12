@@ -628,7 +628,7 @@ namespace WelcomeLibrary.DAL
             if (connessione == null || connessione == "") return;
             if (item.SessionId == null || item.SessionId == "") return;
             if (item.IpClient == null || item.IpClient == "") return;
-            
+
             List<OleDbParameter> parColl = new List<OleDbParameter>();
 
             OleDbParameter p1 = new OleDbParameter("@dataoggi", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now));
@@ -642,8 +642,10 @@ namespace WelcomeLibrary.DAL
             string query = "DELETE * FROM TBL_CARRELLO ";
             string where = "";
             if (string.IsNullOrWhiteSpace(where))
-                //query += " WHERE Data is not null and (Data+Validita) < @dataoggi AND (SessionId=@SessionId and IpClient=@IpClient) ";
-                query += " WHERE Data is not null and (Data+Validita) < @dataoggi and CodiceOrdine='' ";
+                //query += " WHERE Data is not null and (Data+Validita) < @dataoggi and CodiceOrdine='' ";
+                query += " WHERE Data is not null and DateDiff('d', @dataoggi, DateAdd('d', Validita, Data)) <= 0 and CodiceOrdine='' ";
+
+
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

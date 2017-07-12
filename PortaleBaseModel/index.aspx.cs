@@ -22,14 +22,14 @@ public partial class index : CommonPage
             if (!IsPostBack)
             {
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", true, deflanguage);
-              //  CaricaControlliServerside();
+                //  CaricaControlliServerside();
                 CaricaControlliJS();
                 SettaTestoIniziale("Home");
                 InizializzaSeo();
-            //PulisciRegistrazionitemporanee();
+                //PulisciRegistrazionitemporanee();
 
-            // se utilizzi le risorse abilita il databind
-            //DataBind();
+                // se utilizzi le risorse abilita il databind
+                //DataBind();
             }
         }
         catch (Exception err)
@@ -38,13 +38,42 @@ public partial class index : CommonPage
         }
     }
 
+    private void InizializzaSeo()
+    {
+        string linkcanonico = "~";
+        linkcanonico = "~/" + Lingua + "/Home";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == Lingua)
+            linkcanonico = "~";
+        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
+        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+    }
+
+    private void SettaTestoIniziale(string sezione)
+    {
+        string htmlPage = "";
+        if (references.ResMan("Common", Lingua, "Content" + sezione) != null)
+            htmlPage = ReplaceLinks(references.ResMan("Common", Lingua, "Content" + sezione).ToString());
+        litTextHeadPage.Text = htmlPage;
+        string strigaperricerca = sezione;
+        //strigaperricerca = Request.Url.AbsolutePath;
+        //strigaperricerca = strigaperricerca.ToLower().Replace("index.aspx", "home");
+        Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
+        if (content != null && content.Id != 0)
+        {
+            htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
+
+            litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
+        }
+    }
+
+
+
+
+
     private void CaricaControlliServerside()
     {
         //Literal lit = null;
         // Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
-
-
-       
 
 #if false //VIDEO PER TESTATA E FASCE
 
@@ -176,45 +205,20 @@ public partial class index : CommonPage
         //SELEZIONE CONTENUTI LATERALI ULTIMI POST RUBRICHE
         //string control5 = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divJSIsotopeContainer3\", \"portfolio3\", 1, 12, false, \"\", \"rif000004,rif000005,rif000006,rif000007,rif000008,rif000009\", \"\", true, false, 12);";
         //string control4 = "injectPortfolioAndLoad(\"isotopeOfferte.html\",\"divJSIsotopeContainer1\", \"portfolio1\", 1, 20, false, \"\", \"rif000003\", \"\", true, false, 12);";
- 
+
         //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
         //{
-            //cs.RegisterStartupScript(this.GetType(), "controllistBanHeadcycle", controllistBanHeadcycle, true);
-            //cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
-            //cs.RegisterStartupScript(this.GetType(), "cbanhome", controllistBanHome, true);
-            //cs.RegisterStartupScript(this.GetType(), "c1", control1, true);
-            //cs.RegisterStartupScript(this.GetType(), "c2", control2, true);
-            //cs.RegisterStartupScript(this.GetType(), "cban1", controllistBan1, true);
-            //cs.RegisterStartupScript(this.GetType(), "cban2", controllistBan2, true);
-            //cs.RegisterStartupScript(this.GetType(), "cban3", controllistBan3, true);
-            //cs.RegisterStartupScript(this.GetType(), "cban4", controllistBan4, true);
-            //cs.RegisterStartupScript(this.GetType(), "csect1", controllistsection1, true);
+        //cs.RegisterStartupScript(this.GetType(), "controllistBanHeadcycle", controllistBanHeadcycle, true);
+        //cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
+        //cs.RegisterStartupScript(this.GetType(), "cbanhome", controllistBanHome, true);
+        //cs.RegisterStartupScript(this.GetType(), "c1", control1, true);
+        //cs.RegisterStartupScript(this.GetType(), "c2", control2, true);
+        //cs.RegisterStartupScript(this.GetType(), "cban1", controllistBan1, true);
+        //cs.RegisterStartupScript(this.GetType(), "cban2", controllistBan2, true);
+        //cs.RegisterStartupScript(this.GetType(), "cban3", controllistBan3, true);
+        //cs.RegisterStartupScript(this.GetType(), "cban4", controllistBan4, true);
+        //cs.RegisterStartupScript(this.GetType(), "csect1", controllistsection1, true);
         //}
     }
 
-    private void InizializzaSeo()
-    {
-        string linkcanonico = "~";
-        linkcanonico = "~/" + Lingua + "/Home";
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
-    }
-
-    private void SettaTestoIniziale(string sezione)
-    {
-        string htmlPage = "";
-        if (references.ResMan("Common",Lingua,"Content" + sezione) != null)
-            htmlPage = ReplaceLinks(references.ResMan("Common",Lingua,"Content" + sezione).ToString());
-        litTextHeadPage.Text = htmlPage;
-        string strigaperricerca = sezione;
-        //strigaperricerca = Request.Url.AbsolutePath;
-        //strigaperricerca = strigaperricerca.ToLower().Replace("index.aspx", "home");
-        Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-        if (content != null && content.Id != 0)
-        {
-            htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-
-            litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
-        }
-    }
 }
