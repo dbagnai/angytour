@@ -94,6 +94,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
    protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
          Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
@@ -130,7 +131,6 @@ public partial class AreaContenuti_Default3 : CommonPage
             this.CaricaDati();
             ImpostaDettaglioSolaLettura(true);
 
-            DataBind();
         }
         else
         {
