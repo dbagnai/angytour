@@ -27,6 +27,32 @@ namespace WelcomeLibrary.DOM
             set { _CodiceContenuto = value; }
         }
 
+        private string _customtitleI;
+        public string CustomtitleI
+        {
+            get { return _customtitleI; }
+            set { _customtitleI = value; }
+        }
+        private string _customtitleGB;
+        public string CustomtitleGB
+        {
+            get { return _customtitleGB; }
+            set { _customtitleGB = value; }
+        }
+
+        private string _customdescI;
+        public string CustomdescI
+        {
+            get { return _customdescI; }
+            set { _customdescI = value; }
+        }
+        private string _customdescGB;
+        public string CustomdescGB
+        {
+            get { return _customdescGB; }
+            set { _customdescGB = value; }
+        }
+
         private string _TitoloI;
         public string TitoloI
         {
@@ -163,6 +189,12 @@ namespace WelcomeLibrary.DOM
             this.TitoloI = "";
             this.offertaassociata = new Offerte();
 
+            this.CustomtitleI = "";
+            this.CustomdescI = "";
+            this.CustomtitleGB = "";
+            this.CustomdescGB = "";
+
+
         }
         public Contenuti(Contenuti tmp)
         {
@@ -176,6 +208,10 @@ namespace WelcomeLibrary.DOM
             this.TitoloRU = tmp.TitoloRU;
             this.TitoloGB = tmp.TitoloGB;
             this.TitoloI = tmp.TitoloI;
+            this.TitoloGB = tmp.TitoloGB;
+            this.TitoloI = tmp.TitoloI;
+            this.CustomtitleI = tmp.CustomtitleI;
+            this.CustomdescI = tmp.CustomdescI;
             this.offertaassociata = new Offerte(tmp.offertaassociata);
 
             Allegato _tmp;

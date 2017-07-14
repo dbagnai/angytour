@@ -29,8 +29,13 @@
     <meta property="fb:admins" content="100000889151299" />
     <%--<meta property="fb:app_id" content="435846069925856" />--%>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <meta name="robots" id="metaRobots" content="index,follow" runat="Server" />    
+    <meta name="robots" id="metaRobots" content="index,follow" runat="Server" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <asp:Literal Text="" ID="litgeneric4" runat="server" />
+    <asp:Literal Text="" ID="litgeneric3" runat="server" />
+    <asp:Literal Text="" ID="litgeneric2" runat="server" />
+    <asp:Literal Text="" ID="litgeneric1" runat="server" />
+    <asp:Literal Text="" ID="litgeneric0" runat="server" />
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
@@ -209,7 +214,7 @@
                 <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+390578294014 ">
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
-            <div style="width: 100%;position:relative">
+            <div style="width: 100%; position: relative">
                 <div style="max-width: 1600px; margin: 0px auto; position: relative">
                     <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
                         <a class="menuzord-brand" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
@@ -218,17 +223,17 @@
                         </a>
                         <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
 
-                            <%--    <li runat="server" id="liHome">
-                        <a id="linkHomeHigh" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>" onclick="JsSvuotaSession(this)">
-                            <%# references.ResMan("Common", Lingua,"TestoHome") %>
-                        </a>
-                    </li>--%>
+                            <li runat="server" id="liHome">
+                                <a id="linkHomeHigh" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>" onclick="JsSvuotaSession(this)"'>
+                                    <%# references.ResMan("Common", Lingua,"TestoHome") %>
+                                </a>
+                            </li>
 
-                            <li runat="server">
+                            <%--  <li runat="server">
                                 <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
                                     <%# references.ResMan("Common", Lingua,"testoid1") %>
                                 </a>
-                            </li>
+                            </li>--%>
 
                             <li>
                                 <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid9") %></a>
@@ -792,19 +797,19 @@
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
                                         <li runat="server">
-                                            <a id="linkHome" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHome") %>'>
+                                            <a id="linkHome" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkhome") %>' title='<%# references.ResMan("Common", Lingua,"testohome") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoHome") %>' />
+                                                    <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common", Lingua,"testohome") %>' />
                                                 </span>
                                             </a>
                                         </li>
 
-                                        <li runat="server">
+<%--                                        <li runat="server">
                                             <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
                                                 <span class="label-nav">
                                                     <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid1") %>' /></span>
                                             </a>
-                                        </li>
+                                        </li>--%>
 
                                         <li runat="server">
                                             <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid2") %>'>
@@ -995,7 +1000,7 @@
         <!--DEFIANTJS to query json obkects-->
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/jarallax.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/script.js")%>"></script>

@@ -46,6 +46,30 @@ public partial class index : CommonPage
             linkcanonico = "~";
         Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+
+        //METTIAMO GLI ALTERNATE
+        string hreflang = "";
+
+        //Italiano
+        hreflang = " hreflang=\"it\" ";
+        string linkcanonicoalt = "~/" + "I" + "/Home";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
+            linkcanonicoalt = "~";
+        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+
+#if false
+        //inglese
+        hreflang = " hreflang=\"en\" ";
+        linkcanonicoalt = "~/" + "GB" + "/Home";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
+            linkcanonicoalt = "~";
+        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; 
+#endif
+
     }
 
     private void SettaTestoIniziale(string sezione)
@@ -58,17 +82,41 @@ public partial class index : CommonPage
         //strigaperricerca = Request.Url.AbsolutePath;
         //strigaperricerca = strigaperricerca.ToLower().Replace("index.aspx", "home");
         Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
+
+        string customdesc = "";
+        string customtitle = "";
         if (content != null && content.Id != 0)
         {
             htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
+
+            string descrizione = content.DescrizioneI;
+            string titolopagina = content.TitoloI;
+            switch (Lingua)
+            {
+                case "GB":
+                    descrizione = content.DescrizioneGB;
+                    titolopagina = content.TitoloGB;
+                    customdesc = content.CustomdescGB;
+                    customtitle = content.CustomtitleGB;
+                    break;
+                default:
+                    customdesc = content.CustomdescI;
+                    customtitle = content.CustomtitleI;
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(customtitle))
+                ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
+            if (!string.IsNullOrEmpty(customdesc))
+                ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
         }
+
+
     }
 
 
-
-
+    #region OLD CALLS
 
     private void CaricaControlliServerside()
     {
@@ -221,4 +269,5 @@ public partial class index : CommonPage
         //}
     }
 
+    #endregion
 }

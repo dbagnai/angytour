@@ -614,9 +614,29 @@ public partial class _SchedaProdotto : CommonPage
         else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
             ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
 
-        string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+        //string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);
+        //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
+        //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+
+        Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
+        string hreflang = "";
+        //METTIAMO GLI ALTERNATE
+        hreflang = " hreflang=\"it\" ";
+        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(data.DenominazioneI), data.Id.ToString(), data.CodiceTipologia);
+        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "I") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+#if false
+
+        hreflang = " hreflang=\"en\" ";
+        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
+        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "GB") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+
+#endif
     }
 
     protected void Cerca_Click(object sender, EventArgs e)

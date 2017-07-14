@@ -1365,7 +1365,7 @@ function formatlabelresource(localObjects, valore, prop, callback) {
     try {
 
         var controllo = localObjects["resultinfo"][prop[1]];
-        if (controllo == "true" || controllo == null) { 
+        if (controllo == "true" || controllo == null) {
             retstring = baseresources[lng][prop[0].toLowerCase()];
         }
     } catch (e) { };

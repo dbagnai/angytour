@@ -611,7 +611,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
         offerte.Add(item);
 #endif
-
 #if false
         //if (CodiceTipologia == "rif000100")
         //{
@@ -888,19 +887,12 @@ public partial class _SchedaOffertaMaster : CommonPage
     }
     protected void AssociaDatiSocial(Offerte data)
     {
-
         string descrizione = data.DescrizionebyLingua(Lingua);
         string denominazione = data.DenominazionebyLingua(Lingua);
 
         //  Categoria = data.CodiceCategoria;
         EvidenziaSelezione(denominazione.Replace(" ", "").Replace("-", "").Replace("&", "e").Replace("'", "").Replace("?", ""));
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
-
-#if false
-        divSocial.Attributes.Add("addthis:title", html.Convert((denominazione + " " + Nome).Replace("<br/>", " ")).Trim());
-        divSocial.Attributes.Add("addthis:description", html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true), true).Replace("<br/>", " ")).Trim());
-        divSocial.Attributes.Add("addthis:url", ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia)));
-#endif
 
         //Comments facebook
         //divComments.Attributes.Add("data-href", ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia)));
@@ -921,10 +913,55 @@ public partial class _SchedaOffertaMaster : CommonPage
         else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
             ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
 
-        //litNomePagina.Text = denominazione;
-        string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+        /////////////////////////////////////////////////////////////
+        //MODIFICA PER TITLE E DESCRIPTION CUSTOM
+        ////////////////////////////////////////////////////////////
+        string customdesc = "";
+        string customtitle = "";
+        switch (Lingua)
+        {
+            case "GB":
+                customdesc = data.Campo2GB;
+                customtitle = data.Campo1GB;
+                break;
+            default:
+                customdesc = data.Campo2I;
+                customtitle = data.Campo1I;
+                break;
+        }
+        if (!string.IsNullOrEmpty(customtitle))
+            ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
+        if (!string.IsNullOrEmpty(customdesc))
+            ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
+        ////////////////////////////////////////////////////////////
+
+
+
+        ///////////////////////////////////
+        //string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);
+        //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
+        //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+
+        Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
+
+        string hreflang = "";
+        //METTIAMO GLI ALTERNATE
+        hreflang = " hreflang=\"it\" ";
+        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(data.DenominazioneI), data.Id.ToString(), data.CodiceTipologia);
+        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "I") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+
+#if false
+        hreflang = " hreflang=\"en\" ";
+        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
+        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "GB") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; 
+#endif
+
     }
 
     protected void rptOfferta_ItemDataBound(object sender, RepeaterItemEventArgs e)

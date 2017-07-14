@@ -250,7 +250,27 @@ public class CommonPage : Page
         DateTime modification = System.IO.File.GetLastWriteTime(server.MapPath(filepath));
         return "?v=" + modification.ToString("ddMMyyHHmmss");
     }
-
+    public static System.Globalization.CultureInfo setCulture(string lng)
+    {
+        string culturename = "";
+        switch (lng)
+        {
+            case "I":
+                culturename = "it";
+                break;
+            case "GB":
+                culturename = "en";
+                break;
+            case "RU":
+                culturename = "ru";
+                break;
+            default:
+                culturename = "it";
+                break;
+        }
+        System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
+        return ci;
+    }
     /// <summary>
     /// SPOSTA IL VIEWSTATE IN FONDO ALLA PAGINA PER 
     /// </summary>

@@ -6,7 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
             <asp:Literal Text="" ID="litNomePagina" runat="server" />
@@ -15,7 +14,6 @@
 
         </div>
     </div>
-
     <%-- <!--=== Breadcrumbs ===-->
         <div class="breadcrumbs">
             <div class="container">
@@ -36,9 +34,6 @@
 <asp:Content ID="Content8" ContentPlaceHolderID="ContentPlaceHolderJs" runat="Server">
     <script type="text/javascript">
         $(document).ready(function () {
-            //injectScrollerAndLoad("owlscrollerOfferte.html","divJSScrollerContainer1", "carouselInject1","", "rif000002", "prod000006", true, true, 6);
-            //injectScrollerAndLoad("owlscrollerOfferte.html","divJSScrollerContainer2", "carouselInject2","", "rif000003", "", true, true, 6);
-            //injectPortfolioAndLoad("isotopeOfferte.html","divJSIsotopeContainer1", "portfolio1", 1, 20, false,"", "rif000003", "", true, true, 12);
         });
     </script>
 </asp:Content>

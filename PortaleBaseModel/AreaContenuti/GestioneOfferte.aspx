@@ -260,7 +260,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label13" runat="server" Text="Testo promo Ita" /></strong>
+                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
@@ -269,7 +269,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelps1" runat="server" Text="Testo promo sconto Ita" /></strong>
+                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)"/></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
@@ -309,7 +309,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelpre" runat="server" Text="Testo promo Eng" /></strong>
+                                        <asp:Label ID="Labelpre" runat="server"  Text="Meta Title Eng (opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
@@ -318,7 +318,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelprse" runat="server" Text="Testo promo sconto Eng" /></strong>
+                                        <asp:Label ID="Labelprse" runat="server" Text="Meta Description Eng (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo2GB" runat="server"></asp:TextBox>

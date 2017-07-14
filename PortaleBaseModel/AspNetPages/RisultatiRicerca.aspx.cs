@@ -212,7 +212,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
     {
         ClientScriptManager cs = Page.ClientScript;
 
-        String   scriptRegVariables = string.Format("var testoricerca = '" + Server.HtmlEncode(testoricerca)  + "';"); 
+        String scriptRegVariables = string.Format("var testoricerca = '" + Server.HtmlEncode(testoricerca) + "';");
 
         if (!cs.IsClientScriptBlockRegistered("RegVariablesScriptPage"))
         {
@@ -248,8 +248,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         switch (Tipologia)
         {
             case "rif000002":
-                SettaTestoIniziale();
-                AssociaDatiSocial(null);
+                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-md-9 col-sm-9";
@@ -274,7 +273,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                     string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
 
-                   
+
 
                     if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                     {
@@ -285,8 +284,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                 break;
             case "rif000003":
-                SettaTestoIniziale();
-                AssociaDatiSocial(null);
+                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-sm-12";
@@ -322,8 +320,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 break;
             case "rif000004":
 
-                SettaTestoIniziale();
-                AssociaDatiSocial(null);
+                AssociaDatiSocial();
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-md-9 col-sm-9";
                 column2.Visible = false;
@@ -738,9 +735,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
 #endif
         #endregion
-        if (offerte != null && offerte.Count > 0)
-            AssociaDatiSocial(offerte[0]);
-        SettaTestoIniziale();
+        AssociaDatiSocial();
+        //if (offerte != null && offerte.Count > 0)
+        //    AssociaDatiSocial(offerte[0]);
 
         Pager<Offerte> p = new Pager<Offerte>();
         if (offerte != null && offerte.Count > PagerRisultati.PageSize)
@@ -765,85 +762,10 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
     }
 
-    private void SettaTestoIniziale()
+    protected void AssociaDatiSocial()
     {
-        WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
-        WelcomeLibrary.DOM.TipologiaOfferte sezione_inlingua = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
-        if (sezione != null)
-        {
-            EvidenziaSelezione(sezione.Descrizione);
-
-            string titolopagina = sezione_inlingua.Descrizione;
-            litNomePagina.Text = titolopagina;
-            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
-            Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
-            if (catselected != null && (litNomePagina.Text.ToLower().Trim() != catselected.Descrizione.ToLower().Trim()))
-            {
-                litNomePagina.Text += " " + catselected.Descrizione;
-            }
-
-            string htmlPage = "";
-            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
-                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
-            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
-                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
-
-            string strigaperricerca = "";
-            Contenuti content = null;
-#if false
-            if (!string.IsNullOrEmpty(sezione.Descrizione))
-            {
-                strigaperricerca = "/" + Tipologia + "/" + CleanUrl(sezione.Descrizione); //Request.Url.AbsolutePath
-                content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            }
-
-            if (content == null && !string.IsNullOrEmpty(Categoria))
-                strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
-            content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca); 
-#endif
-            string testolink = "";
-            if (!string.IsNullOrEmpty(sezione.Descrizione))
-            {
-                testolink = sezione.Descrizione;
-            }
-            if (!string.IsNullOrEmpty(Categoria))
-            {
-                Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
-                if (categoriaprodotto != null)
-                {
-                    testolink = categoriaprodotto.Descrizione;
-                }
-            }
-            string linkcanonico = CreaLinkRoutes(null, false, Lingua, testolink.Trim(), "", Tipologia);
-            linkcanonico = linkcanonico.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");
-            content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkcanonico);
-
-            if (content != null && content.Id != 0)
-            {
-                htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
-                if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
-            }
-            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
-            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 90, true)).Replace("<br/>", "\r\n"));
-            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-
-            litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
-        }
-        //if (litNomePagina.Text.StartsWith(" ")) divTitle.Visible = false;
-
-    }
-    protected void AssociaDatiSocial(Offerte data)
-    {
-        //HtmlGenericControl divSocial = (HtmlGenericControl)e.Item.FindControl("divSocial");
-        //divSocial.Attributes.Add("addthis:url", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/SchedaContenutoMaster.aspx?idOfferta=" + data.Id + "&CodiceTipologia=" + data.CodiceTipologia + "&Lingua=" + Lingua);
-        //divSocial.Attributes.Add("addthis:title", WelcomeLibrary.UF.Utility.SostituisciTestoACapo(data.DenominazioneI) + " " + Nome);
-        //divSocial.Attributes.Add("addthis:description", CommonPage.ReplaceLinks(ConteggioCaratteri(data.DescrizioneI, 90)));
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
-
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
-        string testolink = "";
-        if (sezione != null)
-            testolink = sezione.Descrizione;
         string sezionedescrizione = "";
         if (!string.IsNullOrEmpty(Categoria))
         {
@@ -851,39 +773,146 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             if (categoriaprodotto != null)
             {
                 sezionedescrizione += categoriaprodotto.Descrizione;
-                testolink = sezionedescrizione;
             }
         }
         if (sezione != null)
             sezionedescrizione += " " + sezione.Descrizione;
 
 
-        ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common",Lingua, "testoPosizionebase")) + " " + Nome);
-
-        if (data != null)
+        //////  PER CREAZIONE LINK CANONICI E ALTERNATE
+        WelcomeLibrary.DOM.TipologiaOfferte sezioneI = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
+        string sezionedescrizioneI = "";
+        if (sezioneI != null)
+            sezionedescrizioneI = sezioneI.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria))
         {
-            string descrizione = data.DescrizionebyLingua(Lingua);
-            string denominazione = data.DenominazionebyLingua(Lingua);
-
-            //Titolo e descrizione pagina
-            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
-            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-            //Opengraph per facebook
-            ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Nome).Trim();
-            simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true))).Replace("<br/>", " ").Trim(); ;
-            ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
-            //((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-            if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
-                ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-            else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
-                ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
+            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "I");
+            if (categoriaprodotto != null)
+            {
+                sezionedescrizioneI = categoriaprodotto.Descrizione;
+            }
         }
 
-        string linkcanonico =
-          CreaLinkRoutes(null, false, Lingua, testolink.Trim(), "", Tipologia);
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+        WelcomeLibrary.DOM.TipologiaOfferte sezioneGB = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "GB" & tmp.Codice == Tipologia); });
+        string sezionedescrizioneGB = "";
+        if (sezioneGB != null)
+            sezionedescrizioneGB = sezioneGB.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria))
+        {
+            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "GB");
+            if (categoriaprodotto != null)
+            {
+                sezionedescrizioneGB = categoriaprodotto.Descrizione;
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////
+        Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
+
+
+        string urlcanonico = "";
+
+        string hreflang = "";
+        //METTIAMO GLI ALTERNATE
+        hreflang = " hreflang=\"it\" ";
+        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria);
+        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "I") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
+
+        hreflang = " hreflang=\"en\" ";
+        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria);
+        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "GB") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
+
+        /////////////////////DEFINIZIONE DEI TITOLI E CONTENUTI DI PAGINA ////////////////////////////////////////////////////////////
+
+        string htmlPage = "";
+        //TEST CARICAMENTO TESTI DA RISORSE
+        if (references.ResMan("Common", Lingua, "testo" + Tipologia) != null)
+            htmlPage = references.ResMan("Common", Lingua, "testo" + Tipologia).ToString();
+        if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
+            htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
+        if (sezione != null)
+        {
+            ////////EVIDENZIAZIONE MENU
+            EvidenziaSelezione(sezione.Descrizione); //SOlo per la voce al top dei dropdown ....
+            ///////////////////////NOME PAGINA////////////////////////////////
+            string titolopagina = sezione.Descrizione;
+            litNomePagina.Text = titolopagina;
+            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
+            Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
+            if (catselected != null && (litNomePagina.Text.ToLower().Trim() != catselected.Descrizione.ToLower().Trim()))
+            {
+                litNomePagina.Text += " " + catselected.Descrizione;
+            }
+            ///////////////////////////////////////////////////////////////
+        }
+        urlcanonico = urlcanonico.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");
+        Contenuti content = null;
+        content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlcanonico);
+        string customtitle = "";
+        string customdesc = "";
+        if (content != null && content.Id != 0)
+        {
+            htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
+            if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
+            switch (Lingua)
+            {
+                case "GB":
+                    customdesc = content.CustomdescGB;
+                    customtitle = content.CustomtitleGB;
+                    break;
+                default:
+                    customdesc = content.CustomdescI;
+                    customtitle = content.CustomtitleI;
+                    break;
+            }
+        }
+        /////////////////////DEFINIZIONE DEI META DI PAGINA ////////////////////////////////////////////////////////////
+        string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
+        string description = "";
+        string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 150, true)).Replace("<br/>", "\r\n")).Trim();
+        description = simpletext;
+
+        /////////////////////////////////////////////////////////////
+        //MODIFICA PER TITLE E DESCRIPTION CUSTOM
+        ////////////////////////////////////////////////////////////
+        if (!string.IsNullOrEmpty(customtitle))
+            metametatitle = (customtitle).Replace("<br/>", "\r\n");
+        if (!string.IsNullOrEmpty(customdesc))
+            description = customdesc.Replace("<br/>", "\r\n");
+        ////////////////////////////////////////////////////////////
+        //Opengraph per facebook
+        ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Nome).Trim();
+        ((HtmlMeta)Master.FindControl("metafbdescription")).Content = description;
+        //////////////////////////////////////////
+        ((HtmlTitle)Master.FindControl("metaTitle")).Text = metametatitle;
+        ((HtmlMeta)Master.FindControl("metaDesc")).Content = description;
+        //////////////////////////////////////////////////////////////////////////
+        litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
+
+        //if (data != null)
+        //{
+        //    string descrizione = data.DescrizionebyLingua(Lingua);
+        //    string denominazione = data.DenominazionebyLingua(Lingua);
+
+        //    //Titolo e descrizione pagina
+        //    string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
+        //    ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
+
+          //    if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
+        //        ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        //    else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
+        //        ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
+        //}
+
+
     }
+   
+
     protected void EvidenziaSelezione(string testolink)
     {
         HtmlAnchor linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink.Replace(" ", "")));
@@ -1067,7 +1096,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common", Lingua, "testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 

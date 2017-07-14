@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 @import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
- 
+
 
 html {
     font-family: 'Raleway';
@@ -108,6 +108,7 @@ a.active {
 .body-wrapper {
     padding-top: 5px;
     padding-bottom: 0px;
+    overflow-y: hidden;
 }
 
 input.inputnoback,
@@ -159,7 +160,6 @@ a.buttonstyle {
     margin: 0px;
     text-align: center;
     background-color: #33332e;
-    
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -1407,7 +1407,6 @@ Portfolio ( da rival )
     -moz-filter: drop-shadow(0 2px 5px .2px);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -1418,23 +1417,23 @@ Portfolio ( da rival )
     -moz-filter: drop-shadow(0 2px 5px .2px);
 }
 
-.work-div:hover {
-    position: relative;
-    margin: 10px;
-    /*Questo setta lo spazio tra gli items*/
-    padding: 0px;
-    /*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    .work-div:hover {
+        position: relative;
+        margin: 10px;
+        /*Questo setta lo spazio tra gli items*/
+        padding: 0px;
+        /*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     -moz-filter: drop-shadow(0 10px 20px .35px);*/
-    -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
-    -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
-    box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
-    -webkit-transition: box-shadow .3s;
-    -moz-filter: drop-shadow(0 2px 5px .2px);
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-}
+        -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+        -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+        box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+        -webkit-transition: box-shadow .3s;
+        -moz-filter: drop-shadow(0 2px 5px .2px);
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+    }
 
 .work-div-noborder {
     position: relative;
@@ -1444,9 +1443,9 @@ Portfolio ( da rival )
     background-color: #fff;
 }
 
-.work-div-noborder:hover {
-    position: relative;
-}
+    .work-div-noborder:hover {
+        position: relative;
+    }
 
 .works-grid-1 .work-item {
     width: 99.999%;
@@ -1559,48 +1558,48 @@ Portfolio ( da rival )
     text-align: center;
 }
 
-.work-image:after {
-    position: absolute;
-    display: block;
-    content: "";
-    height: 100%;
-    width: 100%;
-    top: 0;
-}
+    .work-image:after {
+        position: absolute;
+        display: block;
+        content: "";
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
 
-.work-image img {
-    display: block;
-    height: auto;
-    width: 100%;
-    margin: auto;
-}
+    .work-image img {
+        display: block;
+        height: auto;
+        width: 100%;
+        margin: auto;
+    }
 
 
-.work-image img.adapttocontainer2 {
-    /* Maintain aspect ratio */
-    max-height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    margin: auto;
-}
+        .work-image img.adapttocontainer2 {
+            /* Maintain aspect ratio */
+            max-height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            margin: auto;
+        }
 
-.work-image img.adapttocontainer {
-    /* CSS Hack will make it width 100% and height 100% */
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    /* Maintain aspect ratio */
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    margin: auto;
-}
+        .work-image img.adapttocontainer {
+            /* CSS Hack will make it width 100% and height 100% */
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            /* Maintain aspect ratio */
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            margin: auto;
+        }
 
 
 .work-subcaption {
@@ -1732,7 +1731,7 @@ Portfolio ( da rival )
 .work-title {
     font-size: 1.3em;
     font-weight: 400;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     color: #1f809f;
 }
 
@@ -2261,6 +2260,7 @@ Portfoli Single ( da rival )
 .rev-slider-full {
     max-height: 1000px;
 }
+
     .rev-slider-full .slotholder:after {
         width: 100%;
         height: 100%;
@@ -2327,7 +2327,7 @@ Portfoli Single ( da rival )
 .bigtext {
     font-family: 'Montserrat';
     color: #fff;
-    font-size: 3.4rem;
+    font-size: 4.3rem;
     font-weight: 600;
     text-align: center;
     line-height: normal;
@@ -2338,13 +2338,15 @@ Portfoli Single ( da rival )
 
 .smalltext {
     color: #fff;
-    font-size: 1.9rem;
+    font-size: 2.5rem;
     font-weight: 600;
     text-align: center;
     line-height: normal;
     max-width: auto;
     max-height: auto;
     white-space: nowrap;
+    font-family: 'Lora', serif;
+    font-style: italic;
 }
 
 
@@ -2445,7 +2447,7 @@ ol.flex-control-thumbs li {
 }
 
 .blog-post {
-    padding:05px;
+    padding: 05px;
     background-color: #fff;
     border: 2px solid #eee;
     border-radius: 6px;
@@ -2519,7 +2521,7 @@ button.btn,
     text-transform: uppercase;
     font-weight: 500;
     font-size: 13px;
-    font-family:Raleway;
+    font-family: Raleway;
     /*background-color: #606060;*/
     position: relative;
     height: auto;
@@ -2536,7 +2538,6 @@ button.btn,
     -o-transition: background 0.2s, opacity 0.2s;
     transition: background 0.2s, opacity 0.2s;
     margin: 0 0px 10px 0px !important;
-
     /*padding: 3px 25px !important;*/
     line-height: 1 !important;
     padding: .75rem 2.1875rem !important;
@@ -2848,7 +2849,7 @@ button.btn,
 /*Owl Carousel
 ------------------------------------*/
 
- 
+
 .imgcontained {
     /*display: block;
         overflow: hidden;
@@ -3909,3 +3910,124 @@ ol.unstyled {
         animation: page-loader .6s linear infinite;
         -webkit-animation: page-loader .6s linear infinite;
     }
+
+/* MODIFICHE MIRCO */
+p.lead, .lead p {
+    line-height: 1.8 !important;
+}
+
+.col-xs-12 {
+    text-align: justify;
+}
+
+.mbr-section-subtitle {
+    font-size: 30px;
+    line-height: 36px;
+}
+
+.text-xs-right {
+    text-align: right !important;
+}
+
+.text-xs-left {
+    text-align: left !important;
+}
+
+#isoBan4x1 .work-item .work-div-noborder .work-image {
+    width: 90%;
+    border-radius: 50%;
+    margin: 5% 0 10% 5%;
+}
+
+#content6-2l:after {
+    background: linear-gradient(-45deg, #ffffff 16px, transparent 0), linear-gradient(45deg, #ffffff 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+#news-zig-zag:after, #promo-zig-zag:after {
+    background: linear-gradient(-135deg, #ffffff 16px, transparent 0), linear-gradient(135deg, #ffffff 16px, transparent 0);
+    background-position: left-top;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+#generic-zig-zag:after {
+    background: linear-gradient(-135deg, #f2ece6 16px, transparent 0), linear-gradient(135deg, #f2ece6 16px, transparent 0);
+    background-position: left-top;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+.title-block {
+    font-weight: 600;
+}
+
+.work-desc {
+    line-height: 28px;
+}
+
+.footer {
+    background-color: #f2ece6;
+}
+
+.footer-wrapper {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.footer .social-icons .social-media-icon {
+    background-color: #733039;
+    border-radius: 50%;
+}
+
+.footer .copyright {
+    background-color: #733039;
+    padding: 30px 0;
+}
+
+#map1 iframe {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+#map1::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    box-shadow: inset 0px 11px 8px -10px black, inset 0px -11px 8px -10px black;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+
+/* IMPORTANTE!!! DA TOGLIERE PER BENE!!! MODIFICHE MIRCO */
+/*#divnavigazioneJs0 {
+    display: none;
+}*/

@@ -80,8 +80,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 RenderGallery(content);
 
                 InzializzaTestoPagina(content);
-                InizializzaSeo();
-               DataBind();
+                InizializzaSeo(content);
+                DataBind();
             }
             else
             {
@@ -167,14 +167,38 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
     }
 
-    private void InizializzaSeo()
+    private void InizializzaSeo(Contenuti item)
     {
-        string testourlpagina = references.ResMan("Common",Lingua,"testoidUrl" + idContenuto).ToString();
+        Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
-        string linkcanonico = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testourlpagina), idContenuto, "con001000");
-        // string linkcanonico = "~/Informazioni/" + Lingua + "/" + ContenutoPagina + "/" + CaricaValoreMaster(Request, Session, "testoindice"); ;
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+        string hreflang = "";
+        //METTIAMO GLI ALTERNATE
+        hreflang = " hreflang=\"it\" ";
+        //System.Globalization.CultureInfo ci = setCulture("I");
+        //string testourlpagina = references.ResMan("Common","I","testoidUrl" + idContenuto).ToString();
+        string testourlpagina = item.TitolobyLingua("I");
+        string linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "I", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "I")
+        {
+            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        }
+#if false
+
+        hreflang = " hreflang=\"en\" ";
+        //ci = setCulture("GB");
+        testourlpagina = item.TitolobyLingua("GB");
+        linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (Lingua == "GB")
+        {
+            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        } 
+#endif
     }
 
     protected void EvidenziaSelezione(string testolink)
@@ -326,12 +350,12 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
 
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(),true);
+                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //LINK
                 string target = "_blank";
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(),true);
+                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
                 {
@@ -398,7 +422,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
         return sb.ToString();
     }
-    
+
 
     protected void btnNewsletter_Click(object sender, EventArgs e)
     {
@@ -424,11 +448,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         /////////////////////////////////////////////////////
         if (!string.IsNullOrEmpty(ContenutoPagina))
         {
-            string tmp = references.ResMan("Common",Lingua,"Testo" + ContenutoPagina).ToString();
+            string tmp = references.ResMan("Common", Lingua, "Testo" + ContenutoPagina).ToString();
             litNomeContenuti.Text = tmp;
             litMainContent.Text = ReplaceAbsoluteLinks(ReplaceLinks(GetLocalResourceObject("Testo" + ContenutoPagina).ToString()));
             //Titolo e descrizione pagina
-            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + references.ResMan("Common",Lingua, "testoPosizionebase") + " " + Nome);
+            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome);
 
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
 
@@ -447,15 +471,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 pnlNewsletter.Visible = true;
             //if (content.Id == 9)
             //    divTitleFreccia.Visible = false;
-
             string DescrizioneContenuto = content.TitolobyLingua(Lingua);
             string TestoContenuto = content.DescrizionebyLingua(Lingua);
-
             //if (content.Id != 9 && content.Id != 10) //Non metto il titolo pagina in questo caso
             litNomeContenuti.Text = DescrizioneContenuto.ToString();
-
             EvidenziaSelezione(content.TitoloI.Replace(" ", "").Replace("-", "").Replace("&", "e").Replace("'", "").Replace("?", ""));
-
             try
             {
                 litMainContent.Text =
@@ -463,16 +483,39 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             }
             catch { }
             //Titolo e descrizione pagina
-            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(DescrizioneContenuto.Replace("<br/>", " ").Trim() + " " + references.ResMan("Common",Lingua, "testoPosizionebase") + " " + Nome);
-
+            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(DescrizioneContenuto.Replace("<br/>", " ").Trim() + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome);
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
             string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true)).Replace("<br/>", " ").Trim());
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-
             //Opengraph per facebook
             ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(DescrizioneContenuto + " " + Nome);
             simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true))).Replace("<br/>", " ").Trim();
             ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
+
+
+            string customtitle = "";
+            string customdesc = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    customdesc = content.CustomdescGB;
+                    customtitle = content.CustomtitleGB;
+                    break;
+                default:
+                    customdesc = content.CustomdescI;
+                    customtitle = content.CustomtitleI;
+                    break;
+            }
+             /////////////////////////////////////////////////////////////
+             //MODIFICA PER TITLE E DESCRIPTION CUSTOM
+             ////////////////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(customtitle))
+                ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
+            if (!string.IsNullOrEmpty(customdesc))
+                ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
+            ////////////////////////////////////////////////////////////
+
+
 
         }
         if (litNomeContenuti.Text.StartsWith(" ")) divTitle.Visible = false;
@@ -497,9 +540,9 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             else
             {
                 if (invio != -1)
-                    ritorno = testo.Substring(0, invio) + "..." + references.ResMan("Common",Lingua,"testoContinua").ToString();
+                    ritorno = testo.Substring(0, invio) + "..." + references.ResMan("Common", Lingua, "testoContinua").ToString();
                 else
-                    ritorno = testo.Substring(0, caratteri) + "..." + references.ResMan("Common",Lingua,"testoContinua").ToString();
+                    ritorno = testo.Substring(0, caratteri) + "..." + references.ResMan("Common", Lingua, "testoContinua").ToString();
             }
         }
         return ritorno;

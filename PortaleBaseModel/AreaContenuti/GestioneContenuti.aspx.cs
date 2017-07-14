@@ -258,10 +258,18 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 }
             }
 
+
             //Riempiamo i dati del dettaglio
             txtTitoloI.Text = Details.TitoloI;//(((Literal)e.Item.FindControl("lit1")).Text);
             txtTitoloGB.Text = Details.TitoloGB;//(((Literal)e.Item.FindControl("lit2")).Text);
             txtTitoloRU.Text = Details.TitoloRU;//(((Literal)e.Item.FindControl("lit2")).Text);
+
+            txtCustomtitleI.Text = Details.CustomtitleI;
+            txtCustomtitleGB.Text = Details.CustomtitleGB;
+            txtCustomdescI.Text = Details.CustomdescI;
+            txtCustomdescGB.Text = Details.CustomdescGB;
+
+
             if (CodiceContenuto == "con001000")
             {
                 tinyhtmlEditRU.InnerText = Details.DescrizioneRU;
@@ -446,6 +454,11 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     updrecord.TitoloGB = txtTitoloGB.Text;
                     updrecord.TitoloRU = txtTitoloRU.Text;
 
+                    updrecord.CustomtitleI = txtCustomtitleI.Text;
+                    updrecord.CustomtitleGB = txtCustomtitleGB.Text;
+                    updrecord.CustomdescI = txtCustomdescI.Text;
+                    updrecord.CustomdescGB = txtCustomdescGB.Text;
+
                     if (CodiceContenuto == "con001000")
                     {
                         updrecord.DescrizioneI = tinyhtmlEditI.InnerText;
@@ -484,6 +497,11 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 updrecord.TitoloI = txtTitoloI.Text;
                 updrecord.TitoloGB = txtTitoloGB.Text;
                 updrecord.TitoloRU = txtTitoloRU.Text;
+
+                updrecord.CustomtitleI = txtCustomtitleI.Text;
+                updrecord.CustomtitleGB = txtCustomtitleGB.Text;
+                updrecord.CustomdescI = txtCustomdescI.Text;
+                updrecord.CustomdescGB = txtCustomdescGB.Text;
 
                 if (CodiceContenuto == "con001000")
                 {
@@ -685,12 +703,23 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         tinyhtmlEditGB.InnerText = "";
         tinyhtmlEditRU.InnerText = "";
 
+        txtCustomtitleI.Text = "";
+        txtCustomtitleGB.Text = "";
+        txtCustomdescI.Text = "";
+        txtCustomdescGB.Text = "";
+
+
         txtData.Text = string.Format("{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now);
         //txtFotoSchema.Value = "";
         //txtFotoValori.Value = "";
     }
     protected void ImpostaDettaglioSolaLettura(bool valore)
     {
+        txtCustomtitleI.ReadOnly = valore;
+        txtCustomtitleGB.ReadOnly = valore;
+        txtCustomdescI.ReadOnly = valore;
+        txtCustomdescGB.ReadOnly = valore;
+
         txtTitoloI.ReadOnly = valore;
         txtTitoloGB.ReadOnly = valore;
         txtDescrizioneGB.ReadOnly = valore;

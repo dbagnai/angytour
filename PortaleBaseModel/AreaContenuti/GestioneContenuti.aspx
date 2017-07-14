@@ -28,7 +28,7 @@
                     - Selezione scheda contenuto</h2>
                 <hr />
                 <div style="width: 100%; overflow: auto">
-                    <table class="table table-condensed" style="width:100%">
+                    <table class="table table-condensed" style="width: 100%">
                         <thead>
                             <tr>
                                 <th></th>
@@ -110,7 +110,8 @@
                     });
                     function tinymceinit() {
                         tinymce.init({
-                            selector: "textarea",
+                            mode: "textareas",
+                            editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
                             extended_valid_elements: 'button[class|onclick|style|type]',
                             theme: "modern",
                             convert_urls: false,
@@ -212,6 +213,26 @@
                                         <asp:TextBox CssClass="form-control" ID="txtTitoloI" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label10" runat="server" Text="META title (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleI" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label5" runat="server" Text="META DESC (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescI" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <asp:Label ID="outupload" Text="" runat="server" ForeColor="red" Font-Bold="true" />
@@ -284,6 +305,24 @@
                                     </div>
                                     <div class="col-sm-10">
                                         <asp:TextBox CssClass="form-control" ID="txtTitoloGB" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                  <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label9" runat="server" Text="META title (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleGB" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label11" runat="server" Text="META DESC (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescGB" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">

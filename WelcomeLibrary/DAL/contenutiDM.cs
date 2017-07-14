@@ -57,6 +57,17 @@ namespace WelcomeLibrary.DAL
                         item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
                         item.TitoloI = reader.GetString(reader.GetOrdinal("TitoloI"));
 
+
+                        if (!(reader["customtitleI"]).Equals(DBNull.Value))
+                            item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
+                        if (!(reader["customdescI"]).Equals(DBNull.Value))
+                            item.CustomdescI = reader.GetString(reader.GetOrdinal("customdescI"));
+                        if (!(reader["customtitleGB"]).Equals(DBNull.Value))
+                            item.CustomtitleGB = reader.GetString(reader.GetOrdinal("customtitleGB"));
+                        if (!(reader["customdescGB"]).Equals(DBNull.Value))
+                            item.CustomdescGB = reader.GetString(reader.GetOrdinal("customdescGB"));
+
+
                         if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
                         else
@@ -194,6 +205,14 @@ namespace WelcomeLibrary.DAL
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("A.DescrizioneGB"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
 
+                        if (!(reader["customtitleI"]).Equals(DBNull.Value))
+                            item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
+                        if (!(reader["customdescI"]).Equals(DBNull.Value))
+                            item.CustomdescI = reader.GetString(reader.GetOrdinal("customdescI"));
+                        if (!(reader["customtitleGB"]).Equals(DBNull.Value))
+                            item.CustomtitleGB = reader.GetString(reader.GetOrdinal("customtitleGB"));
+                        if (!(reader["customdescGB"]).Equals(DBNull.Value))
+                            item.CustomdescGB = reader.GetString(reader.GetOrdinal("customdescGB"));
 
                         if (!(reader["A.DescrizioneRU"]).Equals(DBNull.Value))
                             item.DescrizioneRU = reader.GetString(reader.GetOrdinal("A.DescrizioneRU"));
@@ -261,6 +280,14 @@ namespace WelcomeLibrary.DAL
                         item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
                         item.TitoloI = reader.GetString(reader.GetOrdinal("TitoloI"));
 
+                        if (!(reader["customtitleI"]).Equals(DBNull.Value))
+                            item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
+                        if (!(reader["customdescI"]).Equals(DBNull.Value))
+                            item.CustomdescI = reader.GetString(reader.GetOrdinal("customdescI"));
+                        if (!(reader["customtitleGB"]).Equals(DBNull.Value))
+                            item.CustomtitleGB = reader.GetString(reader.GetOrdinal("customtitleGB"));
+                        if (!(reader["customdescGB"]).Equals(DBNull.Value))
+                            item.CustomdescGB = reader.GetString(reader.GetOrdinal("customdescGB"));
 
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
@@ -344,6 +371,14 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["TitoloRU"]).Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
 
+                        if (!(reader["customtitleI"]).Equals(DBNull.Value))
+                            item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
+                        if (!(reader["customdescI"]).Equals(DBNull.Value))
+                            item.CustomdescI = reader.GetString(reader.GetOrdinal("customdescI"));
+                        if (!(reader["customtitleGB"]).Equals(DBNull.Value))
+                            item.CustomtitleGB = reader.GetString(reader.GetOrdinal("customtitleGB"));
+                        if (!(reader["customdescGB"]).Equals(DBNull.Value))
+                            item.CustomdescGB = reader.GetString(reader.GetOrdinal("customdescGB"));
 
                         if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
@@ -681,7 +716,16 @@ namespace WelcomeLibrary.DAL
             OleDbParameter p9 = new OleDbParameter("@id_attivita", item.Id_attivita);
             parColl.Add(p9);
 
-            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita]) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita)";
+            OleDbParameter pct1 = new OleDbParameter("@customtitleI", item.CustomtitleI);
+            parColl.Add(pct1);
+            OleDbParameter pct2 = new OleDbParameter("@customtitleGB", item.CustomtitleGB);
+            parColl.Add(pct2);
+            OleDbParameter pcd1 = new OleDbParameter("@customdescI", item.CustomdescI);
+            parColl.Add(pcd1);
+            OleDbParameter pcd2 = new OleDbParameter("@customdescGB", item.CustomdescGB);
+            parColl.Add(pcd2);
+
+            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customdescI,customdescGB) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customdescI,@customdescGB)";
             try
             {
                 int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -728,11 +772,22 @@ namespace WelcomeLibrary.DAL
 
             OleDbParameter p9 = new OleDbParameter("@Id_attivita", item.Id_attivita);
             parColl.Add(p9);
+
+            OleDbParameter pct1 = new OleDbParameter("@customtitleI", item.CustomtitleI);
+            parColl.Add(pct1);
+            OleDbParameter pct2 = new OleDbParameter("@customtitleGB", item.CustomtitleGB);
+            parColl.Add(pct2);
+            OleDbParameter pcd1 = new OleDbParameter("@customdescI", item.CustomdescI);
+            parColl.Add(pcd1);
+            OleDbParameter pcd2 = new OleDbParameter("@customdescGB", item.CustomdescGB);
+            parColl.Add(pcd2);
+
+
             OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
 
-            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,DataInserimento=@data,Id_attivita=@Id_attivita  WHERE ([Id]=@id)";
+            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,DataInserimento=@data,Id_attivita=@Id_attivita,customtitleI=@customtitleI,customtitleGB=@customtitleGB,customdescI=@customdescI,customdescGB=@customdescGB   WHERE ([Id]=@id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
