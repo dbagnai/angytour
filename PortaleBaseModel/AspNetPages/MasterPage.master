@@ -221,7 +221,7 @@
                             <div id="divlogo" class="fulllogobckdark"></div>
                             <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                         </a>
-                        <ul class="menuzord-menu menuzord-indented scrollable menuzord-right pull-down">
+                        <ul class="menuzord-menu menuzord-indented scrollable menuzord-right">
 
                             <li runat="server" id="liHome">
                                 <a id="linkHomeHigh" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>" onclick="JsSvuotaSession(this)"'>
