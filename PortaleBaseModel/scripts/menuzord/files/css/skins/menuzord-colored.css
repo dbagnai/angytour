@@ -168,7 +168,7 @@ Colored Skin
 }
 
 /* Mobile mode (Responsive mode) */
-@media (max-width: 768px){
+@media (max-width: 1179px){
 	/* Menu items */
 	.menuzord-responsive .menuzord-menu > li > a{
 		padding: 12px 20px !important;

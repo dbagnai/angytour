@@ -469,7 +469,7 @@ License: http://codecanyon.net/licenses
 
 /* 14 - MOBILE MODE (RESPONSIVE MODE)
 ======================================*/
-@media (max-width: 980px) {
+@media (max-width: 1179px) {
     /* Responsive menu container */
     .menuzord-responsive.menuzord {
         padding: 0;
@@ -629,5 +629,4 @@ License: http://codecanyon.net/licenses
     .menuzord-responsive .menuzord-tabs-content {
         width: 100%;
     }
-
 }
