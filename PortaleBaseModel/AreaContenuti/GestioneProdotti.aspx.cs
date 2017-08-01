@@ -123,7 +123,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             this.CaricaDati();
             ImpostaDettaglioSolaLettura(true);
 
-            DataBind();
+            
         }
         else
         {

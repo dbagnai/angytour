@@ -39,7 +39,7 @@
                         <div class="col-sm-12">
                             <asp:TextBox runat="server" ID="txtinputCerca" Width="100%" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" TargetControlID="txtinputCerca"
-                                runat="server" WatermarkText='<%# references.ResMan("Common", Lingua,"wmarkCerca") %>'>
+                                runat="server" WatermarkText='Cerca'>
                             </Ajax:TextBoxWatermarkExtender>
                         </div>
                     </div>
@@ -678,7 +678,7 @@
                                         <td>
                                             <div>
                                                 <h2>
-                                                    <asp:Label runat="server" ID="TitleProdotti" Text='<%# references.ResMan("Common",Lingua,"TitleProdottiGest") %>'></asp:Label></h2>
+                                                    <%= references.ResMan("Common",Lingua,"TitleProdottiGest") %></h2>
                                             </div>
                                             <table cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -745,7 +745,7 @@
                                             <div style="margin-left: 50px; border-left: 1px solid #000000; padding-left: 10px;">
                                                 <div>
                                                     <h2>
-                                                        <asp:Label runat="server" ID="TitleSottoprodotti" Text='<%# references.ResMan("Common",Lingua,"TitleSottProdottiGest") %>'></asp:Label></h2>
+                                                        <%= references.ResMan("Common",Lingua,"TitleSottProdottiGest") %></h2>
                                                 </div>
                                                 <table>
                                                     <tr>
