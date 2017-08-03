@@ -121,7 +121,7 @@ public partial class _SchedaProdotto : CommonPage
                 Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
                 FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
                 Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
-
+              
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;

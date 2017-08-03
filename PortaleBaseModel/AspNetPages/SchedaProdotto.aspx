@@ -87,7 +87,7 @@
                                 <span itemprop="author" style="font-size: 1.3rem; color: #1f809f"><%# TestoCaratteristica(0, Eval("Caratteristica1").ToString(), Lingua)%></span><br />
                                 <span itemscope itemtype="http://schema.org/Organization">
                                     <span itemprop="name" style="font-size: 1rem; color: #1f809f"><%# TestoCaratteristica(1, Eval("Caratteristica2").ToString(), Lingua)%></span></span><br />
-                                <span itemprop="category" style="font-size: 0.8em"><%# TestoCategoria(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(), Lingua) %></span>
+                                <span itemprop="category" style="font-size: 0.8em"><%# TestoCategoria(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(), Lingua) + TestoCategoria2liv(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),Eval("CodiceCategoria2Liv").ToString(), Lingua) %></span>
                             </em>
                             <div class="clearfix"></div>
 
@@ -104,10 +104,10 @@
                                 </div>
                             </b>
                             <div class="clearfix"></div>
-                            <div class="pull-right"  style="font-size: 0.9rem; color: #1f809f; padding-right: 10px">
+                         <%--   <div class="pull-right"  style="font-size: 0.9rem; color: #1f809f; padding-right: 10px">
                               <em>  <%# references.ResMan("BaseText", Lingua,"Proprietario") %>
                                  <span><%# TestoCaratteristica(2, Eval("Caratteristica3").ToString(), Lingua)%></span></em>
-                            </div>
+                            </div>--%>
                             <meta itemprop="availability" content="in_stock">
                             <div style="width: 100%; margin-top: 10px; overflow: hidden;" runat="server"
                                 visible='<%# ControlloVisibilita(Eval("FotoCollection_M"))%>'>

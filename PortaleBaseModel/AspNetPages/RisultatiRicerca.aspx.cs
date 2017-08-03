@@ -778,6 +778,14 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 sezionedescrizioneI = categoriaprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizioneI = categoriasprodotto.Descrizione;
+            }
+        }
 
         WelcomeLibrary.DOM.TipologiaOfferte sezioneGB = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "GB" & tmp.Codice == Tipologia); });
         string sezionedescrizioneGB = "";
@@ -791,12 +799,20 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 sezionedescrizioneGB = categoriaprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "GB" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizioneGB = categoriasprodotto.Descrizione;
+            }
+        }
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
         string urlcanonico = "";
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
         hreflang = " hreflang=\"it\" ";
-        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria);
+        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv);
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
         litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
@@ -804,7 +820,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         if (Lingua == "I") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
 
         hreflang = " hreflang=\"en\" ";
-        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria);
+        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv);
         litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
         litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         if (Lingua == "GB") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
@@ -815,12 +831,20 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
         string sezionedescrizione = "";
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "GB" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizione += " " + categoriasprodotto.Descrizione;
+            }
+        }
         if (!string.IsNullOrEmpty(Categoria))
         {
             Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
             if (categoriaprodotto != null)
             {
-                sezionedescrizione += categoriaprodotto.Descrizione;
+                sezionedescrizione += " " + categoriaprodotto.Descrizione;
             }
         }
         if (sezione != null)
@@ -846,6 +870,13 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             {
                 litNomePagina.Text += " " + catselected.Descrizione;
             }
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                litNomePagina.Text += " " + categoriasprodotto.Descrizione;
+            }
+
+
             ///////////////////////////////////////////////////////////////
         }
         urlcanonico = urlcanonico.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");

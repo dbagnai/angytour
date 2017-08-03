@@ -3916,7 +3916,7 @@ p.lead, .lead p {
     line-height: 1.8 !important;
 }
 
-.col-xs-12 {
+.mbr-section.col-xs-12 {
     text-align: justify;
 }
 

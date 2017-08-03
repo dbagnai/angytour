@@ -31,6 +31,7 @@ public class jpath
     public string jsonregioni { set; get; }
     public string jsonprovince { set; get; }
     public string jsoncategorie { set; get; }
+    public string jsoncategorie2liv { set; get; }
     public string jsontipologie { set; get; }
     public bool usecdn { set; get; }
 
@@ -187,6 +188,20 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     jpathcomplete.jsoncategorie = Newtonsoft.Json.JsonConvert.SerializeObject(trifprodotti);
 
+                        
+                         List<SProdotto> listsprod = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.FindAll(p =>  p.Lingua == lingua);
+                    WelcomeLibrary.DOM.TabrifCollection trifsprodotti = new TabrifCollection();
+                    if (listprod != null)
+                        foreach (SProdotto p in listsprod)
+                        {
+                            Tabrif p1 = new Tabrif();
+                            p1.Codice = p.CodiceSProdotto;
+                            p1.Campo2 = p.CodiceProdotto;
+                            p1.Campo1 = p.Descrizione;
+                            trifsprodotti.Add(p1);
+                        }
+                    jpathcomplete.jsoncategorie2liv = Newtonsoft.Json.JsonConvert.SerializeObject(trifsprodotti);
+
                     WelcomeLibrary.DOM.TabrifCollection tmptipo = new TabrifCollection();
                     if (WelcomeLibrary.UF.Utility.TipologieOfferte != null)
                         foreach (WelcomeLibrary.DOM.TipologiaOfferte p in WelcomeLibrary.UF.Utility.TipologieOfferte)
@@ -198,6 +213,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             tmptipo.Add(p1);
                         }
                     jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
+
 
                     //retdict.Add("JSONrefmetrature", references.refmetrature);
                     //retdict.Add("JSONrefprezzi", references.refprezzi);
@@ -629,7 +645,11 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 System.Data.OleDb.OleDbParameter p7 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria", filtri["categoria"]);
                 parColl.Add(p7);
             }
-
+             if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+            {
+                System.Data.OleDb.OleDbParameter p10 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
+                parColl.Add(p10);
+            }
             if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
             {
                 System.Data.OleDb.OleDbParameter pc1 = new System.Data.OleDb.OleDbParameter("@Caratteristica1", filtri["caratteristica1"]);

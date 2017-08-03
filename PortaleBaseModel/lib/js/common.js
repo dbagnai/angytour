@@ -15,6 +15,7 @@ var JSONcar1 = "";
 var JSONcar2 = "";
 var JSONcar3 = "";
 var JSONcategorie = "";
+var JSONcategorie2liv = "";
 var jsontipologie = "";
 var percorsolistadati = "";
 var pathAbs = "";
@@ -92,6 +93,7 @@ function loadvariables(result) {
     ///////////OGGETTO Json con le province
     JSONprovince = JSON.parse(jobj["jsonprovince"]);
     JSONcategorie = JSON.parse(jobj["jsoncategorie"]);
+    JSONcategorie2liv = JSON.parse(jobj["jsoncategorie2liv"]);
     jsontipologie = JSON.parse(jobj["jsontipologie"]);
 
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
@@ -1381,6 +1383,7 @@ function frmcategoria(localObjects, valore, prop, callback) {
     dataroot.data = JSONcategorie;
     var selvalue = "";
     //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    if (JSONcategorie != null)
     for (var j = 0; j < dataroot["data"].length; j++) {
         if (dataroot["data"][j].Codice == valore[0]) {
             selvalue = dataroot["data"][j].Campo1;
@@ -1388,6 +1391,29 @@ function frmcategoria(localObjects, valore, prop, callback) {
 
         }
     }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+
+function frmcategoria2liv(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcategorie2liv;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    if (JSONcategorie2liv != null)
+        for (var j = 0; j < dataroot["data"].length; j++) {
+            if (dataroot["data"][j].Codice == valore[0]) {
+                selvalue = dataroot["data"][j].Campo1;
+                break;
+
+            }
+        }
 
     //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
     //    selvalue = selvalue[0].toLowerCase();
