@@ -8,35 +8,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-
+    <script type="text/javascript">
+        makeRevLower = true;
+    </script>
     <div class="container" style="text-align: center; margin-top: 10px">
-        <div class="row">
+        <div class="row" runat="server" id="divTitle">
             <div class="col-md-1 col-sm-1">
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-12">
-                <h1 class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px; margin-top: 5px">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h1 class="title-block" style="line-height: normal;">
                     <asp:Literal Text="" runat="server" ID="litNomePagina" /></h1>
             </div>
         </div>
-        <div class="col-md-1 col-sm-1">
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div style="text-align: center">
-                    <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
-                </div>
-            </div>
-        </div>
+    </div>
+    <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
+    <script type="text/javascript">
+        var makeRevLower = true;
+    </script>
+    <div style="max-width:1800px;margin:0px auto">
+    <div id="divPortfolioList1"></div>
+    <div id="divPortfolioList1Pager"></div>
     </div>
 </asp:Content>
 
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script type="text/javascript">
-        var makeRevLower = true;
-    </script>
-     <div id="divPortfolioList1"></div>
-        <div id="divPortfolioList1Pager"></div>
+
 
 
     <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiPortfolioRival1" visible="false">
@@ -149,7 +146,7 @@
                                             runat="server" frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 </div>
-                                
+
                                 <h2 style="margin-bottom: 5px">
                                     <a id="a1" runat="server"
                                         href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'

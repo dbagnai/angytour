@@ -4,8 +4,6 @@
     MaintainScrollPositionOnPostback="true" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
-
-<%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>--%>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <script type="text/javascript">
         var makeRevLower = true;
@@ -49,107 +47,101 @@
                 </div>
             </div>
         </div>
-
     </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
-
-    <div class="row">
-        <asp:Label ID="output" runat="server"></asp:Label>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-9 col-sm-9">
-
-
-
-
+    <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px;">
+        <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
+        </div>
+        <div class="col-md-9 col-sm-9" runat="server" id="column2">
+            <div class="row">
+                <asp:Label ID="output" runat="server"></asp:Label>
+            </div>
+            <%--Container per inject java della scheda--%>
+            <div id="divItemContainter1" style="position: relative; display: none"></div>
+            <%--Rpt per scheda lato server--%>
             <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
                 <ItemTemplate>
                     <div class="blog-post" style="text-align: justify" itemscope="" itemtype="http://schema.org/Product">
                         <div class="blog-span">
-
-                            <h1 itemprop="name">
-                                <a id="a4" runat="server"
-                                    href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
-                                    target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
-                                    <asp:Literal ID="Literal7" Text='<%# estraititolo(  Eval("Denominazione" + Lingua) ) %>'
-                                        runat="server"></asp:Literal><br />
-                                    <span style="font-size: 70%">
-                                        <asp:Literal ID="Literal12" Text='<%# estraisottotitolo(  Eval("Denominazione" + Lingua) ) %>'
-                                            runat="server"></asp:Literal></span>
-                                </a>
-                            </h1>
-                            <em class="pull-left">
-                                <span itemprop="author" style="font-size: 1.3rem; color: #1f809f"><%# TestoCaratteristica(0, Eval("Caratteristica1").ToString(), Lingua)%></span><br />
-                                <span itemscope itemtype="http://schema.org/Organization">
-                                    <span itemprop="name" style="font-size: 1rem; color: #1f809f"><%# TestoCaratteristica(1, Eval("Caratteristica2").ToString(), Lingua)%></span></span><br />
-                                <span itemprop="category" style="font-size: 0.8em"><%# TestoCategoria(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(), Lingua) + TestoCategoria2liv(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),Eval("CodiceCategoria2Liv").ToString(), Lingua) %></span>
-                            </em>
-                            <div class="clearfix"></div>
-
-                            <b class="product-price pull-right" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                <div style="font-weight: 500; font-size: 1.4em; padding-right: 0px;text-align:right" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                    <meta itemprop="price" content='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'>
-                                    <meta itemprop="priceCurrency" content="EUR">
-                                    <asp:Literal ID="Literal4" runat="server"  Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'></asp:Literal><br />
-                                    <span style="text-decoration: line-through; font-size: 0.9em; color: #aaa; padding-left: 0px; padding-right: 0px">
-                                        <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo(Eval("Prezzolistino"))%>'
-                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzolistino")) + " €"%>'></asp:Literal>
-                                    </span>
-                                    <%#  references.ResMan("Common", Lingua,"TitoloPrezzounita") %>
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div style="width: 100%; margin-top: 10px; overflow: hidden;" runat="server"
+                                        visible='<%# ControlloVisibilita(Eval("FotoCollection_M"))%>'>
+                                        <div class="flexslider" data-transition="slide" data-slidernav="auto" id="scheda-slider" style="width: 100%; overflow: hidden; margin-bottom: 10px; margin-top: 0px;">
+                                            <div class="slides" runat="server" id="divFlexScheda">
+                                                <%# CreaSlide(Container.DataItem,0,600) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <asp:Panel runat="server" Visible='<%# ControlloVisibilitaMiniature(Eval("FotoCollection_M"))  %>'>
+                                        <div class="flexslider" id="carousel-scheda-slider" style="height: 80px; padding-top: 0px; padding-bottom: 0px; overflow: hidden">
+                                            <ul class="slides">
+                                                <%# CreaSlideNavigation(Container.DataItem,0,0) %>
+                                            </ul>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </asp:Panel>
                                 </div>
-                            </b>
-                            <div class="clearfix"></div>
-                         <%--   <div class="pull-right"  style="font-size: 0.9rem; color: #1f809f; padding-right: 10px">
+                                <div class="col-sm-5">
+
+                                    <h1 itemprop="name">
+                                        <a id="a4" runat="server"
+                                            href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                                            target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
+                                            <asp:Literal ID="Literal7" Text='<%# estraititolo(  Eval("Denominazione" + Lingua) ) %>'
+                                                runat="server"></asp:Literal><br />
+                                            <span style="font-size: 70%">
+                                                <asp:Literal ID="Literal12" Text='<%# estraisottotitolo(  Eval("Denominazione" + Lingua) ) %>'
+                                                    runat="server"></asp:Literal></span>
+                                        </a>
+                                    </h1>
+                                    <em class="pull-left">
+                                        <span itemprop="author" style="font-size: 1.3rem; color: #1f809f"><%# TestoCaratteristica(0, Eval("Caratteristica1").ToString(), Lingua)%></span>
+                                        <span itemscope itemtype="http://schema.org/Organization">
+                                            <span itemprop="name" style="font-size: 1rem; color: #1f809f"><%# TestoCaratteristica(1, Eval("Caratteristica2").ToString(), Lingua)%></span></span>
+                                        <span itemprop="category" style="font-size: 0.8em"><%# TestoCategoria(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(), Lingua) + TestoCategoria2liv(Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),Eval("CodiceCategoria2Liv").ToString(), Lingua) %></span>
+                                    </em>
+
+                                    <div class="clearfix" style="margin-bottom: 10px"></div>
+
+                                    <b class="product-price pull-left" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
+                                        <div style="color: #dd9932; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                            <meta itemprop="price" content='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'>
+                                            <meta itemprop="priceCurrency" content="EUR">
+                                            <asp:Literal ID="Literal4" runat="server" Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'></asp:Literal><br />
+                                            <span style="text-decoration: line-through; font-size: 0.9rem; color: #aaa; padding-left: 0px; padding-right: 0px">
+                                                <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo(Eval("Prezzolistino"))%>'
+                                                    Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzolistino")) + " €"%>'></asp:Literal>
+                                            </span>
+                                            <%#  references.ResMan("Common", Lingua,"TitoloPrezzounita") %>
+                                        </div>
+                                    </b>
+                                    <div class="clearfix" style="margin-bottom: 10px"></div>
+
+                                    <div runat="server" class="pull-left" style="max-width: 180px" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
+                                        <%--  <a id="A1" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta" + "&Lingua=" + Lingua%>'  target="_blank" title="" class="buttonstyle">--%>
+                                        <a id="A1" runat="server" href='#richiedilinkpoint' target="_self" title="" class="buttonstyle">
+                                            <%= ImpostaTestoRichiesta()%>
+                                        </a>
+                                    </div>
+
+                                    <div class="clearfix" style="margin-bottom:30px"></div>
+                                    <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
+                                   <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
+                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                    <div class="addthis_inline_share_toolbox"></div>
+                                    <div class="clearfix"></div>
+
+                                    <%--   <div class="pull-right"  style="font-size: 0.9rem; color: #1f809f; padding-right: 10px">
                               <em>  <%# references.ResMan("BaseText", Lingua,"Proprietario") %>
                                  <span><%# TestoCaratteristica(2, Eval("Caratteristica3").ToString(), Lingua)%></span></em>
                             </div>--%>
-                            <meta itemprop="availability" content="in_stock">
-                            <div style="width: 100%; margin-top: 10px; overflow: hidden;" runat="server"
-                                visible='<%# ControlloVisibilita(Eval("FotoCollection_M"))%>'>
-
-
-                                <div class="flexslider" data-transition="slide" data-slidernav="auto" id="scheda-slider" style="width: 100%; overflow: hidden; margin-bottom: 10px; margin-top: 0px;">
-                                    <div class="slides" runat="server" id="divFlexScheda">
-                                        <%# CreaSlide(Container.DataItem,0,600) %>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <asp:Panel runat="server" Visible='<%# ControlloVisibilitaMiniature(Eval("FotoCollection_M"))  %>'>
-                                <div class="flexslider" id="carousel-scheda-slider" style="height: 80px; padding-top: 0px; padding-bottom: 0px; overflow: hidden">
-                                    <ul class="slides">
-                                        <%# CreaSlideNavigation(Container.DataItem,0,0) %>
-                                    </ul>
-                                    <div style="clear: both"></div>
-                                </div>
-                            </asp:Panel>
-
-                            <div class="clearfix"></div>
-                                       <!-- Go to www.addthis.com/dashboard to customize your tools -->
-              <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58fdc705ad8f59e1"></script>
-                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                            <div class="addthis_inline_share_toolbox"></div>
-
-
-
-
-                            <%--  <div class="blog-post-details" runat="server" id="divPostDetails" visible='<%# ControllaVisibilitaPerCodice(Eval("CodiceTipologia").ToString()) || !string.IsNullOrEmpty(ControlloVuotoPosizione(Eval("CodiceComune").ToString(), Eval("CodiceProvincia").ToString(), Eval("CodiceTipologia").ToString(), Lingua))
-                                    || VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                <div style="padding-left: 0px" class="blog-post-details-item blog-post-details-item-left" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                    <span style="font-weight: 800; font-size: 1.9em;">
-                                        <asp:Literal ID="Literal15" runat="server"
-                                            Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €<br/><br/>"%>'></asp:Literal></span>
-                                </div>
-                            </div>--%>
-
-                            <div class="blog-post-tags" style="display: block">
-
-                                <%--   <asp:LinkButton runat="server" ID="btnSottrai"
+                                    <meta itemprop="availability" content="in_stock">
+                                    <div class="blog-post-tags" style="display: block">
+                                        <%--   <asp:LinkButton runat="server" ID="btnSottrai"
                                     OnClick="btnDecrement" class="btn" CommandArgument='<%# Eval("Id")%>'>-</asp:LinkButton>
                                 <input runat="server" class="form-control text-center" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request, Session, Eval("Id").ToString())%>'>
                                 <asp:LinkButton runat="server" ID="btnAggiungi" runat="server"
@@ -157,14 +149,12 @@
                                 </asp:LinkButton>
                                 <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello %>" class="btn-u btn-u-dark" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id")%>'>
                                 </asp:LinkButton>--%>
+                                    </div>
+                                    <%--  <%# CreaRigheDettaglio(Container.DataItem) %>--%>
+                                </div>
                             </div>
-                            <%--   <asp:UpdatePanel runat="server">
-                                <ContentTemplate>--%>
-                            <!--end:.product-header-->
-                            <%-- </ContentTemplate>
-                            </asp:UpdatePanel>--%>
 
-                            <%--  <%# CreaRigheDettaglio(Container.DataItem) %>--%>
+
                             <div class="clearfix"></div>
                             <div class="blog-post-body">
                                 <%--INSERIAMO I PARAMETRI DEL PRODOTTO--%>
@@ -174,37 +164,22 @@
                                 <p>
                                     <asp:Label ID="lbldatite" runat="server" Text='<%#  WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(Eval("Datitecnici" + Lingua).ToString()))%>'></asp:Label>
                                 </p>
+                                   <div class="row">
+                                <div class="col-sm-12">
+                                    <%= "<a  class=\"buttonstyle pull-right\" style=\"max-width:120px\"   href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>" %>
+                                    <%= "<a class=\"buttonstyle pull-right\" style=\"max-width:120px;margin-right:10px;\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>&nbsp;Stampa</a>"%>
+                                </div>
+                            </div>
                             </div>
                             <%--  <%# CreaRigheOpzioni(Container.DataItem)%>--%>
 
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div runat="server" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
-                                        <a id="A1" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta" + "&Lingua=" + Lingua%>'
-                                            target="_blank" title="" class="buttonstyle">
-                                            <%= ImpostaTestoRichiesta()%>
-                                        </a>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <%= "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua
-            + "\"><i class=\"fa fa-print\"></i>&nbsp;Stampa</a>"%>
-                                </div>
-                                <div class="col-sm-4">
-                                    <%= "<a class=\"buttonstyle\"    href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>" %>
-                                </div>
-
-                            </div>
-
-
+                         
                         </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-
-            <div class="ui-15" runat="server" id="div1" visible="true">
+            <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
+            <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="true">
                 <div class="ui-content">
                     <div class="container-fluid">
                         <div class="row" style="padding-right: inherit">
@@ -216,8 +191,6 @@
                                         <%= references.ResMan("Common", Lingua,"TestoDisponibilita") %>
                                     </h3>
                                     <!-- Form -->
-
-
                                     <!-- UI Input -->
                                     <div class="ui-input">
                                         <!-- Input Box -->
@@ -241,7 +214,7 @@
                                     </div>
 
 
-                                    <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                                    <button id="Button1" class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
                                     <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
                                     <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
                                     <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
@@ -256,12 +229,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="clearfix"></div>
-       
-
             <%--SUGGERITI--%>
-            <hr />
             <div class="row" runat="server" id="divSuggeriti" style="margin-bottom: 15px" visible="false">
 
                 <div class="headline">
@@ -347,7 +316,7 @@
 
             </div>
         </div>
-        <div class="col-md-3 col-sm-3" runat="server" id="RightColumn">
+        <div class="col-md-3 col-sm-3" runat="server" id="column3">
             <div class="sidebar sticker">
                 <!-- Sidebar Block -->
                 <div class="sidebar-block" runat="server" visible="false">
@@ -552,9 +521,9 @@
                                 }
                                 $(this).css('visibility', 'visible').addClass('animated').addClass($(this).data('animate-in'));
                                 $(this).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-                                  function () {
-                                      $(this).removeClass($(this).data('animate-in'));
-                                  }
+                                    function () {
+                                        $(this).removeClass($(this).data('animate-in'));
+                                    }
                                 );
                             });
                         },
@@ -580,9 +549,9 @@
                                 }
                                 $(this).css('visibility', 'visible').addClass('animated').addClass($(this).data('animate-in'));
                                 $(this).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-                                  function () {
-                                      $(this).removeClass($(this).data('animate-in'));
-                                  }
+                                    function () {
+                                        $(this).removeClass($(this).data('animate-in'));
+                                    }
                                 );
                             });
                             /* auto-restart player if paused after action */

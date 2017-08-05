@@ -289,7 +289,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     {
         string cattipo = Tipologia;
         ClientScriptManager cs = Page.ClientScript;
-        Literal lit = null;
         switch (Tipologia)
         {
             case "rif000001":
