@@ -34,6 +34,7 @@
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
+    <asp:HiddenField runat="server" ID="hddTagCombined" ClientIDMode="Static" />
 
 
     <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiPortfolioRival1" visible="false">

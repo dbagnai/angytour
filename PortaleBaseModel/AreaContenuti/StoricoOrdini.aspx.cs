@@ -144,9 +144,12 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             //                                          </div>
             sb.Append(" <div class=\"product-categories muted\">");
             sb.Append(TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"));
+            sb.Append(TestoCaratteristicaJson(c.Campo2, c.Offerta.Xmlvalue, "I"));
             sb.Append(" </div>");
 
             sb.Append(" <div class=\"product-categories muted\">");
+            sb.Append(TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), "I") + "/");
+            sb.Append(TestoCaratteristica(1, c.Offerta.Caratteristica2.ToString(), "I") + "/");
             sb.Append(TestoCaratteristica(2, c.Offerta.Caratteristica3.ToString(), "I") + "/");
             sb.Append(TestoCaratteristica(3, c.Offerta.Caratteristica4.ToString(), "I") +" ");
             sb.Append(TestoCaratteristica(4, c.Offerta.Caratteristica5.ToString(), "I"));

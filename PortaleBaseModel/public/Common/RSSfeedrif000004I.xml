@@ -4,21 +4,29 @@
     <title>Albergo Ristorante Il Pozzetto Piatti</title>
     <link>http://localhost:52646</link>
     <description>Albergo Ristorante Il Pozzetto</description>
-    <lastBuildDate>Fri, 07 Jul 2017 11:38:07 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Aug 2017 14:25:43 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-07-07T11:38+02:00</sy:updateBase>
+    <sy:updateBase>2017-08-01T14:25+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>Antipasto umbro
-Il pozzetto Cod: 730</title>
-      <link>http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730</link>
-      <guid isPermaLink="true">http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730</guid>
+      <title>Antipasto Toscano
+sottotitolo Cod: 731</title>
+      <link>http://localhost:52646/I/piatti/antipasto-toscano-sottotitolo-731</link>
+      <guid isPermaLink="true">http://localhost:52646/I/piatti/antipasto-toscano-sottotitolo-731</guid>
+      <pubDate>Wed, 05 Jul 2017 14:17:19 +02:00</pubDate>
+      <category>Piatti</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="Antipasto Toscano
+sottotitolo" width="350" /><p>Crostini e affettati</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/piatti/antipasto-toscano-sottotitolo-731"><em>Antipasto Toscano
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Pici all'aglione Cod: 730</title>
+      <link>http://localhost:52646/I/piatti/pici-allaglione-730</link>
+      <guid isPermaLink="true">http://localhost:52646/I/piatti/pici-allaglione-730</guid>
       <pubDate>Wed, 10 May 2017 18:56:32 +02:00</pubDate>
       <category>Piatti</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/730/antipasto2.jpg" alt="Antipasto umbro
-Il pozzetto" width="350" /><p>In quis ultricies nisl. Duis porta sollicitudin aliquet. Aliquam erat volutpat. Pellentesque maximus mattis varius. Duis in quam facilisis, tincidunt nulla ac, elementum massa. Sed feugiat neque ultrices quam facilisis, a pulvinar augue tristique. Pellentesque iaculis bibendum eros. Nulla varius, massa quis porta gravida, mi justo vestibulum diam, eget efficitur odio justo ut sem. Duis consectetur </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/piatti/antipasto-umbro-il-pozzetto-730"><em>Antipasto umbro
-Il pozzetto</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/730/antipasto2.jpg" alt="Pici all'aglione" width="350" /><p>In quis ultricies nisl. Duis porta sollicitudin aliquet. Aliquam erat volutpat. Pellentesque maximus mattis varius. Duis in quam facilisis, tincidunt nulla ac, elementum massa. Sed feugiat neque ultrices quam facilisis, a pulvinar augue tristique. Pellentesque iaculis bibendum eros. Nulla varius, massa quis porta gravida, mi justo vestibulum diam, eget efficitur odio justo ut sem. Duis consectetur </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/piatti/pici-allaglione-730"><em>Pici all'aglione</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

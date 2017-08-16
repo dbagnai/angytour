@@ -64,10 +64,10 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
-                ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
                 idContenuto = CaricaValoreMaster(Request, Session, "idContenuto", true, "");
                 string testoindice = CaricaValoreMaster(Request, Session, "testoindice", true, "");
 
+                ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
                 ContenutoPagina = ""; //Azzero il contenuto pagina per il rewriting egli url classici
 
                 CaricaControlliJS();
@@ -452,7 +452,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             litNomeContenuti.Text = tmp;
             litMainContent.Text = ReplaceAbsoluteLinks(ReplaceLinks(GetLocalResourceObject("Testo" + ContenutoPagina).ToString()));
             //Titolo e descrizione pagina
-            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome);
+            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + Nome + " " + references.ResMan("Common", Lingua, "testoPosizionebase"));
 
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
 
@@ -483,7 +483,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             }
             catch { }
             //Titolo e descrizione pagina
-            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(DescrizioneContenuto.Replace("<br/>", " ").Trim() + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome);
+            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(DescrizioneContenuto.Replace("<br/>", " ").Trim() + " " + Nome + " " + references.ResMan("Common", Lingua, "testoPosizionebase"));
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
             string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true)).Replace("<br/>", " ").Trim());
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
@@ -492,7 +492,9 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true))).Replace("<br/>", " ").Trim();
             ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
 
-
+            /////////////////////////////////////////////////////////////
+            //MODIFICA PER TITLE E DESCRIPTION CUSTOM
+            ////////////////////////////////////////////////////////////
             string customtitle = "";
             string customdesc = "";
             switch (Lingua)
@@ -506,9 +508,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                     customtitle = content.CustomtitleI;
                     break;
             }
-             /////////////////////////////////////////////////////////////
-             //MODIFICA PER TITLE E DESCRIPTION CUSTOM
-             ////////////////////////////////////////////////////////////
+         
             if (!string.IsNullOrEmpty(customtitle))
                 ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
             if (!string.IsNullOrEmpty(customdesc))

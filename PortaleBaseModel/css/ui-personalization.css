@@ -152,7 +152,7 @@
 
 .btn.btn-orange {
     color: #ffffff;
-    background: #f56f28;
+    background: #cdbe70;
     /*border: 1px solid #3280e7;*/
     border-color: none;
     border: none;
@@ -163,7 +163,7 @@
     .btn.btn-orange:focus,
     .btn.btn-orange.active,
     .btn.btn-orange:active {
-        background: #f56f28;
+        background: #cdbe71;
         color: #ffffff;
     }
 

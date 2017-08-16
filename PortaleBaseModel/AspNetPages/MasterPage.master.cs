@@ -101,8 +101,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
 
         }
-        DataBind();
-
+        //  DataBind();
+        pnlRicerca.DataBind();
+        divContattiMaster.DataBind();
+        req1.DataBind();
+        lisearch.DataBind();
     }
 
     private void ControllaHttp()
@@ -129,22 +132,35 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     private void CaricaMenu()
     {
         //carichiamo i link per le pagine dinamiche in base al tbl rif attività
-        CaricaMenuContenuti(4, 4, rptTipologieLink1High); //Inserisco il link  nel menu
-        CaricaMenuContenuti(4, 4, rptTipologieLink1); //Inserisco il link  nel menu
-        CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
-        CaricaMenuContenuti(2, 2, rptTipologieLink2); //Inserisco il link  nel menu
-        CaricaMenuContenuti(3, 3, rptTipologieLink3High); //Inserisco il link  nel menu
-        CaricaMenuContenuti(3, 3, rptTipologieLink3); //Inserisco il link  nel menu
+
+
+        //CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
+        //CaricaMenuContenuti(2, 2, rptTipologieLink2); //Inserisco il link  nel menu
+
+        CaricaMenuSezioniContenuto("rif000002", rptTipologieLink2High); //Inserisco il link  nel menu
+        CaricaMenuSezioniContenuto("rif000002", rptTipologieLink2); //Inserisco il link  nel menu
+
+
+        //CaricaMenuContenuti(3, 3, rptTipologieLink3High); //Inserisco il link  nel menu
+        //CaricaMenuContenuti(3, 3, rptTipologieLink3); //Inserisco il link  nel menu
 
 
         //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1High, "prod000013,prod000014,prod000015"); //Inserisco il link  nel menu
-        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1); //Inserisco il link  nel menu
- 
+        CaricaMenuSottoSezioniContenuto("rif000001", "prod000013", rptTipologieLink1High);
+        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1,"prod000013"); //Inserisco il link  nel menu
+        CaricaMenuSottoSezioniContenuto("rif000001", "prod000014", rptTipologieLink4High);
+        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink4, "prod000014"); //Inserisco il link  nel menu
+        CaricaMenuSottoSezioniContenuto("rif000001", "prod000015", rptTipologieLink5High);
+        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink5, "prod000015"); //Inserisco il link  nel menu
+
+
+        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink6High, "prod000017"); //Inserisco il link  nel menu
+        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink6, "prod000017"); //Inserisco il link  nel menu
+
         //Carica i link menu per le pagine statiche in base all'id in tabella
         CaricaMenuLinkContenuti(1);
         CaricaMenuLinkContenuti(2);
-        CaricaMenuLinkContenuti(4);
-        CaricaMenuLinkContenuti(5);
+        CaricaMenuLinkContenuti(4); 
 
     }
     private void CaricaBannersAndControls()
@@ -181,7 +197,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
           
             default:
                 sezionebannersnavigazione = "banner-portfolio-sezioni";
-                controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
+                controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner6a.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
                 //  CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, sezionebannersnavigazione, false, litPortfolioBanners0, Lingua, true, 0, 5);
 
                 break;
@@ -430,7 +446,22 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         rptlist.DataSource = prodotti;
         rptlist.DataBind();
     }
+    public void CaricaMenuSottoSezioniContenuto(string tipologia, string categoria, Repeater rptlist, string filtercode = "")
+    {
+        List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        sprodotti.Sort(new GenericComparer<SProdotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
 
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            sprodotti = sprodotti.FindAll(i => list.Exists(l => l == i.CodiceSProdotto));
+        }
+        rptlist.DataSource = sprodotti;
+        rptlist.DataBind();
+    }
     public string CaricaLinkSottoSezioniContenuto(string tipologia, string categoria)
     {
         string ret = "";
@@ -543,6 +574,47 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
     }
 
+    protected void rptTipologieLinkSottoSezioni_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item != null && (e.Item.ItemType == ListItemType.Header))
+        {
+        }
+        if (e.Item.DataItem != null && e.Item != null && (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item))
+        {
+            if (((WelcomeLibrary.DOM.SProdotto)e.Item.DataItem).CodiceProdotto == Categoria)
+            {
+                HtmlAnchor linkmenu = ((HtmlAnchor)e.Item.FindControl("linkRubriche"));
+                if (linkmenu != null)
+                {   //linkmenu.Style.Add(HtmlTextWriterStyle.Color, "Dark Blue");
+                    //HtmlGenericControl divpulsante = ((HtmlGenericControl)e.Item.FindControl("divPulsante"));
+                    //divpulsante.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#e5e5e5");
+                    try
+                    {
+                        //((HtmlGenericControl)linkmenu.Parent).Attributes.Add("class", "active");
+
+                        linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
+                        //linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#4a4b4c");
+
+                        if (linkmenu != null)
+                        {
+                            Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent.Parent.Parent, linkmenu.Parent.Parent.Parent.ID);
+                            if (lidrop != null)
+                            {
+                                ((HtmlGenericControl)lidrop).Attributes["class"] += " active";
+                            }
+                        }
+
+                    }
+                    catch { }
+                    try
+                    {
+                        //((HtmlGenericControl)linkmenu.Parent.Parent.Parent.Parent).Attributes["class"] += " active";
+                    }
+                    catch { }
+                }
+            }
+        }
+    }
 
     #endregion
 

@@ -48,30 +48,30 @@ jQuery(document).ready(function ($) {
     //});
 
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
-    //$(window).scroll(function () {
-    //    if ($(window).scrollTop() > 0) {
-    //        $('#mainnav').addClass('bckColor1');
-    //        $('#divlogo').removeClass();
-    //        $('#divlogo').addClass('shrinklogobck');
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 0) {
+            //        $('#mainnav').addClass('bckColor1');
+            $('#divlogo').removeClass();
+            //        $('#divlogo').addClass('shrinklogobck');
 
-    //        if (sliderPresent) {
-    //            $('#menuzord').addClass('dark');
-    //            $('#menuzord').removeClass('white');
-    //        }
-    //    }
-    //    else {
-    //        $('#mainnav').removeClass('bckColor1');
-    //        $('#divlogo').removeClass();
-    //        $('#divlogo').addClass('fulllogobckdark');
+            //        if (sliderPresent) {
+            //            $('#menuzord').addClass('dark');
+            //            $('#menuzord').removeClass('white');
+            //        }
+        }
+        else {
+            //        $('#mainnav').removeClass('bckColor1');
+            $('#divlogo').removeClass();
+            $('#divlogo').addClass('fulllogobckdark');
 
-    //        if (sliderPresent) {
-    //            $('#menuzord').addClass('white');
-    //            $('#menuzord').removeClass('dark');
-    //            $('#divlogo').removeClass();
-    //            $('#divlogo').addClass('fulllogobck');
-    //        }
-    //    }
-    //});
+            //        if (sliderPresent) {
+            //            $('#menuzord').addClass('white');
+            //            $('#menuzord').removeClass('dark');
+            //            $('#divlogo').removeClass();
+            //            $('#divlogo').addClass('fulllogobck');
+            //        }
+        }
+    });
     /*-----------------------*/
 
     /*Bootstrap Carousel*/

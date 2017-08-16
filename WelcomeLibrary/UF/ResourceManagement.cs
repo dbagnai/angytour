@@ -61,12 +61,12 @@ namespace WelcomeLibrary.UF
 			DateTime st = DateTime.Now;
 			foreach (var _gruppoItem in Items)
 			{
-				var _gruppo = _gruppoItem.Key;
+				var _gruppo = _gruppoItem.Key.ToLower();
 				foreach (var categoria in Items[_gruppo])
 				{
-					if (Items[_gruppo][categoria.Key].ContainsKey(_lingua))
+					if (Items[_gruppo][categoria.Key.ToLower()].ContainsKey(_lingua))
 					{
-						var resources = Items[_gruppo][categoria.Key][_lingua];
+						var resources = Items[_gruppo][categoria.Key.ToLower()][_lingua];
 						foreach (var m in resources)
 						{
 							ret.Add(m.Value);
@@ -89,9 +89,9 @@ namespace WelcomeLibrary.UF
 			{
 				foreach (var categoria in Items[_gruppo])
 				{
-					if (Items[_gruppo][categoria.Key].ContainsKey(_lingua))
+					if (Items[_gruppo][categoria.Key.ToLower()].ContainsKey(_lingua))
 					{
-						var resources = Items[_gruppo][categoria.Key][_lingua];
+						var resources = Items[_gruppo][categoria.Key.ToLower()][_lingua];
 						foreach (var m in resources)
 						{
 							ret.Add(m.Value);
@@ -207,9 +207,7 @@ namespace WelcomeLibrary.UF
 								}
 
 							}
-
-
-
+                            
 						}
 
 					}

@@ -123,7 +123,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             this.CaricaDati();
             ImpostaDettaglioSolaLettura(true);
 
-            
+            if (TipologiaOfferte == "rif000001") //Accendo/spengo i pannelli dei parametri di filtraggio
+                pnlProdottiAssociati.Visible = true;
+
+            // DataBind();
         }
         else
         {
@@ -203,7 +206,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", CodiceProdotto);
                 parColl.Add(p7);
             }
-
+            if (ddlSottoProdSearch.SelectedValue != "")
+            {
+                OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
+                parColl.Add(p8);
+            }
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
@@ -269,6 +276,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtCampo2RU.Text = Details.Campo2RU;
 
             txtIdcollegato.Text = Details.Id_collegato.ToString();
+            hProdotticollegati.Value = Details.Xmlvalue;
 
             txtDenominazioneI.Text = Details.DenominazioneI;//(((Literal)e.Item.FindControl("lit1")).Text);
             txtDenominazioneGB.Text = Details.DenominazioneGB;//(((Literal)e.Item.FindControl("lit2")).Text);
@@ -299,7 +307,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it");
             txtData.Text = string.Format(ci, "{0:dd/MM/yyyy HH:mm:ss}", Details.DataInserimento);
-
+            txtAutore.Text = Details.Autore;
 
             txtLatitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Latitudine1_dts);
             txtLongitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Longitudine1_dts);
@@ -335,8 +343,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     {
         //testoricerca
         testoricerca = Server.HtmlEncode(txtinputCerca.Text);
-        mese = txtinputmese.Text;
-        anno = txtinputanno.Text;
+        //mese = txtinputmese.Text;
+        //anno = txtinputanno.Text;
         CaricaDati();
     }
 
@@ -397,6 +405,22 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         this.CaricaDati();
     }
 #endif
+
+    protected void ddlSottoProdSearch_SelectedIndexChange(object sender, EventArgs e)
+    {
+        ////Qui devo mettere una funzione che riempie i dati con il nome (ITA / ENG / RU) del prodotto selezionato
+        ////Di modo da poterlo modificare
+        //CodiceProdotto = ddlProdottoNewProd1.SelectedValue;
+        //CaricaDatiFormInserimento(ddlTipologiaNewProd.SelectedValue, ddlProdottoNewProd1.SelectedValue);
+        //btnModificaProd.Enabled = true;
+        //NomeNuovoProdIt.Enabled = true;
+        //NomeNuovoProdEng.Enabled = true;
+        //NomeNuovoProdRu.Enabled = true;
+        ////OkButton.Enabled = false;
+        //OkButton.Text = "Annulla";
+        //btnModificaProd.Text = "Salva";
+        CodiceSottoProdottoRicerca = ddlSottoProdSearch.SelectedValue;
+    }
 
     /// <summary>
     /// Carica i dati nelle ddl regione/prov/comune 
@@ -514,6 +538,23 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         catch { }
 
+
+         sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
+        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == Categoria)); });
+        sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        ddlSottoProdSearch.Items.Clear();
+        ddlSottoProdSearch.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
+        ddlSottoProdSearch.Items[0].Value = "";
+        ddlSottoProdSearch.DataSource = sprodotti;
+        ddlSottoProdSearch.DataTextField = "Descrizione";
+        ddlSottoProdSearch.DataValueField = "CodiceSProdotto";
+        ddlSottoProdSearch.DataBind();
+        try
+        {
+            ddlSottoProdSearch.SelectedValue = "";
+            CodiceSottoProdottoRicerca = "";
+        }
+        catch { }
     }
     protected void ddlProdotto_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -701,6 +742,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                         updrecord.Caratteristica5 = tmpcoll;
                     if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica6 = tmpcoll;
+                    updrecord.Xmlvalue = hProdotticollegati.Value;
+
+                    updrecord.Autore = txtAutore.Text;
+
 
                     updrecord.Campo1I = txtCampo1I.Text;
                     updrecord.Campo2I = txtCampo2I.Text;
@@ -793,7 +838,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 //    return;
                 //}
                 updrecord = new Offerte();
-                updrecord.Autore = User.Identity.Name;
+                //updrecord.Autore = User.Identity.Name;
+                if (!string.IsNullOrEmpty(txtAutore.Text))
+                    updrecord.Autore = User.Identity.Name;
+                else updrecord.Autore = txtAutore.Text;
+
                 updrecord.CodiceTipologia = TipologiaOfferte;
 
                 int tmpcoll = 0;
@@ -821,6 +870,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     updrecord.Caratteristica5 = tmpcoll;
                 if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica6 = tmpcoll;
+                updrecord.Xmlvalue = hProdotticollegati.Value;
 
                 updrecord.Campo1I = txtCampo1I.Text;
                 updrecord.Campo2I = txtCampo2I.Text;
@@ -1073,6 +1123,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         rptImmagini.DataBind();
         ClientIDSelected = "";
         OffertaIDSelected = "";
+        hProdotticollegati.Value = "";
 
         txtCampo1GB.Text = "";
         txtCampo1RU.Text = "";
@@ -1109,6 +1160,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtFax.Text = "";
         txtVideo.Text = "";
         txtData.Text = "";
+        txtAutore.Text = "";
 
         txtLatitudine1_dts.Text = string.Empty;
         txtLongitudine1_dts.Text = string.Empty;
@@ -1719,6 +1771,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             ddlTipologiaNewSottProd.SelectedValue = SceltaTipologia;
         }
         catch { }
+
+
+      
+
     }
 
     protected void CaricaDatiFormInserimento(string Tipologia, string Prodotto)

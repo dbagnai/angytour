@@ -4340,7 +4340,7 @@ Revolution Slider Container
     width: 100%;
     position: relative;
     padding: 0;
-    max-height: 500px;
+    /*max-height: 500px;*/
     overflow: hidden;
     visibility: hidden;
     left: 0;

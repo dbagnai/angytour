@@ -43,15 +43,13 @@ public partial class AspNetPages_Shoppingcart : CommonPage
                 PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
 
                 //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "vuoto", false, Lingua);
-             
-               
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua");
 
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
 
-               DataBind();
+             //  DataBind();
             }
             else
             {
@@ -94,7 +92,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     }
     private string SelezionaNazione(CarrelloCollection carrello)
     {
-        string codicenazione = "";
+        string codicenazione = "IT";
         if (carrello != null)
         {
             Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
@@ -162,12 +160,13 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     {
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
+        int idcarrello = 0;
+        int.TryParse(Idtext, out idcarrello);
+        //int idprodotto = 0;
+        //int.TryParse(Idtext, out idprodotto);
         int quantita = 0;
         //int.TryParse(txtQuantita_temp.Value, out quantita);
-
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;
@@ -185,13 +184,15 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     {
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
+        //int idprodotto = 0;
+        //int.TryParse(Idtext, out idprodotto);
+        int idcarrello = 0;
+        int.TryParse(Idtext, out idcarrello);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
         quantita -= 1;//Decremento
         if (quantita < 1) quantita = 0;
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;
@@ -220,13 +221,15 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         //}
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
+        //int idprodotto = 0;
+        //int.TryParse(Idtext, out idprodotto);
+        int idcarrello = 0;
+        int.TryParse(Idtext, out idcarrello);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
 
         quantita += 1;//Incremento
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;

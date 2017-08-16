@@ -113,6 +113,11 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         get { return ViewState["Vetrina"] != null ? (bool)(ViewState["Vetrina"]) : false; }
         set { ViewState["Vetrina"] = value; }
     }
+    public string Promozioni
+    {
+        get { return ViewState["Promozioni"] != null ? (string)(ViewState["Promozioni"]) : ""; }
+        set { ViewState["Promozioni"] = value; }
+    }
     public string Ordinamento
     {
         get { return ViewState["Ordinamento"] != null ? (string)(ViewState["Ordinamento"]) : ""; }
@@ -212,6 +217,10 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
 
+
+                Promozioni = CaricaValoreMaster(Request, Session, "promozioni");
+
+
                 //Aggiungo la lingua al pager se presente nella querystring
                 //PagerRisultati.NavigateUrl += "?Lingua=" + Lingua;
                 //Impostiamo anche gli altri parametri di ricerca
@@ -292,19 +301,19 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         switch (Tipologia)
         {
             case "rif000001":
-             
+
                 if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                 AssociaDatiSocial();
+                AssociaDatiSocial();
                 ModificaFiltroJS(); //Inserisce nell'objfiltro della session i valori di filtraggio
                 string svetrina = "";
                 if (Vetrina) svetrina = "true";
-                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "', \"\", \"\", \"" + Categoria2liv + "\");";
+                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
                     cs.RegisterStartupScript(this.GetType(), "clist1", controllist2, true);
                 }
                 //SettaTestoIniziale();
-               
+
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
                 break;
 
@@ -325,6 +334,12 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             if (objvalue == null) objvalue = new Dictionary<string, string>();
         }
         //AGIORNIAMO IL CONTENITORE OBJFILTRO USATO DALL'HANDLE PER IL FILTRO
+        if (Promozioni != "")
+        {
+            objvalue["promozioni"] = Promozioni;
+        }
+
+
         //ddlCaratteristica1
         //ddlRegione
         //ddlCategoria
@@ -835,7 +850,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
         hreflang = " hreflang=\"it\" ";
-        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria,Categoria2liv);
+        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv);
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
         litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
@@ -1098,7 +1113,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common", Lingua, "testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 
@@ -1139,30 +1154,32 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     }
 
 
-    protected void btnInsertcart(object sender, EventArgs e)
-    {
+    //protected void btnInsertcart(object sender, EventArgs e)
+    //{
 
 
-        string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
-        string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString());
-        int quantita = 0;
-        int.TryParse(q, out quantita);
-        quantita += 1;//Incremento
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+    //    string Idtext = ((LinkButton)sender).CommandArgument.ToString();
+    //    int idprodotto = 0;
+    //    int.TryParse(Idtext, out idprodotto);
+        
+    //    string codTagCombined = hddTagCombined.Value;
+    //    string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString(), codTagCombined);
+    //    int quantita = 0;
+    //    int.TryParse(q, out quantita);
+    //    quantita += 1;//Incremento
+    //    AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
 
-        //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
-        AggiornaVisualizzazioneDatiCarrello();
-        AssociaDati();
+    //    //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
+    //    AggiornaVisualizzazioneDatiCarrello();
+    //    AssociaDati();
 
 
-    }
+    //}
 
-    private void AggiornaVisualizzazioneDatiCarrello()
-    {
-        //  this.Master.VisualizzaCarrello();
-    }
+    //private void AggiornaVisualizzazioneDatiCarrello()
+    //{
+    //    //  this.Master.VisualizzaCarrello();
+    //}
 
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
     protected void btnPrev_click(object sender, EventArgs e)

@@ -210,7 +210,7 @@
                     |
                 <label class="bind" mybind="Gruppo"></label>
                     |
-                <input class="form-control bind" mybind="Valore" idbind="Id" maxlength="20" style="width: 80%" />
+                <input class="form-control bind" mybind="Valore" idbind="Id" maxlength="500" style="width: 80%" />
                 </div>
             </div>
         </div>

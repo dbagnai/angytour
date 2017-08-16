@@ -21,15 +21,16 @@ namespace WelcomeLibrary.DAL
         /// <param name="SessionId"></param>
         /// <param name="IpClient"></param>
         /// <param name="CodiceProdotto">Opzionale se specificato torna solo l'elemento del carrello col codiceprodotto indicato</param>
+        /// <param name="CodiceCaratteristica">Opzionale se specificato torna solo l'elemento del carrello col codiceprodotto e codice carrello indicato</param>
         /// <returns></returns>
-        public CarrelloCollection CaricaCarrello(string connection, string SessionId, string ipClient, int id_prodotto = 0)
+        public CarrelloCollection CaricaCarrello(string connection, string SessionId, string ipClient, int id_prodotto = 0, string idcombinato = "", int idrecordcarrello = 0)
         {
             CarrelloCollection list = new CarrelloCollection();
 
             if (connection == null || connection == "") return list;
             if (SessionId == null || string.IsNullOrWhiteSpace(SessionId)) return list;
             if (ipClient == null || string.IsNullOrWhiteSpace(ipClient)) return list;
-
+            if (idcombinato == null) idcombinato = "";
             //dbDataAccess.ComprimiDbAccess(connection);
 
             Carrello item;
@@ -43,11 +44,27 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(p1);
                 OleDbParameter p2 = new OleDbParameter("@ipClient", ipClient);//OleDbType.VarChar
                 parColl.Add(p2);
-                if (id_prodotto != 0)
+                if (id_prodotto != 0 || !string.IsNullOrEmpty(idcombinato))
                 {
                     query += " and A.id_prodotto like @id_prodotto";
                     OleDbParameter p3 = new OleDbParameter("@id_prodotto", id_prodotto);//OleDbType.VarChar
                     parColl.Add(p3);
+                    query += " and A.campo2 like @campo2";
+                    OleDbParameter p4 = new OleDbParameter("@campo2", idcombinato);//OleDbType.VarChar
+                    parColl.Add(p4);
+                }
+                //if (!string.IsNullOrEmpty(idcombinato))
+                //{
+                //    query += " and A.campo2 like @campo2";
+                //    OleDbParameter p4b = new OleDbParameter("@campo2", idcombinato);//OleDbType.VarChar
+                //    parColl.Add(p4b);
+                //}
+
+                if (idrecordcarrello != 0)
+                {
+                    query += " and A.id like @id";
+                    OleDbParameter p5 = new OleDbParameter("@id", idrecordcarrello);//OleDbType.VarChar
+                    parColl.Add(p5);
                 }
                 query += " order by A.id desc ";
 
@@ -141,6 +158,9 @@ namespace WelcomeLibrary.DAL
                             if (!reader["Caratteristica6"].Equals(DBNull.Value))
                                 offerta.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
 
+                            if (!reader["Xmlvalue"].Equals(DBNull.Value))
+                                offerta.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
                             if (!reader["DATITECNICII"].Equals(DBNull.Value))
                                 offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
                             if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
@@ -189,7 +209,6 @@ namespace WelcomeLibrary.DAL
 
             return list;
         }
-
         /// <summary>
         /// Carica la lista completa degli elementi del carrello su codiceordine, 
         /// restituisce tutta la lista.
@@ -591,7 +610,7 @@ namespace WelcomeLibrary.DAL
             if (ListaCarrello.Count() > 0)
             {
                 //Si suppone di non avere nel carrello doppioni con stesso codice prodotto
-                Carrello itemdb = ListaCarrello.Find(delegate(Carrello _c) { return _c.id_prodotto == item.id_prodotto; });
+                Carrello itemdb = ListaCarrello.Find(delegate (Carrello _c) { return _c.id_prodotto == item.id_prodotto && _c.Campo2 == item.Campo2; });
 
                 if (itemdb != null && itemdb.id_prodotto != 0)
                 {
@@ -659,6 +678,7 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
+
         /// <summary>
         /// Inserisco un elemento nel carrello 
         /// </summary>
@@ -687,6 +707,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p8);
             OleDbParameter p9 = new OleDbParameter("@CodiceOrdine", item.CodiceOrdine);
             parColl.Add(p9);
+            OleDbParameter p10 = new OleDbParameter("@Campo1", item.Campo1);
+            parColl.Add(p10);
+            OleDbParameter p11 = new OleDbParameter("@Campo2", item.Campo2);
+            parColl.Add(p11);
             OleDbParameter pidprod = new OleDbParameter("@id_prodotto", item.id_prodotto);
             parColl.Add(pidprod);
             OleDbParameter pidcliente = new OleDbParameter("@idcliente", item.ID_cliente);// 
@@ -698,7 +722,7 @@ namespace WelcomeLibrary.DAL
             OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);// 
             parColl.Add(pcodicesconto);
 
-            string query = "INSERT INTO TBL_CARRELLO([SessionId],[Prezzo],[Data],[Iva],[Numero],[CodiceProdotto],[IpClient],[Validita],[CodiceOrdine],[id_prodotto],[ID_cliente],[Codicenazione],[Codiceprovincia],[Codicesconto]) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
+            string query = "INSERT INTO TBL_CARRELLO([SessionId],[Prezzo],[Data],[Iva],[Numero],[CodiceProdotto],[IpClient],[Validita],[CodiceOrdine],[Campo1],[Campo2],[id_prodotto],[ID_cliente],[Codicenazione],[Codiceprovincia],[Codicesconto]) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@Campo1,@Campo2,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
             try
             {
                 int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -744,7 +768,7 @@ namespace WelcomeLibrary.DAL
                 OleDbParameter p4 = new OleDbParameter("@Campo1", item.Campo1);//lo uso per l'email del cliente che fà l'ordine
                 parColl.Add(p4);
 
-                OleDbParameter p5 = new OleDbParameter("@Campo2", item.Campo2);// 
+                OleDbParameter p5 = new OleDbParameter("@Campo2", item.Campo2);//lo uso per il json delle caratteristiche
                 parColl.Add(p5);
 
                 OleDbParameter p6 = new OleDbParameter("@Campo3", item.Campo3);// 
@@ -777,6 +801,36 @@ namespace WelcomeLibrary.DAL
             else
                 DeleteCarrelloPerID(connessione, item.ID);
             return;
+        }
+
+        /// <summary>
+        /// Cancellare un elemento dal carrello passandogli l'ID e il codice caratteristiche combinate
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void DeleteCarrelloPerIDCodCarr(string connessione, int ID, string CodCar)
+        {
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            if (connessione == null || connessione == "") return;
+            if (ID == null || ID == 0) return;
+            if (string.IsNullOrEmpty(CodCar)) CodCar = "";
+
+            OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbParameter p2 = new OleDbParameter("@Campo2", CodCar);
+            parColl.Add(p2);
+
+            string query = "DELETE * FROM TBL_CARRELLO WHERE ([ID]=@ID) and ([Campo2]=@Campo2)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione Elemento dal carrello :" + error.Message, error);
+            }
+            return;
+
         }
 
         /// <summary>

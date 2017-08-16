@@ -574,7 +574,7 @@ public class references
         WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.AddRange(WelcomeLibrary.UF.Utility.ElencoProvince);
         WelcomeLibrary.UF.Utility.CaricaListaStaticaComuni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
 
-        WelcomeLibrary.UF.Utility.CaricaMemoriaStaticaCaratteristiche("",false);
+        WelcomeLibrary.UF.Utility.CaricaMemoriaStaticaCaratteristiche("");
         //CRICHIAMO LE LISTE STATICHE TIPOLOGIEANNUNCI, TIPOLOGIECONTENUTI,TIPOLOGIEOFFERTE,ELENCOPROVINCE,ELENCOCOMUNI
         //  WelcomeLibrary.UF.Utility.CaricaListaStaticaTipologieAnnunci(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
         WelcomeLibrary.UF.Utility.CaricaListaStaticaTipologieOfferte(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
@@ -704,7 +704,29 @@ public class references
         }
         return retstr;
     }
-
+    public static string TestoCaratteristicaJson(string idJson, string codeJson, string Lingua)
+    {
+        string retstr = "";
+        if (!string.IsNullOrEmpty(codeJson))
+        {
+            List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(codeJson);
+            if (listCar != null && listCar.Count > 0)
+            {
+                ResultAutocomplete car1 = new ResultAutocomplete();
+                ResultAutocomplete car2 = new ResultAutocomplete();
+                foreach (ModelCarCombinate item in listCar)
+                {
+                    if (item.id == idJson)
+                    {
+                        car1 = item.caratteristica1;
+                        car2 = item.caratteristica2;
+                    }
+                }
+                retstr = "  -  " + car1.value + "  -  " + car2.value;
+            }
+        }
+        return retstr;
+    }
     public static List<Tabrif> FiltraCaratteristiche(int progr, string term, string lingua = "I")
     {
         List<Tabrif> Caratteristica = new List<Tabrif>();

@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
-                        <div class="col-sm-4">
+                        <%-- <div class="col-sm-4">
                             <asp:TextBox runat="server" ID="txtinputmese" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" TargetControlID="txtinputmese"
                                 runat="server" WatermarkText="mese">
@@ -59,6 +59,10 @@
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" TargetControlID="txtinputanno"
                                 runat="server" WatermarkText="anno">
                             </Ajax:TextBoxWatermarkExtender>
+                        </div>--%>
+                        <div class="col-sm-8">
+                            <asp:DropDownList Width="100%" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlSottoProdSearch"
+                                runat="server" OnSelectedIndexChanged="ddlSottoProdSearch_SelectedIndexChange" />
                         </div>
                         <div class="col-sm-4">
                             <asp:Button runat="server" ID="ImgBtnCerca" OnClick="ImgBtnCerca_Click" CssClass="btn btn-primary btn-sm" Width="100%" Text="CERCA" />
@@ -260,7 +264,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label13" runat="server" Text="Testo promo Ita" /></strong>
+                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
@@ -269,7 +273,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelps1" runat="server" Text="Testo promo sconto Ita" /></strong>
+                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
@@ -309,7 +313,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelpre" runat="server" Text="Testo promo Eng" /></strong>
+                                        <asp:Label ID="Labelpre" runat="server" Text="Meta Title Eng (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
@@ -318,7 +322,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelprse" runat="server" Text="Testo promo sconto Eng" /></strong>
+                                        <asp:Label ID="Labelprse" runat="server" Text="Meta Description Eng (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo2GB" runat="server"></asp:TextBox>
@@ -414,7 +418,15 @@
                     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Insertvalidate" />
                     <hr />
                 </div>
-
+                <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label40" runat="server" Text="Autore" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtAutore" CssClass="form-control" runat="server" value="" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-2 item-text">
                         <strong>
@@ -445,36 +457,38 @@
                     </div>
                 </div>
                 <hr />
-                <div class="row">
-                    <div class="col-sm-2 item-text">
-                        <strong>
-                            <asp:Label ID="Label23" runat="server" Text="Caratteristica 1" /></strong>
-                    </div>
-                    <div class="col-sm-10">
-                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica1" runat="server" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2 item-text">
-                        <strong>
-                            <asp:Label ID="Label24" runat="server" Text="Caratteristica 2" /></strong>
-                    </div>
-                    <div class="col-sm-10">
-                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica2" runat="server" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2 item-text">
-                        <strong>
-                            <asp:Label ID="Label27" runat="server" Text="Caratteristica 3" /></strong>
-                    </div>
-                    <div class="col-sm-10">
-                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica3" runat="server" />
-                    </div>
-                </div>
 
                 <asp:Panel runat="server" Visible="false">
 
+                    <div class="row">
+                        <div class="col-sm-2 item-text">
+                            <strong>
+                                <asp:Label ID="Label23" runat="server" Text="Caratteristica 1" /></strong>
+                        </div>
+                        <div class="col-sm-10">
+                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica1" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 item-text">
+                            <strong>
+                                <asp:Label ID="Label24" runat="server" Text="Caratteristica 2" /></strong>
+                        </div>
+                        <div class="col-sm-10">
+                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica2" runat="server" />
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-2 item-text">
+                            <strong>
+                                <asp:Label ID="Label27" runat="server" Text="Caratteristica 3" /></strong>
+                        </div>
+                        <div class="col-sm-10">
+                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica3" runat="server" />
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-sm-2 item-text">
@@ -656,9 +670,238 @@
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
                 </div>
+                <asp:Panel runat="server" ID="pnlProdottiAssociati" Visible="false">
+                    <script>
+                        var propcollegati = [];
+                        var proprietatmp = {};
+                        var caratteristica2 = {};
+                        var caratteristica1 = {};
+                        $(document).ready(function () {
+                            initCaratteristicheCollegate();
+                        });
+                        function initCaratteristicheCollegate() {
+                            $("#txtCombCar1").autocomplete({
+                                source: pathAbs + '/lib/hnd/HandlerDataCommon.ashx' + '?q=autocompletecaratteristiche&progressivo=0',
+                                minLength: 0,
+                                change: function (event, ui) {
+                                    onchangeScelta(this);
+                                },
+                                select: function (event, ui) {
+                                    if (ui.item != null) {
+                                        $("#txtCombCar1").text(ui.item.Campo1);
+                                        caratteristica1 = {};
+                                        caratteristica1.id = ui.item.id;
+                                        caratteristica1.value = ui.item.value;
+                                        caratteristica1.codice = ui.item.codice;
+                                    }
+                                },
+                                open: function () {
+                                    //console.log("OPEN");
+                                    setTimeout(function () {
+                                        $('.ui-autocomplete').css('z-index', 99999999999999);
+                                    }, 0);
+                                }
+                            }).on("focus", function () {
+                                $(this).autocomplete("search", "");
+                            });
+                            $("#txtCombCar2").autocomplete({
+                                source: pathAbs + '/lib/hnd/HandlerDataCommon.ashx' + '?q=autocompletecaratteristiche&progressivo=1',
+                                minLength: 0,
+                                change: function (event, ui) {
+                                    onchangeScelta(this);
+                                },
+                                select: function (event, ui) {
+                                    if (ui.item != null) {
+                                        $("#txtCombCar2").text(ui.item.Campo1);
+                                        caratteristica2 = {};
+                                        caratteristica2.id = ui.item.id;
+                                        caratteristica2.value = ui.item.value;
+                                        caratteristica2.codice = ui.item.codice;
+                                    }
+                                },
+                                open: function () {
+                                    //console.log("OPEN");
+                                    setTimeout(function () {
+                                        $('.ui-autocomplete').css('z-index', 99999999999999);
+                                    }, 0);
+                                }
+                            }).on("focus", function () {
+                                $(this).autocomplete("search", "");
+                            });
 
+                            propcollegati = [];
+                            proprietatmp = {};
+                            caratteristica2 = {};
+                            caratteristica1 = {};
+                            var jsonvalues = $("#hProdotticollegati").val();
+                            if (jsonvalues !== null && jsonvalues !== '')
+                                propcollegati = JSON.parse(jsonvalues);
+                            ShowList('', 'divcontainerlist', 'listapcollegati', propcollegati);
+                        }
+                        function eliminafiltri() {
+                            $("#txtCombCar1").val('');
+                            $("#txtCombCar2").val('');
+                            $("#txtQtacollegati").val('');
+                            proprietatmp = {};
+                            caratteristica1 = {};
+                            caratteristica2 = {};
+                        }
+                        function emptycollegato(el, idcollegato) {
+                            if ($(el)[0].value === '')
+                                $("#" + idcollegato).val('');
+                        }
+                        function addupdateprodottocollegato(el) {
+                            var found = false;
+                            if (caratteristica1.codice != null && caratteristica1.codice != "" && caratteristica2.codice != null && caratteristica2.codice != "") {
+                                var tmpId = caratteristica1.codice + "-" + caratteristica2.codice;//Separo con carattere per evitare conflitti di id caratteristiche diverse
+                                for (var j = 0; j < propcollegati.length; j++) {
+                                    if (propcollegati[j].hasOwnProperty('id')) {
+                                        if (propcollegati[j].id == tmpId) {
+                                            found = true;
+                                            propcollegati[j].qta = $('#txtQtacollegati').val();
+                                        }
+                                    }
+                                }
+                                if (!found) {
+                                    proprietatmp.id = tmpId;
+                                    proprietatmp.qta = $('#txtQtacollegati').val();
+                                    proprietatmp.caratteristica1 = {};
+                                    proprietatmp.caratteristica1 = caratteristica1;
+                                    proprietatmp.caratteristica2 = {};
+                                    proprietatmp.caratteristica2 = caratteristica2;
+                                    //console.log(proprietatmp);
+                                    var prodottoclone = (JSON.parse(JSON.stringify(proprietatmp)));
+                                    propcollegati.push(prodottoclone);
+                                }
+                                $("#hProdotticollegati").val(JSON.stringify(propcollegati));
+                                ShowList('', 'divcontainerlist', 'listapcollegati', propcollegati);
+                            }
+                            else {
+                                if (caratteristica2.codice == null || caratteristica2.codice == "") {
+                                    $('#txtCombCar2').addClass('has-error');
+                                    $('#errorcombCar2').removeClass('spento');
+                                }
+                                if (caratteristica1.codice == null || caratteristica1.codice == "") {
+                                    $('#txtCombCar1').addClass('has-error');
+                                    $('#errorcombCar1').removeClass('spento');
+                                }
+                            }
+                        }
+                        function selectProdotto(idp) {
+                            var found = false;
+                            var jfound = 0;
+                            for (var j = 0; j < propcollegati.length; j++) {
+                                //console.log(propcollegati[j]);
+                                if (propcollegati[j].hasOwnProperty('id')) {
+                                    if (propcollegati[j].id == idp) {
+                                        found = true;
+                                        jfound = j;
+                                        proprietatmp = propcollegati[j];
+                                        caratteristica2 = {};
+                                        caratteristica1 = {};
+                                        caratteristica1 = proprietatmp.caratteristica1;
+                                        caratteristica2 = proprietatmp.caratteristica2;
+                                    }
+                                }
+                            }
+                            if (found) {
+                                $("#txtCombCar1").attr("value", proprietatmp.caratteristica1.value);
+                                $("#txtCombCar2").attr("value", proprietatmp.caratteristica2.value);
+                                $("#txtQtacollegati").attr("value", proprietatmp.qta);
+                            }
+                        }
+
+
+                        function cancelProdotto(idp) {
+                            if (confirm('Vuoi cancellare il prodotto corrente?')) {
+                                //cancello dalla lista il selezionato
+                                var pulito = $.grep(propcollegati, function (e) {
+                                    return e.id != idp;
+                                });
+                                propcollegati = pulito;
+                                if (propcollegati.length != 0)
+                                    $("#hProdotticollegati").val(JSON.stringify(propcollegati));
+                                else
+                                    $("#hProdotticollegati").val('');
+
+                                //SE selezionato l'elemento che cancello lo elimino dalla memoria temporanea
+                                if (proprietatmp != null && proprietatmp.hasOwnProperty('id') && idp == proprietatmp.id) {
+                                    proprietatmp = {};
+                                    eliminafiltri();
+                                }
+                                ShowList('', 'divcontainerlist', 'listapcollegati', propcollegati);
+                            }
+                        }
+
+                        function onchangeScelta(elem) {
+                            proprietatmp = {};
+                            if ($(elem)[0].value != "" && $(elem)[0].value != null) {
+                                $(elem).removeClass('has-error');
+                                if ($(elem)[0].id.indexOf('txtCombCar1') != -1)
+                                    $('#errorcombCar1').addClass('spento');
+                                else $('#errorcombCar2').addClass('spento');
+                            }
+                            else {
+                                $(elem).addClass('has-error');
+                                if ($(elem)[0].id.indexOf('txtCombCar1') != -1)
+                                    $('#errorcombCar1').removeClass('spento');
+                                else $('#errorcombCar2').removeClass('spento');
+                            }
+                        }
+                    </script>
+                    <input type="hidden" id="hProdotticollegati" runat="server" clientidmode="static" />
+                    <hr />
+                    <div class="row">
+                        <style>
+                            #listapcollegati span {
+                                font-size: 16px;
+                            }
+
+                            .ui-menu .ui-menu-item {
+                                font-size: 16px !important;
+                            }
+                        </style>
+                        <div class="col-sm-12">
+                            <h2>Aggiunta Caratteristiche e Disponibilità</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <strong><%= references.ResMan("BaseText", Lingua, "selectcat1") %></strong>
+                            <br />
+                            <input id="txtCombCar1" type="text" class="form-control" onchange="onchangeScelta(this)" onkeyup="onchangeScelta(this)" />
+                            <p class="error spento" id="errorcombCar1">* Taglia obbligatoria</p>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <strong><%= references.ResMan("BaseText", Lingua, "selectcat2") %></strong>
+                            <br />
+                            <input id="txtCombCar2" type="text" class="form-control" onchange="onchangeScelta(this)" onkeyup="onchangeScelta(this)" />
+                            <p class="error spento" id="errorcombCar2">* Valore obbligatorio</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <strong>Qta</strong>
+                            <br />
+                            <input id="txtQtacollegati" type="text" class="form-control" value="1" />
+                        </div>
+                        <div class="col-sm-2">
+                            <br />
+                            <button id="btnAddcollegato" type="button" class="btn btn-primary btn-sm" onclick="javascript:addupdateprodottocollegato()">
+                                Aggiungi
+                                    <br />
+                                Aggiorna</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="divColTagl" id="divcontainerlist">
+                            </div>
+                        </div>
+                    </div>
+
+                </asp:Panel>
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -814,18 +1057,26 @@
                                         </td>
                                     </tr>
                                 </table>
+                                <script>
+                                    function bloccaSblocca(idDiv) {
+                                        $('#' + idDiv).attr('style', 'position: absolute; top: 0; bottom: 0; z-index: 2; heigth:100%; width:100%; background-color:rgba(0,0,0,0.2);');
+                                    }
+                                </script>
                             </div>
                         </td>
                     </tr>
                 </table>
 
                 <hr />
+
+
                 <h2>
                     <asp:Label runat="server" ID="Label25" Text="Gestione tabelle riferimento"></asp:Label>
                 </h2>
                 <hr />
-                <div style="background-color: #fafafa">
-                    <h3>Tabella Caratteristica 1</h3>
+                <div style="background-color: #fafafa; position: relative; z-index: 1;">
+                    <div id="divBlockOverlay1" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
+                    <h3>Tabella Caratteristica 1 / Formato</h3>
                     <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica1_gest" AutoPostBack="true"
                         AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica1update">
                     </asp:DropDownList><br />
@@ -841,18 +1092,19 @@
                        
                             <asp:TextBox runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
 
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire Artista (Italiano)" TargetControlID="txtCar1I">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire  (Italiano)" TargetControlID="txtCar1I">
                     </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w2" WatermarkText="Inserire Artista (Inglese)" TargetControlID="txtCar1GB">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w2" WatermarkText="Inserire  (Inglese)" TargetControlID="txtCar1GB">
                     </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w3" WatermarkText="Inserire Artista (Russo)" TargetControlID="txtCar1RU">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="w3" WatermarkText="Inserire  (Russo)" TargetControlID="txtCar1RU">
                     </Ajax:TextBoxWatermarkExtender>
-                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" />
+                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')"  />
                     <br />
                 </div>
 
-                <div style="background-color: #fafafa">
-                    <h3>Tabella Caratteristica 2</h3>
+                <div style="background-color: #fafafa; position: relative; z-index: 1;">
+                    <div id="divBlockOverlay2" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
+                    <h3>Tabella Caratteristica 2 / Colore</h3>
                     <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica2_gest" AutoPostBack="true"
                         AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica2update">
                     </asp:DropDownList><br />
@@ -866,43 +1118,43 @@
                        
                             <asp:TextBox runat="server" ID="txtCar2RU" Text="" Width="300" /><br />
 
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire Galleria (Italiano)" TargetControlID="txtCar2I">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire  (Italiano)" TargetControlID="txtCar2I">
                     </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender5" WatermarkText="Inserire Galleria (Inglese)" TargetControlID="txtCar2GB">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender5" WatermarkText="Inserire  (Inglese)" TargetControlID="txtCar2GB">
                     </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender14" WatermarkText="Inserire Galleria (Russo)" TargetControlID="txtCar2RU">
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender14" WatermarkText="Inserire  (Russo)" TargetControlID="txtCar2RU">
                     </Ajax:TextBoxWatermarkExtender>
-                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica2" runat="server" OnClick="btnAggiornaCaratteristica2_Click" />
+                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica2" runat="server" OnClick="btnAggiornaCaratteristica2_Click" OnClientClick="bloccaSblocca('divBlockOverlay2')" />
                     <br />
                 </div>
-
-                <div style="background-color: #fafafa">
-                    <h3>Tabella Caratteristica 3</h3>
-                    <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
-                        AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
-                    </asp:DropDownList><br />
-                    Descrizione italiano:
-                       
-                            <asp:TextBox runat="server" ID="txtCar3I" Text="" Width="300" /><br />
-                    Descrizione inglese:
-                       
-                            <asp:TextBox runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
-                    Descrizione Russo:
-                       
-                            <asp:TextBox runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire Provenienza (Italiano)" TargetControlID="txtCar3I">
-                    </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire Provenienza (Inglese)" TargetControlID="txtCar3GB">
-                    </Ajax:TextBoxWatermarkExtender>
-                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire Provenienza (Russo)" TargetControlID="txtCar3RU">
-                    </Ajax:TextBoxWatermarkExtender>
-                    <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
-                    <br />
-                </div>
-
 
                 <asp:Panel runat="server" ID="pnlGestioneCaratteristiche" Visible="false">
 
+
+
+                    <div style="background-color: #fafafa">
+                        <h3>Tabella Caratteristica 3</h3>
+                        <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
+                            AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
+                        </asp:DropDownList><br />
+                        Descrizione italiano:
+                       
+                            <asp:TextBox runat="server" ID="txtCar3I" Text="" Width="300" /><br />
+                        Descrizione inglese:
+                       
+                            <asp:TextBox runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
+                        Descrizione Russo:
+                       
+                            <asp:TextBox runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire Provenienza (Italiano)" TargetControlID="txtCar3I">
+                        </Ajax:TextBoxWatermarkExtender>
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire Provenienza (Inglese)" TargetControlID="txtCar3GB">
+                        </Ajax:TextBoxWatermarkExtender>
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire Provenienza (Russo)" TargetControlID="txtCar3RU">
+                        </Ajax:TextBoxWatermarkExtender>
+                        <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
+                        <br />
+                    </div>
 
 
                     <div style="background-color: #fafafa">

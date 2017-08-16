@@ -28,7 +28,13 @@ namespace WelcomeLibrary.UF
         public string qta { get; set; }
         public string image { get; set; }
     }
-
+    public class ModelCarCombinate
+    {
+        public string id { get; set; }
+        public ResultAutocomplete caratteristica1 { get; set; }
+        public ResultAutocomplete caratteristica2 { get; set; }
+        public string qta { get; set; }
+    }
     public static class Csv
     {
         public static string Escape(string s)
@@ -1417,7 +1423,7 @@ namespace WelcomeLibrary.UF
 
 #region GESTIONE CARICAMENTO CONTENENTI DATI RELATIVI ALLE VARIE TABELLE DI RIFERIMTNTO
 
-        public static void CaricaMemoriaStaticaCaratteristiche(string codicetipologia, bool removenotpresent = true)
+        public static void CaricaMemoriaStaticaCaratteristiche(string codicetipologia, bool removenotpresent = false)
         {
 #region CARICAMENTO DELLE TABELLE DI RIFERIMENTO PER LE CARATTERISTICHE!!
             Caratteristiche = new List<WelcomeLibrary.DOM.TabrifCollection>();

@@ -470,7 +470,6 @@
         <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
-
             <div class="row">
                 <asp:Label ID="output" runat="server"></asp:Label>
             </div>
@@ -732,7 +731,7 @@
                             </ItemTemplate>
                         </asp:Repeater>
 
-                        <div class="ui-15" runat="server" id="div1" visible="true">
+                        <div class="ui-15" runat="server" id="divContactBelow" visible="true">
                             <div class="ui-content">
                                 <div class="container-fluid">
                                     <div class="row" style="padding-right: inherit">
@@ -793,8 +792,8 @@
                 </asp:UpdatePanel>--%>
                 </div>
             </div>
-            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58fdc705ad8f59e1"></script>
+          <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
 
             <div runat="server" id="divSuggeriti" style="margin-bottom: 15px">
 
@@ -897,8 +896,6 @@
         </div>
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
             <div class="sidebar">
-
-
                 <!-- Sidebar Block -->
                 <div class="sidebar-block" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
@@ -1109,13 +1106,13 @@
     <div style="background-color: #f2ece6;">
         <div class="container">
             <div class="row">
-                <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px;margin-right:30px">
+                <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="subtitle-block clearfix">
                                 <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
                                     <div class="pull-left lead">
-                                        <h2 style="margin-bottom:3px">
+                                        <h2 style="margin-bottom: 3px">
                                             <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
                                             <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>

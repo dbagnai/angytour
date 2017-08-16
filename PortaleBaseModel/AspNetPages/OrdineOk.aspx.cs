@@ -390,6 +390,15 @@ public partial class AspNetPages_OrdineOk : CommonPage
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
             TestoMail += " - ID PRODOTTO : " + item.Offerta.Id.ToString();
+            if (!string.IsNullOrEmpty(item.Campo2))
+            {
+                List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
+                ResultAutocomplete taglia = new ResultAutocomplete();
+                ResultAutocomplete colore = new ResultAutocomplete();
+                ModelCarCombinate elem = listCarr.Find(e => e.id == item.Campo2);
+                if (elem != null)
+                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
+            }
             TestoMail += " - QUANTITA' : " + item.Numero + " - Prezzo unitario : " + item.Prezzo + " €<br/>";
 
             //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
@@ -464,6 +473,15 @@ public partial class AspNetPages_OrdineOk : CommonPage
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";
             TestoMail += " - Id Prodotto : " + item.Offerta.Id.ToString();
+            if (!string.IsNullOrEmpty(item.Campo2))
+            {
+                List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
+                ResultAutocomplete taglia = new ResultAutocomplete();
+                ResultAutocomplete colore = new ResultAutocomplete();
+                ModelCarCombinate elem = listCarr.Find(e => e.id == item.Campo2);
+                if (elem != null)
+                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
+            }
             TestoMail += " - Quantità : " + item.Numero + " - Prezzo unitario : " + item.Prezzo + " €<br/>";
 
             //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA

@@ -13,8 +13,8 @@
             <div class="col-md-1 col-sm-1">
             </div>
             <div class="col-md-10 col-sm-10 col-xs-12">
-                <h2 class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
-                    <asp:Literal Text="" runat="server" ID="litSezione" /></h2>
+                <spaden class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
+                    <asp:Literal Text="" runat="server" ID="litSezione" /></spaden>
             </div>
             <div class="col-md-1 col-sm-1">
             </div>
@@ -108,7 +108,7 @@
                                     <div class="clearfix" style="margin-bottom: 10px"></div>
 
                                     <b class="product-price pull-left" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                        <div style="color: #dd9932; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <div style="color: #cdbe70; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                             <meta itemprop="price" content='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'>
                                             <meta itemprop="priceCurrency" content="EUR">
                                             <asp:Literal ID="Literal4" runat="server" Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'></asp:Literal><br />
@@ -128,9 +128,10 @@
                                         </a>
                                     </div>
 
-                                    <div class="clearfix" style="margin-bottom:30px"></div>
+                                    <div class="clearfix" style="margin-bottom: 30px"></div>
                                     <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
-                                   <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
+                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
                                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                     <div class="addthis_inline_share_toolbox"></div>
                                     <div class="clearfix"></div>
@@ -139,21 +140,45 @@
                               <em>  <%# references.ResMan("BaseText", Lingua,"Proprietario") %>
                                  <span><%# TestoCaratteristica(2, Eval("Caratteristica3").ToString(), Lingua)%></span></em>
                             </div>--%>
+                                    <%--INSERIAMO I PARAMETRI DEL PRODOTTO--%>
+                                    <table class="product-attribute table">
+                                        <tbody>
+                                            <%# CreaRigheDettaglio(Container.DataItem) %>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
                                     <meta itemprop="availability" content="in_stock">
-                                    <div class="blog-post-tags" style="display: block">
-                                        <%--   <asp:LinkButton runat="server" ID="btnSottrai"
-                                    OnClick="btnDecrement" class="btn" CommandArgument='<%# Eval("Id")%>'>-</asp:LinkButton>
-                                <input runat="server" class="form-control text-center" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request, Session, Eval("Id").ToString())%>'>
-                                <asp:LinkButton runat="server" ID="btnAggiungi" runat="server"
-                                    OnClick="btnIncrement" class="btn" CommandArgument='<%# Eval("Id")%>'>
-                                </asp:LinkButton>
-                                <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello %>" class="btn-u btn-u-dark" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id")%>'>
-                                </asp:LinkButton>--%>
+                                    <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
+                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
+                                            <div style="width: 200px; padding-left: 2px; padding-right: 2px; margin: 0px auto">
+                                                <asp:LinkButton runat="server" ID="btnSottrai"
+                                                    OnClick="btnDecrement" class="btn btn-purple btn-padding pull-left" CommandArgument='<%# Eval("Id") %>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <input runat="server" class="form-control text-center" style="width: 50px; height: 45px; float: left;" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request,Session,Eval("Id").ToString(),"") %>' />
+
+                                                <asp:LinkButton runat="server" ID="btnAggiungi" Style="color: #fff"
+                                                    OnClick="btnIncrement" class="btn  btn-purple btn-padding pull-left" CommandArgument='<%# Eval("Id") %>'>
+                                                        <i class="fa fa-plus"></i>
+                                                </asp:LinkButton>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
+                                            <div style="padding-left: 2px; padding-right: 2px; margin: 0px auto">
+                                                <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello") %>' class="btn  btn-purple btn-padding" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id") %>' Style="width: 100%; font-size: 0.5rem;">
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
+                                            <div style="padding-left: 2px; padding-right: 2px; margin: 0px auto">
+                                                <a class="btn btn-purple btn-padding" Style="width: 100%; font-size: 0.5rem;"
+                                                    id="A14" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
+                                                    <%= references.ResMan("Common", Lingua,"gotoShoppingCart") %> 
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <%--  <%# CreaRigheDettaglio(Container.DataItem) %>--%>
                                 </div>
                             </div>
-
 
                             <div class="clearfix"></div>
                             <div class="blog-post-body">
@@ -164,16 +189,14 @@
                                 <p>
                                     <asp:Label ID="lbldatite" runat="server" Text='<%#  WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(Eval("Datitecnici" + Lingua).ToString()))%>'></asp:Label>
                                 </p>
-                                   <div class="row">
-                                <div class="col-sm-12">
-                                    <%= "<a  class=\"buttonstyle pull-right\" style=\"max-width:120px\"   href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>" %>
-                                    <%= "<a class=\"buttonstyle pull-right\" style=\"max-width:120px;margin-right:10px;\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>&nbsp;Stampa</a>"%>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <%= "<a  class=\"buttonstyle pull-right\" style=\"max-width:120px\"   href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>" %>
+                                        <%= "<a class=\"buttonstyle pull-right\" style=\"max-width:120px;margin-right:10px;\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>&nbsp;Stampa</a>"%>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                             <%--  <%# CreaRigheOpzioni(Container.DataItem)%>--%>
-
-                         
                         </div>
                     </div>
                 </ItemTemplate>
@@ -187,9 +210,9 @@
                                 <!-- Ui Form -->
                                 <div class="ui-form">
                                     <!-- Heading -->
-                                    <h3 class="h3-sidebar-title sidebar-title">
+                                    <span class="subtitle-block">
                                         <%= references.ResMan("Common", Lingua,"TestoDisponibilita") %>
-                                    </h3>
+                                    </span>
                                     <!-- Form -->
                                     <!-- UI Input -->
                                     <div class="ui-input">
@@ -234,10 +257,10 @@
             <div class="row" runat="server" id="divSuggeriti" style="margin-bottom: 15px" visible="false">
 
                 <div class="headline">
-                    <h2>
+                    <span class="subtitle-block">
                         <%--<%= (CodiceTipologia == "rif000100" || CodiceTipologia == "rif000101") ? references.ResMan("Common",Lingua,"titoloCollegati").ToString() : references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString()%>--%>
                         <%= (CodiceTipologia == "rif000100" || CodiceTipologia == "rif000101") ? references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                    </h2>
+                        <span>
                 </div>
 
                 <asp:Repeater ID="rptArticoliSuggeriti" runat="server"
@@ -436,10 +459,10 @@
                     <div class="subtitle-block clearfix">
                         <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
                             <div class="headline pull-left">
-                                <h2>
+                                <div class="subtitle-block clearfix">
                                     <%--<%= (CodiceTipologia=="rif000001" ) ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
                                     <%= (CodiceTipologia=="rif000001" ) ?  references.ResMan("Common", Lingua, "titoloCollegati"): references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                                </h2>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -590,4 +613,27 @@
         }
 
     </script>
+
+    <script type="text/javascript">
+        var car1Select = "";
+        var car2select = "";
+        function changeValue(elem, type) {
+            car1select = $('#' + 'ddlcat1')[0].value;
+            car2select = $('#' + 'ddlcat2')[0].value;
+            $('#hddTagCombined')[0].value = car1select + "-" + car2select;
+            GetCurrentCarrelloQty('txtQuantita', '<%= idOfferta %>', $('#hddTagCombined')[0].value);
+        }
+        $(document).ready(function () {
+            var idCarCombinate = $('#hddTagCombined')[0].value;
+            var carcombined = idCarCombinate.split('-');
+            var $select = $('#' + 'ddlcat1');
+            if (carcombined != null && carcombined.length > 0)
+                $select.val(carcombined[0]);
+            var $select = $('#' + 'ddlcat2');
+            if (carcombined != null && carcombined.length > 0)
+                $select.val(carcombined[1]);
+        });
+    </script>
+    <asp:HiddenField runat="server" ID="hddTagCombined" ClientIDMode="Static" />
+
 </asp:Content>

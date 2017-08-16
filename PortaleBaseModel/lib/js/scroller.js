@@ -1,10 +1,10 @@
 ﻿"use strict";
 
 
-function injectScrollerAndLoad(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype) {
-    loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, lng);
+function injectScrollerAndLoad(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
+    loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni, lng);
 }
-function injectScrollerAndLoadinner(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype) {
+function injectScrollerAndLoadinner(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
 
     var templateHtml = pathAbs + "/lib/template/" + "owlscrollerOfferte.html";
     if (type != null && type != '')
@@ -20,19 +20,28 @@ function injectScrollerAndLoadinner(type, container, controlid, listShow, tipolo
             $(this).prop("id", replacedid);
         });
 
+        getfromsession('objfiltro', function (retval) {
+            var objfiltro = {};
+            var params = {};
+            if (retval != null && retval != '')
+                objfiltro = JSON.parse(retval);
+            params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
 
-        var params = {};
-        params.tipologia = tipologia;
-        params.visualData = visualData;
-        params.visualPrezzo = visualPrezzo;
-        params.maxelement = maxelement;
-        params.listShow = listShow;
-        params.categoria = categoria;
-        params.scrollertype = scrollertype;
-        globalObject[controlid + "params"] = params;
+            params.tipologia = tipologia;
+            params.visualData = visualData;
+            params.visualPrezzo = visualPrezzo;
+            params.maxelement = maxelement;
+            params.listShow = listShow;
+            params.categoria = categoria;
+            params.categoria2Liv = categoria2Liv;
+            params.scrollertype = scrollertype;
+            params.vetrina = vetrina;
+            params.promozioni = promozioni;
+            globalObject[controlid + "params"] = params;
 
-        //Qui puoi fare inizializzazione controlli su allegati
-        CaricaScroller(controlid, container);
+            //Qui puoi fare inizializzazione controlli su allegati
+            CaricaScroller(controlid, container);
+        });
 
     });
 };
@@ -125,9 +134,9 @@ function BindScroller(el, localObjects, container) {
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj, data[j], localObjects, "",
-                    function (ret) {
-                        htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                    });
+            function (ret) {
+                htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+            });
     }
 
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller

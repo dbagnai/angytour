@@ -247,6 +247,29 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
         switch (Tipologia)
         {
+            case "rif000001":
+                if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+                AssociaDatiSocial();
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-sm-12";
+                column2.Visible = false;
+                column3.Visible = false;
+                //ContaArticoliPerperiodo(Tipologia);
+                divSearch.Visible = false;
+                divLatestPost.Visible = false;
+                //CaricaUltimiPost(Tipologia, Categoria);
+                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
+                //CaricaMenuContenuti(4, 9, rptContenutiLink);
+                divCategorie.Visible = false;
+                //string svetrina = "";
+                //if (Vetrina) svetrina = "true";
+                string controllistpr = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", \"\", \"\", \"\", \"" + Categoria2liv + "\");";
+                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+                {
+                    cs.RegisterStartupScript(this.GetType(), "clist1", controllistpr, true);
+                }
+                break;
             case "rif000002":
                 AssociaDatiSocial();
 
@@ -271,7 +294,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     //string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
 
 
-                    string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
+                    string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
 
 
 
@@ -939,7 +962,6 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
 
     }
-
 
     protected void EvidenziaSelezione(string testolink)
     {

@@ -985,6 +985,11 @@ public class CommonPage : Page
     {
         return references.TestoCaratteristica(progressivocaratteristica, codice, Lingua);
     }
+    public static string TestoCaratteristicaJson(string IdJson, string codeJson, string Lingua)
+    {
+        return references.TestoCaratteristicaJson(IdJson, codeJson, Lingua);
+    }
+
     public static string NomeRegione(string codiceprovincia, string Lingua)
     {
         return references.NomeRegione(codiceprovincia, Lingua);
@@ -1216,7 +1221,6 @@ public class CommonPage : Page
 
     }
     public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I")
-
     {
 
         string sessionid = "";
@@ -1264,7 +1268,6 @@ public class CommonPage : Page
 
             if (!nofoto)
             {
-
                 sb.Append("<a target=\"_blank\"   href=\"" +
                     linkofferta
                        + "\"  class=\"product-thumb pull-left\"  >");
@@ -1294,6 +1297,18 @@ public class CommonPage : Page
             if (c.Offerta.Caratteristica6 != 0)
                 sb.Append(CommonPage.TestoCaratteristica(5, c.Offerta.Caratteristica6.ToString(), Lingua));
             sb.Append(" </div>");
+            #region MODIFIED CARATTERISTICHE CARRELLO
+            if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
+            {
+                sb.Append(" <div class=\"product-categories muted\">");
+                //recupero le caratteristiche del prodotto
+                List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
+                ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
+                if (item != null)
+                    sb.Append(item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                sb.Append(" </div>");
+            }
+            #endregion
 
             //sb.Append(" <div class=\"product-categories muted\">");
             //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
@@ -1309,9 +1324,9 @@ public class CommonPage : Page
         }
         return sb.ToString();
     }
-    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, int idprodotto, int quantita, string username, int idcliente = 0)
+
+    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, int idprodotto, int quantita, string username, string idcombinato = "", int idcarrello = 0, int idcliente = 0)
     {
-        bool superamentodisponibilita = false;
         bool ret = false;
         string sessionid = "";
         string trueIP = "";
@@ -1322,31 +1337,43 @@ public class CommonPage : Page
         CarrelloCollection ColItem = new CarrelloCollection();
         eCommerceDM ecom = new eCommerceDM();
 
-
-        if (idprodotto != 0)
+        bool abilitacarimento = false;
+        if (idprodotto != 0 || (idcarrello != 0)) abilitacarimento = true;
+        //else if (idcarrello != 0) abilitacarimento = true;
+        if (abilitacarimento)
         {
             Item = new Carrello();
             offerteDM offDM = new offerteDM();
-            Offerte off = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idprodotto.ToString());
-            //Carico la riga prodotto dal carrello
-            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto);
+
+            //Carico la riga prodotto dal carrello in base all'idcarrello oppure per la combinazione idprodotto/idcombinato 
+            //ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto);
+            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto, idcombinato, idcarrello);
             if (ColItem != null && ColItem.Count > 0)
+            {
                 Item = ColItem[0];
-            bool prodottoeliminato = false;
+                //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno l'idprodotto
+                idprodotto = ColItem[0].id_prodotto;
+                //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno il selettore per le caratteristiche
+                idcombinato = Item.Campo2;
+            }
+
+            //Carichiamo il prodotto dal database per verificare l'esistenza e l'eventuale disponibilità
+            Offerte off = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idprodotto.ToString());
+            //bool prodottoeliminato = false;
             if (off == null || off.Id == 0)
             {
                 if (Item != null && Item.id_prodotto != 0)
                     ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID);
-                prodottoeliminato = true;
+                //prodottoeliminato = true;
                 quantita = 0;
                 return ret;
             }
-            //controlli sulla disponibilità articolo
+
+            //controlli sulla disponibilità articolo ( disponibilitò generale )
             if (off.Qta_vendita != null)
             {
                 if (quantita > off.Qta_vendita)
                 {
-                    superamentodisponibilita = true; //da usare per visualizzazione alerts
                     Session.Add("superamentoquantita", (long)off.Qta_vendita);
                     quantita = (int)off.Qta_vendita;
                 }
@@ -1354,7 +1381,51 @@ public class CommonPage : Page
                 {
                     if (Item != null && Item.id_prodotto != 0)
                         ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID);
-                    prodottoeliminato = true;
+                    //prodottoeliminato = true;
+                    quantita = 0;
+                    return ret;
+                }
+            }
+            else if (!string.IsNullOrEmpty(off.Xmlvalue))  //andiamo a controllare la disponibilità se presenti limiti per  caratteristiche 
+            {
+                List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off.Xmlvalue);
+                bool exist = false;
+                foreach (ModelCarCombinate item in listprod)
+                {
+                    if (item.id == idcombinato)
+                    {
+                        //Qui ho trovato la combinazione che mi serve
+                        exist = true;
+                        int qta = 0;
+                        int.TryParse(item.qta, out qta);
+                        //devo verificare se c'è quella disponibilita in base alle caratteristiche selezionate
+                        if (quantita > qta)
+                        {
+                            Session.Add("superamentoquantita", (long)qta);
+                            quantita = qta;
+                        }
+                        if (qta == 0) // se il prodotto non è più disponibile lo elimino dal carrello
+                        {
+                            if (Item != null && Item.id_prodotto != 0)
+                                ecom.DeleteCarrelloPerIDCodCarr(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID, Item.Campo2);
+                            //prodottoeliminato = true;
+                            quantita = 0;
+                            return ret;
+                        }
+                    }
+                }
+
+                //controllo se non ho trovato elementi col filtro caratteristiche indicato
+                if (!exist)
+                {
+                    //non ho l'elemento nella lista diponibili, stampo a video che quella combinazione non è disponibile
+                    // o non esiste
+                    //e lo elimino dal carrello
+                    if (Item != null && Item.id_prodotto != 0)
+                        ecom.DeleteCarrelloPerIDCodCarr(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID, Item.Campo2);
+                    //  prodottoeliminato = true;
+                    Session.Add("superamentoquantita", 0);
+                    Session.Add("nontrovata", 0);
                     quantita = 0;
                     return ret;
                 }
@@ -1366,22 +1437,23 @@ public class CommonPage : Page
                 Item.Prezzo = off.Prezzo;
                 //prodotto.Iva = 0;
                 //if (quantita == 0) quantita = 1;
-
                 Item.CodiceProdotto = off.CodiceProdotto;
                 Item.id_prodotto = off.Id;
                 Item.Validita = 1;
                 Item.SessionId = sessionid;
                 Item.IpClient = trueIP;
                 Item.Numero = quantita;
+                Item.Campo2 = idcombinato;
 
             }
             else
             {
+                Item.Data = DateTime.Now;
                 Item.Prezzo = off.Prezzo;
                 Item.CodiceProdotto = off.CodiceProdotto;
                 Item.id_prodotto = off.Id;
-                Item.Data = DateTime.Now;
                 Item.Numero = quantita;
+                Item.Campo2 = idcombinato;
             }
 
             //Aggiungo l'id anagrafica del cliente ( configurato nel profilo utente ) all'articolo nel carrello
@@ -1405,6 +1477,7 @@ public class CommonPage : Page
         }
         return ret;
     }
+
     public static bool SvuotaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session)
     {
         string sessionid = "";
@@ -1445,7 +1518,7 @@ public class CommonPage : Page
         long idclienteincarrello = 0;
         foreach (Carrello c in ColItem)
         {
-            //controlli sulla disponibilità articolo///////////////////
+            //controlli sulla disponibilità articolo/////////////////// ( QUI VA' MODIFICATO PER LA GESTIONE CON LEGAME A CARATTERISTICHE !!! DA FARE)
             if (c.Offerta.Qta_vendita != null)
             {
                 if (c.Offerta.Qta_vendita == 0) // se il prodotto non è più disponibile lo elimino dal carrello
@@ -1535,8 +1608,7 @@ public class CommonPage : Page
         {
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
-
-            valoresconto = Math.Floor((double)totalecarrello * tmp / 100);
+            valoresconto = Math.Round(((double)totalecarrello * tmp / 100), 2, MidpointRounding.ToEven);
         }
         return valoresconto;
     }
@@ -1571,7 +1643,8 @@ public class CommonPage : Page
         }
         return spesespedizione;
     }
-    public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto)
+
+    public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar)
     {
         string ret = "0";
         string sessionid = "";
@@ -1583,13 +1656,12 @@ public class CommonPage : Page
         CarrelloCollection ColItem = new CarrelloCollection();
         eCommerceDM ecom = new eCommerceDM();
 
-
         if (!string.IsNullOrWhiteSpace(idprodotto) && idprodotto.ToString() != "0")
         {
 
             int id_prodotto = 0;
             int.TryParse(idprodotto.ToString(), out id_prodotto);
-            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, id_prodotto);
+            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, id_prodotto, codcar);
             if (ColItem != null && ColItem.Count > 0)
                 Item = ColItem[0];
         }

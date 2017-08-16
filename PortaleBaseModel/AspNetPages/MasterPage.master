@@ -52,7 +52,6 @@
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/isotop_animation.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/animate.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/style1.css" />
-
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css" />
@@ -72,6 +71,18 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-101766393-7', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 <%--<body class="bckGray">--%>
 <body class="">
@@ -106,74 +117,36 @@
             });
         </script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
-        <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'"></script>
         <!-- MENU --->
 
-        <div class="fixedtop" id="divTop" runat="server" visible="false">
-            <div class="container" style="padding: 0px">
-                <div class="pull-left">
-                    <a runat="server" href='<%# references.ResMan("Common",Lingua,"LinkHome") %>' title='<%# references.ResMan("Common",Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                        <img style="height: 60px" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
-                    </a>
-                </div>
-                <div class="pull-left" style="padding-top: 2px; display: none">
-                    <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                        <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
-                    </a>
-                </div>
-                <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; display: none; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
-                    <a style="color: White; padding: 8px" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHomeCambio") %>' title='<%# references.ResMan("Common", Lingua,"testoCambio") %>'>
-                        <%# references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-                    <%--  <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
-                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a> | 
-                                        <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
-                                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>
-                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
-                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a>
-                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
-                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>--%>
-                </div>
-                <div runat="server" visible="false" class="form-search pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 180px; position: relative">
-                    <div class="input-group">
-                        <input class="form-control input-small" style="width: 100%;" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" id="Text1" />
-                        <b class="input-group-btn">
-                            <asp:Button OnClick="btnsearch_Click" ID="buttonSearch" class="btn btn-default btn-xs" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
-                        </b>
-                    </div>
-                </div>
-                <div class="pull-right hidden-xs" style="padding-left: 8px; padding-top: 3px;">
-                    <i class="fa fa-phone"></i><a href="<%# "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
-                        <span style="color: #fff; font-weight: 400"><%# references.ResMan("Common", Lingua,"testoTelfisso") %>
-                        </span></a>
-                </div>
-                <div class="pull-right hidden-xs" style="padding-left: 3px; padding-top: 0px;">
-                    <div class="social-icons-small pull-right" style="display: block">
+        <div class="fixedtop" id="divTop" runat="server" visible="true">
+            <div class="container" style="padding: 0px;">
+                <div class="pull-right hidden-xs" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
+                    <div class="social-icons-small pull-right" style="display: block" runat="server" visible="false">
                         <ul style="float: right">
                             <li style="float: right">
-                                <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>' runat="server" target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
+                                <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
                             </li>
                             <li style="float: right">
-                                <a href='<%# references.ResMan("Common", Lingua,"_linktwitter") %>' runat="server" target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
+                                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
                             </li>
-                            <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%# references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" runat="server" data-original-title="googleplus">googleplus</a></li>
+                            <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>
                         </ul>
-
-
-                        <%--    <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>" runat="server" target="_blank" style="color: #fff;">
-                            <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgFacebook") %>" />
+                        <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
+                            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
                         </a>--%>
-                        <%--<a href='<%# references.ResMan("Common", Lingua,"_linkTwitter") %>" runat="server" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgTwitter") %>" />
+                        <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
                             </a>
-                            <a href='<%# references.ResMan("Common", Lingua,"_linkLinkedin") %>" runat="server" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" runat="server" src='<%# references.ResMan("Common", Lingua,"imgLinkedin") %>" />
+                            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
                             </a>--%>
                     </div>
 
-
-                    <div id="containerCarrello" class="pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: none">
+                    <div id="containerCarrello" class="pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: block">
                         <a class="btn btn-default btn-small pull-right"
-                            id="A6" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
+                            id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                             <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems" />
                         </a>
                         <ul class="dropdown-menu dropdown-cart">
@@ -183,94 +156,184 @@
                                 </ul>
                             </li>
                             <li class="divider"></li>
-                            <li><a id="A4" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
-                                <asp:Literal ID="Literal11" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoShoppingcart") %>' /></a></li>
+                            <li><a id="A4" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
                             <li class="divider"></li>
-                            <li><a
-                                id="A9" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrder") %>'>
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdine") %>' runat="server" />
+                            <%-- <li><a
+                                id="A9"   href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"LinkOrder")) %>'>
+                                <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %> 
                             </a></li>
-                            <li class="divider"></li>
-                            <li><a
-                                id="A1" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkOrderNoregistrazione") %>'>
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>' runat="server" />
+                            <li class="divider"></li>--%>
+                            <li><a id="A1" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %> 
                             </a></li>
                         </ul>
                         <button type="button" class="btn btn-default btn-small dropdown-toggle pull-right triggerdata" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
                             <span class="caret"></span>
-                            <img runat="server" alt="carrello" src='<%# references.ResMan("Common", Lingua,"imgCarrello") %>' style="width: 25px; border: none" />
+                            <i class="fa fa-shopping-cart" style="font-size: 20px;"></i>
                         </button>
                     </div>
 
                 </div>
+                <div class="simplemenu">
+                    <ul>
+                        <li runat="server">
+                            <a id="linkid1high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testoid1") %></a>
+                        </li>
+                        <li runat="server" class="dropdown">
+                            <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer;">
+                                <%= references.ResMan("Common", Lingua,"testoid10") %><b class="caret"></b></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <asp:Repeater ID="rptTipologieLink2High" runat="server"
+                                    OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a id="linkRubriche" class="dropdown-item" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
+                                                runat="server">
+                                                <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
+                        <li runat="server">
+                            <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                                <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-left" runat="server" visible="false">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                        <img style="height: 60px" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
+                    </a>
+                </div>
+                <div class="pull-left" runat="server" visible="false">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                        <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
+                    </a>
+                </div>
+
+                <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; display: none; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                    <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                        <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                    <%--  <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
+                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a> | 
+                                        <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
+                                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>
+                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeIta") %>' title='<%# references.ResMan("Common", Lingua,"testoIta") %>">
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoIta") %>" runat="server" /></a>
+                                    <a style="color: black" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHomeEn") %>' title='<%# references.ResMan("Common", Lingua,"testoEn") %>">
+                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoEn") %>" runat="server" /></a>--%>
+                </div>
+                <%-- <div runat="server" visible="false" class="form-search pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 180px; position: relative">
+                    <div class="input-group">
+                        <input class="form-control input-small" style="width: 100%;" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" id="Text1" />
+                        <b class="input-group-btn">
+                            <asp:Button OnClick="btnsearch_Click" ID="buttonSearch" class="btn btn-default btn-xs" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
+                        </b>
+                    </div>
+                </div>--%>
+                <div class="pull-right hidden-xs" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
+                    <i class="fa fa-phone"></i><a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
+                        <span style="color: #fff; font-weight: 400"><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
+                        </span></a>
+                </div>
+
             </div>
         </div>
         <div class="fixednav" id="mainnav">
             <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
-                <a style="color: #555; padding: 8px" runat="server" href='<%# references.ResMan("Common", Lingua,"linkHomeCambio") %>' title='<%# references.ResMan("Common", Lingua,"testoCambio") %>'>
-                    <%# references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                <a style="color: #555; padding: 8px" href='<%= references.ResMan("Common", Lingua,"linkHomeCambio") %>'>
+                    <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
             <div style="position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+390578294014 ">
+                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+39xxx ">
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
-            <div style="width: 100%; position: relative">
-                <div style="max-width: 1600px; margin: 0px auto; position: relative">
-                    <div id="menuzord" class="menuzord menuzord-responsive dark bckColor1">
-                        <a class="menuzord-brand" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
+            <div class="container" id="divImg">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6" style="line-height: 0; min-height: 0px; text-align: center">
+                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="javascript:JsSvuotaSession()">
                             <div id="divlogo" class="fulllogobckdark"></div>
-                            <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                         </a>
-                        <ul class="menuzord-menu menuzord-indented scrollable menuzord-right">
+                    </div>
+                </div>
+            </div>
+            <div id="menuzord" class="menuzord menuzord-responsive orange">
+                <ul class="menuzord-menu menuzord-indented scrollable menuzord-center">
+                    <li runat="server" id="liHome">
+                        <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                            <div class="iconlogo"></div>
+                        </a>
+                    </li>
+                    <%-- 
+                        <li>
+                            <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid9") %></a>
+                            <ul class="dropdown">
+                            </ul>
+                        </li>
+                    --%>
 
-                            <li runat="server" id="liHome">
-                                <a id="linkHomeHigh" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>" onclick="JsSvuotaSession(this)"'>
-                                    <%# references.ResMan("Common", Lingua,"TestoHome") %>
-                                </a>
-                            </li>
 
-                            <%--  <li runat="server">
-                                <a id="linkid1High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
-                                    <%# references.ResMan("Common", Lingua,"testoid1") %>
-                                </a>
-                            </li>--%>
 
-                            <li>
-                                <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid9") %></a>
-                                <ul class="dropdown">
-                                    <li runat="server">
-                                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid2") %>'>
-                                            <%# references.ResMan("Common", Lingua,"testoid2") %>
-                                        </a>
-                                    </li>
-                                    <li runat="server">
-                                        <a id="linkid4High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid4") %>'>
-                                            <%# references.ResMan("Common", Lingua,"testoid4") %>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <%--   <li runat="server">
-                            <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"TestoPanel3"),"rif000001","Vetrina=true") %>
-                        </li>--%>
-                            <li runat="server">
-                                <asp:Repeater ID="rptTipologieLink1High" runat="server"
-                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                    <ItemTemplate>
-                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                    <li runat="server">
+                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
+                        <ul class="dropdown">
+                            <asp:Repeater ID="rptTipologieLink4High" runat="server"
+                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                <ItemTemplate>
+                                    <li>
+                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
                                             runat="server">
                                             <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
                                         </a>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </li>
-                            <li runat="server">
-                                <a id="linkid5High" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid5") %>'>
-                                    <%# references.ResMan("Common", Lingua,"testoid5") %>
-                                </a>
-                            </li>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </li>
+                    <li runat="server">
+                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
+                        <ul class="dropdown">
+                            <asp:Repeater ID="rptTipologieLink1High" runat="server"
+                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                <ItemTemplate>
+                                    <li>
+                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </li>
+                    <li runat="server">
+                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
+                        <ul class="dropdown">
+                            <asp:Repeater ID="rptTipologieLink5High" runat="server"
+                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                <ItemTemplate>
+                                    <li>
+                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </li>
 
-                            <%--<asp:Repeater ID="rptTipologieLink1High" runat="server"
+
+                    <li runat="server">
+                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
+                    </li>
+
+                    <%-- <asp:Repeater ID="rptTipologieLink6High" runat="server"
                         OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
                         <ItemTemplate>
                             <li>
@@ -281,86 +344,62 @@
                             </li>
                         </ItemTemplate>
                     </asp:Repeater>--%>
-                            <li runat="server">
-                                <asp:Repeater ID="rptTipologieLink3High" runat="server"
-                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                    <ItemTemplate>
-                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </li>
-
-                            <li runat="server">
-                                <asp:Repeater ID="rptTipologieLink2High" runat="server"
-                                    OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                    <ItemTemplate>
-                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </li>
 
 
-                            <%--  <li runat="server">
+                    <li runat="server">
+                        <a id="linkid4High" onclick="JsSvuotaSession(this)" href="#"  runat="server" >
+                            <%= references.ResMan("Common", Lingua,"testoid4") %>
+                        </a>
+                    </li>
 
-                         
-                            <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid10") %></a>
+                    <li runat="server">
+                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#" >
+                            <%= references.ResMan("Common", Lingua,"testoid2") %>
+                        </a>
+                    </li>
 
-                            <ul class="dropdown">
-
-                                <asp:Repeater ID="rptTipologieLink5High" runat="server"
-                                    OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                    <ItemTemplate>
-                                        <li>
-                                            <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                            </a>
-                                        </li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-
-                            </ul>
-                        </li>--%>
-
-                            <li runat="server">
-                                <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkContatti") %>' title='<%# references.ResMan("Common", Lingua,"testoContatti") %>'>
-                                    <span class="label-nav"><%# references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
-                                </a>
-                                <%-- <a id="linkid11high" runat="server" href="javascript:void(0)" style="cursor: pointer;"><%# references.ResMan("Common", Lingua,"testoid11") %></a>
-                        <ul class="dropdown">
-                            <li></li>
+                    <%--<asp:Repeater ID="rptTipologieLink1High" runat="server"
+                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                        <ItemTemplate>
                             <li>
-                                <a id="linkDovesiamoHigh" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkDovesiamo" %>' title='<%# references.ResMan("Common", Lingua,"testoDovesiamo") %>">
-                                    <span class="label-nav"><%# references.ResMan("Common", Lingua,"testoDovesiamo") %>   </span>
+                                <a onclick="JsSvuotaSession(this)" id="linkRubriche" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
+                                    runat="server">
+                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
                                 </a>
                             </li>
+                        </ItemTemplate>
+                    </asp:Repeater>--%>
+ 
 
-                            <li class="search" style="float: right;" runat="server" visible="false">
-                                <div style="padding-top: 5px; padding-left: 10px">
-                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>" />
-                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>" runat="server" ClientIDMode="Static" />
-                                </div>
-                            </li>
-                        </ul>--%>
-                            </li>
-                            <li class="search" style="float: right;" runat="server" visible="false">
-                                <div style="padding-top: 5px; padding-left: 10px">
-                                    <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
-                                    <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
-                                </div>
-                            </li>
-
-                            <li style="height: 1px" class="scrollable-fix"></li>
+                    <%-- <li runat="server">
+                        <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testoid10") %></a>
+                        <ul class="dropdown">
+                            <asp:Repeater ID="rptTipologieLink2High" runat="server"
+                                OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                <ItemTemplate>
+                                    <li>
+                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
+                                            runat="server">
+                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                        </a>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </ul>
-                    </div>
-                </div>
+                    </li>--%>
+
+
+                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
+                        <div style="padding-top: 5px; padding-left: 10px">
+                            <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
+                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
+                        </div>
+                    </li>
+
+                    <li style="height: 1px" class="scrollable-fix"></li>
+                </ul>
             </div>
+
         </div>
         <%--   <div class="fixednav1" id="mainnav1">
             <div id="menuzord1" class="menuzord sec-menu menuzord-responsive white">
@@ -370,7 +409,7 @@
         </div>--%>
         <!-- FINE MENU --->
         <div class="body-wrapper" style="padding-top: 0px">
-            <div id="VerticalSpacer" clientidmode="static" style="height: 72px;" runat="server"></div>
+            <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="divSliderBanner" style="margin: 0px auto; position: relative; display: none" class="hidden-xs"></div>
             <div id="divContainerBannerhome" style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>
             <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>
@@ -384,7 +423,7 @@
                         <div class="col-sm-12">
                             <div class="title-block clearfix">
                                 <div class="row" style="text-align: center; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; border-bottom: 1px solid #33332e; line-height: 40px; color: #33332e">
-                                    <%# references.ResMan("Common", Lingua,"TestoPanel3")  %>
+                                    <%= references.ResMan("Common", Lingua,"TestoPanel3")  %>
                                 </div>
                             </div>
                         </div>
@@ -438,7 +477,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <br />
-                            <h2><%# references.ResMan("Common", Lingua,"testoRicercaCatalogo") %></h2>
+                            <h2><%= references.ResMan("Common", Lingua,"testoRicercaCatalogo") %></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -464,11 +503,8 @@
                         </div>
                         <div class="col-sm-2">
                             <asp:CheckBox Text='<%# references.ResMan("Common", Lingua,"TestoMenu1") %>' runat="server" Checked="false" ID="chkPromo" />
-
                         </div>
-
                     </div>
-
                     <div class="row">
                         <div class="col-sm-2">
                             <asp:DropDownList CssClass="form-control" runat="server" Width="99%" ID="ddlOrdinamento"
@@ -476,10 +512,9 @@
                             </asp:DropDownList>
                         </div>
                     </div>
-
                     <div class="row">
                         <br />
-                        <asp:Button class="divbuttonstyle" Text='<%# references.ResMan("Common", Lingua,"testoCerca") %>' runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" />
+                        <asp:Button class="divbuttonstyle" runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" Text='<%# references.ResMan("Common", Lingua,"testoCerca") %>' />
                     </div>
                     <br />
                     <br />
@@ -706,25 +741,24 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
+            <div style="max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
                 <div id="divnavigazioneJs1" style="background-color: transparent"></div>
             </div>
-            <div style="margin-left: 1%; margin-right: 1%; max-width: 1800px; position: relative; margin: 0px auto; display: none">
+            <div style="max-width: 1800px; position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 0px;">
                 <div id="divnavigazioneJs0" style="background-color: transparent"></div>
             </div>
-            <div style="background-color: #fff; padding-top: 30px; padding-bottom: 0px; text-align: center" id="divContattiMaster" runat="server" visible="false">
+            <div style="background-color: #fff; padding-top: 30px; padding-bottom: 0px; text-align: center" id="divContattiMaster" runat="server" visible="true">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7">
-                            <img runat="server" style="width: 80%" src="~/public/Files/con001000/31/contatti-1.png" alt="" />
+                            <img runat="server" style="width: 80%" src="~/public/Files/con001000/31/contatti-sorrisidigioia.jpg" alt="" />
                         </div>
 
                         <div class="col-sm-5">
-                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoContattaciFooter") %>' runat="server" />
-                            <%--      <a href="<%# references.ResMan("Common", Lingua,"iconCelltext") %>"><%# references.ResMan("Common", Lingua,"iconCelltex")t %></a>--%>
-
-                            <%--  <a href="<%# references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%# references.ResMan("Common", Lingua,"iconMaptext") %></a>--%>
-                            <span><%# references.ResMan("Common", Lingua,"iconEmailtext") %></span>
+                            <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
+                            <%--      <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a>--%>
+                            <%--  <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a>--%>
+                            <span><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
                             <br />
                             <br />
                             <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
@@ -735,7 +769,7 @@
                             <br />
                             <textarea style="background-color: #ffffff" rows="4" cols="5" class="subscribe-input text-input form-control" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                             <br />
-                            <button style="float: right; border: solid 1px #fff; background-color: #33332e; color: #fff; width: 150px" class="form-control" runat="server" validationgroup="contattifooter" onserverclick="btnContatti1_Click"><%# references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                            <button style="float: right; border: solid 1px #fff; background-color: #33332e; color: #fff; width: 150px" class="form-control" runat="server" validationgroup="contattifooter" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
                             <div style="clear: both"></div>
                             <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px; float: right" Checked="true" Text='<%# references.ResMan("Common", Lingua,"testoPrivacy") %>' /><br />
                             <div style="clear: both"></div>
@@ -763,105 +797,151 @@
                 <div class="container">
                     <div class="footer-wrapper">
                         <div class="row">
-                            <div class="col-sm-4 footer-col">
-                                <a runat="server" href='<%# references.ResMan("Common", Lingua,"LinkHome") %>' title='<%# references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                                    <img src="<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png")%>" style="width: 80%; margin: 0 auto" alt="" />
+                            <div class="col-sm-3 footer-col">
+                                <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
+                                    <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' style="width: 98%; margin: 0 auto" alt="" />
                                 </a>
                                 <br />
                                 <asp:Panel runat="server" ID="pnlNewsletterHome" Visible="false">
                                     <div class="footer-title">
-                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"titoloNewsletter") %>' runat="server" />
+                                        <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                                     </div>
                                     <div class="footer-content">
 
                                         <p>
-                                            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoNewsletterForm") %>' runat="server" />
+                                            <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
                                         </p>
                                         <%--     <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
                                             <br />
                                             <br />--%>
                                         <input type="text" style="background-color: #ffffff; width: 75%; height: 36px" name="q" class="subscribe-input text-input form-control pull-left" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
-
-                                        <button class="btn btn-blue btn-sm pull-left" style="width: 20%" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%# references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
-                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
-
-
+                                        <button class="btn btn-blue btn-sm pull-left" style="width: 20%" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
+                                        <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
                                     </div>
                                 </asp:Panel>
                             </div>
-                            <div class="col-sm-offset-2 col-sm-3 footer-col">
+                            <div class=" col-sm-3 footer-col">
 
                                 <div class="footer-title">
-                                    <%# references.ResMan("Common", Lingua,"testoFooter1") %>
+                                    <%= references.ResMan("Common", Lingua,"testoFooter1") %>
                                 </div>
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
                                         <li runat="server">
-                                            <a id="linkHome" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"linkhome") %>' title='<%# references.ResMan("Common", Lingua,"testohome") %>'>
+                                            <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common", Lingua,"testohome") %>' />
+                                                    <%= references.ResMan("Common", Lingua,"testohome") %> 
                                                 </span>
                                             </a>
                                         </li>
+                                        <li runat="server">
+                                            <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#">
+                                                <span class="label-nav"><%= references.ResMan("Common", Lingua,"testoid1") %></span>
+                                            </a>
+                                        </li>
+                                        <li runat="server">
+                                            <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#" >
+                                                <span class="label-nav">
+                                                    <%= references.ResMan("Common", Lingua,"testoid2") %></span>
+                                            </a>
+                                        </li>
+                                        <li runat="server">
+                                            <a id="linkid4" onclick="JsSvuotaSession(this)" runat="server" href="#"  >
+                                                <span class="label-nav">
+                                                    <%= references.ResMan("Common", Lingua,"testoid4") %></span>
+                                            </a>
+                                        </li>
 
-<%--                                        <li runat="server">
-                                            <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid1") %>'>
-                                                <span class="label-nav">
-                                                    <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid1") %>' /></span>
-                                            </a>
-                                        </li>--%>
 
-                                        <li runat="server">
-                                            <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid2") %>'>
+                                        <%--  <asp:Repeater ID="rptTipologieLink2" runat="server"
+                                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                                            <ItemTemplate>
+                                                <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                                    runat="server">
+                                                    <span class="label-nav">
+                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
+                                                </a></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>--%>
+
+
+                                        <li>
+                                            <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                                 <span class="label-nav">
-                                                    <asp:Literal ID="Literal4" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid2") %>' /></span>
+                                                    <%= references.ResMan("Common", Lingua,"testoContatti") %> 
+                                                </span>
                                             </a>
                                         </li>
-                                        <li runat="server">
-                                            <a id="linkid4" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid4") %>'>
-                                                <span class="label-nav">
-                                                    <asp:Literal ID="Literal6" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid4") %>' /></span>
-                                            </a>
-                                        </li>
-                                        <li runat="server">
-                                            <a id="linkid5" onclick="JsSvuotaSession(this)" runat="server" href="#" title='<%# references.ResMan("Common", Lingua,"testoid5") %>'>
-                                                <span class="label-nav">
-                                                    <asp:Literal ID="Literal7" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoid5") %>' /></span>
-                                            </a>
-                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class=" col-sm-3 footer-col">
+
+                                <div class="footer-title">
+                                    <%= TestoSezione("rif000001")  %>
+                                </div>
+                                <div class="footer-content">
+                                    <ul class="footer-category-list">
+
+
+
+                                        <asp:Repeater ID="rptTipologieLink4" runat="server"
+                                            OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                            <ItemTemplate>
+                                                <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
+                                                    runat="server">
+                                                    <span class="label-nav">
+                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
+                                                </a></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                         <asp:Repeater ID="rptTipologieLink1" runat="server"
-                                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                                            OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
                                             <ItemTemplate>
-                                                <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                                <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
                                                     runat="server">
                                                     <span class="label-nav">
                                                         <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
                                                 </a></li>
                                             </ItemTemplate>
                                         </asp:Repeater>
+                                        <asp:Repeater ID="rptTipologieLink5" runat="server"
+                                            OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                            <ItemTemplate>
+                                                <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
+                                                    runat="server">
+                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
+                                                </a></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+
+
+                                        <li runat="server">
+                                            <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
+                                        </li>
+
+                                        <%-- <asp:Repeater ID="rptTipologieLink6" runat="server"
+                                            OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
+                                            <ItemTemplate>
+                                                <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
+                                                    runat="server">
+                                                    <span class="label-nav">
+                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
+                                                </a></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>--%>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 footer-col">
+                                <div class="footer-title">
+                                    <%= TestoSezione("rif000002")  %>
+                                </div>
+                                <div class="footer-content">
+                                    <ul class="footer-category-list">
+
                                         <asp:Repeater ID="rptTipologieLink2" runat="server"
-                                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                            <ItemTemplate>
-                                                <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                                    runat="server">
-                                                    <span class="label-nav">
-                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                                </a></li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-
-                                        <asp:Repeater ID="rptTipologieLink3" runat="server"
-                                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                            <ItemTemplate>
-                                                <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                                    runat="server">
-                                                    <span class="label-nav">
-                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                                </a></li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-
-                                        <%--   <asp:Repeater ID="rptTipologieLink5" runat="server"
                                             OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
                                             <ItemTemplate>
                                                 <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString()) %>'
@@ -871,24 +951,9 @@
                                                     </span>
                                                 </a></li>
                                             </ItemTemplate>
-                                        </asp:Repeater>--%>
-                                        <li>
-                                            <a id="linkContatti" onclick="JsSvuotaSession(this)" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkContatti") %>' title='<%# references.ResMan("Common", Lingua,"testoContatti") %>'>
-                                                <span class="label-nav">
-                                                    <asp:Literal ID="Literal3" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoContatti") %>' />
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 footer-col">
-                                <div class="footer-title">
-                                    <%= TestoSezione("rif000003")  %>
-                                </div>
-                                <div class="footer-content">
-                                    <ul class="footer-category-list">
-                                        <%= CaricaLinksPerTipologia("rif000003","","10") %>
+                                        </asp:Repeater>
+
+                                        <!-- <%= CaricaLinksPerTipologia("rif000002","","10")  %> -->
                                     </ul>
                                 </div>
 
@@ -900,18 +965,16 @@
                         <div class="social-icons pull-right" style="display: block">
                             <ul style="float: right">
                                 <li style="float: right">
-                                    <a href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>' runat="server" target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
+                                    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
                                 </li>
                                 <li style="float: right">
-                                    <a href='<%# references.ResMan("Common", Lingua,"_linktwitter") %>' runat="server" target="_blank" class="social-media-icon twitter-icon" data-original-title="twitter">twitter</a>
+                                    <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon twitter-icon" data-original-title="twitter">twitter</a>
                                 </li>
 
 
-                                <li style="float: right"><a class="social-media-icon googleplus-icon" href='<%# references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" runat="server"><i class="fa fa-google-plus"></i></a></li>
+                                <li style="float: right"><a class="social-media-icon googleplus-icon" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank"><i class="fa fa-google-plus"></i></a></li>
 
-                                <%--      <li style="float: right">
-                                        <a href='<%# references.ResMan("Common", Lingua,"_linkgoogle") %>" runat="server" target="_blank" class="social-media-icon googleplus-icon" data-original-title="googleplus">googleplus</a>
-                                    </li>
+                                <%--  
                                     
                                     <li style="float: right">
                                         <a href='<%# references.ResMan("Common", Lingua,"_linkyoutube") %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
@@ -941,11 +1004,11 @@
                             <div class="col-ld-12" style="text-align: center">
 
                                 <p style="font-size: 1.2em; padding-top: 10px;">
-                                    <asp:Literal ID="Literal5" runat="server" Text='<%# references.ResMan("Common", Lingua,"txtFooter") %>' /><br />
-                                    <a id="linkLogin" runat="server" href='<%# references.ResMan("Common", Lingua,"Linklogin") %>'>
-                                        <asp:Literal ID="Literal9" runat="server" Text='<%# references.ResMan("Common", Lingua,"Testologin") %>' /></a>
+                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
+                                    <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
+                                        <%= references.ResMan("Common", Lingua,"Testologin") %></a>
 
-                                    <a runat="server" target="_blank" href='<%# references.ResMan("Common", Lingua,"linkWebmouse") %>'>Project by Web Mouse Consulting srl</a>
+                                    <a target="_blank" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkWebmouse") ) %>'>Project by Web Mouse Consulting srl</a>
                                 </p>
 
                                 <%-- <div class="pull-right">

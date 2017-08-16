@@ -361,6 +361,226 @@ public partial class _SchedaProdotto : CommonPage
         rptArticoliSuggeriti.DataSource = offerte;
         rptArticoliSuggeriti.DataBind();
     }
+
+
+    protected string CreaRigheDettaglio(Object itemobj)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        if (itemobj != null)
+        {
+            Offerte item = (Offerte)itemobj;
+            string codiceprodotto = "";
+            WelcomeLibrary.DOM.Prodotto p = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && tmp.CodiceProdotto == item.CodiceCategoria); });
+            if (p != null)
+            {
+                sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("Common", Lingua, "ddlTuttiProdotto"));
+                //sb.Append(GetGlobalResourceObject("Common", "ddlTuttiProdotto").ToString());
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                sb.Append(p.Descrizione);
+                sb.Append("  </td></tr>");
+                codiceprodotto = p.CodiceProdotto;
+            }
+            WelcomeLibrary.DOM.SProdotto sp = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && tmp.CodiceSProdotto == item.CodiceCategoria2Liv); });
+            if (sp != null)
+            {
+                sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("Common", Lingua, "ddlTuttiSottoProdotto"));
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                sb.Append(sp.Descrizione);
+                sb.Append("  </td></tr>");
+            }
+
+
+#if false
+
+            if (item.CodiceRegione != null && !string.IsNullOrEmpty(item.CodiceRegione))
+            {
+                sb.Append("  <tr class=\"alt\"><th >");
+                sb.Append(references.ResMan("Common", Lingua, "ddlTuttiregione"));
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                sb.Append(NomeRegione(item.CodiceRegione, Lingua));
+                sb.Append("  </td></tr>");
+            } 
+#endif
+
+            //CREAZIONE DELLE DDL DI SELEZIONE PER LA SCELTA SE PRESENTE GESTIONE DISPONIBILITA' ARITICOLI PER CARATTERISTICHE
+            if (!string.IsNullOrEmpty(item.Xmlvalue))
+            {
+
+                //Presento l'eventuale valore per la selezione con le caratterisiztiche per le disponibilità
+                // hddTagColCod.Value = item.Caratteristica1 + "-" + item.Caratteristica2;
+
+
+                List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Xmlvalue);
+                List<ResultAutocomplete> listacat1 = new List<ResultAutocomplete>();
+                List<ResultAutocomplete> listacar2 = new List<ResultAutocomplete>();
+                foreach (ModelCarCombinate elem in listprod)
+                {
+                    if (!string.IsNullOrEmpty(elem.caratteristica1.id) && elem.caratteristica1.id != "0")
+                    {
+                        if (!listacat1.Exists(e => e.id == elem.caratteristica1.id))
+                            listacat1.Add(elem.caratteristica1);
+                    }
+
+                    if (!string.IsNullOrEmpty(elem.caratteristica2.id) && elem.caratteristica2.id != "0")
+                    {
+                        if (!listacar2.Exists(e => e.id == elem.caratteristica2.id))
+                            listacar2.Add(elem.caratteristica2);
+                    }
+                }
+                sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("BaseText", Lingua, "selectcat1"));
+                //sb.Append(GetGlobalResourceObject("BaseText", "selectcat1").ToString());
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                string status0 = "disabled";
+                if (listacat1 != null && listacat1.Count > 0) status0 = "";
+                sb.Append("  <select id=\"ddlcat1\" class=\"form-control\" style=\"width:100%;\" onchange=\"changeValue(this,'')\" " + status0 + ">");
+                sb.Append("  <option id=\"sc1\" value=\"\">" + references.ResMan("BaseText", Lingua, "genericselect") + "</option>");
+                if (listacat1 != null)
+                    foreach (ResultAutocomplete elem in listacat1)
+                    {
+                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + elem.value + "</option>");
+                    }
+                sb.Append("  <select>");
+                sb.Append("  </td></tr>");
+
+                //initDDLCaratteristiche(ddlcat1, listacat1, "");
+                sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("BaseText", Lingua, "selectcat2"));
+                //sb.Append(GetGlobalResourceObject("BaseText", "selectcat2").ToString());
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                string status1 = "disabled";
+                if (listacar2 != null && listacar2.Count > 0) status1 = "";
+                sb.Append("  <select id=\"ddlcat2\" class=\"form-control\"  style=\"width:100%;\" onchange=\"changeValue(this,'')\" " + status1 + ">");
+                sb.Append("  <option id=\"sc2\" value=\"\">" + references.ResMan("BaseText", Lingua, "genericselect") + "</option>");
+                if (listacar2 != null)
+                    foreach (ResultAutocomplete elem in listacar2)
+                    {
+                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + elem.value + "</option>");
+                    }
+                sb.Append("  <select>");
+
+                sb.Append("  </td></tr>");
+            }
+            else // NON IMPOSTAZIONE DISPONIBILITA' PER CARATTERISTICA -> SOLO VISUALIZZAZIONE
+            {
+                //SOLO VISUALIZZAZIONE CARATTERISTICA
+                Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica1.ToString(); });
+                if (Car1 != null)
+                {
+                    sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("BaseText", Lingua, "selectcat1"));
+                    //sb.Append(GetGlobalResourceObject("BaseText", "selectcat1").ToString());
+                    sb.Append("  </th>");
+                    sb.Append("  <td>");
+                    sb.Append(Car1.Campo1);
+                    sb.Append("  </td></tr>");
+                }
+                //SOLO VISUALIZZAZIONE CARATTERISTICA
+                Tabrif Car2 = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica2.ToString(); });
+                if (Car2 != null)
+                {
+                    sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("BaseText", Lingua, "selectcat2"));
+                    //sb.Append(GetGlobalResourceObject("BaseText", "selectcat2").ToString());
+                    sb.Append("  </th>");
+                    sb.Append("  <td>");
+                    sb.Append(Car2.Campo1);
+                    sb.Append("  </td></tr>");
+                }
+            }
+
+
+
+            if (!string.IsNullOrEmpty(item.CodiceProdotto))
+            {
+                sb.Append("  <tr class=\"alt\"><th>");
+                sb.Append(references.ResMan("BaseText", Lingua, "Codice"));
+                //sb.Append(GetGlobalResourceObject("BaseText", "Codice").ToString());
+                sb.Append("  </th>");
+                sb.Append("  <td>");
+                sb.Append(item.CodiceProdotto);
+                sb.Append("  </td></tr>");
+            }
+
+
+            //Tabrif Car6 = Utility.Caratteristiche[5].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica6.ToString(); });
+            //if (Car6 != null)
+            //{
+            //    sb.Append("  <tr class=\"alt\"><th>");
+            //    sb.Append(GetGlobalResourceObject("BaseText", "selectditta").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(Car6.Campo1);
+            //    sb.Append("  </td></tr>");
+            //}
+
+
+
+
+            //Tabrif Car3 = Utility.Caratteristiche[2].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica3.ToString(); });
+            //if (Car3 != null)
+            //{
+            //    sb.Append("  <tr class=\"alt\"><th >");
+            //    sb.Append(GetGlobalResourceObject("BaseText", "selectatcgmpliv1").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(references.TestoCaratteristicaSublivelli(2, 1, item.Caratteristica3, Lingua));
+            //    sb.Append("  </td></tr>");
+            //    sb.Append("  <tr class=\"alt\"><th >");
+            //    sb.Append(GetGlobalResourceObject("BaseText", "selectatcgmpliv2").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(references.TestoCaratteristicaSublivelli(2, 2, item.Caratteristica3, Lingua));
+            //    sb.Append("  </td></tr>");
+            //    sb.Append("  <tr class=\"alt\"><th >");
+            //    sb.Append(GetGlobalResourceObject("BaseText", "selectatcgmpliv3").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(references.TestoCaratteristicaSublivelli(2, 3, item.Caratteristica3, Lingua));
+            //    sb.Append("  </td></tr>");
+            //}
+
+            //if (item.Anno != 0)
+            //{
+            //    sb.Append("  <tr class=\"\"><th>");
+            //    sb.Append(GetGlobalResourceObject("Common", "ddlTuttiAnno").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(item.Anno);
+            //    sb.Append("  </td></tr>");
+            //}
+
+
+
+            //Tabrif Car3 = Utility.Caratteristiche[2].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica3.ToString(); });
+            //Tabrif Car4 = Utility.Caratteristiche[3].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica4.ToString(); });
+            //Tabrif Car5 = Utility.Caratteristiche[4].Find(delegate(Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.Caratteristica5.ToString(); });
+            //if (Car3 != null & Car4 != null && Car5 != null)
+            //{
+            //    sb.Append("  <tr class=\"alt\"><th>");
+            //    sb.Append(GetGlobalResourceObject("Common", "ddlTuttiCarDim").ToString());
+            //    sb.Append("  </th>");
+            //    sb.Append("  <td>");
+            //    sb.Append(Car3.Campo1 + "/");
+            //    sb.Append(Car4.Campo1 + " ");
+            //    sb.Append(Car5.Campo1);
+            //    sb.Append("  </td></tr>");
+
+            //}
+
+        }
+
+        return sb.ToString();
+    }
+
+
 #if false //Sezione elaborazione dati automotive
 
     protected bool VarificaSuOpzioni(Object itemobj, string valore)
@@ -574,7 +794,7 @@ public partial class _SchedaProdotto : CommonPage
     
 #endif
 
-   protected void AssociaDati()
+    protected void AssociaDati()
     {
         //Carichiamo l'immobile a partire dal codice dello stesso e dalla lingua
         OfferteCollection offerte = new OfferteCollection();
@@ -1143,8 +1363,8 @@ public partial class _SchedaProdotto : CommonPage
         int.TryParse(Idtext, out idprodotto);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
-
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        string codTagCombined = hddTagCombined.Value;
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
 
         txtQuantita_temp.Value = quantita.ToString();
         //Aggiorniamo nella masterpage il numero prodotti / articoli nel carrello
@@ -1164,11 +1384,12 @@ public partial class _SchedaProdotto : CommonPage
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
         int idprodotto = 0;
         int.TryParse(Idtext, out idprodotto);
-        string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString());
+        string codTagCombined = hddTagCombined.Value;
+        string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString(), codTagCombined);
         int quantita = 0;
         int.TryParse(q, out quantita);
         quantita += 1;//Incremento
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
@@ -1194,8 +1415,24 @@ public partial class _SchedaProdotto : CommonPage
         int.TryParse(txtQuantita_temp.Value, out quantita);
 
         quantita += 1;//Incremento
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        string codTagCombined = hddTagCombined.Value;
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
+        if (Session["superamentoquantita"] != null)
+        {
+            int qtamod = 0;
+            int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
+            Session.Remove("superamentoquantita");
+            quantita = qtamod;
+            output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita"); //Resources.Common.testoCarellosuperamentoquantita;
+            if (Session["nontrovata"] != null)
+            {
+                Session.Remove("nontrovata");
+                output.Text = references.ResMan("Common", Lingua, "testoCarellononesistente");// Resources.Common.testoCarellononesistente;
+            }
+        }
         txtQuantita_temp.Value = quantita.ToString();
+
+
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
@@ -1206,7 +1443,7 @@ public partial class _SchedaProdotto : CommonPage
 
     private void AggiornaVisualizzazioneDatiCarrello()
     {
-        //this.Master.VisualizzaCarrello();
+        this.Master.VisualizzaTotaliCarrello();
     }
 
     protected void btnDecrement(object sender, EventArgs e)
@@ -1219,7 +1456,23 @@ public partial class _SchedaProdotto : CommonPage
         int.TryParse(txtQuantita_temp.Value, out quantita);
         quantita -= 1;//Decremento
         if (quantita < 1) quantita = 0;
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        string codTagCombined = hddTagCombined.Value;
+
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
+        if (Session["superamentoquantita"] != null)
+        {
+            int qtamod = 0;
+            int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
+            Session.Remove("superamentoquantita");
+            quantita = qtamod;
+            output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita"); //Resources.Common.testoCarellosuperamentoquantita;
+            if (Session["nontrovata"] != null)
+            {
+                Session.Remove("nontrovata");
+                output.Text = references.ResMan("Common", Lingua, "testoCarellononesistente");// Resources.Common.testoCarellononesistente;
+
+            }
+        }
         txtQuantita_temp.Value = quantita.ToString();
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
@@ -1236,8 +1489,9 @@ public partial class _SchedaProdotto : CommonPage
         int.TryParse(Idtext, out idprodotto);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
+        string codTagCombined = hddTagCombined.Value;
 
-        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name);
+        AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
 
         txtQuantita_temp.Value = "0";
         AggiornaVisualizzazioneDatiCarrello();

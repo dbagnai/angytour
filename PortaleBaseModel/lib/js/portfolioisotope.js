@@ -17,10 +17,10 @@ function InjectPagerPortfolio(pagercontainer, controlid) {
         CaricaIsotopeData(controlid);
     });
 }
-function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid) {
-    loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, lng);
+function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
+    loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, lng);
 }
-function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca,vetrina,promozioni, connectedid) {
+function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
 
  //   console.log('injectPortfolioAndLoadinner' + container);
     var templateHtml = pathAbs + "/lib/template/" + "isotopeOfferte.html";
@@ -69,6 +69,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             params.maxelement = maxelement;
             params.listShow = listShow;
             params.categoria = categoria;
+            params.categoria2Liv = categoria2Liv;
             params.testoricerca = testoricerca;
             params.vetrina = vetrina;
             params.promozioni = promozioni;
@@ -121,20 +122,6 @@ function CaricaIsotopeData(controlid) {
 
         putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) { });
     });
-
-    //var tipologia = tipologia || "";
-    //var visualData = visualData || "false";
-    //var visualPrezzo = visualPrezzo || "false";
-    //var maxelement = maxelement || "16";
-    //var listShow = listShow || "";
-    //var categoria = categoria || "";
-
-    //objfiltrotmp.tipologia = tipologia;
-    //objfiltrotmp.visualData = visualData;
-    //objfiltrotmp.visualPrezzo = visualPrezzo;
-    //objfiltrotmp.maxelement = maxelement;
-    //objfiltrotmp.listShow = listShow;
-    //objfiltrotmp.categoria = categoria;
 
     var functiontocallonend = renderIsotopeNotPaged;
     if (enablepager == "true" || enablepager == true)

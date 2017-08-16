@@ -27,6 +27,9 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
             string strJson = new StreamReader(context.Request.InputStream).ReadToEnd();
             //deserialize the parameters passed
             inputParameters objPar = Deserialize<inputParameters>(strJson);
+            int idprodotto = 0;
+            int quantita = 0;
+
             ///////////////////////////////////////////////// PRENDO I RIFERIMENTI DEL CLIENT PER IL CARRELLO
             //string ip = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             //if (string.IsNullOrEmpty(ip.Trim()))
@@ -47,10 +50,9 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                 case "add":
                     if (objPar != null)
                     {
-                        int idprodotto = 0;
                         int.TryParse(objPar.codice, out idprodotto);
-                        string q = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, idprodotto.ToString());
-                        int quantita = 0;
+                        string codcaratt = objPar.codiceCaratt;
+                        string q = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, idprodotto.ToString(), codcaratt);
                         int.TryParse(q, out quantita);
                         quantita += 1;//Incremento
                         CommonPage.AggiornaProdottoCarrello(context.Request, context.Session, idprodotto, quantita, objPar.Username);
@@ -64,13 +66,24 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         context.Response.Write("No Data");
                     }
                     break;
+                case "selectrowqty":
+                    if (objPar != null)
+                    {
+                        string qty = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, objPar.idprodotto, objPar.idcombined);
+                        context.Response.Write((qty));
+                    }
+                    else
+                    {
+                        context.Response.Write("0");
+                    }
+                    break;
                 default:
                 case "show":
 
                     if (objPar != null)
                     {
 
-                        String output = CommonPage.VisualizzaCarrello(context.Request, context.Session, objPar.codice, true, objPar.Lingua);
+                        String output = CommonPage.VisualizzaCarrello(context.Request, context.Session, objPar.codice, false, objPar.Lingua);
                         // string jsonoutput = Serialize<inputParameters>(objPar);
 
                         //string fullName = objUsr.first_name + " " + objUsr.last_name;
@@ -120,11 +133,15 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
     }
 
 
+
     public class inputParameters
     {
         public string codice { get; set; }
+        public string codiceCaratt { get; set; }
         public string Lingua { get; set; }
         public string Username { get; set; }
+        public string idprodotto { get; set; }
+        public string idcombined { get; set; }
     }
 
 

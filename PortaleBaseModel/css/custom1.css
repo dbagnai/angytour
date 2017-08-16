@@ -26,7 +26,6 @@ textarea {
     font-family: 'Raleway';
     font-size: 1em;
     background-color: transparent;
-    background-color: #fbfbfb;
     color: #444;
 }
 
@@ -159,7 +158,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #33332e;
+    background-color: #cdbe70;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -174,6 +173,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
+        background-color: #cdbe71;
         /*background-color: #4f4f4f;
         -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
@@ -189,7 +189,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #33332e;
+        background-color: #cdbe70;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -204,7 +204,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #33332e;
+        background-color: #cdbe70;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
     box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -218,9 +218,9 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #33332e;
+    background-color: #cdbe70;
     border: none;
-    font-weight: 600;
+    font-weight: 500;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -235,8 +235,8 @@ a.buttonstyle {
         margin: 0px;
         text-align: center;
         border: none;
-        background-color: #33332e;
-        font-weight: 600;
+        background-color: #cdbe71;
+        font-weight: 500;
         /*background-color: #4f4f4f;
     -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
@@ -252,8 +252,8 @@ a.buttonstyle {
         margin: 0px;
         text-align: center;
         border: none;
-        background-color: #33332e;
-        font-weight: 600;
+        background-color: #cdbe71;
+        font-weight: 500;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -267,9 +267,9 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #33332e;
+        background-color: #cdbe70;
         border: 1px solid #ccc;
-        font-weight: 600;
+        font-weight: 500;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -280,15 +280,18 @@ a.buttonstyle {
 
     .divbuttonstyle a {
         color: #fff;
-        font-size: 1.2em;
-        font-weight: 600;
+        font-size: 0.9em;
+        font-weight: 500;
+        letter-spacing: 2px;
     }
 
         .divbuttonstyle a:hover {
             color: #fff;
-            font-size: 1.2em;
-            font-weight: 600;
+            font-size: 0.9em;
+            font-weight: 500;
+            letter-spacing: 2px;
         }
+
 
 .divbuttonstylegray {
     color: #ffffff;
@@ -1000,16 +1003,18 @@ a.buttonstyleoutline {
 }
 
 .footer {
-    background-color: #eee;
+    background-color: #e8e0ba;
+    border-top: inset 1px solid #aaa;
 }
 
     .footer .copyright {
         font-family: 'Raleway';
         /*background-color: #33332e;*/
-        background-color: #33332e;
+        background-color: #555;
         border-top: 1px solid #ccc;
         color: #fff;
         font-size: 10px;
+        padding: 10px 0px;
     }
 
         .footer .copyright a {
@@ -1052,7 +1057,7 @@ a.buttonstyleoutline {
 
 .footer .footer-col .footer-title {
     color: #000;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #444;
 }
 
     .footer .footer-col .footer-title a {
@@ -1075,6 +1080,31 @@ a.buttonstyleoutline {
 .header .logo {
     margin: 15px 0 0 0;
 }
+
+.simplemenu > ul {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin: 0;
+    background-color: transparent;
+    float: right;
+}
+
+    .simplemenu > ul > li {
+        padding: 4px 10px 4px 10px;
+        float: left;
+    }
+
+        .simplemenu > ul > li > a {
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .simplemenu > ul > li > ul > li > a {
+            color: #000;
+            text-transform: uppercase;
+        }
 
 .social-icons-small > ul {
     list-style-type: none;
@@ -1535,7 +1565,7 @@ Portfolio ( da rival )
 
 
 .work-content-bordered {
-    border: 5px solid #eceded;
+    border: 5px solid #ccc;
     position: relative;
     /*width: 100%;
     height: 100%;*/
@@ -1552,7 +1582,7 @@ Portfolio ( da rival )
 .work-image {
     position: relative;
     overflow: hidden;
-    min-height: 250px;
+    min-height: 200px;
     /*max-height: 200px;*/
     width: 100%;
     text-align: center;
@@ -2257,8 +2287,22 @@ Portfoli Single ( da rival )
 
 /*REV SLIDER CORRECTION*/
 
-.rev-slider-full {
+
+.headerspacer {
+    padding-top: 235px;
+}
+
+@media (max-width: 1179px) {
+    .headerspacer {
+        padding-top: 141px;
+    }
+}
+
+/*.rev-slider-full {
     max-height: 1000px;
+}*/
+.rev-slider-full {
+    height: calc(100vh - 225px) !important;
 }
 
     .rev-slider-full .slotholder:after {
@@ -2324,6 +2368,10 @@ Portfoli Single ( da rival )
     font-family: 'Open Sans';
 }
 
+.text-shadow {
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+}
+
 .bigtext {
     font-family: 'Montserrat';
     color: #fff;
@@ -2334,6 +2382,7 @@ Portfoli Single ( da rival )
     max-width: auto;
     max-height: auto;
     white-space: nowrap;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
 }
 
 .smalltext {
@@ -2347,6 +2396,7 @@ Portfoli Single ( da rival )
     white-space: nowrap;
     font-family: 'Lora', serif;
     font-style: italic;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
 }
 
 
@@ -2512,6 +2562,8 @@ ol.flex-control-thumbs li {
         border-radius: 0 !important;
     }
 
+
+
 .btn,
 input[type="submit"],
 input[type="button"],
@@ -2521,15 +2573,17 @@ button.btn,
     text-transform: uppercase;
     font-weight: 500;
     font-size: 13px;
-    font-family: Raleway;
-    /*background-color: #606060;*/
     position: relative;
+    /*padding: 3px 5px 4px 5px !important;
+    line-height: 33px !important;*/
+    line-height: 1 !important;
+    padding: .75rem 2.1875rem !important;
     height: auto;
     /*border: none;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 0px;*/
-    -webkit-box-shadow: none;
+    border-radius: 0px;
+    -webkit-box-shadow: none;*/
     -moz-box-shadow: none;
     box-shadow: none;
     text-shadow: none;
@@ -2537,10 +2591,8 @@ button.btn,
     -moz-transition: background 0.2s, opacity 0.2s;
     -o-transition: background 0.2s, opacity 0.2s;
     transition: background 0.2s, opacity 0.2s;
-    margin: 0 0px 10px 0px !important;
-    /*padding: 3px 25px !important;*/
-    line-height: 1 !important;
-    padding: .75rem 2.1875rem !important;
+    margin: 0 0 0 0 !important;
+    /*margin: 0 0px 10px 0px !important;*/
 }
 
     .btn:hover,
@@ -2551,9 +2603,9 @@ button.btn,
         text-decoration: none !important;
         color: white !important;
         opacity: 0.78;
-        /*background-color: #606060;*/
-        /*border: none;*/
-        /*-webkit-border-radius: 0px;
+        /*background-color: #606060;
+        border: none;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
         border-radius: 0px;*/
         -webkit-box-shadow: none;
@@ -2565,6 +2617,7 @@ button.btn,
         -o-transition: background 0.2s, opacity 0.2s;
         transition: background 0.2s, opacity 0.2s;
         margin: 0 0px 10px 0;
+     
     }
 
     .btn:active,
@@ -2587,6 +2640,19 @@ button.btn,
         outline: 0;
         background-color: #606060;
     }
+
+
+
+.btn-padding {
+    padding: 1.2rem 0.55rem !important;
+    text-align: center;
+}
+
+.btn-purple {
+    background-color: #cdbe70 !important;
+}
+
+
 /*Carousel
 ------------------------------------*/
 /*carousel-v1*/
@@ -3989,9 +4055,6 @@ p.lead, .lead p {
     line-height: 28px;
 }
 
-.footer {
-    background-color: #f2ece6;
-}
 
 .footer-wrapper {
     padding-top: 60px;
@@ -3999,14 +4062,11 @@ p.lead, .lead p {
 }
 
 .footer .social-icons .social-media-icon {
-    background-color: #733039;
+    background-color: #cdbe70;
     border-radius: 50%;
 }
 
-.footer .copyright {
-    background-color: #733039;
-    padding: 30px 0;
-}
+
 
 #map1 iframe {
     display: block;
@@ -4026,8 +4086,6 @@ p.lead, .lead p {
     pointer-events: none;
 }
 
-
-/* IMPORTANTE!!! DA TOGLIERE PER BENE!!! MODIFICHE MIRCO */
-/*#divnavigazioneJs0 {
-    display: none;
-}*/
+#divContainerb1 {
+    height: calc(100vh - 225px) !important;
+}

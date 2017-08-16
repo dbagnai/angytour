@@ -34,6 +34,7 @@ public class jpath
     public string jsoncategorie2liv { set; get; }
     public string jsontipologie { set; get; }
     public bool usecdn { set; get; }
+    public string username { set; get; }
 
 }
 
@@ -127,6 +128,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     jpathcomplete.percorsocontenuti = percorsocontenutitmp;
                     jpathcomplete.percorsoexp = WelcomeLibrary.STATIC.Global.percorsoexp;
                     jpathcomplete.usecdn = WelcomeLibrary.STATIC.Global.usecdn;
+                    jpathcomplete.username = context.User.Identity.Name;
                     //LINGUE/////////////////////////////////////////////////////7
                     var filejsonlanguages = "languages.json";
                     //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
@@ -188,8 +190,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     jpathcomplete.jsoncategorie = Newtonsoft.Json.JsonConvert.SerializeObject(trifprodotti);
 
-                        
-                         List<SProdotto> listsprod = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.FindAll(p =>  p.Lingua == lingua);
+
+                    List<SProdotto> listsprod = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.FindAll(p => p.Lingua == lingua);
                     WelcomeLibrary.DOM.TabrifCollection trifsprodotti = new TabrifCollection();
                     if (listprod != null)
                         foreach (SProdotto p in listsprod)
@@ -202,6 +204,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     jpathcomplete.jsoncategorie2liv = Newtonsoft.Json.JsonConvert.SerializeObject(trifsprodotti);
 
+
                     WelcomeLibrary.DOM.TabrifCollection tmptipo = new TabrifCollection();
                     if (WelcomeLibrary.UF.Utility.TipologieOfferte != null)
                         foreach (WelcomeLibrary.DOM.TipologiaOfferte p in WelcomeLibrary.UF.Utility.TipologieOfferte)
@@ -213,7 +216,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             tmptipo.Add(p1);
                         }
                     jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
-
 
                     //retdict.Add("JSONrefmetrature", references.refmetrature);
                     //retdict.Add("JSONrefprezzi", references.refprezzi);
@@ -250,7 +252,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 case "caricaConfig":
 
                     List<ConfigItem> retconfig = new List<ConfigItem>();
-                    
+
                     retconfig = ConfigManagement.ReadAsList(filtri);
                     if (retconfig == null || retconfig.Count == 0)
                         retconfig.Add(new ConfigItem());
@@ -280,14 +282,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     //Chiamiamo l'aggiornamento di tutti i dati
                     //ConfigDM cDM = new ConfigDM();
                     //result = cDM.AggiornaConfigList(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref list);
-                    result = ConfigManagement.AggiornaConfigList( ref list);
-                    
+                    result = ConfigManagement.AggiornaConfigList(ref list);
+
                     break;
 
                 case "caricaresources":
 
                     List<ResourceItem> retresource = new List<ResourceItem>();
-                    
+
                     retresource = ResourceManagement.ReadItemsByLingua(lingua);
                     if (retresource == null || retresource.Count == 0)
                         retresource.Add(new ResourceItem());
@@ -309,15 +311,15 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     , new JsonSerializerSettings()
                     {
                         DateFormatString = "dd/MM/yyyy HH:mm:ss",
-                           NullValueHandling = NullValueHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
                         //DateFormatString = "dd/MM/yyyy",
                         MissingMemberHandling = MissingMemberHandling.Ignore,
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                         PreserveReferencesHandling = PreserveReferencesHandling.None
                     });
                     //Chiamiamo l'aggiornamento di tutti i dati
-                    result = ResourceManagement.AggiornaResourceList( ref listresource);
-                    
+                    result = ResourceManagement.AggiornaResourceList(ref listresource);
+
                     break;
 
 
@@ -645,7 +647,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 System.Data.OleDb.OleDbParameter p7 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria", filtri["categoria"]);
                 parColl.Add(p7);
             }
-             if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+            if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
             {
                 System.Data.OleDb.OleDbParameter p10 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
                 parColl.Add(p10);
@@ -682,7 +684,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             }
             if (filtri.ContainsKey("promozioni") && !string.IsNullOrEmpty(filtri["promozioni"]))
             {
-                System.Data.OleDb.OleDbParameter promo = new System.Data.OleDb.OleDbParameter("@promozioni", filtri["promozioni"]);
+                bool _tmpb = false;
+                bool.TryParse(filtri["promozioni"], out _tmpb);
+                System.Data.OleDb.OleDbParameter promo = new System.Data.OleDb.OleDbParameter("@promozioni",  _tmpb);
                 parColl.Add(promo);
             }
             if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
@@ -771,7 +775,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
         foreach (Offerte _o in filteredData)
         {
-          
+
 
             Dictionary<string, string> tmp = new Dictionary<string, string>();
             string testotitolo = "";
@@ -854,9 +858,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         try
                         {
 
-                            using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(   HttpContext.Current.Server.MapPath(tmppathimmagine)))
+                            using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
                             {
-                                imagesratio.Add(  ((double) tmpimg.Width/(double) tmpimg.Height).ToString()  );
+                                imagesratio.Add(((double)tmpimg.Width / (double)tmpimg.Height).ToString());
                             }
                         }
                         catch

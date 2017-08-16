@@ -89,45 +89,10 @@ public partial class _SchedaOffertaMaster : CommonPage
                         Session["Tipologia"] = CodiceTipologia;
                     AssociaDatiSocial(item);
                 }
-
-                //INTEGRAZIONE PER VISUALIZZAZIONE DATI IN BASE A TESTO DI RICERCA
-                //if (string.IsNullOrEmpty(idOfferta))
-                //{
-                //    Offerte item = offDM.CaricaOffertaPerTestourl(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, testoindice);
-                //    if (item != null && item.Id != 0)
-                //    {
-                //        idOfferta = item.Id.ToString();
-                //        CodiceTipologia = item.CodiceTipologia;
-                //    }
-                //}
-                #region SEZIONE MASTERPAGE GESTIONE
-                //string sectionforbanner = CodiceTipologia;
-                //if (!string.IsNullOrEmpty(Categoria))
-                //    sectionforbanner += "-" + Categoria;
-                //if (!string.IsNullOrEmpty(CodiceTipologia))
-                //    if (!string.IsNullOrEmpty(CodiceTipologia))
-                //        Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, sectionforbanner, false, Lingua);
-                //    else
-                //        Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
-                // Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "spento", false, Lingua);
-
-                //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
-                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-blog", false, lit, Lingua);
-
-
-                //HtmlGenericControl divmaster = (HtmlGenericControl)Master.FindControl("SezioneContenutiHome");
-                //divmaster.Visible = false;
-
-                #endregion
-
-
+ 
                 //CaricaControlliJS();
                 SettaTestoIniziale();
-
                 SettaVisualizzazione(item);
-
-
-                Literal lit = null;
 
                 DataBind();
             }
@@ -254,6 +219,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 divSearch.Visible = true;
                 divContact.Visible = false;
+                divContactBelow.Visible = false;
                 ContaArticoliPerperiodo(CodiceTipologia);
                 divLatestPost.Visible = false;
                 //AssociaRubricheConsigliati();
@@ -608,7 +574,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         //Carichiamo l'immobile a partire dal codice dello stesso e dalla lingua
         OfferteCollection offerte = new OfferteCollection();
 #if true
-        item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
+       // item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
         offerte.Add(item);
 #endif
 #if false
@@ -934,8 +900,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         if (!string.IsNullOrEmpty(customdesc))
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
         ////////////////////////////////////////////////////////////
-
-
 
         ///////////////////////////////////
         //string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);

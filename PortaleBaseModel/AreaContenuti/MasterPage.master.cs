@@ -49,9 +49,9 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 //rptCatalogo.DataBind();
 
 
-                //List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
-                //rptCatalogoCategorie.DataSource = listcat;
-                //rptCatalogoCategorie.DataBind();
+                List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
+                rptCatalogoCategorie.DataSource = listcat;
+                rptCatalogoCategorie.DataBind();
 
 
                 //Custom tipo

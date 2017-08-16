@@ -42,6 +42,48 @@
     <script src="assets/js/respond.js"></script>
     <![endif]-->
     <style type="text/css">
+         // Aggiungere agli stili in testa 
+         .divColTagl {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .divColTagl ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            .divColTagl ul li {
+                list-style: none;
+                margin-bottom: 5px;
+                padding-top: 5px;
+                border-bottom: 1px solid #dddddd;
+            }
+
+        .ui-autocomplete ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ui-menu .ui-menu-item {
+            font-size: 1.4rem;
+        }
+
+        .has-error {
+            border: 1px solid red !important;
+        }
+
+        .error {
+            font-size: 12px;
+            font-weight: bold;
+            color: red !important;
+        }
+
+        .spento {
+            display: none !important;
+        }
+
         .pagination {
             display: inline-block;
             padding-left: 0;
@@ -250,7 +292,7 @@
             <div class="navbar-container" id="navbar-container">
 
                 <div class="navbar-header pull-left">
-                    <a href='<%= references.ResMan("Common",Lingua,"LinkHome") %>'   class="navbar-brand">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome") ) %>' class="navbar-brand">
                         <img runat="server" id="imgLogo" src="Immagini/logowebmouse.png" height="50" />
                     </a>
 
@@ -278,7 +320,7 @@
                     <asp:Literal ID="litTrial" runat="server"></asp:Literal>
                 </div>
                 <div class="navbar-header pull-right">
-                    <a href='<%= references.ResMan("Common",Lingua,"LinkHome") %>'  class="navbar-brand" style="margin-top: 10px;">
+                    <a href='<%= references.ResMan("Common",Lingua,"LinkHome") %>' class="navbar-brand" style="margin-top: 10px;">
                         <i class="fa fa-sign-out"></i>
                     </a>
                 </div>
@@ -308,12 +350,47 @@
 
                 <ul class="nav nav-list">
                     <li id="tagDefault" runat="server" class="hover">
-                        <a href="Default.aspx">
+                        <a href="/AreaContenuti/Default.aspx">
                             <i class="menu-icon fa fa-tachometer"></i>
                             <span class="menu-text">Dashboard </span>
                         </a>
 
                         <b class="arrow"></b>
+                    </li>
+
+
+                    <li id="tagCatalogo" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">Gestione Sezione Catalogo
+                            </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+
+                            
+                            <asp:Repeater ID="rptCatalogo" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <asp:Repeater ID="rptCatalogoCategorie" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("CodiceTipologia").ToString() + "&CodiceProdotto="+ Eval("CodiceProdotto").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                        </ul>
                     </li>
 
                     <li id="tagOfferteProdotti" runat="server" class="hover">
@@ -351,25 +428,6 @@
                             </asp:Repeater>
 
 
-                            <asp:Repeater ID="rptCatalogo" runat="server">
-                                <ItemTemplate>
-                                    <li class="hover">
-                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
-                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
-                                        <b class="arrow"></b>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-
-                            <asp:Repeater ID="rptCatalogoCategorie" runat="server">
-                                <ItemTemplate>
-                                    <li class="hover">
-                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("CodiceTipologia").ToString() + "&CodiceProdotto="+ Eval("CodiceProdotto").ToString() %>">
-                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
-                                        <b class="arrow"></b>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
 
                         </ul>
                     </li>
@@ -416,30 +474,31 @@
                                                     <span class="menu-text">Testate Home</span></a>
                                                 <b class="arrow"></b>
                                             </li>
+                                              <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Home ( per mobile )</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Ristorante</span></a>
+                                                    <span class="menu-text">Testate Chisiamo</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate camere</span></a>
+                                                    <span class="menu-text">Testate Servizi</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Listini</span></a>
+                                                    <span class="menu-text">Testate Su misura</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-5">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Menu</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
+                                           
 
                                             <li>
                                                 <hr style="margin: 2px 0" />
@@ -450,18 +509,7 @@
                                                     <span class="menu-text">Testate catalogo</span></a>
                                                 <b class="arrow"></b>
                                             </li>--%>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000003">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate eventi e promo</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000004">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Piatti</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
+                                            
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000002">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -546,12 +594,7 @@
                                                     <span class="menu-text">Banner generico (test parallax )</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banner Fascia Home ( per mobile )</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
+                                          
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -704,7 +747,7 @@
     </script>
     <![endif]-->
     <script type="text/javascript">
-        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+                    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
     </script>
     <script src="assets/js/bootstrap.js"></script>
 

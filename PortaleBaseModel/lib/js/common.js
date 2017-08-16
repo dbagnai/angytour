@@ -19,6 +19,7 @@ var JSONcategorie2liv = "";
 var jsontipologie = "";
 var percorsolistadati = "";
 var pathAbs = "";
+var username = "";
 var commonhandlerpath = '/lib/hnd/HandlerDataCommon.ashx';
 var referencesloaded = false;
 var promisecalling = false;
@@ -95,6 +96,7 @@ function loadvariables(result) {
     JSONcategorie = JSON.parse(jobj["jsoncategorie"]);
     JSONcategorie2liv = JSON.parse(jobj["jsoncategorie2liv"]);
     jsontipologie = JSON.parse(jobj["jsontipologie"]);
+    username = jobj["username"];
 
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
     var dictresources = JSON.parse(jobj["dictreferences"]);
@@ -719,6 +721,64 @@ function CleanHtml(el) {
 }
 
 
+/*Visualizza un lista i dati passati col template indicato*/
+function ShowList(templatename, container, controlid, data) {
+    var localObjects = {};
+
+    var templateHtml = pathAbs + "/lib/template/" + "genericlista.html";
+    if (templatename != null && templatename != '')
+        templateHtml = pathAbs + "/lib/template/" + templatename;
+
+    //Correggo l'id dei controlli del template per l'inzializzazione dello scroller univoca e corretta
+    $('#' + container).html('');
+
+    if (data !== null && data.length > 0) {
+        $('#' + container).load(templateHtml, function () {
+            $('#' + container).find("[id^=replaceid]").each(function (index, text) {
+                var currentid = $(this).prop("id");
+                var replacedid = currentid.replace('replaceid', controlid);
+                $(this).prop("id", replacedid);
+            });
+            setTimeout(function () {
+                if (!data.length) return;
+                var str = $('#' + controlid)[0].outerHTML;
+                //$('#' + el).parent().parent().parent().parent().show();
+                //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
+                //in caso di rebinding successivo dopo l'iniezione del template
+                if (!globalObject.hasOwnProperty(controlid + "template")) {
+                    globalObject[controlid + "template"] = $('#' + controlid)[0].outerHTML;
+                    str = globalObject[controlid + "template"];
+                }
+                else
+                    str = globalObject[controlid + "template"];
+
+                var jquery_obj = $(str);
+                var outerhtml = jquery_obj.outerHTML();
+                var innerHtml = jquery_obj.html();
+                var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
+                var htmlout = "";
+                var htmlitem = "";
+                for (var j = 0; j < data.length; j++) {
+                    htmlitem = "";
+                    //htmlitem = FillBindControls(jquery_obj, data[j]);
+                    //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
+                    FillBindControls(jquery_obj, data[j], localObjects, "",
+                        function (ret) {
+                            htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                        });
+                }
+                //Inseriamo htmlout nel contenitore  $('#' + el).html 
+                $('#' + controlid).html('');
+                $('#' + controlid).html(htmlout);
+                CleanHtml($('#' + controlid));
+            }, 500);
+        });
+    }
+}
+
+
+
+
 /*Riceve una stringa Html parserizzata con jquery per il fill coi dati*/
 function FillBindControls(jquery_obj, dataitem, localObjects, classselector, callback) {
 
@@ -1079,6 +1139,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     valore[1] = dataitem[$(this).attr("mybind1")];
                                 if ($(this).attr("mybind2") != null)
                                     valore[2] = dataitem[$(this).attr("mybind2")];
+                                if ($(this).attr("mybind3") != null)
+                                    valore[3] = dataitem[$(this).attr("mybind3")];
                                 if ($(this).attr("myvalue") != null)
                                     prop[0] = $(this).attr("myvalue");
                                 if ($(this).attr("myvalue1") != null)
@@ -1092,13 +1154,17 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                         valore = ret;
                                 });
                             }
+
+                            //if (valore != '' && valore != null) $(this).show();
+                            //$(this).html(valore);
+
                             if (valore == "true" || valore == "false") {
                                 if (valore == "true")
                                     $(this).hide();
                             }
                             else
                                 $(this).html(valore);
-                            //$(this).html(dataitem[proprarr[0]]);
+
                         }
                         else
                             $(this).html('');
@@ -1108,17 +1174,25 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     break;
                 case 2: //Oggetto bind di 2 livelli
                     if ($(this).is("span")) {
-                        var idelement = dataitem[proprarr[0]];
-                        var property = proprarr[1];
-                        var valore = "";
-                        if (localObjects["linkloaded"].hasOwnProperty(idelement)) {
-                            if (localObjects["linkloaded"][idelement].hasOwnProperty(property)) {
-                                valore = localObjects["linkloaded"][idelement][property];
-                                $(this).html(valore);
-                            }
-                        }
-                        else
+                        if ($(this).attr('mybind1') != undefined) {
+                            var object = dataitem[proprarr[0]];
+                            var property = proprarr[1];
+                            var valore = object[property];
                             $(this).html(valore);
+                        }
+                        else {
+                            var idelement = dataitem[proprarr[0]];
+                            var property = proprarr[1];
+                            var valore = "";
+                            if (localObjects["linkloaded"].hasOwnProperty(idelement)) {
+                                if (localObjects["linkloaded"][idelement].hasOwnProperty(property)) {
+                                    valore = localObjects["linkloaded"][idelement][property];
+                                    $(this).html(valore);
+                                }
+                            }
+                            else
+                                $(this).html(valore);
+                        }
                     }
                     else if ($(this).is("iframe")) {
                         var idelement = dataitem[proprarr[0]];
@@ -1288,20 +1362,33 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     var retstring = "";
     var testoCarelloesaurito = baseresources[lng]["testocarelloesaurito"];
     var testoInseriscicarrello = baseresources[lng]["testoinseriscicarrello"];
+    var testoVedi = baseresources[lng]["vedi"];
+
     var id = valore[0];
     var qtavendita = valore[1];
+    var xmlvalue = valore[2];
+
 
     if (qtavendita == 0) {
-        retstring = "<div style=\"float:right;width:90px;line-height:15px\"  class=\"divbuttonstyle\"  >" + testoCarelloesaurito + "</div>";
+        retstring = "<div style=\"float:right;width:90px;line-height:15px; padding-top:10px;\"  class=\"divbuttonstyle\"  >" + testoCarelloesaurito + "</div>";
     } else {
         //retstring = "<button type=\"button\" style=\"float:right\" class=\"btn btn-purple btn-small trigcarrello\" title=\"" + id + "," + lng + "," + username + "\"  >" + testoInseriscicarrello + "</button>";
         var testocall = id + "," + lng + "," + username;
 
-        retstring = "<button type=\"button\" style=\"float:right\" class=\"btn btn-purple btn-small\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+        retstring = "<button type=\"button\" style=\"float:right; margin-top:10px !important; background-color:#121212;\" class=\"btn btn-theme\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+
+        if (xmlvalue != null && xmlvalue != "") {
+            var link = localObjects["linkloaded"][id]["link"];
+            retstring = "<a href=\"" + link + "\" target=\"_self\" >";
+            retstring += "<div  style=\"float:right; margin-top:10px !important; background-color:#121212\" class=\"btn btn-theme\"  >" + testoVedi + "</div>";
+            retstring += "</a>";
+
+        }
     }
 
     callback(retstring);
 }
+
 function formatautore(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1362,13 +1449,14 @@ function formatlabelsconto(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
+
 function formatlabelresource(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
 
         var controllo = localObjects["resultinfo"][prop[1]];
         if (controllo == "true" || controllo == null) {
-            retstring = baseresources[lng][prop[0].toLowerCase()];
+            retstring = baseresources[lng][prop[0]];
         }
     } catch (e) { };
     callback(retstring);
@@ -1384,13 +1472,13 @@ function frmcategoria(localObjects, valore, prop, callback) {
     var selvalue = "";
     //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
     if (JSONcategorie != null)
-    for (var j = 0; j < dataroot["data"].length; j++) {
-        if (dataroot["data"][j].Codice == valore[0]) {
-            selvalue = dataroot["data"][j].Campo1;
-            break;
+        for (var j = 0; j < dataroot["data"].length; j++) {
+            if (dataroot["data"][j].Codice == valore[0]) {
+                selvalue = dataroot["data"][j].Campo1;
+                break;
 
+            }
         }
-    }
 
     //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
     //    selvalue = selvalue[0].toLowerCase();
@@ -1419,6 +1507,7 @@ function frmcategoria2liv(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
+
 function frmtipologia(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
     //dataroot += "}";
