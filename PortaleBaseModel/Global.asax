@@ -301,7 +301,7 @@
                     appaddress = System.Web.HttpContext.Current.Request.Url.ToString();
                     string query = System.Web.HttpContext.Current.Request.Url.Query;
                     if (!string.IsNullOrEmpty(query))
-                        appaddress = appaddress.Replace(query, "");
+                       appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
 

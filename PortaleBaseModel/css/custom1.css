@@ -2302,7 +2302,7 @@ Portfoli Single ( da rival )
     max-height: 1000px;
 }*/
 .rev-slider-full {
-    height: calc(100vh - 225px) !important;
+    /*height: calc(100vh - 225px) !important;*/
 }
 
     .rev-slider-full .slotholder:after {
