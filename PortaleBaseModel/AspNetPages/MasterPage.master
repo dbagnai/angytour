@@ -109,7 +109,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'"></script>
         <!-- MENU --->
-
+        <div id="header">
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="container" style="padding: 0px;">
                 <div class="pull-right hidden-xs" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
@@ -390,6 +390,7 @@
                 </ul>
             </div>
 
+        </div>
         </div>
         <%--   <div class="fixednav1" id="mainnav1">
             <div id="menuzord1" class="menuzord sec-menu menuzord-responsive white">

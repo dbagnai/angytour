@@ -2302,6 +2302,10 @@ Portfoli Single ( da rival )
     max-height: 1000px;
 }*/
 .rev-slider-full {
+    /*height: calc(100vh - 225px) !important;*/
+}
+
+#divContainerb1 {
     height: calc(100vh - 225px) !important;
 }
 
@@ -4084,8 +4088,4 @@ p.lead, .lead p {
     bottom: 0;
     left: 0;
     pointer-events: none;
-}
-
-#divContainerb1 {
-    height: calc(100vh - 225px) !important;
 }
