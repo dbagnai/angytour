@@ -787,8 +787,11 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
     protected void AssociaDatiSocial()
     {
+        Tabrif actualpagelink = new Tabrif();
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////  PER CREAZIONE LINK CANONICI E ALTERNATE ///////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneI = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
         string sezionedescrizioneI = "";
         if (sezioneI != null)
@@ -840,13 +843,23 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
         litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        if (Lingua == "I") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
+        if (Lingua == "I")
+        {
+            urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
+        }
 
         hreflang = " hreflang=\"en\" ";
         linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv);
         litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
         litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        if (Lingua == "GB") { urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; }
+        if (Lingua == "GB")
+        {
+            urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /////////////////////DEFINIZIONE DEI TITOLI E CONTENUTI DI PAGINA ////////////////////////////////////////////////////////////
@@ -959,9 +972,57 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         //    else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
         //        ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
         //}
-
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// List<Tabrif> links = GeneraBreadcrumbPath(true);
+        List<Tabrif> links = GeneraBreadcrumbPath(true);
+        links.Add(actualpagelink);
+        HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
+        ulbr.InnerHtml = BreadcrumbConstruction(links);
     }
+    private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
+    {
+        List<Tabrif> links = new List<Tabrif>();
+        Tabrif link = new Tabrif();
+        link.Campo1 = ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome"));
+        link.Campo2 = references.ResMan("Common", Lingua, "testoHome");
+        links.Add(link);
+
+
+
+        //TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == Tipologia); });
+        //if (item != null)
+        //{
+        //    string testourl = item.Descrizione;
+        //    Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
+        //    if (catselected != null && usacategoria)
+        //        testourl = catselected.Descrizione;
+        //    if (!string.IsNullOrEmpty(Categoria2liv))
+        //    {
+        //        SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+        //        if (categoriasprodotto != null && usacategoria)
+        //        {
+        //            testourl = categoriasprodotto.Descrizione;
+        //        }
+        //    }
+        //    string tmpcategoria = Categoria;
+        //    string tmpcategoria2liv = Categoria2liv;
+        //    if (!usacategoria)
+        //    {
+        //        tmpcategoria = ""; tmpcategoria2liv = "";
+        //    }
+
+
+        //    string linkcanonicoalt = CreaLinkRoutes(null, false, Lingua, CleanUrl(testourl), "", Tipologia, tmpcategoria, tmpcategoria2liv);
+        //    link = new Tabrif();
+        //    link.Campo1 = linkcanonicoalt;
+        //    link.Campo2 = testourl;
+        //    links.Add(link);
+        //}
+        return links;
+    }
+
+
 
     protected void EvidenziaSelezione(string testolink)
     {

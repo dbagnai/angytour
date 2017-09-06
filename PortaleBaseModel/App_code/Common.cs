@@ -390,7 +390,22 @@ public class CommonPage : Page
         return ret;
     }
 
+    public static string BreadcrumbConstruction(List<Tabrif> links)
+    {
+        //Creo la struttura annidata dei link
+        StringBuilder sb = new StringBuilder();
+        foreach (Tabrif l in links)
+        {
+            sb.Append("<li>");
+            sb.Append("<a");
+            sb.Append(" href=\"" + l.Campo1 + "\">");
+            sb.Append(l.Campo2);
+            sb.Append("</a> ");
+            sb.Append("</li>");
 
+        }
+        return sb.ToString();
+    }
     public static string ConteggioCaratteri(string testo, int caratteri = 600, bool nolink = false, string testoAggiunto = "")
     {
         string ritorno = testo;

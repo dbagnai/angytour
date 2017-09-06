@@ -12,6 +12,43 @@ namespace WelcomeLibrary.UF
     public static class SitemapManager
     {
 
+        public static string getlinktipologia(string codicetipologia, string lingua)
+        {
+            string ret = "";
+            //Visualizzo i link di per tipologia
+            TipologiaOfferte tipo = Utility.TipologieOfferte.Find(s => s.Lingua == lingua && s.Codice == codicetipologia);
+            if (tipo != null)
+            {
+                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, tipo.Descrizione, "", tipo.Codice, "", "", "", "", "", true, false);
+            }
+            return ret;
+        }
+        public static string getlinksezione(string codicetipologia, string codiceprodotto, string lingua)
+        {
+            string ret = "";
+            //Visualizzo i link di sezione prodotto
+            Prodotto prod = Utility.ElencoProdotti.Find(s => s.Lingua == lingua && s.CodiceTipologia == codicetipologia && s.CodiceProdotto == codiceprodotto);
+            if (prod != null)
+            {
+                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, prod.Descrizione, "", prod.CodiceTipologia, prod.CodiceProdotto, "", "", "", "", true, false);
+            }
+            return ret;
+        }
+
+
+        public static string getlinksottosezione(string codicetipologia, string codiceprodotto, string codicesottoprodotto, string lingua)
+        {
+            string ret = "";
+            //Visualizzo i link di sezione sottoprodotti
+            Prodotto prod = Utility.ElencoProdotti.Find(s => s.Lingua == lingua && s.CodiceTipologia == codicetipologia && s.CodiceProdotto == codiceprodotto);
+            SProdotto sprod = Utility.ElencoSottoProdotti.Find(s => s.Lingua == lingua && s.CodiceProdotto == codiceprodotto && s.CodiceSProdotto == codicesottoprodotto);
+            if (prod != null && sprod != null)
+            {
+                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, sprod.Descrizione, "", prod.CodiceTipologia, sprod.CodiceProdotto, sprod.CodiceSProdotto, "", "", "", true, false);
+            }
+            return ret;
+        }
+
         /// <summary>
         /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
         /// </summary>

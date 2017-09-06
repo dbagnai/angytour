@@ -979,6 +979,14 @@
                                             <asp:Button ID="btnModificaProd" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica" OnClick="btnModifiProd_Click" />
                                             <asp:Button ID="btnEliminaProdotto" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaProd_Click" /><br />
                                             <br />
+                                            
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneI" runat="server" />
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneGB" runat="server" />
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneRU" runat="server" />
+
                                             <asp:Label runat="server" ID="ErrorMsgNuovoProdotto" ForeColor="Red"></asp:Label>
                                             <div style="height: 50px;">
                                             </div>
@@ -1052,6 +1060,14 @@
                                                 <asp:Button ID="btnEliminaSottoProd" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaSottProd_Click" /><br />
                                                 <asp:Label runat="server" ID="ErrorMessage" ForeColor="Red"></asp:Label>
                                             </div>
+
+                                                 <br />
+                                                <asp:Literal Text="" ID="linksottosezioneI" runat="server" />
+                                                <br />
+                                                <asp:Literal Text="" ID="linksottosezioneGB" runat="server" />
+                                                <br />
+                                                <asp:Literal Text="" ID="linksottosezioneRU" runat="server" />
+
                                             <div style="height: 50px;">
                                             </div>
                                         </td>
