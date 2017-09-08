@@ -1,10 +1,8 @@
-﻿//var carrellohandlerpath = pathAbs + '/lib/hnd/CarrelloHandler.ashx';
-var carrellohandlerpath = "";
+﻿var carrellohandlerpath = '/lib/hnd/CarrelloHandler.ashx';
 
 
 $(document).ready(function () {
     connectCarrelloEvents();
-    carrellohandlerpath = pathAbs + '/lib/hnd/CarrelloHandler.ashx';
 });
 
 function connectCarrelloEvents() {
@@ -33,7 +31,7 @@ function connectCarrelloEvents() {
     /////////////INSERIMENTO NEL CARRELLO (INUTILE CON INIEZIONE JS!!!!!)/////////////////////////////////////////////
     $('button.trigcarrello').click(function (e) {
         var title = $(this).attr("title");
-        InserisciCarrelloNopostback(title);
+        InserisciCarrello(title);
         e.preventDefault();
     });
     //////////////////////////////////////////////////////////////////////
@@ -100,27 +98,6 @@ function OnSuccessShowcarrello(response, destination) {
 //    //$(".totalItems").append(response);
 //    __doPostBack();
 //}
-
-function GetCurrentCarrelloQty(contenitoredestinazione, idprodotto, idcombined) {
-    $.ajax({
-        destinationControl: contenitoredestinazione,
-        type: "POST",
-        url: carrellohandlerpath + "?Azione=selectrowqty",
-        // contentType: "application/json; charset=utf-8",
-        // dataType: "json",
-        data: '{idprodotto: "' + idprodotto + '" , idcombined: "' + idcombined + '" }',
-        success: function (data) {
-            $.find("[id*='" + this.destinationControl + "']")[0].value = data;
-            console.log(data);
-        },
-        failure: function (response) {
-            //  alert(response);
-        }
-    });
-}
-
-
-
 function InserisciCarrelloNopostback(testo) {
     var res = testo.split(",", 3);
     var idprodotto = res[0];
@@ -145,8 +122,6 @@ function AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingu
         }
     });
 }
-
-
 function OnSuccessAddcarrelloNopostback(response, destination) {
     //$(".totalItems").empty();
     //$(".totalItems").append(response);
@@ -160,9 +135,8 @@ function OnSuccessAddcarrelloNopostback(response, destination) {
         // dataType: "json",
         data: '{empty: "" }',
         success: function (data) {
-            $("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
-            //$("#containerCarrelloMobile").find("[id*='litTotalHigh']")[0].innerText = data; //????
-
+            if ($("#containerCarrello").find("[id*='litTotalHigh']").length != 0)
+                $("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
         },
         failure: function (response) {
             //  alert(response);

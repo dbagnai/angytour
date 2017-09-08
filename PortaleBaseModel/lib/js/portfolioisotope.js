@@ -17,8 +17,11 @@ function InjectPagerPortfolio(pagercontainer, controlid) {
         CaricaIsotopeData(controlid);
     });
 }
+
 function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
-    loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, lng);
+    setTimeout(function () {
+        loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, lng);
+    }, 100);
 }
 function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
 
@@ -208,6 +211,7 @@ function BindIsotope(el, localObjects) {
                         htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
                     });
     }
+
 
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
     $('#' + el).html('');

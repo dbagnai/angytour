@@ -20,8 +20,11 @@ function InjectPagerPortfolioBanner(pagercontainer, controlid) {
     });
 }
 
+
 function injectPortfolioAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola) {
-    loadref(injectPortfolioAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, lng);
+    setTimeout(function () {
+        loadref(injectPortfolioAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, lng);
+    }, 100 );
 
 }
 function injectPortfolioAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola) {
@@ -40,6 +43,7 @@ function injectPortfolioAndLoadBannerinner(type, container, controlid, page, pag
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
         });
+
         InitIsotopeLocalBanner(controlid);
         //Usiamo memoria globale indicizzata con l'id del controllo
         var pagerdata = {};
@@ -132,6 +136,8 @@ function BindIsotopeBanner(el, localObjects) {
         $('#' + el).html('');
         return;
     }
+
+
     var str = $('#' + el)[0].innerHTML;
     $('#' + el).parent().parent().show();
     $('#' + el).parent().parent().parent().parent().show();

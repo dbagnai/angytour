@@ -54,12 +54,12 @@
 	border: 1px solid #dddddd;
 	background: #f6f6f6 url("images/ui-bg_highlight-soft_100_f6f6f6_1x100.png") 50% 50% repeat-x;
 	font-weight: bold;
-	color: #0073ea;
+	color: #4d4d4d;
 }
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
-	color: #0073ea;
+	color: #4d4d4d;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -68,8 +68,8 @@
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #0073ea;
-	background: #0073ea url("images/ui-bg_highlight-soft_25_0073ea_1x100.png") 50% 50% repeat-x;
+	border: 1px solid #4d4d4d;
+	background: #ccc url("images/ui-bg_highlight-f6f6f6.png") 50% 50% repeat-x;
 	font-weight: bold;
 	color: #ffffff;
 }
@@ -166,7 +166,7 @@
 	background-image: url("images/ui-icons_ff0084_256x240.png");
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_0073ea_256x240.png");
+	background-image: url("images/ui-icons_666666_256x240.png");
 }
 .ui-state-default .ui-icon {
 	background-image: url("images/ui-icons_666666_256x240.png");
@@ -179,7 +179,7 @@
 	background-image: url("images/ui-icons_454545_256x240.png");
 }
 .ui-state-highlight .ui-icon {
-	background-image: url("images/ui-icons_0073ea_256x240.png");
+	background-image: url("images/ui-icons_666666_256x240.png");
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
