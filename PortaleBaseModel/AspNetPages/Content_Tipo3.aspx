@@ -297,14 +297,19 @@
                                                     </style>
                                                     <script>
                                                         function ConfirmCancella() {
-                                                            var response = grecaptcha.getResponse();
+                                                          <%--  var response = grecaptcha.getResponse();
                                                             if (response.length == 0)  //reCaptcha not verified
                                                             {
                                                                 $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
                                                                 return false;
                                                             }
-                                                                //reCaptch verified
-                                                            else { }
+                                                            else {--%>
+                                                            if (Page_ClientValidate("MailInfo")) {
+                                                                /*do work and go for postback*/
+                                                            } else {
+                                                                // alert('not validated');
+                                                            }
+                                                            //}
                                                         }
                                                     </script>
                                                     <br />

@@ -130,12 +130,15 @@
         try
         {
 
+            List<string> Tmp_linksite = new List<string>();
             string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
             string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
             string host = percorsoBase.Replace(".", "");
             host = host.Replace(":", "");
             host = host.Replace("/", "");
             Messaggi["Messaggio"] += host.ToLower();
+
+           
 
             //Carichiamo la lista delle offerte totale
             WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
@@ -155,10 +158,12 @@
 
             //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
 
+        
             string Lingua = "I";
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua,"rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
             //Questa è da rivedere in base al codice tipologia !!!!!
-            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             //Lingua = "GB";
