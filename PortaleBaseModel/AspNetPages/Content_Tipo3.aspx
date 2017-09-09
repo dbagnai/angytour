@@ -4,7 +4,7 @@
 
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
+<%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>--%>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubsSlider" runat="Server">
 </asp:Content>
 
@@ -45,13 +45,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
+<%--    <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
         AsyncPostBackErrorMessage="Errore generico. Contattare HelpDesk" AsyncPostBackTimeout="400"
         EnablePartialRendering="true"
         EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
         <Scripts>
         </Scripts>
-    </Ajax:ToolkitScriptManager>
+    </Ajax:ToolkitScriptManager>--%>
     <div class="row" style="text-align: center">
         <div class="col-xs-12">
             <p>
@@ -161,20 +161,20 @@
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
                                                             <asp:TextBox ID="txtArrivo" Width="99%" runat="server"
-                                                                class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriododa") %>' />
+                                                                class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriododa") %>' />
                                                             <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                            <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
+                                                          <%--  <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
                                                                 TargetControlID="txtArrivo">
-                                                            </Ajax:CalendarExtender>
+                                                            </Ajax:CalendarExtender>--%>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
-                                                            <asp:TextBox ID="txtPartenza" Width="99%" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriodoa") %>' />
+                                                            <asp:TextBox ID="txtPartenza" Width="99%" runat="server" class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriodoa") %>' />
                                                             <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                            <Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
+                                                            <%--<Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
                                                                 TargetControlID="txtPartenza">
-                                                            </Ajax:CalendarExtender>
+                                                            </Ajax:CalendarExtender>--%>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -182,10 +182,15 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
-                                                            <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
+                                                            <%--<Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
                                                                 MaskType="Number" TargetControlID="txtAdulti" InputDirection="RightToLeft" Mask="99"
                                                                 AutoComplete="false">
-                                                            </Ajax:MaskedEditExtender>
+                                                            </Ajax:MaskedEditExtender>--%>
+                                                            <script>
+                                                                jQuery(function ($) {
+                                                                    $("#ctl00_ContentPlaceHolder1_txtAdulti").mask("99", { placeholder: " " });
+                                                                });
+                                                            </script>
                                                             <asp:TextBox ID="txtAdulti" Width="99%" runat="server"
                                                                 class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoAdulti") %>' />
                                                             <label class="ui-icon"><i class="fa fa-group"></i></label>
@@ -193,10 +198,15 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
-                                                            <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender2" AcceptNegative="None"
+                                                            <%--<Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender2" AcceptNegative="None"
                                                                 MaskType="Number" TargetControlID="txtBambini" InputDirection="RightToLeft" Mask="99"
                                                                 AutoComplete="false">
-                                                            </Ajax:MaskedEditExtender>
+                                                            </Ajax:MaskedEditExtender>--%>
+                                                             <script>
+                                                                 jQuery(function ($) {
+                                                                     $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
+                                                                 });
+                                                            </script>
                                                             <asp:TextBox ID="txtBambini" Width="99%" runat="server"
                                                                 class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoBambini") %>' />
                                                             <label class="ui-icon"><i class="fa fa-user"></i></label>

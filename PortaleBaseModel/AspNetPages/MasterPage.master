@@ -1027,7 +1027,8 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/_jquery.placeholder.js") %>"></script>
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/minified/jquery-ui.min.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.ui.datepicker.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.maskedinput.js")%>"></script>
+        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.ui.datepicker.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jq.appear.js")%>"></script>
@@ -1061,12 +1062,9 @@
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/fluidvids.js")%>"></script> --%>
         <!--DEFIANTJS to query json obkects-->
         <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/jarallax.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/script.js")%>"></script>
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.sticky.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/detect-zoom.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>

@@ -701,3 +701,19 @@ Parameter name: key 20/06/2017 13.47.50</Messaggio>
 <Messaggio>httplocalhost52646Generato sitemap  08/09/2017 13:16:04</Messaggio>
  <Data>08/09/2017 13:16:04</Data>
 <Messaggio>httplocalhost52646Generato sitemap  08/09/2017 13:16:04Terminato Aggiornamento  08/09/2017 13:16:04</Messaggio>
+ <Data>09/09/2017 17:59:51</Data>
+<Messaggio> Application start : 09/09/2017 17:59:45</Messaggio>
+ <Data>09/09/2017 17:59:51</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/09/2017 18:00:52</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:00:52</Messaggio>
+ <Data>09/09/2017 18:00:52</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:00:52Terminato Aggiornamento  09/09/2017 18:00:52</Messaggio>
+ <Data>09/09/2017 18:16:36</Data>
+<Messaggio> Application start : 09/09/2017 18:16:31</Messaggio>
+ <Data>09/09/2017 18:16:36</Data>
+<Messaggio> Global init original path: http://localhost:52646/lib/hnd/HandlerDataCommon.ashx?q=emptysession&link=&_=1504973692614 Global init AbsolutePath : /lib/hnd/HandlerDataCommon.ashx Global init ApplicationPath : / Global init Query : ?q=emptysession&link=&_=1504973692614 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/09/2017 18:17:37</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:17:37</Messaggio>
+ <Data>09/09/2017 18:17:37</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:17:37Terminato Aggiornamento  09/09/2017 18:17:37</Messaggio>
