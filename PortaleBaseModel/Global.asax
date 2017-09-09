@@ -4,7 +4,73 @@
 <%@ Import Namespace="System.Web.Routing" %>
 
 <script RunAt="server">
-    public static string percorsoFisicoImmobili;
+    /////KEEP ALIVE TIMER///////////////////////////////////////
+    public static DateTime When1;
+    public static double Every1;
+    private System.Timers.Timer OpTimer1;
+
+    /// <summary>
+    /// Funzione di Inizializzazione del Timer per la schedulazione delle opearazioni
+    /// </summary>
+    private void StartTimer1()
+    {
+        while (When1 <= DateTime.Now)
+        {
+            When1 = When1.AddHours(Every1);
+        }
+        OpTimer1 = new System.Timers.Timer(GetInterval1());
+        OpTimer1.AutoReset = false; //Il timer non riparte automaticamente dopo l'evento ontimer
+        OpTimer1.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent1); //Imposto il delegato per l'evento ontimer
+        OpTimer1.Enabled = true; //Faccio partire il timer
+    }
+    /// <summary>
+    /// Ritorna il numero di millisecondi da adesso all'orario prestabilito per l'esecuzione dell'evento
+    /// del timer OnTimer
+    /// </summary>
+    /// <returns></returns>
+    private double GetInterval1()
+    {
+        TimeSpan diff = When1.Subtract(DateTime.Now);
+
+        //ricalcolo l'intervallo del timer per multipli della cadenza 
+        //successivamente all'istante attuale
+        if (diff.TotalMinutes < 0)
+        {
+            while (When1 <= DateTime.Now)
+            {
+                When1 = When.AddHours(Every1);
+            }
+            diff = When1.Subtract(DateTime.Now);
+            // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
+        }
+        //risultato in millisecondi 
+        return diff.Ticks / 10000;
+    }
+    /// <summary>
+    /// Evento relativo a OpTimer per l'esecuzione delle operazioni agli intervalli stabiliti
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="e"></param>
+    public void OnTimedEvent1(object source, System.Timers.ElapsedEventArgs e)
+    {
+        try
+        {
+            //this.Ping();
+            string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx", 1252);
+        }
+        catch { };
+        //Reimposto l'esecuzione tra Every ore rispetto alla data di ultima esecuzione
+        When1 = When1.AddHours(Every1);
+        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato 
+        //con il tempo - potrebbe sballare
+        OpTimer1.Interval = (Double)GetInterval1();
+        OpTimer1.Start();
+
+    }
+   
+    ////KEEP ALIVE APP////////////////////////////////////
+    
+    
     //Variabili per Timer per esecuzione compiti schedulati 
     public static DateTime When;
     public static double Every;
@@ -235,6 +301,14 @@
             //Every = 0.01; //Ciclo di esecuzione in ore
             Every = 4; //Ciclo di esecuzione in ore
             StartTimer();
+
+
+            
+            //TIMER2 -> PER KEEP ALIVE ( blocca idle timeout brevi di IIS )
+            When1 = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString());
+            //Every = 0.01; //Ciclo di esecuzione in ore
+            Every1 = 0.03; //Ciclo di esecuzione in ore
+            StartTimer1();
 
             //Creo una variabile per la scrittura dei messaggi nel file di log
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
