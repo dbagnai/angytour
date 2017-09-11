@@ -22,9 +22,32 @@ namespace WelcomeLibrary.UF
             // Segue un esempio di come gestire l'evento LogRequest e fornire la relativa 
             // implementazione della registrazione personalizzata
             context.PreSendRequestHeaders += this.SetDefaultCacheHeader;
+            context.PostRequestHandlerExecute += this.SetCompressionHnd;
         }
 
         #endregion
+        private void SetCompressionHnd(object sender, EventArgs eventArgs)
+        {
+            HttpContext context = HttpContext.Current;
+            String encoding = context.Request.Headers.Get("Accept-Encoding");
+
+            if (encoding == null)
+                return;
+
+            encoding.ToLower();
+
+            if (encoding.Contains("gzip"))
+            {
+                context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
+                HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
+            }
+            else
+            {
+                context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
+                HttpContext.Current.Response.AppendHeader("Content-Encoding", "deflate");
+            }
+        }
+
         private void SetDefaultCacheHeader(object sender, EventArgs eventArgs)
         {
             double secondsduration = 36000;
@@ -32,7 +55,7 @@ namespace WelcomeLibrary.UF
             string finalpath = HttpContext.Current.Request.Url.AbsolutePath;
             if (finalpath.ToLower().EndsWith(".ashx"))
                 nocache = true;
-            if(HttpContext.Current.Response.ContentType == "text/plain")
+            if (HttpContext.Current.Response.ContentType == "text/plain")
                 nocache = true;
             if (HttpContext.Current.Response.ContentType == "text/html")
                 nocache = true;
