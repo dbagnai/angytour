@@ -131,9 +131,16 @@ public partial class AspNetPages_Orderpage : CommonPage
     /// <param name="carrello"></param>
     private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, int idcliente = 0)
     {
+        string codicesconto = "";
+        if (Session["codicesconto"] != null)
+        {
+            codicesconto = Session["codicesconto"].ToString();
+        }
         foreach (Carrello c in carrello)
         {
             // if (User.Identity != null && User.Identity.Name != "")
+            c.ID_cliente = idcliente;
+            c.Codicesconto = codicesconto; //metto il codice sconto nella lista prodotti nel carrello
             AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente);
         }
     }

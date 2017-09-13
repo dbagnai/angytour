@@ -883,7 +883,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string sezionedescrizione = "";
         if (!string.IsNullOrEmpty(Categoria2liv))
         {
-            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "GB" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua ==Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
             if (categoriasprodotto != null)
             {
                 sezionedescrizione += " " + categoriasprodotto.Descrizione;

@@ -717,3 +717,11 @@ Parameter name: key 20/06/2017 13.47.50</Messaggio>
 <Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:17:37</Messaggio>
  <Data>09/09/2017 18:17:37</Data>
 <Messaggio>httplocalhost52646Generato sitemap  09/09/2017 18:17:37Terminato Aggiornamento  09/09/2017 18:17:37</Messaggio>
+ <Data>11/09/2017 12:08:21</Data>
+<Messaggio> Application start : 11/09/2017 12:08:16</Messaggio>
+ <Data>11/09/2017 12:08:21</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/09/2017 12:09:22</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/09/2017 12:09:22</Messaggio>
+ <Data>11/09/2017 12:09:22</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/09/2017 12:09:22Terminato Aggiornamento  11/09/2017 12:09:22</Messaggio>

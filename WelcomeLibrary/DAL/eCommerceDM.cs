@@ -92,7 +92,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["A.Codiceprovincia"].Equals(DBNull.Value))
                             item.Codiceprovincia = reader.GetString(reader.GetOrdinal("A.Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
-                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codicesconto"));
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
                         item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
                         if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
@@ -257,7 +257,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["A.Codiceprovincia"].Equals(DBNull.Value))
                             item.Codiceprovincia = reader.GetString(reader.GetOrdinal("A.Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
-                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codicesconto"));
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
                         item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
                         if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
@@ -459,7 +459,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codiceprovincia"].Equals(DBNull.Value))
                             item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
-                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codicesconto"));
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
                         if (!reader["CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
                         item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
