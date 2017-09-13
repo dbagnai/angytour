@@ -1471,6 +1471,12 @@ public class CommonPage : Page
                 Item.Campo2 = idcombinato;
             }
 
+            //Memorizzo nel carrello il codice sconto se applicato
+            if (Session["codicesconto"] != null)
+            {
+                Item.Codicesconto = Session["codicesconto"].ToString();
+            }
+
             //Aggiungo l'id anagrafica del cliente ( configurato nel profilo utente ) all'articolo nel carrello
             //In modo da avre l'associazione degli ordini con i clienti
             if (idcliente != 0) //SE passato un idcliente lo memorizzo nel rigo di carrello prodotti
@@ -1525,7 +1531,7 @@ public class CommonPage : Page
         CarrelloCollection ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
 
         string idlist = "";
-
+        string codicesconto = "";
         TotaliCarrello totali = new TotaliCarrello();
         totali.Supplementospedizione = supplementospedizione;
 
@@ -1549,6 +1555,7 @@ public class CommonPage : Page
             totali.TotaleOrdine += c.Numero * (c.Prezzo + c.Iva);
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
+            codicesconto = c.Codicesconto;
         }
         if (idlist.Length > 1)
         {
@@ -1562,7 +1569,14 @@ public class CommonPage : Page
         }
 
         //  totali.TotaleSmaltimento = CalcolaTotaliSmaltimento(ColItem);
-        totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali.TotaleOrdine);
+        totali.Codicesconto = codicesconto;
+
+        //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
+        ClientiDM cDM = new ClientiDM();
+        Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicesconto);
+        if (cli != null && cli.Id_cliente != 0) totali.Id_commerciale = cli.Id_cliente;
+
+        totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali.TotaleOrdine, cli);
         totali.TotaleSpedizione = CalcolaSpeseSpedizione(ColItem, codicenazione, codiceprovincia, supplementospedizione, totali.TotaleOrdine, totali.TotaleSconto, supplementocontanti);
 
         totali.Id_cliente = (int)idclienteincarrello;
@@ -1615,15 +1629,35 @@ public class CommonPage : Page
 
         return totale;
     }
-    private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello)
+    private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello, Cliente cli = null) // da modificare per gestione sconti commerciali!!!!
     {
         double valoresconto = 0;
         string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
+        //Prendo la percentuale da quella in configurazione
         if (Session["codicesconto"] != null && Session["codicesconto"].ToString() == ConfigManagement.ReadKey("codicesconto"))
         {
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
             valoresconto = Math.Round(((double)totalecarrello * tmp / 100), 2, MidpointRounding.ToEven);
+        }
+
+        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
+        if (Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
+        {
+            double percscontocommerciale = 0;
+            //Se presente un codice sconto
+            string codicesconto = Session["codicesconto"].ToString();
+            //Promviamo a vedere se il codice sconto ha associato un0anagrafica commerciale
+            //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
+            if (cli != null && cli.Id_cliente != 0)
+            {
+                Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
+                if (dict != null && dict.ContainsKey(codicesconto))
+                {
+                    percscontocommerciale = dict[codicesconto];
+                    valoresconto = Math.Round(((double)totalecarrello * percscontocommerciale / 100), 2, MidpointRounding.ToEven);
+                }
+            }
         }
         return valoresconto;
     }
@@ -1652,7 +1686,7 @@ public class CommonPage : Page
                 //if (totalearticoli <= 3)
                 if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
                 {
-                    spesespedizione += Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni")); 
+                    spesespedizione += Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
                 }
                 break;
         }

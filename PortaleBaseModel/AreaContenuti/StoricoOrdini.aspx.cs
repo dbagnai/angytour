@@ -9,6 +9,7 @@ using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Data.OleDb;
 using System.Text;
+using WelcomeLibrary.UF;
 
 public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 {
@@ -27,33 +28,63 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         get { return Session["id_cliente"] != null ? (string)(Session["id_cliente"]) : ""; }
         set { Session["id_cliente"] = value; }
     }
-   public string Lingua
-   {
-      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : CommonPage.deflanguage; }
-      set { ViewState["Lingua"] = value; }
-   }
+    public string id_commerciale
+    {
+        get { return Session["id_commerciale"] != null ? (string)(Session["id_commerciale"]) : ""; }
+        set { Session["id_commerciale"] = value; }
+    }
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : CommonPage.deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
 
-   protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             AutoCompleteExtender1.ContextKey = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
+            AutoCompleteExtender2.ContextKey = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
             PageGuid = System.Guid.NewGuid().ToString();
             id_cliente = CaricaValoreMaster(Request, Session, "id_cliente", true, "");
+            id_commerciale = CaricaValoreMaster(Request, Session, "id_commerciale", true, "");
             CommonPage CommonPage = new CommonPage();
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
 
-         CaricaOrdini();
+            /////////////////////////////////////////////////////////////////////
+            //Verifichiamo accesso socio e impostiamo la visualizzazione corretta
+            //Spegnendo le cose che non devono essere visibili ai soci!!!
+            /////////////////////////////////////////////////////////////////////
+            usermanager USM = new usermanager();
+            if (USM.ControllaRuolo(User.Identity.Name, "Commerciale"))
+                ImpostaVisualizzazione();
+
+
+            CaricaOrdini();
         }
     }
+    private void ImpostaVisualizzazione()
+    {
+        string idcliente = getidcliente(User.Identity.Name);
+        if (!string.IsNullOrEmpty(idcliente))
+        {
+            id_commerciale = idcliente;
+            txtCommerciale.Text = idcliente;
+            txtCommerciale.Enabled = false;
+        }
+        else
+        {
+            Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+        }
 
+    }
 
     protected string TipopagaDisplay(object item)
     {
         if (item == null) return "";
         TotaliCarrello i = (TotaliCarrello)item;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(references.ResMan("Common", Lingua,"txt" + i.Modalitapagamento).ToString());
+        sb.Append(references.ResMan("Common", Lingua, "txt" + i.Modalitapagamento).ToString());
         return sb.ToString();
     }
 
@@ -79,9 +110,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         sb.Append("\">");
 
         if (!i.Pagato)
-            sb.Append(references.ResMan("Common",Lingua,"txtOrdinenonpagato").ToString());
+            sb.Append(references.ResMan("Common", Lingua, "txtOrdinenonpagato").ToString());
         else
-            sb.Append(references.ResMan("Common",Lingua,"txtOrdinepagato").ToString());
+            sb.Append(references.ResMan("Common", Lingua, "txtOrdinepagato").ToString());
         //    txtOrdineannullato
 
         sb.Append("</span>");
@@ -101,21 +132,19 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         eCommerceDM ecmDM = new eCommerceDM();
         CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
 
-
         foreach (Carrello c in carrellolist)
         {
 
             //Creiamo la visualizzione degli articoli in carrello
             // da fare <li>  contenuto da prendere sotto  </li>
-            sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px\">");
+            sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:10px; border-bottom:1px solid #ddd;\">");
 
             if (!nofoto)
             {
+                //CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString())
                 sb.Append("<a target=\"_blank\"   href=\"" +
-                    CommonPage.ReplaceAbsoluteLinks(
-                    CommonPage.CreaLinkRoutes(null,false,"I",CommonPage.CleanUrl(c.Offerta.DenominazioneI),c.Offerta.Id.ToString(),c.Offerta.CodiceTipologia,c.Offerta.CodiceCategoria)
-                    )
-                       + "\"  class=\"product-thumb pull-right\"  >");
+                    CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, "I", CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""))
+                       + "\"  class=\"product-thumb pull-left\"  >");
                 sb.Append("<img alt=\""
                     +
                     CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true))
@@ -127,39 +156,39 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             }
 
             sb.Append(" <div class=\"product-details\">");
-            sb.Append(" <h3 class=\"product-name\">");
+            sb.Append(" <span class=\"product-name\">");
             sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI));
-            sb.Append(" </h3>");
-            sb.Append(" </div>");
+            sb.Append(" </span>");
 
-            // sb.Append(c.Offerta.Anno);
 
-            //<div class="product-categories muted">
-            //                                              <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) %>
-            //                                          </div>
-            //                                          <div class="product-categories muted">
-            //                                              <%# CommonPage.TestoCaratteristica(2,Eval("Offerta.Caratteristica3").ToString(),Lingua) %>/
-            //                                                  <%# CommonPage.TestoCaratteristica(3,Eval("Offerta.Caratteristica4").ToString(),Lingua) %>&nbsp;
-            //                                                  <%# CommonPage.TestoCaratteristica(4,Eval("Offerta.Caratteristica5").ToString(),Lingua) %>
-            //                                          </div>
-            sb.Append(" <div class=\"product-categories muted\">");
-            sb.Append(TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"));
-            sb.Append(TestoCaratteristicaJson(c.Campo2, c.Offerta.Xmlvalue, "I"));
-            sb.Append(" </div>");
+            #region MODIFIED CARATTERISTICHE CARRELLO
+            if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
+            {
+                sb.Append(" <div class=\"product-categories muted\">");
+                //recupero le caratteristiche del prodotto
+                List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
+                ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
+                if (item != null)
+                    sb.Append(item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                sb.Append(" </div>");
+            }
+            #endregion
 
-            sb.Append(" <div class=\"product-categories muted\">");
-            sb.Append(TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), "I") + "/");
-            sb.Append(TestoCaratteristica(1, c.Offerta.Caratteristica2.ToString(), "I") + "/");
-            sb.Append(TestoCaratteristica(2, c.Offerta.Caratteristica3.ToString(), "I") + "/");
-            sb.Append(TestoCaratteristica(3, c.Offerta.Caratteristica4.ToString(), "I") +" ");
-            sb.Append(TestoCaratteristica(4, c.Offerta.Caratteristica5.ToString(), "I"));
-            sb.Append(" </div>");
-
+            //sb.Append(" <div class=\"product-categories muted\">");
+            //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
+            //sb.Append(" </div>");
+            //sb.Append(" <div class=\"product-categories muted\">");
+            //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
+            //sb.Append(" </div>");
+            //sb.Append(" <div class=\"product-categories muted\">");
+            //sb.Append(CommonPage.TestoCaratteristica(1, c.Offerta.Caratteristica2.ToString(), Lingua));
+            //sb.Append(" </div>");
             //sb.Append(" <div class=\"product-categories muted\">");
             //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
             //sb.Append(" </div>");
-            sb.Append(" <p class=\"product-calc muted\">");
 
+
+            sb.Append(" <p class=\"product-calc muted\">");
             sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", c.Prezzo) + " €");
             sb.Append(" </p>");
 
@@ -173,7 +202,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     {
         string ret = "";
         WelcomeLibrary.DOM.TipologiaOfferte sezione =
-              WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate(WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" && tmp.Codice == codicetipologia); });
+              WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
             ret += " nella sezione:  \"" + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, "I")) + "\"";
@@ -184,7 +213,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     }
 
 
-    protected TotaliCarrelloCollection CaricaDatiOrdini(string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "")
+    protected TotaliCarrelloCollection CaricaDatiOrdini(string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "", string idcommerciale = "")
     {
         eCommerceDM eDM = new eCommerceDM();
         TotaliCarrelloCollection ordini = new TotaliCarrelloCollection();
@@ -193,6 +222,11 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         {
             OleDbParameter parid = new OleDbParameter("@Id_cliente", id_cliente);
             parcoll.Add(parid);
+        }
+        if (!string.IsNullOrWhiteSpace(idcommerciale))
+        {
+            OleDbParameter parid1 = new OleDbParameter("@Id_commerciale", idcommerciale);
+            parcoll.Add(parid1);
         }
         if (!string.IsNullOrEmpty(codiceordine))
         {
@@ -225,7 +259,11 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 
     protected void CaricaOrdini()
     {
-        TotaliCarrelloCollection ordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text);
+        string idforced = id_commerciale;
+        if (string.IsNullOrEmpty(idforced))
+            idforced = txtCommerciale.Text;
+
+        TotaliCarrelloCollection ordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
 #if true
         //Selezionamo i risultati in base al numero di pagina e alla sua dimensione per la paginazione
         //Utilizzando la classe di paginazione
@@ -313,7 +351,11 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         sb.Append("</tr>");
         sb.Append("</thead>");
 
-        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text);
+        string idforced = id_commerciale;
+        if (string.IsNullOrEmpty(idforced))
+            idforced = txtCommerciale.Text;
+
+        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
         if (listaordini != null)
             foreach (TotaliCarrello t in listaordini)
             {
@@ -324,7 +366,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
                 sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Mailcliente + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Denominazionecliente + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\">" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                       t.TotaleSmaltimento +   t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €" + "</td>");
+                       t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €" + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\" class=\"order-status\">" + TipopagaDisplay(t) + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\" class=\"order-status\">" + StatusCheck(t) + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\">");

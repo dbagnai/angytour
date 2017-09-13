@@ -168,7 +168,7 @@
                                             MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
                                             CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
                                             CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
-                                        <script type="text/javascript" language="javascript">
+                                        <script type="text/javascript" >
                                             function GetCodeR(source, eventArgs) {
                                                 $get("<%= txtCLIENTE.ClientID %>").value = eventArgs.get_value();
                                             }
@@ -178,6 +178,25 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </li>
+                             <li runat="server" id="liFiltroCommerciali">
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
+                                        <Ajax:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" TargetControlID="txtCommerciale"
+                                            OnClientItemSelected="GetCodeC" ServiceMethod="GetCompletionList" ServicePath="WS/WSListaClienti.asmx"
+                                            MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
+                                            CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
+                                            CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
+                                        <script type="text/javascript" >
+                                            function GetCodeC(source, eventArgs) {
+                                                $get("<%= txtCommerciale.ClientID %>").value = eventArgs.get_value();
+                                            }
+                                        </script>
+                                        Filtro commerciale (ricerca per nome o email):<br />
+                                        <asp:TextBox MaxLength="10" ID="txtCommerciale" Width="100%" runat="server" /><br />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </li>
+
                             <li runat="server" id="liFiltroordini">Codice Ordine:<br />
                                 <asp:TextBox ID="txtCodiceordine" Width="100%" runat="server" /><br />
 
@@ -326,6 +345,14 @@
                                                                 <td>
                                                                     <%# Eval("Indirizzospedizione").ToString() %></td>
                                                             </tr>
+                                                             <tr>
+                                                                <th>IdCommerciale:</th>
+                                                                <td><%# Eval("Id_commerciale").ToString() %></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>CodSconto:</th>
+                                                                <td><%# Eval("Codicesconto").ToString() %></td>
+                                                            </tr>
                                                             <tr>
                                                                 <th>Note:</th>
                                                                 <td>
@@ -339,7 +366,7 @@
                                                 <div class="form-cart btn-group pull-right">
                                                     <a class="btn btn-default btn-small dropdown-toggle triggerdata" data-toggle="dropdown" id="btnDetails" runat="server">Prodotti<span class="caret"></span>
                                                     </a>
-                                                    <ul class="dropdown-menu dropdown-cart" style="width: 300px">
+                                                    <ul class="dropdown-menu dropdown-cart" style="width: 300px;list-style:none">
                                                         <li>
                                                             <ul class="products-list-mini" id="ContainerCarrelloDetails" runat="server" title='<%# Eval("CodiceOrdine").ToString() %>'>
                                                             </ul>

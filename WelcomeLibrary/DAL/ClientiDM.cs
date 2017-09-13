@@ -98,8 +98,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
                         if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
@@ -107,6 +108,9 @@ namespace WelcomeLibrary.DAL
                         item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));
                         if (!reader["Pivacf"].Equals(DBNull.Value))
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
+
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
 
                         break;
@@ -122,7 +126,159 @@ namespace WelcomeLibrary.DAL
             return item;
         }
 
+        public Cliente CaricaClientePerCodicesconto(string connection, string codicesconto, string idtipocliente = "")
+        {
+            Cliente item = new Cliente();
+            if (connection == null || connection == "") return item;
+            if (codicesconto == null || codicesconto == "") return item;
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
 
+            string query = "";
+            query = "SELECT *  FROM TBL_CLIENTI ";
+
+
+            if (!string.IsNullOrWhiteSpace(codicesconto))
+            {
+                //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
+                OleDbParameter pcodsconto = new OleDbParameter("@Codicisconto", "%" + codicesconto + "%"); //OleDbType.VarChar
+                parColl.Add(pcodsconto);
+                if (!query.ToLower().Contains("where"))
+                    query += " WHERE Codicisconto like @Codicisconto ";
+                else
+                    query += " AND Codicisconto like @Codicisconto  ";
+                OleDbParameter p1 = new OleDbParameter("@Codicesconto", codicesconto); //OleDbType.VarChar
+                parColl.Add(p1);
+            }
+
+
+            if (idtipocliente != "")
+            {
+                OleDbParameter p2 = new OleDbParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
+                parColl.Add(p2);
+                if (!query.ToLower().Contains("where"))
+                    query += " WHERE  id_tipi_clienti=@id_tipi_clienti";
+                else
+                    query += " AND  id_tipi_clienti=@id_tipi_clienti  ";
+            }
+
+
+            try
+            {
+
+                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return item; };
+                    if (reader.HasRows == false)
+                        return item;
+
+                    while (reader.Read())
+                    {
+                        item = new Cliente();
+
+                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+
+                        if (!reader["Cap"].Equals(DBNull.Value))
+                            item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
+                        if (!reader["Cellulare"].Equals(DBNull.Value))
+                            item.Cellulare = reader.GetString(reader.GetOrdinal("Cellulare"));
+                        if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                            item.CodiceCOMUNE = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                        if (!reader["CodiceNAZIONE"].Equals(DBNull.Value))
+                            item.CodiceNAZIONE = reader.GetString(reader.GetOrdinal("CodiceNAZIONE"));
+                        if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
+                            item.CodicePROVINCIA = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                            item.CodiceREGIONE = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                        if (!reader["Cognome"].Equals(DBNull.Value))
+                            item.Cognome = reader.GetString(reader.GetOrdinal("Cognome"));
+
+                        if (!reader["Sesso"].Equals(DBNull.Value))
+                            item.Sesso = reader.GetString(reader.GetOrdinal("Sesso"));
+
+                        item.Consenso1 = reader.GetBoolean(reader.GetOrdinal("Consenso1"));
+                        item.Consenso2 = reader.GetBoolean(reader.GetOrdinal("Consenso2"));
+                        item.Consenso3 = reader.GetBoolean(reader.GetOrdinal("Consenso3"));
+                        item.Consenso4 = reader.GetBoolean(reader.GetOrdinal("Consenso4"));
+                        item.ConsensoPrivacy = reader.GetBoolean(reader.GetOrdinal("ConsensoPrivacy"));
+                        if (!reader["DataInvioValidazione"].Equals(DBNull.Value))
+                            item.DataInvioValidazione = reader.GetDateTime(reader.GetOrdinal("DataInvioValidazione"));
+                        if (!reader["DataNascita"].Equals(DBNull.Value))
+                            item.DataNascita = reader.GetDateTime(reader.GetOrdinal("DataNascita"));
+                        if (!reader["DataRicezioneValidazione"].Equals(DBNull.Value))
+                            item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
+                        if (!reader["Email"].Equals(DBNull.Value))
+                            item.Email = reader.GetString(reader.GetOrdinal("Email"));
+                        if (!reader["Indirizzo"].Equals(DBNull.Value))
+                            item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));
+                        if (!reader["IPclient"].Equals(DBNull.Value))
+                            item.IPclient = reader.GetString(reader.GetOrdinal("IPclient"));
+                        if (!reader["Lingua"].Equals(DBNull.Value))
+                            item.Lingua = reader.GetString(reader.GetOrdinal("Lingua"));
+                        if (!reader["Nome"].Equals(DBNull.Value))
+                            item.Nome = reader.GetString(reader.GetOrdinal("Nome"));
+                        if (!reader["Professione"].Equals(DBNull.Value))
+                            item.Professione = reader.GetString(reader.GetOrdinal("Professione"));
+                        if (!reader["Spare1"].Equals(DBNull.Value))
+                            item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
+                        if (!reader["Spare2"].Equals(DBNull.Value))
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
+                        if (!reader["Telefono"].Equals(DBNull.Value))
+                            item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
+                        if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
+                            item.TestoFormConsensi = reader.GetString(reader.GetOrdinal("TestoFormConsensi"));
+                        item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));
+                        if (!reader["Pivacf"].Equals(DBNull.Value))
+                            item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
+
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
+                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+
+                        break;
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento Cliente :" + error.Message, error);
+            }
+
+            return item;
+        }
+        /// <summary>
+        /// Splitta in un dictionari le coppie codicesconto;percentualesconto;......... etc
+        /// </summary>
+        /// <param name="codici"></param>
+        /// <returns></returns>
+        public static Dictionary<string, double> SplitCodiciSconto(string codici)
+        {
+            Dictionary<string, double> dict = new Dictionary<string, double>();
+            string[] listaarray = codici.Split(';');
+            string key = "";
+            bool even = false;
+            foreach (string codice in listaarray)
+            {
+                if (!even)
+                {
+                    key = codice;
+                    if (!dict.ContainsKey(key) && !string.IsNullOrEmpty(key)) dict.Add(key, 0);
+                }
+                else
+                {
+                    double convperc = 0;
+                    double.TryParse(codice, out convperc);
+                    if (dict.ContainsKey(key)) dict[key] = convperc;
+                    key = "";
+                }
+                even = !even;
+            }
+            return dict;
+        }
 
         /// <summary>
         /// Carica un cliente in base all'identificativo dello stesso nel db
@@ -202,8 +358,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
                         if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
@@ -211,6 +368,8 @@ namespace WelcomeLibrary.DAL
                         item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));
                         if (!reader["Pivacf"].Equals(DBNull.Value))
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
 
                         break;
@@ -271,6 +430,7 @@ namespace WelcomeLibrary.DAL
             return idret;
         }
 
+#if false
         /// <summary>
         /// Carica i clienti validati che sono associati alla lista id delle cards passate
         /// </summary>
@@ -308,8 +468,6 @@ namespace WelcomeLibrary.DAL
 
                     while (reader.Read())
                     {
-                        item = new Cliente();
-
                         item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
                         item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
@@ -357,14 +515,20 @@ namespace WelcomeLibrary.DAL
                             item.Professione = reader.GetString(reader.GetOrdinal("Professione"));
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
-                        if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                         if (!reader["Spare2"].Equals(DBNull.Value))
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
                             item.TestoFormConsensi = reader.GetString(reader.GetOrdinal("TestoFormConsensi"));
                         item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));
+                        if (!reader["Pivacf"].Equals(DBNull.Value))
+                            item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
+                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
 
                         list.Add(item);
                     }
@@ -379,6 +543,7 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
+#endif
 
 #if false
         /// <summary>
@@ -487,8 +652,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
                         if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
@@ -592,8 +758,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));
                         if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
@@ -601,7 +768,8 @@ namespace WelcomeLibrary.DAL
                         item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));
                         if (!reader["Pivacf"].Equals(DBNull.Value))
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
-
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
 
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
                             item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
@@ -625,11 +793,19 @@ namespace WelcomeLibrary.DAL
         {
             ClienteCollection list = new ClienteCollection();
             if (constr == "") return list;
-            string query = "SELECT ID_CLIENTE,Cognome,Nome,Email FROM [TBL_CLIENTI] WHERE Cognome LIKE @testoricerca or Nome LIKE @testoricerca or Email like @testoricerca";
+            string query = "SELECT ID_CLIENTE,Cognome,Nome,Email FROM [TBL_CLIENTI] WHERE  Cognome LIKE @testoricerca or Nome LIKE @testoricerca or Email like @testoricerca";
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             // parametro
             OleDbParameter p1 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%"); //OleDbType.VarChar
             parColl.Add(p1);
+
+            int tmp = 0;
+            if (int.TryParse(testoricerca, out tmp))
+            {
+                OleDbParameter p2 = new OleDbParameter("@idcliente", tmp); //OleDbType.VarChar
+                parColl.Add(p2);
+                query += " or ID_CLIENTE = @idcliente ";
+            }
             OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, constr);
             Cliente item;
             using (reader)
@@ -706,6 +882,8 @@ namespace WelcomeLibrary.DAL
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("piva"));
                     sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("codici sconto"));
+                    sb.Append(";");
 
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("consenso email"));
 
@@ -762,6 +940,8 @@ namespace WelcomeLibrary.DAL
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Indirizzo));
                         sb.Append(";");
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Pivacf));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Codicisconto));
                         sb.Append(";");
 
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Validato.ToString()));
@@ -821,6 +1001,14 @@ namespace WelcomeLibrary.DAL
                         OleDbParameter p3 = new OleDbParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
                         parColl.Add(p3);
                     }
+                    if (!string.IsNullOrWhiteSpace(_paramCliente.Codicisconto))
+                    {
+                        //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
+                        OleDbParameter pcodsconto = new OleDbParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
+                        parColl.Add(pcodsconto);
+                        query += " and Codicisconto like @Codicisconto ";
+                    }
+
                     if (!string.IsNullOrWhiteSpace(_paramCliente.id_tipi_clienti))
                     {
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
@@ -986,8 +1174,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("Spare1"));//
                         if (!reader["Spare2"].Equals(DBNull.Value))
-                            if (!reader["Spare2"].Equals(DBNull.Value))
-                                item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));//
+                            item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
+                        //if (!reader["Spare3"].Equals(DBNull.Value))
+                        //    item.Spare3 = reader.GetString(reader.GetOrdinal("Spare3"));
                         if (!reader["Telefono"].Equals(DBNull.Value))
                             item.Telefono = reader.GetString(reader.GetOrdinal("Telefono"));//
                         if (!reader["TestoFormConsensi"].Equals(DBNull.Value))
@@ -995,6 +1184,9 @@ namespace WelcomeLibrary.DAL
                         item.Validato = reader.GetBoolean(reader.GetOrdinal("Validato"));//
                         if (!reader["Pivacf"].Equals(DBNull.Value))
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));//
+                        if (!reader["Codicisconto"].Equals(DBNull.Value))
+                            item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
+
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
                             item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
 
@@ -1182,13 +1374,15 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p24);
             OleDbParameter p28 = new OleDbParameter("@Pivacf", item.Pivacf);
             parColl.Add(p28);
-
             OleDbParameter pses = new OleDbParameter("@Sesso", item.Sesso);
             parColl.Add(pses);
-
             if (string.IsNullOrEmpty(item.id_tipi_clienti)) item.id_tipi_clienti = "0";
             OleDbParameter ptipi = new OleDbParameter("@id_tipi_clienti", item.id_tipi_clienti); //OleDbType.VarChar
             parColl.Add(ptipi);
+
+            OleDbParameter pcsco = new OleDbParameter("@Codicisconto", item.Codicisconto);
+            parColl.Add(pcsco);
+
 
             string query = "";
             if (item.Id_cliente != 0)
@@ -1197,7 +1391,7 @@ namespace WelcomeLibrary.DAL
                 query = "UPDATE [TBL_CLIENTI] SET Id_card=@Id_card,Nome=@Nome,Cognome=@Cognome,CodiceNAZIONE=@CodiceNAZIONE,CodiceREGIONE=@CodiceREGIONE,CodicePROVINCIA=@CodicePROVINCIA,CodiceCOMUNE=@CodiceCOMUNE";
                 query += ",Cap=@Cap,Indirizzo=@Indirizzo,Email=@Email,Telefono=@Telefono,Cellulare=@Cellulare,Professione=@Professione,IPclient=@IPclient,Validato=@Validato,TestoFormConsensi=@TestoFormConsensi";
                 query += ",DataNascita=@DataNascita,DataInvioValidazione=@DataInvioValidazione,DataRicezioneValidazione=@DataRicezioneValidazione";
-                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti";
+                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto";
                 query += " WHERE [Id_cliente] = " + item.Id_cliente;
             }
             else
@@ -1205,11 +1399,11 @@ namespace WelcomeLibrary.DAL
                 //Insert
                 query = "INSERT INTO TBL_CLIENTI (Id_card,Nome,Cognome,CodiceNAZIONE,CodiceREGIONE,CodicePROVINCIA,CodiceCOMUNE";
                 query += ",Cap,Indirizzo,Email,Telefono,Cellulare,Professione,IPclient,Validato,TestoFormConsensi,DataNascita,DataInvioValidazione,DataRicezioneValidazione";
-                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti)";
+                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto)";
                 query += " values ( ";
                 query += "@Id_card,@Nome,@Cognome,@CodiceNAZIONE,@CodiceREGIONE,@CodicePROVINCIA,@CodiceCOMUNE";
                 query += ",@Cap,@Indirizzo,@Email,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione";
-                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti )";
+                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto )";
             }
 
             try

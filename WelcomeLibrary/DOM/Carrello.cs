@@ -123,11 +123,26 @@ namespace WelcomeLibrary.DOM
             set { _supplementospedizione = value; }
         }
 
+        private Int32 _id_commerciale;
+        public Int32 Id_commerciale
+        {
+            get { return _id_commerciale; }
+            set { _id_commerciale = value; }
+        }
+        private string _Codicesconto;
+        public string Codicesconto
+        {
+            get { return _Codicesconto; }
+            set { _Codicesconto = value; }
+        }
+
         public TotaliCarrello()
         {
             Id = 0;
             Id_cliente = 0;
+            Id_commerciale = 0;
             CodiceOrdine = "";
+            Codicesconto = "";
             TotaleOrdine = 0;
             TotaleSconto = 0;
             TotaleSpedizione = 0;
@@ -148,6 +163,7 @@ namespace WelcomeLibrary.DOM
         {
             Id = tmp.Id;
             Id_cliente = tmp.Id_cliente;
+            Id_commerciale = tmp.Id_commerciale;
             CodiceOrdine = tmp.CodiceOrdine;
             TotaleOrdine = tmp.TotaleOrdine;
             TotaleSconto = tmp.TotaleSconto;

@@ -289,7 +289,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["B.ID"].Equals(DBNull.Value))
                         {
                             offerta.Id = reader.GetInt32(reader.GetOrdinal("B.ID"));
-                              offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                            offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                             offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
@@ -322,6 +322,9 @@ namespace WelcomeLibrary.DAL
                                 offerta.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
                             if (!reader["Caratteristica6"].Equals(DBNull.Value))
                                 offerta.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+
+                            if (!reader["Xmlvalue"].Equals(DBNull.Value))
+                                offerta.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
 
                             if (!reader["DATITECNICII"].Equals(DBNull.Value))
                                 offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
@@ -615,6 +618,8 @@ namespace WelcomeLibrary.DAL
                 if (itemdb != null && itemdb.id_prodotto != 0)
                 {
                     itemdb.ID_cliente = item.ID_cliente;//Permetto l'aggiornamento dell'id del cliente
+                    itemdb.Codicesconto = item.Codicesconto;//Permetto l'aggiornamento del codice sconto
+
                     if (aggiungiavalori == true)
                         //aumento la quantità del valore passato a quella presente nel db 
                         itemdb.Numero += item.Numero;
@@ -939,20 +944,28 @@ namespace WelcomeLibrary.DAL
                 //if (caricacarrelloitems)
                 //    query += " left join TBL_CARRELLO B on Codiceordine=B.Codiceordine ";
 
-                if (parColl.Exists(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; }))
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; }))
                 {
-                    OleDbParameter pidcliente = parColl.Find(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; });
+                    OleDbParameter pidcliente = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; });
                     _parUsed.Add(pidcliente);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Id_cliente = @Id_cliente ";
                     else
                         query += " AND Id_cliente = @Id_cliente  ";
                 }
-
-
-                if (parColl.Exists(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; }))
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; }))
                 {
-                    OleDbParameter pmailcliente = parColl.Find(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; });
+                    OleDbParameter pidcomm = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; });
+                    _parUsed.Add(pidcomm);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Id_commerciale = @Id_commerciale ";
+                    else
+                        query += " AND Id_commerciale = @Id_commerciale  ";
+                }
+
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; }))
+                {
+                    OleDbParameter pmailcliente = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; });
                     _parUsed.Add(pmailcliente);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Mailcliente like @Mailcliente ";
@@ -960,9 +973,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND Mailcliente like @Mailcliente  ";
                 }
 
-                if (parColl.Exists(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
                 {
-                    OleDbParameter pCodiceordine = parColl.Find(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                    OleDbParameter pCodiceordine = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
                     _parUsed.Add(pCodiceordine);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Codiceordine like @Codiceordine ";
@@ -971,18 +984,18 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; }))
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; }))
                 {
-                    OleDbParameter pDataMin = parColl.Find(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; });
+                    OleDbParameter pDataMin = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; });
                     _parUsed.Add(pDataMin);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE DataOrdine >= @DataMin ";
                     else
                         query += " AND DataOrdine >= @DataMin ";
                 }
-                if (parColl.Exists(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; }))
+                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; }))
                 {
-                    OleDbParameter pDataMax = parColl.Find(delegate(OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; });
+                    OleDbParameter pDataMax = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; });
                     _parUsed.Add(pDataMax);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE DataOrdine <= @DataMax ";
@@ -1014,6 +1027,11 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
                             item.Id_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+
+                        if (!reader["Id_commerciale"].Equals(DBNull.Value))
+                            item.Id_commerciale = reader.GetInt32(reader.GetOrdinal("Id_commerciale"));
+                        if (!reader["Codicesconto"].Equals(DBNull.Value))
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
 
                         if (!reader["Mailcliente"].Equals(DBNull.Value))
@@ -1056,7 +1074,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Dataordine"].Equals(DBNull.Value))
                             item.Dataordine = reader.GetDateTime(reader.GetOrdinal("Dataordine"));
 
-                        
+
                         list.Add(item); //Elemento unico in base al codiceordine
                     }
                 }
@@ -1120,6 +1138,12 @@ namespace WelcomeLibrary.DAL
                             item.Id_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
 
 
+                        if (!reader["Id_commerciale"].Equals(DBNull.Value))
+                            item.Id_commerciale = reader.GetInt32(reader.GetOrdinal("Id_commerciale"));
+                        if (!reader["Codicesconto"].Equals(DBNull.Value))
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
+
+
                         if (!reader["Mailcliente"].Equals(DBNull.Value))
                             item.Mailcliente = reader.GetString(reader.GetOrdinal("Mailcliente"));
 
@@ -1170,7 +1194,7 @@ namespace WelcomeLibrary.DAL
 
             return item;
         }
-       
+
         /// <summary>
         /// Inserisco un elemento nella tabella degli ordini 
         /// </summary>
@@ -1222,7 +1246,14 @@ namespace WelcomeLibrary.DAL
             OleDbParameter ppsupplementospedizione = new OleDbParameter("@Supplementospedizione", item.Supplementospedizione);// 
             parColl.Add(ppsupplementospedizione);
 
-            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione)";
+
+            OleDbParameter pidcommerciale = new OleDbParameter("@Id_commerciale", item.Id_commerciale);
+            parColl.Add(pidcommerciale);
+            OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);
+            parColl.Add(pcodicesconto);
+
+
+            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto)";
             try
             {
                 int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -1253,7 +1284,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p2);
             OleDbParameter p3;
             if (item.Dataordine != null)
-                p3 = new OleDbParameter("@Dataordine", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.Dataordine.Value));
+                p3 = new OleDbParameter("@Dataordine", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Dataordine.Value));
             else
                 p3 = new OleDbParameter("@Dataordine", System.DBNull.Value);
             parColl.Add(p3);
@@ -1287,10 +1318,15 @@ namespace WelcomeLibrary.DAL
             OleDbParameter ppsupplementospedizione = new OleDbParameter("@Supplementospedizione", item.Supplementospedizione);// 
             parColl.Add(ppsupplementospedizione);
 
+            OleDbParameter pidcommerciale = new OleDbParameter("@Id_commerciale", item.Id_commerciale);
+            parColl.Add(pidcommerciale);
+            OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);
+            parColl.Add(pcodicesconto);
+
             OleDbParameter pid = new OleDbParameter("@Id", item.Id);//OleDbType.VarChar
             parColl.Add(pid);
 
-            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione WHERE ([ID]=@Id)";
+            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@SupplementospCodicescontoedizione WHERE ([ID]=@Id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

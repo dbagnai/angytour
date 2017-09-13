@@ -249,7 +249,7 @@
 </head>
 <body style="width: 1000px; margin: 0 auto; border: 2px Solid #ccc; background-color: #ccc">
 
-    <div style="background-color: White; padding: 20px; min-height: 1800px;position:relative;">
+    <div style="background-color: White; padding: 20px; min-height: 1800px; position: relative;">
         <form id="form1" runat="server">
             <Ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
                 <Scripts>
@@ -378,22 +378,21 @@
                         <tr>
                             <td style="width: 40px">Id
                             </td>
-                            <td>Cognome o Rag.Soc.</td>
+                            <td style="width: 390px">Cognome o Rag.Soc.</td>
                             <td style="width: 100px">Nome</td>
                             <td style="width: 160px">Email</td>
                             <td style="width: 70px">Lingua</td>
-                            <td style="width: 50px">Tipo cliente</td>
+                            <td style="width: 150px">Tipo cliente</td>
                             <td style="width: 15px">Valido</td>
                         </tr>
                     </table>
                     <asp:Repeater ID="rptClienti" runat="server" EnableViewState="true" OnItemDataBound="rptClienti_OnItemDataBound">
                         <ItemTemplate>
-                            <asp:Panel ID="PopupMenu" CssClass="popupMenu" runat="server" Width="290px" Height="440px"
+                            <asp:Panel ID="PopupMenu" CssClass="popupMenu" runat="server" Width="290px" 
                                 BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
-                                <div style="width: 290px; float: left">
+                                <div style="width: 290px; float: left;padding:5px">
                                     <div style="text-align: center; width: 97%; background-color: Black; color: White;">
                                         DATI ANAGRAFICI CLIENTE
-                                   
                                     </div>
                                     <table style="width: 280px; table-layout: fixed">
                                         <tr>
@@ -586,6 +585,18 @@
                                         <tr>
                                             <td style="width: 80px; background-color: Black; color: White;">
                                                 <div style="overflow: hidden; width: 80px">
+                                                    Codici Sconto<br /> (codice;percentuale;)
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div style="overflow: hidden; width: 190px">
+                                                    <input id="txtCS" maxlength="1000" class="txtInputPopup" runat="server" value='<%# Eval("Codicisconto") %>' />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 80px; background-color: Black; color: White;">
+                                                <div style="overflow: hidden; width: 80px">
                                                     Sesso
                                                
                                                 </div>
@@ -616,11 +627,12 @@
                                             </td>
                                         </tr>
                                     </table>
+
+                                    <asp:Button ID="btnAggiorna" runat="server" UseSubmitBehavior="false" OnClick="Aggiorna_click"
+                                        CommandArgument='<%# Eval("ID_CLIENTE") %>' Text="Aggiorna" />
+                                    <asp:Button ID="btCancella" runat="server" UseSubmitBehavior="false" Text="Cancella"
+                                        OnClientClick="javascript:ConfermaCancella(this)" OnClick="Cancella_click" />
                                 </div>
-                                <asp:Button ID="btnAggiorna" runat="server" UseSubmitBehavior="false" OnClick="Aggiorna_click"
-                                    CommandArgument='<%# Eval("ID_CLIENTE") %>' Text="Aggiorna" />
-                                <asp:Button ID="btCancella" runat="server" UseSubmitBehavior="false" Text="Cancella"
-                                    OnClientClick="javascript:ConfermaCancella(this)" OnClick="Cancella_click" />
                             </asp:Panel>
                             <Ajax:PopupControlExtender ID="hoe2" TargetControlID="pnlRiga" PopupControlID="PopupMenu"
                                 runat="server" Position="Bottom" OffsetX="50" OffsetY="0">
@@ -665,8 +677,8 @@
                                                 Text='<%# Eval("Lingua") %>' />--%>
                                             </div>
                                         </td>
-                                        <td style="width: 50px">
-                                            <div style="overflow: hidden; width: 50px">
+                                        <td style="width: 150px">
+                                            <div style="overflow: hidden; width: 150px">
                                                 <asp:DropDownList runat="server" ID="ddlTipiClienti" AppendDataBoundItems="true" Width="98%" SelectedValue='<%# Eval("id_tipi_clienti") %>'
                                                     OnInit="ddlTipiClienti_OnInit" SkinID="Insert_ddl" />
                                             </div>
@@ -695,7 +707,7 @@
                 HoverCssClass="popupHover" PopupPosition="Bottom" OffsetX="50" OffsetY="0" PopDelay="100" />--%>
                     <Ajax:PopupControlExtender ID="hoe3" TargetControlID="btnNuovo" PopupControlID="PopupMenu1"
                         runat="server" Position="Bottom" OffsetX="50" OffsetY="0" />
-                    <asp:Panel ID="PopupMenu1" CssClass="popupMenu" runat="server" Width="850px" 
+                    <asp:Panel ID="PopupMenu1" CssClass="popupMenu" runat="server" Width="850px"
                         BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
                         <div style="width: 850px">
                             <table style="width: 800px; background-color: Black; color: White; font-size: 10pt">
@@ -988,10 +1000,21 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="width: 80px; background-color: Black; color: White;">
+                                        <div style="overflow: hidden; width: 80px">
+                                            Codici Sconto ( codice;percentuale;... )
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="overflow: hidden; width: 190px">
+                                            <input id="txtCS" maxlength="1000" class="txtInputPopup" runat="server" value='' />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td style="width: 200px; background-color: Black; color: White;">
                                         <div style="overflow: hidden; width: 100%">
                                             Sesso
-                                       
                                         </div>
                                     </td>
                                     <td>
@@ -1030,9 +1053,7 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
             <br />
-            <div style="height: auto; border: 1px solid black; padding: 10px;position:relative">
-
-
+            <div style="height: auto; border: 1px solid black; padding: 10px; position: relative">
                 &nbsp;<br />
                 <asp:Label Text="<h1>Importazione liste clienti TIPO 1</h1><br/>(FORMATO ELENCO : nome1,email1,nome2,email2 .... usando come separatore la , o il ;)"
                     runat="server" />

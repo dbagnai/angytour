@@ -45,7 +45,7 @@ namespace WelcomeLibrary.DOM
         {
             get { return _Cognome; }
             set { _Cognome = value; }
-        }  
+        }
         private string _Sesso;
         public string Sesso
         {
@@ -215,6 +215,12 @@ namespace WelcomeLibrary.DOM
             get { return _Pivacf; }
             set { _Pivacf = value; }
         }
+        private string _Codicisconto;
+        public string Codicisconto
+        {
+            get { return _Codicisconto; }
+            set { _Codicisconto = value; }
+        }
         public Cliente()
         {
             this.card = new Card();
@@ -226,6 +232,7 @@ namespace WelcomeLibrary.DOM
             this.CodicePROVINCIA = string.Empty;
             this.CodiceREGIONE = string.Empty;
             this.Cognome = string.Empty;
+            this.Email = string.Empty;
             this.Consenso1 = false;
             this.Consenso2 = false;
             this.Consenso3 = false;
@@ -237,9 +244,9 @@ namespace WelcomeLibrary.DOM
             this.Id_card = 0;
             this.Id_cliente = 0;
             this.Indirizzo = string.Empty;
-            this.IPclient= string.Empty;
-            this.Lingua=  "I";
-            this.Nome=  string.Empty;
+            this.IPclient = string.Empty;
+            this.Lingua = "I";
+            this.Nome = string.Empty;
             this.Professione = string.Empty;
             this.Spare1 = string.Empty;
             this.Spare2 = string.Empty;
@@ -250,15 +257,17 @@ namespace WelcomeLibrary.DOM
             this.Validato = false;
             this.Pivacf = string.Empty;
             this.id_tipi_clienti = "0";
-           
+            this.Codicisconto = string.Empty;
+
         }
         public Cliente(Cliente tmp)
         {
             this.card = new Card(tmp.card);
             this.Cap = tmp.Cap;
+            this.Email = tmp.Email;
             this.Cellulare = tmp.Cellulare;
             this.CodiceNAZIONE = tmp.CodiceNAZIONE;
-            this.CodiceCOMUNE =tmp.CodiceCOMUNE;
+            this.CodiceCOMUNE = tmp.CodiceCOMUNE;
             this.CodicePROVINCIA = tmp.CodicePROVINCIA;
             this.CodiceREGIONE = tmp.CodiceREGIONE;
             this.Sesso = tmp.Sesso;
@@ -286,6 +295,7 @@ namespace WelcomeLibrary.DOM
             this.Validato = tmp.Validato;
             this.CodiceCard = tmp.CodiceCard;
             this.Pivacf = tmp.Pivacf;
+            this.Codicisconto = tmp.Codicisconto;
             this.id_tipi_clienti = tmp.id_tipi_clienti;
 
         }

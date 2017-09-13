@@ -5,6 +5,7 @@ namespace WelcomeLibrary.UF
 {
     public class CachingModule : IHttpModule
     {
+        bool enablecompression = true;
         /// <summary>
         /// Il modulo dovrà essere configurato nel file Web.config del
         /// Web e registrato con IIS prima di poter essere utilizzato. Per ulteriori informazioni
@@ -22,7 +23,8 @@ namespace WelcomeLibrary.UF
             // Segue un esempio di come gestire l'evento LogRequest e fornire la relativa 
             // implementazione della registrazione personalizzata
             context.PreSendRequestHeaders += this.SetDefaultCacheHeader;
-            context.PostRequestHandlerExecute += this.SetCompressionHnd;
+            if (enablecompression)
+                context.PostRequestHandlerExecute += this.SetCompressionHnd;
         }
 
         #endregion
@@ -30,12 +32,16 @@ namespace WelcomeLibrary.UF
         {
             HttpContext context = HttpContext.Current;
             String encoding = context.Request.Headers.Get("Accept-Encoding");
+            String path = HttpContext.Current.Request.Url.AbsolutePath;
 
             if (encoding == null)
                 return;
-
-            encoding.ToLower();
-
+            encoding = encoding.ToLower();
+            if (path != null)
+            {
+                path = path.ToLower();
+                if (path.Contains(".axd")) return;
+            }
             if (encoding.Contains("gzip"))
             {
                 context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);

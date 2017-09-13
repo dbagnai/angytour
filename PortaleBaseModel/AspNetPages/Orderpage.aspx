@@ -10,7 +10,7 @@
         makeRevLower = true;
     </script>
     <h4 style="line-height: 2em">
-        <asp:Label Style="font-size: 2em; color: darkgreen" Text="" ID="output" runat="server" /></h4>
+        <asp:Label Style="font-size: 2em" Text="" ID="output" runat="server" /></h4>
     <asp:ValidationSummary runat="server" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") %>' />
     <br />
     <asp:Panel runat="server" ID="pnlFormOrdine">

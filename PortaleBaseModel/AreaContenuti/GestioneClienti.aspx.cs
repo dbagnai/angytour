@@ -270,6 +270,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Spare1 = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtWE"))).Value;
         cli.Pivacf = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtPI"))).Value;
         cli.Professione = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtPF"))).Value;
+        cli.Codicisconto = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCS"))).Value;
 
         string datanascita = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtDN"))).Value;
         DateTime _dt = DateTime.MinValue;
@@ -416,6 +417,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Spare1 = txtWE.Value.Trim();
         cli.Pivacf = txtPI.Value.Trim();
         cli.Professione = txtPF.Value.Trim();
+        cli.Codicisconto = txtCS.Value.Trim();
 
         string datanascita = txtDN.Value.Trim();
         DateTime _dt = DateTime.MinValue;
@@ -495,6 +497,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         txtWE.Value = "";
         txtPI.Value = "";
         txtPF.Value = "";
+        txtCS.Value = "";
         txtDN.Value = "";
         txtC1.Value = "";
 

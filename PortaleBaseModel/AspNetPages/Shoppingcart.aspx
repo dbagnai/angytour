@@ -35,7 +35,7 @@
                                 <tr>
                                     <td class="cart-remove">
                                         <asp:LinkButton runat="server" ID="btnDelete"
-                                            OnClick="btnDelete" CommandArgument='<%# Eval("id_prodotto") %>'>
+                                            OnClick="btnDelete" CommandArgument='<%# Eval("id") %>'>
                                                   <i class="fa fa-2x fa-times"></i></asp:LinkButton>
                                     </td>
                                     <td class="cart-product">
@@ -87,15 +87,15 @@
                                             <div class="input-group">
                                                 <b class="input-group-btn">
                                                     <asp:LinkButton runat="server" ID="btnSottrai" Style="width: 40px"
-                                                        OnClick="btnDecrement" class="btn btn-small" CommandArgument='<%# Eval("id") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
+                                                        OnClick="btnDecrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
                                                 </b>
 
-                                                <input runat="server" class="form-control text-center" style="width: 50px"
+                                                <input runat="server" class="form-control text-center" style="font-size:1.2rem;font-weight:600;width: 50px; height: 38px; float: left;"
                                                     id="txtQuantita" type="text" value='<%# Eval("Numero") %>' />
 
                                                 <b class="input-group-btn">
                                                     <asp:LinkButton runat="server" ID="btnAggiungi" Style="width: 40px"
-                                                        OnClick="btnIncrement" class="btn btn-small" CommandArgument='<%# Eval("id") %>'>
+                                                        OnClick="btnIncrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'>
                                                         <i class="fa fa-plus"></i>
                                                     </asp:LinkButton>
                                                 </b>
@@ -196,7 +196,7 @@
                     id="A7"   href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrder") ) %>'>
                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %> 
                 </a><br /><br />--%>
-                        <a class="btn btn-large btn-success btn-block"
+                        <a class="btn btn-purple btn-block"
                     id="A2"  href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                 </a>
