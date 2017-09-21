@@ -785,8 +785,10 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
     }
 
+
     protected void AssociaDatiSocial()
     {
+
         Tabrif actualpagelink = new Tabrif();
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -862,7 +864,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////DEFINIZIONE DEI TITOLI E CONTENUTI DI PAGINA ////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
 
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
@@ -972,10 +976,26 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         //    else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
         //        ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
         //}
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// List<Tabrif> links = GeneraBreadcrumbPath(true);
         List<Tabrif> links = GeneraBreadcrumbPath(true);
+        if (false) //Pagina copertina presente
+        {
+            Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
+            if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
+            {
+                Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
+                if (contentpercategoria != null && contentpercategoria.Id != 0)
+                {
+                    Tabrif laddink = new Tabrif();
+                    laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
+                    laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
+                    links.Add(laddink);
+                }
+            }
+        }
         links.Add(actualpagelink);
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
@@ -1021,8 +1041,6 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         //}
         return links;
     }
-
-
 
     protected void EvidenziaSelezione(string testolink)
     {

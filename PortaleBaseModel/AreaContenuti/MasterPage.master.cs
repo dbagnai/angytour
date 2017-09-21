@@ -22,6 +22,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
             if (!IsPostBack)
             {
 
+
                 if (Request.QueryString["Errore"] != null && Request.QueryString["Errore"] != "")
                 { output.Text = Request.QueryString["Errore"].ToString(); }
 
@@ -94,12 +95,26 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                     tagBanner.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "GESTIONE GALLERIA E BANNER";
                 }
-                else if (Request.FilePath.ToLower().Trim().Contains("gestionenewsletter") || Request.FilePath.ToLower().Trim().Contains("gestioneclienti"))
+                else if (Request.FilePath.ToLower().Trim().Contains("gestioneclienti")  )
                 {
-                    tagBanner.Attributes.Add("class", "active open hover");
+                    tagContatti.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "GESTIONE CLIENTI";
                 }
-
+                else if (Request.FilePath.ToLower().Trim().Contains("gestionenewsletter") )
+                {
+                    tagContatti.Attributes.Add("class", "active open hover");
+                    lblTitleSection.Text = "GESTIONE NEWSLETTER";
+                }
+                else if ( Request.FilePath.ToLower().Trim().Contains("storicoordini"))
+                {
+                    tagContatti.Attributes.Add("class", "active open hover");
+                    lblTitleSection.Text = "STORICO ORDINI";
+                }
+                else if (Request.FilePath.ToLower().Trim().Contains("configpage") || Request.FilePath.ToLower().Trim().Contains("resourcepage"))
+                {
+                    tagConfig.Attributes.Add("class", "active open hover");
+                    lblTitleSection.Text = "GESTIONE CONFIG";
+                }
                 else
                 {
                     tagDefault.Attributes.Add("class", "active open hover");
@@ -118,5 +133,17 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         }
     }
 
+    private void ImpostaVisualizzazione()
+    {
+        //string idcliente = CommonPage.getidcliente(Page.User.Identity.Name);
+        //if (!string.IsNullOrEmpty(idcliente))
+        //{
+        //    id_commerciale = idcliente;
+        //}
+        //else
+        //{
+            Response.Redirect("~/Error.aspx?Error=Utente non permesso");
+        //}
 
+    }
 }

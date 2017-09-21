@@ -1366,5 +1366,124 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
+
+        public string ExportOrdersToCsv(string DestinationPath, string CsvFilename, TotaliCarrelloCollection list)
+        {
+            string retString = "";
+            try
+            {
+                System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it-IT");
+                WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, "", true);
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                if (list != null)
+                {
+                    sb = new StringBuilder();
+                    ///TRACCIATO USATO ---------------------------------------------
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Data"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Id Ordine"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Id cliente"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Mail"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Nome"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Totale"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Pagamento"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Commerciale"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Pagato"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Dettagli"));
+                    sb.Append(";");
+                    WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, sb.ToString(), false);
+
+                    foreach (TotaliCarrello t in list)
+                    {
+
+                        sb = new StringBuilder();
+
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Dataordine)));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.CodiceOrdine));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Id_cliente.ToString()));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Mailcliente));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Denominazionecliente.Replace("<br/>","\r\n")));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                       t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €"));
+                        sb.Append(";");
+                        sb.Append(t.Modalitapagamento);
+                        sb.Append(";");
+                        sb.Append(t.Id_commerciale);
+                        sb.Append(";");
+                        sb.Append((t == null) ? false : t.Pagato);
+                        sb.Append(";");
+                        string dettaglioordine = CreaDettaglioCarrello(t.CodiceOrdine);
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(dettaglioordine));
+                        sb.Append(";");
+
+                        WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, sb.ToString(), false);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                retString = err.Message;
+                if (err.InnerException != null)
+                    retString += err.InnerException.Message;
+            }
+            return retString;
+        }
+
+        private string CreaDettaglioCarrello(string codiceordine)
+        {
+            StringBuilder sb = new StringBuilder();
+            eCommerceDM ecmDM = new eCommerceDM();
+            CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
+            string Lingua = "I";
+            foreach (Carrello c in carrellolist)
+            {
+                sb.Append(" Nome : ");
+                sb.Append(c.Offerta.DenominazioneI);
+                #region MODIFIED CARATTERISTICHE CARRELLO
+                if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
+                {
+                    sb.Append("\r\n");
+                    //recupero le caratteristiche del prodotto
+                    List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
+                    ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
+                    if (item != null)
+                        sb.Append(item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                    sb.Append("\r\n");
+                }
+                #endregion
+
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
+                //sb.Append(" </div>");
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
+                //sb.Append(" </div>");
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(CommonPage.TestoCaratteristica(1, c.Offerta.Caratteristica2.ToString(), Lingua));
+                //sb.Append(" </div>");
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
+                //sb.Append(" </div>");
+
+                sb.Append(c.Numero + " " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", c.Prezzo) + " €");
+                sb.Append("\r\n");
+
+                sb.Append("\r\n");
+            }
+            return sb.ToString();
+        }
     }
 }

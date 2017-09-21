@@ -18,10 +18,10 @@ function InjectPagerSliderBanner(pagercontainer, controlid) {
     });
 }
 
-function injectSliderAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height,fullscreen) {
-    loadref(injectSliderAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height, fullscreen, lng);
+function injectSliderAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height) {
+    loadref(injectSliderAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height, lng);
 }
-function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height, fullscreen) {
+function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola,width,height) {
     //qui devo visualizzare il titolo
     var templateHtml = pathAbs + "/lib/template/" + "sliderbanner.html";
     if (type != null && type != '')
@@ -55,9 +55,8 @@ function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesi
         params.tblsezione = tblsezione;
         params.filtrosezione = filtrosezione;
         params.mescola = mescola;
-        params.height = height;
+        params.heigth = height;
         params.width = width;
-        params.fullscreen = fullscreen;
 
         globalObject[controlid + "params"] = params;
 
@@ -138,7 +137,7 @@ function BindSliderBanner(el, localObjects) {
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[el + "params"];
     //objfiltrotmp.containerId
-    
+
     /*-----------------------*/
     sliderPresent = true;
     //$('#menuzord').addClass('white');
@@ -173,17 +172,14 @@ function BindSliderBanner(el, localObjects) {
                     });
     }
 
-    initSlider(el, objfiltrotmp.width, objfiltrotmp.height, objfiltrotmp.fullscreen);
+    initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
 
     CleanHtml($('#' + el));
 
 };
 
-function initSlider(idDiv, width, height, fullscreen) {
-    var fullscreen = fullscreen || "on";
+function initSlider(idDiv, width, height) {
     jQuery(document).ready(function ($) {
-
-
         $('#' + idDiv).parent().show();
        
         $('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
@@ -195,35 +191,35 @@ function initSlider(idDiv, width, height, fullscreen) {
             //startwidth: 1170,
             //startheight: 550,
             onHoverStop: "on",
-            thumbWidth: 100,
+            thumbWidth: 80,
             thumbHeight: 50,
             thumbAmount: 3,
-            hideThumbs: 0,
-            navigationType: "bullet",// use none, bullet or thumb
-            navigationArrows: "none", // nextto, solo, none, nextto questo per le frecce laterali
+            hideThumbs: 200,
+            navigationType: "thumb",// use none, bullet or thumb
+            navigationArrows: "solo", // nextto, solo, none, nextto questo per le frecce laterali
             navigationStyle: "square",  // round, square, navbar, round-old, square-old, navbar-old 
             navigationHAlign: "center",
             navigationVAlign: "bottom",
-            navigationHOffset: 30,
-            navigationVOffset: 20,
-            soloArrowLeftHalign: "left",
-            soloArrowLeftValign: "center",
-            soloArrowLeftHOffset: 20,
-            soloArrowLeftVOffset: 0,
+            navigationHOffset: 0,
+            navigationVOffset: 5,
+            soloArrowLeftHalign: "right",
+            soloArrowLeftValign: "bottom",
+            soloArrowLeftHOffset: 60,
+            soloArrowLeftVOffset: 10,
             soloArrowRightHalign: "right",
-            soloArrowRightValign: "center",
-            soloArrowRightHOffset: 20,
-            soloArrowRightVOffset: 0,
+            soloArrowRightValign: "bottom",
+            soloArrowRightHOffset: 10,
+            soloArrowRightVOffset: 10,
             touchenabled: "on",
             stopAtSlide: -1,
             stopAfterLoops: -1,
             hideCaptionAtLimit: 0,
-            hideAllCaptionAtLimit: 0,
+            hideAllCaptionAtLilmit: 0,
             hideSliderAtLimit: 0,
-            fullWidth: "off",
-            fullScreen: fullscreen,
+            fullWidth: "on",
+            fullScreen: "off",// fullScreen: fullscreen,
             autoHeight: "off",
-            fullScreenOffsetContainer: "#header",
+            fullScreenOffsetContainer: "#topheader-to-offset",
             lazyLoad: "on",
             keyboardNavigation: "on",
             shadow: 0

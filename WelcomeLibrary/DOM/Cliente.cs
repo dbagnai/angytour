@@ -45,7 +45,7 @@ namespace WelcomeLibrary.DOM
         {
             get { return _Cognome; }
             set { _Cognome = value; }
-        }
+        }  
         private string _Sesso;
         public string Sesso
         {
@@ -88,6 +88,7 @@ namespace WelcomeLibrary.DOM
             get { return _Indirizzo; }
             set { _Indirizzo = value; }
         }
+     
         private string _Email;
         public string Email
         {
@@ -221,6 +222,12 @@ namespace WelcomeLibrary.DOM
             get { return _Codicisconto; }
             set { _Codicisconto = value; }
         }
+        private string _Serialized;
+        public string Serialized
+        {
+            get { return _Serialized; }
+            set { _Serialized = value; }
+        }
         public Cliente()
         {
             this.card = new Card();
@@ -244,9 +251,9 @@ namespace WelcomeLibrary.DOM
             this.Id_card = 0;
             this.Id_cliente = 0;
             this.Indirizzo = string.Empty;
-            this.IPclient = string.Empty;
-            this.Lingua = "I";
-            this.Nome = string.Empty;
+            this.IPclient= string.Empty;
+            this.Lingua=  "I";
+            this.Nome=  string.Empty;
             this.Professione = string.Empty;
             this.Spare1 = string.Empty;
             this.Spare2 = string.Empty;
@@ -258,7 +265,8 @@ namespace WelcomeLibrary.DOM
             this.Pivacf = string.Empty;
             this.id_tipi_clienti = "0";
             this.Codicisconto = string.Empty;
-
+            this.Serialized = string.Empty;
+           
         }
         public Cliente(Cliente tmp)
         {
@@ -267,7 +275,7 @@ namespace WelcomeLibrary.DOM
             this.Email = tmp.Email;
             this.Cellulare = tmp.Cellulare;
             this.CodiceNAZIONE = tmp.CodiceNAZIONE;
-            this.CodiceCOMUNE = tmp.CodiceCOMUNE;
+            this.CodiceCOMUNE =tmp.CodiceCOMUNE;
             this.CodicePROVINCIA = tmp.CodicePROVINCIA;
             this.CodiceREGIONE = tmp.CodiceREGIONE;
             this.Sesso = tmp.Sesso;
@@ -297,6 +305,7 @@ namespace WelcomeLibrary.DOM
             this.Pivacf = tmp.Pivacf;
             this.Codicisconto = tmp.Codicisconto;
             this.id_tipi_clienti = tmp.id_tipi_clienti;
+            this.Serialized = tmp.Serialized;
 
         }
     }

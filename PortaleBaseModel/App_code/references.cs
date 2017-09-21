@@ -565,7 +565,7 @@ public class references
         references.CaricaDatiReftablesDaJson(Server); //Tabelle di riferimento per l'immobiliare
 
         WelcomeLibrary.UF.Utility.CaricaListaStaticaNazioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, true);
-        WelcomeLibrary.UF.Utility.Nazioni.RemoveAll(n => !(n.Codice == "IT" || n.Codice == "XX"));
+        //WelcomeLibrary.UF.Utility.Nazioni.RemoveAll(n => !(n.Codice == "IT" || n.Codice == "XX"));
 
         WelcomeLibrary.UF.Utility.CaricaListaStaticaProvince(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
         //List<WelcomeLibrary.DOM.Province> province1 = WelcomeLibrary.UF.Utility.ElencoProvince.FindAll(delegate(WelcomeLibrary.DOM.Province tmp) { return (tmp.CodiceRegione == _tmp.CodiceRegione && _tmp.SiglaNazione.ToLower() == "it"); });
@@ -657,7 +657,15 @@ public class references
             ritorno = item.Codice;
         return ritorno;
     }
-
+    public static double  TrovaCostoNazione(string codice,string Lingua="I")
+    {
+        double ritorno = 0;
+        if (string.IsNullOrEmpty(codice)) return ritorno;
+        Tabrif item = WelcomeLibrary.UF.Utility.Nazioni.Find(n => n.Codice == codice && n.Lingua == Lingua);
+        if (item != null)
+            ritorno = item.Double1;
+        return ritorno;
+    }
     public static string TestoTipologia(string codicetipologia, string Lingua)
     {
         string retstr = "";

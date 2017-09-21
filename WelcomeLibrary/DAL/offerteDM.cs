@@ -549,7 +549,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Data1"].Equals(DBNull.Value))
                             item.Data1 = reader.GetDateTime(reader.GetOrdinal("Data1"));
 
-                     
+
                         if (!reader["DescrizioneGB"].Equals(DBNull.Value))
                             item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                         if (!reader["DescrizioneI"].Equals(DBNull.Value))
@@ -2599,8 +2599,8 @@ namespace WelcomeLibrary.DAL
 
                 }
 
-            //    query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
-               query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
+                //    query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
+                query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
 
 
                 OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
@@ -2875,7 +2875,9 @@ namespace WelcomeLibrary.DAL
         /// <returns></returns>
         public AllegatiCollection CaricaAllegatiFoto(AllegatiCollection list)
         {
-            Allegato item;
+            //Spacchetto gli allegati che sono nella forma
+            //esempio schema All1:S:0:13:Des1:S:13:7:All2:S:20:13:Des2:S:33:7:
+            Allegato item = new Allegato();
             string Schema = list.Schema;
             string Value = list.Valori;
             int i = 0;
@@ -2883,47 +2885,95 @@ namespace WelcomeLibrary.DAL
             int start = 0;
             int end = 0;
             bool flagprimafoto = false;
+            string etype = "";
+            int startseq = 0;
             while (start < Schema.Length)
             {
-                item = new Allegato();
-                //LEGGIAMO LO SCHEMA PER IL NOMEALLEGATO
+                etype = "all";
+                //LEGGIAMO LO SCHEMA PER IL NOMEALLEGATO --------------------------------------------------------------------------
                 start = Schema.IndexOf(":S:", start) + 3;
-                end = Schema.IndexOf(":", start);
-                if (end == -1) return list;
-                i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
-                start = end + 1;
-                end = Schema.IndexOf(":", start);
-                j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
-                start = end + 1;
-                //LEGGIAMO IL VALORE (NOMEALLEGATO)
-                item.NomeFile = Value.Substring(i, j);
-                if (!Value.Substring(i, j).ToLower().StartsWith("http://"))
-                    item.NomeAnteprima = "Ant" + Value.Substring(i, j);
-                else
-                    item.NomeAnteprima = Value.Substring(i, j);
-
-                //LEGGIAMO LO SCHEMA PER LA DESCRIZIONE ALLEGATO
-                start = Schema.IndexOf(":S:", start) + 3;
-                end = Schema.IndexOf(":", start);
-                i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
-                start = end + 1;
-                end = Schema.IndexOf(":", start);
-                j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
-                start = end + 1;
-                //LEGGIAMO IL VALORE (descrizione ALLEGATO)
-                item.Descrizione = Value.Substring(i, j);
-                //LA CARTELLA PER LE FOTO E' SEMPRE LA STESSA
-                item.Cartella = "";
-                //Inserisco il percorso per la foto di anteprima
-                if (!flagprimafoto && item.NomeAnteprima != "Ant" && item.NomeAnteprima != "")
+                //Controllo tipo ////////////////////////////////////////
+                if (start - 3 > 0)
                 {
-                    if (!(item.Descrizione.Trim().ToString().ToLower() == "cv" || item.Descrizione.Trim().ToString().ToLower() == "cequip"))
+                    startseq = Schema.LastIndexOf(":", start - 4);
+                    if (startseq != -1)
                     {
-                        flagprimafoto = true;
-                        list.FotoAnteprima = item.NomeAnteprima;
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("all")) etype = "all";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("des")) etype = "des";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("pro")) etype = "pro";
                     }
                 }
-                list.Add(item);
+                ///////////////////////////////////////////////////////////////////
+                switch (etype)
+                {
+                    case "all":
+                        if (!string.IsNullOrEmpty(item.NomeFile)) list.Add(item);
+                        item = new Allegato();
+                        end = Schema.IndexOf(":", start);
+                        if (end == -1) return list;
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (NOMEALLEGATO)
+                        item.NomeFile = Value.Substring(i, j);
+                        if (!Value.Substring(i, j).ToLower().StartsWith("http://") && !Value.Substring(i, j).ToLower().StartsWith("https://"))
+                            item.NomeAnteprima = "Ant" + Value.Substring(i, j);
+                        else
+                            item.NomeAnteprima = Value.Substring(i, j);
+                        break;
+                    case "des":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        item.Descrizione = Value.Substring(i, j);
+                        break;
+                    case "pro":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        int tmpro = 0;
+                        int.TryParse(Value.Substring(i, j), out tmpro);
+                        item.Progressivo = tmpro;
+                        break;
+                    default:
+
+                        break;
+                }
+
+
+                //LA CARTELLA PER LE FOTO E' SEMPRE LA STESSA (potrei indicarla volendo ...)
+                item.Cartella = "";
+                //Inserisco il percorso per la foto di anteprima
+#if false
+                if (!flagprimafoto && item.NomeAnteprima != "Ant" && item.NomeAnteprima != "")
+                {
+                    //if (!(item.Descrizione.Trim().ToString().ToLower() == "cv" || item.Descrizione.Trim().ToString().ToLower() == "cequip"))
+                    //{
+                    flagprimafoto = true;
+                    list.FotoAnteprima = item.NomeAnteprima;
+                    //}
+                }
+                if (item.Progressivo == 1) list.FotoAnteprima = item.NomeAnteprima; 
+#endif
+
+                if (!(start < Schema.Length)) if (!string.IsNullOrEmpty(item.NomeFile)) list.Add(item);
+
+            }
+            // list.Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Allegato>("Progressivo", System.ComponentModel.ListSortDirection.Ascending));
+            if (list != null && list.Count > 0)
+            {
+                list.Sort(new GenericComparer2<Allegato>("Progressivo", System.ComponentModel.ListSortDirection.Ascending, "NomeFile", System.ComponentModel.ListSortDirection.Ascending));
+                list.FotoAnteprima = list[0].NomeAnteprima; //Setto la foto anteprima per tutta la collection
             }
 
             return list;
@@ -2937,7 +2987,7 @@ namespace WelcomeLibrary.DAL
         public AllegatiCollection CreaStringheAllegati(AllegatiCollection list)
         {
             //Impacchettiamo gli allegati creando le strinche schema / valori
-            //esempio schema Foto1:S:0:13:Descr1:S:13:7:Foto2:S:20:13:Descr2:S:33:7:
+            //esempio schema All1:S:0:13:Des1:S:13:7:All2:S:20:13:Des2:S:33:7:
             int pos = 0; //Posizione iniziale per lo schema
             int n = 0;
             list.Schema = "";
@@ -2950,7 +3000,7 @@ namespace WelcomeLibrary.DAL
                 //INSERISCO NOME FILE 
                 len = item.NomeFile.Length;
                 item.NomeFile.Replace(":S:", "SSS");//Elimina eventuali presenze
-                //del carattere di separazione dal nomefile
+                                                    //del carattere di separazione dal nomefile
                 list.Schema += "All" + n + ":S:" + pos + ":" + len + ":";
                 list.Valori += item.NomeFile;
                 pos += len;
@@ -2958,16 +3008,26 @@ namespace WelcomeLibrary.DAL
                 //INSERISCO DESCRIZIONE
                 len = item.Descrizione.Length;
                 item.Descrizione.Replace(":S:", "SSS");//Elimina eventuali presenze
-                //del carattere di separazione dalla descrizione
+                                                       //del carattere di separazione dalla descrizione
                 list.Schema += "Des" + n + ":S:" + pos + ":" + len + ":";
                 list.Valori += item.Descrizione;
                 pos += len;
+
+                //INSERISCO Progressivo
+                len = item.Progressivo.ToString().Length;
+                item.Progressivo.ToString().Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                                  //del carattere di separazione dalla descrizione
+                list.Schema += "Pro" + n + ":S:" + pos + ":" + len + ":";
+                list.Valori += item.Progressivo.ToString();
+                pos += len;
+
+
             }
 
             return list;
         }
 
-        public bool modificaFoto(string connection, int idOfferta, string nomefile, string descrizione)
+        public bool modificaFoto(string connection, int idOfferta, string nomefile, string descrizione, string progressivo = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -2985,6 +3045,9 @@ namespace WelcomeLibrary.DAL
 
                 F1.NomeFile = nomefile;
                 F1.Descrizione = descrizione;
+                int tmp = 0;
+                int.TryParse(progressivo, out tmp);
+                F1.Progressivo = tmp;
 
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
@@ -3013,7 +3076,7 @@ namespace WelcomeLibrary.DAL
             return true;
         }
 
-        public bool insertFoto(string connection, int idOfferta, string nomefile, string descrizione)
+        public bool insertFoto(string connection, int idOfferta, string nomefile, string descrizione, string progressivo = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -3031,6 +3094,11 @@ namespace WelcomeLibrary.DAL
                 Allegato tmp = new Allegato();
                 tmp.NomeFile = nomefile;
                 tmp.Descrizione = descrizione;
+                int tmpint = 1;
+                if (!string.IsNullOrEmpty(progressivo))
+                    int.TryParse(progressivo, out tmpint);
+                tmp.Progressivo = tmpint;
+
                 FotoColl.Add(tmp);
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
@@ -3304,7 +3372,7 @@ namespace WelcomeLibrary.DAL
         }
 
         public void InsertOffertaCollegata(string connessione,
-     Offerte item)
+        Offerte item)
         {
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             if (connessione == null || connessione == "") return;
@@ -4530,7 +4598,7 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
         {
-            titolo = ( ConfigManagement.ReadKey("Nome")  ?? "");
+            titolo = (ConfigManagement.ReadKey("Nome") ?? "");
             descrizione = (ConfigManagement.ReadKey("Descrizione") ?? "");
 
             //string Lingua = "I";

@@ -86,13 +86,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         get { return ViewState["CodiceSottoProdottoRicerca"] != null ? (string)(ViewState["CodiceSottoProdottoRicerca"]) : ""; }
         set { ViewState["CodiceSottoProdottoRicerca"] = value; }
     }
-   public string Lingua
-   {
-      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
-      set { ViewState["Lingua"] = value; }
-   }
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
 
-   protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
@@ -105,12 +105,15 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             { TipologiaOfferte = Request.QueryString["CodiceTipologia"].ToString(); }
             if (TipologiaOfferte == null || TipologiaOfferte == "")
                 Response.Redirect("default.aspx?Errore=Selezionare Tipo Offerta");
+            hidTipologia.Value = TipologiaOfferte;
+
             //Carichiamo i dati relativi al contenuto specificato
             //Da fare repeater paginato con i risultati della query sul db
             litTitolo.Text = (Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return tmp.Lingua == "I" && tmp.Codice == TipologiaOfferte; })).Descrizione;
 
             if (Request.QueryString["CodiceProdotto"] != null && Request.QueryString["CodiceProdotto"] != "")
             { CodiceProdotto = Request.QueryString["CodiceProdotto"].ToString(); }
+           // LoadJavascriptVariables();
 
             //Carichiamo le ddl per la collocazione geografica senza selezioni
             // CaricaDatiDdlRicercaRepeater("", "");
@@ -130,14 +133,37 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         else
         {
+            if (Request["__EVENTTARGET"] == "aggiornatettaglio")
+            {
+              //  string email = Request["__EVENTARGUMENT"];
+                CaricaDati();
+            }
+
             output.Text = "";
             ErrorMessage.Text = "";
             ErrorMsgNuovoProdotto.Text = "";
 
         }
+       
         //CodiceProdottoRicerca = ddlProdottoRicerca.SelectedValue;
         //CodiceSottoProdottoRicerca = ddlSProdottoRicerca.SelectedValue;
     }
+
+
+    //private void LoadJavascriptVariables()
+    //{
+    //    ClientScriptManager cs = Page.ClientScript;
+
+    //    String scriptRegVariables = string.Format("var tipologia = '{0}'", TipologiaOfferte) + "\r\n";
+    //    scriptRegVariables += "; " + string.Format("var idselected = '" + OffertaIDSelected + "'");
+    //    scriptRegVariables += "; " + "\r\n";
+    //    if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
+    //    {
+    //        cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScript", scriptRegVariables, true);
+    //    }
+    //}
+
+
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 
     protected void PagerRisultati_PageCommand(object sender, string PageNum)
@@ -324,9 +350,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                 NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
                 txtDescrizione.Text = Details.FotoCollection_M[0].Descrizione;
+                txtProgressivo.Text = Details.FotoCollection_M[0].Progressivo.ToString();
             }
             else
+            {
                 imgFoto.ImageUrl = "";
+                NomeFotoSelezionata = "";
+                txtDescrizione.Text = "";
+                txtProgressivo.Text = "";
+
+            }
             //Carichiamo la galleria delle foto
             rptImmagini.DataSource = Details.FotoCollection_M;
             rptImmagini.DataBind();
@@ -446,7 +479,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         //regioni.Sort(new GenericComparer<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending));
         ddlRegione.Items.Clear();
-        ddlRegione.Items.Insert(0, references.ResMan("Common",Lingua,"ddlTuttiregione"));
+        ddlRegione.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiregione"));
         ddlRegione.Items[0].Value = "";
         ddlRegione.DataSource = regioni;
         ddlRegione.DataTextField = "Regione";
@@ -459,7 +492,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         catch { }
         //Province
         ddlProvincia.Items.Clear();
-        ddlProvincia.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiprovincia"));
+        ddlProvincia.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiprovincia"));
         ddlProvincia.Items[0].Value = "";
         if (Regione != "")
         {
@@ -482,7 +515,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         //Comuni
         ddlComune.Items.Clear();
-        ddlComune.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiComune"));
+        ddlComune.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiComune"));
         ddlComune.Items[0].Value = "";
         if (Provincia != "")
         {
@@ -510,7 +543,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         }
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdotto.Items.Clear();
-        ddlProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlProdotto.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdotto.Items[0].Value = "";
         ddlProdotto.DataSource = prodotti;
         ddlProdotto.DataTextField = "Descrizione";
@@ -526,7 +559,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdotto.SelectedValue)); });
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlSottoProdotto.Items.Clear();
-        ddlSottoProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlSottoProdotto.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlSottoProdotto.Items[0].Value = "";
         ddlSottoProdotto.DataSource = sprodotti;
         ddlSottoProdotto.DataTextField = "Descrizione";
@@ -539,7 +572,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         catch { }
 
 
-         sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
+        sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
         sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == Categoria)); });
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlSottoProdSearch.Items.Clear();
@@ -646,6 +679,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         this.SvuotaDettaglio();
         OffertaIDSelected = ((LinkButton)(sender)).CommandArgument.ToString();
         ClientIDSelected = ((LinkButton)(sender)).ClientID;
+        hidIdselected.Value = OffertaIDSelected;
+
         NomeFotoSelezionata = "";
 
         this.AggiornaDettaglio(OffertaIDSelected);
@@ -655,11 +690,23 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void linkgalleria_click(object sender, EventArgs e)
     {
-        NomeFotoSelezionata = ((ImageButton)(sender)).CommandArgument.ToString();
+        string serializedallegato = ((ImageButton)(sender)).CommandArgument.ToString();
+        Allegato allegato = Newtonsoft.Json.JsonConvert.DeserializeObject<Allegato>(serializedallegato
+                  , new Newtonsoft.Json.JsonSerializerSettings()
+                  {
+                      DateFormatString = "dd/MM/yyyy HH:mm:ss",
+                      //DateFormatString = "dd/MM/yyyy",
+                      MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+                      ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                      PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None
+                  });
+
+        NomeFotoSelezionata = allegato.NomeFile;
+        //NomeFotoSelezionata = ((ImageButton)(sender)).CommandArgument.ToString();
+
 
         string percorsofile = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + NomeFotoSelezionata;
         imgFoto.ImageUrl = percorsofile;
-
 
         //PER I FILES CHE NON SONO IMMAGINI METTO UN'IMMAGINE FISSA
         if (!(NomeFotoSelezionata.ToLower().EndsWith("jpg") || NomeFotoSelezionata.ToLower().EndsWith("gif") || NomeFotoSelezionata.ToLower().EndsWith("png")))
@@ -671,8 +718,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
             linkFoto.HRef = "";
 
-
-        txtDescrizione.Text = ((ImageButton)(sender)).ToolTip;
+        //txtDescrizione.Text = ((ImageButton)(sender)).ToolTip;
+        txtDescrizione.Text = allegato.Descrizione;
+        txtProgressivo.Text = allegato.Progressivo.ToString();
     }
     protected void btnNuovo_Click(object sender, EventArgs e)
     {
@@ -943,6 +991,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
                 //Seleziono l'elemento appena inserito e ci inserisco gli allegati necessari
                 OffertaIDSelected = updrecord.Id.ToString();
+                hidIdselected.Value = OffertaIDSelected;
 
                 //Inviamo una mailing a tutti i clienti validati ( e con card attiva ) per l'offerta in questione appena inserita
                 //if (updrecord.CodiceCategoria == "prod000005")
@@ -1025,12 +1074,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     mail.Tipomailing = (Int32)enumclass.TipoMailing.AvvisoInserimentoStruttura;
                     mail.NoteInvio = "";
 
-                    mail.SoggettoMail = references.ResMan("Common",Lingua,"oggettoMailInserimentoStruttura").ToString();
-                    mail.TestoMail = references.ResMan("Common",Lingua,"testoMailInserimentoStruttura").ToString() + "<br/>";
+                    mail.SoggettoMail = references.ResMan("Common", Lingua, "oggettoMailInserimentoStruttura").ToString();
+                    mail.TestoMail = references.ResMan("Common", Lingua, "testoMailInserimentoStruttura").ToString() + "<br/>";
 
                     //Mettiamo anche il link alla pagina specifica della struttura appena inserita
                     string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/SchedaOfferta.aspx?Lingua=" + c.Lingua.ToUpper() + "&idOfferta=" + item.Id + "&CodiceTipologia=" + item.CodiceTipologia; //idOfferta=38&CodiceTipologia=rif000002&Lingua=I
-                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common",Lingua,"TestoLinkAStruttura").ToString() + "<br/>";
+                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", Lingua, "TestoLinkAStruttura").ToString() + "<br/>";
 
                     mDM.InserisciAggiornaMail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, mail); //Inseriamo nel db per l'invio
 
@@ -1123,6 +1172,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         rptImmagini.DataBind();
         ClientIDSelected = "";
         OffertaIDSelected = "";
+        hidIdselected.Value = "";
+
         hProdotticollegati.Value = "";
 
         txtCampo1GB.Text = "";
@@ -1147,6 +1198,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         chkPromozione.Checked = false;
 
         txtDescrizione.Text = "";
+        txtProgressivo.Text = "";
         txtCodiceProd.Text = "";
         //txtFotoSchema.Value = "";
         //txtFotoValori.Value = "";
@@ -1231,7 +1283,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
         txtData.ReadOnly = valore;
 
-      //  ddlProdotto.Enabled = !valore;
+        //  ddlProdotto.Enabled = !valore;
         ddlSottoProdotto.Enabled = !valore;
 
         //hiddenTargetControlForModalPopup.Enabled = !valore;
@@ -1255,191 +1307,28 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
     }
 
-    #region Gestione Foto allegate
+    #region Gestione FILES ALLEGATI
 
     protected void btnModifica_Click(object sender, EventArgs e)
     {
-        try
+        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizione.Text, txtProgressivo.Text);
+        if (string.IsNullOrEmpty(retmsg))
         {
-            int i = 0;
-            int.TryParse(OffertaIDSelected, out i);
-            bool ret = offDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, NomeFotoSelezionata, txtDescrizione.Text);
+            this.CaricaDati();
+            retmsg = "Modifica File correttamente avvenuta.";
         }
-        catch (Exception errins)
-        {
-            output.Text = errins.Message;
-        }
-
-        output.Text = "Foto Modificata Correttamente";
-        //Aggiorniamo il repeater e la foto per il record selezionato
-        this.CaricaDati();
+        output.Text += retmsg;
     }
     protected void btnCarica_Click(object sender, EventArgs e)
     {
-        try
+        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizione.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text);
+        if (string.IsNullOrEmpty(retmsg))
         {
-            //Controlliamo se ho selezionato un record
-            if (OffertaIDSelected == null || OffertaIDSelected == "")
-            {
-                output.Text = "Selezionare un elemento per associare la foto";
-                return;
-            }
-            int idSelected = 0;
-            if (!Int32.TryParse(OffertaIDSelected, out idSelected))
-            {
-                output.Text = "Selezionare un elemento per associare la foto";
-                return;
-            }
-            //if (txtFotoSchema.Value != "")
-            //{
-            //    output.Text = "Foto già presente, eliminare foto prima di reinserire!";
-            //    return;
-            //}
-
-            //Verifichiamo la presenza del percorso di destinazione altrimenti lo creiamo
-            //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
-            string pathDestinazione = Server.MapPath(PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected);
-            if (!Directory.Exists(pathDestinazione))
-                Directory.CreateDirectory(pathDestinazione);
-
-            //-------------------------------------
-            //Carichiamoci il file
-            //-------------------------------------
-            if (UploadFoto.HasFile)
-            {
-                if (UploadFoto.PostedFile.ContentLength > 15000000)
-                {
-
-                    output.Text = "La foto non può essere caricata perché supera 15MB!";
-                }
-                else
-                {
-                    //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
-                    string NomeCorretto = UploadFoto.FileName.Replace("+", "");
-                    NomeCorretto = NomeCorretto.Replace("%", "");
-                    NomeCorretto = NomeCorretto.Replace(" ", "");
-                    NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
-                    //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
-                    if (System.IO.File.Exists(pathDestinazione))
-                    {
-                        output.Text = ("La foto non può essere caricata perché già presente sul server!");
-                    }
-                    else
-                    {
-                        Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                        if (UploadFoto.PostedFile.ContentType == "image/jpeg" || UploadFoto.PostedFile.ContentType == "image/pjpeg" || UploadFoto.PostedFile.ContentType == "image/gif")
-                        {
-                            int maxheight = 800;
-                            int maxwidth = 1000;
-                            bool ridimensiona = true;
-                            //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
-                            if (ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
-                            {
-                                //Creiamo l'anteprima Piccola per usi in liste
-                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 350, 350, pathDestinazione + "\\", "Ant" + NomeCorretto);
-                                //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
-                                //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
-                                try
-                                {
-                                    try
-                                    {
-                                        bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, txtDescrizione.Text);
-                                    }
-                                    catch (Exception errins)
-                                    {
-                                        output.Text = errins.Message;
-                                    }
-
-                                    output.Text = "Foto Inserita Correttamente";
-                                    //Aggiorniamo il repeater e la foto per il record selezionato
-                                    this.CaricaDati();
-                                    //OfferteCollection list = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, TipologiaOfferte);
-                                    //rptOfferte.DataSource = list;
-                                    //rptOfferte.DataBind();
-
-
-                                }
-                                catch (Exception error)
-                                {
-                                    //CANCELLO LA FOTO UPLOADATA
-                                    if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
-                                    if (System.IO.File.Exists(pathDestinazione + "\\" + "Ant" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + "Ant" + NomeCorretto);
-                                    //AGGIORNO IL DETAILSVIEW
-                                    output.Text = error.Message;
-                                }
-                            }
-                            else { output.Text += ("La foto non è stata caricata! (Problema nel caricamento)"); }
-                        }
-                        else if (UploadFoto.PostedFile.ContentType == "application/pdf")
-                        {
-
-                            //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
-                            UploadFoto.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
-                            try
-                            {
-                                try
-                                {
-                                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "");
-                                }
-                                catch (Exception errins)
-                                {
-                                    output.Text = errins.Message;
-                                }
-
-                                output.Text += "Documento Inserito Correttamente";
-                                //Aggiorniamo il repeater e la foto per il record selezionato
-                                this.CaricaDati();
-                            }
-                            catch (Exception error)
-                            {
-                                //CANCELLO IL FILE UPLOADATO
-                                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
-                                //AGGIORNO IL DETAILSVIEW
-                                output.Text = error.Message;
-                            }
-                        }
-                        else
-                        {
-
-                            //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
-                            UploadFoto.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
-                            try
-                            {
-                                try
-                                {
-                                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "");
-                                }
-                                catch (Exception errins)
-                                {
-                                    output.Text = errins.Message;
-                                }
-
-                                output.Text += "Documento Inserito Correttamente";
-                                //Aggiorniamo il repeater e la foto per il record selezionato
-                                this.CaricaDati();
-                            }
-                            catch (Exception error)
-                            {
-                                //CANCELLO IL FILE UPLOADATO
-                                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
-                                //AGGIORNO IL DETAILSVIEW
-                                output.Text = error.Message;
-                            }
-                        }
-                    }
-                }
-            }
-            else { output.Text = "Selezionare il file da caricare"; }
+            this.CaricaDati();
+            retmsg = "Caricamento File correttamente avvenuto.";
         }
-        catch (Exception errorecaricamento)
-        {
-            output.Text += errorecaricamento.Message;
-            if (errorecaricamento.InnerException != null)
-                output.Text += errorecaricamento.InnerException.Message;
-
-        }
+        output.Text += retmsg;
     }
-
 
     /// <summary>
     /// Elimina la foto attualmente visualizzata dal record selezionato
@@ -1448,216 +1337,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     /// <param name="e"></param>
     protected void btnElimina_Click(object sender, EventArgs e)
     {
-        //Controlliamo se ho selezionato un record
-        if (OffertaIDSelected == null || OffertaIDSelected == "")
+        string retmsg = filemanage.EliminaFile(Server, OffertaIDSelected, TipologiaOfferte, NomeFotoSelezionata);
+        if (string.IsNullOrEmpty(retmsg))
         {
-            output.Text = "Selezionare un elemento per cancellare la foto";
-            return;
-        }
-
-        if (NomeFotoSelezionata == null || NomeFotoSelezionata == "")
-        {
-            output.Text = "Selezionare una foto da cancellare";
-            return;
-        }
-        int idSelected = 0;
-        if (!Int32.TryParse(OffertaIDSelected, out idSelected))
-        {
-            output.Text = "Selezionare un elemento per cancellare la foto";
-            return;
-        }
-        //Ricarichiamo l'offerta selezionata dal db
-        //Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected);
-
-        //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
-        string pathDestinazione = Server.MapPath(PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected);
-        //-------------------------------------
-        //Eliminiamo il file se presente
-        //-------------------------------------
-        try
-        {
-            try
-            {
-                bool ret = offDM.CancellaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeFotoSelezionata, "", pathDestinazione);
-            }
-            catch (Exception errodel)
-            {
-                output.Text = errodel.Message;
-            }
-
-            //imgFoto.ImageUrl = "";
-            //txtFotoSchema.Value = "";
-            //txtFotoValori.Value = "";
-            //Aggiorniamo il repeater e la foto per il record selezionato
             this.CaricaDati();
-            //OfferteCollection list = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, TipologiaOfferte);
-            //rptOfferte.DataSource = list;
-            //rptOfferte.DataBind();
-
+            retmsg = "Cancellazione File correttamente avvenuta.";
         }
-        catch (Exception errore)
-        {
-            output.Text += " " + errore.Message;
-        }
-    }
-
-    //SUB per save e resize dell'immagine
-    private bool ResizeAndSave(System.IO.Stream imgStr, int Width, int Height, string Filename, bool ridimensiona)
-    {
-        try
-        {
-            using (System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(imgStr))
-            {
-                if (ridimensiona == true)
-                {
-                    //CREO LE DIMENSIONI DELLA FOTO SALVATA IN BASE AL RAPORTO ORIGINALE DI ASPETTO
-                    int altezzaStream = bmpStream.Height; //altezza foto originale
-                    int larghezzaStream = bmpStream.Width; //larghezza foto originale
-                    if (altezzaStream <= larghezzaStream)
-                        Height = Convert.ToInt32(((double)Width / (double)larghezzaStream) * (double)altezzaStream);
-                    else
-                        Width = Convert.ToInt32(((double)Height / (double)altezzaStream) * (double)larghezzaStream);
-
-                    //FINE CALCOLO ----------------------------------------------------------
-                }
-
-                using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
-                {
-
-                    System.Drawing.Bitmap img_filtrata = img_orig;
-                    //FILTRI CONTRASTO BRIGHTNESS/contrast/sturation
-                    //img_filtrata = ImageProcessing.applicaSaturationCorrection(img_filtrata, 0.05);
-                    //img_filtrata = ImageProcessing.applicaBrightness(img_filtrata, 0.03);
-                    //img_filtrata = ImageProcessing.applicaContrast(img_filtrata, 0.75);
-                    //img_filtrata = ImageProcessing.applicaAdaptiveSmoothing(img_filtrata);
-                    //img_filtrata = ImageProcessing.applicaConservativeSmoothing(img_filtrata);
-                    //img_filtrata = ImageProcessing.applicaHSLFilter(img_filtrata, 0.87, 0.075);
-                    //img_filtrata = ImageProcessing.applicaGaussianBlur(img_filtrata, 1, 5);
-                    //img_filtrata = ImageProcessing.applicaMediano(img_filtrata, 4);
-                    // ImageProcessing.NoiseRemoval(img_filtrata);
-                    //img_filtrata = ImageProcessing.MeanFilter(img_filtrata, 2);
-                    img_filtrata = ImageProcessing.applicaResizeBilinear(img_filtrata, Width, Height); //resisze
-                    //img_filtrata = ImageProcessing.applicaResizeBicubic(img_filtrata, Width, Height); //resisze
-
-                    using (System.Drawing.Bitmap img = img_filtrata)
-                    {
-                        System.Drawing.Imaging.ImageFormat imgF = null;
-                        switch (System.IO.Path.GetExtension(Filename).ToLower())
-                        {
-                            case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                            case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                            case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-                            default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-                        }
-                        //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
-                        {
-
-                            // Create an Encoder object based on the GUID for the Quality parameter category.
-                            ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
-                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                            // Create an EncoderParameters object.
-                            // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                            EncoderParameters myEncoderParameters = new EncoderParameters(3);
-                            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                            myEncoderParameters.Param[0] = myEncoderParameter;
-                            myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
-                            myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
-
-                            img.Save(Filename, jgpEncoder, myEncoderParameters);
-                        }
-                        else
-                            img.Save(Filename, imgF);
-                    }
-                }
-            }
-        }
-        catch
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private ImageCodecInfo GetEncoder(ImageFormat format)
-    {
-        ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-        foreach (ImageCodecInfo codec in codecs)
-        {
-            if (codec.FormatID == format.Guid)
-            {
-                return codec;
-            }
-        }
-        return null;
+        output.Text += retmsg;
     }
 
 
-
-    protected void CreaAnteprima(string filePath, int Altezza, int Larghezza, string pathAnteprime, string nomeAnteprima)
-    {
-        string PathTempAnteprime = pathAnteprime;
-        System.Drawing.Imaging.ImageFormat imgF = null;
-        //System.IO.File.Exists(PathTempAnteprime);
-        if (!System.IO.Directory.Exists(PathTempAnteprime))
-        {
-            System.IO.Directory.CreateDirectory(PathTempAnteprime);
-        }
-        // throw new Exception("Cartella temporanea di destinazione per l'anteprima non trovata!");
-
-        using (System.IO.FileStream file = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
-        {
-            using (System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(file))
-            {
-                int altezzaStream = bmpStream.Height;
-                int larghezzaStream = bmpStream.Width;
-                if (altezzaStream <= larghezzaStream)
-                    Altezza = Convert.ToInt32((double)Larghezza / (double)larghezzaStream * (double)altezzaStream);
-                else
-                    Larghezza = Convert.ToInt32((double)Altezza / (double)altezzaStream * (double)larghezzaStream);
-                System.Drawing.Bitmap img = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(Larghezza, Altezza));
-                switch (System.IO.Path.GetExtension(filePath).ToLower())
-                {
-                    case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                    case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                    case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-                    default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-                }
-
-                img.Save(PathTempAnteprime + nomeAnteprima, imgF);
-            }
-            file.Close();
-        }
-        if (!System.IO.File.Exists(PathTempAnteprime + nomeAnteprima))
-            output.Text = ("Anteprima Allegato non salvata correttamente!");
-
-    }
-
-    protected string ComponiUrlAnteprima(object FotoColl, string id)
-    {
-        string url = "";
-
-        if (FotoColl != null && ((AllegatiCollection)FotoColl).Count > 0 && ((AllegatiCollection)FotoColl)[0].NomeAnteprima != null)
-            if (!((AllegatiCollection)FotoColl)[0].NomeAnteprima.ToLower().StartsWith("http://") && !((AllegatiCollection)FotoColl)[0].NomeAnteprima.ToLower().StartsWith("https://"))
-                url = PercorsoFiles + "/" + TipologiaOfferte + "/" + id + "/" + ((AllegatiCollection)FotoColl)[0].NomeAnteprima;
-            else
-                url = ((AllegatiCollection)FotoColl)[0].NomeAnteprima;
-
-        return url;
-    }
-    protected string ComponiUrlGalleriaAnteprima(string NomeAnteprima)
-    {
-        string url = "";
-
-        url = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + NomeAnteprima;
-        //PER I FILES CHE NON SONO IMMAGINI METTO UN'IMMAGINE FISSA
-        if (!(NomeAnteprima.ToLower().EndsWith("jpg") || NomeAnteprima.ToLower().EndsWith("gif") || NomeFotoSelezionata.ToLower().EndsWith("png")))
-            url = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
-
-
-
-        return url;
-    }
     #endregion
 
     #region GESTIONE CATEGORIE 1 E SECONDO LIVELLO
@@ -1680,7 +1369,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd1.Items.Clear();
-        ddlProdottoNewProd1.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlProdottoNewProd1.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdottoNewProd1.Items[0].Value = "";
         ddlProdottoNewProd1.DataSource = prodotti;
         ddlProdottoNewProd1.DataTextField = "Descrizione";
@@ -1695,7 +1384,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewProd.Items.Clear();
-        ddlTipologiaNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlTipologiaNewProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlTipologiaNewProd.Items[0].Value = "";
         ddlTipologiaNewProd.DataSource = Tipologie;
         ddlTipologiaNewProd.DataTextField = "Descrizione";
@@ -1724,7 +1413,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd.Items.Clear();
-        ddlProdottoNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlProdottoNewProd.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdottoNewProd.Items[0].Value = "";
         ddlProdottoNewProd.DataSource = prodotti;
         ddlProdottoNewProd.DataTextField = "Descrizione";
@@ -1743,7 +1432,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdottoNewSProd.Items.Clear();
-        ddlProdottoNewSProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlProdottoNewSProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlProdottoNewSProd.Items[0].Value = "";
         ddlProdottoNewSProd.DataSource = sprodotti;
         ddlProdottoNewSProd.DataTextField = "Descrizione";
@@ -1760,7 +1449,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewSottProd.Items.Clear();
-        ddlTipologiaNewSottProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlTipologiaNewSottProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlTipologiaNewSottProd.Items[0].Value = "";
         ddlTipologiaNewSottProd.DataSource = Tipologie;
         ddlTipologiaNewSottProd.DataTextField = "Descrizione";
@@ -1773,7 +1462,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         catch { }
 
 
-      
+
 
     }
 
@@ -2308,11 +1997,6 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         //OkButton.Enabled = false;
         OkButton.Text = "Annulla";
         btnModificaProd.Text = "Salva";
-
-
-        linksezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "I");
-        linksezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "GB");
-        linksezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "RU");
     }
 
     protected void ddlProdottoNewProd_SelectedIndexChange(object sender, EventArgs e)
@@ -2321,9 +2005,6 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDatiDllSottoprodotto(ddlTipologiaNewSottProd.SelectedValue, ddlProdottoNewProd.SelectedValue, "");
         CaricaDatiFormInserimentoSott(ddlTipologiaNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue);
 
-        linksottosezioneI.Text = "";
-        linksottosezioneGB.Text = "";
-        linksottosezioneRU.Text = "";
     }
     protected void ddlProdottoNewSProd_SelectedIndexChange(object sender, EventArgs e)
     {
@@ -2336,26 +2017,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoSottRu.Enabled = true;
         OkButton2.Text = "Annulla";
         btnModificaSottoProd.Text = "Salva";
-
-        linksottosezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "I");
-        linksottosezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "GB");
-        linksottosezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "RU");
-
     }
     protected void TipologiaProd_SelectedIndexChanged(object sender, EventArgs e)
     {
         //Permette il cambio della tipologia di offerte OCCHIO!!!!
         TipologiaOfferte = ddlTipologiaNewProd.SelectedValue;
         CaricaDatiDdlRicerca("", "", "", "", "");
-
-        linksezioneI.Text = "";
-        linksezioneGB.Text = "";
-        linksezioneRU.Text = "";
     }
     #endregion
 
     #region GESTIONE CARATTERISTICHE DI RICERCA
-
 
     private void CaricaDatiDdlCaratteristiche(int p1, int p2, int p3, int p4, int p5, int p6)
     {
@@ -2566,7 +2237,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             litCodp.Text = "";
-           txtCar1I.Text = "";
+            txtCar1I.Text = "";
             txtCar1GB.Text = "";
             txtCar1RU.Text = "";
         }

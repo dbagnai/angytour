@@ -690,10 +690,10 @@ namespace WelcomeLibrary.UF
 
 
                 Exception errret = null;
-            //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
-            // 2016 06 26 si prende da TBL_Config
-            Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, sectionName); //Stringa da web config                
-            if (mailvalues.ContainsKey("host"))
+                //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
+                // 2016 06 26 si prende da TBL_Config
+                Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, sectionName); //Stringa da web config                
+                if (mailvalues.ContainsKey("host"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", mailvalues["host"]);
                 if (mailvalues.ContainsKey("port"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", mailvalues["port"]);
@@ -1421,11 +1421,11 @@ namespace WelcomeLibrary.UF
         //}
 
 
-#region GESTIONE CARICAMENTO CONTENENTI DATI RELATIVI ALLE VARIE TABELLE DI RIFERIMTNTO
+        #region GESTIONE CARICAMENTO CONTENENTI DATI RELATIVI ALLE VARIE TABELLE DI RIFERIMTNTO
 
         public static void CaricaMemoriaStaticaCaratteristiche(string codicetipologia, bool removenotpresent = false)
         {
-#region CARICAMENTO DELLE TABELLE DI RIFERIMENTO PER LE CARATTERISTICHE!!
+            #region CARICAMENTO DELLE TABELLE DI RIFERIMENTO PER LE CARATTERISTICHE!!
             Caratteristiche = new List<WelcomeLibrary.DOM.TabrifCollection>();
             //Caratteristica1
             Caratteristiche.Add(CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1"));
@@ -1492,7 +1492,7 @@ namespace WelcomeLibrary.UF
                         idtoremove.Add(t.Codice);
                 foreach (string id in idtoremove) Caratteristiche[5].RemoveAll(c => c.Codice == id);
             }
-#endregion
+            #endregion
 
         }
 
@@ -1599,8 +1599,7 @@ namespace WelcomeLibrary.UF
         public static void CaricaListaStaticaNazioni(string connection, bool listacompleta = true)
         {
             if (connection == null || connection == "") return;
-
-
+         
             TabrifCollection _list = new TabrifCollection();
             Nazioni = _list;
 
@@ -1610,16 +1609,19 @@ namespace WelcomeLibrary.UF
             _naz.Codice = "XX";
             _naz.Lingua = "I";
             _naz.Campo1 = "Estero";
+            _naz.Double1 = 0;
             _list.Add(_naz);
             _naz = new Tabrif();
             _naz.Codice = "XX";
             _naz.Lingua = "GB";
             _naz.Campo1 = "International";
+            _naz.Double1 = 0;
             _list.Add(_naz);
             _naz = new Tabrif();
             _naz.Codice = "XX";
             _naz.Lingua = "RU";
             _naz.Campo1 = "International";
+            _naz.Double1 = 0;
             _list.Add(_naz);
 
 
@@ -1642,6 +1644,10 @@ namespace WelcomeLibrary.UF
                             _naz.Codice = reader.GetString(reader.GetOrdinal("CodiceNazione")).Trim();
                             _naz.Campo1 = reader.GetString(reader.GetOrdinal("Descrizione")).Trim();
                             _naz.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
+                            _naz.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
+                            if (!reader["Double1"].Equals(DBNull.Value))
+                                _naz.Double1 = reader.GetDouble(reader.GetOrdinal("Double1"));
+
                             _list.Add(_naz);
                         }
                     }
@@ -2703,7 +2709,7 @@ ZW	Zimbabwe
         }
 
 
-#endregion
+        #endregion
 
 
         public static string SostituisciTestoACapo(string testo)

@@ -183,14 +183,15 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = references.ResMan("Common",Lingua, "risposta_5");
+            output.Text = references.ResMan("Common", Lingua, "risposta_5");  
         }
-        output.Text += " " + references.ResMan("Common",Lingua, "GoogleConversione");
+
+
 #if true
 
         //Qui devo scrivere nella tabella ordini
         //i dati qui memorizzati ( TBL_CARRELLO_ORDINI )
-        //bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
+        //bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
         //if (!authandcapturemode)
         //    totali.Pagato = true; //Nel caso di transazione paypal con carta in modalità diretta!! la setto pagata!!!
         totali.Pagato = true;
@@ -210,29 +211,69 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Offerte off = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item.id_prodotto.ToString());
             if (off != null)
             {
-                off.DenominazioneI += "(Pagato)";
-                off.Archiviato = false;
                 if (off.Qta_vendita != null)
                 {
                     off.Qta_vendita = off.Qta_vendita.Value - item.Numero;
                     if (off.Qta_vendita < 0) off.Qta_vendita = 0;
+                    offDM.UpdateOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
+                    offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
                 }
-                offDM.UpdateOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
-                offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
+                else if (!string.IsNullOrEmpty(off.Xmlvalue))
+                {
+                    //qui devo controllare le disponibilità per tagli/colore
+                    List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off.Xmlvalue);
+                    foreach (ModelCarCombinate elem in listCarr)
+                    {
+                        if (elem.id == item.Campo2)
+                        {
+                            int qtaCalc = 0;
+                            qtaCalc = (Convert.ToInt32(elem.qta)) - item.Numero;
+                            if (qtaCalc < 0) elem.qta = "0";
+                            else elem.qta = qtaCalc.ToString();
+                        }
+                    }
+
+                    //adesso serializzo, sostituisco e risalvo
+                    string ret = Newtonsoft.Json.JsonConvert.SerializeObject(listCarr);
+                    off.Xmlvalue = ret;
+
+                    offDM.UpdateOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
+                    offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
+                }
             }
 
 #endif
         }
+
+        //Creiamo il file per export degli ordini...
+        try
+        {
+            //CreaFileExportOrdini(totali, prodotti, cliente);
+        }
+        catch (Exception err)
+        {
+            output.Text = err.Message + " <br/> ";
+            switch (Lingua)
+            {
+                case "I":
+                    output.Text += "Errore creazione export ordini. Contattatare l'assistenza. ";
+                    break;
+                case "GB":
+                    output.Text += "Error creating export order. Contact support.";
+                    break;
+            }
+        }
+
         try
         {
             //Inviamo le email di conferma al portale ed al cliente
             string TestoMail = "";
             //Invio la mail per il fornitore
-            string SoggettoMailFornitore = references.ResMan("Common",Lingua, "OrdineSoggettomailRichiesta") + Nome;
+            string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;  
             TestoMail = CreaMailPerFornitore(totali, prodotti);
             Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
-            string SoggettoMailCliente = references.ResMan("Common",Lingua, "OrdineSoggettomailRiepilogo") + Nome;
+            string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome; 
             TestoMail = CreaMailCliente(totali, prodotti);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
         }
@@ -243,7 +284,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
     }
 
-   
     private void VisualizzaErrorePaypal(string codiceordine)
     {
         output.Text = "Errore transazione non avvenuta, cod " + codiceordine;

@@ -704,14 +704,14 @@
                                                     target="_blank" title="" class="buttonstyle">
                                                     <%= ImpostaTestoRichiesta() %>
                                                 </a>--%>
-                                                <%= "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/Content_Tipo3.aspx?TipoContenuto=Richiesta&Lingua=" + Lingua+ "&idOfferta=" + idOfferta + "\">" + ImpostaTestoRichiesta() + "</a>" %>
+                                                <%# "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/Content_Tipo3.aspx?TipoContenuto=Richiesta&Lingua=" + Lingua+ "&idOfferta=" + idOfferta + "\">" + ImpostaTestoRichiesta() + "</a>" %>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <%= "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>" + references.ResMan("BaseText", Lingua,"Stampa") + "</a>"%>
+                                            <%# "<a class=\"buttonstyle\"  target=\"_blank\" href=\"" + PercorsoAssolutoApplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + idOfferta + "&CodiceTipologia=" + CodiceTipologia + "&Lingua=" + Lingua  + "\"><i class=\"fa fa-print\"></i>" + references.ResMan("BaseText", Lingua,"Stampa") + "</a>"%>
                                         </div>
                                         <div class="col-sm-4">
-                                            <%= "<a class=\"buttonstyle\"    href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>"%>
+                                            <%# "<a class=\"buttonstyle\"    href=\"" + GeneraBackLink() + "\"><i class=\"fa fa-reply-all\"></i>&nbsp;" + references.ResMan("Common", Lingua,"testoIndietro") + "</a>"%>
                                         </div>
                                     </div>
 
@@ -792,8 +792,7 @@
                 </asp:UpdatePanel>--%>
                 </div>
             </div>
-          <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
+          <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script> 
 
             <div runat="server" id="divSuggeriti" style="margin-bottom: 15px">
 

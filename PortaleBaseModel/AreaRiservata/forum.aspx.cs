@@ -976,7 +976,7 @@ public partial class AreaRiservata_Default : CommonPage
                             if (ResizeAndSave(UploadControl.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 150, 150, pathDestinazione + "\\", "Ant" + NomeCorretto);
+                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto,450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto);
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
                                 try

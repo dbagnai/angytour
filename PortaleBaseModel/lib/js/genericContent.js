@@ -106,6 +106,8 @@ function bindgenericcontent(el, localObjects) {
         //setTimeout(function (el) { rebuildCarousel(el) }, 3000);
         //rebuildCarousel(el);
         inizializzaFlexsliderGallery(el, container);
+      //  $('.zoommgfy').magnify(); //ATTIVA LO ZOOM NELLA GALLERIA
+
     });
     CleanHtml($('#' + container));
     reinitaddthis();

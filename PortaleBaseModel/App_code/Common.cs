@@ -13,6 +13,7 @@ using System.Web.Profile;
 using System.Xml;
 using System.Data.OleDb;
 using System.Text;
+using System.Drawing.Imaging;
 
 /// <summary>
 /// This Page class is common to all sample pages and exists as a place to
@@ -110,6 +111,22 @@ public class CommonPage : Page
         richiesta.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
 
     }
+    public static string BreadcrumbConstruction(List<Tabrif> links)
+    {
+        //Creo la struttura annidata dei link
+        StringBuilder sb = new StringBuilder();
+        foreach (Tabrif l in links)
+        {
+            sb.Append("<li>");
+            sb.Append("<a");
+            sb.Append(" href=\"" + l.Campo1 + "\">");
+            sb.Append(l.Campo2);
+            sb.Append("</a> ");
+            sb.Append("</li>");
+
+        }
+        return sb.ToString();
+    }
     public static string ScalaImmagine(string pathFileorigine, HttpServerUtility Server, string percorsoFisicoorigine = "")
     {
         //string percorsoviranteprime = WelcomeLibrary.STATIC.Global.PercorsoComune;
@@ -177,7 +194,28 @@ public class CommonPage : Page
 
                     default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
                 }
-                img.Save(pathAnteprime + nomeAnteprima, imgF);
+
+                if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
+                {
+
+                    // Create an Encoder object based on the GUID for the Quality parameter category.
+                    ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
+                    System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                    // Create an EncoderParameters object.
+                    // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                    EncoderParameters myEncoderParameters = new EncoderParameters(3);
+                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                    myEncoderParameters.Param[0] = myEncoderParameter;
+                    myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
+                    myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
+
+                    img.Save(pathAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters);
+                }
+                else
+                    img.Save(pathAnteprime + nomeAnteprima, imgF);
+
+
+
                 file.Close();
                 ret = true;
                 if (!System.IO.File.Exists(pathAnteprime + nomeAnteprima))
@@ -187,6 +225,18 @@ public class CommonPage : Page
         catch
         { ret = false; }
         return ret;
+    }
+    private static System.Drawing.Imaging.ImageCodecInfo GetEncoder(System.Drawing.Imaging.ImageFormat format)
+    {
+        System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageDecoders();
+        foreach (System.Drawing.Imaging.ImageCodecInfo codec in codecs)
+        {
+            if (codec.FormatID == format.Guid)
+            {
+                return codec;
+            }
+        }
+        return null;
     }
     public static string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false)
     {
@@ -390,22 +440,7 @@ public class CommonPage : Page
         return ret;
     }
 
-    public static string BreadcrumbConstruction(List<Tabrif> links)
-    {
-        //Creo la struttura annidata dei link
-        StringBuilder sb = new StringBuilder();
-        foreach (Tabrif l in links)
-        {
-            sb.Append("<li>");
-            sb.Append("<a");
-            sb.Append(" href=\"" + l.Campo1 + "\">");
-            sb.Append(l.Campo2);
-            sb.Append("</a> ");
-            sb.Append("</li>");
 
-        }
-        return sb.ToString();
-    }
     public static string ConteggioCaratteri(string testo, int caratteri = 600, bool nolink = false, string testoAggiunto = "")
     {
         string ritorno = testo;
@@ -1340,7 +1375,7 @@ public class CommonPage : Page
         return sb.ToString();
     }
 
-    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, int idprodotto, int quantita, string username, string idcombinato = "", int idcarrello = 0, int idcliente = 0)
+    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, int idprodotto, int quantita, string username, string idcombinato = "", int idcarrello = 0, int idcliente = 0 )
     {
         bool ret = false;
         string sessionid = "";
@@ -1664,6 +1699,11 @@ public class CommonPage : Page
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, bool supplementospedizione, double totaleordine, double totalesconto, bool contrassegno = false)
     {
         double spesespedizione = 0;
+
+        double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
+        if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = Convert.ToDouble(ConfigManagement.ReadKey("defaultesterospedizione")); //Costostandard per l'estero
+
+
         //Da calcolare in base ai parametri passati
         //long totalearticoli = 0;
         //foreach (Carrello c in ColItem)
@@ -1675,19 +1715,20 @@ public class CommonPage : Page
         if (contrassegno) //Supplemento isole supplementoSpedizioni
             spesespedizione = Convert.ToDouble(ConfigManagement.ReadKey("supplementoContrassegno"));
 
-        //supplementoContrassegno
 
         switch (codicenazione)
         {
-            //case "GB":
-            //    spesespedizione = 20;
-            //    break;
-            default:
-                //if (totalearticoli <= 3)
+           case "IT":
                 if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
                 {
-                    spesespedizione += Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
+                    spesespedizione += costospedizionenazione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
                 }
+                break;
+            default:
+                //if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
+                //{
+                    spesespedizione += costospedizionenazione; 
+                //}
                 break;
         }
         return spesespedizione;

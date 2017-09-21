@@ -104,7 +104,7 @@ public partial class AreaContenuti_GestioneGalleria : CommonPage
                             if (ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 350, 350, pathDestinazione + "\\", "Ant" + NomeCorretto);
+                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto);
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
                                 try
@@ -372,7 +372,24 @@ public partial class AreaContenuti_GestioneGalleria : CommonPage
 
                 default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
             }
-            img.Save(PathTempAnteprime + nomeAnteprima, imgF);
+            if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
+            {
+
+                // Create an Encoder object based on the GUID for the Quality parameter category.
+                ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                // Create an EncoderParameters object.
+                // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                EncoderParameters myEncoderParameters = new EncoderParameters(3);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
+                myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
+
+                img.Save(PathTempAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters);
+            }
+            else
+                img.Save(PathTempAnteprime + nomeAnteprima, imgF);
             file.Close();
         }
         if (!System.IO.File.Exists(PathTempAnteprime + nomeAnteprima))

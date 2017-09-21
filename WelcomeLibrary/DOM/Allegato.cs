@@ -73,7 +73,7 @@ namespace WelcomeLibrary.DOM
             this.File = null;
             this.NomeAnteprima = "";
             this.NomeFile = "";
-            this.Progressivo = 0;
+            this.Progressivo = 1;
         }
         #region IDisposable Membri di
 

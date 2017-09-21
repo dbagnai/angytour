@@ -4,7 +4,12 @@
 <%@ Import Namespace="System.Web.Routing" %>
 
 <script RunAt="server">
+
+
+
+    //////////////////////////////////////////////////////////////////////////////
     /////KEEP ALIVE TIMER///////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
     public static DateTime When1;
     public static double Every1;
     private System.Timers.Timer OpTimer1;
@@ -67,10 +72,12 @@
         OpTimer1.Start();
 
     }
-   
+    //////////////////////////////////////////////////////////////////////////////
     ////KEEP ALIVE APP////////////////////////////////////
-    
-    
+    //////////////////////////////////////////////////////////////////////////////
+
+
+
     //Variabili per Timer per esecuzione compiti schedulati 
     public static DateTime When;
     public static double Every;
@@ -196,15 +203,12 @@
         try
         {
 
-            List<string> Tmp_linksite = new List<string>();
             string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
             string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
             string host = percorsoBase.Replace(".", "");
             host = host.Replace(":", "");
             host = host.Replace("/", "");
             Messaggi["Messaggio"] += host.ToLower();
-
-           
 
             //Carichiamo la lista delle offerte totale
             WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
@@ -224,12 +228,10 @@
 
             //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
 
-        
             string Lingua = "I";
-            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua,"rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
             //Questa è da rivedere in base al codice tipologia !!!!!
-            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             //Lingua = "GB";
@@ -303,7 +305,6 @@
             StartTimer();
 
 
-            
             //TIMER2 -> PER KEEP ALIVE ( blocca idle timeout brevi di IIS )
             When1 = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
@@ -381,8 +382,8 @@
                     string query = System.Web.HttpContext.Current.Request.Url.Query;
                     if (!string.IsNullOrEmpty(query))
                     {
-                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
-                        appaddress = appaddress.Replace((query), "");
+                        appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
+                        appaddress.Replace((query), "");
                     }
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }

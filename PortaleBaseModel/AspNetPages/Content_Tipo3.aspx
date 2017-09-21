@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-10 col-sm-10 col-xs-12">
                 <h2 class="h1-body-title" style="color: #5c5c5c">
-                    <asp:Literal Text="" runat="server" ID="litNomePagina" />
+                    <asp:Literal Text="" runat="server" ID="litNomePagina" /></h2>
             </div>
             <div class="col-md-1 col-sm-1">
             </div>
@@ -45,7 +45,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-<%--    <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
+    <%-- <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
         AsyncPostBackErrorMessage="Errore generico. Contattare HelpDesk" AsyncPostBackTimeout="400"
         EnablePartialRendering="true"
         EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
@@ -59,7 +59,7 @@
             </p>
             <asp:Label runat="server" ID="lblContenutiContatti"></asp:Label>
 
-            <asp:PlaceHolder runat="server" ID="plhForm" Visible="false">
+            <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
                 <div style="width: 80%; margin: 0px auto; background-color: #fdfdfd; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
                     <div class="ui-15">
                         <div class="ui-content">
@@ -163,7 +163,7 @@
                                                             <asp:TextBox ID="txtArrivo" Width="99%" runat="server"
                                                                 class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriododa") %>' />
                                                             <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                          <%--  <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
+                                                            <%-- <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
                                                                 TargetControlID="txtArrivo">
                                                             </Ajax:CalendarExtender>--%>
                                                         </div>
@@ -172,7 +172,7 @@
                                                         <div class="ui-input">
                                                             <asp:TextBox ID="txtPartenza" Width="99%" runat="server" class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriodoa") %>' />
                                                             <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                            <%--<Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
+                                                            <%--  <Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
                                                                 TargetControlID="txtPartenza">
                                                             </Ajax:CalendarExtender>--%>
                                                         </div>
@@ -182,7 +182,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
-                                                            <%--<Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
+                                                            <%-- <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
                                                                 MaskType="Number" TargetControlID="txtAdulti" InputDirection="RightToLeft" Mask="99"
                                                                 AutoComplete="false">
                                                             </Ajax:MaskedEditExtender>--%>
@@ -198,14 +198,11 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
-                                                            <%--<Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender2" AcceptNegative="None"
-                                                                MaskType="Number" TargetControlID="txtBambini" InputDirection="RightToLeft" Mask="99"
-                                                                AutoComplete="false">
-                                                            </Ajax:MaskedEditExtender>--%>
-                                                             <script>
-                                                                 jQuery(function ($) {
-                                                                     $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
-                                                                 });
+
+                                                            <script>
+                                                                jQuery(function ($) {
+                                                                    $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
+                                                                });
                                                             </script>
                                                             <asp:TextBox ID="txtBambini" Width="99%" runat="server"
                                                                 class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoBambini") %>' />
@@ -288,7 +285,7 @@
                                                     <div id="recaptcharesponse"></div>
                                                     <asp:Button ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true"
                                                         ValidationGroup="MailInfo" class="divbuttonstyle" OnClick="btnInvia_Click" OnClientClick="return ConfirmCancella()" />
-                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                                                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                     <style>
                                                         .g-recaptcha {
                                                             margin: 15px auto !important;
@@ -299,28 +296,37 @@
                                                             text-align: -o-center;
                                                             text-align: -ms-center;
                                                         }
-
                                                         #recaptcharesponse {
                                                             font-size: 1.5rem;
                                                             color: red;
                                                         }
                                                     </style>
                                                     <script>
-                                                        function ConfirmCancella() {
-                                                          <%--  var response = grecaptcha.getResponse();
-                                                            if (response.length == 0)  //reCaptcha not verified
-                                                            {
-                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
-                                                                return false;
-                                                            }
-                                                            else {--%>
-                                                            if (Page_ClientValidate("MailInfo")) {
-                                                                /*do work and go for postback*/
-                                                            } else {
-                                                                // alert('not validated');
-                                                            }
-                                                            //}
-                                                        }
+                                                                function ConfirmCancella() {
+                                                                     if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
+                                                                         $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                                                         return false;
+                                                                     }
+                                                                     else {
+                                                                         $("#recaptcharesponse").html('');
+                                                                     }
+
+                                                                  <%--  var response = grecaptcha.getResponse();
+                                                                    if (response.length == 0)  //reCaptcha not verified
+                                                                    {
+                                                                        $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
+                                                                        return false;
+                                                                    }
+                                                                    else {--%>
+                                                                     if (Page_ClientValidate("MailInfo")) {
+                                                                         /*do work and go for postback*/
+                                                                     } else {
+                                                                         // alert('not validated');
+                                                                     }
+                                                                    //}
+
+                                                                    //if (typeof (Page_ClientValidate) == 'function') if (Page_ClientValidate()) { return confirm('Are   you   sure   to   submit   ?'); } else return false;
+                                                                }
                                                     </script>
                                                     <br />
                                                     <asp:CheckBox CssClass="from-control" ID="chkPrivacy" runat="server" Checked="true" Text='<%# references.ResMan("Common", Lingua,"chkPrivacy")  %>' />

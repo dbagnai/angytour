@@ -27,27 +27,28 @@
             <div class="col-lg-8">
                 <div class="widget bill-address">
                     <%--  <h3>
-                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"IndirizzoFatturazione") %>' runat="server" /></h3>--%>
+                        <%= references.ResMan("Common", Lingua,"IndirizzoFatturazione") %></h3>--%>
                     <div class="form-vertical">
                         <div class="form-row row" style="display: block">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"selezionaNazione") %>' runat="server" /></label>
-                                <asp:DropDownList ID="ddlNazione" Enabled="false"
+                                    <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
+                                </label>
+                                <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
                                     CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                             </div>
                         </div>
                         <div class="form-row row">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto2") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpNome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
                                 <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpNome" runat="server" />
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto3") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                                 <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpCognome" runat="server" />
@@ -56,14 +57,14 @@
                         <div class="form-row row" style="display: block">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto16s") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto16s") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpRagsoc" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16s") %>' />
                                 <%--        <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpRagsoc" runat="server" />--%>
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto17s") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto17s") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPiva" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17s") %>' />
                                 <%--   <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpPiva" runat="server" />--%>
@@ -73,14 +74,14 @@
 
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto10") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpIndirizzo" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' />
                                 <%-- <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpIndirizzo" runat="server" />--%>
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto8") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto8") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpComune" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto8") %>' />
@@ -91,16 +92,15 @@
                         <div class="form-row row form-group" style="display: block">
                             <div class="col-lg-6">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto7") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpProvincia" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' />
                                 <%-- <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpProvincia" runat="server" />--%>
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto9") %>
                                 </label>
-
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCap" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' />
                                 <%--                <asp:RequiredFieldValidator ErrorMessage="*" ControlToValidate="inpCap" runat="server" />--%>
                             </div>
@@ -109,7 +109,7 @@
                         <div class="form-row row">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto4") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpEmail" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto11") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
@@ -127,7 +127,7 @@
                 </div>
                 <div class="widget shop-shipping" runat="server" visible="true">
                     <h3>
-                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"IndirizzoSpedizione") %>' runat="server" /></h3>
+                        <%= references.ResMan("Common", Lingua,"IndirizzoSpedizione") %> </h3>
                     <div class="form-row row">
                         <div class="col-lg-12 form-group">
                             <label class="checkbox">
@@ -140,14 +140,14 @@
                         <div class="form-row row">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto10") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpIndirizzoS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' />
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto8") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto8") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpComuneS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto8") %>' />
@@ -156,13 +156,13 @@
                         <div class="form-row row form-group">
                             <div class="col-lg-6">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto7") %>
                                 </label>
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpProvinciaS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' />
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto9") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCaps" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' />
@@ -171,7 +171,7 @@
                         <div class="form-row row">
                             <div class="col-lg-6 form-group">
                                 <label>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' runat="server" />
+                                    <%= references.ResMan("Common", Lingua,"FormTesto11") %>
                                 </label>
 
                                 <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTelS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
@@ -184,7 +184,7 @@
                     <div class="form-row row">
                         <div class="col-lg-12 form-group">
                             <label>
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"FormTesto14") %>' runat="server" />
+                                <%= references.ResMan("Common", Lingua,"FormTesto14") %>
                             </label>
                             <textarea class="form-control" enableviewstate="true" placeholder='<%# references.ResMan("Common", Lingua,"testoNote") %>' runat="server" id="inpNote" rows="5"></textarea>
                         </div>
@@ -192,17 +192,17 @@
                 </div>
                 <div class="widget shop-selections">
                     <h3>
-                        <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,"CarrelloSelezioneArticoli") %>'></asp:Literal></h3>
+                        <%= references.ResMan("Common", Lingua,"CarrelloSelezioneArticoli") %></h3>
                     <table class="table table-cart">
                         <thead>
                             <tr>
                                 <td class="cart-product">
-                                    <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,"CarrelloArticolo") %>'></asp:Literal>
+                                    <%= references.ResMan("Common", Lingua,"CarrelloArticolo") %>
                                 </td>
                                 <td class="cart-quantity">
-                                    <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,"CarrelloQuantita") %>'></asp:Literal></td>
+                                    <%= references.ResMan("Common", Lingua,"CarrelloQuantita") %></td>
                                 <td class="cart-total">
-                                    <asp:Literal runat="server" Text='<%# references.ResMan("Common", Lingua,"CarrelloTotale") %>'></asp:Literal></td>
+                                    <%= references.ResMan("Common", Lingua,"CarrelloTotale") %></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -219,7 +219,7 @@
                                                     ImageUrl='<%#  CommonPage.ComponiUrl(Eval("Offerta.FotoCollection_M.FotoAnteprima"),Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.Id").ToString()) %>'
                                                     Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
                                             </a>--%>
-                                            <div class="product-details" style="height:auto">
+                                            <div class="product-details" style="height: auto">
                                                 <h3 class="product-name">
                                                     <%--  <a id="a1" runat="server"
                                                         href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
@@ -269,7 +269,7 @@
                                     <tr>
                                         <th class="cart-heading" colspan="2">
                                             <span>
-                                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %>' runat="server" /></span>
+                                                <%= references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %></span>
                                         </th>
                                         <td class="cart-total">
                                             <span>
@@ -280,8 +280,8 @@
                                     <%-- <tr>
                                                 <th class="cart-heading" colspan="2">
                                                     <span>
-                                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleSmaltimento") %>' runat="server" /><br />
-                                                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoSmaltimento") %>' runat="server" />
+                                                        <%= references.ResMan("Common", Lingua,"CarrelloTotaleSmaltimento") %><br />
+                                                        <%= references.ResMan("Common", Lingua,"testoSmaltimento") %>
 
                                                     </span>
                                                 </th>
@@ -294,7 +294,7 @@
                                     <tr>
                                         <th class="cart-heading" colspan="2">
                                             <span>
-                                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoSconto") %>' runat="server" /></span>
+                                                <%= references.ResMan("Common", Lingua,"testoSconto") %></span>
                                         </th>
                                         <td class="cart-total">
 
@@ -308,7 +308,7 @@
                                     <tr>
                                         <th class="cart-heading" colspan="2">
                                             <span>
-                                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %>' runat="server" /></span>
+                                                <%= references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %></span>
                                         </th>
                                         <td class="cart-total">
                                             <span>
@@ -319,7 +319,7 @@
                                     <tr>
                                         <th class="cart-heading" colspan="2">
                                             <span>
-                                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %>' runat="server" /></span>
+                                                <%= references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></span>
                                         </th>
                                         <td class="cart-total">
                                             <span>
@@ -333,8 +333,7 @@
                     </table>
                 </div>
                 <div class="widget bill-payment" style="text-align: left">
-
-                    <asp:Label runat="server" ID="Label1" CssClass="TitlePrezzo" Text='<%# references.ResMan("Common", Lingua,"TitleCodiceSconto") %>' />
+                    <span class="TitlePrezzo"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></span>
                     <asp:TextBox runat="server" ID="txtCodiceSconto" />
                     <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" />
                     <span style="color: red">
@@ -343,20 +342,18 @@
                 </div>
 
                 <div class="widget bill-payment">
-                    <h3>
-                        <asp:Literal Text='<%# references.ResMan("Common", Lingua,"testoMetodopagamento") %>' runat="server" /></h3>
+                    <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
 
-                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"txtEstero") %>' runat="server" />
+                    <%= references.ResMan("Common", Lingua,"txtEstero") %>
                     <ul class="unstyled">
                         <li>
                             <input type="radio" class="input-radio" name="payment_method" value="bacs" checked="false"
                                 runat="server" id="inpBonifico" />
                             <label for="payment_method_bacs">
                                 <b>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"txtbacs") %>' runat="server" /></b><br />
+                                    <%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
 
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"chkbacs") %>' runat="server" />
-
+                                <%= references.ResMan("Common", Lingua,"chkbacs") %>
                             </label>
 
                         </li>
@@ -365,10 +362,9 @@
                                 runat="server" id="inpContanti" /><br />
                             <label for="payment_method_contanti">
                                 <b>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"txtcontanti") %>' runat="server" /></b><br />
+                                    <%= references.ResMan("Common", Lingua,"txtcontanti") %></b><br />
 
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"chkcontanti") %>' runat="server" />
-
+                                <%= references.ResMan("Common", Lingua,"chkcontanti") %>
                             </label>
 
                         </li>
@@ -384,9 +380,9 @@
                             <input type="radio" class="input-radio" disabled="false" name="payment_method" value="payway" runat="server" id="inpPayway" />
                             <label for="payment_method_payway">
                                 <b>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"txtpayway") %>' runat="server" /></b><br />
+                                    <%= references.ResMan("Common", Lingua,"txtpayway") %></b><br />
 
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"chkpayway") %>' runat="server" />
+                                <%= references.ResMan("Common", Lingua,"chkpayway") %>
                             </label>
                         </li>
 
@@ -394,9 +390,9 @@
                             <input type="radio" class="input-radio" disabled="false" checked="true" name="payment_method" value="paypal" runat="server" id="inpPaypal" />
                             <label for="payment_method_paypal">
                                 <b>
-                                    <asp:Literal Text='<%# references.ResMan("Common", Lingua,"txtpaypal") %>' runat="server" /></b><br />
+                                    <%= references.ResMan("Common", Lingua,"txtpaypal") %></b><br />
 
-                                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"chkpaypal") %>' runat="server" />
+                                <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                             </label>
                         </li>
                     </ul>

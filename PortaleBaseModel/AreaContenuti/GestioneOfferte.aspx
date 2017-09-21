@@ -22,13 +22,22 @@
                 $get("<%=cancelHidden.ClientID%>").value = "false";
             }
         }
+        function aggiornaview() {
+            //var ctrmail = $('#' + item);
+            __doPostBack('aggiornatettaglio', '');
+        }
+
     </script>
+    <input type="hidden" id="hidIdselected" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidTipologia" runat="server" clientidmode="static" />
+
     <%--  <link href="../App_Themes/TemaPortale1/StylePortale1.css" rel="stylesheet" type="text/css" />--%>
 
     <div class="row" style="background-color: White; padding: 10px 10px 10px 10px">
         <div class="col-sm-5">
             <asp:HiddenField ID="cancelHidden" runat="server" Value="false" />
-            <asp:Literal ID="output" runat="server"></asp:Literal>
+            <span style="font-size:1.4rem;color:crimson">
+                <asp:Literal ID="output" runat="server"></asp:Literal></span>
             <div style="margin-bottom: 30px">
                 <h2>
                     <asp:Literal ID="litTitolo" runat="server"></asp:Literal>
@@ -124,6 +133,34 @@
             </div>
             <div style="margin-bottom: 30px">
                 <h2>Caricamento foto</h2>
+
+                 <script type="text/javascript">
+                     $(document).ready(function () {
+                         startDropZone();
+                     });
+
+                </script>
+                <div style="overflow-y: auto; height: 370px; width: 600px">
+                    <div id="dzContainer">
+                        <div id="dZUpload" class="dropzone" style="background-color: lightyellow; min-height: 370px">
+                            <%--<div class="dz-default dz-message"></div>--%>
+                            <div class="dz-default"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="preview-template" style="display: none;">
+                    <div class="dz-preview dz-file-preview">
+                        <div class="dz-details">
+                            <div class="dz-filename"><span data-dz-name></span></div>
+                            <div class="dz-size" data-dz-size></div>
+                            <img data-dz-thumbnail />
+                        </div>
+                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                        <div class="dz-success-mark"><span>✔</span></div>
+                        <div class="dz-error-mark"><span>✘</span></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                    </div>
+                </div>
                 <table width="100%" style="margin-top: 10px; font-size: 12px; table-layout: fixed; border-collapse: collapse;"
                     cellpadding="0" cellspacing="0">
                     <tr>
@@ -133,11 +170,11 @@
                             <div>
                                 <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default btn-sm" runat="server" />
                                 <br />
-                                Descrizione
-                       
-                                    <br />
+                                Descrizione  <br />
                                 <asp:TextBox runat="server" ID="txtDescrizione" CssClass="form-control" />
                                 <br />
+                                Progressivo <br />
+                                <asp:TextBox runat="server" ID="txtProgressivo" CssClass="form-control" />
                                 <br />
                                 <asp:Button ID="btnCarica" runat="server" CssClass="btn btn-primary btn-sm" Text="Carica Foto" OnClick="btnCarica_Click" />
                                 <asp:Button ID="btnModifica" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica Descrizione Foto" OnClick="btnModifica_Click" />
@@ -158,8 +195,9 @@
                                         <asp:Repeater runat="server" ID="rptImmagini">
                                             <ItemTemplate>
                                                 <li style="list-style: none; display: inline">
-                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>'
-                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />
+                                                 <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
+                                                         <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
+                                                         Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# CommonPage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
                                                 </li>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -260,7 +298,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)" /></strong>
+                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
@@ -269,7 +307,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)" /></strong>
+                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)"/></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
@@ -309,7 +347,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelpre" runat="server" Text="Meta Title Eng (opzionale)" /></strong>
+                                        <asp:Label ID="Labelpre" runat="server"  Text="Meta Title Eng (opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
@@ -448,7 +486,7 @@
 
                 <asp:Panel runat="server" ID="pnlIndirizzo1" Visible="false">
                     <div class="row" style="border: 1px solid White; margin: 1%; padding: 20px">
-                        <%-- <h3>Indirizzo 1</h3>
+                       <%-- <h3>Indirizzo 1</h3>
                         <div class="row" style="margin-bottom: 5px">
                             <div class="col-sm-4">
                                 <strong>Nome della posizione</strong>
@@ -519,7 +557,7 @@
                             </div>
                         </div>
 
-                        <%--  <div class="row" style="margin-bottom: 5px">
+                      <%--  <div class="row" style="margin-bottom: 5px">
                             <div class="col-sm-4">
                                 <strong>Via*</strong>
                             </div>
@@ -800,7 +838,7 @@
                                         <td>
                                             <div>
                                                 <h2>
-                                                    <%= references.ResMan("Common",Lingua,"TitleProdottiGest") %></h2>
+                                                  <%= references.ResMan("Common",Lingua,"TitleProdottiGest") %></h2>
                                             </div>
                                             <table cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -824,6 +862,7 @@
                                                 <tr>
                                                     <td>
                                                         <div style="height: 35px;">
+                                                           
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -859,23 +898,13 @@
                                             <asp:Button ID="btnEliminaProdotto" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaProd_Click" /><br />
                                             <br />
                                             <asp:Label runat="server" ID="ErrorMsgNuovoProdotto" ForeColor="Red"></asp:Label>
-
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneI" runat="server" />
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneGB" runat="server" />
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneRU" runat="server" />
-
                                             <div style="height: 50px;">
                                             </div>
                                         </td>
                                         <td>
                                             <%-- Qui aggiungiamo le dll di selezione per la modifica del SottoProdotto--%>
                                             <div style="margin-left: 50px; border-left: 1px solid #000000; padding-left: 10px;">
-                                                <div>
-                                                    <h2><%= references.ResMan("Common",Lingua,"TitleSottProdottiGest") %></h2>
-                                                </div>
+                                                <div><h2><%= references.ResMan("Common",Lingua,"TitleSottProdottiGest") %></h2></div>
                                                 <table>
                                                     <tr>
                                                         <td style="width: 150px;">
@@ -938,14 +967,6 @@
                                                 <asp:Button ID="btnEliminaSottoProd" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaSottProd_Click" /><br />
                                                 <asp:Label runat="server" ID="ErrorMessage" ForeColor="Red"></asp:Label>
                                             </div>
-
-                                                <br />
-                                                <asp:Literal Text="" ID="linksottosezioneI" runat="server" />
-                                                <br />
-                                                <asp:Literal Text="" ID="linksottosezioneGB" runat="server" />
-                                                <br />
-                                                <asp:Literal Text="" ID="linksottosezioneRU" runat="server" />
-
                                             <div style="height: 50px;">
                                             </div>
                                         </td>
@@ -970,7 +991,7 @@
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica1update">
                         </asp:DropDownList>
                         <br />
-
+                    
                         Descrizione italiano:
                        
                             <asp:TextBox runat="server" ID="txtCar1I" Text="" Width="300" /><br />

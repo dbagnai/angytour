@@ -247,13 +247,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
                 //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezionicatalogo", false, lit, Lingua, true);
 
-#if false  //Tasto per andare alla lista categorie del catalogo
-                HtmlGenericControl divLinkcontainer = (HtmlGenericControl)Master.FindControl("divLinkcontainer");
-                divLinkcontainer.Visible = true;
-                HtmlAnchor linkListacategorie = (HtmlAnchor)Master.FindControl("linkListacategorie");
-                linkListacategorie.HRef = references.ResMan("Common",Lingua,"linkCatalogo;
-                linkListacategorie.InnerHtml = references.ResMan("Common",Lingua,"testolinkSezioniCatalogo; 
-#endif
+
 #if false
                 Panel p = (Panel)Master.FindControl("pnlRicerca");
                 if (p != null)
@@ -307,7 +301,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 ModificaFiltroJS(); //Inserisce nell'objfiltro della session i valori di filtraggio
                 string svetrina = "";
                 if (Vetrina) svetrina = "true";
-                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
+                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
                     cs.RegisterStartupScript(this.GetType(), "clist1", controllist2, true);
@@ -800,6 +794,8 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     //    }
 
 
+
+
     protected void AssociaDatiSocial()
     {
         Tabrif actualpagelink = new Tabrif();
@@ -883,7 +879,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string sezionedescrizione = "";
         if (!string.IsNullOrEmpty(Categoria2liv))
         {
-            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua ==Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
             if (categoriasprodotto != null)
             {
                 sezionedescrizione += " " + categoriasprodotto.Descrizione;
@@ -1053,6 +1049,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //}
         return links;
     }
+
 
     protected void EvidenziaSelezione(string testolink)
     {

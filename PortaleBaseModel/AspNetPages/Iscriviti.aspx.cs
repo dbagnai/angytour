@@ -90,7 +90,7 @@ public partial class _Iscriviti : CommonPage
                 //Lo uso per mandare la mail relativa alla struttura richiesta al termine della validazione
                 ID_contenuto = CaricaValoreMaster(Request, Session, "ID_contenuto");
 
-                CaricaControlliJS();
+              //  CaricaControlliJS();
 
                 CaricaDatiDdlRicerca("it", "", "", "", "", "");
                 InzializzaEtichette();
@@ -351,6 +351,7 @@ public partial class _Iscriviti : CommonPage
                     }
 
                     #region GESTIONE REDIRECT PER RICHIESTE OFFERTE E CONTENUTI
+#if false
                     //IN caso di validazione positiva se ID_contenuto o id_offerta non vuoti -> posso reindirizzare al form di 
                     //richiesta dell'offerta!!
                     Offerte offerta = new Offerte();
@@ -381,6 +382,7 @@ public partial class _Iscriviti : CommonPage
                         }
                     }
 
+#endif
                     #endregion
                 }
                 else
@@ -468,7 +470,6 @@ public partial class _Iscriviti : CommonPage
                 ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
                 prof.IdCliente = cliente.Id_cliente.ToString();
                 prof.Save();
-
 
                 ////Stampo a video i dati dell'username e password Appena Creati
                 //Username.Visible = true;

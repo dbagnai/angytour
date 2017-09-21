@@ -112,6 +112,8 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
 
                         break;
                     }
@@ -237,7 +239,8 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
-
+                        if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         break;
                     }
                 }
@@ -371,7 +374,8 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
-
+                        if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         break;
                     }
                 }
@@ -529,7 +533,8 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
                         item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
-
+                    if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         list.Add(item);
                     }
                 }
@@ -773,6 +778,8 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
                             item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         test += 1;
                         List.Add(item);
                     }
@@ -1189,7 +1196,8 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
                             item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
-
+                        if (!reader["Serialized"].Equals(DBNull.Value))
+                            item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         list.Add(item);
                     }
                 }
@@ -1383,7 +1391,8 @@ namespace WelcomeLibrary.DAL
             OleDbParameter pcsco = new OleDbParameter("@Codicisconto", item.Codicisconto);
             parColl.Add(pcsco);
 
-
+            OleDbParameter pserial = new OleDbParameter("@Serialized", item.Serialized);
+            parColl.Add(pserial);
             string query = "";
             if (item.Id_cliente != 0)
             {
@@ -1391,7 +1400,7 @@ namespace WelcomeLibrary.DAL
                 query = "UPDATE [TBL_CLIENTI] SET Id_card=@Id_card,Nome=@Nome,Cognome=@Cognome,CodiceNAZIONE=@CodiceNAZIONE,CodiceREGIONE=@CodiceREGIONE,CodicePROVINCIA=@CodicePROVINCIA,CodiceCOMUNE=@CodiceCOMUNE";
                 query += ",Cap=@Cap,Indirizzo=@Indirizzo,Email=@Email,Telefono=@Telefono,Cellulare=@Cellulare,Professione=@Professione,IPclient=@IPclient,Validato=@Validato,TestoFormConsensi=@TestoFormConsensi";
                 query += ",DataNascita=@DataNascita,DataInvioValidazione=@DataInvioValidazione,DataRicezioneValidazione=@DataRicezioneValidazione";
-                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto";
+                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto,Serialized=@Serialized";
                 query += " WHERE [Id_cliente] = " + item.Id_cliente;
             }
             else
@@ -1399,11 +1408,11 @@ namespace WelcomeLibrary.DAL
                 //Insert
                 query = "INSERT INTO TBL_CLIENTI (Id_card,Nome,Cognome,CodiceNAZIONE,CodiceREGIONE,CodicePROVINCIA,CodiceCOMUNE";
                 query += ",Cap,Indirizzo,Email,Telefono,Cellulare,Professione,IPclient,Validato,TestoFormConsensi,DataNascita,DataInvioValidazione,DataRicezioneValidazione";
-                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto)";
+                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto,Serialized)";
                 query += " values ( ";
                 query += "@Id_card,@Nome,@Cognome,@CodiceNAZIONE,@CodiceREGIONE,@CodicePROVINCIA,@CodiceCOMUNE";
                 query += ",@Cap,@Indirizzo,@Email,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione";
-                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto )";
+                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto,@Serialized )";
             }
 
             try

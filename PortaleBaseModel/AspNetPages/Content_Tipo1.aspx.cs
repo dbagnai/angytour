@@ -166,9 +166,9 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         //}
 
     }
-
     private void InizializzaSeo(Contenuti item)
     {
+        Tabrif actualpagelink = new Tabrif();
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
         string hreflang = "";
@@ -185,9 +185,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         if (Lingua == "I")
         {
             litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            actualpagelink.Campo2 = (testourlpagina);
+
         }
 #if false
-
         hreflang = " hreflang=\"en\" ";
         //ci = setCulture("GB");
         testourlpagina = item.TitolobyLingua("GB");
@@ -197,10 +199,27 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         if (Lingua == "GB")
         {
             litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+          link.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            link.Campo2 = (testourlpagina);
         } 
 #endif
-    }
 
+
+        List<Tabrif> links = GeneraBreadcrumbPath(true);
+        links.Add(actualpagelink);
+        HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
+        ulbr.InnerHtml = BreadcrumbConstruction(links);
+    }
+    private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
+    {
+        List<Tabrif> links = new List<Tabrif>();
+        Tabrif link = new Tabrif();
+        link.Campo1 = ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome"));
+        link.Campo2 = references.ResMan("Common", Lingua, "testoHome");
+        links.Add(link);
+
+        return links;
+    }
     protected void EvidenziaSelezione(string testolink)
     {
 

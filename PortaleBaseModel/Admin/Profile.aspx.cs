@@ -47,11 +47,13 @@ public partial class admin_Profile : CommonPage
         //    }
         //}
         //else
-            MUColl_filtrata = MUColl;
+        MUColl_filtrata = MUColl;
 
         return MUColl_filtrata;
 
     }
+
+  
     protected string getidcliente(string utente)
     {
         //  save UserLastActivityDate so it can be reassigned later
@@ -115,10 +117,10 @@ public partial class admin_Profile : CommonPage
         //}
         //else
         //{
-            foreach (string ruolo in Roles.GetAllRoles())
-            {
-                ruoli.Add(ruolo);
-            }
+        foreach (string ruolo in Roles.GetAllRoles())
+        {
+            ruoli.Add(ruolo);
+        }
 
         //}
 
@@ -147,7 +149,7 @@ public partial class admin_Profile : CommonPage
     //}
     protected void Page_PreInit(object sender, EventArgs e)
     {
-       
+
         //if (Session["Agenzie"] == null)
         //    if (CaricaSession() != true) Response.Redirect("~/index.aspx");
     }
@@ -156,7 +158,7 @@ public partial class admin_Profile : CommonPage
     {
         if (!IsPostBack)
         {
-      
+
             UsersList.DataSource = this.GetListaUtentiFiltrata();
             UsersList.DataBind();
 
@@ -263,7 +265,7 @@ public partial class admin_Profile : CommonPage
             prof.IdCliente = txtIdcliente.Text;
             prof.IdSocio = txtIdsocio.Text;
 
-            
+
             //SALVARE IL PROFILO non dimenticarsene
             prof.Save();
 
@@ -312,6 +314,6 @@ public partial class admin_Profile : CommonPage
         }
 
     }
-    
-   
+
+
 }

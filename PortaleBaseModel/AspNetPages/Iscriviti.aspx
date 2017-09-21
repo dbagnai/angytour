@@ -2,7 +2,6 @@
     CodeFile="Iscriviti.aspx.cs" Inherits="_Iscriviti" Title="" %>
 
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -12,17 +11,17 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:UpdatePanel runat="server" ID="updIscrivi">
-        <ContentTemplate>
+ <%--   <asp:UpdatePanel runat="server" ID="updIscrivi">
+        <ContentTemplate>--%>
                     <div class="row">
-                        <div class="alert-danger">
+                       <div class="alert alert-block">
                             <asp:Label Font-Size="Medium" ID="output" runat="server" Text=""></asp:Label>
                             <asp:Label runat="server" ID="litDescrizioneIscrivi" Text="" Font-Size="Medium" />
                         </div>
                     </div>
                     <div class="row">
 
-                        <script type="text/javascript" language="javascript">
+                        <script type="text/javascript">
                             function OpenWindow(Url, NomeFinestra, features) {
                                 window.open(Url, NomeFinestra, features);
                             }
@@ -158,12 +157,12 @@
                                 </div>
                                 <div class="col-sm-9">
 
-                                    <asp:TextBox ID="txtNascita" Width="100%"
+                                    <asp:TextBox ID="txtNascita" Width="100%" CssClass="datepicker"
                                         Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
 
-                                    <Ajax:CalendarExtender ID="calext" runat="server" Format="dd/MM/yyyy"
+                                   <%-- <Ajax:CalendarExtender ID="calext" runat="server" Format="dd/MM/yyyy"
                                         TargetControlID="txtNascita">
-                                    </Ajax:CalendarExtender>
+                                    </Ajax:CalendarExtender>--%>
                                 </div>
                             </div>
                             <div class="row">
@@ -186,8 +185,6 @@
                                     <br />
                                     <asp:Button ID="btnInvia" runat="server" Text="Invia" CausesValidation="true" UseSubmitBehavior="false"
                                         ValidationGroup="MailInfo" SkinID="btn1" OnClick="btnInvia_Click" />
-                         
-
                                     <asp:ValidationSummary runat="server" ID="Summary" ValidationGroup="MailInfo" DisplayMode="BulletList"
                                         ShowSummary="true" HeaderText="Rilevati dati mancanti per l'invio della proposta:" />
                                 </div>
@@ -202,6 +199,6 @@
                         </asp:PlaceHolder>
 
                     </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+       <%-- </ContentTemplate>
+    </asp:UpdatePanel>--%>
 </asp:Content> 

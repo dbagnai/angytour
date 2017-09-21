@@ -8,10 +8,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
     <div style="text-align: center">
         <h2>
-            <%= ReplaceAbsoluteLinks(ReplaceLinks(references.ResMan("Common",Lingua,"ContentError")))  %>
+            <%= ReplaceAbsoluteLinks(ReplaceLinks(references.ResMan("Common",Lingua,"ContentError") ) ) %>
         </h2>
         <asp:Literal Text="" ID="output" runat="server" />
-
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">

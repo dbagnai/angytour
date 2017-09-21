@@ -79,7 +79,7 @@ public class usermanager
         {
             MembershipUser utente = Membership.GetUser(username, false);
             string passimpostata = utente.ResetPassword();
-            text = "La nuova password automatica è:  " + passimpostata;
+            text = passimpostata;
 
             //Procedura con requires question and aswer
 #if false
@@ -113,14 +113,16 @@ public class usermanager
             if (string.IsNullOrEmpty(password))
                 password = WelcomeLibrary.UF.RandomPassword.Generate(8);
             if (!string.IsNullOrEmpty(username))
+            {
                 Membership.CreateUser(username, password);
-            //associamo l'utente al ruolo
-             Roles.AddUserToRole(username, role);
-            ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(username);
-            prof.IdCliente = idassociato;
-            prof.Save();
-            password = "User: "+ username +" Psw: " + password;
-            esito = true;
+                //associamo l'utente al ruolo
+                Roles.AddUserToRole(username, role);
+                ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(username);
+                prof.IdCliente = idassociato;
+                prof.Save();
+                password = "User: " + username + " Psw: " + password;
+                esito = true;
+            }
         }
         catch (Exception error)
         {
@@ -131,6 +133,36 @@ public class usermanager
         }
         return esito;
     }
-    
 
+    public string GetUsernamebycamporofilo(string field, string value)
+    {
+        string retval = "";
+        //ELIMINIAMO GLI UTENTI CHE NON DOBBIAMO VISUALIZZARE in base all'agenzia
+        MembershipUserCollection MUColl = Membership.GetAllUsers();
+       // MembershipUserCollection MUColl_filtrata = new MembershipUserCollection();
+
+        foreach (MembershipUser _user in MUColl)
+        {
+            DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
+            if (_user != null)
+            {
+                UserLastActivityDate = _user.LastActivityDate;
+            }
+            ProfileCommon prf = (ProfileCommon)ProfileCommon.Create(_user.UserName);
+            string valueselected = prf[field].ToString();
+            if (value == valueselected)
+            { retval = _user.UserName; }
+            // need to reset the UserLastActivityDate that has just been updated by above two lines
+            if (_user != null)
+            {
+                _user.LastActivityDate = UserLastActivityDate;
+                Membership.UpdateUser(_user);
+            }
+        }
+
+        //MUColl_filtrata = MUColl;
+
+        return retval;
+
+    }
 }

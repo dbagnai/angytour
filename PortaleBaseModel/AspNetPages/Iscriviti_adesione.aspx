@@ -2,7 +2,8 @@
     CodeFile="Iscriviti_adesione.aspx.cs" Inherits="AspNetPages_Iscrivitiadesione" Title=""
     MaintainScrollPositionOnPostback="false" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
+
+
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -12,7 +13,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
             <div class="row">
-                <script type="text/javascript" language="javascript">
+                <script type="text/javascript">
                     function OpenWindow(Url, NomeFinestra, features) {
                         window.open(Url, NomeFinestra, features);
                     }

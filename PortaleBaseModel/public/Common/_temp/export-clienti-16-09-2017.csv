@@ -1,0 +1,6 @@
+﻿
+"id";"tipo cliente";"lingua";"Nome";"Cognome";"nazione";"regione";"provincia";"comune";"email";"telefono";"cellulare";"professione";"data nascita";"cap";"indirizzo";"piva";"codici sconto";"consenso email"
+"921";"Commerciale";"I";"Antonio";"Commerciale";"IT";;;;"dbagnai@gmail.com";"";"";"";"01/01/2001 00:00:00";"";"";"";"pippox;15,6;pappox;35,55";"True"
+"926";"Fornitori";"I";"Palli";"Pinco";"IT";Abruzzo;L'Aquila;Anversa degli Abruzzi;"infi@palle.it";"";"";"";"01/01/2001 00:00:00";"";"";"";"";"True"
+"924";"Iscritto Web";"I";"";"Ripar Srl";"IT";;;Chianciano Terme;"dbagnai@webmouse.it";"233223";"";"";"13/09/2017 00:00:00";"53045";"vai rome";"23232323";"";"True"
+"912";"Aziende";"I";"Azienda";"Web Mouse Consulting Srl";"IT";;;;"info@webmouse.sm";"";"";"";"01/01/2001 00:00:00";"";"";"";"";"True"

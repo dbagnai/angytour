@@ -13,8 +13,8 @@
             <div class="col-md-1 col-sm-1">
             </div>
             <div class="col-md-10 col-sm-10 col-xs-12">
-                <spaden class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
-                    <asp:Literal Text="" runat="server" ID="litSezione" /></spaden>
+                <span class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
+                    <asp:Literal Text="" runat="server" ID="litSezione" /></span>
             </div>
             <div class="col-md-1 col-sm-1">
             </div>
@@ -56,7 +56,7 @@
         <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
-            <div class="row">
+            <div class="row" style="color: red; font-size: 1.2rem">
                 <asp:Label ID="output" runat="server"></asp:Label>
             </div>
             <%--Container per inject java della scheda--%>
@@ -67,7 +67,7 @@
                     <div class="blog-post" style="text-align: justify" itemscope="" itemtype="http://schema.org/Product">
                         <div class="blog-span">
                             <div class="row">
-                                <div class="col-sm-7">
+                                <div class="col-sm-8">
                                     <div style="width: 100%; margin-top: 10px; overflow: hidden;" runat="server"
                                         visible='<%# ControlloVisibilita(Eval("FotoCollection_M"))%>'>
                                         <div class="flexslider" data-transition="slide" data-slidernav="auto" id="scheda-slider" style="width: 100%; overflow: hidden; margin-bottom: 10px; margin-top: 0px;">
@@ -85,7 +85,7 @@
                                         </div>
                                     </asp:Panel>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
 
                                     <h1 itemprop="name">
                                         <a id="a4" runat="server"
@@ -108,7 +108,7 @@
                                     <div class="clearfix" style="margin-bottom: 10px"></div>
 
                                     <b class="product-price pull-left" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                        <div style="color: #cdbe70; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <div style="color: #AC4220; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                             <meta itemprop="price" content='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'>
                                             <meta itemprop="priceCurrency" content="EUR">
                                             <asp:Literal ID="Literal4" runat="server" Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", Eval("Prezzo")) + " €"%>'></asp:Literal><br />
@@ -120,22 +120,6 @@
                                         </div>
                                     </b>
                                     <div class="clearfix" style="margin-bottom: 10px"></div>
-
-                                    <div runat="server" class="pull-left" style="max-width: 180px" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
-                                        <%--  <a id="A1" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta" + "&Lingua=" + Lingua%>'  target="_blank" title="" class="buttonstyle">--%>
-                                        <a id="A1" runat="server" href='#richiedilinkpoint' target="_self" title="" class="buttonstyle">
-                                            <%= ImpostaTestoRichiesta()%>
-                                        </a>
-                                    </div>
-
-                                    <div class="clearfix" style="margin-bottom: 30px"></div>
-                                    <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
-                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b92dea4be8e3"></script>
-                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                    <div class="addthis_inline_share_toolbox"></div>
-                                    <div class="clearfix"></div>
-
                                     <%--   <div class="pull-right"  style="font-size: 0.9rem; color: #1f809f; padding-right: 10px">
                               <em>  <%# references.ResMan("BaseText", Lingua,"Proprietario") %>
                                  <span><%# TestoCaratteristica(2, Eval("Caratteristica3").ToString(), Lingua)%></span></em>
@@ -149,30 +133,37 @@
                                     <div class="clearfix"></div>
                                     <meta itemprop="availability" content="in_stock">
                                     <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
-                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
-                                            <div style="width: 200px; padding-left: 2px; padding-right: 2px; margin: 0px auto">
+                                        <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 0px; padding-right: 5px">
                                                 <asp:LinkButton runat="server" ID="btnSottrai"
-                                                    OnClick="btnDecrement" class="btn btn-purple btn-padding pull-left" CommandArgument='<%# Eval("Id") %>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <input runat="server" class="form-control text-center" style="width: 50px; height: 45px; float: left;" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request,Session,Eval("Id").ToString(),"") %>' />
+                                                    OnClick="btnDecrement" class="buttonstyle pull-left"  Style="height: 42px !important" CommandArgument='<%# Eval("Id") %>'><i class="fa fa-minus"></i></asp:LinkButton>
 
-                                                <asp:LinkButton runat="server" ID="btnAggiungi" Style="color: #fff"
-                                                    OnClick="btnIncrement" class="btn  btn-purple btn-padding pull-left" CommandArgument='<%# Eval("Id") %>'>
+                                                <input runat="server" class="form-control text-center" style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 42px; float: left;" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request,Session,Eval("Id").ToString(),"") %>' />
+
+                                                <asp:LinkButton runat="server" ID="btnAggiungi" style="height: 42px !important"   OnClick="btnIncrement" class="buttonstyle pull-left"   CommandArgument='<%# Eval("Id") %>'>
                                                         <i class="fa fa-plus"></i>
                                                 </asp:LinkButton>
+                                        </div>
+                                        <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 0px">
+                                            <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello") %>' class="buttonstyle" Style="width: 100%; font-size: 0.8rem;" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id") %>'>
+                                            </asp:LinkButton>
+                                        </div>
 
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
+                                    </div>
+
+                                    <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                                        <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 0px; padding-right: 5px">
                                             <div style="padding-left: 2px; padding-right: 2px; margin: 0px auto">
-                                                <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello") %>' class="btn  btn-purple btn-padding" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id") %>' Style="width: 100%; font-size: 0.5rem;">
-                                                </asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4" style="margin-top: 5px; margin-bottom: 5px;padding-left:5px;padding-right:5px">
-                                            <div style="padding-left: 2px; padding-right: 2px; margin: 0px auto">
-                                                <a class="btn btn-purple btn-padding" Style="width: 100%; font-size: 0.5rem;"
+                                                <a class="buttonstyle" style="width: 100%; font-size: 0.8rem;"
                                                     id="A14" runat="server" href='<%# references.ResMan("Common", Lingua,"LinkShoppingcart") %>'>
                                                     <%= references.ResMan("Common", Lingua,"gotoShoppingCart") %> 
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 0px">
+                                            <div runat="server"  style="padding-left: 2px; padding-right: 2px; margin: 0px auto" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
+                                                <%--  <a id="A1" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta" + "&Lingua=" + Lingua%>'  target="_blank" title="" class="buttonstyle">--%>
+                                                <a id="A1" runat="server" href='#richiedilinkpoint' target="_self" title="" class="buttonstyle" style="width: 100%; font-size: 0.9rem;">
+                                                    <%= ImpostaTestoRichiesta()%>
                                                 </a>
                                             </div>
                                         </div>
@@ -181,6 +172,11 @@
                             </div>
 
                             <div class="clearfix"></div>
+                            <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script>
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <div class="addthis_inline_share_toolbox"></div>
                             <div class="blog-post-body">
                                 <%--INSERIAMO I PARAMETRI DEL PRODOTTO--%>
                                 <p>
@@ -495,6 +491,7 @@
         }
         $(document).ready(function () {
             inizializzaFlexsliderScheda();
+            $('.zoommgfy').magnify();
         });
         function inizializzaFlexsliderScheda() {
             //Plugin: flexslider con funzione di animazione dei messaggi o oggetti sopra
@@ -577,6 +574,7 @@
                                     }
                                 );
                             });
+
                             /* auto-restart player if paused after action */
                             if (!slider.playing) {
                                 slider.play();

@@ -12,85 +12,29 @@ namespace WelcomeLibrary.UF
     public static class SitemapManager
     {
 
-        public static string getlinktipologia(string codicetipologia, string lingua)
-        {
-            string ret = "";
-            //Visualizzo i link di per tipologia
-            TipologiaOfferte tipo = Utility.TipologieOfferte.Find(s => s.Lingua == lingua && s.Codice == codicetipologia);
-            if (tipo != null)
-            {
-                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, tipo.Descrizione, "", tipo.Codice, "", "", "", "", "", true, false);
-            }
-            return ret;
-        }
-        public static string getlinksezione(string codicetipologia, string codiceprodotto, string lingua)
-        {
-            string ret = "";
-            //Visualizzo i link di sezione prodotto
-            Prodotto prod = Utility.ElencoProdotti.Find(s => s.Lingua == lingua && s.CodiceTipologia == codicetipologia && s.CodiceProdotto == codiceprodotto);
-            if (prod != null)
-            {
-                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, prod.Descrizione, "", prod.CodiceTipologia, prod.CodiceProdotto, "", "", "", "", true, false);
-            }
-            return ret;
-        }
-
-
-        public static string getlinksottosezione(string codicetipologia, string codiceprodotto, string codicesottoprodotto, string lingua)
-        {
-            string ret = "";
-            //Visualizzo i link di sezione sottoprodotti
-            Prodotto prod = Utility.ElencoProdotti.Find(s => s.Lingua == lingua && s.CodiceTipologia == codicetipologia && s.CodiceProdotto == codiceprodotto);
-            SProdotto sprod = Utility.ElencoSottoProdotti.Find(s => s.Lingua == lingua && s.CodiceProdotto == codiceprodotto && s.CodiceSProdotto == codicesottoprodotto);
-            if (prod != null && sprod != null)
-            {
-                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, sprod.Descrizione, "", prod.CodiceTipologia, sprod.CodiceProdotto, sprod.CodiceSProdotto, "", "", "", true, false);
-            }
-            return ret;
-        }
-
         /// <summary>
         /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
         /// </summary>
-        public static List<string> RigeneraLinkSezioniUrlrewrited(string Lingua = "", string removetipologie = "")
+        public static void RigeneraLinkSezioniUrlrewrited()
         {
-            List<string> listalinks = new List<string>();
-            List<TipologiaOfferte> listfiltered = WelcomeLibrary.UF.Utility.TipologieOfferte;
-            if (!string.IsNullOrEmpty(Lingua))
-                listfiltered = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == Lingua);
-            if (!string.IsNullOrEmpty(removetipologie))
-            {
-                string[] arrtipologie = removetipologie.ToLower().Split(',');
-                List<string> ltipidarimuovere = arrtipologie.ToList<string>();
-                if (ltipidarimuovere != null)
-                {
-                    foreach (string _t in ltipidarimuovere)
-                    {
-                        listfiltered.RemoveAll(t => t.Codice == _t);
-                    }
-                }
-            }
-
-
-            foreach (TipologiaOfferte tipologia in listfiltered)
+            foreach (TipologiaOfferte tipologia in WelcomeLibrary.UF.Utility.TipologieOfferte)
             {
                 //WelcomeLibrary.DOM.TipologiaOfferte sezione =
                 //    WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == tipologia.Lingua && tmp.Codice == tipologia.Codice); });
                 //Genero il link per la tipologia
-                listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true));
+                WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true);
 
                 List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
                 foreach (Prodotto p in prodotti)
                 {
                     //Genero il link per la categoria
-                    listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true));
-
+                    WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true);
 
                     List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
                     foreach (SProdotto s in sprodotti)
                     {
                         //Genero il link per la sotto categoria
-                        listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true));
+                        WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true);
                     }
                 }
             }
@@ -110,13 +54,15 @@ namespace WelcomeLibrary.UF
                     //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 1, elem.Codice, elem.Lingua);
                     //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 2, elem.Codice, elem.Lingua);
                     //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 3, elem.Codice, elem.Lingua);
-                    //         listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(elem.Lingua, testolink, "", "rif000100", "", "", "", "", "", true, true, addparms));
+                    //        WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(elem.Lingua, testolink, "", "rif000100", "", "", "", "", "", true, true, addparms);
                     //        break;
                     //}
                 }
             }
-            return listalinks;
         }
+
+
+
 
         /// <summary>
         /// Genera la lista dei link alle schede prodotto per la collection passata

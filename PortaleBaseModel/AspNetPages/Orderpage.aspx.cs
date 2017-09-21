@@ -38,6 +38,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         try
         {
+
             if (!IsPostBack)
             {
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
@@ -53,6 +54,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 //divmaster.Visible = false;
                 //Literal lit = (Literal)Master.FindControl("litPortfolioLow");
                 //Master.CaricaBannersPortfolio("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-low", false, lit, Lingua);
+                DataBind();
 
                 string conversione = CaricaValoreMaster(Request, Session, "conversione");
                 if (conversione == "true")
@@ -66,14 +68,11 @@ public partial class AspNetPages_Orderpage : CommonPage
 
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
-
-                DataBind();
-
-
             }
             else
             {
                 output.Text = "";
+                DataBind();
             }
 
         }
@@ -177,6 +176,12 @@ public partial class AspNetPages_Orderpage : CommonPage
         }
         catch { valore = "IT"; ddlNazione.SelectedValue = valore.ToUpper(); }
     }
+
+
+    protected void ddlNazione_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+    }
     protected string TestoSezione(string codicetipologia)
     {
         string ret = "";
@@ -220,8 +225,9 @@ public partial class AspNetPages_Orderpage : CommonPage
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
-        string codicenazione = SelezionaNazione(carrello);
-        SelezionaClientePerAffitti(carrello);//Dedicato alla gestione affitti
+        string codicenazione = SelezionaNazione(carrello, ddlNazione.SelectedValue);
+
+        //SelezionaClientePerAffitti(carrello);//Dedicato alla gestione affitti
         AggiornaDatiUtenteSuCarrello(carrello); //Aggiorno code sconto e idcliente
 
         VisualizzaTotaliCarrello(codicenazione, "");
@@ -296,7 +302,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
     }
 
-    private string SelezionaNazione(CarrelloCollection carrello)
+    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "")
     {
         string codicenazione = "";
         if (carrello != null)
@@ -304,6 +310,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
             if (c != null)
                 codicenazione = c.Codicenazione;
+            if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
         }
         try
         {
@@ -328,6 +335,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     protected void checkbox_click(object sender, EventArgs e)
     {
         plhShipping.Visible = !((CheckBox)sender).Checked;
+        CaricaCarrello();
 
     }
 
@@ -359,9 +367,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             eCommerceDM ecom = new eCommerceDM();
             //DATI DEL CLIENTE PRESI DAL FORM
             Cliente cliente = new Cliente();
-
-            CaricaDatiClienteDaForm(cliente);
-            //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC
+            //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTEcmd
             Cliente clispediz = new Cliente(cliente);
             if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
                 clispediz.Cap = inpCaps.Value;
@@ -374,7 +380,9 @@ public partial class AspNetPages_Orderpage : CommonPage
             if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
                 clispediz.Telefono = inpTelS.Value;
             string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
-            cliente.Spare1 = cliserialized; //Appoggio i dati di spedizione in Spare 1 del cliente
+            cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            CaricaDatiClienteDaForm(cliente);
+
             if (!(User.Identity != null && !string.IsNullOrWhiteSpace(User.Identity.Name))) // Se non loggato metto il cliente tra quelli newsletter
                 MemorizzaClientePerNewsletter(cliente);
 
@@ -1088,6 +1096,8 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             ctmp.Cap = cliente.Cap;
             ctmp.Telefono = cliente.Telefono;
+            ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
+
             cliDM.InserisciAggiornaCliente("", ref ctmp);
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

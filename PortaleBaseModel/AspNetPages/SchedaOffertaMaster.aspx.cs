@@ -82,6 +82,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia");
                 Categoria = CaricaValoreMaster(Request, Session, "Categoria");
                 Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
+
                 testoindice = CaricaValoreMaster(Request, Session, "testoindice");
 
                 item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
@@ -98,7 +99,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                         Session["Tipologia"] = CodiceTipologia;
                     AssociaDatiSocial(item);
                 }
-
+ 
                 //CaricaControlliJS();
                 SettaTestoIniziale();
                 SettaVisualizzazione(item);
@@ -914,7 +915,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         //string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), data.Id.ToString(), data.CodiceTipologia);
         //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
-
         Tabrif actualpagelink = new Tabrif();
 
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));

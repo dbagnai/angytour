@@ -150,246 +150,256 @@
             list-style-type: none;
         }
     </style>
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-     
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="widget">
-                        <h3>Filtri ordini</h3>
-                        <ul class="menu">
-                            <li runat="server" id="liFiltroclienti">
-                                <asp:UpdatePanel runat="server">
-                                    <ContentTemplate>
-                                        <Ajax:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtCLIENTE"
-                                            OnClientItemSelected="GetCodeR" ServiceMethod="GetCompletionList" ServicePath="WS/WSListaClienti.asmx"
-                                            MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
-                                            CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
-                                            CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
-                                        <script type="text/javascript" >
-                                            function GetCodeR(source, eventArgs) {
-                                                $get("<%= txtCLIENTE.ClientID %>").value = eventArgs.get_value();
-                                            }
-                                        </script>
-                                        Filtro cliente (ricerca per nome o email):<br />
-                                        <asp:TextBox MaxLength="10" ID="txtCLIENTE" Width="100%" runat="server" /><br />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </li>
-                             <li runat="server" id="liFiltroCommerciali">
-                                <asp:UpdatePanel runat="server">
-                                    <ContentTemplate>
-                                        <Ajax:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" TargetControlID="txtCommerciale"
-                                            OnClientItemSelected="GetCodeC" ServiceMethod="GetCompletionList" ServicePath="WS/WSListaClienti.asmx"
-                                            MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
-                                            CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
-                                            CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
-                                        <script type="text/javascript" >
-                                            function GetCodeC(source, eventArgs) {
-                                                $get("<%= txtCommerciale.ClientID %>").value = eventArgs.get_value();
-                                            }
-                                        </script>
-                                        Filtro commerciale (ricerca per nome o email):<br />
-                                        <asp:TextBox MaxLength="10" ID="txtCommerciale" Width="100%" runat="server" /><br />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </li>
 
-                            <li runat="server" id="liFiltroordini">Codice Ordine:<br />
-                                <asp:TextBox ID="txtCodiceordine" Width="100%" runat="server" /><br />
-
-                            </li>
-                            <li>Data inizio ordine:<br />
-                                <asp:TextBox runat="server" ID="txtdatamin" Width="100%" />
-                                <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtdatamin">
-                                </Ajax:CalendarExtender>
-                            </li>
-                            <li>
-                                Data fine ordine:<br />
-                                <asp:TextBox runat="server" ID="txtdatamax" Width="100%" />
-                                <Ajax:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtdatamax">
-                                </Ajax:CalendarExtender>
-                            </li>
-                            <li>
-                                <asp:Button ID="btnFiltroOrdine" runat="server" class="btn btn-info pull-right"
-                                    OnClick="btnFiltroordine_Click" Text="Filter"></asp:Button></li>
-                        </ul>
-                    </div>
-                </div>
-                <!--end:.span3-->
-                <script type="text/javascript">
-                    function stampalista() {
-                        $get("ctl00_ContentPlaceHolder1_btnStampa").click();
-                    }</script>
-                <div class="col-lg-9">
-                    <div class="widget">
-                        <a class="btn btn-default btn-small pull-right" href='<%= WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/AspNetPages/formStampa.aspx" %>'
-                            target="_blank" style="text-decoration: underline;" onclick="javascript:stampalista();">Stampa Lista</a>
-                        <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />
-                        <h3>Lista ordini</h3>
-                        <table class="table table-order table-stripped">
-                            <thead>
-                                <tr>
-                                    <td>Date</td>
-                                    <td>Order ID</td>
-                                    <td>Totale Ordine</td>
-                                    <td>Tipo Pagamento</td>
-                                    <td>Stato</td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="widget">
+                <h3>Filtri ordini</h3>
+                <ul class="menu" style="list-style-type: none">
+                    <li runat="server" id="liFiltroclienti">
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <Ajax:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtCLIENTE"
+                                    OnClientItemSelected="GetCodeR" ServiceMethod="GetCompletionList" ServicePath="WS/WSListaClienti.asmx"
+                                    MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
+                                    CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
+                                    CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
                                 <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        //Funzione eseguita all'apertura del dropdown con classe triggerdata
-                                        $('div.btn-group a.triggerdata').click(function (e) {
-                                            var $div = $(this).parent();
-                                            $(this).dropdown("toggle");
-                                            //alert($(this).parent().find("[id*='ContainerCarrelloDetails']")[0].id);
-                                            if ($(this).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText == "") {
-                                                var codiceordine = $(this).parent().find("[id*='ContainerCarrelloDetails']").attr("title");
-                                                var contenitoredestinazione = $(this).parent().find("[id*='ContainerCarrelloDetails']");
-                                                //Caricamento ajax carrello!
-                                                ShowCurrentCarrello(contenitoredestinazione, codiceordine);
+                                    function GetCodeR(source, eventArgs) {
+                                        $get("<%= txtCLIENTE.ClientID %>").value = eventArgs.get_value();
+                                    }
+                                        </script>
+                                Filtro cliente (ricerca per nome o email):<br />
+                                <asp:TextBox MaxLength="10" ID="txtCLIENTE" Width="100%" runat="server" /><br />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </li>
+                    <li runat="server" id="liFiltroCommerciali">
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <Ajax:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" TargetControlID="txtCommerciale"
+                                    OnClientItemSelected="GetCodeC" ServiceMethod="GetCompletionList" ServicePath="WS/WSListaClienti.asmx"
+                                    MinimumPrefixLength="3" EnableCaching="true" UseContextKey="true" CompletionSetCount="100"
+                                    CompletionInterval="1000" CompletionListCssClass="autocomplete_completionListElement"
+                                    CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
+                                <script type="text/javascript">
+                                    function GetCodeC(source, eventArgs) {
+                                        $get("<%= txtCommerciale.ClientID %>").value = eventArgs.get_value();
+                                    }
+                                        </script>
+                                Filtro commerciale (ricerca per nome o email):<br />
+                                <asp:TextBox MaxLength="10" ID="txtCommerciale" Width="100%" runat="server" /><br />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </li>
+
+                    <li runat="server" id="liFiltroordini">Codice Ordine:<br />
+                        <asp:TextBox ID="txtCodiceordine" Width="100%" runat="server" /><br />
+
+                    </li>
+                    <li>Data inizio ordine:<br />
+                        <asp:TextBox runat="server" ID="txtdatamin" Width="100%" />
+                        <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtdatamin">
+                        </Ajax:CalendarExtender>
+                    </li>
+                    <li>Data fine ordine:<br />
+                        <asp:TextBox runat="server" ID="txtdatamax" Width="100%" />
+                        <Ajax:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtdatamax">
+                        </Ajax:CalendarExtender>
+                    </li>
+                    <li>
+                        <asp:Button ID="btnFiltroOrdine" runat="server" class="btn btn-info pull-right"
+                            OnClick="btnFiltroordine_Click" Text="Filter"></asp:Button></li>
+                </ul>
+            </div>
+        </div>
+        <!--end:.span3-->
+        <script type="text/javascript">
+                                            function stampalista() {
+                                                $get("ctl00_ContentPlaceHolder1_btnStampa").click();
                                             }
-                                            e.preventDefault();
-                                            //Reimposta la funzione che fà apire il dropdown
-                                            $(this).click(function (ev) {
-                                                $(this).dropdown("toggle");
-                                                return false;
-                                            });
-                                            return false;
-                                        });
+                </script>
+        <div class="col-lg-9">
+            <div class="widget">
 
-                                        //Evita che il dropdown si chiuda cliccandodi sopra
-                                        $('.dropdown-menu').click(function (e) {
-                                            e.stopPropagation();
-                                        });
+                <a class="btn btn-default btn-small pull-right" href='<%= WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/AspNetPages/formStampa.aspx" %>'
+                    target="_blank" style="text-decoration: underline;">Stampa Lista</a>
 
+                <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />
+                <asp:Button class="btn btn-default btn-small pull-right" Text="Excel" ID="Button1" OnClick="btnExport_Click" runat="server" CommandArgument="" />
+
+                <h3>Lista ordini</h3>
+                <table class="table table-order table-stripped">
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Order ID</td>
+                            <td>Totale Ordine</td>
+                            <td>Tipo Pagamento</td>
+                            <td>Stato</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                //Funzione eseguita all'apertura del dropdown con classe triggerdata
+                                $('div.btn-group a.triggerdata').click(function (e) {
+                                    var $div = $(this).parent();
+                                    $(this).dropdown("toggle");
+                                    //alert($(this).parent().find("[id*='ContainerCarrelloDetails']")[0].id);
+                                    if ($(this).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText == "") {
+                                        var codiceordine = $(this).parent().find("[id*='ContainerCarrelloDetails']").attr("title");
+                                        var contenitoredestinazione = $(this).parent().find("[id*='ContainerCarrelloDetails']");
+                                        //Caricamento ajax carrello!
+                                        ShowCurrentCarrello(contenitoredestinazione, codiceordine);
+                                    }
+                                    e.preventDefault();
+                                    //Reimposta la funzione che fà apire il dropdown
+                                    $(this).click(function (ev) {
+                                        $(this).dropdown("toggle");
+                                        return false;
                                     });
-                                    function ShowCurrentCarrello(contenitoredestinazione, codiceordine) {
-                                        $.ajax({
-                                            destinationControl: contenitoredestinazione,
-                                            type: "POST",
-                                            url: "StoricoOrdini.aspx/GetCurrentCarrello",
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            data: '{codice: "' + codiceordine + '" }',
-                                            success: function (data) {
-                                                OnSuccess(data, this.destinationControl);
-                                            },
-                                            failure: function (response) {
-                                                alert(response.d);
-                                            }
-                                        });
+                                    return false;
+                                });
+
+                                //Evita che il dropdown si chiuda cliccandodi sopra
+                                $('.dropdown-menu').click(function (e) {
+                                    e.stopPropagation();
+                                });
+
+                            });
+                            function ShowCurrentCarrello(contenitoredestinazione, codiceordine) {
+                                $.ajax({
+                                    destinationControl: contenitoredestinazione,
+                                    type: "POST",
+                                    url: "StoricoOrdini.aspx/GetCurrentCarrello",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    data: '{codice: "' + codiceordine + '" }',
+                                    success: function (data) {
+                                        OnSuccess(data, this.destinationControl);
+                                    },
+                                    failure: function (response) {
+                                        alert(response.d);
                                     }
-                                    function OnSuccess(response, destination) {
-                                        // alert(response.d);
-                                        // alert(destination[0].id);//Controllo destinazione html
-                                        destination.append("<li>" + response.d + "</li>");
-                                    }
+                                });
+                            }
+                            function OnSuccess(response, destination) {
+                                // alert(response.d);
+                                // alert(destination[0].id);//Controllo destinazione html
+                                destination.append("<li>" + response.d + "</li>");
+                            }
                                 </script>
-                                <asp:Repeater runat="server" ID="rtpOrdini">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td class="order-date"><%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("Dataordine") ) %> </td>
-                                            <td class="order-id"><%# Eval("CodiceOrdine").ToString() %></td>
-                                            <td class="order-amount"><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                        <asp:Repeater runat="server" ID="rtpOrdini">
+                            <ItemTemplate>
+                                <tr>
+                                    <td class="order-date"><%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("Dataordine") ) %> </td>
+                                    <td class="order-id"><%# Eval("CodiceOrdine").ToString() %></td>
+                                    <td class="order-amount"><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
                                                                     (Double)Eval("TotaleSmaltimento") +   (Double)Eval("TotaleOrdine") + (Double)Eval("TotaleSpedizione") - (Double)Eval("TotaleSconto")  ) + " €" %></td>
-                                            <td class="order-status"><%# TipopagaDisplay(Container.DataItem) %></td>
-                                            <td class="order-status"><%# StatusDisplay(Container.DataItem) %>
-                                                <asp:CheckBox Checked="<%# StatusCheck(Container.DataItem) %>" ToolTip='<%# Eval("CodiceOrdine").ToString() %>' runat="server" AutoPostBack="true" ID="chkPagato" OnCheckedChanged="chkPagato_CheckedChanged" />
-                                            </td>
-                                            <td class="order-amount">
-                                                <div class="form-cart btn-group pull-right">
-                                                    <a class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown" id="details" runat="server">Dettagli<span class="caret"></span>
-                                                    </a>
-                                                    <table class="dropdown-menu product-attribute table" style="min-width: 350px; text-align: left">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th>Totale Carrello</th>
-                                                                <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                                    <td class="order-status"><%# TipopagaDisplay(Container.DataItem) %></td>
+                                    <td class="order-status"><%# StatusDisplay(Container.DataItem) %>
+                                        <asp:CheckBox Checked="<%# StatusCheck(Container.DataItem) %>" ToolTip='<%# Eval("CodiceOrdine").ToString() %>' runat="server" AutoPostBack="true" ID="chkPagato" OnCheckedChanged="chkPagato_CheckedChanged" />
+                                    </td>
+                                    <td class="order-amount">
+                                        <div class="form-cart btn-group pull-right">
+                                            <a class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown" id="details" runat="server">Dettagli<span class="caret"></span>
+                                            </a>
+                                            <table class="dropdown-menu product-attribute table" style="min-width: 350px; text-align: left">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Totale Carrello</th>
+                                                        <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
                                                                      (Double)Eval("TotaleOrdine") ) + " €" %></td>
-                                                            </tr>
-                                                             <tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Totale Spedizione</th>
+                                                        <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                                                                       (Double)Eval("TotaleSpedizione")   ) + " €" %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Totale Sconto</th>
+                                                        <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                                                                       (Double)Eval("TotaleSconto")   ) + " €" %></td>
+                                                    </tr>
+                                                    <%--    <tr>
                                                                 <th>Totale Smaltimento</th>
                                                                 <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
                                                                        (Double)Eval("TotaleSmaltimento")   ) + " €" %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Totale Spedizione</th>
-                                                                <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                       (Double)Eval("TotaleSpedizione")   ) + " €" %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>IdCliente:</th>
-                                                                <td><%# Eval("Id_cliente").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Mail Cliente:</th>
-                                                                <td><%# Eval("Mailcliente").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Nome Cliente:</th>
-                                                                <td>
-                                                                    <%# Eval("Denominazionecliente").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Fatturazione:</th>
-                                                                <td><%# Eval("Indirizzofatturazione").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Spedizione:</th>
-                                                                <td>
-                                                                    <%# Eval("Indirizzospedizione").ToString() %></td>
-                                                            </tr>
-                                                             <tr>
-                                                                <th>IdCommerciale:</th>
-                                                                <td><%# Eval("Id_commerciale").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>CodSconto:</th>
-                                                                <td><%# Eval("Codicesconto").ToString() %></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Note:</th>
-                                                                <td>
-                                                                    <%# Eval("Note").ToString() %></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </td>
-                                            <td class="order-detail">
-                                                <div class="form-cart btn-group pull-right">
-                                                    <a class="btn btn-default btn-small dropdown-toggle triggerdata" data-toggle="dropdown" id="btnDetails" runat="server">Prodotti<span class="caret"></span>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-cart" style="width: 300px;list-style:none">
-                                                        <li>
-                                                            <ul class="products-list-mini" id="ContainerCarrelloDetails" runat="server" title='<%# Eval("CodiceOrdine").ToString() %>'>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <tr>
-                                    <td>
-                                        <div class="pull-right">
+                                                            </tr>--%>
 
-                                            <UC:PagerEx ID="PagerRisultati" runat="server" NavigateUrl="" PageSize="30" CurrentPage="1"
-                                                TotalRecords="0" dimensioneGruppo="20" nGruppoPagine="1" OnPageCommand="PagerRisultati_PageCommand"
-                                                OnPageGroupClickNext="PagerRisultati_PageGroupClickNext" OnPageGroupClickPrev="PagerRisultati_PageGroupClickPrev" />
+                                                    <tr>
+                                                        <th>IdCliente:</th>
+                                                        <td><%# Eval("Id_cliente").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Mail Cliente:</th>
+                                                        <td><%# Eval("Mailcliente").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nome Cliente:</th>
+                                                        <td>
+                                                            <%# Eval("Denominazionecliente").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fatturazione:</th>
+                                                        <td><%# Eval("Indirizzofatturazione").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Spedizione:</th>
+                                                        <td>
+                                                            <%# Eval("Indirizzospedizione").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>IdCommerciale:</th>
+                                                        <td><%# Eval("Id_commerciale").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>CodSconto:</th>
+                                                        <td><%# Eval("Codicesconto").ToString() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Note:</th>
+                                                        <td>
+                                                            <%# Eval("Note").ToString() %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="clearfix">
+                                    </td>
+                                    <td class="order-detail">
+                                        <div class="form-cart btn-group pull-right">
+                                            <a class="btn btn-default b<tn-small dropdown-toggle triggerdata" data-toggle="dropdown" id="btnDetails" runat="server">Prodotti<span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-cart" style="width: 300px; list-style: none">
+                                                <li>
+                                                    <ul class="products-list-mini" id="ContainerCarrelloDetails" style="list-style: none" runat="server" title='<%# Eval("CodiceOrdine").ToString() %>'>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </td>
                                 </tr>
-                                <%--  <tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <tr>
+                            <td>
+                                <div class="pull-right">
+
+                                    <UC:PagerEx ID="PagerRisultati" runat="server" NavigateUrl="" PageSize="30" CurrentPage="1"
+                                        TotalRecords="0" dimensioneGruppo="20" nGruppoPagine="1" OnPageCommand="PagerRisultati_PageCommand"
+                                        OnPageGroupClickNext="PagerRisultati_PageGroupClickNext" OnPageGroupClickPrev="PagerRisultati_PageGroupClickPrev" />
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </td>
+                        </tr>
+                        <%--  <tr>
                                     <td class="order-date">Mar 1, 2013</td>
                                     <td class="order-id">PO1234-IN</td>
                                     <td class="order-amount">&pound;215.20</td>
@@ -403,13 +413,13 @@
                                     <td class="order-status"><span class="text-error">Cancelled</span></td>
                                     <td class="order-detail"><a href="#" class="btn btn-info">View</a>
                                 </tr>--%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!--end:.span9-->
+                    </tbody>
+                </table>
             </div>
-     
+        </div>
+        <!--end:.span9-->
+    </div>
+
 
 
 </asp:Content>

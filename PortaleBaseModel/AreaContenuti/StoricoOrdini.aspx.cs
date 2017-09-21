@@ -71,6 +71,8 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             id_commerciale = idcliente;
             txtCommerciale.Text = idcliente;
             txtCommerciale.Enabled = false;
+            ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
+
         }
         else
         {
@@ -283,6 +285,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         rtpOrdini.DataBind();
 
 #endif
+        PreparaStampa();
     }
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 
@@ -332,55 +335,75 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         }
         CaricaOrdini();
     }
-    protected void btnStampa_Click(object sender, EventArgs e)
+    protected void btnExport_Click(object sender, EventArgs e)
     {
-        System.Text.StringBuilder sb = new StringBuilder();
-        sb.Append(" <table style=\"padding:10px;border:solid 1px #000000\" class=\"table table-order table-stripped\"><tr>");
-
-        sb.Append("<thead>");
-        sb.Append("<tr style=\"border-bottom:1px solid #000000\">");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Date</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Order ID</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Id Cliente</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Mail</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Denominazione</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Totale Ordine</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Tipo Pagamento</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Pagato</td>");
-        sb.Append("<td style=\"border-right:1px solid #000000\">Dettagli</td>");
-        sb.Append("</tr>");
-        sb.Append("</thead>");
 
         string idforced = id_commerciale;
         if (string.IsNullOrEmpty(idforced))
             idforced = txtCommerciale.Text;
+        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
+        string csvName = "export-ordini-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".csv";
+        string pathFile = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp\\";
+        if (!System.IO.Directory.Exists(pathFile))
+            System.IO.Directory.CreateDirectory(pathFile);
+        eCommerceDM eDM = new eCommerceDM();
+        string retmessage = eDM.ExportOrdersToCsv(pathFile, csvName, listaordini);
 
+        WelcomeLibrary.UF.SharedStatic.DownloadFile(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/" + csvName);
+    }
+
+    protected void PreparaStampa()
+    {
+        System.Text.StringBuilder sb = new StringBuilder();
+        sb.Append(" <table style=\"padding:10px;border:solid 1px #000000\" class=\"table table-order table-stripped\"><tr>");
+        sb.Append("<thead>");
+        sb.Append("<tr style=\"background-color:#ccc;color:#fff\">");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Date</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Order ID</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Id Cliente</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Mail</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Denominazione</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Totale Ordine</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Tipo Pagamento</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Comm.</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Pagato</td>");
+        sb.Append("<td style=\"background-color:#ccc;color:#fff\">Dettagli</td>");
+        sb.Append("</tr>");
+        sb.Append("</thead>");
+        string idforced = id_commerciale;
+        if (string.IsNullOrEmpty(idforced))
+            idforced = txtCommerciale.Text;
         TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
         if (listaordini != null)
             foreach (TotaliCarrello t in listaordini)
             {
                 sb.Append("<tr>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Dataordine) + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + t.CodiceOrdine + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Id_cliente + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Mailcliente + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Denominazionecliente + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Dataordine) + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.CodiceOrdine + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.Id_cliente + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.Mailcliente + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.Denominazionecliente + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
                        t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €" + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\" class=\"order-status\">" + TipopagaDisplay(t) + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\" class=\"order-status\">" + StatusCheck(t) + "</td>");
-                sb.Append("<td style=\"border-right:1px solid #000000\">");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + TipopagaDisplay(t) + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + t.Id_commerciale + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + StatusCheck(t) + "</td>");
+                sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">");
 
                 sb.Append("<ul style=\"list-style:none;font-size:10px\">" + VisualizzaCarrello(t.CodiceOrdine, true) + "</ul>");
                 sb.Append("</td>");
                 sb.Append("</tr>");
-
                 sb.Append("<tr><td colspan=\"9\" style=\"border-bottom:1px solid #000000\"></td></tr>");
             }
 
         sb.Append("</table>");
         Session.Add("datistampa", sb.ToString());
 
+    }
 
+
+    protected void btnStampa_Click(object sender, EventArgs e)
+    {
+        PreparaStampa();
     }
 }

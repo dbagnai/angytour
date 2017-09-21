@@ -1,79 +1,35 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Sorrisi di gioia Blog</title>
+    <title>Legatoria Toscana Blog</title>
     <link>http://localhost:52646</link>
-    <description>Sorrisi di Gioia</description>
-    <lastBuildDate>Wed, 13 Sep 2017 19:57:38 GMT</lastBuildDate>
+    <description>Legatoria Toscana</description>
+    <lastBuildDate>Thu, 21 Sep 2017 17:16:34 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-09-13T19:57+02:00</sy:updateBase>
+    <sy:updateBase>2017-09-21T17:16+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>EVENTO VIDEO
-sottotitolo da inserire Cod: 705</title>
-      <link>http://localhost:52646/I/blog/evento-video-sottotitolo-da-inserire-705</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/evento-video-sottotitolo-da-inserire-705</guid>
-      <pubDate>Tue, 17 Mar 2015 14:56:48 +01:00</pubDate>
+      <title>News 2
+sottotitolo Cod: 864</title>
+      <link>http://localhost:52646/I/blog/news-2-sottotitolo-864</link>
+      <guid isPermaLink="true">http://localhost:52646/I/blog/news-2-sottotitolo-864</guid>
+      <pubDate>Wed, 20 Sep 2017 16:35:40 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="EVENTO VIDEO
-sottotitolo da inserire" width="350" /><p>Ea diam nullam nec. Vim an magna mutat dicta. Quando recusabo expetendis est ne, ne sed volumus molestiae omittantur, ne quo vide consulatu. Vim simul nobis moderatius an, est agam inimicus an. Equidem detracto epicurei nam ne. Ex mea malis soleat mucius.  <br/>  <br/> Ius natum tempor persequeris no. Ius dolor facilisi no, ea sea semper dictas. Mei legere postulant id, rebum inermis ea eum. Pri ut vide sale </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/evento-video-sottotitolo-da-inserire-705"><em>EVENTO VIDEO
-sottotitolo da inserire</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="News 2
+sottotitolo" width="350" /><p>Lorem prova ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-2-sottotitolo-864"><em>News 2
+sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>EVENTO WEDDING PARTY
-sottotitolo da inserire Cod: 703</title>
-      <link>http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-703</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-703</guid>
-      <pubDate>Tue, 17 Mar 2015 14:56:48 +01:00</pubDate>
+      <title>News 1
+sottotitolo Cod: 863</title>
+      <link>http://localhost:52646/I/blog/news-1-sottotitolo-863</link>
+      <guid isPermaLink="true">http://localhost:52646/I/blog/news-1-sottotitolo-863</guid>
+      <pubDate>Tue, 12 Sep 2017 16:42:26 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/703/dsc_0800-2.jpg" alt="EVENTO WEDDING PARTY
-sottotitolo da inserire" width="350" /><p>Ea diam nullam nec. Vim an magna mutat dicta. Quando recusabo expetendis est ne, ne sed volumus molestiae omittantur, ne quo vide consulatu. Vim simul nobis moderatius an, est agam inimicus an. Equidem detracto epicurei nam ne. Ex mea malis soleat mucius.  <br/>  <br/> Ius natum tempor persequeris no. Ius dolor facilisi no, ea sea semper dictas. Mei legere postulant id, rebum inermis ea eum. Pri ut vide sale </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-703"><em>EVENTO WEDDING PARTY
-sottotitolo da inserire</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>EVENTO WEDDING PARTY
-sottotitolo da inserire Cod: 568</title>
-      <link>http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-568</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-568</guid>
-      <pubDate>Tue, 17 Mar 2015 14:56:48 +01:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/568/prova1.jpg" alt="EVENTO WEDDING PARTY
-sottotitolo da inserire" width="350" /><p>Ea diam nullam nec. Vim an magna mutat dicta. Quando recusabo expetendis est ne, ne sed volumus molestiae omittantur, ne quo vide consulatu. Vim simul nobis moderatius an, est agam inimicus an. Equidem detracto epicurei nam ne. Ex mea malis soleat mucius.  <br/>  <br/> Ius natum tempor persequeris no. Ius dolor facilisi no, ea sea semper dictas. Mei legere postulant id, rebum inermis ea eum. Pri ut vide sale </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-568"><em>EVENTO WEDDING PARTY
-sottotitolo da inserire</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>EVENTO DEGUSTAZIONE IN CANTINA
-sottotitolo da inserire Cod: 567</title>
-      <link>http://localhost:52646/I/blog/evento-degustazione-in-cantina-sottotitolo-da-inserire-567</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/evento-degustazione-in-cantina-sottotitolo-da-inserire-567</guid>
-      <pubDate>Tue, 17 Feb 2015 14:43:52 +01:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/567/prova3.jpg" alt="EVENTO DEGUSTAZIONE IN CANTINA
-sottotitolo da inserire" width="350" /><p>Ea diam nullam nec. Vim an magna mutat dicta. Quando recusabo expetendis est ne, ne sed volumus molestiae omittantur, ne quo vide consulatu. Vim simul nobis moderatius an, est agam inimicus an. Equidem detracto epicurei nam ne. Ex mea malis soleat mucius.  <br/>  <br/> Ius natum tempor persequeris no. Ius dolor facilisi no, ea sea semper dictas. Mei legere postulant id, rebum inermis ea eum. Pri ut vide sale </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/evento-degustazione-in-cantina-sottotitolo-da-inserire-567"><em>EVENTO DEGUSTAZIONE IN CANTINA
-sottotitolo da inserire</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>ARTE E FOLLIA
-Antonio Ligabue Pietro Ghizzardi Cod: 566</title>
-      <link>http://localhost:52646/I/blog/arte-e-follia-antonio-ligabue-pietro-ghizzardi-566</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/arte-e-follia-antonio-ligabue-pietro-ghizzardi-566</guid>
-      <pubDate>Sat, 14 Feb 2015 13:09:11 +01:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/566/ligabue.jpg" alt="ARTE E FOLLIA
-Antonio Ligabue Pietro Ghizzardi" width="350" /><p>A cura di Vittorio Sgarbi <br/> Organizzata da Augusto Agosta Tota <br/> con la consulenza scientifica del Centro Studi e Archivio Antonio Ligabue di Parma <br/>  <br/> Coordinamento generale <br/> Catia Monacelli <br/>  <br/> Promossa da <br/> Comune di Gualdo Tadino, Polo Museale Città di Gualdo Tadino, Regione Umbria, Fondazione Cassa di Risparmio di Perugia <br/>  <br/> Gualdo Tadino, Perugia <br/> 17 aprile - 30 ottobre 2016 • Chiesa Monumentale di </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/arte-e-follia-antonio-ligabue-pietro-ghizzardi-566"><em>ARTE E FOLLIA
-Antonio Ligabue Pietro Ghizzardi</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>EVENTO WEDDING PARTY
-sottotitolo da inserire Cod: 704</title>
-      <link>http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-704</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-704</guid>
-      <pubDate>Sat, 17 Jan 2015 14:56:48 +01:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/704/prova1.jpg" alt="EVENTO WEDDING PARTY
-sottotitolo da inserire" width="350" /><p>Ea diam nullam nec. Vim an magna mutat dicta. Quando recusabo expetendis est ne, ne sed volumus molestiae omittantur, ne quo vide consulatu. Vim simul nobis moderatius an, est agam inimicus an. Equidem detracto epicurei nam ne. Ex mea malis soleat mucius.  <br/>  <br/> Ius natum tempor persequeris no. Ius dolor facilisi no, ea sea semper dictas. Mei legere postulant id, rebum inermis ea eum. Pri ut vide sale </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/evento-wedding-party-sottotitolo-da-inserire-704"><em>EVENTO WEDDING PARTY
-sottotitolo da inserire</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/863/a3.jpg" alt="News 1
+sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-1-sottotitolo-863"><em>News 1
+sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

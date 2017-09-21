@@ -5,11 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%-- <Ajax:ToolkitScriptManager ID="ScriptManagerMaster" runat="server" AllowCustomErrorsRedirect="True"
-        AsyncPostBackErrorMessage="Errore generico. Contattare HelpDesk" AsyncPostBackTimeout="400"
-        EnablePartialRendering="true" EnablePageMethods="true" EnableScriptLocalization="true"
-        EnableScriptGlobalization="true">
-    </Ajax:ToolkitScriptManager>--%>
+
 
     <script type="text/javascript">
         function ConfirmCancella() {
@@ -22,13 +18,20 @@
                 $get("<%=cancelHidden.ClientID%>").value = "false";
             }
         }
+        function aggiornaview() {
+            //var ctrmail = $('#' + item);
+            __doPostBack('aggiornatettaglio', '');
+        }
+
     </script>
-    <%--  <link href="../App_Themes/TemaPortale1/StylePortale1.css" rel="stylesheet" type="text/css" />--%>
+    <input type="hidden" id="hidIdselected" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidTipologia" runat="server" clientidmode="static" />
 
     <div class="row" style="background-color: White; padding: 10px 10px 10px 10px">
         <div class="col-sm-5">
             <asp:HiddenField ID="cancelHidden" runat="server" Value="false" />
-            <asp:Literal ID="output" runat="server"></asp:Literal>
+            <span style="font-size: 1.8rem; color: crimson">
+                <asp:Literal ID="output" runat="server"></asp:Literal></span>
             <div style="margin-bottom: 30px">
                 <h2>
                     <asp:Literal ID="litTitolo" runat="server"></asp:Literal>
@@ -37,10 +40,7 @@
                 <div class="cerca">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox runat="server" ID="txtinputCerca" Width="100%" />
-                            <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" TargetControlID="txtinputCerca"
-                                runat="server" WatermarkText='Cerca'>
-                            </Ajax:TextBoxWatermarkExtender>
+                            <asp:TextBox runat="server" ID="txtinputCerca" Width="100%" placeholder="cerca .." />
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
@@ -101,10 +101,7 @@
                                             <asp:Literal ID="Literal1" runat="server" Text='<%# Eval("CodiceProdotto").ToString() %>'></asp:Literal>
                                         </div>
                                     </td>
-                                    <%-- <td style="width: 0px; height: 100px; border: Solid 1px Black;">
-                            <asp:Image  ID="imgAnt" Width="95px" ImageUrl='<%# ComponiUrlAnteprima(Eval("FotoCollection_M"),Eval("Id").ToString()) %>'
-                                runat="server" />
-                        </td>--%>
+
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
                                             <asp:Literal ID="lit1" runat="server" Text='<%# Eval("DenominazioneI").ToString() %>'></asp:Literal>
@@ -128,6 +125,36 @@
             </div>
             <div style="margin-bottom: 30px">
                 <h2>Caricamento foto</h2>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        startDropZone();
+                    });
+
+                </script>
+                <div style="overflow-y: auto; height: 370px; width: 600px">
+                    <div id="dzContainer">
+                        <div id="dZUpload" class="dropzone" style="background-color: lightyellow; min-height: 370px">
+                            <div class="dz-default"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="preview-template" style="display: none;">
+                    <div class="dz-preview dz-file-preview">
+                        <div class="dz-details">
+                            <div class="dz-filename"><span data-dz-name></span></div>
+                            <div class="dz-size" data-dz-size></div>
+                            <img data-dz-thumbnail />
+                        </div>
+                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                        <div class="dz-success-mark"><span>✔</span></div>
+                        <div class="dz-error-mark"><span>✘</span></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                    </div>
+                </div>
+
+
                 <table width="100%" style="margin-top: 10px; font-size: 12px; table-layout: fixed; border-collapse: collapse;"
                     cellpadding="0" cellspacing="0">
                     <tr>
@@ -138,10 +165,12 @@
                                 <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default btn-sm" runat="server" />
                                 <br />
                                 Descrizione
-                       
                                     <br />
                                 <asp:TextBox runat="server" ID="txtDescrizione" CssClass="form-control" />
                                 <br />
+                                Progressivo
+                                <br />
+                                <asp:TextBox runat="server" ID="txtProgressivo" CssClass="form-control" />
                                 <br />
                                 <asp:Button ID="btnCarica" runat="server" CssClass="btn btn-primary btn-sm" Text="Carica Foto" OnClick="btnCarica_Click" />
                                 <asp:Button ID="btnModifica" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica Descrizione Foto" OnClick="btnModifica_Click" />
@@ -162,8 +191,10 @@
                                         <asp:Repeater runat="server" ID="rptImmagini">
                                             <ItemTemplate>
                                                 <li style="list-style: none; display: inline">
-                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>'
-                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />
+                                                    <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
+                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
+                                                         Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>'
+                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# CommonPage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
                                                 </li>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -979,14 +1010,6 @@
                                             <asp:Button ID="btnModificaProd" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica" OnClick="btnModifiProd_Click" />
                                             <asp:Button ID="btnEliminaProdotto" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaProd_Click" /><br />
                                             <br />
-                                            
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneI" runat="server" />
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneGB" runat="server" />
-                                            <br />
-                                            <asp:Literal Text="" ID="linksezioneRU" runat="server" />
-
                                             <asp:Label runat="server" ID="ErrorMsgNuovoProdotto" ForeColor="Red"></asp:Label>
                                             <div style="height: 50px;">
                                             </div>
@@ -1060,14 +1083,6 @@
                                                 <asp:Button ID="btnEliminaSottoProd" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaSottProd_Click" /><br />
                                                 <asp:Label runat="server" ID="ErrorMessage" ForeColor="Red"></asp:Label>
                                             </div>
-
-                                                 <br />
-                                                <asp:Literal Text="" ID="linksottosezioneI" runat="server" />
-                                                <br />
-                                                <asp:Literal Text="" ID="linksottosezioneGB" runat="server" />
-                                                <br />
-                                                <asp:Literal Text="" ID="linksottosezioneRU" runat="server" />
-
                                             <div style="height: 50px;">
                                             </div>
                                         </td>
@@ -1114,7 +1129,7 @@
                     </Ajax:TextBoxWatermarkExtender>
                     <Ajax:TextBoxWatermarkExtender runat="server" ID="w3" WatermarkText="Inserire  (Russo)" TargetControlID="txtCar1RU">
                     </Ajax:TextBoxWatermarkExtender>
-                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')"  />
+                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                     <br />
                 </div>
 

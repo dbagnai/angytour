@@ -1,46 +1,467 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Sorrisi di gioia Catalogo</title>
+    <title>Legatoria Toscana Catalogo</title>
     <link>http://localhost:52646</link>
-    <description>Sorrisi di Gioia</description>
-    <lastBuildDate>Wed, 13 Sep 2017 19:57:38 GMT</lastBuildDate>
+    <description>Legatoria Toscana</description>
+    <lastBuildDate>Thu, 21 Sep 2017 17:16:33 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-09-13T19:57+02:00</sy:updateBase>
+    <sy:updateBase>2017-09-21T17:16+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>Promo Cerimonia
-promozione Cod: 733</title>
-      <link>http://localhost:52646/I/catalogo/promo-cerimonia-promozione-733</link>
-      <guid isPermaLink="true">http://localhost:52646/I/catalogo/promo-cerimonia-promozione-733</guid>
-      <pubDate>Mon, 14 Aug 2017 10:06:50 +02:00</pubDate>
+      <title>Album Foto Piccolo
+Neoprene 20x20 Cod: 862</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-piccolo-neoprene-20x20-862</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-piccolo-neoprene-20x20-862</guid>
+      <pubDate>Tue, 29 Aug 2017 19:16:51 +02:00</pubDate>
       <category>Catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/733/dress-test1.jpg" alt="Promo Cerimonia
-promozione" width="350" /><p>Testo da inserire...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/promo-cerimonia-promozione-733"><em>Promo Cerimonia
-promozione</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/862/legatoriatoscana-149.jpg" alt="Album Foto Piccolo
+Neoprene 20x20" width="350" /><p>Album Foto 20x20cm in Neoprene. Realizzato da mani artigiane nel cuore della Toscana.Chiusura con laccio e bottone.  <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-piccolo-neoprene-20x20-862"><em>Album Foto Piccolo
+Neoprene 20x20</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>Serigrafia rova
-sottotitolo 1 Cod: 721</title>
-      <link>http://localhost:52646/I/catalogo/serigrafia-rova-sottotitolo-1-721</link>
-      <guid isPermaLink="true">http://localhost:52646/I/catalogo/serigrafia-rova-sottotitolo-1-721</guid>
-      <pubDate>Wed, 01 Mar 2017 12:36:59 +01:00</pubDate>
+      <title>Album Foto Piccolo
+Carta Moonrock 20x20 Cod: 861</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-20x20-861</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-20x20-861</guid>
+      <pubDate>Tue, 29 Aug 2017 19:10:09 +02:00</pubDate>
       <category>Catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/721/dress-test1.jpg" alt="Serigrafia rova
-sottotitolo 1" width="350" /><p>ACb Lorem ipsum dolor sit amet, mea dicta cetero vivendo at. Ex consul causae eum, per inani partem soluta ut, no solum legimus incorrupte has. An eum sint error nominati, in est purto iriure labitur. Mel utinam essent interesset id. Vix facete democritum reprehendunt ad. Per an veniam rationibus omittantur, id nec inermis reprimique. <br/>  <br/> Ea nulla praesent qui, sit ei quod solum labore. Ullum assueverit </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/serigrafia-rova-sottotitolo-1-721"><em>Serigrafia rova
-sottotitolo 1</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/861/109a4502.jpg" alt="Album Foto Piccolo
+Carta Moonrock 20x20" width="350" /><p>Album Foto 20x20cm rilegato in Carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio. L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-20x20-861"><em>Album Foto Piccolo
+Carta Moonrock 20x20</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>Abito Sposa
-sottotitolo Cod: 720</title>
-      <link>http://localhost:52646/I/catalogo/abito-sposa-sottotitolo-720</link>
-      <guid isPermaLink="true">http://localhost:52646/I/catalogo/abito-sposa-sottotitolo-720</guid>
-      <pubDate>Wed, 01 Mar 2017 12:35:34 +01:00</pubDate>
+      <title>Album Foto Medio
+Carta Moonrock e Decorazione 25x20 Cod: 860</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-medio-carta-moonrock-e-decorazione-25x20-860</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-medio-carta-moonrock-e-decorazione-25x20-860</guid>
+      <pubDate>Tue, 29 Aug 2017 19:02:27 +02:00</pubDate>
       <category>Catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/720/dress-test1.jpg" alt="Abito Sposa
-sottotitolo" width="350" /><p>Lorem ipsum dolor sit amet, mea dicta cetero vivendo at. Ex consul causae eum, per inani partem soluta ut, no solum legimus incorrupte has. An eum sint error nominati, in est purto iriure labitur. Mel utinam essent interesset id. Vix facete democritum reprehendunt ad. Per an veniam rationibus omittantur, id nec inermis reprimique. <br/>  <br/> Ea nulla praesent qui, sit ei quod solum labore. Ullum assueverit </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/abito-sposa-sottotitolo-720"><em>Abito Sposa
-sottotitolo</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="Album Foto Medio
+Carta Moonrock e Decorazione 25x20" width="350" /><p>Album Foto 25x20cm rilegato in Carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione.  <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-medio-carta-moonrock-e-decorazione-25x20-860"><em>Album Foto Medio
+Carta Moonrock e Decorazione 25x20</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto Piccolo
+Carta Moonrock e Decorazione 20x20 Cod: 859</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-e-decorazione-20x20-859</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-e-decorazione-20x20-859</guid>
+      <pubDate>Tue, 29 Aug 2017 18:57:38 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/859/109a4494.jpg" alt="Album Foto Piccolo
+Carta Moonrock e Decorazione 20x20" width="350" /><p>Album Foto 20x20cm rilegato in Carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione.  <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-e-decorazione-20x20-859"><em>Album Foto Piccolo
+Carta Moonrock e Decorazione 20x20</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto Grande
+Carta Bambù e Decorazione 30x24 Cod: 858</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-grande-carta-bambu-e-decorazione-30x24-858</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-grande-carta-bambu-e-decorazione-30x24-858</guid>
+      <pubDate>Tue, 29 Aug 2017 18:41:18 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/858/109a4613.jpg" alt="Album Foto Grande
+Carta Bambù e Decorazione 30x24" width="350" /><p>Album Foto 30x24cm rilegato in Carta Bambù. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione.  <br/> L'interno del nostro Album Foto è composto da 60 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-grande-carta-bambu-e-decorazione-30x24-858"><em>Album Foto Grande
+Carta Bambù e Decorazione 30x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto Grande
+Tela 30x24 Cod: 857</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-grande-tela-30x24-857</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-grande-tela-30x24-857</guid>
+      <pubDate>Tue, 29 Aug 2017 18:37:03 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/857/legatoriatoscana-531.jpg" alt="Album Foto Grande
+Tela 30x24" width="350" /><p>Album Foto 30x24cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione Paesaggio.  <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-grande-tela-30x24-857"><em>Album Foto Grande
+Tela 30x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto Grande
+Tela e Cuoio 30x24 Cod: 856</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-grande-tela-e-cuoio-30x24-856</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-grande-tela-e-cuoio-30x24-856</guid>
+      <pubDate>Tue, 29 Aug 2017 18:28:04 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/856/109a4633.jpg" alt="Album Foto Grande
+Tela e Cuoio 30x24" width="350" /><p>Album Foto 30x24cm rilegato in Tela e cuoio. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione Paesaggio.  <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina.  <br/> Riscopri il piacere di conservare le tue foto in un album artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-grande-tela-e-cuoio-30x24-856"><em>Album Foto Grande
+Tela e Cuoio 30x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Grande
+Carta Bambù e cuoio 21x15 Cod: 855</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-grande-carta-bambu-e-cuoio-21x15-855</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-grande-carta-bambu-e-cuoio-21x15-855</guid>
+      <pubDate>Tue, 29 Aug 2017 18:24:49 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/855/109a4584.jpg" alt="Quaderno Grande
+Carta Bambù e cuoio 21x15" width="350" /><p>Diario 21x15cm rilegato in carta Bambù. Con decorazione Paesaggio e cuoio.  <br/> Realizzato da mani artigiane nel cuore della Toscana.  <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio.  <br/> Riscopri il piacere di scrivere su un quaderno artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-grande-carta-bambu-e-cuoio-21x15-855"><em>Quaderno Grande
+Carta Bambù e cuoio 21x15</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Medio
+Carta Bambù e cuoio 17x12 Cod: 854</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-medio-carta-bambu-e-cuoio-17x12-854</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-medio-carta-bambu-e-cuoio-17x12-854</guid>
+      <pubDate>Tue, 29 Aug 2017 18:20:00 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/854/109a4582.jpg" alt="Quaderno Medio
+Carta Bambù e cuoio 17x12" width="350" /><p>Diario 24x17cm rilegato in carta Bambù. Con decorazione Paesaggio e cuoio.  <br/> Realizzato da mani artigiane nel cuore della Toscana.  <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio.  <br/> Riscopri il piacere di scrivere su un quaderno artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-medio-carta-bambu-e-cuoio-17x12-854"><em>Quaderno Medio
+Carta Bambù e cuoio 17x12</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Piccolo
+Carta Bambù e cuoio 24x17 Cod: 853</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-piccolo-carta-bambu-e-cuoio-24x17-853</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-piccolo-carta-bambu-e-cuoio-24x17-853</guid>
+      <pubDate>Tue, 29 Aug 2017 18:11:19 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/853/109a4586.jpg" alt="Libro Firma Piccolo
+Carta Bambù e cuoio 24x17" width="350" /><p>Diario 24x17cm rilegato in carta Bambù. Con decorazione Paesaggio e cuoio. <br/> Realizzato da mani artigiane nel cuore della Toscana. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-piccolo-carta-bambu-e-cuoio-24x17-853"><em>Libro Firma Piccolo
+Carta Bambù e cuoio 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto Grande
+Carta Moonrock e Decorazione 30x24 Cod: 852</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-grande-carta-moonrock-e-decorazione-30x24-852</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-grande-carta-moonrock-e-decorazione-30x24-852</guid>
+      <pubDate>Tue, 29 Aug 2017 17:50:34 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/852/109a4530.jpg" alt="Album Foto Grande
+Carta Moonrock e Decorazione 30x24" width="350" /><p>Album Foto 30x24cm rilegato in Carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione. <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina. <br/> Riscopri il piacere di conservare le tue foto in un album artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-grande-carta-moonrock-e-decorazione-30x24-852"><em>Album Foto Grande
+Carta Moonrock e Decorazione 30x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Agenda Medioevalis Piccolo
+Neoprene 13x9 Cod: 851</title>
+      <link>http://localhost:52646/I/catalogo/agenda-medioevalis-piccolo-neoprene-13x9-851</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/agenda-medioevalis-piccolo-neoprene-13x9-851</guid>
+      <pubDate>Tue, 29 Aug 2017 17:38:30 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/851/legatoriatoscana-100.jpg" alt="Agenda Medioevalis Piccolo
+Neoprene 13x9" width="350" /><p>Agenda 13x9cm in Neoprene. Realizzata da mani artigiane nel cuore della Toscana. Chiusura con laccio e bottone. <br/> L'interno della nostra Agenda è composto da un calendario giornaliero perpetuo con fogli di carta "Acid-Free" color avorio. Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci. <br/>  <br/>  <br/>  <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/agenda-medioevalis-piccolo-neoprene-13x9-851"><em>Agenda Medioevalis Piccolo
+Neoprene 13x9</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Album Foto XXL
+Carta Moonrock e Decorazione 30x30 Cod: 850</title>
+      <link>http://localhost:52646/I/catalogo/album-foto-xxl-carta-moonrock-e-decorazione-30x30-850</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/album-foto-xxl-carta-moonrock-e-decorazione-30x30-850</guid>
+      <pubDate>Tue, 29 Aug 2017 17:34:02 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/850/109a4544.jpg" alt="Album Foto XXL
+Carta Moonrock e Decorazione 30x30" width="350" /><p>Album Foto 30x30cm rilegato in Carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione. <br/> L'interno del nostro Album Foto è composto da 30 fogli di carta "Acid-Free" color avorio separati da carta velina. <br/> Riscopri il piacere di conservare le tue foto in un album artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/album-foto-xxl-carta-moonrock-e-decorazione-30x30-850"><em>Album Foto XXL
+Carta Moonrock e Decorazione 30x30</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Viaggi
+Tela e Decorazione 24x17 Cod: 849</title>
+      <link>http://localhost:52646/I/catalogo/libro-viaggi-tela-e-decorazione-24x17-849</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-viaggi-tela-e-decorazione-24x17-849</guid>
+      <pubDate>Tue, 29 Aug 2017 17:21:47 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/849/legatoriatoscana-565.jpg" alt="Libro Viaggi
+Tela e Decorazione 24x17" width="350" /><p>Diario 24x17 rilegato in Tela. Con decorazione in legno e cuoio. Realizzato da mani artigiane nel cuore della Toscana. <br/> L'interno del nostro Quaderno è composto da 80 fogli di carta "Acid-Free" color avorio. <br/> Finalmente l'occasione di annotare tutti i particolari dei tuoi viaggi. <br/> Per ulteriori informazioni non esitare a contattarci. <br/>  <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-viaggi-tela-e-decorazione-24x17-849"><em>Libro Viaggi
+Tela e Decorazione 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Ricette
+Tela e Decorazione 24x17 Cod: 848</title>
+      <link>http://localhost:52646/I/catalogo/libro-ricette-tela-e-decorazione-24x17-848</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-ricette-tela-e-decorazione-24x17-848</guid>
+      <pubDate>Tue, 29 Aug 2017 17:15:05 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/848/legatoriatoscana-560.jpg" alt="Libro Ricette
+Tela e Decorazione 24x17" width="350" /><p>Diario 24x17 rilegato in Tela. Con decorazione in legno e cuoio. Realizzato da mani artigiane nel cuore della Toscana. <br/> L'interno del nostro Quaderno è composto da 80 fogli di carta "Acid-Free" color avorio. <br/> Finalmente l'occasione di creare un libro con le tue ricette migliori. <br/> Per ulteriori informazioni non esitare a contattarci. <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-ricette-tela-e-decorazione-24x17-848"><em>Libro Ricette
+Tela e Decorazione 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Ricette
+Carta Moonrock 24x17 Cod: 846</title>
+      <link>http://localhost:52646/I/catalogo/libro-ricette-carta-moonrock-24x17-846</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-ricette-carta-moonrock-24x17-846</guid>
+      <pubDate>Tue, 29 Aug 2017 17:02:38 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/846/109a4560.jpg" alt="Libro Ricette
+Carta Moonrock 24x17" width="350" /><p>Diario 24x17 rilegato in carta Moonrock. Decorato con la tecnica del Decoupage. Realizzato da mani artigiane nel cuore della Toscana.  L'interno del nostro Quaderno è composto da 80 fogli di carta "Acid-Free" color avorio. <br/> Finalmente l'occasione di creare un libro con le tue ricette migliori. <br/> Per ulteriori informazioni non esitare a contattarci. <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-ricette-carta-moonrock-24x17-846"><em>Libro Ricette
+Carta Moonrock 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Vini
+Tela e Decorazione 24x17 Cod: 845</title>
+      <link>http://localhost:52646/I/catalogo/libro-vini-tela-e-decorazione-24x17-845</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-vini-tela-e-decorazione-24x17-845</guid>
+      <pubDate>Tue, 29 Aug 2017 16:55:16 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/845/legatoriatoscana-572.jpg" alt="Libro Vini
+Tela e Decorazione 24x17" width="350" /><p>Diario 24x17 rilegato in Tela. Con decorazione in legno e cuoio. Realizzato da mani artigiane nel cuore della Toscana. <br/> L'interno del nostro Quaderno è composto da 80 fogli di carta "Acid-Free" color avorio. <br/> Finalmente l'occasione di tenere nota dei migliori vini assaggiati. <br/> Per ulteriori informazioni non esitare a contattarci. <br/>  <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-vini-tela-e-decorazione-24x17-845"><em>Libro Vini
+Tela e Decorazione 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Piccolo
+Tela 24x17 Cod: 841</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-24x17-841</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-24x17-841</guid>
+      <pubDate>Tue, 29 Aug 2017 16:42:58 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/841/legatoriatoscana-496.jpg" alt="Libro Firma Piccolo
+Tela 24x17" width="350" /><p>Diario 24x17cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-24x17-841"><em>Libro Firma Piccolo
+Tela 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Piccolo
+Tela e Decorazione 24x17 Cod: 843</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-e-decorazione-24x17-843</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-e-decorazione-24x17-843</guid>
+      <pubDate>Tue, 29 Aug 2017 16:42:57 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/843/109a4589.jpg" alt="Libro Firma Piccolo
+Tela e Decorazione 24x17" width="350" /><p>Diario 24x17cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio e legno. L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-e-decorazione-24x17-843"><em>Libro Firma Piccolo
+Tela e Decorazione 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Grande
+Tela 30x21 Cod: 847</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-grande-tela-30x21-847</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-grande-tela-30x21-847</guid>
+      <pubDate>Tue, 29 Aug 2017 16:34:34 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/847/legatoriatoscana-515.jpg" alt="Libro Firma Grande
+Tela 30x21" width="350" /><p>Diario 30x21cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-grande-tela-30x21-847"><em>Libro Firma Grande
+Tela 30x21</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Grande
+Carta Moonrock 30x21 Cod: 842</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-30x21-842</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-30x21-842</guid>
+      <pubDate>Tue, 29 Aug 2017 16:34:33 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/842/109a4472.jpg" alt="Libro Firma Grande
+Carta Moonrock 30x21" width="350" /><p>Diario 30x21cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-30x21-842"><em>Libro Firma Grande
+Carta Moonrock 30x21</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro Firma Grande
+Carta Moonrock e Decorazione 30x21 Cod: 844</title>
+      <link>http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-e-decorazione-30x21-844</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-e-decorazione-30x21-844</guid>
+      <pubDate>Tue, 29 Aug 2017 16:34:32 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/844/109a4485.jpg" alt="Libro Firma Grande
+Carta Moonrock e Decorazione 30x21" width="350" /><p>Diario 30x21cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Legno e Cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-e-decorazione-30x21-844"><em>Libro Firma Grande
+Carta Moonrock e Decorazione 30x21</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Mini
+Neoprene 8x6 Cod: 840</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-mini-neoprene-8x6-840</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-mini-neoprene-8x6-840</guid>
+      <pubDate>Tue, 29 Aug 2017 16:11:39 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/840/legatoriatoscana-10.jpg" alt="Medioevalis Mini
+Neoprene 8x6" width="350" /><p>Diario 8x6cm in Neoprene. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con laccio e bottone. <br/> L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-mini-neoprene-8x6-840"><em>Medioevalis Mini
+Neoprene 8x6</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Mini
+Carta Moonrock 8x6 Cod: 839</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-mini-carta-moonrock-8x6-839</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-mini-carta-moonrock-8x6-839</guid>
+      <pubDate>Tue, 29 Aug 2017 16:06:41 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/839/legatoriatoscana-580.jpg" alt="Medioevalis Mini
+Carta Moonrock 8x6" width="350" /><p>Diario 8x6cm in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio. <br/> L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-mini-carta-moonrock-8x6-839"><em>Medioevalis Mini
+Carta Moonrock 8x6</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Piccolo
+Neoprene 13x9 Cod: 838</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-piccolo-neoprene-13x9-838</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-piccolo-neoprene-13x9-838</guid>
+      <pubDate>Tue, 29 Aug 2017 15:34:52 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/838/legatoriatoscana-48.jpg" alt="Medioevalis Piccolo
+Neoprene 13x9" width="350" /><p>Diario 13x9cm in Neoprene. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con laccio e bottone. <br/> L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-piccolo-neoprene-13x9-838"><em>Medioevalis Piccolo
+Neoprene 13x9</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Piccolo
+Carta Moonrock 13x9 Cod: 837</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-piccolo-carta-moonrock-13x9-837</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-piccolo-carta-moonrock-13x9-837</guid>
+      <pubDate>Tue, 29 Aug 2017 15:19:46 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/837/109a4372.jpg" alt="Medioevalis Piccolo
+Carta Moonrock 13x9" width="350" /><p>Diario 13x9cm in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con laccio in cuoio. <br/> L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-piccolo-carta-moonrock-13x9-837"><em>Medioevalis Piccolo
+Carta Moonrock 13x9</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Piccolo
+Tela 13x9 Cod: 831</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-piccolo-tela-13x9-831</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-piccolo-tela-13x9-831</guid>
+      <pubDate>Tue, 29 Aug 2017 12:17:22 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/831/legatoriatoscana-462.jpg" alt="Quaderno Piccolo
+Tela 13x9" width="350" /><p>Diario 13x9cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-piccolo-tela-13x9-831"><em>Quaderno Piccolo
+Tela 13x9</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Piccolo
+Carta Moonrock 13x9 Cod: 830</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-piccolo-carta-moonrock-13x9-830</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-piccolo-carta-moonrock-13x9-830</guid>
+      <pubDate>Tue, 29 Aug 2017 11:47:35 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/830/qpm001-quadernopiccolomoonrockverde(2).jpg" alt="Quaderno Piccolo
+Carta Moonrock 13x9" width="350" /><p>Diario 13x9cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio.  <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-piccolo-carta-moonrock-13x9-830"><em>Quaderno Piccolo
+Carta Moonrock 13x9</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Medio
+Neoprene 17x12
+ Cod: 832</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-medio-neoprene-17x12-832</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-medio-neoprene-17x12-832</guid>
+      <pubDate>Tue, 29 Aug 2017 11:42:46 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/832/legatoriatoscana-117.jpg" alt="Medioevalis Medio
+Neoprene 17x12
+" width="350" /><p>Diario 17x12cm in Neoprene. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con laccio e bottone. <br/> L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-medio-neoprene-17x12-832"><em>Medioevalis Medio
+Neoprene 17x12
+</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Medioevalis Medio
+Carta Moonrock 17x12 Cod: 835</title>
+      <link>http://localhost:52646/I/catalogo/medioevalis-medio-carta-moonrock-17x12-835</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/medioevalis-medio-carta-moonrock-17x12-835</guid>
+      <pubDate>Tue, 29 Aug 2017 11:42:45 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/835/109a4401.jpg" alt="Medioevalis Medio
+Carta Moonrock 17x12" width="350" /><p>Diario 17x12cm in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con laccio e bottone. L'interno del nostro Medioevalis è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/medioevalis-medio-carta-moonrock-17x12-835"><em>Medioevalis Medio
+Carta Moonrock 17x12</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Medio
+Tela 17x12 Cod: 834</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-medio-tela-17x12-834</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-medio-tela-17x12-834</guid>
+      <pubDate>Tue, 29 Aug 2017 11:42:44 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/834/legatoriatoscana-474.jpg" alt="Quaderno Medio
+Tela 17x12" width="350" /><p>Diario 17x12cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-medio-tela-17x12-834"><em>Quaderno Medio
+Tela 17x12</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Medio
+Tela e Bottone 17x12 Cod: 833</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-medio-tela-e-bottone-17x12-833</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-medio-tela-e-bottone-17x12-833</guid>
+      <pubDate>Tue, 29 Aug 2017 11:42:43 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/833/legatoriatoscana-465.jpg" alt="Quaderno Medio
+Tela e Bottone 17x12" width="350" /><p>Diario 17x12cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Chiusura con elastico e bottone. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-medio-tela-e-bottone-17x12-833"><em>Quaderno Medio
+Tela e Bottone 17x12</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Medio
+Carta Moonrock 17x12 Cod: 829</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-medio-carta-moonrock-17x12-829</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-medio-carta-moonrock-17x12-829</guid>
+      <pubDate>Tue, 29 Aug 2017 11:42:42 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/829/109a4412.jpg" alt="Quaderno Medio
+Carta Moonrock 17x12" width="350" /><p>Diario 17x12cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio.  L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-medio-carta-moonrock-17x12-829"><em>Quaderno Medio
+Carta Moonrock 17x12</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Grande
+Tela e Cuoio 21x15 Cod: 836</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-grande-tela-e-cuoio-21x15-836</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-grande-tela-e-cuoio-21x15-836</guid>
+      <pubDate>Tue, 29 Aug 2017 11:29:40 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/836/legatoriatoscana-538.jpg" alt="Quaderno Grande
+Tela e Cuoio 21x15" width="350" /><p>Diario 21x15cm rilegato in Tela e Cuoio. Con decorazione Paesaggio. Realizzato da mani artigiane nel cuore della Toscana. L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-grande-tela-e-cuoio-21x15-836"><em>Quaderno Grande
+Tela e Cuoio 21x15</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Grande
+Tela 21x15 Cod: 828</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-grande-tela-21x15-828</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-grande-tela-21x15-828</guid>
+      <pubDate>Tue, 29 Aug 2017 11:29:39 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/828/legatoriatoscana-485.jpg" alt="Quaderno Grande
+Tela 21x15" width="350" /><p>Diario 21x15cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio.  <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio.  <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-grande-tela-21x15-828"><em>Quaderno Grande
+Tela 21x15</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Grande
+Carta Moonrock 21x15 Cod: 825</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-grande-carta-moonrock-21x15-825</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-grande-carta-moonrock-21x15-825</guid>
+      <pubDate>Tue, 29 Aug 2017 10:58:26 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/825/109a4438.jpg" alt="Quaderno Grande
+Carta Moonrock 21x15" width="350" /><p>Diario 21x15cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-grande-carta-moonrock-21x15-825"><em>Quaderno Grande
+Carta Moonrock 21x15</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Orizzontale
+Tela e Cuoio 17x24 Cod: 827</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-e-cuoio-17x24-827</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-e-cuoio-17x24-827</guid>
+      <pubDate>Tue, 29 Aug 2017 10:56:36 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/827/legatoriatoscana-543.jpg" alt="Quaderno Orizzontale
+Tela e Cuoio 17x24" width="350" /><p>Diario 17x24cm rilegato in Tela e Cuoio. Con decorazione Paesaggio. Realizzato da mani artigiane nel cuore della Toscana. L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-e-cuoio-17x24-827"><em>Quaderno Orizzontale
+Tela e Cuoio 17x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Orizzontale
+Tela 17x24 Cod: 826</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-17x24-826</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-17x24-826</guid>
+      <pubDate>Tue, 29 Aug 2017 10:56:35 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/826/legatoriatoscana-504.jpg" alt="Quaderno Orizzontale
+Tela 17x24" width="350" /><p>Diario 17x24cm rilegato in Tela. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in cuoio. <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-17x24-826"><em>Quaderno Orizzontale
+Tela 17x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Quaderno Orizzontale
+Carta Moonrock 17x24 Cod: 824</title>
+      <link>http://localhost:52646/I/catalogo/quaderno-orizzontale-carta-moonrock-17x24-824</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/quaderno-orizzontale-carta-moonrock-17x24-824</guid>
+      <pubDate>Tue, 29 Aug 2017 10:56:34 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/824/109a4458.jpg" alt="Quaderno Orizzontale
+Carta Moonrock 17x24" width="350" /><p>Diario 17x24cm rilegato in carta Moonrock. Realizzato da mani artigiane nel cuore della Toscana. Con decorazione in Cuoio. L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio. <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/quaderno-orizzontale-carta-moonrock-17x24-824"><em>Quaderno Orizzontale
+Carta Moonrock 17x24</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Libro dei Segreti
+Tela e Carta Stampata 24x17 Cod: 823</title>
+      <link>http://localhost:52646/I/catalogo/libro-dei-segreti-tela-e-carta-stampata-24x17-823</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/libro-dei-segreti-tela-e-carta-stampata-24x17-823</guid>
+      <pubDate>Tue, 29 Aug 2017 10:12:09 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/823/legatoriatoscana-316.jpg" alt="Libro dei Segreti
+Tela e Carta Stampata 24x17" width="350" /><p>Diario 21x15cm rilegato in Tela e carta stampata. Realizzato da mani artigiane nel cuore della Toscana. Con astuccio in carta Moonrock e matita.  <br/> L'interno del nostro Quaderno è composto da 128 fogli di carta "Acid-Free" color avorio.  <br/> Riscopri il piacere di scrivere su un quaderno artigianale.  <br/> Per ulteriori informazioni non esitare a contattarci.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/libro-dei-segreti-tela-e-carta-stampata-24x17-823"><em>Libro dei Segreti
+Tela e Carta Stampata 24x17</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Diario del Neonato
+Tela e Carta Stampata 24x17  Cod: 822</title>
+      <link>http://localhost:52646/I/catalogo/diario-del-neonato-tela-e-carta-stampata-24x17-822</link>
+      <guid isPermaLink="true">http://localhost:52646/I/catalogo/diario-del-neonato-tela-e-carta-stampata-24x17-822</guid>
+      <pubDate>Tue, 29 Aug 2017 10:04:13 +02:00</pubDate>
+      <category>Catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000001/822/legatoriatoscana-425.jpg" alt="Diario del Neonato
+Tela e Carta Stampata 24x17 " width="350" /><p>Diario 24x17 cm rilegato in Tela e carta stampata. Realizzato da mani artigiane nel cuore della Toscana. <br/>  <br/> L'interno del nostro Quaderno è composto da 16 fogli di carta "Acid-Free" color avorio.  <br/>  <br/> Riscopri il piacere di scrivere su un quaderno artigianale. <br/> bold:(|Per ulteriori informazioni non esitare a contattarci.) <br/> </p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/catalogo/diario-del-neonato-tela-e-carta-stampata-24x17-822"><em>Diario del Neonato
+Tela e Carta Stampata 24x17 </em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

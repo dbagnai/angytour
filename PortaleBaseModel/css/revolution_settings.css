@@ -298,10 +298,12 @@ website:   	http://www.themepunch.com
     margin: 0px;
     border-width: 0px;
     border-style: none;
-    white-space: nowrap;
-    padding: 3px 4px;
-    padding-top: 1px;
-    /*background-color: #7e8e96;*/
+    /*white-space: nowrap;*/
+    padding: 20px 20px;
+    background-color: rgba(0,0,0,0.4);
+    height: 100%;
+    max-width:400px;
+    text-align:left;
 }
 
 .tp-caption.very_big_black {
@@ -1198,7 +1200,7 @@ website:   	http://www.themepunch.com
     z-index: 1000;
     position: absolute;
     padding: 3px;
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.4);
     width: 500px;
     height: 50px; /* THE DIMENSIONS OF THE THUMB CONTAINER */
     margin-top: -50px;

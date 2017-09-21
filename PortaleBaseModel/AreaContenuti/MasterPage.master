@@ -14,6 +14,9 @@
     <meta name="description" content="top menu &amp; navigation" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+
+
+
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -25,6 +28,10 @@
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="mainacestyle" />
     <link rel="stylesheet" href="assets/css/style.css" class="ace-main-stylesheet" id="newstyle" />
+
+
+
+    <!---->
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="assets/css/ace-part2.css" class="ace-main-stylesheet" />
@@ -42,8 +49,7 @@
     <script src="assets/js/respond.js"></script>
     <![endif]-->
     <style type="text/css">
-         // Aggiungere agli stili in testa 
-         .divColTagl {
+        // Aggiungere agli stili in testa .divColTagl {
             background: #fff;
             padding: 20px;
             margin-top: 20px;
@@ -255,14 +261,18 @@
             EnablePartialRendering="true"
             EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
             <Scripts>
-                <%--<asp:ScriptReference Path="~/js/_jq.js" NotifyScriptLoaded="true" />--%>
                 <asp:ScriptReference Path="~/js/jquery-2.1.3.min.js" NotifyScriptLoaded="true" />
-                <%--<asp:ScriptReference Path="~/Scripts/jquery-1.10.1.min.js" NotifyScriptLoaded="true" />--%>
                 <asp:ScriptReference Path="~/Scripts/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
                 <asp:ScriptReference Path="~/Scripts/tinymce/tinymce.min.js" />
                 <asp:ScriptReference Path="~/Scripts/jquery.prettyPhoto.js" />
+                <asp:ScriptReference NotifyScriptLoaded="true" Path="~/Scripts/jquery.cycle.all.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.tools.min.js" NotifyScriptLoaded="true" />
             </Scripts>
         </Ajax:ToolkitScriptManager>
+    <!-- dropzone-->
+    <link href="/js/dropzone/dropzone.css" rel="stylesheet" />
+    <script src="/js/dropzone/dropzone.js"></script>
+    <script src="/lib/js/dropzonemng.js"></script>
 
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
@@ -320,7 +330,7 @@
                     <asp:Literal ID="litTrial" runat="server"></asp:Literal>
                 </div>
                 <div class="navbar-header pull-right">
-                    <a href='<%= references.ResMan("Common",Lingua,"LinkHome") %>' class="navbar-brand" style="margin-top: 10px;">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkLogin")) %>' class="navbar-brand" style="margin-top: 10px;">
                         <i class="fa fa-sign-out"></i>
                     </a>
                 </div>
@@ -348,7 +358,7 @@
 
 
 
-                <ul class="nav nav-list">
+                <ul class="nav nav-list" runat="server" id="ulMainbar">
                     <li id="tagDefault" runat="server" class="hover">
                         <a href="/AreaContenuti/Default.aspx">
                             <i class="menu-icon fa fa-tachometer"></i>
@@ -369,7 +379,7 @@
                         <b class="arrow"></b>
                         <ul class="submenu">
 
-                            
+
                             <asp:Repeater ID="rptCatalogo" runat="server">
                                 <ItemTemplate>
                                     <li class="hover">
@@ -456,7 +466,7 @@
                     <li id="tagBanner" runat="server" class="hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-desktop"></i>
-                            <span class="menu-text">Gestione Gelleria e Banner
+                            <span class="menu-text">Gestione Galleria e Banner
                             </span>
 
                             <b class="arrow fa fa-angle-down"></b>
@@ -474,7 +484,7 @@
                                                     <span class="menu-text">Testate Home</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                              <li class="newLi hover">
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Home ( per mobile )</span></a>
@@ -489,16 +499,21 @@
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Servizi</span></a>
+                                                    <span class="menu-text">Testate Personalizzazioni</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Su misura</span></a>
+                                                    <span class="menu-text">Testate Su laboratorio</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                           
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-5">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Condizioni vendita</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
 
                                             <li>
                                                 <hr style="margin: 2px 0" />
@@ -509,7 +524,7 @@
                                                     <span class="menu-text">Testate catalogo</span></a>
                                                 <b class="arrow"></b>
                                             </li>--%>
-                                            
+
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000002">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -594,7 +609,7 @@
                                                     <span class="menu-text">Banner generico (test parallax )</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                          
+
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -664,13 +679,25 @@
                                     <span class="menu-text">Anagrafica Clienti</span></a>
                                 <b class="arrow"></b>
                             </li>
-                            <%--     <li class="hover">
+                            <li class="hover">
                                 <a href="StoricoOrdini.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Storico Ordini
                                     </span></a>
                                 <b class="arrow"></b>
-                            </li>--%>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li id="tagConfig" runat="server" class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-cog"></i>
+                            <span class="menu-text">Gestione Config </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+                        <ul class="submenu">
                             <li class="hover">
                                 <a href="ConfigPage.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -685,7 +712,6 @@
                             </li>
                         </ul>
                     </li>
-
 
                 </ul>
                 <!-- /.nav-list -->
@@ -777,60 +803,60 @@
 
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
-        jQuery(function ($) {
-            var $sidebar = $('.sidebar').eq(0);
-            if (!$sidebar.hasClass('h-sidebar')) return;
+                    jQuery(function ($) {
+                        var $sidebar = $('.sidebar').eq(0);
+                        if (!$sidebar.hasClass('h-sidebar')) return;
 
-            $(document).on('settings.ace.top_menu', function (ev, event_name, fixed) {
-                if (event_name !== 'sidebar_fixed') return;
+                        $(document).on('settings.ace.top_menu', function (ev, event_name, fixed) {
+                            if (event_name !== 'sidebar_fixed') return;
 
-                var sidebar = $sidebar.get(0);
-                var $window = $(window);
+                            var sidebar = $sidebar.get(0);
+                            var $window = $(window);
 
-                //return if sidebar is not fixed or in mobile view mode
-                var sidebar_vars = $sidebar.ace_sidebar('vars');
-                if (!fixed || (sidebar_vars['mobile_view'] || sidebar_vars['collapsible'])) {
-                    $sidebar.removeClass('lower-highlight');
-                    //restore original, default marginTop
-                    sidebar.style.marginTop = '';
+                            //return if sidebar is not fixed or in mobile view mode
+                            var sidebar_vars = $sidebar.ace_sidebar('vars');
+                            if (!fixed || (sidebar_vars['mobile_view'] || sidebar_vars['collapsible'])) {
+                                $sidebar.removeClass('lower-highlight');
+                                //restore original, default marginTop
+                                sidebar.style.marginTop = '';
 
-                    $window.off('scroll.ace.top_menu')
-                    return;
-                }
-
-
-                var done = false;
-                $window.on('scroll.ace.top_menu', function (e) {
-
-                    var scroll = $window.scrollTop();
-                    scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
-                    if (scroll > 17) scroll = 17;
+                                $window.off('scroll.ace.top_menu')
+                                return;
+                            }
 
 
-                    if (scroll > 16) {
-                        if (!done) {
-                            $sidebar.addClass('lower-highlight');
-                            done = true;
-                        }
-                    }
-                    else {
-                        if (done) {
-                            $sidebar.removeClass('lower-highlight');
-                            done = false;
-                        }
-                    }
+                            var done = false;
+                            $window.on('scroll.ace.top_menu', function (e) {
 
-                    sidebar.style['marginTop'] = (17 - scroll) + 'px';
-                }).triggerHandler('scroll.ace.top_menu');
-
-            }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
-
-            $(window).on('resize.ace.top_menu', function () {
-                $(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
-            });
+                                var scroll = $window.scrollTop();
+                                scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
+                                if (scroll > 17) scroll = 17;
 
 
-        });
+                                if (scroll > 16) {
+                                    if (!done) {
+                                        $sidebar.addClass('lower-highlight');
+                                        done = true;
+                                    }
+                                }
+                                else {
+                                    if (done) {
+                                        $sidebar.removeClass('lower-highlight');
+                                        done = false;
+                                    }
+                                }
+
+                                sidebar.style['marginTop'] = (17 - scroll) + 'px';
+                            }).triggerHandler('scroll.ace.top_menu');
+
+                        }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+
+                        $(window).on('resize.ace.top_menu', function () {
+                            $(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+                        });
+
+
+                    });
     </script>
 
 </body>

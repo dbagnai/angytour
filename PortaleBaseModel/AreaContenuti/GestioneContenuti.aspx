@@ -112,7 +112,7 @@
                         tinymce.init({
                             mode: "textareas",
                             editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
-                            extended_valid_elements: 'button[class|onclick|style|type]',
+                            extended_valid_elements: 'button[class|onclick|style|type|id|name],input[class|onclick|style|type|value|id|name|placeholder]',
                             theme: "modern",
                             convert_urls: false,
                             relative_urls: false,

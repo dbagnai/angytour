@@ -5,7 +5,7 @@ namespace WelcomeLibrary.UF
 {
     public class CachingModule : IHttpModule
     {
-        bool enablecompression = true;
+        bool enablecompression = false;
         /// <summary>
         /// Il modulo dovrà essere configurato nel file Web.config del
         /// Web e registrato con IIS prima di poter essere utilizzato. Per ulteriori informazioni

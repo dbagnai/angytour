@@ -58,12 +58,16 @@ jQuery(document).ready(function ($) {
             //            $('#menuzord').addClass('dark');
             //            $('#menuzord').removeClass('white');
             //        }
+            $('#divMessage').hide();
+
+            
+
         }
         else {
             //        $('#mainnav').removeClass('bckColor1');
             $('#divlogo').removeClass();
             $('#divlogo').addClass('fulllogobckdark');
-
+            $('#divMessage').show();
             //        if (sliderPresent) {
             //            $('#menuzord').addClass('white');
             //            $('#menuzord').removeClass('dark');

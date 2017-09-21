@@ -194,9 +194,9 @@ public partial class _SchedaProdotto : CommonPage
 
                 break;
             default:
-                column1.Visible = true;
-                column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-10 col-sm-10";
+                column1.Visible = false;
+                //column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-md-12 col-sm-12";
                 column3.Visible = false;
                 //column3.Attributes["class"] = "col-md-3 col-sm-3";
                 divContact.Visible = false;
@@ -996,6 +996,7 @@ public partial class _SchedaProdotto : CommonPage
         return links;
     }
 
+
     protected void Cerca_Click(object sender, EventArgs e)
     {
         string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
@@ -1183,14 +1184,20 @@ public partial class _SchedaProdotto : CommonPage
                     #region FOTO
                     //if (!string.IsNullOrEmpty(link))
                     //    sb.Append("	       <a href=\"" + link + "\" target=\"" + target + "\" title=\"" + testotitolo + "\">\r\n");
-                    sb.Append("	           <img itemprop=\"image\" style=\"");
+                    sb.Append("	           <img class=\"zoommgfy\"  itemprop=\"image\" style=\"");
 #if true
                     string imgdimstyle = "";
+                    int originalwidth = 0;
+                    int originalheight = 0;
+                    double  scalefactorzoom = 1;
                     try
                     {
                         if (maxheight != 0)
                             using (System.Drawing.Image tmp = System.Drawing.Image.FromFile(Server.MapPath(virtuallink)))
                             {
+                                originalwidth = tmp.Width;
+                                originalheight = tmp.Height;
+
                                 if (tmp.Width <= tmp.Height)
                                 {
                                     imgdimstyle = "width:auto;height:" + maxheight + "px;";
@@ -1207,7 +1214,7 @@ public partial class _SchedaProdotto : CommonPage
                     else
                         sb.Append(imgdimstyle);
 #endif
-                    sb.Append("border:none\" src=\"" + pathimmagine + "\" alt=\"" + testotitolo + "\" />\r\n");
+                    sb.Append("border:none\" src=\"" + pathimmagine + "\" data-magnify-magnifiedwidth=\"" + (scalefactorzoom* originalwidth).ToString() + "\" data-magnify-magnifiedheight=\"" + (scalefactorzoom * originalheight).ToString() + "\" data-magnify-src=\"" + pathimmagine + "\" alt =\"" + testotitolo + "\" />\r\n");
 
                     //if (!string.IsNullOrEmpty(link))
                     //    sb.Append("	       </a>\r\n");
@@ -1263,13 +1270,13 @@ public partial class _SchedaProdotto : CommonPage
     protected string ImpostaTestoRichiesta()
     {
         string ret = "";
-        if (CodiceTipologia == "rif000001")
-            ret = references.ResMan("Common",Lingua, "TestoRichiedi");
-         //ret = references.ResMan("Common",Lingua,"TestoDisponibilita");
-         else
-            ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
+        //if (CodiceTipologia == "rif000001")
+        //    ret = references.ResMan("Common",Lingua, "TestoRichiedi");
+        // else
+            //ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
+            ret = references.ResMan("Common",Lingua, "titoloinformazioni");
 
-
+        
         return ret;
     }
 

@@ -25,7 +25,7 @@
     <script type="text/javascript">
         var makeRevLower = true;
     </script>
-    <div style="max-width:1800px;margin:0px auto">
+    <div style="max-width:1800px;margin:0px auto;padding:20px">
     <div id="divPortfolioList1"></div>
     <div id="divPortfolioList1Pager"></div>
     </div>

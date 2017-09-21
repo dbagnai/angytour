@@ -43,13 +43,10 @@
     --%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <script type="text/javascript">
         makeRevLower = false;
     </script>
-
     <div class="row" style="min-height: 500px">
-
         <div class="col-md-3"></div>
         <div class="col-md-6" style="text-align: center">
             <label class="alert-danger alert-block">
@@ -61,7 +58,6 @@
                 <hr />
                 <asp:LoginView ID="LogView1" runat="server">
                     <AnonymousTemplate>
-
                         <div class="classic-form">
                             <div class="form-horizontal">
                                 <div class="form-group">
@@ -74,7 +70,7 @@
                                 <div class="form-group">
                                     <label for="password" class="col-sm-3 control-label">Password</label>
                                     <div class="col-sm-9">
-                                       <%-- <a runat="server" onserverclick="btnForget_Click" class="pull-right"><%= references.ResMan("Common",Lingua,"testoLoginForget") %></a>--%>
+                                        <%-- <a runat="server" onserverclick="btnForget_Click" class="pull-right"><%= references.ResMan("Common",Lingua,"testoLoginForget") %></a>--%>
                                         <input type="password" placeholder="Password" class="form-control" runat="server" id="inputPassword">
                                     </div>
                                 </div>
@@ -114,9 +110,10 @@
                                 <%-- <br />
                                 <a runat="server" alt="" class="btn btn-default btn-small" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />--%>
-                              <%--  <br />
+                                <%--  <br />
                                 <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
-                             --%>   <br />
+                                --%>
+                                <br />
                                 <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
                                     LoginText="" />
                                 <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
@@ -126,7 +123,7 @@
                             <ContentTemplate>
                                 <%-- <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
-                              <%--  <br />
+                                <%--  <br />
                                 <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkSchedaSocio") %>' id="lnkOrdrpage">
                                     <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoSchedaSocio %>" runat="server" />
                                 </a>
@@ -154,13 +151,30 @@
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="GestorePortale">
                             <ContentTemplate>
-                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area
-                                            Gestione Contenuti</a><br />
+                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />
                                 <br />
                                 <br />
-                                <%-- <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />
+                                <br />
+                                <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
+                                <br />
+                                <br />
+                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                    LoginText="" />
+                                <br />
+                                <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                        <asp:RoleGroup Roles="Commerciale">
+                            <ContentTemplate>
+                                <%-- <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />--%>
+                                <br />
+                                <br />
+                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                            Storico Ordini</a><br />
+                                <br />
                                 <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
                                 <br />
@@ -177,7 +191,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <%--   <div class="classic-form" runat="server" visible="false">
+            <div class="classic-form" runat="server" visible="false">
                 <div class="form-horizontal">
                     <div class="form-group">
                         <h3>
@@ -188,13 +202,14 @@
                         </div>
                         <div class="form-group">
 
-                            <a href='<%# references.ResMan("Common",Lingua,"LinkIscrivitisocio") %>' class="btn btn-block btn-primary"
+                            <a href='<%# references.ResMan("Common",Lingua,"LinkIscriviti") %>' class="btn btn-block btn-primary"
                                 runat="server" id="btnIscriviti">
-                                <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoLoginNewCreateSocio") %>' /></a>
+                                <asp:Literal ID="Literal2" runat="server" Text='<%# references.ResMan("Common",Lingua,"testoIscrizione") %>' /></a>
                         </div>
                     </div>
-                </div>--%>
+                </div>
+            </div>
         </div>
+        <!--end:.row-->
     </div>
-    <!--end:.row-->
 </asp:Content>

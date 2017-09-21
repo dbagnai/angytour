@@ -105,22 +105,22 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             if (Sezione.ToLower().Contains("headhomegallery"))
             {
                 ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 1000;//500
+                ResizeHeight = 666;//500
             }
             if (Sezione.ToLower().Contains("header-"))
             {
                 ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 1000;//500
+                ResizeHeight = 666;//500
             }
             if (Sezione.ToLower().Contains("header-h"))
             {
                 ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 1000;//500
+                ResizeHeight = 666;//500
             }
             if (Sezione.ToLower().Contains("rif00"))
             {
                 ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 1000;//500
+                ResizeHeight = 666;//500
             }
 
             //NUOVO METODO A TABELLA UNICA
@@ -132,7 +132,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             if (Sezione.ToLower().Contains("banner-portfolio-sezioni"))
             {
                 ResizeWidth = 800;
-                ResizeHeight = 700;
+                ResizeHeight = 800;
             }
           
 
@@ -450,7 +450,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                             if (ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 350, 350, pathDestinazione + "\\", "Ant" + NomeCorretto);
+                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto);
                                 ret = true; //Se tutto ok imposto true il caricamento
                             }
                             else { output.Text += ("La foto non è stata caricata! (Problema nel caricamento)"); }

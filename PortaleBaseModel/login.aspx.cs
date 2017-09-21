@@ -46,8 +46,6 @@ public partial class login : CommonPage
     }
     protected void loginbtn_Click(object sender, EventArgs e)
     {
-
-
         HtmlInputText usr = (HtmlInputText)LogView1.Controls[0].Controls[0].FindControl("inputName");
         HtmlInputText psw = (HtmlInputText)LogView1.Controls[0].Controls[0].FindControl("inputPassword");
         Label outlogin = (Label)LogView1.Controls[0].Controls[0].FindControl("outputlogin");
@@ -64,7 +62,7 @@ public partial class login : CommonPage
          //FormsAuthentication.LoginUrl = references.ResMan("Common",Lingua,"Linklogin");
          //FormsAuthentication.DefaultUrl
          FormsAuthentication.RedirectFromLoginPage(username, false);
-            //FormsAuthentication.Authenticate(username, password);
+          //FormsAuthentication.Authenticate(username, password);
         }
         else
         {
@@ -187,9 +185,6 @@ public partial class login : CommonPage
         string ret = "";
         try
         {
-
-
-
 
             ClientiDM cliDM = new ClientiDM();
             Cliente cliente = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, email);

@@ -37,6 +37,14 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
     {
         if (!IsPostBack)
         {
+            /////////////////////////////////////////////////////////////////////
+            //Verifichiamo accesso socio e impostiamo la visualizzazione corretta
+            //Spegnendo le cose che non devono essere visibili ai soci!!!
+            /////////////////////////////////////////////////////////////////////
+            usermanager USM = new usermanager();
+            if (USM.ControllaRuolo(User.Identity.Name, "Commerciale"))
+                ImpostaVisualizzazione();
+
 
             CaricaDati("");
             AutoCompleteExtender1.ContextKey = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
@@ -50,7 +58,21 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
             outputimporta.Text = "";
         }
     }
+    private void ImpostaVisualizzazione()
+    {
+        string idcliente = getidcliente(User.Identity.Name);
+        if (!string.IsNullOrEmpty(idcliente))
+        {
+          
+            ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
 
+        }
+        else
+        {
+            Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+        }
+
+    }
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 
     protected void PagerRisultati_PageCommand(object sender, string PageNum)
@@ -245,7 +267,90 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         else
             txtTipoClienteUpdate.Text = "";
     }
+    public string GetUserData(object dataitem)
+    {
+        string ret = "";
+        //  Literal litUserdata = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Literal)sender).NamingContainer).FindControl("litUserdata")));
+        Cliente cli = new Cliente();
+        cli = (Cliente)dataitem;
+        usermanager USM = new usermanager();
+        string username = USM.GetUsernamebycamporofilo("idCliente", cli.Id_cliente.ToString());
+        if (!string.IsNullOrEmpty(username))
+        {
+            ret = username;
+        }
+        else
+            ret = "non presente";
+        return ret;
+    }
 
+    protected void EliminaUtente_click(object sender, EventArgs e)
+    {
+        Literal outrow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("outRow")));
+        Literal litMsRow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litMsRow")));
+        ClientiDM cliDM = new ClientiDM();
+        Cliente cli = new Cliente();
+        //string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
+        string CodClienteCliccato = ((Button)sender).CommandArgument;
+        usermanager USM = new usermanager();
+        string username = USM.GetUsernamebycamporofilo("idCliente", CodClienteCliccato);
+        if (USM.EliminaUtentebyUsername(username))
+        {
+            outrow.Text = "Eliminato Utente";
+            Literal litUserdata = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litUserdata")));
+            litUserdata.Text = "non presente";
+
+        }
+    }
+
+    protected void Setnewpass_click(object sender, EventArgs e)
+    {
+        Literal outrow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("outRow")));
+        Literal litMsRow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litMsRow")));
+        HtmlInputText txtNewpass = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtNewpass")));
+        ClientiDM cliDM = new ClientiDM();
+        Cliente cli = new Cliente();
+        //string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
+        string CodClienteCliccato = ((Button)sender).CommandArgument;
+        usermanager USM = new usermanager();
+        string username = USM.GetUsernamebycamporofilo("idCliente", CodClienteCliccato);
+        string newpass = USM.Resetpassword(username);
+        string msgrsp = USM.Cambiopassword(username, newpass, txtNewpass.Value);
+        outrow.Text = msgrsp;
+    }
+
+    protected void Generautente_click(object sender, EventArgs e)
+    {
+        ClientiDM cliDM = new ClientiDM();
+        Cliente cli = new Cliente();
+        //string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
+        string CodClienteCliccato = ((Button)sender).CommandArgument;
+        int idcliente = 0;
+        int.TryParse(CodClienteCliccato, out idcliente);
+        cli.Id_cliente = idcliente;
+        cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodClienteCliccato); //Ricarico il cliente completo dal db
+
+        if (cli != null && cli.Id_cliente != 0)
+        {
+            Literal outrow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("outRow")));
+            Literal litMsRow = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litMsRow")));
+
+            usermanager USM = new usermanager();
+            string username = USM.GetUsernamebycamporofilo("idCliente", idcliente.ToString());
+            if (string.IsNullOrEmpty(username))
+            {
+                string password = "";
+                username = idcliente + "-" + cli.Email;
+                USM.CreaUtente(idcliente.ToString(), ref username, ref password, "Commerciale");
+                outrow.Text = password;
+                Literal litUserdata = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litUserdata")));
+                litUserdata.Text = username;
+            }
+            else outrow.Text = "Utente già esistente -> Username: " + username;
+
+        }
+
+    }
     protected void Aggiorna_click(object sender, EventArgs e)
     {
         ClientiDM cliDM = new ClientiDM();
@@ -291,6 +396,22 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Validato = ((CheckBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("chkVD"))).Checked;
 
         cli.Sesso = ((RadioButtonList)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("radSesso"))).SelectedValue;
+
+        //Controlliamo eventuale duplicazione di codici sconto
+        Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
+        if (dict != null)
+        {
+            foreach (string csconto in dict.Keys)
+            {
+                //Vediamo se duplicata
+                Cliente cliduplicato = cliDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, csconto);
+                if (cliduplicato != null && cliduplicato.Id_cliente != 0 && cliduplicato.Id_cliente != cli.Id_cliente)
+                {
+                    output.Text = "Modificare codice sconto inserito. Presente cliente con codice sconto uguale , id cliente :" + cliduplicato.Id_cliente.ToString() + " Non consentiti clienti con codici sconto uguali";
+                    return;
+                }
+            }
+        }
 
 
         //RICORDA DI VALIDARE I CAMPI OBBLIGATORI!!!! e la tipologia di dati
@@ -429,6 +550,23 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         try
         {
             ClientiDM cliDM = new ClientiDM();
+
+            //Controlliamo eventuale duplicazione di codici sconto
+            Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
+            if (dict != null)
+            {
+                foreach (string csconto in dict.Keys)
+                {
+                    //Vediamo se duplicata
+                    Cliente cliduplicato = cliDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, csconto);
+                    if (cliduplicato != null && cliduplicato.Id_cliente != 0 && cliduplicato.Id_cliente != cli.Id_cliente)
+                    {
+                        output.Text = "Modificare codice sconto inserito. Presente cliente con codice sconto uguale , id cliente :" + cliduplicato.Id_cliente.ToString() + " Non consentiti clienti con codici sconto uguali <br/>";
+                        return;
+                    }
+                }
+            }
+
             //Controllo nel dbEMAIL per coincidenze!!!!
             if (cli.Email.ToLower().Trim() != "")
             {
@@ -1459,10 +1597,10 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
     protected void btnExport_Click(object sender, EventArgs e)
     {
-        Cliente _paramcli = new Cliente();
+        Cliente _paramcli = null;
         //_paramcli.Lingua = "";
         //_paramcli.CodiceNAZIONE = ddlNazioniFiltro.SelectedValue;
-       // _paramcli.id_tipi_clienti = ddlTipiClientiImporta.SelectedValue;
+        // _paramcli.id_tipi_clienti = ddlTipiClientiImporta.SelectedValue;
         //   CaricaDati("", _paramcli);
 
         ClientiDM cliDM = new ClientiDM();
