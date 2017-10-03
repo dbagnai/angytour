@@ -25,7 +25,7 @@ function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enab
 }
 function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
 
- //   console.log('injectPortfolioAndLoadinner' + container);
+    //   console.log('injectPortfolioAndLoadinner' + container);
     var templateHtml = pathAbs + "/lib/template/" + "isotopeOfferte.html";
     if (type != null && type != '')
         templateHtml = pathAbs + "/lib/template/" + type;
@@ -49,7 +49,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             if (retval != null && retval != '')
                 objfiltro = JSON.parse(retval);
             params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
-         //   console.log("injectPortfolioAndLoadinner " + JSON.stringify(objfiltro));
+            //   console.log("injectPortfolioAndLoadinner " + JSON.stringify(objfiltro));
 
             //Se presente prendo la pagina in sessione per la selezione di pagina iniziale
             if (objfiltro != null && objfiltro.hasOwnProperty("page" + controlid)) {
@@ -79,7 +79,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             //params.regione = regione; //Preso da sessione
             //params.caratteristica1 = caratteristica1;//Preso da sessione
             globalObject[controlid + "params"] = params;
-         //   console.log("injectPortfolioAndLoadinner params " + JSON.stringify(params));
+            //   console.log("injectPortfolioAndLoadinner params " + JSON.stringify(params));
 
             if (enablepager == "true" || enablepager == true) {
                 var pagercontainer = container + "Pager";
@@ -125,7 +125,7 @@ function CaricaIsotopeData(controlid) {
 
         putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) { });
     });
-
+    $(".loaderrelative").show();
     var functiontocallonend = renderIsotopeNotPaged;
     if (enablepager == "true" || enablepager == true)
         functiontocallonend = renderIsotopePaged;
@@ -152,7 +152,9 @@ function CaricaIsotopeData(controlid) {
                 callafterfilter(localObjects, controlid);
 
             }
-            catch (e) { }
+            catch (e) {
+                $(".loaderrelative").hide();
+            }
         },
         functiontocallonend);
 };
@@ -172,59 +174,61 @@ function renderIsotopePaged(localObjects, controlid) {
 }
 
 function BindIsotope(el, localObjects) {
+    try {
+        var objcomplete = JSON.parse(localObjects["dataloaded"]);
+        var data = objcomplete["datalist"]
+        if (!data.length) {
+            $('#' + el).html('');
+            $(".loaderrelative").hide();
+            return;
+        }
 
-    var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
-    if (!data.length) {
+        var str = $('#' + el)[0].innerHTML;
+        $('#' + el).parent().parent().show();
+
+
+        //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
+        //in caso di rebinding successivo dopo l'iniezione del template
+        if (!globalObject.hasOwnProperty(el + "template")) {
+            globalObject[el + "template"] = $('#' + el)[0].innerHTML;
+            str = globalObject[el + "template"];
+        }
+        else
+            str = globalObject[el + "template"];
+
+
+        var jquery_obj = $(str);
+        var outerhtml = jquery_obj.outerHTML();
+        var innerHtml = jquery_obj.html();
+        var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
+        var htmlout = "";
+        var htmlitem = "";
+
+
+        for (var j = 0; j < data.length; j++) {
+            htmlitem = "";
+            //htmlitem = FillBindControls(jquery_obj, data[j]);
+            //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
+            FillBindControls(jquery_obj, data[j], localObjects, "",
+                function (ret) {
+                    htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                });
+        }
+
+
+        //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
         $('#' + el).html('');
-        return;
-    }
+        // Update isotope container with new data. 
+        //$('#' + el).isotope('remove',  $('#' + el).data('isotope').$allAtoms );
+        $('#' + el).isotope('insert', $(htmlout))
+            // trigger isotope again after images have been loaded
+            .imagesLoaded(function () {
+                $('#' + el).isotope('layout');
+                CleanHtml($('#' + el));
 
-    var str = $('#' + el)[0].innerHTML;
-    $('#' + el).parent().parent().show();
-
-
-    //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
-    //in caso di rebinding successivo dopo l'iniezione del template
-    if (!globalObject.hasOwnProperty(el + "template")) {
-        globalObject[el + "template"] = $('#' + el)[0].innerHTML;
-        str = globalObject[el + "template"];
-    }
-    else
-        str = globalObject[el + "template"];
-
-
-    var jquery_obj = $(str);
-    var outerhtml = jquery_obj.outerHTML();
-    var innerHtml = jquery_obj.html();
-    var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
-    var htmlout = "";
-    var htmlitem = "";
-
-
-    for (var j = 0; j < data.length; j++) {
-        htmlitem = "";
-        //htmlitem = FillBindControls(jquery_obj, data[j]);
-        //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
-        FillBindControls(jquery_obj, data[j], localObjects, "",
-                    function (ret) {
-                        htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                    });
-    }
-
-
-    //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
-    $('#' + el).html('');
-    // Update isotope container with new data. 
-    //$('#' + el).isotope('remove',  $('#' + el).data('isotope').$allAtoms );
-    $('#' + el).isotope('insert', $(htmlout))
-      // trigger isotope again after images have been loaded
-      .imagesLoaded(function () {
-          $('#' + el).isotope('layout');
-          CleanHtml($('#' + el));
-
-      });
-
+            });
+        $(".loaderrelative").hide();
+    } catch (e) { $(".loaderrelative").hide(); }
 };
 
 
@@ -251,11 +255,11 @@ function InitIsotopeLocal(controlid) {
     });
     //  });
     $grid.on('layoutComplete',
-  function (event, laidOutItems) {
-      lazyLoad();
-      //console.log('Isotope layout completed on ' +
-      //  laidOutItems.length + ' items');
-  });
+        function (event, laidOutItems) {
+            lazyLoad();
+            //console.log('Isotope layout completed on ' +
+            //  laidOutItems.length + ' items');
+        });
 }
 
 
@@ -274,7 +278,7 @@ function initHtmlPager(controlid) {
 }
 
 function nextpage(controlid) {
- //   console.log('nextpage');
+    //   console.log('nextpage');
     var page = globalObject[controlid + "pagerdata"].page;
     if (!isNaN(Number(page)))
         page = Number(page) + 1;
@@ -289,7 +293,7 @@ function nextpage(controlid) {
             nextpage(connecteid);
     }
 
-   
+
     renderPager(controlid, function (result) {
         CaricaIsotopeData(controlid);
     });
@@ -297,7 +301,7 @@ function nextpage(controlid) {
     scrolltotop.scrollup();
 }
 function prevpage(controlid) {
-   // console.log('prevpage');
+    // console.log('prevpage');
     var page = globalObject[controlid + "pagerdata"].page;
     if (!isNaN(Number(page)))
         page = Number(page) - 1;
@@ -309,7 +313,7 @@ function prevpage(controlid) {
             prevpage(connecteid);
     }
 
-    
+
     renderPager(controlid, function (result) {
         CaricaIsotopeData(controlid);
     });

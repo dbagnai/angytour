@@ -19,6 +19,9 @@
             <div class="col-md-1 col-sm-1">
             </div>
         </div>
+          <div class="loaderrelative" style="display: none">
+                <div class="spinner"></div>
+            </div>
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div style="text-align: center">

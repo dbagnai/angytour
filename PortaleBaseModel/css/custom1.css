@@ -4048,6 +4048,15 @@ ol.unstyled {
     z-index: 99999;
     background: #fff;
 }
+.loaderrelative {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: auto;
+    z-index: 99999;
+    background: #fff;
+}
 
 @keyframes page-loader {
     to {

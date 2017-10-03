@@ -31,11 +31,14 @@
             <div class="col-md-1 col-sm-1">
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                  <h1 class="title-block"  style="line-height:normal;">
+                <h1 class="title-block" style="line-height: normal;">
                     <asp:Literal Text="" runat="server" ID="litNomePagina" /></h1>
             </div>
         </div>
-    </div>   
+    </div>
+    <div class="loaderrelative" style="display: none">
+        <div class="spinner"></div>
+    </div>
     <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
 </asp:Content>
 
@@ -380,7 +383,7 @@
             <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
                 <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common",Lingua,"TestoArchivio") %>
                 </h3>
-                <div class="sidebar-content"  style="overflow-y: auto" id="divArchivioList">
+                <div class="sidebar-content" style="overflow-y: auto" id="divArchivioList">
                     <asp:Repeater ID="rptArchivio" runat="server">
                         <ItemTemplate>
                             <ul class="posts-list" id="ulAnno" runat="server" title='<%# Eval("Key").ToString() %>'>

@@ -37,7 +37,7 @@ function CaricaDatageneriContent(controlid) {
     //per la lingua usare lng
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[controlid + "params"];
-
+    $(".loaderrelative").show();
     var functiontocallonend = renderGenericContent;
     //if (enablepager == "true" || enablepager == true)
     //    functiontocallonend = renderIsotopePaged;
@@ -66,6 +66,7 @@ function CaricaDatageneriContent(controlid) {
             }
             catch (e) {
                 //console.log(e);
+                $(".loaderrelative").show();
             }
         },
         functiontocallonend);
@@ -74,48 +75,49 @@ function renderGenericContent(localObjects, controlid) {
     bindgenericcontent(controlid, localObjects);//I dati sono già paginati all'origine
 };
 function bindgenericcontent(el, localObjects) {
+    try {
+        var objcomplete = JSON.parse(localObjects["dataloaded"]);
+        var data = objcomplete["datalist"]
+        if (!data.length) {
+            $('#' + el).html('');
+            $(".loaderrelative").hide();
+            return;
+        }
 
-    var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
-    if (!data.length) {
-        $('#' + el).html('');
-        return;
-    }
+        var objfiltrotmp = {};
+        objfiltrotmp = globalObject[el + "params"];
+        var container = objfiltrotmp.container;
 
-    var objfiltrotmp = {};
-    objfiltrotmp = globalObject[el + "params"];
-    var container = objfiltrotmp.container;
+        var str = $($('#' + el)[0]).outerHTML();
+        var jquery_obj = $(str);
+        jquery_obj = $(jquery_obj);
+        var htmlout = "";
+        var htmlitem = "";
+        $('#' + container).html('');
+        for (var j = 0; j < data.length; j++) {
+            FillBindControls(jquery_obj.wrap('<p>').parent(), data[j], localObjects, "",
+                function (ret) {
+                    //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                    $('#' + container).append(ret.html()) + "\r\n";
+                });
+        }
+        $('#' + container).show();
+        $('#' + container + 'Title').show();
+        //console.log('content generic inject');
+        jQuery(document).ready(function () {
+            //setTimeout(function (el) { rebuildCarousel(el) }, 3000);
+            //rebuildCarousel(el);
+            inizializzaFlexsliderGallery(el, container);
+            //  $('.zoommgfy').magnify(); //ATTIVA LO ZOOM NELLA GALLERIA
 
-    var str = $($('#' + el)[0]).outerHTML();
-    var jquery_obj = $(str);
-    jquery_obj = $(jquery_obj);
-    var htmlout = "";
-    var htmlitem = "";
-    $('#' + container).html('');
-    for (var j = 0; j < data.length; j++) {
-        FillBindControls(jquery_obj.wrap('<p>').parent(), data[j], localObjects, "",
-            function (ret) {
-                //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                $('#' + container).append(ret.html()) + "\r\n";
-            });
-    }
-    $('#' + container).show();
-    $('#' + container + 'Title').show();
-    //console.log('content generic inject');
-    jQuery(document).ready(function () {
-        //setTimeout(function (el) { rebuildCarousel(el) }, 3000);
-        //rebuildCarousel(el);
-        inizializzaFlexsliderGallery(el, container);
-      //  $('.zoommgfy').magnify(); //ATTIVA LO ZOOM NELLA GALLERIA
-
-    });
-    CleanHtml($('#' + container));
-    reinitaddthis();
-
+        });
+        CleanHtml($('#' + container));
+        reinitaddthis();
+        $(".loaderrelative").show();
+    } catch (e)}{ $(".loaderrelative").show(); }
 };
 
-function reinitaddthis()
-{
+function reinitaddthis() {
     //    addthis.init()
     $('#atstbx').remove();
     //addthis.toolbox('.addthis_toolbox');
@@ -130,7 +132,7 @@ function reinitaddthis()
     //    window._atr = null;
     //    window._atw = null;
     //}
-   // return $.getScript("http://s7.addthis.com/js/300/addthis_widget.js#pubid=sdive");
+    // return $.getScript("http://s7.addthis.com/js/300/addthis_widget.js#pubid=sdive");
 }
 
 /*--- FLEXLIDER GALLERY -------http://www.woothemes.com/flexslider/-----------*/
@@ -259,7 +261,7 @@ function inizializzaFlexsliderGallery(controlid, container) {
 
 //owl carousel GALLERY -------http://owlgraphic.com/owlcarousel/demos/manipulations.html-----------------------------------
 function injectOwlGalleryControls(controlid, container) {
-    
+
     $("#" + container).load("/lib/template/" + "owlsliderfoto.html", function () {
 
         $('#' + container).find("[id^=replaceid]").each(function (index, text) {
