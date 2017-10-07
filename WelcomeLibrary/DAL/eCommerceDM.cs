@@ -655,7 +655,7 @@ namespace WelcomeLibrary.DAL
 
             List<OleDbParameter> parColl = new List<OleDbParameter>();
 
-            OleDbParameter p1 = new OleDbParameter("@dataoggi", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now));
+            OleDbParameter p1 = new OleDbParameter("@dataoggi", dbDataAccess.CorrectDatenow( System.DateTime.Now));
             //p1.OleDbType = OleDbType.Date;
             parColl.Add(p1);
             //OleDbParameter p2 = new OleDbParameter("@SessionId", item.SessionId);
@@ -698,7 +698,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             OleDbParameter p2 = new OleDbParameter("@Prezzo", item.Prezzo);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@Data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now));
+            OleDbParameter p3 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
             parColl.Add(p3);
             OleDbParameter p4 = new OleDbParameter("@Iva", item.Iva);
             parColl.Add(p4);
@@ -762,7 +762,7 @@ namespace WelcomeLibrary.DAL
 
             if (item.Numero > 0)
             {
-                OleDbParameter p2 = new OleDbParameter("@Data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now));
+                OleDbParameter p2 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
                 parColl.Add(p2);
                 OleDbParameter p9 = new OleDbParameter("@Numero", item.Numero);
                 parColl.Add(p9);
@@ -1212,7 +1212,7 @@ namespace WelcomeLibrary.DAL
 
             OleDbParameter p3;
             if (item.Dataordine != null)
-                p3 = new OleDbParameter("@Dataordine", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Dataordine.Value));
+                p3 = new OleDbParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
             else
                 p3 = new OleDbParameter("@Dataordine", System.DBNull.Value);
             parColl.Add(p3);
@@ -1284,7 +1284,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p2);
             OleDbParameter p3;
             if (item.Dataordine != null)
-                p3 = new OleDbParameter("@Dataordine", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Dataordine.Value));
+                p3 = new OleDbParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
             else
                 p3 = new OleDbParameter("@Dataordine", System.DBNull.Value);
             parColl.Add(p3);

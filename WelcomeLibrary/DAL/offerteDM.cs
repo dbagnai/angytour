@@ -3274,10 +3274,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p16);
             OleDbParameter p17 = new OleDbParameter("@WEBSITE", item.Website);
             parColl.Add(p17);
-            OleDbParameter p18 = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            OleDbParameter p18 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p18.OleDbType = OleDbType.Date;
             parColl.Add(p18);
-            OleDbParameter pdata1 = new OleDbParameter("@data1", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Data1));
+            OleDbParameter pdata1 = new OleDbParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
             parColl.Add(pdata1);
 
             OleDbParameter p19 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
@@ -3414,7 +3414,7 @@ namespace WelcomeLibrary.DAL
             OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Datanascita_dts));
+            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
             OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
@@ -3588,10 +3588,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p13);
             OleDbParameter p14 = new OleDbParameter("@WEBSITE", item.Website);
             parColl.Add(p14);
-            OleDbParameter pdata = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            OleDbParameter pdata = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata);
-            OleDbParameter pdata1 = new OleDbParameter("@data1", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Data1));
+            OleDbParameter pdata1 = new OleDbParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata1);
 
@@ -3729,7 +3729,7 @@ namespace WelcomeLibrary.DAL
             OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.Datanascita_dts));
+            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
             OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);

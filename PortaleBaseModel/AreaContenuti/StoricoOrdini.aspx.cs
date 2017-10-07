@@ -240,7 +240,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             DateTime _dt;
             if (DateTime.TryParse(datamin, out _dt))
             {
-                OleDbParameter pardmin = new OleDbParameter("@DataMin", _dt);
+                OleDbParameter pardmin = new OleDbParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmin);
             }
         }
@@ -249,7 +249,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             DateTime _dt;
             if (DateTime.TryParse(datamax, out _dt))
             {
-                OleDbParameter pardmax = new OleDbParameter("@DataMax", _dt);
+                OleDbParameter pardmax = new OleDbParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmax);
             }
         }

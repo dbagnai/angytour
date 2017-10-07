@@ -583,7 +583,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         try
         {
             //Carichiamo tutti i clienti destinatari ( prendo i clienti Validati, con consenso commrciale opzione 1, e con card attivata e non scaduta )
-            CardsDM cDM = new CardsDM();
+           // CardsDM cDM = new CardsDM();
             ClientiDM cliDM = new ClientiDM();
             Cliente _clifiltro = new Cliente();
             _clifiltro.Validato = true;

@@ -36,9 +36,9 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p5);
             OleDbParameter p4 = null;
             if (item.Data != null && item.Data != DateTime.MinValue)
-                p4 = new OleDbParameter("@Data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.Data));
+                p4 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow(item.Data));
             else
-                p4 = new OleDbParameter("@Data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",System.DateTime.Now));
+                p4 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.OleDbType = OleDbType.Date;
             parColl.Add(p4);
 

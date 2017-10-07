@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\bannersDM.cs" />
-    <Compile Include="DAL\CardsDM.cs" />
     <Compile Include="DAL\ClientiDM.cs" />
     <Compile Include="DAL\contenutiDM.cs" />
     <Compile Include="DAL\dbDataAccess.cs" />

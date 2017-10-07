@@ -266,7 +266,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             string query = "DELETE FROM TBL_MAILING_ONCHARGE WHERE ( DataInserimento < @DataInserimento ) ";
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             OleDbParameter pdmin;
-            pdmin = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",data));
+            pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
             //pdmin.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdmin);
 
@@ -309,7 +309,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                 if (mindate != null)
                 {
                     OleDbParameter pdmin;
-                    pdmin = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",mindate.Value));
+                    pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(mindate.Value));
                     //pdmin.DbType = System.Data.DbType.DateTime;
                     parColl.Add(pdmin);
                     query += " and DataInserimento > @DataInserimento";
@@ -453,7 +453,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             string query = "DELETE FROM TBL_MAILING WHERE ( DataInserimento < @DataInserimento ) ";
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             OleDbParameter pdmin;
-            pdmin = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",data));
+            pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
             //pdmin.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdmin);
 
@@ -527,14 +527,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             OleDbParameter p4 = null;
             if (item.DataInserimento != null)
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataInserimento));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",System.DateTime.Now));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
             OleDbParameter p8;
             if (item.DataInvio != null)
-                p8 = new OleDbParameter("@DataInvio", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataInvio.Value));
+                p8 = new OleDbParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
             else
                 p8 = new OleDbParameter("@DataInvio", System.DBNull.Value);
             //p8.DbType = System.Data.DbType.DateTime;
@@ -542,7 +542,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             OleDbParameter pdadesione;
             if (item.DataAdesione != null)
-                pdadesione = new OleDbParameter("@DataAdesione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataAdesione.Value));
+                pdadesione = new OleDbParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
             else
                 pdadesione = new OleDbParameter("@DataAdesione", System.DBNull.Value);
             //pdadesione.DbType = System.Data.DbType.DateTime;
@@ -612,21 +612,21 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             OleDbParameter p4 = null;
             if (item.DataInserimento != null)
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataInserimento));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",System.DateTime.Now));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
            // p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
             OleDbParameter p8;
             if (item.DataInvio != null)
-                p8 = new OleDbParameter("@DataInvio", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataInvio.Value));
+                p8 = new OleDbParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
             else
                 p8 = new OleDbParameter("@DataInvio", System.DBNull.Value);
             //p8.DbType = System.Data.DbType.DateTime;
             parColl.Add(p8);
             OleDbParameter pdadesione;
             if (item.DataAdesione != null)
-                pdadesione = new OleDbParameter("@DataAdesione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataAdesione.Value));
+                pdadesione = new OleDbParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
             else
                 pdadesione = new OleDbParameter("@DataAdesione", System.DBNull.Value);
             //pdadesione.DbType = System.Data.DbType.DateTime;
@@ -689,9 +689,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             OleDbParameter p4 = null;
             if (item.DataInserimento != null && item.DataInserimento != DateTime.MinValue)
-                p4 = new OleDbParameter("@DataInserimento",String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+                p4 = new OleDbParameter("@DataInserimento",dbDataAccess.CorrectDatenow( item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",System.DateTime.Now));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
 
@@ -930,7 +930,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                 OleDbParameter p5 = new OleDbParameter("@DescrizioneGruppoMailing", item.Campo1);//OleDbType.VarChar
                 parColl.Add(p5);
                 OleDbParameter p4 = null;
-                p4 = new OleDbParameter("@DataInserimento", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.Data1));
+                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.Data1));
                 //p4.DbType = System.Data.DbType.DateTime;
                 parColl.Add(p4);
                 OleDbParameter p7 = new OleDbParameter("@Attivo", item.Bool1);//OleDbType.VarChar

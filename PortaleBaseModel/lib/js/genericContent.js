@@ -114,7 +114,7 @@ function bindgenericcontent(el, localObjects) {
         CleanHtml($('#' + container));
         reinitaddthis();
         $(".loaderrelative").show();
-    } catch (e)}{ $(".loaderrelative").show(); }
+    } catch (e){ $(".loaderrelative").show(); }
 };
 
 function reinitaddthis() {

@@ -214,7 +214,7 @@ namespace WelcomeLibrary.DAL
 
             OleDbParameter p19 = null;
             if (item.DataInvioValidazione != null)
-                p19 = new OleDbParameter("@DataInvioValidazione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataInvioValidazione.Value));
+                p19 = new OleDbParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow(item.DataInvioValidazione.Value));
             else
                 p19 = new OleDbParameter("@DataInvioValidazione", System.DBNull.Value);
             //p19.OleDbType = OleDbType.Date;
@@ -222,7 +222,7 @@ namespace WelcomeLibrary.DAL
 
             OleDbParameter p20;
             if (item.DataRicezioneValidazione != null)
-                p20 = new OleDbParameter("@DataRicezioneValidazione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}",item.DataRicezioneValidazione.Value));
+                p20 = new OleDbParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow(item.DataRicezioneValidazione.Value));
             else
                 p20 = new OleDbParameter("@DataRicezioneValidazione", System.DBNull.Value);
             //p20.OleDbType = OleDbType.Date;

@@ -14,6 +14,15 @@ namespace WelcomeLibrary.DAL
 {
     public static class dbDataAccess
     {
+
+        public static DateTime CorrectDatenow(DateTime dataorig)
+        {
+            DateTime _tmpdate = System.DateTime.Now;
+            if (!DateTime.TryParse(dataorig.ToString(), out _tmpdate))
+                DateTime.TryParse(System.DateTime.Now.ToString(), out _tmpdate);
+            return _tmpdate;
+        }
+
         //QUESTO DATAMANAGER SELEZIONA IL DB IN BASE
         //ALL'AZIENDA IMPOSTATA NELL'APPOSITA PROPRIETA' DBAZIENDA
         //USA LA SINTASSI sqlserver + dbAzienda per la stringa di connessione

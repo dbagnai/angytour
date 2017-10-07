@@ -709,7 +709,7 @@ namespace WelcomeLibrary.DAL
             OleDbParameter p7 = new OleDbParameter("@fotovalori", "");//item.FotoCollection_M.Valori
             parColl.Add(p7);
 
-            OleDbParameter p8 = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            OleDbParameter p8 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 
@@ -766,7 +766,7 @@ namespace WelcomeLibrary.DAL
             //OleDbParameter p7 = new OleDbParameter("@fotovalori", item.FotoCollection_M.Valori);
             //parColl.Add(p7);
 
-            OleDbParameter p8 = new OleDbParameter("@data", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInserimento));
+            OleDbParameter p8 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 

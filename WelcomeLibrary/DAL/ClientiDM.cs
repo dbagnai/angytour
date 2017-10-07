@@ -1058,10 +1058,10 @@ namespace WelcomeLibrary.DAL
                             DateTime di = System.DateTime.Now.AddYears(-emax);
                             DateTime df = System.DateTime.Now.AddYears(-emin);
 
-                            OleDbParameter datainizio = new OleDbParameter("@Data_inizio", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", di));
+                            OleDbParameter datainizio = new OleDbParameter("@Data_inizio", dbDataAccess.CorrectDatenow( di));
                             parColl.Add(datainizio);
 
-                            OleDbParameter datafine = new OleDbParameter("@Data_fine", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", df));
+                            OleDbParameter datafine = new OleDbParameter("@Data_fine", dbDataAccess.CorrectDatenow( df));
                             parColl.Add(datafine);
 
                             query += " AND   ( DataNascita >= @Data_inizio and  DataNascita <= @Data_fine )  ";
@@ -1346,19 +1346,19 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p27);
             OleDbParameter p26 = new OleDbParameter("@TestoFormConsensi", item.TestoFormConsensi);
             parColl.Add(p26);
-            OleDbParameter p15 = new OleDbParameter("@DataNascita", item.DataNascita);
+            OleDbParameter p15 = new OleDbParameter("@DataNascita", dbDataAccess.CorrectDatenow(item.DataNascita));
             parColl.Add(p15);
 
             OleDbParameter p14 = null;
             if (item.DataInvioValidazione != null)
-                p14 = new OleDbParameter("@DataInvioValidazione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataInvioValidazione.Value));
+                p14 = new OleDbParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow( item.DataInvioValidazione.Value));
             else
                 p14 = new OleDbParameter("@DataInvioValidazione", System.DBNull.Value);
             //p14.DbType = System.Data.DbType.DateTime;
             parColl.Add(p14);
             OleDbParameter p16;
             if (item.DataRicezioneValidazione != null)
-                p16 = new OleDbParameter("@DataRicezioneValidazione", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:dd/MM/yyyy HH:mm:ss}", item.DataRicezioneValidazione.Value));
+                p16 = new OleDbParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow( item.DataRicezioneValidazione.Value));
             else
                 p16 = new OleDbParameter("@DataRicezioneValidazione", System.DBNull.Value);
             //p16.DbType = System.Data.DbType.DateTime;
