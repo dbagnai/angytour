@@ -42,6 +42,10 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             RiempiListaClientiValidatiDaAnagrafica();
 
         }
+        if (User.IsInRole("WebMaster"))
+        {
+            btnComprimi.Visible = true;
+        }
         //else
         //{
         //    if (Request.QueryString["preview"] == "1" && !string.IsNullOrEmpty(Request.QueryString["fileId"]))
@@ -335,6 +339,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     }
     private void PopolaClientiListaAnagrafica(ClienteCollection clientianagrafica)
     {
+        if (chkCaricamentolista.Checked == false) return;
         if (clientianagrafica != null)
             //  clientinelgruppo.Sort(new GenericComparer<Cliente>("Email", System.ComponentModel.ListSortDirection.Ascending));
             clientianagrafica.Sort(new GenericComparer2<Cliente>("Cognome", System.ComponentModel.ListSortDirection.Ascending, "Nome", System.ComponentModel.ListSortDirection.Ascending));
@@ -1293,5 +1298,16 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     protected void btnFiltroClienti_Click(object sender, EventArgs e)
     {
         RiempiListaClientiValidatiDaAnagrafica();
+    }
+
+    protected void ComprimiDatabase(object sender, EventArgs e)
+    {
+        //SE VUOI ANCHE CANCELLARE I RECORD DELLA TABELLA MAIL ABILITA QUESTE
+        //mailingDM mDM = new mailingDM();
+        //int giornipercancellazione = 0;
+        //mDM.CancellaMailPerPulizia(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, System.DateTime.Now.AddDays(-giornipercancellazione));
+
+        output.Text = dbDataAccess.ComprimiDbAccess(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, false);
+
     }
 }
