@@ -52,14 +52,18 @@ namespace WelcomeLibrary.UF
                 context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
                 HttpContext.Current.Response.AppendHeader("Content-Encoding", "deflate");
             }
+            HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
+
         }
 
         private void SetDefaultCacheHeader(object sender, EventArgs eventArgs)
         {
-            double secondsduration = 36000;
+            double secondsduration = 690000;
             bool nocache = false;
             string finalpath = HttpContext.Current.Request.Url.AbsolutePath;
             if (finalpath.ToLower().EndsWith(".ashx"))
+                nocache = true;
+            if (finalpath.ToLower().EndsWith(".axd"))
                 nocache = true;
             if (HttpContext.Current.Response.ContentType == "text/plain")
                 nocache = true;

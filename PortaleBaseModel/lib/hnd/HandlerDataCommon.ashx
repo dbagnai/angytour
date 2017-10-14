@@ -686,7 +686,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             {
                 bool _tmpb = false;
                 bool.TryParse(filtri["promozioni"], out _tmpb);
-                System.Data.OleDb.OleDbParameter promo = new System.Data.OleDb.OleDbParameter("@promozioni",  _tmpb);
+                System.Data.OleDb.OleDbParameter promo = new System.Data.OleDb.OleDbParameter("@promozioni", _tmpb);
                 parColl.Add(promo);
             }
             if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
@@ -835,54 +835,56 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             tmp.Add("datitecnici", datitecnici);
             tmp.Add("image", pathimmagine);
             tmp.Add("video", _o.linkVideo);
-
-            List<string> imagescomplete = new List<string>();
-            List<string> imagesdesc = new List<string>();
-            List<string> imagesratio = new List<string>();
-            List<string> filescomplete = new List<string>();
-            List<string> filesdesc = new List<string>();
-
-
-            if ((_o != null) && (_o.FotoCollection_M.Count > 0))
+            //DETTAGLI PER LA LISTA COMPLETA ALLEGATI
+            if (filteredData != null && filteredData.Count == 1)  //Si riempiono solo per la scheda singola
             {
-                foreach (Allegato a in _o.FotoCollection_M)
+                List<string> imagescomplete = new List<string>();
+                List<string> imagesdesc = new List<string>();
+                List<string> imagesratio = new List<string>();
+                List<string> filescomplete = new List<string>();
+                List<string> filesdesc = new List<string>();
+
+
+                if ((_o != null) && (_o.FotoCollection_M.Count > 0))
                 {
-                    if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                    foreach (Allegato a in _o.FotoCollection_M)
                     {
-                        //IMMAGINE
-                        string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
-                        string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                        imagescomplete.Add(abspathimmagine);
-                        //a.Descrizione -> dove la mettiamo
-                        imagesdesc.Add(a.Descrizione);
-                        try
+                        if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
                         {
-
-                            using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
+                            //IMMAGINE
+                            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
+                            string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            imagescomplete.Add(abspathimmagine);
+                            //a.Descrizione -> dove la mettiamo
+                            imagesdesc.Add(a.Descrizione);
+                            try
                             {
-                                imagesratio.Add(((double)tmpimg.Width / (double)tmpimg.Height).ToString());
-                            }
-                        }
-                        catch
-                        { }
-                    }
-                    else
-                    {
-                        //a.Descrizione -> dove la mettiamo
-                        string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
-                        tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                        filescomplete.Add(tmppathimmagine);
-                        filesdesc.Add(a.Descrizione);
 
+                                using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
+                                {
+                                    imagesratio.Add(((double)tmpimg.Width / (double)tmpimg.Height).ToString());
+                                }
+                            }
+                            catch
+                            { }
+                        }
+                        else
+                        {
+                            //a.Descrizione -> dove la mettiamo
+                            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
+                            tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            filescomplete.Add(tmppathimmagine);
+                            filesdesc.Add(a.Descrizione);
+
+                        }
                     }
                 }
+                tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
+                tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));
+                tmp.Add("imagesratio", Newtonsoft.Json.JsonConvert.SerializeObject(imagesratio));
+                tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
+                tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
             }
-            tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
-            tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));
-            tmp.Add("imagesratio", Newtonsoft.Json.JsonConvert.SerializeObject(imagesratio));
-            tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
-            tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
-
 
             linksurl.Add(_o.Id.ToString(), tmp);
         }

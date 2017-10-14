@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlTypes;
 using System.Xml;
+using System.IO;
 
 namespace WelcomeLibrary.DAL
 {
@@ -427,17 +428,56 @@ namespace WelcomeLibrary.DAL
 
         }
 
-        public static void ComprimiDbAccess(string Conn)
+        public static string ComprimiDbAccess(string Conn, bool eliminaorigine = false)
         {
+            string ret = "";
             try
             {
                 string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
+
+                /////////////////////////////////////////////////////////
+                //FILE NAME PER LA GESTIONE DEL DATABASE
+                /////////////////////////////////////////////////////////
+                string dbfilename = (connessione.Substring(connessione.IndexOf("Data Source=") + 12)).Replace("|DataDirectory|", AppDomain.CurrentDomain.BaseDirectory + "App_Data\\");
+                string destdbfilename = (connessione.Substring(connessione.IndexOf("Data Source=") + 12).Replace(".mdb", "compress.mdb")).Replace("|DataDirectory|", AppDomain.CurrentDomain.BaseDirectory + "App_Data\\");
+                //string tempdbfilename = (connessione.Substring(connessione.IndexOf("Data Source=") + 12).Replace(".mdb", "temp.mdb")).Replace("|DataDirectory|", AppDomain.CurrentDomain.BaseDirectory + "App_Data\\");
+                //ELIMINO IL FILE DI COPIA DESTINAZIONE SE PRESENTE
+                FileInfo destdb = new FileInfo(destdbfilename);
+                destdb.Delete();
+                /////////////////////////////////////////////////////////
+
+                /////////////////////////////////////////////////////////
+                //EFFETTUO LA COMPRESSIONE DEL DB
+                /////////////////////////////////////////////////////////
                 connessione += ";Jet OLEDB:Engine Type=5";
-                connessione = connessione.Replace("|DataDirectory|", AppDomain.CurrentDomain.BaseDirectory + "\\App_Data");
+                connessione = connessione.Replace("|DataDirectory|", AppDomain.CurrentDomain.BaseDirectory + "App_Data\\");
+                //"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=C:\\Documenti\\Lavoro\\WebMouse\\LavoriClienti\\ChianciasiSito2015\\PortaleBaseModel\\App_Data\\dbData.mdb;Jet OLEDB:Engine Type=5"
+                string newconnessione = connessione.Replace(".mdb", "compress.mdb");
                 JRO.JetEngine jro = new JRO.JetEngine();
-               
                 //Comprime il database ma lo copia in uno nuovo!!
-                jro.CompactDatabase(connessione, connessione + ";Jet OLEDB:Engine Type=5");
+                jro.CompactDatabase(connessione, newconnessione + ";Jet OLEDB:Engine Type=5");
+
+                /////////////////////////////////////////////////////////
+                //OPERAZIONI DI COPIA DEL DATABASE
+                /////////////////////////////////////////////////////////
+                FileInfo origine = new FileInfo(dbfilename); //db file originale non compresso
+                FileInfo destination = new FileInfo(destdbfilename); //db file compresso
+
+                //Faccio un bck del db originario con la data di esecuzione della compressione
+                DateTime modification = System.DateTime.Now;
+                origine.CopyTo(dbfilename.Replace(".mdb", "_" + modification.ToString("ddMMyyHHmmss") + ".mdb"));//Faccio una copia del database originario per sicurezza
+
+                if (eliminaorigine && destination.Exists && new FileInfo(dbfilename.Replace(".mdb", "_" + modification.ToString("ddMMyyHHmmss") + ".mdb")).Exists)
+                {
+                    //Muovo il db originario in uno di destinazione
+                    //origine.MoveTo(tempdbfilename); //Sposto il db originale in uno di destinazione temporaneo
+                    //Cancello il db originario 
+                    origine.Delete();
+                    destination.MoveTo(dbfilename);
+                    //FileInfo tempdb = new FileInfo(tempdbfilename);
+                    //tempdb.Delete();
+                }
+                ret = "Compresso db correttamente";
 
                 //Aggiungi riferimento  fare clic sulla scheda COM e selezionare Microsoft Jet and Replication Objects 2.1 Library. 
                 //Dim jro As JRO.JetEngine
@@ -445,9 +485,13 @@ namespace WelcomeLibrary.DAL
                 //jro.CompactDatabase("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\nwind.mdb", _
                 //"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\NewNwind.mdb;Jet OLEDB:Engine Type=5")
             }
-            catch { }
-
+            catch (Exception err)
+            {
+                ret = "Errore compressione db: " + err.Message;
+            }
+            return ret;
         }
+
 
         public static int ExecuteStoredProcListOle(string query, List<OleDbParameter> parms, string Conn)
         {
