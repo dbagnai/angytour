@@ -43,7 +43,7 @@
         {
             while (When1 <= DateTime.Now)
             {
-                When1 = When.AddHours(Every1);
+                When1 = When1.AddHours(Every1);
             }
             diff = When1.Subtract(DateTime.Now);
             // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
@@ -227,20 +227,26 @@
             //rif000101 -> trattaemtni   schede indirizzabili a  href='<%# CreaLinkRicercaprodotti(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,false) %>'
 
             //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
+            List<string> Tmp_linksite = new List<string>();
 
             string Lingua = "I";
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
             //Questa è da rivedere in base al codice tipologia !!!!!
-            List<string> Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
+
             //Lingua = "GB";
+            //Tmp_linksite = new();
+            //Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
             //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
             //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
             //Lingua = "RU";
-            //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
+            //Tmp_linksite = new();
+            //Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));  //offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "5000", Lingua);
             //Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", WelcomeLibrary.STATIC.Global.UpdateUrl);
             //references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
