@@ -1,18 +1,2 @@
 User-agent: *
-Disallow: /Admin/
-Disallow: /App_LocalResources/
-Disallow: /App_Themes/
-Disallow: /AreaContenuti/
-Disallow: /AreaRiservata/
-Disallow: /AspNetPages/
-Disallow: /aspnetpages/
-Disallow: /bin/
-Disallow: /App_data/
-Disallow: /ScriptResource.axd
-Disallow: /WebResource.axd
-Disallow: /webResource.axd
-Disallow: /scriptresource.axd
-Disallow: /Aspnetpages/Content_Tipo3.aspx?idOfferta=
-Allow: /AspNetPages/Content_Tipo3.aspx
-
-
+Disallow: /*
