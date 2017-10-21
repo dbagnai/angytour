@@ -12,6 +12,9 @@ using System.IO;
 using System.Configuration;
 using System.Net.Configuration;
 using System.Xml;
+using ActiveUp.Net;
+using ActiveUp.Net.Mail;
+using ActiveUp.Net.Security;
 
 namespace WelcomeLibrary.UF
 {
@@ -454,6 +457,58 @@ namespace WelcomeLibrary.UF
 #endif
 
         public static bool invioMailGenerico(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
+         string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase", string libtype = "mailsystem")
+        {
+            bool ret = false;
+            try
+            {
+                switch (libtype)
+                {
+                    case "systemweb":
+                        ret = invioMailGenericosystemweb(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
+                  destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                        break;
+
+                    case "systemnet":
+                        ret = invioMailGenericosystemnet(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
+                  destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                        break;
+
+                    case "mailsystem":
+                        ret = invioMailGenericomailsystem(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
+                 destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                        break;
+                    default:
+                        ret = invioMailGenericosystemnet(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
+                  destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                        break;
+                }
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException(error.Message);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Implic metho con depracated system.web
+        /// </summary>
+        /// <param name="mittenteNome"></param>
+        /// <param name="mittenteMail"></param>
+        /// <param name="SoggettoMail"></param>
+        /// <param name="Descrizione"></param>
+        /// <param name="destinatarioMail1"></param>
+        /// <param name="destinatarioNome"></param>
+        /// <param name="foto"></param>
+        /// <param name="percorsofoto"></param>
+        /// <param name="incorporaimmagini"></param>
+        /// <param name="server"></param>
+        /// <param name="plaintext"></param>
+        /// <param name="emaildestbcc"></param>
+        /// <param name="sectionName"></param>
+        /// <returns></returns>
+        public static bool invioMailGenericosystemweb(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
           string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
         {
             bool ret = false;
@@ -673,8 +728,6 @@ namespace WelcomeLibrary.UF
 
                 } 
 #endif
-
-
                 //CORREGGE LA STINGA METTENDO LE INIZIALI MAIUSCOLE
                 //string myString = "disposition-Notification-To";
                 //TextInfo TI = new CultureInfo("it-IT", false).TextInfo;
@@ -683,11 +736,11 @@ namespace WelcomeLibrary.UF
                 //objMail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                 //objMail.Headers.Add("Disposition-Notification-To", "\"" + mittenteNome + "\"" + " <" + mittenteMail + ">");
                 //cli.EnableSsl = true;
+
                 //SEZIONE AGGIUNTA PER SERVER SMTP ALTERNATIVO
                 //Dictionary<string, string> attrvalues1 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "system.net", "mailSettings", "smtp", "network"); //Stringa dedicata
                 //Dictionary<string, string> attrvalues2 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", "mailing", "network"); //Stringa standard
                 //Dictionary<string, string> attrvalues3 = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", "smtpbase", "network"); //Stringa standard
-
 
                 Exception errret = null;
                 //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
@@ -705,7 +758,6 @@ namespace WelcomeLibrary.UF
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", mailvalues["username"]);
                 if (mailvalues.ContainsKey("password"))
                     objMail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", mailvalues["password"]);
-
 
 #if false
                 if (sectionName != "")
@@ -752,7 +804,6 @@ namespace WelcomeLibrary.UF
 
 #endif
 
-
                 int ntentativi = 3;
                 int i = 0;
                 while (i < ntentativi)
@@ -776,22 +827,40 @@ namespace WelcomeLibrary.UF
             }
             catch (Exception error)
             {
-                throw new ApplicationException("&nbsp <br/> Errore Invio Mail a " + destinatarioNome + ". " + error.Message);
+                string text = "&nbsp <br/> Errore Invio Mail a " + destinatarioNome + ". " + error.Message;
+                if (error.InnerException != null)
+                    text += error.InnerException.Message;
+                throw new ApplicationException(text);
             }
 
             return ret;
         }
 
-
-
-        public static bool invioMailGenericoSystemnet(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
+        /// <summary>
+        /// Explici methond non permesso aruba
+        /// </summary>
+        /// <param name="mittenteNome"></param>
+        /// <param name="mittenteMail"></param>
+        /// <param name="SoggettoMail"></param>
+        /// <param name="Descrizione"></param>
+        /// <param name="destinatarioMail1"></param>
+        /// <param name="destinatarioNome"></param>
+        /// <param name="foto"></param>
+        /// <param name="percorsofoto"></param>
+        /// <param name="incorporaimmagini"></param>
+        /// <param name="server"></param>
+        /// <param name="plaintext"></param>
+        /// <param name="emaildestbcc"></param>
+        /// <param name="sectionName"></param>
+        /// <returns></returns>
+        public static bool invioMailGenericosystemnet(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
             string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "")
         {
             bool ret = false;
             MailMessage objMail = new MailMessage();
             using (objMail)
             {
-                SmtpClient cli = new SmtpClient();
+                System.Net.Mail.SmtpClient cli = new System.Net.Mail.SmtpClient();
                 try
                 {
 
@@ -1032,6 +1101,238 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
+        public static bool invioMailGenericomailsystem(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
+       string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
+        {
+            bool ret = false;
+            ActiveUp.Net.Mail.Message mailMessage = new ActiveUp.Net.Mail.Message();
+            try
+            {
+
+                //MimeMailAddress mittente = new MimeMailAddress(mittenteMail); // se metti il nome aegis non funziona
+                //MimeMailAddress destinatario = new MimeMailAddress(destinatarioMail1); // se metti il nome aegis non funziona
+                // mailMessage.Sender = mittente;
+                mailMessage.From.Email = mittenteMail;
+                mailMessage.From.Name = mittenteNome;
+                mailMessage.AddHeaderField("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
+
+                if (destinatarioMail1 != "")
+                {
+                    //MailAddress dest = new MailAddress(destinatarioMail1, destinatarioNome);
+                    mailMessage.To.Add(destinatarioMail1, destinatarioNome);
+                }
+                if (emaildestbcc != null)
+                {
+                    foreach (string s in emaildestbcc)
+                    {
+                        mailMessage.Bcc.Add(s, "");
+
+                    }
+                }
+                //INSERIAMO GLI ATTACHMENT
+
+                try
+                {
+                    //System.Web.Mail.MailAttachment Att;
+
+                    if (foto != null)
+                        foreach (string attach in foto)
+                        {
+                            mailMessage.Attachments.Add(percorsofoto + attach, false);
+                        }
+                }
+                catch
+                { }
+                //Corpo e soggetto del messaggio 
+                string soggetto = SoggettoMail.Replace("\r\n", "");
+                soggetto = soggetto.Replace("\r", "");
+                soggetto = soggetto.Replace("\n", "");
+                mailMessage.Subject = soggetto;
+                //METODO INCLUSIONE RISORSE INTEGRATE -------------------------------------------------------------
+
+
+                List<LinkedResource> listaimmagini = new List<LinkedResource>();
+                List<string> listapathfileimmagini = new List<string>();
+                //LinkedResource img2 = null;
+                //string pathfisicoimg2 = "";
+                //if (!string.IsNullOrEmpty(pathfisicoimg2))
+                //{
+                //    StringBuilder sb1 = new StringBuilder("<img border=\"none\" src=\"cid:IMG2\" alt=\"\" />");
+                //    img2 = new LinkedResource(pathfisicoimg2);
+                //    img2.ContentId = "IMG2";
+                //    img2.ContentType = new System.Net.Mime.ContentType("image/jpeg");
+                //    listaimmagini.Add(img2);
+                //}
+                int imgidx = 1;
+                int posimmagine = 0;
+                if (incorporaimmagini && server != null)
+                {
+                    posimmagine = Descrizione.ToLower().IndexOf("src=\"", posimmagine);
+                    while (posimmagine != -1)
+                    {
+                        int endposimmagine = -1;
+                        string stringtoreplace = "";
+                        if (posimmagine + 5 < Descrizione.Length)
+                            endposimmagine = Descrizione.ToLower().IndexOf("\"", posimmagine + 5);
+                        if (posimmagine != -1 && endposimmagine != -1 && endposimmagine > posimmagine)
+                        {
+                            stringtoreplace = Descrizione.Substring(posimmagine, endposimmagine - posimmagine + 1);
+                            string linkimmagine = stringtoreplace.Substring(5, stringtoreplace.Length - 6);
+                            if (!string.IsNullOrEmpty(linkimmagine))
+                            {
+                                try
+                                {
+
+#if true   //VErsione per risorse
+                                    string percorsoassoluto = linkimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                    string percorsovirtuale = linkimmagine.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "~");
+                                    string percorsofisico = server.MapPath(percorsovirtuale);
+
+                                    listapathfileimmagini.Add(percorsofisico);
+                                    if (System.IO.File.Exists(percorsofisico))
+                                    {
+                                        string nomefile = percorsovirtuale.Substring(percorsovirtuale.LastIndexOf("/") + 1);
+                                        string replacetext = "src=\"cid:" + nomefile + "\"";
+
+                                        // LinkedResource img = new LinkedResource(percorsofisico);
+                                        // img.ContentId = "IMG" + imgidx.ToString();
+                                        //img.ContentType = new System.Net.Mime.ContentType("image/jpeg");
+                                        // listaimmagini.Add(img);
+
+                                        Descrizione = Descrizione.Replace(stringtoreplace, replacetext);
+                                        imgidx += 1;//incremento l'indice immagini
+                                    }
+
+#endif
+
+                                }
+                                catch { }
+                            }
+                        }
+                        posimmagine = posimmagine + 5;
+                        if (posimmagine + 5 < Descrizione.Length)
+                            posimmagine = Descrizione.ToLower().IndexOf("src=\"", posimmagine);
+                        else posimmagine = -1;
+                    }
+                }
+
+
+                //INSERIAMO LE IMMAGINI COME  ATTACHMENT
+                try
+                {
+
+                    if (foto != null)
+                        foreach (string attach in listapathfileimmagini)
+                        {
+                            mailMessage.Attachments.Add(percorsofoto + attach, false);
+                        }
+                    //System.Web.Mail.MailAttachment Att;
+
+                    //foreach (string attach in listapathfileimmagini)
+                    //{
+                    //    Att = new System.Web.Mail.MailAttachment(attach, System.Web.Mail.MailEncoding.Base64);
+                    //    objMail.Attachments.Add(Att);
+                    //}
+                    //Att = null;
+                }
+                catch
+                { }
+
+                //METODO INCLUSIONE RISORSE INTEGRATE ---------------------------------------------------------------
+                mailMessage.ContentType.MimeType = "text/html";
+                //mailMessage.ContentTransferEncoding = ContentTransferEncoding.EightBits;
+                mailMessage.ContentTransferEncoding = ContentTransferEncoding.Base64;
+                //mailMessage.Charset = "utf-8";
+                mailMessage.BodyHtml.Charset = "utf-8";
+                //mailMessage.BodyEncoding = System.Text.Encoding.UTF8; ;
+                //mailMessage.SubjectEncoding = Encoding.UTF8; 
+
+
+                //Tolgo interrruzioni di linea non html
+                Descrizione = Descrizione.Replace("\r\n", "");
+                Descrizione = Descrizione.Replace("\r", "");
+                Descrizione = Descrizione.Replace("\n", "");
+                mailMessage.BodyHtml.Text = Descrizione;
+                //mailMessage.BodyText.Text = Descrizione;
+
+
+                //mailMessage.BuildMimePartTree();
+
+                Exception errret = null;
+                //Server serversmtp = new Server("",2,"","",true,EncryptionType.SSL)
+                Server serversmtp = new Server();
+                //Dictionary<string, string> mailvalues = WelcomeLibrary.UF.Utility.ReadXmlAttributesOfElement(ref errret, "mailSettings", sectionName, "network"); //Stringa da web config
+                // 2016 06 26 si prende da TBL_Config
+                Dictionary<string, string> mailvalues = WelcomeLibrary.UF.ConfigManagement.ReadSection(ref errret, sectionName); //Stringa da web config                
+                if (mailvalues.ContainsKey("host"))
+                    serversmtp.Host = mailvalues["host"];
+                if (mailvalues.ContainsKey("port"))
+                {
+                    int port = 25;
+                    int.TryParse(mailvalues["port"], out port);
+                    serversmtp.Port = port;
+                }
+                serversmtp.ServerEncryptionType = EncryptionType.None;
+
+                if (mailvalues.ContainsKey("enablessl") && mailvalues["enablessl"] == "true")
+                {
+                    //SSL IMLICIT MODE (465)
+                    serversmtp.ServerEncryptionType = EncryptionType.SSL;
+                    //TLS EXPLICT (587)
+                    //serversmtp.ServerEncryptionType = EncryptionType.TLS;
+                }
+                if (mailvalues.ContainsKey("username"))
+                    serversmtp.Username = mailvalues["username"];
+                if (mailvalues.ContainsKey("password"))
+                    serversmtp.Password = mailvalues["password"];
+
+                //SaslMechanism.Login
+                ServerCollection servers = new ServerCollection();
+                servers.Add(serversmtp);
+
+                // bool isSpam = BayesianFilter.AnalyzeMessage(string.Empty, this.messageTextbox.Text, "../../spam.txt",
+                //"../../ham.txt", "../../ignore.txt");
+
+
+                //int ntentativi = 3;
+                //int i = 0;
+                //while (i < ntentativi)
+                //{
+                //    //inviamo il mail facendo un certo num di tentativi
+                //    try
+                //    {
+                //        System.Threading.Thread.Sleep(50); //DA TESTARE TOGLIENDOLO
+                //                                           //System.Web.Mail.SmtpMail.Send(objMail);
+                bool validemail = Validator.ValidateSyntax(mailMessage.From.Email);
+                if (!validemail) throw new ApplicationException("Email errata|Invalid Email");
+
+                string servermessage = "";
+                ActiveUp.Net.Mail.SmtpClient.Send(mailMessage, servers, out servermessage);
+
+                if (!servermessage.StartsWith("250")) throw new ApplicationException("Mail Server Error sending mail " + servermessage);
+                //    System.Threading.Thread.Sleep(50); //DA TESTARE TOGLIENDOLO
+                //    i = ntentativi;
+                //    ret = true;
+                //}
+                //catch (Exception errTentativi)
+                //{
+                //    i += 1;
+                //    if (i == ntentativi) throw new Exception(errTentativi.Message);
+                //}
+                //}
+
+            }
+            catch (Exception error)
+            {
+                string text = "&nbsp <br/> Errore Invio Mail a " + destinatarioNome + ". " + error.Message;
+                if (error.InnerException != null)
+                    text += error.InnerException.Message;
+                throw new ApplicationException(text);
+            }
+
+            return ret;
+        }
+
         public static string HtmlEncode(string text)
         {
             string result;
@@ -1044,314 +1345,7 @@ namespace WelcomeLibrary.UF
             return result;
 
         }
-
-#if false
-
-        public static bool invioMailGenericoAegis(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
-          string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "")
-        {
-            bool ret = false;
-
-            MimeMailMessage objMail = new MimeMailMessage();
-            //MailMessage objMail = new MailMessage();
-            using (objMail)
-            {
-
-                try
-                {
-
-                    //MimeMailAddress mitt = new MimeMailAddress(mittenteMail, mittenteNome);
-                    MimeMailAddress mitt = new MimeMailAddress(mittenteMail);
-                    objMail.From = mitt;
-                    //objMail.ReplyTo = mitt;
-                    //MailAddress toforantispam = new MailAddress("address", "nome"); //Aggiunto per filtro antispam per evitare 1.0 MISSING_HEADERS  Missing To: header
-                    //objMail.To.Add(toforantispam);
-                    //objMail.Sender = mitt;
-                    //  objMail.Headers.Add("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
-
-                    if (destinatarioMail1 != "")
-                    {
-                        //MimeMailAddress dest = new MimeMailAddress(destinatarioMail1, destinatarioNome);
-                        MimeMailAddress dest = new MimeMailAddress(destinatarioMail1);
-                        objMail.To.Add(dest);
-
-                    }
-
-                    if (emaildestbcc != null)
-                    {
-                        foreach (string s in emaildestbcc)
-                        {
-                            //MimeMailAddress dest = new MimeMailAddress(s, "");
-                            MimeMailAddress dest = new MimeMailAddress(s);
-                            objMail.Bcc.Add(dest);
-
-                        }
-                    }
-
-                    //INSERIAMO GLI ATTACHMENT
-                    try
-                    {
-                        MimeAttachment Att;
-                        if (foto != null)
-                            foreach (string attach in foto)
-                            {
-                                Att = new MimeAttachment(percorsofoto + attach);
-                                objMail.Attachments.Add(Att);
-                            }
-                        Att = null;
-                    }
-                    catch
-                    { }
-
-                    //Corpo e soggetto del messaggio 
-                    string soggetto = SoggettoMail.Replace("\r\n", "");
-                    soggetto = soggetto.Replace("\r", "");
-                    soggetto = soggetto.Replace("\n", "");
-                    objMail.Subject = soggetto;
-
-
-                    //METODO INCLUSIONE RISORSE INTEGRATE ---------------------------------------------------------------
-                    List<LinkedResource> listaimmagini = new List<LinkedResource>();
-                    //LinkedResource img1 = null;
-                    LinkedResource img2 = null;
-                    string pathfisicoimg2 = "";
-                    if (!string.IsNullOrEmpty(pathfisicoimg2))
-                    {
-                        StringBuilder sb1 = new StringBuilder("<img border=\"none\" src=\"cid:IMG2\" alt=\"\" />");
-                        img2 = new LinkedResource(pathfisicoimg2);
-                        img2.ContentId = "IMG2";
-                        img2.ContentType = new System.Net.Mime.ContentType("image/jpeg");
-                        listaimmagini.Add(img2);
-                    }
-                    int imgidx = 1;
-                    int posimmagine = 0;
-                    if (incorporaimmagini && server != null)
-                    {
-                        posimmagine = Descrizione.ToLower().IndexOf("src=\"", posimmagine);
-                        while (posimmagine != -1)
-                        {
-                            int endposimmagine = -1;
-                            string stringtoreplace = "";
-                            if (posimmagine + 5 < Descrizione.Length)
-                                endposimmagine = Descrizione.ToLower().IndexOf("\"", posimmagine + 5);
-                            if (posimmagine != -1 && endposimmagine != -1 && endposimmagine > posimmagine)
-                            {
-                                stringtoreplace = Descrizione.Substring(posimmagine, endposimmagine - posimmagine + 1);
-                                string linkimmagine = stringtoreplace.Substring(5, stringtoreplace.Length - 6);
-                                if (!string.IsNullOrEmpty(linkimmagine))
-                                {
-                                    try
-                                    {
-                                        string percorsovirtuale = linkimmagine.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "~");
-                                        string percorsofisico = server.MapPath(percorsovirtuale);
-                                        if (System.IO.File.Exists(percorsofisico))
-                                        {
-                                            string replacetext = "src=\"cid:IMG" + imgidx.ToString() + "\"";
-                                            LinkedResource img = new LinkedResource(percorsofisico);
-                                            img.ContentId = "IMG" + imgidx.ToString();
-                                            img.ContentType = new System.Net.Mime.ContentType("image/jpeg");
-                                            listaimmagini.Add(img);
-                                            Descrizione = Descrizione.Replace(stringtoreplace, replacetext);
-                                            imgidx += 1;//incremento l'indice immagini
-                                        }
-                                    }
-                                    catch { }
-                                }
-                            }
-                            posimmagine = posimmagine + 5;
-                            if (posimmagine + 5 < Descrizione.Length)
-                                posimmagine = Descrizione.ToLower().IndexOf("src=\"", posimmagine);
-                            else posimmagine = -1;
-                        }
-                    }
-#if true
-
-                    objMail.IsBodyHtml = true;
-
-                    //objMail.SubjectEncoding = System.Text.Encoding.UTF8;
-                    //objMail.BodyEncoding = System.Text.Encoding.UTF8;
-
-                    //Tolgo interrruzioni di linea non html
-                    Descrizione = Descrizione.Replace("\r\n", "");
-                    Descrizione = Descrizione.Replace("\r", "");
-                    Descrizione = Descrizione.Replace("\n", "");
-
-                    objMail.Body = Descrizione;
-
-#endif
-                    //METODO INCLUSIONE RISORSE INTEGRATE ---------------------------------------------------------------
-#if false
-                    //SISTEMA CREAZIONE MAIL MULTIVIEW PER FILTRO ANTISPAM
-
-                    if (!plaintext)
-                    {
-
-                        objMail.IsBodyHtml = true;
-                        objMail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        objMail.BodyEncoding = System.Text.Encoding.UTF8;
-                        //objMail.BodyEncoding.IsBrowserDisplay = true;
-
-                        //Tolgo interrruzioni di linea non html
-                        Descrizione = Descrizione.Replace("\r\n", "");
-                        Descrizione = Descrizione.Replace("\r", "");
-                        Descrizione = Descrizione.Replace("\n", "");
-
-                        //CREAZIONE DELLE VIEW DELLA MAIL
-                        AlternateView htmlView;
-                        htmlView = AlternateView.CreateAlternateViewFromString(
-        Descrizione, Encoding.UTF8, "text/html");//.Replace("\r\n", "<br/>")
-
-                        //htmlView.ContentType = new System.Net.Mime.ContentType("text/html"); //Encoding.UTF8,
-                        //htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit;
-
-                        //if (img1 != null)
-                        //    htmlView.LinkedResources.Add(img1);
-                        //if (img2 != null)
-                        //    htmlView.LinkedResources.Add(img2);
-                        if (listaimmagini != null && listaimmagini.Count > 0)
-                            foreach (LinkedResource img in listaimmagini)
-                            {
-                                htmlView.LinkedResources.Add(img);
-                            }
-                        objMail.AlternateViews.Add(htmlView);
-                    }
-                    else //Versione solo Text!!!
-                    {
-                        objMail.IsBodyHtml = false;
-                        objMail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        objMail.BodyEncoding = System.Text.Encoding.UTF8;
-
-                        //VERSIONE SENZA VIEW SOLO HTML
-                        //objMail.Body = Descrizione;
-                        //objMail.Body = objMail.Body.Replace("\r\n", "<br/>");
-                        //-------------------------------------------------------------------------------------------
-                        //Aggiungo una vista solo testo al messaggio ( per migliorare lo spam rating della mail )
-                        //-------------------------------------------------------------------------------------------
-                        string simpletext = Descrizione;
-
-                        //Converto a plain text tutto!!!
-                        //HtmlToText html = new HtmlToText();   //;
-                        //string simpletext = html.Convert(Descrizione);
-
-                        //  string simpletext = ConvertHtmlToPlainText(Descrizione);
-
-                        AlternateView textView =
-                  System.Net.Mail.AlternateView.CreateAlternateViewFromString(
-                  simpletext);
-                        textView.ContentType = new System.Net.Mime.ContentType("text/plain");
-                        textView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit;
-                        objMail.AlternateViews.Add(textView);
-                        //-------------------------------------------------------------------------------------------
-
-                    } 
-#endif
-
-                    //CORREGGE LA STINGA METTENDO LE INIZIALI MAIUSCOLE
-                    //string myString = "disposition-Notification-To";
-                    //TextInfo TI = new CultureInfo("it-IT", false).TextInfo;
-                    //myString = (TI.ToTitleCase(myString));
-                    //QUESTO AGGIUNGE LA NOTIFICA DI RICEZIONE DEL MESSAGGIO
-                    //objMail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                    //objMail.Headers.Add("Disposition-Notification-To", "\"" + mittenteNome + "\"" + " <" + mittenteMail + ">");
-
-                    var cli = new SmtpSocketClient();
-
-
-                    //SmtpClient cli = new SmtpClient();
-                    //SEZIONE AGGIUNTA PER SERVER SMTP ALTERNATIVO
-                    if (sectionName != "")
-                    {
-                        SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);
-                        if (section != null)
-                        {
-                            if (section.Network != null)
-                            {
-                                cli.Host = section.Network.Host;
-                                cli.Port = section.Network.Port;
-                                cli.User = section.Network.UserName;
-                                cli.Password = section.Network.Password;
-                                if (section.Network.EnableSsl)
-                                    cli.SslType = SslMode.Ssl;
-                                cli.AuthenticationMode = AuthenticationType.Base64;
-                                //cli.UseDefaultCredentials = section.Network.DefaultCredentials;
-                                //cli.Credentials = new System.Net.NetworkCredential(section.Network.UserName, section.Network.Password, section.Network.ClientDomain);
-                                //cli.SslType = section.Network.EnableSsl;
-                                //if (section.Network.TargetName != null)
-                                //    cli.TargetName = section.Network.TargetName;
-
-
-                            }
-
-                            //cli.DeliveryMethod = section.DeliveryMethod;
-                            //if (section.SpecifiedPickupDirectory != null && section.SpecifiedPickupDirectory.PickupDirectoryLocation != null)
-                            //    cli.PickupDirectoryLocation = section.SpecifiedPickupDirectory.PickupDirectoryLocation;
-                        }
-                    }
-                    else //Lettura da sezione default...
-                    {
-                        SmtpSection sectionbase = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-                        cli.Host = sectionbase.Network.Host;
-                        cli.Port = sectionbase.Network.Port;
-                        cli.User = sectionbase.Network.UserName;
-                        cli.Password = sectionbase.Network.Password;
-                        if (sectionbase.Network.EnableSsl)
-                            cli.SslType = SslMode.Ssl;
-
-                        cli.AuthenticationMode = AuthenticationType.Base64;
-                    }
-                    //------------------------------
-
-
-                    int ntentativi = 3;
-                    int i = 0;
-                    while (i < ntentativi)
-                    {
-                        //inviamo il mail facendo un certo num di tentativi
-                        try
-                        {
-                            //cli.MailMessage = objMail;
-                            //cli.SendCompleted += new SendCompletedEventHandler(OnMailSent);
-                            //cli.SendMailAsync();
-                            System.Threading.Thread.Sleep(100); //DA TESTARE TOGLIENDOLO
-                            cli.SendMail(objMail);
-
-                            System.Threading.Thread.Sleep(100); //DA TESTARE TOGLIENDOLO
-                            i = ntentativi;
-                            ret = true;
-                        }
-                        catch (Exception errTentativi)
-                        {
-                            i += 1;
-                            if (i == ntentativi) throw new Exception(errTentativi.Message);
-                        }
-                    }
-                    cli = null;
-
-                }
-                catch (Exception error)
-                {
-                    throw new ApplicationException("&nbsp <br/> Errore Invio Mail a " + destinatarioNome + ". " + error.Message);
-                }
-            }
-            return ret;
-        }
-
-        // A simple call back function:
-        private static void OnMailSent(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            if (e.UserState != null)
-                Console.Out.WriteLine(e.UserState.ToString());
-            if (e.Error != null)
-            {
-                // MessageBox.Show(e.Error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (!e.Cancelled)
-            {
-                //  MessageBox.Show("Send successfull!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-#endif
+ 
         ///// <summary>
         ///// Send an electronic message using the Collaboration Data Objects (CDO).
         ///// Do not forget to browse through your COM references and add the "Microsoft CDO for Windows 200 Library" which should add two references: ADODB, and CDO.
