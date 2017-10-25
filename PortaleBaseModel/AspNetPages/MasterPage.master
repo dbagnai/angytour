@@ -92,6 +92,7 @@
     <script type="text/javascript" src='<%= "/lib/js/portfolioisotope.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") %>'></script>
     <script type="text/javascript" src='<%= "/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") %>'></script>
     <script type="text/javascript" src='<%= "/lib/js/portfolioisotopeBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
+    <script type="text/javascript" src='<%= "/lib/js/portfolioisotopeBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
     <script type="text/javascript" src='<%= "/lib/js/archivio.js" + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
     <script type="text/javascript" src='<%= "/js/lazyloadimg.js" + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
     <%--   <script type="text/javascript" src='<%= "/lib/js/searchcontrol1.js" + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script> --%>
@@ -1163,7 +1164,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/Scripts/flexslider/jquery.flexslider-min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/it-cookies-policy.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.mb.YTPlayer.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
         <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.mb.vimeo_player.min.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.fitvids.js")%>"></script>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/fluidvids.js")%>"></script> --%>

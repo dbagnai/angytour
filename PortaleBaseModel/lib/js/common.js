@@ -1098,6 +1098,30 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         //$(this).attr("style", "background-image: url('" + completepath + "')");
 
                     }
+                    else if (($(this).is("div") || $(this).is("section"))
+                        && ($(this).hasClass('bckvideoelement'))
+                    ) {
+                        var imgslist = "";
+                        var id = dataitem[proprarr[0]];
+                        var completepath = "";
+                        /*Allegato primario*/
+                        CompleteUrlPrimaryImg(localObjects, id, true, usecdn, function (imgret) {
+                            completepath = imgret;
+                        });
+                        if (completepath != null && completepath != '') {
+                            var styletext = $(this).attr("style");
+                            styletext = styletext.replace(/urlplaceholder/g, completepath);
+                            $(this).attr("style", styletext);
+                        }
+                        var link = localObjects["linkloaded"][id]['link'];
+                        if (link != null && link != '') {
+                            var datatext = $(this).attr("data-property");
+                            datatext = datatext.replace(/videoplaceholder/g, link);
+                            $(this).attr("data-property", datatext);
+                        }
+                        //var testo = localObjects["linkloaded"][id]['titolo'];
+
+                    }
                     else if ($(this).is("meta")) {
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             var valore = [];

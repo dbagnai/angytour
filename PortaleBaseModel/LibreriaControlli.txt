@@ -146,7 +146,17 @@ injectandloadgenericcontent("schedadetails.html","divContainer1", "divitemdettag
      // ]]></script>         	  
   <div id="divContainer1" style="position: relative; display: none">&nbsp;</div> 
 	
-	
+
+----------------------------------------------
+BANNERS VIDEO	 -> injectandloadgenericvideo						-
+----------------------------------------------
+
+<script>// <![CDATA[
+injectandloadgenericvideo('bannervideo.html','divContainer1', 'videoInject1', 1, 2, false, '','1','','TBL_BANNERS_GENERALE','video-testata',false);
+// ]]></script>
+
+
+<div id="divContainer1">&nbsp;</div>	
 -------------------------------------
 BANNERS GENERIC/JARALLAX FULL	 -> injectandloadgenericbanner						-
 -------------------------------------
