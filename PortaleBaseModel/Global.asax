@@ -394,7 +394,7 @@
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
 
-                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps") == "true")
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
                     appaddress = appaddress.ToLower().Replace("http:", "https:");
 
 
@@ -467,9 +467,24 @@
        new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
        new GenericRouteHandler()));
 
+        RoutingForOldUrlRewrite(routes); //Da configurae con i vecchi valori di route da renindirizzare
+    }
+    void RoutingForOldUrlRewrite(System.Web.Routing.RouteCollection routes) //Vecchi parametri routing per redirect
+    {
+
+        ////Dovremmo mappare anche per le vecchie liste di raggruppamento ( queste sono da mappare in tabella redirect !!!! per intero  )
+        //routes.Add("Genericoldlistacategorieprod", new System.Web.Routing.Route("catalogo-prodotti/{Lingua}/{ContenutoPagina}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistacatalogoprod", new System.Web.Routing.Route("Casadellabatteria/Prodotti/{Lingua}/{CodiceContenuto}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistablog", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistablogconsezione", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{Sezione}/{testoindice}", new GenericRouteHandler()));
+
+        //SCHEDE PRODOTTI
+        //routes.Add("Genericolddetailprod1", new System.Web.Routing.Route("Casadellabatteria/Scheda-Prodotto/{Lingua}/{CodiceContenuto}/{idContenuto}/{modo}/{Tipolista}/{testoindice}", new GenericRouteHandler()));
+        //SCHEDE EVENTI
+        //routes.Add("Genericolddetailevent1", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{idContenuto}/{modo}/{Tipolista}/{testoindice}", new GenericRouteHandler()));
+
 
     }
-
     void Application_End(object sender, EventArgs e)
     {
         //  Codice eseguito all'arresto dell'applicazione

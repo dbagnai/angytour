@@ -23,6 +23,20 @@ public class GenericRouteHandler : IRouteHandler
         // TODO: aggiungere qui la logica del costruttore
         //
     }
+    private string Testredirect(string originalurl)
+    {
+        string urltoredirect = "";
+        //if (ConfigurationManager.AppSettings["Redirect"].ToString() == "true")
+        //{
+
+        if (urltoredirect != null)
+        {
+            // originalurl = originalurl.Replace(pathassoluto + "/", "");//Tolgo il dominio per la ricerca
+            urltoredirect = SitemapManager.TestRedirect(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, originalurl);
+        }
+        //}
+        return urltoredirect;
+    }
     public IHttpHandler GetHttpHandler(RequestContext requestContext)
     {
         string Pathdestinazione = "~/Index.aspx";
@@ -30,13 +44,46 @@ public class GenericRouteHandler : IRouteHandler
         string destinationselector = requestContext.RouteData.Values["destinationselector"] as string;
         string Lingua = requestContext.RouteData.Values["Lingua"] as string;
 
-         if (Lingua == null)
-         {
+        if (Lingua == null)
+        {
             HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
             Lingua = ConfigManagement.ReadKey("deflanguage");
-         }
+        }
 
-      switch (Lingua.ToUpper())
+
+        /*REWRITING OLD URL **************************************************************************/
+        //Query in tbl redirect
+        //Se ho un match in tabella routing -> devo prendere il nuovo url da tabella e fare
+        //Pathdestinazione = NUOVO URL DA TABELLA REDIRECT ; e da li fare redirect in base all'url
+        string originalrequesturl = requestContext.HttpContext.Request.Path;
+        string urltoredir = "";
+        if (originalrequesturl.ToLower().Contains("Casadellabatteria/".ToLower()) || originalrequesturl.ToLower().Contains("catalogo-prodotti/".ToLower()))
+            urltoredir = Testredirect(originalrequesturl);
+        if (!string.IsNullOrEmpty(urltoredir))
+        {
+            return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(urltoredir));
+        }
+        if (originalrequesturl.ToLower().Contains("Casadellabatteria/Scheda-Prodotto/".ToLower()) ||
+            originalrequesturl.ToLower().Contains("Casadellabatteria/Eventi/".ToLower()))
+        {
+            string idoldcontent = requestContext.RouteData.Values["idContenuto"] as string;
+            if (idoldcontent != null)
+            {
+                offerteDM offDM = new offerteDM();
+                Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idoldcontent);
+                if (item != null)
+                {
+                    string denominazione = item.DenominazionebyLingua(Lingua);
+                    string linkcanonico = CommonPage.CreaLinkRoutes(null, false, Lingua, (denominazione), item.Id.ToString(), item.CodiceTipologia);
+                    return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(linkcanonico));
+                }
+            }
+        }
+        /*END REWRITING OLD URL **********************************************************************/
+
+
+
+        switch (Lingua.ToUpper())
         {
             case "I":
             case "GB":
@@ -44,7 +91,7 @@ public class GenericRouteHandler : IRouteHandler
                 break;
             default:
                 HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
-               Pathdestinazione = "~/Error.aspx";
+                Pathdestinazione = "~/Error.aspx";
                 return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 //return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 break;

@@ -58,8 +58,9 @@
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/owl-carousel/owl-carousel/owl.carousel.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/Scripts/flexslider/flexslider.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/magnify/css/magnify.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/js/YTPlayer/css/jquery.mb.YTPlayer.min.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/ui-personalization.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/rivalvideo.css" />
+  <%--  <link rel="stylesheet" type="text/css" runat="server" href="~/css/rivalvideo.css" />--%>
     <%-- landing files--%>
     <link rel="stylesheet" type="text/css" runat="server" href="~/fonts/icon54/style.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/fonts/icon54-v2/style.css" />
