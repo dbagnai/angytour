@@ -3,6 +3,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <link rel="stylesheet"  href="/css/prettyPhoto.css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script type="text/javascript">
@@ -17,7 +19,6 @@
             }
         }
     </script>
-    <link rel="stylesheet" runat="server" href="~/css/prettyPhoto.css" />
     <div style="background-color: White; padding: 10px 10px 10px 10px">
         <asp:HiddenField ID="cancelHidden" runat="server" Value="false" />
         <asp:Literal ID="output" runat="server"></asp:Literal>

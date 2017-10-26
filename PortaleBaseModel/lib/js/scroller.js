@@ -2,8 +2,11 @@
 
 
 function injectScrollerAndLoad(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
-    loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni, lng);
+    
+        loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni, lng);
+  
 }
+
 function injectScrollerAndLoadinner(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
 
     var templateHtml = pathAbs + "/lib/template/" + "owlscrollerOfferte.html";

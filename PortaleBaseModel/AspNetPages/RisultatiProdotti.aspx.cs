@@ -292,6 +292,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     {
         string cattipo = Tipologia;
         ClientScriptManager cs = Page.ClientScript;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
         switch (Tipologia)
         {
             case "rif000001":
@@ -301,10 +302,21 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 ModificaFiltroJS(); //Inserisce nell'objfiltro della session i valori di filtraggio
                 string svetrina = "";
                 if (Vetrina) svetrina = "true";
-                string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
+                //string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
+
+                sb.Clear();
+                sb.Append("(function wait() {");
+                sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
+                sb.Append("    {");
+                sb.Append("injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
+                sb.Append(" }");
+                sb.Append("   else  {");
+                sb.Append("  setTimeout(wait, 50);");
+                sb.Append("  }  })();");
+
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
-                    cs.RegisterStartupScript(this.GetType(), "clist1", controllist2, true);
+                    cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
                 }
                 //SettaTestoIniziale();
 
@@ -400,17 +412,50 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     public void CaricaControlliJS()
     {
         ClientScriptManager cs = Page.ClientScript;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
         //Carico la galleria in masterpage corretta
-        string controllistBanHead = "";
-        if (Tipologia == "")
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+        //string controllistBanHead = "";
+        //if (Tipologia == "")
+        //    controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+        //else
+        //    controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + Tipologia + "',false,2000,300);";
+
+        if (string.IsNullOrEmpty(Tipologia))
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,1000);";
+
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+
+        }
         else
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + Tipologia + "',false,2000,300);";
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + sectionforbanner + "',false,2000,1000);";
+
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + Tipologia + "',false,2000,300);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+        }
+
+
 
         if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
         {
-            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
+            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
         }
     }
     protected string estraititolo(object testotitolo)

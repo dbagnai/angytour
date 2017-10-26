@@ -6,7 +6,13 @@ CONTENUTI TIPO SCROLLER		 -> injectScrollerAndLoad					-
 
 ELEMENTO SCROLLER CON SFONDO PARTICOLARE (es.  VINI )
 <script>// <![CDATA[
-injectScrollerAndLoad("owlscrollerVini1.html","divContainer1", "carouselInject1","", "rif000003", "", false, true, 12);
+ (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
+           injectScrollerAndLoad("owlscrollerVini1.html","divContainer1", "carouselInject1","", "rif000003", "", false, true, 12);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
 	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
@@ -25,7 +31,13 @@ injectScrollerAndLoad("owlscrollerVini1.html","divContainer1", "carouselInject1"
 
 SCROLLER CONTENUTI STANDARD NEWS
 <script>// <![CDATA[
-  injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject2","", "rif000002", "", false, false, 12);
+ (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
+             injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject2","", "rif000002", "", false, false, 12);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
 	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
@@ -45,7 +57,13 @@ SCROLLER CONTENUTI STANDARD NEWS
  
 SCROLLER CONTENUTI STANDARD NEWS ( Con selezione di categoria )
 <script>// <![CDATA[
-injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject1","", "rif000002", "prod000006", true, false, 6);
+ (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
+		injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject1","", "rif000002", "prod000006", true, false, 6);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
 	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">
@@ -64,9 +82,14 @@ injectScrollerAndLoad("owlscrollerOfferte.html","divContainer1", "carouselInject
  
  
  //VERSIONE SCROLLER DELLE RUBRICHE
-
  <script>// <![CDATA[
+ (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
 injectScrollerAndLoad("owlscrollerOfferte1.html","divContainer1", "carouselInject5","", "rif000009", "", true, false, 6, 1);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
 	<div id="divContainer1Title" class="row" style="display: none; background-color: #f2ece6;">

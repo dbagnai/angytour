@@ -1,21 +1,38 @@
 ﻿<script>
-    // <![CDATA[
-    injectSliderAndLoadBanner('sliderBanner1.html', 'divContainerb1', 'bannersliderb1', 1, 2, false, '', '', '', 'TBL_BANNERS_GENERALE', 'header-home', false, 1600, 530);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectSliderAndLoadBanner === "function") {
+            injectSliderAndLoadBanner('sliderBanner1.html', 'divContainerb1', 'bannersliderb1', 1, 2, false, '', '', '', 'TBL_BANNERS_GENERALE', 'header-home', false, 1600, 530);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div id="divContainerb1" class="hidden-xs" style="margin: 0px auto; position: relative; display: none; max-width: 1600px;">&nbsp;</div>
 <script>
-    // <![CDATA[
-    injectFasciaAndLoadBanner('bannerFascia3.html', 'divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia-home', false);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+            injectFasciaAndLoadBanner('bannerFascia3.html', 'divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia-home', false);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div id="divContainerHeadmobile1" class="visible-xs hidden-sm hidden-md hidden-lg" style="display: none;">&nbsp;</div>
-
 <script>
-    // <![CDATA[
-    injectScrollerAndLoad("owlscrollerProdotti1.html", "divContainerPromo1", "carouselpromo1", "", "rif000001", "", false, true, 12, "", "", "", "true");
+// <![CDATA[
+    (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
+            injectScrollerAndLoad("owlscrollerProdotti1.html", "divContainerPromo1", "carouselpromo1", "", "rif000001", "", false, true, 12, "", "", "", "true");
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
-<div style="margin: 50px auto;position: relative;padding:10px;">
-    <div style="max-width: 1600px;   position: relative; margin: 0px auto;background-color: #efefef;" class="paper">
-        <div id="divContainerPromo1Title" class="row" style="display: none">
+<div style="margin: 50px auto; position: relative; padding: 10px;">
+    <div style="max-width: 1600px; position: relative; margin: 0px auto; background-color: #efefef;" class="paper">
+        <div id="divContainerPromo1Title" class="row" style="display: none;">
             <div class="col-sm-12">
                 <div class="title-block clearfix">
                     <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 0px; line-height: 40px; color: #444;"><a href="/I/catalogo/promozioni?promozioni=true" target="_self">Promozioni</a></div>
@@ -26,13 +43,18 @@
         <div id="divContainerPromo1">&nbsp;</div>
     </div>
 </div>
-
 <!--  Navigazione catalogo -->
 <script>
-    // <![CDATA[
-    injectPortfolioAndLoadBanner('IsotopeBanner4b.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '4', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectPortfolioAndLoadBanner === "function") {
+            injectPortfolioAndLoadBanner('IsotopeBanner4b.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '4', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
-<div style="max-width:1600px; position: relative; margin: 0px auto; display: none; padding-top: 0px; padding-bottom: 20px;">
+<div style="max-width: 1600px; position: relative; margin: 0px auto; display: none; padding-top: 0px; padding-bottom: 20px;">
     <section id="header3-2k" class="mbr-section mbr-section__container article" style="background-color: #ffffff; padding-top: 40px; padding-bottom: 20px;">
         <div class="container">
             <div class="row">
@@ -43,49 +65,64 @@
             </div>
         </div>
     </section>
-    <div id="divContainerNav1" style="background-color: transparent">&nbsp;</div>
+    <div id="divContainerNav1" style="background-color: transparent;">&nbsp;</div>
 </div>
 <!-- BLOCCO BANNER 1 -->
 <script>
-    // <![CDATA[
-    injectFasciaAndLoadBanner('bannerFascia2.html', 'divContainerBanner1', 'bannerfascia1', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia1', false);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+            injectFasciaAndLoadBanner('bannerFascia2.html', 'divContainerBanner1', 'bannerfascia1', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia1', false);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div style="padding-top: 80px; padding-bottom: 80px; background-color: #efefef;">
     <div id="divContainerBanner1" style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">&nbsp;</div>
 </div>
 <!-- BLOCCO BANNER 2 -->
 <script>
-    // <![CDATA[
-    injectFasciaAndLoadBanner('bannerFascia3.html', 'divContainerBanner2', 'bannerfascia2', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia2', false);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+            injectFasciaAndLoadBanner('bannerFascia3.html', 'divContainerBanner2', 'bannerfascia2', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia2', false);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div style="padding-top: 80px; padding-bottom: 80px; background-color: #fff;">
     <div id="divContainerBanner2" style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">&nbsp;</div>
 </div>
-
 <!-- BLOCCO 7 titolo + testo -->
 <section id="content5-13" class="mbr-section mbr-parallax-background" style="background-image: url('/public/Files/con001000/31/sfondo-newsletter.jpg'); padding-top: 140px; padding-bottom: 140px;">
     <div class="mbr-overlay" style="opacity: 0.5; background-color: #000000;"></div>
     <div class="container">
         <h3 class="mbr-section-title display-2">RICEVI PROMOZIONI ESCLUSIVE</h3>
         <div class="lead">
-            <p>Lasciaci la tua mail per ricevere le novità e le offerte in esclusiva</p>
+            <p>Lasciaci la tua mail per ricevere le novit&agrave; e le offerte in esclusiva<br />e approfitta di uno sconto immediato del 10% su tutto il catalogo!</p>
         </div>
-        <input class="form-control" id="inpEmail" placeholder="indirizzo email" style="width:150px;margin:0px auto" />
-        <div class="mbr-section-btn"><input type="button" class="btn btn-lg btn-primary mbr-editable-button" style="width:150px;margin:0px auto" value="Iscriviti" onclick="javascript:newsubscribe(this,'inpEmail')" /></div>
+        <input class="form-control" style="width: 150px; margin: 0px auto;" type="text" id="inpEmail" placeholder="indirizzo email" />
+        <div class="mbr-section-btn"><input class="btn btn-lg btn-primary mbr-editable-button" onclick="javascript:newsubscribe(this,'inpEmail')" style="width: 150px; margin: 0px auto;" type="button" value="Iscriviti" /></div>
     </div>
 </section>
 <script>
-    // <![CDATA[
+// <![CDATA[
     function newsubscribe(btn, item) {
         var ctrmail = $('#' + item);
         __doPostBack('inseriscinewsletter', ctrmail[0].value);
     }
-    // ]]>
-</script>
-
+// ]]></script>
 <script>
-    // <![CDATA[
-    injectScrollerAndLoad("owlscrollerOfferte.html", "divContainerNews", "carouselInject2", "", "rif000002", "", true, false, 12);
+// <![CDATA[
+    (function wait() {
+        if (typeof injectScrollerAndLoad === "function") {
+            injectScrollerAndLoad("owlscrollerOfferte.html", "divContainerNews", "carouselInject2", "", "rif000002", "", true, false, 12);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div style="margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px; background-color: #efefef;">
     <div id="divContainerNewsTitle" class="row" style="display: none;">
@@ -99,8 +136,3 @@
         <div id="divContainerNews">&nbsp;</div>
     </div>
 </div>
- 
-
-
-
-

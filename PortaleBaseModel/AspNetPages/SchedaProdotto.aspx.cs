@@ -170,6 +170,7 @@ public partial class _SchedaProdotto : CommonPage
     {
         string controlsuggeriti = "";
         ClientScriptManager cs = Page.ClientScript;
+        System.Text.StringBuilder sb =new System.Text.StringBuilder();
         switch (CodiceTipologia)
         {
             case "":
@@ -179,17 +180,39 @@ public partial class _SchedaProdotto : CommonPage
                 column3.Visible = false;
                 divContact.Visible = false;
                 divContact.Visible = false;
-                controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
+                //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
+                sb.Clear();
+                sb.Append("(function wait() {");
+                sb.Append("  if (typeof injectScrollerAndLoad === \"function\")");
+                sb.Append("    {");
+                sb.Append("injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");");
+                sb.Append(" }");
+                sb.Append("   else  {");
+                sb.Append("  setTimeout(wait, 50);");
+                sb.Append("  }  })();");
+
+
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
-                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", controlsuggeriti, true);
+                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
                 }
 
                 //BIND PER LA SCHEDA!!!!
-                string controlresource1 = "injectandloadgenericcontent(\"schedadetailsprod.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");";
+                //string controlresource1 = "injectandloadgenericcontent(\"schedadetailsprod.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");";
+
+                sb.Clear();
+                sb.Append("(function wait() {");
+                sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
+                sb.Append("    {");
+                sb.Append("injectandloadgenericcontent(\"schedadetailsprod.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");");
+                sb.Append(" }");
+                sb.Append("   else  {");
+                sb.Append("  setTimeout(wait, 50);");
+                sb.Append("  }  })();");
+
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
-                    cs.RegisterStartupScript(this.GetType(), "controlresource1", controlresource1, true);
+                    cs.RegisterStartupScript(this.GetType(), "controlresource1", sb.ToString(), true);
                 }
 
                 break;
@@ -200,10 +223,21 @@ public partial class _SchedaProdotto : CommonPage
                 column3.Visible = false;
                 //column3.Attributes["class"] = "col-md-3 col-sm-3";
                 divContact.Visible = false;
-                controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
+                //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
+
+                sb.Clear();
+                sb.Append("(function wait() {");
+                sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
+                sb.Append("    {");
+                sb.Append("injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");");
+                sb.Append(" }");
+                sb.Append("   else  {");
+                sb.Append("  setTimeout(wait, 50);");
+                sb.Append("  }  })();");
+
                 if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
                 {
-                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", controlsuggeriti, true);
+                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
                 }
                 this.AssociaDati();
                 break;
