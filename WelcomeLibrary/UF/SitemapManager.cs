@@ -12,6 +12,40 @@ namespace WelcomeLibrary.UF
     public static class SitemapManager
     {
 
+        public static string TestRedirect(string connection, string urltoredirect)
+        {
+            string ret = "";
+
+            if (connection == null || connection == "") { return null; };
+            //  if (urltoredirect == null || urltoredirect == "") { return null; };
+
+            string query = "SELECT * FROM TBL_redirect where originalUrl like @urltoredirect";
+            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            OleDbParameter p1 = new OleDbParameter("@urltoredirect", urltoredirect);//OleDbType.VarChar
+            parColl.Add(p1);
+            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            Tabrif item = new Tabrif();
+            using (reader)
+            {
+                if (reader == null) { return null; };
+                if (reader.HasRows == false)
+                    return null;
+                while (reader.Read())
+                {
+                    item = new Tabrif();
+                    item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
+
+                    if (!reader["originalUrl"].Equals(DBNull.Value))
+                        item.Campo1 = reader.GetString(reader.GetOrdinal("originalUrl"));
+                    if (!reader["redirectedUrl"].Equals(DBNull.Value))
+                        item.Campo2 = reader.GetString(reader.GetOrdinal("redirectedUrl"));
+                    ret = item.Campo2;
+                }
+            }
+
+            return ret;
+        }
+
 
         /// <summary>
         /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
