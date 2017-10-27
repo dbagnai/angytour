@@ -128,7 +128,7 @@
     -moz-filter: drop-shadow(0 2px 2px .2px);*/
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 769px) {
     .fixednav1 {
         top: 60px;
         /*
@@ -285,7 +285,7 @@
         color: #fff;
     }
 
-@media (max-width: 1179px) {
+@media (max-width: 769px) {
     .menuzord.white .menuzord-menu > li > a {
         background-color: #888;
     }
@@ -408,62 +408,70 @@
     height: auto;
 }
 
+@media (max-width: 1179px) {
+    .menuzord-menu > li {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
+
 @media (max-width: 768px) {
+
+
     .fulllogobckdark {
-        width: 193px;
+        width: 270px;
         height: 70px;
     }
 
-}
+    .menuzord {
+        min-height: 60px;
+    }
 
-    @media (max-width: 1179px) {
-        .menuzord {
-            min-height: 60px;
-        }
+    .menuzord-responsive.menuzord-menu {
+        padding-bottom: 20px;
+    }
 
-        .menuzord-responsive.menuzord-menu {
-            padding-bottom: 20px;
-        }
+    .menuzord.menuzord-responsive {
+        /*text-align:center;*/
+    }
 
-        .menuzord.menuzord-responsive {
-            /*text-align:center;*/
-        }
+    .menuzord ul.menuzord-center {
+        width: 100%;
+    }
 
-        .menuzord ul.menuzord-center {
-            width: 100%;
-        }
+    .menuzord-responsive .menuzord-menu li .indicator {
+        height: auto;
+        line-height: normal;
+    }
 
-        .menuzord-responsive .menuzord-menu li .indicator {
-            height: auto;
+    .menuzord-menu > li {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+        .menuzord-menu > li > a {
             line-height: normal;
         }
 
-        .menuzord-menu > li {
-            padding-top: 0px;
-            padding-bottom: 0px;
-        }
-
-            .menuzord-menu > li > a {
-                line-height: normal;
-            }
-
-        .menuzord-responsive .menuzord-brand {
-            margin: 0px 15% !important;
-            font-size: 20px;
-            line-height: 1.55;
-            max-width: 160px;
-            float: none;
-            position: absolute;
-            left: 0px;
-            top: 0px;
-        }
-
-            .menuzord-responsive .menuzord-brand img {
-                max-width: 140px;
-                /*width: 100%;*/
-                display: inline-block;
-            }
+    .menuzord-responsive .menuzord-brand {
+        margin: 0px 15% !important;
+        font-size: 20px;
+        line-height: 1.55;
+        max-width: 160px;
+        float: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
     }
+
+        .menuzord-responsive .menuzord-brand img {
+            max-width: 140px;
+            /*width: 100%;*/
+            display: inline-block;
+        }
+}
 
     .menuzord .showhide {
         float: left;

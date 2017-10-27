@@ -1582,20 +1582,20 @@ Portfolio ( da rival )
     width: 16.666666%;
 }
 
-@media (min-width: 950px) and (max-width: 1349px) {
+@media(min-width: 768px) and (max-width: 1200px) {
     .works-grid-4 .work-item {
-        width: 24.999%;
+        width: 33.333%;
     }
 }
 
 
-@media (min-width: 850px) and (max-width: 949px) {
+@media (min-width: 850px) and (max-width: 768px) {
     .works-grid-6 .work-item {
         width: 33.333%;
     }
 }
 
-@media (min-width: 580px) and (max-width: 949px) {
+@media (min-width: 580px) and (max-width: 768px) {
     .works-grid-2 .work-item {
         width: 49.999%;
     }
