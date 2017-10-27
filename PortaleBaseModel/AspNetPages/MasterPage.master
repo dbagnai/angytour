@@ -318,7 +318,7 @@
                     --%>
 
                     <li runat="server">
-                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
+                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink4High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -334,7 +334,7 @@
                         </ul>
                     </li>
                     <li runat="server">
-                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
+                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink1High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -350,7 +350,7 @@
                         </ul>
                     </li>
                     <li runat="server" visible="false">
-                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
+                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink5High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -366,7 +366,7 @@
                         </ul>
                     </li>
                     <li runat="server">
-                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000017",true, true)%></a>
+                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000017",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink6High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -402,7 +402,7 @@
 
 
                     <li runat="server" class="visible-xs visible-sm hidden-md hidden-lg">
-                        <a runat="server" href="javascript:void(0)" style="cursor: pointer;">
+                        <a  class="a-dropdown"  runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testoid10") %></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink8High" runat="server"

@@ -177,7 +177,7 @@ function BindSliderBanner(el, localObjects) {
     CleanHtml($('#' + el));
 
 };
-
+//https://www.themepunch.com/faq/wrap-lines-of-text-jquery-version/
 function initSlider(idDiv, width, height) {
     jQuery(document).ready(function ($) {
         $('#' + idDiv).parent().show();
