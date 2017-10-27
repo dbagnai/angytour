@@ -33,7 +33,7 @@ License: http://codecanyon.net/licenses
         var menu = $(menu_container).children(".menuzord-menu");
         var menu_li = $(menu).find("li");
         var showHideButton;
-        var mobileWidthBase = 769;
+        var mobileWidthBase = 768;
         var bigScreenFlag = 2000; // a number greater than "mobileWidthBase"
         var smallScreenFlag = 200; // a number less than "mobileWidthBase"
         //	console.log(menu_container);
