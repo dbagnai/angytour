@@ -4562,6 +4562,7 @@ namespace WelcomeLibrary.DAL
             foreach (TipologiaOfferte item in Utility.TipologieOfferte)
             {
                 CreaRssFeed("I", item.Codice);
+                CreaRssFeed("I", item.Codice, "", "", true);
             }
         }
         /// <summary>
@@ -4596,10 +4597,11 @@ namespace WelcomeLibrary.DAL
         /// <summary>
         /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )
         /// </summary>
-        public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
+        public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "", bool gmerchant = false)
         {
+
             titolo = (ConfigManagement.ReadKey("Nome") ?? "");
-            descrizione = (ConfigManagement.ReadKey("Descrizione") ?? "");
+            string descrizionefeed = (ConfigManagement.ReadKey("Descrizione") ?? "");
 
             //string Lingua = "I";
             string Lingua = Lng;
@@ -4607,7 +4609,7 @@ namespace WelcomeLibrary.DAL
             TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == FiltroTipologia); });
             if (item != null)
                 titolofeed += " " + item.Descrizione;
-            string descrizionefeed = descrizione;
+
             string logfilename = "LogRss.txt";
             //string stringabase = "articoli/";
             System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
@@ -4647,18 +4649,28 @@ namespace WelcomeLibrary.DAL
                 //-------------------------------------------------------------------------------------------------------------
                 //QUI creo L'XML PER IL PROGRAMMA DI VISUALIZZAZIONE
                 //System.IO.FileStream str = new System.IO.FileStream(Server.MapPath(basevetrinadir + immobile.Codice + ".xml"), System.IO.FileMode.Create);
-                System.IO.FileStream str = new System.IO.FileStream(PathFileXml + "\\RSSfeed" + FiltroTipologia + Lng + ".xml", System.IO.FileMode.Create);
+                string filename = PathFileXml + "\\RSSfeed" + FiltroTipologia + Lng + ".xml";
+                if (gmerchant) filename = PathFileXml + "\\Merchantfeed" + FiltroTipologia + Lng + ".xml";
+                System.IO.FileStream str = new System.IO.FileStream(filename, System.IO.FileMode.Create);
                 using (str)
                 {
-                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(str, System.Text.Encoding.Default);
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(str, System.Text.Encoding.UTF8);
                     writer.Formatting = Formatting.Indented;
                     // aggiungo l'intestazione XML 
-                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    //writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                     // apro la root rss  
 
-                    //writer.WriteStartElement("rss xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\" version=\"2.0\"");
+                    //writer.WriteStartElement("rss");
+                    //writer.WriteAttributeString("xmlns:sy", "http://purl.org/rss/1.0/modules/syndication/");
+                    //writer.WriteAttributeString("version", "2.0");
+
+                    //https://support.google.com/merchants/answer/7052112?hl=en
                     writer.WriteStartElement("rss");
-                    writer.WriteAttributeString("xmlns:sy", "http://purl.org/rss/1.0/modules/syndication/");
+                    if (gmerchant)
+                        writer.WriteAttributeString("xmlns:g", "http://base.google.com/ns/1.0");
+                    else
+                        writer.WriteAttributeString("xmlns:sy", "http://purl.org/rss/1.0/modules/syndication/");
                     writer.WriteAttributeString("version", "2.0");
 
                     writer.WriteStartElement("channel");
@@ -4668,38 +4680,147 @@ namespace WelcomeLibrary.DAL
                     writer.WriteElementString("description", descrizionefeed);
                     //writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyyy-MM-ddTHH:mm:ss+01:00"));
                     writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "ddd, dd MMM yyyy HH:mm:ss 'GMT'"));
-                    writer.WriteElementString("sy:updatePeriod", "daily");
-                    writer.WriteElementString("sy:updateFrequency", "1");
-                    writer.WriteElementString("sy:updateBase", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyy-MM-ddTHH:mmzzz"));
+                    if (!gmerchant)
+                    {
+                        writer.WriteElementString("sy:updatePeriod", "daily");
+                        writer.WriteElementString("sy:updateFrequency", "1");
+                        writer.WriteElementString("sy:updateBase", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyy-MM-ddTHH:mmzzz"));
+                    }
                     //writer.WriteElementString("language", "en-EN");
                     writer.WriteElementString("language", "it-IT");
-                    //Creaiamo il feed degli immobili
+
+                    //Creaiamo il feed
                     foreach (Offerte _new in lista)
                     {
+                        string testotitolo = _new.DenominazionebyLingua(Lingua).ToLower();
+                        string descrizioneitem = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 5000)));
+
                         if (_new == null || string.IsNullOrEmpty(_new.Id.ToString())) continue;
+                        if (descrizioneitem == null || string.IsNullOrEmpty(descrizioneitem)) continue;
+
+                        ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
+                        string gtinean = "";
+                        string brand = "";
+                        string gtinmpn = "";
+                        string prezzo = "";
+                        if (gmerchant == true) //Controllo parametri base x feed merchant!!!! id-price-brand-mpn o gtin 
+                        {
+
+                            //Cerco brand:-> codice produttore per pubblicare
+                            //Cerco ean:-> codice per pubblicare
+                            //Cerco mpn:-> codice per pubblicare se non presente ean
+                            int start = descrizioneitem.ToLower().IndexOf("ean:");
+                            if (start != -1)
+                            {
+                                int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 5);
+                                int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 5);
+                                int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 5);
+                                int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 5);
+                                //Prendiamo il minimo != -1
+                                int end = -1;
+                                if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                                if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                                if (end != -1)
+                                    gtinean = descrizioneitem.Substring(start + 4, end - (start + 4)).Trim();
+                            }
+                            start = descrizioneitem.ToLower().IndexOf("mpn:");
+                            if (start != -1)
+                            {
+                                int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 5);
+                                int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 5);
+                                int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 5);
+                                int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 5);
+                                //Prendiamo il minimo != -1
+                                int end = -1;
+                                if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                                if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                                if (end != -1)
+                                    gtinmpn = descrizioneitem.Substring(start + 4, end - (start + 4)).Trim();
+                            }
+                            start = descrizioneitem.ToLower().IndexOf("brand:");
+                            if (start != -1)
+                            {
+                                int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 7);
+                                int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 7);
+                                int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 7);
+                                int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 7);
+                                //Prendiamo il minimo != -1
+                                int end = -1;
+                                if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                                if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                                if (end != -1)
+                                    brand = descrizioneitem.Substring(start + 6, end - (start + 6)).Trim();
+                            }
+                            start = descrizioneitem.ToLower().IndexOf("marchio:");
+                            if (start != -1)
+                            {
+                                int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 9);
+                                int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 9);
+                                int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 9);
+                                int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 9);
+                                //Prendiamo il minimo != -1
+                                int end = -1;
+                                if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                                if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                                if (end != -1)
+                                    brand = descrizioneitem.Substring(start + 8, end - (start + 8)).Trim();
+                            }
+                            start = descrizioneitem.ToLower().IndexOf("prezzo:");
+                            if (start != -1)
+                            {
+                                int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 7);
+                                int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 7);
+                                int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 7);
+                                int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 7);
+                                //Prendiamo il minimo != -1
+                                int end = -1;
+                                if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                                if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                                if (end != -1)
+                                    prezzo = descrizioneitem.Substring(start + 7, end - (start + 7));
+                                if (_new.Prezzo == 0)
+                                {
+                                    double prezzodbo = 0;
+                                    if (double.TryParse(prezzo, out prezzodbo))
+                                    {
+                                        _new.Prezzo = prezzodbo;
+                                    }
+                                }
+                            }
+                            if (string.IsNullOrEmpty(brand)) continue;
+                            if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue;
+                            if (_new == null || _new.Prezzo == 0) continue;
+
+                        }
+                        ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
+
                         writer.WriteStartElement("item");
 
-                        string testoperindice = _new.DenominazionebyLingua(Lingua);
-
                         //TITOLO SCHEDA
-                        writer.WriteElementString("title", testoperindice.Replace("-", " ") + " Cod: " + _new.Id.ToString());
+                        writer.WriteElementString("title", testotitolo.Replace("-", " "));
 
                         //LINK A SCHEDA
                         string UrlCompleto = "";
-                        //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testoperindice + ".aspx";
-                        UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testoperindice, _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, false);
-
+                        //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testotitolo + ".aspx";
+                        UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, false);
                         writer.WriteElementString("link", UrlCompleto);
 
-                        writer.WriteStartElement("guid");
-                        writer.WriteAttributeString("isPermaLink", "true");
-                        writer.WriteValue(UrlCompleto);
-                        writer.WriteEndElement();
-
-                        //<pubDate>
-                        writer.WriteStartElement("pubDate");
-                        writer.WriteValue(System.Xml.XmlConvert.ToString(_new.DataInserimento, "ddd, dd MMM yyyy HH:mm:ss zzz"));
-                        writer.WriteEndElement();
+                        if (!gmerchant)
+                        {
+                            writer.WriteStartElement("guid");
+                            writer.WriteAttributeString("isPermaLink", "true");
+                            writer.WriteValue(UrlCompleto);
+                            writer.WriteEndElement();
+                            //<pubDate>
+                            writer.WriteStartElement("pubDate");
+                            writer.WriteValue(System.Xml.XmlConvert.ToString(_new.DataInserimento, "ddd, dd MMM yyyy HH:mm:ss zzz"));
+                            writer.WriteEndElement();
+                        }
 
                         //Categoria
                         //<category>
@@ -4714,13 +4835,115 @@ namespace WelcomeLibrary.DAL
                         //DESCRIZIONE
                         string linkimmagine = ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                        StringBuilder sb = new StringBuilder();
-                        if (_new.FotoCollection_M != null)
-                            sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testoperindice + "\" width=\"350\" />");
-                        string descrizionenotizia = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 400)));
+                        ///////////////////////////////////////////PER FEED MERCHANT GOOGLE //////////////////////////////////////
 
-                        sb.Append("<p>" + descrizionenotizia + "</p>");
-                        sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testoperindice + "</em></a>.</p>");
+                        if (gmerchant)
+                        {
+                            writer.WriteStartElement("g:image_link");
+                            writer.WriteValue(linkimmagine);
+                            writer.WriteEndElement();
+                            //if ((_new != null) && (_new.FotoCollection_M.Count > 1))
+                            //{
+                            //    foreach (Allegato a in _new.FotoCollection_M)
+                            //    {
+                            //        if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                            //        {
+                            //            //IMMAGINE
+                            //            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
+                            //            string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            //            if (abspathimmagine != linkimmagine)
+                            //            {
+                            //                writer.WriteStartElement("g:additional_​​​image_​​​link");
+                            //                writer.WriteValue(abspathimmagine);
+                            //                writer.WriteEndElement();
+                            //            }
+                            //        }
+                            //    }
+                            //}
+                            //BRAND
+                            writer.WriteStartElement("g:brand");
+                            writer.WriteValue(brand);
+                            writer.WriteEndElement();
+                            //CODIE  EAN / ISBN / UPC / JAN / ITF-14
+                            if (!string.IsNullOrEmpty(gtinean))
+                            {
+                                writer.WriteStartElement("g:gtin");
+                                writer.WriteValue(gtinean);
+                                writer.WriteEndElement();
+                            }
+                            //MANUFACTURER PART NUMBER
+                            if (!string.IsNullOrEmpty(gtinmpn))
+                            {
+                                writer.WriteStartElement("g:mpn");
+                                writer.WriteValue(gtinmpn);
+                                writer.WriteEndElement();
+                            }
+                            //Specifico che non fornisco codice gtin o mpn per il prodotto ( che sarebbero meglio)
+                            //writer.WriteStartElement("g:identifier_​exists");
+                            //writer.WriteValue("no"); //yes
+                            //writer.WriteEndElement();
+                            //PRODUCT CATEGORY!!!!! ( DA PERSONALIZZARE IN BASE AL SETTORE QUI METTO PER IL SITO ATTUALE )
+                            //writer.WriteStartElement("g:google_​​product_​​category");
+                            //writer.WriteValue("276"); //Codice o desrizione google taxonomy ( quesot è per le batterie )
+                            //writer.WriteEndElement();
+                            if (_new.Prezzo != 0)
+                            {
+                                writer.WriteStartElement("g:price");
+                                writer.WriteValue(_new.Prezzo.ToString() + " EUR");
+                                writer.WriteEndElement();
+                            }
+                            ////////////////////////////////////////////////////////////////
+                            //                         < g:shipping >
+
+
+                            //< g:country > US </ g:country >
+
+
+                            //     < g:region > MA </ g:region >
+
+
+                            //          < g:service > Ground </ g:service >
+
+
+                            //               < g:price > 6.49 USD </ g:price >
+
+
+                            //                  </ g:shipping >
+
+                            writer.WriteStartElement("g:shipping");
+
+
+                            writer.WriteStartElement("g:country");
+                            writer.WriteValue("IT"); //prezzo spedizione
+                            writer.WriteEndElement();
+                            writer.WriteStartElement("g:price");
+                            writer.WriteValue("0.00 EUR"); //prezzo spedizione
+                            writer.WriteEndElement();
+
+                            writer.WriteEndElement();
+
+
+
+                            writer.WriteStartElement("g:availability");
+                            writer.WriteValue("in stock"); //out of stock | preorder
+                            writer.WriteEndElement();
+                            writer.WriteStartElement("g:condition");
+                            writer.WriteValue("nuovo"); //new refurbished used ( o nuovo ricondizionato usato )
+                            writer.WriteEndElement();
+                            writer.WriteStartElement("g:id");
+                            writer.WriteValue(_new.Id);
+                            writer.WriteEndElement();
+                            ////////////////////////////////// aggiungere eventuali altri come la marca o altro...
+                            //////////////////////////////////////////////////////////////////////////////////////////////////////FINE MERCHANT
+                        }
+                        StringBuilder sb = new StringBuilder();
+                        if (_new.FotoCollection_M != null && !gmerchant)
+                            sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testotitolo + "\" width=\"350\" />");
+
+                        sb.Append("<p>" + ReplaceLinks(descrizioneitem) + "</p>");
+
+                        if (!gmerchant)
+                            sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testotitolo + "</em></a>.</p>");
                         writer.WriteStartElement("description");
                         writer.WriteCData(sb.ToString());
                         //writer.WriteRaw("<![CDATA[Questo è un test con caratteri <>]]>");
@@ -4786,8 +5009,10 @@ namespace WelcomeLibrary.DAL
         /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
         /// <param name="strIn"></param>
         /// <returns></returns>
-        public static String ReplaceLinks(string strIn)
+        public static String ReplaceLinks(string strIn, bool nolink = false)
         {
+            string target = "_blank";
+            string urlcorretto = "";
             string ret = strIn;
             int a = strIn.ToLower().IndexOf("link:(");
             while (a != -1)
@@ -4804,10 +5029,32 @@ namespace WelcomeLibrary.DAL
                     string[] dati = url.Split('|');
                     if (dati.Length == 2)
                     {
-                        url = dati[0];
+                        url = (dati[0]);
                         testourl = dati[1];
                     }
-                    strIn = strIn.Replace(origtext, "<a style=\"font-weight:bold\" href=\"http://" + url + "\" target=\"_blank\">" + testourl + "</a>");
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink && urlcorretto != "")
+                    {
+                        strIn = strIn.Replace(origtext, "<a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:bold;background-color:#e0e0e0\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
                 }
                 else
                 {
@@ -4816,10 +5063,417 @@ namespace WelcomeLibrary.DAL
                 a = strIn.ToLower().IndexOf("link:(");
             }
             ret = strIn;
+
+            a = strIn.ToLower().IndexOf("quot:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<div style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\">" + testourl + "</div>");
+                        else
+                            strIn = strIn.Replace(origtext, "<div  style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("quot:(");
+            }
+            ret = strIn;
+
+
+            a = strIn.ToLower().IndexOf("bold:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<strong>" + testourl + "</strong>");
+                        else
+                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+
+
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("bold:(");
+            }
+            ret = strIn;
+
+
+            a = strIn.ToLower().IndexOf("iden:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        //if (string.IsNullOrWhiteSpace(url))
+                        //    strIn = strIn.Replace(origtext, "</p><span class=\"lateralbar\">" + testourl + "</span><p>");
+                        //else
+                        //    strIn = strIn.Replace(origtext, "</p><span class=\"lateralbar\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span><p>");
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<div class=\"lateralbar\">" + testourl + "</div>");
+                        else
+                            strIn = strIn.Replace(origtext, "<div class=\"lateralbar\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("iden:(");
+            }
+            ret = strIn;
+
+            a = strIn.ToLower().IndexOf("butt:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\">" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+
+
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("butt:(");
+
+
+
+            }
+            ret = strIn;
+
+
+            a = strIn.ToLower().IndexOf("buto:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\">" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("buto:(");
+            }
+            ret = strIn;
+
+
+
+
+            a = strIn.ToLower().IndexOf("imag:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+
+
+                        if (!string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<img class=\"\"  style=\"max-width:100%\"  src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
+                        else if (!url.ToLower().StartsWith("http"))
+                            strIn = strIn.Replace(origtext, "<img class=\"\"  style=\"max-width:100%\"  src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("imag:(");
+
+
+
+            }
+            ret = strIn;
+
+
+            a = strIn.ToLower().IndexOf("titl:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span style=\"font-weight:800;font-size:1.4em\" >" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("titl:(");
+            }
+            ret = strIn;
+
+
+
             return ret;
 
         }
+        public static string ReplaceAbsoluteLinks(string testo)
+        {
 
+            return testo.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        }
         #endregion
     }
 }
