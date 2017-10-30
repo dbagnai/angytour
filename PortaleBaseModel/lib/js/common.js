@@ -857,6 +857,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 testo = localObjects["linkloaded"][idscheda][bindproptitle];
                                 $(this).attr("title", testo);
                             }
+                            if (link.toLowerCase().indexOf(pathAbs) != 0) $(this).attr("target", "_blank");
+                            //if (!link.toLowerCase().startsWith(pathAbs)) $(this).attr("target", "_blank");
+
                         }
                         else {
                             $(this).attr("href", '');
@@ -952,7 +955,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     catch (e) {
                                     };
                                 }
-                               
+
 
                                 contenutoslide += '<img class="zoommgfy" itemprop="image"  style="border:none;' + imgstyle + '" src="';
                                 contenutoslide += imgslist[j];
@@ -1110,14 +1113,18 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         });
                         if (completepath != null && completepath != '') {
                             var styletext = $(this).attr("style");
-                            styletext = styletext.replace(/urlplaceholder/g, completepath);
-                            $(this).attr("style", styletext);
+                            if (styletext != undefined && styletext != null && styletext != '') {
+                                styletext = styletext.replace(/urlplaceholder/g, completepath);
+                                $(this).attr("style", styletext);
+                            }
                         }
                         var link = localObjects["linkloaded"][id]['link'];
                         if (link != null && link != '') {
                             var datatext = $(this).attr("data-property");
-                            datatext = datatext.replace(/videoplaceholder/g, link);
-                            $(this).attr("data-property", datatext);
+                            if (datatext != undefined && datatext != null && datatext != '') {
+                                datatext = datatext.replace(/videoplaceholder/g, link);
+                                $(this).attr("data-property", datatext);
+                            }
                         }
                         //var testo = localObjects["linkloaded"][id]['titolo'];
 
@@ -1414,7 +1421,8 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     var id = valore[0];
     var qtavendita = valore[1];
     var xmlvalue = valore[2];
-
+    var prezzo = valore[3];
+    //JSON.parse(localObjects.dataloaded)["datalist"]
 
     if (qtavendita == 0) {
         retstring = "<div style=\"width:90px;line-height:15px; padding-top:10px;\"  class=\"divbuttonstyle\"  >" + testoCarelloesaurito + "</div>";
@@ -1424,13 +1432,13 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
 
         retstring = "<button type=\"button\" style=\" background-color:#121212;\" class=\"btn btn-purple\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
 
-        if (xmlvalue != null && xmlvalue != "") {
+        if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || prezzo == 0)) {
             var link = localObjects["linkloaded"][id]["link"];
             retstring = "<a href=\"" + link + "\" target=\"_self\" >";
             retstring += "<div  style=\"background-color:#121212\" class=\"btn btn-purple\"  >" + testoVedi + "</div>";
             retstring += "</a>";
-
         }
+
     }
 
     callback(retstring);
@@ -2203,4 +2211,3 @@ Array.prototype.remByName = function (val) {
     }
     return this;
 }
- 
