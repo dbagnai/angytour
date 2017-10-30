@@ -1699,10 +1699,11 @@ public class CommonPage : Page
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, bool supplementospedizione, double totaleordine, double totalesconto, bool contrassegno = false)
     {
         double spesespedizione = 0;
+        double tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out tmpconv);
 
         double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
-        if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = Convert.ToDouble(ConfigManagement.ReadKey("defaultesterospedizione")); //Costostandard per l'estero
-
+        if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = tmpconv; //Costostandard per l'estero
 
         //Da calcolare in base ai parametri passati
         //long totalearticoli = 0;
@@ -1710,16 +1711,24 @@ public class CommonPage : Page
         //{
         //    totalearticoli += c.Numero;
         //}
-        if (supplementospedizione) //Supplemento isole supplementoSpedizioni
-            spesespedizione = Convert.ToDouble(ConfigManagement.ReadKey("supplementoSpedizioni"));
-        if (contrassegno) //Supplemento isole supplementoSpedizioni
-            spesespedizione = Convert.ToDouble(ConfigManagement.ReadKey("supplementoContrassegno"));
 
+        tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("supplementoSpedizioni"), out tmpconv);
+        if (supplementospedizione) //Supplemento isole supplementoSpedizioni
+            spesespedizione += tmpconv;
+
+        tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("supplementoContrassegno"), out tmpconv);
+        if (contrassegno) //Supplemento contrassegno  
+            spesespedizione += tmpconv;
+
+        tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("sogliaSpedizioni"), out tmpconv);
 
         switch (codicenazione)
         {
-           case "IT":
-                if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
+            case "IT":
+                if (totaleordine - totalesconto <= tmpconv)
                 {
                     spesespedizione += costospedizionenazione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
                 }
@@ -1727,12 +1736,13 @@ public class CommonPage : Page
             default:
                 //if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
                 //{
-                    spesespedizione += costospedizionenazione; 
+                spesespedizione += costospedizionenazione;
                 //}
                 break;
         }
         return spesespedizione;
     }
+
 
     public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar)
     {

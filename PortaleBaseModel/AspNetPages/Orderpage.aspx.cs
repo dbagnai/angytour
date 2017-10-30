@@ -71,9 +71,14 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
             else
             {
+                if (Request["__EVENTTARGET"] == "refreshcarrello")
+                {
+                    CaricaCarrello();
+                }
                 output.Text = "";
                 DataBind();
             }
+           
 
         }
         catch (Exception err)
@@ -324,7 +329,8 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
 
         bool supplementoisole = chkSupplemento.Checked;
-        TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole);
+        bool supplementocontrassegno = inpContanti.Checked;
+        TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole, supplementocontrassegno);
         List<TotaliCarrello> list = new List<TotaliCarrello>();
         list.Add(totali);
         rptTotali.DataSource = list;
@@ -398,13 +404,18 @@ public partial class AspNetPages_Orderpage : CommonPage
                 //In modo da associarli ad un ordine preciso in caso di successo dell'invio del pagamento o della  mail
                 CodiceOrdine = GeneraCodiceOrdine();
                 bool supplementoisole = chkSupplemento.Checked;
-
-                TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole);
+                bool supplementocontrassegno = inpContanti.Checked;
+                TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
 
                 string urlpagamento = "";
                 string modalita = "";
                 string descrizionepagamento = "";
 
+                if (inpContanti.Checked)
+                {
+                    modalita = inpContanti.Value;
+                    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+                }
                 if (inpBonifico.Checked)
                 {
                     modalita = inpBonifico.Value;
@@ -525,7 +536,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
                     EseguiCheckOutPaypal(returl, cancelurl, paypaldatas, authandcapturemode); // da traspormare in auth and capture true succesivamente
                 }
-                if (modalita == "bacs") //PAGAMENTO CON BONIFICO
+                if (modalita == "bacs" || modalita == "contanti") //PAGAMENTO CON BONIFICO
                 {
                     //try
                     //{
@@ -1311,4 +1322,21 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
 
 
+
+    protected void inpContanti_ServerChange(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+    }
+
+    protected void inpBonifico_ServerChange(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+
+    }
+
+    protected void inpPaypal_ServerChange(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+
+    }
 }
