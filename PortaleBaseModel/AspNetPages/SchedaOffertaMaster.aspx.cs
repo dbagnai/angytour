@@ -167,6 +167,8 @@ public partial class _SchedaOffertaMaster : CommonPage
             cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
         }
     }
+
+
     protected string GeneraBackLink(bool usacategoria = true)
     {
         string ret = "";

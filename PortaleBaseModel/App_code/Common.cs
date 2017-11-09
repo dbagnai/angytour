@@ -1355,10 +1355,24 @@ public class CommonPage : Page
                 List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
                 ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
                 if (item != null)
-                    sb.Append(item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                {
+                    string testoinlinguacar1 = item.caratteristica1.value;
+                    Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica1.codice; });
+                    if (Car1 != null)
+                        testoinlinguacar1 = Car1.Campo1;
+
+                    string testoinlinguacar2 = item.caratteristica2.value;
+                    Tabrif Car2 = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica2.codice; });
+                    if (Car2 != null)
+                        testoinlinguacar2 = Car2.Campo1;
+
+                    sb.Append(testoinlinguacar1 + "  -  " + testoinlinguacar2);
+                }
+
                 sb.Append(" </div>");
             }
             #endregion
+
 
             //sb.Append(" <div class=\"product-categories muted\">");
             //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));

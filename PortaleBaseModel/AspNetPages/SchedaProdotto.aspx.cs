@@ -443,7 +443,6 @@ public partial class _SchedaProdotto : CommonPage
                 sb.Append("  </td></tr>");
             } 
 #endif
-
             //CREAZIONE DELLE DDL DI SELEZIONE PER LA SCELTA SE PRESENTE GESTIONE DISPONIBILITA' ARITICOLI PER CARATTERISTICHE
             if (!string.IsNullOrEmpty(item.Xmlvalue))
             {
@@ -481,7 +480,12 @@ public partial class _SchedaProdotto : CommonPage
                 if (listacat1 != null)
                     foreach (ResultAutocomplete elem in listacat1)
                     {
-                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + elem.value + "</option>");
+                        string testoinlingua = elem.value;
+                        Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == elem.codice; });
+                        if (Car1 != null)
+                            testoinlingua = Car1.Campo1;
+
+                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + testoinlingua + "</option>");
                     }
                 sb.Append("  <select>");
                 sb.Append("  </td></tr>");
@@ -499,7 +503,13 @@ public partial class _SchedaProdotto : CommonPage
                 if (listacar2 != null)
                     foreach (ResultAutocomplete elem in listacar2)
                     {
-                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + elem.value + "</option>");
+
+                        string testoinlingua = elem.value;
+                        Tabrif Car2 = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == elem.codice; });
+                        if (Car2 != null)
+                            testoinlingua = Car2.Campo1;
+
+                        sb.Append("  <option id=\"" + elem.id + "\" value=\"" + elem.codice + "\">" + testoinlingua + "</option>");
                     }
                 sb.Append("  <select>");
 
@@ -512,7 +522,7 @@ public partial class _SchedaProdotto : CommonPage
                 if (Car1 != null)
                 {
                     sb.Append("  <tr class=\"alt\"><th>");
-                sb.Append(references.ResMan("BaseText", Lingua, "selectcat1"));
+                    sb.Append(references.ResMan("BaseText", Lingua, "selectcat1"));
                     //sb.Append(GetGlobalResourceObject("BaseText", "selectcat1").ToString());
                     sb.Append("  </th>");
                     sb.Append("  <td>");
@@ -524,7 +534,7 @@ public partial class _SchedaProdotto : CommonPage
                 if (Car2 != null)
                 {
                     sb.Append("  <tr class=\"alt\"><th>");
-                sb.Append(references.ResMan("BaseText", Lingua, "selectcat2"));
+                    sb.Append(references.ResMan("BaseText", Lingua, "selectcat2"));
                     //sb.Append(GetGlobalResourceObject("BaseText", "selectcat2").ToString());
                     sb.Append("  </th>");
                     sb.Append("  <td>");
@@ -532,6 +542,7 @@ public partial class _SchedaProdotto : CommonPage
                     sb.Append("  </td></tr>");
                 }
             }
+
 
 
 

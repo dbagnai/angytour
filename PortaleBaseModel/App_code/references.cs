@@ -730,7 +730,18 @@ public class references
                         car2 = item.caratteristica2;
                     }
                 }
-                retstr = "  -  " + car1.value + "  -  " + car2.value;
+
+                string testoinlinguacar1 = car1.value;
+                Tabrif Car1mem = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == car1.codice; });
+                if (Car1mem != null)
+                    testoinlinguacar1 = Car1mem.Campo1;
+
+                string testoinlinguacar2 = car2.value;
+                Tabrif Car2mem = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == car2.codice; });
+                if (Car2mem != null)
+                    testoinlinguacar2 = Car2mem.Campo1;
+
+                retstr = "  -  " + testoinlinguacar1 + "  -  " + testoinlinguacar2;
             }
         }
         return retstr;
