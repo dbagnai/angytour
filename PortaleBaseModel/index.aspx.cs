@@ -60,7 +60,7 @@ public partial class index : CommonPage
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
         litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
 
-#if false
+#if true
         //inglese
         hreflang = " hreflang=\"en\" ";
         linkcanonicoalt = "~/" + "GB" + "/Home";

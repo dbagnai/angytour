@@ -189,7 +189,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             actualpagelink.Campo2 = (testourlpagina);
 
         }
-#if false
+#if true
         hreflang = " hreflang=\"en\" ";
         //ci = setCulture("GB");
         testourlpagina = item.TitolobyLingua("GB");
@@ -199,9 +199,9 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         if (Lingua == "GB")
         {
             litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-          link.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
-            link.Campo2 = (testourlpagina);
-        } 
+            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            actualpagelink.Campo2 = (testourlpagina);
+        }
 #endif
 
 
@@ -527,7 +527,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                     customtitle = content.CustomtitleI;
                     break;
             }
-         
+
             if (!string.IsNullOrEmpty(customtitle))
                 ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
             if (!string.IsNullOrEmpty(customdesc))

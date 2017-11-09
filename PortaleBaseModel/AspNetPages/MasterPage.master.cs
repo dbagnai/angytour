@@ -86,6 +86,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 metaDesc.Content += references.ResMan("Common", Lingua, "descMain").ToString().Replace("<br/>", " ").Trim();
             //Prendiamo i dati dalla querystring
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+
+#if true
+            if (Lingua.ToLower() == "gb") Response.RedirectPermanent("~");
+#endif
+
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);
             Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", false);

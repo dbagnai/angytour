@@ -904,7 +904,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
-
+#if true
         hreflang = " hreflang=\"en\" ";
         linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv);
         litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
@@ -914,6 +914,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
         }
+#endif
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

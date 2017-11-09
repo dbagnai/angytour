@@ -1016,7 +1016,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
-#if false
+#if true
         hreflang = " hreflang=\"en\" ";
         linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
         litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
