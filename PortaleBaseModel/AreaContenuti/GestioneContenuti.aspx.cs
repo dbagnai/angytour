@@ -667,7 +667,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     //Prima Cancello
                     conDM.DeleteContenuti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
-                    WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
+                    WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdContenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
 
 
                     this.SvuotaDettaglio();

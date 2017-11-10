@@ -182,7 +182,7 @@
                             <div class="addthis_inline_share_toolbox"></div>
                             <div class="blog-post-body">
                                 <%--INSERIAMO I PARAMETRI DEL PRODOTTO--%>
-                                <p>
+                                           <p itemprop="description">
                                     <asp:Label ID="lbldescri" runat="server" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(Eval("Descrizione" + Lingua).ToString()))%>'></asp:Label>
                                 </p>
                                 <p>

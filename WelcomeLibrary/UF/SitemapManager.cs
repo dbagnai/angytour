@@ -716,6 +716,7 @@ namespace WelcomeLibrary.UF
             }
             return idret;
         }
+
         /// <summary>
         /// Elimina gli urlrewrided in tabella in base all'id
         /// </summary>
@@ -728,9 +729,9 @@ namespace WelcomeLibrary.UF
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             if (connessione == null || connessione == "") return idret;
 
-            string query = "DELETE FROM TBL_URLREWRITING WHERE ( ( Calledurl like @Calledurl or Parametri like @Parametroid ) and ( Parametri not like @Parametroexcludi )) ";
+            string query = "DELETE FROM TBL_URLREWRITING WHERE ( ( Calledurl like @Calledurl or Parametri like @Parametroid ) and ( Parametri like '%idOfferta%' ) and ( Parametri not like @Parametroexcludi )) ";
             OleDbParameter p1;
-            p1 = new OleDbParameter("@Calledurl", "%" + id);
+            p1 = new OleDbParameter("@Calledurl", "%-" + id);
             parColl.Add(p1);
             OleDbParameter p2;
             p2 = new OleDbParameter("@Parametroid", "%;idOfferta," + id + ";%");
@@ -757,9 +758,9 @@ namespace WelcomeLibrary.UF
             List<OleDbParameter> parColl = new List<OleDbParameter>();
             if (connessione == null || connessione == "") return idret;
 
-            string query = "DELETE FROM TBL_URLREWRITING WHERE ( Calledurl like @Calledurl or Parametri like @Parametroid ) ";
+            string query = "DELETE FROM TBL_URLREWRITING WHERE ( Calledurl like @Calledurl or Parametri like @Parametroid ) and ( Parametri like '%idContenuto%' )  ";
             OleDbParameter p1;
-            p1 = new OleDbParameter("@Calledurl", "%" + id);
+            p1 = new OleDbParameter("@Calledurl", "%-" + id);
             parColl.Add(p1);
             OleDbParameter p2;
             p2 = new OleDbParameter("@Parametroid", "%;idContenuto," + id + ";%");
