@@ -381,10 +381,10 @@
 
             <!-- Sidebar Block -->
             <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
-                <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common",Lingua,"TestoArchivio") %>
-                </h3>
+            <%--    <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common",Lingua,"TestoArchivio") %>
+                </h3>--%>
                 <div class="sidebar-content" style="overflow-y: auto" id="divArchivioList">
-                    <asp:Repeater ID="rptArchivio" runat="server">
+                   <%-- <asp:Repeater ID="rptArchivio" runat="server">
                         <ItemTemplate>
                             <ul class="posts-list" id="ulAnno" runat="server" title='<%# Eval("Key").ToString() %>'>
                                 <asp:Repeater ID="rptArchivioMesi" runat="server" DataSource='<%# Eval("Value") %>'
@@ -399,7 +399,7 @@
                                 </asp:Repeater>
                             </ul>
                         </ItemTemplate>
-                    </asp:Repeater>
+                    </asp:Repeater>--%>
 
                 </div>
             </div>
