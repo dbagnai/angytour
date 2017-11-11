@@ -112,7 +112,13 @@ CONTENUTI ISOTOPE ELEMENTS TIPO PORTFOLIO (inserire div del pager se settato il 
 
  //CONTENUTI PER TESTATA PORTFOLIO TIPO BANNER MURO
  <script>// <![CDATA[
- //string control6 = "injectPortfolioAndLoad("isotopeOfferte.html","divContainer1", "portfolio1", 1, 6, false, "", "rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 6);
+  function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
+		injectPortfolioAndLoad("isotopeOfferte.html","divContainer1", "portfolio1", 1, 6, false, "", "rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 6);
+        } else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -120,7 +126,14 @@ CONTENUTI ISOTOPE ELEMENTS TIPO PORTFOLIO (inserire div del pager se settato il 
 
 //PORTFOLIO A DUE ELEMENTI ( es news a due elementi)
   <script>// <![CDATA[
+   function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
 injectPortfolioAndLoad("isotopeOfferte2.html","divContainer1", "portfolio3", 1, 12, false, "", "rif000004,rif000005,rif000006,rif000007,rif000008,rif000009", "", true, false, 12);
+		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -129,7 +142,14 @@ injectPortfolioAndLoad("isotopeOfferte2.html","divContainer1", "portfolio3", 1, 
 
 NEWS ELEMENTO SINGOLO CON FOTO SINISTRA E TESTO  DESTRA
  <script>// <![CDATA[
+  function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
   injectPortfolioAndLoad("isotopeOfferte4.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", true, false, "","" + testoricerca + "");
+ 		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -137,7 +157,14 @@ NEWS ELEMENTO SINGOLO CON FOTO SINISTRA E TESTO  DESTRA
 
 PORTFOLIO A 1 ELEMENTO PER LATERALE (ES. OFFERTE)
  <script>// <![CDATA[
+   function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
   injectPortfolioAndLoad("isotopeOfferte5.html","divContainer1", "portlist1", 1, 20, true, "", "" + tipologia + "", "" + categoria + "", false, true, "6","" + testoricerca + "");
+   		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -145,7 +172,14 @@ PORTFOLIO A 1 ELEMENTO PER LATERALE (ES. OFFERTE)
   
 PORTFOLIO A 3 ELEMENTI CON FONDINO ( STILE VINI)
  <script>// <![CDATA[
+   function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
  injectPortfolioAndLoad("isotopeVini.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
+     		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -153,7 +187,13 @@ PORTFOLIO A 3 ELEMENTI CON FONDINO ( STILE VINI)
       
 PORTFOLIO STANDARD A 3 ELEMENTI (ES. OFFERTE)
  <script>// <![CDATA[
- injectPortfolioAndLoad("isotopeOfferte1.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
+ function wait() {
+        if (typeof injectPortfolioAndLoad === "function") {
+	injectPortfolioAndLoad("isotopeOfferte1.html","divContainer1", "portlist1", 1, 21, true, "", "" + tipologia + "", "" + categoria + "", false, true, "","" + testoricerca + "");
+      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
   <div id="divContainer1Title">&nbsp;</div> 
 <div id="divContainer1">&nbsp;</div>
@@ -165,7 +205,13 @@ PORTFOLIO STANDARD A 3 ELEMENTI (ES. OFFERTE)
 CONTENUTI SCHEDA DETTAGLIO	 -> injectandloadgenericcontent						-
 -------------------------------------
  <script>// <![CDATA[
-injectandloadgenericcontent("schedadetails.html","divContainer1", "divitemdettagli",true,true, "" + idofferta + "");
+ function wait() {
+        if (typeof injectandloadgenericcontent === "function") {
+	injectandloadgenericcontent("schedadetails.html","divContainer1", "divitemdettagli",true,true, "" + idofferta + "");
+	    		} else {
+            setTimeout(wait, 50);
+        }
+    })();
      // ]]></script>         	  
   <div id="divContainer1" style="position: relative; display: none">&nbsp;</div> 
 	
@@ -175,7 +221,13 @@ BANNERS VIDEO	 -> injectandloadgenericvideo						-
 ----------------------------------------------
 
 <script>// <![CDATA[
-injectandloadgenericvideo('bannervideo.html','divContainer1', 'videoInject1', 1, 2, false, '','1','','TBL_BANNERS_GENERALE','video-testata',false);
+function wait() {
+        if (typeof injectandloadgenericvideo === "function") {
+	injectandloadgenericvideo('bannervideo.html','divContainer1', 'videoInject1', 1, 2, false, '','1','','TBL_BANNERS_GENERALE','video-testata',false);
+	     		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 
 
@@ -186,7 +238,14 @@ BANNERS GENERIC/JARALLAX FULL	 -> injectandloadgenericbanner						-
 
 FULL BANNER JARALLAX
 <script>// <![CDATA[
+function wait() {
+        if (typeof injectandloadgenericbanner === "function") {
 injectandloadgenericbanner('bannerimagefull.html','divContainer1', 'bansect1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','banners-section1',false);
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>
 
@@ -195,7 +254,13 @@ injectandloadgenericbanner('bannerimagefull.html','divContainer1', 'bansect1', 1
 ------------------------------------
    
 <script>// <![CDATA[
+function wait() {
+        if (typeof injectandloadgenericbanner === "function") {
 injectandloadgenericbanner('bannerparallax.html','divContainer1', 'bansect1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','banners-section1',false);
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script> 
 <div id="divContainer1">&nbsp;</div>
 
@@ -205,7 +270,13 @@ injectandloadgenericbanner('bannerparallax.html','divContainer1', 'bansect1', 1,
 BANNERS   testate / revolution slider	 -> injectSliderAndLoadBanner						-
 -------------------------------------
 <script>// <![CDATA[
+function wait() {
+        if (typeof injectSliderAndLoadBanner === "function") {
 injectSliderAndLoadBanner('sliderBanner.html','divContainer1', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,1000); 
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script> 	
 	<div id="divContainer1" style="margin: 0px auto; position: relative; display: none" class="hidden-xs">&nbsp;</div>
 	
@@ -220,7 +291,13 @@ BANNERS   testate  per mobile	 -> injectFasciaAndLoadBanner	-
 
 //Banner testate mobile cycle tipo fascia 
 <script>// <![CDATA[
+function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
 injectFasciaAndLoadBanner('bannerFascia3.html','divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia-home',false); 
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script> 
 <div id="divContainerHeadmobile1"style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg">&nbsp;</div> &nbsp;</div>
 
@@ -233,7 +310,14 @@ butt:(I/web/ristorante-1|Il Ristorante)
 //Banner testate tipo cycle 100% LARGHEZZA
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
+ function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
  injectFasciaAndLoadBanner('bannerFascialarge.html','divContainer1', 'bannerfasciahead', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','header-home',false);
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>
 
@@ -241,7 +325,14 @@ butt:(I/web/ristorante-1|Il Ristorante)
 BANNER   ( immagine sinistra )  FASCIA E TESTO LATERALE	 -> injectFasciaAndLoadBanner	
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
- injectFasciaAndLoadBanner('bannerFascia2.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+  function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+  injectFasciaAndLoadBanner('bannerFascia2.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+	      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>
 
@@ -254,7 +345,13 @@ butt:(I/web/ristorante-1|Il Ristorante)
 BANNER    ( immagine destra )  FASCIA E TESTO LATERALE	 -> injectFasciaAndLoadBanner	
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
- injectFasciaAndLoadBanner('bannerFascia3.html','divContainer1', 'bannerfascia2', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia2',false);
+   function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+   injectFasciaAndLoadBanner('bannerFascia3.html','divContainer1', 'bannerfascia2', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia2',false);
+      		} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>
 
@@ -269,7 +366,14 @@ butt:(I/web/ristorante-1|Il Ristorante)
 //BANNERS A FASCIA COMPLETA 100% Larghezza ( TIPO DIVISORE )											-
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
- injectFasciaAndLoadBanner('bannerFascia.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+    function wait() {
+        if (typeof injectFasciaAndLoadBanner === "function") {
+    injectFasciaAndLoadBanner('bannerFascia.html','divContainer1', 'bannerfascia1', 1, 2, false, '','2','','TBL_BANNERS_GENERALE','banners-fascia1',false);
+   		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>
 
@@ -278,7 +382,14 @@ butt:(I/web/ristorante-1|Il Ristorante)
 BANNER CON SCROLLER 	 -> injectScrollerAndLoadBanner	(type, container, controlid, listShow, maxelement, scrollertype, tblsezione, filtrosezione, mescola)
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
-injectScrollerAndLoadBanner('owlscrollerBanner.html','divContainer1', 'scrlBan1', null, 30, '1','TBL_BANNERS_GENERALE','banner-xxxx',false);
+     function wait() {
+        if (typeof injectScrollerAndLoadBanner === "function") {
+   injectScrollerAndLoadBanner('owlscrollerBanner.html','divContainer1', 'scrlBan1', null, 30, '1','TBL_BANNERS_GENERALE','banner-xxxx',false);
+		} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div style="max-width: 1800px; position: relative; margin: 0px auto; display: none">
 <div id="divContainer1" style="background-color: transparent">&nbsp;</div> 
@@ -288,7 +399,14 @@ injectScrollerAndLoadBanner('owlscrollerBanner.html','divContainer1', 'scrlBan1'
 BANNER CON ISOTOPE PORTFOLIO ( NAVIGAZIONE )	 -> injectPortfolioAndLoadBanner						-
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
-injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divContainer1', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-portfolio-sezioni',false);
+   function wait() {
+        if (typeof injectPortfolioAndLoadBanner === "function") {
+   injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divContainer1', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-portfolio-sezioni',false);
+	} else {
+            setTimeout(wait, 50);
+        }
+    })();
+
 // ]]></script>
 <div style="max-width: 1800px; position: relative; margin: 0px auto; display: none">
 <div id="divContainer1" style="background-color: transparent">&nbsp;</div> 
@@ -298,7 +416,13 @@ injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divContainer1', 'isoBan1', 
 BANNER CON ISOTOPE PORTFOLIO SINGOLO ELEMENTO ( PROMO DESTRA )	 -> injectPortfolioAndLoadBanner						-
 ---------------------------------------------------------------------------------------------------------
  <script>// <![CDATA[
- injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainer1', 'portlistBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);
+  function wait() {
+        if (typeof injectPortfolioAndLoadBanner === "function") {
+    injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainer1', 'portlistBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);
+} else {
+            setTimeout(wait, 50);
+        }
+    })();
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>	   
 

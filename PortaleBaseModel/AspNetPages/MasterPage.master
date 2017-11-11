@@ -38,117 +38,61 @@
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <!--- Styles -->
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/revolution_settings.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/menuzord.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/skins/menuzord-colored.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/menuzordcustomize.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/tipsy.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/prettyPhoto.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/isotop_animation.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/animate.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/style1.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/notifications/notification.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/owl-carousel/owl-carousel/owl.carousel.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/Scripts/flexslider/flexslider.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/magnify/css/magnify.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/js/YTPlayer/css/jquery.mb.YTPlayer.min.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/ui-personalization.css" />
-    <%--    <link rel="stylesheet" type="text/css" runat="server" href="~/css/rivalvideo.css" />--%>
-    <%-- landing files--%>
-    <link rel="stylesheet" type="text/css" runat="server" href="~/fonts/icon54/style.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/fonts/icon54-v2/style.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/fonts/icons-mind/style.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/landing.css" />
-    <%-- personalization files--%>
-    <link rel="stylesheet" type="text/css" runat="server" href="~/css/custom1.css" />
-
-    <%--   JAVASCRIPT --%>
-    <%--<script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-migrate-1.4.1.min.js"></script>
-    <script type="text/javascript" src="/js/localforage.min.js"></script>
-    <script type="text/javascript" src="/scripts/menuzord/files/js/menuzord.js"></script>
-    <script type="text/javascript" src="/scripts/pako/pako.min.js"></script>
-    <script type="text/javascript" src="/js/notifications/notify.min.js"></script>
-    <script type="text/javascript" src="/js/notifications/notify-metro.js"></script>
-    <script type="text/javascript" src="/js/notifications/notifications.js"></script>
-    <script type="text/javascript" src="/js/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="/js/imagesloaded.pkgd.js"></script>
-    <script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.cycle.js"></script>
-    <script type="text/javascript" src="/js/jquery.cycle2.carousel.js"></script>
-    <script type="text/javascript" src="/js/magnify/js/jquery.magnify.js"></script>
-    <script type="text/javascript" src="/js/magnify/js/jquery.magnify-mobile.js"></script> 
-    <script type="text/javascript" src='<%= "/lib/js/common.js" + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/genericContent.js" + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/genericBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/sliderBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/scroller.js" + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/portfolioisotope.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/portfolioisotopeBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/videoBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/archivio.js" + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
-    <script type="text/javascript" src='<%= "/js/lazyloadimg.js" + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
-    <script type="text/javascript" src='<%= "/lib/js/searchcontrol1.js" + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>  
-    <script type="text/javascript" src='<%= "/lib/js/carrello.js" + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>--%>
-
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
 </head>
 <%--<body class="bckGray">--%>
 <body class="">
     <form id="form1" runat="server">
-        <!-- JAVASCRIPT -->
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-2.1.3.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-migrate-1.4.1.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/menuzord/files/js/menuzord.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/imagesloaded.pkgd.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/isotope.pkgd.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle2.carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify.js")%>"></script>
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify-mobile.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
-
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericContent.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/sliderBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotope.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotopeBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js"))%>"></script>
-        <script type="text/javascript" src='<%= "/lib/js/videoBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/archivio.js"  + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'"></script>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/searchcontrol1.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>--%>
-
-
-
+        <!--- Styles -->
+       <%-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:300,400,600,800|Lora:400,700,400i,700i|Montserrat:400,700" rel="stylesheet">--%>
+       <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
+        <script src="/js/webfont.js"></script>
         <script>
-            pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
-            initLingua('<%= Lingua %>');
-            loadref(initLingua, '<%= Lingua %>');
-            jQuery(document).ready(function () {
-                loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
-             <%--   loadref(InitSearchControls, '<%= Lingua %>')--%>
+            WebFont.load({
+                google: {
+                    families: ['Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i', 'Open Sans:300,400,600,800', 'Lora:400,700,400i,700i','Montserrat:400,700']
+                }
             });
         </script>
+        <%--     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/bootstrap337/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/revolution_settings.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/menuzord.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/skins/menuzord-colored.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/menuzordcustomize.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/tipsy.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/prettyPhoto.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/isotop_animation.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/animate.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/style1.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/customizeautocomplete.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/notifications/notification.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/owl-carousel/owl-carousel/owl.carousel.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/Scripts/flexslider/flexslider.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/magnify/css/magnify.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/js/YTPlayer/css/jquery.mb.YTPlayer.min.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/ui-personalization.css" />
+        <%--    <link rel="stylesheet" type="text/css" runat="server" href="/css/rivalvideo.css" />--%>
+        <%-- landing files--%>
+        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icon54/style.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icon54-v2/style.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icons-mind/style.css" />
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/landing.css" />
+        <%-- personalization files--%>
+        <link rel="stylesheet" type="text/css" runat="server" href="/css/custom1.css" />
+        <%--   JAVASCRIPT --%>
+        <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>
+
+
 
         <!-- MENU --->
 
@@ -318,7 +262,7 @@
                     --%>
 
                     <li runat="server">
-                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
+                        <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink4High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -334,7 +278,7 @@
                         </ul>
                     </li>
                     <li runat="server">
-                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
+                        <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink1High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -350,7 +294,7 @@
                         </ul>
                     </li>
                     <li runat="server" visible="false">
-                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
+                        <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink5High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -366,7 +310,7 @@
                         </ul>
                     </li>
                     <li runat="server">
-                        <a runat="server"  class="a-dropdown"  href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000017",true, true)%></a>
+                        <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000017",true, true)%></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink6High" runat="server"
                                 OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -402,7 +346,7 @@
 
 
                     <li runat="server" class="visible-xs visible-sm hidden-md hidden-lg">
-                        <a  class="a-dropdown"  runat="server" href="javascript:void(0)" style="cursor: pointer;">
+                        <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testoid10") %></a>
                         <ul class="dropdown">
                             <asp:Repeater ID="rptTipologieLink8High" runat="server"
@@ -1146,13 +1090,48 @@
         </footer>
 
 
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/menuzord/files/js/menuzord.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
+
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/imagesloaded.pkgd.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/isotope.pkgd.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle2.carousel.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify.js")%>"></script>
+        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify-mobile.js")%>"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
+        <script>
+                                    pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
+                                    initLingua('<%= Lingua %>');
+             loadref(initLingua, '<%= Lingua %>');
+             jQuery(document).ready(function () {
+                 loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
+             <%--   loadref(InitSearchControls, '<%= Lingua %>')--%>
+             });
+        </script>
+
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericContent.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js"))%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js"))%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/sliderBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js"))%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotope.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotopeBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js"))%>"></script>
+        <script type="text/javascript" src='<%= "/lib/js/videoBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/archivio.js"  + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js"))%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/scroller.js" + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") )%>"></script>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/searchcontrol1.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>--%>
 
-
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/_jquery.placeholder.js") %>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.maskedinput.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jq.appear.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.base64.js")%>"></script>
@@ -1180,7 +1159,8 @@
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.sticky.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/detect-zoom.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>
+        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+
         <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
         </asp:ContentPlaceHolder>
 
@@ -1190,20 +1170,20 @@
 
         <!-- fine div disp_form_cont -->
         <script type="text/javascript">
-                                    var makeRevLower = false;
+             var makeRevLower = false;
 
-                                    //function JsSvuotaSession(this) {
-                                    //    //  var contenitoredestinazione = $('#divAjaxGeneralCall').parent().find("[id*='divInnerAjaxGeneralCall']");
+             //function JsSvuotaSession(this) {
+             //    //  var contenitoredestinazione = $('#divAjaxGeneralCall').parent().find("[id*='divInnerAjaxGeneralCall']");
 
-                                    //    AjaxClearSession("", "");
+             //    AjaxClearSession("", "");
 
-                                    //}
+             //}
 
-                                    function AjaxClearSession(contenitoredestinazione, campo1) {
-                                        $.ajax({
-                                            destinationControl: contenitoredestinazione,
-                                            type: "POST",
-                                            url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
+             function AjaxClearSession(contenitoredestinazione, campo1) {
+                 $.ajax({
+                     destinationControl: contenitoredestinazione,
+                     type: "POST",
+                     url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
                                             contentType: "application/json; charset=utf-8",
                                             dataType: "json",
                                             data: '{campo1: "' + campo1 + '" }',

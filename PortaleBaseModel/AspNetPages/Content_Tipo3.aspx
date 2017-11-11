@@ -10,6 +10,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>
     <script type="text/javascript">
         function OpenWindow(Url, NomeFinestra, features) {
             window.open(Url, NomeFinestra, features);
