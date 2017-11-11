@@ -129,7 +129,7 @@ public partial class _SchedaProdotto : CommonPage
                 Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
                 FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
                 Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
-              
+
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
@@ -151,9 +151,9 @@ public partial class _SchedaProdotto : CommonPage
                 }
                 SettaTestoIniziale();
                 SettaVisualizzazione(item);
- 
 
-               DataBind();
+
+                DataBind();
             }
             else
             {
@@ -170,7 +170,7 @@ public partial class _SchedaProdotto : CommonPage
     {
         string controlsuggeriti = "";
         ClientScriptManager cs = Page.ClientScript;
-        System.Text.StringBuilder sb =new System.Text.StringBuilder();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
         switch (CodiceTipologia)
         {
             case "":
@@ -264,7 +264,9 @@ public partial class _SchedaProdotto : CommonPage
             }
             string tmpcategoria = Categoria;
             string tmpcategoria2liv = Categoria2liv;
-            if (!usacategoria) {  tmpcategoria = ""; tmpcategoria2liv = "";
+            if (!usacategoria)
+            {
+                tmpcategoria = ""; tmpcategoria2liv = "";
             }
 
             ret = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(testourl), "", CodiceTipologia, tmpcategoria, tmpcategoria2liv);
@@ -354,7 +356,7 @@ public partial class _SchedaProdotto : CommonPage
     {
         string ret = "";
         // if (codicetipologia == "rif000002") ret = references.ResMan("Common",Lingua,"TitoloPrezzoApartire + " ";
-        if (codicetipologia == "rif000001") ret = references.ResMan("Common",Lingua, "TitoloPrezzo") + " ";
+        if (codicetipologia == "rif000001") ret = references.ResMan("Common", Lingua, "TitoloPrezzo") + " ";
 
         return ret;
     }
@@ -859,7 +861,7 @@ public partial class _SchedaProdotto : CommonPage
         //    AssociaDatiSocial(item);
         //}
         offerte.Add(item);
-      
+
 #endif
 
         //Associamo ai controlli i dati dell'immobile
@@ -959,19 +961,20 @@ public partial class _SchedaProdotto : CommonPage
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
 
-#if false
-        hreflang = " hreflang=\"en\" ";
-        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
-        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-          if (Lingua == "GB")
-        { 
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-            Tabrif link = new Tabrif();
-            link.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
-            link.Campo2 = CleanUrl(data.DenominazioneGB);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"en\" ";
+            linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (Lingua == "GB")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+                Tabrif link = new Tabrif();
+                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
+            }
         }
-#endif
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
@@ -1204,12 +1207,12 @@ public partial class _SchedaProdotto : CommonPage
                 testotitolo = item.DenominazionebyLingua(Lingua);
 
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(),true);
+                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //LINK
                 string target = "_blank";
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(),true);
+                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
                 {
@@ -1234,7 +1237,7 @@ public partial class _SchedaProdotto : CommonPage
                     string imgdimstyle = "";
                     int originalwidth = 0;
                     int originalheight = 0;
-                    double  scalefactorzoom = 1;
+                    double scalefactorzoom = 1;
                     try
                     {
                         if (maxheight != 0)
@@ -1259,7 +1262,7 @@ public partial class _SchedaProdotto : CommonPage
                     else
                         sb.Append(imgdimstyle);
 #endif
-                    sb.Append("border:none\" src=\"" + pathimmagine + "\" data-magnify-magnifiedwidth=\"" + (scalefactorzoom* originalwidth).ToString() + "\" data-magnify-magnifiedheight=\"" + (scalefactorzoom * originalheight).ToString() + "\" data-magnify-src=\"" + pathimmagine + "\" alt =\"" + testotitolo + "\" />\r\n");
+                    sb.Append("border:none\" src=\"" + pathimmagine + "\" data-magnify-magnifiedwidth=\"" + (scalefactorzoom * originalwidth).ToString() + "\" data-magnify-magnifiedheight=\"" + (scalefactorzoom * originalheight).ToString() + "\" data-magnify-src=\"" + pathimmagine + "\" alt =\"" + testotitolo + "\" />\r\n");
 
                     //if (!string.IsNullOrEmpty(link))
                     //    sb.Append("	       </a>\r\n");
@@ -1318,10 +1321,10 @@ public partial class _SchedaProdotto : CommonPage
         //if (CodiceTipologia == "rif000001")
         //    ret = references.ResMan("Common",Lingua, "TestoRichiedi");
         // else
-            //ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
-            ret = references.ResMan("Common",Lingua, "titoloinformazioni");
+        //ret = references.ResMan("Common",Lingua, "TestoDisponibilita");
+        ret = references.ResMan("Common", Lingua, "titoloinformazioni");
 
-        
+
         return ret;
     }
 
@@ -1423,7 +1426,7 @@ public partial class _SchedaProdotto : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            string addtext = " " + references.ResMan("Common",Lingua,"testoSezione").ToString();
+            string addtext = " " + references.ResMan("Common", Lingua, "testoSezione").ToString();
             if (nosezione) addtext = "";
             ret += addtext + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, Lingua, Session));
 
@@ -1674,14 +1677,14 @@ public partial class _SchedaProdotto : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-            outputContact.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
+                outputContact.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1689,7 +1692,7 @@ public partial class _SchedaProdotto : CommonPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-         outputContact.Text += references.ResMan("Common", Lingua, "txtMailError");
+            outputContact.Text += references.ResMan("Common", Lingua, "txtMailError");
         }
     }
 
@@ -1735,14 +1738,14 @@ public partial class _SchedaProdotto : CommonPage
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
 
             }
             else
             {
 
 
-               outputContact1.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
+                outputContact1.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -1750,7 +1753,7 @@ public partial class _SchedaProdotto : CommonPage
         catch (Exception err)
         {
             outputContact1.Text = err.Message + " <br/> ";
-            outputContact1.Text += references.ResMan("Common",Lingua, "txtMailError");
+            outputContact1.Text += references.ResMan("Common", Lingua, "txtMailError");
         }
     }
 

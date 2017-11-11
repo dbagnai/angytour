@@ -87,9 +87,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             //Prendiamo i dati dalla querystring
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
 
-#if true
-            if (Lingua.ToLower() == "gb") Response.RedirectPermanent("~");
-#endif
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "gb") Response.RedirectPermanent("~");
+            }
 
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);

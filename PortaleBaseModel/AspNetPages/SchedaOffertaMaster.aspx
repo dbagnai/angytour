@@ -731,58 +731,6 @@
                             </ItemTemplate>
                         </asp:Repeater>
 
-                        <div class="ui-15" runat="server" id="divContactBelow" visible="true">
-                            <div class="ui-content">
-                                <div class="container-fluid">
-                                    <div class="row" style="padding-right: inherit">
-                                        <div class="col-md-12 col-sm-12 ui-padd">
-                                            <!-- Ui Form -->
-                                            <div class="ui-form">
-                                                <!-- Heading -->
-                                                <h3 class="h3-sidebar-title sidebar-title">
-                                                    <%= references.ResMan("Common", Lingua,"TestoDisponibilita") %>
-                                                </h3>
-                                                <!-- Form -->
-
-
-                                                <!-- UI Input -->
-                                                <div class="ui-input">
-                                                    <!-- Input Box -->
-                                                    <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName" />
-                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                </div>
-                                                <div class="ui-input">
-                                                    <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Cognome" runat="server" id="txtContactCognome" />
-                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                </div>
-                                                <div class="ui-input">
-                                                    <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Telefono" runat="server" id="txtContactPhone" />
-                                                    <label class="ui-icon"><i class="fa fa-phone"></i></label>
-                                                </div>
-                                                <div class="ui-input">
-                                                    <input type="text" class="form-control" name="unname" validationgroup="contattilateral" placeholder="Email" runat="server" id="txtContactEmail" />
-                                                    <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
-                                                </div>
-                                                <div class="ui-input">
-                                                    <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
-                                                </div>
-
-
-                                                <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
-                                                <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
-                                                <div style="font-weight: 300; font-size: 10px; color: red">
-                                                    <asp:Literal Text="" ID="outputContact" runat="server" />
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
 
@@ -792,7 +740,8 @@
                 </asp:UpdatePanel>--%>
                 </div>
             </div>
-          <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script> 
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script>
 
             <div runat="server" id="divSuggeriti" style="margin-bottom: 15px">
 
@@ -1102,8 +1051,75 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-    <div style="background-color: #f2ece6;">
+    <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
+    <div class="ui-15" runat="server" id="divContactBelow" clientidmode="static" visible="false" style="background-color: #efefef">
         <div class="container">
+            <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"TestoDisponibilita") %></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Ui Form -->
+            <div class="ui-form">
+                <!-- Heading -->
+                <div class="row" style="padding-right: inherit">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="ui-input">
+                                    <!-- Input Box -->
+                                    <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName" />
+                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="ui-input">
+                                    <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Cognome" runat="server" id="txtContactCognome" />
+                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="ui-input">
+                                    <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Telefono" runat="server" id="txtContactPhone" />
+                                    <label class="ui-icon"><i class="fa fa-phone"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="ui-input">
+                                    <input type="text" class="form-control" name="unname" validationgroup="contattilateral" placeholder="Email" runat="server" id="txtContactEmail" />
+                                    <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-input">
+                            <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
+                        </div>
+
+
+                        <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                        <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
+                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
+                        <div style="font-weight: 300; font-size: 10px; color: red">
+                            <asp:Literal Text="" ID="outputContact" runat="server" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="background-color: #f2ece6;">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
             <div class="row">
                 <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
                     <div class="row">

@@ -1018,19 +1018,20 @@ public partial class _SchedaOffertaMaster : CommonPage
             actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
-#if true
-        hreflang = " hreflang=\"en\" ";
-        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
-        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        if (Lingua == "GB")
-        { 
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-            Tabrif link = new Tabrif();
-            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
-            actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"en\" ";
+            linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (Lingua == "GB")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+                Tabrif link = new Tabrif();
+                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
+            }
         }
-#endif
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  

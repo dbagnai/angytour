@@ -904,17 +904,19 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
-#if true
-        hreflang = " hreflang=\"en\" ";
-        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv);
-        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        if (Lingua == "GB")
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
-            urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
-            actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
+            hreflang = " hreflang=\"en\" ";
+            linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv);
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (Lingua == "GB")
+            {
+                urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
+            }
         }
-#endif
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1280,7 +1282,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     //    string Idtext = ((LinkButton)sender).CommandArgument.ToString();
     //    int idprodotto = 0;
     //    int.TryParse(Idtext, out idprodotto);
-        
+
     //    string codTagCombined = hddTagCombined.Value;
     //    string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString(), codTagCombined);
     //    int quantita = 0;

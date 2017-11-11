@@ -60,15 +60,17 @@ public partial class index : CommonPage
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
         litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
 
-#if true
-        //inglese
-        hreflang = " hreflang=\"en\" ";
-        linkcanonicoalt = "~/" + "GB" + "/Home";
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
-            linkcanonicoalt = "~";
-        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; 
-#endif
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
+        {
+            //inglese
+            hreflang = " hreflang=\"en\" ";
+            linkcanonicoalt = "~/" + "GB" + "/Home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
+                linkcanonicoalt = "~";
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        }
 
     }
 

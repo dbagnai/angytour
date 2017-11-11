@@ -189,20 +189,21 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             actualpagelink.Campo2 = (testourlpagina);
 
         }
-#if true
-        hreflang = " hreflang=\"en\" ";
-        //ci = setCulture("GB");
-        testourlpagina = item.TitolobyLingua("GB");
-        linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
-        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        if (Lingua == "GB")
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
-            actualpagelink.Campo2 = (testourlpagina);
+            hreflang = " hreflang=\"en\" ";
+            //ci = setCulture("GB");
+            testourlpagina = item.TitolobyLingua("GB");
+            linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (Lingua == "GB")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                actualpagelink.Campo2 = (testourlpagina);
+            }
         }
-#endif
 
 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
