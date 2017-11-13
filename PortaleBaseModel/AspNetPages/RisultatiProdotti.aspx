@@ -169,9 +169,9 @@
                                    <asp:Literal text='<%# references.ResMan("Common", Lingua,"testoInseriscicarrello") %>' runat="server" />  <i class="icon-shopping-cart"></i>
                                 </asp:LinkButton>
                                 <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'
-                                    Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €" %>'></asp:Literal>
+                                    Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("Prezzo") }) + " €" %>'></asp:Literal>
                                 <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Prezzolistino") ) %>'
-                                    Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzolistino")) + " €" %>'></asp:Literal>
+                                    Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("Prezzolistino")}) + " €" %>'></asp:Literal>
                             </p>--%>
                                 <p>
                                     <%# TestoCaratteristica(2,Eval("Caratteristica3").ToString(),Lingua) %>

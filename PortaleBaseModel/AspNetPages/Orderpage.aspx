@@ -250,7 +250,7 @@
                                                 </div>
                                                 <b class="product-price ">
                                                     <asp:Literal ID="lblPrezzo" runat="server"
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Offerta.Prezzo")) + " €" %>'></asp:Literal>
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzo") }) + " €" %>'></asp:Literal>
                                                 </b>
                                                 </div>
                                             </td>
@@ -276,7 +276,7 @@
                                             <td class="cart-total">
                                                 <span>
                                                     <asp:Literal ID="lblPrezzo" runat="server"
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleOrdine")) + " €" %>'></asp:Literal></span>
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleOrdine") }) + " €" %>'></asp:Literal></span>
                                             </td>
                                         </tr>
                                         <%-- <tr>
@@ -290,7 +290,7 @@
                                                 <td class="cart-total">
                                                     <span>
                                                         <asp:Literal ID="Literal3" runat="server"
-                                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSmaltimento")) + " €" %>'></asp:Literal></span>
+                                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("TotaleSmaltimento")}) + " €" %>'></asp:Literal></span>
                                                 </td>
                                             </tr>--%>
                                         <tr>
@@ -302,7 +302,7 @@
 
                                                 <span>
                                                     <asp:Literal ID="Literal3" runat="server"
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSconto")) + " €" %>'></asp:Literal></span>
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleSconto") }) + " €" %>'></asp:Literal></span>
 
                                             </td>
                                         </tr>
@@ -315,7 +315,7 @@
                                             <td class="cart-total">
                                                 <span>
                                                     <asp:Literal ID="Literal1" runat="server"
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("TotaleSpedizione")) + " €" %>'></asp:Literal></span>
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleSpedizione") }) + " €" %>'></asp:Literal></span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -326,7 +326,7 @@
                                             <td class="cart-total">
                                                 <span>
                                                     <asp:Literal ID="Literal2" runat="server"
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",(double)Eval("TotaleSpedizione") +(double)Eval("TotaleSmaltimento") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto")    ) + " €" %>'></asp:Literal></span>
+                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSpedizione") + (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") } ) + " €" %>'></asp:Literal></span>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

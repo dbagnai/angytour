@@ -780,7 +780,7 @@ public partial class _SchedaProdotto : CommonPage
             sb.Append("<div class=\"col-sm-6\">");
             sb.Append("<br/\">");
             sb.Append("<span style=\"font-size: 1.5em; font-weight:600 ;color: #000\">");
-            sb.Append("Prezzo:" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", item.Prezzo) + " €");
+            sb.Append("Prezzo:" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}",new object[] { item.Prezzo }) + " €");
             sb.Append("</span>");
             sb.Append("</div>");
             sb.Append("</div>");

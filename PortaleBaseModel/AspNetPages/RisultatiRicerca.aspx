@@ -201,7 +201,7 @@
                             <div class="blog-post-details-item blog-post-details-item-left" runat="server" visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'>
 
                                 <asp:Literal ID="Literal5" runat="server"
-                                    Text='<%# "Prezzo: "+ String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €<br/><br/>" %>'></asp:Literal>
+                                    Text='<%# "Prezzo: "+ String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Prezzo") }) + " €<br/><br/>" %>'></asp:Literal>
                             </div>
                         </div>
                         <div class="blog-post-featured-img img-overlay" runat="server" style="max-height: 450px"

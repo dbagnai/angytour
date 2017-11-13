@@ -304,11 +304,11 @@ public partial class AreaContenuti_Default3 : CommonPage
             chkContatto.Checked = Details.Abilitacontatto;
 
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it");
-            txtData.Text = string.Format(ci, "{0:dd/MM/yyyy HH:mm:ss}", Details.DataInserimento);
+            txtData.Text = string.Format(ci, "{0:dd/MM/yyyy HH:mm:ss}", new object[] { Details.DataInserimento });
 
 
-            txtLatitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Latitudine1_dts);
-            txtLongitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Longitudine1_dts);
+            txtLatitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Latitudine1_dts });
+            txtLongitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Longitudine1_dts });
 
             txtCodiceProd.Text = Details.CodiceProdotto;
 

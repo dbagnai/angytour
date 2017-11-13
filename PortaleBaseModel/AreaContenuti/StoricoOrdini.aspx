@@ -301,7 +301,7 @@
                                     <td class="order-date"><%# string.Format("{0:dd/MM/yyyy HH:mm:ss}", Eval("Dataordine") ) %> </td>
                                     <td class="order-id"><%# Eval("CodiceOrdine").ToString() %></td>
                                     <td class="order-amount"><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                    (Double)Eval("TotaleSmaltimento") +   (Double)Eval("TotaleOrdine") + (Double)Eval("TotaleSpedizione") - (Double)Eval("TotaleSconto")  ) + " €" %></td>
+                                                                  new object[] { (Double)Eval("TotaleSmaltimento") + (Double)Eval("TotaleOrdine") + (Double)Eval("TotaleSpedizione") - (Double)Eval("TotaleSconto") }  ) + " €" %></td>
                                     <td class="order-status"><%# TipopagaDisplay(Container.DataItem) %></td>
                                     <td class="order-status"><%# StatusDisplay(Container.DataItem) %>
                                         <asp:CheckBox Checked="<%# StatusCheck(Container.DataItem) %>" ToolTip='<%# Eval("CodiceOrdine").ToString() %>' runat="server" AutoPostBack="true" ID="chkPagato" OnCheckedChanged="chkPagato_CheckedChanged" />
@@ -315,22 +315,22 @@
                                                     <tr>
                                                         <th>Totale Carrello</th>
                                                         <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                     (Double)Eval("TotaleOrdine") ) + " €" %></td>
+                                                                   new object[] { (Double)Eval("TotaleOrdine") } ) + " €" %></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Totale Spedizione</th>
                                                         <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                       (Double)Eval("TotaleSpedizione")   ) + " €" %></td>
+                                                                      new object[] { (Double)Eval("TotaleSpedizione") }  ) + " €" %></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Totale Sconto</th>
                                                         <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                       (Double)Eval("TotaleSconto")   ) + " €" %></td>
+                                                                     new object[] { (Double)Eval("TotaleSconto") } ) + " €" %></td>
                                                     </tr>
                                                     <%--    <tr>
                                                                 <th>Totale Smaltimento</th>
                                                                 <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
-                                                                       (Double)Eval("TotaleSmaltimento")   ) + " €" %></td>
+                                                                       new object[] {(Double)Eval("TotaleSmaltimento")  } ) + " €" %></td>
                                                             </tr>--%>
 
                                                     <tr>

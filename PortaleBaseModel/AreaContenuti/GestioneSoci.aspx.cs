@@ -1029,7 +1029,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             txtNome_dts.Text = Details.Nome_dts;
             txtCognome_dts.Text = Details.Cognome_dts;
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it");
-            txtDatanascita_dts.Text = string.Format(ci, "{0:dd/MM/yyyy}", Details.Datanascita_dts);
+            txtDatanascita_dts.Text = string.Format(ci, "{0:dd/MM/yyyy}", new object[] { Details.Datanascita_dts });
             txtPivacf_dts.Text = Details.Pivacf_dts;
             //txtSociopresentatore1_dts.Text = Details.Sociopresentatore1_dts;
             //txtSociopresentatore2_dts.Text = Details.Sociopresentatore2_dts;
@@ -1074,8 +1074,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             txtVia1_dts.Value = Details.Via1_dts;
             txtCap1_dts.Value = Details.Cap1_dts;
             txtTelefono1_dts.Value = Details.Telefono1_dts;
-            txtLatitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Latitudine1_dts);
-            txtLongitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Longitudine1_dts);
+            txtLatitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Latitudine1_dts });
+            txtLongitudine1_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Longitudine1_dts });
 
             // Details.CodiceNAZIONE1_dts ->  ddlCodiceNAZIONE1_dts  e txtCodiceNAZIONE1_dts ;
             // Details.CodiceREGIONE1_dts ->  ddlCodiceREGIONE1_dts e txtCodiceREGIONE1_dts;
@@ -1089,8 +1089,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             txtVia2_dts.Value = Details.Via2_dts;
             txtCap2_dts.Value = Details.Cap2_dts;
             txtTelefono2_dts.Value = Details.Telefono2_dts;
-            txtLatitudine2_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Latitudine2_dts);
-            txtLongitudine2_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Longitudine2_dts);
+            txtLatitudine2_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Latitudine2_dts });
+            txtLongitudine2_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Longitudine2_dts });
 
             // Details.CodiceNAZIONE2_dts ->  ddlCodiceNAZIONE2_dts  e txtCodiceNAZIONE2_dts ;
             // Details.CodiceREGIONE2_dts ->  ddlCodiceREGIONE2_dts e txtCodiceREGIONE2_dts;
@@ -1104,8 +1104,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             txtVia3_dts.Value = Details.Via3_dts;
             txtCap3_dts.Value = Details.Cap3_dts;
             txtTelefono3_dts.Value = Details.Telefono3_dts;
-            txtLatitudine3_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Latitudine3_dts);
-            txtLongitudine3_dts.Text = String.Format(ci, "{0:##.#####################}", Details.Longitudine3_dts);
+            txtLatitudine3_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Latitudine3_dts });
+            txtLongitudine3_dts.Text = String.Format(ci, "{0:##.#####################}", new object[] { Details.Longitudine3_dts });
 
             // Details.CodiceNAZIONE3_dts ->  ddlCodiceNAZIONE3_dts  e txtCodiceNAZIONE3_dts ;
             // Details.CodiceREGIONE3_dts ->  ddlCodiceREGIONE3_dts e txtCodiceREGIONE3_dts;
@@ -1207,7 +1207,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             chkContatto.Checked = Details.Abilitacontatto;
 
             ci = new System.Globalization.CultureInfo("it");
-            txtData.Text = string.Format(ci, "{0:dd/MM/yyyy HH:mm:ss}", Details.DataInserimento);
+            txtData.Text = string.Format(ci, "{0:dd/MM/yyyy HH:mm:ss}", new object[] { Details.DataInserimento });
 
             txtCodiceProd.Text = Details.CodiceProdotto;
 
@@ -4687,7 +4687,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Emailriservata_dts + "</td>");
                 sb.Append("<td style=\"border-right:1px solid #000000\">" + t.Email + "</td>");
                 //sb.Append("<td style=\"border-right:1px solid #000000\">" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                //       t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €" + "</td>");
+                //      new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto} ) + " €" + "</td>");
                 sb.Append("</tr>");
                 sb.Append("<tr><td colspan=\"6\" style=\"border-bottom:1px solid #000000\"></td></tr>");
             }

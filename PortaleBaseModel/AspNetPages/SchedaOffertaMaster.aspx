@@ -615,13 +615,13 @@
                                     <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-left" runat="server" visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'>
                                         <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
                                             <asp:Literal ID="Literal15" runat="server"
-                                                Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €" %>'></asp:Literal>
+                                                Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Prezzo") }) + " €" %>'></asp:Literal>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
                                             <em>
                                                 <asp:Literal ID="Literal9" runat="server"
-                                                    Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("PrezzoListino")) + " €<br/><br/>" %>'></asp:Literal></em>
+                                                    Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("PrezzoListino") }) + " €<br/><br/>" %>'></asp:Literal></em>
                                         </div>
 
                                     </div>
@@ -798,7 +798,7 @@
                                             <li runat="server" visible='<%# VerificaPresenzaPrezzo( Eval("Prezzo") ) %>'>
                                                 <span style="font-weight: 500">
                                                     <asp:Literal ID="lblPrezzo" runat="server"
-                                                        Text='<%# references.ResMan("Common", Lingua,"TitoloPrezzo")  + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",Eval("Prezzo")) + " €<br/><br/>" %>'></asp:Literal></span>
+                                                        Text='<%# references.ResMan("Common", Lingua,"TitoloPrezzo")  + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Prezzo") }) + " €<br/><br/>" %>'></asp:Literal></span>
                                             </li>
                                             <li runat="server" visible='<%# ControllaVisibilitaPerCodice(Eval("CodiceTipologia").ToString()) %>'>
                                                 <asp:Literal ID="Literal2" Text="pubblicato il " runat="server" /><asp:Literal ID="Literal3"

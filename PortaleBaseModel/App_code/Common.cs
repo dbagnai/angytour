@@ -1379,7 +1379,7 @@ public class CommonPage : Page
             //sb.Append(" </div>");
             sb.Append(" <p class=\"product-calc muted\">");
 
-            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", c.Prezzo) + " €");
+            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo } ) + " €");
             sb.Append(" </p>");
 
             sb.Append(" </div>");

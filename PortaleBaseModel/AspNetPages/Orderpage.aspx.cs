@@ -490,7 +490,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     remotepost.Add("MID", merchantid);//id mercante fornito da soar
                     remotepost.Add("OID", CodiceOrdine);//codice dell'ordine attuale identificativo
                     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("it-IT");
-                    string costo = string.Format(culture, "{0:0}", Convert.ToDouble(totali.TotaleOrdine - totali.TotaleSconto + totali.TotaleSpedizione) * 100); //Il totale da passare è in centesimi di euro
+                    string costo = string.Format(culture, "{0:0}", new object[] { Convert.ToDouble(totali.TotaleOrdine - totali.TotaleSconto + totali.TotaleSpedizione) * 100 }); //Il totale da passare è in centesimi di euro
                     remotepost.Add("IMP", costo);//Il campo importo è numerico, specificato in centesimi. Esempio : 001920 = 19 Euro e 20 centesimi
                     remotepost.Add("LAN", "it");//it o en
                     remotepost.Add("_Nome", cliente.Nome);
@@ -700,7 +700,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             writer.WriteRaw(codiceordine);
             writer.WriteEndElement();
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it");
-            string dataordine = string.Format(ci, "{0:ddMMyyyyHHmmss}", totali.Dataordine);
+            string dataordine = string.Format(ci, "{0:ddMMyyyyHHmmss}", new object[] {totali.Dataordine );
             writer.WriteStartElement("DATAORDINE");
             writer.WriteRaw(dataordine);
             writer.WriteEndElement();

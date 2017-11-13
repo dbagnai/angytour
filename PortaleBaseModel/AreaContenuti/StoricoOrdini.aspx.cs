@@ -191,7 +191,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 
 
             sb.Append(" <p class=\"product-calc muted\">");
-            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", c.Prezzo) + " €");
+            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
             sb.Append(" </p>");
 
             sb.Append(" </div>");
@@ -384,7 +384,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.Mailcliente + "</td>");
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + t.Denominazionecliente + "</td>");
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\">" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                       t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €" + "</td>");
+                       new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto }) + " €" + "</td>");
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + TipopagaDisplay(t) + "</td>");
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + t.Id_commerciale + "</td>");
                 sb.Append("<td style=\"background-color:#eee;color:#000;padding:3px\" class=\"order-status\">" + StatusCheck(t) + "</td>");

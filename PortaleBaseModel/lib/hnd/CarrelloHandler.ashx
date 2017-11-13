@@ -59,7 +59,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
                         //Calcolo il nuovo totale del carrello e lo ritorno per la visualizzazione
                         //WelcomeLibrary.DOM.TotaliCarrello totali = CommonPage.CalcolaTotaliCarrello(null, null, "", "");
-                        //context.Response.Write(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", totali.TotaleOrdine) + " €");
+                        //context.Response.Write(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",new object[] { totali.TotaleOrdine }) + " €");
                     }
                     else
                     {
@@ -121,7 +121,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
         CommonPage.CaricaRiferimentiCarrello(context.Request, context.Session, ref sessionid, ref trueIP);
         WelcomeLibrary.DAL.eCommerceDM ecmDM = new WelcomeLibrary.DAL.eCommerceDM();
         WelcomeLibrary.DOM.CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
-        ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", CommonPage.CalcolaTotaleCarrello(context.Request, context.Session, carrello)) + " €";
+        ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { CommonPage.CalcolaTotaleCarrello(context.Request, context.Session, carrello) }) + " €";
         return ret;
     }
     public bool IsReusable

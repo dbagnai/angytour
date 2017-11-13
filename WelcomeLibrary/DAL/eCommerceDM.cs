@@ -1417,7 +1417,7 @@ namespace WelcomeLibrary.DAL
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Denominazionecliente.Replace("<br/>","\r\n")));
                         sb.Append(";");
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                       t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto) + " €"));
+                      new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto }) + " €"));
                         sb.Append(";");
                         sb.Append(t.Modalitapagamento);
                         sb.Append(";");
@@ -1478,7 +1478,7 @@ namespace WelcomeLibrary.DAL
                 //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
                 //sb.Append(" </div>");
 
-                sb.Append(c.Numero + " " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", c.Prezzo) + " €");
+                sb.Append(c.Numero + " " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 sb.Append("\r\n");
 
                 sb.Append("\r\n");

@@ -2046,7 +2046,7 @@ public partial class AspNetPages_MasterPageMenuinline : System.Web.UI.MasterPage
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
         double totalecarrello = CommonPage.CalcolaTotaleCarrello(Request, Session, carrello);
         //if (totalecarrello == 0) divCart.Visible = false;
-        litTotalHigh.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", totalecarrello) + " €";
+        litTotalHigh.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] {totalecarrello }) + " €";
     }
     #endregion
 }

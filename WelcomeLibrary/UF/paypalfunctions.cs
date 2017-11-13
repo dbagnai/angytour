@@ -146,12 +146,12 @@ public class NVPAPICaller
 #endif
             if (d == 0) continue;//Non aggiungo gli ementi a costo zero -> altrimenti il sistema si irrita
 
-            string prezzounitario = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", d);
+            string prezzounitario = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d });
 
             //ncamere
             int quantita = 0;
             int.TryParse(dettaglio[4], out quantita);
-            string strquantita = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N0}", quantita);
+            string strquantita = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N0}", new object[] { quantita });
             //percentualeanticipo
             double percanticipo = 0;
             double.TryParse(dettaglio[5], out percanticipo);
@@ -160,8 +160,8 @@ public class NVPAPICaller
             //encoder["L_PAYMENTREQUEST_0_NUMBER" + i.ToString()] = "12334.00"; //item number
             encoder["L_PAYMENTREQUEST_0_NAME" + i.ToString()] = testo2.Substring(0, (testo2.Length <= 60) ? testo2.Length : 60);
             encoder["L_PAYMENTREQUEST_0_DESC" + i.ToString()] = testo3.Substring(0, (testo3.Length <= 126) ? testo3.Length : 126);
-            //encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", d * quantita * percanticipo / 100);
-            encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", d);
+            //encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] {d * quantita * percanticipo / 100});
+            encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d });
             encoder["L_PAYMENTREQUEST_0_QTY" + i.ToString()] = quantita.ToString();
             encoder["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Physical"; //L_PAYMENTREQUEST_n_ITEMCATEGORYm Digital Physical  
             //encoder["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Digital"; //L_PAYMENTREQUEST_n_ITEMCATEGORYm Digital Physical  
@@ -170,8 +170,8 @@ public class NVPAPICaller
             i++;
         }
         //Totale costo articoli (formato numeri sempre xxxxxxxx.xx )
-        encoder["PAYMENTREQUEST_0_ITEMAMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", totalamount);
-        encoder["PAYMENTREQUEST_0_AMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", totalamount);
+        encoder["PAYMENTREQUEST_0_ITEMAMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totalamount });
+        encoder["PAYMENTREQUEST_0_AMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totalamount });
 
         //tramite i seguenti puoi preimpostare i dati di fatturazione/spedizione
         //        &PAYMENTREQUEST_0_SHIPTONAME=John Smith
