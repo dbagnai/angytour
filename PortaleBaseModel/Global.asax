@@ -239,7 +239,7 @@
             Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 
-            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() != "true")
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
             {
                 Lingua = "GB";
                 Tmp_linksite = new List<string>();
