@@ -1079,18 +1079,22 @@ public partial class _SchedaOffertaMaster : CommonPage
             link.Campo2 = testourl;
 
 
-            ////Mettiamo la copertina nel path
-            //if (!string.IsNullOrEmpty(Categoria2liv))
-            //{
-            //    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, link.Campo2);
-            //    if (contentpercategoria == null || contentpercategoria.Id == 0)
-            //    {
-            //        Tabrif laddink = new Tabrif();
-            //        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
-            //        laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
-            //        links.Add(laddink);
-            //    }
-            //}
+            //if (CodiceTipologia == "rif000003") //Pagina copertina presente
+            if (false) //Pagina copertina presente
+            {
+                Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == CodiceTipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
+                if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
+                {
+                    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
+                    if (contentpercategoria != null && contentpercategoria.Id != 0)
+                    {
+                        Tabrif laddink = new Tabrif();
+                        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
+                        laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
+                        links.Add(laddink);
+                    }
+                }
+            }
 
             links.Add(link);
         }

@@ -181,6 +181,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
     private void CaricaBannersAndControls()
     {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
         //CaricaUltimiPostScrollerTipo1(litScroller1, null, "rif000001");
         //CaricaUltimiPostScrollerTipo1(litScroller2, null, "rif000002");
         //CaricaBannersPortfolio("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-high", false, litPortfolioLow, Lingua);
@@ -213,7 +214,17 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
             default:
                 sezionebannersnavigazione = "banner-portfolio-sezioni";
-                controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4b.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
+                //controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4B.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
+                sb.Clear();
+                sb.Append("(function wait() {");
+                sb.Append("  if (typeof injectPortfolioAndLoadBanner === \"function\")");
+                sb.Append("    {");
+                sb.Append("injectPortfolioAndLoadBanner('IsotopeBanner4.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);");
+                sb.Append(" }");
+                sb.Append("   else  {");
+                sb.Append("  setTimeout(wait, 50);");
+                sb.Append("  }  })();");
+
                 //  CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, sezionebannersnavigazione, false, litPortfolioBanners0, Lingua, true, 0, 5);
 
                 break;
@@ -237,18 +248,18 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             ClientScriptManager cs = Page.ClientScript;
             if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
             {
-                cs.RegisterStartupScript(this.GetType(), "cban2", controllistBan2, true);
+                cs.RegisterStartupScript(this.GetType(), "cban2",  sb.ToString() , true);
             }
         }
-        if (!string.IsNullOrEmpty(controllistBan3))
-        {
-            //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
-            ClientScriptManager cs = Page.ClientScript;
-            if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-            {
-                cs.RegisterStartupScript(this.GetType(), "cban3", controllistBan3, true);
-            }
-        }
+        //if (!string.IsNullOrEmpty(controllistBan3))
+        //{
+        //    //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
+        //    ClientScriptManager cs = Page.ClientScript;
+        //    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //    {
+        //        cs.RegisterStartupScript(this.GetType(), "cban3", controllistBan3, true);
+        //    }
+        //}
     }
 
     protected void CaricaMenuLinkContenuti(int id)

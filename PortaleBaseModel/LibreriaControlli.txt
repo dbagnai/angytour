@@ -426,11 +426,4 @@ BANNER CON ISOTOPE PORTFOLIO SINGOLO ELEMENTO ( PROMO DESTRA )	 -> injectPortfol
 // ]]></script>
 <div id="divContainer1">&nbsp;</div>	   
 
-		
------------------------- DA FARE ----------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------
-VIDEO BANNER  TESTATA E BANNER RIPORTARE in procedura javascript con handler da codice master.cs	-
-------------------------------------------------------------------------------------------------------	
-	   
-
+		 

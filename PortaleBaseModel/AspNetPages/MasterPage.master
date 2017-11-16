@@ -47,50 +47,50 @@
     <form id="form1" runat="server">
 
         <!--- Styles -->
-       <%-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:300,400,600,800|Lora:400,700,400i,700i|Montserrat:400,700" rel="stylesheet">--%>
-       <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
-        <script src="/js/webfont.js"></script>
+        <%-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:300,400,600,800|Lora:400,700,400i,700i|Montserrat:400,700" rel="stylesheet">--%>
+        <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
         <script>
             WebFont.load({
                 google: {
-                    families: ['Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i', 'Open Sans:300,400,600,800', 'Lora:400,700,400i,700i','Montserrat:400,700']
+                    families: ['Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i', 'Open Sans:300,400,600,800', 'Lora:400,700,400i,700i', 'Montserrat:400,700']
                 }
             });
         </script>
+
         <%--     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/bootstrap337/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/revolution_settings.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/menuzord.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/skins/menuzord-colored.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/scripts/menuzord/files/css/menuzordcustomize.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/font-awesome.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/tipsy.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/prettyPhoto.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/isotop_animation.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/animate.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/style1.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/jquery-ui-1.11.4.custom/customizeautocomplete.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/notifications/notification.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/owl-carousel/owl-carousel/owl.carousel.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/Scripts/flexslider/flexslider.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/magnify/css/magnify.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/js/YTPlayer/css/jquery.mb.YTPlayer.min.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/ui-personalization.css" />
-        <%--    <link rel="stylesheet" type="text/css" runat="server" href="/css/rivalvideo.css" />--%>
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap337/bootstrap.min.css") %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/revolution_settings.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/scripts/menuzord/files/css/menuzord.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/scripts/menuzord/files/css/skins/menuzord-colored.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/scripts/menuzord/files/css/menuzordcustomize.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/font-awesome.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/tipsy.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/prettyPhoto.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/isotop_animation.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/animate.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/style1.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/jquery-ui.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/notifications/notification.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/owl-carousel/owl-carousel/owl.carousel.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/Scripts/flexslider/flexslider.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
+        <%--        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/rivalvideo.css" ) %>" />--%>
         <%-- landing files--%>
-        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icon54/style.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icon54-v2/style.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/fonts/icons-mind/style.css" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54-v2/style.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icons-mind/style.css")  %> " />
         <link rel="stylesheet" type="text/css" runat="server" href="/css/landing.css" />
         <%-- personalization files--%>
         <link rel="stylesheet" type="text/css" runat="server" href="/css/custom1.css" />
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>
 
 
 
@@ -1090,75 +1090,77 @@
         </footer>
 
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/menuzord/files/js/menuzord.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
-
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/imagesloaded.pkgd.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/isotope.pkgd.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.cycle2.carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify.js")%>"></script>
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/magnify/js/jquery.magnify-mobile.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/scripts/menuzord/files/js/menuzord.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/scripts/pako/pako.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify-metro.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notifications.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/moment-with-locales.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/imagesloaded.pkgd.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/isotope.pkgd.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle2.carousel.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
+        <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
         <script>
                                     pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
                                     initLingua('<%= Lingua %>');
-             loadref(initLingua, '<%= Lingua %>');
-             jQuery(document).ready(function () {
-                 loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
+                                    loadref(initLingua, '<%= Lingua %>');
+                                    jQuery(document).ready(function () {
+                                        loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
              <%--   loadref(InitSearchControls, '<%= Lingua %>')--%>
              });
         </script>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericContent.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/genericBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/sliderBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotope.js" + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/bannerFascia.js" + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/portfolioisotopeBanner.js"  + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js"))%>"></script>
-        <script type="text/javascript" src='<%= "/lib/js/videoBanner.js" + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/archivio.js"  + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js"))%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/lazyloadimg.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/lazyloadimg.js") %>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/scroller.js" + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") )%>"></script>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/searchcontrol1.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>--%>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericContent.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/sliderBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/scroller.js") + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotope.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/bannerFascia.js") + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotopeBanner.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/archivio.js") + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/lazyloadimg.js") + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
+        <%--   <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol1.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script> --%>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/carrello.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/_jquery.placeholder.js") %>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.maskedinput.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/animationEnigne.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jq.appear.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.base64.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.easing.1.3.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.prettyPhoto.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.themepunch.plugins.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.themepunch.tools.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.themepunch.revolution.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.tipsy.js")%>"></script>
-        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.validate.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jQuery.XDomainRequest.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/back-to-top.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/owl-carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
+
+           <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/_jquery.placeholder.js") %>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/scripts/jqueryui/jquery.maskedinput.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.easing.1.3.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.prettyPhoto.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.plugins.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.tools.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.revolution.min.js")%>"></script>
+        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.enablelog.js")%>"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.tipsy.js")%>"></script>
+        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jQuery.XDomainRequest.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/back-to-top.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/Scripts/flexslider/jquery.flexslider-min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/it-cookies-policy.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/it-cookies-policy.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.fitvids.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>
         <!--DEFIANTJS to query json obkects-->
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
+        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/jarallax.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/landing/script.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/script.js")%>"></script>
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.sticky.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/detect-zoom.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.sticky.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/detect-zoom.min.js")%>"></script>
+
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
@@ -1184,46 +1186,46 @@
                      destinationControl: contenitoredestinazione,
                      type: "POST",
                      url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            data: '{campo1: "' + campo1 + '" }',
-                                            success: function (data) {
-                                                OnSuccessRiepilogo(data, this.destinationControl);
-                                            },
-                                            failure: function (response) {
-                                                alert(response.d);
-                                            }
-                                        });
-                                    }
-                                    function OnSuccessRiepilogo(response, destination) {
-                                        //alert(response.d);
-                                        // alert("success");
-                                    }
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     data: '{campo1: "' + campo1 + '" }',
+                     success: function (data) {
+                         OnSuccessRiepilogo(data, this.destinationControl);
+                     },
+                     failure: function (response) {
+                         alert(response.d);
+                     }
+                 });
+             }
+             function OnSuccessRiepilogo(response, destination) {
+                 //alert(response.d);
+                 // alert("success");
+             }
 
-                                    /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
-                                    !function (cash) { //ensure $ always references jQuery
-                                        $(function () { //when dom has finished loading
-                                            //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
-                                            function fixHeader() {
-                                                //for each element that is classed as 'pull-down'
-                                                //reset margin-top for all pull down items
-                                                $('.pull-down').each(function () {
-                                                    $(this).css('margin-top', 0);
-                                                });
+             /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
+             !function (cash) { //ensure $ always references jQuery
+                 $(function () { //when dom has finished loading
+                     //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
+                     function fixHeader() {
+                         //for each element that is classed as 'pull-down'
+                         //reset margin-top for all pull down items
+                         $('.pull-down').each(function () {
+                             $(this).css('margin-top', 0);
+                         });
 
-                                                //set its margin-top to the difference between its own height and the height of its parent
-                                                $('.pull-down').each(function () {
-                                                    if ($(window).innerWidth() >= 991) {
-                                                        $(this).css('margin-top', $(this).parent().height() - $(this).height());
-                                                    }
-                                                });
-                                            }
-                                            $(window).resize(function () {
-                                                fixHeader();
-                                            });
-                                            fixHeader();
-                                        });
-                                    }(window.jQuery);
+                         //set its margin-top to the difference between its own height and the height of its parent
+                         $('.pull-down').each(function () {
+                             if ($(window).innerWidth() >= 991) {
+                                 $(this).css('margin-top', $(this).parent().height() - $(this).height());
+                             }
+                         });
+                     }
+                     $(window).resize(function () {
+                         fixHeader();
+                     });
+                     fixHeader();
+                 });
+             }(window.jQuery);
         </script>
         <!-- Wrapper end -->
         <!--[if lt IE 9]>

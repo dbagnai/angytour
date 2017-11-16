@@ -293,7 +293,20 @@ public class CommonPage : Page
 
         return testo.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
     }
+    public static string ReplaceCdnLinks(string testo)
+    {
 
+        string path = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
+        string cdnuse = WelcomeLibrary.UF.ConfigManagement.ReadKey("usecdn").ToLower();
+        string pathcdn = WelcomeLibrary.UF.ConfigManagement.ReadKey("percorsocdn").ToLower();
+        if (cdnuse == "true")
+        {
+            path = pathcdn + "/" + System.Web.HttpContext.Current.Request.Url.Host.ToString();
+
+        }
+
+        return testo.Replace("~", path);
+    }
     public static string AppendModTime(HttpServerUtility server, string filepath)
     {
         //DateTime creation = System.IO.File.GetCreationTime(@"C:\test.txt");

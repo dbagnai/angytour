@@ -137,17 +137,42 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
     public void CaricaControlliJS()
     {
         ClientScriptManager cs = Page.ClientScript;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
         //Carico la galleria in masterpage corretta
         string controllistBanHead = "";
         if (idContenuto == "")
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,450);" ;
+
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,450);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+        }
         else
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + idContenuto + "',false,2000,300);";
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + idContenuto + "',false,2000,450);";
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + idContenuto + "',false,2000,450);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+        }
+
 
         if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
         {
-            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
+            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
 
         }
         //if (idContenuto == "7")

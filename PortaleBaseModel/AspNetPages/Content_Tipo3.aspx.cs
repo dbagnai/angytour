@@ -126,18 +126,43 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         //Literal lit = (Literal)Master.FindControl("litPortfolioBanners1");
         //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezionicatalogo", false, lit, Lingua,true);
 
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
         //Carico la galleria in masterpage corretta
         string controllistBanHead = "";
+
         if (TipoContenuto == "")
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);";
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,300);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+        }
         else
-            controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + TipoContenuto + "',false,2000,300);";
+        {
+            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + TipoContenuto + "',false,2000,300);";
+
+            sb.Clear();
+            sb.Append("(function wait() {");
+            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+            sb.Append("    {");
+            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-" + TipoContenuto + "',false,2000,300);");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 50);");
+            sb.Append("  }  })();");
+        }
 
         ClientScriptManager cs = Page.ClientScript;
         if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
         {
-            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", controllistBanHead, true);
+            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
         }
 
     }
