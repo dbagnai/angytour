@@ -154,18 +154,16 @@ function BindIsotopeBanner(el, localObjects) {
 
 
     var jquery_obj = $(str);
-    var outerhtml = jquery_obj.outerHTML();
-    var innerHtml = jquery_obj.html();
-    var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
+    //var outerhtml = jquery_obj.outerHTML();
+    //var innerHtml = jquery_obj.html();
+    /*Prendo l'elemento contenitore*/
+    //var containeritem = outerhtml.replace(innerHtml, '');
     var htmlout = "";
-    var htmlitem = "";
     for (var j = 0; j < data.length; j++) {
-        htmlitem = "";
-        //htmlitem = FillBindControls(jquery_obj, data[j]);
-        //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj, data[j], localObjects, "",
                     function (ret) {
-                        htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                        htmlout += (ret.outerHTML()) + "\r\n";
+                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
                     });
     }
 

@@ -184,11 +184,11 @@ function BindIsotope(el, localObjects) {
         }
 
         var str = $('#' + el)[0].innerHTML;
-        $('#' + el).parent().parent().show();
-
+        $('#' + el).parent().parent().show(); //Row COntainer
+        var alternate = ($('#' + el).hasClass('alternatecolor'));
 
         //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
-        //in caso di rebinding successivo dopo l'iniezione del template
+        //in caso di rebinding successivo dopo la prima iniezione del template (es. con controllo pager)
         if (!globalObject.hasOwnProperty(el + "template")) {
             globalObject[el + "template"] = $('#' + el)[0].innerHTML;
             str = globalObject[el + "template"];
@@ -198,20 +198,38 @@ function BindIsotope(el, localObjects) {
 
 
         var jquery_obj = $(str);
-        var outerhtml = jquery_obj.outerHTML();
-        var innerHtml = jquery_obj.html();
-        var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
+        //var outerhtml = jquery_obj.outerHTML();
+        //var innerHtml = jquery_obj.html();
+        //  var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore vuoto da ripetere*/
         var htmlout = "";
-        var htmlitem = "";
-
+        // var htmlitem = "";
 
         for (var j = 0; j < data.length; j++) {
-            htmlitem = "";
+            // htmlitem = "";
             //htmlitem = FillBindControls(jquery_obj, data[j]);
             //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
             FillBindControls(jquery_obj, data[j], localObjects, "",
                 function (ret) {
-                    htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+
+                    /*REGIONE PER EFFETTO ALTERNATE DEGLI ITEM DEL REPEATER*/
+                    if (alternate) {
+                        var w = $(window).width();
+                        if (w > 768) {
+                            if (isEven(j)) {
+                                $('.odd', ret).remove();
+                                ret.css("background-color", $('.even', ret).css("background-color")); //Coloro il contenitore come l'elemento attuale
+                            }
+                            else {
+                                $('.even', ret).remove();
+                                ret.css("background-color", $('.odd', ret).css("background-color"));//Coloro il contenitore come l'elemento attuale
+                            }
+                        }
+                        else $('.odd', ret).remove(); //in xs faccio tutte uguali le righe
+                    }
+                    /*END REGIONE PER EFFETTO ALTERNATE DEGLI ITEM DEL REPEATER*/
+
+                    //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                    htmlout += (ret.outerHTML()) + "\r\n";
                 });
         }
 
@@ -232,6 +250,9 @@ function BindIsotope(el, localObjects) {
 };
 
 
+function isEven(n) {
+    return n == parseFloat(n) ? !(n % 2) : void 0;
+}
 
 
 function InitIsotopeLocal(controlid) {
