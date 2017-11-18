@@ -262,11 +262,11 @@
             EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
             <Scripts>
                 <asp:ScriptReference Path="~/js/jquery-2.1.3.min.js" NotifyScriptLoaded="true" />
-                <asp:ScriptReference Path="~/Scripts/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
-                <asp:ScriptReference Path="~/Scripts/tinymce/tinymce.min.js" />
-                <asp:ScriptReference Path="~/Scripts/jquery.prettyPhoto.js" />
-                <asp:ScriptReference NotifyScriptLoaded="true" Path="~/Scripts/jquery.cycle.all.js" />
-                <asp:ScriptReference Path="~/Scripts/jquery.tools.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/tinymce/tinymce.min.js" />
+                <asp:ScriptReference Path="~/js/jquery.prettyPhoto.js" />
+                <asp:ScriptReference NotifyScriptLoaded="true" Path="~/js/jquery.cycle.all.js" />
+                <asp:ScriptReference Path="~/js/jquery.tools.min.js" NotifyScriptLoaded="true" />
             </Scripts>
         </Ajax:ToolkitScriptManager>
     <!-- dropzone-->
@@ -286,7 +286,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/pako/pako.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js")+ CommonPage.AppendModTime(Server,"~/lib/js/common.js")%>"></script>
         <script>
             var pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';

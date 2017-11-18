@@ -61,9 +61,9 @@
         <%--     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap337/bootstrap.min.css") %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/revolution_settings.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/scripts/menuzord/files/css/menuzord.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/scripts/menuzord/files/css/skins/menuzord-colored.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/scripts/menuzord/files/css/menuzordcustomize.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/menuzord.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/skins/menuzord-colored.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/js/menuzord/files/css/menuzordcustomize.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/font-awesome.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/tipsy.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/prettyPhoto.css")  %> " />
@@ -75,7 +75,7 @@
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/notifications/notification.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/owl-carousel/owl-carousel/owl.carousel.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/Scripts/flexslider/flexslider.css" ) %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/flexslider/flexslider.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
         <%--        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/rivalvideo.css" ) %>" />--%>
@@ -104,12 +104,12 @@
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
                             </li>
-                            <li style="float: right">
+                      <%--      <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
                             </li>
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
-                            </li>
+                            </li>--%>
                             <%--  <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
                             </li>--%>
@@ -1091,8 +1091,8 @@
 
 
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/scripts/menuzord/files/js/menuzord.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/scripts/pako/pako.min.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/menuzord/files/js/menuzord.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/pako/pako.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify-metro.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notifications.js") %>'></script>
@@ -1131,7 +1131,7 @@
            <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/_jquery.placeholder.js") %>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/scripts/jqueryui/jquery.maskedinput.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
@@ -1147,7 +1147,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/back-to-top.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/Scripts/flexslider/jquery.flexslider-min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/flexslider/jquery.flexslider-min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/it-cookies-policy.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>

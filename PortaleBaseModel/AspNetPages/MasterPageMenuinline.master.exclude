@@ -43,9 +43,9 @@
     <!--- Styles -->
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/revolution_settings.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/menuzord.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/skins/menuzord-colored.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/scripts/menuzord/files/css/menuzordcustomize.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/js/menuzord/files/css/menuzord.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/js/menuzord/files/css/skins/menuzord-colored.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/js/menuzord/files/css/menuzordcustomize.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/tipsy.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/prettyPhoto.css" />
@@ -58,7 +58,7 @@
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/notifications/notification.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/js/owl-carousel/owl-carousel/owl.carousel.css" />
-    <link rel="stylesheet" type="text/css" runat="server" href="~/Scripts/flexslider/flexslider.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/js/flexslider/flexslider.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/ui-personalization.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/css/rivalvideo.css" />
     <%-- landing files--%>
@@ -80,8 +80,8 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-2.1.3.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-migrate-1.4.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/menuzord/files/js/menuzord.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/pako/pako.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/menuzord/files/js/menuzord.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/pako/pako.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
@@ -1030,9 +1030,9 @@
         </footer>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/_jquery.placeholder.js") %>"></script>
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/minified/jquery-ui.min.js")%>"></script>--%>
+        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jqueryui/minified/jquery-ui.min.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jqueryui/jquery.ui.datepicker.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jqueryui/jquery.ui.datepicker.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jq.appear.js")%>"></script>
@@ -1058,7 +1058,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/back-to-top.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/owl-carousel.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/Scripts/flexslider/jquery.flexslider-min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/flexslider/jquery.flexslider-min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/it-cookies-policy.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.mb.YTPlayer.min.js")%>"></script>
         <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery.mb.vimeo_player.min.js")%>"></script>--%>

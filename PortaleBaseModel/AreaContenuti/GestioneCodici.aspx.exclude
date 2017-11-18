@@ -16,7 +16,7 @@
             <Scripts>
                 <asp:ScriptReference Path="~/aspnetpages/JS/jquery-1.4.3.min.js" NotifyScriptLoaded="true" />
                 <asp:ScriptReference Path="~/aspnetpages/JS/jquery.cycle.all.js" NotifyScriptLoaded="true" />
-                <asp:ScriptReference Path="~/Scripts/jquery.maphilight.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/jquery.maphilight.min.js" NotifyScriptLoaded="true" />
             </Scripts>
         </asp:ScriptManager>
         <script type="text/javascript">

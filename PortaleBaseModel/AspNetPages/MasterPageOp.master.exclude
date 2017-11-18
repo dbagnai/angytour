@@ -61,8 +61,8 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jquery-1.10.2.min.js")%>"></script>
-        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/scripts/jquery-migrate-1.2.1.min.js")%>"></script>
+        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-1.10.2.min.js")%>"></script>
+        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-migrate-1.2.1.min.js")%>"></script>
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/bootstrap.js")%>"></script>

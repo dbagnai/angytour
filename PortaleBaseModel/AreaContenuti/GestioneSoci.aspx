@@ -109,8 +109,8 @@
             EnablePartialRendering="true" EnablePageMethods="true" EnableScriptLocalization="true"
             EnableScriptGlobalization="true">
             <Scripts>
-                <asp:ScriptReference Path="~/Scripts/jquery-1.10.2.min.js" NotifyScriptLoaded="true" />
-                <asp:ScriptReference Path="~/Scripts/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/jquery-1.10.2.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/jquery-migrate-1.2.1.min.js" NotifyScriptLoaded="true" />
                 <asp:ScriptReference Path="~/js/bootstrap.min.js" NotifyScriptLoaded="true" />
                 <asp:ScriptReference Path="~/js/back-to-top.js" NotifyScriptLoaded="true" />
             </Scripts>
