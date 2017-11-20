@@ -2377,6 +2377,7 @@ Portfoli Single ( da rival )
 
 #divContainerb1 {
     /*height: calc(80vh - 225px) !important;*/
+    height: calc(80vh - 86px) !important;
 }
 
 /*.rev-slider-full {
