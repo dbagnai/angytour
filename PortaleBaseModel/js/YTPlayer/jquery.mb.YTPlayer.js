@@ -74,7 +74,7 @@ var getYTPVideoID = function( url ) {
 			fadeOnStartTime: 500, //fade in timing at video start
 			showControls: true,
 			showAnnotations: false,
-			showYTLogo: true,
+			showYTLogo: false,
 			stopMovieOnBlur: true,
 			realfullscreen: true,
 			mobileFallbackImage: null,
@@ -216,8 +216,8 @@ var getYTPVideoID = function( url ) {
 					jQuery.mbCookie.remove( "YTPlayer_start_from" + YTPlayer.videoID );
 				}
 
-				YTPlayer.canPlayOnMobile = jQuery.mbBrowser.mobile && ( 'playsInline' in document.createElement( 'video' ) );
-				 //YTPlayer.canPlayOnMobile = true; //Per test su chrome mobile
+			//	YTPlayer.canPlayOnMobile = jQuery.mbBrowser.mobile && ( 'playsInline' in document.createElement( 'video' ) );
+				 YTPlayer.canPlayOnMobile = true; //Per test su chrome mobile
 
 				if( YTPlayer.canPlayOnMobile ) {
 					YTPlayer.opt.showControls = false;
@@ -677,20 +677,19 @@ var getYTPVideoID = function( url ) {
 				setTimeout( function() {
 					jQuery( YTPlayer ).trigger( "YTPChanged" );
                 }, 50);
-                //COMENTATO DA DANIELE
-                /*
-				if( YTPlayer.isPlayer && !YTPlayer.opt.autoPlay ) {
-					var bgndURL = jQuery.mbYTPlayer.locationProtocol + "//i.ytimg.com/vi/" + YTPlayer.videoID + "/maxresdefault.jpg";
+                //COMMENTATO DA DANIELE 25.10.2017
+				//if( YTPlayer.isPlayer && !YTPlayer.opt.autoPlay ) {
+				//	var bgndURL = jQuery.mbYTPlayer.locationProtocol + "//i.ytimg.com/vi/" + YTPlayer.videoID + "/maxresdefault.jpg";
 
-					if( bgndURL )
-						YTPlayer.opt.containment.css( {
-							background: "rgba(0,0,0,0.5) url(" + bgndURL + ") center center",
-							backgroundSize: "cover"
-						} );
-					YTPlayer.opt.backgroundUrl = bgndURL;
+				//	if( bgndURL )
+				//		YTPlayer.opt.containment.css( {
+				//			background: "rgba(0,0,0,0.5) url(" + bgndURL + ") center center",
+				//			backgroundSize: "cover"
+				//		} );
+				//	YTPlayer.opt.backgroundUrl = bgndURL;
 
-				}
-                */
+				//}
+
 				YTPlayer.videoData = null;
 				YTPlayer.opt.ratio = YTPlayer.opt.ratio == "auto" ? "16/9" : YTPlayer.opt.ratio;
 

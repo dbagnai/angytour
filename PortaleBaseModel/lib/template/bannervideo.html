@@ -1,31 +1,56 @@
-﻿<div id="replaceid" class="bckvideostyle bind bckvideoelement"  mybind="Id" 
+﻿<div id="replaceid" class="bckvideostyle bind bckvideoelement" mybind="Id"
      style="background: url('urlplaceholder') no-repeat center center; background-size: cover"
-     data-property="{videoURL:'videoplaceholder',containment:'self', showControls: false, autoPlay:false, loop: false, mute: false, startAt:0, opacity:1,vol:50, addRaster:false, quality:'default'}">
+     data-property="{videoURL:'videoplaceholder',containment:'self', showControls: false, autoPlay:true, loop: false,  startAt:0, opacity:1,vol:50, addRaster:false, quality:'default'}">
     <div class="overlayvideotext bind" mybind="Id" myvalue="titolo" format="formattestoreplace">
-        <!--<h1>jQuery.mb.YTPlayer</h1>
-        <h2>
-            An HTML5 Background player
-            <br />
-            for YouTube videos
-        </h2>-->
+        <!--
+           <div style="display: table; height: 100%; width: 100%;"> <div style="display: table-row; vertical-align: top;"> <div class="bigtext">Titolo</div> <div class="smalltext">Sottotitolo</div> </div> <div style="display: table-row; vertical-align: bottom;"><div style="display:table-cell;vertical-align: bottom;padding-bottom:30px"> <a class="btn btn-lg btn-blue" style="font-size:2rem;text-transform:none" href="#">Scopri di più</a></div> </div> </div>
+
+                -->
     </div>
     <div class="overlayvideobuttons">
-        <input type="button" onclick="jQuery('#replaceid').YTPPlay()" class="btn btn-blue"  style="font-family: FontAwesome;" value="&#xf04b;" />
-        <input type="button" onclick="jQuery('#replaceid').YTPGetPlayer().pauseVideo()" class="btn btn-blue"  style="font-family: FontAwesome;" value="&#xf04c;" />
-        <!--<input type="button" onclick="jQuery('#replaceid').YTPTogglePlay()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf04b;" />-->
+        <!--<input type="button" onclick="jQuery('#replaceid').YTPPlay()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf04b;" />
+        <input type="button" onclick="jQuery('#replaceid').YTPGetPlayer().pauseVideo()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf04c;" />-->
+        <input type="button" onclick="jQuery('#replaceid').YTPTogglePlay()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf04b; / &#xf04c;" />
     </div>
-
+    <!--<div class="overlayvideobuttonsbottomright">
+        <input type="button" onclick="jQuery('#replaceid').YTPToggleVolume()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf026;" />
+    </div>-->
     <style>
         .bckvideostyle {
             width: 100%;
-            height: calc(80vh - 0px) !important;
+            height: calc(90vh - 0px) !important;
             position: relative;
             top: 0;
             left: 0;
             z-index: 0;
             background-size: cover;
             overflow-x: hidden;
+            overflow-y: hidden;
         }
+
+        @media (max-width: 768px) {
+            .bckvideostyle {
+                width: 100%;
+                height: calc(35vh - 0px) !important;
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                background-size: cover;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+                .bckvideostyle a {
+                    font-size: 15px !important;
+                    height: 25px;
+                    line-height: 25px;
+                    vertical-align: bottom;
+                }
+        }
+
+
+
         .overlayvideotext {
             position: absolute;
             font-size: 40px;
@@ -33,12 +58,14 @@
             line-height: 80px;
             color: #000;
             width: 100%;
+            height: 100%;
             margin-top: 0;
             text-shadow: 10px 10px 20px rgba(248, 248, 248, 0.60);
         }
+
         .overlayvideobuttons {
             position: absolute;
-            bottom: 30%;
+            bottom: 15%;
             font-size: 40px;
             text-align: center;
             line-height: 80px;
@@ -46,6 +73,28 @@
             width: 100%;
             margin-bottom: 0;
             text-shadow: 10px 10px 20px rgba(248, 248, 248, 0.60);
+        }
+
+        .overlayvideobuttonsbottomright {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 40px;
+            text-align: center;
+            line-height: 40px;
+            color: #000;
+            width: auto;
+          
+            text-shadow: 10px 10px 20px rgba(248, 248, 248, 0.60);
+
+        }
+        .overlayvideobuttonsbottomright input
+        {
+            background: rgba(0,0,0,0.4) !important;
+              margin: 0 !important;
+        }
+        .overlayvideobuttons input {
+            background: rgba(0,0,0,0.4) !important;
         }
     </style>
 
