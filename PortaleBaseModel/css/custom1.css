@@ -1664,18 +1664,28 @@ Portfolio ( da rival )
         width: 100%;
         top: 0;
     }
+     
 
     .work-image img {
-        /*height: auto;*/
+       /*height: auto;*/
+        display: block;
+        height: auto;
         width: 100%;
         margin: auto;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
     }
-
+      /* Centra verticalmente l'immagine clippandola sul min-height del contanitore */
+        .work-image img.verticalcentered {
+            /*width: auto;
+            height: 100%;
+            margin: auto;*/
+            width: 100%;
+            margin: auto;
+            left: 0;
+            right: 0;
+            position: absolute;
+            bottom: 0;
+            top: 0;
+        }
     .work-image.rounded {
         width: 95%;
         border-radius: 50%;
@@ -2377,9 +2387,12 @@ Portfoli Single ( da rival )
 
 #divContainerb1 {
     /*height: calc(80vh - 225px) !important;*/
-    height: calc(80vh - 86px) !important;
+    height: calc(60vh - 86px) !important;
 }
-
+.tp-caption.very_big_white {
+    max-width: 600px !important;
+    width:30% !important;
+}
 /*.rev-slider-full {
     max-height: 1000px;
 }*/
