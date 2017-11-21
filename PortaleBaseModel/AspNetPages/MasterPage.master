@@ -104,7 +104,7 @@
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
                             </li>
-                      <%--      <li style="float: right">
+                            <%--      <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
                             </li>
                             <li style="float: right">
@@ -329,6 +329,15 @@
                     <li runat="server">
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>
+               <%--     <asp:Repeater ID="Repeater1" runat="server"
+                        OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
+                        <ItemTemplate>
+                            <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
+                                runat="server">
+                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
+                             </li>
+                        </ItemTemplate>
+                    </asp:Repeater>--%>
 
                     <%-- <asp:Repeater ID="rptTipologieLink6High" runat="server"
                         OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
@@ -1111,7 +1120,7 @@
                                     jQuery(document).ready(function () {
                                         loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
              <%--   loadref(InitSearchControls, '<%= Lingua %>')--%>
-             });
+                                    });
         </script>
 
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericContent.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
@@ -1128,7 +1137,7 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
 
 
-           <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/_jquery.placeholder.js") %>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>
@@ -1172,20 +1181,20 @@
 
         <!-- fine div disp_form_cont -->
         <script type="text/javascript">
-             var makeRevLower = false;
+                                    var makeRevLower = false;
 
-             //function JsSvuotaSession(this) {
-             //    //  var contenitoredestinazione = $('#divAjaxGeneralCall').parent().find("[id*='divInnerAjaxGeneralCall']");
+                                    //function JsSvuotaSession(this) {
+                                    //    //  var contenitoredestinazione = $('#divAjaxGeneralCall').parent().find("[id*='divInnerAjaxGeneralCall']");
 
-             //    AjaxClearSession("", "");
+                                    //    AjaxClearSession("", "");
 
-             //}
+                                    //}
 
-             function AjaxClearSession(contenitoredestinazione, campo1) {
-                 $.ajax({
-                     destinationControl: contenitoredestinazione,
-                     type: "POST",
-                     url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
+                                    function AjaxClearSession(contenitoredestinazione, campo1) {
+                                        $.ajax({
+                                            destinationControl: contenitoredestinazione,
+                                            type: "POST",
+                                            url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
                      data: '{campo1: "' + campo1 + '" }',

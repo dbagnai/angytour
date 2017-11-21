@@ -4259,3 +4259,25 @@ p.lead, .lead p {
             transform: rotate(1deg);
             z-index: -2;
         }
+
+        
+/*TRICK PER AVERE STRUTTURA BOOTSTRAP >xs con col tutte della stessa altezza*/
+
+@media (min-width:768px) {
+    .table-container {
+        display: table;
+        width: 100%;
+ 
+    }
+        .table-container .table-row {
+            height: 100%;
+            display: table-row;
+        }
+
+            .table-container .table-row .table-col {
+                display: table-cell;
+                float: none;
+                vertical-align: middle;
+            }
+}
+/*END TRICK PER AVERE STRUTTURA BOOTSTRAP >xs con col tutte della stessa altezza*/

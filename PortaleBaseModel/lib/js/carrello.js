@@ -11,7 +11,7 @@ function connectCarrelloEvents() {
     //////////APERTURA DROPDOWN CARRELLO///////////////////////////////////////////
     //Funzione eseguita all'apertura del dropdown con classe triggerdata
     //$('div.btn-group button.triggerdata').click(function (e) {
-    //    $(this).dropdown("toggle");
+    //    $(this).dropdown("toggle");to
     //    $(this).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText = "";
     //    var codiceordine = $(this).parent().find("[id*='ContainerCarrelloDetails']").attr("title");
     //    var contenitoredestinazione = $(this).parent().find("[id*='ContainerCarrelloDetails']");
