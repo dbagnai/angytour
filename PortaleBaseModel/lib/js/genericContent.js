@@ -1,5 +1,6 @@
 ﻿"use strict";
 
+
 function injectandloadgenericcontent(type, container, controlid, visualData, visualPrezzo, iditem) {
     loadref(injectandloadgenericcontentinner, type, container, controlid, visualData, visualPrezzo, iditem, lng);
 }
@@ -114,7 +115,7 @@ function bindgenericcontent(el, localObjects) {
         CleanHtml($('#' + container));
         reinitaddthis();
         $(".loaderrelative").show();
-    } catch (e){ $(".loaderrelative").show(); }
+    } catch (e) { $(".loaderrelative").show(); }
 };
 
 function reinitaddthis() {
