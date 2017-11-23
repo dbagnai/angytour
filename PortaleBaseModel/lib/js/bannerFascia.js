@@ -178,49 +178,46 @@ function BindFasciaBanner(el, localObjects) {
             });
     }
     $('#' + el).cycle();
-    calcAspectRatio(el);
-    $(window).on("orientationchange", function (event) {
-        calcAspectRatio(el);
-    });
-    $(window).resize(function () {
-        calcAspectRatio(el);
-    });
+    if (el != null) {
+        $('#' + el).parent().show();
+    }
 
-    var counter = 0;
-    var looper = setInterval(function () {
-        calcAspectRatio(el);
-        counter++;
-        if (counter >= 5) {
-            clearInterval(looper);
-        };
-        console.log('recalcsize-ini' + ' ' + el);
-    }, 2000);
 
-    //$(document).on('cycle-post-initialize', '.newslider', function (event) {
-    //    calcAspectRatio(el);
-    //    console.log('post-ini' + ' ' + el);
-    //});
-
-    //jQuery(document).ready(function () {
-    // $('#' + el).cycle();
+    /*Old javascrip  vertical text alignment*/
+    //calcAspectRatio(el);
+    //$(window).on("orientationchange", function (event) {
     //    calcAspectRatio(el);
     //});
+
+    //$(window).resize(function () {
+    //    calcAspectRatio(el);
+    //});
+
+    //var counter = 0;
+    //var looper = setInterval(function () {
+    //    calcAspectRatio(el);
+    //    counter++;
+    //    if (counter >= 5) {
+    //        clearInterval(looper);
+    //    };
+    //    console.log('recalcsize-ini' + ' ' + el);
+    //}, 2000);
+
 
     CleanHtml($('#' + el));
 
 };
+
 
 function calcAspectRatio(el) {
     if (el != null) {
         $('#' + el).parent().show();
         //$('#' + el).parent().attr("style", "display:block;");
 
-        //setTimeout(function () {
         var img = $('#' + el + ' .imgBanner');
         var divtesto = $('#' + el + ' .divTesto');
         var divtesto2 = $('#' + el + ' .divTesto2');
 
-        //console.log((divtesto).parent().outerHeight());
         if ($(window).width() > 1023) {
 
             divtesto.each(function (index, text) {
@@ -272,7 +269,7 @@ function calcAspectRatio(el) {
             });
 
         }
-        //}, 400);
+
 
 
     }
