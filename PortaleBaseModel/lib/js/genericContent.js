@@ -119,11 +119,26 @@ function bindgenericcontent(el, localObjects) {
 };
 
 function reinitaddthis() {
-    //    addthis.init()
-    $('#atstbx').remove();
-    //addthis.toolbox('.addthis_toolbox');
-    if (typeof addthis !== 'undefined') { addthis.layers.refresh(); }
 
+    $('#atstbx').remove();
+    //if (typeof addthis !== 'undefined') {
+    //     addthis.layers.refresh();
+    //    console.log('addthisreint');
+    //}
+    var counter = 0;
+    var looper = setInterval(function () {
+        if (typeof addthis !== 'undefined') {
+            addthis.layers.refresh();
+            console.log('addthisreint');
+        }
+        counter++;
+        if (counter >= 5) {
+            clearInterval(looper);
+        };
+    }, 200);
+
+
+    //addthis.toolbox('.addthis_toolbox'); //int atthis dinamically
     //if (window.addthis) {
     //    window.addthis = null;
     //    window._adr = null;
