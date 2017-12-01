@@ -3,7 +3,6 @@ var sliderPresent = false;
 /* Chiamata tipo  injectSliderAndLoadBanner(id contenitore destinazione, idunico dello scroller , "rif000003", true, true, 6);*/
 
 /*Da vedere dopo la gestione di questi parametri che per adesso metto globali per farli vedere al pager*/
- 
 function InjectPagerSliderBanner(pagercontainer, controlid) {
     var templateHtml = pathAbs + "/lib/template/" + "sliderbanner.html";
     $("#" + pagercontainer).load(templateHtml, function () {
@@ -17,12 +16,11 @@ function InjectPagerSliderBanner(pagercontainer, controlid) {
         CaricaSliderDataBanner(controlid);
     });
 }
-
 function injectSliderAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height) {
     loadref(injectSliderAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height, lng);
 }
 function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola,width,height) {
-    //qui devo visualizzare il titolo
+    //Qui devo visualizzare il titolo
     var templateHtml = pathAbs + "/lib/template/" + "sliderbanner.html";
     if (type != null && type != '')
         templateHtml = pathAbs + "/lib/template/" + type;
@@ -175,7 +173,7 @@ function BindSliderBanner(el, localObjects) {
     initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
 
     CleanHtml($('#' + el));
-
+    CleanHtml($('#' + el).parent());
 };
 //https://www.themepunch.com/faq/wrap-lines-of-text-jquery-version/
 function initSlider(idDiv, width, height) {

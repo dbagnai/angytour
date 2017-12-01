@@ -177,11 +177,30 @@ function BindFasciaBanner(el, localObjects) {
                 $('#' + el).append(ret.html()) + "\r\n";
             });
     }
-    $('#' + el).cycle();
+ 
     if (el != null) {
         $('#' + el).parent().show();
     }
+    jQuery(document).ready(function () {
+        $('#' + el).parent().imagesLoaded(function () {
+            $('#' + el).cycle();
+        });
+    });
+    $('#' + el).on('cycle-update-view', function (e, optionHash, slideOptionsHash, currentSlideEl) {
+        var $slide = $(currentSlideEl);
+        var h = $slide.outerHeight();
+        $slide.parent().css({
+            height: h
+        });
+        //window.console && console.log("EVENT: " + e.type + " " + el);
+        //window.console && console.log("slide parent: " + $slide.parent().prop("id") + " height:" + h);
+    });
 
+    //$(window).load(function () {
+    //    $('#' + el).parent().imagesLoaded(function () {
+    //        $('#' + el).cycle({ before: onBefore });
+    //    });
+    //});le();
 
     /*Old javascrip  vertical text alignment*/
     //calcAspectRatio(el);

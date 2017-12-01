@@ -15,10 +15,11 @@
     <div class="overlayvideobuttonsbottomright visible-xs">
         <input type="button" onclick="jQuery('#replaceid').YTPToggleVolume()" class="btn btn-blue" style="font-family: FontAwesome;" value="&#xf026;" />
     </div>
-    <style>
-        .bckvideostyle {
+    <style>    
+
+      .bckvideostyle {
             width: 100%;
-            height: calc(90vh - 0px) !important;
+            height: calc(90vh - 70px) !important;
             position: relative;
             top: 0;
             left: 0;
@@ -27,28 +28,6 @@
             overflow-x: hidden;
             overflow-y: hidden;
         }
-
-        @media (max-width: 768px) {
-            .bckvideostyle {
-                width: 100%;
-                height: calc(35vh - 0px) !important;
-                position: relative;
-                top: 0;
-                left: 0;
-                z-index: 0;
-                background-size: cover;
-                overflow-x: hidden;
-                overflow-y: hidden;
-            }
-
-                .bckvideostyle a {
-                    font-size: 15px !important;
-                    height: 25px;
-                    line-height: 25px;
-                    vertical-align: bottom;
-                }
-        }
-
 
 
         .overlayvideotext {
@@ -62,6 +41,102 @@
             margin-top: 0;
             text-shadow: 10px 10px 20px rgba(248, 248, 248, 0.60);
         }
+
+            .overlayvideotext .bigtext {
+                font-size: 6rem;
+            }
+
+            .overlayvideotext .smalltext {
+                font-size: 4rem;
+            }
+
+
+        @media (min-width: 800px ) and (max-width: 1179px) {
+            .bckvideostyle {
+                width: 100%;
+                height: calc(100vh - 70px) !important;
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                background-size: cover;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+            .overlayvideotext .bigtext {
+                font-size: 4rem;
+            }
+
+            .overlayvideotext .smalltext {
+                font-size: 2.5rem;
+            }
+             .bckvideostyle a {
+                    font-size: 28px !important;
+                    height: 35px;
+                    line-height: 35px;
+                    vertical-align: bottom;
+                }
+        }
+
+        @media (min-width: 450px ) and (max-width: 800px) {
+            .bckvideostyle {
+                width: 100%;
+                height: calc(100vh - 70px) !important;
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                background-size: cover;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+            .overlayvideotext .bigtext {
+                font-size: 3rem;
+            }
+
+            .overlayvideotext .smalltext {
+                font-size: 1.5rem;
+            }
+             .bckvideostyle a {
+                    font-size: 20px !important;
+                    height: 30px;
+                    line-height: 30px;
+                    vertical-align: bottom;
+                }
+        }
+
+        @media (max-width: 450px) {
+            .bckvideostyle {
+                width: 100%;
+                height: calc(35vh - 70px) !important;
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                background-size: cover;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+               
+
+            .overlayvideotext .bigtext {
+                font-size: 2rem;
+            }
+
+            .overlayvideotext .smalltext {
+                font-size: 1rem;
+            }
+             .bckvideostyle a {
+                    font-size: 15px !important;
+                    height: 25px;
+                    line-height: 25px;
+                    vertical-align: bottom;
+                }
+        }
+
 
         .overlayvideobuttons {
             position: absolute;

@@ -135,7 +135,7 @@ function bindgenericbanner(controlid, localObjects) {
             autoplay = true;
             volev = 0;
         }
-
+       
         var options = {
             // mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
             playOnlyIfVisible: false,
@@ -155,6 +155,6 @@ function bindgenericbanner(controlid, localObjects) {
         //    onReady: function (player) {
         //    }
         //});
-
+       
     });
 }; 

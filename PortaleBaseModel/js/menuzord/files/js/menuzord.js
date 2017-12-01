@@ -61,7 +61,6 @@ License: http://codecanyon.net/licenses
 
         // responsive behavior
         if (settings.responsive) {
-
             var mobilebtn = "<em></em><em></em><em></em>";
             if (settings.mobilebuttonclass != '') {
                 mobilebtn = "<div class='" + settings.mobilebuttonclass + "'>";
@@ -69,7 +68,6 @@ License: http://codecanyon.net/licenses
                     mobilebtn += settings.mobilebuttontext;
                 mobilebtn += "</div>";
             }
-
             $(menu_container).addClass("menuzord-responsive").prepend("<a href='javascript:void(0)' class='showhide'>" + mobilebtn + "</a>");
             showHideButton = $(menu_container).children(".showhide");
         }

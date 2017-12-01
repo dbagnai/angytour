@@ -27,6 +27,47 @@ var callqueque = [];
 var globalObject = {}; //memoria generale per appoggio dati temporanei ( attenzione, usare con id univoci nelle chiamate !)
 
 
+
+
+$(document).ready(function () {
+    searchtaginjectandcall();
+});
+//searchtaginjectandcall();
+
+/*Seleziona i tag con classe inject e Chiama la funzione specificata nell'attributo params passando i parametri a seguire*/
+function searchtaginjectandcall() {
+    $(".inject").each(function () {
+        var container = $(this);
+        var callerpars = container.attr('params').split(',');
+        var callerid = container.prop("id");
+        var itemtocall = {};
+        for (var i = 0; i < callerpars.length; i++) {
+            console.log(callerpars[i]);
+            if (i == 0) {
+                itemtocall = {};
+                itemtocall.args = [];
+                itemtocall.name = callerpars[i].trim().replace(/\'/g, "");
+            } else {
+                if (callerpars[i].trim().toLowerCase() == ("false") || callerpars[i].trim().toLowerCase() == ("true"))
+                    itemtocall.args.push((callerpars[i].trim() == 'true'));
+                else if (!isNaN(Number(callerpars[i].trim())))
+                    itemtocall.args.push(Number(callerpars[i].trim()));
+                else
+                    itemtocall.args.push(callerpars[i].trim().replace(/\'/g, ""));
+            }
+        }
+        //window[itemtocall.name].apply(this, itemtocall.args)//make the call
+        (function wait() {
+            if (typeof window[itemtocall.name] === "function") {
+                window[itemtocall.name].apply(this, itemtocall.args)//make the call
+            } else {
+                setTimeout(wait, 50);
+            }
+        })();
+    });
+}
+
+
 function initLingua(lingua) {
     lng = lingua || "I";
     moment.locale("it");
@@ -53,6 +94,7 @@ function loadref(functocall) {
         args.push(arguments[i]);
         lingua = arguments[i];
         item.args.push(arguments[i]);
+
     }
     if (promisecalling)
         callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise
@@ -718,6 +760,23 @@ function CleanHtml(el) {
     el.find('*').removeAttr("myvalue3");
     el.find('*').removeAttr("format");
     el.find('*').removeClass("bind");
+    el.find('*').removeClass("inject");
+    el.find('*').removeAttr("params");
+
+    el.removeAttr("mybind");
+    el.removeAttr("mybind1");
+    el.removeAttr("mybind2");
+    el.removeAttr("mybind3");
+    el.removeAttr("myvalue");
+    el.removeAttr("myvalue1");
+    el.removeAttr("myvalue2");
+    el.removeAttr("myvalue3");
+    el.removeAttr("format");
+    el.removeClass("bind");
+    el.removeClass("inject");
+    el.removeAttr("params");
+
+
 }
 
 
