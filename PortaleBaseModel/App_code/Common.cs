@@ -533,9 +533,7 @@ public class CommonPage : Page
         return strIn.Trim('-');
 
     }
-
-    //
-
+     
     /// <summary>
     /// Rimpiazza link:(www.sitodavadere.it) con un link html
     /// oppure link:(www.sitodavadere.it|testo visualizzato del link)

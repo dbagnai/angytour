@@ -1130,7 +1130,7 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/scroller.js") + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotope.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/bannerFascia.js") + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotopeBanner.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotopeBanner.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/archivio.js") + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/lazyloadimg.js") + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
         <%--   <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol1.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script> --%>
