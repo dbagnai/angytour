@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link rel="stylesheet"  href="/css/prettyPhoto.css" />
+    <link rel="stylesheet" href="/css/prettyPhoto.css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -109,7 +109,7 @@
                         pretty();
                         tinymceinit();
                     });
-                    function tinymceinit() {
+                     function tinymceinit() {
                         tinymce.init({
                             mode: "textareas",
                             editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
@@ -119,6 +119,8 @@
                             relative_urls: false,
                             forced_root_block: false,
                             verify_html: false,
+                            allow_html_in_named_anchor: true,
+                            valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text]",
                             plugins: [
                                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -308,7 +310,7 @@
                                         <asp:TextBox CssClass="form-control" ID="txtTitoloGB" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
-                                  <div class="row">
+                                <div class="row">
                                     <div class="col-sm-2">
                                         <strong>
                                             <asp:Label ID="Label9" runat="server" Text="META title (custom)" /></strong>

@@ -397,13 +397,13 @@
                     if (!string.IsNullOrEmpty(query))
                     {
                         appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
-                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20","%2520"), "");
+                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20", "%2520"), "");
                         appaddress.Replace((query), "");
                     }
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
 
-                    if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
                     appaddress = appaddress.ToLower().Replace("http:", "https:");
 
                 System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
