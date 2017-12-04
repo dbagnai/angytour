@@ -109,7 +109,7 @@
                         pretty();
                         tinymceinit();
                     });
-                     function tinymceinit() {
+                    function tinymceinit() {
                         tinymce.init({
                             mode: "textareas",
                             editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
