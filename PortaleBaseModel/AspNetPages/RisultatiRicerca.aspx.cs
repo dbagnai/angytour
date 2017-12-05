@@ -444,9 +444,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                     sb.Clear();
                     sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
+                    sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
                     sb.Append("    {");
-                    sb.Append("injectSliderAndLoadBanner(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");");
+                    sb.Append("injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");");
                     sb.Append(" }");
                     sb.Append("   else  {");
                     sb.Append("  setTimeout(wait, 50);");
