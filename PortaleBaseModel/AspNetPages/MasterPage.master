@@ -228,7 +228,7 @@
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
             <div style="position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+39xxx ">
+                <a style="padding-top: 0px" class="pull-right visible-xs" href='<%= references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
             <div class="container" id="divImg">
