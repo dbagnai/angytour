@@ -176,8 +176,8 @@
                                 </asp:Repeater>
                             </ul>
                         </li>
-                        <li runat="server">
-                            <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                        <li runat="server" id="linkContattiHigh">
+                            <a  onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                 <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                             </a>
                         </li>
@@ -372,8 +372,8 @@
                             </asp:Repeater>
                         </ul>
                     </li>
-                    <li runat="server" class=" hidden-sm hidden-md hidden-lg">
-                        <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                    <li runat="server" class=" hidden-sm hidden-md hidden-lg" id="linkContatti1High">
+                        <a  onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
                     </li>
@@ -912,8 +912,8 @@
                                         </asp:Repeater>--%>
 
 
-                                    <li>
-                                        <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
+                                    <li runat="server" id="linkContatti" >
+                                        <a onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                             <span class="label-nav">
                                                 <%= references.ResMan("Common", Lingua,"testoContatti") %> 
                                             </span>

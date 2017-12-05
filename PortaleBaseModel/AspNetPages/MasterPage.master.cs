@@ -544,7 +544,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                         //  ((HtmlGenericControl)linkmenu.Parent.Parent.Parent.Parent).Attributes["class"] += " active";
                         if (linkmenu != null)
                         {
-                            Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent.Parent.Parent, linkmenu.Parent.Parent.Parent.ID);
+                            Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent, linkmenu.Parent.ID);
                             if (lidrop != null)
                             {
                                 ((HtmlGenericControl)lidrop).Attributes["class"] += " active";
