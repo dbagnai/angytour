@@ -258,7 +258,7 @@
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1"); 
 #endif
 
-            // references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
+            references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
 
             Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
@@ -397,13 +397,13 @@
                     if (!string.IsNullOrEmpty(query))
                     {
                         appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
-                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20", "%2520"), "");
+                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20","%2520"), "");
                         appaddress.Replace((query), "");
                     }
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
 
-                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
+                    if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
                     appaddress = appaddress.ToLower().Replace("http:", "https:");
 
                 System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();

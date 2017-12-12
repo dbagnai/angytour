@@ -176,8 +176,8 @@
                                 </asp:Repeater>
                             </ul>
                         </li>
-                        <li runat="server" id="linkContattiHigh">
-                            <a  onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                        <li runat="server">
+                            <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                 <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                             </a>
                         </li>
@@ -228,7 +228,7 @@
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
             <div style="position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px" class="pull-right visible-xs" href='<%= references.ResMan("Common", Lingua,"iconcelltext") %>'>
+                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+39xxx ">
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
             <div class="container" id="divImg">
@@ -246,7 +246,7 @@
 
                 </div>
             </div>
-       
+
             <div id="menuzord" class="menuzord menuzord-responsive orange">
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-center">
                     <li runat="server" id="liHome">
@@ -330,7 +330,7 @@
                     <li runat="server">
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>
-               <%--     <asp:Repeater ID="Repeater1" runat="server"
+                    <%--     <asp:Repeater ID="Repeater1" runat="server"
                         OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
                         <ItemTemplate>
                             <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
@@ -372,8 +372,8 @@
                             </asp:Repeater>
                         </ul>
                     </li>
-                    <li runat="server" class=" hidden-sm hidden-md hidden-lg" id="linkContatti1High">
-                        <a  onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                    <li runat="server" class=" hidden-sm hidden-md hidden-lg">
+                        <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
                     </li>
@@ -496,13 +496,10 @@
                     </div>
                 </div>
             </asp:Panel>
-            <div class="container" style="text-align: center">
-                <div class="row" runat="server" id="divRicerca" visible="false">
-                    <div class="col-sm-12" style="text-align: center">
-                        <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
-                    </div>
-                </div>
+            <div runat="server" id="divRicerca" visible="false">
+                <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
             </div>
+
             <asp:Panel runat="server" ID="pnlRicerca" Visible="false">
                 <div class="container" style="text-align: center">
                     <div class="row">
@@ -912,8 +909,8 @@
                                         </asp:Repeater>--%>
 
 
-                                    <li runat="server" id="linkContatti" >
-                                        <a onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
+                                    <li>
+                                        <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                             <span class="label-nav">
                                                 <%= references.ResMan("Common", Lingua,"testoContatti") %> 
                                             </span>
@@ -1114,13 +1111,18 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
         <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>
         <script>
                                     pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
                                     initLingua('<%= Lingua %>');
-                                    loadref(initLingua, '<%= Lingua %>');
+                                   <%-- loadref(initLingua, '<%= Lingua %>');--%>
                                     jQuery(document).ready(function () {
+                                        /*Test pulizia cache*/
                                         loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
-             <%--   loadref(InitSearchControls, '<%= Lingua %>')--%>
+                                        /*Carico pannello ricerca immobili*/
+                                        loadref(InitSearchControls, '<%= Lingua %>');//make the call
+                                        /*Chiamo aggiornamento immobili se richiesto*/
+                                        loadref(UpdateImmobiliJs, '<%= Lingua %>');
                                     });
         </script>
 
@@ -1133,7 +1135,8 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotopeBanner.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/archivio.js") + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/lazyloadimg.js") + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
-        <%--   <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol1.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script> --%>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>
+       
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/carrello.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
 
@@ -1162,7 +1165,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>
         <!--DEFIANTJS to query json obkects-->
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
+          <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>
@@ -1183,59 +1186,30 @@
         <!-- fine div disp_form_cont -->
         <script type="text/javascript">
                                     var makeRevLower = false;
+                                    /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
+                                    !function (cash) { //ensure $ always references jQuery
+                                        $(function () { //when dom has finished loading
+                                            //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
+                                            function fixHeader() {
+                                                //for each element that is classed as 'pull-down'
+                                                //reset margin-top for all pull down items
+                                                $('.pull-down').each(function () {
+                                                    $(this).css('margin-top', 0);
+                                                });
 
-                                    //function JsSvuotaSession(this) {
-                                    //    //  var contenitoredestinazione = $('#divAjaxGeneralCall').parent().find("[id*='divInnerAjaxGeneralCall']");
-
-                                    //    AjaxClearSession("", "");
-
-                                    //}
-
-                                    function AjaxClearSession(contenitoredestinazione, campo1) {
-                                        $.ajax({
-                                            destinationControl: contenitoredestinazione,
-                                            type: "POST",
-                                            url: '<%= CommonPage.ReplaceAbsoluteLinks("~/Index.aspx/SvuotaSessione") %>',
-                     contentType: "application/json; charset=utf-8",
-                     dataType: "json",
-                     data: '{campo1: "' + campo1 + '" }',
-                     success: function (data) {
-                         OnSuccessRiepilogo(data, this.destinationControl);
-                     },
-                     failure: function (response) {
-                         alert(response.d);
-                     }
-                 });
-             }
-             function OnSuccessRiepilogo(response, destination) {
-                 //alert(response.d);
-                 // alert("success");
-             }
-
-             /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
-             !function (cash) { //ensure $ always references jQuery
-                 $(function () { //when dom has finished loading
-                     //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
-                     function fixHeader() {
-                         //for each element that is classed as 'pull-down'
-                         //reset margin-top for all pull down items
-                         $('.pull-down').each(function () {
-                             $(this).css('margin-top', 0);
-                         });
-
-                         //set its margin-top to the difference between its own height and the height of its parent
-                         $('.pull-down').each(function () {
-                             if ($(window).innerWidth() >= 991) {
-                                 $(this).css('margin-top', $(this).parent().height() - $(this).height());
-                             }
-                         });
-                     }
-                     $(window).resize(function () {
-                         fixHeader();
-                     });
-                     fixHeader();
-                 });
-             }(window.jQuery);
+                                                //set its margin-top to the difference between its own height and the height of its parent
+                                                $('.pull-down').each(function () {
+                                                    if ($(window).innerWidth() >= 991) {
+                                                        $(this).css('margin-top', $(this).parent().height() - $(this).height());
+                                                    }
+                                                });
+                                            }
+                                            $(window).resize(function () {
+                                                fixHeader();
+                                            });
+                                            fixHeader();
+                                        });
+                                    }(window.jQuery);
         </script>
         <!-- Wrapper end -->
         <!--[if lt IE 9]>

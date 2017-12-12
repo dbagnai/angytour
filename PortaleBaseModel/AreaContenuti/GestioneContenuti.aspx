@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link rel="stylesheet" href="/css/prettyPhoto.css" />
+    <link rel="stylesheet"  href="/css/prettyPhoto.css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -310,7 +310,7 @@
                                         <asp:TextBox CssClass="form-control" ID="txtTitoloGB" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
-                                <div class="row">
+                                  <div class="row">
                                     <div class="col-sm-2">
                                         <strong>
                                             <asp:Label ID="Label9" runat="server" Text="META title (custom)" /></strong>
@@ -372,6 +372,24 @@
                                     </div>
                                     <div class="col-sm-10">
                                         <asp:TextBox CssClass="form-control" ID="txtTitoloRU" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                  <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label12" runat="server" Text="META title (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleRU" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <strong>
+                                            <asp:Label ID="Label13" runat="server" Text="META DESC (custom)" /></strong>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescRU" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">

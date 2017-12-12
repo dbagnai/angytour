@@ -266,8 +266,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
             txtCustomtitleI.Text = Details.CustomtitleI;
             txtCustomtitleGB.Text = Details.CustomtitleGB;
+            txtCustomtitleRU.Text = Details.CustomtitleRU;
             txtCustomdescI.Text = Details.CustomdescI;
             txtCustomdescGB.Text = Details.CustomdescGB;
+            txtCustomdescRU.Text = Details.CustomdescRU;
 
 
             if (CodiceContenuto == "con001000")
@@ -462,8 +464,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
                     updrecord.CustomtitleI = txtCustomtitleI.Text;
                     updrecord.CustomtitleGB = txtCustomtitleGB.Text;
+                    updrecord.CustomtitleRU = txtCustomtitleRU.Text;
                     updrecord.CustomdescI = txtCustomdescI.Text;
                     updrecord.CustomdescGB = txtCustomdescGB.Text;
+                    updrecord.CustomdescRU = txtCustomdescRU.Text;
 
                     if (CodiceContenuto == "con001000")
                     {
@@ -506,8 +510,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
                 updrecord.CustomtitleI = txtCustomtitleI.Text;
                 updrecord.CustomtitleGB = txtCustomtitleGB.Text;
+                updrecord.CustomtitleRU = txtCustomtitleRU.Text;
                 updrecord.CustomdescI = txtCustomdescI.Text;
                 updrecord.CustomdescGB = txtCustomdescGB.Text;
+                updrecord.CustomdescRU = txtCustomdescRU.Text;
 
                 if (CodiceContenuto == "con001000")
                 {
@@ -711,8 +717,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
         txtCustomtitleI.Text = "";
         txtCustomtitleGB.Text = "";
+        txtCustomtitleRU.Text = "";
         txtCustomdescI.Text = "";
         txtCustomdescGB.Text = "";
+        txtCustomdescRU.Text = "";
 
 
         txtData.Text = string.Format("{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now);
@@ -723,8 +731,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
     {
         txtCustomtitleI.ReadOnly = valore;
         txtCustomtitleGB.ReadOnly = valore;
+        txtCustomtitleRU.ReadOnly = valore;
         txtCustomdescI.ReadOnly = valore;
         txtCustomdescGB.ReadOnly = valore;
+        txtCustomdescRU.ReadOnly = valore;
 
         txtTitoloI.ReadOnly = valore;
         txtTitoloGB.ReadOnly = valore;

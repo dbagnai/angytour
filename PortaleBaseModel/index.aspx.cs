@@ -102,6 +102,12 @@ public partial class index : CommonPage
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
+                case "RU":
+                    descrizione = content.DescrizioneRU;
+                    titolopagina = content.TitoloRU;
+                    customdesc = content.CustomdescRU;
+                    customtitle = content.CustomtitleRU;
+                    break;
                 default:
                     customdesc = content.CustomdescI;
                     customtitle = content.CustomtitleI;

@@ -1,0 +1,323 @@
+[
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 3,
+        "idcollegamento": 2,
+        "descrizione": "Descrizione ville",
+        "lingua": "I",
+        "titolo": "Ville"
+      },
+      {
+        "id": 4,
+        "idcollegamento": 2,
+        "descrizione": "Villas category",
+        "lingua": "GB",
+        "titolo": "Villas"
+      },
+      {
+        "id": 18,
+        "idcollegamento": 2,
+        "descrizione": "",
+        "lingua": "RU",
+        "titolo": "Виллы"
+      }
+    ],
+    "id": 2,
+    "codicetiporisorsa": "a09ns53tf6",
+    "id_allegati": "a4a0da80-caac-412c-802d-7c37360263a7"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 5,
+        "idcollegamento": 3,
+        "descrizione": "Casali",
+        "lingua": "I",
+        "titolo": "Casali"
+      },
+      {
+        "id": 6,
+        "idcollegamento": 3,
+        "descrizione": "",
+        "lingua": "GB",
+        "titolo": "country houses"
+      },
+      {
+        "id": 33,
+        "idcollegamento": 3,
+        "descrizione": "Descrizione russo",
+        "lingua": "RU",
+        "titolo": "Загородные дома"
+      }
+    ],
+    "id": 3,
+    "codicetiporisorsa": "t65dm30nj9",
+    "id_allegati": "176d2e21-f2b5-423d-a3c8-6bf5ab1aebc9"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 9,
+        "idcollegamento": 5,
+        "descrizione": "Descrizione della categoria appartamenti",
+        "lingua": "I",
+        "titolo": "Appartamenti"
+      },
+      {
+        "id": 10,
+        "idcollegamento": 5,
+        "descrizione": "Description of apartments category",
+        "lingua": "GB",
+        "titolo": "Apartments"
+      },
+      {
+        "id": 17,
+        "idcollegamento": 5,
+        "descrizione": "descrizione appartamenti in russo",
+        "lingua": "RU",
+        "titolo": "Квартиры"
+      }
+    ],
+    "id": 5,
+    "codicetiporisorsa": "s13qn72aw5",
+    "id_allegati": "c085dd92-c28e-42a2-96c7-2ebec01558c7"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 43,
+        "idcollegamento": 22,
+        "lingua": "GB",
+        "titolo": "Farm"
+      },
+      {
+        "id": 44,
+        "idcollegamento": 22,
+        "lingua": "I",
+        "titolo": "Aziende Agricole"
+      },
+      {
+        "id": 61,
+        "idcollegamento": 22,
+        "lingua": "RU",
+        "titolo": "Фермы"
+      }
+    ],
+    "id": 22,
+    "codicetiporisorsa": "p67ab89zm4",
+    "id_allegati": "6a8ff01b-bc64-48fe-97a1-915a3ef42418"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 45,
+        "idcollegamento": 23,
+        "lingua": "I",
+        "titolo": "Terreni Edificabili"
+      },
+      {
+        "id": 46,
+        "idcollegamento": 23,
+        "lingua": "GB",
+        "titolo": "Building plot"
+      },
+      {
+        "id": 47,
+        "idcollegamento": 23,
+        "lingua": "RU",
+        "titolo": "Участок под застройку"
+      }
+    ],
+    "id": 23,
+    "codicetiporisorsa": "y97rq35kn0",
+    "id_allegati": "40c42064-d915-4cfb-b78a-97c868a4dcdf"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 48,
+        "idcollegamento": 24,
+        "descrizione": "descrizione villette a schiera e case con ingresso indipendente",
+        "lingua": "I",
+        "titolo": "Case indipendenti"
+      },
+      {
+        "id": 51,
+        "idcollegamento": 24,
+        "descrizione": "descrizione villette a schiera e case con ingresso indipendente",
+        "lingua": "GB",
+        "titolo": "townhouses"
+      },
+      {
+        "id": 62,
+        "idcollegamento": 24,
+        "descrizione": "descrizione villette a schiera e case con ingresso indipendente",
+        "lingua": "RU",
+        "titolo": "Коттеджи"
+      }
+    ],
+    "id": 24,
+    "codicetiporisorsa": "r58qy46mt2",
+    "id_allegati": "c4a7f29e-3cb1-412d-95f8-228d5702d310"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 49,
+        "idcollegamento": 25,
+        "descrizione": "",
+        "lingua": "I",
+        "titolo": "Strutture ricettive"
+      },
+      {
+        "id": 52,
+        "idcollegamento": 25,
+        "descrizione": "",
+        "lingua": "GB",
+        "titolo": "accomodation facilities"
+      },
+      {
+        "id": 63,
+        "idcollegamento": 25,
+        "descrizione": "",
+        "lingua": "RU",
+        "titolo": "Гостиницы"
+      }
+    ],
+    "id": 25,
+    "codicetiporisorsa": "y86bo71fc3",
+    "id_allegati": "5b64464c-dec3-48b4-850a-1c4150ad62dd"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 50,
+        "idcollegamento": 26,
+        "descrizione": "",
+        "lingua": "I",
+        "titolo": "Attività commerciali"
+      },
+      {
+        "id": 64,
+        "idcollegamento": 26,
+        "descrizione": "descrizione case vacanza, bed & breakfast",
+        "lingua": "RU",
+        "titolo": "Cтруктуры для отдыха"
+      },
+      {
+        "id": 65,
+        "idcollegamento": 26,
+        "descrizione": "descrizione case vacanza, bed & breakfast",
+        "lingua": "GB",
+        "titolo": "Holiday house"
+      }
+    ],
+    "id": 26,
+    "codicetiporisorsa": "z70nm43ks9",
+    "id_allegati": "609cc5a6-9c13-4372-a0fe-9a100dea4003"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 53,
+        "idcollegamento": 27,
+        "lingua": "I",
+        "titolo": "borghi e castelli"
+      },
+      {
+        "id": 54,
+        "idcollegamento": 27,
+        "lingua": "GB",
+        "titolo": "hamlet and castle"
+      },
+      {
+        "id": 66,
+        "idcollegamento": 27,
+        "lingua": "RU",
+        "titolo": "Античные деревни и замки"
+      }
+    ],
+    "id": 27,
+    "codicetiporisorsa": "t89di43ba6",
+    "id_allegati": "30953783-0a42-401c-ba1e-1a3676f07de6"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 55,
+        "idcollegamento": 28,
+        "descrizione": "",
+        "lingua": "GB",
+        "titolo": "wine estate"
+      },
+      {
+        "id": 56,
+        "idcollegamento": 28,
+        "descrizione": "",
+        "lingua": "I",
+        "titolo": "aziende vitivinicole"
+      },
+      {
+        "id": 67,
+        "idcollegamento": 28,
+        "descrizione": "",
+        "lingua": "RU",
+        "titolo": "винная компания"
+      }
+    ],
+    "id": 28,
+    "codicetiporisorsa": "a49ey27tb5",
+    "id_allegati": "b3f82a89-0678-4e07-8e26-380048529f7d"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 57,
+        "idcollegamento": 29,
+        "lingua": "I",
+        "titolo": "terreni agricoli"
+      },
+      {
+        "id": 58,
+        "idcollegamento": 29,
+        "lingua": "GB",
+        "titolo": "agricoltural lands"
+      },
+      {
+        "id": 68,
+        "idcollegamento": 29,
+        "lingua": "RU",
+        "titolo": "Земельные участки"
+      }
+    ],
+    "id": 29,
+    "codicetiporisorsa": "c80ze39sr2",
+    "id_allegati": "95624c67-21db-49b8-a5e9-52e254ce7ac4"
+  },
+  {
+    "dettaglitiporisorse": [
+      {
+        "id": 70,
+        "idcollegamento": 31,
+        "lingua": "I",
+        "titolo": "ESTERO"
+      },
+      {
+        "id": 71,
+        "idcollegamento": 31,
+        "lingua": "GB",
+        "titolo": "OVERSEAS PROPERTIES"
+      },
+      {
+        "id": 72,
+        "idcollegamento": 31,
+        "lingua": "RU",
+        "titolo": "Зарубежная недвижимость"
+      }
+    ],
+    "id": 31,
+    "codicetiporisorsa": "e67nm03oq9",
+    "id_allegati": "aa4ed1d2-b972-4e97-bbb4-72f6cf3d437e"
+  }
+]

@@ -988,6 +988,10 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
+                case "RU":
+                    customdesc = content.CustomdescRU;
+                    customtitle = content.CustomtitleRU;
+                    break;
                 default:
                     customdesc = content.CustomdescI;
                     customtitle = content.CustomtitleI;

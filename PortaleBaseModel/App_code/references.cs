@@ -291,6 +291,7 @@ public class references
                     }
                 }
                 //Creaimo la lista dei link
+                int count = 0;
                 if ((!string.IsNullOrEmpty(testotitolo)))
                 {
 
@@ -305,6 +306,10 @@ public class references
                         tmp.Add(testotitolo);
                         tmp.Add(link);
                         retdict.Add(idact, tmp);
+                        count++;
+
+                        if (count > maxresults) break;
+
                     }
                 }
             }
@@ -349,7 +354,8 @@ public class references
 
         var filejsonlanguages = "languages.json";
         //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
-        if (System.IO.File.Exists(pathjsonfiles + filejsonlanguages))
+        //if (System.IO.File.Exists(pathjsonfiles + filejsonlanguages))
+        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages))
             reflanguages = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages);
 
     }
@@ -377,51 +383,72 @@ public class references
     }
     public static Dictionary<string, Dictionary<string, string>> GetResourcesByLingua(string lingua = "I")
     {
-      Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
 
-      List<ResourceItem> lri = ResourceManagement.ReadItemsByLingua("BaseText", lingua);
-      foreach (var r in lri)
-      {
-         if (!dict.ContainsKey(lingua))
-            dict.Add(lingua, new Dictionary<string, string>());
-         if (!dict[lingua].ContainsKey(r.Chiave))
-         {
-            dict[lingua].Add(r.Chiave, r.Valore);
-         }
+        List<ResourceItem> lri = ResourceManagement.ReadItemsByLingua("BaseText", lingua);
+        foreach (var r in lri)
+        {
+            if (!dict.ContainsKey(lingua))
+                dict.Add(lingua, new Dictionary<string, string>());
+            if (!dict[lingua].ContainsKey(r.Chiave))
+            {
+                dict[lingua].Add(r.Chiave, r.Valore);
+            }
 
-      }
+        }
 
-      return dict;
+        return dict;
+    }
+    public static void RegenerateUrlSearchLinks(HttpServerUtility Server, string tipologia)
+    {
+        List<string> linktipologielist = new List<string>();
+        List<string> linktipologieregionilist = new List<string>();
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+
+        dynamic jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(references.reflanguages);
+        foreach (dynamic l in jsonResponse)
+        {
+            //Link per letipologie immobiliari
+            string Lingua = l.Value.Path;
+            WelcomeLibrary.DOM.ProvinceCollection regioni = ListaRegioni(Lingua);
+            TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == tipologia); });
+            if (item != null)
+            {
+                Dictionary<string, string> tipologieimmobili = references.GetreftipologieValues(Lingua);
+                foreach (KeyValuePair<string, string> t in tipologieimmobili)
+                {
+                    sb1 = new StringBuilder();
+                    sb1.Append(item.Descrizione);
+                    sb1.Append("-");
+                    sb1.Append(t.Value);
+                    //string testourl = item.Descrizione + "-" + t.Value;
+                    //string testolink = t.Value;
+                    string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, sb1.ToString(), "", tipologia, t.Key, "", "", "", "", true, true);
+                    //linktipologielist.Add(link);
+                    //Link per tipologie immobiliari e regioni
+                    if (regioni != null)
+                        foreach (WelcomeLibrary.DOM.Province r in regioni)
+                        {
+                            sb2 = new StringBuilder();
+                            sb2.Append(sb1.ToString());
+                            sb2.Append("-");
+                            sb2.Append(r.Regione);
+                            //string testourl2 = testourl + "-" + r.Regione;
+                            link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, sb2.ToString(), "", tipologia, t.Key, "", r.Codice, "", "", true, true);
+                            //link per regione immobile
+                            link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, item.Descrizione + "-" + r.Regione, "", tipologia, "", "", r.Codice, "", "", true, true);
+                            //linktipologieregionilist.Add(link);
+                        }
+                }
+            }
+        }
     }
 
-   // da far vedere a daniele commentata sennò senza file risorse non compila
-   //public static Dictionary<string, Dictionary<string, string>> GetResourcesByLinguaOld(string lingua = "I")
-   //{
-   //   System.Globalization.CultureInfo ci = setCulture(lingua);
-   //   Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
-   //   //Ricerca con ResourceManager creando un metodo che trova tutti i link che contengono
-   //   //le tipologie in questione
-   //   System.Resources.ResourceSet rset2 = Resources.Basetext.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
-   //   //System.Resources.ResourceSet rset2 = references.ResMan("BaseText", Lingua, sourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true);
-   //   // Create an IDictionaryEnumerator to read the data in the ResourceSet.
-   //   System.Collections.IDictionaryEnumerator id2 = rset2.GetEnumerator();
-   //   // Iterate through the ResourceSet and display the contents to the console. 
-
-   //   while (id2.MoveNext())
-   //   {
-   //      if (!dict.ContainsKey(lingua))
-   //         dict.Add(lingua, new Dictionary<string, string>());
-   //      if (!dict[lingua].ContainsKey(id2.Key.ToString()))
-   //      {
-   //         dict[lingua].Add(id2.Key.ToString(), HttpContext.GetGlobalResourceObject("Basetext", id2.Key.ToString(), ci).ToString());
-   //      }
-   //   }
-   //   id2.Reset();
-   //   return dict;
-   //}
-
-   public static void CreaSitemapImmobili(HttpServerUtility Server, string tipologia)
+    public static void CreaSitemapImmobili(HttpServerUtility Server, string tipologia)
     {
+        //Per prima cosa rigenero i link per le ricerche tipologia e tipologia / regione
+        RegenerateUrlSearchLinks(Server, tipologia);
 
         string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
         string PathSitemap = WelcomeLibrary.STATIC.Global.percorsoFisicoComune;
@@ -459,7 +486,7 @@ public class references
                 string link = "";
                 if ((!string.IsNullOrEmpty(testotitolo)))
                 {
-                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                    link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testotitolo, idact, tipologia, "", "", "", "", "", true, true);
                     linklist.Add(link);
                 }
             }
@@ -527,14 +554,13 @@ public class references
 
     public static void CaricaMemoriaStatica(HttpServerUtility Server)
     {
-      WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
+        WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
 
-      WelcomeLibrary.UF.ConfigManagement.LoadConfig();
+        WelcomeLibrary.UF.ConfigManagement.LoadConfig();
+        WelcomeLibrary.UF.ResourceManagement.LoadResources();
 
-         WelcomeLibrary.UF.ResourceManagement.LoadResources();
-
-      //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
-      if (ConfigManagement.ReadKey("Posizione") == "Remoto")
+        //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
+        if (ConfigManagement.ReadKey("Posizione") == "Remoto")
         {
             WelcomeLibrary.STATIC.Global.PercorsoContenuti = "~" + ConfigManagement.ReadKey("DataDir") + "/Files";
             WelcomeLibrary.STATIC.Global.PercorsoComune = "~" + ConfigManagement.ReadKey("DataDir") + "/Common";
@@ -559,7 +585,6 @@ public class references
         bool tmpcdn = false;
         bool.TryParse(susecdn, out tmpcdn);
         WelcomeLibrary.STATIC.Global.usecdn = tmpcdn;
-         
 
 
         references.CaricaDatiReftablesDaJson(Server); //Tabelle di riferimento per l'immobiliare
@@ -591,18 +616,18 @@ public class references
         WelcomeLibrary.UF.Utility.CaricaListaStaticaProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
         WelcomeLibrary.UF.Utility.CaricaListaStaticaSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
 
-         //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
-         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
-         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
+        //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
+        //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
+        //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
 
-   }
+    }
 
-   public static string ResMan(string Gruppo, string Lingua, string Chiave, string Categoria = "")
-   {
-      return WelcomeLibrary.UF.ResourceManagement.ReadKey(Gruppo, Lingua, Chiave, Categoria).Valore;
-   }
+    public static string ResMan(string Gruppo, string Lingua, string Chiave, string Categoria = "")
+    {
+        return WelcomeLibrary.UF.ResourceManagement.ReadKey(Gruppo, Lingua, Chiave, Categoria).Valore;
+    }
 
-   public static string NomeRegione(string codiceprovincia, string Lingua)
+    public static string NomeRegione(string codiceprovincia, string Lingua)
     {
         string ritorno = "";
         Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codiceprovincia); });
@@ -617,6 +642,22 @@ public class references
         if (item != null)
             ritorno = item.Provincia;
         return ritorno;
+    }
+    public static WelcomeLibrary.DOM.ProvinceCollection ListaRegioni(string Lingua)
+    {
+        WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
+        List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == Lingua); });
+        if (provincelingua != null)
+        {
+            provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
+            foreach (Province item in provincelingua)
+            {
+                if (item.Lingua == Lingua)
+                    if (!regioni.Exists(delegate (Province tmp) { return (tmp.Regione == item.Regione); }))
+                        regioni.Add(item);
+            }
+        }
+        return regioni;
     }
     public static string TrovaCodiceRegione(string nomeregione, string Lingua)
     {
@@ -657,7 +698,7 @@ public class references
             ritorno = item.Codice;
         return ritorno;
     }
-    public static double  TrovaCostoNazione(string codice,string Lingua="I")
+    public static double TrovaCostoNazione(string codice, string Lingua = "I")
     {
         double ritorno = 0;
         if (string.IsNullOrEmpty(codice)) return ritorno;

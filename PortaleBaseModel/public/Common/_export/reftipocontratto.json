@@ -1,0 +1,54 @@
+[
+  {
+    "dettaglitipocontratto": [
+      {
+        "id": 3,
+        "idcollegamento": 2,
+        "descrizione": "",
+        "lingua": "GB",
+        "titolo": "Sale"
+      },
+      {
+        "id": 4,
+        "idcollegamento": 2,
+        "descrizione": "",
+        "lingua": "I",
+        "titolo": "Vendita"
+      },
+      {
+        "id": 5,
+        "idcollegamento": 2,
+        "lingua": "RU",
+        "titolo": "Продажа"
+      }
+    ],
+    "id": 2,
+    "codicetipocontratto": "w96ox08gp3",
+    "id_allegati": "67bcdd8e-1e6e-4676-ab10-6e340435a59a"
+  },
+  {
+    "dettaglitipocontratto": [
+      {
+        "id": 12,
+        "idcollegamento": 5,
+        "lingua": "RU",
+        "titolo": "Аренда"
+      },
+      {
+        "id": 13,
+        "idcollegamento": 5,
+        "lingua": "GB",
+        "titolo": "Rent"
+      },
+      {
+        "id": 14,
+        "idcollegamento": 5,
+        "lingua": "I",
+        "titolo": "Affitto"
+      }
+    ],
+    "id": 5,
+    "codicetipocontratto": "j98sn65tc1",
+    "id_allegati": "14350c53-6348-49ce-9b94-4330b01b4366"
+  }
+]

@@ -288,7 +288,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
     protected void EvidenziaSelezione(string testolink)
     {
-        HtmlGenericControl linkmenu = ((HtmlGenericControl)Master.FindControl("link" + testolink));
+        HtmlAnchor linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink));
 
 
         try
@@ -298,7 +298,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
                 linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
             }
-            linkmenu = ((HtmlGenericControl)Master.FindControl("link" + testolink + "high"));
+            linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink + "high"));
             if (linkmenu != null)
             {
                 Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent, linkmenu.Parent.ID);
@@ -322,7 +322,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         catch { }
         try
         {
-            linkmenu = ((HtmlGenericControl)Master.FindControl("link" + testolink + "Lateral"));
+            linkmenu = ((HtmlAnchor)Master.FindControl("link" + testolink + "Lateral"));
             if (linkmenu != null)
             {
                 linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");

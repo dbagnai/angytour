@@ -205,8 +205,9 @@ public partial class _SchedaOffertaMaster : CommonPage
             if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
+          
+#if false  
             string strigaperricerca = "";
-#if false
             strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
             Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
             if (content == null && !string.IsNullOrEmpty(Categoria))
@@ -948,6 +949,7 @@ public partial class _SchedaOffertaMaster : CommonPage
     }
     protected void AssociaDatiSocial(Offerte data)
     {
+        string  host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         string descrizione = data.DescrizionebyLingua(Lingua);
         string denominazione = data.DenominazionebyLingua(Lingua);
 
@@ -968,7 +970,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         ((HtmlMeta)Master.FindControl("metafbTitle")).Content = html.Convert((denominazione + " " + Nome).Replace("<br/>", " ").Trim());
         simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true))).Replace("<br/>", " ").Trim();
         ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
-
         if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
             ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString(), true).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
         else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
@@ -984,6 +985,10 @@ public partial class _SchedaOffertaMaster : CommonPage
             case "GB":
                 customdesc = data.Campo2GB;
                 customtitle = data.Campo1GB;
+                break;
+            case "RU":
+                customdesc = data.Campo2RU;
+                customtitle = data.Campo1RU;
                 break;
             default:
                 customdesc = data.Campo2I;
@@ -1008,28 +1013,55 @@ public partial class _SchedaOffertaMaster : CommonPage
         //METTIAMO GLI ALTERNATE
         hreflang = " hreflang=\"it\" ";
         string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(data.DenominazioneI), data.Id.ToString(), data.CodiceTipologia);
+        linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+            linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit"));
+
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" +  (linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" +  (linkcanonicoalt) + "\"/>";
         if (Lingua == "I")
         {
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            litcanonic.Text = "<link rel=\"canonical\"  href=\"" +  (linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 =  (linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
             linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(data.DenominazioneGB), data.Id.ToString(), data.CodiceTipologia);
+            linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
+
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" +  (linkcanonicoalt) + "\"/>";
             if (Lingua == "GB")
             {
-                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" +  (linkcanonicoalt) + "\"/>";
                 Tabrif link = new Tabrif();
-                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                actualpagelink.Campo1 =  (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
+            }
+        }
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"ru\" ";
+            linkcanonicoalt = CreaLinkRoutes(null, false, "RU", CleanUrl(data.DenominazioneRU), data.Id.ToString(), data.CodiceTipologia);
+            linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
+
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
+            if (Lingua == "RU")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
+                Tabrif link = new Tabrif();
+                actualpagelink.Campo1 = (linkcanonicoalt);
+                actualpagelink.Campo2 = CleanUrl(data.DenominazioneRU);
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

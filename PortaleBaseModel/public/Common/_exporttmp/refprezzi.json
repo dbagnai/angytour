@@ -1,0 +1,142 @@
+[
+  {
+    "dettagliprezzi": [
+      {
+        "id": 1,
+        "idcollegamento": 1,
+        "descrizione": "0;100000",
+        "lingua": "I",
+        "titolo": "Da 0 a 100.000 €"
+      },
+      {
+        "id": 2,
+        "idcollegamento": 1,
+        "descrizione": "0;100000",
+        "lingua": "GB",
+        "titolo": "From 0 to 100.000 €"
+      },
+      {
+        "id": 12,
+        "idcollegamento": 1,
+        "descrizione": "0;100000",
+        "lingua": "RU",
+        "titolo": "От  0 до  100.000 €"
+      }
+    ],
+    "id": 1,
+    "codice": "e60ng48kj2",
+    "id_allegati": "c97a2711-a632-4f44-8dd8-ce20890ee9cd"
+  },
+  {
+    "dettagliprezzi": [
+      {
+        "id": 3,
+        "idcollegamento": 2,
+        "descrizione": "100000;300000",
+        "lingua": "I",
+        "titolo": "Da 100.000 a 300.000 €"
+      },
+      {
+        "id": 4,
+        "idcollegamento": 2,
+        "descrizione": "100000;300000",
+        "lingua": "GB",
+        "titolo": "From 100.000 to 300.000 €"
+      },
+      {
+        "id": 13,
+        "idcollegamento": 2,
+        "descrizione": "100000;300000",
+        "lingua": "RU",
+        "titolo": "От  100.000 до  300.000 €"
+      }
+    ],
+    "id": 2,
+    "codice": "z36de29mr8",
+    "id_allegati": "1d55cc76-0caf-46b6-b6ea-9c20228f1ac5"
+  },
+  {
+    "dettagliprezzi": [
+      {
+        "id": 5,
+        "idcollegamento": 3,
+        "descrizione": "300000;600000",
+        "lingua": "GB",
+        "titolo": "From 300.000 to 600.000 €"
+      },
+      {
+        "id": 6,
+        "idcollegamento": 3,
+        "descrizione": "300000;600000",
+        "lingua": "I",
+        "titolo": "Da 300.000 a 600.000 €"
+      },
+      {
+        "id": 11,
+        "idcollegamento": 3,
+        "descrizione": "300000;600000",
+        "lingua": "RU",
+        "titolo": "От  300.000 до  600.000 €"
+      }
+    ],
+    "id": 3,
+    "codice": "d30pq26ge8",
+    "id_allegati": "ba0bdd8f-3ddb-4c30-83e2-28895c342521"
+  },
+  {
+    "dettagliprezzi": [
+      {
+        "id": 7,
+        "idcollegamento": 4,
+        "descrizione": "600000;1000000",
+        "lingua": "GB",
+        "titolo": "From 600.000 to 1.000.000 €"
+      },
+      {
+        "id": 8,
+        "idcollegamento": 4,
+        "descrizione": "600000;1000000",
+        "lingua": "I",
+        "titolo": "Da 600.000 a 1.000.000 €"
+      },
+      {
+        "id": 14,
+        "idcollegamento": 4,
+        "descrizione": "600000;1000000",
+        "lingua": "RU",
+        "titolo": "От  600.000 до  1.000.000 €"
+      }
+    ],
+    "id": 4,
+    "codice": "k58gy13aj9",
+    "id_allegati": "36d6615d-99f4-4e0a-ba3e-a226f2bc8a86"
+  },
+  {
+    "dettagliprezzi": [
+      {
+        "id": 9,
+        "idcollegamento": 5,
+        "descrizione": "1000000;999999999",
+        "lingua": "GB",
+        "titolo": "Over 1.000.000 €"
+      },
+      {
+        "id": 10,
+        "idcollegamento": 5,
+        "descrizione": "1000000;999999999",
+        "lingua": "I",
+        "titolo": "Oltre 1.000.000 €"
+      },
+      {
+        "id": 15,
+        "idcollegamento": 5,
+        "descrizione": "1000000;999999999",
+        "lingua": "RU",
+        "titolo": "Больше  1.000.000 €"
+      }
+    ],
+    "id": 5,
+    "codice": "m09ki15qe6",
+    "id_allegati": "083626c9-a38c-405c-82de-c0b4dfc53c9b"
+  }
+]

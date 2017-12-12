@@ -1,0 +1,142 @@
+[
+  {
+    "dettaglimetrature": [
+      {
+        "id": 1,
+        "idcollegamento": 1,
+        "descrizione": "0;50",
+        "lingua": "I",
+        "titolo": "Da 0 a 50 mq"
+      },
+      {
+        "id": 2,
+        "idcollegamento": 1,
+        "descrizione": "0;50",
+        "lingua": "GB",
+        "titolo": "From 0 to 50 sqm"
+      },
+      {
+        "id": 11,
+        "idcollegamento": 1,
+        "descrizione": "0;50",
+        "lingua": "RU",
+        "titolo": "От  0 до  50 sqm"
+      }
+    ],
+    "id": 1,
+    "codice": "k78jf10sp9",
+    "id_allegati": "ce41c2e0-0f1e-4d78-ba59-785beb4873ec"
+  },
+  {
+    "dettaglimetrature": [
+      {
+        "id": 3,
+        "idcollegamento": 2,
+        "descrizione": "50;100",
+        "lingua": "I",
+        "titolo": "Da 50 a 100 mq"
+      },
+      {
+        "id": 4,
+        "idcollegamento": 2,
+        "descrizione": "50;100",
+        "lingua": "GB",
+        "titolo": "From 50 to 100 sqm"
+      },
+      {
+        "id": 12,
+        "idcollegamento": 2,
+        "descrizione": "50;100",
+        "lingua": "RU",
+        "titolo": "От  50 до  100 sqm"
+      }
+    ],
+    "id": 2,
+    "codice": "p27wk34bi9",
+    "id_allegati": "78ca95ef-d855-4138-b919-b78544fd41e7"
+  },
+  {
+    "dettaglimetrature": [
+      {
+        "id": 5,
+        "idcollegamento": 3,
+        "descrizione": "100;250",
+        "lingua": "GB",
+        "titolo": "From 100 to 250 sqm"
+      },
+      {
+        "id": 6,
+        "idcollegamento": 3,
+        "descrizione": "100;250",
+        "lingua": "I",
+        "titolo": "Da 100 a 250 mq"
+      },
+      {
+        "id": 13,
+        "idcollegamento": 3,
+        "descrizione": "100;250",
+        "lingua": "RU",
+        "titolo": "От  100 до  250 sqm"
+      }
+    ],
+    "id": 3,
+    "codice": "a09gp74ex1",
+    "id_allegati": "40741dd6-4932-4f26-b37a-f2d420d22c46"
+  },
+  {
+    "dettaglimetrature": [
+      {
+        "id": 7,
+        "idcollegamento": 4,
+        "descrizione": "250;500",
+        "lingua": "I",
+        "titolo": "Da 250 a 500 mq"
+      },
+      {
+        "id": 8,
+        "idcollegamento": 4,
+        "descrizione": "250;500",
+        "lingua": "GB",
+        "titolo": "From 250 to 500 sqm"
+      },
+      {
+        "id": 14,
+        "idcollegamento": 4,
+        "descrizione": "250;500",
+        "lingua": "RU",
+        "titolo": "От  250 до  500 sqm"
+      }
+    ],
+    "id": 4,
+    "codice": "k17oe39ri5",
+    "id_allegati": "32afb715-5e1f-4e42-9dd9-a30eb9cb0326"
+  },
+  {
+    "dettaglimetrature": [
+      {
+        "id": 9,
+        "idcollegamento": 5,
+        "descrizione": "500;999999999",
+        "lingua": "GB",
+        "titolo": "Over 500 sqm"
+      },
+      {
+        "id": 10,
+        "idcollegamento": 5,
+        "descrizione": "500;999999999",
+        "lingua": "I",
+        "titolo": "Oltre 500 mq"
+      },
+      {
+        "id": 15,
+        "idcollegamento": 5,
+        "descrizione": "500;999999999",
+        "lingua": "RU",
+        "titolo": "Больше  500 sqm"
+      }
+    ],
+    "id": 5,
+    "codice": "s62tw40kb5",
+    "id_allegati": "5bc52f2b-1b63-4bca-ae83-c9073c4e0a01"
+  }
+]

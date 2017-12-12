@@ -9,9 +9,7 @@
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
             <asp:Literal Text="" ID="litNomePagina" runat="server" />
-
             <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
-
         </div>
     </div>
     <%-- <!--=== Breadcrumbs ===-->

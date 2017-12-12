@@ -1,0 +1,128 @@
+[
+  {
+    "dettaglicondizione": [
+      {
+        "id": 1,
+        "idcollegamento": 1,
+        "descrizione": "",
+        "lingua": "I",
+        "titolo": "Ristrutturato"
+      },
+      {
+        "id": 2,
+        "idcollegamento": 1,
+        "lingua": "GB",
+        "titolo": "Restored"
+      },
+      {
+        "id": 3,
+        "idcollegamento": 1,
+        "lingua": "RU",
+        "titolo": "Реставрировано"
+      }
+    ],
+    "id": 1,
+    "codicecondizione": "k61en07bd5",
+    "id_allegati": "bce8cfe4-0402-417a-ba68-41143c8cb44d"
+  },
+  {
+    "dettaglicondizione": [
+      {
+        "id": 4,
+        "idcollegamento": 2,
+        "lingua": "I",
+        "titolo": "Da Ristrutturare"
+      },
+      {
+        "id": 5,
+        "idcollegamento": 2,
+        "lingua": "GB",
+        "titolo": "To be restored"
+      },
+      {
+        "id": 6,
+        "idcollegamento": 2,
+        "lingua": "RU",
+        "titolo": "Для восстанавления"
+      }
+    ],
+    "id": 2,
+    "codicecondizione": "n90ia38cm5",
+    "id_allegati": "86e20fe1-8600-4af9-8afb-334410cd86c3"
+  },
+  {
+    "dettaglicondizione": [
+      {
+        "id": 13,
+        "idcollegamento": 5,
+        "lingua": "I",
+        "titolo": "Parzialmente ristrutturato"
+      },
+      {
+        "id": 14,
+        "idcollegamento": 5,
+        "lingua": "GB",
+        "titolo": "Partially restored"
+      },
+      {
+        "id": 15,
+        "idcollegamento": 5,
+        "lingua": "RU",
+        "titolo": "Частично восстановлено"
+      }
+    ],
+    "id": 5,
+    "codicecondizione": "j90qn87zy1",
+    "id_allegati": "48e2fdfa-7212-457f-83c8-ee9e16407eb6"
+  },
+  {
+    "dettaglicondizione": [
+      {
+        "id": 16,
+        "idcollegamento": 6,
+        "lingua": "I",
+        "titolo": "In costruzione"
+      },
+      {
+        "id": 17,
+        "idcollegamento": 6,
+        "lingua": "GB",
+        "titolo": "Under construction"
+      },
+      {
+        "id": 20,
+        "idcollegamento": 6,
+        "lingua": "RU",
+        "titolo": "Новостройки"
+      }
+    ],
+    "id": 6,
+    "codicecondizione": "f59cr47ps2",
+    "id_allegati": "681aa91f-b202-42b5-8316-d67365c89ec4"
+  },
+  {
+    "dettaglicondizione": [
+      {
+        "id": 18,
+        "idcollegamento": 7,
+        "lingua": "I",
+        "titolo": "Abitabile"
+      },
+      {
+        "id": 19,
+        "idcollegamento": 7,
+        "lingua": "GB",
+        "titolo": "Habitable"
+      },
+      {
+        "id": 21,
+        "idcollegamento": 7,
+        "lingua": "RU",
+        "titolo": "Жилые помещения"
+      }
+    ],
+    "id": 7,
+    "codicecondizione": "x97ai36sn0",
+    "id_allegati": "78eaf816-1588-4cfc-b654-ef97aa7b0236"
+  }
+]

@@ -121,14 +121,22 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
 
                 case "initreferencesdata":
-                    var percorsocontenutitmp = WelcomeLibrary.STATIC.Global.PercorsoContenuti.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Files");
-                    var percorsocomunetmp = WelcomeLibrary.STATIC.Global.PercorsoComune.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione); ;// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Common");
                     var jpathcomplete = new jpath();
-                    jpathcomplete.percorsocomune = percorsocomunetmp;
-                    jpathcomplete.percorsocontenuti = percorsocontenutitmp;
+
+                    var percorsoapptmp = WelcomeLibrary.STATIC.Global.percorsoapp;// CommonPage.ReplaceAbsoluteLinks("~");
+                    jpathcomplete.percorsocdn = WelcomeLibrary.STATIC.Global.percorsocdn;
+                    jpathcomplete.percorsoimg = WelcomeLibrary.STATIC.Global.percorsoimg;
                     jpathcomplete.percorsoexp = WelcomeLibrary.STATIC.Global.percorsoexp;
                     jpathcomplete.usecdn = WelcomeLibrary.STATIC.Global.usecdn;
+                    jpathcomplete.percorsoapp = percorsoapptmp;
+
+
+                    var percorsocontenutitmp = WelcomeLibrary.STATIC.Global.PercorsoContenuti.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Files");
+                    var percorsocomunetmp = WelcomeLibrary.STATIC.Global.PercorsoComune.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione); ;// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Common");
+                    jpathcomplete.percorsocomune = percorsocomunetmp;
+                    jpathcomplete.percorsocontenuti = percorsocontenutitmp;
                     jpathcomplete.username = context.User.Identity.Name;
+
                     //LINGUE/////////////////////////////////////////////////////7
                     var filejsonlanguages = "languages.json";
                     //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
@@ -170,13 +178,21 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     jpathcomplete.jsonprovince = Newtonsoft.Json.JsonConvert.SerializeObject(trifprovince);
                     //////////////////////////////////////////////////////////////
 
+
+                    /*Per immobili*/
                     string linktmp = "";
-                    WelcomeLibrary.DOM.TipologiaOfferte tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000001"); });
+                    WelcomeLibrary.DOM.TipologiaOfferte tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000666"); });
+                    if (tipotmp != null)
+                        linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
+                    jpathcomplete.percorsolistaimmobili = linktmp;
+                    /*Per catalogo*/
+                    linktmp = "";
+                    tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000001"); });
                     if (tipotmp != null)
                         linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
                     jpathcomplete.percorsolistadati = linktmp;
 
-                    Dictionary<string, WelcomeLibrary.DOM.TabrifCollection> retdict = new Dictionary<string, WelcomeLibrary.DOM.TabrifCollection>();
+
 
                     List<Prodotto> listprod = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == lingua);
                     WelcomeLibrary.DOM.TabrifCollection trifprodotti = new TabrifCollection();
@@ -204,7 +220,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     jpathcomplete.jsoncategorie2liv = Newtonsoft.Json.JsonConvert.SerializeObject(trifsprodotti);
 
-
                     WelcomeLibrary.DOM.TabrifCollection tmptipo = new TabrifCollection();
                     if (WelcomeLibrary.UF.Utility.TipologieOfferte != null)
                         foreach (WelcomeLibrary.DOM.TipologiaOfferte p in WelcomeLibrary.UF.Utility.TipologieOfferte)
@@ -217,15 +232,22 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
 
-                    //retdict.Add("JSONrefmetrature", references.refmetrature);
-                    //retdict.Add("JSONrefprezzi", references.refprezzi);
-                    //retdict.Add("JSONrefcondizione", references.refcondizione);
-                    //retdict.Add("JSONreftipocontratto", references.reftipocontratto);
-                    //retdict.Add("JSONreftiporisorse", references.reftiporisorse);
+
+                    //Dictionary<string, WelcomeLibrary.DOM.TabrifCollection> retdict = new Dictionary<string, WelcomeLibrary.DOM.TabrifCollection>();
+                    Dictionary<string, string> retdict = new Dictionary<string, string>();
+
+                    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+                    retdict.Add("JSONrefmetrature", references.refmetrature);
+                    retdict.Add("JSONrefprezzi", references.refprezzi);
+                    retdict.Add("JSONrefcondizione", references.refcondizione);
+                    retdict.Add("JSONreftipocontratto", references.reftipocontratto);
+                    retdict.Add("JSONreftiporisorse", references.reftiporisorse);
                     //retdict.Add("JSONgeogenerale", references.refgeogenerale);
-                    retdict.Add("JSONcar1", Utility.Caratteristiche[0]);
-                    retdict.Add("JSONcar2", Utility.Caratteristiche[1]);
-                    retdict.Add("JSONcar3", Utility.Caratteristiche[2]);
+                    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+
+                    retdict.Add("JSONcar1", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[0]));
+                    retdict.Add("JSONcar2", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[1]));
+                    retdict.Add("JSONcar3", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[2]));
                     jpathcomplete.dictreferences = Newtonsoft.Json.JsonConvert.SerializeObject(retdict, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -556,6 +578,41 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     });
                     ////////////////////////////////////////////////////////////////////////////
                     break;
+                case "getestatefromurl": /*Importazione datatbase immobiliare da gestionale*/
+
+                    string Urlexport = WelcomeLibrary.STATIC.Global.percorsoapp + WelcomeLibrary.STATIC.Global.percorsoexp.TrimEnd('/') + ".zip";
+                    string zippedfile = WelcomeLibrary.STATIC.Global.PercorsoComune + "/_export.zip";
+                    zippedfile = context.Server.MapPath(zippedfile);
+                    WelcomeLibrary.UF.SharedStatic.MakeHttpGet(Urlexport, zippedfile);
+
+                    string destinationfilepath = context.Server.MapPath("~" + WelcomeLibrary.STATIC.Global.percorsoexp);
+                    string originaldir = WelcomeLibrary.STATIC.Global.percorsoexp;
+                    string temporarydir = WelcomeLibrary.STATIC.Global.percorsoexp.TrimEnd('/') + "tmp/";
+                    string tmpdestinationfilepath = context.Server.MapPath("~" + temporarydir);
+
+                    //Utilizzo una dir di appoggio di lavoro temporanea per evitare conflitti sulla lettura dei filese /public/common/_exporttmp/
+                    if (!System.IO.Directory.Exists(tmpdestinationfilepath))
+                        System.IO.Directory.CreateDirectory(tmpdestinationfilepath);
+                    WelcomeLibrary.UF.Utility.UnZip(zippedfile, tmpdestinationfilepath, ""); //Unzip to temporary folder
+                                                                                             //CAMBIO TEMPORANEAMENTE DIRECTORY DI LAVORO PER IL SITO PER EVITARE CONFILITTI DI LOCK PER I FILES
+                    WelcomeLibrary.STATIC.Global.percorsoexp = temporarydir;///////////////
+                    System.Threading.Thread.Sleep(2000); //Attendo eventuali richieste in corso da ultimare
+
+                    //Scompattiamo i nuovi files nella directory finale
+                    WelcomeLibrary.UF.Utility.UnZip(zippedfile, destinationfilepath, "");
+                    //Reimposto la directory originale!!
+                    WelcomeLibrary.STATIC.Global.percorsoexp = originaldir;///////////////
+                    references.CaricaMemoriaStatica(context.Server); //Aggiorno la memoria statica se variata
+
+                    System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+                    Messaggi.Add("Messaggio", "");
+                    Messaggi["Messaggio"] += " Aggiornato correttamente immobili da gestionale " + System.DateTime.Now.ToString();
+                    WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+                    break;
+                case "creasitemapsresources":
+                    //Da fare la gnerazione delle sitemap dal file estates.json
+                    references.CreaSitemapImmobili(context.Server, "rif000666");
+                    break;
 
             }
         }
@@ -827,15 +884,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             tmp.Add("contactlink", contactlink);
             tmp.Add("printlink", printlink);
             tmp.Add("bcklink", bcklink);
-
-
             tmp.Add("link", link);
             tmp.Add("titolo", testotitolo);
             tmp.Add("descrizione", descrizione);
             tmp.Add("datitecnici", datitecnici);
             tmp.Add("image", pathimmagine);
             tmp.Add("video", _o.linkVideo);
-            //DETTAGLI PER LA LISTA COMPLETA ALLEGATI
+
+            //DETTAGLI PER LA LISTA COMPLETA ALLEGATI //////////////////////////////////
             if (filteredData != null && filteredData.Count == 1)  //Si riempiono solo per la scheda singola
             {
                 List<string> imagescomplete = new List<string>();
@@ -859,14 +915,13 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             imagesdesc.Add(a.Descrizione);
                             try
                             {
-
                                 using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
                                 {
                                     imagesratio.Add(((double)tmpimg.Width / (double)tmpimg.Height).ToString());
                                 }
                             }
                             catch
-                            { }
+                            { imagesratio.Add("1"); }
                         }
                         else
                         {
@@ -885,6 +940,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
                 tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
             }
+            ////////////////////////////////////////////////////////////////////////////////////////////
 
             linksurl.Add(_o.Id.ToString(), tmp);
         }

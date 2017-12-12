@@ -12,7 +12,7 @@
 
 
 
-<div id="divContainerb1" class="hidden-xs inject" style="margin: 0px auto; position: relative; display: none; max-width: 1600px;" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
+<!--<div id="divContainerb1" class="hidden-xs inject" style="margin: 0px auto; position: relative; display: none; max-width: 1600px;" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>-->
 
 
 
@@ -27,29 +27,24 @@
     })();
 // ]]></script>
 <div id="divContainerHeadmobile1" class="visible-xs hidden-sm hidden-md hidden-lg" style="display: none;">&nbsp;</div>
-<script>
-    // <![CDATA[
-    (function wait() {
-        if (typeof injectScrollerAndLoad === "function") {
-            injectScrollerAndLoad("owlscrollerProdotti1.html", "divContainerPromo1", "carouselpromo1", "", "rif000001", "", false, true, 12, "", "", "", "true");
-        } else {
-            setTimeout(wait, 50);
-        }
-    })();
-// ]]></script>
+
+<!-- BLOCCO PROMO IMMOBILI -->
 <div style="margin: 50px auto; position: relative; padding: 10px;">
-    <div style="max-width: 1600px; position: relative; margin: 0px auto; background-color: #efefef;" class="paper">
+    <div style="max-width: 1600px; position: relative; margin: 0px auto; background-color: #efefef;">
         <div id="divContainerPromo1Title" class="row" style="display: none;">
             <div class="col-sm-12">
                 <div class="title-block clearfix">
-                    <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 0px; line-height: 40px; color: #444;"><a href="/I/catalogo/promozioni?promozioni=true" target="_self">Promozioni</a></div>
+                    <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 0px; line-height: 40px; color: #444;"><a href="/I/catalogo/promozioni?promozioni=true" target="_self">Proposte</a></div>
                 </div>
-                <small class="mbr-section-subtitle">prodotti artigianali made in Italy</small>
+                <small class="mbr-section-subtitle">immobili selezionati</small>
             </div>
         </div>
-        <div id="divContainerPromo1">&nbsp;</div>
+        <div id="divContainerPromo1" class="hidden-xs inject" style="margin: 0px auto; position: relative; display: none; max-width: 1600px;" params="injectScrollerImmobiliAndLoad,owlscrollerImmobili.html, divContainerPromo1, carouselpromo1, '', 'rif000666', '', false, true, 12, 2, '', true, false"></div>
     </div>
 </div>
+<!-- BLOCCO PROMO IMMOBILI -->
+
+
 <!--  Navigazione catalogo -->
 <script>
     // <![CDATA[

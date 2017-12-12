@@ -193,6 +193,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
     }
     private void InizializzaSeo(Contenuti item)
     {
+        string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         Tabrif actualpagelink = new Tabrif();
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
@@ -203,14 +204,19 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         //string testourlpagina = references.ResMan("Common","I","testoidUrl" + idContenuto).ToString();
         string testourlpagina = item.TitolobyLingua("I");
         string linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "I", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+        linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+            linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit"));
+
+
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
         if (Lingua == "I")
         {
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-            actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = (testourlpagina);
 
         }
@@ -220,16 +226,37 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             //ci = setCulture("GB");
             testourlpagina = item.TitolobyLingua("GB");
             linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+            linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
+
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
             if (Lingua == "GB")
             {
-                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-                actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
+                actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = (testourlpagina);
             }
         }
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"ru\" ";
+            testourlpagina = item.TitolobyLingua("RU");
+            linkcanonicoalt = CommonPage.CreaLinkRoutes(Session, true, "RU", CommonPage.CleanUrl(testourlpagina), item.Id.ToString(), "con001000");
+            linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
 
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
+            if (Lingua == "RU")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
+                actualpagelink.Campo1 = (linkcanonicoalt);
+                actualpagelink.Campo2 = (testourlpagina);
+            }
+        }
 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
         links.Add(actualpagelink);
@@ -547,6 +574,10 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 case "GB":
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
+                    break;
+                case "RU":
+                    customdesc = content.CustomdescRU;
+                    customtitle = content.CustomtitleRU;
                     break;
                 default:
                     customdesc = content.CustomdescI;

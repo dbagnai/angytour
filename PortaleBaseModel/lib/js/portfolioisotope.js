@@ -19,9 +19,9 @@ function InjectPagerPortfolio(pagercontainer, controlid) {
 }
 
 function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
-    setTimeout(function () {
+    //setTimeout(function () {
         loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, lng);
-    }, 100);
+    //}, 100);
 }
 function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
 
@@ -66,6 +66,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             pagerdata["pagerconnectedid"] = connectedid;
             globalObject[controlid + "pagerdata"] = pagerdata;
 
+            params.container = container;/*Inserisco il nome del container nei parametri per uso successivo nel binding*/
             params.tipologia = tipologia;
             params.visualData = visualData;
             params.visualPrezzo = visualPrezzo;
@@ -97,7 +98,6 @@ function CaricaIsotopeData(controlid) {
     //per la lingua usare lng
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[controlid + "params"];
-
     var page = globalObject[controlid + "pagerdata"].page;
     var pagesize = globalObject[controlid + "pagerdata"].pagesize;
     var enablepager = globalObject[controlid + "pagerdata"].enablepager;
@@ -137,14 +137,14 @@ function CaricaIsotopeData(controlid) {
                 var parseddata = JSON.parse(result);
 
                 var temp = parseddata["resultinfo"];
-                localObjects["resultinfo"] = JSON.parse(temp);
-
+                localObjects["resultinfo"] = JSON.parse(temp);//Dictionary parserizzato dei parametri calcolati generali
                 var totalrecords = localObjects["resultinfo"].totalrecords;
                 globalObject[controlid + "pagerdata"].totalrecords = totalrecords;
 
                 var data = "{ \"datalist\":" + parseddata["data"];
                 data += "}";
                 localObjects["dataloaded"] = data;
+
                 var datalink = parseddata["linkloaded"];  //link creati presi da tabella
                 //Inserisco i valori nella memoria generale che contiene i valori per tutti i componenti
                 // globalObject[controlid] = localObjects;
@@ -249,10 +249,6 @@ function BindIsotope(el, localObjects) {
     } catch (e) { $(".loaderrelative").hide(); }
 };
 
-
-function isEven(n) {
-    return n == parseFloat(n) ? !(n % 2) : void 0;
-}
 
 
 function InitIsotopeLocal(controlid) {

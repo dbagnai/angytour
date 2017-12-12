@@ -4,6 +4,11 @@ var jsonlanguages = "";
 var versionforcache = "1";
 var percorsocontenuti = "";
 var percorsocomune = "";
+var percorsoapp = "";
+var percorsocdn = "";
+var percorsoimg = "";
+var percorsoexp = "";
+var percorsolistaimmobili = "";
 var usecdn = false;
 var lng = "I";
 var baseresources = '';
@@ -20,19 +25,24 @@ var jsontipologie = "";
 var percorsolistadati = "";
 var pathAbs = "";
 var username = "";
+var JSONrefmetrature = "";
+var JSONrefprezzi = "";
+var JSONrefcondizione = "";
+var JSONreftipocontratto = "";
+var JSONreftiporisorse = "";
+var JSONreftipocontatto = "";
 var commonhandlerpath = '/lib/hnd/HandlerDataCommon.ashx';
+var resourcehandlerpath = '/lib/hnd/HandlerDataImmobili.ashx';
 var referencesloaded = false;
 var promisecalling = false;
 var callqueque = [];
 var globalObject = {}; //memoria generale per appoggio dati temporanei ( attenzione, usare con id univoci nelle chiamate !)
 
 
-
-
 $(document).ready(function () {
-    searchtaginjectandcall();
+    //searchtaginjectandcall();
 });
-//searchtaginjectandcall();
+searchtaginjectandcall();
 
 /*Seleziona i tag con classe inject e Chiama la funzione specificata nell'attributo params passando i parametri a seguire*/
 function searchtaginjectandcall() {
@@ -42,7 +52,7 @@ function searchtaginjectandcall() {
         var callerid = container.prop("id");
         var itemtocall = {};
         for (var i = 0; i < callerpars.length; i++) {
-            console.log(callerpars[i]);
+          //  console.log(callerpars[i]);
             if (i == 0) {
                 itemtocall = {};
                 itemtocall.args = [];
@@ -57,6 +67,7 @@ function searchtaginjectandcall() {
             }
         }
         //window[itemtocall.name].apply(this, itemtocall.args)//make the call
+        /*Chiamo la funzione controllando se definita, altrimenti attendo che lo sia e la richiamo*/
         (function wait() {
             if (typeof window[itemtocall.name] === "function") {
                 window[itemtocall.name].apply(this, itemtocall.args)//make the call
@@ -97,7 +108,7 @@ function loadref(functocall) {
 
     }
     if (promisecalling)
-        callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise
+        callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise iniziale per inizializzare le referenze base
     else {
         promisecalling = true;
         var promise = initreferencesdata(lingua);
@@ -111,8 +122,14 @@ function loadref(functocall) {
                 var callitem = tmpqueue[i];
                 //callqueque.splice(i, 1);
                 //callqueque.remByName(callitem.name); //tolgo dall'array la chiamata
-                //setTimeout(function () { window[callitem.name].apply(this, callitem.args); }, 50);
-                window[callitem.name].apply(this, callitem.args);//Questa chiama senza promise la funzione finale
+                //window[callitem.name].apply(this, callitem.args);//Questa chiama senza promise la funzione finale
+                (function wait() {
+                    if (typeof window[callitem.name] === "function") {
+                        window[callitem.name].apply(this, callitem.args)//make the call
+                    } else {
+                        setTimeout(wait, 50);
+                    }
+                })();
             }
         });
     }
@@ -121,6 +138,11 @@ function loadref(functocall) {
 function loadvariables(result) {
     //PERCORSI APPLICAZIONE//////////////////////////////////////////////
     var jobj = JSON.parse(result);
+    percorsoapp = jobj["percorsoapp"];
+    percorsocdn = jobj["percorsocdn"];
+    percorsoimg = jobj["percorsoimg"];
+    percorsoexp = jobj["percorsoexp"];
+    percorsolistaimmobili = jobj["percorsolistaimmobili"];
 
     versionforcache = jobj["versionforcache"];
     percorsocomune = jobj["percorsocomune"];
@@ -143,16 +165,24 @@ function loadvariables(result) {
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
     var dictresources = JSON.parse(jobj["dictreferences"]);
     ////console.log(baseresources);
-    //JSONrefmetrature = JSON.parse(dictresources["JSONrefmetrature"]);
-    //JSONrefprezzi = JSON.parse(dictresources["JSONrefprezzi"]);
-    //JSONrefcondizione = JSON.parse(dictresources["JSONrefcondizione"]);
-    //JSONreftipocontratto = JSON.parse(dictresources["JSONreftipocontratto"]);
-    //JSONreftiporisorse = JSON.parse(dictresources["JSONreftiporisorse"]);
+    if (dictresources["JSONrefmetrature"] != null && dictresources["JSONrefmetrature"] != '')
+        JSONrefmetrature = JSON.parse(dictresources["JSONrefmetrature"]);
+    if (dictresources["JSONrefprezzi"] != null && dictresources["JSONrefprezzi"] != '')
+        JSONrefprezzi = JSON.parse(dictresources["JSONrefprezzi"]);
+    if (dictresources["JSONrefcondizione"] != null && dictresources["JSONrefcondizione"] != '')
+        JSONrefcondizione = JSON.parse(dictresources["JSONrefcondizione"]);
+    if (dictresources["JSONreftipocontratto"] != null && dictresources["JSONreftipocontratto"] != '')
+        JSONreftipocontratto = JSON.parse(dictresources["JSONreftipocontratto"]);
+    if (dictresources["JSONreftiporisorse"] != null && dictresources["JSONreftiporisorse"] != '')
+        JSONreftiporisorse = JSON.parse(dictresources["JSONreftiporisorse"]);
     //JSONgeogenerale = JSON.parse(dictresources["JSONgeogenerale"]);
     //JSONcar1 = JSON.parse(dictresources["JSONclasse"]);
-    JSONcar1 = (dictresources["JSONcar1"]);
-    JSONcar2 = (dictresources["JSONcar2"]);
-    JSONcar3 = (dictresources["JSONcar3"]);
+    if (dictresources["JSONcar1"] != null && dictresources["JSONcar1"] != '')
+        JSONcar1 = JSON.parse((dictresources["JSONcar1"]));
+    if (dictresources["JSONcar2"] != null && dictresources["JSONcar2"] != '')
+        JSONcar2 = JSON.parse((dictresources["JSONcar2"]));
+    if (dictresources["JSONcar3"] != null && dictresources["JSONcar3"] != '')
+        JSONcar3 = JSON.parse((dictresources["JSONcar3"]));
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
 
     referencesloaded = true;
@@ -288,8 +318,10 @@ function manageclientstorage(action, key, value, durationhours) {
             console.log("Key in localforage db:" + numberOfKeys);
             if (numberOfKeys != 0)
                 localforage.clear().then(function () {
-                    console.log('clear local memory and reload');
-                    location.reload(true);
+                    console.log('cleared local memory and reload');
+                    //navigate to url withou querystring
+                    window.location.replace(window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1"));
+                   // window.location.reload(true);
 
                 }).catch(function (err) {
                     // This code runs if there were any errors
@@ -1246,6 +1278,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             valore[0] = dataitem[proprarr[0]];
                             var prop = [];
                             var formatfunc = "";
+
                             if ($(this).attr("format") != null) {
                                 formatfunc = $(this).attr("format");
                                 if ($(this).attr("mybind1") != null)
@@ -1643,7 +1676,7 @@ function frmtipologia(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
-function frmprovincia2(localObjects, valore, prop, callback) {
+function frmprovincia(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONgeogenerale);
     //dataroot += "}";
     //dataroot = JSON.parse(dataroot);
@@ -1663,7 +1696,7 @@ function frmprovincia2(localObjects, valore, prop, callback) {
         selvalue = selvalue.toLowerCase();
     callback(selvalue);
 }
-function frmregione2(localObjects, valore, prop, callback) {
+function frmregione(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONgeogenerale);
     //dataroot += "}";
     //dataroot = JSON.parse(dataroot);
@@ -1685,6 +1718,9 @@ function frmregione2(localObjects, valore, prop, callback) {
         selvalue = selvalue.toLowerCase();
     callback(selvalue);
 }
+
+
+
 
 function frmcaratteristica1(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
@@ -2002,6 +2038,11 @@ function sendmessagefixed(title, text) {
     $.Notification.notify('warning', 'top center', title, text);
 
 }
+
+function isEven(n) {
+    return n == parseFloat(n) ? !(n % 2) : void 0;
+}
+
 
 String.prototype.capitalizeFirstLetter = function () {
     return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();

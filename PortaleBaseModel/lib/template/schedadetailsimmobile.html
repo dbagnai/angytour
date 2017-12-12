@@ -1,0 +1,145 @@
+﻿
+<div id="replaceid" itemscope="" itemtype="http://schema.org/Article">
+
+    <span class="pull-right blog-price bind" mybind="Prezzo1" mybind1="nascondiprezzo" format="frmprezzo"></span>
+
+    <h3 style="font-size: 90%">
+        <span class="bind" mybind="idtipologia" format="frmtiporisorsa"></span>
+        <span class="bind" mybind="idcontratto" format="frmcontratto"></span>
+        <span class="bind" mybind="codiceREGIONE" format="frmregione"></span>/
+        <span class="bind" mybind="codicePROVINCIA" format="frmprovincia"></span>/
+        <span class="bind" mybind="codiceCOMUNE"></span>
+    </h3>
+
+    <h1 itemprop="name">
+        <span class="bind" mybind="id.titolo"></span>
+        <br />
+        <span class="bind" mybind="name" style="font-style: italic; text-transform: capitalize; font-size: 80%"></span>
+    </h1>
+    <h3>
+        <span class="bind" mybind="Superficie1" format="frmsuperficie"></span>
+        <span class="bind" mybind="Camere" format="frmcamere"></span>
+        <span class="bind" mybind="bagni" format="frmbagni"></span>
+    </h3>
+    <span class="bind" mybind="codice" format="frmcodice"></span>
+    <!-- Placeholder per la owl gallery -->
+    <div id="plhGallery" class="bind" mybind="id" myvalue="video" format="frmvisibility1"></div>
+
+    <div class="responsive-video" style="display: none">
+        <iframe class="bind" mybind="id.video" frameborder="0" allowfullscreen src=""></iframe>
+    </div>
+
+    <p>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <div class="addthis_inline_share_toolbox"></div>
+    </p>
+
+    <br />
+    <div class="blog-sezione">
+        <span class="bind" mybind="id" myvalue="descrizione" format="formatlabelresource"></span>
+    </div>
+    <span class="bind" mybind="id.descrizionebreve" itemprop="description"></span>
+    <div class="blog-sezione"><span class="bind" mybind="id" myvalue="Dati" format="formatlabelresource"></span></div>
+
+    <div class="table-responsive pull-left">
+        <table class="table hover">
+            <tbody>
+                <tr>
+                    <td>
+                        <b><span class="bind" mybind="id" myvalue="posizione" format="formatlabelresource"></span></b>
+                    </td>
+                    <td>
+                        <span class="bind" mybind="codiceREGIONE" format="frmregione"></span>/
+                        <span class="bind" mybind="codicePROVINCIA" format="frmprovincia"></span>/
+                        <span class="bind" mybind="codiceCOMUNE"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="nome" format="formatlabelresource"></span></b></td>
+                    <td>
+                        <span class="bind" mybind="name"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="contratto" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="idcontratto" format="frmcontratto"></span></td>
+
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="condizioni" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="idcondizione" format="frmcondizione"></span></td>
+
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="metratura" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="Superficie1" format="frmsuperficie"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="camerelbl" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="Camere"></span></td>
+
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="classe" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="cle"></span></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive  pull-left">
+        <table class="table hover">
+            <tbody>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="codice" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="codice"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="tipologia" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="idtipologia" format="frmtiporisorsa"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="prezzo" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="Prezzo1" mybind1="nascondiprezzo" format="frmprezzo"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="terreno" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="Superficie2" format="frmterreno"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="bagnilbl" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="bagni"></span></td>
+                </tr>
+                <tr>
+                    <td><b><span class="bind" mybind="id" myvalue="ipe" format="formatlabelresource"></span></b></td>
+                    <td><span class="bind" mybind="ipe" format="frmipe"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="blog-sezione"><span class="bind" mybind="id" myvalue="caratteristiche" format="formatlabelresource"></span></div>
+    <span class="bind" mybind="id.descrizione"></span>
+    <br />
+
+    <div class="row">
+        <!--<div class="col-sm-4">
+            <a rel="nofollow, noindex" class="bind buttonstyle" target="_self" href="contactlink" title="" mybind="id"><span class="bind" mybind="id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
+        </div>-->
+        <div class="pull-left">
+            <a rel="nofollow, noindex" class="bind buttonstyle" target="_blank" href="printlink" title="" mybind="id"><span class="bind" mybind="id" myvalue="stampa" format="formatlabelresource"></span></a>
+        </div>
+        <div class="pull-left">
+            <a class="bind buttonstyle" target="_self" href="bcklink" title="" mybind="id"><span class="bind" mybind="id" myvalue="testoindietro" format="formatlabelresource"></span></a>
+
+        </div>
+    </div>
+
+</div>
+ 

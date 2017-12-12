@@ -91,7 +91,14 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             {
                 if (Lingua.ToLower() == "gb") Response.RedirectPermanent("~");
             }
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "ru") Response.RedirectPermanent("~");
+            }
 
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
+ 
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);
             Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", false);
@@ -112,7 +119,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         CaricaMenu();
         CaricaBannersAndControls();
-        // SettaTestoIniziale("Home");
+        SettaTestoIniziale("Pannello Ricerca Sito");
         VisualizzaTotaliCarrello();
         LoadJavascriptVariables();
         //  DataBind();
@@ -140,6 +147,27 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         }
     }
+    private void ControlloLingua()
+    {
+        string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
+        // outputContact.Text = Lingua + " " + host + " " + Request.Url.ToString();
+        switch (Lingua)
+        {
+            case "I":
+                if (!host.EndsWith(".it")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit")),true);
+                break;
+            case "GB":
+                if (!host.EndsWith(".com")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen")),true);
+                break;
+            case "RU":
+                if (!host.EndsWith(".ru")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru")),true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
 
     #region GESTIONE MENU E LINKS
 
@@ -248,7 +276,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             ClientScriptManager cs = Page.ClientScript;
             if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
             {
-                cs.RegisterStartupScript(this.GetType(), "cban2",  sb.ToString() , true);
+                cs.RegisterStartupScript(this.GetType(), "cban2", sb.ToString(), true);
             }
         }
         //if (!string.IsNullOrEmpty(controllistBan3))
@@ -544,7 +572,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                         //  ((HtmlGenericControl)linkmenu.Parent.Parent.Parent.Parent).Attributes["class"] += " active";
                         if (linkmenu != null)
                         {
-                            Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent, linkmenu.Parent.ID);
+                            Control lidrop = CommonPage.FindControlRecursive(linkmenu.Parent.Parent.Parent, linkmenu.Parent.Parent.Parent.ID);
                             if (lidrop != null)
                             {
                                 ((HtmlGenericControl)lidrop).Attributes["class"] += " active";
@@ -645,7 +673,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     #endregion
 
-    private void SettaTestoIniziale7(string sezione)
+    private void SettaTestoIniziale(string sezione)
     {
         if (litTextHeadPage.Text == "")
         {
