@@ -208,7 +208,8 @@ namespace WelcomeLibrary.UF
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
                 /////////////////////////////////////
-                if (codicetipologia == "rif000666") cleandenominazione += "-"; //Rendo unici i path immobili aggiungendo in coda     
+                //if (codicetipologia == "rif000666") cleandenominazione += "i";
+                //Rendo unici i path immobili aggiungendo in coda  un - ( altrimenti potrei avere dei casi ambigui tra TBL_ATTIVITA e immobili in quanto non essendo dalla stessa tabella potrei avere id unguali per due elementi diversi )
                 urlRewrited = GeneraRewritingElement(Lingua, codicetipologia, destinationselector, cleandenominazione, id, "scheda");
             }
             else if (string.IsNullOrEmpty(codicetipologia) || codicetipologia.Length != 9)
@@ -765,6 +766,7 @@ namespace WelcomeLibrary.UF
             OleDbParameter p2;
             p2 = new OleDbParameter("@Parametroid", "%;idContenuto," + id + ";%");
             parColl.Add(p2);
+           
             try
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
