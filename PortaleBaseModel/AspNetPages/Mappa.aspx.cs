@@ -11,6 +11,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Collections.Generic;
 using WelcomeLibrary.DAL;
 using WelcomeLibrary.DOM;
+using System.Data.SQLite;
 
 public partial class AspNetPages_Mappa : CommonPage
 {
@@ -104,8 +105,8 @@ public partial class AspNetPages_Mappa : CommonPage
     private void CreaLinkArticoli()
     {
         //litMainContent.Text;
-        List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
-        parColl = new List<System.Data.OleDb.OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+        parColl = new List<SQLiteParameter>();
         offerteDM offDM = new offerteDM();
         WelcomeLibrary.DOM.OfferteCollection lista = new WelcomeLibrary.DOM.OfferteCollection();
 

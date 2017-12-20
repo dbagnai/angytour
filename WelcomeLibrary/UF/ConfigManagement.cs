@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using WelcomeLibrary.DAL;
 
 namespace WelcomeLibrary.UF
@@ -65,13 +65,13 @@ namespace WelcomeLibrary.UF
 			foreach (ConfigItem item in list)
 			{
 				if (connessione == null || connessione == "") return err;
-				List<OleDbParameter> parColl = new List<OleDbParameter>();
+				List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
-				OleDbParameter p2 = new OleDbParameter("@Codice", item.Codice);
+				SQLiteParameter p2 = new SQLiteParameter("@Codice", item.Codice);
 				parColl.Add(p2);
-				OleDbParameter p3 = new OleDbParameter("@Valore", item.Valore);
+				SQLiteParameter p3 = new SQLiteParameter("@Valore", item.Valore);
 				parColl.Add(p3);
-				OleDbParameter p4 = new OleDbParameter("@Gruppo", item.Gruppo);
+				SQLiteParameter p4 = new SQLiteParameter("@Gruppo", item.Gruppo);
 				parColl.Add(p4);
 
 
@@ -120,7 +120,7 @@ namespace WelcomeLibrary.UF
 			try
 			{
 
-				OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+				SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
 				using (reader)
 				{
 					if (reader == null) { return; };

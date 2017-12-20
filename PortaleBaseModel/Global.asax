@@ -2,10 +2,9 @@
 <%@ Assembly Name="System.Configuration" %>
 <%@ Assembly Name="System.Web" %>
 <%@ Import Namespace="System.Web.Routing" %>
+<%@ Import Namespace="System.Data.SQLite" %>
 
 <script RunAt="server">
-
-
 
     //////////////////////////////////////////////////////////////////////////////
     /////KEEP ALIVE TIMER///////////////////////////////////////
@@ -215,9 +214,9 @@
 
             //Carichiamo la lista delle offerte totale
             WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
-            List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
-            parColl = new List<System.Data.OleDb.OleDbParameter>();
-            //System.Data.OleDb.OleDbParameter ptipo = new System.Data.OleDb.OleDbParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            parColl = new List<SQLiteParameter>();
+            //SQLiteParameter ptipo = new SQLiteParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
             //parColl.Add(ptipo);
 
             //VA' CREATO UN FILTRO PER LA GENERAZIONE

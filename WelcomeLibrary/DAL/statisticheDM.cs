@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using WelcomeLibrary.DOM;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -19,30 +19,30 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public static void InserisciAggiorna(string connessione, Statistiche item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@Idattivita", item.Idattivita);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Idattivita", item.Idattivita);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@EmailDestinatario", item.EmailDestinatario);//OleDbType.VarChar
+            SQLiteParameter p2 = new SQLiteParameter("@EmailDestinatario", item.EmailDestinatario);//OleDbType.VarChar
             parColl.Add(p2);
-            OleDbParameter p2b = new OleDbParameter("@EmailMittente", item.EmailMittente);//OleDbType.VarChar
+            SQLiteParameter p2b = new SQLiteParameter("@EmailMittente", item.EmailMittente);//OleDbType.VarChar
             parColl.Add(p2b);
            // string _tmp = enumclass.TipoContatto.visitaurl.ToString();
 
-            OleDbParameter p3 = new OleDbParameter("@TipoContatto", item.TipoContatto);//OleDbType.VarChar
+            SQLiteParameter p3 = new SQLiteParameter("@TipoContatto", item.TipoContatto);//OleDbType.VarChar
             parColl.Add(p3);
-            OleDbParameter p5 = new OleDbParameter("@Url", item.Url);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@Url", item.Url);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p4 = null;
+            SQLiteParameter p4 = null;
             if (item.Data != null && item.Data != DateTime.MinValue)
-                p4 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow(item.Data));
+                p4 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow(item.Data));
             else
-                p4 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                p4 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.OleDbType = OleDbType.Date;
             parColl.Add(p4);
 
-            OleDbParameter p6 = new OleDbParameter("@Testomail", item.Testomail);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@Testomail", item.Testomail);//OleDbType.VarChar
             parColl.Add(p6);
 
             string query = "";

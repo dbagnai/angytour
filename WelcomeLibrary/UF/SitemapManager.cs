@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using WelcomeLibrary.DOM;
 using System.Text.RegularExpressions;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using WelcomeLibrary.DAL;
 
 namespace WelcomeLibrary.UF
@@ -20,10 +20,10 @@ namespace WelcomeLibrary.UF
             //  if (urltoredirect == null || urltoredirect == "") { return null; };
 
             string query = "SELECT * FROM TBL_redirect where originalUrl like @urltoredirect";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@urltoredirect", urltoredirect);//OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@urltoredirect", urltoredirect);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
             Tabrif item = new Tabrif();
             using (reader)
             {
@@ -608,10 +608,10 @@ namespace WelcomeLibrary.UF
             try
             {
                 string query = "SELECT * FROM TBL_URLREWRITING WHERE Calledurl=@Calledurl";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@Calledurl", calledurl);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@Calledurl", calledurl);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -647,7 +647,7 @@ namespace WelcomeLibrary.UF
         }
         public static void InserisciAggiornaUrlrewrite(string connessione, Tabrif item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (string.IsNullOrEmpty(item.Codice.Trim()) || string.IsNullOrEmpty(item.Campo1.Trim())) return;
 
@@ -657,17 +657,17 @@ namespace WelcomeLibrary.UF
             {
                 item.Id = itemindb.Id;
             }
-            OleDbParameter p1 = new OleDbParameter("@Calledurl", item.Codice);
+            SQLiteParameter p1 = new SQLiteParameter("@Calledurl", item.Codice);
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Pathdestinazione", item.Campo1);
+            SQLiteParameter p2 = new SQLiteParameter("@Pathdestinazione", item.Campo1);
             parColl.Add(p2);
-            OleDbParameter p2b = new OleDbParameter("@Parametri", item.Campo2);
+            SQLiteParameter p2b = new SQLiteParameter("@Parametri", item.Campo2);
             parColl.Add(p2b);
 
             int i = 0;
             if (item.Intero1 != null)
                 i = item.Intero1.Value;
-            OleDbParameter p2c = new OleDbParameter("@Relatedid", i);
+            SQLiteParameter p2c = new SQLiteParameter("@Relatedid", i);
             parColl.Add(p2c);
 
             string query = "";
@@ -700,12 +700,12 @@ namespace WelcomeLibrary.UF
         public static int EliminaUrlrewrite(string connessione, Tabrif item)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_URLREWRITING WHERE ( Calledurl = @Calledurl ) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@Calledurl", item.Codice);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@Calledurl", item.Codice);
             parColl.Add(p1);
             try
             {
@@ -727,18 +727,18 @@ namespace WelcomeLibrary.UF
         public static int EliminaUrlrewritebyIdOfferta(string connessione, string id)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_URLREWRITING WHERE ( ( Calledurl like @Calledurl or Parametri like @Parametroid ) and ( Parametri like '%idOfferta%' ) and ( Parametri not like @Parametroexcludi )) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@Calledurl", "%-" + id);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@Calledurl", "%-" + id);
             parColl.Add(p1);
-            OleDbParameter p2;
-            p2 = new OleDbParameter("@Parametroid", "%;idOfferta," + id + ";%");
+            SQLiteParameter p2;
+            p2 = new SQLiteParameter("@Parametroid", "%;idOfferta," + id + ";%");
             parColl.Add(p2);
-            OleDbParameter pexc;
-            pexc = new OleDbParameter("@Parametroexcludi", "%Tipologia,rif000666%");
+            SQLiteParameter pexc;
+            pexc = new SQLiteParameter("@Parametroexcludi", "%Tipologia,rif000666%");
             parColl.Add(pexc);
 
             try
@@ -756,15 +756,15 @@ namespace WelcomeLibrary.UF
         public static int EliminaUrlrewritebyIdContenuto(string connessione, string id)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_URLREWRITING WHERE ( Calledurl like @Calledurl or Parametri like @Parametroid ) and ( Parametri like '%idContenuto%' )  ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@Calledurl", "%-" + id);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@Calledurl", "%-" + id);
             parColl.Add(p1);
-            OleDbParameter p2;
-            p2 = new OleDbParameter("@Parametroid", "%;idContenuto," + id + ";%");
+            SQLiteParameter p2;
+            p2 = new SQLiteParameter("@Parametroid", "%;idContenuto," + id + ";%");
             parColl.Add(p2);
            
             try

@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 public partial class _SchedaProdotto : CommonPage
 {
@@ -366,22 +366,22 @@ public partial class _SchedaProdotto : CommonPage
         divSuggeriti.Visible = true;
 
         OfferteCollection offerte = new OfferteCollection();
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
         if (CodiceTipologia != "" && CodiceTipologia != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", CodiceTipologia);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", CodiceTipologia);
             parColl.Add(p3);
         }
         else return;
         if (item.Caratteristica1.ToString() != "" && item.Caratteristica1.ToString() != "0") //marca
         {
-            OleDbParameter pcaratteristica1 = new OleDbParameter("@Caratteristica1", item.Caratteristica1);
+            SQLiteParameter pcaratteristica1 = new SQLiteParameter("@Caratteristica1", item.Caratteristica1);
             parColl.Add(pcaratteristica1);
         }
         //if (caratteristica2 != "" && caratteristica2 != "0") //modello
         //{
-        //    OleDbParameter pcaratteristica2 = new OleDbParameter("@Caratteristica2", caratteristica2);
+        //    SQLiteParameter pcaratteristica2 = new SQLiteParameter("@Caratteristica2", caratteristica2);
         //    parColl.Add(pcaratteristica2);
         //}
         offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "12", Lingua, null);
@@ -1060,16 +1060,16 @@ public partial class _SchedaProdotto : CommonPage
         if (string.IsNullOrEmpty(tipologiadacaricare))
             tipologiadacaricare = "rif000001,rif000002,rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,,rif000009";
 
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
         if (tipologiadacaricare != "" && tipologiadacaricare != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
             parColl.Add(p3);
         }
         if (categoria != "")
         {
-            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", categoria);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", categoria);
             parColl.Add(p7);
         }
 

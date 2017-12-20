@@ -14,7 +14,7 @@ using WelcomeLibrary.DAL;
 using WelcomeLibrary.UF;
 using System.IO;
 using System.Drawing.Imaging;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Text;
 
 public partial class AreaContenuti_GestioneSoci : CommonPage
@@ -224,18 +224,18 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         {
 
             #region Versione con db ACCESS
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
             //if (tipologia == "") tipologia = "%";
             if (TipologiaOfferte != "")
             {
-                OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
                 parColl.Add(p3);
             }
             if (testoricerca.Trim() != "")
             {
                 testoricerca = testoricerca.Replace(" ", "%");
-                OleDbParameter p7 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+                SQLiteParameter p7 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
                 parColl.Add(p7);
             }
 
@@ -245,19 +245,19 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     statoblocco = rdBloccati.SelectedValue;
                 bool _statoblocco = false;
                 bool.TryParse(statoblocco, out _statoblocco);
-                OleDbParameter pstatoblocco = new OleDbParameter("@Bloccoaccesso_dts", _statoblocco);
+                SQLiteParameter pstatoblocco = new SQLiteParameter("@Bloccoaccesso_dts", _statoblocco);
                 parColl.Add(pstatoblocco);
             }
             if (stringafiltropagamenti.Trim() != "")
             {
                 stringafiltropagamenti = stringafiltropagamenti.Replace(" ", "%");
-                OleDbParameter pstringafiltropagamenti = new OleDbParameter("@stringafiltropagamenti", "%" + stringafiltropagamenti + "%");
+                SQLiteParameter pstringafiltropagamenti = new SQLiteParameter("@stringafiltropagamenti", "%" + stringafiltropagamenti + "%");
                 parColl.Add(pstringafiltropagamenti);
             }
 
             if (ddlFiltroTrattamenti.SelectedValue.Trim() != "")
             {
-                OleDbParameter pstringafiltrotrattamenti = new OleDbParameter("@stringafiltrotrattamenti", "%" + ddlFiltroTrattamenti.SelectedValue + "%");
+                SQLiteParameter pstringafiltrotrattamenti = new SQLiteParameter("@stringafiltrotrattamenti", "%" + ddlFiltroTrattamenti.SelectedValue + "%");
                 parColl.Add(pstringafiltrotrattamenti);
             }
             if (mese.Trim() != "" || anno.Trim() != "")
@@ -268,12 +268,12 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 int.TryParse(mese, out _m);
                 if (_a != 0)
                 {
-                    OleDbParameter p8 = new OleDbParameter("@annofiltro", _a); //Data registr. ordine
+                    SQLiteParameter p8 = new SQLiteParameter("@annofiltro", _a); //Data registr. ordine
                     parColl.Add(p8);
                 }
                 if (_m != 0)
                 {
-                    OleDbParameter p9 = new OleDbParameter("@mesefiltro", _m); //Data registr. ordine
+                    SQLiteParameter p9 = new SQLiteParameter("@mesefiltro", _m); //Data registr. ordine
                     parColl.Add(p9);
                 }
             }
@@ -282,36 +282,36 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             if (ddlNazioneRicerca.SelectedValue.Trim() != "")
             {
                 string valorenaz = ddlNazioneRicerca.SelectedValue.Trim().Replace(" ", "%");
-                OleDbParameter pstringafiltronaz = new OleDbParameter("@CodiceNAZIONE", "%" + valorenaz + "%");
+                SQLiteParameter pstringafiltronaz = new SQLiteParameter("@CodiceNAZIONE", "%" + valorenaz + "%");
                 parColl.Add(pstringafiltronaz);
             }
             if (ddlRegioneRicerca.SelectedValue.Trim() != "")
             {
                 string valorereg = ddlRegioneRicerca.SelectedValue.Trim().Replace(" ", "%");
-                OleDbParameter pstringafiltroreg = new OleDbParameter("@CodiceREGIONE", "%" + valorereg + "%");
+                SQLiteParameter pstringafiltroreg = new SQLiteParameter("@CodiceREGIONE", "%" + valorereg + "%");
                 parColl.Add(pstringafiltroreg);
             }
             if (ddlProvinciaRicerca.SelectedValue.Trim() != "")
             {
                 string valorepro = ddlProvinciaRicerca.SelectedValue.Trim().Replace(" ", "%");
-                OleDbParameter pstringafiltropro = new OleDbParameter("@CodicePROVINCIA", "%" + valorepro + "%");
+                SQLiteParameter pstringafiltropro = new SQLiteParameter("@CodicePROVINCIA", "%" + valorepro + "%");
                 parColl.Add(pstringafiltropro);
             }
             if (ddlComuneRicerca.SelectedValue.Trim() != "")
             {
                 string valorecom = ddlComuneRicerca.SelectedValue.Trim().Replace(" ", "%");
-                OleDbParameter pstringafiltrocom = new OleDbParameter("@CodiceCOMUNE", "%" + valorecom + "%");
+                SQLiteParameter pstringafiltrocom = new SQLiteParameter("@CodiceCOMUNE", "%" + valorecom + "%");
                 parColl.Add(pstringafiltrocom);
             }
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
-            //    OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", CodiceProdottoRicerca);
+            //    SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdottoRicerca);
             //    parColl.Add(p7);
             //}
             //if (ddlSProdottoRicerca.SelectedValue != "")
             //{
-            //    OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
+            //    SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
             //    parColl.Add(p8);
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
@@ -4645,14 +4645,14 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         //CODICE FISCALE
         //EMAIL
         System.Text.StringBuilder sb = new StringBuilder();
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
         if (TipologiaOfferte != "")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
             parColl.Add(p3);
         }
         bool _statoblocco = false;
-        OleDbParameter pstatoblocco = new OleDbParameter("@Bloccoaccesso_dts", _statoblocco);
+        SQLiteParameter pstatoblocco = new SQLiteParameter("@Bloccoaccesso_dts", _statoblocco);
         parColl.Add(pstatoblocco);
         OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "Cognome_dts", false);
 

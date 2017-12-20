@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using System.Data.OleDb;
 using System.Collections.Generic;
 using System.Text;
 using WelcomeLibrary.DOM;
 using System.Xml;
 using WelcomeLibrary.UF;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -35,7 +35,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="parColl"></param>
         /// <param name="maxrecord"></param>
         /// <returns></returns>
-        public OfferteCollection CaricaOfferteFiltrate(string connection, List<OleDbParameter> parColl, string maxrecord = "", string LinguaFiltro = "", bool? filtrocatalogo = null,
+        public OfferteCollection CaricaOfferteFiltrate(string connection, List<SQLiteParameter> parColl, string maxrecord = "", string LinguaFiltro = "", bool? filtrocatalogo = null,
             string campoordinamento = "", bool includiarchiviati = false)
         {
             OfferteCollection list = new OfferteCollection();
@@ -45,21 +45,135 @@ namespace WelcomeLibrary.DAL
             Offerte item;
             try
             {
-                List<OleDbParameter> _parUsed = new List<OleDbParameter>();
-                string query = "";
-                if (string.IsNullOrEmpty(maxrecord))
-                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
-                else
-                    query = "SELECT  TOP " + maxrecord + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts ";
+                List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
+					
+				StringBuilder queryCols = new StringBuilder();
+				queryCols.AppendLine("A.ID ");
+				queryCols.AppendLine(", A.Id_dts_collegato ");
+				queryCols.AppendLine(", A.CodiceNazione ");
+				queryCols.AppendLine(", A.CodiceREGIONE ");
+				queryCols.AppendLine(", A.CodicePROVINCIA ");
+				queryCols.AppendLine(", A.CodiceCOMUNE ");
+				queryCols.AppendLine(", A.CodiceTIPOLOGIA ");
+				queryCols.AppendLine(", A.WEBSITE ");
+				queryCols.AppendLine(", A.EMAIL ");
+				queryCols.AppendLine(", A.TELEFONO ");
+				queryCols.AppendLine(", A.FAX ");
+				queryCols.AppendLine(", A.INDIRIZZO ");
+				queryCols.AppendLine(", A.DENOMINAZIONEGB ");
+				queryCols.AppendLine(", A.DENOMINAZIONEI ");
+				queryCols.AppendLine(", A.DESCRIZIONEI ");
+				queryCols.AppendLine(", A.DESCRIZIONEGB ");
+				queryCols.AppendLine(", A.DATITECNICII ");
+				queryCols.AppendLine(", A.DATITECNICIGB ");
+				queryCols.AppendLine(", A.FotoSchema ");
+				queryCols.AppendLine(", A.FotoValori ");
+				queryCols.AppendLine(", A.Datainserimento ");
+				queryCols.AppendLine(", A.CodiceProdotto ");
+				queryCols.AppendLine(", A.CodiceCategoria ");
+				queryCols.AppendLine(", A.CodiceCategoria2Liv ");
+				queryCols.AppendLine(", A.Prezzo ");
+				queryCols.AppendLine(", A.PrezzoListino ");
+				queryCols.AppendLine(", A.Vetrina ");
+				queryCols.AppendLine(", A.AbilitaContatto ");
+				queryCols.AppendLine(", A.linkVideo ");
+				queryCols.AppendLine(", A.Campo1I ");
+				queryCols.AppendLine(", A.Campo2I ");
+				queryCols.AppendLine(", A.Campo1GB ");
+				queryCols.AppendLine(", A.Campo2GB ");
+				queryCols.AppendLine(", A.Id_collegato ");
+				queryCols.AppendLine(", A.Caratteristica1 ");
+				queryCols.AppendLine(", A.Caratteristica2 ");
+				queryCols.AppendLine(", A.Anno ");
+				queryCols.AppendLine(", A.Archiviato ");
+				queryCols.AppendLine(", A.Caratteristica3 ");
+				queryCols.AppendLine(", A.Caratteristica4 ");
+				queryCols.AppendLine(", A.Caratteristica5 ");
+				queryCols.AppendLine(", A.Caratteristica6 ");
+				queryCols.AppendLine(", A.Autore ");
+				queryCols.AppendLine(", A.XmlValue ");
+				queryCols.AppendLine(", A.Data1 ");
+				queryCols.AppendLine(", A.DENOMINAZIONERU ");
+				queryCols.AppendLine(", A.DESCRIZIONERU ");
+				queryCols.AppendLine(", A.DATITECNICIRU ");
+				queryCols.AppendLine(", A.Campo1RU ");
+				queryCols.AppendLine(", A.Campo2RU ");
+				queryCols.AppendLine(", A.Promozione ");
+				queryCols.AppendLine(", A.Qta_vendita ");
+				queryCols.AppendLine(", B.ID_DTS ");
+				queryCols.AppendLine(", B.pivacf_dts ");
+				queryCols.AppendLine(", B.nome_dts ");
+				queryCols.AppendLine(", B.cognome_dts ");
+				queryCols.AppendLine(", B.datanascita_dts ");
+				queryCols.AppendLine(", B.sociopresentatore1_dts ");
+				queryCols.AppendLine(", B.sociopresentatore2_dts ");
+				queryCols.AppendLine(", B.telefonoprivato_dts ");
+				queryCols.AppendLine(", B.annolaurea_dts ");
+				queryCols.AppendLine(", B.annospecializzazione_dts ");
+				queryCols.AppendLine(", B.altrespecializzazioni_dts ");
+				queryCols.AppendLine(", B.socioSicpre_dts ");
+				queryCols.AppendLine(", B.socioIsaps_dts ");
+				queryCols.AppendLine(", B.socioaltraassociazione_dts ");
+				queryCols.AppendLine(", B.trattamenticollegati_dts ");
+				queryCols.AppendLine(", B.accettazioneStatuto_dts ");
+				queryCols.AppendLine(", B.certificazione_dts ");
+				queryCols.AppendLine(", B.emailriservata_dts ");
+				queryCols.AppendLine(", B.CodiceNAZIONE1_dts ");
+				queryCols.AppendLine(", B.CodiceREGIONE1_dts ");
+				queryCols.AppendLine(", B.CodicePROVINCIA1_dts ");
+				queryCols.AppendLine(", B.CodiceCOMUNE1_dts ");
+				queryCols.AppendLine(", B.CodiceNAZIONE2_dts ");
+				queryCols.AppendLine(", B.CodiceREGIONE2_dts ");
+				queryCols.AppendLine(", B.CodicePROVINCIA2_dts ");
+				queryCols.AppendLine(", B.CodiceCOMUNE2_dts ");
+				queryCols.AppendLine(", B.CodiceNAZIONE3_dts ");
+				queryCols.AppendLine(", B.CodiceREGIONE3_dts ");
+				queryCols.AppendLine(", B.CodicePROVINCIA3_dts ");
+				queryCols.AppendLine(", B.CodiceCOMUNE3_dts ");
+				queryCols.AppendLine(", B.latitudine1_dts ");
+				queryCols.AppendLine(", B.longitudine1_dts ");
+				queryCols.AppendLine(", B.latitudine2_dts ");
+				queryCols.AppendLine(", B.longitudine2_dts ");
+				queryCols.AppendLine(", B.latitudine3_dts ");
+				queryCols.AppendLine(", B.longitudine3_dts ");
+				queryCols.AppendLine(", B.bloccoaccesso_dts ");
+				queryCols.AppendLine(", B.via1_dts ");
+				queryCols.AppendLine(", B.cap1_dts ");
+				queryCols.AppendLine(", B.nomeposizione1_dts ");
+				queryCols.AppendLine(", B.telefono1_dts ");
+				queryCols.AppendLine(", B.via2_dts ");
+				queryCols.AppendLine(", B.cap2_dts ");
+				queryCols.AppendLine(", B.nomeposizione2_dts ");
+				queryCols.AppendLine(", B.telefono2_dts ");
+				queryCols.AppendLine(", B.via3_dts ");
+				queryCols.AppendLine(", B.cap3_dts ");
+				queryCols.AppendLine(", B.nomeposizione3_dts ");
+				queryCols.AppendLine(", B.telefono3_dts ");
+				queryCols.AppendLine(", B.pagamenti_dts ");
+				queryCols.AppendLine(", B.ricfatt_dts ");
+				queryCols.AppendLine(", B.indirizzofatt_dts ");
+				queryCols.AppendLine(", B.noteriservate_dts ");
+				queryCols.AppendLine(", B.niscrordine_dts ");
+				queryCols.AppendLine(", B.annofrequenza_dts ");
+				queryCols.AppendLine(", B.nomeuniversita_dts ");
+				queryCols.AppendLine(", B.dettagliuniversita_dts ");
+				queryCols.AppendLine(", B.Boolfields_dts ");
+				queryCols.AppendLine(", B.Textfield1_dts ");
+				queryCols.AppendLine(", B.Interventieseguiti_dts ");
+				queryCols.AppendLine(", B.locordine_dts ");
 
-                //Inseriamo il codice di join per la pabella dettagli
-                query += "";
 
 
+					 string query = "";
+					query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id"; }))
+					 //Inseriamo il codice di join per la pabella dettagli
+					query += "";
+
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; }))
                 {
-                    OleDbParameter pidvalue = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id"; });
+                    SQLiteParameter pidvalue = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; });
                     _parUsed.Add(pidvalue);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Id like @Id ";
@@ -67,9 +181,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND Id like @Id  ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@IdList"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; }))
                 {
-                    OleDbParameter pidlist = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@IdList"; });
+                    SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; });
                     string listaid = pidlist.Value.ToString();
 
                     string[] listaarray = listaid.Split(',');
@@ -89,18 +203,18 @@ namespace WelcomeLibrary.DAL
                 }
 
                 //Per ogni parametro vedo se esiste e lo inserisco nello script
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; }))
                 {
-                    OleDbParameter pnaz = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
+                    SQLiteParameter pnaz = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
                     _parUsed.Add(pnaz);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
                     else
                         query += " AND  ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
                 {
-                    OleDbParameter preg = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; });
+                    SQLiteParameter preg = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; });
                     _parUsed.Add(preg);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
@@ -108,18 +222,18 @@ namespace WelcomeLibrary.DAL
                         query += " AND  ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
                 }
                 //Per ogni parametro vedo se esiste e lo inserisco nello script
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; }))
                 {
-                    OleDbParameter pprov = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; });
+                    SQLiteParameter pprov = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; });
                     _parUsed.Add(pprov);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA ) ";
                     else
                         query += " AND  ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA )   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; }))
                 {
-                    OleDbParameter pcom = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; });
+                    SQLiteParameter pcom = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; });
                     _parUsed.Add(pcom);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE ) ";
@@ -128,10 +242,10 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; }))
                 {
 
-                    OleDbParameter ptip = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; });
+                    SQLiteParameter ptip = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; });
                     if (!ptip.Value.ToString().Contains(","))
                     {
                         _parUsed.Add(ptip);
@@ -160,9 +274,9 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_collegato"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_collegato"; }))
                 {
-                    OleDbParameter pId_collegato = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_collegato"; });
+                    SQLiteParameter pId_collegato = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_collegato"; });
                     _parUsed.Add(pId_collegato);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Id_collegato like @Id_collegato ";
@@ -187,10 +301,10 @@ namespace WelcomeLibrary.DAL
                     }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; }))
                 {
-                    OleDbParameter _pabilc = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; });
-                    OleDbParameter pabilc = new OleDbParameter(_pabilc.ParameterName, _pabilc.Value);
+                    SQLiteParameter _pabilc = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Abilitacontatto"; });
+                    SQLiteParameter pabilc = new SQLiteParameter(_pabilc.ParameterName, _pabilc.Value);
 
                     _parUsed.Add(pabilc);
                     if (!query.ToLower().Contains("where"))
@@ -198,10 +312,10 @@ namespace WelcomeLibrary.DAL
                     else
                         query += " AND Abilitacontatto = @Abilitacontatto ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Archiviato"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Archiviato"; }))
                 {
-                    OleDbParameter _parch = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Archiviato"; });
-                    OleDbParameter parch = new OleDbParameter(_parch.ParameterName, _parch.Value);
+                    SQLiteParameter _parch = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Archiviato"; });
+                    SQLiteParameter parch = new SQLiteParameter(_parch.ParameterName, _parch.Value);
 
                     _parUsed.Add(parch);
                     if (!query.ToLower().Contains("where"))
@@ -210,9 +324,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND Archiviato = @Archiviato ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; }))
                 {
-                    OleDbParameter _parch = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; });
+                    SQLiteParameter _parch = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; });
                     try
                     {
                         bool _par = Convert.ToBoolean(_parch.Value);
@@ -238,54 +352,54 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; }))
                 {
-                    OleDbParameter ppmin = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
+                    SQLiteParameter ppmin = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
                     _parUsed.Add(ppmin);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Prezzo >= @PrezzoMin ";
                     else
                         query += " AND Prezzo >= @PrezzoMin  ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
                 {
-                    OleDbParameter ppmax = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
+                    SQLiteParameter ppmax = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
                     _parUsed.Add(ppmax);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE  Prezzo <= @PrezzoMax  ";
                     else
                         query += " AND  Prezzo <= @PrezzoMax   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
                 {
-                    OleDbParameter pcat = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
+                    SQLiteParameter pcat = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
                     _parUsed.Add(pcat);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE CodiceCategoria like @CodiceCategoria ";
                     else
                         query += " AND CodiceCategoria like @CodiceCategoria  ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; }))
                 {
-                    OleDbParameter pcat2liv = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; });
+                    SQLiteParameter pcat2liv = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; });
                     _parUsed.Add(pcat2liv);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE CodiceCategoria2Liv like @CodiceCategoria2Liv ";
                     else
                         query += " AND CodiceCategoria2Liv like @CodiceCategoria2Liv  ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Vetrina"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Vetrina"; }))
                 {
-                    OleDbParameter vetrina = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Vetrina"; });
+                    SQLiteParameter vetrina = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Vetrina"; });
                     _parUsed.Add(vetrina);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Vetrina = @Vetrina ";
                     else
                         query += " AND  Vetrina = @Vetrina   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@promozioni"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; }))
                 {
-                    OleDbParameter promozione = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@promozioni"; });
+                    SQLiteParameter promozione = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; });
                     _parUsed.Add(promozione);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Promozione = @promozioni ";
@@ -295,27 +409,27 @@ namespace WelcomeLibrary.DAL
 
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
                 {
-                    OleDbParameter Caratteristica1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
+                    SQLiteParameter Caratteristica1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
                     _parUsed.Add(Caratteristica1);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica1 = @Caratteristica1 ";
                     else
                         query += " AND  Caratteristica1 = @Caratteristica1   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; }))
                 {
-                    OleDbParameter Caratteristica2 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; });
+                    SQLiteParameter Caratteristica2 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; });
                     _parUsed.Add(Caratteristica2);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica2 = @Caratteristica2 ";
                     else
                         query += " AND  Caratteristica2 = @Caratteristica2   ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; }))
                 {
-                    OleDbParameter Caratteristica3 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; });
+                    SQLiteParameter Caratteristica3 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; });
                     _parUsed.Add(Caratteristica3);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica3 = @Caratteristica3 ";
@@ -323,27 +437,27 @@ namespace WelcomeLibrary.DAL
                         query += " AND  Caratteristica3 = @Caratteristica3   ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; }))
                 {
-                    OleDbParameter Caratteristica4 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; });
+                    SQLiteParameter Caratteristica4 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; });
                     _parUsed.Add(Caratteristica4);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica4 = @Caratteristica4 ";
                     else
                         query += " AND  Caratteristica4 = @Caratteristica4  ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; }))
                 {
-                    OleDbParameter Caratteristica5 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; });
+                    SQLiteParameter Caratteristica5 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; });
                     _parUsed.Add(Caratteristica5);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica5 = @Caratteristica5 ";
                     else
                         query += " AND  Caratteristica5 = @Caratteristica5 ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; }))
                 {
-                    OleDbParameter Caratteristica6 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; });
+                    SQLiteParameter Caratteristica6 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; });
                     _parUsed.Add(Caratteristica6);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Caratteristica6 = @Caratteristica6 ";
@@ -351,9 +465,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND  Caratteristica6 = @Caratteristica6 ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Anno"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Anno"; }))
                 {
-                    OleDbParameter Carannao = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Anno"; });
+                    SQLiteParameter Carannao = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Anno"; });
                     _parUsed.Add(Carannao);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Anno = @Anno ";
@@ -362,9 +476,9 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@testoricerca"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@testoricerca"; }))
                 {
-                    OleDbParameter testoricerca = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@testoricerca"; });
+                    SQLiteParameter testoricerca = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@testoricerca"; });
                     _parUsed.Add(testoricerca);
                     if (!query.ToLower().Contains("where"))
                     {
@@ -383,9 +497,9 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; }))
                 {
-                    OleDbParameter stringafiltropagamenti = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; });
+                    SQLiteParameter stringafiltropagamenti = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; });
                     _parUsed.Add(stringafiltropagamenti);
                     if (!query.ToLower().Contains("where"))
                     {
@@ -396,9 +510,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND  ( Pagamenti_dts like @stringafiltropagamenti )   ";
                     }
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; }))
                 {
-                    OleDbParameter stringafiltrotrattamenti = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; });
+                    SQLiteParameter stringafiltrotrattamenti = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; });
                     _parUsed.Add(stringafiltrotrattamenti);
                     if (!query.ToLower().Contains("where"))
                     {
@@ -412,15 +526,15 @@ namespace WelcomeLibrary.DAL
 
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio"; })
-                    && parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; })
+                    && parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; }))
                 {
-                    OleDbParameter _datainizio = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio"; });
-                    OleDbParameter datainizio = new OleDbParameter(_datainizio.ParameterName, _datainizio.Value);
+                    SQLiteParameter _datainizio = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; });
+                    SQLiteParameter datainizio = new SQLiteParameter(_datainizio.ParameterName, _datainizio.Value);
                     _parUsed.Add(datainizio);
 
-                    OleDbParameter _datafine = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine"; });
-                    OleDbParameter datafine = new OleDbParameter(_datafine.ParameterName, _datafine.Value);
+                    SQLiteParameter _datafine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; });
+                    SQLiteParameter datafine = new SQLiteParameter(_datafine.ParameterName, _datafine.Value);
                     _parUsed.Add(datafine);
 
                     if (!query.ToLower().Contains("where"))
@@ -429,15 +543,15 @@ namespace WelcomeLibrary.DAL
                         query += " AND   ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; })
-              && parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine1"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; })
+              && parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine1"; }))
                 {
-                    OleDbParameter _datainizio1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; });
-                    OleDbParameter datainizio1 = new OleDbParameter(_datainizio1.ParameterName, _datainizio1.Value);
+                    SQLiteParameter _datainizio1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; });
+                    SQLiteParameter datainizio1 = new SQLiteParameter(_datainizio1.ParameterName, _datainizio1.Value);
                     _parUsed.Add(datainizio1);
 
-                    OleDbParameter _datafine1 = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Data_fine1"; });
-                    OleDbParameter datafine1 = new OleDbParameter(_datafine1.ParameterName, _datafine1.Value);
+                    SQLiteParameter _datafine1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine1"; });
+                    SQLiteParameter datafine1 = new SQLiteParameter(_datafine1.ParameterName, _datafine1.Value);
                     _parUsed.Add(datafine1);
 
                     if (!query.ToLower().Contains("where"))
@@ -447,20 +561,20 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@annofiltro"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@annofiltro"; }))
                 {
-                    OleDbParameter _annofiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@annofiltro"; });
-                    OleDbParameter annofiltro = new OleDbParameter(_annofiltro.ParameterName, _annofiltro.Value);
+                    SQLiteParameter _annofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@annofiltro"; });
+                    SQLiteParameter annofiltro = new SQLiteParameter(_annofiltro.ParameterName, _annofiltro.Value);
                     _parUsed.Add(_annofiltro);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE (((Year([DataInserimento]))=@annofiltro))  ";
                     else
                         query += " AND  (((Year([DataInserimento]))=@annofiltro))    ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
                 {
-                    OleDbParameter _mesefiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
-                    OleDbParameter mesefiltro = new OleDbParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
+                    SQLiteParameter _mesefiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
+                    SQLiteParameter mesefiltro = new SQLiteParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
                     _parUsed.Add(mesefiltro);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE (((Month([DataInserimento]))=@mesefiltro))  ";
@@ -468,21 +582,21 @@ namespace WelcomeLibrary.DAL
                         query += " AND  (((Month([DataInserimento]))=@mesefiltro))    ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
                 {
-                    OleDbParameter _giornofiltro = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
-                    OleDbParameter giornofiltro = new OleDbParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
+                    SQLiteParameter _giornofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
+                    SQLiteParameter giornofiltro = new SQLiteParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
                     _parUsed.Add(giornofiltro);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE (((Day([DataInserimento]))=@giornofiltro))  ";
                     else
                         query += " AND  (((Day([DataInserimento]))=@giornofiltro))    ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
                 {
-                    OleDbParameter _Bloccoaccesso_dts = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; });
+                    SQLiteParameter _Bloccoaccesso_dts = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; });
 
-                    OleDbParameter Bloccoaccesso_dts = new OleDbParameter(_Bloccoaccesso_dts.ParameterName, _Bloccoaccesso_dts.Value);
+                    SQLiteParameter Bloccoaccesso_dts = new SQLiteParameter(_Bloccoaccesso_dts.ParameterName, _Bloccoaccesso_dts.Value);
                     // Bloccoaccesso_dts.DbType = DbType.Boolean;
                     _parUsed.Add(_Bloccoaccesso_dts);
                     if (!query.ToLower().Contains("where"))
@@ -513,9 +627,9 @@ namespace WelcomeLibrary.DAL
                 if (!includiarchiviati)
                 {
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (Archiviato = false)  ";
+                        query += " WHERE (Archiviato = 0)  ";
                     else
-                        query += " AND  (Archiviato = false)    ";
+                        query += " AND  (Archiviato = 0)    ";
                 }
 
 
@@ -524,8 +638,11 @@ namespace WelcomeLibrary.DAL
                 else
                     query += "  order BY " + campoordinamento + " Desc, Id Desc ";
 
+				if (!string.IsNullOrEmpty(maxrecord))
+					query += " LIMIT " + maxrecord;
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+
+					 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -841,8 +958,8 @@ namespace WelcomeLibrary.DAL
                     query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where Id_collegato=@Id_collegato  ";
 
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@Id_collegato", idcollegato);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@Id_collegato", idcollegato);//OleDbType.VarChar
                 parColl.Add(p1);
 
                 if (!String.IsNullOrEmpty(LinguaFiltro))
@@ -884,7 +1001,7 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1191,7 +1308,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
                 if (!codicetipologia.Contains(","))
                 {
@@ -1199,7 +1316,7 @@ namespace WelcomeLibrary.DAL
                         query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where CodiceTIPOLOGIA=@CodiceTIPOLOGIA ";
                     else
                         query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceTIPOLOGIA=@CodiceTIPOLOGIA  ";
-                    OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", codicetipologia);//OleDbType.VarChar
+                    SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", codicetipologia);//OleDbType.VarChar
                     parColl.Add(p1);
                 }
                 else
@@ -1277,7 +1394,7 @@ namespace WelcomeLibrary.DAL
                         query += "  order BY " + campoordinamento + " Desc, Id Desc ";
                 }
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1585,10 +1702,10 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto=@CodiceProdotto order BY DataInserimento Desc";
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", codiceProdotto);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", codiceProdotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1893,10 +2010,10 @@ namespace WelcomeLibrary.DAL
             {
 
                 string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ID=@ID order BY DataInserimento Desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@ID", idOfferta);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@ID", idOfferta);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -2197,12 +2314,12 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@Titolo", "%" + testoricerca + "%");//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + testoricerca + "%");//OleDbType.VarChar
                 parColl.Add(p1);
                 string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ( DENOMINAZIONEI like @Titolo or DENOMINAZIONEGB like @Titolo or DENOMINAZIONERU like @Titolo ) order BY DataInserimento Desc";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -2500,14 +2617,14 @@ namespace WelcomeLibrary.DAL
         {
             List<string> list = new List<string>();
             if (connection == null || connection == "") return list;
-            List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+            List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
             try
             {
                 string query = "SELECT DISTINCT CodiceCOMUNE FROM " + Tblarchivio;
 
                 if (!string.IsNullOrEmpty(codiceTipologia))
                 {
-                    OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", codiceTipologia);
+                    SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", codiceTipologia);
                     _parUsed.Add(ptip);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
@@ -2516,8 +2633,8 @@ namespace WelcomeLibrary.DAL
                 }
                 query += " order BY codiceCOMUNE ";
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -2558,8 +2675,8 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                //OleDbParameter p1 = new OleDbParameter("@CodiceTipologia", CodTipologia);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                //SQLiteParameter p1 = new SQLiteParameter("@CodiceTipologia", CodTipologia);//OleDbType.VarChar
                 //parColl.Add(p1);
                 if (string.IsNullOrEmpty(filtrotipologie))
                 {
@@ -2588,7 +2705,7 @@ namespace WelcomeLibrary.DAL
 
                     if (!string.IsNullOrEmpty(filtrocategoria))
                     {
-                        OleDbParameter p1 = new OleDbParameter("@CodiceCategoria", filtrocategoria);//OleDbType.VarChar
+                        SQLiteParameter p1 = new SQLiteParameter("@CodiceCategoria", filtrocategoria);//OleDbType.VarChar
                         parColl.Add(p1);
                         if (!query.ToLower().Contains("where"))
                             query += " WHERE CodiceCategoria like @CodiceCategoria ";
@@ -2603,7 +2720,7 @@ namespace WelcomeLibrary.DAL
                 query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
 
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -2661,10 +2778,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM " + _tblarchivio + " where CodiceCategoria like @CodiceCategoria and archiviato='false' order BY DataInserimento Desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceCategoria", CodiceCategoria);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceCategoria", CodiceCategoria);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -2824,10 +2941,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT CodiceCategoria,CodiceCategoria2Liv,count(CodiceCategoria2Liv) as totsottoprodotti FROM " + _tblarchivio + " WHERE   archiviato='false' and CodiceTIPOLOGIA = @CodiceTIPOLOGIA group by CodiceCategoria,CodiceCategoria2Liv";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", CodiceTipologia);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -3053,14 +3170,14 @@ namespace WelcomeLibrary.DAL
                 //PER IL SALVATAGGIO NEL DB
                 FotoColl = this.CreaStringheAllegati(FotoColl);
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                 parColl.Add(p2);
-                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                 //parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                SQLiteParameter p4 = new SQLiteParameter("@id", idOfferta);//OleDbType.VarChar
                 parColl.Add(p4);
                 string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                 try
@@ -3103,14 +3220,14 @@ namespace WelcomeLibrary.DAL
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
                 FotoColl = this.CreaStringheAllegati(FotoColl);
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                 parColl.Add(p2);
-                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                 //parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                SQLiteParameter p4 = new SQLiteParameter("@id", idOfferta);//OleDbType.VarChar
                 parColl.Add(p4);
                 string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                 try
@@ -3149,14 +3266,14 @@ namespace WelcomeLibrary.DAL
                     //RIFORMIAMO LE STRINGHE schema e valori
                     //PER IL SALVATAGGIO NEL DB
                     FotoColl = this.CreaStringheAllegati(FotoColl);
-                    List<OleDbParameter> parColl = new List<OleDbParameter>();
-                    OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                    List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                    SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                     parColl.Add(p1);
-                    OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                    SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                     parColl.Add(p2);
-                    //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                    //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                     //parColl.Add(p3);
-                    OleDbParameter p4 = new OleDbParameter("@id", idOfferta);//OleDbType.VarChar
+                    SQLiteParameter p4 = new SQLiteParameter("@id", idOfferta);//OleDbType.VarChar
                     parColl.Add(p4);
                     string query = "UPDATE [" + Tblarchivio + "] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                     dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
@@ -3188,10 +3305,10 @@ namespace WelcomeLibrary.DAL
             if (idOfferta == null || idOfferta == 0) { return null; };
 
             string query = "SELECT [FotoSchema],[FotoValori] FROM " + Tblarchivio + " where ID=@idOfferta";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@idOfferta", idOfferta);//OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@idOfferta", idOfferta);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
             Offerte item = new Offerte();
             using (reader)
             {
@@ -3227,18 +3344,18 @@ namespace WelcomeLibrary.DAL
         public void InsertOfferta(string connessione,
         Offerte item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@DENOMINAZIONEI", item.DenominazioneI);
+            SQLiteParameter p2 = new SQLiteParameter("@DENOMINAZIONEI", item.DenominazioneI);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
+            SQLiteParameter p3 = new SQLiteParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@DescrizioneI", item.DescrizioneI);
+            SQLiteParameter p4 = new SQLiteParameter("@DescrizioneI", item.DescrizioneI);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@DescrizioneGB", item.DescrizioneGB);
+            SQLiteParameter p5 = new SQLiteParameter("@DescrizioneGB", item.DescrizioneGB);
             parColl.Add(p5);
 
             string schema = "";
@@ -3249,111 +3366,111 @@ namespace WelcomeLibrary.DAL
             if (item.FotoCollection_M.Valori != null)
                 valori = item.FotoCollection_M.Valori;
 
-            OleDbParameter p6 = new OleDbParameter("@FotoSchema", schema);
+            SQLiteParameter p6 = new SQLiteParameter("@FotoSchema", schema);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@FotoValori", valori);
+            SQLiteParameter p7 = new SQLiteParameter("@FotoValori", valori);
             parColl.Add(p7);
 
-            OleDbParameter p8 = new OleDbParameter("@CodiceCOMUNE", item.CodiceComune);
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceComune);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@CodicePROVINCIA", item.CodiceProvincia);
+            SQLiteParameter p9 = new SQLiteParameter("@CodicePROVINCIA", item.CodiceProvincia);
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@CodiceREGIONE", item.CodiceRegione);
+            SQLiteParameter p10 = new SQLiteParameter("@CodiceREGIONE", item.CodiceRegione);
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@DATITECNICII", item.DatitecniciI);
+            SQLiteParameter p11 = new SQLiteParameter("@DATITECNICII", item.DatitecniciI);
             parColl.Add(p11);
-            OleDbParameter p12 = new OleDbParameter("@DATITECNICIGB", item.DatitecniciGB);
+            SQLiteParameter p12 = new SQLiteParameter("@DATITECNICIGB", item.DatitecniciGB);
             parColl.Add(p12);
-            OleDbParameter p13 = new OleDbParameter("@EMAIL", item.Email);
+            SQLiteParameter p13 = new SQLiteParameter("@EMAIL", item.Email);
             parColl.Add(p13);
-            OleDbParameter p14 = new OleDbParameter("@FAX", item.Fax);
+            SQLiteParameter p14 = new SQLiteParameter("@FAX", item.Fax);
             parColl.Add(p14);
-            OleDbParameter p15 = new OleDbParameter("@INDIRIZZO", item.Indirizzo);
+            SQLiteParameter p15 = new SQLiteParameter("@INDIRIZZO", item.Indirizzo);
             parColl.Add(p15);
-            OleDbParameter p16 = new OleDbParameter("@TELEFONO", item.Telefono);
+            SQLiteParameter p16 = new SQLiteParameter("@TELEFONO", item.Telefono);
             parColl.Add(p16);
-            OleDbParameter p17 = new OleDbParameter("@WEBSITE", item.Website);
+            SQLiteParameter p17 = new SQLiteParameter("@WEBSITE", item.Website);
             parColl.Add(p17);
-            OleDbParameter p18 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p18 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p18.OleDbType = OleDbType.Date;
             parColl.Add(p18);
-            OleDbParameter pdata1 = new OleDbParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
+            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
             parColl.Add(pdata1);
 
-            OleDbParameter p19 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+            SQLiteParameter p19 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
             parColl.Add(p19);
-            OleDbParameter p20a = new OleDbParameter("@CodiceCategoria", item.CodiceCategoria);
+            SQLiteParameter p20a = new SQLiteParameter("@CodiceCategoria", item.CodiceCategoria);
             parColl.Add(p20a);
-            OleDbParameter p20 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
+            SQLiteParameter p20 = new SQLiteParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
             parColl.Add(p20);
-            OleDbParameter p21 = new OleDbParameter("@Prezzo", item.Prezzo);
+            SQLiteParameter p21 = new SQLiteParameter("@Prezzo", item.Prezzo);
             parColl.Add(p21);
-            OleDbParameter p22 = new OleDbParameter("@PrezzoListino", item.PrezzoListino);
+            SQLiteParameter p22 = new SQLiteParameter("@PrezzoListino", item.PrezzoListino);
             parColl.Add(p22);
-            OleDbParameter p23 = new OleDbParameter("@Vetrina", item.Vetrina);
+            SQLiteParameter p23 = new SQLiteParameter("@Vetrina", item.Vetrina);
             parColl.Add(p23);
-            OleDbParameter pabcon = new OleDbParameter("@Abilitacontatto", item.Abilitacontatto);
+            SQLiteParameter pabcon = new SQLiteParameter("@Abilitacontatto", item.Abilitacontatto);
             parColl.Add(pabcon);
-            OleDbParameter pvideo = new OleDbParameter("@linkVideo", item.linkVideo);
+            SQLiteParameter pvideo = new SQLiteParameter("@linkVideo", item.linkVideo);
             parColl.Add(pvideo);
 
-            OleDbParameter pcampo1i = new OleDbParameter("@Campo1I", item.Campo1I);
+            SQLiteParameter pcampo1i = new SQLiteParameter("@Campo1I", item.Campo1I);
             parColl.Add(pcampo1i);
-            OleDbParameter pcampoi2 = new OleDbParameter("@Campo2I", item.Campo2I);
+            SQLiteParameter pcampoi2 = new SQLiteParameter("@Campo2I", item.Campo2I);
             parColl.Add(pcampoi2);
-            OleDbParameter pcampo1gb = new OleDbParameter("@Campo1GB", item.Campo1GB);
+            SQLiteParameter pcampo1gb = new SQLiteParameter("@Campo1GB", item.Campo1GB);
             parColl.Add(pcampo1gb);
-            OleDbParameter pcampo2gb = new OleDbParameter("@Campo2GB", item.Campo2GB);
+            SQLiteParameter pcampo2gb = new SQLiteParameter("@Campo2GB", item.Campo2GB);
             parColl.Add(pcampo2gb);
 
-            OleDbParameter pcar1i = new OleDbParameter("@Caratteristica1", item.Caratteristica1);
+            SQLiteParameter pcar1i = new SQLiteParameter("@Caratteristica1", item.Caratteristica1);
             parColl.Add(pcar1i);
-            OleDbParameter pcar2i = new OleDbParameter("@Caratteristica2", item.Caratteristica2);
+            SQLiteParameter pcar2i = new SQLiteParameter("@Caratteristica2", item.Caratteristica2);
             parColl.Add(pcar2i);
-            OleDbParameter pcar3i = new OleDbParameter("@Caratteristica3", item.Caratteristica3);
+            SQLiteParameter pcar3i = new SQLiteParameter("@Caratteristica3", item.Caratteristica3);
             parColl.Add(pcar3i);
-            OleDbParameter pcar4i = new OleDbParameter("@Caratteristica4", item.Caratteristica4);
+            SQLiteParameter pcar4i = new SQLiteParameter("@Caratteristica4", item.Caratteristica4);
             parColl.Add(pcar4i);
-            OleDbParameter pcar5i = new OleDbParameter("@Caratteristica5", item.Caratteristica5);
+            SQLiteParameter pcar5i = new SQLiteParameter("@Caratteristica5", item.Caratteristica5);
             parColl.Add(pcar5i);
-            OleDbParameter pcar6i = new OleDbParameter("@Caratteristica6", item.Caratteristica6);
+            SQLiteParameter pcar6i = new SQLiteParameter("@Caratteristica6", item.Caratteristica6);
             parColl.Add(pcar6i);
 
-            OleDbParameter pcaranno = new OleDbParameter("@Anno", item.Anno);
+            SQLiteParameter pcaranno = new SQLiteParameter("@Anno", item.Anno);
             parColl.Add(pcaranno);
-            OleDbParameter parch = new OleDbParameter("@Archiviato", item.Archiviato);
+            SQLiteParameter parch = new SQLiteParameter("@Archiviato", item.Archiviato);
             parColl.Add(parch);
 
-            OleDbParameter pidcoll = new OleDbParameter("@Id_collegato", item.Id_collegato);
+            SQLiteParameter pidcoll = new SQLiteParameter("@Id_collegato", item.Id_collegato);
             parColl.Add(pidcoll);
-            OleDbParameter pidcollsub = new OleDbParameter("@Id_dts_collegato", item.Id_dts_collegato);
+            SQLiteParameter pidcollsub = new SQLiteParameter("@Id_dts_collegato", item.Id_dts_collegato);
             parColl.Add(pidcollsub);
 
-            OleDbParameter pautore = new OleDbParameter("@Autore", item.Autore);
+            SQLiteParameter pautore = new SQLiteParameter("@Autore", item.Autore);
             parColl.Add(pautore);
 
-            OleDbParameter pxmlvalue = new OleDbParameter("@xmlvalue", item.Xmlvalue);
+            SQLiteParameter pxmlvalue = new SQLiteParameter("@xmlvalue", item.Xmlvalue);
             parColl.Add(pxmlvalue);
 
-            OleDbParameter p3ru = new OleDbParameter("@DENOMINAZIONERU", item.DenominazioneRU);
+            SQLiteParameter p3ru = new SQLiteParameter("@DENOMINAZIONERU", item.DenominazioneRU);
             parColl.Add(p3ru);
-            OleDbParameter p5ru = new OleDbParameter("@DescrizioneRU", item.DescrizioneRU);
+            SQLiteParameter p5ru = new SQLiteParameter("@DescrizioneRU", item.DescrizioneRU);
             parColl.Add(p5ru);
-            OleDbParameter p12ru = new OleDbParameter("@DATITECNICIRU", item.DatitecniciRU);
+            SQLiteParameter p12ru = new SQLiteParameter("@DATITECNICIRU", item.DatitecniciRU);
             parColl.Add(p12ru);
-            OleDbParameter pcampo1ru = new OleDbParameter("@Campo1RU", item.Campo1RU);
+            SQLiteParameter pcampo1ru = new SQLiteParameter("@Campo1RU", item.Campo1RU);
             parColl.Add(pcampo1ru);
-            OleDbParameter pcampo2ru = new OleDbParameter("@Campo2RU", item.Campo2RU);
+            SQLiteParameter pcampo2ru = new SQLiteParameter("@Campo2RU", item.Campo2RU);
             parColl.Add(pcampo2ru);
 
-            OleDbParameter pqtavendita = new OleDbParameter();
+            SQLiteParameter pqtavendita = new SQLiteParameter();
             if (item.Qta_vendita == null)
-                pqtavendita = new OleDbParameter("@Qta_vendita", DBNull.Value);
+                pqtavendita = new SQLiteParameter("@Qta_vendita", DBNull.Value);
             else
-                pqtavendita = new OleDbParameter("@Qta_vendita", item.Qta_vendita.Value);
+                pqtavendita = new SQLiteParameter("@Qta_vendita", item.Qta_vendita.Value);
             parColl.Add(pqtavendita);
 
-            OleDbParameter pPromozione = new OleDbParameter("@Promozione", item.Promozione);
+            SQLiteParameter pPromozione = new SQLiteParameter("@Promozione", item.Promozione);
             parColl.Add(pPromozione);
 
 
@@ -3374,143 +3491,143 @@ namespace WelcomeLibrary.DAL
         public void InsertOffertaCollegata(string connessione,
         Offerte item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter AccettazioneStatuto_dts = new OleDbParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
+            SQLiteParameter AccettazioneStatuto_dts = new SQLiteParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
             parColl.Add(AccettazioneStatuto_dts);
-            OleDbParameter Altrespecializzazioni_dts = new OleDbParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
+            SQLiteParameter Altrespecializzazioni_dts = new SQLiteParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
             parColl.Add(Altrespecializzazioni_dts);
-            OleDbParameter Annolaurea_dts = new OleDbParameter("@Annolaurea_dts", item.Annolaurea_dts);
+            SQLiteParameter Annolaurea_dts = new SQLiteParameter("@Annolaurea_dts", item.Annolaurea_dts);
             parColl.Add(Annolaurea_dts);
-            OleDbParameter Annospecializzazione_dts = new OleDbParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
+            SQLiteParameter Annospecializzazione_dts = new SQLiteParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
             parColl.Add(Annospecializzazione_dts);
-            OleDbParameter Bloccoaccesso_dts = new OleDbParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
+            SQLiteParameter Bloccoaccesso_dts = new SQLiteParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
             parColl.Add(Bloccoaccesso_dts);
-            OleDbParameter Cap1_dts = new OleDbParameter("@Cap1_dts", item.Cap1_dts);
+            SQLiteParameter Cap1_dts = new SQLiteParameter("@Cap1_dts", item.Cap1_dts);
             parColl.Add(Cap1_dts);
-            OleDbParameter Cap2_dts = new OleDbParameter("@Cap2_dts", item.Cap2_dts);
+            SQLiteParameter Cap2_dts = new SQLiteParameter("@Cap2_dts", item.Cap2_dts);
             parColl.Add(Cap2_dts);
-            OleDbParameter Cap3_dts = new OleDbParameter("@Cap3_dts", item.Cap3_dts);
+            SQLiteParameter Cap3_dts = new SQLiteParameter("@Cap3_dts", item.Cap3_dts);
             parColl.Add(Cap3_dts);
-            OleDbParameter Certificazione_dts = new OleDbParameter("@Certificazione_dts", item.Certificazione_dts);
+            SQLiteParameter Certificazione_dts = new SQLiteParameter("@Certificazione_dts", item.Certificazione_dts);
             parColl.Add(Certificazione_dts);
-            OleDbParameter CodiceCOMUNE1_dts = new OleDbParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
+            SQLiteParameter CodiceCOMUNE1_dts = new SQLiteParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
             parColl.Add(CodiceCOMUNE1_dts);
-            OleDbParameter CodiceCOMUNE2_dts = new OleDbParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
+            SQLiteParameter CodiceCOMUNE2_dts = new SQLiteParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
             parColl.Add(CodiceCOMUNE2_dts);
-            OleDbParameter CodiceCOMUNE3_dts = new OleDbParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
+            SQLiteParameter CodiceCOMUNE3_dts = new SQLiteParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
             parColl.Add(CodiceCOMUNE3_dts);
-            OleDbParameter CodiceNAZIONE1_dts = new OleDbParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
+            SQLiteParameter CodiceNAZIONE1_dts = new SQLiteParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
             parColl.Add(CodiceNAZIONE1_dts);
-            OleDbParameter CodiceNAZIONE2_dts = new OleDbParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
+            SQLiteParameter CodiceNAZIONE2_dts = new SQLiteParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
             parColl.Add(CodiceNAZIONE2_dts);
-            OleDbParameter CodiceNAZIONE3_dts = new OleDbParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
+            SQLiteParameter CodiceNAZIONE3_dts = new SQLiteParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
             parColl.Add(CodiceNAZIONE3_dts);
-            OleDbParameter CodicePROVINCIA1_dts = new OleDbParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
+            SQLiteParameter CodicePROVINCIA1_dts = new SQLiteParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
             parColl.Add(CodicePROVINCIA1_dts);
-            OleDbParameter CodicePROVINCIA2_dts = new OleDbParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
+            SQLiteParameter CodicePROVINCIA2_dts = new SQLiteParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
             parColl.Add(CodicePROVINCIA2_dts);
-            OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
+            SQLiteParameter CodicePROVINCIA3_dts = new SQLiteParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
+            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
-            OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
+            SQLiteParameter CodiceREGIONE1_dts = new SQLiteParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
             parColl.Add(CodiceREGIONE1_dts);
-            OleDbParameter CodiceREGIONE2_dts = new OleDbParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
+            SQLiteParameter CodiceREGIONE2_dts = new SQLiteParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
             parColl.Add(CodiceREGIONE2_dts);
-            OleDbParameter CodiceREGIONE3_dts = new OleDbParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
+            SQLiteParameter CodiceREGIONE3_dts = new SQLiteParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
             parColl.Add(CodiceREGIONE3_dts);
-            OleDbParameter Cognome_dts = new OleDbParameter("@Cognome_dts", item.Cognome_dts);
+            SQLiteParameter Cognome_dts = new SQLiteParameter("@Cognome_dts", item.Cognome_dts);
             parColl.Add(Cognome_dts);
 
-            OleDbParameter Emailriservata_dts = new OleDbParameter("@Emailriservata_dts", item.Emailriservata_dts);
+            SQLiteParameter Emailriservata_dts = new SQLiteParameter("@Emailriservata_dts", item.Emailriservata_dts);
             parColl.Add(Emailriservata_dts);
-            OleDbParameter Latitudine1_dts = new OleDbParameter("@Latitudine1_dts", item.Latitudine1_dts);
+            SQLiteParameter Latitudine1_dts = new SQLiteParameter("@Latitudine1_dts", item.Latitudine1_dts);
             parColl.Add(Latitudine1_dts);
 
-            OleDbParameter Latitudine2_dts = new OleDbParameter("@Latitudine2_dts", item.Latitudine2_dts);
+            SQLiteParameter Latitudine2_dts = new SQLiteParameter("@Latitudine2_dts", item.Latitudine2_dts);
             parColl.Add(Latitudine2_dts);
-            OleDbParameter Latitudine3_dts = new OleDbParameter("@Latitudine3_dts", item.Latitudine3_dts);
+            SQLiteParameter Latitudine3_dts = new SQLiteParameter("@Latitudine3_dts", item.Latitudine3_dts);
             parColl.Add(Latitudine3_dts);
-            OleDbParameter Longitudine1_dts = new OleDbParameter("@Longitudine1_dts", item.Longitudine1_dts);
+            SQLiteParameter Longitudine1_dts = new SQLiteParameter("@Longitudine1_dts", item.Longitudine1_dts);
             parColl.Add(Longitudine1_dts);
-            OleDbParameter Longitudine2_dts = new OleDbParameter("@Longitudine2_dts", item.Longitudine2_dts);
+            SQLiteParameter Longitudine2_dts = new SQLiteParameter("@Longitudine2_dts", item.Longitudine2_dts);
             parColl.Add(Longitudine2_dts);
 
-            OleDbParameter Longitudine3_dts = new OleDbParameter("@Longitudine3_dts", item.Longitudine3_dts);
+            SQLiteParameter Longitudine3_dts = new SQLiteParameter("@Longitudine3_dts", item.Longitudine3_dts);
             parColl.Add(Longitudine3_dts);
-            OleDbParameter Nome_dts = new OleDbParameter("@Nome_dts", item.Nome_dts);
+            SQLiteParameter Nome_dts = new SQLiteParameter("@Nome_dts", item.Nome_dts);
             parColl.Add(Nome_dts);
-            OleDbParameter Nomeposizione1_dts = new OleDbParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
+            SQLiteParameter Nomeposizione1_dts = new SQLiteParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
             parColl.Add(Nomeposizione1_dts);
-            OleDbParameter Nomeposizione2_dts = new OleDbParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
+            SQLiteParameter Nomeposizione2_dts = new SQLiteParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
             parColl.Add(Nomeposizione2_dts);
-            OleDbParameter Nomeposizione3_dts = new OleDbParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
+            SQLiteParameter Nomeposizione3_dts = new SQLiteParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
             parColl.Add(Nomeposizione3_dts);
-            OleDbParameter Pivacf_dts = new OleDbParameter("@Pivacf_dts", item.Pivacf_dts);
+            SQLiteParameter Pivacf_dts = new SQLiteParameter("@Pivacf_dts", item.Pivacf_dts);
             parColl.Add(Pivacf_dts);
 
-            OleDbParameter Socioaltraassociazione_dts = new OleDbParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
+            SQLiteParameter Socioaltraassociazione_dts = new SQLiteParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
             parColl.Add(Socioaltraassociazione_dts);
-            OleDbParameter SocioIsaps_dts = new OleDbParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
+            SQLiteParameter SocioIsaps_dts = new SQLiteParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
             parColl.Add(SocioIsaps_dts);
 
-            OleDbParameter Sociopresentatore1_dts = new OleDbParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
+            SQLiteParameter Sociopresentatore1_dts = new SQLiteParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
             parColl.Add(Sociopresentatore1_dts);
 
-            OleDbParameter Sociopresentatore2_dts = new OleDbParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
+            SQLiteParameter Sociopresentatore2_dts = new SQLiteParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
             parColl.Add(Sociopresentatore2_dts);
 
-            OleDbParameter SocioSicpre_dts = new OleDbParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
+            SQLiteParameter SocioSicpre_dts = new SQLiteParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
             parColl.Add(SocioSicpre_dts);
-            OleDbParameter Telefono1_dts = new OleDbParameter("@Telefono1_dts", item.Telefono1_dts);
+            SQLiteParameter Telefono1_dts = new SQLiteParameter("@Telefono1_dts", item.Telefono1_dts);
             parColl.Add(Telefono1_dts);
-            OleDbParameter Telefono2_dts = new OleDbParameter("@Telefono2_dts", item.Telefono2_dts);
+            SQLiteParameter Telefono2_dts = new SQLiteParameter("@Telefono2_dts", item.Telefono2_dts);
             parColl.Add(Telefono2_dts);
-            OleDbParameter Telefono3_dts = new OleDbParameter("@Telefono3_dts", item.Telefono3_dts);
+            SQLiteParameter Telefono3_dts = new SQLiteParameter("@Telefono3_dts", item.Telefono3_dts);
             parColl.Add(Telefono3_dts);
-            OleDbParameter Telefonoprivato_dts = new OleDbParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
+            SQLiteParameter Telefonoprivato_dts = new SQLiteParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
             parColl.Add(Telefonoprivato_dts);
 
-            OleDbParameter Trattamenticollegati_dts = new OleDbParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
+            SQLiteParameter Trattamenticollegati_dts = new SQLiteParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
             parColl.Add(Trattamenticollegati_dts);
-            OleDbParameter Via1_dts = new OleDbParameter("@Via1_dts", item.Via1_dts);
+            SQLiteParameter Via1_dts = new SQLiteParameter("@Via1_dts", item.Via1_dts);
             parColl.Add(Via1_dts);
-            OleDbParameter Via2_dts = new OleDbParameter("@Via2_dts", item.Via2_dts);
+            SQLiteParameter Via2_dts = new SQLiteParameter("@Via2_dts", item.Via2_dts);
             parColl.Add(Via2_dts);
 
-            OleDbParameter Via3_dts = new OleDbParameter("@Via3_dts", item.Via3_dts);
+            SQLiteParameter Via3_dts = new SQLiteParameter("@Via3_dts", item.Via3_dts);
             parColl.Add(Via3_dts);
 
-            OleDbParameter Pagamenti_dts = new OleDbParameter("@Pagamenti_dts", item.Pagamenti_dts);
+            SQLiteParameter Pagamenti_dts = new SQLiteParameter("@Pagamenti_dts", item.Pagamenti_dts);
             parColl.Add(Pagamenti_dts);
 
 
-            OleDbParameter ricfatt_dts = new OleDbParameter("@ricfatt_dts", item.ricfatt_dts);
+            SQLiteParameter ricfatt_dts = new SQLiteParameter("@ricfatt_dts", item.ricfatt_dts);
             parColl.Add(ricfatt_dts);
-            OleDbParameter noteriservate_dts = new OleDbParameter("@noteriservate_dts", item.noteriservate_dts);
+            SQLiteParameter noteriservate_dts = new SQLiteParameter("@noteriservate_dts", item.noteriservate_dts);
             parColl.Add(noteriservate_dts);
-            OleDbParameter indirizzofatt_dts = new OleDbParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
+            SQLiteParameter indirizzofatt_dts = new SQLiteParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
             parColl.Add(indirizzofatt_dts);
 
-            OleDbParameter niscrordine_dts = new OleDbParameter("@niscrordine_dts", item.niscrordine_dts);
+            SQLiteParameter niscrordine_dts = new SQLiteParameter("@niscrordine_dts", item.niscrordine_dts);
             parColl.Add(niscrordine_dts);
-            OleDbParameter locordine_dts = new OleDbParameter("@locordine_dts", item.locordine_dts);
+            SQLiteParameter locordine_dts = new SQLiteParameter("@locordine_dts", item.locordine_dts);
             parColl.Add(locordine_dts);
-            OleDbParameter annofrequenza_dts = new OleDbParameter("@annofrequenza_dts", item.annofrequenza_dts);
+            SQLiteParameter annofrequenza_dts = new SQLiteParameter("@annofrequenza_dts", item.annofrequenza_dts);
             parColl.Add(annofrequenza_dts);
-            OleDbParameter nomeuniversita_dts = new OleDbParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
+            SQLiteParameter nomeuniversita_dts = new SQLiteParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
             parColl.Add(nomeuniversita_dts);
-            OleDbParameter dettagliuniversita_dts = new OleDbParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
+            SQLiteParameter dettagliuniversita_dts = new SQLiteParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
             parColl.Add(dettagliuniversita_dts);
-            OleDbParameter Boolfields_dts = new OleDbParameter("@Boolfields_dts", item.Boolfields_dts);
+            SQLiteParameter Boolfields_dts = new SQLiteParameter("@Boolfields_dts", item.Boolfields_dts);
             parColl.Add(Boolfields_dts);
-            OleDbParameter Textfield1_dts = new OleDbParameter("@Textfield1_dts", item.Textfield1_dts);
+            SQLiteParameter Textfield1_dts = new SQLiteParameter("@Textfield1_dts", item.Textfield1_dts);
             parColl.Add(Textfield1_dts);
-            OleDbParameter Interventieseguiti_dts = new OleDbParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
+            SQLiteParameter Interventieseguiti_dts = new SQLiteParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
             parColl.Add(Interventieseguiti_dts);
             // niscrordine_dts
             //locordine_dts
@@ -3542,18 +3659,18 @@ namespace WelcomeLibrary.DAL
         public void UpdateOfferta(string connessione,
             Offerte item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            //OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceOfferta);//OleDbType.VarChar
+            //SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceOfferta);//OleDbType.VarChar
             //parColl.Add(p1);
-            OleDbParameter p1 = new OleDbParameter("@DENOMINAZIONEI", item.DenominazioneI);
+            SQLiteParameter p1 = new SQLiteParameter("@DENOMINAZIONEI", item.DenominazioneI);
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
+            SQLiteParameter p2 = new SQLiteParameter("@DENOMINAZIONEGB", item.DenominazioneGB);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@DescrizioneI", item.DescrizioneI);
+            SQLiteParameter p3 = new SQLiteParameter("@DescrizioneI", item.DescrizioneI);
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@DescrizioneGB", item.DescrizioneGB);
+            SQLiteParameter p4 = new SQLiteParameter("@DescrizioneGB", item.DescrizioneGB);
             parColl.Add(p4);
             string schema = "";
             if (item.FotoCollection_M.Schema != null)
@@ -3563,114 +3680,114 @@ namespace WelcomeLibrary.DAL
             if (item.FotoCollection_M.Valori != null)
                 valori = item.FotoCollection_M.Valori;
 
-            OleDbParameter pschema = new OleDbParameter("@FotoSchema", schema);
+            SQLiteParameter pschema = new SQLiteParameter("@FotoSchema", schema);
             parColl.Add(pschema);
-            OleDbParameter pvalori = new OleDbParameter("@FotoValori", valori);
+            SQLiteParameter pvalori = new SQLiteParameter("@FotoValori", valori);
             parColl.Add(pvalori);
 
-            OleDbParameter p5 = new OleDbParameter("@CodiceCOMUNE", item.CodiceComune);
+            SQLiteParameter p5 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceComune);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@CodicePROVINCIA", item.CodiceProvincia);
+            SQLiteParameter p6 = new SQLiteParameter("@CodicePROVINCIA", item.CodiceProvincia);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@CodiceREGIONE", item.CodiceRegione);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceREGIONE", item.CodiceRegione);
             parColl.Add(p7);
-            OleDbParameter p8 = new OleDbParameter("@DATITECNICII", item.DatitecniciI);
+            SQLiteParameter p8 = new SQLiteParameter("@DATITECNICII", item.DatitecniciI);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@DATITECNICIGB", item.DatitecniciGB);
+            SQLiteParameter p9 = new SQLiteParameter("@DATITECNICIGB", item.DatitecniciGB);
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@EMAIL", item.Email);
+            SQLiteParameter p10 = new SQLiteParameter("@EMAIL", item.Email);
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@FAX", item.Fax);
+            SQLiteParameter p11 = new SQLiteParameter("@FAX", item.Fax);
             parColl.Add(p11);
-            OleDbParameter p12 = new OleDbParameter("@INDIRIZZO", item.Indirizzo);
+            SQLiteParameter p12 = new SQLiteParameter("@INDIRIZZO", item.Indirizzo);
             parColl.Add(p12);
-            OleDbParameter p13 = new OleDbParameter("@TELEFONO", item.Telefono);
+            SQLiteParameter p13 = new SQLiteParameter("@TELEFONO", item.Telefono);
             parColl.Add(p13);
-            OleDbParameter p14 = new OleDbParameter("@WEBSITE", item.Website);
+            SQLiteParameter p14 = new SQLiteParameter("@WEBSITE", item.Website);
             parColl.Add(p14);
-            OleDbParameter pdata = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter pdata = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata);
-            OleDbParameter pdata1 = new OleDbParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
+            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata1);
 
 
-            OleDbParameter p17 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+            SQLiteParameter p17 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
             parColl.Add(p17);
-            OleDbParameter p18a = new OleDbParameter("@CodiceCategoria", item.CodiceCategoria);
+            SQLiteParameter p18a = new SQLiteParameter("@CodiceCategoria", item.CodiceCategoria);
             parColl.Add(p18a);
-            OleDbParameter p18 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
+            SQLiteParameter p18 = new SQLiteParameter("@CodiceCategoria2Liv", item.CodiceCategoria2Liv);
             parColl.Add(p18);
-            OleDbParameter p19 = new OleDbParameter("@Prezzo", item.Prezzo);
+            SQLiteParameter p19 = new SQLiteParameter("@Prezzo", item.Prezzo);
             parColl.Add(p19);
-            OleDbParameter p20 = new OleDbParameter("@PrezzoListino", item.PrezzoListino);
+            SQLiteParameter p20 = new SQLiteParameter("@PrezzoListino", item.PrezzoListino);
             parColl.Add(p20);
-            OleDbParameter p21 = new OleDbParameter("@Vetrina", item.Vetrina);
+            SQLiteParameter p21 = new SQLiteParameter("@Vetrina", item.Vetrina);
             parColl.Add(p21);
 
-            OleDbParameter pabilc = new OleDbParameter("@Abilitacontatto", item.Abilitacontatto);
+            SQLiteParameter pabilc = new SQLiteParameter("@Abilitacontatto", item.Abilitacontatto);
             parColl.Add(pabilc);
-            OleDbParameter pvideo = new OleDbParameter("@linkVideo", item.linkVideo);
+            SQLiteParameter pvideo = new SQLiteParameter("@linkVideo", item.linkVideo);
             parColl.Add(pvideo);
-            OleDbParameter pcampo1i = new OleDbParameter("@Campo1I", item.Campo1I);
+            SQLiteParameter pcampo1i = new SQLiteParameter("@Campo1I", item.Campo1I);
             parColl.Add(pcampo1i);
-            OleDbParameter pcampoi2 = new OleDbParameter("@Campo2I", item.Campo2I);
+            SQLiteParameter pcampoi2 = new SQLiteParameter("@Campo2I", item.Campo2I);
             parColl.Add(pcampoi2);
-            OleDbParameter pcampo1gb = new OleDbParameter("@Campo1GB", item.Campo1GB);
+            SQLiteParameter pcampo1gb = new SQLiteParameter("@Campo1GB", item.Campo1GB);
             parColl.Add(pcampo1gb);
-            OleDbParameter pcampo2gb = new OleDbParameter("@Campo2GB", item.Campo2GB);
+            SQLiteParameter pcampo2gb = new SQLiteParameter("@Campo2GB", item.Campo2GB);
             parColl.Add(pcampo2gb);
-            OleDbParameter pcar1i = new OleDbParameter("@Caratteristica1", item.Caratteristica1);
+            SQLiteParameter pcar1i = new SQLiteParameter("@Caratteristica1", item.Caratteristica1);
             parColl.Add(pcar1i);
-            OleDbParameter pcar2i = new OleDbParameter("@Caratteristica2", item.Caratteristica2);
+            SQLiteParameter pcar2i = new SQLiteParameter("@Caratteristica2", item.Caratteristica2);
             parColl.Add(pcar2i);
-            OleDbParameter pcar3i = new OleDbParameter("@Caratteristica3", item.Caratteristica3);
+            SQLiteParameter pcar3i = new SQLiteParameter("@Caratteristica3", item.Caratteristica3);
             parColl.Add(pcar3i);
-            OleDbParameter pcar4i = new OleDbParameter("@Caratteristica4", item.Caratteristica4);
+            SQLiteParameter pcar4i = new SQLiteParameter("@Caratteristica4", item.Caratteristica4);
             parColl.Add(pcar4i);
-            OleDbParameter pcar5i = new OleDbParameter("@Caratteristica5", item.Caratteristica5);
+            SQLiteParameter pcar5i = new SQLiteParameter("@Caratteristica5", item.Caratteristica5);
             parColl.Add(pcar5i);
-            OleDbParameter pcar6i = new OleDbParameter("@Caratteristica6", item.Caratteristica6);
+            SQLiteParameter pcar6i = new SQLiteParameter("@Caratteristica6", item.Caratteristica6);
             parColl.Add(pcar6i);
 
-            OleDbParameter pcaranno = new OleDbParameter("@Anno", item.Anno);
+            SQLiteParameter pcaranno = new SQLiteParameter("@Anno", item.Anno);
             parColl.Add(pcaranno);
-            OleDbParameter parch = new OleDbParameter("@Archiviato", item.Archiviato);
+            SQLiteParameter parch = new SQLiteParameter("@Archiviato", item.Archiviato);
             parColl.Add(parch);
-            OleDbParameter pidcoll = new OleDbParameter("@Id_collegato", item.Id_collegato);
+            SQLiteParameter pidcoll = new SQLiteParameter("@Id_collegato", item.Id_collegato);
             parColl.Add(pidcoll);
-            OleDbParameter pidcollsub = new OleDbParameter("@Id_dts_collegato", item.Id_dts_collegato);
+            SQLiteParameter pidcollsub = new SQLiteParameter("@Id_dts_collegato", item.Id_dts_collegato);
             parColl.Add(pidcollsub);
 
 
-            OleDbParameter pautore = new OleDbParameter("@Autore", item.Autore);
+            SQLiteParameter pautore = new SQLiteParameter("@Autore", item.Autore);
             parColl.Add(pautore);
-            OleDbParameter pxmlValue = new OleDbParameter("@xmlValue", item.Xmlvalue);
+            SQLiteParameter pxmlValue = new SQLiteParameter("@xmlValue", item.Xmlvalue);
             parColl.Add(pxmlValue);
 
 
-            OleDbParameter p3ru = new OleDbParameter("@DENOMINAZIONERU", item.DenominazioneRU);
+            SQLiteParameter p3ru = new SQLiteParameter("@DENOMINAZIONERU", item.DenominazioneRU);
             parColl.Add(p3ru);
-            OleDbParameter p5ru = new OleDbParameter("@DescrizioneRU", item.DescrizioneRU);
+            SQLiteParameter p5ru = new SQLiteParameter("@DescrizioneRU", item.DescrizioneRU);
             parColl.Add(p5ru);
-            OleDbParameter p12ru = new OleDbParameter("@DATITECNICIRU", item.DatitecniciRU);
+            SQLiteParameter p12ru = new SQLiteParameter("@DATITECNICIRU", item.DatitecniciRU);
             parColl.Add(p12ru);
-            OleDbParameter pcampo1ru = new OleDbParameter("@Campo1RU", item.Campo1RU);
+            SQLiteParameter pcampo1ru = new SQLiteParameter("@Campo1RU", item.Campo1RU);
             parColl.Add(pcampo1ru);
-            OleDbParameter pcampo2ru = new OleDbParameter("@Campo2RU", item.Campo2RU);
+            SQLiteParameter pcampo2ru = new SQLiteParameter("@Campo2RU", item.Campo2RU);
             parColl.Add(pcampo2ru);
-            OleDbParameter pqtavendita = new OleDbParameter();
+            SQLiteParameter pqtavendita = new SQLiteParameter();
             if (item.Qta_vendita == null)
-                pqtavendita = new OleDbParameter("@Qta_vendita", DBNull.Value);
+                pqtavendita = new SQLiteParameter("@Qta_vendita", DBNull.Value);
             else
-                pqtavendita = new OleDbParameter("@Qta_vendita", item.Qta_vendita.Value);
+                pqtavendita = new SQLiteParameter("@Qta_vendita", item.Qta_vendita.Value);
             parColl.Add(pqtavendita);
 
-            OleDbParameter pPromozione = new OleDbParameter("@Promozione", item.Promozione);
+            SQLiteParameter pPromozione = new SQLiteParameter("@Promozione", item.Promozione);
             parColl.Add(pPromozione);
 
-            OleDbParameter p16 = new OleDbParameter("@Id", item.Id);
+            SQLiteParameter p16 = new SQLiteParameter("@Id", item.Id);
             parColl.Add(p16);
             string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori, [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU,  [Qta_vendita]=@Qta_vendita,[Promozione]=@Promozione   WHERE [Id]=@Id ";
 
@@ -3689,145 +3806,145 @@ namespace WelcomeLibrary.DAL
         public void UpdateOffertaCollegata(string connessione,
          Offerte item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter AccettazioneStatuto_dts = new OleDbParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
+            SQLiteParameter AccettazioneStatuto_dts = new SQLiteParameter("@AccettazioneStatuto_dts", item.AccettazioneStatuto_dts);//OleDbType.VarChar
             parColl.Add(AccettazioneStatuto_dts);
-            OleDbParameter Altrespecializzazioni_dts = new OleDbParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
+            SQLiteParameter Altrespecializzazioni_dts = new SQLiteParameter("@Altrespecializzazioni_dts", item.Altrespecializzazioni_dts);
             parColl.Add(Altrespecializzazioni_dts);
-            OleDbParameter Annolaurea_dts = new OleDbParameter("@Annolaurea_dts", item.Annolaurea_dts);
+            SQLiteParameter Annolaurea_dts = new SQLiteParameter("@Annolaurea_dts", item.Annolaurea_dts);
             parColl.Add(Annolaurea_dts);
-            OleDbParameter Annospecializzazione_dts = new OleDbParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
+            SQLiteParameter Annospecializzazione_dts = new SQLiteParameter("@Annospecializzazione_dts", item.Annospecializzazione_dts);
             parColl.Add(Annospecializzazione_dts);
-            OleDbParameter Bloccoaccesso_dts = new OleDbParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
+            SQLiteParameter Bloccoaccesso_dts = new SQLiteParameter("@Bloccoaccesso_dts", item.Bloccoaccesso_dts);
             parColl.Add(Bloccoaccesso_dts);
-            OleDbParameter Cap1_dts = new OleDbParameter("@Cap1_dts", item.Cap1_dts);
+            SQLiteParameter Cap1_dts = new SQLiteParameter("@Cap1_dts", item.Cap1_dts);
             parColl.Add(Cap1_dts);
-            OleDbParameter Cap2_dts = new OleDbParameter("@Cap2_dts", item.Cap2_dts);
+            SQLiteParameter Cap2_dts = new SQLiteParameter("@Cap2_dts", item.Cap2_dts);
             parColl.Add(Cap2_dts);
-            OleDbParameter Cap3_dts = new OleDbParameter("@Cap3_dts", item.Cap3_dts);
+            SQLiteParameter Cap3_dts = new SQLiteParameter("@Cap3_dts", item.Cap3_dts);
             parColl.Add(Cap3_dts);
-            OleDbParameter Certificazione_dts = new OleDbParameter("@Certificazione_dts", item.Certificazione_dts);
+            SQLiteParameter Certificazione_dts = new SQLiteParameter("@Certificazione_dts", item.Certificazione_dts);
             parColl.Add(Certificazione_dts);
-            OleDbParameter CodiceCOMUNE1_dts = new OleDbParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
+            SQLiteParameter CodiceCOMUNE1_dts = new SQLiteParameter("@CodiceCOMUNE1_dts", item.CodiceCOMUNE1_dts);
             parColl.Add(CodiceCOMUNE1_dts);
-            OleDbParameter CodiceCOMUNE2_dts = new OleDbParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
+            SQLiteParameter CodiceCOMUNE2_dts = new SQLiteParameter("@CodiceCOMUNE2_dts", item.CodiceCOMUNE2_dts);
             parColl.Add(CodiceCOMUNE2_dts);
-            OleDbParameter CodiceCOMUNE3_dts = new OleDbParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
+            SQLiteParameter CodiceCOMUNE3_dts = new SQLiteParameter("@CodiceCOMUNE3_dts", item.CodiceCOMUNE3_dts);
             parColl.Add(CodiceCOMUNE3_dts);
-            OleDbParameter CodiceNAZIONE1_dts = new OleDbParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
+            SQLiteParameter CodiceNAZIONE1_dts = new SQLiteParameter("@CodiceNAZIONE1_dts", item.CodiceNAZIONE1_dts);
             parColl.Add(CodiceNAZIONE1_dts);
-            OleDbParameter CodiceNAZIONE2_dts = new OleDbParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
+            SQLiteParameter CodiceNAZIONE2_dts = new SQLiteParameter("@CodiceNAZIONE2_dts", item.CodiceNAZIONE2_dts);
             parColl.Add(CodiceNAZIONE2_dts);
-            OleDbParameter CodiceNAZIONE3_dts = new OleDbParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
+            SQLiteParameter CodiceNAZIONE3_dts = new SQLiteParameter("@CodiceNAZIONE3_dts", item.CodiceNAZIONE3_dts);
             parColl.Add(CodiceNAZIONE3_dts);
-            OleDbParameter CodicePROVINCIA1_dts = new OleDbParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
+            SQLiteParameter CodicePROVINCIA1_dts = new SQLiteParameter("@CodicePROVINCIA1_dts", item.CodicePROVINCIA1_dts);
             parColl.Add(CodicePROVINCIA1_dts);
-            OleDbParameter CodicePROVINCIA2_dts = new OleDbParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
+            SQLiteParameter CodicePROVINCIA2_dts = new SQLiteParameter("@CodicePROVINCIA2_dts", item.CodicePROVINCIA2_dts);
             parColl.Add(CodicePROVINCIA2_dts);
-            OleDbParameter CodicePROVINCIA3_dts = new OleDbParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
+            SQLiteParameter CodicePROVINCIA3_dts = new SQLiteParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            OleDbParameter Datanascita_dts = new OleDbParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
+            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
-            OleDbParameter CodiceREGIONE1_dts = new OleDbParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
+            SQLiteParameter CodiceREGIONE1_dts = new SQLiteParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
             parColl.Add(CodiceREGIONE1_dts);
-            OleDbParameter CodiceREGIONE2_dts = new OleDbParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
+            SQLiteParameter CodiceREGIONE2_dts = new SQLiteParameter("@CodiceREGIONE2_dts", item.CodiceREGIONE2_dts);
             parColl.Add(CodiceREGIONE2_dts);
-            OleDbParameter CodiceREGIONE3_dts = new OleDbParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
+            SQLiteParameter CodiceREGIONE3_dts = new SQLiteParameter("@CodiceREGIONE3_dts", item.CodiceREGIONE3_dts);
             parColl.Add(CodiceREGIONE3_dts);
-            OleDbParameter Cognome_dts = new OleDbParameter("@Cognome_dts", item.Cognome_dts);
+            SQLiteParameter Cognome_dts = new SQLiteParameter("@Cognome_dts", item.Cognome_dts);
             parColl.Add(Cognome_dts);
 
-            OleDbParameter Emailriservata_dts = new OleDbParameter("@Emailriservata_dts", item.Emailriservata_dts);
+            SQLiteParameter Emailriservata_dts = new SQLiteParameter("@Emailriservata_dts", item.Emailriservata_dts);
             parColl.Add(Emailriservata_dts);
-            OleDbParameter Latitudine1_dts = new OleDbParameter("@Latitudine1_dts", item.Latitudine1_dts);
+            SQLiteParameter Latitudine1_dts = new SQLiteParameter("@Latitudine1_dts", item.Latitudine1_dts);
             parColl.Add(Latitudine1_dts);
 
-            OleDbParameter Latitudine2_dts = new OleDbParameter("@Latitudine2_dts", item.Latitudine2_dts);
+            SQLiteParameter Latitudine2_dts = new SQLiteParameter("@Latitudine2_dts", item.Latitudine2_dts);
             parColl.Add(Latitudine2_dts);
-            OleDbParameter Latitudine3_dts = new OleDbParameter("@Latitudine3_dts", item.Latitudine3_dts);
+            SQLiteParameter Latitudine3_dts = new SQLiteParameter("@Latitudine3_dts", item.Latitudine3_dts);
             parColl.Add(Latitudine3_dts);
-            OleDbParameter Longitudine1_dts = new OleDbParameter("@Longitudine1_dts", item.Longitudine1_dts);
+            SQLiteParameter Longitudine1_dts = new SQLiteParameter("@Longitudine1_dts", item.Longitudine1_dts);
             parColl.Add(Longitudine1_dts);
-            OleDbParameter Longitudine2_dts = new OleDbParameter("@Longitudine2_dts", item.Longitudine2_dts);
+            SQLiteParameter Longitudine2_dts = new SQLiteParameter("@Longitudine2_dts", item.Longitudine2_dts);
             parColl.Add(Longitudine2_dts);
 
-            OleDbParameter Longitudine3_dts = new OleDbParameter("@Longitudine3_dts", item.Longitudine3_dts);
+            SQLiteParameter Longitudine3_dts = new SQLiteParameter("@Longitudine3_dts", item.Longitudine3_dts);
             parColl.Add(Longitudine3_dts);
-            OleDbParameter Nome_dts = new OleDbParameter("@Nome_dts", item.Nome_dts);
+            SQLiteParameter Nome_dts = new SQLiteParameter("@Nome_dts", item.Nome_dts);
             parColl.Add(Nome_dts);
-            OleDbParameter Nomeposizione1_dts = new OleDbParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
+            SQLiteParameter Nomeposizione1_dts = new SQLiteParameter("@Nomeposizione1_dts", item.Nomeposizione1_dts);
             parColl.Add(Nomeposizione1_dts);
-            OleDbParameter Nomeposizione2_dts = new OleDbParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
+            SQLiteParameter Nomeposizione2_dts = new SQLiteParameter("@Nomeposizione2_dts", item.Nomeposizione2_dts);
             parColl.Add(Nomeposizione2_dts);
-            OleDbParameter Nomeposizione3_dts = new OleDbParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
+            SQLiteParameter Nomeposizione3_dts = new SQLiteParameter("@Nomeposizione3_dts", item.Nomeposizione3_dts);
             parColl.Add(Nomeposizione3_dts);
-            OleDbParameter Pivacf_dts = new OleDbParameter("@Pivacf_dts", item.Pivacf_dts);
+            SQLiteParameter Pivacf_dts = new SQLiteParameter("@Pivacf_dts", item.Pivacf_dts);
             parColl.Add(Pivacf_dts);
 
-            OleDbParameter Socioaltraassociazione_dts = new OleDbParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
+            SQLiteParameter Socioaltraassociazione_dts = new SQLiteParameter("@Socioaltraassociazione_dts", item.Socioaltraassociazione_dts);
             parColl.Add(Socioaltraassociazione_dts);
-            OleDbParameter SocioIsaps_dts = new OleDbParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
+            SQLiteParameter SocioIsaps_dts = new SQLiteParameter("@SocioIsaps_dts", item.SocioIsaps_dts);
             parColl.Add(SocioIsaps_dts);
 
-            OleDbParameter Sociopresentatore1_dts = new OleDbParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
+            SQLiteParameter Sociopresentatore1_dts = new SQLiteParameter("@Sociopresentatore1_dts", item.Sociopresentatore1_dts);
             parColl.Add(Sociopresentatore1_dts);
 
-            OleDbParameter Sociopresentatore2_dts = new OleDbParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
+            SQLiteParameter Sociopresentatore2_dts = new SQLiteParameter("@Sociopresentatore2_dts", item.Sociopresentatore2_dts);
             parColl.Add(Sociopresentatore2_dts);
 
-            OleDbParameter SocioSicpre_dts = new OleDbParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
+            SQLiteParameter SocioSicpre_dts = new SQLiteParameter("@SocioSicpre_dts", item.SocioSicpre_dts);
             parColl.Add(SocioSicpre_dts);
-            OleDbParameter Telefono1_dts = new OleDbParameter("@Telefono1_dts", item.Telefono1_dts);
+            SQLiteParameter Telefono1_dts = new SQLiteParameter("@Telefono1_dts", item.Telefono1_dts);
             parColl.Add(Telefono1_dts);
-            OleDbParameter Telefono2_dts = new OleDbParameter("@Telefono2_dts", item.Telefono2_dts);
+            SQLiteParameter Telefono2_dts = new SQLiteParameter("@Telefono2_dts", item.Telefono2_dts);
             parColl.Add(Telefono2_dts);
-            OleDbParameter Telefono3_dts = new OleDbParameter("@Telefono3_dts", item.Telefono3_dts);
+            SQLiteParameter Telefono3_dts = new SQLiteParameter("@Telefono3_dts", item.Telefono3_dts);
             parColl.Add(Telefono3_dts);
-            OleDbParameter Telefonoprivato_dts = new OleDbParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
+            SQLiteParameter Telefonoprivato_dts = new SQLiteParameter("@Telefonoprivato_dts", item.Telefonoprivato_dts);
             parColl.Add(Telefonoprivato_dts);
 
-            OleDbParameter Trattamenticollegati_dts = new OleDbParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
+            SQLiteParameter Trattamenticollegati_dts = new SQLiteParameter("@Trattamenticollegati_dts", item.Trattamenticollegati_dts);
             parColl.Add(Trattamenticollegati_dts);
-            OleDbParameter Via1_dts = new OleDbParameter("@Via1_dts", item.Via1_dts);
+            SQLiteParameter Via1_dts = new SQLiteParameter("@Via1_dts", item.Via1_dts);
             parColl.Add(Via1_dts);
-            OleDbParameter Via2_dts = new OleDbParameter("@Via2_dts", item.Via2_dts);
+            SQLiteParameter Via2_dts = new SQLiteParameter("@Via2_dts", item.Via2_dts);
             parColl.Add(Via2_dts);
 
-            OleDbParameter Via3_dts = new OleDbParameter("@Via3_dts", item.Via3_dts);
+            SQLiteParameter Via3_dts = new SQLiteParameter("@Via3_dts", item.Via3_dts);
             parColl.Add(Via3_dts);
 
-            OleDbParameter Pagamenti_dts = new OleDbParameter("@Pagamenti_dts", item.Pagamenti_dts);
+            SQLiteParameter Pagamenti_dts = new SQLiteParameter("@Pagamenti_dts", item.Pagamenti_dts);
             parColl.Add(Pagamenti_dts);
 
-            OleDbParameter ricfatt_dts = new OleDbParameter("@ricfatt_dts", item.ricfatt_dts);
+            SQLiteParameter ricfatt_dts = new SQLiteParameter("@ricfatt_dts", item.ricfatt_dts);
             parColl.Add(ricfatt_dts);
-            OleDbParameter noteriservate_dts = new OleDbParameter("@noteriservate_dts", item.noteriservate_dts);
+            SQLiteParameter noteriservate_dts = new SQLiteParameter("@noteriservate_dts", item.noteriservate_dts);
             parColl.Add(noteriservate_dts);
-            OleDbParameter indirizzofatt_dts = new OleDbParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
+            SQLiteParameter indirizzofatt_dts = new SQLiteParameter("@indirizzofatt_dts", item.indirizzofatt_dts);
             parColl.Add(indirizzofatt_dts);
 
-            OleDbParameter niscrordine_dts = new OleDbParameter("@niscrordine_dts", item.niscrordine_dts);
+            SQLiteParameter niscrordine_dts = new SQLiteParameter("@niscrordine_dts", item.niscrordine_dts);
             parColl.Add(niscrordine_dts);
-            OleDbParameter locordine_dts = new OleDbParameter("@locordine_dts", item.locordine_dts);
+            SQLiteParameter locordine_dts = new SQLiteParameter("@locordine_dts", item.locordine_dts);
             parColl.Add(locordine_dts);
-            OleDbParameter annofrequenza_dts = new OleDbParameter("@annofrequenza_dts", item.annofrequenza_dts);
+            SQLiteParameter annofrequenza_dts = new SQLiteParameter("@annofrequenza_dts", item.annofrequenza_dts);
             parColl.Add(annofrequenza_dts);
-            OleDbParameter nomeuniversita_dts = new OleDbParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
+            SQLiteParameter nomeuniversita_dts = new SQLiteParameter("@nomeuniversita_dts", item.nomeuniversita_dts);
             parColl.Add(nomeuniversita_dts);
-            OleDbParameter dettagliuniversita_dts = new OleDbParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
+            SQLiteParameter dettagliuniversita_dts = new SQLiteParameter("@dettagliuniversita_dts", item.dettagliuniversita_dts);
             parColl.Add(dettagliuniversita_dts);
-            OleDbParameter Boolfields_dts = new OleDbParameter("@Boolfields_dts", item.Boolfields_dts);
+            SQLiteParameter Boolfields_dts = new SQLiteParameter("@Boolfields_dts", item.Boolfields_dts);
             parColl.Add(Boolfields_dts);
-            OleDbParameter Textfield1_dts = new OleDbParameter("@Textfield1_dts", item.Textfield1_dts);
+            SQLiteParameter Textfield1_dts = new SQLiteParameter("@Textfield1_dts", item.Textfield1_dts);
             parColl.Add(Textfield1_dts);
-            OleDbParameter Interventieseguiti_dts = new OleDbParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
+            SQLiteParameter Interventieseguiti_dts = new SQLiteParameter("@Interventieseguiti_dts", item.Interventieseguiti_dts);
             parColl.Add(Interventieseguiti_dts);
 
-            OleDbParameter Id_dts = new OleDbParameter("@Id_dts", item.Id_dts_collegato);
+            SQLiteParameter Id_dts = new SQLiteParameter("@Id_dts", item.Id_dts_collegato);
             parColl.Add(Id_dts);
             string query = "UPDATE " + _tblarchiviodettaglio + " SET AccettazioneStatuto_dts=@AccettazioneStatuto_dts,Altrespecializzazioni_dts=@Altrespecializzazioni_dts,Annolaurea_dts=@Annolaurea_dts,Annospecializzazione_dts=@Annospecializzazione_dts,Bloccoaccesso_dts=@Bloccoaccesso_dts,Cap1_dts=@Cap1_dts,Cap2_dts=@Cap2_dts,Cap3_dts=@Cap3_dts,Certificazione_dts=@Certificazione_dts,CodiceCOMUNE1_dts=@CodiceCOMUNE1_dts,CodiceCOMUNE2_dts=@CodiceCOMUNE2_dts,CodiceCOMUNE3_dts=@CodiceCOMUNE3_dts,CodiceNAZIONE1_dts=@CodiceNAZIONE1_dts,CodiceNAZIONE2_dts=@CodiceNAZIONE2_dts,CodiceNAZIONE3_dts=@CodiceNAZIONE3_dts,CodicePROVINCIA1_dts=@CodicePROVINCIA1_dts,CodicePROVINCIA2_dts=@CodicePROVINCIA2_dts,CodicePROVINCIA3_dts=@CodicePROVINCIA3_dts,Datanascita_dts=@Datanascita_dts,CodiceREGIONE1_dts=@CodiceREGIONE1_dts,CodiceREGIONE2_dts=@CodiceREGIONE2_dts,CodiceREGIONE3_dts=@CodiceREGIONE3_dts,Cognome_dts=@Cognome_dts,Emailriservata_dts=@Emailriservata_dts,Latitudine1_dts=@Latitudine1_dts,Latitudine2_dts=@Latitudine2_dts,Latitudine3_dts=@Latitudine3_dts,Longitudine1_dts=@Longitudine1_dts,Longitudine2_dts=@Longitudine2_dts,Longitudine3_dts=@Longitudine3_dts,Nome_dts=@Nome_dts,Nomeposizione1_dts=@Nomeposizione1_dts,Nomeposizione2_dts=@Nomeposizione2_dts,Nomeposizione3_dts=@Nomeposizione3_dts,Pivacf_dts=@Pivacf_dts,Socioaltraassociazione_dts=@Socioaltraassociazione_dts,SocioIsaps_dts=@SocioIsaps_dts,Sociopresentatore1_dts=@Sociopresentatore1_dts,Sociopresentatore2_dts=@Sociopresentatore2_dts,SocioSicpre_dts=@SocioSicpre_dts,Telefono1_dts=@Telefono1_dts,Telefono2_dts=@Telefono2_dts,Telefono3_dts=@Telefono3_dts,Telefonoprivato_dts=@Telefonoprivato_dts,Trattamenticollegati_dts=@Trattamenticollegati_dts,Via1_dts=@Via1_dts,Via2_dts=@Via2_dts,Via3_dts=@Via3_dts,Pagamenti_dts=@Pagamenti_dts,ricfatt_dts=@ricfatt_dts,noteriservate_dts=@noteriservate_dts,indirizzofatt_dts=@indirizzofatt_dts, niscrordine_dts=@niscrordine_dts, locordine_dts=@locordine_dts,annofrequenza_dts=@annofrequenza_dts, nomeuniversita_dts=@nomeuniversita_dts,dettagliuniversita_dts=@dettagliuniversita_dts, Boolfields_dts=@Boolfields_dts, Textfield1_dts=@Textfield1_dts, Interventieseguiti_dts=@Interventieseguiti_dts WHERE [Id_dts]=@Id_dts ";
 
@@ -3848,18 +3965,18 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 if (connessione == null || connessione == "") return;
                 if (item == null || item.Id == 0) return;
-                OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
                 parColl.Add(p1);
                 string query = "DELETE FROM " + _tblarchivio + " WHERE ([ID]=@id)";
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
 
                 if (item.Id_dts_collegato != 0)
                 {
-                    List<OleDbParameter> parCollsub = new List<OleDbParameter>();
-                    OleDbParameter pidsub = new OleDbParameter("@id_dts", item.Id_dts_collegato);//OleDbType.VarChar
+                    List<SQLiteParameter> parCollsub = new List<SQLiteParameter>();
+                    SQLiteParameter pidsub = new SQLiteParameter("@id_dts", item.Id_dts_collegato);//OleDbType.VarChar
                     parCollsub.Add(pidsub);
                     query = "DELETE FROM " + _tblarchiviodettaglio + " WHERE ([ID_DTS]=@id_dts)";
                     dbDataAccess.ExecuteStoredProcListOle(query, parCollsub, connessione);
@@ -3902,27 +4019,27 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InserisciAggiornaCaratteristica(string connessione, Tabrif item, string tablename)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            OleDbParameter p1 = new OleDbParameter("@Descrizione", item.Campo1);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Descrizione", item.Campo1);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p21 = new OleDbParameter("@CodiceTipo", item.Codice);
+            SQLiteParameter p21 = new SQLiteParameter("@CodiceTipo", item.Codice);
             parColl.Add(p21);
-            OleDbParameter p8 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            SQLiteParameter p8 = new SQLiteParameter("@Lingua", item.Lingua);//OleDbType.VarChar
             parColl.Add(p8);
 
-            OleDbParameter pclink = new OleDbParameter("@relatedCodiceTipo", item.Campo2);//OleDbType.VarChar
+            SQLiteParameter pclink = new SQLiteParameter("@relatedCodiceTipo", item.Campo2);//OleDbType.VarChar
             parColl.Add(pclink);
 
-            OleDbParameter ps1 = new OleDbParameter("@Spare1", item.Campo3);//OleDbType.VarChar
+            SQLiteParameter ps1 = new SQLiteParameter("@Spare1", item.Campo3);//OleDbType.VarChar
             parColl.Add(ps1);
-            OleDbParameter ps2 = new OleDbParameter("@Spare2", item.Campo4);//OleDbType.VarChar
+            SQLiteParameter ps2 = new SQLiteParameter("@Spare2", item.Campo4);//OleDbType.VarChar
             parColl.Add(ps2);
-            OleDbParameter ps3 = new OleDbParameter("@Spare3", item.Campo5);//OleDbType.VarChar
+            SQLiteParameter ps3 = new SQLiteParameter("@Spare3", item.Campo5);//OleDbType.VarChar
             parColl.Add(ps3);
-            OleDbParameter ps4 = new OleDbParameter("@Spare4", item.Campo6);//OleDbType.VarChar
+            SQLiteParameter ps4 = new SQLiteParameter("@Spare4", item.Campo6);//OleDbType.VarChar
             parColl.Add(ps4);
-            OleDbParameter ps5 = new OleDbParameter("@Spare5", item.Campo7);//OleDbType.VarChar
+            SQLiteParameter ps5 = new SQLiteParameter("@Spare5", item.Campo7);//OleDbType.VarChar
             parColl.Add(ps5);
 
             string query = "";
@@ -3965,8 +4082,8 @@ namespace WelcomeLibrary.DAL
 
             if (idused.Exists(i => i == item.Codice)) return "Codice utilizzato, rimovere i riferimenti prima della cancellazione.";
 
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter pcod = new OleDbParameter("@Codice", item.Codice);//OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter pcod = new SQLiteParameter("@Codice", item.Codice);//OleDbType.VarChar
             parColl.Add(pcod);
             string query = "DELETE FROM " + tablename + " WHERE Codice=@Codice";
             try
@@ -3989,14 +4106,14 @@ namespace WelcomeLibrary.DAL
         {
             List<string> list = new List<string>();
             if (connection == null || connection == "") return list;
-            List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+            List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
             try
             {
                 string query = "SELECT DISTINCT " + Campocaratteristica + " FROM " + Tblarchivio;
 
                 //if (!string.IsNullOrEmpty(codiceTipologia))
                 //{
-                //    OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", codiceTipologia);
+                //    SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", codiceTipologia);
                 //    _parUsed.Add(ptip);
                 //    if (!query.ToLower().Contains("where"))
                 //        query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
@@ -4005,8 +4122,8 @@ namespace WelcomeLibrary.DAL
                 //}
                 query += " order BY " + Campocaratteristica;
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -4054,7 +4171,7 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "SELECT TOP 1 * FROM dbo_TBLRIF_PRODOTTO order BY CodiceProdotto Desc";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -4165,7 +4282,7 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "SELECT TOP 1 * FROM dbo_TBLRIF_SOTTOPRODOTTO order BY CodiceSottoProdotto Desc";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -4200,18 +4317,18 @@ namespace WelcomeLibrary.DAL
         public void UpdateProdotto(string connessione,
             Prodotto item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
             if (item.Lingua == "I")
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p2 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p4 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p4);
 
 
@@ -4229,13 +4346,13 @@ namespace WelcomeLibrary.DAL
             }
             else
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p2 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p4 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p4);
 
 
@@ -4261,19 +4378,19 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InsertProdotto(string connessione, Prodotto item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
             if (item.Lingua == "I")
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p3 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p4 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p4);
                 string nuovocodiceprodotto = CreareCodiceAggiornatoProdotto(connessione);
-                OleDbParameter p2 = new OleDbParameter("@CodiceProdotto", nuovocodiceprodotto);
+                SQLiteParameter p2 = new SQLiteParameter("@CodiceProdotto", nuovocodiceprodotto);
                 parColl.Add(p2);
                 item.CodiceProdotto = nuovocodiceprodotto;
             }
@@ -4281,13 +4398,13 @@ namespace WelcomeLibrary.DAL
             {
                 //se il prodotto non è in italiano, siamo al secodno inserimento quindi nell'altra lingua e gli devo assegnare lo stesso codice prodotto
                 Prodotto tmp_item = CaricaUltimoProdotto(connessione);
-                OleDbParameter p1 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p3 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p4 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p4);
-                OleDbParameter p2 = new OleDbParameter("@CodiceProdotto", tmp_item.CodiceProdotto);
+                SQLiteParameter p2 = new SQLiteParameter("@CodiceProdotto", tmp_item.CodiceProdotto);
                 parColl.Add(p2);
             }
 
@@ -4313,27 +4430,27 @@ namespace WelcomeLibrary.DAL
         public void DeleteProdotto(string connessione,
           Prodotto item, bool controllapresenza = true)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "" || string.IsNullOrEmpty(item.CodiceProdotto)) return;
 
             if (controllapresenza)
             {
                 //Verifichiamo che nella categoria prodotti non siano presenti prodotti in quella categoria/sottocategoria
-                OleDbParameter pprov = new OleDbParameter("@CodicePROVINCIA", "%");
+                SQLiteParameter pprov = new SQLiteParameter("@CodicePROVINCIA", "%");
                 parColl.Add(pprov);
-                OleDbParameter pcom = new OleDbParameter("@CodiceCOMUNE", "%");
+                SQLiteParameter pcom = new SQLiteParameter("@CodiceCOMUNE", "%");
                 parColl.Add(pcom);
-                OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", "%");
+                SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", "%");
                 parColl.Add(ptip);
-                OleDbParameter preg = new OleDbParameter("@CodiceREGIONE", "%");
+                SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", "%");
                 parColl.Add(preg);
-                OleDbParameter prmin = new OleDbParameter("@PrezzoMin", "0");
+                SQLiteParameter prmin = new SQLiteParameter("@PrezzoMin", "0");
                 parColl.Add(prmin);
-                OleDbParameter prmax = new OleDbParameter("@PrezzoMax", double.MaxValue);
+                SQLiteParameter prmax = new SQLiteParameter("@PrezzoMax", double.MaxValue);
                 parColl.Add(prmax);
-                OleDbParameter pcat = new OleDbParameter("@CodiceCategoria", item.CodiceProdotto);
+                SQLiteParameter pcat = new SQLiteParameter("@CodiceCategoria", item.CodiceProdotto);
                 parColl.Add(pcat);
-                OleDbParameter pcat2 = new OleDbParameter("@CodiceCategoria2Liv", "%");
+                SQLiteParameter pcat2 = new SQLiteParameter("@CodiceCategoria2Liv", "%");
                 parColl.Add(pcat2);
                 OfferteCollection offerte = this.CaricaOfferteFiltrate(connessione, parColl);
                 if (offerte != null && offerte.Count > 0)
@@ -4343,8 +4460,8 @@ namespace WelcomeLibrary.DAL
             }
 
             //Qui devi cancellare dalle tabelle prodotto e dalla tabella sottoprodotti ...
-            parColl = new List<OleDbParameter>();
-            OleDbParameter p1prod = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1prod = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
             parColl.Add(p1prod);
             string query = "DELETE FROM dbo_TBLRIF_PRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
             try
@@ -4356,8 +4473,8 @@ namespace WelcomeLibrary.DAL
                 throw new ApplicationException("Errore, cancellazione SottoProdotto  :" + error.Message, error);
             }
 
-            parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
             parColl.Add(p1);
             query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
             try
@@ -4381,19 +4498,19 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InsertSottoProdotto(string connessione, SProdotto item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
             if (item.Lingua == "I")
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p3 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p4 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p4);
                 string nuovocodicesottoprodotto = CreareCodiceAggiornatoSottoprodotto(connessione);
-                OleDbParameter p2 = new OleDbParameter("@CodiceSottoprodotto", CreareCodiceAggiornatoSottoprodotto(connessione));
+                SQLiteParameter p2 = new SQLiteParameter("@CodiceSottoprodotto", CreareCodiceAggiornatoSottoprodotto(connessione));
                 parColl.Add(p2);
                 item.CodiceSProdotto = nuovocodicesottoprodotto;
             }
@@ -4401,13 +4518,13 @@ namespace WelcomeLibrary.DAL
             {
                 //se il prodotto non è in italiano, siamo al secodno inserimento quindi nell'altra lingua e gli devo assegnare lo stesso codice prodotto
                 SProdotto tmp_item = CaricaUltimoSottoProdotto(connessione);
-                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p3 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p3 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p4 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p4);
-                OleDbParameter p2 = new OleDbParameter("@CodiceSottoprodotto", tmp_item.CodiceSProdotto);
+                SQLiteParameter p2 = new SQLiteParameter("@CodiceSottoprodotto", tmp_item.CodiceSProdotto);
                 parColl.Add(p2);
             }
 
@@ -4434,28 +4551,28 @@ namespace WelcomeLibrary.DAL
         public void DeleteSottoProdotto(string connessione,
             SProdotto item, bool controllapresenza = true)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "" || string.IsNullOrEmpty(item.CodiceProdotto) || string.IsNullOrEmpty(item.CodiceSProdotto)) return;
 
 
             if (controllapresenza)
             {
                 //Verifichiamo che nella categoria sottoprodotti non siano presenti prodotti in quella categoria/sottocategoria
-                OleDbParameter pprov = new OleDbParameter("@CodicePROVINCIA", "%");
+                SQLiteParameter pprov = new SQLiteParameter("@CodicePROVINCIA", "%");
                 parColl.Add(pprov);
-                OleDbParameter pcom = new OleDbParameter("@CodiceCOMUNE", "%");
+                SQLiteParameter pcom = new SQLiteParameter("@CodiceCOMUNE", "%");
                 parColl.Add(pcom);
-                OleDbParameter ptip = new OleDbParameter("@CodiceTIPOLOGIA", "%");
+                SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", "%");
                 parColl.Add(ptip);
-                OleDbParameter preg = new OleDbParameter("@CodiceREGIONE", "%");
+                SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", "%");
                 parColl.Add(preg);
-                OleDbParameter prmin = new OleDbParameter("@PrezzoMin", "0");
+                SQLiteParameter prmin = new SQLiteParameter("@PrezzoMin", "0");
                 parColl.Add(prmin);
-                OleDbParameter prmax = new OleDbParameter("@PrezzoMax", double.MaxValue);
+                SQLiteParameter prmax = new SQLiteParameter("@PrezzoMax", double.MaxValue);
                 parColl.Add(prmax);
-                OleDbParameter pcat = new OleDbParameter("@CodiceCategoria", item.CodiceProdotto);
+                SQLiteParameter pcat = new SQLiteParameter("@CodiceCategoria", item.CodiceProdotto);
                 parColl.Add(pcat);
-                OleDbParameter pcat2 = new OleDbParameter("@CodiceCategoria2Liv", item.CodiceSProdotto);
+                SQLiteParameter pcat2 = new SQLiteParameter("@CodiceCategoria2Liv", item.CodiceSProdotto);
                 parColl.Add(pcat2);
                 OfferteCollection offerte = this.CaricaOfferteFiltrate(connessione, parColl);
                 if (offerte != null && offerte.Count > 0)
@@ -4464,10 +4581,10 @@ namespace WelcomeLibrary.DAL
                 }
             }
 
-            parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+            parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
             parColl.Add(p3);
             string query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto AND CodiceSottoprodotto=@CodiceSottoprodotto  ";
             try
@@ -4492,18 +4609,18 @@ namespace WelcomeLibrary.DAL
         public void UpdateSottoProdotto(string connessione,
             SProdotto item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
             if (item.Lingua == "I")
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p2 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p4 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p4);
 
 
@@ -4521,13 +4638,13 @@ namespace WelcomeLibrary.DAL
             }
             else
             {
-                OleDbParameter p1 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@Descrizione", item.Descrizione);
+                SQLiteParameter p2 = new SQLiteParameter("@Descrizione", item.Descrizione);
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Lingua", item.Lingua);
+                SQLiteParameter p4 = new SQLiteParameter("@Lingua", item.Lingua);
                 parColl.Add(p4);
 
 
@@ -4622,8 +4739,8 @@ namespace WelcomeLibrary.DAL
 
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
-            List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
-            parColl = new List<System.Data.OleDb.OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            parColl = new List<SQLiteParameter>();
             offerteDM offDM = new offerteDM();
             WelcomeLibrary.DOM.OfferteCollection lista = new WelcomeLibrary.DOM.OfferteCollection();
 
@@ -4633,7 +4750,7 @@ namespace WelcomeLibrary.DAL
                 //Carichiamo in memoria tutti le ultime 1000 news ( eventualmente x tipologia )
                 if (!string.IsNullOrEmpty(FiltroTipologia))
                 {
-                    OleDbParameter filtrotipologia = new OleDbParameter("@CodiceTIPOLOGIA", FiltroTipologia);
+                    SQLiteParameter filtrotipologia = new SQLiteParameter("@CodiceTIPOLOGIA", FiltroTipologia);
                     parColl.Add(filtrotipologia);
                 }
                 lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua);

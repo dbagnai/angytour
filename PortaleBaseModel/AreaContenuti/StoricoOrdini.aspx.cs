@@ -7,7 +7,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Text;
 using WelcomeLibrary.UF;
 
@@ -219,20 +219,20 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     {
         eCommerceDM eDM = new eCommerceDM();
         TotaliCarrelloCollection ordini = new TotaliCarrelloCollection();
-        List<OleDbParameter> parcoll = new List<OleDbParameter>();
+        List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
         if (!string.IsNullOrWhiteSpace(id_cliente))
         {
-            OleDbParameter parid = new OleDbParameter("@Id_cliente", id_cliente);
+            SQLiteParameter parid = new SQLiteParameter("@Id_cliente", id_cliente);
             parcoll.Add(parid);
         }
         if (!string.IsNullOrWhiteSpace(idcommerciale))
         {
-            OleDbParameter parid1 = new OleDbParameter("@Id_commerciale", idcommerciale);
+            SQLiteParameter parid1 = new SQLiteParameter("@Id_commerciale", idcommerciale);
             parcoll.Add(parid1);
         }
         if (!string.IsNullOrEmpty(codiceordine))
         {
-            OleDbParameter parcod = new OleDbParameter("@Codiceordine", codiceordine);
+            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", codiceordine);
             parcoll.Add(parcod);
         }
         if (!string.IsNullOrEmpty(datamin))
@@ -240,7 +240,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             DateTime _dt;
             if (DateTime.TryParse(datamin, out _dt))
             {
-                OleDbParameter pardmin = new OleDbParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
+                SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmin);
             }
         }
@@ -249,7 +249,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             DateTime _dt;
             if (DateTime.TryParse(datamax, out _dt))
             {
-                OleDbParameter pardmax = new OleDbParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
+                SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmax);
             }
         }

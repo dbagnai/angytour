@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
 using WelcomeLibrary.DAL;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.UF
 {
@@ -116,7 +116,7 @@ namespace WelcomeLibrary.UF
 			try
 			{
 
-				OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+				SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
 				using (reader)
 				{
 					if (reader == null) { return; };
@@ -229,12 +229,12 @@ namespace WelcomeLibrary.UF
 
             string connection = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
             string query = "SELECT ID, Gruppo,Categoria,Lingua,Chiave,Valore,Comment FROM TBL_Risorse";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
 
             if (!string.IsNullOrEmpty(pgruppo))
             {
-                OleDbParameter pg = new OleDbParameter("@Gruppo", pgruppo);//OleDbType.VarChar
+                SQLiteParameter pg = new SQLiteParameter("@Gruppo", pgruppo);//OleDbType.VarChar
                 parColl.Add(pg);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE Gruppo like @Gruppo ";
@@ -243,7 +243,7 @@ namespace WelcomeLibrary.UF
             }
             if (!string.IsNullOrEmpty(pcategoria))
             {
-                OleDbParameter pc = new OleDbParameter("@Categoria", pcategoria);//OleDbType.VarChar
+                SQLiteParameter pc = new SQLiteParameter("@Categoria", pcategoria);//OleDbType.VarChar
                 parColl.Add(pc);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE Categoria like @Categoria ";
@@ -252,7 +252,7 @@ namespace WelcomeLibrary.UF
             }
             if (!string.IsNullOrEmpty(plingua))
             {
-                OleDbParameter pl = new OleDbParameter("@Lingua", plingua);//OleDbType.VarChar
+                SQLiteParameter pl = new SQLiteParameter("@Lingua", plingua);//OleDbType.VarChar
                 parColl.Add(pl);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE Lingua like @Lingua ";
@@ -261,7 +261,7 @@ namespace WelcomeLibrary.UF
             }
             if (!string.IsNullOrEmpty(pchiave))
             {
-                OleDbParameter pch = new OleDbParameter("@Chiave", pchiave);//OleDbType.VarChar
+                SQLiteParameter pch = new SQLiteParameter("@Chiave", pchiave);//OleDbType.VarChar
                 parColl.Add(pch);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE Chiave like @Chiave ";
@@ -272,7 +272,7 @@ namespace WelcomeLibrary.UF
             try
             {
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return Items; };
@@ -378,13 +378,13 @@ namespace WelcomeLibrary.UF
             foreach (ResourceItem item in list)
             {
                 if (connessione == null || connessione == "") return err;
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
-                OleDbParameter p2 = new OleDbParameter("@Chiave", item.Chiave);
+                SQLiteParameter p2 = new SQLiteParameter("@Chiave", item.Chiave);
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@Valore", item.Valore);
+                SQLiteParameter p3 = new SQLiteParameter("@Valore", item.Valore);
                 parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@Gruppo", item.Gruppo);
+                SQLiteParameter p4 = new SQLiteParameter("@Gruppo", item.Gruppo);
                 parColl.Add(p4);
 
 
@@ -403,11 +403,11 @@ namespace WelcomeLibrary.UF
                         continue;
                     }
 
-                    OleDbParameter pcat = new OleDbParameter("@Categoria", (item.Categoria != null ? item.Categoria : ""));
+                    SQLiteParameter pcat = new SQLiteParameter("@Categoria", (item.Categoria != null ? item.Categoria : ""));
                     parColl.Add(pcat);
-                    OleDbParameter pcom = new OleDbParameter("@Comment", (item.Comment != null ? item.Comment : ""));
+                    SQLiteParameter pcom = new SQLiteParameter("@Comment", (item.Comment != null ? item.Comment : ""));
                     parColl.Add(pcom);
-                    OleDbParameter plin = new OleDbParameter("@Lingua", item.Lingua);
+                    SQLiteParameter plin = new SQLiteParameter("@Lingua", item.Lingua);
                     parColl.Add(plin);
 
                     query = "INSERT INTO TBL_Risorse (Chiave,Valore,Gruppo,Categoria";

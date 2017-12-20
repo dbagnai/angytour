@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.UF;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -36,39 +37,39 @@ namespace WelcomeLibrary.DAL
             Carrello item;
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
                 query = "SELECT A.*,B.* FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
 
-                OleDbParameter p1 = new OleDbParameter("@SessionId", SessionId);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@SessionId", SessionId);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@ipClient", ipClient);//OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@ipClient", ipClient);//OleDbType.VarChar
                 parColl.Add(p2);
                 if (id_prodotto != 0 || !string.IsNullOrEmpty(idcombinato))
                 {
                     query += " and A.id_prodotto like @id_prodotto";
-                    OleDbParameter p3 = new OleDbParameter("@id_prodotto", id_prodotto);//OleDbType.VarChar
+                    SQLiteParameter p3 = new SQLiteParameter("@id_prodotto", id_prodotto);//OleDbType.VarChar
                     parColl.Add(p3);
                     query += " and A.campo2 like @campo2";
-                    OleDbParameter p4 = new OleDbParameter("@campo2", idcombinato);//OleDbType.VarChar
+                    SQLiteParameter p4 = new SQLiteParameter("@campo2", idcombinato);//OleDbType.VarChar
                     parColl.Add(p4);
                 }
                 //if (!string.IsNullOrEmpty(idcombinato))
                 //{
                 //    query += " and A.campo2 like @campo2";
-                //    OleDbParameter p4b = new OleDbParameter("@campo2", idcombinato);//OleDbType.VarChar
+                //    SQLiteParameter p4b = new SQLiteParameter("@campo2", idcombinato);//OleDbType.VarChar
                 //    parColl.Add(p4b);
                 //}
 
                 if (idrecordcarrello != 0)
                 {
                     query += " and A.id like @id";
-                    OleDbParameter p5 = new OleDbParameter("@id", idrecordcarrello);//OleDbType.VarChar
+                    SQLiteParameter p5 = new SQLiteParameter("@id", idrecordcarrello);//OleDbType.VarChar
                     parColl.Add(p5);
                 }
                 query += " order by A.id desc ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -227,15 +228,15 @@ namespace WelcomeLibrary.DAL
             Carrello item;
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
                 query = "SELECT A.*,B.* FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
 
-                OleDbParameter p1 = new OleDbParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
                 query += " order by A.id desc ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -392,16 +393,16 @@ namespace WelcomeLibrary.DAL
             int ret = 0;
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
                 query = "SELECT count(*) as prodotti FROM TBL_CARRELLO where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
 
-                OleDbParameter p1 = new OleDbParameter("@SessionId", SessionId);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@SessionId", SessionId);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@ipClient", ipClient);//OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@ipClient", ipClient);//OleDbType.VarChar
                 parColl.Add(p2);
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return 0; };
@@ -438,10 +439,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM TBL_CARRELLO where ID=@ID";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -514,8 +515,8 @@ namespace WelcomeLibrary.DAL
             {
                 //string query = "SELECT * FROM TBL_CARRELLO order BY CodiceOrdine Desc";
                 string query = "SELECT TOP 1 * FROM TBL_CARRELLO ORDER BY CodiceOrdine DESC,id desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -566,10 +567,10 @@ namespace WelcomeLibrary.DAL
             {
 
                 string query = "SELECT * FROM TBL_CARRELLO where CodiceOrdine=@CodiceOrdine";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceOrdine", codiceordine);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceOrdine", codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -602,7 +603,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InsertUpdateCarrello(string connessione, Carrello item, bool aggiungiavalori = true)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
             //Per prima cosa svuotiamo il carrello dagli elementi scaduti
@@ -653,14 +654,14 @@ namespace WelcomeLibrary.DAL
             if (item.SessionId == null || item.SessionId == "") return;
             if (item.IpClient == null || item.IpClient == "") return;
 
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
-            OleDbParameter p1 = new OleDbParameter("@dataoggi", dbDataAccess.CorrectDatenow( System.DateTime.Now));
+            SQLiteParameter p1 = new SQLiteParameter("@dataoggi", dbDataAccess.CorrectDatenow( System.DateTime.Now));
             //p1.OleDbType = OleDbType.Date;
             parColl.Add(p1);
-            //OleDbParameter p2 = new OleDbParameter("@SessionId", item.SessionId);
+            //SQLiteParameter p2 = new SQLiteParameter("@SessionId", item.SessionId);
             //parColl.Add(p2);
-            //OleDbParameter p3 = new OleDbParameter("@IpClient", item.IpClient);
+            //SQLiteParameter p3 = new SQLiteParameter("@IpClient", item.IpClient);
             //parColl.Add(p3);
 
             string query = "DELETE * FROM TBL_CARRELLO ";
@@ -691,40 +692,40 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InsertCarrello(string connessione, Carrello item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@SessionId", item.SessionId);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@SessionId", item.SessionId);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Prezzo", item.Prezzo);
+            SQLiteParameter p2 = new SQLiteParameter("@Prezzo", item.Prezzo);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
+            SQLiteParameter p3 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@Iva", item.Iva);
+            SQLiteParameter p4 = new SQLiteParameter("@Iva", item.Iva);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@Numero", item.Numero);
+            SQLiteParameter p5 = new SQLiteParameter("@Numero", item.Numero);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@CodiceProdotto", item.CodiceProdotto);
+            SQLiteParameter p6 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@IpClient", item.IpClient);
+            SQLiteParameter p7 = new SQLiteParameter("@IpClient", item.IpClient);
             parColl.Add(p7);
-            OleDbParameter p8 = new OleDbParameter("@Validita", item.Validita);
+            SQLiteParameter p8 = new SQLiteParameter("@Validita", item.Validita);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@CodiceOrdine", item.CodiceOrdine);
+            SQLiteParameter p9 = new SQLiteParameter("@CodiceOrdine", item.CodiceOrdine);
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@Campo1", item.Campo1);
+            SQLiteParameter p10 = new SQLiteParameter("@Campo1", item.Campo1);
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@Campo2", item.Campo2);
+            SQLiteParameter p11 = new SQLiteParameter("@Campo2", item.Campo2);
             parColl.Add(p11);
-            OleDbParameter pidprod = new OleDbParameter("@id_prodotto", item.id_prodotto);
+            SQLiteParameter pidprod = new SQLiteParameter("@id_prodotto", item.id_prodotto);
             parColl.Add(pidprod);
-            OleDbParameter pidcliente = new OleDbParameter("@idcliente", item.ID_cliente);// 
+            SQLiteParameter pidcliente = new SQLiteParameter("@idcliente", item.ID_cliente);// 
             parColl.Add(pidcliente);
-            OleDbParameter pnazione = new OleDbParameter("@Codicenazione", item.Codicenazione);// 
+            SQLiteParameter pnazione = new SQLiteParameter("@Codicenazione", item.Codicenazione);// 
             parColl.Add(pnazione);
-            OleDbParameter pprovincia = new OleDbParameter("@Codiceprovincia", item.Codiceprovincia);// 
+            SQLiteParameter pprovincia = new SQLiteParameter("@Codiceprovincia", item.Codiceprovincia);// 
             parColl.Add(pprovincia);
-            OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);// 
+            SQLiteParameter pcodicesconto = new SQLiteParameter("@Codicesconto", item.Codicesconto);// 
             parColl.Add(pcodicesconto);
 
             string query = "INSERT INTO TBL_CARRELLO([SessionId],[Prezzo],[Data],[Iva],[Numero],[CodiceProdotto],[IpClient],[Validita],[CodiceOrdine],[Campo1],[Campo2],[id_prodotto],[ID_cliente],[Codicenazione],[Codiceprovincia],[Codicesconto]) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@Campo1,@Campo2,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
@@ -748,7 +749,7 @@ namespace WelcomeLibrary.DAL
         public void UpdateCarrello(string connessione, Carrello item)
         {
             //string CodiceOrdineTemporaneo = "";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (item == null || item.id_prodotto == 0 || item.ID == 0) return;
             //if (string.IsNullOrEmpty(item.CodiceOrdine))
@@ -762,33 +763,33 @@ namespace WelcomeLibrary.DAL
 
             if (item.Numero > 0)
             {
-                OleDbParameter p2 = new OleDbParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
+                SQLiteParameter p2 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
                 parColl.Add(p2);
-                OleDbParameter p9 = new OleDbParameter("@Numero", item.Numero);
+                SQLiteParameter p9 = new SQLiteParameter("@Numero", item.Numero);
                 parColl.Add(p9);
-                OleDbParameter p3 = new OleDbParameter("@CodiceOrdine", item.CodiceOrdine);//OleDbType.VarChar
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceOrdine", item.CodiceOrdine);//OleDbType.VarChar
                 parColl.Add(p3);
 
 
-                OleDbParameter p4 = new OleDbParameter("@Campo1", item.Campo1);//lo uso per l'email del cliente che fà l'ordine
+                SQLiteParameter p4 = new SQLiteParameter("@Campo1", item.Campo1);//lo uso per l'email del cliente che fà l'ordine
                 parColl.Add(p4);
 
-                OleDbParameter p5 = new OleDbParameter("@Campo2", item.Campo2);//lo uso per il json delle caratteristiche
+                SQLiteParameter p5 = new SQLiteParameter("@Campo2", item.Campo2);//lo uso per il json delle caratteristiche
                 parColl.Add(p5);
 
-                OleDbParameter p6 = new OleDbParameter("@Campo3", item.Campo3);// 
+                SQLiteParameter p6 = new SQLiteParameter("@Campo3", item.Campo3);// 
                 parColl.Add(p6);
 
-                OleDbParameter pidcliente = new OleDbParameter("@idcliente", item.ID_cliente);// 
+                SQLiteParameter pidcliente = new SQLiteParameter("@idcliente", item.ID_cliente);// 
                 parColl.Add(pidcliente);
-                OleDbParameter pnazione = new OleDbParameter("@Codicenazione", item.Codicenazione);// 
+                SQLiteParameter pnazione = new SQLiteParameter("@Codicenazione", item.Codicenazione);// 
                 parColl.Add(pnazione);
-                OleDbParameter pprovincia = new OleDbParameter("@Codiceprovincia", item.Codiceprovincia);// 
+                SQLiteParameter pprovincia = new SQLiteParameter("@Codiceprovincia", item.Codiceprovincia);// 
                 parColl.Add(pprovincia);
-                OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);// 
+                SQLiteParameter pcodicesconto = new SQLiteParameter("@Codicesconto", item.Codicesconto);// 
                 parColl.Add(pcodicesconto);
 
-                OleDbParameter p1 = new OleDbParameter("@ID", item.ID);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@ID", item.ID);//OleDbType.VarChar
                 parColl.Add(p1);
 
 
@@ -815,14 +816,14 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void DeleteCarrelloPerIDCodCarr(string connessione, int ID, string CodCar)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (ID == null || ID == 0) return;
             if (string.IsNullOrEmpty(CodCar)) CodCar = "";
 
-            OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Campo2", CodCar);
+            SQLiteParameter p2 = new SQLiteParameter("@Campo2", CodCar);
             parColl.Add(p2);
 
             string query = "DELETE * FROM TBL_CARRELLO WHERE ([ID]=@ID) and ([Campo2]=@Campo2)";
@@ -845,11 +846,11 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void DeleteCarrelloPerID(string connessione, int ID)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (ID == null || ID == 0) return;
 
-            OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "DELETE * FROM TBL_CARRELLO WHERE ([ID]=@ID)";
@@ -872,11 +873,11 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void UpdateCarrelloPerListaID(string connessione, string codicenazione, string listaid)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (listaid == null || listaid == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@codicenazione", codicenazione);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@codicenazione", codicenazione);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "UPDATE TBL_CARRELLO SET Codicenazione = @codicenazione WHERE [ID] in " + listaid;
@@ -898,11 +899,11 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void UpdateCarrelloSessionidPerListaID(string connessione, string sessionid, string listaid)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (listaid == null || listaid == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@Sessionid", sessionid);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Sessionid", sessionid);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "UPDATE TBL_CARRELLO SET Sessionid = @Sessionid WHERE [ID] in " + listaid;
@@ -923,7 +924,7 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         /// <param name="connection"></param>
         /// <returns></returns>
-        public TotaliCarrelloCollection CaricaListaOrdini(string connection, List<OleDbParameter> parColl, string maxrecord = "", bool caricacarrelloitems = false)
+        public TotaliCarrelloCollection CaricaListaOrdini(string connection, List<SQLiteParameter> parColl, string maxrecord = "", bool caricacarrelloitems = false)
         {
             TotaliCarrelloCollection list = new TotaliCarrelloCollection();
 
@@ -934,7 +935,7 @@ namespace WelcomeLibrary.DAL
             {
 
                 string query = "";
-                List<OleDbParameter> _parUsed = new List<OleDbParameter>();
+                List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
 
                 if (string.IsNullOrEmpty(maxrecord))
                     query = "SELECT * FROM TBL_CARRELLO_ORDINI  ";
@@ -944,18 +945,18 @@ namespace WelcomeLibrary.DAL
                 //if (caricacarrelloitems)
                 //    query += " left join TBL_CARRELLO B on Codiceordine=B.Codiceordine ";
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_cliente"; }))
                 {
-                    OleDbParameter pidcliente = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_cliente"; });
+                    SQLiteParameter pidcliente = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_cliente"; });
                     _parUsed.Add(pidcliente);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Id_cliente = @Id_cliente ";
                     else
                         query += " AND Id_cliente = @Id_cliente  ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; }))
                 {
-                    OleDbParameter pidcomm = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; });
+                    SQLiteParameter pidcomm = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_commerciale"; });
                     _parUsed.Add(pidcomm);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Id_commerciale = @Id_commerciale ";
@@ -963,9 +964,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND Id_commerciale = @Id_commerciale  ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Mailcliente"; }))
                 {
-                    OleDbParameter pmailcliente = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Mailcliente"; });
+                    SQLiteParameter pmailcliente = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Mailcliente"; });
                     _parUsed.Add(pmailcliente);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Mailcliente like @Mailcliente ";
@@ -973,9 +974,9 @@ namespace WelcomeLibrary.DAL
                         query += " AND Mailcliente like @Mailcliente  ";
                 }
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
                 {
-                    OleDbParameter pCodiceordine = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                    SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
                     _parUsed.Add(pCodiceordine);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE Codiceordine like @Codiceordine ";
@@ -984,18 +985,18 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@DataMin"; }))
                 {
-                    OleDbParameter pDataMin = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMin"; });
+                    SQLiteParameter pDataMin = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@DataMin"; });
                     _parUsed.Add(pDataMin);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE DataOrdine >= @DataMin ";
                     else
                         query += " AND DataOrdine >= @DataMin ";
                 }
-                if (parColl.Exists(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@DataMax"; }))
                 {
-                    OleDbParameter pDataMax = parColl.Find(delegate (OleDbParameter tmp) { return tmp.ParameterName == "@DataMax"; });
+                    SQLiteParameter pDataMax = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@DataMax"; });
                     _parUsed.Add(pDataMax);
                     if (!query.ToLower().Contains("where"))
                         query += " WHERE DataOrdine <= @DataMax ";
@@ -1003,11 +1004,11 @@ namespace WelcomeLibrary.DAL
                         query += " AND DataOrdine <= @DataMax ";
                 }
 
-                //OleDbParameter p1 = new OleDbParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
+                //SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 //parColl.Add(p1);
                 query += " order by Dataordine desc, Id desc ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -1108,15 +1109,15 @@ namespace WelcomeLibrary.DAL
             TotaliCarrello item = null;
             try
             {
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
                 query = "SELECT * FROM TBL_CARRELLO_ORDINI where CodiceOrdine = @Codiceordine ";
 
-                OleDbParameter p1 = new OleDbParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
                 query += " order by id desc ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1202,54 +1203,54 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InsertOrdine(string connessione, TotaliCarrello item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@Indirizzofatturazione", item.Indirizzofatturazione);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Indirizzofatturazione", item.Indirizzofatturazione);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Indirizzospedizione", item.Indirizzospedizione);
+            SQLiteParameter p2 = new SQLiteParameter("@Indirizzospedizione", item.Indirizzospedizione);
             parColl.Add(p2);
 
-            OleDbParameter p3;
+            SQLiteParameter p3;
             if (item.Dataordine != null)
-                p3 = new OleDbParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
+                p3 = new SQLiteParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
             else
-                p3 = new OleDbParameter("@Dataordine", System.DBNull.Value);
+                p3 = new SQLiteParameter("@Dataordine", System.DBNull.Value);
             parColl.Add(p3);
 
-            OleDbParameter pidcliente = new OleDbParameter("@Id_cliente", item.Id_cliente);
+            SQLiteParameter pidcliente = new SQLiteParameter("@Id_cliente", item.Id_cliente);
             parColl.Add(pidcliente);
-            OleDbParameter p4 = new OleDbParameter("@Mailcliente", item.Mailcliente);
+            SQLiteParameter p4 = new SQLiteParameter("@Mailcliente", item.Mailcliente);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@Modalitapagamento", item.Modalitapagamento);
+            SQLiteParameter p5 = new SQLiteParameter("@Modalitapagamento", item.Modalitapagamento);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@Note", item.Note);
+            SQLiteParameter p6 = new SQLiteParameter("@Note", item.Note);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@Urlpagamento", item.Urlpagamento);
+            SQLiteParameter p7 = new SQLiteParameter("@Urlpagamento", item.Urlpagamento);
             parColl.Add(p7);
-            OleDbParameter p8 = new OleDbParameter("@CodiceOrdine", item.CodiceOrdine);
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceOrdine", item.CodiceOrdine);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@Denominazionecliente", item.Denominazionecliente);
+            SQLiteParameter p9 = new SQLiteParameter("@Denominazionecliente", item.Denominazionecliente);
             parColl.Add(p9);
-            OleDbParameter ppagato = new OleDbParameter("@Pagato", item.Pagato);
+            SQLiteParameter ppagato = new SQLiteParameter("@Pagato", item.Pagato);
             parColl.Add(ppagato);
-            OleDbParameter ptotaleordine = new OleDbParameter("@TotaleOrdine", item.TotaleOrdine);// 
+            SQLiteParameter ptotaleordine = new SQLiteParameter("@TotaleOrdine", item.TotaleOrdine);// 
             parColl.Add(ptotaleordine);
-            OleDbParameter ptotsconto = new OleDbParameter("@TotaleSconto", item.TotaleSconto);// 
+            SQLiteParameter ptotsconto = new SQLiteParameter("@TotaleSconto", item.TotaleSconto);// 
             parColl.Add(ptotsconto);
-            OleDbParameter pptotspedizione = new OleDbParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
+            SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
 
 
-            OleDbParameter pptotsmaltimento = new OleDbParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
+            SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
             parColl.Add(pptotsmaltimento);
-            OleDbParameter ppsupplementospedizione = new OleDbParameter("@Supplementospedizione", item.Supplementospedizione);// 
+            SQLiteParameter ppsupplementospedizione = new SQLiteParameter("@Supplementospedizione", item.Supplementospedizione);// 
             parColl.Add(ppsupplementospedizione);
 
 
-            OleDbParameter pidcommerciale = new OleDbParameter("@Id_commerciale", item.Id_commerciale);
+            SQLiteParameter pidcommerciale = new SQLiteParameter("@Id_commerciale", item.Id_commerciale);
             parColl.Add(pidcommerciale);
-            OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);
+            SQLiteParameter pcodicesconto = new SQLiteParameter("@Codicesconto", item.Codicesconto);
             parColl.Add(pcodicesconto);
 
 
@@ -1274,56 +1275,56 @@ namespace WelcomeLibrary.DAL
         public void UpdateOrdine(string connessione, TotaliCarrello item)
         {
             //string CodiceOrdineTemporaneo = "";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (item == null || item.CodiceOrdine == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@Indirizzofatturazione", item.Indirizzofatturazione);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Indirizzofatturazione", item.Indirizzofatturazione);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Indirizzospedizione", item.Indirizzospedizione);
+            SQLiteParameter p2 = new SQLiteParameter("@Indirizzospedizione", item.Indirizzospedizione);
             parColl.Add(p2);
-            OleDbParameter p3;
+            SQLiteParameter p3;
             if (item.Dataordine != null)
-                p3 = new OleDbParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
+                p3 = new SQLiteParameter("@Dataordine", dbDataAccess.CorrectDatenow( item.Dataordine.Value));
             else
-                p3 = new OleDbParameter("@Dataordine", System.DBNull.Value);
+                p3 = new SQLiteParameter("@Dataordine", System.DBNull.Value);
             parColl.Add(p3);
-            OleDbParameter pidcliente = new OleDbParameter("@Id_cliente", item.Id_cliente);
+            SQLiteParameter pidcliente = new SQLiteParameter("@Id_cliente", item.Id_cliente);
             parColl.Add(pidcliente);
-            OleDbParameter p4 = new OleDbParameter("@Mailcliente", item.Mailcliente);
+            SQLiteParameter p4 = new SQLiteParameter("@Mailcliente", item.Mailcliente);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@Modalitapagamento", item.Modalitapagamento);
+            SQLiteParameter p5 = new SQLiteParameter("@Modalitapagamento", item.Modalitapagamento);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@Note", item.Note);
+            SQLiteParameter p6 = new SQLiteParameter("@Note", item.Note);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@Urlpagamento", item.Urlpagamento);
+            SQLiteParameter p7 = new SQLiteParameter("@Urlpagamento", item.Urlpagamento);
             parColl.Add(p7);
-            OleDbParameter p8 = new OleDbParameter("@CodiceOrdine", item.CodiceOrdine);
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceOrdine", item.CodiceOrdine);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@Denominazionecliente", item.Denominazionecliente);
+            SQLiteParameter p9 = new SQLiteParameter("@Denominazionecliente", item.Denominazionecliente);
             parColl.Add(p9);
-            OleDbParameter ppagato = new OleDbParameter("@Pagato", item.Pagato);
+            SQLiteParameter ppagato = new SQLiteParameter("@Pagato", item.Pagato);
             parColl.Add(ppagato);
-            OleDbParameter ptotaleordine = new OleDbParameter("@TotaleOrdine", item.TotaleOrdine);// 
+            SQLiteParameter ptotaleordine = new SQLiteParameter("@TotaleOrdine", item.TotaleOrdine);// 
             parColl.Add(ptotaleordine);
-            OleDbParameter ptotsconto = new OleDbParameter("@TotaleSconto", item.TotaleSconto);// 
+            SQLiteParameter ptotsconto = new SQLiteParameter("@TotaleSconto", item.TotaleSconto);// 
             parColl.Add(ptotsconto);
-            OleDbParameter pptotspedizione = new OleDbParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
+            SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
 
 
 
-            OleDbParameter pptotsmaltimento = new OleDbParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
+            SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
             parColl.Add(pptotsmaltimento);
-            OleDbParameter ppsupplementospedizione = new OleDbParameter("@Supplementospedizione", item.Supplementospedizione);// 
+            SQLiteParameter ppsupplementospedizione = new SQLiteParameter("@Supplementospedizione", item.Supplementospedizione);// 
             parColl.Add(ppsupplementospedizione);
 
-            OleDbParameter pidcommerciale = new OleDbParameter("@Id_commerciale", item.Id_commerciale);
+            SQLiteParameter pidcommerciale = new SQLiteParameter("@Id_commerciale", item.Id_commerciale);
             parColl.Add(pidcommerciale);
-            OleDbParameter pcodicesconto = new OleDbParameter("@Codicesconto", item.Codicesconto);
+            SQLiteParameter pcodicesconto = new SQLiteParameter("@Codicesconto", item.Codicesconto);
             parColl.Add(pcodicesconto);
 
-            OleDbParameter pid = new OleDbParameter("@Id", item.Id);//OleDbType.VarChar
+            SQLiteParameter pid = new SQLiteParameter("@Id", item.Id);//OleDbType.VarChar
             parColl.Add(pid);
 
             string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@SupplementospCodicescontoedizione WHERE ([ID]=@Id)";
@@ -1347,11 +1348,11 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void DeleteOrdinePerID(string connessione, int ID)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (ID == null || ID == 0) return;
 
-            OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "DELETE * FROM TBL_CARRELLO_ORDINI WHERE ([ID]=@ID)";

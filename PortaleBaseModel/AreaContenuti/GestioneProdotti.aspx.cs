@@ -14,7 +14,7 @@ using WelcomeLibrary.DAL;
 using WelcomeLibrary.UF;
 using System.IO;
 using System.Drawing.Imaging;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 
 public partial class AreaContenuti_Gestioneprodotti : CommonPage
@@ -195,18 +195,18 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         {
 
             #region Versione con db ACCESS
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
             //if (tipologia == "") tipologia = "%";
             if (TipologiaOfferte != "")
             {
-                OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", TipologiaOfferte);
                 parColl.Add(p3);
             }
             if (testoricerca.Trim() != "")
             {
                 testoricerca = testoricerca.Replace(" ", "%");
-                OleDbParameter p7 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+                SQLiteParameter p7 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
                 parColl.Add(p7);
             }
 
@@ -218,34 +218,34 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 int.TryParse(mese, out _m);
                 if (_a != 0)
                 {
-                    OleDbParameter p8 = new OleDbParameter("@annofiltro", _a); //Data registr. ordine
+                    SQLiteParameter p8 = new SQLiteParameter("@annofiltro", _a); //Data registr. ordine
                     parColl.Add(p8);
                 }
                 if (_m != 0)
                 {
-                    OleDbParameter p9 = new OleDbParameter("@mesefiltro", _m); //Data registr. ordine
+                    SQLiteParameter p9 = new SQLiteParameter("@mesefiltro", _m); //Data registr. ordine
                     parColl.Add(p9);
                 }
             }
             if (CodiceProdotto != "")
             {
-                OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", CodiceProdotto);
+                SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdotto);
                 parColl.Add(p7);
             }
             if (ddlSottoProdSearch.SelectedValue != "")
             {
-                OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
+                SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
                 parColl.Add(p8);
             }
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
-            //    OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", CodiceProdottoRicerca);
+            //    SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdottoRicerca);
             //    parColl.Add(p7);
             //}
             //if (ddlSProdottoRicerca.SelectedValue != "")
             //{
-            //    OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
+            //    SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
             //    parColl.Add(p8);
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))

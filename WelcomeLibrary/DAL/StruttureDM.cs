@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -21,8 +21,8 @@ namespace WelcomeLibrary.DAL
             Struttura item = new Struttura();
             if (connection == null || connection == "") return item;
             //if (parColl == null || parColl.Count < 2) return list;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@Email", Email); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@Email", Email); //OleDbType.VarChar
             parColl.Add(p1);
 
             try
@@ -30,7 +30,7 @@ namespace WelcomeLibrary.DAL
                 string query = "";
                 query = "SELECT * FROM TBL_STRUTTURE WHERE Email = @Email";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return item; };
@@ -98,8 +98,8 @@ namespace WelcomeLibrary.DAL
             Struttura item = new Struttura();
             if (connection == null || connection == "") return item;
             //if (parColl == null || parColl.Count < 2) return list;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@ID_STRUTTURA", Id_Struttura); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@ID_STRUTTURA", Id_Struttura); //OleDbType.VarChar
             parColl.Add(p1);
 
             try
@@ -107,7 +107,7 @@ namespace WelcomeLibrary.DAL
                 string query = "";
                 query = "SELECT * FROM TBL_STRUTTURE WHERE ID_STRUTTURA = @ID_STRUTTURA";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return item; };
@@ -172,81 +172,81 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InserisciAggiornaStruttura(string connessione, ref Struttura item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            //OleDbParameter p1 = new OleDbParameter("@ID_struttura", item.Id_struttura);
+            //SQLiteParameter p1 = new SQLiteParameter("@ID_struttura", item.Id_struttura);
             //parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@CodiceTIPOLOGIA", item.CodTipologia);
+            SQLiteParameter p2 = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodTipologia);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@RagSoc", item.RagSoc);
+            SQLiteParameter p3 = new SQLiteParameter("@RagSoc", item.RagSoc);
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@PIva", item.PIva);
+            SQLiteParameter p4 = new SQLiteParameter("@PIva", item.PIva);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@CodiceNAZIONE", item.CodiceNAZIONE);
+            SQLiteParameter p5 = new SQLiteParameter("@CodiceNAZIONE", item.CodiceNAZIONE);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@CodiceREGIONE", item.CodiceREGIONE);
+            SQLiteParameter p6 = new SQLiteParameter("@CodiceREGIONE", item.CodiceREGIONE);
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@CodicePROVINCIA", item.CodicePROVINCIA);
+            SQLiteParameter p7 = new SQLiteParameter("@CodicePROVINCIA", item.CodicePROVINCIA);
             parColl.Add(p7);
-            OleDbParameter p8 = new OleDbParameter("@CodiceCOMUNE", item.CodiceCOMUNE);
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceCOMUNE);
             parColl.Add(p8);
-            OleDbParameter p9 = new OleDbParameter("@Cap", item.Cap);
+            SQLiteParameter p9 = new SQLiteParameter("@Cap", item.Cap);
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@Indirizzo", item.Indirizzo);
+            SQLiteParameter p10 = new SQLiteParameter("@Indirizzo", item.Indirizzo);
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@Email", item.Email);
+            SQLiteParameter p11 = new SQLiteParameter("@Email", item.Email);
             parColl.Add(p11);
-            OleDbParameter p12 = new OleDbParameter("@Telefono", item.Telefono);
+            SQLiteParameter p12 = new SQLiteParameter("@Telefono", item.Telefono);
             parColl.Add(p12);
-            OleDbParameter p13 = new OleDbParameter("@Cellulare", item.Cellulare);
+            SQLiteParameter p13 = new SQLiteParameter("@Cellulare", item.Cellulare);
             parColl.Add(p13);
-            OleDbParameter p14 = new OleDbParameter("@Offerta1", item.Offerta1);
+            SQLiteParameter p14 = new SQLiteParameter("@Offerta1", item.Offerta1);
             parColl.Add(p14);
-            OleDbParameter p15 = new OleDbParameter("@Offerta2", item.Offerta2);
+            SQLiteParameter p15 = new SQLiteParameter("@Offerta2", item.Offerta2);
             parColl.Add(p15);
-            OleDbParameter p16 = new OleDbParameter("@PacchettoAdesione", item.Adesione);
+            SQLiteParameter p16 = new SQLiteParameter("@PacchettoAdesione", item.Adesione);
             parColl.Add(p16);
-            OleDbParameter p17 = new OleDbParameter("@ModalitaPagamento", item.ModPagamento);
+            SQLiteParameter p17 = new SQLiteParameter("@ModalitaPagamento", item.ModPagamento);
             parColl.Add(p17);
-            OleDbParameter p18 = new OleDbParameter("@IPclient", item.IPclient);
+            SQLiteParameter p18 = new SQLiteParameter("@IPclient", item.IPclient);
             parColl.Add(p18);
 
-            OleDbParameter p19 = null;
+            SQLiteParameter p19 = null;
             if (item.DataInvioValidazione != null)
-                p19 = new OleDbParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow(item.DataInvioValidazione.Value));
+                p19 = new SQLiteParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow(item.DataInvioValidazione.Value));
             else
-                p19 = new OleDbParameter("@DataInvioValidazione", System.DBNull.Value);
+                p19 = new SQLiteParameter("@DataInvioValidazione", System.DBNull.Value);
             //p19.OleDbType = OleDbType.Date;
             parColl.Add(p19);
 
-            OleDbParameter p20;
+            SQLiteParameter p20;
             if (item.DataRicezioneValidazione != null)
-                p20 = new OleDbParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow(item.DataRicezioneValidazione.Value));
+                p20 = new SQLiteParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow(item.DataRicezioneValidazione.Value));
             else
-                p20 = new OleDbParameter("@DataRicezioneValidazione", System.DBNull.Value);
+                p20 = new SQLiteParameter("@DataRicezioneValidazione", System.DBNull.Value);
             //p20.OleDbType = OleDbType.Date;
             parColl.Add(p20);
 
-            OleDbParameter p21 = new OleDbParameter("@Validato", item.Validato);
+            SQLiteParameter p21 = new SQLiteParameter("@Validato", item.Validato);
             parColl.Add(p21);
-            OleDbParameter p22 = new OleDbParameter("@TestoFormConsensi", item.TestoFormConsensi);
+            SQLiteParameter p22 = new SQLiteParameter("@TestoFormConsensi", item.TestoFormConsensi);
             parColl.Add(p22);
-            OleDbParameter p23 = new OleDbParameter("@ConsensoPrivacy", item.ConsensoPrivacy);//OleDbType.VarChar
+            SQLiteParameter p23 = new SQLiteParameter("@ConsensoPrivacy", item.ConsensoPrivacy);//OleDbType.VarChar
             parColl.Add(p23);
-            OleDbParameter p24 = new OleDbParameter("@Consenso1", item.Consenso1);//OleDbType.VarChar
+            SQLiteParameter p24 = new SQLiteParameter("@Consenso1", item.Consenso1);//OleDbType.VarChar
             parColl.Add(p24);
-            OleDbParameter p25 = new OleDbParameter("@Consenso2", item.Consenso2);//OleDbType.VarChar
+            SQLiteParameter p25 = new SQLiteParameter("@Consenso2", item.Consenso2);//OleDbType.VarChar
             parColl.Add(p25);
-            OleDbParameter p26 = new OleDbParameter("@Consenso3", item.Consenso3);//OleDbType.VarChar
+            SQLiteParameter p26 = new SQLiteParameter("@Consenso3", item.Consenso3);//OleDbType.VarChar
             parColl.Add(p26);
-            OleDbParameter p27 = new OleDbParameter("@Consenso4", item.Consenso4);//OleDbType.VarChar
+            SQLiteParameter p27 = new SQLiteParameter("@Consenso4", item.Consenso4);//OleDbType.VarChar
             parColl.Add(p27);
-            OleDbParameter p28 = new OleDbParameter("@Lingua", item.Lingua);
+            SQLiteParameter p28 = new SQLiteParameter("@Lingua", item.Lingua);
             parColl.Add(p28);
-            OleDbParameter p29 = new OleDbParameter("@Spare1", item.Spare1);
+            SQLiteParameter p29 = new SQLiteParameter("@Spare1", item.Spare1);
             parColl.Add(p29);
-            OleDbParameter p30 = new OleDbParameter("@Spare2", item.Spare2);
+            SQLiteParameter p30 = new SQLiteParameter("@Spare2", item.Spare2);
             parColl.Add(p30);
 
             string query = "";

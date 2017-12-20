@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using ICSharpCode.SharpZipLib.Core;
@@ -1500,7 +1500,7 @@ namespace WelcomeLibrary.UF
             try
             {
                 string query = "SELECT * FROM " + tablename + " order BY Lingua,Descrizione";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return _list; };
@@ -1559,7 +1559,7 @@ namespace WelcomeLibrary.UF
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_TIPI_CLIENTI order BY Lingua,TipoCliente";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return; };
@@ -1624,7 +1624,7 @@ namespace WelcomeLibrary.UF
                 if (listacompleta)
                 {
                     string query = "SELECT * FROM dbo_TBLRIF_NAZIONI order BY Lingua,CodiceNazione,Descrizione";
-                    OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                    SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                     using (reader)
                     {
                         if (reader == null) { return; };
@@ -1927,7 +1927,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PROVINCE order BY Lingua,CodiceRegione,CodiceProvincia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -1984,7 +1984,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_COMUNI order BY Lingua,CodiceIncrocio";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2028,10 +2028,10 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_COMUNI where CodiceIncrocio = @codiceprovincia order BY Lingua,CodiceIncrocio";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@codiceprovincia", codiceprovincia);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@codiceprovincia", codiceprovincia);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -2076,7 +2076,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_CONTENUTI order BY Lingua,CodiceContenuto";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2117,10 +2117,10 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_CONTENUTI where Lingua=@Lingua order BY Lingua,CodiceContenuto";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@Lingua", Lingua);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@Lingua", Lingua);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2160,7 +2160,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_ANNUNCI order BY  Lingua,CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2201,7 +2201,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_ATTIVITA order BY  Lingua,CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2236,7 +2236,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_ATTIVITA order BY  Lingua,CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return "reader nullo"; };
@@ -2279,7 +2279,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PREZZI order BY  CodiceTipologiaCollegata,Lingua,CodiceFascia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2325,7 +2325,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PARAMETRO1 order BY  Descrizione,Lingua,CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2368,7 +2368,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PARAMETRO2 order BY  Descrizione,Lingua,CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2410,7 +2410,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_ATTIVITACAT1 order BY  Lingua,codcat1";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2451,7 +2451,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_ATTIVITA_LINK_LIV1 order BY  CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2494,7 +2494,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBL_ATTIVITA order BY  CodiceTipologia";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2537,10 +2537,10 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PRODOTTO where CodiceTipologia = @codiceattivita order BY Lingua,CodiceTipologia";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@codiceattivita", codiceattivita);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@codiceattivita", codiceattivita);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -2585,7 +2585,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_PRODOTTO order BY  Lingua,CodiceProdotto";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2626,7 +2626,7 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_SOTTOPRODOTTO order BY  Lingua,CodiceSottoprodotto";
-                OleDbDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return false; };
@@ -2668,10 +2668,10 @@ ZW	Zimbabwe
             try
             {
                 string query = "SELECT * FROM dbo_TBLRIF_SOTTOPRODOTTO where CodiceProdotto = @codiceprodotto order BY Lingua,CodiceProdotto";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@codiceprodotto", codiceprodotto);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@codiceprodotto", codiceprodotto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {

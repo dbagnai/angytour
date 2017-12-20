@@ -3,7 +3,7 @@ using System.Collections;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -519,27 +519,27 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //InizializzaEtichette();
 
         #region Versione con db ACCESS
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
 
         if (provincia != "")
         {
-            OleDbParameter p1 = new OleDbParameter("@CodicePROVINCIA", provincia);
+            SQLiteParameter p1 = new SQLiteParameter("@CodicePROVINCIA", provincia);
             parColl.Add(p1);
         }
         if (comune != "")
         {
-            OleDbParameter p2 = new OleDbParameter("@CodiceCOMUNE", comune);
+            SQLiteParameter p2 = new SQLiteParameter("@CodiceCOMUNE", comune);
             parColl.Add(p2);
         }
         if (tipologia != "" && tipologia != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologia);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
             parColl.Add(p3);
         }
         if (regione != "" && regione != "-")
         {
-            OleDbParameter p4 = new OleDbParameter("@CodiceREGIONE", regione);
+            SQLiteParameter p4 = new SQLiteParameter("@CodiceREGIONE", regione);
             parColl.Add(p4);
         }
         double PrezzoMin = double.MinValue;
@@ -552,63 +552,63 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 PrezzoMin = _selfascia.PrezzoMin;
                 PrezzoMax = _selfascia.PrezzoMax;
             }
-            OleDbParameter p5 = new OleDbParameter("@PrezzoMin", PrezzoMin);
+            SQLiteParameter p5 = new SQLiteParameter("@PrezzoMin", PrezzoMin);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@PrezzoMax", PrezzoMax);
+            SQLiteParameter p6 = new SQLiteParameter("@PrezzoMax", PrezzoMax);
             parColl.Add(p6);
         }
         if (categoria != "")
         {
-            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", categoria);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", categoria);
             parColl.Add(p7);
         }
 
         if (annata != "" && annata != "0")
         {
-            OleDbParameter pannata = new OleDbParameter("@Anno", annata);
+            SQLiteParameter pannata = new SQLiteParameter("@Anno", annata);
             parColl.Add(pannata);
         }
         if (caratteristica1 != "" && caratteristica1 != "0")
         {
-            OleDbParameter pcaratteristica1 = new OleDbParameter("@Caratteristica1", caratteristica1);
+            SQLiteParameter pcaratteristica1 = new SQLiteParameter("@Caratteristica1", caratteristica1);
             parColl.Add(pcaratteristica1);
         }
         if (caratteristica2 != "" && caratteristica2 != "0")
         {
-            OleDbParameter pcaratteristica2 = new OleDbParameter("@Caratteristica2", caratteristica2);
+            SQLiteParameter pcaratteristica2 = new SQLiteParameter("@Caratteristica2", caratteristica2);
             parColl.Add(pcaratteristica2);
         }
         if (caratteristica3 != "" && caratteristica3 != "0")
         {
-            OleDbParameter pcaratteristica3 = new OleDbParameter("@Caratteristica3", caratteristica3);
+            SQLiteParameter pcaratteristica3 = new SQLiteParameter("@Caratteristica3", caratteristica3);
             parColl.Add(pcaratteristica3);
         }
         if (caratteristica4 != "" && caratteristica4 != "0")
         {
-            OleDbParameter pcaratteristica4 = new OleDbParameter("@Caratteristica4", caratteristica4);
+            SQLiteParameter pcaratteristica4 = new SQLiteParameter("@Caratteristica4", caratteristica4);
             parColl.Add(pcaratteristica4);
         }
         if (caratteristica5 != "" && caratteristica5 != "0")
         {
-            OleDbParameter pcaratteristica5 = new OleDbParameter("@Caratteristica5", caratteristica5);
+            SQLiteParameter pcaratteristica5 = new SQLiteParameter("@Caratteristica5", caratteristica5);
             parColl.Add(pcaratteristica5);
         }
 
         if (Vetrina != false)
         {
-            OleDbParameter pvetrina = new OleDbParameter("@Vetrina", Vetrina);
+            SQLiteParameter pvetrina = new SQLiteParameter("@Vetrina", Vetrina);
             parColl.Add(pvetrina);
         }
 
         if (categoria2liv != "")
         {
-            OleDbParameter p8 = new OleDbParameter("@CodiceCategoria2Liv", categoria2liv);
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", categoria2liv);
             parColl.Add(p8);
         }
         if (testoricerca.Trim() != "")
         {
             testoricerca = testoricerca.Replace(" ", "%");
-            OleDbParameter p8 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+            SQLiteParameter p8 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
             parColl.Add(p8);
         }
         if (Mesefiltro.Trim() != "")//|| anno.Trim() != "")
@@ -619,12 +619,12 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             int.TryParse(Mesefiltro, out _m);
             if (_a != 0)
             {
-                OleDbParameter p8 = new OleDbParameter("@annofiltro", _a);
+                SQLiteParameter p8 = new SQLiteParameter("@annofiltro", _a);
                 parColl.Add(p8);
             }
             if (_m != 0)
             {
-                OleDbParameter p9 = new OleDbParameter("@mesefiltro", _m);
+                SQLiteParameter p9 = new SQLiteParameter("@mesefiltro", _m);
                 parColl.Add(p9);
             }
 
@@ -635,7 +635,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             int.TryParse(Giornofiltro, out _g);
             if (_g != 0)
             {
-                OleDbParameter pgiorno = new OleDbParameter("@giornofiltro", _g);
+                SQLiteParameter pgiorno = new SQLiteParameter("@giornofiltro", _g);
                 parColl.Add(pgiorno);
             }
         }

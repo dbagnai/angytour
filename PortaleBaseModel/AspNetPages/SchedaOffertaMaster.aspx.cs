@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 public partial class _SchedaOffertaMaster : CommonPage
 {
@@ -470,16 +470,16 @@ public partial class _SchedaOffertaMaster : CommonPage
         if (string.IsNullOrEmpty(tipologiadacaricare))
             tipologiadacaricare = "rif000001,rif000002,rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,rif000009";
 
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
         if (tipologiadacaricare != "" && tipologiadacaricare != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
             parColl.Add(p3);
         }
         if (categoria != "")
         {
-            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", categoria);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", categoria);
             parColl.Add(p7);
         }
         OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10", Lingua, false);
@@ -606,16 +606,16 @@ public partial class _SchedaOffertaMaster : CommonPage
         if (string.IsNullOrEmpty(tipologiadacaricare))
             tipologiadacaricare = "rif000001,rif000002,rif000003,rif000004,rif000005,rif000006,rif000007,rif000008,,rif000009";
 
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
         if (tipologiadacaricare != "" && tipologiadacaricare != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
             parColl.Add(p3);
         }
         if (Categoria != "")
         {
-            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", Categoria);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", Categoria);
             parColl.Add(p7);
         }
         offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10", Lingua, false);
@@ -692,10 +692,10 @@ public partial class _SchedaOffertaMaster : CommonPage
             rptOfferteGalleryDetail.DataSource = offerte;
             rptOfferteGalleryDetail.DataBind();
             //CArico anche la lista
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (CodiceTipologia != "" && CodiceTipologia != "-")
             {
-                OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", CodiceTipologia);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", CodiceTipologia);
                 parColl.Add(p3);
             }
             List<Offerte> offertelist = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua, false);

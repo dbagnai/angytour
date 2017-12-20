@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Data;
-using System.Data.Common;
-using System.Data.OleDb;
 using System.Collections.Generic;
 using System.Text;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.UF;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -28,10 +26,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM TBL_CONTENUTI where CodiceContenuto=@CodiceContenuto order BY DataInserimento Desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
                 using (reader)
                 {
@@ -119,10 +117,10 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "SELECT TOP " + maxrecord + " A.*,B.* FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc";
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -265,10 +263,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM TBL_CONTENUTI where ID=@ID order BY DataInserimento Desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@ID", idContenuto);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@ID", idContenuto);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -352,11 +350,11 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo )";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                //OleDbParameter p1 = new OleDbParameter("@Titolo", "%" + URI + "%");//OleDbType.VarChar
-                OleDbParameter p1 = new OleDbParameter("@Titolo", "%" + URI );//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                //SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI + "%");//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI );//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -536,14 +534,14 @@ namespace WelcomeLibrary.DAL
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
                 FotoColl = this.CreaStringheAllegati(FotoColl);
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                 parColl.Add(p2);
-                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                 //parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@id", idContenuto);//OleDbType.VarChar
+                SQLiteParameter p4 = new SQLiteParameter("@id", idContenuto);//OleDbType.VarChar
                 parColl.Add(p4);
                 string query = "UPDATE [TBL_CONTENUTI] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                 try
@@ -583,14 +581,14 @@ namespace WelcomeLibrary.DAL
                     //RIFORMIAMO LE STRINGHE schema e valori
                     //PER IL SALVATAGGIO NEL DB
                     FotoColl = this.CreaStringheAllegati(FotoColl);
-                    List<OleDbParameter> parColl = new List<OleDbParameter>();
-                    OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                    List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                    SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                     parColl.Add(p1);
-                    OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                    SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                     parColl.Add(p2);
-                    //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                    //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                     //parColl.Add(p3);
-                    OleDbParameter p4 = new OleDbParameter("@id", idContenuto);//OleDbType.VarChar
+                    SQLiteParameter p4 = new SQLiteParameter("@id", idContenuto);//OleDbType.VarChar
                     parColl.Add(p4);
                     string query = "UPDATE [TBL_CONTENUTI] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                     dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
@@ -633,14 +631,14 @@ namespace WelcomeLibrary.DAL
                 //PER IL SALVATAGGIO NEL DB
                 FotoColl = this.CreaStringheAllegati(FotoColl);
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@fotoschema", FotoColl.Schema);
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@fotoschema", FotoColl.Schema);
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@fotovalori", FotoColl.Valori);
+                SQLiteParameter p2 = new SQLiteParameter("@fotovalori", FotoColl.Valori);
                 parColl.Add(p2);
-                //OleDbParameter p3 = new OleDbParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
+                //SQLiteParameter p3 = new SQLiteParameter("@datainserimento", System.DateTime.Now.ToString());//OleDbType.VarChar
                 //parColl.Add(p3);
-                OleDbParameter p4 = new OleDbParameter("@id", idContenuto);//OleDbType.VarChar
+                SQLiteParameter p4 = new SQLiteParameter("@id", idContenuto);//OleDbType.VarChar
                 parColl.Add(p4);
                 string query = "UPDATE [TBL_CONTENUTI] SET [FotoSchema]=@fotoschema,[FotoValori]=@fotovalori  WHERE ([Id]=@id)";
                 try
@@ -669,10 +667,10 @@ namespace WelcomeLibrary.DAL
             if (idContenuto == null || idContenuto == 0) { return null; };
 
             string query = "SELECT [FotoSchema],[FotoValori] FROM TBL_CONTENUTI where ID=@idContenuto";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@idContenuto", idContenuto);//OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@idContenuto", idContenuto);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
             Contenuti item = new Contenuti();
             using (reader)
             {
@@ -703,49 +701,49 @@ namespace WelcomeLibrary.DAL
         public void InsertContenuto(string connessione,
         Contenuti item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@codicecontenuto", item.CodiceContenuto);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@codicecontenuto", item.CodiceContenuto);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@titoloi", item.TitoloI);
+            SQLiteParameter p2 = new SQLiteParameter("@titoloi", item.TitoloI);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@titologb", item.TitoloGB);
+            SQLiteParameter p3 = new SQLiteParameter("@titologb", item.TitoloGB);
             parColl.Add(p3);
-            OleDbParameter p3r = new OleDbParameter("@titoloru", item.TitoloRU);
+            SQLiteParameter p3r = new SQLiteParameter("@titoloru", item.TitoloRU);
             parColl.Add(p3r);
-            OleDbParameter p4 = new OleDbParameter("@descrizionei", item.DescrizioneI);
+            SQLiteParameter p4 = new SQLiteParameter("@descrizionei", item.DescrizioneI);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@descrizionegb", item.DescrizioneGB);
+            SQLiteParameter p5 = new SQLiteParameter("@descrizionegb", item.DescrizioneGB);
             parColl.Add(p5);
-            OleDbParameter p5r = new OleDbParameter("@descrizioneru", item.DescrizioneRU);
+            SQLiteParameter p5r = new SQLiteParameter("@descrizioneru", item.DescrizioneRU);
             parColl.Add(p5r);
 
 
 
-            OleDbParameter p6 = new OleDbParameter("@fotoschema", "");//item.FotoCollection_M.Schema
+            SQLiteParameter p6 = new SQLiteParameter("@fotoschema", "");//item.FotoCollection_M.Schema
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@fotovalori", "");//item.FotoCollection_M.Valori
+            SQLiteParameter p7 = new SQLiteParameter("@fotovalori", "");//item.FotoCollection_M.Valori
             parColl.Add(p7);
 
-            OleDbParameter p8 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 
-            OleDbParameter p9 = new OleDbParameter("@id_attivita", item.Id_attivita);
+            SQLiteParameter p9 = new SQLiteParameter("@id_attivita", item.Id_attivita);
             parColl.Add(p9);
 
-            OleDbParameter pct1 = new OleDbParameter("@customtitleI", item.CustomtitleI);
+            SQLiteParameter pct1 = new SQLiteParameter("@customtitleI", item.CustomtitleI);
             parColl.Add(pct1);
-            OleDbParameter pct2 = new OleDbParameter("@customtitleGB", item.CustomtitleGB);
+            SQLiteParameter pct2 = new SQLiteParameter("@customtitleGB", item.CustomtitleGB);
             parColl.Add(pct2);
-            OleDbParameter pct3 = new OleDbParameter("@customtitleRU", item.CustomtitleRU);
+            SQLiteParameter pct3 = new SQLiteParameter("@customtitleRU", item.CustomtitleRU);
             parColl.Add(pct3);
-            OleDbParameter pcd1 = new OleDbParameter("@customdescI", item.CustomdescI);
+            SQLiteParameter pcd1 = new SQLiteParameter("@customdescI", item.CustomdescI);
             parColl.Add(pcd1);
-            OleDbParameter pcd2 = new OleDbParameter("@customdescGB", item.CustomdescGB);
+            SQLiteParameter pcd2 = new SQLiteParameter("@customdescGB", item.CustomdescGB);
             parColl.Add(pcd2);
-            OleDbParameter pcd3 = new OleDbParameter("@customdescRU", item.CustomdescRU);
+            SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
 
             string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customdescI,customdescGB,customdescRU) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customdescI,@customdescGB,@customdescRU)";
@@ -769,47 +767,47 @@ namespace WelcomeLibrary.DAL
         public void UpdateContenuti(string connessione,
             Contenuti item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p2 = new OleDbParameter("@titoloi", item.TitoloI);
+            SQLiteParameter p2 = new SQLiteParameter("@titoloi", item.TitoloI);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@titologb", item.TitoloGB);
+            SQLiteParameter p3 = new SQLiteParameter("@titologb", item.TitoloGB);
             parColl.Add(p3);
-            OleDbParameter p3r = new OleDbParameter("@titoloru", item.TitoloRU);
+            SQLiteParameter p3r = new SQLiteParameter("@titoloru", item.TitoloRU);
             parColl.Add(p3r);
-            OleDbParameter p4 = new OleDbParameter("@descrizionei", item.DescrizioneI);
+            SQLiteParameter p4 = new SQLiteParameter("@descrizionei", item.DescrizioneI);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@descrizionegb", item.DescrizioneGB);
+            SQLiteParameter p5 = new SQLiteParameter("@descrizionegb", item.DescrizioneGB);
             parColl.Add(p5);
-            OleDbParameter p5r = new OleDbParameter("@descrizioneru", item.DescrizioneRU);
+            SQLiteParameter p5r = new SQLiteParameter("@descrizioneru", item.DescrizioneRU);
             parColl.Add(p5r);
-            //OleDbParameter p6 = new OleDbParameter("@fotoschema", item.FotoCollection_M.Schema);
+            //SQLiteParameter p6 = new SQLiteParameter("@fotoschema", item.FotoCollection_M.Schema);
             //parColl.Add(p6);
-            //OleDbParameter p7 = new OleDbParameter("@fotovalori", item.FotoCollection_M.Valori);
+            //SQLiteParameter p7 = new SQLiteParameter("@fotovalori", item.FotoCollection_M.Valori);
             //parColl.Add(p7);
 
-            OleDbParameter p8 = new OleDbParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 
-            OleDbParameter p9 = new OleDbParameter("@Id_attivita", item.Id_attivita);
+            SQLiteParameter p9 = new SQLiteParameter("@Id_attivita", item.Id_attivita);
             parColl.Add(p9);
 
-            OleDbParameter pct1 = new OleDbParameter("@customtitleI", item.CustomtitleI);
+            SQLiteParameter pct1 = new SQLiteParameter("@customtitleI", item.CustomtitleI);
             parColl.Add(pct1);
-            OleDbParameter pct2 = new OleDbParameter("@customtitleGB", item.CustomtitleGB);
+            SQLiteParameter pct2 = new SQLiteParameter("@customtitleGB", item.CustomtitleGB);
             parColl.Add(pct2);
-            OleDbParameter pct3 = new OleDbParameter("@customtitleRU", item.CustomtitleRU);
+            SQLiteParameter pct3 = new SQLiteParameter("@customtitleRU", item.CustomtitleRU);
             parColl.Add(pct3);
-            OleDbParameter pcd1 = new OleDbParameter("@customdescI", item.CustomdescI);
+            SQLiteParameter pcd1 = new SQLiteParameter("@customdescI", item.CustomdescI);
             parColl.Add(pcd1);
-            OleDbParameter pcd2 = new OleDbParameter("@customdescGB", item.CustomdescGB);
+            SQLiteParameter pcd2 = new SQLiteParameter("@customdescGB", item.CustomdescGB);
             parColl.Add(pcd2);
-            OleDbParameter pcd3 = new OleDbParameter("@customdescRU", item.CustomdescRU);
+            SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
 
-            OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
 
@@ -828,11 +826,11 @@ namespace WelcomeLibrary.DAL
         public void DeleteContenuti(string connessione,
                 Contenuti item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (item == null || item.Id == 0) return;
 
-            OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "DELETE FROM TBL_CONTENUTI WHERE ([ID]=@id)";

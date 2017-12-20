@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -26,20 +26,20 @@ namespace WelcomeLibrary.DAL
 
 
             //if (parColl == null || parColl.Count < 2) return list;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@Email", email); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@Email", email); //OleDbType.VarChar
             parColl.Add(p1);
             if (idtipocliente == "") idtipocliente = "0";//metto il cliente di tipo default per la ricerca se non specificato!!
 
             query += " and id_tipi_clienti=@id_tipi_clienti";
-            OleDbParameter p2 = new OleDbParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
+            SQLiteParameter p2 = new SQLiteParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
             parColl.Add(p2);
 
 
             try
             {
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return item; };
@@ -133,7 +133,7 @@ namespace WelcomeLibrary.DAL
             Cliente item = new Cliente();
             if (connection == null || connection == "") return item;
             if (codicesconto == null || codicesconto == "") return item;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
             string query = "";
             query = "SELECT *  FROM TBL_CLIENTI ";
@@ -142,20 +142,20 @@ namespace WelcomeLibrary.DAL
             if (!string.IsNullOrWhiteSpace(codicesconto))
             {
                 //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
-                OleDbParameter pcodsconto = new OleDbParameter("@Codicisconto", "%" + codicesconto + "%"); //OleDbType.VarChar
+                SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + codicesconto + "%"); //OleDbType.VarChar
                 parColl.Add(pcodsconto);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE Codicisconto like @Codicisconto ";
                 else
                     query += " AND Codicisconto like @Codicisconto  ";
-                OleDbParameter p1 = new OleDbParameter("@Codicesconto", codicesconto); //OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@Codicesconto", codicesconto); //OleDbType.VarChar
                 parColl.Add(p1);
             }
 
 
             if (idtipocliente != "")
             {
-                OleDbParameter p2 = new OleDbParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
                 parColl.Add(p2);
                 if (!query.ToLower().Contains("where"))
                     query += " WHERE  id_tipi_clienti=@id_tipi_clienti";
@@ -167,7 +167,7 @@ namespace WelcomeLibrary.DAL
             try
             {
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return item; };
@@ -294,15 +294,15 @@ namespace WelcomeLibrary.DAL
             Cliente item = new Cliente();
             if (connection == null || connection == "") return item;
             //if (parColl == null || parColl.Count < 2) return list;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@Id_cliente", ID_cliente); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@Id_cliente", ID_cliente); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "";
                 query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return item; };
@@ -393,13 +393,13 @@ namespace WelcomeLibrary.DAL
             string idret = "";
             int idtipocliente = 0;
             if (!int.TryParse(id_tipi_clienti, out idtipocliente)) return idret;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
             if (id_tipi_clienti == null || id_tipi_clienti == "") return idret;
 
             string query = "DELETE FROM TBL_CLIENTI WHERE ( ID_tipi_clienti = @id_tipi_clienti ) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@id_tipi_clienti", idtipocliente);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@id_tipi_clienti", idtipocliente);
             parColl.Add(p1);
 
             try
@@ -416,12 +416,12 @@ namespace WelcomeLibrary.DAL
         public string CancellaClientePerId(string connessione, int ID_cliente)
         {
             string idret = "";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_CLIENTI WHERE ( ID_CLIENTE = @ID_cliente ) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@ID_cliente", ID_cliente);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@ID_cliente", ID_cliente);
             parColl.Add(p1);
             try
             {
@@ -463,7 +463,7 @@ namespace WelcomeLibrary.DAL
                 else return list;
 
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -571,21 +571,21 @@ namespace WelcomeLibrary.DAL
                 query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
                 query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email and Validato = @Validato and Consenso1 = @Consenso1";
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
                 //Prendendo dai campi del cliente posso inserire i parametri di filtraggio!!!! _paramCliente
-                OleDbParameter p1 = new OleDbParameter("@Email", "%");
+                SQLiteParameter p1 = new SQLiteParameter("@Email", "%");
                 if (!string.IsNullOrEmpty(_paramCliente.Email))
                 {
-                    p1 = new OleDbParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
+                    p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
                 }
                 parColl.Add(p1);
-                OleDbParameter p2 = new OleDbParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
                 parColl.Add(p2);
-                OleDbParameter p3 = new OleDbParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
+                SQLiteParameter p3 = new SQLiteParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
                 parColl.Add(p3);
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
 
                 using (reader)
@@ -695,14 +695,14 @@ namespace WelcomeLibrary.DAL
             int test = 1;
             ClienteCollection List = new ClienteCollection();
             Cliente item = new Cliente();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "SELECT  G.*,C.*  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -801,19 +801,19 @@ namespace WelcomeLibrary.DAL
             ClienteCollection list = new ClienteCollection();
             if (constr == "") return list;
             string query = "SELECT ID_CLIENTE,Cognome,Nome,Email FROM [TBL_CLIENTI] WHERE  Cognome LIKE @testoricerca or Nome LIKE @testoricerca or Email like @testoricerca";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             // parametro
-            OleDbParameter p1 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%"); //OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%"); //OleDbType.VarChar
             parColl.Add(p1);
 
             int tmp = 0;
             if (int.TryParse(testoricerca, out tmp))
             {
-                OleDbParameter p2 = new OleDbParameter("@idcliente", tmp); //OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@idcliente", tmp); //OleDbType.VarChar
                 parColl.Add(p2);
                 query += " or ID_CLIENTE = @idcliente ";
             }
-            OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, constr);
+            SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, constr);
             Cliente item;
             using (reader)
             {
@@ -989,13 +989,13 @@ namespace WelcomeLibrary.DAL
                 query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
                 query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email ";
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
                 //Prendendo dai campi del cliente posso inserire i parametri di filtraggio!!!! _paramCliente
-                OleDbParameter p1 = new OleDbParameter("@Email", "%");
+                SQLiteParameter p1 = new SQLiteParameter("@Email", "%");
                 if (_paramCliente != null && !string.IsNullOrEmpty(_paramCliente.Email))
                 {
-                    p1 = new OleDbParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
+                    p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
                 }
                 parColl.Add(p1);
                 if (_paramCliente != null)
@@ -1003,15 +1003,15 @@ namespace WelcomeLibrary.DAL
                     if (!bypassvalidazione)
                     {
                         query += " and Validato = @Validato and Consenso1 = @Consenso1 ";
-                        OleDbParameter p2 = new OleDbParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
+                        SQLiteParameter p2 = new SQLiteParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
                         parColl.Add(p2);
-                        OleDbParameter p3 = new OleDbParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
+                        SQLiteParameter p3 = new SQLiteParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
                         parColl.Add(p3);
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Codicisconto))
                     {
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
-                        OleDbParameter pcodsconto = new OleDbParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
+                        SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
                         parColl.Add(pcodsconto);
                         query += " and Codicisconto like @Codicisconto ";
                     }
@@ -1019,26 +1019,26 @@ namespace WelcomeLibrary.DAL
                     if (!string.IsNullOrWhiteSpace(_paramCliente.id_tipi_clienti))
                     {
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
-                        OleDbParameter ptipi = new OleDbParameter("@id_tipi_clienti", _paramCliente.id_tipi_clienti); //OleDbType.VarChar
+                        SQLiteParameter ptipi = new SQLiteParameter("@id_tipi_clienti", _paramCliente.id_tipi_clienti); //OleDbType.VarChar
                         parColl.Add(ptipi);
                         query += " and ID_tipi_clienti = @id_tipi_clienti ";
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.CodiceNAZIONE))
                     {
-                        OleDbParameter pnazione = new OleDbParameter("@codnaz", _paramCliente.CodiceNAZIONE); //OleDbType.VarChar
+                        SQLiteParameter pnazione = new SQLiteParameter("@codnaz", _paramCliente.CodiceNAZIONE); //OleDbType.VarChar
                         parColl.Add(pnazione);
                         query += " and CodiceNAZIONE = @codnaz ";
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Lingua))
                     {
-                        OleDbParameter plingua = new OleDbParameter("@lingua", _paramCliente.Lingua); //OleDbType.VarChar
+                        SQLiteParameter plingua = new SQLiteParameter("@lingua", _paramCliente.Lingua); //OleDbType.VarChar
                         parColl.Add(plingua);
                         query += " and Lingua = @lingua ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Sesso))
                     {
-                        OleDbParameter psesso = new OleDbParameter("@Sesso", _paramCliente.Sesso); //OleDbType.VarChar
+                        SQLiteParameter psesso = new SQLiteParameter("@Sesso", _paramCliente.Sesso); //OleDbType.VarChar
                         parColl.Add(psesso);
                         query += " and Sesso = @Sesso ";
                     }
@@ -1058,10 +1058,10 @@ namespace WelcomeLibrary.DAL
                             DateTime di = System.DateTime.Now.AddYears(-emax);
                             DateTime df = System.DateTime.Now.AddYears(-emin);
 
-                            OleDbParameter datainizio = new OleDbParameter("@Data_inizio", dbDataAccess.CorrectDatenow( di));
+                            SQLiteParameter datainizio = new SQLiteParameter("@Data_inizio", dbDataAccess.CorrectDatenow( di));
                             parColl.Add(datainizio);
 
-                            OleDbParameter datafine = new OleDbParameter("@Data_fine", dbDataAccess.CorrectDatenow( df));
+                            SQLiteParameter datafine = new SQLiteParameter("@Data_fine", dbDataAccess.CorrectDatenow( df));
                             parColl.Add(datafine);
 
                             query += " AND   ( DataNascita >= @Data_inizio and  DataNascita <= @Data_fine )  ";
@@ -1080,7 +1080,7 @@ namespace WelcomeLibrary.DAL
                         if (anno != "0")
                         {
                             int.TryParse(anno, out annoa);
-                            OleDbParameter parannoa = new OleDbParameter("@anno", annoa); //OleDbType.VarChar
+                            SQLiteParameter parannoa = new SQLiteParameter("@anno", annoa); //OleDbType.VarChar
                             parColl.Add(parannoa);
                             query += " and (((Year([DataNascita]))=@anno)) ";
                         }
@@ -1088,7 +1088,7 @@ namespace WelcomeLibrary.DAL
                         if (mese != "0")
                         {
                             int.TryParse(mese, out mesea);
-                            OleDbParameter parmese = new OleDbParameter("@mese", mesea); //OleDbType.VarChar
+                            SQLiteParameter parmese = new SQLiteParameter("@mese", mesea); //OleDbType.VarChar
                             parColl.Add(parmese);
                             query += " and (((Month([DataNascita]))=@mese)) ";
                         }
@@ -1097,7 +1097,7 @@ namespace WelcomeLibrary.DAL
                         {
                             int.TryParse(giorno, out giornoa);
 
-                            OleDbParameter pargiorno = new OleDbParameter("@giorno", giornoa); //OleDbType.VarChar
+                            SQLiteParameter pargiorno = new SQLiteParameter("@giorno", giornoa); //OleDbType.VarChar
                             parColl.Add(pargiorno);
                             query += " and (((Day([DataNascita]))=@giorno)) ";
                         }
@@ -1107,7 +1107,7 @@ namespace WelcomeLibrary.DAL
 
                 }
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
 
                 using (reader)
@@ -1227,7 +1227,7 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "";
                 query = "SELECT * FROM dbo_TBLRIF_TIPI_CLIENTI  ";
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -1265,13 +1265,13 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InserisciAggiornaTipoCliente(string connessione, Tabrif item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            OleDbParameter p1 = new OleDbParameter("@TipoCliente", item.Campo1);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@TipoCliente", item.Campo1);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p21 = new OleDbParameter("@CodiceTipo", item.Codice);
+            SQLiteParameter p21 = new SQLiteParameter("@CodiceTipo", item.Codice);
             parColl.Add(p21);
-            OleDbParameter p8 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            SQLiteParameter p8 = new SQLiteParameter("@Lingua", item.Lingua);//OleDbType.VarChar
             parColl.Add(p8);
 
             string query = "";
@@ -1311,87 +1311,87 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InserisciAggiornaCliente(string connessione, ref Cliente item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            OleDbParameter p1 = new OleDbParameter("@Id_card", item.Id_card);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Id_card", item.Id_card);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p21 = new OleDbParameter("@Nome", item.Nome);
+            SQLiteParameter p21 = new SQLiteParameter("@Nome", item.Nome);
             parColl.Add(p21);
-            OleDbParameter p8 = new OleDbParameter("@Cognome", item.Cognome);//OleDbType.VarChar
+            SQLiteParameter p8 = new SQLiteParameter("@Cognome", item.Cognome);//OleDbType.VarChar
             parColl.Add(p8);
-            OleDbParameter p5 = new OleDbParameter("@CodiceNAZIONE", item.CodiceNAZIONE);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@CodiceNAZIONE", item.CodiceNAZIONE);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p7 = new OleDbParameter("@CodiceREGIONE", item.CodiceREGIONE);//OleDbType.VarChar
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceREGIONE", item.CodiceREGIONE);//OleDbType.VarChar
             parColl.Add(p7);
-            OleDbParameter p6 = new OleDbParameter("@CodicePROVINCIA", item.CodicePROVINCIA);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@CodicePROVINCIA", item.CodicePROVINCIA);//OleDbType.VarChar
             parColl.Add(p6);
-            OleDbParameter p4 = new OleDbParameter("@CodiceCOMUNE", item.CodiceCOMUNE);//OleDbType.VarChar
+            SQLiteParameter p4 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceCOMUNE);//OleDbType.VarChar
             parColl.Add(p4);
-            OleDbParameter p2 = new OleDbParameter("@Cap", item.Cap);//OleDbType.VarChar
+            SQLiteParameter p2 = new SQLiteParameter("@Cap", item.Cap);//OleDbType.VarChar
             parColl.Add(p2);
-            OleDbParameter p18 = new OleDbParameter("@Indirizzo", item.Indirizzo);
+            SQLiteParameter p18 = new SQLiteParameter("@Indirizzo", item.Indirizzo);
             parColl.Add(p18);
-            OleDbParameter p17 = new OleDbParameter("@Email", item.Email);
+            SQLiteParameter p17 = new SQLiteParameter("@Email", item.Email);
             parColl.Add(p17);
-            OleDbParameter p25 = new OleDbParameter("@Telefono", item.Telefono);
+            SQLiteParameter p25 = new SQLiteParameter("@Telefono", item.Telefono);
             parColl.Add(p25);
-            OleDbParameter p3 = new OleDbParameter("@Cellulare", item.Cellulare);//OleDbType.VarChar
+            SQLiteParameter p3 = new SQLiteParameter("@Cellulare", item.Cellulare);//OleDbType.VarChar
             parColl.Add(p3);
-            OleDbParameter p22 = new OleDbParameter("@Professione", item.Professione);
+            SQLiteParameter p22 = new SQLiteParameter("@Professione", item.Professione);
             parColl.Add(p22);
-            OleDbParameter p19 = new OleDbParameter("@IPclient", item.IPclient);
+            SQLiteParameter p19 = new SQLiteParameter("@IPclient", item.IPclient);
             parColl.Add(p19);
 
-            OleDbParameter p27 = new OleDbParameter("@Validato", item.Validato);
+            SQLiteParameter p27 = new SQLiteParameter("@Validato", item.Validato);
             parColl.Add(p27);
-            OleDbParameter p26 = new OleDbParameter("@TestoFormConsensi", item.TestoFormConsensi);
+            SQLiteParameter p26 = new SQLiteParameter("@TestoFormConsensi", item.TestoFormConsensi);
             parColl.Add(p26);
-            OleDbParameter p15 = new OleDbParameter("@DataNascita", dbDataAccess.CorrectDatenow(item.DataNascita));
+            SQLiteParameter p15 = new SQLiteParameter("@DataNascita", dbDataAccess.CorrectDatenow(item.DataNascita));
             parColl.Add(p15);
 
-            OleDbParameter p14 = null;
+            SQLiteParameter p14 = null;
             if (item.DataInvioValidazione != null)
-                p14 = new OleDbParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow( item.DataInvioValidazione.Value));
+                p14 = new SQLiteParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow( item.DataInvioValidazione.Value));
             else
-                p14 = new OleDbParameter("@DataInvioValidazione", System.DBNull.Value);
+                p14 = new SQLiteParameter("@DataInvioValidazione", System.DBNull.Value);
             //p14.DbType = System.Data.DbType.DateTime;
             parColl.Add(p14);
-            OleDbParameter p16;
+            SQLiteParameter p16;
             if (item.DataRicezioneValidazione != null)
-                p16 = new OleDbParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow( item.DataRicezioneValidazione.Value));
+                p16 = new SQLiteParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow( item.DataRicezioneValidazione.Value));
             else
-                p16 = new OleDbParameter("@DataRicezioneValidazione", System.DBNull.Value);
+                p16 = new SQLiteParameter("@DataRicezioneValidazione", System.DBNull.Value);
             //p16.DbType = System.Data.DbType.DateTime;
             parColl.Add(p16);
 
-            OleDbParameter p13 = new OleDbParameter("@ConsensoPrivacy", item.ConsensoPrivacy);//OleDbType.VarChar
+            SQLiteParameter p13 = new SQLiteParameter("@ConsensoPrivacy", item.ConsensoPrivacy);//OleDbType.VarChar
             parColl.Add(p13);
-            OleDbParameter p9 = new OleDbParameter("@Consenso1", item.Consenso1);//OleDbType.VarChar
+            SQLiteParameter p9 = new SQLiteParameter("@Consenso1", item.Consenso1);//OleDbType.VarChar
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@Consenso2", item.Consenso2);//OleDbType.VarChar
+            SQLiteParameter p10 = new SQLiteParameter("@Consenso2", item.Consenso2);//OleDbType.VarChar
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@Consenso3", item.Consenso3);//OleDbType.VarChar
+            SQLiteParameter p11 = new SQLiteParameter("@Consenso3", item.Consenso3);//OleDbType.VarChar
             parColl.Add(p11);
-            OleDbParameter p12 = new OleDbParameter("@Consenso4", item.Consenso4);//OleDbType.VarChar
+            SQLiteParameter p12 = new SQLiteParameter("@Consenso4", item.Consenso4);//OleDbType.VarChar
             parColl.Add(p12);
-            OleDbParameter p20 = new OleDbParameter("@Lingua", item.Lingua);
+            SQLiteParameter p20 = new SQLiteParameter("@Lingua", item.Lingua);
             parColl.Add(p20);
-            OleDbParameter p23 = new OleDbParameter("@Spare1", item.Spare1);
+            SQLiteParameter p23 = new SQLiteParameter("@Spare1", item.Spare1);
             parColl.Add(p23);
-            OleDbParameter p24 = new OleDbParameter("@Spare2", item.Spare2);
+            SQLiteParameter p24 = new SQLiteParameter("@Spare2", item.Spare2);
             parColl.Add(p24);
-            OleDbParameter p28 = new OleDbParameter("@Pivacf", item.Pivacf);
+            SQLiteParameter p28 = new SQLiteParameter("@Pivacf", item.Pivacf);
             parColl.Add(p28);
-            OleDbParameter pses = new OleDbParameter("@Sesso", item.Sesso);
+            SQLiteParameter pses = new SQLiteParameter("@Sesso", item.Sesso);
             parColl.Add(pses);
             if (string.IsNullOrEmpty(item.id_tipi_clienti)) item.id_tipi_clienti = "0";
-            OleDbParameter ptipi = new OleDbParameter("@id_tipi_clienti", item.id_tipi_clienti); //OleDbType.VarChar
+            SQLiteParameter ptipi = new SQLiteParameter("@id_tipi_clienti", item.id_tipi_clienti); //OleDbType.VarChar
             parColl.Add(ptipi);
 
-            OleDbParameter pcsco = new OleDbParameter("@Codicisconto", item.Codicisconto);
+            SQLiteParameter pcsco = new SQLiteParameter("@Codicisconto", item.Codicisconto);
             parColl.Add(pcsco);
 
-            OleDbParameter pserial = new OleDbParameter("@Serialized", item.Serialized);
+            SQLiteParameter pserial = new SQLiteParameter("@Serialized", item.Serialized);
             parColl.Add(pserial);
             string query = "";
             if (item.Id_cliente != 0)
@@ -1437,13 +1437,13 @@ namespace WelcomeLibrary.DAL
         /// <param name="idCliente"></param>
         public void unsubscribeCliente(string connessione, string idCliente)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (idCliente == null || idCliente == "") return;
 
-            OleDbParameter p27 = new OleDbParameter("@Validato", false);
+            SQLiteParameter p27 = new SQLiteParameter("@Validato", false);
             parColl.Add(p27);
-            OleDbParameter p9 = new OleDbParameter("@Consenso1", false);//OleDbType.VarChar
+            SQLiteParameter p9 = new SQLiteParameter("@Consenso1", false);//OleDbType.VarChar
             parColl.Add(p9);
 
             //UPdate

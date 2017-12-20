@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -442,12 +442,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         offerteDM offDM = new offerteDM();
         //OfferteCollection offerte = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, tipologiadacaricare, "6", false, Lingua, false);
 
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
-        OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+        SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologiadacaricare);
         parColl.Add(p3);
         if (Categoria.Trim() != "")
         {
-            OleDbParameter p7 = new OleDbParameter("@CodiceCategoria", Categoria);
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", Categoria);
             parColl.Add(p7);
         }
 

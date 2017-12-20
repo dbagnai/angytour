@@ -13,6 +13,7 @@ using System.Web.SessionState;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Data.SQLite;
 
 public class jpath
 {
@@ -687,47 +688,47 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         {
             //offerte = (OfferteCollection)offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filtri["tipologia"], filtri["maxelement"], false, lingua, false);
             //CARICO FILTRANDO ////////////////////////////////////////////////////////////////
-            List<System.Data.OleDb.OleDbParameter> parColl = new List<System.Data.OleDb.OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
             if (filtri.ContainsKey("id") && !string.IsNullOrEmpty(filtri["id"]))
             {
-                System.Data.OleDb.OleDbParameter pid = new System.Data.OleDb.OleDbParameter("@Id", filtri["id"]);
+                SQLiteParameter pid = new SQLiteParameter("@Id", filtri["id"]);
                 parColl.Add(pid);
             }
             if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
             {
-                System.Data.OleDb.OleDbParameter p3 = new System.Data.OleDb.OleDbParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
                 parColl.Add(p3);
             }
             if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
             {
-                System.Data.OleDb.OleDbParameter p7 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria", filtri["categoria"]);
+                SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", filtri["categoria"]);
                 parColl.Add(p7);
             }
             if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
             {
-                System.Data.OleDb.OleDbParameter p10 = new System.Data.OleDb.OleDbParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
+                SQLiteParameter p10 = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
                 parColl.Add(p10);
             }
             if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
             {
-                System.Data.OleDb.OleDbParameter pc1 = new System.Data.OleDb.OleDbParameter("@Caratteristica1", filtri["caratteristica1"]);
+                SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["caratteristica1"]);
                 parColl.Add(pc1);
             }
             if (filtri.ContainsKey("caratteristica2") && !string.IsNullOrEmpty(filtri["caratteristica2"]))
             {
-                System.Data.OleDb.OleDbParameter pc2 = new System.Data.OleDb.OleDbParameter("@Caratteristica2", filtri["caratteristica2"]);
+                SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["caratteristica2"]);
                 parColl.Add(pc2);
             }
             if (filtri.ContainsKey("caratteristica3") && !string.IsNullOrEmpty(filtri["caratteristica3"]))
             {
-                System.Data.OleDb.OleDbParameter pc3 = new System.Data.OleDb.OleDbParameter("@Caratteristica3", filtri["caratteristica3"]);
+                SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["caratteristica3"]);
                 parColl.Add(pc3);
             }
 
             if (filtri.ContainsKey("regione") && !string.IsNullOrEmpty(filtri["regione"]))
             {
-                System.Data.OleDb.OleDbParameter preg = new System.Data.OleDb.OleDbParameter("@CodiceREGIONE", filtri["regione"]);
+                SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", filtri["regione"]);
                 parColl.Add(preg);
             }
 
@@ -736,20 +737,20 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             {
                 bool _tmpb = false;
                 bool.TryParse(filtri["vetrina"], out _tmpb);
-                System.Data.OleDb.OleDbParameter pvet = new System.Data.OleDb.OleDbParameter("@Vetrina", _tmpb);
+                SQLiteParameter pvet = new SQLiteParameter("@Vetrina", _tmpb);
                 parColl.Add(pvet);
             }
             if (filtri.ContainsKey("promozioni") && !string.IsNullOrEmpty(filtri["promozioni"]))
             {
                 bool _tmpb = false;
                 bool.TryParse(filtri["promozioni"], out _tmpb);
-                System.Data.OleDb.OleDbParameter promo = new System.Data.OleDb.OleDbParameter("@promozioni", _tmpb);
+                SQLiteParameter promo = new SQLiteParameter("@promozioni", _tmpb);
                 parColl.Add(promo);
             }
             if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
             {
                 string testoricerca = filtri["testoricerca"].Trim().Replace(" ", "%");
-                System.Data.OleDb.OleDbParameter p8 = new System.Data.OleDb.OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+                SQLiteParameter p8 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
                 parColl.Add(p8);
             }
             string maxrecords = "";
@@ -771,12 +772,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         int.TryParse(mese, out _m);
                         if (_a != 0)
                         {
-                            System.Data.OleDb.OleDbParameter panno = new System.Data.OleDb.OleDbParameter("@annofiltro", _a);
+                            SQLiteParameter panno = new SQLiteParameter("@annofiltro", _a);
                             parColl.Add(panno);
                         }
                         if (_m != 0)
                         {
-                            System.Data.OleDb.OleDbParameter pmese = new System.Data.OleDb.OleDbParameter("@mesefiltro", _m);
+                            SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", _m);
                             parColl.Add(pmese);
                         }
 

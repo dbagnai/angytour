@@ -7,7 +7,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.UF;
-using System.Data.OleDb;
+using System.Data.SQLite;
 
 public partial class AspNetPages_ListaElenco : CommonPage
 {
@@ -323,26 +323,26 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
         //InizializzaEtichette();
         #region Versione con db ACCESS
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 #if true
 
         if (tipologia != "" && tipologia != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologia);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
             parColl.Add(p3);
         }
 
         if (testoricerca.Trim() != "")
         {
             testoricerca = testoricerca.Replace(" ", "%");
-            OleDbParameter p7 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+            SQLiteParameter p7 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
             parColl.Add(p7);
         }
         //Per ora non filtro le nazioni
         //if (ddlNazioneRicerca.SelectedValue.Trim() != "")
         //{
         //    string valorenaz = ddlNazioneRicerca.SelectedValue.Trim().Replace(" ", "%");
-        //    OleDbParameter pstringafiltronaz = new OleDbParameter("@CodiceNAZIONE", "%" + valorenaz + "%");
+        //    SQLiteParameter pstringafiltronaz = new SQLiteParameter("@CodiceNAZIONE", "%" + valorenaz + "%");
         //    parColl.Add(pstringafiltronaz);
         //}
         bool flagfiltroregione = false;
@@ -350,33 +350,33 @@ public partial class AspNetPages_ListaElenco : CommonPage
         {
             flagfiltroregione = true;
             string valorereg = ddlRegioneRicerca.SelectedValue.Trim().Replace(" ", "%");
-            OleDbParameter pstringafiltroreg = new OleDbParameter("@CodiceREGIONE", "%" + valorereg + "%");
+            SQLiteParameter pstringafiltroreg = new SQLiteParameter("@CodiceREGIONE", "%" + valorereg + "%");
             parColl.Add(pstringafiltroreg);
         }
         if (ddlProvinciaRicerca.SelectedValue.Trim() != "")
         {
             string valorepro = ddlProvinciaRicerca.SelectedValue.Trim().Replace(" ", "%");
-            OleDbParameter pstringafiltropro = new OleDbParameter("@CodicePROVINCIA", "%" + valorepro + "%");
+            SQLiteParameter pstringafiltropro = new SQLiteParameter("@CodicePROVINCIA", "%" + valorepro + "%");
             parColl.Add(pstringafiltropro);
         }
         //Per ora non filtro i comuni
         //if (ddlComuneRicerca.SelectedValue.Trim() != "")
         //{
         //    string valorecom = ddlComuneRicerca.SelectedValue.Trim().Replace(" ", "%");
-        //    OleDbParameter pstringafiltrocom = new OleDbParameter("@CodiceCOMUNE", "%" + valorecom + "%");
+        //    SQLiteParameter pstringafiltrocom = new SQLiteParameter("@CodiceCOMUNE", "%" + valorecom + "%");
         //    parColl.Add(pstringafiltrocom);
         //}
 
         if (Categoria.Trim() != "")
         {
-            OleDbParameter pcat = new OleDbParameter("@CodiceCategoria", "%" + Categoria + "%");
+            SQLiteParameter pcat = new SQLiteParameter("@CodiceCategoria", "%" + Categoria + "%");
             parColl.Add(pcat);
 
         }
 
         if (Categoria2liv.Trim() != "")
         {
-            OleDbParameter pcat2 = new OleDbParameter("@CodiceCategoria2Liv", "%" + Categoria2liv + "%");
+            SQLiteParameter pcat2 = new SQLiteParameter("@CodiceCategoria2Liv", "%" + Categoria2liv + "%");
             parColl.Add(pcat2);
 
         }

@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Web.Security;
 using System.Web.Profile;
 using System.Xml;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Text;
 using System.Drawing.Imaging;
 
@@ -1127,17 +1127,17 @@ public class CommonPage : Page
     public string PulisciRegistrazionitemporanee()
     {
         string message = "";
-        List<OleDbParameter> parColl = new List<OleDbParameter>();
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
         string tipologia = "rif000004";
         if (tipologia != "" && tipologia != "-")
         {
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", tipologia);
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
             parColl.Add(p3);
         }
-        OleDbParameter psrch = new OleDbParameter("@Archiviato", true);
+        SQLiteParameter psrch = new SQLiteParameter("@Archiviato", true);
         parColl.Add(psrch);
-        OleDbParameter pdini = new OleDbParameter("@Data_inizio", "01/01/1900");
-        OleDbParameter pdfin = new OleDbParameter("@Data_fine", System.DateTime.Now.AddDays(-1).ToString());
+        SQLiteParameter pdini = new SQLiteParameter("@Data_inizio", "01/01/1900");
+        SQLiteParameter pdfin = new SQLiteParameter("@Data_fine", System.DateTime.Now.AddDays(-1).ToString());
         parColl.Add(pdini);
         parColl.Add(pdfin);
         List<Offerte> offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", "I", false, "", true);
@@ -2629,12 +2629,12 @@ public class CommonPage : Page
             //Facciamo una get nel db  per l'offerta con l'id_collegato specifico
             //--> se presente aggiorno quella
             //--> altrimenti inserisco
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter ptipologia = new OleDbParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter ptipologia = new SQLiteParameter("@CodiceTIPOLOGIA", item.CodiceTipologia);
             parColl.Add(ptipologia);
             if (id_origine != 0)
             {
-                OleDbParameter pid_origine = new OleDbParameter("@Id_collegato", id_origine);
+                SQLiteParameter pid_origine = new SQLiteParameter("@Id_collegato", id_origine);
                 parColl.Add(pid_origine);
             }
             List<Offerte> offertecollegate = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1", null, null, "", true);

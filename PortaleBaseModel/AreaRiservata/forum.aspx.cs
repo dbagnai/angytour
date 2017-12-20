@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -208,12 +208,12 @@ public partial class AreaRiservata_Default : CommonPage
             string anno = "";
             List<Offerte> listPost = new List<Offerte>();
             List<Offerte> listRepost = new List<Offerte>();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
             //if (tipologia == "") tipologia = "%";
             if (Tipologia != "")
             {
-                OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", Tipologia);
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", Tipologia);
                 parColl.Add(p3);
             }
 
@@ -221,7 +221,7 @@ public partial class AreaRiservata_Default : CommonPage
             if (!string.IsNullOrEmpty(testoricerca.Trim())) //Caricamento con filtro di testo
             {
                 testoricerca = testoricerca.Replace(" ", "%");
-                OleDbParameter p7 = new OleDbParameter("@testoricerca", "%" + testoricerca + "%");
+                SQLiteParameter p7 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
                 parColl.Add(p7);
                 list = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
                 Session.Remove("testoricerca");
@@ -238,12 +238,12 @@ public partial class AreaRiservata_Default : CommonPage
                     }
                     idlist = idlist.TrimEnd(',');
                     //CArico tutti i post principali dalla lista id trovata
-                    parColl = new List<OleDbParameter>();
-                    OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", Tipologia);
+                    parColl = new List<SQLiteParameter>();
+                    SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", Tipologia);
                     parColl.Add(p3);
-                    OleDbParameter pilist = new OleDbParameter("@IdList", idlist);
+                    SQLiteParameter pilist = new SQLiteParameter("@IdList", idlist);
                     parColl.Add(pilist);
-                    OleDbParameter pcollegato = new OleDbParameter("@Id_collegato", "0");
+                    SQLiteParameter pcollegato = new SQLiteParameter("@Id_collegato", "0");
                     parColl.Add(pcollegato);
                     listPost = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
                     if (listPost != null && listPost.Count > 0)
@@ -269,9 +269,9 @@ public partial class AreaRiservata_Default : CommonPage
             }
             else if (idOfferta != "0" && idOfferta != "")   //Se presente filtro per id del post -> carico solo quello
             {
-                OleDbParameter pid = new OleDbParameter("@Id", idOfferta);
+                SQLiteParameter pid = new SQLiteParameter("@Id", idOfferta);
                 parColl.Add(pid);
-                OleDbParameter pcollegato = new OleDbParameter("@Id_collegato", "0");
+                SQLiteParameter pcollegato = new SQLiteParameter("@Id_collegato", "0");
                 parColl.Add(pcollegato);
                 listPost = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
                 dictRepost = new Dictionary<int, List<Offerte>>();
@@ -746,11 +746,11 @@ public partial class AreaRiservata_Default : CommonPage
         //Prememorizziamo i dati che mi servono dei soci in una sola volta
         try
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p3 = new OleDbParameter("@CodiceTIPOLOGIA", "rif000100");
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", "rif000100");
             parColl.Add(p3);
             //bool _statoblocco = false;
-            //OleDbParameter pstatoblocco = new OleDbParameter("@Bloccoaccesso_dts", _statoblocco);
+            //SQLiteParameter pstatoblocco = new SQLiteParameter("@Bloccoaccesso_dts", _statoblocco);
             //parColl.Add(pstatoblocco);
             List<Offerte> soci = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", false);
             if (soci != null)

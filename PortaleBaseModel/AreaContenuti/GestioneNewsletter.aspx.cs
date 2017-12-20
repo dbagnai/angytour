@@ -1307,7 +1307,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         //int giornipercancellazione = 0;
         //mDM.CancellaMailPerPulizia(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, System.DateTime.Now.AddDays(-giornipercancellazione));
 
-        output.Text = dbDataAccess.ComprimiDbAccess(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, false);
+        output.Text = dbDataAccess.comprimiSQLiteDB(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
 
     }
 }

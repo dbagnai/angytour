@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WelcomeLibrary.DOM;
 using System.Data.OleDb;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -23,8 +24,8 @@ namespace WelcomeLibrary.DAL
             if (connection == null || connection == "") return list;
 
             Mail item = new Mail();
-            //List<OleDbParameter> parColl = new List<OleDbParameter>();
-            //OleDbParameter p1 = new OleDbParameter("@Email", email); //OleDbType.VarChar
+            //List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            //SQLiteParameter p1 = new SQLiteParameter("@Email", email); //OleDbType.VarChar
             //parColl.Add(p1);
             try
             {
@@ -44,7 +45,7 @@ namespace WelcomeLibrary.DAL
                 }
                 else return list;
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -105,8 +106,8 @@ namespace WelcomeLibrary.DAL
             if (connection == null || connection == "") return list;
 
             Mail item = new Mail();
-            //List<OleDbParameter> parColl = new List<OleDbParameter>();
-            //OleDbParameter p1 = new OleDbParameter("@Email", email); //OleDbType.VarChar
+            //List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            //SQLiteParameter p1 = new SQLiteParameter("@Email", email); //OleDbType.VarChar
             //parColl.Add(p1);
             try
             {
@@ -115,7 +116,7 @@ namespace WelcomeLibrary.DAL
                     query += " TOP " + MaxEmail.Value;
                 query += " *,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome,  MC.Id_mail AS mailincharge FROM ( TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE ) left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE (((M.DataInvio) Is Null) AND ((M.Errore)=False) AND ((MC.Id_mail) Is Null)) order by M.ID";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -183,7 +184,7 @@ namespace WelcomeLibrary.DAL
         public int MarcaMailpreseincarico(string connessione, int? MaxEmail)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
             string query = "";
             //Insert
@@ -237,12 +238,12 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public int EliminaMaildapresaincarico(string connessione, int idmail)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_MAILING_ONCHARGE WHERE ( Id_mail = @idmail ) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@Id_mail", idmail);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@Id_mail", idmail);
             parColl.Add(p1);
             try
             {
@@ -264,9 +265,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         {
             if (connection == null || connection == "") return;
             string query = "DELETE FROM TBL_MAILING_ONCHARGE WHERE ( DataInserimento < @DataInserimento ) ";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter pdmin;
-            pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter pdmin;
+            pdmin = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
             //pdmin.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdmin);
 
@@ -301,21 +302,21 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             try
             {
 
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@ID_mailing_struttura", idnewsletter); //OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@ID_mailing_struttura", idnewsletter); //OleDbType.VarChar
                 parColl.Add(p1);
                 string query = "SELECT *  FROM TBL_MAILING WHERE Errore = false and ID_mailing_struttura = @ID_mailing_struttura";
 
                 if (mindate != null)
                 {
-                    OleDbParameter pdmin;
-                    pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(mindate.Value));
+                    SQLiteParameter pdmin;
+                    pdmin = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(mindate.Value));
                     //pdmin.DbType = System.Data.DbType.DateTime;
                     parColl.Add(pdmin);
                     query += " and DataInserimento > @DataInserimento";
                 }
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -378,13 +379,13 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             if (Id == 0) return null;
 
             Mail item = new Mail();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@Id", Id); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@Id", Id); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "SELECT *,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome FROM TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE  WHERE Id = @Id ";
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -451,9 +452,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         {
             if (connection == null || connection == "") return;
             string query = "DELETE FROM TBL_MAILING WHERE ( DataInserimento < @DataInserimento ) ";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter pdmin;
-            pdmin = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter pdmin;
+            pdmin = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(data));
             //pdmin.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdmin);
 
@@ -478,9 +479,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         {
             if (connection == null || connection == "") return;
             string query = "DELETE FROM TBL_MAILING WHERE (((DataInvio) Is Null) AND ((Errore)=False)) ";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            //OleDbParameter pdmin;
-            //pdmin = new OleDbParameter("@DataInserimento", data.ToString());
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            //SQLiteParameter pdmin;
+            //pdmin = new SQLiteParameter("@DataInserimento", data.ToString());
             //pdmin.DbType = System.Data.DbType.DateTime;
             //parColl.Add(pdmin);
 
@@ -502,53 +503,53 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="item"></param>
         public void InserisciAggiornaMail(string connessione, Mail item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            OleDbParameter p1 = new OleDbParameter("@Id_card", item.Id_card);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Id_card", item.Id_card);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@Id_cliente", item.Id_cliente);//OleDbType.VarChar
+            SQLiteParameter p2 = new SQLiteParameter("@Id_cliente", item.Id_cliente);//OleDbType.VarChar
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
+            SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
 
-            OleDbParameter p5 = new OleDbParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
+            SQLiteParameter p7 = new SQLiteParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
             parColl.Add(p7);
 
-            OleDbParameter p9 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            SQLiteParameter p9 = new SQLiteParameter("@Lingua", item.Lingua);//OleDbType.VarChar
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@Errore", item.Errore);//OleDbType.VarChar
+            SQLiteParameter p10 = new SQLiteParameter("@Errore", item.Errore);//OleDbType.VarChar
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@TestoErrore", item.TestoErrore);//OleDbType.VarChar
+            SQLiteParameter p11 = new SQLiteParameter("@TestoErrore", item.TestoErrore);//OleDbType.VarChar
             parColl.Add(p11);
 
-            OleDbParameter p4 = null;
+            SQLiteParameter p4 = null;
             if (item.DataInserimento != null)
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
-            OleDbParameter p8;
+            SQLiteParameter p8;
             if (item.DataInvio != null)
-                p8 = new OleDbParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
+                p8 = new SQLiteParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
             else
-                p8 = new OleDbParameter("@DataInvio", System.DBNull.Value);
+                p8 = new SQLiteParameter("@DataInvio", System.DBNull.Value);
             //p8.DbType = System.Data.DbType.DateTime;
             parColl.Add(p8);
 
-            OleDbParameter pdadesione;
+            SQLiteParameter pdadesione;
             if (item.DataAdesione != null)
-                pdadesione = new OleDbParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
+                pdadesione = new SQLiteParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
             else
-                pdadesione = new OleDbParameter("@DataAdesione", System.DBNull.Value);
+                pdadesione = new SQLiteParameter("@DataAdesione", System.DBNull.Value);
             //pdadesione.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdadesione);
 
-            OleDbParameter pidnewsletter = new OleDbParameter("@ID_mailing_struttura", item.Id_mailing_struttura);//OleDbType.VarChar
+            SQLiteParameter pidnewsletter = new SQLiteParameter("@ID_mailing_struttura", item.Id_mailing_struttura);//OleDbType.VarChar
             parColl.Add(pidnewsletter);
 
             string query = "";
@@ -588,50 +589,50 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public void InserisciBloccoMailPerClienti(string connessione, Mail item, ClienteCollection idclienti)
         {
             if (idclienti == null || idclienti.Count == 0) return;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            OleDbParameter p1 = new OleDbParameter("@Id_card", item.Id_card);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@Id_card", item.Id_card);//OleDbType.VarChar
             parColl.Add(p1);
 
-            OleDbParameter p3 = new OleDbParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
+            SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
 
-            OleDbParameter p5 = new OleDbParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
+            SQLiteParameter p7 = new SQLiteParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
             parColl.Add(p7);
 
-            OleDbParameter p9 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            SQLiteParameter p9 = new SQLiteParameter("@Lingua", item.Lingua);//OleDbType.VarChar
             parColl.Add(p9);
-            OleDbParameter p10 = new OleDbParameter("@Errore", item.Errore);//OleDbType.VarChar
+            SQLiteParameter p10 = new SQLiteParameter("@Errore", item.Errore);//OleDbType.VarChar
             parColl.Add(p10);
-            OleDbParameter p11 = new OleDbParameter("@TestoErrore", item.TestoErrore);//OleDbType.VarChar
+            SQLiteParameter p11 = new SQLiteParameter("@TestoErrore", item.TestoErrore);//OleDbType.VarChar
             parColl.Add(p11);
 
-            OleDbParameter p4 = null;
+            SQLiteParameter p4 = null;
             if (item.DataInserimento != null)
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
            // p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
-            OleDbParameter p8;
+            SQLiteParameter p8;
             if (item.DataInvio != null)
-                p8 = new OleDbParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
+                p8 = new SQLiteParameter("@DataInvio", dbDataAccess.CorrectDatenow(item.DataInvio.Value));
             else
-                p8 = new OleDbParameter("@DataInvio", System.DBNull.Value);
+                p8 = new SQLiteParameter("@DataInvio", System.DBNull.Value);
             //p8.DbType = System.Data.DbType.DateTime;
             parColl.Add(p8);
-            OleDbParameter pdadesione;
+            SQLiteParameter pdadesione;
             if (item.DataAdesione != null)
-                pdadesione = new OleDbParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
+                pdadesione = new SQLiteParameter("@DataAdesione", dbDataAccess.CorrectDatenow(item.DataAdesione.Value));
             else
-                pdadesione = new OleDbParameter("@DataAdesione", System.DBNull.Value);
+                pdadesione = new SQLiteParameter("@DataAdesione", System.DBNull.Value);
             //pdadesione.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdadesione);
-            OleDbParameter pidnewsletter = new OleDbParameter("@ID_mailing_struttura", item.Id_mailing_struttura);//OleDbType.VarChar
+            SQLiteParameter pidnewsletter = new SQLiteParameter("@ID_mailing_struttura", item.Id_mailing_struttura);//OleDbType.VarChar
             parColl.Add(pidnewsletter);
 
             string query = "";
@@ -673,25 +674,25 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public int InserisciAggiornaNewsletter(string connessione, Mail item)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
-            OleDbParameter p3 = new OleDbParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
+            SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
-            OleDbParameter p5 = new OleDbParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
+            SQLiteParameter p7 = new SQLiteParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
             parColl.Add(p7);
-            OleDbParameter p9 = new OleDbParameter("@Lingua", item.Lingua);//OleDbType.VarChar
+            SQLiteParameter p9 = new SQLiteParameter("@Lingua", item.Lingua);//OleDbType.VarChar
             parColl.Add(p9);
 
-            OleDbParameter p4 = null;
+            SQLiteParameter p4 = null;
             if (item.DataInserimento != null && item.DataInserimento != DateTime.MinValue)
-                p4 = new OleDbParameter("@DataInserimento",dbDataAccess.CorrectDatenow( item.DataInserimento));
+                p4 = new SQLiteParameter("@DataInserimento",dbDataAccess.CorrectDatenow( item.DataInserimento));
             else
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
 
@@ -729,8 +730,8 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         {
             if (connection == null || connection == "") return;
             if (Id == 0) return;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@id", Id);//OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@id", Id);//OleDbType.VarChar
             parColl.Add(p1);
             string query = "DELETE FROM TBL_MAILING_STRUTTURA WHERE ([ID]=@id)";
             try
@@ -756,13 +757,13 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             if (Id == 0) return null;
 
             Mail item = new Mail();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@id", Id); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@id", Id); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "SELECT  * FROM TBL_MAILING_STRUTTURA  WHERE Id = @id ";
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -810,17 +811,17 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             Mail item = new Mail();
             string query = "SELECT  * FROM TBL_MAILING_STRUTTURA order by Id";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (mindate != null)
             {
-                OleDbParameter p1 = new OleDbParameter("@DataInserimento", mindate.Value.ToShortDateString()); //OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@DataInserimento", mindate.Value.ToShortDateString()); //OleDbType.VarChar
                 parColl.Add(p1);
                 query += " WHERE DataInserimento > @DataInserimento ";
             }
 
             try
             {
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -866,14 +867,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             TabrifCollection List = new TabrifCollection();
             Tabrif item = new Tabrif();
-            //List<OleDbParameter> parColl = new List<OleDbParameter>();
-            //OleDbParameter p1 = new OleDbParameter("@id", Id); //OleDbType.VarChar
+            //List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            //SQLiteParameter p1 = new SQLiteParameter("@id", Id); //OleDbType.VarChar
             //parColl.Add(p1);
             try
             {
                 string query = "SELECT DISTINCT GruppoMailing, DescrizioneGruppoMailing FROM TBL_MAILING_GRUPPI_CLIENTI order by DescrizioneGruppoMailing asc";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -905,7 +906,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public int InserisciAggiornaNuovoGruppoClientiNewsletter(string connessione, Tabrif item)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             int idrecord = 0;
@@ -915,9 +916,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             string query = "";
             if (idrecord != 0) // Se il gruppo già esiste modifico solo la descrizione per il gruppo intero
             {
-                OleDbParameter p5 = new OleDbParameter("@DescrizioneGruppoMailing", item.Campo1);//OleDbType.VarChar
+                SQLiteParameter p5 = new SQLiteParameter("@DescrizioneGruppoMailing", item.Campo1);//OleDbType.VarChar
                 parColl.Add(p5);
-                OleDbParameter p3 = new OleDbParameter("@GruppoMailing", item.Intero1);//OleDbType.VarChar
+                SQLiteParameter p3 = new SQLiteParameter("@GruppoMailing", item.Intero1);//OleDbType.VarChar
                 parColl.Add(p3);
                 //Update
                 query = "UPDATE [TBL_MAILING_GRUPPI_CLIENTI] SET DescrizioneGruppoMailing=@DescrizioneGruppoMailing";
@@ -925,17 +926,17 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             }
             else
             {
-                OleDbParameter p2 = new OleDbParameter("@ID_CLIENTE", item.Intero2);//OleDbType.VarChar
+                SQLiteParameter p2 = new SQLiteParameter("@ID_CLIENTE", item.Intero2);//OleDbType.VarChar
                 parColl.Add(p2);
-                OleDbParameter p5 = new OleDbParameter("@DescrizioneGruppoMailing", item.Campo1);//OleDbType.VarChar
+                SQLiteParameter p5 = new SQLiteParameter("@DescrizioneGruppoMailing", item.Campo1);//OleDbType.VarChar
                 parColl.Add(p5);
-                OleDbParameter p4 = null;
-                p4 = new OleDbParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.Data1));
+                SQLiteParameter p4 = null;
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.Data1));
                 //p4.DbType = System.Data.DbType.DateTime;
                 parColl.Add(p4);
-                OleDbParameter p7 = new OleDbParameter("@Attivo", item.Bool1);//OleDbType.VarChar
+                SQLiteParameter p7 = new SQLiteParameter("@Attivo", item.Bool1);//OleDbType.VarChar
                 parColl.Add(p7);
-                OleDbParameter p3 = new OleDbParameter("@GruppoMailing", item.Intero1);//OleDbType.VarChar
+                SQLiteParameter p3 = new SQLiteParameter("@GruppoMailing", item.Intero1);//OleDbType.VarChar
                 parColl.Add(p3);
                 //Insert
                 query = "INSERT INTO TBL_MAILING_GRUPPI_CLIENTI (Id_cliente,DescrizioneGruppoMailing";
@@ -966,15 +967,15 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public int EliminaClienteDaGruppoClientiNewsletter(string connessione, int id_cliente, int idgruppo)
         {
             int idret = -1;
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
             string query = "DELETE FROM TBL_MAILING_GRUPPI_CLIENTI WHERE ( GruppoMailing = @GruppoMailing AND ID_CLIENTE = @ID_CLIENTE  ) ";
-            OleDbParameter p1;
-            p1 = new OleDbParameter("@GruppoMailing", idgruppo);
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@GruppoMailing", idgruppo);
             parColl.Add(p1);
-            OleDbParameter p2;
-            p2 = new OleDbParameter("@ID_CLIENTE", id_cliente);
+            SQLiteParameter p2;
+            p2 = new SQLiteParameter("@ID_CLIENTE", id_cliente);
             parColl.Add(p2);
             try
             {
@@ -998,14 +999,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             if (idgruppomailing == 0) return null;
 
             Tabrif item = new Tabrif();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "SELECT  *  FROM TBL_MAILING_GRUPPI_CLIENTI WHERE GruppoMailing=@GruppoMailing AND ID_CLIENTE = 0 ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1047,15 +1048,15 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             TabrifCollection List = new TabrifCollection();
             Tabrif item = new Tabrif();
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
-            OleDbParameter p1 = new OleDbParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@GruppoMailing", idgruppomailing); //OleDbType.VarChar
             parColl.Add(p1);
             try
             {
                 string query = "SELECT  *  FROM TBL_MAILING_GRUPPI_CLIENTI WHERE GruppoMailing=@GruppoMailing AND Attivo = true AND  ID_CLIENTE <> 0 ";
                 //string query = "SELECT  *  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND Attivo = true AND  ID_CLIENTE <> 0 ";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -1128,12 +1129,12 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             query += ", DataInserimento, GruppoMailing )";
             query += "  select tbl_clienti.ID_Cliente, '" + gruppo.Campo1 + "'  AS Espr1, '" + gruppo.Data1.ToShortDateString() + "'  AS Espr2, " + gruppo.Intero1 + "  AS Espr4 from tbl_clienti ";
             query += " WHERE Email like @Email ";
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             //Prendendo dai campi del cliente posso inserire i parametri di filtraggio!!!! _paramCliente
-            OleDbParameter p1 = new OleDbParameter("@Email", "%");
+            SQLiteParameter p1 = new SQLiteParameter("@Email", "%");
             if (_paramCliente != null && !string.IsNullOrEmpty(_paramCliente.Email))
             {
-                p1 = new OleDbParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
+                p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
             }
             parColl.Add(p1);
             if (_paramCliente != null)
@@ -1141,27 +1142,27 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                 if (!bypassvalidazione)
                 {
                     query += " and Validato = @Validato and Consenso1 = @Consenso1 ";
-                    OleDbParameter p2 = new OleDbParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
+                    SQLiteParameter p2 = new SQLiteParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
                     parColl.Add(p2);
-                    OleDbParameter p3 = new OleDbParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
+                    SQLiteParameter p3 = new SQLiteParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
                     parColl.Add(p3);
                 }
                 if (!string.IsNullOrEmpty(_paramCliente.id_tipi_clienti))
                 {
                     //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
-                    OleDbParameter ptipi = new OleDbParameter("@id_tipi_clienti", _paramCliente.id_tipi_clienti); //OleDbType.VarChar
+                    SQLiteParameter ptipi = new SQLiteParameter("@id_tipi_clienti", _paramCliente.id_tipi_clienti); //OleDbType.VarChar
                     parColl.Add(ptipi);
                     query += " and ID_tipi_clienti = @id_tipi_clienti ";
                 }
                 if (!string.IsNullOrWhiteSpace(_paramCliente.CodiceNAZIONE))
                 {
-                    OleDbParameter pnazione = new OleDbParameter("@codnaz", _paramCliente.CodiceNAZIONE); //OleDbType.VarChar
+                    SQLiteParameter pnazione = new SQLiteParameter("@codnaz", _paramCliente.CodiceNAZIONE); //OleDbType.VarChar
                     parColl.Add(pnazione);
                     query += " and CodiceNAZIONE = @codnaz ";
                 }
                 if (!string.IsNullOrWhiteSpace(_paramCliente.Lingua))
                 {
-                    OleDbParameter plingua = new OleDbParameter("@lingua", _paramCliente.Lingua); //OleDbType.VarChar
+                    SQLiteParameter plingua = new SQLiteParameter("@lingua", _paramCliente.Lingua); //OleDbType.VarChar
                     parColl.Add(plingua);
                     query += " and Lingua = @lingua ";
                 }
@@ -1200,14 +1201,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="idGruppo"></param>
         public void EliminaClientiDaGruppo(string connection, int idGruppo)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connection == null || connection == "") return;
 
             //string query = "DELETE FROM TBL_MAILING_GRUPPI_CLIENTI WHERE ( GruppoMailing = @GruppoMailing AND ID_CLIENTE = @ID_CLIENTE  ) ";
             string query = "DELETE FROM TBL_MAILING_GRUPPI_CLIENTI WHERE ( GruppoMailing = @GruppoMailing AND ID_CLIENTE <> 0 ) ";
 
-            OleDbParameter pgruppomailing;
-            pgruppomailing = new OleDbParameter("@GruppoMailing", idGruppo);
+            SQLiteParameter pgruppomailing;
+            pgruppomailing = new SQLiteParameter("@GruppoMailing", idGruppo);
             parColl.Add(pgruppomailing);
 
             try

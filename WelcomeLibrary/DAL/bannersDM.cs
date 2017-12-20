@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.Common;
-using System.Data.OleDb;
-
-
 using WelcomeLibrary.DOM;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.DAL
 {
@@ -101,13 +97,13 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                List<OleDbParameter> parColl = null;
+                List<SQLiteParameter> parColl = null;
 
                 string query = "SELECT * FROM " + nometabella;
                 if (!string.IsNullOrWhiteSpace(filtro))
                 {
-                    parColl = new List<OleDbParameter>();
-                    OleDbParameter p1 = new OleDbParameter("@sezione", filtro);//OleDbType.VarChar
+                    parColl = new List<SQLiteParameter>();
+                    SQLiteParameter p1 = new SQLiteParameter("@sezione", filtro);//OleDbType.VarChar
                     parColl.Add(p1);
                     query += " where sezione = @sezione  ";
                 }
@@ -118,7 +114,7 @@ namespace WelcomeLibrary.DAL
                 else
                     query += " order BY progressivo asc, DataInserimento Desc";
 
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -171,10 +167,10 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT * FROM " + nometabella + " where ID=@ID  order BY progressivo asc, DataInserimento Desc";
-                List<OleDbParameter> parColl = new List<OleDbParameter>();
-                OleDbParameter p1 = new OleDbParameter("@ID", ID);//OleDbType.VarChar
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
                 parColl.Add(p1);
-                OleDbDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {
                     if (reader == null) { return null; };
@@ -228,30 +224,30 @@ namespace WelcomeLibrary.DAL
         public void InsertBanner(string connessione,
         Banners item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p1 = new OleDbParameter("@ImageUrl", item.ImageUrl);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@ImageUrl", item.ImageUrl);//OleDbType.VarChar
             parColl.Add(p1);
-            OleDbParameter p2 = new OleDbParameter("@NavigateUrl", item.NavigateUrl);
+            SQLiteParameter p2 = new SQLiteParameter("@NavigateUrl", item.NavigateUrl);
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@AlternateText", item.AlternateText);
+            SQLiteParameter p3 = new SQLiteParameter("@AlternateText", item.AlternateText);
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@AlternateTextGB", item.AlternateTextGB);
+            SQLiteParameter p4 = new SQLiteParameter("@AlternateTextGB", item.AlternateTextGB);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@ImageUrlGB", item.ImageUrlGB);//OleDbType.VarChar
+            SQLiteParameter p5 = new SQLiteParameter("@ImageUrlGB", item.ImageUrlGB);//OleDbType.VarChar
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@NavigateUrlGB", item.NavigateUrlGB);
+            SQLiteParameter p6 = new SQLiteParameter("@NavigateUrlGB", item.NavigateUrlGB);
             parColl.Add(p6);
 
-            OleDbParameter p4r = new OleDbParameter("@AlternateTextRU", item.AlternateTextRU);
+            SQLiteParameter p4r = new SQLiteParameter("@AlternateTextRU", item.AlternateTextRU);
             parColl.Add(p4r);
-            OleDbParameter p5r = new OleDbParameter("@ImageUrlRU", item.ImageUrlRU);//OleDbType.VarChar
+            SQLiteParameter p5r = new SQLiteParameter("@ImageUrlRU", item.ImageUrlRU);//OleDbType.VarChar
             parColl.Add(p5r);
-            OleDbParameter p6r = new OleDbParameter("@NavigateUrlRU", item.NavigateUrlRU);
+            SQLiteParameter p6r = new SQLiteParameter("@NavigateUrlRU", item.NavigateUrlRU);
             parColl.Add(p6r);
 
-            OleDbParameter p7 = new OleDbParameter("@Progressivo", item.progressivo);
+            SQLiteParameter p7 = new SQLiteParameter("@Progressivo", item.progressivo);
             parColl.Add(p7);
 
 
@@ -260,7 +256,7 @@ namespace WelcomeLibrary.DAL
 
             if (!string.IsNullOrWhiteSpace(item.sezione))
             {
-                OleDbParameter p8 = new OleDbParameter("@sezione", item.sezione);
+                SQLiteParameter p8 = new SQLiteParameter("@sezione", item.sezione);
                 parColl.Add(p8);
                 query = "INSERT INTO " + nometabella + "([ImageUrl],[NavigateUrl],[AlternateText],[AlternateTextGB],[ImageUrlGB],[NavigateUrlGB],[AlternateTextRU],[ImageUrlRU],[NavigateUrlRU],Progressivo,[Sezione]) VALUES (@ImageUrl,@NavigateUrl,@AlternateText,@AlternateTextGB,@ImageUrlGB,@NavigateUrlGB,@AlternateTextRU,@ImageUrlRU,@NavigateUrlRU,@Progressivo,@sezione)";
             }
@@ -278,41 +274,41 @@ namespace WelcomeLibrary.DAL
         public void UpdateBanners(string connessione,
             Banners item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
 
-            OleDbParameter p2 = new OleDbParameter("@ImageUrl", item.ImageUrl);//OleDbType.VarChar
+            SQLiteParameter p2 = new SQLiteParameter("@ImageUrl", item.ImageUrl);//OleDbType.VarChar
             parColl.Add(p2);
-            OleDbParameter p3 = new OleDbParameter("@NavigateUrl", item.NavigateUrl);
+            SQLiteParameter p3 = new SQLiteParameter("@NavigateUrl", item.NavigateUrl);
             parColl.Add(p3);
-            OleDbParameter p4 = new OleDbParameter("@AlternateText", item.AlternateText);
+            SQLiteParameter p4 = new SQLiteParameter("@AlternateText", item.AlternateText);
             parColl.Add(p4);
-            OleDbParameter p5 = new OleDbParameter("@AlternateTextGB", item.AlternateTextGB);
+            SQLiteParameter p5 = new SQLiteParameter("@AlternateTextGB", item.AlternateTextGB);
             parColl.Add(p5);
-            OleDbParameter p6 = new OleDbParameter("@ImageUrlGB", item.ImageUrlGB);//OleDbType.VarChar
+            SQLiteParameter p6 = new SQLiteParameter("@ImageUrlGB", item.ImageUrlGB);//OleDbType.VarChar
             parColl.Add(p6);
-            OleDbParameter p7 = new OleDbParameter("@NavigateUrGB", item.NavigateUrlGB);
+            SQLiteParameter p7 = new SQLiteParameter("@NavigateUrGB", item.NavigateUrlGB);
             parColl.Add(p7);
 
-            OleDbParameter p5r = new OleDbParameter("@AlternateTextRU", item.AlternateTextRU);
+            SQLiteParameter p5r = new SQLiteParameter("@AlternateTextRU", item.AlternateTextRU);
             parColl.Add(p5r);
-            OleDbParameter p6r = new OleDbParameter("@ImageUrlRU", item.ImageUrlRU);//OleDbType.VarChar
+            SQLiteParameter p6r = new SQLiteParameter("@ImageUrlRU", item.ImageUrlRU);//OleDbType.VarChar
             parColl.Add(p6r);
-            OleDbParameter p7r = new OleDbParameter("@NavigateUrRU", item.NavigateUrlRU);
+            SQLiteParameter p7r = new SQLiteParameter("@NavigateUrRU", item.NavigateUrlRU);
             parColl.Add(p7r);
 
-            OleDbParameter p8 = new OleDbParameter("@Progressivo", item.progressivo);
+            SQLiteParameter p8 = new SQLiteParameter("@Progressivo", item.progressivo);
             parColl.Add(p8);
             string query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[Progressivo]=@Progressivo  WHERE ([Id]=@id)";
 
             if (!string.IsNullOrWhiteSpace(item.sezione))
             {
-                OleDbParameter p9 = new OleDbParameter("@sezione", item.sezione);
+                SQLiteParameter p9 = new SQLiteParameter("@sezione", item.sezione);
                 parColl.Add(p9);
                 query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[Progressivo]=@Progressivo,[sezione]=@sezione  WHERE ([Id]=@id)";
             }
 
-            OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
             try
@@ -329,11 +325,11 @@ namespace WelcomeLibrary.DAL
         public void DeleteBanners(string connessione,
                 Banners item)
         {
-            List<OleDbParameter> parColl = new List<OleDbParameter>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             if (item == null || item.Id == 0) return;
 
-            OleDbParameter p1 = new OleDbParameter("@id", item.Id);//OleDbType.VarChar
+            SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
             string query = "DELETE FROM " + nometabella + " WHERE ([ID]=@id)";
