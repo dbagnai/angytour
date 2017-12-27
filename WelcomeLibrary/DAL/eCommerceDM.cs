@@ -664,14 +664,17 @@ namespace WelcomeLibrary.DAL
             //SQLiteParameter p3 = new SQLiteParameter("@IpClient", item.IpClient);
             //parColl.Add(p3);
 
-            string query = "DELETE * FROM TBL_CARRELLO ";
+            string query = "DELETE FROM TBL_CARRELLO ";
             string where = "";
             if (string.IsNullOrWhiteSpace(where))
-                //query += " WHERE Data is not null and (Data+Validita) < @dataoggi and CodiceOrdine='' ";
-                query += " WHERE Data is not null and DateDiff('d', @dataoggi, DateAdd('d', Validita, Data)) <= 0 and CodiceOrdine='' ";
+				//query += " WHERE Data is not null and (Data+Validita) < @dataoggi and CodiceOrdine='' ";
+				//query += " WHERE Data is not null and DateDiff('d', @dataoggi, DateAdd('d', Validita, Data)) <= 0 and CodiceOrdine='' ";
+				query += " WHERE Data is not null and JulianDay(@dataoggi)- (JulianDay(Data) + Validita)<=0 and CodiceOrdine='' ";
+			//JulianDay(@dataoggi) - (JulianDay(Data) + Validita)
 
 
-            try
+
+				try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
@@ -728,7 +731,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcodicesconto = new SQLiteParameter("@Codicesconto", item.Codicesconto);// 
             parColl.Add(pcodicesconto);
 
-            string query = "INSERT INTO TBL_CARRELLO([SessionId],[Prezzo],[Data],[Iva],[Numero],[CodiceProdotto],[IpClient],[Validita],[CodiceOrdine],[Campo1],[Campo2],[id_prodotto],[ID_cliente],[Codicenazione],[Codiceprovincia],[Codicesconto]) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@Campo1,@Campo2,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
+            string query = "INSERT INTO TBL_CARRELLO (SessionId,Prezzo,Data,Iva,Numero,CodiceProdotto,IpClient,Validita,CodiceOrdine,Campo1,Campo2,id_prodotto,ID_cliente,Codicenazione,Codiceprovincia,Codicesconto) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@Campo1,@Campo2,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
             try
             {
                 int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

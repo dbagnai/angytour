@@ -47,127 +47,130 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
 					
-				StringBuilder queryCols = new StringBuilder();
-				queryCols.AppendLine("A.ID ");
-				queryCols.AppendLine(", A.Id_dts_collegato ");
-				queryCols.AppendLine(", A.CodiceNazione ");
-				queryCols.AppendLine(", A.CodiceREGIONE ");
-				queryCols.AppendLine(", A.CodicePROVINCIA ");
-				queryCols.AppendLine(", A.CodiceCOMUNE ");
-				queryCols.AppendLine(", A.CodiceTIPOLOGIA ");
-				queryCols.AppendLine(", A.WEBSITE ");
-				queryCols.AppendLine(", A.EMAIL ");
-				queryCols.AppendLine(", A.TELEFONO ");
-				queryCols.AppendLine(", A.FAX ");
-				queryCols.AppendLine(", A.INDIRIZZO ");
-				queryCols.AppendLine(", A.DENOMINAZIONEGB ");
-				queryCols.AppendLine(", A.DENOMINAZIONEI ");
-				queryCols.AppendLine(", A.DESCRIZIONEI ");
-				queryCols.AppendLine(", A.DESCRIZIONEGB ");
-				queryCols.AppendLine(", A.DATITECNICII ");
-				queryCols.AppendLine(", A.DATITECNICIGB ");
-				queryCols.AppendLine(", A.FotoSchema ");
-				queryCols.AppendLine(", A.FotoValori ");
-				queryCols.AppendLine(", A.Datainserimento ");
-				queryCols.AppendLine(", A.CodiceProdotto ");
-				queryCols.AppendLine(", A.CodiceCategoria ");
-				queryCols.AppendLine(", A.CodiceCategoria2Liv ");
-				queryCols.AppendLine(", A.Prezzo ");
-				queryCols.AppendLine(", A.PrezzoListino ");
-				queryCols.AppendLine(", A.Vetrina ");
-				queryCols.AppendLine(", A.AbilitaContatto ");
-				queryCols.AppendLine(", A.linkVideo ");
-				queryCols.AppendLine(", A.Campo1I ");
-				queryCols.AppendLine(", A.Campo2I ");
-				queryCols.AppendLine(", A.Campo1GB ");
-				queryCols.AppendLine(", A.Campo2GB ");
-				queryCols.AppendLine(", A.Id_collegato ");
-				queryCols.AppendLine(", A.Caratteristica1 ");
-				queryCols.AppendLine(", A.Caratteristica2 ");
-				queryCols.AppendLine(", A.Anno ");
-				queryCols.AppendLine(", A.Archiviato ");
-				queryCols.AppendLine(", A.Caratteristica3 ");
-				queryCols.AppendLine(", A.Caratteristica4 ");
-				queryCols.AppendLine(", A.Caratteristica5 ");
-				queryCols.AppendLine(", A.Caratteristica6 ");
-				queryCols.AppendLine(", A.Autore ");
-				queryCols.AppendLine(", A.XmlValue ");
-				queryCols.AppendLine(", A.Data1 ");
-				queryCols.AppendLine(", A.DENOMINAZIONERU ");
-				queryCols.AppendLine(", A.DESCRIZIONERU ");
-				queryCols.AppendLine(", A.DATITECNICIRU ");
-				queryCols.AppendLine(", A.Campo1RU ");
-				queryCols.AppendLine(", A.Campo2RU ");
-				queryCols.AppendLine(", A.Promozione ");
-				queryCols.AppendLine(", A.Qta_vendita ");
-				queryCols.AppendLine(", B.ID_DTS ");
-				queryCols.AppendLine(", B.pivacf_dts ");
-				queryCols.AppendLine(", B.nome_dts ");
-				queryCols.AppendLine(", B.cognome_dts ");
-				queryCols.AppendLine(", B.datanascita_dts ");
-				queryCols.AppendLine(", B.sociopresentatore1_dts ");
-				queryCols.AppendLine(", B.sociopresentatore2_dts ");
-				queryCols.AppendLine(", B.telefonoprivato_dts ");
-				queryCols.AppendLine(", B.annolaurea_dts ");
-				queryCols.AppendLine(", B.annospecializzazione_dts ");
-				queryCols.AppendLine(", B.altrespecializzazioni_dts ");
-				queryCols.AppendLine(", B.socioSicpre_dts ");
-				queryCols.AppendLine(", B.socioIsaps_dts ");
-				queryCols.AppendLine(", B.socioaltraassociazione_dts ");
-				queryCols.AppendLine(", B.trattamenticollegati_dts ");
-				queryCols.AppendLine(", B.accettazioneStatuto_dts ");
-				queryCols.AppendLine(", B.certificazione_dts ");
-				queryCols.AppendLine(", B.emailriservata_dts ");
-				queryCols.AppendLine(", B.CodiceNAZIONE1_dts ");
-				queryCols.AppendLine(", B.CodiceREGIONE1_dts ");
-				queryCols.AppendLine(", B.CodicePROVINCIA1_dts ");
-				queryCols.AppendLine(", B.CodiceCOMUNE1_dts ");
-				queryCols.AppendLine(", B.CodiceNAZIONE2_dts ");
-				queryCols.AppendLine(", B.CodiceREGIONE2_dts ");
-				queryCols.AppendLine(", B.CodicePROVINCIA2_dts ");
-				queryCols.AppendLine(", B.CodiceCOMUNE2_dts ");
-				queryCols.AppendLine(", B.CodiceNAZIONE3_dts ");
-				queryCols.AppendLine(", B.CodiceREGIONE3_dts ");
-				queryCols.AppendLine(", B.CodicePROVINCIA3_dts ");
-				queryCols.AppendLine(", B.CodiceCOMUNE3_dts ");
-				queryCols.AppendLine(", B.latitudine1_dts ");
-				queryCols.AppendLine(", B.longitudine1_dts ");
-				queryCols.AppendLine(", B.latitudine2_dts ");
-				queryCols.AppendLine(", B.longitudine2_dts ");
-				queryCols.AppendLine(", B.latitudine3_dts ");
-				queryCols.AppendLine(", B.longitudine3_dts ");
-				queryCols.AppendLine(", B.bloccoaccesso_dts ");
-				queryCols.AppendLine(", B.via1_dts ");
-				queryCols.AppendLine(", B.cap1_dts ");
-				queryCols.AppendLine(", B.nomeposizione1_dts ");
-				queryCols.AppendLine(", B.telefono1_dts ");
-				queryCols.AppendLine(", B.via2_dts ");
-				queryCols.AppendLine(", B.cap2_dts ");
-				queryCols.AppendLine(", B.nomeposizione2_dts ");
-				queryCols.AppendLine(", B.telefono2_dts ");
-				queryCols.AppendLine(", B.via3_dts ");
-				queryCols.AppendLine(", B.cap3_dts ");
-				queryCols.AppendLine(", B.nomeposizione3_dts ");
-				queryCols.AppendLine(", B.telefono3_dts ");
-				queryCols.AppendLine(", B.pagamenti_dts ");
-				queryCols.AppendLine(", B.ricfatt_dts ");
-				queryCols.AppendLine(", B.indirizzofatt_dts ");
-				queryCols.AppendLine(", B.noteriservate_dts ");
-				queryCols.AppendLine(", B.niscrordine_dts ");
-				queryCols.AppendLine(", B.annofrequenza_dts ");
-				queryCols.AppendLine(", B.nomeuniversita_dts ");
-				queryCols.AppendLine(", B.dettagliuniversita_dts ");
-				queryCols.AppendLine(", B.Boolfields_dts ");
-				queryCols.AppendLine(", B.Textfield1_dts ");
-				queryCols.AppendLine(", B.Interventieseguiti_dts ");
-				queryCols.AppendLine(", B.locordine_dts ");
+					//StringBuilder queryCols = new StringBuilder();
+					//queryCols.AppendLine("A.ID ");
+					//queryCols.AppendLine(", A.Id_dts_collegato ");
+					//queryCols.AppendLine(", A.CodiceNazione ");
+					//queryCols.AppendLine(", A.CodiceREGIONE ");
+					//queryCols.AppendLine(", A.CodicePROVINCIA ");
+					//queryCols.AppendLine(", A.CodiceCOMUNE ");
+					//queryCols.AppendLine(", A.CodiceTIPOLOGIA ");
+					//queryCols.AppendLine(", A.WEBSITE ");
+					//queryCols.AppendLine(", A.EMAIL ");
+					//queryCols.AppendLine(", A.TELEFONO ");
+					//queryCols.AppendLine(", A.FAX ");
+					//queryCols.AppendLine(", A.INDIRIZZO ");
+					//queryCols.AppendLine(", A.DENOMINAZIONEGB ");
+					//queryCols.AppendLine(", A.DENOMINAZIONEI ");
+					//queryCols.AppendLine(", A.DESCRIZIONEI ");
+					//queryCols.AppendLine(", A.DESCRIZIONEGB ");
+					//queryCols.AppendLine(", A.DATITECNICII ");
+					//queryCols.AppendLine(", A.DATITECNICIGB ");
+					//queryCols.AppendLine(", A.FotoSchema ");
+					//queryCols.AppendLine(", A.FotoValori ");
+					//queryCols.AppendLine(", A.Datainserimento ");
+					//queryCols.AppendLine(", A.CodiceProdotto ");
+					//queryCols.AppendLine(", A.CodiceCategoria ");
+					//queryCols.AppendLine(", A.CodiceCategoria2Liv ");
+					//queryCols.AppendLine(", A.Prezzo ");
+					//queryCols.AppendLine(", A.PrezzoListino ");
+					//queryCols.AppendLine(", A.Vetrina ");
+					//queryCols.AppendLine(", A.AbilitaContatto ");
+					//queryCols.AppendLine(", A.linkVideo ");
+					//queryCols.AppendLine(", A.Campo1I ");
+					//queryCols.AppendLine(", A.Campo2I ");
+					//queryCols.AppendLine(", A.Campo1GB ");
+					//queryCols.AppendLine(", A.Campo2GB ");
+					//queryCols.AppendLine(", A.Id_collegato ");
+					//queryCols.AppendLine(", A.Caratteristica1 ");
+					//queryCols.AppendLine(", A.Caratteristica2 ");
+					//queryCols.AppendLine(", A.Anno ");
+					//queryCols.AppendLine(", A.Archiviato ");
+					//queryCols.AppendLine(", A.Caratteristica3 ");
+					//queryCols.AppendLine(", A.Caratteristica4 ");
+					//queryCols.AppendLine(", A.Caratteristica5 ");
+					//queryCols.AppendLine(", A.Caratteristica6 ");
+					//queryCols.AppendLine(", A.Autore ");
+					//queryCols.AppendLine(", A.XmlValue ");
+					//queryCols.AppendLine(", A.Data1 ");
+					//queryCols.AppendLine(", A.DENOMINAZIONERU ");
+					//queryCols.AppendLine(", A.DESCRIZIONERU ");
+					//queryCols.AppendLine(", A.DATITECNICIRU ");
+					//queryCols.AppendLine(", A.Campo1RU ");
+					//queryCols.AppendLine(", A.Campo2RU ");
+					//queryCols.AppendLine(", A.Promozione ");
+					//queryCols.AppendLine(", A.Qta_vendita ");
+					//queryCols.AppendLine(", B.ID_DTS ");
+					//queryCols.AppendLine(", B.pivacf_dts ");
+					//queryCols.AppendLine(", B.nome_dts ");
+					//queryCols.AppendLine(", B.cognome_dts ");
+					//queryCols.AppendLine(", B.datanascita_dts ");
+					//queryCols.AppendLine(", B.sociopresentatore1_dts ");
+					//queryCols.AppendLine(", B.sociopresentatore2_dts ");
+					//queryCols.AppendLine(", B.telefonoprivato_dts ");
+					//queryCols.AppendLine(", B.annolaurea_dts ");
+					//queryCols.AppendLine(", B.annospecializzazione_dts ");
+					//queryCols.AppendLine(", B.altrespecializzazioni_dts ");
+					//queryCols.AppendLine(", B.socioSicpre_dts ");
+					//queryCols.AppendLine(", B.socioIsaps_dts ");
+					//queryCols.AppendLine(", B.socioaltraassociazione_dts ");
+					//queryCols.AppendLine(", B.trattamenticollegati_dts ");
+					//queryCols.AppendLine(", B.accettazioneStatuto_dts ");
+					//queryCols.AppendLine(", B.certificazione_dts ");
+					//queryCols.AppendLine(", B.emailriservata_dts ");
+					//queryCols.AppendLine(", B.CodiceNAZIONE1_dts ");
+					//queryCols.AppendLine(", B.CodiceREGIONE1_dts ");
+					//queryCols.AppendLine(", B.CodicePROVINCIA1_dts ");
+					//queryCols.AppendLine(", B.CodiceCOMUNE1_dts ");
+					//queryCols.AppendLine(", B.CodiceNAZIONE2_dts ");
+					//queryCols.AppendLine(", B.CodiceREGIONE2_dts ");
+					//queryCols.AppendLine(", B.CodicePROVINCIA2_dts ");
+					//queryCols.AppendLine(", B.CodiceCOMUNE2_dts ");
+					//queryCols.AppendLine(", B.CodiceNAZIONE3_dts ");
+					//queryCols.AppendLine(", B.CodiceREGIONE3_dts ");
+					//queryCols.AppendLine(", B.CodicePROVINCIA3_dts ");
+					//queryCols.AppendLine(", B.CodiceCOMUNE3_dts ");
+					//queryCols.AppendLine(", B.latitudine1_dts ");
+					//queryCols.AppendLine(", B.longitudine1_dts ");
+					//queryCols.AppendLine(", B.latitudine2_dts ");
+					//queryCols.AppendLine(", B.longitudine2_dts ");
+					//queryCols.AppendLine(", B.latitudine3_dts ");
+					//queryCols.AppendLine(", B.longitudine3_dts ");
+					//queryCols.AppendLine(", B.bloccoaccesso_dts ");
+					//queryCols.AppendLine(", B.via1_dts ");
+					//queryCols.AppendLine(", B.cap1_dts ");
+					//queryCols.AppendLine(", B.nomeposizione1_dts ");
+					//queryCols.AppendLine(", B.telefono1_dts ");
+					//queryCols.AppendLine(", B.via2_dts ");
+					//queryCols.AppendLine(", B.cap2_dts ");
+					//queryCols.AppendLine(", B.nomeposizione2_dts ");
+					//queryCols.AppendLine(", B.telefono2_dts ");
+					//queryCols.AppendLine(", B.via3_dts ");
+					//queryCols.AppendLine(", B.cap3_dts ");
+					//queryCols.AppendLine(", B.nomeposizione3_dts ");
+					//queryCols.AppendLine(", B.telefono3_dts ");
+					//queryCols.AppendLine(", B.pagamenti_dts ");
+					//queryCols.AppendLine(", B.ricfatt_dts ");
+					//queryCols.AppendLine(", B.indirizzofatt_dts ");
+					//queryCols.AppendLine(", B.noteriservate_dts ");
+					//queryCols.AppendLine(", B.niscrordine_dts ");
+					//queryCols.AppendLine(", B.annofrequenza_dts ");
+					//queryCols.AppendLine(", B.nomeuniversita_dts ");
+					//queryCols.AppendLine(", B.dettagliuniversita_dts ");
+					//queryCols.AppendLine(", B.Boolfields_dts ");
+					//queryCols.AppendLine(", B.Textfield1_dts ");
+					//queryCols.AppendLine(", B.Interventieseguiti_dts ");
+					//queryCols.AppendLine(", B.locordine_dts ");
 
 
 
 					 string query = "";
-					query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
 
-					 //Inseriamo il codice di join per la pabella dettagli
+				//	query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+				query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+
+				
+					//Inseriamo il codice di join per la pabella dettagli
 					query += "";
 
 
@@ -400,16 +403,24 @@ namespace WelcomeLibrary.DAL
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; }))
                 {
                     SQLiteParameter promozione = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; });
-                    _parUsed.Add(promozione);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Promozione = @promozioni ";
-                    else
-                        query += " AND  Promozione = @promozioni   ";
-                }
+
+						_parUsed.Add(promozione);
+						if (!query.ToLower().Contains("where"))
+							query += " WHERE Promozione = @promozioni ";
+						else
+							query += " AND  Promozione = @promozioni   ";
+
+					//_parUsed.Add(promozione);
+					//if (!query.ToLower().Contains("where"))
+					//	query += " WHERE Promozione = " + ((bool)promozione.Value ? "1" : "0") + " ";
+					//else
+					//	query += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
+
+				}
 
 
 
-                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
+				if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
                 {
                     SQLiteParameter Caratteristica1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
                     _parUsed.Add(Caratteristica1);
@@ -633,16 +644,32 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-                if (campoordinamento == "")
+				if (campoordinamento == "")
                     query += "  order BY DataInserimento Desc, Id Desc  ";
                 else
                     query += "  order BY " + campoordinamento + " Desc, Id Desc ";
 
+
+
 				if (!string.IsNullOrEmpty(maxrecord))
 					query += " LIMIT " + maxrecord;
 
+				///*****************************/
+				//query += " AND Promozione = @promozioni ";
+				///*****************************/
+				//_parUsed = new List<SQLiteParameter>();
+				//SQLiteParameter promozione1 = new SQLiteParameter("@promozioni",  DbType.Int64);
+				//promozione1.Value = 1;
+				//_parUsed.Add(promozione1);
 
-					 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+				//_parUsed = new List<SQLiteParameter>();
+				//SQLiteParameter pp = new SQLiteParameter("@datainserimento", DbType.DateTime);
+				//pp.Value = new DateTime(2017,9,11);
+				//query = "SELECT A.*,B.* FROM TBL_ATTIVITA A left join TBL_ATTIVITA_DETAIL B on A.id_dts_collegato=B.Id_dts   WHERE datainserimento >= @datainserimento order BY DataInserimento Desc, Id Desc   LIMIT 12";
+				//_parUsed.Add(pp);
+
+
+				SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };

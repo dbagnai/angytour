@@ -245,10 +245,10 @@ namespace WelcomeLibrary.DAL
 			return ret;
 		}
 
-        public static int ExecuteStoredProcListOle(string query, List<SQLiteParameter> parms, string Conn)
+        public static long ExecuteStoredProcListOle(string query, List<SQLiteParameter> parms, string Conn)
         {
             string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
-            int ritorno = 0;
+            long ritorno = 0;
             //SqlConnection conn = new SqlConnection(ConnectionString);
             using (SQLiteConnection conn = new SQLiteConnection(connessione))
             {
@@ -294,8 +294,10 @@ namespace WelcomeLibrary.DAL
 
                     if ((((string)query.ToUpper()).StartsWith("INSERT ") == true)) //nella query di insert ritorno l'identity appena generata
                     {
-                        cmd.CommandText = "Select @@Identity";
-                        ritorno = (int)cmd.ExecuteScalar();
+						//cmd.CommandText = "Select @@Identity";
+						cmd.CommandText = "SELECT last_insert_rowid()";
+						//object o = cmd.ExecuteScalar();
+						ritorno = (long)cmd.ExecuteScalar();
                     }
 
                     conn.Close();
