@@ -758,37 +758,37 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             if (btnAggiorna.Text == "Aggiorna")
             {
                 updrecord = new Offerte();
-                int tmp = 0;
-                if (Int32.TryParse(OffertaIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(OffertaIDSelected, out tmp))
                 {
                     updrecord.Id = tmp;
                     updrecord = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, OffertaIDSelected);
 
 
-                    int tmpcoll = 0;
-                    if (Int32.TryParse(txtIdcollegato.Text, out tmpcoll))
+                    long tmpcoll = 0;
+                    if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
                         updrecord.Id_collegato = tmpcoll;
 
                     tmpcoll = 0;
-                    if (Int32.TryParse(txtAnno.Text, out tmpcoll))
+                    if (long.TryParse(txtAnno.Text, out tmpcoll))
                         updrecord.Anno = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica1 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica2 = tmpcoll;
 
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica3 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica4 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica5 = tmpcoll;
-                    if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica6 = tmpcoll;
                     updrecord.Xmlvalue = hProdotticollegati.Value;
 
@@ -893,30 +893,30 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
                 updrecord.CodiceTipologia = TipologiaOfferte;
 
-                int tmpcoll = 0;
-                if (Int32.TryParse(txtIdcollegato.Text, out tmpcoll))
+                long tmpcoll = 0;
+                if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
                     updrecord.Id_collegato = tmpcoll;
 
                 tmpcoll = 0;
-                if (Int32.TryParse(txtAnno.Text, out tmpcoll))
+                if (long.TryParse(txtAnno.Text, out tmpcoll))
                     updrecord.Anno = tmpcoll;
                 tmpcoll = 0;
-                if (Int32.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica1 = tmpcoll;
                 tmpcoll = 0;
-                if (Int32.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica2 = tmpcoll;
 
                 tmpcoll = 0;
-                if (Int32.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica3 = tmpcoll;
                 tmpcoll = 0;
-                if (Int32.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica4 = tmpcoll;
                 tmpcoll = 0;
-                if (Int32.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica5 = tmpcoll;
-                if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+                if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                     updrecord.Caratteristica6 = tmpcoll;
                 updrecord.Xmlvalue = hProdotticollegati.Value;
 
@@ -1071,7 +1071,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     mail.Id_card = c.Id_card;
                     mail.Id_cliente = c.Id_cliente;
                     mail.Lingua = c.Lingua;
-                    mail.Tipomailing = (Int32)enumclass.TipoMailing.AvvisoInserimentoStruttura;
+                    mail.Tipomailing = (long)enumclass.TipoMailing.AvvisoInserimentoStruttura;
                     mail.NoteInvio = "";
 
                     mail.SoggettoMail = references.ResMan("Common", Lingua, "oggettoMailInserimentoStruttura").ToString();
@@ -1110,8 +1110,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             try
             {
                 Offerte updrecord = new Offerte();
-                int tmp = 0;
-                if (Int32.TryParse(OffertaIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(OffertaIDSelected, out tmp))
                 {
                     updrecord.Id = tmp;
                     //Devi cancellare anche le foto allegate altrimenti restano
@@ -2028,7 +2028,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
     #region GESTIONE CARATTERISTICHE DI RICERCA
 
-    private void CaricaDatiDdlCaratteristiche(int p1, int p2, int p3, int p4, int p5, int p6)
+    private void CaricaDatiDdlCaratteristiche(long p1, long p2, long p3, long p4, long p5, long p6)
     {
 
         //Riempio la ddl 

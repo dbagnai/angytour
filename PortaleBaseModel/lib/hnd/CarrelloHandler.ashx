@@ -27,7 +27,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
             string strJson = new StreamReader(context.Request.InputStream).ReadToEnd();
             //deserialize the parameters passed
             inputParameters objPar = Deserialize<inputParameters>(strJson);
-            int idprodotto = 0;
+            long idprodotto = 0;
             int quantita = 0;
 
             ///////////////////////////////////////////////// PRENDO I RIFERIMENTI DEL CLIENT PER IL CARRELLO
@@ -50,7 +50,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                 case "add":
                     if (objPar != null)
                     {
-                        int.TryParse(objPar.codice, out idprodotto);
+                        long.TryParse(objPar.codice, out idprodotto);
                         string codcaratt = objPar.codiceCaratt;
                         string q = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, idprodotto.ToString(), codcaratt);
                         int.TryParse(q, out quantita);

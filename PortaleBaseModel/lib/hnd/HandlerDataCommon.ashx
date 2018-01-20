@@ -76,7 +76,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             string term = pars.ContainsKey("term") ? pars["term"].ToLower() : "";
             string id = pars.ContainsKey("id") ? pars["id"] : "";
             List<ResultAutocomplete> lra = new List<ResultAutocomplete>();
-            int irecs = 0;
+            long irecs = 0;
 
             string lingua = pars.ContainsKey("lng") ? pars["lng"] : "I";
             string filter1 = pars.ContainsKey("filter1") ? pars["filter1"] : "";
@@ -94,7 +94,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             switch (q)
             {
                 case "autocompletecaratteristiche":
-                    int.TryParse(Recs, out irecs);
+                    long.TryParse(Recs, out irecs);
                     if (irecs == 0) irecs = 50;
 
                     int progr = 0;
@@ -104,7 +104,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     {
                         List<Tabrif> Caratteristica = new List<Tabrif>();
                         Caratteristica = references.FiltraCaratteristiche(progr, term, lingua);
-                        int count = 0;
+                        long count = 0;
 
                         ResultAutocomplete ra = new ResultAutocomplete() { id = "", label = "", value = "Tutti", codice = "" };
                         lra.Add(ra);

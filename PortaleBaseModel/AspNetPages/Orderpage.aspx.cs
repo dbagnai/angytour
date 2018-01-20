@@ -150,7 +150,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     /// Aggiorna l'associazione del carrello ai dati dell'utente loggato!!
     /// </summary>
     /// <param name="carrello"></param>
-    private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, int idcliente = 0)
+    private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, long idcliente = 0)
     {
         string codicesconto = "";
         if (Session["codicesconto"] != null)

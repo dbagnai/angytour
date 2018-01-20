@@ -559,8 +559,8 @@ public partial class AspNetPages_SchedaResource : CommonPage
 
                 singleresource = Newtonsoft.Json.JsonConvert.SerializeObject(r); //Serializzo 
 
-                int tmpint = 0;
-                int.TryParse(idOfferta, out tmpint);
+                long tmpint = 0;
+                long.TryParse(idOfferta, out tmpint);
                 item.Id = tmpint;
                 item.CodiceProdotto = r.codice;
                 item.CodiceRegione = r.codiceREGIONE;
@@ -649,7 +649,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
             string telefono = txtContactPhone.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
 
             string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;

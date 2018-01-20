@@ -26,8 +26,8 @@ public class filemanage
         try
         {
             offerteDM offDM = new offerteDM();
-            int i = 0;
-            int.TryParse(idrecord, out i);
+            long i = 0;
+            long.TryParse(idrecord, out i);
             if (!offDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, nomefile, DescrizioneFile, progressivofile))
                 ret = "Errore Modifica file";
         }
@@ -49,8 +49,8 @@ public class filemanage
                 ret += "Selezionare un elemento per associare il file";
                 return ret;
             }
-            int idSelected = 0;
-            if (!Int32.TryParse(idrecord, out idSelected))
+            long idSelected = 0;
+            if (!long.TryParse(idrecord, out idSelected))
             {
                 ret += "Selezionare un elemento per associare il file";
                 return ret;
@@ -206,8 +206,8 @@ public class filemanage
                 ret += "Selezionare un elemento per associare il file";
                 return ret;
             }
-            int idSelected = 0;
-            if (!Int32.TryParse(idrecord, out idSelected))
+            long idSelected = 0;
+            if (!long.TryParse(idrecord, out idSelected))
             {
                 ret += "Selezionare un elemento per associare il file";
                 return ret;
@@ -366,8 +366,8 @@ public class filemanage
             ret = "Selezionare una foto da cancellare";
             return ret;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(idrecord, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(idrecord, out idSelected))
         {
             ret = "Selezionare un elemento per cancellare la foto";
             return ret;

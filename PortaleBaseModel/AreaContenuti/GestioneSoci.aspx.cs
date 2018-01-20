@@ -1393,24 +1393,24 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             if (btnAggiorna.Text == "Aggiorna")
             {
                 updrecord = new Offerte();
-                int tmp = 0;
-                if (Int32.TryParse(OffertaIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(OffertaIDSelected, out tmp))
                 {
                     string datimodificati = "";
 
                     updrecord.Id = tmp;
                     updrecord = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, OffertaIDSelected);
 
-                    int tmpcoll = 0;
-                    if (Int32.TryParse(txtIdcollegato.Text, out tmpcoll))
+                    long tmpcoll = 0;
+                    if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
                         updrecord.Id_collegato = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(txtAnno.Text, out tmpcoll))
+                    if (long.TryParse(txtAnno.Text, out tmpcoll))
                         updrecord.Anno = tmpcoll;
 
                     tmpcoll = 0;
-                   
-                    //if (Int32.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
+
+                    //if (long.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
                     //{
                     //    if (updrecord.Caratteristica1 != tmpcoll)
                     //    {
@@ -1419,7 +1419,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     //    } updrecord.Caratteristica1 = tmpcoll;
                     //}
                     //tmpcoll = 0;
-                    //if (Int32.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
+                    //if (long.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
                     //{
                     //    if (updrecord.Caratteristica2 != tmpcoll)
                     //        datimodificati += "modificata caregoria sicpre<br/>";
@@ -1427,7 +1427,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     //    updrecord.Caratteristica2 = tmpcoll;
                     //}
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
                     {
                         if (updrecord.Caratteristica3 != tmpcoll)
                             datimodificati += "modificata caregoria socio<br/>";
@@ -1435,12 +1435,12 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     } 
                     
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica4 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica5 = tmpcoll;
-                    if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica6 = tmpcoll;
 
                     updrecord.Campo1I = txtCampo1I.Text;
@@ -1704,30 +1704,30 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     updrecord = new Offerte();
                     updrecord.CodiceTipologia = TipologiaOfferte;
 
-                    int tmpcoll = 0;
-                    if (Int32.TryParse(txtIdcollegato.Text, out tmpcoll))
+                long tmpcoll = 0;
+                    if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
                         updrecord.Id_collegato = tmpcoll;
 
                     tmpcoll = 0;
-                    if (Int32.TryParse(txtAnno.Text, out tmpcoll))
+                    if (long.TryParse(txtAnno.Text, out tmpcoll))
                         updrecord.Anno = tmpcoll;
-                    //tmpcoll = 0;
-                    //if (Int32.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
-                    //    updrecord.Caratteristica1 = tmpcoll;
-                    //tmpcoll = 0;
-                    //if (Int32.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
-                    //    updrecord.Caratteristica2 = tmpcoll;
+                //tmpcoll = 0;
+                //if (long.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
+                //    updrecord.Caratteristica1 = tmpcoll;
+                //tmpcoll = 0;
+                //if (long.TryParse(ddlCaratteristica2.SelectedValue, out tmpcoll))
+                //    updrecord.Caratteristica2 = tmpcoll;
 
-                    tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+                tmpcoll = 0;
+                    if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica3 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica4 = tmpcoll;
                     tmpcoll = 0;
-                    if (Int32.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica5 = tmpcoll;
-                    if (Int32.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+                    if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica6 = tmpcoll;
 
                     updrecord.Campo1I = txtCampo1I.Text;
@@ -2034,8 +2034,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             try
             {
                 Offerte updrecord = new Offerte();
-                int tmp = 0;
-                if (Int32.TryParse(OffertaIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(OffertaIDSelected, out tmp))
                 {
                     updrecord.Id = tmp;
                     //Devi cancellare anche le foto allegate altrimenti restano
@@ -2452,8 +2452,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
     {
         try
         {
-            int i = 0;
-            int.TryParse(idrecored, out i);
+            long i = 0;
+            long.TryParse(idrecored, out i);
             bool ret = offDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, nomefile, Descrizione);
         }
         catch (Exception errins)
@@ -2479,8 +2479,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             output.Text = "Selezionare una foto da cancellare";
             return;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(idrecord, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(idrecord, out idSelected))
         {
             output.Text = "Selezionare un elemento per cancellare la foto";
             return;
@@ -2523,8 +2523,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 output.Text = "Selezionare un elemento per associare il file";
                 return;
             }
-            int idSelected = 0;
-            if (!Int32.TryParse(idrecord, out idSelected))
+            long idSelected = 0;
+            if (!long.TryParse(idrecord, out idSelected))
             {
                 output.Text = "Selezionare un elemento per associare il file";
                 return;
@@ -3449,7 +3449,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
     #region GESTIONE CARATTERISTICHE DI RICERCA
 
 
-    private void CaricaDatiDdlCaratteristiche(int p1, int p2, int p3, int p4, int p5, int p6)
+    private void CaricaDatiDdlCaratteristiche(long p1, long p2, long p3, long p4, long p5, long p6)
     {
 
         //Riempio la ddl 

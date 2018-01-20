@@ -1471,8 +1471,8 @@ public partial class _SchedaProdotto : CommonPage
     {
         string id = (((Button)sender).CommandArgument);
         Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
-        int _i = 0;
-        int.TryParse(id, out _i);
+        long _i = 0;
+        long.TryParse(id, out _i);
         //Registro la statistica di contatto
         Statistiche stat = new Statistiche();
         stat.Data = DateTime.Now;
@@ -1496,16 +1496,16 @@ public partial class _SchedaProdotto : CommonPage
         //}
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
-        int quantita = 0;
-        int.TryParse(txtQuantita_temp.Value, out quantita);
+        long idprodotto = 0;
+        long.TryParse(Idtext, out idprodotto);
+        long quantita = 0;
+        long.TryParse(txtQuantita_temp.Value, out quantita);
         string codTagCombined = hddTagCombined.Value;
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
-
+ 
         txtQuantita_temp.Value = quantita.ToString();
         //Aggiorniamo nella masterpage il numero prodotti / articoli nel carrello
-        // int nprodotti = ecom.ContaProdottiCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
+        // long nprodotti = ecom.ContaProdottiCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
 
         // AssociaDati();
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
@@ -1519,12 +1519,12 @@ public partial class _SchedaProdotto : CommonPage
 
 
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
+        long idprodotto = 0;
+        long.TryParse(Idtext, out idprodotto);
         string codTagCombined = hddTagCombined.Value;
         string q = CaricaQuantitaNelCarrello(Request, Session, idprodotto.ToString(), codTagCombined);
-        int quantita = 0;
-        int.TryParse(q, out quantita);
+        long quantita = 0;
+        long.TryParse(q, out quantita);
         quantita += 1;//Incremento
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
 
@@ -1546,18 +1546,18 @@ public partial class _SchedaProdotto : CommonPage
         //}
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
-        int quantita = 0;
-        int.TryParse(txtQuantita_temp.Value, out quantita);
+        long idprodotto = 0;
+        long.TryParse(Idtext, out idprodotto);
+        long quantita = 0;
+        long.TryParse(txtQuantita_temp.Value, out quantita);
 
         quantita += 1;//Incremento
         string codTagCombined = hddTagCombined.Value;
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
         if (Session["superamentoquantita"] != null)
         {
-            int qtamod = 0;
-            int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
+            long qtamod = 0;
+            long.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
             output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita"); //Resources.Common.testoCarellosuperamentoquantita;
@@ -1587,10 +1587,10 @@ public partial class _SchedaProdotto : CommonPage
     {
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
-        int quantita = 0;
-        int.TryParse(txtQuantita_temp.Value, out quantita);
+        long idprodotto = 0;
+        long.TryParse(Idtext, out idprodotto);
+        long quantita = 0;
+        long.TryParse(txtQuantita_temp.Value, out quantita);
         quantita -= 1;//Decremento
         if (quantita < 1) quantita = 0;
         string codTagCombined = hddTagCombined.Value;
@@ -1598,8 +1598,8 @@ public partial class _SchedaProdotto : CommonPage
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
         if (Session["superamentoquantita"] != null)
         {
-            int qtamod = 0;
-            int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
+            long qtamod = 0;
+            long.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
             output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita"); //Resources.Common.testoCarellosuperamentoquantita;
@@ -1622,10 +1622,10 @@ public partial class _SchedaProdotto : CommonPage
     {
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idprodotto = 0;
-        int.TryParse(Idtext, out idprodotto);
-        int quantita = 0;
-        int.TryParse(txtQuantita_temp.Value, out quantita);
+        long idprodotto = 0;
+        long.TryParse(Idtext, out idprodotto);
+        long quantita = 0;
+        long.TryParse(txtQuantita_temp.Value, out quantita);
         string codTagCombined = hddTagCombined.Value;
 
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
@@ -1646,7 +1646,7 @@ public partial class _SchedaProdotto : CommonPage
             string telefono = txtContactPhone.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
@@ -1707,7 +1707,7 @@ public partial class _SchedaProdotto : CommonPage
             string telefono = txtContactPhone1.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtContactMessage1.Value.Replace("\r", "<br/>") + " <br/> ";

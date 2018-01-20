@@ -83,7 +83,7 @@ namespace WelcomeLibrary.UF
 				}
 				try
 				{
-					int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+					long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
 					LoadConfig();
 				}
 				catch (Exception error)
@@ -131,7 +131,7 @@ namespace WelcomeLibrary.UF
 					{
 						ConfigItem item = new ConfigItem();
 
-						item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+						item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
 						item.Gruppo = reader["Gruppo"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Gruppo"));
 						item.Codice = reader["Codice"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Codice"));
@@ -169,7 +169,7 @@ namespace WelcomeLibrary.UF
 
 	public class ConfigItem
 	{
-		public int Id { get; set; }
+		public long Id { get; set; }
 		public string Gruppo { get; set; }
 		public string Codice { get; set; }
 		public string Valore { get; set; }

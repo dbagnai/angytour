@@ -366,7 +366,7 @@
                                         </a>
                                         &nbsp;
 
-                                        <div class="pull-right"><%# CalcolaNumeroCommenti((int)Eval("Id")) %></div>
+                                        <div class="pull-right"><%# CalcolaNumeroCommenti((long)Eval("Id")) %></div>
 
                                         <div class="clearfix"></div>
                                         <div id="responseContainer"></div>

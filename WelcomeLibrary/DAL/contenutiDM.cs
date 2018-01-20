@@ -40,11 +40,11 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Contenuti();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
-                        int _i = 0;
+                        long _i = 0;
                         if (!(reader["ID_ATTIVITA"]).Equals(DBNull.Value))
-                            int.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
+                            long.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
                         item.Id_attivita = _i;
                         item.CodiceContenuto = reader.GetString(reader.GetOrdinal("CodiceContenuto"));
                         item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
@@ -130,17 +130,17 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Contenuti();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("A.ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("A.ID"));
 
-                        int _i = 0;
+                        long _i = 0;
                         if (!(reader["ID_ATTIVITA"]).Equals(DBNull.Value))
-                            int.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
+                            long.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
                         item.Id_attivita = _i;
 
                         if (caricaofferteassociate && _i != 0)
                         {
                             Offerte offerta = new Offerte();
-                            offerta.Id = reader.GetInt32(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("B.DataInserimento"));
                             offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("B.DescrizioneI"));
@@ -276,11 +276,11 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Contenuti();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
-                        int _i = 0;
+                        long _i = 0;
                         if (!(reader["ID_ATTIVITA"]).Equals(DBNull.Value))
-                            int.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
+                            long.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
                         item.Id_attivita = _i;
 
                         item.CodiceContenuto = reader.GetString(reader.GetOrdinal("CodiceContenuto"));
@@ -364,11 +364,11 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Contenuti();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
-                        int _i = 0;
+                        long _i = 0;
                         if (!(reader["ID_ATTIVITA"]).Equals(DBNull.Value))
-                            int.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
+                            long.TryParse(reader["ID_ATTIVITA"].ToString(), out _i);
                         item.Id_attivita = _i;
 
                         item.CodiceContenuto = reader.GetString(reader.GetOrdinal("CodiceContenuto"));
@@ -512,7 +512,7 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
-        public bool insertFoto(string connection, int idContenuto, string nomefile, string descrizione)
+        public bool insertFoto(string connection, long idContenuto, string nomefile, string descrizione)
         {
             if (connection == "") return false;
             if (idContenuto == 0) return false;
@@ -558,7 +558,7 @@ namespace WelcomeLibrary.DAL
         }
 
 
-        public bool CancellaFoto(string connection, int idContenuto, string nomefile, string descrizione, string pathfile)
+        public bool CancellaFoto(string connection, long idContenuto, string nomefile, string descrizione, string pathfile)
         {
 
             if (connection == "") return false;
@@ -608,7 +608,7 @@ namespace WelcomeLibrary.DAL
             }
             return true;
         }
-        public bool modificaFoto(string connection, int idContenuto, string nomefile, string descrizione)
+        public bool modificaFoto(string connection, long idContenuto, string nomefile, string descrizione)
         {
             if (connection == "") return false;
             if (idContenuto == 0) return false;
@@ -661,7 +661,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="idContenuto"></param>
         /// <returns></returns>
-        public AllegatiCollection getListaFotobyId(string connection, int idContenuto)
+        public AllegatiCollection getListaFotobyId(string connection, long idContenuto)
         {
             if (connection == null || connection == "") { return null; };
             if (idContenuto == null || idContenuto == 0) { return null; };
@@ -749,7 +749,7 @@ namespace WelcomeLibrary.DAL
             string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customdescI,customdescGB,customdescRU) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customdescI,@customdescGB,@customdescRU)";
             try
             {
-                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db
             }
             catch (Exception error)

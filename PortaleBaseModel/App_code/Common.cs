@@ -533,7 +533,7 @@ public class CommonPage : Page
         return strIn.Trim('-');
 
     }
-     
+
     /// <summary>
     /// Rimpiazza link:(www.sitodavadere.it) con un link html
     /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
@@ -541,6 +541,17 @@ public class CommonPage : Page
     /// <returns></returns>
     public static String ReplaceLinks(string strIn, bool nolink = false)
     {
+        List<string> tags = new List<string>();
+        tags.Add("link:(");
+        tags.Add("quot:(");
+        tags.Add("bold:(");
+        tags.Add("iden:(");
+        tags.Add("butt:(");
+        tags.Add("buto:(");
+        tags.Add("imag:(");
+        tags.Add("titl:(");
+
+
         string target = "_blank";
         string urlcorretto = "";
         string ret = strIn;
@@ -552,8 +563,18 @@ public class CommonPage : Page
             if (b != -1)
             {
                 origtext = strIn.Substring(a, b - a + 1);
-
                 string url = strIn.Substring(a + 6, b - (a + 6));
+
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
+
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -562,6 +583,9 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
+
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -604,6 +628,18 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
+
+
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -612,6 +648,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -660,6 +698,17 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
+
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -668,6 +717,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -717,6 +768,7 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -725,6 +777,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -774,6 +828,16 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
+
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -782,6 +846,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -836,6 +902,15 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
                 string testourl = url;
                 //Splitto supponendo di avere lo schema ulr|testourl
                 string[] dati = url.Split('|');
@@ -844,6 +919,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -892,6 +969,15 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
                 string testourl = url;
                 string[] dati = url.Split('|');
                 if (dati.Length == 2)
@@ -899,6 +985,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -951,6 +1039,15 @@ public class CommonPage : Page
                 origtext = strIn.Substring(a, b - a + 1);
 
                 string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
                 string testourl = url;
                 string[] dati = url.Split('|');
                 if (dati.Length == 2)
@@ -958,6 +1055,8 @@ public class CommonPage : Page
                     url = (dati[0]);
                     testourl = dati[1];
                 }
+                else
+                    url = "";
                 urlcorretto = url;
                 if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                 {
@@ -1400,7 +1499,7 @@ public class CommonPage : Page
         return sb.ToString();
     }
 
-    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, int idprodotto, int quantita, string username, string idcombinato = "", int idcarrello = 0, int idcliente = 0 )
+    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long idprodotto, long quantita, string username, string idcombinato = "", long idcarrello = 0, long idcliente = 0 )
     {
         bool ret = false;
         string sessionid = "";
@@ -1450,7 +1549,7 @@ public class CommonPage : Page
                 if (quantita > off.Qta_vendita)
                 {
                     Session.Add("superamentoquantita", (long)off.Qta_vendita);
-                    quantita = (int)off.Qta_vendita;
+                    quantita = (long)off.Qta_vendita;
                 }
                 if (off.Qta_vendita == 0) // se il prodotto non è più disponibile lo elimino dal carrello
                 {
@@ -1471,8 +1570,8 @@ public class CommonPage : Page
                     {
                         //Qui ho trovato la combinazione che mi serve
                         exist = true;
-                        int qta = 0;
-                        int.TryParse(item.qta, out qta);
+                        long qta = 0;
+                        long.TryParse(item.qta, out qta);
                         //devo verificare se c'è quella disponibilita in base alle caratteristiche selezionate
                         if (quantita > qta)
                         {
@@ -1545,8 +1644,8 @@ public class CommonPage : Page
             }
             if (!string.IsNullOrEmpty(username))
             {
-                int i = 0;
-                int.TryParse(getidcliente(username), out i);
+                long i = 0;
+                long.TryParse(getidcliente(username), out i);
                 Item.ID_cliente = i;
             }
             if (quantita >= 1)
@@ -1566,7 +1665,7 @@ public class CommonPage : Page
         CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
         eCommerceDM ecom = new eCommerceDM();
         CarrelloCollection ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
-        List<int> idtodelete = new List<int>();
+        List<long> idtodelete = new List<long>();
         foreach (Carrello c in ColItem)
         {
             ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.ID);
@@ -1595,7 +1694,7 @@ public class CommonPage : Page
         TotaliCarrello totali = new TotaliCarrello();
         totali.Supplementospedizione = supplementospedizione;
 
-        List<int> idtodelete = new List<int>();
+        List<long> idtodelete = new List<long>();
         long idclienteincarrello = 0;
         foreach (Carrello c in ColItem)
         {
@@ -1623,7 +1722,7 @@ public class CommonPage : Page
             idlist = idlist.Insert(0, "( ");
             idlist += " )";
         }
-        foreach (int l in idtodelete) //Elimino dal carrello gli elementi non più disponibili
+        foreach (long l in idtodelete) //Elimino dal carrello gli elementi non più disponibili
         {
             ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, l);
         }
@@ -1639,7 +1738,7 @@ public class CommonPage : Page
         totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali.TotaleOrdine, cli);
         totali.TotaleSpedizione = CalcolaSpeseSpedizione(ColItem, codicenazione, codiceprovincia, supplementospedizione, totali.TotaleOrdine, totali.TotaleSconto, supplementocontanti);
 
-        totali.Id_cliente = (int)idclienteincarrello;
+        totali.Id_cliente = (long)idclienteincarrello;
         //Aggiono i codice della nazione di spedizione nel carrello
         if (!string.IsNullOrWhiteSpace(idlist) && !string.IsNullOrWhiteSpace(codicenazione))
             ecom.UpdateCarrelloPerListaID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicenazione, idlist);
@@ -1784,8 +1883,8 @@ public class CommonPage : Page
         if (!string.IsNullOrWhiteSpace(idprodotto) && idprodotto.ToString() != "0")
         {
 
-            int id_prodotto = 0;
-            int.TryParse(idprodotto.ToString(), out id_prodotto);
+            long id_prodotto = 0;
+            long.TryParse(idprodotto.ToString(), out id_prodotto);
             ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, id_prodotto, codcar);
             if (ColItem != null && ColItem.Count > 0)
                 Item = ColItem[0];
@@ -2539,7 +2638,7 @@ public class CommonPage : Page
 
             //Estraiamo il codice di provenienza dal record letto in remoto
             string id_origine_str = "0";
-            int id_origine = 0;
+            long id_origine = 0;
             string indirizzocontenutocompleto = values["guid"];
 
             //Comunicati
@@ -2550,7 +2649,7 @@ public class CommonPage : Page
                 int lastpos = id_origine_str.LastIndexOf('/');
                 if (lastpos != -1)
                     id_origine_str = id_origine_str.Substring(lastpos + 1);
-                int.TryParse(id_origine_str, out id_origine);
+                long.TryParse(id_origine_str, out id_origine);
                 item.Id_collegato = id_origine; //Metto l'id di provenienza nel campo degli id collegati!!!
                 if (item.Id_collegato != 0)
                 {  //Carichiamo adesso i contenuti completi dalla pagina di dettaglio ( Chiamata WEB )
@@ -2588,7 +2687,7 @@ public class CommonPage : Page
                     int lastpos = id_origine_str.ToLower().LastIndexOf("id_art=");
                     if (lastpos != -1)
                         id_origine_str = id_origine_str.Substring(lastpos + 7);
-                    int.TryParse(id_origine_str, out id_origine);
+                    long.TryParse(id_origine_str, out id_origine);
                     item.Id_collegato = id_origine; //Metto l'id di provenienza nel campo degli id collegati!!!
                     if (item.Id_collegato != 0)
                     {
@@ -2678,8 +2777,8 @@ public class CommonPage : Page
             {
                 return "No id selected!";
             }
-            int idSelected = 0;
-            if (!Int32.TryParse(idrecord, out idSelected))
+            long idSelected = 0;
+            if (!long.TryParse(idrecord, out idSelected))
             {
                 return "No id selected!";
             }
@@ -2754,8 +2853,8 @@ public class CommonPage : Page
             c.CodiceContenuto = codicecontenutoweb; //Impongo il codice per i contenuti provenienti dal web
 
 #if true
-            int _id = 0;
-            int.TryParse(kv.Key, out _id);
+            long _id = 0;
+            long.TryParse(kv.Key, out _id);
             c.Id = _id; //assegno l'identificativo progressivo del contenuto preso dal web   
 #endif
 

@@ -160,8 +160,8 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     {
         HtmlInputText txtQuantita_temp = (HtmlInputText)((LinkButton)sender).FindControl("txtQuantita");
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
-        int idcarrello = 0;
-        int.TryParse(Idtext, out idcarrello);
+        long idcarrello = 0;
+        long.TryParse(Idtext, out idcarrello);
         //int idprodotto = 0;
         //int.TryParse(Idtext, out idprodotto);
         int quantita = 0;
@@ -186,8 +186,8 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
         //int idprodotto = 0;
         //int.TryParse(Idtext, out idprodotto);
-        int idcarrello = 0;
-        int.TryParse(Idtext, out idcarrello);
+        long idcarrello = 0;
+        long.TryParse(Idtext, out idcarrello);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
         quantita -= 1;//Decremento
@@ -223,8 +223,8 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
         //int idprodotto = 0;
         //int.TryParse(Idtext, out idprodotto);
-        int idcarrello = 0;
-        int.TryParse(Idtext, out idcarrello);
+        long idcarrello = 0;
+        long.TryParse(Idtext, out idcarrello);
         int quantita = 0;
         int.TryParse(txtQuantita_temp.Value, out quantita);
 

@@ -33,7 +33,7 @@ namespace WelcomeLibrary.UF
                 while (reader.Read())
                 {
                     item = new Tabrif();
-                    item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
+                    item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
 
                     if (!reader["originalUrl"].Equals(DBNull.Value))
                         item.Campo1 = reader.GetString(reader.GetOrdinal("originalUrl"));
@@ -623,9 +623,9 @@ namespace WelcomeLibrary.UF
                         Tabrif _item = new Tabrif();
 
                         _item = new Tabrif();
-                        _item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
+                        _item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
                         if (!reader["Relatedid"].Equals(DBNull.Value))
-                            _item.Intero1 = reader.GetInt32(reader.GetOrdinal("Relatedid"));
+                            _item.Intero1 = reader.GetInt64(reader.GetOrdinal("Relatedid"));
                         _item.Codice = reader.GetString(reader.GetOrdinal("Calledurl")).ToString().Trim();
                         _item.Campo1 = reader.GetString(reader.GetOrdinal("Pathdestinazione")).Trim();
                         _item.Campo2 = reader.GetString(reader.GetOrdinal("Parametri")).Trim();
@@ -664,7 +664,7 @@ namespace WelcomeLibrary.UF
             SQLiteParameter p2b = new SQLiteParameter("@Parametri", item.Campo2);
             parColl.Add(p2b);
 
-            int i = 0;
+            long i = 0;
             if (item.Intero1 != null)
                 i = item.Intero1.Value;
             SQLiteParameter p2c = new SQLiteParameter("@Relatedid", i);
@@ -697,9 +697,9 @@ namespace WelcomeLibrary.UF
             }
             return;
         }
-        public static int EliminaUrlrewrite(string connessione, Tabrif item)
+        public static long EliminaUrlrewrite(string connessione, Tabrif item)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
@@ -724,9 +724,9 @@ namespace WelcomeLibrary.UF
         /// <param name="connessione"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static int EliminaUrlrewritebyIdOfferta(string connessione, string id)
+        public static long EliminaUrlrewritebyIdOfferta(string connessione, string id)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
@@ -753,9 +753,9 @@ namespace WelcomeLibrary.UF
         }
 
 
-        public static int EliminaUrlrewritebyIdContenuto(string connessione, string id)
+        public static long EliminaUrlrewritebyIdContenuto(string connessione, string id)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 

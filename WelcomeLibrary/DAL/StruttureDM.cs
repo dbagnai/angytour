@@ -41,7 +41,7 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Struttura();
 
-                        item.Id_struttura = reader.GetInt32(reader.GetOrdinal("ID_STRUTTURA"));
+                        item.Id_struttura = reader.GetInt64(reader.GetOrdinal("ID_STRUTTURA"));
                         item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
                         item.Cellulare = reader.GetString(reader.GetOrdinal("Cellulare"));
                         item.CodiceCOMUNE = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
@@ -118,7 +118,7 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Struttura();
 
-                        item.Id_struttura = reader.GetInt32(reader.GetOrdinal("ID_STRUTTURA"));
+                        item.Id_struttura = reader.GetInt64(reader.GetOrdinal("ID_STRUTTURA"));
                         item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
                         item.Cellulare = reader.GetString(reader.GetOrdinal("Cellulare"));
                         item.CodiceCOMUNE = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
@@ -272,7 +272,7 @@ namespace WelcomeLibrary.DAL
             }
             try
             {
-                int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id_struttura == 0)
                 item.Id_struttura = retID;
             }

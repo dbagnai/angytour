@@ -109,7 +109,7 @@ namespace WelcomeLibrary.DAL
                 }
                 if (randomize)
                 {
-                    query += "ORDER BY rnd(INT(NOW*id)-NOW*id), Id Desc";
+                    query += "ORDER BY random(), Id Desc";
                 }
                 else
                     query += " order BY progressivo asc, DataInserimento Desc";
@@ -125,9 +125,9 @@ namespace WelcomeLibrary.DAL
                     {
 
                         item = new Banners();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!(reader["Progressivo"]).Equals(DBNull.Value))
-                            item.progressivo = reader.GetInt32(reader.GetOrdinal("Progressivo"));
+                            item.progressivo = reader.GetInt64(reader.GetOrdinal("Progressivo"));
 
                         item.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                         item.NavigateUrl = reader.GetString(reader.GetOrdinal("NavigateUrl"));
@@ -181,9 +181,9 @@ namespace WelcomeLibrary.DAL
                     {
 
                         item = new Banners();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!(reader["Progressivo"]).Equals(DBNull.Value))
-                            item.progressivo = reader.GetInt32(reader.GetOrdinal("Progressivo"));
+                            item.progressivo = reader.GetInt64(reader.GetOrdinal("Progressivo"));
 
                         item.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                         item.NavigateUrl = reader.GetString(reader.GetOrdinal("NavigateUrl"));

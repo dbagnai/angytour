@@ -291,16 +291,16 @@ namespace WelcomeLibrary.DAL
                     if (filtrocatalogo.Value) //Filtro i codicditipologia compresi tra 100 e 199 ( catalogo ) rispetto agli atri
                     {
                         if (!query.ToLower().Contains("where"))
-                            query += " WHERE (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=100) and  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<200)) ";
+                            query += " WHERE ((( CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER) )>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))<200)) ";
                         else
-                            query += " AND (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=100) and  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<200)) ";
+                            query += " AND (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<200)) ";
                     }
                     else
                     {
                         if (!query.ToLower().Contains("where"))
-                            query += " WHERE (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<100) or  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=200)) ";
+                            query += " WHERE (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
                         else
-                            query += " AND  (((CInt(Mid(A.[CodiceTIPOLOGIA],4)))<100) or  ((CInt(Mid(A.[CodiceTIPOLOGIA],4)))>=200)) ";
+                            query += " AND  (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
                     }
 
 
@@ -351,7 +351,6 @@ namespace WelcomeLibrary.DAL
 
                     }
                     catch { }
-
                 }
 
 
@@ -679,9 +678,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -729,20 +728,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -805,7 +804,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -1017,7 +1016,7 @@ namespace WelcomeLibrary.DAL
 
                 if (randomize)
                 {
-                    query += "ORDER BY rnd(INT(NOW*id)-NOW*id), Id Desc";
+                    query += "ORDER BY random(), Id Desc";
                 }
                 else
                 {
@@ -1038,9 +1037,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -1072,20 +1071,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
                         item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                         item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
@@ -1165,7 +1164,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -1410,7 +1409,7 @@ namespace WelcomeLibrary.DAL
 
                 if (randomize)
                 {
-                    query += "ORDER BY rnd(INT(NOW*id)-NOW*id), ID Desc";
+                    query += "ORDER BY random(), ID Desc";
                 }
                 else
                 {
@@ -1431,9 +1430,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -1479,20 +1478,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -1560,7 +1559,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -1742,9 +1741,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -1789,20 +1788,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -1867,7 +1866,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -2050,9 +2049,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -2096,20 +2095,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -2171,7 +2170,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -2356,9 +2355,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -2405,20 +2404,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -2480,7 +2479,7 @@ namespace WelcomeLibrary.DAL
 
                         //CAMPI IN TABELLA COLLEGATA------------------------------------------------------------------
                         if (!reader["Id_dts_collegato"].Equals(DBNull.Value))
-                            item.Id_dts_collegato = reader.GetInt32(reader.GetOrdinal("Id_dts_collegato"));
+                            item.Id_dts_collegato = reader.GetInt64(reader.GetOrdinal("Id_dts_collegato"));
 
                         if (!reader["Pivacf_dts"].Equals(DBNull.Value))
                             item.Pivacf_dts = reader.GetString(reader.GetOrdinal("Pivacf_dts"));
@@ -2757,9 +2756,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         // item = new Offerte();
-                        int anno = reader.GetInt16(reader.GetOrdinal("anno"));
-                        int mese = reader.GetInt16(reader.GetOrdinal("mese"));
-                        int numero = reader.GetInt32(reader.GetOrdinal("numero"));
+                        int anno = reader.GetInt32(reader.GetOrdinal("anno"));
+                        int mese = reader.GetInt32(reader.GetOrdinal("mese"));
+                        long numero = reader.GetInt64(reader.GetOrdinal("numero"));
 
                         if (!list.ContainsKey(anno.ToString()))
                         {
@@ -2818,9 +2817,9 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Offerte();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!reader["Id_collegato"].Equals(DBNull.Value))
-                            item.Id_collegato = reader.GetInt32(reader.GetOrdinal("Id_collegato"));
+                            item.Id_collegato = reader.GetInt64(reader.GetOrdinal("Id_collegato"));
 
                         if (!reader["Autore"].Equals(DBNull.Value))
                             item.Autore = reader.GetString(reader.GetOrdinal("Autore"));
@@ -2865,20 +2864,20 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                            item.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                            item.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                         if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                            item.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                            item.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                         if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                            item.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                            item.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                         if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                            item.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                            item.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                         if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                            item.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                            item.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                         if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                            item.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                            item.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                         if (!reader["Anno"].Equals(DBNull.Value))
-                            item.Anno = reader.GetInt32(reader.GetOrdinal("Anno"));
+                            item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -2959,12 +2958,11 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="CodiceCategoria"></param>
         /// <returns></returns>
-        public Dictionary<string, Dictionary<string, int>> ContaProdottiSottoprodotti(string connection, string CodiceTipologia)
+        public Dictionary<string, Dictionary<string, long>> ContaProdottiSottoprodotti(string connection, string CodiceTipologia)
         {
-            Dictionary<string, Dictionary<string, int>> list = new Dictionary<string, Dictionary<string, int>>();
+            Dictionary<string, Dictionary<string, long>> list = new Dictionary<string, Dictionary<string, long>>();
             if (connection == null || connection == "") return list;
-            //KeyValuePair<string, KeyValuePair<string, int>> _kv = new KeyValuePair<string, KeyValuePair<string, int>>();
-            Dictionary<string, int> _sprodotti = new Dictionary<string, int>();
+            Dictionary<string, long> _sprodotti = new Dictionary<string, long>();
             try
             {
                 string query = "SELECT CodiceCategoria,CodiceCategoria2Liv,count(CodiceCategoria2Liv) as totsottoprodotti FROM " + _tblarchivio + " WHERE   archiviato='false' and CodiceTIPOLOGIA = @CodiceTIPOLOGIA group by CodiceCategoria,CodiceCategoria2Liv";
@@ -2984,11 +2982,11 @@ namespace WelcomeLibrary.DAL
                             string codicecategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
                             if (!list.ContainsKey(codicecategoria))
                             {
-                                _sprodotti = new Dictionary<string, int>();
+                                _sprodotti = new Dictionary<string, long>();
                                 if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value) && !reader["totsottoprodotti"].Equals(DBNull.Value))
                                 {
                                     string codicecategoria2liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
-                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt32(reader.GetOrdinal("totsottoprodotti")));
+                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt64(reader.GetOrdinal("totsottoprodotti")));
                                     list.Add(codicecategoria, _sprodotti);
                                 }
                             }
@@ -2998,7 +2996,7 @@ namespace WelcomeLibrary.DAL
                                 if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value) && !reader["totsottoprodotti"].Equals(DBNull.Value))
                                 {
                                     string codicecategoria2liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
-                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt32(reader.GetOrdinal("totsottoprodotti")));
+                                    _sprodotti.Add(codicecategoria2liv, reader.GetInt64(reader.GetOrdinal("totsottoprodotti")));
                                 }
                             }
                         }
@@ -3171,7 +3169,7 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
-        public bool modificaFoto(string connection, int idOfferta, string nomefile, string descrizione, string progressivo = "")
+        public bool modificaFoto(string connection, long idOfferta, string nomefile, string descrizione, string progressivo = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -3220,7 +3218,7 @@ namespace WelcomeLibrary.DAL
             return true;
         }
 
-        public bool insertFoto(string connection, int idOfferta, string nomefile, string descrizione, string progressivo = "")
+        public bool insertFoto(string connection, long idOfferta, string nomefile, string descrizione, string progressivo = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -3270,7 +3268,7 @@ namespace WelcomeLibrary.DAL
             return true;
         }
 
-        public bool CancellaFoto(string connection, int idOfferta, string nomefile, string descrizione, string pathfile)
+        public bool CancellaFoto(string connection, long idOfferta, string nomefile, string descrizione, string pathfile)
         {
 
             if (connection == "") return false;
@@ -3326,7 +3324,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="idContenuto"></param>
         /// <returns></returns>
-        public AllegatiCollection getListaFotobyId(string connection, int idOfferta)
+        public AllegatiCollection getListaFotobyId(string connection, long idOfferta)
         {
             if (connection == null || connection == "") { return null; };
             if (idOfferta == null || idOfferta == 0) { return null; };
@@ -3505,7 +3503,7 @@ namespace WelcomeLibrary.DAL
             string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,Qta_vendita,Promozione  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@Qta_vendita,@Promozione )";
             try
             {
-                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db
             }
             catch (Exception error)
@@ -3668,7 +3666,7 @@ namespace WelcomeLibrary.DAL
             string query = "INSERT INTO " + _tblarchiviodettaglio + " ([AccettazioneStatuto_dts],[Altrespecializzazioni_dts],[Annolaurea_dts],[Annospecializzazione_dts],[Bloccoaccesso_dts],[Cap1_dts],[Cap2_dts],[Cap3_dts],[Certificazione_dts],[CodiceCOMUNE1_dts],[CodiceCOMUNE2_dts],[CodiceCOMUNE3_dts],[CodiceNAZIONE1_dts],[CodiceNAZIONE2_dts],[CodiceNAZIONE3_dts],[CodicePROVINCIA1_dts],[CodicePROVINCIA2_dts],[CodicePROVINCIA3_dts],[Datanascita_dts],[CodiceREGIONE1_dts],[CodiceREGIONE2_dts],[CodiceREGIONE3_dts],[Cognome_dts],[Emailriservata_dts],[Latitudine1_dts],Latitudine2_dts,Latitudine3_dts,Longitudine1_dts,Longitudine2_dts,Longitudine3_dts,Nome_dts,Nomeposizione1_dts,Nomeposizione2_dts,Nomeposizione3_dts,Pivacf_dts,Socioaltraassociazione_dts,SocioIsaps_dts,Sociopresentatore1_dts,Sociopresentatore2_dts,SocioSicpre_dts,Telefono1_dts,Telefono2_dts,Telefono3_dts,Telefonoprivato_dts,Trattamenticollegati_dts,Via1_dts,Via2_dts,Via3_dts,Pagamenti_dts,ricfatt_dts,noteriservate_dts,indirizzofatt_dts,niscrordine_dts,locordine_dts,annofrequenza_dts,nomeuniversita_dts,dettagliuniversita_dts,Boolfields_dts,Textfield1_dts,Interventieseguiti_dts) VALUES (@AccettazioneStatuto_dts,@Altrespecializzazioni_dts,@Annolaurea_dts,@Annospecializzazione_dts,@Bloccoaccesso_dts,@Cap1_dts,@Cap2_dts,@Cap3_dts,@Certificazione_dts,@CodiceCOMUNE1_dts,@CodiceCOMUNE2_dts,@CodiceCOMUNE3_dts,@CodiceNAZIONE1_dts,@CodiceNAZIONE2_dts,@CodiceNAZIONE3_dts,@CodicePROVINCIA1_dts,@CodicePROVINCIA2_dts,@CodicePROVINCIA3_dts,@Datanascita_dts,@CodiceREGIONE1_dts,@CodiceREGIONE2_dts,@CodiceREGIONE3_dts,@Cognome_dts,@Emailriservata_dts,@Latitudine1_dts,@Latitudine2_dts,@Latitudine3_dts,@Longitudine1_dts,@Longitudine2_dts,@Longitudine3_dts,@Nome_dts,@Nomeposizione1_dts,@Nomeposizione2_dts,@Nomeposizione3_dts,@Pivacf_dts,@Socioaltraassociazione_dts,@SocioIsaps_dts,@Sociopresentatore1_dts,@Sociopresentatore2_dts,@SocioSicpre_dts,@Telefono1_dts,@Telefono2_dts,@Telefono3_dts,@Telefonoprivato_dts,@Trattamenticollegati_dts,@Via1_dts,@Via2_dts,@Via3_dts,@Pagamenti_dts,@ricfatt_dts,@noteriservate_dts,@indirizzofatt_dts,@niscrordine_dts,@locordine_dts,@annofrequenza_dts,@nomeuniversita_dts,@dettagliuniversita_dts,@Boolfields_dts,@Textfield1_dts,@Interventieseguiti_dts)";
             try
             {
-                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 item.Id_dts_collegato = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db per il record collegato
             }
             catch (Exception error)
@@ -4087,7 +4085,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id == "") item.Id = retID.ToString(); // se era insert memorizzo l'id del cliente appena inserito
 
             }
@@ -4162,7 +4160,7 @@ namespace WelcomeLibrary.DAL
                         // item = new Offerte();
                         string caratteristica = "";
                         if (!reader[Campocaratteristica].Equals(DBNull.Value))
-                            caratteristica = reader.GetInt32(reader.GetOrdinal(Campocaratteristica)).ToString();
+                            caratteristica = reader.GetInt64(reader.GetOrdinal(Campocaratteristica)).ToString();
                         if (!list.Exists(c => c.ToString().ToLower() == caratteristica.ToLower()))
                         {
                             list.Add(caratteristica);
@@ -5155,6 +5153,17 @@ namespace WelcomeLibrary.DAL
         /// <returns></returns>
         public static String ReplaceLinks(string strIn, bool nolink = false)
         {
+            List<string> tags = new List<string>();
+            tags.Add("link:(");
+            tags.Add("quot:(");
+            tags.Add("bold:(");
+            tags.Add("iden:(");
+            tags.Add("butt:(");
+            tags.Add("buto:(");
+            tags.Add("imag:(");
+            tags.Add("titl:(");
+
+
             string target = "_blank";
             string urlcorretto = "";
             string ret = strIn;
@@ -5166,8 +5175,18 @@ namespace WelcomeLibrary.DAL
                 if (b != -1)
                 {
                     origtext = strIn.Substring(a, b - a + 1);
-
                     string url = strIn.Substring(a + 6, b - (a + 6));
+
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5176,6 +5195,9 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
+
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5218,6 +5240,18 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+
+
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5226,6 +5260,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5274,6 +5310,17 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5282,6 +5329,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5331,6 +5380,7 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5339,6 +5389,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5388,6 +5440,16 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5396,6 +5458,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5450,6 +5514,15 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
                     string testourl = url;
                     //Splitto supponendo di avere lo schema ulr|testourl
                     string[] dati = url.Split('|');
@@ -5458,6 +5531,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5506,6 +5581,15 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
                     string testourl = url;
                     string[] dati = url.Split('|');
                     if (dati.Length == 2)
@@ -5513,6 +5597,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5565,6 +5651,15 @@ namespace WelcomeLibrary.DAL
                     origtext = strIn.Substring(a, b - a + 1);
 
                     string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
                     string testourl = url;
                     string[] dati = url.Split('|');
                     if (dati.Length == 2)
@@ -5572,6 +5667,8 @@ namespace WelcomeLibrary.DAL
                         url = (dati[0]);
                         testourl = dati[1];
                     }
+                    else
+                        url = "";
                     urlcorretto = url;
                     if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
                     {
@@ -5613,6 +5710,7 @@ namespace WelcomeLibrary.DAL
             return ret;
 
         }
+
         public static string ReplaceAbsoluteLinks(string testo)
         {
 

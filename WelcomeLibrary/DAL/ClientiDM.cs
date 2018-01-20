@@ -50,8 +50,8 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Cliente();
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard")); // da verificare
                         if (!reader["Cap"].Equals(DBNull.Value))
@@ -111,7 +111,7 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
-                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
 
@@ -178,8 +178,8 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Cliente();
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
 
                         if (!reader["Cap"].Equals(DBNull.Value))
                             item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
@@ -238,7 +238,7 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
-                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         break;
@@ -313,8 +313,8 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Cliente();
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard")); // da verificare
                         if (!reader["Cap"].Equals(DBNull.Value))
@@ -373,7 +373,7 @@ namespace WelcomeLibrary.DAL
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
-                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         break;
@@ -391,8 +391,8 @@ namespace WelcomeLibrary.DAL
         public string CancellaClientiPerTipologia(string connessione, string id_tipi_clienti)
         {
             string idret = "";
-            int idtipocliente = 0;
-            if (!int.TryParse(id_tipi_clienti, out idtipocliente)) return idret;
+            long  idtipocliente = 0;
+            if (!long.TryParse(id_tipi_clienti, out idtipocliente)) return idret;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
             if (id_tipi_clienti == null || id_tipi_clienti == "") return idret;
@@ -413,7 +413,7 @@ namespace WelcomeLibrary.DAL
             return idret;
         }
 
-        public string CancellaClientePerId(string connessione, int ID_cliente)
+        public string CancellaClientePerId(string connessione, long ID_cliente)
         {
             string idret = "";
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -472,8 +472,8 @@ namespace WelcomeLibrary.DAL
 
                     while (reader.Read())
                     {
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard")); // da verificare
                         if (!reader["Cap"].Equals(DBNull.Value))
@@ -532,7 +532,7 @@ namespace WelcomeLibrary.DAL
                             item.Pivacf = reader.GetString(reader.GetOrdinal("Pivacf"));
                         if (!reader["Codicisconto"].Equals(DBNull.Value))
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
-                        item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                        item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                     if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         list.Add(item);
@@ -599,8 +599,8 @@ namespace WelcomeLibrary.DAL
                         item = new Cliente();
 
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard"));
 
@@ -614,7 +614,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["DataGenerazione"].Equals(DBNull.Value))
                             item.card.DataGenerazione = reader.GetDateTime(reader.GetOrdinal("DataGenerazione"));
                         if (!reader["DurataGG"].Equals(DBNull.Value))
-                            item.card.DurataGG = reader.GetInt32(reader.GetOrdinal("DurataGG"));
+                            item.card.DurataGG = reader.GetInt64(reader.GetOrdinal("DurataGG"));
 
                         if (!reader["Cap"].Equals(DBNull.Value))
                             item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
@@ -688,7 +688,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="idgruppomailing"></param>
         /// <returns></returns>
-        public ClienteCollection CaricaClientiPerGruppoNewsletter(string connection, int idgruppomailing)
+        public ClienteCollection CaricaClientiPerGruppoNewsletter(string connection, long idgruppomailing)
         {
             if (connection == null || connection == "") return null;
             if (idgruppomailing == 0) return null;
@@ -714,10 +714,10 @@ namespace WelcomeLibrary.DAL
 
                         if (reader["C.ID_CLIENTE"].Equals(DBNull.Value)) continue;//salto i record per cui non trovo l'id del cliente!
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("C.ID_CLIENTE"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("C.ID_CLIENTE"));
 
                         if (!reader["ID_CARD"].Equals(DBNull.Value))
-                            item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                            item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
 
                         if (!reader["Cap"].Equals(DBNull.Value))
                             item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
@@ -777,7 +777,7 @@ namespace WelcomeLibrary.DAL
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
 
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
-                            item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                            item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         test += 1;
@@ -788,7 +788,7 @@ namespace WelcomeLibrary.DAL
             }
             catch (Exception error)
             {
-                throw new ApplicationException("Errore Caricamento Cleinti per gruppo newsletter :" + error.Message, error);
+                throw new ApplicationException("Errore Caricamento Clienti per gruppo newsletter :" + error.Message, error);
             }
             return List;
         }
@@ -806,8 +806,8 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p1 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%"); //OleDbType.VarChar
             parColl.Add(p1);
 
-            int tmp = 0;
-            if (int.TryParse(testoricerca, out tmp))
+            long tmp = 0;
+            if (long.TryParse(testoricerca, out tmp))
             {
                 SQLiteParameter p2 = new SQLiteParameter("@idcliente", tmp); //OleDbType.VarChar
                 parColl.Add(p2);
@@ -823,7 +823,7 @@ namespace WelcomeLibrary.DAL
                 while (reader.Read())
                 {
                     item = new Cliente();
-                    item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
+                    item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
                     item.Spare3 = "";
                     if (!(reader["Cognome"]).Equals(DBNull.Value))
                         item.Spare3 = reader.GetString(reader.GetOrdinal("Cognome"));//
@@ -1121,8 +1121,8 @@ namespace WelcomeLibrary.DAL
                         item = new Cliente();
 
 
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard"));
 
@@ -1136,7 +1136,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["DataGenerazione"].Equals(DBNull.Value))
                             item.card.DataGenerazione = reader.GetDateTime(reader.GetOrdinal("DataGenerazione"));
                         if (!reader["DurataGG"].Equals(DBNull.Value))
-                            item.card.DurataGG = reader.GetInt32(reader.GetOrdinal("DurataGG"));
+                            item.card.DurataGG = reader.GetInt64(reader.GetOrdinal("DurataGG"));
                         //--------------------------------------------------------------------
                         if (!reader["Cap"].Equals(DBNull.Value))
                             item.Cap = reader.GetString(reader.GetOrdinal("Cap"));//
@@ -1195,7 +1195,7 @@ namespace WelcomeLibrary.DAL
                             item.Codicisconto = reader.GetString(reader.GetOrdinal("Codicisconto"));
 
                         if (!reader["id_tipi_clienti"].Equals(DBNull.Value))
-                            item.id_tipi_clienti = reader.GetInt32(reader.GetOrdinal("id_tipi_clienti")).ToString();
+                            item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
                         list.Add(item);
@@ -1238,11 +1238,11 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Tabrif();
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
                         if (!reader["TipoCliente"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("TipoCliente"));
                         if (!reader["CodiceTipo"].Equals(DBNull.Value))
-                            item.Codice = reader.GetInt32(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
+                            item.Codice = reader.GetInt64(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
 
 
                         list.Add(item);
@@ -1291,7 +1291,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id == "") item.Id = retID.ToString(); // se era insert memorizzo l'id del cliente appena inserito
 
             }
@@ -1417,7 +1417,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id_cliente == 0) item.Id_cliente = retID; // se era insert memorizzo l'id del cliente appena inserito
 
             }

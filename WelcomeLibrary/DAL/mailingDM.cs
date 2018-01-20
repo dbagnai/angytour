@@ -32,7 +32,7 @@ namespace WelcomeLibrary.DAL
                 string query = "";
                 query = "SELECT * FROM TBL_MAILING WHERE Errore = false ";
                 if (tipomailing != null)
-                    query += " and TipoMailing = " + (Int32)tipomailing + " ";
+                    query += " and TipoMailing = " + (long)tipomailing + " ";
                 if (cards != null && cards.Count > 0)
                 {
                     query += " and id_card in (  ";
@@ -57,9 +57,9 @@ namespace WelcomeLibrary.DAL
                         item = new Mail();
 
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["Lingua"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.Lingua = reader.GetString(reader.GetOrdinal("Lingua"));
                         if (!reader["NoteInvio"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
@@ -70,7 +70,7 @@ namespace WelcomeLibrary.DAL
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("Tipomailing"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                         if (!reader["DataInvio"].Equals(DBNull.Value))
@@ -127,9 +127,9 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Mail();
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("M.ID"));
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("M.ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("M.ID_CARD"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("M.ID"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("M.ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("M.ID_CARD"));
                         if (!reader["M.Lingua"].Equals(DBNull.Value))
                             item.Lingua = reader.GetString(reader.GetOrdinal("M.Lingua"));
 
@@ -141,7 +141,7 @@ namespace WelcomeLibrary.DAL
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value))
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("Tipomailing"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["M.DataInserimento"].Equals(DBNull.Value))
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("M.DataInserimento"));
                         if (!reader["DataInvio"].Equals(DBNull.Value))
@@ -151,7 +151,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Errore"].Equals(DBNull.Value))
                             item.Errore = reader.GetBoolean(reader.GetOrdinal("Errore"));
                         if (!reader["ID_mailing_struttura"].Equals(DBNull.Value))
-                            item.Id_mailing_struttura = reader.GetInt32(reader.GetOrdinal("ID_mailing_struttura"));
+                            item.Id_mailing_struttura = reader.GetInt64(reader.GetOrdinal("ID_mailing_struttura"));
 
                         if (!reader["EmailCliente"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.Cliente.Email = reader.GetString(reader.GetOrdinal("EmailCliente"));
@@ -181,9 +181,9 @@ namespace WelcomeLibrary.DAL
         /// <param name="idmailcoll"></param>
         /// <param name="MaxEmail"></param>
         /// <returns></returns>
-        public int MarcaMailpreseincarico(string connessione, int? MaxEmail)
+        public long MarcaMailpreseincarico(string connessione, int? MaxEmail)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
             string query = "";
@@ -235,9 +235,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connessione"></param>
         /// <param name="idmail"></param>
         /// <returns></returns>
-        public int EliminaMaildapresaincarico(string connessione, int idmail)
+        public long EliminaMaildapresaincarico(string connessione, long idmail)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
@@ -291,7 +291,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="idnewsletter"></param>
         /// <param name="mindate"></param>
         /// <returns></returns>
-        public MailCollection CaricaMailPeridnewsletterValide(string connection, int idnewsletter, DateTime? mindate)
+        public MailCollection CaricaMailPeridnewsletterValide(string connection, long idnewsletter, DateTime? mindate)
         {
             MailCollection list = new MailCollection();
             if (connection == null || connection == "") return list;
@@ -327,9 +327,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     {
                         item = new Mail();
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("ID_CARD"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["Lingua"].Equals(DBNull.Value))
                             item.Lingua = reader.GetString(reader.GetOrdinal("Lingua"));
 
@@ -341,7 +341,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("Tipomailing"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                         if (!reader["DataInvio"].Equals(DBNull.Value))
@@ -351,7 +351,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                         if (!reader["Errore"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.Errore = reader.GetBoolean(reader.GetOrdinal("Errore"));
                         if (!reader["ID_mailing_struttura"].Equals(DBNull.Value))
-                            item.Id_mailing_struttura = reader.GetInt32(reader.GetOrdinal("ID_mailing_struttura"));
+                            item.Id_mailing_struttura = reader.GetInt64(reader.GetOrdinal("ID_mailing_struttura"));
 
 
                         list.Add(item);
@@ -373,7 +373,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public Mail CaricaMailPerId(string connection, int Id)
+        public Mail CaricaMailPerId(string connection, long Id)
         {
             if (connection == null || connection == "") return null;
             if (Id == 0) return null;
@@ -396,9 +396,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     {
                         item = new Mail();
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
-                        item.Id_cliente = reader.GetInt32(reader.GetOrdinal("M.ID_CLIENTE"));
-                        item.Id_card = reader.GetInt32(reader.GetOrdinal("M.ID_CARD"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("M.ID_CLIENTE"));
+                        item.Id_card = reader.GetInt64(reader.GetOrdinal("M.ID_CARD"));
                         if (!reader["M.Lingua"].Equals(DBNull.Value))
                             item.Lingua = reader.GetString(reader.GetOrdinal("M.Lingua"));
 
@@ -410,7 +410,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("Tipomailing"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                         if (!reader["DataInvio"].Equals(DBNull.Value))
@@ -421,7 +421,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                             item.Errore = reader.GetBoolean(reader.GetOrdinal("Errore"));
 
                         if (!reader["ID_mailing_struttura"].Equals(DBNull.Value))
-                            item.Id_mailing_struttura = reader.GetInt32(reader.GetOrdinal("ID_mailing_struttura"));
+                            item.Id_mailing_struttura = reader.GetInt64(reader.GetOrdinal("ID_mailing_struttura"));
 
                         if (!reader["EmailCliente"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.Cliente.Email = reader.GetString(reader.GetOrdinal("EmailCliente"));
@@ -671,9 +671,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
-        public int InserisciAggiornaNewsletter(string connessione, Mail item)
+        public long InserisciAggiornaNewsletter(string connessione, Mail item)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
@@ -726,7 +726,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         }
 
 
-        public void CancellaNewsletterPerId(string connection, int Id)
+        public void CancellaNewsletterPerId(string connection, long Id)
         {
             if (connection == null || connection == "") return;
             if (Id == 0) return;
@@ -751,7 +751,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public Mail CaricaNewsletterPerId(string connection, int Id)
+        public Mail CaricaNewsletterPerId(string connection, long Id)
         {
             if (connection == null || connection == "") return null;
             if (Id == 0) return null;
@@ -773,8 +773,8 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     {
                         item = new Mail();
                         //TBL_MAILING_STRUTTURA.TipoMailing, TBL_MAILING_STRUTTURA.TestoMail, TBL_MAILING_STRUTTURA.SoggettoMail, TBL_MAILING_STRUTTURA.NoteInvio, TBL_MAILING_STRUTTURA.DataInserimento, TBL_MAILING_STRUTTURA.Lingua
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("TipoMailing"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("TipoMailing"));
                         if (!reader["TestoMail"].Equals(DBNull.Value))
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
                         if (!reader["SoggettoMail"].Equals(DBNull.Value))
@@ -831,8 +831,8 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     {
                         item = new Mail();
                         //TBL_MAILING_STRUTTURA.TipoMailing, TBL_MAILING_STRUTTURA.TestoMail, TBL_MAILING_STRUTTURA.SoggettoMail, TBL_MAILING_STRUTTURA.NoteInvio, TBL_MAILING_STRUTTURA.DataInserimento, TBL_MAILING_STRUTTURA.Lingua
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
-                        item.Tipomailing = reader.GetInt32(reader.GetOrdinal("TipoMailing"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Tipomailing = reader.GetInt64(reader.GetOrdinal("TipoMailing"));
                         if (!reader["TestoMail"].Equals(DBNull.Value))
                             item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
                         if (!reader["SoggettoMail"].Equals(DBNull.Value))
@@ -883,7 +883,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     while (reader.Read())
                     {
                         item = new Tabrif();
-                        item.Intero1 = reader.GetInt32(reader.GetOrdinal("GruppoMailing"));
+                        item.Intero1 = reader.GetInt64(reader.GetOrdinal("GruppoMailing"));
                         if (!reader["DescrizioneGruppoMailing"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("DescrizioneGruppoMailing"));
                         List.Add(item);
@@ -903,14 +903,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
-        public int InserisciAggiornaNuovoGruppoClientiNewsletter(string connessione, Tabrif item)
+        public long InserisciAggiornaNuovoGruppoClientiNewsletter(string connessione, Tabrif item)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
-            int idrecord = 0;
-            int.TryParse(item.Id, out idrecord);
+            long idrecord = 0;
+            long.TryParse(item.Id, out idrecord);
 
 
             string query = "";
@@ -964,9 +964,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="id_cliente"></param>
         /// <param name="idgruppo"></param>
         /// <returns></returns>
-        public int EliminaClienteDaGruppoClientiNewsletter(string connessione, int id_cliente, int idgruppo)
+        public long EliminaClienteDaGruppoClientiNewsletter(string connessione, long id_cliente, long idgruppo)
         {
-            int idret = -1;
+            long idret = -1;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
@@ -993,7 +993,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connessione"></param>
         /// <param name="idGruppoMailing"></param>
         /// <returns></returns>
-        public Tabrif CaricaGruppoMailing(string connection, int idgruppomailing)
+        public Tabrif CaricaGruppoMailing(string connection, long idgruppomailing)
         {
             if (connection == null || connection == "") return null;
             if (idgruppomailing == 0) return null;
@@ -1015,9 +1015,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     while (reader.Read())
                     {
                         item = new Tabrif();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
-                        item.Intero1 = reader.GetInt32(reader.GetOrdinal("GruppoMailing"));
-                        item.Intero2 = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
+                        item.Intero1 = reader.GetInt64(reader.GetOrdinal("GruppoMailing"));
+                        item.Intero2 = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
                         if (!reader["DescrizioneGruppoMailing"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("DescrizioneGruppoMailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value))
@@ -1041,7 +1041,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="idgruppomailing"></param>
         /// <returns></returns>
-        public TabrifCollection CaricaClientiNewsletterPerGruppo(string connection, int idgruppomailing)
+        public TabrifCollection CaricaClientiNewsletterPerGruppo(string connection, long idgruppomailing)
         {
             if (connection == null || connection == "") return null;
             if (idgruppomailing == 0) return null;
@@ -1065,9 +1065,9 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     while (reader.Read())
                     {
                         item = new Tabrif();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
-                        item.Intero1 = reader.GetInt32(reader.GetOrdinal("GruppoMailing"));
-                        item.Intero2 = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
+                        item.Intero1 = reader.GetInt64(reader.GetOrdinal("GruppoMailing"));
+                        item.Intero2 = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
                         if (!reader["DescrizioneGruppoMailing"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("DescrizioneGruppoMailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value))
@@ -1092,7 +1092,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="id_cliente"></param>
         /// <param name="idGruppo"></param>
-        public void AggiungiClienteAGruppo(string connection, int id_cliente, int idGruppo)
+        public void AggiungiClienteAGruppo(string connection, long id_cliente, long idGruppo)
         {
             //Inseriamo nel gruppo il cliente indicato
             Tabrif gruppo = CaricaGruppoMailing(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idGruppo);
@@ -1100,7 +1100,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             gruppo.Data1 = System.DateTime.Now;
             gruppo.Intero2 = id_cliente;
             //inseriamo il nuovo cliente nel gruppo ( dovresti verificare cho non ci sia già! )
-            int idgruppo = InserisciAggiornaNuovoGruppoClientiNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, gruppo);
+            long idgruppo = InserisciAggiornaNuovoGruppoClientiNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, gruppo);
             return;
         }
 
@@ -1112,7 +1112,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="_paramCliente"></param>
         /// <param name="idGruppo"></param>
         /// <param name="bypassvalidazione"></param>
-        public void AggiungiClientiAGruppo(string connection, Cliente _paramCliente, int idGruppo, bool bypassvalidazione = false)
+        public void AggiungiClientiAGruppo(string connection, Cliente _paramCliente, long idGruppo, bool bypassvalidazione = false)
         {
             if (connection == null || connection == "") return;
 
@@ -1186,7 +1186,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="id_cliente"></param>
         /// <param name="idGruppo"></param>
-        public void EliminaClienteDaGruppo(string connection, int id_cliente, int idGruppo)
+        public void EliminaClienteDaGruppo(string connection, long id_cliente, long idGruppo)
         {
             //Devo eliminare quella coppia gruppomailing idcliente dalla tabelle__mailing_gruppi
             EliminaClienteDaGruppoClientiNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id_cliente, idGruppo);
@@ -1199,7 +1199,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         /// <param name="connection"></param>
         /// <param name="id_cliente"></param>
         /// <param name="idGruppo"></param>
-        public void EliminaClientiDaGruppo(string connection, int idGruppo)
+        public void EliminaClientiDaGruppo(string connection, long idGruppo)
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connection == null || connection == "") return;

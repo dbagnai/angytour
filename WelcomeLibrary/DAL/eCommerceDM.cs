@@ -24,7 +24,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="CodiceProdotto">Opzionale se specificato torna solo l'elemento del carrello col codiceprodotto indicato</param>
         /// <param name="CodiceCaratteristica">Opzionale se specificato torna solo l'elemento del carrello col codiceprodotto e codice carrello indicato</param>
         /// <returns></returns>
-        public CarrelloCollection CaricaCarrello(string connection, string SessionId, string ipClient, int id_prodotto = 0, string idcombinato = "", int idrecordcarrello = 0)
+        public CarrelloCollection CaricaCarrello(string connection, string SessionId, string ipClient, long id_prodotto = 0, string idcombinato = "", long idrecordcarrello = 0)
         {
             CarrelloCollection list = new CarrelloCollection();
 
@@ -79,13 +79,13 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Carrello();
-                        item.ID = reader.GetInt32(reader.GetOrdinal("A.ID"));
+                        item.ID = reader.GetInt64(reader.GetOrdinal("A.ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
 
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
-                            item.ID_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+                            item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
 
                         if (!reader["A.Codicenazione"].Equals(DBNull.Value))
@@ -95,7 +95,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
-                        item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
+                        item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("A.CodiceProdotto"));
 
@@ -104,9 +104,9 @@ namespace WelcomeLibrary.DAL
                         //    item.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
                         item.Prezzo = reader.GetDouble(reader.GetOrdinal("A.Prezzo"));
 
-                        item.Iva = reader.GetInt32(reader.GetOrdinal("Iva"));
-                        item.Numero = reader.GetInt32(reader.GetOrdinal("Numero"));
-                        item.Validita = reader.GetInt32(reader.GetOrdinal("Validita"));
+                        item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
+                        item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
+                        item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
 
                         if (!reader["Campo1"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
@@ -123,7 +123,7 @@ namespace WelcomeLibrary.DAL
                         Offerte offerta = new Offerte();
                         if (!reader["B.ID"].Equals(DBNull.Value))
                         {
-                            offerta.Id = reader.GetInt32(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
@@ -147,17 +147,17 @@ namespace WelcomeLibrary.DAL
                                 offerta.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
 
                             if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                                offerta.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                                offerta.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                             if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                                offerta.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                                offerta.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                             if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                                offerta.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                                offerta.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                             if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                                offerta.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                                offerta.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                             if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                                offerta.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                                offerta.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                             if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                                offerta.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                                offerta.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                             if (!reader["Xmlvalue"].Equals(DBNull.Value))
                                 offerta.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -246,12 +246,12 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Carrello();
-                        item.ID = reader.GetInt32(reader.GetOrdinal("A.ID"));
+                        item.ID = reader.GetInt64(reader.GetOrdinal("A.ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
-                            item.ID_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+                            item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
                         if (!reader["A.Codicenazione"].Equals(DBNull.Value))
                             item.Codicenazione = reader.GetString(reader.GetOrdinal("A.Codicenazione"));
@@ -260,7 +260,7 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
-                        item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
+                        item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("A.CodiceProdotto"));
 
@@ -269,9 +269,9 @@ namespace WelcomeLibrary.DAL
                         //    item.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
                         item.Prezzo = reader.GetDouble(reader.GetOrdinal("A.Prezzo"));
 
-                        item.Iva = reader.GetInt32(reader.GetOrdinal("Iva"));
-                        item.Numero = reader.GetInt32(reader.GetOrdinal("Numero"));
-                        item.Validita = reader.GetInt32(reader.GetOrdinal("Validita"));
+                        item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
+                        item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
+                        item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
 
                         if (!reader["Campo1"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
@@ -289,7 +289,7 @@ namespace WelcomeLibrary.DAL
                         Offerte offerta = new Offerte();
                         if (!reader["B.ID"].Equals(DBNull.Value))
                         {
-                            offerta.Id = reader.GetInt32(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
@@ -312,17 +312,17 @@ namespace WelcomeLibrary.DAL
                             if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
                                 offerta.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
                             if (!reader["Caratteristica1"].Equals(DBNull.Value))
-                                offerta.Caratteristica1 = reader.GetInt32(reader.GetOrdinal("Caratteristica1"));
+                                offerta.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
                             if (!reader["Caratteristica2"].Equals(DBNull.Value))
-                                offerta.Caratteristica2 = reader.GetInt32(reader.GetOrdinal("Caratteristica2"));
+                                offerta.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
                             if (!reader["Caratteristica3"].Equals(DBNull.Value))
-                                offerta.Caratteristica3 = reader.GetInt32(reader.GetOrdinal("Caratteristica3"));
+                                offerta.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
                             if (!reader["Caratteristica4"].Equals(DBNull.Value))
-                                offerta.Caratteristica4 = reader.GetInt32(reader.GetOrdinal("Caratteristica4"));
+                                offerta.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
                             if (!reader["Caratteristica5"].Equals(DBNull.Value))
-                                offerta.Caratteristica5 = reader.GetInt32(reader.GetOrdinal("Caratteristica5"));
+                                offerta.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
                             if (!reader["Caratteristica6"].Equals(DBNull.Value))
-                                offerta.Caratteristica6 = reader.GetInt32(reader.GetOrdinal("Caratteristica6"));
+                                offerta.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
 
                             if (!reader["Xmlvalue"].Equals(DBNull.Value))
                                 offerta.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -385,12 +385,12 @@ namespace WelcomeLibrary.DAL
         /// <param name="SessionId"></param>
         /// <param name="ipClient"></param>
         /// <returns></returns>
-        public int ContaProdottiCarrello(string connection, string SessionId, string ipClient)
+        public long ContaProdottiCarrello(string connection, string SessionId, string ipClient)
         {
             if (connection == null || connection == "") return 0;
             if (SessionId == null || string.IsNullOrWhiteSpace(SessionId)) return 0;
             if (ipClient == null || string.IsNullOrWhiteSpace(ipClient)) return 0;
-            int ret = 0;
+            long ret = 0;
             try
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -411,7 +411,7 @@ namespace WelcomeLibrary.DAL
 
                     while (reader.Read())
                     {
-                        ret = reader.GetInt32(reader.GetOrdinal("prodotti"));
+                        ret = reader.GetInt64(reader.GetOrdinal("prodotti"));
                     }
                 }
 
@@ -453,11 +453,11 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Carrello();
-                        item.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
-                            item.ID_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+                            item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
                         if (!reader["Codicenazione"].Equals(DBNull.Value))
                             item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
                         if (!reader["Codiceprovincia"].Equals(DBNull.Value))
@@ -466,13 +466,13 @@ namespace WelcomeLibrary.DAL
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
                         if (!reader["CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
-                        item.id_prodotto = reader.GetInt32(reader.GetOrdinal("id_prodotto"));
+                        item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
                         if (!reader["Prezzo"].Equals(DBNull.Value))
                             item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
-                        item.Iva = reader.GetInt32(reader.GetOrdinal("Iva"));
-                        item.Numero = reader.GetInt32(reader.GetOrdinal("Numero"));
-                        item.Validita = reader.GetInt32(reader.GetOrdinal("Validita"));
+                        item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
+                        item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
+                        item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
                         if (!reader["Campo1"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
                         if (!reader["Campo2"].Equals(DBNull.Value))
@@ -734,7 +734,7 @@ namespace WelcomeLibrary.DAL
             string query = "INSERT INTO TBL_CARRELLO (SessionId,Prezzo,Data,Iva,Numero,CodiceProdotto,IpClient,Validita,CodiceOrdine,Campo1,Campo2,id_prodotto,ID_cliente,Codicenazione,Codiceprovincia,Codicesconto) VALUES (@SessionId,@Prezzo,@Data,@Iva,@Numero,@CodiceProdotto,@IpClient,@Validita,@CodiceOrdine,@Campo1,@Campo2,@id_prodotto,@idcliente,@Codicenazione,@Codiceprovincia,@Codicesconto)";
             try
             {
-                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 item.ID = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db
             }
             catch (Exception error)
@@ -817,7 +817,7 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
-        public void DeleteCarrelloPerIDCodCarr(string connessione, int ID, string CodCar)
+        public void DeleteCarrelloPerIDCodCarr(string connessione, long ID, string CodCar)
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
@@ -847,7 +847,7 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
-        public void DeleteCarrelloPerID(string connessione, int ID)
+        public void DeleteCarrelloPerID(string connessione, long ID)
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
@@ -1021,7 +1021,7 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new TotaliCarrello();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("Id"));
 
                         if (!reader["Indirizzofatturazione"].Equals(DBNull.Value))
                             item.Indirizzofatturazione = reader.GetString(reader.GetOrdinal("Indirizzofatturazione"));
@@ -1030,10 +1030,10 @@ namespace WelcomeLibrary.DAL
                             item.Indirizzospedizione = reader.GetString(reader.GetOrdinal("Indirizzospedizione"));
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
-                            item.Id_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+                            item.Id_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
                         if (!reader["Id_commerciale"].Equals(DBNull.Value))
-                            item.Id_commerciale = reader.GetInt32(reader.GetOrdinal("Id_commerciale"));
+                            item.Id_commerciale = reader.GetInt64(reader.GetOrdinal("Id_commerciale"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
@@ -1130,7 +1130,7 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new TotaliCarrello();
-                        item.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("Id"));
 
                         if (!reader["Indirizzofatturazione"].Equals(DBNull.Value))
                             item.Indirizzofatturazione = reader.GetString(reader.GetOrdinal("Indirizzofatturazione"));
@@ -1139,11 +1139,11 @@ namespace WelcomeLibrary.DAL
                             item.Indirizzospedizione = reader.GetString(reader.GetOrdinal("Indirizzospedizione"));
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
-                            item.Id_cliente = reader.GetInt32(reader.GetOrdinal("Id_cliente"));
+                            item.Id_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
 
                         if (!reader["Id_commerciale"].Equals(DBNull.Value))
-                            item.Id_commerciale = reader.GetInt32(reader.GetOrdinal("Id_commerciale"));
+                            item.Id_commerciale = reader.GetInt64(reader.GetOrdinal("Id_commerciale"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
@@ -1260,7 +1260,7 @@ namespace WelcomeLibrary.DAL
             string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto)";
             try
             {
-                int lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db
             }
             catch (Exception error)
@@ -1349,11 +1349,11 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
-        public void DeleteOrdinePerID(string connessione, int ID)
+        public void DeleteOrdinePerID(string connessione, long ID)
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            if (ID == null || ID == 0) return;
+            if (ID == 0) return;
 
             SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);

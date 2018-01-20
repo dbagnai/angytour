@@ -290,7 +290,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //}
     }
 
-    protected void CaricaMenuLinkContenuti(int id)
+    protected void CaricaMenuLinkContenuti(long id)
     {
 
         //Contenuti item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ContentIDSelected);
@@ -729,7 +729,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string mittenteMail = txtContactEmail.Value;
             string nomedestinatario = CommonPage.Nome;
             string maildestinatario = CommonPage.Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + nomemittente + " tramite il sito " + CommonPage.Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
@@ -742,7 +742,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
                 if (item != null && item.Id != 0)
                 {
-                    int.TryParse(idOfferta, out idperstatistiche);
+                    long.TryParse(idOfferta, out idperstatistiche);
                     if (!string.IsNullOrWhiteSpace(item.Email)) //Se non è vuota mando alla mail indicata nell'articolo
                     {
                         nomedestinatario = item.Email;

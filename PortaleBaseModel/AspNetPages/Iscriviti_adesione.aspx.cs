@@ -106,10 +106,10 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                 if (!string.IsNullOrWhiteSpace(idNewsletter) && !string.IsNullOrWhiteSpace(ID_mail)) //COntrollo se provengo da una richiesta adesione a newslettter!
                 {
                     mailingDM mDM = new mailingDM();
-                    int id = 0;
-                    int.TryParse(ID_mail, out id);
+                    long id = 0;
+                    long.TryParse(ID_mail, out id);
                     Mail mail = mDM.CaricaMailPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
-                    int.TryParse(idNewsletter, out id);
+                    long.TryParse(idNewsletter, out id);
                     Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
                     //Titololetto di sezione e presentazione
                     litMainContent.Text = references.ResMan("Common",Lingua, "TitoloIscrivi");
@@ -402,8 +402,8 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
             cliente.IPclient = trueIP;
 
             mailingDM mDM = new mailingDM();
-            int id = 0;
-            int.TryParse(ID_mail, out id);
+            long id = 0;
+            long.TryParse(ID_mail, out id);
             //Controlliamo che la newsletter per il cliente non sia già completa di adesione
             Mail mailacliente = mDM.CaricaMailPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
             if (mailacliente == null)
@@ -418,7 +418,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
             }
             //Carico anche la newsletter
             id = 0;
-            int.TryParse(idNewsletter, out id);
+            long.TryParse(idNewsletter, out id);
             Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
             string intestazioneform = "";
             if (newsletter != null)
@@ -440,8 +440,8 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
             //Proviamo a caricare il cliente per email, per verificare se già presente in anagrafica e corrispondente all'id cliente passato nella querystring:
             Cliente clidb = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cliente.Email);
             //Prendo l'id_cliente passato nella chiamata
-            int idcliente = 0;
-            int.TryParse(ID_cliente, out idcliente);
+            long idcliente = 0;
+            long.TryParse(ID_cliente, out idcliente);
             if (clidb != null && clidb.Id_cliente != 0 && clidb.Validato && clidb.Id_cliente == idcliente)//Cliente presente in anagrafica, già validato e con mail coincidente con l'id passato!!!!
             {
                 clidb.Spare1 = cliente.Spare1;

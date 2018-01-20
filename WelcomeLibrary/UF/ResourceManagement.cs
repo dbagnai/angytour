@@ -127,7 +127,7 @@ namespace WelcomeLibrary.UF
 					{
 						ResourceItem item = new ResourceItem();
 
-						item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+						item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
 						item.Gruppo = reader["Gruppo"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Gruppo"));
 						item.Categoria = reader["Categoria"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Categoria"));
@@ -283,7 +283,7 @@ namespace WelcomeLibrary.UF
                     {
                         ResourceItem item = new ResourceItem();
 
-                        item.Id = reader.GetInt32(reader.GetOrdinal("ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
 
                         item.Gruppo = reader["Gruppo"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Gruppo"));
                         item.Categoria = reader["Categoria"].Equals(DBNull.Value) ? "" : reader.GetString(reader.GetOrdinal("Categoria"));
@@ -418,7 +418,7 @@ namespace WelcomeLibrary.UF
                 }
                 try
                 {
-                    int retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                    long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                     LoadResources();
                 }
                 catch (Exception error)
@@ -450,7 +450,7 @@ namespace WelcomeLibrary.UF
 
 	public class ResourceItem
 	{
-		public int Id { get; set; }
+		public long Id { get; set; }
 		public string Gruppo { get; set; }
 		public string Categoria { get; set; }
 		public string Lingua { get; set; }

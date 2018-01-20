@@ -226,8 +226,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     {
                         if (elem.id == item.Campo2)
                         {
-                            int qtaCalc = 0;
-                            qtaCalc = (Convert.ToInt32(elem.qta)) - item.Numero;
+                            long qtaCalc = 0;
+                            qtaCalc = (Convert.ToInt64(elem.qta)) - item.Numero;
                             if (qtaCalc < 0) elem.qta = "0";
                             else elem.qta = qtaCalc.ToString();
                         }

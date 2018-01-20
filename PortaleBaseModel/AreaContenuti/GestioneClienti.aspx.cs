@@ -325,8 +325,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         Cliente cli = new Cliente();
         //string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
         string CodClienteCliccato = ((Button)sender).CommandArgument;
-        int idcliente = 0;
-        int.TryParse(CodClienteCliccato, out idcliente);
+        long idcliente = 0;
+        long.TryParse(CodClienteCliccato, out idcliente);
         cli.Id_cliente = idcliente;
         cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodClienteCliccato); //Ricarico il cliente completo dal db
 
@@ -356,8 +356,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         ClientiDM cliDM = new ClientiDM();
         Cliente cli = new Cliente();
         string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
-        int idcliente = 0;
-        int.TryParse(CodClienteCliccato, out idcliente);
+        long idcliente = 0;
+        long.TryParse(CodClienteCliccato, out idcliente);
         cli.Id_cliente = idcliente;
         cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodClienteCliccato); //Ricarico il cliente completo dal db
         // e aggiorno solo i campi che mi interessano
@@ -472,8 +472,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
         string CodClienteCliccato = ((TextBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCod"))).Text;
         ClientiDM cliDM = new ClientiDM();
-        int i = 0;
-        int.TryParse(CodClienteCliccato, out i);
+        long i = 0;
+        long.TryParse(CodClienteCliccato, out i);
         string ritorno = cliDM.CancellaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i);
         output.Text = ritorno;
 
@@ -1598,10 +1598,10 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
     protected void btnExport_Click(object sender, EventArgs e)
     {
         Cliente _paramcli = null;
-        //_paramcli.Lingua = "";
+        _paramcli.Lingua = "";
         //_paramcli.CodiceNAZIONE = ddlNazioniFiltro.SelectedValue;
-        // _paramcli.id_tipi_clienti = ddlTipiClientiImporta.SelectedValue;
-        //   CaricaDati("", _paramcli);
+        _paramcli.id_tipi_clienti = ddlTipiClientiImporta.SelectedValue;
+        CaricaDati("", _paramcli);
 
         ClientiDM cliDM = new ClientiDM();
         List<Cliente> cliforexport = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _paramcli, true);

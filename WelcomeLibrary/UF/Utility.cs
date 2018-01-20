@@ -1510,8 +1510,8 @@ namespace WelcomeLibrary.UF
                     while (reader.Read())
                     {
                         _item = new Tabrif();
-                        _item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
-                        _item.Codice = reader.GetInt32(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
+                        _item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
+                        _item.Codice = reader.GetInt64(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
                         _item.Campo1 = reader.GetString(reader.GetOrdinal("Descrizione")).Trim();
 
                         if (!reader["RelatedCodiceTipo"].Equals(DBNull.Value))
@@ -1569,8 +1569,8 @@ namespace WelcomeLibrary.UF
                     while (reader.Read())
                     {
                         _item = new Tabrif();
-                        _item.Id = reader.GetInt32(reader.GetOrdinal("ID")).ToString();
-                        _item.Codice = reader.GetInt32(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
+                        _item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
+                        _item.Codice = reader.GetInt64(reader.GetOrdinal("CodiceTipo")).ToString().Trim();
                         _item.Campo1 = reader.GetString(reader.GetOrdinal("TipoCliente")).Trim();
                         _item.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
                         _list.Add(_item);

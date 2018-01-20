@@ -394,7 +394,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             string maildestinatario = Email;
             Dictionary<string, string> destinatariperregione = new Dictionary<string, string>();
 
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             if (TipoContenuto == "Prenota")
                 tipo = "richiesta preventivo prenotazione ";

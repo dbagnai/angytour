@@ -453,8 +453,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             if (btnAggiorna.Text == "Aggiorna")
             {
                 updrecord = new Contenuti();
-                int tmp = 0;
-                if (Int32.TryParse(ContentIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(ContentIDSelected, out tmp))
                 {
                     updrecord.Id = tmp;
                     updrecord.CodiceContenuto = CodiceContenuto;
@@ -488,8 +488,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     DateTime _tmpdate = System.DateTime.Now;
                     DateTime.TryParse(txtData.Text, out _tmpdate);
                     updrecord.DataInserimento = _tmpdate;
-                    int _i = 0;
-                    int.TryParse(ddlStruttura.SelectedValue, out _i);
+                    long _i = 0;
+                    long.TryParse(ddlStruttura.SelectedValue, out _i);
                     updrecord.Id_attivita = _i;
                     //Questi li devi riempire con la lista delle foto
                     //updrecord.FotoCollection_M.Schema = txtFotoSchema.Value;
@@ -539,8 +539,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 //Questi li devi riempire con la lista delle foto
                 //updrecord.FotoCollection_M.Schema = txtFotoSchema.Value;
                 //updrecord.FotoCollection_M.Valori = txtFotoValori.Value;
-                int _i = 0;
-                int.TryParse(ddlStruttura.SelectedValue, out _i);
+                long _i = 0;
+                long.TryParse(ddlStruttura.SelectedValue, out _i);
                 updrecord.Id_attivita = _i;
 
                 conDM.InsertContenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
@@ -613,7 +613,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     mail.Id_card = c.Id_card;
                     mail.Id_cliente = c.Id_cliente;
                     mail.Lingua = c.Lingua;
-                    mail.Tipomailing = (Int32)enumclass.TipoMailing.AvvisoNuovaofferta;
+                    mail.Tipomailing = (long)enumclass.TipoMailing.AvvisoNuovaofferta;
                     mail.NoteInvio = "";
 
                     mail.SoggettoMail = references.ResMan("Common",mail.Lingua,"oggettoMailInserimentoOfferta");
@@ -646,8 +646,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             try
             {
                 Contenuti updrecord = new Contenuti();
-                int tmp = 0;
-                if (Int32.TryParse(ContentIDSelected, out tmp))
+                long tmp = 0;
+                if (long.TryParse(ContentIDSelected, out tmp))
                 {
                     updrecord.Id = tmp;
 
@@ -757,8 +757,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             output.Text = "Selezionare un elemento per associare la foto";
             return;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(ContentIDSelected, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
         {
             output.Text = "Selezionare un elemento per associare la foto";
             return;
@@ -792,8 +792,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             output.Text = "Selezionare un elemento per associare la foto";
             return;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(ContentIDSelected, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
         {
             output.Text = "Selezionare un elemento per associare la foto";
             return;
@@ -828,8 +828,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             output.Text = "Selezionare un elemento per associare la foto";
             return;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(ContentIDSelected, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
         {
             output.Text = "Selezionare un elemento per associare la foto";
             return;
@@ -952,8 +952,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
     {
         try
         {
-            int i = 0;
-            int.TryParse(ContentIDSelected, out i);
+            long i = 0;
+            long.TryParse(ContentIDSelected, out i);
             bool ret = conDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, NomeFotoSelezionata, txtDescrizione.Text);
         }
         catch (Exception errins)
@@ -975,8 +975,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 output.Text = "Selezionare un elemento per associare la foto";
                 return;
             }
-            int idSelected = 0;
-            if (!Int32.TryParse(ContentIDSelected, out idSelected))
+            long idSelected = 0;
+            if (!long.TryParse(ContentIDSelected, out idSelected))
             {
                 output.Text = "Selezionare un elemento per associare la foto";
                 return;
@@ -1091,8 +1091,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             output.Text = "Selezionare una foto da cancellare";
             return;
         }
-        int idSelected = 0;
-        if (!Int32.TryParse(ContentIDSelected, out idSelected))
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
         {
             output.Text = "Selezionare un elemento per cancellare la foto";
             return;

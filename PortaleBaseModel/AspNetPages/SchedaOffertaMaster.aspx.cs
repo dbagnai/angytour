@@ -1627,8 +1627,8 @@ public partial class _SchedaOffertaMaster : CommonPage
     {
         string id = (((Button)sender).CommandArgument);
         Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
-        int _i = 0;
-        int.TryParse(id, out _i);
+        long _i = 0;
+        long.TryParse(id, out _i);
         //Registro la statistica di contatto
         Statistiche stat = new Statistiche();
         stat.Data = DateTime.Now;
@@ -1653,7 +1653,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             string telefono = txtContactPhone.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
@@ -1714,7 +1714,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             string telefono = txtContactPhone1.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtContactMessage1.Value.Replace("\r", "<br/>") + " <br/> ";

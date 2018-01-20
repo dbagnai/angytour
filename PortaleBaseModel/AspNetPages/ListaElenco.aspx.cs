@@ -100,11 +100,11 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
                 AssociaDati();
 
-               //Inizializziamo le etichette dei controlli in base alla lingua
-               //InizializzaEtichette();
-               //InizializzaMeta();
+                //Inizializziamo le etichette dei controlli in base alla lingua
+                //InizializzaEtichette();
+                //InizializzaMeta();
 
-               DataBind();
+                DataBind();
             }
             else
             {
@@ -202,7 +202,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            ret += " " + references.ResMan("Common",Lingua,"testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
+            ret += " " + references.ResMan("Common", Lingua, "testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
         }
         return ret;
     }
@@ -318,8 +318,8 @@ public partial class AspNetPages_ListaElenco : CommonPage
         //filtrandoli in base ai parametri richiesti
         OfferteCollection offerte = new OfferteCollection();
         string tipologia = Tipologia;
-        btnNext.Text = references.ResMan("Common",Lingua,"txtTastoNextPartners").ToString();
-        btnPrev.Text = references.ResMan("Common",Lingua,"txtTastoPrevPartners").ToString();
+        btnNext.Text = references.ResMan("Common", Lingua, "txtTastoNextPartners").ToString();
+        btnPrev.Text = references.ResMan("Common", Lingua, "txtTastoPrevPartners").ToString();
 
         //InizializzaEtichette();
         #region Versione con db ACCESS
@@ -456,7 +456,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
                //List<Offerte> socialtrenazioni = offerte.FindAll(o => (o.CodiceNAZIONE1_dts.ToLower() != "it") || (o.CodiceNAZIONE2_dts.ToLower() != "it") || (o.CodiceNAZIONE3_dts.ToLower() != "it"));
                //socialtrenazioni.Sort(new GenericComparer2<Offerte>("Cognome_dts", System.ComponentModel.ListSortDirection.Ascending, "Nome_dts", System.ComponentModel.ListSortDirection.Descending));
 
-                List<Offerte> socialtrenazioni = offerte.FindAll(o => (o.CodiceNAZIONE1_dts.ToLower() != "it") );
+                List<Offerte> socialtrenazioni = offerte.FindAll(o => (o.CodiceNAZIONE1_dts.ToLower() != "it"));
                 //socialtrenazioni.Sort(new GenericComparer2<Offerte>("Cognome_dts", System.ComponentModel.ListSortDirection.Ascending, "Nome_dts", System.ComponentModel.ListSortDirection.Descending));
                 socialtrenazioni.Sort(new GenericComparer<Offerte>("Denominazione" + Lingua, System.ComponentModel.ListSortDirection.Ascending));
                 foreach (Offerte o in socialtrenazioni)
@@ -631,11 +631,11 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
 
             string htmlPage = "";
-            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
-                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
+            if (references.ResMan("Common", Lingua, "testo" + Tipologia) != null)
+                htmlPage = references.ResMan("Common", Lingua, "testo" + Tipologia).ToString();
 
-            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
-                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
+            if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
+                htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
             string strigaperricerca = ""; //Request.Url.AbsolutePath
             if (!string.IsNullOrEmpty(Categoria))
                 strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
@@ -816,7 +816,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
             string telefono = "";// txtContactPhone.Value;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
-            int idperstatistiche = 0;
+            long idperstatistiche = 0;
             string tipo = "testimonianze";
             string SoggettoMail = "Inserimento " + tipo + " da " + cognomemittente + "  " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
@@ -847,12 +847,12 @@ public partial class AspNetPages_ListaElenco : CommonPage
                 WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
 
-                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common",Lingua, "LinkContatti")) + "&conversione=true");
+                Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkContatti")) + "&conversione=true");
 
             }
             else
             {
-                outputContact.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
+                outputContact.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -860,7 +860,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
         catch (Exception err)
         {
             outputContact.Text = err.Message + " <br/> ";
-            outputContact.Text += references.ResMan("Common",Lingua, "txtMailError");
+            outputContact.Text += references.ResMan("Common", Lingua, "txtMailError");
         }
     }
 

@@ -20,14 +20,14 @@ using System.IO;
 
 public partial class AreaContenuti_GestioneNewsletter : CommonPage
 {
-    public List<int> ListaIdClientiSelezionatiInanagrafica
+    public List<long> ListaIdClientiSelezionatiInanagrafica
     {
-        get { return ViewState["ListaIdClientiSelezionatiInanagrafica"] != null ? (List<int>)(ViewState["ListaIdClientiSelezionatiInanagrafica"]) : new List<int>(); }
+        get { return ViewState["ListaIdClientiSelezionatiInanagrafica"] != null ? (List<long>)(ViewState["ListaIdClientiSelezionatiInanagrafica"]) : new List<long>(); }
         set { ViewState["ListaIdClientiSelezionatiInanagrafica"] = value; }
     }
-    public List<int> ListaIdClientiSelezionatiIngruppo
+    public List<long> ListaIdClientiSelezionatiIngruppo
     {
-        get { return ViewState["ListaIdClientiSelezionatiIngruppo"] != null ? (List<int>)(ViewState["ListaIdClientiSelezionatiIngruppo"]) : new List<int>(); }
+        get { return ViewState["ListaIdClientiSelezionatiIngruppo"] != null ? (List<long>)(ViewState["ListaIdClientiSelezionatiIngruppo"]) : new List<long>(); }
         set { ViewState["ListaIdClientiSelezionatiIngruppo"] = value; }
     }
     protected void Page_Load(object sender, EventArgs e)
@@ -297,8 +297,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 
         if (!string.IsNullOrWhiteSpace(tipocliente))
         {
-            int i = 0;
-            int.TryParse(tipocliente, out i);
+            long i = 0;
+            long.TryParse(tipocliente, out i);
             _clifiltro.id_tipi_clienti = i.ToString(); //filtro per tipo cliente (0 default - clienti standard altrimenti dalla tabella riferimento tipi di clienti)
         }
         else
@@ -346,7 +346,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 
         ListItemCollection listcoll = new ListItemCollection();
         ListItem item = null;
-        ListaIdClientiSelezionatiInanagrafica = new List<int>();
+        ListaIdClientiSelezionatiInanagrafica = new List<long>();
 
         if (clientianagrafica != null)
             foreach (Cliente c in clientianagrafica)
@@ -375,7 +375,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 
         ListItemCollection listcoll = new ListItemCollection();
         ListItem item = null;
-        ListaIdClientiSelezionatiIngruppo = new List<int>();
+        ListaIdClientiSelezionatiIngruppo = new List<long>();
         if (clientinelgruppo != null)
             foreach (Cliente c in clientinelgruppo)
             {
@@ -391,7 +391,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         listClientiNelgruppo.DataBind();
 
     }
-    private void PopolaGruppiMailing(int idselected = -1)
+    private void PopolaGruppiMailing(long idselected = -1)
     {
         mailingDM mDM = new mailingDM();
         //Carichiamo la lista dei gruppi clienti!!!
@@ -439,7 +439,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         nuovogruppo.Intero2 = 0;
 
         //Creiamo il nuovo gruppo clienti
-        int idgruppo = mDM.InserisciAggiornaNuovoGruppoClientiNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, nuovogruppo);
+        long idgruppo = mDM.InserisciAggiornaNuovoGruppoClientiNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, nuovogruppo);
         PopolaGruppiMailing(idgruppo);
     }
 
@@ -452,8 +452,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         if (listGruppi.SelectedItem != null)
         {
             string selvalue = listGruppi.SelectedItem.Value;
-            int id = 0;
-            int.TryParse(selvalue, out id);
+            long id = 0;
+            long.TryParse(selvalue, out id);
             grupposelezionato = mDM.CaricaGruppoMailing(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
             grupposelezionato.Campo1 = txtNomeGruppo.Text;
             //  grupposelezionato.Intero2 = 0;
@@ -495,8 +495,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     private void VisualizzaGruppoMailing(string selvalue)
     {
         mailingDM mDM = new mailingDM();
-        int id = 0;
-        int.TryParse(selvalue, out id);
+        long id = 0;
+        long.TryParse(selvalue, out id);
         //Prima carico la lista clienti nel gruppo
         //-> selezione gruppo clienti
         // TabrifCollection clientinelgruppo = mDM.CaricaClientiNewsletterPerGruppo(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
@@ -526,8 +526,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             //Devo aggiungere tutti i clienti al gruppo selezionato nella lsitabox
             //dal filtro anagrafico nella listAnagraficaClienti
             string selidgruppovalue = listGruppi.SelectedItem.Value;
-            int idgruppo = 0;
-            int.TryParse(selidgruppovalue, out idgruppo);
+            long idgruppo = 0;
+            long.TryParse(selidgruppovalue, out idgruppo);
             mailingDM mDM = new mailingDM();
 
             Cliente _clifiltro = SettaFiltroCliente(true, true, ddlLinguaFiltroClienti.SelectedValue, ddlTipiClienti.SelectedValue, ddlNazioniFiltro.SelectedValue, txtetamin.Text, txtetamax.Text, radSessoRicerca.SelectedValue);
@@ -545,8 +545,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         {
             //idgrupponewsletter
             string selidgruppovalue = listGruppi.SelectedItem.Value;
-            int idgruppo = 0;
-            int.TryParse(selidgruppovalue, out idgruppo);
+            long idgruppo = 0;
+            long.TryParse(selidgruppovalue, out idgruppo);
 
             mailingDM mDM = new mailingDM();
 
@@ -570,10 +570,10 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             //idgrupponewsletter
             string selidgruppovalue = listGruppi.SelectedItem.Value;
 
-            int idcliente = 0;
-            int idgruppo = 0;
-            int.TryParse(selidclientevalue, out idcliente);
-            int.TryParse(selidgruppovalue, out idgruppo);
+            long idcliente = 0;
+            long idgruppo = 0;
+            long.TryParse(selidclientevalue, out idcliente);
+            long.TryParse(selidgruppovalue, out idgruppo);
 
             mailingDM mDM = new mailingDM();
             mDM.AggiungiClienteAGruppo(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente, idgruppo);
@@ -592,10 +592,10 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             string selidclientevalue = listClientiNelgruppo.SelectedItem.Value;
             //idgrupponewsletter
             string selidgruppovalue = listGruppi.SelectedItem.Value;
-            int idcliente = 0;
-            int idgruppo = 0;
-            int.TryParse(selidclientevalue, out idcliente);
-            int.TryParse(selidgruppovalue, out idgruppo);
+            long idcliente = 0;
+            long idgruppo = 0;
+            long.TryParse(selidclientevalue, out idcliente);
+            long.TryParse(selidgruppovalue, out idgruppo);
 
             mailingDM mDM = new mailingDM();
             mDM.EliminaClienteDaGruppo(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente, idgruppo);
@@ -604,13 +604,10 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         }
     }
 
-
-
     protected void listitemchange(object sender, EventArgs e)
     {
         string seltext = ((ListBox)sender).SelectedItem.Text;
-        string selvalue = ((ListBox)sender).SelectedItem.Value;
-
+        string selvalue = ((ListBox)sender).SelectedItem.Value; 
         //Carichiamo i dati della newsletter ed associamoli ai controlli
         VisualizzaNewsletter(selvalue);
         litId.Text = selvalue;
@@ -653,8 +650,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     private void VisualizzaNewsletter(string selvalue)
     {
         mailingDM mDM = new mailingDM();
-        int id = 0;
-        int.TryParse(selvalue, out id);
+        long id = 0;
+        long.TryParse(selvalue, out id);
         Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
 
         //Visualizziamo quanto caricato
@@ -701,7 +698,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         txtContent.Text = "";
     }
 
-    private void PopolaListaNewsletter(int idselected = -1)
+    private void PopolaListaNewsletter(long idselected = -1)
     {
         //Carichiamo dal db la lista delle strutture nesletter ... e bindiamo gli id alla lista
         mailingDM mDM = new mailingDM();
@@ -733,8 +730,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         string idstring = "-1";
         if (listNewsLetter.SelectedItem != null)
             idstring = listNewsLetter.SelectedItem.Value;
-        int id = 0;
-        int.TryParse(idstring, out id);
+        long id = 0;
+        long.TryParse(idstring, out id);
         PopolaListaNewsletter(id);
     }
     protected void Nuova(object sender, EventArgs e)
@@ -877,7 +874,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 #endif
 
             Mail newsletter = new Mail();
-            newsletter.Tipomailing = (Int32)enumclass.TipoMailing.Newsletter_tipo1; //Specifico il tipo della mail per lo smistatore
+            newsletter.Tipomailing = (long)enumclass.TipoMailing.Newsletter_tipo1; //Specifico il tipo della mail per lo smistatore
             newsletter.NoteInvio = txtAdesione.Text;
             //Testi indroduttivi soggetto e mail ( da prendere dal form attuale )
             newsletter.SoggettoMail = txtSoggetto.Text; // da chidere all'utente mediante apposita box
@@ -887,14 +884,14 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             //item.DataInserimento = _tmpdate;
 
             //Imposto l'id della newsletter selezionata se presente
-            int id = 0;
+            long id = 0;
             if (listNewsLetter.SelectedItem != null)
             {
                 string selvalue = listNewsLetter.SelectedItem.Value;
-                int.TryParse(selvalue, out id);
+                long.TryParse(selvalue, out id);
             }
             newsletter.Id = id;
-            int identity = mDM.InserisciAggiornaNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, newsletter);
+            long identity = mDM.InserisciAggiornaNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, newsletter);
             if (newsletter.Id == 0)
                 newsletter.Id = identity;
             if (newsletter.Id != 0)
@@ -937,11 +934,11 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         mailingDM mDM = new mailingDM();
         //Imposto l'id della newsletter selezionata se presente
-        int id = 0;
+        long id = 0;
         if (listNewsLetter.SelectedItem != null)
         {
             string selvalue = listNewsLetter.SelectedItem.Value;
-            int.TryParse(selvalue, out id);
+            long.TryParse(selvalue, out id);
         }
         mDM.CancellaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
         SvuotaNewsletter();
@@ -956,11 +953,11 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         mailingDM mDM = new mailingDM();
         //Imposto l'id e carico la newsletter selezionata se presente
-        int id = 0;
+        long id = 0;
         if (listNewsLetter.SelectedItem != null)
         {
             string selvalue = listNewsLetter.SelectedItem.Value;
-            int.TryParse(selvalue, out id);
+            long.TryParse(selvalue, out id);
         }
         Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
         //Inseriamo le email nella tabella per l'invio
@@ -972,7 +969,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                 ClientiDM cliDM = new ClientiDM();
                 string selidgruppovalue = listGruppi.SelectedItem.Value;
                 id = 0;
-                int.TryParse(selidgruppovalue, out id);
+                long.TryParse(selidgruppovalue, out id);
                 ClienteCollection clientifiltro = cliDM.CaricaClientiPerGruppoNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
                 //Togliamo i clienti non validati e senza consenso per promozioni commerciali per sicurezza
                 if (clientifiltro != null)
@@ -995,11 +992,11 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         mailingDM mDM = new mailingDM();
         //Imposto l'id della newsletter selezionata se presente
-        int id = 0;
+        long id = 0;
         if (listNewsLetter.SelectedItem != null)
         {
             string selvalue = listNewsLetter.SelectedItem.Value;
-            int.TryParse(selvalue, out id);
+            long.TryParse(selvalue, out id);
         }
         Mail newsletter = mDM.CaricaNewsletterPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
 
@@ -1071,8 +1068,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         try
         {
-            int id_newsletter = mail.Id;
-            int totalemailpreparate = 0;
+            long id_newsletter = mail.Id;
+            long totalemailpreparate = 0;
             litMails.Text = "Totale mail preparate: " + "0";
             if (clientimail != null)
             {

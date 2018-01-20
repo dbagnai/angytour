@@ -76,7 +76,7 @@ public partial class AreaRiservata_Default : CommonPage
         get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
         set { ViewState["PercorsoAssolutoApplicazione"] = value; }
     }
-    public Dictionary<int, List<Offerte>> dictRepost = new Dictionary<int, List<Offerte>>();
+    public Dictionary<long, List<Offerte>> dictRepost = new Dictionary<long, List<Offerte>>();
     public Dictionary<string, Offerte> dictSocibyUsername = new Dictionary<string, Offerte>();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -248,7 +248,7 @@ public partial class AreaRiservata_Default : CommonPage
                     listPost = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
                     if (listPost != null && listPost.Count > 0)
                     {
-                        dictRepost = new Dictionary<int, List<Offerte>>();
+                        dictRepost = new Dictionary<long, List<Offerte>>();
                         foreach (Offerte o in listPost)
                         {
                             List<Offerte> orderredrepost = offDM.CaricaOfferteCollegate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, o.Id.ToString(), "", false, Lingua, true);
@@ -274,7 +274,7 @@ public partial class AreaRiservata_Default : CommonPage
                 SQLiteParameter pcollegato = new SQLiteParameter("@Id_collegato", "0");
                 parColl.Add(pcollegato);
                 listPost = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
-                dictRepost = new Dictionary<int, List<Offerte>>();
+                dictRepost = new Dictionary<long, List<Offerte>>();
                 foreach (Offerte o in listPost)
                 {
                     List<Offerte> orderredrepost = offDM.CaricaOfferteCollegate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, o.Id.ToString(), "", false, Lingua, true);
@@ -298,7 +298,7 @@ public partial class AreaRiservata_Default : CommonPage
                     listPost = list.FindAll(c => c.Id_collegato == 0);
                     listRepost = list.FindAll(c => c.Id_collegato != 0);
                 }
-                dictRepost = new Dictionary<int, List<Offerte>>();
+                dictRepost = new Dictionary<long, List<Offerte>>();
                 foreach (Offerte o in listPost)
                 {
                     if (!dictRepost.ContainsKey(o.Id))
@@ -376,7 +376,7 @@ public partial class AreaRiservata_Default : CommonPage
             updrecord.Autore = User.Identity.Name;
             updrecord.CodiceTipologia = Tipologia;
 
-            int tmpcoll = 0;
+            //int tmpcoll = 0;
             //if (Int32.TryParse(txtIdcollegato.Text, out tmpcoll))
             //    updrecord.Id_collegato = tmpcoll;
 
@@ -491,8 +491,8 @@ public partial class AreaRiservata_Default : CommonPage
         StringBuilder sb = new StringBuilder();
         try
         {
-            int tmp = 0;
-            if (Int32.TryParse(id, out tmp))
+            long tmp = 0;
+            if (long.TryParse(id, out tmp))
             {
                 offerteDM offDM = new offerteDM();
                 Offerte o = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id.ToString());
@@ -559,8 +559,8 @@ public partial class AreaRiservata_Default : CommonPage
         try
         {
             Offerte updrecord = new Offerte();
-            int tmp = 0;
-            if (Int32.TryParse(id, out tmp))
+            long tmp = 0;
+            if (long.TryParse(id, out tmp))
             {
 
                 offerteDM offDM = new offerteDM();
@@ -596,8 +596,8 @@ public partial class AreaRiservata_Default : CommonPage
         try
         {
             Offerte newrecord = new Offerte();
-            int tmp = 0;
-            if (Int32.TryParse(id, out tmp))
+            long tmp = 0;
+            if (long.TryParse(id, out tmp))
             {
 
                 offerteDM offDM = new offerteDM();
@@ -698,12 +698,12 @@ public partial class AreaRiservata_Default : CommonPage
         html = sb.ToString();
         return html;
     }
-    public string CalcolaNumeroCommenti(int Id)
+    public string CalcolaNumeroCommenti(long Id)
     {
         string ret ="";
         if(dictRepost.ContainsKey(Id))
         {
-            int totalerepost = ((List<Offerte>)dictRepost[(Id)]).Count;
+            long totalerepost = ((List<Offerte>)dictRepost[(Id)]).Count;
             ret = "Totale commenti : " + totalerepost.ToString();
         }
         return ret;
