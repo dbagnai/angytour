@@ -121,20 +121,20 @@ namespace WelcomeLibrary.DOM
         }
 
 
-        private int? _Intero1;
-        public int? Intero1
+        private long? _Intero1;
+        public long? Intero1
         {
             get { return _Intero1; }
             set { _Intero1 = value; }
         }
-        private int? _Intero2;
-        public int? Intero2
+        private long? _Intero2;
+        public long? Intero2
         {
             get { return _Intero2; }
             set { _Intero2 = value; }
         }
-        private int? _Intero3;
-        public int? Intero3
+        private long? _Intero3;
+        public long? Intero3
         {
             get { return _Intero3; }
             set { _Intero3 = value; }

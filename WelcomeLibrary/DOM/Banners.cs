@@ -7,8 +7,8 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Banners
     {
-        private Int32 _Id;
-        public Int32 Id
+        private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
@@ -80,8 +80,8 @@ namespace WelcomeLibrary.DOM
             set { _sezione = value; }
         }
 
-        private int _progressivo;
-        public int progressivo
+        private long _progressivo;
+        public long progressivo
         {
             get { return _progressivo; }
             set { _progressivo = value; }

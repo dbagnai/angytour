@@ -8,8 +8,8 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Struttura
     {
-        private Int32 _Id_struttura;
-        public Int32 Id_struttura
+        private long _Id_struttura;
+        public long Id_struttura
         {
             get { return _Id_struttura; }
             set { _Id_struttura = value; }

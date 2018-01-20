@@ -7,32 +7,32 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Mail
     {
-         private Int32 _Id;
-        public Int32 Id
+         private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
         }
-        private Int32 _Id_card;
-        public Int32 Id_card
+        private long _Id_card;
+        public long Id_card
         {
             get { return _Id_card; }
             set { _Id_card = value; }
         }
-         private Int32 _Id_cliente;
-        public Int32 Id_cliente
+         private long _Id_cliente;
+        public long Id_cliente
         {
             get { return _Id_cliente; }
             set { _Id_cliente = value; }
         }
-        private Int32 _Id_mailing_struttura;
-        public Int32 Id_mailing_struttura
+        private long _Id_mailing_struttura;
+        public long Id_mailing_struttura
         {
             get { return _Id_mailing_struttura; }
             set { _Id_mailing_struttura = value; }
         }
-            private Int32 _tipomailing;
-        public Int32 Tipomailing
+            private long _tipomailing;
+        public long Tipomailing
         {
             get { return _tipomailing; }
             set { _tipomailing = value; }

@@ -7,14 +7,14 @@ namespace WelcomeLibrary.DOM
 
     public class Contenuti
     {
-        private Int32 _Id;
-        public Int32 Id
+        private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
         }
-        private Int32 _Id_attivita;
-        public Int32 Id_attivita
+        private long _Id_attivita;
+        public long Id_attivita
         {
             get { return _Id_attivita; }
             set { _Id_attivita = value; }

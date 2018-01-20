@@ -8,14 +8,14 @@ namespace WelcomeLibrary.DOM
     public class Cliente
     {
 
-        private Int32 _Id_cliente;
-        public Int32 Id_cliente
+        private long _Id_cliente;
+        public long Id_cliente
         {
             get { return _Id_cliente; }
             set { _Id_cliente = value; }
         }
-        private Int32 _Id_card;
-        public Int32 Id_card
+        private long _Id_card;
+        public long Id_card
         {
             get { return _Id_card; }
             set { _Id_card = value; }

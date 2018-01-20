@@ -12,15 +12,15 @@ namespace WelcomeLibrary.DOM
 
 
 
-        private Int32 _Id;
-        public Int32 Id
+        private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
         }
 
-        private Int32 _Id_collegato;
-        public Int32 Id_collegato
+        private long _Id_collegato;
+        public long Id_collegato
         {
             get { return _Id_collegato; }
             set { _Id_collegato = value; }
@@ -300,60 +300,60 @@ namespace WelcomeLibrary.DOM
             set { _Archiviato = value; }
         }
 
-        private Int32 _Caratteristica1;
-        public Int32 Caratteristica1
+        private long _Caratteristica1;
+        public long Caratteristica1
         {
             get { return _Caratteristica1; }
             set { _Caratteristica1 = value; }
         }
 
-        private Int32 _Caratteristica2;
-        public Int32 Caratteristica2
+        private long _Caratteristica2;
+        public long Caratteristica2
         {
             get { return _Caratteristica2; }
             set { _Caratteristica2 = value; }
         }
 
 
-        private Int32 _Caratteristica3;
-        public Int32 Caratteristica3
+        private long _Caratteristica3;
+        public long Caratteristica3
         {
             get { return _Caratteristica3; }
             set { _Caratteristica3 = value; }
         }
 
 
-        private Int32 _Caratteristica4;
-        public Int32 Caratteristica4
+        private long _Caratteristica4;
+        public long Caratteristica4
         {
             get { return _Caratteristica4; }
             set { _Caratteristica4 = value; }
         }
 
 
-        private Int32 _Caratteristica5;
-        public Int32 Caratteristica5
+        private long _Caratteristica5;
+        public long Caratteristica5
         {
             get { return _Caratteristica5; }
             set { _Caratteristica5 = value; }
         }
-        private Int32 _Caratteristica6;
-        public Int32 Caratteristica6
+        private long _Caratteristica6;
+        public long Caratteristica6
         {
             get { return _Caratteristica6; }
             set { _Caratteristica6 = value; }
         }
 
-        private Int32 _Anno;
-        public Int32 Anno
+        private long _Anno;
+        public long Anno
         {
             get { return _Anno; }
             set { _Anno = value; }
         }
 
 
-        private Int32 _Id_dts_collegato;
-        public Int32 Id_dts_collegato
+        private long _Id_dts_collegato;
+        public long Id_dts_collegato
         {
             get { return _Id_dts_collegato; }
             set { _Id_dts_collegato = value; }

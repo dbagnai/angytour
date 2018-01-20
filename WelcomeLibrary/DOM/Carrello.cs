@@ -8,8 +8,8 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class TotaliCarrello
     {
-        private Int32 _Id;
-        public Int32 Id
+        private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
@@ -72,8 +72,8 @@ namespace WelcomeLibrary.DOM
             set { _urlpagamento = value; }
         }
 
-        private Int32 _id_cliente;
-        public Int32 Id_cliente
+        private long _id_cliente;
+        public long Id_cliente
         {
             get { return _id_cliente; }
             set { _id_cliente = value; }
@@ -123,8 +123,8 @@ namespace WelcomeLibrary.DOM
             set { _supplementospedizione = value; }
         }
 
-        private Int32 _id_commerciale;
-        public Int32 Id_commerciale
+        private long _id_commerciale;
+        public long Id_commerciale
         {
             get { return _id_commerciale; }
             set { _id_commerciale = value; }
@@ -188,21 +188,21 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Carrello
     {
-        private Int32 _ID;
-        public Int32 ID
+        private long _ID;
+        public long ID
         {
             get { return _ID; }
             set { _ID = value; }
         }
-        private Int32 _ID_cliente;
-        public Int32 ID_cliente
+        private long _ID_cliente;
+        public long ID_cliente
         {
             get { return _ID_cliente; }
             set { _ID_cliente = value; }
         }
 
-        private Int32 _id_prodotto;
-        public Int32 id_prodotto
+        private long _id_prodotto;
+        public long id_prodotto
         {
             get { return _id_prodotto; }
             set { _id_prodotto = value; }
@@ -229,15 +229,15 @@ namespace WelcomeLibrary.DOM
             set { _Prezzo = value; }
         }
 
-        private int _Iva;
-        public int Iva
+        private long _Iva;
+        public long Iva
         {
             get { return _Iva; }
             set { _Iva = value; }
         }
 
-        private int _Numero;
-        public int Numero
+        private long _Numero;
+        public long Numero
         {
             get { return _Numero; }
             set { _Numero = value; }
@@ -258,8 +258,8 @@ namespace WelcomeLibrary.DOM
             set { _IpClient = value; }
         }
 
-        private int _Validita;
-        public int Validita
+        private long _Validita;
+        public long Validita
         {
             get { return _Validita; }
             set { _Validita = value; }
@@ -316,8 +316,8 @@ namespace WelcomeLibrary.DOM
             get { return _Offerta; }
             set { _Offerta = value; }
         }
-        private int _progressivo = 0;
-        public int Progressivo
+        private long _progressivo = 0;
+        public long Progressivo
         {
             get { return _progressivo; }
             set { _progressivo = value; }

@@ -7,8 +7,8 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Card
     {
-        private Int32 _Id_card;
-        public Int32 Id_card
+        private long _Id_card;
+        public long Id_card
         {
             get { return _Id_card; }
             set { _Id_card = value; }
@@ -32,8 +32,8 @@ namespace WelcomeLibrary.DOM
             get { return _DataAttivazione; }
             set { _DataAttivazione = value; }
         }
-          private Int32 _DurataGG;
-        public Int32 DurataGG
+          private long _DurataGG;
+        public long DurataGG
         {
             get { return _DurataGG; }
             set { _DurataGG = value; }

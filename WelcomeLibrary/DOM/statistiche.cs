@@ -9,14 +9,14 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class Statistiche
     {
-        private Int32 _Id;
-        public Int32 Id
+        private long _Id;
+        public long Id
         {
             get { return _Id; }
             set { _Id = value; }
         }
-        private Int32 _Idattivita;
-        public Int32 Idattivita
+        private long _Idattivita;
+        public long Idattivita
         {
             get { return _Idattivita; }
             set { _Idattivita = value; }
