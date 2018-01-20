@@ -39,7 +39,7 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.*,B.* FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
+                query = "SELECT A.ID,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori   FROM TBL_CARRELLO as A left outer join TBL_ATTIVITA as B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
 
                 SQLiteParameter p1 = new SQLiteParameter("@SessionId", SessionId);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -79,7 +79,7 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Carrello();
-                        item.ID = reader.GetInt64(reader.GetOrdinal("A.ID"));
+                        item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
 
@@ -88,21 +88,21 @@ namespace WelcomeLibrary.DAL
                             item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
 
-                        if (!reader["A.Codicenazione"].Equals(DBNull.Value))
-                            item.Codicenazione = reader.GetString(reader.GetOrdinal("A.Codicenazione"));
-                        if (!reader["A.Codiceprovincia"].Equals(DBNull.Value))
-                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("A.Codiceprovincia"));
+                        if (!reader["Codicenazione"].Equals(DBNull.Value))
+                            item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
+                        if (!reader["Codiceprovincia"].Equals(DBNull.Value))
+                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
                         item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
-                        if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
-                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("A.CodiceProdotto"));
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
 
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
                         //if (!reader["B.Prezzo"].Equals(DBNull.Value))
                         //    item.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
-                        item.Prezzo = reader.GetDouble(reader.GetOrdinal("A.Prezzo"));
+                        item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
 
                         item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
                         item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
@@ -121,9 +121,9 @@ namespace WelcomeLibrary.DAL
                         //carichiamo i dati relativi all'offerta scelta
                         //item.Offerta = CaricaDatiOffertaRelativa(connection, item.CodiceProdotto);
                         Offerte offerta = new Offerte();
-                        if (!reader["B.ID"].Equals(DBNull.Value))
+                        if (!reader["B_ID"].Equals(DBNull.Value))
                         {
-                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B_ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
@@ -135,12 +135,12 @@ namespace WelcomeLibrary.DAL
 
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
                                 offerta.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
-                            if (!reader["B.CodicePROVINCIA"].Equals(DBNull.Value))
-                                offerta.CodiceProvincia = reader.GetString(reader.GetOrdinal("A.CodicePROVINCIA"));
+                            if (!reader["B_CodicePROVINCIA"].Equals(DBNull.Value))
+                                offerta.CodiceProvincia = reader.GetString(reader.GetOrdinal("B_CodicePROVINCIA"));
                             if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                                 offerta.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
-                            if (!reader["B.CodiceProdotto"].Equals(DBNull.Value))
-                                offerta.CodiceProdotto = reader.GetString(reader.GetOrdinal("B.CodiceProdotto"));
+                            if (!reader["B_CodiceProdotto"].Equals(DBNull.Value))
+                                offerta.CodiceProdotto = reader.GetString(reader.GetOrdinal("B_CodiceProdotto"));
                             if (!reader["CodiceCategoria"].Equals(DBNull.Value))
                                 offerta.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
                             if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
@@ -176,8 +176,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
                             if (!reader["WEBSITE"].Equals(DBNull.Value))
                                 offerta.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
-                            if (!reader["B.Prezzo"].Equals(DBNull.Value))
-                                offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
+                            if (!reader["B_Prezzo"].Equals(DBNull.Value))
+                                offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("B_Prezzo"));
                             if (!reader["PrezzoListino"].Equals(DBNull.Value))
                                 offerta.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
                             if (!reader["Vetrina"].Equals(DBNull.Value))
@@ -230,7 +230,7 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.*,B.* FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
+                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori   FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
 
                 SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -246,28 +246,28 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Carrello();
-                        item.ID = reader.GetInt64(reader.GetOrdinal("A.ID"));
+                        item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
                             item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
 
-                        if (!reader["A.Codicenazione"].Equals(DBNull.Value))
-                            item.Codicenazione = reader.GetString(reader.GetOrdinal("A.Codicenazione"));
-                        if (!reader["A.Codiceprovincia"].Equals(DBNull.Value))
-                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("A.Codiceprovincia"));
+                        if (!reader["Codicenazione"].Equals(DBNull.Value))
+                            item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
+                        if (!reader["Codiceprovincia"].Equals(DBNull.Value))
+                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
 
                         item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
-                        if (!reader["A.CodiceProdotto"].Equals(DBNull.Value))
-                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("A.CodiceProdotto"));
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
 
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
                         //if (!reader["B.Prezzo"].Equals(DBNull.Value))
                         //    item.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
-                        item.Prezzo = reader.GetDouble(reader.GetOrdinal("A.Prezzo"));
+                        item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
 
                         item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
                         item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
@@ -287,9 +287,9 @@ namespace WelcomeLibrary.DAL
                         //carichiamo i dati relativi all'offerta scelta
                         //item.Offerta = CaricaDatiOffertaRelativa(connection, item.CodiceProdotto);
                         Offerte offerta = new Offerte();
-                        if (!reader["B.ID"].Equals(DBNull.Value))
+                        if (!reader["B_ID"].Equals(DBNull.Value))
                         {
-                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B_ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
@@ -301,12 +301,12 @@ namespace WelcomeLibrary.DAL
 
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
                                 offerta.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
-                            if (!reader["B.CodicePROVINCIA"].Equals(DBNull.Value))
-                                offerta.CodiceProvincia = reader.GetString(reader.GetOrdinal("A.CodicePROVINCIA"));
+                            if (!reader["B_CodicePROVINCIA"].Equals(DBNull.Value))
+                                offerta.CodiceProvincia = reader.GetString(reader.GetOrdinal("B_CodicePROVINCIA"));
                             if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                                 offerta.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
-                            if (!reader["B.CodiceProdotto"].Equals(DBNull.Value))
-                                offerta.CodiceProdotto = reader.GetString(reader.GetOrdinal("B.CodiceProdotto"));
+                            if (!reader["B_CodiceProdotto"].Equals(DBNull.Value))
+                                offerta.CodiceProdotto = reader.GetString(reader.GetOrdinal("B_CodiceProdotto"));
                             if (!reader["CodiceCategoria"].Equals(DBNull.Value))
                                 offerta.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
                             if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
@@ -341,8 +341,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
                             if (!reader["WEBSITE"].Equals(DBNull.Value))
                                 offerta.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
-                            if (!reader["B.Prezzo"].Equals(DBNull.Value))
-                                offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
+                            if (!reader["B_Prezzo"].Equals(DBNull.Value))
+                                offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("B_Prezzo"));
 
                             if (!reader["PrezzoListino"].Equals(DBNull.Value))
                                 offerta.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));

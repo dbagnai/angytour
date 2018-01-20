@@ -287,14 +287,14 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p5);
             SQLiteParameter p6 = new SQLiteParameter("@ImageUrlGB", item.ImageUrlGB);//OleDbType.VarChar
             parColl.Add(p6);
-            SQLiteParameter p7 = new SQLiteParameter("@NavigateUrGB", item.NavigateUrlGB);
+            SQLiteParameter p7 = new SQLiteParameter("@NavigateUrlGB", item.NavigateUrlGB);
             parColl.Add(p7);
 
             SQLiteParameter p5r = new SQLiteParameter("@AlternateTextRU", item.AlternateTextRU);
             parColl.Add(p5r);
             SQLiteParameter p6r = new SQLiteParameter("@ImageUrlRU", item.ImageUrlRU);//OleDbType.VarChar
             parColl.Add(p6r);
-            SQLiteParameter p7r = new SQLiteParameter("@NavigateUrRU", item.NavigateUrlRU);
+            SQLiteParameter p7r = new SQLiteParameter("@NavigateUrlRU", item.NavigateUrlRU);
             parColl.Add(p7r);
 
             SQLiteParameter p8 = new SQLiteParameter("@Progressivo", item.progressivo);

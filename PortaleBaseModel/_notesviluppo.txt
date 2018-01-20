@@ -1,3 +1,9 @@
 
+-- controllare tuttee le query join e evitare la sintassi a. b. getordinal
+-- rivedi i bulk insert specie nella newsletter
 -- Rivedere le query e la sintassi per sqllite
--- FUNZIONE Mid e CIn in query sqlite -> trovare equivalenti
+-- inserire limit skip nelle query ...
+-- integrazione su sqllite del membership ...
+
+
+
