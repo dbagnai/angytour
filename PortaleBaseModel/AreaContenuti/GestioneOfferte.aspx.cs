@@ -211,6 +211,8 @@ public partial class AreaContenuti_Default3 : CommonPage
                     parColl.Add(p9);
                 }
             }
+             
+
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
             //    SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdottoRicerca);

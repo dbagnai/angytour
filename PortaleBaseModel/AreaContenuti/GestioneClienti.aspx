@@ -6,7 +6,7 @@
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title></title>
-    <meta http-equiv="x-ua-compatible" content="IE=9" />
+   <%-- <meta http-equiv="x-ua-compatible" content="IE=9" />--%>
 
     <style type="text/css">
         /*STILI PER LE FINESTRE DI POPUP------------------------------------*/

@@ -36,7 +36,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="maxrecord"></param>
         /// <returns></returns>
         public OfferteCollection CaricaOfferteFiltrate(string connection, List<SQLiteParameter> parColl, string maxrecord = "", string LinguaFiltro = "", bool? filtrocatalogo = null,
-            string campoordinamento = "", bool includiarchiviati = false)
+            string campoordinamento = "", bool includiarchiviati = false, long page = 1, long pagesize = 0)
         {
             OfferteCollection list = new OfferteCollection();
             if (connection == null || connection == "") return list;
@@ -46,132 +46,130 @@ namespace WelcomeLibrary.DAL
             try
             {
                 List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
-					
-					//StringBuilder queryCols = new StringBuilder();
-					//queryCols.AppendLine("A.ID ");
-					//queryCols.AppendLine(", A.Id_dts_collegato ");
-					//queryCols.AppendLine(", A.CodiceNazione ");
-					//queryCols.AppendLine(", A.CodiceREGIONE ");
-					//queryCols.AppendLine(", A.CodicePROVINCIA ");
-					//queryCols.AppendLine(", A.CodiceCOMUNE ");
-					//queryCols.AppendLine(", A.CodiceTIPOLOGIA ");
-					//queryCols.AppendLine(", A.WEBSITE ");
-					//queryCols.AppendLine(", A.EMAIL ");
-					//queryCols.AppendLine(", A.TELEFONO ");
-					//queryCols.AppendLine(", A.FAX ");
-					//queryCols.AppendLine(", A.INDIRIZZO ");
-					//queryCols.AppendLine(", A.DENOMINAZIONEGB ");
-					//queryCols.AppendLine(", A.DENOMINAZIONEI ");
-					//queryCols.AppendLine(", A.DESCRIZIONEI ");
-					//queryCols.AppendLine(", A.DESCRIZIONEGB ");
-					//queryCols.AppendLine(", A.DATITECNICII ");
-					//queryCols.AppendLine(", A.DATITECNICIGB ");
-					//queryCols.AppendLine(", A.FotoSchema ");
-					//queryCols.AppendLine(", A.FotoValori ");
-					//queryCols.AppendLine(", A.Datainserimento ");
-					//queryCols.AppendLine(", A.CodiceProdotto ");
-					//queryCols.AppendLine(", A.CodiceCategoria ");
-					//queryCols.AppendLine(", A.CodiceCategoria2Liv ");
-					//queryCols.AppendLine(", A.Prezzo ");
-					//queryCols.AppendLine(", A.PrezzoListino ");
-					//queryCols.AppendLine(", A.Vetrina ");
-					//queryCols.AppendLine(", A.AbilitaContatto ");
-					//queryCols.AppendLine(", A.linkVideo ");
-					//queryCols.AppendLine(", A.Campo1I ");
-					//queryCols.AppendLine(", A.Campo2I ");
-					//queryCols.AppendLine(", A.Campo1GB ");
-					//queryCols.AppendLine(", A.Campo2GB ");
-					//queryCols.AppendLine(", A.Id_collegato ");
-					//queryCols.AppendLine(", A.Caratteristica1 ");
-					//queryCols.AppendLine(", A.Caratteristica2 ");
-					//queryCols.AppendLine(", A.Anno ");
-					//queryCols.AppendLine(", A.Archiviato ");
-					//queryCols.AppendLine(", A.Caratteristica3 ");
-					//queryCols.AppendLine(", A.Caratteristica4 ");
-					//queryCols.AppendLine(", A.Caratteristica5 ");
-					//queryCols.AppendLine(", A.Caratteristica6 ");
-					//queryCols.AppendLine(", A.Autore ");
-					//queryCols.AppendLine(", A.XmlValue ");
-					//queryCols.AppendLine(", A.Data1 ");
-					//queryCols.AppendLine(", A.DENOMINAZIONERU ");
-					//queryCols.AppendLine(", A.DESCRIZIONERU ");
-					//queryCols.AppendLine(", A.DATITECNICIRU ");
-					//queryCols.AppendLine(", A.Campo1RU ");
-					//queryCols.AppendLine(", A.Campo2RU ");
-					//queryCols.AppendLine(", A.Promozione ");
-					//queryCols.AppendLine(", A.Qta_vendita ");
-					//queryCols.AppendLine(", B.ID_DTS ");
-					//queryCols.AppendLine(", B.pivacf_dts ");
-					//queryCols.AppendLine(", B.nome_dts ");
-					//queryCols.AppendLine(", B.cognome_dts ");
-					//queryCols.AppendLine(", B.datanascita_dts ");
-					//queryCols.AppendLine(", B.sociopresentatore1_dts ");
-					//queryCols.AppendLine(", B.sociopresentatore2_dts ");
-					//queryCols.AppendLine(", B.telefonoprivato_dts ");
-					//queryCols.AppendLine(", B.annolaurea_dts ");
-					//queryCols.AppendLine(", B.annospecializzazione_dts ");
-					//queryCols.AppendLine(", B.altrespecializzazioni_dts ");
-					//queryCols.AppendLine(", B.socioSicpre_dts ");
-					//queryCols.AppendLine(", B.socioIsaps_dts ");
-					//queryCols.AppendLine(", B.socioaltraassociazione_dts ");
-					//queryCols.AppendLine(", B.trattamenticollegati_dts ");
-					//queryCols.AppendLine(", B.accettazioneStatuto_dts ");
-					//queryCols.AppendLine(", B.certificazione_dts ");
-					//queryCols.AppendLine(", B.emailriservata_dts ");
-					//queryCols.AppendLine(", B.CodiceNAZIONE1_dts ");
-					//queryCols.AppendLine(", B.CodiceREGIONE1_dts ");
-					//queryCols.AppendLine(", B.CodicePROVINCIA1_dts ");
-					//queryCols.AppendLine(", B.CodiceCOMUNE1_dts ");
-					//queryCols.AppendLine(", B.CodiceNAZIONE2_dts ");
-					//queryCols.AppendLine(", B.CodiceREGIONE2_dts ");
-					//queryCols.AppendLine(", B.CodicePROVINCIA2_dts ");
-					//queryCols.AppendLine(", B.CodiceCOMUNE2_dts ");
-					//queryCols.AppendLine(", B.CodiceNAZIONE3_dts ");
-					//queryCols.AppendLine(", B.CodiceREGIONE3_dts ");
-					//queryCols.AppendLine(", B.CodicePROVINCIA3_dts ");
-					//queryCols.AppendLine(", B.CodiceCOMUNE3_dts ");
-					//queryCols.AppendLine(", B.latitudine1_dts ");
-					//queryCols.AppendLine(", B.longitudine1_dts ");
-					//queryCols.AppendLine(", B.latitudine2_dts ");
-					//queryCols.AppendLine(", B.longitudine2_dts ");
-					//queryCols.AppendLine(", B.latitudine3_dts ");
-					//queryCols.AppendLine(", B.longitudine3_dts ");
-					//queryCols.AppendLine(", B.bloccoaccesso_dts ");
-					//queryCols.AppendLine(", B.via1_dts ");
-					//queryCols.AppendLine(", B.cap1_dts ");
-					//queryCols.AppendLine(", B.nomeposizione1_dts ");
-					//queryCols.AppendLine(", B.telefono1_dts ");
-					//queryCols.AppendLine(", B.via2_dts ");
-					//queryCols.AppendLine(", B.cap2_dts ");
-					//queryCols.AppendLine(", B.nomeposizione2_dts ");
-					//queryCols.AppendLine(", B.telefono2_dts ");
-					//queryCols.AppendLine(", B.via3_dts ");
-					//queryCols.AppendLine(", B.cap3_dts ");
-					//queryCols.AppendLine(", B.nomeposizione3_dts ");
-					//queryCols.AppendLine(", B.telefono3_dts ");
-					//queryCols.AppendLine(", B.pagamenti_dts ");
-					//queryCols.AppendLine(", B.ricfatt_dts ");
-					//queryCols.AppendLine(", B.indirizzofatt_dts ");
-					//queryCols.AppendLine(", B.noteriservate_dts ");
-					//queryCols.AppendLine(", B.niscrordine_dts ");
-					//queryCols.AppendLine(", B.annofrequenza_dts ");
-					//queryCols.AppendLine(", B.nomeuniversita_dts ");
-					//queryCols.AppendLine(", B.dettagliuniversita_dts ");
-					//queryCols.AppendLine(", B.Boolfields_dts ");
-					//queryCols.AppendLine(", B.Textfield1_dts ");
-					//queryCols.AppendLine(", B.Interventieseguiti_dts ");
-					//queryCols.AppendLine(", B.locordine_dts ");
+
+                //StringBuilder queryCols = new StringBuilder();
+                //queryCols.AppendLine("A.ID ");
+                //queryCols.AppendLine(", A.Id_dts_collegato ");
+                //queryCols.AppendLine(", A.CodiceNazione ");
+                //queryCols.AppendLine(", A.CodiceREGIONE ");
+                //queryCols.AppendLine(", A.CodicePROVINCIA ");
+                //queryCols.AppendLine(", A.CodiceCOMUNE ");
+                //queryCols.AppendLine(", A.CodiceTIPOLOGIA ");
+                //queryCols.AppendLine(", A.WEBSITE ");
+                //queryCols.AppendLine(", A.EMAIL ");
+                //queryCols.AppendLine(", A.TELEFONO ");
+                //queryCols.AppendLine(", A.FAX ");
+                //queryCols.AppendLine(", A.INDIRIZZO ");
+                //queryCols.AppendLine(", A.DENOMINAZIONEGB ");
+                //queryCols.AppendLine(", A.DENOMINAZIONEI ");
+                //queryCols.AppendLine(", A.DESCRIZIONEI ");
+                //queryCols.AppendLine(", A.DESCRIZIONEGB ");
+                //queryCols.AppendLine(", A.DATITECNICII ");
+                //queryCols.AppendLine(", A.DATITECNICIGB ");
+                //queryCols.AppendLine(", A.FotoSchema ");
+                //queryCols.AppendLine(", A.FotoValori ");
+                //queryCols.AppendLine(", A.Datainserimento ");
+                //queryCols.AppendLine(", A.CodiceProdotto ");
+                //queryCols.AppendLine(", A.CodiceCategoria ");
+                //queryCols.AppendLine(", A.CodiceCategoria2Liv ");
+                //queryCols.AppendLine(", A.Prezzo ");
+                //queryCols.AppendLine(", A.PrezzoListino ");
+                //queryCols.AppendLine(", A.Vetrina ");
+                //queryCols.AppendLine(", A.AbilitaContatto ");
+                //queryCols.AppendLine(", A.linkVideo ");
+                //queryCols.AppendLine(", A.Campo1I ");
+                //queryCols.AppendLine(", A.Campo2I ");
+                //queryCols.AppendLine(", A.Campo1GB ");
+                //queryCols.AppendLine(", A.Campo2GB ");
+                //queryCols.AppendLine(", A.Id_collegato ");
+                //queryCols.AppendLine(", A.Caratteristica1 ");
+                //queryCols.AppendLine(", A.Caratteristica2 ");
+                //queryCols.AppendLine(", A.Anno ");
+                //queryCols.AppendLine(", A.Archiviato ");
+                //queryCols.AppendLine(", A.Caratteristica3 ");
+                //queryCols.AppendLine(", A.Caratteristica4 ");
+                //queryCols.AppendLine(", A.Caratteristica5 ");
+                //queryCols.AppendLine(", A.Caratteristica6 ");
+                //queryCols.AppendLine(", A.Autore ");
+                //queryCols.AppendLine(", A.XmlValue ");
+                //queryCols.AppendLine(", A.Data1 ");
+                //queryCols.AppendLine(", A.DENOMINAZIONERU ");
+                //queryCols.AppendLine(", A.DESCRIZIONERU ");
+                //queryCols.AppendLine(", A.DATITECNICIRU ");
+                //queryCols.AppendLine(", A.Campo1RU ");
+                //queryCols.AppendLine(", A.Campo2RU ");
+                //queryCols.AppendLine(", A.Promozione ");
+                //queryCols.AppendLine(", A.Qta_vendita ");
+                //queryCols.AppendLine(", B.ID_DTS ");
+                //queryCols.AppendLine(", B.pivacf_dts ");
+                //queryCols.AppendLine(", B.nome_dts ");
+                //queryCols.AppendLine(", B.cognome_dts ");
+                //queryCols.AppendLine(", B.datanascita_dts ");
+                //queryCols.AppendLine(", B.sociopresentatore1_dts ");
+                //queryCols.AppendLine(", B.sociopresentatore2_dts ");
+                //queryCols.AppendLine(", B.telefonoprivato_dts ");
+                //queryCols.AppendLine(", B.annolaurea_dts ");
+                //queryCols.AppendLine(", B.annospecializzazione_dts ");
+                //queryCols.AppendLine(", B.altrespecializzazioni_dts ");
+                //queryCols.AppendLine(", B.socioSicpre_dts ");
+                //queryCols.AppendLine(", B.socioIsaps_dts ");
+                //queryCols.AppendLine(", B.socioaltraassociazione_dts ");
+                //queryCols.AppendLine(", B.trattamenticollegati_dts ");
+                //queryCols.AppendLine(", B.accettazioneStatuto_dts ");
+                //queryCols.AppendLine(", B.certificazione_dts ");
+                //queryCols.AppendLine(", B.emailriservata_dts ");
+                //queryCols.AppendLine(", B.CodiceNAZIONE1_dts ");
+                //queryCols.AppendLine(", B.CodiceREGIONE1_dts ");
+                //queryCols.AppendLine(", B.CodicePROVINCIA1_dts ");
+                //queryCols.AppendLine(", B.CodiceCOMUNE1_dts ");
+                //queryCols.AppendLine(", B.CodiceNAZIONE2_dts ");
+                //queryCols.AppendLine(", B.CodiceREGIONE2_dts ");
+                //queryCols.AppendLine(", B.CodicePROVINCIA2_dts ");
+                //queryCols.AppendLine(", B.CodiceCOMUNE2_dts ");
+                //queryCols.AppendLine(", B.CodiceNAZIONE3_dts ");
+                //queryCols.AppendLine(", B.CodiceREGIONE3_dts ");
+                //queryCols.AppendLine(", B.CodicePROVINCIA3_dts ");
+                //queryCols.AppendLine(", B.CodiceCOMUNE3_dts ");
+                //queryCols.AppendLine(", B.latitudine1_dts ");
+                //queryCols.AppendLine(", B.longitudine1_dts ");
+                //queryCols.AppendLine(", B.latitudine2_dts ");
+                //queryCols.AppendLine(", B.longitudine2_dts ");
+                //queryCols.AppendLine(", B.latitudine3_dts ");
+                //queryCols.AppendLine(", B.longitudine3_dts ");
+                //queryCols.AppendLine(", B.bloccoaccesso_dts ");
+                //queryCols.AppendLine(", B.via1_dts ");
+                //queryCols.AppendLine(", B.cap1_dts ");
+                //queryCols.AppendLine(", B.nomeposizione1_dts ");
+                //queryCols.AppendLine(", B.telefono1_dts ");
+                //queryCols.AppendLine(", B.via2_dts ");
+                //queryCols.AppendLine(", B.cap2_dts ");
+                //queryCols.AppendLine(", B.nomeposizione2_dts ");
+                //queryCols.AppendLine(", B.telefono2_dts ");
+                //queryCols.AppendLine(", B.via3_dts ");
+                //queryCols.AppendLine(", B.cap3_dts ");
+                //queryCols.AppendLine(", B.nomeposizione3_dts ");
+                //queryCols.AppendLine(", B.telefono3_dts ");
+                //queryCols.AppendLine(", B.pagamenti_dts ");
+                //queryCols.AppendLine(", B.ricfatt_dts ");
+                //queryCols.AppendLine(", B.indirizzofatt_dts ");
+                //queryCols.AppendLine(", B.noteriservate_dts ");
+                //queryCols.AppendLine(", B.niscrordine_dts ");
+                //queryCols.AppendLine(", B.annofrequenza_dts ");
+                //queryCols.AppendLine(", B.nomeuniversita_dts ");
+                //queryCols.AppendLine(", B.dettagliuniversita_dts ");
+                //queryCols.AppendLine(", B.Boolfields_dts ");
+                //queryCols.AppendLine(", B.Textfield1_dts ");
+                //queryCols.AppendLine(", B.Interventieseguiti_dts ");
+                //queryCols.AppendLine(", B.locordine_dts ");
 
 
 
-					 string query = "";
+                string query = "";
+                string queryfilter = "";
 
-				//	query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
-				query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+                //	query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
+                query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
 
-				
-					//Inseriamo il codice di join per la pabella dettagli
-					query += "";
 
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; }))
@@ -403,23 +401,23 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter promozione = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; });
 
-						_parUsed.Add(promozione);
-						if (!query.ToLower().Contains("where"))
-							query += " WHERE Promozione = @promozioni ";
-						else
-							query += " AND  Promozione = @promozioni   ";
+                    _parUsed.Add(promozione);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE Promozione = @promozioni ";
+                    else
+                        query += " AND  Promozione = @promozioni   ";
 
-					//_parUsed.Add(promozione);
-					//if (!query.ToLower().Contains("where"))
-					//	query += " WHERE Promozione = " + ((bool)promozione.Value ? "1" : "0") + " ";
-					//else
-					//	query += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
+                    //_parUsed.Add(promozione);
+                    //if (!query.ToLower().Contains("where"))
+                    //	query += " WHERE Promozione = " + ((bool)promozione.Value ? "1" : "0") + " ";
+                    //else
+                    //	query += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
 
-				}
+                }
 
 
 
-				if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; }))
                 {
                     SQLiteParameter Caratteristica1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
                     _parUsed.Add(Caratteristica1);
@@ -577,9 +575,9 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter annofiltro = new SQLiteParameter(_annofiltro.ParameterName, _annofiltro.Value);
                     _parUsed.Add(_annofiltro);
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (((Year([DataInserimento]))=@annofiltro))  ";
+                        query += " WHERE ((strftime('%Y',[DataInserimento])=@annofiltro))  ";
                     else
-                        query += " AND  (((Year([DataInserimento]))=@annofiltro))    ";
+                        query += " AND  ((strftime('%Y',[DataInserimento])=@annofiltro))    ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
                 {
@@ -587,9 +585,9 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter mesefiltro = new SQLiteParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
                     _parUsed.Add(mesefiltro);
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (((Month([DataInserimento]))=@mesefiltro))  ";
+                        query += " WHERE ((((strftime('%m',[DataInserimento])=@annofiltro)) =@mesefiltro))  ";
                     else
-                        query += " AND  (((Month([DataInserimento]))=@mesefiltro))    ";
+                        query += " AND  ((((strftime('%m',[DataInserimento])=@annofiltro))=@mesefiltro))    ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
@@ -598,9 +596,9 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter giornofiltro = new SQLiteParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
                     _parUsed.Add(giornofiltro);
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (((Day([DataInserimento]))=@giornofiltro))  ";
+                        query += " WHERE ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))  ";
                     else
-                        query += " AND  (((Day([DataInserimento]))=@giornofiltro))    ";
+                        query += " AND  ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))    ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
                 {
@@ -643,32 +641,30 @@ namespace WelcomeLibrary.DAL
                 }
 
 
-				if (campoordinamento == "")
+                if (campoordinamento == "")
                     query += "  order BY DataInserimento Desc, Id Desc  ";
                 else
-                    query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+                    query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
+
+                if (!string.IsNullOrEmpty(maxrecord))
+                    query += " LIMIT " + maxrecord;
+
+                ///*****************************/
+                //query += " AND Promozione = @promozioni ";
+                ///*****************************/
+                //_parUsed = new List<SQLiteParameter>();
+                //SQLiteParameter promozione1 = new SQLiteParameter("@promozioni",  DbType.Int64);
+                //promozione1.Value = 1;
+                //_parUsed.Add(promozione1);
+
+                //_parUsed = new List<SQLiteParameter>();
+                //SQLiteParameter pp = new SQLiteParameter("@datainserimento", DbType.DateTime);
+                //pp.Value = new DateTime(2017,9,11);
+                //query = "SELECT A.*,B.* FROM TBL_ATTIVITA A left join TBL_ATTIVITA_DETAIL B on A.id_dts_collegato=B.Id_dts   WHERE datainserimento >= @datainserimento order BY DataInserimento Desc, Id Desc   LIMIT 12";
+                //_parUsed.Add(pp);
 
 
-
-				if (!string.IsNullOrEmpty(maxrecord))
-					query += " LIMIT " + maxrecord;
-
-				///*****************************/
-				//query += " AND Promozione = @promozioni ";
-				///*****************************/
-				//_parUsed = new List<SQLiteParameter>();
-				//SQLiteParameter promozione1 = new SQLiteParameter("@promozioni",  DbType.Int64);
-				//promozione1.Value = 1;
-				//_parUsed.Add(promozione1);
-
-				//_parUsed = new List<SQLiteParameter>();
-				//SQLiteParameter pp = new SQLiteParameter("@datainserimento", DbType.DateTime);
-				//pp.Value = new DateTime(2017,9,11);
-				//query = "SELECT A.*,B.* FROM TBL_ATTIVITA A left join TBL_ATTIVITA_DETAIL B on A.id_dts_collegato=B.Id_dts   WHERE datainserimento >= @datainserimento order BY DataInserimento Desc, Id Desc   LIMIT 12";
-				//_parUsed.Add(pp);
-
-
-				SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -978,10 +974,7 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "";
 
-                if (string.IsNullOrEmpty(maxofferte))
-                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where Id_collegato=@Id_collegato ";
-                else
-                    query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where Id_collegato=@Id_collegato  ";
+                query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where Id_collegato=@Id_collegato ";
 
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -1009,9 +1002,9 @@ namespace WelcomeLibrary.DAL
                 if (!includiarchiviati)
                 {
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (Archiviato = false)  ";
+                        query += " WHERE (Archiviato = 0)  ";
                     else
-                        query += " AND  (Archiviato = false)    ";
+                        query += " AND  (Archiviato = 0)    ";
                 }
 
                 if (randomize)
@@ -1023,8 +1016,11 @@ namespace WelcomeLibrary.DAL
                     if (campoordinamento == "")
                         query += "  order BY DataInserimento Desc, Id Desc  ";
                     else
-                        query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+                        query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
+
+                if (string.IsNullOrEmpty(maxofferte))
+                    query = " limit " + maxofferte;
 
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
@@ -1338,19 +1334,15 @@ namespace WelcomeLibrary.DAL
 
                 if (!codicetipologia.Contains(","))
                 {
-                    if (string.IsNullOrEmpty(maxofferte))
-                        query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where CodiceTIPOLOGIA=@CodiceTIPOLOGIA ";
-                    else
-                        query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceTIPOLOGIA=@CodiceTIPOLOGIA  ";
+                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where CodiceTIPOLOGIA=@CodiceTIPOLOGIA ";
+
                     SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", codicetipologia);//OleDbType.VarChar
                     parColl.Add(p1);
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(maxofferte))
-                        query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
-                    else
-                        query = "SELECT  TOP " + maxofferte + " A.*,B.* FROM " + Tblarchivio + "    A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts   ";
+
+                    query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
 
 
 
@@ -1394,9 +1386,9 @@ namespace WelcomeLibrary.DAL
                 if (!includiarchiviati)
                 {
                     if (!query.ToLower().Contains("where"))
-                        query += " WHERE (Archiviato = false)  ";
+                        query += " WHERE (Archiviato = 0)  ";
                     else
-                        query += " AND  (Archiviato = false)    ";
+                        query += " AND  (Archiviato = 0)    ";
                 }
 
                 if (filtradisponibili)
@@ -1417,8 +1409,11 @@ namespace WelcomeLibrary.DAL
                     if (campoordinamento == "")
                         query += "  order BY DataInserimento Desc, Id Desc  ";
                     else
-                        query += "  order BY " + campoordinamento + " Desc, Id Desc ";
+                        query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
+
+                if (string.IsNullOrEmpty(maxofferte))
+                    query = " limit " + maxofferte;
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -2657,7 +2652,7 @@ namespace WelcomeLibrary.DAL
                     else
                         query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
                 }
-                query += " order BY codiceCOMUNE ";
+                query += " order BY COLLATE NOCASE codiceCOMUNE ";
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
@@ -2706,11 +2701,11 @@ namespace WelcomeLibrary.DAL
                 //parColl.Add(p1);
                 if (string.IsNullOrEmpty(filtrotipologie))
                 {
-                    query = "SELECT Month([Datainserimento]) AS mese,Year([Datainserimento]) AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
+                    query = "SELECT strftime('%m',[Datainserimento]) AS mese, strftime('%Y',[Datainserimento])  AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
                 }
                 else
                 {
-                    query = "SELECT Month([Datainserimento]) AS mese,Year([Datainserimento]) AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
+                    query = "SELECT  strftime('%m',[Datainserimento]) AS mese, strftime('%Y',[Datainserimento])  AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
 
 
                     string[] codici = filtrotipologie.Split(',');
@@ -2743,7 +2738,7 @@ namespace WelcomeLibrary.DAL
                 }
 
                 //    query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
-                query += " GROUP BY Year([Datainserimento]), Month([Datainserimento]) order BY Year([Datainserimento]) DESC, Month([Datainserimento]) DESC; ";
+                query += " GROUP BY  strftime('%Y',[Datainserimento]),strftime('%m',[Datainserimento]) order BY strftime('%Y',[Datainserimento]) COLLATE NOCASE DESC, strftime('%m',[Datainserimento]) COLLATE NOCASE DESC; ";
 
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
@@ -2803,7 +2798,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT * FROM " + _tblarchivio + " where CodiceCategoria like @CodiceCategoria and archiviato='false' order BY DataInserimento Desc";
+                string query = "SELECT * FROM " + _tblarchivio + " where CodiceCategoria like @CodiceCategoria and archiviato=0 order BY DataInserimento Desc";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceCategoria", CodiceCategoria);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -2965,7 +2960,7 @@ namespace WelcomeLibrary.DAL
             Dictionary<string, long> _sprodotti = new Dictionary<string, long>();
             try
             {
-                string query = "SELECT CodiceCategoria,CodiceCategoria2Liv,count(CodiceCategoria2Liv) as totsottoprodotti FROM " + _tblarchivio + " WHERE   archiviato='false' and CodiceTIPOLOGIA = @CodiceTIPOLOGIA group by CodiceCategoria,CodiceCategoria2Liv";
+                string query = "SELECT CodiceCategoria,CodiceCategoria2Liv,count(CodiceCategoria2Liv) as totsottoprodotti FROM " + _tblarchivio + " WHERE   archiviato=0 and CodiceTIPOLOGIA = @CodiceTIPOLOGIA group by CodiceCategoria,CodiceCategoria2Liv";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceTIPOLOGIA", CodiceTipologia);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -3416,10 +3411,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p16);
             SQLiteParameter p17 = new SQLiteParameter("@WEBSITE", item.Website);
             parColl.Add(p17);
-            SQLiteParameter p18 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p18 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow(item.DataInserimento));
             //p18.OleDbType = OleDbType.Date;
             parColl.Add(p18);
-            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
+            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow(item.Data1));
             parColl.Add(pdata1);
 
             SQLiteParameter p19 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);
@@ -3556,7 +3551,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter CodicePROVINCIA3_dts = new SQLiteParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
+            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow(item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
             SQLiteParameter CodiceREGIONE1_dts = new SQLiteParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
@@ -3730,10 +3725,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p13);
             SQLiteParameter p14 = new SQLiteParameter("@WEBSITE", item.Website);
             parColl.Add(p14);
-            SQLiteParameter pdata = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter pdata = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow(item.DataInserimento));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata);
-            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow( item.Data1));
+            SQLiteParameter pdata1 = new SQLiteParameter("@data1", dbDataAccess.CorrectDatenow(item.Data1));
             //pdata.DbType = System.Data.DbType.DateTime;
             parColl.Add(pdata1);
 
@@ -3871,7 +3866,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter CodicePROVINCIA3_dts = new SQLiteParameter("@CodicePROVINCIA3_dts", item.CodicePROVINCIA3_dts);
             parColl.Add(CodicePROVINCIA3_dts);
 
-            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow( item.Datanascita_dts));
+            SQLiteParameter Datanascita_dts = new SQLiteParameter("@Datanascita_dts", dbDataAccess.CorrectDatenow(item.Datanascita_dts));
             parColl.Add(Datanascita_dts);
 
             SQLiteParameter CodiceREGIONE1_dts = new SQLiteParameter("@CodiceREGIONE1_dts", item.CodiceREGIONE1_dts);
@@ -4145,7 +4140,7 @@ namespace WelcomeLibrary.DAL
                 //    else
                 //        query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
                 //}
-                query += " order BY " + Campocaratteristica;
+                query += " order BY " + Campocaratteristica + " COLLATE NOCASE asc ";
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
@@ -4194,7 +4189,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT TOP 1 * FROM dbo_TBLRIF_PRODOTTO order BY CodiceProdotto Desc";
+                string query = "SELECT * FROM dbo_TBLRIF_PRODOTTO order BY CodiceProdotto COLLATE NOCASE Desc limit 1";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
@@ -4305,7 +4300,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT TOP 1 * FROM dbo_TBLRIF_SOTTOPRODOTTO order BY CodiceSottoProdotto Desc";
+                string query = "SELECT * FROM dbo_TBLRIF_SOTTOPRODOTTO order BY CodiceSottoProdotto COLLATE NOCASE Desc limit 1";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
                 using (reader)
@@ -4578,7 +4573,6 @@ namespace WelcomeLibrary.DAL
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "" || string.IsNullOrEmpty(item.CodiceProdotto) || string.IsNullOrEmpty(item.CodiceSProdotto)) return;
-
 
             if (controllapresenza)
             {

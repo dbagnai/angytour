@@ -115,7 +115,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT TOP " + maxrecord + " A.*,B.* FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc";
+                string query = "SELECT  A.ID as A_ID,A.ID_ATTIVITA,A.CodiceContenuto,A.DataInserimento as A_DataInserimento,A.DescrizioneI as A_DescrizioneI,A.TitoloI,A.DescrizioneGB as A_DescrizioneGB,A.TitoloGB,A.customtitleI,A.customdescI,A.customtitleGB,A.customdescGB,A.customtitleRU,A.customdescRU,A.DescrizioneRU as A_DescrizioneRU,A.TitoloRU,A.FotoSchema as  A_FotoSchema,A.FotoValori as A_FotoValori,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento as B_DataInserimento,B.DescrizioneI as B_DescrizioneI,B.DENOMINAZIONEI,B.CodiceCOMUNE,B.CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.DATITECNICII,B.DENOMINAZIONEGB,B.DescrizioneGB as B_DescrizioneGB,B.DATITECNICIGB,B.DescrizioneRU as B_DescrizioneRU,B.DENOMINAZIONERU,B.DATITECNICIRU,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo,B.FotoSchema as B_FotoSchema,B.FotoValori as B_FotoValori FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc limit " + maxrecord;
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
@@ -130,7 +130,7 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Contenuti();
-                        item.Id = reader.GetInt64(reader.GetOrdinal("A.ID"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("A_ID"));
 
                         long _i = 0;
                         if (!(reader["ID_ATTIVITA"]).Equals(DBNull.Value))
@@ -140,10 +140,10 @@ namespace WelcomeLibrary.DAL
                         if (caricaofferteassociate && _i != 0)
                         {
                             Offerte offerta = new Offerte();
-                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B.ID"));
+                            offerta.Id = reader.GetInt64(reader.GetOrdinal("B_ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
-                            offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("B.DataInserimento"));
-                            offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("B.DescrizioneI"));
+                            offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("B_DataInserimento"));
+                            offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("B_DescrizioneI"));
                             offerta.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
                                 offerta.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
@@ -164,13 +164,13 @@ namespace WelcomeLibrary.DAL
 
 
                             offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
-                            offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("B.DescrizioneGB"));
+                            offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("B_DescrizioneGB"));
                             if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
                                 offerta.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
 
 
-                            if (!reader["B.DescrizioneRU"].Equals(DBNull.Value))
-                                offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("B.DescrizioneRU"));
+                            if (!reader["B_DescrizioneRU"].Equals(DBNull.Value))
+                                offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("B_DescrizioneRU"));
                             if (!reader["DENOMINAZIONERU"].Equals(DBNull.Value))
                                 offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
                             if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
@@ -188,12 +188,12 @@ namespace WelcomeLibrary.DAL
                                 offerta.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
                             if (!reader["Prezzo"].Equals(DBNull.Value))
                                 offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
-                            if (!(reader["B.FotoSchema"]).Equals(DBNull.Value))
-                                offerta.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("B.FotoSchema"));
+                            if (!(reader["B_FotoSchema"]).Equals(DBNull.Value))
+                                offerta.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("B_FotoSchema"));
                             else
                                 offerta.FotoCollection_M.Schema = "";
-                            if (!(reader["B.FotoValori"]).Equals(DBNull.Value))
-                                offerta.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("B.FotoValori"));
+                            if (!(reader["B_FotoValori"]).Equals(DBNull.Value))
+                                offerta.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("B_FotoValori"));
                             else
                                 offerta.FotoCollection_M.Valori = "";
                             //Creo la lista delle foto
@@ -203,10 +203,10 @@ namespace WelcomeLibrary.DAL
 
                         item.CodiceContenuto = reader.GetString(reader.GetOrdinal("CodiceContenuto"));
 
-                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("A.DataInserimento"));
-                        item.DescrizioneI = reader.GetString(reader.GetOrdinal("A.DescrizioneI"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("A_DataInserimento"));
+                        item.DescrizioneI = reader.GetString(reader.GetOrdinal("A_DescrizioneI"));
                         item.TitoloI = reader.GetString(reader.GetOrdinal("TitoloI"));
-                        item.DescrizioneGB = reader.GetString(reader.GetOrdinal("A.DescrizioneGB"));
+                        item.DescrizioneGB = reader.GetString(reader.GetOrdinal("A_DescrizioneGB"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
 
                         if (!(reader["customtitleI"]).Equals(DBNull.Value))
@@ -223,17 +223,17 @@ namespace WelcomeLibrary.DAL
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
 
 
-                        if (!(reader["A.DescrizioneRU"]).Equals(DBNull.Value))
-                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("A.DescrizioneRU"));
+                        if (!(reader["A_DescrizioneRU"]).Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("A_DescrizioneRU"));
                         if (!(reader["TitoloRU"]).Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
 
-                        if (!(reader["A.FotoSchema"]).Equals(DBNull.Value))
-                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("A.FotoSchema"));
+                        if (!(reader["A_FotoSchema"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("A_FotoSchema"));
                         else
                             item.FotoCollection_M.Schema = "";
-                        if (!(reader["A.FotoValori"]).Equals(DBNull.Value))
-                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("A.FotoValori"));
+                        if (!(reader["A_FotoValori"]).Equals(DBNull.Value))
+                            item.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("A_FotoValori"));
                         else
                             item.FotoCollection_M.Valori = "";
                         //Da completare creando la lista delle foto col percorso corretto per

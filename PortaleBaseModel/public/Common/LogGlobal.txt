@@ -2501,3 +2501,153 @@ Nome parametro: startIndex 16/09/2017 18:50:02Terminato Aggiornamento  16/09/201
 <Messaggio> Application start : 20/12/2017 18.56.33</Messaggio>
  <Data>20/12/2017 18.56.35</Data>
 <Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 12:24:53</Data>
+<Messaggio> Application start : 22/01/2018 12:24:51</Messaggio>
+ <Data>22/01/2018 12:24:53</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 12:39:37</Data>
+<Messaggio> Application start : 22/01/2018 12:39:36</Messaggio>
+ <Data>22/01/2018 12:39:37</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneContenuti.aspx?CodiceContenuto=con001000 Global init AbsolutePath : /AreaContenuti/GestioneContenuti.aspx Global init ApplicationPath : / Global init Query : ?CodiceContenuto=con001000 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 12:41:13</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 12:41:13</Messaggio>
+ <Data>22/01/2018 12:41:13</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 12:41:13Terminato Aggiornamento  22/01/2018 12:41:13</Messaggio>
+ <Data>22/01/2018 13:13:10</Data>
+<Messaggio> Application start : 22/01/2018 13:13:09</Messaggio>
+ <Data>22/01/2018 13:13:10</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 13:14:43</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:14:43</Messaggio>
+ <Data>22/01/2018 13:14:43</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:14:43Terminato Aggiornamento  22/01/2018 13:14:43</Messaggio>
+ <Data>22/01/2018 13:15:09</Data>
+<Messaggio> Application start : 22/01/2018 13:15:07</Messaggio>
+ <Data>22/01/2018 13:15:09</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 13:16:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:16:42</Messaggio>
+ <Data>22/01/2018 13:16:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:16:42Terminato Aggiornamento  22/01/2018 13:16:42</Messaggio>
+ <Data>22/01/2018 13:23:35</Data>
+<Messaggio> Application start : 22/01/2018 13:23:34</Messaggio>
+ <Data>22/01/2018 13:23:35</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 13:25:08</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:25:08</Messaggio>
+ <Data>22/01/2018 13:25:08</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:25:08Terminato Aggiornamento  22/01/2018 13:25:08</Messaggio>
+ <Data>22/01/2018 13:27:06</Data>
+<Messaggio> Application start : 22/01/2018 13:27:05</Messaggio>
+ <Data>22/01/2018 13:27:06</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 13:28:39</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:28:39</Messaggio>
+ <Data>22/01/2018 13:28:39</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 13:28:39Terminato Aggiornamento  22/01/2018 13:28:39</Messaggio>
+ <Data>22/01/2018 16:11:17</Data>
+<Messaggio> Application start : 22/01/2018 16:11:14</Messaggio>
+ <Data>22/01/2018 16:11:17</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 16:12:56</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 16:12:56</Messaggio>
+ <Data>22/01/2018 16:12:56</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 16:12:56Terminato Aggiornamento  22/01/2018 16:12:56</Messaggio>
+ <Data>22/01/2018 16:20:03</Data>
+<Messaggio> Application start : 22/01/2018 16:20:01</Messaggio>
+ <Data>22/01/2018 16:20:03</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 16:21:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 16:21:42</Messaggio>
+ <Data>22/01/2018 16:21:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 16:21:42Terminato Aggiornamento  22/01/2018 16:21:42</Messaggio>
+ <Data>22/01/2018 17:07:06</Data>
+<Messaggio> Application start : 22/01/2018 17:07:04</Messaggio>
+ <Data>22/01/2018 17:07:06</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:08:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:08:42</Messaggio>
+ <Data>22/01/2018 17:08:42</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:08:42Terminato Aggiornamento  22/01/2018 17:08:42</Messaggio>
+ <Data>22/01/2018 17:12:39</Data>
+<Messaggio> Application start : 22/01/2018 17:12:38</Messaggio>
+ <Data>22/01/2018 17:12:39</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:13:07</Data>
+<Messaggio> Application start : 22/01/2018 17:13:05</Messaggio>
+ <Data>22/01/2018 17:13:07</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:14:46</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:14:46</Messaggio>
+ <Data>22/01/2018 17:14:46</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:14:46Terminato Aggiornamento  22/01/2018 17:14:46</Messaggio>
+ <Data>22/01/2018 17:19:26</Data>
+<Messaggio> Application start : 22/01/2018 17:19:24</Messaggio>
+ <Data>22/01/2018 17:19:26</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:21:03</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:21:03</Messaggio>
+ <Data>22/01/2018 17:21:03</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:21:03Terminato Aggiornamento  22/01/2018 17:21:03</Messaggio>
+ <Data>22/01/2018 17:30:16</Data>
+<Messaggio> Application start : 22/01/2018 17:30:14</Messaggio>
+ <Data>22/01/2018 17:30:16</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:31:51</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:31:51</Messaggio>
+ <Data>22/01/2018 17:31:51</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:31:51Terminato Aggiornamento  22/01/2018 17:31:51</Messaggio>
+ <Data>22/01/2018 17:34:26</Data>
+<Messaggio> Application start : 22/01/2018 17:34:24</Messaggio>
+ <Data>22/01/2018 17:34:26</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:36:06</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:36:06</Messaggio>
+ <Data>22/01/2018 17:36:06</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:36:06Terminato Aggiornamento  22/01/2018 17:36:06</Messaggio>
+ <Data>22/01/2018 17:40:21</Data>
+<Messaggio> Application start : 22/01/2018 17:40:19</Messaggio>
+ <Data>22/01/2018 17:40:21</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:41:25</Data>
+<Messaggio> Application start : 22/01/2018 17:41:22</Messaggio>
+ <Data>22/01/2018 17:41:25</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 17:43:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:43:12</Messaggio>
+ <Data>22/01/2018 17:43:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 17:43:12Terminato Aggiornamento  22/01/2018 17:43:12</Messaggio>
+ <Data>22/01/2018 18:08:31</Data>
+<Messaggio> Application start : 22/01/2018 18:08:29</Messaggio>
+ <Data>22/01/2018 18:08:31</Data>
+<Messaggio> Global init original path: http://localhost:52646/AreaContenuti/GestioneClienti.aspx Global init AbsolutePath : /AreaContenuti/GestioneClienti.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 18:10:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 18:10:12</Messaggio>
+ <Data>22/01/2018 18:10:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 18:10:12Terminato Aggiornamento  22/01/2018 18:10:12</Messaggio>
+ <Data>22/01/2018 18:42:24</Data>
+<Messaggio> Application start : 22/01/2018 18:42:24 Errore aggiornamento portale: Errore Caricamento Memoria Statica ParametroGenerico2 ricerca contenuti :SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:42:24 Errore aggiornamento portale: SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:42:24</Messaggio>
+ <Data>22/01/2018 18:42:24</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 18:49:36</Data>
+<Messaggio> Application start : 22/01/2018 18:47:07 Errore aggiornamento portale: Errore Caricamento Memoria Statica ParametroGenerico2 ricerca contenuti :SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:49:36 Errore aggiornamento portale: SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:49:36</Messaggio>
+ <Data>22/01/2018 18:49:36</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 18:55:17</Data>
+<Messaggio> Application start : 22/01/2018 18:53:29 Errore aggiornamento portale: Errore Caricamento Memoria Statica ParametroGenerico2 ricerca contenuti :SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:55:17 Errore aggiornamento portale: SQL logic error
+no such collation sequence: NOCASEa 22/01/2018 18:55:17</Messaggio>
+ <Data>22/01/2018 18:55:17</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 19:00:03</Data>
+<Messaggio> Application start : 22/01/2018 19:00:00</Messaggio>
+ <Data>22/01/2018 19:00:03</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>22/01/2018 19:02:05</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 19:02:05</Messaggio>
+ <Data>22/01/2018 19:02:05</Data>
+<Messaggio>httplocalhost52646Generato sitemap  22/01/2018 19:02:05Terminato Aggiornamento  22/01/2018 19:02:05</Messaggio>

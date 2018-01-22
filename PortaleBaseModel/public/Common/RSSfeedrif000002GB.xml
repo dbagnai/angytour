@@ -1,13 +1,24 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Albergo Ristorante Il Pozzetto News</title>
-    <link />
-    <description>Albergo Ristorante Il Pozzetto</description>
-    <lastBuildDate>Tue, 20 Jun 2017 16:37:40 GMT</lastBuildDate>
+    <title>Legatoria Toscana Blog</title>
+    <link>http://localhost:52646</link>
+    <description>Legatoria Toscana</description>
+    <lastBuildDate>Mon, 22 Jan 2018 19:01:04 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-06-20T16:37+02:00</sy:updateBase>
+    <sy:updateBase>2018-01-22T19:01+01:00</sy:updateBase>
     <language>it-IT</language>
+    <item>
+      <title>dfdf
+dffsd</title>
+      <link>http://localhost:52646/GB/blog/dfdf-dffsd-864</link>
+      <guid isPermaLink="true">http://localhost:52646/GB/blog/dfdf-dffsd-864</guid>
+      <pubDate>Wed, 20 Sep 2017 16:35:40 +02:00</pubDate>
+      <category>Blog</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="dfdf
+dffsd" width="350" /><p>dfdffd</p><p>Continua a leggere / Read More <a href="http://localhost:52646/GB/blog/dfdf-dffsd-864"><em>dfdf
+dffsd</em></a>.</p>]]></description>
+    </item>
   </channel>
 </rss>

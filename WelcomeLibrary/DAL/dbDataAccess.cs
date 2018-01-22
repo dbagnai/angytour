@@ -109,30 +109,24 @@ namespace WelcomeLibrary.DAL
 
 
 
-        public static T ExecuteScalar<T>(string Query, List<DbParameter> parameters, string Conn)
+        public static T ExecuteScalar<T>(string Query, List<SQLiteParameter> parameters, string Conn)
         {
             string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
-
-
             //UTILIZZO GENERICO DEL METODO
             //int totalRecords = ExecuteScalar<int>("SELECT COUNT(*) FROM authors", null);
-
             //using (SqlConnection conn = new SqlConnection(ConnectionString))
-            using (SqlConnection conn = new SqlConnection(connessione))
+            using (SQLiteConnection conn = new SQLiteConnection(connessione))
             {
                 conn.Open();
 
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SQLiteCommand command = new SQLiteCommand(Query, conn))
                 {
                     command.Parameters.Clear();
-
                     // controllo che siano passati parametri
                     if (parameters != null && parameters.Count > 0)
                         for (int i = 0; i < parameters.Count; i++)
                             command.Parameters.Add(parameters[i]);
-
                     T ritorno = (T)command.ExecuteScalar();
-
                     conn.Close();
                     return ritorno;
                 }
@@ -237,7 +231,7 @@ namespace WelcomeLibrary.DAL
 
 			try
 			{
-				ExecuteScalar<int>("VACUUM;", null, Conn);
+				ExecuteScalar<long>("VACUUM;", null, Conn);
 				ret = "Compresso db correttamente";
 			}
 			catch { ret = "Errore compressione archivio DB"; }

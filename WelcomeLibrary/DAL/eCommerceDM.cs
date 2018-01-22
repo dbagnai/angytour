@@ -514,7 +514,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 //string query = "SELECT * FROM TBL_CARRELLO order BY CodiceOrdine Desc";
-                string query = "SELECT TOP 1 * FROM TBL_CARRELLO ORDER BY CodiceOrdine DESC,id desc";
+                string query = "SELECT FROM TBL_CARRELLO ORDER BY CodiceOrdine COLLATE NOCASE DESC,id DESC limit 1";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
 
@@ -656,7 +656,7 @@ namespace WelcomeLibrary.DAL
 
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
-            SQLiteParameter p1 = new SQLiteParameter("@dataoggi", dbDataAccess.CorrectDatenow( System.DateTime.Now));
+            SQLiteParameter p1 = new SQLiteParameter("@dataoggi", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p1.OleDbType = OleDbType.Date;
             parColl.Add(p1);
             //SQLiteParameter p2 = new SQLiteParameter("@SessionId", item.SessionId);
@@ -666,10 +666,8 @@ namespace WelcomeLibrary.DAL
 
             string query = "DELETE FROM TBL_CARRELLO ";
             string where = "";
-            if (string.IsNullOrWhiteSpace(where))
-				//query += " WHERE Data is not null and (Data+Validita) < @dataoggi and CodiceOrdine='' ";
-				//query += " WHERE Data is not null and DateDiff('d', @dataoggi, DateAdd('d', Validita, Data)) <= 0 and CodiceOrdine='' ";
-				query += " WHERE Data is not null and JulianDay(@dataoggi)- (JulianDay(Data) + Validita)<=0 and CodiceOrdine='' ";
+            if (string.IsNullOrWhiteSpace(where)) 
+				query += " WHERE Data is not null and (JulianDay(Data) + Validita) - JulianDay(@dataoggi) <=0 and CodiceOrdine='' ";
 			//JulianDay(@dataoggi) - (JulianDay(Data) + Validita)
 
 
@@ -940,10 +938,8 @@ namespace WelcomeLibrary.DAL
                 string query = "";
                 List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
 
-                if (string.IsNullOrEmpty(maxrecord))
-                    query = "SELECT * FROM TBL_CARRELLO_ORDINI  ";
-                else
-                    query = "SELECT  TOP " + maxrecord + " * FROM TBL_CARRELLO_ORDINI ";
+                   query = "SELECT * FROM TBL_CARRELLO_ORDINI  ";
+         
 
                 //if (caricacarrelloitems)
                 //    query += " left join TBL_CARRELLO B on Codiceordine=B.Codiceordine ";
@@ -1010,6 +1006,10 @@ namespace WelcomeLibrary.DAL
                 //SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 //parColl.Add(p1);
                 query += " order by Dataordine desc, Id desc ";
+
+                if (!string.IsNullOrEmpty(maxrecord))
+                    query = " limit  " + maxrecord + " ";
+
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)

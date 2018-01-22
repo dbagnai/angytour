@@ -63,7 +63,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         string idcliente = getidcliente(User.Identity.Name);
         if (!string.IsNullOrEmpty(idcliente))
         {
-          
+
             ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
 
         }
@@ -160,14 +160,23 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
 
         if (codicecliente == "")
-            cliColl = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _paramCliente, true);//Passando null -> prende tutti i clienti, inoltre baypasso il filtro validati
+            cliColl = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _paramCliente, true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);//Passando null -> prende tutti i clienti, inoltre baypasso il filtro validati
         else
         {
             cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicecliente);
             cliColl.Add(cli);
+            cliColl.Totrecs = 1;
         }
-        cliColl.Sort(new GenericComparer2<Cliente>("Cognome", System.ComponentModel.ListSortDirection.Ascending, "Nome", System.ComponentModel.ListSortDirection.Ascending));
-#if true
+        //cliColl.Sort(new GenericComparer2<Cliente>("Cognome", System.ComponentModel.ListSortDirection.Ascending, "Nome", System.ComponentModel.ListSortDirection.Ascending));
+
+      //  output.Text += "row returned : " + cliColl.Count +  " total row found:" + cliColl.Totrecs;
+
+        long nrecordfiltrati = cliColl.Totrecs;
+        PagerRisultati.TotalRecords = (long)cliColl.Totrecs; 
+        if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
+
+
+#if false
         //Selezionamo i risultati in base al numero di pagina e alla sua dimensione per la paginazione
         //Utilizzando la classe di paginazione
         WelcomeLibrary.UF.Pager<Cliente> _pager = new WelcomeLibrary.UF.Pager<Cliente>(cliColl);
@@ -175,8 +184,10 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         //if (nrecordfiltrati != 0)
         PagerRisultati.TotalRecords = nrecordfiltrati;
         if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
-#endif
         rptClienti.DataSource = _pager.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+
+#endif
+        rptClienti.DataSource = cliColl;
         rptClienti.DataBind();
         // updPanel1.Update();
     }

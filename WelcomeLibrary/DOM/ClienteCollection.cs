@@ -13,7 +13,11 @@ namespace WelcomeLibrary.DOM
             _ClienteCollection = new List<Cliente>();
         }
 
-          /// <summary>
+        private long _totrecs = 0;
+        public long Totrecs { get => _totrecs; set => _totrecs = value; }
+
+
+        /// <summary>
         /// Costruttore dell'oggetto a partire da un oggetto ClienteCollection
         /// </summary>
         /// <param name="list"></param>

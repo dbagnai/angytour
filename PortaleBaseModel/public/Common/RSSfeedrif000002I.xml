@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
     <title>Legatoria Toscana Blog</title>
     <link>http://localhost:52646</link>
     <description>Legatoria Toscana</description>
-    <lastBuildDate>Thu, 21 Sep 2017 17:16:34 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jan 2018 19:01:05 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-09-21T17:16+02:00</sy:updateBase>
+    <sy:updateBase>2018-01-22T19:01+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>News 2
-sottotitolo Cod: 864</title>
-      <link>http://localhost:52646/I/blog/news-2-sottotitolo-864</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/news-2-sottotitolo-864</guid>
+      <title>news 2v
+sottotitolov</title>
+      <link>http://localhost:52646/I/blog/news-2v-sottotitolov-864</link>
+      <guid isPermaLink="true">http://localhost:52646/I/blog/news-2v-sottotitolov-864</guid>
       <pubDate>Wed, 20 Sep 2017 16:35:40 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="News 2
-sottotitolo" width="350" /><p>Lorem prova ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-2-sottotitolo-864"><em>News 2
-sottotitolo</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="news 2v
+sottotitolov" width="350" /><p>Lorem prova ......v</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-2v-sottotitolov-864"><em>news 2v
+sottotitolov</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>News 1
-sottotitolo Cod: 863</title>
+      <title>news 1
+sottotitolo</title>
       <link>http://localhost:52646/I/blog/news-1-sottotitolo-863</link>
       <guid isPermaLink="true">http://localhost:52646/I/blog/news-1-sottotitolo-863</guid>
       <pubDate>Tue, 12 Sep 2017 16:42:26 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/863/a3.jpg" alt="News 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-1-sottotitolo-863"><em>News 1
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/863/a3.jpg" alt="news 1
+sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-1-sottotitolo-863"><em>news 1
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

@@ -1,296 +1,302 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:52646/I/blog/news-2-sottotitolo-864</loc>
-    <lastmod>2017-09-21</lastmod>
+    <loc>http://localhost:52646/I/catalogo/catalogo</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-13</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-libri-firma-131</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-libri-viaggi-132</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-libri-dei-vini-138</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-agende-139</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-libri-ricette-1310</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-diari-1311</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/scrittura-libri-paesaggio-1319</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-14</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-album-foto-143</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-book-fotografico-144</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-album-foto-battesimo-1412</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-album-foto-comunione-1413</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/fotografia-album-foto-matrimonio-1414</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/arte-15</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/cartellina-disegno-155</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/arte-blocco-disegno-156</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/musica-17</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/musica-pentagramma-1717</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/libri-musica-1718</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/catalogo/campionatura-20</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/blog</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/news-18</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/eventi-19</loc>
+    <lastmod>2018-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/news-2v-sottotitolov-864</loc>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/news-1-sottotitolo-863</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-piccolo-neoprene-20x20-862</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-20x20-861</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-medio-carta-moonrock-e-decorazione-25x20-860</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-piccolo-carta-moonrock-e-decorazione-20x20-859</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-grande-carta-bambu-e-decorazione-30x24-858</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-grande-tela-30x24-857</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-grande-tela-e-cuoio-30x24-856</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-grande-carta-bambu-e-cuoio-21x15-855</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-medio-carta-bambu-e-cuoio-17x12-854</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-piccolo-carta-bambu-e-cuoio-24x17-853</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-grande-carta-moonrock-e-decorazione-30x24-852</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/agenda-medioevalis-piccolo-neoprene-13x9-851</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/album-foto-xxl-carta-moonrock-e-decorazione-30x30-850</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/catalogo/libro-viaggi-tela-e-decorazione-24x17-849</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-ricette-tela-e-decorazione-24x17-848</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-ricette-carta-moonrock-24x17-846</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-vini-tela-e-decorazione-24x17-845</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-24x17-841</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-piccolo-tela-e-decorazione-24x17-843</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-grande-tela-30x21-847</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-30x21-842</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/libro-firma-grande-carta-moonrock-e-decorazione-30x21-844</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-mini-neoprene-8x6-840</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-mini-carta-moonrock-8x6-839</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-piccolo-neoprene-13x9-838</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-piccolo-carta-moonrock-13x9-837</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-piccolo-tela-13x9-831</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-piccolo-carta-moonrock-13x9-830</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-medio-neoprene-17x12-832</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/medioevalis-medio-carta-moonrock-17x12-835</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-medio-tela-17x12-834</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-medio-tela-e-bottone-17x12-833</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-medio-carta-moonrock-17x12-829</loc>
-    <lastmod>2017-09-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/catalogo/quaderno-grande-tela-e-cuoio-21x15-836</loc>
-    <lastmod>2017-09-21</lastmod>
+    <loc>http://localhost:52646/I/catalogo/quaderno-grandea-tela-e-cuoio-21x15a-836</loc>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/quaderno-grande-tela-21x15-828</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/quaderno-grande-carta-moonrock-21x15-825</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-e-cuoio-17x24-827</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-17x24-826</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/quaderno-orizzontale-carta-moonrock-17x24-824</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/libro-dei-segreti-tela-e-carta-stampata-24x17-823</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/catalogo/diario-del-neonato-tela-e-carta-stampata-24x17-822</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/gallerie/galleria-prova-723</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/artisti/artista-4-sottotitolo-711</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/artisti/artista-3-sottotitolo-710</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/artisti/artista-2-sottotitolo-709</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/artisti/artista-1-sottotitolo-708</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-685</loc>
-    <lastmod>2017-09-21</lastmod>
+    <lastmod>2018-01-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

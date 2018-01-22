@@ -22,8 +22,9 @@ namespace WelcomeLibrary.DAL
             Cliente item = new Cliente();
             if (connection == null || connection == "") return item;
             string query = "";
-            query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Email=@Email";
+            //query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Email=@Email";
 
+            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email=@Email";
 
             //if (parColl == null || parColl.Count < 2) return list;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -300,7 +301,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -391,7 +392,7 @@ namespace WelcomeLibrary.DAL
         public string CancellaClientiPerTipologia(string connessione, string id_tipi_clienti)
         {
             string idret = "";
-            long  idtipocliente = 0;
+            long idtipocliente = 0;
             if (!long.TryParse(id_tipi_clienti, out idtipocliente)) return idret;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
@@ -700,7 +701,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             try
             {
-                string query = "SELECT  G.*,C.*  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
+                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -712,9 +713,9 @@ namespace WelcomeLibrary.DAL
                     {
                         item = new Cliente();
 
-                        if (reader["C.ID_CLIENTE"].Equals(DBNull.Value)) continue;//salto i record per cui non trovo l'id del cliente!
+                        if (reader["C_ID_CLIENTE"].Equals(DBNull.Value)) continue;//salto i record per cui non trovo l'id del cliente!
 
-                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("C.ID_CLIENTE"));
+                        item.Id_cliente = reader.GetInt64(reader.GetOrdinal("C_ID_CLIENTE"));
 
                         if (!reader["ID_CARD"].Equals(DBNull.Value))
                             item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
@@ -977,7 +978,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="_paramCliente">Parametri di filtro email,validato,consenso1</param>
         /// <returns></returns>
-        public ClienteCollection CaricaClientiFiltrati(string connection, Cliente _paramCliente, bool bypassvalidazione = false)
+        public ClienteCollection CaricaClientiFiltrati(string connection, Cliente _paramCliente, bool bypassvalidazione = false, long page = 1, long pagesize = 0)
         {
             ClienteCollection list = new ClienteCollection();
             if (connection == null || connection == "") return list;
@@ -986,8 +987,12 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
-                query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email ";
+                //query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
+                //query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email ";
+
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard  FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD ";
+
+                string queryfilter = " WHERE Email like @Email ";
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
 
@@ -1002,7 +1007,7 @@ namespace WelcomeLibrary.DAL
                 {
                     if (!bypassvalidazione)
                     {
-                        query += " and Validato = @Validato and Consenso1 = @Consenso1 ";
+                        queryfilter += " and Validato = @Validato and Consenso1 = @Consenso1 ";
                         SQLiteParameter p2 = new SQLiteParameter("@Validato", _paramCliente.Validato); //OleDbType.VarChar
                         parColl.Add(p2);
                         SQLiteParameter p3 = new SQLiteParameter("@Consenso1", _paramCliente.Consenso1); //OleDbType.VarChar
@@ -1013,7 +1018,7 @@ namespace WelcomeLibrary.DAL
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
                         SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
                         parColl.Add(pcodsconto);
-                        query += " and Codicisconto like @Codicisconto ";
+                        queryfilter += " and Codicisconto like @Codicisconto ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(_paramCliente.id_tipi_clienti))
@@ -1021,26 +1026,26 @@ namespace WelcomeLibrary.DAL
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
                         SQLiteParameter ptipi = new SQLiteParameter("@id_tipi_clienti", _paramCliente.id_tipi_clienti); //OleDbType.VarChar
                         parColl.Add(ptipi);
-                        query += " and ID_tipi_clienti = @id_tipi_clienti ";
+                        queryfilter += " and ID_tipi_clienti = @id_tipi_clienti ";
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.CodiceNAZIONE))
                     {
                         SQLiteParameter pnazione = new SQLiteParameter("@codnaz", _paramCliente.CodiceNAZIONE); //OleDbType.VarChar
                         parColl.Add(pnazione);
-                        query += " and CodiceNAZIONE = @codnaz ";
+                        queryfilter += " and CodiceNAZIONE = @codnaz ";
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Lingua))
                     {
                         SQLiteParameter plingua = new SQLiteParameter("@lingua", _paramCliente.Lingua); //OleDbType.VarChar
                         parColl.Add(plingua);
-                        query += " and Lingua = @lingua ";
+                        queryfilter += " and Lingua = @lingua ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Sesso))
                     {
                         SQLiteParameter psesso = new SQLiteParameter("@Sesso", _paramCliente.Sesso); //OleDbType.VarChar
                         parColl.Add(psesso);
-                        query += " and Sesso = @Sesso ";
+                        queryfilter += " and Sesso = @Sesso ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Spare2)) //FIltro per età
@@ -1058,13 +1063,13 @@ namespace WelcomeLibrary.DAL
                             DateTime di = System.DateTime.Now.AddYears(-emax);
                             DateTime df = System.DateTime.Now.AddYears(-emin);
 
-                            SQLiteParameter datainizio = new SQLiteParameter("@Data_inizio", dbDataAccess.CorrectDatenow( di));
+                            SQLiteParameter datainizio = new SQLiteParameter("@Data_inizio", dbDataAccess.CorrectDatenow(di));
                             parColl.Add(datainizio);
 
-                            SQLiteParameter datafine = new SQLiteParameter("@Data_fine", dbDataAccess.CorrectDatenow( df));
+                            SQLiteParameter datafine = new SQLiteParameter("@Data_fine", dbDataAccess.CorrectDatenow(df));
                             parColl.Add(datafine);
 
-                            query += " AND   ( DataNascita >= @Data_inizio and  DataNascita <= @Data_fine )  ";
+                            queryfilter += " AND   ( DataNascita >= @Data_inizio and  DataNascita <= @Data_fine )  ";
                         }
                     }
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Spare1)) //Filtro giorno di nascita
@@ -1082,7 +1087,7 @@ namespace WelcomeLibrary.DAL
                             int.TryParse(anno, out annoa);
                             SQLiteParameter parannoa = new SQLiteParameter("@anno", annoa); //OleDbType.VarChar
                             parColl.Add(parannoa);
-                            query += " and (((Year([DataNascita]))=@anno)) ";
+                            queryfilter += " and (strftime('%Y',[DataNascita])=@anno)) ";
                         }
 
                         if (mese != "0")
@@ -1090,7 +1095,7 @@ namespace WelcomeLibrary.DAL
                             int.TryParse(mese, out mesea);
                             SQLiteParameter parmese = new SQLiteParameter("@mese", mesea); //OleDbType.VarChar
                             parColl.Add(parmese);
-                            query += " and (((Month([DataNascita]))=@mese)) ";
+                            queryfilter += " and (strftime('%m',[DataNascita])=@mese)) ";
                         }
 
                         if (giorno != "0")
@@ -1099,17 +1104,26 @@ namespace WelcomeLibrary.DAL
 
                             SQLiteParameter pargiorno = new SQLiteParameter("@giorno", giornoa); //OleDbType.VarChar
                             parColl.Add(pargiorno);
-                            query += " and (((Day([DataNascita]))=@giorno)) ";
+                            queryfilter += " and (strftime('%d',[DataNascita])=@giorno)) ";
                         }
 
 
                     }
 
                 }
+                query += queryfilter;
+
+                query += " order by Cognome COLLATE NOCASE asc,Nome COLLATE NOCASE asc ";
+                if (pagesize != 0)
+                {
+                    query += " limit " + (page - 1) * pagesize + "," + pagesize;
+                }
+
+                /*CALCOLO IL NUMERO DI RICGHE FILTRATE TOTALI*/
+                long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM TBL_CLIENTI " + queryfilter, parColl, connection);
+                list.Totrecs = totalrecords;
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
-
-
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -1119,8 +1133,6 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         item = new Cliente();
-
-
                         item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
                         item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
@@ -1351,14 +1363,14 @@ namespace WelcomeLibrary.DAL
 
             SQLiteParameter p14 = null;
             if (item.DataInvioValidazione != null)
-                p14 = new SQLiteParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow( item.DataInvioValidazione.Value));
+                p14 = new SQLiteParameter("@DataInvioValidazione", dbDataAccess.CorrectDatenow(item.DataInvioValidazione.Value));
             else
                 p14 = new SQLiteParameter("@DataInvioValidazione", System.DBNull.Value);
             //p14.DbType = System.Data.DbType.DateTime;
             parColl.Add(p14);
             SQLiteParameter p16;
             if (item.DataRicezioneValidazione != null)
-                p16 = new SQLiteParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow( item.DataRicezioneValidazione.Value));
+                p16 = new SQLiteParameter("@DataRicezioneValidazione", dbDataAccess.CorrectDatenow(item.DataRicezioneValidazione.Value));
             else
                 p16 = new SQLiteParameter("@DataRicezioneValidazione", System.DBNull.Value);
             //p16.DbType = System.Data.DbType.DateTime;
@@ -1419,7 +1431,7 @@ namespace WelcomeLibrary.DAL
             {
                 long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id_cliente == 0) item.Id_cliente = retID; // se era insert memorizzo l'id del cliente appena inserito
-
+              
             }
             catch (Exception error)
             {

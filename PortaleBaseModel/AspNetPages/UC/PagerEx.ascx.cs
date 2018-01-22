@@ -174,9 +174,9 @@ public partial class UC_PagerEx : System.Web.UI.UserControl
     //    pagerInnerTable.Rows[0].Cells.Insert(insertCellPosition, tableCell);
     //}
 
-    public int TotalRecords
+    public long TotalRecords
     {
-        get { return ViewState[this.ID + "totalRecords"] != null ? Convert.ToInt32(ViewState[this.ID + "totalRecords"].ToString()) : 0; }
+        get { return ViewState[this.ID + "totalRecords"] != null ? Convert.ToInt64(ViewState[this.ID + "totalRecords"].ToString()) : 0; }
         set { ViewState[this.ID + "totalRecords"] = value; }
     }
     public int PageSize
