@@ -2651,3 +2651,160 @@ no such collation sequence: NOCASEa 22/01/2018 18:55:17</Messaggio>
 <Messaggio>httplocalhost52646Generato sitemap  22/01/2018 19:02:05</Messaggio>
  <Data>22/01/2018 19:02:05</Data>
 <Messaggio>httplocalhost52646Generato sitemap  22/01/2018 19:02:05Terminato Aggiornamento  22/01/2018 19:02:05</Messaggio>
+ <Data>23/01/2018 09:29:40</Data>
+<Messaggio> Application start : 23/01/2018 09:29:26</Messaggio>
+ <Data>23/01/2018 09:29:40</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 09:31:30</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 09:31:30</Messaggio>
+ <Data>23/01/2018 09:31:30</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 09:31:30Terminato Aggiornamento  23/01/2018 09:31:30</Messaggio>
+ <Data>23/01/2018 12:55:35</Data>
+<Messaggio> Application start : 23/01/2018 12:55:32 Errore aggiornamento portale: Non è stato possibile caricare il file o l'assembly 'System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' o una delle relative dipendenze. La definizione di manifesto dell'assembly specificato non corrisponde al riferimento all'assembly. (Eccezione da HRESULT: 0x80131040) (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 118) 23/01/2018 12:55:35 Errore aggiornamento portale: Non è stato possibile caricare il file o l'assembly 'System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' o una delle relative dipendenze. La definizione di manifesto dell'assembly specificato non corrisponde al riferimento all'assembly. (Eccezione da HRESULT: 0x80131040) 23/01/2018 12:55:35</Messaggio>
+ <Data>23/01/2018 12:55:35</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:12:04</Data>
+<Messaggio> Application start : 23/01/2018 13:12:02 Errore aggiornamento portale: Non è stato possibile caricare il file o l'assembly 'System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' o una delle relative dipendenze. La definizione di manifesto dell'assembly specificato non corrisponde al riferimento all'assembly. (Eccezione da HRESULT: 0x80131040) (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 118) 23/01/2018 13:12:04 Errore aggiornamento portale: Non è stato possibile caricare il file o l'assembly 'System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' o una delle relative dipendenze. La definizione di manifesto dell'assembly specificato non corrisponde al riferimento all'assembly. (Eccezione da HRESULT: 0x80131040) 23/01/2018 13:12:04</Messaggio>
+ <Data>23/01/2018 13:12:04</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:17:18</Data>
+<Messaggio> Application start : 23/01/2018 13:17:15 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: hashAlgorithmType (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 118) 23/01/2018 13:17:18 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: hashAlgorithmType 23/01/2018 13:17:18</Messaggio>
+ <Data>23/01/2018 13:17:18</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:19:45</Data>
+<Messaggio> Application start : 23/01/2018 13:19:44 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: HashAlgorithmType (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 118) 23/01/2018 13:19:45 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: HashAlgorithmType 23/01/2018 13:19:45</Messaggio>
+ <Data>23/01/2018 13:19:45</Data>
+<Messaggio> Global init original path: http://localhost:52646/Login.aspx?Lingua=I Global init AbsolutePath : /Login.aspx Global init ApplicationPath : / Global init Query : ?Lingua=I Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:23:08</Data>
+<Messaggio> Application start : 23/01/2018 13:23:06 Errore aggiornamento portale: SQL logic error
+no such column: Email 23/01/2018 13:23:08</Messaggio>
+ <Data>23/01/2018 13:23:08</Data>
+<Messaggio> Global init original path: http://localhost:52646/Login.aspx?Lingua=I Global init AbsolutePath : /Login.aspx Global init ApplicationPath : / Global init Query : ?Lingua=I Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:26:08</Data>
+<Messaggio> Application start : 23/01/2018 13:26:03</Messaggio>
+ <Data>23/01/2018 13:26:08</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 13:28:05</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 13:28:05</Messaggio>
+ <Data>23/01/2018 13:28:05</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 13:28:05Terminato Aggiornamento  23/01/2018 13:28:05</Messaggio>
+ <Data>23/01/2018 15:22:53</Data>
+<Messaggio> Application start : 23/01/2018 15:22:51</Messaggio>
+ <Data>23/01/2018 15:22:53</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Default.aspx Global init AbsolutePath : /Admin/Default.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 15:24:55</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 15:24:55</Messaggio>
+ <Data>23/01/2018 15:24:55</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 15:24:55Terminato Aggiornamento  23/01/2018 15:24:55</Messaggio>
+ <Data>23/01/2018 15:33:07</Data>
+<Messaggio> Application start : 23/01/2018 15:33:04</Messaggio>
+ <Data>23/01/2018 15:33:07</Data>
+<Messaggio> Global init original path: http://localhost:52646/lib/hnd/HandlerDataCommon.ashx?q=emptysession&link=&_=1516717817132 Global init AbsolutePath : /lib/hnd/HandlerDataCommon.ashx Global init ApplicationPath : / Global init Query : ?q=emptysession&link=&_=1516717817132 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 15:34:57</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 15:34:57</Messaggio>
+ <Data>23/01/2018 15:34:57</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 15:34:57Terminato Aggiornamento  23/01/2018 15:34:57</Messaggio>
+ <Data>23/01/2018 15:35:54</Data>
+<Messaggio> Application start : 23/01/2018 15:35:53</Messaggio>
+ <Data>23/01/2018 15:35:54</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Default.aspx Global init AbsolutePath : /Admin/Default.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 15:37:26</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 15:37:26</Messaggio>
+ <Data>23/01/2018 15:37:26</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 15:37:26Terminato Aggiornamento  23/01/2018 15:37:26</Messaggio>
+ <Data>23/01/2018 15:37:33</Data>
+<Messaggio> Application start : 23/01/2018 15:37:30</Messaggio>
+ <Data>23/01/2018 15:37:33</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/default.aspx Global init AbsolutePath : /Admin/default.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 15:39:25</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 15:39:25</Messaggio>
+ <Data>23/01/2018 15:39:25</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 15:39:25Terminato Aggiornamento  23/01/2018 15:39:25</Messaggio>
+ <Data>23/01/2018 16:38:18</Data>
+<Messaggio> Application start : 23/01/2018 16:38:16</Messaggio>
+ <Data>23/01/2018 16:38:18</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Default.aspx Global init AbsolutePath : /Admin/Default.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 16:40:53</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 16:40:53</Messaggio>
+ <Data>23/01/2018 16:40:53</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 16:40:53Terminato Aggiornamento  23/01/2018 16:40:53</Messaggio>
+ <Data>23/01/2018 17:02:13</Data>
+<Messaggio> Application start : 23/01/2018 17:02:11 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: HashAlgorithmType (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 119) 23/01/2018 17:02:13 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: HashAlgorithmType 23/01/2018 17:02:13</Messaggio>
+ <Data>23/01/2018 17:02:13</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Profile.aspx Global init AbsolutePath : /Admin/Profile.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 17:03:47</Data>
+<Messaggio> Application start : 23/01/2018 17:03:19 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: hashAlgorithmType (C:\Documenti\Lavoro\WebMouse\Repo\_basesitetest\PortaleBaseModel\web.config line 119) 23/01/2018 17:03:47 Errore aggiornamento portale: SQLiteMembershipProvider configuration error: Unrecognized attribute: hashAlgorithmType 23/01/2018 17:03:47</Messaggio>
+ <Data>23/01/2018 17:03:47</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/CreateUser.aspx Global init AbsolutePath : /Admin/CreateUser.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 17:27:19</Data>
+<Messaggio> Application start : 23/01/2018 17:25:57</Messaggio>
+ <Data>23/01/2018 17:27:19</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Profile.aspx Global init AbsolutePath : /Admin/Profile.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 17:28:58</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 17:28:58</Messaggio>
+ <Data>23/01/2018 17:28:58</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 17:28:58Terminato Aggiornamento  23/01/2018 17:28:58</Messaggio>
+ <Data>23/01/2018 18:00:55</Data>
+<Messaggio> Application start : 23/01/2018 18:00:50</Messaggio>
+ <Data>23/01/2018 18:00:55</Data>
+<Messaggio> Global init original path: http://localhost:52646/login.aspx Global init AbsolutePath : /login.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 18:02:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:02:44</Messaggio>
+ <Data>23/01/2018 18:02:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:02:44Terminato Aggiornamento  23/01/2018 18:02:44</Messaggio>
+ <Data>23/01/2018 18:06:14</Data>
+<Messaggio> Application start : 23/01/2018 18:06:05</Messaggio>
+ <Data>23/01/2018 18:06:14</Data>
+<Messaggio> Global init original path: http://localhost:52646/Admin/Profile.aspx Global init AbsolutePath : /Admin/Profile.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 18:08:01</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:08:01</Messaggio>
+ <Data>23/01/2018 18:08:01</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:08:01Terminato Aggiornamento  23/01/2018 18:08:01</Messaggio>
+ <Data>23/01/2018 18:18:42</Data>
+<Messaggio> Application start : 23/01/2018 18:18:40</Messaggio>
+ <Data>23/01/2018 18:18:42</Data>
+<Messaggio> Global init original path: http://localhost:52646/I/catalogo/quaderno-orizzontale-tela-17x24-826 Global init AbsolutePath : /I/catalogo/quaderno-orizzontale-tela-17x24-826 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 18:21:22</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 18:21:22</Messaggio>
+ <Data>23/01/2018 18:21:22</Data>
+<Messaggio>httplocalhost52646 Errore aggiornamento in app start: Thread interrotto. 23/01/2018 18:21:22Terminato Aggiornamento  23/01/2018 18:21:22</Messaggio>
+ <Data>23/01/2018 18:23:18</Data>
+<Messaggio> Application start : 23/01/2018 18:23:16</Messaggio>
+ <Data>23/01/2018 18:23:18</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 18:25:31</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:25:31</Messaggio>
+ <Data>23/01/2018 18:25:31</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 18:25:31Terminato Aggiornamento  23/01/2018 18:25:31</Messaggio>
+ <Data>23/01/2018 18:51:03</Data>
+<Messaggio>EseguiMailing(): Errore invio mail: Errore Caricamento mails :Indice oltre i limiti della matrice. 23/01/2018 18:51:03</Messaggio>
+ <Data>23/01/2018 18:51:03</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 18:51:03</Messaggio>
+ <Data>23/01/2018 18:51:48</Data>
+<Messaggio>EseguiMailing(): Errore invio mail: Errore Caricamento mails :Indice oltre i limiti della matrice. 23/01/2018 18:51:48</Messaggio>
+ <Data>23/01/2018 18:51:48</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 18:51:48</Messaggio>
+ <Data>23/01/2018 18:51:55</Data>
+<Messaggio>EseguiMailing(): Errore invio mail: Errore Caricamento mails :Indice oltre i limiti della matrice. 23/01/2018 18:51:55</Messaggio>
+ <Data>23/01/2018 18:51:55</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 18:51:55</Messaggio>
+ <Data>23/01/2018 18:53:38</Data>
+<Messaggio>EseguiMailing(): Errore invio mail: Errore Caricamento mails :Indice oltre i limiti della matrice. 23/01/2018 18:53:38</Messaggio>
+ <Data>23/01/2018 18:53:38</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 18:53:09</Messaggio>
+ <Data>23/01/2018 18:54:30</Data>
+<Messaggio>EseguiMailing(): Errore invio mail: Errore Caricamento mails :Indice oltre i limiti della matrice. 23/01/2018 18:54:30</Messaggio>
+ <Data>23/01/2018 18:54:30</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 18:53:41</Messaggio>
+ <Data>23/01/2018 19:01:34</Data>
+<Messaggio> Application start : 23/01/2018 19:01:32</Messaggio>
+ <Data>23/01/2018 19:01:34</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>23/01/2018 19:01:54</Data>
+<Messaggio>EseguiMailing(): inviate 4 mail in data 23/01/2018 19:01:54</Messaggio>
+ <Data>23/01/2018 19:01:54</Data>
+<Messaggio>Page_Load(): Esecuzione pagina task: 23/01/2018 19:01:50</Messaggio>
+ <Data>23/01/2018 19:03:19</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 19:03:19</Messaggio>
+ <Data>23/01/2018 19:03:19</Data>
+<Messaggio>httplocalhost52646Generato sitemap  23/01/2018 19:03:19Terminato Aggiornamento  23/01/2018 19:03:19</Messaggio>

@@ -112,7 +112,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT";
-                query += " M.ID as M_ID,M.DataInserimento as M_DataInserimento,M.ID_CLIENTE as M_ID_CLIENTE,M.ID_CARD as M_ID_CARD, M.Lingua as M_Lingua,M.NoteInvio,M.DataAdesione,M.Errore,M.ID_mailing_struttura,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome,  MC.Id_mail AS mailincharge FROM ( TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE ) left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
+                query += " M.ID as M_ID,M.DataInserimento as M_DataInserimento,M.ID_CLIENTE as M_ID_CLIENTE,M.ID_CARD as M_ID_CARD, M.Lingua as M_Lingua,M.DataInvio,M.TestoErrore,M.Tipomailing,M.TestoMail,M.SoggettoMail,M.NoteInvio,M.DataAdesione,M.Errore,M.ID_mailing_struttura,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome,  MC.Id_mail AS mailincharge FROM ( TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE ) left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
                 if (MaxEmail != null)
                     query += " limit " + MaxEmail.Value;
 
@@ -146,6 +146,7 @@ namespace WelcomeLibrary.DAL
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("M_DataInserimento"));
                         if (!reader["DataInvio"].Equals(DBNull.Value))
                             item.DataInvio = reader.GetDateTime(reader.GetOrdinal("DataInvio"));
+
                         if (!reader["DataAdesione"].Equals(DBNull.Value))
                             item.DataAdesione = reader.GetDateTime(reader.GetOrdinal("DataAdesione"));
                         if (!reader["Errore"].Equals(DBNull.Value))
@@ -240,7 +241,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
 
-            string query = "DELETE FROM TBL_MAILING_ONCHARGE WHERE ( Id_mail = @idmail ) ";
+            string query = "DELETE FROM TBL_MAILING_ONCHARGE WHERE ( Id_mail = @Id_mail ) ";
             SQLiteParameter p1;
             p1 = new SQLiteParameter("@Id_mail", idmail);
             parColl.Add(p1);
@@ -398,8 +399,8 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                         item.Id = reader.GetInt64(reader.GetOrdinal("M_ID"));
                         item.Id_cliente = reader.GetInt64(reader.GetOrdinal("M.ID_CLIENTE"));
                         item.Id_card = reader.GetInt64(reader.GetOrdinal("M.ID_CARD"));
-                        if (!reader["M.Lingua"].Equals(DBNull.Value))
-                            item.Lingua = reader.GetString(reader.GetOrdinal("M.Lingua"));
+                        if (!reader["MLingua"].Equals(DBNull.Value))
+                            item.Lingua = reader.GetString(reader.GetOrdinal("M_Lingua"));
 
                         if (!reader["NoteInvio"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.NoteInvio = reader.GetString(reader.GetOrdinal("NoteInvio"));

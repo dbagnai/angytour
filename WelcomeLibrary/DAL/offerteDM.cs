@@ -171,15 +171,14 @@ namespace WelcomeLibrary.DAL
                 query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
 
 
-
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; }))
                 {
                     SQLiteParameter pidvalue = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; });
                     _parUsed.Add(pidvalue);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Id like @Id ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Id like @Id ";
                     else
-                        query += " AND Id like @Id  ";
+                        queryfilter += " AND Id like @Id  ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; }))
@@ -190,16 +189,16 @@ namespace WelcomeLibrary.DAL
                     string[] listaarray = listaid.Split(',');
                     if (listaarray != null && listaarray.Length > 0)
                     {
-                        if (!query.ToLower().Contains("where"))
-                            query += " WHERE Id in (    ";
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE Id in (    ";
                         else
-                            query += " AND  Id in (      ";
+                            queryfilter += " AND  Id in (      ";
                         foreach (string codice in listaarray)
                         {
                             if (!string.IsNullOrEmpty(codice.Trim()))
-                                query += " " + codice + " ,";
+                                queryfilter += " " + codice + " ,";
                         }
-                        query = query.TrimEnd(',') + " ) ";
+                        queryfilter = queryfilter.TrimEnd(',') + " ) ";
                     }
                 }
 
@@ -208,38 +207,38 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter pnaz = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
                     _parUsed.Add(pnaz);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
                     else
-                        query += " AND  ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
+                        queryfilter += " AND  ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
                 {
                     SQLiteParameter preg = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; });
                     _parUsed.Add(preg);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
                     else
-                        query += " AND  ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
+                        queryfilter += " AND  ( CodiceREGIONE like @CodiceREGIONE or CodiceREGIONE1_dts like @CodiceREGIONE or CodiceREGIONE2_dts like @CodiceREGIONE or CodiceREGIONE3_dts like @CodiceREGIONE ) ";
                 }
                 //Per ogni parametro vedo se esiste e lo inserisco nello script
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; }))
                 {
                     SQLiteParameter pprov = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodicePROVINCIA"; });
                     _parUsed.Add(pprov);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA ) ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA ) ";
                     else
-                        query += " AND  ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA )   ";
+                        queryfilter += " AND  ( CodicePROVINCIA like @CodicePROVINCIA or CodicePROVINCIA1_dts like @CodicePROVINCIA or CodicePROVINCIA2_dts like @CodicePROVINCIA  or CodicePROVINCIA3_dts like @CodicePROVINCIA )   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; }))
                 {
                     SQLiteParameter pcom = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCOMUNE"; });
                     _parUsed.Add(pcom);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE ) ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE ) ";
                     else
-                        query += " AND  ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE )   ";
+                        queryfilter += " AND  ( CodiceCOMUNE like @CodiceCOMUNE or CodiceCOMUNE1_dts like @CodiceCOMUNE or CodiceCOMUNE2_dts like @CodiceCOMUNE or CodiceCOMUNE3_dts like @CodiceCOMUNE )   ";
                 }
 
 
@@ -250,26 +249,26 @@ namespace WelcomeLibrary.DAL
                     if (!ptip.Value.ToString().Contains(","))
                     {
                         _parUsed.Add(ptip);
-                        if (!query.ToLower().Contains("where"))
-                            query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
                         else
-                            query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+                            queryfilter += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
                     }
                     else
                     {
                         string[] codici = ptip.Value.ToString().Split(',');
                         if (codici != null && codici.Length > 0)
                         {
-                            if (!query.ToLower().Contains("where"))
-                                query += " WHERE CodiceTIPOLOGIA in (    ";
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE CodiceTIPOLOGIA in (    ";
                             else
-                                query += " AND  CodiceTIPOLOGIA in (      ";
+                                queryfilter += " AND  CodiceTIPOLOGIA in (      ";
                             foreach (string codice in codici)
                             {
                                 if (!string.IsNullOrEmpty(codice.Trim()))
-                                    query += " '" + codice + "' ,";
+                                    queryfilter += " '" + codice + "' ,";
                             }
-                            query = query.TrimEnd(',') + " ) ";
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
                         }
                     }
                 }
@@ -279,26 +278,26 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter pId_collegato = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_collegato"; });
                     _parUsed.Add(pId_collegato);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Id_collegato like @Id_collegato ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Id_collegato like @Id_collegato ";
                     else
-                        query += " AND Id_collegato like @Id_collegato  ";
+                        queryfilter += " AND Id_collegato like @Id_collegato  ";
                 }
 
                 if (filtrocatalogo != null)
                     if (filtrocatalogo.Value) //Filtro i codicditipologia compresi tra 100 e 199 ( catalogo ) rispetto agli atri
                     {
-                        if (!query.ToLower().Contains("where"))
-                            query += " WHERE ((( CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER) )>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))<200)) ";
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE ((( CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER) )>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))<200)) ";
                         else
-                            query += " AND (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<200)) ";
+                            queryfilter += " AND (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4) as INTEGER))>=100) and  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<200)) ";
                     }
                     else
                     {
-                        if (!query.ToLower().Contains("where"))
-                            query += " WHERE (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
                         else
-                            query += " AND  (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
+                            queryfilter += " AND  (((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))<100) or  ((CAST(SUBSTR(A.[CodiceTIPOLOGIA],4)  as INTEGER))>=200)) ";
                     }
 
 
@@ -308,10 +307,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter pabilc = new SQLiteParameter(_pabilc.ParameterName, _pabilc.Value);
 
                     _parUsed.Add(pabilc);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Abilitacontatto = @Abilitacontatto ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Abilitacontatto = @Abilitacontatto ";
                     else
-                        query += " AND Abilitacontatto = @Abilitacontatto ";
+                        queryfilter += " AND Abilitacontatto = @Abilitacontatto ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Archiviato"; }))
                 {
@@ -319,10 +318,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter parch = new SQLiteParameter(_parch.ParameterName, _parch.Value);
 
                     _parUsed.Add(parch);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Archiviato = @Archiviato ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Archiviato = @Archiviato ";
                     else
-                        query += " AND Archiviato = @Archiviato ";
+                        queryfilter += " AND Archiviato = @Archiviato ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@filtrodisponibili"; }))
@@ -334,17 +333,17 @@ namespace WelcomeLibrary.DAL
 
                         if (_par)
                         {
-                            if (!query.ToLower().Contains("where"))
-                                query += " WHERE (Qta_vendita > 0 or Qta_vendita is null)  ";
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE (Qta_vendita > 0 or Qta_vendita is null)  ";
                             else
-                                query += " AND (Qta_vendita > 0 or Qta_vendita is null)  ";
+                                queryfilter += " AND (Qta_vendita > 0 or Qta_vendita is null)  ";
                         }
                         else
                         {
-                            if (!query.ToLower().Contains("where"))
-                                query += " WHERE (Qta_vendita <= 0 and Qta_vendita is not null)  ";
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE (Qta_vendita <= 0 and Qta_vendita is not null)  ";
                             else
-                                query += " AND (Qta_vendita <= 0 and Qta_vendita is not null)  ";
+                                queryfilter += " AND (Qta_vendita <= 0 and Qta_vendita is not null)  ";
                         }
 
                     }
@@ -356,62 +355,62 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter ppmin = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
                     _parUsed.Add(ppmin);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Prezzo >= @PrezzoMin ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Prezzo >= @PrezzoMin ";
                     else
-                        query += " AND Prezzo >= @PrezzoMin  ";
+                        queryfilter += " AND Prezzo >= @PrezzoMin  ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
                 {
                     SQLiteParameter ppmax = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
                     _parUsed.Add(ppmax);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE  Prezzo <= @PrezzoMax  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  Prezzo <= @PrezzoMax  ";
                     else
-                        query += " AND  Prezzo <= @PrezzoMax   ";
+                        queryfilter += " AND  Prezzo <= @PrezzoMax   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
                 {
                     SQLiteParameter pcat = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
                     _parUsed.Add(pcat);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE CodiceCategoria like @CodiceCategoria ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
                     else
-                        query += " AND CodiceCategoria like @CodiceCategoria  ";
+                        queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; }))
                 {
                     SQLiteParameter pcat2liv = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; });
                     _parUsed.Add(pcat2liv);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE CodiceCategoria2Liv like @CodiceCategoria2Liv ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE CodiceCategoria2Liv like @CodiceCategoria2Liv ";
                     else
-                        query += " AND CodiceCategoria2Liv like @CodiceCategoria2Liv  ";
+                        queryfilter += " AND CodiceCategoria2Liv like @CodiceCategoria2Liv  ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Vetrina"; }))
                 {
                     SQLiteParameter vetrina = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Vetrina"; });
                     _parUsed.Add(vetrina);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Vetrina = @Vetrina ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Vetrina = @Vetrina ";
                     else
-                        query += " AND  Vetrina = @Vetrina   ";
+                        queryfilter += " AND  Vetrina = @Vetrina   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; }))
                 {
                     SQLiteParameter promozione = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@promozioni"; });
 
                     _parUsed.Add(promozione);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Promozione = @promozioni ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Promozione = @promozioni ";
                     else
-                        query += " AND  Promozione = @promozioni   ";
+                        queryfilter += " AND  Promozione = @promozioni   ";
 
                     //_parUsed.Add(promozione);
-                    //if (!query.ToLower().Contains("where"))
-                    //	query += " WHERE Promozione = " + ((bool)promozione.Value ? "1" : "0") + " ";
+                    //if (!queryfilter.ToLower().Contains("where"))
+                    //	queryfilter += " WHERE Promozione = " + ((bool)promozione.Value ? "1" : "0") + " ";
                     //else
-                    //	query += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
+                    //	queryfilter += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
 
                 }
 
@@ -421,66 +420,66 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter Caratteristica1 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica1"; });
                     _parUsed.Add(Caratteristica1);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica1 = @Caratteristica1 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica1 = @Caratteristica1 ";
                     else
-                        query += " AND  Caratteristica1 = @Caratteristica1   ";
+                        queryfilter += " AND  Caratteristica1 = @Caratteristica1   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; }))
                 {
                     SQLiteParameter Caratteristica2 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica2"; });
                     _parUsed.Add(Caratteristica2);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica2 = @Caratteristica2 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica2 = @Caratteristica2 ";
                     else
-                        query += " AND  Caratteristica2 = @Caratteristica2   ";
+                        queryfilter += " AND  Caratteristica2 = @Caratteristica2   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; }))
                 {
                     SQLiteParameter Caratteristica3 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica3"; });
                     _parUsed.Add(Caratteristica3);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica3 = @Caratteristica3 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica3 = @Caratteristica3 ";
                     else
-                        query += " AND  Caratteristica3 = @Caratteristica3   ";
+                        queryfilter += " AND  Caratteristica3 = @Caratteristica3   ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; }))
                 {
                     SQLiteParameter Caratteristica4 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica4"; });
                     _parUsed.Add(Caratteristica4);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica4 = @Caratteristica4 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica4 = @Caratteristica4 ";
                     else
-                        query += " AND  Caratteristica4 = @Caratteristica4  ";
+                        queryfilter += " AND  Caratteristica4 = @Caratteristica4  ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; }))
                 {
                     SQLiteParameter Caratteristica5 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica5"; });
                     _parUsed.Add(Caratteristica5);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica5 = @Caratteristica5 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica5 = @Caratteristica5 ";
                     else
-                        query += " AND  Caratteristica5 = @Caratteristica5 ";
+                        queryfilter += " AND  Caratteristica5 = @Caratteristica5 ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; }))
                 {
                     SQLiteParameter Caratteristica6 = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Caratteristica6"; });
                     _parUsed.Add(Caratteristica6);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Caratteristica6 = @Caratteristica6 ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Caratteristica6 = @Caratteristica6 ";
                     else
-                        query += " AND  Caratteristica6 = @Caratteristica6 ";
+                        queryfilter += " AND  Caratteristica6 = @Caratteristica6 ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Anno"; }))
                 {
                     SQLiteParameter Carannao = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Anno"; });
                     _parUsed.Add(Carannao);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE Anno = @Anno ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Anno = @Anno ";
                     else
-                        query += " AND  Anno = @Anno   ";
+                        queryfilter += " AND  Anno = @Anno   ";
                 }
 
 
@@ -488,19 +487,19 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter testoricerca = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@testoricerca"; });
                     _parUsed.Add(testoricerca);
-                    if (!query.ToLower().Contains("where"))
+                    if (!queryfilter.ToLower().Contains("where"))
                     {
-                        query += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
-                        query += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        query += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
-                        query += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
+                        queryfilter += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
+                        queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
                     }
                     else
                     {
-                        query += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
-                        query += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        query += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
-                        query += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
+                        queryfilter += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca ";
+                        queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  ";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or xmlValue like @testoricerca ) ";
                     }
                 }
 
@@ -509,26 +508,26 @@ namespace WelcomeLibrary.DAL
                 {
                     SQLiteParameter stringafiltropagamenti = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltropagamenti"; });
                     _parUsed.Add(stringafiltropagamenti);
-                    if (!query.ToLower().Contains("where"))
+                    if (!queryfilter.ToLower().Contains("where"))
                     {
-                        query += " WHERE ( Pagamenti_dts like @stringafiltropagamenti ) ";
+                        queryfilter += " WHERE ( Pagamenti_dts like @stringafiltropagamenti ) ";
                     }
                     else
                     {
-                        query += " AND  ( Pagamenti_dts like @stringafiltropagamenti )   ";
+                        queryfilter += " AND  ( Pagamenti_dts like @stringafiltropagamenti )   ";
                     }
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; }))
                 {
                     SQLiteParameter stringafiltrotrattamenti = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stringafiltrotrattamenti"; });
                     _parUsed.Add(stringafiltrotrattamenti);
-                    if (!query.ToLower().Contains("where"))
+                    if (!queryfilter.ToLower().Contains("where"))
                     {
-                        query += " WHERE ( Trattamenticollegati_dts like @stringafiltrotrattamenti ) ";
+                        queryfilter += " WHERE ( Trattamenticollegati_dts like @stringafiltrotrattamenti ) ";
                     }
                     else
                     {
-                        query += " AND  ( Trattamenticollegati_dts like @stringafiltrotrattamenti )   ";
+                        queryfilter += " AND  ( Trattamenticollegati_dts like @stringafiltrotrattamenti )   ";
                     }
                 }
 
@@ -545,10 +544,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter datafine = new SQLiteParameter(_datafine.ParameterName, _datafine.Value);
                     _parUsed.Add(datafine);
 
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE  ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
                     else
-                        query += " AND   ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
+                        queryfilter += " AND   ( DataInserimento >= @Data_inizio and  DataInserimento <= @Data_fine )  ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio1"; })
@@ -562,10 +561,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter datafine1 = new SQLiteParameter(_datafine1.ParameterName, _datafine1.Value);
                     _parUsed.Add(datafine1);
 
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE  ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
                     else
-                        query += " AND   ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
+                        queryfilter += " AND   ( Data1 >= @Data_inizio1 and  Data1 <= @Data_fine1 )  ";
                 }
 
 
@@ -574,20 +573,20 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter _annofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@annofiltro"; });
                     SQLiteParameter annofiltro = new SQLiteParameter(_annofiltro.ParameterName, _annofiltro.Value);
                     _parUsed.Add(_annofiltro);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ((strftime('%Y',[DataInserimento])=@annofiltro))  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((strftime('%Y',[DataInserimento])=@annofiltro))  ";
                     else
-                        query += " AND  ((strftime('%Y',[DataInserimento])=@annofiltro))    ";
+                        queryfilter += " AND  ((strftime('%Y',[DataInserimento])=@annofiltro))    ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
                 {
                     SQLiteParameter _mesefiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
                     SQLiteParameter mesefiltro = new SQLiteParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
                     _parUsed.Add(mesefiltro);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ((((strftime('%m',[DataInserimento])=@annofiltro)) =@mesefiltro))  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((((strftime('%m',[DataInserimento])=@annofiltro)) =@mesefiltro))  ";
                     else
-                        query += " AND  ((((strftime('%m',[DataInserimento])=@annofiltro))=@mesefiltro))    ";
+                        queryfilter += " AND  ((((strftime('%m',[DataInserimento])=@annofiltro))=@mesefiltro))    ";
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
@@ -595,10 +594,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter _giornofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
                     SQLiteParameter giornofiltro = new SQLiteParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
                     _parUsed.Add(giornofiltro);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))  ";
                     else
-                        query += " AND  ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))    ";
+                        queryfilter += " AND  ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))    ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
                 {
@@ -607,10 +606,10 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter Bloccoaccesso_dts = new SQLiteParameter(_Bloccoaccesso_dts.ParameterName, _Bloccoaccesso_dts.Value);
                     // Bloccoaccesso_dts.DbType = DbType.Boolean;
                     _parUsed.Add(_Bloccoaccesso_dts);
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE ( Bloccoaccesso_dts=@Bloccoaccesso_dts )  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( Bloccoaccesso_dts=@Bloccoaccesso_dts )  ";
                     else
-                        query += " AND  ( Bloccoaccesso_dts=@Bloccoaccesso_dts )    ";
+                        queryfilter += " AND  ( Bloccoaccesso_dts=@Bloccoaccesso_dts )    ";
                 }
 
 
@@ -619,27 +618,29 @@ namespace WelcomeLibrary.DAL
                     switch (LinguaFiltro)
                     {
                         case "GB":
-                            if (!query.ToLower().Contains("where"))
-                                query += " WHERE ( DenominazioneGB <> '' and DenominazioneGB is not null )  ";
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE ( DenominazioneGB <> '' and DenominazioneGB is not null )  ";
                             else
-                                query += " AND  ( DenominazioneGB <> ''  and DenominazioneGB is not null )    ";
+                                queryfilter += " AND  ( DenominazioneGB <> ''  and DenominazioneGB is not null )    ";
                             break;
                         case "RU":
-                            if (!query.ToLower().Contains("where"))
-                                query += " WHERE ( DenominazioneRU <> '' and DenominazioneRU is not null )  ";
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE ( DenominazioneRU <> '' and DenominazioneRU is not null )  ";
                             else
-                                query += " AND  ( DenominazioneRU <> ''  and DenominazioneRU is not null )    ";
+                                queryfilter += " AND  ( DenominazioneRU <> ''  and DenominazioneRU is not null )    ";
                             break;
                     }
                 }
                 if (!includiarchiviati)
                 {
-                    if (!query.ToLower().Contains("where"))
-                        query += " WHERE (Archiviato = 0)  ";
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE (Archiviato = 0)  ";
                     else
-                        query += " AND  (Archiviato = 0)    ";
+                        queryfilter += " AND  (Archiviato = 0)    ";
                 }
 
+
+                query += queryfilter;
 
                 if (campoordinamento == "")
                     query += "  order BY DataInserimento Desc, Id Desc  ";
@@ -648,20 +649,18 @@ namespace WelcomeLibrary.DAL
 
                 if (!string.IsNullOrEmpty(maxrecord))
                     query += " LIMIT " + maxrecord;
+                else
+                {
+                    if (pagesize != 0)
+                    {
+                        query += " limit " + (page - 1) * pagesize + "," + pagesize;
+                    }
+                }
 
-                ///*****************************/
-                //query += " AND Promozione = @promozioni ";
-                ///*****************************/
-                //_parUsed = new List<SQLiteParameter>();
-                //SQLiteParameter promozione1 = new SQLiteParameter("@promozioni",  DbType.Int64);
-                //promozione1.Value = 1;
-                //_parUsed.Add(promozione1);
+                /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
 
-                //_parUsed = new List<SQLiteParameter>();
-                //SQLiteParameter pp = new SQLiteParameter("@datainserimento", DbType.DateTime);
-                //pp.Value = new DateTime(2017,9,11);
-                //query = "SELECT A.*,B.* FROM TBL_ATTIVITA A left join TBL_ATTIVITA_DETAIL B on A.id_dts_collegato=B.Id_dts   WHERE datainserimento >= @datainserimento order BY DataInserimento Desc, Id Desc   LIMIT 12";
-                //_parUsed.Add(pp);
+                long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM  " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  " + queryfilter, _parUsed, connection);
+                list.Totrecs = totalrecords;
 
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);

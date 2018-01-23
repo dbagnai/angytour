@@ -1,12 +1,14 @@
 
 
--- paginazione con LIMIT (pagesise) OFFSET (skip row number)   ( replicare quanto gatto in gestioeclienti sulle altre query paginate !! )
--- riguardare i campi nullabe rispetto auqelli di access nel database
+VERIFICA SULLA TRASPOSIZIONE DEL DB ACCESS
+- ricontrollare i nomi dei parametri nelle query se scritti bene ripetto alla query !!!!!
+-- riguardare i campi nullabe rispetto a qelli di access nel database
 -- controllare dove nel vecchio acces metteva campo default per data oggi (datetime('now', 'localtime'))
--- integrazione su sqllite del membership ...
 
- 
- 
+----------------------
+
+--(OK) paginazione con LIMIT (pagesise) OFFSET (skip row number)   ( replicare quanto gatto in gestioeclienti sulle altre query paginate !! )
+--(OK) integrazione su sqllite del membership ...
 --(OK) attenzione l'order default per sqllite è casesensiticve per ordinare case insensitive usare .... order by COLLATE NOCASE asc -> daverificare ovunque l'order by!!!!!
 --(OK) SOSTITUIRE LE FUNZIONI MONTH YEAR DELLE QUERY  ( ES ..  strftime('%m',[Datainserimento]) AS mese, strftime('%Y',[Datainserimento])  AS anno )
 -(OK) controllare tutte le query join e evitare la sintassi a. b. getordinal

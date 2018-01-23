@@ -13,7 +13,10 @@ namespace WelcomeLibrary.DOM
             _OfferteCollection = new List<Offerte>();
         }
 
-          /// <summary>
+        private long _totrecs = 0;
+        public long Totrecs { get => _totrecs; set => _totrecs = value; }
+
+        /// <summary>
         /// Costruttore dell'oggetto a partire da un oggetto OfferteCollection
         /// </summary>
         /// <param name="list"></param>

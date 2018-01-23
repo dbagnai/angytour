@@ -764,7 +764,7 @@ namespace WelcomeLibrary.DAL
 
             if (item.Numero > 0)
             {
-                SQLiteParameter p2 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow( System.DateTime.Now));
+                SQLiteParameter p2 = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow(System.DateTime.Now));
                 parColl.Add(p2);
                 SQLiteParameter p9 = new SQLiteParameter("@Numero", item.Numero);
                 parColl.Add(p9);
@@ -794,7 +794,7 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(p1);
 
 
-                string query = "UPDATE [TBL_CARRELLO] SET [Data]=@Data,Numero=@Numero,CodiceOrdine=@CodiceOrdine,Campo1=@Campo1,Campo2=@Campo2,Campo3=@Campo3,ID_cliente=@ID_cliente,Codicenazione=@Codicenazione,Codiceprovincia=@Codiceprovincia ,Codicesconto=@Codicesconto WHERE ([ID]=@ID)";
+                string query = "UPDATE [TBL_CARRELLO] SET [Data]=@Data,Numero=@Numero,CodiceOrdine=@CodiceOrdine,Campo1=@Campo1,Campo2=@Campo2,Campo3=@Campo3,ID_cliente=@idcliente,Codicenazione=@Codicenazione,Codiceprovincia=@Codiceprovincia ,Codicesconto=@Codicesconto WHERE ([ID]=@ID)";
                 try
                 {
                     dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

@@ -40,6 +40,11 @@
                 <asp:TextBox ID="txtIdcliente" runat="server"></asp:TextBox><br />
                 Id Socio :<br />
                 <asp:TextBox ID="txtIdsocio" runat="server"></asp:TextBox><br />
+
+                   prova :<br />
+                <asp:TextBox ID="txtprova" runat="server"></asp:TextBox><br />
+
+
                 <asp:Button ID="Button1" runat="server" Text="Registra" OnClick="Button1_Click" />
                 <p>
                     Ricordarsi che per memorizzare qualsiasi modifica è necessario salvare premendo<br />

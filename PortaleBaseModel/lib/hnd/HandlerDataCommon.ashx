@@ -681,6 +681,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         int.TryParse(spage, out page);
         int.TryParse(spagesize, out pagesize);
 
+        List<Offerte> filteredData = new List<Offerte>();
         offerteDM offDM = new offerteDM();
         Dictionary<string, string> ritorno = new Dictionary<string, string>();
         OfferteCollection offerte = new OfferteCollection();
@@ -783,14 +784,23 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     }
                 }
-            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua);
+
+
+
+            if (enabledpager && page != 0 && pagesize != 0)
+            {
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "", false, page, pagesize);
+            }
+            else
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua);
+
         }
         //else
         //    offerte = filtri[4];
 
+        /*Old paging method*/
+#if false
 
-
-        List<Offerte> filteredData = new List<Offerte>();
         if (offerte != null && offerte.Count > 0 && enabledpager && page != 0 && pagesize != 0)
         {
             //Facciamo il take skip
@@ -802,16 +812,19 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 filteredData = offerte.GetRange(start, pagesize);
         }
         else filteredData = offerte;
+#endif
 
-
+#if false
         if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
         {
             int maxelem = 0;
             int.TryParse(filtri["maxelement"], out maxelem);
             if (maxelem < filteredData.Count())
                 filteredData = filteredData.GetRange(0, maxelem);
-        }
+        } 
+#endif
 
+        filteredData = offerte;
         string tempOff = Newtonsoft.Json.JsonConvert.SerializeObject(filteredData, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
         {
             NullValueHandling = NullValueHandling.Ignore,
@@ -825,7 +838,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         ListRet.Add("visualPrezzo", filtri["visualPrezzo"]);
 
         string tot = "0";
-        if (offerte != null) tot = offerte.Count.ToString();
+        //if (offerte != null) tot = offerte.Count.ToString();
+        if (offerte != null) tot = offerte.Totrecs.ToString();
         ListRet.Add("totalrecords", tot);
         string tempListret = Newtonsoft.Json.JsonConvert.SerializeObject(ListRet);
         ritorno.Add("resultinfo", tempListret);

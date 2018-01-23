@@ -211,7 +211,7 @@ public partial class AreaContenuti_Default3 : CommonPage
                     parColl.Add(p9);
                 }
             }
-             
+
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
@@ -224,20 +224,20 @@ public partial class AreaContenuti_Default3 : CommonPage
             //    parColl.Add(p8);
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
-            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
 
 #endif
             #endregion
 
             //offerte = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, TipologiaOfferte);
-            if (offerte == null)
+            if (offerte == null || offerte.Count == 0)
             {
                 rptOfferte.DataSource = offerte;
                 rptOfferte.DataBind();
                 output.Text = "Nessuna struttura trovata per le selezioni fatte";
                 return;
             }
-            offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));
+            //offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));
 
         }
         catch (Exception error)
@@ -246,16 +246,21 @@ public partial class AreaContenuti_Default3 : CommonPage
             return;
         }
 
-#if true
+        long nrecordfiltrati = offerte.Totrecs;
+        PagerRisultati.TotalRecords = (long)offerte.Totrecs;
+        if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
+
+#if false
         //Selezionamo i risultati in base al numero di pagina e alla sua dimensione per la paginazione
         //Utilizzando la classe di paginazione
         WelcomeLibrary.UF.Pager<Offerte> _pager = new WelcomeLibrary.UF.Pager<Offerte>(offerte);
         int nrecordfiltrati = _pager.Count;
-        //if (nrecordfiltrati != 0)
         PagerRisultati.TotalRecords = nrecordfiltrati;
         if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
-#endif
         rptOfferte.DataSource = _pager.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+
+#endif
+        rptOfferte.DataSource = offerte;
         rptOfferte.DataBind();
 
         //Aggiorno la vista del dettaglio
@@ -331,7 +336,8 @@ public partial class AreaContenuti_Default3 : CommonPage
                 txtProgressivo.Text = Details.FotoCollection_M[0].Progressivo.ToString();
             }
             else
-            {   imgFoto.ImageUrl = "";
+            {
+                imgFoto.ImageUrl = "";
                 NomeFotoSelezionata = "";
                 txtDescrizione.Text = "";
                 txtProgressivo.Text = "";
@@ -638,8 +644,8 @@ public partial class AreaContenuti_Default3 : CommonPage
                   , new Newtonsoft.Json.JsonSerializerSettings()
                   {
                       DateFormatString = "dd/MM/yyyy HH:mm:ss",
-                     //DateFormatString = "dd/MM/yyyy",
-                     MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+                      //DateFormatString = "dd/MM/yyyy",
+                      MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
                       ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
                       PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None
                   });
@@ -990,7 +996,7 @@ public partial class AreaContenuti_Default3 : CommonPage
         try
         {
             //Carichiamo tutti i clienti destinatari ( prendo i clienti Validati, con consenso commrciale opzione 1, e con card attivata e non scaduta )
-           // CardsDM cDM = new CardsDM();
+            // CardsDM cDM = new CardsDM();
             ClientiDM cliDM = new ClientiDM();
             Cliente _clifiltro = new Cliente();
             _clifiltro.Validato = true;

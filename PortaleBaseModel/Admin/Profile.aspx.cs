@@ -53,7 +53,7 @@ public partial class admin_Profile : CommonPage
 
     }
 
-  
+
     protected string getidcliente(string utente)
     {
         //  save UserLastActivityDate so it can be reassigned later
@@ -264,8 +264,6 @@ public partial class admin_Profile : CommonPage
             prof.Cellulare = Cellulare.Text;
             prof.IdCliente = txtIdcliente.Text;
             prof.IdSocio = txtIdsocio.Text;
-
-
             //SALVARE IL PROFILO non dimenticarsene
             prof.Save();
 

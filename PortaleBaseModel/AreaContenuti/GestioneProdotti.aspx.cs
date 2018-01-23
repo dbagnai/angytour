@@ -249,20 +249,19 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             //    parColl.Add(p8);
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
-            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true);
-
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
 #endif
             #endregion
 
             //offerte = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, TipologiaOfferte);
-            if (offerte == null)
+            if (offerte == null || offerte.Count == 0)
             {
                 rptOfferte.DataSource = offerte;
                 rptOfferte.DataBind();
                 output.Text = "Nessuna struttura trovata per le selezioni fatte";
                 return;
             }
-            offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));
+            //offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));
 
         }
         catch (Exception error)
@@ -270,17 +269,21 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             output.Text = error.Message.ToString();
             return;
         }
+        long nrecordfiltrati = offerte.Totrecs;
+        PagerRisultati.TotalRecords = (long)offerte.Totrecs;
+        if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
 
-#if true
+#if false
         //Selezionamo i risultati in base al numero di pagina e alla sua dimensione per la paginazione
         //Utilizzando la classe di paginazione
         WelcomeLibrary.UF.Pager<Offerte> _pager = new WelcomeLibrary.UF.Pager<Offerte>(offerte);
         int nrecordfiltrati = _pager.Count;
-        //if (nrecordfiltrati != 0)
         PagerRisultati.TotalRecords = nrecordfiltrati;
         if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
-#endif
         rptOfferte.DataSource = _pager.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+
+#endif
+        rptOfferte.DataSource = offerte;
         rptOfferte.DataBind();
 
         //Aggiorno la vista del dettaglio

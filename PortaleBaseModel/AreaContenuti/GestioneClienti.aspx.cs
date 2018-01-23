@@ -1608,7 +1608,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
     protected void btnExport_Click(object sender, EventArgs e)
     {
-        Cliente _paramcli = null;
+        Cliente _paramcli = new Cliente();
         _paramcli.Lingua = "";
         //_paramcli.CodiceNAZIONE = ddlNazioniFiltro.SelectedValue;
         _paramcli.id_tipi_clienti = ddlTipiClientiImporta.SelectedValue;
