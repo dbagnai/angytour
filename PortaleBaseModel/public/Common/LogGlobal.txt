@@ -2808,3 +2808,43 @@ no such column: Email 23/01/2018 13:23:08</Messaggio>
 <Messaggio>httplocalhost52646Generato sitemap  23/01/2018 19:03:19</Messaggio>
  <Data>23/01/2018 19:03:19</Data>
 <Messaggio>httplocalhost52646Generato sitemap  23/01/2018 19:03:19Terminato Aggiornamento  23/01/2018 19:03:19</Messaggio>
+ <Data>24/01/2018 11:57:01</Data>
+<Messaggio> Application start : 24/01/2018 11:56:59</Messaggio>
+ <Data>24/01/2018 11:57:01</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/01/2018 11:58:36</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 11:58:36</Messaggio>
+ <Data>24/01/2018 11:58:36</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 11:58:36Terminato Aggiornamento  24/01/2018 11:58:36</Messaggio>
+ <Data>24/01/2018 12:05:16</Data>
+<Messaggio> Application start : 24/01/2018 12:05:15</Messaggio>
+ <Data>24/01/2018 12:05:17</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/01/2018 12:10:09</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:10:09</Messaggio>
+ <Data>24/01/2018 12:10:09</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:10:09Terminato Aggiornamento  24/01/2018 12:10:09</Messaggio>
+ <Data>24/01/2018 12:13:25</Data>
+<Messaggio> Application start : 24/01/2018 12:13:23</Messaggio>
+ <Data>24/01/2018 12:13:25</Data>
+<Messaggio> Global init original path: http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865 Global init AbsolutePath : /I/blog/new-proca-lite-sottotitolo-865 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/01/2018 12:15:54</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:15:54</Messaggio>
+ <Data>24/01/2018 12:15:54</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:15:54Terminato Aggiornamento  24/01/2018 12:15:54</Messaggio>
+ <Data>24/01/2018 12:17:29</Data>
+<Messaggio> Application start : 24/01/2018 12:17:28</Messaggio>
+ <Data>24/01/2018 12:17:29</Data>
+<Messaggio> Global init original path: http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865 Global init AbsolutePath : /I/blog/new-proca-lite-sottotitolo-865 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/01/2018 12:19:21</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:19:21</Messaggio>
+ <Data>24/01/2018 12:19:21</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:19:21Terminato Aggiornamento  24/01/2018 12:19:21</Messaggio>
+ <Data>24/01/2018 12:38:12</Data>
+<Messaggio> Application start : 24/01/2018 12:38:10</Messaggio>
+ <Data>24/01/2018 12:38:12</Data>
+<Messaggio> Global init original path: http://localhost:52646/I/blog/news201709-rif000002-18201709 Global init AbsolutePath : /I/blog/news201709-rif000002-18201709 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>24/01/2018 12:40:07</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:40:07</Messaggio>
+ <Data>24/01/2018 12:40:07</Data>
+<Messaggio>httplocalhost52646Generato sitemap  24/01/2018 12:40:07Terminato Aggiornamento  24/01/2018 12:40:07</Messaggio>

@@ -764,7 +764,17 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 {
                     string mese = filtri["mese"];
                     string anno = filtri["anno"];
+                    if (mese.Trim() != "" && anno.Trim() != "")
+                    {
+                              SQLiteParameter panno = new SQLiteParameter("@annofiltro", anno);
+                            parColl.Add(panno);
 
+                            
+                            SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", mese);
+                            parColl.Add(pmese);
+                    }
+
+#if false
                     if (mese.Trim() != "" && anno.Trim() != "")
                     {
                         int _a = 0;
@@ -782,7 +792,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             parColl.Add(pmese);
                         }
 
-                    }
+                    } 
+#endif
                 }
 
 

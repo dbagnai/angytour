@@ -583,10 +583,12 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter _mesefiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
                     SQLiteParameter mesefiltro = new SQLiteParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
                     _parUsed.Add(mesefiltro);
+
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE ((((strftime('%m',[DataInserimento])=@annofiltro)) =@mesefiltro))  ";
+                        queryfilter += " WHERE ((strftime('%m',[DataInserimento])=@mesefiltro))  ";
                     else
-                        queryfilter += " AND  ((((strftime('%m',[DataInserimento])=@annofiltro))=@mesefiltro))    ";
+                        queryfilter += " AND  ((strftime('%m',[DataInserimento])=@mesefiltro))    ";
+ 
                 }
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
@@ -594,10 +596,12 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter _giornofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
                     SQLiteParameter giornofiltro = new SQLiteParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
                     _parUsed.Add(giornofiltro);
+
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))  ";
+                        queryfilter += " WHERE ((strftime('%d',[DataInserimento])=@giornofiltro))  ";
                     else
-                        queryfilter += " AND  ((((strftime('%d',[DataInserimento])=@annofiltro))=@giornofiltro))    ";
+                        queryfilter += " AND  ((strftime('%d',[DataInserimento])=@giornofiltro))    ";
+ 
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Bloccoaccesso_dts"; }))
                 {
@@ -2750,8 +2754,8 @@ namespace WelcomeLibrary.DAL
                     while (reader.Read())
                     {
                         // item = new Offerte();
-                        int anno = reader.GetInt32(reader.GetOrdinal("anno"));
-                        int mese = reader.GetInt32(reader.GetOrdinal("mese"));
+                        string anno = reader.GetString(reader.GetOrdinal("anno"));
+                        string mese = reader.GetString(reader.GetOrdinal("mese"));
                         long numero = reader.GetInt64(reader.GetOrdinal("numero"));
 
                         if (!list.ContainsKey(anno.ToString()))
