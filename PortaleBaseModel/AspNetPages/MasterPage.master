@@ -163,22 +163,12 @@
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer;">
                                 <%= references.ResMan("Common", Lingua,"testoid10") %><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <asp:Repeater ID="rptTipologieLink2High" runat="server"
-                                    OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                    <ItemTemplate>
-                                        <li>
-                                            <a id="linkRubriche" class="dropdown-item" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                            </a>
-                                        </li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <%= CreaLinkCategorie("rif000002") %>
                             </ul>
                         </li>
                         <li runat="server">
                             <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                                <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
+                                <span><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                             </a>
                         </li>
                     </ul>
@@ -265,93 +255,31 @@
                     <li runat="server">
                         <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000014",true, true)%></a>
                         <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink4High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                            <%= CreaLinkSottoCategorie("rif000001","prod000014") %>
                         </ul>
                     </li>
                     <li runat="server">
                         <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000013",true, true)%></a>
                         <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink1High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                            <%= CreaLinkSottoCategorie("rif000001","prod000013") %>
                         </ul>
                     </li>
                     <li runat="server" visible="false">
                         <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000015",true, true)%></a>
                         <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink5High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                            <%= CreaLinkSottoCategorie("rif000001","prod000015") %>
                         </ul>
                     </li>
                     <li runat="server">
                         <a runat="server" class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000017",true, true)%></a>
                         <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink6High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSottoSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString(),Eval("CodiceSProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                            <%= CreaLinkSottoCategorie("rif000001","prod000017") %>
                         </ul>
                     </li>
 
                     <li runat="server">
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>
-                    <%--     <asp:Repeater ID="Repeater1" runat="server"
-                        OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                        <ItemTemplate>
-                            <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                             </li>
-                        </ItemTemplate>
-                    </asp:Repeater>--%>
-
-                    <%-- <asp:Repeater ID="rptTipologieLink6High" runat="server"
-                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                        <ItemTemplate>
-                            <li>
-                                <a onclick="JsSvuotaSession(this)" id="linkRubriche" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                    runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                </a>
-                            </li>
-                        </ItemTemplate>
-                    </asp:Repeater>--%>
-
 
 
 
@@ -359,60 +287,15 @@
                         <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testoid10") %></a>
                         <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink8High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                            <%= CreaLinkCategorie("rif000002") %>
                         </ul>
                     </li>
                     <li runat="server" class=" hidden-sm hidden-md hidden-lg">
                         <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
+                            <span><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
                     </li>
-
-                    <%--<asp:Repeater ID="rptTipologieLink1High" runat="server"
-                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                        <ItemTemplate>
-                            <li>
-                                <a onclick="JsSvuotaSession(this)" id="linkRubriche" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                    runat="server">
-                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                </a>
-                            </li>
-                        </ItemTemplate>
-                    </asp:Repeater>--%>
-
-
-                    <%-- <li runat="server">
-                        <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testoid10") %></a>
-                        <ul class="dropdown">
-                            <asp:Repeater ID="rptTipologieLink2High" runat="server"
-                                OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                <ItemTemplate>
-                                    <li>
-                                        <a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString())%>'
-                                            runat="server">
-                                            <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </ul>
-                    </li>--%>
-
-                    <li runat="server">
-                        <a id="linkid2High" onclick="JsSvuotaSession(this)" runat="server" href="#">
-                            <%= references.ResMan("Common", Lingua,"testoid2") %>
-                        </a>
-                    </li>
+                    <%= CreaLinkPaginastatica(2) %>
 
                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
                         <div style="padding-top: 5px; padding-left: 10px">
@@ -775,12 +658,20 @@
                 </div>
             </div>
  -->
+
+
+            <div style="position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 20px;">
+                <asp:Literal Text="" ID="plhNavigazione" runat="server" />
+            </div>
+
             <div style="max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
                 <div id="divnavigazioneJs1" style="background-color: transparent"></div>
             </div>
             <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 0px;">
                 <div id="divnavigazioneJs0" style="background-color: transparent"></div>
             </div>
+
+
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/legatoria-contact.jpg')">
                     <div class="mbr-overlay" style="opacity: 0.5; background-color: #000000;"></div>
@@ -868,50 +759,18 @@
                                 <ul class="footer-category-list">
                                     <li runat="server">
                                         <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
-                                            <span class="label-nav">
+                                            <span>
                                                 <%= references.ResMan("Common", Lingua,"testohome") %> 
                                             </span>
                                         </a>
                                     </li>
-                                    <li runat="server">
-                                        <a id="linkid1" onclick="JsSvuotaSession(this)" runat="server" href="#">
-                                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"testoid1") %></span>
-                                        </a>
-                                    </li>
-                                    <li runat="server">
-                                        <a id="linkid2" onclick="JsSvuotaSession(this)" runat="server" href="#">
-                                            <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testoid2") %></span>
-                                        </a>
-                                    </li>
-                                    <li runat="server">
-                                        <a id="linkid4" onclick="JsSvuotaSession(this)" runat="server" href="#">
-                                            <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testoid4") %></span>
-                                        </a>
-                                    </li>
-                                    <li runat="server">
-                                        <a id="linkid5" onclick="JsSvuotaSession(this)" runat="server" href="#">
-                                            <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testoid5") %></span>
-                                        </a>
-                                    </li>
-
-                                    <%--  <asp:Repeater ID="rptTipologieLink2" runat="server"
-                                            OnItemDataBound="rptTipologieLink_ItemDataBound" ViewStateMode="Enabled">
-                                            <ItemTemplate>
-                                                <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%# CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("Codice").ToString())%>'
-                                                    runat="server">
-                                                    <span class="label-nav">
-                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                                </a></li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>--%>
-
-
+                                    <%= CreaLinkPaginastatica(1) %>
+                                    <%= CreaLinkPaginastatica(2) %>
+                                    <%= CreaLinkPaginastatica(3) %>
+                                    <%= CreaLinkPaginastatica(4) %>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
-                                            <span class="label-nav">
+                                            <span>
                                                 <%= references.ResMan("Common", Lingua,"testoContatti") %> 
                                             </span>
                                         </a>
@@ -926,74 +785,12 @@
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-
-
-
-                                    <asp:Repeater ID="rptTipologieLink4" runat="server"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                    <asp:Repeater ID="rptTipologieLink1" runat="server"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                    <asp:Repeater ID="rptTipologieLink5" runat="server" Visible="false"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                    <asp:Repeater ID="rptTipologieLink6" runat="server"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                    <asp:Repeater ID="rptTipologieLink7" runat="server"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-
+                                    <%= CreaLinkCategorie("rif000001") %>
                                     <li runat="server">
                                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                                     </li>
 
-                                    <%-- <asp:Repeater ID="rptTipologieLink6" runat="server"
-                                            OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                            <ItemTemplate>
-                                                <li><a id="linkRubriche" onclick="javascript:JsSvuotaSession()" href='<%#  CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", "rif000001", Eval("CodiceProdotto").ToString())%>'
-                                                    runat="server">
-                                                    <span class="label-nav">
-                                                        <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label></span>
-                                                </a></li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>--%>
+
                                 </ul>
                             </div>
                         </div>
@@ -1003,19 +800,7 @@
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-
-                                    <asp:Repeater ID="rptTipologieLink2" runat="server"
-                                        OnItemDataBound="rptTipologieLinkSezioni_ItemDataBound" ViewStateMode="Enabled">
-                                        <ItemTemplate>
-                                            <li><a id="linkRubriche" onclick="JsSvuotaSession(this)" href='<%#  CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(Eval("Descrizione").ToString()), "", Eval("CodiceTipologia").ToString(), Eval("CodiceProdotto").ToString()) %>'
-                                                runat="server">
-                                                <span class="label-nav">
-                                                    <asp:Label ID="Titolo" runat="server" Text='<%# Eval("Descrizione").ToString()%>'></asp:Label>
-                                                </span>
-                                            </a></li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-
+                                    <%= CreaLinkCategorie("rif000002") %>
                                     <!-- <%= CaricaLinksPerTipologia("rif000002","","10")  %> -->
                                 </ul>
                             </div>
@@ -1111,18 +896,16 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
         <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>
+        <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>--%>
         <script>
                                     pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
                                     initLingua('<%= Lingua %>');
                                    <%-- loadref(initLingua, '<%= Lingua %>');--%>
                                     jQuery(document).ready(function () {
-                                        /*Test pulizia cache*/
-                                        loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>')
-                                        /*Carico pannello ricerca immobili*/
-                                        loadref(InitSearchControls, '<%= Lingua %>');//make the call
-                                        /*Chiamo aggiornamento immobili se richiesto*/
-                                        loadref(UpdateImmobiliJs, '<%= Lingua %>');
+                                        loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
+                                      <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
+                                      <%-- 
+                                        loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
                                     });
         </script>
 
@@ -1136,10 +919,8 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/archivio.js") + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/lazyloadimg.js") + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>
-       
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/carrello.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
-
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/_jquery.placeholder.js") %>"></script>
@@ -1165,7 +946,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>
         <!--DEFIANTJS to query json obkects-->
-          <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
 
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>

@@ -98,7 +98,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
- 
+
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);
             Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", false);
@@ -119,7 +119,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         CaricaMenu();
         CaricaBannersAndControls();
-        SettaTestoIniziale("Pannello Ricerca Sito");
+       // SettaTestoIniziale("Pannello Ricerca Sito");
         VisualizzaTotaliCarrello();
         LoadJavascriptVariables();
         //  DataBind();
@@ -154,13 +154,13 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         switch (Lingua)
         {
             case "I":
-                if (!host.EndsWith(".it")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit")),true);
+                if (!host.EndsWith(".it")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit")), true);
                 break;
             case "GB":
-                if (!host.EndsWith(".com")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen")),true);
+                if (!host.EndsWith(".com")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen")), true);
                 break;
             case "RU":
-                if (!host.EndsWith(".ru")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru")),true);
+                if (!host.EndsWith(".ru")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru")), true);
                 break;
 
             default:
@@ -176,29 +176,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //carichiamo i link per le pagine dinamiche in base al tbl rif attività
 
         //CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
-        //CaricaMenuContenuti(2, 2, rptTipologieLink2); //Inserisco il link  nel menu
-
-        CaricaMenuSezioniContenuto("rif000002", rptTipologieLink2High); //Inserisco il link  nel menu
-        CaricaMenuSezioniContenuto("rif000002", rptTipologieLink2); //Inserisco il link  nel menu
-        CaricaMenuSezioniContenuto("rif000002", rptTipologieLink8High); //Inserisco il link  nel menu
-
-        //CaricaMenuContenuti(3, 3, rptTipologieLink3High); //Inserisco il link  nel menu
-        //CaricaMenuContenuti(3, 3, rptTipologieLink3); //Inserisco il link  nel menu
-
-        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1High, "prod000013,prod000014,prod000015"); //Inserisco il link  nel menu
-        CaricaMenuSottoSezioniContenuto("rif000001", "prod000013", rptTipologieLink1High);
-        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink1, "prod000013"); //Inserisco il link  nel menu
-        CaricaMenuSottoSezioniContenuto("rif000001", "prod000014", rptTipologieLink4High);
-        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink4, "prod000014"); //Inserisco il link  nel menu
-        CaricaMenuSottoSezioniContenuto("rif000001", "prod000015", rptTipologieLink5High);
-        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink5, "prod000015"); //Inserisco il link  nel menu
-        CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
-        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink6, "prod000017"); //Inserisco il link  nel menu
-        CaricaMenuSezioniContenuto("rif000001", rptTipologieLink7, "prod000020"); //Inserisco il link  nel menu
-
-
-        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink6High, "prod000017"); //Inserisco il link  nel menu
-        //CaricaMenuSezioniContenuto("rif000001", rptTipologieLink6, "prod000017"); //Inserisco il link  nel menu
+        //CaricaMenuSezioniContenuto("rif000002", rptTipologieLink8High); //Inserisco il link  nel menu
+        //CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
 
         //Carica i link menu per le pagine statiche in base all'id in tabella
         CaricaMenuLinkContenuti(1);
@@ -244,16 +223,31 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sezionebannersnavigazione = "banner-portfolio-sezioni";
                 //controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4B.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
                 sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectPortfolioAndLoadBanner === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectPortfolioAndLoadBanner('IsotopeBanner4.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
 
-                //  CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, sezionebannersnavigazione, false, litPortfolioBanners0, Lingua, true, 0, 5);
+                //sb.Append("(function wait() {");
+                //sb.Append("  if (typeof injectPortfolioAndLoadBanner === \"function\")");
+                //sb.Append("    {");
+                //sb.Append("injectPortfolioAndLoadBanner('IsotopeBanner4b.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);");
+                //sb.Append(" }");
+                //sb.Append("   else  {");
+                //sb.Append("  setTimeout(wait, 50);");
+                //sb.Append("  }  })();");
+
+
+                sb.Append("<section id=\"header3-2k\" class=\"mbr-section mbr-section__container article\" style=\"background-color: #ffffff; padding-top: 40px; padding-bottom: 20px;\">");
+                sb.Append("  <div class=\"container\">");
+                sb.Append("      <div class=\"row\">");
+                sb.Append("          <div class=\"col-xs-12\">");
+                sb.Append("             <h3 class=\"mbr-section-title display-2\">" + references.ResMan("basetext", Lingua, "testoCatalogonav1") + "</h3>");
+                sb.Append("             <small class=\"mbr-section-subtitle\">" + references.ResMan("basetext", Lingua, "testoCatalogonav2") + "</small>");
+                sb.Append("         </div>");
+                sb.Append("     </div>");
+                sb.Append(" </div>");
+                sb.Append("</section>");
+                sb.Append("<div id=\"divnavigazioneJs0\" class=\"inject\" params=\"");
+                sb.Append("injectPortfolioAndLoadBanner,'IsotopeBanner4b.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','4','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false");
+                sb.Append("\"></div>");
+                plhNavigazione.Text = sb.ToString();
 
                 break;
         }
@@ -270,15 +264,15 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //        break;
         //}
 
-        if (!string.IsNullOrEmpty(controllistBan2))
-        {
-            //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
-            ClientScriptManager cs = Page.ClientScript;
-            if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-            {
-                cs.RegisterStartupScript(this.GetType(), "cban2", sb.ToString(), true);
-            }
-        }
+        //if (!string.IsNullOrEmpty(controllistBan2))
+        //{
+        //    //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
+        //    ClientScriptManager cs = Page.ClientScript;
+        //    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //    {
+        //        cs.RegisterStartupScript(this.GetType(), "cban2", sb.ToString(), true);
+        //    }
+        //}
         //if (!string.IsNullOrEmpty(controllistBan3))
         //{
         //    //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
@@ -289,7 +283,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //    }
         //}
     }
-
+   
     protected void CaricaMenuLinkContenuti(long id)
     {
 
@@ -331,12 +325,261 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         if (CodiceTipologia == tipologia && Vetrina != "")
             sb.Append(" style=\"font-weight:500 !important\"  ");
         sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-        sb.Append("<span class=\"label-nav\">" + testo.ToLower() + "</span>");
+        sb.Append("<span >" + testo.ToLower() + "</span>");
         sb.Append("</a>");
 
         return sb.ToString();
     }
+    /*NEW CREAZIONE LINK MENU SUI 3 LIVELLI*/
 
+    public string CreaLinkPaginastatica(int idps, string classe = "", string stile = "font-weight:600 !important")
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        contenutiDM conDM = new contenutiDM();
+        Contenuti item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idps.ToString());
+        //Creiamo i link
+        if (item != null)
+        {
+            string testo = item.TitolobyLingua(Lingua);
+            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            testo = references.ResMan("Common", Lingua, "testoid" + idps);
+            sb.Append("<li>");
+            sb.Append("<a  href=\"");
+            sb.Append(link);
+            sb.Append("\"");
+            if (idps.ToString() == idContenuto)
+                sb.Append(" class=\"" + classe + "\" style=\"" + stile + "\"  ");
+            sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+            sb.Append(testo);
+            sb.Append("</a>");
+            sb.Append("</li>");
+            /*
+                 <a id="linkid10High" onclick="JsSvuotaSession(this)" runat="server" href="#">
+                                        <%= references.ResMan("Common", Lingua,"testoid10") %>
+                                    </a>
+             */
+        }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Creazione lista li per tipologie da min a max
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
+    public string CreaLinkTipologie(int min, int max)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
+        sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
+        sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+        if (sezioni != null)
+            foreach (TipologiaOfferte o in sezioni)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                sb.Append("<li>");
+                sb.Append("<a href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (o.Codice == CodiceTipologia)
+                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                sb.Append(testo);
+                sb.Append("</a>");
+                sb.Append("</li>");
+            }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Creazione lista li con sottolivelli per le tipologie indicate , depth=0 solo lista 1 primo livello categoria, depth=1 primo e secondo livello categoria e sottocategoria
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <param name="depth"></param>
+    /// <param name="ulvisibility">Rende le sottoliste sempre visibili</param>
+    /// <returns></returns>
+    public string CreaLinkTipologieNested(int min, int max, int depth = 0, bool ulvisibility = false)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
+        sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
+        sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+        if (sezioni != null)
+            foreach (TipologiaOfferte o in sezioni)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                sb.Append("<li>");
+                sb.Append("<a  href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (o.Codice == CodiceTipologia)
+                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                sb.Append(testo);
+                sb.Append("</a>");
+
+                /*Nested level*/
+                string sottomenu = "";
+                if (depth == 0) sottomenu = CreaLinkCategorie(o.Codice);
+                if (depth == 1) sottomenu = CreaLinkCategorieNested(o.Codice);
+                if (!string.IsNullOrEmpty(sottomenu))
+                {
+                    string ulstyle = "style =\"display: none;\"";
+                    if (ulvisibility) ulstyle = "";
+                    sb.Append("<ul class=\"dropdown\" " + ulstyle + " >");
+                    sb.Append(sottomenu);
+                    sb.Append("</ul>");
+                }
+
+                sb.Append("</li>");
+            }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Creazione lista li delle categorie per la tipologia indicata
+    /// </summary>
+    /// <param name="tipologia"></param>
+    /// <param name="filtercode"></param>
+    /// <returns></returns>
+    public string CreaLinkCategorie(string tipologia, string filtercode = "")
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
+        }
+        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+        if (prodotti != null)
+            foreach (Prodotto o in prodotti)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                sb.Append("<li>");
+                sb.Append("<a href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (o.CodiceProdotto == Categoria)
+                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                sb.Append(testo);
+                sb.Append("</a>");
+                sb.Append("</li>");
+            }
+
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Creazione lista li delle categorie e sottocategorie per la tipologia indicata
+    /// </summary>
+    /// <param name="tipologia"></param>
+    /// <param name="filtercode"></param>
+    /// <param name="ulvisibility"></param>
+    /// <returns></returns>
+    public string CreaLinkCategorieNested(string tipologia, string filtercode = "", bool ulvisibility = false)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
+        }
+        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+        if (prodotti != null)
+            foreach (Prodotto o in prodotti)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                sb.Append("<li>");
+                sb.Append("<a  href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (o.CodiceProdotto == Categoria)
+                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                sb.Append(testo);
+                sb.Append("</a>");
+
+                /*Nested level*/
+                string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto);
+                if (!string.IsNullOrEmpty(sottomenu))
+                {
+                    string ulstyle = "style =\"display: none;\"";
+                    if (ulvisibility) ulstyle = "";
+                    sb.Append("<ul class=\"dropdown\" " + ulstyle + " >");
+                    sb.Append(sottomenu);
+                    sb.Append("</ul>");
+                }
+                sb.Append("</li>");
+            }
+
+
+        return sb.ToString();
+    }
+    /// <summary>
+    /// Creazione lista li delle sottocategorie ( 1livello ) per la tipologie e categoria indicata
+    /// </summary>
+    /// <param name="tipologia"></param>
+    /// <param name="categoria"></param>
+    /// <param name="filtercode"></param>
+    /// <returns></returns>
+    public string CreaLinkSottoCategorie(string tipologia, string categoria, string filtercode = "")
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        sprodotti.Sort(new GenericComparer<SProdotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            sprodotti = sprodotti.FindAll(i => list.Exists(l => l == i.CodiceSProdotto));
+        }
+        if (sprodotti != null)
+            foreach (SProdotto o in sprodotti)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                sb.Append("<li>");
+                sb.Append("<a href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (o.CodiceSProdotto == Categoria2liv)
+                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                sb.Append(testo);
+                sb.Append("</a>");
+                sb.Append("</li>");
+            }
+        return sb.ToString();
+    }
+    /*NEW CREAZIONE LINK MENU SUI 3 LIVELLI*/
 
     public string CaricaLinksPerTipologiaImmobili(string tipologia, string ordinamento = "")
     {
@@ -359,7 +602,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (tipologia == CodiceTipologia && t.Key == Categoria)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span class=\"label-nav\">" + testolink.ToLower() + "</span>");
+                sb.Append("<span >" + testolink.ToLower() + "</span>");
                 sb.Append("</a>");
                 sb.Append("</li>");
 
@@ -392,7 +635,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //if (idOfferta == )
                 //    sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span class=\"label-nav\">" + testourl.ToLower() + "</span>");
+                sb.Append("<span >" + testourl.ToLower() + "</span>");
                 sb.Append("</a>");
                 sb.Append("</li>");
 
@@ -466,7 +709,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (o.Id.ToString() == idOfferta)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span class=\"label-nav\">" + testo.ToLower() + "</span>");
+                sb.Append("<span >" + testo.ToLower() + "</span>");
                 sb.Append("</a>");
                 sb.Append("</li>");
             }
@@ -517,35 +760,35 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         rptlist.DataSource = sprodotti;
         rptlist.DataBind();
     }
-    public string CaricaLinkSottoSezioniContenuto(string tipologia, string categoria)
-    {
-        string ret = "";
-        //List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
-        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
-        List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        if (sprodotti != null)
-            foreach (SProdotto o in sprodotti)
-            {
+    //public string CaricaLinkSottoSezioniContenuto(string tipologia, string categoria)
+    //{
+    //    string ret = "";
+    //    //List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
+    //    //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+    //    List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
+    //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+    //    if (sprodotti != null)
+    //        foreach (SProdotto o in sprodotti)
+    //        {
 
-                string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
-                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                sb.Append("<li>");
-                sb.Append("<div class=\"divbuttonstyle\" style=\"margin-right: 5px;  font-size: 0.8em; padding: 2px;\" >");
-                sb.Append("<a href=\"");
-                sb.Append(link);
-                sb.Append("\" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span class=\"label-nav\">" + testo + "</span>");
-                sb.Append("</a>");
-                sb.Append("</div>");
-                sb.Append("</li>");
-            }
-        ret = sb.ToString();
-        if (ret != "")
-            pnlCategorie.Visible = true;
-        return ret;
-    }
+    //            string testo = o.Descrizione;
+    //            string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
+    //            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+    //            sb.Append("<li>");
+    //            sb.Append("<div class=\"divbuttonstyle\" style=\"margin-right: 5px;  font-size: 0.8em; padding: 2px;\" >");
+    //            sb.Append("<a href=\"");
+    //            sb.Append(link);
+    //            sb.Append("\" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+    //            sb.Append("<span >" + testo + "</span>");
+    //            sb.Append("</a>");
+    //            sb.Append("</div>");
+    //            sb.Append("</li>");
+    //        }
+    //    ret = sb.ToString();
+    //    if (ret != "")
+    //        pnlCategorie.Visible = true;
+    //    return ret;
+    //}
 
 
 

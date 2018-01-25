@@ -10,6 +10,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <script type="text/javascript">
         makeRevLower = true;
+        history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
     </script>
     <div class="container" style="text-align: center; margin-top: 10px">
         <div class="row" runat="server" id="divTitle">
@@ -32,6 +33,8 @@
     <div style="max-width: 1800px; margin: 0px auto; padding: 20px">
         <div id="divPortfolioList1"></div>
         <div id="divPortfolioList1Pager"></div>
+        <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
+
     </div>
 </asp:Content>
 

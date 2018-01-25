@@ -5,6 +5,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderSubsSlider" runat="Server">
+    <script>
+        history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
+    </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <div class="container" style="text-align: center; margin-top: 10px">
@@ -35,6 +38,7 @@
     
     <div id="divPortfolioList1"></div>
     <div id="divPortfolioList1Pager"></div>
+        <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
 
 
     <div id="divPlaceholderIsotopeList"></div>

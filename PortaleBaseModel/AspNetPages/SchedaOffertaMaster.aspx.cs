@@ -205,8 +205,8 @@ public partial class _SchedaOffertaMaster : CommonPage
             if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
-          
-#if false  
+
+#if false
             string strigaperricerca = "";
             strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
             Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
@@ -280,42 +280,20 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
                     //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
 
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2);");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
 
                     sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectScrollerAndLoad === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
-
-
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        //cs.RegisterStartupScript(this.GetType(), "clistlatest", controllatest, true);
-                        cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
-                        //cs.RegisterStartupScript(this.GetType(), "cbandestra1", cbandestra1, true);
-                    }
-
 
                     //BIND PER LA SCHEDA!!!!
-                    //string controlresource1 = "injectandloadgenericcontent(\"schedadetails.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");";
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
 
-                    sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectandloadgenericcontent(\"schedadetails.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "controlresource1", sb.ToString(), true);
-                    }
                 }
 
 
@@ -338,40 +316,17 @@ public partial class _SchedaOffertaMaster : CommonPage
                 {
                     //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2);";
                     sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectScrollerAndLoad === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2);");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
 
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        //cs.RegisterStartupScript(this.GetType(), "clistlatest", controllatest, true);
-                        cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
-                        //cs.RegisterStartupScript(this.GetType(), "cbandestra1", cbandestra1, true);
-                    }
-
-#if true
-
-                    //BIND PER LA SCHEDA!!!!
-                    //string controlresource2 = "injectandloadgenericcontent(\"schedadetails.html\",\"divItemContainter1\", \"divitem\",false,true, \"" + idOfferta + "\");";
                     sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectandloadgenericcontent(\"schedadetails.html\",\"divItemContainter1\", \"divitem\",false,true, \"" + idOfferta + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "controlresource1", sb.ToString(), true);
-                    }
-#endif
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
 
                 }
@@ -949,7 +904,7 @@ public partial class _SchedaOffertaMaster : CommonPage
     }
     protected void AssociaDatiSocial(Offerte data)
     {
-        string  host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
+        string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         string descrizione = data.DescrizionebyLingua(Lingua);
         string denominazione = data.DenominazionebyLingua(Lingua);
 
@@ -1018,13 +973,13 @@ public partial class _SchedaOffertaMaster : CommonPage
             linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit"));
 
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" +  (linkcanonicoalt) + "\"/>";
+        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" +  (linkcanonicoalt) + "\"/>";
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
         if (Lingua == "I")
         {
-            litcanonic.Text = "<link rel=\"canonical\"  href=\"" +  (linkcanonicoalt) + "\"/>";
-            actualpagelink.Campo1 =  (linkcanonicoalt);
+            litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
+            actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
@@ -1036,12 +991,12 @@ public partial class _SchedaOffertaMaster : CommonPage
                 linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
 
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" +  (linkcanonicoalt) + "\"/>";
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
             if (Lingua == "GB")
             {
-                litcanonic.Text = "<link rel=\"canonical\"  href=\"" +  (linkcanonicoalt) + "\"/>";
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (linkcanonicoalt) + "\"/>";
                 Tabrif link = new Tabrif();
-                actualpagelink.Campo1 =  (linkcanonicoalt);
+                actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
             }
         }

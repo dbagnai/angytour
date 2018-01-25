@@ -19,9 +19,9 @@
             <div class="col-md-1 col-sm-1">
             </div>
         </div>
-          <div class="loaderrelative" style="display: none">
-                <div class="spinner"></div>
-            </div>
+        <div class="loaderrelative" style="display: none">
+            <div class="spinner"></div>
+        </div>
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div style="text-align: center">
@@ -64,6 +64,8 @@
             </div>
             <%--Container per inject java della scheda--%>
             <div id="divItemContainter1" style="position: relative; display: none"></div>
+            <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
+
             <%--Rpt per scheda lato server--%>
             <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
                 <ItemTemplate>
@@ -137,14 +139,14 @@
                                     <meta itemprop="availability" content="in_stock">
                                     <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
                                         <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 0px; padding-right: 5px">
-                                                <asp:LinkButton runat="server" ID="btnSottrai"
-                                                    OnClick="btnDecrement" class="buttonstyle pull-left"  Style="height: 42px !important" CommandArgument='<%# Eval("Id") %>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="btnSottrai"
+                                                OnClick="btnDecrement" class="buttonstyle pull-left" Style="height: 42px !important" CommandArgument='<%# Eval("Id") %>'><i class="fa fa-minus"></i></asp:LinkButton>
 
-                                                <input runat="server" class="form-control text-center" style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 42px; float: left;" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request,Session,Eval("Id").ToString(),"") %>' />
+                                            <input runat="server" class="form-control text-center" style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 42px; float: left;" id="txtQuantita" type="text" value='<%# CaricaQuantitaNelCarrello(Request,Session,Eval("Id").ToString(),"") %>' />
 
-                                                <asp:LinkButton runat="server" ID="btnAggiungi" style="height: 42px !important"   OnClick="btnIncrement" class="buttonstyle pull-left"   CommandArgument='<%# Eval("Id") %>'>
+                                            <asp:LinkButton runat="server" ID="btnAggiungi" Style="height: 42px !important" OnClick="btnIncrement" class="buttonstyle pull-left" CommandArgument='<%# Eval("Id") %>'>
                                                         <i class="fa fa-plus"></i>
-                                                </asp:LinkButton>
+                                            </asp:LinkButton>
                                         </div>
                                         <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 0px">
                                             <asp:LinkButton runat="server" Text='<%# references.ResMan("Common", Lingua,"testoAggiornacarrello") %>' class="buttonstyle" Style="width: 100%; font-size: 0.8rem;" OnClick="btnUpdateCart" CommandArgument='<%# Eval("Id") %>'>
@@ -163,7 +165,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-6" style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 0px">
-                                            <div runat="server"  style="padding-left: 2px; padding-right: 2px; margin: 0px auto" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
+                                            <div runat="server" style="padding-left: 2px; padding-right: 2px; margin: 0px auto" id="divContact" visible='<%# AttivaContatto(Eval("Abilitacontatto"))%>'>
                                                 <%--  <a id="A1" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta" + "&Lingua=" + Lingua%>'  target="_blank" title="" class="buttonstyle">--%>
                                                 <a id="A1" runat="server" href='#richiedilinkpoint' target="_self" title="" class="buttonstyle" style="width: 100%; font-size: 0.9rem;">
                                                     <%= ImpostaTestoRichiesta()%>
@@ -182,7 +184,7 @@
                             <div class="addthis_inline_share_toolbox"></div>
                             <div class="blog-post-body">
                                 <%--INSERIAMO I PARAMETRI DEL PRODOTTO--%>
-                                           <p itemprop="description">
+                                <p itemprop="description">
                                     <asp:Label ID="lbldescri" runat="server" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(CommonPage.ReplaceLinks(Eval("Descrizione" + Lingua).ToString()))%>'></asp:Label>
                                 </p>
                                 <p>
@@ -200,7 +202,7 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            
+
             <div class="clearfix"></div>
             <%--SUGGERITI--%>
             <div class="row" runat="server" id="divSuggeriti" style="margin-bottom: 15px" visible="false">
@@ -209,7 +211,7 @@
                     <span class="subtitle-block">
                         <%--<%= (CodiceTipologia == "rif000100" || CodiceTipologia == "rif000101") ? references.ResMan("Common",Lingua,"titoloCollegati").ToString() : references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString()%>--%>
                         <%= (CodiceTipologia == "rif000100" || CodiceTipologia == "rif000101") ? references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                        </span>
+                    </span>
                 </div>
 
                 <asp:Repeater ID="rptArticoliSuggeriti" runat="server"
@@ -400,7 +402,7 @@
             </div>
         </div>
     </div>
- 
+
     <%--   <div class="row" style="margin-top: 20px">
             <div class="pull-right">
                 <div id="fb-root"></div>
@@ -568,8 +570,8 @@
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-    
-      <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
+
+    <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
     <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="true" style="background-color: #efefef">
         <<div class="ui-content">
             <div class="container">
@@ -636,7 +638,7 @@
             </div>
         </div>
     </div>
-     <div style="background-color: #efefef;">
+    <div style="background-color: #efefef;">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
@@ -654,7 +656,7 @@
                     </div>
                 </div>
             </div>
-            <div id="divScrollerSuggeritiJs"></div>
+            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
         </div>
     </div>
 </asp:Content>

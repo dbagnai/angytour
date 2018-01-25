@@ -392,17 +392,20 @@
                 else
                 {
                     appaddress = System.Web.HttpContext.Current.Request.Url.ToString();
+                    int startquery = appaddress.IndexOf("?");
+                    if (startquery != -1)
+                        appaddress = appaddress.Substring(0, startquery);
                     string query = System.Web.HttpContext.Current.Request.Url.Query;
                     if (!string.IsNullOrEmpty(query))
                     {
                         appaddress.Replace(HttpContext.Current.Server.UrlDecode(query), "");
-                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20","%2520"), "");
+                        appaddress = appaddress.Replace(HttpContext.Current.Server.UrlDecode(query).Replace("%20", "%2520"), "");
                         appaddress.Replace((query), "");
                     }
                     appaddress = appaddress.ToLower().TrimEnd('/');
                 }
 
-                    if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enableHttps").ToLower() == "true")
                     appaddress = appaddress.ToLower().Replace("http:", "https:");
 
                 System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
@@ -479,16 +482,20 @@
     void RoutingForOldUrlRewrite(System.Web.Routing.RouteCollection routes) //Vecchi parametri routing per redirect
     {
 
-        ////Dovremmo mappare anche per le vecchie liste di raggruppamento ( queste sono da mappare in tabella redirect !!!! per intero  )
-        //routes.Add("Genericoldlistacategorieprod", new System.Web.Routing.Route("catalogo-prodotti/{Lingua}/{ContenutoPagina}/{testoindice}", new GenericRouteHandler()));
-        //routes.Add("Genericoldlistacatalogoprod", new System.Web.Routing.Route("Casadellabatteria/Prodotti/{Lingua}/{CodiceContenuto}/{testoindice}", new GenericRouteHandler()));
-        //routes.Add("Genericoldlistablog", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{testoindice}", new GenericRouteHandler()));
-        //routes.Add("Genericoldlistablogconsezione", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{Sezione}/{testoindice}", new GenericRouteHandler()));
+        //   //Dovremmo mappare anche per le vecchie liste di raggruppamento ( queste sono da mappare in tabella redirect !!!! per intero  )
+        //routes.Add("Genericoldpagstatica", new System.Web.Routing.Route("Informazioni/{Lingua}/{idContenuto}/{testoindice}", new GenericRouteHandler()));
 
-        //SCHEDE PRODOTTI
-        //routes.Add("Genericolddetailprod1", new System.Web.Routing.Route("Casadellabatteria/Scheda-Prodotto/{Lingua}/{CodiceContenuto}/{idContenuto}/{modo}/{Tipolista}/{testoindice}", new GenericRouteHandler()));
-        //SCHEDE EVENTI
-        //routes.Add("Genericolddetailevent1", new System.Web.Routing.Route("Casadellabatteria/Eventi/{Lingua}/{CodiceContenuto}/{idContenuto}/{modo}/{Tipolista}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldschedaablog", new System.Web.Routing.Route("Articolo/{Lingua}/{Tipologia}/{idOfferta}/{testoindice}", new GenericRouteHandler()));
+
+        //routes.Add("Genericoldlistablog", new System.Web.Routing.Route("info/{Lingua}/{Tipologia}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistacatblog", new System.Web.Routing.Route("info/{Lingua}/{Tipologia}/{Categoria}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistacatsottocatblog", new System.Web.Routing.Route("info/{Lingua}/{Tipologia}/{Categoria}/{Categoria2liv}/{testoindice}", new GenericRouteHandler()));
+
+        //routes.Add("Genericoldschedaprod", new System.Web.Routing.Route("prodotto/{Lingua}/{Tipologia}/{idOfferta}/{testoindice}", new GenericRouteHandler()));
+
+        //routes.Add("Genericoldlistaprod", new System.Web.Routing.Route("catalogo/{Lingua}/{Tipologia}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistaprodcat", new System.Web.Routing.Route("catalogo/{Lingua}/{Tipologia}/{Categoria}/{testoindice}", new GenericRouteHandler()));
+        //routes.Add("Genericoldlistaprodcatsottocat", new System.Web.Routing.Route("catalogo/{Lingua}/{Tipologia}/{Categoria}/{Categoria2liv}/{testoindice}", new GenericRouteHandler()));
 
 
     }

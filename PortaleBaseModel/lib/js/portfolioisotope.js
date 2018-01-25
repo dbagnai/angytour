@@ -39,7 +39,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
         });
-        InitIsotopeLocal(controlid);
+       // InitIsotopeLocal(controlid);
 
         //RICARICO LA PAGINA DALLA SESISONE SE PRESENTE
 
@@ -236,15 +236,26 @@ function BindIsotope(el, localObjects) {
 
         //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
         $('#' + el).html('');
-        // Update isotope container with new data. 
-        //$('#' + el).isotope('remove',  $('#' + el).data('isotope').$allAtoms );
-        $('#' + el).isotope('insert', $(htmlout))
+
+        InitIsotopeLocal(el);
+        var $grid = $('#' + el).isotope('insert', $(htmlout))
             // trigger isotope again after images have been loaded
             .imagesLoaded(function () {
                 $('#' + el).isotope('layout');
                 CleanHtml($('#' + el));
-
+                //reinitscrollpos();
             });
+        //On event layoutComplete i make what needed
+        $grid.on('layoutComplete',
+            function (event, laidOutItems) {
+                lazyLoad();
+                //Abilito traking vertical scroll position e reimposto la posizioneiniziale se presente in memoria
+                enablescrolltopmem = true;
+                reinitscrollpos(); //Return to previosus scrolltop pos of page
+                //console.log('Isotope layout completed on ' +
+                //  laidOutItems.length + ' items');
+            });
+
         $(".loaderrelative").hide();
     } catch (e) { $(".loaderrelative").hide(); }
 };
@@ -253,8 +264,8 @@ function BindIsotope(el, localObjects) {
 
 function InitIsotopeLocal(controlid) {
     /* ---------------------------------------------- /*
-    * Portfolio 
-    /* ---------------------------------------------- */
+   * Portfolio 
+   /* ---------------------------------------------- */
     var worksgrid = $('#' + controlid);
     var worksgrid_mode;
     if (worksgrid.hasClass('works-grid-masonry')) {
@@ -266,17 +277,27 @@ function InitIsotopeLocal(controlid) {
     // worksgrid.imagesLoaded(function () {
     var $grid = worksgrid.isotope({
         layoutMode: worksgrid_mode,
-        itemSelector: '.work-item'
+        itemSelector: '.work-item',
+        isInitLayout: false //disable layout on initialization, so you can use methods or add events before the initial layout.
         //fitRows: {
         //gutter: 10}
     });
     //  });
-    $grid.on('layoutComplete',
-        function (event, laidOutItems) {
-            lazyLoad();
-            //console.log('Isotope layout completed on ' +
-            //  laidOutItems.length + ' items');
-        });
+
+
+    //$grid.on('layoutComplete',
+    //    function (event, laidOutItems) {
+    //        lazyLoad();
+    //        //console.log('Isotope layout completed on ' +
+    //        //  laidOutItems.length + ' items');
+    //        console.log('layoutComplete');
+    //    });
+
+    //$grid.on('arrangeComplete',
+    //    function (event, filteredItems) {
+    //        console.log('arrangeComplete');
+    //    }
+    //);
 }
 
 

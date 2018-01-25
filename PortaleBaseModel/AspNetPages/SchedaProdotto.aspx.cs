@@ -180,40 +180,21 @@ public partial class _SchedaProdotto : CommonPage
                 column3.Visible = false;
                 divContact.Visible = false;
                 divContact.Visible = false;
-                //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
+
                 sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectScrollerAndLoad === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
+                sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
+                sb.Append("\"></div>");
+                plhSuggeritiJs.Text = sb.ToString();
 
 
-                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                {
-                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
-                }
-
+                sb.Clear();
                 //BIND PER LA SCHEDA!!!!
-                //string controlresource1 = "injectandloadgenericcontent(\"schedadetailsprod.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");";
+                sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                sb.Append("\"></div>");
+                placeholderrisultati.Text = sb.ToString();
 
-                sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectandloadgenericcontent(\"schedadetailsprod.html\",\"divItemContainter1\", \"divitem\",true,true, \"" + idOfferta + "\");");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
-
-                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                {
-                    cs.RegisterStartupScript(this.GetType(), "controlresource1", sb.ToString(), true);
-                }
 
                 break;
             default:
@@ -226,19 +207,11 @@ public partial class _SchedaProdotto : CommonPage
                 //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");";
 
                 sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectandloadgenericcontent === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectScrollerAndLoad(\"owlscrollerProdotti1.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2, \"" + Categoria2liv + "\");");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
-
-                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                {
-                    cs.RegisterStartupScript(this.GetType(), "controlsuggeriti", sb.ToString(), true);
-                }
+                sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
+                sb.Append("\"></div>");
+                plhSuggeritiJs.Text = sb.ToString();
+ 
                 this.AssociaDati();
                 break;
         }

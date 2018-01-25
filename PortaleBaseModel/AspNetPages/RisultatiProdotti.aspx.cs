@@ -304,20 +304,16 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 if (Vetrina) svetrina = "true";
                 //string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
 
-                sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
 
-                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                {
-                    cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
-                }
+
+
+                sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                sb.Append("injectPortfolioAndLoad,isotopeProdotti1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'," + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
+                sb.Append("\"></div>");
+                sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                placeholderrisultati.Text = sb.ToString();
+
+
                 //SettaTestoIniziale();
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 

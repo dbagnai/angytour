@@ -289,24 +289,15 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
                 //CaricaMenuContenuti(4, 9, rptContenutiLink);
                 divCategorie.Visible = false;
-                //string svetrina = "";
-                //if (Vetrina) svetrina = "true";
-                //string controllistpr = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", \"\", \"\", \"\", \"" + Categoria2liv + "\");";
 
+                //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                //placeholderrisultati
+                sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                sb.Append("injectPortfolioAndLoad,isotopeProdotti1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                sb.Append("\"></div>");
+                sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                placeholderrisultati.Text = sb.ToString();
 
-                sb.Clear();
-                sb.Append("(function wait() {");
-                sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
-                sb.Append("    {");
-                sb.Append("injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", \"\", \"\", \"\", \"" + Categoria2liv + "\");");
-                sb.Append(" }");
-                sb.Append("   else  {");
-                sb.Append("  setTimeout(wait, 50);");
-                sb.Append("  }  })();");
-                if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                {
-                    cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
-                }
 
                 break;
             case "rif000002":
@@ -330,27 +321,14 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 if (!JavaInjection)
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                    //string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
 
-
-                    //string controllist1 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");";
-
-                    sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", true, false, \"\",\"" + testoricerca + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
-
-
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
-                        //cs.RegisterStartupScript(this.GetType(), "cbandestra1", cbandestra1, true);
-                    }
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeOfferte4.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
                 }
 
                 break;
@@ -381,20 +359,14 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     //string controllist2 = "injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
 
 
-                    sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeOfferte1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
 
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
-                    }
                 }
 
 
@@ -427,38 +399,23 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     //string controllist3 = "injectPortfolioAndLoad(\"isotopeOfferte5.html\",\"divContainerBannerslat1\", \"portlist2\", 1, 10, false, \"\", \"" + "rif000003" + "\", \"" + "" + "\", false, true, \"6\",\"" + testoricerca + "\");";
 
                     sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectPortfolioAndLoad === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectPortfolioAndLoad(\"isotopeOfferte5.html\",\"divContainerBannerslat1\", \"portlist2\", 1, 10, false, \"\", \"" + "rif000003" + "\", \"" + "" + "\", false, true, \"6\",\"" + testoricerca + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "controllist3", sb.ToString(), true);
-                    }
+
+                    sb.Append("<div id=\"divPortfolioListLat\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeOfferte5.html,divPortfolioListLat, portlistlat1, 1, 21, false, \'\', \'" + "rif000003" + "\', \'\', false, true, \'6\',\'\'");
+                    sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    plhContainerLat.Text = sb.ToString();
 
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                    //string controllist4 = "injectPortfolioAndLoad(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
 
-                    sb.Clear();
-                    sb.Append("(function wait() {");
-                    sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
-                    sb.Append("    {");
-                    sb.Append("injectSliderAndLoadBanner(\"isotopeOfferte4.html\",\"divPortfolioList1\", \"portlist1\", 1, 20, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");");
-                    sb.Append(" }");
-                    sb.Append("   else  {");
-                    sb.Append("  setTimeout(wait, 50);");
-                    sb.Append("  }  })();");
 
-                    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-                    {
-                        cs.RegisterStartupScript(this.GetType(), "clist1", sb.ToString(), true);
-                        //cs.RegisterStartupScript(this.GetType(), "cbandestra1", cbandestra1, true);
-                    }
-
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeOfferte4.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
                 }
 
                 break;

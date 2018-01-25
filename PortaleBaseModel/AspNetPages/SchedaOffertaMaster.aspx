@@ -474,6 +474,7 @@
                 <asp:Label ID="output" runat="server"></asp:Label>
             </div>
             <div id="divItemContainter1" style="position: relative; display: none"></div>
+            <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
 
             <div class="row">
                 <div class="col-md-12 col-sm-12">
@@ -1026,7 +1027,6 @@
                                 </ul>
                             </ItemTemplate>
                         </asp:Repeater>--%>
-
                     </div>
                 </div>
 
@@ -1138,7 +1138,7 @@
                     </div>
 
                 </div>
-                <div id="divScrollerSuggeritiJs"></div>
+                <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
             </div>
         </div>
     </div>

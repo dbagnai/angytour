@@ -25,6 +25,7 @@
         <!--=== End Breadcrumbs ===-->--%>
     <script type="text/javascript">
         makeRevLower = true;
+        history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
     </script>
     <div class="container" style="text-align: center; margin-top: 10px">
         <div class="row" runat="server" id="divTitle">
@@ -146,6 +147,8 @@
         </div>--%>
         <div id="divPortfolioList1"></div>
         <div id="divPortfolioList1Pager"></div>
+        <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
+
     </div>
     <div class="col-md-9 col-sm-9" runat="server" id="column2">
 
@@ -368,6 +371,7 @@
             <!-- Sidebar Block -->
 
 
+        <asp:Literal Text="" ID="plhContainerLat" runat="server" />
 
             <div id="divContainerBannerslat1"></div>
             <div class="sidebar-block" runat="server" id="div2" visible="false">
