@@ -325,7 +325,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     //placeholderrisultati
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopeOfferte4.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopeOfferteSingleRow1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = sb.ToString();
