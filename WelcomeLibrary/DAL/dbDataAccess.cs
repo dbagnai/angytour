@@ -91,17 +91,38 @@ namespace WelcomeLibrary.DAL
 
         }
 
+        //public static string comprimiSQLiteDB(string Conn)
+        //{
+        //    string ret = "";
+
+        //    try
+        //    {
+        //        ExecuteScalar<long>("VACUUM;", null, Conn);
+        //        ret = "Compresso db correttamente";
+        //    }
+        //    catch { ret = "Errore compressione archivio DB"; }
+
+        //    return ret;
+        //}
         public static string comprimiSQLiteDB(string Conn)
         {
+            string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
             string ret = "";
-
             try
             {
-                ExecuteScalar<long>("VACUUM;", null, Conn);
-                ret = "Compresso db correttamente";
+                using (SQLiteConnection conn = new SQLiteConnection(connessione))
+                {
+                    conn.Open();
+                    string query = "VACUUM;";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                        ret = "Compresso db correttamente";
+                    }
+                    conn.Close();
+                }
             }
-            catch { ret = "Errore compressione archivio DB"; }
-
+            catch(Exception e) { ret = "Errore compressione archivio DB:" + e.Message; }
             return ret;
         }
 
