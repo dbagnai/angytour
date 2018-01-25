@@ -664,7 +664,7 @@ namespace WelcomeLibrary.DAL
         public AllegatiCollection getListaFotobyId(string connection, long idContenuto)
         {
             if (connection == null || connection == "") { return null; };
-            if (idContenuto == null || idContenuto == 0) { return null; };
+            if (idContenuto == 0) { return null; };
 
             string query = "SELECT [FotoSchema],[FotoValori] FROM TBL_CONTENUTI where ID=@idContenuto";
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();

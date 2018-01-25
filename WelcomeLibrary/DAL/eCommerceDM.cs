@@ -819,7 +819,7 @@ namespace WelcomeLibrary.DAL
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            if (ID == null || ID == 0) return;
+            if (ID == 0) return;
             if (string.IsNullOrEmpty(CodCar)) CodCar = "";
 
             SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
@@ -849,7 +849,7 @@ namespace WelcomeLibrary.DAL
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
-            if (ID == null || ID == 0) return;
+            if (ID == 0) return;
 
             SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
@@ -1315,8 +1315,6 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
 
-
-
             SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
             parColl.Add(pptotsmaltimento);
             SQLiteParameter ppsupplementospedizione = new SQLiteParameter("@Supplementospedizione", item.Supplementospedizione);// 
@@ -1330,7 +1328,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pid = new SQLiteParameter("@Id", item.Id);//OleDbType.VarChar
             parColl.Add(pid);
 
-            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@SupplementospCodicescontoedizione WHERE ([ID]=@Id)";
+            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@Codicesconto WHERE ([ID]=@Id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

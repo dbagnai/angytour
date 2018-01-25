@@ -1119,7 +1119,7 @@ namespace WelcomeLibrary.DAL
                     query += " limit " + (page - 1) * pagesize + "," + pagesize;
                 }
 
-                /*CALCOLO IL NUMERO DI RICGHE FILTRATE TOTALI*/
+                /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
                 long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM TBL_CLIENTI " + queryfilter, parColl, connection);
                 list.Totrecs = totalrecords;
 
