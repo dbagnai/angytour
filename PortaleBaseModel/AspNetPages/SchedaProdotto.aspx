@@ -113,7 +113,7 @@
                                     <div class="clearfix" style="margin-bottom: 10px"></div>
 
                                     <b class="product-price pull-left" runat="server" visible='<%# VerificaPresenzaPrezzo(Eval("Prezzo"))%>'>
-                                        <div style="color: #AC4220; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <div style="color: #2a4e40; font-weight: 500; font-size: 1.5rem; padding-right: 0px; text-align: left" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                             <meta itemprop="price" content='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", new object[] { Eval("Prezzo") }) + " €"%>'>
                                             <meta itemprop="priceCurrency" content="EUR">
                                             <asp:Literal ID="Literal4" runat="server" Text='<%#  ImpostaIntroPrezzo(Eval("CodiceTipologia").ToString()) + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:##,###.00}", new object[] { Eval("Prezzo") }) + " €"%>'></asp:Literal><br />
@@ -579,7 +579,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12">
-                                <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"TestoDisponibilita") %></div>
+                                <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"testocontattadtl") %></div>
                             </div>
                         </div>
                     </div>
@@ -623,7 +623,9 @@
                             </div>
 
 
-                            <button id="Button1" class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                            <button id="Button1" style="width:200px"  class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+
+
                             <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
                             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
                             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />

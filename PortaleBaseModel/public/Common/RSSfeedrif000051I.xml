@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Legatoria Toscana Rassegna Stampa</title>
+    <title>Nome Sito Rassegna Stampa</title>
     <link>http://localhost:52646</link>
-    <description>Legatoria Toscana</description>
-    <lastBuildDate>Wed, 24 Jan 2018 12:39:16 GMT</lastBuildDate>
+    <description>Nome Sito</description>
+    <lastBuildDate>Sat, 27 Jan 2018 17:53:50 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-01-24T12:39+01:00</sy:updateBase>
+    <sy:updateBase>2018-01-27T17:53+01:00</sy:updateBase>
     <language>it-IT</language>
   </channel>
 </rss>

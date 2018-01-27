@@ -1,13 +1,35 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Albergo Ristorante Il Pozzetto Promozione</title>
+    <title>Nome Sito Eventi</title>
     <link>http://localhost:52646</link>
-    <description>Albergo Ristorante Il Pozzetto</description>
-    <lastBuildDate>Tue, 01 Aug 2017 16:21:48 GMT</lastBuildDate>
+    <description>Nome Sito</description>
+    <lastBuildDate>Sat, 27 Jan 2018 17:53:50 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2017-08-01T16:21+02:00</sy:updateBase>
+    <sy:updateBase>2018-01-27T17:53+01:00</sy:updateBase>
     <language>it-IT</language>
+    <item>
+      <title>prodotto 3
+sottotitolo</title>
+      <link>http://localhost:52646/I/eventi/prodotto-3-sottotitolo-872</link>
+      <guid isPermaLink="true">http://localhost:52646/I/eventi/prodotto-3-sottotitolo-872</guid>
+      <pubDate>Sat, 27 Jan 2018 15:16:01 +01:00</pubDate>
+      <category>Eventi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/872/sizer1.jpg" alt="prodotto 3
+sottotitolo" width="350" /><p>Vestibulum bibendum efficitur leo ornare egestas. Nullam sagittis ipsum nulla, in pretium dolor tincidunt consequat. Fusce tellus est, accumsan eget dui a, fringilla vehicula dolor. Proin bibendum id urna id mollis. Praesent metus ante, tempus eget sapien eu, sodales sollicitudin eros. Ut consequat ipsum vitae augue vehicula placerat. Morbi venenatis luctus pulvinar. Vivamus eget massa sagittis, imperdiet sem quis, consectetur risus. Nunc eu diam non lorem interdum rhoncus non non ex. Sed non ante lectus. <br/>  <br/> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas in mattis lectus. Mauris sodales non mi in interdum. Donec condimentum gravida condimentum. Donec volutpat auctor est, eget mattis lacus tincidunt vitae. Vestibulum semper orci ut lorem iaculis, in bibendum felis dictum. Donec ante elit, commodo sit amet dignissim vitae, eleifend non felis. Integer fermentum accumsan sapien ut suscipit. Sed mauris ex, mollis ut aliquam eget, malesuada eget nunc. Pellentesque facilisis leo ut porta cursus. Nam id purus diam. Nulla facilisi. Cras non euismod sapien. Nunc quis lorem congue, vulputate neque quis, eleifend ante. Phasellus egestas sapien a leo tempus tempus.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/eventi/prodotto-3-sottotitolo-872"><em>prodotto 3
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>evento 1
+sottotitolo</title>
+      <link>http://localhost:52646/I/eventi/evento-1-sottotitolo-871</link>
+      <guid isPermaLink="true">http://localhost:52646/I/eventi/evento-1-sottotitolo-871</guid>
+      <pubDate>Sat, 27 Jan 2018 15:14:45 +01:00</pubDate>
+      <category>Eventi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/871/sizer1.jpg" alt="evento 1
+sottotitolo" width="350" /><p>Vestibulum bibendum efficitur leo ornare egestas. Nullam sagittis ipsum nulla, in pretium dolor tincidunt consequat. Fusce tellus est, accumsan eget dui a, fringilla vehicula dolor. Proin bibendum id urna id mollis. Praesent metus ante, tempus eget sapien eu, sodales sollicitudin eros. Ut consequat ipsum vitae augue vehicula placerat. Morbi venenatis luctus pulvinar. Vivamus eget massa sagittis, imperdiet sem quis, consectetur risus. Nunc eu diam non lorem interdum rhoncus non non ex. Sed non ante lectus. <br/>  <br/> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas in mattis lectus. Mauris sodales non mi in interdum. Donec condimentum gravida condimentum. Donec volutpat auctor est, eget mattis lacus tincidunt vitae. Vestibulum semper orci ut lorem iaculis, in bibendum felis dictum. Donec ante elit, commodo sit amet dignissim vitae, eleifend non felis. Integer fermentum accumsan sapien ut suscipit. Sed mauris ex, mollis ut aliquam eget, malesuada eget nunc. Pellentesque facilisis leo ut porta cursus. Nam id purus diam. Nulla facilisi. Cras non euismod sapien. Nunc quis lorem congue, vulputate neque quis, eleifend ante. Phasellus egestas sapien a leo tempus tempus.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/eventi/evento-1-sottotitolo-871"><em>evento 1
+sottotitolo</em></a>.</p>]]></description>
+    </item>
   </channel>
 </rss>

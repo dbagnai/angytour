@@ -178,11 +178,11 @@
 }
 
 .fulllogobckdark {
-    width: 360px;
-    height: 120px;
+    width: 299px;
+    height: 55px;
     padding: 5px;
-    background: url('/images/main_logo_d.png') center center;
-    background-size: 75% 75%;
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 80% 80%;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
@@ -205,7 +205,7 @@
 
 /*orange OVERRIDE*/
 .menuzord.orange {
-    background: #AC4220;
+    background: #2a4e40;
 }
 
     .menuzord.orange .menuzord-brand {
@@ -219,7 +219,7 @@
     .menuzord.orange .menuzord-menu > li.active > a,
     .menuzord.orange .menuzord-menu > li:hover > a,
     .menuzord.orange .menuzord-menu ul.dropdown li:hover > a {
-        background: #AC4220;
+        background: #2a4e40;
         color: #fff;
     }
 
@@ -232,7 +232,7 @@
     }
 
     .menuzord.orange .menuzord-menu > li.search form input[type="text"] {
-        background: #AC4220;
+        background: #2a4e40;
         color: #fff;
     }
 
@@ -364,8 +364,8 @@
 .menuzord-menu > li {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
     .menuzord-menu > li > a {
@@ -425,7 +425,7 @@
 @media (max-width: 768px) {
 
     .menuzord-menu > li {
-        padding: 4px 3px !important;
+        padding: 0px !important;
     }
 
         .menuzord-menu > li > a {
@@ -434,8 +434,13 @@
         }
 
     .fulllogobckdark {
-        width: 270px;
-        height: 70px;
+        width: 300px;
+        height: 61px;
+        padding: 5px;
+        background-size: 60% 60%;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        margin-left: calc(100% - 170px);
     }
 
     .menuzord {

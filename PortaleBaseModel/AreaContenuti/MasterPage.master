@@ -504,25 +504,13 @@
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Chisiamo</span></a>
+                                                    <span class="menu-text">Testate header 1</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            <li class="newLi hover">
+                                                <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Personalizzazioni</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Su laboratorio</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-5">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Condizioni vendita</span></a>
+                                                    <span class="menu-text">Testate header 3</span></a>
                                                 <b class="arrow"></b>
                                             </li>
 
@@ -690,13 +678,13 @@
                                     <span class="menu-text">Anagrafica Clienti</span></a>
                                 <b class="arrow"></b>
                             </li>
-                            <li class="hover">
+                          <%--  <li class="hover">
                                 <a href="StoricoOrdini.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Storico Ordini
                                     </span></a>
                                 <b class="arrow"></b>
-                            </li>
+                            </li>--%>
 
                         </ul>
                     </li>

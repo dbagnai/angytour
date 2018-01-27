@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
 
             $("#divTop").removeClass('fixedtop');
             $("#divTop").addClass('freetop');
-        } else {
+        } else {http://localhost:52646/
             $("#mainnav").addClass('fixednav');
             $("#mainnav").removeClass('freenav');
             $("#mainnav1").addClass('fixednav1');
@@ -32,6 +32,7 @@ jQuery(document).ready(function ($) {
         //.html("Zoom:" + zoom + " device:" + device);
     }, 1000);
 
+    jQuery("#menuzord").show();
     jQuery("#menuzord").menuzord({
         align: "left",
         scrollable: true,

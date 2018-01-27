@@ -77,7 +77,7 @@ function searchtaginjectandcall() {
         var callerid = container.prop("id");
         var itemtocall = {};
         for (var i = 0; i < callerpars.length; i++) {
-          //  console.log(callerpars[i]);
+            //  console.log(callerpars[i]);
             if (i == 0) {
                 itemtocall = {};
                 itemtocall.args = [];
@@ -1134,20 +1134,20 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         CompleteUrlListImgsDesc(localObjects, idallegato, false, usecdn, function (filesret) {
                             imgslistdesc = filesret;
                         })
-
-                        for (var j = 0; j < imgslist.length; j++) {
-                            try {
-                                /*<li > <img src="" alt="" style="padding:5px" /></li > */
-                                contenutoslide += '<li > <img style="padding:5px" src="';
-                                var position = imgslist[j].lastIndexOf('/');
-                                var pathanteprima = imgslist[j].substr(0, position + 1) + "ant" + imgslist[j].substr(position + 1);
-                                contenutoslide += pathanteprima;
-                                contenutoslide += '" alt="" />';
-                                contenutoslide += '</li>';
+                        if (imgslist.length > 1)
+                            for (var j = 0; j < imgslist.length; j++) {
+                                try {
+                                    /*<li > <img src="" alt="" style="padding:5px" /></li > */
+                                    contenutoslide += '<li > <img style="padding:5px" src="';
+                                    var position = imgslist[j].lastIndexOf('/');
+                                    var pathanteprima = imgslist[j].substr(0, position + 1) + "ant" + imgslist[j].substr(position + 1);
+                                    contenutoslide += pathanteprima;
+                                    contenutoslide += '" alt="" />';
+                                    contenutoslide += '</li>';
+                                }
+                                catch (e) {
+                                }
                             }
-                            catch (e) {
-                            }
-                        }
                         $(this).html(contenutoslide);
                         if (contenutoslide !== '')
                             $(this).parent().show();

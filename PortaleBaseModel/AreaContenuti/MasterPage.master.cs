@@ -45,14 +45,14 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 rptTipologia.DataSource = Tipologie;
                 rptTipologia.DataBind();
 
-                //List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
-                //rptCatalogo.DataSource = Catalogo;
-                //rptCatalogo.DataBind();
+                List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
+                rptCatalogo.DataSource = Catalogo;
+                rptCatalogo.DataBind();
 
 
-                List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
-                rptCatalogoCategorie.DataSource = listcat;
-                rptCatalogoCategorie.DataBind();
+                //List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
+                //rptCatalogoCategorie.DataSource = listcat;
+                //rptCatalogoCategorie.DataBind();
 
 
                 //Custom tipo
@@ -62,9 +62,9 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
 
                 //Rassegna
-                //List<WelcomeLibrary.DOM.TipologiaOfferte> list = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 51 && Convert.ToInt32(t.Codice.Substring(3)) <= 51);
-                //rptCustom.DataSource = list;
-                //rptCustom.DataBind();
+                List<WelcomeLibrary.DOM.TipologiaOfferte> list = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 51 && Convert.ToInt32(t.Codice.Substring(3)) <= 51);
+                rptCustom.DataSource = list;
+                rptCustom.DataBind();
 
 
                 //Commenti

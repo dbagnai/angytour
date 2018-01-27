@@ -46,7 +46,7 @@
                 <div class="cerca">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox runat="server" ID="txtinputCerca" Width="100%" />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputCerca" Width="100%" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" TargetControlID="txtinputCerca"
                                 runat="server" WatermarkText='Cerca'>
                             </Ajax:TextBoxWatermarkExtender>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
                         <div class="col-sm-4">
-                            <asp:TextBox runat="server" ID="txtinputmese" />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtinputmese" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" TargetControlID="txtinputmese"
                                 runat="server" WatermarkText="mese">
                             </Ajax:TextBoxWatermarkExtender>
@@ -62,7 +62,7 @@
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
                         </div>
                         <div class="col-sm-4">
-                            <asp:TextBox runat="server" ID="txtinputanno" />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtinputanno" />
                             <Ajax:FilteredTextBoxExtender ID="ftbe1" runat="server" TargetControlID="txtinputanno"
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" TargetControlID="txtinputanno"
@@ -171,10 +171,10 @@
                                 <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default btn-sm" runat="server" />
                                 <br />
                                 Descrizione  <br />
-                                <asp:TextBox runat="server" ID="txtDescrizione" CssClass="form-control" />
+                                <asp:TextBox CssClass="mceNoEditor form-control"  runat="server" ID="txtDescrizione" />
                                 <br />
                                 Progressivo <br />
-                                <asp:TextBox runat="server" ID="txtProgressivo" CssClass="form-control" />
+                                <asp:TextBox CssClass="mceNoEditor form-control"  runat="server" ID="txtProgressivo" />
                                 <br />
                                 <asp:Button ID="btnCarica" runat="server" CssClass="btn btn-primary btn-sm" Text="Carica Foto" OnClick="btnCarica_Click" />
                                 <asp:Button ID="btnModifica" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica Descrizione Foto" OnClick="btnModifica_Click" />
@@ -281,7 +281,7 @@
                             <asp:Label ID="Label12" runat="server" Text="CODICE PRODOTTO" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtCodiceProd" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCodiceProd" runat="server"></asp:TextBox>
                         <%--   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ErrorMessage="CodiceProdotto Obbligatorio"
                                 ControlToValidate="txtCodiceProd" runat="server" Text="*" ValidationGroup="Insertvalidate" />--%>
                     </div>
@@ -301,7 +301,7 @@
                                         <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -310,7 +310,7 @@
                                         <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)"/></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -319,7 +319,7 @@
                                         <asp:Label ID="litDenominazioneI" runat="server" Text="Denominazione Ita" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneI" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneI" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -328,7 +328,7 @@
                                         <asp:Label ID="litDescrizioneI" runat="server" Text="Descrizione Ita" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                                         <asp:Label ID="Label1" runat="server" Text="Dettagli Ita" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciI"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciI"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@
                                         <asp:Label ID="Labelpre" runat="server"  Text="Meta Title Eng (opzionale)"  /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -359,7 +359,7 @@
                                         <asp:Label ID="Labelprse" runat="server" Text="Meta Description Eng (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo2GB" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2GB" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -368,7 +368,7 @@
                                         <asp:Label ID="Literal2" runat="server" Text="Denominazione Eng" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneGB" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneGB" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -377,7 +377,7 @@
                                         <asp:Label ID="Literal3" runat="server" Text="Descrizione Eng" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -387,7 +387,7 @@
                                         <asp:Label ID="Label2" runat="server" Text="Dettaglio Eng" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciGB"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciGB"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -403,7 +403,7 @@
                                         <asp:Label ID="Label33" runat="server" Text="Testo promo Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo1RU" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1RU" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -412,7 +412,7 @@
                                         <asp:Label ID="Label34" runat="server" Text="Testo promo sconto Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtCampo2RU" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2RU" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -421,7 +421,7 @@
                                         <asp:Label ID="Label35" runat="server" Text="Denominazione Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneRU" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneRU" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -430,7 +430,7 @@
                                         <asp:Label ID="Label36" runat="server" Text="Descrizione Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -440,7 +440,7 @@
                                         <asp:Label ID="Label37" runat="server" Text="Dettaglio Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciRU"
+                                    <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDatitecniciRU"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -588,13 +588,13 @@
                         <div class="row" style="margin-bottom: 5px">
                             <div class="col-sm-4">
                                 <strong>Latitudine</strong><br />
-                                <asp:TextBox ID="TextBox1" runat="server" value="" />
+                                <asp:TextBox CssClass="mceNoEditor"  ID="TextBox1" runat="server" value="" />
                                 <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server" TargetControlID="txtLatitudine1_dts"
                                     FilterType="Custom, Numbers" ValidChars="0123456789," />
                             </div>
                             <div class="col-sm-8">
                                 <strong>Longitudine</strong><br />
-                                <asp:TextBox ID="TextBox2" runat="server" value="" />
+                                <asp:TextBox CssClass="mceNoEditor"  ID="TextBox2" runat="server" value="" />
                                 <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" TargetControlID="txtLongitudine1_dts"
                                     FilterType="Custom, Numbers" ValidChars="0123456789," />
                             </div>
@@ -669,7 +669,7 @@
                                 <asp:Label ID="Label22" runat="server" Text="Anno ( 4 cifre )" /></strong>
                         </div>
                         <div class="col-sm-10">
-                            <asp:TextBox CssClass="form-control" ID="txtAnno" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="mceNoEditor form-control" ID="txtAnno" runat="server"></asp:TextBox>
                             <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtAnno"
                                 FilterMode="ValidChars" ValidChars="0123456789" />
                         </div>
@@ -682,7 +682,7 @@
                             <asp:Label ID="Label19" runat="server" Text="Prezzo Listino &euro;" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtPrezzoListino" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtPrezzoListino" runat="server"></asp:TextBox>
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtPrezzoListino"
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
@@ -693,7 +693,7 @@
                             <asp:Label ID="Labelprezzo" runat="server" Text="Prezzo Web &euro;" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtPrezzo" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtPrezzo" runat="server"></asp:TextBox>
                         <Ajax:FilteredTextBoxExtender ID="ftbe" runat="server" TargetControlID="txtPrezzo"
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
@@ -705,7 +705,7 @@
                             <asp:Label Width="30%" ID="Label38" runat="server" Text="Quantità disponibile" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox Width="60%" ID="txtQta_vendita" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor"  Width="60%" ID="txtQta_vendita" runat="server"></asp:TextBox>
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtQta_vendita"
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
@@ -717,7 +717,7 @@
                             <asp:Label ID="Label3" runat="server" Text="Indirizzo" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" Height="150px" TextMode="MultiLine" ID="txtIndirizzo" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtIndirizzo" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -726,7 +726,7 @@
                             <asp:Label ID="Label4" runat="server" Text="Email" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtEmail" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtEmail" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -735,7 +735,7 @@
                             <asp:Label ID="Label5" runat="server" Text="Website" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtWebsite" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtWebsite" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -744,7 +744,7 @@
                             <asp:Label ID="Label6" runat="server" Text="Telefono" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtTelefono" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtTelefono" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -753,7 +753,7 @@
                             <asp:Label ID="Label7" runat="server" Text="Fax" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtFax" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtFax" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -762,7 +762,7 @@
                             <asp:Label ID="Label20" runat="server" Text="Videolink" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtVideo" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtVideo" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -771,7 +771,7 @@
                             <asp:Label ID="Label11" runat="server" Text="Imposta Data (opzionale)" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtData" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtData" runat="server"></asp:TextBox>
                         <Ajax:CalendarExtender ID="cal2" runat="server" Format="dd/MM/yyyy HH.mm.ss" TargetControlID="txtData">
                         </Ajax:CalendarExtender>
                     </div>
@@ -791,7 +791,7 @@
                             <asp:Label ID="Label21" runat="server" Text="Id collegato" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="form-control" ID="txtIdcollegato" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtIdcollegato" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
@@ -800,7 +800,7 @@
                             <asp:Label ID="Label31" runat="server" Text="Latitudite" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox ID="txtLatitudine1_dts" CssClass="form-control" runat="server" value="" />
+                        <asp:TextBox CssClass="mceNoEditor form-control"  ID="txtLatitudine1_dts" runat="server" value="" />
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtLatitudine1_dts"
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
@@ -811,7 +811,7 @@
                             <asp:Label ID="Label32" runat="server" Text="Longitudine" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox ID="txtLongitudine1_dts" CssClass="form-control" runat="server" value="" />
+                        <asp:TextBox CssClass="mceNoEditor form-control"  ID="txtLongitudine1_dts"  runat="server" value="" />
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" TargetControlID="txtLongitudine1_dts"
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
@@ -871,7 +871,7 @@
                                                         <asp:Label runat="server" ID="NomeIta" Text="Nome 1 Livello Ita"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox ID="NomeNuovoProdIt" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdIt" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -879,7 +879,7 @@
                                                         <asp:Label runat="server" ID="NomeEng" Text="Nome 1 Livello Eng"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox ID="NomeNuovoProdEng" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdEng" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -887,7 +887,7 @@
                                                         <asp:Label runat="server" ID="NomeRu" Text="Nome 1 Livello Ru"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox ID="NomeNuovoProdRu" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdRu" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -940,7 +940,7 @@
                                                             <asp:Label runat="server" ID="NomeSottIta" Text="Nome 2 Livello Ita"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="NomeNuovoSottIt" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottIt" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -948,7 +948,7 @@
                                                             <asp:Label runat="server" ID="NomeSottEng" Text="Nome 2 Livello Eng"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="NomeNuovoSottEng" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottEng" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -956,7 +956,7 @@
                                                             <asp:Label runat="server" ID="NomeSottRu" Text="Nome 2 Livello Ru"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -994,13 +994,13 @@
                     
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar1I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar1GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
 
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire tipo (Italiano)" TargetControlID="txtCar1I">
                         </Ajax:TextBoxWatermarkExtender>
@@ -1018,13 +1018,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar2I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar2GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar2RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2RU" Text="" Width="300" /><br />
 
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire indice (Italiano)" TargetControlID="txtCar2I">
                         </Ajax:TextBoxWatermarkExtender>
@@ -1043,13 +1043,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar3I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar3I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar3GB">
@@ -1067,13 +1067,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar4I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar4GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar4RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender8" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar4I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender9" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar4GB">
@@ -1091,13 +1091,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar5I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar5GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar5RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender10" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar5I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender11" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar5GB">
@@ -1115,13 +1115,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox runat="server" ID="txtCar6I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox runat="server" ID="txtCar6GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender13" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar6GB">

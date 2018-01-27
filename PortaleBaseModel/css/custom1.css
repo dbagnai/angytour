@@ -150,7 +150,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #AC4220;
+    background-color: #2a4e40;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -181,7 +181,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #AC4220;
+        background-color: #2a4e40;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -196,7 +196,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #AC4220;
+        background-color: #2a4e40;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
     box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -210,7 +210,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #AC4220;
+    background-color: #2a4e40;
     border: none;
     font-weight: 500;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -259,7 +259,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #AC4220;
+        background-color: #2a4e40;
         border: 1px solid #ccc;
         font-weight: 500;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -1002,7 +1002,7 @@ a.buttonstyleoutline {
     .footer .copyright {
         font-family: 'Raleway';
         /*background-color: #33332e;*/
-        background-color: #AC4220;
+        background-color: #2a4e40;
         border-top: 1px solid #ccc;
         color: #fff;
         font-size: 10px;
@@ -1074,7 +1074,7 @@ a.buttonstyleoutline {
 }
 
 .rightside .rightside-promo {
-    color: #AC4220;
+    color: #2a4e40;
     position: relative;
     display: block;
     vertical-align: middle;
@@ -1862,15 +1862,15 @@ Portfolio ( da rival )
 }
 
 .work-item:hover .work-image > img {
-    -webkit-transform: scale(1.2);
-    /*scale(1.3) rotate(2deg);*/
+    /*-webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
-    /* scale(1.3) rotate(2deg);*/
     -ms-transform: scale(1.2);
-    /* scale(1.3) rotate(2deg);*/
     -o-transform: scale(1.2);
+    transform: scale(1.2);*/
+    /*scale(1.3) rotate(2deg);*/
     /* scale(1.3) rotate(2deg);*/
-    transform: scale(1.2);
+    /* scale(1.3) rotate(2deg);*/
+    /* scale(1.3) rotate(2deg);*/
     /* scale(1.3) rotate(2deg);*/
 }
 
@@ -2376,18 +2376,18 @@ Portfoli Single ( da rival )
 
 
 .headerspacer {
-    padding-top: 205px;
+    padding-top: 86px;
 }
 
 @media (max-width: 769px) {
     .headerspacer {
-        padding-top: 181px;
+        padding-top: 86px;
     }
 }
 
 #divContainerb1 {
     /*height: calc(80vh - 225px) !important;*/
-    height: calc(60vh - 86px) !important;
+    height: calc(100vh - 86px) !important;
 }
 .tp-caption.very_big_white {
     padding: 0 100px !important;
@@ -2775,7 +2775,7 @@ button.btn,
 }
 
 .btn-purple {
-    background-color: #AC4220 !important;
+    background-color: #2a4e40 !important;
 }
 
 
@@ -4198,7 +4198,7 @@ p.lead, .lead p {
 }
 
 .footer .social-icons .social-media-icon {
-    background-color: #AC4220;
+    background-color: #2a4e40;
     border-radius: 50%;
 }
 

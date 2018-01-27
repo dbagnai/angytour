@@ -10,7 +10,7 @@
             </div>
             <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
                 <div class="owl-slider-v2" id="replaceid">
-                    <div class="item" style="padding:0px;margin:14px;border:1px solid #444;overflow:hidden;position:relative;">
+                    <div class="item" style="padding:0px;margin:14px;background-color:#fff;overflow:hidden;position:relative">
                         <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
                         <div style="border: none; box-shadow: none">
                             <div style="border: none; box-shadow: none;text-align:center" class="feature">
@@ -24,8 +24,8 @@
                                 <div class="pull-left" style="margin-left:10px">
                                     <!--<p style="font-size:0.8rem;" class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" format="formatdescrizione"></p>-->
                                     <!--<span class="bind" mybind="Id" myvalue="descrizione" myvalue1="250" format="formatdescrizione"></span><br />-->
-                                    <!--<span class="bind" style="font-size:1.1rem;color:#AC4220" mybind="Caratteristica1" format="frmcaratteristica1"></span><br />
-                                    <span class="bind" style="font-size:0.8rem;color:#AC4220" mybind="Caratteristica2" format="frmcaratteristica2"></span><br />-->
+                                    <!--<span class="bind" style="font-size:1.1rem;color:#66483b" mybind="Caratteristica1" format="frmcaratteristica1"></span><br />
+                                    <span class="bind" style="font-size:0.8rem;color:#66483b" mybind="Caratteristica2" format="frmcaratteristica2"></span><br />-->
                                     <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria" format="frmcategoria"></span>
                                     <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
 
@@ -34,7 +34,7 @@
 
                                 <div style="padding:20px 10px;border-top:none;height:150px;text-align:center;overflow:hidden" class="feature-content">
                                     <h3 style="min-height:50px">
-                                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id" style="font-size:1.5rem;font-weight:600;margin-top:30px;margin-bottom:0px;color:#AC4220">
+                                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id" style="font-size:1.5rem;font-weight:600;margin-top:30px;margin-bottom:0px;color:#66483b">
                                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                                         </a>
                                     </h3>
@@ -42,17 +42,22 @@
                                         <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style="font-size:1rem;"></span>
                                     </a><br />
 
-                                    <div class="pull-right" style="font-size:2rem;margin-top:8px">
-                                        <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><br />
-                                        <span style="font-size:0.6em;text-decoration:line-through;color:#ccc" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                    <div style="font-size:1.4rem;margin-top:12px;text-align:center;color:#66483b">
+                                        <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                        <br />
+                                        <span style="font-size:0.8em;text-decoration:line-through;color:#ccc" class="bind" mybind="Id" myvalue="txtprezzolistino" format="formatlabelresource"></span>
+                                        <span style="font-size:0.8em;text-decoration:line-through;color:#ccc" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                     </div>
                                 </div>
                                 <!--<div class="pull-left" style="padding-top:30px">
-                                    <span class="bind" style="font-size:0.8rem;color:#AC4220;font-style:italic" mybind="Caratteristica3" myvalue="Proprietario" format="formatlabelresource"></span>
-                                    <span class="bind" style="font-size:0.8rem;color:#AC4220;font-style:italic" mybind="Caratteristica3" format="frmcaratteristica3"></span>&nbsp;
+                                    <span class="bind" style="font-size:0.8rem;color:#66483b;font-style:italic" mybind="Caratteristica3" myvalue="Proprietario" format="formatlabelresource"></span>
+                                    <span class="bind" style="font-size:0.8rem;color:#66483b;font-style:italic" mybind="Caratteristica3" format="frmcaratteristica3"></span>&nbsp;
                                 </div>-->
                                 <div class="clearfix"></div>
-                                <div class="bind" style="margin:10px auto" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" format="formatbtncarrello"></div>
+                                <!--<div class="bind" style="margin:10px auto" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" format="formatbtncarrello"></div>-->
+                                <a class="bind" target="_self" href="link" title="titolo" mybind="Id" style="display:block;margin:5px auto">
+                                    <div class="divbuttonstyle bind" style="max-width:160px;margin:5px auto" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                                </a>
                             </div>
                             <!--<div class="feature-details">
                                <div class="pull-left">

@@ -154,8 +154,8 @@
                                 <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />
                                 <br />
                                 <br />
-                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
-                                            Storico Ordini</a><br />
+                              <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                            Storico Ordini</a><br />--%>
                                 <br />
                                 <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>

@@ -255,24 +255,13 @@ public partial class _SchedaOffertaMaster : CommonPage
         switch (CodiceTipologia)
         {
             case "rif000002":
-
-
                 column2.Attributes["class"] = "col-md-9 col-sm-9";
                 column3.Attributes["class"] = "col-md-3 col-sm-3";
-
                 divSearch.Visible = true;
                 divContact.Visible = false;
                 divContactBelow.Visible = false;
                 ContaArticoliPerperiodo(CodiceTipologia);
                 divLatestPost.Visible = false;
-                //AssociaRubricheConsigliati();
-                //CaricaUltimiPost(CodiceTipologia, Categoria);
-                // CaricaMenuSezioniContenuto(CodiceTipologia, rptProdottiContenutiLink);
-                //CaricaMenuContenuti(2, 3, rptContenutiLink);
-                // divCategorie.Visible = true;
-                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
-                // Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6,5);
-
                 if (!JavaInjection)
                 {
 
@@ -281,7 +270,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
 
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2);");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = sb.ToString();
 
@@ -301,12 +290,12 @@ public partial class _SchedaOffertaMaster : CommonPage
 
             case "rif000003":
             case "rif000004":
+            case "rif000005":
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-md-10 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
-
                 divSearch.Visible = false;
                 divContact.Visible = false;
                 divLatestPost.Visible = false;
@@ -314,16 +303,17 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 if (!JavaInjection)
                 {
-                    //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", false, true, 12,2);";
+             
+
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 

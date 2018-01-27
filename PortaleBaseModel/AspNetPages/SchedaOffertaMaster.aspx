@@ -1118,8 +1118,8 @@
     </div>
 
 
-    <div style="background-color: #f2ece6;">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+    <div style="background-color: #ccc;">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 25px; padding-right: 25px;">
             <div class="row">
                 <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
                     <div class="row">
@@ -1129,7 +1129,7 @@
                                     <div class="pull-left lead">
                                         <h2 style="margin-bottom: 3px">
                                             <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
+                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
                                         </h2>
                                     </div>
                                 </div>

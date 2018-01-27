@@ -173,10 +173,10 @@ public partial class _SchedaProdotto : CommonPage
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         switch (CodiceTipologia)
         {
-            case "":
-                column1.Visible = true;
+            case "rif000001":
+                column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-10 col-sm-10";
+                column2.Attributes["class"] = "col-md-12 col-sm-12";
                 column3.Visible = false;
                 divContact.Visible = false;
                 divContact.Visible = false;
