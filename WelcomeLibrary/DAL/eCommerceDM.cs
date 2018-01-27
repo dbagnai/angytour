@@ -827,7 +827,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p2 = new SQLiteParameter("@Campo2", CodCar);
             parColl.Add(p2);
 
-            string query = "DELETE * FROM TBL_CARRELLO WHERE ([ID]=@ID) and ([Campo2]=@Campo2)";
+            string query = "delete FROM TBL_CARRELLO WHERE ([ID]=@ID) and ([Campo2]=@Campo2)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -854,7 +854,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
 
-            string query = "DELETE * FROM TBL_CARRELLO WHERE ([ID]=@ID)";
+            string query = "DELETE FROM TBL_CARRELLO WHERE ([ID]=@ID)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -1356,7 +1356,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p1 = new SQLiteParameter("@ID", ID);//OleDbType.VarChar
             parColl.Add(p1);
 
-            string query = "DELETE * FROM TBL_CARRELLO_ORDINI WHERE ([ID]=@ID)";
+            string query = "delete FROM TBL_CARRELLO_ORDINI WHERE ([ID]=@ID)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
