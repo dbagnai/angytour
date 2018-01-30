@@ -332,7 +332,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
     /*NEW CREAZIONE LINK MENU SUI 3 LIVELLI*/
 
-    public string CreaLinkPaginastatica(int idps, string classe = "", string stile = "font-weight:600 !important")
+    public string CreaLinkPaginastatica(int idps, bool noli = false, string classe = "", string stile = "font-weight:600 !important")
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         contenutiDM conDM = new contenutiDM();
@@ -343,7 +343,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string testo = item.TitolobyLingua(Lingua);
             string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
             testo = references.ResMan("Common", Lingua, "testoid" + idps);
-            sb.Append("<li>");
+            if (!noli) sb.Append("<li>");
             sb.Append("<a  href=\"");
             sb.Append(link);
             sb.Append("\"");
@@ -352,7 +352,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
             sb.Append(testo);
             sb.Append("</a>");
-            sb.Append("</li>");
+            if (!noli) sb.Append("</li>");
             /*
                  <a id="linkid10High" onclick="JsSvuotaSession(this)" runat="server" href="#">
                                         <%= references.ResMan("Common", Lingua,"testoid10") %>
@@ -361,6 +361,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         return sb.ToString();
     }
+
 
     /// <summary>
     /// Creazione lista li per tipologie da min a max
