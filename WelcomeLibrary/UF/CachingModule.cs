@@ -25,9 +25,22 @@ namespace WelcomeLibrary.UF
             context.PreSendRequestHeaders += this.SetDefaultCacheHeader;
             if (enablecompression)
                 context.PostRequestHandlerExecute += this.SetCompressionHnd;
+            context.PostRequestHandlerExecute += this.SetAdditionalheaders;
+
         }
 
         #endregion
+        private void SetAdditionalheaders(object sender, EventArgs eventArgs)
+        {
+            HttpContext context = HttpContext.Current;
+            String path = HttpContext.Current.Request.Url.AbsolutePath;
+            //Accept-CH: DPR, Width, Viewport-Width
+            HttpContext.Current.Response.AppendHeader("Accept-CH", "DPR, Width, Viewport-Width");
+            HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
+            String ViewportVidth = context.Request.Headers.Get("Viewport-Width"); //Questa è la viewport del CLIENT!!!
+        }
+
+
         private void SetCompressionHnd(object sender, EventArgs eventArgs)
         {
             HttpContext context = HttpContext.Current;
@@ -52,7 +65,6 @@ namespace WelcomeLibrary.UF
                 context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
                 HttpContext.Current.Response.AppendHeader("Content-Encoding", "deflate");
             }
-            HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
 
         }
 

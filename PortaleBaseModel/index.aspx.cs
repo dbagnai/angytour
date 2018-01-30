@@ -10,6 +10,8 @@ using WelcomeLibrary.DOM;
 
 public partial class index : CommonPage
 {
+
+    
     public string Lingua
     {
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
@@ -17,6 +19,8 @@ public partial class index : CommonPage
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+
+         
         try
         {
             if (!IsPostBack)

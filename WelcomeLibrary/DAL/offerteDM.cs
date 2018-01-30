@@ -1022,7 +1022,7 @@ namespace WelcomeLibrary.DAL
                         query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
 
-                if (string.IsNullOrEmpty(maxofferte))
+                if (!string.IsNullOrEmpty(maxofferte))
                     query = " limit " + maxofferte;
 
 
@@ -1415,7 +1415,7 @@ namespace WelcomeLibrary.DAL
                         query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
 
-                if (string.IsNullOrEmpty(maxofferte))
+                if (!string.IsNullOrEmpty(maxofferte))
                     query = " limit " + maxofferte;
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);

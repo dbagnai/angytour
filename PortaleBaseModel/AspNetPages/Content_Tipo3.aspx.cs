@@ -80,8 +80,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
                 if (!string.IsNullOrEmpty(idOfferta))
                 {
-                   HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
-                   metarobots.Attributes["Content"] = "noindex,follow";
+                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                    metarobots.Attributes["Content"] = "noindex,follow";
                 }
 
                 CaricaControlliJS();
@@ -189,7 +189,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         if (TipoContenuto == "Prenota")
         {
             ddlLocations.Items.Clear();
-            ListItem li = new ListItem(references.ResMan("Common",Lingua, "selLocation"), "");
+            ListItem li = new ListItem(references.ResMan("Common", Lingua, "selLocation"), "");
             ddlLocations.Items.Add(li);
             //Inseriamo la lista delle locations 
             OfferteCollection list = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodiceTipologia);
@@ -200,17 +200,17 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                     li = new ListItem(estraititolo(item1), item1.Id.ToString());
                     ddlLocations.Items.Add(li);
                 }
-
                 try
                 {
-                    ddlLocations.SelectedValue = item.Id.ToString();
+                    if (item != null && item.Id != 0)
+                        ddlLocations.SelectedValue = item.Id.ToString();
                 }
                 catch { }
             }
         }
 #endif
 
-        txtDescrizione.Text += addtext + references.ResMan("Common",Lingua, "testoMessage") + "\r\n";
+        txtDescrizione.Text += addtext + references.ResMan("Common", Lingua, "testoMessage") + "\r\n";
 
         EvidenziaSelezione(TipoContenuto);
 
@@ -250,12 +250,12 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
         //VISUALIZZIAMO IL TESTO CARICANDOLO OPPORTUNAMENTE
         string htmlPage = "";
-        if (references.ResMan("Common",Lingua,"testo" + TipoContenuto) != null)
-            htmlPage = "<h2>" + references.ResMan("Common",Lingua,"testo" + TipoContenuto).ToString() + "</h2>";
+        if (references.ResMan("Common", Lingua, "testo" + TipoContenuto) != null)
+            htmlPage = "<h2>" + references.ResMan("Common", Lingua, "testo" + TipoContenuto).ToString() + "</h2>";
         string strigaperricerca = Request.Url.AbsolutePath + "?" + Request.QueryString;
         if (strigaperricerca.LastIndexOf("&idOfferta=") != -1)
             strigaperricerca = strigaperricerca.Substring(0, strigaperricerca.LastIndexOf("&idOfferta="));
-      
+
         Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
         if (content != null && content.Id != 0)
         {
@@ -517,7 +517,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             }
             else
             {
-                output.Text = references.ResMan("Common",Lingua, "txtPrivacyError");
+                output.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
 
@@ -525,7 +525,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         catch (Exception err)
         {
             output.Text = err.Message + " <br/> ";
-            lblRisposta.Text = references.ResMan("Common",Lingua, "txtMailError");
+            lblRisposta.Text = references.ResMan("Common", Lingua, "txtMailError");
         }
     }
     //private void CaricaDdlservizi(string value = "")
@@ -592,9 +592,9 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
     protected void Visualizzarisposta()
     {
 
-        lblRisposta.Text = references.ResMan("Common",Lingua, "TestoRichiestaCorretto");
+        lblRisposta.Text = references.ResMan("Common", Lingua, "TestoRichiestaCorretto");
 
-        lblRisposta.Text += references.ResMan("Common",Lingua, "GoogleConversione");
+        lblRisposta.Text += references.ResMan("Common", Lingua, "GoogleConversione");
         plhRisposta.Visible = true;
         lblRisposta.Visible = true;
 
