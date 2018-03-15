@@ -161,7 +161,10 @@ public class NVPAPICaller
             encoder["L_PAYMENTREQUEST_0_NAME" + i.ToString()] = testo2.Substring(0, (testo2.Length <= 60) ? testo2.Length : 60);
             encoder["L_PAYMENTREQUEST_0_DESC" + i.ToString()] = testo3.Substring(0, (testo3.Length <= 126) ? testo3.Length : 126);
             //encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] {d * quantita * percanticipo / 100});
-            encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d });
+
+            //encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d });
+            //Inserisco la percentuale di acconto su tutti gli articoli
+            encoder["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d * percanticipo / 100 });
             encoder["L_PAYMENTREQUEST_0_QTY" + i.ToString()] = quantita.ToString();
             encoder["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Physical"; //L_PAYMENTREQUEST_n_ITEMCATEGORYm Digital Physical  
             //encoder["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Digital"; //L_PAYMENTREQUEST_n_ITEMCATEGORYm Digital Physical  

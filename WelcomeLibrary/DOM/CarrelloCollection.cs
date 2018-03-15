@@ -8,6 +8,8 @@ namespace WelcomeLibrary.DOM
     [Serializable]
     public class TotaliCarrelloCollection : List<TotaliCarrello>
     {
+        private long _totrecs;
+
         private List<TotaliCarrello> _TotaliCarrelloCollection;
         public TotaliCarrelloCollection()
         {
@@ -40,6 +42,8 @@ namespace WelcomeLibrary.DOM
                 this.Add(_tmp);
             }
         }
+
+        public long Totrecs { get => _totrecs; set => _totrecs = value; }
 
         public List<TotaliCarrello> GetItems()
         {

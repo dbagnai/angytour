@@ -333,7 +333,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                 break;
             case "rif000003":
-            case "rif000005":
+            case "rif000004":
                 AssociaDatiSocial();
 
                 column1.Visible = true;
@@ -375,7 +375,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
                 break;
 
-            case "rif000004":
+            case "rif000008":
                 AssociaDatiSocial();
 
                 column1.Visible = true;
@@ -416,8 +416,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
                 break;
-                break;
-            case "rif000008":
+            case "rif000005":
 
                 AssociaDatiSocial();
                 column1.Visible = true;
@@ -1260,7 +1259,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
     {
         bool ret = false;
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
-        if ((NomeAnteprima == null || NomeAnteprima == "") && (linkVideo != null && ((string)linkVideo) != ""))
+        if ((NomeAnteprima == null || NomeAnteprima.ToString() == "") && (linkVideo != null && ((string)linkVideo) != ""))
             ret = true;
         return ret;
     }
@@ -1269,7 +1268,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         string ret = "";
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
 
-        if (linkVideo != null && linkVideo != "")
+        if (linkVideo != null && linkVideo.ToString() != "")
             ret = linkVideo.ToString();
         return ret;
     }

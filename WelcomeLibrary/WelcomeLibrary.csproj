@@ -48,12 +48,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\bannersDM.cs" />
+    <Compile Include="DAL\bookingDM.cs" />
     <Compile Include="DAL\ClientiDM.cs" />
     <Compile Include="DAL\contenutiDM.cs" />
     <Compile Include="DAL\dbDataAccess.cs" />
@@ -155,6 +156,8 @@
     <Compile Include="DOM\ClienteCollection.cs" />
     <Compile Include="DOM\Annunci.cs" />
     <Compile Include="DOM\AnnunciCollection.cs" />
+    <Compile Include="DOM\Listino.cs" />
+    <Compile Include="DOM\Eventi.cs" />
     <Compile Include="DOM\ParametroGenericoCollection.cs" />
     <Compile Include="DOM\ParametroGenerico.cs" />
     <Compile Include="DOM\statistiche.cs" />
@@ -192,7 +195,6 @@
     <Compile Include="UF\GenericComparer.cs" />
     <Compile Include="UF\GenericFunc.cs" />
     <Compile Include="UF\HandlerHelper.cs" />
-    <Compile Include="UF\handlers.cs" />
     <Compile Include="UF\htmlToText.cs" />
     <Compile Include="UF\IListRandomExtensions.cs" />
     <Compile Include="UF\ImageProcessing.cs" />

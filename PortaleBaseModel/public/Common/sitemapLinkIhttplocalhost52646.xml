@@ -1,122 +1,128 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:52646/I/prodotti/prodotti</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/strutture/strutture</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/blog</loc>
-    <lastmod>2018-01-27</lastmod>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/news-18</loc>
-    <lastmod>2018-01-27</lastmod>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/eventi-19</loc>
-    <lastmod>2018-01-27</lastmod>
+    <lastmod>2018-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/territorio-25</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/eventi/eventi</loc>
-    <lastmod>2018-01-27</lastmod>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/degustazioni/degustazioni</loc>
-    <lastmod>2018-01-27</lastmod>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristoranti/ristoranti</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/escursioni-21</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristoranti/ristoranti-2-sottotitolo-876</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/wellness-22</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristoranti/ristoranti-1-sottotitolo-875</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/cibo-23</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/degustazione-2-titolo-lungo-su-due-righe-sottotitolo-874</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/vino-24</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/degustazione-1-sottotitolo-873</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/strutture/casa-baccano-basso-10</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/eventi/prodotto-3-sottotitolo-872</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/strutture/casa-baccano-alto-9</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/eventi/evento-1-sottotitolo-871</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/strutture/la-tenuta-casa-baccano-8</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/prodotti/prodotto-2-sottotitolo-870</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/benessere-1-sottotitolo-7</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/prodotti/prodotto-1-sottotitolo-869</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/degustazioni/escurzioni-1-sottotitolo-6</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/sasa-sasasasaas-868</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/camere-1-sototitolo-5</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/eventi/offerte-1-sottotitolo-4</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/news-2fdf-sottotitolovdffd-864</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/blog/news-2-sottotitolo-3</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/news-1-sottotitolo-863</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/blog/news-1-sottotitolo-2</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-685</loc>
-    <lastmod>2018-01-27</lastmod>
+    <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-1</loc>
+    <lastmod>2018-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

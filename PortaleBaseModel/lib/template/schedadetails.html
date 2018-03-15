@@ -9,14 +9,14 @@
     </h1>
     <div class="blog-post-details" runat="server" id="divPostDetails">
 
-        <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-left">
+        <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-right">
             <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
                 <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix" style="float: left;"></div>
             <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
                 <em>
-                    <span style="text-decoration: line-through;font-size:0.9rem;color:#aaa;padding-left:5px;padding-right:5px" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                    <span style="text-decoration: line-through;font-size:1.4rem;color:#aaa;padding-left:10px;padding-right:5px;font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                 </em>
             </div>
         </div>
@@ -59,13 +59,13 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-sm-4">
-            <a rel="nofollow, noindex" class="bind buttonstyle" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
+            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
         </div>
         <div class="col-sm-4">
-            <a rel="nofollow, noindex" class="bind buttonstyle" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
         </div>
         <div class="col-sm-4">
-            <a class="bind buttonstyle" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
+            <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
 
         </div>
     </div>

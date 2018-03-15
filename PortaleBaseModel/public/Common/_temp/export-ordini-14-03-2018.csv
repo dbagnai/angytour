@@ -1,0 +1,30 @@
+﻿
+"Data";"Id Ordine";"Id cliente";"Mail";"Nome";"Totale";"Pagamento";"Commerciale";"Pagato";"Dettagli";
+"14/03/2018 12:40:09";"041789532";"0";"dbagnai@gmail.com";"Bagnai Daniele";"3.200,00 €";bacs;0;False;" Nome : Casa Baccano Alto
+
+Periodo da14/04/2018
+ a21/04/2018
+
+ adulti:3
+bambini:1
+1 1.800,00 €
+
+ Nome : Casa Baccano Basso
+
+Periodo da17/03/2018
+ a24/03/2018
+
+ adulti:3
+bambini:1
+1 1.200,00 €
+
+ Nome : Escurzioni 1
+sottotitolo
+Periodo da22/03/2018
+ a25/03/2018
+
+ adulti:
+bambini:
+4 50,00 €
+
+";

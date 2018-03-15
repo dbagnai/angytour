@@ -392,7 +392,7 @@ public class references
                 dict.Add(lingua, new Dictionary<string, string>());
             if (!dict[lingua].ContainsKey(r.Chiave))
             {
-                dict[lingua].Add(r.Chiave, r.Valore);
+                dict[lingua].Add(r.Chiave, CommonPage.ReplaceLinks(r.Valore));
             }
 
         }
@@ -619,6 +619,8 @@ public class references
         //CARICA LA LISTA DELLE TIPOLOGIE E DELLE PROVINCE IN UNA MEMORIA STATICA PER RIUTILIZZO
         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
+
+        WelcomeLibrary.DAL.bookingDM.InitVincoli(); //Vincoli per il book , usa quelli preimpostati!!!
 
     }
 

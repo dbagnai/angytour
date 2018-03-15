@@ -9,7 +9,7 @@ namespace WelcomeLibrary.DOM
     {
 
 
-     
+
         private TabrifCollection _Lingue;
         public TabrifCollection Lingue
         {
@@ -153,9 +153,33 @@ namespace WelcomeLibrary.DOM
             set { _Rowstamp = value; }
         }
 
-        
+        public Tabrif(string id, string codice, string lingua, string campo1, string campo2 = "", string campo3 = "", string campo4 = "", string campo5 = "", string campo6 = "", string campo7 = "", string campo8 = "", string campo9 = "", string campo10 = "", bool bool1 = false, bool bool2 = false, string data1 = "01/01/0001", long? intero1 = null, long? intero2 = null, long? intero3 = null, double double1 = 0, TabrifCollection lingue = null)
+        {
+            Lingue = lingue;
+            Id = id;
+            Codice = codice;
+            Lingua = lingua;
+            Campo1 = campo1;
+            Campo2 = campo2;
+            Campo3 = campo3;
+            Campo4 = campo4;
+            Campo5 = campo5;
+            Campo6 = campo6;
+            Campo7 = campo7;
+            Campo8 = campo8;
+            Campo9 = campo9;
+            Campo10 = campo10;
+            Bool1 = bool1;
+            Bool2 = bool2;
+            Data1 = DateTime.Parse(data1);
+            Intero1 = intero1;
+            Intero2 = intero2;
+            Intero3 = intero3;
+            Double1 = double1;
+            Rowstamp = (byte[])Convert.FromBase64String("");
+        }
 
-        public Tabrif() 
+        public Tabrif()
         {
             this.Id = "";
             this.Double1 = 0;

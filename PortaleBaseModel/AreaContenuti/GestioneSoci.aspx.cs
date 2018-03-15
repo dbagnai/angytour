@@ -16,11 +16,12 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Data.SQLite;
 using System.Text;
+using System.Web.Profile;
 
 public partial class AreaContenuti_GestioneSoci : CommonPage
 {
     bool debug = false;
-    offerteDM offDM = new offerteDM();
+   // offerteDM offDM = new offerteDM();
 
     public string OffertaIDSelected
     {
@@ -4543,8 +4544,9 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     //associamo l'utente al ruolo
                     Roles.AddUserToRole(NomeUtente, "Socio");
 
-                    ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
-                    prof.IdSocio = socio.Id.ToString();
+                    //ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
+                    ProfileBase prof = ProfileBase.Create(NomeUtente);
+                    prof["IdSocio"] = socio.Id.ToString();
                     prof.Save();
 
                     ////Stampo a video i dati dell'username e password Appena Creati

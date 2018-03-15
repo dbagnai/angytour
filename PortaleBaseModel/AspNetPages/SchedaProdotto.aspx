@@ -8,6 +8,7 @@
     <script type="text/javascript">
         var makeRevLower = true;
     </script>
+
     <div class="container" style="padding-left: 35px; padding-right: 50px; text-align: center; margin-top: 0px">
         <div class="row">
             <div class="col-md-1 col-sm-1">
@@ -51,6 +52,9 @@
             </div>
         </div>
     </div>
+
+    <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
+
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
 </asp:Content>
@@ -64,7 +68,6 @@
             </div>
             <%--Container per inject java della scheda--%>
             <div id="divItemContainter1" style="position: relative; display: none"></div>
-            <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
 
             <%--Rpt per scheda lato server--%>
             <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
@@ -572,8 +575,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
 
     <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="true" style="background-color: #efefef">
-        <<div class="ui-content">
+    <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="false" style="background-color: #cfcfcf;padding-top:30px;padding-bottom:30px">
+        <div class="ui-content" style="margin:0px auto;">
             <div class="container">
                 <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
                     <div class="container">
@@ -623,7 +626,7 @@
                             </div>
 
 
-                            <button id="Button1" style="width:200px"  class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                            <button id="Button1" style="width: 200px" class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
 
 
                             <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />

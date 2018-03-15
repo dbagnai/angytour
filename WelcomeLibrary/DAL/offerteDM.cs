@@ -3024,7 +3024,6 @@ namespace WelcomeLibrary.DAL
             int j = 0;
             int start = 0;
             int end = 0;
-            bool flagprimafoto = false;
             string etype = "";
             int startseq = 0;
             while (start < Schema.Length)
@@ -3325,7 +3324,7 @@ namespace WelcomeLibrary.DAL
         public AllegatiCollection getListaFotobyId(string connection, long idOfferta)
         {
             if (connection == null || connection == "") { return null; };
-            if (idOfferta == null || idOfferta == 0) { return null; };
+            if (idOfferta == 0) { return null; };
 
             string query = "SELECT [FotoSchema],[FotoValori] FROM " + Tblarchivio + " where ID=@idOfferta";
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -4174,6 +4173,24 @@ namespace WelcomeLibrary.DAL
             }
 
             return list;
+        }
+
+        public string estraititolo(Offerte item,string Lingua)
+        {
+            if (item == null) return "";
+            string testotitolo = item.DenominazionebyLingua(Lingua);
+
+
+            string titolo1 = testotitolo.ToString();
+            string titolo2 = "";
+            int i = testotitolo.ToString().IndexOf("\n");
+            if (i != -1)
+            {
+                titolo1 = testotitolo.ToString().Substring(0, i);
+                if (testotitolo.ToString().Length >= i + 1)
+                    titolo2 = testotitolo.ToString().Substring(i + 1);
+            }
+            return titolo1;
         }
 
         #region GESTIONE CATEGORIE E SOTTOCATEGORIE

@@ -118,7 +118,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
 
         CaricaMenu();
-        CaricaBannersAndControls();
+        //CaricaBannersAndControls();
        // SettaTestoIniziale("Pannello Ricerca Sito");
         VisualizzaTotaliCarrello();
         LoadJavascriptVariables();
@@ -180,59 +180,23 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
 
         //Carica i link menu per le pagine statiche in base all'id in tabella
-        CaricaMenuLinkContenuti(1);
-        CaricaMenuLinkContenuti(2);
-        CaricaMenuLinkContenuti(4);
-        CaricaMenuLinkContenuti(5);
+        //CaricaMenuLinkContenuti(1);
+        //CaricaMenuLinkContenuti(2);
+        //CaricaMenuLinkContenuti(4);
+        //CaricaMenuLinkContenuti(5);
 
     }
     private void CaricaBannersAndControls()
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        //CaricaUltimiPostScrollerTipo1(litScroller1, null, "rif000001");
-        //CaricaUltimiPostScrollerTipo1(litScroller2, null, "rif000002");
-        //CaricaBannersPortfolio("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-high", false, litPortfolioLow, Lingua);
-        //CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-halfstriscia-1", true, litBannerLeft1, Lingua);
-        //CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-halfstriscia-2", true, litBannerCentral1, Lingua);
-        //CaricaBannersStriscia("TBL_BANNERS_GENERALE", 0, 0, "banner-halfstriscia-3", true, litBannerRight1, Lingua);
-
-        //Visualizzo le sottocategorie del catalogo
-        //litLinksottosezioni.Text = CaricaLinkSottoSezioniContenuto(CodiceTipologia, Categoria);
 
         string sezionebannersnavigazione = "";
-        string controllistBan2 = "";
-        string controllistBan3 = "";
         switch (CodiceTipologia)
         {
-            //case "rif000002":
-            //    sezionebannersnavigazione = "banner-portfolio-blog";
-            //    controllistBan3 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs1', 'isoBan2', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-            //    sezionebannersnavigazione = "banner-portfolio-sezioni";
-            //    //controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner6a.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-            //    controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-            //    break;
-
-            //case "rif000001":
-            //    sezionebannersnavigazione = "banner-portfolio-catalogo";
-            //    controllistBan3 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs1', 'isoBan2', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-            //    sezionebannersnavigazione = "banner-portfolio-sezioni";
-            //    controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-            //    break;
-
+             
             default:
                 sezionebannersnavigazione = "banner-portfolio-sezioni";
-                //controllistBan2 = "injectPortfolioAndLoadBanner('IsotopeBanner4B.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
                 sb.Clear();
-
-                //sb.Append("(function wait() {");
-                //sb.Append("  if (typeof injectPortfolioAndLoadBanner === \"function\")");
-                //sb.Append("    {");
-                //sb.Append("injectPortfolioAndLoadBanner('IsotopeBanner4b.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);");
-                //sb.Append(" }");
-                //sb.Append("   else  {");
-                //sb.Append("  setTimeout(wait, 50);");
-                //sb.Append("  }  })();");
-
 
                 sb.Append("<section id=\"header3-2k\" class=\"mbr-section mbr-section__container article\" style=\"background-color: #ffffff; padding-top: 40px; padding-bottom: 20px;\">");
                 sb.Append("  <div class=\"container\">");
@@ -245,43 +209,13 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append(" </div>");
                 sb.Append("</section>");
                 sb.Append("<div id=\"divnavigazioneJs0\" class=\"inject\" params=\"");
-                sb.Append("injectPortfolioAndLoadBanner,'IsotopeBanner4b.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','4','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false");
+                sb.Append("injectPortfolioAndLoadBanner,'IsotopeBanner4.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','4','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false");
                 sb.Append("\"></div>");
                 plhNavigazione.Text = sb.ToString();
 
                 break;
         }
-        //switch (idContenuto)
-        //{
-        //    case "1":
-        //    case "2":
-        //        sezionebannersnavigazione = "banner-portfolio-catalogo";
-        //        controllistBan3 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs1', 'isoBan2', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-        //        break;
-        //    case "10":
-        //        sezionebannersnavigazione = "banner-portfolio-blog";
-        //        controllistBan3 = "injectPortfolioAndLoadBanner('IsotopeBanner4a.html','divnavigazioneJs1', 'isoBan2', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false);";
-        //        break;
-        //}
-
-        //if (!string.IsNullOrEmpty(controllistBan2))
-        //{
-        //    //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
-        //    ClientScriptManager cs = Page.ClientScript;
-        //    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        //    {
-        //        cs.RegisterStartupScript(this.GetType(), "cban2", sb.ToString(), true);
-        //    }
-        //}
-        //if (!string.IsNullOrEmpty(controllistBan3))
-        //{
-        //    //ISOTOPE PORTFOLIO BANNERS NAVIGAZIONE
-        //    ClientScriptManager cs = Page.ClientScript;
-        //    if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        //    {
-        //        cs.RegisterStartupScript(this.GetType(), "cban3", controllistBan3, true);
-        //    }
-        //}
+        
     }
    
     protected void CaricaMenuLinkContenuti(long id)
@@ -603,7 +537,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (tipologia == CodiceTipologia && t.Key == Categoria)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span >" + testolink.ToLower() + "</span>");
+                sb.Append( testolink);
                 sb.Append("</a>");
                 sb.Append("</li>");
 
@@ -710,7 +644,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (o.Id.ToString() == idOfferta)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append("<span >" + testo.ToLower() + "</span>");
+                sb.Append( testo  );
                 sb.Append("</a>");
                 sb.Append("</li>");
             }
@@ -971,6 +905,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             //Prepariamo e inviamo il mail
             string nomemittente = txtContactName.Value;
             string mittenteMail = txtContactEmail.Value;
+            string mittenteTelefono = txtContactTelefono.Value;
+            
             string nomedestinatario = CommonPage.Nome;
             string maildestinatario = CommonPage.Email;
             long idperstatistiche = 0;
@@ -978,7 +914,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string SoggettoMail = "Richiesta " + tipo + " da " + nomemittente + " tramite il sito " + CommonPage.Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
 
-            Descrizione += " <br/> Telefono Cliente:  Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
+            Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
             Descrizione += " <br/> Confermo l'autorizzazione al trattamento dei miei dati personali (D.Lgs 196/2003)";
             if (idOfferta != "") //Inseriamo il dettaglio della scheda di provenienza
             {

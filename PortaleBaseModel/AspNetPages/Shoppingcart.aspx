@@ -3,142 +3,180 @@
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <h4>
-                <asp:Label Style="font-size: 1.4em; color: red; padding-top: 10px;" ID="output" runat="server" Text=""></asp:Label></h4>
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
+    <script type="text/javascript">
+        var makeRevLower = true;
+    </script>
+    <div class="container" style="text-align: center;" runat="server" id="divTitle">
+        <div class="row">
+            <div class="col-md-1 col-sm-1">
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+                <h1 class="title-block" style="line-height: normal;">
+                    <asp:Literal Text="" runat="server" ID="litNomeContenuti" /></h1>
+            </div>
+            <div class="col-md-1 col-sm-1">
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="widget shop-selections">
-                <h3><%= references.ResMan("Common", Lingua,",CarrelloSelezioneArticoli") %></h3>
-                <table class="table table-cart">
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <td class="cart-product">
-                                <%= references.ResMan("Common", Lingua,",CarrelloArticolo") %>
-                            </td>
-                            <td class="cart-quantity">
-                                <%= references.ResMan("Common", Lingua,",CarrelloQuantita") %></td>
-                            <td class="cart-total">
-                                <%= references.ResMan("Common", Lingua,",CarrelloTotale") %></td>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <asp:Literal ID="litMainContent" runat="server"></asp:Literal>
 
-                        <asp:Repeater ID="rptProdotti" runat="server" ViewStateMode="Enabled">
-                            <ItemTemplate>
-                                <tr>
-                                    <td class="cart-remove">
-                                        <asp:LinkButton runat="server" ID="btnDelete"
-                                            OnClick="btnDelete" CommandArgument='<%# Eval("id") %>'>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>
+                    <asp:Label Style="font-size: 1.4em; color: red; padding-top: 10px;" ID="output" runat="server" Text=""></asp:Label></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="widget shop-selections">
+                    <h3><%= references.ResMan("Common", Lingua,",CarrelloSelezioneArticoli") %></h3>
+                    <table class="table table-cart">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td class="cart-product">
+                                    <%= references.ResMan("Common", Lingua,"CarrelloArticolo") %>
+                                </td>
+                                <td class="cart-quantity">
+                                    <%= references.ResMan("Common", Lingua,"CarrelloQuantita") %>
+
+                                </td>
+                                <td class="cart-total">
+                                    <%= references.ResMan("Common", Lingua,"CarrelloTotale") %></td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <asp:Repeater ID="rptProdotti" runat="server" ViewStateMode="Enabled">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td class="cart-remove">
+                                            <asp:LinkButton runat="server" ID="btnDelete"
+                                                OnClick="btnDelete" CommandArgument='<%# Eval("id") %>'>
                                                   <i class="fa fa-2x fa-times"></i></asp:LinkButton>
-                                    </td>
-                                    <td class="cart-product">
-                                        <a id="a3" runat="server"
-                                            href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
-                                            target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
-                                            class="product-thumb pull-left">
-                                            <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
-                                                runat="server" Style="width: auto; height: auto; max-width: 100px; max-height: 100px;"
-                                                ImageUrl='<%#  CommonPage.ComponiUrlAnteprima(Eval("Offerta.FotoCollection_M.FotoAnteprima"),Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.Id").ToString()) %>'
-                                                Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
-                                        </a>
-                                        <div class="product-details">
-                                            <h3 class="product-name">
-                                                <a id="a1" runat="server"
-                                                    href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
-                                                    target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>
-                                                    <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
-                                                        runat="server"></asp:Literal>
-                                                </a>
-                                            </h3>
-                                            <div class="product-categories muted">
-                                                <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) %>
+                                        </td>
+                                        <td class="cart-product">
+                                            <a id="a3" runat="server"
+                                                href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
+                                                class="product-thumb pull-left">
+                                                <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
+                                                    runat="server" Style="width: auto; height: auto; max-width: 100px; max-height: 100px;"
+                                                    ImageUrl='<%#  CommonPage.ComponiUrlAnteprima(Eval("Offerta.FotoCollection_M.FotoAnteprima"),Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.Id").ToString()) %>'
+                                                    Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
+                                            </a>
+                                            <div class="product-details">
+                                                <h3 class="product-name">
+                                                    <a id="a1" runat="server"
+                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>
+                                                        <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
+                                                            runat="server"></asp:Literal>
+                                                    </a>
+                                                </h3>
+                                                <div class="product-categories muted">
+                                                    <%# Eval("Datastart") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiododa") + ": " + "</b>" +  string.Format("{0:dd/MM/yyyy}", Eval("Datastart")):"" %>
+
+                                                    <%# Eval("Dataend") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", Eval("Dataend")) : "" %>
+                                                </div>
+
+                                                <div class="product-categories muted">
+                                                    <%#  Selezionadajson(Eval("jsonfield1") ,"adulti", Lingua) %>
+                                                </div>
+                                                <div class="product-categories muted">
+                                                    <%#  Selezionadajson(Eval("jsonfield1") ,"bambini", Lingua) %>
+                                                </div>
+
+                                                <div class="product-categories muted">
+                                                    <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) %>
                                                 &nbsp;<%# CommonPage.TestoCategoria2liv(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Eval("Offerta.CodiceCategoria2Liv").ToString(),Lingua) %>
-                                            </div>
-                                            <div class="product-categories muted">
-                                                <%# CommonPage.TestoCaratteristicaJson(Eval("Campo2").ToString(),Eval("Offerta.Xmlvalue").ToString(),Lingua) %>
-                                            </div>
-                                            <%--                                            <div class="product-categories muted">
+                                                </div>
+                                                <div class="product-categories muted">
+                                                    <%# CommonPage.TestoCaratteristicaJson(Eval("Campo2").ToString(),Eval("Offerta.Xmlvalue").ToString(),Lingua) %>
+                                                </div>
+                                                <%--                                            <div class="product-categories muted">
                                                 <%# CommonPage.TestoCaratteristica(1,Eval("Offerta.Caratteristica2").ToString(),Lingua) %>
                                             </div>--%>
 
 
-                                            <%-- <div class="product-categories muted">
+                                                <%-- <div class="product-categories muted">
                                                         <%# TestoSezione(Eval("Offerta.CodiceTipologia").ToString()) %>
                                                     </div>--%>
-                                            <b class="product-price ">
-                                                <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzo") ) %>'
-                                                    Text='<%#  Eval("Numero").ToString() + "&times" +      String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzo") }) + " €" %>'></asp:Literal>
-                                                <em>
-                                                    <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzolistino") ) %>'
-                                                        Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzolistino") }) + " €" %>'></asp:Literal>
-                                                </em>
-                                            </b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="cart-quantity" style="margin: 0px auto">
-                                            <div class="input-group">
-                                                <b class="input-group-btn">
-                                                    <asp:LinkButton runat="server" ID="btnSottrai" Style="width: 40px"
-                                                        OnClick="btnDecrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
-                                                </b>
-
-                                                <input runat="server" class="form-control text-center" style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 38px; float: left;"
-                                                    id="txtQuantita" type="text" value='<%# Eval("Numero") %>' />
-
-                                                <b class="input-group-btn">
-                                                    <asp:LinkButton runat="server" ID="btnAggiungi" Style="width: 40px"
-                                                        OnClick="btnIncrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'>
-                                                        <i class="fa fa-plus"></i>
-                                                    </asp:LinkButton>
+                                                <b class="product-price ">
+                                                    <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzo") ) %>'
+                                                        Text='<%#  Eval("Numero").ToString() + "&times" +      String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzo") }) + " €" %>'></asp:Literal>
+                                                    <em>
+                                                        <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzolistino") ) %>'
+                                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzolistino") }) + " €" %>'></asp:Literal>
+                                                    </em>
                                                 </b>
                                             </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </td>
-                                    <td class="cart-total">
-                                        <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+
+                                            <asp:Label runat="server"  CssClass="text-center"  style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 38px; float: left;"
+                                               Text='<%# Eval("Numero") %>'></asp:Label>
+                                            <div class="cart-quantity" style="margin: 0px auto; display: none">
+                                                <div class="input-group">
+                                                    <b class="input-group-btn">
+                                                        <asp:LinkButton runat="server" ID="btnSottrai" Style="width: 40px"
+                                                            OnClick="btnDecrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
+                                                    </b>
+
+                                                    <input runat="server" class="form-control text-center" style="font-size: 1.2rem; font-weight: 600; width: 50px; height: 38px; float: left;"
+                                                        id="txtQuantita" type="text" value='<%# Eval("Numero") %>' />
+
+                                                    <b class="input-group-btn">
+                                                        <asp:LinkButton runat="server" ID="btnAggiungi" Style="width: 40px"
+                                                            OnClick="btnIncrement" class="btn btn-purple btn-padding" CommandArgument='<%# Eval("id") %>'>
+                                                        <i class="fa fa-plus"></i>
+                                                        </asp:LinkButton>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </td>
+                                        <td class="cart-total">
+                                            <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
+                                        </td>
+                                    </tr>
 
 
-                            </ItemTemplate>
-                        </asp:Repeater>
+                                </ItemTemplate>
+                            </asp:Repeater>
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="widget shop-shipping" style="display: none">
-                <h3><%= references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %></h3>
-                <div class="form-group">
-                    <asp:DropDownList ID="ddlNazione" CssClass="form-control" Width="100%" runat="server">
-                        <asp:ListItem Text="" Value=""></asp:ListItem>
-                    </asp:DropDownList>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-row row">
-                    <span class="col-lg-4">
-                        <%--    <input type="text" class="form-control" placeholder="State / county">--%>
-                    </span>
-                    <span class="col-lg-4">
-                        <%--<input type="text" class="form-control" placeholder="Postcode / Zip">--%>
-                    </span>
-                    <span class="col-lg-3">
-                        <asp:LinkButton class="btn btn-default btn-block" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server"><%= references.ResMan("Common", Lingua,"CarrelloRicalcolaTotaleSpedizione") %></asp:LinkButton>
-                    </span>
+                <div class="widget shop-shipping" style="display: none">
+                    <h3><%= references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %></h3>
+                    <div class="form-group">
+                        <asp:DropDownList ID="ddlNazione" CssClass="form-control" Width="100%" runat="server">
+                            <asp:ListItem Text="" Value=""></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-row row">
+                        <span class="col-lg-4">
+                            <%--    <input type="text" class="form-control" placeholder="State / county">--%>
+                        </span>
+                        <span class="col-lg-4">
+                            <%--<input type="text" class="form-control" placeholder="Postcode / Zip">--%>
+                        </span>
+                        <span class="col-lg-3">
+                            <asp:LinkButton class="btn btn-default btn-block" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server"><%= references.ResMan("Common", Lingua,"CarrelloRicalcolaTotaleSpedizione") %></asp:LinkButton>
+                        </span>
+                    </div>
                 </div>
+
             </div>
+            <div class="col-lg-3">
 
-        </div>
-        <div class="col-lg-3">
-
-            <%--<div class="widget">
+                <%--<div class="widget">
                         <h3>Coupon Code</h3>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Place promotion code here..">
@@ -149,58 +187,59 @@
                             </b>
                         </div>
                     </div>--%>
-            <div class="widget">
-                <h3>
-                    <%= references.ResMan("Common", Lingua,"CarrelloRiepilogo") %></h3>
-                <asp:Repeater runat="server" ID="rptTotali">
-                    <ItemTemplate>
-                        <table class="table table-summary">
-                            <tbody>
-                                <tr class="cart-subtotal">
-                                    <th>
-                                        <%# references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %></th>
-                                    <td><span class="amount">
-                                        <asp:Literal ID="lblPrezzo" runat="server"
-                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}", new object[] { Eval("TotaleOrdine") }) + " €" %>'></asp:Literal>
-                                    </span></td>
-                                </tr>
-                                <%--<tr class="shipping">
+                <div class="widget">
+                    <h3 class="mbr-section-title display-5">
+                        <%= references.ResMan("Common", Lingua,"CarrelloRiepilogo") %></h3>
+                    <asp:Repeater runat="server" ID="rptTotali">
+                        <ItemTemplate>
+                            <table class="table table-summary">
+                                <tbody>
+                                    <%--<tr class="cart-subtotal">
+                                        <th>
+                                            <%# references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %></th>
+                                        <td><span class="amount">
+                                            <asp:Literal ID="lblPrezzo" runat="server"
+                                                Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}", new object[] { Eval("TotaleOrdine") }) + " €" %>'></asp:Literal>
+                                        </span></td>
+                                    </tr>--%>
+                                    <%--<tr class="shipping">
                                     <th>
                                         <%# references.ResMan("Common", Lingua,"CarrelloTotaleSmaltimento %> </th>
                                     <td>
                                        <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("TotaleSmaltimento")}) + " €" %></td>
                                 </tr>--%>
-                                <tr class="shipping">
-                                    <th>
-                                        <%# references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %></th>
-                                    <td>
-                                        <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleSpedizione") }) + " €" %></td>
-                                </tr>
-                                <tr class="total">
-                                    <th>
-                                        <%# references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></th>
-                                    <td>
-                                        <span class="amount">
-                                            <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleSpedizione") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") }  ) + " €" %> 
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ItemTemplate>
-                </asp:Repeater>
-                <%-- <button class="btn btn-default btn-block">
+                                    <%--  <tr class="shipping">
+                                        <th>
+                                            <%# references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %></th>
+                                        <td>
+                                            <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleSpedizione") }) + " €" %></td>
+                                    </tr>--%>
+                                    <tr class="total">
+                                        <th>
+                                            <%# references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></th>
+                                        <td>
+                                            <span class="amount">
+                                                <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleSpedizione") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") }  ) + " €" %> 
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <%-- <button class="btn btn-default btn-block">
                             Update totals
                         </button>--%>
-                <%--    <a class="btn btn-large btn-success btn-block"
+                    <%--    <a class="btn btn-large btn-success btn-block"
                     id="A7"   href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrder") ) %>'>
                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %> 
                 </a><br /><br />--%>
-                <a class="btn btn-purple btn-block"
-                    id="A2" href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
-                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
-                </a>
+                    <a class="btn btn-purple btn-block"
+                        id="A2" href='<%= ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                        <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
+                    </a>
 
+                </div>
             </div>
         </div>
     </div>

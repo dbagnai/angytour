@@ -2246,8 +2246,9 @@ public partial class _IscrivitiSocio : CommonPage
                     //associamo l'utente al ruolo
                     Roles.AddUserToRole(NomeUtente, "Socio");
 
-                    ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
-                    prof.IdSocio = socio.Id.ToString();
+                    ((ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
+                    ProfileBase prof = ProfileBase.Create(NomeUtente);
+                    prof["IdSocio"] = socio.Id.ToString();
                     prof.Save();
 
                     ////Stampo a video i dati dell'username e password Appena Creati

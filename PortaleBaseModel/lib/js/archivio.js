@@ -105,8 +105,6 @@ function BindArchivio(localObjects, el) {
     var container = objFiltroTemp.container;
 
     var str = $('#' + el)[0].innerHTML;  //elemento interno da bindare
-
-
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
     //in caso di rebinding successivo dopo l'iniezione del template
     //if (!globalObject.hasOwnProperty(el + "template")) {

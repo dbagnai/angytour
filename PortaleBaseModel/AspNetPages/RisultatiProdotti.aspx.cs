@@ -1151,7 +1151,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
     {
         bool ret = false;
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
-        if ((NomeAnteprima == null || NomeAnteprima == "") && (linkVideo != null && ((string)linkVideo) != ""))
+        if ((NomeAnteprima == null || NomeAnteprima.ToString() == "") && (linkVideo != null && ((string)linkVideo) != ""))
             ret = true;
         return ret;
     }
@@ -1160,7 +1160,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string ret = "";
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
 
-        if (linkVideo != null && linkVideo != "")
+        if (linkVideo != null && linkVideo.ToString() != "")
             ret = linkVideo.ToString();
         return ret;
     }

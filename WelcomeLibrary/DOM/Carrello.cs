@@ -47,6 +47,13 @@ namespace WelcomeLibrary.DOM
             set { _TotaleSconto = value; }
         }
 
+        private double _precacconto;
+        public double Percacconto
+        {
+            get { return _precacconto; }
+            set { _precacconto = value; }
+        }
+
         private string _Indirizzofatturazione;
         public string Indirizzofatturazione
         {
@@ -158,6 +165,7 @@ namespace WelcomeLibrary.DOM
             CarrelloItems = new CarrelloCollection();
             Supplementospedizione = false;
             TotaleSmaltimento = 0;
+            Percacconto = 0;
         }
         public TotaliCarrello(TotaliCarrello tmp)
         {
@@ -182,6 +190,7 @@ namespace WelcomeLibrary.DOM
 
             Supplementospedizione = tmp.Supplementospedizione;
             TotaleSmaltimento = tmp.TotaleSmaltimento;
+            Percacconto = tmp.Percacconto;
 
         }
     }
@@ -220,6 +229,21 @@ namespace WelcomeLibrary.DOM
         {
             get { return _Data; }
             set { _Data = value; }
+        }
+
+
+        private DateTime? _datastart;
+        public DateTime? Datastart
+        {
+            get { return _datastart; }
+            set { _datastart = value; }
+        }
+
+        private DateTime? _dataend;
+        public DateTime? Dataend
+        {
+            get { return _dataend; }
+            set { _dataend = value; }
         }
 
         private double _Prezzo;
@@ -322,7 +346,12 @@ namespace WelcomeLibrary.DOM
             get { return _progressivo; }
             set { _progressivo = value; }
         }
-
+        private string _jsonfield1;
+        public string jsonfield1
+        {
+            get { return _jsonfield1; }
+            set { _jsonfield1 = value; }
+        }
         public Carrello()
         {
             this.ID = 0;
@@ -335,6 +364,7 @@ namespace WelcomeLibrary.DOM
             this.Iva = 0;
             this.Numero = 0;
             this.CodiceProdotto = "";
+            this.jsonfield1 = "";
             this.Validita = 0;
             this.CodiceOrdine = "";
             this.Campo1 = "";
@@ -344,6 +374,8 @@ namespace WelcomeLibrary.DOM
             this.Codiceprovincia = "";
             this.Codicesconto = "";
             this.Offerta = new Offerte();
+            this.Datastart = null;
+            this.Dataend = null;
 
         }
 
@@ -360,6 +392,7 @@ namespace WelcomeLibrary.DOM
             this.Iva = tmp.Iva;
             this.Numero = tmp.Numero;
             this.CodiceProdotto = tmp.CodiceProdotto;
+            this.jsonfield1 = tmp.jsonfield1;
             this.Validita = tmp.Validita;
             this.CodiceOrdine = tmp.CodiceOrdine;
             this.Campo1 = tmp.Campo1;
@@ -370,6 +403,10 @@ namespace WelcomeLibrary.DOM
             this.Codicesconto = tmp.Codicesconto;
             this.Codiceprovincia = "";
             this.Offerta = new Offerte(tmp.Offerta);
+
+            this.Datastart = tmp.Datastart;
+            this.Dataend = tmp.Dataend;
+
         }
     }
 }

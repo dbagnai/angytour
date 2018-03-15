@@ -1,6 +1,6 @@
 ﻿/* Add here all your css styles (customizations) */
 
- 
+
 html {
     font-family: 'Raleway';
     -webkit-text-size-adjust: 100%;
@@ -150,7 +150,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #2a4e40;
+    background-color: #524339;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -181,7 +181,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #2a4e40;
+        background-color: #524339;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -196,7 +196,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #2a4e40;
+        background-color: #524339;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
     box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -210,7 +210,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #2a4e40;
+    background-color: #524339;
     border: none;
     font-weight: 500;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -259,7 +259,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #2a4e40;
+        background-color: #524339;
         border: 1px solid #ccc;
         font-weight: 500;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -363,13 +363,12 @@ a.buttonstyle {
         }
 
 
-
 .divbuttonstylered {
     color: white;
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #33332e;
+    background-color: #bc343f;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -381,7 +380,6 @@ a.buttonstyle {
     .divbuttonstylered:hover {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
         /*background-color: #4f4f4f;
         -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
@@ -395,9 +393,8 @@ a.buttonstyle {
     .divbuttonstylered:active {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
-        background-color: #33332e;
+        background-color: #bc343f;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -409,9 +406,8 @@ a.buttonstyle {
     .divbuttonstylered:visited {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
-        background-color: #33332e;
+        background-color: #bc343f;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -425,12 +421,18 @@ a.buttonstyle {
         font-size: 1.2em;
     }
 
+
+
+
+
+
+
 .divbuttonstyleorange {
     color: white;
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #f56f28;
+    background-color: #e7b315;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -442,7 +444,6 @@ a.buttonstyle {
     .divbuttonstyleorange:hover {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
         /*background-color: #4f4f4f;
         -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
@@ -456,9 +457,8 @@ a.buttonstyle {
     .divbuttonstyleorange:active {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
-        background-color: #f56f28;
+        background-color: #e7b315;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -470,9 +470,8 @@ a.buttonstyle {
     .divbuttonstyleorange:visited {
         color: white;
         padding: 10px;
-        margin: 0px;
         text-align: center;
-        background-color: #f56f28;
+        background-color: #e7b315;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -486,10 +485,10 @@ a.buttonstyle {
         font-size: 1.2em;
     }
 
+
 .divbuttonstylenegative {
     color: #4a4b4c;
     padding: 10px;
-    margin: 0px;
     text-align: center;
     background-color: #ffffff;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -503,7 +502,6 @@ a.buttonstyle {
     .divbuttonstylenegative:hover {
         color: #4a4b4c;
         padding: 10px;
-        margin: 0px;
         text-align: center;
         background-color: #ccc;
         /*background-color: #4f4f4f;
@@ -518,7 +516,6 @@ a.buttonstyle {
     .divbuttonstylenegative:active {
         color: #4a4b4c;
         padding: 10px;
-        margin: 0px;
         text-align: center;
         background-color: #fff;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -532,7 +529,6 @@ a.buttonstyle {
     .divbuttonstylenegative:visited {
         color: #4a4b4c;
         padding: 10px;
-        margin: 0px;
         text-align: center;
         background-color: #fff;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -551,7 +547,6 @@ a.buttonstyle {
 a.buttonstyleshadow {
     color: white;
     padding: 10px;
-    margin: 0px;
     text-align: center;
     background-color: #4a4b4c;
     -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
@@ -1002,7 +997,7 @@ a.buttonstyleoutline {
     .footer .copyright {
         font-family: 'Raleway';
         /*background-color: #33332e;*/
-        background-color: #2a4e40;
+        background-color: #524339;
         border-top: 1px solid #ccc;
         color: #fff;
         font-size: 10px;
@@ -1074,7 +1069,7 @@ a.buttonstyleoutline {
 }
 
 .rightside .rightside-promo {
-    color: #2a4e40;
+    color: #524339;
     position: relative;
     display: block;
     vertical-align: middle;
@@ -1532,6 +1527,7 @@ Portfolio ( da rival )
     /*background-color: #fff;*/
     overflow: hidden;
 }
+
     .work-div-noborder:hover {
         position: relative;
     }
@@ -1544,7 +1540,7 @@ Portfolio ( da rival )
     margin: 10px;
     overflow: hidden;
 }
-    
+
 
 .works-grid-1 .work-item {
     width: 99.999%;
@@ -1664,16 +1660,16 @@ Portfolio ( da rival )
         width: 100%;
         top: 0;
     }
-     
+
 
     .work-image img {
-       /*height: auto;*/
+        /*height: auto;*/
         display: block;
         height: auto;
         width: 100%;
         margin: auto;
     }
-      /* Centra verticalmente l'immagine clippandola sul min-height del contanitore */
+        /* Centra verticalmente l'immagine clippandola sul min-height del contanitore */
         .work-image img.verticalcentered {
             /*width: auto;
             height: 100%;
@@ -1686,38 +1682,39 @@ Portfolio ( da rival )
             bottom: 0;
             top: 0;
         }
+
     .work-image.rounded {
         width: 95%;
         border-radius: 50%;
         margin: 5%;
     }
-     
 
-        .work-image img.adapttocontainer2 {
-            /* Maintain aspect ratio */
-            max-height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            margin: auto;
-        }
 
-        .work-image img.adapttocontainer {
-            /* CSS Hack will make it width 100% and height 100% */
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            bottom: 0px;
-            left: 0px;
-            /* Maintain aspect ratio */
-            max-height: 100%;
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            margin: auto;
-        }
+    .work-image img.adapttocontainer2 {
+        /* Maintain aspect ratio */
+        max-height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+
+    .work-image img.adapttocontainer {
+        /* CSS Hack will make it width 100% and height 100% */
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        /* Maintain aspect ratio */
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
 
 
 .work-subcaption {
@@ -1862,15 +1859,15 @@ Portfolio ( da rival )
 }
 
 .work-item:hover .work-image > img {
-    /*-webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);*/
+    /*-webkit-transform: scale(1.2);*/
     /*scale(1.3) rotate(2deg);*/
+    /*-moz-transform: scale(1.2);*/
     /* scale(1.3) rotate(2deg);*/
+    /*-ms-transform: scale(1.2);*/
     /* scale(1.3) rotate(2deg);*/
+    /*-o-transform: scale(1.2);*/
     /* scale(1.3) rotate(2deg);*/
+    /*transform: scale(1.2);*/
     /* scale(1.3) rotate(2deg);*/
 }
 
@@ -2376,23 +2373,23 @@ Portfoli Single ( da rival )
 
 
 .headerspacer {
-    padding-top: 86px;
+    padding-top: 205px;
 }
 
 @media (max-width: 769px) {
     .headerspacer {
-        padding-top: 86px;
+        padding-top: 181px;
     }
 }
 
 #divContainerb1 {
     /*height: calc(80vh - 225px) !important;*/
-    height: calc(100vh - 86px) !important;
+    height: calc(60vh - 86px) !important;
 }
+
 .tp-caption.very_big_white {
-    padding: 0 100px !important;
-    max-width: 750px !important;
-    width: 50% !important;
+    max-width: 600px !important;
+    width: 30% !important;
 }
 /*.rev-slider-full {
     max-height: 1000px;
@@ -2743,7 +2740,6 @@ button.btn,
         -o-transition: background 0.2s, opacity 0.2s;
         transition: background 0.2s, opacity 0.2s;
         margin: 0 0px 10px 0;
-     
     }
 
     .btn:active,
@@ -2775,7 +2771,7 @@ button.btn,
 }
 
 .btn-purple {
-    background-color: #2a4e40 !important;
+    background-color: #524339 !important;
 }
 
 
@@ -4063,6 +4059,7 @@ ol.unstyled {
     z-index: 99999;
     background: #fff;
 }
+
 .loaderrelative {
     position: relative;
     left: 0px;
@@ -4198,7 +4195,7 @@ p.lead, .lead p {
 }
 
 .footer .social-icons .social-media-icon {
-    background-color: #2a4e40;
+    background-color: #524339;
     border-radius: 50%;
 }
 
@@ -4261,15 +4258,15 @@ p.lead, .lead p {
             z-index: -2;
         }
 
-        
+
 /*TRICK PER AVERE STRUTTURA BOOTSTRAP >xs con col tutte della stessa altezza*/
 
 @media (min-width:768px) {
     .table-container {
         display: table;
         width: 100%;
- 
     }
+
         .table-container .table-row {
             height: 100%;
             display: table-row;
@@ -4280,5 +4277,629 @@ p.lead, .lead p {
                 float: none;
                 vertical-align: middle;
             }
+
+    .table-col div {
+        margin: 0px auto;
+    }
 }
+
+.table-col .ecomctr-group {
+    display: table-cell;
+    position: relative;
+}
+
+
+.ecomctr {
+    padding: 0.5em;
+}
+
+.ecomctr .ecomctr-group {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #565656;
+    font-size: 0.875rem;
+    /*padding: 0.5em;*/
+}
+
+.ecomctr-icon {
+    right: 4px;
+    top: 8px;
+    font-size: 1rem;
+    width: 30px;
+    height: 20px !important;
+    background-image: none;
+    color: #ddd;
+    line-height: 1px;
+    text-indent: 0;
+    position: absolute;
+    text-align: center;
+}
+
+.ecomctr .ecomctr-group i {
+    color: #888;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.ecomctr .ecomctr-group-title {
+    /*font-family: "";*/
+    color: #e7b315;
+    font-size: 30px;
+    line-height: 43px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 20px 0;
+    box-shadow: 3px 0 #e7b315;
+}
+
 /*END TRICK PER AVERE STRUTTURA BOOTSTRAP >xs con col tutte della stessa altezza*/
+
+
+
+/*-----------------------------------
+--------------- MIRCO ---------------
+-----------------------------------*/
+
+/*------------ MENU TOP -----------*/
+.headerspacer {
+    padding-top: 85.6px;
+}
+
+.bckColor2 {
+    /*background-image: url(/images/sfondo-testata.jpg);*/
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    /*background-color: #502811;*/
+    background-color: #524339;
+}
+
+.fulllogobckdark {
+    /*width: 112px;*/
+    width: 262px;
+    height: 55px;
+    padding: 5px;
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+.menuzord-menu > li {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.menuzord.white .menuzord-menu > li.active > a, .menuzord.white .menuzord-menu > li:hover > a, .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
+    background: #766152 !important;
+}
+
+.menuzord.white .menuzord-menu > li.active > a,
+.menuzord.white .menuzord-menu > li:hover > a,
+.menuzord.white .menuzord-menu ul.dropdown li:hover > a {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .menuzord-menu > li > a {
+        background-color: #766152 !important;
+    }
+
+    .menu-top-socoial {
+        padding: 0 !important;
+    }
+}
+
+/*------------------------------------
+--------- BANNER TESTATA HOME --------
+--------------------------------------*/
+.tp-caption.very_big_white {
+    padding: 0 90px !important;
+    max-width: 800px !important;
+    width: 40% !important;
+}
+
+#divContainerb1 {
+    /*height: calc(80vh - 225px) !important;*/
+    height: calc(100vh - 85.6px) !important;
+}
+
+.bigtextleft1 {
+    font-family: 'Montserrat';
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: left;
+    max-width: auto;
+    max-height: auto;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    padding-bottom: 10px;
+}
+
+/*------------------------------------
+--------- VIDEO TESTATA HOME ---------
+--------------------------------------*/
+.titolo1videohome {
+    animation: titolo1 20s;
+    -moz-animation: titolo1 20s;
+    -o-animation: titolo1 20s;
+    animation: titolo1 20s;
+    animation-iteration-count: 1;
+    opacity: 0;
+}
+
+.titolo2videohome {
+    -webkit-animation: titolo2 25s;
+    -moz-animation: titolo2 25s;
+    -o-animation: titolo2 25s;
+    animation: titolo2 25s;
+    animation-iteration-count: 1;
+    font-size: 20px;
+    opacity: 0;
+}
+
+@keyframes titolo1 {
+    20% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes titolo2 {
+    25% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.overlayvideotext {
+    position: absolute;
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px !important;
+    color: #fff !important;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/*--------------------------------------
+--------------- PULSANTI ---------------
+----------------------------------------*/
+.divbuttonstyle a, div.divbuttonstyle, .divbuttonstyle, button.divbuttonstyle, .btn, .btn-primary, input[type="submit"].divbuttonstyle {
+    font-family: 'Lato', sans-serif !important;
+    text-transform: uppercase !important;
+    border-radius: 3px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: #524339;
+    border-radius: 3px;
+    border-color: #524339;
+    display: inline-block;
+    /*margin: 10px 5px;*/
+    font-weight: 400;
+    letter-spacing: 2px;
+    padding: .75rem 1rem !important;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+    /*.divbuttonstyle a, .divbuttonstyle a:visited, a.divbuttonstyle, a.divbuttonstyle:visited, .divbuttonstyle, .divbuttonstyle:visited, .btn, input[type="submit"], input[type="button"], button.btn, .btn-primary, .btn:visited, input:visited[type="submit"], input:visited[type="button"], button.btn:visited, .btn-primary:visited*/
+    .divbuttonstyle a, .divbuttonstyle a:visited, a.divbuttonstyle, a.divbuttonstyle:visited, .divbuttonstyle, .divbuttonstyle:visited, .btn, input[type="submit"], input[type="button"], button.btn, .btn-primary, .btn:visited, input:visited[type="submit"], input:visited[type="button"], button.btn:visited, .btn-primary:visited {
+        font-family: 'Lato', sans-serif !important;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        position: relative;
+        line-height: 1 !important;
+        padding: .75rem 1rem !important;
+        display: inline-block;
+        /*margin: 10px 5px;*/
+        height: auto;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        text-shadow: none;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+        -webkit-transition: background 0.2s, opacity 0.2s;
+        -moz-transition: background 0.2s, opacity 0.2s;
+        -o-transition: background 0.2s, opacity 0.2s;
+        transition: background 0.2s, opacity 0.2s;
+        background: #524339;
+        border-radius: 3px;
+        border-color: #524339;
+    }
+
+        .divbuttonstyle a:hover, a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.divbuttonstyle:hover, .btn:hover, .btn-primary:hover, input[type="submit"].divbuttonstyle:hover {
+            text-decoration: none !important;
+            color: white !important;
+            opacity: 0.78;
+            background: #524339;
+            border-color: #524339;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            text-shadow: none;
+            -webkit-transition: background 0.2s, opacity 0.2s;
+            -moz-transition: background 0.2s, opacity 0.2s;
+            -o-transition: background 0.2s, opacity 0.2s;
+            transition: background 0.2s, opacity 0.2s;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding: .75rem 1rem !important;
+            display: inline-block;
+            /*margin: 10px 5px;*/
+            height: auto;
+        }
+
+        .divbuttonstyle a:active, a.divbuttonstyle:active, div.divbuttonstyle:active, .divbuttonstyle:active, button.divbuttonstyle:active, .btn:active, .btn-primary:active, input[type="submit"].divbuttonstyle:active {
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+            background: #524339;
+            border-color: #524339;
+            opacity: 0.78;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            /*margin: 10px 5px;*/
+            height: auto;
+            letter-spacing: 2px;
+            padding: .75rem 1rem !important;
+        }
+
+.btn-black-outline, .btn-black-outline:active, .btn-black-outline:visited {
+    font-family: 'Lato', sans-serif !important;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    position: relative;
+    line-height: 1 !important;
+    padding: .75rem 1rem !important;
+    margin: 10px 5px;
+    height: auto;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    -webkit-transition: background 0.2s, opacity 0.2s;
+    -moz-transition: background 0.2s, opacity 0.2s;
+    -o-transition: background 0.2s, opacity 0.2s;
+    transition: background 0.2s, opacity 0.2s;
+    margin: 0 0 0 0 !important;
+    background: #fff;
+    border-radius: 3px;
+    border-color: #000;
+}
+
+    .btn-black-outline:hover {
+        text-decoration: none !important;
+        color: white !important;
+        opacity: 0.78;
+        background: #000;
+        border-color: #000;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        text-shadow: none;
+        -webkit-transition: background 0.2s, opacity 0.2s;
+        -moz-transition: background 0.2s, opacity 0.2s;
+        -o-transition: background 0.2s, opacity 0.2s;
+        transition: background 0.2s, opacity 0.2s;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        padding: .75rem 1rem !important;
+        height: auto;
+        margin: 10px 5px;
+    }
+
+.btn {
+    border-width: 1px;
+}
+
+/*--------------------------------------
+---- 2 PULSANTI home testo colonne -----
+----------------------------------------*/
+@media (max-width: 414px) {
+    .btn-center-xs, .btn-center-xs-bottom {
+        text-align: center !important;
+    }
+
+    .btn-center-xs-bottom {
+        margin-top: 10px;
+    }
+
+    .text-xs-right {
+        text-align: center !important;
+    }
+
+    .text-xs-left {
+        text-align: center !important;
+    }
+}
+
+/*--------------------------------------
+----- BANNER - STRUTTURE RICETTIVE -----
+----------------------------------------*/
+.work-image.rounded {
+    width: 100%;
+    border-radius: 50%;
+    margin: 5%;
+    text-align: center;
+    margin-left: -2.5%;
+}
+
+@media (max-width: 768px) {
+    .work-image.rounded {
+        margin-left: 0;
+    }
+}
+
+/*--------------------------------------
+--------- banner navigazione -----------
+----------------------------------------*/
+.work-image.rounded {
+    border-radius: 0;
+}
+
+/*--------------------------------------
+------ titolo banner fascia home -------
+----------------------------------------*/
+.big2 {
+    font-size: 2.5rem;
+}
+
+/*--------------------------------------
+------------ icone servizi -------------
+----------------------------------------*/
+#features3-2p .card-img-top {
+    border-radius: 50% !important;
+    max-width: 80%;
+    border: none;
+}
+
+/*--------------------------------------
+-------- pagina singola camera ---------
+----------------------------------------*/
+.blog-post .blog-post-body {
+    border-bottom: 0px solid #f0f0f0;
+}
+
+/*--------------------------------------
+-------- pagina ristorante menu --------
+----------------------------------------*/
+.media-container-row {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+}
+
+/*--------------------------------------
+--------- PAGINA CONTATTI FORM ---------
+----------------------------------------*/
+.ui-15 .ui-form .form-control {
+    background-color: #f7f7f7;
+}
+
+/*--------------------------------------
+-- PAGINA INTERNA BLOG-OFFERTE-SERVIZI -
+----------------------------------------*/
+.blog-post .blog-post-details-item-left {
+    padding: 0 0 5px 0px;
+}
+
+/*--------------------------------------
+---------- MENU SMART PHONE ------------
+----------------------------------------*/
+@media (max-width: 768px) {
+    .fulllogobckdark {
+        width: 300px;
+        height: 61px;
+        padding: 5px;
+        background-size: 60% 60%;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        margin-left: calc(100% - 170px);
+    }
+}
+
+@media (max-width: 768px) {
+    .menuzord-menu > li {
+        padding: 0 !important;
+    }
+}
+
+
+/****************************
+Breadcrumb
+****************************/
+.breadcrumb-container {
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 9px;
+    display: inline-block;
+    background-color: transparent;
+}
+
+.breadcrumb-container span {
+    display: inline-block;
+    float: left;
+    font-size: 11px;
+    margin: 0 7px 0 0;
+}
+
+.breadcrumb li {
+    float: left;
+    padding-right: 5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 9px;
+    color: 666;
+}
+
+.breadcrumb > .active {
+    color: #888;
+}
+
+.breadcrumb li a {
+    color: 666;
+    text-decoration: none;
+}
+
+    .breadcrumb li a:hover {
+        text-decoration: underline;
+    }
+
+.breadcrumb li:last-child:after {
+    content: "";
+    width: 0px;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #666;
+    content: ">\00a0";
+}
+
+
+
+/****************************
+Modify  class per jqxcalendar
+****************************/
+.jqx-fill-halfcolorbckend {
+    background: linear-gradient(90deg, rgba(251, 132, 153, 1) 50%, white 50%) !important;
+    /*background: linear-gradient(to left,  #fff  50%,  rgba(251, 132, 153, 1) 50%);*/
+    border: none;
+    /*height: 100%;
+  width: 100%*/
+}
+
+.jqx-fill-halfcolorbckstart {
+    background: linear-gradient(90deg, white 50%, rgba(251, 132, 153, 1) 50%) !important;
+    /*background: linear-gradient(to left,  rgba(251, 132, 153, 1)  50%,  #fff 50%);*/
+    border: none;
+    /*height: 100%;
+  width: 100%*/
+}
+
+.jqx-fill-state-pressed {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border-color: #999;
+    background-image: none;
+    background: #d1d1d1 !important;
+}
+
+.jqx-calendar-cell-restrictedDate {
+    background-color: rgba(251, 132, 153, 1) !important;
+    border: 1px solid #fff;
+    margin: 0 0 0 0;
+    cursor: pointer;
+}
+
+
+/****************************
+Modify  class per datepicker
+****************************/
+
+.ui-state-halfcolorbckend {
+    background: linear-gradient(90deg, rgba(251, 132, 153, 1) 50%, white 50%) !important;
+    /*background: linear-gradient(to left,  #fff  50%,  rgba(251, 132, 153, 1) 50%);*/
+    border: none;
+    /*height: 100%;
+  width: 100%*/
+}
+
+    .ui-state-halfcolorbckend > .ui-state-default {
+        background-image: none;
+        background-color: transparent;
+    }
+
+
+.ui-state-halfcolorbckstart {
+    background: linear-gradient(90deg, white 50%, rgba(251, 132, 153, 1) 50%) !important;
+    /*background: linear-gradient(to left,  rgba(251, 132, 153, 1)  50%,  #fff 50%);*/
+    border: none;
+    /*height: 100%;
+  width: 100%*/
+}
+
+    .ui-state-halfcolorbckstart > .ui-state-default {
+        background-image: none;
+        background-color: transparent;
+    }
+
+.ui-state-pressed {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border-color: #999;
+    background-image: none;
+    background: #d1d1d1 !important;
+}
+
+.ui-state-reserved {
+    opacity: 0.9 !important;
+    background-color: rgba(251, 132, 153, 0.8) !important;
+}
+
+.ui-state-disabled > .ui-state-default {
+    background: none !important;
+}
+
+
+.date-range-selected > .ui-state-active,
+.date-range-selected > .ui-state-default {
+    background-image: none;
+    background-color: lightsteelblue;
+}

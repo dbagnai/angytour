@@ -198,8 +198,8 @@
             EnablePartialRendering="true" OnAsyncPostBackError="ScriptManagerMaster_AsyncPostBackError"
             EnablePageMethods="true" EnableScriptLocalization="true" EnableScriptGlobalization="true">
             <Scripts>
-                <asp:ScriptReference Path="~/js/jquery-2.1.3.min.js" NotifyScriptLoaded="true" />
-                <asp:ScriptReference Path="~/js/jquery-migrate-1.4.1.min.js" NotifyScriptLoaded="true" />
+                <asp:ScriptReference Path="~/js/jquery-2.1.3.min.js"/>
+                <asp:ScriptReference Path="~/js/jquery-migrate-1.4.1.min.js" />
             </Scripts>
         </asp:ScriptManager>
         <!--DEFIANTJS to query json obkects-->

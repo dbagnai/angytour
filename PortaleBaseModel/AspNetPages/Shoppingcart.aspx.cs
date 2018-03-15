@@ -49,7 +49,11 @@ public partial class AspNetPages_Shoppingcart : CommonPage
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
 
-             //  DataBind();
+                string urlcanonico = Request.Url.AbsoluteUri.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");
+                Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlcanonico);
+                InzializzaTestoPagina(content);
+
+                //  DataBind();
             }
             else
             {
@@ -62,6 +66,60 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             output.Text = err.Message;
         }
     }
+
+    protected void InzializzaTestoPagina(Contenuti content)
+    {
+
+        /////////////////////////////////////////////////////
+        if (content != null)
+        {
+            string DescrizioneContenuto = "";// content.TitolobyLingua(Lingua);
+            string TestoContenuto = content.DescrizionebyLingua(Lingua);
+            //if (content.Id != 9 && content.Id != 10) //Non metto il titolo pagina in questo caso
+            litNomeContenuti.Text = DescrizioneContenuto.ToString();
+            //EvidenziaSelezione(content.TitoloI.Replace(" ", "").Replace("-", "").Replace("&", "e").Replace("'", "").Replace("?", ""));
+            try
+            {
+                litMainContent.Text =
+                    ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
+            }
+            catch { }
+
+
+
+            /////////////////////////////////////////////////////////////
+            //MODIFICA PER TITLE E DESCRIPTION CUSTOM
+            ////////////////////////////////////////////////////////////
+            string customtitle = "";
+            string customdesc = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    customdesc = content.CustomdescGB;
+                    customtitle = content.CustomtitleGB;
+                    break;
+                case "RU":
+                    customdesc = content.CustomdescRU;
+                    customtitle = content.CustomtitleRU;
+                    break;
+                default:
+                    customdesc = content.CustomdescI;
+                    customtitle = content.CustomtitleI;
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(customtitle))
+                ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
+            if (!string.IsNullOrEmpty(customdesc))
+                ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
+            ////////////////////////////////////////////////////////////
+
+
+
+        }
+        if (litNomeContenuti.Text.StartsWith(" ")) divTitle.Visible = false;
+    }
+
 
     private void CaricaCarrello()
     {
@@ -87,9 +145,15 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         //aggiorno il carrello in quanto se erano presenti articoli esauriti vengono rimossi
         carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
 
+
+        //carrello[0].Dataend.Value.
+
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
     }
+
+  
+
     private string SelezionaNazione(CarrelloCollection carrello)
     {
         string codicenazione = "IT";
@@ -140,7 +204,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
               WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
         if (sezione != null)
         {
-            ret += " " + references.ResMan("Common",Lingua,"testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
+            ret += " " + references.ResMan("Common", Lingua, "testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
         }
         return ret;
     }
@@ -166,14 +230,14 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         //int.TryParse(Idtext, out idprodotto);
         int quantita = 0;
         //int.TryParse(txtQuantita_temp.Value, out quantita);
-        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name, "", idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = references.ResMan("Common",Lingua,"testoCarellosuperamentoquantita");
+            output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = "0";
         //AggiornaVisualizzazioneDatiCarrello();
@@ -192,14 +256,14 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         int.TryParse(txtQuantita_temp.Value, out quantita);
         quantita -= 1;//Decremento
         if (quantita < 1) quantita = 0;
-        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name, "", idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = references.ResMan("Common",Lingua, "testoCarellosuperamentoquantita");
+            output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = quantita.ToString();
 
@@ -208,7 +272,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         CaricaCarrello();
 
     }
-   
+
     protected void btnIncrement(object sender, EventArgs e)
     {
 
@@ -229,14 +293,14 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         int.TryParse(txtQuantita_temp.Value, out quantita);
 
         quantita += 1;//Incremento
-        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name,"",idcarrello);
+        AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name, "", idcarrello);
         if (Session["superamentoquantita"] != null)
         {
             int qtamod = 0;
             int.TryParse(Session["superamentoquantita"].ToString(), out qtamod);
             Session.Remove("superamentoquantita");
             quantita = qtamod;
-            output.Text = references.ResMan("Common",Lingua, "testoCarellosuperamentoquantita");
+            output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = quantita.ToString();
 

@@ -48,6 +48,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             PageGuid = System.Guid.NewGuid().ToString();
             id_cliente = CaricaValoreMaster(Request, Session, "id_cliente", true, "");
             id_commerciale = CaricaValoreMaster(Request, Session, "id_commerciale", true, "");
+            hididcommerciale.Value = id_commerciale;
             CommonPage CommonPage = new CommonPage();
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
 
@@ -70,9 +71,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         {
             id_commerciale = idcliente;
             txtCommerciale.Text = idcliente;
+            hididcommerciale.Value = id_commerciale;
             txtCommerciale.Enabled = false;
             ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
-
         }
         else
         {
@@ -81,16 +82,16 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 
     }
 
-    protected string TipopagaDisplay(object item)
+    protected static string  TipopagaDisplay(object item)
     {
         if (item == null) return "";
         TotaliCarrello i = (TotaliCarrello)item;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(references.ResMan("Common", Lingua, "txt" + i.Modalitapagamento).ToString());
+        sb.Append(references.ResMan("Common", "I", "txt" + i.Modalitapagamento).ToString());
         return sb.ToString();
     }
 
-    protected bool StatusCheck(object item)
+    protected static bool StatusCheck(object item)
     {
         if (item == null) return false;
         TotaliCarrello i = (TotaliCarrello)item;
@@ -130,74 +131,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     public static string VisualizzaCarrello(string codiceordine, bool nofoto = false)
     {
         StringBuilder sb = new StringBuilder();
-        //sb.Append(codiceordine);
-        eCommerceDM ecmDM = new eCommerceDM();
-        CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
-
-        foreach (Carrello c in carrellolist)
-        {
-
-            //Creiamo la visualizzione degli articoli in carrello
-            // da fare <li>  contenuto da prendere sotto  </li>
-            sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:10px; border-bottom:1px solid #ddd;\">");
-
-            if (!nofoto)
-            {
-                //CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString())
-                sb.Append("<a target=\"_blank\"   href=\"" +
-                    CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, "I", CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""))
-                       + "\"  class=\"product-thumb pull-left\"  >");
-                sb.Append("<img alt=\""
-                    +
-                    CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true))
-                    + "\" Style=\"width: auto; height: auto; max-width: 60px; max-height: 60px;\" ");
-                sb.Append(" src=\"");
-                sb.Append(CommonPage.ReplaceAbsoluteLinks(CommonPage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString())) + "\" ");
-                sb.Append("\" />");
-                sb.Append(" </a>");
-            }
-
-            sb.Append(" <div class=\"product-details\">");
-            sb.Append(" <span class=\"product-name\">");
-            sb.Append(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI));
-            sb.Append(" </span>");
-
-
-            #region MODIFIED CARATTERISTICHE CARRELLO
-            if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
-            {
-                sb.Append(" <div class=\"product-categories muted\">");
-                //recupero le caratteristiche del prodotto
-                List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
-                ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
-                if (item != null)
-                    sb.Append(item.caratteristica1.value + "  -  " + item.caratteristica2.value);
-                sb.Append(" </div>");
-            }
-            #endregion
-
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
-            //sb.Append(" </div>");
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
-            //sb.Append(" </div>");
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(CommonPage.TestoCaratteristica(1, c.Offerta.Caratteristica2.ToString(), Lingua));
-            //sb.Append(" </div>");
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
-            //sb.Append(" </div>");
-
-
-            sb.Append(" <p class=\"product-calc muted\">");
-            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
-            sb.Append(" </p>");
-
-            sb.Append(" </div>");
-            sb.Append(" </li>");
-
-        }
+        sb.Append(CommonPage.VisualizzaCarrello(null, null, codiceordine, nofoto));
         return sb.ToString();
     }
     protected static string TestoSezione(string codicetipologia)
@@ -209,66 +143,23 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         {
             ret += " nella sezione:  \"" + CommonPage.ReplaceAbsoluteLinks(CommonPage.CrealinkElencotipologia(codicetipologia, "I")) + "\"";
         }
-
         return ret;
-
     }
-
-
-    protected TotaliCarrelloCollection CaricaDatiOrdini(string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "", string idcommerciale = "")
-    {
-        eCommerceDM eDM = new eCommerceDM();
-        TotaliCarrelloCollection ordini = new TotaliCarrelloCollection();
-        List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
-        if (!string.IsNullOrWhiteSpace(id_cliente))
-        {
-            SQLiteParameter parid = new SQLiteParameter("@Id_cliente", id_cliente);
-            parcoll.Add(parid);
-        }
-        if (!string.IsNullOrWhiteSpace(idcommerciale))
-        {
-            SQLiteParameter parid1 = new SQLiteParameter("@Id_commerciale", idcommerciale);
-            parcoll.Add(parid1);
-        }
-        if (!string.IsNullOrEmpty(codiceordine))
-        {
-            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", codiceordine);
-            parcoll.Add(parcod);
-        }
-        if (!string.IsNullOrEmpty(datamin))
-        {
-            DateTime _dt;
-            if (DateTime.TryParse(datamin, out _dt))
-            {
-                SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
-                parcoll.Add(pardmin);
-            }
-        }
-        if (!string.IsNullOrEmpty(datamax))
-        {
-            DateTime _dt;
-            if (DateTime.TryParse(datamax, out _dt))
-            {
-                SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
-                parcoll.Add(pardmax);
-            }
-        }
-
-        ordini = eDM.CaricaListaOrdini(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parcoll, "");
-
-        return ordini;
-    }
-
     protected void CaricaOrdini()
     {
         string idforced = id_commerciale;
         if (string.IsNullOrEmpty(idforced))
             idforced = txtCommerciale.Text;
 
-        TotaliCarrelloCollection ordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
-#if true
-        //Selezionamo i risultati in base al numero di pagina e alla sua dimensione per la paginazione
-        //Utilizzando la classe di paginazione
+        TotaliCarrelloCollection ordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+
+        long nrecordfiltrati = ordini.Totrecs;
+        PagerRisultati.TotalRecords = (long)ordini.Totrecs;
+        if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
+
+        rtpOrdini.DataSource = ordini;
+        rtpOrdini.DataBind();
+#if false
 
         WelcomeLibrary.UF.Pager<TotaliCarrello> p = new WelcomeLibrary.UF.Pager<TotaliCarrello>(ordini, true, this.Page, PageGuid + PagerRisultati.ClientID);
         PagerRisultati.TotalRecords = p.Count;
@@ -282,10 +173,11 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             Pagina = "1";
         }
         rtpOrdini.DataSource = p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+
         rtpOrdini.DataBind();
 
 #endif
-        PreparaStampa();
+        //if ((!string.IsNullOrEmpty(txtdatamin.Text) && !string.IsNullOrEmpty(txtdatamax.Text)) || !string.IsNullOrEmpty(txtCodiceordine.Text) || !string.IsNullOrEmpty(txtCLIENTE.Text)) PreparaStampa();
     }
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 
@@ -299,19 +191,19 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 
     protected void PagerRisultati_PageGroupClickNext(object sender, string spare)
     {
-        int pag = PagerRisultati.CurrentPage;
-        pag++;
-        if (pag > PagerRisultati.totalPages) pag = PagerRisultati.totalPages;
-        Pagina = pag.ToString();
+        //int pag = PagerRisultati.CurrentPage;
+        //pag++;
+        //if (pag > PagerRisultati.totalPages) pag = PagerRisultati.totalPages;
+        //Pagina = pag.ToString();
         CaricaOrdini();
     }
 
     protected void PagerRisultati_PageGroupClickPrev(object sender, string spare)
     {
-        int pag = PagerRisultati.CurrentPage;
-        pag--;
-        if (pag < 1) pag = 1;
-        Pagina = pag.ToString();
+        //int pag = PagerRisultati.CurrentPage;
+        //pag--;
+        //if (pag < 1) pag = 1;
+        //Pagina = pag.ToString();
         CaricaOrdini();
 
     }
@@ -337,7 +229,6 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     }
     protected void btnExport_Click(object sender, EventArgs e)
     {
-
         string idforced = id_commerciale;
         if (string.IsNullOrEmpty(idforced))
             idforced = txtCommerciale.Text;
@@ -348,12 +239,19 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             System.IO.Directory.CreateDirectory(pathFile);
         eCommerceDM eDM = new eCommerceDM();
         string retmessage = eDM.ExportOrdersToCsv(pathFile, csvName, listaordini);
-
         WelcomeLibrary.UF.SharedStatic.DownloadFile(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/" + csvName);
     }
 
-    protected void PreparaStampa()
+
+    //protected void btnStampa_Click(object sender, EventArgs e)
+    //{
+    //    PreparaStampa();
+    //}
+
+    [System.Web.Services.WebMethod]
+    public static string  PreparaStampa(string idcommerciale, string idcliente, string codiceordine, string datamin, string datamax)
     {
+        string ret = "";
         System.Text.StringBuilder sb = new StringBuilder();
         sb.Append(" <table style=\"padding:10px;border:solid 1px #000000\" class=\"table table-order table-stripped\"><tr>");
         sb.Append("<thead>");
@@ -370,10 +268,13 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         sb.Append("<td style=\"background-color:#ccc;color:#fff\">Dettagli</td>");
         sb.Append("</tr>");
         sb.Append("</thead>");
-        string idforced = id_commerciale;
-        if (string.IsNullOrEmpty(idforced))
-            idforced = txtCommerciale.Text;
-        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
+
+        //string idforced = id_commerciale;
+        //if (string.IsNullOrEmpty(idforced))
+        //    idforced = txtCommerciale.Text;
+        //TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
+        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(idcliente, codiceordine, datamin, datamax, idcommerciale);
+
         if (listaordini != null)
             foreach (TotaliCarrello t in listaordini)
             {
@@ -397,13 +298,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             }
 
         sb.Append("</table>");
-        Session.Add("datistampa", sb.ToString());
-
+        HttpContext.Current.Session.Add("datistampa", sb.ToString());
+        return ret;
     }
 
 
-    protected void btnStampa_Click(object sender, EventArgs e)
-    {
-        PreparaStampa();
-    }
 }

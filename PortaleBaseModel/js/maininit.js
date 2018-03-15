@@ -617,7 +617,7 @@ jQuery(document).ready(function ($) {
 
 
     //place holder fallback
-    $('input, textarea').placeholder();
+    //$('input, textarea').placeholder();
 
 
     //process video posts

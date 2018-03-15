@@ -34,7 +34,7 @@ namespace WelcomeLibrary.UF
     {
 
 
-#if true
+#if false
 
         public static bool Median(Bitmap b)
         {

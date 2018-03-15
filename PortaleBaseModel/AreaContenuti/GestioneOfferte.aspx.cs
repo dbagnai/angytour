@@ -19,7 +19,7 @@ using System.Data.SQLite;
 
 public partial class AreaContenuti_Default3 : CommonPage
 {
-    offerteDM offDM = new offerteDM();
+   // offerteDM offDM = new offerteDM();
     public string ClientIDSelected
     {
         get { return ViewState["ClientIDSelected"] != null ? (string)(ViewState["ClientIDSelected"]) : ""; }

@@ -153,7 +153,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+    <asp:HiddenField runat="server" ID="hididcommerciale" />
 
     <div class="row">
         <div class="col-lg-3">
@@ -172,7 +172,7 @@
                                     function GetCodeR(source, eventArgs) {
                                         $get("<%= txtCLIENTE.ClientID %>").value = eventArgs.get_value();
                                     }
-                                        </script>
+                                </script>
                                 Filtro cliente (ricerca per nome o email):<br />
                                 <asp:TextBox MaxLength="10" ID="txtCLIENTE" Width="100%" runat="server" /><br />
                             </ContentTemplate>
@@ -190,7 +190,7 @@
                                     function GetCodeC(source, eventArgs) {
                                         $get("<%= txtCommerciale.ClientID %>").value = eventArgs.get_value();
                                     }
-                                        </script>
+                                </script>
                                 Filtro commerciale (ricerca per nome o email):<br />
                                 <asp:TextBox MaxLength="10" ID="txtCommerciale" Width="100%" runat="server" /><br />
                             </ContentTemplate>
@@ -219,17 +219,38 @@
         </div>
         <!--end:.span3-->
         <script type="text/javascript">
-                                            function stampalista() {
-                                                $get("ctl00_ContentPlaceHolder1_btnStampa").click();
-                                            }
-                </script>
+            function Preparadati() {
+
+                var idcommerciale = $("#" +  '<%= hididcommerciale.ClientID %>').val();
+                if (idcommerciale == ''){  idcommerciale = $("#" +  '<%= txtCommerciale.ClientID %>').val();}
+                var idcliente = $("#" +  '<%= txtCLIENTE.ClientID %>').val();
+                var codiceordine = $("#" +  '<%= txtCodiceordine.ClientID %>').val();
+                var datamin = $("#" +  '<%= txtdatamin.ClientID %>').val();
+                var datamax = $("#" + '<%= txtdatamax.ClientID %>').val();
+                $.ajax({
+                    type: "POST",
+                    url: "StoricoOrdini.aspx/PreparaStampa",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: '{idcommerciale: "' + idcommerciale + '",idcliente: "' + idcliente + '",codiceordine: "' + codiceordine + '",datamin: "' + datamin + '",datamax: "' + datamax + '" }',
+                    success: function (data) {
+                       // OnSuccess(data, this.destinationControl);
+                          //window.location.href = '/AspNetPages/formStampa.aspx';
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                    }
+                });
+
+            }
+            //function stampalista() {
+            //    $get("ctl00_ContentPlaceHolder1_btnStampa").click();
+            //}
+        </script>
         <div class="col-lg-9">
             <div class="widget">
-
-                <a class="btn btn-default btn-small pull-right" href='<%= WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/AspNetPages/formStampa.aspx" %>'
-                    target="_blank" style="text-decoration: underline;">Stampa Lista</a>
-
-                <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />
+                <a class="btn btn-default btn-small pull-right" onclick="Preparadati()" href='<%= WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/AspNetPages/formStampa.aspx" %>'  target="_blank" style="text-decoration: underline;">Stampa Lista</a>
+            <%--    <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />--%>
                 <asp:Button class="btn btn-default btn-small pull-right" Text="Excel" ID="Button1" OnClick="btnExport_Click" runat="server" CommandArgument="" />
 
                 <h3>Lista ordini</h3>
@@ -294,7 +315,7 @@
                                 // alert(destination[0].id);//Controllo destinazione html
                                 destination.append("<li>" + response.d + "</li>");
                             }
-                                </script>
+                        </script>
                         <asp:Repeater runat="server" ID="rtpOrdini">
                             <ItemTemplate>
                                 <tr>
@@ -332,6 +353,11 @@
                                                                 <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
                                                                        new object[] {(Double)Eval("TotaleSmaltimento")  } ) + " €" %></td>
                                                             </tr>--%>
+                                                    <tr>
+                                                        <th>Acconto:</th>
+                                                        <td><%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                                                                     new object[] { (Double)Eval("Percacconto") } ) + "%" %></td>
+                                                    </tr>
 
                                                     <tr>
                                                         <th>IdCliente:</th>

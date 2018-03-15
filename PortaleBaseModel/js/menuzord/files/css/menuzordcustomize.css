@@ -140,10 +140,16 @@
 .menuzord,
 .menuzord * {
     font-family: 'Montserrat';
-    font-weight: 500;
+    /*font-weight: 500;*/
     font-size: 1rem;
 }
-
+.bckColor2 {
+    /*background-image: url(/images/sfondo-testata.jpg);*/
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    /*background-color: #502811;*/
+    background-color: #524339;
+}
 .bckColor1 {
     background-color: #fff;
 }
@@ -178,11 +184,11 @@
 }
 
 .fulllogobckdark {
-    width: 299px;
-    height: 55px;
+    width: 250px;
+    height: 80px;
     padding: 5px;
-    background: url(/images/main_logo_d.png) center center;
-    background-size: 80% 80%;
+    background: url('/images/main_logo_d.png') center center;
+    background-size: 65% 65%;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
@@ -205,7 +211,7 @@
 
 /*orange OVERRIDE*/
 .menuzord.orange {
-    background: #2a4e40;
+    background: #524339;
 }
 
     .menuzord.orange .menuzord-brand {
@@ -219,8 +225,9 @@
     .menuzord.orange .menuzord-menu > li.active > a,
     .menuzord.orange .menuzord-menu > li:hover > a,
     .menuzord.orange .menuzord-menu ul.dropdown li:hover > a {
-        background: #2a4e40;
+        background: none;
         color: #fff;
+        font-weight:600;
     }
 
     .menuzord.orange .showhide em {
@@ -232,7 +239,7 @@
     }
 
     .menuzord.orange .menuzord-menu > li.search form input[type="text"] {
-        background: #2a4e40;
+        background: #524339;
         color: #fff;
     }
 
@@ -295,8 +302,9 @@
 .menuzord.white .menuzord-menu > li.active > a,
 .menuzord.white .menuzord-menu > li:hover > a,
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
-    background: #909090;
-    color: #fff;
+     background: none;
+        color: #fff;
+        font-weight:600;
 }
 
 .menuzord.white .showhide em {
@@ -364,8 +372,8 @@
 .menuzord-menu > li {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 17px;
+    padding-right: 17px;
 }
 
     .menuzord-menu > li > a {
@@ -425,7 +433,7 @@
 @media (max-width: 768px) {
 
     .menuzord-menu > li {
-        padding: 0px !important;
+        padding: 4px 3px !important;
     }
 
         .menuzord-menu > li > a {
@@ -434,13 +442,8 @@
         }
 
     .fulllogobckdark {
-        width: 300px;
-        height: 61px;
-        padding: 5px;
-        background-size: 60% 60%;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-        margin-left: calc(100% - 170px);
+        width: 270px;
+        height: 70px;
     }
 
     .menuzord {

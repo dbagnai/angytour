@@ -1,0 +1,1818 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Lora:400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,700);
+
+
+
+body,
+input,
+textarea,
+.mbr-company .list-group-text {
+  font-family: 'Raleway', sans-serif;
+}
+.mbr-footer-content li,
+.mbr-footer .mbr-contacts li {
+  font-family: 'Raleway', sans-serif;
+}
+.btn,
+.alert,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.mbr-figure .mbr-figure-caption,
+.mbr-gallery-title,
+.mbr-map [data-state-details],
+.mbr-price {
+  font-family: 'Montserrat', sans-serif;
+}
+.mbr-footer-content h1,
+.mbr-footer .mbr-contacts h1,
+.mbr-footer-content h2,
+.mbr-footer .mbr-contacts h2,
+.mbr-footer-content h3,
+.mbr-footer .mbr-contacts h3,
+.mbr-footer-content h4,
+.mbr-footer .mbr-contacts h4,
+.mbr-footer-content p strong,
+.mbr-footer .mbr-contacts p strong,
+.mbr-footer-content strong,
+.mbr-footer .mbr-contacts strong {
+  font-family: 'Montserrat', sans-serif;
+}
+.btn-sm,
+.lead a,
+.lead blockquote,
+.mbr-section-subtitle,
+.mbr-section-hero .mbr-section-lead,
+.mbr-cards .card-subtitle,
+.mbr-testimonial .card-block {
+  font-family: 'Lora', serif;
+}
+.mbr-author-name {
+  font-family: 'Montserrat', sans-serif;
+}
+.mbr-author-desc {
+  font-family: 'Lora', serif;
+}
+.mbr-plan-title {
+  font-family: 'Montserrat', sans-serif;
+}
+.mbr-plan-subtitle,
+.mbr-plan-price-desc {
+  font-family: 'Lora', serif;
+}
+.bg-primary {
+  background-color: #c0a375 !important;
+}
+.bg-success {
+  background-color: #90a878 !important;
+}
+.bg-info {
+  background-color: #7e9b9f !important;
+}
+.bg-warning {
+  background-color: #f3c649 !important;
+}
+.bg-danger {
+  background-color: #f28281 !important;
+}
+.btn-primary {
+  background-color: #c0a375;
+  border-color: #c0a375;
+  color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #ffffff;
+  background-color: #a07e49;
+  border-color: #a07e49;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: #ffffff !important;
+  background-color: #a07e49 !important;
+  border-color: #a07e49 !important;
+}
+.btn-secondary {
+  background-color: #bfcecb;
+  border-color: #bfcecb;
+  color: #ffffff;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary.focus,
+.btn-secondary:active,
+.btn-secondary.active {
+  color: #ffffff;
+  background-color: #94ada8;
+  border-color: #94ada8;
+}
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+  color: #ffffff !important;
+  background-color: #94ada8 !important;
+  border-color: #94ada8 !important;
+}
+.btn-info {
+  background-color: #7e9b9f;
+  border-color: #7e9b9f;
+  color: #ffffff;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info.focus,
+.btn-info:active,
+.btn-info.active {
+  color: #ffffff;
+  background-color: #597478;
+  border-color: #597478;
+}
+.btn-info.disabled,
+.btn-info:disabled {
+  color: #ffffff !important;
+  background-color: #597478 !important;
+  border-color: #597478 !important;
+}
+.btn-success {
+  background-color: #90a878;
+  border-color: #90a878;
+  color: #ffffff;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.focus,
+.btn-success:active,
+.btn-success.active {
+  color: #ffffff;
+  background-color: #6a8153;
+  border-color: #6a8153;
+}
+.btn-success.disabled,
+.btn-success:disabled {
+  color: #ffffff !important;
+  background-color: #6a8153 !important;
+  border-color: #6a8153 !important;
+}
+.btn-warning {
+  background-color: #f3c649;
+  border-color: #f3c649;
+  color: #ffffff;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus,
+.btn-warning:active,
+.btn-warning.active {
+  color: #ffffff;
+  background-color: #e1a90f;
+  border-color: #e1a90f;
+}
+.btn-warning.disabled,
+.btn-warning:disabled {
+  color: #ffffff !important;
+  background-color: #e1a90f !important;
+  border-color: #e1a90f !important;
+}
+.btn-danger {
+  background-color: #f28281;
+  border-color: #f28281;
+  color: #ffffff;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger.focus,
+.btn-danger:active,
+.btn-danger.active {
+  color: #ffffff;
+  background-color: #eb3d3c;
+  border-color: #eb3d3c;
+}
+.btn-danger.disabled,
+.btn-danger:disabled {
+  color: #ffffff !important;
+  background-color: #eb3d3c !important;
+  border-color: #eb3d3c !important;
+}
+.btn-primary-outline {
+  background: none;
+  border-color: #8e7041;
+  color: #8e7041;
+}
+.btn-primary-outline:hover,
+.btn-primary-outline:focus,
+.btn-primary-outline.focus,
+.btn-primary-outline:active,
+.btn-primary-outline.active {
+  color: #ffffff;
+  background-color: #c0a375;
+  border-color: #c0a375;
+}
+.btn-primary-outline.disabled,
+.btn-primary-outline:disabled {
+  color: #ffffff !important;
+  background-color: #c0a375 !important;
+  border-color: #c0a375 !important;
+}
+.btn-secondary-outline {
+  background: none;
+  border-color: #85a29c;
+  color: #85a29c;
+}
+.btn-secondary-outline:hover,
+.btn-secondary-outline:focus,
+.btn-secondary-outline.focus,
+.btn-secondary-outline:active,
+.btn-secondary-outline.active {
+  color: #ffffff;
+  background-color: #bfcecb;
+  border-color: #bfcecb;
+}
+.btn-secondary-outline.disabled,
+.btn-secondary-outline:disabled {
+  color: #ffffff !important;
+  background-color: #bfcecb !important;
+  border-color: #bfcecb !important;
+}
+.btn-info-outline {
+  background: none;
+  border-color: #4e6669;
+  color: #4e6669;
+}
+.btn-info-outline:hover,
+.btn-info-outline:focus,
+.btn-info-outline.focus,
+.btn-info-outline:active,
+.btn-info-outline.active {
+  color: #ffffff;
+  background-color: #7e9b9f;
+  border-color: #7e9b9f;
+}
+.btn-info-outline.disabled,
+.btn-info-outline:disabled {
+  color: #ffffff !important;
+  background-color: #7e9b9f !important;
+  border-color: #7e9b9f !important;
+}
+.btn-success-outline {
+  background: none;
+  border-color: #5d7149;
+  color: #5d7149;
+}
+.btn-success-outline:hover,
+.btn-success-outline:focus,
+.btn-success-outline.focus,
+.btn-success-outline:active,
+.btn-success-outline.active {
+  color: #ffffff;
+  background-color: #90a878;
+  border-color: #90a878;
+}
+.btn-success-outline.disabled,
+.btn-success-outline:disabled {
+  color: #ffffff !important;
+  background-color: #90a878 !important;
+  border-color: #90a878 !important;
+}
+.btn-warning-outline {
+  background: none;
+  border-color: #c9970d;
+  color: #c9970d;
+}
+.btn-warning-outline:hover,
+.btn-warning-outline:focus,
+.btn-warning-outline.focus,
+.btn-warning-outline:active,
+.btn-warning-outline.active {
+  color: #ffffff;
+  background-color: #f3c649;
+  border-color: #f3c649;
+}
+.btn-warning-outline.disabled,
+.btn-warning-outline:disabled {
+  color: #ffffff !important;
+  background-color: #f3c649 !important;
+  border-color: #f3c649 !important;
+}
+.btn-danger-outline {
+  background: none;
+  border-color: #e82625;
+  color: #e82625;
+}
+.btn-danger-outline:hover,
+.btn-danger-outline:focus,
+.btn-danger-outline.focus,
+.btn-danger-outline:active,
+.btn-danger-outline.active {
+  color: #ffffff;
+  background-color: #f28281;
+  border-color: #f28281;
+}
+.btn-danger-outline.disabled,
+.btn-danger-outline:disabled {
+  color: #ffffff !important;
+  background-color: #f28281 !important;
+  border-color: #f28281 !important;
+}
+.text-primary {
+  color: #c0a375 !important;
+}
+.text-success {
+  color: #90a878 !important;
+}
+.text-info {
+  color: #7e9b9f !important;
+}
+.text-warning {
+  color: #f3c649 !important;
+}
+.text-danger {
+  color: #f28281 !important;
+}
+.alert-success {
+  background-color: #90a878;
+}
+.alert-info {
+  background-color: #7e9b9f;
+}
+.alert-warning {
+  background-color: #f3c649;
+}
+.alert-danger {
+  background-color: #f28281;
+}
+.btn-social {
+  border-color: #c0a375;
+}
+.btn-social:hover {
+  background: #c0a375;
+}
+.mbr-company .list-group-item.active .list-group-text {
+  color: #c0a375;
+}
+.mbr-footer p a,
+.mbr-footer ul a {
+  color: #c0a375;
+}
+.mbr-footer-content li::before,
+.mbr-footer .mbr-contacts li::before {
+  background: #c0a375;
+}
+.mbr-footer-content li a:hover,
+.mbr-footer .mbr-contacts li a:hover {
+  color: #c0a375;
+}
+.lead a,
+.lead a:hover {
+  color: #c0a375;
+}
+.lead blockquote {
+  border-color: #c0a375;
+}
+.mbr-plan-header.bg-primary .mbr-plan-subtitle,
+.mbr-plan-header.bg-primary .mbr-plan-price-desc {
+  color: #e8ddcd;
+}
+.mbr-plan-header.bg-success .mbr-plan-subtitle,
+.mbr-plan-header.bg-success .mbr-plan-price-desc {
+  color: #d0dac6;
+}
+.mbr-plan-header.bg-info .mbr-plan-subtitle,
+.mbr-plan-header.bg-info .mbr-plan-price-desc {
+  color: #c7d4d5;
+}
+.mbr-plan-header.bg-warning .mbr-plan-subtitle,
+.mbr-plan-header.bg-warning .mbr-plan-price-desc {
+  color: #ffffff;
+}
+.mbr-plan-header.bg-danger .mbr-plan-subtitle,
+.mbr-plan-header.bg-danger .mbr-plan-price-desc {
+  color: #ffffff;
+}
+.mbr-small-footer a,
+.mbr-gallery-filter li:hover {
+  color: #c0a375;
+}
+.scrollToTop_wraper {
+  opacity: 0 !important;
+}
+#menu-1 .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-1 .navbar-caption {
+  color: #ffffff;
+}
+#menu-1 .navbar-toggler {
+  color: #ffffff;
+}
+#menu-1 .close-icon::before,
+#menu-1 .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-1 .link,
+#menu-1 .dropdown-item {
+  color: #ffffff;
+}
+#menu-1 .link {
+  font-size: 0.75rem;
+}
+#menu-1 .dropdown-item,
+#menu-1 .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-1 .link:hover,
+#menu-1 .dropdown-item:hover,
+#menu-1 .link:focus,
+#menu-1 .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-1 .link[aria-expanded="true"],
+#menu-1 .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-1 .nav-dropdown-sm .link:focus,
+#menu-1 .nav-dropdown-sm .link:hover,
+#menu-1 .nav-dropdown-sm .dropdown-item:focus,
+#menu-1 .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-1 .navbar,
+#menu-1 .nav-dropdown-sm,
+#menu-1 .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-1 .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-1 .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-1 .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-1 .bg-color.transparent.opened .link:hover,
+#menu-1 .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-1 .link[aria-expanded="true"],
+#menu-1 .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#header1-0 .mbr-section-lead P {
+  font-size: 24px;
+}
+#header1-0 p {
+  color: #fff;
+  font-family: Lora;
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-top: -1em;
+  margin-bottom: 4.3125rem;
+}
+#header3-2 .mbr-section-title,
+#header3-2 .mbr-section-subtitle {
+  text-align: center;
+}
+#header2-r .mbr-section-text {
+  font-size: 24px;
+}
+#header2-r .btn {
+  font-size: 12px;
+}
+#header2-r p.lead,
+#header2-r .lead p {
+  font-size: 20px;
+}
+#header3-s .mbr-section-title,
+#header3-s .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-s H3 {
+  color: #000000;
+}
+#header3-s SMALL {
+  color: #000000;
+  font-size: 32px;
+}
+#header3-s h3.mbr-section-title.display-2 {
+  display: none;
+}
+#features3-j P {
+  color: #5b5b5b;
+  font-size: 20px;
+}
+#features3-j H4 {
+  color: #000000;
+  font-size: 24px;
+}
+#features3-j H5 {
+  color: #b8312f;
+  font-size: 20px;
+}
+#features3-j B {
+  color: #5b5b5b;
+}
+@media (min-width: 992px) {
+  #features3-j .mbr-cards-row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+#msg-box6-q .mbr-section-title,
+#msg-box6-q .lead p {
+  color: #fff;
+}
+#msg-box6-q P {
+  font-size: 20px;
+}
+#msg-box6-m .mbr-section-title,
+#msg-box6-m .lead p {
+  color: #fff;
+}
+#msg-box6-m H3 {
+  color: #90a878;
+}
+#msg-box6-m P {
+  color: #5b5b5b;
+  font-size: 20px;
+}
+#msg-box6-m h3.mbr-section-title.display-2 {
+  color: #000;
+}
+#msg-box6-m .lead p {
+  color: #5b5b5b;
+}
+#msg-box6-n .mbr-section-title,
+#msg-box6-n .lead p {
+  color: #fff;
+}
+#msg-box6-n P {
+  font-size: 20px;
+}
+#header3-p .mbr-section-title,
+#header3-p .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-p SMALL {
+  font-size: 24px;
+  color: #5c5c5c;
+}
+#features7-o .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-o .iconbox {
+    background-color: #e19f3f;
+    border-color: #e19f3f;
+}
+#features7-o P {
+  text-align: center;
+  font-size: 18px;
+}
+#features7-o H4 {
+  font-size: 22px;
+}
+#header3-t .mbr-section-title,
+#header3-t .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-t SMALL {
+  font-size: 24px;
+  color: #efefef;
+}
+#header3-t H3 {
+  color: #ffffff;
+}
+#features7-u .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-u .iconbox {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+#features7-u H4 {
+  color: #ffffff;
+  font-size: 22px;
+}
+#features7-u P {
+  color: #efefef;
+  font-size: 18px;
+}
+#header3-6 .mbr-section-title,
+#header3-6 .mbr-section-subtitle {
+  text-align: center;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#header1-y p.lead,
+#header1-y .lead p {
+  margin-bottom: 1.5rem;
+}
+@media only screen and (min-width: 768px) {
+  #header1-y {
+    /* desktop - tablets: */
+  }
+  #header1-y #clockdiv {
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+  }
+  #header1-y #clockdiv > div {
+    padding: 10px;
+    border-radius: 3px;
+    background: rgba(144, 168, 120, 0.6);
+    display: inline-block;
+  }
+  #header1-y #clockdiv div > span {
+    padding: 15px;
+    border-radius: 3px;
+    background: #90a878;
+    display: inline-block;
+  }
+  #header1-y .smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  #header1-y {
+    /* desktop - tablets: */
+  }
+  #header1-y #clockdiv {
+    display: none;
+  }
+  #header1-y #clockdiv > div {
+    display: none;
+  }
+  #header1-y #clockdiv div > span {
+    display: none;
+  }
+  #header1-y .smalltext {
+    display: none;
+  }
+}
+#custom-html-4h {
+  /* Type valid CSS here */
+}
+#custom-html-4h .logo {
+  width: 100%;
+  height: 163px;
+  margin-top: 40px;
+}
+#header3-z .mbr-section-title,
+#header3-z .mbr-section-subtitle {
+  text-align: center;
+}
+#header2-12 .mbr-section-text {
+  font-size: 24px;
+}
+#header2-12 .btn {
+  font-size: 12px;
+}
+#header2-12 p.lead,
+#header2-12 .lead p {
+  font-size: 20px;
+}
+#header3-13 .mbr-section-title,
+#header3-13 .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-13 H3 {
+  color: #000000;
+}
+#header3-13 SMALL {
+  color: #000000;
+  font-size: 32px;
+}
+#header3-13 h3.mbr-section-title.display-2 {
+  display: none;
+}
+#features3-14 P {
+  color: #5b5b5b;
+  font-size: 20px;
+}
+#features3-14 H4 {
+  color: #000000;
+  font-size: 24px;
+}
+#features3-14 H5 {
+  color: #b8312f;
+  font-size: 20px;
+}
+#features3-14 B {
+  color: #5b5b5b;
+}
+@media (min-width: 992px) {
+  #features3-14 .mbr-cards-row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+#msg-box6-15 .mbr-section-title,
+#msg-box6-15 .lead p {
+  color: #fff;
+}
+#msg-box6-15 P {
+  font-size: 20px;
+}
+#msg-box6-16 .mbr-section-title,
+#msg-box6-16 .lead p {
+  color: #fff;
+}
+#msg-box6-16 H3 {
+  color: #90a878;
+}
+#msg-box6-16 P {
+  color: #5b5b5b;
+  font-size: 20px;
+}
+#msg-box6-16 h3.mbr-section-title.display-2 {
+  color: #000;
+}
+#msg-box6-16 .lead p {
+  color: #5b5b5b;
+}
+#msg-box6-17 .mbr-section-title,
+#msg-box6-17 .lead p {
+  color: #fff;
+}
+#msg-box6-17 P {
+  font-size: 20px;
+}
+#header3-18 .mbr-section-title,
+#header3-18 .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-18 SMALL {
+  font-size: 24px;
+  color: #5c5c5c;
+}
+#features7-19 .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-19 .iconbox {
+  background-color: #c0a375;
+  border-color: #c0a375;
+}
+#features7-19 P {
+  text-align: center;
+  font-size: 18px;
+}
+#features7-19 H4 {
+  font-size: 22px;
+}
+#header3-1a .mbr-section-title,
+#header3-1a .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-1a SMALL {
+  font-size: 24px;
+  color: #efefef;
+}
+#header3-1a H3 {
+  color: #ffffff;
+}
+#features7-1b .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-1b .iconbox {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+#features7-1b H4 {
+  color: #ffffff;
+  font-size: 22px;
+}
+#features7-1b P {
+  color: #efefef;
+  font-size: 18px;
+}
+#header3-1c .mbr-section-title,
+#header3-1c .mbr-section-subtitle {
+  text-align: center;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#custom-html-4i {
+  /* Type valid CSS here */
+}
+#custom-html-4i .logo {
+  width: 100%;
+  height: 163px;
+  margin-top: 40px;
+}
+#header3-27 .mbr-section-title,
+#header3-27 .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-27 SMALL {
+  font-size: 24px;
+  color: #565656;
+}
+#content6-26 P {
+  font-size: 20px;
+}
+#msg-box6-28 .mbr-section-title,
+#msg-box6-28 .lead p {
+  color: #fff;
+}
+#msg-box6-28 P {
+  font-size: 24px;
+}
+#msg-box6-28 .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#content1-2a P {
+  color: #ffffff;
+  font-size: 24px;
+}
+#msg-box6-2d .mbr-section-title,
+#msg-box6-2d .lead p {
+  color: #fff;
+}
+#msg-box6-2d P {
+  font-size: 24px;
+  color: #000000;
+  text-align: right;
+}
+#msg-box6-2d H3 {
+  color: #28262b;
+}
+#msg-box6-2d .lead p {
+  margin-bottom: 0;
+  color: #28262b;
+}
+#msg-box6-2d .mbr-section-title {
+  color: #28262b;
+}
+#content1-2c P {
+  color: #28262b;
+  font-size: 24px;
+  text-align: right;
+}
+#msg-box6-2e .mbr-section-title,
+#msg-box6-2e .lead p {
+  color: #fff;
+}
+#msg-box6-2e P {
+  font-size: 24px;
+}
+#msg-box6-2e .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#content1-2f P {
+  color: #ffffff;
+  font-size: 24px;
+}
+#header3-2g .mbr-section-title,
+#header3-2g .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-2g SMALL {
+  /*font-size: 24px;*/
+  color: #28262b;
+}
+#features7-2h .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-2h .iconbox {
+    background-color: #e19f3f;
+    border-color: #e19f3f;
+}
+#features7-2h H4 {
+  font-size: 22px;
+}
+#header3-2k .mbr-section-title,
+#header3-2k .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-2k SMALL {
+  /*font-size: 24px;*/
+  color: #5c5c5c;
+}
+#features6-2l P {
+  font-size: 18px;
+}
+#features6-2l H4 {
+  font-size: 22px;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#custom-html-4j {
+  /* Type valid CSS here */
+}
+#custom-html-4j .logo {
+  width: 100%;
+  height: 163px;
+  margin-top: 40px;
+}
+#header3-2o .mbr-section-title,
+#header3-2o .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-2o SMALL {
+  font-size: 24px;
+  color: #565656;
+}
+#content6-2p P {
+  font-size: 20px;
+}
+#msg-box6-2r .mbr-section-title,
+#msg-box6-2r .lead p {
+  color: #fff;
+}
+#msg-box6-2r P {
+  font-size: 24px;
+}
+#msg-box6-2r .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#content1-2s P {
+  color: #ffffff;
+  font-size: 24px;
+}
+#msg-box6-2t .mbr-section-title,
+#msg-box6-2t .lead p {
+  color: #fff;
+}
+#msg-box6-2t P {
+  font-size: 24px;
+  color: #f7da64;
+  text-align: right;
+}
+#msg-box6-2t H3 {
+  color: #ffffff;
+}
+#msg-box6-2t B {
+  color: #f7da64;
+}
+#msg-box6-2t .lead p {
+  color: #f7da64;
+}
+#msg-box6-2t .mbr-section-title {
+  color: #f7da64;
+}
+#msg-box6-2v .mbr-section-title,
+#msg-box6-2v .lead p {
+  color: #fff;
+}
+#msg-box6-2v P {
+  font-size: 24px;
+  color: #28262b;
+}
+#msg-box6-2v H3 {
+  color: #28262b;
+}
+#msg-box6-2v .lead p {
+  color: #28262b;
+  margin-bottom: 0;
+}
+#msg-box6-2v .mbr-section-title {
+  color: #28262b;
+}
+#content1-2w P {
+  color: #28262b;
+  font-size: 24px;
+}
+#header3-2x .mbr-section-title,
+#header3-2x .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-2x SMALL {
+  font-size: 24px;
+  color: #28262b;
+}
+#features7-2y .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-2y .iconbox {
+  background-color: #c0a375;
+  border-color: #c0a375;
+}
+#features7-2y H4 {
+  font-size: 22px;
+}
+#header3-2z .mbr-section-title,
+#header3-2z .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-2z SMALL {
+  font-size: 24px;
+  color: #5c5c5c;
+}
+#features6-30 P {
+  font-size: 18px;
+}
+#features6-30 H4 {
+  font-size: 22px;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#custom-html-4k {
+  /* Type valid CSS here */
+}
+#custom-html-4k .logo {
+  width: 100%;
+  height: 163px;
+  margin-top: 40px;
+}
+#header3-34 .mbr-section-title,
+#header3-34 .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-34 SMALL {
+  font-size: 24px;
+  color: #565656;
+}
+#content6-35 P {
+  font-size: 20px;
+}
+#msg-box6-37 .mbr-section-title,
+#msg-box6-37 .lead p {
+  color: #fff;
+}
+#msg-box6-37 P {
+  font-size: 24px;
+}
+#msg-box6-37 .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#msg-box6-3a .mbr-section-title,
+#msg-box6-3a .lead p {
+  color: #fff;
+}
+#msg-box6-3a P {
+  font-size: 24px;
+  color: #28262b;
+}
+#msg-box6-3a H3 {
+  color: #28262b;
+}
+#msg-box6-3a .lead p {
+  color: #28262b;
+  margin-bottom: 0;
+}
+#msg-box6-3a .mbr-section-title {
+  color: #28262b;
+}
+#header3-3c .mbr-section-title,
+#header3-3c .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-3c SMALL {
+  font-size: 24px;
+  color: #28262b;
+}
+#features7-3d .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-3d .iconbox {
+  background-color: #c0a375;
+  border-color: #c0a375;
+}
+#features7-3d H4 {
+  font-size: 22px;
+}
+#header3-3e .mbr-section-title,
+#header3-3e .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-3e SMALL {
+  font-size: 24px;
+  color: #5c5c5c;
+}
+#features6-3f P {
+  font-size: 18px;
+}
+#features6-3f H4 {
+  font-size: 22px;
+}
+
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#custom-html-4l {
+  /* Type valid CSS here */
+}
+#custom-html-4l .logo {
+  width: 100%;
+  height: 163px;
+  margin-top: 40px;
+}
+#header3-3j .mbr-section-title,
+#header3-3j .mbr-section-subtitle {
+  text-align: center;
+}
+#header3-3j SMALL {
+  font-size: 24px;
+  color: #565656;
+}
+#content6-3k P {
+  font-size: 20px;
+}
+#msg-box6-3m .mbr-section-title,
+#msg-box6-3m .lead p {
+  color: #fff;
+}
+#msg-box6-3m P {
+  font-size: 24px;
+}
+#msg-box6-3m .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#content1-3t P {
+  color: #ffffff;
+  font-size: 24px;
+}
+#msg-box6-3n .mbr-section-title,
+#msg-box6-3n .lead p {
+  color: #fff;
+}
+#msg-box6-3n P {
+  font-size: 24px;
+  color: #28262b;
+}
+#msg-box6-3n H3 {
+  color: #28262b;
+}
+#msg-box6-3n .lead p {
+  color: #28262b;
+  margin-bottom: 0;
+}
+#msg-box6-3n .mbr-section-title {
+  color: #28262b;
+}
+#content2-3u BLOCKQUOTE {
+  font-size: 24px;
+  font-family: 'Raleway', sans-serif;
+}
+#content2-3u P {
+  font-size: 24px;
+}
+#content2-3u UL {
+  font-size: 24px;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#header2-48 .mbr-section-text {
+  font-size: 24px;
+}
+#msg-box6-44 .mbr-section-title,
+#msg-box6-44 .lead p {
+  color: #fff;
+}
+#msg-box6-44 P {
+  font-size: 24px;
+  color: #28262b;
+}
+#msg-box6-44 H3 {
+  color: #28262b;
+}
+#msg-box6-44 .lead p {
+  color: #28262b;
+  margin-bottom: 0;
+}
+#msg-box6-44 .mbr-section-title {
+  color: #28262b;
+}
+#msg-box6-42 .mbr-section-title,
+#msg-box6-42 .lead p {
+  color: #fff;
+}
+#msg-box6-42 P {
+  font-size: 24px;
+}
+#msg-box6-42 .lead p {
+  color: #fff;
+  margin-bottom: 0;
+}
+#msg-box6-47 .mbr-section-title,
+#msg-box6-47 .lead p {
+  color: #fff;
+}
+#msg-box6-47 P {
+  font-size: 24px;
+  color: #28262b;
+}
+#msg-box6-47 H3 {
+  color: #28262b;
+}
+#msg-box6-47 .lead p {
+  color: #28262b;
+  margin-bottom: 0;
+}
+#msg-box6-47 .mbr-section-title {
+  color: #28262b;
+}
+#menu-x {
+  /* #en {
+    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 -32px 0 -32px;
+    color: rgba(0, 0, 0, 0.);
+    padding: 9px 16px;
+    border-radius: 3px;
+} */
+}
+#menu-x .hide-buttons .nav-btn {
+  display: none !important;
+}
+#menu-x .navbar-caption {
+  color: #ffffff;
+}
+#menu-x .navbar-toggler {
+  color: #ffffff;
+}
+#menu-x .close-icon::before,
+#menu-x .close-icon::after {
+  background-color: #ffffff;
+}
+#menu-x .link,
+#menu-x .dropdown-item {
+  color: #ffffff;
+}
+#menu-x .link {
+  font-size: 0.75rem;
+}
+#menu-x .dropdown-item,
+#menu-x .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#menu-x .link:hover,
+#menu-x .dropdown-item:hover,
+#menu-x .link:focus,
+#menu-x .dropdown-item:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-menu {
+  background: #0e0e0e;
+}
+#menu-x .nav-dropdown-sm .link:focus,
+#menu-x .nav-dropdown-sm .link:hover,
+#menu-x .nav-dropdown-sm .dropdown-item:focus,
+#menu-x .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#menu-x .navbar,
+#menu-x .nav-dropdown-sm,
+#menu-x .nav-dropdown-sm .link[aria-expanded="true"],
+#menu-x .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#menu-x .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#menu-x .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#menu-x .bg-color.transparent.opened .link:hover,
+#menu-x .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#menu-x .link[aria-expanded="true"],
+#menu-x .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#menu-x #it {
+  background: url(../../images/bandiera_italiana.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -25px;
+  color: rgba(0, 0, 0, 0);
+}
+#menu-x #en {
+  background: url(../../images/bandiera_inglese.jpg) center no-repeat;
+  background-size: 20px 14px;
+  padding-left: 20px;
+  margin: 0 -15px 0 -15px;
+  color: rgba(0, 0, 0, 0);
+}
+#header2-4b .mbr-section-text {
+  font-size: 24px;
+}

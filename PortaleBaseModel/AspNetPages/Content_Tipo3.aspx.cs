@@ -197,7 +197,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             {
                 foreach (Offerte item1 in list)
                 {
-                    li = new ListItem(estraititolo(item1), item1.Id.ToString());
+                     li = new ListItem(offDM.estraititolo(item1,Lingua), item1.Id.ToString());
+                    item.DenominazionebyLingua(Lingua);
                     ddlLocations.Items.Add(li);
                 }
                 try
@@ -268,23 +269,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
 #endif
 
-    protected string estraititolo(Offerte item)
-    {
-        if (item == null) return "";
-        string testotitolo = item.DenominazionebyLingua(Lingua);
-
-
-        string titolo1 = testotitolo.ToString();
-        string titolo2 = "";
-        int i = testotitolo.ToString().IndexOf("\n");
-        if (i != -1)
-        {
-            titolo1 = testotitolo.ToString().Substring(0, i);
-            if (testotitolo.ToString().Length >= i + 1)
-                titolo2 = testotitolo.ToString().Substring(i + 1);
-        }
-        return titolo1;
-    }
+   
 
     protected void EvidenziaSelezione(string testolink)
     {

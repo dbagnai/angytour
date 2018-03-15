@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Profile;
 using System.Web.Security;
 
 /// <summary>
@@ -117,8 +118,9 @@ public class usermanager
                 Membership.CreateUser(username, password);
                 //associamo l'utente al ruolo
                 Roles.AddUserToRole(username, role);
-                ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(username);
-                prof.IdCliente = idassociato;
+                //ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(username);
+                ProfileBase prof = ProfileBase.Create(username);
+                prof["IdCliente"] = idassociato;
                 prof.Save();
                 password = "User: " + username + " Psw: " + password;
                 esito = true;
@@ -148,7 +150,8 @@ public class usermanager
             {
                 UserLastActivityDate = _user.LastActivityDate;
             }
-            ProfileCommon prf = (ProfileCommon)ProfileCommon.Create(_user.UserName);
+            //ProfileCommon prf = (ProfileCommon)ProfileCommon.Create(_user.UserName);
+            ProfileBase prf = ProfileBase.Create(_user.UserName);
             string valueselected = prf[field].ToString();
             if (value == valueselected)
             { retval = _user.UserName; }

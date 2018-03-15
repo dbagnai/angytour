@@ -96,7 +96,7 @@ public class GenericRouteHandler : IRouteHandler
                 Pathdestinazione = "~/Error.aspx";
                 return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 //return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
-                break;
+                //break;
         }
 
 

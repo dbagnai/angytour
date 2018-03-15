@@ -801,7 +801,7 @@ namespace WelcomeLibrary.DAL
         {
             ClienteCollection list = new ClienteCollection();
             if (constr == "") return list;
-            string query = "SELECT ID_CLIENTE,Cognome,Nome,Email FROM [TBL_CLIENTI] WHERE  Cognome LIKE @testoricerca or Nome LIKE @testoricerca or Email like @testoricerca";
+            string query = "SELECT ID_CLIENTE,Cognome,Nome,Email FROM [TBL_CLIENTI] WHERE  cast(ID_CLIENTE as text)   LIKE @testoricerca or Cognome LIKE @testoricerca or Nome LIKE @testoricerca or Email like @testoricerca";
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             // parametro
             SQLiteParameter p1 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%"); //OleDbType.VarChar

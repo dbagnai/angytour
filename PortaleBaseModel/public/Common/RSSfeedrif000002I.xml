@@ -1,56 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Nome Sito Blog</title>
+    <title>Casa Baccano Blog</title>
     <link>http://localhost:52646</link>
-    <description>Nome Sito</description>
-    <lastBuildDate>Sat, 27 Jan 2018 17:53:50 GMT</lastBuildDate>
+    <description>Casa Baccano</description>
+    <lastBuildDate>Thu, 15 Mar 2018 10:18:41 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-01-27T17:53+01:00</sy:updateBase>
+    <sy:updateBase>2018-03-15T10:18+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>sasa
-sasasasaas</title>
-      <link>http://localhost:52646/I/blog/sasa-sasasasaas-868</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/sasa-sasasasaas-868</guid>
-      <pubDate>Thu, 25 Jan 2018 10:09:05 +01:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="sasa
-sasasasaas" width="350" /><p>xzxxzzx</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/sasa-sasasasaas-868"><em>sasa
-sasasasaas</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>new proca lite
+      <title>news 2
 sottotitolo</title>
-      <link>http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865</guid>
-      <pubDate>Wed, 24 Jan 2018 12:01:40 +01:00</pubDate>
+      <link>http://localhost:52646/I/blog/news-2-sottotitolo-3</link>
+      <guid isPermaLink="true">http://localhost:52646/I/blog/news-2-sottotitolo-3</guid>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/865/agnese-produzione-(1).jpg" alt="new proca lite
-sottotitolo" width="350" /><p>Lite text ..... <br/> dffdd</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/new-proca-lite-sottotitolo-865"><em>new proca lite
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/3/siszer.jpg" alt="news 2
+sottotitolo" width="350" /><p>Lorem prova ... <br/>  <br/>  <br/> vide:(https://www.youtube.com/embed/CdnaJPPxQow?rel=0|Prova)</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-2-sottotitolo-3"><em>news 2
 sottotitolo</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>news 2fdf
-sottotitolovdffd</title>
-      <link>http://localhost:52646/I/blog/news-2fdf-sottotitolovdffd-864</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/news-2fdf-sottotitolovdffd-864</guid>
-      <pubDate>Wed, 20 Sep 2017 16:35:40 +02:00</pubDate>
-      <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="news 2fdf
-sottotitolovdffd" width="350" /><p>Lorem prova ......vdf</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-2fdf-sottotitolovdffd-864"><em>news 2fdf
-sottotitolovdffd</em></a>.</p>]]></description>
     </item>
     <item>
       <title>news 1
 sottotitolo</title>
-      <link>http://localhost:52646/I/blog/news-1-sottotitolo-863</link>
-      <guid isPermaLink="true">http://localhost:52646/I/blog/news-1-sottotitolo-863</guid>
-      <pubDate>Tue, 12 Sep 2017 16:42:26 +02:00</pubDate>
+      <link>http://localhost:52646/I/blog/news-1-sottotitolo-2</link>
+      <guid isPermaLink="true">http://localhost:52646/I/blog/news-1-sottotitolo-2</guid>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/863/a3.jpg" alt="news 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-1-sottotitolo-863"><em>news 1
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000002/2/siszer.jpg" alt="news 1
+sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/blog/news-1-sottotitolo-2"><em>news 1
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

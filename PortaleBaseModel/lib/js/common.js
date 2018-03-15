@@ -1,4 +1,5 @@
-﻿"use strict";
+﻿
+"use strict";
 
 var jsonlanguages = "";
 var versionforcache = "1";
@@ -31,12 +32,15 @@ var JSONrefcondizione = "";
 var JSONreftipocontratto = "";
 var JSONreftiporisorse = "";
 var JSONreftipocontatto = "";
+var bookinghandlerpath = '/lib/hnd/HandlerBooking.ashx';
 var commonhandlerpath = '/lib/hnd/HandlerDataCommon.ashx';
 var resourcehandlerpath = '/lib/hnd/HandlerDataImmobili.ashx';
+var carrellohandlerpath = '/lib/hnd/CarrelloHandler.ashx';
+
 var referencesloaded = false;
 var promisecalling = false;
 var callqueque = [];
-var globalObject = {}; //memoria generale per appoggio dati temporanei ( attenzione, usare con id univoci nelle chiamate !)
+var globalObject = {};
 
 
 var enablescrolltopmem = false;
@@ -65,7 +69,7 @@ var reinitscrollpos = function () {
 
 
 $(document).ready(function () {
-    //searchtaginjectandcall();
+    //   searchtaginjectandcall();
 });
 searchtaginjectandcall();
 
@@ -119,7 +123,8 @@ function testCacheversion(serverversion) {
 //Si chiama con loadref(nomefunzione,parametro1,parametro2, .... , lingua)
 function loadref(functocall) {
     var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
-    //MEMORIZZO LA CHIAMATA 
+
+    //MEMORIZZO LA CHIAMATA
     var item = {};
     item.name = functocall.name;
     item.args = [];
@@ -132,6 +137,7 @@ function loadref(functocall) {
         item.args.push(arguments[i]);
 
     }
+
     if (promisecalling)
         callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise iniziale per inizializzare le referenze base
     else {
@@ -601,14 +607,16 @@ function GetResourcesValue(key, data) {
 
 }
 /*------------FUNZIONI RIEMPIMENTO DDL ------------------------------------------------*/
-function fillDDLArray(container, jsonDictionary, selectionText, selectionVaue, nameKey, nameValue) {
+function fillDDLArraySimple(container, jsonDictionary, selectionText, selectionValue, nameKey, nameValue, selectedvalue) {
     try {
-        var sel = baseresources[lng]["selectgeneric"];
+        var sel = '';
+        try { sel = baseresources[lng]["selectgeneric"]; } catch (e) { }
         if (selectionText != null) sel = selectionText;
-        var $select = $(container).clone();
-        if ($select.length) {
-            //$select.find('option').remove();
+        var $select = $(container);
+        if ($select) {
+            $select.find('option').remove();
             var listitems = "";
+            listitems += '<option value="' + selectionValue + '"> ' + sel + ' </option>';
             try {
                 for (var i = 0; i < jsonDictionary.length; i++) {
                     listitems += '<option style="cursor:pointer;" value="' + jsonDictionary[i][nameKey] + '">' + jsonDictionary[i][nameValue] + '</option>';
@@ -616,11 +624,44 @@ function fillDDLArray(container, jsonDictionary, selectionText, selectionVaue, n
             }
             catch (e1) { }
             $select.append(listitems);
+            $select.val(selectedvalue);
+            if ($select.val() != selectedvalue && selectedvalue != null) {
+                //$select.find('option').remove();
+                //listitems += '<option value="' + selectedvalue + '">' + selectedvalue + '</option>';
+                //$select.append(listitems);
+                //$select.val(selectedvalue);
+            }
+            //$select.change(); //Chiama il change per aggiornare le variabili javascript ( se presente l'evento nel controllo )
+        }
+    }
+    catch (e) {
+    }
+}
+
+function fillDDLArray(container, jsonDictionary, selectionText, selectionValue, nameKey, nameValue) {
+    try {
+        var sel = '';
+        try { sel = baseresources[lng]["selectgeneric"]; } catch (e) { }
+        if (selectionText != null) sel = selectionText;
+        var $select = $(container).clone();
+        if ($select.length) {
+
+            //$select.find('option').remove();
+            var listitems = "";
+            // listitems += '<option value="' + selectionValue + '"> ' + sel + ' </option>';
+
+            try {
+                for (var i = 0; i < jsonDictionary.length; i++) {
+                    listitems += '<option style="cursor:pointer;" value="' + jsonDictionary[i][nameKey] + '">' + jsonDictionary[i][nameValue] + '</option>';
+                }
+            }
+            catch (e1) { }
+            $select.append(listitems);
+
         }
         return $select;
     }
     catch (e) {
-
     }
 }
 
@@ -936,7 +977,12 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if ($(this).attr("idbind") != null)
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
 
+
+                        if ($(this).attr("placeholder") != null)
+                            $(this).attr("placeholder", baseresources[lng][$(this).attr("placeholder")]);
+
                     }
+
                     else if ($(this).is("textarea")) {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).text(dataitem[proprarr[0]]);
@@ -1152,6 +1198,20 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if (contenutoslide !== '')
                             $(this).parent().show();
 
+                    }
+                    else if ($(this).is("div")
+                        && ($(this).hasClass('bookingtool'))
+                    ) {
+                        var idrisorsa = dataitem[proprarr[0]];
+                        bookingtool.initbookingtool(idrisorsa, $(this).attr("id"));
+                    }
+                    else if ($(this).is("div")
+                        && ($(this).hasClass('carellotool'))
+                    ) {
+                        var idrisorsa = dataitem[proprarr[0]];
+                        //var prezzounitario = dataitem[proprarr[1]]; // da passaere
+                        var idcontrollo = $(this).attr("id");
+                        carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 1);
                     }
                     else if ($(this).is("div")
                         && ($(this).hasClass('owl-carousel') || $(this).hasClass('img-list'))
@@ -1557,9 +1617,7 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
             retstring += "<div  style=\"background-color:#121212\" class=\"btn btn-purple\"  >" + testoVedi + "</div>";
             retstring += "</a>";
         }
-
     }
-
     callback(retstring);
 }
 
@@ -1976,10 +2034,7 @@ function caricaDatiServerBanner(lng, objfiltro, page, pagesize, enablepager, cal
     });
 }
 
-/* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
-
-/*---FUNZIONI UTILITA'----------------------------*/
 function putinsession(key, value, callback) {
     //putinsession
     var key = key || "";
@@ -2018,13 +2073,6 @@ function getfromsession(key, callback) {
             }
         });
 }
-
-function openLink(link) {
-    //console.log('openlink:' + link);
-    window.location.href = link;
-    return false;
-}
-
 function JsSvuotaSession(el) {
     var link = "";
     if (el !== null && el !== undefined) {
@@ -2057,6 +2105,52 @@ function emptysession(link, callback) {
         }
     });
 }
+
+/* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
+
+
+/*---FUNZIONI UTILITA'----------------------------*/
+
+//METODO 1
+var require = function (src, callback) {
+    callback = callback || function () { };
+    var newScriptTag = document.createElement('script'),
+        firstScriptTag = document.getElementsByTagName('script')[0];
+    newScriptTag.src = src;
+    newScriptTag.async = true;
+    newScriptTag.onload = newScriptTag.onreadystatechange = function () {
+        (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') && (callback());
+    };
+    firstScriptTag.parentNode.insertBefore(newScriptTag, firstScriptTag);
+}
+
+
+//METODO 2 Caricamento dinamico di file script .js con 
+function loadJs(url) {
+    return new Promise(resolve => {
+        const script = document.createElement("script");
+        script.src = url;
+        script.onload = resolve;
+        document.head.appendChild(script);
+    });
+}
+function loadCss(url) {
+    return new Promise(resolve => {
+        const script = document.createElement("link");
+        script.href = url;
+        script.rel = "stylesheet";
+        script.type = "text/css";
+        script.onload = resolve;
+        document.head.appendChild(script);
+    });
+}
+
+function openLink(link) {
+    //console.log('openlink:' + link);
+    window.location.href = link;
+    return false;
+}
+
 function sendmessage(title, text) {
     $.Notification.autoHideNotify('success', 'top right', title, text)
 }
@@ -2070,11 +2164,6 @@ function isEven(n) {
     return n == parseFloat(n) ? !(n % 2) : void 0;
 }
 
-
-String.prototype.capitalizeFirstLetter = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-}
-
 function endsWith(str, word) {
     return str.indexOf(word, str.length - word.length) !== -1;
 }
@@ -2086,20 +2175,12 @@ function jsAddSlashes(str) {
     return str;
 }
 
-Number.prototype.pad = function (len) {
-    return (new Array(len + 1).join("0") + this).slice(-len);
-}
 function getTime(passdata) {
 
     var tmpData = new Date(passdata) || new Date();
     var date_obj = tmpData;
     var date_obj_time = date_obj;
     try {
-        //var date_obj_hours = date_obj.getUTCHours().pad(2);
-        //var date_obj_mins = date_obj.getUTCMinutes().pad(2);
-        //var date_obj_second = date_obj.getUTCSeconds().pad(2);
-
-
 
         var date_obj_hours = date_obj.format("HH");
         var date_obj_mins = date_obj.format("mm");
@@ -2117,11 +2198,6 @@ function getDate(passdata) {
     var date_obj = tmpData;
     var date_obj_date = date_obj;
     try {
-        //var date_obj_day = date_obj.getDay().pad(2);
-        //var date_obj_month = date_obj.getMonth().pad(2);
-        //var date_obj_year = date_obj.getYear().pad(2);
-
-
 
         var date_obj_day = date_obj.format("dd");
         var date_obj_month = date_obj.format("MM");
@@ -2132,7 +2208,13 @@ function getDate(passdata) {
 
     } return date_obj_date;
 }
-
+function DownloadFile(filetodownload) {
+    $.get(
+        filetodownload,
+        function (data, textStatus, jqXHR) {
+            window.location = (filetodownload);
+        });
+}
 $.fn.isOnScreen = function () {
     var win = $(window);
     var viewport = {
@@ -2141,7 +2223,6 @@ $.fn.isOnScreen = function () {
     };
     viewport.right = viewport.left + win.width();
     viewport.bottom = viewport.top + win.height();
-    //console.log(viewport);
 
     var bounds = this.offset();
     bounds.right = bounds.left + this.outerWidth();
@@ -2191,39 +2272,7 @@ function registerListener(event, func) {
     });
 })(jQuery);
 
-if (typeof String.prototype.trim != 'function') { // detect native implementation
-    String.prototype.trim = function () {
-        return this.replace(/^\s+/, '').replace(/\s+$/, '');
-    };
-}
 
-Date.prototype.today = function (separator) {
-    var separator = separator || "/";
-    return ((this.getDate() < 10) ? "0" : "") + this.getDate() + separator + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + separator + this.getFullYear();
-}
-
-// For the time now
-Date.prototype.timeNow = function (separator) {
-    var separator = separator || ":";
-    return ((this.getHours() < 10) ? "0" : "") + this.getHours() + separator + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + separator + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-}
-Number.prototype.formatMoney = function (decPlaces, thouSeparator, decSeparator) {
-    var n = this,
-        decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
-        decSeparator = decSeparator == undefined ? "." : decSeparator,
-        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
-        sign = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
-    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
-};
-function DownloadFile(filetodownload) {
-    $.get(
-        filetodownload,
-        function (data, textStatus, jqXHR) {
-            window.location = (filetodownload);
-        });
-}
 function getMeta(url) {
     $("<img/>").attr("src", url).load(function () {
         s = { w: this.width, h: this.height };
@@ -2253,23 +2302,8 @@ $.fn.outerHTML = function () {
     else return $t.clone().wrap('<p>').parent().html();
 }
 
-if (typeof Array.prototype.contains !== 'function') {
-    Array.prototype.contains = function (needle) {
-        var i = null;
-        for (i in this) {
-            if (this[i] == needle) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-}
-
-
 function getCopy(objectToCopy) {
     var copy = {};
-
     for (var prop in objectToCopy) {
         if (typeof (objectToCopy[prop]) === "object") {
             copy[prop] = getCopy(objectToCopy[prop]);
@@ -2278,13 +2312,61 @@ function getCopy(objectToCopy) {
             copy[prop] = null;
         }
     }
-
     return copy;
-
-
 }
-var sortBy = (function () {
 
+
+//if (typeof Array.prototype.contains !== 'function') {
+//    Array.prototype.contains = function (needle) {
+//        var i = null;
+//        for (i in this) {
+//            if (this[i] == needle) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//}
+//Array.prototype.remByName = function (val) {
+//    for (var i = 0; i < this.length; i++) {
+//        if (this[i].name === val) {
+//            this.splice(i, 1);
+//            i--;
+//        }
+//    }
+//    return this;
+//}
+
+String.prototype.capitalizeFirstLetter = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
+Number.prototype.pad = function (len) {
+    return (new Array(len + 1).join("0") + this).slice(-len);
+}
+if (typeof String.prototype.trim != 'function') { // detect native implementation
+    String.prototype.trim = function () {
+        return this.replace(/^\s+/, '').replace(/\s+$/, '');
+    };
+}
+Date.prototype.today = function (separator) {
+    var separator = separator || "/";
+    return ((this.getDate() < 10) ? "0" : "") + this.getDate() + separator + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + separator + this.getFullYear();
+}
+Date.prototype.timeNow = function (separator) {
+    var separator = separator || ":";
+    return ((this.getHours() < 10) ? "0" : "") + this.getHours() + separator + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + separator + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+}
+Number.prototype.formatMoney = function (decPlaces, thouSeparator, decSeparator) {
+    var n = this,
+        decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+        decSeparator = decSeparator == undefined ? "." : decSeparator,
+        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+        sign = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+};
+var sortBy = (function () {
     //cached privated objects
     var _toString = Object.prototype.toString,
         //the default parser function
@@ -2293,7 +2375,6 @@ var sortBy = (function () {
         _getItem = function (x) {
             return this.parser((x !== null && typeof x === "object" && x[this.prop]) || x);
         };
-
     // Creates a method for sorting the Array
     // @array: the Array of elements
     // @o.prop: property name (if it is an Array of objects)
@@ -2315,9 +2396,7 @@ var sortBy = (function () {
     };
 
 }());
-
-
-// Fix Function#name on browsers that do not support it (IE):
+//Fix Function#name on browsers that do not support it (IE):
 if (!(function f() { }).name) {
     Object.defineProperty(Function.prototype, 'name', {
         get: function () {
@@ -2329,12 +2408,5 @@ if (!(function f() { }).name) {
         }
     });
 }
-Array.prototype.remByName = function (val) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i].name === val) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-}
+
+

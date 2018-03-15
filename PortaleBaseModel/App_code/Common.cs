@@ -14,6 +14,7 @@ using System.Xml;
 using System.Data.SQLite;
 using System.Text;
 using System.Drawing.Imaging;
+using Newtonsoft.Json;
 
 /// <summary>
 /// This Page class is common to all sample pages and exists as a place to
@@ -273,7 +274,7 @@ public class CommonPage : Page
     public static string ControlloDotDot(object NomeAnteprima, string classe)
     {
         string ret = classe;
-        if (NomeAnteprima == null || NomeAnteprima == "")
+        if (NomeAnteprima == null || NomeAnteprima.ToString() == "")
             ret = "";
         return ret;
     }
@@ -379,7 +380,7 @@ public class CommonPage : Page
         bool ret = false;
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
 
-        if (NomeAnteprima == null || NomeAnteprima == "")
+        if (NomeAnteprima == null || NomeAnteprima.ToString() == "")
             ret = true;
         return ret;
     }
@@ -550,6 +551,7 @@ public class CommonPage : Page
         tags.Add("buto:(");
         tags.Add("imag:(");
         tags.Add("titl:(");
+        tags.Add("vide:(");
 
 
         string target = "_blank";
@@ -869,9 +871,9 @@ public class CommonPage : Page
                 if (!nolink)
                 {
                     if (string.IsNullOrWhiteSpace(url))
-                        strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\">" + testourl + "</span>");
+                        strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline-block\" class=\"divbuttonstyle\">" + testourl + "</span>");
                     else
-                        strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                        strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
 
 
 
@@ -1028,6 +1030,74 @@ public class CommonPage : Page
         }
         ret = strIn;
 
+
+        a = strIn.ToLower().IndexOf("vide:(");
+        while (a != -1)
+        {
+            string origtext = "";
+            int b = strIn.ToLower().IndexOf(")", a + 1);
+            if (b != -1)
+            {
+                origtext = strIn.Substring(a, b - a + 1);
+
+                string url = strIn.Substring(a + 6, b - (a + 6));
+                tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                int lastsplit = url.LastIndexOf('|');
+                int firstsplit = url.IndexOf('|');
+                while (lastsplit != firstsplit)
+                {
+                    url = url.Remove(lastsplit, 1);
+                    lastsplit = url.LastIndexOf('|');
+                    firstsplit = url.IndexOf('|');
+                }
+                string testourl = url;
+                string[] dati = url.Split('|');
+                if (dati.Length == 2)
+                {
+                    url = (dati[0]);
+                    testourl = dati[1];
+                }
+                else
+                    url = "";
+                urlcorretto = url;
+                if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                {
+                    target = "_self";
+                    urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                }
+                if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                {
+                    target = "_self";
+                    if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                        urlcorretto = "https://" + url;
+                    else
+                        urlcorretto = "http://" + url;
+                }
+                urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                if (!nolink)
+                {
+                    if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        string texthtml = "<div class=\"responsive-video\" style=\"display:block;\">";
+                        texthtml += " <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"\" src=\"" + urlcorretto + "\"></iframe>";
+                        texthtml += "</div>";
+                        strIn = strIn.Replace(origtext, texthtml);
+                    }
+
+                }
+                else
+                    strIn = strIn.Replace(origtext, testourl);
+
+            }
+            else
+            {
+                strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+            }
+            a = strIn.ToLower().IndexOf("vide:(");
+
+        }
+        ret = strIn;
 
         a = strIn.ToLower().IndexOf("titl:(");
         while (a != -1)
@@ -1380,7 +1450,27 @@ public class CommonPage : Page
 
 
     }
-    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I")
+
+    public static string Selezionadajson(object item, string key, string Lingua)
+    {
+        string ret = "";
+        if (item != null && item.ToString() != "")
+        {
+            try
+            {
+                ret = "<b>" + references.ResMan("basetext", Lingua, "formtesto" + key) + ": " + "</b>";
+                Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(item.ToString());
+                if (dic != null && dic.ContainsKey(key))
+                    ret += dic[key];
+                else
+                    ret = "";
+            }
+            catch { }
+        }
+        return ret;
+    }
+
+    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false)
     {
 
         string sessionid = "";
@@ -1400,110 +1490,148 @@ public class CommonPage : Page
         {
             carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
         }
-        foreach (Carrello c in carrello)
+        if (!serializeddatas)
         {
-
-            //Creiamo la visualizzione degli articoli in carrello
-            // da fare <li>  contenuto da prendere sotto  </li>
-            sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px\">");
-
-            string linkofferta = "";
-            string testoofferta = "";
-            string imgofferta = "";
-            string titoloofferta = "";
-            if (c.Offerta != null)
+            foreach (Carrello c in carrello)
             {
-                try
+
+                //Creiamo la visualizzione degli articoli in carrello
+                // da fare <li>  contenuto da prendere sotto  </li>
+                sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px\">");
+
+                string linkofferta = "";
+                string testoofferta = "";
+                string imgofferta = "";
+                string titoloofferta = "";
+                if (c.Offerta != null)
                 {
-                    if (c.Offerta.DenominazioneI != null)
+                    try
                     {
-                        linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
-                        testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
-                        imgofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
-                        titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
+                        if (c.Offerta.DenominazioneI != null)
+                        {
+                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
+                            imgofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
+                            titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
+                        }
                     }
+                    catch { }
                 }
-                catch { }
-            }
 
-            if (!nofoto)
-            {
-                sb.Append("<a target=\"_blank\"   href=\"" +
-                    linkofferta
-                       + "\"  class=\"product-thumb pull-left\"  >");
-                sb.Append("<img alt=\""
-                    +
-                  testoofferta
-                    + "\" Style=\"width: auto; height: auto; max-width: 60px; max-height: 60px;\" ");
-                sb.Append(" src=\"");
-                sb.Append(imgofferta + "\" ");
-                sb.Append("\" />");
-                sb.Append(" </a>");
-            }
-
-            sb.Append(" <div class=\"product-details\">");
-            sb.Append(" <h3 class=\"product-name\">");
-            sb.Append(titoloofferta);
-            sb.Append(" </h3>");
-
-
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
-            //sb.Append(" </div>");
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
-            //sb.Append(" </div>");
-            sb.Append(" <div class=\"product-categories muted\">");
-            if (c.Offerta.Caratteristica6 != 0)
-                sb.Append(CommonPage.TestoCaratteristica(5, c.Offerta.Caratteristica6.ToString(), Lingua));
-            sb.Append(" </div>");
-            #region MODIFIED CARATTERISTICHE CARRELLO
-            if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
-            {
-                sb.Append(" <div class=\"product-categories muted\">");
-                //recupero le caratteristiche del prodotto
-                List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
-                ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
-                if (item != null)
+                if (!nofoto)
                 {
-                    string testoinlinguacar1 = item.caratteristica1.value;
-                    Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica1.codice; });
-                    if (Car1 != null)
-                        testoinlinguacar1 = Car1.Campo1;
-
-                    string testoinlinguacar2 = item.caratteristica2.value;
-                    Tabrif Car2 = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica2.codice; });
-                    if (Car2 != null)
-                        testoinlinguacar2 = Car2.Campo1;
-
-                    sb.Append(testoinlinguacar1 + "  -  " + testoinlinguacar2);
+                    sb.Append("<a target=\"_blank\"   href=\"" +
+                        linkofferta
+                           + "\"  class=\"product-thumb pull-left\"  >");
+                    sb.Append("<img alt=\""
+                        +
+                      testoofferta
+                        + "\" Style=\"width: auto; height: auto; max-width: 50px; max-height: 50px;\" ");
+                    sb.Append(" src=\"");
+                    sb.Append(imgofferta + "\" ");
+                    sb.Append("\" />");
+                    sb.Append(" </a>");
                 }
+                sb.Append(" <p class=\"product-calc muted\">");
+                sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
+                sb.Append(" </p>");
+
+                sb.Append(" <div class=\"clearfix\"></div>");
+
+
+                sb.Append(" <div class=\"product-details\">");
+                sb.Append(" <span class=\"product-name\"><b>");
+                sb.Append(titoloofferta);
+                sb.Append(" </b></span>");
+
+
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
+                //sb.Append(" </div>");
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
+                //sb.Append(" </div>");
+                sb.Append(" <div class=\"product-categories muted\">");
+                if (c.Offerta.Caratteristica6 != 0)
+                    sb.Append(CommonPage.TestoCaratteristica(5, c.Offerta.Caratteristica6.ToString(), Lingua));
+                sb.Append(" </div>");
+
+
+
+                #region MODIFIED CARATTERISTICHE CARRELLO
+                if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
+                {
+                    sb.Append(" <div class=\"product-categories muted\">");
+                    //recupero le caratteristiche del prodotto
+                    List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
+                    ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
+                    if (item != null)
+                    {
+                        string testoinlinguacar1 = item.caratteristica1.value;
+                        Tabrif Car1 = Utility.Caratteristiche[0].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica1.codice; });
+                        if (Car1 != null)
+                            testoinlinguacar1 = Car1.Campo1;
+
+                        string testoinlinguacar2 = item.caratteristica2.value;
+                        Tabrif Car2 = Utility.Caratteristiche[1].Find(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Codice == item.caratteristica2.codice; });
+                        if (Car2 != null)
+                            testoinlinguacar2 = Car2.Campo1;
+
+                        sb.Append(testoinlinguacar1 + "  -  " + testoinlinguacar2);
+                    }
+
+                    sb.Append(" </div>");
+                }
+                #endregion
+
+                sb.Append(" <div class=\"product-categories muted\">");
+                if (c.Datastart != null && c.Dataend != null)
+                {
+                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiododa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Datastart) + "<br/>");
+                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
+                }
+                sb.Append("<br/>" + Selezionadajson(c.jsonfield1, "adulti", Lingua));
+                sb.Append(" " + Selezionadajson(c.jsonfield1, "bambini", Lingua) + "<br/>");
+                sb.Append(" </div>");
+
+
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
+                //sb.Append(" </div>");
+
+
 
                 sb.Append(" </div>");
+                sb.Append(" </li>");
+
             }
-            #endregion
-
-
-            //sb.Append(" <div class=\"product-categories muted\">");
-            //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
-            //sb.Append(" </div>");
-            sb.Append(" <p class=\"product-calc muted\">");
-
-            sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo } ) + " €");
-            sb.Append(" </p>");
-
-            sb.Append(" </div>");
-            sb.Append(" </li>");
 
         }
+        else
+        {
+            //Serializzo e ritorno tutto il carrello
+            sb.Append(Newtonsoft.Json.JsonConvert.SerializeObject(carrello, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+            }));
+
+        }
+
+
+
         return sb.ToString();
     }
 
-    public static bool AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long idprodotto, long quantita, string username, string idcombinato = "", long idcarrello = 0, long idcliente = 0 )
+    public static string AggiornaProdottoCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long idprodotto, long quantita, string username, string idcombinato = "", long idcarrello = 0, long idcliente = 0, double prezzo = 0, DateTime? datastart = null, DateTime? dataend = null, string jsonfield1 = "", bool forceidcarrello = false)
     {
-        bool ret = false;
+        string ret = "";
         string sessionid = "";
         string trueIP = "";
+        if (quantita < 1) quantita = 0;
+
         CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
 
         //Carico l'elemento del carrello e lo aggiorno nel database con le modifiche di numero
@@ -1519,14 +1647,18 @@ public class CommonPage : Page
             Item = new Carrello();
             offerteDM offDM = new offerteDM();
 
-            //Carico la riga prodotto dal carrello in base all'idcarrello oppure per la combinazione idprodotto/idcombinato 
-            //ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto);
-            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto, idcombinato, idcarrello);
+            //Carico la riga prodotto dal carrello in base all'idcarrello oppure per la combinazione idprodotto/idcombinato  ( oppure in base all'idcarrello se passato!)
+            if (!forceidcarrello)
+                ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, idprodotto, idcombinato, idcarrello);//Carico per prodotto/combinato o per idcarrello
+            else
+                ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, null, null, 0, "", idcarrello); //forzo di caricare il carrello solo per idcarrello e non per prodotto in modo da consentire righe carrello multiple per l stesso prodotto!!!!
+
             if (ColItem != null && ColItem.Count > 0)
             {
-                Item = ColItem[0];
+                Item = ColItem[0]; //SUPPONENDO CHE PER UN CERTO idprodotto/sdcombinato ci sia solo un elemento a carrello
+
                 //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno l'idprodotto
-                idprodotto = ColItem[0].id_prodotto;
+                idprodotto = Item.id_prodotto;
                 //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno il selettore per le caratteristiche
                 idcombinato = Item.Campo2;
             }
@@ -1605,10 +1737,16 @@ public class CommonPage : Page
                 }
             }
 
-            if (Item == null || Item.id_prodotto == 0) //Nuovo elemento da mettere nel carrello
+            double prezzocarrello = 0;
+            if (prezzo != 0)
+                prezzocarrello = prezzo;
+            else
+                prezzocarrello = off.Prezzo;
+
+            if (Item == null || Item.ID == 0) //Nuovo elemento da mettere nel carrello
             {
                 Item.Data = System.DateTime.Now;
-                Item.Prezzo = off.Prezzo;
+                Item.Prezzo = prezzocarrello;
                 //prodotto.Iva = 0;
                 //if (quantita == 0) quantita = 1;
                 Item.CodiceProdotto = off.CodiceProdotto;
@@ -1618,16 +1756,23 @@ public class CommonPage : Page
                 Item.IpClient = trueIP;
                 Item.Numero = quantita;
                 Item.Campo2 = idcombinato;
-
+                Item.Datastart = datastart;
+                Item.Dataend = dataend;
+                Item.jsonfield1 = jsonfield1;
             }
             else
             {
                 Item.Data = DateTime.Now;
-                Item.Prezzo = off.Prezzo;
+                Item.Prezzo = prezzocarrello;
                 Item.CodiceProdotto = off.CodiceProdotto;
                 Item.id_prodotto = off.Id;
                 Item.Numero = quantita;
                 Item.Campo2 = idcombinato;
+                if (datastart != null)
+                    Item.Datastart = datastart;
+                if (dataend != null)
+                    Item.Dataend = dataend;
+                Item.jsonfield1 = jsonfield1;
             }
 
             //Memorizzo nel carrello il codice sconto se applicato
@@ -1638,6 +1783,7 @@ public class CommonPage : Page
 
             //Aggiungo l'id anagrafica del cliente ( configurato nel profilo utente ) all'articolo nel carrello
             //In modo da avre l'associazione degli ordini con i clienti
+
             if (idcliente != 0) //SE passato un idcliente lo memorizzo nel rigo di carrello prodotti
             {
                 Item.ID_cliente = idcliente;
@@ -1653,12 +1799,12 @@ public class CommonPage : Page
             else
                 ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID);
 
-            ret = true;
+            ret = Item.ID.ToString();
         }
         return ret;
     }
 
-    public static bool SvuotaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session)
+    public static bool SvuotaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long id = 0)
     {
         string sessionid = "";
         string trueIP = "";
@@ -1668,7 +1814,12 @@ public class CommonPage : Page
         List<long> idtodelete = new List<long>();
         foreach (Carrello c in ColItem)
         {
-            ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.ID);
+            if (id == 0)
+                ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.ID);
+            else if (id == c.ID)
+            {
+                ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.ID);
+            }
         }
         return true;
     }
@@ -1742,6 +1893,14 @@ public class CommonPage : Page
         //Aggiono i codice della nazione di spedizione nel carrello
         if (!string.IsNullOrWhiteSpace(idlist) && !string.IsNullOrWhiteSpace(codicenazione))
             ecom.UpdateCarrelloPerListaID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicenazione, idlist);
+
+        //Momorizziamo nei totali se presente un acconto!!!
+        double percentualeanticipo = Convert.ToDouble(ConfigManagement.ReadKey("percAnticipoPagamento"));
+        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg
+        if (ColItem.Exists(p => p.Datastart != null && ((TimeSpan)(p.Datastart.Value - DateTime.Now)).Days < 60))
+            percentualeanticipo = 100;
+        totali.Percacconto = percentualeanticipo;
+
         return totali;
     }
     private static double CalcolaTotaliSmaltimento(CarrelloCollection ColItem)
@@ -1773,10 +1932,7 @@ public class CommonPage : Page
         string sessionid = "";
         string trueIP = "";
         CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
-
-
         eCommerceDM ecom = new eCommerceDM();
-
         if (carrello == null || carrello.Count == 0)
             carrello = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
 
@@ -1868,7 +2024,7 @@ public class CommonPage : Page
     }
 
 
-    public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar)
+    public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar, string idcarrello = "")
     {
         string ret = "0";
         string sessionid = "";
@@ -1885,7 +2041,11 @@ public class CommonPage : Page
 
             long id_prodotto = 0;
             long.TryParse(idprodotto.ToString(), out id_prodotto);
-            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, id_prodotto, codcar);
+
+            long lidcarrello = 0;
+            long.TryParse(idcarrello.ToString(), out lidcarrello);
+
+            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, id_prodotto, codcar, lidcarrello);
             if (ColItem != null && ColItem.Count > 0)
                 Item = ColItem[0];
         }
@@ -1893,6 +2053,49 @@ public class CommonPage : Page
         if (Item != null && Item.id_prodotto != 0)
             ret = Item.Numero.ToString();
         return ret;
+    }
+    public static TotaliCarrelloCollection CaricaDatiOrdini(string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "", string idcommerciale = "", long page = 1, long pagesize = 0)
+    {
+        eCommerceDM eDM = new eCommerceDM();
+        TotaliCarrelloCollection ordini = new TotaliCarrelloCollection();
+        List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
+        if (!string.IsNullOrWhiteSpace(id_cliente))
+        {
+            SQLiteParameter parid = new SQLiteParameter("@Id_cliente", id_cliente);
+            parcoll.Add(parid);
+        }
+        if (!string.IsNullOrWhiteSpace(idcommerciale))
+        {
+            SQLiteParameter parid1 = new SQLiteParameter("@Id_commerciale", idcommerciale);
+            parcoll.Add(parid1);
+        }
+        if (!string.IsNullOrEmpty(codiceordine))
+        {
+            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", codiceordine);
+            parcoll.Add(parcod);
+        }
+        if (!string.IsNullOrEmpty(datamin))
+        {
+            DateTime _dt;
+            if (DateTime.TryParse(datamin, out _dt))
+            {
+                SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
+                parcoll.Add(pardmin);
+            }
+        }
+        if (!string.IsNullOrEmpty(datamax))
+        {
+            DateTime _dt;
+            if (DateTime.TryParse(datamax, out _dt))
+            {
+                SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
+                parcoll.Add(pardmax);
+            }
+        }
+
+        ordini = eDM.CaricaListaOrdini(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parcoll, "", false, page, pagesize);
+
+        return ordini;
     }
 
 

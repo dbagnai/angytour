@@ -177,15 +177,16 @@ public partial class _SchedaProdotto : CommonPage
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-md-12 col-sm-12";
+                column2.Visible = false;
                 column3.Visible = false;
                 divContact.Visible = false;
                 divContact.Visible = false;
 
                 sb.Clear();
-                sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
-                sb.Append("\"></div>");
-                plhSuggeritiJs.Text = sb.ToString();
+                //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                //sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
+                //sb.Append("\"></div>");
+                //plhSuggeritiJs.Text = sb.ToString();
 
 
                 sb.Clear();
@@ -1274,7 +1275,7 @@ public partial class _SchedaProdotto : CommonPage
     {
         bool ret = false;
         //"http://www.youtube.com/embed/Z9lwY9arkj8"
-        if ((NomeAnteprima == null || NomeAnteprima == "") && (linkVideo != null && ((string)linkVideo) != ""))
+        if ((NomeAnteprima == null || NomeAnteprima.ToString() == "") && (linkVideo != null && ((string)linkVideo) != ""))
             ret = true;
         return ret;
     }
@@ -1483,13 +1484,11 @@ public partial class _SchedaProdotto : CommonPage
         // AssociaDati();
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
-
-
+        
     }
 
     protected void btnInsertcart(object sender, EventArgs e)
     {
-
 
         string Idtext = ((LinkButton)sender).CommandArgument.ToString();
         long idprodotto = 0;
@@ -1504,7 +1503,6 @@ public partial class _SchedaProdotto : CommonPage
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
         //AssociaDati();
-
 
     }
     protected void btnIncrement(object sender, EventArgs e)

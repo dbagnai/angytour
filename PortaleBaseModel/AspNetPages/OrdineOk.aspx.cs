@@ -142,7 +142,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                     string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                     string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                    output.Text = references.ResMan("Common",Lingua,"risposta_7").ToString() + " Error" + errcode + "<br/>";
+                    output.Text = references.ResMan("Common", Lingua, "risposta_7").ToString() + " Error" + errcode + "<br/>";
                     output.Text += desc + "<br/>";
                     output.Text += desc2 + "<br/>";
                 }
@@ -155,7 +155,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                 string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                 string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                output.Text = references.ResMan("Common",Lingua,"risposta_6").ToString() + " Error" + errcode + "<br/>";
+                output.Text = references.ResMan("Common", Lingua, "risposta_6").ToString() + " Error" + errcode + "<br/>";
                 output.Text += desc + "<br/>";
                 output.Text += desc2 + "<br/>";
             }
@@ -183,7 +183,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = references.ResMan("Common", Lingua, "risposta_5");  
+            output.Text = references.ResMan("Common", Lingua, "risposta_5");
         }
 
 
@@ -244,6 +244,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
 #endif
         }
+        InsertEventoBooking(prodotti, totali, "rif000001");
+
 
         //Creiamo il file per export degli ordini...
         try
@@ -269,11 +271,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Inviamo le email di conferma al portale ed al cliente
             string TestoMail = "";
             //Invio la mail per il fornitore
-            string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;  
+            string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
             Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
-            string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome; 
+            string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
         }
@@ -283,7 +285,39 @@ public partial class AspNetPages_OrdineOk : CommonPage
 #endif
 
     }
+    private void InsertEventoBooking(CarrelloCollection prodotti, TotaliCarrello totali, string filtrotipologia)
+    {
+        foreach (Carrello c in prodotti)
+        {
+            if (c.Dataend != null && c.Datastart != null)
+            {
+                if (!string.IsNullOrEmpty(filtrotipologia))
+                {
+                    if (c.Offerta.CodiceTipologia != filtrotipologia) continue;
+                }
+                try
+                {
+                    Eventi tmpelement = new Eventi();
+                    tmpelement.Enddate = c.Dataend.Value;
+                    tmpelement.Startdate = c.Datastart.Value;
+                    tmpelement.Prezzo = c.Prezzo;
+                    tmpelement.Idattivita = c.id_prodotto;
+                    tmpelement.Soggetto = "Order.n. " + c.CodiceOrdine;
+                    if (totali.Percacconto != 100) tmpelement.Soggetto += " (Richiesto Acconto : " + totali.Percacconto + "%)";
+                    tmpelement.Testoevento = "";
+                    tmpelement.Idcliente = c.ID_cliente;
+                    tmpelement.Idvincolo = "";
+                    tmpelement.Codicerichiesta = "";//identificativo della richiesta a calendario generato all'inserimento
+                    tmpelement.Status = 1; //Stato confermato dell'evento/prenotazione pagate con paypal
+                    tmpelement.Jsonfield1 = c.jsonfield1;
 
+                    bookingDM.dbInsertEvent(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, tmpelement);
+                }
+                catch { }
+            }
+
+        }
+    }
     private void VisualizzaErrorePaypal(string codiceordine)
     {
         output.Text = "Errore transazione non avvenuta, cod " + codiceordine;
@@ -342,7 +376,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = references.ResMan("Common",Lingua, "risposta_5");
+            output.Text = references.ResMan("Common", Lingua, "risposta_5");
         }
 
         //Siccome tutto a buon fine -> setto pagato ( in realtà nella modalità con accettazione
@@ -367,11 +401,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Inviamo le email di conferma al portale ed al cliente
             string TestoMail = "";
             //Invio la mail per il fornitore
-            string SoggettoMailFornitore = references.ResMan("Common",Lingua, "OrdineSoggettomailRichiesta") + Nome;
+            string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
             Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
-            string SoggettoMailCliente = references.ResMan("Common",Lingua, "OrdineSoggettomailRiepilogo") + Nome;
+            string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
         }
@@ -408,28 +442,44 @@ public partial class AspNetPages_OrdineOk : CommonPage
         }
     }
 
-
     protected string CreaMailPerFornitore(TotaliCarrello totali, CarrelloCollection prodotti)
     {
         string TestoMail = "";
 
         //Mi preparo il testo della mail (formattiamo in html)
-        TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-family:Calibri; font-size:14px;'><tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + Nome + "  <br/>";
+        TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-size:14px;'><tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + Nome + "  <br/>";
         TestoMail += "<br/>I dati dell' utente sono indirizzo fatturazione : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-        TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
-        TestoMail += totali.Indirizzospedizione + "<br/></td></tr>";
-        TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
 
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-family:Calibri; font-size:14px;'><tr><td><br/> DETTAGLIO ORDINE : <br/></td></tr>";
+        if (string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
+            TestoMail += totali.Indirizzospedizione;
+        }
+        TestoMail += "</td></tr>";
+        if (!string.IsNullOrEmpty(totali.Note))
+            TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
+
+
+        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-size:14px;'><tr><td><br/> DETTAGLIO ORDINE <br/></td></tr>";
         TestoMail += "<tr><td> <br/>CODICE ORDINE : " + totali.CodiceOrdine + "<br/></td></tr>";
         int i = 1;
         foreach (Carrello item in prodotti)
         {
             TestoMail += "<tr><td><br/>" + i.ToString() + " - " + item.Offerta.DenominazioneI + "<br/>";
+
+            if (item.Dataend != null && item.Datastart != null)
+            {
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
+            }
+
+            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
-            TestoMail += " - ID PRODOTTO : " + item.Offerta.Id.ToString();
+            TestoMail += " ID PRODOTTO : " + item.Offerta.Id.ToString();
             if (!string.IsNullOrEmpty(item.Campo2))
             {
                 List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
@@ -439,7 +489,9 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 if (elem != null)
                     TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
             }
-            TestoMail += " - QUANTITA' : " + item.Numero + " - Prezzo unitario : " + item.Prezzo + " €<br/>";
+            TestoMail += " QUANTITA' : " + item.Numero;
+            if (item.Prezzo != 0)
+                TestoMail += "  Prezzo Unitario : " + item.Prezzo + " €<br/>";
 
             //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
             //if (item != null && item.Offerta != null && item.Offerta.CodiceTipologia == "rif000101")
@@ -459,15 +511,20 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         if (totali.TotaleSconto != 0)
             TestoMail += "<tr><td><br/>SCONTO APPLICATO " + totali.TotaleSconto + " € </td></tr>";
+        TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "<tr><td><br/>SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €";
+            TestoMail += "SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<tr><td><br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €";
-        TestoMail += "<br/><br/>TOTALE COMPLESSIVO: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-        TestoMail += "<tr><td><br/>MODALITA' DI PAGAMENTO: " + references.ResMan("Common",Lingua,"chk" + totali.Modalitapagamento).ToString();
+            TestoMail += "<br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        TestoMail += "<br/>TOTALE COMPLESSIVO: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
 
+        if (totali.Percacconto != 100)
+            TestoMail += "<tr><td><br/>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "%: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+
+
+        TestoMail += "<tr><td><br/>MODALITA' DI PAGAMENTO: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
-        TestoMail += "</td></tr></table></td><tr/>";
+        TestoMail += "</table></td><tr/>";
         TestoMail += "<tr><td><br/>L'utente è in attesa di essere ricontattato per confermare la disponibilità e per comunicargli i dettagli del pagamento.";
         TestoMail += "</td></tr></table>";
 
@@ -482,24 +539,30 @@ public partial class AspNetPages_OrdineOk : CommonPage
         //txtNome.Text- txtEmail.Text  - txtTelefono.Text -  txtIndirizzo.Text - lblPrezzoSpedizione.Text - lblTotaleSpese.Text
 
         //MAIL PER IL CLIENTE DI CONFERMA ORDINE
-        TestoMail = "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"600\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
+        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"600\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
         TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
         //Testo mail
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/> " + references.ResMan("Common",Lingua,"OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
-        TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> :" + "<br/>";
+        TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
+        TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
 
         TestoMail += "<br/>Fatturazione : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-        TestoMail += "<br/>Spedizione  : <br/> ";
-        TestoMail += totali.Indirizzospedizione + "<br/></td></tr>";
-        TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
 
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0'><tr><td style='font-family:Calibri; font-size:14px; color:#e12222;'> <br/>Dettagli prodotti : </td></tr>";
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'> <br/>CODICE ORDINE : " + totali.CodiceOrdine + "<br/></td></tr>";
+        if (string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/>Spedizione : <br/> ";
+            TestoMail += totali.Indirizzospedizione;
+        }
+        TestoMail += "</td></tr>";
+        if (!string.IsNullOrEmpty(totali.Note))
+            TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
+
+        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0'>";
+        TestoMail += "<tr><td style='font-size:14px;'>CODICE ORDINE : " + totali.CodiceOrdine + "<br/></td></tr>";
         int i = 1;
         foreach (Carrello item in prodotti)
         {
-            TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'>" + "<font color='#e12222'>" + i.ToString() + "</font> - ";
+            TestoMail += "<tr><td style=' font-size:14px;'>" + i.ToString() + " - ";
             switch (Lingua)
             {
                 case "GB":
@@ -510,9 +573,18 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     break;
             }
 
+            if (item.Dataend != null && item.Datastart != null)
+            {
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
+            }
+
+            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";
-            TestoMail += " - Id Prodotto : " + item.Offerta.Id.ToString();
+            TestoMail += "  Id Prodotto : " + item.Offerta.Id.ToString();
             if (!string.IsNullOrEmpty(item.Campo2))
             {
                 List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
@@ -522,7 +594,9 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 if (elem != null)
                     TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
             }
-            TestoMail += " - Quantità : " + item.Numero + " - Prezzo unitario : " + item.Prezzo + " €<br/>";
+            TestoMail += " Quantità : " + item.Numero;
+            if (item.Prezzo != 0)
+                TestoMail += "  Prezzo unitario : " + item.Prezzo + " €<br/>";
 
             //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
             //if (item != null && item.Offerta != null && item.Offerta.CodiceTipologia == "rif000101")
@@ -541,28 +615,34 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         if (totali.TotaleSconto != 0)
             TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
-        TestoMail += "<tr><td><br/>";
+        TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
             TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<tr><td><br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+            TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
         TestoMail += "Totale ordine: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-        TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common",Lingua,"chk" + totali.Modalitapagamento).ToString();
 
+        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg
+        if (totali.Percacconto != 100)
+            TestoMail += "<tr><td><br/>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "%: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+
+
+        TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
-        TestoMail += "</td></tr></table></td><tr/>";
-
+        TestoMail += "</table></td><tr/>";
         //testo di chiusura
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + references.ResMan("Common",Lingua,"TestoConfermaOrdine").ToString();
-        TestoMail += "<tr><td style='font-family:Calibri; font-size:14px; color:#252626;'><br/>" + references.ResMan("Common",Lingua,"TestoSaluti").ToString() + "<br/>" + references.ResMan("Common",Lingua,"TestoHomeIndex").ToString() + "</td></td> <br/><br/><br/>";
+        TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoConfermaOrdine").ToString() + " </td></tr>";
+        TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoSaluti").ToString() + "<br/>" + references.ResMan("Common", Lingua, "TestoHomeIndex").ToString() + "</td></td> <br/>";
 
         //Inserisco il footer con i dati
-        TestoMail += "<tr><td style='text-align:center; font-family:Calibri; font-size:14px; color:#252626;'><br/><br/>" + references.ResMan("Common",Lingua,"txtFooter").ToString();
+        TestoMail += "<tr><td style='text-align:center; font-size:14px;'><br/><br/>" + references.ResMan("Common", Lingua, "txtFooter").ToString();
 
         TestoMail += "</td></tr></table></div>";
 
         return TestoMail;
     }
+
+
 
 
 }

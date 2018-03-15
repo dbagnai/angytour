@@ -1326,7 +1326,7 @@ Blog
 .blog-post .blog-post-details {
     height: auto;
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden;*/
     border-top: 2px solid #f0f0f0;
     border-bottom: 2px solid #f0f0f0;
 }
@@ -1857,63 +1857,7 @@ Boxed
     -moz-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.16);
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.16);
 }
-/****************************
-Breadcrumb
-****************************/
-.breadcrumb-container {
-    position: absolute;
-    right: 0;
-    top: 40%;
-}
 
-.breadcrumb {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 11px;
-    display: inline-block;
-    background-color: transparent;
-}
-
-.breadcrumb-container span {
-    display: inline-block;
-    float: left;
-    font-size: 11px;
-    margin: 0 7px 0 0;
-}
-
-.breadcrumb li {
-    float: left;
-    padding-right: 5px;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 13px;
-    color: #444;
-}
-
-.breadcrumb > .active {
-    color: #888;
-}
-
-.breadcrumb li a {
-    color: #444;
-    text-decoration: none;
-}
-
-    .breadcrumb li a:hover {
-        text-decoration: underline;
-    }
-
-.breadcrumb li:last-child:after {
-    content: "";
-    width: 0px;
-}
-
-.breadcrumb > li + li:before {
-    padding: 0 5px;
-    color: #444;
-    content: ">\00a0";
-}
 /****************************
 Buttons
 ****************************/

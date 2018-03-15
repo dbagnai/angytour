@@ -104,7 +104,8 @@ function bindgenericcontent(el, localObjects) {
         }
         $('#' + container).show();
         $('#' + container + 'Title').show();
-        //console.log('content generic inject');
+
+        console.log('content generic injected');
         jQuery(document).ready(function () {
             //setTimeout(function (el) { rebuildCarousel(el) }, 3000);
             //rebuildCarousel(el);

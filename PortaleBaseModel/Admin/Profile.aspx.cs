@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Web.Profile;
 
 public partial class admin_Profile : CommonPage
 {
@@ -54,48 +55,48 @@ public partial class admin_Profile : CommonPage
     }
 
 
-    protected string getidcliente(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-        {
-            UserLastActivityDate = _user.LastActivityDate;
-        }
+    //protected string getidcliente(string utente)
+    //{
+    //    //  save UserLastActivityDate so it can be reassigned later
+    //    MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
+    //    DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
+    //    if (_user != null)
+    //    {
+    //        UserLastActivityDate = _user.LastActivityDate;
+    //    }
 
-        ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
-        string idCliente = prf.IdCliente;
+    //    ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
+    //    string idCliente = prf.IdCliente;
 
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return idCliente;
-    }
-    protected string getidsocio(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-        {
-            UserLastActivityDate = _user.LastActivityDate;
-        }
+    //    // need to reset the UserLastActivityDate that has just been updated by above two lines
+    //    if (_user != null)
+    //    {
+    //        _user.LastActivityDate = UserLastActivityDate;
+    //        Membership.UpdateUser(_user);
+    //    }
+    //    return idCliente;
+    //}
+    //protected string getidsocio(string utente)
+    //{
+    //    //  save UserLastActivityDate so it can be reassigned later
+    //    MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
+    //    DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
+    //    if (_user != null)
+    //    {
+    //        UserLastActivityDate = _user.LastActivityDate;
+    //    }
 
-        ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
-        string idsocio = prf.IdSocio;
+    //    ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
+    //    string idsocio = prf.IdSocio;
 
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return idsocio;
-    }
+    //    // need to reset the UserLastActivityDate that has just been updated by above two lines
+    //    if (_user != null)
+    //    {
+    //        _user.LastActivityDate = UserLastActivityDate;
+    //        Membership.UpdateUser(_user);
+    //    }
+    //    return idsocio;
+    //}
     protected ArrayList GetRuoliFiltrati()
     {
         ArrayList ruoli = new ArrayList();
@@ -171,15 +172,16 @@ public partial class admin_Profile : CommonPage
             }
 
 
-            ProfileCommon prof = (ProfileCommon)Profile.GetProfile(UsersList.SelectedValue);
+            //ProfileCommon prof = (ProfileCommon)Profile.GetProfile(UsersList.SelectedValue);
+            ProfileBase prof = ProfileBase.Create(UsersList.SelectedValue);
             if (prof != null)
             {
-                FirstName.Text = prof.FirstName;
-                LastName.Text = prof.LastName;
-                EMail.Text = prof.EMail;
-                Cellulare.Text = prof.Cellulare;
-                txtIdcliente.Text = prof.IdCliente;
-                txtIdsocio.Text = prof.IdSocio;
+                FirstName.Text = (string)prof["FirstName"];
+                LastName.Text = (string)prof["LastName"];
+                EMail.Text = (string)prof["EMail"];
+                Cellulare.Text = (string)prof["Cellulare"];
+                txtIdcliente.Text = (string)prof["IdCliente"];
+                txtIdsocio.Text = (string)prof["IdSocio"];
             }
 
             // need to reset the UserLastActivityDate that has just been updated by above two lines
@@ -256,14 +258,14 @@ public partial class admin_Profile : CommonPage
 
         try
         {
-            ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(UsersList.SelectedValue);
-
-            prof.FirstName = FirstName.Text;
-            prof.LastName = LastName.Text;
-            prof.EMail = EMail.Text;
-            prof.Cellulare = Cellulare.Text;
-            prof.IdCliente = txtIdcliente.Text;
-            prof.IdSocio = txtIdsocio.Text;
+            //ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(UsersList.SelectedValue);
+            ProfileBase prof = ProfileBase.Create(UsersList.SelectedValue);
+            prof["FirstName"] = FirstName.Text;
+            prof["LastName"] = LastName.Text;
+            prof["EMail"] = EMail.Text;
+            prof["Cellulare"] = Cellulare.Text;
+            prof["IdCliente"] = txtIdcliente.Text;
+            prof["IdSocio"] = txtIdsocio.Text;
             //SALVARE IL PROFILO non dimenticarsene
             prof.Save();
 
@@ -291,17 +293,16 @@ public partial class admin_Profile : CommonPage
             UserLastActivityDate = _user.LastActivityDate;
         }
 
-        ProfileCommon prof = (ProfileCommon)Profile.GetProfile(UsersList.SelectedValue);
+        //ProfileCommon prof = (ProfileCommon)Profile.GetProfile(UsersList.SelectedValue);
+            ProfileBase prof = ProfileBase.Create(UsersList.SelectedValue);
         if (prof != null)
         {
-
-            FirstName.Text = prof.FirstName;
-            LastName.Text = prof.LastName;
-
-            EMail.Text = prof.EMail;
-            Cellulare.Text = prof.Cellulare;
-            txtIdcliente.Text = prof.IdCliente;
-            txtIdsocio.Text = prof.IdSocio;
+            FirstName.Text = (string)prof["FirstName"];
+            LastName.Text = (string)prof["LastName"];
+            EMail.Text = (string)prof["EMail"];
+            Cellulare.Text = (string)prof["Cellulare"];
+            txtIdcliente.Text = (string)prof["IdCliente"];
+            txtIdsocio.Text = (string)prof["IdSocio"];
         }
 
         // need to reset the UserLastActivityDate that has just been updated by above two lines

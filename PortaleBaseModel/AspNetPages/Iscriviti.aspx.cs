@@ -12,6 +12,7 @@ using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Collections.Generic;
+using System.Web.Profile;
 
 public partial class _Iscriviti : CommonPage
 {
@@ -467,8 +468,9 @@ public partial class _Iscriviti : CommonPage
                 //associamo l'utente al ruolo
                 Roles.AddUserToRole(NomeUtente, "Operatore");
 
-                ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
-                prof.IdCliente = cliente.Id_cliente.ToString();
+                //ProfileCommon prof = (ProfileCommon)ProfileCommon.Create(NomeUtente);
+                    ProfileBase prof = ProfileBase.Create(NomeUtente);
+                prof["IdCliente"] = cliente.Id_cliente.ToString();
                 prof.Save();
 
                 ////Stampo a video i dati dell'username e password Appena Creati
