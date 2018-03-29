@@ -171,7 +171,6 @@ function BindSliderBanner(el, localObjects) {
     }
 
     initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
-
     CleanHtml($('#' + el));
     CleanHtml($('#' + el).parent());
 };

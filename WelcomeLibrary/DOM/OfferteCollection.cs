@@ -41,6 +41,7 @@ namespace WelcomeLibrary.DOM
                 _tmp = new Offerte(tmp);
                 this.Add(_tmp);
             }
+
         }
 
         public List<Offerte> GetItems()

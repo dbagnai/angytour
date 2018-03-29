@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Casa Baccano Degustazioni</title>
-    <link>http://localhost:52646</link>
-    <description>Casa Baccano</description>
-    <lastBuildDate>Thu, 15 Mar 2018 10:18:41 GMT</lastBuildDate>
+    <title>Web Mouse Consulting Srl Servizi</title>
+    <link />
+    <description>Web Mouse Consulting Srl</description>
+    <lastBuildDate>Tue, 20 Mar 2018 17:34:37 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-03-15T10:18+01:00</sy:updateBase>
+    <sy:updateBase>2018-03-20T17:34+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title>benessere 1
 sottotitolo</title>
-      <link>http://localhost:52646/I/degustazioni/benessere-1-sottotitolo-7</link>
-      <guid isPermaLink="true">http://localhost:52646/I/degustazioni/benessere-1-sottotitolo-7</guid>
+      <link>/I/servizi/benessere-1-sottotitolo-7</link>
+      <guid isPermaLink="true">/I/servizi/benessere-1-sottotitolo-7</guid>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Degustazioni</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/7/dsc_1800.jpg" alt="benessere 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/degustazioni/benessere-1-sottotitolo-7"><em>benessere 1
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000004/7/dsc_1800.jpg" alt="benessere 1
+sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="/I/servizi/benessere-1-sottotitolo-7"><em>benessere 1
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title>escurzioni 1
 sottotitolo</title>
-      <link>http://localhost:52646/I/degustazioni/escurzioni-1-sottotitolo-6</link>
-      <guid isPermaLink="true">http://localhost:52646/I/degustazioni/escurzioni-1-sottotitolo-6</guid>
+      <link>/I/servizi/escurzioni-1-sottotitolo-6</link>
+      <guid isPermaLink="true">/I/servizi/escurzioni-1-sottotitolo-6</guid>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Degustazioni</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/6/47-suite-gotica.jpg" alt="escurzioni 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/degustazioni/escurzioni-1-sottotitolo-6"><em>escurzioni 1
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000004/6/47-suite-gotica.jpg" alt="escurzioni 1
+sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="/I/servizi/escurzioni-1-sottotitolo-6"><em>escurzioni 1
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

@@ -309,6 +309,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-md-3 col-sm-3";
                 ContaArticoliPerperiodo(Tipologia);
+                Caricalinksrubriche(Tipologia);
                 divSearch.Visible = true;
                 divLatestPost.Visible = false;
                 //CaricaUltimiPost(Tipologia, Categoria);
@@ -322,18 +323,32 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
-                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     //placeholderrisultati
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopeOfferteSingleRow1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = sb.ToString();
+
+
+                    sb.Clear();
+                    sb.Append("<div class=\"sfondo-contenitore\">");
+                    sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    sb.Append("</div>");
+                    placeholderlateral.Text = sb.ToString();
+
+
                 }
 
                 break;
             case "rif000003":
             case "rif000004":
+            case "rif000005":
+
                 AssociaDatiSocial();
 
                 column1.Visible = true;
@@ -416,7 +431,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
                 break;
-            case "rif000005":
+            case "rif000007":
 
                 AssociaDatiSocial();
                 column1.Visible = true;
@@ -470,13 +485,53 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 AssociaDati();
                 break;
             default:
-                //lit = (Literal)Master.FindControl("litPortfolioBanners0");
-                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-blog", false, lit, Lingua, true);
+                AssociaDatiSocial();
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-md-9 col-sm-9";
+                column2.Visible = false;
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                column3.Attributes["class"] = "col-md-3 col-sm-3";
                 ContaArticoliPerperiodo(Tipologia);
+                Caricalinksrubriche(Tipologia);
                 divSearch.Visible = true;
-                divLatestPost.Visible = true;
-                CaricaUltimiPost(Tipologia, Categoria);
-                AssociaDati();
+                divLatestPost.Visible = false;
+                //CaricaUltimiPost(Tipologia, Categoria);
+                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
+                //CaricaMenuContenuti(4, 9, rptContenutiLink);
+                divCategorie.Visible = false;
+                //BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )
+                //string cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6, 5);
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    sb.Clear();
+
+
+
+                    sb.Clear();
+                    sb.Append("<div class=\"sfondo-contenitore\">");
+                    sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    sb.Append("</div>");
+                    placeholderlateral.Text = sb.ToString();
+                    //
+
+
+                }
+
 
                 break;
         }
@@ -530,36 +585,56 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
     }
 
 
+
+    private void Caricalinksrubriche(string cattipo)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        divLinksrubriche.Visible = true;
+        sb.Append("<div id=\"divLinksrubrichecontainer\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
+        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("\"></div>");
+        divLinksrubriche.InnerHtml = (sb.ToString());
+        //ClientScriptManager cs = Page.ClientScript;
+        //sb.Clear();
+        //sb.Append("(function wait() {");
+        //sb.Append("  if (typeof injcCategorieLinks === \"function\")");
+        //sb.Append("    {");
+        //sb.Append("injcCategorieLinks('linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "','');");
+        //sb.Append(" }");
+        //sb.Append("   else  {");
+        //sb.Append("  setTimeout(wait, 50);");
+        //sb.Append("  }  })();");
+        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //{
+        //    cs.RegisterStartupScript(this.GetType(), "clistrubriche", sb.ToString(), true);
+        //}
+    }
+
     private void ContaArticoliPerperiodo(string cattipo)
     {
-        //offerteDM offDM = new offerteDM();
-
-        //Dictionary<string, Dictionary<string, string>> archivioperannomese = offDM.ContaPerAnnoMese(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, Tipologia, Categoria);
-        //rptArchivio.DataSource = archivioperannomese;
-        //rptArchivio.DataBind();
-        divArchivio.Visible = true;
-
-        //string controllist1 = "injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','" + Categoria2liv + "');";
-
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Clear();
-        sb.Append("(function wait() {");
-        sb.Append("  if (typeof injectArchivioAndLoad === \"function\")");
-        sb.Append("    {");
-        sb.Append("injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','" + Categoria2liv + "');");
-        sb.Append(" }");
-        sb.Append("   else  {");
-        sb.Append("  setTimeout(wait, 50);");
-        sb.Append("  }  })();");
+        divArchivio.Visible = true;
+        divLinksrubriche.Visible = true;
+        sb.Append("<div id=\"divArchivioList\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
+        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("\"></div>");
+        divArchivio.InnerHtml = (sb.ToString());
 
-        ClientScriptManager cs = Page.ClientScript;
-        if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        {
-
-            cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
-
-        }
-
+        //ClientScriptManager cs = Page.ClientScript;
+        //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        //sb.Clear();
+        //sb.Append("(function wait() {");
+        //sb.Append("  if (typeof injectArchivioAndLoad === \"function\")");
+        //sb.Append("    {");
+        //sb.Append("injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','');");
+        //sb.Append(" }");
+        //sb.Append("   else  {");
+        //sb.Append("  setTimeout(wait, 50);");
+        //sb.Append("  }  })();");
+        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //{
+        //    cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
+        //}
     }
     protected void rptArchivioMesi_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
@@ -1047,8 +1122,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
             ///////////////////////NOME PAGINA////////////////////////////////
             string titolopagina = sezione.Descrizione;
-            litNomePagina.Text = titolopagina;
-            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
+            //litNomePagina.Text = titolopagina;
+            litNomePagina.Text = "";
+
             Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
             if (catselected != null && (litNomePagina.Text.ToLower().Trim() != catselected.Descrizione.ToLower().Trim()))
             {
@@ -1059,8 +1135,6 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
-
-
             ///////////////////////////////////////////////////////////////
         }
 
@@ -1210,9 +1284,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             //case "rif000002":
             //    Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litPortfolioRivals2, Lingua, "", list);
             //    break;
-            case "rif000012":
-                Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litGalleryDetails, Lingua, "", list, "noborder");
-                break;
+            //case "rif000012":
+            //    Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litGalleryDetails, Lingua, "", list, "noborder");
+            //    break;
             default:
                 rptOfferte.DataSource = list;
                 rptOfferte.DataBind();

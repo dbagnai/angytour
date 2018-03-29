@@ -120,7 +120,8 @@ public class CommonPage : Page
         {
             sb.Append("<li>");
             sb.Append("<a");
-            sb.Append(" href=\"" + l.Campo1 + "\">");
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            sb.Append("   href=\"" + l.Campo1 + "\">");
             sb.Append(l.Campo2);
             sb.Append("</a> ");
             sb.Append("</li>");
@@ -1199,6 +1200,29 @@ public class CommonPage : Page
 
     #region Wrapper Per Metodi REFERENCES 
 
+
+    protected static string getidsocio(string utente)
+    {
+
+        return usermanager.getidsocio(utente); 
+
+    }
+
+    public static string getFirstName(string utente)
+    {
+        return usermanager.getFirstName(utente);
+
+    }
+    
+    public static string getidcliente(string utente)
+    {
+        return usermanager.getidcliente(utente);
+    }
+    public static string getmailuser(string utente)
+    {
+        return usermanager.getmailuser(utente);
+    }
+
     public static string TestoTipologia(string codicetipologia, string Lingua)
     {
         return references.TestoTipologia(codicetipologia, Lingua);
@@ -1336,96 +1360,7 @@ public class CommonPage : Page
         return message;
     }
 
-    protected static string getidsocio(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-            UserLastActivityDate = _user.LastActivityDate;
 
-        ProfileBase profile = ProfileBase.Create(utente);
-        string idsocio = (string)profile["IdSocio"];
-
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return idsocio;
-
-    }
-
-    public static string getFirstName(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-            UserLastActivityDate = _user.LastActivityDate;
-
-        ProfileBase profile = ProfileBase.Create(utente);
-        string nome = (string)profile["FirstName"];
-
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return nome;
-
-    }
-    /// <summary>
-    /// torna l'dicliente associato all'utente nel profilo
-    /// </summary>
-    /// <param name="utente"></param>
-    /// <returns></returns>
-    public static string getidcliente(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-        {
-            UserLastActivityDate = _user.LastActivityDate;
-        }
-
-        //ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
-        ProfileBase profile = ProfileBase.Create(utente);
-        string idCliente = (string)profile["IdCliente"];
-
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return idCliente;
-    }
-    public static string getmailuser(string utente)
-    {
-        //  save UserLastActivityDate so it can be reassigned later
-        MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
-        DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
-        if (_user != null)
-        {
-            UserLastActivityDate = _user.LastActivityDate;
-        }
-
-        //ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
-        ProfileBase profile = ProfileBase.Create(utente);
-        string emailuser = (string)profile["EMail"];
-
-        // need to reset the UserLastActivityDate that has just been updated by above two lines
-        if (_user != null)
-        {
-            _user.LastActivityDate = UserLastActivityDate;
-            Membership.UpdateUser(_user);
-        }
-        return emailuser;
-    }
     public static void CaricaRiferimentiCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, ref string sessionid, ref string trueIP)
     {
         if (Session != null)

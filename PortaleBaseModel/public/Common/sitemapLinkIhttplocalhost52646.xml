@@ -1,128 +1,242 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:52646/I/strutture/strutture</loc>
-    <lastmod>2018-03-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
     <loc>http://localhost:52646/I/blog/blog</loc>
-    <lastmod>2018-03-15</lastmod>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/news-18</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-18</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/eventi-19</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-siti-internet-181</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/territorio-25</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-social-182</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/eventi/eventi</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-posizionamento-183</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/degustazioni</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-info-grafica-184</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/escursioni-21</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-foto-e-video-185</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/wellness-22</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/web-piattaforme-cms-186</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/cibo-23</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-19</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/vino-24</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-comunicare-sul-web-197</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/strutture/casa-baccano-basso-10</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-verbale-198</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/strutture/casa-baccano-alto-9</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-editoria-199</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/strutture/la-tenuta-casa-baccano-8</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-grafica-digitale-1910</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/benessere-1-sottotitolo-7</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/comunicazione-grafica-manuale-1911</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/degustazioni/escurzioni-1-sottotitolo-6</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/marketing-25</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/camere-1-sototitolo-5</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/marketing-stategie-2512</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/eventi/offerte-1-sottotitolo-4</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/marketing-brand-2513</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/news-2-sottotitolo-3</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/marketing-packaging-2514</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/news-1-sottotitolo-2</loc>
-    <lastmod>2018-03-15</lastmod>
+    <loc>http://localhost:52646/I/blog/marketing-mercati-2515</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/informatica-26</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/informatica-reti-2616</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/informatica-linguaggi-2617</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/informatica-hardware-2618</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/informatica-software-2619</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/come-raggiungere-il-primo-posto-su-google-personas-una-nuova-prospettiva-limportanza-del-contesto-4</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-internet-news-sottotitolo-3</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-2-sottotitolo-c-2</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-13sottotitolo-16</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-12sottotitolo-15</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-11-sottotitolo-14</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-13</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-12</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-9-sottotitolo-11</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-8sottotitolo-10</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-7sottotitolo-9</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-6sottotitolo-8</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-5sottotitolo-7</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-4sottotitolo-6</loc>
+    <lastmod>2018-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/blog/siti-interenet-3sottotitolo-5</loc>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-1</loc>
-    <lastmod>2018-03-15</lastmod>
+    <lastmod>2018-03-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

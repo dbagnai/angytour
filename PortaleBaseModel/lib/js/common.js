@@ -54,7 +54,7 @@ $(window).scroll(function () {
     var scrollPosition = $(window).scrollTop();
     if (enablescrolltopmem) {
         sessionStorage.setItem("scrollPosition_" + pathName, scrollPosition.toString());
-        console.log(scrollPosition);
+       // console.log(scrollPosition);
     }
 });
 /*Recover scroll top pos from memory*/
@@ -1016,6 +1016,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             if (localObjects["linkloaded"][idscheda].hasOwnProperty(bindprophref)) {
                                 link = localObjects["linkloaded"][idscheda][bindprophref];
                                 $(this).attr("href", link);
+                                //$(this).show();
+                                $(this).css("display", "block");
                             }
                             if (localObjects["linkloaded"][idscheda].hasOwnProperty(bindproptitle)) {
                                 testo = localObjects["linkloaded"][idscheda][bindproptitle];
@@ -1027,6 +1029,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         }
                         else {
                             $(this).attr("href", '');
+                            $(this).css("display", "none");
                         }
                     }
                     else if ($(this).is("img") && $(this).hasClass('revolution')) {
@@ -1035,6 +1038,15 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['image'];
                             $(this).attr("data-lazyload", pathImg);
+                            //$(this).attr("alt", testoalt);
+                        }
+                    }
+                    else if ($(this).is("img") && $(this).hasClass('avatar')) {
+                        var idallegato = dataitem[proprarr[0]];
+                        if (dataitem.hasOwnProperty(proprarr[0])) {
+                            //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
+                            var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
+                            $(this).attr("src", pathImg);
                             //$(this).attr("alt", testoalt);
                         }
                     }
@@ -1211,7 +1223,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         var idrisorsa = dataitem[proprarr[0]];
                         //var prezzounitario = dataitem[proprarr[1]]; // da passaere
                         var idcontrollo = $(this).attr("id");
-                        carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 1);
+                        carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 2); //1 carrello con data range //2 carreelo standard //3 entrambi
                     }
                     else if ($(this).is("div")
                         && ($(this).hasClass('owl-carousel') || $(this).hasClass('img-list'))
@@ -1621,6 +1633,19 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     callback(retstring);
 }
 
+function formatlinksezione(localObjects, valore, prop, callback) {
+    var retstring = "";
+    try {
+        var object = localObjects["linkloaded"];
+        if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
+            var linksezione = object[valore[0]][prop[0]];
+            if (linksezione != null && linksezione != "")
+                retstring = linksezione;
+        }
+    } catch (e) { };
+    callback(retstring);
+}
+
 function formatautore(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1633,25 +1658,18 @@ function formatautore(localObjects, valore, prop, callback) {
     } catch (e) { };
     callback(retstring);
 }
-
-function formatdescrizione(localObjects, valore, prop, callback) {
+function formatviews(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
         var object = localObjects["linkloaded"];
         if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
-
-            var descrizione = object[valore[0]][prop[0]];
-            if (prop[1] != undefined && prop[1] != null && prop[1] != "") {
-                if (descrizione.length >= parseInt(prop[1]))
-                    descrizione = descrizione.substring(0, parseInt(prop[1]));
-                retstring = descrizione.replace(/\n/g, "<br/>");
-            }
+            var valore = object[valore[0]][prop[0]];
+            if (valore != null && valore != "")
+                retstring = valore;
         }
     } catch (e) { };
     callback(retstring);
-
 }
-
 function formattestoreplace(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1663,6 +1681,32 @@ function formattestoreplace(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
+
+function formatdescrizione(localObjects, valore, prop, callback) {
+    var retstring = "";
+    try {
+        var object = localObjects["linkloaded"];
+        if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
+
+            var descrizione = object[valore[0]][prop[0]];
+            if (prop[1] != undefined && prop[1] != null && prop[1] != "") {
+                if (descrizione.length >= parseInt(prop[1])) {
+                    var i = parseInt(prop[1]); var j = 1; var stop = false;
+                    while (j < 30 && !stop && i + j + 1 < descrizione.lenght) {
+                        if (descrizione.substring(i + j, i + j + 1) == ' ' || descrizione.substring(i + j, i + j + 1) == '.' || descrizione.substring(i + j, i + j + 1) == '\n') stop = true;
+                        j += 1;
+                    }
+                    descrizione = descrizione.substring(0, parseInt(prop[1]) + j) + " >>";
+                }
+                retstring = descrizione.replace(/\n/g, "<br/>");
+            }
+        }
+    } catch (e) { };
+    callback(retstring);
+
+}
+
+
 
 function formatlabelsconto(localObjects, valore, prop, callback) {
     var retstring = "";
@@ -1870,7 +1914,30 @@ function frmcaratteristica3(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
+function formatdata1(localObjects, valore, prop, callback) {
+    var retstring = "";
+    var tmpDate = valore[0];
+    var controllo = localObjects["resultinfo"][prop[0]];
+    if (controllo == "true") {
+        if (tmpDate && tmpDate != "") {
+            var objData = new Date(tmpDate);
 
+            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
+
+            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
+            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY')
+
+            //var d = formattedDate.getDate();
+            //var m = formattedDate.getMonth();
+            //m += 1;  // JavaScript months are 0-11
+            //var y = formattedDate.getFullYear();
+            //return d + "/" + m + "/" + y;
+            retstring = dateFormattedwithtime;
+        }
+    }
+
+    callback(retstring);
+}
 function formatdata(localObjects, valore, prop, callback) {
     var retstring = "";
     var tmpDate = valore[0];
@@ -1980,6 +2047,28 @@ function caricaDatiServerArchivio(lng, objfiltro, callback, functiontocallonend)
 }
 
 
+function caricaDatiServerLinkscategorie(lng, objfiltro, callback, functiontocallonend) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'caricaLinks2liv', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
+        success: function (result) {
+            callback(result, functiontocallonend);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText, function () { });
+        }
+    });
+}
 
 function caricaDatiServer(lng, objfiltro, page, pagesize, enablepager, callback, functiontocallonend) {
     var lng = lng || "I";

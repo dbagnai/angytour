@@ -20,7 +20,8 @@ jQuery(document).ready(function ($) {
 
             $("#divTop").removeClass('fixedtop');
             $("#divTop").addClass('freetop');
-        } else {http://localhost:52646/
+        } else {
+            http://localhost:52646/
             $("#mainnav").addClass('fixednav');
             $("#mainnav").removeClass('freenav');
             $("#mainnav1").addClass('fixednav1');
@@ -53,6 +54,10 @@ jQuery(document).ready(function ($) {
         if ($(window).scrollTop() > 0) {
             //        $('#mainnav').addClass('bckColor1');
             $('#divlogo').removeClass();
+            $('.menuzord-menu').addClass('scrolled');
+            $('#divlogoBrand').addClass('shrinklogo');
+
+
             //        $('#divlogo').addClass('shrinklogobck');
 
             //        if (sliderPresent) {
@@ -61,14 +66,27 @@ jQuery(document).ready(function ($) {
             //        }
             $('#divMessage').hide();
 
-            
+            ///////AFFIX MANAGER       //////////////////////////////////////////////////////////////////
+            //remove affix per una colonna in base alla posizione della barra laterale
+            //console.log("scrolltop :" + $(window).scrollTop() + "windows height:" + ($(document).height() - $(window).height()) + " footer height: " + $('footer').height());
+            if ($(window).scrollTop() + $('footer').height() > ($(document).height() - $(window).height()))
+                $(".affixfinder").removeClass('affix');
+             else
+                $(".affixfinder").addClass('affix');
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
 
         }
         else {
             //        $('#mainnav').removeClass('bckColor1');
             $('#divlogo').removeClass();
+
             $('#divlogo').addClass('fulllogobckdark');
             $('#divMessage').show();
+
+            $('.menuzord-menu').removeClass('scrolled');
+            $('#divlogoBrand').removeClass('shrinklogo');
+
             //        if (sliderPresent) {
             //            $('#menuzord').addClass('white');
             //            $('#menuzord').removeClass('dark');
@@ -164,9 +182,10 @@ jQuery(document).ready(function ($) {
             }
         }
     }
+
     /* ---------------------------------------------- /*
-		 * Set sections backgrounds from rival
-		/* ---------------------------------------------- */
+   * Set sections backgrounds
+  /* ---------------------------------------------- */
 
     var module = $('.home-section, .module, .module-small, .side-image');
     module.each(function (i) {
@@ -178,7 +197,7 @@ jQuery(document).ready(function ($) {
 
     /* ---------------------------------------------- /*
 		 * Youtube video background from RIval
-		/* ---------------------------------------------- */
+	/* ---------------------------------------------- */
 
     $(function () {
         $(".video-player").mb_YTPlayer();
@@ -208,16 +227,6 @@ jQuery(document).ready(function ($) {
         $('.video-player').toggleVolume();
         $(this).toggleClass('fa-volume-off fa-volume-up');
         return false;
-    });
-    /* ---------------------------------------------- /*
-     * Set sections backgrounds
-    /* ---------------------------------------------- */
-
-    var module = $('.home-section, .module, .module-small, .side-image');
-    module.each(function (i) {
-        if ($(this).attr('data-background')) {
-            $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
-        }
     });
 
     /* ---------------------------------------------- /*
@@ -585,8 +594,6 @@ jQuery(document).ready(function ($) {
 
 
     /* Init the plugin */
-
-
     //form_validation('#contact-form');
     //form_validation('#comment-form');
 
@@ -598,14 +605,14 @@ jQuery(document).ready(function ($) {
     });
  */
     /* to top button */
-    $('body').append('<div id="to-top-button"> <i class="fa fa-angle-up"></i> </div>');
+    //$('body').append('<div id="to-top-button"> <i class="fa fa-angle-up"></i> </div>');
 
 
-    $('#to-top-button').click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        });
-    });
+    //$('#to-top-button').click(function () {
+    //    $('body,html').animate({
+    //        scrollTop: 0
+    //    });
+    //});
 
 
     /* Info Box Listeners */
@@ -626,10 +633,8 @@ jQuery(document).ready(function ($) {
     //init tooltip tipsy
     $('.social-media-icon,.tool-tip').tipsy({ gravity: 's', fade: true, offset: 5 });
 
-
     //Remove tipsy tooltip event from image overlay elements
     $('.item_img_overlay_content .social-media-icon,.top-bar .social-media-icon').unbind('mouseenter');
-
 
     //Callout Box And Message Box Mobile Button
     $('.message-box ,.callout-box').each(function () {
@@ -963,22 +968,6 @@ function centeringBullets() {
         $this.css('margin-left', -(w / 2) + 'px');
     });
 }
-
-/*FUNZIONE CHE VERIFICA SE UN CERTO OGGETTO E VISIBILE NELLO SCHERMO*/
-//$.fn.isOnScreen = function () {
-//    var win = $(window);
-//    var viewport = {
-//        top: win.scrollTop(),
-//        left: win.scrollLeft()
-//    };
-//    viewport.right = viewport.left + win.width();
-//    viewport.bottom = viewport.top + win.height();
-
-//    var bounds = this.offset();
-//    bounds.right = bounds.left + this.outerWidth();
-//    bounds.bottom = bounds.top + this.outerHeight();
-//    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-//};
 
 
 /*FUNZIONE CHE TESTA SE UN OGGETTO E'DEFINITO O MENO*/

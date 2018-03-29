@@ -122,6 +122,7 @@
                             <th>ID</th>
                             <th>Codice</th>
                             <th>Denominazione ITA</th>
+                            <th>Link ITA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -137,7 +138,9 @@
 
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal>
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                            <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
+
                                         </div>
                                     </td>
                                     <td style="border: Solid 1px #ccc;">
@@ -149,6 +152,12 @@
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
                                             <asp:Literal ID="lit1" runat="server" Text='<%# Eval("DenominazioneI").ToString() %>'></asp:Literal>
+                                        </div>
+                                    </td>
+                                      <td style="border: Solid 1px #ccc;">
+                                        <div style="height: 50px; overflow-y: auto">
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                            view
                                         </div>
                                     </td>
                                     <%--<td style="border: Solid 1px Black;">

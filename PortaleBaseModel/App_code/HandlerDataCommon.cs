@@ -520,7 +520,74 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         PreserveReferencesHandling = PreserveReferencesHandling.None,
                     });
                     break;
+                case "caricaLinks2liv":
 
+                    //////////////////////////////////////////////////////////////////////
+                    //recupero i parametri che mi servono da objfiltro
+                    //////////////////////////////////////////////////////////////////////
+                    Dictionary<string, string> filtriCategorie = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
+                    Dictionary<string, string> linksDictionary = new Dictionary<string, string>();
+                    Dictionary<string, List<Tabrif>> mainDictionary = new Dictionary<string, List<Tabrif>>();
+                    Tabrif elemlink = new Tabrif();
+
+                    List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == lingua && (tmp.CodiceTipologia == filtriCategorie["tipologia"])); });
+                    prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                    if (prodotti != null)
+                    {
+                        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                        foreach (Prodotto o in prodotti)
+                        {
+                            string testo = o.Descrizione;
+                            //string linkcategoria = CommonPage.CreaLinkRoutes(null, false, lingua, (testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                            //linkcategoria = linkcategoria.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == lingua && (tmp.CodiceProdotto == o.CodiceProdotto)); });
+                            sprodotti.Sort(new GenericComparer<SProdotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                            if (sprodotti != null)
+                            {
+                                foreach (SProdotto s in sprodotti)
+                                {
+                                    string testosprod = s.Descrizione;
+                                    string linksprod = CommonPage.CreaLinkRoutes(null, false, lingua, (testosprod), "", filtriCategorie["tipologia"], s.CodiceProdotto, s.CodiceSProdotto);
+                                    linksprod = linksprod.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                                    elemlink = new Tabrif();
+                                    elemlink.Codice = s.CodiceSProdotto;
+                                    elemlink.Campo1 = linksprod;
+                                    elemlink.Campo2 = testosprod;
+                                    if (mainDictionary.ContainsKey(testo))
+                                    {
+                                        mainDictionary[testo].Add(elemlink);
+                                    }
+                                    else
+                                    {
+                                        List<Tabrif> tmpList = new List<Tabrif>();
+                                        mainDictionary.Add(testo, tmpList);
+                                        mainDictionary[testo].Add(elemlink);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
+                    string serializedmaindictionary = Newtonsoft.Json.JsonConvert.SerializeObject(mainDictionary, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None
+                    });
+                    linksDictionary.Add("data", serializedmaindictionary);
+
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(linksDictionary, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    ////////////////////////////////////////////////////////////////////////////
+                    break;
                 case "caricaDatiArchivio":
 
                     //////////////////////////////////////////////////////////////////////
@@ -559,8 +626,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             }
                         }
                     }
-
-
                     string tempOffArchivio = Newtonsoft.Json.JsonConvert.SerializeObject(tmpArchivio, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -568,11 +633,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                         PreserveReferencesHandling = PreserveReferencesHandling.None
                     });
-
-
-
                     valueArchivio.Add("data", tempOffArchivio);
-
                     //value = filterDataArchivio(lingua, filtriArchivio);
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(valueArchivio, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
@@ -689,94 +750,128 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         offerteDM offDM = new offerteDM();
         Dictionary<string, string> ritorno = new Dictionary<string, string>();
         OfferteCollection offerte = new OfferteCollection();
-        if (!filtri.ContainsKey("listShow") || string.IsNullOrEmpty(filtri["listShow"]))
+
+
+        //CARICO FILTRANDO ////////////////////////////////////////////////////////////////
+        List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+        string maxrecords = "";
+        if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
+            maxrecords = filtri["maxelement"];
+
+        if (filtri.ContainsKey("mostviewed") && !string.IsNullOrEmpty(filtri["mostviewed"]))
         {
-            //offerte = (OfferteCollection)offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filtri["tipologia"], filtri["maxelement"], false, lingua, false);
-            //CARICO FILTRANDO ////////////////////////////////////////////////////////////////
-            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
-
-            if (filtri.ContainsKey("id") && !string.IsNullOrEmpty(filtri["id"]))
+            long maxelements = 0;
+            long.TryParse(filtri["mostviewed"], out maxelements);
+            if (maxelements != 0)
             {
-                SQLiteParameter pid = new SQLiteParameter("@Id", filtri["id"]);
-                parColl.Add(pid);
-            }
-            if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
-            {
-                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
-                parColl.Add(p3);
-            }
-            if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
-            {
-                SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", filtri["categoria"]);
-                parColl.Add(p7);
-            }
-            if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
-            {
-                SQLiteParameter p10 = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
-                parColl.Add(p10);
-            }
-            if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
-            {
-                SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["caratteristica1"]);
-                parColl.Add(pc1);
-            }
-            if (filtri.ContainsKey("caratteristica2") && !string.IsNullOrEmpty(filtri["caratteristica2"]))
-            {
-                SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["caratteristica2"]);
-                parColl.Add(pc2);
-            }
-            if (filtri.ContainsKey("caratteristica3") && !string.IsNullOrEmpty(filtri["caratteristica3"]))
-            {
-                SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["caratteristica3"]);
-                parColl.Add(pc3);
-            }
-
-            if (filtri.ContainsKey("regione") && !string.IsNullOrEmpty(filtri["regione"]))
-            {
-                SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", filtri["regione"]);
-                parColl.Add(preg);
-            }
-
-
-            if (filtri.ContainsKey("vetrina") && !string.IsNullOrEmpty(filtri["vetrina"]))
-            {
-                bool _tmpb = false;
-                bool.TryParse(filtri["vetrina"], out _tmpb);
-                SQLiteParameter pvet = new SQLiteParameter("@Vetrina", _tmpb);
-                parColl.Add(pvet);
-            }
-            if (filtri.ContainsKey("promozioni") && !string.IsNullOrEmpty(filtri["promozioni"]))
-            {
-                bool _tmpb = false;
-                bool.TryParse(filtri["promozioni"], out _tmpb);
-                SQLiteParameter promo = new SQLiteParameter("@promozioni", _tmpb);
-                parColl.Add(promo);
-            }
-            if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
-            {
-                string testoricerca = filtri["testoricerca"].Trim().Replace(" ", "%");
-                SQLiteParameter p8 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
-                parColl.Add(p8);
-            }
-            string maxrecords = "";
-
-            if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
-                maxrecords = filtri["maxelement"];
-
-            if (filtri.ContainsKey("mese") && !string.IsNullOrEmpty(filtri["mese"]))
-                if (filtri.ContainsKey("anno") && !string.IsNullOrEmpty(filtri["anno"]))
+                maxrecords = maxelements.ToString();
+                //estraiamo la lista degli di più visti
+                Dictionary<long, long> mostvisited = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData, maxelements);
+                long _i = 0;
+                string idlistfiltro = "";
+                foreach (KeyValuePair<long, long> kv in mostvisited)
                 {
-                    string mese = filtri["mese"];
-                    string anno = filtri["anno"];
-                    if (mese.Trim() != "" && anno.Trim() != "")
-                    {
-                        SQLiteParameter panno = new SQLiteParameter("@annofiltro", anno);
-                        parColl.Add(panno);
+                    if (_i >= maxelements) break;
+                    idlistfiltro += kv.Key + ",";
+                    _i++;
+                }
+                idlistfiltro = idlistfiltro.TrimEnd(',');
+                if (!string.IsNullOrEmpty(idlistfiltro))
+                {
+                    SQLiteParameter pidlist1 = new SQLiteParameter("@IdList", idlistfiltro);
+                    parColl.Add(pidlist1);
+                }
+            }
+        }
+
+        if (filtri.ContainsKey("listShow") && !string.IsNullOrEmpty(filtri["listShow"]))
+        {
+            if (filtri["listShow"].Contains(','))
+            {
+                SQLiteParameter pidlist = new SQLiteParameter("@IdList", filtri["listShow"]);
+                parColl.Add(pidlist);
+            }
+        }
+        if (filtri.ContainsKey("id") && !string.IsNullOrEmpty(filtri["id"]))
+        {
+            SQLiteParameter pid = new SQLiteParameter("@Id", filtri["id"]);
+            parColl.Add(pid);
+        }
+        if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
+        {
+            SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
+            parColl.Add(p3);
+        }
+        if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
+        {
+            SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", filtri["categoria"]);
+            parColl.Add(p7);
+        }
+        if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+        {
+            SQLiteParameter p10 = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
+            parColl.Add(p10);
+        }
+        if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
+        {
+            SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["caratteristica1"]);
+            parColl.Add(pc1);
+        }
+        if (filtri.ContainsKey("caratteristica2") && !string.IsNullOrEmpty(filtri["caratteristica2"]))
+        {
+            SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["caratteristica2"]);
+            parColl.Add(pc2);
+        }
+        if (filtri.ContainsKey("caratteristica3") && !string.IsNullOrEmpty(filtri["caratteristica3"]))
+        {
+            SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["caratteristica3"]);
+            parColl.Add(pc3);
+        }
+
+        if (filtri.ContainsKey("regione") && !string.IsNullOrEmpty(filtri["regione"]))
+        {
+            SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", filtri["regione"]);
+            parColl.Add(preg);
+        }
 
 
-                        SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", mese);
-                        parColl.Add(pmese);
-                    }
+        if (filtri.ContainsKey("vetrina") && !string.IsNullOrEmpty(filtri["vetrina"]))
+        {
+            bool _tmpb = false;
+            bool.TryParse(filtri["vetrina"], out _tmpb);
+            SQLiteParameter pvet = new SQLiteParameter("@Vetrina", _tmpb);
+            parColl.Add(pvet);
+        }
+        if (filtri.ContainsKey("promozioni") && !string.IsNullOrEmpty(filtri["promozioni"]))
+        {
+            bool _tmpb = false;
+            bool.TryParse(filtri["promozioni"], out _tmpb);
+            SQLiteParameter promo = new SQLiteParameter("@promozioni", _tmpb);
+            parColl.Add(promo);
+        }
+        if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
+        {
+            string testoricerca = filtri["testoricerca"].Trim().Replace(" ", "%");
+            SQLiteParameter p8 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
+            parColl.Add(p8);
+        }
+
+
+
+        if (filtri.ContainsKey("mese") && !string.IsNullOrEmpty(filtri["mese"]))
+            if (filtri.ContainsKey("anno") && !string.IsNullOrEmpty(filtri["anno"]))
+            {
+                string mese = filtri["mese"];
+                string anno = filtri["anno"];
+                if (mese.Trim() != "" && anno.Trim() != "")
+                {
+                    SQLiteParameter panno = new SQLiteParameter("@annofiltro", anno);
+                    parColl.Add(panno);
+
+
+                    SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", mese);
+                    parColl.Add(pmese);
+                }
 
 #if false
                     if (mese.Trim() != "" && anno.Trim() != "")
@@ -798,24 +893,30 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     } 
 #endif
-                }
-
-
-
-            if (enabledpager && page != 0 && pagesize != 0)
-            {
-                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "", false, page, pagesize);
             }
-            else
-                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua);
 
+
+
+        if (enabledpager && page != 0 && pagesize != 0)
+        {
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "", false, page, pagesize);
         }
+        else if (senablepager == "skip" && page != 0 && pagesize != 0)
+        {
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua, null, "", false, page, pagesize);
+            int lmaxrecords = 0;
+            int.TryParse(maxrecords, out lmaxrecords);
+            if (lmaxrecords != 0)
+                offerte = new OfferteCollection(offerte.GetRange(0, Math.Min(offerte.Count, lmaxrecords)));
+        }
+        else
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "");
+        //}
         //else
         //    offerte = filtri[4];
 
-        /*Old paging method*/
 #if false
-
+        /*Old paging method*/
         if (offerte != null && offerte.Count > 0 && enabledpager && page != 0 && pagesize != 0)
         {
             //Facciamo il take skip
@@ -828,7 +929,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         }
         else filteredData = offerte;
 #endif
-
 #if false
         if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
         {
@@ -859,11 +959,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         string tempListret = Newtonsoft.Json.JsonConvert.SerializeObject(ListRet);
         ritorno.Add("resultinfo", tempListret);
 
+        //Carico lista statistiche visite per inserirla nella lista di ritorno
+        Dictionary<long, long> visite = new Dictionary<long, long>();
+        if (filteredData != null && filteredData.Count > 0)
+            visite = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData);
+
         Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
         foreach (Offerte _o in filteredData)
         {
-
-
             Dictionary<string, string> tmp = new Dictionary<string, string>();
             string testotitolo = "";
             string descrizione = "";
@@ -872,24 +975,29 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             {
                 case "GB":
                     testotitolo = _o.DenominazioneGB;
-                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneGB, 5000, true));
-                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciGB, 5000, true));
+                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneGB, 6000, true));
+                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciGB, 6000, true));
                     break;
                 default:
                     testotitolo = _o.DenominazioneI;
-                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneI, 5000, true));
-                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciI, 5000, true));
+                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneI, 6000, true));
+                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciI, 6000, true));
                     break;
             }
+
+            string linksezione = "";
+            SProdotto sottocategoria = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto _tmp) { return (_tmp.Lingua == lingua && (_tmp.CodiceSProdotto == _o.CodiceCategoria2Liv)); });
+            if (sottocategoria != null)
+                linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+            linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+
             string pathimmagine = ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
             if (string.IsNullOrEmpty(pathimmagine))
                 pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-            string target = "_self";
+            string target = "";
             string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
-
             if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
             {
                 target = "_self";
@@ -897,33 +1005,104 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             }
             link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-            string titolo1 = testotitolo;
-            string titolo2 = "<br/>";
-            int i = testotitolo.IndexOf("\n");
-            if (i != -1)
-            {
-                titolo1 = testotitolo.Substring(0, i);
-                if (testotitolo.Length >= i + 1)
-                    titolo2 = testotitolo.Substring(i + 1);
-            }
+            //string titolo1 = testotitolo;
+            //string titolo2 = "<br/>";
+            //int i = testotitolo.IndexOf("\n");
+            //if (i != -1)
+            //{
+            //    titolo1 = testotitolo.Substring(0, i);
+            //    if (testotitolo.Length >= i + 1)
+            //        titolo2 = testotitolo.Substring(i + 1);
+            //}
 
             string contactlink = "";
             if (_o.Abilitacontatto) contactlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/Content_Tipo3.aspx?TipoContenuto=Richiesta&Lingua=" + lingua + "&idOfferta=" + _o.Id;
             string printlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + _o.Id + "&Lingua=" + lingua;
             string bcklink = GeneraBackLink(_o.CodiceTipologia, _o.CodiceCategoria, lingua);
+
+            string pathavatar = "";
+            if (string.IsNullOrEmpty(pathavatar))
+                pathavatar = ("~/images/sitespecific/" + _o.Autore + ".png").Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+            string numeroviews = "";
+            if (visite != null && visite.ContainsKey(_o.Id))
+                numeroviews = visite[_o.Id].ToString();
+            tmp.Add("views", numeroviews); //Numero di visualizzazioni della scheda
+
             tmp.Add("contactlink", contactlink);
             tmp.Add("printlink", printlink);
             tmp.Add("bcklink", bcklink);
             tmp.Add("link", link);
+            tmp.Add("linksezione", linksezione);
             tmp.Add("titolo", testotitolo);
             tmp.Add("descrizione", descrizione);
             tmp.Add("datitecnici", datitecnici);
             tmp.Add("image", pathimmagine);
+            tmp.Add("avatar", pathavatar);
             tmp.Add("video", _o.linkVideo);
 
             //DETTAGLI PER LA LISTA COMPLETA ALLEGATI //////////////////////////////////
             if (filteredData != null && filteredData.Count == 1)  //Si riempiono solo per la scheda singola
             {
+
+                /****CREO IL LINK ALLA SCHEDA PRECEDENTRE E PROSSIMA RISPETTO ALLA SCHEDA ATTUALE **********/
+                //Carichiamo la prossima e precedente scheda di settore !!!
+                if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@Id"; }))
+                {
+                    parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@Id"; }).Value = _o.Id;
+                }
+                else
+                {
+                    SQLiteParameter pid = new SQLiteParameter("@Id", _o.Id);
+                    parColl.Add(pid);
+                }
+                if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceTIPOLOGIA"; }))
+                {
+                    parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceTIPOLOGIA"; }).Value = _o.CodiceTipologia; ;
+                }
+                else
+                {
+                    SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", _o.CodiceTipologia);
+                    parColl.Add(ptip);
+                }
+                if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria"; }))
+                {
+                    parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria"; }).Value = _o.CodiceCategoria;
+
+                }
+                else
+                {
+                    SQLiteParameter ptcat = new SQLiteParameter("@CodiceCategoria", _o.CodiceCategoria);
+                    parColl.Add(ptcat);
+                }
+                if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria2Liv"; }))
+                {
+                    parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria2Liv"; }).Value = _o.CodiceCategoria2Liv; ;
+                }
+                else
+                {
+                    SQLiteParameter pc2liv = new SQLiteParameter("@CodiceCategoria2Liv", _o.CodiceCategoria2Liv);
+                    parColl.Add(pc2liv);
+                }
+                Dictionary<string, Offerte> prevnextcontent = offDM.CaricaPrevNextOfferte(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl);
+                if (prevnextcontent != null)
+                {
+                    if (prevnextcontent.ContainsKey("prev") && prevnextcontent["prev"] != null)
+                    {
+                        string linkprev = CommonPage.CreaLinkRoutes(null, false, lingua, prevnextcontent["prev"].DenominazionebyLingua(lingua), prevnextcontent["prev"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+                        tmp.Add("prevlink", linkprev);
+                        tmp.Add("prevlinktext", prevnextcontent["prev"].DenominazionebyLingua(lingua));
+
+                    }
+                    if (prevnextcontent.ContainsKey("next") && prevnextcontent["next"] != null)
+                    {
+                        string linknext = CommonPage.CreaLinkRoutes(null, false, lingua, prevnextcontent["next"].DenominazionebyLingua(lingua), prevnextcontent["next"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+                        tmp.Add("nextlink", linknext);
+                        tmp.Add("nextlinktext", prevnextcontent["next"].DenominazionebyLingua(lingua));
+                    }
+                }
+                /*****************************************************************************************************/
+
                 List<string> imagescomplete = new List<string>();
                 List<string> imagesdesc = new List<string>();
                 List<string> imagesratio = new List<string>();
@@ -1080,17 +1259,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
             }
             link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
-            //string titolo1 = testotitolo;
-            //string titolo2 = "<br/>";
-            //int i = testotitolo.IndexOf("\n");
-            //if (i != -1)
-            //{
-            //    titolo1 = testotitolo.Substring(0, i);
-            //    if (testotitolo.Length >= i + 1)
-            //        titolo2 = testotitolo.Substring(i + 1);
-            //}
-            //string autore = _o.Autore;
 
             tmp.Add("link", link);
             //tmp.Add("titolo", testotitolo);

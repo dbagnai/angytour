@@ -34,6 +34,7 @@
                             <tr>
                                 <th></th>
                                 <th>ID</th>
+                                <th>Link</th>
                                 <th>Titolo ITA</th>
                                 <%--  <th>Titolo ENG</th>
                                 <th>Titolo RU</th>--%>
@@ -54,6 +55,7 @@
                                                 <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal>
                                             </div>
                                         </td>
+                                        <td><%# CreaLinkPaginastatica( (long)Eval("Id") ,true) %></td>
                                         <td style="border: Solid 1px #ccc;">
                                             <div style="height: 50px; overflow-y: auto">
                                                 <asp:Literal ID="lit1" runat="server" Text='<%# Eval("TitoloI").ToString() %>'></asp:Literal>
@@ -120,7 +122,7 @@
                             forced_root_block: false,
                             verify_html: false,
                             allow_html_in_named_anchor: true,
-                            valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text]",
+                            valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style]",
                             plugins: [
                                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",

@@ -1,0 +1,93 @@
+﻿<!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+        var sticky = new Waypoint.Sticky({
+            element: $('.stickcolumn')[0],
+            offset:830
+        });
+        $('#divBannersContainerRubriche').waypoint(function (direction) {
+            $('.stickcolumn').toggleClass('stuck', direction === 'up');
+            $('.stickcolumn').toggleClass('sticky-surpassed', direction === 'down');
+            var new_width = $('.sticky-wrapper').width();
+            $('.stickcolumn').width(new_width);
+        }, {
+                offset: function () {
+                    return ($('.stickcolumn').outerHeight() - 830);
+                }
+            });
+    });
+</script>
+<style>
+    @media (min-width: 768px) {
+        .sticky-wrapper {
+            width: 100%;
+        }
+        .stuck {
+            position: fixed;
+            top: 160px;
+        }
+
+        .sticky-surpassed {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+</style>-->
+<!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
+
+
+<div id="divContainerb1" class="hidden-xs inject" style="max-width:1400px;margin: 20px auto 20px auto; position: relative; display: none;" params="injectSliderAndLoadBanner,sliderBanner.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '',TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
+
+
+<div id="divContainerHeadmobile1" class="visible-xs hidden-sm hidden-md hidden-lg inject" params="injectFasciaAndLoadBanner,'bannerFascia3.html', 'divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia-home', false" style="display: none;">&nbsp;</div>
+
+
+
+<section class="mbr-section mbr-section__container article" style="padding: 30px 20px 20px 20px;text-align:left">
+    <div style="max-width:1400px;margin:0px auto">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="mbr-section-title display-2">WebMousers Blog</h3>
+                <small class="lead">
+                    Ti offriamo i nostri migliori consigli, ricerche, how-to-do e approfondimenti, il tutto per aiutarti a migliorare le tue competenze nella comunicazione digitale e nel marketing online. Stai cercando il blog Webmousers? Visualizza l'archivio.
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div style="max-width:1400px;margin:0px auto;padding:20px">
+    <div class="row no-gutter">
+        <div class="col-sm-9">
+            <!--<div id="divContainer1Title">&nbsp;</div>-->
+            <div id="divContainer1" class="inject" params="injectPortfolioAndLoad,'isotopePortfolioBlog2.html', 'divContainer1', 'portfolio1', 1, 24, true, '', 'rif000002', '', true, false">&nbsp;</div>
+            <div id="divContainer1Pager">&nbsp;</div>
+        </div>
+        <div class="col-sm-3">
+            <div class="stickcolumn">
+                <div id="divLinksrubrichecontainer" style="overflow-y: auto;margin:10px auto;" class="inject" params="injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1' ,'','rif000002','',''"></div>
+                <div id="divArchivioList" style="overflow-y: auto;margin:10px auto;" class="inject" params="injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1' ,'','rif000002','',''"></div>
+               
+                <div class="sfondo-contenitore">
+                    <div id="divContainer2Title" class="title-style1">Ultimi Articoli</div>
+                    <div id="divContainer2" class="inject" params="injectPortfolioAndLoad,'isotopePortfolioSingleRowSmall.html', 'divContainer2', 'portfolio2', 2, 24, 'skip', '', 'rif000002', '', true, false,8">&nbsp;</div>
+                    <div id="divContainer2Pager">&nbsp;</div>
+                </div>
+                <div class="sfondo-contenitore">
+                    <div id="divContainer3Title" class="title-style1">I Più visti</div>
+                    <div id="divContainer3" class="inject" params="injectPortfolioAndLoad,'isotopePortfolioSingleRowSmall.html', 'divContainer3', 'portfolio3', 1, 8, false, '', 'rif000002', '', true, false, '','','','','','',8">&nbsp;</div>
+                    <div id="divContainer3Pager">&nbsp;</div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="max-width:1400px;margin:0px auto;position:relative" id="divBannersContainerRubriche">
+    <div style="position: relative; margin: 0px auto; display: none">
+        <div id="divBannerRubriche" style="background-color: transparent" class="inject" params="injectPortfolioAndLoadBanner,'IsotopeBanner4.html', 'divBannerRubriche', 'isoBan1', 1, 1, false, '', '10', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">     &nbsp;</div>
+    </div>
+</div>

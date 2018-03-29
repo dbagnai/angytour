@@ -29,7 +29,8 @@ namespace WelcomeLibrary.DOM
         public enum TipoContatto
         {
             invioemail = 0,
-            visitaurl = 1 
+            visitaurl = 1,
+            visitapagina = 2
         }
 
     }

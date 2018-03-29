@@ -43,84 +43,7 @@
     <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
 </asp:Content>
 
-
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="width: 100%; padding: 0; margin: 0" runat="server" id="divContenutiPortfolioRival1" visible="false">
-        <div class="container">
-            <%--PORTFOLIO CONTENTS 1 ELEMENTS--%>
-            <%--<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
-                <div class="col-xs-12" style="text-align: center; font-weight: 500; font-size: 1.6em; padding-bottom: 5px; padding-top: 5px; text-transform: uppercase">
-                    <asp:Literal Text="" runat="server" ID="litNomeContenuti1" />
-                </div>
-            </div>--%>
-            <div class="row" style="margin-bottom: 20px; margin-top: 20px">
-                <div class=" col-sm-12">
-                    <ul class="works-grid works-grid-gut works-grid-4 works-hover-lw">
-                        <asp:Literal ID="litPortfolioRivals3" runat="server"></asp:Literal>
-                    </ul>
-                </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px; margin-top: 20px">
-                <div class="col-sm-12">
-                    <ul class="works-grid works-grid-gut works-grid-3 works-hover-lw">
-                        <asp:Literal ID="litPortfolioRivals3b" runat="server"></asp:Literal>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiPortfolio4" visible="false">
-        <div class="container">
-            <%--PORTFOLIO CONTENTS 4 ELEMENTS--%>
-            <%--<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
-                <div class="col-xs-12" style="text-align: center; font-weight: 500; font-size: 1.6em;padding-bottom: 5px; padding-top: 5px; text-transform: uppercase">
-                    <asp:Literal Text="" runat="server" ID="litNomeContenuti4" />
-                </div>
-            </div>--%>
-            <div class="row" style="margin-bottom: 20px; margin-top: 20px">
-                <div class="col-md-12 col-sm-12">
-                    <div class="portfolio-items portfolio-items-cols4">
-                        <asp:Literal ID="litContenutiPortfolio4" runat="server"></asp:Literal>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiPortfolio1" visible="false">
-        <div class="container">
-            <%--PORTFOLIO CONTENTS 1 ELEMENTS--%>
-            <%--<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
-                <div class="col-xs-12" style="text-align: center; font-weight: 500; font-size: 1.6em; padding-bottom: 5px; padding-top: 5px; text-transform: uppercase">
-                    <asp:Literal Text="" runat="server" ID="litNomeContenuti1" />
-                </div>
-            </div>--%>
-            <div class="row" style="margin-bottom: 20px; margin-top: 50px">
-                <div class="col-md-12 col-sm-12">
-                    <div class="portfolio-items portfolio-items-cols1">
-                        <asp:Literal ID="litContenutiPortfolio1" runat="server"></asp:Literal>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiPortfolio2" visible="false">
-        <div class="container">
-            <%--PORTFOLIO CONTENTS 1 ELEMENTS--%>
-            <%--<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
-                <div class="col-xs-12" style="text-align: center; font-weight: 500; font-size: 1.6em;   padding-bottom: 5px; padding-top: 5px; text-transform: uppercase">
-                    <asp:Literal Text="" runat="server" ID="litNomeContenuti2" />
-                </div>
-            </div>--%>
-            <div class="row" style="margin-bottom: 20px; margin-top: 50px">
-                <div class="col-md-12 col-sm-12">
-                    <div class="portfolio-items portfolio-items-cols2">
-                        <asp:Literal ID="litContenutiPortfolio2" runat="server"></asp:Literal>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divContenutiGallery" visible="false">
         <div class="row" style="margin-bottom: 20px; margin-top: 20px">
             <div class="col-sm-12">
@@ -130,25 +53,14 @@
             </div>
         </div>
     </div>
-
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
     <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
-        <%--<div id="divPortfolioList1Title" class="row" style="display: none">
-            <div class="col-sm-12">
-                <div class="subtitle-block clearfix">
-                    <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
-                        <%= Master.TestoSezione(Tipologia,false,true)  %>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
         <div id="divPortfolioList1"></div>
         <div id="divPortfolioList1Pager"></div>
         <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
-
     </div>
     <div class="col-md-9 col-sm-9" runat="server" id="column2">
 
@@ -162,16 +74,6 @@
                 <div class="pull-right">
                     <asp:Button ID="btnPrevh" class="button btn-flat" Text='<%# references.ResMan("Common", Lingua,"txtTastoPrev") %>'
                         runat="server" OnClick="btnPrev_click" />
-                </div>
-            </div>
-        </div>
-        <div style="width: 100%; padding: 0px; margin: 0px" runat="server" id="divRivalPortfolio2" visible="false">
-
-            <div class="row" style="margin-bottom: 20px; margin-top: 20px">
-                <div class="col-sm-12">
-                    <ul class="works-grid works-grid-gut works-grid-2 works-hover-lw">
-                        <asp:Literal ID="litPortfolioRivals2" runat="server"></asp:Literal>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -259,7 +161,6 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
-
         <asp:Panel runat="server" ID="pnlPager" Visible="false">
             <div class="row">
                 <div class="pull-left">
@@ -282,9 +183,10 @@
         </asp:Panel>
     </div>
     <div class="col-md-3 col-sm-3" runat="server" id="column3">
+
         <div class="sidebar" runat="server" id="RightSidebar">
             <!-- Sidebar Block -->
-            <div class="sidebar-block" runat="server" id="divSearch" visible="false">
+            <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                 <div class="sidebar-content tags blog-search">
                     <div class="input-group">
                         <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
@@ -295,6 +197,13 @@
                 </div>
             </div>
             <!-- Sidebar Block -->
+            <div style="max-width: 350px; margin: 10px auto" runat="server" id="divLinksrubriche" visible="false">
+            </div>
+            <div style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
+            </div>
+            <!-- Sidebar Block -->
+            <asp:Literal Text="" ID="lateralplh1" runat="server" />
+
 
             <div class="sidebar-block" id="divCategorie" runat="server" visible="false">
                 <h3 class="h3-sidebar-title sidebar-title">Categorie
@@ -371,7 +280,7 @@
             <!-- Sidebar Block -->
 
 
-        <asp:Literal Text="" ID="plhContainerLat" runat="server" />
+            <asp:Literal Text="" ID="plhContainerLat" runat="server" />
 
             <div id="divContainerBannerslat1"></div>
             <div class="sidebar-block" runat="server" id="div2" visible="false">
@@ -381,33 +290,10 @@
                     </ul>
                 </div>
             </div>
-
-
-            <!-- Sidebar Block -->
-            <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
-            <%--    <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common",Lingua,"TestoArchivio") %>
-                </h3>--%>
-                <div class="sidebar-content" style="overflow-y: auto" id="divArchivioList">
-                   <%-- <asp:Repeater ID="rptArchivio" runat="server">
-                        <ItemTemplate>
-                            <ul class="posts-list" id="ulAnno" runat="server" title='<%# Eval("Key").ToString() %>'>
-                                <asp:Repeater ID="rptArchivioMesi" runat="server" DataSource='<%# Eval("Value") %>'
-                                    OnItemDataBound="rptArchivioMesi_ItemDataBound">
-                                    <ItemTemplate>
-                                        <li style="border-top: 1px dotted #e5e5e5; margin-top: 10px; padding-top: 10px">
-                                            <i class="fa fa-check color-green"></i>
-                                            <a id="alink" runat="server" href="#" target="_self">(<asp:Literal ID="NumeroElementi"
-                                                runat="server" Text='<%# Eval("Value").ToString() %>'></asp:Literal>)</a>
-                                        </li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </ul>
-                        </ItemTemplate>
-                    </asp:Repeater>--%>
-
-                </div>
-            </div>
-            <!-- Sidebar Block -->
+            <asp:Literal Text="" ID="placeholderlateral" runat="server" />
+            <asp:Literal Text="" ID="placeholderlateral1" runat="server" />
+            <asp:Literal Text="" ID="placeholderlateral2" runat="server" />
+            <asp:Literal Text="" ID="placeholderlateral3" runat="server" />
         </div>
     </div>
 </asp:Content>

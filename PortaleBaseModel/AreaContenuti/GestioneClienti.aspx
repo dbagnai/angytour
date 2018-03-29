@@ -625,7 +625,7 @@
                                     CommandArgument='<%#  Eval("ID_CLIENTE") %>' Text="Elimina Utente" /><br />
                                 <asp:Button ID="btnNewpass" Style="float: left" runat="server" UseSubmitBehavior="false" OnClick="Setnewpass_click"
                                     CommandArgument='<%#  Eval("ID_CLIENTE") %>' Text="Imposta Password" />
-                                <input id="txtNewpass" style="float: left" maxlength="10" class="txtNewpass" runat="server" value='' /><br />
+                                <input id="txtNewpass" style="float: left" maxlength="16" class="txtNewpass" runat="server" value='' /><br />
                                 <div style="clear: both"></div>
                                 <span style="font-size: 16px">
                                     <asp:Literal Text="" ID="litMsRow" runat="server" />

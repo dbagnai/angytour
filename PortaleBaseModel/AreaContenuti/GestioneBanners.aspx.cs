@@ -104,23 +104,23 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("headhomegallery"))
             {
-                ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 666;//500
+                ResizeWidth = 1400;// 2000;//1170
+                ResizeHeight = 590;//500
             }
             if (Sezione.ToLower().Contains("header-"))
             {
-                ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 666;//500
+                ResizeWidth = 1400;// 2000;//1170
+                ResizeHeight = 590;//500
             }
             if (Sezione.ToLower().Contains("header-h"))
             {
-                ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 666;//500
+                ResizeWidth = 1400;// 2000;//1170
+                ResizeHeight = 590;//500
             }
             if (Sezione.ToLower().Contains("rif00"))
             {
-                ResizeWidth = 2000;// 2000;//1170
-                ResizeHeight = 666;//500
+                ResizeWidth = 1400;// 2000;//1170
+                ResizeHeight = 590;//500
             }
 
             //NUOVO METODO A TABELLA UNICA

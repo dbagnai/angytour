@@ -288,9 +288,9 @@
         <div class="row">
             <div class="col-sm-6">
                 <b>Chiave</b>
-                <input class="form-control" id="newchiave" mybind="Chiave" maxlength="20" style="width: 80%" />
+                <input class="form-control" id="newchiave" mybind="Chiave" maxlength="50" style="width: 80%" />
                 <b>Gruppo</b>
-                <input class="form-control" id="newgruppo" mybind="Gruppo" maxlength="20" style="width: 80%" />
+                <input class="form-control" id="newgruppo" mybind="Gruppo" maxlength="50" style="width: 80%" />
             </div>
             <div class="col-sm-6">
                 <b>Valore</b>

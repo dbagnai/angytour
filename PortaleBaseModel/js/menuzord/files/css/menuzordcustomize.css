@@ -5,7 +5,7 @@
     width: 100%;
     top: 0px;
     z-index: 999;
-    background-color: #ccc;
+    background-color: #314da3;
     overflow: visible;
     width: 100%;
     /*background-color: #eee
@@ -34,7 +34,7 @@
 .fixedtop .dropdown-menu {
     top: 30px !important;
     position: absolute;
-    background-color: #fff;
+    background-color: #314da3;
     padding: 5px;
     height: auto;
     z-index: 1000;
@@ -139,17 +139,19 @@
 
 .menuzord,
 .menuzord * {
-    font-family: 'Montserrat';
+    font-family: 'Raleway';
     /*font-weight: 500;*/
     font-size: 1rem;
 }
+
 .bckColor2 {
-    /*background-image: url(/images/sfondo-testata.jpg);*/
     background-repeat: no-repeat;
     background-size: 100% auto;
-    /*background-color: #502811;*/
-    background-color: #524339;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
 }
+
 .bckColor1 {
     background-color: #fff;
 }
@@ -164,15 +166,7 @@
     background-repeat: no-repeat;
 }
 
-.shrinklogobck {
-    width: 120px;
-    height: 50px;
-    padding: 0px;
-    background-image: url('/images/main_logo_d.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    margin: 0 auto;
-}
+
 
 .fulllogobck {
     width: 416px;
@@ -184,19 +178,30 @@
 }
 
 .fulllogobckdark {
-    width: 250px;
-    height: 80px;
+    /*width: 206px;
+    height: 61px;*/
+    width: 400px;
+    height: 119px;
     padding: 5px;
-    background: url('/images/main_logo_d.png') center center;
-    background-size: 65% 65%;
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 95% 95%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+.shrinklogobck {
+    width: 120px;
+    height: 50px;
+    padding: 0px;
+    background-image: url('/images/main_logo_d.png');
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
 
 .shrinklogo {
-    width: 55%;
-    height: auto;
-    padding: 0px;
+    width: 206px;
+    height: 61px;
 }
 
 .fulllogo {
@@ -211,7 +216,7 @@
 
 /*orange OVERRIDE*/
 .menuzord.orange {
-    background: #524339;
+    background: #314da3;
 }
 
     .menuzord.orange .menuzord-brand {
@@ -227,7 +232,7 @@
     .menuzord.orange .menuzord-menu ul.dropdown li:hover > a {
         background: none;
         color: #fff;
-        font-weight:600;
+        font-weight: 600;
     }
 
     .menuzord.orange .showhide em {
@@ -239,7 +244,7 @@
     }
 
     .menuzord.orange .menuzord-menu > li.search form input[type="text"] {
-        background: #524339;
+        background: #314da3;
         color: #fff;
     }
 
@@ -290,34 +295,35 @@
     }
 
     .menuzord.white .menuzord-menu > li > a {
-        color: #fff;
+        color: #444;
     }
 
-@media (max-width: 768px) {
+@media (max-width: 1179px) {
     .menuzord.white .menuzord-menu > li > a {
-        background-color: #888;
+        background-color: #fff;
+        border-bottom: solid 1px #ccc;
     }
 }
 
 .menuzord.white .menuzord-menu > li.active > a,
 .menuzord.white .menuzord-menu > li:hover > a,
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
-     background: none;
-        color: #fff;
-        font-weight:600;
+    background: none;
+    /*color: #fff;*/
+    font-weight: 600;
 }
 
 .menuzord.white .showhide em {
-    background: #fff;
+    background: #444;
 }
 
 .menuzord.white .menuzord-menu > li.search form:before {
-    color: #fff;
+    color: #444;
 }
 
 .menuzord.white .menuzord-menu > li.search form input[type="text"] {
     background: #909090;
-    color: #fff;
+    color: #444;
 }
 /*White -------------------------------- */
 
@@ -370,20 +376,27 @@
     }
 
 .menuzord-menu > li {
-    padding-top: 10px;
+    padding-top: 66px;
     padding-bottom: 10px;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-    .menuzord-menu > li > a {
-        font-size: 1rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        color: #444;
-        padding: 8px 16px;
-        line-height: normal;
-    }
+.menuzord-menu.scrolled > li {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.menuzord-menu > li > a {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #444;
+    padding: 8px 16px;
+    line-height: normal;
+}
 
 
 .menuzord-menu ul.dropdown li {
@@ -400,10 +413,11 @@
     line-height: 1.55;
     max-width: 180px;
     padding: 0px;
-    margin: 0px;
+   
     float: none;
-    position: absolute;
-    left: 0px;
+    position: absolute; 
+     margin: 0px !important;
+        left: 0px;
     top: 0px;
 }
 
@@ -430,10 +444,25 @@
         }
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 1179px) {
+    .fulllogobckdark {
+        width: 206px;
+        height: 61px;
+        padding: 5px;
+        background-size: 80% 80%;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        margin-left: calc(100% - 170px);
+    }
+
+    .shrinklogo {
+        width: 100%;
+        height: auto;
+    }
 
     .menuzord-menu > li {
-        padding: 4px 3px !important;
+        padding: 0 !important;
     }
 
         .menuzord-menu > li > a {
@@ -441,10 +470,7 @@
             padding: 8px 5px !important;
         }
 
-    .fulllogobckdark {
-        width: 270px;
-        height: 70px;
-    }
+
 
     .menuzord {
         min-height: 60px;
@@ -464,18 +490,23 @@
 
     .menuzord-responsive .menuzord-menu li .indicator {
         height: auto;
+        min-height: 44px;
         line-height: normal;
+        border-left: solid 1px #ccc;
     }
 
 
     .menuzord-responsive .menuzord-brand {
-        margin: 0px 15% !important;
         font-size: 20px;
         line-height: 1.55;
         max-width: 160px;
         float: none;
         position: absolute;
-        left: 0px;
+        /*margin: 0px 35% !important;*/
+        /*left: 0px;*/
+        margin-top:0px;
+        margin-left: -103px !important;
+        left: 50%;
         top: 0px;
     }
 

@@ -91,12 +91,30 @@ public partial class AreaContenuti_Default3 : CommonPage
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
         set { ViewState["Lingua"] = value; }
     }
+    public string Autore
+    {
+        get { return ViewState["Autore"] != null ? (string)(ViewState["Autore"]) : ""; }
+        set { ViewState["Autore"] = value; }
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
         if (!IsPostBack)
         {
+
+            /////////////////////////////////////////////////////////////////////
+            //Verifichiamo accesso  e impostiamo la visualizzazione corretta
+            //Spegnendo le cose che non devono essere visibili ai soci!!!
+            /////////////////////////////////////////////////////////////////////
+            usermanager USM = new usermanager();
+            if (USM.ControllaRuolo(User.Identity.Name, "Autore"))
+            {
+                Autore = User.Identity.Name;
+                ImpostaVisualizzazione();
+            }
+
+
             Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
 
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
@@ -107,6 +125,9 @@ public partial class AreaContenuti_Default3 : CommonPage
             if (TipologiaOfferte == null || TipologiaOfferte == "")
                 Response.Redirect("default.aspx?Errore=Selezionare Tipo Offerta");
             hidTipologia.Value = TipologiaOfferte;
+
+            if (Request.QueryString["CodiceProdotto"] != null && Request.QueryString["CodiceProdotto"] != "")
+            { CodiceProdotto = Request.QueryString["CodiceProdotto"].ToString(); }
 
             if (TipologiaOfferte == "rif000061" || TipologiaOfferte == "rif000062")
             {
@@ -148,6 +169,28 @@ public partial class AreaContenuti_Default3 : CommonPage
         //CodiceProdottoRicerca = ddlProdottoRicerca.SelectedValue;
         //CodiceSottoProdottoRicerca = ddlSProdottoRicerca.SelectedValue;
     }
+
+    private void ImpostaVisualizzazione()
+    {
+        string idcliente = getidcliente(User.Identity.Name);
+        if (!string.IsNullOrEmpty(idcliente))
+        {
+
+            //((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
+            ((HtmlGenericControl)Master.FindControl("tagPagineStatiche")).Visible = false; //Spengo la barra navigazione
+            ((HtmlGenericControl)Master.FindControl("tagBanner")).Visible = false; //Spengo la barra navigazione
+            ((HtmlGenericControl)Master.FindControl("tagContatti")).Visible = false; //Spengo la barra navigazione
+            ((HtmlGenericControl)Master.FindControl("tagConfig")).Visible = false; //Spengo la barra navigazione
+
+
+        }
+        else
+        {
+            Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+        }
+
+    }
+
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 
     protected void PagerRisultati_PageCommand(object sender, string PageNum)
@@ -193,6 +236,11 @@ public partial class AreaContenuti_Default3 : CommonPage
                 SQLiteParameter p7 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
                 parColl.Add(p7);
             }
+            if (Autore.Trim() != "")
+            {
+                SQLiteParameter pautore = new SQLiteParameter("@Autore", Autore);
+                parColl.Add(pautore);
+            }
 
             if (mese.Trim() != "" || anno.Trim() != "")
             {
@@ -211,19 +259,17 @@ public partial class AreaContenuti_Default3 : CommonPage
                     parColl.Add(p9);
                 }
             }
+            if (CodiceProdotto != "")
+            {
+                SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdotto);
+                parColl.Add(p7);
+            }
+            if (ddlSottoProdSearch.SelectedValue != "")
+            {
+                SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
+                parColl.Add(p8);
+            }
 
-
-            //if (ddlProdottoRicerca.SelectedValue != "")
-            //{
-            //    SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", CodiceProdottoRicerca);
-            //    parColl.Add(p7);
-            //}
-            //if (ddlSProdottoRicerca.SelectedValue != "")
-            //{
-            //    SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
-            //    parColl.Add(p8);
-            //}
-            //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
 
 #endif
@@ -234,7 +280,7 @@ public partial class AreaContenuti_Default3 : CommonPage
             {
                 rptOfferte.DataSource = offerte;
                 rptOfferte.DataBind();
-                output.Text = "Nessuna struttura trovata per le selezioni fatte";
+                output.Text = "Nessun valore trovato per le selezioni fatte";
                 return;
             }
             //offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));
@@ -298,6 +344,7 @@ public partial class AreaContenuti_Default3 : CommonPage
             txtTelefono.Text = Details.Telefono;
             txtFax.Text = Details.Fax;
             txtVideo.Text = Details.linkVideo;
+            txtAutore.Text = Details.Autore;
 
             txtPrezzo.Text = Details.Prezzo.ToString();
             txtPrezzoListino.Text = Details.PrezzoListino.ToString();
@@ -421,6 +468,22 @@ public partial class AreaContenuti_Default3 : CommonPage
         this.CaricaDati();
     }
 #endif
+    protected void ddlSottoProdSearch_SelectedIndexChange(object sender, EventArgs e)
+    {
+        ////Qui devo mettere una funzione che riempie i dati con il nome (ITA / ENG / RU) del prodotto selezionato
+        ////Di modo da poterlo modificare
+        //CodiceProdotto = ddlProdottoNewProd1.SelectedValue;
+        //CaricaDatiFormInserimento(ddlTipologiaNewProd.SelectedValue, ddlProdottoNewProd1.SelectedValue);
+        //btnModificaProd.Enabled = true;
+        //NomeNuovoProdIt.Enabled = true;
+        //NomeNuovoProdEng.Enabled = true;
+        //NomeNuovoProdRu.Enabled = true;
+        ////OkButton.Enabled = false;
+        //OkButton.Text = "Annulla";
+        //btnModificaProd.Text = "Salva";
+        CodiceSottoProdottoRicerca = ddlSottoProdSearch.SelectedValue;
+    }
+
 
     /// <summary>
     /// Carica i dati nelle ddl regione/prov/comune 
@@ -535,6 +598,24 @@ public partial class AreaContenuti_Default3 : CommonPage
         try
         {
             ddlSottoProdotto.SelectedValue = SottoCategoria;
+        }
+        catch { }
+
+
+        sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
+        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == Categoria)); });
+        sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        ddlSottoProdSearch.Items.Clear();
+        ddlSottoProdSearch.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
+        ddlSottoProdSearch.Items[0].Value = "";
+        ddlSottoProdSearch.DataSource = sprodotti;
+        ddlSottoProdSearch.DataTextField = "Descrizione";
+        ddlSottoProdSearch.DataValueField = "CodiceSProdotto";
+        ddlSottoProdSearch.DataBind();
+        try
+        {
+            ddlSottoProdSearch.SelectedValue = "";
+            CodiceSottoProdottoRicerca = "";
         }
         catch { }
 
@@ -1162,8 +1243,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
         txtLatitudine1_dts.Text = string.Empty;
         txtLongitudine1_dts.Text = string.Empty;
-
-        CaricaDatiDdlRicerca("", "", "", "", "");
+        CaricaDatiDdlRicerca("", "", "", CodiceProdotto, "");
         CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
         txtAnno.Text = "";
 
@@ -1833,8 +1913,9 @@ public partial class AreaContenuti_Default3 : CommonPage
                 {
                     this.SvuotaDettaglioProd();
                     Utility.CaricaListaStaticaProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
-                    this.CaricaDatiDllProdotto(TipologiaOfferte, "");
-                    //   CaricaDatiDdlRicercaRepeater("", "");
+                    this.CaricaDatiDdlRicerca("", "", "", "", "");
+                    this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
+
                     OkButton.Text = "Nuovo";
                     btnModificaProd.Enabled = false;
                     btnModificaProd.Text = "Modifica";

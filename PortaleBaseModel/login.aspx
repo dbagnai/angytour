@@ -149,7 +149,23 @@
                                 <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                             </ContentTemplate>
                         </asp:RoleGroup>
-                        <asp:RoleGroup Roles="GestorePortale">
+                        <asp:RoleGroup Roles="Autore">
+                            <ContentTemplate>
+                                <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/GestioneOfferte.aspx?CodiceTipologia=rif000002&Lingua=I" id="lnkAdminPage">Area Personale</a><br />
+                                <br />
+                                <br />
+                                <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area Storico Ordini</a><br /> --%>
+                                <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
+                                <br />--%>
+                                <br />
+                                <br />
+                                <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                    LoginText="" />
+                                <br />
+                                <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                          <asp:RoleGroup Roles="GestorePortale">
                             <ContentTemplate>
                                 <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />
                                 <br />

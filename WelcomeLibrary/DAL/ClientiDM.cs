@@ -389,6 +389,49 @@ namespace WelcomeLibrary.DAL
 
             return item;
         }
+
+
+
+        public static Cliente GetNomeClientePerId(string connection, string ID_cliente)
+        {
+            Cliente item = new Cliente();
+            if (connection == null || connection == "") return item;
+            //if (parColl == null || parColl.Count < 2) return list;
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@Id_cliente", ID_cliente); //OleDbType.VarChar
+            parColl.Add(p1);
+            try
+            {
+                string query = "";
+                query = "SELECT  Cognome,Nome FROM TBL_CLIENTI  WHERE Id_cliente=@Id_cliente";
+
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return item; };
+                    if (reader.HasRows == false)
+                        return item;
+
+                    while (reader.Read())
+                    {
+                        item = new Cliente();
+                        if (!reader["Cognome"].Equals(DBNull.Value))
+                            item.Cognome = reader.GetString(reader.GetOrdinal("Cognome"));
+                            item.Nome = reader.GetString(reader.GetOrdinal("Nome"));
+                        break;
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                //throw new ApplicationException("Errore Caricamento Cliente :" + error.Message, error);
+            }
+
+            return item;
+        }
+
+
         public string CancellaClientiPerTipologia(string connessione, string id_tipi_clienti)
         {
             string idret = "";

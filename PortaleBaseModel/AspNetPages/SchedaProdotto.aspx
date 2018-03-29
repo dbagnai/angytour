@@ -181,8 +181,7 @@
 
                             <div class="clearfix"></div>
                             <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
-                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
                             <!-- Go to www.addthis.com/dashboard to customize your tools -->
                             <div class="addthis_inline_share_toolbox"></div>
                             <div class="blog-post-body">

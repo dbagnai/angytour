@@ -58,6 +58,12 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         get { return ViewState["CodiceContenuto"] != null ? (string)(ViewState["CodiceContenuto"]) : ""; }
         set { ViewState["CodiceContenuto"] = value; }
     }
+
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : ""; }
+        set { ViewState["Lingua"] = value; }
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -65,7 +71,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             PageGuid = System.Guid.NewGuid().ToString();
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
             PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
-
+            Lingua = "I";
             if (Request.QueryString["CodiceContenuto"] != null && Request.QueryString["CodiceContenuto"] != "")
             { CodiceContenuto = Request.QueryString["CodiceContenuto"].ToString(); }
             if (CodiceContenuto == null || CodiceContenuto == "")
@@ -108,6 +114,37 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
         }
     }
+
+    public string CreaLinkPaginastatica(long idps, bool noli = false, string classe = "", string stile = "font-weight:600 !important")
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        contenutiDM conDM = new contenutiDM();
+        Contenuti item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idps.ToString());
+        //Creiamo i link
+        if (item != null)
+        {
+            string testo = item.TitolobyLingua(Lingua);
+            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            testo = "Vedi";
+            if (!noli) sb.Append("<li>");
+            sb.Append("<a  href=\"");
+            sb.Append(link);
+            sb.Append("\"");
+            if (idps.ToString() == ContentIDSelected)
+                sb.Append(" class=\"" + classe + "\" style=\"" + stile + "\"  ");
+            sb.Append(" target=\"_blank\" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+            sb.Append(testo);
+            sb.Append("</a>");
+            if (!noli) sb.Append("</li>");
+            /*
+                 <a id="linkid10High" onclick="JsSvuotaSession(this)" runat="server" href="#">
+                                        <%= references.ResMan("Common", Lingua,"testoid10") %>
+                                    </a>
+             */
+        }
+        return sb.ToString();
+    }
+
 
     #region PARTE RELATIVA ALLA PAGINAZIONE DEL REPEATER
 

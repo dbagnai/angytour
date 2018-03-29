@@ -39,15 +39,20 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
                 //Inizializzo i valori
 
-                List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 11));
+                //List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 11));
                 //Tipologie.AddRange( WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) == 199));
                 // Tipologie.RemoveAll(delegate(WelcomeLibrary.DOM.TipologiaOfferte _t) { return _t.Codice == "rif000100"; });
-                rptTipologia.DataSource = Tipologie;
-                rptTipologia.DataBind();
+                //rptTipologia.DataSource = Tipologie;
+                //rptTipologia.DataBind();
 
-                List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
-                rptCatalogo.DataSource = Catalogo;
-                rptCatalogo.DataBind();
+                List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000002" && p.Lingua == "I");
+                rptRubricheCategorie.DataSource = listcat;
+                rptRubricheCategorie.DataBind();
+                 
+
+                //List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
+                //rptCatalogo.DataSource = Catalogo;
+                //rptCatalogo.DataBind();
 
 
                 //List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");

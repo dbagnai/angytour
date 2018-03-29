@@ -1,75 +1,99 @@
 ﻿
 <div id="replaceid" class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
-    <h1 itemprop="name" style="margin-bottom:4px">
-        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
-            <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
-            </span>
-        </a>
-    </h1>
-    <div class="blog-post-details" runat="server" id="divPostDetails">
 
-        <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-right">
-            <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
-                <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-            </div>
-            <div class="clearfix" style="float: left;"></div>
-            <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
-                <em>
-                    <span style="text-decoration: line-through;font-size:1.4rem;color:#aaa;padding-left:10px;padding-right:5px;font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                </em>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <div class="blog-post-details-item blog-post-details-item-left">
-            <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
-            <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
-            <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
-            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
-            <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
-        </div>
-
-        <div class="blog-post-details-item blog-post-details-item-left">
-            <span class="bind" mybind="CodiceRegione" format="frmregione"></span>
-            <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
-            <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
-        </div>
-    </div>
     <!-- Placeholder per la owl gallery -->
     <div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"></div>
-
-
     <div class="responsive-video" style="display: none">
         <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
     </div>
 
-
-
-    <p>
-        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-        <div class="addthis_inline_share_toolbox"></div>
-    </p>
-    <div mybind="Id" class="bind files-list" style="display:none"></div>
-
-    <div class="blog-post-body" style="text-align: justify" itemprop="description">
-        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span><br />
-        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+    <div style="padding-left:10px;padding-right:20px;position:relative;">
+        <!--<div class="autore"></div>-->
+        <div class="avatar avatar-large pull-left">
+            <div class="avatar-inner">
+                <img class="bind avatar" mybind="Id" src="" />
+            </div>
+        </div>
+        <div class="pull-right">
+            <span class="bind" mybind="Id" myvalue="TestoPubblicatodata" format="formatlabelresource"></span>
+            <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i>
+        </div>
+        <div class="pull-right">
+            <span class="bind" mybind="CodiceRegione" format="frmregione"></span>
+            <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
+            <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
+        </div>
+        <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
+        <div class="pull-left">
+            <div class="pull-left" style="padding-right:10px;font-size:0.9rem; font-style:italic;text-align:right">
+                <span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
+                <span class="bind" itemprop="author" mybind="Autorenome"></span>
+                <!--<span class="bind" mybind="Autore"></span>-->
+            </div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-    <div class="row">
-        <div class="col-sm-4">
-            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
+    <div style="padding:20px">
+        <h1 itemprop="name" style="margin-bottom:4px">
+            <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                </span>
+            </a>
+        </h1>
+        <div class="bind linksmall" mybind="Id" myvalue="linksezione" format="formatlinksezione" style="padding-top:5px;padding-bottom:5px"></div>
+        <!--<span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>-->
+        <!--<span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>-->
+        <div class="blog-post-details" runat="server" id="divPostDetails">
+            <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-right">
+                <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
+                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                </div>
+                <div class="clearfix" style="float: left;"></div>
+                <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
+                    <em>
+                        <span style="text-decoration: line-through;font-size:1.4rem;color:#aaa;padding-left:10px;padding-right:5px;font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                    </em>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
-        </div>
-        <div class="col-sm-4">
-            <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
+        <p>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+        </p>
+        <div mybind="Id" class="bind files-list" style="display:none"></div>
 
+        <div class="blog-post-body" itemprop="description">
+            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span><br />
+            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
         </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <!--<div class="col-sm-4">
+                <a rel="nofollow, noindex" class="btn bind" style="width: 100%;" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
+            </div>-->
+            <!--<div class="pull-right">
+                <a class="btn bind" style="width: 100%" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
+            </div>-->
+            <div class="pull-right">
+                <a rel="nofollow, noindex" class="btn bind" style="width: 100%" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row" style="margin-top:40px">
+            <div class="pull-right" style="max-width:240px">
+                <!--<a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="nextlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span></a>-->
+                <a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="nextlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="line-height:32px;display:inline-block;vertical-align:top"><br /></div><div style="font-size:0.8em;line-height:14px;display:inline-block;vertical-align:top" class="bind" mybind="Id" myvalue="nextlinktext" format="formattestoreplace"></div></a>
+            </div>
+            <div class="pull-left"  style="max-width:240px">
+                <!--<a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="prevlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span></a>-->
+                <a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="prevlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="line-height:32px;display:inline-block;vertical-align:top"><br/>
+            </div><div style="line-height:14px;display:inline-block;vertical-align:top;font-size:0.8em" class="bind" mybind="Id" myvalue="prevlinktext" format="formattestoreplace"></div></a>
+        </div>
+        </div>
+        <div class="clearfix"></div>
+
     </div>
-
 </div>
 <hr />
 

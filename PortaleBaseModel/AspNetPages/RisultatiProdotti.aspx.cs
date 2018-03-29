@@ -676,11 +676,11 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         progressivosepara = 1;
         switch (Tipologia)
         {
-            case "rif000001":
-                Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litPortfolioRivals3b, Lingua, "", list, "", "1f809f");
-                //  Master.CaricaContenutiPortfolioRivalBordered(Tipologia, litPortfolioRivals3b, Lingua, "", list);
+            //case "rif000001":
+            //    Master.CaricaContenutiPortfolioRivalSubtext(Tipologia, litPortfolioRivals3b, Lingua, "", list, "", "1f809f");
+            //    //  Master.CaricaContenutiPortfolioRivalBordered(Tipologia, litPortfolioRivals3b, Lingua, "", list);
 
-                break;
+            //    break;
             default:
                 rptProdotti.DataSource = list;
                 rptProdotti.DataBind();

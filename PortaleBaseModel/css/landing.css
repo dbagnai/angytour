@@ -34,7 +34,7 @@ h3.mbr-section-title.display-2 {
     color: #F1C050;
     text-decoration: none;
 	font-weight: 900;
-	font-family: 'Montserrat',sans-serif;
+	font-family: 'Raleway',sans-serif;
 }
 .mbr-cards .card {
     padding-left: 10px !important;
@@ -52,7 +52,7 @@ h3.mbr-section-title.display-2 {
 	color: #fff !important
 }
 .mbr-testimonial .card-block p {
-    font-family: "Lora";
+    font-family: "Lato";
     font-size: 1.28rem !important;
     line-height: 2 !important;
 }
@@ -119,8 +119,8 @@ h3.mbr-section-title.display-2 {
   background: none !important; }
 
 .btn {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
+  font-family: 'Lato', sans-serif;
+  font-weight:4500;
   letter-spacing: 2px;
   padding: 0.75rem 2.1875rem;
   font-size: 0.75rem;
@@ -135,7 +135,7 @@ h3.mbr-section-title.display-2 {
   font-size: 0.9687rem;
   line-height: 1.5;
   border-radius: 3px;
-  font-family: "Lora";
+  font-family: "Lato";
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0px; }
@@ -531,7 +531,7 @@ a.mbr-iconfont:hover {
 p.lead,
 .lead p {
   font-size: 1.07rem;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 2.3125rem; }
 
 .article .lead p, .article .lead ul, .article .lead ol, .article .lead pre, .article .lead blockquote {
@@ -539,9 +539,9 @@ p.lead,
 
 .lead {
   font-size: 1.07rem;
-  font-weight: 300; }
+  font-weight: 400; }
   .lead a {
-    font-family: "Lora";
+    font-family: "Lato";
     font-style: italic;
     font-weight: 400; }
     .lead a, .lead a:hover {
@@ -566,7 +566,7 @@ p.lead,
     font-weight: 600;
     margin-bottom: 1.605rem; }
   .lead blockquote {
-    font-family: "Lora";
+    font-family: "Lato";
     font-style: italic;
     padding: 10px 0 10px 20px;
     border-left: 4px solid #c39f76;
@@ -581,27 +581,27 @@ p.lead,
 
 .display-1 {
   font-size: 4.39rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -2px;
   margin-bottom: 0.2843em;
   margin-top: 3.9rem; }
 
 .display-2 {
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -1px;
   margin-bottom: 1.5625rem;
   margin-top: 3.5rem; }
 
 .display-3 {
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 3.2rem;
   margin-bottom: 2rem; }
 
 .display-4 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 2.3rem;
   margin-bottom: 1.8rem; }
 
@@ -644,7 +644,7 @@ p.lead,
 /*.alert {
   border-radius: 0;
   border: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.875rem;
@@ -688,7 +688,7 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 .display-1, .display-2, .display-3, .display-4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
   word-break: break-word;
   word-wrap: break-word; }
 
@@ -774,7 +774,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   font-style: italic;
   font-weight: 400;
   font-size: 17px;
-  font-family: "Lora";
+  font-family: "Lato";
   line-height: 26px;
   color: #8c8c8c;
   margin-bottom: 30px; }
@@ -789,7 +789,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   margin-bottom: 1.6875rem; }
 .mbr-section-hero .mbr-section-lead {
   color: #fff;
-  font-family: Lora;
+  font-family: 'Lato';
   font-size: 1.5rem;
   font-style: italic;
   margin-top: -1em; }
@@ -917,7 +917,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   .mbr-figure .mbr-figure-caption {
     background: #2e2e2e;
     color: #fff;
-    font-family: Montserrat;
+    font-family: 'Raleway';
     padding: 1.5rem 0;
     text-align: center;
     width: 100%; }
@@ -938,7 +938,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     width: 100%; }
   .mbr-map [data-state-details] {
     color: #6b6763;
-    font-family: Montserrat;
+    font-family: 'Raleway';
     height: 1.5em;
     margin-top: -0.75em;
     padding-left: 1.25rem;
@@ -1046,7 +1046,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   opacity: 0.9; }
 
 .mbr-gallery-title {
-  font-family: Montserrat;
+  font-family: 'Raleway';
   font-size: 0.9em;
   position: absolute;
   display: block;
@@ -1101,7 +1101,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   background: #1b1b1b;
   opacity: 0.5;
   font-size: 55px;
-  font-weight: 300;
+  font-weight: 400;
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -1364,7 +1364,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   font-style: italic;
   font-weight: 400;
   font-size: 0.875rem;
-  font-family: "Lora";
+  font-family: "Lato";
   color: #5b5b5b;
   margin-top: -1rem;
   line-height: 1.7857;
@@ -1425,14 +1425,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   .mbr-plan .card-title {
     margin-bottom: 1.5625rem; }
   .mbr-plan-title {
-    font-family: "Montserrat";
+    font-family: 'Raleway';
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.28;
     margin-bottom: 0; }
   .mbr-plan-subtitle, .mbr-plan-price-desc {
     color: #a0a0a0;
-    font-family: "Lora";
+    font-family: "Lato";
     font-size: 0.875rem;
     font-style: italic;
     font-weight: 400;
@@ -1492,7 +1492,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 -------*/
 .mbr-price {
-  font-family: "Montserrat";
+  font-family: 'Raleway';
   line-height: 1.3; }
   .mbr-price-value {
     font-size: 1.875rem;
@@ -1539,7 +1539,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   .mbr-testimonial .card-block {
     background: #f4f4f4;
     color: #565656;
-    font-family: "Lora";
+    font-family: "Lato";
     font-size: 1.125rem;
     font-style: italic;
     font-weight: 400;
@@ -1581,7 +1581,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     width: 5rem; }
 .mbr-author-name {
   color: #2d2d2d;
-  font-family: "Montserrat";
+  font-family: "Raleway";
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: -1px;
@@ -1589,7 +1589,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   padding-top: 1.25rem; }
 .mbr-author-desc {
   color: #a7a7a7;
-  font-family: "Lora";
+  font-family: "Lato";
   font-size: 0.875rem;
   font-style: italic;
   font-weight: 400;
@@ -1726,7 +1726,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .mbr-footer-content p strong, .mbr-footer-content strong, .mbr-footer .mbr-contacts h1, .mbr-footer .mbr-contacts h2, .mbr-footer .mbr-contacts h3, .mbr-footer .mbr-contacts h4,
 .mbr-footer .mbr-contacts p strong, .mbr-footer .mbr-contacts strong {
   color: #7c7c7c;
-  font-family: "Montserrat";
+  font-family: "Raleway";
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: -1px;
@@ -2305,7 +2305,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 .mbr-footer .mbr-contacts p strong,
 .mbr-footer-content strong,
 .mbr-footer .mbr-contacts strong {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 .btn-sm,
 .lead a,
@@ -2314,20 +2314,20 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 .mbr-section-hero .mbr-section-lead,
 .mbr-cards .card-subtitle,
 .mbr-testimonial .card-block {
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
 }
 .mbr-author-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 .mbr-author-desc {
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
 }
 .mbr-plan-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 .mbr-plan-subtitle,
 .mbr-plan-price-desc {
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
 }
 .bg-primary {
   background-color: #2a4e40 !important;
@@ -2671,7 +2671,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-0 .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-0 .navbar-toggler {
@@ -2808,7 +2808,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-c .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-c .navbar-toggler {
@@ -3008,7 +3008,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-w .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-w .navbar-toggler {
@@ -3127,7 +3127,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-15 .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-15 .navbar-toggler {
@@ -3359,7 +3359,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-1f .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-1f .navbar-toggler {
@@ -3481,7 +3481,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-1s .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-1s .navbar-toggler {
@@ -3617,7 +3617,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-21 .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-21 .navbar-toggler {
@@ -3819,7 +3819,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-31 .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-31 .navbar-toggler {
@@ -3962,7 +3962,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #menu-3k .navbar-caption {
   color: #ffffff;
-  font-family: 'Lora', serif;
+  font-family: 'Lato', serif;
   font-size: 18px;
 }
 #menu-3k .navbar-toggler {
@@ -4070,7 +4070,7 @@ html.is-builder .article .lead:not([data-app-remove-it]) + div .btn {
 }
 #header3-41 SMALL {
   font-size: 32px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #232323;
 }
 #custom-html-40 {

@@ -119,7 +119,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         CaricaMenu();
         //CaricaBannersAndControls();
-       // SettaTestoIniziale("Pannello Ricerca Sito");
+        // SettaTestoIniziale("Pannello Ricerca Sito");
         VisualizzaTotaliCarrello();
         LoadJavascriptVariables();
         //  DataBind();
@@ -174,11 +174,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     private void CaricaMenu()
     {
         //carichiamo i link per le pagine dinamiche in base al tbl rif attività
-
         //CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
         //CaricaMenuSezioniContenuto("rif000002", rptTipologieLink8High); //Inserisco il link  nel menu
         //CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
-
         //Carica i link menu per le pagine statiche in base all'id in tabella
         //CaricaMenuLinkContenuti(1);
         //CaricaMenuLinkContenuti(2);
@@ -193,7 +191,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         string sezionebannersnavigazione = "";
         switch (CodiceTipologia)
         {
-             
+
             default:
                 sezionebannersnavigazione = "banner-portfolio-sezioni";
                 sb.Clear();
@@ -215,9 +213,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
                 break;
         }
-        
+
     }
-   
+
     protected void CaricaMenuLinkContenuti(long id)
     {
 
@@ -440,8 +438,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
             prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
         }
-        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
         if (prodotti != null)
+        {
+            prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
@@ -453,7 +452,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append(link);
                 sb.Append("\"");
                 if (o.CodiceProdotto == Categoria)
-                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                    sb.Append(" style=\"font-weight:600 !important;display:block;\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
                 sb.Append(testo);
                 sb.Append("</a>");
@@ -470,7 +469,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 }
                 sb.Append("</li>");
             }
-
+        }
 
         return sb.ToString();
     }
@@ -537,7 +536,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (tipologia == CodiceTipologia && t.Key == Categoria)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append( testolink);
+                sb.Append(testolink);
                 sb.Append("</a>");
                 sb.Append("</li>");
 
@@ -644,7 +643,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (o.Id.ToString() == idOfferta)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
-                sb.Append( testo  );
+                sb.Append(testo);
                 sb.Append("</a>");
                 sb.Append("</li>");
             }
@@ -906,7 +905,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string nomemittente = txtContactName.Value;
             string mittenteMail = txtContactEmail.Value;
             string mittenteTelefono = txtContactTelefono.Value;
-            
+
             string nomedestinatario = CommonPage.Nome;
             string maildestinatario = CommonPage.Email;
             long idperstatistiche = 0;
@@ -996,6 +995,176 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         Response.Redirect(linkverifica);
     }
 
+    protected bool ControlloVisibilita(object fotos)
+    {
+        bool ret = true;
+        if (fotos == null || ((AllegatiCollection)fotos).Count <= 0) ret = false;
+        bool onlypdf = (fotos != null && ((AllegatiCollection)fotos).Count > 0 && !((AllegatiCollection)fotos).Exists(c => (c.NomeFile.ToString().ToLower().EndsWith("jpg") || c.NomeFile.ToString().ToLower().EndsWith("gif") || c.NomeFile.ToString().ToLower().EndsWith("png"))));
+        if (onlypdf) ret = false;
+        return ret;
+    }
+
+    protected void btnsearch1_Click(object sender, EventArgs e)
+    {
+        //testoricerca
+        string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
+        Session.Add("testoricerca", Server.HtmlEncode(txtSearchTop.Value)); //carico in sessione il parametro da cercare
+        Response.Redirect(link);
+    }
+    protected void btnsearch_Click(object sender, EventArgs e)
+    {
+        //testoricerca
+        string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
+        Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
+        Response.Redirect(link);
+    }
+    protected void btnUsatoCerca_Click(object sender, EventArgs e)
+    {
+        Session["Caratteristica1"] = ddlCaratteristica1.SelectedValue;
+        Session["Caratteristica2"] = ddlCaratteristica2.SelectedValue;
+        Session["Caratteristica3"] = ddlCaratteristica3.SelectedValue;
+        Session["Caratteristica4"] = ddlCaratteristica4.SelectedValue;
+        Session["FasciaPrezzo"] = ddlFascePrezzo.SelectedValue;
+        Session["Vetrina"] = chkPromo.Checked;
+        Session["Ordinamento"] = ddlOrdinamento.SelectedValue;
+        //  Response.Redirect(references.ResMan("Common",Lingua,"linkUsato);
+    }
+    public void CaricaDdlOrdinamento(string value = "")
+    {
+        //string tipi = references.ResMan("Common",Lingua,"listaServizi;
+        Dictionary<string, string> dict = new Dictionary<string, string>();
+        //string[] tipiarray = tipi.Split(',');
+        //foreach (string s in tipiarray)
+        //{
+        //    dict.Add(s, s);
+        //}
+        dict.Add(references.ResMan("Common", Lingua, "FormOrdinamento"), "");
+        dict.Add("Data Inserimento", "DataInserimento");
+        dict.Add("Prezzo", "Prezzo");
+        dict.Add("Data Immatricolazione", "Data1");
+
+        ddlOrdinamento.Items.Clear();
+        //ddlOrdinamento.AppendDataBoundItems = true;
+        //ddlOrdinamento.Items.Insert(0, references.ResMan("Common",Lingua,"FormOrdinamento.ToString());
+        //ddlOrdinamento.Items[0].Value = "";
+        ddlOrdinamento.DataSource = dict;
+        ddlOrdinamento.DataTextField = "Key";
+        ddlOrdinamento.DataValueField = "Value";
+        ddlOrdinamento.DataBind();
+        try
+        {
+
+            ddlOrdinamento.SelectedValue = value;
+        }
+        catch
+        { }
+
+
+
+    }
+    public void CaricaDatiDdlCaratteristiche(string Lingua = "I", string p1 = "0", string p2 = "0", string p3 = "0", string p4 = "0", string fasciaprezzo = "0", bool promozioni = false)
+    {
+
+        //Riempio la ddl 
+        List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+        ddlCaratteristica1.Items.Clear();
+        ddlCaratteristica1.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica1"));
+        ddlCaratteristica1.Items[0].Value = "0";
+        ddlCaratteristica1.DataSource = Car1;
+        ddlCaratteristica1.DataTextField = "Campo1";
+        ddlCaratteristica1.DataValueField = "Codice";
+        ddlCaratteristica1.DataBind();
+        try
+        {
+            ddlCaratteristica1.SelectedValue = p1.ToString();
+        }
+        catch { }
+
+
+        //Riempio la ddl  ( collegandola alla caratteristica 1 )
+        List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Campo2 == p1.ToString(); });
+        ddlCaratteristica2.Items.Clear();
+        ddlCaratteristica2.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica2"));
+        ddlCaratteristica2.Items[0].Value = "0";
+        ddlCaratteristica2.DataSource = Car2;
+        ddlCaratteristica2.DataTextField = "Campo1";
+        ddlCaratteristica2.DataValueField = "Codice";
+        ddlCaratteristica2.DataBind();
+        try
+        {
+            ddlCaratteristica2.SelectedValue = p2.ToString();
+        }
+        catch { }
+
+
+        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+        ddlCaratteristica3.Items.Clear();
+        ddlCaratteristica3.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica3"));
+        ddlCaratteristica3.Items[0].Value = "0";
+        ddlCaratteristica3.DataSource = Car3;
+        ddlCaratteristica3.DataTextField = "Campo1";
+        ddlCaratteristica3.DataValueField = "Codice";
+        ddlCaratteristica3.DataBind();
+        try
+        {
+            ddlCaratteristica3.SelectedValue = p3.ToString();
+        }
+        catch { }
+
+
+        //Riempio la ddl  
+        List<Tabrif> Car4 = Utility.Caratteristiche[3].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+        ddlCaratteristica4.Items.Clear();
+        ddlCaratteristica4.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica4"));
+        ddlCaratteristica4.Items[0].Value = "0";
+        ddlCaratteristica4.DataSource = Car4;
+        ddlCaratteristica4.DataTextField = "Campo1";
+        ddlCaratteristica4.DataValueField = "Codice";
+        ddlCaratteristica4.DataBind();
+        try
+        {
+            ddlCaratteristica4.SelectedValue = p4.ToString();
+        }
+        catch { }
+
+
+        List<Fascediprezzo> prezzi = Utility.Fascediprezzo.FindAll(fp => fp.Lingua == Lingua && fp.CodiceTipologiaCollegata == "rif000100");
+        ddlFascePrezzo.Items.Clear();
+        ddlFascePrezzo.Items.Insert(0, references.ResMan("Common", Lingua, "SelezionePrezzo"));
+        ddlFascePrezzo.Items[0].Value = "0";
+        ddlFascePrezzo.DataSource = prezzi;
+        ddlFascePrezzo.DataTextField = "Descrizione";
+        ddlFascePrezzo.DataValueField = "Codice";
+        ddlFascePrezzo.DataBind();
+        try
+        {
+            ddlFascePrezzo.SelectedValue = fasciaprezzo;
+        }
+        catch { }
+
+        chkPromo.Checked = promozioni;
+    }
+    protected void ddlCaratteristica1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);
+    }
+
+    #region FUNZIONI GESTIONE ECOMMERCE
+
+    public void VisualizzaTotaliCarrello()
+    {
+
+        string sessionid = "";
+        string trueIP = "";
+        CommonPage.CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
+
+        eCommerceDM ecmDM = new eCommerceDM();
+        CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
+        double totalecarrello = CommonPage.CalcolaTotaleCarrello(Request, Session, carrello);
+        //if (totalecarrello == 0) divCart.Visible = false;
+        litTotalHigh.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { totalecarrello }) + " €";
+    }
+    #endregion
 
 
 #if false
@@ -1293,6 +1462,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     } 
 #endif
+#if false
+
     public void CaricaBannersFascia(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua)
     {
 
@@ -1419,15 +1590,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //else
         //    destinationliteral.Parent.Visible = false;
     }
-    protected bool ControlloVisibilita(object fotos)
-    {
-        bool ret = true;
-        if (fotos == null || ((AllegatiCollection)fotos).Count <= 0) ret = false;
-        bool onlypdf = (fotos != null && ((AllegatiCollection)fotos).Count > 0 && !((AllegatiCollection)fotos).Exists(c => (c.NomeFile.ToString().ToLower().EndsWith("jpg") || c.NomeFile.ToString().ToLower().EndsWith("gif") || c.NomeFile.ToString().ToLower().EndsWith("png"))));
-        if (onlypdf) ret = false;
-        return ret;
-    }
-    public void CaricaContenutiPortfolioRival(string tipologiadacaricare, Literal destinationliteral, string Lingua, string numerodacaricare = "6", List<Offerte> passedlist = null)
+
+
+
+      public void CaricaContenutiPortfolioRival(string tipologiadacaricare, Literal destinationliteral, string Lingua, string numerodacaricare = "6", List<Offerte> passedlist = null)
     {
 
         offerteDM offDM = new offerteDM();
@@ -2001,7 +2167,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         else
             destinationliteral.Parent.Visible = false;
     }
-
     public void CaricaVideoSection(string Tbl_sezione, int maxwidth, int maxheight, string filtrosezione, bool mescola, Literal destinationliteral, string Lingua, string tipo = "module")
     {
 
@@ -2148,158 +2313,5 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         }
     }
-    protected void btnsearch_Click(object sender, EventArgs e)
-    {
-        //testoricerca
-        string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
-    protected void btnUsatoCerca_Click(object sender, EventArgs e)
-    {
-        Session["Caratteristica1"] = ddlCaratteristica1.SelectedValue;
-        Session["Caratteristica2"] = ddlCaratteristica2.SelectedValue;
-        Session["Caratteristica3"] = ddlCaratteristica3.SelectedValue;
-        Session["Caratteristica4"] = ddlCaratteristica4.SelectedValue;
-        Session["FasciaPrezzo"] = ddlFascePrezzo.SelectedValue;
-        Session["Vetrina"] = chkPromo.Checked;
-        Session["Ordinamento"] = ddlOrdinamento.SelectedValue;
-        //  Response.Redirect(references.ResMan("Common",Lingua,"linkUsato);
-    }
-    public void CaricaDdlOrdinamento(string value = "")
-    {
-        //string tipi = references.ResMan("Common",Lingua,"listaServizi;
-        Dictionary<string, string> dict = new Dictionary<string, string>();
-        //string[] tipiarray = tipi.Split(',');
-        //foreach (string s in tipiarray)
-        //{
-        //    dict.Add(s, s);
-        //}
-        dict.Add(references.ResMan("Common", Lingua, "FormOrdinamento"), "");
-        dict.Add("Data Inserimento", "DataInserimento");
-        dict.Add("Prezzo", "Prezzo");
-        dict.Add("Data Immatricolazione", "Data1");
-
-        ddlOrdinamento.Items.Clear();
-        //ddlOrdinamento.AppendDataBoundItems = true;
-        //ddlOrdinamento.Items.Insert(0, references.ResMan("Common",Lingua,"FormOrdinamento.ToString());
-        //ddlOrdinamento.Items[0].Value = "";
-        ddlOrdinamento.DataSource = dict;
-        ddlOrdinamento.DataTextField = "Key";
-        ddlOrdinamento.DataValueField = "Value";
-        ddlOrdinamento.DataBind();
-        try
-        {
-
-            ddlOrdinamento.SelectedValue = value;
-        }
-        catch
-        { }
-
-
-
-    }
-    public void CaricaDatiDdlCaratteristiche(string Lingua = "I", string p1 = "0", string p2 = "0", string p3 = "0", string p4 = "0", string fasciaprezzo = "0", bool promozioni = false)
-    {
-
-        //Riempio la ddl 
-        List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica1.Items.Clear();
-        ddlCaratteristica1.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica1"));
-        ddlCaratteristica1.Items[0].Value = "0";
-        ddlCaratteristica1.DataSource = Car1;
-        ddlCaratteristica1.DataTextField = "Campo1";
-        ddlCaratteristica1.DataValueField = "Codice";
-        ddlCaratteristica1.DataBind();
-        try
-        {
-            ddlCaratteristica1.SelectedValue = p1.ToString();
-        }
-        catch { }
-
-
-        //Riempio la ddl  ( collegandola alla caratteristica 1 )
-        List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Campo2 == p1.ToString(); });
-        ddlCaratteristica2.Items.Clear();
-        ddlCaratteristica2.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica2"));
-        ddlCaratteristica2.Items[0].Value = "0";
-        ddlCaratteristica2.DataSource = Car2;
-        ddlCaratteristica2.DataTextField = "Campo1";
-        ddlCaratteristica2.DataValueField = "Codice";
-        ddlCaratteristica2.DataBind();
-        try
-        {
-            ddlCaratteristica2.SelectedValue = p2.ToString();
-        }
-        catch { }
-
-
-        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica3.Items.Clear();
-        ddlCaratteristica3.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica3"));
-        ddlCaratteristica3.Items[0].Value = "0";
-        ddlCaratteristica3.DataSource = Car3;
-        ddlCaratteristica3.DataTextField = "Campo1";
-        ddlCaratteristica3.DataValueField = "Codice";
-        ddlCaratteristica3.DataBind();
-        try
-        {
-            ddlCaratteristica3.SelectedValue = p3.ToString();
-        }
-        catch { }
-
-
-        //Riempio la ddl  
-        List<Tabrif> Car4 = Utility.Caratteristiche[3].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica4.Items.Clear();
-        ddlCaratteristica4.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica4"));
-        ddlCaratteristica4.Items[0].Value = "0";
-        ddlCaratteristica4.DataSource = Car4;
-        ddlCaratteristica4.DataTextField = "Campo1";
-        ddlCaratteristica4.DataValueField = "Codice";
-        ddlCaratteristica4.DataBind();
-        try
-        {
-            ddlCaratteristica4.SelectedValue = p4.ToString();
-        }
-        catch { }
-
-
-        List<Fascediprezzo> prezzi = Utility.Fascediprezzo.FindAll(fp => fp.Lingua == Lingua && fp.CodiceTipologiaCollegata == "rif000100");
-        ddlFascePrezzo.Items.Clear();
-        ddlFascePrezzo.Items.Insert(0, references.ResMan("Common", Lingua, "SelezionePrezzo"));
-        ddlFascePrezzo.Items[0].Value = "0";
-        ddlFascePrezzo.DataSource = prezzi;
-        ddlFascePrezzo.DataTextField = "Descrizione";
-        ddlFascePrezzo.DataValueField = "Codice";
-        ddlFascePrezzo.DataBind();
-        try
-        {
-            ddlFascePrezzo.SelectedValue = fasciaprezzo;
-        }
-        catch { }
-
-        chkPromo.Checked = promozioni;
-    }
-    protected void ddlCaratteristica1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);
-    }
-
-    #region FUNZIONI GESTIONE ECOMMERCE
-
-    public void VisualizzaTotaliCarrello()
-    {
-
-        string sessionid = "";
-        string trueIP = "";
-        CommonPage.CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
-
-        eCommerceDM ecmDM = new eCommerceDM();
-        CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
-        double totalecarrello = CommonPage.CalcolaTotaleCarrello(Request, Session, carrello);
-        //if (totalecarrello == 0) divCart.Visible = false;
-        litTotalHigh.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { totalecarrello }) + " €";
-    }
-    #endregion
+#endif
 }

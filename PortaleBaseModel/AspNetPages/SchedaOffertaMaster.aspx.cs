@@ -99,7 +99,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                         Session["Tipologia"] = CodiceTipologia;
                     AssociaDatiSocial(item);
                 }
-
+                RegistraStatistichePagina();
                 //CaricaControlliJS();
                 SettaTestoIniziale();
                 SettaVisualizzazione(item);
@@ -117,7 +117,117 @@ public partial class _SchedaOffertaMaster : CommonPage
             output.Text = err.Message;
         }
     }
+#if false   //COdice da modificare per scorrimento schede di sezione!!!!
 
+    private void Memorizzaelenco()
+    {
+        ContenutiCollection list = conDM.CaricaContenutiPerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodiceContenuto, "1000", true, Sezione);
+        List<string> idList = new List<string>();
+        list.ForEach(delegate (Contenuti _c) { idList.Add(_c.Id.ToString()); });
+        Session.Add("idList", idList);
+        string idContenutoTmp = idContenuto;
+        //alinkPrev
+        if (list != null && ((List<string>)Session["idList"]).Count > 0)
+        {
+            int i = ((List<string>)Session["idList"]).FindIndex(delegate (string _id) { return _id == idContenuto; });
+            if (i > 0 && ((List<string>)Session["idList"]) != null)
+            {
+                idContenutoTmp = ((List<string>)Session["idList"])[i - 1];
+            }
+        }
+        string titololink = "";
+        Contenuti item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idContenutoTmp);
+        switch (Lingua)
+        {
+            case "GB":
+                titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceGB)) ? ConteggioCaratteri((item.TestoIndiceGB), 100) : ConteggioCaratteri((item.TitoloGB), 100);
+                //titololink = item.TitoloGB;
+                break;
+            default:
+                titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceI)) ? ConteggioCaratteri((item.TestoIndiceI), 100) : ConteggioCaratteri((item.TitoloI), 100);
+                //titololink = item.TitoloI;
+                break;
+        }
+        WelcomeLibrary.HtmlToText cv = new WelcomeLibrary.HtmlToText();
+        titololink = cv.Convert(Utility.ConteggioCaratteri(Utility.CleanUrl((titololink.Trim())), 100));
+        string linktogo = CreaLinkRoutes(CodiceContenuto, Sezione, idContenutoTmp, titololink, Lingua);
+        alinkPrev.HRef = linktogo;
+
+        if (Session["idList"] != null && ((List<string>)Session["idList"]).Count > 0)
+        {
+            int i = ((List<string>)Session["idList"]).FindIndex(delegate (string _id) { return _id == idContenuto; });
+            if (i < ((List<string>)Session["idList"]).Count - 1)
+            {
+                idContenutoTmp = ((List<string>)Session["idList"])[i + 1];
+            }
+        }
+        //AssociaDati();
+        //ScriptManager.RegisterStartupScript(this, Page.GetType(), "scriptScroll", "InizializzaScroll();", true);
+
+        titololink = "";
+        item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idContenutoTmp);
+        switch (Lingua)
+        {
+            case "GB":
+                titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceGB)) ? ConteggioCaratteri((item.TestoIndiceGB), 100) : ConteggioCaratteri((item.TitoloGB), 100);
+                //titololink = item.TitoloGB;
+                break;
+            default:
+                titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceI)) ? ConteggioCaratteri((item.TestoIndiceI), 100) : ConteggioCaratteri((item.TitoloI), 100);
+                //titololink = item.TitoloI;
+                break;
+        }
+        titololink = cv.Convert(Utility.ConteggioCaratteri(Utility.CleanUrl((titololink.Trim())), 100));
+        linktogo = CreaLinkRoutes(CodiceContenuto, Sezione, idContenutoTmp, titololink, Lingua);
+        alinkNext.HRef = linktogo;
+
+    } 
+#endif
+
+    private void RegistraStatistichePagina()
+    {
+
+        // throw new NotImplementedException();
+        string currenturl = Request.Url.ToString();
+        //////////////////////////////////////////////////////////////////////////////
+        //Prendiamo l'ip del client
+        /////////////////////////////////////////////////////////////////////////////
+        string trueIP = "";
+        string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+        if (!string.IsNullOrEmpty(ip))
+        {
+            string[] ipRange = ip.Split(',');
+            trueIP = ipRange[0].Trim();
+        }
+        else
+        {
+            trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
+        }
+
+        string id = idOfferta;
+        int _i = 0;
+        int.TryParse(id, out _i);
+        //  string codicecontenuto = CodiceContenuto;
+
+        bool visitaintiemlapse = WelcomeLibrary.DAL.statisticheDM.CaricaLastRecordStatisticaByIdcontenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta, System.DateTime.Now, new TimeSpan(0, 30, 0), trueIP);
+        if (!visitaintiemlapse)
+        {
+            //Verifichiamo nel timelapse se presente una richiesta di pagina per qual contenuto dallo stesso IP
+            //2 min lapse , ip address
+
+            //Registro la statistica di contatto
+            Statistiche stat = new Statistiche();
+            stat.Url = currenturl;
+            stat.Data = DateTime.Now;
+            stat.Idattivita = _i;
+
+            stat.EmailDestinatario = "";
+            stat.EmailMittente = "";
+            stat.Testomail = trueIP;
+            stat.TipoContatto = enumclass.TipoContatto.visitapagina.ToString();
+            WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
+        }
+    }
     public void CaricaControlliJS()
     {
         ClientScriptManager cs = Page.ClientScript;
@@ -255,12 +365,17 @@ public partial class _SchedaOffertaMaster : CommonPage
         switch (CodiceTipologia)
         {
             case "rif000002":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-12 col-sm-12";
                 column2.Attributes["class"] = "col-md-9 col-sm-9";
                 column3.Attributes["class"] = "col-md-3 col-sm-3";
+                column3.Visible = true;
+
                 divSearch.Visible = true;
+                ContaArticoliPerperiodo(CodiceTipologia);
+                Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = false;
-                ContaArticoliPerperiodo(CodiceTipologia);
                 divLatestPost.Visible = false;
                 if (!JavaInjection)
                 {
@@ -269,17 +384,30 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
                     //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
 
+                    //SUGGERITI
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = sb.ToString();
 
+                    sb.Clear();
+
+                    //ULTIMI ARTICOLI
+                    sb.Append("<div class=\"sfondo-contenitore\">");
+                    sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+                    sb.Append("</div>");
+                    placeholderlateral.Text = sb.ToString();
+                   
 
                     sb.Clear();
 
                     //BIND PER LA SCHEDA!!!!
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 
@@ -302,7 +430,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 if (!JavaInjection)
                 {
-             
+
 
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
@@ -343,7 +471,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsconcarrello.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 
@@ -425,7 +553,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 divSearch.Visible = true;
                 divLatestPost.Visible = true;
                 divContact.Visible = false;
-                AssociaRubricheConsigliati();
+                //AssociaRubricheConsigliati();
                 CaricaUltimiPost(CodiceTipologia, Categoria);
                 ContaArticoliPerperiodo(CodiceTipologia);
                 column1.Visible = false;
@@ -465,34 +593,56 @@ public partial class _SchedaOffertaMaster : CommonPage
         rtpLatestPost.DataSource = offerte;
         rtpLatestPost.DataBind();
     }
+
+    private void Caricalinksrubriche(string cattipo)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        divLinksrubriche.Visible = true;
+        sb.Append("<div id=\"divLinksrubrichecontainer\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
+        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("\"></div>");
+        divLinksrubriche.InnerHtml = (sb.ToString());
+        //ClientScriptManager cs = Page.ClientScript;
+        //sb.Clear();
+        //sb.Append("(function wait() {");
+        //sb.Append("  if (typeof injcCategorieLinks === \"function\")");
+        //sb.Append("    {");
+        //sb.Append("injcCategorieLinks('linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "','');");
+        //sb.Append(" }");
+        //sb.Append("   else  {");
+        //sb.Append("  setTimeout(wait, 50);");
+        //sb.Append("  }  })();");
+        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //{
+        //    cs.RegisterStartupScript(this.GetType(), "clistrubriche", sb.ToString(), true);
+        //}
+    }
+
     private void ContaArticoliPerperiodo(string cattipo)
     {
-        //offerteDM offDM = new offerteDM();
-        //Dictionary<string, Dictionary<string, string>> archivioperannomese = offDM.ContaPerAnnoMese(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, Tipologia, Categoria);
-        //rptArchivio.DataSource = archivioperannomese;
-        //rptArchivio.DataBind();
-        divArchivio.Visible = true;
-        //string controllist1 = "injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','');";
-
-        ClientScriptManager cs = Page.ClientScript;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Clear();
-        sb.Append("(function wait() {");
-        sb.Append("  if (typeof injectArchivioAndLoad === \"function\")");
-        sb.Append("    {");
-        sb.Append("injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','');");
-        sb.Append(" }");
-        sb.Append("   else  {");
-        sb.Append("  setTimeout(wait, 50);");
-        sb.Append("  }  })();");
+        divArchivio.Visible = true;
+        divLinksrubriche.Visible = true;
+        sb.Append("<div id=\"divArchivioList\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
+        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("\"></div>");
+        divArchivio.InnerHtml = (sb.ToString());
 
-        if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        {
-
-            cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
-
-        }
-
+        //ClientScriptManager cs = Page.ClientScript;
+        //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        //sb.Clear();
+        //sb.Append("(function wait() {");
+        //sb.Append("  if (typeof injectArchivioAndLoad === \"function\")");
+        //sb.Append("    {");
+        //sb.Append("injectArchivioAndLoad('listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "','');");
+        //sb.Append(" }");
+        //sb.Append("   else  {");
+        //sb.Append("  setTimeout(wait, 50);");
+        //sb.Append("  }  })();");
+        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
+        //{
+        //    cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
+        //}
     }
 
     protected void rptArchivioMesi_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -573,6 +723,7 @@ public partial class _SchedaOffertaMaster : CommonPage
     /// <summary>
     /// Articoli consigliati in base alla rubrica
     /// </summary>
+#if false
     protected void AssociaRubricheConsigliati(bool scrollerview = true)
     {
         OfferteCollection offerte = new OfferteCollection();
@@ -607,7 +758,8 @@ public partial class _SchedaOffertaMaster : CommonPage
 
 
 
-    }
+    } 
+#endif
     protected void AssociaRubricheRiferiteaid(string idcollegato)
     {
         OfferteCollection offerte = new OfferteCollection();
@@ -657,6 +809,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         //}
         
 #endif
+#if false
         if (CodiceTipologia == "rif000012")
         {
             column1.Visible = false;
@@ -677,12 +830,12 @@ public partial class _SchedaOffertaMaster : CommonPage
             divContenutiGallery.Visible = true;
             Master.CaricaContenutiPortfolioRivalSubtext(CodiceTipologia, litGalleryDetails, Lingua, "", offertelist, "noborder");
 
-        }
-        else
-        {
-            rptOfferta.DataSource = offerte;
-            rptOfferta.DataBind();
-        }
+        } 
+#endif
+
+        rptOfferta.DataSource = offerte;
+        rptOfferta.DataBind();
+
         //UserPanel.Update();
     }
 

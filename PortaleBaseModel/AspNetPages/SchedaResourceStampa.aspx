@@ -34,7 +34,7 @@
 
         /* H1&H3  for page titles */
         h1, h2, h3, h4, h5, h6 {
-            font-family: "Roboto", sans-serif;
+            font-family: "Raleway", sans-serif;
             margin: 0 0 15px 0;
             font-weight: 300;
             color: #4b4b4b;

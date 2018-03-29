@@ -469,7 +469,7 @@ License: http://codecanyon.net/licenses
 
 /* 14 - MOBILE MODE (RESPONSIVE MODE)
 ======================================*/
-@media (max-width: 768px) {
+@media (max-width: 1179px) {
     /* Responsive menu container */
     .menuzord-responsive.menuzord {
         padding: 0;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AreaContenuti/MasterPage.master" AutoEventWireup="true" CodeFile="GestioneOfferte.aspx.cs" Inherits="AreaContenuti_Default3" MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AreaContenuti/MasterPage.master" AutoEventWireup="true" CodeFile="GestioneOfferte.aspx.cs" Inherits="AreaContenuti_Default3" MaintainScrollPositionOnPostback="true" ValidateRequest="false" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
@@ -27,6 +27,50 @@
             __doPostBack('aggiornatettaglio', '');
         }
 
+        $(function () {
+            tinymceinit();
+        });
+        function tinymceinit() {
+            tinymce.init({
+                mode: "textareas",
+                editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
+                extended_valid_elements: 'button[class|onclick|style|type|id|name],input[class|onclick|style|type|value|id|name|placeholder]',
+                theme: "modern",
+                convert_urls: false,
+                relative_urls: false,
+                forced_root_block: false,
+                verify_html: false,
+                allow_html_in_named_anchor: true,
+                valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style],+body[script]",
+                plugins: [
+                    "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                    "save table directionality emoticons template paste textcolor"
+                ],
+                menubar: false,
+                toolbar_items_size: 'small',
+                toolbar: "insertfile undo redo cut copy paste pastetext | table | bold italic underline superscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink anchor | code fullpage | charmap fontsizeselect forecolor backcolor | mybutton",
+                setup: function (editor) {
+                    editor.addButton('mybutton', {
+                        text: 'Test',
+                        icon: false,
+                        onclick: function () {
+                            editor.insertContent('Click Test Button');
+                        }
+                    });
+                },
+                style_formats: [
+                    { title: 'Bold text', inline: 'b' },
+                    { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+                    { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+                    { title: 'Example 1', inline: 'span', classes: 'example1' },
+                    { title: 'Example 2', inline: 'span', classes: 'example2' },
+                    { title: 'Table styles' },
+                    { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+                ]
+            });
+        }
+
     </script>
     <input type="hidden" id="hidIdselected" runat="server" clientidmode="static" />
     <input type="hidden" id="hidTipologia" runat="server" clientidmode="static" />
@@ -36,7 +80,7 @@
     <div class="row" style="background-color: White; padding: 10px 10px 10px 10px">
         <div class="col-sm-5">
             <asp:HiddenField ID="cancelHidden" runat="server" Value="false" />
-            <span style="font-size:1.4rem;color:crimson">
+            <span style="font-size: 1.4rem; color: crimson">
                 <asp:Literal ID="output" runat="server"></asp:Literal></span>
             <div style="margin-bottom: 30px">
                 <h2>
@@ -53,8 +97,15 @@
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+                        <div class="col-sm-8">
+                            <asp:DropDownList Width="100%" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlSottoProdSearch"
+                                runat="server" OnSelectedIndexChanged="ddlSottoProdSearch_SelectedIndexChange" />
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
                         <div class="col-sm-4">
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtinputmese" />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputmese" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" TargetControlID="txtinputmese"
                                 runat="server" WatermarkText="mese">
                             </Ajax:TextBoxWatermarkExtender>
@@ -62,7 +113,7 @@
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
                         </div>
                         <div class="col-sm-4">
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtinputanno" />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputanno" />
                             <Ajax:FilteredTextBoxExtender ID="ftbe1" runat="server" TargetControlID="txtinputanno"
                                 FilterType="Custom, Numbers" ValidChars="0123456789" />
                             <Ajax:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" TargetControlID="txtinputanno"
@@ -83,6 +134,7 @@
                             <th>ID</th>
                             <th>Codice</th>
                             <th>Denominazione ITA</th>
+                            <th>Vedi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,10 +147,10 @@
                                             <i id="imgButton" runat="server" class="fa fa-search fa-2x"></i>
                                         </asp:LinkButton>
                                     </td>
-
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal>
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                                <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
                                         </div>
                                     </td>
                                     <td style="border: Solid 1px #ccc;">
@@ -113,6 +165,11 @@
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
                                             <asp:Literal ID="lit1" runat="server" Text='<%# Eval("DenominazioneI").ToString() %>'></asp:Literal>
+                                        </div>
+                                    </td>
+                                    <td style="border: Solid 1px #ccc;">
+                                        <div style="height: 50px; overflow-y: auto">
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
                                         </div>
                                     </td>
                                     <%--<td style="border: Solid 1px Black;">
@@ -134,10 +191,10 @@
             <div style="margin-bottom: 30px">
                 <h2>Caricamento foto</h2>
 
-                 <script type="text/javascript">
-                     $(document).ready(function () {
-                         startDropZone();
-                     });
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        startDropZone();
+                    });
 
                 </script>
                 <div style="overflow-y: auto; height: 370px; width: 600px">
@@ -170,11 +227,13 @@
                             <div>
                                 <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default btn-sm" runat="server" />
                                 <br />
-                                Descrizione  <br />
-                                <asp:TextBox CssClass="mceNoEditor form-control"  runat="server" ID="txtDescrizione" />
+                                Descrizione 
                                 <br />
-                                Progressivo <br />
-                                <asp:TextBox CssClass="mceNoEditor form-control"  runat="server" ID="txtProgressivo" />
+                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtDescrizione" />
+                                <br />
+                                Progressivo
+                                <br />
+                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtProgressivo" />
                                 <br />
                                 <asp:Button ID="btnCarica" runat="server" CssClass="btn btn-primary btn-sm" Text="Carica Foto" OnClick="btnCarica_Click" />
                                 <asp:Button ID="btnModifica" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica Descrizione Foto" OnClick="btnModifica_Click" />
@@ -195,9 +254,10 @@
                                         <asp:Repeater runat="server" ID="rptImmagini">
                                             <ItemTemplate>
                                                 <li style="list-style: none; display: inline">
-                                                 <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
-                                                         <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
-                                                         Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# CommonPage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
+                                                    <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
+                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
+                                                         Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>'
+                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# CommonPage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
                                                 </li>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -287,6 +347,15 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label40" runat="server" Text="Autore" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:TextBox CssClass="mceNoEditor form-control" ReadOnly="true" ID="txtAutore" runat="server" value="" />
+                    </div>
+                </div>
+                <div class="row">
                     <hr />
                     <ul class="nav nav-pills" style="margin-left: 0;">
                         <li class="active"><a data-toggle="pill" href="#promoita">Italiano</a></li>
@@ -298,7 +367,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)"  /></strong>
+                                        <asp:Label ID="Label13" runat="server" Text="Meta Title(opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1I" runat="server"></asp:TextBox>
@@ -307,7 +376,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)"/></strong>
+                                        <asp:Label ID="Labelps1" runat="server" Text="Meta Description (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2I" runat="server"></asp:TextBox>
@@ -347,7 +416,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelpre" runat="server"  Text="Meta Title Eng (opzionale)"  /></strong>
+                                        <asp:Label ID="Labelpre" runat="server" Text="Meta Title Eng (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
@@ -452,6 +521,7 @@
                     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Insertvalidate" />
                     <hr />
                 </div>
+
                 <asp:Panel runat="server" ID="pnlIndirizzo0">
                     <div class="row">
                         <div class="col-sm-2 item-text">
@@ -486,7 +556,7 @@
 
                 <asp:Panel runat="server" ID="pnlIndirizzo1" Visible="false">
                     <div class="row" style="border: 1px solid White; margin: 1%; padding: 20px">
-                       <%-- <h3>Indirizzo 1</h3>
+                        <%-- <h3>Indirizzo 1</h3>
                         <div class="row" style="margin-bottom: 5px">
                             <div class="col-sm-4">
                                 <strong>Nome della posizione</strong>
@@ -557,7 +627,7 @@
                             </div>
                         </div>
 
-                      <%--  <div class="row" style="margin-bottom: 5px">
+                        <%--  <div class="row" style="margin-bottom: 5px">
                             <div class="col-sm-4">
                                 <strong>Via*</strong>
                             </div>
@@ -705,7 +775,7 @@
                             <asp:Label Width="30%" ID="Label38" runat="server" Text="Quantità disponibile" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="mceNoEditor"  Width="60%" ID="txtQta_vendita" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="mceNoEditor" Width="60%" ID="txtQta_vendita" runat="server"></asp:TextBox>
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtQta_vendita"
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
@@ -800,7 +870,7 @@
                             <asp:Label ID="Label31" runat="server" Text="Latitudite" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="mceNoEditor form-control"  ID="txtLatitudine1_dts" runat="server" value="" />
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtLatitudine1_dts" runat="server" value="" />
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtLatitudine1_dts"
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
@@ -811,7 +881,7 @@
                             <asp:Label ID="Label32" runat="server" Text="Longitudine" /></strong>
                     </div>
                     <div class="col-sm-10">
-                        <asp:TextBox CssClass="mceNoEditor form-control"  ID="txtLongitudine1_dts"  runat="server" value="" />
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="txtLongitudine1_dts" runat="server" value="" />
                         <Ajax:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" TargetControlID="txtLongitudine1_dts"
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
@@ -838,7 +908,7 @@
                                         <td>
                                             <div>
                                                 <h2>
-                                                  <%= references.ResMan("Common",Lingua,"TitleProdottiGest") %></h2>
+                                                    <%= references.ResMan("Common",Lingua,"TitleProdottiGest") %></h2>
                                             </div>
                                             <table cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -862,7 +932,6 @@
                                                 <tr>
                                                     <td>
                                                         <div style="height: 35px;">
-                                                           
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -871,7 +940,7 @@
                                                         <asp:Label runat="server" ID="NomeIta" Text="Nome 1 Livello Ita"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdIt" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdIt" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -879,7 +948,7 @@
                                                         <asp:Label runat="server" ID="NomeEng" Text="Nome 1 Livello Eng"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdEng" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdEng" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -887,7 +956,7 @@
                                                         <asp:Label runat="server" ID="NomeRu" Text="Nome 1 Livello Ru"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoProdRu" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdRu" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -904,7 +973,9 @@
                                         <td>
                                             <%-- Qui aggiungiamo le dll di selezione per la modifica del SottoProdotto--%>
                                             <div style="margin-left: 50px; border-left: 1px solid #000000; padding-left: 10px;">
-                                                <div><h2><%= references.ResMan("Common",Lingua,"TitleSottProdottiGest") %></h2></div>
+                                                <div>
+                                                    <h2><%= references.ResMan("Common",Lingua,"TitleSottProdottiGest") %></h2>
+                                                </div>
                                                 <table>
                                                     <tr>
                                                         <td style="width: 150px;">
@@ -940,7 +1011,7 @@
                                                             <asp:Label runat="server" ID="NomeSottIta" Text="Nome 2 Livello Ita"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottIt" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottIt" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -948,7 +1019,7 @@
                                                             <asp:Label runat="server" ID="NomeSottEng" Text="Nome 2 Livello Eng"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottEng" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottEng" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -956,7 +1027,7 @@
                                                             <asp:Label runat="server" ID="NomeSottRu" Text="Nome 2 Livello Ru"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="mceNoEditor"  ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -991,16 +1062,16 @@
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica1update">
                         </asp:DropDownList>
                         <br />
-                    
+
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
 
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire tipo (Italiano)" TargetControlID="txtCar1I">
                         </Ajax:TextBoxWatermarkExtender>
@@ -1018,13 +1089,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar2RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2RU" Text="" Width="300" /><br />
 
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire indice (Italiano)" TargetControlID="txtCar2I">
                         </Ajax:TextBoxWatermarkExtender>
@@ -1043,13 +1114,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar3I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar3GB">
@@ -1067,13 +1138,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar4RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender8" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar4I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender9" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar4GB">
@@ -1091,13 +1162,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5GB" Text="" Width="300" /><br />
                         Descrizione Russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar5RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender10" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar5I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender11" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar5GB">
@@ -1115,13 +1186,13 @@
                         </asp:DropDownList><br />
                         Descrizione italiano:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6I" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6I" Text="" Width="300" /><br />
                         Descrizione inglese:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6GB" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6GB" Text="" Width="300" /><br />
                         Descrizione russo:
                        
-                            <asp:TextBox CssClass="mceNoEditor"  runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender13" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar6GB">

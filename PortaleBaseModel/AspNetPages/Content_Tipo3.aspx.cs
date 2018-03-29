@@ -220,12 +220,12 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         switch (TipoContenuto)
         {
             case "Dovesiamo":
-                plhDove.Visible = true;
+                plhDove.Visible = false;
                 plhForm.Visible = false;
                 divRoutes.Visible = false;
                 break;
             case "Prenota":
-                plhDove.Visible = true;
+                plhDove.Visible = false;
                 plhForm.Visible = true;
                 pnlPrenotazione.Visible = true; //Sezione per completamento form prenotazione
                 divRoutes.Visible = false;
@@ -240,12 +240,12 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             //    CaricaDdlsedi("");
             //    break;
             case "Richiesta":
-                plhForm.Visible = true;
+                plhForm.Visible = false;
                 break;
             default:
                 plhForm.Visible = true;
-                plhDove.Visible = true;
-                divRoutes.Visible = true;
+                plhDove.Visible = false;
+                divRoutes.Visible = false;
                 break;
         }
 

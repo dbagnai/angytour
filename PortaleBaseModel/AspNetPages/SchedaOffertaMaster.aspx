@@ -6,13 +6,12 @@
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>--%>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-  
+
     <div class="row">
         <div class="col-md-1 col-sm-1">
         </div>
         <div class="col-md-10 col-sm-10 col-xs-12">
-            <h2 class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
-                <asp:Literal Text="" runat="server" ID="litSezione" /></h2>
+            <asp:Literal Text="" runat="server" ID="litSezione" />
         </div>
         <div class="col-md-1 col-sm-1">
         </div>
@@ -467,7 +466,9 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
-    <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px;">
+
+    <div class="row" style="padding-top: 10px; background-color: #fff" id="divSezioneSchedaContenuto">
+
         <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
@@ -555,9 +556,10 @@
                     </asp:Repeater>
 
                     <!--Blog Post-->
-                    <div class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
-                        <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
-                            <ItemTemplate>
+
+                    <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
+                        <ItemTemplate>
+                            <div class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
                                 <%-- <div class="pull-right" runat="server" id="div1" visible='<%# AttivaContatto(Eval("Abilitacontatto")) %>'>
                                 <a id="A2" runat="server" href='<%# "~/Aspnetpages/Content_Tipo3.aspx?idOfferta=" + Eval("Id").ToString() + "&TipoContenuto=Richiesta"  + "&Lingua=" + Lingua %>'
                                     target="_blank" title="" class="button btn-flat">
@@ -730,21 +732,15 @@
                                         </script>
                                     </asp:Panel>
                                 </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
 
-
-
-
-
-                    </div>
                     <%--    </ContentTemplate>
                 </asp:UpdatePanel>--%>
                 </div>
             </div>
-            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5996de41348587ec"></script>
-
+           <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
             <div runat="server" id="divSuggeriti" style="margin-bottom: 15px">
 
                 <div runat="server" visible="false" id="divScrollerSuggeriti" style="margin-top: 0px; margin-bottom: 0px">
@@ -845,24 +841,76 @@
             </div>
         </div>
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
-            <div class="sidebar">
+
+            <!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
+            <script type="text/javascript">
+                $(window).load(function () {
+                    var destraheight = $('<%="#" + column3.ClientID %>').outerHeight();
+                    var sinistraheight = $('<%="#" + column2.ClientID %>').outerHeight();
+                    if (sinistraheight > destraheight) {
+                        var sticky = new Waypoint.Sticky({
+                            element: $('.stickcolumn')[0]
+                        });
+                        $('#divSuggeritiContainer').waypoint(function (direction) {
+                            $('.stickcolumn').toggleClass('stuck', direction === 'up');
+                            $('.stickcolumn').toggleClass('sticky-surpassed', direction === 'down');
+                            var new_width = $('.sticky-wrapper').width();
+                            $('.stickcolumn').width(new_width);
+                        }, {
+                                offset: function () {
+                                    return ($('.stickcolumn').outerHeight() + 170);
+                                }
+                            });
+                    }
+                });
+            </script>
+            <style>
+                @media (min-width: 768px) {
+                    .sticky-wrapper {
+                        width: 100%;
+                    }
+
+                    .stuck {
+                        position: fixed;
+                        top: 170px;
+                    }
+
+                    .sticky-surpassed {
+                        position: absolute;
+                        bottom: 0;
+                    }
+                }
+            </style>
+            <!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
+
+            <%--<div class="affix affixfinder">--%>
+            <div class="stickcolumn">
                 <!-- Sidebar Block -->
-                <div class="sidebar-block" runat="server" id="divSearch" visible="false">
+                <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
                         <div class="input-group">
                             <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                             <span class="input-group-addon">
-                                <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button icon-reload" runat="server" clientidmode="Static" />
+                                <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
                             </span>
                         </div>
                     </div>
                 </div>
                 <!-- Sidebar Block -->
-                <div class="sidebar-block" runat="server" id="divContact" visible="true">
+                <div style="max-width: 350px; margin: 10px auto" runat="server" id="divLinksrubriche" visible="false">
+                </div>
+                <div style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
+                </div>
+                <asp:Literal Text="" ID="placeholderlateral" runat="server" />
+                <asp:Literal Text="" ID="placeholderlateral1" runat="server" />
+                <asp:Literal Text="" ID="placeholderlateral2" runat="server" />
+                <asp:Literal Text="" ID="placeholderlateral3" runat="server" />
 
-                    <div class="sidebar-content">
 
 
+                <!-- Sidebar Block -->
+                <div runat="server" id="divContact" visible="true">
+                    <div>
                         <div class="ui-15">
                             <div class="ui-content">
                                 <div class="container-fluid">
@@ -917,7 +965,7 @@
                     </div>
                 </div>
                 <!-- Sidebar Block -->
-                <div class="sidebar-block" id="divCategorie" runat="server" visible="false">
+                <div id="divCategorie" runat="server" visible="false">
                     <h3 class="h3-sidebar-title sidebar-title">Categorie
                     </h3>
                     <div class="sidebar-content">
@@ -959,7 +1007,7 @@
                 </div>
                 <div id="divLatestpostContainer"></div>
                 <div id="divLatestpostContainerPager"></div>
-                <div class="sidebar-block" runat="server" id="divLatestPost" visible="false">
+                <div runat="server" id="divLatestPost" visible="false">
                     <h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common", Lingua,"TestoPanel1") %>
                     </h3>
                     <div class="sidebar-content">
@@ -1006,37 +1054,13 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Sidebar Block -->
-                <div class="sidebar-block" runat="server" id="divArchivio" visible="false">
-                    <%--<h3 class="h3-sidebar-title sidebar-title"><%= references.ResMan("Common", Lingua,"TestoArchivio") %>
-                    </h3>--%>
-                    <div class="sidebar-content" style="overflow-y: auto" id="divArchivioList">
-
-                        <%--<asp:Repeater ID="rptArchivio" runat="server">
-                            <ItemTemplate>
-                                <ul class="posts-list" id="ulAnno" runat="server" title='<%# Eval("Key").ToString() %>'>
-                                    <asp:Repeater ID="rptArchivioMesi" runat="server" DataSource='<%# Eval("Value") %>'
-                                        OnItemDataBound="rptArchivioMesi_ItemDataBound">
-                                        <ItemTemplate>
-                                            <li style="border-top: 1px dotted #e5e5e5; margin-top: 10px; padding-top: 10px">
-                                                <i class="fa fa-check color-green"></i>
-                                                <a id="alink" runat="server" href="#" target="_self">(<asp:Literal ID="NumeroElementi"
-                                                    runat="server" Text='<%# Eval("Value").ToString() %>'></asp:Literal>)</a>
-                                            </li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </ul>
-                            </ItemTemplate>
-                        </asp:Repeater>--%>
-                    </div>
-                </div>
 
             </div>
+            <%--</div>--%>
         </div>
-
     </div>
 
-    <%--   <div class="row">
+    <%-- <div class="row">
             <div id="fb-root"></div>
             <script type="text/javascript">
                 (function (d, s, id) {
@@ -1119,7 +1143,7 @@
     </div>
 
 
-    <div style="background-color: #ccc;">
+    <div style="background-color: #ccc; position: relative" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 25px; padding-right: 25px;">
             <div class="row">
                 <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">

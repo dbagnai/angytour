@@ -169,10 +169,10 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         }
         //cliColl.Sort(new GenericComparer2<Cliente>("Cognome", System.ComponentModel.ListSortDirection.Ascending, "Nome", System.ComponentModel.ListSortDirection.Ascending));
 
-      //  output.Text += "row returned : " + cliColl.Count +  " total row found:" + cliColl.Totrecs;
+        //  output.Text += "row returned : " + cliColl.Count +  " total row found:" + cliColl.Totrecs;
 
         long nrecordfiltrati = cliColl.Totrecs;
-        PagerRisultati.TotalRecords = (long)cliColl.Totrecs; 
+        PagerRisultati.TotalRecords = (long)cliColl.Totrecs;
         if (nrecordfiltrati == 0) PagerRisultati.CurrentPage = 1;
 
 
@@ -352,7 +352,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
             {
                 string password = "";
                 username = idcliente + "-" + cli.Email;
-                USM.CreaUtente(idcliente.ToString(), ref username, ref password, "Commerciale");
+                //USM.CreaUtente(idcliente.ToString(), ref username, ref password, "Commerciale");
+                USM.CreaUtente(idcliente.ToString(), ref username, ref password, "Autore");
                 outrow.Text = password;
                 Literal litUserdata = ((Literal)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("litUserdata")));
                 litUserdata.Text = username;

@@ -18,12 +18,12 @@ function InjectPagerPortfolio(pagercontainer, controlid) {
     });
 }
 
-function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
+function injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) {
     //setTimeout(function () {
-        loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, lng);
+    loadref(injectPortfolioAndLoadinner, type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed, lng);
     //}, 100);
 }
-function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv) {
+function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) {
 
     //   console.log('injectPortfolioAndLoadinner' + container);
     var templateHtml = pathAbs + "/lib/template/" + "isotopeOfferte.html";
@@ -39,7 +39,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
         });
-       // InitIsotopeLocal(controlid);
+        // InitIsotopeLocal(controlid);
 
         //RICARICO LA PAGINA DALLA SESISONE SE PRESENTE
 
@@ -77,6 +77,7 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
             params.testoricerca = testoricerca;
             params.vetrina = vetrina;
             params.promozioni = promozioni;
+            params.mostviewed = mostviewed;
             //params.regione = regione; //Preso da sessione
             //params.caratteristica1 = caratteristica1;//Preso da sessione
             globalObject[controlid + "params"] = params;
@@ -134,6 +135,13 @@ function CaricaIsotopeData(controlid) {
             var localObjects = {};
 
             try {
+
+                // caso particolare in cui potrei sommare i risultati precedenti in memoria q quelli ritornati per avere la modalità VISUALIZZA ALTRI in aggiunta ai presenti
+              //  if (enablepager=='skip') 
+                //{
+                //    globalObject[controlid + "prevparseddata"]
+                //    globalObject[controlid + "prevparseddatalink"]
+                //}
                 var parseddata = JSON.parse(result);
 
                 var temp = parseddata["resultinfo"];
@@ -141,6 +149,8 @@ function CaricaIsotopeData(controlid) {
                 var totalrecords = localObjects["resultinfo"].totalrecords;
                 globalObject[controlid + "pagerdata"].totalrecords = totalrecords;
 
+                //globalObject[controlid + "prevparseddata"] <-- parseddata["data"]; // da testare
+                 
                 var data = "{ \"datalist\":" + parseddata["data"];
                 data += "}";
                 localObjects["dataloaded"] = data;
@@ -149,6 +159,9 @@ function CaricaIsotopeData(controlid) {
                 //Inserisco i valori nella memoria generale che contiene i valori per tutti i componenti
                 // globalObject[controlid] = localObjects;
                 localObjects["linkloaded"] = JSON.parse(datalink);
+
+                //globalObject[controlid + "prevparseddatalink"] <-- localObjects["linkloaded"];  // datestare
+
                 callafterfilter(localObjects, controlid);
 
             }

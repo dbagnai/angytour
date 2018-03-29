@@ -250,6 +250,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
+          
 #endif
             #endregion
 
@@ -258,7 +259,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             {
                 rptOfferte.DataSource = offerte;
                 rptOfferte.DataBind();
-                output.Text = "Nessuna struttura trovata per le selezioni fatte";
+                output.Text = "Nessun valore trovato per le selezioni fatte";
                 return;
             }
             //offerte.Sort(new GenericComparer<Offerte>("DataInserimento", System.ComponentModel.ListSortDirection.Descending));

@@ -9,8 +9,11 @@ namespace WelcomeLibrary.DOM
     {
 
 
-
-
+        public string Autorenome
+        {
+            get =>
+          (!string.IsNullOrEmpty(_Autore.Trim())) ? UF.usermanager.getFullNameFromStatic(_Autore.Trim()) : "";
+        }
 
         private long _Id;
         public long Id
@@ -25,8 +28,6 @@ namespace WelcomeLibrary.DOM
             get { return _Id_collegato; }
             set { _Id_collegato = value; }
         }
-
-
 
         private string _CodiceTipologia;
         public string CodiceTipologia
