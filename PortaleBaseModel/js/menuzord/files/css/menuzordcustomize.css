@@ -413,11 +413,10 @@
     line-height: 1.55;
     max-width: 180px;
     padding: 0px;
-   
     float: none;
-    position: absolute; 
-     margin: 0px !important;
-        left: 0px;
+    position: absolute;
+    margin: 0px !important;
+    left: 0px;
     top: 0px;
 }
 
@@ -456,9 +455,10 @@
         margin-left: calc(100% - 170px);
     }
 
+
     .shrinklogo {
-        width: 100%;
-        height: auto;
+        width: 206px;
+        height: 61px;
     }
 
     .menuzord-menu > li {
@@ -504,7 +504,7 @@
         position: absolute;
         /*margin: 0px 35% !important;*/
         /*left: 0px;*/
-        margin-top:0px;
+        margin-top: 0px;
         margin-left: -103px !important;
         left: 50%;
         top: 0px;

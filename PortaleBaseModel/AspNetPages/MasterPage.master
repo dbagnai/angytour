@@ -40,22 +40,8 @@
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111863124-11"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-111863124-11');
-</script>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-9028735285166707",
-            enable_page_level_ads: true
-        });
-    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -741,6 +727,7 @@
         <script>
             pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
             initLingua('<%= Lingua %>');
+            var makeRevLower = false;
                                    <%-- loadref(initLingua, '<%= Lingua %>');--%>
             jQuery(document).ready(function () {
                 loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
@@ -806,35 +793,8 @@
         <div class="loader" style="display: none">
             <div class="spinner"></div>
         </div>
-
-        <!-- fine div disp_form_cont -->
-        <script type="text/javascript">
-            var makeRevLower = false;
-            /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
-            !function (cash) { //ensure $ always references jQuery
-                $(function () { //when dom has finished loading
-                    //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
-                    function fixHeader() {
-                        //for each element that is classed as 'pull-down'
-                        //reset margin-top for all pull down items
-                        $('.pull-down').each(function () {
-                            $(this).css('margin-top', 0);
-                        });
-
-                        //set its margin-top to the difference between its own height and the height of its parent
-                        $('.pull-down').each(function () {
-                            if ($(window).innerWidth() >= 991) {
-                                $(this).css('margin-top', $(this).parent().height() - $(this).height());
-                            }
-                        });
-                    }
-                    $(window).resize(function () {
-                        fixHeader();
-                    });
-                    fixHeader();
-                });
-            }(window.jQuery);
-        </script>
+         rm_cont -->
+        
         <!-- Wrapper end -->
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
