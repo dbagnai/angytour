@@ -7,6 +7,7 @@ html {
     -ms-text-size-adjust: 100%;
     font-size: 0.9em;
     font-weight: 400;
+            line-height: 23px;
 }
 
 body,
@@ -19,6 +20,7 @@ textarea {
     font-size: 1em;
     background-color: transparent;
     color: #555;
+        line-height: 23px;
 }
 
 .bckGray {
@@ -85,9 +87,11 @@ a.active {
 }
 
 .body-wrapper {
-    padding-top: 5px;
-    padding-bottom: 0px;
-    overflow-y: hidden;
+    padding:0px 15px;
+    position: relative;
+    z-index: 0;
+    width:100%;
+    /*overflow-x:hidden;*/
 }
 
 input.inputnoback,
@@ -1581,7 +1585,7 @@ Portfolio
 .work-div {
     background-color: #fff;
     position: relative;
-    margin: 5px;
+    margin: 0px 0px 15px 15px;
     /*Questo setta lo spazio tra gli items*/
     padding: 0px 0px 30px 0px;
     /*background-color: rgba(200,200,200,0.05);*/
@@ -1597,7 +1601,7 @@ Portfolio
 
     .work-div:hover {
         position: relative;
-        margin: 5px;
+   margin: 0px 0px 15px 15px;
         /*Questo setta lo spazio tra gli items*/
         padding: 0px 0px 30px 0px;
         -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.6);
@@ -2733,7 +2737,7 @@ ol.flex-control-thumbs li {
 }
 
 .blog-post {
-    padding: 15px;
+    padding: 0px;
     background-color: #fff;
     border: 2px solid #eee;
     border-radius: 6px;

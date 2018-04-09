@@ -625,7 +625,12 @@
                                                     <span class="menu-text">Banner area BLog</span></a>
                                                 <b class="arrow"></b>
                                             </li>--%>
-
+                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner area Notizie</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog1">
                                                     <i class="menu-icon fa fa-caret-right"></i>

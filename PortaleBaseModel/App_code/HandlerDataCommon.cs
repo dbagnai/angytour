@@ -906,14 +906,26 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua, null, "", false, page, pagesize);
             int lmaxrecords = 0;
             int.TryParse(maxrecords, out lmaxrecords);
-            if (lmaxrecords != 0)
-                offerte = new OfferteCollection(offerte.GetRange(0, Math.Min(offerte.Count, lmaxrecords)));
+            if (offerte != null && lmaxrecords != 0)
+            {
+                long nget = Math.Min(offerte.Count, lmaxrecords);
+                OfferteCollection tmpoffselect = new OfferteCollection();
+                for (int conta = 0; conta < nget; conta++)
+                {
+                    tmpoffselect.Add(offerte[conta]);
+                }
+                offerte = tmpoffselect;
+                //if (lmaxrecords != 0)
+                //    offerte = new OfferteCollection(offerte.GetRange(0, Math.Min(offerte.Count, lmaxrecords)));
+            }
+
         }
         else
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "");
         //}
         //else
         //    offerte = filtri[4];
+ 
 
 #if false
         /*Old paging method*/
@@ -975,21 +987,23 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             {
                 case "GB":
                     testotitolo = _o.DenominazioneGB;
-                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneGB, 6000, true));
-                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciGB, 6000, true));
+                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneGB, 30000, true));
+                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciGB, 30000, true));
                     break;
                 default:
                     testotitolo = _o.DenominazioneI;
-                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneI, 6000, true));
-                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciI, 6000, true));
+                    descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizioneI, 30000, true));
+                    datitecnici = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DatitecniciI, 30000, true));
                     break;
             }
 
             string linksezione = "";
             SProdotto sottocategoria = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto _tmp) { return (_tmp.Lingua == lingua && (_tmp.CodiceSProdotto == _o.CodiceCategoria2Liv)); });
             if (sottocategoria != null)
+            {
                 linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
-            linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+                linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+            }
 
             string pathimmagine = ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -1143,11 +1157,15 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     }
                 }
-                tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
-                tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));
-                tmp.Add("imagesratio", Newtonsoft.Json.JsonConvert.SerializeObject(imagesratio));
-                tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
-                tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
+
+                if (!_o.Promozione)
+                {
+                    tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
+                    tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));
+                    tmp.Add("imagesratio", Newtonsoft.Json.JsonConvert.SerializeObject(imagesratio));
+                    tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
+                    tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
+                }
             }
             ////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -467,7 +467,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 
-    <div class="row" style="padding-top: 10px; background-color: #fff" id="divSezioneSchedaContenuto">
+    <div class="row" id="divSezioneSchedaContenuto">
 
         <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
         </div>
@@ -740,7 +740,8 @@
                 </asp:UpdatePanel>--%>
                 </div>
             </div>
-           <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
             <div runat="server" id="divSuggeriti" style="margin-bottom: 15px">
 
                 <div runat="server" visible="false" id="divScrollerSuggeriti" style="margin-top: 0px; margin-bottom: 0px">
@@ -841,55 +842,13 @@
             </div>
         </div>
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
-
-            <!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
-            <script type="text/javascript">
-                $(window).load(function () {
-                    var destraheight = $('<%="#" + column3.ClientID %>').outerHeight();
-                    var sinistraheight = $('<%="#" + column2.ClientID %>').outerHeight();
-                    if (sinistraheight > destraheight) {
-                        var sticky = new Waypoint.Sticky({
-                            element: $('.stickcolumn')[0]
-                        });
-                        $('#divSuggeritiContainer').waypoint(function (direction) {
-                            $('.stickcolumn').toggleClass('stuck', direction === 'up');
-                            $('.stickcolumn').toggleClass('sticky-surpassed', direction === 'down');
-                            var new_width = $('.sticky-wrapper').width();
-                            $('.stickcolumn').width(new_width);
-                        }, {
-                                offset: function () {
-                                    return ($('.stickcolumn').outerHeight() + 170);
-                                }
-                            });
-                    }
-                });
-            </script>
-            <style>
-                @media (min-width: 768px) {
-                    .sticky-wrapper {
-                        width: 100%;
-                    }
-
-                    .stuck {
-                        position: fixed;
-                        top: 170px;
-                    }
-
-                    .sticky-surpassed {
-                        position: absolute;
-                        bottom: 0;
-                    }
-                }
-            </style>
-            <!--STICKY comportamento per una colonna con limitazione collisione in basso a contenitore di stop-->
-
-            <%--<div class="affix affixfinder">--%>
-            <div class="stickcolumn">
+            <%--<div class="sticky-top" style="top: 120px" id="divColumnsticky">--%>
+            <div style="top: 120px" id="divColumnsticky">
                 <!-- Sidebar Block -->
                 <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
-                        <div class="input-group">
-                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
+                        <div class="input-group flex-nowrap">
+                            <input class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                             <span class="input-group-addon">
                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
                             </span>
@@ -905,8 +864,6 @@
                 <asp:Literal Text="" ID="placeholderlateral1" runat="server" />
                 <asp:Literal Text="" ID="placeholderlateral2" runat="server" />
                 <asp:Literal Text="" ID="placeholderlateral3" runat="server" />
-
-
 
                 <!-- Sidebar Block -->
                 <div runat="server" id="divContact" visible="true">
@@ -1056,7 +1013,6 @@
                 </div>
 
             </div>
-            <%--</div>--%>
         </div>
     </div>
 
@@ -1145,26 +1101,23 @@
 
     <div style="background-color: #ccc; position: relative" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 25px; padding-right: 25px;">
-            <div class="row">
-                <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="subtitle-block clearfix">
-                                <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
-                                    <div class="pull-left lead">
-                                        <h2 style="margin-bottom: 3px">
-                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                                        </h2>
-                                    </div>
+            <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="subtitle-block clearfix">
+                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
+                                <div class="pull-left lead">
+                                    <h2 style="margin-bottom: 3px">
+                                        <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
+                                        <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
             </div>
+            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
         </div>
     </div>
 </asp:Content>

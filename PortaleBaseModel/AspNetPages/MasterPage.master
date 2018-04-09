@@ -38,6 +38,17 @@
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111863124-11"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111863124-11');
+</script>
+
+
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -63,11 +74,12 @@
                 }
             });
         </script>
-             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <%-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
         <%--      <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap337/bootstrap.min.css") %>" />--%>
 
-      <%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-       
+        <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap400/css/bootstrap.min.css") %>" />
+
 
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/revolution_settings.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/menuzord.css")  %>" />
@@ -87,12 +99,12 @@
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/flexslider/flexslider.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
+        <%--        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54v1/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54-v2/style.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mobirise-icons/mobirise-icons.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icons-mind/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />--%>
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/et-line-font-plugin/style.css")  %> " />
         <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-faq.css" />
         <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-additional.css" />
@@ -107,20 +119,20 @@
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div style="padding-left: 40px; padding-right: 40px">
 
-                <div class="pull-right">
-                    <div class="input-group" style="width: 160px; padding: 3px">
-                        <input type="text" id="txtSearchTop" class="form-control" style="height: 24px" runat="server" placeholder="Cerca ....">
-                        <span class="input-group-addon" style="border: none; padding: 0px">
-                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="blog-search-button fa fa-search" style="border: none" runat="server"></button>
-                        </span>
+                <div class="float-right">
+                    <div class="input-group flex-nowrap" style="width: 160px; padding: 3px">
+                        <input type="text" id="txtSearchTop" class="form-control" style="height: 24px" runat="server" placeholder="Cerca ...." />
+                        <div class="input-group-append" style="border: none; padding: 0px; background-color: #ccc">
+                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
-                <div class="pull-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
-                    <div class="social-icons-small pull-left" style="display: block" runat="server" visible="true">
+                <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
+                    <div class="social-icons-small float-left" style="display: block" runat="server" visible="true">
                         <ul style="float: right">
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
@@ -147,8 +159,8 @@
                             </a>--%>
                     </div>
                     <asp:PlaceHolder runat="server" Visible="false">
-                        <div id="containerCarrello" class="pull-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: block">
-                            <a class="pull-right" style="color: #fff !important; border: none"
+                        <div id="containerCarrello" class="float-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: block">
+                            <a class="float-right" style="color: #fff !important; border: none"
                                 id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                 <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems" />
                             </a>
@@ -171,14 +183,14 @@
                                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %> 
                                 </a></li>
                             </ul>
-                            <button type="button" class="dropdown-toggle pull-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
+                            <button type="button" class="dropdown-toggle float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
                                 <span class="caret" style="font-size: 20px; color: #fff"></span>
                                 <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
                             </button>
                         </div>
                     </asp:PlaceHolder>
                 </div>
-                <%-- <div class="simplemenu hidden-xs">
+                <%--<div class="simplemenu d-none d-sm-block">
                     <ul>
                         <li runat="server" class="dropdown">
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer;">
@@ -194,21 +206,21 @@
                         </li>
                     </ul>
                 </div>--%>
-                <div class="pull-left" runat="server" visible="false">
+                <div class="float-left" runat="server" visible="false">
                     <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
                         <img style="height: 60px" src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
                     </a>
                 </div>
-                <div class="pull-left" runat="server" visible="false">
+                <div class="float-left" runat="server" visible="false">
                     <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
-                <div class="pull-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
-                <div class="pull-right hidden-xs" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
+                <div class="float-right d-none" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
                     <i class="fa fa-phone" style="color: #fff;"></i><a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                         <span style="color: #fff; font-weight: 400"><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
                         </span></a>
@@ -222,7 +234,7 @@
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
             <div style="display: none; position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px" class="pull-right visible-xs" href="tel:+39xxx ">
+                <a style="padding-top: 0px" class="float-right visible-xs" href="tel:+39xxx ">
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
             <%--<div class="container" id="divImg">
@@ -255,6 +267,12 @@
 
                     <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
 
+                    <li runat="server">
+                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "9".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
+                        <ul class="dropdown">
+                            <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
+                        </ul>
+                    </li>
                     <li runat="server">
                         <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000018",true)), "5".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000018",true) %></a>
                         <ul class="dropdown">
@@ -297,14 +315,14 @@
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>--%>
 
-                    <%--  <li runat="server" class="visible-xs visible-sm hidden-md hidden-lg">
+                    <%--  <li runat="server" class="d-block d-md-none">
                         <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testomenu2") %></a>
                         <ul class="dropdown">
                             <%= CreaLinkCategorie("rif000002") %>
                         </ul>
                     </li>--%>
-                    <li runat="server" class=" hidden-sm hidden-md hidden-lg">
+                    <li runat="server" class="d-block d-sm-none">
                         <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
@@ -312,8 +330,8 @@
 
                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
                         <div style="padding-top: 5px; padding-left: 10px">
-                            <input class="pull-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
-                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown pull-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
+                            <input class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
+                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
                         </div>
                     </li>
 
@@ -322,24 +340,23 @@
             </div>
 
         </div>
-        <%--   <div class="fixednav1" id="mainnav1">
+        <section class="body-wrapper">
+            <%--   <div class="fixednav1" id="mainnav1">
             <div id="menuzord1" class="menuzord sec-menu menuzord-responsive white">
                 <ul id="divSearchBarPlaceholder1" class="menuzord-menu menu-reduced menuzord-indented scrollable menuzord-center">
                 </ul>
             </div>
         </div>--%>
-        <!-- FINE MENU --->
-        <div class="body-wrapper" style="padding-top: 0px">
+            <!-- FINE MENU --->
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
-            <div id="divSliderBanner" style="margin: 0px auto; position: relative; display: none" class="hidden-xs"></div>
-            <div id="divContainerBannerhome" style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>
-            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>
+            <%--    <div id="divSliderBanner" style="margin: 0px auto; position: relative; display: none" class="hidden-xs"></div>
+            <div id="divContainerBannerhome" style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>--%>
+            <%--            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>--%>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-
-            <div class="breadcrumbs">
-                <div class="container">
-                    <ul class="pull-right breadcrumb" runat="server" id="ulBreadcrumb">
+            <div style="max-width: 1400px; margin: 0px auto; padding-left: 15px; padding-right: 15px">
+                <div class="breadcrumbs clearfix">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb">
                     </ul>
                 </div>
             </div>
@@ -361,7 +378,7 @@
                                 </button>
                             </div>
                             <div class="collapse navbar-collapse">
-                                <ul id="navigation-3" class="nav navbar-nav hidden-md hidden-sm hidden-xs" style="width: 100%">
+                                <ul id="navigation-3" class="nav navbar-nav d-none" style="width: 100%">
                                     <asp:Literal runat="server" ID="litLinksottosezioni"></asp:Literal>
                                 </ul>
                             </div>
@@ -430,7 +447,8 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
-            <div style="max-width: 1400px; margin: 0px auto; padding-left: 15px; padding-right: 15px">
+            <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
+
                 <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                 </asp:ContentPlaceHolder>
                 <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
@@ -507,14 +525,16 @@
                 </section>
             </div>
 
-        </div>
-        <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
-            <div style="height: 100%; width: 100%; position: relative">
-                <div id="map1" style="height: 410px; width: 100%">
+
+
+            <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
+                <div style="height: 100%; width: 100%; position: relative">
+                    <div id="map1" style="height: 410px; width: 100%">
+                    </div>
+                    <%-- <div style="position: absolute; top: 50%; left: 10%; width:auto;height:auto; padding:10px; background-color: #fff">OVERLAY TEXT</div>--%>
                 </div>
-                <%-- <div style="position: absolute; top: 50%; left: 10%; width:auto;height:auto; padding:10px; background-color: #fff">OVERLAY TEXT</div>--%>
-            </div>
-        </asp:PlaceHolder>
+            </asp:PlaceHolder>
+        </section>
         <footer>
             <div class="footer" style="margin-top: 0px">
                 <div class="footerhead">
@@ -547,8 +567,8 @@
                         </ul>
 
                         <%--SOCIAL--%>
-                        <div class="pull-right">
-                            <div class="social-icons pull-right" style="display: block; line-height: 60px">
+                        <div class="float-right">
+                            <div class="social-icons float-right" style="display: block; line-height: 60px">
                                 <ul style="float: right">
                                     <li style="float: right">
                                         <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
@@ -574,6 +594,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
 
                 </div>
@@ -581,7 +602,18 @@
                 <div class="footer-wrapper">
 
                     <div class="row">
-                        <div class="col-sm-3 footer-col">
+                        <div class="col footer-col">
+                            <%--BLOG--%>
+                            <div class="footer-title">
+                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
+                            </div>
+                            <div class="footer-content">
+                                <ul class="footer-category-list">
+                                    <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
 
@@ -598,7 +630,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3 footer-col">
+                        <div class="col footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
                                 <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000019",true)), "4".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000019",true) %></a>
@@ -609,7 +641,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3 footer-col">
+                        <div class="col footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
                                 <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000025",true)), "2".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000025",true) %></a>
@@ -620,7 +652,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3 footer-col">
+                        <div class="col footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
                                 <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000026",true)), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000026",true) %></a>
@@ -648,7 +680,7 @@
                                         <br />
                                         <br />
                                 --%>
-                                <input type="text" style="background-color: #ffffff; width: 60%; height: 36px" name="q" class="subscribe-input text-input form-control pull-left" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
+                                <input type="text" style="background-color: #ffffff; width: 60%; height: 36px" name="q" class="subscribe-input text-input form-control float-left" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
                                 <button class="divbuttonstyle" style="width: 40%; padding-left: 10px; padding-right: 10px" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
                                 <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
                             </asp:Panel>
@@ -659,14 +691,14 @@
                 <div class="copyright">
                     <div class="container">
                         <div class="row">
-                            <div class="col-ld-12" style="text-align: center">
+                            <div class="col-lg-12" style="text-align: center">
                                 <p style="font-size: 1.1em; padding: 10px 10px; line-height: 1.1rem;">
                                     <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
 
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
                                         <%= references.ResMan("Common", Lingua,"Testologin") %></a>
                                 </p>
-                                <%-- <div class="pull-right">
+                                <%-- <div class="float-right">
                                     <p style="font-size: 1.2em; padding-top: 10px">
                                         <a id="A3" href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>" runat="server" target="_blank" style="padding-left: 5px; padding-right: 5px">
                                             <asp:Literal ID="Literal10" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoSeguici") %>" /><i class="fa fa-facebook"></i></a>
@@ -680,7 +712,7 @@
             </div>
         </footer>
 
-       <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>--%>
+
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/menuzord/files/js/menuzord.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/pako/pako.min.js") %>'></script>
@@ -692,9 +724,14 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/isotope.pkgd.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle2.carousel.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>
-         <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
+        <%--        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>--%>
+
+        <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>--%>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
+        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/           <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
+       <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
+
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>
 
@@ -756,9 +793,9 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/script.js")%>"></script>
 
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquerywaypoint/jquery.waypoints.min.js")%>"></script>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquerywaypoint/jquery.waypoints.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquerywaypoint/shortcuts/sticky.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.sticky.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.sticky.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/detect-zoom.min.js")%>"></script>
 
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>

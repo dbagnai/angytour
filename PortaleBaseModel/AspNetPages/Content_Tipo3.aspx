@@ -54,14 +54,11 @@
         </Scripts>
     </Ajax:ToolkitScriptManager>--%>
     <div class="row" style="text-align: center">
-        <div class="col-xs-12">
-            <p>
-                <asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label>
-            </p>
+        <div class="col">
+            <p><asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label></p>
             <asp:Label runat="server" ID="lblContenutiContatti"></asp:Label>
-
             <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                <div style="width: 80%; margin: 0px auto; background-color: #fdfdfd; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
+                <div style="width: 80%; margin: 20px auto; background-color: #efefef; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
                     <div class="ui-15">
                         <div class="ui-content">
                             <div class="container-fluid">
@@ -347,13 +344,9 @@
             </asp:PlaceHolder>
 
             <asp:PlaceHolder ID="plhRisposta" runat="server" Visible="false">
-                <h2>
-                    <asp:Literal ID="lblRisposta" runat="server" Text=""></asp:Literal>
-
-                </h2>
+                <h2><asp:Literal ID="lblRisposta" runat="server" Text=""></asp:Literal></h2>
                 <br />
             </asp:PlaceHolder>
-
             <asp:PlaceHolder ID="plhDove" runat="server" Visible="false">
                 <div id="map" style="height: 410px; width: 100%; margin: 10px auto">
                 </div>

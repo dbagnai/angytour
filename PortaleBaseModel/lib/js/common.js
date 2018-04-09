@@ -54,7 +54,7 @@ $(window).scroll(function () {
     var scrollPosition = $(window).scrollTop();
     if (enablescrolltopmem) {
         sessionStorage.setItem("scrollPosition_" + pathName, scrollPosition.toString());
-       // console.log(scrollPosition);
+        // console.log(scrollPosition);
     }
 });
 /*Recover scroll top pos from memory*/
@@ -1698,7 +1698,12 @@ function formatdescrizione(localObjects, valore, prop, callback) {
                     }
                     descrizione = descrizione.substring(0, parseInt(prop[1]) + j) + " >>";
                 }
-                retstring = descrizione.replace(/\n/g, "<br/>");
+                if (prop[2] != undefined && prop[2] != null && prop[2] == "nobreak")
+                    retstring = descrizione.replace(/\n/g, "&nbsp;");
+                else
+                    retstring = descrizione.replace(/\n/g, "<br/>");
+
+
             }
         }
     } catch (e) { };
@@ -2312,6 +2317,12 @@ $.fn.isOnScreen = function () {
     };
     viewport.right = viewport.left + win.width();
     viewport.bottom = viewport.top + win.height();
+    //console.log(viewport);
+    var percdelta = 0.2;
+    viewport.top -= viewport.top * percdelta;
+    viewport.bottom += viewport.bottom * percdelta;
+    viewport.left -= viewport.left * percdelta;
+    viewport.right += viewport.right * percdelta;
 
     var bounds = this.offset();
     bounds.right = bounds.left + this.outerWidth();

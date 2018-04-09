@@ -6,12 +6,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-    <div class="row">
-        <div class="col-sm-12" style="text-align: center">
+ 
             <asp:Literal Text="" ID="litNomePagina" runat="server" />
             <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
-        </div>
-    </div>
+      
     <%-- <!--=== Breadcrumbs ===-->
         <div class="breadcrumbs">
             <div class="container">

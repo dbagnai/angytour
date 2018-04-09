@@ -19,7 +19,7 @@ textarea {
     color: #666666;
     margin: 0;
     font-size: 13px;
-    line-height: 20px;
+
     background-color: white;
 }
 
@@ -169,14 +169,7 @@ blockquote {
 }
 
 /* Main Container */
-.body-wrapper {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    position: relative;
-    z-index: 0;
-    width:100%;
-    overflow-x:hidden;
-}
+
 
 
 .right-text {

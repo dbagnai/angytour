@@ -99,11 +99,11 @@ jQuery(document).ready(function ($) {
     //$.datepicker.setDefaults($.datepicker.regional['']);  
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
 
-    /*Bootstrap Carousel*/
-    jQuery('.carousel').carousel({
-        interval: 3000,
-        pause: 'hover'
-    });
+    /*Jquery Carousel*/
+    //jQuery('.carousel').carousel({
+    //    interval: 3000,
+    //    pause: 'hover'
+    //});
     /*-----------------------*/
 
     /*Owl Carousel*/

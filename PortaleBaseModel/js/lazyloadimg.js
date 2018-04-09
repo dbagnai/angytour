@@ -12,7 +12,7 @@ function lazyLoad() {
             if ($(lazy[i]).isOnScreen()) {
                 //console.log($(lazy[i]));
                 if (lazy[i].getAttribute('data-src')) {
-                 //   console.log(lazy[i].getAttribute('data-src'));
+                //console.log(lazy[i].getAttribute('data-src'));
                     lazy[i].src = lazy[i].getAttribute('data-src');
                     lazy[i].removeAttribute('data-src');
                 }
