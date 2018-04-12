@@ -190,6 +190,7 @@
     <Compile Include="DOM\TipologiaOfferteCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STATIC\Global.cs" />
+    <Compile Include="UF\bundleengine.cs" />
     <Compile Include="UF\CachingModule.cs" />
     <Compile Include="UF\ConfigManagement.cs" />
     <Compile Include="UF\dataManagement.cs" />

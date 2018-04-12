@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Web Mouse Consulting Srl Portfolio</title>
-    <link />
-    <description>Web Mouse Consulting Srl</description>
-    <lastBuildDate>Tue, 20 Mar 2018 17:34:37 GMT</lastBuildDate>
+    <title>Webmousers Blog Servizi</title>
+    <link>http://localhost:52646</link>
+    <description>Webmousers Blog</description>
+    <lastBuildDate>Thu, 12 Apr 2018 11:42:36 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-03-20T17:34+01:00</sy:updateBase>
+    <sy:updateBase>2018-04-12T11:42+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>offerte 1
-sottotitolo</title>
-      <link>/I/portfolio/offerte-1-sottotitolo-4</link>
-      <guid isPermaLink="true">/I/portfolio/offerte-1-sottotitolo-4</guid>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Portfolio</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000003/4/siszer.jpg" alt="offerte 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="/I/portfolio/offerte-1-sottotitolo-4"><em>offerte 1
-sottotitolo</em></a>.</p>]]></description>
+      <title>sollicitudin pharetra
+hendrerit sit ame</title>
+      <link>http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18</link>
+      <guid isPermaLink="true">http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18</guid>
+      <pubDate>Mon, 09 Apr 2018 15:46:18 +02:00</pubDate>
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/18/sample-banner.jpg" alt="sollicitudin pharetra
+hendrerit sit ame" width="350" /><p>Cras pulvinar leo eu neque blandit, vel consectetur dui vehicula. In hac habitasse platea dictumst. Suspendisse ultrices, mi a sollicitudin pharetra, dui ante sodales risus, non mattis ipsum purus non mi. Nullam sit amet enim ornare, tempor leo ac, sodales ligula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean sit amet tristique tellus. Curabitur ex mauris, mattis non consectetur et, hendrerit sit amet dolor. Nunc facilisis sem justo, ut porta diam vestibulum eget. Pellentesque felis nisl, molestie vel facilisis id, fringilla eget augue.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18"><em>sollicitudin pharetra
+hendrerit sit ame</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

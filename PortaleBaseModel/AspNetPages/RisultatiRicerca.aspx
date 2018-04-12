@@ -53,11 +53,32 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="" runat="server" id="columnsingle">
+            <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
     <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
+        <div class="clearfix">
+            <div class="float-right" style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
+                <div class="sidebar-content tags blog-search ">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
+                        <span class="input-group-addon">
+                            <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="float-right pr-2" style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
+            </div>
+
+        </div>
+
         <div id="divPortfolioList1"></div>
         <div id="divPortfolioList1Pager"></div>
         <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
@@ -186,21 +207,10 @@
 
         <div class="sidebar" runat="server" id="RightSidebar">
             <!-- Sidebar Block -->
-            <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
-                <div class="sidebar-content tags blog-search">
-                    <div class="input-group">
-                        <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
-                        <span class="input-group-addon">
-                            <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <!-- Sidebar Block -->
+
             <div style="max-width: 350px; margin: 10px auto" runat="server" id="divLinksrubriche" visible="false">
             </div>
-            <div style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
-            </div>
+
             <!-- Sidebar Block -->
             <asp:Literal Text="" ID="lateralplh1" runat="server" />
 

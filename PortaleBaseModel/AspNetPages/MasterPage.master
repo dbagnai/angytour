@@ -39,9 +39,23 @@
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111863124-11"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111863124-11"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-111863124-11');
+    </script>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9028735285166707",
+            enable_page_level_ads: true
+        });
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -85,12 +99,12 @@
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/flexslider/flexslider.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
-        <%--        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
+                <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54v1/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54-v2/style.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mobirise-icons/mobirise-icons.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icons-mind/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />--%>
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/et-line-font-plugin/style.css")  %> " />
         <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-faq.css" />
         <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-additional.css" />
@@ -176,10 +190,10 @@
                         </div>
                     </asp:PlaceHolder>
                 </div>
-                <%--<div class="simplemenu d-none d-sm-block">
+                <div class="simplemenu d-none d-sm-block">
                     <ul>
                         <li runat="server" class="dropdown">
-                            <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer;">
+                            <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
                                 <%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <%= CreaLinkCategorie("rif000002") %>
@@ -191,7 +205,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>--%>
+                </div>
                 <div class="float-left" runat="server" visible="false">
                     <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
                         <img style="height: 60px" src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
@@ -245,6 +259,10 @@
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable  menuzord-right">
+                    <%= CreaLinkPaginastatica(1) %>
+                    <%= CreaLinkPaginastatica(4) %>
+                    <%= CreaLinkTipologie(3,5) %>
+
                     <%--<li runat="server" id="liHome">
                         <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
                             <div class="iconlogo"></div>
@@ -253,36 +271,13 @@
 
                     <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
 
-                    <li runat="server">
+                    <%--  <li runat="server">
                         <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "9".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
                         <ul class="dropdown">
                             <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
                         </ul>
-                    </li>
-                    <li runat="server">
-                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000018",true)), "5".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000018",true) %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkSottoCategorie("rif000002","prod000018") %>
-                        </ul>
-                    </li>
-                    <li runat="server">
-                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000019",true)), "4".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000019",true) %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkSottoCategorie("rif000002","prod000019") %>
-                        </ul>
-                    </li>
-                    <li runat="server">
-                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000025",true)), "2".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000025",true) %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkSottoCategorie("rif000002","prod000025") %>
-                        </ul>
-                    </li>
-                    <li runat="server">
-                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000026",true)), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000026",true) %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkSottoCategorie("rif000002","prod000026") %>
-                        </ul>
-                    </li>
+                    </li>--%>
+
 
                     <%-- <li runat="server">
                         <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu3") %></a>
@@ -301,13 +296,16 @@
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>--%>
 
-                    <%--  <li runat="server" class="d-block d-md-none">
+                    <li runat="server" class="d-block d-md-none">
                         <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testomenu2") %></a>
                         <ul class="dropdown">
                             <%= CreaLinkCategorie("rif000002") %>
                         </ul>
-                    </li>--%>
+                    </li>
+
+
+
                     <li runat="server" class="d-block d-sm-none">
                         <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
@@ -530,27 +528,6 @@
                                 <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' style="margin: 0 auto; height: 60px" alt="" />
                             </a>
                         </div>
-                        <ul class="footer-category-list-horizontal">
-                            <%--HOME--%>
-                            <li runat="server">
-                                <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
-                                    <span class="label-nav">
-                                        <%= references.ResMan("Common", Lingua,"testohome") %> 
-                                    </span>
-                                </a>
-                            </li>
-                            <%--CHI SIAMO--%>
-                            <%= CreaLinkPaginastatica(1) %>
-
-                            <%--CONTATTI--%>
-                            <li>
-                                <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
-                                    <span class="label-nav">
-                                        <%= references.ResMan("Common", Lingua,"testoContatti") %> 
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
 
                         <%--SOCIAL--%>
                         <div class="float-right">
@@ -588,67 +565,62 @@
                 <div class="footer-wrapper">
 
                     <div class="row">
-                        <div class="col footer-col">
+
+                        <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
+                                <%= references.ResMan("Common",Lingua,"testofooter1") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col footer-col">
-                            <%--BLOG--%>
-                            <div class="footer-title">
-
-
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000018",true)), "5".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000018",true) %></a>
-
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CreaLinkSottoCategorie("rif000002","prod000018") %>
-                                    <%--     <%= CreaLinkCategorie("rif000002") %>--%>
-                                    <%--  <%=  CreaLinkCategorieNested("rif000002","",true)  %>--%>
+                                    <li runat="server">
+                                        <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
+                                            <span class="label-nav">
+                                                <%= references.ResMan("Common", Lingua,"testohome") %> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <%= CreaLinkPaginastatica(1) %>
+                                    
+                                    <%= CreaLinkPaginastatica(4) %>
+                                    <li>
+                                        <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
+                                            <span class="label-nav">
+                                                <%= references.ResMan("Common", Lingua,"testoContatti") %> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <%--              <%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                     <!-- <%= CaricaLinksPerTipologia("rif000002","","10")  %> -->
                                 </ul>
                             </div>
                         </div>
-                        <div class="col footer-col">
+                        <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000019",true)), "4".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000019",true) %></a>
+                                <%= references.ResMan("Common",Lingua,"testofooter2") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkSottoCategorie("rif000002","prod000019") %>
+                                    <%= CreaLinkTipologie(3,5) %>
+                                    <%= CreaLinkPaginastatica(2) %>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col footer-col">
+                        <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000025",true)), "2".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000025",true) %></a>
+                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, references.ResMan("Common",Lingua,"testoid5"), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testoid5") %></a>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkSottoCategorie("rif000002","prod000025") %>
+                                    <%= CreaLinkCategorie("rif000002") %>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col footer-col">
-                            <%--BLOG--%>
-                            <div class="footer-title">
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000026",true)), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000026",true) %></a>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CreaLinkSottoCategorie("rif000002","prod000026") %>
-                                </ul>
-                            </div>
-                        </div>
+
+
+
                     </div>
                     <div class="row">
 
@@ -727,7 +699,6 @@
         <script>
             pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
             initLingua('<%= Lingua %>');
-            var makeRevLower = false;
                                    <%-- loadref(initLingua, '<%= Lingua %>');--%>
             jQuery(document).ready(function () {
                 loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
@@ -793,8 +764,35 @@
         <div class="loader" style="display: none">
             <div class="spinner"></div>
         </div>
-         rm_cont -->
-        
+
+        <!-- fine div disp_form_cont -->
+        <script type="text/javascript">
+            var makeRevLower = false;
+            /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
+            !function (cash) { //ensure $ always references jQuery
+                $(function () { //when dom has finished loading
+                    //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
+                    function fixHeader() {
+                        //for each element that is classed as 'pull-down'
+                        //reset margin-top for all pull down items
+                        $('.pull-down').each(function () {
+                            $(this).css('margin-top', 0);
+                        });
+
+                        //set its margin-top to the difference between its own height and the height of its parent
+                        $('.pull-down').each(function () {
+                            if ($(window).innerWidth() >= 991) {
+                                $(this).css('margin-top', $(this).parent().height() - $(this).height());
+                            }
+                        });
+                    }
+                    $(window).resize(function () {
+                        fixHeader();
+                    });
+                    fixHeader();
+                });
+            }(window.jQuery);
+        </script>
         <!-- Wrapper end -->
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>

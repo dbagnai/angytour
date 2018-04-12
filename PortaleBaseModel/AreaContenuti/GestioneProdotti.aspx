@@ -138,7 +138,7 @@
 
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                            <a  onclick="JsSvuotaSession(this)"  target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
                                             <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
 
                                         </div>

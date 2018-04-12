@@ -2,265 +2,139 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost:52646/I/blog/blog</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-18</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/blog/notizie-18</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-siti-internet-181</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/blog/revisioni-19</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-social-182</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/blog/video-25</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-posizionamento-183</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/servizi/servizi</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-info-grafica-184</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/auto-usate</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-foto-e-video-185</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/escursioni-21</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/web-piattaforme-cms-186</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/wellness-22</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-19</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/cibo-23</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-comunicare-sul-web-197</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/vino-24</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-verbale-198</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerte</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-editoria-199</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-grafica-digitale-1910</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/auto-usate/ford-fiesta-14-sottotitolo-19</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/comunicazione-grafica-manuale-1911</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/marketing-25</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/marketing-stategie-2512</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/marketing-brand-2513</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/marketing-packaging-2514</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/marketing-mercati-2515</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/informatica-26</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/informatica-reti-2616</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/informatica-linguaggi-2617</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/informatica-hardware-2618</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/informatica-software-2619</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/notizie-27</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/notizie-curiosita-2720</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/notizie-interviste-2721</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/sdaa-sadasdas-17</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/come-raggiungere-il-primo-posto-su-google-personas-una-nuova-prospettiva-limportanza-del-contesto-4</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-internet-news-sottotitolo-3</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-2-sottotitolo-c-2</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-13sottotitolo-16</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/blog/siti-interenet-13-sottotitolo-16</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-12sottotitolo-15</loc>
-    <lastmod>2018-04-09</lastmod>
+    <loc>http://localhost:52646/I/blog/siti-interenet-12-sottotitolo-15</loc>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-11-sottotitolo-14</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-13</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-12</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-9-sottotitolo-11</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-8sottotitolo-10</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-7sottotitolo-9</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-6sottotitolo-8</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-5sottotitolo-7</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-4sottotitolo-6</loc>
-    <lastmod>2018-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-3sottotitolo-5</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-1</loc>
-    <lastmod>2018-04-09</lastmod>
+    <lastmod>2018-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

@@ -366,14 +366,14 @@ public partial class _SchedaOffertaMaster : CommonPage
         {
             case "rif000002":
                 column1.Visible = false;
-                column1.Attributes["class"] = "col-md-12 col-sm-12";
-                column2.Attributes["class"] = "col-md-9 col-sm-9";
-                column3.Attributes["class"] = "col-md-3 col-sm-3";
+                column2.Visible = true;
+                column2.Attributes["class"] = "col-12 col-sm-9";
+                column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = true;
 
                 divSearch.Visible = true;
                 ContaArticoliPerperiodo(CodiceTipologia);
-                Caricalinksrubriche(CodiceTipologia);
+              //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = false;
                 divLatestPost.Visible = false;
@@ -393,14 +393,14 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Clear();
 
                     //ULTIMI ARTICOLI
-                    sb.Append("<div class=\"sfondo-contenitore\">");
-                    sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
-                    sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
-                    sb.Append("\"></div>");
-                    sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
-                    sb.Append("</div>");
-                    placeholderlateral.Text = sb.ToString();
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
                    
 
                     sb.Clear();
@@ -417,10 +417,11 @@ public partial class _SchedaOffertaMaster : CommonPage
                 break;
 
             case "rif000003":
+            case "rif000004":
             case "rif000005":
-                column1.Visible = true;
+                column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-10 col-sm-10";
+                column2.Attributes["class"] = "col-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -448,62 +449,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 }
                 break;
-            case "rif000004":
-                column1.Visible = true;
-                column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-10 col-sm-10";
-                column2.Visible = true;
-                column3.Visible = false;
-                divSearch.Visible = false;
-                divContact.Visible = false;
-                divLatestPost.Visible = false;
-                divCategorie.Visible = false;
-
-                if (!JavaInjection)
-                {
-
-
-                    //sb.Clear();
-                    //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    //sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
-                    //sb.Append("\"></div>");
-                    //plhSuggeritiJs.Text = sb.ToString();
-
-                    sb.Clear();
-                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
-                    sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
-
-                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
-
-                }
-                break;
-            //case "rif000008":
-            //case "rif000009":
-            //    //lit = (Literal)Master.FindControl("litPortfolioBanners2");
-            //    //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezioni", false, lit, Lingua, true);
-            //    // ContaArticoliPerperiodo();
-            //    divSearch.Visible = false;
-            //    divLatestPost.Visible = false;
-            //    AssociaRubricheConsigliati();
-            //    column1.Visible = true;
-            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
-            //    column2.Attributes["class"] = "col-md-10 col-sm-10";
-            //    column3.Visible = false;
-            //    break;
-            //case "rif000010":
-            //case "rif000011":
-            //    // ContaArticoliPerperiodo();
-            //    divSearch.Visible = false;
-            //    divLatestPost.Visible = false;
-            //    AssociaRubricheConsigliati();
-            //    column1.Visible = true;
-            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
-            //    column2.Attributes["class"] = "col-md-10 col-sm-10";
-            //    column3.Visible = false;
-            //    break;
-
+          
             case "rif000012":
                 break;
             //case "rif000001":
@@ -602,20 +548,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
-        //ClientScriptManager cs = Page.ClientScript;
-        //sb.Clear();
-        //sb.Append("(function wait() {");
-        //sb.Append("  if (typeof injcCategorieLinks === \"function\")");
-        //sb.Append("    {");
-        //sb.Append("injcCategorieLinks('linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "','');");
-        //sb.Append(" }");
-        //sb.Append("   else  {");
-        //sb.Append("  setTimeout(wait, 50);");
-        //sb.Append("  }  })();");
-        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        //{
-        //    cs.RegisterStartupScript(this.GetType(), "clistrubriche", sb.ToString(), true);
-        //}
+        
     }
 
     private void ContaArticoliPerperiodo(string cattipo)

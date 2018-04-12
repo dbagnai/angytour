@@ -304,12 +304,13 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 AssociaDatiSocial();
 
                 column1.Visible = true;
-                column1.Attributes["class"] = "col-md-9 col-sm-9";
+                column1.Attributes["class"] = "col-12";
                 column2.Visible = false;
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
-                column3.Attributes["class"] = "col-md-3 col-sm-3";
+                column3.Attributes["class"] = "col-12 col-sm-3";
+                column3.Visible = false;
                 ContaArticoliPerperiodo(Tipologia);
-                Caricalinksrubriche(Tipologia);
+              //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie 
                 divSearch.Visible = true;
                 divLatestPost.Visible = false;
                 //CaricaUltimiPost(Tipologia, Categoria);
@@ -323,78 +324,42 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
-                    //placeholderrisultati
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //placeholderrisultati.Text = sb.ToString();
+
+
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 
 
-                    sb.Clear();
-                    sb.Append("<div class=\"sfondo-contenitore\">");
-                    sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
-                    sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
-                    sb.Append("\"></div>");
-                    sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
-                    sb.Append("</div>");
-                    placeholderlateral.Text = sb.ToString();
+
+                    //sb.Clear();
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
 
 
                 }
 
                 break;
-            case "rif000003":
             case "rif000004":
             case "rif000005":
 
                 AssociaDatiSocial();
 
                 column1.Visible = true;
-                column1.Attributes["class"] = "col-sm-12";
-                column2.Visible = false;
-                column3.Visible = false;
-                //column2.Attributes["class"] = "col-md-1 col-sm-1";
-                //column3.Attributes["class"] = "col-md-3 col-sm-3";
-                //ContaArticoliPerperiodo(Tipologia);
-                divSearch.Visible = false;
-                divLatestPost.Visible = false;
-                //CaricaUltimiPost(Tipologia, Categoria);
-                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
-                //CaricaMenuContenuti(4, 9, rptContenutiLink);
-                divCategorie.Visible = false;
-                //BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )
-                //string cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
-                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6, 5);
-
-                if (!JavaInjection)
-                {
-                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeVini.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
-                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
-
-
-                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
-                    //placeholderrisultati
-                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopeOfferte1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
-                    sb.Append("\"></div>");
-                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
-
-                }
-
-
-
-                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
-                break;
-
-            case "rif000008":
-                AssociaDatiSocial();
-
-                column1.Visible = true;
-                column1.Attributes["class"] = "col-sm-12";
+                column1.Attributes["class"] = "col-12";
                 column2.Visible = false;
                 column3.Visible = false;
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
@@ -424,6 +389,50 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = sb.ToString();
+
+                }
+
+
+
+                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
+                break;
+
+            case "rif000003":
+                AssociaDatiSocial();
+
+                column1.Visible = false;
+                column2.Visible = false;
+                column3.Visible = false;
+
+                columnsingle.Attributes["class"] = "col-12";
+
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                //column3.Attributes["class"] = "col-md-3 col-sm-3";
+                //ContaArticoliPerperiodo(Tipologia);
+                divSearch.Visible = false;
+                divLatestPost.Visible = false;
+                //CaricaUltimiPost(Tipologia, Categoria);
+                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
+                //CaricaMenuContenuti(4, 9, rptContenutiLink);
+                divCategorie.Visible = false;
+                //BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )
+                //string cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6, 5);
+
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeVini.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+
+
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeProdottiSinglerow.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultatinocontainer.Text = sb.ToString();
 
                 }
 
@@ -493,7 +502,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-md-3 col-sm-3";
                 ContaArticoliPerperiodo(Tipologia);
-                Caricalinksrubriche(Tipologia);
+               // Caricalinksrubriche(Tipologia);
                 divSearch.Visible = true;
                 divLatestPost.Visible = false;
                 //CaricaUltimiPost(Tipologia, Categoria);
@@ -594,20 +603,8 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
-        //ClientScriptManager cs = Page.ClientScript;
-        //sb.Clear();
-        //sb.Append("(function wait() {");
-        //sb.Append("  if (typeof injcCategorieLinks === \"function\")");
-        //sb.Append("    {");
-        //sb.Append("injcCategorieLinks('linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "','');");
-        //sb.Append(" }");
-        //sb.Append("   else  {");
-        //sb.Append("  setTimeout(wait, 50);");
-        //sb.Append("  }  })();");
-        //if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        //{
-        //    cs.RegisterStartupScript(this.GetType(), "clistrubriche", sb.ToString(), true);
-        //}
+       
+
     }
 
     private void ContaArticoliPerperiodo(string cattipo)

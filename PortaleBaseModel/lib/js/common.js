@@ -1123,25 +1123,27 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 imgstyle = "max-width:100%;height:auto;";
                                 var maxheight = $(this).getStyle('max-height');
                                 if (maxheight !== '') {
+                                    maxheight = maxheight.replace("px", "");
+                                    var docwidth = $(document).width();
+                                    if (maxheight > docwidth) maxheight = docwidth;
                                     try {
                                         if (parseFloat(imgslistratio[j].replace(",", ".")) < 1) {
-                                            imgstyle = "width:auto;height:" + maxheight + "px;";
+                                            //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                            imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
                                         }
                                     }
                                     catch (e) {
                                     };
                                 }
 
+                              //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
 
                                 contenutoslide += '<img class="zoommgfy" itemprop="image"  style="border:none;' + imgstyle + '" src="';
                                 contenutoslide += imgslist[j];
-
                                 contenutoslide += '" ';
-
                                 contenutoslide += ' data-magnify-src="';
                                 contenutoslide += imgslist[j];
                                 contenutoslide += '" ';
-
                                 /*Livello di ingrandimento della lente (è fatto sempre rispetto alla dimensione dell'immagine naturale che qui gli forzo!!!)*/
                                 var aspectratio = parseFloat(imgslistratio[j].replace(",", "."));
                                 var imgwidth = 1100;
@@ -1153,8 +1155,10 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 contenutoslide += Math.floor(imgheight);
                                 contenutoslide += '" ';
                                 /*Livello di ingrandimento della lente*/
-
                                 contenutoslide += ' alt = "" />';
+
+                              //  contenutoslide += '</a>';
+
 
                                 try {
                                     descriptiontext = imgslistdesc[j];
@@ -1681,7 +1685,6 @@ function formattestoreplace(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
-
 function formatdescrizione(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1710,6 +1713,7 @@ function formatdescrizione(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
+
 
 
 

@@ -1,34 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Web Mouse Consulting Srl Servizi</title>
-    <link />
-    <description>Web Mouse Consulting Srl</description>
-    <lastBuildDate>Tue, 20 Mar 2018 17:34:37 GMT</lastBuildDate>
+    <title>Webmousers Blog Auto Usate</title>
+    <link>http://localhost:52646</link>
+    <description>Webmousers Blog</description>
+    <lastBuildDate>Thu, 12 Apr 2018 11:42:36 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-03-20T17:34+01:00</sy:updateBase>
+    <sy:updateBase>2018-04-12T11:42+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>benessere 1
+      <title>ford fiesta 1.4
 sottotitolo</title>
-      <link>/I/servizi/benessere-1-sottotitolo-7</link>
-      <guid isPermaLink="true">/I/servizi/benessere-1-sottotitolo-7</guid>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Servizi</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000004/7/dsc_1800.jpg" alt="benessere 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="/I/servizi/benessere-1-sottotitolo-7"><em>benessere 1
-sottotitolo</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>escurzioni 1
-sottotitolo</title>
-      <link>/I/servizi/escurzioni-1-sottotitolo-6</link>
-      <guid isPermaLink="true">/I/servizi/escurzioni-1-sottotitolo-6</guid>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Servizi</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000004/6/47-suite-gotica.jpg" alt="escurzioni 1
-sottotitolo" width="350" /><p>test ...</p><p>Continua a leggere / Read More <a href="/I/servizi/escurzioni-1-sottotitolo-6"><em>escurzioni 1
+      <link>http://localhost:52646/I/auto-usate/ford-fiesta-14-sottotitolo-19</link>
+      <guid isPermaLink="true">http://localhost:52646/I/auto-usate/ford-fiesta-14-sottotitolo-19</guid>
+      <pubDate>Mon, 09 Apr 2018 15:47:12 +02:00</pubDate>
+      <category>Auto Usate</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/19/sample-banner.jpg" alt="ford fiesta 1.4
+sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan purus finibus non. Pellentesque molestie eros et turpis efficitur, non congue lectus sollicitudin. Vestibulum scelerisque justo dolor, eget sollicitudin elit pellentesque laoreet. Curabitur vel tellus eu est tempus ultrices commodo eget velit. Nunc interdum pretium turpis. Vivamus tristique dictum tempus. Ut euismod lectus eget tellus congue faucibus. Cras ullamcorper enim quis nisl condimentum, id porta nisl aliquam. Praesent a justo sit amet lectus dictum volutpat in vitae mauris. Vestibulum molestie, mi id dignissim fermentum, nibh quam vehicula lorem, vel iaculis sem tellus eu turpis.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/auto-usate/ford-fiesta-14-sottotitolo-19"><em>ford fiesta 1.4
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

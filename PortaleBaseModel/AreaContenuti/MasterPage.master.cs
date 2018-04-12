@@ -39,16 +39,16 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
                 //Inizializzo i valori
 
-                //List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 11));
-                //Tipologie.AddRange( WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) == 199));
-                // Tipologie.RemoveAll(delegate(WelcomeLibrary.DOM.TipologiaOfferte _t) { return _t.Codice == "rif000100"; });
-                //rptTipologia.DataSource = Tipologie;
-                //rptTipologia.DataBind();
+                List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 11));
+                Tipologie.AddRange(WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) == 199));
+                Tipologie.RemoveAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte _t) { return _t.Codice == "rif000100"; });
+                rptTipologia.DataSource = Tipologie;
+                rptTipologia.DataBind();
 
-                List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000002" && p.Lingua == "I");
-                rptRubricheCategorie.DataSource = listcat;
-                rptRubricheCategorie.DataBind();
-                 
+                //List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000002" && p.Lingua == "I");
+                //rptRubricheCategorie.DataSource = listcat;
+                //rptRubricheCategorie.DataBind();
+
 
                 //List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
                 //rptCatalogo.DataSource = Catalogo;
@@ -67,9 +67,9 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
 
                 //Rassegna
-                List<WelcomeLibrary.DOM.TipologiaOfferte> list = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 51 && Convert.ToInt32(t.Codice.Substring(3)) <= 51);
-                rptCustom.DataSource = list;
-                rptCustom.DataBind();
+                //List<WelcomeLibrary.DOM.TipologiaOfferte> list = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 51 && Convert.ToInt32(t.Codice.Substring(3)) <= 51);
+                //rptCustom.DataSource = list;
+                //rptCustom.DataBind();
 
 
                 //Commenti

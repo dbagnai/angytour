@@ -467,7 +467,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 
-    <div class="row" id="divSezioneSchedaContenuto">
+    <div class="row justify-content-center" id="divSezioneSchedaContenuto">
 
         <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
         </div>

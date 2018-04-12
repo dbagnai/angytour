@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Web Mouse Consulting Srl Corsi</title>
-    <link />
-    <description>Web Mouse Consulting Srl</description>
-    <lastBuildDate>Tue, 20 Mar 2018 17:34:37 GMT</lastBuildDate>
+    <title>Webmousers Blog Offerte</title>
+    <link>http://localhost:52646</link>
+    <description>Webmousers Blog</description>
+    <lastBuildDate>Thu, 12 Apr 2018 11:42:36 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-03-20T17:34+01:00</sy:updateBase>
+    <sy:updateBase>2018-04-12T11:42+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>camere 1
-sototitolo</title>
-      <link>/I/corsi/camere-1-sototitolo-5</link>
-      <guid isPermaLink="true">/I/corsi/camere-1-sototitolo-5</guid>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +01:00</pubDate>
-      <category>Corsi</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="/public/Files/rif000005/5/siszer.jpg" alt="camere 1
-sototitolo" width="350" /><p>test ..</p><p>Continua a leggere / Read More <a href="/I/corsi/camere-1-sototitolo-5"><em>camere 1
-sototitolo</em></a>.</p>]]></description>
+      <title>offerta test
+sottotitolo</title>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</guid>
+      <pubDate>Mon, 09 Apr 2018 15:47:36 +02:00</pubDate>
+      <category>Offerte</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000005/20/rest2.jpg" alt="offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-20"><em>offerta test
+sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

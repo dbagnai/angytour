@@ -3,6 +3,7 @@
 <%@ Assembly Name="System.Web" %>
 <%@ Import Namespace="System.Web.Routing" %>
 <%@ Import Namespace="System.Data.SQLite" %>
+<%@ Import Namespace="WelcomeLibrary.UF" %>
 
 <script RunAt="server">
 
@@ -459,8 +460,25 @@
         return result;
     }
 
+    void RegisterBundles(System.Web.Routing.RouteCollection routes)
+    {
+
+        // DICHIARAZIONE BUNDLES E MODALITA' RITORNO
+        BundleEngine.AddRoutes(routes);//Route x bundler
+        BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
+        //BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files sempre e non solo a riavvio app
+        //BundleEngine.EnumBundleMode
+        //BundleEngine.AddBundleJS("nomedelbundlejs", "~/path/file.js","","");
+        //BundleEngine.AddBundleCSS("nomebundlecss", "~/path/file.css","","");
+        //UTILIZZO in pagina o lato server
+        //BundleEngine.RenderCSS("nomebundlecss");
+        //BundleEngine.RenderJS("nomebundlejs");
+    }
+
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)
     {
+
+        RegisterBundles(routes); // Bundles da iniettare css/js
 
         //routes.Add("Generic", new System.Web.Routing.Route("{textmatch}", new GenericRouteHandler()));
         routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
