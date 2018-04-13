@@ -263,6 +263,8 @@ function initreferencesdata(lingua) {
     } else { deferred.resolve(''); }
     return deferred.promise();
 }
+
+
 function getfromclientstorage(key) {
     var deferredclientstorage = $.Deferred();
     var expired = false;

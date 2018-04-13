@@ -258,7 +258,7 @@
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1"); 
 #endif
 
-            references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
+            //references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
 
             Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
