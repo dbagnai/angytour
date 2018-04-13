@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'icon54';
-    src:    url('fonts/icon54.eot?uf6sbu');
-    src:    url('fonts/icon54.eot?uf6sbu#iefix') format('embedded-opentype'),
-        url('fonts/icon54.ttf?uf6sbu') format('truetype'),
-        url('fonts/icon54.woff?uf6sbu') format('woff'),
-        url('fonts/icon54.svg?uf6sbu#icon54') format('svg');
+    src:    url('/fonts/icon54v1/fonts/icon54.eot?uf6sbu');
+    src:    url('/fonts/icon54v1/fonts/icon54.eot?uf6sbu#iefix') format('embedded-opentype'),
+        url('/fonts/icon54v1/fonts/icon54.ttf?uf6sbu') format('truetype'),
+        url('/fonts/icon54v1/fonts/icon54.woff?uf6sbu') format('woff'),
+        url('/fonts/icon54v1/fonts/icon54.svg?uf6sbu#icon54') format('svg');
     font-weight: normal;
     font-style: normal;
 }

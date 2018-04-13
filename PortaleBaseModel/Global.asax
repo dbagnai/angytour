@@ -466,13 +466,105 @@
         // DICHIARAZIONE BUNDLES E MODALITA' RITORNO
         BundleEngine.AddRoutes(routes);//Route x bundler
         BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
-        //BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files sempre e non solo a riavvio app
-        //BundleEngine.EnumBundleMode
-        //BundleEngine.AddBundleJS("nomedelbundlejs", "~/path/file.js","","");
-        //BundleEngine.AddBundleCSS("nomebundlecss", "~/path/file.css","","");
-        //UTILIZZO in pagina o lato server
-        //BundleEngine.RenderCSS("nomebundlecss");
-        //BundleEngine.RenderJS("nomebundlejs");
+        BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files sempre e non solo a riavvio app
+        //BundleEngine.EnumBundleMode.LastWriteTime
+
+        BundleEngine.AddBundleJS("bundlejslib1",
+    "~/js/bootstrap400/popper.min.js",
+    "~/js/bootstrap400/js/bootstrap.min.js",
+    "~/js/localforage.min.js",
+    "~/js/menuzord/files/js/menuzord.js",
+    "~/js/pako/pako.min.js",
+    "~/js/notifications/notify.min.js",
+    "~/js/notifications/notify-metro.js",
+    "~/js/notifications/notifications.js",
+    "~/js/moment-with-locales.min.js",
+    "~/js/imagesloaded.pkgd.js",
+    "~/js/isotope.pkgd.min.js",
+    "~/js/jquery.cycle.js",
+    "~/js/jquery.cycle2.carousel.js",
+    "~/js/jquery-ui-1.11.4.custom/jquery-ui.js",
+    "~/js/jqueryui/jquery.maskedinput.js",
+     "~/js/owl-carousel.js",
+   "~/js/owl-carousel/owl-carousel/owl.carousel.js",
+      //"~/js/magnify/js/jquery.magnify.js",
+      // "~/js/magnify/js/jquery.magnify-mobile.js"  
+      "~/lib/js/common.js",
+    //"~/lib/js/immobili2.js",
+    "~/lib/js/genericContent.js",
+    "~/lib/js/genericBanner.js",
+    "~/lib/js/sliderBanner.js",
+    "~/lib/js/scroller.js",
+    "~/lib/js/portfolioisotope.js",
+    "~/lib/js/bannerFascia.js",
+    "~/lib/js/portfolioisotopeBanner.js",
+    "~/lib/js/archivio.js",
+    "~/lib/js/linkslistddl2.js",
+    "~/js/lazyloadimg.js",
+    "~/lib/js/searchcontrol.js",
+    "~/lib/js/carrello.js",
+    "~/lib/js/bookingtool.js",
+    "~/lib/js/videoBanner.js"
+        );
+
+        BundleEngine.AddBundleJS("bundlejslib2",
+           "~/js/animationEnigne.js",
+       "~/js/jq.appear.js",
+       "~/js/jquery.base64.js",
+       "~/js/jquery.easing.1.3.js",
+       "~/js/jquery.prettyPhoto.js",
+       "~/js/jquery.themepunch.plugins.min.js",
+       "~/js/jquery.themepunch.tools.min.js",
+       "~/js/jquery.themepunch.revolution.min.js",
+       "~/js/jquery.tipsy.js",
+       "~/js/jQuery.XDomainRequest.js",
+       "~/js/back-to-top.js",
+       "~/js/flexslider/jquery.flexslider-min.js",
+       "~/js/it-cookies-policy.js",
+       "~/js/YTPlayer/jquery.mb.YTPlayer.js",
+       "~/js/jquery.fitvids.js",
+       "~/js/detect-zoom.min.js",
+       "~/js/maininit.js",
+       "~/js/landing/jarallax.js",
+       "~/js/landing/script.js"
+           );
+
+
+
+        BundleEngine.AddBundleCSS("bundlecss1",
+        "~/js/bootstrap400/css/bootstrap.min.css",
+    "~/css/revolution_settings.css",
+    "~/js/menuzord/files/css/menuzord.css",
+    "~/js/menuzord/files/css/skins/menuzord-colored.css",
+     "~/js/menuzord/files/css/menuzordcustomize.css",
+     "~/css/font-awesome.css",
+    "~/css/tipsy.css",
+    "~/css/prettyPhoto.css",
+    "~/css/isotop_animation.css",
+    "~/css/animate.css",
+    "~/css/style1.css",
+    "~/js/jquery-ui-1.11.4.custom/jquery-ui.css",
+    "~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css",
+    "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
+    "~/js/notifications/notification.css",
+    "~/js/owl-carousel/owl-carousel/owl.carousel.css",
+    "~/js/flexslider/flexslider.css",
+    "~/js/magnify/css/magnify.css",
+    "~/css/ui-personalization.css",
+     //"~/fonts/icon54/style.css",
+     //"~/fonts/icon54v1/style.css",
+     //"~/fonts/icon54-v2/style.css",
+     //"~/css/mobirise-icons/mobirise-icons.css",
+     //"~/fonts/icons-mind/style.css",
+     //"~/fonts/linecons/style.css",
+     //"~/fonts/et-line-font-plugin/style.css",
+     "~/css/mbr-faq.css",
+     "~/css/mbr-additional.css",
+     "~/css/landing.css",
+     "~/css/custom1.css"
+      );
+
+
     }
 
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)

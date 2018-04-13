@@ -603,6 +603,10 @@ namespace WelcomeLibrary.UF
                 //context.Response.Cache.SetCacheability(HttpCacheability.Server  .NoCache);
 
                 context.Response.ContentType = CType;
+
+                //var minifier = new Microsoft.Ajax.Utilities.Minifier();
+                //var minifiedString = minifier.MinifyJavaScript(unMinifiedString);
+
                 context.Response.Write(ret);
 
             }

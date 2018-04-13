@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'iconsMind';
-	src:url('fonts/icon-mind.eot?-rdmvgc');
-	src:url('fonts/icons-mind.eot?#iefix-rdmvgc') format('embedded-opentype'),
-		url('fonts/icons-mind.woff?-rdmvgc') format('woff'),
-		url('fonts/icons-mind.ttf?-rdmvgc') format('truetype'),
-		url('fonts/icons-mind.svg?-rdmvgc#icons-mind') format('svg');
+	src:url('/fonts/icons-mind/fonts/icon-mind.eot?-rdmvgc');
+	src:url('/fonts/icons-mind/fonts/icons-mind.eot?#iefix-rdmvgc') format('embedded-opentype'),
+		url('/fonts/icons-mind/fonts/icons-mind.woff?-rdmvgc') format('woff'),
+		url('/fonts/icons-mind/fonts/icons-mind.ttf?-rdmvgc') format('truetype'),
+		url('/fonts/icons-mind/fonts/icons-mind.svg?-rdmvgc#icons-mind') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

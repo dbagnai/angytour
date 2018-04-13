@@ -12,7 +12,7 @@
 
 (function (exports) {
 	// Place the script in strict mode
-	'use strict';
+    'use strict';
 
 	/**
 	 * Class for managing events.
@@ -21,6 +21,7 @@
 	 * @class Manages event registering and emitting.
 	 */
 	function EventEmitter() {}
+
 
 	// Shortcuts to improve speed and size
 

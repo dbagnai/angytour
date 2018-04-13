@@ -38,24 +38,6 @@
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111863124-11"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-111863124-11');
-    </script>
-
-
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-9028735285166707",
-            enable_page_level_ads: true
-        });
-    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -74,13 +56,11 @@
                 }
             });
         </script>
-        <%-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-        <%--      <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap337/bootstrap.min.css") %>" />--%>
 
         <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap400/css/bootstrap.min.css") %>" />
 
-
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
+        <%--  <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap400/css/bootstrap.min.css") %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/revolution_settings.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/menuzord.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/skins/menuzord-colored.css")  %>" />
@@ -99,22 +79,25 @@
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/flexslider/flexslider.css" ) %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
-                <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54v1/style.css")  %>" />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54-v2/style.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mobirise-icons/mobirise-icons.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/mobirise-icons/mobirise-icons.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icons-mind/style.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />
         <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/et-line-font-plugin/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-faq.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/mbr-additional.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/landing.css" />
-        <link rel="stylesheet" type="text/css" runat="server" href="/css/custom1.css" />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mbr-faq.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mbr-additional.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/landing.css")  %> " />
+        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/custom1.css")  %> " />--%>
+
+
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
+        <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>
+
         <!-- MENU --->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div style="padding-left: 40px; padding-right: 40px">
@@ -581,7 +564,7 @@
                                         </a>
                                     </li>
                                     <%= CreaLinkPaginastatica(1) %>
-                                    
+
                                     <%= CreaLinkPaginastatica(4) %>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
@@ -669,8 +652,21 @@
                 </div>
             </div>
         </footer>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="loader" style="display: none">
+            <div class="spinner"></div>
+        </div>
+        <div id="divSearchBarPlaceholder">
+        </div>
 
 
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
+
+        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/           
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
+      <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/menuzord/files/js/menuzord.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/pako/pako.min.js") %>'></script>
@@ -682,32 +678,14 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/isotope.pkgd.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle2.carousel.js") %>'></script>
-        <%--        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>--%>
-
-        <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap337/bootstrap.min.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
-        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/           <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
-       <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>
-
-        <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
-        <%--     <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>--%>
-        <script>
-            pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
-            initLingua('<%= Lingua %>');
-                                   <%-- loadref(initLingua, '<%= Lingua %>');--%>
-            jQuery(document).ready(function () {
-                loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
-                                      <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
-                                      <%-- 
-                                        loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
-            });
-        </script>
-
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>--%>
+        <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
+            <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
+        <!-- Librerie CMS management -->
+<%--         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericContent.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/sliderBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js") %>'></script>
@@ -721,10 +699,27 @@
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/carrello.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/bookingtool.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/bookingtool.js") %>"></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>
+        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>--%>
+        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>--%>
+        <script>
+            var makeRevLower = false;
+            pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
+            initLingua('<%= Lingua %>');
+            jQuery(document).ready(function () {
+                loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
+                <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
+                <%--  loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
+            });
+        </script>
+        <!-- FIne Librerie CMS management -->
 
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/_jquery.placeholder.js") %>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
+
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
+        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
+        <%--  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>--%>
+
+        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.easing.1.3.js")%>"></script>
@@ -732,68 +727,19 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.plugins.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.tools.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.revolution.min.js")%>"></script>
-        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.enablelog.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.tipsy.js")%>"></script>
-        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jQuery.XDomainRequest.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/back-to-top.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
+
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/flexslider/jquery.flexslider-min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/it-cookies-policy.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>
-        <!--DEFIANTJS to query json obkects-->
-        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
-
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/script.js")%>"></script>
-
-
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquerywaypoint/jquery.waypoints.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquerywaypoint/shortcuts/sticky.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.sticky.js")%>"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/detect-zoom.min.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/script.js")%>"></script>--%>
 
-        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
-
-        <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
-        </asp:ContentPlaceHolder>
-
-        <div class="loader" style="display: none">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- fine div disp_form_cont -->
-        <script type="text/javascript">
-            var makeRevLower = false;
-            /*Allinea verticalmente in basso tutti gli oggetti in classe pull-down*/
-            !function (cash) { //ensure $ always references jQuery
-                $(function () { //when dom has finished loading
-                    //make top text appear aligned to bottom: http://stackoverflow.com/questions/13841387/how-do-i-bottom-align-grid-elements-in-bootstrap-fluid-layout
-                    function fixHeader() {
-                        //for each element that is classed as 'pull-down'
-                        //reset margin-top for all pull down items
-                        $('.pull-down').each(function () {
-                            $(this).css('margin-top', 0);
-                        });
-
-                        //set its margin-top to the difference between its own height and the height of its parent
-                        $('.pull-down').each(function () {
-                            if ($(window).innerWidth() >= 991) {
-                                $(this).css('margin-top', $(this).parent().height() - $(this).height());
-                            }
-                        });
-                    }
-                    $(window).resize(function () {
-                        fixHeader();
-                    });
-                    fixHeader();
-                });
-            }(window.jQuery);
-        </script>
-        <!-- Wrapper end -->
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
         <link rel="stylesheet" href="src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>" >
@@ -801,8 +747,7 @@
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
         <![endif]-->
-        <div id="divSearchBarPlaceholder">
-        </div>
+
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
 </body>

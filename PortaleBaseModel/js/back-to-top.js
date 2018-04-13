@@ -73,4 +73,4 @@ var scrolltotop = {
 	}
 }
 
-scrolltotop.init()
+scrolltotop.init();
