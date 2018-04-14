@@ -1,6 +1,5 @@
 ﻿
 "use strict";
-
 var jsonlanguages = "";
 var versionforcache = "1";
 var percorsocontenuti = "";
@@ -36,7 +35,6 @@ var bookinghandlerpath = '/lib/hnd/HandlerBooking.ashx';
 var commonhandlerpath = '/lib/hnd/HandlerDataCommon.ashx';
 var resourcehandlerpath = '/lib/hnd/HandlerDataImmobili.ashx';
 var carrellohandlerpath = '/lib/hnd/CarrelloHandler.ashx';
-
 var referencesloaded = false;
 var promisecalling = false;
 var callqueque = [];
@@ -115,6 +113,8 @@ function initLingua(lingua) {
     if (clearlocalmem == 'true')
         manageclientstorage("clear");
 }
+
+
 function testCacheversion(serverversion) {
     if (versionforcache != serverversion) manageclientstorage("clear");
 }
@@ -135,9 +135,7 @@ function loadref(functocall) {
         args.push(arguments[i]);
         lingua = arguments[i];
         item.args.push(arguments[i]);
-
     }
-
     if (promisecalling)
         callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise iniziale per inizializzare le referenze base
     else {
@@ -1138,7 +1136,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     };
                                 }
 
-                              //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
+                                //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
 
                                 contenutoslide += '<img class="zoommgfy" itemprop="image"  style="border:none;' + imgstyle + '" src="';
                                 contenutoslide += imgslist[j];
@@ -1159,7 +1157,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 /*Livello di ingrandimento della lente*/
                                 contenutoslide += ' alt = "" />';
 
-                              //  contenutoslide += '</a>';
+                                //  contenutoslide += '</a>';
 
 
                                 try {

@@ -6,6 +6,7 @@ using System.Web;
 using System.IO;
 using System.Text;
 using System.Web.Routing;
+using NUglify;
 
 
 namespace WelcomeLibrary.UF
@@ -39,6 +40,10 @@ namespace WelcomeLibrary.UF
             /// </summary>
             public bool ScriptTypeAttribute { get; set; }
 
+
+            public bool minifyCss { get; set; }
+            public bool minifyJs { get; set; }
+
             /// <summary>
             /// Determine if use file extension in handler
             /// require mapping in system.webserver/handlers, see documentation
@@ -55,6 +60,8 @@ namespace WelcomeLibrary.UF
 
             public BundleOptionsFactory()
             {
+                minifyCss = false;
+                minifyJs = false;
                 CheckFilesAlways = false;
                 BundleMode = EnumBundleMode.MD5;
                 ScriptTypeAttribute = false;
@@ -579,16 +586,22 @@ namespace WelcomeLibrary.UF
                     context.Response.Write("");
                     return;
                 }
-
+                //https://www.nuget.org/packages/NUglify/1.5.10
                 if (fileType.ToLower() == "js")
                 {
                     ret = BundleEngine.RenderFullBundleJS(bundleName, true);
                     CType = "application/javascript;charset=UTF-8";
+                    if (BundleEngine.BundleOptions.minifyJs)
+                        ret = minifyjs(ret);
+
+
                 }
                 else if (fileType.ToLower() == "css")
                 {
                     ret = BundleEngine.RenderFullBundleCSS(bundleName, true);
                     CType = "text/css";
+                    if (BundleEngine.BundleOptions.minifyCss)
+                        ret = minifycss(ret);
                 }
 
                 // gli handler rispondono xon cache-control : private , ma così il browser non fa cache
@@ -607,8 +620,31 @@ namespace WelcomeLibrary.UF
                 //var minifier = new Microsoft.Ajax.Utilities.Minifier();
                 //var minifiedString = minifier.MinifyJavaScript(unMinifiedString);
 
+
+
                 context.Response.Write(ret);
 
+            }
+            public string minifyjs(string text)
+            {
+                string ret = text;
+                NUglify.JavaScript.CodeSettings jsset = new NUglify.JavaScript.CodeSettings();
+                //jsset.OutputMode = OutputMode.MultipleLines;
+                jsset.PreserveImportantComments = false;
+                UglifyResult urjs = NUglify.Uglify.Js(ret, jsset);
+                ret = urjs.Code;
+                return ret;
+            }
+            public string minifycss(string text)
+            {
+                string ret = text;
+                NUglify.Css.CssSettings cssset = new NUglify.Css.CssSettings();
+
+                //cssset.OutputMode = OutputMode.MultipleLines;
+                cssset.CommentMode = NUglify.Css.CssComment.None;
+                UglifyResult urcss = NUglify.Uglify.Css(ret, cssset);
+                ret = urcss.Code;
+                return ret;
             }
 
             public bool IsReusable
