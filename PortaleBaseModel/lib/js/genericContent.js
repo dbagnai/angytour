@@ -159,8 +159,8 @@ function injectFlexsliderControls(controlid, container, callback) {
             var currentid = $(this).prop("id");
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
-            if (callback != null) callback();
         });
+            if (callback != null) callback();
     });
 }
 function inizializzaFlexsliderGallery(controlid, container) {
