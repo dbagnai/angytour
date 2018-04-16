@@ -15,22 +15,22 @@ function injectandloadgenericcontentinner(type, container, controlid, visualData
     $('#' + container).load(templateHtml, function () {
 
         //injectOwlGalleryControls(controlid, "plhGallery");
-        injectFlexsliderControls(controlid, "plhGallery");
+        injectFlexsliderControls(controlid, "plhGallery", function () {
 
-        $('#' + container).find("[id^=replaceid]").each(function (index, text) {
-            var currentid = $(this).prop("id");
-            var replacedid = currentid.replace('replaceid', controlid);
-            $(this).prop("id", replacedid);
+            $('#' + container).find("[id^=replaceid]").each(function (index, text) {
+                var currentid = $(this).prop("id");
+                var replacedid = currentid.replace('replaceid', controlid);
+                $(this).prop("id", replacedid);
+            });
+
+            var params = {};
+            params.container = container;/*Inserisco il nome dle container nei parametri per uso successivo nel binding*/
+            params.id = iditem;
+            params.visualData = visualData;
+            params.visualPrezzo = visualPrezzo;
+            globalObject[controlid + "params"] = params;
+            CaricaDatageneriContent(controlid);
         });
-
-        var params = {};
-        params.container = container;/*Inserisco il nome dle container nei parametri per uso successivo nel binding*/
-        params.id = iditem;
-        params.visualData = visualData;
-        params.visualPrezzo = visualPrezzo;
-        globalObject[controlid + "params"] = params;
-
-        CaricaDatageneriContent(controlid);
     });
 };
 function CaricaDatageneriContent(controlid) {
@@ -153,12 +153,13 @@ function reinitaddthis() {
 }
 
 /*--- FLEXLIDER GALLERY -------http://www.woothemes.com/flexslider/-----------*/
-function injectFlexsliderControls(controlid, container) {
+function injectFlexsliderControls(controlid, container, callback) {
     $("#" + container).load("/lib/template/" + "flexslidergallery.html", function () {
         $('#' + container).find("[id^=replaceid]").each(function (index, text) {
             var currentid = $(this).prop("id");
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
+            if (callback != null) callback();
         });
     });
 }
