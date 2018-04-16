@@ -469,8 +469,10 @@
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("BundlesCheckFilesAlways").ToLower() == "true")
             BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files ad ogni chiamata e non solo a riavvio app
         //BundleEngine.BundleOptions.BundleMode = BundleEngine.EnumBundleMode.LastWriteTime;
-        //BundleEngine.BundleOptions.minifyCss = true;
-        //BundleEngine.BundleOptions.minifyJs = true;
+              if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesnifycss").ToLower() == "true")
+            BundleEngine.BundleOptions.minifyCss = true;
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
+            BundleEngine.BundleOptions.minifyJs = true;
 
         BundleEngine.AddBundleJS("bundlejslib1",
     "~/js/bootstrap400/popper.min.js",
