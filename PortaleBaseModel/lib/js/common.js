@@ -941,7 +941,6 @@ function CleanHtml(el) {
 
 }
 
-
 /*Visualizza un lista i dati passati col template indicato*/
 function ShowList(templatename, container, controlid, data) {
     var localObjects = {};
@@ -985,7 +984,8 @@ function ShowList(templatename, container, controlid, data) {
                     //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
                     FillBindControls(jquery_obj, data[j], localObjects, "",
                         function (ret) {
-                            htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                            //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                            htmlout += ret.html() + "\r\n";
                         });
                 }
                 //Inseriamo htmlout nel contenitore  $('#' + el).html 
