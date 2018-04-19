@@ -79,7 +79,7 @@ function searchtaginjectandcall() {
         var callerid = container.prop("id");
         var itemtocall = {};
         for (var i = 0; i < callerpars.length; i++) {
-            //  console.log(callerpars[i]);
+
             if (i == 0) {
                 itemtocall = {};
                 itemtocall.args = [];
@@ -93,15 +93,27 @@ function searchtaginjectandcall() {
                     itemtocall.args.push(callerpars[i].trim().replace(/\'/g, ""));
             }
         }
-        //window[itemtocall.name].apply(this, itemtocall.args)//make the call
+        //window[itemtocall.name].apply(this, itemtocall.args)//make the call directly
         /*Chiamo la funzione controllando se definita, altrimenti attendo che lo sia e la richiamo*/
-        (function wait() {
-            if (typeof window[itemtocall.name] === "function") {
-                window[itemtocall.name].apply(this, itemtocall.args)//make the call
-            } else {
-                setTimeout(wait, 50);
-            }
-        })();
+        if (itemtocall.name.indexOf('.') == -1)
+            (function wait() {
+                if (typeof window[itemtocall.name] === "function") {
+                    window[itemtocall.name].apply(this, itemtocall.args)//make the call
+                } else {
+                    setTimeout(wait, 50);
+                }
+            })();
+        else {
+            var levelscopes = itemtocall.name.split('.');
+            (function wait() {
+                if (levelscopes.length = 2)
+                    if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
+                        window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args)//make the call
+                    } else {
+                        setTimeout(wait, 50);
+                    }
+            })();
+        }
     });
 }
 
@@ -124,11 +136,11 @@ function testCacheversion(serverversion) {
 function loadref(functocall) {
     var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
 
-    //MEMORIZZO LA CHIAMATA
+    //MEMORIZZO I DATI DELLA CHIAMATA
     var item = {};
     item.name = functocall.name;
     item.args = [];
-
+    if (item.name == '' || item.name == undefined) item.name = arguments[0];
     //MEMORIZZO GLI ARGOMENTI DI CHIAMATA IN ARGS
     var args = new Array();
     for (var i = 1; i < arguments.length; i++) {
@@ -136,30 +148,80 @@ function loadref(functocall) {
         lingua = arguments[i];
         item.args.push(arguments[i]);
     }
-    if (promisecalling)
-        callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise iniziale per inizializzare le referenze base
+
+    if (promisecalling && !referencesloaded)
+        callqueque.push(item); //metto nella coda delle chiamate durante l'esecuzione della promise per il caricamento delle tabelle di riferimento
     else {
         promisecalling = true;
         var promise = initreferencesdata(lingua);
         promise.then(function (result) {
-            window[functocall.name].apply(this, args);
-            //AL RITORNO DALLA PROMISE CHIAMO ANCHE TUTTE LE FUNZIONI NELLA CODA DIRETTAMENTE
+            promisecalling = false;
+
+            /////////////////////////////////////////////////////
+            //Chiamiamo  direttamete la funzione se presente nel chiamante ( considerando la possibilità di funzioni in scope interni )
+            /////////////////////////////////////////////////////
+            if (!(item.name == '' || item.name == undefined))
+            //window[item.name].apply(this, args); 
+            {
+                if (item.name.indexOf('.') == -1)
+                    (function wait() {
+                        if (typeof window[item.name] === "function") {
+                            window[item.name].apply(this, args)//make the call
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                else {
+                    var levelscopes = item.name.split('.');
+                    (function wait() {
+                        if (levelscopes.length = 2)
+                            if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
+                                window[levelscopes[0]][levelscopes[1]].apply(this, args)//make the call
+                            } else {
+                                setTimeout(wait, 50);
+                            }
+                    })();
+                }
+            }
+
+            /////////////////////////////////////////////////////
+            //Iniziamo a chiamre quelle nella coda
+            /////////////////////////////////////////////////////
             var tmpqueue = jQuery.extend(true, [], callqueque);
             callqueque = []; //SVUOTO LA CODA
-            promisecalling = false;
             for (var i = 0; i < tmpqueue.length; i++) {
                 var callitem = tmpqueue[i];
-                //callqueque.splice(i, 1);
-                //callqueque.remByName(callitem.name); //tolgo dall'array la chiamata
-                //window[callitem.name].apply(this, callitem.args);//Questa chiama senza promise la funzione finale
-                (function wait() {
-                    if (typeof window[callitem.name] === "function") {
-                        window[callitem.name].apply(this, callitem.args)//make the call
-                    } else {
-                        setTimeout(wait, 50);
+                //if (callitem.name.indexOf('.') == -1)
+                //    window[callitem.name].apply(this, callitem.args);//Questa chiama senza promise la funzione finale
+                //else {
+                //    var levelscopes = callitem.name.split('.');
+                //    window[levelscopes[0]][levelscopes[1]].apply(this, callitem.args)//make the call
+                //}
+
+                if (!(callitem.name == '' || callitem.name == undefined)) {
+                    if (callitem.name.indexOf('.') == -1)
+                        (function wait() {
+                            if (typeof window[callitem.name] === "function") {
+                                window[callitem.name].apply(this, callitem.args)//make the call
+                            } else {
+                                setTimeout(wait, 50);
+                            }
+                        })();
+                    else {
+                        var levelscopes = callitem.name.split('.');
+                        (function wait() {
+                            if (levelscopes.length = 2)
+                                if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
+                                    window[levelscopes[0]][levelscopes[1]].apply(this, callitem.args)//make the call
+                                } else {
+                                    setTimeout(wait, 50);
+                                }
+                        })();
                     }
-                })();
+                }
+
             }
+
         });
     }
 }

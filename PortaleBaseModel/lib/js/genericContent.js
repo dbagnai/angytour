@@ -178,7 +178,6 @@ function inizializzaFlexsliderGallery(controlid, container) {
                 slideshow: false,                //Boolean: Animate slider automatically
                 //   slideshowSpeed: 4000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
                 //  animationSpeed: 600,            //Integer: Set the speed of animations, in milliseconds
-
                 // Usability features
                 pauseOnAction: true,            //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
                 pauseOnHover: true,            //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
