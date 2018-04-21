@@ -46,13 +46,14 @@
     <form id="form1" runat="server">
 
         <!--- Styles -->
-        <%-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:300,400,600,800|Lato:400,400i,700,900" rel="stylesheet">--%>
+          <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700|Open+Sans:300,400,600,800|Lato:400,400i,700" rel="stylesheet" />
+
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
         <script>
             WebFont.load({
                 google: {
-                    families: ['Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i', 'Open Sans:300,400,600,800', 'Lato:400,400i,700,900']
+                    families: ['Raleway:300,400,500,600,700', 'Open Sans:300,400,600,800', 'Lato:400,400i,700']
                 }
             });
         </script>
@@ -60,43 +61,14 @@
         <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
-        <%--  <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/bootstrap400/css/bootstrap.min.css") %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/revolution_settings.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/menuzord.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/menuzord/files/css/skins/menuzord-colored.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/js/menuzord/files/css/menuzordcustomize.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/font-awesome.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/tipsy.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/prettyPhoto.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/isotop_animation.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/animate.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/style1.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/jquery-ui.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/notifications/notification.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/owl-carousel/owl-carousel/owl.carousel.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/flexslider/flexslider.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/js/magnify/css/magnify.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceCdnLinks( "~/css/ui-personalization.css" ) %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54/style.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54v1/style.css")  %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icon54-v2/style.css" ) %>" />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/mobirise-icons/mobirise-icons.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/icons-mind/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/linecons/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/fonts/et-line-font-plugin/style.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mbr-faq.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/mbr-additional.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/landing.css")  %> " />
-        <link rel="stylesheet" type="text/css" href="<%= CommonPage.ReplaceAbsoluteLinks( "~/css/custom1.css")  %> " />--%>
 
 
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>
+       <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
         <!-- MENU --->
         <div class="fixedtop" id="divTop" runat="server" visible="true">

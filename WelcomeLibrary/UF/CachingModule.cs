@@ -37,7 +37,8 @@ namespace WelcomeLibrary.UF
             //Accept-CH: DPR, Width, Viewport-Width
             HttpContext.Current.Response.AppendHeader("Accept-CH", "DPR, Width, Viewport-Width");
             HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
-            String ViewportVidth = context.Request.Headers.Get("Viewport-Width"); //Questa è la viewport del CLIENT!!!
+            String Viewportwidth = context.Request.Headers.Get("Viewport-Width"); //Questa è la viewport del CLIENT presa dalla richiesta !!!
+            WelcomeLibrary.STATIC.Global.Viewportw = Viewportwidth;
         }
 
 

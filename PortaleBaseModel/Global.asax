@@ -474,6 +474,13 @@
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
             BundleEngine.BundleOptions.minifyJs = true;
 
+
+                BundleEngine.AddBundleJS("bundlejslib0",
+"~/js/jquery321/jquery-3.2.1.min.js",
+"~/js/jquery321/jquery-migrate-3.0.1.min.js"
+);
+
+
         BundleEngine.AddBundleJS("bundlejslib1",
     "~/js/bootstrap400/popper.min.js",
     "~/js/bootstrap400/js/bootstrap.min.js",
@@ -488,7 +495,8 @@
     "~/js/isotope.pkgd.min.js",
     "~/js/jquery.cycle.js",
     "~/js/jquery.cycle2.carousel.js",
-    "~/js/jquery-ui-1.11.4.custom/jquery-ui.js",
+//"~/js/jquery-ui-1.11.4.custom/jquery-ui.js",
+"~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
     "~/js/jqueryui/jquery.maskedinput.js",
      "~/js/owl-carousel.js",
    "~/js/owl-carousel/owl-carousel/owl.carousel.js",
@@ -513,6 +521,9 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib2",
+             //~/js/jquery.validate.js,
+           //~/js/defiant/defiant.min.js,
+           //"https://www.google.com/recaptcha/api.js",
            "~/js/animationEnigne.js",
        "~/js/jq.appear.js",
        "~/js/jquery.base64.js",
@@ -548,8 +559,9 @@
     "~/css/isotop_animation.css",
     "~/css/animate.css",
     "~/css/style1.css",
-    "~/js/jquery-ui-1.11.4.custom/jquery-ui.css",
-    "~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css",
+    "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
+    //"~/js/jquery-ui-1.11.4.custom/jquery-ui.min.css",
+    //"~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css",
     "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
     "~/js/notifications/notification.css",
     "~/js/owl-carousel/owl-carousel/owl.carousel.css",

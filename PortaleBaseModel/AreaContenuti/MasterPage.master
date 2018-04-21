@@ -286,6 +286,12 @@
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
+        --%>
+
+         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.js")%>"></script>
+        <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
+        <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
+
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
@@ -619,14 +625,14 @@
                                                     <span class="menu-text">Banner Navigazione Principale</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                   
-                                             <li class="newLi hover">
+
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner area Blog</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                      
+
 
                                             <li>
                                                 <hr style="margin: 2px 0" />

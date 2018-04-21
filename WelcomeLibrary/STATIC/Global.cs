@@ -12,6 +12,15 @@ namespace WelcomeLibrary.STATIC
             get { return _NomeConnessioneDb; }
             set { _NomeConnessioneDb = value; }
         }
+
+
+        private static string _viewportw = "";
+        public static string Viewportw
+        {
+            get { return _viewportw; }
+            set { _viewportw = value; }
+        }
+
         private static bool _updateUrl = false;
         public static bool UpdateUrl
         {
