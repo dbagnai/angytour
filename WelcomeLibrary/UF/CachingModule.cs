@@ -35,8 +35,11 @@ namespace WelcomeLibrary.UF
             HttpContext context = HttpContext.Current;
             String path = HttpContext.Current.Request.Url.AbsolutePath;
             //Accept-CH: DPR, Width, Viewport-Width
-            HttpContext.Current.Response.AppendHeader("Accept-CH", "DPR, Width, Viewport-Width");
-            HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
+            if (!HttpContext.Current.Response.HeadersWritten)
+            {
+                HttpContext.Current.Response.AppendHeader("Accept-CH", "DPR, Width, Viewport-Width");
+                HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
+            }
             String Viewportwidth = context.Request.Headers.Get("Viewport-Width"); //Questa è la viewport del CLIENT presa dalla richiesta !!!
             WelcomeLibrary.STATIC.Global.Viewportw = Viewportwidth;
         }
@@ -59,12 +62,14 @@ namespace WelcomeLibrary.UF
             if (encoding.Contains("gzip"))
             {
                 context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
-                HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
+                if (!HttpContext.Current.Response.HeadersWritten)
+                    HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
             }
             else
             {
                 context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
-                HttpContext.Current.Response.AppendHeader("Content-Encoding", "deflate");
+                if (!HttpContext.Current.Response.HeadersWritten)
+                    HttpContext.Current.Response.AppendHeader("Content-Encoding", "deflate");
             }
 
         }

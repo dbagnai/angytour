@@ -442,147 +442,6 @@ function manageclientstorage(action, key, value, durationhours) {
     }
 }
 
-/* //INIT REFERECES OLD VERSIONE ( con localstorage )
-function initreferencesdata(lingua) {
-    lng = lingua || "I";
-    var deferred = $.Deferred();
-
-    //QUI PUOI TESTARE CHE SE LE VARIABILI SONO NGIA CARICHE NON RICARICHI
-    if (!referencesloaded) {
-        var localstoragedata = managelocalstorage("get", "referencesvars" + lng, "", "");
-        if (localstoragedata == '') {
-            $.ajax({
-                url: pathAbs + commonhandlerpath,
-                contentType: "application/json; charset=utf-8",
-                //async: false,
-                cache: false,
-                data: { 'q': 'initreferencesdata', 'lng': lng },
-                success: function (result) {
-                    try {
-
-                        managelocalstorage("put", "referencesvars" + lng, result, 1); //Metto i valori di ritorno in localstorage con 1 ora scadenza
-                        loadvariables(result);
-                    }
-                    catch (e) {
-                        sendmessage('fail init initreferencesdata', e);
-                    }
-                    deferred.resolve('');
-                },
-                failure: function (result) {
-                    sendmessage('fail init initreferencesdata', '');
-                    deferred.resolve('');
-                }
-            });
-        }
-        else {
-
-            loadvariables(localstoragedata); //Prendo i valori di init dal localstorage
-            deferred.resolve('');
-        }
-    } else { deferred.resolve(''); }
-    return deferred.promise();
-}
-function managelocalstorage(action, key, value, durationhours) {
-    try {
-        var pako = window.pako; //Compression Lib
-        if (action == 'put') {
-            localStorage.removeItem(key);
-            var unused = 999999999;
-            //var unused = getUnusedSpaceOfLocalStorageInBytes();
-            //var used = getUsedSpaceOfLocalStorageInBytes();
-            //var quota = unused + used;
-
-            var binaryString = pako.deflate(value, { to: 'string' }); //Compress
-            try {
-                if (binaryString.length < unused) {
-
-                    localStorage.setItem(key, binaryString)
-                    //Controllare se quello che messo dentro è lungo come quello inserito
-                    var datenow = new Date();
-                    datenow = new moment(datenow).add(durationhours, 'h');
-                    localStorage.setItem("datestored", datenow.format("DD/MM/YYYY HH:mm:ss"))
-                }
-            }
-            catch (err) {
-                localStorage.removeItem(key);
-                console.log('localstorage size excedeed');
-            }
-
-        }
-        if (action == 'get') {
-            var expired = false;
-            if (localStorage.getItem("datestored")) {
-                var expiretime = localStorage.getItem("datestored");
-                if (moment(new Date()) > moment(expiretime, "DD/MM/YYYY HH:mm:ss")) {
-                    expired = true;
-                    localStorage.removeItem("datestored");
-                    localStorage.removeItem(key);
-                }
-            }
-            if (expired) {
-                return "";
-            }
-            else
-                if (localStorage.getItem(key)) {
-                    //  console.log("Used space" + getUsedSpaceOfLocalStorageInBytes());
-                    value = localStorage.getItem(key);
-                    value = pako.inflate(value, { to: 'string' }); //Descompress
-                }
-        }
-        if (action == 'clear') {
-            console.log('clear and reload');
-            //CLEAR ALL LOCAL STORAGE
-            window.localStorage.clear();
-            location.reload(true);
-            //localStorage.removeItem(key);
-        }
-    } catch (e) { }
-    return value;
-}
-function getUsedSpaceOfLocalStorageInBytes() {
-    // Returns the total number of used space (in Bytes) of the Local Storage
-    var b = 0;
-    for (var key in window.localStorage) {
-        if (window.localStorage.hasOwnProperty(key)) {
-            b += key.length + localStorage.getItem(key).length;
-        }
-    }
-    return b;
-}
-
-function getUnusedSpaceOfLocalStorageInBytes() { //NON USARE QUESTA ALLOCA TROPPA MEMORIA NEL BROWSER
-    var maxByteSize = 10485760; // 10MB
-    var minByteSize = 0;
-    var tryByteSize = 0;
-    var testQuotaKey = 'testQuota';
-    var timeout = 20000;
-    var startTime = new Date().getTime();
-    var unusedSpace = 0;
-    var runtime;
-    do {
-        runtime = new Date().getTime() - startTime;
-        try {
-            tryByteSize = Math.floor((maxByteSize + minByteSize) / 2);
-            localStorage.setItem(testQuotaKey, new Array(tryByteSize).join('1'));
-            minByteSize = tryByteSize;
-        } catch (e) {
-            maxByteSize = tryByteSize - 1;
-        }
-    } while ((maxByteSize - minByteSize > 1) && runtime < timeout);
-
-    localStorage.removeItem(testQuotaKey);
-
-    if (runtime >= timeout) {
-        console.log("Unused space calculation may be off due to timeout.");
-    }
-
-    // Compensate for the byte size of the key that was used, then subtract 1 byte because the last value of the tryByteSize threw the exception
-    unusedSpace = tryByteSize + testQuotaKey.length - 1;
-    return unusedSpace;
-}
-
- */
-
 function CaricaListaLingue() {
     if (jsonlanguages === '')
         jsonlanguages = (function () {
@@ -941,6 +800,7 @@ function CleanHtml(el) {
 
 }
 
+
 /*Visualizza un lista i dati passati col template indicato*/
 function ShowList(templatename, container, controlid, data) {
     var localObjects = {};
@@ -991,7 +851,7 @@ function ShowList(templatename, container, controlid, data) {
                 //Inseriamo htmlout nel contenitore  $('#' + el).html 
                 $('#' + controlid).html('');
                 $('#' + controlid).html(htmlout);
-                CleanHtml($('#' + controlid));
+                //CleanHtml($('#' + controlid));
             }, 500);
         });
     }
@@ -1099,6 +959,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['image'];
+                            //pathImg += "?vw=" + window.outerWidth;
                             $(this).attr("data-lazyload", pathImg);
                             //$(this).attr("alt", testoalt);
                         }
@@ -1108,6 +969,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
+                            //pathImg += "?vw=" + window.outerWidth;
                             $(this).attr("src", pathImg);
                             //$(this).attr("alt", testoalt);
                         }
@@ -1118,6 +980,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             var pathImg = localObjects["linkloaded"][idallegato]['image'];
                             var link = localObjects["linkloaded"][idallegato]['link'];
                             $(this).attr("data-link", link);
+                            //pathImg += "?vw=" + window.outerWidth;
                             $(this).attr("data-thumb", pathImg);
                         }
                     }
@@ -1132,8 +995,12 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 var position = completepath.lastIndexOf('/');
                                 completepath = completepath.substr(0, position + 1) + "ant" + completepath.substr(position + 1);
                             }
+                     
                             if (completepath != null && completepath != '')
+                            {
+                                //completepath += "?vw=" + window.outerWidth;
                                 $(this).attr("src", completepath);
+                            }
                             if ($(this).hasClass('lazy')) {
                                 $(this).attr("data-src", completepath);
                                 $(this).attr("src", "");
@@ -1201,6 +1068,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
 
                                 contenutoslide += '<img class="zoommgfy" itemprop="image"  style="border:none;' + imgstyle + '" src="';
+                                //var pathImg = imgslist[j] + "?vw=" + window.outerWidth;
                                 contenutoslide += imgslist[j];
                                 contenutoslide += '" ';
                                 contenutoslide += ' data-magnify-src="';
@@ -1265,6 +1133,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     contenutoslide += '<li > <img style="padding:5px" src="';
                                     var position = imgslist[j].lastIndexOf('/');
                                     var pathanteprima = imgslist[j].substr(0, position + 1) + "ant" + imgslist[j].substr(position + 1);
+                                    //pathanteprima = pathanteprima + "?vw=" + window.outerWidth;
                                     contenutoslide += pathanteprima;
                                     contenutoslide += '" alt="" />';
                                     contenutoslide += '</li>';
@@ -1304,6 +1173,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         for (var j = 0; j < imgslist.length; j++) {
                             contenutoslide += '<div class="item">';
                             contenutoslide += '<img  class="img-responsive"  src="';
+                            //var pathimg = imgslist[j] + "?vw=" + window.outerWidth;
                             contenutoslide += imgslist[j];
                             contenutoslide += '"/>';
                             contenutoslide += '</div>';
