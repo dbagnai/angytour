@@ -414,9 +414,9 @@ function manageclientstorage(action, key, value, durationhours) {
                     console.log('cleared local memory and reload');
                     localforage.removeItem('datestored'); //Forza il rinnovamento della cache ( alo prossimo giro viene rinnovata la memoria del browser)
                     //navigate to url withou querystring
-                    //window.location.replace(window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1")).reload(true);
-                    window.location.href = window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1");
-                    window.location.reload(true);
+                    //window.location.href = window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1");
+                    //window.location.reload(true);
+                    location.replace(window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1"));
 
                 }).catch(function (err) {
                     // This code runs if there were any errors
