@@ -23,12 +23,12 @@ function injectScrollerAndLoadinner(type, container, controlid, listShow, tipolo
             $(this).prop("id", replacedid);
         });
 
-        getfromsession('objfiltro', function (retval) {
-            var objfiltro = {};
             var params = {};
-            if (retval != null && retval != '')
-                objfiltro = JSON.parse(retval);
-            params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
+        //getfromsession('objfiltro', function (retval) {
+        //    var objfiltro = {};
+        //    if (retval != null && retval != '')
+        //        objfiltro = JSON.parse(retval);
+        //    params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
 
             params.tipologia = tipologia;
             params.visualData = visualData;
@@ -44,7 +44,7 @@ function injectScrollerAndLoadinner(type, container, controlid, listShow, tipolo
 
             //Qui puoi fare inizializzazione controlli su allegati
             CaricaScroller(controlid, container);
-        });
+        //});
 
     });
 };

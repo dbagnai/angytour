@@ -27,7 +27,7 @@ p.lead, .lead p {
 .mbr-cards .card-text {
     line-height: 1.5;
 }
-h3.mbr-section-title.display-2 {
+h3.mbr-section-title.display-2, h1.mbr-section-title.display-2 {
     color: #232323;
 }
 .numeri {

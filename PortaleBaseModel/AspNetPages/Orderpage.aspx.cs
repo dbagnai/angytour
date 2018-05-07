@@ -1199,7 +1199,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         ClientiDM cliDM = new ClientiDM();
         Cliente clitmp = new Cliente();
         clitmp.Email = cliente.Email;
-        ClienteCollection clifiltrati = cliDM.CaricaClientiFiltrati("", clitmp, true);
+        ClienteCollection clifiltrati = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp, true);
         //clifiltrati = cliDM.GetLista(clitmp.Email, ""); ;
         foreach (Cliente c in clifiltrati)
         {
@@ -1219,6 +1219,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
 
             cliDM.InserisciAggiornaCliente("", ref ctmp);
+            cliente.Id_cliente = clitmp.Id_cliente;
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -46,17 +46,17 @@
     <form id="form1" runat="server">
 
         <!--- Styles -->
-          <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700|Open+Sans:300,400,600,800|Lato:400,400i,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700|Open+Sans:300,400,600,800|Lato:400,400i,700" rel="stylesheet" />
 
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
         <script>
             WebFont.load({
                 google: {
                     families: ['Raleway:300,400,500,600,700', 'Open Sans:300,400,600,800', 'Lato:400,400i,700']
                 }
             });
-        </script>
+        </script>--%>
 
         <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
@@ -66,7 +66,7 @@
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
-       <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
+        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
@@ -214,9 +214,19 @@
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable  menuzord-right">
-                    <%= CreaLinkPaginastatica(1) %>
-                    <%= CreaLinkPaginastatica(4) %>
-                    <%= CreaLinkTipologie(3,5) %>
+                    <%= CreaLinkTipologie(6,6) %>
+                    <%--<%= CreaLinkPaginastatica(1) %>--%>
+                    <%= CreaLinkPaginastatica(2) %>
+
+                    <li runat="server">
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
+                        <ul class="dropdown">
+                            <%= CreaLinkPaginastatica(3) %>
+                            <%= CreaLinkPaginastatica(4) %>
+                        </ul>
+                    </li>
+
+                    <%= CreaLinkTipologie(4,5) %>
 
                     <%--<li runat="server" id="liHome">
                         <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
@@ -387,6 +397,7 @@
             </asp:ContentPlaceHolder>
 
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
+                <%--<div style="max-width: 100%; margin: 0px auto; padding-left: 0px; padding-right: 0px">--%>
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                 </asp:ContentPlaceHolder>
@@ -477,17 +488,17 @@
         <footer>
             <div class="footer" style="margin-top: 0px">
                 <div class="footerhead">
-                    <div class="footerheadcontainer">
-                        <div class="footerlogo">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-4 align-self-center py-3">
                             <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                                 <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' style="margin: 0 auto; height: 60px" alt="" />
                             </a>
                         </div>
 
                         <%--SOCIAL--%>
-                        <div class="float-right">
-                            <div class="social-icons float-right" style="display: block; line-height: 60px">
-                                <ul style="float: right">
+                        <div class="col-sm-4  align-self-center">
+                            <div class="d-table mx-auto d-sm-block col-sm-mx-right social-icons" style="display: block; line-height: 60px">
+                                <ul>
                                     <li style="float: right">
                                         <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
                                     </li>
@@ -517,9 +528,9 @@
 
                 </div>
 
-                <div class="footer-wrapper">
+                <div class="footer-wrapper py-5">
 
-                    <div class="row">
+                    <div class="row justify-content-center">
 
                         <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
@@ -535,9 +546,10 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <%= CreaLinkPaginastatica(1) %>
+                                    <%= CreaLinkTipologie(6,6) %>
+                                    <%--<%= CreaLinkPaginastatica(1) %>--%>
+                                    <%= CreaLinkPaginastatica(2) %>
 
-                                    <%= CreaLinkPaginastatica(4) %>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                             <span class="label-nav">
@@ -553,19 +565,21 @@
                         <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter2") %>
+                                <%= references.ResMan("Common",Lingua,"testofooter3") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkTipologie(3,5) %>
-                                    <%= CreaLinkPaginastatica(2) %>
+                                    <%= CreaLinkPaginastatica(3) %>
+                                    <%= CreaLinkPaginastatica(4) %>
+
+                                    <%= CreaLinkTipologie(4,5) %>
                                 </ul>
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
                             <%--BLOG--%>
                             <div class="footer-title">
-                                <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, references.ResMan("Common",Lingua,"testoid5"), "6".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testoid5") %></a>
+                                  <%= references.ResMan("Common",Lingua,"testofooter2") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
@@ -574,13 +588,8 @@
                             </div>
                         </div>
 
-
-
-                    </div>
-                    <div class="row">
-
-                        <%--NEWS-LETTER--%>
-                        <div class="col-sm-3 footer-col">
+                         <%--NEWS-LETTER--%>
+                        <div class="col-sm-2 footer-col">
                             <div class="footer-title">
                                 <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                             </div>
@@ -607,7 +616,7 @@
                             <div class="col-lg-12" style="text-align: center">
                                 <p style="font-size: 1.1em; padding: 10px 10px; line-height: 1.1rem;">
                                     <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
-
+                                    <a target="_blank" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkWebmouse") ) %>'>Project by Web Mouse Consulting srl</a> -
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
                                         <%= references.ResMan("Common", Lingua,"Testologin") %></a>
                                 </p>
@@ -637,7 +646,7 @@
 
         <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/           
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
-      <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
+        <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/menuzord/files/js/menuzord.js") %>'></script>
@@ -657,7 +666,7 @@
         <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
             <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
         <!-- Librerie CMS management -->
-<%--         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
+        <%--         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericContent.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js") %>'></script>
         <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/sliderBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js") %>'></script>

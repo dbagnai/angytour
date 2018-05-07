@@ -843,7 +843,7 @@
         </div>
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
             <%--<div class="sticky-top" style="top: 120px" id="divColumnsticky">--%>
-            <div style="top: 120px" id="divColumnsticky">
+            <div class="position-sticky mb-5" style="top: 120px" id="divColumnsticky">
                 <!-- Sidebar Block -->
                 <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
@@ -1100,12 +1100,12 @@
 
 
     <div style="background-color: #ccc; position: relative" id="divSuggeritiContainer">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 25px; padding-right: 25px;">
-            <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin-left: 30px; margin-right: 30px">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="subtitle-block clearfix">
-                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
+                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
                                 <div class="pull-left lead">
                                     <h2 style="margin-bottom: 3px">
                                         <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>

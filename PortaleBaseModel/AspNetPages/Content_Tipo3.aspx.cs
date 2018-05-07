@@ -244,8 +244,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 break;
             default:
                 plhForm.Visible = true;
-                plhDove.Visible = false;
-                divRoutes.Visible = false;
+                plhDove.Visible = true;
+                divRoutes.Visible = true;
                 break;
         }
 

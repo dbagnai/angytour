@@ -801,6 +801,30 @@ function CleanHtml(el) {
 }
 
 
+function recursiveEach($element,controlid){
+    $element.children().each(function () {
+        var $currentElement = $(this);
+
+        var currentattr = $(this).attr("href");
+        if (currentattr != null && currentattr != undefined) {
+            var replacedattr = currentattr.replace('replaceid', controlid);
+            $(this).attr("href", replacedattr);
+        }
+        currentattr = $(this).attr("data-parent");
+        if (currentattr != null && currentattr != undefined) {
+            var replacedattr = currentattr.replace('replaceid', controlid);
+            $(this).attr("data-parent", replacedattr);
+        }
+
+        var currentid = $(this).prop("id");
+        var replacedid = currentid.replace('replaceid', controlid);
+        $(this).prop("id", replacedid);
+
+        //////////// Loop her children
+        recursiveEach($currentElement,controlid);
+    });
+}
+
 /*Visualizza un lista i dati passati col template indicato*/
 function ShowList(templatename, container, controlid, data) {
     var localObjects = {};
@@ -814,11 +838,13 @@ function ShowList(templatename, container, controlid, data) {
 
     if (data !== null && data.length > 0) {
         $('#' + container).load(templateHtml, function () {
-            $('#' + container).find("[id^=replaceid]").each(function (index, text) {
-                var currentid = $(this).prop("id");
-                var replacedid = currentid.replace('replaceid', controlid);
-                $(this).prop("id", replacedid);
-            });
+                 recursiveEach($('#' + container),controlid);
+            //$('#' + container).find("[id^=replaceid]").each(function (index, text) {
+            //    var currentid = $(this).prop("id");
+            //    var replacedid = currentid.replace('replaceid', controlid);
+            //    $(this).prop("id", replacedid);
+            //});
+       
             setTimeout(function () {
                 if (!data.length) return;
                 var str = $('#' + controlid)[0].outerHTML;
@@ -1085,21 +1111,25 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 contenutoslide += Math.floor(imgheight);
                                 contenutoslide += '" ';
                                 /*Livello di ingrandimento della lente*/
-                                contenutoslide += ' alt = "" />';
+                                //contenutoslide += ' alt = "" />';
 
                                 //  contenutoslide += '</a>';
 
-
-                                try {
+  try {
                                     descriptiontext = imgslistdesc[j];
-                                    if (descriptiontext !== '') {
-                                        contenutoslide += '<div class="divbuttonstyle" style="position:absolute;left:30px;bottom:30px;padding:10px;text-align:left;color:#ffffff;">';
-                                        contenutoslide += descriptiontext;
-                                        contenutoslide += '</div>';
-                                    }
+																						   
+
+
+                                    //if (descriptiontext !== '') {
+                                    //    contenutoslide += '<div class="divbuttonstyle" style="position:absolute;left:30px;bottom:30px;padding:10px;text-align:left;color:#ffffff;">';
+                                    //    contenutoslide += descriptiontext;
+                                    //    contenutoslide += '</div>';
+                                    //}
                                 } catch (e) {
                                 };
-
+                                contenutoslide += ' alt="' + descriptiontext + '" />';
+								
+								
                                 contenutoslide += '</div>';
                                 contenutoslide += '</div>';
 
@@ -1668,11 +1698,13 @@ function formatlabelsconto(localObjects, valore, prop, callback) {
 }
 
 function formatlabelresource(localObjects, valore, prop, callback) {
-    var retstring = "";
+   var retstring = "";
     try {
 
-        var controllo = localObjects["resultinfo"][prop[1]];
-        if (controllo == "true" || controllo == null) {
+        var controllo = null;
+        if (localObjects.hasOwnProperty('resultinfo') && localObjects['resultinfo'].hasOwnProperty(prop[1]))
+            localObjects["resultinfo"][prop[1]];
+        if (controllo == "true" || controllo == null || controllo == undefined) {
             retstring = baseresources[lng][prop[0]];
         }
     } catch (e) { };
@@ -2445,4 +2477,13 @@ if (!(function f() { }).name) {
     });
 }
 
+
+function validateEmail(value) {
+    var input = document.createElement('input');
+
+    input.type = 'email';
+    input.value = value;
+
+    return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
+}							   
 

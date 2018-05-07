@@ -18,14 +18,14 @@ function injcCategorieLinksinner(type, container, controlid, listShow, tipologia
             var replacedid = currentid.replace('replaceid', controlid);
             $(this).prop("id", replacedid);
         });
+        var params = {};
 
         //RICARICO LA PAGINA DALLA SESISONE SE PRESENTE
-        getfromsession('objfiltro', function (retval) {
-            var objfiltro = {};
-            var params = {};
-            if (retval != null && retval != '')
-                objfiltro = JSON.parse(retval);
-            params = objfiltro;
+        //getfromsession('objfiltro', function (retval) {
+        //    var objfiltro = {};
+        //    if (retval != null && retval != '')
+        //        objfiltro = JSON.parse(retval);
+        //    params = objfiltro;
 
             params.tipologia = tipologia;
             params.listShow = listShow;
@@ -36,7 +36,7 @@ function injcCategorieLinksinner(type, container, controlid, listShow, tipologia
             globalObject[controlid + "params"] = params;
 
             CaricaCategorieLinksData(controlid);
-        });
+        //});
     });
 };
 
@@ -47,12 +47,12 @@ function CaricaCategorieLinksData(controlid) {
     objfiltrotmp = globalObject[controlid + "params"];
 
     /*MEMORIZZO LA PAGINA IN SESSIONE*/
-    getfromsession('objfiltro', function (retval) {
-        var objfiltro = {};
-        if (retval != null && retval != '')
-            objfiltro = JSON.parse(retval);
-        putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) { });
-    });
+    //getfromsession('objfiltro', function (retval) {
+    //    var objfiltro = {};
+    //    if (retval != null && retval != '')
+    //        objfiltro = JSON.parse(retval);
+    //    putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) { });
+    //});
 
     var functiontocallonend = BindCategorieLinks;
 

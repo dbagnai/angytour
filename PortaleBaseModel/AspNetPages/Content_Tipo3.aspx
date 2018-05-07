@@ -326,7 +326,7 @@
                                                                     //if (typeof (Page_ClientValidate) == 'function') if (Page_ClientValidate()) { return confirm('Are   you   sure   to   submit   ?'); } else return false;
                                                                 }
                                                     </script>
-                                                    <br />
+                                                    <br /><br />
                                                     <asp:CheckBox CssClass="from-control" ID="chkPrivacy" runat="server" Checked="true" Text='<%# references.ResMan("Common", Lingua,"chkPrivacy")  %>' />
                                                     <a id="linkPrivacy" runat="server" onclick="OpenWindow('PrivacyI.htm','','scrollbars=yes,width=600,height=400')"
                                                         href="javascript:;">(D.Lgs 196/2003)</a><br />
@@ -348,7 +348,7 @@
                 <br />
             </asp:PlaceHolder>
             <asp:PlaceHolder ID="plhDove" runat="server" Visible="false">
-                <div id="map" style="height: 410px; width: 100%; margin: 10px auto">
+                <div id="map" style="height: 410px; width: 100%; margin: 40px auto">
                 </div>
             </asp:PlaceHolder>
             <div class="container" runat="server" id="divRoutes" visible="false">
@@ -360,7 +360,7 @@
                 <div class="row" style="text-align: center">
                     <div class="col-sm-12">
                         <asp:Label runat="server" ID="lblContenutiDove"></asp:Label>
-                        <div class="divContentTitle" style="margin: 0px auto; margin-top: 40px; height: auto; display: block">
+                        <div class="divContentTitle" style="margin: 0px auto; margin-bottom: 50px; height: auto; display: block">
                             <div style="font-size: 14px; padding-top: 8px;">
                                 <span id="lblPartenza">
                                     <asp:Literal Text='<%# references.ResMan("Common", Lingua,"GooglePartenza") %>' runat="server" />

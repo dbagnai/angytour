@@ -2,10 +2,10 @@
 <div id="replaceid" class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
 
     <!-- Placeholder per la owl gallery -->
-    <div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"></div>
+    <!--<div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"></div>
     <div class="responsive-video" style="display: none">
         <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
-    </div>
+    </div>-->
 
     <div style="padding-top:20px;padding-left:10px;padding-right:20px;position:relative;">
         <!--<div class="autore"></div>-->
@@ -14,9 +14,8 @@
                 <img class="bind avatar" mybind="Id" src="" />
             </div>
         </div>
-        <div class="float-right">
+        <div class="float-left">
             <span class="bind" mybind="Id" myvalue="TestoPubblicatodata" format="formatlabelresource"></span>
-            <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i>
         </div>
         <div class="float-right">
             <span class="bind" mybind="CodiceRegione" format="frmregione"></span>
@@ -25,9 +24,10 @@
         </div>
         <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
         <div class="float-left">
-            <div class="float-left" style="padding-right:10px;font-size:0.9rem; font-style:italic;text-align:right">
+            <div class="float-left" style="padding-right:10px;font-size:0.8rem; font-style:italic;text-align:right">
                 <span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
                 <span class="bind" itemprop="author" mybind="Autorenome"></span>
+                <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="padding-left:10px;"></span>
                 <!--<span class="bind" mybind="Autore"></span>-->
             </div>
         </div>
@@ -35,7 +35,7 @@
     </div>
     <div style="padding:20px">
         <h1 itemprop="name" style="margin-bottom:4px">
-            <a class="bind" style="color:#314da3" target="_self" href="link" title="titolo" mybind="Id">
+            <a class="bind" style="color:#be202d" target="_self" href="link" title="titolo" mybind="Id">
                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
                 <span style="font-size: 0.7em;line-height: 0.1;" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
                 </span>
@@ -64,7 +64,15 @@
         <div mybind="Id" class="bind files-list" style="display:none"></div>
 
         <div class="blog-post-body" itemprop="description">
-            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="12000" format="formatdescrizione"></span><br />
+
+            <!-- Start PHOTO GALLERY Placeholder per la owl gallery -->
+            <div id="plhGallery" class="bind col-12 float-none p-0 col-sm-6 float-sm-left pl-sm-0 pr-sm-3 pb-sm-3" mybind="Id" myvalue="video" format="frmvisibility"></div>
+            <div class="responsive-video" style="display: none">
+                <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
+            </div>
+            <!-- End PHOTO GALLERY Placeholder per la owl gallery -->
+
+            <span class="bind mb-1" mybind="Id" myvalue="descrizione" myvalue1="12000" format="formatdescrizione"></span><br />
             <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="12000" format="formatdescrizione"></span>
         </div>
         <div class="clearfix"></div>
@@ -74,21 +82,28 @@
         <!--<div class="float-right">
             <a class="btn bind" style="width: 100%" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
         </div>-->
-        <div class="float-left">
-            <a rel="nofollow, noindex" class="btn bind" style="width: 100%" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+        <div class="float-none mr-0 mb-3 float-sm-left mr-sm-3 mb-sm-0">
+            <a rel="nofollow, noindex" class="btn-black-outline bind" style="width: 100%" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
         </div>
 
-        <div class="clearfix" style="margin:40px"></div>
-        <div class="float-left" style="max-width:240px"> 
-            <a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="prevlink" title="" mybind="Id">
-                <span class="bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="line-height:32px;display:inline-block;vertical-align:top">
-                    <br />
-                </div><div style="line-height:14px;display:inline-block;vertical-align:top;font-size:0.8em" class="bind" mybind="Id" myvalue="prevlinktext" format="formattestoreplace"></div>
-            </a>
+        <!--<div class="clearfix" style="margin:40px"></div>-->
+        <div class="d-flex justify-content-between my-3 float-none d-sm-block float-sm-right my-sm-0">
+            <div class="mr-0 float-sm-left mr-sm-3">
+                <a class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                    <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span>
+                    <div style="display:inline-block;"></div>
+                    <!--<div style="line-height:14px;display:inline-block;vertical-align:top;font-size:0.8em" class="bind" mybind="Id" myvalue="prevlinktext" format="formattestoreplace"></div>-->
+                </a>
+            </div>
+            <div class="float-sm-right">
+                <a class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                    <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span>
+                    <div style="display:inline-block;"></div>
+                    <!--<div style="font-size:0.8em;line-height:14px;display:inline-block;vertical-align:top" class="bind" mybind="Id" myvalue="nextlinktext" format="formattestoreplace"></div>-->
+                </a>
+            </div>
         </div>
-        <div class="float-right" style="max-width:240px"> 
-            <a class="bind" style="width: 100%;display:none;border:1px solid #ccc;padding:10px" target="_self" href="nextlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="line-height:32px;display:inline-block;vertical-align:top"><br /></div><div style="font-size:0.8em;line-height:14px;display:inline-block;vertical-align:top" class="bind" mybind="Id" myvalue="nextlinktext" format="formattestoreplace"></div></a>
-        </div>
+
         <div class="clearfix" style="margin-top:10px"></div>
 
     </div>

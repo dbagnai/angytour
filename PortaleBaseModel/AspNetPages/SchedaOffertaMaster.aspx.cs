@@ -407,7 +407,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                     //BIND PER LA SCHEDA!!!!
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 
@@ -417,8 +417,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 break;
 
             case "rif000003":
-            case "rif000004":
-            case "rif000005":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-10";
@@ -449,7 +447,71 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 }
                 break;
-          
+
+            case "rif000004":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-10";
+                column2.Visible = true;
+                column3.Visible = false;
+                divSearch.Visible = false;
+                divContact.Visible = false;
+                divLatestPost.Visible = false;
+                divCategorie.Visible = false;
+
+                if (!JavaInjection)
+                {
+
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+
+                }
+                break;
+
+            case "rif000005":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-10";
+                column2.Visible = true;
+                column3.Visible = false;
+                divSearch.Visible = false;
+                divContact.Visible = false;
+                divLatestPost.Visible = false;
+                divCategorie.Visible = false;
+
+                if (!JavaInjection)
+                {
+
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+
+                }
+                break;
+
             case "rif000012":
                 break;
             //case "rif000001":

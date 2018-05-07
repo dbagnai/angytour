@@ -147,7 +147,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #314da3;
+    background-color: #ecc33c;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -178,7 +178,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #314da3;
+        background-color: #ecc33c;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -193,7 +193,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #314da3;
+        background-color: #ecc33c;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
     box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -207,7 +207,7 @@ a.buttonstyle {
     padding: 10px;
     margin: 0px;
     text-align: center;
-    background-color: #314da3;
+    background-color: #ecc33c;
     border: none;
     font-weight: 400;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -256,7 +256,7 @@ a.buttonstyle {
         padding: 10px;
         margin: 0px;
         text-align: center;
-        background-color: #314da3;
+        background-color: #ecc33c;
         border: 1px solid #ccc;
         font-weight: 400;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
@@ -749,8 +749,9 @@ a.buttonstyleoutline {
     color: #fff !important;
     line-height: normal !important;
     background-color: transparent;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 100;
+    line-height: 1.6rem !important;
 }
 
     .small2.blackcolor {
@@ -1034,7 +1035,7 @@ a.buttonstyleoutline {
     .footer .copyright {
         font-family: 'Lato';
         /*background-color: #33332e;*/
-        background-color: #314da3;
+        background-color: #ecc33c;
         border-top: 1px solid #ccc;
         color: #fff;
         font-size: 10px;
@@ -1107,7 +1108,7 @@ a.buttonstyleoutline {
 }
 
 .rightside .rightside-promo {
-    color: #314da3;
+    color: #ecc33c;
     position: relative;
     display: block;
     vertical-align: middle;
@@ -1761,7 +1762,7 @@ Portfolio
 }
 
 .work-image {
-    height: 280px;
+    /*height: 280px;*/
 }
 
 @media (min-width: 580px) and (max-width: 1000px) {
@@ -1808,7 +1809,7 @@ Portfolio
         height: auto;
         top: 50%;
         position: relative;
-        transform: translate(0,-50%);
+        /*transform: translate(0,-50%);*/
     }
 
     .work-image img.adapttocontainer2 {
@@ -2506,13 +2507,13 @@ Portfoli Single ( da rival )
 
 #divContainerb1 {
     /*height: calc(80vh - 225px) !important;*/
-    height: calc(50vh - 141px) !important;
+    height: calc(100vh - 141px) !important;
     max-height: 480px;
 }
 
 .tp-caption.very_big_white {
-    max-width: 700px !important;
-    width: 30% !important;
+    max-width: 100% !important;
+    width: 100% !important;
 }
 /*.rev-slider-full {
     max-height: 1000px;
@@ -2641,7 +2642,7 @@ Portfoli Single ( da rival )
     max-height: auto;
     white-space: nowrap;
     font-family: 'Lato', serif;
-    font-style: italic;
+    /*font-style: italic;*/
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
 }
 
@@ -2894,7 +2895,7 @@ button.btn,
 }
 
 .btn-purple {
-    background-color: #314da3 !important;
+    background-color: #ecc33c !important;
 }
 
 
@@ -4242,8 +4243,9 @@ p.lead, .lead p {
 }
 
 .mbr-section-subtitle {
-    font-size: 24px;
+    font-size: 30px;
     line-height: 36px;
+    font-style: normal;
 }
 
 .text-xs-right {
@@ -4318,7 +4320,7 @@ p.lead, .lead p {
 }
 
 .footer .social-icons .social-media-icon {
-    background-color: #314da3;
+    background-color: #ecc33c;
     border-radius: 50%;
 }
 
@@ -4554,9 +4556,9 @@ p.lead, .lead p {
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    background: #314da3;
+    background: #ecc33c;
     border-radius: 3px;
-    border-color: #314da3;
+    border-color: #ecc33c;
     display: inline-block;
     /*margin: 10px 5px;*/
     font-weight: 400;
@@ -4588,7 +4590,7 @@ p.lead, .lead p {
         -moz-transition: background 0.2s, opacity 0.2s;
         -o-transition: background 0.2s, opacity 0.2s;
         transition: background 0.2s, opacity 0.2s;
-        background: #314da3;
+        background: #ecc33c;
         border-radius: 3px;
     }
 
@@ -4596,8 +4598,8 @@ p.lead, .lead p {
             text-decoration: none !important;
             color: white !important;
             opacity: 0.78;
-            background: #314da3;
-            border-color: #314da3;
+            background: #ecc33c;
+            border-color: #ecc33c;
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
             box-shadow: none;
@@ -4618,8 +4620,8 @@ p.lead, .lead p {
             -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
             -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
-            background: #314da3;
-            border-color: #314da3;
+            background: #ecc33c;
+            border-color: #ecc33c;
             opacity: 0.78;
             font-size: 0.8rem;
             letter-spacing: 2px;
@@ -4653,7 +4655,10 @@ p.lead, .lead p {
     margin: 0 0 0 0 !important;
     background: #fff;
     border-radius: 3px;
-    border-color: #000;
+    border: 1px solid #000;
+    color: #000 !important;
+    text-align: center;
+    text-transform: uppercase;
 }
 
     .btn-black-outline:hover {
@@ -4941,4 +4946,42 @@ Modify  class per datepicker
 .date-range-selected > .ui-state-default {
     background-image: none;
     background-color: lightsteelblue;
+}
+
+/*----------------------------------
+------ MODIFICHE NONNA ROSA ------
+----------------------------------*/
+.footer {
+    background-color: #95908f;
+}
+.footerhead {
+    padding: 15px 60px 15px 60px;
+    border-top: 1px solid #e8e8e8;
+    background-color: #fffcef;
+    line-height: 60px;
+}
+    .footer .footer-col .footer-title {
+        color: #ecc33c;
+        border-bottom: 1px solid #444;
+    }
+    .footer .footer-col .footer-content a, .footer .footer-col p {
+        color: #fff;
+    }
+    .footer .copyright {
+        font-family: 'Lato';
+        /* background-color: #33332e; */
+        background-color: #5c5856;
+        border-top: none;
+        color: #fff;
+        font-size: 14px;
+        padding: 25px 0px;
+    }
+        .footer .copyright p {
+            line-height: 1.5rem !important;
+        }
+
+@media (max-width: 415px) {
+    .display-2 {
+        font-size: 2.2rem;
+    }
 }
