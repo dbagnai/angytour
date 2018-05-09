@@ -43,7 +43,7 @@ function CaricaScrollerBanner(controlid) {
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[controlid + "params"];
 
-    caricaDatiServerBanner(lng, objfiltrotmp, 1, 20, true,
+    caricaDatiServerBanner(lng, objfiltrotmp, 1, 20, false,
         function (result, callafterfilter) {
             var localObjects = {};
 

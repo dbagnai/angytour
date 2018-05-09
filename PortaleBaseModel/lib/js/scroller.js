@@ -68,7 +68,7 @@ function CaricaScroller(controlid, container) {
     //objfiltrotmp.listShow = listShow;
     //objfiltrotmp.categoria = categoria;
 
-    caricaDatiServer(lng, objfiltrotmp, 1, 20, true,
+    caricaDatiServer(lng, objfiltrotmp, 1, 20, false,
         function (result, callafterfilter) {
             var localObjects = {};
 

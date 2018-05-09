@@ -497,6 +497,7 @@ namespace WelcomeLibrary.UF
             strIn = strIn.Replace("ì", "i");
             strIn = strIn.Replace("ò", "o");
             strIn = strIn.Replace("ù", "u");
+            strIn = strIn.Replace("&", "e");
             // strIn = Regex.Replace(strIn, @"[^a-zA-Z0-9@\_]", "");
             strIn = Regex.Replace(strIn, @"[^a-zA-Zа-яА-ЯЁё0-9@\$=_()-]", "");
             return strIn.Trim('-');
