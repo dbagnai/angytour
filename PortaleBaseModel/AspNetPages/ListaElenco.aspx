@@ -334,15 +334,25 @@
                                             <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contatti" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                                         </div>
 
+                                      
+                                        <div class="checkbox">
+                                            <label>
+                                                <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
+                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                            </label>
+                                        </div>
                                         <button class="divbuttonstyle" runat="server" validationgroup="contatti" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
-                                        <div style="clear: both"></div>
-                                        <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
-                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contatti" ControlToValidate="txtContactName" runat="server" />
-                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contatti" ControlToValidate="txtContactCognome" runat="server" />
-                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contatti" ControlToValidate="txtContactEmail" runat="server" />
+
                                         <div style="font-weight: 300; font-size: 10px; color: red">
                                             <asp:Literal Text="" ID="outputContact" runat="server" />
                                         </div>
+                                        <div style="clear: both"></div>
+
+                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contatti" ControlToValidate="txtContactName" runat="server" />
+                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contatti" ControlToValidate="txtContactCognome" runat="server" />
+                                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contatti" ControlToValidate="txtContactEmail" runat="server" />
+
                                     </div>
                                 </div>
 

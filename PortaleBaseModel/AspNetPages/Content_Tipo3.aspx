@@ -17,7 +17,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>
+    <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>
     <script type="text/javascript">
         makeRevLower = true;
     </script>
@@ -55,7 +55,8 @@
     </Ajax:ToolkitScriptManager>--%>
     <div class="row" style="text-align: center">
         <div class="col">
-            <p><asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label></p>
+            <p>
+                <asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label></p>
             <asp:Label runat="server" ID="lblContenutiContatti"></asp:Label>
             <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
                 <div style="width: 80%; margin: 20px auto; background-color: #efefef; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
@@ -294,20 +295,21 @@
                                                             text-align: -o-center;
                                                             text-align: -ms-center;
                                                         }
+
                                                         #recaptcharesponse {
                                                             font-size: 1.5rem;
                                                             color: red;
                                                         }
                                                     </style>
                                                     <script>
-                                                                function ConfirmCancella() {
-                                                                     if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
-                                                                         $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
-                                                                         return false;
-                                                                     }
-                                                                     else {
-                                                                         $("#recaptcharesponse").html('');
-                                                                     }
+                                                        function ConfirmCancella() {
+                                                            if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
+                                                                        $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        $("#recaptcharesponse").html('');
+                                                                    }
 
                                                                   <%--  var response = grecaptcha.getResponse();
                                                                     if (response.length == 0)  //reCaptcha not verified
@@ -316,21 +318,33 @@
                                                                         return false;
                                                                     }
                                                                     else {--%>
-                                                                     if (Page_ClientValidate("MailInfo")) {
-                                                                         /*do work and go for postback*/
-                                                                     } else {
-                                                                         // alert('not validated');
-                                                                     }
-                                                                    //}
+                                                            if (Page_ClientValidate("MailInfo")) {
+                                                                /*do work and go for postback*/
+                                                            } else {
+                                                                // alert('not validated');
+                                                            }
+                                                            //}
 
-                                                                    //if (typeof (Page_ClientValidate) == 'function') if (Page_ClientValidate()) { return confirm('Are   you   sure   to   submit   ?'); } else return false;
-                                                                }
+                                                            //if (typeof (Page_ClientValidate) == 'function') if (Page_ClientValidate()) { return confirm('Are   you   sure   to   submit   ?'); } else return false;
+                                                        }
                                                     </script>
-                                                    <br /><br />
-                                                    <asp:CheckBox CssClass="from-control" ID="chkPrivacy" runat="server" Checked="true" Text='<%# references.ResMan("Common", Lingua,"chkPrivacy")  %>' />
-                                                    <a id="linkPrivacy" runat="server" onclick="OpenWindow('PrivacyI.htm','','scrollbars=yes,width=600,height=400')"
-                                                        href="javascript:;">(D.Lgs 196/2003)</a><br />
-                                                    <asp:CheckBox CssClass="from-control" ID="chkNewsletter" runat="server" Checked="true" Text='<%# references.ResMan("Common", Lingua,"titoloNewsletter1")  %>' />
+                                                    <br />
+
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
+                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                        </label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
+                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                            <%= references.ResMan("Common", Lingua,"titoloNewsletter1") %>
+                                                        </label>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -344,7 +358,8 @@
             </asp:PlaceHolder>
 
             <asp:PlaceHolder ID="plhRisposta" runat="server" Visible="false">
-                <h2><asp:Literal ID="lblRisposta" runat="server" Text=""></asp:Literal></h2>
+                <h2>
+                    <asp:Literal ID="lblRisposta" runat="server" Text=""></asp:Literal></h2>
                 <br />
             </asp:PlaceHolder>
             <asp:PlaceHolder ID="plhDove" runat="server" Visible="false">

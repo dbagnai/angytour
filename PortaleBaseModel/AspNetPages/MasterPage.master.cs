@@ -914,7 +914,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";
 
             Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
-            Descrizione += " <br/> Confermo l'autorizzazione al trattamento dei miei dati personali (D.Lgs 196/2003)";
+            Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali ";
             if (idOfferta != "") //Inseriamo il dettaglio della scheda di provenienza
             {
                 offerteDM offDM = new offerteDM();

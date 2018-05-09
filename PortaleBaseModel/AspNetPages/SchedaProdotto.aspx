@@ -181,7 +181,8 @@
 
                             <div class="clearfix"></div>
                             <%# references.ResMan("Common", Lingua , "social_condividi")  %><br />
-                        <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
                             <!-- Go to www.addthis.com/dashboard to customize your tools -->
                             <div class="addthis_inline_share_toolbox"></div>
                             <div class="blog-post-body">
@@ -342,15 +343,27 @@
                                                 <div class="ui-input">
                                                     <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral1" placeholder="Messaggio .." runat="server" id="txtContactMessage1" />
                                                 </div>
+
+
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <asp:CheckBox ID="chkContactPrivacy1" runat="server" Checked="false" />
+                                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                    </label>
+                                                </div>
+                                                <div style="font-weight: 300; font-size: 1rem; color: red">
+                                                    <asp:Literal Text="" ID="outputContact1" runat="server" />
+                                                </div>
                                                 <button id="btnFormContatto" class="btn btn-brown btn-lg btn-block" runat="server" validationgroup="contattilateral1" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
                                                 <div style="clear: both"></div>
-                                                <asp:CheckBox ID="chkContactPrivacy1" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
+
                                                 <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactName1" runat="server" />
                                                 <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactCognome1" runat="server" />
                                                 <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactEmail1" runat="server" />
-                                                <div style="font-weight: 300; font-size: 10px; color: red">
-                                                    <asp:Literal Text="" ID="outputContact1" runat="server" />
-                                                </div>
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -574,8 +587,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
 
     <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="false" style="background-color: #cfcfcf;padding-top:30px;padding-bottom:30px">
-        <div class="ui-content" style="margin:0px auto;">
+    <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="false" style="background-color: #cfcfcf; padding-top: 30px; padding-bottom: 30px">
+        <div class="ui-content" style="margin: 0px auto;">
             <div class="container">
                 <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
                     <div class="container">
@@ -625,16 +638,22 @@
                             </div>
 
 
-                            <button id="Button1" style="width: 200px" class="btn btn-orange btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
 
-
-                            <asp:CheckBox ID="chkContactPrivacy" runat="server" Style="font-weight: 300; font-size: 10px" Checked="true" Text="Acconsento al trattamento dei miei dati personali (D.Lgs 196/2003) " />
+                            <div class="checkbox">
+                                <label>
+                                    <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                </label>
+                            </div>
+                            <button id="Button1" class="divbuttonstyle" style="float: right;" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                            <br />
+                            <div style="font-weight: 300; font-size: 1rem; color: red">
+                                <asp:Literal Text="" ID="outputContact" runat="server" />
+                            </div>
                             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
                             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
                             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
-                            <div style="font-weight: 300; font-size: 10px; color: red">
-                                <asp:Literal Text="" ID="outputContact" runat="server" />
-                            </div>
 
                         </div>
                     </div>

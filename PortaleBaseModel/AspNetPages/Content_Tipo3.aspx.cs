@@ -197,7 +197,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             {
                 foreach (Offerte item1 in list)
                 {
-                     li = new ListItem(offDM.estraititolo(item1,Lingua), item1.Id.ToString());
+                    li = new ListItem(offDM.estraititolo(item1, Lingua), item1.Id.ToString());
                     item.DenominazionebyLingua(Lingua);
                     ddlLocations.Items.Add(li);
                 }
@@ -269,7 +269,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
 #endif
 
-   
+
 
     protected void EvidenziaSelezione(string testolink)
     {
@@ -421,10 +421,12 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             //}
             Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
             Descrizione += " <br/> Telefono Cliente:" + txtTel.Text + " Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
-            Descrizione += " <br/> Confermo l'autorizzazione al trattamento dei miei dati personali (D.Lgs 196/2003)";
+            Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei  dati personali ";
 
             if (chkNewsletter.Checked == true)
             {
+                Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
+
                 //SoggettoMail = "Richiesta iscrizione newsletter da " + nomemittente + " tramite il sito " + Nome;
                 //------------------------------------------------
                 //Memorizzo i dati nel cliente per la newsletter

@@ -829,7 +829,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
             //}
             Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
             Descrizione += " <br/> Telefono Cliente:  " + telefono + "   Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
-            Descrizione += " <br/> Confermo l'autorizzazione al trattamento dei miei dati personali (D.Lgs 196/2003)";
+            Descrizione += " <br/> Il cliente Conferma l'autorizzazione al trattamento dei dati personali";
 
             if (chkContactPrivacy.Checked)
             {
