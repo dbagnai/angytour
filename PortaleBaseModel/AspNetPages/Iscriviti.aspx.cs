@@ -739,6 +739,8 @@ public partial class _Iscriviti : CommonPage
             Descrizione += references.ResMan("Common",Lingua,"FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
             Descrizione += cliente.TestoFormConsensi + "<br/>";
+            Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
+
             //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + references.ResMan("Common",Lingua,"testoLinkValidazioneAttivazione").ToString() + "<br/>";
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
 

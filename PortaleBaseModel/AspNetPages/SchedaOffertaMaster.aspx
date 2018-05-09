@@ -914,7 +914,7 @@
                                                 <button id="btnFormContatto1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
 
                                                 <div style="clear: both"></div>
-                                                <div style="font-weight: 300; font-size: 10px; color: red">
+                                                <div style="font-weight: 300; font-size: 1rem; color: red">
                                                     <asp:Literal Text="" ID="outputContact1" runat="server" />
                                                 </div>
 
@@ -1101,7 +1101,7 @@
                         </div>
 
                         <button id="Button1" class="btn btn-blue btn-lg btn-block" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
-                        <div style="font-weight: 300; font-size: 10px; color: red">
+                        <div style="font-weight: 300; font-size: 1rem; color: red">
                             <asp:Literal Text="" ID="outputContact" runat="server" />
                         </div>
                         <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
