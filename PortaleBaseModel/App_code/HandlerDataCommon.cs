@@ -592,6 +592,72 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     });
                     ////////////////////////////////////////////////////////////////////////////
                     break;
+                case "caricaLinks1liv":
+
+                    //////////////////////////////////////////////////////////////////////
+                    //recupero i parametri che mi servono da objfiltro
+                    //////////////////////////////////////////////////////////////////////
+                    Dictionary<string, string> filtriCategorie1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
+                    Dictionary<string, string> linksDictionary1 = new Dictionary<string, string>();
+                    Dictionary<string, List<Tabrif>> mainDictionary1 = new Dictionary<string, List<Tabrif>>();
+                    Tabrif elemlink1 = new Tabrif();
+                    //filtriCategorie1["tipologia"]
+                    List<string> tipologie = new List<string>();
+                    if (filtriCategorie1.ContainsKey("tipologia"))
+                        tipologie = filtriCategorie1["tipologia"].Split('|').ToList<string>();
+                    List<TipologiaOfferte> tlist = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => tipologie.Contains(t.Codice) && t.Lingua == lingua);
+                    if (tlist != null)
+                    {
+                        tlist.Sort(new GenericComparer<TipologiaOfferte>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                        foreach (TipologiaOfferte t in tlist)
+                        {
+                            string testotipologia = t.Descrizione;
+                            List<Prodotto> prodotti1 = Utility.ElencoProdotti.FindAll(p => p.Lingua == lingua && p.CodiceTipologia == t.Codice);
+                            prodotti1.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                            if (prodotti1 != null)
+                            {
+                                prodotti1.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+                                foreach (Prodotto o in prodotti1)
+                                {
+                                    string testoprodotto = o.Descrizione;
+                                    string linkcategoria = CommonPage.CreaLinkRoutes(null, false, lingua, (testoprodotto), "", o.CodiceTipologia, o.CodiceProdotto);
+                                    linkcategoria = linkcategoria.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                    elemlink1 = new Tabrif();
+                                    elemlink1.Codice = o.CodiceProdotto;
+                                    elemlink1.Campo1 = linkcategoria;
+                                    elemlink1.Campo2 = testoprodotto;
+                                    if (mainDictionary1.ContainsKey(testotipologia))
+                                    {
+                                        mainDictionary1[testotipologia].Add(elemlink1);
+                                    }
+                                    else
+                                    {
+                                        List<Tabrif> tmpList = new List<Tabrif>();
+                                        mainDictionary1.Add(testotipologia, tmpList);
+                                        mainDictionary1[testotipologia].Add(elemlink1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    string serializedmainDictionary1 = Newtonsoft.Json.JsonConvert.SerializeObject(mainDictionary1, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None
+                    });
+                    linksDictionary1.Add("data", serializedmainDictionary1);
+
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(linksDictionary1, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    ////////////////////////////////////////////////////////////////////////////
+                    break;
                 case "caricaDatiArchivio":
 
                     //////////////////////////////////////////////////////////////////////
@@ -1001,12 +1067,23 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
             }
 
+
             string linksezione = "";
             SProdotto sottocategoria = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto _tmp) { return (_tmp.Lingua == lingua && (_tmp.CodiceSProdotto == _o.CodiceCategoria2Liv)); });
             if (sottocategoria != null)
             {
                 linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
                 linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+            }
+
+            if (string.IsNullOrEmpty(linksezione))
+            {
+                Prodotto categoria = Utility.ElencoProdotti.Find(p => p.Lingua == lingua && (p.CodiceTipologia == _o.CodiceTipologia && p.CodiceProdotto == _o.CodiceCategoria));
+                if (categoria != null)
+                {
+                    linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(categoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria);
+                    linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + categoria.Descrizione + "</a>";
+                }
             }
 
             string pathimmagine = ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());

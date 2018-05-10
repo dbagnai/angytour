@@ -512,6 +512,7 @@
     "~/lib/js/bannerFascia.js",
     "~/lib/js/portfolioisotopeBanner.js",
     "~/lib/js/archivio.js",
+    "~/lib/js/linkslistddl1.js",
     "~/lib/js/linkslistddl2.js",
     "~/js/lazyloadimg.js",
     "~/lib/js/searchcontrol.js",
