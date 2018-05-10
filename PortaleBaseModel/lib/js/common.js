@@ -118,16 +118,7 @@ function searchtaginjectandcall() {
 }
 
 
-function initLingua(lingua) {
-    lng = lingua || "I";
-    moment.locale("it");
-    var clearlocalmem = $.getQueryString("clear");
-    if (clearlocalmem == 'true')
-        manageclientstorage("clear");
-}
-function testCacheversion(serverversion) {
-    if (versionforcache != serverversion) manageclientstorage("clear");
-}
+
 
 //QUESTA PERMETTE DI CHIAMARE LA FUNZIONE PASSATA NEI PARAMENTRI AL TERMINE DELLA FUNZIONE DI PROMISE QUI DEFINITA
 //AGGIUNGENDO I PARAMETRI DELLA FUNZIONE PRESENT NELLA LISTA DELLA CHIAMATA
@@ -224,6 +215,18 @@ function loadref(functocall) {
         });
     }
 }
+
+function initLingua(lingua) {
+    lng = lingua || "I";
+    moment.locale("it");
+    var clearlocalmem = $.getQueryString("clear");
+    if (clearlocalmem == 'true')
+        manageclientstorage("clear");
+}
+function testCacheversion(serverversion) {
+    if (versionforcache != serverversion) manageclientstorage("clear");
+}
+
 
 function loadvariables(result) {
     //PERCORSI APPLICAZIONE//////////////////////////////////////////////

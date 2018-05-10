@@ -44,6 +44,7 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; });
                     string listaid = pidlist.Value.ToString();
 
+                    listaid = listaid.Trim().Replace("|", ",");
                     string[] listaarray = listaid.Trim().Split(',');
                     if (listaarray != null && listaarray.Length > 0)
                     {
@@ -63,6 +64,7 @@ namespace WelcomeLibrary.DAL
                 {
 
                     SQLiteParameter ptip = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; });
+                    ptip.Value = ptip.Value.ToString().Replace("|", ",");
                     if (!ptip.Value.ToString().Contains(","))
                     {
                         _parUsed.Add(ptip);
@@ -73,6 +75,7 @@ namespace WelcomeLibrary.DAL
                     }
                     else
                     {
+
                         string[] codici = ptip.Value.ToString().Split(',');
                         if (codici != null && codici.Length > 0)
                         {
@@ -529,6 +532,8 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; });
                     string listaid = pidlist.Value.ToString();
 
+                    listaid = listaid.Trim().ToString().Replace("|", ",");
+
                     string[] listaarray = listaid.Trim().Split(',');
                     if (listaarray != null && listaarray.Length > 0)
                     {
@@ -589,6 +594,8 @@ namespace WelcomeLibrary.DAL
                 {
 
                     SQLiteParameter ptip = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; });
+                    ptip.Value = ptip.Value.ToString().Trim().Replace("|", ",");
+
                     if (!ptip.Value.ToString().Contains(","))
                     {
                         _parUsed.Add(ptip);
@@ -1684,6 +1691,7 @@ namespace WelcomeLibrary.DAL
             {
                 string query = "";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                codicetipologia = codicetipologia.Trim().Replace("|", ",");
 
                 if (!codicetipologia.Contains(","))
                 {
@@ -3060,6 +3068,7 @@ namespace WelcomeLibrary.DAL
                 {
                     query = "SELECT  strftime('%m',[Datainserimento]) AS mese, strftime('%Y',[Datainserimento])  AS anno, Count(" + _tblarchivio + ".ID) AS numero FROM " + Tblarchivio;
 
+                    filtrotipologie = filtrotipologie.Trim().Replace("|", ",");
 
                     string[] codici = filtrotipologie.Split(',');
                     if (codici != null && codici.Length > 0)
