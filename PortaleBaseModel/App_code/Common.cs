@@ -15,6 +15,7 @@ using System.Data.SQLite;
 using System.Text;
 using System.Drawing.Imaging;
 using Newtonsoft.Json;
+using System.Globalization;
 
 /// <summary>
 /// This Page class is common to all sample pages and exists as a place to
@@ -120,7 +121,7 @@ public class CommonPage : Page
         {
             sb.Append("<li>");
             sb.Append("<a");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
             sb.Append("   href=\"" + l.Campo1 + "\">");
             sb.Append(l.Campo2);
             sb.Append("</a> ");
@@ -1167,8 +1168,146 @@ public class CommonPage : Page
 
 
 
+        a = strIn.ToLower().IndexOf("cnfg:(");
+        while (a != -1)
+        {
+            string origtext = "";
+            int b = strIn.ToLower().IndexOf(")", a + 1);
+            if (b != -1)
+            {
+                origtext = strIn.Substring(a, b - a + 1);
+
+                string url = strIn.Substring(a + 6, b - (a + 6));
+                string testourl = url;
+                string[] dati = url.Split('|');
+                if (dati.Length == 2)
+                {
+                    url = (dati[0]);
+                    //testourl = dati[1];
+
+                    testourl = ConfigManagement.ReadKey(dati[1]);  
+
+                }
+                urlcorretto = url;
+                if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                {
+                    target = "_self";
+                    urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                }
+                if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                {
+                    target = "_self";
+                    if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                        urlcorretto = "https://" + url;
+                    else
+                        urlcorretto = "http://" + url;
+                }
+                urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                if (!nolink)
+                {
+                    if (string.IsNullOrWhiteSpace(url))
+                        strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                    else
+                        strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+
+                }
+                else
+                    strIn = strIn.Replace(origtext, testourl);
+                target = "_blank";
+
+            }
+            else
+            {
+                strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+            }
+            a = strIn.ToLower().IndexOf("cnfg:(");
+        }
+        ret = strIn;
+
+
+
+        a = strIn.ToLower().IndexOf("rsrc:(");
+        while (a != -1)
+        {
+            string origtext = "";
+            int b = strIn.ToLower().IndexOf(")", a + 1);
+            if (b != -1)
+            {
+                origtext = strIn.Substring(a, b - a + 1);
+
+                string url = strIn.Substring(a + 6, b - (a + 6));
+                string testourl = url;
+                string[] dati = url.Split('|');
+                if (dati.Length == 2)
+                {
+                    url = (dati[0]);
+                    //testourl = dati[1];
+                   string lingua = GetLinguaFromActualCulture(System.Threading.Thread.CurrentThread.CurrentCulture);
+                   testourl = references.ResMan("Common", lingua, dati[1]);
+
+                }
+                urlcorretto = url;
+                if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                {
+                    target = "_self";
+                    urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                }
+                if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                {
+                    target = "_self";
+                    if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                        urlcorretto = "https://" + url;
+                    else
+                        urlcorretto = "http://" + url;
+                }
+                urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                if (!nolink)
+                {
+                    if (string.IsNullOrWhiteSpace(url))
+                        strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                    else
+                        strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+
+                }
+                else
+                    strIn = strIn.Replace(origtext, testourl);
+                target = "_blank";
+
+            }
+            else
+            {
+                strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+            }
+            a = strIn.ToLower().IndexOf("rsrc:(");
+        }
+        ret = strIn;
+
         return ret;
 
+    }
+
+    private static string GetLinguaFromActualCulture(CultureInfo currentCulture)
+    {
+        string lingua = deflanguage;
+
+        switch (currentCulture.TwoLetterISOLanguageName.ToLower())
+        {
+            case "it":
+                lingua = "I";
+                break;
+            case "en":
+                lingua = "GB";
+                break;
+            case "ru":
+                lingua = "RU";
+                break;
+            default:
+                lingua = "GB";
+                break;
+        }
+        return lingua;
     }
 
     public static string ControlloVuotoPosizione(string comune, string codiceprovincia, string codicetipologia, string Lingua)
@@ -1205,7 +1344,7 @@ public class CommonPage : Page
     protected static string getidsocio(string utente)
     {
 
-        return usermanager.getidsocio(utente); 
+        return usermanager.getidsocio(utente);
 
     }
 
@@ -1214,7 +1353,7 @@ public class CommonPage : Page
         return usermanager.getFirstName(utente);
 
     }
-    
+
     public static string getidcliente(string utente)
     {
         return usermanager.getidcliente(utente);

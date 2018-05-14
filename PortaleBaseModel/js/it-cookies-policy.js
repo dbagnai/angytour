@@ -7,17 +7,18 @@ var CookiesPolicy = {
     css_element: null,
     view_element: true,
     cookie_name: 'CookiePolicy',
-    cookie_duration: '259200', // durata in minuti
-    testo_introduttivo: 'Utilizziamo i cookie per migliorare la vostra esperienza di navigazione. Continuando a navigare nel sito si accetta la nostra <a href="#" id="link_open_cookie_policy">politica cookie</a>.',
+    cookie_duration: '259200', // durata in minuti 
+    testo_introduttivo: 'Questo sito utilizza i cookies per offrirti un\'esperienza di navigazione migliore.Usando il nostro servizio accetti l\'impiego di cookie in accordo con la nostra cookie policy: <a href="#" id="link_open_cookie_policy">Scoprine di piu\' </a>.',
     bar_height: 13, // pixel 
     bar_padding: 3, // pixel 
 
     init: function (id_attivita, lang) {
-       /* if (!id_attivita) return false;*/
+        /* if (!id_attivita) return false;*/
 
         CookiesPolicy.id_attivita = id_attivita;
         CookiesPolicy.lang = lang;
-        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'CookiePolicy.aspx';
+        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'informazioni/I/5/politica-cookie';
+        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'informazioni/GB/5/politica-cookie';
         CookiesPolicy.html_element = CookiesPolicy.CreateHtml();
         CookiesPolicy.css_element = CookiesPolicy.CreateCSS();
         CookiesPolicy.view_element = CookiesPolicy.IsRequiredView();
@@ -31,7 +32,7 @@ var CookiesPolicy = {
         var html = '';
 
         html += '<div id="cookies_policy" class="cookies_policy" >';
-        html += '' + CookiesPolicy.testo_introduttivo + ' <input id="link_close_cookie_policy" type="button" value="Ok">';
+        html += ' <input id="link_close_cookie_policy" type="button" value="Ok">' + '' + CookiesPolicy.testo_introduttivo;
         html += '</div>';
 
         return html;
@@ -97,11 +98,11 @@ var CookiesPolicy = {
         if (CookiesPolicy.isHighslide()) {
 
             var w = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName('body')[0],
-            x = w.innerWidth || e.clientWidth || g.clientWidth,
-            y = w.innerHeight || e.clientHeight || g.clientHeight;
+                d = document,
+                e = d.documentElement,
+                g = d.getElementsByTagName('body')[0],
+                x = w.innerWidth || e.clientWidth || g.clientWidth,
+                y = w.innerHeight || e.clientHeight || g.clientHeight;
 
             hs.height = y - 200;
             hs.width = x - 100;
@@ -112,11 +113,9 @@ var CookiesPolicy = {
             hs.slideshows = ''; // fix perche va in conflitto
             return hs.htmlExpand(document.body, { objectType: 'iframe', src: CookiesPolicy.link_privacy });
         } else {
-            window.open(CookiesPolicy.link_privacy, '', 'width=800,height=500,scrollbars=yes'); return false;
-
+            if (CookiesPolicy.lang == 'it') { window.open(CookiesPolicy.link_privacy, '', 'width=800,height=500,scrollbars=yes'); return false; }
+            else { window.open(CookiesPolicy.link_privacy_en, '', 'width=800,height=500,scrollbars=yes'); return false; }
         }
-
-
 
     },
 
@@ -258,10 +257,10 @@ var CookiesPolicy = {
         var expires_date = new Date(today.getTime() + (expires));
 
         document.cookie = name + "=" + escape(value) +
-        ((expires) ? ";expires=" + expires_date.toGMTString() : "") +
-        ((path) ? ";path=" + path : "") +
-        ((domain) ? ";domain=" + domain : "") +
-        ((secure) ? ";secure" : "");
+            ((expires) ? ";expires=" + expires_date.toGMTString() : "") +
+            ((path) ? ";path=" + path : "") +
+            ((domain) ? ";domain=" + domain : "") +
+            ((secure) ? ";secure" : "");
     }
 
 
