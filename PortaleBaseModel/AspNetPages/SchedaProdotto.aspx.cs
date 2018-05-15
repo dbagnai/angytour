@@ -133,32 +133,28 @@ public partial class _SchedaProdotto : CommonPage
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
-
-
                 item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
-                if (item != null)
-                {
-                    Categoria = item.CodiceCategoria;
-                    if (Categoria != "")
-                        Session["Categoria"] = Categoria;
-                    Categoria2liv = item.CodiceCategoria2Liv;
-                    if (Categoria2liv != "")
-                        Session["Categoria2liv"] = Categoria2liv;
-                    CodiceTipologia = item.CodiceTipologia;
-                    if (CodiceTipologia != "")
-                        Session["Tipologia"] = CodiceTipologia;
-                    AssociaDatiSocial(item);
-                }
-                SettaTestoIniziale();
-                SettaVisualizzazione(item);
-
-
                 DataBind();
             }
             else
             {
                 output.Text = "";
             }
+            if (item != null)
+            {
+                Categoria = item.CodiceCategoria;
+                if (Categoria != "")
+                    Session["Categoria"] = Categoria;
+                Categoria2liv = item.CodiceCategoria2Liv;
+                if (Categoria2liv != "")
+                    Session["Categoria2liv"] = Categoria2liv;
+                CodiceTipologia = item.CodiceTipologia;
+                if (CodiceTipologia != "")
+                    Session["Tipologia"] = CodiceTipologia;
+                AssociaDatiSocial(item);
+            }
+            SettaTestoIniziale();
+            SettaVisualizzazione(item);
 
         }
         catch (Exception err)

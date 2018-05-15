@@ -62,9 +62,12 @@ public partial class _SchedaOffertaMaster : CommonPage
         set { ViewState["Categoria2liv"] = value; }
     }
     public bool JavaInjection = false;
-
+    public Offerte item
+    {
+        get { return ViewState["item"] != null ? (Offerte)(ViewState["item"]) : new Offerte(); }
+        set { ViewState["item"] = value; }
+    }
     int progressivosepara = 1;
-    Offerte item = new Offerte();
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -82,27 +85,9 @@ public partial class _SchedaOffertaMaster : CommonPage
                 CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia");
                 Categoria = CaricaValoreMaster(Request, Session, "Categoria");
                 Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
-
                 testoindice = CaricaValoreMaster(Request, Session, "testoindice");
-
                 item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
-                if (item != null)
-                {
-                    Categoria = item.CodiceCategoria;
-                    if (Categoria != "")
-                        Session["Categoria"] = Categoria;
-                    Categoria2liv = item.CodiceCategoria2Liv;
-                    if (Categoria2liv != "")
-                        Session["Categoria2liv"] = Categoria2liv;
-                    CodiceTipologia = item.CodiceTipologia;
-                    if (CodiceTipologia != "")
-                        Session["Tipologia"] = CodiceTipologia;
-                    AssociaDatiSocial(item);
-                }
                 RegistraStatistichePagina();
-                //CaricaControlliJS();
-                SettaTestoIniziale();
-                SettaVisualizzazione(item);
 
                 DataBind();
             }
@@ -110,6 +95,22 @@ public partial class _SchedaOffertaMaster : CommonPage
             {
                 output.Text = "";
             }
+            if (item != null)
+            {
+                Categoria = item.CodiceCategoria;
+                if (Categoria != "")
+                    Session["Categoria"] = Categoria;
+                Categoria2liv = item.CodiceCategoria2Liv;
+                if (Categoria2liv != "")
+                    Session["Categoria2liv"] = Categoria2liv;
+                CodiceTipologia = item.CodiceTipologia;
+                if (CodiceTipologia != "")
+                    Session["Tipologia"] = CodiceTipologia;
+                AssociaDatiSocial(item);
+            }
+            //CaricaControlliJS();
+            SettaTestoIniziale();
+            SettaVisualizzazione(item);
 
         }
         catch (Exception err)
@@ -186,7 +187,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
     private void RegistraStatistichePagina()
     {
-
         // throw new NotImplementedException();
         string currenturl = Request.Url.ToString();
         //////////////////////////////////////////////////////////////////////////////
@@ -203,7 +203,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         {
             trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
         }
-
         string id = idOfferta;
         int _i = 0;
         int.TryParse(id, out _i);
@@ -373,7 +372,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 divSearch.Visible = true;
                 ContaArticoliPerperiodo(CodiceTipologia);
-              //  Caricalinksrubriche(CodiceTipologia);
+                //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = false;
                 divLatestPost.Visible = false;
@@ -401,7 +400,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
                     //sb.Append("</div>");
                     //placeholderlateral.Text = sb.ToString();
-                   
+
 
                     sb.Clear();
 
@@ -610,7 +609,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
-        
+
     }
 
     private void ContaArticoliPerperiodo(string cattipo)

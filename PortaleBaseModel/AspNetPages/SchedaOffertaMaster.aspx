@@ -1,7 +1,6 @@
 <%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
     CodeFile="SchedaOffertaMaster.aspx.cs"
-    EnableTheming="true" Culture="it-IT" Inherits="_SchedaOffertaMaster" Title="" EnableEventValidation="false"
-    MaintainScrollPositionOnPostback="true" %>
+    EnableTheming="true" Culture="it-IT" Inherits="_SchedaOffertaMaster" Title="" EnableEventValidation="false"  %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>--%>

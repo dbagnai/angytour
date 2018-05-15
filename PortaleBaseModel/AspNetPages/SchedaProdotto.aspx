@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
     CodeFile="SchedaProdotto.aspx.cs"
-    EnableTheming="true" Culture="it-IT" Inherits="_SchedaProdotto" Title="" EnableEventValidation="false"
-    MaintainScrollPositionOnPostback="true" %>
+    EnableTheming="true" Culture="it-IT" Inherits="_SchedaProdotto" Title="" EnableEventValidation="false"  %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
