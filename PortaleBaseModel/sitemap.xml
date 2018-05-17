@@ -2,23 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://www.webmousers.com</loc>
+    <loc>https://www.casabaccano.com</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="http://www.webmousers.com/Home"
+                href="https://www.casabaccano.com/Home"
                  />
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>
-      https://www.webmousers.com/I/web/chi-siamo-1
+      https://www.casabaccano.com/I/web/tenuta-35
     </loc>
   </url>
   <url>
     <loc>
-      https://www.webmousers.com/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Contatti
+      https://www.casabaccano.com/I/web/filosofia-1
     </loc>
   </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/I/web/concierge-7
+    </loc>
+  </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/I/web/wedding-2
+    </loc>
+  </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/I/web/visita-le-strutture-8
+    </loc>
+  </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/I/web/acquista-i-servizi-9
+    </loc>
+  </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Contatti
+    </loc>
+  </url>
+  <url>
+    <loc>
+      https://www.casabaccano.com/I/web/condizioni-generali-di-prenotazione-41
+    </loc>
+  </url>
+  <url>
+    <loc>
+
+    </loc>
+  </url>
+  <url>
+    <loc>
+
+    </loc>
+  </url>
+  <url>
+    <loc>
+
+    </loc>
+  </url>
+
 </urlset>

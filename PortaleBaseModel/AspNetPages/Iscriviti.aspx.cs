@@ -506,9 +506,9 @@ public partial class _Iscriviti : CommonPage
     //}
     private void InzializzaEtichette()
     {
-        chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
+        //chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
         Summary.HeaderText = references.ResMan("Common",Lingua, "testoDatiMancanti");
-        btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
+        //btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
     }
     protected void RiempiFormConDatiTest()
     {
@@ -570,7 +570,7 @@ public partial class _Iscriviti : CommonPage
         try
         {
             Cliente cliente = CaricaDatiClienteDaForm(); //Leggo i dati del cliente dal form
-#if true
+ 
             //Testo se l'email del cliente è presente in anagrafica e validata per l'iscriziokne
             //Ne qual caso invio la mail di richiesta direttamente al portale
             ClientiDM cliDM = new ClientiDM();
@@ -580,8 +580,6 @@ public partial class _Iscriviti : CommonPage
                 output.Text = references.ResMan("Common",Lingua, "txtValidateVerifica");
                 
             }
-#endif
-
             if (!chkPrivacy.Checked)
             {
                output.Text = references.ResMan("Common", Lingua, "txtPrivacyError");

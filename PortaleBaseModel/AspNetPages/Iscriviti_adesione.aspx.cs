@@ -322,9 +322,9 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
     //}
     private void InzializzaEtichette()
     {
-        chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
+        //chkPrivacy.Text = references.ResMan("Common",Lingua, "testoPrivacy");
         Summary.HeaderText = references.ResMan("Common",Lingua, "testoDatiMancanti");
-        btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
+        //btnInvia.Text = references.ResMan("Common",Lingua, "TestoBtnNewsletter");
     }
     protected void RiempiFormConDatiTest()
     {

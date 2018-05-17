@@ -56,7 +56,8 @@
     <div class="row" style="text-align: center">
         <div class="col">
             <p>
-                <asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label></p>
+                <asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label>
+            </p>
             <asp:Label runat="server" ID="lblContenutiContatti"></asp:Label>
             <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
                 <div style="width: 80%; margin: 20px auto; background-color: #efefef; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
@@ -282,8 +283,8 @@
                                                         ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
                                                     <br />
                                                     <div id="recaptcharesponse"></div>
-                                                    <asp:Button ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true"
-                                                        ValidationGroup="MailInfo" class="divbuttonstyle" OnClick="btnInvia_Click" OnClientClick="return ConfirmCancella()" />
+                                                    <button id="btnInvia" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+                                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
                                                     <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                     <style>
                                                         .g-recaptcha {
@@ -302,39 +303,41 @@
                                                         }
                                                     </style>
                                                     <script>
-                                                        function ConfirmCancella() {
+                                                        function ConfirmContactValue(elembtn) {
                                                             if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
-                                                                        $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
-                                                                        return false;
-                                                                    }
-                                                                    else {
-                                                                        $("#recaptcharesponse").html('');
-                                                                    }
-
-                                                                  <%--  var response = grecaptcha.getResponse();
-                                                                    if (response.length == 0)  //reCaptcha not verified
-                                                                    {
-                                                                        $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
-                                                                        return false;
-                                                                    }
-                                                                    else {--%>
+                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                $("#recaptcharesponse").html('');
+                                                            }
+                                                            <%--  var response = grecaptcha.getResponse();
+                                                            if (response.length == 0)  //reCaptcha not verified
+                                                            {
+                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
+                                                                return false;
+                                                            }
+                                                            else {--%>
                                                             if (Page_ClientValidate("MailInfo")) {
                                                                 /*do work and go for postback*/
+                                                                $(elembtn).attr("disabled", "")
+                                                                $(elembtn).val("Wait ..");
+                                                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                                buttpost.click();
                                                             } else {
                                                                 // alert('not validated');
+                                                                return false;
                                                             }
                                                             //}
-
-                                                            //if (typeof (Page_ClientValidate) == 'function') if (Page_ClientValidate()) { return confirm('Are   you   sure   to   submit   ?'); } else return false;
                                                         }
                                                     </script>
-                                                    <br />
 
+                                                    <br />
                                                     <div class="checkbox">
                                                         <label>
                                                             <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
                                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                                         </label>
                                                     </div>
                                                     <br />

@@ -93,7 +93,7 @@
                                     <%#  CrealistaFiles(Eval("Id"),  Eval("FotoCollection_M")) %>
                                 </div>
                                 <!-- User -->
-                                <div class="ui-user clearfix" style="display:none">
+                                <div class="ui-user clearfix" style="display: none">
                                     <!-- User Image -->
                                     <a href="#">
                                         <img runat="server" src="~/images/logo.png" alt="" /></a>
@@ -195,19 +195,19 @@
         <asp:Repeater ID="rptSoci" runat="server" ViewStateMode="Enabled" OnItemDataBound="rptSoci_ItemDataBound">
             <ItemTemplate>
                 <div class="row" runat="server" id="divTitle"
-                    style="font-size: 20px; color: #06558b; padding-bottom: 5px; margin-top: 25px; margin-bottom:20px ;border-bottom: 1px solid #06558b" visible="false">
+                    style="font-size: 20px; color: #06558b; padding-bottom: 5px; margin-top: 25px; margin-bottom: 20px; border-bottom: 1px solid #06558b" visible="false">
                     <asp:Literal Text="" ID="litRegione" runat="server" />
                 </div>
-                <div class="row" style="border-bottom:1px solid #ccc;margin-bottom:20px;padding-bottom:5px">
+                <div class="row" style="border-bottom: 1px solid #ccc; margin-bottom: 20px; padding-bottom: 5px">
                     <div class="col-lg-4">
-                    <%--    <h5 style="text-transform: capitalize">
+                        <%--    <h5 style="text-transform: capitalize">
                             <a id="a1" runat="server"
                                 href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                 <asp:Literal ID="litTitolo" Text='<%# Eval("Cognome_dts").ToString() + " "  + Eval("Nome_dts").ToString()  %>'
                                     runat="server"></asp:Literal></a>
                         </h5>--%>
-                        <h5 style="text-transform: capitalize;margin-bottom:0px">
+                        <h5 style="text-transform: capitalize; margin-bottom: 0px">
                             <a id="a4" runat="server"
                                 href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
@@ -227,7 +227,7 @@
 
                     </div>
                     <div class="col-lg-2">
-                        <a id="a3" runat="server" class="buttonstyle" style="padding-top:5px;padding-bottom:5px"
+                        <a id="a3" runat="server" class="buttonstyle" style="padding-top: 5px; padding-bottom: 5px"
                             href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="color: #fff; font-size: 13px; font-weight: bold">
@@ -334,16 +334,67 @@
                                             <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contatti" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                                         </div>
 
-                                      
                                         <div class="checkbox">
                                             <label>
                                                 <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
                                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                             </label>
                                         </div>
-                                        <button class="divbuttonstyle" runat="server" validationgroup="contatti" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
+                                      
 
+                                        <button id="btnInvia" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contatti" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+                                        <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
+                                        <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                                        <style>
+                                            .g-recaptcha {
+                                                margin: 15px auto !important;
+                                                width: auto !important;
+                                                height: auto !important;
+                                                text-align: -webkit-center;
+                                                text-align: -moz-center;
+                                                text-align: -o-center;
+                                                text-align: -ms-center;
+                                            }
+
+                                            #recaptcharesponse {
+                                                font-size: 1.5rem;
+                                                color: red;
+                                            }
+                                        </style>
+                                        <script>
+                                            function ConfirmContactValue(elembtn) {
+                                                if ($('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked == false) {
+                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                $("#recaptcharesponse").html('');
+                                                            }
+                                                            <%--  var response = grecaptcha.getResponse();
+                                                            if (response.length == 0)  //reCaptcha not verified
+                                                            {
+                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
+                                                                return false;
+                                                            }
+                                                            else {--%>
+                                                            if (Page_ClientValidate("contatti")) {
+                                                                /*do work and go for postback*/
+                                                                $(elembtn).attr("disabled", "")
+                                                                $(elembtn).val("Wait ..");
+                                                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                    buttpost.click();
+                                                } else {
+                                                    // alert('not validated');
+                                                    return false;
+                                                }
+                                                //}
+                                            }
+                                        </script>
+
+
+
+                                        <div id="recaptcharesponse"></div>
                                         <div style="font-weight: 300; font-size: 10px; color: red">
                                             <asp:Literal Text="" ID="outputContact" runat="server" />
                                         </div>
@@ -366,4 +417,4 @@
             </div>
         </div>
     </div>
-</asp:Content> 
+</asp:Content>

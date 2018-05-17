@@ -97,7 +97,7 @@
                         <label>
                             <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                         </label>
                     </div>
                     <br />
@@ -108,19 +108,57 @@
                             <%= references.ResMan("Common", Lingua,"testoConsenso1") %>
                         </label>
                     </div>
+                    <br />
+                    <br />
+                    <button id="btnInvia" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoBtnNewsletter")  %> </button>
+                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInviaAStrutturaSenzaValidazione_Click" />
+                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                    <style>
+                        .g-recaptcha {
+                            margin: 15px auto !important;
+                            width: auto !important;
+                            height: auto !important;
+                            text-align: -webkit-center;
+                            text-align: -moz-center;
+                            text-align: -o-center;
+                            text-align: -ms-center;
+                        }
 
-                    <br />
-                    <br />
-                    <asp:Button ID="btnInvia" runat="server" Text="Invia" CausesValidation="true" UseSubmitBehavior="false"
-                        ValidationGroup="MailInfo" OnClick="btnInviaAStrutturaSenzaValidazione_Click" />
-                    <%-- <asp:UpdateProgress ID="UpdateProgress4" runat="server" DisplayAfter="0" DynamicLayout="false"
-                                        AssociatedUpdatePanelID="updIscrivi">
-                                        <ProgressTemplate>
-                                            <div style="float: left; background-color: Transparent; color: Black; padding: 0px">
-                                                <img alt="" src="../images/Varie/indicator.gif" />
-                                            </div>
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>--%>
+                        #recaptcharesponse {
+                            font-size: 1.5rem;
+                            color: red;
+                        }
+                    </style>
+                    <script>
+                        function ConfirmContactValue(elembtn) {
+                            if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
+                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                return false;
+                            }
+                            else {
+                                $("#recaptcharesponse").html('');
+                            }
+                            <%--  var response = grecaptcha.getResponse();
+                            if (response.length == 0)  //reCaptcha not verified
+                            {
+                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
+                                return false;
+                            }
+                            else {--%>
+                            if (Page_ClientValidate("MailInfo")) {
+                                /*do work and go for postback*/
+                                $(elembtn).attr("disabled", "")
+                                $(elembtn).val("Wait ..");
+                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                buttpost.click();
+                            } else {
+                                // alert('not validated');
+                                return false;
+                            }
+                            //}
+                        }
+                    </script>
+                    <div id="recaptcharesponse" style="margin: 5px"></div>
                     <br />
                     <asp:ValidationSummary runat="server" ID="Summary" ValidationGroup="MailInfo" DisplayMode="BulletList"
                         ShowSummary="true" HeaderText="Rilevati dati mancanti / Missing needed infos " />

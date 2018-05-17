@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
     CodeFile="SchedaProdotto.aspx.cs"
-    EnableTheming="true" Culture="it-IT" Inherits="_SchedaProdotto" Title="" EnableEventValidation="false"  %>
+    EnableTheming="true" Culture="it-IT" Inherits="_SchedaProdotto" Title="" EnableEventValidation="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
@@ -14,7 +14,8 @@
             </div>
             <div class="col-md-10 col-sm-10 col-xs-12">
                 <span class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
-                    <asp:Literal Text="" runat="server" ID="litSezione" /></span>
+                    <asp:literal text="" runat="server" id="litSezione" />
+                </span>
             </div>
             <div class="col-md-1 col-sm-1">
             </div>
@@ -25,7 +26,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div style="text-align: center">
-                    <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
+                    <asp:literal text="" runat="server" id="litTextHeadPage" />
                 </div>
             </div>
         </div>
@@ -52,7 +53,7 @@
         </div>
     </div>
 
-    <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
+    <asp:literal text="" id="placeholderrisultati" runat="server" />
 
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
@@ -63,13 +64,13 @@
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
             <div class="row" style="color: red; font-size: 1.2rem">
-                <asp:Label ID="output" runat="server"></asp:Label>
+                <asp:label id="output" runat="server"></asp:label>
             </div>
             <%--Container per inject java della scheda--%>
             <div id="divItemContainter1" style="position: relative; display: none"></div>
 
             <%--Rpt per scheda lato server--%>
-            <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
+            <asp:repeater id="rptOfferta" runat="server" onitemdatabound="rptOfferta_ItemDataBound">
                 <ItemTemplate>
                     <div class="blog-post" style="text-align: justify" itemscope="" itemtype="http://schema.org/Product">
                         <div class="blog-span">
@@ -203,7 +204,7 @@
                         </div>
                     </div>
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:repeater>
 
             <div class="clearfix"></div>
             <%--SUGGERITI--%>
@@ -216,8 +217,8 @@
                     </span>
                 </div>
 
-                <asp:Repeater ID="rptArticoliSuggeriti" runat="server"
-                    ViewStateMode="Enabled">
+                <asp:repeater id="rptArticoliSuggeriti" runat="server"
+                    viewstatemode="Enabled">
                     <ItemTemplate>
                         <div class="col-sm-4" style="padding-left: 0px;">
                             <div class="blog-post">
@@ -288,7 +289,7 @@
                         </div>
                         <%= SeparaRows()%>
                     </ItemTemplate>
-                </asp:Repeater>
+                </asp:repeater>
 
             </div>
         </div>
@@ -346,20 +347,42 @@
 
                                                 <div class="checkbox">
                                                     <label>
-                                                        <asp:CheckBox ID="chkContactPrivacy1" runat="server" Checked="false" />
+                                                        <asp:checkbox id="chkContactPrivacy1" runat="server" checked="false" />
                                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                                     </label>
                                                 </div>
-                                                <div style="font-weight: 300; font-size: 1rem; color: red">
-                                                    <asp:Literal Text="" ID="outputContact1" runat="server" />
+                                                <script>
+                                                    function ConfirmValidationForm1(elembtn) {
+                                                        var chk1 = document.getElementById("<%= chkContactPrivacy1.ClientID  %>");
+                                                        var out1 = document.getElementById("outputContact1div");
+                                                        if (!chk1.checked) {
+                                                            out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                            return false;
+                                                        } else { out1.innerHTML = ''; }
+                                                        if (Page_ClientValidate("contattilateral1")) {
+                                                            /*do work and go for postback*/
+                                                            console.log('ok validated');
+                                                            var buttpost = document.getElementById("<%= btnFormContattoSrv.ClientID  %>");
+                                                            $(elembtn).attr("disabled", "")
+                                                            $(elembtn).innerHTML = "Wait ..";
+                                                            buttpost.click();
+                                                        } else {
+                                                            console.log('not  validated');
+                                                            return false;
+                                                        }
+                                                    }
+                                                </script>
+                                                <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral1" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                                <asp:button id="btnFormContattoSrv" style="display: none" runat="server" onclick="btnContatti1_Click" />
+                                                <div style="font-weight: 300; font-size: 1.2rem; color: red" id="outputContact1div">
+                                                    <asp:literal text="" id="outputContact1" runat="server" />
                                                 </div>
-                                                <button id="btnFormContatto" class="btn btn-brown btn-lg btn-block" runat="server" validationgroup="contattilateral1" onserverclick="btnContatti1_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
                                                 <div style="clear: both"></div>
 
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactName1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactCognome1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactEmail1" runat="server" />
+                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral1" controltovalidate="txtContactName1" runat="server" />
+                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' validationgroup="contattilateral1" controltovalidate="txtContactCognome1" runat="server" />
+                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' validationgroup="contattilateral1" controltovalidate="txtContactEmail1" runat="server" />
 
 
 
@@ -379,8 +402,8 @@
                     </h3>
                     <div class="sidebar-content">
                         <ul class="posts-list">
-                            <asp:Repeater ID="rtpLatestPost" runat="server"
-                                ViewStateMode="Enabled">
+                            <asp:repeater id="rtpLatestPost" runat="server"
+                                viewstatemode="Enabled">
                                 <ItemTemplate>
                                     <li>
                                         <div class="posts-list-thumbnail">
@@ -409,7 +432,7 @@
                                         </div>
                                     </li>
                                 </ItemTemplate>
-                            </asp:Repeater>
+                            </asp:repeater>
                         </ul>
                     </div>
                 </div>
@@ -580,7 +603,7 @@
                 $select.val(carcombined[1]);
         });
     </script>
-    <asp:HiddenField runat="server" ID="hddTagCombined" ClientIDMode="Static" />
+    <asp:hiddenfield runat="server" id="hddTagCombined" clientidmode="Static" />
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
@@ -640,19 +663,41 @@
 
                             <div class="checkbox">
                                 <label>
-                                    <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
+                                    <asp:checkbox id="chkContactPrivacy" runat="server" checked="false" />
                                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                    <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkinformativa")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                    <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                 </label>
                             </div>
-                            <button id="Button1" class="divbuttonstyle" style="float: right;" runat="server" validationgroup="contattilateral" onserverclick="btnContatti_Click"><%= references.ResMan("Common", Lingua,"TestoInvio") %></button>
-                            <br />
-                            <div style="font-weight: 300; font-size: 1rem; color: red">
-                                <asp:Literal Text="" ID="outputContact" runat="server" />
+                            <script>
+                                function ConfirmValidationForm(elembtn) {
+                                    var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
+                                    var out1 = document.getElementById("outputContactdiv");
+                                    if (!chk1.checked) {
+                                        out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                        return false;
+                                    } else { out1.innerHTML = ''; }
+                                    if (Page_ClientValidate("contattilateral")) {
+                                        /*do work and go for postback*/
+                                        console.log('ok validated');
+                                        var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");
+                                        $(elembtn).attr("disabled", "")
+                                        $(elembtn).innerHTML = "Wait ..";
+                                        buttpost.click();
+                                    } else {
+                                        console.log('not  validated');
+                                        return false;
+                                    }
+                                }
+                            </script>
+                            <button id="Button1" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                            <asp:button id="Button1srv" style="display: none" runat="server" onclick="btnContatti_Click" />
+
+                            <div style="font-weight: 300; font-size: 1.2rem; color: white" id="outputContactdiv">
+                                <asp:literal text="" id="outputContact" runat="server" />
                             </div>
-                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
-                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
-                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
+                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral" controltovalidate="txtContactName" runat="server" />
+                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' validationgroup="contattilateral" controltovalidate="txtContactCognome" runat="server" />
+                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' validationgroup="contattilateral" controltovalidate="txtContactEmail" runat="server" />
 
                         </div>
                     </div>
@@ -678,7 +723,7 @@
                     </div>
                 </div>
             </div>
-            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
+            <asp:literal text="" id="plhSuggeritiJs" runat="server" />
         </div>
     </div>
 </asp:Content>

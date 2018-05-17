@@ -6,7 +6,7 @@
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title></title>
-   <%-- <meta http-equiv="x-ua-compatible" content="IE=9" />--%>
+    <%-- <meta http-equiv="x-ua-compatible" content="IE=9" />--%>
 
     <style type="text/css">
         /*STILI PER LE FINESTRE DI POPUP------------------------------------*/
@@ -360,21 +360,20 @@
                 </asp:UpdateProgress>
                 <table style="width: 100%; background-color: black; color: white">
                     <tr>
-                        <td style="width: 40px">Id
-                        </td>
-                        <td style="width: 390px">Cognome o Rag.Soc.</td>
-                        <td style="width: 100px">Nome</td>
-                        <td style="width: 160px">Email</td>
-                        <td style="width: 70px">Lingua</td>
-                        <td style="width: 150px">Tipo cliente</td>
-                        <td style="width: 15px">Valido</td>
+                        <td style="width: 50px"> Id</td>
+                        <td style=""> Cognome o Rag.Soc.</td>
+                        <td style="width: 150px"> Nome</td>
+                        <td style="width: 160px"> Email</td>
+                        <td style="width: 100px"> Lingua</td>
+                        <td style="width: 150px"> Tipo cliente</td>
+                        <td style="width: 40px"> Valido</td>
                     </tr>
                 </table>
                 <asp:Repeater ID="rptClienti" runat="server" EnableViewState="true" OnItemDataBound="rptClienti_OnItemDataBound">
                     <ItemTemplate>
-                        <asp:Panel ID="PopupMenu" CssClass="popupMenu" runat="server"  
+                        <asp:Panel ID="PopupMenu" CssClass="popupMenu" runat="server"
                             BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
-                            <div style="max-width:350px;width: 100%; float: left; padding: 5px">
+                            <div style="max-width: 350px; width: 100%; float: left; padding: 5px">
                                 <div style="text-align: center; width: 97%; background-color: Black; color: White;">
                                     DATI ANAGRAFICI CLIENTE
                                 </div>
@@ -625,7 +624,7 @@
                                     CommandArgument='<%#  Eval("ID_CLIENTE") %>' Text="Elimina Utente" /><br />
                                 <asp:Button ID="btnNewpass" Style="float: left" runat="server" UseSubmitBehavior="false" OnClick="Setnewpass_click"
                                     CommandArgument='<%#  Eval("ID_CLIENTE") %>' Text="Imposta Password" />
-                                <input id="txtNewpass" style="float: left" maxlength="16" class="txtNewpass" runat="server" value='' /><br />
+                                <input id="txtNewpass" style="float: left" maxlength="10" class="txtNewpass" runat="server" value='' /><br />
                                 <div style="clear: both"></div>
                                 <span style="font-size: 16px">
                                     <asp:Literal Text="" ID="litMsRow" runat="server" />
@@ -640,50 +639,50 @@
 
                             <table style="width: 100%;">
                                 <tr>
-                                    <td style="width: 40px">
-                                        <div style="overflow: hidden; width: 40px">
-                                            <asp:TextBox Width="98%" SkinID="Insert_txt" MaxLength="8" ReadOnly="true" ID="txtCod"
+                                    <td style="width: 50px">
+                                        <div style="overflow: hidden; width: 50px">
+                                            <asp:TextBox Width="100%" SkinID="Insert_txt" MaxLength="8" ReadOnly="true" ID="txtCod"
                                                 runat="server" Text='<%# Eval("ID_CLIENTE") %>' />
                                         </div>
                                     </td>
                                     <td>
-                                        <div style="overflow: hidden; width: 100%">
-                                            <asp:TextBox Width="98%" MaxLength="200" SkinID="Insert_txt" ID="txtCG" runat="server"
+                                        <div style="overflow: hidden;">
+                                            <asp:TextBox Width="100%" MaxLength="200" SkinID="Insert_txt" ID="txtCG" runat="server"
                                                 Text='<%# Eval("Cognome") %>' />
                                         </div>
                                     </td>
-                                    <td style="width: 100px">
-                                        <div style="overflow: hidden; width: 100px">
-                                            <asp:TextBox Width="98%" MaxLength="200" SkinID="Insert_txt" ID="txtNO" runat="server"
+                                    <td style="width: 150px">
+                                        <div style="overflow: hidden; width: 150px">
+                                            <asp:TextBox Width="100%" MaxLength="200" SkinID="Insert_txt" ID="txtNO" runat="server"
                                                 Text='<%# Eval("Nome") %>' />
                                         </div>
                                     </td>
                                     <td style="width: 160px">
                                         <div style="overflow: hidden; width: 160px">
-                                            <asp:TextBox Width="98%" MaxLength="100" SkinID="Insert_txt" ID="txtEM" runat="server"
+                                            <asp:TextBox Width="100%" MaxLength="100" SkinID="Insert_txt" ID="txtEM" runat="server"
                                                 Text='<%# Eval("Email") %>' />
                                         </div>
                                     </td>
-                                    <td style="width: 70px">
-                                        <div style="overflow: hidden; width: 70px">
-                                            <asp:DropDownList Width="98%" runat="server" ID="ddlLingua" SelectedValue='<%# Eval("Lingua") %>'
+                                    <td style="width: 100px">
+                                        <div style="overflow: hidden; width: 100px">
+                                            <asp:DropDownList Width="100%" runat="server" ID="ddlLingua" SelectedValue='<%# Eval("Lingua") %>'
                                                 SkinID="Insert_ddl">
                                                 <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                                                 <asp:ListItem Text="Inglese" Value="GB" />
                                                 <asp:ListItem Text="Russo" Value="RU" />
                                             </asp:DropDownList>
-                                            <%-- <asp:TextBox Width="98%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
+                                            <%-- <asp:TextBox Width="100%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
                                                 Text='<%# Eval("Lingua") %>' />--%>
                                         </div>
                                     </td>
                                     <td style="width: 150px">
                                         <div style="overflow: hidden; width: 150px">
-                                            <asp:DropDownList runat="server" ID="ddlTipiClienti" AppendDataBoundItems="true" Width="98%" SelectedValue='<%# Eval("id_tipi_clienti") %>'
+                                            <asp:DropDownList runat="server" ID="ddlTipiClienti" AppendDataBoundItems="true" Width="100%" SelectedValue='<%# Eval("id_tipi_clienti") %>'
                                                 OnInit="ddlTipiClienti_OnInit" SkinID="Insert_ddl" />
                                         </div>
                                     </td>
-                                    <td style="width: 15px">
-                                        <div style="overflow: hidden; width: 15px">
+                                    <td style="width: 40px">
+                                        <div style="overflow: hidden; width: 40px;text-align:center">
                                             <asp:CheckBox ID="chkVD" runat="server" Checked='<%# Eval("Validato") %>' />
                                         </div>
                                     </td>
@@ -706,28 +705,21 @@
                 HoverCssClass="popupHover" PopupPosition="Bottom" OffsetX="50" OffsetY="0" PopDelay="100" />--%>
                 <Ajax:PopupControlExtender ID="hoe3" TargetControlID="btnNuovo" PopupControlID="PopupMenu1"
                     runat="server" Position="Bottom" OffsetX="50" OffsetY="0" />
-                <asp:Panel ID="PopupMenu1" CssClass="popupMenu" runat="server" 
+                <asp:Panel ID="PopupMenu1" CssClass="popupMenu" runat="server"
                     BorderColor="Black" BorderStyle="Solid" BorderWidth="1">
-                    <div style="max-width: 850px;width:100%">
-                        <table style="width:100%; background-color: Black; color: White; font-size: 12pt">
+                    <div style="max-width: 850px; width: 100%">
+                        <table style="width: 100%; background-color: Black; color: White; font-size: 12pt">
                             <tr>
                                 <td style="width: 40px">
-                                    <div style="width: 40px">
-                                        Codice
-                                       
-                                            <%--  <asp:RequiredFieldValidator ID="reqCod" ErrorMessage="*" ValidationGroup="inserimento"
-                                        runat="server" ControlToValidate="txtCod"></asp:RequiredFieldValidator>--%>
-                                    </div>
+                                    <div style="width: 40px"> Codice </div>
                                 </td>
                                 <td>
-                                    <div>
-                                        Cognome/RagSoc
-                                       
-                                            <asp:RequiredFieldValidator ID="reqRagsoc" ErrorMessage="*" ValidationGroup="inserimento"
+                                    <div> Cognome/RagSoc
+                                        <asp:RequiredFieldValidator ID="reqRagsoc" ErrorMessage="*" ValidationGroup="inserimento"
                                                 runat="server" ControlToValidate="txtCG"></asp:RequiredFieldValidator>
                                     </div>
                                 </td>
-                                <td style="width: 100px">
+                                <td style="width: 150px">
                                     <div style="width: 100px">
                                         Nome
                                        
@@ -743,16 +735,13 @@
                                 </td>
                                 <td style="width: 70px">
                                     <div style="width: 70px">
-                                        Lingua
-                                       
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ErrorMessage="*" ValidationGroup="inserimento"
+                                        Lingua <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ErrorMessage="*" ValidationGroup="inserimento"
                                                 runat="server" ControlToValidate="ddlLingua"></asp:RequiredFieldValidator>
                                     </div>
                                 </td>
                                 <td style="width: 80px">
                                     <div style="width: 80px">
-                                        Tipo Cliente
-                                       
+                                        Tipo Cliente 
                                     </div>
                                 </td>
                                 <td style="width: 40px">
@@ -763,52 +752,52 @@
                                 </td>
                             </tr>
                         </table>
-                        <table style="width:100%;">
+                        <table style="width: 100%;">
                             <tr>
                                 <td style="width: 40px">
                                     <div style="overflow: hidden; width: 40px">
-                                        <asp:TextBox Width="98%" SkinID="Insert_txt" CssClass="txtInputPopupUpper" MaxLength="8"
+                                        <asp:TextBox Width="100%" SkinID="Insert_txt" CssClass="txtInputPopupUpper" MaxLength="8"
                                             ReadOnly="true" ID="txtCod" runat="server" Text="" />
                                     </div>
                                 </td>
                                 <td>
                                     <div style="overflow: hidden;">
-                                        <asp:TextBox Width="98%" MaxLength="200" CssClass="txtInputPopup" SkinID="Insert_txt"
+                                        <asp:TextBox Width="100%" MaxLength="200" CssClass="txtInputPopup" SkinID="Insert_txt"
                                             ID="txtCG" runat="server" Text="" />
                                     </div>
                                 </td>
-                                <td style="width: 100px">
-                                    <div style="overflow: hidden; width: 100px">
-                                        <asp:TextBox Width="98%" MaxLength="200" SkinID="Insert_txt" ID="txtNO" runat="server"
+                                <td style="width: 150px">
+                                    <div style="overflow: hidden; width: 150px">
+                                        <asp:TextBox Width="100%" MaxLength="200" SkinID="Insert_txt" ID="txtNO" runat="server"
                                             Text="" CssClass="txtInputPopup" />
                                     </div>
                                 </td>
                                 <td style="width: 160px">
                                     <div style="overflow: hidden; width: 160px">
-                                        <asp:TextBox Width="98%" MaxLength="100" SkinID="Insert_txt" ID="txtEM" runat="server"
+                                        <asp:TextBox Width="100%" MaxLength="100" SkinID="Insert_txt" ID="txtEM" runat="server"
                                             Text="" CssClass="txtInputPopup" />
                                     </div>
                                 </td>
                                 <td style="width: 70px">
                                     <div style="overflow: hidden; width: 70px">
-                                        <asp:DropDownList Width="98%" runat="server" ID="ddlLingua" SkinID="Insert_ddl">
+                                        <asp:DropDownList Width="100%" runat="server" ID="ddlLingua" SkinID="Insert_ddl">
                                             <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                                             <asp:ListItem Text="Inglese" Value="GB" />
                                             <asp:ListItem Text="Russo" Value="RU" />
                                         </asp:DropDownList>
-                                        <%--<asp:TextBox Width="98%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
+                                        <%--<asp:TextBox Width="100%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
                                             Text="" CssClass="txtInputPopupUpper" />--%>
                                     </div>
                                 </td>
                                 <td style="width: 80px">
                                     <div style="overflow: hidden; width: 80px">
-                                        <asp:DropDownList runat="server" ID="ddlTipiClienti" Width="98%" SkinID="Insert_ddl" AppendDataBoundItems="true" />
-                                        <%-- <asp:TextBox Width="98%" MaxLength="10" SkinID="Insert_txt" ID="txtTC" runat="server"
+                                        <asp:DropDownList runat="server" ID="ddlTipiClienti" Width="100%" SkinID="Insert_ddl" AppendDataBoundItems="true" />
+                                        <%-- <asp:TextBox Width="100%" MaxLength="10" SkinID="Insert_txt" ID="txtTC" runat="server"
                                             Text='<%# Eval("id_tipi_clienti") %>' CssClass="txtInputPopup" />--%>
                                     </div>
                                 </td>
                                 <td style="width: 40px">
-                                    <div style="overflow: hidden; width: 40px">
+                                    <div style="overflow: hidden; width: 40px;text-align:center">
                                         <asp:CheckBox ID="chkVD" runat="server" Checked='<%# Eval("Validato") %>' />
                                     </div>
                                 </td>
@@ -1109,8 +1098,8 @@
 
             <div>
                 <asp:CheckBox ID="chkCommercialeImporta" Text="Consenso Commerciale" runat="server"
-                    Checked="true" /><br />
-                <asp:CheckBox ID="chkPrivacyImporta" Text="Consenso Privacy" runat="server" Checked="true" />
+                    Checked="false" /><br />
+                <asp:CheckBox ID="chkPrivacyImporta" Text="Consenso Privacy" runat="server" Checked="false" />
             </div>
             <br />
             <asp:Button Text="Importa" runat="server" OnClick="btnImporta_onclick" ID="btnImporta" />

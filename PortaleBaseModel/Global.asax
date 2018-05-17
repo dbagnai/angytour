@@ -466,16 +466,17 @@
         // DICHIARAZIONE BUNDLES E MODALITA' RITORNO
         BundleEngine.AddRoutes(routes);//Route x bundler
         BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleLinkOrScript; //Opzioni di ritorno dell'handler
+        //BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("BundlesCheckFilesAlways").ToLower() == "true")
             BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files ad ogni chiamata e non solo a riavvio app
-        //BundleEngine.BundleOptions.BundleMode = BundleEngine.EnumBundleMode.LastWriteTime;
-              if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesnifycss").ToLower() == "true")
+                                                                //BundleEngine.BundleOptions.BundleMode = BundleEngine.EnumBundleMode.LastWriteTime;
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesnifycss").ToLower() == "true")
             BundleEngine.BundleOptions.minifyCss = true;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
             BundleEngine.BundleOptions.minifyJs = true;
 
 
-                BundleEngine.AddBundleJS("bundlejslib0",
+        BundleEngine.AddBundleJS("bundlejslib0",
 "~/js/jquery321/jquery-3.2.1.min.js",
 "~/js/jquery321/jquery-migrate-3.0.1.min.js"
 );
@@ -522,7 +523,7 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib2",
-             //~/js/jquery.validate.js,
+           //~/js/jquery.validate.js,
            //~/js/defiant/defiant.min.js,
            //"https://www.google.com/recaptcha/api.js",
            "~/js/animationEnigne.js",

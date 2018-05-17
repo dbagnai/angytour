@@ -575,13 +575,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 }
 
                 break;
-            case "rif000012":
-                divSearch.Visible = false;
-                divLatestPost.Visible = false;
-                RightSidebar.Visible = false;
-                divContenutiGallery.Visible = true;
-                AssociaDati();
-                break;
+           
             default:
                 AssociaDatiSocial();
 

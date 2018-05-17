@@ -17,266 +17,273 @@ var bookingtool = new function () {
 
     //this.initbookingtool = function () { //Funzione visibile all'esterno
     //}; 
+    //this.start = function (msg) { console.log('start book called '); return; };
 
-    this.start = function (msg) { console.log('start book called ') };
+    this.initbookingtool = function (idrisorsa, idcontrollo) {
+        idpassed = idrisorsa;
+        controlid = idcontrollo;
 
-    return {
-        initbookingtool: function (idrisorsa, idcontrollo) {
-            idpassed = idrisorsa;
-            controlid = idcontrollo;
+        (function wait() {
+            if (typeof loadJs === "function") {
+                loadJs(pathfiles + "jqxcore.js").then(function () {
+                    loadedresources += 1;
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadCss(pathfiles + "styles/jqx.base.css").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "jqxdatetimeinput.js").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "jqxdata.js").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "jqxdate.js").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "jqxcalendar.js").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "jqxtooltip.js").then(function () { loadedresources += 1; });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
+                    (function wait() {
+                        if (typeof loadJs === "function") {
+                            loadJs(pathfiles + "globalization/globalize.js").then(function () {
+                                loadedresources += 1;
 
-            (function wait() {
-                if (typeof loadJs === "function") {
-                    loadJs(pathfiles + "jqxcore.js").then(function () {
-                        loadedresources += 1;
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadCss(pathfiles + "styles/jqx.base.css").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "jqxdatetimeinput.js").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "jqxdata.js").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "jqxdate.js").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "jqxcalendar.js").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "jqxtooltip.js").then(function () { loadedresources += 1; });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-                        (function wait() {
-                            if (typeof loadJs === "function") {
-                                loadJs(pathfiles + "globalization/globalize.js").then(function () {
-                                    loadedresources += 1;
+                                (function wait() {
+                                    if (typeof loadJs === "function") {
+                                        loadJs(pathfiles + "globalization/globalize.culture.it-IT.js").then(function () { loadedresources += 1; });
+                                    } else {
+                                        setTimeout(wait, 50);
+                                    }
+                                })();
 
-                                    (function wait() {
-                                        if (typeof loadJs === "function") {
-                                            loadJs(pathfiles + "globalization/globalize.culture.it-IT.js").then(function () { loadedresources += 1; });
-                                        } else {
-                                            setTimeout(wait, 50);
-                                        }
-                                    })();
+                            });
+                        } else {
+                            setTimeout(wait, 50);
+                        }
+                    })();
 
-                                });
-                            } else {
-                                setTimeout(wait, 50);
-                            }
-                        })();
-
-                    });
-                } else {
-                    setTimeout(wait, 50);
-                }
-            })();
+                });
+            } else {
+                setTimeout(wait, 50);
+            }
+        })();
 
 
-            (function wait1() { //Aspettiamo che il controllo sia iniettato
-                if ($("#" + controlid).length) {
-                    insertbookingTool();
-                } else {
-                    setTimeout(wait1, 80);
-                }
-            })();
+        (function wait1() { //Aspettiamo che il controllo sia iniettato
+            if ($("#" + controlid).length) {
+                insertbookingTool();
+            } else {
+                setTimeout(wait1, 80);
+            }
+        })();
 
 
-            return;
-        },
-        getidpassed: function (parametro) {  //altr funzione chiamabile dall'esterno che torna la somma dei due valori (test)
-            return parametro + idpassed;
-        }, calcolaPrezzo: function () {
-            Visualizzatasti(false);
+        return;
+    };
 
+    this.calcolaPrezzo = function () {
+        Visualizzatasti(false);
+
+        $('#' + controlid + "info").html('');
+        $('#' + controlid + "info").attr('class', '');
+        //$('#' + controlid + "messages").html('');
+        //$('#' + controlid + "messages").attr('class', '');
+
+        var str = new Date(Math.min(prv, cur));
+        var end = new Date(Math.max(prv, cur));
+
+
+        var selperiodo = ('<span style="font-weight:600">' + moment(str).format("DD/MM/YYYY") + ' - ' + moment(end).format("DD/MM/YYYY") + '</span>');
+        var linkrichiestadiretta = '<br/><a style="color:#fff;font-weight:600" href="#contactmasterlinkpoint">' + GetResourcesValue("testocontattaci1") + '</a>';
+        /*+++++++++++++++++++++++++++++++++++++++++VERIFICHE VONOLI DI PRENOTAZIONE*/
+        //VINCOLO SOLO SETTIMANE INTERE
+        var datediffdays = moment(end).diff(moment(str), 'days');
+        var remainder = datediffdays % 7;
+        if (remainder != 0) {
             $('#' + controlid + "info").html('');
-            $('#' + controlid + "info").attr('class', '');
-            //$('#' + controlid + "messages").html('');
-            //$('#' + controlid + "messages").attr('class', '');
-
-            var str = new Date(Math.min(prv, cur));
-            var end = new Date(Math.max(prv, cur));
-
-            /*+++++++++++++++++++++++++++++++++++++++++VERIFICHE VONOLI DI PRENOTAZIONE*/
-            //VINCOLO SOLO SETTIMANE INTERE
-            var datediffdays = moment(end).diff(moment(str), 'days');
-            var remainder = datediffdays % 7;
-            if (remainder != 0) {
-                $('#' + controlid + "info").html('');
-                $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                $('#' + controlid + "info").html(GetResourcesValue("testoprenotam7"));
-                return;
-            }
-            //VINCOLO SOLO SABATO SABATO
-            if (moment(end).isoWeekday() != 6 || moment(str).isoWeekday() != 6) {
-                $('#' + controlid + "info").html('');
-                $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                $('#' + controlid + "info").html(GetResourcesValue("testoprenotaday"));
-                return;
-            }
-            /*++++++++++++++++++++++++++++++++++++++++VERIFICHE VONOLI DI PRENOTAZIONE*/
-
-            //Ultima verifica sulla disponibilità prima di inserire in carrello e procedere con la prenotazione
-            var tmpelement = globalObject[controlid + "evento"];
-            tmpelement.Enddate = moment(str).set({ hour: 10, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
-            tmpelement.Startdate = moment(end).set({ hour: 16, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
-            tmpelement.Idevento = 0;
-            tmpelement.Idattivita = idpassed;
-            tmpelement.Prezzo = 0; //Prezzo da calcolare
-            tmpelement.Soggetto = '';
-            tmpelement.Testoevento = '';
-            tmpelement.Idcliente = '0';
-            tmpelement.Idvincolo = '';
-            tmpelement.Codicerichiesta = '';
-            tmpelement.Status = 1;
-
-            calcolaprezzobyidattivita(moment(str).format("DD/MM/YYYY"), moment(end).format("DD/MM/YYYY"), idpassed, function (result) {
-                var prezzodalistino = Number(result.trim());
-                if (!isNaN(prezzodalistino) && prezzodalistino != 0) {
-                    tmpelement.Prezzo = Number(result.trim());
-                    var prezzomsg = "<div>" + GetResourcesValue("prezzo") + " " + prezzodalistino.formatMoney() + "€</div>";
-                    $('#' + controlid + "info").html(prezzomsg);
-                    $('#' + controlid + "info").attr('class', 'alert alert-success');
-
-
-                    Visualizzatasti(true);
-
-                }
-                else {
-                    $('#' + controlid + "info").html('');
-                    $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                    $('#' + controlid + "info").html(GetResourcesValue("testoprenotaerr1"));
-                    return;
-                }
-            });
-
-            return;
-        },
-        InserisciPrenotazione: function () {  //altr funzione chiamabile dall'esterno che torna la somma dei due valori (test)
-            $('#' + controlid + "info").html('');
-            $('#' + controlid + "info").attr('class', '');
-            //$('#' + controlid + "messages").html('');
-            //$('#' + controlid + "messages").attr('class', '');
-
-            var str = new Date(Math.min(prv, cur));
-            var end = new Date(Math.max(prv, cur));
-
-            /*+++++++++++++++++++++++++++++++++++++++++VERIFICHE VINCOLI DI PRENOTAZIONE*/
-            //VINCOLO SOLO SETTIMANE INTERE
-            var datediffdays = moment(end).diff(moment(str), 'days');
-            var remainder = datediffdays % 7;
-            if (remainder != 0) {
-                $('#' + controlid + "info").html('');
-                $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                $('#' + controlid + "info").html(GetResourcesValue("testoprenotam7"));
-                return;
-            }
-            //VINCOLO SOLO SABATO SABATO
-            if (moment(end).isoWeekday() != 6 || moment(str).isoWeekday() != 6) {
-                $('#' + controlid + "info").html('');
-                $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                $('#' + controlid + "info").html(GetResourcesValue("testoprenotaday"));
-                return;
-            }
-            /*++++++++++++++++++++++++++++++++++++++++VERIFICHE VINCOLI DI PRENOTAZIONE*/
-
-            //Ultima verifica sulla disponibilità prima di inserire in carrello e procedere con la prenotazione
-            var tmpelement = globalObject[controlid + "evento"];
-            tmpelement.Enddate = moment(end).set({ hour: 10, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
-            tmpelement.Startdate = moment(str).set({ hour: 16, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
-            tmpelement.Idevento = 0;
-            tmpelement.Idattivita = idpassed;
-            tmpelement.Prezzo = 0; //Prezzo da calcolare
-            tmpelement.Soggetto = '';
-            tmpelement.Testoevento = '';
-            tmpelement.Idcliente = '0';
-            tmpelement.Idvincolo = '';
-            tmpelement.Codicerichiesta = '';
-            tmpelement.Status = 1;
-            //Aggiungiamo gli adulti bambini !!
-            var adulti = $("#" + controlid + "selectadult" + " option:selected").val();
-            var bambini = $("#" + controlid + "selectchild" + " option:selected").val();
-            var jsondetails = {};
-            jsondetails.adulti = adulti;
-            jsondetails.bambini = bambini;
-            tmpelement.Jsonfield1 = JSON.stringify(jsondetails);
-
-            calcolaprezzobyidattivita(moment(str).format("DD/MM/YYYY"), moment(end).format("DD/MM/YYYY"), idpassed, function (result) {
-                var prezzodalistino = Number(result.trim());
-                if (!isNaN(prezzodalistino) && prezzodalistino != 0) {
-                    tmpelement.Prezzo = Number(result.trim());
-                    var prezzomsg = "<div>" + GetResourcesValue("prezzo") + " " + prezzodalistino.formatMoney() + "€</div>";
-                    $('#' + controlid + "info").attr('class', 'alert alert-success');
-                    $('#' + controlid + "info").html(prezzomsg);
-
-                    var functiontocallonend = function () { };
-                    verificaDatiServerEvento(lng, tmpelement,
-                        function (result, callafterfilter) {
-                            try {
-                                if (callafterfilter != null) {
-                                    $('#' + controlid + "messages2").attr('class', '');
-                                    $('#' + controlid + "messages2").html('');
-
-                                    //////////////////
-                                    // funzione per inserire l'elemento a carrello tipo  in carrello.js   ( con valori date , prezzo e single=true ) presi da tmpelement!!!!!
-                                    //////////////////
-                                    AddCurrentCarrelloNopostback('', idpassed, lng, '', '', '', tmpelement.Prezzo, tmpelement.Startdate, tmpelement.Enddate, tmpelement.Jsonfield1, 'single', false,
-                                        function (result) {
-                                            //Visualizzatasti(true);
-                                            openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
-                                            callafterfilter();
-                                        });
-
-                                }
-                                else {
-                                    $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                                    $('#' + controlid + "info").html(result);
-                                }
-                            }
-                            catch (e) { $('#' + controlid + "info").attr('class', 'alert alert-danger'); $('#' + controlid + "info").html(e); console.log(e); console.log(result); }
-                        },
-                        functiontocallonend);
-                }
-                else {
-                    $('#' + controlid + "info").html('');
-                    $('#' + controlid + "info").attr('class', 'alert alert-danger');
-                    $('#' + controlid + "info").html(GetResourcesValue("testoprenotaerr1"));
-                    return;
-                }
-            });
-
-            return;
-        },
-        SvuotaCarrello: function () {
-            CancellaCarrello();
+            $('#' + controlid + "info").attr('class', 'alert alert-danger');
+            $('#' + controlid + "info").html(selperiodo + '<br/>' + GetResourcesValue("testoprenotam7") + linkrichiestadiretta);
             return;
         }
-    }
+        //VINCOLO SOLO SABATO SABATO
+        if (moment(end).isoWeekday() != 6 || moment(str).isoWeekday() != 6) {
+            $('#' + controlid + "info").html('');
+            $('#' + controlid + "info").attr('class', 'alert alert-danger');
+            $('#' + controlid + "info").html(selperiodo + '<br/>' + GetResourcesValue("testoprenotaday") + linkrichiestadiretta );
+            return;
+        }
+        /*++++++++++++++++++++++++++++++++++++++++VERIFICHE VONOLI DI PRENOTAZIONE*/
 
+        //Ultima verifica sulla disponibilità prima di inserire in carrello e procedere con la prenotazione
+        var tmpelement = globalObject[controlid + "evento"];
+        tmpelement.Enddate = moment(str).set({ hour: 10, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
+        tmpelement.Startdate = moment(end).set({ hour: 16, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
+        tmpelement.Idevento = 0;
+        tmpelement.Idattivita = idpassed;
+        tmpelement.Prezzo = 0; //Prezzo da calcolare
+        tmpelement.Soggetto = '';
+        tmpelement.Testoevento = '';
+        tmpelement.Idcliente = '0';
+        tmpelement.Idvincolo = '';
+        tmpelement.Codicerichiesta = '';
+        tmpelement.Status = 1;
+
+        calcolaprezzobyidattivita(moment(str).format("DD/MM/YYYY"), moment(end).format("DD/MM/YYYY"), idpassed, function (result) {
+            var prezzodalistino = parseFloat(result.trim().replace(",", "."));
+            if (!isNaN(prezzodalistino) && prezzodalistino != 0) {
+                tmpelement.Prezzo = parseFloat(result.trim().replace(",", "."));
+                var prezzomsg = "<div>" + GetResourcesValue("prezzo") + " " + prezzodalistino.formatMoney(2, '.', ',') + "€</div>";
+                $('#' + controlid + "info").html(selperiodo + '<br/>' + prezzomsg);
+                $('#' + controlid + "info").attr('class', 'alert alert-success');
+
+
+                Visualizzatasti(true);
+
+            }
+            else {
+                $('#' + controlid + "info").html('');
+                $('#' + controlid + "info").attr('class', 'alert alert-danger');
+                $('#' + controlid + "info").html(selperiodo + '<br/>' + GetResourcesValue("testoprenotaerr1"));
+                return;
+            }
+        });
+
+        return;
+    };
+
+    this.InserisciPrenotazione = function () {  //altr funzione chiamabile dall'esterno che torna la somma dei due valori (test)
+        $('#' + controlid + "info").html('');
+        $('#' + controlid + "info").attr('class', '');
+        //$('#' + controlid + "messages").html('');
+        //$('#' + controlid + "messages").attr('class', '');
+
+        var str = new Date(Math.min(prv, cur));
+        var end = new Date(Math.max(prv, cur));
+
+        /*+++++++++++++++++++++++++++++++++++++++++VERIFICHE VINCOLI DI PRENOTAZIONE*/
+        //VINCOLO SOLO SETTIMANE INTERE
+        var datediffdays = moment(end).diff(moment(str), 'days');
+        var remainder = datediffdays % 7;
+        if (remainder != 0) {
+            $('#' + controlid + "info").html('');
+            $('#' + controlid + "info").attr('class', 'alert alert-danger');
+            $('#' + controlid + "info").html(GetResourcesValue("testoprenotam7"));
+            return;
+        }
+        //VINCOLO SOLO SABATO SABATO
+        if (moment(end).isoWeekday() != 6 || moment(str).isoWeekday() != 6) {
+            $('#' + controlid + "info").html('');
+            $('#' + controlid + "info").attr('class', 'alert alert-danger');
+            $('#' + controlid + "info").html(GetResourcesValue("testoprenotaday"));
+            return;
+        }
+        /*++++++++++++++++++++++++++++++++++++++++VERIFICHE VINCOLI DI PRENOTAZIONE*/
+
+        //Ultima verifica sulla disponibilità prima di inserire in carrello e procedere con la prenotazione
+        var tmpelement = globalObject[controlid + "evento"];
+        tmpelement.Enddate = moment(end).set({ hour: 10, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
+        tmpelement.Startdate = moment(str).set({ hour: 16, minute: 0, second: 0, millisecond: 0 }).format("DD/MM/YYYY HH:mm:ss");
+        tmpelement.Idevento = 0;
+        tmpelement.Idattivita = idpassed;
+        tmpelement.Prezzo = 0; //Prezzo da calcolare
+        tmpelement.Soggetto = '';
+        tmpelement.Testoevento = '';
+        tmpelement.Idcliente = '0';
+        tmpelement.Idvincolo = '';
+        tmpelement.Codicerichiesta = '';
+        tmpelement.Status = 1;
+        //Aggiungiamo gli adulti bambini !!
+        var adulti = $("#" + controlid + "selectadult" + " option:selected").val();
+        var bambini = $("#" + controlid + "selectchild" + " option:selected").val();
+        var jsondetails = {};
+        jsondetails.adulti = adulti;
+        jsondetails.bambini = bambini;
+        tmpelement.Jsonfield1 = JSON.stringify(jsondetails);
+
+        calcolaprezzobyidattivita(moment(str).format("DD/MM/YYYY"), moment(end).format("DD/MM/YYYY"), idpassed, function (result) {
+            var prezzodalistino = parseFloat(result.trim().replace(",", "."));
+            if (!isNaN(prezzodalistino) && prezzodalistino != 0) {
+                tmpelement.Prezzo = parseFloat(result.trim().replace(",", "."));
+                var prezzomsg = "<div>" + GetResourcesValue("prezzo") + " " + prezzodalistino.formatMoney(2, '.', ',') + "€</div>";
+                $('#' + controlid + "info").attr('class', 'alert alert-success');
+                $('#' + controlid + "info").html(prezzomsg);
+
+                var functiontocallonend = function () { };
+                verificaDatiServerEvento(lng, tmpelement,
+                    function (result, callafterfilter) {
+                        try {
+                            if (callafterfilter != null) {
+                                $('#' + controlid + "messages2").attr('class', '');
+                                $('#' + controlid + "messages2").html('');
+
+                                //////////////////
+                                // funzione per inserire l'elemento a carrello tipo  in carrello.js   ( con valori date , prezzo e single=true ) presi da tmpelement!!!!!
+                                //////////////////
+                                AddCurrentCarrelloNopostback('', idpassed, lng, '', '', '', tmpelement.Prezzo, tmpelement.Startdate, tmpelement.Enddate, tmpelement.Jsonfield1, 'single', false,
+                                    function (result) {
+                                        //Visualizzatasti(true);
+                                        openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
+                                        callafterfilter();
+                                    });
+
+                            }
+                            else {
+                                $('#' + controlid + "info").attr('class', 'alert alert-danger');
+                                $('#' + controlid + "info").html(result);
+                            }
+                        }
+                        catch (e) { $('#' + controlid + "info").attr('class', 'alert alert-danger'); $('#' + controlid + "info").html(e); console.log(e); console.log(result); }
+                    },
+                    functiontocallonend);
+            }
+            else {
+                $('#' + controlid + "info").html('');
+                $('#' + controlid + "info").attr('class', 'alert alert-danger');
+                $('#' + controlid + "info").html(GetResourcesValue("testoprenotaerr1"));
+                return;
+            }
+        });
+
+        return;
+    };
+
+    this.SvuotaCarrello = function () {
+        CancellaCarrello();
+        return;
+    };
+
+    this.getidpassed = function (parametro) {
+        return getidpassed(parametro);
+    };
+    function getidpassed(parametro) {
+        return parametro + idpassed;
+    }
 
     function Visualizzatasti(abilita) {
 
@@ -299,7 +306,6 @@ var bookingtool = new function () {
         if (!abilita) onclickevent = "style=\"width:160px;margin:0px auto;display:table\"";
         var btnprenota = "<div class=\"divbuttonstyleorange\"  " + onclickevent + " >" + GetResourcesValue("testoprenota") + "</div>";
         $('#' + controlid + "messages").append(btnprenota);
-
 
     }
 
@@ -729,4 +735,4 @@ var bookingtool = new function () {
 
     }
 
-}
+};

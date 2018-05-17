@@ -537,8 +537,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                     //Procediamo con l'odine su paypal
                     //Valori impostazione paypal
                     string Encodedidordine = dataManagement.EncodeToBase64(CodiceOrdine);
-                    string returl = (ConfigManagement.ReadKey("returlPaypal")) + Encodedidordine;
-                    string cancelurl = (ConfigManagement.ReadKey("cancelurlPaypal")) + Encodedidordine + "&error=true";
+                    string returl = (ConfigManagement.ReadKey("returlPaypal")) + Encodedidordine + "&Lingua=" + Lingua;
+                    string cancelurl = (ConfigManagement.ReadKey("cancelurlPaypal")) + Encodedidordine + "&error=true" + "&Lingua=" + Lingua;
                     //if (!returl.ToLower().StartsWith(PercorsoAssolutoApplicazione.ToLower()))
                     //    returl = PercorsoAssolutoApplicazione + "/" + returl;
                     //if (!cancelurl.ToLower().StartsWith(PercorsoAssolutoApplicazione.ToLower()))

@@ -103,7 +103,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
             switch (sazione)
             {
                 case "add":
-                    double.TryParse(sprezzo, out prezzo);
+                    double.TryParse(sprezzo.Replace(".", ","), out prezzo);
                     if (DateTime.TryParseExact(sdatastart, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp)) datastart = tmp;
                     if (DateTime.TryParseExact(sdataend, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp)) dataend = tmp;
                     long.TryParse(sidprodotto, out idprodotto);
@@ -137,7 +137,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
                     break;
                 case "subtract":
-                    double.TryParse(sprezzo, out prezzo);
+                    double.TryParse(sprezzo.Replace(".", ","), out prezzo);
                     if (DateTime.TryParseExact(sdatastart, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp)) datastart = tmp;
                     if (DateTime.TryParseExact(sdataend, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp)) dataend = tmp;
                     long.TryParse(sidprodotto, out idprodotto);

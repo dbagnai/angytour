@@ -473,6 +473,8 @@ namespace WelcomeLibrary.DAL
             }
             return;
         }
+
+#if false //vecchio metodo che calcolava anche se le fasce del periodo non erano presenti!!! prendendo le ultime presenti
         /// <summary>
         /// Calcola il costo complessivo per una certa attivita e periodo, con l'utilizzo della tabella dei listini
         /// considerando la differenziazione tra prezzo settimanale e giornaliero
@@ -488,8 +490,6 @@ namespace WelcomeLibrary.DAL
             List<Listino> fascesettimanali = new List<Listino>();
             List<Listino> fascegiornaliere = new List<Listino>();
 
-
-
             //Ora devo calcolare l'importo base suddividendo in periodi settimanali e giornalieri e calcolando il costo in base alle tariffe di listino
             //tipologia tariff a giornaliera 1 - settimanale 2
 
@@ -502,28 +502,23 @@ namespace WelcomeLibrary.DAL
 
             //UNICO ANNO RIFERIMENTO PER I LISTINI LE FASCE DEVONO ESSERE SEMPRE IN UN UNICO ANNO
             fascesettimanali = fascesettimanali.OrderByDescending(o => o.Enddate).ToList();
+            //elimino le fasce fuori dall'anno ( commentato faccio un filtro dopo )
             int annoref = fascesettimanali.First().Enddate.Year;
             fascesettimanali.RemoveAll(f => f.Enddate.Year != annoref || f.Startdate.Year != annoref);
+
             fascegiornaliere = fascegiornaliere.OrderByDescending(o => o.Enddate).ToList();
+            //elimino le fasce fuori dall'anno ( commentato faccio un filtro dopo )
             int annoref1 = fascegiornaliere.First().Enddate.Year;
             fascegiornaliere.RemoveAll(f => f.Enddate.Year != annoref1 || f.Startdate.Year != annoref1);
             ////////////////////////////////
 
-            //Controllo per anno bisestile ( data richiesta e data listino )
-            //DateTime primomarzointabellalistino = new DateTime(2012, 3, 1);
-            //if (fascesettimanali != null && fascesettimanali.Count() > 0) { primomarzointabellalistino = new DateTime((fascesettimanali.First().Enddate.Year), 3, 1); }
-            //else if (fascegiornaliere != null && fascegiornaliere.Count() > 0) { primomarzointabellalistino = new DateTime((fascegiornaliere.First().Enddate.Year), 3, 1); }
-            //DateTime primomarzorichiesta = new DateTime(eventstart.Year, 3, 1);
-            //if (primomarzointabellalistino.DayOfYear == primomarzorichiesta.DayOfYear)
-            //    coincidenzatipoannotabellalistino = true;
-
+            //////////////VERIFICHE SU ANNO BISESTILE (da spostare dentro al ciclo sotto !!!!  ) //////////////////////
             bool annolistinobisestile = true;
             if (fascesettimanali != null && fascesettimanali.Count() > 0) { annolistinobisestile = DateTime.IsLeapYear(fascesettimanali.First().Enddate.Year); }
             else if (fascegiornaliere != null && fascegiornaliere.Count() > 0) { annolistinobisestile = DateTime.IsLeapYear(fascegiornaliere.First().Enddate.Year); }
             bool annorichiestabisestile = DateTime.IsLeapYear(eventstart.Year);
             if (annolistinobisestile == annorichiestabisestile) coincidenzatipoannotabellalistino = true;
             ////////////////////////////
-
 
             //CALCOLIAMO IL COSTO IN RELAZIONE ALLE SETTIMANE PRESENTI NEL PERIODO INDICATO
             DateTime _startcalc = eventstart;
@@ -537,10 +532,14 @@ namespace WelcomeLibrary.DAL
                         Listino fasciadicostostart = null;
                         Listino fasciadicostoend = null;
 
+                        //PER PRIMA COSA FILTRIAMO O SELEZIONIAMO LE FASCE DI COSTO DI INTERESSE IN BASE ALL'ANNO DELLA DATE DELLA RICHIESTA
+                        // da fare verifica sulla presenza delle fasce corrette di costo
+
+
                         //Vediamo i costi una settimana alla volta ( per un'idattivita e un tipo di tariffa dovrebbe uscire solo un elemento listino per ogni data di ricerca)
                         //CERCO LE FASCE DI COSTO IN CUI RIENTRANO LA DATA INIZIO E FINE SETTIMANA PER LA SETTIMANA ATTUALE DEL CICLO
+
                         //CONTROLLO SULLA DATA INZIO SETTIMANA------------------------------------------------------------------------
-                        //Controllo per bisestile considerando che in tabella listino ho memorizzato un anno bisestile (2012) come riferimento
                         List<Listino> settimanaselezionata = null;
                         if (coincidenzatipoannotabellalistino) //entrambi bisestile o entrambi no
                             settimanaselezionata = fascesettimanali.Where(c => _startcalc.DayOfYear >= c.Startdate.DayOfYear && _startcalc.DayOfYear <= c.Enddate.DayOfYear).ToList();
@@ -551,13 +550,12 @@ namespace WelcomeLibrary.DAL
                             if (annorichiestabisestile)
                                 settimanaselezionata = fascesettimanali.Where(c => _startcalc.AddYears(1).DayOfYear >= c.Startdate.DayOfYear && _startcalc.AddYears(1).DayOfYear <= c.Enddate.DayOfYear).ToList();
                         }
-
                         //Controllo che sia uscita una sola fascia di listino
                         if (settimanaselezionata != null && settimanaselezionata.Count == 1)
                             fasciadicostostart = settimanaselezionata[settimanaselezionata.Count - 1];
                         else if (settimanaselezionata != null && settimanaselezionata.Count > 1)
                         {
-                            fasciadicostostart = settimanaselezionata[settimanaselezionata.Count - 1];
+                            //fasciadicostostart = settimanaselezionata[settimanaselezionata.Count - 1];
                             error += "Errore trovate fasce di costo multiple per la data: " + _startcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
                         }
                         else if (settimanaselezionata == null)
@@ -565,6 +563,7 @@ namespace WelcomeLibrary.DAL
                             error += "Non trovata fascia di costo per la data: " + _startcalc.ToShortDateString() + " alloggio: " + idattivita + " tipotariffa: 2 .Verificare";
                         }
                         //---------------------------------------------------------------------------------------------------------------
+
                         //CONTROLLI SULLA DATA DI FINE SETTIMANA-------------------------------------------------------------------------
                         if (coincidenzatipoannotabellalistino)//entrambi bisestile o entrambi no
                             settimanaselezionata = fascesettimanali.Where(c => _endcalc.DayOfYear >= c.Startdate.DayOfYear && _endcalc.DayOfYear <= c.Enddate.DayOfYear).ToList();
@@ -580,19 +579,22 @@ namespace WelcomeLibrary.DAL
                             fasciadicostoend = settimanaselezionata[settimanaselezionata.Count - 1];
                         else if (settimanaselezionata != null && settimanaselezionata.Count > 1)
                         {
-                            fasciadicostoend = settimanaselezionata[settimanaselezionata.Count - 1];
+                            //fasciadicostoend = settimanaselezionata[settimanaselezionata.Count - 1];
                             error += "Errore trovate fasce di costo multiple per la data: " + _endcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
                         }
                         else if (settimanaselezionata == null)
                         {
                             error += "Non trovata fascia di costo per la data: " + _endcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
                         }
+
                         //---------------------------------------------------------------------------------------------------------------
                         //Passiamo al calcolo del costo in base al periodo richiesto
                         //Il criterio è tale che per il costo della settimana scelgo la fascia a costo maggiore tra quelle trovate anche se 
                         //la settimana cade a cavallo di due periodi di costo
                         if (fasciadicostostart != null && fasciadicostoend != null)
                         {
+                            //Da fare diverso!!-> vedere se coincidono la fasciaster ed end >> prendi il prezzo , se non coincidono -> siamo a cavallo di due fasce quindi devo fare un calcolo in base alla sovrapposizione delle date!!!
+                            //da fare ..
                             if (fasciadicostostart.Prezzo > fasciadicostoend.Prezzo)
                                 prezzocalcolato += fasciadicostostart.Prezzo;
                             else
@@ -659,6 +661,190 @@ namespace WelcomeLibrary.DAL
             }
             return prezzocalcolato;
         }
+
+#endif
+
+        /// <summary>
+        /// Calcola il prezzo in base alle date ed ai listini !! presuppone la presenza delle fasce di costo per i periodi di interesse senno non calcola
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="eventstart"></param>
+        /// <param name="eventend"></param>
+        /// <param name="idattivita"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public double CalcolaPrezzoBase(string connection, DateTime eventstart, DateTime eventend, string idattivita, ref string error)
+        {
+            bool coincidenzatipoannotabellalistino = false;
+            double prezzocalcolato = 0;
+            int ngiorni = 0;
+            int nsettimane = Math.DivRem(((TimeSpan)(eventend.Date - eventstart.Date)).Days, 7, out ngiorni);
+            List<Listino> fascesettimanali = new List<Listino>();
+            List<Listino> fascegiornaliere = new List<Listino>();
+
+            //Ora devo calcolare l'importo base suddividendo in periodi settimanali e giornalieri e calcolando il costo in base alle tariffe di listino
+            //tipologia tariff a giornaliera 1 - settimanale 2
+
+            //CARICO LE FASCE DI COSTO INTERESSATE DALLA TABELLA LISTINO (SETTIMANALI)
+            fascesettimanali = CaricaFasceCostoByAttivitaTipotariffa(connection, idattivita, "2");
+            if (fascesettimanali == null || fascesettimanali.Count() == 0) //Se non presenti le fasce settimanali uso solo il giornaliero
+                ngiorni = ((TimeSpan)(eventend.Date - eventstart.Date)).Days;
+            //CARICO LE FASCE DI COSTO INTERESSATE DALLA TABELLA LISTINO (GIORNALIERE)
+            fascegiornaliere = CaricaFasceCostoByAttivitaTipotariffa(connection, idattivita, "1");
+
+            //UNICO ANNO RIFERIMENTO PER I LISTINI LE FASCE DEVONO ESSERE SEMPRE IN UN UNICO ANNO
+            fascesettimanali = fascesettimanali.OrderByDescending(o => o.Enddate).ToList();
+            //elimino le fasce fuori dall'anno ( commentato faccio un filtro dopo )
+            //int annoref = fascesettimanali.First().Enddate.Year;
+            //fascesettimanali.RemoveAll(f => f.Enddate.Year != annoref || f.Startdate.Year != annoref);
+
+            fascegiornaliere = fascegiornaliere.OrderByDescending(o => o.Enddate).ToList();
+            //elimino le fasce fuori dall'anno ( commentato faccio un filtro dopo )
+            //int annoref1 = fascegiornaliere.First().Enddate.Year;
+            //fascegiornaliere.RemoveAll(f => f.Enddate.Year != annoref1 || f.Startdate.Year != annoref1);
+            ////////////////////////////////
+
+            //////////////VERIFICHE SU ANNO BISESTILE (da spostare dentro al ciclo sotto !!!!  ) //////////////////////
+            //bool annolistinobisestile = true;
+            //if (fascesettimanali != null && fascesettimanali.Count() > 0) { annolistinobisestile = DateTime.IsLeapYear(fascesettimanali.First().Enddate.Year); }
+            //else if (fascegiornaliere != null && fascegiornaliere.Count() > 0) { annolistinobisestile = DateTime.IsLeapYear(fascegiornaliere.First().Enddate.Year); }
+            //bool annorichiestabisestile = DateTime.IsLeapYear(eventstart.Year);
+            //if (annolistinobisestile == annorichiestabisestile) coincidenzatipoannotabellalistino = true;
+            ////////////////////////////
+
+            //CALCOLIAMO IL COSTO IN RELAZIONE ALLE SETTIMANE PRESENTI NEL PERIODO INDICATO
+            DateTime _startcalc = eventstart;
+            DateTime _endcalc = eventstart.AddDays(7);
+            if (nsettimane != 0)
+            {
+                if (fascesettimanali != null && fascesettimanali.Count() > 0)
+                {
+                    for (int _i = 1; _i <= nsettimane; _i++) //Ciclo sulle settimane del periodo richiesto
+                    {
+                        Listino fasciadicostostart = null;
+                        Listino fasciadicostoend = null;
+
+                        //CONTROLLO SULLA DATA INZIO SETTIMANA------------------------------------------------------------------------
+                        List<Listino> settimanaselezionata = null;
+                        settimanaselezionata = fascesettimanali.Where(c => _startcalc >= c.Startdate && _startcalc <= c.Enddate).ToList();
+
+                        //Controllo che sia uscita una sola fascia di listino
+                        if (settimanaselezionata != null && settimanaselezionata.Count == 1)
+                            fasciadicostostart = settimanaselezionata[settimanaselezionata.Count - 1];
+                        else if (settimanaselezionata != null && settimanaselezionata.Count > 1)
+                        {
+                            //fasciadicostostart = settimanaselezionata[settimanaselezionata.Count - 1];
+                            error += "Errore trovate fasce di costo multiple per la data: " + _startcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
+                        }
+                        else if (settimanaselezionata == null)
+                        {
+                            error += "Non trovata fascia di costo per la data: " + _startcalc.ToShortDateString() + " alloggio: " + idattivita + " tipotariffa: 2 .Verificare";
+                        }
+                        //---------------------------------------------------------------------------------------------------------------
+
+                        //CONTROLLI SULLA DATA DI FINE SETTIMANA-------------------------------------------------------------------------
+                        settimanaselezionata = fascesettimanali.Where(c => _endcalc >= c.Startdate && _endcalc <= c.Enddate).ToList();
+
+                        //Controllo che sia uscita una sola fascia di listino
+                        if (settimanaselezionata != null && settimanaselezionata.Count == 1)
+                            fasciadicostoend = settimanaselezionata[settimanaselezionata.Count - 1];
+                        else if (settimanaselezionata != null && settimanaselezionata.Count > 1)
+                        {
+                            //fasciadicostoend = settimanaselezionata[settimanaselezionata.Count - 1];
+                            error += "Errore trovate fasce di costo multiple per la data: " + _endcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
+                        }
+                        else if (settimanaselezionata == null)
+                        {
+                            error += "Non trovata fascia di costo per la data: " + _endcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 2 .Verificare";
+                        }
+
+                        //---------------------------------------------------------------------------------------------------------------
+                        //Passiamo al calcolo del costo in base al periodo richiesto
+                        //Il criterio è tale che per il costo della settimana scelgo la fascia a costo maggiore tra quelle trovate anche se 
+                        //la settimana cade a cavallo di due periodi di costo
+                        if (fasciadicostostart != null && fasciadicostoend != null)
+                        {
+                            //Da fare diverso!!-> vedere se coincidono la fasciaster ed end >> prendi il prezzo , se non coincidono -> siamo a cavallo di due fasce quindi devo fare un calcolo in base alla sovrapposizione delle date!!!
+                            //da fare ..
+                            if (fasciadicostostart.Startdate == fasciadicostoend.Startdate && fasciadicostostart.Enddate == fasciadicostoend.Enddate)
+                            {
+                                prezzocalcolato += fasciadicostostart.Prezzo;
+                            }
+                            else // fasce start e fine diverse ( devo calcolare il prezzo in base alla percentuale di sovarpposizione nelle fasce in settimi delle date di inizio e fine periodo
+                            {
+                                ///////////////////////////////VERIFICARE !!!! DEBUG
+                                double dayinprimafascia = 0;
+                                dayinprimafascia = ((TimeSpan)(fasciadicostostart.Enddate.Date - _startcalc.Date)).Days + 1; //Ultima notte sempre nel periodo iniziale
+                                double dayinsecondafascia = 0;
+                                dayinsecondafascia = ((TimeSpan)(_endcalc.Date - fasciadicostoend.Startdate.Date)).Days;
+                                double perc1fascia = dayinprimafascia / (dayinprimafascia + dayinsecondafascia);
+                                double perc2fascia = dayinsecondafascia / (dayinprimafascia + dayinsecondafascia);
+                                prezzocalcolato += perc1fascia * fasciadicostostart.Prezzo + perc2fascia * fasciadicostoend.Prezzo;
+                                ///////////////////////////////VERIFICARE !!!! DEBUG
+                            }
+
+                            //if (fasciadicostostart.Prezzo > fasciadicostoend.Prezzo)
+                            //    prezzocalcolato += fasciadicostostart.Prezzo;
+                            //else
+                            //    prezzocalcolato += fasciadicostoend.Prezzo;
+                        }
+                        else
+                        {
+                            error += "Non trovato (oppure valori multipli) fascia per il calcolo dei costi nel periodo : " + _startcalc.ToShortDateString() + "  -  " + _endcalc.ToShortDateString();
+                        }
+
+                        //Passiamo ala settimana successiva per il cumulo dei costi totali
+                        _startcalc = _startcalc.AddDays(7);
+                        _endcalc = _startcalc.AddDays(7);
+
+                    }
+                }
+
+            }
+
+            //CALCOLIAMO IL COSTO IN BASE AI GIORNI AGGIUNTIVI PRESENTI NEL PERIODO RICHIESTO (_startcalc)
+            if (ngiorni != 0)
+            {
+                if (fascegiornaliere != null && fascegiornaliere.Count() > 0)
+                {
+                    for (int _i = 1; _i <= ngiorni; _i++) //Ciclo sui giorni del periodo richiesto
+                    {
+                        Listino fasciaselezionata = null;
+
+                        //List<Listino> periodolistino = fascegiornaliere.Where(c => _startcalc >= c.startdate && _startcalc <= c.enddate).ToList();
+                        List<Listino> periodolistino = null;
+                        periodolistino = fascegiornaliere.Where(c => _startcalc >= c.Startdate && _startcalc <= c.Enddate).ToList();
+
+                        //Controllo che sia uscita una sola fascia di listino
+                        if (periodolistino != null && periodolistino.Count == 1)
+                            fasciaselezionata = periodolistino[0];
+                        else if (periodolistino != null && periodolistino.Count > 1)
+                        {
+                            // fasciaselezionata = periodolistino[0]; //Se trovo + fasce prendo la prima
+                            error += "Errore trovate fasce di costo multiple per la data: " + _startcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 1 .Verificare";
+                        }
+                        else if (periodolistino == null)
+                        {
+                            error += "Non trovata fascia di costo per la data: " + _startcalc.ToShortDateString() + " id: " + idattivita + " tipotariffa: 1 .Verificare";
+                        }
+
+                        if (fasciaselezionata != null)
+                        {
+                            prezzocalcolato += fasciaselezionata.Prezzo;
+                        }
+                        else
+                        {
+                            error += "Non trovato fascia per il calcolo dei costi nel periodo: " + _startcalc.ToShortDateString() + "  -  " + _endcalc.ToShortDateString();
+                        }
+                        _startcalc = _startcalc.AddDays(1);//avanzo al giorno successivo
+                    }
+                }
+            }
+            return prezzocalcolato;
+        }
+
+
+
         #endregion
 
 

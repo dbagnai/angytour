@@ -72,21 +72,16 @@ a {
     color: #666666;
     text-decoration: none;
 }
-/*a.link1 {
-    color: #002e68;
+a {
+    text-decoration: none;
+}
+a:focus {
+    outline: none;
+}
+a:hover {
+    text-decoration: none;
 }
 
-a.hover {
-    color: #f31b2f;
-}
-
-a.visited {
-    color: #002e68;
-}
-
-a.active {
-    color: #002e68;
-}*/
 .body_paragraph {
     font-family: 'Lato';
 }

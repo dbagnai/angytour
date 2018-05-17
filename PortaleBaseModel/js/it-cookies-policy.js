@@ -17,8 +17,8 @@ var CookiesPolicy = {
 
         CookiesPolicy.id_attivita = id_attivita;
         CookiesPolicy.lang = lang;
-        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'informazioni/I/5/politica-cookie';
-        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'informazioni/GB/5/politica-cookie';
+        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'I/web/politica-cookie-5';
+        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'GB/web/politica-cookie-5';
         CookiesPolicy.html_element = CookiesPolicy.CreateHtml();
         CookiesPolicy.css_element = CookiesPolicy.CreateCSS();
         CookiesPolicy.view_element = CookiesPolicy.IsRequiredView();

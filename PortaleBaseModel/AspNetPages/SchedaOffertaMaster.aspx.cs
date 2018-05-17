@@ -511,8 +511,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 }
                 break;
 
-            case "rif000012":
-                break;
+           
             //case "rif000001":
             //case "rif000004":
             //case "rif000005":
