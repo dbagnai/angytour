@@ -97,7 +97,7 @@ public class filemanage
                             if (ResizeAndSave(file.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true);
+                                CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true);
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
                                 try
@@ -254,7 +254,7 @@ public class filemanage
                             if (ResizeAndSave(UploadControl.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true);
+                                CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true);
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
                                 try
@@ -831,9 +831,31 @@ public class filemanage
         NomeAnteprima = "Ant" + NomeAnteprima;
 
         string percorsoanteprimagenerata = "";
-        if (filemanage.CreaAnteprima(percorsofisicofile, 450, 450, percorsofisanteprime + "\\", NomeAnteprima, false,false)) //qui con true puoi forzare la rigenerazione di tutte le anteprime
+        if (filemanage.CreaAnteprima(percorsofisicofile, 450, 450, percorsofisanteprime + "\\", NomeAnteprima, false, false)) //qui con true puoi forzare la rigenerazione di tutte le anteprime
             percorsoanteprimagenerata = percorsoviranteprime + "/" + NomeAnteprima;
         return percorsoanteprimagenerata;
+    }
+    public static string SelectImageByResolution(string pathimmagine, string viewportw)
+    {
+        // -xs 0> <576px  | -sm  576> <768  | -md 769< <992  |  -lg >992 <1200  | -xl(no estensione) >1200
+        string retname = pathimmagine;
+        int actwidth = 0;
+        if (int.TryParse(viewportw, out actwidth))
+        {
+            string modifier = "";
+            if (actwidth <= 576)
+                modifier = "-xs";
+            else if (actwidth > 576 && actwidth <= 768)
+                modifier = "-sm";
+            else if (actwidth > 768 && actwidth <= 992)
+                modifier = "-md";
+            else if (actwidth > 992 && actwidth <= 1200)
+                modifier = "-lg";
+            int extpos = pathimmagine.LastIndexOf('.');
+            retname = pathimmagine.Insert(extpos, modifier);
+        }
+        return retname;
+
     }
 
 }
