@@ -124,7 +124,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
-                        if (ResizeAndSave(fileupload.PostedFile.InputStream, ref maxdimx, ref maxdimy, pathDestinazione + NomeCorretto, ridimensiona))
+                        if (filemanage.ResizeAndSave(fileupload.PostedFile.InputStream, ref maxdimx, ref maxdimy, pathDestinazione + NomeCorretto, ridimensiona))
                         {
                             rethtml = ReplaceAbsoluteLinks(percorsovirtualedestinazione + NomeCorretto);
                         }
@@ -155,90 +155,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         outupload.Text = error;
         return rethtml;
     }
-    /// <summary>
-    /// SUB per save e resize dell'immagine
-    /// </summary>
-    /// <param name="imgStr"></param>
-    /// <param name="Width"></param>
-    /// <param name="Height"></param>
-    /// <param name="Filename"></param>
-    /// <param name="ridimensiona"></param>
-    /// <returns></returns>
-    private bool ResizeAndSave(System.IO.Stream imgStr, ref int Width, ref int Height, string Filename, bool ridimensiona)
-    {
-        try
-        {
-            System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(imgStr);
-
-            if (ridimensiona == true)
-            {
-                //CREO LE DIMENSIONI DELLA FOTO SALVATA IN BASE AL RAPORTO ORIGINALE DI ASPETTO
-                int altezzaStream = bmpStream.Height; //altezza foto originale
-                int larghezzaStream = bmpStream.Width; //larghezza foto originale
-                if (altezzaStream <= larghezzaStream)
-                {
-                    if (Width > larghezzaStream) Width = larghezzaStream;
-                    Height = Convert.ToInt32(((double)Width / (double)larghezzaStream) * (double)altezzaStream);
-                }
-                else
-                {
-                    if (Height > altezzaStream) Height = altezzaStream;
-                    Width = Convert.ToInt32(((double)Height / (double)altezzaStream) * (double)larghezzaStream);
-                }
-                //FINE CALCOLO ----------------------------------------------------------
-            }
-
-            using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
-            {
-                System.Drawing.Bitmap img_filtrata = img_orig;
-                img_filtrata = new System.Drawing.Bitmap(img_filtrata, new System.Drawing.Size(Width, Height));
-                using (System.Drawing.Bitmap img = img_filtrata)
-                {
-                    System.Drawing.Imaging.ImageFormat imgF = null;
-                    switch (System.IO.Path.GetExtension(Filename).ToLower())
-                    {
-                        case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                        case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                        case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-                        default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-                    }
-                    //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
-                    {
-                        // Create an Encoder object based on the GUID for the Quality parameter category.
-                        ImageCodecInfo jgpEncoder = GetEncoder(imgF);
-                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                        // Create an EncoderParameters object.
-                        // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                        EncoderParameters myEncoderParameters = new EncoderParameters(1);
-                        EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 85L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                        myEncoderParameters.Param[0] = myEncoderParameter;
-                        img.Save(Filename, jgpEncoder, myEncoderParameters);
-                    }
-                    else
-                        img.Save(Filename, imgF);
-                }
-            }
-        }
-        catch (Exception errore)
-        {
-            throw new ApplicationException("Resize and upload:", errore);
-        }
-        return true;
-    }
-    private ImageCodecInfo GetEncoder(ImageFormat format)
-    {
-        ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-        foreach (ImageCodecInfo codec in codecs)
-        {
-            if (codec.FormatID == format.Guid)
-            {
-                return codec;
-            }
-        }
-        return null;
-    }
-
+   
 
 
     protected void ddlLinguaFiltroClientiChange(object sender, EventArgs e)

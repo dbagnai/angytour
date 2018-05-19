@@ -130,7 +130,7 @@ public class CommonPage : Page
         }
         return sb.ToString();
     }
-  
+
 
     public static string ControlloDotDot(object NomeAnteprima, string classe)
     {
@@ -2895,7 +2895,8 @@ public class CommonPage : Page
                 try
                 {
                     //Allego il file prendendolo da web
-                    CaricaFile(server, urlfile, filename, item.CodiceTipologia, item.Id.ToString()); //Inserisco i file che devo in allegato
+                    filemanage.CaricaFile(server, urlfile, filename, item.CodiceTipologia, item.Id.ToString());
+                    //Inserisco i file che devo in allegato
                 }
                 catch (Exception err)
                 {
@@ -2904,70 +2905,7 @@ public class CommonPage : Page
             }
         }
     }
-    private static string CaricaFile(HttpServerUtility server, string urlfile, string Nomefile, string codicetipologia, string idrecord)
-    {
-        string responsestr = "";
-        try
-        {
-            //Controlliamo se ho selezionato un record
-            if (idrecord == null || idrecord == "")
-            {
-                return "No id selected!";
-            }
-            long idSelected = 0;
-            if (!long.TryParse(idrecord, out idSelected))
-            {
-                return "No id selected!";
-            }
 
-            //Verifichiamo la presenza del percorso di destinazione altrimenti lo creiamo
-            //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
-            string pathDestinazione = server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + codicetipologia + "/" + idrecord);
-            if (!System.IO.Directory.Exists(pathDestinazione))
-                System.IO.Directory.CreateDirectory(pathDestinazione);
-
-            //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
-            string NomeCorretto = Nomefile.Replace("+", "");
-            NomeCorretto = NomeCorretto.Replace("%", "");
-            NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
-            //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
-            if (System.IO.File.Exists(pathDestinazione))
-            {
-                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
-            }
-            //Faccio la get da web e salvo nel percorso di destinazione
-            WelcomeLibrary.UF.SharedStatic.MakeHttpGet(urlfile, pathDestinazione + "\\" + NomeCorretto);
-            try
-            {
-                try
-                {
-                    offerteDM offDM = new offerteDM();
-                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "");
-                }
-                catch (Exception errins)
-                {
-
-                }
-                responsestr += "";//tutto ok file caricato
-            }
-            catch (Exception error)
-            {
-                //CANCELLO IL FILE UPLOADATO
-                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
-                responsestr += error.Message;
-                if (error.InnerException != null)
-                    responsestr += error.InnerException.Message;
-            }
-        }
-        catch (Exception errorecaricamento)
-        {
-            responsestr += errorecaricamento.Message;
-            if (errorecaricamento.InnerException != null)
-                responsestr += errorecaricamento.InnerException.Message;
-
-        }
-        return responsestr;
-    }
 
 
     public static void AggiornaMemoriaStaticaPost(HttpServerUtility server, Dictionary<string, Dictionary<string, string>> dict, string codicedestinazione, bool scaricafilesinlocale = true)

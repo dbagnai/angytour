@@ -351,7 +351,70 @@ public class filemanage
         }
         return ret;
     }
+    public static string CaricaFile(HttpServerUtility server, string urlfile, string Nomefile, string codicetipologia, string idrecord)
+    {
+        string responsestr = "";
+        try
+        {
+            //Controlliamo se ho selezionato un record
+            if (idrecord == null || idrecord == "")
+            {
+                return "No id selected!";
+            }
+            long idSelected = 0;
+            if (!long.TryParse(idrecord, out idSelected))
+            {
+                return "No id selected!";
+            }
 
+            //Verifichiamo la presenza del percorso di destinazione altrimenti lo creiamo
+            //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
+            string pathDestinazione = server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + codicetipologia + "/" + idrecord);
+            if (!System.IO.Directory.Exists(pathDestinazione))
+                System.IO.Directory.CreateDirectory(pathDestinazione);
+
+            //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
+            string NomeCorretto = Nomefile.Replace("+", "");
+            NomeCorretto = NomeCorretto.Replace("%", "");
+            NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
+            //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
+            if (System.IO.File.Exists(pathDestinazione))
+            {
+                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+            }
+            //Faccio la get da web e salvo nel percorso di destinazione
+            WelcomeLibrary.UF.SharedStatic.MakeHttpGet(urlfile, pathDestinazione + "\\" + NomeCorretto);
+            try
+            {
+                try
+                {
+                    offerteDM offDM = new offerteDM();
+                    bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "");
+                }
+                catch (Exception errins)
+                {
+
+                }
+                responsestr += "";//tutto ok file caricato
+            }
+            catch (Exception error)
+            {
+                //CANCELLO IL FILE UPLOADATO
+                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                responsestr += error.Message;
+                if (error.InnerException != null)
+                    responsestr += error.InnerException.Message;
+            }
+        }
+        catch (Exception errorecaricamento)
+        {
+            responsestr += errorecaricamento.Message;
+            if (errorecaricamento.InnerException != null)
+                responsestr += errorecaricamento.InnerException.Message;
+
+        }
+        return responsestr;
+    }
     public static string EliminaFile(HttpServerUtility Server, string idrecord, string tipologia, string nomefile)
     {
         string ret = "";
@@ -502,6 +565,92 @@ public class filemanage
         }
         return true;
     }
+
+    /// <summary>
+    /// SUB per save e resize dell'immagine
+    /// </summary>
+    /// <param name="imgStr"></param>
+    /// <param name="Width"></param>
+    /// <param name="Height"></param>
+    /// <param name="Filename"></param>
+    /// <param name="ridimensiona"></param>
+    /// <returns></returns>
+    public static bool ResizeAndSave(System.IO.Stream imgStr, ref int Width, ref int Height, string Filename, bool ridimensiona)
+    {
+        try
+        {
+            System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(imgStr);
+            if (ridimensiona == true)
+            {
+                //CREO LE DIMENSIONI DELLA FOTO SALVATA IN BASE AL RAPORTO ORIGINALE DI ASPETTO
+                int altezzaStream = bmpStream.Height; //altezza foto originale
+                int larghezzaStream = bmpStream.Width; //larghezza foto originale
+
+                if (altezzaStream <= larghezzaStream)
+                {
+                    int Maxheight = Height;
+                    if (Width > larghezzaStream) Width = larghezzaStream;
+                    Height = Convert.ToInt32(((double)Width / (double)larghezzaStream) * (double)altezzaStream);
+                    if (Height > Maxheight)
+                    {
+                        Height = Maxheight;
+                        Width = Convert.ToInt32(((double)Maxheight / (double)altezzaStream) * (double)larghezzaStream);
+                    }
+
+                }
+                else
+                {
+                    int maxwidth = Width;
+                    if (Height > altezzaStream) Height = altezzaStream;
+                    Width = Convert.ToInt32(((double)Height / (double)altezzaStream) * (double)larghezzaStream);
+                    if (Width > maxwidth)
+                    {
+                        Width = maxwidth;
+                        Height = Convert.ToInt32(((double)maxwidth / (double)larghezzaStream) * (double)altezzaStream);
+                    }
+                }
+                //FINE CALCOLO ----------------------------------------------------------
+            }
+
+            using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
+            {
+                System.Drawing.Bitmap img_filtrata = img_orig;
+                img_filtrata = new System.Drawing.Bitmap(img_filtrata, new System.Drawing.Size(Width, Height));
+                using (System.Drawing.Bitmap img = img_filtrata)
+                {
+                    System.Drawing.Imaging.ImageFormat imgF = null;
+                    switch (System.IO.Path.GetExtension(Filename).ToLower())
+                    {
+                        case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
+                        case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
+                        case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
+                        default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
+                    }
+                    //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
+                    {
+                        // Create an Encoder object based on the GUID for the Quality parameter category.
+                        ImageCodecInfo jgpEncoder = GetEncoder(imgF);
+                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                        // Create an EncoderParameters object.
+                        // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                        EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                        EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        img.Save(Filename, jgpEncoder, myEncoderParameters);
+                    }
+                    else
+                        img.Save(Filename, imgF);
+                }
+            }
+        }
+        catch (Exception errore)
+        {
+            throw new ApplicationException("Resize and upload:", errore);
+        }
+        return true;
+    }
+
     public static System.Drawing.Imaging.ImageCodecInfo GetEncoder(System.Drawing.Imaging.ImageFormat format)
     {
         System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageDecoders();
@@ -521,7 +670,7 @@ public class filemanage
         {
             if (System.IO.File.Exists(pathAnteprime + nomeAnteprima) && !replacefile)
                 return true;
-           // System.IO.File.Delete(pathAnteprime + nomeAnteprima);
+            // System.IO.File.Delete(pathAnteprime + nomeAnteprima);
 
             //System.IO.File.Exists(PathTempAnteprime);
             if (!System.IO.Directory.Exists(pathAnteprime))
