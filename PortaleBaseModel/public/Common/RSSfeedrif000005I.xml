@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Webmousers Blog Offerte</title>
+    <title>Webmousers Blog Promozioni</title>
     <link>http://localhost:52646</link>
     <description>Webmousers Blog</description>
-    <lastBuildDate>Fri, 13 Apr 2018 13:09:28 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 19 May 2018 19:20:47 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-04-13T13:09+02:00</sy:updateBase>
+    <sy:updateBase>2018-05-19T19:20+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title>offerta test
 sottotitolo</title>
-      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</link>
-      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</guid>
+      <link>http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20</link>
+      <guid isPermaLink="true">http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20</guid>
       <pubDate>Mon, 09 Apr 2018 15:47:36 +02:00</pubDate>
-      <category>Offerte</category>
+      <category>Promozioni</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000005/20/rest2.jpg" alt="offerta test
-sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-20"><em>offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20"><em>offerta test
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

@@ -3661,9 +3661,23 @@ namespace WelcomeLibrary.DAL
 
                     //ESEGUIAMO LA CANCELLAZIONE FISICA
                     //DEI FILE IMMAGINE E ANTEPRIMA DAL SERVER
+                    if (System.IO.File.Exists(pathfile + "\\" + nomefile))
+                    {
+                        string filenamenoext = System.IO.Path.GetFileNameWithoutExtension(pathfile + "\\" + nomefile).ToString();
+                        string fileext = System.IO.Path.GetExtension(pathfile + "\\" + nomefile).ToLower();
+                        string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                        string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                        string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                        string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                        if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                        if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                        if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                        if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+
+                    }
                     if (System.IO.File.Exists(pathfile + "\\" + nomefile)) System.IO.File.Delete(pathfile + "\\" + nomefile);
                     if (System.IO.File.Exists(pathfile + "\\" + "Ant" + nomefile)) System.IO.File.Delete(pathfile + "\\" + "Ant" + nomefile);
-
+                   
                 }
                 catch (Exception error)
                 {

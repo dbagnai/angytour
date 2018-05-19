@@ -450,7 +450,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                             if (filemanage.ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto))
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true))
                                     output.Text = "Anteprima non salvata correttamente";
 
                                 ret = true; //Se tutto ok imposto true il caricamento
@@ -605,9 +605,55 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             {
                 // bool ret = offDM.CancellaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeFotoSelezionata, "", pathDestinazione);
                 //CANCELLO LA FOTO UPLOADATA
+
+                if (fi.Exists)
+                {
+                    string fileext = fi.Extension;
+                    string pathfile = fi.DirectoryName;
+                    string filenamenoext = fi.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext));
+                    string filename_xs = pathfile + "\\" +filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" +filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" +filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
+                if (fiGB.Exists)
+                {
+                    string fileext = fiGB.Extension;
+                    string pathfile = fiGB.DirectoryName;
+                    string filenamenoext = fiGB.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
+                if (fiRU.Exists)
+                {
+                    string fileext = fiRU.Extension;
+                    string pathfile = fiRU.DirectoryName;
+                    string filenamenoext = fiRU.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
                 if (fi.Exists) fi.Delete();
                 if (System.IO.File.Exists(fi.DirectoryName + "\\ant" + fi.Name)) System.IO.File.Delete(fi.DirectoryName + "\\ant" + fi.Name);
-
                 if (fiGB.Exists) fiGB.Delete();
                 if (System.IO.File.Exists(fiGB.DirectoryName + "\\ant" + fiGB.Name)) System.IO.File.Delete(fiGB.DirectoryName + "\\ant" + fiGB.Name);
                 if (fiRU.Exists) fiRU.Delete();

@@ -494,7 +494,7 @@
                                     <br />
 
                                 </div>
-                                <div style="width: 100%; height: 500px;">
+                                <div style="width: 100%; height: 500px;max-width:500px">
                                     <asp:HiddenField ID="txtFotoSchema" runat="server" />
                                     <asp:HiddenField ID="txtFotoValori" runat="server" />
                                     <div style="width: 100%; float: left; height: 400px; padding: 10px">

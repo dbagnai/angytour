@@ -929,6 +929,11 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
                         if (filemanage.ResizeAndSave(fileupload.PostedFile.InputStream, maxdimx, maxdimy, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                         {
+                            //Creo anche le anteprime e le varie versioni del file per dimensioni diverse
+                            if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true))
+                                output.Text = ("Anteprima Allegato non salvata correttamente!");
+
+
                             rethtml = ReplaceAbsoluteLinks(percorsovirtualedestinazione + NomeCorretto);
                         }
                         else
@@ -1065,7 +1070,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                             if (filemanage.ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto))
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true))
                                      output.Text = ("Anteprima Allegato non salvata correttamente!");
 
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
