@@ -746,10 +746,10 @@ public partial class AspNetPages_ListaElenco : CommonPage
         ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
 
 
-        //((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        //((HtmlMeta)Master.FindControl("metafbimage")).Content = filemanage.ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
         //if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
-        //    ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        //    ((HtmlMeta)Master.FindControl("metafbimage")).Content = filemanage.ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
         //else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
         //    ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
 

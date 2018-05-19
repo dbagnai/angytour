@@ -130,148 +130,7 @@ public class CommonPage : Page
         }
         return sb.ToString();
     }
-    public static string ScalaImmagine(string pathFileorigine, HttpServerUtility Server, string percorsoFisicoorigine = "")
-    {
-        //string percorsoviranteprime = WelcomeLibrary.STATIC.Global.PercorsoComune;
-        //string percorsofisanteprime = WelcomeLibrary.STATIC.Global.percorsoFisicoComune;
-        int posname = pathFileorigine.LastIndexOf('/');
-        if (posname < 0) return "";
-
-        string percorsoviranteprime = pathFileorigine.Substring(0, posname);
-        string percorsofisanteprime = percorsoFisicoorigine;
-        if (Server != null) percorsofisanteprime = Server.MapPath(percorsoviranteprime);
-        string NomeAnteprima = pathFileorigine.Substring(posname + 1);
-        string percorsofisicofile = percorsofisanteprime + "\\" + NomeAnteprima;
-        if (Server != null) Server.MapPath(pathFileorigine).ToString();
-
-        if (NomeAnteprima.ToString().StartsWith("Ant"))
-            NomeAnteprima = NomeAnteprima.ToString().Remove(0, 3);
-        NomeAnteprima = "Ant" + NomeAnteprima;
-
-        string percorsoanteprimagenerata = "";
-        if (CreaAnteprima(percorsofisicofile, 450, 450, percorsofisanteprime + "\\", NomeAnteprima, false))
-            percorsoanteprimagenerata = percorsoviranteprime + "/" + NomeAnteprima;
-        return percorsoanteprimagenerata;
-    }
-
-
-    /// <summary>
-    /// I path da passare sono percorsi fisici sul server!
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="Altezza"></param>
-    /// <param name="Larghezza"></param>
-    /// <param name="pathAnteprime"></param>
-    /// <param name="nomeAnteprima"></param>
-    /// <returns></returns>
-    public static bool CreaAnteprima(string fileorigine, int Altezza, int Larghezza, string pathAnteprime, string nomeAnteprima, bool replacefile = false)
-    {
-        bool ret = false;
-        try
-        {
-            if (System.IO.File.Exists(pathAnteprime + nomeAnteprima) && !replacefile)
-                return true;
-            //System.IO.File.Exists(PathTempAnteprime);
-            if (!System.IO.Directory.Exists(pathAnteprime))
-            {
-                System.IO.Directory.CreateDirectory(pathAnteprime);
-            }
-            // throw new Exception("Cartella temporanea di destinazione per l'anteprima non trovata!");
-
-            using (System.IO.FileStream file = new System.IO.FileStream(fileorigine, System.IO.FileMode.Open))
-            {
-                System.Drawing.Imaging.ImageFormat imgF = null;
-                System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(file);
-                int altezzaStream = bmpStream.Height;
-                int larghezzaStream = bmpStream.Width;
-                if (altezzaStream <= larghezzaStream)
-                    Altezza = Convert.ToInt32((double)Larghezza / (double)larghezzaStream * (double)altezzaStream);
-                else
-                    Larghezza = Convert.ToInt32((double)Altezza / (double)altezzaStream * (double)larghezzaStream);
-                System.Drawing.Bitmap img = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(Larghezza, Altezza));
-                switch (System.IO.Path.GetExtension(fileorigine).ToLower())
-                {
-                    case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                    case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                    case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-
-                    default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-                }
-
-                if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
-                {
-
-                    // Create an Encoder object based on the GUID for the Quality parameter category.
-                    ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
-                    System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                    // Create an EncoderParameters object.
-                    // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                    EncoderParameters myEncoderParameters = new EncoderParameters(3);
-                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                    myEncoderParameters.Param[0] = myEncoderParameter;
-                    myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
-                    myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
-
-                    img.Save(pathAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters);
-                }
-                else
-                    img.Save(pathAnteprime + nomeAnteprima, imgF);
-
-
-
-                file.Close();
-                ret = true;
-                if (!System.IO.File.Exists(pathAnteprime + nomeAnteprima))
-                    ret = false;
-            }
-        }
-        catch
-        { ret = false; }
-        return ret;
-    }
-    private static System.Drawing.Imaging.ImageCodecInfo GetEncoder(System.Drawing.Imaging.ImageFormat format)
-    {
-        System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageDecoders();
-        foreach (System.Drawing.Imaging.ImageCodecInfo codec in codecs)
-        {
-            if (codec.FormatID == format.Guid)
-            {
-                return codec;
-            }
-        }
-        return null;
-    }
-    public static string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false)
-    {
-        string ritorno = "";
-        string physpath = "";
-        if (NomeAnteprima != null)
-            if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
-            {
-                if (CodiceTipologia != "" && idOfferta != "")
-                    if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
-                    {
-                        ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
-                        physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
-                        //Così ritorno l'immagine non di anteprima ma quella pieno formato
-                        if (NomeAnteprima.ToString().StartsWith("Ant"))
-                            ritorno += "/" + NomeAnteprima.ToString().Remove(0, 3);
-                        else
-                            ritorno += "/" + NomeAnteprima.ToString();
-                        //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
-                        string anteprimaimmagine = CommonPage.ScalaImmagine(ritorno, null, physpath);
-                        if (anteprimaimmagine != "" && !noanteprima) ritorno = anteprimaimmagine;
-                        //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
-                    }
-                    else
-                        ritorno = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
-            }
-            else
-                ritorno = NomeAnteprima.ToString();
-
-        return ritorno;
-    }
-
+  
 
     public static string ControlloDotDot(object NomeAnteprima, string classe)
     {
@@ -1185,7 +1044,7 @@ public class CommonPage : Page
                     url = (dati[0]);
                     //testourl = dati[1];
 
-                    testourl = ConfigManagement.ReadKey(dati[1]);  
+                    testourl = ConfigManagement.ReadKey(dati[1]);
 
                 }
                 urlcorretto = url;
@@ -1243,8 +1102,8 @@ public class CommonPage : Page
                 {
                     url = (dati[0]);
                     //testourl = dati[1];
-                   string lingua = GetLinguaFromActualCulture(System.Threading.Thread.CurrentThread.CurrentCulture);
-                   testourl = references.ResMan("Common", lingua, dati[1]);
+                    string lingua = GetLinguaFromActualCulture(System.Threading.Thread.CurrentThread.CurrentCulture);
+                    testourl = references.ResMan("Common", lingua, dati[1]);
 
                 }
                 urlcorretto = url;
@@ -1586,7 +1445,7 @@ public class CommonPage : Page
                         {
                             linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
-                            imgofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
+                            imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
                             titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
                         }
                     }

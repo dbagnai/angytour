@@ -191,24 +191,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
             {
                 System.Drawing.Bitmap img_filtrata = img_orig;
-                //FILTRI CONTRASTO BRIGHTNESS/contrast/sturation
-                // img_filtrata = ImageProcessing.applicaSaturationCorrection(img_filtrata, 0.05);
-                //img_filtrata = ImageProcessing.applicaBrightness(img_filtrata, 0.03);
-
-                //img_filtrata = ImageProcessing.applicaContrast(img_filtrata, 0.75);
-                //img_filtrata = ImageProcessing.applicaAdaptiveSmoothing(img_filtrata);
-                //img_filtrata = ImageProcessing.applicaConservativeSmoothing(img_filtrata);
-                //img_filtrata = ImageProcessing.applicaHSLFilter(img_filtrata, 0.87, 0.075);
-                //img_filtrata = ImageProcessing.applicaGaussianBlur(img_filtrata, 1, 5);
-                //img_filtrata = ImageProcessing.applicaMediano(img_filtrata, 4);
-                // ImageProcessing.NoiseRemoval(img_filtrata);
-                //img_filtrata = ImageProcessing.MeanFilter(img_filtrata, 2);
-                img_filtrata = ImageProcessing.applicaResizeBilinear(img_filtrata, Width, Height); //resisze
-                //img_filtrata = ImageProcessing.applicaResizeBicubic(img_filtrata, Width, Height); //resisze
-                //TOLGO IL FILTRO PER TEST
-                //System.Drawing.Bitmap img_filtrata = img_orig;
-                //RESIZE FINALE DELL'IMMAGINE
-                //System.Drawing.Bitmap img = new System.Drawing.Bitmap(img_filtrata, new System.Drawing.Size(Width, Height));
+                img_filtrata = new System.Drawing.Bitmap(img_filtrata, new System.Drawing.Size(Width, Height));
                 using (System.Drawing.Bitmap img = img_filtrata)
                 {
                     System.Drawing.Imaging.ImageFormat imgF = null;
@@ -607,7 +590,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     protected void listitemchange(object sender, EventArgs e)
     {
         string seltext = ((ListBox)sender).SelectedItem.Text;
-        string selvalue = ((ListBox)sender).SelectedItem.Value; 
+        string selvalue = ((ListBox)sender).SelectedItem.Value;
         //Carichiamo i dati della newsletter ed associamoli ai controlli
         VisualizzaNewsletter(selvalue);
         litId.Text = selvalue;
@@ -1241,12 +1224,12 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             if (m.Lingua != "I")
                 culturename = "en";
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
-         //string value = HttpContext.GetGlobalResourceObject("CommonBase", "TestoUnsubscribe", ci).ToString();
-         
-         string value = references.ResMan("CommonBase", m.Lingua,"TestoUnsubscribe");
+            //string value = HttpContext.GetGlobalResourceObject("CommonBase", "TestoUnsubscribe", ci).ToString();
 
-         //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
-         if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
+            string value = references.ResMan("CommonBase", m.Lingua, "TestoUnsubscribe");
+
+            //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
+            if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
                 Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
             else
                 Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";

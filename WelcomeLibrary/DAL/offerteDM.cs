@@ -5506,7 +5506,7 @@ namespace WelcomeLibrary.DAL
                             else
                                 ritorno += "/" + NomeAnteprima.ToString();
                             //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
-                            //string anteprimaimmagine = CommonPage.ScalaImmagine(ritorno, null, physpath);
+                            //string anteprimaimmagine = filemanage.ScalaImmagine(ritorno, null, physpath);
                             //if (anteprimaimmagine != "" && !noanteprima) ritorno = anteprimaimmagine;
                             //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
                         }

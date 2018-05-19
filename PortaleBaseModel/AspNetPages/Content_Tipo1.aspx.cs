@@ -366,11 +366,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
 
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //LINK
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString());
+                string virtuallink = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString());
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
                 {
@@ -422,12 +422,12 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
 
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
+                string pathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //LINK
                 string target = "_blank";
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
+                string virtuallink = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceContenuto, item.Id.ToString(), true);
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
                 {

@@ -687,155 +687,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 break;
         }
     }
-    //    protected void AssociaDatiSocial(Offerte data)
-    //    {
-    //        WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
-
-    //        WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
-    //        string testolink = "";
-    //        if (sezione != null)
-    //            testolink = sezione.Descrizione;
-    //        string sezionedescrizione = "";
-    //        if (!string.IsNullOrEmpty(Categoria))
-    //        {
-    //            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
-    //            if (categoriaprodotto != null)
-    //            {
-    //                sezionedescrizione += categoriaprodotto.Descrizione;
-    //                testolink = sezionedescrizione;
-    //            }
-    //        }
-    //        if (sezione != null)
-    //            sezionedescrizione += " " + sezione.Descrizione;
-
-
-    //        //////PER CREAZIONE LINK CANONICI E ALTERNATE
-    //        WelcomeLibrary.DOM.TipologiaOfferte sezioneI = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
-    //        string sezionedescrizioneI = "";
-    //        if (sezioneI != null)
-    //            sezionedescrizioneI = sezioneI.Descrizione;
-    //        if (!string.IsNullOrEmpty(Categoria))
-    //        {
-    //            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "I");
-    //            if (categoriaprodotto != null)
-    //            {
-    //                sezionedescrizioneI = categoriaprodotto.Descrizione;
-    //            }
-    //        }
-
-    //        WelcomeLibrary.DOM.TipologiaOfferte sezioneGB = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "GB" & tmp.Codice == Tipologia); });
-    //        string sezionedescrizioneGB = "";
-    //        if (sezioneGB != null)
-    //            sezionedescrizioneGB = sezioneGB.Descrizione;
-    //        if (!string.IsNullOrEmpty(Categoria))
-    //        {
-    //            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "GB");
-    //            if (categoriaprodotto != null)
-    //            {
-    //                sezionedescrizioneGB = categoriaprodotto.Descrizione;
-    //            }
-    //        }
-    //      ///////////////////////////////////////////////////////////////////////////
-
-
-    //      ((HtmlTitle)Master.FindControl("metaTitle")).Text = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
-
-    //        if (data != null)
-    //        {
-    //            string descrizione = data.DescrizionebyLingua(Lingua);
-    //            string denominazione = data.DenominazionebyLingua(Lingua);
-
-    //            //Titolo e descrizione pagina
-    //            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
-    //            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-    //            //Opengraph per facebook
-    //            ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + Nome).Trim();
-    //            simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true))).Replace("<br/>", " ").Trim(); ;
-    //            ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
-    //            //((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-    //            if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
-    //                ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-    //            else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
-    //                ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
-    //        }
-
-    //        //string linkcanonico =
-    //        //  CreaLinkRoutes(null, false, Lingua, testolink.Trim(), "", Tipologia);
-    //        //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-    //        //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
-
-
-    //        //////////////////
-    //        Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
-
-    //        string hreflang = "";
-    //        //METTIAMO GLI ALTERNATE
-    //        hreflang = " hreflang=\"it\" ";
-    //        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria);
-    //        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-    //        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-    //        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-    //        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-    //        if (Lingua == "I") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-    //#if false
-
-    //        hreflang = " hreflang=\"en\" ";
-    //        linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria);
-    //        litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-    //        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-    //        if (Lingua == "GB") litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-
-
-    //#endif
-    //    }
-
-    //    private void SettaTestoIniziale()
-    //    {
-
-    //        WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I" & tmp.Codice == Tipologia); });
-    //        WelcomeLibrary.DOM.TipologiaOfferte sezione_inlingua = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
-    //        if (sezione != null)
-    //        {
-    //            EvidenziaSelezione(sezione.Descrizione);
-
-    //            string titolopagina = sezione_inlingua.Descrizione.ToUpper();
-    //            litNomePagina.Text = titolopagina;
-    //            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
-    //            Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
-    //            if (catselected != null)
-    //            {
-    //                litNomePagina.Text += " " + catselected.Descrizione.ToUpper();
-    //            }
-
-    //            string htmlPage = "";
-    //            if (references.ResMan("Common",Lingua,"testo" + Tipologia) != null)
-    //                htmlPage = references.ResMan("Common",Lingua,"testo" + Tipologia).ToString();
-    //            if (references.ResMan("Common",Lingua,"testo" + Categoria) != null)
-    //                htmlPage = references.ResMan("Common",Lingua,"testo" + Categoria).ToString();
-    //            string strigaperricerca = ""; //Request.Url.AbsolutePath
-    //            if (!string.IsNullOrEmpty(Categoria))
-    //                strigaperricerca = "/" + Tipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
-    //            Contenuti content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-    //            if (content == null && !string.IsNullOrEmpty(titolopagina))
-    //            {
-    //                strigaperricerca = "/" + Tipologia + "/" + CleanUrl(titolopagina); //Request.Url.AbsolutePath
-    //                content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-    //            }
-    //            if (content != null && content.Id != 0)
-    //            {
-    //                htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-
-    //            }
-    //            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
-    //            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 90, true)).Replace("<br/>", " ").Trim());
-    //            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-
-    //            litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
-    //        }
-    //    }
-
-
-
+    
 
     protected void AssociaDatiSocial()
     {
@@ -1018,21 +870,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //////////////////////////////////////////////////////////////////////////
         litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
 
-        //if (data != null)
-        //{
-        //    string descrizione = data.DescrizionebyLingua(Lingua);
-        //    string denominazione = data.DenominazionebyLingua(Lingua);
-
-        //    //Titolo e descrizione pagina
-        //    string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
-        //    ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-
-        //    if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
-        //        ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-        //    else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
-        //        ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
-        //}
-
+         
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1256,7 +1094,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             if (NomeAnteprima.ToString().ToLower().StartsWith("ant"))
                 NomeAnteprima = NomeAnteprima.ToString().Remove(0, 3);
             ritorno += "/" + NomeAnteprima.ToString();
-            //string anteprima = ScalaImmagineImmobile(ritorno, NomeAnteprima.ToString(), Server);
+            //string anteprima = filemanage.ScalaImmagineImmobile(ritorno, NomeAnteprima.ToString(), Server);
             //if (!string.IsNullOrEmpty(anteprima))
             //    ritorno = anteprima;
         }

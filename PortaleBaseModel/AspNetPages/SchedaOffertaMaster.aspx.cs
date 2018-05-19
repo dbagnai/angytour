@@ -841,7 +841,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             Offerte itemOff = (Offerte)item;
 
             //CARICAMENTO DATI DB
-            string pathimmagine = ComponiUrlAnteprima(itemOff.FotoCollection_M.FotoAnteprima, itemOff.CodiceTipologia, itemOff.Id.ToString(), true);
+            string pathimmagine = filemanage.ComponiUrlAnteprima(itemOff.FotoCollection_M.FotoAnteprima, itemOff.CodiceTipologia, itemOff.Id.ToString(), true);
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
             string target = "_self";
 
@@ -1092,7 +1092,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true))).Replace("<br/>", " ").Trim();
         ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
         if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
-            ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString(), true).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+            ((HtmlMeta)Master.FindControl("metafbimage")).Content = filemanage.ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString(), true).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
         else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
             ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
 
@@ -1273,7 +1273,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 //((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(data.DenominazioneI);
                 //((HtmlMeta)Master.FindControl("metafbdescription")).Content = CommonPage.ReplaceLinks(ConteggioCaratteri(data.DescrizioneI, 90));
 
-                //((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                //((HtmlMeta)Master.FindControl("metafbimage")).Content = filemanage.ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
             }
         }
@@ -1445,11 +1445,11 @@ public partial class _SchedaOffertaMaster : CommonPage
 
 
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //LINK
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString());
+                string virtuallink = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString());
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1)
                 {
@@ -1502,11 +1502,11 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 testotitolo = item.DenominazionebyLingua(Lingua);
                 //IMMAGINE
-                string pathimmagine = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
+                string pathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 //LINK
                 string target = "_blank";
-                string virtuallink = ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
+                string virtuallink = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString(), true);
                 string link = virtuallink.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && !string.IsNullOrEmpty(link))
                 {

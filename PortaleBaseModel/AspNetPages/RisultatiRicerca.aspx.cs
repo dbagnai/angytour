@@ -836,7 +836,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             Offerte itemOff = (Offerte)item;
 
             //CARICAMENTO DATI DB
-            string pathimmagine = ComponiUrlAnteprima(itemOff.FotoCollection_M.FotoAnteprima, itemOff.CodiceTipologia, itemOff.Id.ToString());
+            string pathimmagine = filemanage.ComponiUrlAnteprima(itemOff.FotoCollection_M.FotoAnteprima, itemOff.CodiceTipologia, itemOff.Id.ToString());
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
             string target = "_self";
             string denominazione = itemOff.DenominazionebyLingua(Lingua);

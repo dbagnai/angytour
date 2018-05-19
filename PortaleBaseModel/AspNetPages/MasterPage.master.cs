@@ -1289,7 +1289,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string testotitolo = _o.DenominazionebyLingua(Lingua);
                 string descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizionebyLingua(Lingua), 100, true));
 
-                string pathimmagine = ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -1613,7 +1613,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string testotitolo = _o.DenominazionebyLingua(Lingua);
                 string descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DenominazionebyLingua(Lingua), 100, true));
 
-                string pathimmagine = CommonPage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -1690,7 +1690,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizionebyLingua(Lingua), 100, true));
 
 
-                string pathimmagine = CommonPage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -1798,7 +1798,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizionebyLingua(Lingua), 100, true));
 
 
-                string pathimmagine = CommonPage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -2032,7 +2032,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string testotitolo = _o.DenominazionebyLingua(Lingua);
                 string descrizione = CommonPage.ReplaceLinks(CommonPage.ConteggioCaratteri(_o.DescrizionebyLingua(Lingua), 100, true));
 
-                string pathimmagine = CommonPage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 if (string.IsNullOrEmpty(pathimmagine))
@@ -2314,4 +2314,5 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
     }
 #endif
+
 }

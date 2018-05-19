@@ -159,7 +159,7 @@
                                         </div>
                                     </td>
                                     <%-- <td style="width: 0px; height: 100px; border: Solid 1px Black;">
-                            <asp:Image  ID="imgAnt" Width="95px" ImageUrl='<%# ComponiUrlAnteprima(Eval("FotoCollection_M"),Eval("Id").ToString()) %>'
+                            <asp:Image  ID="imgAnt" Width="95px" ImageUrl='<%# filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M"),Eval("Id").ToString()) %>'
                                 runat="server" />
                         </td>--%>
                                     <td style="border: Solid 1px #ccc;">
@@ -257,7 +257,7 @@
                                                     <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
                                                     <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
                                                          Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>'
-                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# CommonPage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
+                                                        OnClick="linkgalleria_click" runat="server" ImageUrl='<%# filemanage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
                                                 </li>
                                             </ItemTemplate>
                                         </asp:Repeater>

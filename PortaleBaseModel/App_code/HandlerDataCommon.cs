@@ -1086,7 +1086,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 }
             }
 
-            string pathimmagine = ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+            string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString(),true,true);
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
             if (string.IsNullOrEmpty(pathimmagine))
                 pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -1212,7 +1212,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
                         {
                             //IMMAGINE
-                            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
+                            string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(),true,true);
                             string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             imagescomplete.Add(abspathimmagine);
                             //a.Descrizione -> dove la mettiamo
@@ -1230,7 +1230,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         else
                         {
                             //a.Descrizione -> dove la mettiamo
-                            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString());
+                            string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(),true,true);
                             tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             filescomplete.Add(tmppathimmagine);
                             filesdesc.Add(a.Descrizione);
@@ -1375,39 +1375,39 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
     }
 
 
-    protected string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false)
-    {
-        string ritorno = "";
-        string physpath = "";
-        if (NomeAnteprima != null)
-            if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
-            {
-                if (CodiceTipologia != "" && idOfferta != "")
-                {
-                    //if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
-                    //{
-                    ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
-                    physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
-                    //Così ritorno l'immagine non di anteprima ma quella pieno formato
-                    if (NomeAnteprima.ToString().StartsWith("Ant"))
-                        ritorno += "/" + NomeAnteprima.ToString().Remove(0, 3);
-                    else
-                        ritorno += "/" + NomeAnteprima.ToString();
-                    //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
-                    //string anteprimaimmagine = CommonPage.ScalaImmagine(ritorno, null, physpath);
-                    //          if (anteprimaimmagine != "" && !noanteprima) ritorno = anteprimaimmagine;
-                    //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
+    //protected string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false)
+    //{
+    //    string ritorno = "";
+    //    string physpath = "";
+    //    if (NomeAnteprima != null)
+    //        if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
+    //        {
+    //            if (CodiceTipologia != "" && idOfferta != "")
+    //            {
+    //                //if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
+    //                //{
+    //                ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
+    //                physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
+    //                //Così ritorno l'immagine non di anteprima ma quella pieno formato
+    //                if (NomeAnteprima.ToString().StartsWith("Ant"))
+    //                    ritorno += "/" + NomeAnteprima.ToString().Remove(0, 3);
+    //                else
+    //                    ritorno += "/" + NomeAnteprima.ToString();
+    //                //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
+    //                //string anteprimaimmagine = filemanage.ScalaImmagine(ritorno, null, physpath);
+    //                //          if (anteprimaimmagine != "" && !noanteprima) ritorno = anteprimaimmagine;
+    //                //////////////INSERITO PER LA GENERAZIONE DELLE ANTEPRIME
 
-                }
-                //    else
-                //        ritorno = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
-                //}
-            }
-            else
-                ritorno = NomeAnteprima.ToString();
+    //            }
+    //            //    else
+    //            //        ritorno = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
+    //            //}
+    //        }
+    //        else
+    //            ritorno = NomeAnteprima.ToString();
 
-        return ritorno;
-    }
+    //    return ritorno;
+    //}
 
 
     public bool IsReusable

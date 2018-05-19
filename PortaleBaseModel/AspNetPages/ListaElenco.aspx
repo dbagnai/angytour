@@ -68,9 +68,9 @@
                     <div class="row work-div" style="margin-right: 5px; margin-bottom: 5px">
 
                         <div class="col-md-3" runat="server" visible='<%# ControlloVisibilita(Eval("FotoCollection_M")) %>'>
-                            <a target="_blank" href='<%#  ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>' runat="server">
+                            <a target="_blank" href='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>' runat="server">
                                 <asp:Image ID="Anteprima" runat="server"
-                                    ImageUrl='<%#  ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
+                                    ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
                                     Visible='<%# ControlloVisibilita(Eval("FotoCollection_M")) %>'
                                     class="img-responsive hover-effect" /></a>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="col-md-2">
                         <a target="_blank" href='<%# "http://" + Eval("Website").ToString()  %>' runat="server">
                             <asp:Image ID="Anteprima" runat="server"
-                                ImageUrl='<%#  ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
+                                ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
                                 Visible='<%# ControlloVisibilita(Eval("FotoCollection_M")) %>'
                                 class="img-responsive hover-effect" /></a>
                     </div>

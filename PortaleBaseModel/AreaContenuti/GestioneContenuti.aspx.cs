@@ -401,7 +401,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             HtmlControl control = (HtmlControl)((LinkButton)sender).FindControl("imgButton");
             control.Attributes.Add("class", "fa fa-search fa-2x");
         }
- 
+
     }
     protected void link_click(object sender, EventArgs e)
     {
@@ -595,7 +595,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             //Creo o aggiorno l'url per il rewriting in tutte le lingue ...
             ////////////////////////////////////////////////////////////////////
             WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdContenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
- 
+
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.TitolobyLingua("I"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.TitolobyLingua("GB"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.TitolobyLingua("RU"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
@@ -626,7 +626,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         try
         {
             //Carichiamo tutti i clienti destinatari ( prendo i clienti Validati, con consenso commrciale opzione 1, e con card attivata e non scaduta )
-           // CardsDM cDM = new CardsDM();
+            // CardsDM cDM = new CardsDM();
             ClientiDM cliDM = new ClientiDM();
             Cliente _clifiltro = new Cliente();
             _clifiltro.Validato = true;
@@ -653,12 +653,12 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     mail.Tipomailing = (long)enumclass.TipoMailing.AvvisoNuovaofferta;
                     mail.NoteInvio = "";
 
-                    mail.SoggettoMail = references.ResMan("Common",mail.Lingua,"oggettoMailInserimentoOfferta");
-                    mail.TestoMail = references.ResMan("Common", mail.Lingua,"testoMailInserimentoOfferta") + "<br/>";
+                    mail.SoggettoMail = references.ResMan("Common", mail.Lingua, "oggettoMailInserimentoOfferta");
+                    mail.TestoMail = references.ResMan("Common", mail.Lingua, "testoMailInserimentoOfferta") + "<br/>";
 
                     //Mettiamo anche il link alla pagina specifica dell'offerta appena inserita
                     string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/SchedaContenuto.aspx?Lingua=" + c.Lingua.ToUpper() + "&idContenuto=" + item.Id + "&CodiceContenuto=" + item.CodiceContenuto;
-                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", c.Lingua.ToUpper(),"TestoLinkAOfferta").ToString() + "<br/>";
+                    mail.TestoMail += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", c.Lingua.ToUpper(), "TestoLinkAOfferta").ToString() + "<br/>";
 
                     mDM.InserisciAggiornaMail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, mail); //Inseriamo nel db per l'invio
 
@@ -906,10 +906,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             //-------------------------------------
             if (fileupload.HasFile)
             {
-                if (fileupload.PostedFile.ContentLength > 15000000)
+                if (fileupload.PostedFile.ContentLength > 25000000)
                 {
 
-                    error += "La foto non può essere caricata perché supera 6MB!";
+                    error += "La foto non può essere caricata perché supera 25MB!";
                 }
                 else
                 {
@@ -927,7 +927,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
-                        if (ResizeAndSave(fileupload.PostedFile.InputStream, maxdimx, maxdimy, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
+                        if (filemanage.ResizeAndSave(fileupload.PostedFile.InputStream, maxdimx, maxdimy, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                         {
                             rethtml = ReplaceAbsoluteLinks(percorsovirtualedestinazione + NomeCorretto);
                         }
@@ -1036,10 +1036,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             //-------------------------------------
             if (UploadFoto.HasFile)
             {
-                if (UploadFoto.PostedFile.ContentLength > 15000000)
+                if (UploadFoto.PostedFile.ContentLength > 25000000)
                 {
 
-                    output.Text += "La foto non può essere caricata perché supera 6MB!";
+                    output.Text += "La foto non può essere caricata perché supera 25MB!";
                 }
                 else
                 {
@@ -1056,16 +1056,18 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     else
                     {
                         //Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                        if (UploadFoto.PostedFile.ContentType == "image/jpeg" || UploadFoto.PostedFile.ContentType == "image/pjpeg" || UploadFoto.PostedFile.ContentType == "image/gif")
+                        if (UploadFoto.PostedFile.ContentType == "image/jpeg" || UploadFoto.PostedFile.ContentType == "image/pjpeg" || UploadFoto.PostedFile.ContentType == "image/gif" || UploadFoto.PostedFile.ContentType == "image/png")
                         {
                             int maxheight = 800;
                             int maxwidth = 1000;
                             bool ridimensiona = true;
                             //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
-                            if (ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
+                            if (filemanage.ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                this.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto);
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto))
+                                     output.Text = ("Anteprima Allegato non salvata correttamente!");
+
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
                                 try
@@ -1171,160 +1173,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
     }
 
 
-    /// <summary>
-    /// SUB per save e resize dell'immagine
-    /// </summary>
-    /// <param name="imgStr"></param>
-    /// <param name="Width"></param>
-    /// <param name="Height"></param>
-    /// <param name="Filename"></param>
-    /// <param name="ridimensiona"></param>
-    /// <returns></returns>
-    private bool ResizeAndSave(System.IO.Stream imgStr, int Width, int Height, string Filename, bool ridimensiona)
-    {
-        try
-        {
-            System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(imgStr);
-
-            if (ridimensiona == true)
-            {
-                //CREO LE DIMENSIONI DELLA FOTO SALVATA IN BASE AL RAPORTO ORIGINALE DI ASPETTO
-                int altezzaStream = bmpStream.Height; //altezza foto originale
-                int larghezzaStream = bmpStream.Width; //larghezza foto originale
-                if (altezzaStream <= larghezzaStream)
-                {
-                    if (Width > larghezzaStream) Width = larghezzaStream;
-                    Height = Convert.ToInt32(((double)Width / (double)larghezzaStream) * (double)altezzaStream);
-                }
-                else
-                {
-                    if (Height > altezzaStream) Height = altezzaStream;
-                    Width = Convert.ToInt32(((double)Height / (double)altezzaStream) * (double)larghezzaStream);
-                }
-                //FINE CALCOLO ----------------------------------------------------------
-            }
-
-            using (System.Drawing.Bitmap img_orig = new System.Drawing.Bitmap(bmpStream))
-            {
-                System.Drawing.Bitmap img_filtrata = img_orig;
-                //FILTRI CONTRASTO BRIGHTNESS/contrast/sturation
-                //img_filtrata = ImageProcessing.applicaSaturationCorrection(img_filtrata, 0.05);
-                //img_filtrata = ImageProcessing.applicaBrightness(img_filtrata, 0.03);
-                //img_filtrata = ImageProcessing.applicaContrast(img_filtrata, 0.75);
-                //img_filtrata = ImageProcessing.applicaAdaptiveSmoothing(img_filtrata);
-                //img_filtrata = ImageProcessing.applicaConservativeSmoothing(img_filtrata);
-                //img_filtrata = ImageProcessing.applicaHSLFilter(img_filtrata, 0.87, 0.075);
-                //img_filtrata = ImageProcessing.applicaGaussianBlur(img_filtrata, 1, 5);
-                //img_filtrata = ImageProcessing.applicaMediano(img_filtrata, 4);
-                // ImageProcessing.NoiseRemoval(img_filtrata);
-                //img_filtrata = ImageProcessing.MeanFilter(img_filtrata, 2);
-                img_filtrata = ImageProcessing.applicaResizeBilinear(img_filtrata, Width, Height); //resisze
-                //img_filtrata = ImageProcessing.applicaResizeBicubic(img_filtrata, Width, Height); //resisze
-                //TOLGO IL FILTRO PER TEST
-                //System.Drawing.Bitmap img_filtrata = img_orig;
-                //RESIZE FINALE DELL'IMMAGINE
-                //System.Drawing.Bitmap img = new System.Drawing.Bitmap(img_filtrata, new System.Drawing.Size(Width, Height));
-                using (System.Drawing.Bitmap img = img_filtrata)
-                {
-                    System.Drawing.Imaging.ImageFormat imgF = null;
-                    switch (System.IO.Path.GetExtension(Filename).ToLower())
-                    {
-                        case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                        case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                        case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-                        default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-                    }
-                    //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
-                    {
-                        // Create an Encoder object based on the GUID for the Quality parameter category.
-                        ImageCodecInfo jgpEncoder = GetEncoder(imgF);
-                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                        // Create an EncoderParameters object.
-                        // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                        EncoderParameters myEncoderParameters = new EncoderParameters(1);
-                        EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 85L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                        myEncoderParameters.Param[0] = myEncoderParameter;
-                        img.Save(Filename, jgpEncoder, myEncoderParameters);
-                    }
-                    else
-                        img.Save(Filename, imgF);
-                }
-            }
-        }
-        catch (Exception errore)
-        {
-            throw new ApplicationException("Resize and upload:", errore);
-        }
-        return true;
-    }
-    private ImageCodecInfo GetEncoder(ImageFormat format)
-    {
-        ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-        foreach (ImageCodecInfo codec in codecs)
-        {
-            if (codec.FormatID == format.Guid)
-            {
-                return codec;
-            }
-        }
-        return null;
-    }
-
-    protected void CreaAnteprima(string filePath, int Altezza, int Larghezza, string pathAnteprime, string nomeAnteprima)
-    {
-        string PathTempAnteprime = pathAnteprime;
-        System.Drawing.Imaging.ImageFormat imgF = null;
-        //System.IO.File.Exists(PathTempAnteprime);
-        if (!System.IO.Directory.Exists(PathTempAnteprime))
-        {
-            System.IO.Directory.CreateDirectory(PathTempAnteprime);
-        }
-        // throw new Exception("Cartella temporanea di destinazione per l'anteprima non trovata!");
-
-        using (System.IO.FileStream file = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
-        {
-            System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(file);
-            int altezzaStream = bmpStream.Height;
-            int larghezzaStream = bmpStream.Width;
-            if (altezzaStream <= larghezzaStream)
-                Altezza = Convert.ToInt32((double)Larghezza / (double)larghezzaStream * (double)altezzaStream);
-            else
-                Larghezza = Convert.ToInt32((double)Altezza / (double)altezzaStream * (double)larghezzaStream);
-            System.Drawing.Bitmap img = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(Larghezza, Altezza));
-            switch (System.IO.Path.GetExtension(filePath).ToLower())
-            {
-                case ".gif": imgF = System.Drawing.Imaging.ImageFormat.Gif; break;
-                case ".png": imgF = System.Drawing.Imaging.ImageFormat.Png; break;
-                case ".bmp": imgF = System.Drawing.Imaging.ImageFormat.Bmp; break;
-
-                default: imgF = System.Drawing.Imaging.ImageFormat.Jpeg; break;
-            }
-            if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
-            {
-
-                // Create an Encoder object based on the GUID for the Quality parameter category.
-                ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
-                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                // Create an EncoderParameters object.
-                // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                EncoderParameters myEncoderParameters = new EncoderParameters(3);
-                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                myEncoderParameters.Param[0] = myEncoderParameter;
-                myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
-                myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
-
-                img.Save(PathTempAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters);
-            }
-            else
-                img.Save(PathTempAnteprime + nomeAnteprima, imgF);
-            file.Close();
-        }
-        if (!System.IO.File.Exists(PathTempAnteprime + nomeAnteprima))
-            output.Text = ("Anteprima Allegato non salvata correttamente!");
-    }
-
-
+   
+     
     #endregion
 
 
