@@ -1021,7 +1021,12 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             });
                             if ($(this).hasClass('img-ant') && completepath.indexOf('dummylogo') == -1) {
                                 var position = completepath.lastIndexOf('/');
-                                completepath = completepath.substr(0, position + 1) + "ant" + completepath.substr(position + 1);
+                                var filename = completepath.substr(position + 1);
+                                filename = filename.replace(/-xs./g, ".");
+                                filename = filename.replace(/-sm./g, ".");
+                                filename = filename.replace(/-md./g, ".");
+                                filename = filename.replace(/-lg./g, ".");
+                                completepath = completepath.substr(0, position + 1) + "ant" + filename;
                             }
                      
                             if (completepath != null && completepath != '')
@@ -1164,7 +1169,12 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                     /*<li > <img src="" alt="" style="padding:5px" /></li > */
                                     contenutoslide += '<li > <img style="padding:5px" src="';
                                     var position = imgslist[j].lastIndexOf('/');
-                                    var pathanteprima = imgslist[j].substr(0, position + 1) + "ant" + imgslist[j].substr(position + 1);
+                                    var filename = imgslist[j].substr(position + 1);
+                                    filename = filename.replace(/-xs./g, ".");
+                                    filename = filename.replace(/-sm./g, ".");
+                                    filename = filename.replace(/-md./g, ".");
+                                    filename = filename.replace(/-lg./g, ".");
+                                    var pathanteprima = imgslist[j].substr(0, position + 1) + "ant" + filename;
                                     //pathanteprima = pathanteprima + "?vw=" + window.outerWidth;
                                     contenutoslide += pathanteprima;
                                     contenutoslide += '" alt="" />';

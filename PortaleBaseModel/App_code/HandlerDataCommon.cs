@@ -1088,7 +1088,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
             string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString(), true, true);
             // (potrei decidere anche di passare ls versione dell'immagine in base alla rispolizione   WelcomeLibrary.STATIC.Global.Viewportw
-            //pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+            pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
 
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
             if (string.IsNullOrEmpty(pathimmagine))
@@ -1216,7 +1216,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         {
                             //IMMAGINE
                             string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
-                            //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                            tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
 
                             string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             imagescomplete.Add(abspathimmagine);
@@ -1236,7 +1236,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         {
                             //a.Descrizione -> dove la mettiamo
                             string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
-                            //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                            tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
 
                             tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             filescomplete.Add(tmppathimmagine);
@@ -1355,12 +1355,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             string physpathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione).Replace("/", "\\").Replace("\\\\", "\\\\");
             string filename = System.IO.Path.GetFileName(physpathimmagine).ToString();
             string filepath = System.IO.Path.GetDirectoryName(physpathimmagine).ToString();
-            filemanage.CreaAnteprima(physpathimmagine, 450, 450, filepath + "\\", "Ant" + filename);
+            filemanage.CreaAnteprima(physpathimmagine, 450, 450, filepath + "\\", "Ant" + filename,false,true);
             ///////////////////////////////////////
 
             //Qui  posso decidere anche di passare le versioni in base alla rispolizione   WelcomeLibrary.STATIC.Global.Viewportw
             //andatando a modificare il noem del file aggiungendo -xs -xs -md -lg  a seconda della risoluzione al nome del file
-            //pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+            pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
 
             pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
             if (string.IsNullOrEmpty(pathimmagine))
@@ -1391,7 +1391,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         return ritorno;
     }
 
-   
+
     public bool IsReusable
     {
         get

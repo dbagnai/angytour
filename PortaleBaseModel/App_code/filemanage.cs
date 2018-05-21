@@ -14,6 +14,8 @@ using System.Drawing.Imaging;
 /// </summary>
 public class filemanage
 {
+    public static int reslevels = 2; //Imposta il numero di livelli di immagini da usare in base alle rispuluzioni 1- solo xs 2-solo xs sm etc ...
+
     public filemanage()
     {
         //
@@ -619,6 +621,7 @@ public class filemanage
     }
     public static bool CreaAnteprima(string fileorigine, int Width, int Height, string pathAnteprime, string nomeAnteprima, bool replacefile = false, bool generateversions = false)
     {
+       // generateversions = false; //COMMENTARE SE VUOI ELIMINARE IL FUNZIONAMENTO CON LE RISOLUZIONI MULTIPLE PER LE IMMAGINI
         bool ret = false;
         try
         {
@@ -643,10 +646,10 @@ public class filemanage
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             bool existreducedfiles = true;
             if (generateversions)
-                if (!System.IO.File.Exists(filepath + "\\" + filename_xs) ||
-                    !System.IO.File.Exists(filepath + "\\" + filename_sm) ||
-                    !System.IO.File.Exists(filepath + "\\" + filename_md) ||
-                    !System.IO.File.Exists(filepath + "\\" + filename_lg))
+                if ((!System.IO.File.Exists(filepath + "\\" + filename_xs) && filemanage.reslevels >= 1) ||
+                    (!System.IO.File.Exists(filepath + "\\" + filename_sm) && filemanage.reslevels >= 2) ||
+                    (!System.IO.File.Exists(filepath + "\\" + filename_md) && filemanage.reslevels >= 3) ||
+                    (!System.IO.File.Exists(filepath + "\\" + filename_lg) && filemanage.reslevels >= 4))
                     existreducedfiles = false;
 
             if (existsanteprima && existreducedfiles && !replacefile)
@@ -668,30 +671,34 @@ public class filemanage
 
                 if (generateversions)
                 {
-                    if (larghezzaStream > larghezza_xs)
-                    {
-                        RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_xs, ref altezza_xs);
-                        img_xs = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_xs, altezza_xs));
-                    }
-                    else img_xs = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
-                    if (larghezzaStream > larghezza_sm)
-                    {
-                        RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_sm, ref altezza_sm);
-                        img_sm = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_sm, altezza_sm));
-                    }
-                    else img_sm = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
-                    if (larghezzaStream > larghezza_md)
-                    {
-                        RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_md, ref altezza_md);
-                        img_md = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_md, altezza_md));
-                    }
-                    else img_md = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
-                    if (larghezzaStream > larghezza_lg)
-                    {
-                        RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_lg, ref altezza_lg);
-                        img_lg = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_lg, altezza_lg));
-                    }
-                    else img_lg = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
+                    if (filemanage.reslevels >= 1)
+                        if (larghezzaStream > larghezza_xs)
+                        {
+                            RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_xs, ref altezza_xs);
+                            img_xs = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_xs, altezza_xs));
+                        }
+                        else img_xs = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
+                    if (filemanage.reslevels >= 2)
+                        if (larghezzaStream > larghezza_sm)
+                        {
+                            RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_sm, ref altezza_sm);
+                            img_sm = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_sm, altezza_sm));
+                        }
+                        else img_sm = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
+                    if (filemanage.reslevels >= 3)
+                        if (larghezzaStream > larghezza_md)
+                        {
+                            RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_md, ref altezza_md);
+                            img_md = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_md, altezza_md));
+                        }
+                        else img_md = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
+                    if (filemanage.reslevels >= 4)
+                        if (larghezzaStream > larghezza_lg)
+                        {
+                            RicalcolaDimensioni(altezzaStream, larghezzaStream, ref larghezza_lg, ref altezza_lg);
+                            img_lg = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezza_lg, altezza_lg));
+                        }
+                        else img_lg = new System.Drawing.Bitmap(bmpStream, new System.Drawing.Size(larghezzaStream, altezzaStream));
                     /////////////////////////////////////////  
                 }
 
@@ -831,7 +838,7 @@ public class filemanage
         NomeAnteprima = "Ant" + NomeAnteprima;
 
         string percorsoanteprimagenerata = "";
-        if (filemanage.CreaAnteprima(percorsofisicofile, 450, 450, percorsofisanteprime + "\\", NomeAnteprima, false, false)) //qui con true puoi forzare la rigenerazione di tutte le anteprime
+        if (filemanage.CreaAnteprima(percorsofisicofile, 450, 450, percorsofisanteprime + "\\", NomeAnteprima, false, true)) //qui con true puoi forzare la rigenerazione di tutte le anteprime anche se già generate
             percorsoanteprimagenerata = percorsoviranteprime + "/" + NomeAnteprima;
         return percorsoanteprimagenerata;
     }
@@ -843,13 +850,13 @@ public class filemanage
         if (int.TryParse(viewportw, out actwidth))
         {
             string modifier = "";
-            if (actwidth <= 576)
+            if (actwidth <= 576 && filemanage.reslevels >= 1)
                 modifier = "-xs";
-            else if (actwidth > 576 && actwidth <= 768)
+            else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
                 modifier = "-sm";
-            else if (actwidth > 768 && actwidth <= 992)
+            else if (actwidth > 768 && actwidth <= 992 && filemanage.reslevels >= 3)
                 modifier = "-md";
-            else if (actwidth > 992 && actwidth <= 1200)
+            else if (actwidth > 992 && actwidth <= 1200 && filemanage.reslevels >= 4)
                 modifier = "-lg";
             int extpos = pathimmagine.LastIndexOf('.');
             retname = pathimmagine.Insert(extpos, modifier);
