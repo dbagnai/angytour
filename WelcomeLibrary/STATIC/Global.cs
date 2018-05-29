@@ -13,6 +13,12 @@ namespace WelcomeLibrary.STATIC
             set { _NomeConnessioneDb = value; }
         }
 
+        private static bool? _sololuxuryestates = null;
+        public static bool? sololuxuryestates
+        {
+            get { return _sololuxuryestates; }
+            set { _sololuxuryestates = value; }
+        }
 
         private static string _viewportw = "";
         public static string Viewportw

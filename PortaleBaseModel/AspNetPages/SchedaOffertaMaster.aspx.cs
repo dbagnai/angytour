@@ -511,7 +511,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 }
                 break;
 
-           
+
             //case "rif000001":
             //case "rif000004":
             //case "rif000005":
@@ -1127,7 +1127,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
         Tabrif actualpagelink = new Tabrif();
-
+        string urlcambiolinguaenit = "";
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
         string hreflang = "";
@@ -1148,6 +1148,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -1184,6 +1185,18 @@ public partial class _SchedaOffertaMaster : CommonPage
                 actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneRU);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
+            HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+            divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+            divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            divCambioLinguaen.InnerHtml += "href=\"";
+            divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+            divCambioLinguaen.InnerHtml += "\" >";
+            divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+            divCambioLinguaen.InnerHtml += "</a>";
+            divCambioLinguaen.Visible = true;
+            HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+            divCambioLinguadef.Visible = false;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////

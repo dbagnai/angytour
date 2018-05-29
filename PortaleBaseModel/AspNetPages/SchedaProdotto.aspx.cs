@@ -208,7 +208,7 @@ public partial class _SchedaProdotto : CommonPage
                 sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
                 sb.Append("\"></div>");
                 plhSuggeritiJs.Text = sb.ToString();
- 
+
                 this.AssociaDati();
                 break;
         }
@@ -915,6 +915,7 @@ public partial class _SchedaProdotto : CommonPage
         Tabrif actualpagelink = new Tabrif();
 
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
+        string urlcambiolinguaenit = "";
 
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
@@ -930,6 +931,7 @@ public partial class _SchedaProdotto : CommonPage
             actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
 
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
@@ -944,6 +946,19 @@ public partial class _SchedaProdotto : CommonPage
                 actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
+
+            HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+            divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+            divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            divCambioLinguaen.InnerHtml += "href=\"";
+            divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+            divCambioLinguaen.InnerHtml += "\" >";
+            divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+            divCambioLinguaen.InnerHtml += "</a>";
+            divCambioLinguaen.Visible = true;
+            HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+            divCambioLinguadef.Visible = false;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1472,7 +1487,7 @@ public partial class _SchedaProdotto : CommonPage
         long.TryParse(txtQuantita_temp.Value, out quantita);
         string codTagCombined = hddTagCombined.Value;
         AggiornaProdottoCarrello(Request, Session, idprodotto, quantita, User.Identity.Name, codTagCombined);
- 
+
         txtQuantita_temp.Value = quantita.ToString();
         //Aggiorniamo nella masterpage il numero prodotti / articoli nel carrello
         // long nprodotti = ecom.ContaProdottiCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
@@ -1480,7 +1495,7 @@ public partial class _SchedaProdotto : CommonPage
         // AssociaDati();
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
         AggiornaVisualizzazioneDatiCarrello();
-        
+
     }
 
     protected void btnInsertcart(object sender, EventArgs e)

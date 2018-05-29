@@ -585,8 +585,7 @@ public class references
         bool tmpcdn = false;
         bool.TryParse(susecdn, out tmpcdn);
         WelcomeLibrary.STATIC.Global.usecdn = tmpcdn;
-
-
+         
         references.CaricaDatiReftablesDaJson(Server); //Tabelle di riferimento per l'immobiliare
 
         WelcomeLibrary.UF.Utility.CaricaListaStaticaNazioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, true);

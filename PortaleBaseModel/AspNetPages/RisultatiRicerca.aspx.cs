@@ -310,7 +310,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = false;
                 ContaArticoliPerperiodo(Tipologia);
-              //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie 
+                //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie 
                 divSearch.Visible = true;
                 divLatestPost.Visible = false;
                 //CaricaUltimiPost(Tipologia, Categoria);
@@ -575,7 +575,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 }
 
                 break;
-           
+
             default:
                 AssociaDatiSocial();
 
@@ -585,7 +585,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-md-3 col-sm-3";
                 ContaArticoliPerperiodo(Tipologia);
-               // Caricalinksrubriche(Tipologia);
+                // Caricalinksrubriche(Tipologia);
                 divSearch.Visible = true;
                 divLatestPost.Visible = false;
                 //CaricaUltimiPost(Tipologia, Categoria);
@@ -686,7 +686,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
-       
+
 
     }
 
@@ -1113,6 +1113,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
         ////////////
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
+        string urlcambiolinguaenit = "";
         string urlcanonico = "";
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
@@ -1134,6 +1135,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -1151,6 +1153,19 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
+
+            HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+            divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+            divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            divCambioLinguaen.InnerHtml += "href=\"";
+            divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+            divCambioLinguaen.InnerHtml += "\" >";
+            divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+            divCambioLinguaen.InnerHtml += "</a>";
+            divCambioLinguaen.Visible = true;
+            HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+            divCambioLinguadef.Visible = false;
         }
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {

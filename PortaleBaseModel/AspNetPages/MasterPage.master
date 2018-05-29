@@ -82,8 +82,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
-                    <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                <div class="pull-right" id="divCambioLinguaen" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                </div>
+                <div class="pull-right" id="divCambioLinguadef" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                   <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
                 <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
@@ -171,10 +173,10 @@
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
-                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+              <%--  <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-                </div>
+                </div>--%>
                 <div class="float-right d-none" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
                     <i class="fa fa-phone" style="color: #fff;"></i><a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                         <span style="color: #fff; font-weight: 400"><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
@@ -184,10 +186,10 @@
         </div>
 
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
-            <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
+          <%--  <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
                 <a style="color: #555; padding: 8px" href='<%= references.ResMan("Common", Lingua,"linkHomeCambio") %>'>
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-            </div>
+            </div>--%>
             <div style="display: none; position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px" class="float-right visible-xs" href="tel:+39xxx ">
                     <i class="fa fa-2x fa-phone"></i></a>
