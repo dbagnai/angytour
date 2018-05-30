@@ -1143,7 +1143,7 @@
                         <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />
 
 
-                        <div style="font-weight: 300; font-size: 1rem; color: red" " id="outputContactdiv">
+                        <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContactdiv">
                             <asp:literal text="" id="outputContact" runat="server" />
                         </div>
                         <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral" controltovalidate="txtContactName" runat="server" />
