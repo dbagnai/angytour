@@ -415,7 +415,6 @@ public class CommonPage : Page
         tags.Add("titl:(");
         tags.Add("vide:(");
 
-
         string target = "_blank";
         string urlcorretto = "";
         string ret = strIn;

@@ -96,8 +96,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (Lingua.ToLower() == "ru") Response.RedirectPermanent("~");
             }
 
-            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
-                ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
+            //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+            //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
 
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);

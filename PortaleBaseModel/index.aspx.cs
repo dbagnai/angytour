@@ -7,11 +7,12 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WelcomeLibrary.DOM;
+using WelcomeLibrary.UF;
 
 public partial class index : CommonPage
 {
 
-    
+
     public string Lingua
     {
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
@@ -20,7 +21,7 @@ public partial class index : CommonPage
     protected void Page_Load(object sender, EventArgs e)
     {
 
-         
+
         try
         {
             if (!IsPostBack)
@@ -93,8 +94,24 @@ public partial class index : CommonPage
         string customtitle = "";
         if (content != null && content.Id != 0)
         {
+
+            //System.Diagnostics.Stopwatch SP = new System.Diagnostics.Stopwatch();
+            //TimeSpan ts;
+            //SP.Start();
+
+
             htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
+            htmlPage = custombind.bind(htmlPage); //eseguiamo il bindig delle funzioni lato server
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
+
+            //    // Get the elapsed time as a TimeSpan value.
+            //    ts = SP.Elapsed;
+            //    // Format and display the TimeSpan value.
+            //    string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            //        ts.Hours, ts.Minutes, ts.Seconds,
+            //ts.Milliseconds / 10);
+            //    System.Diagnostics.Debug.WriteLine(elapsedTime + " :Start stopwatch time");
+
 
             string descrizione = content.DescrizioneI;
             string titolopagina = content.TitoloI;
