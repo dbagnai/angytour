@@ -37,7 +37,7 @@
     {
         TimeSpan diff = When1.Subtract(DateTime.Now);
 
-        //ricalcolo l'intervallo del timer per multipli della cadenza 
+        //ricalcolo l'intervallo del timer per multipli della cadenza
         //successivamente all'istante attuale
         if (diff.TotalMinutes < 0)
         {
@@ -48,7 +48,7 @@
             diff = When1.Subtract(DateTime.Now);
             // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
         }
-        //risultato in millisecondi 
+        //risultato in millisecondi
         return diff.Ticks / 10000;
     }
     /// <summary>
@@ -66,7 +66,7 @@
         catch { };
         //Reimposto l'esecuzione tra Every ore rispetto alla data di ultima esecuzione
         When1 = When1.AddHours(Every1);
-        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato 
+        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato
         //con il tempo - potrebbe sballare
         OpTimer1.Interval = (Double)GetInterval1();
         OpTimer1.Start();
@@ -76,9 +76,7 @@
     ////KEEP ALIVE APP////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-
-
-    //Variabili per Timer per esecuzione compiti schedulati 
+    //Variabili per Timer per esecuzione compiti schedulati
     public static DateTime When;
     public static double Every;
     private System.Timers.Timer OpTimer;
@@ -105,7 +103,7 @@
     {
         TimeSpan diff = When.Subtract(DateTime.Now);
 
-        //ricalcolo l'intervallo del timer per multipli della cadenza 
+        //ricalcolo l'intervallo del timer per multipli della cadenza
         //successivamente all'istante attuale
         if (diff.TotalMinutes < 0)
         {
@@ -117,7 +115,7 @@
             // diff = DateTime.Parse(StartHour).AddDays(1).Subtract(DateTime.Now);
         }
 
-        //risultato in millisecondi 
+        //risultato in millisecondi
         return diff.Ticks / 10000;
     }
     /// <summary>
@@ -132,8 +130,8 @@
         Messaggi.Add("Messaggio", "");
 
         //---------------------------------------------
-        //Operazioni varie da eseguire 
-        //iterazione con database ecc. 
+        //Operazioni varie da eseguire
+        //iterazione con database ecc.
         //---------------------------------------------
         try
         {
@@ -173,7 +171,7 @@
                 {
                     if (((TimeSpan)(System.DateTime.Today - fi.CreationTime.Date)).Days >= 2)
                     {
-                        //Elimino il file in quanto probabilmente si è interrotto il processo in modo imprevisto   
+                        //Elimino il file in quanto probabilmente si è interrotto il processo in modo imprevisto
                         fi.Delete();
                     }
                 }
@@ -192,7 +190,7 @@
 
         //Reimposto l'esecuzione tra Every ore rispetto alla data di ultima esecuzione
         When = When.AddHours(Every);
-        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato 
+        //Riprendo l'intervallo così prendo in considerazione il tempo di elaborazione passato
         //con il tempo - potrebbe sballare
         OpTimer.Interval = (Double)GetInterval();
         OpTimer.Start();
@@ -255,10 +253,10 @@
             Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
             Tmp_linksite = WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true);
-            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1"); 
+            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 #endif
 
-            // references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
+            //references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
 
             Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
@@ -279,13 +277,11 @@
         }
     }
 
-
     void Application_Start(object sender, EventArgs e)
     {
         System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
         Messaggi.Add("Messaggio", "");
         Messaggi["Messaggio"] += " Application start : " + System.DateTime.Now.ToString();
-
 
         try
         {
@@ -318,7 +314,6 @@
             Every = 4; //Ciclo di esecuzione in ore
             StartTimer();
 
-
             //TIMER2 -> PER KEEP ALIVE ( blocca idle timeout brevi di IIS )
             When1 = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
@@ -327,7 +322,6 @@
 
             //Creo una variabile per la scrittura dei messaggi nel file di log
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi); //Per fare questa scritturo ho problemi di file permissions sul getdirectory
-
 
         }
         catch (Exception errore)
@@ -369,7 +363,6 @@
                 {
                     return;
                 }
-
 
                 string appaddress = "";
                 if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
@@ -433,7 +426,6 @@
                     WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
                 }
 
-
                 WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
                 WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
                 s_InitializedAlready = true;
@@ -465,8 +457,8 @@
 
         // DICHIARAZIONE BUNDLES E MODALITA' RITORNO
         BundleEngine.AddRoutes(routes);//Route x bundler
-        //BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleLinkOrScript; //Opzioni di ritorno dell'handler
-        BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
+        BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleLinkOrScript; //Opzioni di ritorno dell'handler
+        //BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("BundlesCheckFilesAlways").ToLower() == "true")
             BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files ad ogni chiamata e non solo a riavvio app
                                                                 //BundleEngine.BundleOptions.BundleMode = BundleEngine.EnumBundleMode.LastWriteTime;
@@ -475,12 +467,10 @@
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
             BundleEngine.BundleOptions.minifyJs = true;
 
-
         BundleEngine.AddBundleJS("bundlejslib0",
 "~/js/jquery321/jquery-3.2.1.min.js",
 "~/js/jquery321/jquery-migrate-3.0.1.min.js"
 );
-
 
         BundleEngine.AddBundleJS("bundlejslib1",
     "~/js/bootstrap400/popper.min.js",
@@ -502,7 +492,7 @@
      "~/js/owl-carousel.js",
    "~/js/owl-carousel/owl-carousel/owl.carousel.js",
       //"~/js/magnify/js/jquery.magnify.js",
-      // "~/js/magnify/js/jquery.magnify-mobile.js"  
+      // "~/js/magnify/js/jquery.magnify-mobile.js"
       "~/lib/js/common.js",
     //"~/lib/js/immobili2.js",
     "~/lib/js/genericContent.js",
@@ -547,10 +537,9 @@
        "~/js/landing/script.js"
            );
 
-
-
         BundleEngine.AddBundleCSS("bundlecss1",
         "~/js/bootstrap400/css/bootstrap.min.css",
+        //"~/css/less/bootstrap/bootstrap.less",
     "~/css/revolution_settings.css",
     "~/js/menuzord/files/css/menuzord.css",
     "~/js/menuzord/files/css/skins/menuzord-colored.css",
@@ -577,12 +566,13 @@
      //"~/fonts/icons-mind/style.css",
      //"~/fonts/linecons/style.css",
      //"~/fonts/et-line-font-plugin/style.css",
+     "~/css/opj/style-100.css", /*SET-COLORI*/
      "~/css/mbr-faq.css",
      "~/css/mbr-additional.css",
      "~/css/landing.css",
-     "~/css/custom1.css"
+     "~/css/custom1.css",
+     "~/css/custom.css"
       );
-
 
     }
 
@@ -626,7 +616,6 @@
         //routes.Add("Genericoldlistaprodcat", new System.Web.Routing.Route("catalogo/{Lingua}/{Tipologia}/{Categoria}/{testoindice}", new GenericRouteHandler()));
         //routes.Add("Genericoldlistaprodcatsottocat", new System.Web.Routing.Route("catalogo/{Lingua}/{Tipologia}/{Categoria}/{Categoria2liv}/{testoindice}", new GenericRouteHandler()));
 
-
     }
     void Application_End(object sender, EventArgs e)
     {
@@ -640,7 +629,6 @@
 
     }
 
-
     void Session_Start(object sender, EventArgs e)
     {
         // Codice eseguito all'avvio di una nuova sessione
@@ -649,11 +637,10 @@
 
     void Session_End(object sender, EventArgs e)
     {
-        // Codice eseguito al termine di una sessione. 
+        // Codice eseguito al termine di una sessione.
         // Nota: l'evento Session_End viene generato solo quando la modalità sessionstate
-        // è impostata su InProc nel file Web.config. Se la modalità è impostata su StateServer 
+        // è impostata su InProc nel file Web.config. Se la modalità è impostata su StateServer
         // o SQLServer, l'evento non viene generato.
 
     }
-
 </script>

@@ -19,7 +19,7 @@ function InjectPagerSliderBanner(pagercontainer, controlid) {
 function injectSliderAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height) {
     loadref(injectSliderAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height, lng);
 }
-function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola,width,height) {
+function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height) {
     //Qui devo visualizzare il titolo
     var templateHtml = pathAbs + "/lib/template/" + "sliderbanner.html";
     if (type != null && type != '')
@@ -28,6 +28,7 @@ function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesi
     //Correggo l'id dei controlli del template per l'inzializzazione dello scroller con id univoca e corretta
     $('#' + container).html('');
     $('#' + container + 'Title').show();
+
     $('#' + container).load(templateHtml, function () {
         $('#' + container).find("[id^=replaceid]").each(function (index, text) {
             var currentid = $(this).prop("id");
@@ -88,7 +89,7 @@ function CaricaSliderDataBanner(controlid) {
 
             try {
 
-                if (result !== null && result != '') {
+                if (result !== null && result != '' && callafterfilter != null) {
                     var parseddata = JSON.parse(result);
                     var temp = parseddata["resultinfo"];
                     localObjects["resultinfo"] = JSON.parse(temp);
@@ -102,7 +103,8 @@ function CaricaSliderDataBanner(controlid) {
                     // globalObject[controlid] = localObjects;
                     localObjects["linkloaded"] = JSON.parse(datalink);
                     callafterfilter(localObjects, controlid);
-                }
+                } else
+                    console.log(result);
             }
             catch (e) {
                 console.log(e);
@@ -134,7 +136,7 @@ function BindSliderBanner(el, localObjects) {
 
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[el + "params"];
-    //objfiltrotmp.containerId
+    //objfiltrotmp.containerid
 
     /*-----------------------*/
     sliderPresent = true;
@@ -163,66 +165,70 @@ function BindSliderBanner(el, localObjects) {
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj.wrap('<p>').parent(), data[j], localObjects, "",
-                    function (ret) {
-                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                        var test = $('#' + el + ' ul')[0];
-                        $(test).append(ret.html()) + "\r\n";
-                    });
+            function (ret) {
+                //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                var test = $('#' + el + ' ul')[0];
+                $(test).append(ret.html()) + "\r\n";
+            });
     }
 
     initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
+
     CleanHtml($('#' + el));
     CleanHtml($('#' + el).parent());
 };
 //https://www.themepunch.com/faq/wrap-lines-of-text-jquery-version/
 function initSlider(idDiv, width, height) {
-    jQuery(document).ready(function ($) {
-        $('#' + idDiv).parent().show();
-       
-        $('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
-        $('#' + idDiv).css('visibility', 'visible');
-        $('#' + idDiv).revolution({
-            delay: 5000,
-            startwidth: width,
-            startheight: height,
-            //startwidth: 1170,
-            //startheight: 550,
-            onHoverStop: "on",
-            thumbWidth: 80,
-            thumbHeight: 50,
-            thumbAmount: 3,
-            hideThumbs: 200,
-            navigationType: "thumb",// use none, bullet or thumb
-            navigationArrows: "solo", // nextto, solo, none, nextto questo per le frecce laterali
-            navigationStyle: "square",  // round, square, navbar, round-old, square-old, navbar-old 
-            navigationHAlign: "center",
-            navigationVAlign: "bottom",
-            navigationHOffset: 0,
-            navigationVOffset: 5,
-            soloArrowLeftHalign: "right",
-            soloArrowLeftValign: "bottom",
-            soloArrowLeftHOffset: 60,
-            soloArrowLeftVOffset: 10,
-            soloArrowRightHalign: "right",
-            soloArrowRightValign: "bottom",
-            soloArrowRightHOffset: 10,
-            soloArrowRightVOffset: 10,
-            touchenabled: "on",
-            stopAtSlide: -1,
-            stopAfterLoops: -1,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            hideSliderAtLimit: 0,
-            fullWidth: "on",
-            fullScreen: "on",// fullScreen: fullscreen,
-            fullScreenAlignForce: "on",
-            autoHeight: "on",
-            fullScreenOffsetContainer: "#topheader-to-offset",
-            lazyLoad: "on",
-            keyboardNavigation: "on",
-            shadow: 0
-        });
+    // jQuery(document).ready(function ($) {
+
+    $('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
+    $('#' + idDiv).css('visibility', 'visible');
+    $('#' + idDiv).revolution({
+        delay: 5000,
+        startwidth: width,
+        startheight: height,
+        //startwidth: 1170,
+        //startheight: 550,
+        onHoverStop: "on",
+        thumbWidth: 80,
+        thumbHeight: 50,
+        thumbAmount: 3,
+        hideThumbs: 200,
+        navigationType: "thumb",// use none, bullet or thumb
+        navigationArrows: "solo", // nextto, solo, none, nextto questo per le frecce laterali
+        navigationStyle: "square",  // round, square, navbar, round-old, square-old, navbar-old 
+        navigationHAlign: "center",
+        navigationVAlign: "bottom",
+        navigationHOffset: 0,
+        navigationVOffset: 5,
+        soloArrowLeftHalign: "right",
+        soloArrowLeftValign: "bottom",
+        soloArrowLeftHOffset: 60,
+        soloArrowLeftVOffset: 10,
+        soloArrowRightHalign: "right",
+        soloArrowRightValign: "bottom",
+        soloArrowRightHOffset: 10,
+        soloArrowRightVOffset: 10,
+        touchenabled: "on",
+        stopAtSlide: -1,
+        stopAfterLoops: -1,
+        hideCaptionAtLimit: 0,
+        hideAllCaptionAtLilmit: 0,
+        hideSliderAtLimit: 0,
+        fullWidth: "on",
+        fullScreen: "on",// fullScreen: fullscreen,
+        fullScreenAlignForce: "on",
+        autoHeight: "on",
+        fullScreenOffsetContainer: "#topheader-to-offset",
+        lazyLoad: "on",
+        keyboardNavigation: "on",
+        shadow: 0
     });
+    //$('#' + idDiv).parent().attr('style', ';height:calc(100vh - 141px) !important;');
+    $('#' + idDiv).parent().show();
+    $('#' + idDiv).show();
+
+    // });
 }
 
 

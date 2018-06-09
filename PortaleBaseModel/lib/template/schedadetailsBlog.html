@@ -1,14 +1,12 @@
-﻿
-<div id="replaceid" class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
+﻿<div id="replaceid" class="blog-post" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
 
     <!-- Placeholder per la owl gallery -->
     <!--<div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"></div>
     <div class="responsive-video" style="display: none">
         <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
     </div>-->
-
-    <div style="padding-top:20px;padding-left:10px;padding-right:20px;position:relative;">
-        <!--<div class="autore"></div>-->
+    <!--<div style="padding-top:20px;padding-left:10px;padding-right:20px;position:relative;">
+        <div class="autore"></div>
         <div class="avatar avatar-large float-left">
             <div class="avatar-inner">
                 <img class="bind avatar" mybind="Id" src="" />
@@ -28,35 +26,41 @@
                 <span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
                 <span class="bind" itemprop="author" mybind="Autorenome"></span>
                 <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="padding-left:10px;"></span>
-                <!--<span class="bind" mybind="Autore"></span>-->
             </div>
         </div>
         <div class="clearfix"></div>
-    </div>
+    </div>-->
+
     <div style="padding:20px">
         <h1 itemprop="name" style="margin-bottom:4px">
-            <a class="bind" style="color:#be202d" target="_self" href="link" title="titolo" mybind="Id">
+            <a class="bind primary-color" target="_self" href="link" title="titolo" mybind="Id">
                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
                 <span style="font-size: 0.7em;line-height: 0.1;" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
                 </span>
             </a>
         </h1>
-        <div class="bind linksmall" mybind="Id" myvalue="linksezione" format="formatlinksezione" style="padding-top:5px;padding-bottom:5px"></div>
+        <div class="float-left" style="padding-right:10px;font-size:1rem; font-style:italic;text-align:right;padding-bottom:15px;">
+            <span class="bind linksmall-blog" mybind="Id" myvalue="linksezione" format="formatlinksezione" style="margin-right:10px; font-style:normal;"></span>
+            <span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
+            <span class="bind" itemprop="author" mybind="Autorenome"></span>
+            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="padding-left:10px;"></span>
+            <!--<span class="bind" mybind="Autore"></span>-->
+        </div>
         <!--<span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>-->
         <!--<span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>-->
-        <div class="blog-post-details" runat="server" id="divPostDetails">
-            <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-right">
-                <div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
-                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                </div>
-                <div class="clearfix" style="float: left;"></div>
-                <div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
-                    <em>
-                        <span style="text-decoration: line-through;font-size:1.4rem;color:#aaa;padding-left:10px;padding-right:5px;font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                    </em>
-                </div>
-            </div>
-        </div>
+        <!--<div class="blog-post-details" runat="server" id="divPostDetails">
+        <div style="padding-left: 0px" class="blog-post-details-item  blog-post-details-item-right">
+            <!--<div style="font-weight: 800; font-size: 1.9em; float: left; line-height: normal">
+                <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+            </div>-->
+        <!--<div class="clearfix" style="float: left;"></div>-->
+        <!--<div style="font-weight: 600; font-size: 1.4em; color: #888; float: left; text-decoration: line-through; line-height: normal">
+            <em>
+                <span style="text-decoration: line-through;font-size:1.4rem;color:#aaa;padding-left:10px;padding-right:5px;font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+            </em>
+        </div>-->
+        <!--</div>
+        </div>-->
         <p>
             <!-- Go to www.addthis.com/dashboard to customize your tools -->
             <div class="addthis_inline_share_toolbox"></div>
@@ -66,7 +70,7 @@
         <div class="blog-post-body" itemprop="description">
 
             <!-- Start PHOTO GALLERY Placeholder per la owl gallery -->
-            <div id="plhGallery" class="bind col-12 float-none p-0 col-sm-6 float-sm-left pl-sm-0 pr-sm-3 pb-sm-3" mybind="Id" myvalue="video" format="frmvisibility"></div>
+            <div id="plhGallery" class="bind col-12 float-none p-0 col-sm-7 float-sm-left pl-sm-0 pr-sm-3 pb-sm-3" mybind="Id" myvalue="video" format="frmvisibility"></div>
             <div class="responsive-video" style="display: none">
                 <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
             </div>
@@ -105,8 +109,6 @@
         </div>
 
         <div class="clearfix" style="margin-top:10px"></div>
-
     </div>
 </div>
 <hr />
-

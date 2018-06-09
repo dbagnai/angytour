@@ -687,7 +687,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 break;
         }
     }
-
+    
 
     protected void AssociaDatiSocial()
     {
@@ -738,7 +738,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             }
         }
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
-        string urlcambiolinguaenit = "";
         string urlcanonico = "";
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
@@ -753,7 +752,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
-        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -766,19 +764,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
             }
-            else urlcambiolinguaenit = linkcanonicoalt;
-
-            HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
-            divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-            divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-            divCambioLinguaen.InnerHtml += "href=\"";
-            divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
-            divCambioLinguaen.InnerHtml += "\" >";
-            divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
-            divCambioLinguaen.InnerHtml += "</a>";
-            divCambioLinguaen.Visible = true;
-            HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
-            divCambioLinguadef.Visible = false;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -885,7 +870,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //////////////////////////////////////////////////////////////////////////
         litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
 
-
+         
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -71,6 +71,7 @@ $(document).ready(function () {
 });
 searchtaginjectandcall();
 
+
 /*Seleziona i tag con classe inject e Chiama la funzione specificata nell'attributo params passando i parametri a seguire*/
 function searchtaginjectandcall() {
     $(".inject").each(function () {
@@ -2103,7 +2104,7 @@ function caricaDatiServerBanner(lng, objfiltro, page, pagesize, enablepager, cal
         },
         error: function (result) {
             //sendmessage('fail creating link');
-            callback(result.responseText, function () { });
+            callback(result.responseText, null);
         }
     });
 }

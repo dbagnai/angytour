@@ -95,7 +95,7 @@ function CaricaFasciaDataBanner(controlid) {
 
             try {
 
-                if (result !== null && result != '') {
+                if (result !== null && result != '' && callafterfilter != null) {
                     var parseddata = JSON.parse(result);
                     var temp = parseddata["resultinfo"];
                     localObjects["resultinfo"] = JSON.parse(temp);
@@ -109,7 +109,8 @@ function CaricaFasciaDataBanner(controlid) {
                     // globalObject[controlid] = localObjects;
                     localObjects["linkloaded"] = JSON.parse(datalink);
                     callafterfilter(localObjects, controlid);
-                }
+                } else
+                    console.log(result);
             }
             catch (e) {
                 console.log(e);
@@ -177,30 +178,40 @@ function BindFasciaBanner(el, localObjects) {
                 $('#' + el).append(ret.html()) + "\r\n";
             });
     }
- 
     if (el != null) {
         $('#' + el).parent().show();
     }
-    jQuery(document).ready(function () {
-        $('#' + el).parent().imagesLoaded(function () {
-            $('#' + el).cycle();
-        });
-    });
     $('#' + el).on('cycle-update-view', function (e, optionHash, slideOptionsHash, currentSlideEl) {
         var $slide = $(currentSlideEl);
         var h = $slide.outerHeight();
         $slide.parent().css({
             height: h
         });
-        //window.console && console.log("EVENT: " + e.type + " " + el);
-        //window.console && console.log("slide parent: " + $slide.parent().prop("id") + " height:" + h);
     });
+
+    setTimeout(function () {
+        $('#' + el).parent().imagesLoaded(function () {
+            $('#' + el).cycle();
+        });
+    }, 2000);
+
+    //jQuery(document).ready(function () {
+    //    $('#' + el).parent().imagesLoaded(function () {
+    //        $('#' + el).cycle();
+    //    });
+    //});
 
     //$(window).load(function () {
     //    $('#' + el).parent().imagesLoaded(function () {
     //        $('#' + el).cycle({ before: onBefore });
+    //        console.log('cycle start');
     //    });
-    //});le();
+    //    console.log('load win');
+    //});
+
+    //window.addEventListener("load", function (event) {
+    //    console.log('load win');
+    //});
 
     /*Old javascrip  vertical text alignment*/
     //calcAspectRatio(el);

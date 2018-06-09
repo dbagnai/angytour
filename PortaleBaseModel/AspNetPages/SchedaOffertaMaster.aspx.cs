@@ -21,53 +21,65 @@ public partial class _SchedaOffertaMaster : CommonPage
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
         set { ViewState["Lingua"] = value; }
     }
+
     public string PercorsoComune
     {
         get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
         set { ViewState["PercorsoComune"] = value; }
     }
+
     public string PercorsoFiles
     {
         get { return ViewState["PercorsoFiles"] != null ? (string)(ViewState["PercorsoFiles"]) : ""; }
         set { ViewState["PercorsoFiles"] = value; }
     }
+
     public string PercorsoAssolutoApplicazione
     {
         get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
         set { ViewState["PercorsoAssolutoApplicazione"] = value; }
     }
+
     public string idOfferta
     {
         get { return ViewState["idOfferta"] != null ? (string)(ViewState["idOfferta"]) : ""; }
         set { ViewState["idOfferta"] = value; }
     }
+
     public string testoindice
     {
         get { return ViewState["testoindice"] != null ? (string)(ViewState["testoindice"]) : ""; }
         set { ViewState["testoindice"] = value; }
     }
+
     public string CodiceTipologia
     {
         get { return ViewState["Tipologia"] != null ? (string)(ViewState["Tipologia"]) : ""; }
         set { ViewState["Tipologia"] = value; }
     }
+
     public string Categoria
     {
         get { return ViewState["Categoria"] != null ? (string)(ViewState["Categoria"]) : ""; }
         set { ViewState["Categoria"] = value; }
     }
+
     public string Categoria2liv
     {
         get { return ViewState["Categoria2liv"] != null ? (string)(ViewState["Categoria2liv"]) : ""; }
         set { ViewState["Categoria2liv"] = value; }
     }
+
     public bool JavaInjection = false;
+
     public Offerte item
     {
         get { return ViewState["item"] != null ? (Offerte)(ViewState["item"]) : new Offerte(); }
         set { ViewState["item"] = value; }
     }
-    int progressivosepara = 1;
+
+    private int progressivosepara = 1;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -111,13 +123,13 @@ public partial class _SchedaOffertaMaster : CommonPage
             //CaricaControlliJS();
             SettaTestoIniziale();
             SettaVisualizzazione(item);
-
         }
         catch (Exception err)
         {
             output.Text = err.Message;
         }
     }
+
 #if false   //COdice da modificare per scorrimento schede di sezione!!!!
 
     private void Memorizzaelenco()
@@ -144,6 +156,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceGB)) ? ConteggioCaratteri((item.TestoIndiceGB), 100) : ConteggioCaratteri((item.TitoloGB), 100);
                 //titololink = item.TitoloGB;
                 break;
+
             default:
                 titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceI)) ? ConteggioCaratteri((item.TestoIndiceI), 100) : ConteggioCaratteri((item.TitoloI), 100);
                 //titololink = item.TitoloI;
@@ -173,6 +186,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceGB)) ? ConteggioCaratteri((item.TestoIndiceGB), 100) : ConteggioCaratteri((item.TitoloGB), 100);
                 //titololink = item.TitoloGB;
                 break;
+
             default:
                 titololink = (!string.IsNullOrWhiteSpace(item.TestoIndiceI)) ? ConteggioCaratteri((item.TestoIndiceI), 100) : ConteggioCaratteri((item.TitoloI), 100);
                 //titololink = item.TitoloI;
@@ -181,8 +195,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         titololink = cv.Convert(Utility.ConteggioCaratteri(Utility.CleanUrl((titololink.Trim())), 100));
         linktogo = CreaLinkRoutes(CodiceContenuto, Sezione, idContenutoTmp, titololink, Lingua);
         alinkNext.HRef = linktogo;
-
-    } 
+    }
 #endif
 
     private void RegistraStatistichePagina()
@@ -227,6 +240,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
         }
     }
+
     public void CaricaControlliJS()
     {
         ClientScriptManager cs = Page.ClientScript;
@@ -251,7 +265,6 @@ public partial class _SchedaOffertaMaster : CommonPage
             sb.Append("   else  {");
             sb.Append("  setTimeout(wait, 50);");
             sb.Append("  }  })();");
-
         }
         else
         {
@@ -268,15 +281,11 @@ public partial class _SchedaOffertaMaster : CommonPage
             sb.Append("  }  })();");
         }
 
-
-
-
         if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
         {
             cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
         }
     }
-
 
     protected string GeneraBackLink(bool usacategoria = true)
     {
@@ -294,9 +303,9 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         return ret;
     }
+
     private void SettaTestoIniziale()
     {
-
         TipologiaOfferte itemtipo = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == CodiceTipologia); });
         if (itemtipo != null)
         {
@@ -314,7 +323,6 @@ public partial class _SchedaOffertaMaster : CommonPage
             if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
-
 #if false
             string strigaperricerca = "";
             strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
@@ -328,7 +336,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             {
                 strigaperricerca = "/" + CodiceTipologia + "/" + CleanUrl(titolopagina); //Request.Url.AbsolutePath
                 content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            } 
+            }
 #endif
             Contenuti content = null;
 
@@ -347,13 +355,12 @@ public partial class _SchedaOffertaMaster : CommonPage
             {
                 htmlPage = content.DescrizionebyLingua(Lingua);
                 if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
-
             }
 
             litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
         }
-
     }
+
     private void SettaVisualizzazione(Offerte item)
     {
         string controlsuggeriti = "";
@@ -366,9 +373,10 @@ public partial class _SchedaOffertaMaster : CommonPage
             case "rif000002":
                 column1.Visible = false;
                 column2.Visible = true;
+                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
                 column2.Attributes["class"] = "col-12 col-sm-9";
-                column3.Attributes["class"] = "col-12 col-sm-3";
-                column3.Visible = true;
+
+                column3.Visible = false;
 
                 divSearch.Visible = true;
                 ContaArticoliPerperiodo(CodiceTipologia);
@@ -378,7 +386,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 divLatestPost.Visible = false;
                 if (!JavaInjection)
                 {
-
                     //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);";
                     //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
                     //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
@@ -401,7 +408,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //sb.Append("</div>");
                     //placeholderlateral.Text = sb.ToString();
 
-
                     sb.Clear();
 
                     //BIND PER LA SCHEDA!!!!
@@ -409,44 +415,11 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
-
                 }
-
 
                 break;
 
             case "rif000003":
-                column1.Visible = false;
-                column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-10";
-                column2.Visible = true;
-                column3.Visible = false;
-                divSearch.Visible = false;
-                divContact.Visible = false;
-                divLatestPost.Visible = false;
-                divCategorie.Visible = false;
-
-                if (!JavaInjection)
-                {
-
-
-                    sb.Clear();
-                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
-                    sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
-
-                    sb.Clear();
-                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
-                    sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
-
-                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
-
-                }
-                break;
-
             case "rif000004":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
@@ -460,22 +433,19 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 if (!JavaInjection)
                 {
-
-
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
-
                 }
                 break;
 
@@ -492,11 +462,9 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 if (!JavaInjection)
                 {
-
-
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = sb.ToString();
 
@@ -507,10 +475,96 @@ public partial class _SchedaOffertaMaster : CommonPage
                     placeholderrisultati.Text = sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
-
                 }
                 break;
 
+            case "rif000006":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-10";
+                column2.Visible = true;
+                column3.Visible = false;
+                divSearch.Visible = false;
+                divContact.Visible = false;
+                divLatestPost.Visible = false;
+                divCategorie.Visible = false;
+
+                if (!JavaInjection)
+                {
+                    sb.Clear();
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+                }
+                break;
+
+            //case "rif000004":
+            //    column1.Visible = false;
+            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
+            //    column2.Attributes["class"] = "col-10";
+            //    column2.Visible = true;
+            //    column3.Visible = false;
+            //    divSearch.Visible = false;
+            //    divContact.Visible = false;
+            //    divLatestPost.Visible = false;
+            //    divCategorie.Visible = false;
+
+            //    if (!JavaInjection)
+            //    {
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+            //        sb.Append("\"></div>");
+            //        plhSuggeritiJs.Text = sb.ToString();
+
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+            //        sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+            //        sb.Append("\"></div>");
+            //        placeholderrisultati.Text = sb.ToString();
+
+            //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+
+            //    }
+            //    break;
+
+            //case "rif000005":
+            //    column1.Visible = false;
+            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
+            //    column2.Attributes["class"] = "col-10";
+            //    column2.Visible = true;
+            //    column3.Visible = false;
+            //    divSearch.Visible = false;
+            //    divContact.Visible = false;
+            //    divLatestPost.Visible = false;
+            //    divCategorie.Visible = false;
+
+            //    if (!JavaInjection)
+            //    {
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+            //        sb.Append("\"></div>");
+            //        plhSuggeritiJs.Text = sb.ToString();
+
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+            //        sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+            //        sb.Append("\"></div>");
+            //        placeholderrisultati.Text = sb.ToString();
+
+            //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+            //    }
+            //    break;
 
             //case "rif000001":
             //case "rif000004":
@@ -552,6 +606,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
 
                 break;
+
             default:
                 //lit = (Literal)Master.FindControl("litPortfolioBanners1");
                 //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-blog", false, lit, Lingua, true);
@@ -569,7 +624,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 break;
         }
-
     }
 
     protected void CaricaUltimiPost(string tipologia, string categoria = "")
@@ -608,7 +662,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
-
     }
 
     private void ContaArticoliPerperiodo(string cattipo)
@@ -651,7 +704,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 string selanno = "";
                 //selanno = ((HiddenField)((RepeaterItem)((Repeater)(sender)).Parent).FindControl("ulAnno")).Value;
 
-
                 selanno = ((HtmlGenericControl)((Repeater)(sender)).Parent).Attributes["Title"];
                 int year = 0;
                 int.TryParse(selanno, out year);
@@ -665,6 +717,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             }
         }
     }
+
     protected string CrealistaFiles(object id, object lista)
     {
         string html = "";
@@ -675,7 +728,6 @@ public partial class _SchedaOffertaMaster : CommonPage
             //  sb.Append("<div class=\"col-md-4\">");
             foreach (Allegato a in (AllegatiCollection)lista)
             {
-
                 if (!(a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
                 {
                     string link = PercorsoFiles + "/" + CodiceTipologia + "/" + id.ToString() + "/" + a.NomeFile;
@@ -687,18 +739,15 @@ public partial class _SchedaOffertaMaster : CommonPage
                     //sb.Append("<a class=\"linked\" target=\"_blank\" href=\"" + link + "\"><i class=\"fa  fa-eye  color-green\"></i>" + descrizione + "</a>");
                     //sb.Append("</li>");
                     sb.Append("<a style=\"margin-right:10px;margin-bottom:10px;min-width:190px\" class=\"buttonstyle\" target=\"_blank\" href=\"" + link + "\"><i class=\"fa fa-search\"></i>" + descrizione + "</a>");
-
-
                 }
-
             }
             // sb.Append("</div>");
             //sb.Append("</ul>");
-
         }
         html = sb.ToString();
         return html;
     }
+
     public string SeparaRows()
     {
         string ritorno = "";
@@ -708,11 +757,12 @@ public partial class _SchedaOffertaMaster : CommonPage
         progressivosepara += 1;
         return ritorno;
     }
+
     protected void aFacebook_prerender(object sender, EventArgs e)
     {
-
         // ((HtmlAnchor)sender).Attributes.Add("", "");
     }
+
     /// <summary>
     /// Articoli consigliati in base alla rubrica
     /// </summary>
@@ -748,11 +798,9 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         else
             Master.CaricaUltimiPostScrollerTipo1(litScrollerSuggeriti, null, "", Lingua, false, true, offerte, "10");
-
-
-
-    } 
+    }
 #endif
+
     protected void AssociaRubricheRiferiteaid(string idcollegato)
     {
         OfferteCollection offerte = new OfferteCollection();
@@ -760,6 +808,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         rptArticoliSuggeriti.DataSource = offerte;
         rptArticoliSuggeriti.DataBind();
     }
+
     protected void Cerca_Click(object sender, EventArgs e)
     {
         //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
@@ -786,7 +835,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
     protected void AssociaDati(Offerte item)
     {
-
         //Carichiamo l'immobile a partire dal codice dello stesso e dalla lingua
         OfferteCollection offerte = new OfferteCollection();
 #if true
@@ -796,11 +844,10 @@ public partial class _SchedaOffertaMaster : CommonPage
 #if false
         //if (CodiceTipologia == "rif000100")
         //{
-
         //    rptSocio.DataSource = offerte;
         //    rptSocio.DataBind();
         //}
-        
+
 #endif
 #if false
         if (CodiceTipologia == "rif000012")
@@ -822,8 +869,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             List<Offerte> offertelist = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua, false);
             divContenutiGallery.Visible = true;
             Master.CaricaContenutiPortfolioRivalSubtext(CodiceTipologia, litGalleryDetails, Lingua, "", offertelist, "noborder");
-
-        } 
+        }
 #endif
 
         rptOfferta.DataSource = offerte;
@@ -834,7 +880,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
     protected string CreaItem(object item)
     {
-
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         if (item != null)
         {
@@ -849,7 +894,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
             string link = CreaLinkRoutes(Session, false, Lingua, CleanUrl(denominazione), itemOff.Id.ToString(), itemOff.CodiceTipologia, itemOff.CodiceCategoria);
 
-
             string titolo1 = denominazione;
             string titolo2 = "<br/>";
             int i = denominazione.IndexOf("\n");
@@ -859,7 +903,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 if (denominazione.Length >= i + 1)
                     titolo2 = denominazione.Substring(i + 1);
             }
-
 
             //////////////////////////////////////
             sb.Append("<div class=\"thumb-label-item animated seo\" ");
@@ -873,12 +916,10 @@ public partial class _SchedaOffertaMaster : CommonPage
             sb.Append("	                <a class=\"portfolio-zoom\" target=" + target + " href=\"" + link + "\" title=\"" + denominazione + "\" > \r\n");
             sb.Append("<img  src=\"" + pathimmagine + "\" alt=\"\" /> \r\n");
 
-
             //sb.Append("<div class=\"item-img-overlay\"> \r\n");
             ////IN alternativa aperutra galleria pretty photo    <a class="portfolio-zoom fa fa-plus" href="images/placeholders/portfolio1.jpg"  data-rel="prettyPhoto[portfolio]" title="Title goes here"></a>
             //if (denominazione.ToString() != "")
             //{
-
             //    sb.Append("	 <div class=\"item_img_overlay_content\">\r\n");
             //    sb.Append("  <h3 class=\"thumb-label-item-title\">\r\n");
             //    sb.Append("	    <a target=" + target + " href=\"" + link + "\" title=\"" + denominazione.ToString() + "\"  >" + WelcomeLibrary.UF.Utility.SostituisciTestoACapo(denominazione.ToString()) + "</a>\r\n");
@@ -903,10 +944,10 @@ public partial class _SchedaOffertaMaster : CommonPage
 
             sb.Append("</div>\r\n");
             ///////////////////////////////////////////
-
         }
         return sb.ToString();
     }
+
     protected string VisualizzaPosizione(object item)
     {
         string html = "";
@@ -948,34 +989,28 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         if (socio.CodiceNAZIONE1_dts.ToLower() != "it")
         {
-
             html += "<strong>" + socio.Nomeposizione1_dts + "</strong><br/> ";
             html += socio.CodiceNAZIONE1_dts + "<br/> ";
             html += socio.Via1_dts + "<br/> ";
             html += socio.Cap1_dts + " " + socio.CodiceCOMUNE1_dts + " <br/> " + socio.CodicePROVINCIA1_dts + " <br/> " + socio.CodiceREGIONE1_dts + "<br/> ";
             html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono1_dts + "<br/> ";
-
         }
         if (socio.CodiceNAZIONE2_dts.ToLower() != "it")
         {
-
             html += "<strong>" + socio.Nomeposizione2_dts + "</strong><br/> ";
             html += socio.CodiceNAZIONE2_dts + "<br/> ";
             html += socio.Via2_dts + "<br/> ";
             html += socio.Cap2_dts + " " + socio.CodiceCOMUNE2_dts + " <br/> " + socio.CodicePROVINCIA2_dts + " <br/> " + socio.CodiceREGIONE2_dts + "<br/> ";
             html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono2_dts + "<br/> ";
-
         }
         if (socio.CodiceNAZIONE3_dts.ToLower() != "it")
         {
-
             html += "<strong>" + socio.Nomeposizione3_dts + "</strong><br/> ";
             html += socio.CodiceNAZIONE3_dts + "<br/> ";
             html += socio.Via3_dts + "<br/> ";
             html += socio.Cap3_dts + " " + socio.CodiceCOMUNE3_dts + " <br/> " + socio.CodicePROVINCIA3_dts + " <br/> " + socio.CodiceREGIONE3_dts + "<br/> ";
             html += references.ResMan("Common",Lingua,"Telefono") + " " + socio.Telefono3_dts + "<br/> ";
-
-        } 
+        }
 #endif
 
         Province _p = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice.ToLower() == socio.CodicePROVINCIA1_dts); });
@@ -984,11 +1019,11 @@ public partial class _SchedaOffertaMaster : CommonPage
             descrizione = _p.SiglaProvincia;
             html += socio.CodiceCOMUNE1_dts + "- " + _p.Provincia + " - " + _p.Regione;
             html += " (" + socio.CodiceNAZIONE1_dts + ") <br/> ";
-
         }
 
         return html;
     }
+
     protected string ImpostaTestoRichiesta()
     {
         string ret = "";
@@ -1001,9 +1036,9 @@ public partial class _SchedaOffertaMaster : CommonPage
             //else
             ret = references.ResMan("Common", Lingua, "TestoDisponibilita");
 
-
         return ret;
     }
+
     protected bool VerificaPresenzaPrezzo(object prezzo)
     {
         bool ret = false;
@@ -1011,6 +1046,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             ret = true;
         return ret;
     }
+
     protected bool AttivaContatto(object flag)
     {
         bool ret = false;
@@ -1031,7 +1067,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
                 linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
             }
-
         }
         catch { }
         try
@@ -1044,7 +1079,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                     ((HtmlGenericControl)limenu).Attributes["class"] += " active";
                 }
             }
-
         }
         catch { }
         try
@@ -1054,7 +1088,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 linkmenu.Style.Add(HtmlTextWriterStyle.FontWeight, "600 !important");
                 linkmenu.Style.Add(HtmlTextWriterStyle.Color, "#000 !important");
             }
-
         }
         catch { }
         try
@@ -1068,6 +1101,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         catch { }
     }
+
     protected void AssociaDatiSocial(Offerte data)
     {
         string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
@@ -1107,10 +1141,12 @@ public partial class _SchedaOffertaMaster : CommonPage
                 customdesc = data.Campo2GB;
                 customtitle = data.Campo1GB;
                 break;
+
             case "RU":
                 customdesc = data.Campo2RU;
                 customtitle = data.Campo1RU;
                 break;
+
             default:
                 customdesc = data.Campo2I;
                 customtitle = data.Campo1I;
@@ -1127,7 +1163,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
         Tabrif actualpagelink = new Tabrif();
-        string urlcambiolinguaenit = "";
+
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
         string hreflang = "";
@@ -1148,7 +1184,6 @@ public partial class _SchedaOffertaMaster : CommonPage
             actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
-        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -1185,29 +1220,17 @@ public partial class _SchedaOffertaMaster : CommonPage
                 actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneRU);
             }
-            else urlcambiolinguaenit = linkcanonicoalt;
-            HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
-            divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-            divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-            divCambioLinguaen.InnerHtml += "href=\"";
-            divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
-            divCambioLinguaen.InnerHtml += "\" >";
-            divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
-            divCambioLinguaen.InnerHtml += "</a>";
-            divCambioLinguaen.Visible = true;
-            HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
-            divCambioLinguadef.Visible = false;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         List<Tabrif> links = GeneraBreadcrumbPath(true);
         links.Add(actualpagelink);
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
-
     }
+
     private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
     {
         List<Tabrif> links = new List<Tabrif>();
@@ -1238,12 +1261,10 @@ public partial class _SchedaOffertaMaster : CommonPage
                 tmpcategoria = ""; tmpcategoria2liv = "";
             }
 
-
             string linkcanonicoalt = CreaLinkRoutes(null, false, Lingua, CleanUrl(testourl), "", CodiceTipologia, tmpcategoria, tmpcategoria2liv);
             link = new Tabrif();
             link.Campo1 = linkcanonicoalt;
             link.Campo2 = testourl;
-
 
             //if (CodiceTipologia == "rif000003") //Pagina copertina presente
             if (false) //Pagina copertina presente
@@ -1287,10 +1308,10 @@ public partial class _SchedaOffertaMaster : CommonPage
                 //((HtmlMeta)Master.FindControl("metafbdescription")).Content = CommonPage.ReplaceLinks(ConteggioCaratteri(data.DescrizioneI, 90));
 
                 //((HtmlMeta)Master.FindControl("metafbimage")).Content = filemanage.ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
             }
         }
     }
+
     protected void ImgSmall_PreRender(object sender, EventArgs e)
     {
         int maxwidth = 90;
@@ -1313,7 +1334,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                 ((Image)sender).Height = maxheight;
             }
 #endif
-
         }
         catch
         { }
@@ -1353,6 +1373,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         catch
         { }
     }
+
     protected void ImgAnt_PreRender(object sender, EventArgs e)
     {
         int maxwidth = 500;
@@ -1399,12 +1420,9 @@ public partial class _SchedaOffertaMaster : CommonPage
                 ((Image)sender).Height = maxheight;
             }
 #endif
-
         }
         catch
         { }
-
-
     }
 
     protected string CalcolaRapp(Object NomeAnteprima, string CodiceTipologia, string idOfferta)
@@ -1427,8 +1445,8 @@ public partial class _SchedaOffertaMaster : CommonPage
             System.Drawing.Image tmp = System.Drawing.Image.FromFile(Server.MapPath(ritorno));
             double rappwidthheight = ((double)tmp.Width / (double)tmp.Height);
             tmp.Dispose();
-            //-> devi passare questo rapporto al javascript per il ricalcolo delle dimensioni 
-            //dell'imagine ---> 
+            //-> devi passare questo rapporto al javascript per il ricalcolo delle dimensioni
+            //dell'imagine --->
             ritorno = rappwidthheight.ToString();
         }
         catch
@@ -1451,11 +1469,9 @@ public partial class _SchedaOffertaMaster : CommonPage
         Offerte item = ((Offerte)itemobj);
         if ((item != null) && (item.FotoCollection_M.Count > 0))
         {
-
             foreach (Allegato a in item.FotoCollection_M)
             {
                 string testotitolo = item.DenominazionebyLingua(Lingua);
-
 
                 //IMMAGINE
                 string pathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, item.CodiceTipologia, item.Id.ToString());
@@ -1484,12 +1500,12 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Append("\"  src=\"" + pathimmagine + "\" alt=\"" + testotitolo + "\" />\r\n");
                 }
                 sb.Append(" </li>\r\n");
-
             }
         }
 
         return sb.ToString();
     }
+
     protected bool ControlloVisibilita(object fotos, object linkvideo)
     {
         bool ret = true;
@@ -1527,7 +1543,6 @@ public partial class _SchedaOffertaMaster : CommonPage
                     link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
                 }
 
-
                 sb.Append("<div class=\"slide\" ");
                 if (item.FotoCollection_M.Count > 1)
                     sb.Append(" data-thumb=\"" + pathimmagine + "\" ");
@@ -1537,6 +1552,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 if (!ControlloVideo(item.FotoCollection_M.FotoAnteprima, item.linkVideo))
                 {
                     #region FOTO
+
                     //if (!string.IsNullOrEmpty(link))
                     //    sb.Append("	       <a href=\"" + link + "\" target=\"" + target + "\" title=\"" + testotitolo + "\">\r\n");
                     sb.Append("	           <img itemprop=\"image\"  style=\"");
@@ -1577,14 +1593,14 @@ public partial class _SchedaOffertaMaster : CommonPage
                         sb.Append("	       </a>\r\n");
                         sb.Append("	       </div>\r\n");
                     }
-                    #endregion
+
+                    #endregion FOTO
                 }
 
                 sb.Append("    </div>\r\n");
                 sb.Append("</div>\r\n");
             }
         }
-
 
         return sb.ToString();
     }
@@ -1622,6 +1638,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         return titolo1;
     }
+
     protected string estraisottotitolo(object testotitolo)
     {
         if (testotitolo == null) return "";
@@ -1636,6 +1653,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         }
         return titolo2;
     }
+
     protected bool ControllaVisibilitaValore(string valore)
     {
         bool ret = true;
@@ -1644,12 +1662,14 @@ public partial class _SchedaOffertaMaster : CommonPage
 
         return ret;
     }
+
     protected bool ControllaVisibilitaPerCodice(string codicetipologia)
     {
         bool ret = false;
         if (codicetipologia == "rif000002") ret = true;
         return ret;
     }
+
     protected string ImpostaIntroPrezzo(string codicetipologia)
     {
         string ret = "";
@@ -1658,7 +1678,6 @@ public partial class _SchedaOffertaMaster : CommonPage
 
         return ret;
     }
-
 
     protected bool ControlloVideo(object NomeAnteprima, object linkVideo)
     {
@@ -1692,6 +1711,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         if (abilitacontatto) ret = "";
         return ret;
     }
+
     protected string ControlloVuoto(string pre, string contenuto)
     {
         string ret = "";
@@ -1700,8 +1720,8 @@ public partial class _SchedaOffertaMaster : CommonPage
             ret = pre + contenuto;
 
         return ret;
-
     }
+
     protected string TipoOfferta()
     {
         string ritorno = "";
@@ -1710,6 +1730,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             ritorno = "<br/><span style=\"margin-left:100px;padding:2px 10px 2px 10px;font-size:11pt;font-style:italic;color: #fff;background-color:#cc67fe\">" + item.Descrizione + "</span>";
         return ritorno;
     }
+
     protected string TestoSezione(string codicetipologia, bool solotitolo = false, bool nosezione = false)
     {
         string ret = "";
@@ -1727,6 +1748,7 @@ public partial class _SchedaOffertaMaster : CommonPage
 
         return ret;
     }
+
     protected string ControlloVuotoPosizione(string comune, string codiceprovincia)
     {
         string ret = "";
@@ -1747,6 +1769,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             ritorno = item.Provincia;
         return ritorno;
     }
+
     protected bool VerificaPresenzaFoto(object foto)
     {
         bool ret = false;
@@ -1755,8 +1778,8 @@ public partial class _SchedaOffertaMaster : CommonPage
             ret = true;
         }
         return ret;
-
     }
+
     protected void btnRegistrastatistiche_Click(object sender, EventArgs e)
     {
         string id = (((Button)sender).CommandArgument);
@@ -1774,7 +1797,6 @@ public partial class _SchedaOffertaMaster : CommonPage
         stat.Url = item.Website;
         WelcomeLibrary.DAL.statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
     }
-
 
     protected void btnContatti_Click(object sender, EventArgs e)
     {
@@ -1817,18 +1839,13 @@ public partial class _SchedaOffertaMaster : CommonPage
                 stat.Url = "";
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
-
                 Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
-
             }
             else
             {
-
-
                 outputContact.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
-
         }
         catch (Exception err)
         {
@@ -1878,18 +1895,13 @@ public partial class _SchedaOffertaMaster : CommonPage
                 stat.Url = "";
                 statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
 
-
                 Response.Redirect(CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkContatti")) + "&idOfferta=" + idOfferta.ToString() + "&conversione=true");
-
             }
             else
             {
-
-
                 outputContact1.Text = references.ResMan("Common", Lingua, "txtPrivacyError");
                 //Mittente.Descrizione += " <br/> Non vi Autorizzo al trattamento dei miei dati personali (D.Lgs 196/2003)";
             }
-
         }
         catch (Exception err)
         {

@@ -10,5 +10,9 @@
   {
     "outputFile": "css/opj/variables.css",
     "inputFile": "css/opj/variables.less"
+  },
+  {
+    "outputFile": "css/custom.css",
+    "inputFile": "css/custom.less"
   }
 ]

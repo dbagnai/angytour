@@ -1190,7 +1190,7 @@ pre {
   text-decoration: none !important;
 }
     .cid-qrZYnYas0g .card .card-header a.panel-title h4 {
-        border: 1px solid #dfdfdf;
+        /*border: 1px solid #dfdfdf;*/
         padding: 1.3rem 2rem;
         margin-bottom: 0;
         font-weight: 700;

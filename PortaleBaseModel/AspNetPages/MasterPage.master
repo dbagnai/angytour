@@ -62,7 +62,6 @@
 
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
 
-
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
@@ -82,10 +81,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="pull-right" id="divCambioLinguaen" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
-                </div>
-                <div class="pull-right" id="divCambioLinguadef" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
-                   <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                    <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
                 <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
@@ -133,11 +130,11 @@
                                 <li class="divider"></li>
                                 <%-- <li><a
                                 id="A9"   href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"LinkOrder")) %>'>
-                                <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %> 
+                                <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %>
                             </a></li>
                             <li class="divider"></li>--%>
                                 <li><a id="A1" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
-                                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %> 
+                                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                                 </a></li>
                             </ul>
                             <button type="button" class="dropdown-toggle float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
@@ -173,10 +170,10 @@
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
-              <%--  <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-                </div>--%>
+                </div>
                 <div class="float-right d-none" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
                     <i class="fa fa-phone" style="color: #fff;"></i><a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                         <span style="color: #fff; font-weight: 400"><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
@@ -186,12 +183,12 @@
         </div>
 
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
-          <%--  <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
+            <div style="position: absolute; right: 10px; margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #fff; border-radius: 3px" runat="server" visible="false">
                 <a style="color: #555; padding: 8px" href='<%= references.ResMan("Common", Lingua,"linkHomeCambio") %>'>
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-            </div>--%>
-            <div style="display: none; position: absolute; top: 15px; right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px" class="float-right visible-xs" href="tel:+39xxx ">
+            </div>
+            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 35px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+                <a style="padding-top: 0px" class="float-right visible-xs" href="tel:+393495066859 ">
                     <i class="fa fa-2x fa-phone"></i></a>
             </div>
             <%--<div class="container" id="divImg">
@@ -206,7 +203,6 @@
                             <%= references.ResMan("Common",Lingua,"testospedizione")  %>
                         </div>
                     </div>
-
                 </div>
             </div>--%>
 
@@ -216,19 +212,43 @@
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable  menuzord-right">
-                    <%= CreaLinkTipologie(6,6) %>
-                    <%--<%= CreaLinkPaginastatica(1) %>--%>
-                    <%= CreaLinkPaginastatica(2) %>
+                    <%--<%= CreaLinkTipologie(6,6) %>--%>
 
+                    <%-- Agriturismo --%>
+                    <%= CreaLinkPaginastatica(1) %>
+                    <%-- Servizi --%>
+                    <%= CreaLinkTipologie(3,3) %>
+                    <%-- <li runat="server">
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
+                        <ul class="dropdown">
+                            <%= CreaLinkPaginastatica(2) %>
+                            <%= CreaLinkCategorie("rif000003") %>
+                        </ul>
+                    </li>--%>
+                    <%-- Alloggi --%>
+                    <%= CreaLinkTipologie(4,4) %>
+                    <%-- Offerte --%>
+                    <%= CreaLinkTipologie(5,5) %>
+                    <%-- Gallery --%>
+                    <%= CreaLinkTipologie(6,6) %>
+                    <%-- Faq --%>
+                    <%= CreaLinkPaginastatica(3) %>
+                    <%--PRENOTA--%>
                     <li runat="server">
+                        <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
+                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
+                        </a>
+                    </li>
+
+                    <%--<li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
                         <ul class="dropdown">
                             <%= CreaLinkPaginastatica(3) %>
                             <%= CreaLinkPaginastatica(4) %>
                         </ul>
-                    </li>
+                    </li>--%>
 
-                    <%= CreaLinkTipologie(4,5) %>
+                    <%--<%= CreaLinkTipologie(4,5) %>--%>
 
                     <%--<li runat="server" id="liHome">
                         <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
@@ -245,7 +265,6 @@
                         </ul>
                     </li>--%>
 
-
                     <%-- <li runat="server">
                         <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu3") %></a>
                         <ul class="dropdown">
@@ -258,11 +277,11 @@
                         </ul>
                     </li>--%>
 
-
                     <%--                    <li runat="server">
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>--%>
 
+                    <%-- Blog --%>
                     <li runat="server" class="d-block d-md-none">
                         <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
                             <%= references.ResMan("Common", Lingua,"testomenu2") %></a>
@@ -271,8 +290,7 @@
                         </ul>
                     </li>
 
-
-
+                    <%-- Contatti --%>
                     <li runat="server" class="d-block d-sm-none">
                         <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
@@ -289,7 +307,6 @@
                     <li style="height: 1px" class="scrollable-fix"></li>
                 </ul>
             </div>
-
         </div>
         <section class="body-wrapper">
             <%--   <div class="fixednav1" id="mainnav1">
@@ -318,7 +335,7 @@
             <!-- OLD SISTEMA RICERCA E CATEGORIE -->
             <asp:Panel runat="server" ID="pnlCategorie" Visible="false">
                 <div class="bckgrid">
-                    <div class="container" style="text-align: justify">
+                    <div class="container text-justify">
                         <nav id="navmenu-3" class="navbar navbar-default" role="navigation" style="background: none; border: none; margin-bottom: 0px; padding-top: 5px; min-height: 30px; top: 0px;">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle visible-md visible-sm visible-xs" id="mobile-menu-button-3" style="float: none; padding: 5px; margin: 0px auto; background-color: #33332e; color: #fff">
@@ -422,87 +439,83 @@
                 <div id="divnavigazioneJs0" style="background-color: transparent"></div>
             </div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-            <div id="divContattiMaster" runat="server" visible="false">
-                <%--  <section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">--%>
-                <section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">
-                    <%--  <div class="mbr-overlay" style="opacity: 0.5; background-color: #000000;"></div>--%>
+            <div id="divContattiMaster" runat="server" visible="true">
+                <section class="mbr-section mbr-parallax-background" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
+                    <%--<section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">--%>
+                    <div class="mbr-overlay"></div>
                     <div class="container">
-                        <div class="col-sm-8 col-sm-offset-2">
+                        <div class="row justify-content-md-center">
+                            <div class="col-sm-8">
 
-                            <div class="lead" style="color: #444">
-                                <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                            </div>
-                            <%-- <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a> --%>
-                            <%-- <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a> --%>
-                            <span style="color: #444"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
-                            <br />
-                            <br />
-                            <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
-                            <br />
-                            <br />
-                            <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
-                            <br />
-                            <br />
-                            <input style="background-color: #ffffff" type="text" name="q" class="subscribe-input text-input form-control" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
-                            <br />
-                            <br />
-                            <textarea style="background-color: #ffffff; border: none" rows="4" cols="5" class="subscribe-input text-input form-control" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
-                            <br />
-                            <div style="clear: both"></div>
-                            <div class="checkbox">
-                                <label style="color: #fff">
-                                    <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
-                                    <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span>
-                                    <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                                </label>
-                            </div>
+                                <div class="lead text-white">
+                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
+                                </div>
+                                <%-- <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a> --%>
+                                <%-- <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a> --%>
+                                <span class="text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
+                                <br />
+                                <br />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
+                                <br />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
+                                <br />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
+                                <br />
+                                <textarea style="background-color: rgba(255, 255, 255, 0.80); border: none" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
+                                <br />
+                                <div style="clear: both"></div>
+                                <div class="checkbox">
+                                    <label style="color: #fff">
+                                        <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
+                                        <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span>
+                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                    </label>
+                                </div>
 
-                            <div style="clear: both"></div>
+                                <div style="clear: both"></div>
 
-                            <div class="mbr-section-btn">
-                                <script>
-                                    function ConfirmValidationFormMaster(elembtn) {
-                                        console.log('clicked');
-                                        var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                        var out1 = document.getElementById("outputContactMasterDiv");
-                                        if (!chk1.checked) {
-                                            out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                            return false;
-                                        } else { out1.innerHTML = ''; }
-                                        if (Page_ClientValidate("contattifooter")) {
-                                            /*do work and go for postback*/
-                                            console.log('ok validated');
-                                            var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                            $(elembtn).attr("disabled", "")
-                                            $(elembtn).innerHTML = "Wait ..";
-                                            buttpost.click();
-                                        } else {
-                                            console.log('not  validated');
-                                            return false;
+                                <div>
+                                    <%--class="mbr-section-btn"--%>
+                                    <script>
+                                        function ConfirmValidationFormMaster(elembtn) {
+                                            console.log('clicked');
+                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
+                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                            if (!chk1.checked) {
+                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                return false;
+                                            } else { out1.innerHTML = ''; }
+                                            if (Page_ClientValidate("contattifooter")) {
+                                                /*do work and go for postback*/
+                                                console.log('ok validated');
+                                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                $(elembtn).attr("disabled", "")
+                                                $(elembtn).innerHTML = "Wait ..";
+                                                buttpost.click();
+                                            } else {
+                                                console.log('not  validated');
+                                                return false;
+                                            }
                                         }
-                                    }
-                                </script>
-                                <button id="btnInvia" type="button" class="btn btn-blue btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
+                                    </script>
+                                    <button id="btnInvia" type="button" class="divbuttonstyle float-right" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
 
-
-                                <%--<asp:Button Style="float: right" ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true" ValidationGroup="contattifooter" class="divbuttonstyle" OnClick="btnContatti1_Click" OnClientClick="return ConfirmValidation();" />--%>
-                            </div>
-                            <br />
-                            <div class="lead">
-                                <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
-                                <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
-                                <div style="font-weight: 300; color: White" id="outputContactMasterDiv">
-                                    <asp:Literal Text="" ID="outputContact" runat="server" />
+                                    <%--<asp:Button Style="float: right" ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true" ValidationGroup="contattifooter" class="divbuttonstyle" OnClick="btnContatti1_Click" OnClientClick="return ConfirmValidation();" />--%>
+                                </div>
+                                <br />
+                                <div class="lead">
+                                    <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
+                                    <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
+                                    <div style="font-weight: 300; color: White" id="outputContactMasterDiv">
+                                        <asp:Literal Text="" ID="outputContact" runat="server" />
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
             </div>
-
-
 
             <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
                 <div style="height: 100%; width: 100%; position: relative">
@@ -513,18 +526,18 @@
             </asp:PlaceHolder>
         </section>
         <footer>
-            <div class="footer" style="margin-top: 0px">
+            <div class="footer mt-0">
                 <div class="footerhead">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-4 align-self-center py-3">
                             <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                                <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' style="margin: 0 auto; height: 60px" alt="" />
+                                <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 60px" alt="" />
                             </a>
                         </div>
 
                         <%--SOCIAL--%>
                         <div class="col-sm-4  align-self-center">
-                            <div class="d-table mx-auto d-sm-block col-sm-mx-right social-icons" style="display: block; line-height: 60px">
+                            <div class="d-table mx-auto d-sm-block col-sm-mx-right d-block social-icons animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
                                 <ul>
                                     <li style="float: right">
                                         <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
@@ -533,7 +546,7 @@
                                         <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon instagram-icon" data-original-title="instagram"></a>
                                     </li>
                                     <li style="float: right"><a class="social-media-icon youtube-icon" href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' data-original-title="yuotube" target="_blank"></a></li>
-                                    <%--  
+                                    <%--
                                             <li style="float: right">
                                                 <a href='<%# references.ResMan("Common", Lingua,"_linkyoutube") %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
                                             </li>
@@ -552,7 +565,6 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-
                 </div>
 
                 <div class="footer-wrapper py-5">
@@ -560,46 +572,53 @@
                     <div class="row justify-content-center">
 
                         <div class="col col-sm-2 footer-col">
-                            <%--BLOG--%>
+                            <%-- LINKS --%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter1") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
+                                    <%-- Home --%>
                                     <li runat="server">
                                         <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
                                             <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testohome") %> 
+                                                <%= references.ResMan("Common", Lingua,"testohome") %>
                                             </span>
                                         </a>
                                     </li>
-                                    <%= CreaLinkTipologie(6,6) %>
-                                    <%--<%= CreaLinkPaginastatica(1) %>--%>
-                                    <%= CreaLinkPaginastatica(2) %>
-
+                                    <%-- Offerte --%>
+                                    <%= CreaLinkTipologie(5,5) %>
+                                    <%-- Prenota --%>
+                                    <li>
+                                        <a id="linkPrenota2" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>'>
+                                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
+                                        </a>
+                                    </li>
+                                    <%-- Faq --%>
+                                    <%= CreaLinkPaginastatica(3) %>
+                                    <%-- Contatti --%>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                             <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testoContatti") %> 
+                                                <%= references.ResMan("Common", Lingua,"testoContatti") %>
                                             </span>
                                         </a>
                                     </li>
-                                    <%--              <%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
-                                    <!-- <%= CaricaLinksPerTipologia("rif000002","","10")  %> -->
+                                    <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                 </ul>
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
-                            <%--BLOG--%>
+                            <%-- ALLOGGI --%>
                             <div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter3") %>
+                                <%= references.ResMan("Common",Lingua,"testofooter4") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkPaginastatica(3) %>
-                                    <%= CreaLinkPaginastatica(4) %>
-
-                                    <%= CreaLinkTipologie(4,5) %>
+                                    <%= CreaLinkPaginastatica(1) %>
+                                    <%= CaricaLinksPerTipologia("rif000004","","10") %>
+                                    <%= CreaLinkTipologie(3,3) %>
+                                    <%= CreaLinkTipologie(6,6) %>
                                 </ul>
                             </div>
                         </div>
@@ -624,26 +643,25 @@
                                 <p>
                                     <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
                                 </p>
-                                <%-- 
+                                <%--
                                         <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
                                         <br />
                                         <br />
                                 --%>
-                                <input type="text" style="background-color: #ffffff; width: 60%; height: 36px" name="q" class="subscribe-input text-input form-control float-left" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
-                                <button class="divbuttonstyle" style="width: 40%; padding-left: 10px; padding-right: 10px" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
+                                <input type="text" style="width: 60%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
+                                <button class="divbuttonstyle px-2 border-0" style="width: 40%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
                                 <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
                             </asp:Panel>
                         </div>
-
                     </div>
                 </div>
                 <div class="copyright">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12" style="text-align: center">
-                                <p style="font-size: 1.1em; padding: 10px 10px; line-height: 1.1rem;">
+                                <p style="font-size: 1.2em; padding: 30px 10px; line-height: 1.8rem !important;">
                                     <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
-                                    <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>- 
+                                    <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>-
                                     <a target="_blank" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkWebmouse") ) %>'>Project by Web Mouse Consulting srl</a> -
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
                                         <%= references.ResMan("Common", Lingua,"Testologin") %></a>
@@ -669,10 +687,9 @@
         <div id="divSearchBarPlaceholder">
         </div>
 
-
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
 
-        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/           
+        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
         <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
@@ -722,7 +739,6 @@
         </script>
         <!-- FIne Librerie CMS management -->
 
-
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
@@ -751,12 +767,11 @@
 
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
-        <link rel="stylesheet" href="src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>" >
+        <link rel="stylesheet" href="src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
         <![endif]-->
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
         <![endif]-->
-
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
 </body>

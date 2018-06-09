@@ -621,7 +621,7 @@ public class filemanage
     }
     public static bool CreaAnteprima(string fileorigine, int Width, int Height, string pathAnteprime, string nomeAnteprima, bool replacefile = false, bool generateversions = false)
     {
-        // generateversions = false; //COMMENTARE SE VUOI ELIMINARE IL FUNZIONAMENTO CON LE RISOLUZIONI MULTIPLE PER LE IMMAGINI
+       // generateversions = false; //COMMENTARE SE VUOI ELIMINARE IL FUNZIONAMENTO CON LE RISOLUZIONI MULTIPLE PER LE IMMAGINI
         bool ret = false;
         try
         {
@@ -847,21 +847,21 @@ public class filemanage
         // -xs 0> <576px  | -sm  576> <768  | -md 769< <992  |  -lg >992 <1200  | -xl(no estensione) >1200
         string retname = pathimmagine;
         int actwidth = 0;
-        if (!string.IsNullOrEmpty(pathimmagine) && pathimmagine.LastIndexOf('.') != -1)
-            if (int.TryParse(viewportw, out actwidth))
-            {
-                string modifier = "";
-                if (actwidth <= 576 && filemanage.reslevels >= 1)
-                    modifier = "-xs";
-                else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
-                    modifier = "-sm";
-                else if (actwidth > 768 && actwidth <= 992 && filemanage.reslevels >= 3)
-                    modifier = "-md";
-                else if (actwidth > 992 && actwidth <= 1200 && filemanage.reslevels >= 4)
-                    modifier = "-lg";
-                int extpos = pathimmagine.LastIndexOf('.');
-                retname = pathimmagine.Insert(extpos, modifier);
-            }
+        if(!string.IsNullOrEmpty(pathimmagine) && pathimmagine.LastIndexOf('.')!=-1)
+        if (int.TryParse(viewportw, out actwidth))
+        {
+            string modifier = "";
+            if (actwidth <= 576 && filemanage.reslevels >= 1)
+                modifier = "-xs";
+            else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
+                modifier = "-sm";
+            else if (actwidth > 768 && actwidth <= 992 && filemanage.reslevels >= 3)
+                modifier = "-md";
+            else if (actwidth > 992 && actwidth <= 1200 && filemanage.reslevels >= 4)
+                modifier = "-lg";
+            int extpos = pathimmagine.LastIndexOf('.');
+            retname = pathimmagine.Insert(extpos, modifier);
+        }
         return retname;
 
     }

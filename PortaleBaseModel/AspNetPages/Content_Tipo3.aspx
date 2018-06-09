@@ -215,7 +215,7 @@
                                             </asp:Panel>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input my-0">
                                                         <asp:TextBox ID="txtNome" Width="99%" runat="server"
                                                             class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
                                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
@@ -224,7 +224,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input my-0">
                                                         <asp:TextBox ID="txtSoc" Width="99%" runat="server"
                                                             class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16l") %>' />
                                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
@@ -236,7 +236,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input my-0">
                                                         <asp:TextBox ID="txtEmail" Width="99%" runat="server"
                                                             class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
                                                         <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
@@ -245,7 +245,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input mt-0">
                                                         <asp:TextBox ID="txtTel" Width="99%" runat="server"
                                                             class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
                                                         <label class="ui-icon"><i class="fa fa-phone"></i></label>
@@ -255,7 +255,7 @@
 
                                             <div class="row" runat="server" id="divRegione" visible="false">
                                                 <div class="col-sm-12">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input my-0">
                                                         <asp:Literal ID="Literal8" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />*<br />
                                                         <asp:DropDownList class="form-control" runat="server" ID="ddlRegione" AppendDataBoundItems="true"
                                                             OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
@@ -267,7 +267,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <div class="ui-input">
+                                                    <div class="ui-input my-0">
                                                         <asp:TextBox ID="txtDescrizione" Width="99%"
                                                             TextMode="MultiLine" Font-Size="17px" Font-Names="Raleway"
                                                             Height="250px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
@@ -281,9 +281,9 @@
                                                 <div class="col-sm-12" style="text-align: center">
                                                     <asp:ValidationSummary runat="server" ID="Summary" ValidationGroup="MailInfo" DisplayMode="BulletList"
                                                         ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
-                                                    <br />
+                                                    
                                                     <div id="recaptcharesponse"></div>
-                                                    <button id="btnInvia" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+                                                    <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
                                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
                                                     <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                     <style>
@@ -333,6 +333,7 @@
                                                     </script>
 
                                                     <br />
+                                                    <br />
                                                     <div class="checkbox">
                                                         <label>
                                                             <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
@@ -340,7 +341,7 @@
                                                             <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                                         </label>
                                                     </div>
-                                                    <br />
+                                                    
                                                     <div class="checkbox">
                                                         <label>
                                                             <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
@@ -385,10 +386,10 @@
                                 </span>
                             </div>
                             <div style="font-size: 12px; padding-top: 5px; padding-bottom: 5px">
-                                <input id="startvalue" type="text" style="width: 260px; height: 30px;" />
+                                <input id="startvalue" type="text" style="width: 260px; height: 30px;border: 1px solid #999999; width:300px;" />
                             </div>
-                            <div style="margin-left: 10px; font-size: 14px;">
-                                <input id="Button1" style="box-shadow: none"
+                            <div style="font-size: 14px;">
+                                <input id="Button1" style="box-shadow: none; border:none; color:white; cursor:pointer; width:300px;"
                                     type="button" value="<%= references.ResMan("Common",Lingua,"GoogleCalcolapercorso").ToString() %>" onclick="return Button1_onclick()" />
                             </div>
                         </div>
