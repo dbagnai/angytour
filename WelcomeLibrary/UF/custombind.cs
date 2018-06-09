@@ -14,9 +14,18 @@ namespace WelcomeLibrary.UF
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(text);
+            var findclasses = doc.DocumentNode.Descendants("div").Where(d =>
+                   d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("inject") && d.Attributes.Contains("params")
+               );
+            if ((findclasses != null) && (findclasses.Count() > 0))
+            {
+                foreach (var node in findclasses)
+                {
+                    string parametri = node.Attributes["params"].Value;
 
+                }
 
-
+            }
             return doc.DocumentNode.OuterHtml;
         }
 
