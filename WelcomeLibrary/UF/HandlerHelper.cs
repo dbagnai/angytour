@@ -121,7 +121,7 @@ namespace WelcomeLibrary.UF
                             sr.Close();
                         }
                     }
-                    catch (Exception ex) { 
+                    catch  { 
                         //Utility.Logging.Error("GetParams", ex); 
                     }
                     tw.Close();

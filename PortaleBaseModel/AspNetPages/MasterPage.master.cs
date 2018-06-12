@@ -129,6 +129,16 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         lisearch.DataBind();
     }
 
+    /// <summary>
+    /// Carico le chiamate di inizializzazione dalla memoria di binding del server in custombind
+    /// </summary>
+    /// <returns></returns>
+    public string InjectedEndPageScripts()
+    {
+        string ret = custombind.CreaInitStringJavascript();
+        return ret;
+    }
+
     private void ControllaHttp()
     {
         if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https:"))

@@ -2,6 +2,7 @@
 using System;
 using System.Web;
 using System.Drawing.Imaging;
+using WelcomeLibrary.UF;
 
 public class FileUploadHandler : IHttpHandler
 {

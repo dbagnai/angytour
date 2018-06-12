@@ -1,23 +1,67 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Webmousers Blog Promozioni</title>
+    <title>Webmousers Blog Offerte</title>
     <link>http://localhost:52646</link>
     <description>Webmousers Blog</description>
-    <lastBuildDate>Sat, 19 May 2018 19:20:47 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 11 Jun 2018 09:16:19 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-05-19T19:20+02:00</sy:updateBase>
+    <sy:updateBase>2018-06-11T09:16+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title>offerta test
 sottotitolo</title>
-      <link>http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20</link>
-      <guid isPermaLink="true">http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20</guid>
-      <pubDate>Mon, 09 Apr 2018 15:47:36 +02:00</pubDate>
-      <category>Promozioni</category>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-37</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-37</guid>
+      <pubDate>Wed, 06 Jun 2018 18:31:28 +02:00</pubDate>
+      <category>Offerte</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-37"><em>offerta test
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>offerta test
+sottotitolo</title>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</guid>
+      <pubDate>Wed, 06 Jun 2018 11:20:01 +02:00</pubDate>
+      <category>Offerte</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000005/20/rest2.jpg" alt="offerta test
-sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20"><em>offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-20"><em>offerta test
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>offerta test
+sottotitolo</title>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-34</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-34</guid>
+      <pubDate>Wed, 06 Jun 2018 11:19:01 +02:00</pubDate>
+      <category>Offerte</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-34"><em>offerta test
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>offerta test
+sottotitolo</title>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-33</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-33</guid>
+      <pubDate>Wed, 06 Jun 2018 11:18:29 +02:00</pubDate>
+      <category>Offerte</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-33"><em>offerta test
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>offerta test
+sottotitolo</title>
+      <link>http://localhost:52646/I/offerte/offerta-test-sottotitolo-32</link>
+      <guid isPermaLink="true">http://localhost:52646/I/offerte/offerta-test-sottotitolo-32</guid>
+      <pubDate>Wed, 06 Jun 2018 11:17:49 +02:00</pubDate>
+      <category>Offerte</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="offerta test
+sottotitolo" width="350" /><p>Proin eu metus eu dolor iaculis tincidunt. Fusce sagittis nisl quis sapien pulvinar facilisis. Fusce non egestas tellus, nec maximus nisi. Integer ligula nunc, imperdiet eu orci vitae, rhoncus dignissim tortor. Donec a nisl sodales, vulputate ante ut, convallis lectus. Duis imperdiet ante vel nunc congue, eget ullamcorper ligula lacinia. Vivamus lacus est, facilisis in purus in, suscipit mattis purus. Duis in maximus magna, id rhoncus lorem.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/offerte/offerta-test-sottotitolo-32"><em>offerta test
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

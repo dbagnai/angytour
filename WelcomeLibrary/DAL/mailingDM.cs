@@ -249,7 +249,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
@@ -275,7 +275,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
             }
-            catch (Exception error)
+            catch
             {
                 //throw new ApplicationException("Errore, cancellazione mail prese in carico vecchie :" + error.Message, error);
             }
@@ -738,7 +738,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
             }
-            catch (Exception error)
+            catch 
             {
                 //throw new ApplicationException("Errore, cancellazione newsletter :" + error.Message, error);
             }
@@ -981,7 +981,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch 
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }

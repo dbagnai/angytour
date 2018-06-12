@@ -743,7 +743,6 @@
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
         <%--  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>--%>
-
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
@@ -774,5 +773,6 @@
         <![endif]-->
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
+     <%= InjectedEndPageScripts() %>
 </body>
 </html>

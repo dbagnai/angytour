@@ -57,7 +57,7 @@
 
                             <div id="divCutHeight" runat="server" style="overflow: hidden; margin: 5px; padding: 10px">
                                 <asp:Image ID="Anteprima" runat="server" OnPreRender="ImgAnt_PreRender"
-                                    ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString(),true) %>' />
+                                    ImageUrl='<%# WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString(),true) %>' />
                             </div>
                             <div style="text-align: justify; padding: 10px; margin-top: 10px">
                                 <asp:Label ID="lbldescri" runat="server" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo( CommonPage.ReplaceLinks( Eval("Descrizione" + Lingua).ToString()) ) %>'></asp:Label>

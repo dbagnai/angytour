@@ -360,7 +360,7 @@ namespace WelcomeLibrary.UF
                     }
                 }
             }
-            catch (Exception error)
+            catch 
             {
                 // throw new ApplicationException("Errore Caricamento Tabella Risorse :" + error.Message, error);
             }

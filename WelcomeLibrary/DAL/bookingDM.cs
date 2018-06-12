@@ -675,7 +675,7 @@ namespace WelcomeLibrary.DAL
         /// <returns></returns>
         public double CalcolaPrezzoBase(string connection, DateTime eventstart, DateTime eventend, string idattivita, ref string error)
         {
-            bool coincidenzatipoannotabellalistino = false;
+           // bool coincidenzatipoannotabellalistino = false;
             double prezzocalcolato = 0;
             int ngiorni = 0;
             int nsettimane = Math.DivRem(((TimeSpan)(eventend.Date - eventstart.Date)).Days, 7, out ngiorni);

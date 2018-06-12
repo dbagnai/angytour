@@ -4,21 +4,54 @@
     <title>Webmousers Blog Servizi</title>
     <link>http://localhost:52646</link>
     <description>Webmousers Blog</description>
-    <lastBuildDate>Fri, 13 Apr 2018 13:09:28 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 11 Jun 2018 09:16:19 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2018-04-13T13:09+02:00</sy:updateBase>
+    <sy:updateBase>2018-06-11T09:16+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>sollicitudin pharetra
-hendrerit sit ame</title>
-      <link>http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18</link>
-      <guid isPermaLink="true">http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18</guid>
-      <pubDate>Mon, 09 Apr 2018 15:46:18 +02:00</pubDate>
+      <title>servizio
+sottotitolo servizio</title>
+      <link>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-29</link>
+      <guid isPermaLink="true">http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-29</guid>
+      <pubDate>Tue, 29 May 2018 11:12:03 +02:00</pubDate>
       <category>Servizi</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/18/sample-banner.jpg" alt="sollicitudin pharetra
-hendrerit sit ame" width="350" /><p>Cras pulvinar leo eu neque blandit, vel consectetur dui vehicula. In hac habitasse platea dictumst. Suspendisse ultrices, mi a sollicitudin pharetra, dui ante sodales risus, non mattis ipsum purus non mi. Nullam sit amet enim ornare, tempor leo ac, sodales ligula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean sit amet tristique tellus. Curabitur ex mauris, mattis non consectetur et, hendrerit sit amet dolor. Nunc facilisis sem justo, ut porta diam vestibulum eget. Pellentesque felis nisl, molestie vel facilisis id, fringilla eget augue.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/sollicitudin-pharetra-hendrerit-sit-ame-18"><em>sollicitudin pharetra
-hendrerit sit ame</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/29/sample-banner.jpg" alt="servizio
+sottotitolo servizio" width="350" /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-29"><em>servizio
+sottotitolo servizio</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>servizio
+sottotitolo servizio</title>
+      <link>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-28</link>
+      <guid isPermaLink="true">http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-28</guid>
+      <pubDate>Tue, 29 May 2018 11:11:34 +02:00</pubDate>
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/28/sample-banner.jpg" alt="servizio
+sottotitolo servizio" width="350" /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-28"><em>servizio
+sottotitolo servizio</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>servizio
+sottotitolo servizio</title>
+      <link>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-27</link>
+      <guid isPermaLink="true">http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-27</guid>
+      <pubDate>Tue, 29 May 2018 11:11:02 +02:00</pubDate>
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/27/sample-banner.jpg" alt="servizio
+sottotitolo servizio" width="350" /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-27"><em>servizio
+sottotitolo servizio</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>servizio
+sottotitolo servizio</title>
+      <link>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-26</link>
+      <guid isPermaLink="true">http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-26</guid>
+      <pubDate>Tue, 29 May 2018 11:10:15 +02:00</pubDate>
+      <category>Servizi</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000003/26/sample-banner.jpg" alt="servizio
+sottotitolo servizio" width="350" /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-26"><em>servizio
+sottotitolo servizio</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

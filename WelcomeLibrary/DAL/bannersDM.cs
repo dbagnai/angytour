@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using WelcomeLibrary.DOM;
 using System.Data.SQLite;
+using Newtonsoft.Json;
+using WelcomeLibrary.UF;
+using System.Linq;
 
 namespace WelcomeLibrary.DAL
 {
     public class bannersDM
     {
-        
+
         string nometabella = "tbl_banners";
         public bannersDM()
         {
@@ -32,12 +35,119 @@ namespace WelcomeLibrary.DAL
                 DataTable dt = dbDataAccess.GetDataTableOle(query, null, connessione);
                 ret = true;
             }
-            catch (Exception err)
+            catch
             {
                 ret = false;
             }
 
             return ret;
+        }
+        /// <summary>
+        /// Funzione caricamento con serializzazione dei risultati usata nell'handler
+        /// </summary>
+        /// <param name="lingua"></param>
+        /// <param name="filtriBanner"></param>
+        /// <param name="spage"></param>
+        /// <param name="spagesize"></param>
+        /// <param name="senablepager"></param>
+        /// <returns></returns>
+        public static Dictionary<string, string> filterDataBanner(string lingua, Dictionary<string, string> filtriBanner, string spage, string spagesize, string senablepager)
+        {
+            bool enabledpager = false;
+            bool.TryParse(senablepager, out enabledpager);
+
+            int page = 0;
+            int pagesize = 0;
+            int maxelement = 0;
+            int.TryParse(spage, out page);
+            int.TryParse(spagesize, out pagesize);
+            bool smescola = false;
+            bool.TryParse(filtriBanner["mescola"], out smescola);
+            Dictionary<string, string> ritorno = new Dictionary<string, string>();
+            BannersCollection banners = new BannersCollection();
+            string tblsezione = filtriBanner["tblsezione"];
+            string filtrosezione = filtriBanner["filtrosezione"];
+            int.TryParse(filtriBanner["maxelement"], out maxelement);
+            bannersDM banDM = new bannersDM(tblsezione);
+
+            banners = banDM.CaricaBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filtrosezione.Trim(), smescola, maxelement);
+            if (banners == null) banners = new BannersCollection();
+            //dt = banDM.GetTabellaBannersGuidato(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Lingua, filtrosezione, mescola);
+
+            //else
+            //    offerte = filtri[4];
+
+            List<Banners> filteredData = new List<Banners>();
+            if (banners != null && banners.Count > 0 && enabledpager && page != 0 && pagesize != 0)
+            {
+                //Facciamo il take skip
+                int start = ((page - 1) * pagesize);
+                //int end = start + pagesize - 1;
+                if (start + pagesize > banners.Count - 1)
+                    filteredData = banners.GetRange(start, banners.Count - start);
+                else
+                    filteredData = banners.GetRange(start, pagesize).ToList();
+            }
+            else filteredData = banners;
+            string tempOff = Newtonsoft.Json.JsonConvert.SerializeObject(filteredData, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+            });
+            ritorno.Add("data", tempOff);
+            Dictionary<string, string> ListRet = new Dictionary<string, string>();
+            string tot = "0";
+            if (banners != null) tot = banners.Count.ToString();
+            ListRet.Add("totalrecords", tot);
+
+            string tempListret = Newtonsoft.Json.JsonConvert.SerializeObject(ListRet);
+            ritorno.Add("resultinfo", tempListret);
+
+            Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
+            foreach (Banners _o in filteredData)
+            {
+                Dictionary<string, string> tmp = new Dictionary<string, string>();
+                string testotitolo = ""; 
+
+                testotitolo = _o.AlternateTextbyLingua(lingua);
+                string pathimmagine = _o.ImageUrlbyLingua(lingua); //percorso virtuale della foto banner sul server!!
+
+                ///////////////////////////////////////
+                //Ricreiamo le anteprime se non presenti 
+                string physpathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione).Replace("/", "\\").Replace("\\\\", "\\");
+                string filename = System.IO.Path.GetFileName(physpathimmagine).ToString();
+                string filepath = System.IO.Path.GetDirectoryName(physpathimmagine).ToString();
+                filemanage.CreaAnteprima(physpathimmagine, 450, 450, filepath + "\\", "Ant" + filename, false, true);
+                ///////////////////////////////////////
+                //Qui  posso decidere di passare le versioni in base alla risoluzione   WelcomeLibrary.STATIC.Global.Viewportw
+                //andatando a modificare il noem del file aggiungendo -xs -xs -md -lg  a seconda della risoluzione al nome del file
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                if (string.IsNullOrEmpty(pathimmagine))
+                    pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                //string target = "_self";
+                string link = _o.NavigateUrlbyLingua(lingua);
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
+                {
+                   // target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                tmp.Add("link", link);
+                tmp.Add("titolo", (offerteDM.ReplaceLinks(testotitolo)));
+                tmp.Add("image", pathimmagine);
+                linksurl.Add(_o.Id.ToString(), tmp);
+            }
+
+            string retlinksurl = Newtonsoft.Json.JsonConvert.SerializeObject(linksurl);
+            ritorno.Add("linkloaded", retlinksurl);
+
+            return ritorno;
         }
 
         /// <summary>
@@ -54,7 +164,7 @@ namespace WelcomeLibrary.DAL
             BannersCollection banners = null;
             banners = this.CaricaBanners(connessione, filtro.Trim(), mescola, maxbanners);
 
-            if (mescola && banners!=null)
+            if (mescola && banners != null)
                 banners.Shuffle();
 
             //Trasformiamo i banner in una datatable con la struttura adatta all'adrotator

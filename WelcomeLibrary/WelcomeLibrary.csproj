@@ -202,6 +202,7 @@
     <Compile Include="UF\ConfigManagement.cs" />
     <Compile Include="UF\custombind.cs" />
     <Compile Include="UF\dataManagement.cs" />
+    <Compile Include="UF\filemanage.cs" />
     <Compile Include="UF\GenericComparer.cs" />
     <Compile Include="UF\GenericFunc.cs" />
     <Compile Include="UF\HandlerHelper.cs" />

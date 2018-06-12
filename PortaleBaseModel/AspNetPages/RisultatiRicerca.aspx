@@ -135,7 +135,7 @@
                             <a id="a3" runat="server" class="portfolio-zoom"
                                 href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
-                                <asp:Image ID="Anteprima" runat="server" class="img-responsive" ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>' />
+                                <asp:Image ID="Anteprima" runat="server" class="img-responsive" ImageUrl='<%#  WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>' />
                                 <div class="item-img-overlay">
                                     <div class="item_img_overlay_content">
                                         <div class="blog-post-details-item blog-post-details-item-left">
@@ -260,7 +260,7 @@
                                             href='<%# CreaLinkRoutes(Session,false,Lingua,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                             <asp:Image ID="Anteprima" runat="server" Style="max-width: 55px; max-height: 55px"
-                                                ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
+                                                ImageUrl='<%#  WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"),Eval("CodiceTipologia").ToString(),Eval("Id").ToString()) %>'
                                                 Visible='<%#  !ControlloVideo ( Eval("FotoCollection_M.FotoAnteprima") ) %>' />
                                         </a>
                                     </div>

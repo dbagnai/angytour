@@ -12,6 +12,7 @@ using WelcomeLibrary.DAL;
 using WelcomeLibrary.DOM;
 using System.Data.OleDb;
 using System.Collections.Generic;
+using WelcomeLibrary.UF;
 
 public partial class AspNetPages_Content_Tipo1 : CommonPage
 {

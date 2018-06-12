@@ -3241,3 +3241,177 @@
 <Messaggio>httplocalhost52646Generato sitemap  19/05/2018 19:20:46</Messaggio>
  <Data>19/05/2018 19:20:46</Data>
 <Messaggio>httplocalhost52646Generato sitemap  19/05/2018 19:20:46Terminato Aggiornamento  19/05/2018 19:20:46</Messaggio>
+ <Data>09/06/2018 19:11:04</Data>
+<Messaggio> Application start : 09/06/2018 19:11:04</Messaggio>
+ <Data>09/06/2018 19:11:04</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/06/2018 19:12:04</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:12:04</Messaggio>
+ <Data>09/06/2018 19:12:04</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:12:04Terminato Aggiornamento  09/06/2018 19:12:04</Messaggio>
+ <Data>09/06/2018 19:12:44</Data>
+<Messaggio> Application start : 09/06/2018 19:12:43</Messaggio>
+ <Data>09/06/2018 19:12:44</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/06/2018 19:14:16</Data>
+<Messaggio> Application start : 09/06/2018 19:14:15</Messaggio>
+ <Data>09/06/2018 19:14:16</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/06/2018 19:15:21</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:15:21</Messaggio>
+ <Data>09/06/2018 19:15:21</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:15:21Terminato Aggiornamento  09/06/2018 19:15:21</Messaggio>
+ <Data>09/06/2018 19:22:49</Data>
+<Messaggio> Application start : 09/06/2018 19:22:48</Messaggio>
+ <Data>09/06/2018 19:22:49</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>09/06/2018 19:25:27</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:25:27</Messaggio>
+ <Data>09/06/2018 19:25:27</Data>
+<Messaggio>httplocalhost52646Generato sitemap  09/06/2018 19:25:27Terminato Aggiornamento  09/06/2018 19:25:27</Messaggio>
+ <Data>11/06/2018 08:59:03</Data>
+<Messaggio> Application start : 11/06/2018 08:59:01</Messaggio>
+ <Data>11/06/2018 08:59:03</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 09:00:09</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/06/2018 09:00:09</Messaggio>
+ <Data>11/06/2018 09:00:09</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/06/2018 09:00:09Terminato Aggiornamento  11/06/2018 09:00:09</Messaggio>
+ <Data>11/06/2018 09:15:10</Data>
+<Messaggio> Application start : 11/06/2018 09:15:10</Messaggio>
+ <Data>11/06/2018 09:15:10</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 09:16:19</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/06/2018 09:16:19</Messaggio>
+ <Data>11/06/2018 09:16:19</Data>
+<Messaggio>httplocalhost52646Generato sitemap  11/06/2018 09:16:19Terminato Aggiornamento  11/06/2018 09:16:19</Messaggio>
+ <Data>11/06/2018 09:43:10</Data>
+<Messaggio> Application start : 11/06/2018 09:43:10</Messaggio>
+ <Data>11/06/2018 09:43:10</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 10:05:26</Data>
+<Messaggio> Application start : 11/06/2018 10:05:26</Messaggio>
+ <Data>11/06/2018 10:05:32</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 10:13:48</Data>
+<Messaggio> Application start : 11/06/2018 10:13:47</Messaggio>
+ <Data>11/06/2018 10:13:48</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 10:15:19</Data>
+<Messaggio> Application start : 11/06/2018 10:15:18</Messaggio>
+ <Data>11/06/2018 10:15:19</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 10:21:18</Data>
+<Messaggio> Application start : 11/06/2018 10:21:17</Messaggio>
+ <Data>11/06/2018 10:21:18</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 10:53:00</Data>
+<Messaggio> Application start : 11/06/2018 10:52:59</Messaggio>
+ <Data>11/06/2018 10:53:00</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 11:42:12</Data>
+<Messaggio> Application start : 11/06/2018 11:42:12</Messaggio>
+ <Data>11/06/2018 11:42:12</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 14:21:44</Data>
+<Messaggio> Application start : 11/06/2018 14:21:43</Messaggio>
+ <Data>11/06/2018 14:21:44</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 14:38:16</Data>
+<Messaggio> Application start : 11/06/2018 14:38:14</Messaggio>
+ <Data>11/06/2018 14:38:16</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 14:41:43</Data>
+<Messaggio> Application start : 11/06/2018 14:41:41</Messaggio>
+ <Data>11/06/2018 14:41:43</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 15:32:14</Data>
+<Messaggio> Application start : 11/06/2018 15:32:12</Messaggio>
+ <Data>11/06/2018 15:32:14</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 15:56:41</Data>
+<Messaggio> Application start : 11/06/2018 15:56:41</Messaggio>
+ <Data>11/06/2018 15:56:41</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 16:20:31</Data>
+<Messaggio> Application start : 11/06/2018 16:20:30</Messaggio>
+ <Data>11/06/2018 16:20:31</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 16:50:14</Data>
+<Messaggio> Application start : 11/06/2018 16:50:11</Messaggio>
+ <Data>11/06/2018 16:50:14</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:00:59</Data>
+<Messaggio> Application start : 11/06/2018 17:00:57</Messaggio>
+ <Data>11/06/2018 17:00:59</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:08:36</Data>
+<Messaggio> Application start : 11/06/2018 17:08:34</Messaggio>
+ <Data>11/06/2018 17:08:36</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:17:55</Data>
+<Messaggio> Application start : 11/06/2018 17:17:53</Messaggio>
+ <Data>11/06/2018 17:17:55</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:20:06</Data>
+<Messaggio> Application start : 11/06/2018 17:20:04</Messaggio>
+ <Data>11/06/2018 17:20:07</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:27:09</Data>
+<Messaggio> Application start : 11/06/2018 17:27:07</Messaggio>
+ <Data>11/06/2018 17:27:09</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:38:18</Data>
+<Messaggio> Application start : 11/06/2018 17:38:16</Messaggio>
+ <Data>11/06/2018 17:38:18</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:49:48</Data>
+<Messaggio> Application start : 11/06/2018 17:49:46</Messaggio>
+ <Data>11/06/2018 17:49:48</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 17:58:48</Data>
+<Messaggio> Application start : 11/06/2018 17:58:47</Messaggio>
+ <Data>11/06/2018 17:58:48</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>11/06/2018 20:09:14</Data>
+<Messaggio> Application start : 11/06/2018 20:09:12</Messaggio>
+ <Data>11/06/2018 20:09:14</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 09:25:47</Data>
+<Messaggio> Application start : 12/06/2018 09:25:46</Messaggio>
+ <Data>12/06/2018 09:25:47</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 09:51:25</Data>
+<Messaggio> Application start : 12/06/2018 09:51:25</Messaggio>
+ <Data>12/06/2018 09:51:25</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 10:41:09</Data>
+<Messaggio> Application start : 12/06/2018 10:41:07</Messaggio>
+ <Data>12/06/2018 10:41:09</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 10:44:26</Data>
+<Messaggio> Application start : 12/06/2018 10:44:21</Messaggio>
+ <Data>12/06/2018 10:44:43</Data>
+<Messaggio> Application start : 12/06/2018 10:44:41</Messaggio>
+ <Data>12/06/2018 10:44:45</Data>
+<Messaggio> Global init original path: http://localhost:52646/undefined Global init AbsolutePath : /undefined Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 10:55:37</Data>
+<Messaggio> Application start : 12/06/2018 10:55:35</Messaggio>
+ <Data>12/06/2018 10:55:37</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 11:01:02</Data>
+<Messaggio> Application start : 12/06/2018 11:01:00</Messaggio>
+ <Data>12/06/2018 11:01:02</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 12:11:58</Data>
+<Messaggio> Application start : 12/06/2018 12:11:57</Messaggio>
+ <Data>12/06/2018 12:11:58</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 12:30:35</Data>
+<Messaggio> Application start : 12/06/2018 12:30:34</Messaggio>
+ <Data>12/06/2018 12:30:35</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/06/2018 12:50:58</Data>
+<Messaggio> Application start : 12/06/2018 12:50:57</Messaggio>
+ <Data>12/06/2018 12:50:58</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>

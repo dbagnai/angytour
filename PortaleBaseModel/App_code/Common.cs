@@ -251,9 +251,8 @@ public class CommonPage : Page
 
         bool gen = false;
         bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
-        //bool upd = false;
-        //bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"], out upd);
         string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
         return link;//.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
     }
 
@@ -318,7 +317,9 @@ public class CommonPage : Page
 
     public static string ConteggioCaratteri(string testo, int caratteri = 600, bool nolink = false, string testoAggiunto = "")
     {
-        string ritorno = testo;
+        return SitemapManager.ConteggioCaratteri(testo, caratteri, nolink, testoAggiunto);
+#if false
+        tring ritorno = testo;
 
         if (testo.Length > caratteri)
         {
@@ -340,7 +341,8 @@ public class CommonPage : Page
                 // references.ResMan("Common",Lingua,"testoContinua").ToString()
             }
         }
-        return ritorno;
+        return ritorno; 
+#endif
     }
 
 
@@ -368,16 +370,21 @@ public class CommonPage : Page
 
     public static String CleanInput(string strIn)
     {
+        return SitemapManager.CleanInput(strIn);
+#if false
         // Replace invalid characters with empty strings.
         //return Regex.Replace(strIn, @"[^\w\.@-]", "");
         // strIn = Regex.Replace(strIn, @"[\W]", "");
         //strIn = strIn.Replace(" ", "-");
         strIn = Regex.Replace(strIn, @"[^a-zA-Zа-яА-ЯЁё0-9@\$=!:.’#%_?^<>()òàùèì &°:;-]", "");
 
-        return strIn;
+        return strIn; 
+#endif
     }
     public static String CleanUrl(string strIn)
     {
+        return SitemapManager.CleanUrl(strIn);
+#if false
         strIn = strIn.Trim();
         // Replace invalid characters with empty strings.
         //return Regex.Replace(strIn, @"[^\w\.@-]", "");
@@ -393,7 +400,8 @@ public class CommonPage : Page
         strIn = strIn.Replace("&", "e");
         // strIn = Regex.Replace(strIn, @"[^a-zA-Z0-9@\_]", "");
         strIn = Regex.Replace(strIn, @"[^a-zA-Zа-яА-ЯЁё0-9@\$=_()-]", "");
-        return strIn.Trim('-');
+        return strIn.Trim('-'); 
+#endif
 
     }
 
@@ -404,6 +412,8 @@ public class CommonPage : Page
     /// <returns></returns>
     public static String ReplaceLinks(string strIn, bool nolink = false)
     {
+        return offerteDM.ReplaceLinks(strIn, nolink);
+#if false
         List<string> tags = new List<string>();
         tags.Add("link:(");
         tags.Add("quot:(");
@@ -1142,14 +1152,16 @@ public class CommonPage : Page
         }
         ret = strIn;
 
-        return ret;
+        return ret; 
+#endif
 
     }
 
     private static string GetLinguaFromActualCulture(CultureInfo currentCulture)
     {
+       return offerteDM.GetLinguaFromActualCulture(currentCulture);
+#if false
         string lingua = deflanguage;
-
         switch (currentCulture.TwoLetterISOLanguageName.ToLower())
         {
             case "it":
@@ -1165,7 +1177,8 @@ public class CommonPage : Page
                 lingua = "GB";
                 break;
         }
-        return lingua;
+        return lingua; 
+#endif
     }
 
     public static string ControlloVuotoPosizione(string comune, string codiceprovincia, string codicetipologia, string Lingua)

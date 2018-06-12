@@ -804,7 +804,7 @@ function CleanHtml(el) {
 }
 
 
-function recursiveEach($element,controlid){
+function recursiveEach($element, controlid) {
     $element.children().each(function () {
         var $currentElement = $(this);
 
@@ -824,7 +824,7 @@ function recursiveEach($element,controlid){
         $(this).prop("id", replacedid);
 
         //////////// Loop her children
-        recursiveEach($currentElement,controlid);
+        recursiveEach($currentElement, controlid);
     });
 }
 
@@ -841,13 +841,13 @@ function ShowList(templatename, container, controlid, data) {
 
     if (data !== null && data.length > 0) {
         $('#' + container).load(templateHtml, function () {
-                 recursiveEach($('#' + container),controlid);
+            recursiveEach($('#' + container), controlid);
             //$('#' + container).find("[id^=replaceid]").each(function (index, text) {
             //    var currentid = $(this).prop("id");
             //    var replacedid = currentid.replace('replaceid', controlid);
             //    $(this).prop("id", replacedid);
             //});
-       
+
             setTimeout(function () {
                 if (!data.length) return;
                 var str = $('#' + controlid)[0].outerHTML;
@@ -887,8 +887,6 @@ function ShowList(templatename, container, controlid, data) {
 }
 
 
-
-
 /*Riceve una stringa Html parserizzata con jquery per il fill coi dati*/
 function FillBindControls(jquery_obj, dataitem, localObjects, classselector, callback) {
 
@@ -902,7 +900,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
             proprarr = $(this).attr("mybind").split('.');
         if (proprarr != null && proprarr.length != 0) {
             switch (proprarr.length) {
-                case 1: //Oggetto 1 livello
+                case 1: //Oggetto 1 livello proprarr[0] è il nome della proprietà per il bind nello specifico Id, o altre proprietà dell'oggetto in bind
 
                     //if (dataitem.hasOwnProperty(proprarr[0]))
                     //    $(this).val(dataitem[proprarr[0]]);
@@ -910,8 +908,10 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     //    $(this).val('');
 
                     if ($(this).is("label")) {
-                        $(this).attr("value", dataitem[proprarr[0]]);
-                        $(this).html(dataitem[proprarr[0]]);
+                        if (dataitem.hasOwnProperty(proprarr[0])) {
+                            $(this).attr("value", dataitem[proprarr[0]]);
+                            $(this).html(dataitem[proprarr[0]]);
+                        }
                     }
                     else if ($(this).is("input") && $(this).attr('type') == 'checkbox') {
                         if (dataitem.hasOwnProperty(proprarr[0]))
@@ -924,14 +924,10 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).attr("value", dataitem[proprarr[0]]);
                         else
                             $(this).attr("value", '');
-
                         if ($(this).attr("idbind") != null)
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
-
-
                         if ($(this).attr("placeholder") != null)
                             $(this).attr("placeholder", baseresources[lng][$(this).attr("placeholder")]);
-
                     }
 
                     else if ($(this).is("textarea")) {
@@ -953,15 +949,17 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     }
                     else if ($(this).is("a")) {
                         var link = "";
-                        var idscheda = dataitem[proprarr[0]];
+                        var idscheda = "";
                         var testo = "";
                         var bindprophref = "";
                         var bindproptitle = "";
+
+                        if (dataitem.hasOwnProperty(proprarr[0])) 
+                            idscheda = dataitem[proprarr[0]];
                         if ($(this).attr("href") != null)
                             bindprophref = $(this).attr("href");
                         if ($(this).attr("title") != null)
                             bindproptitle = $(this).attr("title");
-
 
                         if (localObjects["linkloaded"].hasOwnProperty(idscheda)) {
                             if (localObjects["linkloaded"][idscheda].hasOwnProperty(bindprophref)) {
@@ -984,8 +982,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         }
                     }
                     else if ($(this).is("img") && $(this).hasClass('revolution')) {
-                        var idallegato = dataitem[proprarr[0]];
                         if (dataitem.hasOwnProperty(proprarr[0])) {
+                            var idallegato = dataitem[proprarr[0]];
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['image'];
                             //pathImg += "?vw=" + window.outerWidth;
@@ -993,19 +991,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             //$(this).attr("alt", testoalt);
                         }
                     }
-                    else if ($(this).is("img") && $(this).hasClass('avatar')) {
-                        var idallegato = dataitem[proprarr[0]];
-                        if (dataitem.hasOwnProperty(proprarr[0])) {
-                            //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
-                            var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
-                            //pathImg += "?vw=" + window.outerWidth;
-                            $(this).attr("src", pathImg);
-                            //$(this).attr("alt", testoalt);
-                        }
-                    }
                     else if ($(this).is("li") && $(this).hasClass('revolution')) {
-                        var idallegato = dataitem[proprarr[0]];
                         if (dataitem.hasOwnProperty(proprarr[0])) {
+                            var idallegato = dataitem[proprarr[0]];
                             var pathImg = localObjects["linkloaded"][idallegato]['image'];
                             var link = localObjects["linkloaded"][idallegato]['link'];
                             $(this).attr("data-link", link);
@@ -1029,9 +1017,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 filename = filename.replace(/-lg./g, ".");
                                 completepath = completepath.substr(0, position + 1) + "ant" + filename;
                             }
-                     
-                            if (completepath != null && completepath != '')
-                            {
+
+                            if (completepath != null && completepath != '') {
                                 //completepath += "?vw=" + window.outerWidth;
                                 $(this).attr("src", completepath);
                             }
@@ -1042,6 +1029,16 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         }
                         //else
                         //    $(this).attr("src", '');
+                    }
+                    else if ($(this).is("img") && $(this).hasClass('avatar')) {
+                        var idallegato = dataitem[proprarr[0]];
+                        if (dataitem.hasOwnProperty(proprarr[0])) {
+                            //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
+                            var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
+                            //pathImg += "?vw=" + window.outerWidth;
+                            $(this).attr("src", pathImg);
+                            //$(this).attr("alt", testoalt);
+                        }
                     }
                     else if ($(this).is("div")
                         && ($(this).hasClass('flexmaincontainer'))
@@ -1123,9 +1120,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
 
                                 //  contenutoslide += '</a>';
 
-  try {
+                                try {
                                     descriptiontext = imgslistdesc[j];
-																						   
+
 
 
                                     //if (descriptiontext !== '') {
@@ -1136,8 +1133,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 } catch (e) {
                                 };
                                 contenutoslide += ' alt="' + descriptiontext + '" />';
-								
-								
+
+
                                 contenutoslide += '</div>';
                                 contenutoslide += '</div>';
 
@@ -1345,11 +1342,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         }
 
                     }
-                    //else if ($(this).is("div")
-                    //    && ($(this).hasClass('owl-slider-v2'))
-                    //    ) {
-                    //    var contenutoslide = "";
-                    //}
                     else {
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             var valore = [];
@@ -1711,7 +1703,7 @@ function formatlabelsconto(localObjects, valore, prop, callback) {
 }
 
 function formatlabelresource(localObjects, valore, prop, callback) {
-   var retstring = "";
+    var retstring = "";
     try {
 
         var controllo = null;
@@ -2498,5 +2490,5 @@ function validateEmail(value) {
     input.value = value;
 
     return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
-}							   
+}
 

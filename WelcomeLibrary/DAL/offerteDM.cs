@@ -7,6 +7,7 @@ using WelcomeLibrary.DOM;
 using System.Xml;
 using WelcomeLibrary.UF;
 using System.Data.SQLite;
+using Newtonsoft.Json;
 
 namespace WelcomeLibrary.DAL
 {
@@ -3677,7 +3678,7 @@ namespace WelcomeLibrary.DAL
                     }
                     if (System.IO.File.Exists(pathfile + "\\" + nomefile)) System.IO.File.Delete(pathfile + "\\" + nomefile);
                     if (System.IO.File.Exists(pathfile + "\\" + "Ant" + nomefile)) System.IO.File.Delete(pathfile + "\\" + "Ant" + nomefile);
-                   
+
                 }
                 catch (Exception error)
                 {
@@ -5184,7 +5185,7 @@ namespace WelcomeLibrary.DAL
                 using (str)
                 {
                     System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(str, System.Text.Encoding.UTF8);
-                    writer.Formatting = Formatting.Indented;
+                    writer.Formatting = System.Xml.Formatting.Indented;
                     // aggiungo l'intestazione XML 
                     //writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
                     writer.WriteRaw("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -5533,6 +5534,489 @@ namespace WelcomeLibrary.DAL
             return ritorno;
         }
 
+
+
+        public static Dictionary<string, string> filterData(string lingua, Dictionary<string, string> filtri, string spage, string spagesize, string senablepager)
+        {
+            bool gen = false;
+            bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+
+            bool enabledpager = false;
+            bool.TryParse(senablepager, out enabledpager);
+
+            int page = 0;
+            int pagesize = 0;
+            int.TryParse(spage, out page);
+            int.TryParse(spagesize, out pagesize);
+
+            List<Offerte> filteredData = new List<Offerte>();
+            offerteDM offDM = new offerteDM();
+            Dictionary<string, string> ritorno = new Dictionary<string, string>();
+            OfferteCollection offerte = new OfferteCollection();
+
+
+            //CARICO FILTRANDO ////////////////////////////////////////////////////////////////
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            string maxrecords = "";
+            if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
+                maxrecords = filtri["maxelement"];
+
+            if (filtri.ContainsKey("mostviewed") && !string.IsNullOrEmpty(filtri["mostviewed"]))
+            {
+                long maxelements = 0;
+                long.TryParse(filtri["mostviewed"], out maxelements);
+                if (maxelements != 0)
+                {
+                    maxrecords = maxelements.ToString();
+                    //estraiamo la lista degli di più visti
+                    Dictionary<long, long> mostvisited = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData, maxelements);
+                    long _i = 0;
+                    string idlistfiltro = "";
+                    foreach (KeyValuePair<long, long> kv in mostvisited)
+                    {
+                        if (_i >= maxelements) break;
+                        idlistfiltro += kv.Key + ",";
+                        _i++;
+                    }
+                    idlistfiltro = idlistfiltro.TrimEnd(',');
+                    if (!string.IsNullOrEmpty(idlistfiltro))
+                    {
+                        SQLiteParameter pidlist1 = new SQLiteParameter("@IdList", idlistfiltro);
+                        parColl.Add(pidlist1);
+                    }
+                }
+            }
+
+            if (filtri.ContainsKey("listShow") && !string.IsNullOrEmpty(filtri["listShow"]))
+            {
+                if (filtri["listShow"].Contains(","))
+                {
+                    SQLiteParameter pidlist = new SQLiteParameter("@IdList", filtri["listShow"]);
+                    parColl.Add(pidlist);
+                }
+            }
+            if (filtri.ContainsKey("id") && !string.IsNullOrEmpty(filtri["id"]))
+            {
+                SQLiteParameter pid = new SQLiteParameter("@Id", filtri["id"]);
+                parColl.Add(pid);
+            }
+            if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
+            {
+                SQLiteParameter p3 = new SQLiteParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
+                parColl.Add(p3);
+            }
+            if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
+            {
+                SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", filtri["categoria"]);
+                parColl.Add(p7);
+            }
+            if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+            {
+                SQLiteParameter p10 = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
+                parColl.Add(p10);
+            }
+            if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
+            {
+                SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["caratteristica1"]);
+                parColl.Add(pc1);
+            }
+            if (filtri.ContainsKey("caratteristica2") && !string.IsNullOrEmpty(filtri["caratteristica2"]))
+            {
+                SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["caratteristica2"]);
+                parColl.Add(pc2);
+            }
+            if (filtri.ContainsKey("caratteristica3") && !string.IsNullOrEmpty(filtri["caratteristica3"]))
+            {
+                SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["caratteristica3"]);
+                parColl.Add(pc3);
+            }
+
+            if (filtri.ContainsKey("regione") && !string.IsNullOrEmpty(filtri["regione"]))
+            {
+                SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", filtri["regione"]);
+                parColl.Add(preg);
+            }
+
+
+            if (filtri.ContainsKey("vetrina") && !string.IsNullOrEmpty(filtri["vetrina"]))
+            {
+                bool _tmpb = false;
+                bool.TryParse(filtri["vetrina"], out _tmpb);
+                SQLiteParameter pvet = new SQLiteParameter("@Vetrina", _tmpb);
+                parColl.Add(pvet);
+            }
+            if (filtri.ContainsKey("promozioni") && !string.IsNullOrEmpty(filtri["promozioni"]))
+            {
+                bool _tmpb = false;
+                bool.TryParse(filtri["promozioni"], out _tmpb);
+                SQLiteParameter promo = new SQLiteParameter("@promozioni", _tmpb);
+                parColl.Add(promo);
+            }
+            if (filtri.ContainsKey("testoricerca") && !string.IsNullOrEmpty(filtri["testoricerca"]))
+            {
+                string testoricerca = filtri["testoricerca"].Trim().Replace(" ", "%");
+                SQLiteParameter p8 = new SQLiteParameter("@testoricerca", "%" + testoricerca + "%");
+                parColl.Add(p8);
+            }
+
+            if (filtri.ContainsKey("mese") && !string.IsNullOrEmpty(filtri["mese"]))
+                if (filtri.ContainsKey("anno") && !string.IsNullOrEmpty(filtri["anno"]))
+                {
+                    string mese = filtri["mese"];
+                    string anno = filtri["anno"];
+                    if (mese.Trim() != "" && anno.Trim() != "")
+                    {
+                        SQLiteParameter panno = new SQLiteParameter("@annofiltro", anno);
+                        parColl.Add(panno);
+
+
+                        SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", mese);
+                        parColl.Add(pmese);
+                    }
+
+#if false
+                    if (mese.Trim() != "" && anno.Trim() != "")
+                    {
+                        int _a = 0;
+                        int.TryParse(anno, out _a);
+                        int _m = 0;
+                        int.TryParse(mese, out _m);
+                        if (_a != 0)
+                        {
+                            SQLiteParameter panno = new SQLiteParameter("@annofiltro", _a);
+                            parColl.Add(panno);
+                        }
+                        if (_m != 0)
+                        {
+                            SQLiteParameter pmese = new SQLiteParameter("@mesefiltro", _m);
+                            parColl.Add(pmese);
+                        }
+
+                    } 
+#endif
+                }
+
+
+
+            if (enabledpager && page != 0 && pagesize != 0)
+            {
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "", false, page, pagesize);
+            }
+            else if (senablepager == "skip" && page != 0 && pagesize != 0)
+            {
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua, null, "", false, page, pagesize);
+                int lmaxrecords = 0;
+                int.TryParse(maxrecords, out lmaxrecords);
+                if (offerte != null && lmaxrecords != 0)
+                {
+                    long nget = Math.Min(offerte.Count, lmaxrecords);
+                    OfferteCollection tmpoffselect = new OfferteCollection();
+                    for (int conta = 0; conta < nget; conta++)
+                    {
+                        tmpoffselect.Add(offerte[conta]);
+                    }
+                    offerte = tmpoffselect;
+                    //if (lmaxrecords != 0)
+                    //    offerte = new OfferteCollection(offerte.GetRange(0, Math.Min(offerte.Count, lmaxrecords)));
+                }
+
+            }
+            else
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "");
+            //}
+            //else
+            //    offerte = filtri[4];
+
+
+#if false
+        /*Old paging method*/
+        if (offerte != null && offerte.Count > 0 && enabledpager && page != 0 && pagesize != 0)
+        {
+            //Facciamo il take skip
+            int start = ((page - 1) * pagesize);
+            //int end = start + pagesize - 1;
+            if (start + pagesize > offerte.Count - 1)
+                filteredData = offerte.GetRange(start, offerte.Count - start);
+            else
+                filteredData = offerte.GetRange(start, pagesize);
+        }
+        else filteredData = offerte;
+#endif
+#if false
+        if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
+        {
+            int maxelem = 0;
+            int.TryParse(filtri["maxelement"], out maxelem);
+            if (maxelem < filteredData.Count())
+                filteredData = filteredData.GetRange(0, maxelem);
+        } 
+#endif
+
+            filteredData = offerte;
+            string tempOff = Newtonsoft.Json.JsonConvert.SerializeObject(filteredData, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+            });
+            ritorno.Add("data", tempOff);
+            Dictionary<string, string> ListRet = new Dictionary<string, string>();
+            ListRet.Add("visualData", filtri["visualData"]);
+            ListRet.Add("visualPrezzo", filtri["visualPrezzo"]);
+
+            string tot = "0";
+            //if (offerte != null) tot = offerte.Count.ToString();
+            if (offerte != null) tot = offerte.Totrecs.ToString();
+            ListRet.Add("totalrecords", tot);
+            string tempListret = Newtonsoft.Json.JsonConvert.SerializeObject(ListRet);
+            ritorno.Add("resultinfo", tempListret);
+
+            //Carico lista statistiche visite per inserirla nella lista di ritorno
+            Dictionary<long, long> visite = new Dictionary<long, long>();
+            if (filteredData != null && filteredData.Count > 0)
+                visite = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData);
+
+            Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
+            foreach (Offerte _o in filteredData)
+            {
+                Dictionary<string, string> tmp = new Dictionary<string, string>();
+                string testotitolo = "";
+                string descrizione = "";
+                string datitecnici = "";
+                switch (lingua)
+                {
+                    case "GB":
+                        testotitolo = _o.DenominazioneGB;
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneGB, 30000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciGB, 30000, true));
+                        break;
+                    default:
+                        testotitolo = _o.DenominazioneI;
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneI, 30000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciI, 30000, true));
+                        break;
+                }
+
+
+                string linksezione = "";
+                SProdotto sottocategoria = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto _tmp) { return (_tmp.Lingua == lingua && (_tmp.CodiceSProdotto == _o.CodiceCategoria2Liv)); });
+                if (sottocategoria != null)
+                {
+
+                    linksezione = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv, "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                    //linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+                    linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+                }
+
+                if (string.IsNullOrEmpty(linksezione))
+                {
+                    Prodotto categoria = Utility.ElencoProdotti.Find(p => p.Lingua == lingua && (p.CodiceTipologia == _o.CodiceTipologia && p.CodiceProdotto == _o.CodiceCategoria));
+                    if (categoria != null)
+                    {
+                        linksezione = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(categoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                        //linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, SitemapManager.CleanUrl(categoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria);
+                        linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + categoria.Descrizione + "</a>";
+                    }
+                }
+
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString(), true, true);
+                // (potrei decidere anche di passare ls versione dell'immagine in base alla rispolizione   WelcomeLibrary.STATIC.Global.Viewportw
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                if (string.IsNullOrEmpty(pathimmagine))
+                    pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                string target = "";
+
+                //string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
+                {
+                    target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                //string titolo1 = testotitolo;
+                //string titolo2 = "<br/>";
+                //int i = testotitolo.IndexOf("\n");
+                //if (i != -1)
+                //{
+                //    titolo1 = testotitolo.Substring(0, i);
+                //    if (testotitolo.Length >= i + 1)
+                //        titolo2 = testotitolo.Substring(i + 1);
+                //}
+
+                string contactlink = "";
+                if (_o.Abilitacontatto) contactlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/Content_Tipo3.aspx?TipoContenuto=Richiesta&Lingua=" + lingua + "&idOfferta=" + _o.Id;
+                string printlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + _o.Id + "&Lingua=" + lingua;
+                string bcklink = SitemapManager.GeneraBackLink(_o.CodiceTipologia, _o.CodiceCategoria, lingua);
+
+                string pathavatar = "";
+                if (string.IsNullOrEmpty(pathavatar))
+                    pathavatar = ("~/images/sitespecific/" + _o.Autore + ".png").Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                string numeroviews = "";
+                if (visite != null && visite.ContainsKey(_o.Id))
+                    numeroviews = visite[_o.Id].ToString();
+                tmp.Add("views", numeroviews); //Numero di visualizzazioni della scheda
+
+                tmp.Add("contactlink", contactlink);
+                tmp.Add("printlink", printlink);
+                tmp.Add("bcklink", bcklink);
+                tmp.Add("link", link);
+                tmp.Add("linksezione", linksezione);
+                tmp.Add("titolo", testotitolo);
+                tmp.Add("descrizione", descrizione);
+                tmp.Add("datitecnici", datitecnici);
+                tmp.Add("image", pathimmagine);
+                tmp.Add("avatar", pathavatar);
+                tmp.Add("video", _o.linkVideo);
+
+                //DETTAGLI PER LA LISTA COMPLETA ALLEGATI //////////////////////////////////
+                if (filteredData != null && filteredData.Count == 1)  //Si riempiono solo per la scheda singola
+                {
+
+                    /****CREO IL LINK ALLA SCHEDA PRECEDENTRE E PROSSIMA RISPETTO ALLA SCHEDA ATTUALE **********/
+                    //Carichiamo la prossima e precedente scheda di settore !!!
+                    if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@Id"; }))
+                    {
+                        parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@Id"; }).Value = _o.Id;
+                    }
+                    else
+                    {
+                        SQLiteParameter pid = new SQLiteParameter("@Id", _o.Id);
+                        parColl.Add(pid);
+                    }
+                    if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceTIPOLOGIA"; }))
+                    {
+                        parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceTIPOLOGIA"; }).Value = _o.CodiceTipologia; ;
+                    }
+                    else
+                    {
+                        SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", _o.CodiceTipologia);
+                        parColl.Add(ptip);
+                    }
+                    if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria"; }))
+                    {
+                        parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria"; }).Value = _o.CodiceCategoria;
+
+                    }
+                    else
+                    {
+                        SQLiteParameter ptcat = new SQLiteParameter("@CodiceCategoria", _o.CodiceCategoria);
+                        parColl.Add(ptcat);
+                    }
+                    if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria2Liv"; }))
+                    {
+                        parColl.Find(delegate (SQLiteParameter _par) { return _par.ParameterName == "@CodiceCategoria2Liv"; }).Value = _o.CodiceCategoria2Liv; ;
+                    }
+                    else
+                    {
+                        SQLiteParameter pc2liv = new SQLiteParameter("@CodiceCategoria2Liv", _o.CodiceCategoria2Liv);
+                        parColl.Add(pc2liv);
+                    }
+                    Dictionary<string, Offerte> prevnextcontent = offDM.CaricaPrevNextOfferte(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl);
+                    if (prevnextcontent != null)
+                    {
+                        if (prevnextcontent.ContainsKey("prev") && prevnextcontent["prev"] != null)
+                        {
+
+                            string linkprev = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, prevnextcontent["prev"].DenominazionebyLingua(lingua), prevnextcontent["prev"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv, "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+                            //string linkprev = CommonPage.CreaLinkRoutes(null, false, lingua, prevnextcontent["prev"].DenominazionebyLingua(lingua), prevnextcontent["prev"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+                            tmp.Add("prevlink", linkprev);
+                            tmp.Add("prevlinktext", prevnextcontent["prev"].DenominazionebyLingua(lingua));
+
+                        }
+                        if (prevnextcontent.ContainsKey("next") && prevnextcontent["next"] != null)
+                        {
+                            string linknext = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, prevnextcontent["next"].DenominazionebyLingua(lingua), prevnextcontent["next"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv, "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+                            //string linknext = CommonPage.CreaLinkRoutes(null, false, lingua, prevnextcontent["next"].DenominazionebyLingua(lingua), prevnextcontent["next"].Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
+                            tmp.Add("nextlink", linknext);
+                            tmp.Add("nextlinktext", prevnextcontent["next"].DenominazionebyLingua(lingua));
+                        }
+                    }
+                    /*****************************************************************************************************/
+
+                    List<string> imagescomplete = new List<string>();
+                    List<string> imagesdesc = new List<string>();
+                    List<string> imagesratio = new List<string>();
+                    List<string> filescomplete = new List<string>();
+                    List<string> filesdesc = new List<string>();
+
+
+                    if ((_o != null) && (_o.FotoCollection_M.Count > 0))
+                    {
+                        foreach (Allegato a in _o.FotoCollection_M)
+                        {
+                            if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                            {
+                                //IMMAGINE
+                                string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
+                                tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+
+                                string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                                imagescomplete.Add(abspathimmagine);
+                                //a.Descrizione -> dove la mettiamo
+                                imagesdesc.Add(a.Descrizione);
+                                try
+                                {
+                                    //using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
+                                    using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile((tmppathimmagine).Replace("~", WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione).Replace("/", "\\").Replace("\\\\", "\\")))
+                                    {
+                                        imagesratio.Add(((double)tmpimg.Width / (double)tmpimg.Height).ToString());
+                                    }
+                                }
+                                catch
+                                { imagesratio.Add("1"); }
+                            }
+                            else
+                            {
+                                //a.Descrizione -> dove la mettiamo
+                                string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
+                                tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+
+                                tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                filescomplete.Add(tmppathimmagine);
+                                filesdesc.Add(a.Descrizione);
+
+                            }
+                        }
+                    }
+
+                    if (!_o.Promozione)
+                    {
+                        tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
+                        tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));
+                        tmp.Add("imagesratio", Newtonsoft.Json.JsonConvert.SerializeObject(imagesratio));
+                        tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
+                        tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////
+
+                linksurl.Add(_o.Id.ToString(), tmp);
+            }
+
+            string retlinksurl = Newtonsoft.Json.JsonConvert.SerializeObject(linksurl);
+            ritorno.Add("linkloaded", retlinksurl);
+
+            return ritorno;
+        }
+
+
+        /// <summary>
+        /// Rimpiazza link:(www.sitodavadere.it) con un link html
+        /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
+        /// <param name="strIn"></param>
+        /// <returns></returns>
         /// <summary>
         /// Rimpiazza link:(www.sitodavadere.it) con un link html
         /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
@@ -5549,7 +6033,7 @@ namespace WelcomeLibrary.DAL
             tags.Add("buto:(");
             tags.Add("imag:(");
             tags.Add("titl:(");
-
+            tags.Add("vide:(");
 
             string target = "_blank";
             string urlcorretto = "";
@@ -5868,9 +6352,9 @@ namespace WelcomeLibrary.DAL
                     if (!nolink)
                     {
                         if (string.IsNullOrWhiteSpace(url))
-                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\">" + testourl + "</span>");
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline-block\" class=\"divbuttonstyle\">" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
 
 
 
@@ -6028,6 +6512,74 @@ namespace WelcomeLibrary.DAL
             ret = strIn;
 
 
+            a = strIn.ToLower().IndexOf("vide:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    else
+                        url = "";
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (!string.IsNullOrWhiteSpace(url))
+                        {
+                            string texthtml = "<div class=\"responsive-video\" style=\"display:block;\">";
+                            texthtml += " <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"\" src=\"" + urlcorretto + "\"></iframe>";
+                            texthtml += "</div>";
+                            strIn = strIn.Replace(origtext, texthtml);
+                        }
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("vide:(");
+
+            }
+            ret = strIn;
+
             a = strIn.ToLower().IndexOf("titl:(");
             while (a != -1)
             {
@@ -6094,8 +6646,146 @@ namespace WelcomeLibrary.DAL
 
 
 
+            a = strIn.ToLower().IndexOf("cnfg:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        //testourl = dati[1];
+
+                        testourl = ConfigManagement.ReadKey(dati[1]);
+
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("cnfg:(");
+            }
+            ret = strIn;
+
+
+
+            a = strIn.ToLower().IndexOf("rsrc:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        //testourl = dati[1];
+                        string lingua = GetLinguaFromActualCulture(System.Threading.Thread.CurrentThread.CurrentCulture);
+                        testourl = WelcomeLibrary.UF.ResourceManagement.ReadKey("Common", lingua, dati[1]).Valore;
+
+                    }
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("rsrc:(");
+            }
+            ret = strIn;
+
             return ret;
 
+        }
+
+        public static string GetLinguaFromActualCulture(System.Globalization.CultureInfo currentCulture)
+        {
+            string lingua = ConfigManagement.ReadKey("deflanguage");
+
+            switch (currentCulture.TwoLetterISOLanguageName.ToLower())
+            {
+                case "it":
+                    lingua = "I";
+                    break;
+                case "en":
+                    lingua = "GB";
+                    break;
+                case "ru":
+                    lingua = "RU";
+                    break;
+                default:
+                    lingua = "GB";
+                    break;
+            }
+            return lingua;
         }
 
         public static string ReplaceAbsoluteLinks(string testo)

@@ -517,7 +517,7 @@ namespace WelcomeLibrary.UF
                 //output.Text = response;
 
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -546,7 +546,7 @@ namespace WelcomeLibrary.UF
                 rethtml = response;
 
             }
-            catch (Exception ex)
+            catch 
             {
 
             }
@@ -588,7 +588,7 @@ namespace WelcomeLibrary.UF
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
 
             }

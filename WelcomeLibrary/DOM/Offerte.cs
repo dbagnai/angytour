@@ -794,7 +794,7 @@ namespace WelcomeLibrary.DOM
 
         public void DenominazionebyLingua(string Lingua, string value)
         {
-            string ret = "";
+           
             switch (Lingua)
             {
                 case "GB":

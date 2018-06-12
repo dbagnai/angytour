@@ -75,7 +75,6 @@ function CaricaSliderDataBanner(controlid) {
     //per la lingua usare lng
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[controlid + "params"];
-
     var page = globalObject[controlid + "pagerdata"].page;
     var pagesize = globalObject[controlid + "pagerdata"].pagesize;
     var enablepager = globalObject[controlid + "pagerdata"].enablepager;
@@ -91,18 +90,21 @@ function CaricaSliderDataBanner(controlid) {
 
                 if (result !== null && result != '' && callafterfilter != null) {
                     var parseddata = JSON.parse(result);
+
                     var temp = parseddata["resultinfo"];
                     localObjects["resultinfo"] = JSON.parse(temp);
+
                     var totalrecords = localObjects["resultinfo"].totalrecords;
                     globalObject[controlid + "pagerdata"].totalrecords = totalrecords;
+
                     var data = "{ \"datalist\":" + parseddata["data"];
                     data += "}";
                     localObjects["dataloaded"] = data;
+
                     var datalink = parseddata["linkloaded"];  //link creati presi da tabella
-                    //Inserisco i valori nella memoria generale che contiene i valori per tutti i componenti
-                    // globalObject[controlid] = localObjects;
                     localObjects["linkloaded"] = JSON.parse(datalink);
-                    callafterfilter(localObjects, controlid);
+
+                    callafterfilter(controlid, localObjects);
                 } else
                     console.log(result);
             }
@@ -114,10 +116,10 @@ function CaricaSliderDataBanner(controlid) {
 };
 
 
-function renderSliderNotPagedBanner(localObjects, controlid) {
+function renderSliderNotPagedBanner(controlid, localObjects) {
     BindSliderBanner(controlid, localObjects);//I dati sono già paginati all'origine
 };
-//function renderIsotopePaged(localObjects, controlid) {
+//function renderIsotopePaged(controlid, localObjects) {
 //    /*Da ultimare  con la paginazione e sistemare il paginatore   .......
 //     * Passando nella renderPager
 //     ................... */
@@ -148,35 +150,23 @@ function BindSliderBanner(el, localObjects) {
     /*-----------------------*/
 
     var str = $($('#' + el)[0]).outerHTML();
-    //$('#' + el).parent().parent().show();
-
     var jquery_obj = $(str).html();
-    //var outerhtml = jquery_obj.outerHTML();
-    // var innerHtml = jquery_obj.html();
-    //var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
     jquery_obj = $(jquery_obj).html();
-    jquery_obj = $(jquery_obj);
-    var htmlout = "";
-    var htmlitem = "";
-    var controlDiv = $($('#' + el + ' ul')[0]).html('');
-    //controlDiv.empty();
+    jquery_obj = $(jquery_obj); //elemento li
+    var controlDiv = $($('#' + el + ' ul')[0]).html(''); //Vuoto i valori presenti prima di aggiungerne
     for (var j = 0; j < data.length; j++) {
-        htmlitem = "";
-        //htmlitem = FillBindControls(jquery_obj, data[j]);
-        //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj.wrap('<p>').parent(), data[j], localObjects, "",
             function (ret) {
-                //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
                 var test = $('#' + el + ' ul')[0];
                 $(test).append(ret.html()) + "\r\n";
             });
     }
 
     initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
-
     CleanHtml($('#' + el));
     CleanHtml($('#' + el).parent());
 };
+
 //https://www.themepunch.com/faq/wrap-lines-of-text-jquery-version/
 function initSlider(idDiv, width, height) {
     // jQuery(document).ready(function ($) {
@@ -187,8 +177,6 @@ function initSlider(idDiv, width, height) {
         delay: 5000,
         startwidth: width,
         startheight: height,
-        //startwidth: 1170,
-        //startheight: 550,
         onHoverStop: "on",
         thumbWidth: 80,
         thumbHeight: 50,

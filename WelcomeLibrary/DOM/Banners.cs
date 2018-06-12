@@ -94,6 +94,8 @@ namespace WelcomeLibrary.DOM
             set { _DataInserimento = value; }
         }
 
+ 
+
         public string AlternateTextbyLingua(string Lingua)
         {
             string ret = "";
@@ -176,7 +178,7 @@ namespace WelcomeLibrary.DOM
             }
             return ret;
         }
-        public void NavigateUrlbyLingua(string Lingua,string value)
+        public void NavigateUrlbyLingua(string Lingua, string value)
         {
             switch (Lingua)
             {
@@ -231,5 +233,25 @@ namespace WelcomeLibrary.DOM
             this.sezione = tmp.sezione;
             this.progressivo = tmp.progressivo;
         }
+
+        public Dictionary<string, string> GetDictionaryElements()
+        {
+            Dictionary<string, string> _tmp = new Dictionary<string, string>();
+            _tmp["progressivo"] = this.progressivo.ToString();
+            _tmp["Id"] = this.Id.ToString();
+            _tmp["ImageUrl"] = this.ImageUrl;
+            _tmp["NavigateUrl"] = this.NavigateUrl;
+            _tmp["AlternateText"] = this.AlternateText;
+            _tmp["AlternateTextGB"] = this.AlternateTextGB;
+            _tmp["ImageUrlGB"] = this.ImageUrlGB;
+            _tmp["NavigateUrlGB"] = this.NavigateUrlGB;
+            _tmp["AlternateTextRU;"] = this.AlternateTextRU;
+            _tmp["ImageUrlRU"] = this.ImageUrlRU;
+            _tmp["NavigateUrlRU"] = this.NavigateUrlRU;
+            _tmp["sezione"] = this.sezione;
+            _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", this.DataInserimento);
+            return _tmp;
+        }
+
     }
 }

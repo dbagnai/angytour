@@ -1,164 +1,236 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:52646/I/catalogo/catalogo</loc>
-    <lastmod>2018-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
     <loc>http://localhost:52646/I/blog/blog</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/notizie-18</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/revisioni-19</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/blog/normative-19</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/video-25</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/servizi/servizi</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/servizi/privati-26</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/servizi/aziende-27</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/servizi/adr-29</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/alloggi/alloggi</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/alloggi/aziende-21</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/alloggi/privati-22</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/alloggi/adr-23</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/offerte/offerte</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/gallery/gallery</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/escursioni-21</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-37</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/wellness-22</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-36</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/cibo-23</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-35</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/vino-24</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/promozioni/promozioni</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-34</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristorante/ristorante</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-33</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/fotogallery-3-sottotitolo-25</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-32</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/fotogallery-2-sottotitolo-24</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/alloggi/la-pioppaia-sottotitolo-31</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristorante/ampio-parcheggio-sottotitolo-ampio-parcheggio-23</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/blog/notizia-1-sottotitolo-notizia-1-30</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/ristorante/hotel-sottotitolo-hotel-22</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-29</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/catalogo/test-prod-1-sdsds-21</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-28</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/promozioni/offerta-test-sottotitolo-20</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-27</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/foto-gallery-1-sottotitolo-19</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-26</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/come-raggiungere-il-primo-posto-su-google-personas-una-nuova-prospettiva-limportanza-del-contesto-4</loc>
-    <lastmod>2018-05-19</lastmod>
+    <loc>http://localhost:52646/I/alloggi/belvedere-sottotitolo-25</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/alloggi/granaio-sottotitolo-24</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-23</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-22</loc>
+    <lastmod>2018-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/I/test-prod-1-sdsds-21</loc>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-internet-news-sottotitolo-3</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-2-sottotitolo-c-2</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-13-sottotitolo-16</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-12-sottotitolo-15</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-11-sottotitolo-14</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-13</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-1</loc>
-    <lastmod>2018-05-19</lastmod>
+    <lastmod>2018-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

@@ -267,7 +267,7 @@
                                         href='<%# CreaLinkRoutes(Session, false, Lingua, CleanUrl(Eval("Denominazione" + Lingua).ToString()), Eval("Id").ToString(), Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString())%>'
                                         target="_self" title='<%# CleanInput(ConteggioCaratteri(Eval("Denominazione" + Lingua).ToString(), 300, true))%>'>
                                         <asp:Image ID="Anteprima" runat="server" class="img-responsive"
-                                            ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"), Eval("CodiceTipologia").ToString(), Eval("Id").ToString())%>'
+                                            ImageUrl='<%#  WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"), Eval("CodiceTipologia").ToString(), Eval("Id").ToString())%>'
                                             Visible='<%#  !ControlloVideo(Eval("FotoCollection_M.FotoAnteprima"))%>' /></a>
                                     <div class="item-img-overlay">
                                         <a id="a8" runat="server" onclick="javascript:JsSvuotaSession(this)"
@@ -411,7 +411,7 @@
                                                 href='<%# CreaLinkRoutes(Session, false, Lingua, CleanUrl(Eval("Denominazione" + Lingua).ToString()), Eval("Id").ToString(), Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString())%>'
                                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(Eval("Denominazione" + Lingua).ToString(), 300, true))%>'>
                                                 <asp:Image ID="Anteprima" runat="server" Style="max-width: 55px; max-height: 55px"
-                                                    ImageUrl='<%#  filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"), Eval("CodiceTipologia").ToString(), Eval("Id").ToString())%>'
+                                                    ImageUrl='<%#  WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("FotoCollection_M.FotoAnteprima"), Eval("CodiceTipologia").ToString(), Eval("Id").ToString())%>'
                                                     Visible='<%#  !ControlloVideo(Eval("FotoCollection_M.FotoAnteprima"))%>' />
                                             </a>
                                         </div>

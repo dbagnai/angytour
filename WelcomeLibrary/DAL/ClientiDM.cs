@@ -423,7 +423,7 @@ namespace WelcomeLibrary.DAL
                 }
 
             }
-            catch (Exception error)
+            catch
             {
                 //throw new ApplicationException("Errore Caricamento Cliente :" + error.Message, error);
             }

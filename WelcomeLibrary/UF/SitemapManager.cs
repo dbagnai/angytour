@@ -6,6 +6,7 @@ using WelcomeLibrary.DOM;
 using System.Text.RegularExpressions;
 using System.Data.SQLite;
 using WelcomeLibrary.DAL;
+using Newtonsoft.Json;
 
 namespace WelcomeLibrary.UF
 {
@@ -45,7 +46,71 @@ namespace WelcomeLibrary.UF
 
             return ret;
         }
+        public static string GeneraBackLink(string tipologia, string categoria, string lingua, bool usacategoria = true)
+        {
+            string ret = "";
+            TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == tipologia); });
+            if (item != null)
+            {
+                string testourl = item.Descrizione;
+                Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == lingua && (tmp.CodiceTipologia == tipologia && tmp.CodiceProdotto == categoria)); });
+                if (catselected != null && usacategoria)
+                    testourl = catselected.Descrizione;
+                string tmpcategoria = categoria;
+                if (!usacategoria) tmpcategoria = "";
 
+               // ret = CommonPage.CreaLinkRoutes(null, false, lingua, (testourl), "", tipologia, tmpcategoria);
+                bool gen = false;
+                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, (testourl), "", tipologia, tmpcategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+            }
+            return ret;
+        }
+        public static Dictionary<string, string> creaMenuSezioni(string min, string max, string lingua)
+        {
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+            int Min = Convert.ToInt32(min);
+            int Max = Convert.ToInt32(max);
+            List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte temp) { return (temp.Lingua == lingua); });
+            sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < Min || Convert.ToInt32(t.Codice.Substring(3)) > Max);
+            sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+
+            string tempTpo = Newtonsoft.Json.JsonConvert.SerializeObject(sezioni, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+            });
+            ret.Add("data", tempTpo);
+
+            Dictionary<string, string> tmp = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
+            foreach (TipologiaOfferte _o in sezioni)
+            {
+                //string link = offerteDM.CreaLinkRoutes(null, false, lingua, CleanUrl(_o.Descrizione), "", _o.Codice);
+                bool gen = false;
+                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
+                {
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                tmp = new Dictionary<string, string>();
+                tmp.Add("link", link);
+                tmp.Add("titolo", _o.Descrizione);
+
+                linksurl.Add(_o.Codice, tmp);
+            }
+            string retlinksurl = Newtonsoft.Json.JsonConvert.SerializeObject(linksurl);
+            ret.Add("linkloaded", retlinksurl);
+
+            return ret;
+        }
 
         /// <summary>
         /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
@@ -458,9 +523,9 @@ namespace WelcomeLibrary.UF
                 if (nolink)
                 {
                     if (invio != -1)
-                        ritorno = testo.Substring(0, invio) + "";
+                        ritorno = testo.Substring(0, invio) + " " + testoAggiunto;
                     else
-                        ritorno = testo.Substring(0, caratteri) + "";
+                        ritorno = testo.Substring(0, caratteri) + " " + testoAggiunto;
                 }
                 else
                 {
@@ -640,7 +705,7 @@ namespace WelcomeLibrary.UF
 
 
             }
-            catch (Exception error)
+            catch
             {
                 // throw new ApplicationException("Errore Caricamento tabella urlrewriting :" + error.Message, error);
             }
@@ -692,7 +757,7 @@ namespace WelcomeLibrary.UF
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch
             {
                 //  throw new ApplicationException("Errore, inserimento/aggiornamento urlrewrite :" + error.Message, error);
             }
@@ -712,7 +777,7 @@ namespace WelcomeLibrary.UF
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch 
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
@@ -746,7 +811,7 @@ namespace WelcomeLibrary.UF
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
@@ -772,7 +837,7 @@ namespace WelcomeLibrary.UF
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch (Exception error)
+            catch 
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
