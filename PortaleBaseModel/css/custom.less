@@ -1,13 +1,16 @@
 ﻿/*@import "~/css/less/bootstrap/bootstrap.less";*/
+@import url('https://fonts.googleapis.com/css?family=Amiri:400,700|Frank+Ruhl+Libre:300,400,500,700|Lato:300,400|Libre+Baskerville:400,700|Merriweather+Sans:300,400,700|Merriweather:300,400,700|Montserrat|Noto+Sans:400,700|Noto+Serif:400,700|Open+Sans:300,400,700|PT+Sans+Narrow:400,700|Playfair+Display+SC:700|Raleway|Roboto:300,400|Rubik:300,300i,400,700|Song+Myung|Source+Sans+Pro:300,400,700');
+
 /*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
-@bg-primary-color: #86754f; /*logo - sfondo-pulsanti - fixed-top*/
+@bg-primary-color: #1a3661; /*logo - sfondo-pulsanti - fixed-top*/
 @bg-secondary-color: fade(@bg-primary-color, 40%); /*footer-link*/
 /*@bg-secondary-color: #dac8a0;*/
 @bg-light-color: fade(@bg-primary-color, 10%); /*footer-social e banner*/
 /*@bg-light-color: #f5f0e5;*/
-@bg-dark-color: #555; /*footer-bottom*/
+@bg-dark-color: darken(@bg-primary-color, 15%); /*footer-bottom*/
+/*@bg-dark-color: #555;*/
 /**/
 @primary-color: #232323; /*titoli-principali*/
 @secondary-color: #555; /*menu - sotto-titoli-principali - body*/
@@ -17,10 +20,14 @@
 /*----------------------------------
 //////////////| FONT |//////////////
 ----------------------------------*/
-@primary-font: 'Raleway', sans-serif; /*menu - titoli-principali*/
+@primary-font: 'Frank Ruhl Libre', serif; /*menu - titoli-principali*/
 @secondary-font: 'Raleway', sans-serif; /*sotto-titoli-principali*/
 @base-font: 'Lato', sans-serif; /*body*/
 @alternative-font: 'EBGaramond12-Regular', serif;
+/*@primary-font: 'Raleway', sans-serif;*/ /*menu - titoli-principali*/
+/*@secondary-font: 'Raleway', sans-serif;*/ /*sotto-titoli-principali*/
+/*@base-font: 'Lato', sans-serif;*/ /*body*/
+/*@alternative-font: 'EBGaramond12-Regular', serif;*/
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
@@ -56,6 +63,7 @@
 @body-size: 1.35rem;
 @body-color: @secondary-color;
 @body-font: @base-font;
+@body-weight: 300;
 /**/
 @scheda-size: 1.1rem;
 @scheda-color: @secondary-color;
@@ -280,12 +288,18 @@
     display: block;
 }
 
-p {
+p, p.lead, .lead p {
     color: @body-color;
     font-family: @body-font;
     font-size: @body-size;
+    font-weight: @body-weight;
     line-height: 1.4 !important;
-    font-weight: 400;
+}
+
+body, html, button, input, select, textarea {
+    &:extend(p);
+    font-size: 1em;
+    background-color: transparent;
 }
 /*body {
     font-family: 'Raleway', sans-serif;
@@ -651,6 +665,39 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 /*----------------------------------
+-------- BANNER STAFF --------
+----------------------------------*/
+.isotope-staff a .rounded {
+    background-color: @banner-navigazione-background;
+    padding: @banner-navigazione-padding;
+    border-radius: 0 !important;
+    text-align: center;
+    margin: 5% 5% 0 0;
+}
+
+.isotope-staff .work-subcaption {
+    background-color: @bg-light-color;
+    height: 168px;
+}
+
+.isotope-staff .work-subcaption .work-title {
+    color: @title-banner-color;
+    font-family: @title-banner-font;
+    font-size: @title-banner-navigazione-size;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 0px;
+}
+
+.isotope-staff .work-subcaption .work-desc {
+    color: @subtitle-banner-color;
+    font-family: @subtitle-banner-font;
+    font-size: @subtitle-banner-navigazione-size;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+/*----------------------------------
 ---------- BANNER OFFERTA ----------
 ----------------------------------*/
 .titolo-offerta {
@@ -729,6 +776,12 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     font-family: @scheda-font;
     line-height: 1.6rem;
 }
+/*----------------------------------
+------- SCHEDA DETAILS STAFF -------
+----------------------------------*/
+.staff-image img {
+    height: auto !important
+}
 
 /*----------------------------------
 --- CARUSEL SCHEDA DETAILS BLOG ----
@@ -740,7 +793,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 /*----------------------------------
----------- FAQ ----------
+---------------- FAQ ---------------
 ----------------------------------*/
 .faq-section {
     padding-top: 0px;
@@ -782,9 +835,106 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 .faq-section .card .card-header a.panel-title h4 {
+    font-family: @body-font;
     padding: 1.3rem 2rem;
     margin-bottom: 0;
     font-weight: 700;
     font-size: 1rem;
     line-height: 22px;
+}
+
+/*----------------------------------
+--------- EFFETTO PULSANTE ---------
+----------------------------------*/
+@media screen and (min-width: 414px) {
+    .menuzord-menu * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+    }
+
+    .menuzord-menu a {
+        position: relative;
+        padding: 8px 14px !important;
+    }
+
+    .menuzord-menu a:hover {
+        color: lighten(@bg-primary-color, 30%) !important;
+        font-weight: 500 !important;
+    }
+
+    .menuzord.white .menuzord-menu > li.active > a,
+    .menuzord.white .menuzord-menu > li:hover > a,
+    .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
+        font-weight: 500 !important;
+    }
+
+    /*opzione 1*/
+    .menuzord-menu a:before,
+    .menuzord-menu a:after {
+        height: 14px;
+        width: 14px;
+        position: absolute;
+        content: '';
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+        opacity: 0;
+    }
+
+    .menuzord-menu a:before {
+        left: 0;
+        top: 0;
+        border-left: 2px solid lighten(@bg-primary-color, 30%);
+        border-top: 2px solid lighten(@bg-primary-color, 30%);
+        -webkit-transform: translate(100%, 50%);
+        transform: translate(100%, 50%);
+    }
+
+    .menuzord-menu a:after {
+        right: 0;
+        bottom: 0;
+        border-right: 2px solid lighten(@bg-primary-color, 30%);
+        border-bottom: 2px solid lighten(@bg-primary-color, 30%);
+        -webkit-transform: translate(-100%, -50%);
+        transform: translate(-100%, -50%);
+    }
+
+    .menuzord-menu a:hover:before,
+    .menuzord-menu .current a:before,
+    .menuzord-menu a:hover:after,
+    .menuzord-menu .current a:after {
+        -webkit-transform: translate(0%, 0%);
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+
+    /*opzione 2*/
+    /*.menuzord-menu a:before,
+    .menuzord-menu a:after {
+        height: 1px;
+        position: absolute;
+        content: '';
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+        background-color: lighten(@bg-primary-color, 30%);
+        width: 0;
+    }
+
+    .menuzord-menu a:before {
+        top: 0;
+        left: 0;
+    }
+
+    .menuzord-menu a:after {
+        bottom: 0;
+        right: 0;
+    }
+
+    .menuzord-menu a:hover:before,
+    .menuzord-menu .current a:before,
+    .menuzord-menu a:hover:after,
+    .menuzord-menu .current a:after {
+        width: 100%;
+    }*/
 }

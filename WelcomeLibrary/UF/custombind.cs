@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
+using System.Text.RegularExpressions;
 
 namespace WelcomeLibrary.UF
 {
@@ -20,7 +21,7 @@ namespace WelcomeLibrary.UF
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(text);
             var findclasses = doc.DocumentNode.Descendants().Where(d =>
-                   d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("inject") && d.Attributes.Contains("params")
+                   d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("inject") && !d.Attributes["class"].Value.Contains("clientsideinject") && d.Attributes.Contains("params")
                );
             if ((findclasses != null) && (findclasses.Count() > 0))
             {
@@ -93,7 +94,7 @@ namespace WelcomeLibrary.UF
                         if (!dictpars.ContainsKey("filtrosezione")) return;
 
                         ///////////////////////////////////////////////////////////
-                        return; // da togliere per abilitare il  nuovo sistema
+                        // da togliere per abilitare il  nuovo sistema
                         ///////////////////////////////////////////////////////////
 
                         ///////////////////////////////////////////////////////////
@@ -167,9 +168,9 @@ namespace WelcomeLibrary.UF
                                     node.Attributes["params"].Remove();
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    //aggiungo un comando javascript da eseguire dopo il binding
+                                    //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    jscommands.Add(containerid, "initSlider('" + containerid + "'," + dictpars["width"] + "," + dictpars["height"] + ");");
+                                    jscommands.Add(containerid, "initSlider('" + containerid + "'," + dictpars["width"] + "," + dictpars["height"] + ")");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -371,16 +372,210 @@ namespace WelcomeLibrary.UF
                                 nodetobind.Attributes.Add("data-thumb", pathImg);
                         }
                     }
-                    else if (nodetobind.Name == "img" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("revolution"))
+                    else if (nodetobind.Name == "img")
                     {
                         string completepath = "";
                         string idscheda = "";
                         if (itemdic.ContainsKey(property))
                         {
                             idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("image"))
+                                completepath = linkloaded[idscheda]["image"];
+                            if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("img-ant") && completepath.ToLower().LastIndexOf("dummylogo") == -1)
+                            {
+                                int position = completepath.LastIndexOf('/');
+                                var filename = completepath.Substring(position + 1);
+                                filename = filename.Replace("-xs.", ".");
+                                filename = filename.Replace("-sm.", ".");
+                                filename = filename.Replace("-md.", ".");
+                                filename = filename.Replace("-lg.", ".");
+                                completepath = completepath.Substring(0, position + 1) + "ant" + filename;
+                            }
+                            if (completepath != null && completepath != "")
+                            {
+                                //completepath += "?vw=" + window.outerWidth; 
+                                nodetobind.SetAttributeValue("src", completepath);
+                                //if (nodetobind.Attributes.Contains("src"))
+                                //    nodetobind.Attributes["src"].Value = completepath;
+                                //else
+                                //    nodetobind.Attributes.Add("src", completepath);
+                            }
+                            if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("lazy"))
+                            {
+                                nodetobind.SetAttributeValue("data-src", completepath);
+
+                                //if (nodetobind.Attributes.Contains("data-src"))
+                                //    nodetobind.Attributes["data-src"].Value = completepath;
+                                //else
+                                //    nodetobind.Attributes.Add("data-src", completepath);
+
+                                nodetobind.SetAttributeValue("src", "");
+                            }
 
 
                         }
+                    }
+                    else if (nodetobind.Name == "img" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("avatar"))
+                    {
+                        string completepath = "";
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("avatar"))
+                                completepath = linkloaded[idscheda]["avatar"];
+
+                            nodetobind.SetAttributeValue("src", completepath);
+                        }
+                    }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("flexmaincontainer"))
+                    {
+                        List<string> imgslist = new List<string>();
+                        List<string> imgslistdesc = new List<string>();
+                        List<string> imgslistratio = new List<string>();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imageslist") && !string.IsNullOrEmpty(linkloaded[idscheda]["imageslist"]))
+                                imgslist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imageslist"]);
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesdesc") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesdesc"]))
+                                imgslistdesc = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesdesc"]);
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesratio") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesratio"]))
+                                imgslist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
+                            //foreach (string img in imgslist)
+                            StringBuilder sb = new StringBuilder();
+                            for (int j = 0; j < imgslist.Count(); j++)
+                            {
+                                try
+                                {
+                                    /*<div class="slide" data-thumb="" >
+                                   <div class="slide-content" style="position:relative;padding:1px">
+                                       <img itemprop="image" style="border:none" src="" alt="" />
+                                       <div class="divbuttonstyle" style="position:absolute;left:30px;bottom:30px;padding:10px;text-align:left;color:#ffffff;">
+                                           <a style="color:#ffffff" href="" target="" title="">&nbsp</a>
+                                       </div>
+                                   </div>
+                               </div >*/
+
+                                    string img = imgslist[j];
+
+                                    sb.Append("<div class=\"slide\" data-thumb=\"");
+                                    sb.Append(img);
+                                    sb.Append("\">");
+                                    sb.Append("<div class=\"slide-content\"  style=\"position:relative;padding: 1px\">");
+
+                                    string imgstyle = "max-width:100%;height:auto;";
+                                    string maxheight = "";
+                                    if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
+                                    {
+                                        string inlinestyle = nodetobind.Attributes["style"].Value;
+                                        //parse style to find an element
+                                        foreach (var entries in inlinestyle.Split(';'))
+                                        {
+                                            string[] values = entries.Split(':');
+                                            if (values != null && values.Count() == 2)
+                                            {
+                                                if (values[0].ToLower() == "max-height") maxheight = values[1];
+                                                //newStyles += values.Join(':') + ";";
+                                            }
+                                        }
+                                    }
+                                    if (maxheight != "")
+                                    {
+                                        maxheight = maxheight.Replace("px", "");
+                                        int calcheight = 0;
+                                        if (int.TryParse(maxheight, out calcheight))
+                                        {
+                                            int actwidth = 0;
+                                            if (int.TryParse(WelcomeLibrary.STATIC.Global.Viewportw, out actwidth))
+                                                if (calcheight > actwidth) calcheight = actwidth;
+                                            try
+                                            {
+                                                double ar = 1;
+                                                if (double.TryParse(imgslistratio[j], out ar))
+                                                    if (ar < 1)
+                                                    {
+                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                    }
+                                            }
+                                            catch
+                                            {
+                                            };
+                                        }
+                                    }
+                                    //  contenutoslide += "<a rel=\"prettyPhoto[pp_gal]\" href=\"" + imgslist[j] + "\">';
+                                    sb.Append("<img class=\"zoommgfy\" itemprop=\"image\"  style=\"border:none;" + imgstyle + "\" src=\"");
+                                    sb.Append(imgslist[j]);
+                                    sb.Append("\" ");
+                                    sb.Append(" data-magnify-src=\"");
+                                    sb.Append(imgslist[j]);
+                                    sb.Append("\" ");
+
+                                    /*Livello di ingrandimento della lente (è fatto sempre rispetto alla dimensione dell'immagine naturale che qui gli forzo!!!)*/
+                                    double ar1 = 1;
+                                    if (double.TryParse(imgslistratio[j], out ar1))
+                                    {
+                                        double imgwidth = 1100;
+                                        double imgheight = (double)imgwidth / ar1;
+                                        sb.Append(" data-magnify-magnifiedwidth=\"");
+                                        sb.Append(Math.Floor(imgwidth).ToString());
+                                        sb.Append("\" ");
+                                        sb.Append(" data-magnify-magnifiedheight=\"");
+                                        sb.Append(Math.Floor(imgheight).ToString());
+                                        sb.Append("\" ");
+                                    }
+                                    /*Livello di ingrandimento della lente*/
+                                    string descriptiontext = "";
+                                    if (imgslistdesc.Count > j)
+                                        descriptiontext = imgslistdesc[j];
+                                    sb.Append(" alt=\"" + descriptiontext + "\" />");
+
+                                    sb.Append("</div>");
+                                    sb.Append("</div>");
+                                }
+                                catch
+                                {
+                                }
+                            }
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml = contenutoslide;
+                            if (nodetobind.ParentNode != null && !string.IsNullOrEmpty(contenutoslide))
+                                if (nodetobind.ParentNode.Attributes.Contains("style"))
+                                {
+                                    nodetobind.ParentNode.Attributes["style"].Value = nodetobind.ParentNode.Attributes["style"].Value.Replace("display:none", "");
+                                    nodetobind.ParentNode.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.ParentNode.Attributes.Add("style", "display:block");
+
+                        }
+                    }
+                    else if (nodetobind.Name == "ul" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("flexnavcontainer"))
+                    {
+                        List<string> imgslist = new List<string>();
+                        List<string> imgslistdesc = new List<string>();
+                        //List<string> imgslistratio = new List<string>();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imageslist") && !string.IsNullOrEmpty(linkloaded[idscheda]["imageslist"]))
+                                imgslist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imageslist"]);
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesdesc") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesdesc"]))
+                                imgslistdesc = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesdesc"]);
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesratio") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesratio"]))
+                            //    imgslist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
+                            StringBuilder sb = new StringBuilder();
+                            if (imgslist.Count() > 1)
+                                for (int j = 0; j < imgslist.Count(); j++)
+                                {
+                                    sb.Append("<li> <img style=\"padding:5px\" src=\"");
+
+                                }
+                        }
+
                     }
                     //da continuare .... col mapping .............. da FillBindControls
 
@@ -405,7 +600,7 @@ namespace WelcomeLibrary.UF
             ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands
-            jscode += "console.log('inject from custom bind')\r\n";
+            jscode += "console.log('inject from custom bind');\r\n";
             if (jscommands != null)
                 foreach (KeyValuePair<string, string> kv in jscommands)
                 {

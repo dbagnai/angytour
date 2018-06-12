@@ -954,7 +954,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         var bindprophref = "";
                         var bindproptitle = "";
 
-                        if (dataitem.hasOwnProperty(proprarr[0])) 
+                        if (dataitem.hasOwnProperty(proprarr[0]))
                             idscheda = dataitem[proprarr[0]];
                         if ($(this).attr("href") != null)
                             bindprophref = $(this).attr("href");
@@ -1003,8 +1003,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     }
                     else if ($(this).is("img")) {
                         var completepath = "";
-                        var idallegato = dataitem[proprarr[0]];
                         if (dataitem.hasOwnProperty(proprarr[0])) {
+                            var idallegato = dataitem[proprarr[0]];
+
                             CompleteUrlPrimaryImg(localObjects, idallegato, true, usecdn, function (imgret) {
                                 completepath = imgret;
                             });
@@ -1031,8 +1032,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         //    $(this).attr("src", '');
                     }
                     else if ($(this).is("img") && $(this).hasClass('avatar')) {
-                        var idallegato = dataitem[proprarr[0]];
                         if (dataitem.hasOwnProperty(proprarr[0])) {
+                        var idallegato = dataitem[proprarr[0]];
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
                             //pathImg += "?vw=" + window.outerWidth;
@@ -1048,6 +1049,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         var imgslistratio = "";
                         var contenutoslide = "";
                         var idallegato = dataitem[proprarr[0]];
+
                         /*Lista completa degli allegati per l'immobile*/
                         CompleteUrlListImgs(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslist = ret;
@@ -1055,7 +1057,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         CompleteUrlListImgsDesc(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslistdesc = ret;
                         })
-
                         CompleteUrlListImgsRatio(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslistratio = ret;
                         })
@@ -1074,7 +1075,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
 
                                 var descriptiontext = "";
 
-                                contenutoslide += '<div class="slide"  data-thumb="';
+                                contenutoslide += '<div class="slide" data-thumb="';
                                 contenutoslide += imgslist[j];
                                 contenutoslide += '">';
                                 contenutoslide += '<div class="slide-content"  style="position:relative;padding:1px">';
@@ -1097,7 +1098,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 }
 
                                 //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
-
                                 contenutoslide += '<img class="zoommgfy" itemprop="image"  style="border:none;' + imgstyle + '" src="';
                                 //var pathImg = imgslist[j] + "?vw=" + window.outerWidth;
                                 contenutoslide += imgslist[j];
@@ -1117,14 +1117,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 contenutoslide += '" ';
                                 /*Livello di ingrandimento della lente*/
                                 //contenutoslide += ' alt = "" />';
-
                                 //  contenutoslide += '</a>';
-
                                 try {
                                     descriptiontext = imgslistdesc[j];
-
-
-
                                     //if (descriptiontext !== '') {
                                     //    contenutoslide += '<div class="divbuttonstyle" style="position:absolute;left:30px;bottom:30px;padding:10px;text-align:left;color:#ffffff;">';
                                     //    contenutoslide += descriptiontext;
@@ -1133,7 +1128,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 } catch (e) {
                                 };
                                 contenutoslide += ' alt="' + descriptiontext + '" />';
-
 
                                 contenutoslide += '</div>';
                                 contenutoslide += '</div>';
@@ -1165,7 +1159,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             for (var j = 0; j < imgslist.length; j++) {
                                 try {
                                     /*<li > <img src="" alt="" style="padding:5px" /></li > */
-                                    contenutoslide += '<li > <img style="padding:5px" src="';
+                                    contenutoslide += '<li> <img style="padding:5px" src="';
                                     var position = imgslist[j].lastIndexOf('/');
                                     var filename = imgslist[j].substr(position + 1);
                                     filename = filename.replace(/-xs./g, ".");
@@ -1185,20 +1179,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if (contenutoslide !== '')
                             $(this).parent().show();
 
-                    }
-                    else if ($(this).is("div")
-                        && ($(this).hasClass('bookingtool'))
-                    ) {
-                        var idrisorsa = dataitem[proprarr[0]];
-                        bookingtool.initbookingtool(idrisorsa, $(this).attr("id"));
-                    }
-                    else if ($(this).is("div")
-                        && ($(this).hasClass('carellotool'))
-                    ) {
-                        var idrisorsa = dataitem[proprarr[0]];
-                        //var prezzounitario = dataitem[proprarr[1]]; // da passaere
-                        var idcontrollo = $(this).attr("id");
-                        carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 2); //1 carrello con data range //2 carreelo standard //3 entrambi
                     }
                     else if ($(this).is("div")
                         && ($(this).hasClass('owl-carousel') || $(this).hasClass('img-list'))
@@ -1341,6 +1321,20 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             }
                         }
 
+                    }
+                    else if ($(this).is("div")
+                        && ($(this).hasClass('bookingtool'))
+                    ) {
+                        var idrisorsa = dataitem[proprarr[0]];
+                        bookingtool.initbookingtool(idrisorsa, $(this).attr("id"));
+                    }
+                    else if ($(this).is("div")
+                        && ($(this).hasClass('carellotool'))
+                    ) {
+                        var idrisorsa = dataitem[proprarr[0]];
+                        //var prezzounitario = dataitem[proprarr[1]]; // da passaere
+                        var idcontrollo = $(this).attr("id");
+                        carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 2); //1 carrello con data range //2 carreelo standard //3 entrambi
                     }
                     else {
                         if (dataitem.hasOwnProperty(proprarr[0])) {

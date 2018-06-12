@@ -2191,9 +2191,9 @@ Portfoli Single ( da rival )
 }
 
 #divContainerb1 {
-    background-color:#eee;
+    /*height: calc(80vh - 225px) !important;*/
     height: calc(100vh - 141px) !important;
-    /*max-height: 480px;*/
+    max-height: 480px;
 }
 
 .tp-caption.very_big_white {

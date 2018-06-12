@@ -211,13 +211,11 @@
                     <div id="divlogoBrand" class="fulllogobckdark"></div>
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
-                <ul class="menuzord-menu menuzord-indented scrollable  menuzord-right">
+                <ul class="menuzord-menu menuzord-indented scrollable menuzord-right">
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
 
-                    <%-- Agriturismo --%>
+                    <%-- Agenzia --%>
                     <%= CreaLinkPaginastatica(1) %>
-                    <%-- Servizi --%>
-                    <%= CreaLinkTipologie(3,3) %>
                     <%-- <li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
                         <ul class="dropdown">
@@ -225,20 +223,27 @@
                             <%= CreaLinkCategorie("rif000003") %>
                         </ul>
                     </li>--%>
-                    <%-- Alloggi --%>
-                    <%= CreaLinkTipologie(4,4) %>
+                    <%-- Punti di forza - prodotti --%>
+                    <%= CreaLinkTipologie(3,4) %>
                     <%-- Offerte --%>
-                    <%= CreaLinkTipologie(5,5) %>
+                    <%--<%= CreaLinkTipologie(5,5) %>--%>
                     <%-- Gallery --%>
-                    <%= CreaLinkTipologie(6,6) %>
+                    <%--<%= CreaLinkTipologie(6,6) %>--%>
+                    <%-- Staff --%>
+                    <%= CreaLinkTipologie(7,7) %>
+                    <%-- Esperienze --%>
+                    <%= CreaLinkTipologie(8,8) %>
                     <%-- Faq --%>
                     <%= CreaLinkPaginastatica(3) %>
                     <%--PRENOTA--%>
-                    <li runat="server">
+                    <%--<li runat="server">
                         <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                         </a>
-                    </li>
+                    </li>--%>
+                    <%-----------------------%>
+                    <%-------FINE MENU-------%>
+                    <%-----------------------%>
 
                     <%--<li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
@@ -322,9 +327,9 @@
             <%--            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>--%>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-            <div style="max-width: 1400px; margin: 0px auto; padding-left: 15px; padding-right: 15px">
+            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px">
                 <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" style="line-height: 40px;">
                     </ul>
                 </div>
             </div>
@@ -586,14 +591,20 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <%-- Offerte --%>
-                                    <%= CreaLinkTipologie(5,5) %>
+                                    <%-- Agenzia --%>
+                                    <%= CreaLinkPaginastatica(1) %>
+                                    <%-- Punti di forza --%>
+                                    <%= CreaLinkTipologie(3,3) %>
+                                    <%-- Staff --%>
+                                    <%= CreaLinkTipologie(7,7) %>
+                                    <%-- Esperienze --%>
+                                    <%= CreaLinkTipologie(8,8) %>
                                     <%-- Prenota --%>
-                                    <li>
+                                    <%--<li>
                                         <a id="linkPrenota2" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>'>
                                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                                         </a>
-                                    </li>
+                                    </li>--%>
                                     <%-- Faq --%>
                                     <%= CreaLinkPaginastatica(3) %>
                                     <%-- Contatti --%>
@@ -609,16 +620,13 @@
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
-                            <%-- ALLOGGI --%>
+                            <%-- PRODOTTI --%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter4") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CreaLinkPaginastatica(1) %>
                                     <%= CaricaLinksPerTipologia("rif000004","","10") %>
-                                    <%= CreaLinkTipologie(3,3) %>
-                                    <%= CreaLinkTipologie(6,6) %>
                                 </ul>
                             </div>
                         </div>
@@ -743,6 +751,7 @@
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
         <%--  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>--%>
+
         <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
@@ -773,6 +782,6 @@
         <![endif]-->
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
-     <%= InjectedEndPageScripts() %>
+        <%= InjectedEndPageScripts() %>
 </body>
 </html>

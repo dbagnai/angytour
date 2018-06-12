@@ -419,11 +419,60 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 break;
 
+            case "rif000008":
+                column1.Visible = false;
+                column2.Visible = true;
+                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
+                column2.Attributes["class"] = "col-12 col-sm-9";
+
+                column3.Visible = false;
+
+                divSearch.Visible = true;
+                ContaArticoliPerperiodo(CodiceTipologia);
+                //  Caricalinksrubriche(CodiceTipologia);
+                divContact.Visible = false;
+                divContactBelow.Visible = false;
+                divLatestPost.Visible = false;
+                if (!JavaInjection)
+                {
+                    //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);";
+                    //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
+                    //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+
+                    //SUGGERITI
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
+                    sb.Clear();
+
+                    //ULTIMI ARTICOLI
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
+
+                    sb.Clear();
+
+                    //BIND PER LA SCHEDA!!!!
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsBlog-no-image.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+                }
+
+                break;
+
             case "rif000003":
             case "rif000004":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-10";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -500,6 +549,35 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+                }
+                break;
+
+            case "rif000007":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-10";
+                column2.Visible = true;
+                column3.Visible = false;
+                divSearch.Visible = false;
+                divContact.Visible = false;
+                divLatestPost.Visible = false;
+                divCategorie.Visible = false;
+
+                if (!JavaInjection)
+                {
+                    sb.Clear();
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = sb.ToString();
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = sb.ToString();
 

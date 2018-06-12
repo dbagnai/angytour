@@ -581,6 +581,93 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             case "rif000007":
 
                 AssociaDatiSocial();
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-12";
+                column2.Visible = false;
+                column3.Visible = false;
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                //column3.Attributes["class"] = "col-md-3 col-sm-3";
+                //ContaArticoliPerperiodo(Tipologia);
+                divSearch.Visible = false;
+                divLatestPost.Visible = false;
+                //CaricaUltimiPost(Tipologia, Categoria);
+                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
+                //CaricaMenuContenuti(4, 9, rptContenutiLink);
+                divCategorie.Visible = false;
+                //BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )
+                //string cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6, 5);
+
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeVini.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeStaff.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+                }
+
+                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
+                break;
+
+            case "rif000008":
+                AssociaDatiSocial();
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-12";
+                column2.Visible = false;
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                column3.Attributes["class"] = "col-12 col-sm-3";
+                column3.Visible = false;
+                ContaArticoliPerperiodo(Tipologia);
+                //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
+                divSearch.Visible = true;
+                divLatestPost.Visible = false;
+                //CaricaUltimiPost(Tipologia, Categoria);
+                //CaricaMenuSezioniContenuto(Tipologia, rptProdottiContenutiLink);
+                //CaricaMenuContenuti(4, 9, rptContenutiLink);
+                divCategorie.Visible = false;
+                //BANNER CON ISOTOPE PORTFOLIO ( PROMO DESTRA )
+                //string cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-destra", true, litBannersLaterali, Lingua, false, 6, 5);
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //placeholderrisultati.Text = sb.ToString();
+
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog-no-image.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = sb.ToString();
+
+                    //sb.Clear();
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
+                }
+                break;
+
+            case "rif000009":
+
+                AssociaDatiSocial();
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-md-9 col-sm-9";
                 column2.Visible = false;
