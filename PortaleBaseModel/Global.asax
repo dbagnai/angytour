@@ -499,6 +499,7 @@
     "~/lib/js/genericBanner.js",
     "~/lib/js/sliderBanner.js",
     "~/lib/js/scroller.js",
+    "~/lib/js/scrollerBanner.js",
     "~/lib/js/portfolioisotope.js",
     "~/lib/js/bannerFascia.js",
     "~/lib/js/portfolioisotopeBanner.js",

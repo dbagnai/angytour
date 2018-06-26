@@ -142,12 +142,11 @@ function BindFasciaBanner(el, localObjects) {
 
     if (!data.length) {
         $('#' + el).html('');
-        console.log($('#' + objfiltrotmp.containerid));
+        //console.log($('#' + objfiltrotmp.containerid));
         $('#' + objfiltrotmp.containerid).html('');
         return;
     }
 
-    $('#' + objfiltrotmp.containerid).parent().show();
     var str = $($('#' + el)[0]).outerHTML();
     //$('#' + el).parent().parent().show();
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
@@ -178,22 +177,8 @@ function BindFasciaBanner(el, localObjects) {
                 $('#' + el).append(ret.html()) + "\r\n";
             });
     }
-    if (el != null) {
-        $('#' + el).parent().show();
-    }
-    $('#' + el).on('cycle-update-view', function (e, optionHash, slideOptionsHash, currentSlideEl) {
-        var $slide = $(currentSlideEl);
-        var h = $slide.outerHeight();
-        $slide.parent().css({
-            height: h
-        });
-    });
 
-    setTimeout(function () {
-        $('#' + el).parent().imagesLoaded(function () {
-            $('#' + el).cycle();
-        });
-    }, 2000);
+    initcycleBanner(el, objfiltrotmp.containerid)
 
     //jQuery(document).ready(function () {
     //    $('#' + el).parent().imagesLoaded(function () {
@@ -237,7 +222,23 @@ function BindFasciaBanner(el, localObjects) {
     CleanHtml($('#' + el));
 
 };
+function initcycleBanner(el, containerid) {
 
+    $('#' + containerid).parent().show();
+    $('#' + el).parent().show();
+    $('#' + el).on('cycle-update-view', function (e, optionHash, slideOptionsHash, currentSlideEl) {
+        var $slide = $(currentSlideEl);
+        var h = $slide.outerHeight();
+        $slide.parent().css({
+            height: h
+        });
+    });
+    setTimeout(function () {
+        $('#' + el).parent().imagesLoaded(function () {
+            $('#' + el).cycle();
+        });
+    }, 2000);
+}
 
 function calcAspectRatio(el) {
     if (el != null) {

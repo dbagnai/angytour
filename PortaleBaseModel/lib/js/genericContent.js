@@ -164,6 +164,10 @@ function injectFlexsliderControls(controlid, container, callback) {
     });
 }
 function inizializzaFlexsliderGallery(controlid, container) {
+
+    $('#' + container).show();
+    $('#' + container + 'Title').show();
+
     //Plugin: flexslider con funzione di animazione dei messaggi o oggetti sopra
     // ------------------------------------------------------------------
     if ($("#" + controlid + "-main-slider") != null)

@@ -94,7 +94,7 @@ namespace WelcomeLibrary.DOM
             set { _DataInserimento = value; }
         }
 
- 
+
 
         public string AlternateTextbyLingua(string Lingua)
         {
@@ -249,7 +249,7 @@ namespace WelcomeLibrary.DOM
             _tmp["ImageUrlRU"] = this.ImageUrlRU;
             _tmp["NavigateUrlRU"] = this.NavigateUrlRU;
             _tmp["sezione"] = this.sezione;
-            _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", this.DataInserimento);
+            _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });
             return _tmp;
         }
 

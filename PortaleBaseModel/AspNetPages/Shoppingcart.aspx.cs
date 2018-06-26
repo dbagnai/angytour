@@ -81,7 +81,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             try
             {
                 litMainContent.Text =
-                    ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
+                  custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
             }
             catch { }
 

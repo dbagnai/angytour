@@ -68,8 +68,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 idContenuto = CaricaValoreMaster(Request, Session, "idContenuto", true, "");
                 string testoindice = CaricaValoreMaster(Request, Session, "testoindice", true, "");
 
-                ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
-                ContenutoPagina = ""; //Azzero il contenuto pagina per il rewriting egli url classici
+                //ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
+                //ContenutoPagina = ""; //Azzero il contenuto pagina per il rewriting egli url classici
 
                 CaricaControlliJS();
                 CaricaControlliServerside();
@@ -519,29 +519,29 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
     {
 
         /////////////////////////////////////////////////////
-        if (!string.IsNullOrEmpty(ContenutoPagina))
-        {
-            string tmp = references.ResMan("Common", Lingua, "Testo" + ContenutoPagina).ToString();
-            litNomeContenuti.Text = tmp;
-            litMainContent.Text = ReplaceAbsoluteLinks(ReplaceLinks(GetLocalResourceObject("Testo" + ContenutoPagina).ToString()));
-            //Titolo e descrizione pagina
-            ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + Nome + " " + references.ResMan("Common", Lingua, "testoPosizionebase"));
+        //if (!string.IsNullOrEmpty(ContenutoPagina)) //usata nel vecchio sistema di chiamanta degli url
+        //{
+        //    string tmp = references.ResMan("Common", Lingua, "Testo" + ContenutoPagina).ToString();
+        //    litNomeContenuti.Text = tmp;
+        //    litMainContent.Text = ReplaceAbsoluteLinks(ReplaceLinks(GetLocalResourceObject("Testo" + ContenutoPagina).ToString()));
+        //    //Titolo e descrizione pagina
+        //    ((HtmlTitle)Master.FindControl("metaTitle")).Text = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + Nome + " " + references.ResMan("Common", Lingua, "testoPosizionebase"));
 
-            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
+        //    WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();   //;
 
-            string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true)).Replace("<br/>", "\r\n"));
-            ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
-            //Opengraph per facebook
-            ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + Nome);
-            simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true))).Replace("<br/>", "\r\n");
-            ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
+        //    string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true)).Replace("<br/>", "\r\n"));
+        //    ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
+        //    //Opengraph per facebook
+        //    ((HtmlMeta)Master.FindControl("metafbTitle")).Content = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(tmp + " " + Nome);
+        //    simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(litMainContent.Text, 300, true))).Replace("<br/>", "\r\n");
+        //    ((HtmlMeta)Master.FindControl("metafbdescription")).Content = simpletext;
 
 
-        }
+        //}
         if (content != null)
         {
-            if (content.Id == 12) //Visualizzo il form per le newsletter
-                pnlNewsletter.Visible = true;
+            //if (content.Id == 12) //Visualizzo il form per le newsletter
+            //    pnlNewsletter.Visible = true;
             //if (content.Id == 9)
             //    divTitleFreccia.Visible = false;
             string DescrizioneContenuto = content.TitolobyLingua(Lingua);
@@ -552,7 +552,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             try
             {
                 litMainContent.Text =
-                    ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
+                  custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
             }
             catch { }
             //Titolo e descrizione pagina

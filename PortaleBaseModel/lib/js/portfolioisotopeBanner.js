@@ -24,7 +24,7 @@ function InjectPagerPortfolioBanner(pagercontainer, controlid) {
 function injectPortfolioAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola) {
     setTimeout(function () {
         loadref(injectPortfolioAndLoadBannerinner, type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, lng);
-    }, 100 );
+    }, 100);
 
 }
 function injectPortfolioAndLoadBannerinner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola) {
@@ -44,7 +44,7 @@ function injectPortfolioAndLoadBannerinner(type, container, controlid, page, pag
             $(this).prop("id", replacedid);
         });
 
-        InitIsotopeLocalBanner(controlid);
+        //InitIsotopeLocalBanner(controlid);
         //Usiamo memoria globale indicizzata con l'id del controllo
         var pagerdata = {};
         pagerdata["page"] = page;
@@ -54,6 +54,7 @@ function injectPortfolioAndLoadBannerinner(type, container, controlid, page, pag
         globalObject[controlid + "pagerdata"] = pagerdata;
 
         var params = {};
+        params.containerid = container;
         params.maxelement = maxelement;
         params.listShow = listShow;
         params.tblsezione = tblsezione;
@@ -138,11 +139,7 @@ function BindIsotopeBanner(el, localObjects) {
     }
 
 
-    var str = $('#' + el)[0].innerHTML;
-    $('#' + el).parent().parent().show();
-    $('#' + el).parent().parent().parent().parent().show();
-
-
+    var str = $('#' + el)[0].innerHTML; //Elemento da ripetere
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
     //in caso di rebinding successivo dopo l'iniezione del template
     if (!globalObject.hasOwnProperty(el + "template")) {
@@ -151,9 +148,8 @@ function BindIsotopeBanner(el, localObjects) {
     }
     else
         str = globalObject[el + "template"];
-
-
     var jquery_obj = $(str);
+
     //var outerhtml = jquery_obj.outerHTML();
     //var innerHtml = jquery_obj.html();
     /*Prendo l'elemento contenitore*/
@@ -161,33 +157,28 @@ function BindIsotopeBanner(el, localObjects) {
     var htmlout = "";
     for (var j = 0; j < data.length; j++) {
         FillBindControls(jquery_obj, data[j], localObjects, "",
-                    function (ret) {
-                        htmlout += (ret.outerHTML()) + "\r\n";
-                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                    });
+            function (ret) {
+                htmlout += (ret.outerHTML()) + "\r\n";
+                //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+            });
     }
-
+    $('#' + el).parent().parent().show(); //titolo
+    $('#' + el).parent().parent().parent().parent().show(); //contenitore blocco
+     
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
-    $('#' + el).html('');
-    // Update isotope container with new data. 
-    //$('#' + el).isotope('remove',  $('#' + el).data('isotope').$allAtoms );
-    $('#' + el).isotope('insert', $(htmlout))
-      // trigger isotope again after images have been loaded
-      .imagesLoaded(function () {
-          $('#' + el).isotope('layout');
-          CleanHtml($('#' + el));
-
-      });
+    $('#' + el).html((htmlout));
+    CleanHtml($('#' + el));
+    InitIsotopeLocalBanner(el);
+   // setTimeout(function () { InitIsotopeLocalBanner(el); }, 100)
 
 };
 
 
-
-
 function InitIsotopeLocalBanner(controlid) {
+
     /* ---------------------------------------------- /*
-    * Portfolio 
-    /* ---------------------------------------------- */
+   * Portfolio  https://isotope.metafizzy.co/methods.html
+   /* ---------------------------------------------- */
     var worksgrid = $('#' + controlid);
     var worksgrid_mode;
     if (worksgrid.hasClass('works-grid-masonry')) {
@@ -196,14 +187,42 @@ function InitIsotopeLocalBanner(controlid) {
         worksgrid_mode = 'fitRows';
     }
 
+    //Vediamo se già inizializzato in precedenza l'isotope e nel caso eliminiamolo
+    var gridcheck = worksgrid.data('isotope');
+    if (gridcheck != null) {
+        var elems = gridcheck.getFilteredItemElements();
+        worksgrid.isotope('destroy');
+    }
     // worksgrid.imagesLoaded(function () {
-    worksgrid.isotope({
+    var $grid = worksgrid.isotope({
         layoutMode: worksgrid_mode,
-        itemSelector: '.work-item'
+        itemSelector: '.work-item',
+        isInitLayout: false //disable layout on initialization, so you can use methods or add events before the initial layout (altrimenti layoutcomplete no parte e neppure layout).
         //fitRows: {
         //gutter: 10}
     });
     // });
+
+    //$grid.isotope('reloadItems');
+    //$grid.isotope('getItemElements')
+
+    worksgrid.imagesLoaded(function () {
+        $grid.isotope('layout');
+    });
+
+    //On event layoutComplete i make what needed
+    //$grid.on('layoutComplete',
+    //    function (event, laidOutItems) {
+    //        lazyLoad();
+    //        //Abilito traking vertical scroll position e reimposto la posizioneiniziale se presente in memoria
+    //        enablescrolltopmem = true;
+    //        reinitscrollpos(); //Return to previosus scrolltop pos of page
+    //    });
+
+
+    $grid.on('arrangeComplete', function (event, filteredItems) {
+        console.log('arrange is complete');
+    });
 }
 
 /*Pager functions start-------------------------------------------------------------------------------*/

@@ -182,7 +182,7 @@ public partial class _SchedaProdotto : CommonPage
                 //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                 //sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
                 //sb.Append("\"></div>");
-                //plhSuggeritiJs.Text = sb.ToString();
+                //plhSuggeritiJs.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);
 
 
                 sb.Clear();
@@ -190,7 +190,7 @@ public partial class _SchedaProdotto : CommonPage
                 sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                 sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
                 sb.Append("\"></div>");
-                placeholderrisultati.Text = sb.ToString();
+                placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);
 
 
                 break;
@@ -207,7 +207,7 @@ public partial class _SchedaProdotto : CommonPage
                 sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                 sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
                 sb.Append("\"></div>");
-                plhSuggeritiJs.Text = sb.ToString();
+                plhSuggeritiJs.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);
  
                 this.AssociaDati();
                 break;

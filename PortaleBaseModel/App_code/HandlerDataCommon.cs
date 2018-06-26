@@ -40,7 +40,11 @@ public class jpath
     public string username { set; get; }
 
 }
-
+public class jreturncontainerdata
+{
+    public string html { set; get; }
+    public Dictionary<string, string> jscommands { set; get; }
+}
 
 public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 {
@@ -491,7 +495,33 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     });
                     ////////////////////////////////////////////////////////////////////////////
                     break;
+                case "caricahmtlbinded":
+                    string htmlout = "";
+                    Dictionary<string, string> filtripager = new Dictionary<string, string>();
+                    filtripager.Add("page", page);
+                    filtripager.Add("pagesize", pagesize);
+                    filtripager.Add("enablepager", enablepager);
+                    //htmlout = custombind.getbindedhtmlstring(filtri, filtripager, lingua, context.User.Identity.Name, context.Session);
 
+                    String maincontainertext = "";
+                    if (filtri.ContainsKey("maincontainertext")) maincontainertext = WelcomeLibrary.UF.dataManagement.DecodeFromBase64(filtri["maincontainertext"]);
+                    //if (filtri.ContainsKey("maincontainertext")) maincontainertext = filtri["maincontainertext"].Replace("\\\"", "\"").Replace("|", "'");
+                    //if (filtri.ContainsKey("maincontainertext")) maincontainertext = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(filtri["maincontainertext"]);
+                    if (!string.IsNullOrEmpty(maincontainertext))
+                    {
+                        htmlout = custombind.bind(maincontainertext, lingua, context.User.Identity.Name, context.Session, filtri, filtripager);
+                        jreturncontainerdata jr = new jreturncontainerdata();
+                        jr.html = htmlout;
+                        jr.jscommands = custombind.jscommands;
+                        result = Newtonsoft.Json.JsonConvert.SerializeObject(jr, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            MissingMemberHandling = MissingMemberHandling.Ignore,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            PreserveReferencesHandling = PreserveReferencesHandling.None,
+                        });
+                    }
+                    break;
                 case "caricaMenuSezioni":
                     Dictionary<string, string> filtriMenu = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
 

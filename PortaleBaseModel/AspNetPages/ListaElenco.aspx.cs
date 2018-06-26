@@ -652,6 +652,8 @@ public partial class AspNetPages_ListaElenco : CommonPage
             string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 90, true)).Replace("<br/>", " ").Trim());
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
 
+
+            htmlPage = custombind.bind(htmlPage, Lingua, Page.User.Identity.Name, Session);
             litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
         }
     }

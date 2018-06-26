@@ -101,7 +101,7 @@ public partial class index : CommonPage
 
 
             htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-            htmlPage = custombind.bind(htmlPage,Lingua); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
+            htmlPage = custombind.bind(htmlPage,Lingua, User.Identity.Name, HttpContext.Current.Session); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
 
             //    // Get the elapsed time as a TimeSpan value.

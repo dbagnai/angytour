@@ -85,16 +85,10 @@ function BindScrollerBanner(el, localObjects) {
         $('#' + el).html('');
         return;
     }
-
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[el + "params"];
     var container = objfiltrotmp.container;
-    $('#' + container).parent().show();
-    //$('#' + el).parent().parent().parent().parent().parent().show();
-
     var str = $('#' + el)[0].innerHTML;
-
-
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
     //in caso di rebinding successivo dopo l'iniezione del template
     if (!globalObject.hasOwnProperty(el + "template")) {
@@ -103,16 +97,12 @@ function BindScrollerBanner(el, localObjects) {
     }
     else
         str = globalObject[el + "template"];
-
-
     var jquery_obj = $(str);
-    var outerhtml = jquery_obj.outerHTML();
     var innerHtml = jquery_obj.html();
+    var outerhtml = jquery_obj.outerHTML();
     var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
     var htmlout = "";
-    var htmlitem = "";
     for (var j = 0; j < data.length; j++) {
-        htmlitem = "";
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj, data[j], localObjects, "",
@@ -120,13 +110,21 @@ function BindScrollerBanner(el, localObjects) {
                         htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
                     });
     }
-
+    //$('#' + el).parent().parent().parent().parent().parent().show();
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
     $('#' + el).html('');
     $('#' + el).html(htmlout);
+    CleanHtml($('#' + el));
+
+    $('#' + container).parent().show();
+    initScrollerBanner(el, globalObject[el + "params"].scrollertype);
+};
+
+function initScrollerBanner(el, type)
+{
     setTimeout(function () {
-        var scrollertype = globalObject[el + "params"].scrollertype;
-        console.log(scrollertype);
+        var scrollertype = type;
+        //console.log(scrollertype);
         switch (scrollertype) {
             case "1":
                 ScrollerInitBanner1(el);
@@ -144,10 +142,8 @@ function BindScrollerBanner(el, localObjects) {
                 ScrollerInitBanner(el);
                 break;
         }
-        CleanHtml($('#' + el));
     }, 100);
-
-};
+}
 
 function ScrollerInitBanner(controlid) {
     jQuery(document).ready(function () {

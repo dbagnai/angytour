@@ -1099,7 +1099,7 @@ namespace WelcomeLibrary.DOM
             this.Telefono = tmp.Telefono;
             this.Website = tmp.Website;
             this.DataInserimento = tmp.DataInserimento;
-            this.DataInserimento = tmp.Data1;
+            this.Data1 = tmp.Data1;
             this.DescrizioneGB = tmp.DescrizioneGB;
             this.DescrizioneRU = tmp.DescrizioneRU;
             this.DescrizioneI = tmp.DescrizioneI;
@@ -1198,5 +1198,144 @@ namespace WelcomeLibrary.DOM
 
 
         }
+
+        public Dictionary<string, string> GetDictionaryElements()
+        {
+            Dictionary<string, string> _tmp = new Dictionary<string, string>();
+            _tmp["Id"] = this.Id.ToString();
+            _tmp["Id_collegato"] = this.Id_collegato.ToString();
+            _tmp["Id_dts_collegato"] = this.Id_dts_collegato.ToString();
+            _tmp["Campo1I"] = this.Campo1I.ToString();
+            _tmp["Campo1GB"] = this.Campo1GB.ToString();
+
+            _tmp["Campo1RU"] = this.Campo1RU.ToString();
+            _tmp["Campo2I"] = this.Campo2I.ToString();
+            _tmp["Campo2GB"] = this.Campo2GB.ToString();
+            _tmp["Campo2RU"] = this.Campo2RU.ToString();
+            _tmp["CodiceOfferta"] = this.CodiceOfferta.ToString();
+            _tmp["CodiceOfferta"] = this.CodiceOfferta.ToString();
+            _tmp["Prezzo"] = this.Prezzo.ToString();
+            _tmp["CodiceTipologia"] = this.CodiceTipologia.ToString();
+            _tmp["CodiceComune"] = this.CodiceComune.ToString();
+            _tmp["CodiceProvincia"] = this.CodiceProvincia.ToString();
+            _tmp["CodiceRegione"] = this.CodiceRegione.ToString();
+            _tmp["_CodiceCategoria"] = this._CodiceCategoria.ToString();
+            _tmp["_CodiceCategoria2Liv"] = this._CodiceCategoria2Liv.ToString();
+            _tmp["CodiceProdotto"] = this.CodiceProdotto.ToString();
+            _tmp["DatitecniciGB"] = this.DatitecniciGB.ToString();
+            _tmp["DatitecniciRU"] = this.DatitecniciRU.ToString();
+            _tmp["DatitecniciI"] = this.DatitecniciI.ToString();
+            _tmp["DenominazioneGB"] = this.DenominazioneGB.ToString();
+            _tmp["DenominazioneRU"] = this.DenominazioneRU.ToString();
+            _tmp["DenominazioneI"] = this.DenominazioneI.ToString();
+            _tmp["Email"] = this.Email.ToString();
+            _tmp["Fax"] = this.Fax.ToString();
+            _tmp["Indirizzo"] = this.Indirizzo.ToString();
+            _tmp["Telefono"] = this.Telefono.ToString();
+            _tmp["Website"] = this.Website.ToString();
+            _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });  
+            _tmp["Data1"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.Data1 });  
+            _tmp["DescrizioneGB"] = this.DescrizioneGB.ToString();
+            _tmp["DescrizioneRU"] = this.DescrizioneRU.ToString();
+            _tmp["DescrizioneI"] = this.DescrizioneI.ToString();
+            _tmp["PrezzoListino"] = this.PrezzoListino.ToString();
+            _tmp["Vetrina"] = this.Vetrina.ToString();
+            _tmp["Promozione"] = this.Promozione.ToString();
+            _tmp["Qta_vendita"] = this.Qta_vendita.ToString();
+            _tmp["Abilitacontatto"] = this.Abilitacontatto.ToString();
+            _tmp["Archiviato"] = this.Archiviato.ToString();
+            _tmp["linkVideo"] = this.linkVideo.ToString();
+            _tmp["Autore"] = this.Autore.ToString();
+            _tmp["Xmlvalue"] = this.Xmlvalue.ToString();
+
+            _tmp["Caratteristica1"] = this.Caratteristica1.ToString();
+            _tmp["Caratteristica2"] = this.Caratteristica2.ToString();
+            _tmp["Caratteristica3"] = this.Caratteristica3.ToString();
+            _tmp["Caratteristica4"] = this.Caratteristica4.ToString();
+            _tmp["Caratteristica5"] = this.Caratteristica5.ToString();
+            _tmp["Caratteristica6"] = this.Caratteristica6.ToString();
+            _tmp["Anno"] = this.Anno.ToString();
+
+         
+            _tmp["Pivacf_dts"] = this.Pivacf_dts.ToString();
+
+            _tmp["Nome_dts"] = this.Nome_dts.ToString();
+            _tmp["Cognome_dts"] = this.Cognome_dts.ToString();
+            _tmp["Datanascita_dts"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.Datanascita_dts });  
+            _tmp["Sociopresentatore1_dts"] = this.Sociopresentatore1_dts.ToString();
+            _tmp["Sociopresentatore2_dts"] = this.Sociopresentatore2_dts.ToString();
+            _tmp["Telefonoprivato_dts"] = this.Telefonoprivato_dts.ToString();
+            _tmp["Annolaurea_dts"] = this.Annolaurea_dts.ToString();
+            _tmp["Annospecializzazione_dts"] = this.Annospecializzazione_dts.ToString();
+            _tmp["Altrespecializzazioni_dts"] = this.Altrespecializzazioni_dts.ToString();
+            _tmp["SocioSicpre_dts"] = this.SocioSicpre_dts.ToString();
+            _tmp["SocioIsaps_dts"] = this.SocioIsaps_dts.ToString();
+            _tmp["Socioaltraassociazione_dts"] = this.Socioaltraassociazione_dts.ToString();
+            _tmp["Trattamenticollegati_dts"] = this.Trattamenticollegati_dts.ToString();
+            _tmp["AccettazioneStatuto_dts"] = this.AccettazioneStatuto_dts.ToString();
+            _tmp["Certificazione_dts"] = this.Certificazione_dts.ToString();
+            _tmp["Emailriservata_dts"] = this.Emailriservata_dts.ToString();
+            _tmp["CodiceNAZIONE1_dts"] = this.CodiceNAZIONE1_dts.ToString();
+            _tmp["CodiceREGIONE1_dts"] = this.CodiceREGIONE1_dts.ToString();
+            _tmp["CodicePROVINCIA1_dts"] = this.CodicePROVINCIA1_dts.ToString();
+            _tmp["CodiceCOMUNE1_dts"] = this.CodiceCOMUNE1_dts.ToString();
+            _tmp["CodiceNAZIONE2_dts"] = this.CodiceNAZIONE2_dts.ToString();
+            _tmp["CodiceREGIONE2_dts"] = this.CodiceREGIONE2_dts.ToString();
+            _tmp["CodicePROVINCIA2_dts"] = this.CodicePROVINCIA2_dts.ToString();
+            _tmp["CodiceCOMUNE2_dts"] = this.CodiceCOMUNE2_dts.ToString();
+            _tmp["CodiceNAZIONE3_dts"] = this.CodiceNAZIONE3_dts.ToString();
+            _tmp["CodiceREGIONE3_dts"] = this.CodiceREGIONE3_dts.ToString();
+            _tmp["CodicePROVINCIA3_dts"] = this.CodicePROVINCIA3_dts.ToString();
+            _tmp["CodiceCOMUNE3_dts"] = this.CodiceCOMUNE3_dts.ToString();
+            _tmp["Latitudine1_dts"] = this.Latitudine1_dts.ToString();
+            _tmp["Longitudine1_dts"] = this.Longitudine1_dts.ToString();
+            _tmp["Latitudine2_dts"] = this.Latitudine2_dts.ToString();
+            _tmp["Longitudine2_dts"] = this.Longitudine2_dts.ToString();
+            _tmp["Latitudine3_dts"] = this.Latitudine3_dts.ToString();
+            _tmp["Longitudine3_dts"] = this.Longitudine3_dts.ToString();
+            _tmp["Bloccoaccesso_dts"] = this.Bloccoaccesso_dts.ToString();
+            _tmp["Via1_dts"] = this.Via1_dts.ToString();
+            _tmp["Cap1_dts"] = this.Cap1_dts.ToString();
+            _tmp["Nomeposizione1_dts"] = this.Nomeposizione1_dts.ToString();
+            _tmp["Telefono1_dts"] = this.Telefono1_dts.ToString();
+            _tmp["Via2_dts"] = this.Via2_dts.ToString();
+            _tmp["Cap2_dts"] = this.Cap2_dts.ToString();
+            _tmp["Nomeposizione2_dts"] = this.Nomeposizione2_dts.ToString();
+            _tmp["Telefono2_dts"] = this.Telefono2_dts.ToString();
+            _tmp["Via3_dts"] = this.Via3_dts.ToString();
+            _tmp["Cap3_dts"] = this.Cap3_dts.ToString();
+            _tmp["Nomeposizione3_dts"] = this.Nomeposizione3_dts.ToString();
+            _tmp["Telefono3_dts"] = this.Telefono3_dts.ToString();
+            _tmp["Pagamenti_dts"] = this.Pagamenti_dts.ToString();
+
+            _tmp["ricfatt_dts"] = this.ricfatt_dts.ToString();
+            _tmp["noteriservate_dts"] = this.noteriservate_dts.ToString();
+            _tmp["indirizzofatt_dts"] = this.indirizzofatt_dts.ToString();
+
+
+
+            _tmp["niscrordine_dts"] = this.niscrordine_dts.ToString();
+            _tmp["locordine_dts"] = this.locordine_dts.ToString();
+            _tmp["annofrequenza_dts"] = this.annofrequenza_dts.ToString();
+            _tmp["nomeuniversita_dts"] = this.nomeuniversita_dts.ToString();
+            _tmp["dettagliuniversita_dts"] = this.dettagliuniversita_dts.ToString();
+            _tmp["Boolfields_dts"] = this.Boolfields_dts.ToString();
+            _tmp["Textfield1_dts"] = this.Textfield1_dts.ToString();
+            _tmp["Interventieseguiti_dts"] = this.Interventieseguiti_dts.ToString();
+
+
+            //Allegato _tmp;
+            //this.FotoCollection_M = new AllegatiCollection();
+            //foreach (Allegato tmplist in tmp.FotoCollection_M)
+            //{
+            //    _tmp = new Allegato(tmplist);
+            //    this.FotoCollection_M.Add(_tmp);
+            //}
+
+
+            return _tmp;
+        }
+
+
     }
 }

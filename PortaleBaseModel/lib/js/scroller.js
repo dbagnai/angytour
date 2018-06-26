@@ -2,9 +2,9 @@
 
 
 function injectScrollerAndLoad(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
-    
-        loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni, lng);
-  
+
+    loadref(injectScrollerAndLoadinner, type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni, lng);
+
 }
 
 function injectScrollerAndLoadinner(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) {
@@ -23,27 +23,27 @@ function injectScrollerAndLoadinner(type, container, controlid, listShow, tipolo
             $(this).prop("id", replacedid);
         });
 
-            var params = {};
+        var params = {};
         //getfromsession('objfiltro', function (retval) {
         //    var objfiltro = {};
         //    if (retval != null && retval != '')
         //        objfiltro = JSON.parse(retval);
         //    params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
+        params.container = container;
+        params.tipologia = tipologia;
+        params.visualData = visualData;
+        params.visualPrezzo = visualPrezzo;
+        params.maxelement = maxelement;
+        params.listShow = listShow;
+        params.categoria = categoria;
+        params.categoria2Liv = categoria2Liv;
+        params.scrollertype = scrollertype;
+        params.vetrina = vetrina;
+        params.promozioni = promozioni;
+        globalObject[controlid + "params"] = params;
 
-            params.tipologia = tipologia;
-            params.visualData = visualData;
-            params.visualPrezzo = visualPrezzo;
-            params.maxelement = maxelement;
-            params.listShow = listShow;
-            params.categoria = categoria;
-            params.categoria2Liv = categoria2Liv;
-            params.scrollertype = scrollertype;
-            params.vetrina = vetrina;
-            params.promozioni = promozioni;
-            globalObject[controlid + "params"] = params;
-
-            //Qui puoi fare inizializzazione controlli su allegati
-            CaricaScroller(controlid, container);
+        //Qui puoi fare inizializzazione controlli su allegati
+        CaricaScroller(controlid, container);
         //});
 
     });
@@ -112,9 +112,8 @@ function BindScroller(el, localObjects, container) {
         $('#' + el).html('');
         return;
     }
+   // var container = objfiltrotmp.container;
     var str = $('#' + el)[0].innerHTML;
-    $('#' + el).parent().parent().parent().parent().show();
-
 
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
     //in caso di rebinding successivo dopo l'iniezione del template
@@ -131,9 +130,7 @@ function BindScroller(el, localObjects, container) {
     var innerHtml = jquery_obj.html();
     var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
     var htmlout = "";
-    var htmlitem = "";
     for (var j = 0; j < data.length; j++) {
-        htmlitem = "";
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj, data[j], localObjects, "",
@@ -145,8 +142,21 @@ function BindScroller(el, localObjects, container) {
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
     $('#' + el).html('');
     $('#' + el).html(htmlout);
+    CleanHtml($('#' + el));
+
+    $('#' + el).parent().parent().parent().parent().show();
+    $('#' + container + 'Title').show();
+    initScrollertype(el, container, globalObject[el + "params"].scrollertype);
+};
+
+function initScrollertype(el,container, type) {
+
+    $('#' + el).parent().parent().parent().parent().show();
+    $('#' + container + 'Title').show();
+
     setTimeout(function () {
-        var scrollertype = globalObject[el + "params"].scrollertype;
+        var scrollertype = type;
+        //console.log(scrollertype);
         switch (scrollertype) {
             case "1":
                 ScrollerInit1(el);
@@ -158,10 +168,8 @@ function BindScroller(el, localObjects, container) {
                 ScrollerInit(el);
                 break;
         }
-        CleanHtml($('#' + el));
     }, 100);
-    $('#' + container + 'Title').show();
-};
+}
 
 function ScrollerInit(controlid) {
     jQuery(document).ready(function () {

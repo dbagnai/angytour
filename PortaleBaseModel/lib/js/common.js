@@ -59,7 +59,9 @@ $(window).scroll(function () {
 var reinitscrollpos = function () {
     var pathName = document.location.pathname;
     if (sessionStorage["scrollPosition_" + pathName]) {
+        // setTimeout(function () {
         $(window).scrollTop(sessionStorage.getItem("scrollPosition_" + pathName) || 0);
+        //}, 200)
         console.log("restore pos to : " + sessionStorage.getItem("scrollPosition_" + pathName));
     }
 };
@@ -1033,7 +1035,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     }
                     else if ($(this).is("img") && $(this).hasClass('avatar')) {
                         if (dataitem.hasOwnProperty(proprarr[0])) {
-                        var idallegato = dataitem[proprarr[0]];
+                            var idallegato = dataitem[proprarr[0]];
                             //var testoalt = localObjects["linkloaded"][idallegato]['testoalt'];
                             var pathImg = localObjects["linkloaded"][idallegato]['avatar'];
                             //pathImg += "?vw=" + window.outerWidth;
@@ -1276,6 +1278,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
 
                     }
                     else if ($(this).is("meta")) {
+
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             var valore = [];
                             valore[0] = dataitem[proprarr[0]]; //id attuale record
@@ -1304,6 +1307,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 $(this).attr("content", valore);
                             }
                         }
+
                     }
                     else if ($(this).is("iframe")) {
                         var idelement = dataitem[proprarr[0]];
@@ -1345,18 +1349,21 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
 
                             if ($(this).attr("format") != null) {
                                 formatfunc = $(this).attr("format");
+
                                 if ($(this).attr("mybind1") != null)
                                     valore[1] = dataitem[$(this).attr("mybind1")];
                                 if ($(this).attr("mybind2") != null)
                                     valore[2] = dataitem[$(this).attr("mybind2")];
                                 if ($(this).attr("mybind3") != null)
                                     valore[3] = dataitem[$(this).attr("mybind3")];
+
                                 if ($(this).attr("myvalue") != null)
                                     prop[0] = $(this).attr("myvalue");
                                 if ($(this).attr("myvalue1") != null)
                                     prop[1] = $(this).attr("myvalue1");
                                 if ($(this).attr("myvalue2") != null)
                                     prop[2] = $(this).attr("myvalue2");
+
                                 window[formatfunc](localObjects, valore, prop, function (ret) {
                                     if (ret != null && Array.isArray(ret) && ret.length > 0)
                                         valore = ret[0];
@@ -1410,8 +1417,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         var valore = "";
                         if (localObjects["linkloaded"].hasOwnProperty(idelement)) {
                             if (localObjects["linkloaded"][idelement].hasOwnProperty(property)) {
+                                valore = localObjects["linkloaded"][idelement][property];
                                 if (valore != null && valore != '') {
-                                    valore = localObjects["linkloaded"][idelement][property];
                                     $(this).attr("src", valore + "?rel=0");//&autoplay=1
                                     $(this).parent().show();
                                 }
@@ -1426,6 +1433,11 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
     //return jquery_obj;
     callback(jquery_obj);
 };
+
+
+/*--------------------------------------------------------------------------------------------------------
+//FUNZIONI AGGIUNTIVE USATE DA FILLBINDCONTROLS PER IL BIND --------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------*/
 
 function CompleteUrlPrimaryImg(localObjects, idallegati, anteprima, usecdn, callback) {
     var pathfile = "";
@@ -1508,6 +1520,16 @@ function CompleteUrlListFilesDesc(localObjects, idallegati, anteprima, usecdn, c
     callback(arrayfiles);
 }
 
+function formattestoreplace(localObjects, valore, prop, callback) {
+    var retstring = "";
+    try {
+        var object = localObjects["linkloaded"];
+        if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
+            retstring = object[valore[0]][prop[0]];
+        }
+    } catch (e) { };
+    callback(retstring);
+}
 function frmvisibility(localObjects, valore, prop, callback) {
     var retstring = "false";
     try {
@@ -1531,7 +1553,6 @@ function formatprezzoofferta(localObjects, valore, prop, callback) {
     }
     callback(retstring);
 }
-
 function formattitle(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1548,7 +1569,6 @@ function formattitle(localObjects, valore, prop, callback) {
     } catch (e) { };
     callback(retstring);
 }
-
 function formatsubtitle(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1566,8 +1586,6 @@ function formatsubtitle(localObjects, valore, prop, callback) {
     } catch (e) { };
     callback(retstring);
 }
-
-
 function formatbtncarrello(localObjects, valore, prop, callback) {
     var retstring = "";
     var testoCarelloesaurito = baseresources[lng]["testocarelloesaurito"];
@@ -1597,7 +1615,6 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     }
     callback(retstring);
 }
-
 function formatlinksezione(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1610,7 +1627,6 @@ function formatlinksezione(localObjects, valore, prop, callback) {
     } catch (e) { };
     callback(retstring);
 }
-
 function formatautore(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1635,17 +1651,6 @@ function formatviews(localObjects, valore, prop, callback) {
     } catch (e) { };
     callback(retstring);
 }
-function formattestoreplace(localObjects, valore, prop, callback) {
-    var retstring = "";
-    try {
-        var object = localObjects["linkloaded"];
-        if (localObjects["linkloaded"].hasOwnProperty(valore[0])) {
-            retstring = object[valore[0]][prop[0]];
-        }
-    } catch (e) { };
-    callback(retstring);
-
-}
 function formatdescrizione(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1666,18 +1671,12 @@ function formatdescrizione(localObjects, valore, prop, callback) {
                     retstring = descrizione.replace(/\n/g, "&nbsp;");
                 else
                     retstring = descrizione.replace(/\n/g, "<br/>");
-
-
             }
         }
     } catch (e) { };
     callback(retstring);
 
 }
-
-
-
-
 function formatlabelsconto(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1695,7 +1694,6 @@ function formatlabelsconto(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
-
 function formatlabelresource(localObjects, valore, prop, callback) {
     var retstring = "";
     try {
@@ -1710,6 +1708,57 @@ function formatlabelresource(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
+function formatdata1(localObjects, valore, prop, callback) {
+    var retstring = "";
+    var tmpDate = valore[0];
+    var controllo = localObjects["resultinfo"][prop[0]];
+    if (controllo == "true") {
+        if (tmpDate && tmpDate != "") {
+            var objData = new Date(tmpDate);
+            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
+            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
+            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY')
+            //var d = formattedDate.getDate();
+            //var m = formattedDate.getMonth();
+            //m += 1;  // JavaScript months are 0-11
+            //var y = formattedDate.getFullYear();
+            //return d + "/" + m + "/" + y;
+            retstring = dateFormattedwithtime;
+        }
+    }
+
+    callback(retstring);
+}
+function formatdata(localObjects, valore, prop, callback) {
+    var retstring = "";
+    var tmpDate = valore[0];
+    var controllo = localObjects["resultinfo"][prop[0]];
+    if (controllo == "true") {
+        if (tmpDate && tmpDate != "") {
+            var objData = new Date(tmpDate);
+
+            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
+
+            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
+            var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY')
+
+            //var d = formattedDate.getDate();
+            //var m = formattedDate.getMonth();
+            //m += 1;  // JavaScript months are 0-11
+            //var y = formattedDate.getFullYear();
+            //return d + "/" + m + "/" + y;
+            retstring = dateFormattedwithtime;
+        }
+    }
+
+    callback(retstring);
+}
+function formatvalue(localObjects, valore, prop, callback) {
+
+    var retstring = valore[0];
+
+    callback(retstring);
+}
 function frmcategoria(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
     //dataroot += "}";
@@ -1720,7 +1769,7 @@ function frmcategoria(localObjects, valore, prop, callback) {
     var selvalue = "";
     //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
     if (JSONcategorie != null)
-        for (var j = 0; j < dataroot["data"].length; j++) {
+        for (var j = 0; j < ["data"].length; j++) {
             if (dataroot["data"][j].Codice == valore[0]) {
                 selvalue = dataroot["data"][j].Campo1;
                 break;
@@ -1732,7 +1781,6 @@ function frmcategoria(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
-
 function frmcategoria2liv(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
     //dataroot += "}";
@@ -1755,7 +1803,6 @@ function frmcategoria2liv(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
-
 function frmtipologia(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
     //dataroot += "}";
@@ -1763,6 +1810,70 @@ function frmtipologia(localObjects, valore, prop, callback) {
 
     var dataroot = {};
     dataroot.data = jsontipologie;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+function frmcaratteristica1(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar1;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        //if (dataroot["data"][j].Codice == valore[0] ) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+function frmcaratteristica2(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar2;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+function frmcaratteristica3(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar3;
     var selvalue = "";
     //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
     for (var j = 0; j < dataroot["data"].length; j++) {
@@ -1820,129 +1931,9 @@ function frmregione(localObjects, valore, prop, callback) {
     callback(selvalue);
 }
 
-
-
-
-function frmcaratteristica1(localObjects, valore, prop, callback) {
-    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
-    //dataroot += "}";
-    //dataroot = JSON.parse(dataroot);
-
-    var dataroot = {};
-    dataroot.data = JSONcar1;
-    var selvalue = "";
-    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
-    for (var j = 0; j < dataroot["data"].length; j++) {
-        if (dataroot["data"][j].Codice == valore[0]) {
-            selvalue = dataroot["data"][j].Campo1;
-            break;
-
-        }
-    }
-
-    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
-    //    selvalue = selvalue[0].toLowerCase();
-    callback(selvalue);
-}
-function frmcaratteristica2(localObjects, valore, prop, callback) {
-    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
-    //dataroot += "}";
-    //dataroot = JSON.parse(dataroot);
-
-    var dataroot = {};
-    dataroot.data = JSONcar2;
-    var selvalue = "";
-    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
-    for (var j = 0; j < dataroot["data"].length; j++) {
-        if (dataroot["data"][j].Codice == valore[0]) {
-            selvalue = dataroot["data"][j].Campo1;
-            break;
-
-        }
-    }
-
-    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
-    //    selvalue = selvalue[0].toLowerCase();
-    callback(selvalue);
-}
-function frmcaratteristica3(localObjects, valore, prop, callback) {
-    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
-    //dataroot += "}";
-    //dataroot = JSON.parse(dataroot);
-
-    var dataroot = {};
-    dataroot.data = JSONcar3;
-    var selvalue = "";
-    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
-    for (var j = 0; j < dataroot["data"].length; j++) {
-        if (dataroot["data"][j].Codice == valore[0]) {
-            selvalue = dataroot["data"][j].Campo1;
-            break;
-
-        }
-    }
-
-    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
-    //    selvalue = selvalue[0].toLowerCase();
-    callback(selvalue);
-}
-function formatdata1(localObjects, valore, prop, callback) {
-    var retstring = "";
-    var tmpDate = valore[0];
-    var controllo = localObjects["resultinfo"][prop[0]];
-    if (controllo == "true") {
-        if (tmpDate && tmpDate != "") {
-            var objData = new Date(tmpDate);
-
-            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
-
-            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY')
-
-            //var d = formattedDate.getDate();
-            //var m = formattedDate.getMonth();
-            //m += 1;  // JavaScript months are 0-11
-            //var y = formattedDate.getFullYear();
-            //return d + "/" + m + "/" + y;
-            retstring = dateFormattedwithtime;
-        }
-    }
-
-    callback(retstring);
-}
-function formatdata(localObjects, valore, prop, callback) {
-    var retstring = "";
-    var tmpDate = valore[0];
-    var controllo = localObjects["resultinfo"][prop[0]];
-    if (controllo == "true") {
-        if (tmpDate && tmpDate != "") {
-            var objData = new Date(tmpDate);
-
-            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
-
-            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY')
-
-            //var d = formattedDate.getDate();
-            //var m = formattedDate.getMonth();
-            //m += 1;  // JavaScript months are 0-11
-            //var y = formattedDate.getFullYear();
-            //return d + "/" + m + "/" + y;
-            retstring = dateFormattedwithtime;
-        }
-    }
-
-    callback(retstring);
-}
-
-function formatvalue(localObjects, valore, prop, callback) {
-
-    var retstring = valore[0];
-
-    callback(retstring);
-}
-
+/*--------------------------------------------------------------------------------------------------------
 //CARICAMENTO DATI --------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------*/
 function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -1968,7 +1959,6 @@ function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallone
         }
     });
 }
-
 function caricaParametriRisorseServer(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -1994,7 +1984,6 @@ function caricaParametriRisorseServer(lng, objfiltro, callback, functiontocallon
         }
     });
 }
-
 function caricaDatiServerArchivio(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2017,8 +2006,6 @@ function caricaDatiServerArchivio(lng, objfiltro, callback, functiontocallonend)
         }
     });
 }
-
-
 function caricaDatiServerLinkscategorie(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2041,7 +2028,6 @@ function caricaDatiServerLinkscategorie(lng, objfiltro, callback, functiontocall
         }
     });
 }
-
 function caricaDatiServer(lng, objfiltro, page, pagesize, enablepager, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2067,8 +2053,31 @@ function caricaDatiServer(lng, objfiltro, page, pagesize, enablepager, callback,
         }
     });
 }
+function CaricaDatiServerBinded(lng, objfiltro, page, pagesize, enablepager, callback) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+    var page = page || "";
+    var pagesize = pagesize || "";
+    var enablepager = enablepager || false;
 
-
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'caricahmtlbinded', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng, 'page': page, 'pagesize': pagesize, 'enablepager': enablepager },
+        success: function (result) {
+            callback(result);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText);
+        }
+    });
+}
 function caricaDatiServerBanner(lng, objfiltro, page, pagesize, enablepager, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2094,7 +2103,6 @@ function caricaDatiServerBanner(lng, objfiltro, page, pagesize, enablepager, cal
         }
     });
 }
-
 
 function putinsession(key, value, callback) {
     //putinsession
@@ -2166,13 +2174,15 @@ function emptysession(link, callback) {
         }
     });
 }
+/*--------------------------------------------------------------------------------------------------------
+//FINE CARICAMENTO DATI --------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------*/
 
-/* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
-
-/*---FUNZIONI UTILITA'----------------------------*/
-
-//METODO 1
+/* ****************************************************************************************************
+/*---FUNZIONI UTILITA'-----------------------------------------------------------------------------------
+ *********************************************************************************************************/
+//METODO 1 Caricamento dinamico di file script .js con 
 var require = function (src, callback) {
     callback = callback || function () { };
     var newScriptTag = document.createElement('script'),
@@ -2184,7 +2194,6 @@ var require = function (src, callback) {
     };
     firstScriptTag.parentNode.insertBefore(newScriptTag, firstScriptTag);
 }
-
 
 //METODO 2 Caricamento dinamico di file script .js con 
 function loadJs(url) {
@@ -2215,16 +2224,13 @@ function openLink(link) {
 function sendmessage(title, text) {
     $.Notification.autoHideNotify('success', 'top right', title, text)
 }
-
 function sendmessagefixed(title, text) {
     $.Notification.notify('warning', 'top center', title, text);
-
 }
 
 function isEven(n) {
     return n == parseFloat(n) ? !(n % 2) : void 0;
 }
-
 function endsWith(str, word) {
     return str.indexOf(word, str.length - word.length) !== -1;
 }
@@ -2235,7 +2241,6 @@ function jsAddSlashes(str) {
     }
     return str;
 }
-
 function getTime(passdata) {
 
     var tmpData = new Date(passdata) || new Date();
@@ -2312,8 +2317,6 @@ function registerListener(event, func) {
         window.attachEvent('on' + event, func)
     }
 }
-
-
 (function ($) {
     $.extend({
         getQueryString: function (name) {
@@ -2338,15 +2341,12 @@ function registerListener(event, func) {
         }
     });
 })(jQuery);
-
-
 function getMeta(url) {
     $("<img/>").attr("src", url).load(function () {
         s = { w: this.width, h: this.height };
         alert(s.w + ' ' + s.h);
     });
 }
-
 $.fn.extend({
     // get style attributes that were set on the first element of the jQuery object
     getStyle: function (prop) {
@@ -2475,8 +2475,6 @@ if (!(function f() { }).name) {
         }
     });
 }
-
-
 function validateEmail(value) {
     var input = document.createElement('input');
 

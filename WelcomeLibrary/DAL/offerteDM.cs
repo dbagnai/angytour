@@ -5535,9 +5535,19 @@ namespace WelcomeLibrary.DAL
         }
 
 
-
+        /// <summary>
+        /// Funzione caricamento dati usata dell'handler e dalla funzione di binding
+        /// </summary>
+        /// <param name="lingua"></param>
+        /// <param name="filtri"></param>
+        /// <param name="spage"></param>
+        /// <param name="spagesize"></param>
+        /// <param name="senablepager"></param>
+        /// <returns></returns>
         public static Dictionary<string, string> filterData(string lingua, Dictionary<string, string> filtri, string spage, string spagesize, string senablepager)
         {
+            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
+
             bool gen = false;
             bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
 
@@ -5760,23 +5770,23 @@ namespace WelcomeLibrary.DAL
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 PreserveReferencesHandling = PreserveReferencesHandling.None,
             });
-            ritorno.Add("data", tempOff);
+            ritorno.Add("data", tempOff); //lista dati di ritorno
+
+            //Prepariamo anche le info utili lato client (resultinfo)
             Dictionary<string, string> ListRet = new Dictionary<string, string>();
             ListRet.Add("visualData", filtri["visualData"]);
             ListRet.Add("visualPrezzo", filtri["visualPrezzo"]);
-
             string tot = "0";
-            //if (offerte != null) tot = offerte.Count.ToString();
             if (offerte != null) tot = offerte.Totrecs.ToString();
             ListRet.Add("totalrecords", tot);
             string tempListret = Newtonsoft.Json.JsonConvert.SerializeObject(ListRet);
             ritorno.Add("resultinfo", tempListret);
 
+            //Prepariamo un dictionary per id elemento che contiene le coppie chiave valore utili alla renderizzazione (linkloaded)
             //Carico lista statistiche visite per inserirla nella lista di ritorno
             Dictionary<long, long> visite = new Dictionary<long, long>();
             if (filteredData != null && filteredData.Count > 0)
                 visite = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData);
-
             Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
             foreach (Offerte _o in filteredData)
             {
@@ -5803,7 +5813,6 @@ namespace WelcomeLibrary.DAL
                 SProdotto sottocategoria = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto _tmp) { return (_tmp.Lingua == lingua && (_tmp.CodiceSProdotto == _o.CodiceCategoria2Liv)); });
                 if (sottocategoria != null)
                 {
-
                     linksezione = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv, "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     //linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
                     linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
@@ -5823,24 +5832,20 @@ namespace WelcomeLibrary.DAL
                 string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString(), true, true);
                 // (potrei decidere anche di passare ls versione dell'immagine in base alla rispolizione   WelcomeLibrary.STATIC.Global.Viewportw
                 pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
-
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 string target = "";
-
                 //string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
-
                 string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
-
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
                     target = "_self";
                     link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
                 }
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
+               
                 //string titolo1 = testotitolo;
                 //string titolo2 = "<br/>";
                 //int i = testotitolo.IndexOf("\n");
@@ -5870,7 +5875,8 @@ namespace WelcomeLibrary.DAL
                 tmp.Add("bcklink", bcklink);
                 tmp.Add("link", link);
                 tmp.Add("linksezione", linksezione);
-                tmp.Add("titolo", testotitolo);
+                //tmp.Add("titolo", html.Convert(testotitolo));
+                tmp.Add("titolo",  (testotitolo));
                 tmp.Add("descrizione", descrizione);
                 tmp.Add("datitecnici", datitecnici);
                 tmp.Add("image", pathimmagine);
@@ -5981,7 +5987,7 @@ namespace WelcomeLibrary.DAL
                             {
                                 //a.Descrizione -> dove la mettiamo
                                 string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
-                                tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                                //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
 
                                 tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                                 filescomplete.Add(tmppathimmagine);
@@ -6034,6 +6040,7 @@ namespace WelcomeLibrary.DAL
             tags.Add("imag:(");
             tags.Add("titl:(");
             tags.Add("vide:(");
+            tags.Add("h2ti:(");
 
             string target = "_blank";
             string urlcorretto = "";
@@ -6644,7 +6651,69 @@ namespace WelcomeLibrary.DAL
             }
             ret = strIn;
 
+            a = strIn.ToLower().IndexOf("h2ti:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
 
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    else
+                        url = "";
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<h2 style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" >" + testourl + "</h2>");
+                        else
+                            strIn = strIn.Replace(origtext, "<h2><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></h2>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il quot:( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("h2ti:(");
+            }
+            ret = strIn;
 
             a = strIn.ToLower().IndexOf("cnfg:(");
             while (a != -1)

@@ -336,6 +336,7 @@ namespace WelcomeLibrary.UF
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter bf1 = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             bf1.Serialize(ms, Classe);
             //return ms.ToArray();
+
             return Convert.ToBase64String(ms.ToArray());
         }
 

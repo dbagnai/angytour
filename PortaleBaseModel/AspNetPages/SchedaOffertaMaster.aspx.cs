@@ -354,7 +354,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             if (content != null && content.Id != 0)
             {
                 htmlPage = content.DescrizionebyLingua(Lingua);
-                if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
+                //if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
             }
 
             litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
@@ -392,9 +392,9 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                     //SUGGERITI
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind( sb.ToString(),Lingua,Page.User.Identity.Name,Session);//sb.ToString();
 
                     sb.Clear();
 
@@ -414,7 +414,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);//sb.ToString();
                 }
 
                 break;
@@ -441,9 +441,9 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                     //SUGGERITI
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     sb.Clear();
 
@@ -463,7 +463,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog-no-image.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
                 }
 
                 break;
@@ -484,15 +484,15 @@ public partial class _SchedaOffertaMaster : CommonPage
                 {
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -513,15 +513,15 @@ public partial class _SchedaOffertaMaster : CommonPage
                 {
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -542,15 +542,15 @@ public partial class _SchedaOffertaMaster : CommonPage
                 {
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -571,15 +571,15 @@ public partial class _SchedaOffertaMaster : CommonPage
                 {
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = sb.ToString();
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -600,15 +600,15 @@ public partial class _SchedaOffertaMaster : CommonPage
             //    {
             //        sb.Clear();
             //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\"");
             //        sb.Append("\"></div>");
-            //        plhSuggeritiJs.Text = sb.ToString();
+            //        plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); 
 
             //        sb.Clear();
             //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
             //        sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
             //        sb.Append("\"></div>");
-            //        placeholderrisultati.Text = sb.ToString();
+            //        placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); 
 
             //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
 
@@ -630,15 +630,15 @@ public partial class _SchedaOffertaMaster : CommonPage
             //    {
             //        sb.Clear();
             //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\");");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2\"");
             //        sb.Append("\"></div>");
-            //        plhSuggeritiJs.Text = sb.ToString();
+            //        plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); 
 
             //        sb.Clear();
             //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
             //        sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
             //        sb.Append("\"></div>");
-            //        placeholderrisultati.Text = sb.ToString();
+            //        placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session); 
 
             //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
             //    }

@@ -282,11 +282,11 @@
         <script src="/lib/js/dropzonemng.js"></script>
 
 
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
+<%--        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
-        --%>
+ --%>
 
          <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.js")%>"></script>
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />

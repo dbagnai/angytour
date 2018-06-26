@@ -62,6 +62,27 @@ namespace WelcomeLibrary.UF
 
     public static class Utility
     {
+        public static System.Globalization.CultureInfo setCulture(string lng)
+        {
+            string culturename = "";
+            switch (lng)
+            {
+                case "I":
+                    culturename = "it";
+                    break;
+                case "GB":
+                    culturename = "en";
+                    break;
+                case "RU":
+                    culturename = "ru";
+                    break;
+                default:
+                    culturename = "it";
+                    break;
+            }
+            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
+            return ci;
+        }
 
         // Compresses the files in the nominated folder, and creates a zip file on disk named as outPathname.
         //

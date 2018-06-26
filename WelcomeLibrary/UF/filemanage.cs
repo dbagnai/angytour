@@ -392,7 +392,7 @@ namespace WelcomeLibrary.UF
                         offerteDM offDM = new offerteDM();
                         bool ret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "");
                     }
-                    catch 
+                    catch
                     {
 
                     }
@@ -627,7 +627,10 @@ namespace WelcomeLibrary.UF
                 if (!System.IO.File.Exists(fileorigine))
                     return false;
 
-                bool existsanteprima = false;
+                if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("gif") || fileorigine.ToString().ToLower().EndsWith("png")))
+                    return false;  
+
+                    bool existsanteprima = false;
                 if (System.IO.File.Exists(pathAnteprime + nomeAnteprima))
                     existsanteprima = true;
 
@@ -794,7 +797,7 @@ namespace WelcomeLibrary.UF
             string ritorno = "";
             string physpath = "";
             if (NomeAnteprima != null)
-                if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
+                if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
                 {
                     if (CodiceTipologia != "" && idOfferta != "")
                         if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
@@ -813,6 +816,11 @@ namespace WelcomeLibrary.UF
                         }
                         else if (!nonpdf)
                             ritorno = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/pdf.png";
+                        else
+                        {
+                            ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString() + "/" + NomeAnteprima;
+                        }
+
                 }
                 else
                     ritorno = NomeAnteprima.ToString();
@@ -847,20 +855,21 @@ namespace WelcomeLibrary.UF
             string retname = pathimmagine;
             int actwidth = 0;
             if (!string.IsNullOrEmpty(pathimmagine) && pathimmagine.LastIndexOf('.') != -1)
-                if (int.TryParse(viewportw, out actwidth))
-                {
-                    string modifier = "";
-                    if (actwidth <= 576 && filemanage.reslevels >= 1)
-                        modifier = "-xs";
-                    else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
-                        modifier = "-sm";
-                    else if (actwidth > 768 && actwidth <= 992 && filemanage.reslevels >= 3)
-                        modifier = "-md";
-                    else if (actwidth > 992 && actwidth <= 1200 && filemanage.reslevels >= 4)
-                        modifier = "-lg";
-                    int extpos = pathimmagine.LastIndexOf('.');
-                    retname = pathimmagine.Insert(extpos, modifier);
-                }
+                if ((pathimmagine.ToString().ToLower().EndsWith("jpg") || pathimmagine.ToString().ToLower().EndsWith("gif") || pathimmagine.ToString().ToLower().EndsWith("png")))
+                    if (int.TryParse(viewportw, out actwidth))
+                    {
+                        string modifier = "";
+                        if (actwidth <= 576 && filemanage.reslevels >= 1)
+                            modifier = "-xs";
+                        else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
+                            modifier = "-sm";
+                        else if (actwidth > 768 && actwidth <= 992 && filemanage.reslevels >= 3)
+                            modifier = "-md";
+                        else if (actwidth > 992 && actwidth <= 1200 && filemanage.reslevels >= 4)
+                            modifier = "-lg";
+                        int extpos = pathimmagine.LastIndexOf('.');
+                        retname = pathimmagine.Insert(extpos, modifier);
+                    }
             return retname;
 
         }

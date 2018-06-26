@@ -733,8 +733,9 @@
                                 <div class="row" style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin-bottom: 5px;">
                                     <div class="headline pull-left">
                                         <h2>
-                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                            <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua, "titoloCollegati"): references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
+                                            <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
+                                            <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>
+
                                         </h2>
                                     </div>
                                     <a class="owl-btn prev-v2 pull-left" id="carousel2cprev"><i style="color: #33332e" class="fa fa-chevron-left"></i></a>
@@ -1098,15 +1099,15 @@
                         <script>
                             function ConfirmValidationForm(elembtn) {
                                 var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                 var out1 = document.getElementById("outputContactdiv");
-                                 if (!chk1.checked) {
-                                     out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                     return false;
-                                 } else { out1.innerHTML = ''; }
-                                 if (Page_ClientValidate("contattilateral")) {
-                                     /*do work and go for postback*/
-                                     console.log('ok validated');
-                                     var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");
+                                var out1 = document.getElementById("outputContactdiv");
+                                if (!chk1.checked) {
+                                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                    return false;
+                                } else { out1.innerHTML = ''; }
+                                if (Page_ClientValidate("contattilateral")) {
+                                    /*do work and go for postback*/
+                                    console.log('ok validated');
+                                    var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");
                                     $(elembtn).attr("disabled", "")
                                     $(elembtn).innerHTML = "Wait ..";
                                     buttpost.click();
@@ -1141,8 +1142,7 @@
                                 <div class="pull-left lead">
                                     <h2 class="mbr-section-title" style="margin-bottom: 3px">
                                         <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                        <%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101") ?  references.ResMan("Common", Lingua,"titoloCollegati") : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                                    </h2>
+                                        <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>     </h2>
                                 </div>
                             </div>
                         </div>

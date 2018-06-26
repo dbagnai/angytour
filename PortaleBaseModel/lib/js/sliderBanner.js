@@ -48,7 +48,7 @@ function injectSliderAndLoadBannerinner(type, container, controlid, page, pagesi
         globalObject[controlid + "pagerdata"] = pagerdata;
 
         var params = {};
-        params.containerid = container;
+        params.container = container;
         params.maxelement = maxelement;
         params.listShow = listShow;
         params.tblsezione = tblsezione;
@@ -138,7 +138,8 @@ function BindSliderBanner(el, localObjects) {
 
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[el + "params"];
-    //objfiltrotmp.containerid
+    //objfiltrotmp.container
+     //$('#' + objfiltrotmp.container).parent().show(); //Visualizzo il contenitore se era spento
 
     /*-----------------------*/
     sliderPresent = true;
@@ -162,14 +163,20 @@ function BindSliderBanner(el, localObjects) {
             });
     }
 
-    initSlider(el, objfiltrotmp.width, objfiltrotmp.heigth);
+    initSlider(el, objfiltrotmp.container, objfiltrotmp.width, objfiltrotmp.heigth);
     CleanHtml($('#' + el));
     CleanHtml($('#' + el).parent());
 };
 
 //https://www.themepunch.com/faq/wrap-lines-of-text-jquery-version/
-function initSlider(idDiv, width, height) {
+function initSlider(idDiv, idContainer, width, height) {
     // jQuery(document).ready(function ($) {
+
+    //$('#' + idDiv).parent().attr('style', ';height:calc(100vh - 141px) !important;');
+    $('#' + idContainer).parent().show();
+    $('#' + idContainer).show();
+    //$('#' + idDiv).parent().show();
+    $('#' + idDiv).show();
 
     $('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
     $('#' + idDiv).css('visibility', 'visible');
@@ -212,9 +219,7 @@ function initSlider(idDiv, width, height) {
         keyboardNavigation: "on",
         shadow: 0
     });
-    //$('#' + idDiv).parent().attr('style', ';height:calc(100vh - 141px) !important;');
-    $('#' + idDiv).parent().show();
-    $('#' + idDiv).show();
+
 
     // });
 }
