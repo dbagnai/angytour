@@ -428,7 +428,8 @@ function nextpagebindonserver(controlid) {
                     if (result != '') {
                         try {
                             //Inserisco un elemento di ancor per appendere i dati in pagina prima del contenitore corrente
-                            $("#" + containerid).before("<span id='" + containerid + "-pr'></span>");
+                            if ($("#" + containerid + "-pr") == null || $("#" + containerid + "-pr").length == 0)
+                                $("#" + containerid).before("<span id='" + containerid + "-pr'></span>");
                             //Elimino i vecchi elementi dal contenitore con la pagina precedente
                             $("#" + containerid).remove();
                             $("#" + containerid + "Pager").remove();
@@ -481,7 +482,8 @@ function prevpagebindonserver(controlid) {
                     if (result != '') {
                         try {
                             //Inserisco un elemento di ancor per appendere i dati in pagina
-                            $("#" + containerid).before("<span id='" + containerid + "-pr'></span>");
+                            if ($("#" + containerid + "-pr") == null || $("#" + containerid + "-pr").length == 0)
+                                $("#" + containerid).before("<span id='" + containerid + "-pr'></span>");
                             //Elimino i vecchi elementi
                             $("#" + containerid).remove();
                             $("#" + containerid + "Pager").remove();
@@ -507,6 +509,65 @@ function prevpagebindonserver(controlid) {
     });
 
 }
+
+function addcontentbindonserver(controlid) {
+
+    var page = globalObject[controlid + "pagerdata"].page;
+    if (!isNaN(Number(page)))
+        page = Number(page) + 1;
+    var pagesnumber = Math.ceil(globalObject[controlid + "pagerdata"].totalrecords / globalObject[controlid + "pagerdata"].pagesize);
+    var pageover = false;
+    if (page > pagesnumber) { page = pagesnumber; pageover = true; };
+    if (page < 1) { page = 1; pageover = true };
+    globalObject[controlid + "pagerdata"].page = page;
+    scrolltotop.setting.scrollduration = 0;
+    scrolltotop.scrollup();
+    /*MEMORIZZO LA PAGINA IN SESSIONE (per mantenere la posizione di pagina al cambio di url)*/
+    getfromsession('objfiltro', function (retval) {
+        var objfiltro = {};
+        if (retval != null && retval != '')
+            objfiltro = JSON.parse(retval);
+        var propname = "page" + controlid;
+        objfiltro[propname] = page;//aggiungo al filtro in session la pagina attuale dalla memoria globale javascript
+        putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) {
+
+            if (!pageover)
+                CaricaDatiServerBinded(lng, globalObject[controlid + "params"], globalObject[controlid + "pagerdata"].page, globalObject[controlid + "pagerdata"].pagesize, globalObject[controlid + "pagerdata"].enablepager, function (result) {
+                    var containerid = globalObject[controlid + "params"].container;
+                    if (result != '') {
+                        try {
+                            //Elimino i vecchi elementi dal contenitore con la pagina precedente
+                            //$("#" + containerid).remove();
+                            $("#" + containerid + "Pager").remove();
+                            var resparsed = JSON.parse(result);
+
+                            var newhtml = $(resparsed["html"]);
+                            //Prendo il pager e lo appendo dopo il conteniteore generale
+                            var newpager = ((newhtml).wrap('<p>').parent().find("#" + containerid + "Pager")).outerHTML()
+                            $("#" + containerid).after(newpager);
+                            //inseriscso l'html renderizzato nella lista ul
+                            var nuovili = ((newhtml).find("#" + controlid)).html();
+                             $("#" + controlid).append(nuovili);
+
+                            // devo scorrere resparsed["jscommands"] e chiamare le funzioni li presenti con  window[itemtocall.name].apply(this, itemtocall.args) o eval ( ...)  .. da finire
+                            if (resparsed != null && resparsed.hasOwnProperty("jscommands"))
+                                for (var key in resparsed["jscommands"]) {
+                                    if (resparsed["jscommands"].hasOwnProperty(key)) {
+                                        try {
+                                            //console.log(key, resparsed["jscommands"][key]);
+                                            eval(resparsed["jscommands"][key]);//Eseguiamo i comandi indicati dal server
+                                        } catch{ }
+                                    }
+                                }
+                        } catch { }
+                    }
+                });
+
+        });
+    });
+
+}
+
 /**
 PAGINAZIONE CON BINDING SERVER SIDE END -----------------------------------
  */

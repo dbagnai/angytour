@@ -1100,6 +1100,22 @@ namespace WelcomeLibrary.UF
                                                 ///////////////////////////////////////////////////////////////////////////////////
                                                 //Inizializziamo i tasti avanti e indietro del pager e valorizziamo le etichette di testo   sostituisce renderpager lato client e anche inithtmlpager
                                                 ///////////////////////////////////////////////////////////////////////////////////
+                                                var btnadd = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnAddcontent");
+                                                if ((btnadd != null) && (btnadd.Count() > 0))
+                                                {
+                                                    btnadd.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore + " add";
+                                                    btnadd.First().SetAttributeValue("onClick", "javascript:addcontentbindonserver('" + dictpars["controlid"] + "')");
+
+                                                    if (btnadd.First().Attributes.Contains("style"))
+                                                    {
+                                                        btnadd.First().Attributes["style"].Value = btnadd.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        btnadd.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        btnadd.First().Attributes.Add("style", "display:block");
+                                                }
+
+
                                                 var btnnext1 = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage1");
                                                 if ((btnnext1 != null) && (btnnext1.Count() > 0))
                                                 {
