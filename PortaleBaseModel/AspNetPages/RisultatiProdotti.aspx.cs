@@ -311,7 +311,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 sb.Append("injectPortfolioAndLoad,isotopeProdotti1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'," + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
                 sb.Append("\"></div>");
                 sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                placeholderrisultati.Text = sb.ToString();
+                placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);// sb.ToString();
 
 
                 //SettaTestoIniziale();

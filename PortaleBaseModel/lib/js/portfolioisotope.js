@@ -311,84 +311,6 @@ function InitIsotopeLocal(controlid, container) {
 }
 
 
-
-/*Pager functions per client side binding start-------------------------------------------------------------------------------*/
-
-function initHtmlPager(controlid) {
-    $('#' + controlid + 'btnNextPage').attr('onClick', "javascript:nextpage('" + controlid + "')")
-    $('#' + controlid + 'btnPrevPage').attr('onClick', "javascript:prevpage('" + controlid + "')")
-}
-function renderPager(controlid, callback) {
-    //console.log('renderPager');
-    var page = globalObject[controlid + "pagerdata"].page;
-    var pagesize = globalObject[controlid + "pagerdata"].pagesize;
-    var enablepager = globalObject[controlid + "pagerdata"].enablepager;
-    var totalrecords = globalObject[controlid + "pagerdata"].totalrecords;
-
-    var pagesnumber = Math.ceil(totalrecords / pagesize);
-    if (page > pagesnumber) page = pagesnumber;
-    if (page < 1) page = 1;
-    globalObject[controlid + "pagerdata"].page = page;
-
-    $('#' + controlid + 'btnNextPage')[0].innerHTML = baseresources[lng]["pageravanti"];
-    $('#' + controlid + 'btnNextPage').show();
-    $('#' + controlid + 'btnPrevPage')[0].innerHTML = baseresources[lng]["pagerindietro"];
-    $('#' + controlid + 'btnPrevPage').show();
-    $("#" + controlid + "spantotals")[0].innerHTML = baseresources[lng]["pagertotale"] + " " + totalrecords + "<br/>";
-    //$('#' + controlid + 'btnNextPage')[0].innerHTML = 'Avanti';
-    //$('#' + controlid + 'btnPrevPage')[0].innerHTML = 'Indietro';
-    //$("#" + controlid + "spantotals")[0].innerHTML = 'Totale ' + " " + totalrecords + "<br/>";
-    $("#" + controlid + "divactpage")[0].innerHTML = page + "/" + pagesnumber;
-
-    if (pagesnumber > 1)
-        $('#' + controlid + 'divPager').show();
-    else
-        $('#' + controlid + 'divPager').hide();
-    if (callback != null)
-        callback('');
-}
-
-function nextpage(controlid) {
-    //   console.log('nextpage');
-    var page = globalObject[controlid + "pagerdata"].page;
-    if (!isNaN(Number(page)))
-        page = Number(page) + 1;
-    globalObject[controlid + "pagerdata"].page = page;
-
-    var connecteid = globalObject[controlid + "pagerdata"].pagerconnectedid;
-    if (connecteid != undefined && connecteid != "" && connecteid != null) {
-        var pagesize = globalObject[controlid + "pagerdata"].pagesize;
-        var totalrecords = globalObject[controlid + "pagerdata"].totalrecords;
-        var pagesnumber = Math.ceil(totalrecords / pagesize);
-        if (Number(page) < totalrecords)
-            nextpage(connecteid);
-    }
-    renderPager(controlid, function (result) {
-        CaricaIsotopeData(controlid);
-    });
-    scrolltotop.setting.scrollduration = 0;
-    scrolltotop.scrollup();
-}
-function prevpage(controlid) {
-    // console.log('prevpage');
-    var page = globalObject[controlid + "pagerdata"].page;
-    if (!isNaN(Number(page)))
-        page = Number(page) - 1;
-    globalObject[controlid + "pagerdata"].page = page;
-
-    var connecteid = globalObject[controlid + "pagerdata"].pagerconnectedid;
-    if (connecteid != undefined && connecteid != "" && connecteid != null) {
-        if (Number(page) <= 1)
-            prevpage(connecteid);
-    }
-    renderPager(controlid, function (result) {
-        CaricaIsotopeData(controlid);
-    });
-    scrolltotop.setting.scrollduration = 0;
-    scrolltotop.scrollup();
-}
-/*Pager functions per client side binding end-------------------------------------------------------------------------------*/
-
 /**
 PAGINAZIONE CON BINDING SERVER SIDE -----------------------------------
  */
@@ -571,3 +493,83 @@ function addcontentbindonserver(controlid) {
 /**
 PAGINAZIONE CON BINDING SERVER SIDE END -----------------------------------
  */
+
+
+
+
+/*Pager functions per client side binding start-------------------------------------------------------------------------------*/
+
+function initHtmlPager(controlid) {
+    $('#' + controlid + 'btnNextPage').attr('onClick', "javascript:nextpage('" + controlid + "')")
+    $('#' + controlid + 'btnPrevPage').attr('onClick', "javascript:prevpage('" + controlid + "')")
+}
+function renderPager(controlid, callback) {
+    //console.log('renderPager');
+    var page = globalObject[controlid + "pagerdata"].page;
+    var pagesize = globalObject[controlid + "pagerdata"].pagesize;
+    var enablepager = globalObject[controlid + "pagerdata"].enablepager;
+    var totalrecords = globalObject[controlid + "pagerdata"].totalrecords;
+
+    var pagesnumber = Math.ceil(totalrecords / pagesize);
+    if (page > pagesnumber) page = pagesnumber;
+    if (page < 1) page = 1;
+    globalObject[controlid + "pagerdata"].page = page;
+
+    $('#' + controlid + 'btnNextPage')[0].innerHTML = baseresources[lng]["pageravanti"];
+    $('#' + controlid + 'btnNextPage').show();
+    $('#' + controlid + 'btnPrevPage')[0].innerHTML = baseresources[lng]["pagerindietro"];
+    $('#' + controlid + 'btnPrevPage').show();
+    $("#" + controlid + "spantotals")[0].innerHTML = baseresources[lng]["pagertotale"] + " " + totalrecords + "<br/>";
+    //$('#' + controlid + 'btnNextPage')[0].innerHTML = 'Avanti';
+    //$('#' + controlid + 'btnPrevPage')[0].innerHTML = 'Indietro';
+    //$("#" + controlid + "spantotals")[0].innerHTML = 'Totale ' + " " + totalrecords + "<br/>";
+    $("#" + controlid + "divactpage")[0].innerHTML = page + "/" + pagesnumber;
+
+    if (pagesnumber > 1)
+        $('#' + controlid + 'divPager').show();
+    else
+        $('#' + controlid + 'divPager').hide();
+    if (callback != null)
+        callback('');
+}
+
+function nextpage(controlid) {
+    //   console.log('nextpage');
+    var page = globalObject[controlid + "pagerdata"].page;
+    if (!isNaN(Number(page)))
+        page = Number(page) + 1;
+    globalObject[controlid + "pagerdata"].page = page;
+
+    var connecteid = globalObject[controlid + "pagerdata"].pagerconnectedid;
+    if (connecteid != undefined && connecteid != "" && connecteid != null) {
+        var pagesize = globalObject[controlid + "pagerdata"].pagesize;
+        var totalrecords = globalObject[controlid + "pagerdata"].totalrecords;
+        var pagesnumber = Math.ceil(totalrecords / pagesize);
+        if (Number(page) < totalrecords)
+            nextpage(connecteid);
+    }
+    renderPager(controlid, function (result) {
+        CaricaIsotopeData(controlid);
+    });
+    scrolltotop.setting.scrollduration = 0;
+    scrolltotop.scrollup();
+}
+function prevpage(controlid) {
+    // console.log('prevpage');
+    var page = globalObject[controlid + "pagerdata"].page;
+    if (!isNaN(Number(page)))
+        page = Number(page) - 1;
+    globalObject[controlid + "pagerdata"].page = page;
+
+    var connecteid = globalObject[controlid + "pagerdata"].pagerconnectedid;
+    if (connecteid != undefined && connecteid != "" && connecteid != null) {
+        if (Number(page) <= 1)
+            prevpage(connecteid);
+    }
+    renderPager(controlid, function (result) {
+        CaricaIsotopeData(controlid);
+    });
+    scrolltotop.setting.scrollduration = 0;
+    scrolltotop.scrollup();
+}
+/*Pager functions per client side binding end-------------------------------------------------------------------------------*/

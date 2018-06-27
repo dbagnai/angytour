@@ -352,7 +352,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     sb.Append("\"></div>");
-                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                   sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);// sb.ToString();
 
                     //sb.Clear();
@@ -530,10 +530,12 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     //placeholderrisultati
-                    sb.Append("<div id=\"divPortfolioList\" class=\"inject clientsideinject\" params=\"");
+                    //sb.Append("<div>");
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     sb.Append("injectPortfolioAndLoad,isotopeSinglerowAnimated.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //sb.Append("</div>");
                     placeholderrisultatinocontainer.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);// sb.ToString();
                 }
 

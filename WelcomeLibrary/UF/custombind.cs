@@ -967,8 +967,8 @@ namespace WelcomeLibrary.UF
                         // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) 
                         //return;
 
-
-                        if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
+                        if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
+                        //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
                         //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", node.ParentNode.OuterHtml.Replace("\"", "\\\"").Replace("'", "|")); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
                         //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", Newtonsoft.Json.JsonConvert.SerializeObject(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
                         //Caricamento parametri per la chiamata
@@ -1016,6 +1016,10 @@ namespace WelcomeLibrary.UF
                         if (!dictpars.ContainsKey("container")) return;
                         if (!dictpars.ContainsKey("controlid")) return;
 
+                        //Se non presente inserisco un nodo contenitore al quello passato
+                        //var newNode = HtmlNode.CreateNode(node.OuterHtml.Replace(node.OuterHtml, "<div class=\"containernode\">" + node.OuterHtml + "</div>"));
+                        //node.ParentNode.ReplaceChild(newNode, node);
+
                         ///////////////////////////////////////////////////////////
                         //CARICAMENTO TEMPLATE VISUALIZZAZIONE  (isotopeOfferte.html)
                         ///////////////////////////////////////////////////////////
@@ -1052,6 +1056,21 @@ namespace WelcomeLibrary.UF
                                 //////////////////////////////////////////////////////////////////////////////////////////////////// 
                                 if (dictpagerpars["enablepager"] == "true")
                                 {
+
+                                    //Se non presente appendiamo il div per il pager
+                                    //"<div id=\"containeridListPager\"></div> //Inserisco questo elemento se non presente
+                                    var pagernode = node.ParentNode.SelectNodes("//*[contains(@id,'" + dictpars["container"] + "Pager')]");
+                                    if (pagernode == null || pagernode.Count == 0)
+                                    {
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporaneo
+                                        tmpdoc.LoadHtml("<div id=\"" + dictpars["container"] + "Pager\"></div>");
+                                        //node.ParentNode.InsertAfter(tmpdoc.DocumentNode.Clone(), node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']"));
+                                        //node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']").ParentNode.AppendChild(tmpdoc.DocumentNode.Clone());
+                                        //node.ParentNode.AppendChild(tmpdoc.DocumentNode.Clone()); //Modifica la collection padre del ciclo e va in errore
+                                        node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']").AppendChild(tmpdoc.DocumentNode.Clone());
+                                    }
+
+
                                     string templatepager = "";
                                     if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + "pagerIsotope.html"))
                                         templatepager = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + "pagerIsotope.html");
@@ -1267,21 +1286,30 @@ namespace WelcomeLibrary.UF
                                     }
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    //Appendiamo l'html al contenitore corretto dopo il binding!!
+                                    //Appendiamo l'html al contenitore corretto dopo il binding!
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
-                                    if (elementtoappend != null)
+                                    //var nodeconteinerisotope = node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']");
+                                    //nodeconteinerisotope.RemoveAllChildren();
+                                    //var clonedpager = node.SelectSingleNode("//*[@id='" + dictpars["container"] + "Pager']").Clone(); //Clono il pager per non cancellarlo
+                                    HtmlNode clonedpager = null; //Clono il pager per non cancellarlo
+                                    var childelems = node.ChildNodes.Descendants().Where(n => n.Id == (dictpars["container"] + "Pager"));
+                                    if ((childelems != null) && (childelems.Count() > 0))
                                     {
-                                        //node.AppendChild(elementtoappend.First().Clone()); //Appendo il blocco bindato ai dati
-                                        node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+                                        //Clono il pager per non cancellarlo
+                                        clonedpager = childelems.First().Clone();
                                     }
+                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
+                                    node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+                                    if (clonedpager != null && node.ParentNode.SelectSingleNode("//*[@id='" + dictpars["container"] + "Pager']") == null)
+                                        node.AppendChild(clonedpager); //Appendo il pager
+
+
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     node.Attributes["class"].Value = node.Attributes["class"].Value.Replace("inject", "");
                                     node.Attributes["params"].Remove();
                                     CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
-
 
 
                                     //Aggiorno le variaibli javascript globalObject[controlid + "params"] ( da dictpars) e globalObject[controlid + "pagerdata" ] ( da dictpagerpars ) per far funzionare il pager lato client !!!
@@ -1960,7 +1988,7 @@ namespace WelcomeLibrary.UF
                         {
                             string idelement = itemdic[property];
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
-                            {    //bookingtool.initbookingtool(idelement, nodetobind.Attributes["id"]);
+                            {    //carrellotool.initcarrellotool(idelement,  ..... );
                                 if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value)) jscommands.Remove(nodetobind.Attributes["id"].Value);
                                 jscommands.Add(nodetobind.Attributes["id"].Value, "carrellotool.initcarrellotool(" + idelement + ",''," + Username + "," + nodetobind.Attributes["id"].Value + ",2);"); //Imposto la chiamata da tornare
                             }
