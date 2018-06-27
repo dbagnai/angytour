@@ -998,6 +998,7 @@ namespace WelcomeLibrary.UF
                         //////////////////////////////////////////////////
                         //Ricarichiamo dalla session la pagina se presente
                         //////////////////////////////////////////////////
+#if false
                         if (Session != null)
                         {
                             string retval = Session["objfiltro"].ToString();
@@ -1012,7 +1013,8 @@ namespace WelcomeLibrary.UF
                                             dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
                                     }
                             }
-                        }
+                        } 
+#endif
                         //////////////////////////////////////
                         //Se presente la quesrystring pagino con quella (PRIORITARA)
                         if (Richiesta != null)
@@ -1221,18 +1223,21 @@ namespace WelcomeLibrary.UF
                                                 ///////////PAGINAZIONE CON FUNZIONI JAVASCRIPT E CARICAMENTO LATO SERVER
 
                                                 //Pulsanti per chiamate lato client!
-                                                //var btnnext = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage");
-                                                //if ((btnnext != null) && (btnnext.Count() > 0))
-                                                //{
-                                                //    btnnext.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
-                                                //    btnnext.First().SetAttributeValue("onClick", "javascript:nextpage('" + dictpars["controlid"] + "')");
-                                                //}
-                                                //var btnprev = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnPrevPage");
-                                                //if ((btnprev != null) && (btnprev.Count() > 0))
-                                                //{
-                                                //    btnprev.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
-                                                //    btnprev.First().SetAttributeValue("onClick", "javascript:prevpage('" + dictpars["controlid"] + "')");
-                                                //}
+#if false
+                                                var btnnext = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage");
+                                                if ((btnnext != null) && (btnnext.Count() > 0))
+                                                {
+                                                    btnnext.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
+                                                    btnnext.First().SetAttributeValue("onClick", "javascript:nextpage('" + dictpars["controlid"] + "')");
+                                                }
+                                                var btnprev = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnPrevPage");
+                                                if ((btnprev != null) && (btnprev.Count() > 0))
+                                                {
+                                                    btnprev.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
+                                                    btnprev.First().SetAttributeValue("onClick", "javascript:prevpage('" + dictpars["controlid"] + "')");
+                                                } 
+                                                ////////////////////////////////////
+#endif
                                                 var lbltototali = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "spantotals");
                                                 if ((lbltototali != null) && (lbltototali.Count() > 0))
                                                     lbltototali.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagertotale").Valore + " " + totalrecords.ToString() + "<br/>";
