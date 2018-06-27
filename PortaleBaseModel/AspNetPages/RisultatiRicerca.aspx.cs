@@ -353,7 +353,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     sb.Append("\"></div>");
                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);// sb.ToString();
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);// sb.ToString();
 
                     //sb.Clear();
                     //sb.Append("<div class=\"sfondo-contenitore\">");

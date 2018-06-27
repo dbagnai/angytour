@@ -483,7 +483,7 @@
     "~/js/notifications/notifications.js",
     "~/js/moment-with-locales.min.js",
     "~/js/imagesloaded.pkgd.js",
-    "~/js/isotope.pkgd.min.js",
+    "~/js/isotope304/isotope.pkgd.min.js",
     "~/js/jquery.cycle.js",
     "~/js/jquery.cycle2.carousel.js",
 //"~/js/jquery-ui-1.11.4.custom/jquery-ui.js",

@@ -520,6 +520,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                             PreserveReferencesHandling = PreserveReferencesHandling.None,
                         });
+                        //Svuoto jscommands in memoria
+                        custombind.jscommands = new Dictionary<string, string>();
                     }
                     break;
                 case "caricaMenuSezioni":

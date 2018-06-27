@@ -48,21 +48,26 @@ var enablescrolltopmem = false;
 //    $(window).scrollTop(0);
 //}); 
 $(window).scroll(function () {
-    var pathName = document.location.pathname;
+    var pathName = document.location.pathname + document.location.search;
     var scrollPosition = $(window).scrollTop();
     if (enablescrolltopmem) {
         sessionStorage.setItem("scrollPosition_" + pathName, scrollPosition.toString());
-        // console.log(scrollPosition);
+         console.log(scrollPosition);
     }
 });
 /*Recover scroll top pos from memory*/
 var reinitscrollpos = function () {
-    var pathName = document.location.pathname;
+    var pathName = document.location.pathname + document.location.search;
     if (sessionStorage["scrollPosition_" + pathName]) {
-        // setTimeout(function () {
-        $(window).scrollTop(sessionStorage.getItem("scrollPosition_" + pathName) || 0);
-        //}, 200)
-        console.log("restore pos to : " + sessionStorage.getItem("scrollPosition_" + pathName));
+        if (sessionStorage["scrollPosition_" + pathName]) {
+            //console.log("doc act height: " + $(document).height());
+            //   setTimeout(function () {
+            if ($(document).height() > sessionStorage.getItem("scrollPosition_" + pathName)) {
+                $(window).scrollTop(sessionStorage.getItem("scrollPosition_" + pathName));
+                console.log("restore pos to : " + sessionStorage.getItem("scrollPosition_" + pathName));
+            }
+            //  }, 600)
+        }
     }
 };
 /*Memorizzo posizione scrolltop in session ----------------------------------------*/

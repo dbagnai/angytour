@@ -287,26 +287,24 @@ function InitIsotopeLocal(controlid, container) {
     });
     // });
 
-    //$grid.isotope('reloadItems');
-    //$grid.isotope('getItemElements')
+    $grid.on('arrangeComplete', function () {
+        console.log('arrangeComplete');
+    }).isotope();
+
+    $grid.on('layoutComplete',
+        function (event, laidOutItems) {
+            lazyLoad();
+            // setTimeout(function () {
+            console.log("layoutComplete doc act height: " + $(document).height());
+            reinitscrollpos(); //Return to previosus scrolltop pos of page
+            //   }, 500);
+            setTimeout(function () { enablescrolltopmem = true; }, 3000);
+        });
 
     worksgrid.imagesLoaded(function () {
         $grid.isotope('layout');
     });
 
-    //On event layoutComplete i make what needed
-    $grid.on('layoutComplete',
-        function (event, laidOutItems) {
-            lazyLoad();
-            //Abilito traking vertical scroll position e reimposto la posizioneiniziale se presente in memoria
-            enablescrolltopmem = true;
-            reinitscrollpos(); //Return to previosus scrolltop pos of page
-        });
-
-
-    $grid.on('arrangeComplete', function (event, filteredItems) {
-        console.log('arrange is complete');
-    });
 
 }
 
@@ -322,6 +320,12 @@ function initGlobalVarsFromServer(controlid, dictpars, dictpagerpars) {
     if (dictpagerpars != null && dictpagerpars != '') {
         globalObject[controlid + "pagerdata"] = JSON.parse(dictpagerpars);
     }
+    if (globalObject.hasOwnProperty(controlid + "pagerdata") && globalObject[controlid + "pagerdata"].hasOwnProperty("page") && globalObject[controlid + "pagerdata"].page > 1) {
+       // window.location.hash = "page=" + globalObject[controlid + "pagerdata"].page;
+        //$.getQueryString("page")
+      //  window.location.search += "page=" + globalObject[controlid + "pagerdata"].page; //Se cambi la quesry string avvien il postback
+        //finire
+    } else {  }
 }
 function nextpagebindonserver(controlid) {
 
@@ -469,7 +473,7 @@ function addcontentbindonserver(controlid) {
                             $("#" + containerid).after(newpager);
                             //inseriscso l'html renderizzato nella lista ul
                             var nuovili = ((newhtml).find("#" + controlid)).html();
-                             $("#" + controlid).append(nuovili);
+                            $("#" + controlid).append(nuovili);
 
                             // devo scorrere resparsed["jscommands"] e chiamare le funzioni li presenti con  window[itemtocall.name].apply(this, itemtocall.args) o eval ( ...)  .. da finire
                             if (resparsed != null && resparsed.hasOwnProperty("jscommands"))

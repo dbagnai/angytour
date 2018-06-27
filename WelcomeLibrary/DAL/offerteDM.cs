@@ -5845,7 +5845,7 @@ namespace WelcomeLibrary.DAL
                     link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
                 }
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-               
+
                 //string titolo1 = testotitolo;
                 //string titolo2 = "<br/>";
                 //int i = testotitolo.IndexOf("\n");
@@ -5876,7 +5876,7 @@ namespace WelcomeLibrary.DAL
                 tmp.Add("link", link);
                 tmp.Add("linksezione", linksezione);
                 //tmp.Add("titolo", html.Convert(testotitolo));
-                tmp.Add("titolo",  (testotitolo));
+                tmp.Add("titolo", (testotitolo));
                 tmp.Add("descrizione", descrizione);
                 tmp.Add("datitecnici", datitecnici);
                 tmp.Add("image", pathimmagine);
@@ -6018,20 +6018,18 @@ namespace WelcomeLibrary.DAL
         }
 
 
+
         /// <summary>
-        /// Rimpiazza link:(www.sitodavadere.it) con un link html
-        /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
+        /// Funzione di rimpiazzo dei tag
+        /// </summary>
         /// <param name="strIn"></param>
-        /// <returns></returns>
-        /// <summary>
-        /// Rimpiazza link:(www.sitodavadere.it) con un link html
-        /// oppure link:(www.sitodavadere.it|testo visualizzato del link)
-        /// <param name="strIn"></param>
+        /// <param name="nolink"></param>
         /// <returns></returns>
         public static String ReplaceLinks(string strIn, bool nolink = false)
         {
             List<string> tags = new List<string>();
             tags.Add("link:(");
+            tags.Add("aimg:(");
             tags.Add("quot:(");
             tags.Add("bold:(");
             tags.Add("iden:(");
@@ -6447,6 +6445,86 @@ namespace WelcomeLibrary.DAL
             ret = strIn;
 
 
+            a = strIn.ToLower().IndexOf("aimg:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    int lastsplit = url.LastIndexOf('|');
+                    int firstsplit = url.IndexOf('|');
+                    while (lastsplit != firstsplit)
+                    {
+                        url = url.Remove(lastsplit, 1);
+                        lastsplit = url.LastIndexOf('|');
+                        firstsplit = url.IndexOf('|');
+                    }
+                    string testourl = url;
+                    string[] dati = url.Split('|');
+                    if (dati.Length == 2)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                    }
+                    else
+                        url = "";
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    string testourlcorretto = testourl;
+                    if (!testourl.ToLower().StartsWith("http") && !testourl.ToLower().StartsWith("https") && !testourl.ToLower().StartsWith("~"))
+                    {
+
+                        testourlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + testourl;
+                    }
+                    if (testourl.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !testourl.ToLower().StartsWith("http") && !testourl.ToLower().StartsWith("https"))
+                    {
+                        
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            testourlcorretto = "https://" + testourl;
+                        else
+                            testourlcorretto = "http://" + testourl;
+                    }
+                    testourlcorretto = ReplaceAbsoluteLinks(testourlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (!string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<a target=\"_blank\"  href=\"" + urlcorretto + "\" ><img class=\"aimg\"  style=\"max-width:100%;border:none\"  src=\"" + testourlcorretto + "\"  /></a>");
+                       
+
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("aimg:(");
+
+
+            }
+            ret = strIn;
 
 
             a = strIn.ToLower().IndexOf("imag:(");

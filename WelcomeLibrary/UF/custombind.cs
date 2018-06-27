@@ -15,8 +15,9 @@ namespace WelcomeLibrary.UF
         private static string Lingua = "";
         private static string Username = "";
         private static System.Web.SessionState.HttpSessionState Session = null;
+        private static System.Web.HttpRequest Richiesta = null;
         public static Dictionary<string, string> jscommands = new Dictionary<string, string>();
-        public static string bind(string text, string lingua, string username = "", System.Web.SessionState.HttpSessionState sessione = null, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null)
+        public static string bind(string text, string lingua, string username = "", System.Web.SessionState.HttpSessionState sessione = null, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null, System.Web.HttpRequest richiesta = null)
         {
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +31,7 @@ namespace WelcomeLibrary.UF
             Lingua = lingua;
             Username = username;
             Session = sessione;
+            Richiesta = richiesta;
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(text);
             var findclasses = doc.DocumentNode.Descendants().Where(d =>
@@ -1011,6 +1013,16 @@ namespace WelcomeLibrary.UF
                                     }
                             }
                         }
+                        //////////////////////////////////////
+                        //Se presente la quesrystring pagino con quella (PRIORITARA)
+                        if (Richiesta != null)
+                        {
+                            if (Richiesta.QueryString.AllKeys.Contains("page"))
+                            {
+                                string pagina = Richiesta.QueryString.GetValues("page")[0];
+                                dictpagerpars["page"] = pagina;
+                            }
+                        }
                         /////////////////////////////////////
 
                         if (!dictpars.ContainsKey("container")) return;
@@ -1092,9 +1104,13 @@ namespace WelcomeLibrary.UF
                                                 int page = 1; int.TryParse(dictpagerpars["page"], out page);
                                                 int pagesize = 1; int.TryParse(dictpagerpars["pagesize"], out pagesize);
                                                 int pagesnumber = (int)System.Math.Ceiling((Double)totalrecords / (Double)pagesize);
-                                                if (page > pagesnumber) page = pagesnumber;
-                                                if (page < 1) page = 1;
+                                                if (page > pagesnumber) { page = pagesnumber; }
+                                                if (page < 1) { page = 1; }
                                                 dictpagerpars["page"] = page.ToString();
+
+                                                string prevpage = (page - 1 < 1) ? "1" : (page - 1).ToString();
+                                                string nextpage = (page + 1 > pagesnumber) ? pagesnumber.ToString() : (page + 1).ToString();
+
                                                 //Accendo o spengo il pager
                                                 if (pagesnumber > 1)
                                                 {
@@ -1134,7 +1150,44 @@ namespace WelcomeLibrary.UF
                                                         btnadd.First().Attributes.Add("style", "display:block");
                                                 }
 
+                                                ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+#if true
+                                                var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
+                                                if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
+                                                {
+                                                    aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
+                                                    //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+                                                    aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
 
+                                                    if (aNextPage.First().Attributes.Contains("style"))
+                                                    {
+                                                        aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        aNextPage.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        aNextPage.First().Attributes.Add("style", "display:block");
+                                                }
+
+                                                var aPrevPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aPrevPage");
+                                                if ((aPrevPage != null) && (aPrevPage.Count() > 0) && Richiesta != null && page > 1)
+                                                {
+                                                    aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
+                                                    //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+                                                    aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+
+                                                    if (aPrevPage.First().Attributes.Contains("style"))
+                                                    {
+                                                        aPrevPage.First().Attributes["style"].Value = aPrevPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        aPrevPage.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        aPrevPage.First().Attributes.Add("style", "display:block");
+                                                }
+#endif
+                                                ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+
+                                                ///////////PAGINAZIONE CON FUNZIONI JAVASCRIPT E CARICAMENTO LATO SERVER
+#if false
                                                 var btnnext1 = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage1");
                                                 if ((btnnext1 != null) && (btnnext1.Count() > 0))
                                                 {
@@ -1163,7 +1216,9 @@ namespace WelcomeLibrary.UF
                                                     }
                                                     else
                                                         btnprev1.First().Attributes.Add("style", "display:block");
-                                                }
+                                                } 
+#endif
+                                                ///////////PAGINAZIONE CON FUNZIONI JAVASCRIPT E CARICAMENTO LATO SERVER
 
                                                 //Pulsanti per chiamate lato client!
                                                 //var btnnext = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage");
