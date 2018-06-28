@@ -312,21 +312,7 @@ function InitIsotopeLocal(controlid, container) {
 /**
 PAGINAZIONE CON BINDING SERVER SIDE -----------------------------------
  */
-function initGlobalVarsFromServer(controlid, dictpars, dictpagerpars) {
-    //console.log('initGlobalVarsFromServer');
-    if (dictpars != null && dictpars != '') {
-        globalObject[controlid + "params"] = JSON.parse(dictpars);
-    }
-    if (dictpagerpars != null && dictpagerpars != '') {
-        globalObject[controlid + "pagerdata"] = JSON.parse(dictpagerpars);
-    }
-    if (globalObject.hasOwnProperty(controlid + "pagerdata") && globalObject[controlid + "pagerdata"].hasOwnProperty("page") && globalObject[controlid + "pagerdata"].page > 1) {
-       // window.location.hash = "page=" + globalObject[controlid + "pagerdata"].page;
-        //$.getQueryString("page")
-      //  window.location.search += "page=" + globalObject[controlid + "pagerdata"].page; //Se cambi la quesry string avvien il postback
-        //finire
-    } else {  }
-}
+
 function nextpagebindonserver(controlid) {
 
     var page = globalObject[controlid + "pagerdata"].page;

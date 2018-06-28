@@ -894,6 +894,22 @@ function ShowList(templatename, container, controlid, data) {
 }
 
 
+//Usata per valorizzare le variabili generali con comando iniettato lato server custombind
+function initGlobalVarsFromServer(controlid, dictpars, dictpagerpars) {
+    //console.log('initGlobalVarsFromServer');
+    if (dictpars != null && dictpars != '') {
+        globalObject[controlid + "params"] = JSON.parse(dictpars);
+    }
+    if (dictpagerpars != null && dictpagerpars != '') {
+        globalObject[controlid + "pagerdata"] = JSON.parse(dictpagerpars);
+    }
+    if (globalObject.hasOwnProperty(controlid + "pagerdata") && globalObject[controlid + "pagerdata"].hasOwnProperty("page") && globalObject[controlid + "pagerdata"].page > 1) {
+        // window.location.hash = "page=" + globalObject[controlid + "pagerdata"].page;
+        //$.getQueryString("page")
+        //  window.location.search += "page=" + globalObject[controlid + "pagerdata"].page; //Se cambi la quesry string avvien il postback
+    } else { }
+}
+
 /*Riceve una stringa Html parserizzata con jquery per il fill coi dati*/
 function FillBindControls(jquery_obj, dataitem, localObjects, classselector, callback) {
 

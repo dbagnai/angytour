@@ -96,6 +96,7 @@ function bindgenericbanner(el, localObjects) {
     var objfiltrotmp = {};
     objfiltrotmp = globalObject[el + "params"];
     var container = objfiltrotmp.container;
+
     var str = $($('#' + el)[0]).outerHTML();
     var jquery_obj = $(str);
     jquery_obj = $(jquery_obj);
@@ -109,15 +110,17 @@ function bindgenericbanner(el, localObjects) {
                 $('#' + container).append(ret.html()) + "\r\n";
             });
     }
+     console.log('banner jaralax inject');
+    CleanHtml($('#' + container));
+    InitGenericBanner(controlid, container);
+}; 
+
+function InitVideo(controlid, container) {
     $('#' + container).show();
     $('#' + container + 'Title').show();
-    console.log('banner jaralax inject');
-
-    CleanHtml($('#' + container));
-
     $(function () {
         $('.mbr-parallax-background').jarallax({
             speed: 0.2
         });
     });
-}; 
+};

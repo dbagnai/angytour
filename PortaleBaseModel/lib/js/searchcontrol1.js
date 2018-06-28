@@ -73,7 +73,7 @@ function Visualizzalistadati() {
     var objfiltro = {};
     //  JsSvuotaSession(this);
     emptysession('', function (retval) {
-       // console.log(retval);
+        // console.log(retval);
         $(".searchdropdown").each(function () {
             var idsel = $(this).attr("id");
             // if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
@@ -163,7 +163,11 @@ function FillSearchControls(objfiltro) {
                     /*Se passo il filtro presetto i valori*/
                     if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
                         selectedvalueact = objfiltroint[idcontrollo];
-                    FillAndSelectRef(proprarr[0], lng, idcontrollo, baseresources[lng]["select" + proprarr[0].toLowerCase()], '', selectedvalueact, filter);
+
+                    var selstring = '';
+                    if (baseresources != null && baseresources.hasOwnProperty(lng) && baseresources[lng].hasOwnProperty("select" + proprarr[0].toLowerCase()))
+                        selstring = baseresources[lng]["select" + proprarr[0].toLowerCase()];
+                    FillAndSelectRef(proprarr[0], lng, idcontrollo, selstring, '', selectedvalueact, filter);
                     break;//Oggetto di secondo livello non implementato per ora
                 case 2:
                     break;
@@ -194,7 +198,7 @@ function FillSearchControls(objfiltro) {
         } catch (e) { }
 
     });
-  
+
     /*----------------------------------------------------------------------*/
     //FILL DELLE RICERCHE GEOGRAFICHE 
     //var seln = "IT";
@@ -232,21 +236,21 @@ function FillAndSelectRef(tableselector, lng, ddlid, selecttext, selectvalue, se
         case "Regione":
             result = JSONregioni;
             break;
-            //case "dettaglimetrature":
-            //    result = JSONrefmetrature;
-            //    break;
-            //case "dettagliprezzi":
-            //    result = JSONrefprezzi;
-            //    break;
-            //case "dettaglicondizione":
-            //    result = JSONrefcondizione;
-            //    break;
-            //case "dettaglitipocontratto":
-            //    result = JSONreftipocontratto;
-            //    break;
-            //case "dettaglitiporisorse":
-            //    result = JSONreftiporisorse;
-            //    break;
+        //case "dettaglimetrature":
+        //    result = JSONrefmetrature;
+        //    break;
+        //case "dettagliprezzi":
+        //    result = JSONrefprezzi;
+        //    break;
+        //case "dettaglicondizione":
+        //    result = JSONrefcondizione;
+        //    break;
+        //case "dettaglitipocontratto":
+        //    result = JSONreftipocontratto;
+        //    break;
+        //case "dettaglitiporisorse":
+        //    result = JSONreftiporisorse;
+        //    break;
         case "":
             break;
     }

@@ -1396,8 +1396,260 @@ namespace WelcomeLibrary.UF
                                 }
                             }
                         }
-
                         break;
+                    case "injectandloadgenericvideo":
+                        // injectandloadgenericvideo(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height)
+
+                        //Caricamento parametri per la chiamata
+                        if (pars.Count > 0) dictpars.Add("functionname", pars[0]);
+                        if (pars.Count > 1) dictpars.Add("templateHtml", pars[1]);
+                        if (pars.Count > 2) dictpars.Add("container", pars[2]);
+                        if (pars.Count > 3) dictpars.Add("controlid", pars[3]);
+
+                        if (pars.Count > 7) dictpars.Add("listShow", pars[7]);
+                        if (pars.Count > 8) dictpars.Add("maxelement", pars[8]);
+                        if (pars.Count > 9) dictpars.Add("connectedid", pars[9]);
+                        if (pars.Count > 10) dictpars.Add("tblsezione", pars[10]);
+                        if (pars.Count > 11) dictpars.Add("filtrosezione", pars[11]);
+                        if (pars.Count > 12) dictpars.Add("mescola", pars[12]);
+                        if (pars.Count > 13) dictpars.Add("width", pars[13]);
+                        if (pars.Count > 14) dictpars.Add("height", pars[14]);
+                        ////////////////////////////(PAGINAZIONE on usata ... )
+                        if (pars.Count > 4) dictpagerpars.Add("page", pars[4]);
+                        if (pars.Count > 5) dictpagerpars.Add("pagesize", pars[5]);
+                        if (pars.Count > 6) dictpagerpars.Add("enablepager", pars[6]);
+
+                        if (!dictpars.ContainsKey("container")) return;
+                        if (!dictpars.ContainsKey("controlid")) return;
+                        if (!dictpars.ContainsKey("tblsezione")) return;
+                        if (!dictpars.ContainsKey("filtrosezione")) return;
+
+                        ///////////////////////////////////////////////////////////
+                        //CARICAMENTO TEMPLATE  (bannervideo.html)
+                        ///////////////////////////////////////////////////////////
+                        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]))
+                            templatetext = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]);
+                        templatetext = templatetext.Replace("replaceid", dictpars["controlid"]);
+                        if (!string.IsNullOrEmpty(templatetext))
+                        {
+                            HtmlDocument template = new HtmlDocument();
+                            template.LoadHtml(templatetext); //Template per il bind
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //CARICAMENTO DATI PER BIND
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false");
+                            if (dictdati != null && dictdati.Count > 0)
+                            {
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //LISTE DATI DA VISUALIZZARE
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<Banners> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Banners>>(dictdati["data"]);
+                                //Caratteristiche della lista ( totalrecords )
+                                Dictionary<string, string> resultinfo = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictdati["resultinfo"]);
+                                //Collezione chiave,valore per id elemento dei valori preparati per il binding link,titolo,image
+                                Dictionary<string, Dictionary<string, string>> linkloaded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(dictdati["linkloaded"]);
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]); //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                {
+                                    string repeatelement = elementtoappend.First().OuterHtml;
+                                    if ((repeatelement != ""))
+                                    {
+                                        //Creo una copia  del contenuto da ripetere creandoci un nuovo documento 
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporane per fre il binding ripetuto
+                                        tmpdoc.LoadHtml(repeatelement);
+                                        HtmlNode cloneitemtemplate = tmpdoc.DocumentNode.Clone(); //elemento root matrice template da ripetere per fare il binding
+                                        template.DocumentNode.RemoveAllChildren(); //ATTENZIONE questa rimuove i child del ellemento primario del template
+                                        foreach (Banners item in data)
+                                        {
+                                            //Copio i dati dall'oggetto Banners in un dictionary property,value per evitare l'utilizzo pesante di reflection nel binding!!!!
+                                            Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection nel binding
+                                            HtmlNode cloneitem = cloneitemtemplate.Clone();
+                                            //PROCEDURA DI BIND DATI
+                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            if ((bindingnodes != null) && (bindingnodes.Count() > 0))
+                                                foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
+                                                {
+                                                    DataBindElement(nodetobind, itemdic, linkloaded, resultinfo);
+                                                }
+
+                                            template.DocumentNode.AppendChild(cloneitem.Clone());
+                                        }
+                                    }
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Appendiamo l'html al contenitore corretto dopo il binding!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
+                                    //node.AppendChild(elementtoappend.First().Clone()); //Appendo il blocco bindato ai dati
+                                    node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+
+                                    if (node != null)
+                                        if (node.Attributes.Contains("style"))
+                                        {
+                                            node.Attributes["style"].Value = node.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.Attributes.Add("style", "display:block");
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.Attributes["class"].Value = node.Attributes["class"].Value.Replace("inject", "");
+                                    node.Attributes["params"].Remove();
+                                    CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
+
+                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpars) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
+                                    jscommands.Add(container, "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////END BINDING ////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                }
+                            }
+                        }
+                        break;
+                    case "injectandloadgenericbanner":
+                        // injectandloadgenericbanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height)
+
+                        //Caricamento parametri per la chiamata
+                        if (pars.Count > 0) dictpars.Add("functionname", pars[0]);
+                        if (pars.Count > 1) dictpars.Add("templateHtml", pars[1]);
+                        if (pars.Count > 2) dictpars.Add("container", pars[2]);
+                        if (pars.Count > 3) dictpars.Add("controlid", pars[3]);
+                        if (pars.Count > 7) dictpars.Add("listShow", pars[7]);
+                        if (pars.Count > 8) dictpars.Add("maxelement", pars[8]);
+                        if (pars.Count > 9) dictpars.Add("connectedid", pars[9]);
+                        if (pars.Count > 10) dictpars.Add("tblsezione", pars[10]);
+                        if (pars.Count > 11) dictpars.Add("filtrosezione", pars[11]);
+                        if (pars.Count > 12) dictpars.Add("mescola", pars[12]);
+                        if (pars.Count > 13) dictpars.Add("width", pars[13]);
+                        if (pars.Count > 14) dictpars.Add("height", pars[14]);
+                        ////////////////////////////(PAGINAZIONE on usata ... )
+                        if (pars.Count > 4) dictpagerpars.Add("page", pars[4]);
+                        if (pars.Count > 5) dictpagerpars.Add("pagesize", pars[5]);
+                        if (pars.Count > 6) dictpagerpars.Add("enablepager", pars[6]);
+
+                        if (!dictpars.ContainsKey("container")) return;
+                        if (!dictpars.ContainsKey("controlid")) return;
+                        if (!dictpars.ContainsKey("tblsezione")) return;
+                        if (!dictpars.ContainsKey("filtrosezione")) return;
+
+                        ///////////////////////////////////////////////////////////
+                        //CARICAMENTO TEMPLATE  (bannerimagefull.html)
+                        ///////////////////////////////////////////////////////////
+                        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]))
+                            templatetext = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]);
+                        templatetext = templatetext.Replace("replaceid", dictpars["controlid"]);
+                        if (!string.IsNullOrEmpty(templatetext))
+                        {
+                            HtmlDocument template = new HtmlDocument();
+                            template.LoadHtml(templatetext); //Template per il bind
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //CARICAMENTO DATI PER BIND
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false");
+                            if (dictdati != null && dictdati.Count > 0)
+                            {
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //LISTE DATI DA VISUALIZZARE
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<Banners> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Banners>>(dictdati["data"]);
+                                //Caratteristiche della lista ( totalrecords )
+                                Dictionary<string, string> resultinfo = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictdati["resultinfo"]);
+                                //Collezione chiave,valore per id elemento dei valori preparati per il binding link,titolo,image
+                                Dictionary<string, Dictionary<string, string>> linkloaded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(dictdati["linkloaded"]);
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]); //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                {
+                                    string repeatelement = elementtoappend.First().OuterHtml;
+                                    if ((repeatelement != ""))
+                                    {
+                                        //Creo una copia  del contenuto da ripetere creandoci un nuovo documento 
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporane per fre il binding ripetuto
+                                        tmpdoc.LoadHtml(repeatelement);
+                                        HtmlNode cloneitemtemplate = tmpdoc.DocumentNode.Clone(); //elemento root matrice template da ripetere per fare il binding
+                                        template.DocumentNode.RemoveAllChildren(); //ATTENZIONE questa rimuove i child del ellemento primario del template
+                                        foreach (Banners item in data)
+                                        {
+                                            //Copio i dati dall'oggetto Banners in un dictionary property,value per evitare l'utilizzo pesante di reflection nel binding!!!!
+                                            Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection nel binding
+                                            HtmlNode cloneitem = cloneitemtemplate.Clone();
+                                            //PROCEDURA DI BIND DATI
+                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            if ((bindingnodes != null) && (bindingnodes.Count() > 0))
+                                                foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
+                                                {
+                                                    DataBindElement(nodetobind, itemdic, linkloaded, resultinfo);
+                                                }
+
+                                            template.DocumentNode.AppendChild(cloneitem.Clone());
+                                        }
+                                    }
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Appendiamo l'html al contenitore corretto dopo il binding!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
+                                    //node.AppendChild(elementtoappend.First().Clone()); //Appendo il blocco bindato ai dati
+                                    node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+
+                                    if (node != null)
+                                        if (node.Attributes.Contains("style"))
+                                        {
+                                            node.Attributes["style"].Value = node.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.Attributes.Add("style", "display:block");
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.Attributes["class"].Value = node.Attributes["class"].Value.Replace("inject", "");
+                                    node.Attributes["params"].Remove();
+                                    CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
+
+                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpars) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
+                                    jscommands.Add(container, "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////END BINDING ////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                }
+                            }
+                        }
+                        break;
+                    // Da implementare SUCCESSIVAMENTE le seguenti funzioni javascript 
+                    // injectArchivioAndLoad - InjectCat1livLinks - injcCategorieLinks - VisualizzaSearchControls - 
                     default:
                         break;
                 }

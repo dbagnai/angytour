@@ -107,8 +107,6 @@ function bindgenericbanner(controlid, localObjects) {
     var str = $($('#' + controlid)[0]).outerHTML();
     var jquery_obj = $(str);
     jquery_obj = $(jquery_obj);
-    var htmlout = "";
-    var htmlitem = "";
     $('#' + container).html('');
     for (var j = 0; j < data.length; j++) {
         if (j > 0) break; //Per ora permetto un solo video
@@ -118,14 +116,18 @@ function bindgenericbanner(controlid, localObjects) {
                 $('#' + container).append(ret.html()) + "\r\n";
             });
     }
-    $('#' + container).show();
-    $('#' + container + 'Title').show();
+    CleanHtml($('#' + container));
     console.log('video inject');
 
-    CleanHtml($('#' + container));
+    InitVideo(controlid, container); //inzializzo il video
+}; 
 
+function InitVideo(controlid, container)
+{
+
+    $('#' + container).show();
+    $('#' + container + 'Title').show();
     $(function () {
-
         var muteval = false;
         var autoplay = true;
         var volev = 50;
@@ -135,7 +137,6 @@ function bindgenericbanner(controlid, localObjects) {
             autoplay = true;
             volev = 0;
         }
-       
         var options = {
             // mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
             playOnlyIfVisible: false,
@@ -143,18 +144,16 @@ function bindgenericbanner(controlid, localObjects) {
             autoPlay: autoplay,
             vol: volev
         };
-
         //var options = {
         //    // mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
         //    playOnlyIfVisible: false 
         //};
-
         //myPlayer = jQuery(".player").YTPlayer(options);
         var myPlayer = jQuery("#" + controlid).YTPlayer(options);
         //var myPlayer = jQuery(".player").YTPlayer({
         //    onReady: function (player) {
         //    }
         //});
-       
     });
-}; 
+
+};
