@@ -311,7 +311,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 sb.Append("injectPortfolioAndLoad,isotopeProdotti1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'," + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
                 sb.Append("\"></div>");
                 sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session);// sb.ToString();
+                placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
 
                 //SettaTestoIniziale();
@@ -828,7 +828,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string customdesc = "";
         if (content != null && content.Id != 0)
         {
-            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua))), Lingua, Page.User.Identity.Name, Session); //ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)));
+            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua))), Lingua, Page.User.Identity.Name, Session, null, null, Request); //ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)));
             //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
             switch (Lingua)
             {

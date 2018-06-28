@@ -263,7 +263,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             htmlPage =  ReplaceAbsoluteLinks(ReplaceAbsoluteLinks(content.DescrizionebyLingua(Lingua)));
 
         }
-        lblContenutiContatti.Text = custombind.bind(htmlPage, Lingua, Page.User.Identity.Name, Session);// htmlPage;
+        lblContenutiContatti.Text = custombind.bind(htmlPage, Lingua, Page.User.Identity.Name, Session, null, null, Request);// htmlPage;
 
     }
 

@@ -2050,7 +2050,7 @@ namespace WelcomeLibrary.UF
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
                             {    //carrellotool.initcarrellotool(idelement,  ..... );
                                 if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value)) jscommands.Remove(nodetobind.Attributes["id"].Value);
-                                jscommands.Add(nodetobind.Attributes["id"].Value, "carrellotool.initcarrellotool(" + idelement + ",''," + Username + "," + nodetobind.Attributes["id"].Value + ",2);"); //Imposto la chiamata da tornare
+                                jscommands.Add(nodetobind.Attributes["id"].Value, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + nodetobind.Attributes["id"].Value + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
                             }
                         }
                     }

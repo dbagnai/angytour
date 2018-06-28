@@ -653,7 +653,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
 
 
-            htmlPage = custombind.bind(htmlPage, Lingua, Page.User.Identity.Name, Session);
+            htmlPage = custombind.bind(htmlPage, Lingua, Page.User.Identity.Name, Session, null, null, Request);
             litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
         }
     }
