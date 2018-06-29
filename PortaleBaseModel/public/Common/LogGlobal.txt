@@ -3595,3 +3595,23 @@
 <Messaggio> Application start : 28/06/2018 17:27:33</Messaggio>
  <Data>28/06/2018 17:27:35</Data>
 <Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>28/06/2018 19:40:45</Data>
+<Messaggio> Application start : 28/06/2018 19:40:43</Messaggio>
+ <Data>28/06/2018 19:40:45</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>29/06/2018 11:16:34</Data>
+<Messaggio> Application start : 29/06/2018 11:16:34</Messaggio>
+ <Data>29/06/2018 11:16:34</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>29/06/2018 11:23:10</Data>
+<Messaggio> Application start : 29/06/2018 11:23:09</Messaggio>
+ <Data>29/06/2018 11:23:10</Data>
+<Messaggio> Global init original path: http://localhost:52646/I/blog/notizie-18?page=1 Global init AbsolutePath : /I/blog/notizie-18 Global init ApplicationPath : / Global init Query : ?page=1 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>29/06/2018 11:25:08</Data>
+<Messaggio> Application start : 29/06/2018 11:25:07</Messaggio>
+ <Data>29/06/2018 11:25:08</Data>
+<Messaggio> Global init original path: http://localhost:52646/lib/hnd/HandlerDataCommon.ashx?q=emptysession&link=&_=1530264205117 Global init AbsolutePath : /lib/hnd/HandlerDataCommon.ashx Global init ApplicationPath : / Global init Query : ?q=emptysession&link=&_=1530264205117 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>29/06/2018 11:27:38</Data>
+<Messaggio> Application start : 29/06/2018 11:27:38</Messaggio>
+ <Data>29/06/2018 11:27:38</Data>
+<Messaggio> Global init original path: http://localhost:52646/lib/hnd/HandlerDataCommon.ashx?q=emptysession&link=&_=1530264348834 Global init AbsolutePath : /lib/hnd/HandlerDataCommon.ashx Global init ApplicationPath : / Global init Query : ?q=emptysession&link=&_=1530264348834 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>

@@ -457,7 +457,7 @@
 
         // DICHIARAZIONE BUNDLES E MODALITA' RITORNO
         BundleEngine.AddRoutes(routes);//Route x bundler
-        BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleLinkOrScript; //Opzioni di ritorno dell'handler
+       BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleLinkOrScript; //Opzioni di ritorno dell'handler
         //BundleEngine.BundleOptions.InjectionMode = BundleEngine.EnumInjectionMode.SingleCombinedScript; //Opzioni di ritorno dell'handler
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("BundlesCheckFilesAlways").ToLower() == "true")
             BundleEngine.BundleOptions.CheckFilesAlways = true; //Rilegge md5 tutti files ad ogni chiamata e non solo a riavvio app

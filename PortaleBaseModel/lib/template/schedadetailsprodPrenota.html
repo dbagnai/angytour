@@ -71,27 +71,87 @@
     </div>
     <!-- SEZIONE GESTIONE CARRELLO PRENOTAZIONI -->
     <div id="prenotalinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <!-- SEZIONE GESTIONE CARRELLO -->
-    <div id="carrellos1" class="bind carellotool float-right" mybind="Id">
-        <div class="table-container">
-            <div class="row table-row">
-                <div class="float-right table-col ecomctr" id="carrellos1messages"></div>
-                <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
-                    <div style="display:table;margin: 10px auto 0px auto;position:relative">
-                        <div class="ecomctr-group">
-                            <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
-                            <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
-                            <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:9999"></div>
+    <div style="background-color: #efefef;padding-top:40px;padding-bottom:40px" id="calendarbookcontainer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="bind" mybind="Id" myvalue="testoordine0" format="formatlabelresource"></span>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #382525;padding-top:40px;padding-bottom:40px">
+            <div class="container">
+                <div class="table-container">
+                    <div class="row table-row">
+                        <div class="col-sm-1 table-col ecomctr">
+                            <div class="ecomctr-group-title">
+                                <span class="bind" mybind="Id" myvalue="testoprenota" format="formatlabelresource"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3  table-col ecomctr">
+                            <div id="calendarbookinfo"></div>
+                            <div style="display:none">
+                                <div id="calendarbookinfo2"></div>
+                                <div id="calendarbookmessages2"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 table-col ecomctr" id="calendarbookselectdate">
+                            <div style="display:table;margin: 0px auto;position:relative">
+                                <div class="ecomctr-group">
+                                    <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" />
+                                    <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
+                                    <div id="calendarbook" class="bind bookingtool" style="position:absolute;left:0px;top:35px;display:none;z-index:999" mybind="Id"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 table-col ecomctr">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <select class="form-control" id="calendarbookselectadult">
+                                        <option value="" class="bind" mybind="Id" myvalue="formtestoadulti" format="formatlabelresource"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="999">>8</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6">
+                                    <select class="form-control" id="calendarbookselectchild">
+                                        <option value="" class="bind" mybind="Id" myvalue="formtestobambini" format="formatlabelresource"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="999">>8</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 table-col ecomctr">
+                            <div id="calendarbookmessages"></div>
                         </div>
                     </div>
                 </div>
-                <div class="float-right table-col ecomctr" id="carrellos1plus"></div>
-                <div class="float-right table-col ecomctr" id="carrellos1qty"></div>
-                <div class="float-right table-col ecomctr" id="carrellos1minus"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="bind" mybind="Id" myvalue="testoordine3" format="formatlabelresource"></span>
+                </div>
             </div>
         </div>
     </div>
-    <!-- FINE SEZIONE GESTIONE CARRELLO -->
+    <!-- FINE SEZIONE GESTIONE CARRELLO PRENOTAZIONI -->
 
 </div>
 
