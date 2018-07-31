@@ -1659,7 +1659,6 @@ namespace WelcomeLibrary.UF
                             _naz.Codice = reader.GetString(reader.GetOrdinal("CodiceNazione")).Trim();
                             _naz.Campo1 = reader.GetString(reader.GetOrdinal("Descrizione")).Trim();
                             _naz.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
-                            _naz.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
                             if (!reader["Double1"].Equals(DBNull.Value))
                                 _naz.Double1 = reader.GetDouble(reader.GetOrdinal("Double1"));
 

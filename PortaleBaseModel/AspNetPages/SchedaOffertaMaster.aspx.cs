@@ -468,6 +468,38 @@ public partial class _SchedaOffertaMaster : CommonPage
 
                 break;
 
+            case "rif000009":
+                column1.Visible = false;
+                column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
+                column2.Visible = true;
+                column3.Visible = false;
+                divSearch.Visible = false;
+                divContact.Visible = false;
+                divLatestPost.Visible = false;
+                divCategorie.Visible = false;
+
+                if (!JavaInjection)
+                {
+
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerTestimonialsBt3.html,divScrollerSuggeritiJs, carouselInject1,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12, '3'\");");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
+                    sb.Clear();
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails-testimonials.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
+                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+
+                }
+                break;
+
             case "rif000003":
             case "rif000004":
                 column1.Visible = false;

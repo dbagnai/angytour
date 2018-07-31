@@ -6,7 +6,6 @@ License: http://codecanyon.net/licenses
 */
 
 (function ($) {
-
     jQuery.fn.menuzord = function (options) {
         var settings;
         $.extend(settings = {
@@ -63,13 +62,16 @@ License: http://codecanyon.net/licenses
         if (settings.responsive) {
             var mobilebtn = "<em></em><em></em><em></em>";
             if (settings.mobilebuttonclass != '') {
-                mobilebtn = "<div class='" + settings.mobilebuttonclass + "'>";
+                mobilebtn = "<div id=\"btn-menumobile\" class='" + settings.mobilebuttonclass + "'>";
                 if (settings.mobilebuttontext != '')
                     mobilebtn += settings.mobilebuttontext;
                 mobilebtn += "</div>";
             }
             $(menu_container).addClass("menuzord-responsive").prepend("<a href='javascript:void(0)' class='showhide'>" + mobilebtn + "</a>");
             showHideButton = $(menu_container).children(".showhide");
+            $("#btn-menumobile").click(function () {
+                $(this).find('i').toggleClass('fa-bars fa-times')
+            });
         }
 
         // scrollable menu
@@ -259,7 +261,6 @@ License: http://codecanyon.net/licenses
             startMenu();
             fixSubmenuRight();
         });
-
     }
 }(jQuery));
 

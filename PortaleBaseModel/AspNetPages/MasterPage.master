@@ -69,14 +69,16 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
+        <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity:0.5; position:absolute; display:none;"><i class="fa fa-cart-plus"></i></div>
+
         <!-- MENU --->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
-            <div style="padding-left: 40px; padding-right: 40px">
+            <div class="d-flex justify-content-center align-items-center d-sm-block" style="padding-left: 40px; padding-right: 40px">
 
                 <div class="float-right">
-                    <div class="input-group flex-nowrap" style="width: 160px; padding: 3px">
+                    <div class="input-group flex-nowrap" style="width: 160px; padding: 3px; padding-left: 15px;">
                         <input type="text" id="txtSearchTop" class="form-control" style="height: 24px" runat="server" placeholder="Cerca ...." />
-                        <div class="input-group-append" style="border: none; padding: 0px; background-color: #ccc">
+                        <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
                             <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
@@ -112,20 +114,21 @@
                                 <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
                             </a>--%>
                     </div>
+                    <%--CARRELLO--%>
                     <asp:PlaceHolder runat="server" Visible="true">
-                        <div id="containerCarrello" class="float-right" style="padding-bottom: 2px; padding-left: 15px; max-width: 270px; position: relative; display: block">
+                        <div id="containerCarrello" class="float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                             <a class="float-right" style="color: #fff !important; border: none"
                                 id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems" />
+                                <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems d-none d-sm-block" />
                             </a>
                             <ul class="dropdown-menu dropdown-cart">
                                 <li>
                                     <ul class="products-list-mini"
-                                        id="ContainerCarrelloDetails" runat="server" title="" style="height: 400px; width: 100%; overflow-y: scroll; overflow-x: hidden">
+                                        id="ContainerCarrelloDetails" runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                     </ul>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a id="A4" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <li class="my-1"><a id="A4" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
                                 <li class="divider"></li>
                                 <%-- <li><a
@@ -133,7 +136,7 @@
                                 <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %>
                             </a></li>
                             <li class="divider"></li>--%>
-                                <li><a id="A1" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                <li><a id="A1" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                                 </a></li>
                             </ul>
@@ -143,6 +146,7 @@
                             </button>
                         </div>
                     </asp:PlaceHolder>
+                    <%--CARRELLO END--%>
                 </div>
                 <div class="simplemenu d-none d-sm-block">
                     <ul>
@@ -187,9 +191,9 @@
                 <a style="color: #555; padding: 8px" href='<%= references.ResMan("Common", Lingua,"linkHomeCambio") %>'>
                     <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
             </div>
-            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 35px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                   <a style="padding-top: 0px" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
-                    <i class="fa fa-2x fa-phone"></i></a>
+            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+                   <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
+                    <i class="fa fa-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
             </div>
             <%--<div class="container" id="divImg">
                 <div class="row">
@@ -206,7 +210,7 @@
                 </div>
             </div>--%>
 
-            <div id="menuzord" class="menuzord menuzord-responsive white" style="display: none">
+            <div id="menuzord" class="menuzord menuzord-responsive white pb-3 pb-sm-0" style="display: none;">
                 <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
                     <div id="divlogoBrand" class="fulllogobckdark"></div>
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
@@ -214,33 +218,72 @@
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right">
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
 
-                    <%-- Agenzia --%>
-                    <%= CreaLinkPaginastatica(1) %>
-                    <%-- <li runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
+                    <%-- Ceramiche Ficola --%>
+                    <%= CreaLinkTipologie(3,3) %>
+                    <%-- Catalogo --%>
+                    <li runat="server">
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
                         <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(2) %>
-                            <%= CreaLinkCategorie("rif000003") %>
+                            <%--<%= CreaLinkPaginastatica(4) %>--%>
+                            <%--<%= CreaLinkTipologie(1,1) %>--%>
+                            <%= CreaLinkCategorie("rif000001") %>
                         </ul>
-                    </li>--%>
-                    <%-- Punti di forza - prodotti --%>
-                    <%= CreaLinkTipologie(3,4) %>
+                    </li>
+                    <%-- Staff --%>
+                    <%--<%= CreaLinkTipologie(7,7) %>--%>
+                    <%-- Servizi - Punti di forza - prodotti --%>
+                    <%--<%= CreaLinkTipologie(3,3) %>--%>
+
                     <%-- Offerte --%>
                     <%--<%= CreaLinkTipologie(5,5) %>--%>
+                    <li runat="server">
+                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
+                    </li>
                     <%-- Gallery --%>
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
-                    <%-- Staff --%>
-                    <%= CreaLinkTipologie(7,7) %>
                     <%-- Esperienze --%>
-                    <%= CreaLinkTipologie(8,8) %>
+                    <%--<%= CreaLinkTipologie(8,8) %>--%>
+                    <%--TESTIMONIALS--%>
+                    <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
-                    <%= CreaLinkPaginastatica(3) %>
+                    <%--<%= CreaLinkPaginastatica(3) %>--%>
                     <%--PRENOTA--%>
                     <%--<li runat="server">
                         <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                         </a>
                     </li>--%>
+                    <%--CARRELLO--%>
+                    <%--<li>
+                    <asp:PlaceHolder runat="server" Visible="true">
+                        <div id="containerCarrello" class="float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                            <a class="float-right" style="color: #fff !important; border: none"
+                                id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <asp:Label Text="100,00 €" runat="server" ID="Label1" ClientIDMode="Static" CssClass="totalItems d-none d-sm-block" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-cart">
+                                <li>
+                                    <ul class="products-list-mini"
+                                        id="Ul1" runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                    </ul>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="my-1"><a id="A4" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                    <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
+                                <li class="divider"></li>
+                                <li><a id="A1" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
+                                </a></li>
+                            </ul>
+                            <button type="button" class="button-carrello float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="Button1">
+                                <span class="caret" style="font-size: 20px; color: #fff"></span>
+                                <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
+                            </button>
+                        </div>
+                    </asp:PlaceHolder>
+                </li>--%>
+                    <%--CARRELLO END--%>
+
                     <%-----------------------%>
                     <%-------FINE MENU-------%>
                     <%-----------------------%>
@@ -280,11 +323,7 @@
                             <%=  CaricaLinksPerTipologia ("rif000001") %>
                             <%= CreaLinkCategorie("rif000004") %>
                         </ul>
-                    </li>--%>
-
-                    <%--                    <li runat="server">
-                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
-                    </li>--%>
+                    </li>--%>                  
 
                     <%-- Blog --%>
                     <li runat="server" class="d-block d-md-none">
@@ -296,7 +335,7 @@
                     </li>
 
                     <%-- Contatti --%>
-                    <li runat="server" class="d-block d-sm-none">
+                    <li runat="server" class="d-block d-md-none">
                         <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
@@ -536,12 +575,12 @@
                     <div class="row justify-content-md-center">
                         <div class="col-sm-4 align-self-center py-3">
                             <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                                <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 60px" alt="" />
+                                <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
                             </a>
                         </div>
 
                         <%--SOCIAL--%>
-                        <div class="col-sm-4  align-self-center">
+                        <div class="col-sm-4 align-self-center">
                             <div class="d-table mx-auto d-sm-block col-sm-mx-right d-block social-icons animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
                                 <ul>
                                     <li style="float: right">
@@ -591,22 +630,32 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <%-- Agenzia --%>
-                                    <%= CreaLinkPaginastatica(1) %>
-                                    <%-- Punti di forza --%>
+                                    <%-- Ceramiche Ficola --%>
+                                    <%--<%= CreaLinkPaginastatica(1) %>--%>
                                     <%= CreaLinkTipologie(3,3) %>
+                                    <%-- Pagina Catalogo --%>
+                                    <%--<%= CreaLinkPaginastatica(4) %>--%>
+                                    <%-- Shop --%>
+                                    <%--<%= CreaLinkTipologie(1,1) %>--%>
                                     <%-- Staff --%>
-                                    <%= CreaLinkTipologie(7,7) %>
+                                    <%--<%= CreaLinkTipologie(7,7) %>--%>
+                                    <%-- Servizi - Punti di forza - prodotti --%>
+                                    <%--<%= CreaLinkTipologie(3,3) %>--%>
+                                    <%-- Turni --%>
+                                    <%--<%= CreaLinkPaginastatica(3) %>--%>                                    
+                                    <%-- Offerte --%>
+                                    <%--<%= CreaLinkTipologie(5,5) %>--%>
+                                    <li runat="server">
+                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
+                    </li>
+                                    <%-- Gallery --%>
+                                    <%--<%= CreaLinkTipologie(6,6) %>--%>
                                     <%-- Esperienze --%>
-                                    <%= CreaLinkTipologie(8,8) %>
-                                    <%-- Prenota --%>
-                                    <%--<li>
-                                        <a id="linkPrenota2" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>'>
-                                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
-                                        </a>
-                                    </li>--%>
+                                    <%--<%= CreaLinkTipologie(8,8) %>--%>
+                                    <%--TESTIMONIALS--%>
+                                    <%= CreaLinkTipologie(9,9) %>
                                     <%-- Faq --%>
-                                    <%= CreaLinkPaginastatica(3) %>
+                                    <%--<%= CreaLinkPaginastatica(3) %>--%>
                                     <%-- Contatti --%>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
@@ -620,13 +669,22 @@
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
-                            <%-- PRODOTTI --%>
-                            <div class="footer-title">
+                            <%-- SERVIZI --%>
+                            <%--<div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter4") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%= CaricaLinksPerTipologia("rif000004","","10") %>
+                                    <%= CaricaLinksPerTipologia("rif000003","","10") %>
+                                </ul>
+                            </div>--%>
+                             <%--SHOP--%>
+                            <div class="footer-title">
+                                <%= references.ResMan("Common",Lingua,"testoid4") %>
+                            </div>
+                            <div class="footer-content">
+                                <ul class="footer-category-list">
+                                    <%= CreaLinkCategorie("rif000001") %>
                                 </ul>
                             </div>
                         </div>

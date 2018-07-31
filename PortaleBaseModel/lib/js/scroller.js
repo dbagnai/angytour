@@ -164,6 +164,9 @@ function initScrollertype(el,container, type) {
             case "2":
                 ScrollerInit2(el);
                 break;
+            case "3":
+                ScrollerInitSingolo(el);
+                break;
             default:
                 ScrollerInit(el);
                 break;
@@ -231,6 +234,30 @@ function ScrollerInit2(controlid) {
             autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
+            itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
+        });
+
+        // Custom Navigation Events
+        jQuery("#" + controlid + "next").click(function () {
+            owl.trigger('owl.next');
+        })
+        jQuery("#" + controlid + "prev").click(function () {
+            owl.trigger('owl.prev');
+        })
+    });
+};
+
+function ScrollerInitSingolo(controlid) {
+    jQuery(document).ready(function () {
+        var owl = jQuery("#" + controlid);
+        owl.owlCarousel({
+            items: [1],
+            autoPlay: 5000,
+            itemsDesktop: [1199, 1], // i/tems between 1000px and 601px
+            itemsTablet: [979, 1], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,

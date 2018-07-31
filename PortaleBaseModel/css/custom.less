@@ -1,28 +1,33 @@
 ﻿/*@import "~/css/less/bootstrap/bootstrap.less";*/
-@import url('https://fonts.googleapis.com/css?family=Amiri:400,700|Frank+Ruhl+Libre:300,400,500,700|Lato:300,400|Libre+Baskerville:400,700|Merriweather+Sans:300,400,700|Merriweather:300,400,700|Montserrat|Noto+Sans:400,700|Noto+Serif:400,700|Open+Sans:300,400,700|PT+Sans+Narrow:400,700|Playfair+Display+SC:700|Raleway|Roboto:300,400|Rubik:300,300i,400,700|Song+Myung|Source+Sans+Pro:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Amiri:400,700|Fira+Sans+Extra+Condensed:300,400,500,600,700|Fira+Sans:300,400,500,600,700|Frank+Ruhl+Libre:300,400,500,700|Lato:300,400|Libre+Baskerville:400,700|Merriweather+Sans:300,400,700|Merriweather:300,400,700|Montserrat|Noto+Sans:400,700|Noto+Serif:400,700|Open+Sans:300,400,700|PT+Sans+Narrow:400,700|Playfair+Display+SC:700|Raleway|Roboto:300,400|Rubik:300,300i,400,700|Song+Myung|Source+Sans+Pro:300,400,700|Oswald:400,500,700');
 
 /*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
-@bg-primary-color: #1a3661; /*logo - sfondo-pulsanti - fixed-top*/
-@bg-secondary-color: fade(@bg-primary-color, 40%); /*footer-link*/
-/*@bg-secondary-color: #dac8a0;*/
-@bg-light-color: fade(@bg-primary-color, 10%); /*footer-social e banner*/
-/*@bg-light-color: #f5f0e5;*/
-@bg-dark-color: darken(@bg-primary-color, 15%); /*footer-bottom*/
-/*@bg-dark-color: #555;*/
+@bg-primary-color: #098f8f; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
+@bg-secondary-color: fade(@bg-primary-color, 45%); /*footer-link*/ /*#dac8a0;*/
+@bg-light-color: fade(@bg-primary-color, 8%); /*footer-social e banner*/ /*#f5f0e5;*/
+@bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/ /*#555;*/
 /**/
-@primary-color: #232323; /*titoli-principali*/
-@secondary-color: #555; /*menu - sotto-titoli-principali - body*/
+@primary-color: darken(@bg-dark-color, 20%); /*menu - titoli-principali*/ /*#232323;*/
+@secondary-color: lighten(@primary-color, 15%); /*sotto-titoli-principali - body*/ /*#555;*/
 @black-color: #000;
 @white-color: #fff;
-/**/
+/* colore complementare */
+@bg-complement-color: spin(@bg-primary-color, 180);
+/* sistema di colori a triade */
+@triadic-secondary: spin(@bg-primary-color, -(360 / 3));
+@triadic-tertiary: spin(@bg-primary-color, (360 / 3));
+/* sistema di colori tonali */
+@tonal-secondary-color: mix(@bg-primary-color, mediumvioletred);
+@tonal-tertiary-color: mix(@bg-primary-color, lightseagreen);
+@tonal-quaternary-color: mix(@bg-primary-color, mintcream);
 /*----------------------------------
 //////////////| FONT |//////////////
 ----------------------------------*/
-@primary-font: 'Frank Ruhl Libre', serif; /*menu - titoli-principali*/
+@primary-font: 'Fira Sans', sans-serif; /*menu - titoli-principali*/
 @secondary-font: 'Raleway', sans-serif; /*sotto-titoli-principali*/
-@base-font: 'Lato', sans-serif; /*body*/
+@base-font: 'Roboto', sans-serif; /*body*/
 @alternative-font: 'EBGaramond12-Regular', serif;
 /*@primary-font: 'Raleway', sans-serif;*/ /*menu - titoli-principali*/
 /*@secondary-font: 'Raleway', sans-serif;*/ /*sotto-titoli-principali*/
@@ -32,22 +37,27 @@
 //////////////| MENU |//////////////
 ----------------------------------*/
 @menu-size: 1rem;
-@menu-hover-weight: 600;
 @menu-font: @primary-font;
-@menu-color: @secondary-color;
+@menu-color: @primary-color;
 @menu-hover-color: @secondary-color;
+@menu-hover-weight: 600;
 /**/
-@submenu-color: @secondary-color;
+@submenu-color: @primary-color;
 @submenu-hover-color: @secondary-color;
+@submenu-weight: 400;
 /*----------------------------------
 /////////////| BUTTON |/////////////
 ----------------------------------*/
 @button-size: 0.8rem;
 @button-font: @base-font;
+@bg-button-color: @bg-primary-color;
+@bg-button-hover-color: lighten(@bg-primary-color, 45%);
 @button-color: @white-color;
 @button-hover-color: @black-color;
 /**/
-@button-outline-color: @black-color;
+@bg-button-outline-color: @white-color;
+@bg-button-outline-hover-color: @primary-color;
+@button-outline-color: @primary-color;
 @button-outline-hover-color: @white-color;
 /*----------------------------------
 ///////////| FONT PAGE |///////////
@@ -55,28 +65,34 @@
 @tite-size: 3rem;
 @title-color: @primary-color;
 @tite-font: @primary-font;
+@title-weight: 300;
+@title-text-transform: uppercase;
 /**/
 @subtite-size: 1.8rem;
 @subtitle-color: @secondary-color;
 @subtite-font: @primary-font;
+@subtitle-weight: 400;
 /**/
 @body-size: 1.35rem;
-@body-color: @secondary-color;
+@body-color: @primary-color;
+/*@body-color: @secondary-color;*/
 @body-font: @base-font;
 @body-weight: 300;
 /**/
+@scheda-title-color: @primary-color;
+@scheda-subtitle-color: @secondary-color;
 @scheda-size: 1.1rem;
-@scheda-color: @secondary-color;
+@scheda-color: @primary-color;
 @scheda-font: @base-font;
 /*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
-@title-footer-color: @bg-primary-color;
+@title-footer-color: @bg-dark-color;
 @title-footer-color-hover: @white-color;
 @title-footer-border-color: @bg-primary-color;
 /**/
 @link-footer-color: @white-color;
-@link-footer-color-hover: @bg-primary-color;
+@link-footer-color-hover: @primary-color;
 /**/
 @body-footer-color: @white-color;
 /*----------------------------------
@@ -125,7 +141,7 @@
 @margin-box-banner-slider: 14px;
 @bg-box-banner-slider: @white-color;
 /**/
-@height-image-banner-slider: 250px;
+@height-image-banner-slider: auto;
 @padding-image-banner-slider: 0;
 /**/
 @height-body-banner-slider: 190px;
@@ -144,67 +160,71 @@
 -------------- COLORI -------------
 ----------------------------------*/
 .bg-primary-color {
-    background-color: @bg-primary-color;
+    background-color: @bg-primary-color !important;
 }
 
 .bg-secondary-color {
-    background-color: @bg-secondary-color;
+    background-color: @bg-secondary-color !important;
 }
 
 .bg-light-color {
-    background-color: @bg-light-color;
+    background-color: @bg-light-color !important;
 }
 
 .bg-dark-color {
-    background-color: @bg-dark-color;
+    background-color: @bg-dark-color !important;
+}
+
+.bg-complement-color {
+    background-color: @bg-complement-color !important;
 }
 
 .tx-primary-color {
-    color: @bg-primary-color;
+    color: @bg-primary-color !important;
 }
 
 .tx-secondary-color {
-    color: @bg-secondary-color;
+    color: @bg-secondary-color !important;
 }
 
 .tx-light-color {
-    color: @bg-light-color;
+    color: @bg-light-color !important;
 }
 
 .tx-dark-color {
-    color: @bg-dark-color;
+    color: @bg-dark-color !important;
 }
 
 .bd-primary-color {
-    border-color: @bg-primary-color;
+    border-color: @bg-primary-color !important;
 }
 
 .bd-secondary-color {
-    border-color: @bg-secondary-color;
+    border-color: @bg-secondary-color !important;
 }
 
 .bd-light-color {
-    border-color: @bg-light-color;
+    border-color: @bg-light-color !important;
 }
 
 .bd-dark-color {
-    border-color: @bg-dark-color;
+    border-color: @bg-dark-color !important;
 }
 
 .primary-color {
-    color: @primary-color;
+    color: @primary-color !important;
 }
 
 .secondary-color {
-    color: @secondary-color;
+    color: @secondary-color !important;
 }
 
 .black-color {
-    color: @black-color;
+    color: @black-color !important;
 }
 
 .white-color {
-    color: @white-color;
+    color: @white-color !important;
 }
 
 /*---------------------------------
@@ -217,7 +237,7 @@
     height: 30px;
     width: 100%;
     top: 0px;
-    z-index: 999;
+    z-index: 9999;
     overflow: visible;
     width: 100%;
     font-size: 1rem;
@@ -227,6 +247,11 @@
 /*---------------------------------
 --------------- MENU --------------
 ----------------------------------*/
+.menuzord, .menuzord * {
+    font-family: @menu-font;
+    border-color: @bg-secondary-color !important;
+}
+
 .menuzord.white .menuzord-menu > li > a {
     color: @menu-color;
     font-family: @menu-font;
@@ -235,39 +260,111 @@
 
 .menuzord.white .menuzord-menu > li.active > a,
 .menuzord.white .menuzord-menu > li:hover > a,
-.menuzord.white .menuzord-menu ul.dropdown li:hover > a {
-    color: @menu-hover-color;
+.menuzord.white .menuzord-menu ul.dropdown li:hover > a,
+.menuzord.white .menuzord-menu > li > a:active {
+    color: @menu-hover-color !important;
     font-weight: @menu-hover-weight;
     background: none;
 }
 
+.menuzord.white .showhide em {
+    background: @submenu-color;
+}
+
 .menuzord-menu ul.dropdown li a {
+    font-weight: @submenu-weight;
     color: @submenu-color;
 }
 
 .menuzord-menu ul.dropdown li:hover > a {
+    font-weight: @submenu-weight;
     color: @submenu-hover-color;
+}
+
+.simplemenu, .simplemenu * {
+    font-family: @menu-font;
+    border-color: @bg-secondary-color !important;
+}
+
+.simplemenu > ul > li > ul > li {
+    padding: 4px;
+}
+
+.simplemenu > ul > li > ul > li > a {
+    color: @submenu-color;
+    text-transform: none;
+}
+
+.simplemenu > ul > li > ul > li > a:hover {
+    color: @submenu-hover-color !important;
+    font-weight: @menu-hover-weight;
+}
+
+.simplemenu .dropdown-menu {
+    border-top: 0;
+    transform: translate3d(0, 24px, 0px) !important;
+    border-radius: 0rem;
+}
+
+.triggerdata {
+    color: @white-color;
+}
+
+div#btn-menumobile {
+    padding: 3px 0;
+    background-color: transparent;
+    color: @menu-color;
+    width: 0;
+    font-size: 24px;
+}
+
+.fixednav .fa-phone, #btn-menumobile {
+    color: @menu-color;
+}
+
+#btn-menumobile .fa-bars {
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+}
+
+#btn-menumobile .fa-times {
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+}
+
+/*---------------------------------
+------- LOGO AZIENDA TESTI --------
+----------------------------------*/
+div#blocco-lgo-home {
+    /*height: 0 !important;
+    padding: 0 !important;
+    display: none;*/
 }
 
 /*---------------------------------
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
-.mbr-section-title {
+.mbr-section-title, .title-block {
     color: @title-color;
     font-family: @tite-font;
     font-size: @tite-size;
+    font-weight: @title-weight;
+    text-transform: @title-text-transform;
     font-style: normal;
-    font-weight: 700;
     text-align: center;
-    letter-spacing: -1px;
+    letter-spacing: 0px;
     line-height: 1.1 !important;
     margin-top: 0;
     word-break: break-word;
     word-wrap: break-word;
 }
 
-@media screen and (max-width: 414px) {
-    .mbr-section-title {
+.title-block {
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 415px) {
+    .mbr-section-title, .title-block {
         font-size: 2rem;
     }
 
@@ -280,9 +377,9 @@
     color: @subtitle-color;
     font-family: @subtite-font;
     font-size: @subtite-size;
-    font-weight: 500;
-    text-align: center;
+    font-weight: @subtitle-weight;
     font-style: normal;
+    text-align: center;
     line-height: 36px;
     margin-top: .25rem !important;
     display: block;
@@ -321,6 +418,14 @@ input, textarea {
 /*----------------------------------
 -------------- PULSANTI --------------
 ----------------------------------*/
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 /*.divbuttonstyle a, */
 a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="button"], button.btn, .btn-primary, div.divbuttonstyle, div.divbuttonstyle:visited, button.divbuttonstyle,
 /*.divbuttonstyle a:visited,*/ a.divbuttonstyle:visited, .divbuttonstyle:visited, btn:visited, input:visited[type="submit"], input:visited[type="button"], button.btn:visited, .btn-primary:visited, div.divbuttonstyle:visited, button.divbuttonstyle:visited,
@@ -344,7 +449,7 @@ a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="butto
     -moz-transition: background 0.2s, opacity 0.2s;
     -o-transition: background 0.2s, opacity 0.2s;
     transition: background 0.2s, opacity 0.2s;
-    background: @bg-primary-color;
+    background: @bg-button-color;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -354,7 +459,7 @@ a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="butto
     white-space: nowrap;
     /*vertical-align: middle !important;*/
     height: auto !important;
-    border: 1px solid @bg-primary-color;
+    border: 1px solid @bg-button-color;
     cursor: pointer;
 }
 
@@ -363,7 +468,7 @@ a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.
     &:extend(.divbuttonstyle);
     color: @button-hover-color !important;
     /*opacity: 0.78;*/
-    background-color: lighten(@bg-primary-color, 30%);
+    background-color: @bg-button-hover-color;
     /*background: @bg-primary-color;*/
     font-size: @button-size;
     text-decoration: none !important;
@@ -377,7 +482,7 @@ a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.
     color: @button-hover-color !important;
 }
 
-footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer button.divbuttonstyle:active, footer .divbuttonstyle, footer .divbuttonstyle:visited, footer .divbuttonstyle:active {
+footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer button.divbuttonstyle:active, footer button.divbuttonstyle:hover, footer .divbuttonstyle, footer .divbuttonstyle:visited, footer .divbuttonstyle:active, footer .divbuttonstyle:hover {
     padding: .75rem 1rem !important;
 }
 
@@ -404,11 +509,11 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     -o-transition: background 0.2s, opacity 0.2s;
     transition: background 0.2s, opacity 0.2s;
     margin: 0 0 0 0 !important;
-    background: @white-color;
+    background: @white-color !important;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    border: 1px solid #000;
+    border: 1px solid @bg-button-outline-hover-color;
     color: @button-outline-color !important;
     text-align: center;
     text-transform: uppercase;
@@ -422,8 +527,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 .btn-black-outline:hover, .btn .btn-black:hover {
     &:extend(.btn-black-outline);
     color: @button-outline-hover-color !important;
-    background: @black-color;
-    border-color: @black-color;
+    background: @bg-button-outline-hover-color !important;
+    border-color: @bg-button-outline-hover-color;
     opacity: 0.78;
     text-decoration: none !important;
 }
@@ -439,6 +544,28 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 .buttonmenu:hover, a.buttonmenu:hover {
     background-color: lighten(@bg-primary-color, 30%) !important;
     color: @button-hover-color !important;
+}
+
+/*----------------------------------
+------ PULSANTE IMAGE HOVER --------
+----------------------------------*/
+.work-image:after {
+    background-position: center center !important;
+    background-size: 50px 50px !important;
+    opacity: 0 !important;
+}
+
+.work-image:hover:after, ul li .work-image:hover:after {
+    z-index: 799 !important;
+    /*background: url(/images/link.png) center center no-repeat !important;*/
+    background: url(/images/link1.png) center center no-repeat !important;
+    /*background: url(/images/link2.png) center center no-repeat !important;
+    background: url(/images/link3.png) center center no-repeat !important;*/
+    background-size: 80px 80px !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+    opacity: 1 !important;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
 }
 
 /*----------------------------------
@@ -530,6 +657,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 
 .footer .footer-col .footer-title {
     color: @title-footer-color;
+    font-family: @tite-font;
+    font-weight: 600;
     border-bottom: 1px solid @title-footer-border-color;
 }
 
@@ -550,15 +679,16 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     font-size: 12px;
 }
 
+.footer .footer-col .footer-content a, .footer .footer-col p {
+    color: @body-footer-color;
+    font-family: @base-font;
+    font-size: 1rem;
+}
+
 .footer .footer-col .footer-content .footer-category-list li a:hover {
     /*color: #33332e;*/
     color: @link-footer-color-hover;
     font-family: @base-font;
-}
-
-.footer .footer-col .footer-content a, .footer .footer-col p {
-    color: @body-footer-color;
-    font-size: 1rem;
 }
 
 .footer-wrapper {
@@ -582,7 +712,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 .bigtext {
     color: @title-testata-home-color;
     font-family: @title-testata-home-font;
-    font-size: @title-testata-home-size;
+    font-size: @title-testata-home-size !important;
     font-weight: 700;
     text-align: center;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
@@ -593,7 +723,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 .smalltext {
     color: @subtitle-testata-home-color;
     font-family: @subtitle-testata-home-font;
-    font-size: @subtitle-testata-home-size;
+    font-size: @subtitle-testata-home-size !important;
     font-weight: 700;
     text-align: center;
     line-height: normal;
@@ -664,8 +794,238 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     margin-bottom: 0px;
 }
 
+/* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
+#isoBannav1 li:nth-child(n+1) .work-image:after {
+    background-position: center calc(~'(100% - 130px) / 2') !important;
+    background-size: 10% !important;
+}
+
+#isoBannav1 li:nth-child(1) .work-image:hover:after {
+    background: url(/images/icon-lampada.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#isoBannav1 li:nth-child(2) .work-image:hover:after {
+    background: url(/images/icon-vaso.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#isoBannav1 li:nth-child(3) .work-image:hover:after {
+    background: url(/images/icon-oggettistica.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#isoBannav1 li:nth-child(4) .work-image:hover:after {
+    background: url(/images/icon-piatti.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#isoBannav1 li:nth-child(5) .work-image:hover:after {
+    background: url(/images/icon-tavoli.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#isoBannav1 li:nth-child(6) .work-image:hover:after {
+    background: url(/images/icon-natale.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+/*#menuzord ul .dropdown li:nth-child(1) {
+    background: url(/images/icon-lampada.png) center calc(~'50% - 90px + 12.5%') no-repeat !important;
+}*/
+
+/*------------------------------------
+ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
+------------------------------------*/
+.button-carrello {
+    &:extend(.divbuttonstyle);
+    font-size: 1.2rem;
+    padding: 0 0 0 2px !important;
+    line-height: 40px !important;
+    width: 42px;
+    border-radius: 50%;
+    font-weight: 200;
+}
+
+.button-carrello:hover {
+    &:extend(.divbuttonstyle:hover);
+    font-size: 1.2rem;
+    padding: 0 0 0 2px !important;
+    line-height: 40px !important;
+    width: 42px;
+    border-radius: 50%;
+    font-weight: 200;
+}
+
+/*.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
+    &:extend(.button-carrello);
+    background: url("/images/soldout1.png") center center no-repeat;
+    background-size: 25px;
+    cursor: unset;
+}
+
+.btn-carrello-esaurito .fa {
+    opacity: 0;
+}*/
+
+.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
+    &:extend(.button-carrello);
+    background-color: transparent !important;
+    color: @button-hover-color !important;
+    border: none !important;
+    letter-spacing: 0 !important;
+    font-size: 0.8rem;
+    cursor: unset;
+}
+
+.carrello-go-launch {
+    /*position:fixed !important;*/
+    display: block !important;
+    z-index: 999 !important;
+}
+
+.prod_discount {
+    background-color: @bg-primary-color !important;
+}
+
+#carrellos1qty input {
+    width: 42px !important;
+    height: 42px !important;
+    margin-top: 0 !important;
+}
+
+/*CARRELLO - MENU - FIXEDTOP*/
+.dropdown-menu {
+    color: @primary-color;
+}
+
+.dropdown-cart .products-list-mini li {
+    padding: 15px !important;
+    background: @bg-light-color;
+    margin-top: 5px !important;
+}
+
+.products-list-mini li + li {
+    border: none;
+}
+
+.dropdown-menu {
+    border: 1px solid @secondary-color;
+}
+
+.products-list-mini li:nth-child(1) {
+    display: none;
+}
+
+.products-list-mini li:nth-child(2) {
+    margin-top: 0px !important;
+}
+
+.products-list-mini li:nth-child(n+1) .work-image:after {
+    background-position: center calc(~'(100% - 61px) / 2') !important;
+    background-size: 15% !important;
+}
+
+.products-list-mini li:nth-child(n+1) .work-image:hover:after {
+    background-size: 25% !important;
+}
+
+/*CARRELLO - MENU - MENUZORD*/
+.menuzord-menu li #containerCarrello a, .menuzord-menu li #containerCarrello a:before, .menuzord-menu li #containerCarrello a:after {
+    border: none;
+    padding: 14px !important;
+}
+
+.menuzord-menu li #containerCarrello a .totalItems {
+    color: @primary-color;
+}
+
+/*RIEPILOGO - CARRELLO*/
+.table td, .table th {
+    padding: .35rem;
+    vertical-align: top;
+    border-top: none;
+    background: @bg-light-color;
+    vertical-align: middle;
+}
+
+.table-cart thead td, .table-cart thead th {
+    color: #fff;
+    font-weight: 300;
+    background: @bg-dark-color;
+}
+
+.table-cart tbody tr td, .table-cart tbody tr th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 4px solid #fff;
+}
+
+.table-cart tbody tr td span, .table-cart tbody tr th span {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+}
+
+.cart-product, .cart-quantity, .cart-total {
+    &:extend(.mbr-section-title);
+    text-align: left !important;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-family: @base-font;
+}
+
+.cart-total {
+    font-size: 1rem;
+}
+
+.table-cart .cart-remove {
+    width: 50px;
+    padding-right: 0;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: auto;
+}
+
+.cart-product .work-image:after {
+    background-size: 30% !important;
+}
+
+.cart-product .work-image:hover:after {
+    background-size: 40% !important;
+}
+
+/*--- PAGINA  ACQUSITO PRODOTTO ---*/
+.bill-address label {
+    margin-bottom: .2rem;
+    font-size: 0.8rem;
+}
+
+.bill-address .form-group {
+    margin-bottom: 0.8rem;
+}
+
+.quantity-order {
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 50px;
+    height: 50px;
+    float: left;
+    background: @bg-secondary-color;
+    line-height: 32px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+}
 /*----------------------------------
--------- BANNER STAFF --------
+---------- ISOTOPE STAFF -----------
 ----------------------------------*/
 .isotope-staff a .rounded {
     background-color: @banner-navigazione-background;
@@ -698,7 +1058,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 /*----------------------------------
----------- BANNER OFFERTA ----------
+---------- ISOTOPE OFFERTA ---------
 ----------------------------------*/
 .titolo-offerta {
     &:extend(.isotope-navigation .work-subcaption .work-title);
@@ -710,14 +1070,14 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 /*----------------------------------
----------- BANNER SLIDER -----------
+---------- ISOTOPE SLIDER ----------
 ----------------------------------*/
 .owl-slider-v2 .box {
     margin: @margin-box-banner-slider;
     background-color: @bg-box-banner-slider;
 }
 
-.owl-slider-v2 .box .work-image {
+.owl-slider-v2 .box .work-image, .owl-slider-v2 .box .work-image-no-button {
     height: @height-image-banner-slider;
     padding: @padding-image-banner-slider;
     width: 100%;
@@ -753,8 +1113,20 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     overflow: hidden
 }
 
+.owl-theme .owl-controls .owl-page span {
+    background: @bg-primary-color;
+    filter: Alpha(Opacity=50);
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.owl-theme .owl-controls .owl-page.active span, .owl-theme .owl-controls.clickable .owl-page:hover span {
+    opacity: 1;
+    filter: Alpha(Opacity=100);
+}
 /*----------------------------------
----- BANNER news-letter e mail -----
+---- ISOTOPE news-letter e mail ----
 ----------------------------------*/
 .mbr-overlay {
     background-color: @bg-testata-opacity;
@@ -770,6 +1142,10 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/
+.blog-post h1 a {
+    color: @scheda-title-color;
+}
+
 .blog-post-body {
     font-size: @scheda-size;
     color: @scheda-color;
@@ -790,6 +1166,10 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     margin: 0 15px;
     background-color: @white-color;
     border: none;
+}
+
+.body-banner-slider a p {
+    font-size: 1.1rem;
 }
 
 /*----------------------------------
@@ -828,26 +1208,22 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     display: block;
     text-decoration: none !important;
     line-height: normal;
-
-    &:hover {
-        color: red;
-    }
 }
 
 .faq-section .card .card-header a.panel-title h4 {
     font-family: @body-font;
+    color: @primary-color;
     padding: 1.3rem 2rem;
     margin-bottom: 0;
     font-weight: 700;
     font-size: 1rem;
     line-height: 22px;
 }
-
 /*----------------------------------
 --------- EFFETTO PULSANTE ---------
 ----------------------------------*/
-@media screen and (min-width: 414px) {
-    .menuzord-menu * {
+@media screen and (min-width: 1025px) {
+    .menuzord-menu *:not(.dropdown-menu) {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         -webkit-transition: all 0.35s ease;
@@ -860,7 +1236,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     }
 
     .menuzord-menu a:hover {
-        color: lighten(@bg-primary-color, 30%) !important;
+        color: @secondary-color;
         font-weight: 500 !important;
     }
 
@@ -868,6 +1244,12 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     .menuzord.white .menuzord-menu > li:hover > a,
     .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
         font-weight: 500 !important;
+    }
+
+    .menuzord-menu ul.dropdown li a, .menuzord-menu ul.dropdown li a:before,
+    .menuzord-menu ul.dropdown li a:after {
+        border: none;
+        padding: 14px !important;
     }
 
     /*opzione 1*/
@@ -885,8 +1267,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     .menuzord-menu a:before {
         left: 0;
         top: 0;
-        border-left: 2px solid lighten(@bg-primary-color, 30%);
-        border-top: 2px solid lighten(@bg-primary-color, 30%);
+        border-left: 2px solid @secondary-color;
+        border-top: 2px solid @secondary-color;
         -webkit-transform: translate(100%, 50%);
         transform: translate(100%, 50%);
     }
@@ -894,8 +1276,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     .menuzord-menu a:after {
         right: 0;
         bottom: 0;
-        border-right: 2px solid lighten(@bg-primary-color, 30%);
-        border-bottom: 2px solid lighten(@bg-primary-color, 30%);
+        border-right: 2px solid @secondary-color;
+        border-bottom: 2px solid @secondary-color;
         -webkit-transform: translate(-100%, -50%);
         transform: translate(-100%, -50%);
     }
@@ -908,7 +1290,6 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         transform: translate(0%, 0%);
         opacity: 1;
     }
-
     /*opzione 2*/
     /*.menuzord-menu a:before,
     .menuzord-menu a:after {
@@ -937,4 +1318,31 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     .menuzord-menu .current a:after {
         width: 100%;
     }*/
+}
+
+/*----------------------------------
+--------------- FORM ---------------
+----------------------------------*/
+.ui-15 .ui-form .form-control {
+    background-color: #ffffff;
+}
+
+.form-control, .form-control:focus {
+    border: 1px solid @bg-secondary-color;
+}
+
+.ui-15 .ui-form .ui-icon {
+    color: @bg-secondary-color !important;
+}
+
+/*CHECKBOX MODIFICA*/
+label[class="checkbox"] input[type="checkbox"] {
+    margin: 4px;
+    width: 25px;
+    height: 25px;
+}
+li input[type="radio"] {
+    margin: 4px;
+    width: 25px;
+    height: 25px;
 }

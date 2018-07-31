@@ -258,8 +258,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     public string CreaLinkPersonalizzato(string testo, string tipologia, string qstring = "")
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-        string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, testo, "", tipologia, "");
+        WelcomeLibrary.DOM.TipologiaOfferte sezione =
+            WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == tipologia); });
+        if (sezione == null) return "";
+        string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, sezione.Descrizione, "", tipologia, "");
         link += "?" + qstring;
         sb.Append("<a href=\"");
         sb.Append(link);
@@ -889,7 +891,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1"));
         scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1"));
         scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1"));
-        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2"));
+        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2"));
         scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2"));
         scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2"));
         scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");

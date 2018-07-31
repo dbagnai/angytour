@@ -1620,17 +1620,17 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     //JSON.parse(localObjects.dataloaded)["datalist"]
 
     if (qtavendita == 0) {
-        retstring = "<div style=\"width:90px;line-height:15px; padding-top:10px;\"  class=\"divbuttonstyle\"  >" + testoCarelloesaurito + "</div>";
+        retstring = "<div style=\"width:90px;line-height:15px; padding-top:10px;\"  class=\"btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
     } else {
         //retstring = "<button type=\"button\" style=\"float:right\" class=\"btn btn-purple btn-small trigcarrello\" title=\"" + id + "," + lng + "," + username + "\"  >" + testoInseriscicarrello + "</button>";
         var testocall = id + "," + lng + "," + username;
 
-        retstring = "<button type=\"button\" style=\" background-color:#121212;\" class=\"btn btn-purple\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+        retstring = "<button type=\"button\" style=\" background-color:#121212;\" class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
 
         if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || prezzo == 0)) {
             var link = localObjects["linkloaded"][id]["link"];
             retstring = "<a href=\"" + link + "\" target=\"_self\" >";
-            retstring += "<div  style=\"background-color:#121212\" class=\"btn btn-purple\"  >" + testoVedi + "</div>";
+            retstring += "<div  style=\"background-color:#121212\" class=\"btn-carrello-esaurito\"  >" + testoVedi + "</div>";
             retstring += "</a>";
         }
     }

@@ -287,7 +287,7 @@
                 <div class="row">
                     <div class="col-sm-2 item-text">
                         <strong>
-                            <asp:Label ID="Label18" runat="server" Text="Vetrina" /></strong>
+                            <asp:Label ID="Label18" runat="server" Text="Spengi Gallery" /></strong>
                     </div>
                     <div class="col-sm-10">
                         <asp:CheckBox ID="chkVetrina" runat="server" />
@@ -296,7 +296,7 @@
                 <div class="row">
                     <div class="col-sm-2 item-text">
                         <strong>
-                            <asp:Label ID="Label39" runat="server" Text="Spengi Gallery" /></strong>
+                            <asp:Label ID="Label39" runat="server" Text="Promozioni" /></strong>
                     </div>
                     <div class="col-sm-10">
                         <asp:CheckBox ID="chkPromozione" runat="server" />

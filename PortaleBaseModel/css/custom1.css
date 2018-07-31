@@ -1457,12 +1457,12 @@ Portfolio
 }
 
 @media (min-width: 580px) and (max-width: 1000px) {
-    .work-image {
+    .work-image, .work-image-no-button {
         height: 200px;
     }
 }
 
-.work-image {
+.work-image, .work-image-no-button {
     position: relative;
     overflow: hidden;
     /*min-height: 200px;*/
@@ -1471,7 +1471,7 @@ Portfolio
     text-align: center;
 }
 
-    .work-image:after {
+    .work-image:after, .work-image-no-button:after {
         position: absolute;
         display: block;
         content: "";
@@ -1480,7 +1480,7 @@ Portfolio
         top: 0;
     }
 
-    .work-image img {
+    .work-image img, .work-image-no-button img {
         /*height: auto;*/
         display: block;
         height: auto;
@@ -3639,7 +3639,8 @@ select.input-small {
     }
 
 .product-details {
-    height: 100px;
+    /*height: 100px;*/
+    padding-top: 8px;
 }
 
     .product-details h3 {
@@ -3671,7 +3672,7 @@ select.input-small {
 }
 
     .dropdown-cart li a {
-        font-size: 0.9rem !important;
+        /*font-size: 0.9rem !important;*/
     }
 
     .dropdown-cart .products-list-mini {
@@ -4466,4 +4467,65 @@ Modify  class per datepicker
 ----------------------------------*/
 #collapse_faq p {
     margin-bottom: 0;
+}
+.body-banner-slider a p {
+    font-size: 1.1rem;
+}
+
+/*----------------------------------------
+------ TESTIMONIALS NUOVA SEZIONE --------
+------------------------------------------*/
+.isotope-testimonials p {
+    font-size: 1rem !important;
+    /*line-height: 1.4rem !important;*/
+}
+
+.scheda-testimonials-img .slide-content {
+    background: #fff;
+    border-radius: 50%;
+    border: 2px dotted #606060;
+    padding: 3px !important;
+}
+
+.scheda-testimonials-img img {
+    border-radius: 50%;
+}
+
+img.aimg {
+    height: 19px;
+    width: auto;
+    margin: 0 5px;
+}
+
+.owlscrollerTestimonials .work-subcaption {
+    height: 160px;
+}
+
+    .owlscrollerTestimonials .work-subcaption p {
+        line-height: 1.8rem !important;
+        font-size: 1.4rem !important;
+    }
+
+@media (max-width: 1025px) {
+    .owlscrollerTestimonials .work-subcaption {
+        height: 180px;
+    }
+}
+
+@media (max-width: 415px) {
+    .owlscrollerTestimonials .work-subcaption {
+        height: 210px;
+    }
+
+        .owlscrollerTestimonials .work-subcaption p {
+            line-height: 1.5rem !important;
+            font-size: 1rem !important;
+        }
+}
+
+/*----------------------------------------
+------------ CARRELLO SPESA --------------
+------------------------------------------*/
+.totalItems {
+    line-height: 1.9rem;
 }

@@ -1444,7 +1444,7 @@ public class CommonPage : Page
 
                 //Creiamo la visualizzione degli articoli in carrello
                 // da fare <li>  contenuto da prendere sotto  </li>
-                sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px\">");
+                sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px;position:relative\">");
 
                 string linkofferta = "";
                 string testoofferta = "";
@@ -1469,25 +1469,31 @@ public class CommonPage : Page
                 {
                     sb.Append("<a target=\"_blank\"   href=\"" +
                         linkofferta
-                           + "\"  class=\"product-thumb pull-left\"  >");
+                           + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
+
+                    sb.Append(" <div class=\"work-image\">");
+
                     sb.Append("<img alt=\""
                         +
                       testoofferta
-                        + "\" Style=\"width: auto; height: auto; max-width: 50px; max-height: 50px;\" ");
+                        + "\" Style=\"width: auto; height: auto; max-width: 100%; max-height: 100%;\" ");
                     sb.Append(" src=\"");
                     sb.Append(imgofferta + "\" ");
                     sb.Append("\" />");
+
+                    sb.Append(" </div>");
+
                     sb.Append(" </a>");
                 }
-                sb.Append(" <p class=\"product-calc muted\">");
-                sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
-                sb.Append(" </p>");
+                //sb.Append(" <p class=\"product-calc muted\">");
+                //sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
+                //sb.Append(" </p>");
 
                 sb.Append(" <div class=\"clearfix\"></div>");
 
 
-                sb.Append(" <div class=\"product-details\">");
-                sb.Append(" <span class=\"product-name\"><b>");
+                sb.Append(" <div class=\"product-details\" style=\"position:absolute; bottom:15px; width:calc(100% - 31px); background:rgba(0, 0, 0, 0.50); color:#fff; padding:8px; text-align:center;\">");
+                sb.Append(" <span class=\"product-name\" style=\"display:none\"><b>");
                 sb.Append(titoloofferta);
                 sb.Append(" </b></span>");
 
@@ -1531,27 +1537,33 @@ public class CommonPage : Page
                 }
                 #endregion
 
-                sb.Append(" <div class=\"product-categories muted\">");
-                if (c.Datastart != null && c.Dataend != null)
-                {
-                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiododa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Datastart) + "<br/>");
-                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
-                }
-                sb.Append("<br/>" + Selezionadajson(c.jsonfield1, "adulti", Lingua));
-                sb.Append(" " + Selezionadajson(c.jsonfield1, "bambini", Lingua) + "<br/>");
-                sb.Append(" </div>");
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //if (c.Datastart != null && c.Dataend != null)
+                //{
+                //    sb.Append(references.ResMan("Common", Lingua, "formtestoperiododa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Datastart) + "<br/>");
+                //    sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
+                //}
+                //sb.Append("<br/>" + Selezionadajson(c.jsonfield1, "adulti", Lingua));
+                //sb.Append(" " + Selezionadajson(c.jsonfield1, "bambini", Lingua) + "<br/>");
+                //sb.Append(" </div>");
 
 
                 //sb.Append(" <div class=\"product-categories muted\">");
                 //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
                 //sb.Append(" </div>");
 
-
+                sb.Append(" <p class=\"product-calc muted\" style=\"font-size:1rem; color:#fff; padding:8px; text-align:center;\">");
+                sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
+                sb.Append(" </p>");
 
                 sb.Append(" </div>");
                 sb.Append(" </li>");
 
             }
+
+
+
+
 
         }
         else

@@ -159,14 +159,14 @@ var carrellotool = new function () {
         if (configview == 2 || configview == 3) {
             $('#' + controlid + "plus").html('');
             $('#' + controlid + "minus").html('');
-            var onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\" onclick =\"carrellotool.aggiungiacarrello()\"";
+            var onclickevent1 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.aggiungiacarrello()\"";
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
-            var btnaggiungi = "<div class=\"divbuttonstyle\"  " + onclickevent1 + ">+</div>";
+            var btnaggiungi = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 1.4rem;\" " + onclickevent1 + ">+</div>";
             $('#' + controlid + "plus").append(btnaggiungi);
 
-            var onclickevent2 = "style=\"width:60px;cursor:pointer;margin-top:10px\" onclick =\"carrellotool.sottradiacarrello()\"";
+            var onclickevent2 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.sottradiacarrello()\"";
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
-            var btnsottrai = "<div class=\"divbuttonstyle\"  " + onclickevent2 + ">-</div>";
+            var btnsottrai = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 2rem;\" " + onclickevent2 + ">-</div>";
             $('#' + controlid + "minus").append(btnsottrai);
 
             carrellotool.caricaquantita();

@@ -5997,7 +5997,7 @@ namespace WelcomeLibrary.DAL
                         }
                     }
 
-                    if (!_o.Promozione)
+                    if (!_o.Vetrina)
                     {
                         tmp.Add("imageslist", Newtonsoft.Json.JsonConvert.SerializeObject(imagescomplete));
                         tmp.Add("imagesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(imagesdesc));

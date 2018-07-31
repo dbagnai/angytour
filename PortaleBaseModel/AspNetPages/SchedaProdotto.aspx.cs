@@ -170,20 +170,25 @@ public partial class _SchedaProdotto : CommonPage
         switch (CodiceTipologia)
         {
             case "rif000001":
+
+
                 column1.Visible = false;
-                column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-12 col-sm-12";
+                //column1.Attributes["class"] = "col-md-1 col-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-9";
                 column2.Visible = false;
                 column3.Visible = false;
                 divContact.Visible = false;
                 divContact.Visible = false;
 
                 sb.Clear();
-                //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                //sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,2, '" + Categoria2liv + "'");
-                //sb.Append("\"></div>");
-                //plhSuggeritiJs.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,'', '" + Categoria2liv + "'");
+                sb.Append("\"></div>");
+                plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
 
+
+                HtmlGenericControl divc = ((HtmlGenericControl)Master.FindControl("divContattiMaster"));
+                divc.Visible = false;
 
                 sb.Clear();
                 //BIND PER LA SCHEDA!!!!
@@ -197,7 +202,7 @@ public partial class _SchedaProdotto : CommonPage
             default:
                 column1.Visible = false;
                 //column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-md-12 col-sm-12";
+                column2.Attributes["class"] = "col-12";
                 column3.Visible = false;
                 //column3.Attributes["class"] = "col-md-3 col-sm-3";
                 divContact.Visible = false;

@@ -1136,8 +1136,9 @@
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-12">
                         <div class="subtitle-block clearfix">
+
                             <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
                                 <div class="pull-left lead">
                                     <h2 class="mbr-section-title" style="margin-bottom: 3px">
@@ -1146,6 +1147,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

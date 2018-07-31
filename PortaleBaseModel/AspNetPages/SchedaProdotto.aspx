@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-1 col-sm-1">
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-12">
+            <div class="col-md-10 col-sm-10 col-12">
                 <span class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
                     <asp:literal text="" runat="server" id="litSezione" />
                 </span>
@@ -462,7 +462,7 @@
         }
         $(document).ready(function () {
             inizializzaFlexsliderScheda();
-            $('.zoommgfy').magnify();
+           // $('.zoommgfy').magnify();
         });
         function inizializzaFlexsliderScheda() {
             //Plugin: flexslider con funzione di animazione dei messaggi o oggetti sopra
@@ -609,13 +609,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
 
     <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15" runat="server" id="divConctactBelow" clientidmode="static" visible="false" style="background-color: #cfcfcf; padding-top: 30px; padding-bottom: 30px">
+    <div class="ui-15 py-4 bg-light-color" runat="server" id="divConctactBelow" clientidmode="static" visible="true">
         <div class="ui-content" style="margin: 0px auto;">
             <div class="container">
                 <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-sm-8 tx-dark-color">
                                 <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"testocontattadtl") %></div>
                             </div>
                         </div>
@@ -624,18 +624,18 @@
                 <!-- Ui Form -->
                 <div class="ui-form">
                     <!-- Heading -->
-                    <div class="row" style="padding-right: inherit">
-                        <div class="col-md-8 col-md-offset-2">
+                    <div class="row justify-content-center" style="padding-right: inherit">
+                        <div class="col-12 col-sm-8">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="ui-input">
+                                    <div class="ui-input my-2 my-sm-3">
                                         <!-- Input Box -->
                                         <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName" />
                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="ui-input">
+                                    <div class="ui-input my-2 my-sm-3">
                                         <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Cognome" runat="server" id="txtContactCognome" />
                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
                                     </div>
@@ -643,19 +643,19 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="ui-input">
+                                    <div class="ui-input my-2 my-sm-3">
                                         <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Telefono" runat="server" id="txtContactPhone" />
                                         <label class="ui-icon"><i class="fa fa-phone"></i></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="ui-input">
+                                    <div class="ui-input my-2 my-sm-3">
                                         <input type="text" class="form-control" name="unname" validationgroup="contattilateral" placeholder="Email" runat="server" id="txtContactEmail" />
                                         <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui-input">
+                            <div class="ui-input my-2 my-sm-3">
                                 <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                             </div>
 
@@ -689,10 +689,12 @@
                                     }
                                 }
                             </script>
-                            <button id="Button1" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                            <div class="col-12 text-center my-3">
+                            <button id="Button1" type="button" class="btn-black-outline" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                </div>
                             <asp:button id="Button1srv" style="display: none" runat="server" onclick="btnContatti_Click" />
 
-                            <div style="font-weight: 300; font-size: 1.2rem; color: white" id="outputContactdiv">
+                            <div style="font-weight: 300; font-size: 1.0rem; color: white" id="outputContactdiv">
                                 <asp:literal text="" id="outputContact" runat="server" />
                             </div>
                             <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral" controltovalidate="txtContactName" runat="server" />
@@ -705,20 +707,22 @@
             </div>
         </div>
     </div>
-    <div style="background-color: #efefef;">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding-left: 10px; padding-right: 10px;">
+    <div style="background-color: #fff; position: relative">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none;  margin-left: 30px; margin-right: 30px">
             <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <div id="divScrollerSuggeritiJsTitle" class="row" style="display: none; margin: 10px;">
+                <div class="col-sm-12 col-12">                  
                         <div class="subtitle-block clearfix">
-                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e; border-bottom: 1px solid #33332e">
-                                <div class="headline pull-left">
-                                    <div class="subtitle-block clearfix">
+
+                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
+                                <div class="pull-left lead">
+                                    <h2 class="mbr-section-title" style="margin-bottom: 3px">
                                         <%--<%= (CodiceTipologia=="rif000001" ) ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
                                         <%= (CodiceTipologia=="rif000001" ) ?  references.ResMan("Common", Lingua, "titoloCollegati"): references.ResMan("Common", Lingua, "titoloCatalogoConsigliati") %>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

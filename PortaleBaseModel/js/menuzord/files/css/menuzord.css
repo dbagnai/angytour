@@ -6,7 +6,7 @@ License: http://codecanyon.net/licenses
 
 /*
 	CONTENTS:
-	
+
 	 1 - MENU CONTAINER
 		- Scrollable menu
 	 2 - BRAND
@@ -46,8 +46,6 @@ License: http://codecanyon.net/licenses
 
 /* FONT
 ======================================*/
-
-
 
 /* 1 - MENU CONTAINER
 ======================================*/
@@ -103,7 +101,7 @@ License: http://codecanyon.net/licenses
     .menuzord-menu.menuzord-right {
         float: right;
     }
-  
+
     /* Menu items */
     .menuzord-menu > li {
         display: inline-block;
@@ -141,6 +139,12 @@ License: http://codecanyon.net/licenses
         min-width: 180px;
         white-space: nowrap;
         background: #fff;
+        margin-top: 10px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border: 1px solid;
+        border-top: 1px dashed;
+        box-shadow: 0 4px 6px -6px #222;
     }
 
         .menuzord-menu ul.dropdown li ul.dropdown {
@@ -155,7 +159,7 @@ License: http://codecanyon.net/licenses
             position: relative;
         }
 
-        .menuzord-menu ul.dropdown li a {
+            .menuzord-menu ul.dropdown li a {
                 width: 100%;
                 background: none;
                 padding: 10px 25px 10px 22px;
@@ -321,7 +325,7 @@ License: http://codecanyon.net/licenses
 /* 9 - SHOW/HIDE BUTTON (MOBILE MODE)
 ======================================*/
 .menuzord .showhide {
-    width: 60px;
+    width: 21px;
     height: 46px;
     padding: 13px 0 0;
     display: none;
@@ -529,6 +533,7 @@ License: http://codecanyon.net/licenses
             border: none;
             background: #fff;
             float: left;
+            border: 1px dashed;
         }
 
             /* Dropdown items */
@@ -537,12 +542,16 @@ License: http://codecanyon.net/licenses
             }
 
                 .menuzord-responsive .menuzord-menu ul.dropdown li a {
-                    border-bottom: solid 1px #f0f0f0;
+                    /*border-bottom: solid 1px #f0f0f0;*/
+                    padding: 12px 20px !important;
+                    line-height: normal;
+                    display: block;
+                    text-align: center;
                 }
 
-        .menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li > a {
+        /*.menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li > a {
             padding-left: 40px !important;
-        }
+        }*/
 
         .menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li > ul.dropdown > li > a {
             padding-left: 60px !important;
@@ -566,7 +575,7 @@ License: http://codecanyon.net/licenses
 
         /* Dropdown/megamenu indicators */
         .menuzord-responsive .menuzord-menu li .indicator {
-            width: 60px;
+            /*width: 60px;
             height: 45px;
             position: absolute;
             right: 0;
@@ -574,7 +583,7 @@ License: http://codecanyon.net/licenses
             font-size: 22px;
             text-align: center;
             line-height: 43px;
-            border-left: solid 1px #f5f5f5;
+            border-left: solid 1px #f5f5f5;*/
         }
 
         .menuzord-responsive .menuzord-menu li ul.dropdown li .indicator {

@@ -117,7 +117,7 @@
                                         <a runat="server" class="btn btn-block btn-primary" alt="" href="~/Admin/default.aspx?Lingua=I" id="lnkAdminPage">AmministrazioneSito</a>
                                         <br />
                                         <br />
-                                        <a runat="server" class="btn btn-block btn-primary" alt="" href="~/AreaContenuti/default.aspx?Lingua=I" id="A1">Area Gestione Contenuti</a>
+                                        <a runat="server" class="btn btn-block btn-primary" alt="" href="~/AreaContenuti/default.aspx?Lingua=I" id="A1">Gestione Contenuti</a>
                                         <%-- <br />
                                 <a runat="server" alt="" class="btn btn-default btn-small" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />--%>

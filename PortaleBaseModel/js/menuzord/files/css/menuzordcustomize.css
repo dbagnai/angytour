@@ -31,8 +31,8 @@
     font-weight: 400;
 }
 
-.fixedtop .dropdown-menu {
-    top: 5px !important;
+.fixedtop .dropdown-menu, #menuzord .dropdown-menu {
+    top: 4px !important;
     position: absolute;
     /*background-color: #809193;*/
     padding: 5px;
@@ -292,6 +292,7 @@
     .menuzord.white .menuzord-menu > li > a {
         background-color: #fff;
         border-bottom: solid 1px #ccc;
+        border: none;
     }
 }
 
@@ -373,7 +374,7 @@
 
 .menuzord-menu.scrolled > li {
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -401,11 +402,10 @@
     line-height: 1.55;
     max-width: 180px;
     padding: 0px;
-
     float: none;
     position: absolute;
-     margin: 0px !important;
-        left: 0px;
+    margin: 0px !important;
+    left: 0px;
     top: 0px;
 }
 
@@ -441,10 +441,10 @@
         margin-left: calc(100% - 170px);
     }
 
-  .shrinklogo {
-    width: 206px;
-    height: 61px;
-}
+    .shrinklogo {
+        width: 206px;
+        height: 61px;
+    }
 
     .menuzord-menu > li {
         padding: 0 !important;
@@ -473,9 +473,13 @@
 
     .menuzord-responsive .menuzord-menu li .indicator {
         height: auto;
-        min-height: 44px;
         line-height: normal;
-        border-left: solid 1px #ccc;
+        border: solid 1px;
+        margin-right: -32px;
+        border-radius: 50%;
+        padding: 0 5px;
+        margin-left: 10px;
+        position: relative;
     }
 
     .menuzord-responsive .menuzord-brand {
@@ -486,7 +490,7 @@
         position: absolute;
         /*margin: 0px 35% !important;*/
         /*left: 0px;*/
-        margin-top:0px;
+        margin-top: 0px;
         margin-left: -103px !important;
         left: 50%;
         top: 0px;
@@ -540,6 +544,7 @@
 
 .menuzord i {
     font-family: FontAwesome;
+    /*padding-top: 10px;*/
 }
 
 .menuzord-tabs-nav > li > a {

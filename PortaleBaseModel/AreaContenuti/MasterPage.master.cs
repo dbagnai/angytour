@@ -50,14 +50,14 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 //rptRubricheCategorie.DataBind();
 
 
-                //List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
-                //rptCatalogo.DataSource = Catalogo;
-                //rptCatalogo.DataBind();
+                List<WelcomeLibrary.DOM.TipologiaOfferte> Catalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 1 && Convert.ToInt32(t.Codice.Substring(3)) <= 1);
+                rptCatalogo.DataSource = Catalogo;
+                rptCatalogo.DataBind();
 
 
-                //List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
-                //rptCatalogoCategorie.DataSource = listcat;
-                //rptCatalogoCategorie.DataBind();
+                List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
+                rptCatalogoCategorie.DataSource = listcat;
+                rptCatalogoCategorie.DataBind();
 
 
                 //Custom tipo

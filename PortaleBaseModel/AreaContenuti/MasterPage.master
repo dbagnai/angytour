@@ -418,7 +418,7 @@
                         </ul>
                     </li>
 
-                    <li id="tagCatalogo" runat="server" class="hover" style="display: none">
+                    <li id="tagCatalogo" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-desktop"></i>
                             <span class="menu-text">Gestione Sezione Catalogo

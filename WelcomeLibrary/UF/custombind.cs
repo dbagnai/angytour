@@ -1295,34 +1295,35 @@ namespace WelcomeLibrary.UF
 
                                                     //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'odd')]");
                                                     //if (nodes != null)
-                                                    foreach (HtmlNode n in cloneitem.SelectNodes("*"))
-                                                    {
-                                                        if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("odd"))
-                                                            n.Remove();
-                                                    }
-
-                                                    //var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("odd"));
-                                                    //if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
                                                     //{
-                                                    //    nodestoremove.First().Remove();
+                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("odd"))
+                                                    //        n.Remove();
                                                     //}
+
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("odd"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                    {
+                                                        nodestoremove.First().Remove();
+                                                    }
                                                 }
                                                 else
                                                 {
                                                     //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'even')]");
                                                     //if (nodes != null)
-                                                    foreach (HtmlNode n in cloneitem.SelectNodes("*"))
-                                                    {
-                                                        if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("odd"))
-                                                            n.Remove();
-                                                    }
+                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
+                                                    //foreach (HtmlNode n in cloneitem.Descendants())
+                                                    //{
+                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("even"))
+                                                    //        n.Remove();
+                                                    //}
 
-                                                    //var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("even"));
-                                                    //if ((nodestoremove != null) && (nodestoremove.Count() > 0))
-                                                    //    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
-                                                    //    {
-                                                    //        nodestoremove.First().Remove();
-                                                    //    }
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("even"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        {
+                                                            nodestoremove.First().Remove();
+                                                        }
                                                 }
 
                                             }
@@ -2537,18 +2538,18 @@ namespace WelcomeLibrary.UF
                         double q = 0;
                         double.TryParse(qtavendita, out q);
                         if (q == 0)
-                            ret = "<div  class=\"divbuttonstyle btn-carrello\"  >" + testoCarelloesaurito + "</div>";
+                            ret = "<div  class=\"button-carrello btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
                         else
                         {
                             var testocall = id + "," + Lingua + "," + Username;
-                            ret = "<button type=\"button\"  class=\"divbuttonstyle btn-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+                            ret = "<button type=\"button\"  class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
                             if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || p == 0))
                             {
                                 var link = "";
                                 if (linkloaded.ContainsKey(id) && linkloaded[id].ContainsKey("link"))
                                     link = linkloaded[id]["link"];
                                 ret = "<a href=\"" + link + "\" target=\"_self\" >";
-                                ret += "<div  class=\"divbuttonstyle btn-carrello\" >" + testoVedi + "</div>";
+                                ret += "<div  class=\"button-carrello btn-carrello-esaurito\" >" + testoVedi + "</div>";
                                 ret += "</a>";
                             }
                         }

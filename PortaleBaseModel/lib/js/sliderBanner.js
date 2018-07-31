@@ -208,7 +208,7 @@ function initSlider(idDiv, idContainer, width, height) {
         stopAtSlide: -1,
         stopAfterLoops: -1,
         hideCaptionAtLimit: 0,
-        hideAllCaptionAtLilmit: 0,
+        hideAllCaptionAtLimit: 0,
         hideSliderAtLimit: 0,
         fullWidth: "on",
         fullScreen: "on",// fullScreen: fullscreen,
