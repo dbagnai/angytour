@@ -2,12 +2,10 @@
     CodeFile="Content_Tipo3.aspx.cs" Inherits="AspNetPages_Content_Tipo3" Title=""
     MaintainScrollPositionOnPostback="true" %>
 
-
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>--%>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubsSlider" runat="Server">
 </asp:Content>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript">
@@ -41,8 +39,6 @@
             </div>
         </div>
     </div>
-
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -59,16 +55,39 @@
                 <asp:Label runat="server" ID="output" Font-Size="Medium"></asp:Label>
             </p>
             <asp:Label runat="server" ID="lblContenutiContatti"></asp:Label>
-            <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                <div style="width: 80%; margin: 20px auto; background-color: #efefef; padding: 20px; border-radius: 6px; border: 2px solid #f0f0f0">
-                    <div class="ui-15">
-                        <div class="ui-content">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 ui-padd">
-                                        <div class="ui-form">
-                                            <asp:Panel runat="server" ID="pnlPrenotazione" Visible="false">
-                                                <%--<div class="row" id="divSelezione1" runat="server" visible="false">
+
+            <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
+                <div class="mbr-overlay mbr-overlay-white"></div>
+                <%--<div class="w-100 bg-light-color">--%>
+                <div class="container">
+                    <div class="row justify-content-end">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 95%;">
+
+                            <%--AVVISO ERRORE DATI NON INSERITI--%>
+                            <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
+                                ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
+                            <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
+                            <div id="recaptcharesponse" style="display:none;" class="errormessageformprivacy"></div>
+                        </div>
+                        <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
+                            <div class="col-sm-6 py-1 px-3 px-sm-4 pt-2 text-center bg-manual-secondary-color-fade">
+                                <div class="ui-15">
+                                    <div class="ui-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 ui-padd">
+                                                    <div class="ui-form py-5">
+
+                                                        <div class="row pb-3" runat="server" visible="true" id="divTitlemail">
+                                                            <div class="col-sm-12">
+                                                                <div class="lead text-white">
+                                                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <asp:Panel runat="server" ID="pnlPrenotazione" Visible="false">
+                                                            <%--<div class="row" id="divSelezione1" runat="server" visible="false">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input" runat="server" id="divListaservizi">
                                                             <asp:Literal ID="Literal9" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormListaServizi %>' />
@@ -109,7 +128,7 @@
                                                         </div>
                                                     </div>
                                                 </div>--%>
-                                                <%-- <div class="row" runat="server" visible="false">
+                                                            <%-- <div class="row" runat="server" visible="false">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
                                                             <asp:TextBox ID="txtMarca" Width="99%" runat="server"
@@ -145,172 +164,177 @@
                                                     </div>
                                                 </div>--%>
 
-
-
-                                                <div class="row" runat="server" visible="true" id="divLocations">
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <%-- <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoLocations %>' />
+                                                            <%--COLLOCAZIONE--%>
+                                                            <div class="row" runat="server" visible="true" id="divLocations">
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input mt-0">
+                                                                        <%-- <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoLocations %>' />
                                                             <br />--%>
-                                                            <asp:DropDownList runat="server" Width="100%" ID="ddlLocations" class="form-control">
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <asp:TextBox ID="txtArrivo" Width="99%" runat="server"
-                                                                class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriododa") %>' />
-                                                            <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                            <%-- <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
-                                                                TargetControlID="txtArrivo">
-                                                            </Ajax:CalendarExtender>--%>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <asp:TextBox ID="txtPartenza" Width="99%" runat="server" class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriodoa") %>' />
-                                                            <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                            <%--  <Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
-                                                                TargetControlID="txtPartenza">
-                                                            </Ajax:CalendarExtender>--%>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                                        <asp:DropDownList runat="server" Width="100%" ID="ddlLocations" class="form-control">
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <%-- <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
+                                                                <div class="col-sm-3">
+                                                                    <div class="ui-input mt-0">
+                                                                        <%-- <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
                                                                 MaskType="Number" TargetControlID="txtAdulti" InputDirection="RightToLeft" Mask="99"
                                                                 AutoComplete="false">
                                                             </Ajax:MaskedEditExtender>--%>
-                                                            <script>
-                                                                jQuery(function ($) {
-                                                                    $("#ctl00_ContentPlaceHolder1_txtAdulti").mask("99", { placeholder: " " });
-                                                                });
-                                                            </script>
-                                                            <asp:TextBox ID="txtAdulti" Width="99%" runat="server"
-                                                                class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoAdulti") %>' />
-                                                            <label class="ui-icon"><i class="fa fa-group"></i></label>
+                                                                        <script>
+                                                                            jQuery(function ($) {
+                                                                                $("#ctl00_ContentPlaceHolder1_txtAdulti").mask("99", { placeholder: " " });
+                                                                            });
+                                                                        </script>
+                                                                        <asp:TextBox ID="txtAdulti" Width="99%" runat="server"
+                                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoAdulti") %>' />
+                                                                        <%--<label class="ui-icon"><i class="fa fa-group"></i></label>--%>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="ui-input mt-0">
+
+                                                                        <script>
+                                                                            jQuery(function ($) {
+                                                                                $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
+                                                                            });
+                                                                        </script>
+                                                                        <asp:TextBox ID="txtBambini" Width="99%" runat="server"
+                                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoBambini") %>' />
+                                                                        <%--<label class="ui-icon fa fa-user"></label>--%>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <%--DATA ARRIVO E PARTENZA--%>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input mt-2 mb-4">
+                                                                        <asp:TextBox ID="txtArrivo" Width="99%" runat="server"
+                                                                            class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriododa") %>' />
+                                                                        <label class="ui-icon"><i class="fa fa-calendar"></i></label>
+                                                                        <%-- <Ajax:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
+                                                                TargetControlID="txtArrivo">
+                                                            </Ajax:CalendarExtender>--%>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input mt-2 mb-4">
+                                                                        <asp:TextBox ID="txtPartenza" Width="99%" runat="server" class="form-control datepicker" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPeriodoa") %>' />
+                                                                        <label class="ui-icon"><i class="fa fa-calendar"></i></label>
+                                                                        <%--  <Ajax:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
+                                                                TargetControlID="txtPartenza">
+                                                            </Ajax:CalendarExtender>--%>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </asp:Panel>
+
+                                                        <%--NOME E COGNOME--%>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtNome" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtNome"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Style="text-align: left; width: 100%;" Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtSoc" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16l") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                                                    <asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
 
-                                                            <script>
-                                                                jQuery(function ($) {
-                                                                    $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
-                                                                });
-                                                            </script>
-                                                            <asp:TextBox ID="txtBambini" Width="99%" runat="server"
-                                                                class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoBambini") %>' />
-                                                            <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtEmail" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
+                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtEmail"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="ui-input mt-0">
+                                                                    <asp:TextBox ID="txtTel" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-phone"></i></label>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
 
+                                                        <div class="row" runat="server" id="divRegione" visible="false">
+                                                            <div class="col-sm-12">
+                                                                <div class="ui-input my-0">
+                                                                    <asp:Literal ID="Literal8" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />*<br />
+                                                                    <asp:DropDownList class="form-control" runat="server" ID="ddlRegione" AppendDataBoundItems="true"
+                                                                        OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
+                                                                    <asp:RequiredFieldValidator runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                            </asp:Panel>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="ui-input my-0">
-                                                        <asp:TextBox ID="txtNome" Width="99%" runat="server"
-                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
-                                                        <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtNome"
-                                                            ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="ui-input my-0">
-                                                        <asp:TextBox ID="txtSoc" Width="99%" runat="server"
-                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16l") %>' />
-                                                        <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                        <asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
-                                                            ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' Text="*" ValidationGroup="MailInfo" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtDescrizione" Width="99%"
+                                                                        TextMode="MultiLine" Font-Size="17px" Font-Names="Raleway"
+                                                                        Height="250px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
+                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtDescrizione"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto17Err") %>' Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="ui-input my-0">
-                                                        <asp:TextBox ID="txtEmail" Width="99%" runat="server"
-                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
-                                                        <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
-                                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtEmail"
-                                                            ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="ui-input mt-0">
-                                                        <asp:TextBox ID="txtTel" Width="99%" runat="server"
-                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
-                                                        <label class="ui-icon"><i class="fa fa-phone"></i></label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12" style="text-align: center">
 
-                                            <div class="row" runat="server" id="divRegione" visible="false">
-                                                <div class="col-sm-12">
-                                                    <div class="ui-input my-0">
-                                                        <asp:Literal ID="Literal8" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />*<br />
-                                                        <asp:DropDownList class="form-control" runat="server" ID="ddlRegione" AppendDataBoundItems="true"
-                                                            OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
-                                                        <asp:RequiredFieldValidator runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false"
-                                                            ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                                <%--MESSAGGIO ERRORE CAMPI MANCANTI--%>
+                                                                <%--<asp:ValidationSummary runat="server" ID="Summary" ValidationGroup="MailInfo" DisplayMode="BulletList"
+                                                                    ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />--%>
 
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="ui-input my-0">
-                                                        <asp:TextBox ID="txtDescrizione" Width="99%"
-                                                            TextMode="MultiLine" Font-Size="17px" Font-Names="Raleway"
-                                                            Height="250px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
-                                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtDescrizione"
-                                                            ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto17Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                                <%--MESSAGGIO ERRORE RECAPTCHA--%>
+                                                                <%--<div id="recaptcharesponse"></div>--%>
 
-                                            <div class="row">
-                                                <div class="col-sm-12" style="text-align: center">
-                                                    <asp:ValidationSummary runat="server" ID="Summary" ValidationGroup="MailInfo" DisplayMode="BulletList"
-                                                        ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
-                                                    
-                                                    <div id="recaptcharesponse"></div>
-                                                    <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
-                                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
-                                                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
-                                                    <style>
-                                                        .g-recaptcha {
-                                                            margin: 15px auto !important;
-                                                            width: auto !important;
-                                                            height: auto !important;
-                                                            text-align: -webkit-center;
-                                                            text-align: -moz-center;
-                                                            text-align: -o-center;
-                                                            text-align: -ms-center;
-                                                        }
+                                                                <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+                                                                <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
+                                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                                                                <style>
+                                                                    .g-recaptcha {
+                                                                        margin: 15px auto !important;
+                                                                        width: auto !important;
+                                                                        height: auto !important;
+                                                                        text-align: -webkit-center;
+                                                                        text-align: -moz-center;
+                                                                        text-align: -o-center;
+                                                                        text-align: -ms-center;
+                                                                    }
 
-                                                        #recaptcharesponse {
-                                                            font-size: 1.5rem;
-                                                            color: red;
-                                                        }
-                                                    </style>
-                                                    <script>
-                                                        function ConfirmContactValue(elembtn) {
-                                                            if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
-                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
-                                                                return false;
-                                                            }
-                                                            else {
-                                                                $("#recaptcharesponse").html('');
-                                                            }
+                                                                    #recaptcharesponse {
+                                                                        font-size: 1.5rem;
+                                                                        color: red;
+                                                                    }
+                                                                </style>
+                                                                <script>
+                                                                    function ConfirmContactValue(elembtn) {
+                                                                        if ($('<%= "#" + chkPrivacy.ClientID %>')[0].checked == false) {
+                                                                            $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"txtPrivacyError") %>');
+                                                                            $('#recaptcharesponse').css({ 'display': 'block' });
+                                                                            return false;
+                                                                        }
+                                                                        else {
+                                                                            $("#recaptcharesponse").html('');
+                                                                            $('#recaptcharesponse').css({ 'display': 'none' });
+                                                                        }
                                                             <%--  var response = grecaptcha.getResponse();
                                                             if (response.length == 0)  //reCaptcha not verified
                                                             {
@@ -318,48 +342,53 @@
                                                                 return false;
                                                             }
                                                             else {--%>
-                                                            if (Page_ClientValidate("MailInfo")) {
-                                                                /*do work and go for postback*/
-                                                                $(elembtn).attr("disabled", "")
-                                                                $(elembtn).val("Wait ..");
-                                                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                                                buttpost.click();
-                                                            } else {
-                                                                // alert('not validated');
-                                                                return false;
-                                                            }
-                                                            //}
-                                                        }
-                                                    </script>
+                                                                        if (Page_ClientValidate("MailInfo")) {
+                                                                            /*do work and go for postback*/
+                                                                            $(elembtn).attr("disabled", "")
+                                                                            $(elembtn).val("Wait ..");
+                                                                            var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                                            buttpost.click();  
+                                                                        } else {
+                                                                            // alert('not validated');
+                                                                            return false;
 
-                                                    <br />
-                                                    <br />
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
-                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                                                        </label>
-                                                    </div>
-                                                    
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
-                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                            <%= references.ResMan("Common", Lingua,"titoloNewsletter1") %>
-                                                        </label>
-                                                    </div>
+                                                                        
+                                                                        }
+                                                                        //}
+                                                                    }
+                                                                </script>
 
+                                                                <br />
+                                                                <br />
+                                                                <div class="checkbox">
+                                                                    <label class="w-100 text-left" style="margin-left: 30px;">
+                                                                        <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
+                                                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
+                                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #ffd800" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="checkbox">
+                                                                    <label class="w-100 text-left" style="margin-left: 30px;">
+                                                                        <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
+                                                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
+                                                                        <%= references.ResMan("Common", Lingua,"titoloNewsletter1") %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </asp:PlaceHolder>
                     </div>
                 </div>
-            </asp:PlaceHolder>
+                <%--</div>--%>
+            </section>
 
             <asp:PlaceHolder ID="plhRisposta" runat="server" Visible="false">
                 <h2>
@@ -367,7 +396,7 @@
                 <br />
             </asp:PlaceHolder>
             <asp:PlaceHolder ID="plhDove" runat="server" Visible="false">
-                <div id="map" style="height: 410px; width: 100%; margin: 40px auto">
+                <div id="map" style="height: 410px; width: calc(100% - 80px); margin: 40px auto">
                 </div>
             </asp:PlaceHolder>
             <div class="container" runat="server" id="divRoutes" visible="false">
@@ -379,17 +408,17 @@
                 <div class="row" style="text-align: center">
                     <div class="col-sm-12">
                         <asp:Label runat="server" ID="lblContenutiDove"></asp:Label>
-                        <div class="divContentTitle" style="margin: 0px auto; margin-bottom: 50px; height: auto; display: block">
-                            <div style="font-size: 14px; padding-top: 8px;">
+                        <div class="divContentTitle" style="margin: 0px auto; margin-bottom: 40px; height: auto; display: block">
+                            <div style="font-size: 14px; padding-top: 0px;">
                                 <span id="lblPartenza">
                                     <asp:Literal Text='<%# references.ResMan("Common", Lingua,"GooglePartenza") %>' runat="server" />
                                 </span>
                             </div>
                             <div style="font-size: 12px; padding-top: 5px; padding-bottom: 5px">
-                                <input id="startvalue" type="text" style="width: 260px; height: 30px;border: 1px solid #999999; width:300px;" />
+                                <input id="startvalue" type="text" style="width: 260px; height: 30px; border: 1px solid #999999; width: 300px;" />
                             </div>
                             <div style="font-size: 14px;">
-                                <input id="Button1" style="box-shadow: none; border:none; color:white; cursor:pointer; width:300px;"
+                                <input id="Button1" style="box-shadow: none; border: none; color: white; cursor: pointer; width: 300px;"
                                     type="button" value="<%= references.ResMan("Common",Lingua,"GoogleCalcolapercorso").ToString() %>" onclick="return Button1_onclick()" />
                             </div>
                         </div>
@@ -401,8 +430,13 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
+
+    <%--ELIMINO IL FORM CONTATTI DELLA MASTER--%>
+    <script>
+        jQuery(function ($) {
+            $('#ctl00_divContattiMaster').css({ 'display': 'none' });
+        });
+    </script>
 </asp:Content>

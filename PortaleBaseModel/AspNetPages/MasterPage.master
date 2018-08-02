@@ -242,17 +242,17 @@
                     <%-- Gallery --%>
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
                     <%-- Esperienze --%>
-                    <%--<%= CreaLinkTipologie(8,8) %>--%>
+                    <%= CreaLinkTipologie(8,8) %>
                     <%--TESTIMONIALS--%>
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
                     <%--<%= CreaLinkPaginastatica(3) %>--%>
                     <%--PRENOTA--%>
-                    <%--<li runat="server">
+                    <li runat="server">
                         <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                         </a>
-                    </li>--%>
+                    </li>
                     <%--CARRELLO--%>
                     <%--<li>
                     <asp:PlaceHolder runat="server" Visible="true">
@@ -484,12 +484,14 @@
             </div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <div id="divContattiMaster" runat="server" visible="true">
-                <section class="mbr-section mbr-parallax-background" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
+                <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
                     <%--<section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">--%>
-                    <div class="mbr-overlay"></div>
+                    <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
-                        <div class="row justify-content-md-center">
-                            <div class="col-sm-8">
+                        <div class="row justify-content-end">
+                            <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="
+    background: url(&quot;/public/Files/con001000/1/guarda-mail-2a-dx.png&quot;) no-repeat left bottom; background-size: 95% auto;"></div>
+                            <div class="col-sm-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
 
                                 <div class="lead text-white">
                                     <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
@@ -505,14 +507,14 @@
                                 <br />
                                 <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
                                 <br />
-                                <textarea style="background-color: rgba(255, 255, 255, 0.80); border: none" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
+                                <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                                 <br />
                                 <div style="clear: both"></div>
                                 <div class="checkbox">
-                                    <label style="color: #fff">
+                                    <label style="color: #fff; text-align:left; padding-left: 30px;">
                                         <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
-                                        <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span>
-                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
+                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check" style="color: #000"></i></span>
+                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff;" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                     </label>
                                 </div>
 
@@ -542,18 +544,18 @@
                                             }
                                         }
                                     </script>
-                                    <button id="btnInvia" type="button" class="divbuttonstyle float-right" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                    <br />
+                                    <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
 
                                     <%--<asp:Button Style="float: right" ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true" ValidationGroup="contattifooter" class="divbuttonstyle" OnClick="btnContatti1_Click" OnClientClick="return ConfirmValidation();" />--%>
                                 </div>
-                                <br />
-                                <div class="lead">
-                                    <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
-                                    <asp:RequiredFieldValidator ForeColor="White" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
-                                    <div style="font-weight: 300; color: White" id="outputContactMasterDiv">
+                                <div class="lead py-3" style="height:75px;">
+                                    <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
                                         <asp:Literal Text="" ID="outputContact" runat="server" />
                                     </div>
+                                    <asp:RequiredFieldValidator ForeColor="#d2ac67" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
+                                    <asp:RequiredFieldValidator ForeColor="#d2ac67" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
                                 </div>
                             </div>
                         </div>
@@ -651,7 +653,7 @@
                                     <%-- Gallery --%>
                                     <%--<%= CreaLinkTipologie(6,6) %>--%>
                                     <%-- Esperienze --%>
-                                    <%--<%= CreaLinkTipologie(8,8) %>--%>
+                                    <%= CreaLinkTipologie(8,8) %>
                                     <%--TESTIMONIALS--%>
                                     <%= CreaLinkTipologie(9,9) %>
                                     <%-- Faq --%>

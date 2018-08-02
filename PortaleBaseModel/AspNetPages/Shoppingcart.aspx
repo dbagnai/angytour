@@ -54,7 +54,7 @@
                                     <%= references.ResMan("Common", Lingua,"CarrelloQuantita") %>
 
                                 </td>
-                                <td style="font-size:;">
+                                <td style="text-align: right;">
                                     <%= references.ResMan("Common", Lingua,"CarrelloTotale") %></td>
                             </tr>
                         </thead>
@@ -150,7 +150,7 @@
                                             </div>
                                             <div class="clearfix"></div>
                                         </td>
-                                        <td>
+                                        <td style="text-align: right;">
                                             <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
                                         </td>
                                     </tr>

@@ -9,6 +9,9 @@
 @bg-light-color: fade(@bg-primary-color, 8%); /*footer-social e banner*/ /*#f5f0e5;*/
 @bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/ /*#555;*/
 /**/
+@bg-manual-secondary-color: #d2ac67;
+@bg-manual-secondary-color-fade: fade(@secondary-color, 70%);
+/**/
 @primary-color: darken(@bg-dark-color, 20%); /*menu - titoli-principali*/ /*#232323;*/
 @secondary-color: lighten(@primary-color, 15%); /*sotto-titoli-principali - body*/ /*#555;*/
 @black-color: #000;
@@ -85,6 +88,10 @@
 @scheda-color: @primary-color;
 @scheda-font: @base-font;
 /*----------------------------------
+//////////| FORM CONTATTI |/////////
+----------------------------------*/
+@bg-testata-opacity-white: fade(@white-color, 60%);
+/*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
 @title-footer-color: @bg-dark-color;
@@ -111,6 +118,7 @@
 @title-testata-home-size: 4rem;
 @title-testata-home-font: @primary-font;
 @title-testata-home-color: @white-color;
+@title-testata-home-weight: 100;
 /**/
 @subtitle-testata-home-size: 2.5rem;
 @subtitle-testata-home-font: @primary-font; /*@alternative-font;*/
@@ -177,6 +185,14 @@
 
 .bg-complement-color {
     background-color: @bg-complement-color !important;
+}
+
+.bg-manual-secondary-color {
+    background-color: @bg-manual-secondary-color !important;
+}
+
+.bg-manual-secondary-color-fade {
+    background-color: @bg-manual-secondary-color-fade !important;
 }
 
 .tx-primary-color {
@@ -348,7 +364,7 @@ div#blocco-lgo-home {
     color: @title-color;
     font-family: @tite-font;
     font-size: @tite-size;
-    font-weight: @title-weight;
+    font-weight: @title-weight !important;
     text-transform: @title-text-transform;
     font-style: normal;
     text-align: center;
@@ -474,11 +490,11 @@ a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.
     text-decoration: none !important;
 }
 
-.divbuttonstyle a, .divbuttonstyle a:visited, .divbuttonstyle a:active {
+.divbuttonstyle a, .divbuttonstyle a:visited, .divbuttonstyle a:active, span.divbuttonstyle a, span.divbuttonstyle {
     color: @button-color !important;
 }
 
-.divbuttonstyle a:hover {
+.divbuttonstyle a:hover, span.divbuttonstyle a:hover, span.divbuttonstyle:hover {
     color: @button-hover-color !important;
 }
 
@@ -513,7 +529,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    border: 1px solid @bg-button-outline-hover-color;
+    border: 1px solid @button-outline-color;
     color: @button-outline-color !important;
     text-align: center;
     text-transform: uppercase;
@@ -531,18 +547,20 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     border-color: @bg-button-outline-hover-color;
     opacity: 0.78;
     text-decoration: none !important;
+    border: 1px solid @bg-button-color;
 }
 
 .buttonmenu {
-    background: @bg-primary-color !important;
+    background: @bg-button-color !important;
     color: @button-color !important;
+    border: 1px solid @bg-button-color;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
     border-radius: 25px;
 }
 
 .buttonmenu:hover, a.buttonmenu:hover {
-    background-color: lighten(@bg-primary-color, 30%) !important;
+    background-color: @bg-button-hover-color !important;
     color: @button-hover-color !important;
 }
 
@@ -608,6 +626,9 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     display: inline;
     list-style: none;
     padding-left: 10px;
+}
+ul.footer-category-list {
+    margin-bottom: 0;
 }
 
 .footer {
@@ -697,7 +718,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 .footer .social-icons .social-media-icon {
-    background-color: @bg-primary-color;
+    background-color: @bg-button-color;
     border-radius: 50%;
 }
 
@@ -713,7 +734,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     color: @title-testata-home-color;
     font-family: @title-testata-home-font;
     font-size: @title-testata-home-size !important;
-    font-weight: 700;
+    font-weight: @title-testata-home-weight;
     text-align: center;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
     line-height: normal;
@@ -1138,7 +1159,9 @@ select.form-control:not([size]):not([multiple]) {
     top: 0;
     z-index: 1;
 }
-
+.mbr-overlay-white {
+    background-color: @bg-testata-opacity-white;
+}
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/
@@ -1264,7 +1287,7 @@ select.form-control:not([size]):not([multiple]) {
         opacity: 0;
     }
 
-    .menuzord-menu a:before {
+    .menuzord-menu li a:before {
         left: 0;
         top: 0;
         border-left: 2px solid @secondary-color;
@@ -1273,7 +1296,7 @@ select.form-control:not([size]):not([multiple]) {
         transform: translate(100%, 50%);
     }
 
-    .menuzord-menu a:after {
+    .menuzord-menu li a:after {
         right: 0;
         bottom: 0;
         border-right: 2px solid @secondary-color;
@@ -1281,14 +1304,19 @@ select.form-control:not([size]):not([multiple]) {
         -webkit-transform: translate(-100%, -50%);
         transform: translate(-100%, -50%);
     }
+    /*tolgo l'effetto al pulsante prenota*/
+    .menuzord-menu li:nth-child(6) a:before, .menuzord-menu li:nth-child(6) a:after {
+        border: none;
+    }
 
-    .menuzord-menu a:hover:before,
-    .menuzord-menu .current a:before,
-    .menuzord-menu a:hover:after,
-    .menuzord-menu .current a:after {
+    .menuzord-menu li a:hover:before,
+    .menuzord-menu li .current a:before,
+    .menuzord-menu li a:hover:after,
+    .menuzord-menu li .current a:after {
         -webkit-transform: translate(0%, 0%);
         transform: translate(0%, 0%);
         opacity: 1;
+        border-color: @menu-hover-color;
     }
     /*opzione 2*/
     /*.menuzord-menu a:before,
@@ -1333,6 +1361,39 @@ select.form-control:not([size]):not([multiple]) {
 
 .ui-15 .ui-form .ui-icon {
     color: @bg-secondary-color !important;
+}
+
+/*--------------- FORM - ERRORE COMPILAZIONE DATI MANCANTI ---------------*/
+.errormessageform {
+    color: red;
+    width: 40%;
+    right: 20px;
+    position: absolute;
+    top: 20px;
+    font-size: 0.9rem !important;
+    background: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    text-align: left;
+}
+
+.errormessageformprivacy {
+    color: red;
+    width: 40%;
+    right: 20px;
+    position: absolute;
+    font-size: 0.9rem !important;
+    background: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    bottom: 140px;
+}
+
+.errormessageform ul {
+    margin-bottom: 0.8rem !important;
 }
 
 /*CHECKBOX MODIFICA*/

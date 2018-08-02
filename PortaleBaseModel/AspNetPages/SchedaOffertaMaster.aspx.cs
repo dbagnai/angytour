@@ -533,7 +533,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             case "rif000005":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-10";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
