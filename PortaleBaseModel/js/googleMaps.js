@@ -36,7 +36,7 @@ $(document).ready(function () {
 function loadScript() {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAI9pleffZQ2n3y81P7fxemgGkVfZwbD4g&v=3.7&' +
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAI9pleffZQ2n3y81P7fxemgGkVfZwbD4g&v=3.exp&' +
         'callback=InitializeMap';
     document.body.appendChild(script);
 }
@@ -62,151 +62,151 @@ function InitializeMap() {
     var styles2 = [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "landscape", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "hue": "#ffd100" }, { "saturation": "44" }] }, { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [{ "saturation": "-1" }, { "hue": "#ff0000" }] }, { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{ "saturation": "-16" }] }, { "featureType": "landscape.natural", "elementType": "geometry.fill", "stylers": [{ "hue": "#ffd100" }, { "saturation": "44" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": "-30" }, { "lightness": "12" }, { "hue": "#ff8e00" }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }, { "saturation": "-26" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#c0b78d" }, { "visibility": "on" }, { "saturation": "4" }, { "lightness": "40" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffe300" }] }, { "featureType": "water", "elementType": "geometry.fill", "stylers": [{ "hue": "#ffe300" }, { "saturation": "-3" }, { "lightness": "-10" }] }, { "featureType": "water", "elementType": "labels", "stylers": [{ "hue": "#ff0000" }, { "saturation": "-100" }, { "lightness": "-5" }] }, { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "labels.text.stroke", "stylers": [{ "visibility": "off" }] }]
     /*Stile 1*/
     var styles1 = [
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 65
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 51
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 30
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 40
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.province",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "lightness": -25
-            },
-            {
-                "saturation": -100
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "hue": "#ffff00"
-            },
-            {
-                "lightness": -25
-            },
-            {
-                "saturation": -97
-            }
-        ]
-    }
+        {
+            "featureType": "landscape",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 65
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 51
+                },
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 30
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 40
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.province",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "on"
+                },
+                {
+                    "lightness": -25
+                },
+                {
+                    "saturation": -100
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "hue": "#ffff00"
+                },
+                {
+                    "lightness": -25
+                },
+                {
+                    "saturation": -97
+                }
+            ]
+        }
     ]
 
     /* Style of the map 1*/
     var styles3 = [
-    {
-        stylers: [
-          { hue: "#00ffe6" },
-          { saturation: -20 }
-        ]
-    }, {
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [
-          { lightness: 100 },
-          { visibility: "simplified" }
-        ]
-    }, {
-        featureType: "road",
-        elementType: "labels",
-        stylers: [
-          { visibility: "on" }
-        ]
-    }, {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-          { visibility: "off" }
-        ]
-    }
+        {
+            stylers: [
+                { hue: "#00ffe6" },
+                { saturation: -20 }
+            ]
+        }, {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [
+                { lightness: 100 },
+                { visibility: "simplified" }
+            ]
+        }, {
+            featureType: "road",
+            elementType: "labels",
+            stylers: [
+                { visibility: "on" }
+            ]
+        }, {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }
 
     ];
     // Create a new StyledMapType object, passing it the array of styles,
@@ -219,15 +219,15 @@ function InitializeMap() {
         directionsDisplay = new google.maps.DirectionsRenderer();
         var latlng = new google.maps.LatLng(googleposlat1, googleposlng1);
         var myOptions =
-    {
-        zoom: 9,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        scrollwheel: false,
-        mapTypeControlOptions: {
-            mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-        }
-    };
+            {
+                zoom: 9,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                }
+            };
         map = new google.maps.Map(document.getElementById(idmapcontainer), myOptions);
 
         //Associate the styled map with the MapTypeId and set it to display.
@@ -254,15 +254,15 @@ function InitializeMap() {
     {
         var latlng = new google.maps.LatLng(googleposlat1, googleposlng1);
         var myOptions =
-    {
-        zoom: 9,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        scrollwheel: false,
-        mapTypeControlOptions: {
-            mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-        }
-    };
+            {
+                zoom: 9,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                }
+            };
         map1 = new google.maps.Map(document.getElementById(idmapcontainer1), myOptions);
 
         //Associate the styled map with the MapTypeId and set it to display.
@@ -290,57 +290,39 @@ function markicons(maplocal) {
     ltlng.push(new google.maps.LatLng(googleposlat1, googleposlng1));
     if (googleposlat2 != '')
         ltlng.push(new google.maps.LatLng(googleposlat2, googleposlng2));
-
-
-
     var center = new google.maps.LatLng(googleposlat1, googleposlng1);
     maplocal.setCenter(center);
+    var infowindow;
+    var marker;
+    var urlmarker = [];
+    var testomarker = [];
     for (var i = 0; i < ltlng.length; i++) {
 
-        var urlmarker = "";
-        if (i == 0)
-            urlmarker = googleurl1;
-        if (i == 1)
-            urlmarker = googleurl2;
-
-        var marker = new google.maps.Marker({
+        if (i == 0) {
+            urlmarker.push(googleurl1);
+            testomarker.push(googlepin1 + '<br/><a target="_blank" href="' + urlmarker[i] + '">' +
+                'Vedi Mappa Completa/See complete map</a> ');
+        }
+        if (i == 1) {
+            urlmarker.push(googleurl2);
+            testomarker.push(googlepin2 + '<br/><a target="_blank" href="' + urlmarker[i] + '">' +
+                'Vedi Mappa Completa/See complete map</a> ');
+        }
+        ///////////////////
+        //infowindow.setContent(testomarker);
+        infowindow = new google.maps.InfoWindow({});
+        marker = new google.maps.Marker({
             map: maplocal,
-            position: ltlng[i],
-            url: urlmarker
+            position: ltlng[i]
         });
-        //if (!infowindow) {
-        var infowindow = new google.maps.InfoWindow();
-        //}
-        var testomarker = "";
-        if (i == 0)
-            testomarker = googlepin1;
-        if (i == 1)
-            testomarker = googlepin2;
-        testomarker += '<br/><a target="_blank" href="' + marker.url + '">' +
-     'Vedi Mappa Completa/See complete map</a> ';
-
-        //   var contentString =
-        //'<div class="popup">' +
-        //'<h2 id="berlin">Berlin</h2>' +
-        //'<p>Center of Berlin</b><br/>' +
-        //'<small><b>Lat.</b> 52.520196, <b>Lon.</b> 13.406067</small></p>' +
-        //'<a target="_blank" href="' + marker.url + '">' +
-        //'Vedi Mappa Completa/See complete map</a> ' +
-        //'</div>';
-        // infowindow.setContent(contentString);
-        infowindow.setContent(testomarker);
-
-        //  infoWindow.setPosition(ltlng[i]);
         (function (i, marker) {
             google.maps.event.addListener(marker, 'click', function () {
-                //window.open(marker.url, '_blank');
-                infowindow.open(maplocal, marker);
+                infowindow.setContent("<div>" + testomarker[i] + "</div>");
+                infowindow.open(map, marker);
             });
         })(i, marker);
+        ///////////////////
 
-        //google.maps.event.addListenerOnce(maplocal, 'idle', function () {
-        //    infowindow.open(maplocal, marker);
-        //});
         google.maps.event.addListenerOnce(maplocal, 'idle', function () {
             google.maps.event.trigger(marker, 'click');
         });
