@@ -145,7 +145,7 @@
                             <div class="form-row row">
                                 <div class="col-12 col-sm-6 form-group">
 
-                                    <label class="checkbox">
+                                    <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
                                         <asp:CheckBox EnableViewState="true" Text='<%# references.ResMan("Common", Lingua,"testochkSpedizione") %>' runat="server"
                                             ID="chkSpedizione" Checked="true" AutoPostBack="true" OnCheckedChanged="checkbox_click" />
                                     </label>
@@ -227,9 +227,9 @@
                                         <td class="cart-product">
                                             <%= references.ResMan("Common", Lingua,"CarrelloArticolo") %>
                                         </td>
-                                        <td class="cart-quantity">
+                                        <td class="cart-quantity" style="text-align: center !important;">
                                             <%= references.ResMan("Common", Lingua,"CarrelloQuantita") %></td>
-                                        <td class="cart-total" style="font-size: 0.8rem;">
+                                        <td class="cart-total" style="font-size: 0.8rem; text-align: right !important;">
                                             <%= references.ResMan("Common", Lingua,"CarrelloTotale") %></td>
                                     </tr>
                                 </thead>
@@ -258,7 +258,7 @@
                                                             Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
                                                     </a>
 
-                                                    <div class="product-details" style="height: auto">
+                                                    <div class="product-details" style="height: auto;">
                                                         <h3 class="product-name">
                                                             <%--  <a id="a1" runat="server"
                                                         href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
@@ -303,9 +303,9 @@
                                                 </td>
                                                 <td class="cart-quantity">
                                                     <asp:Label runat="server"
-                                                        ID="lblQuantita" class="quantity-order" Text='<%# Eval("Numero") %>' />
+                                                        ID="lblQuantita" class="quantity-order" style="margin-left: calc(50% - 25px);" Text='<%# Eval("Numero") %>' />
                                                 </td>
-                                                <td class="cart-total">
+                                                <td class="cart-total" style="text-align: right !important;">
                                                     <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
                                                 </td>
                                             </tr>
@@ -318,7 +318,7 @@
                                                     <span>
                                                         <%= references.ResMan("Common", Lingua,"CarrelloTotaleRiepilogo") %></span>
                                                 </th>
-                                                <td class="cart-total">
+                                                <td class="cart-total" style="text-align: right !important;">
                                                     <span>
                                                         <asp:Literal ID="lblPrezzo" runat="server"
                                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleOrdine") }) + " €" %>'></asp:Literal></span>
@@ -342,7 +342,7 @@
                                                     <span>
                                                         <%= references.ResMan("Common", Lingua,"testoSconto") %></span>
                                                 </th>
-                                                <td class="cart-total">
+                                                <td class="cart-total" style="text-align: right !important;">
 
                                                     <span>
                                                         <asp:Literal ID="Literal3" runat="server"
@@ -355,7 +355,7 @@
                                                     <span>
                                                         <%= references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %></span>
                                                 </th>
-                                                <td class="cart-total">
+                                                <td class="cart-total" style="text-align: right !important;">
                                                     <span>
                                                         <asp:Literal ID="Literal1" runat="server"
                                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("TotaleSpedizione") }) + " €" %>'></asp:Literal></span>
@@ -366,7 +366,7 @@
                                                     <span>
                                                         <%= references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></span>
                                                 </th>
-                                                <td class="cart-total">
+                                                <td class="cart-total" style="text-align: right !important;">
                                                     <span>
                                                         <asp:Literal ID="Literal2" runat="server"
                                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSpedizione") + (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") } ) + " €" %>'></asp:Literal></span>
@@ -432,10 +432,10 @@
                                         </li>
                                         <li style="display: block">
                                             <div class="clearfix" style="margin-bottom: 20px">
-                                                <div class="float-left mt-1 mr-2" style="width: 25px">
+                                                <div class="float-left mt-0 mr-2" style="width: 25px">
                                                     <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" autopostback="true" runat="server" id="inpBonifico" />
                                                 </div>
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top:6px;">
                                                     <b><%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
                                                     <%= references.ResMan("Common", Lingua,"chkbacs") %>
                                                 </div>
@@ -463,11 +463,11 @@
 
                                         <li style="display: block">
                                             <div class="clearfix" style="margin-bottom: 25px">
-                                                <div class="float-left mt-1 mr-2" style="width: 25px;">
+                                                <div class="float-left mt-0 mr-2" style="width: 25px;">
                                                     <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
                                                 </div>
 
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top:6px;">
                                                     <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b><br />
                                                     <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                 </div>

@@ -50,11 +50,11 @@
                                 <td>
                                     <%= references.ResMan("Common", Lingua,"CarrelloArticolo") %>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <%= references.ResMan("Common", Lingua,"CarrelloQuantita") %>
 
                                 </td>
-                                <td style="font-size: 0.8rem;">
+                                <td style="font-size:;">
                                     <%= references.ResMan("Common", Lingua,"CarrelloTotale") %></td>
                             </tr>
                         </thead>
@@ -81,7 +81,7 @@
                                                     Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
                                                 <%--</div>--%>
                                             </a>
-                                            <div class="d-none d-sm-block product-details">
+                                            <div class="d-none d-sm-block product-details" style="padding-top:0;">
                                                 <h3 class="product-name tx-dark-color">
                                                     <a id="a1" runat="server"
                                                         href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
@@ -131,14 +131,14 @@
                                         <td>
                                             <%--                                            <asp:Label runat="server" CssClass="quantity-order"
                                                 Text='<%# Eval("Numero") %>'></asp:Label>--%>
-                                            <div class="w-100 d-flex px-2 py-3 bd-primary-color">
+                                            <div class="w-100 d-flex pr-2 py-3 bd-primary-color justify-content-center">
 
 
                                                 <asp:LinkButton runat="server" ID="btnSottrai" Style="padding-left: 2px !important; font-size: 0.8rem;"
                                                     OnClick="btnDecrement" class="button-carrello" CommandArgument='<%# Eval("id") %>'><i class="fa fa-minus"></i> </asp:LinkButton>
 
 
-                                                <input runat="server" class="form-control" style="width: 35px; text-align: center"
+                                                <input runat="server" class="form-control mx-1" style="width: 35px; text-align: center"
                                                     id="txtQuantita" type="text" value='<%# Eval("Numero") %>' />
 
 
