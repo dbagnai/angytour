@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Home" title="Pagina principale del sito"  description="Home Page">
+    <siteMapNode url="~/I/Home" title="Pagina Home del sito per navigazione in Italiano"  description="">
+      <siteMapNode url="~/Informazioni/I/Presentazione/magazine-birra-e-birrerie" title="Magazine birra e birrerie"  description="" />
+      <siteMapNode url="~/AspNetPages/Archivio.aspx?Lingua=I" title="Archivio storico di tutti gli articoli"  description="Lista completa sfogliabile degli articoli" />
+      <siteMapNode url="~/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Contatti" title="Contattaci"  description="Contattaci direttamente per email" />
+      <siteMapNode url="~/Informazioni/I/Privacyperlink/politica-privacy" title="Privacy"  description="Informativa e norme di gestione della privacy" />
+      <siteMapNode url="~/Informazioni/I/Disclaimer/politica-clienti" title="Disclaimer"  description="Informazioni sulla nostra politica e le nostre norme di comportamento per la gestione delle notizie" />
+      <siteMapNode url="~/AspNetPages/Mappa.aspx?Lingua=I&amp;ContenutoPagina=Mappa" title="Mappa di Navigazione per il sito"  description="Permette di navigare nel sito in maniera immediata in tutte le sezioni" />
+      <siteMapNode url="~/AspNetPages/Content_Tipo3.aspx?Lingua=I&amp;TipoContenuto=Pubblica" title="Pubbicizza con noi"  description="" />
+      <siteMapNode url="~/realestate/I/rif000001/News" title="Attualità"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000001I.xml" title="Feed Rubrica News"  description="" />
+      <siteMapNode url="~/realestate/I/rif000002/Dal-mondo" title="Dal mondo"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000002I.xml" title="Feed Rubrica Dal Mondo"  description="" />
+      <siteMapNode url="~/realestate/I/rif000003/Fiere-ed-eventi" title="Fiere ed eventi"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000003I.xml" title="Feed Rubrica Fiere ed eventi"  description="" />
+      <siteMapNode url="~/realestate/I/rif000004/Birre" title="Birre"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000004I.xml" title="Feed Rubrica Birre"  description="" />
+      <siteMapNode url="~/realestate/I/rif000005/Birrifici" title="Birrifici"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000005I.xml" title="Feed Rubrica Birrifici"  description="" />
+      <siteMapNode url="~/realestate/I/rif000006/Birrerie" title="Birrerie"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000006I.xml" title="Feed Rubrica Birrerie"  description="" />
+      <siteMapNode url="~/realestate/I/rif000007/Giochi" title="Giochi"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000007I.xml" title="Feed Rubrica Giochi"  description="" />
+      <siteMapNode url="~/realestate/I/rif000008/Boccali-e-bicchieri" title="Boccali e bicchieri"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000008I.xml" title="Feed Rubrica Boccali e bicchieri"  description="" />
+      <siteMapNode url="~/realestate/I/rif000009/Home-brewers" title="Home Brewers"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000009I.xml" title="Feed Rubrica Home Brewers"  description="" />
+      <siteMapNode url="~/realestate/I/rif000010/Ricette" title="Ricette"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000010I.xml" title="Feed Rubrica Ricette"  description="" />
+      <siteMapNode url="~/realestate/I/rif000011/Oggettistica" title="Oggettistica"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000011I.xml" title="Feed Rubrica Oggettistica"  description="" />
+      <siteMapNode url="~/realestate/I/rif000012/Abbinamenti" title="Abbinamenti"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000012I.xml" title="Feed Rubrica Abbinamenti"  description="" />
+      <siteMapNode url="~/realestate/I/rif000013/Offerte" title="Offerte"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000013I.xml" title="Feed Rubrica Offerte"  description="" />
+      <siteMapNode url="~/realestate/I/rif000014/Interviste" title="Interviste"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000014I.xml" title="Feed Rubrica Interviste"  description="" />
+      <siteMapNode url="~/realestate/I/rif000015/Arredamento" title="Arredamento"  description="" />
+      <siteMapNode url="~/public/Common/RSSfeedrif000015I.xml" title="Feed Rubrica Arredamento"  description="" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

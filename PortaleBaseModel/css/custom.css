@@ -13,6 +13,7 @@
 /*footer-bottom*/
 /*#555;*/
 /**/
+/**/
 /*menu - titoli-principali*/
 /*#232323;*/
 /*sotto-titoli-principali - body*/
@@ -48,6 +49,9 @@
 /**/
 /*@body-color: @secondary-color;*/
 /**/
+/*----------------------------------
+//////////| FORM CONTATTI |/////////
+----------------------------------*/
 /*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
@@ -105,6 +109,12 @@
 }
 .bg-complement-color {
   background-color: #8f0909 !important;
+}
+.bg-manual-secondary-color {
+  background-color: #d2ac67 !important;
+}
+.bg-manual-secondary-color-fade {
+  background-color: rgba(7, 119, 119, 0.7) !important;
 }
 .tx-primary-color {
   color: #098f8f !important;
@@ -250,7 +260,7 @@ div#blocco-lgo-home {
   color: #032f2f;
   font-family: 'Fira Sans', sans-serif;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 300 !important;
   text-transform: uppercase;
   font-style: normal;
   text-align: center;
@@ -429,10 +439,14 @@ input:hover[type="button"],
 }
 .divbuttonstyle a,
 .divbuttonstyle a:visited,
-.divbuttonstyle a:active {
+.divbuttonstyle a:active,
+span.divbuttonstyle a,
+span.divbuttonstyle {
   color: #fff !important;
 }
-.divbuttonstyle a:hover {
+.divbuttonstyle a:hover,
+span.divbuttonstyle a:hover,
+span.divbuttonstyle:hover {
   color: #000 !important;
 }
 footer button.divbuttonstyle,
@@ -495,17 +509,19 @@ footer .divbuttonstyle:hover {
   border-color: #032f2f;
   opacity: 0.78;
   text-decoration: none !important;
+  border: 1px solid #098f8f;
 }
 .buttonmenu {
   background: #098f8f !important;
   color: #fff !important;
+  border: 1px solid #098f8f;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
 }
 .buttonmenu:hover,
 a.buttonmenu:hover {
-  background-color: #3ef3f3 !important;
+  background-color: #86f7f7 !important;
   color: #000 !important;
 }
 /*----------------------------------
@@ -564,6 +580,9 @@ ul li .work-image:hover:after {
   display: inline;
   list-style: none;
   padding-left: 10px;
+}
+ul.footer-category-list {
+  margin-bottom: 0;
 }
 .footer {
   background-color: #fff;
@@ -652,7 +671,7 @@ ul li .work-image:hover:after {
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
   font-size: 4rem !important;
-  font-weight: 700;
+  font-weight: 100;
   text-align: center;
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
   line-height: normal;
@@ -861,7 +880,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 /*RIEPILOGO - CARRELLO*/
 .table td,
 .table th {
-  padding: .35rem;
+  padding: .5rem;
   vertical-align: top;
   border-top: none;
   background: rgba(9, 143, 143, 0.08);
@@ -1029,6 +1048,9 @@ select.form-control:not([size]):not([multiple]) {
   top: 0;
   z-index: 1;
 }
+.mbr-overlay-white {
+  background-color: rgba(255, 255, 255, 0.6);
+}
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/
@@ -1140,7 +1162,7 @@ select.form-control:not([size]):not([multiple]) {
     transition: all 0.35s ease;
     opacity: 0;
   }
-  .menuzord-menu a:before {
+  .menuzord-menu li a:before {
     left: 0;
     top: 0;
     border-left: 2px solid #077777;
@@ -1148,7 +1170,7 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transform: translate(100%, 50%);
     transform: translate(100%, 50%);
   }
-  .menuzord-menu a:after {
+  .menuzord-menu li a:after {
     right: 0;
     bottom: 0;
     border-right: 2px solid #077777;
@@ -1156,13 +1178,19 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transform: translate(-100%, -50%);
     transform: translate(-100%, -50%);
   }
-  .menuzord-menu a:hover:before,
-  .menuzord-menu .current a:before,
-  .menuzord-menu a:hover:after,
-  .menuzord-menu .current a:after {
+  /*tolgo l'effetto al pulsante prenota*/
+  .menuzord-menu li:nth-child(6) a:before,
+  .menuzord-menu li:nth-child(6) a:after {
+    border: none;
+  }
+  .menuzord-menu li a:hover:before,
+  .menuzord-menu li .current a:before,
+  .menuzord-menu li a:hover:after,
+  .menuzord-menu li .current a:after {
     -webkit-transform: translate(0%, 0%);
     transform: translate(0%, 0%);
     opacity: 1;
+    border-color: #077777;
   }
   /*opzione 2*/
   /*.menuzord-menu a:before,
@@ -1205,6 +1233,36 @@ select.form-control:not([size]):not([multiple]) {
 }
 .ui-15 .ui-form .ui-icon {
   color: rgba(9, 143, 143, 0.45) !important;
+}
+/*--------------- FORM - ERRORE COMPILAZIONE DATI MANCANTI ---------------*/
+.errormessageform {
+  color: red;
+  width: 40%;
+  right: 20px;
+  position: absolute;
+  top: 20px;
+  font-size: 0.9rem !important;
+  background: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+.errormessageformprivacy {
+  color: red;
+  width: 40%;
+  right: 20px;
+  position: absolute;
+  font-size: 0.9rem !important;
+  background: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  bottom: 140px;
+}
+.errormessageform ul {
+  margin-bottom: 0.8rem !important;
 }
 /*CHECKBOX MODIFICA*/
 label[class="checkbox"] input[type="checkbox"] {
