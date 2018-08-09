@@ -50,16 +50,6 @@
 </div>
 
 <!--  Navigazione catalogo -->
-<script>
-    // <![CDATA[
-    (function wait() {
-        if (typeof injectPortfolioAndLoadBanner === "function") {
-            injectPortfolioAndLoadBanner('IsotopeBanner3b.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false);
-        } else {
-            setTimeout(wait, 50);
-        }
-    })();
-    // ]]></script>
 <div class="">
     <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display:none;">
         <section class="d-none d-sm-block pt-0 pt-sm-5 pb-4 mb-2 mt-0 mt-sm-2">
@@ -72,12 +62,31 @@
                 </div>
             </div>
         </section>
-        <div id="divContainerNav1">&nbsp;</div>
+        <div id="divContainerNav1" class="inject" params="'injectPortfolioAndLoadBanner','IsotopeBanner3b.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">&nbsp;</div>
     </div>
 </div>
 
+<!-- BLOCCO PRODOTTI IN EVIDENZA -->
+
+<div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2">
+    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display:none;">
+        <section class="d-none d-sm-block pt-0 pt-sm-5 pb-4 mb-2 mt-0 mt-sm-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="mbr-section-title mb-0">Offerte imperdibili</h3>
+                        <small class="mbr-section-subtitle mb-0 mt-1">Cerca nel catalogo delle offerte e acquista la tua maiolica Ficola</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="divContainerPromo1" class="inject mx-auto" style="width:1600px;" params="'injectScrollerAndLoad','owlscrollerProdotti1.html', 'divContainerPromo1', 'carouselpromo1', '', 'rif000001', '', false, true, 12, '', '', '',true">&nbsp;</div>
+    </div>
+</div>
+
+
 <!--BLOCCO TESTIMONIALS BT3-->
-<div class="bg-light-color py-2">
+<!--<div class="bg-light-color py-2">
     <div class="position-relative my-0 mx-auto pt-0 pb-5" style="max-width: 1600px; display:none;">
         <section class="pt-5 pb-3">
             <div class="container">
@@ -91,8 +100,7 @@
         </section>
         <div id="divContainerTestimonials" class="inject" params="injectScrollerAndLoad,'owlscrollerTestimonialsBt3.html', 'divContainerTestimonials', 'carouselInject1', '', 'rif000009', '', true, false, 12, '3'">&nbsp;</div>
     </div>
-</div>
-
+</div>-->
 <!-- BLOCCO UN PULSANTE -->
 <!--<section id="content6-2l" class="mbr-section article mbr-section__container" style="padding-top: 0px; padding-bottom: 80px;">
     <div class="container">
@@ -146,16 +154,6 @@
     // ]]></script>
 
 <!--BLOCCO BLOG NEWS-->
-<script>
-    // <![CDATA[
-    (function wait() {
-        if (typeof injectScrollerAndLoad === "function") {
-            injectScrollerAndLoad("owlscrollerOfferte-m.html", "divContainerNews", "carouselInject2", "", "rif000002", "", true, false, 12);
-        } else {
-            setTimeout(wait, 50);
-        }
-    })();
-// ]]></script>
 <div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2">
     <div id="divContainerNewsTitle" style="display: none;">
         <div class="col-sm-12">
@@ -163,6 +161,6 @@
         </div>
     </div>
     <div class="position-relative my-0 mx-auto px-2" style="max-width: 1600px;">
-        <div id="divContainerNews">&nbsp;</div>
+        <div id="divContainerNews" class="inject" params="'injectScrollerAndLoad','owlscrollerOfferte-m.html', 'divContainerNews', 'carouselInject2', '', 'rif000002', '', true, false, 12">&nbsp;</div>
     </div>
 </div>
