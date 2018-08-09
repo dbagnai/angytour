@@ -24,7 +24,7 @@ namespace WelcomeLibrary.DAL
             string query = "";
             //query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Email=@Email";
 
-            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email=@Email";
+            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email like @Email";
 
             //if (parColl == null || parColl.Count < 2) return list;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
