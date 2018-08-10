@@ -341,28 +341,26 @@ function getfromclientstorage(key) {
     localforage.getItem('datestored').then(function (value) {
 
         var expiretime = value;
-        if (moment(new Date()) > moment(expiretime, "DD/MM/YYYY HH:mm:ss")) {
+        if (expiretime == null || moment(new Date()) > moment(expiretime, "DD/MM/YYYY HH:mm:ss")) {
             expired = true;
-            localforage.removeItem('datestored').then(function () {
-                localforage.removeItem(key).then(function () {
-                    // Run this code once the key has been removed.
-                    console.log('expired localforage values!');
-                    deferredclientstorage.resolve('');
-
+            if (expiretime != null)
+                localforage.removeItem('datestored').then(function () {
                 }).catch(function (err) {
                     // This code runs if there were any errors
-                    console.log('localforage error clearing values');
+                    console.log('localforage error clearing data');
                     console.log(err);
-                    deferredclientstorage.resolve('');
-
                 });
+            localforage.removeItem(key).then(function () {
+                // Run this code once the key has been removed.
+                console.log('expired localforage values!');
+                deferredclientstorage.resolve('');
             }).catch(function (err) {
                 // This code runs if there were any errors
-                console.log('localforage error clearing data');
+                console.log('localforage error clearing values');
                 console.log(err);
                 deferredclientstorage.resolve('');
-
             });
+
         } else {
             localforage.getItem(key).then(function (value) {
                 if (value != null && value != '')
@@ -378,13 +376,13 @@ function getfromclientstorage(key) {
 
             });
         }
-
-    }).catch(function (err) {
-        // This code runs if there were any errors
-        console.log('Error retrievin localforage datestored key');
-        console.log(err);
-        deferredclientstorage.resolve('');
     });
+    //}).catch(function (err) {
+    //    // This code runs if there were any errors
+    //    console.log('Error retrievin localforage datestored key');
+    //    console.log(err);
+    //    deferredclientstorage.resolve('');
+    //});
 
     return deferredclientstorage.promise();
 }
