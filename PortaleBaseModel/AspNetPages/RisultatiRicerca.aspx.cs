@@ -1157,9 +1157,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         }
         AssociaDatiRepeater(p.GetPagerList(PagerRisultati.CurrentPage, PagerRisultati.PageSize));
     }
-
     protected void AssociaDatiSocial()
     {
+
         string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         Tabrif actualpagelink = new Tabrif();
 
@@ -1233,7 +1233,9 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             }
         }
 
+
         ////////////
+        string urlcambiolinguaenit = "";
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
         string urlcanonico = "";
         string hreflang = "";
@@ -1256,6 +1258,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -1273,6 +1276,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
         }
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {
@@ -1291,6 +1295,19 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneRU);
             }
         }
+
+        HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+        divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+        divCambioLinguaen.InnerHtml += "href=\"";
+        divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+        divCambioLinguaen.InnerHtml += "\" >";
+        divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+        divCambioLinguaen.InnerHtml += "</a>";
+        divCambioLinguaen.Visible = true;
+        HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+        divCambioLinguadef.Visible = false;
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////SEZIONE META TITLE E DESC E CONTENUTO HEADER PAGINA ///////////////////////
@@ -1324,9 +1341,8 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
             ///////////////////////NOME PAGINA////////////////////////////////
             string titolopagina = sezione.Descrizione;
-            //litNomePagina.Text = titolopagina;
-            litNomePagina.Text = "";
-
+            litNomePagina.Text = titolopagina;
+            //if (Tipologia != "rif000001" && Tipologia != "rif000002" && Tipologia != "rif000010")
             Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
             if (catselected != null && (litNomePagina.Text.ToLower().Trim() != catselected.Descrizione.ToLower().Trim()))
             {
@@ -1337,6 +1353,8 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
+
+
             ///////////////////////////////////////////////////////////////
         }
 
@@ -1361,18 +1379,17 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
-
                 case "RU":
                     customdesc = content.CustomdescRU;
                     customtitle = content.CustomtitleRU;
                     break;
-
                 default:
                     customdesc = content.CustomdescI;
                     customtitle = content.CustomtitleI;
                     break;
             }
         }
+
 
         string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
         string description = "";
@@ -1398,7 +1415,7 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
         if (false) //Pagina copertina presente
         {
@@ -1419,7 +1436,6 @@ public partial class AspNetPages_RisultatiRicerca : CommonPage
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
     }
-
     private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
     {
         List<Tabrif> links = new List<Tabrif>();

@@ -691,6 +691,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
 
     protected void AssociaDatiSocial()
     {
+        string urlcambiolinguaenit = "";
         Tabrif actualpagelink = new Tabrif();
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -752,6 +753,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             urlcanonico = ReplaceAbsoluteLinks(linkcanonicoalt); litcanonic.Text = "<link rel=\"canonical\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>"; actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -764,7 +766,19 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 actualpagelink.Campo1 = ReplaceAbsoluteLinks(linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
         }
+        HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+        divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+        divCambioLinguaen.InnerHtml += "href=\"";
+        divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+        divCambioLinguaen.InnerHtml += "\" >";
+        divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+        divCambioLinguaen.InnerHtml += "</a>";
+        divCambioLinguaen.Visible = true;
+        HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+        divCambioLinguadef.Visible = false;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -828,8 +842,8 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         string customdesc = "";
         if (content != null && content.Id != 0)
         {
-            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua))), Lingua, Page.User.Identity.Name, Session, null, null, Request); //ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-            //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
+            htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
+            if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
             switch (Lingua)
             {
                 case "GB":
@@ -851,7 +865,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
         string description = "";
-        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 300, true)).Replace("<br/>", "\r\n")).Trim();
+        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 150, true)).Replace("<br/>", "\r\n")).Trim();
 
         /////////////////////////////////////////////////////////////
         //MODIFICA PER TITLE E DESCRIPTION CUSTOM
@@ -868,8 +882,22 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         ((HtmlTitle)Master.FindControl("metaTitle")).Text = metametatitle;
         ((HtmlMeta)Master.FindControl("metaDesc")).Content = description;
         //////////////////////////////////////////////////////////////////////////
-        litTextHeadPage.Text = ((htmlPage));
+        litTextHeadPage.Text = ReplaceAbsoluteLinks(ReplaceLinks(htmlPage));
 
+        //if (data != null)
+        //{
+        //    string descrizione = data.DescrizionebyLingua(Lingua);
+        //    string denominazione = data.DenominazionebyLingua(Lingua);
+
+        //    //Titolo e descrizione pagina
+        //    string simpletext = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(descrizione, 300, true)).Replace("<br/>", " ").Trim());
+        //    ((HtmlMeta)Master.FindControl("metaDesc")).Content = simpletext;
+
+        //    if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.FotoCollection_M.FotoAnteprima))
+        //        ((HtmlMeta)Master.FindControl("metafbimage")).Content = ComponiUrlAnteprima(data.FotoCollection_M.FotoAnteprima, data.CodiceTipologia, data.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        //    else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
+        //        ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
+        //}
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////

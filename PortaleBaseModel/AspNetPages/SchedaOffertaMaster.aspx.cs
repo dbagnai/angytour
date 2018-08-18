@@ -1251,12 +1251,10 @@ public partial class _SchedaOffertaMaster : CommonPage
                 customdesc = data.Campo2GB;
                 customtitle = data.Campo1GB;
                 break;
-
             case "RU":
                 customdesc = data.Campo2RU;
                 customtitle = data.Campo1RU;
                 break;
-
             default:
                 customdesc = data.Campo2I;
                 customtitle = data.Campo1I;
@@ -1273,6 +1271,7 @@ public partial class _SchedaOffertaMaster : CommonPage
         //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
         Tabrif actualpagelink = new Tabrif();
+        string urlcambiolinguaenit = "";
 
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
 
@@ -1294,6 +1293,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             actualpagelink.Campo1 = (linkcanonicoalt);
             actualpagelink.Campo2 = (data.DenominazioneI);
         }
+        else urlcambiolinguaenit = linkcanonicoalt;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
@@ -1311,6 +1311,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 actualpagelink.Campo1 = (linkcanonicoalt);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneGB);
             }
+            else urlcambiolinguaenit = linkcanonicoalt;
         }
 
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
@@ -1321,7 +1322,7 @@ public partial class _SchedaOffertaMaster : CommonPage
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
 
-            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
             litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + (linkcanonicoalt) + "\"/>";
             if (Lingua == "RU")
             {
@@ -1331,16 +1332,28 @@ public partial class _SchedaOffertaMaster : CommonPage
                 actualpagelink.Campo2 = CleanUrl(data.DenominazioneRU);
             }
         }
+        HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
+        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+        divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+        divCambioLinguaen.InnerHtml += "href=\"";
+        divCambioLinguaen.InnerHtml += urlcambiolinguaenit;
+        divCambioLinguaen.InnerHtml += "\" >";
+        divCambioLinguaen.InnerHtml += references.ResMan("Common", Lingua, "testoCambio").ToUpper();
+        divCambioLinguaen.InnerHtml += "</a>";
+        divCambioLinguaen.Visible = true;
+        HtmlGenericControl divCambioLinguadef = (HtmlGenericControl)Master.FindControl("divCambioLinguadef");
+        divCambioLinguadef.Visible = false;
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
         List<Tabrif> links = GeneraBreadcrumbPath(true);
         links.Add(actualpagelink);
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
-    }
 
+    }
     private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
     {
         List<Tabrif> links = new List<Tabrif>();

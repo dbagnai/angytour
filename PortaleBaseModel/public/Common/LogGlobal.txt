@@ -3615,3 +3615,7 @@
 <Messaggio> Application start : 29/06/2018 11:27:38</Messaggio>
  <Data>29/06/2018 11:27:38</Data>
 <Messaggio> Global init original path: http://localhost:52646/lib/hnd/HandlerDataCommon.ashx?q=emptysession&link=&_=1530264348834 Global init AbsolutePath : /lib/hnd/HandlerDataCommon.ashx Global init ApplicationPath : / Global init Query : ?q=emptysession&link=&_=1530264348834 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>18/08/2018 09:40:52</Data>
+<Messaggio> Application start : 18/08/2018 09:40:52</Messaggio>
+ <Data>18/08/2018 09:40:52</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>

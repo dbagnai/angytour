@@ -229,7 +229,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 plhForm.Visible = true;
                 pnlPrenotazione.Visible = true; //Sezione per completamento form prenotazione
                 divRoutes.Visible = false;
-                divTitlemail.Visible = false;
+               // divTitlemail.Visible = false;
 
                 //CaricaDdlsedi("");
                 break;
