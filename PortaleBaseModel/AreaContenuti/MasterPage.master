@@ -274,7 +274,7 @@
                 if (e) throw e;
                 this.x = x;
                 this.y = y;
-            }
+            };
         </script>
         <!-- dropzone-->
         <link href="/js/dropzone/dropzone.css" rel="stylesheet" />
