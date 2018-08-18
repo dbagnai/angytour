@@ -112,6 +112,12 @@
                     <RoleGroups>
                         <asp:RoleGroup Roles="WebMaster">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                    $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
                                         <a runat="server" class="btn btn-block btn-primary" alt="" href="~/Admin/default.aspx?Lingua=I" id="lnkAdminPage">AmministrazioneSito</a>
@@ -127,7 +133,7 @@
                                         <br />
                                         <br />
                                         <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
-                                            LoginText="" />
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
                                         <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
 
                                     </div>
@@ -136,6 +142,12 @@
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="Socio">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                    $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
                                         <%-- <a  class="btn btn-block btn-primary" alt="" href="<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum) %>"" id="A2">Vai al FORUM SOCI</a><br />
@@ -149,7 +161,7 @@
                                         <br />
                                         <br />
                                         <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'
-                                            LoginText="" />
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
                                         <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                                     </div>
                                 </div>
@@ -157,18 +169,24 @@
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="Operatore">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                   $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
-                                            <%--  <a runat="server" alt="" href="~/AreaRiservata/default.aspx" id="lnkAdminPage">Home
+                                        <%--  <a runat="server" alt="" href="~/AreaRiservata/default.aspx" id="lnkAdminPage">Home
                             Area Riservata</a><br /><br />--%>
-                                            <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkOrder") %>' id="lnkOrdrpage">
-                                                <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoProcediOrdine") %>' runat="server" />
-                                            </a>
-                                            <br />
-                                            <br />
-                                            <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'
-                                                LoginText="" />
-                                            <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                                        <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkOrder") %>' id="lnkOrdrpage">
+                                            <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoProcediOrdine") %>' runat="server" />
+                                        </a>
+                                        <br />
+                                        <br />
+                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
+                                        <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                                     </div>
                                 </div>
 
@@ -176,58 +194,76 @@
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="Autore">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                   $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
-                                            <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/GestioneOfferte.aspx?CodiceTipologia=rif000002&Lingua=I" id="lnkAdminPage">Area Personale</a><br />
-                                            <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area Storico Ordini</a><br /> --%>
-                                            <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
+                                        <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/GestioneOfferte.aspx?CodiceTipologia=rif000002&Lingua=I" id="lnkAdminPage">Area Personale</a><br />
+                                        <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area Storico Ordini</a><br /> --%>
+                                        <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
-                                            <br />
-                                            <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
-                                                LoginText="" />
-                                            <br />
-                                            <br />
-                                            <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                                        <br />
+                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
+                                        <br />
+                                        <br />
+                                        <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                                     </div>
                                 </div>
                             </ContentTemplate>
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="GestorePortale">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                   $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
-                                            <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a>
-                                            <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                        <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a>
+                                        <%--  <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />--%>
-                                            <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
+                                        <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
-                                            <br />
-                                            <br />
-                                            <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
-                                                LoginText="" />
-                                            <br />
-                                            <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                                        <br />
+                                        <br />
+                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
+                                        <br />
+                                        <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                                     </div>
                                 </div>
                             </ContentTemplate>
                         </asp:RoleGroup>
                         <asp:RoleGroup Roles="Commerciale">
                             <ContentTemplate>
+                                <script>
+                                    console.log("callin clear cache");
+                                   $(document).ready(function () {
+                                        manageclientstorage("clear");
+                                    });
+                                </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
-                                            <%-- <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />--%>
-                                            <br />
-                                            <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                        <%-- <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/default.aspx?Lingua=I" id="lnkAdminPage">Area Riservata Personale</a><br />--%>
+                                        <br />
+                                        <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
                                             Storico Ordini</a><br />
-                                            <br />
-                                            <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
+                                        <br />
+                                        <%-- <a  class="btn btn-block btn-primary" alt="" href='<%= ReplaceAbsoluteLinks(references.ResMan("Common",Lingua,"LinkForum")) %>' id="A2">Vai al FORUM SOCI</a><br />
                                 <br />--%>
-                                            <br />
-                                            <br />
-                                            <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
-                                                LoginText="" />
-                                            <br />
-                                            <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
+                                        <br />
+                                        <br />
+                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                            LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
+                                        <br />
+                                        <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
                                     </div>
                                 </div>
                             </ContentTemplate>

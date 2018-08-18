@@ -1733,7 +1733,7 @@ namespace WelcomeLibrary.UF
                             if (nodetobind.Attributes.Contains("checked")) nodetobind.Attributes.Remove("checked");
                         }
                     }
-                    else if (nodetobind.Name == "input" && ((nodetobind.Attributes.Contains("type") && nodetobind.Attributes["type"].Value == "text") || !nodetobind.Attributes.Contains("type")))
+                    else if (nodetobind.Name == "input" && ((nodetobind.Attributes.Contains("type") && nodetobind.Attributes["type"].Value == "text") || (nodetobind.Attributes.Contains("type") && nodetobind.Attributes["type"].Value == "email") || !nodetobind.Attributes.Contains("type")))
                     {
                         if (!nodetobind.Attributes.Contains("value")) nodetobind.Attributes.Add("value", "");
                         nodetobind.Attributes["value"].Value = "";
@@ -2307,7 +2307,35 @@ namespace WelcomeLibrary.UF
                             }
                         }
                     }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("commenttool"))
+                    {
+                        if (itemdic.ContainsKey(property))
+                        {
+                            string idelement = itemdic[property];
+                            if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
+                            {    //carrellotool.initcarrellotool(idelement,  ..... );
+                                string onlytotals = "false";
+                                if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("onlytotals"))
+                                    onlytotals = "true";
 
+                                //Considero la possibilita che se passato un nome di istanza uso quello per la chiamata a funzione!! ( ATTENZIONE , va definita la variabile nel file feedbacks.js )
+                                var instancename = "commenttool";//istanza di default
+                                if (nodetobind.Attributes.Contains("instance") && !string.IsNullOrEmpty(nodetobind.Attributes["instance"].Value))
+                                    instancename = nodetobind.Attributes["instance"].Value;
+
+                                string viewmode = "0";
+                                if (nodetobind.Attributes.Contains("viewmode") && !string.IsNullOrEmpty(nodetobind.Attributes["viewmode"].Value))
+                                    viewmode = nodetobind.Attributes["viewmode"].Value;
+
+                                string maxrecord = "";
+                                if (nodetobind.Attributes.Contains("maxrecord") && !string.IsNullOrEmpty(nodetobind.Attributes["maxrecord"].Value))
+                                    maxrecord = nodetobind.Attributes["maxrecord"].Value;
+
+                                if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value + "commenttool")) jscommands.Remove(nodetobind.Attributes["id"].Value + "commenttool");
+                                jscommands.Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                            }
+                        }
+                    }
                     else
                     {
                         if (itemdic.ContainsKey(property))

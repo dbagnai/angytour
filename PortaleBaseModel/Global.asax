@@ -472,11 +472,8 @@
 
         BundleEngine.AddBundleJS("bundlejslib0",
 "~/js/jquery321/jquery-3.2.1.min.js",
-"~/js/jquery321/jquery-migrate-3.0.1.min.js"
-);
-
-        BundleEngine.AddBundleJS("bundlejslib1",
-    "~/js/bootstrap400/popper.min.js",
+"~/js/jquery321/jquery-migrate-3.0.1.min.js",
+ "~/js/bootstrap400/popper.min.js",
     "~/js/bootstrap400/js/bootstrap.min.js",
     "~/js/localforage.min.js",
     "~/js/menuzord/files/js/menuzord.js",
@@ -489,11 +486,16 @@
     "~/js/isotope304/isotope.pkgd.min.js",
     "~/js/jquery.cycle.js",
     "~/js/jquery.cycle2.carousel.js",
-//"~/js/jquery-ui-1.11.4.custom/jquery-ui.js",
 "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
     "~/js/jqueryui/jquery.maskedinput.js",
      "~/js/owl-carousel.js",
    "~/js/owl-carousel/owl-carousel/owl.carousel.js",
+      "~/lib/js/common.js"
+);
+
+        BundleEngine.AddBundleJS("bundlejslib1",
+   
+
       //"~/js/magnify/js/jquery.magnify.js",
       // "~/js/magnify/js/jquery.magnify-mobile.js"
       "~/lib/js/common.js",
@@ -507,7 +509,8 @@
     "~/lib/js/bannerFascia.js",
     "~/lib/js/portfolioisotopeBanner.js",
     "~/lib/js/archivio.js",
-    "~/lib/js/linkslistddl1.js",
+        "~/lib/js/feedbacks.js",
+        "~/lib/js/linkslistddl1.js",
     "~/lib/js/linkslistddl2.js",
     "~/js/lazyloadimg.js",
     "~/lib/js/searchcontrol.js",
@@ -534,7 +537,8 @@
        "~/js/flexslider/jquery.flexslider-min.js",
        "~/js/it-cookies-policy.js",
        "~/js/YTPlayer/jquery.mb.YTPlayer.js",
-       "~/js/jquery.fitvids.js",
+             "~/js/simplestarrating/SimpleStarRating.js",
+             "~/js/jquery.fitvids.js",
        "~/js/detect-zoom.min.js",
        "~/js/maininit.js",
        "~/js/landing/jarallax.js",
@@ -553,7 +557,8 @@
     "~/css/prettyPhoto.css",
     "~/css/isotop_animation.css",
     "~/css/animate.css",
-    "~/css/style1.css",
+      "~/js/simplestarrating/SimpleStarRating.css",
+      "~/css/style1.css",
     "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
     //"~/js/jquery-ui-1.11.4.custom/jquery-ui.min.css",
     //"~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css",

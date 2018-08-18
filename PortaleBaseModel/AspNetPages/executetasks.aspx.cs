@@ -11,11 +11,12 @@ using System.Web.UI.WebControls.WebParts;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
+using System.Collections.Generic;
 
 public partial class _executetasks : CommonPage
 {
     private int maxinviiperchiamata = 900; //Numero max di invi per chiamata del metodo di esecuzione del mailing
-    private int millisecondbetweenmails = 500; //Numero max di invi per chiamata del metodo di esecuzione del mailing
+    private int millisecondbetweenmails = 300; //Numero max di invi per chiamata del metodo di esecuzione del mailing
 
     public string Lingua
     {
@@ -78,7 +79,7 @@ public partial class _executetasks : CommonPage
                         ClientiDM cliDM = new ClientiDM();
                         //idCliente
                         cliDM.unsubscribeCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idCliente);
-                        litMainContent.Text = references.ResMan("Common",Lingua,"rispostaUnsubscribe").ToString();
+                        litMainContent.Text = references.ResMan("Common", Lingua, "rispostaUnsubscribe").ToString();
                         break;
                     case "aggiornacontenutiweb":
                         AggiornaContenutiDaWeb();
@@ -335,6 +336,58 @@ public partial class _executetasks : CommonPage
             Descrizione = Descrizione.Replace("ID_cliente=&", "ID_cliente=" + m.Id_cliente + "&");//Inserisco nel link di ritorno l'id del cliente
             Descrizione = Descrizione.Replace("ID_mail=&", "ID_mail=" + m.Id + "&");//Inserisco nel link di ritorno l'id della mail che invio
 
+            //Personalizzazione invio a cliente col il nome
+            SoggettoMail = SoggettoMail.Replace("|cliente|", nomecliente);
+            Descrizione = Descrizione.Replace("|cliente|", nomecliente);//Inserisco nel link di ritorno l'id della mail che invio
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Replace nel testo descrizione della mail per inserire il link alla scheda feedcak ed i dati del rpodotto collegato eventuale
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Dictionary<string, string> sparedict = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(m.NoteInvio) && m.NoteInvio.LastIndexOf("||{") != -1 && m.NoteInvio.LastIndexOf("}||") != -1)
+            {
+                if (m.NoteInvio.LastIndexOf("}||") - m.NoteInvio.LastIndexOf("||{") - 3 > 0)
+                {
+                    string serializesparedict = m.NoteInvio.Substring(m.NoteInvio.LastIndexOf("||{") + 3, m.NoteInvio.LastIndexOf("}||") - m.NoteInvio.LastIndexOf("||{") - 3);
+                    sparedict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(serializesparedict);
+                }
+
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////
+            //--> TAG POSSIBILI 
+            //|feedbacklnk| -> link alla scheda in tbl_attivita cui fà riferimento il deedback  
+            //|feedbackfrm| -> link alla form per inserimento del feedback  
+            //|feedbacknme| -> nome del prodotto alla form per inserimento del feedback  
+            //|feedbackimg| -> immagnie del prodotto alla form per inserimento del feedback  
+            /////////////////////////////////////////////////////////////////////////////////////////////////////
+            long idpost = m.Id_card; //CONTIENE L'ID del post cui fa riferimento il feedback dalla procedura handlernewsletter "inseriscimailrichiestafeedback":
+            Dictionary<string, string> links = offerteDM.getlinklist(m.Lingua, idpost.ToString());
+            if (links != null && links.ContainsKey(idpost.ToString()))
+            {
+                Descrizione = Descrizione.Replace("|feedbacklnk|", links[idpost.ToString()]);
+                if (links.ContainsKey(idpost.ToString() + "name"))
+                    Descrizione = Descrizione.Replace("|feedbacknme|", links[idpost.ToString() + "name"]);
+                if (links.ContainsKey(idpost.ToString() + "img"))
+                    Descrizione = Descrizione.Replace("|feedbackimg|", links[idpost.ToString() + "img"]);
+            }
+            else
+            {
+                Descrizione = Descrizione.Replace("|feedbacklnk|", "");
+                Descrizione = Descrizione.Replace("|feedbacknme|", "");
+                Descrizione = Descrizione.Replace("|feedbackimg|", "");
+            }
+
+            if (sparedict.ContainsKey("linkfeedback"))
+            {
+                Descrizione = Descrizione.Replace("|feedbackfrm|", sparedict["linkfeedback"] + "?idpost=" + idpost.ToString() + "&idcliente=" + m.Id_cliente);
+            }
+            else
+                Descrizione = Descrizione.Replace("|feedbackfrm|", "");
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             //Personalizzazione del mittente
             string nomemittente = Nome;
             string mailmittente = Email;
@@ -376,8 +429,8 @@ public partial class _executetasks : CommonPage
             //string value = HttpContext.references.ResMan("Common", m.Lingua,"TestoUnsubscribe", ci).ToString();
             string value = references.ResMan("Common", m.Lingua, "TestoUnsubscribe");
 
-         //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
-         value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
+            //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
+            value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
 
             //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
             if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
@@ -385,7 +438,7 @@ public partial class _executetasks : CommonPage
             else
                 Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";
 
-            Utility.invioMailGenerico(nomemittente, mailmittente, SoggettoMail, Descrizione, Mailcliente, nomecliente, null, "", false, Server,false,null, "mailing");
+            Utility.invioMailGenerico(nomemittente, mailmittente, SoggettoMail, Descrizione, Mailcliente, nomecliente, null, "", false, Server, false, null, "mailing");
             m.NoteInvio += " | Invio eseguito correttamente.";
             m.DataInvio = System.DateTime.Now;
         }
@@ -427,10 +480,10 @@ public partial class _executetasks : CommonPage
             string Mailcliente = m.Cliente.Email;
             string Descrizione = m.TestoMail + "<br/><br/>";
             string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/RichiediCard.aspx?Lingua=" + m.Lingua.ToUpper();
-            Descrizione += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common",Lingua,"TitoloRichiedi").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + link + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", Lingua, "TitoloRichiedi").ToString() + "<br/><br/><br/>";
 
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common", Lingua, "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
@@ -474,7 +527,7 @@ public partial class _executetasks : CommonPage
             string Mailcliente = m.Cliente.Email;
             string Descrizione = m.TestoMail + "<br/><br/><br/>";
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common", Lingua, "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
             m.NoteInvio = "Invio eseguito correttamente.";
@@ -517,7 +570,7 @@ public partial class _executetasks : CommonPage
             string Descrizione = m.TestoMail + "<br/><br/>";
 
             string linkUnsubscribe = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/executetasks.aspx?Azione=unsubscribe&idCliente=" + m.Id_cliente + "&Lingua=" + Lingua;
-            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common",Lingua,"TestoUnsubscribe").ToString() + "<br/><br/><br/>";
+            Descrizione += "<a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + references.ResMan("Common", Lingua, "TestoUnsubscribe").ToString() + "<br/><br/><br/>";
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
             m.NoteInvio = "Invio eseguito correttamente.";

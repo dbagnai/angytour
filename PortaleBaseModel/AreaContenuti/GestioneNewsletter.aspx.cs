@@ -155,7 +155,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         outupload.Text = error;
         return rethtml;
     }
-   
+
 
 
     protected void ddlLinguaFiltroClientiChange(object sender, EventArgs e)
@@ -638,38 +638,6 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         SvuotaNewsletter();
     }
-#if false
-    protected void ajaxFileUpload_OnUploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
-    {
-        string fullPath = ConfigManagement.ReadKey("ImageRoot") + e.FileName;
-
-        // Save your File
-        htmlExtender.AjaxFileUpload.SaveAs(Server.MapPath(fullPath));
-
-        // Tells the HtmlEditorExtender where the file is otherwise it will render as: <img src="" />
-        e.PostedUrl = Page.ResolveUrl(fullPath);
-
-        //// Save uploaded file to the file system
-        //var ajaxFileUpload = (AjaxFileUpload)sender;
-        //ajaxFileUpload.SaveAs(MapPath(filePath));
-
-        //// Update client with saved image path
-        //e.PostedUrl = Page.ResolveUrl(filePath);
-
-
-    } 
-#endif
-    //protected void ajaxFileUpload_OnUploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
-    //{
-    //    if (e.ContentType.Contains("jpg") || e.ContentType.Contains("gif")
-    //        || e.ContentType.Contains("png") || e.ContentType.Contains("jpeg"))
-    //    {
-    //        Session["fileContentType_" + e.FileId] = e.ContentType;
-    //        Session["fileContents_" + e.FileId] = e.GetContents();
-    //    }
-    //    // Set PostedUrl to preview the uploaded file.
-    //    e.PostedUrl = string.Format("?preview=1&fileId={0}", e.FileId);
-    //}   
 
 
     protected void Save(object sender, EventArgs e)
@@ -679,23 +647,13 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             mailingDM mDM = new mailingDM();
 
             //Prepariamo la newsletter
-            string htmlNewsletter = "";// Content.Value;
-            //Formattiamo bene come html il messaggio
-            /*
-            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-    <title>Newsletter</title>
-    </head>
-    <body>
-    Your content
-    </body>
-    </html>
-             */
-            htmlNewsletter += "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
+            string htmlNewsletter = "";
+
+            htmlNewsletter += "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
             //INSERIMENTO TAG PER HEADER MAIL
-            htmlNewsletter += "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><title>Newsletter</title></head><body style=\"background-color: #fafafa;width:100%;margin-left: 0px; margin-top: 0px;margin-right: 0px;margin-bottom: 0px;\">";
-            htmlNewsletter += "<table border=\"0\" cellpadding=\"0\" align=\"center\" cellspacing=\"0\" width=\"900\" style=\"background-color: #ffffff\"> <tr><td align=\"center\">";
+            htmlNewsletter += "<html  xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><title>Newsletter</title></head>";
+            htmlNewsletter += "<body yahoo=fix scroll=\"auto\"  style=\"margin:0;padding:0;FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, sans-serif; cursor:auto;\">";
+            htmlNewsletter += "<table border=\"0\" cellpadding=\"0\" align=\"center\" cellspacing=\"0\" width=\"900\" style=\"\"> <tr><td>";
             htmlNewsletter += "<div id=\"divinziocontenuti\"></div>";
 
             //htmlNewsletter += htmlEdit.Content; // Content.Value;//  
@@ -709,7 +667,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             {
                 if (htmlNewsletter.ToLower().Substring(i).StartsWith("src=\"" + HttpContext.Current.Request.ApplicationPath.ToString()) && HttpContext.Current.Request.ApplicationPath.ToString() != "/")
                     htmlNewsletter = base.ReplaceFirstOccurrence(htmlNewsletter, "src=\"" + HttpContext.Current.Request.ApplicationPath.ToString(), "src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, i);
-                else if (!htmlNewsletter.ToLower().Substring(i).ToLower().StartsWith("src=\"http:/") && !htmlNewsletter.ToLower().Substring(i).ToLower().StartsWith("src=\"https:/"))
+                else if (!htmlNewsletter.ToLower().Substring(i).ToLower().StartsWith("src=\"http:/") && !htmlNewsletter.ToLower().Substring(i).ToLower().StartsWith("src=\"https:/") && !htmlNewsletter.ToLower().Substring(i).ToLower().StartsWith("src=\"|"))
                 {
                     if (!htmlNewsletter.Substring(i + 5).ToLower().StartsWith("/"))
                         htmlNewsletter = base.ReplaceFirstOccurrence(htmlNewsletter, "src=\"", "src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/", i);
@@ -974,15 +932,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             if (clientimail != null)
             {
                 mailingDM mDM = new mailingDM();
-                //foreach (Cliente c in clientimail)
-                //{
-                //    mail.DataInserimento = System.DateTime.Now;
-                //    mail.Id_cliente = c.Id_cliente;
-                //    mail.Id_mailing_struttura = id_newsletter;//L'id della newsletter originale passata è quello di riferimento per l'inserimento della mail
-                //    mail.Id = 0;//Inserisco sempre una nuova riga di mail ad ogni salvataggio ( attenzione potrebbe mandare mail multiple allo stesso cliente )!!!
-                //    mDM.InserisciAggiornaMail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, mail); //Inseriamo nel db la mail pronta per l'invio al cliente specifico
-                //    totalemailpreparate++;
-                //}
+
 
                 //ALTERNATIVA CON INSERT UNICO NEL DB
                 mail.DataInserimento = System.DateTime.Now;
@@ -1030,7 +980,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
     {
         mailingDM mDM = new mailingDM();
         mDM.CancellaMailInAttesa(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
-        outputmailing.Text = "Eliminato mail in attesa di invio";
+        outputmailing.Text = "Eliminato mail in attesa di invio con data inferiore ad oggi";
     }
     protected void SvuotaMail(object sender, EventArgs e)
     {
@@ -1057,7 +1007,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             mailingDM mDM = new mailingDM();
 
             #region PULIZIA TABELLE SISTEMA DI MAILING
-            //Pulizia tabella mail prese in carico
+            //Pulizia tabella mail prese in carico ( dopo tre ore di attesa
             int oreattesapreseincarico = 3;
             mDM.PulisciTabellaMailPreseincarico(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, System.DateTime.Now.AddHours(-oreattesapreseincarico));
             //Per prima cosa pulisco la tabella di mailing dalle email + vecchie di una certa data
@@ -1066,7 +1016,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             #endregion
 
             int countermail = 0;
-            //Leggiamo ed eeguiamo gli invii
+            //Leggiamo le mailda inviare a blocchi ed eeguiamo gli invii
             MailCollection mails = mDM.CaricaMailDaInviare(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, maxinviiperchiamata);
             mDM.MarcaMailpreseincarico(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, maxinviiperchiamata);
 

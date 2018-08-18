@@ -17,13 +17,8 @@ using System.Data.SQLite;
 
 
 
-public class simpleidname
-{
-    public string id { set; get; }
-    public string name { set; get; }
-}
 
-public class jreturncontainer
+public class jreturncontainerbkg
 {
     public Eventi eventitem { set; get; }
     public List<Eventi> eventi { set; get; }
@@ -345,7 +340,7 @@ public class HandlerBooking : IHttpHandler, IRequiresSessionState
 
 
                     //Torno sia le fasce dei listini che la lista id-name delle risorse/attivita
-                    jreturncontainer jr = new jreturncontainer();
+                    jreturncontainerbkg jr = new jreturncontainerbkg();
                     jr.listini = list;
                     jr.reslist = listresources;
                     jr.tipofasce = listtipofasce;
@@ -372,7 +367,7 @@ public class HandlerBooking : IHttpHandler, IRequiresSessionState
                             listresources.Add(new simpleidname() { id = item1.Id.ToString(), name = item1.DenominazionebyLingua(lingua).Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ") });
                         }
                     }
-                    jreturncontainer jr1 = new jreturncontainer();
+                    jreturncontainerbkg jr1 = new jreturncontainerbkg();
                     jr1.listini = new List<Listino>();
                     jr1.reslist = listresources;
                     jr1.tipofasce = listtipofasce;
@@ -434,7 +429,7 @@ public class HandlerBooking : IHttpHandler, IRequiresSessionState
 
                     //Torno sia le fasce dei listini che la lista id-name delle risorse/attivita
 
-                    jreturncontainer jr2 = new jreturncontainer();
+                    jreturncontainerbkg jr2 = new jreturncontainerbkg();
                     jr2.eventitem = new Eventi();
                     jr2.eventi = eventi;
                     jr2.listini = new List<Listino>();

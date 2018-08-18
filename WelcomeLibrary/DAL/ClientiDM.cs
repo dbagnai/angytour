@@ -870,11 +870,20 @@ namespace WelcomeLibrary.DAL
                     item.Id_cliente = reader.GetInt64(reader.GetOrdinal("ID_CLIENTE"));
                     item.Spare3 = "";
                     if (!(reader["Cognome"]).Equals(DBNull.Value))
+                    {
                         item.Spare3 = reader.GetString(reader.GetOrdinal("Cognome"));//
+                        item.Cognome = reader.GetString(reader.GetOrdinal("Cognome"));//
+                    }
                     if (!(reader["Nome"]).Equals(DBNull.Value))
+                    {
                         item.Spare3 += " " + reader.GetString(reader.GetOrdinal("Nome"));//
+                        item.Nome += reader.GetString(reader.GetOrdinal("Nome"));//
+                    }
                     if (!(reader["Email"]).Equals(DBNull.Value))
+                    {
                         item.Spare3 += " " + reader.GetString(reader.GetOrdinal("Email"));//
+                        item.Email += reader.GetString(reader.GetOrdinal("Email"));//
+                    }
                     // aggiungo alla collection
                     list.Add(item);
                 }

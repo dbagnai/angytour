@@ -165,7 +165,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             // if (User.Identity != null && User.Identity.Name != "")
             c.ID_cliente = idcliente;
             c.Codicesconto = codicesconto; //metto il codice sconto nella lista prodotti nel carrello
-            AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente, c.Prezzo, c.Datastart, c.Dataend,c.jsonfield1);
+            AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente, c.Prezzo, c.Datastart, c.Dataend, c.jsonfield1);
         }
     }
     private void RiempiDdlNazione(string valore, DropDownList ddlNazione)
@@ -402,10 +402,10 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             if (prodotti != null && prodotti.Count > 0)
             {
-                
+
 
                 //vERIFICA finale PER IL BOOKING PRIMA DI ORDINARE!!!
-                if (!VerificaDisponibilitaEventoBooking(prodotti,"rif000001"))
+                if (!VerificaDisponibilitaEventoBooking(prodotti, "rif000001"))
                 {
                     output.CssClass = "alert alert-danger";
                     output.Text = references.ResMan("basetext", Lingua, "testoprenotaerr1").ToString();
@@ -607,10 +607,27 @@ public partial class AspNetPages_Orderpage : CommonPage
                     //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
                     foreach (Carrello item in prodotti)
                     {
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //Prepariamo le richieste di feeback per gli articoli in ordine!!
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        try
+                        {
+                            Mail mailfeedback = new Mail();
+
+                            mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                            mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                            mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                            mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                            mailfeedback.Id_card = item.id_prodotto;
+                            HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+
+                        }
+                        catch { }
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         item.CodiceOrdine = CodiceOrdine;
                         SalvaCodiceOrdine(item);
                     }
-                    InsertEventoBooking(prodotti, totali,"rif000001");
+                    InsertEventoBooking(prodotti, totali, "rif000001");
 
 
                     //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
@@ -647,7 +664,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         }
     }
 
-    private void InsertEventoBooking(CarrelloCollection prodotti, TotaliCarrello totali,string filtrotipologia)
+    private void InsertEventoBooking(CarrelloCollection prodotti, TotaliCarrello totali, string filtrotipologia)
     {
         foreach (Carrello c in prodotti)
         {
@@ -685,7 +702,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     /// </summary>
     /// <param name="prodotti"></param>
     /// <returns></returns>
-    private bool VerificaDisponibilitaEventoBooking(CarrelloCollection prodotti,string filtrotipologia)
+    private bool VerificaDisponibilitaEventoBooking(CarrelloCollection prodotti, string filtrotipologia)
     {
         bool free = true;
         foreach (Carrello c in prodotti)

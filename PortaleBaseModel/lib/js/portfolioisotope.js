@@ -355,10 +355,10 @@ function nextpagebindonserver(controlid) {
                                         try {
                                             //console.log(key, resparsed["jscommands"][key]);
                                             eval(resparsed["jscommands"][key]);//Eseguiamo i comandi indicati dal server
-                                        } catch{ }
+                                        } catch (e) { }
                                     }
                                 }
-                        } catch { }
+                        } catch (e) { }
                     }
                 });
 
@@ -409,10 +409,10 @@ function prevpagebindonserver(controlid) {
                                         try {
                                             //f(key, resparsed["jscommands"][key]);
                                             eval(resparsed["jscommands"][key]);
-                                        } catch{ }
+                                        } catch (e) { }
                                     }
                                 }
-                        } catch { }
+                        } catch (e) { }
                     }
                 });
 
@@ -468,10 +468,10 @@ function addcontentbindonserver(controlid) {
                                         try {
                                             //console.log(key, resparsed["jscommands"][key]);
                                             eval(resparsed["jscommands"][key]);//Eseguiamo i comandi indicati dal server
-                                        } catch{ }
+                                        } catch (e) { }
                                     }
                                 }
-                        } catch { }
+                        } catch (e) { }
                     }
                 });
 

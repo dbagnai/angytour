@@ -25,6 +25,9 @@ namespace WelcomeLibrary.UF
         public string label { get; set; }
         public string value { get; set; }
         public string codice { get; set; }
+        public string email { get; set; }
+        public string nome { get; set; }
+        public string cognome { get; set; }
         public string price { get; set; }
         public string iva { get; set; }
         public string um { get; set; }

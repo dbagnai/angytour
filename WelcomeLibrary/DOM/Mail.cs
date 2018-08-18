@@ -100,6 +100,11 @@ namespace WelcomeLibrary.DOM
             set { _Cliente = value; }
         }
 
+        public Dictionary<string, string> Emailaddress { get => _emailaddress; set => _emailaddress = value; }
+        public Dictionary<string, string> Sparedict { get => _sparedict; set => _sparedict = value; }
+
+        private Dictionary<string, string> _emailaddress = new Dictionary<string, string>();
+        private Dictionary<string, string> _sparedict = new Dictionary<string, string>();
 
         public Mail()
         {
@@ -118,6 +123,8 @@ namespace WelcomeLibrary.DOM
             this.DataInserimento = DateTime.MinValue;
             this.DataInvio = null;
             this.DataAdesione = null;
+            this._emailaddress = new Dictionary<string, string>();
+            this._sparedict = new Dictionary<string, string>();
 
         }
         public Mail(Mail tmp)
@@ -137,6 +144,8 @@ namespace WelcomeLibrary.DOM
             this.DataInserimento = tmp.DataInserimento;
             this.DataInvio = tmp.DataInvio;
             this.DataAdesione = tmp.DataAdesione;
+            this._emailaddress = tmp._emailaddress;
+            this._sparedict = tmp._sparedict;
         }
     }
 }

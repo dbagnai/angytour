@@ -106,17 +106,25 @@ namespace WelcomeLibrary.DAL
             if (connection == null || connection == "") return list;
 
             Mail item = new Mail();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             //List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             //SQLiteParameter p1 = new SQLiteParameter("@Email", email); //OleDbType.VarChar
             //parColl.Add(p1);
             try
             {
+                /*Aggiunta per filtro feedback ------- */
+                SQLiteParameter pdmax;
+                pdmax = new SQLiteParameter("@DataInserimentomax", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                parColl.Add(pdmax);
+                /*------ Aggiunta per filtro feedback */
+
                 string query = "SELECT";
-                query += " M.ID as M_ID,M.DataInserimento as M_DataInserimento,M.ID_CLIENTE as M_ID_CLIENTE,M.ID_CARD as M_ID_CARD, M.Lingua as M_Lingua,M.DataInvio,M.TestoErrore,M.Tipomailing,M.TestoMail,M.SoggettoMail,M.NoteInvio,M.DataAdesione,M.Errore,M.ID_mailing_struttura,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome,  MC.Id_mail AS mailincharge FROM ( TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE ) left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
+                query += " M.ID as M_ID,M.DataInserimento as M_DataInserimento,M.ID_CLIENTE as M_ID_CLIENTE,M.ID_CARD as M_ID_CARD, M.Lingua as M_Lingua,M.DataInvio,M.TestoErrore,M.Tipomailing,M.TestoMail,M.SoggettoMail,M.NoteInvio,M.DataAdesione,M.Errore,M.ID_mailing_struttura,C.Email as EmailCliente,C.Nome as Nome,C.Cognome as Cognome,  MC.Id_mail AS mailincharge FROM ( TBL_MAILING M left join TBL_CLIENTI C on M.ID_CLIENTE=C.ID_CLIENTE ) left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE  ( M.DataInserimento <= @DataInserimentomax ) and (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
                 if (MaxEmail != null)
                     query += " limit " + MaxEmail.Value;
 
-                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+
                 using (reader)
                 {
                     if (reader == null) { return list; };
@@ -188,35 +196,43 @@ namespace WelcomeLibrary.DAL
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return idret;
             string query = "";
+
+            /*Aggiunta per filtro feedback ------- */
+            SQLiteParameter pdmax;
+            pdmax = new SQLiteParameter("@DataInserimentomax", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+            parColl.Add(pdmax);
+            /*------ Aggiunta per filtro feedback */
+
             //Insert
             //query = "INSERT INTO TBL_MAILING_ONCHARGE ( Id_mail , DataInserimento )";
             //query += " values ( ";
             //query += "@id,@DataInserimento)";
             query = "Insert into TBL_MAILING_ONCHARGE (Id_mail) Select ";
-            query += " M.id FROM  TBL_MAILING M left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
+            query += " M.id FROM  TBL_MAILING M left join TBL_MAILING_ONCHARGE MC on M.ID = MC.Id_mail WHERE ( M.DataInserimento <= @DataInserimentomax ) and  (((M.DataInvio) Is Null) AND ((M.Errore)=0) AND ((MC.Id_mail) Is Null)) order by M.ID";
             if (MaxEmail != null)
                 query += " limit " + MaxEmail.Value.ToString();
+
             /*
            INSERT INTO MyTable (FirstCol, SecondCol)
-SELECT 'First' ,1
-UNION ALL
-SELECT 'Second' ,2
-UNION ALL
-SELECT 'Third' ,3
-UNION ALL
-SELECT 'Fourth' ,4
-UNION ALL
-SELECT 'Fifth' ,5
-GO
-           * oppure 
-           * 
-           * INSERT INTO YourTable (FirstCol, SecondCol)
-VALUES (‘First’ , 1) , (‘Second’ , 2) , (‘Third’ , ’3′), (‘Fourth’ , ’4′) (‘and so on’)
-           * 
-           * oppure 
-           * Insert into yourtable (table1col, table2col)
-Select table1col, table2col
-From table1 inner join table2 on table1.table1col = table2.table2col
+            SELECT 'First' ,1
+            UNION ALL
+            SELECT 'Second' ,2
+            UNION ALL
+            SELECT 'Third' ,3
+            UNION ALL
+            SELECT 'Fourth' ,4
+            UNION ALL
+            SELECT 'Fifth' ,5
+            GO
+                       * oppure 
+                       * 
+                       * INSERT INTO YourTable (FirstCol, SecondCol)
+            VALUES (‘First’ , 1) , (‘Second’ , 2) , (‘Third’ , ’3′), (‘Fourth’ , ’4′) (‘and so on’)
+                       * 
+                       * oppure 
+                       * Insert into yourtable (table1col, table2col)
+            Select table1col, table2col
+            From table1 inner join table2 on table1.table1col = table2.table2col
            */
             try
             {
@@ -313,8 +329,15 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                     pdmin = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(mindate.Value));
                     //pdmin.DbType = System.Data.DbType.DateTime;
                     parColl.Add(pdmin);
-                    query += " and DataInserimento > @DataInserimento";
+                    /*Aggiunto per evitare di prendere le mail in attsa di invio con data superore all'attuale, per il sistema di feedback*/
+                    SQLiteParameter pdmax;
+                    pdmax = new SQLiteParameter("@DataInserimentomax", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+                    parColl.Add(pdmax);
+
+                    query += " and DataInserimento > @DataInserimento and DataInserimento <= @DataInserimentomax ";
+
                 }
+
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -478,12 +501,14 @@ From table1 inner join table2 on table1.table1col = table2.table2col
         public void CancellaMailInAttesa(string connection)
         {
             if (connection == null || connection == "") return;
-            string query = "DELETE FROM TBL_MAILING WHERE (((DataInvio) Is Null) AND ((Errore)=0)) ";
+
+            string query = "DELETE FROM TBL_MAILING WHERE (((DataInvio) Is Null) AND ((Errore)=0)) AND  ( DataInserimento <= @DataInserimento ) ";
+
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
-            //SQLiteParameter pdmin;
-            //pdmin = new SQLiteParameter("@DataInserimento", data.ToString());
-            //pdmin.DbType = System.Data.DbType.DateTime;
-            //parColl.Add(pdmin);
+            SQLiteParameter pdmax;
+            pdmax = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
+            parColl.Add(pdmax);
+
 
             try
             {
@@ -616,7 +641,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
                 p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
                 p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
-           // p4.DbType = System.Data.DbType.DateTime;
+            // p4.DbType = System.Data.DbType.DateTime;
             parColl.Add(p4);
             SQLiteParameter p8;
             if (item.DataInvio != null)
@@ -690,7 +715,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
 
             SQLiteParameter p4 = null;
             if (item.DataInserimento != null && item.DataInserimento != DateTime.MinValue)
-                p4 = new SQLiteParameter("@DataInserimento",dbDataAccess.CorrectDatenow( item.DataInserimento));
+                p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(item.DataInserimento));
             else
                 p4 = new SQLiteParameter("@DataInserimento", dbDataAccess.CorrectDatenow(System.DateTime.Now));
             //p4.DbType = System.Data.DbType.DateTime;
@@ -738,7 +763,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
             }
-            catch 
+            catch
             {
                 //throw new ApplicationException("Errore, cancellazione newsletter :" + error.Message, error);
             }
@@ -981,7 +1006,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch 
+            catch
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
@@ -1054,7 +1079,7 @@ From table1 inner join table2 on table1.table1col = table2.table2col
             try
             {
                 string query = "SELECT  *  FROM TBL_MAILING_GRUPPI_CLIENTI WHERE GruppoMailing=@GruppoMailing AND Attivo = 1 AND  ID_CLIENTE <> 0 ";
-              
+
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
                 {

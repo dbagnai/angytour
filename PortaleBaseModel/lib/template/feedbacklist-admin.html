@@ -1,0 +1,26 @@
+﻿<ul id="replaceid" style="list-style:none">
+    <li style="padding-bottom:20px">
+        <div class="row">
+            <div class="col-12 text-left" style="font-size:0.9rem;">Id recensione: <span class="bind" mybind="Id"></span></div>
+            <div class="col-12 text-left" style="font-size:0.9rem;">Id articolo: <span class="bind" mybind="Idpost"></span></div>
+            <div class="col-12 text-left">
+                <!--<span class="bind" mybind="stelle"></span>-->
+                <span class="rating bind" mybind="stelle" idbind="Id" data-default-rating="2.5"></span>
+            </div>
+            <div class="col-12 text-left"><div style="font-size:0.9rem;margin-bottom:3px" class="bind" mybind="Data" myvalue="" format="formatdata" /></div>
+            <div class="col-12 text-left">
+                <input type="checkbox" style="width:50px !important; height:35px;align-items:flex-start;display:inline-block" class="form-control bind" mybind="Approvato" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" />
+                <i class="fa fa-2x fa-comments-o"></i><input type="text" class="form-control bind" mybind="Nome" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" />
+            </div>
+            <div class="col-12" style="text-align:left"><input type="email" class="form-control bind" mybind="Email" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
+            <div class="col-12" style="text-align:left"><input type="text" class="form-control bind" mybind="Titolo" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
+            <div class="col-12" style="text-align:left"><textarea rows="3" type="text" class="form-control bind" mybind="Testo" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
+            <div class="col-12" style="text-align:right;vertical-align:central">
+
+                <button type="button" class="btn btn-primary bind select" mybind="Id" myvalue="commenttool.updateitem"><i class="fa fa-2x fa-refresh"></i></button>
+                <button type="button" class="btn btn-danger bind select" mybind="Id" myvalue="commenttool.deleteitem"><i class="fa fa-2x fa-trash-o"></i></button>
+            </div>
+        </div>
+    </li>
+</ul>
+

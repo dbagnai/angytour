@@ -496,7 +496,12 @@
                                     </li>
                                 </ItemTemplate>
                             </asp:Repeater>
-
+                             <li class="hover">
+                                <a href="GestioneFeedback.aspx ">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Gestione Feedbacks</span>
+                                <b class="arrow"></b></a>
+                            </li>
                         </ul>
                     </li>
 

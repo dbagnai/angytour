@@ -100,6 +100,29 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
             switch (q)
             {
+                case "autocompleteclienti":
+                    long.TryParse(Recs, out irecs);
+                    if (irecs == 0) irecs = 20;
+                    if (term != "null")
+                    {
+                        ClientiDM cliDM = new ClientiDM();
+                        ClienteCollection coll = cliDM.GetLista(term, WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+                        long count = 0;
+                        ResultAutocomplete ra = null;
+                        // ResultAutocomplete ra = new ResultAutocomplete() { id = "", label = "", value = "Deseleziona", codice = "" };
+                        //lra.Add(ra);
+                        if (coll != null)
+                            foreach (Cliente r in coll)
+                            {
+                                ra = new ResultAutocomplete() { id = r.Id_cliente.ToString(), label = r.Spare3, email = r.Email, nome = r.Nome.ToString(), cognome = r.Cognome.ToString() };
+                                if (id == null || id == "") lra.Add(ra);
+                                else if (id != "" && r.Id_cliente.ToString() == id) lra.Add(ra);
+                                count++;
+                                if (count > irecs) break;
+                            }
+                    }
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
+                    break;
                 case "autocompletecaratteristiche":
                     long.TryParse(Recs, out irecs);
                     if (irecs == 0) irecs = 50;
@@ -523,6 +546,20 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         //Svuoto jscommands in memoria
                         custombind.jscommands = new Dictionary<string, string>();
                     }
+                    break;
+                case "getlinkbyid":
+                    Dictionary<string, string> filtriid = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
+                    Dictionary<string, string> valueRet1 = new Dictionary<string, string>();
+                    if (filtriid.ContainsKey("id"))
+                        valueRet1 = offerteDM.getlinklist(lingua, filtriid["id"]);
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(valueRet1, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+
                     break;
                 case "caricaMenuSezioni":
                     Dictionary<string, string> filtriMenu = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);

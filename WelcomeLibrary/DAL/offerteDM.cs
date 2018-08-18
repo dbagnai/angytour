@@ -5533,6 +5533,53 @@ namespace WelcomeLibrary.DAL
 
             return ritorno;
         }
+        /// <summary>
+        /// Torna la lista dei link per id
+        /// </summary>
+        /// <param name="lingua"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Dictionary<string, string> getlinklist(string lingua, string id)
+        {
+            Dictionary<string, string> linklist = new Dictionary<string, string>();
+            offerteDM offDM = new offerteDM();
+            OfferteCollection offerte = new OfferteCollection(); List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (!id.Contains(","))
+            {
+                SQLiteParameter pid = new SQLiteParameter("@Id", id);
+                parColl.Add(pid);
+            }
+            else
+            {
+                SQLiteParameter pid = new SQLiteParameter("@Idlist", id);
+                parColl.Add(pid);
+            }
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua);
+            foreach (Offerte _o in offerte)
+            {
+                //string target = "_blank";
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(_o.DenominazionebyLingua(lingua)), _o.Id.ToString(), _o.CodiceTipologia);
+                if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
+                {
+                    //target = "_self";
+                    link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
+                }
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                if (!linklist.ContainsKey(_o.Id.ToString()))
+                    linklist.Add(_o.Id.ToString(), link);
+                if (!linklist.ContainsKey(_o.Id.ToString() + "name"))
+                    linklist.Add(_o.Id.ToString() + "name", _o.DenominazionebyLingua(lingua));
+                if (!linklist.ContainsKey(_o.Id.ToString() + "img"))
+                    linklist.Add(_o.Id.ToString() + "img", pathimmagine);
+
+            }
+            return linklist;
+        }
 
 
         /// <summary>

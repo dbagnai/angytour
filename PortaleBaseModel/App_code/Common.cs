@@ -17,6 +17,14 @@ using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using System.Globalization;
 
+
+public class simpleidname
+{
+    public string id { set; get; }
+    public string name { set; get; }
+}
+
+
 /// <summary>
 /// This Page class is common to all sample pages and exists as a place to
 /// implement common functionality

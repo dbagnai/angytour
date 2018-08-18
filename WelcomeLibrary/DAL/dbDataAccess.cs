@@ -242,6 +242,7 @@ namespace WelcomeLibrary.DAL
 
 
 
+
         public static T ExecuteScalar<T>(string Query, List<SQLiteParameter> parameters, string Conn)
         {
             string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
@@ -259,13 +260,21 @@ namespace WelcomeLibrary.DAL
                     if (parameters != null && parameters.Count > 0)
                         for (int i = 0; i < parameters.Count; i++)
                             command.Parameters.Add(parameters[i]);
-                    T ritorno = (T)command.ExecuteScalar();
+
+                    object temp = command.ExecuteScalar();
                     conn.Close();
-                    return ritorno;
+
+                    if (!temp.Equals(DBNull.Value))
+                    {
+                        return (T)temp;
+                    }
+                    else
+                    {
+                        return default(T);
+                    }
                 }
             }
         }
-
 
         /// <summary>
         /// Creiamo anche un metodo per eseguire query di selezione come stored procedure

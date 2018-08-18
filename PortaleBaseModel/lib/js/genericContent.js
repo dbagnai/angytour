@@ -13,15 +13,15 @@ function injectandloadgenericcontentinner(type, container, controlid, visualData
     //Correggo l'id dei controlli del template per l'inzializzazione dello scroller con id univoca e corretta
     $('#' + container).html('');
     $('#' + container).load(templateHtml, function () {
-
+        recursiveEach($('#' + container), controlid);
         //injectOwlGalleryControls(controlid, "plhGallery");
         injectFlexsliderControls(controlid, "plhGallery", function () {
-
-            $('#' + container).find("[id^=replaceid]").each(function (index, text) {
-                var currentid = $(this).prop("id");
-                var replacedid = currentid.replace('replaceid', controlid);
-                $(this).prop("id", replacedid);
-            });
+            recursiveEach($('#' + container), controlid);
+            //$('#' + container).find("[id^=replaceid]").each(function (index, text) {
+            //    var currentid = $(this).prop("id");
+            //    var replacedid = currentid.replace('replaceid', controlid);
+            //    $(this).prop("id", replacedid);
+            //});
 
             var params = {};
             params.container = container;/*Inserisco il nome dle container nei parametri per uso successivo nel binding*/
@@ -154,14 +154,19 @@ function reinitaddthis() {
 
 /*--- FLEXLIDER GALLERY -------http://www.woothemes.com/flexslider/-----------*/
 function injectFlexsliderControls(controlid, container, callback) {
-    $("#" + container).load("/lib/template/" + "flexslidergallery.html", function () {
-        $('#' + container).find("[id^=replaceid]").each(function (index, text) {
-            var currentid = $(this).prop("id");
-            var replacedid = currentid.replace('replaceid', controlid);
-            $(this).prop("id", replacedid);
-        });
+
+
+    if ($("#" + container).length > 0)
+        $("#" + container).load("/lib/template/" + "flexslidergallery.html", function () {
+            //$('#' + container).find("[id^=replaceid]").each(function (index, text) {
+            //    var currentid = $(this).prop("id");
+            //    var replacedid = currentid.replace('replaceid', controlid);
+            //    $(this).prop("id", replacedid);
+            //});
+            recursiveEach($('#' + container), controlid);
             if (callback != null) callback();
-    });
+        });
+    else { if (callback != null) callback(); }
 }
 function inizializzaFlexsliderGallery(controlid, container) {
 

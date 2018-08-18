@@ -139,6 +139,7 @@
     <Compile Include="DAL\bannersDM.cs" />
     <Compile Include="DAL\bookingDM.cs" />
     <Compile Include="DAL\ClientiDM.cs" />
+    <Compile Include="DAL\commentsDM.cs" />
     <Compile Include="DAL\contenutiDM.cs" />
     <Compile Include="DAL\dbDataAccess.cs" />
     <Compile Include="DAL\eCommerceDM.cs" />
@@ -150,6 +151,8 @@
     <Compile Include="DOM\Allegato.cs" />
     <Compile Include="DOM\Carrello.cs" />
     <Compile Include="DOM\CarrelloCollection.cs" />
+    <Compile Include="DOM\comment.cs" />
+    <Compile Include="DOM\commentscollection.cs" />
     <Compile Include="DOM\Comune.cs" />
     <Compile Include="DOM\ComuneCollection.cs" />
     <Compile Include="DOM\Contenuti.cs" />

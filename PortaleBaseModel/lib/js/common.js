@@ -35,6 +35,9 @@ var bookinghandlerpath = '/lib/hnd/HandlerBooking.ashx';
 var commonhandlerpath = '/lib/hnd/HandlerDataCommon.ashx';
 var resourcehandlerpath = '/lib/hnd/HandlerDataImmobili.ashx';
 var carrellohandlerpath = '/lib/hnd/CarrelloHandler.ashx';
+var newsletterhandlerpath = '/lib/hnd/HandlerNewsletter.ashx';
+var feedbackhandlerpath = '/lib/hnd/feedbackHandler.ashx';
+var commenthandlerpath = '/lib/hnd/feedbackHandler.ashx';
 var referencesloaded = false;
 var promisecalling = false;
 var callqueque = [];
@@ -74,9 +77,9 @@ var reinitscrollpos = function () {
 
 
 $(document).ready(function () {
-    //   searchtaginjectandcall();
+   searchtaginjectandcall();
 });
-searchtaginjectandcall();
+//searchtaginjectandcall();
 
 
 /*Seleziona i tag con classe inject e Chiama la funzione specificata nell'attributo params passando i parametri a seguire*/
@@ -114,7 +117,7 @@ function searchtaginjectandcall() {
         else {
             var levelscopes = itemtocall.name.split('.');
             (function wait() {
-                if (levelscopes.length = 2)
+                if (levelscopes.length == 2)
                     if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
                         window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args)//make the call
                     } else {
@@ -170,11 +173,11 @@ function loadref(functocall) {
                         }
                     })();
                 else {
-                    var levelscopes = item.name.split('.');
+                    var levelscopes1 = item.name.split('.');
                     (function wait() {
-                        if (levelscopes.length = 2)
-                            if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
-                                window[levelscopes[0]][levelscopes[1]].apply(this, args)//make the call
+                        if (levelscopes1.length == 2)
+                            if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
+                                window[levelscopes1[0]][levelscopes1[1]].apply(this, args)//make the call
                             } else {
                                 setTimeout(wait, 50);
                             }
@@ -206,11 +209,11 @@ function loadref(functocall) {
                             }
                         })();
                     else {
-                        var levelscopes = callitem.name.split('.');
+                        var levelscopes1 = callitem.name.split('.');
                         (function wait() {
-                            if (levelscopes.length = 2)
-                                if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
-                                    window[levelscopes[0]][levelscopes[1]].apply(this, callitem.args)//make the call
+                            if (levelscopes1.length == 2)
+                                if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
+                                    window[levelscopes1[0]][levelscopes1[1]].apply(this, callitem.args)//make the call
                                 } else {
                                     setTimeout(wait, 50);
                                 }
@@ -527,11 +530,12 @@ function CaricaGlobalResources(lng, searchtext) {
 
 
 
-function GetResourcesValue(key, data) {
+function GetResourcesValue(key, data, idcontrol) {
     var ret = "";
     var data = data || baseresources;
     if (data != null)
         ret = data[lng][key];
+    $('#' + idcontrol).html(ret);
     return ret;
 
 }
@@ -824,6 +828,22 @@ function recursiveEach($element, controlid) {
             $(this).attr("data-parent", replacedattr);
         }
 
+        currentattr = $(this).attr("data-target");
+        if (currentattr != null && currentattr != undefined) {
+            var replacedattr = currentattr.replace('replaceid', controlid);
+            $(this).attr("data-target", replacedattr);
+        }
+        currentattr = $(this).attr("aria-controls");
+        if (currentattr != null && currentattr != undefined) {
+            var replacedattr = currentattr.replace('replaceid', controlid);
+            $(this).attr("data-controls", replacedattr);
+        }
+        currentattr = $(this).attr("aria-labelledby");
+        if (currentattr != null && currentattr != undefined) {
+            var replacedattr = currentattr.replace('replaceid', controlid);
+            $(this).attr("aria-labelledby", replacedattr);
+        }
+
         var currentid = $(this).prop("id");
         var replacedid = currentid.replace('replaceid', controlid);
         $(this).prop("id", replacedid);
@@ -834,61 +854,52 @@ function recursiveEach($element, controlid) {
 }
 
 /*Visualizza un lista i dati passati col template indicato*/
-function ShowList(templatename, container, controlid, data) {
+function ShowList(templatename, container, controlid, data, callback) {
     var localObjects = {};
 
     var templateHtml = pathAbs + "/lib/template/" + "genericlista.html";
     if (templatename != null && templatename != '')
         templateHtml = pathAbs + "/lib/template/" + templatename;
 
-    //Correggo l'id dei controlli del template per l'inzializzazione dello scroller univoca e corretta
+    //Vuoto i contenitore
     $('#' + container).html('');
 
-    if (data !== null && data.length > 0) {
+    if (data != null && data.length > 0) {
         $('#' + container).load(templateHtml, function () {
             recursiveEach($('#' + container), controlid);
-            //$('#' + container).find("[id^=replaceid]").each(function (index, text) {
-            //    var currentid = $(this).prop("id");
-            //    var replacedid = currentid.replace('replaceid', controlid);
-            //    $(this).prop("id", replacedid);
-            //});
 
-            setTimeout(function () {
-                if (!data.length) return;
-                var str = $('#' + controlid)[0].outerHTML;
-                //$('#' + el).parent().parent().parent().parent().show();
-                //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
-                //in caso di rebinding successivo dopo l'iniezione del template
-                if (!globalObject.hasOwnProperty(controlid + "template")) {
-                    globalObject[controlid + "template"] = $('#' + controlid)[0].outerHTML;
-                    str = globalObject[controlid + "template"];
-                }
-                else
-                    str = globalObject[controlid + "template"];
+            if (!data.length || !$('#' + controlid).length) return;
+            var str = $('#' + controlid)[0].outerHTML;
+            //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
+            //in caso di rebinding successivo dopo l'iniezione del template
+            if (!globalObject.hasOwnProperty(controlid + "template")) {
+                globalObject[controlid + "template"] = $('#' + controlid)[0].outerHTML;
+                str = globalObject[controlid + "template"];
+            }
+            else
+                str = globalObject[controlid + "template"];
 
-                var jquery_obj = $(str);
-                var outerhtml = jquery_obj.outerHTML();
-                var innerHtml = jquery_obj.html();
-                var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
-                var htmlout = "";
-                var htmlitem = "";
-                for (var j = 0; j < data.length; j++) {
-                    htmlitem = "";
-                    //htmlitem = FillBindControls(jquery_obj, data[j]);
-                    //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
-                    FillBindControls(jquery_obj, data[j], localObjects, "",
-                        function (ret) {
-                            //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                            htmlout += ret.html() + "\r\n";
-                        });
-                }
-                //Inseriamo htmlout nel contenitore  $('#' + el).html 
-                $('#' + controlid).html('');
-                $('#' + controlid).html(htmlout);
-                //CleanHtml($('#' + controlid));
-            }, 500);
+            var jquery_obj = $(str);
+            //var outerhtml = jquery_obj.outerHTML();
+            //var innerHtml = jquery_obj.html();
+            //var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
+            var htmlout = "";
+            for (var j = 0; j < data.length; j++) {
+                FillBindControls(jquery_obj, data[j], localObjects, "",
+                    function (ret) {
+                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+                        htmlout += ret.html() + "\r\n";
+                    });
+            }
+            //Inseriamo htmlout nel contenitore  $('#' + el).html 
+            $('#' + controlid).html('');
+            $('#' + controlid).html(htmlout);
+            //CleanHtml($('#' + controlid));
+            //CleanHtml($('#' + container)); 
+            if (callback != null) callback();
+
         });
-    }
+    } else if (callback != null) callback();
 }
 
 
@@ -934,21 +945,38 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).html(dataitem[proprarr[0]]);
                         }
                     }
+                    else if ($(this).is("span") && $(this).hasClass('rating')) {
+                        $(this).attr("data-default-rating", dataitem[proprarr[0]]);
+                        if ($(this).attr("idbind") != null)
+                            $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
+                    }
                     else if ($(this).is("input") && $(this).attr('type') == 'checkbox') {
-                        if (dataitem.hasOwnProperty(proprarr[0]))
+                        if (dataitem.hasOwnProperty(proprarr[0])) {
                             $(this).prop("checked", dataitem[proprarr[0]]);
+                            if (dataitem[proprarr[0]])
+                                $(this).attr("checked", 'checked');
+                        }
                         else
                             $(this).prop("checked", false);
+                        if ($(this).attr("idbind") != null)
+                            $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
                     }
-                    else if ($(this).is("input") && ($(this).attr('type') == 'text' || $(this).attr('type') == null)) {
+                    else if ($(this).is("input") && ($(this).attr('type') == 'text' || $(this).attr('type') == 'email' || $(this).attr('type') == null)) {
                         if (dataitem.hasOwnProperty(proprarr[0]))
                             $(this).attr("value", dataitem[proprarr[0]]);
                         else
                             $(this).attr("value", '');
+
+                        //if ($(this).attr("placeholder") != null)
+                        //    $(this).attr("placeholder", baseresources[lng][$(this).attr("placeholder")]);
+                        var plhattr = $(this).attr("placeholder");
+                        if (plhattr != undefined && plhattr != null && plhattr != '') {
+                            plhattr = GetResourcesValue(plhattr, null);
+                            $(this).attr("placeholder", plhattr);
+                        }
+
                         if ($(this).attr("idbind") != null)
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
-                        if ($(this).attr("placeholder") != null)
-                            $(this).attr("placeholder", baseresources[lng][$(this).attr("placeholder")]);
                     }
 
                     else if ($(this).is("textarea")) {
@@ -956,6 +984,12 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).text(dataitem[proprarr[0]]);
                         else
                             $(this).text('');
+
+                        var plhattr = $(this).attr("placeholder");
+                        if (plhattr != undefined && plhattr != null && plhattr != '') {
+                            plhattr = GetResourcesValue(plhattr, null);
+                            $(this).attr("placeholder", plhattr);
+                        }
 
                         if ($(this).attr("idbind") != null)
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
@@ -1074,13 +1108,13 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         /*Lista completa degli allegati per l'immobile*/
                         CompleteUrlListImgs(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslist = ret;
-                        })
+                        });
                         CompleteUrlListImgsDesc(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslistdesc = ret;
-                        })
+                        });
                         CompleteUrlListImgsRatio(localObjects, idallegato, false, usecdn, function (ret) {
                             imgslistratio = ret;
-                        })
+                        });
 
 
                         for (var j = 0; j < imgslist.length; j++) {
@@ -1104,7 +1138,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 var imgstyle = "";
                                 imgstyle = "max-width:100%;height:auto;";
                                 var maxheight = $(this).getStyle('max-height');
-                                if (maxheight !== '') {
+                                if (maxheight != '') {
                                     maxheight = maxheight.replace("px", "");
                                     var docwidth = $(document).width();
                                     if (maxheight > docwidth) maxheight = docwidth;
@@ -1114,8 +1148,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                             imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
                                         }
                                     }
-                                    catch (e) {
-                                    };
+                                    catch (e) {};
                                 }
 
                                 //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
@@ -1158,7 +1191,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             }
                         }
                         $(this).html(contenutoslide);
-                        if (contenutoslide !== '')
+                        if (contenutoslide != '')
                             $(this).parent().show();
 
                     }
@@ -1197,7 +1230,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                 }
                             }
                         $(this).html(contenutoslide);
-                        if (contenutoslide !== '')
+                        if (contenutoslide != '')
                             $(this).parent().show();
 
                     }
@@ -1220,7 +1253,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             contenutoslide += '</div>';
                         }
                         $(this).html(contenutoslide);
-                        if (contenutoslide !== '')
+                        if (contenutoslide != '')
                             $(this).parent().show();
 
                     }
@@ -1250,7 +1283,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             filelink += '</a>';
                         }
                         $(this).html(filelink);
-                        if (filelink !== '') $(this).show();
+                        if (filelink != '') $(this).show();
 
                     }
                     else if (($(this).is("div") || $(this).is("section"))
@@ -1358,6 +1391,33 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         //var prezzounitario = dataitem[proprarr[1]]; // da passaere
                         var idcontrollo = $(this).attr("id");
                         carrellotool.initcarrellotool(idrisorsa, '', username, idcontrollo, 2); //1 carrello con data range //2 carreelo standard //3 entrambi
+                    }
+                    else if ($(this).is("div")
+                        && ($(this).hasClass('commenttool'))
+                    ) {
+                        var idrisorsa = dataitem[proprarr[0]];
+                        var idcontrollo = $(this).attr("id");
+
+                        var instancename = "commenttool";//istanza di default ( con questa dovresti modificare la chiamata in base all'istanza)
+                        if ($(this).attr("instance") != null)
+                            instancename = $(this).attr("instance");
+
+                        var onlytotals = false;
+                        if ($(this).hasClass('onlytotals')) onlytotals = true;
+
+                        var maxrecord = "''";
+                        if ($(this).attr("maxrecord") != null)
+                            maxrecord = $(this).attr("maxrecord");
+
+                        var viewmode = "0";
+                        if ($(this).attr("viewmode") != null)
+                            maxrecord = $(this).attr("viewmode");
+
+                        if (instancename == "commenttool")
+                            commenttool.rendercommentsloadref(idrisorsa, idcontrollo, '', 'true', '1', '35', maxrecord, onlytotals, viewmode);
+                        else if (instancename == "commenttool1")
+                            commenttool1.rendercommentsloadref(idrisorsa, idcontrollo, '', 'true', '1', '35', maxrecord, onlytotals, viewmode);
+
                     }
                     else {
                         if (dataitem.hasOwnProperty(proprarr[0])) {
@@ -1727,11 +1787,14 @@ function formatlabelresource(localObjects, valore, prop, callback) {
     callback(retstring);
 
 }
+
 function formatdata1(localObjects, valore, prop, callback) {
     var retstring = "";
     var tmpDate = valore[0];
-    var controllo = localObjects["resultinfo"][prop[0]];
-    if (controllo == "true") {
+    var controllo = '';
+    if (localObjects != null && localObjects.hasOwnProperty("resultinfo") && localObjects["resultinfo"].hasOwnProperty(prop[0]))
+        controllo = localObjects["resultinfo"][prop[0]];
+    if (controllo == "true" || controllo == '') {
         if (tmpDate && tmpDate != "") {
             var objData = new Date(tmpDate);
             //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
@@ -1751,8 +1814,10 @@ function formatdata1(localObjects, valore, prop, callback) {
 function formatdata(localObjects, valore, prop, callback) {
     var retstring = "";
     var tmpDate = valore[0];
-    var controllo = localObjects["resultinfo"][prop[0]];
-    if (controllo == "true") {
+    var controllo = '';
+    if (localObjects != null && localObjects.hasOwnProperty("resultinfo") && localObjects["resultinfo"].hasOwnProperty(prop[0]))
+        controllo = localObjects["resultinfo"][prop[0]];
+    if (controllo == "true" || controllo == '') {
         if (tmpDate && tmpDate != "") {
             var objData = new Date(tmpDate);
 
@@ -2180,7 +2245,7 @@ function emptysession(link, callback) {
         //async: false,
         data: { 'q': 'emptysession', 'link': link },
         success: function (result) {
-            if (callback !== null && callback !== undefined)
+            if (callback != null && callback != undefined)
                 callback(result);
             console.log('CLEAREDSESSION');
             //if (link != '') openLink(link);
@@ -2188,7 +2253,7 @@ function emptysession(link, callback) {
         },
         error: function (result) {
             //sendmessage('fail creating link');
-            if (callback !== null && callback !== undefined)
+            if (callback != null && callback != undefined)
                 callback('');
         }
     });
@@ -2251,7 +2316,7 @@ function isEven(n) {
     return n == parseFloat(n) ? !(n % 2) : void 0;
 }
 function endsWith(str, word) {
-    return str.indexOf(word, str.length - word.length) !== -1;
+    return str.indexOf(word, str.length - word.length) != -1;
 }
 function jsAddSlashes(str) {
     if (str != null) {
@@ -2380,13 +2445,28 @@ $.fn.extend({
         if (!prop)
             return actuallySetStyles;
     }
-})
+});
 
 $.fn.outerHTML = function () {
     var $t = $(this);
     if ("outerHTML" in $t[0]) return $t[0].outerHTML;
     else return $t.clone().wrap('<p>').parent().html();
-}
+};
+$.fn.extend({
+    autoHeight: function () {
+        function autoHeight_(element) {
+            return jQuery(element)
+                .css({ 'height': 'auto', 'overflow-y': 'hidden' })
+                .height(element.scrollHeight);
+        }
+        return this.each(function () {
+            autoHeight_(this).on('input', function () {
+                autoHeight_(this);
+            });
+        });
+    }
+});
+
 
 function getCopy(objectToCopy) {
     var copy = {};

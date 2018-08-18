@@ -1,0 +1,40 @@
+﻿<div style="list-style:none" id="replaceid">
+    <div class="row">
+        <!--<div class="col-12 text-left">
+            <div class="bind" mybind="Id" myvalue="feedbacksinserisci" format="formatlabelresource"></div>
+            <br />
+        </div>-->
+        <div class="col-3 text-left">
+            <!-- <input type="text" class="form-control" mybind="stelle" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />-->
+            <span class="bind" mybind="Id" myvalue="valutazione" format="formatlabelresource"></span><br />
+            <span class="rating" mybind="stelle" data-default-rating="0"></span>
+        </div>
+        <div class="col-12 text-left">
+            <!--<span id="t2"></span>
+        <script>GetResourcesValue("nome", null, 't2')</script>-->
+            <!--<span class="bind" mybind="Id" myvalue="nome" format="formatlabelresource"></span>-->
+            <input type="text" class="form-control bind" placeholder="nome" mybind="Nome" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+        </div>
+        <div class="col-12 text-left"> 
+            <input type="email" class="form-control bind" placeholder="email" mybind="Email" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+        </div>
+        <!--<div class="col-1 text-left"><span class="bind" mybind="Data" myvalue="" format="formatdata" /></div>-->
+        <div class="col-12" style="text-align:left">
+            <input type="text" class="form-control bind" placeholder="titolo" mybind="Titolo" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+        </div>
+        <div class="col-12" style="text-align:left">
+            <textarea rows="3" type="text" class="form-control bind" placeholder="messaggio" mybind="Testo" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+        </div>
+        <div class="col-12" style="text-align:left">
+            <div class="row">
+                <div class="col-sm-6 text-right">
+                    <button type="button" id="replaceidinsertbtn" class="btn btn-primary"  onclick="javascript:commenttool.insertitem(this)"><i class="fa fa-2x fa-share"></i>Invia</button>
+                </div>
+                <div class="col-sm-6 text-left">
+                    <div class="display-4" style="color:red;font-weight:600;font-size:1.3rem" id="tresponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

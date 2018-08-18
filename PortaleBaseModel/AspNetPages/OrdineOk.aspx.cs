@@ -204,6 +204,25 @@ public partial class AspNetPages_OrdineOk : CommonPage
             item.CodiceOrdine = CodiceOrdine;
             SalvaCodiceOrdine(item);
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Prepariamo le richieste di feeback per gli articoli in ordine!!
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                Mail mailfeedback = new Mail();
+
+                mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                mailfeedback.Id_card = item.id_prodotto;
+                HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+
+            }
+            catch { }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 #if true // da abilitare per decrementare le quantià vendute
             //Decrementiamo anche le quantità per i prodotti che sono a disponibilità limitata
             // togliendo dal catalogo la quantità venduta dell'articolo presente a carrello
