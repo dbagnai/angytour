@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
      <meta name="metaRobots" id="meta1" content="noindex,nofollow" runat="Server" />
     <style type="text/css">
-        @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
-        @import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600);
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+        @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600);
 
         body {
             font-weight: 300;
