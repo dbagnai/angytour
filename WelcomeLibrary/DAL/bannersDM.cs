@@ -109,17 +109,20 @@ namespace WelcomeLibrary.DAL
             foreach (Banners _o in filteredData)
             {
                 Dictionary<string, string> tmp = new Dictionary<string, string>();
-                string testotitolo = ""; 
+                string testotitolo = "";
 
                 testotitolo = _o.AlternateTextbyLingua(lingua);
                 string pathimmagine = _o.ImageUrlbyLingua(lingua); //percorso virtuale della foto banner sul server!!
 
                 ///////////////////////////////////////
                 //Ricreiamo le anteprime se non presenti 
-                string physpathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione).Replace("/", "\\").Replace("\\\\", "\\");
-                string filename = System.IO.Path.GetFileName(physpathimmagine).ToString();
-                string filepath = System.IO.Path.GetDirectoryName(physpathimmagine).ToString();
-                filemanage.CreaAnteprima(physpathimmagine, 450, 450, filepath + "\\", "Ant" + filename, false, true);
+                if (!string.IsNullOrEmpty(pathimmagine))
+                {
+                    string physpathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione).Replace("/", "\\").Replace("\\\\", "\\");
+                    string filename = System.IO.Path.GetFileName(physpathimmagine).ToString();
+                    string filepath = System.IO.Path.GetDirectoryName(physpathimmagine).ToString();
+                    filemanage.CreaAnteprima(physpathimmagine, 450, 450, filepath + "\\", "Ant" + filename, false, true);
+                }
                 ///////////////////////////////////////
                 //Qui  posso decidere di passare le versioni in base alla risoluzione   WelcomeLibrary.STATIC.Global.Viewportw
                 //andatando a modificare il noem del file aggiungendo -xs -xs -md -lg  a seconda della risoluzione al nome del file
@@ -133,7 +136,7 @@ namespace WelcomeLibrary.DAL
                 string link = _o.NavigateUrlbyLingua(lingua);
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
-                   // target = "_self";
+                    // target = "_self";
                     link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + link;
                 }
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
