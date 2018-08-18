@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="float-right" style="margin-left: 5px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
+                <div class="float-right" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="false">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
