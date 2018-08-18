@@ -12,7 +12,7 @@ function commentclosure(varname) {
 
     this.commentsvisible = true; //Blocca la visualizzazione dei riepiloghi e della lista commenti
     this.onlytotals = false; //Visualizzo solo i totali 
-    this.viewmode = 0; //Imposta la modalità di visualizzazione 0 - default completo di form inserimento 1 - scroller commenti ultimi
+    this.viewmode = 0; //Imposta la modalità di visualizzazione 0 - default completo di form inserimento 1 - scroller commenti ultimi 2-lista commenti verticale senza form inserimento
     this.mailadvice = true; //abilitazioneinvio mail di avviso inserimento di feedback per il gestore
     this.templatehtml = 'feedbacklist.html'; //default template per visualizzazione dei commenti
 
@@ -55,7 +55,7 @@ function commentclosure(varname) {
         //    mainscope.viewmode = 0;
 
 
-      
+
         if (enablepager != '' && enablepager != null && enablepager == 'true') {
             {
                 mainscope.enablepager = true;
@@ -123,10 +123,8 @@ function commentclosure(varname) {
                     function () {
 
                         switch (mainscope.viewmode) {
-                            case 1:
-                                //Visualizzazione tipo scroller
+                            case 1://Visualizzazione tipo scroller
                                 //inizializzaiomo lo scroller
-
                                 inizializzastars();
                                 //Inizializzo lo scroller
                                 jQuery(document).ready(function () {
@@ -145,13 +143,43 @@ function commentclosure(varname) {
                                     // Custom Navigation Events
                                     jQuery("#" + mainscope.idcontainer + '-ctrl' + "next").click(function () {
                                         owl.trigger('owl.next');
-                                    })
+                                    });
                                     jQuery("#" + mainscope.idcontainer + '-ctrl' + "prev").click(function () {
                                         owl.trigger('owl.prev');
-                                    })
+                                    });
                                 });
 
 
+                                break;
+                            case 2: //visualizzazione lista senza form inserimento
+                                /////////////////////////////////////////////////////////////////
+                                //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
+                                /////////////////////////////////////////////////////////////////
+                                if ((mainscope.commentsvisible) || (username != null && username != '')) {
+                                    $("#" + mainscope.idcontainer).prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbacks'));
+                                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbackstitle'));
+                                    inizializzastars();
+                                }
+                                /////////////////////////////////////////////////////////////////
+
+                                ///////////////////////////
+                                //GESTIONE PAGINAZIONE//
+                                ///////////////////////////
+                                if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
+                                    $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
+                                    inizializzapager(mainscope.idcontainer + '-pager');
+                                }
+                                ///////////////////////////
+
+                                /////////////////////////////////////////////////////////////////
+                                //Inizializziamo i commenti
+                                /////////////////////////////////////////////////////////////////
+                                var aperto = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
+                                $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea                                $('textarea').autoHeight();
+                                if (!aperto)
+                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                /////////////////////////////////////////////////////////////////
                                 break;
                             default:
                                 /////////////////////////////////////////////////////////////////
@@ -186,6 +214,7 @@ function commentclosure(varname) {
                                 mainscope.localcontainer.item['Nome'] = testonome.trim();
                                 mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
                                 dummyarray.push(mainscope.localcontainer.item);
+                                //Carico il form per inserimento e inizializzo
                                 ShowList(templateHtml, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
                                     function () {
                                         $('#tresponse').html(mainscope.message);
