@@ -241,7 +241,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             //    CaricaDdlsedi("");
             //    break;
             case "Richiesta":
-                plhForm.Visible = false;
+                plhForm.Visible = true;
                 break;
             default:
                 plhForm.Visible = true;

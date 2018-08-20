@@ -333,10 +333,10 @@ function graphicElementsinit(controlid) {
     //Custom Navigation Events
     $("#" + controlid + "next").click(function () {
         $("#" + controlid + "owl-gallery").trigger('owl.next');
-    })
+    });
     $("#" + controlid + "prev").click(function () {
         $("#" + controlid + "owl-gallery").trigger('owl.prev');
-    })
+    });
 }
 function graphicElementsreinit(controlid) {
 
