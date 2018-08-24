@@ -85,7 +85,7 @@
                 </div>
                 <div class="float-right" id="divCambioLinguaen" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="false">
                 </div>
-                <div class="float-right" id="divCambioLinguadef" style="margin-left: 15px; margin-top: 2px; padding: 2px; font-size: 1rem; background-color: #33332e; border-radius: 3px" runat="server" visible="true">
+                <div class="float-right" id="divCambioLinguadef" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="true">
                     <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                         <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
