@@ -707,15 +707,13 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-left">
+    
+    <%--  <div class="col-12 text-left">
                 <%= references.ResMan("basetext",Lingua,"feedbacksinserisci") %>  <br />
-            </div>
-            <div id="divCommenti" class="inject" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','','true','1','35'"></div>
+            </div>--%>
+    <div id="divCommenti" class="inject py-3" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
 
-        </div>
-    </div>
+
     <div style="background-color: #fff; position: relative">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none;  margin-left: 30px; margin-right: 30px">

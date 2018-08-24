@@ -567,6 +567,8 @@
     "~/js/owl-carousel/owl-carousel/owl.carousel.css",
     "~/js/flexslider/flexslider.css",
     "~/js/magnify/css/magnify.css",
+        "~/css/ashobiz/ashobiz.base.css",
+    "~/css/ashobiz/ashobiz-176.css",
     "~/css/ui-personalization.css",
      //"~/fonts/icon54/style.css",
      //"~/fonts/icon54v1/style.css",

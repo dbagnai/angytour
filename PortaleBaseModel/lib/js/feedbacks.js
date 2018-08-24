@@ -15,17 +15,17 @@ function commentclosure(varname) {
     this.viewmode = 0; //Imposta la modalità di visualizzazione 0 - default completo di form inserimento 1 - scroller commenti ultimi 2- lista commenti senza form inserimento
     this.mailadvice = true; //abilitazioneinvio mail di avviso inserimento di feedback per il gestore
     this.templatehtml = 'feedbacklist.html'; //default template per visualizzazione dei commenti
+    this.templatehtmlinsert = 'feedbackinsert1.html'; //default template per visualizzazione dei commenti
+    this.noinsertform = false;
+    this.insertformup = false;
 
     var mainscope = this;
     this.message = '';
     this.localcontainer = {};
     this.objfiltro = {};
-    //this.idpost = idpost || '';
-    //this.idcontainer = idcontainer || '';
 
     this.idpost = '';
     this.idcontainer = '';
-
     this.enablepager = false;
     this.nomecliente = "";
     this.cognomecliente = "";
@@ -39,22 +39,25 @@ function commentclosure(varname) {
     //function rendercommentsloadref(idpost, idcontainer) {
     //    loadref(rendercomments, idpost, idcontainer, lng);
     //}
-    this.rendercommentsloadref = function (idpost, idcontainer, templatecustom, enablepager, page, pagesize, maxrecord, onlytotals, viewmode) {
+    this.rendercommentsloadref = function (idpost, idcontainer, templatecustom, enablepager, page, pagesize, maxrecord, onlytotals, viewmode, noinsertform, insertformup, templatehtmlinsert) {
+
+        if (templatehtmlinsert != '' && templatehtmlinsert != null)
+            mainscope.templatehtmlinsert = templatehtmlinsert;
 
         if (templatecustom != '' && templatecustom != null)
             mainscope.templatehtml = templatecustom;
+        if (noinsertform != '' && noinsertform != null)
+            mainscope.noinsertform = noinsertform;
+        if (insertformup != '' && insertformup != null)
+            mainscope.insertformup = insertformup;
 
         if (onlytotals != '' && onlytotals != null)
             mainscope.onlytotals = onlytotals;
-        //else
-        //    mainscope.onlytotals = false;
 
         if (viewmode != '' && viewmode != null)
             mainscope.viewmode = viewmode;
         //else
         //    mainscope.viewmode = 0;
-
-
 
         if (enablepager != '' && enablepager != null && enablepager == 'true') {
             {
@@ -109,22 +112,21 @@ function commentclosure(varname) {
         if (mainscope.commentsvisible) tmpfilter = mainscope.objfiltro;
 
         caricacommentsbyidpost(lng, tmpfilter, function (ret, mainscope) {
-
             if (mainscope.onlytotals) {
                 if (mainscope.localcontainer.totaleapprovati > 0) {
-                    $("#" + mainscope.idcontainer).prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbacks1'));
-                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbackstitle1'));
+
+                    $("#" + mainscope.idcontainer).prepend("<span class='feedTotals'  id='" + mainscope.idcontainer + "-totals'></span>");
+                    $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks1'));
+                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle1'));
                     inizializzastars();
                 }
             }
             else
                 ShowList(mainscope.templatehtml, mainscope.idcontainer, mainscope.idcontainer + '-ctrl', mainscope.localcontainer.list,
                     function () {
-
                         switch (mainscope.viewmode) {
-                            case 1:
-                                //Visualizzazione tipo scroller
+                            case 1:     //Visualizzazione tipo scroller
                                 //inizializzaiomo lo scroller
                                 inizializzastars();
                                 //Inizializzo lo scroller
@@ -140,51 +142,55 @@ function commentclosure(varname) {
                                         afterInit: lazyLoad,
                                         afterMove: lazyLoad
                                     });
-
                                     // Custom Navigation Events
                                     jQuery("#" + mainscope.idcontainer + '-ctrl' + "next").click(function () {
                                         owl.trigger('owl.next');
-                                    })
+                                    });
                                     jQuery("#" + mainscope.idcontainer + '-ctrl' + "prev").click(function () {
                                         owl.trigger('owl.prev');
-                                    })
+                                    });
                                 });
-
-
                                 break;
-                            case 2:
-                                /////////////////////////////////////////////////////////////////
-                                //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
-                                /////////////////////////////////////////////////////////////////
-                                if ((mainscope.commentsvisible) || (username != null && username != '')) {
-                                    $("#" + mainscope.idcontainer).prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbacks'));
-                                    //  $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbackstitle'));
-                                    inizializzastars();
-                                }
-                                /////////////////////////////////////////////////////////////////
+                            //case 2: //Visualizzazione tipo lista senza form inserimento
+                            //    var aperto = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
 
-                                ///////////////////////////
-                                //GESTIONE PAGINAZIONE//
-                                ///////////////////////////
-                                if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
-                                    $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
-                                    inizializzapager(mainscope.idcontainer + '-pager');
-                                }
-                                ///////////////////////////
-                                inizializzastars();
-                                $('textarea').autoHeight();
-                                ///////////////////////////////////
+                            //    //////////////////////////////////////////////////////////////////////
+                            //    //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
+                            //    //////////////////////////////////////////////////////////////////////
+                            //    if ((mainscope.commentsvisible) || (username != null && username != '')) {
+                            //        $("#" + mainscope.idcontainer + '-ctrl').prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                            //        $("#" + mainscope.idcontainer + '-ctrl').prepend(GetResourcesValue('feedbacks'));
+                            //        //  $("#" + mainscope.idcontainer+ '-ctrl').prepend(GetResourcesValue('feedbackstitle'));
+                            //        inizializzastars();
+                            //    }
+                            //    /////////////////////////////////////////////////////////////////
 
-                                break;
+                            //    ///////////////////////////
+                            //    //GESTIONE PAGINAZIONE/////
+                            //    ///////////////////////////
+                            //    if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
+                            //        $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
+                            //        inizializzapager(mainscope.idcontainer + '-pager');
+                            //    }
+                            //    ////////////////////////////////////
+                            //    inizializzastars();
+                            //    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                            //    $('textarea').autoHeight();
+                            //    if (!aperto)
+                            //        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                            //    ///////////////////////////////////
+
+                            //    break;
+
                             default:
                                 /////////////////////////////////////////////////////////////////
                                 //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
                                 /////////////////////////////////////////////////////////////////
                                 if ((mainscope.commentsvisible) || (username != null && username != '')) {
-                                    $("#" + mainscope.idcontainer).prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbacks'));
-                                    $("#" + mainscope.idcontainer).prepend(GetResourcesValue('feedbackstitle'));
+                                    $("#" + mainscope.idcontainer).prepend("<div class='feedTotals container pt-1'  id='" + mainscope.idcontainer + "-totals'></div>");
+                                    $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks'));
+                                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle'));
                                     inizializzastars();
                                 }
                                 /////////////////////////////////////////////////////////////////
@@ -201,31 +207,41 @@ function commentclosure(varname) {
                                 /////////////////////////////////////////////////////////////////
                                 //Inseriamo il tool per permettere l'inserimento di un comment
                                 /////////////////////////////////////////////////////////////////
-                                var aperto = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
-                                $("#" + mainscope.idcontainer).prepend("<div  id='" + mainscope.idcontainer + "-head'></div>");
-                                var templateHtml = "feedbackinsert.html";
-                                var dummyarray = [];
-                                //Precompliamo i campi necessari per il form di inserimento
-                                var testonome = mainscope.nomecliente + ' ' + mainscope.cognomecliente;
-                                mainscope.localcontainer.item['Nome'] = testonome.trim();
-                                mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
-                                dummyarray.push(mainscope.localcontainer.item);
-                                ShowList(templateHtml, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
-                                    function () {
-                                        $('#tresponse').html(mainscope.message);
-                                        //window.scroll(0, document.querySelector("#tresponse").offsetTop - 0);
-                                        if (mainscope.message.length > 0)
-                                            $('html, body').animate({ scrollTop: $("#tresponse").offset().top - 150 }, 100);
-                                        mainscope.message = "";
+                                if (!mainscope.noinsertform) {
+                                    if (mainscope.insertformup)
+                                        $("#" + mainscope.idcontainer).prepend("<div  id='" + mainscope.idcontainer + "-head'></div>");
+                                    else
+                                        $("#" + mainscope.idcontainer).append("<div  id='" + mainscope.idcontainer + "-head'></div>");
 
-                                        inizializzastars();
+                                    var dummyarray = [];
+                                    //Precompliamo i campi necessari per il form di inserimento
+                                    var testonome = mainscope.nomecliente + ' ' + mainscope.cognomecliente;
+                                    mainscope.localcontainer.item['Nome'] = testonome.trim();
+                                    mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
+                                    dummyarray.push(mainscope.localcontainer.item);
 
-                                        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
-                                        $('textarea').autoHeight();
-                                        if (!aperto)
-                                            $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                    var aperto1 = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
+                                    ShowList(mainscope.templatehtmlinsert, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
+                                        function () {
+                                            $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(mainscope.message);
+                                            //window.scroll(0, document.querySelector("#' + mainscope.idcontainer + 'tresponse").offsetTop - 0);
+                                            if (mainscope.message.length > 0)
+                                                $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
+                                            mainscope.message = "";
 
-                                    });
+                                            inizializzastars();
+                                            $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                            $('textarea').autoHeight();
+                                            if (!aperto1)
+                                                $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                        });
+                                } else {
+                                    inizializzastars();
+                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                    $('textarea').autoHeight();
+                                    if (!aperto1)
+                                        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                }
                                 /////////////////////////////////////////////////////////////////
                                 break;
                         }
@@ -492,13 +508,13 @@ function commentclosure(varname) {
                     updatecomments(lng, mainscope.localcontainer.list[j], function (ret) {
                         console.log(ret);
                         if (ret == '' || ret == null)
-                            //$('#tresponse').html('Recenzione inserita in attesa di approvazione');
+                            //$('#' + mainscope.idcontainer + 'tresponse').html('Recenzione inserita in attesa di approvazione');
                             mainscope.message = 'Recensione aggiornata';
                         else
-                            //  $('#tresponse').html('Errore: ' + ret);
+                            //  $('#' + mainscope.idcontainer + 'tresponse').html('Errore: ' + ret);
                             mainscope.message = 'Errore: ' + ret;
                         mainscope.rendercomments(mainscope.idpost, mainscope.idcontainer);
-                    })
+                    });
                     // mainscope.localcontainer.list[j] //elemento da passare per l'aggiornamento
                 }
             }
@@ -585,10 +601,10 @@ function commentclosure(varname) {
             callback('Inserire email'); return;
         }
         if (item["Titolo" + lng] == 0 || item["Titolo" + lng].length == 0) {
-            callback('Inserire un titolo per la recenzione');; return;
+            callback('Inserire un titolo per la recenzione'); return;
         }
         if (item["Testo" + lng] == 0 || item["Testo" + lng].length == 0) {
-            callback('Inserire un messaggio di testo per la recenzione');; return;
+            callback('Inserire un messaggio di testo per la recenzione'); return;
         }
 
         callback('');
@@ -632,9 +648,9 @@ function commentclosure(varname) {
 
         Validazionedati(item,
             function (ret) {
-                $('#tresponse').html(ret);
+                $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(ret);
                 if (ret.length > 0) {
-                    $('html, body').animate({ scrollTop: $("#tresponse").offset().top - 150 }, 100);
+                    $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
                     return;
                 }
 
@@ -669,9 +685,9 @@ function commentclosure(varname) {
 
         Validazionedati(item,
             function (ret) {
-                $('#tresponse').html(ret);
+                $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(ret);
                 if (ret.length > 0) {
-                    $('html, body').animate({ scrollTop: $("#tresponse").offset().top - 150 }, 100);
+                    $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
                     $('#' + mainscope.idcontainer + '-head-ctrlinsertbtn').removeAttr("disabled");
                     return;
                 }

@@ -1,16 +1,23 @@
 ﻿
-<ul id="replaceid" style="list-style:none">
+<ul id="replaceid" style="list-style:none" class="container py-4">
     <li style="margin-bottom:10px">
         <div class="row">
-            <div class="col-12 text-left"><i class="fa fa-2x fa-comments-o"></i><h4 style="margin:5px auto 5px auto"><span class="bind" mybind="Nome"></span></h4></div>
-            <div class="col-12 text-left">
-                <span style="font-weight:500" class="bind" mybind="Titolo" idbind="Id"></span>
+            <div class="a-176 col-12" style="background-color:#f0f0f0">
+                <!-- Color Span Blocks -->
+                <!-- Same color of different colors -->
+                <span class="a-bxg-COLOR"></span>
+                <span class="a-bg-petrol"></span>
+                <span class="a-bg-petrol"></span>
+                <div class=" text-left"><i class="fa fa-2x fa-comments-o"></i><h4 style="margin:5px auto 5px auto"><span class="bind" mybind="Nome"></span></h4></div>
+                <div class=" text-left">
+                    <span style="font-weight:500" class="bind" mybind="Titolo" idbind="Id"></span>
+                </div>
+                <div class=" text-left">
+                    <span class="rating bind" mybind="stelle" idbind="Id" disabled data-default-rating="2.5"></span><br />
+                </div>
+                <div class=" text-left"><div style="font-size:0.9rem;margin-bottom:3px" class="bind noborders" mybind="Data" myvalue="" format="formatdata" /></div>
+                <div class="" style="text-align:left"><textarea style="overflow: visible;width:100%" readonly class="bind noborders" mybind="Testo" idbind="Id"></textarea></div>
             </div>
-            <div class="col-12 text-left">
-                <span class="rating bind" mybind="stelle" idbind="Id" disabled data-default-rating="2.5"></span><br />
-            </div>
-            <div class="col-12 text-left"><div style="font-size:0.9rem;margin-bottom:3px" class="bind noborders" mybind="Data" myvalue="" format="formatdata" /></div>
-            <div class="col-12" style="text-align:left"><textarea style="overflow: visible" readonly class="bind noborders" mybind="Testo" idbind="Id"></textarea></div>
         </div>
     </li>
 </ul> 
