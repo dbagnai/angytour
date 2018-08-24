@@ -74,3 +74,13 @@ var scrolltotop = {
 }
 
 scrolltotop.init();
+
+/*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
+$(window).scroll(function () {
+    if ($(window).scrollTop() > 100) {
+        $('#topcontrol').show();
+    }
+    else {
+        $('#topcontrol').hide();
+    }
+});
