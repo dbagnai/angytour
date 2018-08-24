@@ -525,6 +525,55 @@ a.buttonmenu:hover {
   color: #000 !important;
 }
 /*----------------------------------
+PULSANTE SCORRIMENTO BANNER E PAGINA
+----------------------------------*/
+.pulsanti-scorrimento,
+.tp-leftarrow.square,
+.tp-rightarrow.square {
+  font-size: 42px;
+  line-height: 38px;
+  background: #fff !important;
+  border: 1px solid #032f2f;
+  color: #032f2f !important;
+  width: 42px;
+  text-align: center;
+  border-radius: 50%;
+  margin: 5px;
+  height: 42px;
+}
+.pulsanti-scorrimento:hover,
+.tp-leftarrow.square:hover,
+.tp-rightarrow.square:hover {
+  color: #fff !important;
+  background: #032f2f !important;
+  border-color: #032f2f;
+  opacity: 0.78;
+  text-decoration: none !important;
+  border: 1px solid #098f8f;
+}
+.tp-leftarrow.square,
+.tp-rightarrow.square {
+  z-index: 100;
+  cursor: pointer;
+  background: none;
+}
+.tp-leftarrow.square:before {
+  content: "\f104";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  margin-left: -5px;
+}
+.tp-rightarrow.square:before {
+  content: "\f105";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  margin-left: 5px;
+}
+/*----------------------------------
 ------ PULSANTE IMAGE HOVER --------
 ----------------------------------*/
 .work-image:after {

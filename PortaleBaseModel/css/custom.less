@@ -565,6 +565,60 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 /*----------------------------------
+PULSANTE SCORRIMENTO BANNER E PAGINA
+----------------------------------*/
+.pulsanti-scorrimento {
+    font-size: 42px;
+    line-height: 38px;
+    background: @white-color !important;
+    border: 1px solid @button-outline-color;
+    color: @button-outline-color !important;
+    width: 42px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 5px;
+    height: 42px;
+}
+
+.pulsanti-scorrimento:hover {
+    color: @button-outline-hover-color !important;
+    background: @bg-button-outline-hover-color !important;
+    border-color: @bg-button-outline-hover-color;
+    opacity: 0.78;
+    text-decoration: none !important;
+    border: 1px solid @bg-button-color;
+}
+
+.tp-leftarrow.square, .tp-rightarrow.square {
+    &:extend(.pulsanti-scorrimento);
+    z-index: 100;
+    cursor: pointer;
+    background: none;
+}
+
+.tp-leftarrow.square:hover, .tp-rightarrow.square:hover {
+    &:extend(.pulsanti-scorrimento:hover);
+}
+
+.tp-leftarrow.square:before {
+    content: "\f104";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left: -5px;
+}
+
+.tp-rightarrow.square:before {
+    content: "\f105";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left: 5px;
+}
+
+/*----------------------------------
 ------ PULSANTE IMAGE HOVER --------
 ----------------------------------*/
 .work-image:after {
