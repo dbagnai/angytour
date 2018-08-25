@@ -673,7 +673,7 @@ namespace WelcomeLibrary.UF
 
             try
             {
-                string query = "SELECT * FROM TBL_URLREWRITING WHERE Calledurl=@Calledurl";
+                string query = "SELECT * FROM TBL_URLREWRITING WHERE Calledurl like @Calledurl";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@Calledurl", calledurl);//OleDbType.VarChar
                 parColl.Add(p1);
