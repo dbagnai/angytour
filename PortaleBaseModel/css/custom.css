@@ -1,5 +1,6 @@
-﻿/*@import "~/css/less/bootstrap/bootstrap.less";*/
-@import url('https://fonts.googleapis.com/css?family=Amiri:400,700|Fira+Sans+Extra+Condensed:300,400,500,600,700|Fira+Sans:300,400,500,600,700|Frank+Ruhl+Libre:300,400,500,700|Lato:300,400|Libre+Baskerville:400,700|Merriweather+Sans:300,400,700|Merriweather:300,400,700|Montserrat|Noto+Sans:400,700|Noto+Serif:400,700|Open+Sans:300,400,700|PT+Sans+Narrow:400,700|Playfair+Display+SC:700|Raleway|Roboto:300,400|Rubik:300,300i,400,700|Song+Myung|Source+Sans+Pro:300,400,700|Oswald:400,500,700');
+﻿/*----------------------------------
+IMPORTAZ. STILI COMBINAZIONI COLORI
+----------------------------------*/
 /*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
@@ -13,12 +14,12 @@
 /*footer-bottom*/
 /*#555;*/
 /**/
+/*sfondo modulo contatto*/
 /**/
 /*menu - titoli-principali*/
 /*#232323;*/
 /*sotto-titoli-principali - body*/
 /*#555;*/
-/* colore complementare */
 /* sistema di colori a triade */
 /* sistema di colori tonali */
 /*----------------------------------
@@ -85,13 +86,12 @@
 /*----------------------------------
 ///| BANNER news-letter e mail |////
 ----------------------------------*/
-/*
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////|                   |///////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////|   FINE CLASSI @   |///////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////|                   |///////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
+/*@import "custom-bicromo.less";*/
+/*@import "custom-colore-complementare.less";*/
+/*----------------------------------
+////////| IMPORTAZIONE FONT |///////
+----------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Amiri:400,700|Fira+Sans+Extra+Condensed:300,400,500,600,700|Fira+Sans:300,400,500,600,700|Frank+Ruhl+Libre:300,400,500,700|Lato:300,400|Libre+Baskerville:400,700|Merriweather+Sans:300,400,700|Merriweather:300,400,700|Montserrat|Noto+Sans:400,700|Noto+Serif:400,700|Open+Sans:300,400,700|PT+Sans+Narrow:400,700|Playfair+Display+SC:700|Raleway|Roboto:300,400|Rubik:300,300i,400,700|Song+Myung|Source+Sans+Pro:300,400,700|Oswald:400,500,700');
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -106,12 +106,6 @@
 }
 .bg-dark-color {
   background-color: #098f8f !important;
-}
-.bg-complement-color {
-  background-color: #8f0909 !important;
-}
-.bg-manual-secondary-color {
-  background-color: #d2ac67 !important;
 }
 .bg-manual-secondary-color-fade {
   background-color: rgba(7, 119, 119, 0.7) !important;
@@ -171,12 +165,12 @@
 ----------------------------------*/
 .menuzord,
 .menuzord * {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   border-color: rgba(9, 143, 143, 0.45) !important;
 }
 .menuzord.white .menuzord-menu > li > a {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 1rem;
 }
 .menuzord.white .menuzord-menu > li.active > a,
@@ -200,7 +194,7 @@
 }
 .simplemenu,
 .simplemenu * {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   border-color: rgba(9, 143, 143, 0.45) !important;
 }
 .simplemenu > ul > li > ul > li {
@@ -258,7 +252,7 @@ div#blocco-lgo-home {
 .cart-quantity,
 .cart-total {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 3rem;
   font-weight: 300 !important;
   text-transform: uppercase;
@@ -287,7 +281,7 @@ div#blocco-lgo-home {
 }
 .mbr-section-subtitle {
   color: #077777;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 1.8rem;
   font-weight: 400;
   font-style: normal;
@@ -511,18 +505,20 @@ footer .divbuttonstyle:hover {
   text-decoration: none !important;
   border: 1px solid #098f8f;
 }
-.buttonmenu {
-  background: #098f8f !important;
-  color: #fff !important;
-  border: 1px solid #098f8f;
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  border-radius: 25px;
-}
-.buttonmenu:hover,
-a.buttonmenu:hover {
-  background-color: #86f7f7 !important;
-  color: #000 !important;
+@media (min-width: 1025px) {
+  .buttonmenu {
+    background: #098f8f !important;
+    color: #fff !important;
+    border: 1px solid #098f8f;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+  }
+  .buttonmenu:hover,
+  a.buttonmenu:hover {
+    background-color: #86f7f7 !important;
+    color: #000 !important;
+  }
 }
 /*----------------------------------
 PULSANTE SCORRIMENTO BANNER E PAGINA
@@ -672,7 +668,7 @@ ul.footer-category-list {
 }
 .footer .footer-col .footer-title {
   color: #098f8f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-weight: 600;
   border-bottom: 1px solid #098f8f;
 }
@@ -718,7 +714,7 @@ ul.footer-category-list {
 }
 .bigtext {
   color: #fff;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 4rem !important;
   font-weight: 100;
   text-align: center;
@@ -728,7 +724,7 @@ ul.footer-category-list {
 }
 .smalltext {
   color: #fff;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 2.5rem !important;
   font-weight: 700;
   text-align: center;
@@ -745,7 +741,7 @@ ul.footer-category-list {
 .title-isotope,
 .big2 {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 2.2rem;
   font-weight: 600;
   width: 100%;
@@ -783,7 +779,7 @@ ul.footer-category-list {
 .isotope-navigation .work-subcaption .work-title,
 .titolo-offerta {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 1.4rem;
   font-weight: 600;
   font-style: normal;
@@ -1013,7 +1009,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .isotope-staff .work-subcaption .work-title {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 1.4rem;
   font-weight: 600;
   font-style: normal;
@@ -1053,7 +1049,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .title-banner-slider {
   color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Cantata+One', serif;
   font-size: 1.4rem;
   font-weight: 600;
   font-style: normal;

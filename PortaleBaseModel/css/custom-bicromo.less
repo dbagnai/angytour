@@ -1,0 +1,143 @@
+﻿/*----------------------------------
+/////////| COLORI BLOCCHI |/////////
+----------------------------------*/
+@bg-base-color: #205499; /*logo - sfondo-pulsanti - link*/
+@bg-primary-color: #8daa65; /*logo - sfondo-pulsanti - fixed-top*/
+@bg-secondary-color: fade(@bg-primary-color, 45%); /*footer-link*/
+@bg-light-color: fade(@bg-primary-color, 8%); /*footer-social e banner*/
+@bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/
+/**/
+@bg-manual-secondary-color-fade: fade(@secondary-color, 70%); /*sfondo modulo contatto*/
+/**/
+@primary-color: darken(@bg-dark-color, 30%); /*menu - titoli-principali*/
+@secondary-color: lighten(@primary-color, 15%); /*sotto-titoli-principali - body*/
+@black-color: #000;
+@white-color: #fff;
+/*----------------------------------
+//////////////| FONT |//////////////
+----------------------------------*/
+@primary-font: 'Cantata+One', serif; /*menu - titoli-principali*/
+@secondary-font: 'Cantata+One', serif; /*sotto-titoli-principali*/
+@base-font: 'Roboto', sans-serif; /*body*/
+@alternative-font: 'EBGaramond12-Regular', serif;
+/*----------------------------------
+//////////////| MENU |//////////////
+----------------------------------*/
+@menu-size: 1rem;
+@menu-font: @base-font;
+@menu-color: @bg-base-color;
+@menu-hover-color: fade(@bg-base-color, 65%);
+@menu-hover-weight: 600;
+/**/
+@submenu-color: @bg-base-color;
+@submenu-hover-color: fade(@bg-base-color, 65%);
+@submenu-weight: 400;
+/*----------------------------------
+/////////////| BUTTON |/////////////
+----------------------------------*/
+@button-size: 0.8rem;
+@button-font: @base-font;
+@bg-button-color: @bg-base-color;
+@bg-button-hover-color: lighten(@bg-base-color, 45%);
+@button-color: @white-color;
+@button-hover-color: @black-color;
+/**/
+@bg-button-outline-color: @white-color;
+@bg-button-outline-hover-color: @bg-base-color;
+@button-outline-color: @bg-base-color;
+@button-outline-hover-color: @white-color;
+/*----------------------------------
+///////////| FONT PAGE |///////////
+----------------------------------*/
+@tite-size: 3rem;
+@title-color: @primary-color;
+@tite-font: @primary-font;
+@title-weight: 300;
+@title-text-transform: none; /*uppercase;*/
+/**/
+@subtite-size: 1.8rem;
+@subtitle-color: @secondary-color;
+@subtite-font: @primary-font;
+@subtitle-weight: 400;
+/**/
+@body-size: 1.35rem;
+@body-color: @primary-color;
+/*@body-color: @secondary-color;*/
+@body-font: @base-font;
+@body-weight: 300;
+/**/
+@scheda-title-color: @primary-color;
+@scheda-subtitle-color: @secondary-color;
+@scheda-size: 1.1rem;
+@scheda-color: @primary-color;
+@scheda-font: @base-font;
+/*----------------------------------
+//////////| FORM CONTATTI |/////////
+----------------------------------*/
+@bg-testata-opacity-white: fade(@white-color, 60%);
+/*----------------------------------
+/////////////| FOOTER |/////////////
+----------------------------------*/
+@title-footer-color: @bg-dark-color;
+@title-footer-color-hover: @white-color;
+@title-footer-border-color: @bg-primary-color;
+/**/
+@link-footer-color: @white-color;
+@link-footer-color-hover: @primary-color;
+/**/
+@body-footer-color: @white-color;
+/*----------------------------------
+/////////////| BANNER |/////////////
+----------------------------------*/
+@title-banner-font: @primary-font;
+@title-banner-color: @primary-color;
+/**/
+@subtitle-banner-font: @base-font;
+@subtitle-banner-color: @primary-color;
+/*----------------------------------
+//////| BANNER TESTATA HOME |///////
+----------------------------------*/
+@bg-testata-opacity: fade(@black-color, 20%);
+/**/
+@title-testata-home-size: 4rem;
+@title-testata-home-font: @primary-font;
+@title-testata-home-color: @white-color;
+@title-testata-home-weight: 100;
+/**/
+@subtitle-testata-home-size: 2.5rem;
+@subtitle-testata-home-font: @primary-font; /*@alternative-font;*/
+@subtitle-testata-home-color: @white-color;
+/*----------------------------------
+/////////| BANNER FASCIA |//////////
+----------------------------------*/
+@width-banner-fascia: 1600px;
+/**/
+@title-banner-fascia-size: 2.2rem;
+/**/
+@subtitle-banner-fascia-size: 1.6rem;
+/**/
+@body-banner-fascia-size: 1.3rem;
+/*----------------------------------
+///////| BANNER NAVIGAZIONE |///////
+----------------------------------*/
+@banner-navigazione-width: 100%;
+@banner-navigazione-padding: inherit;
+@banner-navigazione-radius: .25rem;
+@banner-navigazione-background: @white-color;
+/**/
+@title-banner-navigazione-size: 1.4rem;
+@subtitle-banner-navigazione-size: 1.2rem;
+/*----------------------------------
+/////////| BANNER SLIDER |//////////
+----------------------------------*/
+@margin-box-banner-slider: 14px;
+@bg-box-banner-slider: @white-color;
+/**/
+@height-image-banner-slider: auto;
+@padding-image-banner-slider: 0;
+/**/
+@height-body-banner-slider: 190px;
+/*----------------------------------
+///| BANNER news-letter e mail |////
+----------------------------------*/
+@bg-opacity: fade(@black-color, 30%);
