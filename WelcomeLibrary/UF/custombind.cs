@@ -191,7 +191,8 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            //var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -317,7 +318,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -440,7 +441,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -571,7 +572,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -705,7 +706,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -878,7 +879,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -1279,7 +1280,7 @@ namespace WelcomeLibrary.UF
 
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -1473,7 +1474,7 @@ namespace WelcomeLibrary.UF
                                             Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection nel binding
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
@@ -1598,7 +1599,7 @@ namespace WelcomeLibrary.UF
                                             Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection nel binding
                                             HtmlNode cloneitem = cloneitemtemplate.Clone();
                                             //PROCEDURA DI BIND DATI
-                                            var bindingnodes = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
                                             if ((bindingnodes != null) && (bindingnodes.Count() > 0))
                                                 foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
                                                 {
