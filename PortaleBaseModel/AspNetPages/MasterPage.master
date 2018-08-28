@@ -571,7 +571,7 @@
             <div class="footer mt-0">
                 <div class="footerhead">
                     <div class="row justify-content-md-center">
-                        <div class="col-sm-4 align-self-center py-3">
+                        <div class="col-sm-4 align-self-center py-3 text-center text-md-left">
                             <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                                 <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
                             </a>
