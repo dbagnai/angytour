@@ -118,11 +118,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
 
         CaricaMenu();
-        //CaricaBannersAndControls();
-        // SettaTestoIniziale("Pannello Ricerca Sito");
-        VisualizzaTotaliCarrello();
+       // VisualizzaTotaliCarrello();
         LoadJavascriptVariables();
-        //  DataBind();
         pnlRicerca.DataBind();
         divContattiMaster.DataBind();
         req1.DataBind();
@@ -1165,16 +1162,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     public void VisualizzaTotaliCarrello()
     {
+        // litTotalHigh.Text = CarrelloHandler.VisualizzaTotaliCarrello(Context);
 
-        string sessionid = "";
-        string trueIP = "";
-        CommonPage.CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
 
-        eCommerceDM ecmDM = new eCommerceDM();
-        CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
-        double totalecarrello = CommonPage.CalcolaTotaleCarrello(Request, Session, carrello);
-        //if (totalecarrello == 0) divCart.Visible = false;
-        litTotalHigh.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { totalecarrello }) + " €";
     }
     #endregion
 

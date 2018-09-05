@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -117,20 +117,21 @@
                             </a>--%>
                     </div>
                     <%--CARRELLO--%>
-                    <asp:PlaceHolder runat="server" Visible="true">
-                        <div id="containerCarrello" class="float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                     
+                     <asp:PlaceHolder runat="server" Visible="true">
+                        <div   class="carrellomaincontainer float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                             <a class="float-right" style="color: #fff !important; border: none"
-                                id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="100,00 €" runat="server" ID="litTotalHigh" ClientIDMode="Static" CssClass="totalItems d-none d-sm-block" />
+                                  href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <asp:Label Text="" runat="server"  ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
                             </a>
                             <ul class="dropdown-menu dropdown-cart">
                                 <li>
-                                    <ul class="products-list-mini"
-                                        id="ContainerCarrelloDetails" runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                    <ul class="carrelloelemslist products-list-mini"
+                                         runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                     </ul>
                                 </li>
                                 <li class="divider"></li>
-                                <li class="my-1"><a id="A4" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <li class="my-1"><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
                                 <li class="divider"></li>
                                 <%-- <li><a
@@ -138,16 +139,17 @@
                                 <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %>
                             </a></li>
                             <li class="divider"></li>--%>
-                                <li><a id="A1" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                <li><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                                 </a></li>
                             </ul>
-                            <button type="button" class="dropdown-toggle float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="btnCarrelloHigh">
+                            <button type="button" class="dropdown-toggle float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
                                 <span class="caret" style="font-size: 20px; color: #fff"></span>
                                 <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
                             </button>
                         </div>
                     </asp:PlaceHolder>
+
                     <%--CARRELLO END--%>
                 </div>
                 <div class="simplemenu d-none d-sm-block">
@@ -250,34 +252,37 @@
                         </a>
                     </li>
                     <%--CARRELLO--%>
-                    <%--<li>
-                    <asp:PlaceHolder runat="server" Visible="true">
-                        <div id="containerCarrello" class="float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
-                            <a class="float-right" style="color: #fff !important; border: none"
-                                id="A6" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="100,00 €" runat="server" ID="Label1" ClientIDMode="Static" CssClass="totalItems d-none d-sm-block" />
+                     <li  runat="server" Visible="true">
+
+                         <asp:PlaceHolder runat="server" Visible="true">
+                        <div   class="carrellomaincontainer float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                            <a class="float-right" style="color: #666 !important; border: none"
+                                href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
                             </a>
                             <ul class="dropdown-menu dropdown-cart">
                                 <li>
-                                    <ul class="products-list-mini"
-                                        id="Ul1" runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                    <ul class="carrelloelemslist products-list-mini"
+                                        runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                     </ul>
                                 </li>
                                 <li class="divider"></li>
-                                <li class="my-1"><a id="A4" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <li class="my-1"><a   class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
                                 <li class="divider"></li>
-                                <li><a id="A1" class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                <li><a   class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
                                     <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                                 </a></li>
                             </ul>
-                            <button type="button" class="button-carrello float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server" id="Button1">
-                                <span class="caret" style="font-size: 20px; color: #fff"></span>
+                            <button type="button" class="button-carrello float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
+                                <span class="caret" style="font-size: 20px; color: #666"></span>
                                 <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
                             </button>
                         </div>
                     </asp:PlaceHolder>
-                </li>--%>
+
+                    
+                </li> 
                     <%--CARRELLO END--%>
 
                     <%-----------------------%>

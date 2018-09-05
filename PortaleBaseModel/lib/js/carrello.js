@@ -95,7 +95,7 @@ var carrellotool = new function () {
                 /***********************************************************************************************************************************************/
                 carrellotool.caricaquantita();
             });
-             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             //SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (ret) {
             //    /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
             //    idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
@@ -106,11 +106,11 @@ var carrellotool = new function () {
         },
         caricaquantita() {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            GetCurrentCarrelloQty('', idprodotto, '', idcarrello,false, function (ret) {
+            GetCurrentCarrelloQty('', idprodotto, '', idcarrello, false, function (ret) {
                 var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
                 $('#' + controlid + "qty").html(casellaqty);
             });
-             //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+            //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             //GetCurrentCarrelloQty('', idprodotto, '', idcarrello, true, function (ret) {
             //    var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
             //    $('#' + controlid + "qty").html(casellaqty);
@@ -283,13 +283,23 @@ function connectCarrelloEvents() {
         e.preventDefault();
     });
     //////////////////////////////////////////////////////////////////////
+
+    GetCarrelloTotal(); //Visualizza il totale del carrello
 }
 
 function GetCarrelloList(el) {
-    $(el).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText = "";
-    //if ($(el).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText == "") {
-    var codiceordine = $(el).parent().find("[id*='ContainerCarrelloDetails']").attr("title");
-    var contenitoredestinazione = $(el).parent().find("[id*='ContainerCarrelloDetails']");
+    //$(el).parent().find("[id*='ContainerCarrelloDetails']")[0].innerText = "";
+    //var codiceordine = $(el).parent().find("[id*='ContainerCarrelloDetails']").attr("title");
+    //var contenitoredestinazione = $(el).parent().find("[id*='ContainerCarrelloDetails']");
+
+
+    $(el).parent().find("[class*='carrelloelemslist']").each(function (index) {
+        // console.log(index + ": " + $(this).text());
+        $(this).html("");
+    });
+    var codiceordine = $(el).parent().find("[class*='carrelloelemslist']").attr("title");
+    var contenitoredestinazione = $(el).parent().find("[class*='carrelloelemslist']");
+
     //Caricamento ajax carrello!
     ShowCurrentCarrello(contenitoredestinazione, codiceordine);
     //}
@@ -331,7 +341,7 @@ function GetCarrelloItems(codiceordine, callback) {
             callback(result);
         },
         error: function (result) {
-           // callback(result.responseText);
+            // callback(result.responseText);
             callback('');
         }
     });
@@ -423,8 +433,10 @@ function OnSuccessAddsub(datain, destination, callback) {
         url: pathAbs + carrellohandlerpath + "?Lingua=" + lng + "&Azione=showtotal",
         data: {},
         success: function (data) {
-            $("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
-            //$("#containerCarrelloMobile").find("[id*='litTotalHigh']")[0].innerText = data; //????
+
+            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(data);
+            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+
             if (callback != null)
                 callback(datain);
         },
@@ -487,8 +499,10 @@ function OnSuccesscarrelloNopostback(response, destination, callback) {
         // dataType: "json",
         data: {},
         success: function (data) {
-            $("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
-            //$("#containerCarrelloMobile").find("[id*='litTotalHigh']")[0].innerText = data; //????
+            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(data);
+
+
+            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
             if (callback != null)
                 callback(true);
         },
@@ -498,6 +512,28 @@ function OnSuccesscarrelloNopostback(response, destination, callback) {
     });
 }
 
+
+function GetCarrelloTotal(callback) {
+    $.ajax({
+        destinationControl: '',
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        dataType: "text",
+        url: pathAbs + carrellohandlerpath + "?Lingua=" + lng + "&Azione=showtotal",
+        data: {},
+        success: function (data) {
+            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").text(data);
+            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            if (callback != null)
+                callback(data);
+        },
+        failure: function (response) {
+            //  alert(response);
+            if (callback != null)
+                callback('');
+        }
+    });
+}
 
 function GetCarrelloTotalForItem(idprodotto, idcombined, idcarrello, callback) {
     $.ajax({

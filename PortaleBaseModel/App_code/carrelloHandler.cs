@@ -227,7 +227,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
         }
     }
-    public string VisualizzaTotaliCarrello(HttpContext context, string idprodotto = "", string idcombined = "", string idcarrello = "")
+    public static string VisualizzaTotaliCarrello(HttpContext context, string idprodotto = "", string idcombined = "", string idcarrello = "")
     {
         string ret = "";
         string sessionid = "";
