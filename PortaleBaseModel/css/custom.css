@@ -565,13 +565,33 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 /*----------------------------------
 ------ PULSANTE IMAGE HOVER --------
 ----------------------------------*/
-.work-image:after {
+.work-item .card {
+  margin: 10px;
+  padding: 0px;
+}
+.card-img-overlay:hover {
+  /*background-color: rgba(0,0,0,0.5);
+    background-position: center center !important;*/
+  /*background-size: 50px 50px !important;*/
+  /*opacity: 0 !important;*/
+  /*width:100%;
+    height:auto;*/
+}
+.work-image:after,
+.imgovercontainer:after {
   background-position: center center !important;
   background-size: 50px 50px !important;
   opacity: 0 !important;
+  position: absolute;
+  display: block;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
 }
 .work-image:hover:after,
-ul li .work-image:hover:after {
+ul li .work-image:hover:after,
+.imgovercontainer:hover:after {
   z-index: 799 !important;
   /*background: url(/images/link.png) center center no-repeat !important;*/
   background: url(/images/link1.png) center center no-repeat !important;
@@ -1020,6 +1040,7 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 .sottotitolo-offerta {
   font-style: normal;
+  font-weight: 300;
 }
 /*----------------------------------
 ---------- ISOTOPE SLIDER ----------

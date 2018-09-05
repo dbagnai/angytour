@@ -467,24 +467,46 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     /*----------------------------------
 ------ PULSANTE IMAGE HOVER --------
 ----------------------------------*/
-    .work-image:after {
-        background-position: center center !important;
-        background-size: 50px 50px !important;
-        opacity: 0 !important;
-    }
 
-    .work-image:hover:after, ul li .work-image:hover:after {
-        z-index: 799 !important;
-        /*background: url(/images/link.png) center center no-repeat !important;*/
-        background: url(/images/link1.png) center center no-repeat !important;
-        /*background: url(/images/link2.png) center center no-repeat !important;
+
+.work-item .card {
+    margin: 10px;
+    padding: 0px;
+}
+
+.card-img-overlay:hover {
+    /*background-color: rgba(0,0,0,0.5);
+    background-position: center center !important;*/
+    /*background-size: 50px 50px !important;*/
+    /*opacity: 0 !important;*/
+    /*width:100%;
+    height:auto;*/
+}
+
+.work-image:after, .imgovercontainer:after {
+    background-position: center center !important;
+    background-size: 50px 50px !important;
+    opacity: 0 !important;
+    position: absolute;
+    display: block;
+    content: "";
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.work-image:hover:after, ul li .work-image:hover:after, .imgovercontainer:hover:after {
+    z-index: 799 !important;
+    /*background: url(/images/link.png) center center no-repeat !important;*/
+    background: url(/images/link1.png) center center no-repeat !important;
+    /*background: url(/images/link2.png) center center no-repeat !important;
     background: url(/images/link3.png) center center no-repeat !important;*/
-        background-size: 80px 80px !important;
-        background-color: rgba(0, 0, 0, 0.50) !important;
-        opacity: 1 !important;
-        -webkit-transition: all 0.35s ease;
-        transition: all 0.35s ease;
-    }
+    background-size: 80px 80px !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+    opacity: 1 !important;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
 
     /*----------------------------------
 -------------- FOOTER --------------
@@ -986,10 +1008,11 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
         &:extend(.isotope-navigation .work-subcaption .work-title);
     }
 
-    .sottotitolo-offerta {
-        &:extend(.isotope-navigation .work-subcaption .work-desc);
-        font-style: normal;
-    }
+.sottotitolo-offerta {
+    &:extend(.isotope-navigation .work-subcaption .work-desc);
+    font-style: normal;
+    font-weight: 300;
+}
 
     /*----------------------------------
 ---------- ISOTOPE SLIDER ----------

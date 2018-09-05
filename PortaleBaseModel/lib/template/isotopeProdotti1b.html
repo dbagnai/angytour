@@ -1,0 +1,67 @@
+﻿ <!-- Isotope  -->
+<div class="row" style="margin-bottom: 35px; margin-top: 20px; display: none">
+    <div class="col-sm-12">
+        <ul class="works-grid works-grid-gut works-grid-4 works-hover-lw" id="replaceid">
+            <li class="work-item">
+                <div class="card bd-secondary-color" style="overflow:hidden">
+                    <!--<div class="card-header"></div>-->
+
+                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                        <div class="position-relative imgovercontainer">
+                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top img-ant" mybind="Id" />
+                            <div class="card-img-overlay">
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
+
+                    <div class="card-body text-center">
+                        <h3 class="card-title titolo-offerta mb-2">
+                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                        </h3>
+
+                        <h4 class="card-subtitle sottotitolo-offerta mt-0">
+                            <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                        </h4>
+                        <!--<p class="card-text">
+        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="160" format="formatdescrizione"></span>
+    </p>-->
+
+                        <div class="container">
+                            <div class="row align-items-end">
+
+                                <div class=" col-6 float-left text-left">
+                                    <!-- DETTAGLI PRODOTTO -->
+                                    <div class="float-left my-0 mr-2">
+                                        <a onclick="javascript:JsSvuotaSession(this)" class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                            <div class="float-right bind button-carrello" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                                        </a>
+                                    </div>
+                                    <!-- AGGIUNGI AL CARRELLO -->
+                                    <div id="carrello-click" class="float-left my-0 bind carrello-stop" style="z-index:1" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
+                                    </div>
+
+                                </div>
+
+                                <!-- PREZZO -->
+                                <div class="col-6 float-right text-right" style="font-size:2rem; margin-top:12px">
+                                    <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                    <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div class="card-footer">Footer</div>-->
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Fine Isotope   -->
+
+
+
