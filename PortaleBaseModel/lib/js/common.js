@@ -945,7 +945,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).html(dataitem[proprarr[0]]);
                         }
                     }
-                    else if ($(this).is("span") && $(this).hasClass('rating')) {
+                    else if (($(this).is("span") || $(this).is("div")) && $(this).hasClass('rating')) {
                         $(this).attr("data-default-rating", dataitem[proprarr[0]]);
                         if ($(this).attr("idbind") != null)
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);

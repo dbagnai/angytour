@@ -100,6 +100,7 @@ public class feedbackHandler : IHttpHandler, IRequiresSessionState
                         bool.TryParse(filtri["approvati"], out bapprovati);
                         soloapprovati = bapprovati;
                     }
+                    
                     comments = comDM.CaricaCommentiFiltratiScript(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idpost, soloapprovati, maxrecord, page, pagesize);
 
                     comments.ForEach(c => c.Lingua = lingua);//permette di settare la lingua nella lista per usare la variabile testo e titolo già settate per lingua

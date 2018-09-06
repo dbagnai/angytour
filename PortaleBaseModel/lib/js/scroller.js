@@ -107,7 +107,7 @@ function renderScrollerList(localObjects, controlid, container) {
 function BindScroller(el, localObjects, container) {
 
     var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
+    var data = objcomplete["datalist"];
     if (!data.length) {
         $('#' + el).html('');
         return;
