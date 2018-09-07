@@ -1,0 +1,21 @@
+{
+  "short_name": "SitoBase",
+  "name": "Sito Base Sviluppo",
+  "icons": [
+    {
+      "src": "/images/icon-logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icon-logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/I/blog/notizie-18?source=pwa",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/I/blog/",
+  "theme_color": "#3367D6"
+}

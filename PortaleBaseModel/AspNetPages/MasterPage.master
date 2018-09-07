@@ -40,13 +40,14 @@
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link rel="manifest" href="~/manifest.json" runat="server">
 </head>
 <%--<body class="bckGray">--%>
 <body>
     <form id="form1" runat="server">
 
         <!--- Styles -->
-      
+
 
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
@@ -60,7 +61,6 @@
 
         <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
-        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
 
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -68,6 +68,7 @@
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
 
@@ -83,11 +84,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="float-right" id="divCambioLinguaen" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="false">
-                </div>
-                <div class="float-right" id="divCambioLinguadef" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="true">
-                    <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
-                        <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                <div runat="server" visible="true">
+                    <div class="float-right" id="divCambioLinguaen" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="false">
+                    </div>
+                    <div class="float-right" id="divCambioLinguadef" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="true">
+                        <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                            <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                    </div>
                 </div>
                 <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
                     <div class="social-icons-small float-left" style="display: block" runat="server" visible="true">
@@ -117,17 +120,17 @@
                             </a>--%>
                     </div>
                     <%--CARRELLO--%>
-                     
-                     <asp:PlaceHolder runat="server" Visible="true">
-                        <div   class="carrellomaincontainer float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+
+                    <asp:PlaceHolder runat="server" Visible="true">
+                        <div class="carrellomaincontainer float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                             <a class="float-right" style="color: #fff !important; border: none"
-                                  href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="" runat="server"  ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
+                                href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
                             </a>
                             <ul class="dropdown-menu dropdown-cart">
                                 <li>
                                     <ul class="carrelloelemslist products-list-mini"
-                                         runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                        runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                     </ul>
                                 </li>
                                 <li class="divider"></li>
@@ -178,7 +181,7 @@
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
-               
+
                 <div class="float-right d-none" style="padding-left: 8px; padding-top: 3px;" runat="server" visible="false">
                     <i class="fa fa-phone" style="color: #fff;"></i><a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                         <span style="color: #fff; font-weight: 400"><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
@@ -188,7 +191,7 @@
         </div>
 
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
-            
+
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fa fa-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
@@ -252,37 +255,37 @@
                         </a>
                     </li>
                     <%--CARRELLO--%>
-                     <li  runat="server" Visible="true">
+                    <li runat="server" visible="true">
 
-                         <asp:PlaceHolder runat="server" Visible="true">
-                        <div   class="carrellomaincontainer float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
-                            <a class="float-right" style="color: #666 !important; border: none"
-                                href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
-                            </a>
-                            <ul class="dropdown-menu dropdown-cart">
-                                <li>
-                                    <ul class="carrelloelemslist products-list-mini"
-                                        runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="my-1"><a   class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                    <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
-                                <li class="divider"></li>
-                                <li><a   class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
-                                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
-                                </a></li>
-                            </ul>
-                            <button type="button" class="button-carrello float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
-                                <span class="caret" style="font-size: 20px; color: #666"></span>
-                                <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
-                            </button>
-                        </div>
-                    </asp:PlaceHolder>
+                        <asp:PlaceHolder runat="server" Visible="true">
+                            <div class="carrellomaincontainer float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                                <a class="float-right" style="color: #666 !important; border: none"
+                                    href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                    <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
+                                </a>
+                                <ul class="dropdown-menu dropdown-cart">
+                                    <li>
+                                        <ul class="carrelloelemslist products-list-mini"
+                                            runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                        </ul>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class="my-1"><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
+                                        <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
+                                    <li class="divider"></li>
+                                    <li><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
+                                        <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
+                                    </a></li>
+                                </ul>
+                                <button type="button" class="button-carrello float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
+                                    <span class="caret" style="font-size: 20px; color: #666"></span>
+                                    <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
+                                </button>
+                            </div>
+                        </asp:PlaceHolder>
 
-                    
-                </li> 
+
+                    </li>
                     <%--CARRELLO END--%>
 
                     <%-----------------------%>
