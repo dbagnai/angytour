@@ -45,10 +45,9 @@
 <%--<body class="bckGray">--%>
 <body>
     <form id="form1" runat="server">
-
+        
+      <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
         <!--- Styles -->
-
-
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
         <script>
@@ -58,15 +57,13 @@
                 }
             });
         </script>--%>
-
         <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-
-
         <%--   JAVASCRIPT --%>
         <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
+
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
 

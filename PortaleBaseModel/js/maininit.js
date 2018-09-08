@@ -616,19 +616,7 @@ jQuery(document).ready(function ($) {
     //  addhovereffecttobootstrapnav();
 });
 
-/*DropDown Menu Hover effect*/
 
-function addhovereffecttobootstrapnav() {     //////////////////////////////////////////
-    //Add Hover effect to menus OF BOOTSTRAP
-    $('ul.nav li.dropdown').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn();
-    }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut();
-    });
-    //////////////////////////////////////
-}
-
-/* Portfolio */
 
 var loaded = false, timeout = 20000;//loaded flag for timeout
 setTimeout(function () {
@@ -640,9 +628,7 @@ setTimeout(function () {
 $(window).load(function () {
     loaded = true;
     centeringBullets();
-
     hideLoading();
-
     var $masonryElement = $('#masonry-elements');
     $masonryElement.isotope({
         transformsEnabled: false,
@@ -677,6 +663,17 @@ $(window).load(function () {
 
     //$('#masonry-elements,.portfolio-items').isotope('reLayout');
 });
+
+/*DropDown Menu Hover effect*/
+function addhovereffecttobootstrapnav() {     //////////////////////////////////////////
+    //Add Hover effect to menus OF BOOTSTRAP
+    $('ul.nav li.dropdown').hover(function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn();
+    }, function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut();
+    });
+    //////////////////////////////////////
+}
 
 /* Loading functions */
 function hideLoading() {

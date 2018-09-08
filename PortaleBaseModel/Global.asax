@@ -469,10 +469,12 @@
             BundleEngine.BundleOptions.minifyCss = true;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
             BundleEngine.BundleOptions.minifyJs = true;
+          BundleEngine.AddBundleJS("bundlejssw",
+            "~/sw.js", //Service Worker
+            "~/sw-register.js"  //Service Worker registration
+        );
 
         BundleEngine.AddBundleJS("bundlejslib0",
-            //"~/sw.js", //Service Worker
-            //"~/sw-register.js",  //Service Worker registration
             "~/js/jquery321/jquery-3.2.1.min.js",
             "~/js/jquery321/jquery-migrate-3.0.1.min.js",
              "~/js/bootstrap400/popper.min.js",
@@ -495,10 +497,10 @@
              "~/lib/js/common.js"
         );
 
-        BundleEngine.AddBundleJS("bundlejslib1", 
+        BundleEngine.AddBundleJS("bundlejslib1",
             //"~/js/magnify/js/jquery.magnify.js",
             // "~/js/magnify/js/jquery.magnify-mobile.js"
-            "~/lib/js/common.js",
+            //"~/lib/js/common.js",
             //"~/lib/js/immobili2.js",
             "~/lib/js/genericContent.js",
             "~/lib/js/genericBanner.js",
@@ -547,7 +549,6 @@
 
         BundleEngine.AddBundleCSS("bundlecss1",
             "~/js/bootstrap400/css/bootstrap.min.css",
-            //"~/css/less/bootstrap/bootstrap.less",
             "~/css/revolution_settings.css",
             "~/js/menuzord/files/css/menuzord.css",
             "~/js/menuzord/files/css/skins/menuzord-colored.css",
@@ -560,8 +561,6 @@
             "~/js/simplestarrating/SimpleStarRating.css",
               "~/css/style1.css",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
-            //"~/js/jquery-ui-1.11.4.custom/jquery-ui.min.css",
-            //"~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css",
             "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
             "~/js/notifications/notification.css",
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
@@ -570,13 +569,6 @@
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
-             //"~/fonts/icon54/style.css",
-             //"~/fonts/icon54v1/style.css",
-             //"~/fonts/icon54-v2/style.css",
-             //"~/css/mobirise-icons/mobirise-icons.css",
-             //"~/fonts/icons-mind/style.css",
-             //"~/fonts/linecons/style.css",
-             //"~/fonts/et-line-font-plugin/style.css",
              "~/css/opj/style-100.css", /*SET-COLORI*/
              "~/css/mbr-faq.css",
              "~/css/mbr-additional.css",

@@ -93,7 +93,7 @@ function CaricaArchivioData(controlid) {
 function BindArchivio(localObjects, el) {
 
     var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
+    var data = objcomplete["datalist"];
     if (data == undefined || data == null) return;
 
     //console.log(data);
