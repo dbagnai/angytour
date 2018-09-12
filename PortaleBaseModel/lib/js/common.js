@@ -2396,9 +2396,9 @@ $.fn.isOnScreen = function () {
 };
 function registerListener(event, func) {
     if (window.addEventListener) {
-        window.addEventListener(event, func)
+        window.addEventListener(event, func);
     } else {
-        window.attachEvent('on' + event, func)
+        window.attachEvent('on' + event, func);
     }
 }
 (function ($) {

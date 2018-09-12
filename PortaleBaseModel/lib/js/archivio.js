@@ -27,15 +27,15 @@ function injectArchivioAndLoadinner(type, container, controlid, listShow, tipolo
         //        objfiltro = JSON.parse(retval);
         //    params = objfiltro;
 
-            params.tipologia = tipologia;
-            params.listShow = listShow;
-            params.categoria = categoria;
-            params.categoria2Liv = categoria2Liv;
-            params.container = container;
+        params.tipologia = tipologia;
+        params.listShow = listShow;
+        params.categoria = categoria;
+        params.categoria2Liv = categoria2Liv;
+        params.container = container;
 
-            globalObject[controlid + "params"] = params;
+        globalObject[controlid + "params"] = params;
 
-            CaricaArchivioData(controlid);
+        CaricaArchivioData(controlid);
         //});
     });
 };
@@ -61,23 +61,25 @@ function CaricaArchivioData(controlid) {
             var localObjects = {};
 
             try {
-                var parseddata = JSON.parse(result);
-                //console.log(parseddata);
+                if (result && result != '') {
+                    var parseddata = JSON.parse(result);
+                    //console.log(parseddata);
 
-                //var temp = parseddata["resultinfo"];
-                //localObjects["resultinfo"] = JSON.parse(temp);
+                    //var temp = parseddata["resultinfo"];
+                    //localObjects["resultinfo"] = JSON.parse(temp);
 
-                //var totalrecords = localObjects["resultinfo"].totalrecords;
-                //globalObject[controlid + "pagerdata"].totalrecords = totalrecords;
+                    //var totalrecords = localObjects["resultinfo"].totalrecords;
+                    //globalObject[controlid + "pagerdata"].totalrecords = totalrecords;
 
-                var data = "{ \"datalist\":" + parseddata["data"];
-                data += "}";
-                localObjects["dataloaded"] = data;
-                var datalink = parseddata["linkloaded"];  //link creati presi da tabella
-                //Inserisco i valori nella memoria generale che contiene i valori per tutti i componenti
-                // globalObject[controlid] = localObjects;
-                //localObjects["linkloaded"] = JSON.parse(datalink);
-                callafterfilter(localObjects, controlid);
+                    var data = "{ \"datalist\":" + parseddata["data"];
+                    data += "}";
+                    localObjects["dataloaded"] = data;
+                    var datalink = parseddata["linkloaded"];  //link creati presi da tabella
+                    //Inserisco i valori nella memoria generale che contiene i valori per tutti i componenti
+                    // globalObject[controlid] = localObjects;
+                    //localObjects["linkloaded"] = JSON.parse(datalink);
+                    callafterfilter(localObjects, controlid);
+                }
 
             }
             catch (e) { console.log(e); console.log(result); }

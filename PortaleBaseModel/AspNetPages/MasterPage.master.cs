@@ -899,6 +899,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += "; " + string.Format("var tipologia = '" + CodiceTipologia + "'");
         scriptRegVariables += "; " + string.Format("var categoria = '" + Categoria + "'");
         scriptRegVariables += "; " + string.Format("var categoria2liv = '" + Categoria2liv + "'");
+        scriptRegVariables += "; ";
 
         if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
         {

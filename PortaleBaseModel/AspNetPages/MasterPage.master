@@ -45,8 +45,11 @@
 <%--<body class="bckGray">--%>
 <body>
     <form id="form1" runat="server">
-        
-      <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
+
+        <%--SERVICE WORKER--%>
+<%--        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
+
+
         <!--- Styles -->
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
@@ -809,29 +812,7 @@
 
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
-        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/defiant/defiant.min.js")%>"></script>--%>
-        <%--  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>--%>
 
-        <%--<script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/animationEnigne.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jq.appear.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.base64.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.easing.1.3.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.prettyPhoto.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.plugins.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.tools.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.themepunch.revolution.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.tipsy.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jQuery.XDomainRequest.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/back-to-top.js")%>"></script>
-
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/flexslider/jquery.flexslider-min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/it-cookies-policy.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/YTPlayer/jquery.mb.YTPlayer.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.fitvids.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/detect-zoom.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/maininit.js") + CommonPage.AppendModTime(Server,"~/lib/js/maininit.js") %>'"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/jarallax.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/landing/script.js")%>"></script>--%>
 
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>

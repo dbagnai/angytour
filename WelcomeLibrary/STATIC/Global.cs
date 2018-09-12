@@ -65,6 +65,7 @@ namespace WelcomeLibrary.STATIC
             set { _percorsofisicoapplicazione = value; }
         }
 
+ 
         private static string _percorsoapp;
         public static string percorsoapp
         {

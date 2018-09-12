@@ -469,9 +469,10 @@
             BundleEngine.BundleOptions.minifyCss = true;
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("Bundlesminifyjs").ToLower() == "true")
             BundleEngine.BundleOptions.minifyJs = true;
-          BundleEngine.AddBundleJS("bundlejssw",
-            "~/sw.js", //Service Worker
-            "~/sw-register.js"  //Service Worker registration
+
+        BundleEngine.AddBundleJS("bundlejssw",
+          "~/sw.js", //Service Worker
+          "~/sw-register.js"  //Service Worker registration
         );
 
         BundleEngine.AddBundleJS("bundlejslib0",
@@ -485,22 +486,21 @@
             "~/js/notifications/notify.min.js",
             "~/js/notifications/notify-metro.js",
             "~/js/notifications/notifications.js",
-            "~/js/moment-with-locales.min.js",
+            "~/js/moment-with-locales.min.js", //big!!
             "~/js/imagesloaded.pkgd.js",
             "~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",
             "~/js/jquery.cycle2.carousel.js",
-            "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
-            "~/js/jqueryui/jquery.maskedinput.js",
              "~/js/owl-carousel.js",
-            "~/js/owl-carousel/owl-carousel/owl.carousel.js",
-             "~/lib/js/common.js"
+            "~/js/owl-carousel/owl-carousel/owl.carousel.min.js",
+             "~/lib/js/common.js",
+            "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
+             "~/js/jqueryui/jquery.maskedinput.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
             //"~/js/magnify/js/jquery.magnify.js",
-            // "~/js/magnify/js/jquery.magnify-mobile.js"
-            //"~/lib/js/common.js",
+            //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",
             "~/lib/js/genericContent.js",
             "~/lib/js/genericBanner.js",
