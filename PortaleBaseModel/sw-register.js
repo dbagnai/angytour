@@ -25,12 +25,20 @@
                 // Registration was successful
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 //registration.update(); //questa forza l'aggiornamento deidati della cache del sw
+
+                //Utilizzo della funzione service worker postMessage - Comando per fare il trim della cache
+                //if (navigator.serviceWorker.controller != null) 
+                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'});
+
+
             }, function (err) {
                 // registration failed :(
                 console.log('ServiceWorker registration failed: ', err);
             });
         });
-    };
 
+      
+
+    };
 
 })();

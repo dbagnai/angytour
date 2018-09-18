@@ -216,25 +216,29 @@ function commentclosure(varname) {
                                     var dummyarray = [];
                                     //Precompliamo i campi necessari per il form di inserimento
                                     var testonome = mainscope.nomecliente + ' ' + mainscope.cognomecliente;
-                                    mainscope.localcontainer.item['Nome'] = testonome.trim();
-                                    mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
+                                    if (mainscope.localcontainer.item.hasOwnProperty('Nome'))
+                                        mainscope.localcontainer.item['Nome'] = testonome.trim();
+                                    if (mainscope.localcontainer.item.hasOwnProperty('Email'))
+                                        mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
                                     dummyarray.push(mainscope.localcontainer.item);
 
                                     var aperto1 = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
-                                    ShowList(mainscope.templatehtmlinsert, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
-                                        function () {
-                                            $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(mainscope.message);
-                                            //window.scroll(0, document.querySelector("#' + mainscope.idcontainer + 'tresponse").offsetTop - 0);
-                                            if (mainscope.message.length > 0)
-                                                $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
-                                            mainscope.message = "";
 
-                                            inizializzastars();
-                                            $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
-                                            $('textarea').autoHeight();
-                                            if (!aperto1)
-                                                $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
-                                        });
+                                    if (mainscope.localcontainer.item != '')
+                                        ShowList(mainscope.templatehtmlinsert, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
+                                            function () {
+                                                $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(mainscope.message);
+                                                //window.scroll(0, document.querySelector("#' + mainscope.idcontainer + 'tresponse").offsetTop - 0);
+                                                if (mainscope.message.length > 0)
+                                                    $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
+                                                mainscope.message = "";
+
+                                                inizializzastars();
+                                                $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                                $('textarea').autoHeight();
+                                                if (!aperto1)
+                                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                            });
                                 } else {
                                     inizializzastars();
                                     $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
@@ -551,6 +555,17 @@ function commentclosure(varname) {
     function caricacommentsbyidpost(lng, objfiltro, callback) {
         var lng = lng || "I";
         var objfiltro = objfiltro || {};
+
+        //Svuoto il contenitore dei commenti
+        mainscope.localcontainer = {};
+        mainscope.localcontainer["item"] = '';
+        mainscope.localcontainer["list"] = '';
+        mainscope.localcontainer["objfiltro"] = '';
+        mainscope.localcontainer["totaleapprovati"] = '';
+        mainscope.localcontainer["totalemediastars"] = '';
+        mainscope.localcontainer["recordstotali"] = '';
+        mainscope.localcontainer["mail"] = '';
+
         $.ajax({
             url: pathAbs + commenthandlerpath,
             contentType: "application/json; charset=utf-8",
@@ -562,14 +577,7 @@ function commentclosure(varname) {
             data: { 'q': 'caricacommenti', 'lng': lng, 'objfiltro': JSON.stringify(objfiltro) },
             success: function (result) {
                 var parseddata = '';
-                mainscope.localcontainer = {};
-                mainscope.localcontainer["item"] = '';
-                mainscope.localcontainer["list"] = '';
-                mainscope.localcontainer["objfiltro"] = '';
-                mainscope.localcontainer["totaleapprovati"] = '';
-                mainscope.localcontainer["totalemediastars"] = '';
-                mainscope.localcontainer["recordstotali"] = '';
-                mainscope.localcontainer["mail"] = '';
+
                 if (result != '') {
                     var parsedres = JSON.parse(result);
                     mainscope.localcontainer["item"] = parsedres.item;//oggetto vuoto per update ed insert

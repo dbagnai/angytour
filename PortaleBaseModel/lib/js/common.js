@@ -868,7 +868,7 @@ function ShowList(templatename, container, controlid, data, callback) {
         $('#' + container).load(templateHtml, function () {
             recursiveEach($('#' + container), controlid);
 
-            if (!data.length || !$('#' + controlid).length) return;
+            if (!data.length || !$('#' + controlid).length) { if (callback != null) callback(); return; }
             var str = $('#' + controlid)[0].outerHTML;
             //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
             //in caso di rebinding successivo dopo l'iniezione del template
