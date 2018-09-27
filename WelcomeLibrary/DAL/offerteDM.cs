@@ -6406,7 +6406,7 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline-block\" class=\"divbuttonstyle\">" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\" class=\"divbuttonstyle\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\"><a onclick=\"javascript:JsSvuotaSession(this)\" class=\"divbuttonstyle\" style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
 
 
 
