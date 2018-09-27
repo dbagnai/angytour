@@ -54,27 +54,6 @@ namespace WelcomeLibrary.UF
         }
 
 
-        //public static string getbindedhtmlstring(Dictionary<string, string> filtri, Dictionary<string, string> filtripager, string lingua, string username = "", System.Web.SessionState.HttpSessionState sessione = null)
-        //{
-        //    string htmlout = "";
-        //    try
-        //    {
-        //        Lingua = lingua;
-        //        Username = username;
-        //        Session = sessione;
-        //        jscommands = new Dictionary<string, string>();
-        //        HtmlDocument doc = new HtmlDocument();
-        //        doc.LoadHtml("<div></div>"); // da rivedere il documento contenitore ... per portfolo dovrei avree due div uno per gli items e uno per il pager containerid e containeridPager ......
-
-        //        functioncallmapping(new List<string>(), doc.DocumentNode, doc, filtri, filtripager);
-        //        htmlout = doc.DocumentNode.InnerHtml;
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //    }
-        //    return htmlout;
-        //}
 
         private static void BindElement(HtmlNode node, HtmlDocument doc, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null)
         {
@@ -2462,7 +2441,7 @@ namespace WelcomeLibrary.UF
                 }
 
             }
-            catch (Exception e)
+            catch
             {
 
             }
@@ -2647,10 +2626,8 @@ namespace WelcomeLibrary.UF
                         string testosconto = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "testosconto").Valore;
                         var prezzo = valore[0];
                         var prezzolistino = valore[1];
-                        double p = 0;
-                        double pl = 0;
-                        double.TryParse(prezzo, out p);
-                        double.TryParse(prezzolistino, out pl);
+                        double.TryParse(prezzo, out double p);
+                        double.TryParse(prezzolistino, out double pl);
                         if (pl != 0 && p != 0 && (pl > p))
                         {
                             ret = "<div class=\"csstransforms prod_discount\">" + testosconto + " ";
@@ -2824,26 +2801,38 @@ namespace WelcomeLibrary.UF
 
 
 
-        public static string CreaInitStringJavascript()
+        public static string CreaInitStringJavascript(Dictionary<string, string> addelements = null)
         {
-            string jscode = "<script>\r\n";
+            string jscode = "<script>//![CDATA[\r\n";
             ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands
             // jscode += "console.log('inject from custom bind');\r\n";
+            if (addelements != null)
+                foreach (KeyValuePair<string, string> kv in addelements)
+                {
+                    if (!jscommands.ContainsKey(kv.Key)) jscommands.Add(kv.Key, kv.Value);
+                }
+            AddInitjavascriptvariables(jscommands);
+
+
             if (jscommands != null)
                 foreach (KeyValuePair<string, string> kv in jscommands)
                 {
                     jscode += kv.Value + ";\r\n";
                 }
-            jscode += "</script>\r\n";
+
+            jscode += "//]]></script>\r\n";
             jscommands = new Dictionary<string, string>(); //Svuoto la memoria dopo aver iniettato le inizializzazioni in pagina
 
             return jscode;
         }
 
+        public static void AddInitjavascriptvariables(Dictionary<string, string> jscommands)
+        {
+            jscommands.Add("NeededJSVars", "var cbindvapidPublicKey = '" + ConfigManagement.ReadKey("PublicKey") + "';\r\n");
 
-
+        }
     }
 
 }

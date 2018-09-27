@@ -59,9 +59,8 @@ namespace WelcomeLibrary.UF
                 string tmpcategoria = categoria;
                 if (!usacategoria) tmpcategoria = "";
 
-               // ret = CommonPage.CreaLinkRoutes(null, false, lingua, (testourl), "", tipologia, tmpcategoria);
-                bool gen = false;
-                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+                // ret = CommonPage.CreaLinkRoutes(null, false, lingua, (testourl), "", tipologia, tmpcategoria);
+                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
                 ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, (testourl), "", tipologia, tmpcategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
             }
@@ -90,8 +89,7 @@ namespace WelcomeLibrary.UF
             foreach (TipologiaOfferte _o in sezioni)
             {
                 //string link = offerteDM.CreaLinkRoutes(null, false, lingua, CleanUrl(_o.Descrizione), "", _o.Codice);
-                bool gen = false;
-                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
                 string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
 
@@ -439,7 +437,7 @@ namespace WelcomeLibrary.UF
         public static Tabrif GeneraRewritingElement(string Lingua, string Tipologia, string destinationselector, string textmatch, string id = "", string tipopagina = "lista", string Categoria = "", string Categoria2liv = "", string anno = "", string mese = "", string regione = "", Dictionary<string, string> addparms = null)
         {
             Tabrif urlRewrited = new Tabrif();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            var parameters = new Dictionary<string, string>();
 
             parameters.Add("Lingua", Lingua.ToUpper());
             if (Tipologia.ToLower().StartsWith("rif"))

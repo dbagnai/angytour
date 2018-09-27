@@ -38,6 +38,7 @@ var carrellohandlerpath = '/lib/hnd/CarrelloHandler.ashx';
 var newsletterhandlerpath = '/lib/hnd/HandlerNewsletter.ashx';
 var feedbackhandlerpath = '/lib/hnd/feedbackHandler.ashx';
 var commenthandlerpath = '/lib/hnd/feedbackHandler.ashx';
+var pushhandlerpath = '/lib/hnd/HandlerPushnotify.ashx';
 var referencesloaded = false;
 var promisecalling = false;
 var callqueque = [];
@@ -943,6 +944,8 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                         if (dataitem.hasOwnProperty(proprarr[0])) {
                             $(this).attr("value", dataitem[proprarr[0]]);
                             $(this).html(dataitem[proprarr[0]]);
+                            if ($(this).attr("idbind") != null)
+                                $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
                         }
                     }
                     else if (($(this).is("span") || $(this).is("div")) && $(this).hasClass('rating')) {
@@ -1683,7 +1686,7 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
         //retstring = "<button type=\"button\" style=\"float:right\" class=\"btn btn-purple btn-small trigcarrello\" title=\"" + id + "," + lng + "," + username + "\"  >" + testoInseriscicarrello + "</button>";
         var testocall = id + "," + lng + "," + username;
 
-        retstring = "<button type=\"button\" style=\" background-color:#121212;\" class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+        retstring = "<button type=\"button\" style=\"background-color:#121212;\" class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
 
         if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || prezzo == 0)) {
             var link = localObjects["linkloaded"][id]["link"];

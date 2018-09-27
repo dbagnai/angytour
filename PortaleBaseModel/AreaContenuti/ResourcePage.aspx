@@ -117,8 +117,7 @@
         }
         /* Procedure update  ---------------------- */
 
-        function deletedata()
-        { }
+        function deletedata() { }
 
         function insertdata() {
             var $select = $('#ddlLingue');
@@ -221,8 +220,7 @@
                 //jsondetailstxt = JSON.stringify(jsondetailsobj);
                 //$(hJsondetails).val(jsondetailstxt);
             }
-            catch (e)
-            { }
+            catch (e) { }
             // console.log(jsondetailsobj);
         }
 
@@ -277,7 +275,7 @@
 
 
     <select id="ddlLingue" onchange="getdata()"></select><br />
-    <span style="font-size:2rem" id="results"></span>
+    <span style="font-size: 2rem" id="results"></span>
 
 
     <div class="row">
@@ -304,21 +302,21 @@
         </div>
     </div>
     <p>&nbsp;</p>
-        <div style="background-color: #ddd; padding: 20px">
-            <h2>Aggiorna valori presenti</h2>
-    <div class="row" id="row1">
-        <div class="col-sm-12">
-            <div>
-                |<label class="bind" mybind="Id"></label>
-                |<label class="bind" mybind="Chiave"></label>
-                |<label class="bind" mybind="Gruppo"></label>|
+    <div style="background-color: #ddd; padding: 20px">
+        <h2>Aggiorna valori presenti</h2>
+        <div class="row" id="row1">
+            <div class="col-sm-12">
+                <div>
+                    |<label class="bind" mybind="Id"></label>
+                    |<label class="bind" mybind="Chiave"></label>
+                    |<label class="bind" mybind="Gruppo"></label>|
                 |<label class="bind" mybind="Lingua"></label>|
                 |<label class="bind" mybind="Categoria"></label>|
              <%--   |<label class="bind" mybind="Comment"></label>|--%>
-                <textarea class="form-control bind" mybind="Valore" idbind="Id" rows="4" style="width: 80%"></textarea>
+                    <textarea class="form-control bind" mybind="Valore" idbind="Id" rows="4" style="width: 80%"></textarea>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <p>&nbsp;</p>
 

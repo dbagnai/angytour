@@ -399,10 +399,9 @@ namespace WelcomeLibrary.UF
                     //Verifichiamo se già esiste un elemento Chiave/Gruppo/Lingua con gli stessi valori per insert
                     if (Verifyduplicate(item))
                     {
-                        err += "Already present element Gruppo,Lingua,Chiave \r\n";
+                        err += "Already present element resource Gruppo,Lingua,Chiave \r\n";
                         continue;
                     }
-
                     SQLiteParameter pcat = new SQLiteParameter("@Categoria", (item.Categoria != null ? item.Categoria : ""));
                     parColl.Add(pcat);
                     SQLiteParameter pcom = new SQLiteParameter("@Comment", (item.Comment != null ? item.Comment : ""));

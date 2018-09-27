@@ -726,6 +726,12 @@
                                     </span></a>
                                 <b class="arrow"></b>
                             </li>
+                              <li class="hover">
+                                <a href="GestionePushnotify.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Gestione notifiche</span></a>
+                                <b class="arrow"></b>
+                            </li>
                         </ul>
                     </li>
                     <li id="tagConfig" runat="server" class="hover">

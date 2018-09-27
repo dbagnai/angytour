@@ -1,15 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
-    CodeFile="index.aspx.cs" Inherits="index"  MaintainScrollPositionOnPostback="true" %>
+    CodeFile="index.aspx.cs" Inherits="index" MaintainScrollPositionOnPostback="true" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
- 
-            <asp:Literal Text="" ID="litNomePagina" runat="server" />
-            <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
-      
+
+    
+
+    <asp:Literal Text="" ID="litNomePagina" runat="server" />
+    <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
+
     <%-- <!--=== Breadcrumbs ===-->
         <div class="breadcrumbs">
             <div class="container">

@@ -119,12 +119,13 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         CaricaMenu();
        // VisualizzaTotaliCarrello();
-        LoadJavascriptVariables();
+      //  LoadJavascriptVariables();
         pnlRicerca.DataBind();
         divContattiMaster.DataBind();
         req1.DataBind();
         lisearch.DataBind();
     }
+
 
     /// <summary>
     /// Carico le chiamate di inizializzazione dalla memoria di binding del server in custombind
@@ -132,8 +133,38 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     /// <returns></returns>
     public string InjectedEndPageScripts()
     {
-        string ret = custombind.CreaInitStringJavascript();
+        Dictionary<string, string> addelements = new Dictionary<string, string>();
+        LoadJavascriptVariables(addelements);
+        string ret = custombind.CreaInitStringJavascript(addelements);
         return ret;
+    }
+    private void LoadJavascriptVariables(Dictionary<string, string> addelements = null)
+    {
+
+        String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1"));
+        scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1"));
+        scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1"));
+        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2"));
+        scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2"));
+        scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2"));
+        scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");
+        scriptRegVariables += "; " + string.Format("var idmapcontainer1 = 'map1'");
+        scriptRegVariables += "; " + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
+
+        scriptRegVariables += "; " + string.Format("var idofferta = '" + idOfferta + "'");
+        scriptRegVariables += "; " + string.Format("var tipologia = '" + CodiceTipologia + "'");
+        scriptRegVariables += "; " + string.Format("var categoria = '" + Categoria + "'");
+        scriptRegVariables += "; " + string.Format("var categoria2liv = '" + Categoria2liv + "'");
+        scriptRegVariables += "; ";
+
+        if (addelements == null) addelements = new Dictionary<string, string>();
+        addelements.Add("jsvarfrommaster", scriptRegVariables);
+
+        //ClientScriptManager cs = Page.ClientScript;
+        //if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
+        //{
+        //    cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScript", scriptRegVariables, true);
+        //}
     }
 
     private void ControllaHttp()
@@ -881,31 +912,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             divRicerca.Visible = true;
         }
     }
-    private void LoadJavascriptVariables()
-    {
-        ClientScriptManager cs = Page.ClientScript;
 
-        String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1"));
-        scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1"));
-        scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1"));
-        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2"));
-        scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2"));
-        scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2"));
-        scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");
-        scriptRegVariables += "; " + string.Format("var idmapcontainer1 = 'map1'");
-        scriptRegVariables += "; " + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
-
-        scriptRegVariables += "; " + string.Format("var idofferta = '" + idOfferta + "'");
-        scriptRegVariables += "; " + string.Format("var tipologia = '" + CodiceTipologia + "'");
-        scriptRegVariables += "; " + string.Format("var categoria = '" + Categoria + "'");
-        scriptRegVariables += "; " + string.Format("var categoria2liv = '" + Categoria2liv + "'");
-        scriptRegVariables += "; ";
-
-        if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
-        {
-            cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScript", scriptRegVariables, true);
-        }
-    }
 
     protected void btnContatti1_Click(object sender, EventArgs e)
     {
