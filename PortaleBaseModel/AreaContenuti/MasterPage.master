@@ -903,6 +903,6 @@
 
         });
     </script>
-
+    <%= InjectedEndPageScripts() %>
 </body>
 </html>

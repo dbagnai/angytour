@@ -137,7 +137,12 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
         }
     }
-
+    public string InjectedEndPageScripts()
+    {
+        Dictionary<string, string> addelements = new Dictionary<string, string>();
+        string ret = WelcomeLibrary.UF.custombind.CreaInitStringJavascript(addelements);
+        return ret;
+    }
     private void ImpostaVisualizzazione()
     {
         //string idcliente = CommonPage.getidcliente(Page.User.Identity.Name);

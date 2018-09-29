@@ -25,12 +25,12 @@ var allowedDomains = [
 
 var corenotcriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
-    //'/error.aspx',
-    //'/bdejs/bundlejssw',
-    //'/bdejs/bundlejslib0',
-    //'/bdecss/bundlecss1',
-    //'/bdejs/bundlejslib1',
-    //'/bdejs/bundlejslib2'
+    '/error.aspx',
+    '/bdejs/bundlejssw',
+    '/bdejs/bundlejslib0',
+    '/bdecss/bundlecss1',
+    '/bdejs/bundlejslib1',
+    '/bdejs/bundlejslib2'
 ];
 var corecriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
@@ -121,14 +121,14 @@ self.addEventListener('fetch', function (event) {
                 };
                 var myRequest = new Request(request.url, myInit);
                 var fetchPromise = fetch(myRequest).then(networkResponse => {
-                    if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only whet data is present in response
+                    if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only if data is present in response
                     {
                         addToCache(coreCacheName, myRequest, networkResponse.clone());
                         //console.log("Updated corecache: " + myRequest.url);
                     }
                     return networkResponse;
                 }).catch(() => {
-                    console.log("err fetching coreres");
+                    console.log("err fetching coreresources");
                     return new Response('');
                 });
                 return response || fetchPromise; //return event cache first!!!
@@ -322,7 +322,7 @@ function notificationshow(event, tag, title, options) {
             .then(existingNotifications => {
                 for (var i = 0; i < existingNotifications.length; i++) {
                     var existingNotification = existingNotifications[i];
-                  // existingNotification.close();
+                  // existingNotification.close(); //chiudo le notifice presenti
                 }
             })
             .then(() => {

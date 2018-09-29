@@ -53,35 +53,20 @@
     <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png" />
     <meta name="msapplication-TileColor" content="#000000" />
     <link rel="manifest" href="~/manifest.json" runat="server">
-    <%--META FOR PWA--%>
 </head>
 <%--<body class="bckGray">--%>
 <body>
     <form id="form1" runat="server">
-        <asp:Panel runat="server" Visible="false">
-            <div id="divforpush" style="width: 350px; height: 150px; overflow: auto; position: fixed; z-index: 999; bottom: 50px; left: 0px" class="d-block">
-                <button disabled class="js-push-btn btn btn-primary">
-                    Enable Push Messaging
+        <asp:Panel runat="server" Visible="true">
+            <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
+                <button disabled class="js-push-btn js-roundedpush  btn btn-primary">
+                    <i class="fa fa-2x fa-bell-slash"></i>
                 </button>
                 <section class="subscription-details js-subscription-details d-none">
-                    <p>
-                        Once you've subscribed your user, you'd send their subscription to your
-                      server to store in a database so that when you want to send a message
-                      you can lookup the subscription and send a message to it.
-                    </p>
-                    <p>
-                        To simplify things for this code lab copy the following details
-                      into the <a href="https://web-push-codelab.glitch.me//">Push Companion
-                      Site</a> and it'll send a push message for you, using the application
-                      server keys on the site - so make sure they match.
-                    </p>
                     <pre><code class="js-subscription-json"></code></pre>
                 </section>
             </div>
         </asp:Panel>
-        <%--SERVICE WORKER--%>
-       <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
-
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
 
         <!--- Styles -->
@@ -104,12 +89,9 @@
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
 
-
-
-
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
 
-        <!-- MENU --->
+        <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="d-flex justify-content-center align-items-center d-sm-block" style="padding-left: 40px; padding-right: 40px">
 
@@ -769,7 +751,7 @@
                         <div class="row">
                             <div class="col-lg-12" style="text-align: center">
                                 <p style="font-size: 1.2em; padding: 30px 10px; line-height: 1.8rem !important;">
-                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
+                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br/>
                                     <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>- Project by Web Mouse Consulting srl -
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
                                         <%= references.ResMan("Common", Lingua,"Testologin") %></a>
@@ -796,45 +778,6 @@
         </div>
 
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
-
-        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
-        <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/popper.min.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/bootstrap400/js/bootstrap.min.js")%>"></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/localforage.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/menuzord/files/js/menuzord.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/pako/pako.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notify-metro.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/notifications/notifications.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/moment-with-locales.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/imagesloaded.pkgd.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/isotope.pkgd.min.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/jquery.cycle2.carousel.js") %>'></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/owl-carousel/owl-carousel/owl.carousel.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jqueryui/jquery.maskedinput.js")%>"></script>--%>
-        <%--    <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify.js") %>'></script>
-            <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/magnify/js/jquery.magnify-mobile.js") %>'></script>--%>
-        <!-- Librerie CMS management -->
-        <%--         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/common.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/common.js") %>"></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericContent.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericContent.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/genericBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/genericBanner.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/sliderBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/sliderBanner.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/scroller.js") + CommonPage.AppendModTime(Server,"~/lib/js/scroller.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotope.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotope.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/bannerFascia.js") + CommonPage.AppendModTime(Server,"~/lib/js/bannerFascia.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/portfolioisotopeBanner.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/portfolioisotopeBanner.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/archivio.js") + CommonPage.AppendModTime(Server,"~/lib/js/archivio.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/linkslistddl2.js") + CommonPage.AppendModTime(Server,"~/lib/js/linkslistddl2.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/js/lazyloadimg.js") + CommonPage.AppendModTime(Server,"~/js/lazyloadimg.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/searchcontrol.js") + CommonPage.AppendModTime(Server,"~/lib/js/searchcontrol1.js") %>'></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/carrello.js" )+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js") %>'></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/bookingtool.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/bookingtool.js") %>"></script>
-        <script type="text/javascript" src='<%= CommonPage.ReplaceCdnLinks("~/lib/js/videoBanner.js") + CommonPage.AppendModTime(Server,"~/lib/js/videoBanner.js") %>'></script>--%>
-        <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/lib/js/immobili2.js" ) + CommonPage.AppendModTime(Server,"~/lib/js/immobili2.js") %>"></script>--%>
         <script>
             var makeRevLower = false;
             pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
@@ -846,11 +789,7 @@
             });
         </script>
         <!-- FIne Librerie CMS management -->
-
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery.validate.js")%>"></script>--%>
-
-
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
         <link rel="stylesheet" href="src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
@@ -861,5 +800,7 @@
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
+    <%--SERVICE WORKER--%>
+    <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>
 </body>
 </html>

@@ -17,9 +17,8 @@ let swRegistration;
                 console.log('ServiceWorker registration successful with scope: ', swRegistration.scope);
                 console.log('Service Worker is registered', swRegistration);
 
-
-                // pushM.initializeUI(); //Gestione delle notifiche push
                 pushM.applicationServerPublicKey = cbindvapidPublicKey;
+                pushM.initializeUI(); //Gestione delle notifiche push
                 // verifyvalidsubscriptionandask();
 
 
@@ -53,11 +52,33 @@ var pushM = new function () {
     //pU5v_A93OiiqGmF8_JVYa5MlyNpMA8jHov3bsBhDEOY
     this.pushButton = document.querySelector('.js-push-btn');
     this.isSubscribed = false;
+    if (mainscope.pushButton)
+        mainscope.pushButton.addEventListener('click', function () {
+            mainscope.pushButton.disabled = true;
+            if (mainscope.isSubscribed) {
+                unsubscribeUser();
+            } else {
+                subscribeUser();
+            }
+        });
+
     this.initializeUI = function () {
         if ('serviceWorker' in navigator && 'PushManager' in window) {
             // Set the initial subscription value
             swRegistration.pushManager.getSubscription()
                 .then(function (subscription) {
+
+                    if (subscription) {
+                        if (mainscope.base64Encode(subscription.options.applicationServerKey) != mainscope.applicationServerPublicKey) //sottoscrizione non più valida per cambio keys->unsubscribe
+                        {
+                            subscription.unsubscribe().then(function (successful) {
+                                mainscope.initializeUI(); //recall initialize
+                                return;
+                            });
+                            return;
+                        }
+                    }
+
                     mainscope.isSubscribed = !(subscription === null);
                     updateSubscriptionOnServer(subscription);
                     if (mainscope.isSubscribed) {
@@ -69,7 +90,8 @@ var pushM = new function () {
                 });
         } else {
             console.warn('Push messaging is not supported');
-            mainscope.pushButton.textContent = 'Push Not Supported';
+            if (mainscope.pushButton)
+                mainscope.pushButton.innerHTML = '<i class="fa fa-2x fa-ban"></i>';
         }
     };
 
@@ -82,11 +104,14 @@ var pushM = new function () {
                     //Controllo se sottoscritto e la puclikkey coincide
                     if (subscription) {
                         if (mainscope.base64Encode(subscription.options.applicationServerKey) != mainscope.applicationServerPublicKey) //sottoscrizione non più valida per cambio keys->unsubscribe
+                        {
                             subscription.unsubscribe().then(function (successful) {
                                 //do something to ask user for subscription!!! or ;
                                 // subscribeUser();
                                 return;
                             });
+                            return;
+                        }
                     } else {
                         //do something to ask user for subscription!!!;
                         // subscribeUser();
@@ -96,41 +121,8 @@ var pushM = new function () {
     }
 
 
-    function updateBtn() {
-        if (Notification.permission === 'denied') {
-            mainscope.pushButton.textContent = 'Push Messaging Blocked.';
-            mainscope.pushButton.disabled = true;
-            updateSubscriptionOnServer(null);
-            return;
-        }
-        if (mainscope.isSubscribed) {
-            mainscope.pushButton.textContent = 'Disable Push Messaging';
-        } else {
-            mainscope.pushButton.textContent = 'Enable Push Messaging';
-        }
-
-        mainscope.pushButton.disabled = false;
-    }
-    this.base64Encode = function (arrayBuffer) {
-        return btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-    };
-    this.urlB64ToUint8Array = function (base64String) {
-        const padding = '='.repeat((4 - base64String.length % 4) % 4);
-        const base64 = (base64String + padding)
-            .replace(/\-/g, '+')
-            .replace(/_/g, '/');
-
-        const rawData = window.atob(base64);
-        const outputArray = new Uint8Array(rawData.length);
-
-        for (let i = 0; i < rawData.length; ++i) {
-            outputArray[i] = rawData.charCodeAt(i);
-        }
-        return outputArray;
-    };
-
-
     function subscribeUser() {
+        console.log('asked subscription');
         //we take the application server's public key, which is base 64 URL safe encoded, and we convert it to a UInt8Array as this is the expected input of the subscribe call.
         const applicationServerKey = mainscope.urlB64ToUint8Array(mainscope.applicationServerPublicKey);
         swRegistration.pushManager.subscribe({
@@ -149,22 +141,18 @@ var pushM = new function () {
             });
     }
 
-
     function updateSubscriptionOnServer(subscription) {
         // TODO: Send subscription to application server
-
         const subscriptionJson = document.querySelector('.js-subscription-json');
-        const subscriptionDetails =
-            document.querySelector('.js-subscription-details');
+        const subscriptionDetails = document.querySelector('.js-subscription-details');
 
         if (subscription) {
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Questa è la subscription che chi richiede il push deve inviare per eesere riconosciuto
             //CAMBIA PER OGNI BROWSER E SESSIONE QUINDI AL MOMENTO DELLA SOTTOSCRIZIONE 
             //QUESTA VA' PASSATA AL SERVER DI PUSH CHE DEVE AVERE LA LISTA DI TUTTE LE SOTTOSCRIZIONI A CUI INVIARE LE PUSH!!!
-            subscriptionJson.textContent = JSON.stringify(subscription);
-
-
+            if (subscriptionJson)
+                subscriptionJson.textContent = JSON.stringify(subscription); //testo della sottoscrizione!
             //Valori della subscription per fare il push ( da passare al server di push )
             var Name = "";
             var p256dh = mainscope.base64Encode(subscription.getKey('p256dh'));
@@ -175,15 +163,34 @@ var pushM = new function () {
             Devices.Name = "";
             Devices.PushP256DH = p256dh;
             Devices.PushAuth = auth;
-            Devices.PushEndpoint = endpoint;
-
+            Devices.PushEndpoint = pushEndpoint;
             //chiamata a handler per salvare/aggiornare il device!  del device jobj["Devices"]
+            updateDevicesubscriptions(Devices);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            subscriptionDetails.classList.remove('d-none');
+            //subscriptionDetails.classList.remove('d-none');
         } else {
-            subscriptionDetails.classList.add('d-none');
+            //subscriptionDetails.classList.add('d-none');
         }
+    }
+    function unsubscribeUser() {
+        //da inserire gestione database per eliminazione del device jobj["Devices"]
+        swRegistration.pushManager.getSubscription()
+            .then(function (subscription) {
+                if (subscription) {
+                    return subscription.unsubscribe();
+                }
+            })
+            .catch(function (error) {
+                console.log('Error unsubscribing', error);
+            })
+            .then(function () {
+                updateSubscriptionOnServer(null);
+
+                console.log('User is unsubscribed.');
+                mainscope.isSubscribed = false;
+                updateBtn();
+            });
     }
     function updateDevicesubscriptions(Devices) {
         var Devices = Devices || {};
@@ -205,34 +212,45 @@ var pushM = new function () {
             }
         } catch (e) { };
     }
-
-    function unsubscribeUser() {
-        //da inserire gestione database per eliminazione del device jobj["Devices"]
-        swRegistration.pushManager.getSubscription()
-            .then(function (subscription) {
-                if (subscription) {
-                    return subscription.unsubscribe();
-                }
-            })
-            .catch(function (error) {
-                console.log('Error unsubscribing', error);
-            })
-            .then(function () {
+    function updateBtn() {
+        if (mainscope.pushButton) {
+            if (Notification.permission === 'denied') {
+                mainscope.pushButton.innerHTML = '<i class="fa fa-2x fa-ban"></i>';
+                mainscope.pushButton.disabled = true;
                 updateSubscriptionOnServer(null);
-
-                console.log('User is unsubscribed.');
-                mainscope.isSubscribed = false;
-                updateBtn();
-            });
-    }
-    if (mainscope.pushButton)
-        mainscope.pushButton.addEventListener('click', function () {
-            mainscope.pushButton.disabled = true;
-            if (mainscope.isSubscribed) {
-                unsubscribeUser();
-            } else {
-                subscribeUser();
+                return;
             }
-        });
+            if (mainscope.isSubscribed) {
+                mainscope.pushButton.innerHTML = '<i class="fa fa-2x fa-bell"></i>';
+            } else {
+                mainscope.pushButton.innerHTML = '<i class="fa fa-2x fa-bell-slash" ></i>';
+            }
+            mainscope.pushButton.disabled = false;
+        }
+    }
+
+
+    this.base64Encode = function (uint8Array) {
+        const base64 = btoa(String.fromCharCode.apply(null, new Uint8Array(uint8Array)));
+        return base64
+            .replace(/\=/g, '') // eslint-disable-line no-useless-escape
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
+    };
+    this.urlB64ToUint8Array = function (base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    };
+
 
 }();
