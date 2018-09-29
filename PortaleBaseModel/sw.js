@@ -259,14 +259,52 @@ function trimCache(cacheName, maxItems) {
         });
     });
 }
-//Creo Listener per comando postMessage trimCaches del service Worker
+
+ 
+//helper chre trova tutti i match in base ad una regular expression in una string
+function getMatches(string, regex, index) {
+    index || (index = 1); // default to the first capturing group
+    var matches = [];
+    var match;
+    while (match = regex.exec(string)) {
+        matches.push(match[index]);
+    }
+    return matches;
+}
+//function fetchAndCache(url, cache) {
+//    return fetch(url).then(function (response) {
+//        if (response.status < 400) {
+//            console.log('got ' + url);
+//            cache.put(url, response.clone());
+//        }
+//        return response.text();
+//    }).then(function (text) {
+//        var pattern = /img src=(?:'|")/((?: files | img) / [^ '"]+)"/g;
+//      var assets = getMatches(text, pattern, 1);
+//        return cache.addAll(assets);
+//    })
+//}
+
+//Mi metto in ascolto dai messaggio inviati dalle pagine web servite!!
 self.addEventListener('message', event => {
     var data = event.data;
+
+    //Creo Listener per comando postMessage trimCaches del service Worker
     if (data.command == "trimCache") {
         trimCache(pagesCacheName, 25);
         trimCache(assetsCacheName, 30);
     };
+
+    //Memorizzazione nella cache di una serie di pagine
+    //if (data.command == "offline-opt-in") {
+
+
+
+    //}
+
 });
+
+
 
 /*Show amount of cache space used*/
 //navigator.storageQuota.queryInfo("temporary").then(function (info) {
@@ -322,7 +360,7 @@ function notificationshow(event, tag, title, options) {
             .then(existingNotifications => {
                 for (var i = 0; i < existingNotifications.length; i++) {
                     var existingNotification = existingNotifications[i];
-                  // existingNotification.close(); //chiudo le notifice presenti
+                    // existingNotification.close(); //chiudo le notifice presenti
                 }
             })
             .then(() => {

@@ -25,7 +25,27 @@ let swRegistration;
                 //registration.update(); //questa forza l'aggiornamento deidati della cache del sw
                 //Utilizzo della funzione service worker postMessage - Comando per fare il trim della cache
                 //if (navigator.serviceWorker.controller != null) 
-                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'});
+                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'}); //invio messaggio al servicewirker dalla pagina
+                //https://github.com/w3c-webmob/ServiceWorkersDemos
+
+
+                ////ESEMPIO COMUNICAZIONE WEBPAGE -> serviceworker e viceversa https://googlechrome.github.io/samples/service-worker/post-message/
+                //Invio messaggio da pagina e serviceworker
+                //navigator.serviceWorker.controller.postMessage({ 'command': 'say-hello!' })//invio messaggio al servicewirker dalla pagina
+
+                //Invio messaggio da serviceworker a pagina
+                //client.postMessage({ 'message': 'hello!' }); messaggio dal serviceworker alla pagina
+
+                //Gestore evento su web page
+                //navigator.serviceWorker.addEventListener('message', function (event) { //event lister per messagio provenienet da service worker
+                //    //do something with the message event.data
+                //})
+
+                //Gestore evento su serviceworker
+                //self.addEventListener('message', function (event) {
+                //    //do something with the message event.data
+                //})
+
 
             }, function (err) {
                 // registration failed :(
