@@ -25,12 +25,12 @@ var allowedDomains = [
 
 var corenotcriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
-    //'/error.aspx',
-    //'/bdejs/bundlejssw',
-    //'/bdejs/bundlejslib0',
-    //'/bdecss/bundlecss1',
-    //'/bdejs/bundlejslib1',
-    //'/bdejs/bundlejslib2'
+    '/error.aspx',
+    '/bdejs/bundlejssw',
+    '/bdejs/bundlejslib0',
+    '/bdecss/bundlecss1',
+    '/bdejs/bundlejslib1',
+    '/bdejs/bundlejslib2'
 ];
 var corecriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
@@ -121,14 +121,14 @@ self.addEventListener('fetch', function (event) {
                 };
                 var myRequest = new Request(request.url, myInit);
                 var fetchPromise = fetch(myRequest).then(networkResponse => {
-                    if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only whet data is present in response
+                    if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only if data is present in response
                     {
                         addToCache(coreCacheName, myRequest, networkResponse.clone());
                         //console.log("Updated corecache: " + myRequest.url);
                     }
                     return networkResponse;
                 }).catch(() => {
-                    console.log("err fetching coreres");
+                    console.log("err fetching coreresources");
                     return new Response('');
                 });
                 return response || fetchPromise; //return event cache first!!!
@@ -259,14 +259,52 @@ function trimCache(cacheName, maxItems) {
         });
     });
 }
-//Creo Listener per comando postMessage trimCaches del service Worker
+
+ 
+//helper chre trova tutti i match in base ad una regular expression in una string
+function getMatches(string, regex, index) {
+    index || (index = 1); // default to the first capturing group
+    var matches = [];
+    var match;
+    while (match = regex.exec(string)) {
+        matches.push(match[index]);
+    }
+    return matches;
+}
+//function fetchAndCache(url, cache) {
+//    return fetch(url).then(function (response) {
+//        if (response.status < 400) {
+//            console.log('got ' + url);
+//            cache.put(url, response.clone());
+//        }
+//        return response.text();
+//    }).then(function (text) {
+//        var pattern = /img src=(?:'|")/((?: files | img) / [^ '"]+)"/g;
+//      var assets = getMatches(text, pattern, 1);
+//        return cache.addAll(assets);
+//    })
+//}
+
+//Mi metto in ascolto dai messaggio inviati dalle pagine web servite!!
 self.addEventListener('message', event => {
     var data = event.data;
+
+    //Creo Listener per comando postMessage trimCaches del service Worker
     if (data.command == "trimCache") {
         trimCache(pagesCacheName, 25);
         trimCache(assetsCacheName, 30);
     };
+
+    //Memorizzazione nella cache di una serie di pagine
+    //if (data.command == "offline-opt-in") {
+
+
+
+    //}
+
 });
+
+
 
 /*Show amount of cache space used*/
 //navigator.storageQuota.queryInfo("temporary").then(function (info) {
@@ -322,7 +360,7 @@ function notificationshow(event, tag, title, options) {
             .then(existingNotifications => {
                 for (var i = 0; i < existingNotifications.length; i++) {
                     var existingNotification = existingNotifications[i];
-                  // existingNotification.close();
+                    // existingNotification.close(); //chiudo le notifice presenti
                 }
             })
             .then(() => {

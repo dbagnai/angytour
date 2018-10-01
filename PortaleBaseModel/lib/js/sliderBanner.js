@@ -181,6 +181,7 @@ function initSlider(idDiv, idContainer, width, height) {
     $('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
     $('#' + idDiv).css('visibility', 'visible');
     $('#' + idDiv).revolution({
+        jsFileLocation: "/revolution464/",
         delay: 5000,
         startwidth: width,
         startheight: height,

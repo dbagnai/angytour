@@ -495,7 +495,10 @@
             "~/js/owl-carousel/owl-carousel/owl.carousel.min.js",
              "~/lib/js/common.js",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
-             "~/js/jqueryui/jquery.maskedinput.js"
+            "~/js/jqueryui/jquery.maskedinput.js",
+            "~/js/revolution464/jquery.themepunch.plugins.min.js",
+            "~/js/revolution464/jquery.themepunch.tools.min.js",
+            "~/js/revolution464/jquery.themepunch.revolution.min.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -530,9 +533,6 @@
             "~/js/jquery.base64.js",
             "~/js/jquery.easing.1.3.js",
             "~/js/jquery.prettyPhoto.js",
-            "~/js/jquery.themepunch.plugins.min.js",
-            "~/js/jquery.themepunch.tools.min.js",
-            "~/js/jquery.themepunch.revolution.min.js",
             "~/js/jquery.tipsy.js",
             "~/js/jQuery.XDomainRequest.js",
             "~/js/back-to-top.js",

@@ -3,13 +3,92 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script type="text/javascript" src='<%= "/sw-register.js" + CommonPage.AppendModTime(Server,"~/sw-register.js") %>'></script>
-    <script type="text/javascript" src='<%= "/sw.js" + CommonPage.AppendModTime(Server,"~/sw.js") %>'></script>
 
     <%-- 
         https://developers.google.com/web/fundamentals/push-notifications/sending-messages-with-web-push-libraries
         https://github.com/web-push-libs/web-push-csharp 
     --%>
+    <script>    
+        $(document).ready(function () {
+            $("#Title, #Message, #Link, #Tag").keyup(function () {
+                var payloadObject = {
+                    id: $("#Id").val(),
+                    title: $("#Title").val(),
+                    message: $("#Message").val(),
+                    link: $("#Link").val(),
+                    tag: $("#Tag").val()
+                };
+                $("#Payload").val(JSON.stringify(payloadObject));
+            });
+        });
+        function SendPush() {
+            //va chiamata la funzione serverside che passando il payload $("#Payload").val() ed eventualmente l'id del device (da pescare da una lista di selezione dei device sottoscritti aò servizio ) a cui inviare esegiue il push pushDM.SendNotification
+            jobj["payload"] = $("#Payload").val();
+            $.ajax({
+                url: pathAbs + pushhandlerpath,
+                dataType: "text",
+                type: "POST",
+                //async: false,
+                cache: false,
+                data: { 'q': 'sendnotification', 'lng': lng, 'pushcontainer': JSON.stringify(jobj) },
+                success: function (result) {
+                    try {
+                        console.log('push Done');
+                        // jobj = JSON.parse(result);
+                        $("#spanResponse").text('Push Done');
+                    }
+                    catch (e) {
+                        console.log('fail sending push', e);
+                        $("#spanResponse").text('fail sending push');
+                    }
+                },
+                failure: function (result) {
+                    console.log('fail  sending push', '');
+                    $("#spanResponse").text('fail sending push');
+                }
+            })
+        }
+    </script>
+
+    <div style="background-color: #ddd; padding: 20px">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Push notifications</h2>
+                    <span style="font-size: 12px;">Type your Title and Message and your payload to notify to pass to push notificator will be generated below.</span>
+                    <hr />
+                    <div class="form-group">
+                        <label class="control-label" for="Title">Title</label>
+                        <input class="form-control" type="text" id="Title" name="Title" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Message">Message</label>
+                        <textarea cols="3" class="form-control" id="Message" name="Message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Link">Link</label>
+                        <input class="form-control" type="text" id="Link" name="Link" value="https://www.webmouse.sm" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Tag">Tag</label>
+                        <input class="form-control" type="text" id="Tag" name="Tag" value="notificationtag1" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Payload">Payload</label>
+                        <textarea id="Payload" name="Payload" style="width: 500px; height: 200px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Send Push" class="btn btn-primary" onclick="javascript: SendPush()" />
+                    </div>
+                    <div class="form-group">
+                        <span id="spanResponse"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>    
         var jobj = "";
         $(document).ready(function () {
@@ -74,31 +153,6 @@
                     console.log('fail  generate keys push', '');
                 }
             })
-
-            //Alternativa da testare
-            //var request = new XMLHttpRequest();
-            //var url = pathAbs + pushhandlerpath;
-            //request.open("POST", url, true);
-            //request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            //var data = JSON.stringify({ 'q': 'generatekeys', 'lng': lng });
-            //request.send(data);
-            //request.onreadystatechange = function () {
-            //    if (request.readyState === 4 && request.status === 200) {
-            //        try {
-            //            jobj = JSON.parse(request.response);
-            //            var PublicKey = jobj["VapidKeys"]["PublicKey"];
-            //            var PrivateKey = jobj["VapidKeys"]["PrivateKey"];
-            //            $("#spanPublicKey").text(PublicKey);
-            //            $("#spanPrivateKey").text(PrivateKey);
-            //        }
-            //        catch (e) {
-            //            console.log('fail generate keys push', e);
-            //        }
-            //    }
-            //    else {
-            //        console.log('fail  generate keys push', '');
-            //    }
-            //};
         }
     </script>
     <h2>Configure Keys</h2>
@@ -127,82 +181,7 @@
         </div>
     </div>
 
-    <script>    
-        $(document).ready(function () {
-            $("#Title, #Message, #Link, #Tag").keyup(function () {
-                var payloadObject = {
-                    title: $("#Title").val(),
-                    message: $("#Message").val(),
-                    link: $("#Link").val(),
-                    tag: $("#Tag").val()
-                };
-                $("#Payload").val(JSON.stringify(payloadObject));
-            });
-        });
-        function SendPush() {
-            //va chiamata la funzione serverside che passando il payload $("#Payload").val() ed eventualmente l'id del device (da pescare da una lista di selezione dei device sottoscritti aò servizio ) a cui inviare esegiue il push pushDM.SendNotification
-            jobj["payload"] = $("#Payload").val();
-            $.ajax({
-                url: pathAbs + pushhandlerpath,
-                dataType: "text",
-                type: "POST",
-                //async: false,
-                cache: false,
-                data: { 'q': 'sendnotification', 'lng': lng, 'pushcontainer': JSON.stringify(jobj) },
-                success: function (result) {
-                    try {
-                        console.log('push Done');
-                        // jobj = JSON.parse(result);
-                        $("#spanResponse").text('Push Done');
-                    }
-                    catch (e) {
-                        console.log('fail sending push', e);
-                        $("#spanResponse").text('fail sending push');
-                    }
-                },
-                failure: function (result) {
-                    console.log('fail  sending push', '');
-                    $("#spanResponse").text('fail sending push');
-                }
-            })
-        }
-    </script>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2>Push notifications</h2>
-                <span style="font-size: 12px;">Type your Title and Message and your payload to notify to pass to push notificator will be generated below.</span>
-                <hr />
-                <div class="form-group">
-                    <label class="control-label" for="Title">Title</label>
-                    <input class="form-control" type="text" id="Title" name="Title" value="" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Message">Message</label>
-                    <input class="form-control" type="text" id="Message" name="Message" value="" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Link">Link</label>
-                    <input class="form-control" type="text" id="Link" name="Link" value="https://www.webmouse.sm" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Tag">Tag</label>
-                    <input class="form-control" type="text" id="Tag" name="Tag" value="notificationtag1" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Payload">Payload</label>
-                    <textarea id="Payload" name="Payload" style="width: 500px; height: 200px;"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="button" value="Send Push" class="btn btn-primary" onclick="javascript: SendPush()" />
-                </div>
-                <div class="form-group">
-                    <span id="spanResponse"></span>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
 
         function askPermission() {
@@ -244,7 +223,7 @@
                                 jobj["Devices"].PushP256DH = "";
                                 jobj["Devices"].PushAuth = "";
                                 jobj["Devices"].PushEndpoint = "";
-                                $('#lblidactual').text('');
+                                $('#Id').val('');
                                 $('#Name').val('');
                                 $('#PushEndpoint').val('');
                                 $('#PushP256DH').val('');
@@ -279,7 +258,10 @@
                         //Controllo se sottoscritto e la puclikkey coincide
                         if (subscription) {
                             if (pushM.base64Encode(subscription.options.applicationServerKey) != pushM.applicationServerPublicKey) //sottoscrizione non più valida per cambio keys->unsubscribe
+                            {
                                 subscription.unsubscribe().then(function (successful) { SubscribeTonotifications(); return; });
+                                return;
+                            }
                         }
 
                         pushM.isSubscribed = !(subscription === null);
@@ -310,7 +292,7 @@
                                     $('#PushEndpoint').val(subscription.endpoint);
                                     $('#PushP256DH').val(p256dh);
                                     $('#PushAuth').val(auth);
-                                    $('#lblidactual').text('');
+                                    $('#Id').val('');
                                     jobj["Devices"].Id = 0;
                                     jobj["Devices"].Name = Name;
                                     jobj["Devices"].PushP256DH = p256dh;
@@ -334,7 +316,6 @@
             });
         };
         function updateDatasubscriptions() {
-
             $(".loader").fadeIn("slow");
             var pushcontainer = JSON.stringify(jobj);
             if (pushcontainer != '' && pushcontainer != null) {
@@ -401,7 +382,7 @@
                 jobj["Devices"].PushP256DH = "";
                 jobj["Devices"].PushAuth = "";
                 jobj["Devices"].PushEndpoint = "";
-                $('#lblidactual').text('');
+                $('#Id').val('');
                 $('#Name').val('');
                 $('#PushEndpoint').val('');
                 $('#PushP256DH').val('');
@@ -414,7 +395,7 @@
                 $("#spanSubscriptionsResponse").text('Richiesta Cancellazione error. ' + e);
             }
         }
-        function getdatadevices() {  //caricamento dei devices evices 
+        function getdatadevices(objfiltro) {  //caricamento dei devices evices 
 
             var objfiltro = objfiltro || "";
             var page = page || "";
@@ -429,7 +410,7 @@
                 dataType: "text",
                 type: "POST",
                 //async: false,
-                data: { 'q': 'deviceslist' },
+                data: { 'q': 'deviceslist', 'objfiltro': objfiltro },
                 success: function (result) {
                     if (result != '') {
                         var datarray = JSON.parse(result);
@@ -497,7 +478,7 @@
                         jobj["Devices"].PushAuth = jobj.DevicesList[indexToSelect].PushAuth;
                         jobj["Devices"].PushEndpoint = jobj.DevicesList[indexToSelect].PushEndpoint;
 
-                        $('#lblidactual').text(idbind);
+                        $('#Id').val(jobj["Devices"].Id);
                         $('#Name').val(jobj["Devices"].Name);
                         $('#PushEndpoint').val(jobj["Devices"].PushEndpoint);
                         $('#PushP256DH').val(jobj["Devices"].PushP256DH);
@@ -530,14 +511,15 @@
                 <span style="font-size: 12px;">To be DONE, gestione delle subscriptions  (Create, Delete , List)-> vedi devices controller .</span>
                 <div class="alert alert-warning alert-dismissable">
                     <div class="form-group">
-                        <input type="button" value="Request client permission" class="btn btn-primary" onclick="javascript: requesclientpermission()" />
+
                         <input type="button" value="Subscribe to Push notifications" class="btn btn-primary" onclick="javascript: SubscribeTonotifications()" />
                         <input type="button" value="UNSubscribe to Push notifications" class="btn btn-primary" onclick="javascript: unSubscribeTonotifications()" />
                         <input type="button" value="Cancella id selezionato" class="btn btn-primary" onclick="javascript: deleteDatadevice()" />
+                        <input type="button" value="Request client permission" class="btn btn-primary" onclick="javascript: requesclientpermission()" />
                     </div>
-
                     <div class="form-group">
                         <label class="control-label" id="lblidactual">Id</label>
+                        <input class="form-control" type="text" id="Id" name="Id" readonly value="" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="Name">Name</label>
@@ -585,5 +567,8 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src='<%= "/sw-register.js" + CommonPage.AppendModTime(Server,"~/sw-register.js") %>'></script>
+    <script type="text/javascript" src='<%= "/sw.js" + CommonPage.AppendModTime(Server,"~/sw.js") %>'></script>
+
 </asp:Content>
 

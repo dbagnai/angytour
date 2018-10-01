@@ -150,7 +150,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");
         scriptRegVariables += "; " + string.Format("var idmapcontainer1 = 'map1'");
         scriptRegVariables += "; " + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
-
         scriptRegVariables += "; " + string.Format("var idofferta = '" + idOfferta + "'");
         scriptRegVariables += "; " + string.Format("var tipologia = '" + CodiceTipologia + "'");
         scriptRegVariables += "; " + string.Format("var categoria = '" + Categoria + "'");

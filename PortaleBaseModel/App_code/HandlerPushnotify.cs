@@ -137,7 +137,7 @@ public class HandlerPushNotify : IHttpHandler, IRequiresSessionState
                     string idtodelete = "";
                     if (jr.Devices != null)
                     {
-                        pushDM.Cancella(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, jr.Devices.Id);
+                        pushDM.CancellaDevices(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, jr.Devices.Id);
 
                     }
                     break;

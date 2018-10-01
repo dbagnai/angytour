@@ -9,6 +9,7 @@ using WelcomeLibrary.UF;
 using WelcomeLibrary.DAL;
 using WelcomeLibrary.DOM;
 using System.Data.SQLite;
+using Newtonsoft.Json;
 
 namespace WelcomeLibrary.DAL
 {
@@ -64,6 +65,17 @@ namespace WelcomeLibrary.DAL
                     //options.Add("headers", new Dictionary<string, object>());//elementi string, object .... che sono aggiunti alla notifica
                     //options.Add("TTL", 2419200); //in secondi tempo di default 4 settimane
 
+                    //aggiungo l'id al payload
+                    Dictionary<string, string> depayload = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string,string>>(payload);
+                    if(depayload !=null && depayload.ContainsKey("id")) depayload["id"] = devicebyid.Id.ToString();
+                    payload = Newtonsoft.Json.JsonConvert.SerializeObject(depayload, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+
                     var webPushClient = new WebPushClient();
                     webPushClient.SendNotification(pushSubscription, payload, options);
                     //webPushClient.SendNotification(pushSubscription, payload, vapidDetails);
@@ -71,15 +83,18 @@ namespace WelcomeLibrary.DAL
                 catch (WebPushException e)
                 {
                     //if (e.Message.ToLower().Contains("subscription no longer valid"))
-                    if (e.StatusCode == System.Net.HttpStatusCode.Gone)
-                        Cancella(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, devicebyid.Id); //elimino le sottoscrizioni non più valide
+                    if (e.StatusCode == System.Net.HttpStatusCode.Gone || e.StatusCode == System.Net.HttpStatusCode.Unauthorized || e.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                        CancellaDevices(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, devicebyid.Id); //elimino le sottoscrizioni non più valide
                     errore += " " + e.Message + " statuscode :" + "Http STATUS code" + e.StatusCode;
                     //le sottoscrizioni che catchano per non valide le posso eleiminare da database ..... da fare
                 }
             }
             else //invio a devices multipli
             {
-                foreach (Devices device in pushDM.DevicesList)
+                List<long> idtodelete = new List<long>();
+                pushDM.DevicesList = pushDM.CaricaDevicesFiltratiScript(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);//Ricarico tutti i device dal database application server
+                DevicesCollection tmpcoll = new DevicesCollection(pushDM.DevicesList);
+                foreach (Devices device in tmpcoll)
                 {
 
                     try
@@ -93,18 +108,30 @@ namespace WelcomeLibrary.DAL
                         options.Add("gcmAPIKey", "");
                         //options.Add("headers", new Dictionary<string, object>());//elementi string, object .... che sono aggiunti alla notifica
                         //options.Add("TTL", 2419200); //in secondi tempo di default 4 settimane
+                        //aggiungo l'id al payload
+                        Dictionary<string, string> depayload = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(payload);
+                        if (depayload != null && depayload.ContainsKey("id")) depayload["id"] = device.Id.ToString();
+                        payload = Newtonsoft.Json.JsonConvert.SerializeObject(depayload, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            MissingMemberHandling = MissingMemberHandling.Ignore,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            PreserveReferencesHandling = PreserveReferencesHandling.None,
+                        });
 
                         var webPushClient = new WebPushClient();
                         webPushClient.SendNotification(pushSubscription, payload, options);
                     }
                     catch (WebPushException e)
                     {
+
                         //if (e.Message.ToLower().Contains("subscription no longer valid"))
-                        if (e.StatusCode == System.Net.HttpStatusCode.Gone)
-                            Cancella(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, device.Id); //elimino le sottoscrizioni non più valide
-                        errore += " " + e.Message + " statuscode :" + "Http STATUS code" + e.StatusCode;
+                        if (e.StatusCode == System.Net.HttpStatusCode.Gone || e.StatusCode == System.Net.HttpStatusCode.Unauthorized || e.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                            CancellaDevices(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, device.Id); //elimino le sottoscrizioni non più valide
+                        errore += " " + e.Message + " statuscode :" + "Http STATUS code" + e.StatusCode + "\r\n";
                     }
                 }
+
 
             }
             return errore;
@@ -264,24 +291,6 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
-        public void CancellaDevices(string connection, long Id)
-        {
-            if (connection == null || connection == "") return;
-            if (Id == 0) return;
-            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
-            SQLiteParameter p1 = new SQLiteParameter("@id", Id);//OleDbType.VarChar
-            parColl.Add(p1);
-            string query = "DELETE FROM Devices WHERE ([Id]=@id)";
-            try
-            {
-                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
-            }
-            catch (Exception error)
-            {
-                //throw new ApplicationException("Errore, cancellazione newsletter :" + error.Message, error);
-            }
-            return;
-        }
 
 
         /// <summary>
@@ -294,6 +303,11 @@ namespace WelcomeLibrary.DAL
         {
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
+
+            if (!string.IsNullOrEmpty((item.PushEndpoint)) && item.Id == 0) //se non passo l'id in ogni caso cancello tutti gli endopoint uguali
+            {
+                CancellaDevices(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, 0, item.PushEndpoint);
+            }
 
 
             SQLiteParameter p2b = new SQLiteParameter("@Name", item.Name);//OleDbType.VarChar
@@ -332,17 +346,25 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
-        public static void Cancella(string connection, long Id)
+
+        public static void CancellaDevices(string connection, long Id, string endpoint = "")
         {
             if (connection == null || connection == "") return;
-            if (Id == 0) return;
+          
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             SQLiteParameter p1 = new SQLiteParameter("@id", Id);//OleDbType.VarChar
             parColl.Add(p1);
-            string query = "DELETE FROM Devices WHERE ([ID]=@id)";
+            string query = "DELETE FROM Devices WHERE ([ID]=@id) ";
+            if (!string.IsNullOrEmpty(endpoint))
+            {
+                SQLiteParameter p2 = new SQLiteParameter("@endpoint", endpoint);//OleDbType.VarChar
+                parColl.Add(p2);
+                query += " or PushEndpoint = @endpoint ";
+            }
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+                DevicesList.RemoveAll(dev => dev.Id == Id);
             }
             catch (Exception error)
             {
