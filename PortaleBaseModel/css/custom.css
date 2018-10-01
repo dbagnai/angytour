@@ -92,7 +92,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-color: #098f8f !important;
 }
 .bg-secondary-color {
-  background-color: rgba(9, 143, 143, 0.45) !important;
+  background-color: #90cdcd !important;
 }
 .bg-light-color {
   background-color: rgba(9, 143, 143, 0.08) !important;
@@ -107,7 +107,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   color: #098f8f !important;
 }
 .tx-secondary-color {
-  color: rgba(9, 143, 143, 0.45) !important;
+  color: #90cdcd !important;
 }
 .tx-light-color {
   color: rgba(9, 143, 143, 0.08) !important;
@@ -119,7 +119,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   border-color: #098f8f !important;
 }
 .bd-secondary-color {
-  border-color: rgba(9, 143, 143, 0.45) !important;
+  border-color: #90cdcd !important;
 }
 .bd-light-color {
   border-color: rgba(9, 143, 143, 0.08) !important;
@@ -153,13 +153,17 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-size: 1rem;
   font-weight: 400;
 }
+.fixedtop .form-control,
+.form-control:focus {
+  border: none;
+}
 /*---------------------------------
 --------------- MENU --------------
 ----------------------------------*/
 .menuzord,
 .menuzord * {
   font-family: 'Fira Sans', sans-serif;
-  border-color: rgba(9, 143, 143, 0.45) !important;
+  border-color: #90cdcd !important;
 }
 .menuzord.white .menuzord-menu > li > a {
   color: #032f2f;
@@ -188,7 +192,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .simplemenu,
 .simplemenu * {
   font-family: 'Fira Sans', sans-serif;
-  border-color: rgba(9, 143, 143, 0.45) !important;
+  border-color: #90cdcd !important;
 }
 .simplemenu > ul > li > ul > li {
   padding: 4px;
@@ -604,6 +608,13 @@ ul li .work-image:hover:after,
   transition: all 0.35s ease;
 }
 /*----------------------------------
+------ PULSANTE IMAGE HOVER --------
+----------------------------------*/
+.btn.btn-blue {
+  border: 1px solid #098f8f;
+  box-shadow: none;
+}
+/*----------------------------------
 -------------- FOOTER --------------
 ----------------------------------*/
 .footerhead {
@@ -712,7 +723,7 @@ ul.footer-category-list {
 }
 .footer-wrapper {
   padding: 20px 60px 50px 60px;
-  background-color: rgba(9, 143, 143, 0.45);
+  background-color: #90cdcd;
 }
 .footer .social-icons .social-media-icon {
   background-color: #098f8f;
@@ -780,6 +791,10 @@ ul.footer-category-list {
 /*----------------------------------
 -------- BANNER NAVIGAZIONE --------
 ----------------------------------*/
+.work-subcaption {
+  width: 100%;
+  height: auto;
+}
 .isotope-navigation a .rounded {
   width: 100%;
   background-color: #fff;
@@ -844,6 +859,12 @@ ul.footer-category-list {
 /*#menuzord ul .dropdown li:nth-child(1) {
     background: url(/images/icon-lampada.png) center calc(~'50% - 90px + 12.5%') no-repeat !important;
 }*/
+/*------------------------------------
+-------- BANNER DICONO DI NOI --------
+------------------------------------*/
+.a-bg-petrol {
+  background-color: #098f8f;
+}
 /*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
@@ -1000,7 +1021,7 @@ select.form-control:not([size]):not([multiple]) {
   width: 50px;
   height: 50px;
   float: left;
-  background: rgba(9, 143, 143, 0.45);
+  background: #90cdcd;
   line-height: 32px;
   border-radius: 50%;
   color: #fff;
@@ -1150,7 +1171,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .faq-section .card {
   background-color: #fff;
-  border: 1px solid rgba(9, 143, 143, 0.45);
+  border: 1px solid #90cdcd;
   border-radius: 0px;
   margin-bottom: -1px;
 }
@@ -1193,7 +1214,7 @@ select.form-control:not([size]):not([multiple]) {
   }
   .menuzord-menu a {
     position: relative;
-    padding: 8px 14px !important;
+    padding: 0px 14px !important;
   }
   .menuzord-menu a:hover {
     color: #077777;
@@ -1288,10 +1309,10 @@ select.form-control:not([size]):not([multiple]) {
 }
 .form-control,
 .form-control:focus {
-  border: 1px solid rgba(9, 143, 143, 0.45);
+  border: 1px solid #90cdcd;
 }
 .ui-15 .ui-form .ui-icon {
-  color: rgba(9, 143, 143, 0.45) !important;
+  color: #90cdcd !important;
 }
 /*--------------- FORM - ERRORE COMPILAZIONE DATI MANCANTI ---------------*/
 .errormessageform {

@@ -1060,30 +1060,74 @@ function InitIsotope() {
 
 
 
-var offsets = $('.fa-shopping-cart').offset();
-var carrellotop = offsets.top - 20;
-var carrelloleft = offsets.left - 0;
+/* ---------------------------------------------- /*
+     * ANIMATION CARRELLO tipo lancia
+    /* ---------------------------------------------- */
 
-var $follower = $("#carrello-go"),
-    mouseX = 0,
-    mouseY = 0;
 
-$("li:nth-child(n+1) #carrello-click").click(function (e) {
-    mouseX = e.pageX - 20;
-    mouseY = e.pageY - 20;
-    $follower.stop().css({ left: mouseX, top: mouseY });
+//var offsets = $('.fa-shopping-cart').offset();
+//var carrellotop = offsets.top - 20;
+//var carrelloleft = offsets.left - 0;
 
-    $('#carrello-go').addClass('carrello-go-launch');
+//var $follower = $("#carrello-go"),
+//    mouseX = 0,
+//    mouseY = 0;
 
-    $('#carrello-go').animate({ left: carrelloleft, top: carrellotop }, 750);
+//$("li:nth-child(n+1) #carrello-click").click(function (e) {
+//    mouseX = e.pageX - 20;
+//    mouseY = e.pageY - 20;
+//    $follower.stop().css({ left: mouseX, top: mouseY });
 
+//    $('#carrello-go').addClass('carrello-go-launch');
+
+//    $('#carrello-go').animate({ left: carrelloleft, top: carrellotop }, 750);
+
+//});
+
+
+/* ---------------------------------------------- /*
+     * ANIMATION CARRELLO tipo rotate
+    /* ---------------------------------------------- */
+
+
+//----- ruota carrello -----
+
+$(function () {
+    $(".button-carrello, .button-carrello1").click(function () {
+        $('.button-carrello-animate').addClass('carrello-go-rotate');
+        setTimeout(RemoveClass, 1000);
+    });
+    function RemoveClass() {
+        $('.button-carrello-animate').removeClass("carrello-go-rotate");
+    }
 });
 
-//var carrellod = document.getElementById("#carrello-go");
-//var carrellotopPos = carrellod.offsetTop;
+//----- aggiungi n° colli -----
 
-//$(document).ready(function () {
-//if (carrellotopPos < 100) {
-//    $('#carrello-go').removeClass('carrello-go-launch');
-//    }
-//});
+$(function () {
+    $('#carrello-click .button-carrello, .button-carrello1, #carrellos1plus').on("click", function () {
+        addOneToThings();
+    })
+});
+
+function addOneToThings() {
+    var countSpan = $('.count');
+    var currentThings = parseInt(countSpan.text());
+    currentThings++;
+    countSpan.text(currentThings);
+}
+
+//----- sottrai n° colli -----
+
+$(function () {
+    $('#carrellos1minus').on("click", function () {
+        subOneToThings();
+    })
+});
+
+function subOneToThings() {
+    var countSpan = $('.count');
+    var currentThings = parseInt(countSpan.text());
+    currentThings--;
+    countSpan.text(currentThings);
+}

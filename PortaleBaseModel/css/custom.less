@@ -103,6 +103,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     font-size: 1rem;
     font-weight: 400;
 }
+.fixedtop .form-control, .form-control:focus {
+    border: none;
+}
 
 /*---------------------------------
 --------------- MENU --------------
@@ -508,6 +511,14 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     transition: all 0.35s ease;
 }
 
+/*----------------------------------
+------ PULSANTE IMAGE HOVER --------
+----------------------------------*/
+.btn.btn-blue {
+    border: 1px solid @bg-primary-color;
+    box-shadow: none;
+}
+
     /*----------------------------------
 -------------- FOOTER --------------
 ----------------------------------*/
@@ -711,6 +722,11 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     /*----------------------------------
 -------- BANNER NAVIGAZIONE --------
 ----------------------------------*/
+.work-subcaption {
+    width: 100%;
+    height: auto;
+}
+
     .isotope-navigation a .rounded {
         width: @banner-navigazione-width;
         background-color: @banner-navigazione-background;
@@ -783,6 +799,13 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     /*#menuzord ul .dropdown li:nth-child(1) {
     background: url(/images/icon-lampada.png) center calc(~'50% - 90px + 12.5%') no-repeat !important;
 }*/
+
+/*------------------------------------
+-------- BANNER DICONO DI NOI --------
+------------------------------------*/
+.a-bg-petrol {
+    background-color: @bg-primary-color;
+}
 
     /*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
@@ -1180,7 +1203,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 
         .menuzord-menu a {
             position: relative;
-            padding: 8px 14px !important;
+            padding: 0px 14px !important;
         }
 
         .menuzord-menu a:hover {
