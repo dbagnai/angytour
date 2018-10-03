@@ -921,10 +921,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             string nomemittente = txtContactName.Value;
             string mittenteMail = txtContactEmail.Value;
             string mittenteTelefono = txtContactTelefono.Value;
-
             string nomedestinatario = CommonPage.Nome;
             string maildestinatario = CommonPage.Email;
             long idperstatistiche = 0;
+
             string tipo = "informazioni";
             string SoggettoMail = "Richiesta " + tipo + " da " + nomemittente + " tramite il sito " + CommonPage.Nome;
             string Descrizione = txtContactMessage.Value.Replace("\r", "<br/>") + " <br/> ";

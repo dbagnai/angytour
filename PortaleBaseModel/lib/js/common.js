@@ -56,7 +56,7 @@ $(window).scroll(function () {
     var scrollPosition = $(window).scrollTop();
     if (enablescrolltopmem) {
         sessionStorage.setItem("scrollPosition_" + pathName, scrollPosition.toString());
-         console.log(scrollPosition);
+        console.log(scrollPosition);
     }
 });
 /*Recover scroll top pos from memory*/
@@ -78,7 +78,7 @@ var reinitscrollpos = function () {
 
 
 $(document).ready(function () {
-   searchtaginjectandcall();
+    searchtaginjectandcall();
 });
 //searchtaginjectandcall();
 
@@ -120,7 +120,7 @@ function searchtaginjectandcall() {
             (function wait() {
                 if (levelscopes.length == 2)
                     if (typeof window[levelscopes[0]][levelscopes[1]] === "function") {
-                        window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args)//make the call
+                        window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args);//make the call
                     } else {
                         setTimeout(wait, 50);
                     }
@@ -568,8 +568,7 @@ function fillDDLArraySimple(container, jsonDictionary, selectionText, selectionV
             //$select.change(); //Chiama il change per aggiornare le variabili javascript ( se presente l'evento nel controllo )
         }
     }
-    catch (e) {
-    }
+    catch (e) { }
 }
 
 function fillDDLArray(container, jsonDictionary, selectionText, selectionValue, nameKey, nameValue) {
@@ -595,8 +594,7 @@ function fillDDLArray(container, jsonDictionary, selectionText, selectionValue, 
         }
         return $select;
     }
-    catch (e) {
-    }
+    catch (e) { }
 }
 
 function initDdl(q, ddlid, selecttext, selectvalue, selectedvalue, lng, filter1, filter2) {
@@ -1151,7 +1149,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                                             imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
                                         }
                                     }
-                                    catch (e) {};
+                                    catch (e) { };
                                 }
 
                                 //  contenutoslide += '<a rel="prettyPhoto[pp_gal]" href="' + imgslist[j] + '">';
@@ -2021,6 +2019,33 @@ function frmregione(localObjects, valore, prop, callback) {
 /*--------------------------------------------------------------------------------------------------------
 //CARICAMENTO DATI --------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------*/
+
+
+function inviamessaggiomail(lng, data, callback) {
+    var lng = lng || "I";
+    var data = data || {};
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data) },
+        success: function (result) {
+            //if (callback)
+            //    callback(result);
+            location.replace(result);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            if (callback)
+                callback(result.responseText);
+        }
+    });
+}
+
 function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2046,6 +2071,9 @@ function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallone
         }
     });
 }
+
+
+
 function caricaParametriRisorseServer(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";

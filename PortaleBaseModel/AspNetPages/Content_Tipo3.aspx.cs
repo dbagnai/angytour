@@ -84,7 +84,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                     metarobots.Attributes["Content"] = "noindex,follow";
                 }
 
-                CaricaControlliJS();
+              //  CaricaControlliJS();
 
 
                 string conversione = CaricaValoreMaster(Request, Session, "conversione");

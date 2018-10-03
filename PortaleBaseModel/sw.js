@@ -83,22 +83,93 @@ function clearCaches() {
     })
 }
 
+/* GESTIONE RICHIESTE OFFLINE  ////////////////////////////////////////////////////////////////////////////////////////////    */
+
+const isOnLine = () => isOnlinevar;
+var isOnlinevar = false;
+function checkonline() {
+    var onlinepromisecheck = fetch(new Request('/images/favicon.ico'), {
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    }).then(networkResponse => {
+        isOnlinevar = true;
+        return true;
+    }).catch((err) => {
+        //we are offline!!!
+        //Memorizziamo le chiamate che mi servono in una coda per riuso successivo
+        isOnlinevar = false; return false;
+    });
+    return onlinepromisecheck;
+}
+const requestBuffer = {
+    _requestQueue: [],
+    intervalId: null,
+    pushRequestForRetry(request, event) {
+        this._requestQueue.push(request);
+        if (!this.intervalId) {
+            this.start(event);
+        }
+    },
+    start(event) {
+        const retry = async () => {
+            if (isOnLine()) {
+                console.log('[service worker] connection re-established, retrying with buffered requests');
+                while (this._requestQueue.length) {
+                    await fetch(this._requestQueue.shift()); //esegue le fetch nella coda!!!! ( Problema le POST REQUEST non posso fare fetch !!!)
+                }
+                const client = await clients.get(event.clientId);
+                if (client) {
+                    client.postMessage({
+                        msg: 'Connection re-established; pending requests flushed.'
+                    });
+                }
+                clearTimeout(this.intervalId);
+                this.intervalId = null;
+            } else {
+                this.intervalId = setTimeout(retry, 5000);
+            }
+            checkonline(); //Aggiorno la varialbile isOnLine
+        }
+        this.intervalId = setTimeout(retry, 5000);
+    }
+}
+/* FINE GESTIONE RICHIESTE OFFLINE ////////////////////////////////////////////////////////////////////////////// */
+
 
 self.addEventListener('fetch', function (event) {
-
     let request = event.request, acceptHeader = event.request.headers.get('Accept');
 
-    //////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     // controlliamo se la chiamata deve essere servita dal service worker o meno
     if (!shouldFetch(event)) {
-        event.respondWith(
-            fetch(request)
-                .catch(() => {
-                    return;
-                })
-        );
-        return;
+        //test handler call per contatti se online -> se corrisponde inserisco nella push cache per rifare la chiamata dopo
+        if (request.url.toLowerCase().indexOf(".ashx") !== -1 && request.url.toLowerCase().indexOf("handlerdatacommon") !== -1) {
+            var newrequest = request.clone();
+            checkonline().then(function (onlinestatus) {
+                //    console.log("Online statis from check :" + onlinestatus + " requesturl:" + request.url);
+                if (!onlinestatus) {
+                    //Siamo offline
+                    console.log('[service worker] app is offline - storing a request to retry later');
+                    requestBuffer.pushRequestForRetry(newrequest.clone(), event);
+                    //event.respondWith(Promise.resolve(new Response({}, { status: 202 }))); // 202 - Accepted
+                }
+            });
+            return;
+        } else {
+
+            event.respondWith(
+                fetch(request)
+                    .catch((err) => {
+                        //we are offline!!!
+                        return;
+                    })
+            );
+            return;
+        }
+
     }
+    ////////////////////////////////////////////////////////////////////////////
 
 
     //if (request.url.indexOf(myPwaUrlPath) !== -1) { return; } //Posso saltare tutte le richieste che non voglio gestire col service worker restituendole direttamente ( oppure viceversa ) 
@@ -191,7 +262,7 @@ self.addEventListener('fetch', function (event) {
                     }
                     return networkResponse;
                 }).catch(() => {
-                    console.log("err fetching assetres");
+                    console.log("err update fetch assetres ");// + request.url);
                     return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', { headers: { 'Content-Type': 'image/svg+xml' } });
                 });
                 //////////////////////////////////////
@@ -260,7 +331,7 @@ function trimCache(cacheName, maxItems) {
     });
 }
 
- 
+
 //helper chre trova tutti i match in base ad una regular expression in una string
 function getMatches(string, regex, index) {
     index || (index = 1); // default to the first capturing group
@@ -284,6 +355,12 @@ function getMatches(string, regex, index) {
 //        return cache.addAll(assets);
 //    })
 //}
+
+
+
+
+
+
 
 //Mi metto in ascolto dai messaggio inviati dalle pagine web servite!!
 self.addEventListener('message', event => {

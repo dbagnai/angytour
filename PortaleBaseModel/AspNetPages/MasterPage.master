@@ -524,13 +524,13 @@
                                 <span class="text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
                                 <br />
                                 <br />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
                                 <br />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
                                 <br />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" name="q" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
+                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
                                 <br />
-                                <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" name="q" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
+                                <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                                 <br />
                                 <div style="clear: both"></div>
                                 <div class="checkbox">
@@ -540,14 +540,10 @@
                                         <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff;" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                     </label>
                                 </div>
-
                                 <div style="clear: both"></div>
-
                                 <div>
-                                    <%--class="mbr-section-btn"--%>
                                     <script>
                                         function ConfirmValidationFormMaster(elembtn) {
-                                            console.log('clicked');
                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
                                             var out1 = document.getElementById("outputContactMasterDiv");
                                             if (!chk1.checked) {
@@ -557,21 +553,52 @@
                                             if (Page_ClientValidate("contattifooter")) {
                                                 /*do work and go for postback*/
                                                 console.log('ok validated');
-                                                var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
                                                 $(elembtn).attr("disabled", "")
-                                                $(elembtn).innerHTML = "Wait ..";
-                                                buttpost.click();
+
+                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                var contactdatas = {};
+                                                contactdatas.chkprivacy = chk1.checked;
+                                                getcontactdata(contactdatas, function (contactdatas) {
+                                                    var tastotxt = $(elembtn).html();
+                                                    $(elembtn).html("Wait ..");
+                                                    inviamessaggiomail(lng, contactdatas, function (result) {
+                                                        if (result) {
+                                                            //in caso di errore visualizzo
+                                                            out1.innerHTML = result;
+                                                            $(elembtn).removeAttr("disabled")
+                                                            $(elembtn).html(tastotxt);
+                                                        }
+                                                    }, tastotxt);
+                                                }, $(elembtn));
+                                                ///////////////////////////////////////////////////////////////////////
+
+                                                ///////////////////////////////////////////////////////////////////////
+                                                //Invio con post back (metodo originale)
+                                               <%-- var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                $(elembtn).html("Wait ..");
+                                                buttpost.click();--%>
+                                                ////////////////////////////////////////////////////////////////////////
                                             } else {
                                                 console.log('not  validated');
                                                 return false;
                                             }
+                                        }
+
+                                        function getcontactdata(contactdatas, callback) {
+                                            var contactdatas = contactdatas || {};
+                                            contactdatas.idofferta = '<%= idOfferta %>';
+                                            contactdatas.name = $("[id$='txtContactName']").val();
+                                            contactdatas.email = $("[id$='txtContactEmail']").val();
+                                            contactdatas.telefono = $("[id$='txtContactTelefono']").val();
+                                            contactdatas.message = $("[id$='txtContactMessage']").val();
+                                            contactdatas.tipo = "informazioni";
+                                            callback(contactdatas);
                                         }
                                     </script>
                                     <br />
                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
 
-                                    <%--<asp:Button Style="float: right" ID="btnInvia" runat="server" Text='<%# references.ResMan("Common", Lingua,"TestoInvio")  %>' CausesValidation="true" UseSubmitBehavior="true" ValidationGroup="contattifooter" class="divbuttonstyle" OnClick="btnContatti1_Click" OnClientClick="return ConfirmValidation();" />--%>
                                 </div>
                                 <div class="lead py-3" style="height: 75px;">
                                     <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
@@ -751,7 +778,7 @@
                         <div class="row">
                             <div class="col-lg-12" style="text-align: center">
                                 <p style="font-size: 1.2em; padding: 30px 10px; line-height: 1.8rem !important;">
-                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br/>
+                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
                                     <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>- Project by Web Mouse Consulting srl -
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
                                         <%= references.ResMan("Common", Lingua,"Testologin") %></a>

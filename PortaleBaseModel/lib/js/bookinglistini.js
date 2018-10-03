@@ -119,7 +119,7 @@ function fillselect(controlid) {
         try {
             var idcontrollo = $(this).attr('id');
             var prefix = idcontrollo.substring(0, 4);
-            idcontrollo = idcontrollo.substring(4);;//Rimuovo il prefisso 4 caratteri per trovare la lista
+            idcontrollo = idcontrollo.substring(4);//Rimuovo il prefisso 4 caratteri per trovare la lista
             var selectedvalue = '';
 
             if (globalObject[controlid + "objfiltro"].hasOwnProperty('id' + idcontrollo))

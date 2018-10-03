@@ -289,6 +289,127 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(jpathcomplete);
                     break;
+                case "inviamessaggiomail":
+                    string smaildata = pars.ContainsKey("data") ? pars["data"] : "";
+                    Dictionary<string, string> maildata = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(smaildata);
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Prepariamo e inviamo il mail
+                    Dictionary<string, string> destinatariperregione = new Dictionary<string, string>();
+
+
+                    string nomemittente = (maildata.GetValueOrDefault("name") ?? "");
+                    string cognomemittente = (maildata.GetValueOrDefault("cognome") ?? "");
+                    string mittenteMail = (maildata.GetValueOrDefault("email") ?? "");
+                    string mittenteTelefono = (maildata.GetValueOrDefault("telefono") ?? "");
+                    string message = (maildata.GetValueOrDefault("message") ?? "");
+                    string location = (maildata.GetValueOrDefault("location") ?? "");
+                    string regione = (maildata.GetValueOrDefault("regione") ?? "");
+                    string adulti = (maildata.GetValueOrDefault("adulti") ?? "");
+                    string bambini = (maildata.GetValueOrDefault("bambini") ?? "");
+                    string arrivo = (maildata.GetValueOrDefault("arrivo") ?? "");
+                    string partenza = (maildata.GetValueOrDefault("partenza") ?? "");
+                    string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");
+                    string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");
+                    bool spuntaprivacy = false;
+                    bool spuntanewsletter = false;
+                    bool.TryParse(chkprivacy, out spuntaprivacy);
+                    bool.TryParse(chknewsletter, out spuntanewsletter);
+
+                    string idofferta = (maildata.GetValueOrDefault("idofferta") ?? "");
+                    string nomedestinatario = ConfigManagement.ReadKey("Nome");
+                    string maildestinatario = ConfigManagement.ReadKey("Email");
+                    string tipocontenuto = (maildata.GetValueOrDefault("tipocontenuto") ?? "");
+                    long idperstatistiche = 0;
+                    string tipo = (maildata.GetValueOrDefault("tipo") ?? "");
+                    if (tipocontenuto == "Prenota")
+                        tipo = "richiesta preventivo prenotazione ";
+                    if (tipocontenuto == "Acquistousato")
+                        tipo = "vendita usato ";
+
+                    string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + " " + nomemittente + " tramite il sito " + ConfigManagement.ReadKey("Nome");
+                    string Descrizione = message.Replace("\r", "<br/>") + " <br/> ";
+                    if (idofferta != "") //Inseriamo il dettaglio della scheda di provenienza
+                    {
+                        offerteDM offDM = new offerteDM();
+                        Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idofferta);
+                        if (item != null && item.Id != 0)
+                        {
+                            long.TryParse(idofferta, out idperstatistiche);
+                            if (!string.IsNullOrWhiteSpace(item.Email)) //Se non è vuota mando alla mail indicata nell'articolo
+                            {
+                                nomedestinatario = item.Email;
+                                maildestinatario = item.Email;
+                            }
+                            Descrizione += "<br/><br/>";
+                            Descrizione += "Pagina provenienza: " + item.DenominazioneI.Replace("\r", "<br/>") + " id:" + idperstatistiche;
+                            Descrizione += "<br/><br/>";
+                        }
+                    }
+                    if (tipocontenuto == "Richiesta")
+                    {
+                    }
+                    if (tipocontenuto == "Prenota")
+                    {
+                        Descrizione += " <br/> Arrivo richiesto:" + arrivo + " Partenza Richiesta: " + partenza;
+                        Descrizione += " <br/> Numero adulti:" + adulti + " <br/> Numero bambini:" + bambini + " Alloggio : " + location;
+                    }
+
+
+                    Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
+                    Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + lingua;
+                    Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
+
+                    if (spuntanewsletter == true)
+                    {
+                        Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
+
+                        //SoggettoMail = "Richiesta iscrizione newsletter da " + nomemittente + " tramite il sito " + Nome;
+                        //------------------------------------------------
+                        //Memorizzo i dati nel cliente per la newsletter
+                        //------------------------------------------------
+                        ClientiDM cliDM = new ClientiDM();
+                        Cliente cli = new Cliente();
+                        string tipocliente = "0"; //Cliente standard per newsletter
+                        //  cli.DataNascita = System.DateTime.Now.Date;
+                        cli.Lingua = lingua;
+                        cli.id_tipi_clienti = tipocliente;
+                        cli.Nome = nomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                        cli.Cognome = cognomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                        cli.Consenso1 = true;
+                        cli.ConsensoPrivacy = true;
+                        cli.Validato = true;
+                        cli.Email = mittenteMail.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                        Cliente _clitmp = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email, tipocliente);
+                        if ((_clitmp != null && _clitmp.Id_cliente != 0))
+                            cli.Id_cliente = _clitmp.Id_cliente;
+                        cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cli);
+                    }
+
+                    if (spuntaprivacy)
+                    {
+                        Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        // Registro la statistica di contatto
+                        Statistiche stat = new Statistiche();
+                        stat.Data = DateTime.Now;
+                        stat.EmailDestinatario = maildestinatario;
+                        stat.EmailMittente = mittenteMail;
+                        stat.Idattivita = idperstatistiche;
+                        stat.Testomail = nomemittente + "<br/>" + SoggettoMail + "<br/>" + Descrizione;
+                        stat.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
+                        stat.Url = "";
+                        statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
+                        result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
+                        if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
+                        result += "&conversione=true";
+                    }
+                    else
+                    {
+                        result = references.ResMan("Common", lingua, "txtPrivacyError") + " <br/> Mancata Autorizzazione privacy"; ;
+                        throw new ApplicationException(result);
+                    }
+
+                    break;
                 case "putinsession":
                     context.Session.Add(Key, Value);
                     break;
@@ -734,11 +855,10 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     Dictionary<string, string> filtriArchivio = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
                     Dictionary<string, string> valueArchivio = new Dictionary<string, string>();
                     Dictionary<string, List<Tabrif>> tmpArchivio = new Dictionary<string, List<Tabrif>>();
-
-                    offerteDM offDM = new offerteDM();
+                    offerteDM offDM1 = new offerteDM();
                     Tabrif elem = new Tabrif();
 
-                    Dictionary<string, Dictionary<string, string>> archivioperannomese = offDM.ContaPerAnnoMese(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, lingua, filtriArchivio["tipologia"], filtriArchivio["categoria"]);
+                    Dictionary<string, Dictionary<string, string>> archivioperannomese = offDM1.ContaPerAnnoMese(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, lingua, filtriArchivio["tipologia"], filtriArchivio["categoria"]);
                     string link = "";
                     foreach (string anno in archivioperannomese.Keys)
                     {

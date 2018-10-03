@@ -67,7 +67,7 @@
                             <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
                                 ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
                             <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
-                            <div id="recaptcharesponse" style="display:none;" class="errormessageformprivacy"></div>
+                            <div id="recaptcharesponse" style="display: none;" class="errormessageformprivacy"></div>
                         </div>
                         <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
                             <div class="col-sm-6 py-1 px-3 px-sm-4 pt-2 text-center bg-manual-secondary-color-fade">
@@ -345,16 +345,56 @@
                                                                         if (Page_ClientValidate("MailInfo")) {
                                                                             /*do work and go for postback*/
                                                                             $(elembtn).attr("disabled", "")
-                                                                            $(elembtn).val("Wait ..");
-                                                                            var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                                                            buttpost.click();  
+
+                                                                            //invio nopostback con handler////////////////////////////////////////////////////
+                                                                            var contactdatas = {};
+                                                                            contactdatas.chkprivacy = $('<%= "#" + chkPrivacy.ClientID %>')[0].checked;
+                                                                            contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                                                            getcontactdata1(contactdatas, function (contactdatas) {
+                                                                                var tastotxt = $(elembtn).html();
+                                                                                $(elembtn).html("Wait ..");
+                                                                                inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                                    if (result) {
+                                                                                        //in caso di errore visualizzo
+                                                                                        $("#recaptcharesponse").html(result);
+                                                                                        $('#recaptcharesponse').css({ 'display': 'block' });
+                                                                                        $(elembtn).removeAttr("disabled")
+                                                                                        $(elembtn).html(tastotxt);
+                                                                                    }
+                                                                                }, tastotxt);
+                                                                            }, $(elembtn));
+                                                                            ///////////////////////////////////////////////////////////////////////
+
+                                                                            ////////////////////////////////////////////////////////////////////////
+                                                                            //Invio con postback
+                                                                          <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                                            $(elembtn).html("Wait ..");
+                                                                            buttpost.click();--%>
+                                                                            ////////////////////////////////////////////////////////////////////////
+
                                                                         } else {
                                                                             // alert('not validated');
                                                                             return false;
-
-                                                                        
                                                                         }
                                                                         //}
+                                                                    }
+                                                                    function getcontactdata1(contactdatas, callback) {
+                                                                        var contactdatas = contactdatas || {};
+                                                                        contactdatas.idofferta = '<%= idOfferta %>';
+                                                                        contactdatas.tipocontenuto = '<%= TipoContenuto %>';
+                                                                        contactdatas.location = $("#ddlLocations option:selected").text();
+                                                                        contactdatas.regione = $("#ddlRegione option:selected").val();
+                                                                        contactdatas.adulti = $("[id$='txtAdulti']").val();
+                                                                        contactdatas.bambini = $("[id$='txtBambini']").val();
+                                                                        contactdatas.arrivo = $("[id$='txtArrivo']").val();
+                                                                        contactdatas.partenza = $("[id$='txtPartenza']").val();
+                                                                        contactdatas.name = $("[id$='txtNome']").val();
+                                                                        contactdatas.cognome = $("[id$='txtSoc']").val();
+                                                                        contactdatas.email = $("[id$='txtEmail']").val();
+                                                                        contactdatas.telefono = $("[id$='txtTel']").val();
+                                                                        contactdatas.message = $("[id$='txtDescrizione']").val();
+                                                                        contactdatas.tipo = "informazioni";
+                                                                        callback(contactdatas);
                                                                     }
                                                                 </script>
 

@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-10 col-sm-10 col-12">
                 <span class="h1-body-title" style="color: #5c5c5c; margin-bottom: 10px">
-                    <asp:literal text="" runat="server" id="litSezione" />
+                    <asp:Literal Text="" runat="server" ID="litSezione" />
                 </span>
             </div>
             <div class="col-md-1 col-sm-1">
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div style="text-align: center">
-                    <asp:literal text="" runat="server" id="litTextHeadPage" />
+                    <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <asp:literal text="" id="placeholderrisultati" runat="server" />
+    <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
 
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
@@ -64,13 +64,13 @@
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
             <div class="row" style="color: red; font-size: 1.2rem">
-                <asp:label id="output" runat="server"></asp:label>
+                <asp:Label ID="output" runat="server"></asp:Label>
             </div>
             <%--Container per inject java della scheda--%>
             <div id="divItemContainter1" style="position: relative; display: none"></div>
 
             <%--Rpt per scheda lato server--%>
-            <asp:repeater id="rptOfferta" runat="server" onitemdatabound="rptOfferta_ItemDataBound">
+            <asp:Repeater ID="rptOfferta" runat="server" OnItemDataBound="rptOfferta_ItemDataBound">
                 <ItemTemplate>
                     <div class="blog-post" style="text-align: justify" itemscope="" itemtype="http://schema.org/Product">
                         <div class="blog-span">
@@ -204,7 +204,7 @@
                         </div>
                     </div>
                 </ItemTemplate>
-            </asp:repeater>
+            </asp:Repeater>
 
             <div class="clearfix"></div>
             <%--SUGGERITI--%>
@@ -217,8 +217,8 @@
                     </span>
                 </div>
 
-                <asp:repeater id="rptArticoliSuggeriti" runat="server"
-                    viewstatemode="Enabled">
+                <asp:Repeater ID="rptArticoliSuggeriti" runat="server"
+                    ViewStateMode="Enabled">
                     <ItemTemplate>
                         <div class="col-sm-4" style="padding-left: 0px;">
                             <div class="blog-post">
@@ -289,7 +289,7 @@
                         </div>
                         <%= SeparaRows()%>
                     </ItemTemplate>
-                </asp:repeater>
+                </asp:Repeater>
 
             </div>
         </div>
@@ -347,7 +347,7 @@
 
                                                 <div class="checkbox">
                                                     <label>
-                                                        <asp:checkbox id="chkContactPrivacy1" runat="server" checked="false" />
+                                                        <asp:CheckBox ID="chkContactPrivacy1" runat="server" Checked="false" />
                                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                                         <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                                     </label>
@@ -364,25 +364,59 @@
                                                             /*do work and go for postback*/
                                                             console.log('ok validated');
                                                             var buttpost = document.getElementById("<%= btnFormContattoSrv.ClientID  %>");
-                                                            $(elembtn).attr("disabled", "")
-                                                            $(elembtn).innerHTML = "Wait ..";
-                                                            buttpost.click();
+                                                            $(elembtn).attr("disabled", "");
+
+                                                            //invio nopostback con handler////////////////////////////////////////////////////
+                                                            var contactdatas = {};
+                                                            contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy1.ClientID %>')[0].checked;
+                                                            getcontactdata1(contactdatas, function (contactdatas) {
+                                                                var tastotxt = $(elembtn).html();
+                                                                $(elembtn).html("Wait ..");
+                                                                inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                    if (result) {
+                                                                        //in caso di errore visualizzo
+                                                                        document.getElementById("outputContact1div").innerHTML = (result);
+                                                                        $(elembtn).removeAttr("disabled");
+                                                                        $(elembtn).html(tastotxt);
+                                                                    }
+                                                                }, tastotxt);
+                                                            }, $(elembtn));
+                                                            ///////////////////////////////////////////////////////////////////////
+
+                                                                            ////////////////////////////////////////////////////////////////////////
+                                                            //Invio con postback
+                                                            <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                            $(elembtn).html("Wait ..");
+                                                            buttpost.click();--%>
+                                                            ////////////////////////////////////////////////////////////////////////
                                                         } else {
                                                             console.log('not  validated');
                                                             return false;
                                                         }
                                                     }
+                                                    function getcontactdata1(contactdatas, callback) {
+                                                        var contactdatas = contactdatas || {};
+                                                        contactdatas.idofferta = '<%= idOfferta %>';
+                                                        contactdatas.name = $("[id$='txtContactName1']").val();
+                                                        contactdatas.cognome = $("[id$='txtContactCognome1']").val();
+                                                        contactdatas.email = $("[id$='txtContactEmail1']").val();
+                                                        contactdatas.telefono = $("[id$='txtContactPhone1']").val();
+                                                        contactdatas.message = $("[id$='txtContactMessage1']").val();
+                                                        contactdatas.tipo = "informazioni";
+                                                        callback(contactdatas);
+                                                    }
+
                                                 </script>
                                                 <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral1" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                                <asp:button id="btnFormContattoSrv" style="display: none" runat="server" onclick="btnContatti1_Click" />
+                                                <asp:Button ID="btnFormContattoSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
                                                 <div style="font-weight: 300; font-size: 1.2rem; color: red" id="outputContact1div">
-                                                    <asp:literal text="" id="outputContact1" runat="server" />
+                                                    <asp:Literal Text="" ID="outputContact1" runat="server" />
                                                 </div>
                                                 <div style="clear: both"></div>
 
-                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral1" controltovalidate="txtContactName1" runat="server" />
-                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' validationgroup="contattilateral1" controltovalidate="txtContactCognome1" runat="server" />
-                                                <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' validationgroup="contattilateral1" controltovalidate="txtContactEmail1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactName1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactCognome1" runat="server" />
+                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral1" ControlToValidate="txtContactEmail1" runat="server" />
 
 
 
@@ -402,8 +436,8 @@
                     </h3>
                     <div class="sidebar-content">
                         <ul class="posts-list">
-                            <asp:repeater id="rtpLatestPost" runat="server"
-                                viewstatemode="Enabled">
+                            <asp:Repeater ID="rtpLatestPost" runat="server"
+                                ViewStateMode="Enabled">
                                 <ItemTemplate>
                                     <li>
                                         <div class="posts-list-thumbnail">
@@ -432,7 +466,7 @@
                                         </div>
                                     </li>
                                 </ItemTemplate>
-                            </asp:repeater>
+                            </asp:Repeater>
                         </ul>
                     </div>
                 </div>
@@ -462,7 +496,7 @@
         }
         $(document).ready(function () {
             inizializzaFlexsliderScheda();
-           // $('.zoommgfy').magnify();
+            // $('.zoommgfy').magnify();
         });
         function inizializzaFlexsliderScheda() {
             //Plugin: flexslider con funzione di animazione dei messaggi o oggetti sopra
@@ -603,7 +637,7 @@
                 $select.val(carcombined[1]);
         });
     </script>
-    <asp:hiddenfield runat="server" id="hddTagCombined" clientidmode="Static" />
+    <asp:HiddenField runat="server" ID="hddTagCombined" ClientIDMode="Static" />
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
@@ -663,7 +697,7 @@
 
                             <div class="checkbox">
                                 <label>
-                                    <asp:checkbox id="chkContactPrivacy" runat="server" checked="false" />
+                                    <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
                                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                     <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
                                 </label>
@@ -681,25 +715,55 @@
                                         console.log('ok validated');
                                         var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");
                                         $(elembtn).attr("disabled", "")
-                                        $(elembtn).innerHTML = "Wait ..";
-                                        buttpost.click();
+
+                                        //invio nopostback con handler////////////////////////////////////////////////////
+                                        var contactdatas = {};
+                                        contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked;
+                                        getcontactdata2(contactdatas, function (contactdatas) {
+                                            var tastotxt = $(elembtn).html();
+                                            $(elembtn).html("Wait ..");
+                                            inviamessaggiomail(lng, contactdatas, function (result) {
+                                                if (result) {
+                                                    //in caso di errore visualizzo
+                                                    document.getElementById("outputContactdiv").innerHTML = (result);
+                                                    $(elembtn).removeAttr("disabled");
+                                                    $(elembtn).html(tastotxt);
+                                                }
+                                            }, tastotxt);
+                                        }, $(elembtn));
+                                        ///////////////////////////////////////////////////////////////////////
+
+
+                                        //$(elembtn).innerHTML = "Wait ..";
+                                        //buttpost.click();
                                     } else {
                                         console.log('not  validated');
                                         return false;
                                     }
                                 }
+                                function getcontactdata2(contactdatas, callback) {
+                                    var contactdatas = contactdatas || {};
+                                    contactdatas.idofferta = '<%= idOfferta %>';
+                                    contactdatas.name = $("[id$='txtContactName']").val();
+                                    contactdatas.cognome = $("[id$='txtContactCognome']").val();
+                                    contactdatas.email = $("[id$='txtContactEmail']").val();
+                                    contactdatas.telefono = $("[id$='txtContactPhone']").val();
+                                    contactdatas.message = $("[id$='txtContactMessage']").val();
+                                    contactdatas.tipo = "informazioni";
+                                    callback(contactdatas);
+                                }
                             </script>
                             <div class="col-12 text-center my-3">
-                            <button id="Button1" type="button" class="btn-black-outline" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                </div>
-                            <asp:button id="Button1srv" style="display: none" runat="server" onclick="btnContatti_Click" />
+                                <button id="Button1" type="button" class="btn-black-outline" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                            </div>
+                            <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />
 
                             <div style="font-weight: 300; font-size: 1.0rem; color: white" id="outputContactdiv">
-                                <asp:literal text="" id="outputContact" runat="server" />
+                                <asp:Literal Text="" ID="outputContact" runat="server" />
                             </div>
-                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' validationgroup="contattilateral" controltovalidate="txtContactName" runat="server" />
-                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' validationgroup="contattilateral" controltovalidate="txtContactCognome" runat="server" />
-                            <asp:requiredfieldvalidator errormessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' validationgroup="contattilateral" controltovalidate="txtContactEmail" runat="server" />
+                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
+                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
+                            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
 
                         </div>
                     </div>
@@ -707,7 +771,7 @@
             </div>
         </div>
     </div>
-    
+
     <%--  <div class="col-12 text-left">
                 <%= references.ResMan("basetext",Lingua,"feedbacksinserisci") %>  <br />
             </div>--%>
@@ -716,9 +780,9 @@
 
     <div style="background-color: #fff; position: relative">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
-            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none;  margin-left: 30px; margin-right: 30px">
-            <div class="row">
-                <div class="col-sm-12 col-12">                  
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
+                <div class="row">
+                    <div class="col-sm-12 col-12">
                         <div class="subtitle-block clearfix">
 
                             <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
@@ -734,7 +798,7 @@
                     </div>
                 </div>
             </div>
-            <asp:literal text="" id="plhSuggeritiJs" runat="server" />
+            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
         </div>
     </div>
 </asp:Content>

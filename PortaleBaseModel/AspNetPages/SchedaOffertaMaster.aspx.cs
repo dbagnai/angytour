@@ -382,7 +382,7 @@ public partial class _SchedaOffertaMaster : CommonPage
                 ContaArticoliPerperiodo(CodiceTipologia);
                 //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
-                divContactBelow.Visible = false;
+                divContactBelow.Visible = true;
                 divLatestPost.Visible = false;
                 if (!JavaInjection)
                 {

@@ -890,7 +890,7 @@
                                                 </div>
                                                 <script>
                                                     function ConfirmValidationForm1(elembtn) {
-                                                        var chk1 = document.getElementById("<%= chkContactPrivacy1.ClientID  %>");
+                                                        var c = document.getElementById("<%= chkContactPrivacy1.ClientID  %>");
                                                         var out1 = document.getElementById("outputContact1div");
                                                         if (!chk1.checked) {
                                                             out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
@@ -900,14 +900,48 @@
                                                             /*do work and go for postback*/
                                                             console.log('ok validated');
                                                             var buttpost = document.getElementById("<%= btnFormContattoSrv.ClientID  %>");
-                                                            $(elembtn).attr("disabled", "")
-                                                            $(elembtn).innerHTML = "Wait ..";
-                                                            buttpost.click();
+                                                            $(elembtn).attr("disabled", "");
+
+                                                            //invio nopostback con handler////////////////////////////////////////////////////
+                                                            var contactdatas = {};
+                                                            contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy1.ClientID %>')[0].checked;
+                                                            getcontactdata1(contactdatas, function (contactdatas) {
+                                                                var tastotxt = $(elembtn).html();
+                                                                $(elembtn).html("Wait ..");
+                                                                inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                    if (result) {
+                                                                        //in caso di errore visualizzo
+                                                                        document.getElementById("outputContact1div").innerHTML = (result);
+                                                                        $(elembtn).removeAttr("disabled");
+                                                                        $(elembtn).html(tastotxt);
+                                                                    }
+                                                                }, tastotxt);
+                                                            }, $(elembtn));
+                                                            ///////////////////////////////////////////////////////////////////////
+
+                                                                            ////////////////////////////////////////////////////////////////////////
+                                                            //Invio con postback
+                                                            <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                            $(elembtn).html("Wait ..");
+                                                            buttpost.click();--%>
+                                                            ////////////////////////////////////////////////////////////////////////
                                                         } else {
                                                             console.log('not  validated');
                                                             return false;
                                                         }
                                                     }
+                                                    function getcontactdata1(contactdatas, callback) {
+                                                        var contactdatas = contactdatas || {};
+                                                        contactdatas.idofferta = '<%= idOfferta %>';
+                                                        contactdatas.name = $("[id$='txtContactName1']").val();
+                                                        contactdatas.cognome = $("[id$='txtContactCognome1']").val();
+                                                        contactdatas.email = $("[id$='txtContactEmail1']").val();
+                                                        contactdatas.telefono = $("[id$='txtContactPhone1']").val();
+                                                        contactdatas.message = $("[id$='txtContactMessage1']").val();
+                                                        contactdatas.tipo = "informazioni";
+                                                        callback(contactdatas);
+                                                    }
+
                                                 </script>
                                                 <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                                 <asp:Button ID="btnFormContattoSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
@@ -1109,13 +1143,47 @@
                                     console.log('ok validated');
                                     var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");
                                     $(elembtn).attr("disabled", "")
-                                    $(elembtn).innerHTML = "Wait ..";
-                                    buttpost.click();
+
+                                    //invio nopostback con handler////////////////////////////////////////////////////
+                                    var contactdatas = {};
+                                    contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked;
+                                    getcontactdata2(contactdatas, function (contactdatas) {
+                                        var tastotxt = $(elembtn).html();
+                                        $(elembtn).html("Wait ..");
+                                        inviamessaggiomail(lng, contactdatas, function (result) {
+                                            if (result) {
+                                                //in caso di errore visualizzo
+                                                document.getElementById("outputContactdiv").innerHTML = (result);
+                                                $(elembtn).removeAttr("disabled");
+                                                $(elembtn).html(tastotxt);
+                                            }
+                                        }, tastotxt);
+                                    }, $(elembtn));
+                                    ///////////////////////////////////////////////////////////////////////
+
+                                    ////////////////////////////////////////////////////////////////////////
+                                    //Invio con postback
+                                    <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                    $(elembtn).html("Wait ..");
+                                    buttpost.click();--%>
+                                    ////////////////////////////////////////////////////////////////////////
                                 } else {
                                     console.log('not  validated');
                                     return false;
                                 }
                             }
+                            function getcontactdata2(contactdatas, callback) {
+                                var contactdatas = contactdatas || {};
+                                contactdatas.idofferta = '<%= idOfferta %>';
+                                contactdatas.name = $("[id$='txtContactName']").val();
+                                contactdatas.cognome = $("[id$='txtContactCognome']").val();
+                                contactdatas.email = $("[id$='txtContactEmail']").val();
+                                contactdatas.telefono = $("[id$='txtContactPhone']").val();
+                                contactdatas.message = $("[id$='txtContactMessage']").val();
+                                contactdatas.tipo = "informazioni";
+                                callback(contactdatas);
+                            }
+
                         </script>
                         <button id="Button1" type="button" class="btn btn-blue btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                         <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />

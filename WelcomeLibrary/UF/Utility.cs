@@ -65,6 +65,19 @@ namespace WelcomeLibrary.UF
 
     public static class Utility
     {
+ 
+
+        // EDIT: one of many possible improved versions
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            // initialized to default value (such as 0 or null depending upon type of TValue)
+            TValue value;
+
+            // attempt to get the value of the key from the dictionary
+            dictionary.TryGetValue(key, out value);
+            return value;
+        }
+
         public static System.Globalization.CultureInfo setCulture(string lng)
         {
             string culturename = "";
@@ -1369,7 +1382,7 @@ namespace WelcomeLibrary.UF
             return result;
 
         }
- 
+
         ///// <summary>
         ///// Send an electronic message using the Collaboration Data Objects (CDO).
         ///// Do not forget to browse through your COM references and add the "Microsoft CDO for Windows 200 Library" which should add two references: ADODB, and CDO.
@@ -1617,7 +1630,7 @@ namespace WelcomeLibrary.UF
         public static void CaricaListaStaticaNazioni(string connection, bool listacompleta = true)
         {
             if (connection == null || connection == "") return;
-         
+
             TabrifCollection _list = new TabrifCollection();
             Nazioni = _list;
 
