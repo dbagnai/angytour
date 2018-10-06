@@ -284,7 +284,7 @@ div#blocco-lgo-home {
   font-style: normal;
   text-align: center;
   line-height: 36px;
-  margin-top: .25rem !important;
+  margin-top: 0.25rem !important;
   display: block;
 }
 p,
@@ -384,7 +384,7 @@ input:hover[type="button"],
   font-weight: 400;
   position: relative;
   line-height: 1 !important;
-  padding: .75rem 2rem !important;
+  padding: 0.75rem 2rem !important;
   display: inline-block;
   height: auto;
   -moz-box-shadow: none;
@@ -448,7 +448,7 @@ footer .divbuttonstyle,
 footer .divbuttonstyle:visited,
 footer .divbuttonstyle:active,
 footer .divbuttonstyle:hover {
-  padding: .75rem 1rem !important;
+  padding: 0.75rem 1rem !important;
 }
 .btn-black-outline,
 .btn-black-outline:active,
@@ -465,7 +465,7 @@ footer .divbuttonstyle:hover {
   font-weight: 400;
   position: relative;
   line-height: 1 !important;
-  padding: .75rem 2rem !important;
+  padding: 0.75rem 2rem !important;
   margin: 10px 5px;
   height: auto;
   -webkit-box-shadow: none;
@@ -868,6 +868,10 @@ ul.footer-category-list {
 /*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
+b,
+strong {
+  font-weight: bold;
+}
 .button-carrello,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover {
@@ -959,7 +963,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 /*RIEPILOGO - CARRELLO*/
 .table td,
 .table th {
-  padding: .5rem;
+  padding: 0.5rem;
   vertical-align: top;
   border-top: none;
   background: rgba(9, 143, 143, 0.08);
@@ -1009,7 +1013,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 /*--- PAGINA  ACQUSITO PRODOTTO ---*/
 .bill-address label {
-  margin-bottom: .2rem;
+  margin-bottom: 0.2rem;
   font-size: 0.8rem;
 }
 .bill-address .form-group {
