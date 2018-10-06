@@ -481,12 +481,13 @@
              "~/js/bootstrap400/popper.min.js",
             "~/js/bootstrap400/js/bootstrap.min.js",
             "~/js/localforage.min.js",
+            //"~/js/idkeyval/idb-keyval-iife.js",
             "~/js/menuzord/files/js/menuzord.js",
             "~/js/pako/pako.min.js",
             "~/js/notifications/notify.min.js",
             "~/js/notifications/notify-metro.js",
             "~/js/notifications/notifications.js",
-            "~/js/moment-with-locales.min.js", //big!!
+            "~/js/moment-with-locales.min.js", //big trova alternativa!!!
             "~/js/imagesloaded.pkgd.js",
             "~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",

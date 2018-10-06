@@ -390,12 +390,10 @@ function getfromclientstorage(key) {
 
     return deferredclientstorage.promise();
 }
+ 
 function manageclientstorage(action, key, value, durationhours) {
-
-    /*Lib per Zlib*/
     var pako = window.pako; //Compression Lib
     if (action == 'put') {
-
         localforage.removeItem(key).then(function () {
             var binaryString = pako.deflate(value, { to: 'string' }); //Compress
             localforage.setItem(key, binaryString).then(function (value) {
@@ -426,8 +424,6 @@ function manageclientstorage(action, key, value, durationhours) {
                     console.log('cleared local memory and reload');
                     localforage.removeItem('datestored'); //Forza il rinnovamento della cache ( alo prossimo giro viene rinnovata la memoria del browser)
                     //navigate to url withou querystring
-                    //window.location.href = window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1");
-                    //window.location.reload(true);
                     location.replace(window.location.href.replace(/^([^\?]+)(\??.*)$/gi, "$1"));
 
                 }).catch(function (err) {
@@ -440,8 +436,6 @@ function manageclientstorage(action, key, value, durationhours) {
             // This code runs if there were any errors
             console.log(err);
         });
-
-
     }
     if (action == 'lenght') {
         localforage.length().then(function (numberOfKeys) {
@@ -453,6 +447,7 @@ function manageclientstorage(action, key, value, durationhours) {
         });
     }
 }
+var randomValue = Math.floor((1 + Math.random()) * 0x10000);
 
 function CaricaListaLingue() {
     if (jsonlanguages === '')
@@ -2020,7 +2015,6 @@ function frmregione(localObjects, valore, prop, callback) {
 //CARICAMENTO DATI --------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------*/
 
-
 function inviamessaggiomail(lng, data, callback) {
     var lng = lng || "I";
     var data = data || {};
@@ -2036,10 +2030,9 @@ function inviamessaggiomail(lng, data, callback) {
         success: function (result) {
             //if (callback)
             //    callback(result);
-            location.replace(result);
+            location.replace(result);//reindirizzo alla destinazione indicata dall'handler
         },
         error: function (result) {
-            //sendmessage('fail creating link');
             if (callback)
                 callback(result.responseText);
         }

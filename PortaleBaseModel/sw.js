@@ -1,4 +1,5 @@
-//This is the service worker with the Cache-first network https://developers.google.com/web/fundamentals/primers/service-workers/
+//This is the service worker with the Cache-first network 
+//https://developers.google.com/web/fundamentals/primers/service-workers/
 //https://jakearchibald.com/2014/offline-cookbook/#stale-while-revalidate
 //https://googlechrome.github.io/samples/service-worker/basic/index.html
 //https://www.afasterweb.com/2017/01/31/upgrading-your-service-worker-cache/
@@ -10,11 +11,13 @@
 
 var CACHE_VERSION = 2; //Per invalidare la cache
 var host = self.location.hostname;
+const quequeCacheName = CACHE_VERSION + host + 'queque';
 const coreCacheName = CACHE_VERSION + host + 'core';
 const pagesCacheName = CACHE_VERSION + host + 'pages';
 const assetsCacheName = CACHE_VERSION + host + 'assets';
-
-var myPwaUrlPath = ""; /* /I/blog/ */
+if ('function' === typeof importScripts) {
+    importScripts('/js/localforage.min.js');//carica una risorsa js da usare nel serviceworker!
+}
 
 var allowedDomains = [
     /*Sn array of external domain that i WANT to cache!*/
@@ -25,12 +28,13 @@ var allowedDomains = [
 
 var corenotcriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
-    '/error.aspx',
-    '/bdejs/bundlejssw',
     '/bdejs/bundlejslib0',
     '/bdecss/bundlecss1',
     '/bdejs/bundlejslib1',
-    '/bdejs/bundlejslib2'
+    '/bdejs/bundlejslib2',
+    //  '/bdejs/bundlejssw',
+    '/error.aspx'
+
 ];
 var corecriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
@@ -44,6 +48,153 @@ function updateCoreCache() {
             return cache.addAll(corecriticalCacheUrls);
         });
 }
+
+
+/* GESTIONE RICHIESTE OFFLINE  ////////////////////////////////////////////////////////////////////////////////////////////    */
+const isOnLine = () => isOnlinevar;
+var isOnlinevar = false;
+function checkonline() {
+    var onlinepromisecheck = fetch(new Request('/images/favicon.ico'), { //Uso questo file per vedere se siamo online OCCHIO!
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    }).then(networkResponse => {
+        isOnlinevar = true; return true;
+    }).catch((err) => {
+        //we are offline!!!
+        //Memorizziamo le chiamate che mi servono in una coda per riuso successivo
+        isOnlinevar = false; return false;
+    });
+    return onlinepromisecheck;
+}
+
+function indexDbcheck() {
+    if (self.indexedDB) {
+        console.log('IndexedDB is supported');
+    }
+}
+
+const requestBuffer = {
+    _requestQueue: [],
+    _requestQueueStorage: [],
+    intervalId: null,
+    updateRequestQueque(message) {
+        //this._requestQueue = message;
+        this._requestQueueStorage = message;
+    },
+    pushRequestForRetry(request, event) {
+        //var cachedrequest = request.clone();
+        this._requestQueue.push(request); //Memorizzo la richiesta nella coda ( imprementare eventualmente sistema persistente alla chiusura del browser!!! )
+        if (localforage) {
+            var localobj = this;
+            //Dalla request devo creare un oggetto json che contiene request.url,payload, method e headers che mi servono per replicare la richiesta al server!!!
+            //ed andare ad agigungerlo all'array di oggetti fetch serializzati  this._requestQueueStorage facciamo un [] di oggetti {} che ognuno contiene i dati per fare le chiamate
+            var requestobj = {};
+            var newrequest = request.clone();
+            newrequest.text().then(function (data) {
+                requestobj.payload = data;
+                requestobj.method = newrequest.method;
+                requestobj.url = newrequest.url;
+                requestobj.mode = newrequest.mode;
+                requestobj.accept = newrequest.headers.get("Accept");
+                requestobj.contenttype = newrequest.headers.get("Content-Type");
+                //newrequest.headers.forEach(function (element) {
+                //    console.log(element);
+                //});
+                localobj._requestQueueStorage.push(requestobj);
+                console.log('Writing indexedDB' + localobj._requestQueueStorage);
+                localforage.setItem('callqueque', localobj._requestQueueStorage, function (err, value) {
+                    if (!localobj.intervalId) {
+                        localobj.start(event);
+                    } console.log('updated callqueque ' + value + '  ' + err);
+                });
+            }, localobj);
+        }
+        else if (!this.intervalId) {
+            this.start(event);
+        }
+    },
+    start(event) {
+        const retry = async () => {
+            if (isOnLine()) {
+                console.log('[service worker] connection re-established, retrying with buffered requests');
+
+                //Se presenti richieste nella coda di memoria volatile faccio le chiamate
+                if (this._requestQueue && Array.isArray(this._requestQueue) && this._requestQueue.length > 0)
+                    while (this._requestQueue.length) {
+                        await fetch(this._requestQueue.shift()); //esegue le fetch delle richieste nella coda!!!!
+                    }
+                //in alternativa se presenti richeste nello storage persistente faccio le fetch 
+                else if (this._requestQueueStorage && Array.isArray(this._requestQueueStorage) && this._requestQueueStorage.length > 0)
+                    while (this._requestQueueStorage.length) {
+                        var currequest = this._requestQueueStorage.shift();
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //RICREO LA RICHIESTA ED ESEGUO LA FETCH
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        var requestUrl = currequest.url;
+                        var payload = currequest.payload;// JSON.stringify(currequest.payload);
+                        if (!(typeof currequest.payload === 'string' || currequest.payload instanceof String))
+                            payload = JSON.stringify(currequest.payload);
+                        var method = currequest.method;
+                        var mode = currequest.mode;
+                        var headers = {
+                            'Accept': currequest.accept,//'application/json',
+                            'Content-Type': currequest.contenttype,//'application/json; charset=utf-8',
+                            'Cache-Control': 'no-cache'
+                        }; // if you have any other headers put them here, aggiungi se vuoi anche  'Content-Length': payload.length,
+
+                        await fetch(requestUrl, {
+                            headers: headers,
+                            mode: mode,
+                            method: method,
+                            body: payload
+                        }).then(function (response) {
+                            console.log('server response', response);
+                            if (response.status < 400) {
+                                //do nothing
+                            }
+                        }).catch(function (error) {
+                            console.error('Send to Server failed:', error);
+                        });
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    }
+
+                this._requestQueue = [];
+                this._requestQueueStorage = [];
+                if (localforage)
+                    localforage.removeItem('callqueque', function (err, value) { console.log('removed callqueque ' + value + '  ' + err); });
+                const client = await clients.get(event.clientId);
+                if (client) {
+                    client.postMessage({
+                        msg: 'Connection re-established; pending requests flushed.'
+                    });
+                }
+                clearTimeout(this.intervalId);
+                this.intervalId = null;
+
+            } else {
+                this.intervalId = setTimeout(retry, 5000);
+            }
+            checkonline(); //Aggiorno la varialbile isOnLine testando se siamo tornati online!
+        };
+        this.intervalId = setTimeout(retry, 5000);
+    }
+}
+
+function recoverRequestsCache(event) {
+    if (localforage)
+        localforage.getItem('callqueque', function (err, value) {
+            if (value && !err)
+                if (Array.isArray(value)) {
+                    requestBuffer.updateRequestQueque(value);
+                    if (!requestBuffer.intervalId) {
+                        requestBuffer.start(event);
+                    }
+                } else localforage.removeItem('callqueque', function (err, value) { console.log('removed callqueque ' + value + '  ' + err); });
+        });
+}
+
+/* FINE GESTIONE RICHIESTE OFFLINE ////////////////////////////////////////////////////////////////////////////// */
 
 
 //Install stage sets up the cache-array to configure pre-cache content
@@ -83,81 +234,46 @@ function clearCaches() {
     })
 }
 
-/* GESTIONE RICHIESTE OFFLINE  ////////////////////////////////////////////////////////////////////////////////////////////    */
-
-const isOnLine = () => isOnlinevar;
-var isOnlinevar = false;
-function checkonline() {
-    var onlinepromisecheck = fetch(new Request('/images/favicon.ico'), {
-        headers: {
-            'Cache-Control': 'no-cache'
-        }
-    }).then(networkResponse => {
-        isOnlinevar = true;
-        return true;
-    }).catch((err) => {
-        //we are offline!!!
-        //Memorizziamo le chiamate che mi servono in una coda per riuso successivo
-        isOnlinevar = false; return false;
-    });
-    return onlinepromisecheck;
-}
-const requestBuffer = {
-    _requestQueue: [],
-    intervalId: null,
-    pushRequestForRetry(request, event) {
-        this._requestQueue.push(request);
-        if (!this.intervalId) {
-            this.start(event);
-        }
-    },
-    start(event) {
-        const retry = async () => {
-            if (isOnLine()) {
-                console.log('[service worker] connection re-established, retrying with buffered requests');
-                while (this._requestQueue.length) {
-                    await fetch(this._requestQueue.shift()); //esegue le fetch nella coda!!!! ( Problema le POST REQUEST non posso fare fetch !!!)
-                }
-                const client = await clients.get(event.clientId);
-                if (client) {
-                    client.postMessage({
-                        msg: 'Connection re-established; pending requests flushed.'
-                    });
-                }
-                clearTimeout(this.intervalId);
-                this.intervalId = null;
-            } else {
-                this.intervalId = setTimeout(retry, 5000);
-            }
-            checkonline(); //Aggiorno la varialbile isOnLine
-        }
-        this.intervalId = setTimeout(retry, 5000);
-    }
-}
-/* FINE GESTIONE RICHIESTE OFFLINE ////////////////////////////////////////////////////////////////////////////// */
-
-
 self.addEventListener('fetch', function (event) {
     let request = event.request, acceptHeader = event.request.headers.get('Accept');
+
+
+    recoverRequestsCache(event);//Vedo se nello storage persistente ci sono chiamate da fare ed in caso le eseguo
 
     ////////////////////////////////////////////////////////////////////////////
     // controlliamo se la chiamata deve essere servita dal service worker o meno
     if (!shouldFetch(event)) {
+
+        ////////////////////////////////////////////////////////////////////////////
         //test handler call per contatti se online -> se corrisponde inserisco nella push cache per rifare la chiamata dopo
-        if (request.url.toLowerCase().indexOf(".ashx") !== -1 && request.url.toLowerCase().indexOf("handlerdatacommon") !== -1) {
+        ////////////////////////////////////////////////////////////////////////////
+        if (request.url.toLowerCase().indexOf(".ashx") !== -1) {
+            ///var getPayload = JSON.parse(context.getVariable('request.content'));
             var newrequest = request.clone();
-            checkonline().then(function (onlinestatus) {
-                //    console.log("Online statis from check :" + onlinestatus + " requesturl:" + request.url);
-                if (!onlinestatus) {
-                    //Siamo offline
-                    console.log('[service worker] app is offline - storing a request to retry later');
-                    requestBuffer.pushRequestForRetry(newrequest.clone(), event);
-                    //event.respondWith(Promise.resolve(new Response({}, { status: 202 }))); // 202 - Accepted
+            newrequest.text().then(function (data) {
+                //  decodeURIComponent(data)
+                if (data.indexOf("inviamessaggiomail") !== -1) {
+                    checkonline().then(function (onlinestatus) {
+                        //console.log("Online statis from check :" + onlinestatus + " requesturl:" + request.url);
+                        if (!onlinestatus) {
+                            var newrequestcached = request.clone();
+                            //Siamo offline
+                            console.log('[service worker] app is offline - storing a request to retry later');
+                            requestBuffer.pushRequestForRetry(newrequestcached.clone(), event);
+                            //    .then(function () {
+                            //    sendNotificationTopages(null, "updatecachequeque", this._requestQueue);
+                            //});
+                            //event.respondWith(Promise.resolve(new Response({}, { status: 202 }))); // 202 - Accepted
+                        }
+                    });
                 }
-            });
+            }).catch((err) => { console.log("Erron retrieving data payload for request: " + err); });
+            //return new Response({}, { status: 202 });
             return;
         } else {
-
+            ////////////////////////////////////////////////////////////////////////////
+            //direct call from servicwworker directly to network
+            ////////////////////////////////////////////////////////////////////////////
             event.respondWith(
                 fetch(request)
                     .catch((err) => {
@@ -181,6 +297,7 @@ self.addEventListener('fetch', function (event) {
             // First Try cache, 
             caches.match(request).then(response => {
 
+                // if (request.url.indexOf('bundlejssw') !== -1) return;
                 //////////////////////AGGIORNAMENTO CACHE IN BACKGROUND SE LINEA DISPONIBILE//////////
                 //Creo una richiesta CORS ( anche nei casi in cui i domini non coincidano x usare con domini esterni)
                 //QUesta aggiorna la cache del service worker se il sistema è online altrimenti ritorna
@@ -317,19 +434,10 @@ function checkAllowedomains(event) {
     //return allowedDomains.some(substring => url.origin.includes(substring));
 }
 function addToCache(cacheName, request, response) {
-    caches.open(cacheName)
-        .then(cache => cache.put(request, response));
+    return caches.open(cacheName)
+        .then(cache => cache.put(request, response))
 }
-// Trim specified cache to max size
-function trimCache(cacheName, maxItems) {
-    caches.open(cacheName).then(function (cache) {
-        cache.keys().then(function (keys) {
-            if (keys.length > maxItems) {
-                cache.delete(keys[0]).then(trimCache(cacheName, maxItems));
-            }
-        });
-    });
-}
+
 
 
 //helper chre trova tutti i match in base ad una regular expression in una string
@@ -357,12 +465,18 @@ function getMatches(string, regex, index) {
 //}
 
 
+// Trim specified cache to max size
+function trimCache(cacheName, maxItems) {
+    caches.open(cacheName).then(function (cache) {
+        cache.keys().then(function (keys) {
+            if (keys.length > maxItems) {
+                cache.delete(keys[0]).then(trimCache(cacheName, maxItems));
+            }
+        });
+    });
+}
 
-
-
-
-
-//Mi metto in ascolto dai messaggio inviati dalle pagine web servite!!
+//Mi metto in ascolto dai messaggi inviati dalle pagine web servite -> verso il serviceworker!!
 self.addEventListener('message', event => {
     var data = event.data;
 
@@ -372,15 +486,28 @@ self.addEventListener('message', event => {
         trimCache(assetsCacheName, 30);
     };
 
-    //Memorizzazione nella cache di una serie di pagine
-    //if (data.command == "offline-opt-in") {
-
-
 
     //}
-
+    //if (data.command == "getcachequeque") {
+    //    requestBuffer.updateRequestQueque(data.message);
+    //}
 });
 
+/*Invio un messagigo dal serviceworker a tutti i client per comandare azioni sula pagina! */
+function sendNotificationTopages(response, type, message) {
+
+    //Invio messaggio da serviceworker a pagina
+    //client.postMessage({ 'message': 'hello!' }); messaggio dal serviceworker alla pagina
+    clients.matchAll().then(function (clients) {
+        clients.forEach(function (client) {
+            client.postMessage({
+                type: type,
+                message: message,
+                timestamp: Date.now()
+            });
+        });
+    });
+}
 
 
 /*Show amount of cache space used*/
@@ -497,3 +624,91 @@ self.addEventListener('notificationclick', function (event) {
 //    );
 //});
 /*PUSH NOTIFICATIN EVENT SW*/
+
+////https://github.com/jakearchibald/idb-keyval
+//var idbKeyval = (function (exports) {
+//    'use strict';
+
+//    class Store {
+//        constructor(dbName = 'keyval-store', storeName = 'keyval') {
+//            this.storeName = storeName;
+//            this._dbp = new Promise((resolve, reject) => {
+//                const openreq = indexedDB.open(dbName, 1);
+//                openreq.onerror = () => reject(openreq.error);
+//                openreq.onsuccess = () => resolve(openreq.result);
+//                // First time setup: create an empty object store
+//                openreq.onupgradeneeded = () => {
+//                    openreq.result.createObjectStore(storeName);
+//                };
+//            });
+//        }
+//        _withIDBStore(type, callback) {
+//            return this._dbp.then(db => new Promise((resolve, reject) => {
+//                const transaction = db.transaction(this.storeName, type);
+//                transaction.oncomplete = () => resolve();
+//                transaction.onabort = transaction.onerror = () => reject(transaction.error);
+//                callback(transaction.objectStore(this.storeName));
+//            }));
+//        }
+//    }
+//    let store;
+//    function getDefaultStore() {
+//        if (!store)
+//            store = new Store();
+//        return store;
+//    }
+//    function get(key, store = getDefaultStore()) {
+//        let req;
+//        return store._withIDBStore('readonly', store => {
+//            req = store.get(key);
+//        }).then(() => req.result);
+//    }
+//    function set(key, value, store = getDefaultStore()) {
+//        return store._withIDBStore('readwrite', store => {
+//            store.put(value, key);
+//        });
+//    }
+//    function del(key, store = getDefaultStore()) {
+//        return store._withIDBStore('readwrite', store => {
+//            store.delete(key);
+//        });
+//    }
+//    function clear(store = getDefaultStore()) {
+//        return store._withIDBStore('readwrite', store => {
+//            store.clear();
+//        });
+//    }
+//    function keys(store = getDefaultStore()) {
+//        const keys = [];
+//        return store._withIDBStore('readonly', store => {
+//            // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
+//            // And openKeyCursor isn't supported by Safari.
+//            (store.openKeyCursor || store.openCursor).call(store).onsuccess = function () {
+//                if (!this.result)
+//                    return;
+//                keys.push(this.result.key);
+//                this.result.continue();
+//            };
+//        }).then(() => keys);
+//    }
+
+//    exports.Store = Store;
+//    exports.get = get;
+//    exports.set = set;
+//    exports.del = del;
+//    exports.clear = clear;
+//    exports.keys = keys;
+
+//    return exports;
+
+//}({}));
+
+// iOS add-to-homescreen is missing IDB, or at least it used to.
+// I haven't tested this in a while.
+if (!self.indexedDB) {
+    idbKeyval = {
+        get: key => Promise.resolve(localStorage.getItem(key)),
+        set: (key, val) => Promise.resolve(localStorage.setItem(key, val)),
+        delete: key => Promise.resolve(localStorage.removeItem(key))
+    };
+}

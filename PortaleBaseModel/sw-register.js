@@ -9,6 +9,7 @@ let swRegistration;
     'use strict';
     //if (('serviceWorker' in navigator) && (  'PushManager' in window)) {
     if (('serviceWorker' in navigator)) {
+
         window.addEventListener('load', function () {
             navigator.serviceWorker.register('/sw.js', { /*scope: '/I/blog/'*/ }).then(function (swReg) {
                 // Registration was successful
@@ -19,32 +20,55 @@ let swRegistration;
 
                 pushM.applicationServerPublicKey = cbindvapidPublicKey;
                 pushM.initializeUI(); //Gestione delle notifiche push
-                // verifyvalidsubscriptionandask();
-
 
                 //registration.update(); //questa forza l'aggiornamento deidati della cache del sw
-                //Utilizzo della funzione service worker postMessage - Comando per fare il trim della cache
-                //if (navigator.serviceWorker.controller != null) 
-                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'}); //invio messaggio al servicewirker dalla pagina
+
+
+                if ('storage' in navigator && 'estimate' in navigator.storage) {
+                    navigator.storage.estimate().then(estimate => {
+                        console.log(`Using ${estimate.usage} out of ${estimate.quota}`);
+                        var $used = document.querySelector(".storage-use"),
+                            $available = document.querySelector(".storage-available");
+                        //$used.innerText = Math.floor(estimate.usage / 1000000);
+                        //$available.innerText = Math.floor(estimate.quota / 1000000);
+                    });
+                }
+
+                ////ESEMPI COMUNICAZIONE WEBPAGE -> serviceworker e viceversa 
+                //https://googlechrome.github.io/samples/service-worker/post-message/
                 //https://github.com/w3c-webmob/ServiceWorkersDemos
 
+                //Invio messaggio da pagina a serviceworker
+                //Utilizzo della funzione service worker postMessage - Comando per fare il trim della cache
+                //if (navigator.serviceWorker.controller != null)
+                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'}); //invio messaggio al servicewirker dalla pagina
 
-                ////ESEMPIO COMUNICAZIONE WEBPAGE -> serviceworker e viceversa https://googlechrome.github.io/samples/service-worker/post-message/
-                //Invio messaggio da pagina e serviceworker
-                //navigator.serviceWorker.controller.postMessage({ 'command': 'say-hello!' })//invio messaggio al servicewirker dalla pagina
+                //Gestore evento su web page a seguto messaggio proveniente da service worker
+                navigator.serviceWorker.addEventListener('message', function (event) {
+                    //if (event.data.timestamp - currentTimestamp > 4 * 60 * 60 * 1000) { //timestamp in millisecondi
+                    //    document.location.reload();
+                    //}
+                    //if (event.data.type == 'updatecachequeque') { //timestamp in millisecondi
+                    //    var messaggio = event.data.message;
+                    //    localforage.setItem('callqueque', messaggio, function (err, value) { console.log('updated callqueque ' + value + '  ' + err); });
 
-                //Invio messaggio da serviceworker a pagina
-                //client.postMessage({ 'message': 'hello!' }); messaggio dal serviceworker alla pagina
+                    //}
+                    //if (event.data.type == 'getcachequeque') { //timestamp in millisecondi
+                    //    var requestQueque;
+                    //    //invio la coda al serviceworker
+                    //    localforage.getItem('callqueque', function (err, value) {
+                    //        if (!err) {
+                    //            requestQueque = value || [];
+                    //            if (navigator.serviceWorker.controller != null)
+                    //                navigator.serviceWorker.controller.postMessage({ 'command': 'getcachequeque', 'message': requestQueque }); //invio messaggio al servicewirker dalla pagina
+                    //        }
+                    //    });
 
-                //Gestore evento su web page
-                //navigator.serviceWorker.addEventListener('message', function (event) { //event lister per messagio provenienet da service worker
-                //    //do something with the message event.data
-                //})
-
-                //Gestore evento su serviceworker
-                //self.addEventListener('message', function (event) {
-                //    //do something with the message event.data
-                //})
+                    //}
+                    //if (event.data.type == 'clearcachequeque') { //timestamp in millisecondi
+                    //    localforage.removeItem('callqueque', function (err, value) { console.log('removed callqueque ' + value + '  ' + err); });
+                    //}
+                });
 
 
             }, function (err) {
@@ -52,6 +76,9 @@ let swRegistration;
                 console.log('ServiceWorker registration failed: ', err);
             });
         });
+
+
+
     };
 
 
