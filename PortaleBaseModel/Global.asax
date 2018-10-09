@@ -471,7 +471,7 @@
             BundleEngine.BundleOptions.minifyJs = true;
 
         BundleEngine.AddBundleJS("bundlejssw",
-          "~/sw.js", //Service Worker
+         // "~/sw.js", //Service Worker
           "~/sw-register.js"  //Service Worker registration
         );
 

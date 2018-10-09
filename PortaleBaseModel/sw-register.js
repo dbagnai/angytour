@@ -4,6 +4,15 @@
 
 //navigator.serviceWorker.getRegistration().then(function(r){r.unregister();});
 
+var pagesTofetchreg = [
+    /* array of  pages that i WANT to indicate sw to pre - cache!*/
+    '/I/ceramiche-ficola/ceramiche-ficola'
+];
+var pagesToservewithswreg = [
+    /* array of  pages that i WANT to serve with serviceworker !! !*/
+
+];
+
 let swRegistration;
 (function () {
     'use strict';
@@ -39,11 +48,24 @@ let swRegistration;
                 //https://github.com/w3c-webmob/ServiceWorkersDemos
 
                 //Invio messaggio da pagina a serviceworker
-                //Utilizzo della funzione service worker postMessage - Comando per fare il trim della cache
-                //if (navigator.serviceWorker.controller != null)
-                // navigator.serviceWorker.controller.postMessage({'command': 'trimCaches'}); //invio messaggio al servicewirker dalla pagina
+                //Utilizzo della funzione service worker postMessage - Comando per fare pulizia della cache e recuperare le chiamate nella coda
+                if (navigator.serviceWorker.controller != null) {
 
+                    navigator.serviceWorker.controller.postMessage({ 'command': 'invalidatecache' }); //invio messaggio al serviceworker dalla pagina per invalidare la cache ( le policy sono nel sw.js )
+                    navigator.serviceWorker.controller.postMessage({ 'command': 'recoverstoredcalls' }); //invio messaggio al servicewirker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
+
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///////////////////COMANDO IL SERVICEWORKER DI PRECARICARE GLI URL ALLA REGISTRAZIONE !!!! ( questo comando lo dovresti dare su richiesta di installazione dell'APP!!!!!! )
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    navigator.serviceWorker.controller.postMessage({ 'command': 'preloadurls', 'parameters': JSON.stringify(pagesTofetchreg) }); //invio messaggio al serviceworker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+
+                    navigator.serviceWorker.controller.postMessage({ 'command': 'pagestoserve', 'parameters': JSON.stringify(pagesToservewithswreg) });
+                }
+
+                //////////////////////////////////////////////////////////////
                 //Gestore evento su web page a seguto messaggio proveniente da service worker
+                //////////////////////////////////////////////////////////////
                 navigator.serviceWorker.addEventListener('message', function (event) {
                     //if (event.data.timestamp - currentTimestamp > 4 * 60 * 60 * 1000) { //timestamp in millisecondi
                     //    document.location.reload();
@@ -51,7 +73,6 @@ let swRegistration;
                     //if (event.data.type == 'updatecachequeque') { //timestamp in millisecondi
                     //    var messaggio = event.data.message;
                     //    localforage.setItem('callqueque', messaggio, function (err, value) { console.log('updated callqueque ' + value + '  ' + err); });
-
                     //}
                     //if (event.data.type == 'getcachequeque') { //timestamp in millisecondi
                     //    var requestQueque;
@@ -63,12 +84,12 @@ let swRegistration;
                     //                navigator.serviceWorker.controller.postMessage({ 'command': 'getcachequeque', 'message': requestQueque }); //invio messaggio al servicewirker dalla pagina
                     //        }
                     //    });
-
                     //}
                     //if (event.data.type == 'clearcachequeque') { //timestamp in millisecondi
                     //    localforage.removeItem('callqueque', function (err, value) { console.log('removed callqueque ' + value + '  ' + err); });
                     //}
                 });
+
 
 
             }, function (err) {

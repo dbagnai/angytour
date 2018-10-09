@@ -1022,6 +1022,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     protected void btnsearch1_Click(object sender, EventArgs e)
     {
+
+        HttpContext.Current.Session.Clear();
         //testoricerca
         string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
         Session.Add("testoricerca", Server.HtmlEncode(txtSearchTop.Value)); //carico in sessione il parametro da cercare
@@ -1029,6 +1031,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
     protected void btnsearch_Click(object sender, EventArgs e)
     {
+
+
+        HttpContext.Current.Session.Clear();
         //testoricerca
         string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
         Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare

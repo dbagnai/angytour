@@ -718,19 +718,51 @@ public partial class _SchedaOffertaMaster : CommonPage
                 break;
 
             default:
-                //lit = (Literal)Master.FindControl("litPortfolioBanners1");
-                //Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-blog", false, lit, Lingua, true);
+                column1.Visible = false;
+                column2.Visible = true;
+                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
+                column2.Attributes["class"] = "col-12 col-sm-9";
+
+                column3.Visible = false;
 
                 divSearch.Visible = true;
-                divLatestPost.Visible = true;
-                divContact.Visible = false;
-                //AssociaRubricheConsigliati();
-                CaricaUltimiPost(CodiceTipologia, Categoria);
                 ContaArticoliPerperiodo(CodiceTipologia);
-                column1.Visible = false;
-                column2.Attributes["class"] = "col-md-9 col-sm-9";
-                column3.Attributes["class"] = "col-md-3 col-sm-3";
-                this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+                //  Caricalinksrubriche(CodiceTipologia);
+                divContact.Visible = false;
+                divContactBelow.Visible = true;
+                divLatestPost.Visible = false;
+                if (!JavaInjection)
+                {
+                    //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);";
+                    //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
+                    //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+
+                    //SUGGERITI
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+
+                    sb.Clear();
+
+                    //ULTIMI ARTICOLI
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
+
+                    sb.Clear();
+
+                    //BIND PER LA SCHEDA!!!!
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                }
 
                 break;
         }
@@ -921,6 +953,8 @@ public partial class _SchedaOffertaMaster : CommonPage
 
     protected void Cerca_Click(object sender, EventArgs e)
     {
+
+        HttpContext.Current.Session.Clear();
         //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
         string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
         Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare

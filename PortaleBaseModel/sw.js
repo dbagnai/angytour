@@ -4,20 +4,56 @@
 //https://googlechrome.github.io/samples/service-worker/basic/index.html
 //https://www.afasterweb.com/2017/01/31/upgrading-your-service-worker-cache/
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//URL CHE VENGONO PRECARICATI COMPRESE LE RISORSE PRESENTI IN PAGINA
+//////////////////////////////////////////////////////////////
+var pagesTofetch = [
+    /* array of  pages that i WANT to pre - cache!*/
+    '/I/blog/notizie-18'
+];
+var pagesToservewithsw = [
+    /* array of  pages that i WANT to serve with serviceworker !! !*/
+    //DA IMPLEMENTARE FUNZIONE DI SELEZIONE DELLE PAGINE DA SERVIRE
+];
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // If at any point you want to force pages that use this service worker to start using a fresh
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-
 var CACHE_VERSION = 2; //Per invalidare la cache
+
+self.importScripts("/js/localforage.min.js",
+    "/lib/sw/invalidation-mgr.js",
+    "/lib/sw/date-mgr.js"
+);
+//if ('function' === typeof importScripts) {
+//    importScripts('/js/localforage.min.js',
+//    '/lib/sw/invalidation-mgr.js',
+//    '/lib/sw/date-mgr.js');//carica una risorsa js da usare nel serviceworker!
+//}
+
 var host = self.location.hostname;
-const quequeCacheName = CACHE_VERSION + host + 'queque';
-const coreCacheName = CACHE_VERSION + host + 'core';
-const pagesCacheName = CACHE_VERSION + host + 'pages';
-const assetsCacheName = CACHE_VERSION + host + 'assets';
-if ('function' === typeof importScripts) {
-    importScripts('/js/localforage.min.js');//carica una risorsa js da usare nel serviceworker!
-}
+const coreCacheName = CACHE_VERSION + host + 'core',
+    pagesCacheName = CACHE_VERSION + host + 'pages',
+    assetsCacheName = CACHE_VERSION + host + 'assets',
+    invalidationManager = new InvalidationManager([{
+        "cacheName": coreCacheName,
+        "invalidationStrategy": "ttl",
+        "strategyOptions": {
+            "ttl": 86400 //1 day
+            //604800 //1 week
+        }
+    },
+    {
+        "cacheName": assetsCacheName,
+        "invalidationStrategy": "maxItems",
+        "strategyOptions": {
+            "max": 1000
+        }
+    }]);
+
 
 var allowedDomains = [
     /*Sn array of external domain that i WANT to cache!*/
@@ -25,16 +61,13 @@ var allowedDomains = [
     'fonts.gstatic.com'
 ];
 
-
 var corenotcriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
     '/bdejs/bundlejslib0',
     '/bdecss/bundlecss1',
     '/bdejs/bundlejslib1',
     '/bdejs/bundlejslib2',
-    //  '/bdejs/bundlejssw',
     '/error.aspx'
-
 ];
 var corecriticalCacheUrls = [
     /* Add an array of files to precache for your app that are needed to make site work!*/
@@ -43,14 +76,14 @@ var corecriticalCacheUrls = [
 function updateCoreCache() {
     return caches.open(coreCacheName)
         .then(cache => {
-            cache.addAll(corenotcriticalCacheUrls); // important, but not critical resources
-            // Make installation contingent on storing core cache items
+            //cache.addAll(corenotcriticalCacheUrls); // important, but not critical resources
+            corenotcriticalCacheUrls.forEach(element => { cache.add(element).catch(() => { /*err adding*/ }); });//QUESTA PERMETTE DI PRECARICARE ANCHE SE UN URL VA IN ERRORE!!!!
+            // Make installation contingent on storing core cache items (ATTENZIONE CON ADDALL SE FALLISCE UN URL FALLISCONO TUTTI E IL SERVICEWORKER NON PARTE!!!)
             return cache.addAll(corecriticalCacheUrls);
         });
 }
 
-
-/* GESTIONE RICHIESTE OFFLINE  ////////////////////////////////////////////////////////////////////////////////////////////    */
+/* GESTIONE CODA DELLE RICHIESTE OFFLINE  ////////////////////////////////////////////////////////////////////////////////////////////    */
 const isOnLine = () => isOnlinevar;
 var isOnlinevar = false;
 function checkonline() {
@@ -67,13 +100,11 @@ function checkonline() {
     });
     return onlinepromisecheck;
 }
-
 function indexDbcheck() {
     if (self.indexedDB) {
         console.log('IndexedDB is supported');
     }
 }
-
 const requestBuffer = {
     _requestQueue: [],
     _requestQueueStorage: [],
@@ -180,7 +211,6 @@ const requestBuffer = {
         this.intervalId = setTimeout(retry, 5000);
     }
 }
-
 function recoverRequestsCache(event) {
     if (localforage)
         localforage.getItem('callqueque', function (err, value) {
@@ -195,7 +225,6 @@ function recoverRequestsCache(event) {
 }
 
 /* FINE GESTIONE RICHIESTE OFFLINE ////////////////////////////////////////////////////////////////////////////// */
-
 
 //Install stage sets up the cache-array to configure pre-cache content
 self.addEventListener('install', function (event) {
@@ -237,9 +266,6 @@ function clearCaches() {
 self.addEventListener('fetch', function (event) {
     let request = event.request, acceptHeader = event.request.headers.get('Accept');
 
-
-    recoverRequestsCache(event);//Vedo se nello storage persistente ci sono chiamate da fare ed in caso le eseguo
-
     ////////////////////////////////////////////////////////////////////////////
     // controlliamo se la chiamata deve essere servita dal service worker o meno
     if (!shouldFetch(event)) {
@@ -260,9 +286,6 @@ self.addEventListener('fetch', function (event) {
                             //Siamo offline
                             console.log('[service worker] app is offline - storing a request to retry later');
                             requestBuffer.pushRequestForRetry(newrequestcached.clone(), event);
-                            //    .then(function () {
-                            //    sendNotificationTopages(null, "updatecachequeque", this._requestQueue);
-                            //});
                             //event.respondWith(Promise.resolve(new Response({}, { status: 202 }))); // 202 - Accepted
                         }
                     });
@@ -320,22 +343,6 @@ self.addEventListener('fetch', function (event) {
                     return new Response('');
                 });
                 return response || fetchPromise; //return event cache first!!!
-
-                /*
-                /////////////////////////////////////////////////////////////////
-                //if not match then network (and cache update), then  fallback  empty content
-                return response || fetch(request)
-                    .then(response => {
-                        if (response.ok && response.status === 200)
-                            addToCache(coreCacheName, request, response.clone());
-                        return response;
-                    })
-                    .catch((err) => {
-                        return new Response('');
-                        //return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', { headers: { 'Content-Type': 'image/svg+xml' } });
-                    });
-                /////////////////////////////////////////////////////////////////
-                */
 
             })
         );
@@ -397,6 +404,7 @@ function isIncoreCache(event) {
         !!(pathPattern.exec(url.pathname) && url.pathname != '/')
     )
 }
+
 function urlstoFetch(event) { //prende solo gli url col path indicato!! del tipo /qualcosa/blog/qualcosa ...
     let request = event.request,
         pathPattern = /^\/(.+)\/(?:(blog|altropathdaincludere)\/(.+)?)?$/,
@@ -420,7 +428,7 @@ function shouldFetch(event) {
         sameorigincheck
     );
 }
-function checkAllowedomains(event) {
+function checkAllowedomains(event) {//Esamino la lista dei domini esterni permessi e ritorno un boolean
     let request = event.request,   //Non gestisco le richieste diverse da GET col serviceWorker, basta ritornare senza chiamare .respondWith.
         url = new URL(request.url); //skip di tutte le richieste cross origin!
     for (var i = allowedDomains.length - 1; i >= 0; --i) {
@@ -433,38 +441,79 @@ function checkAllowedomains(event) {
     //allowedDomains
     //return allowedDomains.some(substring => url.origin.includes(substring));
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function addToCache(cacheName, request, response) {
     return caches.open(cacheName)
         .then(cache => cache.put(request, response))
 }
-
-
-
-//helper chre trova tutti i match in base ad una regular expression in una string
-function getMatches(string, regex, index) {
-    index || (index = 1); // default to the first capturing group
-    var matches = [];
-    var match;
-    while (match = regex.exec(string)) {
-        matches.push(match[index]);
-    }
-    return matches;
+function preloadContents() {
+    checkonline().then(function (onlinestatus) {
+        if (onlinestatus)
+            pagesTofetch.forEach(element => {
+                //carichiamo l'url  ( devo passare una lista di pagine html  ) e con lo scrape dei link iterni mettiamo in cache tutte le risorse necesarie
+                fetchAndCache(element, "");
+            });
+    });
 }
-//function fetchAndCache(url, cache) {
-//    return fetch(url).then(function (response) {
-//        if (response.status < 400) {
-//            console.log('got ' + url);
-//            cache.put(url, response.clone());
+
+function fetchAndCache(url, cache) {
+    return fetch(url).then(function (response) {
+        if (response.status < 400) {
+            console.log('got ' + url);
+            var _tmpresponse = response.clone();
+            if (_tmpresponse.headers.get("Content-type").indexOf("text/html") != -1)
+                caches.open(pagesCacheName).then(cache => {
+                    cache.put(url, _tmpresponse.clone());
+                });
+        }
+        return response.text(); //passo la pagina al parser per i contenuti interni
+    }).then(function (text) {
+         console.log(text);
+        var pattern = /(?<=<img[^<]+?src=(\"|'))[^=(\"|')]+/g; //cerco contenuto attributo src degli oggetti img
+        var pattern1 = /(?<=style=[^<]+?url\((\"|'))[^=(\"|')]+/g; //cerco contenuto attributo url(' degli oggetti dentro attributo style
+        var pattern2 = "";
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //DA FINIRE PRECARICAMENTO DI TUTTI I TAG IN PAGINA CHE FAANO RICHIESTE , LINK, SCRIPT , AXD..... URL
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        var assets = text.match(pattern) || [];
+        assets = assets.concat(text.match(pattern1) || []);
+
+        //console.log(assets);
+        if (assets)
+            caches.open(assetsCacheName).then(cache => {
+                assets.forEach(element => {
+                    cache.add(element)
+                        .then(() => {
+                            //cached
+                        }).catch((err) => {
+                            //err
+                        });
+                });
+            });
+        return;
+    });
+}
+//helper chre trova tutti i match in base ad una regular expression in una string
+//function getAllMatches(regex, text) {
+//    if (regex.constructor !== RegExp) {
+//        throw new Error('not RegExp');
+//    }
+//    var res = [];
+//    var match = null;
+//    if (regex.global) {
+//        while (match = regex.exec(text)) {
+//            res.push(match);
 //        }
-//        return response.text();
-//    }).then(function (text) {
-//        var pattern = /img src=(?:'|")/((?: files | img) / [^ '"]+)"/g;
-//      var assets = getMatches(text, pattern, 1);
-//        return cache.addAll(assets);
-//    })
+//    }
+//    else {
+//        if (match = regex.exec(text)) {
+//            res.push(match);
+//        }
+//    }
 //}
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 // Trim specified cache to max size
 function trimCache(cacheName, maxItems) {
     caches.open(cacheName).then(function (cache) {
@@ -475,13 +524,38 @@ function trimCache(cacheName, maxItems) {
         });
     });
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Mi metto in ascolto dai messaggi inviati dalle pagine web servite -> verso il serviceworker!!
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//MESSAGE PARSER !!! //////////////////////////////////////////////////////////////////////////////
+//Mi metto in ascolto dai messaggi inviati dalle pagine web  -> verso il serviceworker!!
+//////////////////////////////////////////////////////////////////////////////////////////////////
 self.addEventListener('message', event => {
     var data = event.data;
 
+    if (data.command == "pagestoserve") {
+        var _pagesToservewithsw = JSON.parse(data.parameters) || [];
+        pagesToservewithsw = pagesToservewithsw.concat(_pagesToservewithsw || []);
+    }
+    if (data.command == "preloadurls") {
+        var preloadurls = JSON.parse(data.parameters) || [];
+        pagesTofetch = pagesTofetch.concat(preloadurls || []);
+        preloadContents();
+    }
+    if (data.command == "invalidatecache") {
+        //Cache invalidation manager
+        invalidationManager.invalidateCache(coreCacheName);
+        invalidationManager.invalidateCache(assetsCacheName);
+        invalidationManager.invalidateCache(pagesCacheName);
+    }
+
+    if (data.command == "recoverstoredcalls") {
+        //Vedo se nello storage persistente ci sono chiamate da fare ed in caso le eseguo
+        recoverRequestsCache(event);
+    }
+
     //Creo Listener per comando postMessage trimCaches del service Worker
-    if (data.command == "trimCache") {
+    if (data.command == "trimcache") {
         trimCache(pagesCacheName, 25);
         trimCache(assetsCacheName, 30);
     };
@@ -495,9 +569,6 @@ self.addEventListener('message', event => {
 
 /*Invio un messagigo dal serviceworker a tutti i client per comandare azioni sula pagina! */
 function sendNotificationTopages(response, type, message) {
-
-    //Invio messaggio da serviceworker a pagina
-    //client.postMessage({ 'message': 'hello!' }); messaggio dal serviceworker alla pagina
     clients.matchAll().then(function (clients) {
         clients.forEach(function (client) {
             client.postMessage({
@@ -510,16 +581,9 @@ function sendNotificationTopages(response, type, message) {
 }
 
 
-/*Show amount of cache space used*/
-//navigator.storageQuota.queryInfo("temporary").then(function (info) {
-//    console.log(info.quota);
-//    // Result: <quota in bytes>
-//    console.log(info.usage);
-//    // Result: <used data in bytes>
-//    //Over a certain cache size i can remove promo cache ??
-//});
-
-/*PUSH NOTIFICATIN EVENT SW*/
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//////*PUSH NOTIFICATION EVENT SW*/ //////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
     if (!(self.Notification && self.Notification.permission === 'granted')) {
@@ -573,11 +637,8 @@ function notificationshow(event, tag, title, options) {
             })
             .then(resolve);
     });
-
     //return self.registration.showNotification(title, options);
 }
-
-
 
 //https://web-push-book.gauntface.com/chapter-05/04-common-notification-patterns/#open-a-window
 self.addEventListener('notificationclick', function (event) {
@@ -625,90 +686,3 @@ self.addEventListener('notificationclick', function (event) {
 //});
 /*PUSH NOTIFICATIN EVENT SW*/
 
-////https://github.com/jakearchibald/idb-keyval
-//var idbKeyval = (function (exports) {
-//    'use strict';
-
-//    class Store {
-//        constructor(dbName = 'keyval-store', storeName = 'keyval') {
-//            this.storeName = storeName;
-//            this._dbp = new Promise((resolve, reject) => {
-//                const openreq = indexedDB.open(dbName, 1);
-//                openreq.onerror = () => reject(openreq.error);
-//                openreq.onsuccess = () => resolve(openreq.result);
-//                // First time setup: create an empty object store
-//                openreq.onupgradeneeded = () => {
-//                    openreq.result.createObjectStore(storeName);
-//                };
-//            });
-//        }
-//        _withIDBStore(type, callback) {
-//            return this._dbp.then(db => new Promise((resolve, reject) => {
-//                const transaction = db.transaction(this.storeName, type);
-//                transaction.oncomplete = () => resolve();
-//                transaction.onabort = transaction.onerror = () => reject(transaction.error);
-//                callback(transaction.objectStore(this.storeName));
-//            }));
-//        }
-//    }
-//    let store;
-//    function getDefaultStore() {
-//        if (!store)
-//            store = new Store();
-//        return store;
-//    }
-//    function get(key, store = getDefaultStore()) {
-//        let req;
-//        return store._withIDBStore('readonly', store => {
-//            req = store.get(key);
-//        }).then(() => req.result);
-//    }
-//    function set(key, value, store = getDefaultStore()) {
-//        return store._withIDBStore('readwrite', store => {
-//            store.put(value, key);
-//        });
-//    }
-//    function del(key, store = getDefaultStore()) {
-//        return store._withIDBStore('readwrite', store => {
-//            store.delete(key);
-//        });
-//    }
-//    function clear(store = getDefaultStore()) {
-//        return store._withIDBStore('readwrite', store => {
-//            store.clear();
-//        });
-//    }
-//    function keys(store = getDefaultStore()) {
-//        const keys = [];
-//        return store._withIDBStore('readonly', store => {
-//            // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
-//            // And openKeyCursor isn't supported by Safari.
-//            (store.openKeyCursor || store.openCursor).call(store).onsuccess = function () {
-//                if (!this.result)
-//                    return;
-//                keys.push(this.result.key);
-//                this.result.continue();
-//            };
-//        }).then(() => keys);
-//    }
-
-//    exports.Store = Store;
-//    exports.get = get;
-//    exports.set = set;
-//    exports.del = del;
-//    exports.clear = clear;
-//    exports.keys = keys;
-
-//    return exports;
-
-//}({}));
-
-// iOS add-to-homescreen is missing IDB, or at least it used to.
-// I haven't tested this in a while.
-if (!self.indexedDB) {
-    idbKeyval = {
-        get: key => Promise.resolve(localStorage.getItem(key)),
-        set: (key, val) => Promise.resolve(localStorage.setItem(key, val)),
-        delete: key => Promise.resolve(localStorage.removeItem(key))
-    };
-}
