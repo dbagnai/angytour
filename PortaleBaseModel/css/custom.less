@@ -94,17 +94,18 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-color: @bg-primary-color;
     position: fixed;
     top: 0px;
-    height: 30px;
+    height: 40px;
     width: 100%;
     top: 0px;
     z-index: 9999;
     overflow: visible;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 400;
 }
 .fixedtop .form-control, .form-control:focus {
     border: none;
+    background-color: #fff
 }
 
 /*---------------------------------
@@ -149,6 +150,12 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     border-color: @bg-secondary-color !important;
 }
 
+.simplemenu > ul > li {
+    padding: 6px 25px;
+    float: left;
+    border-right: 1px solid @bg-secondary-color;
+}
+
 .simplemenu > ul > li > ul > li {
     padding: 4px;
 }
@@ -156,6 +163,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .simplemenu > ul > li > ul > li > a {
     color: @submenu-color;
     text-transform: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 .simplemenu > ul > li > ul > li > a:hover {
@@ -165,7 +174,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .simplemenu .dropdown-menu {
     border-top: 0;
-    transform: translate3d(0, 24px, 0px) !important;
+    transform: translate3d(0, 29px, 0px) !important;
     border-radius: 0rem;
 }
 

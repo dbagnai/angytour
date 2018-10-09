@@ -93,55 +93,33 @@
 
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
-            <div class="d-flex justify-content-center align-items-center d-sm-block" style="padding-left: 40px; padding-right: 40px">
+            <div class="d-block" style="padding: 5px 0;">
 
+                <!-- LINGUE --->
+                <div runat="server" visible="true">
+                    <div class="float-right px-2 px-sm-4 bd-secondary-color" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                    </div>
+                    <div class="float-right px-2 px-sm-4 bd-secondary-color" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
+                        <a style="color: White; padding: 0px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                            <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                    </div>
+                </div>
+
+                <!-- CERCA --->
                 <div class="float-right">
-                    <div class="input-group flex-nowrap" style="width: 160px; padding: 3px; padding-left: 15px;">
-                        <input type="text" id="txtSearchTop" class="form-control" style="height: 24px" runat="server" placeholder="Cerca ...." />
+                    <div class="input-group flex-nowrap px-2 px-sm-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
+                        <input type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
                         <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
                             <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
-                <div runat="server" visible="true">
-                    <div class="float-right" id="divCambioLinguaen" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="false">
-                    </div>
-                    <div class="float-right" id="divCambioLinguadef" style="margin-left: 5px; margin-top: 4px; padding: 2px; font-size: 1rem; background-color: rgba(255, 255, 255, 0.6); border-radius: 3px; line-height: 19px;" runat="server" visible="true">
-                        <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
-                            <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-                    </div>
-                </div>
+                
                 <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
-                    <div class="social-icons-small float-left" style="display: block" runat="server" visible="true">
-                        <ul style="float: right">
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
-                            </li>
-                            <%--      <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
-                            </li>
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
-                            </li>--%>
-                            <%--  <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
-                            </li>--%>
-                            <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
-                        </ul>
-                        <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
-                            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
-                        </a>--%>
-                        <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
-                            </a>
-                            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
-                            </a>--%>
-                    </div>
+                    
                     <%--CARRELLO--%>
-
                     <asp:PlaceHolder runat="server" Visible="true">
-                        <div class="carrellomaincontainer float-right d-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-2 px-sm-4 py-0 d-sm-none">
                             <a class="float-right" style="color: #fff !important; border: none"
                                 href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                 <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
@@ -172,18 +150,49 @@
                         </div>
                     </asp:PlaceHolder>
 
-                    <%--CARRELLO END--%>
+                    <%-- CARRELLO END --%>
                 </div>
-                <div class="simplemenu d-none d-sm-block">
+
+                <%-- SOCIAL --%>
+                <div class="social-icons-small float-left d-block px-2 px-sm-4 border-right bd-secondary-color" runat="server" visible="true">
+                        <ul style="float: right">
+                            <li style="float: right">
+                                <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
+                            </li>
+                            <%--      <li style="float: right">
+                                <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
+                            </li>
+                            <li style="float: right">
+                                <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
+                            </li>--%>
+                            <%--  <li style="float: right">
+                                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
+                            </li>--%>
+                            <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
+                        </ul>
+                        <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
+                            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
+                        </a>--%>
+                        <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
+                            </a>
+                            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
+                                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
+                            </a>--%>
+                    </div>
+
+                <%-- BLOG --%>
+                <div class="simplemenu float-left d-none d-sm-block">
                     <ul>
-                        <li runat="server" class="dropdown">
+                        <li runat="server" class="dropdown px-2 px-sm-4">
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
                                 <%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
+                            <ul class="dropdown-menu dropdown-menu-right px-3">
                                 <%= CreaLinkCategorie("rif000002") %>
                             </ul>
                         </li>
-                        <li runat="server">
+                        <!-- CONTATTI --->
+                        <li runat="server" class="px-2 px-sm-4">
                             <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                 <span><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                             </a>
@@ -209,7 +218,7 @@
             </div>
         </div>
 
-        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
+        <div class="fixednav bckColor2" id="mainnav" style="padding-left:20px; padding-right:20px">
 
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>

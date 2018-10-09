@@ -263,7 +263,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         }
 
         HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
-        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 0px\" ";
         divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
         divCambioLinguaen.InnerHtml += "href=\"";
         divCambioLinguaen.InnerHtml += urlcambiolinguaenit;

@@ -145,17 +145,18 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .fixedtop {
   background-color: #098f8f;
   position: fixed;
-  height: 30px;
+  height: 40px;
   top: 0px;
   z-index: 9999;
   overflow: visible;
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 .fixedtop .form-control,
 .form-control:focus {
   border: none;
+  background-color: #fff;
 }
 /*---------------------------------
 --------------- MENU --------------
@@ -194,12 +195,19 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
+.simplemenu > ul > li {
+  padding: 6px 25px;
+  float: left;
+  border-right: 1px solid #90cdcd;
+}
 .simplemenu > ul > li > ul > li {
   padding: 4px;
 }
 .simplemenu > ul > li > ul > li > a {
   color: #032f2f;
   text-transform: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 .simplemenu > ul > li > ul > li > a:hover {
   color: #077777 !important;
@@ -207,7 +215,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .simplemenu .dropdown-menu {
   border-top: 0;
-  transform: translate3d(0, 24px, 0px) !important;
+  transform: translate3d(0, 29px, 0px) !important;
   border-radius: 0rem;
 }
 .triggerdata {
