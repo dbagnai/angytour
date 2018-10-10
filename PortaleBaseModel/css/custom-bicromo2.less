@@ -2,15 +2,15 @@
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
 @bg-base-color: #205499; /*logo - sfondo-pulsanti - link*/
-@bg-primary-color: spin(@bg-base-color, 180); /*fixed-top* - colore complementare*/
-@bg-secondary-color: mix(@bg-primary-color, #fff, 45%); /*footer-link*/ /*#dac8a0;*/
-@bg-light-color: mix(@bg-primary-color, #fff, 8%); /*footer-social e banner*/ /*#f5f0e5;*/
-@bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/ /*#555;*/
+@bg-primary-color: #8daa65; /*fixed-top - sfondo-pulsanti - fixed-top*/
+@bg-secondary-color: mix(@bg-primary-color, #fff, 45%); /*footer-link*/
+@bg-light-color: mix(@bg-primary-color, #fff, 8%); /*footer-social e banner*/
+@bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/
 /**/
 @bg-manual-secondary-color-fade: fade(@secondary-color, 70%); /*sfondo modulo contatto*/
 /**/
-@primary-color: darken(@bg-dark-color, 30%); /*menu - titoli-principali*/ /*#232323;*/
-@secondary-color: lighten(@primary-color, 15%); /*sotto-titoli-principali - body*/ /*#555;*/
+@primary-color: darken(@bg-dark-color, 30%); /*menu - titoli-principali*/
+@secondary-color: lighten(@primary-color, 15%); /*sotto-titoli-principali - body*/
 @black-color: #000;
 @white-color: #fff;
 
@@ -72,9 +72,9 @@
 /*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
-@title-footer-color: @bg-dark-color;
+@title-footer-color: @bg-base-color;
 @title-footer-color-hover: @white-color;
-@title-footer-border-color: @bg-primary-color;
+@title-footer-border-color: @bg-base-color;
 /**/
 @link-footer-color: @white-color;
 @link-footer-color-hover: @primary-color;
