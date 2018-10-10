@@ -119,7 +119,7 @@
                     
                     <%--CARRELLO--%>
                     <asp:PlaceHolder runat="server" Visible="true">
-                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-2 px-sm-4 py-0 d-sm-none">
+                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-sm-4 pl-sm-3 py-0 d-sm-none">
                             <a class="float-right" style="color: #fff !important; border: none"
                                 href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                 <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
