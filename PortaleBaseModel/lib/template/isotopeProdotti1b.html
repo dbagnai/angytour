@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <ul class="works-grid works-grid-gut works-grid-4 works-hover-lw" id="replaceid">
             <li class="work-item">
-                <div class="card bd-secondary-color" style="overflow:hidden">
+                <div class="card m-2 bd-secondary-color" style="overflow:hidden">
                     <!--<div class="card-header"></div>-->
 
                     <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
@@ -21,17 +21,17 @@
                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                         </h3>
 
-                        <h4 class="card-subtitle sottotitolo-offerta mt-0">
+                        <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
                             <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
                         </h4>
                         <!--<p class="card-text">
-        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="160" format="formatdescrizione"></span>
-    </p>-->
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="160" format="formatdescrizione"></span>
+                        </p>-->
 
                         <div class="">
                             <div class="row align-items-end">
 
-                                <div class=" col-6 float-left text-left">
+                                <div class="col float-left text-left">
                                     <!-- DETTAGLI PRODOTTO -->
                                     <div class="float-left my-0 mr-2">
                                         <a onclick="javascript:JsSvuotaSession(this)" class="bind" target="_self" href="link" title="titolo" mybind="Id">
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <!-- PREZZO -->
-                                <div class="col-6 float-right text-right" style="font-size:2rem; margin-top:12px">
+                                <div class="col-md-auto float-right text-right" style="font-size:2vw; line-height: 2vw !important;">
                                     <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                     <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                 </div>
@@ -62,6 +62,3 @@
     </div>
 </div>
 <!-- Fine Isotope   -->
-
-
-
