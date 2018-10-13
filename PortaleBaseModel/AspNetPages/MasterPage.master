@@ -59,8 +59,14 @@
     <form id="form1" runat="server">
         <asp:Panel runat="server" Visible="true">
             <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
-                <button disabled class="js-push-btn js-roundedpush  btn btn-primary">
+                <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
                     <i class="fa fa-2x fa-bell-slash"></i>
+                </button>
+                <button type="button" class="js-preload-btn js-roundedpush btn btn-primary">
+                    <i class="fab fa-2x fa-adn"></i>
+                </button>
+                <button type="button" class="js-a2hs-btn js-roundedpush btn btn-primary" style="display:none">
+                    <i class="fas fa-2x fa-home"></i>
                 </button>
                 <section class="subscription-details js-subscription-details d-none">
                     <pre><code class="js-subscription-json"></code></pre>
@@ -114,9 +120,9 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
-                    
+
                     <%--CARRELLO--%>
                     <asp:PlaceHolder runat="server" Visible="true">
                         <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-sm-4 pl-sm-3 py-0 d-sm-none">
@@ -155,31 +161,31 @@
 
                 <%-- SOCIAL --%>
                 <div class="social-icons-small float-left d-block px-2 px-sm-4 border-right bd-secondary-color" runat="server" visible="true">
-                        <ul style="float: right">
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
-                            </li>
-                            <%--      <li style="float: right">
+                    <ul style="float: right">
+                        <li style="float: right">
+                            <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
+                        </li>
+                        <%--      <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
                             </li>
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
                             </li>--%>
-                            <%--  <li style="float: right">
+                        <%--  <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
                             </li>--%>
-                            <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
-                        </ul>
-                        <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
+                        <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
+                    </ul>
+                    <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
                             <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
                         </a>--%>
-                        <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
+                    <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
                                 <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
                             </a>
                             <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
                                 <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
                             </a>--%>
-                    </div>
+                </div>
 
                 <%-- BLOG --%>
                 <div class="simplemenu float-left d-none d-sm-block">
@@ -197,11 +203,11 @@
                                 <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
                             </a>
                         </li>
-                         <!-- TELEFONO --->
+                        <!-- TELEFONO --->
                         <li runat="server" class="px-2 px-sm-4">
                             <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
-                        <i class="fa fa-phone mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
-                        </span></a>
+                                <i class="fa fa-phone mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
+                                </span></a>
                         </li>
                     </ul>
                 </div>
@@ -220,7 +226,7 @@
             </div>
         </div>
 
-        <div class="fixednav bckColor2" id="mainnav" style="padding-left:20px; padding-right:20px">
+        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
 
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
@@ -294,10 +300,10 @@
                                     <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
                                 </a>--%>
 
-                                <a class="float-right" style="color: #666 !important; border: none; padding:0 !important;"
+                                <a class="float-right" style="color: #666 !important; border: none; padding: 0 !important;"
                                     href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <span class="count">0</span>
-                                    </a>
+                                    <span class="count">0</span>
+                                </a>
 
                                 <ul class="dropdown-menu dropdown-cart">
                                     <li>

@@ -9,8 +9,8 @@
 //URL CHE VENGONO PRECARICATI COMPRESE LE RISORSE PRESENTI IN PAGINA
 //////////////////////////////////////////////////////////////
 var pagesTofetch = [
-    /* array of  pages that i WANT to pre - cache!*/
-    '/I/blog/notizie-18'
+    /* array of  pages that i WANT to completely pre - cache!*/
+    /*Vengono aggiunte a quelle che sono indicate in fase di registrazione*/
 ];
 var pagesToservewithsw = [
     /* array of  pages that i WANT to serve with serviceworker !! !*/
@@ -24,6 +24,7 @@ var pagesToservewithsw = [
 // updated service worker is activated.
 var CACHE_VERSION = 2; //Per invalidare la cache
 
+//CARICHIAMO LE RISORSE CHE VERRANNO USATE DAL SERVICEWORKER
 self.importScripts("/js/localforage.min.js",
     "/lib/sw/invalidation-mgr.js",
     "/lib/sw/date-mgr.js"
@@ -35,9 +36,10 @@ self.importScripts("/js/localforage.min.js",
 //}
 
 var host = self.location.hostname;
-const coreCacheName = CACHE_VERSION + host + 'core',
+const
     pagesCacheName = CACHE_VERSION + host + 'pages',
     assetsCacheName = CACHE_VERSION + host + 'assets',
+    coreCacheName = CACHE_VERSION + host + 'core',
     invalidationManager = new InvalidationManager([{
         "cacheName": coreCacheName,
         "invalidationStrategy": "ttl",
@@ -223,7 +225,6 @@ function recoverRequestsCache(event) {
                 } else localforage.removeItem('callqueque', function (err, value) { console.log('removed callqueque ' + value + '  ' + err); });
         });
 }
-
 /* FINE GESTIONE RICHIESTE OFFLINE ////////////////////////////////////////////////////////////////////////////// */
 
 //Install stage sets up the cache-array to configure pre-cache content
@@ -298,7 +299,7 @@ self.addEventListener('fetch', function (event) {
             //direct call from servicwworker directly to network
             ////////////////////////////////////////////////////////////////////////////
             event.respondWith(
-                fetch(request)
+                fetch(request)//Cerico e ritorno direttamente dal network
                     .catch((err) => {
                         //we are offline!!!
                         return;
@@ -310,16 +311,11 @@ self.addEventListener('fetch', function (event) {
     }
     ////////////////////////////////////////////////////////////////////////////
 
-
-    //if (request.url.indexOf(myPwaUrlPath) !== -1) { return; } //Posso saltare tutte le richieste che non voglio gestire col service worker restituendole direttamente ( oppure viceversa ) 
-    //////////////////////////////////////////////////////////////////
     //console.log('The service worker is serving url: ' + request.url);
-
-    if (isIncoreCache(event)) { //Elementi caricati in core cache ( li gestisco in manera dedicata!!! )
+    if (isIncoreCache(event.request.url)) { //Elementi caricati in core cache ( li gestisco in manera dedicata!!! )
         event.respondWith(
             // First Try cache, 
             caches.match(request).then(response => {
-
                 // if (request.url.indexOf('bundlejssw') !== -1) return;
                 //////////////////////AGGIORNAMENTO CACHE IN BACKGROUND SE LINEA DISPONIBILE//////////
                 //Creo una richiesta CORS ( anche nei casi in cui i domini non coincidano x usare con domini esterni)
@@ -396,19 +392,20 @@ self.addEventListener('fetch', function (event) {
         );
     }
 });
-function isIncoreCache(event) {
-    let request = event.request,
-        pathPattern = /^\/(?:(20[0-9]{2}|bdejs|bdecss)\/(.+)?)?$/,
-        url = new URL(request.url);
+function isIncoreCache(url) {
+    //  let request = event.request,
+    pathPattern = /^\/(?:(20[0-9]{2}|bdejs|bdecss)\/(.+)?)?$/;
+    urlcomplete = new URL(url, self.registration.scope);
+    let pathname = urlcomplete.pathname;
     return (
-        !!(pathPattern.exec(url.pathname) && url.pathname != '/')
+        !!(pathPattern.exec(pathname) && pathname != '/')
     )
 }
 
 function urlstoFetch(event) { //prende solo gli url col path indicato!! del tipo /qualcosa/blog/qualcosa ...
     let request = event.request,
         pathPattern = /^\/(.+)\/(?:(blog|altropathdaincludere)\/(.+)?)?$/,
-        url = new URL(request.url);
+        url = new URL(request.url, self.registration.scope);
     return (
         (pathPattern.exec(url.pathname) && url.pathname != '/')
     );
@@ -418,9 +415,9 @@ function shouldFetch(event) {
     let request = event.request,   //Non gestisco le richieste diverse da GET col serviceWorker, basta ritornare senza chiamare .respondWith.
         // pathPattern = /^\/(?:(blog|altro)\/(.+)?)?$/, // pattern di paths da includere nelle fetch del sw ( ablitandolo prendero solo i path indicati col service worker)
         ishandler = (event.request.url.indexOf(".ashx") !== -1), //torno tutte le chimate a handlers, basta ritornare senza chiamare la .respondWith.
-        url = new URL(request.url);
+        url = new URL(request.url, self.registration.scope);
     var sameorigincheck = (url.origin === self.location.origin);//normalmente skip di tutte le richieste cross origin!!
-    if (checkAllowedomains(event)) sameorigincheck = true; //Bypass dello skip per gli allowed domains
+    if (checkAllowedomains(event.request.url)) sameorigincheck = true; //Bypass dello skip per gli allowed domains
 
     return (request.method === 'GET' &&
         !ishandler &&
@@ -428,9 +425,10 @@ function shouldFetch(event) {
         sameorigincheck
     );
 }
-function checkAllowedomains(event) {//Esamino la lista dei domini esterni permessi e ritorno un boolean
-    let request = event.request,   //Non gestisco le richieste diverse da GET col serviceWorker, basta ritornare senza chiamare .respondWith.
-        url = new URL(request.url); //skip di tutte le richieste cross origin!
+function checkAllowedomains(url) {//Esamino la lista dei domini esterni permessi e ritorno un boolean
+    //let request = event.request,   //Non gestisco le richieste diverse da GET col serviceWorker, basta ritornare senza chiamare .respondWith.
+
+    url = new URL(url, self.registration.scope); //skip di tutte le richieste cross origin!
     for (var i = allowedDomains.length - 1; i >= 0; --i) {
         if (url.origin.indexOf(allowedDomains[i]) != -1) {
             // str contains arr[i]
@@ -453,13 +451,16 @@ function preloadContents(preloadurls) {
         if (onlinestatus)
             preloadurls.forEach(element => {
                 //carichiamo l'url  ( devo passare una lista di pagine html  ) e con lo scrape dei link iterni mettiamo in cache tutte le risorse necesarie
-                fetchAndCache(element, "");
+                fetchAndCache(element);
             });
     });
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ESEGUE IL FETCH DELL'URL PASSATO E DEI CONTENUTI NECESSARI A QUESTO - INOLTRE CARICA LE PAGINE LINKATE CON A HREF E ATTRIBUTO PRELOAD
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function fetchAndCache(url) {
 
-function fetchAndCache(url, cache) {
-    return fetch(url).then(function (response) {
+    let fetchPromise = fetch(url).then(function (response) {
         if (response.status < 400) {
             console.log('got ' + url);
             var _tmpresponse = response.clone();
@@ -468,12 +469,13 @@ function fetchAndCache(url, cache) {
                     cache.put(url, _tmpresponse.clone());
                 });
         }
-        //return { 'url': url, 'text': response.text() }; //passo la pagina al parser per i contenuti interni
-        return response.text(); //passo la pagina al parser per i contenuti interni
+        var localurl = url;
+        //var params = { 'url': url, 'text': response.text() }; //passo la pagina al parser per i contenuti interni
+        return response.text();
     }).then(function (text) {
-        //let url = textitem.url;
-        //let text = textitem.text;
 
+        //let text = textitem.text;
+        //var url = response.url;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //PRECARICAMENTO DI TUTTI I TAG IN PAGINA CHE FAANO RICHIESTE , LINK, SCRIPT , AXD..... URL
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,45 +496,116 @@ function fetchAndCache(url, cache) {
         assets = assets.concat(text.match(pattern4) || []);
         assets = assets.concat(text.match(pattern5) || []);
         assets = assets.concat(text.match(pattern6) || []);
-        console.log(assets);
-        if (assets)
-            caches.open(assetsCacheName).then(cache => {
-                assets.forEach(element => {
-                    cache.add(element)
-                        .then(() => {
-                            //cached
-                        }).catch((err) => {
-                            //err
-                        });
-                });
+        //console.log(assets);
+
+        if (assets) {
+            assets.forEach(element => {
+                let destinationcache = assetsCacheName;
+                if (isIncoreCache(element))
+                    destinationcache = coreCacheName;
+
+                //caches.open(destinationcache).then(cache => {
+                //    console.log(destinationcache, element);
+                //    cache.add(element)
+                //        .then(() => {
+                //            //cached
+                //        }).catch((err) => {
+                //            //err
+                //        });
+                //});
+
+                let url = new URL(element, self.registration.scope);
+                var sameorigincheck = (url.origin === self.location.origin);
+                if (checkAllowedomains(element)) sameorigincheck = true;
+                if (sameorigincheck) {
+                    let myHeaders = new Headers();
+                    let myInit = {
+                        method: 'GET',
+                        headers: myHeaders,
+                        mode: 'cors'
+                    };
+                    let myRequest = new Request(element, myInit);
+                    let fetchelement = fetch(myRequest).then(networkResponse => {
+                        if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only if data is present in response
+                        {
+                            addToCache(destinationcache, myRequest, networkResponse.clone()); //inseriamo in cache il file richiesto
+
+                            //Qui per i file di tipo css  và parserizzata la networkResponse.clone() cercando i link dentro url() url("") url('') e aggiungerli alla coda di assets da richiedere
+                            //DA FILTRARE I FILE CCS DA PARSERIZZARE ... ALTRIMENTI CARICA UNA BALLA DI FILES!!!!
+                            // DA FARE ....
+                            /*                            if (networkResponse.headers.get("Content-type").toLowerCase().indexOf("text/css") != -1) {
+                                var newrequest = networkResponse.clone();
+                                newrequest.text().then(function (data) {
+                                    var patterncss2 = /(?<={[^<]+?url\s*\(\s*(\"|'|))[^"')]+/gi; //cerco contenuto attributo url(' degli oggetti dentro attributo style
+                                    var assetsfromcss = (data.match(patterncss2) || []); //qeusti sono da agigungere alle risorse ....
+                                    //prima l'array è da ridurre eliminando gli elemnti uguali in quanto ci sono molte ripetizioni
+                                    if (assetsfromcss) {
+                                        assetsfromcss.forEach(element => {
+                                            let destinationcache = assetsCacheName;
+                                            if (isIncoreCache(element))
+                                                destinationcache = coreCacheName;
+                                            let urlcorretto = new URL(element, self.registration.scope); //gli url da estrarre sono fa fare cosi
+                                            //da fare le fetch per questi e metterli in cacHE
+                                            // DA FARE ...
+
+                                        });
+                                    }
+                                });
+                            }
+                            */
+
+                            console.log(destinationcache, element);
+                        }
+                        return;
+                    });
+                }
             });
 
+        }
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //RICERCA DEI LINK PRESENTI IN PAGINA!!!! ( DA SELEZIONARE PER PRELOAD DEI LINK IN PAGINA SUL DOMINIO !!! ) -> PRENDO SOLO QUELLI CON ATTRIBUTO PRELOAD E FACCIO LA FETCH
+        //RICERCA DEI LINK PRESENTI IN PAGINA!!!! ( DA SELEZIONARE con ATTRIBUTO PRELOAD DEI LINK IN PAGINA !!! ) -> PRENDO SOLO QUELLI CON ATTRIBUTO PRELOAD E FACCIO LA FETCH
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //const regex = /<(.|\n)*?>/g; extracts al tags
         //Ritorna tutti i valori dentro gli href /(?<=<.*\s*href=(\"|'))[^\"']+/gi
-        //Ritorna tutti i valori dentro gli href che nel tag hanno preload dopo /(?<=<.*\s*href=(\"|'))(?=[^>]+?preload\s*.*)[^\"']+/gi
+        //Ritorna tutti i valori dentro gli href che nel tag hanno preload dopo 
         var patternurl1 = /(?<=<.*\s*href=(\"|'))(?=[^>]+?preload\s*.*)[^\"']+/gi;
-        //Ritorna tutti i valori dentro gli href che nel tag hanno preload prima /(?<=<.*\s*preload\s*.*href=(\"|'))[^\"']+/gi  
+        //Ritorna tutti i valori dentro gli href che nel tag hanno preload prima    
         var patternurl2 = /(?<=<.*\s*preload\s*.*href=(\"|'))[^\"']+/gi;
         let pageslinked = text.match(patternurl1) || [];
         pageslinked = pageslinked.concat(text.match(patternurl2) || []);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        return pageslinked;
+
+    });
+
+    //Promise per passare il valore orignale del caller
+    let dummypromise = new Promise((resolve, reject) => {
+        resolve({ url });
+    });
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Promise eseguita AL  termine delle due indicate negli argomenti , serve d avere un contesto CONTEMPORANEO con entrambe le risposte
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    return Promise.all([fetchPromise, dummypromise]).then(function (values) {
+        var pagestofetch = values[0];
+        var originalurl = values[1];
         //Rimuovere l'url originario della fetchandcache dalla lsita generata se presente !!!! da fare
         //pageslinked - cerco url e lo tolgo se presente !!
-
         //console.log(pageslinked);
-        //Da fare precaricamento delle pagine linkate con attributo preload 
         //(ATTENZIONE AI LOOP DI CARICAMENTO PAGINA!!!! se chiami il fetchAndCache di una pagina che contine il link a se stessa come preload!!!!!! )
-        //if (pageslinked)
-        //    pageslinked.forEach(element => {
-        //        fetchAndCache();
-        //    });
-
+        if (pagestofetch)
+            pagestofetch.forEach(element => {
+                if (originalurl.url.toLowerCase().indexOf(element.toLowerCase() == -1))
+                    fetchAndCache(element);
+            });
 
         return;
     });
+
+    // return fetchPromise;
 }
 //helper chre trova tutti i match in base ad una regular expression in una string
 //function getAllMatches(regex, text) {
@@ -574,7 +647,9 @@ self.addEventListener('message', event => {
 
     if (data.command == "pagestoserve") {
         let _pagesToservewithsw = JSON.parse(data.parameters) || [];
-        let pagesToservewithswlocal = pagesToservewithsw.concat(_pagesToservewithsw || []);  //da vedere come usare questa lista
+        let pagesToservewithswlocal = pagesToservewithsw.concat(_pagesToservewithsw || []);
+        //da vedere come usare questa lista pagesToservewithswlocal ( per fare un eventuale filtro di pagine servite )
+
     }
     if (data.command == "preloadurls") {
         let preloadurls = JSON.parse(data.parameters) || [];

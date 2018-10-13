@@ -4,12 +4,15 @@
 
 //navigator.serviceWorker.getRegistration().then(function(r){r.unregister();});
 
+
+/* SPECIFICARE QUI LA LISTA DELLE PAGINE DA PREINSTALLARE NELL'APPLICAZIONE MOBILE */
 var pagesTofetchreg = [
     /* array of  pages that i WANT to indicate sw to pre - cache!*/
-    '/I/ceramiche-ficola/ceramiche-ficola'
+    '/I/ceramiche-ficola/ceramiche-ficola',
+    '/I/blog/notizie-18'
 ];
 var pagesToservewithswreg = [
-    /* array of  pages that i WANT to serve with serviceworker !! !*/
+    /* array of  pages exclusive that i WANT to serve with serviceworker !! !*/
 
 ];
 
@@ -50,16 +53,26 @@ let swRegistration;
                 //Invio messaggio da pagina a serviceworker
                 //Utilizzo della funzione service worker postMessage - Comando per fare pulizia della cache e recuperare le chiamate nella coda
                 if (navigator.serviceWorker.controller != null) {
-
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     navigator.serviceWorker.controller.postMessage({ 'command': 'invalidatecache' }); //invio messaggio al serviceworker dalla pagina per invalidare la cache ( le policy sono nel sw.js )
-                    navigator.serviceWorker.controller.postMessage({ 'command': 'recoverstoredcalls' }); //invio messaggio al servicewirker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    navigator.serviceWorker.controller.postMessage({ 'command': 'recoverstoredcalls' }); //invio messaggio al serviceworker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    ///////////////////COMANDO IL SERVICEWORKER DI PRECARICARE GLI URL ALLA REGISTRAZIONE !!!! ( questo comando lo dovresti dare su richiesta di installazione dell'APP!!!!!! )
+                    ///////////////////COMANDO IL SERVICEWORKER DI PRECARICARE GLI URL ALLA REGISTRAZIONE !!!! ( questo comando VA DATO SOLO su richiesta di installazione dell'APP!!!!!! )
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    navigator.serviceWorker.controller.postMessage({ 'command': 'preloadurls', 'parameters': JSON.stringify(pagesTofetchreg) }); //invio messaggio al serviceworker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
+                    let pushButton = document.querySelector('.js-preload-btn');
+                    if (pushButton)
+                        pushButton.addEventListener('click', function () {
+                            pushButton.disabled = false;
+                            //invio messaggio al serviceworker dalla pagina per fare il preload di tutte le pagine relative all'applicazione specificate in pagesTofetchreg
+                            navigator.serviceWorker.controller.postMessage({ 'command': 'preloadurls', 'parameters': JSON.stringify(pagesTofetchreg) }); 
+                        });
+                    var a2hsBtn = document.querySelector(".js-a2hs-btn"); //Bottone per add to homescreen
+                   // a2hsBtn.style.display = "block";
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
 
+                    //EVENTUALE FILTRO PER SELEZIONARE SOLO UNA LISTA DI PAGINE DA GESTIRE ( da ultimare la gestione nel serviceworker)
                     navigator.serviceWorker.controller.postMessage({ 'command': 'pagestoserve', 'parameters': JSON.stringify(pagesToservewithswreg) });
                 }
 
@@ -104,6 +117,39 @@ let swRegistration;
 
 
 })();
+
+/*ADD TO HOMESCREEN MANAGEMENT ///////////////////////////////////////////////////////// */
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function (e) {
+    console.log('Called beforeinstallprompt');
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    showAddToHomeScreen();
+});
+function showAddToHomeScreen() {
+    var a2hsBtn = document.querySelector(".js-a2hs-btn");
+    a2hsBtn.style.display = "block";
+    a2hsBtn.addEventListener("click", addToHomeScreen);
+}
+function addToHomeScreen() {
+    var a2hsBtn = document.querySelector(".js-a2hs-btn");
+    a2hsBtn.style.display = 'none';  // Show the prompt
+    deferredPrompt.prompt();  // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice
+        .then(function (choiceResult) {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+            } else {
+                console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+        });
+}
+/*ADD TO HOMESCREEN MANAGEMENT ///////////////////////////////////////////////////////// */
+
+
 
 /*fUNZIONE GESTIONE E ATTIVAZIONE DELLE NOTIFICHE PUSH PER LA CREAZIONE DELLE SOTTOSCRIZIONI NECESSARIE ALL'INVIO*/
 var pushM = new function () {

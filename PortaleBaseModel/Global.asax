@@ -471,7 +471,7 @@
             BundleEngine.BundleOptions.minifyJs = true;
 
         BundleEngine.AddBundleJS("bundlejssw",
-         // "~/sw.js", //Service Worker
+          // "~/sw.js", //Service Worker
           "~/sw-register.js"  //Service Worker registration
         );
 
@@ -541,6 +541,8 @@
             "~/js/it-cookies-policy.js",
             "~/js/YTPlayer/jquery.mb.YTPlayer.js",
             "~/js/simplestarrating/SimpleStarRating.js",
+            "~/css/fontawesome541/js/all.js",
+            "~/css/fontawesome541/js/v4-shims.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
             "~/js/maininit.js",
@@ -554,7 +556,7 @@
             "~/js/menuzord/files/css/menuzord.css",
             "~/js/menuzord/files/css/skins/menuzord-colored.css",
              "~/js/menuzord/files/css/menuzordcustomize.css",
-             "~/css/font-awesome.css",
+            //"~/css/font-awesome.css",
             "~/css/tipsy.css",
             "~/css/prettyPhoto.css",
             "~/css/isotop_animation.css",
