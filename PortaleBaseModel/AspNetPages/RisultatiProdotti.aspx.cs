@@ -769,7 +769,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
             else urlcambiolinguaenit = linkcanonicoalt;
         }
         HtmlGenericControl divCambioLinguaen = (HtmlGenericControl)Master.FindControl("divCambioLinguaen");
-        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
+        divCambioLinguaen.InnerHtml = "<a style=\"color: White; padding: 0px\" ";
         divCambioLinguaen.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
         divCambioLinguaen.InnerHtml += "href=\"";
         divCambioLinguaen.InnerHtml += urlcambiolinguaenit;

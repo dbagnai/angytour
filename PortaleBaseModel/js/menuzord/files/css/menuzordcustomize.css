@@ -1,7 +1,7 @@
 ﻿.fixedtop {
     position: fixed;
     top: 0px;
-    height: 30px;
+    height: 40px;
     width: 100%;
     top: 0px;
     z-index: 999;
@@ -73,7 +73,7 @@
 .fixednav {
     position: fixed;
     width: 100%;
-    top: 30px;
+    top: 40px;
     z-index: 998;
     background-color: #ffffff;
     padding-top: 0px;

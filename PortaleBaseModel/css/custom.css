@@ -74,6 +74,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ///| BANNER news-letter e mail |////
 ----------------------------------*/
 /*@import "custom-bicromo.less";*/
+/*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS L'IMPORT DEI FONT QUI NON FUNZIONA!!!!!!!!!! /////////// -> SPOSTATO IN MASTERPAGE
@@ -82,9 +83,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 //////////////| FONT |//////////////
 ----------------------------------*/
-/*menu - titoli-principali*/
+/*titoli-principali*/
 /*sotto-titoli-principali*/
-/*body*/
+/*menu - body*/
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -95,7 +96,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-color: #90cdcd !important;
 }
 .bg-light-color {
-  background-color: rgba(9, 143, 143, 0.08) !important;
+  background-color: #ebf6f6 !important;
 }
 .bg-dark-color {
   background-color: #098f8f !important;
@@ -110,7 +111,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   color: #90cdcd !important;
 }
 .tx-light-color {
-  color: rgba(9, 143, 143, 0.08) !important;
+  color: #ebf6f6 !important;
 }
 .tx-dark-color {
   color: #098f8f !important;
@@ -122,7 +123,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   border-color: #90cdcd !important;
 }
 .bd-light-color {
-  border-color: rgba(9, 143, 143, 0.08) !important;
+  border-color: #ebf6f6 !important;
 }
 .bd-dark-color {
   border-color: #098f8f !important;
@@ -145,17 +146,18 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .fixedtop {
   background-color: #098f8f;
   position: fixed;
-  height: 30px;
+  height: 40px;
   top: 0px;
   z-index: 9999;
   overflow: visible;
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 .fixedtop .form-control,
 .form-control:focus {
   border: none;
+  background-color: #fff;
 }
 /*---------------------------------
 --------------- MENU --------------
@@ -194,12 +196,22 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
+.simplemenu .fa {
+  font: normal normal normal 0.8rem FontAwesome !important;
+}
+.simplemenu > ul > li {
+  padding: 6px 25px;
+  float: left;
+  border-right: 1px solid #90cdcd;
+}
 .simplemenu > ul > li > ul > li {
   padding: 4px;
 }
 .simplemenu > ul > li > ul > li > a {
   color: #032f2f;
   text-transform: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 .simplemenu > ul > li > ul > li > a:hover {
   color: #077777 !important;
@@ -207,7 +219,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .simplemenu .dropdown-menu {
   border-top: 0;
-  transform: translate3d(0, 24px, 0px) !important;
+  transform: translate3d(0, 29px, 0px) !important;
   border-radius: 0rem;
 }
 .triggerdata {
@@ -375,9 +387,15 @@ button.btn:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello,
+.button-carrello1,
 .button-carrello:hover,
 .btn-carrello-esaurito,
-.btn-carrello-esaurito:hover {
+.btn-carrello-esaurito:hover,
+.button-carrello1:hover,
+.btn-carrello-esaurito1,
+.btn-carrello-esaurito1:hover,
+.button-carrello-animate,
+.button-carrello-animate:hover {
   font-family: 'Roboto', sans-serif;
   letter-spacing: 2px;
   font-size: 0.8rem;
@@ -420,7 +438,9 @@ button.btn:hover,
 .btn-primary:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
-.button-carrello:hover {
+.button-carrello:hover,
+.button-carrello1:hover,
+.button-carrello-animate:hover {
   color: #000 !important;
   /*opacity: 0.78;*/
   background-color: #86f7f7;
@@ -516,6 +536,9 @@ footer .divbuttonstyle:hover {
     background-color: #86f7f7 !important;
     color: #000 !important;
   }
+  .menuzord.white .menuzord-menu > li:hover > a.buttonmenu {
+    color: #fff !important;
+  }
 }
 /*----------------------------------
 PULSANTE SCORRIMENTO BANNER E PAGINA
@@ -607,9 +630,6 @@ ul li .work-image:hover:after,
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
-/*----------------------------------
------- PULSANTE IMAGE HOVER --------
-----------------------------------*/
 .btn.btn-blue {
   border: 1px solid #098f8f;
   box-shadow: none;
@@ -619,8 +639,8 @@ ul li .work-image:hover:after,
 ----------------------------------*/
 .footerhead {
   padding: 15px 60px 15px 60px;
-  border-top: 1px solid rgba(9, 143, 143, 0.08);
-  background-color: rgba(9, 143, 143, 0.08);
+  border-top: 1px solid #ebf6f6;
+  background-color: #ebf6f6;
   line-height: 60px;
 }
 .footerheadcontainer {
@@ -756,6 +776,84 @@ ul.footer-category-list {
   white-space: nowrap;
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
 }
+/*------------------------------------
+----- BANNER VIDEO TESTATA HOME ------
+--------------------------------------*/
+.titolo1videohome {
+  -moz-animation: titolo1 20s;
+  -o-animation: titolo1 20s;
+  animation: titolo1 20s;
+  animation-iteration-count: 1;
+  opacity: 0;
+}
+.titolo2videohome {
+  -webkit-animation: titolo2 25s;
+  -moz-animation: titolo2 25s;
+  -o-animation: titolo2 25s;
+  animation: titolo2 25s;
+  animation-iteration-count: 1;
+  font-size: 20px;
+  opacity: 0;
+}
+/*.sfondovideohome {
+    -webkit-animation: sfondo 30s;
+    -moz-animation: sfondo 30s;
+    -o-animation: sfondo 30s;
+    animation: sfondo 30s;
+    animation-iteration-count: 1;
+    background-color: rgba(0, 0, 0, 0);
+}*/
+@keyframes titolo1 {
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes titolo2 {
+  25% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sfondo {
+  80% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  85%,
+  90% {
+    background-color: #000000;
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+.overlayvideotext {
+  position: absolute;
+  font-size: 40px;
+  text-align: center;
+  line-height: 50px !important;
+  color: #fff !important;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
+}
 /*----------------------------------
 ---------- BANNER FASCIA -----------
 ----------------------------------*/
@@ -784,7 +882,7 @@ ul.footer-category-list {
   color: #032f2f;
   font-family: 'Roboto', sans-serif;
   font-size: 1.3rem;
-  font-weight: 100;
+  font-weight: 300;
   background-color: transparent;
   line-height: 1.8rem !important;
 }
@@ -818,41 +916,41 @@ ul.footer-category-list {
   color: #032f2f;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
-  font-style: italic;
+  /*font-style: italic;*/
   margin-bottom: 0px;
 }
 /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
 #isoBannav1 li:nth-child(n+1) .work-image:after {
-  background-position: center calc((100% - 130px) / 2) !important;
+  background-position: center calc((100% - 0px) / 2) !important;
   background-size: 10% !important;
 }
 #isoBannav1 li:nth-child(1) .work-image:hover:after {
-  background: url(/images/icon-lampada.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-lampada.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 #isoBannav1 li:nth-child(2) .work-image:hover:after {
-  background: url(/images/icon-vaso.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-vaso.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 #isoBannav1 li:nth-child(3) .work-image:hover:after {
-  background: url(/images/icon-oggettistica.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-oggettistica.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 #isoBannav1 li:nth-child(4) .work-image:hover:after {
-  background: url(/images/icon-piatti.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-piatti.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 #isoBannav1 li:nth-child(5) .work-image:hover:after {
-  background: url(/images/icon-tavoli.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-tavoli.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 #isoBannav1 li:nth-child(6) .work-image:hover:after {
-  background: url(/images/icon-natale.png) center calc((100% - 130px) / 2) no-repeat !important;
+  background: url(/images/icon-natale.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -874,34 +972,28 @@ strong {
 }
 .button-carrello,
 .btn-carrello-esaurito,
-.btn-carrello-esaurito:hover {
-  font-size: 1.2rem;
+.btn-carrello-esaurito:hover,
+.button-carrello-animate {
+  font-size: 1rem;
   padding: 0 0 0 2px !important;
-  line-height: 40px !important;
-  width: 42px;
+  line-height: 35.5px !important;
+  width: 37.2px;
   border-radius: 50%;
   font-weight: 200;
 }
-.button-carrello:hover {
-  font-size: 1.2rem;
+.button-carrello:hover,
+.button-carrello-animate:hover {
+  font-size: 1rem;
   padding: 0 0 0 2px !important;
-  line-height: 40px !important;
-  width: 42px;
+  line-height: 35.5px !important;
+  width: 37.2px;
   border-radius: 50%;
   font-weight: 200;
 }
-/*.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
-    &:extend(.button-carrello);
-    background: url("/images/soldout1.png") center center no-repeat;
-    background-size: 25px;
-    cursor: unset;
-}
-
-.btn-carrello-esaurito .fa {
-    opacity: 0;
-}*/
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover {
+  /*background: url("/images/soldout1.png") center center no-repeat;*/
+  background-size: 25px;
   background-color: transparent !important;
   color: #000 !important;
   border: none !important;
@@ -909,6 +1001,72 @@ strong {
   font-size: 0.8rem;
   cursor: unset;
 }
+.btn-carrello-esaurito .fa,
+.btn-carrello-esaurito1 .fa {
+  opacity: 0;
+}
+/*------------------------------------------------------*/
+.button-carrello1,
+.btn-carrello-esaurito1,
+.btn-carrello-esaurito1:hover {
+  min-width: 190px !important;
+  margin: 5px;
+}
+.button-carrello1:hover {
+  min-width: 190px !important;
+}
+.btn-carrello-esaurito1,
+.btn-carrello-esaurito1:hover {
+  background-color: transparent !important;
+  color: #000 !important;
+  letter-spacing: 0 !important;
+  font-size: 0.8rem;
+  cursor: unset;
+  min-width: 190px !important;
+}
+/*------------------------------------------------------*/
+.button-carrello-animate {
+  /*animation: rotateY 1s infinite;
+    animation-timing-function: linear;*/
+}
+@-webkit-keyframes rotateY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.carrello-go-rotate {
+  animation: rotateY 1s 1;
+  animation-timing-function: linear;
+}
+/*------------------------------------------------------*/
+@media screen and (min-width: 1025px) {
+  .menuzord-menu .carrellomaincontainer a:before,
+  .menuzord-menu .carrellomaincontainer a:after {
+    display: none;
+  }
+}
+.count {
+  color: #098f8f;
+  border: 1px solid #098f8f;
+  position: absolute;
+  float: right;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  right: -12.5px;
+  top: -12.5px;
+  z-index: 1;
+  -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+  font-size: 0.8rem;
+}
+/*------------------------------------------------------*/
 .carrello-go-launch {
   /*position:fixed !important;*/
   display: block !important;
@@ -919,7 +1077,7 @@ strong {
 }
 #carrellos1qty input {
   width: 42px !important;
-  height: 42px !important;
+  height: 37.2px !important;
   margin-top: 0 !important;
 }
 /*CARRELLO - MENU - FIXEDTOP*/
@@ -928,7 +1086,7 @@ strong {
 }
 .dropdown-cart .products-list-mini li {
   padding: 15px !important;
-  background: rgba(9, 143, 143, 0.08);
+  background: #ebf6f6;
   margin-top: 5px !important;
 }
 .products-list-mini li + li {
@@ -966,7 +1124,7 @@ strong {
   padding: 0.5rem;
   vertical-align: top;
   border-top: none;
-  background: rgba(9, 143, 143, 0.08);
+  background: #ebf6f6;
   vertical-align: middle;
 }
 .table-cart thead td,
@@ -1042,7 +1200,7 @@ select.form-control:not([size]):not([multiple]) {
   margin: 5% 5% 0 0;
 }
 .isotope-staff .work-subcaption {
-  background-color: rgba(9, 143, 143, 0.08);
+  background-color: #ebf6f6;
   height: 168px;
 }
 .isotope-staff .work-subcaption .work-title {
@@ -1183,7 +1341,7 @@ select.form-control:not([size]):not([multiple]) {
   background-color: #098f8f !important;
 }
 .faq-section .card .card-header {
-  background-color: rgba(9, 143, 143, 0.08);
+  background-color: #ebf6f6;
   border: 0px;
   padding: 0;
   margin-bottom: 0;
@@ -1216,9 +1374,13 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
   }
-  .menuzord-menu a {
+  .menuzord-menu a:not(.btn):not(.product-thumb) {
     position: relative;
-    padding: 0px 14px !important;
+    padding: 8px 14px !important;
+  }
+  .menuzord-menu ul.dropdown li {
+    font-size: 1rem;
+    padding: 8px 0;
   }
   .menuzord-menu a:hover {
     color: #077777;
@@ -1392,4 +1554,14 @@ button.js-roundedpush:hover {
   color: white !important;
   padding: 0px !important;
   margin: 0px !important;
+}
+.form-control {
+  background-color: #ebf6f6;
+  box-shadow: none;
+  color: #032f2f;
+  font-size: 0.875rem;
+  padding: 0.5em;
+}
+.rating {
+  color: #098f8f !important;
 }

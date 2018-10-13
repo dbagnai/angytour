@@ -3,6 +3,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ----------------------------------*/
 @import "custom-monocromo.less";
 /*@import "custom-bicromo.less";*/
+/*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
 
 /*----------------------------------
@@ -12,9 +13,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 //////////////| FONT |//////////////
 ----------------------------------*/
-@primary-font: 'Fira Sans', sans-serif; /*menu - titoli-principali*/
+@primary-font: 'Fira Sans', sans-serif; /*titoli-principali*/
 @secondary-font: 'Raleway', sans-serif; /*sotto-titoli-principali*/
-@base-font: 'Roboto', sans-serif; /*body*/
+@base-font: 'Roboto', sans-serif; /*menu - body*/
 @alternative-font: 'EBGaramond12-Regular', serif;
 /*---------------------------------
 -------------- COLORI -------------
@@ -94,17 +95,18 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-color: @bg-primary-color;
     position: fixed;
     top: 0px;
-    height: 30px;
+    height: 40px;
     width: 100%;
     top: 0px;
     z-index: 9999;
     overflow: visible;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 400;
 }
 .fixedtop .form-control, .form-control:focus {
     border: none;
+    background-color: #fff
 }
 
 /*---------------------------------
@@ -149,6 +151,16 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     border-color: @bg-secondary-color !important;
 }
 
+.simplemenu .fa {
+    font: normal normal normal 0.8rem FontAwesome !important;
+}
+
+.simplemenu > ul > li {
+    padding: 6px 25px;
+    float: left;
+    border-right: 1px solid @bg-secondary-color;
+}
+
 .simplemenu > ul > li > ul > li {
     padding: 4px;
 }
@@ -156,6 +168,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .simplemenu > ul > li > ul > li > a {
     color: @submenu-color;
     text-transform: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 .simplemenu > ul > li > ul > li > a:hover {
@@ -165,7 +179,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .simplemenu .dropdown-menu {
     border-top: 0;
-    transform: translate3d(0, 24px, 0px) !important;
+    transform: translate3d(0, 29px, 0px) !important;
     border-radius: 0rem;
 }
 
@@ -411,6 +425,10 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         background-color: @bg-button-hover-color !important;
         color: @button-hover-color !important;
     }
+
+    .menuzord.white .menuzord-menu > li:hover > a.buttonmenu {
+        color: #fff !important;
+    }
 }
 
     /*----------------------------------
@@ -511,9 +529,6 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     transition: all 0.35s ease;
 }
 
-/*----------------------------------
------- PULSANTE IMAGE HOVER --------
-----------------------------------*/
 .btn.btn-blue {
     border: 1px solid @bg-primary-color;
     box-shadow: none;
@@ -686,6 +701,99 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
     }
 
+/*------------------------------------
+----- BANNER VIDEO TESTATA HOME ------
+--------------------------------------*/
+.titolo1videohome {
+    animation: titolo1 20s;
+    -moz-animation: titolo1 20s;
+    -o-animation: titolo1 20s;
+    animation: titolo1 20s;
+    animation-iteration-count: 1;
+    opacity: 0;
+}
+
+.titolo2videohome {
+    -webkit-animation: titolo2 25s;
+    -moz-animation: titolo2 25s;
+    -o-animation: titolo2 25s;
+    animation: titolo2 25s;
+    animation-iteration-count: 1;
+    font-size: 20px;
+    opacity: 0;
+}
+
+/*.sfondovideohome {
+    -webkit-animation: sfondo 30s;
+    -moz-animation: sfondo 30s;
+    -o-animation: sfondo 30s;
+    animation: sfondo 30s;
+    animation-iteration-count: 1;
+    background-color: rgba(0, 0, 0, 0);
+}*/
+
+@keyframes titolo1 {
+    20% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes titolo2 {
+    25% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes sfondo {
+    80% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    85%, 90% {
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.overlayvideotext {
+    position: absolute;
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px !important;
+    color: #fff !important;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
     /*----------------------------------
 ---------- BANNER FASCIA -----------
 ----------------------------------*/
@@ -715,7 +823,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         color: @body-color;
         font-family: @subtitle-banner-font;
         font-size: @body-banner-fascia-size;
-        font-weight: 100;
+        font-weight: 300;
         background-color: transparent;
         line-height: 1.8rem !important;
     }
@@ -750,48 +858,48 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         color: @subtitle-banner-color;
         font-family: @subtitle-banner-font;
         font-size: @subtitle-banner-navigazione-size;
-        font-style: italic;
+        /*font-style: italic;*/
         margin-bottom: 0px;
     }
 
     /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
     #isoBannav1 li:nth-child(n+1) .work-image:after {
-        background-position: center calc(~'(100% - 130px) / 2') !important;
+        background-position: center calc(~'(100% - 0px) / 2') !important;
         background-size: 10% !important;
     }
 
     #isoBannav1 li:nth-child(1) .work-image:hover:after {
-        background: url(/images/icon-lampada.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-lampada.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
 
     #isoBannav1 li:nth-child(2) .work-image:hover:after {
-        background: url(/images/icon-vaso.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-vaso.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
 
     #isoBannav1 li:nth-child(3) .work-image:hover:after {
-        background: url(/images/icon-oggettistica.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-oggettistica.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
 
     #isoBannav1 li:nth-child(4) .work-image:hover:after {
-        background: url(/images/icon-piatti.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-piatti.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
 
     #isoBannav1 li:nth-child(5) .work-image:hover:after {
-        background: url(/images/icon-tavoli.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-tavoli.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
 
     #isoBannav1 li:nth-child(6) .work-image:hover:after {
-        background: url(/images/icon-natale.png) center calc(~'(100% - 130px) / 2') no-repeat !important;
+        background: url(/images/icon-natale.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
         background-size: 20% !important;
         background-color: rgba(0, 0, 0, 0.50) !important;
     }
@@ -815,47 +923,123 @@ b, strong {
     font-weight: bold;
 }
 
-    .button-carrello {
-        &:extend(.divbuttonstyle);
-        font-size: 1.2rem;
-        padding: 0 0 0 2px !important;
-        line-height: 40px !important;
-        width: 42px;
-        border-radius: 50%;
-        font-weight: 200;
-    }
+.button-carrello {
+    &:extend(.divbuttonstyle);
+    font-size: 1rem;
+    padding: 0 0 0 2px !important;
+    line-height: 35.5px !important;
+    width: 37.2px;
+    border-radius: 50%;
+    font-weight: 200;
+}
 
-    .button-carrello:hover {
-        &:extend(.divbuttonstyle:hover);
-        font-size: 1.2rem;
-        padding: 0 0 0 2px !important;
-        line-height: 40px !important;
-        width: 42px;
-        border-radius: 50%;
-        font-weight: 200;
-    }
+.button-carrello:hover {
+    &:extend(.divbuttonstyle:hover);
+    font-size: 1rem;
+    padding: 0 0 0 2px !important;
+    line-height: 35.5px !important;
+    width: 37.2px;
+    border-radius: 50%;
+    font-weight: 200;
+}
 
-    /*.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
+.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
     &:extend(.button-carrello);
-    background: url("/images/soldout1.png") center center no-repeat;
+    /*background: url("/images/soldout1.png") center center no-repeat;*/
     background-size: 25px;
+    cursor: unset;
+    background-color: transparent !important;
+    color: @button-hover-color !important;
+    border: none !important;
+    letter-spacing: 0 !important;
+    font-size: 0.8rem;
     cursor: unset;
 }
 
-.btn-carrello-esaurito .fa {
+.btn-carrello-esaurito .fa, .btn-carrello-esaurito1 .fa {
     opacity: 0;
-}*/
+}
 
-    .btn-carrello-esaurito, .btn-carrello-esaurito:hover {
-        &:extend(.button-carrello);
-        background-color: transparent !important;
-        color: @button-hover-color !important;
-        border: none !important;
-        letter-spacing: 0 !important;
-        font-size: 0.8rem;
-        cursor: unset;
+/*------------------------------------------------------*/
+
+.button-carrello1 {
+    &:extend(.divbuttonstyle);
+    min-width: 190px !important;
+    margin: 5px;
+}
+
+.button-carrello1:hover {
+    &:extend(.divbuttonstyle:hover);
+    min-width: 190px !important;
+}
+
+.btn-carrello-esaurito1, .btn-carrello-esaurito1:hover {
+    &:extend(.button-carrello1);
+    cursor: unset;
+    min-width: 190px !important;
+    background-color: transparent !important;
+    color: @button-hover-color !important;
+    letter-spacing: 0 !important;
+    font-size: 0.8rem;
+    cursor: unset;
+    min-width: 190px !important;
+}
+
+/*------------------------------------------------------*/
+
+.button-carrello-animate {
+    &:extend(.button-carrello);
+    /*animation: rotateY 1s infinite;
+    animation-timing-function: linear;*/
+}
+
+.button-carrello-animate:hover {
+    &:extend(.button-carrello:hover);
+}
+
+@-webkit-keyframes rotateY {
+    0% {
+        transform: rotateY(0deg);
     }
 
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.carrello-go-rotate {
+    animation: rotateY 1s 1;
+    animation-timing-function: linear;
+}
+
+/*------------------------------------------------------*/
+
+@media screen and (min-width: 1025px) {
+    .menuzord-menu .carrellomaincontainer a:before, .menuzord-menu .carrellomaincontainer a:after {
+        display: none;
+    }
+}
+
+.count {
+    color: @bg-primary-color;
+    border: 1px solid @bg-primary-color;
+    position: absolute;
+    float: right;
+    background-color: @white-color;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    right: -12.5px;
+    top: -12.5px;
+    z-index: 1;
+    -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    font-size: 0.8rem;
+}
+
+/*------------------------------------------------------*/
     .carrello-go-launch {
         /*position:fixed !important;*/
         display: block !important;
@@ -868,7 +1052,7 @@ b, strong {
 
     #carrellos1qty input {
         width: 42px !important;
-        height: 42px !important;
+        height: 37.2px !important;
         margin-top: 0 !important;
     }
 
@@ -1206,9 +1390,14 @@ b, strong {
             transition: all 0.35s ease;
         }
 
-        .menuzord-menu a {
+        .menuzord-menu a:not(.btn):not(.product-thumb) {
             position: relative;
-            padding: 0px 14px !important;
+            padding: 8px 14px !important;
+        }
+
+        .menuzord-menu ul.dropdown li {
+            font-size: 1rem;
+            padding: 8px 0;
         }
 
         .menuzord-menu a:hover {
@@ -1399,4 +1588,16 @@ button.js-roundedpush:hover {
     color: white !important;
     padding: 0px !important;
     margin: 0px !important;
-} 
+}
+
+.form-control {
+    background-color: @bg-light-color;
+    box-shadow: none;
+    color: @primary-color;
+    font-size: 0.875rem;
+    padding: 0.5em;
+}
+
+.rating {
+    color: @bg-primary-color !important;
+}
