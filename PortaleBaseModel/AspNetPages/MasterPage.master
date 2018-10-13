@@ -512,7 +512,7 @@
                     <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
                         <div class="row justify-content-end">
-                            <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2a-dx.png&quot;) no-repeat left bottom; background-size: 95% auto;">
+                            <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="background: url('/public/Files/con001000/1/guarda-mail-2a-dx.png') no-repeat left bottom; background-size: 95% auto;">
                             </div>
                             <div class="col-sm-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
 
@@ -819,7 +819,7 @@
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
-        <link rel="stylesheet" href="src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
+        <link rel="stylesheet" src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
         <![endif]-->
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>

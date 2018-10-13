@@ -448,10 +448,10 @@ function addToCache(cacheName, request, response) {
     return caches.open(cacheName)
         .then(cache => cache.put(request, response))
 }
-function preloadContents() {
+function preloadContents(preloadurls) {
     checkonline().then(function (onlinestatus) {
         if (onlinestatus)
-            pagesTofetch.forEach(element => {
+            preloadurls.forEach(element => {
                 //carichiamo l'url  ( devo passare una lista di pagine html  ) e con lo scrape dei link iterni mettiamo in cache tutte le risorse necesarie
                 fetchAndCache(element, "");
             });
@@ -468,19 +468,33 @@ function fetchAndCache(url, cache) {
                     cache.put(url, _tmpresponse.clone());
                 });
         }
+        //return { 'url': url, 'text': response.text() }; //passo la pagina al parser per i contenuti interni
         return response.text(); //passo la pagina al parser per i contenuti interni
     }).then(function (text) {
-         console.log(text);
-        var pattern = /(?<=<img[^<]+?src=(\"|'))[^=(\"|')]+/g; //cerco contenuto attributo src degli oggetti img
-        var pattern1 = /(?<=style=[^<]+?url\((\"|'))[^=(\"|')]+/g; //cerco contenuto attributo url(' degli oggetti dentro attributo style
-        var pattern2 = "";
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //DA FINIRE PRECARICAMENTO DI TUTTI I TAG IN PAGINA CHE FAANO RICHIESTE , LINK, SCRIPT , AXD..... URL
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        var assets = text.match(pattern) || [];
-        assets = assets.concat(text.match(pattern1) || []);
+        //let url = textitem.url;
+        //let text = textitem.text;
 
-        //console.log(assets);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //PRECARICAMENTO DI TUTTI I TAG IN PAGINA CHE FAANO RICHIESTE , LINK, SCRIPT , AXD..... URL
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //console.log(text);
+        var pattern = /(?<=<img[^<]+?src=(\"|'))[^"']+/gi; //cerco contenuto attributo src degli oggetti img
+        var pattern1 = /(?<=style=[^<]+?url\s*\(\s*(\"|'))[^"']+/gi; //cerco contenuto attributo url(' degli oggetti dentro attributo style
+        var pattern2 = /(?<=<script[^<]+?src=\s*(\"|'))[^"']+/gi;  //elementi script src=
+        //elementi link href= o src= che contengono rel="stylesheet"
+        var pattern3 = /(?<=<link.*\s*rel=.stylesheet\s*.*href=(\"|'))[^"']+/gi;
+        var pattern4 = /(?<=<link.*\s*href=(\"|'))(?=[^>]+?rel=.stylesheet\s*.*)[^"']+/gi;
+        var pattern5 = /(?<=<link.*\s*rel=.stylesheet\s*.*src=(\"|'))[^"']+/gi;
+        var pattern6 = /(?<=<link.*\s*src=(\"|'))(?=[^>]+?rel=.stylesheet\s*.*)[^"']+/gi;
+
+        let assets = text.match(pattern) || [];
+        assets = assets.concat(text.match(pattern1) || []);
+        assets = assets.concat(text.match(pattern2) || []);
+        assets = assets.concat(text.match(pattern3) || []);
+        assets = assets.concat(text.match(pattern4) || []);
+        assets = assets.concat(text.match(pattern5) || []);
+        assets = assets.concat(text.match(pattern6) || []);
+        console.log(assets);
         if (assets)
             caches.open(assetsCacheName).then(cache => {
                 assets.forEach(element => {
@@ -492,6 +506,31 @@ function fetchAndCache(url, cache) {
                         });
                 });
             });
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //RICERCA DEI LINK PRESENTI IN PAGINA!!!! ( DA SELEZIONARE PER PRELOAD DEI LINK IN PAGINA SUL DOMINIO !!! ) -> PRENDO SOLO QUELLI CON ATTRIBUTO PRELOAD E FACCIO LA FETCH
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //const regex = /<(.|\n)*?>/g; extracts al tags
+        //Ritorna tutti i valori dentro gli href /(?<=<.*\s*href=(\"|'))[^\"']+/gi
+        //Ritorna tutti i valori dentro gli href che nel tag hanno preload dopo /(?<=<.*\s*href=(\"|'))(?=[^>]+?preload\s*.*)[^\"']+/gi
+        var patternurl1 = /(?<=<.*\s*href=(\"|'))(?=[^>]+?preload\s*.*)[^\"']+/gi;
+        //Ritorna tutti i valori dentro gli href che nel tag hanno preload prima /(?<=<.*\s*preload\s*.*href=(\"|'))[^\"']+/gi  
+        var patternurl2 = /(?<=<.*\s*preload\s*.*href=(\"|'))[^\"']+/gi;
+        let pageslinked = text.match(patternurl1) || [];
+        pageslinked = pageslinked.concat(text.match(patternurl2) || []);
+
+        //Rimuovere l'url originario della fetchandcache dalla lsita generata se presente !!!! da fare
+        //pageslinked - cerco url e lo tolgo se presente !!
+
+        //console.log(pageslinked);
+        //Da fare precaricamento delle pagine linkate con attributo preload 
+        //(ATTENZIONE AI LOOP DI CARICAMENTO PAGINA!!!! se chiami il fetchAndCache di una pagina che contine il link a se stessa come preload!!!!!! )
+        //if (pageslinked)
+        //    pageslinked.forEach(element => {
+        //        fetchAndCache();
+        //    });
+
+
         return;
     });
 }
@@ -531,16 +570,16 @@ function trimCache(cacheName, maxItems) {
 //Mi metto in ascolto dai messaggi inviati dalle pagine web  -> verso il serviceworker!!
 //////////////////////////////////////////////////////////////////////////////////////////////////
 self.addEventListener('message', event => {
-    var data = event.data;
+    let data = event.data;
 
     if (data.command == "pagestoserve") {
-        var _pagesToservewithsw = JSON.parse(data.parameters) || [];
-        pagesToservewithsw = pagesToservewithsw.concat(_pagesToservewithsw || []);
+        let _pagesToservewithsw = JSON.parse(data.parameters) || [];
+        let pagesToservewithswlocal = pagesToservewithsw.concat(_pagesToservewithsw || []);  //da vedere come usare questa lista
     }
     if (data.command == "preloadurls") {
-        var preloadurls = JSON.parse(data.parameters) || [];
-        pagesTofetch = pagesTofetch.concat(preloadurls || []);
-        preloadContents();
+        let preloadurls = JSON.parse(data.parameters) || [];
+        preloadurls = pagesTofetch.concat(preloadurls || []);
+        preloadContents(preloadurls);
     }
     if (data.command == "invalidatecache") {
         //Cache invalidation manager
