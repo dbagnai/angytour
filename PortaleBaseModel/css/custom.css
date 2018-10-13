@@ -966,6 +966,16 @@ ul.footer-category-list {
 /*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
+.prezzo-responsive {
+  font-size: 2vw;
+  line-height: 2vw !important;
+}
+@media (max-width: 1200px) {
+  .prezzo-responsive {
+    font-size: 2rem;
+    line-height: 2rem !important;
+  }
+}
 b,
 strong {
   font-weight: bold;
