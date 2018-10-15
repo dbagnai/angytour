@@ -53,15 +53,17 @@ let swRegistration;
                 //Invio messaggio da pagina a serviceworker
                 //Utilizzo della funzione service worker postMessage - Comando per fare pulizia della cache e recuperare le chiamate nella coda
                 if (navigator.serviceWorker.controller != null) {
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    navigator.serviceWorker.controller.postMessage({ 'command': 'invalidatecache' }); //invio messaggio al serviceworker dalla pagina per invalidare la cache ( le policy sono nel sw.js )
+
+                    /////INVIO COMUNICAZIONE DI INVALIDARE LA CACHE IN BASE A CERTI CRITERI ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //navigator.serviceWorker.controller.postMessage({ 'command': 'invalidatecache' }); //invio messaggio al serviceworker dalla pagina per invalidare la cache ( le policy sono nel sw.js )
+
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     navigator.serviceWorker.controller.postMessage({ 'command': 'recoverstoredcalls' }); //invio messaggio al serviceworker dalla pagina per fare il recoved delle chiamate nello sotrage del browser
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    ///////////////////COMANDO IL SERVICEWORKER DI PRECARICARE GLI URL ALLA REGISTRAZIONE !!!! ( questo comando VA DATO SOLO su richiesta di installazione dell'APP!!!!!! )
+                    ///////////////////COMANDO IL SERVICEWORKER DI PRECARICARE GLI URL ALLA REGISTRAZIONE !!!! ( questo comando lo collego ad un bottone da usare per precarica l'app!!!!!! )
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    let pushButton = document.querySelector('.js-preload-btn');
+                    let pushButton = document.querySelector('.js-preload-btn'); //Bottone per fare il preload dei dati dell'applicazione
                     if (pushButton)
                         pushButton.addEventListener('click', function () {
                             pushButton.disabled = false;

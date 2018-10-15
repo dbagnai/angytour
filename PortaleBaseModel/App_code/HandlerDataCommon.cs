@@ -17,29 +17,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
 
-public class jpath
-{
-    public string percorsocontenuti { set; get; }
-    public string percorsocomune { set; get; }
-    public string percorsoapp { set; get; }
-    public string percorsocdn { set; get; }
-    public string percorsoimg { set; get; }
-    public string percorsoexp { set; get; }
-    public string percorsolistaimmobili { set; get; }
-    public string jsonlanguages { set; get; }
-    public string baseresources { set; get; }
-    public string versionforcache { set; get; }
-    public string dictreferences { set; get; }
-    public string percorsolistadati { set; get; }
-    public string jsonregioni { set; get; }
-    public string jsonprovince { set; get; }
-    public string jsoncategorie { set; get; }
-    public string jsoncategorie2liv { set; get; }
-    public string jsontipologie { set; get; }
-    public bool usecdn { set; get; }
-    public string username { set; get; }
-
-}
 public class jreturncontainerdata
 {
     public string html { set; get; }
@@ -152,142 +129,10 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
 
                 case "initreferencesdata":
-                    var jpathcomplete = new jpath();
 
-                    var percorsoapptmp = WelcomeLibrary.STATIC.Global.percorsoapp;// CommonPage.ReplaceAbsoluteLinks("~");
-                    jpathcomplete.percorsocdn = WelcomeLibrary.STATIC.Global.percorsocdn;
-                    jpathcomplete.percorsoimg = WelcomeLibrary.STATIC.Global.percorsoimg;
-                    jpathcomplete.percorsoexp = WelcomeLibrary.STATIC.Global.percorsoexp;
-                    jpathcomplete.usecdn = WelcomeLibrary.STATIC.Global.usecdn;
-                    jpathcomplete.percorsoapp = percorsoapptmp;
+                    result = references.initreferencesdataserialized(lingua, context.User.Identity.Name);
 
-
-                    var percorsocontenutitmp = WelcomeLibrary.STATIC.Global.PercorsoContenuti.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Files");
-                    var percorsocomunetmp = WelcomeLibrary.STATIC.Global.PercorsoComune.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione); ;// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Common");
-                    jpathcomplete.percorsocomune = percorsocomunetmp;
-                    jpathcomplete.percorsocontenuti = percorsocontenutitmp;
-                    jpathcomplete.username = context.User.Identity.Name;
-
-                    //LINGUE/////////////////////////////////////////////////////7
-                    var filejsonlanguages = "languages.json";
-                    //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
-                    var reflanguages = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages);
-                    jpathcomplete.jsonlanguages = reflanguages;
-
-                    /////////////BASERESOURCES////////////////////////////////////////
-                    jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(references.GetResourcesByLingua(lingua));
-                    ///////////////////////////////////////////////////////////////
-
-                    jpathcomplete.versionforcache = WelcomeLibrary.STATIC.Global.versionforcache;
-
-                    ////////////// REGIONI E PROIVINCE/////////////////////
-                    WelcomeLibrary.DOM.TabrifCollection trifregioni = new TabrifCollection();
-                    WelcomeLibrary.DOM.TabrifCollection trifprovince = new TabrifCollection();
-                    WelcomeLibrary.DOM.ProvinceCollection regionitmp = new WelcomeLibrary.DOM.ProvinceCollection();
-                    List<WelcomeLibrary.DOM.Province> provincelinguatmp = Utility.ElencoProvince.FindAll(delegate (WelcomeLibrary.DOM.Province tmp) { return (tmp.Lingua == lingua); });
-                    if (provincelinguatmp != null && provincelinguatmp.Count > 0)
-                    {
-                        provincelinguatmp.Sort(new GenericComparer2<WelcomeLibrary.DOM.Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
-                        foreach (WelcomeLibrary.DOM.Province item in provincelinguatmp)
-                        {
-                            if (item.Lingua == lingua)
-                                if (!regionitmp.Exists(delegate (WelcomeLibrary.DOM.Province tmp) { return (tmp.Regione == item.Regione); }))
-                                {
-                                    regionitmp.Add(item);
-                                    Tabrif t = new Tabrif();
-                                    t.Codice = item.Codice;
-                                    t.Campo1 = item.Regione;
-                                    trifregioni.Add(t);
-                                }
-                            Tabrif p = new Tabrif();
-                            p.Codice = item.Codice;
-                            p.Campo1 = item.Provincia;
-                            trifprovince.Add(p);
-                        }
-                    }
-                    jpathcomplete.jsonregioni = Newtonsoft.Json.JsonConvert.SerializeObject(trifregioni);
-                    jpathcomplete.jsonprovince = Newtonsoft.Json.JsonConvert.SerializeObject(trifprovince);
-                    //////////////////////////////////////////////////////////////
-
-
-                    /*Per immobili*/
-                    string linktmp = "";
-                    WelcomeLibrary.DOM.TipologiaOfferte tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000666"); });
-                    if (tipotmp != null)
-                        linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
-                    jpathcomplete.percorsolistaimmobili = linktmp;
-                    /*Per catalogo*/
-                    linktmp = "";
-                    tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000001"); });
-                    if (tipotmp != null)
-                        linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
-                    jpathcomplete.percorsolistadati = linktmp;
-
-
-
-                    List<Prodotto> listprod = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == lingua);
-                    WelcomeLibrary.DOM.TabrifCollection trifprodotti = new TabrifCollection();
-                    if (listprod != null)
-                        foreach (Prodotto p in listprod)
-                        {
-                            Tabrif p1 = new Tabrif();
-                            p1.Codice = p.CodiceProdotto;
-                            p1.Campo1 = p.Descrizione;
-                            trifprodotti.Add(p1);
-                        }
-                    jpathcomplete.jsoncategorie = Newtonsoft.Json.JsonConvert.SerializeObject(trifprodotti);
-
-
-                    List<SProdotto> listsprod = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.FindAll(p => p.Lingua == lingua);
-                    WelcomeLibrary.DOM.TabrifCollection trifsprodotti = new TabrifCollection();
-                    if (listprod != null)
-                        foreach (SProdotto p in listsprod)
-                        {
-                            Tabrif p1 = new Tabrif();
-                            p1.Codice = p.CodiceSProdotto;
-                            p1.Campo2 = p.CodiceProdotto;
-                            p1.Campo1 = p.Descrizione;
-                            trifsprodotti.Add(p1);
-                        }
-                    jpathcomplete.jsoncategorie2liv = Newtonsoft.Json.JsonConvert.SerializeObject(trifsprodotti);
-
-                    WelcomeLibrary.DOM.TabrifCollection tmptipo = new TabrifCollection();
-                    if (WelcomeLibrary.UF.Utility.TipologieOfferte != null)
-                        foreach (WelcomeLibrary.DOM.TipologiaOfferte p in WelcomeLibrary.UF.Utility.TipologieOfferte)
-                        {
-                            Tabrif p1 = new Tabrif();
-                            p1.Codice = p.Codice;
-                            p1.Campo1 = p.Descrizione;
-                            p1.Lingua = p.Lingua;
-                            tmptipo.Add(p1);
-                        }
-                    jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
-
-
-                    //Dictionary<string, WelcomeLibrary.DOM.TabrifCollection> retdict = new Dictionary<string, WelcomeLibrary.DOM.TabrifCollection>();
-                    Dictionary<string, string> retdict = new Dictionary<string, string>();
-
-                    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
-                    retdict.Add("JSONrefmetrature", references.refmetrature);
-                    retdict.Add("JSONrefprezzi", references.refprezzi);
-                    retdict.Add("JSONrefcondizione", references.refcondizione);
-                    retdict.Add("JSONreftipocontratto", references.reftipocontratto);
-                    retdict.Add("JSONreftiporisorse", references.reftiporisorse);
-                    //retdict.Add("JSONgeogenerale", references.refgeogenerale);
-                    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
-
-                    retdict.Add("JSONcar1", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[0]));
-                    retdict.Add("JSONcar2", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[1]));
-                    retdict.Add("JSONcar3", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[2]));
-                    jpathcomplete.dictreferences = Newtonsoft.Json.JsonConvert.SerializeObject(retdict, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                        PreserveReferencesHandling = PreserveReferencesHandling.None,
-                    });
-
-                    result = Newtonsoft.Json.JsonConvert.SerializeObject(jpathcomplete);
+                    
                     break;
                 case "inviamessaggiomail":
                     string smaildata = pars.ContainsKey("data") ? pars["data"] : "";
@@ -296,8 +141,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     // Prepariamo e inviamo il mail
                     Dictionary<string, string> destinatariperregione = new Dictionary<string, string>();
-
-
                     string nomemittente = (maildata.GetValueOrDefault("name") ?? "");
                     string cognomemittente = (maildata.GetValueOrDefault("cognome") ?? "");
                     string mittenteMail = (maildata.GetValueOrDefault("email") ?? "");
@@ -354,8 +197,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         Descrizione += " <br/> Arrivo richiesto:" + arrivo + " Partenza Richiesta: " + partenza;
                         Descrizione += " <br/> Numero adulti:" + adulti + " <br/> Numero bambini:" + bambini + " Alloggio : " + location;
                     }
-
-
                     Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
                     Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + lingua;
                     Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
@@ -507,7 +348,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     var percorsocontenuti = WelcomeLibrary.STATIC.Global.PercorsoContenuti.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Files");
                     var percorsocomune = WelcomeLibrary.STATIC.Global.PercorsoComune.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione); ;// CommonPage.ReplaceAbsoluteLinks("~" + ConfigManagement.ReadKey("DataDir") + "/Common");
 
-                    var jpath = new jpath();
+                    var jpath = new references.jpath();
                     jpath.percorsocomune = percorsocomune;
                     jpath.percorsocontenuti = percorsocontenuti;
                     jpath.usecdn = WelcomeLibrary.STATIC.Global.usecdn;

@@ -140,21 +140,26 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
     private void LoadJavascriptVariables(Dictionary<string, string> addelements = null)
     {
+        //However, if you want your JavaScript code to be independently escaped for any context, you could opt for the native JavaScript encoding:
+        //' becomes \x27
+        //" becomes \x22
 
-        String scriptRegVariables = string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1"));
-        scriptRegVariables += "; " + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1"));
-        scriptRegVariables += "; " + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1"));
-        scriptRegVariables += "; " + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2"));
-        scriptRegVariables += "; " + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2"));
-        scriptRegVariables += "; " + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2"));
-        scriptRegVariables += "; " + string.Format("var idmapcontainer = 'map'");
-        scriptRegVariables += "; " + string.Format("var idmapcontainer1 = 'map1'");
-        scriptRegVariables += "; " + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
-        scriptRegVariables += "; " + string.Format("var idofferta = '" + idOfferta + "'");
-        scriptRegVariables += "; " + string.Format("var tipologia = '" + CodiceTipologia + "'");
-        scriptRegVariables += "; " + string.Format("var categoria = '" + Categoria + "'");
-        scriptRegVariables += "; " + string.Format("var categoria2liv = '" + Categoria2liv + "'");
-        scriptRegVariables += "; ";
+        String scriptRegVariables = "";
+        //scriptRegVariables += ";\r\n" + string.Format("loadvariables(JSON.stringify({0}))", references.initreferencesdataserialized(Lingua, Page.User.Identity.Name).Replace("'", "\\'").Replace("\r\n", "").Replace("\r", "").Replace("\n", ""));
+        scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer = 'map'");
+        scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer1 = 'map1'");
+        scriptRegVariables += ";\r\n" + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
+        scriptRegVariables += ";\r\n" + string.Format("var idofferta = '" + idOfferta + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var tipologia = '" + CodiceTipologia + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var categoria = '" + Categoria + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'");
+        scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();
         addelements.Add("jsvarfrommaster", scriptRegVariables);

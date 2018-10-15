@@ -240,7 +240,8 @@ function testCacheversion(serverversion) {
 }
 
 
-function loadvariables(result) {
+function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! ( DA FARE )
+
     //PERCORSI APPLICAZIONE//////////////////////////////////////////////
     var jobj = JSON.parse(result);
     percorsoapp = jobj["percorsoapp"];
@@ -248,7 +249,6 @@ function loadvariables(result) {
     percorsoimg = jobj["percorsoimg"];
     percorsoexp = jobj["percorsoexp"];
     percorsolistaimmobili = jobj["percorsolistaimmobili"];
-
     versionforcache = jobj["versionforcache"];
     percorsocomune = jobj["percorsocomune"];
     percorsocontenuti = jobj["percorsocontenuti"];
@@ -266,7 +266,6 @@ function loadvariables(result) {
     JSONcategorie2liv = JSON.parse(jobj["jsoncategorie2liv"]);
     jsontipologie = JSON.parse(jobj["jsontipologie"]);
     username = jobj["username"];
-
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
     var dictresources = JSON.parse(jobj["dictreferences"]);
     ////console.log(baseresources);
@@ -322,6 +321,10 @@ function initreferencesdata(lingua) {
                         deferred.resolve('');
                     },
                     failure: function (result) {
+                        sendmessage('fail init initreferencesdata', '');
+                        deferred.resolve('');
+                    },
+                    error: function (result) {
                         sendmessage('fail init initreferencesdata', '');
                         deferred.resolve('');
                     }

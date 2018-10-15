@@ -52,7 +52,7 @@ const
         "cacheName": assetsCacheName,
         "invalidationStrategy": "maxItems",
         "strategyOptions": {
-            "max": 1000
+            "max": 10000
         }
     }]);
 
@@ -414,10 +414,10 @@ function urlstoFetch(event) { //prende solo gli url col path indicato!! del tipo
 function shouldFetch(event) {
     let request = event.request,   //Non gestisco le richieste diverse da GET col serviceWorker, basta ritornare senza chiamare .respondWith.
         // pathPattern = /^\/(?:(blog|altro)\/(.+)?)?$/, // pattern di paths da includere nelle fetch del sw ( ablitandolo prendero solo i path indicati col service worker)
-        ishandler = (event.request.url.indexOf(".ashx") !== -1), //torno tutte le chimate a handlers, basta ritornare senza chiamare la .respondWith.
+        ishandler = (request.url.indexOf(".ashx") !== -1), //torno tutte le chimate a handlers, basta ritornare senza chiamare la .respondWith.
         url = new URL(request.url, self.registration.scope);
     var sameorigincheck = (url.origin === self.location.origin);//normalmente skip di tutte le richieste cross origin!!
-    if (checkAllowedomains(event.request.url)) sameorigincheck = true; //Bypass dello skip per gli allowed domains
+    if (checkAllowedomains(request.url)) sameorigincheck = true; //Bypass dello skip per gli allowed domains
 
     return (request.method === 'GET' &&
         !ishandler &&
@@ -469,7 +469,6 @@ function fetchAndCache(url) {
                     cache.put(url, _tmpresponse.clone());
                 });
         }
-        var localurl = url;
         //var params = { 'url': url, 'text': response.text() }; //passo la pagina al parser per i contenuti interni
         return response.text();
     }).then(function (text) {
@@ -488,7 +487,6 @@ function fetchAndCache(url) {
         var pattern4 = /(?<=<link.*\s*href=(\"|'))(?=[^>]+?rel=.stylesheet\s*.*)[^"']+/gi;
         var pattern5 = /(?<=<link.*\s*rel=.stylesheet\s*.*src=(\"|'))[^"']+/gi;
         var pattern6 = /(?<=<link.*\s*src=(\"|'))(?=[^>]+?rel=.stylesheet\s*.*)[^"']+/gi;
-
         let assets = text.match(pattern) || [];
         assets = assets.concat(text.match(pattern1) || []);
         assets = assets.concat(text.match(pattern2) || []);
@@ -497,13 +495,15 @@ function fetchAndCache(url) {
         assets = assets.concat(text.match(pattern5) || []);
         assets = assets.concat(text.match(pattern6) || []);
         //console.log(assets);
-
+        assets = Array.from(new Set(assets)); //elimino le ripetizioni
         if (assets) {
             assets.forEach(element => {
+                console.log('preloading assets ...');
                 let destinationcache = assetsCacheName;
                 if (isIncoreCache(element))
                     destinationcache = coreCacheName;
 
+                //Sistema con cache diretta
                 //caches.open(destinationcache).then(cache => {
                 //    console.log(destinationcache, element);
                 //    cache.add(element)
@@ -525,36 +525,59 @@ function fetchAndCache(url) {
                         mode: 'cors'
                     };
                     let myRequest = new Request(element, myInit);
-                    let fetchelement = fetch(myRequest).then(networkResponse => {
+                    fetch(myRequest).then(networkResponse => {
                         if (networkResponse.ok && networkResponse.status === 200) //status in the range 200 to 299 -> to cache only if data is present in response
                         {
                             addToCache(destinationcache, myRequest, networkResponse.clone()); //inseriamo in cache il file richiesto
 
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //Qui per i file di tipo css  và parserizzata la networkResponse.clone() cercando i link dentro url() url("") url('') e aggiungerli alla coda di assets da richiedere
-                            //DA FILTRARE I FILE CCS DA PARSERIZZARE ... ALTRIMENTI CARICA UNA BALLA DI FILES!!!!
-                            // DA FARE ....
-                            /*                            if (networkResponse.headers.get("Content-type").toLowerCase().indexOf("text/css") != -1) {
+                            //DA FILTRARE I FILE CCS DA PARSERIZZARE ... ALTRIMENTI CARICA UNA BALLA DI FILES!!!! ( QUESTA PARTE E' UN PO PESANTE!! )
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (networkResponse.headers.get("Content-type").toLowerCase().indexOf("text/css") != -1) {
                                 var newrequest = networkResponse.clone();
+                                //  console.log(newrequest.url);
                                 newrequest.text().then(function (data) {
                                     var patterncss2 = /(?<={[^<]+?url\s*\(\s*(\"|'|))[^"')]+/gi; //cerco contenuto attributo url(' degli oggetti dentro attributo style
-                                    var assetsfromcss = (data.match(patterncss2) || []); //qeusti sono da agigungere alle risorse ....
+                                    var assetsfromcss = (data.match(patterncss2) || []); //questi sono da agigungere alle risorse ....
                                     //prima l'array è da ridurre eliminando gli elemnti uguali in quanto ci sono molte ripetizioni
-                                    if (assetsfromcss) {
-                                        assetsfromcss.forEach(element => {
-                                            let destinationcache = assetsCacheName;
-                                            if (isIncoreCache(element))
-                                                destinationcache = coreCacheName;
-                                            let urlcorretto = new URL(element, self.registration.scope); //gli url da estrarre sono fa fare cosi
-                                            //da fare le fetch per questi e metterli in cacHE
-                                            // DA FARE ...
-
+                                    let assetsfromcssunique = Array.from(new Set(assetsfromcss));
+                                    if (assetsfromcssunique) {
+                                        assetsfromcssunique.forEach(element1 => {
+                                            let destinationcache1 = assetsCacheName;
+                                            if (isIncoreCache(element1))
+                                                destinationcache1 = coreCacheName;
+                                            let urlcorretto = new URL(element1, self.registration.scope); //gli url da estrarre sono fa fare cosi
+                                            //da fare le fetch per questi e metterli in cacHE destinationcache1
+                                            // INSERIAMO IN CACHE
+                                            var sameorigincheck1 = (urlcorretto.origin === self.location.origin);
+                                            if (checkAllowedomains(element1)) sameorigincheck1 = true;
+                                            if (sameorigincheck1) {
+                                                try {
+                                                    let myHeaders1 = new Headers();
+                                                    let myInit1 = {
+                                                        method: 'GET',
+                                                        headers: myHeaders1,
+                                                        mode: 'cors'
+                                                    };
+                                                    let myRequest1 = new Request(urlcorretto, myInit1);
+                                                    fetch(myRequest1).then(networkResponse1 => {
+                                                        if (networkResponse1.ok && networkResponse1.status === 200) //status in the range 200 to 299 -> to cache only if data is present in response
+                                                        {
+                                                            addToCache(destinationcache1, myRequest1, networkResponse1.clone()); //inseriamo in cache il file richiesto
+                                                            //   console.log('added from css: ' + myRequest1.url ); 
+                                                            console.log('preloading assets in css ...');
+                                                        }
+                                                        return;
+                                                    }).catch((err) => { console.log(err); });
+                                                } catch (e) { console.log(e); };
+                                            }
                                         });
                                     }
                                 });
                             }
-                            */
-
-                            console.log(destinationcache, element);
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            // console.log(destinationcache, element);
                         }
                         return;
                     });
@@ -562,7 +585,7 @@ function fetchAndCache(url) {
             });
 
         }
-        
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //RICERCA DEI LINK PRESENTI IN PAGINA!!!! ( DA SELEZIONARE con ATTRIBUTO PRELOAD DEI LINK IN PAGINA !!! ) -> PRENDO SOLO QUELLI CON ATTRIBUTO PRELOAD E FACCIO LA FETCH
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -575,9 +598,7 @@ function fetchAndCache(url) {
         let pageslinked = text.match(patternurl1) || [];
         pageslinked = pageslinked.concat(text.match(patternurl2) || []);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        return pageslinked;
+        return pageslinked; //Pagine da caricare indicate come link tipo preload nella pagina originaria passata
 
     });
 
@@ -587,7 +608,7 @@ function fetchAndCache(url) {
     });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Promise eseguita AL  termine delle due indicate negli argomenti , serve d avere un contesto CONTEMPORANEO con entrambe le risposte
+    //Promise congiunta ! eseguita AL  termine delle due indicate negli argomenti , serve d avere un contesto CONTEMPORANEO con entrambe le risposte
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return Promise.all([fetchPromise, dummypromise]).then(function (values) {
         var pagestofetch = values[0];
@@ -596,17 +617,20 @@ function fetchAndCache(url) {
         //pageslinked - cerco url e lo tolgo se presente !!
         //console.log(pageslinked);
         //(ATTENZIONE AI LOOP DI CARICAMENTO PAGINA!!!! se chiami il fetchAndCache di una pagina che contine il link a se stessa come preload!!!!!! )
+        pagestofetch = Array.from(new Set(pagestofetch)); //elimino ripetizioni negli url
         if (pagestofetch)
             pagestofetch.forEach(element => {
-                if (originalurl.url.toLowerCase().indexOf(element.toLowerCase() == -1))
+                let urlcompleto = new URL(originalurl.url, self.registration.scope); //gli url da estrarre sono fa fare cosi
+                if (urlcompleto.href.toLowerCase().indexOf(element.toLowerCase() == -1)) {
                     fetchAndCache(element);
+                    console.log('fetching pages ... ' + element);
+                }
             });
-
-        return;
     });
 
     // return fetchPromise;
 }
+
 //helper chre trova tutti i match in base ad una regular expression in una string
 //function getAllMatches(regex, text) {
 //    if (regex.constructor !== RegExp) {
