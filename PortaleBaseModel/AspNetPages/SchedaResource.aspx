@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" CodeFile="SchedaResource.aspx.cs" Inherits="AspNetPages_SchedaResource" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" CodeFile="SchedaResource.aspx.cs" Inherits="AspNetPages_SchedaResource" EnableViewState="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 

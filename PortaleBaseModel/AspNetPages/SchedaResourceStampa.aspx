@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SchedaResourceStampa.aspx.cs"
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SchedaResourceStampa.aspx.cs" EnableViewState="false"
     EnableTheming="true" Inherits="_SchedaResourceStampa" %>
 
 <%--<%@ Register Src="~/AspNetPages/UC/Pager.ascx" TagName="Pager" TagPrefix="UC" %>--%>

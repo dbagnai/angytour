@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
-    CodeFile="RisultatiProdotti.aspx.cs" Inherits="AspNetPages_RisultatiProdotti" Title="" Culture="it-IT"
+    CodeFile="RisultatiProdotti.aspx.cs" Inherits="AspNetPages_RisultatiProdotti" Title="" Culture="it-IT" EnableViewState="false"
     MaintainScrollPositionOnPostback="false" EnableEventValidation="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
     CodeFile="Content_Tipo1.aspx.cs" Inherits="AspNetPages_Content_Tipo1" Title=""
-    MaintainScrollPositionOnPostback="true" %>
+    MaintainScrollPositionOnPostback="true" EnableViewState="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage"  %>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -59,7 +59,7 @@
     <form id="form1" runat="server">
 
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
-
+       
         <!--- Styles -->
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
@@ -76,9 +76,9 @@
         <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
-
-        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
+         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
+
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
 
@@ -832,7 +832,7 @@
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
         <![endif]-->
-        <asp:Panel runat="server" Visible="false">
+        <asp:Panel runat="server" Visible="true">
             <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
                 <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
                     <i class="fa fa-2x fa-bell-slash"></i>
@@ -852,6 +852,6 @@
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
-  <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
+   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  
 </body>
 </html>

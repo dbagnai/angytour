@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" CodeFile="RisultatiResource.aspx.cs" Inherits="AspNetPages_RisultatiResource" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" CodeFile="RisultatiResource.aspx.cs" Inherits="AspNetPages_RisultatiResource" EnableViewState="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 

@@ -132,6 +132,7 @@ function searchtaginjectandcall() {
 
 
 
+/*
 //QUESTA PERMETTE DI CHIAMARE LA FUNZIONE PASSATA NEI PARAMENTRI AL TERMINE DELLA FUNZIONE DI PROMISE QUI DEFINITA
 //AGGIUNGENDO I PARAMETRI DELLA FUNZIONE PRESENT NELLA LISTA DELLA CHIAMATA
 //Si chiama con loadref(nomefunzione,parametro1,parametro2, .... , lingua)
@@ -178,7 +179,7 @@ function loadref(functocall) {
                     (function wait() {
                         if (levelscopes1.length == 2)
                             if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
-                                window[levelscopes1[0]][levelscopes1[1]].apply(this, args)//make the call
+                                window[levelscopes1[0]][levelscopes1[1]].apply(this, args);//make the call
                             } else {
                                 setTimeout(wait, 50);
                             }
@@ -227,7 +228,51 @@ function loadref(functocall) {
         });
     }
 }
-
+*/
+ 
+ //LOADREF FITTIZZIA CHE REPLICA SOLO LE CHIAMATE, SE LE VARIABILI JAVASCRIPT SONO INIETTATE DIRETTAMETNE IN PAGINA!!! ( potrebbe non essere chiamata senza problemi !!! serve solo per retrocompatibilità )
+function loadref(functocall) {
+    var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
+    //MEMORIZZO I DATI DELLA CHIAMATA
+    var item = {};
+    item.name = functocall.name;
+    item.args = [];
+    if (item.name == '' || item.name == undefined) item.name = arguments[0];
+    //MEMORIZZO GLI ARGOMENTI DI CHIAMATA IN ARGS
+    var args = new Array();
+    for (var i = 1; i < arguments.length; i++) {
+        args.push(arguments[i]);
+        lingua = arguments[i];
+        item.args.push(arguments[i]);
+    }
+    /////////////////////////////////////////////////////
+    //Chiamiamo  direttamete la funzione se presente nel chiamante ( considerando la possibilità di funzioni in scope interni )
+    /////////////////////////////////////////////////////
+    if (!(item.name == '' || item.name == undefined))
+    //window[item.name].apply(this, args); 
+    {
+        if (item.name.indexOf('.') == -1)
+            (function wait() {
+                if (typeof window[item.name] === "function") {
+                    window[item.name].apply(this, args)//make the call
+                } else {
+                    setTimeout(wait, 50);
+                }
+            })();
+        else {
+            var levelscopes1 = item.name.split('.');
+            (function wait() {
+                if (levelscopes1.length == 2)
+                    if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
+                        window[levelscopes1[0]][levelscopes1[1]].apply(this, args);//make the call
+                    } else {
+                        setTimeout(wait, 50);
+                    }
+            })();
+        }
+    }
+}
+ 
 function initLingua(lingua) {
     lng = lingua || "I";
     moment.locale("it");
@@ -393,7 +438,7 @@ function getfromclientstorage(key) {
 
     return deferredclientstorage.promise();
 }
- 
+
 function manageclientstorage(action, key, value, durationhours) {
     var pako = window.pako; //Compression Lib
     if (action == 'put') {
@@ -2306,25 +2351,6 @@ var require = function (src, callback) {
     firstScriptTag.parentNode.insertBefore(newScriptTag, firstScriptTag);
 }
 
-//METODO 2 Caricamento dinamico di file script .js con 
-function loadJs(url) {
-    return new Promise(resolve => {
-        const script = document.createElement("script");
-        script.src = url;
-        script.onload = resolve;
-        document.head.appendChild(script);
-    });
-}
-function loadCss(url) {
-    return new Promise(resolve => {
-        const script = document.createElement("link");
-        script.href = url;
-        script.rel = "stylesheet";
-        script.type = "text/css";
-        script.onload = resolve;
-        document.head.appendChild(script);
-    });
-}
 
 function openLink(link) {
     //console.log('openlink:' + link);
@@ -2609,4 +2635,79 @@ function validateEmail(value) {
 
     return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
 }
+// Polyfills for deprecated escape/unescape() functions
+if (!window.unescape) {
+    window.unescape = function (s) {
+        return s.replace(/%([0-9A-F]{2})/g, function (m, p) {
+            return String.fromCharCode('0x' + p);
+        });
+    };
+}
+if (!window.escape) {
+    window.escape = function (s) {
+        var chr, hex, i = 0, l = s.length, out = '';
+        for (; i < l; i++) {
+            chr = s.charAt(i);
+            if (chr.search(/[A-Za-z0-9\@\*\_\+\-\.\/]/) > -1) {
+                out += chr; continue;
+            }
+            hex = s.charCodeAt(i).toString(16);
+            out += '%' + (hex.length % 2 != 0 ? '0' : '') + hex;
+        }
+        return out;
+    };
+}
+var utf8ToB64 = function (s) {
+    return btoa(unescape(encodeURIComponent(s)));
+};
+var b64ToUtf8 = function (s) {
+    s = s.replace(/\s/g, '');
+    return decodeURIComponent(escape(atob(s)));
+};
+
+//var utf8ArrayToStr = (function () {
+//    var charCache = new Array(128);  // Preallocate the cache for the common single byte chars
+//    var charFromCodePt = String.fromCodePoint || String.fromCharCode;
+//    var result = [];
+//    return function (array) {
+//        var codePt, byte1;
+//        var buffLen = array.length;
+//        result.length = 0;
+//        for (var i = 0; i < buffLen;) {
+//            byte1 = array[i++];
+
+//            if (byte1 <= 0x7F) {
+//                codePt = byte1;
+//            } else if (byte1 <= 0xDF) {
+//                codePt = ((byte1 & 0x1F) << 6) | (array[i++] & 0x3F);
+//            } else if (byte1 <= 0xEF) {
+//                codePt = ((byte1 & 0x0F) << 12) | ((array[i++] & 0x3F) << 6) | (array[i++] & 0x3F);
+//            } else if (String.fromCodePoint) {
+//                codePt = ((byte1 & 0x07) << 18) | ((array[i++] & 0x3F) << 12) | ((array[i++] & 0x3F) << 6) | (array[i++] & 0x3F);
+//            } else {
+//                codePt = 63;    // Cannot convert four byte code points, so use "?" instead
+//                i += 3;
+//            }
+//            result.push(charCache[codePt] || (charCache[codePt] = charFromCodePt(codePt)));
+//        }
+//        return result.join('');
+//    };
+
+//})();
+
+//var urlB64ToUint8Array = (function () {
+//    return function (base64String) {
+//        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+//        const base64 = (base64String + padding)
+//            .replace(/\-/g, '+')
+//            .replace(/_/g, '/');
+//        const rawData = window.atob(base64);
+//        const outputArray = new Uint8Array(rawData.length);
+//        for (let i = 0; i < rawData.length; ++i) {
+//            outputArray[i] = rawData.charCodeAt(i);
+//        }
+//        return outputArray;
+//    };
+
+//})();
 

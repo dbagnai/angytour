@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
     CodeFile="RisultatiRicerca.aspx.cs" Inherits="AspNetPages_RisultatiRicerca" Title="" Culture="it-IT"
     MaintainScrollPositionOnPostback="false" EnableEventValidation="false" %>
 

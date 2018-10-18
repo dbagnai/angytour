@@ -36,15 +36,7 @@ let swRegistration;
                 //registration.update(); //questa forza l'aggiornamento deidati della cache del sw
 
 
-                if ('storage' in navigator && 'estimate' in navigator.storage) {
-                    navigator.storage.estimate().then(estimate => {
-                        console.log(`Using ${estimate.usage} out of ${estimate.quota}`);
-                        var $used = document.querySelector(".storage-use"),
-                            $available = document.querySelector(".storage-available");
-                        //$used.innerText = Math.floor(estimate.usage / 1000000);
-                        //$available.innerText = Math.floor(estimate.quota / 1000000);
-                    });
-                }
+          
 
                 ////ESEMPI COMUNICAZIONE WEBPAGE -> serviceworker e viceversa 
                 //https://googlechrome.github.io/samples/service-worker/post-message/
@@ -106,6 +98,15 @@ let swRegistration;
                 });
 
 
+                if ('storage' in navigator && 'estimate' in navigator.storage) {
+                    navigator.storage.estimate().then(function (estimate) { 
+                        console.log(`Using ${estimate.usage} out of ${estimate.quota}`);
+                        //var $used = document.querySelector(".storage-use"),
+                        //    $available = document.querySelector(".storage-available");
+                        //$used.innerText = Math.floor(estimate.usage / 1000000);
+                        //$available.innerText = Math.floor(estimate.quota / 1000000);
+                    });
+                }
 
             }, function (err) {
                 // registration failed :(

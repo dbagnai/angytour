@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
     CodeFile="executetasks.aspx.cs" Inherits="_executetasks" Title=""
     MaintainScrollPositionOnPostback="true" %>
 

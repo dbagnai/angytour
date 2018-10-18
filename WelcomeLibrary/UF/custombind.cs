@@ -2808,12 +2808,12 @@ namespace WelcomeLibrary.UF
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands
             // jscode += "console.log('inject from custom bind');\r\n";
+            AddInitjavascriptvariables(jscommands);
             if (addelements != null)
                 foreach (KeyValuePair<string, string> kv in addelements)
                 {
                     if (!jscommands.ContainsKey(kv.Key)) jscommands.Add(kv.Key, kv.Value);
                 }
-            AddInitjavascriptvariables(jscommands);
 
 
             if (jscommands != null)

@@ -15,7 +15,7 @@ var carrellotool = new function () {
     var prv = -1, cur = -1;
     var configview = 1; //1 solo calendario , 2 solo tasti +/-, 3 entrambi
     return {
-        modifyscopevalues(pidrisorsa, pidcombined, pidcarrello, pusername, idcontrollo, cfgvista) {
+        modifyscopevalues: function (pidrisorsa, pidcombined, pidcarrello, pusername, idcontrollo, cfgvista) {
             idprodotto = pidrisorsa;
             idcombined = pidcombined;
             idcarrello = pidcarrello;
@@ -45,7 +45,7 @@ var carrellotool = new function () {
 
             return;
         },
-        inserisciacarrelloquantita() { //inserisce nel carrello una quantità esatta per l'articolo calcolata con la differnza dei giorni tramite le date
+        inserisciacarrelloquantita: function () { //inserisce nel carrello una quantità esatta per l'articolo calcolata con la differnza dei giorni tramite le date
             var start = new Date(Math.min(prv, cur));
             var end = new Date(Math.max(prv, cur));
             // console.log("inserisci carrello " + idprodotto + " " + start + " " + end);
@@ -70,7 +70,7 @@ var carrellotool = new function () {
 
             return;
         },
-        aggiungiacarrello() {
+        aggiungiacarrello: function() {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', '', '', null, null, '', '', false, function (ret) {
                 /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
@@ -87,7 +87,7 @@ var carrellotool = new function () {
             //});
             return;
         },
-        sottradiacarrello() {
+        sottradiacarrello: function() {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', '', '', null, null, '', '', false, function (ret) {
                 /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
@@ -104,7 +104,7 @@ var carrellotool = new function () {
             //});
             return;
         },
-        caricaquantita() {
+        caricaquantita: function() {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             GetCurrentCarrelloQty('', idprodotto, '', idcarrello, false, function (ret) {
                 var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
@@ -116,13 +116,13 @@ var carrellotool = new function () {
             //    $('#' + controlid + "qty").html(casellaqty);
             //});
         },
-        caricatotale() { //Carica il totale a carrello attuale per l'elemento passato  
+        caricatotale: function() { //Carica il totale a carrello attuale per l'elemento passato  
             GetCarrelloTotalForItem(idprodotto, idcombined, idcarrello, function (ret) {
                 $('#' + controlid + "price").val(ret);
             });
             return;
         },
-        calcolatotale() {
+        calcolatotale: function() {
             GetPriceForItem(idprodotto, function (ret) {
                 var prezzototaleitem = '';
                 if (prv != -1 && cur != -1) {

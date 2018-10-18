@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
     CodeFile="SchedaProdotto.aspx.cs"
     EnableTheming="true" Culture="it-IT" Inherits="_SchedaProdotto" Title="" EnableEventValidation="false" %>
 

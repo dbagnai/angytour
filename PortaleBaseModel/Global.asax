@@ -494,12 +494,12 @@
             "~/js/jquery.cycle2.carousel.js",
              "~/js/owl-carousel.js",
             "~/js/owl-carousel/owl-carousel/owl.carousel.min.js",
-             "~/lib/js/common.js",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
             "~/js/jqueryui/jquery.maskedinput.js",
             "~/js/revolution464/jquery.themepunch.plugins.min.js",
             "~/js/revolution464/jquery.themepunch.tools.min.js",
-            "~/js/revolution464/jquery.themepunch.revolution.min.js"
+            "~/js/revolution464/jquery.themepunch.revolution.min.js",
+             "~/lib/js/common.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",

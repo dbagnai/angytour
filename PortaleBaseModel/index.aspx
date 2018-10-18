@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
     CodeFile="index.aspx.cs" Inherits="index" MaintainScrollPositionOnPostback="true" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>

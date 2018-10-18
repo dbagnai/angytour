@@ -2,6 +2,48 @@
 $(document).ready(function () {
 });
 
+//METODO 2 Caricamento dinamico di file script .js con    
+
+
+
+function loadJs(url) {
+    //return new Promise(resolve => {
+    //    const script = document.createElement("script");
+    //    script.src = url;
+    //    script.onload = resolve;
+    //    document.head.appendChild(script);
+    //});
+
+    return new Promise(function (resolve) { //Ie 11 version
+        const script = document.createElement("script");
+        script.src = url;
+        script.onload = resolve;
+        document.head.appendChild(script);
+        
+    });
+
+}
+function loadCss(url) {
+    //return new Promise(resolve => {
+    //    const script = document.createElement("link");
+    //    script.href = url;
+    //    script.rel = "stylesheet";
+    //    script.type = "text/css";
+    //    script.onload = resolve;
+    //    document.head.appendChild(script);
+    //});
+
+    return new Promise(function (resolve) { //ie11 versione ( da testare )
+        const script = document.createElement("link");
+        script.href = url;
+        script.rel = "stylesheet";
+        script.type = "text/css";
+        script.onload = resolve;
+        document.head.appendChild(script);
+    
+    });
+
+}
 
 var bookingtool = new function () {
 
@@ -135,7 +177,7 @@ var bookingtool = new function () {
         if (moment(end).isoWeekday() != 6 || moment(str).isoWeekday() != 6) {
             $('#' + controlid + "info").html('');
             $('#' + controlid + "info").attr('class', 'alert alert-danger');
-            $('#' + controlid + "info").html(selperiodo + '<br/>' + GetResourcesValue("testoprenotaday") + linkrichiestadiretta );
+            $('#' + controlid + "info").html(selperiodo + '<br/>' + GetResourcesValue("testoprenotaday") + linkrichiestadiretta);
             return;
         }
         /*++++++++++++++++++++++++++++++++++++++++VERIFICHE VONOLI DI PRENOTAZIONE*/

@@ -364,6 +364,11 @@ namespace WelcomeLibrary.UF
             ms.Position = 0;
             return (T)bf1.Deserialize(ms);
         }
+        /// <summary>
+        /// Converte una stringa in base64
+        /// </summary>
+        /// <param name="toEncode"></param>
+        /// <returns></returns>
         public static string EncodeToBase64(string toEncode)
         {
             byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(toEncode);
@@ -375,6 +380,26 @@ namespace WelcomeLibrary.UF
         {
             byte[] encodedDataAsBytes = System.Convert.FromBase64String(encodedData);
             string returnValue = System.Text.ASCIIEncoding.ASCII.GetString(encodedDataAsBytes);
+            return returnValue;
+        }
+
+
+        /// <summary>
+        /// Converte una stringa in base64
+        /// </summary>
+        /// <param name="toEncode"></param>
+        /// <returns></returns>
+        public static string EncodeUtfToBase64(string toEncode)
+        {
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.UTF8.GetBytes(toEncode);
+            string returnValue = System.Convert.ToBase64String(toEncodeAsBytes);
+            return returnValue;
+        }
+
+        public static string DecodeUtfFromBase64(string encodedData)
+        {
+            byte[] encodedDataAsBytes = System.Convert.FromBase64String(encodedData);
+            string returnValue = System.Text.ASCIIEncoding.UTF8.GetString(encodedDataAsBytes);
             return returnValue;
         }
 
