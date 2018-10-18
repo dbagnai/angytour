@@ -57,22 +57,7 @@
 <%--<body class="bckGray">--%>
 <body>
     <form id="form1" runat="server">
-        <asp:Panel runat="server" Visible="true">
-            <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
-                <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
-                    <i class="fa fa-2x fa-bell-slash"></i>
-                </button>
-                <button type="button" class="js-preload-btn js-roundedpush btn btn-primary">
-                    <i class="fab fa-2x fa-adn"></i>
-                </button>
-                <button type="button" class="js-a2hs-btn js-roundedpush btn btn-primary" style="display:none">
-                    <i class="fas fa-2x fa-home"></i>
-                </button>
-                <section class="subscription-details js-subscription-details d-none">
-                    <pre><code class="js-subscription-json"></code></pre>
-                </section>
-            </div>
-        </asp:Panel>
+
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
 
         <!--- Styles -->
@@ -847,10 +832,26 @@
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
         <![endif]-->
+        <asp:Panel runat="server" Visible="false">
+            <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
+                <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
+                    <i class="fa fa-2x fa-bell-slash"></i>
+                </button>
+                <button type="button" class="js-preload-btn js-roundedpush btn btn-primary">
+                    <i class="fab fa-2x fa-adn"></i>
+                </button>
+                <button type="button" class="js-a2hs-btn js-roundedpush btn btn-primary" style="display: none">
+                    <i class="fas fa-2x fa-home"></i>
+                </button>
+                <section class="subscription-details js-subscription-details d-none">
+                    <pre><code class="js-subscription-json"></code></pre>
+                </section>
+            </div>
+        </asp:Panel>
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
-    <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>
+  <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>--%>
 </body>
 </html>
