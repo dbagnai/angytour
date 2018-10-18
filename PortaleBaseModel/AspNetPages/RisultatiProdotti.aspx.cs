@@ -216,10 +216,7 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
-
-
                 Promozioni = CaricaValoreMaster(Request, Session, "promozioni");
-
 
                 //Aggiungo la lingua al pager se presente nella querystring
                 //PagerRisultati.NavigateUrl += "?Lingua=" + Lingua;
@@ -230,7 +227,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 if (!string.IsNullOrEmpty(tmp)) mese = tmp;
                 tmp = CaricaValoreMaster(Request, Session, "anno", false);
                 if (!string.IsNullOrEmpty(tmp)) anno = tmp;
-
                 tmp = CaricaValoreMaster(Request, Session, "testoricerca", false);
                 if (!string.IsNullOrEmpty(tmp)) testoricerca = tmp;
 
@@ -303,16 +299,11 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 string svetrina = "";
                 if (Vetrina) svetrina = "true";
                 //string controllist2 = "injectPortfolioAndLoad(\"isotopeProdotti1.html\",\"divPortfolioList1\", \"portlist1\", 1, 16, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\", '" + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");";
-
-
-
-
                 sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                 sb.Append("injectPortfolioAndLoad,isotopeProdotti1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'," + svetrina + "','" + Promozioni + "', \"\", \"" + Categoria2liv + "\");");
                 sb.Append("\"></div>");
                 sb.Append("<div id=\"divPortfolioListPager\"></div>");
                 placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
-
 
                 //SettaTestoIniziale();
 

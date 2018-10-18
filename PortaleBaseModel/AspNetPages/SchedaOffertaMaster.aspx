@@ -828,7 +828,7 @@
                 <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
                         <div class="input-group flex-nowrap">
-                            <input class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
+                            <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                             <span class="input-group-addon">
                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
                             </span>

@@ -299,7 +299,7 @@
                 <div class="sidebar-block" runat="server" visible="false">
                     <div class="sidebar-content tags blog-search">
                         <div class="input-group">
-                            <input class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
+                            <input enableviewstate="true" class="form-control blog-search-input text-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
                             <span class="input-group-addon">
                                 <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button icon-search" runat="server" clientidmode="Static" />
                             </span>

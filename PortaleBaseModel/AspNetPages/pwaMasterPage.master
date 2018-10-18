@@ -1,14 +1,6 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage"  %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="pwaMasterPage.master.cs" Inherits="_pwaMasterPage" %>
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-
 <html runat="server" id="htmltag">
 <head runat="server">
     <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
@@ -59,29 +51,10 @@
     <form id="form1" runat="server">
 
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
-       
-        <!--- Styles -->
-        <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
-        <script>
-            WebFont.load({
-                google: {
-                    families: ['Raleway:300,400,500,600,700', 'Open Sans:300,400,600,800', 'Lato:400,400i,700']
-                }
-            });
-        </script>--%>
-        <%--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-        <%--   JAVASCRIPT --%>
-        <%--   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src=" https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>--%>
-        <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-3.2.1.min.js" )%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks("~/js/jquery321/jquery-migrate-3.0.1.min.js" )%>"></script>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
-         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
-
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
-
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="d-block" style="padding: 5px 0;">
@@ -101,7 +74,7 @@
                     <div class="input-group flex-nowrap px-2 px-sm-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
                         <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
                         <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
-                            <button type="button"  onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
+                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -210,7 +183,6 @@
 
             </div>
         </div>
-
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
 
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
@@ -374,7 +346,7 @@
 
                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
                         <div style="padding-top: 5px; padding-left: 10px">
-                            <input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
+                            <input class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
                             <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
                         </div>
                     </li>
@@ -383,19 +355,12 @@
                 </ul>
             </div>
         </div>
+
+        <%-- BODY--%>
         <section class="body-wrapper">
-            <%--   <div class="fixednav1" id="mainnav1">
-            <div id="menuzord1" class="menuzord sec-menu menuzord-responsive white">
-                <ul id="divSearchBarPlaceholder1" class="menuzord-menu menu-reduced menuzord-indented scrollable menuzord-center">
-                </ul>
-            </div>
-        </div>--%>
+
             <!-- FINE MENU --->
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
-            <%--    <div id="divSliderBanner" style="margin: 0px auto; position: relative; display: none" class="hidden-xs"></div>
-            <div id="divContainerBannerhome" style="display: none;" class="visible-xs hidden-sm hidden-md hidden-lg"></div>--%>
-            <%--            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>--%>
-            <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px">
                 <div class="breadcrumbs clearfix">
@@ -406,93 +371,12 @@
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
-
-            <!-- OLD SISTEMA RICERCA E CATEGORIE -->
-            <asp:Panel runat="server" ID="pnlCategorie" Visible="false">
-                <div class="bckgrid">
-                    <div class="container text-justify">
-                        <nav id="navmenu-3" class="navbar navbar-default" role="navigation" style="background: none; border: none; margin-bottom: 0px; padding-top: 5px; min-height: 30px; top: 0px;">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle visible-md visible-sm visible-xs" id="mobile-menu-button-3" style="float: none; padding: 5px; margin: 0px auto; background-color: #33332e; color: #fff">
-                                    <div style="margin: 0px auto">
-                                        <i class="fa fa-list-ul" style="font-size: 0.8em;"></i>
-                                        <span style="font-size: 1em;">SEZIONI CATALOGO</span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="collapse navbar-collapse">
-                                <ul id="navigation-3" class="nav navbar-nav d-none" style="width: 100%">
-                                    <asp:Literal runat="server" ID="litLinksottosezioni"></asp:Literal>
-                                </ul>
-                            </div>
-                        </nav>
-                        <!-- Mobile Nav. Container -->
-                        <ul class="mobile-nav" id="mobilenav3" clientidmode="Static" runat="server">
-                        </ul>
-                    </div>
-                </div>
-            </asp:Panel>
-            <div runat="server" id="divRicerca" visible="false">
-                <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
-            </div>
-            <asp:Panel runat="server" ID="pnlRicerca" Visible="false">
-                <div class="container" style="text-align: center">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <br />
-                            <h2><%= references.ResMan("Common", Lingua,"testoRicercaCatalogo") %></h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica3" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica1" AppendDataBoundItems="true" Style="width: 100%" OnSelectedIndexChanged="ddlCaratteristica1_SelectedIndexChanged" AutoPostBack="true">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica2" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica4" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlFascePrezzo" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:CheckBox Text='<%# references.ResMan("Common", Lingua,"TestoMenu1") %>' runat="server" Checked="false" ID="chkPromo" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" Width="99%" ID="ddlOrdinamento"
-                                AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <br />
-                        <asp:Button class="divbuttonstyle" runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" Text='<%# references.ResMan("Common", Lingua,"testoCerca") %>' />
-                    </div>
-                    <br />
-                    <br />
-                </div>
-            </asp:Panel>
-            <!-- FINE OLD SISTEMA RICERCA -->
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
             </asp:ContentPlaceHolder>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
                 <%--<div style="max-width: 100%; margin: 0px auto; padding-left: 0px; padding-right: 0px">--%>
-
                 <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                 </asp:ContentPlaceHolder>
                 <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
@@ -502,17 +386,7 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderIndextext" runat="server">
             </asp:ContentPlaceHolder>
-            <asp:Literal Text="" ID="literalVideoBanner" runat="server" />
-            <div style="position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 20px;">
-                <asp:Literal Text="" ID="plhNavigazione" runat="server" />
-            </div>
 
-            <div style="max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
-                <div id="divnavigazioneJs1" style="background-color: transparent"></div>
-            </div>
-            <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 0px;">
-                <div id="divnavigazioneJs0" style="background-color: transparent"></div>
-            </div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
@@ -604,8 +478,8 @@
                                         }
                                     </script>
                                     <br />
-                                    <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
+                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                   <%--  <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
 
                                 </div>
                                 <div class="lead py-3" style="height: 75px;">
@@ -620,7 +494,6 @@
                     </div>
                 </section>
             </div>
-
             <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
                 <div style="height: 100%; width: 100%; position: relative">
                     <div id="map1" style="height: 410px; width: 100%">
@@ -629,6 +502,7 @@
                 </div>
             </asp:PlaceHolder>
         </section>
+        <%--FOOTER--%>
         <footer>
             <div class="footer mt-0">
                 <div class="footerhead">
@@ -823,15 +697,8 @@
                 <%--  loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
             });
         </script>
-        <!-- FIne Librerie CMS management -->
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
-        <!--[if lt IE 9]>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
-        <link rel="stylesheet" src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
-        <![endif]-->
-        <!--[if lt IE 9]>
-        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
-        <![endif]-->
+        <%-- PANNELLO TASTI PER PWA--%>
         <asp:Panel runat="server" Visible="true">
             <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
                 <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
@@ -852,6 +719,6 @@
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
-   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  
+    <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>
 </body>
 </html>

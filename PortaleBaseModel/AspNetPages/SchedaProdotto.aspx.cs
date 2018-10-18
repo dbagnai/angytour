@@ -178,7 +178,6 @@ public partial class _SchedaProdotto : CommonPage
                 column2.Visible = false;
                 column3.Visible = false;
                 divContact.Visible = false;
-                divContact.Visible = false;
 
                 sb.Clear();
                 sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");

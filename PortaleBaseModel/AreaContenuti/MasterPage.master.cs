@@ -26,16 +26,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 if (Request.QueryString["Errore"] != null && Request.QueryString["Errore"] != "")
                 { output.Text = Request.QueryString["Errore"].ToString(); }
 
-                //CaricaRotazioneHeader("");
-                //Prendiamo i dati dalla querystring
-                //if (Request.QueryString["Lingua"] != null && Request.QueryString["Lingua"] != "")
-                //{
-                //    Lingua = Request.QueryString["Lingua"].ToString();
-                //}
-                //else if (Context.Items["Lingua"] != null && Context.Items["Lingua"].ToString() != "")
-                //{
-                //    Lingua = Context.Items["Lingua"].ToString();
-                //}
+
 
                 //Inizializzo i valori
 
@@ -58,6 +49,16 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 List<WelcomeLibrary.DOM.Prodotto> listcat = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == "I");
                 rptCatalogoCategorie.DataSource = listcat;
                 rptCatalogoCategorie.DataBind();
+
+
+                ////////////////////////////////////////////////////////////////////////////////////////
+                List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologiepwa = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) >= 500 && Convert.ToInt32(t.Codice.Substring(3)) <= 600);
+                rptPwa.DataSource = Tipologiepwa;
+                rptPwa.DataBind();
+                List<WelcomeLibrary.DOM.Prodotto> SubTipologiepwa = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000500" && p.Lingua == "I");
+                rptPwaCategorie.DataSource = SubTipologiepwa;
+                rptPwaCategorie.DataBind();
+                ////////////////////////////////////////////////////////////////////////////////////////
 
 
                 //Custom tipo

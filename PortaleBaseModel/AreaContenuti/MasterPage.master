@@ -417,6 +417,38 @@
 
                         </ul>
                     </li>
+                    
+                    <li id="tagPwa" runat="server" class="hover" style="display: block">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">Gestione Sezione APP
+                            </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <asp:Repeater ID="rptPwa" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("Codice").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <asp:Repeater ID="rptPwaCategorie" runat="server">
+                                <ItemTemplate>
+                                    <li class="hover">
+                                        <a href="GestioneProdotti.aspx?CodiceTipologia=<%# Eval("CodiceTipologia").ToString() + "&CodiceProdotto="+ Eval("CodiceProdotto").ToString() %>">
+                                            <asp:Label ID="Titolo" CssClass="menu-text" runat="server" Text='<%# Eval("Descrizione").ToString() %>'></asp:Label></a>
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                        </ul>
+                    </li>
 
                     <li id="tagCatalogo" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
@@ -427,8 +459,6 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-
-
                             <asp:Repeater ID="rptCatalogo" runat="server">
                                 <ItemTemplate>
                                     <li class="hover">

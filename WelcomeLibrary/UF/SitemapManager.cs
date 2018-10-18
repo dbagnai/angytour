@@ -463,9 +463,12 @@ namespace WelcomeLibrary.UF
 
             string cleantextmatch = ConteggioCaratteri(CleanUrl(textmatch.Trim().Replace(" ", "-")), 100).ToLower().Trim();
             if (string.IsNullOrEmpty(cleantextmatch)) cleantextmatch = "-";
+
+            //Crea l'oggetto per la Memorizzazione in tabella il path per i rwwriting
             urlRewrited = CreaElementoRewriting(
-                CostruisciRewritedUrl(Lingua, destinationselector, cleantextmatch, id)
-                , OriginalPathdestinazioneByTipologia(Tipologia, tipopagina), Creaparametersstring(parameters));
+                CostruisciRewritedUrl(Lingua, destinationselector, cleantextmatch, id),
+                OriginalPathdestinazioneByTipologia(Tipologia, tipopagina),
+                Creaparametersstring(parameters));
 
             return urlRewrited;
         }
@@ -593,6 +596,8 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 101 && Convert.ToInt32(codicetipologia.Substring(3)) <= 101) //
                         Pathdestinazione = "~/AspNetPages/SchedaProdotto.aspx";
+                    if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 500 && Convert.ToInt32(codicetipologia.Substring(3)) <= 600) //
+                        Pathdestinazione = "~/AspNetPages/pwadetail.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 199 && Convert.ToInt32(codicetipologia.Substring(3)) <= 199) //No Scheda apribile
                         Pathdestinazione = "";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1000 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1000) //No Scheda apribile
@@ -612,6 +617,8 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/ListaElenco.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 101 && Convert.ToInt32(codicetipologia.Substring(3)) <= 101) //
                         Pathdestinazione = "~/AspNetPages/ListaElenco.aspx";
+                    if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 500 && Convert.ToInt32(codicetipologia.Substring(3)) <= 600) //
+                        Pathdestinazione = "~/AspNetPages/pwalist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 199 && Convert.ToInt32(codicetipologia.Substring(3)) <= 199) //
                         Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1000 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1000) //
