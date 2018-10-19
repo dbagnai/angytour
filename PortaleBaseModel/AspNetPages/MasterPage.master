@@ -852,6 +852,6 @@
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
-   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  
+<%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
 </body>
 </html>
