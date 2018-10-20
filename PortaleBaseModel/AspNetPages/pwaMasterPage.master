@@ -51,7 +51,7 @@
     <form id="form1" runat="server">
 
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
-        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecsspwa") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>

@@ -1,8 +1,9 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/pwaMasterPage.master" AutoEventWireup="true" EnableViewState="false"
-    CodeFile="pwalist.aspx.cs" Inherits="AspNetPages_pwalist" Title="" Culture="it-IT"
+﻿<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
+    CodeFile="weblist.aspx.cs" Inherits="AspNetPages_weblist" Title="" Culture="it-IT"
     MaintainScrollPositionOnPostback="false" EnableEventValidation="false" %>
 
-<%@ MasterType VirtualPath="~/AspNetPages/pwaMasterPage.master" %>
+<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %> 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">

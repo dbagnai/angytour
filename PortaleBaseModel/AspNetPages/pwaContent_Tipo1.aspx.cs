@@ -14,7 +14,7 @@ using System.Data.OleDb;
 using System.Collections.Generic;
 using WelcomeLibrary.UF;
 
-public partial class AspNetPages_Content_Tipo1 : CommonPage
+public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
 {
     public string Lingua
     {

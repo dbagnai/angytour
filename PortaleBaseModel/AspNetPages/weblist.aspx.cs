@@ -18,7 +18,7 @@ using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Data.SQLite;
 
-public partial class AspNetPages_pwalist : CommonPage
+public partial class AspNetPages_weblist : CommonPage
 {
     public string PageGuid
     {
@@ -279,7 +279,7 @@ public partial class AspNetPages_pwalist : CommonPage
 
         switch (Tipologia)
         {
-            case "rif000501": //Simil prodotti x app
+            case "rif000001": //Simil prodotti x app
                 if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
                 AssociaDatiSocial();
 
@@ -300,7 +300,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                 break;
-            case "rif000505":
+            case "rif000005":
 
                 AssociaDatiSocial();
 
@@ -330,8 +330,8 @@ public partial class AspNetPages_pwalist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
 
-            case "rif000503":
-            case "rif000504":
+            case "rif000003":
+            case "rif000004":
                 AssociaDatiSocial();
 
                 column1.Visible = false;
@@ -362,7 +362,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
 
-            case "rif000506":
+            case "rif000006":
                 AssociaDatiSocial();
 
                 column1.Visible = true;
@@ -389,7 +389,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
 
-            case "rif000507":
+            case "rif000007":
 
                 AssociaDatiSocial();
 
@@ -416,7 +416,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
 
-            case "rif000508":
+            case "rif000008":
                 AssociaDatiSocial();
 
                 column1.Visible = true;
@@ -456,7 +456,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 }
                 break;
 
-            case "rif000509":
+            case "rif000009":
 
                 AssociaDatiSocial();
 
@@ -783,7 +783,7 @@ public partial class AspNetPages_pwalist : CommonPage
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
-        if  (Tipologia == "rif000501") //Pagina copertina presente
+        if  (Tipologia == "rif000001") //Pagina copertina presente
         {
             Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
             if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))

@@ -976,12 +976,12 @@ namespace WelcomeLibrary.UF
                         if (pars.Count > 6 && !dictpagerpars.ContainsKey("enablepager")) dictpagerpars.Add("enablepager", pars[6]);
 
                         //////////////////////////////////////////////////
-                        //Ricarichiamo dalla session la pagina se presente
+                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
-#if false
+#if true
                         if (Session != null)
                         {
-                            string retval = Session["objfiltro"].ToString();
+                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
                             if (retval != null && retval != "")
                             {
                                 Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
@@ -989,8 +989,11 @@ namespace WelcomeLibrary.UF
                                 if (dictparsfromsession != null)
                                     foreach (KeyValuePair<string, string> kv in dictparsfromsession)
                                     {
-                                        if (kv.Key == ("page" + dictpars["controlid"]))
-                                            dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                        //if (kv.Key == ("page" + dictpars["controlid"]))
+                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                        //aggiungo i parametri dalla sessione se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
                                     }
                             }
                         } 

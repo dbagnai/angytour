@@ -1,8 +1,8 @@
-<%@ Page Language="C#" MasterPageFile="~/AspNetPages/pwaMasterPage.master" AutoEventWireup="true" EnableViewState="false"
-    CodeFile="pwadetail.aspx.cs"
-    EnableTheming="true" Culture="it-IT" Inherits="_pwadetail" Title="" EnableEventValidation="false" %>
+<%@ Page Language="C#" MasterPageFile="~/AspNetPages/MasterPage.master" AutoEventWireup="true" EnableViewState="false"
+    CodeFile="webdetail.aspx.cs"
+    EnableTheming="true" Culture="it-IT" Inherits="_webdetail" Title="" EnableEventValidation="false" %>
 
-<%@ MasterType VirtualPath="~/AspNetPages/pwaMasterPage.master" %>
+<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <div class="row">
         <div class="col-md-1 col-sm-1">

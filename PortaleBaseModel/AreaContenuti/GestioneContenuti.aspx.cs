@@ -89,12 +89,21 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             }
             else
             {
-                plhHtmlEditorRU.Visible = false;
-                plhHtmlEditorGB.Visible = false;
-                plhHtmlEditorI.Visible = false;
-                plhSimpleEditorRU.Visible = true;
-                plhSimpleEditorGB.Visible = true;
-                plhSimpleEditorI.Visible = true;
+                //plhHtmlEditorRU.Visible = false;
+                //plhHtmlEditorGB.Visible = false;
+                //plhHtmlEditorI.Visible = false;
+
+                //plhSimpleEditorRU.Visible = true;
+                //plhSimpleEditorGB.Visible = true;
+                //plhSimpleEditorI.Visible = true;
+
+                plhHtmlEditorRU.Visible = true;
+                plhHtmlEditorGB.Visible = true;
+                plhHtmlEditorI.Visible = true;
+
+                plhSimpleEditorRU.Visible = false;
+                plhSimpleEditorGB.Visible = false;
+                plhSimpleEditorI.Visible = false;
             }
 
             //Carichiamo i dati relativi al contenuto specificato
@@ -124,7 +133,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         if (item != null)
         {
             string testo = item.TitolobyLingua(Lingua);
-            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), CodiceContenuto);
             testo = "Vedi";
             if (!noli) sb.Append("<li>");
             sb.Append("<a  href=\"");
@@ -315,15 +324,17 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 tinyhtmlEditGB.InnerText = Details.DescrizioneGB;
                 tinyhtmlEditI.InnerText = Details.DescrizioneI;
 
-                //htmlEditI.Content = Details.DescrizioneI;//(((Literal)e.Item.FindControl("lit3")).Text);
-                //htmlEditGB.Content = Details.DescrizioneGB;//(((Literal)e.Item.FindControl("lit4")).Text);
-                //htmlEditRU.Content = Details.DescrizioneRU;//(((Literal)e.Item.FindControl("lit4")).Text);
+                
             }
             else
             {
-                txtDescrizioneI.Text = Details.DescrizioneI;//(((Literal)e.Item.FindControl("lit3")).Text);
-                txtDescrizioneGB.Text = Details.DescrizioneGB;//(((Literal)e.Item.FindControl("lit4")).Text);
-                txtDescrizioneRU.Text = Details.DescrizioneRU;//(((Literal)e.Item.FindControl("lit4")).Text);
+                //txtDescrizioneI.Text = Details.DescrizioneI;//(((Literal)e.Item.FindControl("lit3")).Text);
+                //txtDescrizioneGB.Text = Details.DescrizioneGB;//(((Literal)e.Item.FindControl("lit4")).Text);
+                //txtDescrizioneRU.Text = Details.DescrizioneRU;//(((Literal)e.Item.FindControl("lit4")).Text);
+                tinyhtmlEditRU.InnerText = Details.DescrizioneRU;
+                tinyhtmlEditGB.InnerText = Details.DescrizioneGB;
+                tinyhtmlEditI.InnerText = Details.DescrizioneI;
+
             }
 
             txtData.Text = string.Format("{0:dd/MM/yyyy HH:mm:ss}", Details.DataInserimento);
@@ -512,14 +523,17 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                         updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                         updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
 
-                        //updrecord.DescrizioneI = htmlEditI.Content;
-                        //updrecord.DescrizioneGB = htmlEditGB.Content;
+                        
                     }
                     else
                     {
-                        updrecord.DescrizioneI = txtDescrizioneI.Text;
-                        updrecord.DescrizioneGB = txtDescrizioneGB.Text;
-                        updrecord.DescrizioneRU = txtDescrizioneRU.Text;
+                        updrecord.DescrizioneI = tinyhtmlEditI.InnerText;
+                        updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
+                        updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
+
+                        //updrecord.DescrizioneI = txtDescrizioneI.Text;
+                        //updrecord.DescrizioneGB = txtDescrizioneGB.Text;
+                        //updrecord.DescrizioneRU = txtDescrizioneRU.Text;
                     }
 
                     DateTime _tmpdate = System.DateTime.Now;
@@ -565,9 +579,13 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 }
                 else
                 {
-                    updrecord.DescrizioneI = txtDescrizioneI.Text;
-                    updrecord.DescrizioneGB = txtDescrizioneGB.Text;
-                    updrecord.DescrizioneRU = txtDescrizioneRU.Text;
+                    updrecord.DescrizioneI = tinyhtmlEditI.InnerText;
+                    updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
+                    updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
+
+                    //updrecord.DescrizioneI = txtDescrizioneI.Text;
+                    //updrecord.DescrizioneGB = txtDescrizioneGB.Text;
+                    //updrecord.DescrizioneRU = txtDescrizioneRU.Text;
                 }
 
                 DateTime _tmpdate = System.DateTime.Now;

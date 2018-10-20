@@ -305,9 +305,6 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
                 sb.Append("<div id=\"divPortfolioListPager\"></div>");
                 placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
-                //SettaTestoIniziale();
-
-                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog 
                 break;
 
             default:
@@ -735,6 +732,8 @@ public partial class AspNetPages_RisultatiProdotti : CommonPage
         //METTIAMO GLI ALTERNATE
         hreflang = " hreflang=\"it\" ";
         string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv);
+
+
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
         litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));

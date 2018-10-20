@@ -269,7 +269,6 @@ public partial class _SchedaProdotto : CommonPage
             if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
-            string strigaperricerca = "";
 #if false
             strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
             Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);

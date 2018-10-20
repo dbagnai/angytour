@@ -579,6 +579,36 @@
              "~/css/custom1.css",
              "~/css/custom.css"
           );
+
+           BundleEngine.AddBundleCSS("bundlecsspwa",
+            "~/js/bootstrap400/css/bootstrap.min.css",
+            "~/css/revolution_settings.css",
+            "~/js/menuzord/files/css/menuzord.css",
+            "~/js/menuzord/files/css/skins/menuzord-colored.css",
+             "~/js/menuzord/files/css/menuzordcustomize.css",
+            //"~/css/font-awesome.css",
+            "~/css/tipsy.css",
+            "~/css/prettyPhoto.css",
+            "~/css/isotop_animation.css",
+            "~/css/animate.css",
+            "~/js/simplestarrating/SimpleStarRating.css",
+            "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
+            "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
+            "~/js/notifications/notification.css",
+            "~/js/owl-carousel/owl-carousel/owl.carousel.css",
+            "~/js/flexslider/flexslider.css",
+            "~/js/magnify/css/magnify.css",
+            "~/css/ashobiz/ashobiz.base.css",
+            "~/css/ashobiz/ashobiz-176.css",
+              "~/css/style1.css",
+            "~/css/ui-personalization.css",
+             "~/css/opj/style-100.css", /*SET-COLORI*/
+             "~/css/mbr-faq.css",
+             "~/css/mbr-additional.css",
+             "~/css/landing.css",
+             "~/css/custom1.css",
+             "~/css/custom.css"
+          );
     }
 
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)

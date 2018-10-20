@@ -14,7 +14,7 @@ using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Data.SQLite;
 
-public partial class _pwadetail : CommonPage
+public partial class _webdetail : CommonPage
 {
     public string Lingua
     {
@@ -283,7 +283,7 @@ public partial class _pwadetail : CommonPage
             string tmpcategoria = Categoria;
             string tmpcategoria2liv = "";
 
-            if (CodiceTipologia == "rif000501")
+            if (CodiceTipologia == "rif000001")
             {
                 if (!string.IsNullOrEmpty(Categoria2liv))
                 {
@@ -372,7 +372,7 @@ public partial class _pwadetail : CommonPage
         switch (CodiceTipologia)
         {
 
-            case "rif000501":
+            case "rif000001":
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
@@ -383,6 +383,8 @@ public partial class _pwadetail : CommonPage
                 //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = true;
+
+                pnlCommenti.Visible = true; //visualizzo i commenti!!
 
                 HtmlGenericControl divc = ((HtmlGenericControl)Master.FindControl("divContattiMaster"));
                 divc.Visible = false;
@@ -423,7 +425,7 @@ public partial class _pwadetail : CommonPage
 
                 break;
 
-            case "rif000508":
+            case "rif000008":
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
@@ -471,7 +473,7 @@ public partial class _pwadetail : CommonPage
 
                 break;
 
-            case "rif000509":
+            case "rif000009":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";
@@ -501,8 +503,8 @@ public partial class _pwadetail : CommonPage
                 }
                 break;
 
-            case "rif000503":
-            case "rif000504":
+            case "rif000003":
+            case "rif000004":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";
@@ -529,7 +531,7 @@ public partial class _pwadetail : CommonPage
                 }
                 break;
 
-            case "rif000505":
+            case "rif000005":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";
@@ -556,7 +558,7 @@ public partial class _pwadetail : CommonPage
                 }
                 break;
 
-            case "rif000506":
+            case "rif000006":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-10";
@@ -583,7 +585,7 @@ public partial class _pwadetail : CommonPage
                 }
                 break;
 
-            case "rif000507":
+            case "rif000007":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-10";
@@ -881,7 +883,7 @@ public partial class _pwadetail : CommonPage
             link.Campo2 = testourl;
 
             //if (CodiceTipologia == "rif000003") //Pagina copertina presente
-            if (CodiceTipologia == "rif000501") //Pagina copertina presente
+            if (CodiceTipologia == "rif000001") //Pagina copertina presente
             {
                 Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == CodiceTipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
                 if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
