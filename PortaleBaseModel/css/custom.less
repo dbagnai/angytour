@@ -178,14 +178,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     }
 
     .menuzord-menu li.catalogo-menu .indicator::before {
-        font-family: 'FontAwesome';
-        content: "\f0d8";
-        font-family: "Font Awesome 5 Free";
+        font-family: 'Font Awesome 5 Free';
+        /*content: "\f0d8";*/
         font-weight: 400;
         content: "\f0de";
+        /*content: "\f107";*/
     }
 
-    .menuzord-menu li.catalogo-menu .fa {
+    .menuzord-menu li.catalogo-menu .fas {
         display: none;
     }
 
@@ -245,14 +245,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*-------------- END menu prodotti a vista -------------*/
 
 
-.simplemenu, .simplemenu * {
+.simplemenu {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
 }
 
-.simplemenu .fa {
-    font: normal normal normal 0.8rem FontAwesome !important;
-}
+/*.simplemenu .fa, .simplemenu .fas {
+    font: normal normal normal 0.8rem 'Font Awesome 5 Free' !important;
+}*/
 
 .simplemenu > ul > li {
     padding: 6px 25px;
@@ -610,23 +610,23 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         &:extend(.pulsanti-scorrimento:hover);
     }
 
-    .tp-leftarrow.square:before {
-        content: "\f104";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
-        margin-left: -5px;
-    }
+.tp-leftarrow.square:before {
+    content: "\f104";
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left: -5px;
+}
 
-    .tp-rightarrow.square:before {
-        content: "\f105";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
-        margin-left: 5px;
-    }
+.tp-rightarrow.square:before {
+    content: "\f105";
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left: 5px;
+}
 
     /*----------------------------------
 ------ PULSANTE IMAGE HOVER --------

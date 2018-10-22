@@ -217,13 +217,13 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     color: #f3c649;
   }
   .menuzord-menu li.catalogo-menu .indicator::before {
-    font-family: 'FontAwesome';
-    content: "\f0d8";
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Font Awesome 5 Free';
+    /*content: "\f0d8";*/
     font-weight: 400;
     content: "\f0de";
+    /*content: "\f107";*/
   }
-  .menuzord-menu li.catalogo-menu .fa {
+  .menuzord-menu li.catalogo-menu .fas {
     display: none;
   }
   .menuzord-menu li.catalogo-menu ul {
@@ -271,14 +271,13 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   }
 }
 /*-------------- END menu prodotti a vista -------------*/
-.simplemenu,
-.simplemenu * {
+.simplemenu {
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
-.simplemenu .fa {
-  font: normal normal normal 0.8rem FontAwesome !important;
-}
+/*.simplemenu .fa, .simplemenu .fas {
+    font: normal normal normal 0.8rem 'Font Awesome 5 Free' !important;
+}*/
 .simplemenu > ul > li {
   padding: 6px 25px;
   float: left;
@@ -710,7 +709,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 }
 .tp-leftarrow.square:before {
   content: "\f104";
-  font-family: FontAwesome;
+  font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: normal;
   text-decoration: inherit;
@@ -718,7 +717,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 }
 .tp-rightarrow.square:before {
   content: "\f105";
-  font-family: FontAwesome;
+  font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: normal;
   text-decoration: inherit;
