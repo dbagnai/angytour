@@ -161,6 +161,23 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 --------------- MENU --------------
 ----------------------------------*/
+/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
+.headerspacer {
+  padding-top: calc(141px + 48px);
+}
+/*--------- END ---------*/
+/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
+/*.headerspacer {
+    padding-top: calc(141px);
+}*/
+@media (max-width: 1179px) {
+  .headerspacer {
+    padding-top: 90px;
+  }
+}
+#divContainerb1 {
+  height: calc(70vh - 141px) !important;
+}
 .menuzord,
 .menuzord * {
   font-family: 'Fira Sans', sans-serif;
@@ -190,6 +207,70 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-weight: 400;
   color: #077777;
 }
+/*MENU PRODOTTI A VISTA*/
+@media (min-width: 1025px) {
+  .menuzord-menu li.catalogo-menu .indicator {
+    bottom: -28px;
+    position: absolute;
+    font-size: 25px;
+    margin-left: calc(-50% + 7px);
+    color: #f3c649;
+  }
+  .menuzord-menu li.catalogo-menu .indicator::before {
+    font-family: 'FontAwesome';
+    content: "\f0d8";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    content: "\f0de";
+  }
+  .menuzord-menu li.catalogo-menu .fa {
+    display: none;
+  }
+  .menuzord-menu li.catalogo-menu ul {
+    display: block !important;
+    width: calc(100% + 40px);
+    left: -20px;
+    background-color: #f3c649;
+    opacity: 1 !important;
+    border: none;
+    padding: 10px 55px;
+  }
+  .menuzord-menu li.catalogo-menu ul li {
+    display: inline-block;
+    float: right;
+    clear: none;
+    width: auto;
+    margin-left: 10px;
+  }
+  .menuzord-menu li.catalogo-menu ul li a {
+    padding: 14px 14px 14px 35px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
+    background: url(/images/icon-piatti.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
+    background: url(/images/icon-tavoli.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
+    background: url(/images/icon-lampada.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
+    background: url(/images/icon-vaso.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
+    background: url(/images/icon-oggettistica.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+  .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
+    background: url(/images/icon-natale.png) center left no-repeat !important;
+    background-size: 25px !important;
+  }
+}
+/*-------------- END menu prodotti a vista -------------*/
 .simplemenu,
 .simplemenu * {
   font-family: 'Fira Sans', sans-serif;
@@ -347,6 +428,32 @@ button:focus {
 button:hover {
   cursor: pointer;
 }
+/*---------- TTITOLETTI VIRGOLETTAI -----------*/
+.quote-marks {
+  font-size: 2.4rem !important;
+  line-height: 3rem !important;
+  color: #032f2f !important;
+}
+.quote-marks::before {
+  content: "“";
+  font-family: Georgia, serif;
+  margin-top: 20px;
+  position: absolute;
+  margin-left: -55px;
+  font-weight: 500;
+  font-size: 100px;
+  color: #077777;
+}
+.quote-marks::after {
+  content: "”";
+  font-family: Georgia, serif;
+  margin-top: 40px;
+  position: absolute;
+  margin-left: 15px;
+  font-weight: 500;
+  font-size: 100px;
+  color: #077777;
+}
 /*.divbuttonstyle a, */
 a.divbuttonstyle,
 .divbuttonstyle,
@@ -477,7 +584,16 @@ footer .divbuttonstyle:hover {
 .btn .btn-black:visited,
 .btn .btn-black:focus,
 .btn-black-outline:hover,
-.btn .btn-black:hover {
+.btn .btn-black:hover,
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
+.btn-banner:hover,
+.btn .btn-banner:hover {
   font-family: 'Roboto', sans-serif;
   letter-spacing: 2px;
   font-size: 0.8rem;
@@ -521,6 +637,26 @@ footer .divbuttonstyle:hover {
   text-decoration: none !important;
   border: 1px solid #098f8f;
 }
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
+.btn-banner:hover,
+.btn .btn-banner:hover {
+  background: #ffc107 !important;
+  font-size: 1.1vw !important;
+  color: #fff !important;
+}
+.btn-banner:hover,
+.btn .btn-banner:hover {
+  color: #032f2f !important;
+  border-color: #032f2f;
+  opacity: 0.78;
+  text-decoration: none !important;
+}
 @media (min-width: 1025px) {
   .buttonmenu {
     background: #098f8f !important;
@@ -550,7 +686,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
   background: #fff !important;
   border: 1px solid #032f2f;
   color: #032f2f !important;
-  width: 42px;
+  width: 42px !important;
   text-align: center;
   border-radius: 50%;
   margin: 5px;
@@ -618,7 +754,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 .work-image:hover:after,
 ul li .work-image:hover:after,
 .imgovercontainer:hover:after {
-  z-index: 799 !important;
+  z-index: 2 !important;
   /*background: url(/images/link.png) center center no-repeat !important;*/
   background: url(/images/link1.png) center center no-repeat !important;
   /*background: url(/images/link2.png) center center no-repeat !important;
@@ -1383,13 +1519,15 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
   }
-  .menuzord-menu a:not(.btn):not(.product-thumb) {
+  /*in caso dialog sottomenu normale*/
+  /*.menuzord-menu a:not(.btn):not(.product-thumb) {
+            position: relative;
+            padding: 8px 14px !important;
+        }*/
+  /*in caso dialog sottomenu prodotti a vista*/
+  .menuzord-menu a {
     position: relative;
     padding: 8px 14px !important;
-  }
-  .menuzord-menu ul.dropdown li {
-    font-size: 1rem;
-    padding: 8px 0;
   }
   .menuzord-menu a:hover {
     color: #077777;

@@ -111,6 +111,28 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 --------------- MENU --------------
 ----------------------------------*/
+
+/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
+.headerspacer {
+    padding-top: calc(141px + 48px);
+}
+/*--------- END ---------*/
+
+/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
+/*.headerspacer {
+    padding-top: calc(141px);
+}*/
+
+@media (max-width:1179px) {
+    .headerspacer {
+        padding-top: 90px;
+    }
+}
+
+#divContainerb1 {
+    height: calc(70vh - 141px) !important;
+}
+
 .menuzord, .menuzord * {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
@@ -144,6 +166,84 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     font-weight: @submenu-weight;
     color: @submenu-hover-color;
 }
+
+/*MENU PRODOTTI A VISTA*/
+@media (min-width: 1025px) {
+    .menuzord-menu li.catalogo-menu .indicator {
+        bottom: -28px;
+        position: absolute;
+        font-size: 25px;
+        margin-left: calc(-50% + 7px);
+        color: #f3c649;
+    }
+
+    .menuzord-menu li.catalogo-menu .indicator::before {
+        font-family: 'FontAwesome';
+        content: "\f0d8";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 400;
+        content: "\f0de";
+    }
+
+    .menuzord-menu li.catalogo-menu .fa {
+        display: none;
+    }
+
+    .menuzord-menu li.catalogo-menu ul {
+        display: block !important;
+        width: calc(100% + 40px);
+        left: -20px;
+        background-color: #f3c649;
+        opacity: 1 !important;
+        border: none;
+        padding: 10px 55px;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li {
+        display: inline-block;
+        float: right;
+        clear: none;
+        width: auto;
+        margin-left: 10px;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li a {
+        padding: 14px 14px 14px 35px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
+        background: url(/images/icon-piatti.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
+        background: url(/images/icon-tavoli.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
+        background: url(/images/icon-lampada.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
+        background: url(/images/icon-vaso.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
+        background: url(/images/icon-oggettistica.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
+        background: url(/images/icon-natale.png) center left no-repeat !important;
+        background-size: 25px !important;
+    }
+}
+
+/*-------------- END menu prodotti a vista -------------*/
+
 
 .simplemenu, .simplemenu * {
     font-family: @menu-font;
@@ -302,6 +402,35 @@ button:hover {
     cursor: pointer;
 }
 
+/*---------- TTITOLETTI VIRGOLETTAI -----------*/
+.quote-marks {
+    font-size: 2.4rem !important;
+    line-height: 3rem !important;
+    color: @primary-color !important;
+}
+
+.quote-marks::before {
+    content: "“";
+    font-family: Georgia, serif;
+    margin-top: 20px;
+    position: absolute;
+    margin-left: -55px;
+    font-weight: 500;
+    font-size: 100px;
+    color: @secondary-color;
+}
+
+.quote-marks::after {
+    content: "”";
+    font-family: Georgia, serif;
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 100px;
+    color: @secondary-color;
+}
+
 /*.divbuttonstyle a, */
 a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="button"], button.btn, .btn-primary, div.divbuttonstyle, div.divbuttonstyle:visited, button.divbuttonstyle,
 /*.divbuttonstyle a:visited,*/ a.divbuttonstyle:visited, .divbuttonstyle:visited, btn:visited, input:visited[type="submit"], input:visited[type="button"], button.btn:visited, .btn-primary:visited, div.divbuttonstyle:visited, button.divbuttonstyle:visited,
@@ -410,6 +539,21 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     border: 1px solid @bg-button-color;
 }
 
+.btn-banner, .btn-banner:active, .btn-banner:visited, .btn-banner:focus .btn .btn-banner, .btn .btn-banner:active, .btn .btn-banner:visited, .btn .btn-banner:focus {
+    &:extend(.btn-black-outline);
+    background: #ffc107 !important;
+    font-size: 1.1vw !important;
+    color: @button-outline-hover-color !important;
+}
+
+.btn-banner:hover, .btn .btn-banner:hover {
+    &:extend(.btn-banner);
+    color: @button-outline-color !important;
+    border-color: @bg-button-outline-hover-color;
+    opacity: 0.78;
+    text-decoration: none !important;
+}
+
 @media (min-width: 1025px) {
     .buttonmenu {
         background: @bg-button-color !important;
@@ -439,7 +583,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         background: @white-color !important;
         border: 1px solid @button-outline-color;
         color: @button-outline-color !important;
-        width: 42px;
+        width: 42px !important;
         text-align: center;
         border-radius: 50%;
         margin: 5px;
@@ -516,7 +660,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 }
 
 .work-image:hover:after, ul li .work-image:hover:after, .imgovercontainer:hover:after {
-    z-index: 799 !important;
+    z-index: 2 !important;
     /*background: url(/images/link.png) center center no-repeat !important;*/
     background: url(/images/link1.png) center center no-repeat !important;
     /*background: url(/images/link2.png) center center no-repeat !important;
@@ -1400,14 +1544,16 @@ b, strong {
             transition: all 0.35s ease;
         }
 
-        .menuzord-menu a:not(.btn):not(.product-thumb) {
+        /*in caso dialog sottomenu normale*/
+        /*.menuzord-menu a:not(.btn):not(.product-thumb) {
             position: relative;
             padding: 8px 14px !important;
-        }
+        }*/
 
-        .menuzord-menu ul.dropdown li {
-            font-size: 1rem;
-            padding: 8px 0;
+        /*in caso dialog sottomenu prodotti a vista*/
+        .menuzord-menu a {
+            position: relative;
+            padding: 8px 14px !important;
         }
 
         .menuzord-menu a:hover {
