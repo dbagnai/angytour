@@ -366,6 +366,16 @@ p, p.lead, .lead p {
     font-weight: @body-weight;
     line-height: 1.4 !important;
 }
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+ 
+ 
 
 body, html, button, input, select, textarea {
     &:extend(p);

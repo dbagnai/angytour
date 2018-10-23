@@ -391,6 +391,13 @@ textarea {
   font-weight: 300;
   line-height: 1.4 !important;
 }
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+}
 body,
 html,
 button,
