@@ -36,6 +36,7 @@ jQuery(document).ready(function ($) {
         align: "left",
         scrollable: true,
         indicatorFirstLevel: "<i class='fa fa-angle-down'></i>",
+        //indicatorFirstLevel: "<i class='fas fa-2x fa-sort-up'></i>",
         indicatorSecondLevel: "<i class='fa fa-angle-right'></i>",
         mobilebuttonclass: "mobilebtn",
         mobilebuttontext: "<i class='fa fa-bars'></i>"

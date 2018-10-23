@@ -210,20 +210,18 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
   .menuzord-menu li.catalogo-menu .indicator {
-    bottom: -28px;
+    bottom: -29px;
     position: absolute;
     font-size: 25px;
     margin-left: calc(-50% + 7px);
     color: #f3c649;
   }
-  .menuzord-menu li.catalogo-menu .indicator::before {
+  .menuzord-menu li.catalogo-menu .indicator:before {
     font-family: 'Font Awesome 5 Free';
-    /*content: "\f0d8";*/
-    font-weight: 400;
+    font-weight: 900;
     content: "\f0de";
-    /*content: "\f107";*/
   }
-  .menuzord-menu li.catalogo-menu .fas {
+  .menuzord-menu li.catalogo-menu .fa {
     display: none;
   }
   .menuzord-menu li.catalogo-menu ul {

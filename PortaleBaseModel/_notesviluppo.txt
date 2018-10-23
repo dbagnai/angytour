@@ -1,9 +1,13 @@
 
 
+update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
+
+
+
+
+
 VERIFICA SULLA TRASPOSIZIONE DEL DB ACCESS
 - ricontrollare i nomi dei parametri nelle query se scritti bene ripetto alla query !!!!!
-
-
 ----------------------
 -- riguardare i campi nullabe rispetto a qelli di access nel database
 -- controllare dove nel vecchio acces metteva campo default per data oggi (datetime('now', 'localtime'))
