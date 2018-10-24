@@ -157,6 +157,28 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background: @submenu-color;
 }
 
+.menuzord-menu ul.dropdown,
+.menuzord-menu ul.dropdown li ul.dropdown {
+    border-color: @secondary-color;
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 10px 0 20px;
+    display: none;
+    position: absolute;
+    z-index: 99;
+    min-width: 180px;
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid @secondary-color;
+    border-top: 1px dashed @secondary-color;
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+.menuzord-menu ul.dropdown li {
+    font-size: 1rem;
+    padding: 12px 0;
+}
+
 .menuzord-menu ul.dropdown li a {
     font-weight: @submenu-weight;
     color: @submenu-color;
@@ -626,18 +648,20 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     content: "\f104";
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     text-decoration: inherit;
     margin-left: -5px;
+    line-height: 42px;
 }
 
 .tp-rightarrow.square:before {
     content: "\f105";
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     text-decoration: inherit;
     margin-left: 5px;
+    line-height: 42px;
 }
 
     /*----------------------------------
