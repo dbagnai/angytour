@@ -341,10 +341,12 @@ div#btn-menumobile {
 #btn-menumobile .fa-bars {
   transform: rotate(0deg);
   transition: transform 0.3s linear;
+  font-size: 1.5rem;
 }
 #btn-menumobile .fa-times {
   transform: rotate(180deg);
   transition: transform 0.3s linear;
+  font-size: 1.5rem;
 }
 /*---------------------------------
 ------- LOGO AZIENDA TESTI --------
