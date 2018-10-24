@@ -179,7 +179,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   height: calc(70vh - 141px) !important;
 }
 .menuzord,
-.menuzord * {
+.menuzord * ~ .menuzord:not(i) {
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
@@ -206,6 +206,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .menuzord-menu ul.dropdown li:hover > a {
   font-weight: 400;
   color: #077777;
+}
+.menuzord i {
+  font-family: 'Font Awesome 5 Free';
 }
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
@@ -269,13 +272,15 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   }
 }
 /*-------------- END menu prodotti a vista -------------*/
-.simplemenu {
+.simplemenu,
+.simplemenu * ~ .simplemenu:not(i) {
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
-/*.simplemenu .fa, .simplemenu .fas {
-    font: normal normal normal 0.8rem 'Font Awesome 5 Free' !important;
-}*/
+.simplemenu .fa,
+.simplemenu .fas {
+  font: normal normal 900 0.8rem 'Font Awesome 5 Free' !important;
+}
 .simplemenu > ul > li {
   padding: 6px 25px;
   float: left;
@@ -844,10 +849,21 @@ ul.footer-category-list {
   font-size: 0.9em;
 }
 .footer .footer-col .footer-content .footer-category-list li {
-  padding: 2px 0;
+  padding: 4px 0;
   position: relative;
   line-height: normal;
   border-bottom: none;
+  padding-left: 14px;
+  text-indent: -14px;
+}
+.footer .footer-col .footer-content .footer-category-list li a {
+  margin-left: 0px;
+}
+.footer .footer-col .footer-content .footer-category-list li a:before {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  padding-right: 5px;
 }
 .footer .footer-col .footer-title {
   color: #098f8f;
@@ -1489,11 +1505,15 @@ select.form-control:not([size]):not([multiple]) {
   background-color: #fff;
   position: relative;
 }
-.faq-section .card {
+.faq-section .card,
+#collapse_faq .card {
   background-color: #fff;
-  border: 1px solid #90cdcd;
+  border: none;
   border-radius: 0px;
   margin-bottom: -1px;
+}
+#collapse_faq .card {
+  border: 1px solid #90cdcd;
 }
 .faq-section .card .title {
   background-color: #098f8f !important;

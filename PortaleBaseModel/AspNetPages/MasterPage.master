@@ -766,7 +766,7 @@
                                 <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                             </div>
                             <asp:Panel runat="server" ID="pnlNewsletterHome" Visible="true">
-                                <p>
+                                <p class="pb-2">
                                     <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
                                 </p>
                                 <%--

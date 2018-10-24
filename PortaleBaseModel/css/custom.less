@@ -133,7 +133,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     height: calc(70vh - 141px) !important;
 }
 
-.menuzord, .menuzord * {
+.menuzord, .menuzord * ~ .menuzord:not(i) {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
 }
@@ -165,6 +165,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .menuzord-menu ul.dropdown li:hover > a {
     font-weight: @submenu-weight;
     color: @submenu-hover-color;
+}
+
+.menuzord i {
+    font-family: 'Font Awesome 5 Free';
 }
 
 /*MENU PRODOTTI A VISTA*/
@@ -243,14 +247,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*-------------- END menu prodotti a vista -------------*/
 
 
-.simplemenu {
+.simplemenu, .simplemenu * ~ .simplemenu:not(i) {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
 }
 
-/*.simplemenu .fa, .simplemenu .fas {
-    font: normal normal normal 0.8rem 'Font Awesome 5 Free' !important;
-}*/
+.simplemenu .fa, .simplemenu .fas {
+    font: normal normal 900 0.8rem 'Font Awesome 5 Free' !important;
+}
 
 .simplemenu > ul > li {
     padding: 6px 25px;
@@ -769,12 +773,25 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
         font-size: 0.9em;
     }
 
-    .footer .footer-col .footer-content .footer-category-list li {
-        padding: 2px 0;
-        position: relative;
-        line-height: normal;
-        border-bottom: none;
-    }
+.footer .footer-col .footer-content .footer-category-list li {
+    padding: 4px 0;
+    position: relative;
+    line-height: normal;
+    border-bottom: none;
+    padding-left: 14px;
+    text-indent: -14px;
+}
+
+.footer .footer-col .footer-content .footer-category-list li a {
+    margin-left: 0px;
+}
+
+.footer .footer-col .footer-content .footer-category-list li a:before {
+    content: "\f105";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    padding-right: 5px
+}
 
     .footer .footer-col .footer-title {
         color: @title-footer-color;
@@ -1514,12 +1531,17 @@ b, strong {
         position: relative;
     }
 
-    .faq-section .card {
-        background-color: @white-color;
-        border: 1px solid @bg-secondary-color;
-        border-radius: 0px;
-        margin-bottom: -1px;
-    }
+.faq-section .card {
+    background-color: @white-color;
+    border: none;
+    border-radius: 0px;
+    margin-bottom: -1px;
+}
+
+#collapse_faq .card {
+    &:extend(.faq-section .card);
+    border: 1px solid @bg-secondary-color;
+}
 
     .faq-section .card .title {
         background-color: @bg-primary-color !important;
