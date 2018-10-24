@@ -201,7 +201,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .menuzord-menu ul.dropdown,
 .menuzord-menu ul.dropdown li ul.dropdown {
-  border-color: #077777;
+  border-color: #077777 !important;
   list-style: none;
   margin: 10px 0 0 0;
   padding: 10px 0 20px;

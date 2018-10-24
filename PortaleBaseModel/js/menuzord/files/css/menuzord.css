@@ -539,6 +539,7 @@ License: http://codecanyon.net/licenses
             /* Dropdown items */
             .menuzord-responsive .menuzord-menu ul.dropdown li {
                 position: relative;
+                padding: 0;
             }
 
                 .menuzord-responsive .menuzord-menu ul.dropdown li a {
