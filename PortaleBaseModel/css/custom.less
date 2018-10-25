@@ -114,7 +114,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
 .headerspacer {
-    padding-top: calc(141px + 48px);
+    /*padding-top: calc(141px + 48px);*/
+    padding-top: calc(141px + 82px);
 }
 /*--------- END ---------*/
 
@@ -133,7 +134,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     height: calc(70vh - 141px) !important;
 }
 
-.menuzord, .menuzord * ~ .menuzord:not(i) {
+.menuzord, .menuzord *, .menuzord:not(i) {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
 }
@@ -196,11 +197,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
     .menuzord-menu li.catalogo-menu .indicator {
-        bottom: -31px;
+        bottom: -28px;
         position: absolute;
-        font-size: 25px;
+        font-size: 25px !important;
         margin-left: calc(-50% + 7px);
-        color: #f3c649;
+        color: #f3c649 !important;
     }
 
     .menuzord-menu li.catalogo-menu .indicator:before {
@@ -232,37 +233,37 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     }
 
     .menuzord-menu li.catalogo-menu ul li a {
-        padding: 14px 14px 14px 35px !important;
+        padding: 14px 14px 14px 40px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
         background: url(/images/icon-piatti.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
         background: url(/images/icon-tavoli.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
         background: url(/images/icon-lampada.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
         background: url(/images/icon-vaso.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
         background: url(/images/icon-oggettistica.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
         background: url(/images/icon-natale.png) center left no-repeat !important;
-        background-size: 25px !important;
+        background-size: 32px !important;
     }
 }
 
@@ -601,9 +602,9 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 @media (min-width: 1025px) {
-    .buttonmenu {
+    .buttonmenu, a .buttonmenu {
         background: @bg-button-color !important;
-        color: @button-color !important;
+        font-size: @menu-size !important;
         border: 1px solid @bg-button-color;
         -webkit-border-radius: 25px;
         -moz-border-radius: 25px;
@@ -615,8 +616,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         color: @button-hover-color !important;
     }
 
-    .menuzord.white .menuzord-menu > li:hover > a.buttonmenu {
-        color: #fff !important;
+    .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+        color: @white-color !important;
     }
 }
 
@@ -1236,7 +1237,8 @@ b, strong {
 }
 
 .count {
-    color: @bg-primary-color;
+    font-family: @menu-font !important;
+    color: @menu-color;
     border: 1px solid @bg-primary-color;
     position: absolute;
     float: right;
@@ -1252,6 +1254,10 @@ b, strong {
     -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
     box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
     font-size: 0.8rem;
+}
+
+.count:hover {
+    font-family: @menu-font !important;
 }
 
 /*------------------------------------------------------*/
@@ -1643,57 +1649,56 @@ b, strong {
             font-weight: 500 !important;
         }
 
-        .menuzord-menu ul.dropdown li a, .menuzord-menu ul.dropdown li a:before,
-        .menuzord-menu ul.dropdown li a:after {
-            border: none;
-            padding: 14px !important;
-        }
+            .menuzord-menu ul.dropdown li a, .menuzord-menu ul.dropdown li a:before,
+            .menuzord-menu ul.dropdown li a:after {
+                border: none;
+                padding: 14px !important;
+            }
+            /*opzione 1*/
+            .menuzord-menu a:before,
+            .menuzord-menu a:after {
+                height: 14px;
+                width: 14px;
+                position: absolute;
+                content: '';
+                -webkit-transition: all 0.35s ease;
+                transition: all 0.35s ease;
+                opacity: 0;
+            }
 
-        /*opzione 1*/
-        .menuzord-menu a:before,
-        .menuzord-menu a:after {
-            height: 14px;
-            width: 14px;
-            position: absolute;
-            content: '';
-            -webkit-transition: all 0.35s ease;
-            transition: all 0.35s ease;
-            opacity: 0;
-        }
+            .menuzord-menu li a:before {
+                left: 0;
+                top: 0;
+                border-left: 2px solid @secondary-color;
+                border-top: 2px solid @secondary-color;
+                -webkit-transform: translate(100%, 50%);
+                transform: translate(100%, 50%);
+            }
 
-        .menuzord-menu li a:before {
-            left: 0;
-            top: 0;
-            border-left: 2px solid @secondary-color;
-            border-top: 2px solid @secondary-color;
-            -webkit-transform: translate(100%, 50%);
-            transform: translate(100%, 50%);
-        }
+            .menuzord-menu li a:after {
+                right: 0;
+                bottom: 0;
+                border-right: 2px solid @secondary-color;
+                border-bottom: 2px solid @secondary-color;
+                -webkit-transform: translate(-100%, -50%);
+                transform: translate(-100%, -50%);
+            }
+            /*tolgo l'effetto al pulsante prenota*/
+            .menuzord-menu li:nth-child(6) a:before, .menuzord-menu li:nth-child(6) a:after {
+                border: none;
+            }
 
-        .menuzord-menu li a:after {
-            right: 0;
-            bottom: 0;
-            border-right: 2px solid @secondary-color;
-            border-bottom: 2px solid @secondary-color;
-            -webkit-transform: translate(-100%, -50%);
-            transform: translate(-100%, -50%);
-        }
-        /*tolgo l'effetto al pulsante prenota*/
-        .menuzord-menu li:nth-child(6) a:before, .menuzord-menu li:nth-child(6) a:after {
-            border: none;
-        }
-
-        .menuzord-menu li a:hover:before,
-        .menuzord-menu li .current a:before,
-        .menuzord-menu li a:hover:after,
-        .menuzord-menu li .current a:after {
-            -webkit-transform: translate(0%, 0%);
-            transform: translate(0%, 0%);
-            opacity: 1;
-            border-color: @menu-hover-color;
-        }
-        /*opzione 2*/
-        /*.menuzord-menu a:before,
+            .menuzord-menu li a:hover:before,
+            .menuzord-menu li .current a:before,
+            .menuzord-menu li a:hover:after,
+            .menuzord-menu li .current a:after {
+                -webkit-transform: translate(0%, 0%);
+                transform: translate(0%, 0%);
+                opacity: 1;
+                border-color: @menu-hover-color;
+            }
+            /*opzione 2*/
+            /*.menuzord-menu a:before,
     .menuzord-menu a:after {
         height: 1px;
         position: absolute;
@@ -1720,7 +1725,7 @@ b, strong {
     .menuzord-menu .current a:after {
         width: 100%;
     }*/
-    }
+        }
 
     /*----------------------------------
 --------------- FORM ---------------

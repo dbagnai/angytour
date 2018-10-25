@@ -163,7 +163,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ----------------------------------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
 .headerspacer {
-  padding-top: calc(141px + 48px);
+  /*padding-top: calc(141px + 48px);*/
+  padding-top: calc(141px + 82px);
 }
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
@@ -179,7 +180,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   height: calc(70vh - 141px) !important;
 }
 .menuzord,
-.menuzord * ~ .menuzord:not(i) {
+.menuzord *,
+.menuzord:not(i) {
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
@@ -234,11 +236,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
   .menuzord-menu li.catalogo-menu .indicator {
-    bottom: -31px;
+    bottom: -28px;
     position: absolute;
-    font-size: 25px;
+    font-size: 25px !important;
     margin-left: calc(-50% + 7px);
-    color: #f3c649;
+    color: #f3c649 !important;
   }
   .menuzord-menu li.catalogo-menu .indicator:before {
     font-family: 'Font Awesome 5 Free';
@@ -265,31 +267,31 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     margin-left: 10px;
   }
   .menuzord-menu li.catalogo-menu ul li a {
-    padding: 14px 14px 14px 35px !important;
+    padding: 14px 14px 14px 40px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
     background: url(/images/icon-piatti.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
     background: url(/images/icon-tavoli.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
     background: url(/images/icon-lampada.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
     background: url(/images/icon-vaso.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
     background: url(/images/icon-oggettistica.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
     background: url(/images/icon-natale.png) center left no-repeat !important;
-    background-size: 25px !important;
+    background-size: 32px !important;
   }
 }
 /*-------------- END menu prodotti a vista -------------*/
@@ -698,9 +700,10 @@ footer .divbuttonstyle:hover {
   text-decoration: none !important;
 }
 @media (min-width: 1025px) {
-  .buttonmenu {
+  .buttonmenu,
+  a .buttonmenu {
     background: #098f8f !important;
-    color: #fff !important;
+    font-size: 1rem !important;
     border: 1px solid #098f8f;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
@@ -711,7 +714,7 @@ footer .divbuttonstyle:hover {
     background-color: #86f7f7 !important;
     color: #000 !important;
   }
-  .menuzord.white .menuzord-menu > li:hover > a.buttonmenu {
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span {
     color: #fff !important;
   }
 }
@@ -1247,7 +1250,8 @@ strong {
   }
 }
 .count {
-  color: #098f8f;
+  font-family: 'Fira Sans', sans-serif !important;
+  color: #032f2f;
   border: 1px solid #098f8f;
   position: absolute;
   float: right;
@@ -1263,6 +1267,9 @@ strong {
   -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
   box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
   font-size: 0.8rem;
+}
+.count:hover {
+  font-family: 'Fira Sans', sans-serif !important;
 }
 /*------------------------------------------------------*/
 .carrello-go-launch {
