@@ -183,7 +183,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Fira Sans', sans-serif;
   border-color: #90cdcd !important;
 }
-.menuzord.white .menuzord-menu > li > a {
+.menuzord.white .menuzord-menu > li > a,
+.menuzord.white .menuzord-menu > li > a span {
   color: #032f2f;
   font-family: 'Fira Sans', sans-serif;
   font-size: 1rem;
