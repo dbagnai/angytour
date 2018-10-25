@@ -307,6 +307,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   float: left;
   border-right: 1px solid #90cdcd;
 }
+.simplemenu > ul > li:nth-last-child(1) {
+  border-right: none;
+}
+@media screen and (max-width: 961px) {
+  .simplemenu > ul > li {
+    border-right: none;
+  }
+}
 .simplemenu > ul > li > ul > li {
   padding: 4px;
 }
