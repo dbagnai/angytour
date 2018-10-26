@@ -14,5 +14,9 @@
   {
     "outputFile": "css/custom.css",
     "inputFile": "css/custom.less"
+  },
+  {
+    "outputFile": "css/custom-pwa.css",
+    "inputFile": "css/custom-pwa.less"
   }
 ]
