@@ -276,12 +276,12 @@ public partial class AspNetPages_weblist : CommonPage
         Literal lit = null;
         ModificaFiltroJS();
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        AssociaDatiSocial();
 
         switch (Tipologia)
         {
             case "rif000001": //Simil prodotti x app
                 if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-sm-12";
@@ -302,7 +302,6 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
             case "rif000005":
 
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -332,7 +331,6 @@ public partial class AspNetPages_weblist : CommonPage
 
             case "rif000003":
             case "rif000004":
-                AssociaDatiSocial();
 
                 column1.Visible = false;
                 column2.Visible = false;
@@ -363,7 +361,6 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
 
             case "rif000006":
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -391,7 +388,6 @@ public partial class AspNetPages_weblist : CommonPage
 
             case "rif000007":
 
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -417,7 +413,6 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
 
             case "rif000008":
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -458,7 +453,6 @@ public partial class AspNetPages_weblist : CommonPage
 
             case "rif000009":
 
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -483,7 +477,6 @@ public partial class AspNetPages_weblist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
             default:
-                AssociaDatiSocial();
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";

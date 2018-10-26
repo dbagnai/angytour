@@ -203,7 +203,6 @@
                     </div>
                 </div>
             </div>--%>
-
             <div id="menuzord" class="menuzord menuzord-responsive white pb-3 pb-sm-0" style="display: none;">
                 <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
                     <div id="divlogoBrand" class="fulllogobckdark"></div>
