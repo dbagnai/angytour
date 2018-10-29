@@ -3,6 +3,7 @@
     EnableTheming="true" Culture="it-IT" Inherits="_webdetail" Title="" EnableEventValidation="false" %>
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <div class="row">
         <div class="col-md-1 col-sm-1">
@@ -23,11 +24,13 @@
         });
     </script>
 </asp:Content>
+
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 
     <div class="row justify-content-center" id="divSezioneSchedaContenuto">

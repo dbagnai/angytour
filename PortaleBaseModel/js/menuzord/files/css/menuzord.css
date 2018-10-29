@@ -139,7 +139,7 @@ License: http://codecanyon.net/licenses
         min-width: 180px;
         white-space: nowrap;
         background: #fff;
-        margin-top: 12px;
+        margin-top: 10px;
         padding-bottom: 10px;
         padding-top: 10px;
         border: 1px solid;
@@ -539,6 +539,7 @@ License: http://codecanyon.net/licenses
             /* Dropdown items */
             .menuzord-responsive .menuzord-menu ul.dropdown li {
                 position: relative;
+                padding: 0;
             }
 
                 .menuzord-responsive .menuzord-menu ul.dropdown li a {

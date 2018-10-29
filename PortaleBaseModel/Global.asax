@@ -609,7 +609,8 @@
           "~/css/mbr-additional.css",
           "~/css/landing.css",
           "~/css/custom1.css",
-          "~/css/custom.css"
+          "~/css/custom.css",
+          "~/css/custom-pwa.css"
        );
     }
 

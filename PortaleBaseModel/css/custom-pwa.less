@@ -88,25 +88,82 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 /*---------------------------------
------------ FIXED - TOP -----------
+--------------- BODY --------------
 ----------------------------------*/
-.fixedtop {
-    background-color: @bg-primary-color;
+body {
+    padding-bottom: 60px;
+}
+
+/*---------------------------------
+-- NAVIGAZIONE - FIXED - BOTTOM ---
+----------------------------------*/
+.fixedbottom {
+    background-color: @white-color;
     position: fixed;
-    top: 0px;
-    height: 40px;
-    width: 100%;
-    top: 0px;
+    height: 60px;
+    bottom: 0px;
     z-index: 9999;
     overflow: visible;
     width: 100%;
     font-size: 0.8rem;
     font-weight: 400;
+    border-top: 1px solid @bg-primary-color;
 }
-.fixedtop .form-control, .form-control:focus {
+.fixedbottom .form-control, .form-control:focus {
     border: none;
     background-color: #fff
 }
+
+.fixedbottom .nav-link {
+    height: 60px;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.iconhomepwa {
+    background-image: url("/images/pwa/homepwa.png");
+}
+.iconcallpwa {
+    background-image: url("/images/pwa/callpwa.png");
+}
+.iconnotificationpwa {
+    background-image: url("/images/pwa/notificationpwa.png");
+}
+.iconpinpwa {
+    background-image: url("/images/pwa/pinpwa.png");
+}
+.iconsearchpwa {
+    background-image: url("/images/pwa/searchpwa.png");
+}
+.iconwritepwa {
+    background-image: url("/images/pwa/writepwa.png");
+}
+
+/*---------------------------------
+---- MENU + LOGO - FIXED - TOP ----
+----------------------------------*/
+.fixednav {
+    top: 0px;
+}
+/* spengo l'icona del menu a tendina */
+#btn-menumobile .fa-bars {
+    display: none;
+}
+
+@media (max-width: 1179px) {
+    .fulllogobckdark {
+        margin-left: auto !important;
+    }
+}
+
+
+
+
+
+
+
+
 
 /*---------------------------------
 --------------- MENU --------------
@@ -114,22 +171,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
 .headerspacer {
-    /*padding-top: calc(141px + 48px);*/
-    padding-top: calc(141px + 82px);
+    padding-top: 0;
 }
 /*--------- END ---------*/
-
-/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
-/*.headerspacer {
-    padding-top: calc(141px);
-}*/
-
-@media (max-width:1179px) {
-    .headerspacer {
-        padding-top: 90px;
-    }
-}
-
 #divContainerb1 {
     height: calc(70vh - 141px) !important;
 }

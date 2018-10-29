@@ -30,6 +30,7 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
         <div class="" runat="server" id="columnsingle">
+            
             <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
         </div>
     </div>
