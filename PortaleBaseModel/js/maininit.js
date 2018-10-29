@@ -1093,42 +1093,42 @@ function InitIsotope() {
 
 //----- ruota carrello -----
 
-$(function () {
-    $(".button-carrello, .button-carrello1").click(function () {
-        $('.button-carrello-animate').addClass('carrello-go-rotate');
-        setTimeout(RemoveClass, 1000);
-    });
-    function RemoveClass() {
-        $('.button-carrello-animate').removeClass("carrello-go-rotate");
-    }
-});
+//$(function () {
+//    $(".button-carrello, .button-carrello1").click(function () {
+//        $('.button-carrello-animate').addClass('carrello-go-rotate');
+//        setTimeout(RemoveClass, 1000);
+//    });
+//    function RemoveClass() {
+//        $('.button-carrello-animate').removeClass("carrello-go-rotate");
+//    }
+//});
 
-//----- aggiungi n° colli -----
+////----- aggiungi n° colli -----
 
-$(function () {
-    $('#carrello-click .button-carrello, .button-carrello1, #carrellos1plus').on("click", function () {
-        addOneToThings();
-    })
-});
+//$(function () {
+//    $('#carrello-click .button-carrello, .button-carrello1, #carrellos1plus').on("click", function () {
+//        addOneToThings();
+//    })
+//});
 
-function addOneToThings() {
-    var countSpan = $('.count');
-    var currentThings = parseInt(countSpan.text());
-    currentThings++;
-    countSpan.text(currentThings);
-}
+//function addOneToThings() {
+//    var countSpan = $('.count');
+//    var currentThings = parseInt(countSpan.text());
+//    currentThings++;
+//    countSpan.text(currentThings);
+//}
 
-//----- sottrai n° colli -----
+////----- sottrai n° colli -----
 
-$(function () {
-    $('#carrellos1minus').on("click", function () {
-        subOneToThings();
-    })
-});
+//$(function () {
+//    $('#carrellos1minus').on("click", function () {
+//        subOneToThings();
+//    })
+//});
 
-function subOneToThings() {
-    var countSpan = $('.count');
-    var currentThings = parseInt(countSpan.text());
-    currentThings--;
-    countSpan.text(currentThings);
-}
+//function subOneToThings() {
+//    var countSpan = $('.count');
+//    var currentThings = parseInt(countSpan.text());
+//    currentThings--;
+//    countSpan.text(currentThings);
+//}

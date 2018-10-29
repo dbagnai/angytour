@@ -199,11 +199,22 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     context.Response.Write((output));
                     break;
                 case "showtotal":
-                    output = VisualizzaTotaliCarrello(context);
-                    context.Response.Write((output));
+                    string totale = CommonPage.VisualizzaTotaliCarrello(context);
+                    string pezzi = CommonPage.VisualizzaPezziCarrello(context);
+                    jreturncontainercarrello jr = new jreturncontainercarrello();
+                    jr.totale = totale;
+                    jr.pezzi = pezzi;
+                    string result = Newtonsoft.Json.JsonConvert.SerializeObject(jr, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    context.Response.Write((result));
                     break;
                 case "showtotalforproduct":
-                    output = VisualizzaTotaliCarrello(context, sidprodotto, sidcombined, sidcarrello);
+                    output = CommonPage.VisualizzaTotaliCarrello(context, sidprodotto, sidcombined, sidcarrello);
                     context.Response.Write((output));
                     break;
                 case "getpriceforproduct":
@@ -227,24 +238,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
         }
     }
-    public static string VisualizzaTotaliCarrello(HttpContext context, string idprodotto = "", string idcombined = "", string idcarrello = "")
-    {
-        string ret = "";
-        string sessionid = "";
-        string trueIP = "";
-
-        long lprod = 0;
-        long.TryParse(idprodotto, out lprod);
-        long lcarr = 0;
-        long.TryParse(idcarrello, out lcarr);
-
-        CommonPage.CaricaRiferimentiCarrello(context.Request, context.Session, ref sessionid, ref trueIP);
-        WelcomeLibrary.DAL.eCommerceDM ecmDM = new WelcomeLibrary.DAL.eCommerceDM();
-        WelcomeLibrary.DOM.CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, lprod, idcombined, lcarr);
-        ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { CommonPage.CalcolaTotaleCarrello(context.Request, context.Session, carrello) }) + " €";
-        return ret;
-    }
-
+   
 
 
     public bool IsReusable

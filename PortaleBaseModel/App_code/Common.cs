@@ -1790,6 +1790,7 @@ public class CommonPage : Page
         }
         return true;
     }
+  
     /// <summary>
     /// Calcola i totali del carrello con vari costi accessori per la procedura di ordine
     /// </summary>
@@ -1894,6 +1895,23 @@ public class CommonPage : Page
 
         return totalesmaltimento;
     }
+    public static string VisualizzaTotaliCarrello(HttpContext context, string idprodotto = "", string idcombined = "", string idcarrello = "")
+    {
+        string ret = "";
+        string sessionid = "";
+        string trueIP = "";
+
+        long lprod = 0;
+        long.TryParse(idprodotto, out lprod);
+        long lcarr = 0;
+        long.TryParse(idcarrello, out lcarr);
+
+        CommonPage.CaricaRiferimentiCarrello(context.Request, context.Session, ref sessionid, ref trueIP);
+        WelcomeLibrary.DAL.eCommerceDM ecmDM = new WelcomeLibrary.DAL.eCommerceDM();
+        WelcomeLibrary.DOM.CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, lprod, idcombined, lcarr);
+        ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { CommonPage.CalcolaTotaleCarrello(context.Request, context.Session, carrello) }) + " €";
+        return ret;
+    }
     public static double CalcolaTotaleCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, CarrelloCollection carrello)
     {
         string sessionid = "";
@@ -1911,6 +1929,40 @@ public class CommonPage : Page
 
         return totale;
     }
+    public static string VisualizzaPezziCarrello(HttpContext context, string idprodotto = "", string idcombined = "", string idcarrello = "")
+    {
+        string ret = "";
+        string sessionid = "";
+        string trueIP = "";
+
+        long lprod = 0;
+        long.TryParse(idprodotto, out lprod);
+        long lcarr = 0;
+        long.TryParse(idcarrello, out lcarr);
+
+        CommonPage.CaricaRiferimentiCarrello(context.Request, context.Session, ref sessionid, ref trueIP);
+        WelcomeLibrary.DAL.eCommerceDM ecmDM = new WelcomeLibrary.DAL.eCommerceDM();
+        WelcomeLibrary.DOM.CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP, lprod, idcombined, lcarr);
+        ret = CommonPage.CalcolaPezziCarrello(context.Request, context.Session, carrello).ToString();
+        return ret;
+    }
+    public static long CalcolaPezziCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, CarrelloCollection carrello)
+    {
+        string sessionid = "";
+        string trueIP = "";
+        CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
+        eCommerceDM ecom = new eCommerceDM();
+        if (carrello == null || carrello.Count == 0)
+            carrello = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
+
+        long pezzi = 0;
+        foreach (Carrello c in carrello)
+        {
+            pezzi += c.Numero;
+        }
+        return pezzi;
+    }
+
     private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello, Cliente cli = null) // da modificare per gestione sconti commerciali!!!!
     {
         double valoresconto = 0;

@@ -5,6 +5,14 @@ using System.Text;
 
 namespace WelcomeLibrary.DOM
 {
+
+    public class jreturncontainercarrello
+    {
+        public string totale { set; get; }
+        public string pezzi { set; get; }
+
+
+    }
     [Serializable]
     public class TotaliCarrello
     {
