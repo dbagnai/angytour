@@ -996,7 +996,7 @@ namespace WelcomeLibrary.UF
                                         //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
                                     }
                             }
-                        } 
+                        }
 #endif
                         //////////////////////////////////////
                         //Se presente la quesrystring pagino con quella (PRIORITARA)
@@ -2497,7 +2497,7 @@ namespace WelcomeLibrary.UF
                             controllo = resultinfo[prop[0]];
                         if (controllo == "true")
                         {
-                            if (valore[0] != "0")
+                            if (valore[0] != "" && valore[0] != "0")
                                 //ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N0}", new object[] { valore[0] }) + ' ' + unit;
                                 ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:N0}", new object[] { valore[0] }) + ' ' + unit;
                         }
@@ -2706,7 +2706,7 @@ namespace WelcomeLibrary.UF
                     try
                     {
                         string tipobase = "rif000001";
-                        if (prop.Count > 0) //opzionalemnte passo la categoria nel primo myvalue
+                        if (prop.Count > 0 && prop[0] != "")//opzionalemnte passo la categoria nel primo myvalue
                             tipobase = prop[0];
                         List<Prodotto> plist = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == tipobase && p.Lingua == Lingua);
                         if (plist != null)
