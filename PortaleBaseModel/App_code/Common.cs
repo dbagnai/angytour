@@ -1425,7 +1425,7 @@ public class CommonPage : Page
         return ret;
     }
 
-    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false)
+    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false, bool perstampa = false)
     {
 
         string sessionid = "";
@@ -1473,37 +1473,57 @@ public class CommonPage : Page
                     catch { }
                 }
 
-                if (!nofoto)
+                if (!perstampa)
                 {
-                    sb.Append("<a target=\"_blank\"   href=\"" +
-                        linkofferta
-                           + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
+                    if (!nofoto)
+                    {
+                        sb.Append("<a target=\"_blank\"   href=\"" +
+                            linkofferta
+                               + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
+                        sb.Append(" <div class=\"work-image\">");
+                        sb.Append("<img alt=\"" + testoofferta + "\" Style=\"width: auto; height: auto; max-width: 100%; max-height: 100%;\" ");
+                        sb.Append(" src=\"");
+                        sb.Append(imgofferta + "\" ");
+                        sb.Append("\" />");
 
-                    sb.Append(" <div class=\"work-image\">");
+                        sb.Append(" </div>");
 
-                    sb.Append("<img alt=\""
-                        +
-                      testoofferta
-                        + "\" Style=\"width: auto; height: auto; max-width: 100%; max-height: 100%;\" ");
-                    sb.Append(" src=\"");
-                    sb.Append(imgofferta + "\" ");
-                    sb.Append("\" />");
-
-                    sb.Append(" </div>");
-
-                    sb.Append(" </a>");
+                        sb.Append(" </a>");
+                    }
+                    sb.Append(" <div class=\"clearfix\"></div>");
+                    sb.Append(" <div class=\"product-details\" style=\"position:absolute; bottom:15px; width:calc(100% - 31px); background:rgba(0, 0, 0, 0.50); color:#fff; padding:8px; text-align:center;\">");
+                    sb.Append(" <span class=\"product-name\" style=\"display:none\"><b>");
+                    sb.Append(titoloofferta);
+                    sb.Append(" </b></span>");
                 }
+                else
+                {
+                    if (!nofoto)
+                    {
+                        sb.Append("<a target=\"_blank\"   href=\"" +
+                            linkofferta
+                               + "\"  class=\"product-thumb pull-left\"  >");
+                        sb.Append("<img alt=\""
+                            +
+                          testoofferta
+                            + "\" Style=\"width: auto; height: auto; max-width: 60px; max-height: 60px;\" ");
+                        sb.Append(" src=\"");
+                        sb.Append(imgofferta + "\" ");
+                        sb.Append("\" />");
+                        sb.Append(" </a>");
+                    }
+
+                    sb.Append(" <div class=\"product-details\">");
+                    sb.Append(" <h3 class=\"product-name\" style=\"font-size:14px\">");
+                    sb.Append(titoloofferta);
+                    sb.Append(" </h3>");
+
+                }
+
+
                 //sb.Append(" <p class=\"product-calc muted\">");
                 //sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 //sb.Append(" </p>");
-
-                sb.Append(" <div class=\"clearfix\"></div>");
-
-
-                sb.Append(" <div class=\"product-details\" style=\"position:absolute; bottom:15px; width:calc(100% - 31px); background:rgba(0, 0, 0, 0.50); color:#fff; padding:8px; text-align:center;\">");
-                sb.Append(" <span class=\"product-name\" style=\"display:none\"><b>");
-                sb.Append(titoloofferta);
-                sb.Append(" </b></span>");
 
 
                 //sb.Append(" <div class=\"product-categories muted\">");
@@ -1560,7 +1580,10 @@ public class CommonPage : Page
                 //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
                 //sb.Append(" </div>");
 
-                sb.Append(" <p class=\"product-calc muted\" style=\"font-size:1rem; color:#fff; padding:8px; text-align:center;\">");
+                sb.Append(" <p class=\"product-calc muted\" ");
+                if (!perstampa)
+                    sb.Append(" style =\"font-size:1rem; color:#fff; padding:8px; text-align:center;\"");
+                sb.Append(">");
                 sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 sb.Append(" </p>");
 
