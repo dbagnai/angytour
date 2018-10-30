@@ -253,14 +253,14 @@ body {
   top: 0;
   z-index: 1;
 }
-.pwa .textBanner {
+.banner-top-pwa .textBanner {
   z-index: 99;
   padding: 30px 10% 50px 10%;
   position: absolute;
   left: 0;
   top: 80px;
 }
-.pwa .small2 {
+.banner-top-pwa .small2 {
   color: #032f2f !important;
   font-family: 'Fira Sans', sans-serif !important;
   font-size: 2rem !important;
@@ -270,8 +270,8 @@ body {
   padding: 10px 20px;
   border-radius: 10px;
 }
-.pwa .big2,
-.pwa a.divbuttonstyle {
+.banner-top-pwa .big2,
+.banner-top-pwa a.divbuttonstyle {
   display: none !important;
 }
 /*---------------------------------
