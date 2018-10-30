@@ -433,10 +433,12 @@ function OnSuccessAddsub(datain, destination, callback) {
         url: pathAbs + carrellohandlerpath + "?Lingua=" + lng + "&Azione=showtotal",
         data: {},
         success: function (data) {
-
-            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(data);
-            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
-
+            if (data != null && data != '') {
+                var dataparsed = JSON.parse(data);
+                $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(dataparsed.totale);
+                $("[class*='carrellomaincontainer']").find("[class*='count']").html(dataparsed.pezzi);
+                //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            }
             if (callback != null)
                 callback(datain);
         },
@@ -499,10 +501,12 @@ function OnSuccesscarrelloNopostback(response, destination, callback) {
         // dataType: "json",
         data: {},
         success: function (data) {
-            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(data);
-
-
-            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            if (data != null && data != '') {
+                var dataparsed = JSON.parse(data);
+                $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(dataparsed.totale);
+                $("[class*='carrellomaincontainer']").find("[class*='count']").html(dataparsed.pezzi);
+                //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            }
             if (callback != null)
                 callback(true);
         },
@@ -522,8 +526,12 @@ function GetCarrelloTotal(callback) {
         url: pathAbs + carrellohandlerpath + "?Lingua=" + lng + "&Azione=showtotal",
         data: {},
         success: function (data) {
-            $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").text(data);
-            //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            if (data != null && data != '') {
+                var dataparsed = JSON.parse(data);
+                $("[class*='carrellomaincontainer']").find("[class*='carrellototalvalue']").html(dataparsed.totale);
+                $("[class*='carrellomaincontainer']").find("[class*='count']").html(dataparsed.pezzi);
+                //$("#containerCarrello").find("[id*='litTotalHigh']")[0].innerText = data;
+            }
             if (callback != null)
                 callback(data);
         },

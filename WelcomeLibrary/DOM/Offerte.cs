@@ -1219,8 +1219,8 @@ namespace WelcomeLibrary.DOM
             _tmp["CodiceComune"] = this.CodiceComune.ToString();
             _tmp["CodiceProvincia"] = this.CodiceProvincia.ToString();
             _tmp["CodiceRegione"] = this.CodiceRegione.ToString();
-            _tmp["_CodiceCategoria"] = this._CodiceCategoria.ToString();
-            _tmp["_CodiceCategoria2Liv"] = this._CodiceCategoria2Liv.ToString();
+            _tmp["CodiceCategoria"] = this._CodiceCategoria.ToString();
+            _tmp["CodiceCategoria2Liv"] = this._CodiceCategoria2Liv.ToString();
             _tmp["CodiceProdotto"] = this.CodiceProdotto.ToString();
             _tmp["DatitecniciGB"] = this.DatitecniciGB.ToString();
             _tmp["DatitecniciRU"] = this.DatitecniciRU.ToString();
