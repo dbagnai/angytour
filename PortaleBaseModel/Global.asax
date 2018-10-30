@@ -600,6 +600,7 @@
          "~/js/owl-carousel/owl-carousel/owl.carousel.css",
          "~/js/flexslider/flexslider.css",
          "~/js/magnify/css/magnify.css",
+         "~/js/maininit-pwa.js",
          "~/css/ashobiz/ashobiz.base.css",
          "~/css/ashobiz/ashobiz-176.css",
            "~/css/style1.css",

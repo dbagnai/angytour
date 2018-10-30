@@ -150,52 +150,84 @@ body {
 ----------------------------------*/
 .fixedbottom {
   background-color: #fff;
+  border-top: 1px solid #098f8f;
   position: fixed;
   height: 60px;
-  bottom: 0px;
+  bottom: -1px;
   z-index: 9999;
   overflow: visible;
   width: 100%;
   font-size: 0.8rem;
   font-weight: 400;
-  border-top: 1px solid #098f8f;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
 }
 .fixedbottom .form-control,
 .form-control:focus {
   border: none;
   background-color: #fff;
 }
-.fixedbottom .nav-link {
+.menu-bottom-icon-swg {
+  display: block !important;
+  width: 30px;
+  height: 25px;
+  fill: transparent;
+  stroke: #098f8f;
+  stroke-miterlimit: 10;
+  stroke-width: 15px;
+  margin: auto;
+}
+.menu-bottom-icon-swg:hover,
+.menu-bottom-icon-swg:active {
+  fill: #098f8f;
+}
+.menu-bottom-icon-swg:hover,
+.menu-bottom-icon-swg:active {
+  --color-1: #ebf6f6;
+  --size-1: 50px;
+}
+.container-write-icon-swg {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
   height: 60px;
-  background-size: 25px;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background-color: #f3c649;
+  bottom: 70px;
+  right: 10px;
+  z-index: 999;
+  border-radius: 50%;
+  -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
 }
-.iconhomepwa {
-  background-image: url("/images/pwa/homepwa.png");
-}
-.iconcallpwa {
-  background-image: url("/images/pwa/callpwa.png");
-}
-.iconnotificationpwa {
-  background-image: url("/images/pwa/notificationpwa.png");
-}
-.iconpinpwa {
-  background-image: url("/images/pwa/pinpwa.png");
-}
-.iconsearchpwa {
-  background-image: url("/images/pwa/searchpwa.png");
-}
-.iconwritepwa {
-  background-image: url("/images/pwa/writepwa.png");
+.write-icon-swg {
+  display: block !important;
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+  stroke: #f3c649;
+  stroke-miterlimit: 10;
+  stroke-width: 15px;
 }
 /*---------------------------------
 ---- MENU + LOGO - FIXED - TOP ----
 ----------------------------------*/
 .fixednav {
   top: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
+  -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
+  box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
 }
-/* spengo l'icona del menu a tendina */
+.fixednav-scroll {
+  background-color: #ffffff !important;
+  -webkit-box-shadow: 0 4px 6px -6px #222 !important;
+  -moz-box-shadow: 0 4px 6px -6px #222 !important;
+  box-shadow: 0 4px 6px -6px #222 !important;
+}
 #btn-menumobile .fa-bars {
   display: none;
 }
@@ -203,6 +235,44 @@ body {
   .fulllogobckdark {
     margin-left: auto !important;
   }
+  .fulllogobckdark-pwa-start {
+    background-size: 105% 105% !important;
+    margin: 25px auto 0 !important;
+  }
+}
+/*---------------------------------
+----------- BANNER -TOP -----------
+----------------------------------*/
+.mbr-overlay-gradient {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), #ffffff);
+  opacity: 1;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.pwa .textBanner {
+  z-index: 99;
+  padding: 30px 10% 50px 10%;
+  position: absolute;
+  left: 0;
+  top: 80px;
+}
+.pwa .small2 {
+  color: #032f2f !important;
+  font-family: 'Fira Sans', sans-serif !important;
+  font-size: 2rem !important;
+  font-weight: 300 !important;
+  line-height: 2.5rem !important;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.pwa .big2,
+.pwa a.divbuttonstyle {
+  display: none !important;
 }
 /*---------------------------------
 --------------- MENU --------------

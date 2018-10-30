@@ -57,6 +57,8 @@ jQuery(document).ready(function ($) {
             $('#divlogo').removeClass();
             $('.menuzord-menu').addClass('scrolled');
             $('#divlogoBrand').addClass('shrinklogo');
+            $('#mainnav').addClass('fixednav-scroll');
+            $('#divlogoBrand').removeClass('fulllogobckdark-pwa-start');
 
             //        $('#divlogo').addClass('shrinklogobck');
 
@@ -84,6 +86,8 @@ jQuery(document).ready(function ($) {
 
             $('.menuzord-menu').removeClass('scrolled');
             $('#divlogoBrand').removeClass('shrinklogo');
+            $('#mainnav').removeClass('fixednav-scroll');
+            $('#divlogoBrand').addClass('fulllogobckdark-pwa-start');
 
             //        if (sliderPresent) {
             //            $('#menuzord').addClass('white');
