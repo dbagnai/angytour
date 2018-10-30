@@ -229,8 +229,8 @@ function loadref(functocall) {
     }
 }
 */
- 
- //LOADREF FITTIZZIA CHE REPLICA SOLO LE CHIAMATE, SE LE VARIABILI JAVASCRIPT SONO INIETTATE DIRETTAMETNE IN PAGINA!!! ( potrebbe non essere chiamata senza problemi !!! serve solo per retrocompatibilità )
+
+//LOADREF FITTIZZIA CHE REPLICA SOLO LE CHIAMATE, SE LE VARIABILI JAVASCRIPT SONO INIETTATE DIRETTAMETNE IN PAGINA!!! ( potrebbe non essere chiamata senza problemi !!! serve solo per retrocompatibilità )
 function loadref(functocall) {
     var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
     //MEMORIZZO I DATI DELLA CHIAMATA
@@ -272,7 +272,7 @@ function loadref(functocall) {
         }
     }
 }
- 
+
 function initLingua(lingua) {
     lng = lingua || "I";
     moment.locale("it");
@@ -1469,24 +1469,21 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             valore[0] = dataitem[proprarr[0]];
                             var prop = [];
                             var formatfunc = "";
+                            if ($(this).attr("mybind1") != null)
+                                valore[1] = dataitem[$(this).attr("mybind1")];
+                            if ($(this).attr("mybind2") != null)
+                                valore[2] = dataitem[$(this).attr("mybind2")];
+                            if ($(this).attr("mybind3") != null)
+                                valore[3] = dataitem[$(this).attr("mybind3")];
 
+                            if ($(this).attr("myvalue") != null)
+                                prop[0] = $(this).attr("myvalue");
+                            if ($(this).attr("myvalue1") != null)
+                                prop[1] = $(this).attr("myvalue1");
+                            if ($(this).attr("myvalue2") != null)
+                                prop[2] = $(this).attr("myvalue2");
                             if ($(this).attr("format") != null) {
                                 formatfunc = $(this).attr("format");
-
-                                if ($(this).attr("mybind1") != null)
-                                    valore[1] = dataitem[$(this).attr("mybind1")];
-                                if ($(this).attr("mybind2") != null)
-                                    valore[2] = dataitem[$(this).attr("mybind2")];
-                                if ($(this).attr("mybind3") != null)
-                                    valore[3] = dataitem[$(this).attr("mybind3")];
-
-                                if ($(this).attr("myvalue") != null)
-                                    prop[0] = $(this).attr("myvalue");
-                                if ($(this).attr("myvalue1") != null)
-                                    prop[1] = $(this).attr("myvalue1");
-                                if ($(this).attr("myvalue2") != null)
-                                    prop[2] = $(this).attr("myvalue2");
-
                                 window[formatfunc](localObjects, valore, prop, function (ret) {
                                     if (ret != null && Array.isArray(ret) && ret.length > 0)
                                         valore = ret[0];
@@ -1773,6 +1770,29 @@ function formatviews(localObjects, valore, prop, callback) {
         }
     } catch (e) { };
     callback(retstring);
+}
+
+function formatdescrizionedirect(localObjects, valore, prop, callback) {
+    var retstring = "";
+    try {
+        var descrizione = valore[1];
+        if (prop[0] != undefined && prop[0] != null && prop[0] != "") {
+            if (descrizione.length >= parseInt(prop[0])) {
+                var i = parseInt(prop[0]); var j = 1; var stop = false;
+                while (j < 30 && !stop && i + j + 1 < descrizione.lenght) {
+                    if (descrizione.substring(i + j, i + j + 1) == ' ' || descrizione.substring(i + j, i + j + 1) == '.' || descrizione.substring(i + j, i + j + 1) == '\n') stop = true;
+                    j += 1;
+                }
+                descrizione = descrizione.substring(0, parseInt(prop[0]) + j) + " >>";
+            }
+            if (prop[2] != undefined && prop[2] != null && prop[2] == "nobreak")
+                retstring = descrizione.replace(/\n/g, "&nbsp;");
+            else
+                retstring = descrizione.replace(/\n/g, "<br/>");
+        }
+    } catch (e) { };
+    callback(retstring);
+
 }
 function formatdescrizione(localObjects, valore, prop, callback) {
     var retstring = "";

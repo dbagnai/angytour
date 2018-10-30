@@ -82,7 +82,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
 
     }
 
-    protected static string  TipopagaDisplay(object item)
+    protected static string TipopagaDisplay(object item)
     {
         if (item == null) return "";
         TotaliCarrello i = (TotaliCarrello)item;
@@ -128,10 +128,10 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     {
         return VisualizzaCarrello(codice);
     }
-    public static string VisualizzaCarrello(string codiceordine, bool nofoto = false)
+    public static string VisualizzaCarrello(string codiceordine, bool nofoto = false, bool perstampa = true)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(CommonPage.VisualizzaCarrello(null, null, codiceordine, nofoto));
+        sb.Append(CommonPage.VisualizzaCarrello(null, null, codiceordine, nofoto, "I", false, perstampa));
         return sb.ToString();
     }
     protected static string TestoSezione(string codicetipologia)
@@ -249,7 +249,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     //}
 
     [System.Web.Services.WebMethod]
-    public static string  PreparaStampa(string idcommerciale, string idcliente, string codiceordine, string datamin, string datamax)
+    public static string PreparaStampa(string idcommerciale, string idcliente, string codiceordine, string datamin, string datamax)
     {
         string ret = "";
         System.Text.StringBuilder sb = new StringBuilder();
