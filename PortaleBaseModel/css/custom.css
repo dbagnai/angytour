@@ -1754,6 +1754,14 @@ li input[type="radio"] {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
 }
+#divCommenti-totals h3 {
+  color: #032f2f;
+}
+.commenti-details-page div#divCommenti-head-ctrl {
+  background-color: #fff !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 /* -------------------------
     rounded button
     ------------------*/

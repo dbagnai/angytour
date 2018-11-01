@@ -214,10 +214,10 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-    <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15" runat="server" id="divContactBelow" clientidmode="static" visible="false" style="background-color: #efefef">
+    <div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
+    <div class="ui-15 bg-light-color" runat="server" id="divContactBelow" clientidmode="static" visible="false">
         <div class="container">
-            <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
+            <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-sm-8 tx-dark-color">
@@ -343,10 +343,10 @@
         </div>
     </div>
     <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject py-3" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        <div id="divCommenti" class="inject pt-5 commenti-details-page" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
     </asp:Panel>
-    <div class="bg-light-color" style="position: relative" id="divSuggeritiContainer">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
+    <div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
                     <div class="col-sm-12 col-12">
