@@ -233,6 +233,8 @@ function initcycleBanner(el, containerid) {
             height: h
         });
     });
+     
+
     setTimeout(function () {
         $('#' + el).parent().imagesLoaded(function () {
             $('#' + el).cycle();

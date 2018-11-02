@@ -23,6 +23,8 @@ public partial class login : CommonPage
         {
             //Prendiamo i dati dalla querystring
             Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
+            HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+            metarobots.Attributes["Content"] = "noindex,follow";
 
             #region SEZIONE MASTERPAGE GESTIONE
 

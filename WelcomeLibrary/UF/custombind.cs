@@ -2815,7 +2815,8 @@ namespace WelcomeLibrary.UF
             if (addelements != null)
                 foreach (KeyValuePair<string, string> kv in addelements)
                 {
-                    if (!jscommands.ContainsKey(kv.Key)) jscommands.Add(kv.Key, kv.Value);
+                    if (jscommands.ContainsKey(kv.Key)) jscommands.Remove(kv.Key);
+                    jscommands.Add(kv.Key, kv.Value);
                 }
 
 
@@ -2833,6 +2834,7 @@ namespace WelcomeLibrary.UF
 
         public static void AddInitjavascriptvariables(Dictionary<string, string> jscommands)
         {
+            if (jscommands.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
             jscommands.Add("NeededJSVars", "var cbindvapidPublicKey = '" + ConfigManagement.ReadKey("PublicKey") + "';\r\n");
 
         }
