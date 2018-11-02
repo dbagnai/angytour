@@ -524,7 +524,7 @@
                             </div>
                             <div class="col-sm-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
 
-                                <div class="lead text-white">
+                                <div class="big2 text-white">
                                     <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
                                 </div>
                                 <%-- <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a> --%>
