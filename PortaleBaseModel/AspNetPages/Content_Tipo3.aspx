@@ -80,7 +80,7 @@
 
                                                         <div class="row pb-3" runat="server" visible="true" id="divTitlemail">
                                                             <div class="col-sm-12">
-                                                                <div class="lead text-white">
+                                                                <div class="big2 text-white">
                                                                     <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
                                                                 </div>
                                                             </div>
