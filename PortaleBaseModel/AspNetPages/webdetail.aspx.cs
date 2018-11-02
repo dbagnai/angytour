@@ -885,6 +885,17 @@ public partial class _webdetail : CommonPage
             //if (CodiceTipologia == "rif000003") //Pagina copertina presente
             if (CodiceTipologia == "rif000001") //Pagina copertina presente
             {
+                if (item != null && !string.IsNullOrEmpty(item.Descrizione.ToLower().Trim()))
+                {
+                    Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "categorie " + item.Descrizione.ToLower().Trim());
+                    if (contentpertipologia != null && contentpertipologia.Id != 0)
+                    {
+                        Tabrif laddink = new Tabrif();
+                        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000");
+                        laddink.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
+                        links.Add(laddink);
+                    }
+                }
                 Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == CodiceTipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
                 if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
                 {

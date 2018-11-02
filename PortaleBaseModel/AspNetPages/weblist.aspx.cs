@@ -776,8 +776,20 @@ public partial class AspNetPages_weblist : CommonPage
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
-        if  (Tipologia == "rif000001") //Pagina copertina presente
+        if (Tipologia == "rif000001") //Pagina copertina presente
         {
+            if (sezione != null && !string.IsNullOrEmpty(sezione.Descrizione.ToLower().Trim()))
+            {
+                Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "categorie " + sezione.Descrizione.ToLower().Trim());
+                if (contentpertipologia != null && contentpertipologia.Id != 0)
+                {
+                    Tabrif laddink = new Tabrif();
+                    laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000");
+                    laddink.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
+                    links.Add(laddink);
+                }
+            }
+
             Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
             if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
             {
