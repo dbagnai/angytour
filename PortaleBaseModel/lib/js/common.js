@@ -2655,6 +2655,7 @@ function validateEmail(value) {
 
     return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
 }
+
 // Polyfills for deprecated escape/unescape() functions
 if (!window.unescape) {
     window.unescape = function (s) {

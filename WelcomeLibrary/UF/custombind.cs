@@ -2545,10 +2545,10 @@ namespace WelcomeLibrary.UF
                         string xmlvalue = valore[2];
                         string prezzo = valore[3];
                         double p = 0;
-                        double.TryParse(qtavendita, out p);
+                        double.TryParse(prezzo, out p);
                         double q = 0;
                         double.TryParse(qtavendita, out q);
-                        if (q == 0)
+                        if (q == 0 && qtavendita != "")
                             ret = "<div  class=\"button-carrello btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
                         else
                         {

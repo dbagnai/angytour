@@ -142,6 +142,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
         }
     }
+
     public string InjectedEndPageScripts()
     {
         Dictionary<string, string> addelements = new Dictionary<string, string>();
