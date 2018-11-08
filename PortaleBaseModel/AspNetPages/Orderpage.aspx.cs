@@ -632,10 +632,12 @@ public partial class AspNetPages_Orderpage : CommonPage
 
                     //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
                     pnlFormOrdine.Visible = false;
+                    output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
                     switch (Lingua)
                     {
                         case "I":
                             output.Text += "<div><br/>Ordine inviato correttamente. <br/>Sarete contattati a breve dal nostro personale.</div>";
+                           
                             break;
                         default:
                             output.Text += "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible.";

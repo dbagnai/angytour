@@ -275,6 +275,9 @@ function loadref(functocall) {
 
 function initLingua(lingua) {
     lng = lingua || "I";
+}
+function clearcache()
+{
     moment.locale("it");
     var clearlocalmem = $.getQueryString("clear");
     if (clearlocalmem == 'true')

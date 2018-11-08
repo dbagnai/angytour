@@ -184,6 +184,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
             output.Text = references.ResMan("Common", Lingua, "risposta_5");
+            output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
         }
 
 
