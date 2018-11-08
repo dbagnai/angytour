@@ -105,17 +105,17 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                     tagBanner.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "GESTIONE GALLERIA E BANNER";
                 }
-                else if (Request.FilePath.ToLower().Trim().Contains("gestioneclienti")  )
+                else if (Request.FilePath.ToLower().Trim().Contains("gestioneclienti"))
                 {
                     tagContatti.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "GESTIONE CLIENTI";
                 }
-                else if (Request.FilePath.ToLower().Trim().Contains("gestionenewsletter") )
+                else if (Request.FilePath.ToLower().Trim().Contains("gestionenewsletter"))
                 {
                     tagContatti.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "GESTIONE NEWSLETTER";
                 }
-                else if ( Request.FilePath.ToLower().Trim().Contains("storicoordini"))
+                else if (Request.FilePath.ToLower().Trim().Contains("storicoordini"))
                 {
                     tagContatti.Attributes.Add("class", "active open hover");
                     lblTitleSection.Text = "STORICO ORDINI";
@@ -131,7 +131,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                     lblTitleSection.Text = "DASHBOARD";
                 }
 
-               
+
             }
 
             litTrial.Text = WelcomeLibrary.STATIC.Global.TestTrial();
@@ -157,6 +157,8 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         //" becomes \x22
 
         String scriptRegVariables = "";
+        scriptRegVariables += string.Format("var lng = '{0}'", Lingua);
+        scriptRegVariables += "; " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + string.Format("loadvariables(b64ToUtf8('{0}'))", WelcomeLibrary.UF.dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
@@ -183,7 +185,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         //}
         //else
         //{
-            Response.Redirect("~/Error.aspx?Error=Utente non permesso");
+        Response.Redirect("~/Error.aspx?Error=Utente non permesso");
         //}
 
     }
