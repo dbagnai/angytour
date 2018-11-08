@@ -118,8 +118,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
 
         CaricaMenu();
-       // VisualizzaTotaliCarrello();
-      //  LoadJavascriptVariables();
+        // VisualizzaTotaliCarrello();
+        //  LoadJavascriptVariables();
         pnlRicerca.DataBind();
         divContattiMaster.DataBind();
         req1.DataBind();
@@ -145,6 +145,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //" becomes \x22
 
         String scriptRegVariables = "";
+        scriptRegVariables += "; " + string.Format("var lng = '{0}'", Lingua);
+        scriptRegVariables += "; " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
         scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1").Replace("'", "\\'"));
@@ -162,7 +164,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + string.Format("loadvariables(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
 
-        
+
         scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();

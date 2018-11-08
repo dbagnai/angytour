@@ -815,15 +815,14 @@
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
         <script>
             var makeRevLower = false;
-            pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
-            initLingua('<%= Lingua %>');
+           <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
+            initLingua('<%= Lingua %>');--%>
             jQuery(document).ready(function () {
                 loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');
                 <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
                 <%--  loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
             });
         </script>
-        <!-- FIne Librerie CMS management -->
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
