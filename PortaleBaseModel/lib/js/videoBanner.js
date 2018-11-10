@@ -129,14 +129,20 @@ function InitVideo(controlid, container)
     $('#' + container + 'Title').show();
     $(function () {
         var muteval = false;
+        jQuery("#" + controlid + "togglevol").addClass('btn-vol-on');
         var autoplay = true;
+        jQuery("#" + controlid + "toggleplay").addClass('btn-play-on');
+
         var volev = 50;
         var w = $(window).width();
         if (w <= 768) {
             muteval = true;
             autoplay = true;
             volev = 0;
+            jQuery("#" + controlid + "togglevol").toggleClass('btn-vol-on');
         }
+
+
         var options = {
             // mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
             playOnlyIfVisible: false,
@@ -144,12 +150,15 @@ function InitVideo(controlid, container)
             autoPlay: autoplay,
             vol: volev
         };
+
         //var options = {
         //    // mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
         //    playOnlyIfVisible: false 
         //};
+
         //myPlayer = jQuery(".player").YTPlayer(options);
         var myPlayer = jQuery("#" + controlid).YTPlayer(options);
+
         //var myPlayer = jQuery(".player").YTPlayer({
         //    onReady: function (player) {
         //    }
