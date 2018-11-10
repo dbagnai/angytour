@@ -628,9 +628,9 @@ namespace WelcomeLibrary.UF
                     return false;
 
                 if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("gif") || fileorigine.ToString().ToLower().EndsWith("png")))
-                    return false;  
+                    return false;
 
-                    bool existsanteprima = false;
+                bool existsanteprima = false;
                 if (System.IO.File.Exists(pathAnteprime + nomeAnteprima))
                     existsanteprima = true;
 
@@ -792,6 +792,60 @@ namespace WelcomeLibrary.UF
             }
         }
 
+        /// <summary>
+        /// Setta l'immagine di anteprima in base alla lingua
+        /// </summary>
+        /// <param name="offerte"></param>
+        /// <param name="Lingua"></param>
+        public static void ImpostaFotoAnteprimaPerLingua(ref OfferteCollection offerte, string Lingua)
+        {
+            // throw new NotImplementedException();
+            foreach (Offerte o in offerte)
+            {
+                if (o.FotoCollection_M != null && o.FotoCollection_M.Count > 0)
+                {
+
+                    switch (Lingua)
+                    {
+                        case "GB":
+                            Allegato agb = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-gb"));
+                            if (agb != null)
+                            {
+                                o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-")); //elimino le foto anteprima per tutte le lingue
+                                o.FotoCollection_M.FotoAnteprima = agb.NomeAnteprima;
+                                //if (o.FotoCollection_M.Count > 0)
+                                //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
+
+                                o.FotoCollection_M.Insert(0, agb);
+                                o.FotoCollection_M.FotoAnteprima = agb.NomeAnteprima;
+                                //o.FotoCollection_M.FotoAnteprima = agb.NomeFile;
+                            }
+                            break;
+                        case "RU":
+                            Allegato aru = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-ru"));
+                            if (aru != null)
+                            {
+                                o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-")); //elimino le foto anteprima per tutte le lingue
+                                o.FotoCollection_M.Insert(0, aru);
+                                o.FotoCollection_M.FotoAnteprima = aru.NomeAnteprima;
+                                //o.FotoCollection_M.FotoAnteprima = aru.NomeFile;
+                            }
+                            break;
+                        default:
+                            Allegato ait = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-it"));
+                            if (ait != null)
+                            {
+                                //Tolgo le foto che sono di altre lingue che non devono comparire nel caso della lingua base ( italiano )
+                                o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-"));//elimino le foto anteprima per tutte le lingue
+                                o.FotoCollection_M.Insert(0, ait);
+                                o.FotoCollection_M.FotoAnteprima = ait.NomeAnteprima;
+                                //o.FotoCollection_M.FotoAnteprima = ait.NomeFile;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
         public static string ComponiUrlAnteprima(object NomeAnteprima, string CodiceTipologia, string idOfferta, bool noanteprima = false, bool nonpdf = false)
         {
             string ritorno = "";
