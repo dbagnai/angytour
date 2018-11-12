@@ -244,6 +244,10 @@ body {
 ----------- BANNER -TOP -----------
 ----------------------------------*/
 .mbr-overlay-gradient {
+  display: none;
+}
+.banner-top-pwa .mbr-overlay-gradient {
+  display: block;
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0), #ffffff);
   opacity: 1;
   bottom: 0;
