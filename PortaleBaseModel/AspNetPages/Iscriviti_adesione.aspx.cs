@@ -94,7 +94,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
 
                 //Carico la galleria in masterpage corretta
                 //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "header-home", false, Lingua);
-                CaricaControlliJS();
+                //CaricaControlliJS();
 
                 //Titololetto di sezione e presentazione
                 RptDescrizione.Text = references.ResMan("Common",Lingua, "TestoIscrivi");

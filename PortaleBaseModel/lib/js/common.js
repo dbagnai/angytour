@@ -254,7 +254,7 @@ function loadref(functocall) {
         if (item.name.indexOf('.') == -1)
             (function wait() {
                 if (typeof window[item.name] === "function") {
-                    window[item.name].apply(this, args)//make the call
+                    $(document).ready(function () { window[item.name].apply(this, args); });
                 } else {
                     setTimeout(wait, 50);
                 }
@@ -264,7 +264,7 @@ function loadref(functocall) {
             (function wait() {
                 if (levelscopes1.length == 2)
                     if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
-                        window[levelscopes1[0]][levelscopes1[1]].apply(this, args);//make the call
+                        $(document).ready(function () { window[levelscopes1[0]][levelscopes1[1]].apply(this, args); });
                     } else {
                         setTimeout(wait, 50);
                     }
@@ -276,8 +276,7 @@ function loadref(functocall) {
 function initLingua(lingua) {
     lng = lingua || "I";
 }
-function clearcache()
-{
+function clearcache() {
     moment.locale("it");
     var clearlocalmem = $.getQueryString("clear");
     if (clearlocalmem == 'true')
@@ -2658,6 +2657,7 @@ function validateEmail(value) {
 
     return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
 }
+
 
 // Polyfills for deprecated escape/unescape() functions
 if (!window.unescape) {

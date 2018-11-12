@@ -2811,14 +2811,20 @@ namespace WelcomeLibrary.UF
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands
             // jscode += "console.log('inject from custom bind');\r\n";
-            AddInitjavascriptvariables(jscommands);
+
+            Dictionary<string, string> jscommandstmp = new Dictionary<string, string>();
+            AddInitjavascriptvariables(jscommandstmp);
             if (addelements != null)
                 foreach (KeyValuePair<string, string> kv in addelements)
                 {
-                    if (jscommands.ContainsKey(kv.Key)) jscommands.Remove(kv.Key);
-                    jscommands.Add(kv.Key, kv.Value);
+                    if (jscommandstmp.ContainsKey(kv.Key)) jscommandstmp.Remove(kv.Key);
+                    jscommandstmp.Add(kv.Key, kv.Value);
                 }
-
+            if (jscommandstmp != null)
+                foreach (KeyValuePair<string, string> kv in jscommandstmp)
+                {
+                    jscode += kv.Value + ";\r\n";
+                }
 
             if (jscommands != null)
                 foreach (KeyValuePair<string, string> kv in jscommands)
@@ -2831,7 +2837,6 @@ namespace WelcomeLibrary.UF
 
             return jscode;
         }
-
         public static void AddInitjavascriptvariables(Dictionary<string, string> jscommands)
         {
             if (jscommands.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
