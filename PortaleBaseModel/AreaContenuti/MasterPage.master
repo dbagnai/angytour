@@ -277,6 +277,7 @@
             };
         </script>
         <!-- dropzone-->
+        <%= InjectedStartPageScripts() %>
         <link href="/js/dropzone/dropzone.css" rel="stylesheet" />
         <script src="/js/dropzone/dropzone.js"></script>
         <script src="/lib/js/dropzonemng.js"></script>

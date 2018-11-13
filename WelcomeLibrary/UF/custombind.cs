@@ -2802,7 +2802,33 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
+        public static string CreaInitStringJavascriptOnly(Dictionary<string, string> addelements = null)
+        {
+            string jscode = "<script>//![CDATA[\r\n";
+            ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
+            //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
+            //jscommands
+            // jscode += "console.log('inject from custom bind');\r\n";
 
+            Dictionary<string, string> jscommandstmp = new Dictionary<string, string>();
+
+            if (addelements != null)
+                foreach (KeyValuePair<string, string> kv in addelements)
+                {
+                    if (jscommandstmp.ContainsKey(kv.Key)) jscommandstmp.Remove(kv.Key);
+                    jscommandstmp.Add(kv.Key, kv.Value);
+                }
+            if (jscommandstmp != null)
+                foreach (KeyValuePair<string, string> kv in jscommandstmp)
+                {
+                    jscode += kv.Value + ";\r\n";
+                }
+
+
+            jscode += "//]]></script>\r\n";
+
+            return jscode;
+        }
 
         public static string CreaInitStringJavascript(Dictionary<string, string> addelements = null)
         {
@@ -2813,6 +2839,7 @@ namespace WelcomeLibrary.UF
             // jscode += "console.log('inject from custom bind');\r\n";
 
             Dictionary<string, string> jscommandstmp = new Dictionary<string, string>();
+
             AddInitjavascriptvariables(jscommandstmp);
             if (addelements != null)
                 foreach (KeyValuePair<string, string> kv in addelements)
@@ -2826,6 +2853,7 @@ namespace WelcomeLibrary.UF
                     jscode += kv.Value + ";\r\n";
                 }
 
+
             if (jscommands != null)
                 foreach (KeyValuePair<string, string> kv in jscommands)
                 {
@@ -2837,6 +2865,7 @@ namespace WelcomeLibrary.UF
 
             return jscode;
         }
+
         public static void AddInitjavascriptvariables(Dictionary<string, string> jscommands)
         {
             if (jscommands.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
