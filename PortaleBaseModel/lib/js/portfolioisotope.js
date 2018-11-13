@@ -32,65 +32,64 @@ function injectPortfolioAndLoadinner(type, container, controlid, page, pagesize,
     //Correggo l'id dei controlli del template per l'inzializzazione dello scroller con id univoca e corretta
     $('#' + container).html('');
 
-    $('#' + container + 'Title').show();
-    $('#' + container).load(templateHtml, function () {
-        $('#' + container).find("[id^=replaceid]").each(function (index, text) {
-            var currentid = $(this).prop("id");
-            var replacedid = currentid.replace('replaceid', controlid);
-            $(this).prop("id", replacedid);
-        });
-        // InitIsotopeLocal(controlid);
+    //$('#' + container).load(templateHtml, function () {
+    //    $('#' + container).find("[id^=replaceid]").each(function (index, text) {
+    //        var currentid = $(this).prop("id");
+    //        var replacedid = currentid.replace('replaceid', controlid);
+    //        $(this).prop("id", replacedid);
+    //    });
 
-        //RICARICO LA PAGINA INIZIALE DALLA SESISONE SE PRESENTE INVECE DI PRENDERE QUELLA PASSATA NEI PARAMETRI
-        getfromsession('objfiltro', function (retval) {
-            var objfiltro = {};
-            var params = {};
-            if (retval != null && retval != '')
-                objfiltro = JSON.parse(retval);
-            params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
-            //Se presente prendo la pagina in sessione per la selezione di pagina iniziale
-            if (objfiltro != null && objfiltro.hasOwnProperty("page" + controlid)) {
-                var propname = "page" + controlid;
-                page = objfiltro[propname];
-            }
 
-            //Usiamo memoria globale indicizzata con l'id del controllo
-            var pagerdata = {};
-            pagerdata["page"] = page;
-            pagerdata["pagesize"] = pagesize;
-            pagerdata["totalrecords"] = 0;
-            pagerdata["enablepager"] = enablepager;
-            pagerdata["pagerconnectedid"] = connectedid;
-            globalObject[controlid + "pagerdata"] = pagerdata;
+    //RICARICO LA PAGINA INIZIALE DALLA SESISONE SE PRESENTE INVECE DI PRENDERE QUELLA PASSATA NEI PARAMETRI
+    getfromsession('objfiltro', function (retval) {
+        var objfiltro = {};
+        var params = {};
+        if (retval != null && retval != '')
+            objfiltro = JSON.parse(retval);
+        params = objfiltro; //Metto in params tutti i valori presenti nell'objfiltro in session
+        //Se presente prendo la pagina in sessione per la selezione di pagina iniziale
+        if (objfiltro != null && objfiltro.hasOwnProperty("page" + controlid)) {
+            var propname = "page" + controlid;
+            page = objfiltro[propname];
+        }
 
-            params.templateHtml = templateHtml;
-            params.container = container;/*Inserisco il nome del container nei parametri per uso successivo nel binding*/
-            params.tipologia = tipologia;
-            params.visualData = visualData;
-            params.visualPrezzo = visualPrezzo;
-            params.maxelement = maxelement;
-            params.listShow = listShow;
-            params.categoria = categoria;
-            params.categoria2Liv = categoria2Liv;
-            params.testoricerca = testoricerca;
-            params.vetrina = vetrina;
-            params.promozioni = promozioni;
-            params.mostviewed = mostviewed;
-            //params.regione = regione; //Preso da sessione
-            //params.caratteristica1 = caratteristica1;//Preso da sessione
-            globalObject[controlid + "params"] = params;
-            //console.log("injectPortfolioAndLoadinner params " + JSON.stringify(params));
+        //Usiamo memoria globale indicizzata con l'id del controllo
+        var pagerdata = {};
+        pagerdata["page"] = page;
+        pagerdata["pagesize"] = pagesize;
+        pagerdata["totalrecords"] = 0;
+        pagerdata["enablepager"] = enablepager;
+        pagerdata["pagerconnectedid"] = connectedid;
+        globalObject[controlid + "pagerdata"] = pagerdata;
 
-            if (enablepager == "true" || enablepager == true) {
-                var pagercontainer = container + "Pager";
-                InjectPagerPortfolio(pagercontainer, controlid);
-            }
-            else {
-                CaricaIsotopeData(controlid);
-            }
-        })
+        params.templateHtml = templateHtml;
+        params.container = container;/*Inserisco il nome del container nei parametri per uso successivo nel binding*/
+        params.tipologia = tipologia;
+        params.visualData = visualData;
+        params.visualPrezzo = visualPrezzo;
+        params.maxelement = maxelement;
+        params.listShow = listShow;
+        params.categoria = categoria;
+        params.categoria2Liv = categoria2Liv;
+        params.testoricerca = testoricerca;
+        params.vetrina = vetrina;
+        params.promozioni = promozioni;
+        params.mostviewed = mostviewed;
+        //params.regione = regione; //Preso da sessione
+        //params.caratteristica1 = caratteristica1;//Preso da sessione
+        globalObject[controlid + "params"] = params;
+        //console.log("injectPortfolioAndLoadinner params " + JSON.stringify(params));
 
-    });
+        if (enablepager == "true" || enablepager == true) {
+            var pagercontainer = container + "Pager";
+            InjectPagerPortfolio(pagercontainer, controlid);
+        }
+        else {
+            CaricaIsotopeData(controlid);
+        }
+    })
+
+    //});
 };
 
 function CaricaIsotopeData(controlid) {
