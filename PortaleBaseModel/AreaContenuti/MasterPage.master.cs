@@ -143,37 +143,57 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         }
     }
 
+
+    /// <summary>
+    /// Carico le chiamate di inizializzazione dalla memoria di binding del server in custombind
+    /// </summary>
+    /// <returns></returns>
     public string InjectedEndPageScripts()
     {
         Dictionary<string, string> addelements = new Dictionary<string, string>();
-        LoadJavascriptVariables(addelements);
+        LoadJavascriptVariablesEnd(addelements);
         string ret = WelcomeLibrary.UF.custombind.CreaInitStringJavascript(addelements);
         return ret;
     }
-    private void LoadJavascriptVariables(Dictionary<string, string> addelements = null)
+    public string InjectedStartPageScripts()
+    {
+        Dictionary<string, string> addelements = new Dictionary<string, string>();
+        LoadJavascriptVariablesStart(addelements);
+        string ret = WelcomeLibrary.UF.custombind.CreaInitStringJavascriptOnly(addelements);
+        return ret;
+    }
+    private void LoadJavascriptVariablesStart(Dictionary<string, string> addelements = null)
     {
         //However, if you want your JavaScript code to be independently escaped for any context, you could opt for the native JavaScript encoding:
         //' becomes \x27
         //" becomes \x22
 
         String scriptRegVariables = "";
-        scriptRegVariables += string.Format("var lng = '{0}'", Lingua);
-        scriptRegVariables += "; " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        scriptRegVariables += ";\r\n " + string.Format("var lng = '{0}'", Lingua);
+        scriptRegVariables += ";\r\n " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        scriptRegVariables += ";\r\n";
+
+        if (addelements == null) addelements = new Dictionary<string, string>();
+        addelements.Add("jsvarfrommasterstart", scriptRegVariables);
+
+    }
+
+    private void LoadJavascriptVariablesEnd(Dictionary<string, string> addelements = null)
+    {
+        //However, if you want your JavaScript code to be independently escaped for any context, you could opt for the native JavaScript encoding:
+        //' becomes \x27
+        //" becomes \x22
+
+        String scriptRegVariables = "";
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + string.Format("loadvariables(b64ToUtf8('{0}'))", WelcomeLibrary.UF.dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
 
-
         scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();
-        addelements.Add("jsvarfrommaster", scriptRegVariables);
+        addelements.Add("jsvarfrommasterend", scriptRegVariables);
 
-        //ClientScriptManager cs = Page.ClientScript;
-        //if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
-        //{
-        //    cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScript", scriptRegVariables, true);
-        //}
     }
 
     private void ImpostaVisualizzazione()
