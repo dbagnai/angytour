@@ -178,7 +178,7 @@ function BindFasciaBanner(el, localObjects) {
             });
     }
 
-    initcycleBanner(el, objfiltrotmp.containerid)
+    initcycleBanner(el, objfiltrotmp.containerid);
 
     //jQuery(document).ready(function () {
     //    $('#' + el).parent().imagesLoaded(function () {
