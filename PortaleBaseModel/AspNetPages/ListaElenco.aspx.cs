@@ -85,7 +85,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
                 if (int.TryParse(Pagina, out _p))
                 { PagerRisultati.CurrentPage = _p; }
 
-                CaricaControlliJS();
+                //CaricaControlliJS();
 
                 //#region SEZIONE MASTERPAGE GESTIONE
                 //if (!string.IsNullOrEmpty(Tipologia))

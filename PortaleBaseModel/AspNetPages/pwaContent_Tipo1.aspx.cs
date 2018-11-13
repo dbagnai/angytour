@@ -71,7 +71,7 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
                 //ContenutoPagina = CaricaValoreMaster(Request, Session, "ContenutoPagina");
                 //ContenutoPagina = ""; //Azzero il contenuto pagina per il rewriting egli url classici
 
-                CaricaControlliJS();
+                //CaricaControlliJS();
                 CaricaControlliServerside();
                 //  CaricaForms();
 

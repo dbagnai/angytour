@@ -797,18 +797,18 @@ public partial class AspNetPages_pwalist : CommonPage
                 }
             }
 
-            Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
-            if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
-            {
-                Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
-                if (contentpercategoria != null && contentpercategoria.Id != 0)
-                {
-                    Tabrif laddink = new Tabrif();
-                    laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
-                    laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
-                    links.Add(laddink);
-                }
-            }
+            //Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
+            //if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
+            //{
+            //    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
+            //    if (contentpercategoria != null && contentpercategoria.Id != 0)
+            //    {
+            //        Tabrif laddink = new Tabrif();
+            //        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
+            //        laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
+            //        links.Add(laddink);
+            //    }
+            //}
         }
 
         links.Add(actualpagelink);

@@ -28,7 +28,7 @@ public partial class index : CommonPage
             {
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", true, deflanguage);
                 //  CaricaControlliServerside();
-                CaricaControlliJS();
+                //CaricaControlliJS();
                 SettaTestoIniziale("Home");
                 InizializzaSeo();
                 //PulisciRegistrazionitemporanee();
