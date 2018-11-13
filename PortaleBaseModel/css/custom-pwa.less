@@ -52,7 +52,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 .tx-dark-color {
-    color: @bg-dark-color !important;
+    color: @primary-color !important;
 }
 
 .bd-primary-color {
@@ -141,11 +141,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-color: #f3c649;
     bottom: 70px;
-    right: 10px;
+    right: 15px;
     z-index: 999;
     border-radius: 50%;
     -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
@@ -154,8 +154,8 @@ body {
 }
 .write-icon-swg {
     display: block !important;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     fill: #fff;
     stroke: #f3c649;
     stroke-miterlimit: 10;
@@ -165,6 +165,9 @@ body {
 /*---------------------------------
 ---- MENU + LOGO - FIXED - TOP ----
 ----------------------------------*/
+#VerticalSpacer {
+    position: absolute;
+}
 .fixednav {
     top: 0px;
     background-color: rgba(255, 255, 255, 0);
@@ -232,8 +235,38 @@ body {
     display: none !important;
 }
 
+/*---------------------------------
+--------- GENERIC BANNER ----------
+----------------------------------*/
 
-
+ul.banner-pwa > li {
+    border-bottom: 1px solid @bg-secondary-color;
+}
+ul.banner-pwa > li:nth-last-child(1) {
+    border-bottom: none !important;
+}
+.banner-pwa .work-subcaption {
+    width: 100%;
+    height: auto;
+    padding: 0 15px 0 0;
+}
+.banner-pwa .work-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 10px;
+    font-family: 'Fira Sans', sans-serif;
+}
+.banner-pwa .work-desc {
+    line-height: 19px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    max-height: 54.4px;
+}
+.simplemenu > ul > li:nth-last-child(1)
 
 
 

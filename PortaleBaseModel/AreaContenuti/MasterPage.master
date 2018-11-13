@@ -667,6 +667,12 @@
                                                     <span class="menu-text">Banner Navigazione Principale</span></a>
                                                 <b class="arrow"></b>
                                             </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-pwa">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Principale PWA</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
 
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
