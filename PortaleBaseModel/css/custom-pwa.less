@@ -19,6 +19,12 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+@contrast-color-pwa: #f3c649;
+
+.bg-contrast-color {
+    background-color: @contrast-color-pwa !important
+} 
+
 .bg-primary-color {
     background-color: @bg-primary-color !important;
 }
@@ -39,6 +45,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-color: @bg-manual-secondary-color-fade !important;
 }
 
+.tx-contrast-color {
+    color: @contrast-color-pwa !important
+} 
+
 .tx-primary-color {
     color: @bg-primary-color !important;
 }
@@ -54,6 +64,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .tx-dark-color {
     color: @primary-color !important;
 }
+
+.bd-contrast-color {
+    border-color: @contrast-color-pwa !important
+} 
 
 .bd-primary-color {
     border-color: @bg-primary-color !important;
@@ -95,7 +109,96 @@ body {
 }
 
 /*---------------------------------
--- NAVIGAZIONE - FIXED - BOTTOM ---
+- NAVIGAZIONE - FIXED - TOP - PWA -
+----------------------------------*/
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.clear{
+  clear: both;
+}
+
+
+.slide-toggle{
+  display: none;
+}
+
+.slidemenu {
+    font-family: arial, sans-serif;
+    /*max-width: 600px;*/
+    margin: 0 auto 15px;
+    padding-top: 15px;
+    overflow: hidden;
+    background-color:@bg-light-color;
+}
+
+.slidemenu label {
+    width: 25%;
+    text-align: center;
+    display: block;
+    float: left;
+    color: @menu-color;
+    opacity: 0.2;
+}
+
+.slidemenu label:hover {
+    cursor: pointer;
+    color: @menu-color;
+}
+.slidemenu label span {
+    display: block;
+    padding: 5px 0 0;
+    height: min-content;
+}
+.slidemenu label .icon {
+    font-size: 20px;
+    border: solid 2px @menu-color;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    line-height: 45px !important;
+    border-radius: 50%;
+}
+
+/*Bar Style*/
+.slider {
+    width: 100%;
+    height: 5px;
+    display: block;
+    background: @bg-secondary-color;
+    margin-top: 0px;
+    border-radius: 5px;
+}
+.slider .bar {
+    width: 25%;
+    height: 5px;
+    background: @menu-color;
+    border-radius: 5px;
+}
+
+/*Animations*/
+.slidemenu label, .slider .bar {
+  transition: all 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+}
+
+/*Toggle*/
+.slidemenu .slide-toggle:checked + label{
+  opacity: 1;
+}
+.slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
+.slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 25%; }
+.slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 50%; }
+.slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }
+
+
+/*---------------------------------
+ NAVIGAZIONE - FIXED - BOTTOM - PWA
 ----------------------------------*/
 .fixedbottom {
     background-color: @white-color;
@@ -143,7 +246,7 @@ body {
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #f3c649;
+    background-color: @contrast-color-pwa;
     bottom: 70px;
     right: 15px;
     z-index: 999;
@@ -157,29 +260,62 @@ body {
     width: 25px;
     height: 25px;
     fill: #fff;
-    stroke: #f3c649;
+    stroke: @contrast-color-pwa;
     stroke-miterlimit: 10;
     stroke-width: 15px;
 }
 
+/*---------------------------------------
+ NAVIGAZIONE - SCHEDE - TOP - PAGE - PWA 
+---------------------------------------*/
+.nav-tabs {
+    border-bottom: 1px solid @bg-primary-color;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: @body-color;
+    font-weight: 600;
+    background-color: #fff;
+    border-color: @bg-primary-color @bg-primary-color #fff;
+}
+
+.nav-tabs .nav-link {
+    border-radius: .25rem .25rem 0 0 !important;
+    color: @body-color;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.2px;
+}
+
 /*---------------------------------
----- MENU + LOGO - FIXED - TOP ----
+  MENU + LOGO - FIXED - TOP - SITE 
 ----------------------------------*/
 #VerticalSpacer {
     position: absolute;
 }
-.fixednav {
+/*SCOMMENTARE CON BANNER TOP*/
+/*.fixednav {
     top: 0px;
     background-color: rgba(255, 255, 255, 0);
     -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
     -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
     box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0) !important;
+}*/
+/*COMMENTARE CON BANNER TOP*/
+.fixednav {
+    position: relative;
+    top: 0px;
+    background-color: @bg-primary-color !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    min-height: 60px;
 }
 .fixednav-scroll {
-    background-color: rgba(255, 255, 255, 1) !important;
-    -webkit-box-shadow: 0 4px 6px -6px #222 !important;
-    -moz-box-shadow: 0 4px 6px -6px #222 !important;
-    box-shadow: 0 4px 6px -6px #222 !important;
+    background-color: @bg-primary-color !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 #btn-menumobile .fa-bars {
@@ -190,16 +326,24 @@ body {
     .fulllogobckdark {
         margin-left: auto !important;
     }
-    .fulllogobckdark-pwa-start {
+    /*SCOMMENTARE CON BANNER TOP*/
+    /*.fulllogobckdark-pwa-start {
         background-size: 105% 105% !important;
         margin: 25px auto 0 !important;
-    }
+    }*/
 }
 
+.logo-top-pwa {
+    background: url(/images/main_logo_pwa.png) center center;
+    width: 206px;
+    height: 61px;
+    background-size: 206px 61px;
+    background-repeat: no-repeat;
+}
 /*---------------------------------
 ----------- BANNER -TOP -----------
 ----------------------------------*/
-.mbr-overlay-gradient{
+.mbr-overlay-gradient {
     display: none;
 }
 .banner-top-pwa .mbr-overlay-gradient {
@@ -251,20 +395,25 @@ ul.banner-pwa > li:nth-last-child(1) {
     padding: 0 15px 0 0;
 }
 .banner-pwa .work-title {
-    font-weight: 500;
+    /*font-family: 'Fira Sans', sans-serif;
+    font-weight: 500;*/
+    font-family: @base-font;
+    font-weight: 600;
     margin-bottom: 4px;
-    color: #333;
     font-size: 0.9rem;
-    line-height: 10px;
-    font-family: 'Fira Sans', sans-serif;
+    line-height: 14px;
+    letter-spacing: 0.2px;
 }
 .banner-pwa .work-desc {
     line-height: 19px;
     margin: 0;
     font-size: 0.9rem;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 400;
+    /*font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;*/
+    font-family: @base-font;
+    font-weight: 300;
     max-height: 54.4px;
+    letter-spacing: 0.2px;
 }
 .simplemenu > ul > li:nth-last-child(1)
 

@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="pwaMasterPage.master.cs" Inherits="_pwaMasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="pwaMasterPage.master.cs" Inherits="_pwaMasterPage" %>
 
 <!DOCTYPE html>
 <html runat="server" id="htmltag">
@@ -53,6 +53,7 @@
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecsspwa") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
+
 
         <!-- MENU - BOTTOM -->
         <div class="fixedbottom" id="divBottom">
@@ -237,7 +238,7 @@
             <%-- MENU TOP MOBILE - DISABILITATO SU APPLICAZIONE PWA --%>
             <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0" style="display: none;">
                 <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
-                    <div id="divlogoBrand" class="fulllogobckdark"></div>
+                    <div id="divlogoBrand" class="fulllogobckdark logo-top-pwa"></div>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right d-none">
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
@@ -321,6 +322,8 @@
                     <%-------FINE MENU-------%>
                     <%-----------------------%>
 
+
+
                     <%--<li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
                         <ul class="dropdown">
@@ -390,6 +393,35 @@
         <section class="body-wrapper">
 
             <!-- FINE MENU --->
+
+             <!-- MENU - TOP - PWA -->
+  <nav class="slidemenu">
+  
+  <!-- Item 1 -->
+  <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked/>
+  <label for="slide-item-1"><p class="icon">♬</p><span>Home</span></label>
+  
+  <!-- Item 2 -->
+  <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle"/>
+  <label for="slide-item-2"><p class="icon">★</p><span>Avvisi</span></label>
+  
+  <!-- Item 3 -->
+  <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle"/>
+  <label for="slide-item-3"><p class="icon">✈</p><span>Offerte</span></label>
+  
+  <!-- Item 4 -->
+  <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle"/>
+  <label for="slide-item-4"><p class="icon">✎</p><span>News</span></label>
+  
+  <div class="clear"></div>
+  
+  <!-- Bar -->
+  <div class="slider">
+    <div class="bar"></div>
+  </div>
+  
+</nav>
+
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
 
@@ -419,7 +451,7 @@
             </asp:ContentPlaceHolder>
 
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-            <div id="divContattiMaster" runat="server" visible="true">
+            <div id="divContattiMaster" runat="server" visible="false">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
                     <%--<section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">--%>
                     <div class="mbr-overlay mbr-overlay-white"></div>
@@ -534,7 +566,7 @@
             </asp:PlaceHolder>
         </section>
         <%--FOOTER--%>
-        <footer>
+        <footer class="d-none">
             <div class="footer mt-0">
                 <div class="footerhead">
                     <div class="row justify-content-md-center">
@@ -581,13 +613,11 @@
                     <div class="row justify-content-center">
 
                         <div class="col col-sm-2 footer-col">
-                            <%-- LINKS --%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter1") %>
                             </div>
                             <div class="footer-content">
                                 <ul class="footer-category-list">
-                                    <%-- Home --%>
                                     <li runat="server">
                                         <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
                                             <span class="label-nav">
@@ -595,33 +625,12 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <%-- Ceramiche Ficola --%>
-                                    <%--<%= CreaLinkPaginastatica(1) %>--%>
                                     <%= CreaLinkTipologie(3,3) %>
-                                    <%-- Pagina Catalogo --%>
-                                    <%--<%= CreaLinkPaginastatica(4) %>--%>
-                                    <%-- Shop --%>
-                                    <%--<%= CreaLinkTipologie(1,1) %>--%>
-                                    <%-- Staff --%>
-                                    <%--<%= CreaLinkTipologie(7,7) %>--%>
-                                    <%-- Servizi - Punti di forza - prodotti --%>
-                                    <%--<%= CreaLinkTipologie(3,3) %>--%>
-                                    <%-- Turni --%>
-                                    <%--<%= CreaLinkPaginastatica(3) %>--%>
-                                    <%-- Offerte --%>
-                                    <%--<%= CreaLinkTipologie(5,5) %>--%>
                                     <li runat="server">
                                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                                     </li>
-                                    <%-- Gallery --%>
-                                    <%--<%= CreaLinkTipologie(6,6) %>--%>
-                                    <%-- Esperienze --%>
                                     <%= CreaLinkTipologie(8,8) %>
-                                    <%--TESTIMONIALS--%>
                                     <%= CreaLinkTipologie(9,9) %>
-                                    <%-- Faq --%>
-                                    <%--<%= CreaLinkPaginastatica(3) %>--%>
-                                    <%-- Contatti --%>
                                     <li>
                                         <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                             <span class="label-nav">
@@ -629,21 +638,10 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                 </ul>
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
-                            <%-- SERVIZI --%>
-                            <%--<div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter4") %>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CaricaLinksPerTipologia("rif000003","","10") %>
-                                </ul>
-                            </div>--%>
-                            <%--SHOP--%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testoid4") %>
                             </div>
@@ -654,7 +652,6 @@
                             </div>
                         </div>
                         <div class="col col-sm-2 footer-col">
-                            <%--BLOG--%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter2") %>
                             </div>
@@ -664,8 +661,6 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <%--NEWS-LETTER--%>
                         <div class="col-sm-2 footer-col">
                             <div class="footer-title">
                                 <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
@@ -674,11 +669,6 @@
                                 <p>
                                     <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
                                 </p>
-                                <%--
-                                        <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
-                                        <br />
-                                        <br />
-                                --%>
                                 <input type="text" style="width: 60%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
                                 <button class="divbuttonstyle px-2 border-0" style="width: 40%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
                                 <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
@@ -686,6 +676,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="copyright">
                     <div class="container">
                         <div class="row">
