@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
+  <channel>
+    <title>Webmousers Blog Offerte</title>
+    <link>http://localhost:52646</link>
+    <description>Webmousers Blog</description>
+    <lastBuildDate>Wed, 14 Nov 2018 17:44:31 GMT</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <sy:updateBase>2018-11-14T17:44+01:00</sy:updateBase>
+    <language>it-IT</language>
+  </channel>
+</rss>

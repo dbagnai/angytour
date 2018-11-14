@@ -133,12 +133,16 @@ window.addEventListener('beforeinstallprompt', function (e) {
 });
 function showAddToHomeScreen() {
     var a2hsBtn = document.querySelector(".js-a2hs-btn");
-    a2hsBtn.style.display = "block";
-    a2hsBtn.addEventListener("click", addToHomeScreen);
+    if (a2hsBtn != null) {
+        a2hsBtn.style.display = "block";
+        a2hsBtn.addEventListener("click", addToHomeScreen);
+    }
 }
 function addToHomeScreen() {
     var a2hsBtn = document.querySelector(".js-a2hs-btn");
-    a2hsBtn.style.display = 'none';  // Show the prompt
+    if (a2hsBtn != null) {
+        a2hsBtn.style.display = 'none';  // Show the prompt
+    }
     deferredPrompt.prompt();  // Wait for the user to respond to the prompt
     deferredPrompt.userChoice
         .then(function (choiceResult) {

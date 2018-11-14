@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
+  <channel>
+    <title>Webmousers Blog Info</title>
+    <link>http://localhost:52646</link>
+    <description>Webmousers Blog</description>
+    <lastBuildDate>Wed, 14 Nov 2018 17:44:31 GMT</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <sy:updateBase>2018-11-14T17:44+01:00</sy:updateBase>
+    <language>it-IT</language>
+    <item>
+      <title>titolo informazioni
+sottotitolo</title>
+      <link>http://localhost:52646/I/info/titolo-informazioni-sottotitolo-67</link>
+      <guid isPermaLink="true">http://localhost:52646/I/info/titolo-informazioni-sottotitolo-67</guid>
+      <pubDate>Wed, 14 Nov 2018 15:57:27 +01:00</pubDate>
+      <category>Info</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000503/67/Antmacbookpro3.jpg" alt="titolo informazioni
+sottotitolo" width="350" /><p><span>Morbi id suscipit neque. Praesent tempus dui non augue pellentesque euismod. Nunc malesuada id sem vitae pharetra.</span></p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/info/titolo-informazioni-sottotitolo-67"><em>titolo informazioni
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>titolo informazioni
+sottotitolo</title>
+      <link>http://localhost:52646/I/info/titolo-informazioni-sottotitolo-66</link>
+      <guid isPermaLink="true">http://localhost:52646/I/info/titolo-informazioni-sottotitolo-66</guid>
+      <pubDate>Wed, 14 Nov 2018 15:56:54 +01:00</pubDate>
+      <category>Info</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000503/66/Antmacbookpro3.jpg" alt="titolo informazioni
+sottotitolo" width="350" /><p><span>Morbi id suscipit neque. Praesent tempus dui non augue pellentesque euismod. Nunc malesuada id sem vitae pharetra.</span></p><p>Continua a leggere / Read More <a href="http://localhost:52646/I/info/titolo-informazioni-sottotitolo-66"><em>titolo informazioni
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+  </channel>
+</rss>

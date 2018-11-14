@@ -151,6 +151,14 @@ body {
     display: block;
     padding: 5px 0 0;
     height: min-content;
+    color: @menu-color;
+}
+.slidemenu label span li {
+    display: block;
+    height: min-content;
+}
+.slidemenu label span li a {
+    color: @menu-color;
 }
 .slidemenu label .icon {
     font-size: 20px;
@@ -196,6 +204,16 @@ body {
 .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 50%; }
 .slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }
 
+.menu-top-icon-swg {
+    display: block !important;
+    width: 30px;
+    height: 25px;
+    fill: @bg-secondary-color;
+    stroke: @menu-color;
+    stroke-miterlimit: 10;
+    stroke-width: 15px;
+    margin: calc((50px / 2) - (30px / 2)) auto;
+}
 
 /*---------------------------------
  NAVIGAZIONE - FIXED - BOTTOM - PWA
@@ -287,6 +305,12 @@ body {
     letter-spacing: 0.2px;
 }
 
+.fade {
+    display: none !important;
+}
+.fade.show {
+    display: block !important;
+}
 /*---------------------------------
   MENU + LOGO - FIXED - TOP - SITE 
 ----------------------------------*/

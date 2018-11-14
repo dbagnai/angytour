@@ -309,7 +309,7 @@
                     </div>
                     <div class="col-sm-10">
                         <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlProdotto"
-                            OnSelectedIndexChanged="ddlProdotto_SelectedIndexChanged" runat="server" Enabled="false" />
+                            OnSelectedIndexChanged="ddlProdotto_SelectedIndexChanged" runat="server" Enabled="true" />
                         <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ErrorMessage="Categoria Prodotto Obbligatoria"
                             ControlToValidate="ddlProdotto" runat="server" Text="*" ValidationGroup="Insertvalidate" />--%>
                     </div>

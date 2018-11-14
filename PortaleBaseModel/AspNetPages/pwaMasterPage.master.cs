@@ -108,13 +108,12 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             }
         }
         CaricaMenu();
-       // VisualizzaTotaliCarrello();
-      //  LoadJavascriptVariables();
+        // VisualizzaTotaliCarrello();
+        //  LoadJavascriptVariables();
         divContattiMaster.DataBind();
         req1.DataBind();
         lisearch.DataBind();
     }
-
 
     /// <summary>
     /// Carico le chiamate di inizializzazione dalla memoria di binding del server in custombind
@@ -123,20 +122,44 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
     public string InjectedEndPageScripts()
     {
         Dictionary<string, string> addelements = new Dictionary<string, string>();
-        LoadJavascriptVariables(addelements);
+        LoadJavascriptVariablesEnd(addelements);
         string ret = custombind.CreaInitStringJavascript(addelements);
         return ret;
     }
-    private void LoadJavascriptVariables(Dictionary<string, string> addelements = null)
+    public string InjectedStartPageScripts()
+    {
+        Dictionary<string, string> addelements = new Dictionary<string, string>();
+        LoadJavascriptVariablesStart(addelements);
+        string ret = custombind.CreaInitStringJavascriptOnly(addelements);
+        return ret;
+    }
+    private void LoadJavascriptVariablesStart(Dictionary<string, string> addelements = null)
     {
         //However, if you want your JavaScript code to be independently escaped for any context, you could opt for the native JavaScript encoding:
         //' becomes \x27
         //" becomes \x22
 
         String scriptRegVariables = "";
-        scriptRegVariables += "; " + string.Format("var lng = '{0}'", Lingua);
-        scriptRegVariables += "; " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-        scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1").Replace("'", "\\'"));
+        scriptRegVariables += ";\r\n " + string.Format("var lng = '{0}'", Lingua);
+        scriptRegVariables += ";\r\n " + string.Format("var pathAbs = '{0}'", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+        scriptRegVariables += ";\r\n" + string.Format("var idofferta = '" + idOfferta + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var tipologia = '" + CodiceTipologia + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var categoria = '" + Categoria + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'");
+        scriptRegVariables += ";\r\n";
+
+        if (addelements == null) addelements = new Dictionary<string, string>();
+        addelements.Add("jsvarfrommasterstart", scriptRegVariables);
+
+    }
+
+    private void LoadJavascriptVariablesEnd(Dictionary<string, string> addelements = null)
+    {
+        //However, if you want your JavaScript code to be independently escaped for any context, you could opt for the native JavaScript encoding:
+        //' becomes \x27
+        //" becomes \x22
+
+        String scriptRegVariables = "";
         scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1").Replace("'", "\\'"));
@@ -146,19 +169,14 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer = 'map'");
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer1 = 'map1'");
         scriptRegVariables += ";\r\n" + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
-        scriptRegVariables += ";\r\n" + string.Format("var idofferta = '" + idOfferta + "'");
-        scriptRegVariables += ";\r\n" + string.Format("var tipologia = '" + CodiceTipologia + "'");
-        scriptRegVariables += ";\r\n" + string.Format("var categoria = '" + Categoria + "'");
-        scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'")   ;
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + string.Format("loadvariables(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
 
-        
         scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();
-        addelements.Add("jsvarfrommaster", scriptRegVariables);
+        addelements.Add("jsvarfrommasterend", scriptRegVariables);
 
         //ClientScriptManager cs = Page.ClientScript;
         //if (!cs.IsClientScriptBlockRegistered("RegVariablesScript"))
@@ -166,6 +184,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         //    cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScript", scriptRegVariables, true);
         //}
     }
+
 
     private void ControllaHttp()
     {
@@ -221,7 +240,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         //CaricaMenuLinkContenuti(5);
 
     }
-  
+
 
     protected void CaricaMenuLinkContenuti(long id)
     {
@@ -282,7 +301,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         if (item != null)
         {
             string testo = item.TitolobyLingua(Lingua);
-            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001001");
             testo = references.ResMan("Common", Lingua, "testoid" + idps);
             if (!noli) sb.Append("<li>");
             sb.Append("<a  href=\"");
@@ -310,7 +329,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
-    public string CreaLinkTipologie(int min, int max)
+    public string CreaLinkTipologie(int min, int max, bool noli = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
@@ -319,20 +338,32 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         if (sezioni != null)
             foreach (TipologiaOfferte o in sezioni)
             {
-                string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                string testo = references.ResMan("Common", Lingua, "testo" + o.Codice); // o.Descrizione;
+
+                string testomodificato = references.ResMan("Common", Lingua, "testo" + o.Codice);
+                if (!string.IsNullOrEmpty(testomodificato))
+                    testo = testomodificato;
+
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.Codice);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                sb.Append("<li>");
+                if (noli == false)
+                    sb.Append("<li>");
+
+
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
                 if (o.Codice == CodiceTipologia)
-                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                    sb.Append("  class=\"activeelemnt\"   style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
                 sb.Append(testo);
                 sb.Append("</a>");
-                sb.Append("</li>");
+
+
+                if (noli == false)
+                    sb.Append("</li>");
+
             }
         return sb.ToString();
     }
@@ -409,10 +440,14 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+
+               string testomodificato = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
+                if (!string.IsNullOrEmpty(testomodificato))
+                    testo = testomodificato;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.CodiceTipologia, o.CodiceProdotto);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                sb.Append("<li>");
+                //sb.Append("<li>");
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
@@ -421,7 +456,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
                 sb.Append(testo);
                 sb.Append("</a>");
-                sb.Append("</li>");
+                //sb.Append("</li>");
             }
 
 
@@ -859,7 +894,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
 
     #endregion
 
-     protected void InserisciNewsletter(string email)
+    protected void InserisciNewsletter(string email)
     {
         string pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
         if (System.Text.RegularExpressions.Regex.IsMatch(email, pattern))

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="pwaMasterPage.master.cs" Inherits="_pwaMasterPage" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="pwaMasterPage.master.cs" Inherits="_pwaMasterPage" %>
 
 <!DOCTYPE html>
 <html runat="server" id="htmltag">
@@ -51,34 +51,47 @@
     <form id="form1" runat="server">
 
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
+        <%= InjectedStartPageScripts() %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecsspwa") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
-
 
         <!-- MENU - BOTTOM -->
         <div class="fixedbottom" id="divBottom">
 
-<ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-      <a class="nav-link d-flex" href="#"><svg class="menu-bottom-icon-swg"><use xlink:href="#icon-home-swg"></use></svg></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link d-flex" href="#"><svg class="menu-bottom-icon-swg"><use xlink:href="#icon-call-swg"></use></svg></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link d-flex" href="#"><svg class="menu-bottom-icon-swg"><use xlink:href="#icon-notification-swg"></use></svg></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link d-flex" href="#"><svg class="menu-bottom-icon-swg"><use xlink:href="#icon-pin-swg"></use></svg></a>
-  </li>
-    <li class="nav-item">
-    <a class="nav-link d-flex" href="#"><svg class="menu-bottom-icon-swg"><use xlink:href="#icon-search-swg"></use></svg></a>
-  </li>
-</ul>
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-home-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-call-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-notification-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-pin-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-search-swg"></use></svg></a>
+                </li>
+            </ul>
+        </div>
 
-</div>
-
-        <div class="container-write-icon-swg" ><a class="" href="#"><svg class="write-icon-swg"><use xlink:href="#icon-write-swg"></use></svg></a></div>
+        <div class="container-write-icon-swg">
+            <a class="" href="#">
+                <svg class="write-icon-swg">
+                    <use xlink:href="#icon-write-swg"></use></svg></a>
+        </div>
         <!-- END - MENU - BOTTOM -->
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
@@ -207,11 +220,10 @@
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
-
             </div>
         </div>
 
-<%-- MENU + LOGO --%>
+        <%-- MENU + LOGO --%>
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
 
             <%-- TELEFONO MENU TOP MOBILE - DISABILITATO SU APPLICAZIONE PWA --%>
@@ -313,16 +325,12 @@
                                 </button>
                             </div>
                         </asp:PlaceHolder>
-
-
                     </li>
                     <%--CARRELLO END--%>
 
                     <%-----------------------%>
                     <%-------FINE MENU-------%>
                     <%-----------------------%>
-
-
 
                     <%--<li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
@@ -394,43 +402,58 @@
 
             <!-- FINE MENU --->
 
-             <!-- MENU - TOP - PWA -->
-  <nav class="slidemenu">
-  
-  <!-- Item 1 -->
-  <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked/>
-  <label for="slide-item-1"><p class="icon">♬</p><span>Home</span></label>
-  
-  <!-- Item 2 -->
-  <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle"/>
-  <label for="slide-item-2"><p class="icon">★</p><span>Avvisi</span></label>
-  
-  <!-- Item 3 -->
-  <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle"/>
-  <label for="slide-item-3"><p class="icon">✈</p><span>Offerte</span></label>
-  
-  <!-- Item 4 -->
-  <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle"/>
-  <label for="slide-item-4"><p class="icon">✎</p><span>News</span></label>
-  
-  <div class="clear"></div>
-  
-  <!-- Bar -->
-  <div class="slider">
-    <div class="bar"></div>
-  </div>
-  
-</nav>
+            <!-- MENU - TOP - PWA -->
+            <nav class="slidemenu">
+
+                <!-- Item 1 -->
+                <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked />
+                <label for="slide-item-1">
+                   <%= CreaLinkPaginastatica(39,true,"activeelemnt") %> 
+                </label>
+
+                <!-- Item 2 -->
+                <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle" />
+                <label for="slide-item-2">
+                
+                    <span><%= CreaLinkTipologie(503,503) %></span>
+                </label>
+
+                <!-- Item 3 -->
+                <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle" />
+                <label for="slide-item-3">
+                    <%--<p class="icon"><i class="fas fa-tag"></i></p>--%>
+                    <p class="icon">
+                            <svg class="menu-top-icon-swg">
+                                <use xlink:href="#icon-offerte-swg"></use></svg>
+                        </p>
+                    <span>Offerte</span></label>
+
+                <!-- Item 4 -->
+                <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle" />
+                <label for="slide-item-4">
+                    <span><%= CreaLinkTipologie(502,502) %></span>
+                    CreaLinkCategorie
+                </label>
+
+                <%--  <%= CreaLinkSottoCategorie("rif000002","prod000027") %> --%>
+
+                <div class="clear"></div>
+
+                <!-- Bar -->
+                <div class="slider">
+                    <div class="bar"></div>
+                </div>
+            </nav>
 
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
 
-            <%--<div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px">
+            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px;" runat="server" visible="false">
                 <div class="breadcrumbs clearfix">
                     <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" style="line-height: 40px;">
                     </ul>
                 </div>
-            </div>--%>
+            </div>
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
@@ -541,9 +564,8 @@
                                         }
                                     </script>
                                     <br />
-                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                   <%--  <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
-
+                                    <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                    <%--  <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
                                 </div>
                                 <div class="lead py-3" style="height: 75px;">
                                     <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
@@ -744,55 +766,93 @@
     <%--SERVICE WORKER--%>
     <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>
 
-<%--HOME ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-home-swg" viewBox="0 -5 316.28 297.46"><title>Icone </title>
-          <path d="M264.25,106.91a12.94,12.94,0,0,0-3.5-8.33c-32.53-31.35-65.29-62.45-97.88-93.74-3.68-3.53-6.3-4-10.21-.21C119.94,36.07,87,67.32,54.33,98.78A11.26,11.26,0,0,0,51.09,106c-.18,57.45-.1,114.89-.22,172.33,0,5.38,2,7.19,7.27,7.12,16.55-.19,33.11-.07,49.67-.07,9.35,0,9.39,0,9.39-9.15q0-56.71,0-113.45c0-7.85,2-9.86,9.66-9.87q30.34,0,60.71,0c8.92,0,10.56,1.69,10.57,10.82V276.57c0,8.54.26,8.81,8.49,8.82q24.84,0,49.68,0c7.57,0,8.07-.49,8.08-8q0-42.63,0-85.25C264.4,163.74,264.5,135.32,264.25,106.91Z"/>
-          <line class="a" x1="54.33" y1="98.78" x2="1.38" y2="149.41"/><line x1="314.91" y1="149.41" x2="260.75" y2="98.58"/>
-      </symbol>
-  </svg>
+    <%--HOME ICONE SWG--%>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-home-swg" viewBox="0 -5 316.28 297.46">
+            <title>Icone </title>
+            <path d="M264.25,106.91a12.94,12.94,0,0,0-3.5-8.33c-32.53-31.35-65.29-62.45-97.88-93.74-3.68-3.53-6.3-4-10.21-.21C119.94,36.07,87,67.32,54.33,98.78A11.26,11.26,0,0,0,51.09,106c-.18,57.45-.1,114.89-.22,172.33,0,5.38,2,7.19,7.27,7.12,16.55-.19,33.11-.07,49.67-.07,9.35,0,9.39,0,9.39-9.15q0-56.71,0-113.45c0-7.85,2-9.86,9.66-9.87q30.34,0,60.71,0c8.92,0,10.56,1.69,10.57,10.82V276.57c0,8.54.26,8.81,8.49,8.82q24.84,0,49.68,0c7.57,0,8.07-.49,8.08-8q0-42.63,0-85.25C264.4,163.74,264.5,135.32,264.25,106.91Z" />
+            <line class="a" x1="54.33" y1="98.78" x2="1.38" y2="149.41" />
+            <line x1="314.91" y1="149.41" x2="260.75" y2="98.58" />
+        </symbol>
+    </svg>
 
     <%--CALL ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-call-swg" viewBox="0 -5 294.45 297.46"><title>Icone </title>
-          <path d="M2,112.85c-.1,7.94,1.79,16.66,5,25.12,6.38,16.69,16.25,31.33,28.43,44.09q32.51,34,66.31,66.79a147.93,147.93,0,0,0,42.8,29.51c18,8,36.36,9.79,55,2.48,17.65-6.93,31.95-18.53,44.19-32.79a31.76,31.76,0,0,0,4-6.39,17.64,17.64,0,0,0-5.12-22.56c-13.05-10.06-25.94-20.35-39.33-29.95-8.85-6.34-18.45-6.64-26.28,1.91a109.25,109.25,0,0,1-8.31,8.36c-11.6,10.21-24.93,11.79-38.36,4.23a60.68,60.68,0,0,1-11.85-8.89c-8.88-8.46-17.66-17.06-26-26.06a63.84,63.84,0,0,1-10.22-14.62c-5.48-10.94-4.42-21.87,2.79-31.76,3.17-4.35,7.17-8.13,11.07-11.89,7.9-7.63,9.2-16.07,2.08-26.26-9.6-13.72-20.14-26.79-30.46-40A17.28,17.28,0,0,0,53.9,37.44c-6.22-.07-11.07,3.2-15.56,6.89A116.15,116.15,0,0,0,17.7,67.23C8.27,80.54,2,95,2,112.85Z"/>
-          <path style="fill: transparent" d="M141.58,2c67-.43,128.24,46.66,145.6,111.88a154.32,154.32,0,0,1,5.26,34.31c0,1.68,0,3.37,0,5.06"/>
-          <path style="fill: transparent" d="M140.61,42.48A92.24,92.24,0,0,1,167,45.61c44.65,12.44,72.28,41.37,82.85,86.46,1.32,5.61,1.6,11.46,2.37,17.2l-.26,0v3.93"/>
-      </symbol>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-call-swg" viewBox="0 -5 294.45 297.46">
+            <title>Icone </title>
+            <path d="M2,112.85c-.1,7.94,1.79,16.66,5,25.12,6.38,16.69,16.25,31.33,28.43,44.09q32.51,34,66.31,66.79a147.93,147.93,0,0,0,42.8,29.51c18,8,36.36,9.79,55,2.48,17.65-6.93,31.95-18.53,44.19-32.79a31.76,31.76,0,0,0,4-6.39,17.64,17.64,0,0,0-5.12-22.56c-13.05-10.06-25.94-20.35-39.33-29.95-8.85-6.34-18.45-6.64-26.28,1.91a109.25,109.25,0,0,1-8.31,8.36c-11.6,10.21-24.93,11.79-38.36,4.23a60.68,60.68,0,0,1-11.85-8.89c-8.88-8.46-17.66-17.06-26-26.06a63.84,63.84,0,0,1-10.22-14.62c-5.48-10.94-4.42-21.87,2.79-31.76,3.17-4.35,7.17-8.13,11.07-11.89,7.9-7.63,9.2-16.07,2.08-26.26-9.6-13.72-20.14-26.79-30.46-40A17.28,17.28,0,0,0,53.9,37.44c-6.22-.07-11.07,3.2-15.56,6.89A116.15,116.15,0,0,0,17.7,67.23C8.27,80.54,2,95,2,112.85Z" />
+            <path style="fill: transparent" d="M141.58,2c67-.43,128.24,46.66,145.6,111.88a154.32,154.32,0,0,1,5.26,34.31c0,1.68,0,3.37,0,5.06" />
+            <path style="fill: transparent" d="M140.61,42.48A92.24,92.24,0,0,1,167,45.61c44.65,12.44,72.28,41.37,82.85,86.46,1.32,5.61,1.6,11.46,2.37,17.2l-.26,0v3.93" />
+        </symbol>
+    </svg>
 
     <%--NOTIFICATION ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-notification-swg" viewBox="0 -5 262.72 297.46"><title>Icone </title>
-          <path  d="M240.73,211.29c-7.61-.44-12.94-6-13-13.76-.05-4.13,0-8.26,0-12.39-.23-21.09,1.07-42.34-1.05-63.24-4.15-40.81-27.15-67.86-65.47-82-2.52-.94-5.15-1.59-7.85-2.41,0-4.73.13-9.16,0-13.58C152.85,11.59,143.08,2,131.23,2s-21.58,9.71-22,22c-.13,4.42,0,8.85,0,13.35a23.25,23.25,0,0,1-2.66,1.06C68.46,47.86,34,84,34.83,135.22c.33,20.64.08,41.29,0,61.93,0,8.23-5.34,13.51-13.59,14.24a26.17,26.17,0,0,0-9.18,2.42,18.53,18.53,0,0,0-9.52,21.24c2.29,9.22,9.7,14.8,20,14.8l108.73,0,108.74,0c11.7,0,20.4-8.11,20.65-18.94S252.59,212,240.73,211.29Z"/>
-          <path d="M132.15,285.45c19.23-.61,35.51-17.27,34.56-35.58H95.63C96.18,270.21,112.69,286.07,132.15,285.45Z"/>
-      </symbol>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-notification-swg" viewBox="0 -5 262.72 297.46">
+            <title>Icone </title>
+            <path d="M240.73,211.29c-7.61-.44-12.94-6-13-13.76-.05-4.13,0-8.26,0-12.39-.23-21.09,1.07-42.34-1.05-63.24-4.15-40.81-27.15-67.86-65.47-82-2.52-.94-5.15-1.59-7.85-2.41,0-4.73.13-9.16,0-13.58C152.85,11.59,143.08,2,131.23,2s-21.58,9.71-22,22c-.13,4.42,0,8.85,0,13.35a23.25,23.25,0,0,1-2.66,1.06C68.46,47.86,34,84,34.83,135.22c.33,20.64.08,41.29,0,61.93,0,8.23-5.34,13.51-13.59,14.24a26.17,26.17,0,0,0-9.18,2.42,18.53,18.53,0,0,0-9.52,21.24c2.29,9.22,9.7,14.8,20,14.8l108.73,0,108.74,0c11.7,0,20.4-8.11,20.65-18.94S252.59,212,240.73,211.29Z" />
+            <path d="M132.15,285.45c19.23-.61,35.51-17.27,34.56-35.58H95.63C96.18,270.21,112.69,286.07,132.15,285.45Z" />
+        </symbol>
+    </svg>
 
     <%--PIN ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-pin-swg" viewBox="0 -5 225.9 297.46"><title>Icone </title>
-          <path d="M197.68,76.11C192.49,36.67,160.49,5,120.84,2.26,84.45-.23,56.51,15,38.36,46.65c-9.17,16-13.4,33.71-8.87,52A200.42,200.42,0,0,0,42.3,134.17C60,172.4,83,207.47,107.07,241.9c1.94,2.77,4,5.47,6.48,9,10.51-15.77,20.77-30.71,30.55-46,17.14-26.73,33.47-53.94,45.52-83.45C195.55,107,199.81,92.24,197.68,76.11ZM113.33,137A49.84,49.84,0,0,1,63.68,86.46c.18-26.87,22.7-48.86,49.88-48.73A49.61,49.61,0,0,1,163,88C162.88,114.79,140.32,137.05,113.33,137Z"/>
-          <path style="fill: transparent" d="M82.27,228.81C35.92,232.28,2,243.4,2,256.58c0,15.95,49.67,28.88,111,28.88s111-12.93,111-28.88c0-13.14-33.69-24.23-79.81-27.73"/>
-      </symbol>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-pin-swg" viewBox="0 -5 225.9 297.46">
+            <title>Icone </title>
+            <path d="M197.68,76.11C192.49,36.67,160.49,5,120.84,2.26,84.45-.23,56.51,15,38.36,46.65c-9.17,16-13.4,33.71-8.87,52A200.42,200.42,0,0,0,42.3,134.17C60,172.4,83,207.47,107.07,241.9c1.94,2.77,4,5.47,6.48,9,10.51-15.77,20.77-30.71,30.55-46,17.14-26.73,33.47-53.94,45.52-83.45C195.55,107,199.81,92.24,197.68,76.11ZM113.33,137A49.84,49.84,0,0,1,63.68,86.46c.18-26.87,22.7-48.86,49.88-48.73A49.61,49.61,0,0,1,163,88C162.88,114.79,140.32,137.05,113.33,137Z" />
+            <path style="fill: transparent" d="M82.27,228.81C35.92,232.28,2,243.4,2,256.58c0,15.95,49.67,28.88,111,28.88s111-12.93,111-28.88c0-13.14-33.69-24.23-79.81-27.73" />
+        </symbol>
+    </svg>
 
     <%--SEARCH ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-search-swg" viewBox="0 -5 286.87 296.88"><title>Icone </title>
-          <path fill="var(--color-1)" stroke-width="var(--size-1)" d="M210,210h0a122.28,122.28,0,0,0,35.64-86C245.94,56.45,191.93,2.23,124.16,2A121.48,121.48,0,0,0,2,123.46c-.35,67.06,54.23,121.88,121.67,122.19A120.56,120.56,0,0,0,210,210Z"/>
-          <line stroke-width="var(--size-1)" x1="285.46" y1="285.46" x2="210" y2="210"/>
-          <line stroke-width="var(--size-1)" x1="210" y1="210" x2="210" y2="210"/>
-      </symbol>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-search-swg" viewBox="0 -5 286.87 296.88">
+            <title>Icone </title>
+            <path fill="var(--color-1)" stroke-width="var(--size-1)" d="M210,210h0a122.28,122.28,0,0,0,35.64-86C245.94,56.45,191.93,2.23,124.16,2A121.48,121.48,0,0,0,2,123.46c-.35,67.06,54.23,121.88,121.67,122.19A120.56,120.56,0,0,0,210,210Z" />
+            <line stroke-width="var(--size-1)" x1="285.46" y1="285.46" x2="210" y2="210" />
+            <line stroke-width="var(--size-1)" x1="210" y1="210" x2="210" y2="210" />
+        </symbol>
+    </svg>
 
     <%--WRITE ICONE SWG--%>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-      <symbol id="icon-write-swg" viewBox="0 -5 287.73 297.72"><title>Icone </title>
-          <path d="M254.39,88,198.77,32.85Z"/><path class="cls-1" d="M285.26,35.78c-4.12-28.65-37.58-43.61-61.07-26.6-9.31,6.75-17,15.73-25.42,23.67L254.39,88c7.14-6.83,15-13.57,21.93-21.18C284.19,58.15,287,47.54,285.26,35.78Z"/>
-          <path d="M22.64,209.5a8.84,8.84,0,0,0-2.16,4Q11.68,247.9,3,282.37c-.24.95-.36,1.93-.57,3.09a18.55,18.55,0,0,0,2-.2c23.08-5.86,46.17-11.7,69.22-17.68a12.45,12.45,0,0,0,5.43-3.09C134.65,209,254.39,88,254.39,88L198.77,32.85S79,153.06,22.64,209.5Z"/>
-      </symbol>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-write-swg" viewBox="0 -5 287.73 297.72">
+            <title>Icone </title>
+            <path d="M254.39,88,198.77,32.85Z" />
+            <path class="cls-1" d="M285.26,35.78c-4.12-28.65-37.58-43.61-61.07-26.6-9.31,6.75-17,15.73-25.42,23.67L254.39,88c7.14-6.83,15-13.57,21.93-21.18C284.19,58.15,287,47.54,285.26,35.78Z" />
+            <path d="M22.64,209.5a8.84,8.84,0,0,0-2.16,4Q11.68,247.9,3,282.37c-.24.95-.36,1.93-.57,3.09a18.55,18.55,0,0,0,2-.2c23.08-5.86,46.17-11.7,69.22-17.68a12.45,12.45,0,0,0,5.43-3.09C134.65,209,254.39,88,254.39,88L198.77,32.85S79,153.06,22.64,209.5Z" />
+        </symbol>
+    </svg>
+
+    <%--OFFERTE ICONE SWG--%>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-offerte-swg" viewBox="0 -5 274.54 297.46">
+            <title>Offerte</title>
+            <path d="M64.14,26.07c5.78.84,12.77,1.84,19.75,2.88,5.09.75,10.16,1.66,15.26,2.28a4.5,4.5,0,0,0,3.1-1.29c8.06-7.63,16-15.34,24-23C133,.4,141.1.35,147.89,6.85q11.94,11.42,23.75,23a4.67,4.67,0,0,0,4.41,1.39c11.64-1.72,23.29-3.41,35-4.9,7-.89,14.05,4.71,15.34,11.9,2,11.23,3.93,22.48,5.84,33.73a4.42,4.42,0,0,0,2.58,3.56c9.6,5,19.13,10.07,28.68,15.14,8.84,4.69,11.38,12.56,7,21.59-4.75,9.71-9.48,19.43-14.32,29.09a4.56,4.56,0,0,0,0,4.61c4.8,9.58,9.49,19.22,14.2,28.85,4.52,9.25,1.86,17.48-7.18,22.27-9.48,5-18.94,10.08-28.46,15a4.21,4.21,0,0,0-2.47,3.34q-2.85,16.49-5.77,33c-1.59,8.9-8.76,14-17.72,12.6-11-1.67-22-3.41-33.1-5a4.65,4.65,0,0,0-3.34,1.28c-7.95,7.61-15.8,15.33-23.69,23-7.15,7-15.23,6.92-22.39-.08-7.81-7.64-15.66-15.23-23.42-22.92A4.35,4.35,0,0,0,98.61,256c-11.64,1.7-23.3,3.37-35,4.91-6.93.91-14.15-4.62-15.44-11.77-2-11.23-3.94-22.48-5.85-33.74a4.63,4.63,0,0,0-2.72-3.73C30,206.66,20.5,201.56,11,196.48,2.36,191.9-.24,184,4,175.3c4.77-9.8,9.52-19.6,14.4-29.34a4.74,4.74,0,0,0-.05-4.84c-4.77-9.5-9.4-19.07-14.07-28.63-4.59-9.37-2.15-17,7-22,9.52-5.14,19-10.32,28.57-15.36a4.45,4.45,0,0,0,2.51-3.61q2.85-16.61,5.8-33.21C49.47,31,55.61,26,64.14,26.07Z" />
+            <circle cx="110.53" cy="101.1" r="26.74"/>
+            <circle cx="164.02" cy="182.92" r="26.74"/>
+            <line x1="94.28" y1="198.96" x2="183.22" y2="82.03"/>
+            </symbol>
+    </svg>
+
+    <%--NEWS ICONE SWG--%>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-news-swg" viewBox="0 -5 287.46 299.43">
+        <title>News</title>
+        <path d="M217.06,31.09,48,100.56s-4.1.62-6.22-.67C29.7,92.5,17.51,85.27,5.35,78,4.29,77.37,3.19,76.82,2,76.17V213.3c1.53-.87,2.68-1.49,3.8-2.16,12.05-7.22,24.12-14.41,36.12-21.73,2-1.21,5.9-.67,5.9-.67L217,258.31Z"/>
+            <path d="M77.83,201c-5.35,12.88-10.52,25.35-15.77,38L153,276.77c5.38-12.87,10.59-25.35,16-38.23"/>
+            <polyline points="217.02 258.31 285.46 286.45 285.46 2.98 217.06 31.09" style="fill:none;"/>
+            </symbol>
+    </svg>
+
+    <%--NEWS AVVISI SWG--%>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="icon-avvisi-swg" viewBox="0 -5 130.77 297.46">
+            <title>Avvisi</title>
+            <path d="M52.66,94.68c12.2,0,24.4,0,36.59,0,11.58.06,16.29,4.66,14.87,16.23-1.78,14.62-4.49,29.13-7,43.64-4.77,27.2-9.87,54.34-14.4,81.58-.73,4.33.23,9.17,1.38,13.52,1.52,5.75,6.83,8.57,12.94,6.85,5.73-1.62,11.19-4.19,16.77-6.35,2.52-1,4.94-2.42,7.54-2.88,5.72-1,8.92,2.92,6.78,8.33a24,24,0,0,1-4.68,7.61C109.64,277.68,93,286,72.68,285.44c-8.45-.23-17,0-25.3-1.39-21.6-3.63-35.28-23.74-31.59-45.53q8.81-52.07,17.73-104.11c.31-1.83.52-3.69.65-5.55.68-9-3.32-13.75-12.28-14.84-3.83-.46-7.66-1-11.45-1.75-5.15-1-8.58-4.75-8.44-8.88.17-4.52,3.79-8.12,9.33-8.35,9-.37,18.08-.28,27.12-.36C43.18,94.65,47.92,94.68,52.66,94.68Z"/>
+            <path d="M112.39,39.82a37.27,37.27,0,0,1-37,37.39c-21,0-37.58-16.87-37.51-38.23C38,18.63,54.78,2,75.35,2S112.44,19,112.39,39.82Z""/>
+            </symbol>
+            </svg>
 
 </body>
 </html>
