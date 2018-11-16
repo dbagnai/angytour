@@ -303,7 +303,11 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             string testo = item.TitolobyLingua(Lingua);
             string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001001");
             testo = references.ResMan("Common", Lingua, "testoid" + idps);
-            if (!noli) sb.Append("<li>");
+            //if (!noli) sb.Append("<li>");
+            sb.Append("<li");
+            if (idps.ToString() == idContenuto)
+            sb.Append(" class=\"activeelemntli\" style=\"" + stile + "\"  ");
+            sb.Append(">");
             sb.Append("<a  href=\"");
             sb.Append(link);
             sb.Append("\"");
@@ -312,7 +316,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
             sb.Append(testo);
             sb.Append("</a>");
-            if (!noli) sb.Append("</li>");
+            sb.Append("</li>");
+            //if (!noli) sb.Append("</li>");
             /*
                  <a id="linkid10High" onclick="JsSvuotaSession(this)" runat="server" href="#">
                                         <%= references.ResMan("Common", Lingua,"testoid10") %>
@@ -347,8 +352,11 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.Codice);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                if (noli == false)
-                    sb.Append("<li>");
+                //if (noli == false)
+                    sb.Append("<li");
+                if (o.Codice == CodiceTipologia)
+                    sb.Append("  class=\"activeelemntli\"  ");
+                sb.Append(">");
 
 
                 sb.Append("<a href=\"");
@@ -361,7 +369,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("</a>");
 
 
-                if (noli == false)
+                //if (noli == false)
                     sb.Append("</li>");
 
             }
@@ -389,7 +397,10 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                sb.Append("<li>");
+                sb.Append("<li");
+                if (o.Codice == CodiceTipologia)
+                    sb.Append("  class=\"activeelemntli\"  ");
+                sb.Append(">");
                 sb.Append("<a  href=\"");
                 sb.Append(link);
                 sb.Append("\"");

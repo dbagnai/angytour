@@ -157,10 +157,10 @@ body {
 /*---------------------------------
 - NAVIGAZIONE - FIXED - TOP - PWA -
 ----------------------------------*/
-* {
+/**{
   margin: 0;
   padding: 0;
-}
+}*/
 .clear {
   clear: both;
 }
@@ -181,7 +181,7 @@ body {
   display: block;
   float: left;
   color: #032f2f;
-  opacity: 0.2;
+  /*opacity: 0.2;*/
 }
 .slidemenu label:hover {
   cursor: pointer;
@@ -189,7 +189,7 @@ body {
 }
 .slidemenu label span {
   display: block;
-  padding: 5px 0 0;
+  padding: 0;
   height: min-content;
   color: #032f2f;
 }
@@ -249,6 +249,7 @@ body {
 .slidemenu #slide-item-4:checked ~ .slider .bar {
   margin-left: 75%;
 }
+/*aggiunte mirco al css del menu top pwa*/
 .menu-top-icon-swg {
   display: block !important;
   width: 30px;
@@ -258,6 +259,12 @@ body {
   stroke-miterlimit: 10;
   stroke-width: 15px;
   margin: calc((50px / 2) - (30px / 2)) auto;
+}
+.slidemenu label span li {
+  opacity: 0.5;
+}
+.slidemenu label span li.activeelemntli {
+  opacity: 1;
 }
 /*---------------------------------
  NAVIGAZIONE - FIXED - BOTTOM - PWA
@@ -443,18 +450,22 @@ body {
 /*---------------------------------
 --------- GENERIC BANNER ----------
 ----------------------------------*/
-ul.banner-pwa > li {
+ul.banner-pwa > li,
+ul.isotope-pwa > li {
   border-bottom: 1px solid #90cdcd;
 }
-ul.banner-pwa > li:nth-last-child(1) {
+ul.banner-pwa > li:nth-last-child(1),
+ul.isotope-pwa > li:nth-last-child(1) {
   border-bottom: none !important;
 }
-.banner-pwa .work-subcaption {
+.banner-pwa .work-subcaption,
+.isotope-pwa .work-subcaption {
   width: 100%;
   height: auto;
   padding: 0 15px 0 0;
 }
-.banner-pwa .work-title {
+.banner-pwa .work-title,
+.isotope-pwa .work-title {
   /*font-family: 'Fira Sans', sans-serif;
     font-weight: 500;*/
   font-family: 'Roboto', sans-serif;
@@ -464,7 +475,8 @@ ul.banner-pwa > li:nth-last-child(1) {
   line-height: 14px;
   letter-spacing: 0.2px;
 }
-.banner-pwa .work-desc {
+.banner-pwa .work-desc,
+.isotope-pwa .work-desc {
   line-height: 19px;
   margin: 0;
   font-size: 0.9rem;
@@ -475,7 +487,68 @@ ul.banner-pwa > li:nth-last-child(1) {
   max-height: 54.4px;
   letter-spacing: 0.2px;
 }
-.simplemenu > ul > li:nth-last-child(1) .headerspacer {
+/*---------------------------------
+----------- ISOTOPE PWA -----------
+----------------------------------*/
+ul.isotope-pwa > li:first-of-type {
+  padding-top: 0 !important;
+}
+.isotope-pwa .work-subcaption {
+  padding: 0 0 0 15px;
+}
+ul.isotope-pwa > li:first-of-type .work-title {
+  font-size: 120%;
+  line-height: calc(19px * 1.2);
+}
+ul.isotope-pwa > li:first-of-type .work-desc {
+  font-size: 110%;
+  line-height: calc(19px * 1.1);
+}
+ul.isotope-pwa > li:first-of-type h5.work-desc {
+  margin-bottom: 5px;
+}
+ul > li:first-of-type .pwa-img-container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+ul > li:first-of-type .pwa-txt-container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 15px 0 0 0;
+}
+.pwa-txt-container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 66.666667%;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+.pwa-img-container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 33.333333%;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+/*---------------------------------
+--------------- MENU --------------
+----------------------------------*/
+/*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
+.headerspacer {
   padding-top: 0;
 }
 /*--------- END ---------*/

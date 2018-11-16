@@ -405,37 +405,31 @@
             <!-- MENU - TOP - PWA -->
             <nav class="slidemenu">
 
-                <!-- Item 1 -->
+                <!-- Item 1 HOME -->
                 <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked />
-                <label for="slide-item-1">
-                   <%= CreaLinkPaginastatica(39,true,"activeelemnt") %> 
+                <label id="slide-label-1" for="slide-item-1">
+                   <span><%= CreaLinkPaginastatica(39,true,"activeelemnt") %></span>
                 </label>
 
-                <!-- Item 2 -->
+                <!-- Item 2 INFO -->
                 <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle" />
-                <label for="slide-item-2">
-                
+                <label id="slide-label-2" for="slide-item-2">              
                     <span><%= CreaLinkTipologie(503,503) %></span>
                 </label>
 
-                <!-- Item 3 -->
+                <!-- Item 3 OFFERTE -->
                 <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle" />
-                <label for="slide-item-3">
+                <label id="slide-label-3" for="slide-item-3">
                     <%--<p class="icon"><i class="fas fa-tag"></i></p>--%>
-                    <p class="icon">
-                            <svg class="menu-top-icon-swg">
-                                <use xlink:href="#icon-offerte-swg"></use></svg>
-                        </p>
-                    <span>Offerte</span></label>
-
-                <!-- Item 4 -->
-                <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle" />
-                <label for="slide-item-4">
-                    <span><%= CreaLinkTipologie(502,502) %></span>
-                    CreaLinkCategorie
+                    <span><%= CreaLinkTipologie(504,504) %></span>
                 </label>
 
-                <%--  <%= CreaLinkSottoCategorie("rif000002","prod000027") %> --%>
+                <!-- Item 4 NEWS -->
+                <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle" />
+                <label id="slide-label-4" for="slide-item-4">
+                    <span><%= CreaLinkTipologie(502,502) %></span>
+                    <%--  <span><%= CreaLinkSottoCategorie("rif000002","prod000027") %></span> --%>
+                </label>
 
                 <div class="clear"></div>
 
@@ -444,6 +438,8 @@
                     <div class="bar"></div>
                 </div>
             </nav>
+<!-- MENU - TOP - PWA - END -->
+
 
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>

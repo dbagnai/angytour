@@ -10,7 +10,9 @@
         makeRevLower = true;
         history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
     </script>
-    <div class="container" style="text-align: center; margin-top: 10px">
+
+    <%--:::: COMMENTO IL CAMPO H1 DEL TITOLO DELLA PAGINA :::::--%>
+    <div class="container" style="text-align: center; margin-top: 10px; display:none">
         <div class="row" runat="server" id="divTitle">
             <div class="col-md-1 col-sm-1">
             </div>
