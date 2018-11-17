@@ -111,8 +111,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         // VisualizzaTotaliCarrello();
         //  LoadJavascriptVariables();
         divContattiMaster.DataBind();
-        req1.DataBind();
-        lisearch.DataBind();
+        //req1.DataBind();
+        //lisearch.DataBind();
     }
 
     /// <summary>
@@ -303,10 +303,11 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             string testo = item.TitolobyLingua(Lingua);
             string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001001");
             testo = references.ResMan("Common", Lingua, "testoid" + idps);
+
             //if (!noli) sb.Append("<li>");
             sb.Append("<li");
             if (idps.ToString() == idContenuto)
-            sb.Append(" class=\"activeelemntli\" style=\"" + stile + "\"  ");
+                sb.Append(" class=\"activeelemntli\" style=\"" + stile + "\"  ");
             sb.Append(">");
             sb.Append("<a  href=\"");
             sb.Append(link);
@@ -353,7 +354,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //if (noli == false)
-                    sb.Append("<li");
+                sb.Append("<li");
                 if (o.Codice == CodiceTipologia)
                     sb.Append("  class=\"activeelemntli\"  ");
                 sb.Append(">");
@@ -370,7 +371,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
 
 
                 //if (noli == false)
-                    sb.Append("</li>");
+                sb.Append("</li>");
 
             }
         return sb.ToString();
@@ -452,7 +453,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 string testo = o.Descrizione;
 
-               string testomodificato = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
+                string testomodificato = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
                 if (!string.IsNullOrEmpty(testomodificato))
                     testo = testomodificato;
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.CodiceTipologia, o.CodiceProdotto);
@@ -920,22 +921,15 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
 
     }
 
-    protected void btnNewsletter1_Click(object sender, EventArgs e)
-    {
-        //Richiesta  per inserimento in anagrafica clienti !!!!!
-        //Rimando alla pagina di verifica iscrizione
-        ClientiDM cliDM = new ClientiDM();
-        Cliente tmp_Cliente = new Cliente();
-        //tmp_Cliente.Cognome = txtNome.Value;
-        tmp_Cliente.Email = txtEmail.Value;
-        //DateTime _d = DateTime.MinValue;
-        //if (DateTime.TryParse(txtDataNascita.Text, out _d))
-        //    tmp_Cliente.DataNascita = _d;
-        Session.Add("iscrivicliente", tmp_Cliente);
-        string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;
-        Response.Redirect(linkverifica);
-    }
-
+    //protected void btnNewsletter1_Click(object sender, EventArgs e)
+    //{
+    //    ClientiDM cliDM = new ClientiDM();
+    //    Cliente tmp_Cliente = new Cliente();
+    //    tmp_Cliente.Email = txtEmail.Value;
+    //    Session.Add("iscrivicliente", tmp_Cliente);
+    //    string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;
+    //    Response.Redirect(linkverifica);
+    //}
     protected void btnsearch1_Click(object sender, EventArgs e)
     {
         HttpContext.Current.Session.Clear();
@@ -944,14 +938,14 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         Session.Add("testoricerca", Server.HtmlEncode(txtSearchTop.Value)); //carico in sessione il parametro da cercare
         Response.Redirect(link);
     }
-    protected void btnsearch_Click(object sender, EventArgs e)
-    {
-        HttpContext.Current.Session.Clear();
-        //testoricerca
-        string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void btnsearch_Click(object sender, EventArgs e)
+    //{
+    //    HttpContext.Current.Session.Clear();
+    //    //testoricerca
+    //    string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
 
 #if false
     

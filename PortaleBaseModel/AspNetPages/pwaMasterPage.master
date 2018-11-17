@@ -94,309 +94,27 @@
         </div>
         <!-- END - MENU - BOTTOM -->
 
-        <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
-        <!-- MENU -TOP -->
-        <div class="fixedtop d-none" id="divTop">
-            <div class="d-block" style="padding: 5px 0;">
-
-                <!-- LINGUE --->
-                <div runat="server" visible="true">
-                    <div class="float-right px-2 px-sm-4 bd-secondary-color" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                    </div>
-                    <div class="float-right px-2 px-sm-4 bd-secondary-color" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
-                        <a style="color: White; padding: 0px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
-                            <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
-                    </div>
+        <asp:Panel runat="server" Visible="false">  
+            <!-- LINGUE --->
+            <div runat="server" visible="true">
+                <div class="float-right px-2 px-lg-4 bd-secondary-color" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                 </div>
-
-                <!-- CERCA --->
-                <div class="float-right">
-                    <div class="input-group flex-nowrap px-2 px-sm-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
-                        <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
-                        <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
-                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
-
-                    <%--CARRELLO--%>
-                    <asp:PlaceHolder runat="server" Visible="true">
-                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-sm-4 pl-sm-3 py-0 d-sm-none">
-                            <a class="float-right" style="color: #fff !important; border: none"
-                                href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
-                            </a>
-                            <ul class="dropdown-menu dropdown-cart">
-                                <li>
-                                    <ul class="carrelloelemslist products-list-mini"
-                                        runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="my-1"><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                    <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
-                                <li class="divider"></li>
-                                <%-- <li><a
-                                id="A9"   href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"LinkOrder")) %>'>
-                                <%= references.ResMan("Common", Lingua,"TestoProcediOrdine") %>
-                            </a></li>
-                            <li class="divider"></li>--%>
-                                <li><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
-                                    <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
-                                </a></li>
-                            </ul>
-                            <button type="button" class="dropdown-toggle float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
-                                <span class="caret" style="font-size: 20px; color: #fff"></span>
-                                <i class="fa fa-shopping-cart" style="font-size: 20px; color: #fff"></i>
-                            </button>
-                        </div>
-                    </asp:PlaceHolder>
-
-                    <%-- CARRELLO END --%>
-                </div>
-
-                <%-- SOCIAL --%>
-                <div class="social-icons-small float-left d-block px-2 px-sm-4 border-right bd-secondary-color" runat="server" visible="true">
-                    <ul style="float: right">
-                        <li style="float: right">
-                            <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
-                        </li>
-                        <%--      <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
-                            </li>
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
-                            </li>--%>
-                        <%--  <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
-                            </li>--%>
-                        <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
-                    </ul>
-                    <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
-                            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
-                        </a>--%>
-                    <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
-                            </a>
-                            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
-                            </a>--%>
-                </div>
-
-                <%-- BLOG --%>
-                <div class="simplemenu float-left d-none d-sm-block">
-                    <ul>
-                        <li runat="server" class="dropdown px-2 px-sm-4">
-                            <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
-                                <i class="fa fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
-                            <ul class="dropdown-menu dropdown-menu-right px-3">
-                                <%= CreaLinkCategorie("rif000002") %>
-                            </ul>
-                        </li>
-                        <!-- CONTATTI --->
-                        <li runat="server" class="px-2 px-sm-4">
-                            <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                                <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
-                            </a>
-                        </li>
-                        <!-- TELEFONO --->
-                        <li runat="server" class="px-2 px-sm-4">
-                            <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
-                                <i class="fa fa-phone mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
-                                </span></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="float-left" runat="server" visible="false">
-                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
-                        <img style="height: 60px" src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
-                    </a>
-                </div>
-                <div class="float-left" runat="server" visible="false">
-                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
-                        <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
-                    </a>
+                <div class="float-right px-2 px-lg-4 bd-secondary-color" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
+                    <a style="color: White; padding: 0px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
+                        <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                 </div>
             </div>
-        </div>
 
-        <%-- MENU + LOGO --%>
-        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
-
-            <%-- TELEFONO MENU TOP MOBILE - DISABILITATO SU APPLICAZIONE PWA --%>
-            <div class="d-none d-sm-none" style="position: absolute; top: 15px; right: 15px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
-                    <i class="fa fa-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
-            </div>
-
-            <%--<div class="container" id="divImg">
-                <div class="row">
-                    <div class="col-sm-6" style="line-height: 0; min-height: 0px; text-align: left">
-                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="javascript:JsSvuotaSession()">
-                            <div id="divlogo" class="fulllogobckdark" style="margin: 0px 0px;"></div>
-                        </a>
-                    </div>
-                    <div class="col-sm-6">
-                        <div id="divMessage">
-                            <%= references.ResMan("Common",Lingua,"testospedizione")  %>
-                        </div>
+            <!-- CERCA --->
+            <div class="float-right">
+                <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
+                    <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
+                    <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                        <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
-            </div>--%>
-
-            <%-- MENU TOP MOBILE - DISABILITATO SU APPLICAZIONE PWA --%>
-            <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0" style="display: none;">
-                <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
-                    <div id="divlogoBrand" class="fulllogobckdark logo-top-pwa"></div>
-                </a>
-                <ul class="menuzord-menu menuzord-indented scrollable menuzord-right d-none">
-                    <%--<%= CreaLinkTipologie(6,6) %>--%>
-
-                    <%-- Ceramiche Ficola --%>
-                    <%= CreaLinkTipologie(3,3) %>
-                    <%-- Catalogo --%>
-                    <li runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
-                        <ul class="dropdown">
-                            <%--<%= CreaLinkPaginastatica(4) %>--%>
-                            <%--<%= CreaLinkTipologie(1,1) %>--%>
-                            <%= CreaLinkCategorie("rif000001") %>
-                        </ul>
-                    </li>
-                    <%-- Staff --%>
-                    <%--<%= CreaLinkTipologie(7,7) %>--%>
-                    <%-- Servizi - Punti di forza - prodotti --%>
-                    <%--<%= CreaLinkTipologie(3,3) %>--%>
-
-                    <%-- Offerte --%>
-                    <%--<%= CreaLinkTipologie(5,5) %>--%>
-                    <li runat="server">
-                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
-                    </li>
-                    <%-- Gallery --%>
-                    <%--<%= CreaLinkTipologie(6,6) %>--%>
-                    <%-- Esperienze --%>
-                    <%= CreaLinkTipologie(8,8) %>
-                    <%--TESTIMONIALS--%>
-                    <%= CreaLinkTipologie(9,9) %>
-                    <%-- Faq --%>
-                    <%--<%= CreaLinkPaginastatica(3) %>--%>
-                    <%--PRENOTA--%>
-                    <li runat="server">
-                        <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
-                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
-                        </a>
-                    </li>
-                    <%--CARRELLO--%>
-                    <li runat="server" visible="true">
-
-                        <asp:PlaceHolder runat="server" Visible="true">
-                            <div class="carrellomaincontainer float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
-                                <%--<a class="float-right" style="color: #666 !important; border: none"
-                                    href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                    <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
-                                </a>--%>
-
-                                <a class="float-right" style="color: #666 !important; border: none; padding: 0 !important;"
-                                    href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                    <span class="count">0</span>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-cart">
-                                    <li>
-                                        <ul class="carrelloelemslist products-list-mini"
-                                            runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
-                                        </ul>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li class="my-1"><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                        <%= references.ResMan("Common", Lingua,"TestoShoppingcart") %> </a></li>
-                                    <li class="divider"></li>
-                                    <li><a class="btn w-100" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkOrderNoregistrazione")) %>'>
-                                        <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
-                                    </a></li>
-                                </ul>
-                                <button type="button" class="button-carrello-animate float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
-                                    <span class="caret" style="font-size: 20px; color: #666"></span>
-                                    <i class="fa fa-shopping-cart" style="font-size: 1rem; color: #fff"></i>
-                                </button>
-                            </div>
-                        </asp:PlaceHolder>
-                    </li>
-                    <%--CARRELLO END--%>
-
-                    <%-----------------------%>
-                    <%-------FINE MENU-------%>
-                    <%-----------------------%>
-
-                    <%--<li runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu3") %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(3) %>
-                            <%= CreaLinkPaginastatica(4) %>
-                        </ul>
-                    </li>--%>
-
-                    <%--<%= CreaLinkTipologie(4,5) %>--%>
-
-                    <%--<li runat="server" id="liHome">
-                        <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
-                            <div class="iconlogo"></div>
-                        </a>
-                    </li>--%>
-
-                    <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
-
-                    <%--  <li runat="server">
-                        <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "9".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
-                        </ul>
-                    </li>--%>
-
-                    <%-- <li runat="server">
-                        <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu3") %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(8) %>
-                            <li>
-                                <hr style="margin: 0 !important;" />
-                            </li>
-                            <%=  CaricaLinksPerTipologia ("rif000001") %>
-                            <%= CreaLinkCategorie("rif000004") %>
-                        </ul>
-                    </li>--%>
-
-                    <%-- Blog --%>
-                    <li runat="server" class="d-block d-md-none">
-                        <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
-                            <%= references.ResMan("Common", Lingua,"testomenu2") %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkCategorie("rif000002") %>
-                        </ul>
-                    </li>
-
-                    <%-- Contatti --%>
-                    <li runat="server" class="d-block d-md-none">
-                        <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
-                        </a>
-                    </li>
-
-                    <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
-                        <div style="padding-top: 5px; padding-left: 10px">
-                            <input class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
-                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
-                        </div>
-                    </li>
-
-                    <li style="height: 1px" class="scrollable-fix"></li>
-                </ul>
             </div>
-        </div>
-
+        </asp:Panel>
         <%-- BODY--%>
         <section class="body-wrapper">
 
@@ -408,12 +126,12 @@
                 <!-- Item 1 HOME -->
                 <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked />
                 <label id="slide-label-1" for="slide-item-1">
-                   <span><%= CreaLinkPaginastatica(39,true,"activeelemnt") %></span>
+                    <span><%= CreaLinkPaginastatica(39,true,"activeelemnt") %></span>
                 </label>
 
                 <!-- Item 2 INFO -->
                 <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle" />
-                <label id="slide-label-2" for="slide-item-2">              
+                <label id="slide-label-2" for="slide-item-2">
                     <span><%= CreaLinkTipologie(503,503) %></span>
                 </label>
 
@@ -438,7 +156,7 @@
                     <div class="bar"></div>
                 </div>
             </nav>
-<!-- MENU - TOP - PWA - END -->
+            <!-- MENU - TOP - PWA - END -->
 
 
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
@@ -583,141 +301,7 @@
                 </div>
             </asp:PlaceHolder>
         </section>
-        <%--FOOTER--%>
-        <footer class="d-none">
-            <div class="footer mt-0">
-                <div class="footerhead">
-                    <div class="row justify-content-md-center">
-                        <div class="col-sm-4 align-self-center py-3 text-center text-md-left">
-                            <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
-                                <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
-                            </a>
-                        </div>
 
-                        <%--SOCIAL--%>
-                        <div class="col-sm-4 align-self-center">
-                            <div class="d-table mx-auto d-sm-block col-sm-mx-right d-block social-icons animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
-                                <ul>
-                                    <li style="float: right">
-                                        <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
-                                    </li>
-                                    <li style="float: right">
-                                        <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon instagram-icon" data-original-title="instagram"></a>
-                                    </li>
-                                    <li style="float: right"><a class="social-media-icon youtube-icon" href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' data-original-title="yuotube" target="_blank"></a></li>
-                                    <%--
-                                            <li style="float: right">
-                                                <a href='<%# references.ResMan("Common", Lingua,"_linkyoutube") %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
-                                            </li>
-                                            <li>
-                                            <a href='<%# references.ResMan("Common", Lingua,"_linkLinkedin") %>" runat="server" target="_blank"><i class="fa fa-linkedin" style="color: white; padding-left: 5px; padding-right: 5px"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href='<%# references.ResMan("Common", Lingua,"_linkpinterest") %>" runat="server" target="_blank" class="social-media-icon pininterest-icon" data-original-title="pininterest">pininterest</a>
-                                            </li>
-                                            <li>
-                                                <a href='<%# references.ResMan("Common", Lingua,"_linktripadvisor") %>" runat="server" target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
-                                            </li>
-                                    --%>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-
-                <div class="footer-wrapper py-5">
-
-                    <div class="row justify-content-center">
-
-                        <div class="col col-sm-2 footer-col">
-                            <div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter1") %>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <li runat="server">
-                                        <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
-                                            <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testohome") %>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <%= CreaLinkTipologie(3,3) %>
-                                    <li runat="server">
-                                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
-                                    </li>
-                                    <%= CreaLinkTipologie(8,8) %>
-                                    <%= CreaLinkTipologie(9,9) %>
-                                    <li>
-                                        <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
-                                            <span class="label-nav">
-                                                <%= references.ResMan("Common", Lingua,"testoContatti") %>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col col-sm-2 footer-col">
-                            <div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testoid4") %>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CreaLinkCategorie("rif000001") %>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col col-sm-2 footer-col">
-                            <div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter2") %>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CreaLinkCategorie("rif000002") %>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 footer-col">
-                            <div class="footer-title">
-                                <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
-                            </div>
-                            <asp:Panel runat="server" ID="pnlNewsletterHome" Visible="true">
-                                <p>
-                                    <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
-                                </p>
-                                <input type="text" style="width: 60%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
-                                <button class="divbuttonstyle px-2 border-0" style="width: 40%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
-                                <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
-                            </asp:Panel>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="copyright">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12" style="text-align: center">
-                                <p style="font-size: 1.2em; padding: 30px 10px; line-height: 1.8rem !important;">
-                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
-                                    <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>- Project by Web Mouse Consulting srl -
-                                    <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>
-                                        <%= references.ResMan("Common", Lingua,"Testologin") %></a>
-                                </p>
-                                <%-- <div class="float-right">
-                                    <p style="font-size: 1.2em; padding-top: 10px">
-                                        <a id="A3" href='<%# references.ResMan("Common", Lingua,"_linkFacebook") %>" runat="server" target="_blank" style="padding-left: 5px; padding-right: 5px">
-                                            <asp:Literal ID="Literal10" runat="server" Text='<%# references.ResMan("Common", Lingua,"testoSeguici") %>" /><i class="fa fa-facebook"></i></a>
-                                    </p>
-                                </div>--%>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
         </asp:ContentPlaceHolder>
         <div class="loader" style="display: none">
@@ -825,30 +409,30 @@
         <symbol id="icon-offerte-swg" viewBox="0 -5 274.54 297.46">
             <title>Offerte</title>
             <path d="M64.14,26.07c5.78.84,12.77,1.84,19.75,2.88,5.09.75,10.16,1.66,15.26,2.28a4.5,4.5,0,0,0,3.1-1.29c8.06-7.63,16-15.34,24-23C133,.4,141.1.35,147.89,6.85q11.94,11.42,23.75,23a4.67,4.67,0,0,0,4.41,1.39c11.64-1.72,23.29-3.41,35-4.9,7-.89,14.05,4.71,15.34,11.9,2,11.23,3.93,22.48,5.84,33.73a4.42,4.42,0,0,0,2.58,3.56c9.6,5,19.13,10.07,28.68,15.14,8.84,4.69,11.38,12.56,7,21.59-4.75,9.71-9.48,19.43-14.32,29.09a4.56,4.56,0,0,0,0,4.61c4.8,9.58,9.49,19.22,14.2,28.85,4.52,9.25,1.86,17.48-7.18,22.27-9.48,5-18.94,10.08-28.46,15a4.21,4.21,0,0,0-2.47,3.34q-2.85,16.49-5.77,33c-1.59,8.9-8.76,14-17.72,12.6-11-1.67-22-3.41-33.1-5a4.65,4.65,0,0,0-3.34,1.28c-7.95,7.61-15.8,15.33-23.69,23-7.15,7-15.23,6.92-22.39-.08-7.81-7.64-15.66-15.23-23.42-22.92A4.35,4.35,0,0,0,98.61,256c-11.64,1.7-23.3,3.37-35,4.91-6.93.91-14.15-4.62-15.44-11.77-2-11.23-3.94-22.48-5.85-33.74a4.63,4.63,0,0,0-2.72-3.73C30,206.66,20.5,201.56,11,196.48,2.36,191.9-.24,184,4,175.3c4.77-9.8,9.52-19.6,14.4-29.34a4.74,4.74,0,0,0-.05-4.84c-4.77-9.5-9.4-19.07-14.07-28.63-4.59-9.37-2.15-17,7-22,9.52-5.14,19-10.32,28.57-15.36a4.45,4.45,0,0,0,2.51-3.61q2.85-16.61,5.8-33.21C49.47,31,55.61,26,64.14,26.07Z" />
-            <circle cx="110.53" cy="101.1" r="26.74"/>
-            <circle cx="164.02" cy="182.92" r="26.74"/>
-            <line x1="94.28" y1="198.96" x2="183.22" y2="82.03"/>
-            </symbol>
+            <circle cx="110.53" cy="101.1" r="26.74" />
+            <circle cx="164.02" cy="182.92" r="26.74" />
+            <line x1="94.28" y1="198.96" x2="183.22" y2="82.03" />
+        </symbol>
     </svg>
 
     <%--NEWS ICONE SWG--%>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
         <symbol id="icon-news-swg" viewBox="0 -5 287.46 299.43">
-        <title>News</title>
-        <path d="M217.06,31.09,48,100.56s-4.1.62-6.22-.67C29.7,92.5,17.51,85.27,5.35,78,4.29,77.37,3.19,76.82,2,76.17V213.3c1.53-.87,2.68-1.49,3.8-2.16,12.05-7.22,24.12-14.41,36.12-21.73,2-1.21,5.9-.67,5.9-.67L217,258.31Z"/>
-            <path d="M77.83,201c-5.35,12.88-10.52,25.35-15.77,38L153,276.77c5.38-12.87,10.59-25.35,16-38.23"/>
-            <polyline points="217.02 258.31 285.46 286.45 285.46 2.98 217.06 31.09" style="fill:none;"/>
-            </symbol>
+            <title>News</title>
+            <path d="M217.06,31.09,48,100.56s-4.1.62-6.22-.67C29.7,92.5,17.51,85.27,5.35,78,4.29,77.37,3.19,76.82,2,76.17V213.3c1.53-.87,2.68-1.49,3.8-2.16,12.05-7.22,24.12-14.41,36.12-21.73,2-1.21,5.9-.67,5.9-.67L217,258.31Z" />
+            <path d="M77.83,201c-5.35,12.88-10.52,25.35-15.77,38L153,276.77c5.38-12.87,10.59-25.35,16-38.23" />
+            <polyline points="217.02 258.31 285.46 286.45 285.46 2.98 217.06 31.09" style="fill: none;" />
+        </symbol>
     </svg>
 
     <%--NEWS AVVISI SWG--%>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
         <symbol id="icon-avvisi-swg" viewBox="0 -5 130.77 297.46">
             <title>Avvisi</title>
-            <path d="M52.66,94.68c12.2,0,24.4,0,36.59,0,11.58.06,16.29,4.66,14.87,16.23-1.78,14.62-4.49,29.13-7,43.64-4.77,27.2-9.87,54.34-14.4,81.58-.73,4.33.23,9.17,1.38,13.52,1.52,5.75,6.83,8.57,12.94,6.85,5.73-1.62,11.19-4.19,16.77-6.35,2.52-1,4.94-2.42,7.54-2.88,5.72-1,8.92,2.92,6.78,8.33a24,24,0,0,1-4.68,7.61C109.64,277.68,93,286,72.68,285.44c-8.45-.23-17,0-25.3-1.39-21.6-3.63-35.28-23.74-31.59-45.53q8.81-52.07,17.73-104.11c.31-1.83.52-3.69.65-5.55.68-9-3.32-13.75-12.28-14.84-3.83-.46-7.66-1-11.45-1.75-5.15-1-8.58-4.75-8.44-8.88.17-4.52,3.79-8.12,9.33-8.35,9-.37,18.08-.28,27.12-.36C43.18,94.65,47.92,94.68,52.66,94.68Z"/>
-            <path d="M112.39,39.82a37.27,37.27,0,0,1-37,37.39c-21,0-37.58-16.87-37.51-38.23C38,18.63,54.78,2,75.35,2S112.44,19,112.39,39.82Z""/>
-            </symbol>
-            </svg>
+            <path d="M52.66,94.68c12.2,0,24.4,0,36.59,0,11.58.06,16.29,4.66,14.87,16.23-1.78,14.62-4.49,29.13-7,43.64-4.77,27.2-9.87,54.34-14.4,81.58-.73,4.33.23,9.17,1.38,13.52,1.52,5.75,6.83,8.57,12.94,6.85,5.73-1.62,11.19-4.19,16.77-6.35,2.52-1,4.94-2.42,7.54-2.88,5.72-1,8.92,2.92,6.78,8.33a24,24,0,0,1-4.68,7.61C109.64,277.68,93,286,72.68,285.44c-8.45-.23-17,0-25.3-1.39-21.6-3.63-35.28-23.74-31.59-45.53q8.81-52.07,17.73-104.11c.31-1.83.52-3.69.65-5.55.68-9-3.32-13.75-12.28-14.84-3.83-.46-7.66-1-11.45-1.75-5.15-1-8.58-4.75-8.44-8.88.17-4.52,3.79-8.12,9.33-8.35,9-.37,18.08-.28,27.12-.36C43.18,94.65,47.92,94.68,52.66,94.68Z" />
+            <path d="M112.39,39.82a37.27,37.27,0,0,1-37,37.39c-21,0-37.58-16.87-37.51-38.23C38,18.63,54.78,2,75.35,2S112.44,19,112.39,39.82Z" />
+        </symbol>
+    </svg>
 
 </body>
 </html>
