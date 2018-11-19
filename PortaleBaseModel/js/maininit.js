@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
         //var zoom = detectZoom.zoom();
         //var device = detectZoom.device();
         var device = "";
-        var zoom = document.body.clientWidth / window.innerWidth
+        var zoom = document.body.clientWidth / window.innerWidth;
         if (zoom > 1) {
             $("#mainnav").removeClass('fixednav');
             $("#mainnav").addClass('freenav');
@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
             $('#divlogo').removeClass();
             $('.menuzord-menu').addClass('scrolled');
             $('#divlogoBrand').addClass('shrinklogo');
-            $('#mainnav').addClass('fixednav-scroll');
+            //$('#mainnav').addClass('fixednav-scroll');
             //$('#divlogoBrand').removeClass('fulllogobckdark-pwa-start');
 
             //        $('#divlogo').addClass('shrinklogobck');
@@ -86,7 +86,7 @@ jQuery(document).ready(function ($) {
 
             $('.menuzord-menu').removeClass('scrolled');
             $('#divlogoBrand').removeClass('shrinklogo');
-            $('#mainnav').removeClass('fixednav-scroll');
+            //$('#mainnav').removeClass('fixednav-scroll');
             //$('#divlogoBrand').addClass('fulllogobckdark-pwa-start');
 
             //        if (sliderPresent) {
@@ -1142,17 +1142,3 @@ function InitIsotope() {
     /* ---------------------------------------------- */
 
 //if ($('div.mydivclass').length) {}
-$(function () {
-    if ($('#slide-label-1 li.activeelemntli')[0]) {
-        $('.slider .bar').css('margin-left', '0%');
-    }
-    else if ($('#slide-label-2 li.activeelemntli')[0]) {
-    $('.slider .bar').css('margin-left', '25%');
-}
-    else if ($('#slide-label-3 li.activeelemntli')[0]) {
-        $('.slider .bar').css('margin-left', '50%');
-    }
-    else if ($('#slide-label-4 li.activeelemntli')[0]) {
-        $('.slider .bar').css('margin-left', '75%');
-    }
-});

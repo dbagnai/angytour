@@ -110,9 +110,9 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         CaricaMenu();
         // VisualizzaTotaliCarrello();
         //  LoadJavascriptVariables();
-        divContattiMaster.DataBind();
-        req1.DataBind();
-        lisearch.DataBind();
+        //  LoadJavascriptVariables();
+        //divContattiMaster.DataBind();
+        //req1.DataBind();
     }
 
     /// <summary>
@@ -446,7 +446,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
             prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
         }
-        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+        prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         if (prodotti != null)
             foreach (Prodotto o in prodotti)
             {
@@ -458,16 +458,16 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.CodiceTipologia, o.CodiceProdotto);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                //sb.Append("<li>");
+                sb.Append("<li class=\"nav-item\">");
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
                 if (o.CodiceProdotto == Categoria)
-                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                    sb.Append(" class=\"nav-link active submenutop\"  style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
                 sb.Append(testo);
                 sb.Append("</a>");
-                //sb.Append("</li>");
+                sb.Append("</li>");
             }
 
 
@@ -920,21 +920,21 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
 
     }
 
-    protected void btnNewsletter1_Click(object sender, EventArgs e)
-    {
-        //Richiesta  per inserimento in anagrafica clienti !!!!!
-        //Rimando alla pagina di verifica iscrizione
-        ClientiDM cliDM = new ClientiDM();
-        Cliente tmp_Cliente = new Cliente();
-        //tmp_Cliente.Cognome = txtNome.Value;
-        tmp_Cliente.Email = txtEmail.Value;
-        //DateTime _d = DateTime.MinValue;
-        //if (DateTime.TryParse(txtDataNascita.Text, out _d))
-        //    tmp_Cliente.DataNascita = _d;
-        Session.Add("iscrivicliente", tmp_Cliente);
-        string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;
-        Response.Redirect(linkverifica);
-    }
+    //protected void btnNewsletter1_Click(object sender, EventArgs e)
+    //{
+    //    //Richiesta  per inserimento in anagrafica clienti !!!!!
+    //    //Rimando alla pagina di verifica iscrizione
+    //    ClientiDM cliDM = new ClientiDM();
+    //    Cliente tmp_Cliente = new Cliente();
+    //    //tmp_Cliente.Cognome = txtNome.Value;
+    //    tmp_Cliente.Email = txtEmail.Value;
+    //    //DateTime _d = DateTime.MinValue;
+    //    //if (DateTime.TryParse(txtDataNascita.Text, out _d))
+    //    //    tmp_Cliente.DataNascita = _d;
+    //    Session.Add("iscrivicliente", tmp_Cliente);
+    //    string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;
+    //    Response.Redirect(linkverifica);
+    //}
 
     protected void btnsearch1_Click(object sender, EventArgs e)
     {
@@ -944,14 +944,14 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         Session.Add("testoricerca", Server.HtmlEncode(txtSearchTop.Value)); //carico in sessione il parametro da cercare
         Response.Redirect(link);
     }
-    protected void btnsearch_Click(object sender, EventArgs e)
-    {
-        HttpContext.Current.Session.Clear();
-        //testoricerca
-        string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void btnsearch_Click(object sender, EventArgs e)
+    //{
+    //    HttpContext.Current.Session.Clear();
+    //    //testoricerca
+    //    string link = CommonPage.CreaLinkRicerca("", "-", "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
 
 #if false
     

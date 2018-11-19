@@ -241,7 +241,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 tmp = CaricaValoreMaster(Request, Session, "testoricerca", false);
                 if (!string.IsNullOrEmpty(tmp)) testoricerca = tmp;
 
-              
+
                 LoadJavascriptVariables();
                 SettaVisualizzazione();
 
@@ -268,7 +268,7 @@ public partial class AspNetPages_pwalist : CommonPage
             cs.RegisterClientScriptBlock(typeof(Page), "RegVariablesScriptPage", scriptRegVariables, true);
         }
     }
- 
+
     private void SettaVisualizzazione()
     {
         string cattipo = Tipologia;
@@ -482,6 +482,46 @@ public partial class AspNetPages_pwalist : CommonPage
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
+            case "rif000502":
+                AssociaDatiSocial();
+                PreselezionaCategoria();
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-12";
+                column2.Visible = false;
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                column3.Attributes["class"] = "col-12 col-sm-3";
+                column3.Visible = false;
+                ContaArticoliPerperiodo(Tipologia);
+                //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
+                divSearch.Visible = true;
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //placeholderrisultati.Text = sb.ToString();
+
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+
+                    //sb.Clear();
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                }
+                break;
             default:
                 AssociaDatiSocial();
 
@@ -523,6 +563,17 @@ public partial class AspNetPages_pwalist : CommonPage
                 break;
         }
     }
+    protected void PreselezionaCategoria()
+    {
+        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia)); });
+
+        if (prodotti != null && prodotti.Count > 0)
+        {
+            prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+            Categoria = prodotti[0].CodiceProdotto;
+        }
+    }
+
     protected void AssociaDatiSocial()
     {
 
@@ -1015,5 +1066,5 @@ public partial class AspNetPages_pwalist : CommonPage
         Response.Redirect(link);
     }
 
- 
+
 }
