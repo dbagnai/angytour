@@ -492,9 +492,9 @@ public partial class AspNetPages_pwalist : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = false;
-                ContaArticoliPerperiodo(Tipologia);
+                //ContaArticoliPerperiodo(Tipologia);
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
-                divSearch.Visible = true;
+                divSearch.Visible = false;
                 if (!JavaInjection)
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
@@ -506,7 +506,7 @@ public partial class AspNetPages_pwalist : CommonPage
                     //placeholderrisultati.Text = sb.ToString();
 
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                    sb.Append("injectPortfolioAndLoad,isotopePWAPortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();

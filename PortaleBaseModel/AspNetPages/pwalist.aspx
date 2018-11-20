@@ -39,7 +39,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
     <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
-        <div class="clearfix" style="margin: 0 10px 10px 0">
+        <div class="clearfix mb-3">
             <div class="float-right" style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                 <div class="sidebar-content tags blog-search ">
                     <div class="input-group flex-nowrap">

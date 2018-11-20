@@ -225,16 +225,16 @@ body {
 - NAVIGAZIONE - FIXED - TOP - sottomenu - PWA -
 ---------------------------------------------*/
 
+ul#ulSubmenu.nav {
+    display: none;
+}
+
 #ulSubmenu li a {
     &:extend(.nav-tabs .nav-link);
     display: block;
     padding: .5rem 1rem;
 }
 
-/*ul#ulSubmenu > li:first-of-type a {
-    border: 1px solid transparent;
-    &:extend(.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active);
-}*/
 /*---------------------------------
  NAVIGAZIONE - FIXED - BOTTOM - PWA
 ----------------------------------*/
@@ -445,8 +445,9 @@ ul.banner-pwa > li:nth-last-child(1) {
     font-weight: 600;
     margin-bottom: 4px;
     font-size: 0.9rem;
-    line-height: 14px;
+    line-height: 16.8px;
     letter-spacing: 0.2px;
+    text-transform: uppercase;
 }
 .banner-pwa .work-desc {
     line-height: 19px;
@@ -490,6 +491,7 @@ ul.isotope-pwa > li:first-of-type .work-title {
 ul.isotope-pwa > li:first-of-type .work-desc {
     font-size: 110%;
     line-height: calc(19px * 1.1);
+    max-height: 64.1px;
 }
 ul.isotope-pwa > li:first-of-type h5.work-desc {
     margin-bottom: 5px;
@@ -512,6 +514,7 @@ ul > li:first-of-type .pwa-txt-container {
     flex: 0 0 100%;
     max-width: 100%;
     padding: 15px 0 0 0;
+    max-height: 500px;
 }
 .pwa-txt-container {
     position: relative;
@@ -521,6 +524,9 @@ ul > li:first-of-type .pwa-txt-container {
     -ms-flex: 0 0 66.666667%;
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
+}
+.pwa-txt-container{
+    max-height: 93px;
 }
 .pwa-img-container {
     position: relative;
