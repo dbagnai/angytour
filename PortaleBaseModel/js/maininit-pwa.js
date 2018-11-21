@@ -36,17 +36,15 @@ $(function () {
 
 /*--- lo accendo se il path della pagina è quello delle NEWS --*/
 $(function () {
-    if (window.location.pathname == "/I/comunicazioni/comunicazioni") {
-    $('ul#ulSubmenu.nav').css('display', 'flex');
-    }
-/*---- lo accendo anche se è presente la classe submenutop ---*/
-    else if ($('.submenutop')[0]) {
-        $('ul#ulSubmenu.nav').css('display', 'flex');
-    }
-/*------------------ altrimenti lo spengo --------------------*/
-    else {
-        $('ul#ulSubmenu.nav').css('display', 'none');
-}
+    //if (window.location.pathname == "/I/comunicazioni/comunicazioni") {
+    //    $('ul#ulSubmenu.nav').css('display', 'flex');
+    //}
+    //else if ($('.submenutop')[0]) {
+    //    $('ul#ulSubmenu.nav').css('display', 'flex');
+    //}
+    //else {
+    //    $('ul#ulSubmenu.nav').css('display', 'none');
+    //}
 });
 
 /*-------- incornicio il 1° <li> quando APRO le NEWS ------------*/
@@ -64,10 +62,10 @@ $(function () {
 });
 
 /*-------- incornicio il 1° <li> quando ENTRO nella pagina corrispondente ------------*/
-$(function () {
-    if ($('ul#ulSubmenu > li:first-of-type a.submenutop')[0]) {
-        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('border', '1px solid');
-        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('border-color', '#098f8f #098f8f #fff');
-        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('background-color', '#fff');
-    }
-});
+//$(function () {
+//    if ($('ul#ulSubmenu > li:first-of-type a.submenutop')[0]) {
+//        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('border', '1px solid');
+//        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('border-color', '#098f8f #098f8f #fff');
+//        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('background-color', '#fff');
+//    }
+//});
