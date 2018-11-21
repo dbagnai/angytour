@@ -565,12 +565,15 @@ public partial class AspNetPages_pwalist : CommonPage
     }
     protected void PreselezionaCategoria()
     {
-        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia)); });
-
-        if (prodotti != null && prodotti.Count > 0)
+        if (Categoria == "")
         {
-            prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
-            Categoria = prodotti[0].CodiceProdotto;
+            List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia)); });
+
+            if (prodotti != null && prodotti.Count > 0)
+            {
+                prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+                Categoria = prodotti[0].CodiceProdotto;
+            }
         }
     }
 

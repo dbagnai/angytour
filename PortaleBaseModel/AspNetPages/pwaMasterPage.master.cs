@@ -344,7 +344,6 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             foreach (TipologiaOfferte o in sezioni)
             {
                 string testo = references.ResMan("Common", Lingua, "testo" + o.Codice); // o.Descrizione;
-
                 string testomodificato = references.ResMan("Common", Lingua, "testo" + o.Codice);
                 if (!string.IsNullOrEmpty(testomodificato))
                     testo = testomodificato;

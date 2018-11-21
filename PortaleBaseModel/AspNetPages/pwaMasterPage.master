@@ -157,12 +157,8 @@
 
         <%-- BODY--%>
         <section class="body-wrapper">
-
-            <!-- FINE MENU - TOP - DISABILITATO PER PWA --->
-
             <!-- MENU - TOP - PWA -->
             <nav class="slidemenu">
-
                 <!-- Item 1 HOME -->
                 <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked />
                 <label id="slide-label-1" for="slide-item-1">
@@ -180,14 +176,12 @@
                 <label id="slide-label-3" for="slide-item-3">
                     <span><%= CreaLinkTipologie(504,504) %></span>
                 </label>
-
                 <!-- Item 4 NEWS -->
                 <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle" />
                 <label id="slide-label-4" for="slide-item-4">
                     <span><%= CreaLinkTipologie(502,502) %></span>
                     <%--<span><%= CreaLinkSottoCategorie("rif000502","prod000037") %></span> --%>
                 </label>
-
                 <div class="clear"></div>
 
                 <!-- Bar -->
@@ -197,18 +191,14 @@
             </nav>
             <!-- MENU - TOP - PWA - END -->
             <ul id="ulSubmenu" class="nav nav-tabs px-3 mt-3" role="tablist"><%= CreaLinkCategorie(CodiceTipologia) %></ul>
-
-
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px;" runat="server" visible="false">
                 <div class="breadcrumbs clearfix">
                     <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" style="line-height: 40px;">
                     </ul>
                 </div>
             </div>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
@@ -216,7 +206,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
-                <%--<div style="max-width: 100%; margin: 0px auto; padding-left: 0px; padding-right: 0px">--%>
                 <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                 </asp:ContentPlaceHolder>
                 <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
@@ -226,11 +215,6 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderIndextext" runat="server">
             </asp:ContentPlaceHolder>
-
-            <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-
-            <%--QUI C'ERA IL MODULO CONTATTI CANCELLATO--%>
-
             <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
                 <div style="height: 100%; width: 100%; position: relative">
                     <div id="map1" style="height: 410px; width: 100%">
@@ -239,8 +223,43 @@
                 </div>
             </asp:PlaceHolder>
         </section>
+        <!-- MENU - BOTTOM - PWA -->
+        <div class="fixedbottom" id="divBottom">
 
-        <%--QUI C'ERA IL FOOTER CANCELLATO--%>
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-home-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-call-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-notification-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-pin-swg"></use></svg></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" href="#">
+                        <svg class="menu-bottom-icon-swg">
+                            <use xlink:href="#icon-search-swg"></use></svg></a>
+                </li>
+            </ul>
+        </div>
+        <div class="container-write-icon-swg">
+            <a class="" href="#">
+                <svg class="write-icon-swg">
+                    <use xlink:href="#icon-write-swg"></use></svg></a>
+        </div>
+        <!-- END - MENU - BOTTOM - PWA -->
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
         </asp:ContentPlaceHolder>
@@ -249,7 +268,6 @@
         </div>
         <div id="divSearchBarPlaceholder">
         </div>
-
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
         <script>
             var makeRevLower = false;
@@ -285,47 +303,6 @@
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
     <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>
-
-
-
-    <!-- MENU - BOTTOM - PWA -->
-    <div class="fixedbottom" id="divBottom">
-
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link d-flex" href="#">
-                    <svg class="menu-bottom-icon-swg">
-                        <use xlink:href="#icon-home-swg"></use></svg></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex" href="#">
-                    <svg class="menu-bottom-icon-swg">
-                        <use xlink:href="#icon-call-swg"></use></svg></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex" href="#">
-                    <svg class="menu-bottom-icon-swg">
-                        <use xlink:href="#icon-notification-swg"></use></svg></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex" href="#">
-                    <svg class="menu-bottom-icon-swg">
-                        <use xlink:href="#icon-pin-swg"></use></svg></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex" href="#">
-                    <svg class="menu-bottom-icon-swg">
-                        <use xlink:href="#icon-search-swg"></use></svg></a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="container-write-icon-swg">
-        <a class="" href="#">
-            <svg class="write-icon-swg">
-                <use xlink:href="#icon-write-swg"></use></svg></a>
-    </div>
-    <!-- END - MENU - BOTTOM - PWA -->
 
     <%--HOME ICONE SWG--%>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
