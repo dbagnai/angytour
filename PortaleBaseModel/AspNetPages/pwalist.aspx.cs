@@ -730,9 +730,7 @@ public partial class AspNetPages_pwalist : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////SEZIONE META TITLE E DESC E CONTENUTO HEADER PAGINA ///////////////////////
-
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
-
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
         string sezionedescrizione = "";
         if (!string.IsNullOrEmpty(Categoria2liv))
@@ -758,7 +756,6 @@ public partial class AspNetPages_pwalist : CommonPage
         {
             ////////EVIDENZIAZIONE MENU
             EvidenziaSelezione(sezione.Descrizione); // Server Solo per la voce al top dei dropdown ....
-
             ///////////////////////NOME PAGINA////////////////////////////////
             string titolopagina = sezione.Descrizione;
             litNomePagina.Text = titolopagina;
@@ -773,8 +770,6 @@ public partial class AspNetPages_pwalist : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
-
-
             ///////////////////////////////////////////////////////////////
         }
 
