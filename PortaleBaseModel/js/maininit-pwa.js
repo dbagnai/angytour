@@ -49,15 +49,13 @@ $(function () {
 
 /*-------- incornicio il 1° <li> quando APRO le NEWS ------------*/
 $(function () {
-    if ($('.submenutop')[0]) {
-        //
-    }
-    else {
-        $('ul#ulSubmenu > li:first-of-type a').css('border', '1px solid');
-        $('ul#ulSubmenu > li:first-of-type a').css('border-color', '#098f8f #098f8f #fff');
-        $('ul#ulSubmenu > li:first-of-type a').css('background-color', '#fff');
-        $('ul#ulSubmenu > li:first-of-type a').css('font-weight', '600');
-        $('ul#ulSubmenu > li:first-of-type a').css('color', '#032f2f');
+    if ($('.submenutop').length == 0) {
+        $('ul#ulSubmenu > li:first-of-type a').addClass("nav-link active submenutop");
+        //$('ul#ulSubmenu > li:first-of-type a').css('border', '1px solid');
+        //$('ul#ulSubmenu > li:first-of-type a').css('border-color', '#098f8f #098f8f #fff');
+        //$('ul#ulSubmenu > li:first-of-type a').css('background-color', '#fff');
+        //$('ul#ulSubmenu > li:first-of-type a').css('font-weight', '600');
+        //$('ul#ulSubmenu > li:first-of-type a').css('color', '#032f2f');
     }
 });
 
