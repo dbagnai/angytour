@@ -600,10 +600,10 @@
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
-             "~/css/opj/style-100.css", /*SET-COLORI*/
+             //"~/css/opj/style-100.css",  
              "~/css/mbr-faq.css",
              "~/css/mbr-additional.css",
-             "~/css/landing.css",
+             //"~/css/landing.css",
              "~/css/custom1.css",
              "~/css/custom.css"
           );
@@ -614,9 +614,9 @@
          "~/js/menuzord/files/css/menuzord.css",
          "~/js/menuzord/files/css/skins/menuzord-colored.css",
           "~/js/menuzord/files/css/menuzordcustomize.css",
-                    "~/css/fontawesome541/css/all.min.css",
-              "~/css/fontawesome541/css/v4-shims.min.css",
-              "~/css/tipsy.css",
+        "~/css/fontawesome541/css/all.min.css",
+        "~/css/fontawesome541/css/v4-shims.min.css",
+        "~/css/tipsy.css",
          "~/css/prettyPhoto.css",
          "~/css/isotop_animation.css",
          "~/css/animate.css",
@@ -631,10 +631,10 @@
          "~/css/ashobiz/ashobiz-176.css",
            "~/css/style1.css",
          "~/css/ui-personalization.css",
-          "~/css/opj/style-100.css", /*SET-COLORI*/
+          //"~/css/opj/style-100.css",  
           "~/css/mbr-faq.css",
           "~/css/mbr-additional.css",
-          "~/css/landing.css",
+          //"~/css/landing.css",
           "~/css/custom1.css",
           "~/css/custom.css",
           "~/css/custom-pwa.css"

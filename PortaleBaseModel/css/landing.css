@@ -3,9 +3,9 @@
    MIRCO
 
 -------*/
-.body-wrapper a:hover, .top-body a:hover, .top-footer a:hover {
+/*.body-wrapper a:hover, .top-body a:hover, .top-footer a:hover {
     color: #606060;
-}
+}*/
 
 .btn {
     border: 1px solid transparent;
@@ -42,7 +42,6 @@ h3.mbr-section-title.display-2 {
     color: #F1C050;
     text-decoration: none;
     font-weight: 900;
-    font-family: 'Raleway',sans-serif;
 }
 
 .mbr-cards .card {
@@ -65,7 +64,6 @@ h3.mbr-section-title.display-2 {
 }
 
 .mbr-testimonial .card-block p {
-    font-family: "Lato";
     font-size: 1.28rem !important;
     line-height: 2 !important;
 }
@@ -82,13 +80,7 @@ h3.mbr-section-title.display-2 {
     color: #535353 !important;
 }
 
-.mbr-section-full {
-    height: calc(100vh - 60px) !important;
-}
 
-    .mbr-section-full .mbr-overlay {
-        min-height: calc(100vh - 60px) !important;
-    }
 
 @media (min-width: 768px) {
     .text-md-right {
@@ -105,9 +97,10 @@ h3.mbr-section-title.display-2 {
    STYLE - assets\theme\css\style.css
 
 -------*/
-.container {
+
+/*.container {
     position: relative;
-}
+}*/
 
 .btn {
     margin-bottom: 0.5rem;
@@ -152,8 +145,7 @@ h3.mbr-section-title.display-2 {
 }
 
 .btn {
-    font-family: 'Lato', sans-serif;
-    font-weight: 4500;
+    font-weight: 500;
     letter-spacing: 2px;
     padding: 0.75rem 2.1875rem;
     font-size: 0.75rem;
@@ -936,6 +928,14 @@ input, textarea {
     color: #535353 !important;
 }
 
+/*.mbr-section-full {
+    height: calc(100vh - 60px) !important;
+}
+
+    .mbr-section-full .mbr-overlay {
+        min-height: calc(100vh - 60px) !important;
+    }
+
 .mbr-section {
     position: relative;
     padding-top: 120px;
@@ -1108,7 +1108,7 @@ input, textarea {
 .mbr-section-full .mbr-background-video,
 .mbr-section-full .mbr-background-video-preview {
     min-height: 100vh;
-}
+}*/
 
 .mbr-background-video,
 .mbr-background-video-preview {

@@ -404,6 +404,9 @@ p, p.lead, .lead p {
     font-size: @body-size;
     font-weight: @body-weight;
     line-height: 1.4 !important;
+    margin: 2px 0px;
+    padding: 0px;
+    margin-bottom: 5px;
 }
 html {
     -webkit-text-size-adjust: 100%;
@@ -414,30 +417,29 @@ body {
     overflow-x: hidden;
 }
  
- 
-
 body, html, button, input, select, textarea {
     &:extend(p);
     font-size: 1em;
     background-color: transparent;
 }
-/*body {
-    font-family: 'Raleway', sans-serif;
-    color: #232323;
+.container {
+    position: relative;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6,
-.display-1, .display-2, .display-3, .display-4 {
-    font-family: 'Raleway', sans-serif;
-    word-break: break-word;
-    word-wrap: break-word;
+.body-wrapper {
+    padding: 0px 0px;
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    overflow-x: inherit;
 }
 
-input, textarea {
-    font-family: "Raleway";
-}*/
-
+@media (max-width: 415px) {
+    .body-wrapper {
+        overflow-x: hidden;
+    }
+}
+ 
 /*----------------------------------
 -------------- PULSANTI --------------
 ----------------------------------*/
@@ -1120,7 +1122,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     background-color: @bg-primary-color;
 }
 
-    /*------------------------------------
+/*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
 .prezzo-responsive {
@@ -1575,7 +1577,7 @@ b, strong {
 
 .faq-section .card {
     background-color: @white-color;
-    border: none;
+    /*border: none;*/
     border-radius: 0px;
     margin-bottom: -1px;
 }
@@ -1848,3 +1850,184 @@ button.js-roundedpush:hover {
 .rating {
     color: @bg-primary-color !important;
 }
+
+
+
+/* -------------------------
+  Stili from landing.css
+--------------------------- */
+
+.mbr-section-full {
+    height: calc(100vh - 60px) !important;
+}
+
+.mbr-section-full .mbr-overlay {
+    min-height: calc(100vh - 60px) !important;
+}
+
+.mbr-section {
+    position: relative;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mbr-section-full {
+    display: table;
+    height: 100vh;
+    padding-bottom: 0;
+    padding-top: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.mbr-section-full > .mbr-table-cell {
+    width: 100%;
+}
+
+.mbr-section-small {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.mbr-section__container--first {
+    padding-top: 120px;
+    padding-bottom: 40px;
+}
+
+.mbr-section__container--middle {
+    padding-top: 0;
+    padding-bottom: 40px;
+}
+
+.mbr-section__container--last {
+    padding-top: 0;
+    padding-bottom: 120px;
+}
+
+.mbr-section-sm-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.mbr-section-md-padding {
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+
+.mbr-section-nopadding {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mbr-section-title + .mbr-section-subtitle {
+    margin-top: -21px;
+}
+
+.mbr-section-hero::before {
+    display: none !important;
+}
+
+.mbr-section-hero .mbr-section-title {
+    color: #fff;
+    margin-bottom: 1.6875rem;
+}
+
+.mbr-section-hero .mbr-section-lead {
+    color: #fff;
+    font-family: @base-font;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: -1em;
+}
+
+.mbr-section-hero .mbr-section-text {
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .mbr-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .mbr-section-full {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .mbr-section__container--first {
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+
+    .mbr-section__container--middle {
+        padding-top: 0;
+        padding-bottom: 40px;
+    }
+
+    .mbr-section__container--last {
+        padding-top: 0;
+        padding-bottom: 60px;
+    }
+
+    .mbr-section-sm-padding {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .mbr-section-md-padding {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .mbr-section-nopadding {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .mbr-section-subtitle {
+        margin-bottom: 0;
+    }
+
+    .mbr-section-hero.mbr-after-navbar .mbr-section {
+        padding-top: 120px;
+    }
+
+    .mbr-section-hero.mbr-section-with-arrow .mbr-section {
+        padding-bottom: 120px;
+    }
+
+    .mbr-section-hero .mbr-section-title {
+        font-size: 3.125rem !important;
+    }
+
+    .mbr-section-hero .mbr-section-lead {
+        font-size: 1.125rem !important;
+    }
+
+    .mbr-section-hero .mbr-section-btn .btn {
+        font-size: 0.75rem !important;
+        line-height: 1.5;
+        padding: 0.75rem 2.1875rem;
+    }
+}
+
+.mbr-section-full .mbr-overlay {
+    min-height: 100vh;
+}
+
+ 
+
+.mbr-overlay ~ * {
+    z-index: 2;
+}
+
+.mbr-section-full .mbr-background-video,
+.mbr-section-full .mbr-background-video-preview {
+    min-height: 100vh;
+}
+

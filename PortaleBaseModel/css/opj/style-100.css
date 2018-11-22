@@ -1,11 +1,4 @@
-/************************
-Designed by : http://responsivewebinc.com
-***********************
-/* General */
-body {
-    /*font-family: 'Raleway', sans-serif;*/
-    -webkit-font-smoothing: antialiased;
-}
+/*
 
 h1,
 h2,
@@ -14,7 +7,6 @@ h4,
 h5,
 h6 {
     color: #666;
-    font-family: 'Raleway', sans-serif;
     font-weight: 600;
     margin: 2px 0px;
     padding: 0px;
@@ -81,7 +73,7 @@ hr {
 
 ::-moz-focus-inner {
     border: 0;
-}
+}*/
 /* Text color classes */
 .white {
     color: #ffffff !important;
@@ -491,6 +483,7 @@ hr {
         background: #d08166;
         color: #ffffff;
     }
+
 /* Badges */
 .badge {
     min-width: 10px;
@@ -705,11 +698,13 @@ hr {
         background: #b72411;
     }
 
-/* UI X */
-body {
-    /*background:#f4f8fd;*/
-}
 
+
+
+/* -------------------------
+    ui oer i form
+    ------------------*/
+/*  
 .ui-100 {
     margin: 50px 0px;
 }
@@ -812,3 +807,4 @@ body {
         .ui-100 .team-member:hover .team-details p {
             color: #fff;
         }
+    */

@@ -1,15 +1,20 @@
 ﻿/* Add here all your css styles (customizations) */
 
-
-
 .bckGray {
     /*background-color: #f9f9f9;*/
     background-color: rgb(249,249,249);
 }
 
-p {
-    font-family: 'Lato';
-    font-size: 1rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #666;
+    font-weight: 600;
+    margin: 2px 0px;
+    padding: 0px;
 }
 
 h1 {
@@ -42,44 +47,32 @@ h6 {
     line-height: 20px;
 }
 
+hr {
+    margin: 10px 0px;
+    padding: 0px;
+    border-top: 0px;
+    border-bottom: 1px solid #eee;
+}
+
+:focus {
+    outline: none;
+}
+
 a {
+    text-decoration: none;
     color: #666666;
-    text-decoration: none;
 }
 
-a {
-    text-decoration: none;
-}
-
-    a:focus {
+    a:hover, a:active, a:focus {
         outline: none;
-    }
-
-    a:hover {
         text-decoration: none;
+        color: #999;
     }
 
-.body_paragraph {
-    font-family: 'Lato';
-}
 
-.body-wrapper {
-    padding: 0px 0px;
-    position: relative;
-    z-index: 0;
-    width: 100%;
-    overflow-x: inherit;
-}
-
-@media (max-width: 415px) {
-    .body-wrapper {
-        overflow-x: hidden;
-    }
-}
 
 input.inputnoback,
 textarea.inputnoback {
-    font-family: 'Lato';
     font-size: 1.1em;
     background: transparent;
     border: none;
@@ -89,7 +82,6 @@ input.inputgray,
 textarea.inputgray,
 input.inputgray:focus,
 textarea.inputgray:focus {
-    font-family: 'Lato';
     font-size: 1em;
     background: #666;
     color: #fff;
@@ -568,27 +560,21 @@ a.buttonstyleoutline {
 /*FINE STYLES FOR BANNER FASCIA --------------------------------------------*/
 
 .title-block {
-    /*font-family: 'Open Sans';*/
-    font-family: 'Raleway';
     font-size: 2.6rem;
     color: #1d1b1e;
 }
 
     .title-block a {
-        /*font-family: 'Open Sans';*/
-        font-family: 'Raleway';
         font-size: 3rem;
         color: #1d1b1e;
     }
 
 .subtitle-block a {
-    font-family: 'Raleway';
     font-size: 1.4rem;
     color: #1d1b1e;
 }
 
 .subtitle-block {
-    font-family: 'Raleway';
     font-size: 1.4rem;
     color: #1d1b1e;
 }
@@ -1212,7 +1198,6 @@ Portfolio
 .title-style1 {
     /*float: left;*/
     text-align: left;
-    font-family: 'Raleway';
     font-size: 1.6rem;
     font-weight: 700;
     margin: 10px 5px 15px 0px;
@@ -2243,7 +2228,6 @@ Portfoli Single ( da rival )
     padding: 30px;
     font-size: 1.3rem !important;
     text-align: center;
-    font-family: 'Lato';
 }
 
 .text-shadow {
@@ -2251,7 +2235,6 @@ Portfoli Single ( da rival )
 }
 
 .bigtextleft {
-    font-family: 'Raleway';
     color: #fff;
     font-size: 3rem;
     font-weight: 700;
@@ -2272,14 +2255,12 @@ Portfoli Single ( da rival )
     max-width: auto;
     max-height: auto;
     /*white-space: nowrap;*/
-    font-family: 'Lato', serif;
     font-style: italic;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
 }
 
 .slider-text-description .big {
     color: #fff !important;
-    font-family: 'Lato';
     line-height: normal !important;
     background-color: transparent;
     padding: 10px;
@@ -2304,7 +2285,6 @@ Portfoli Single ( da rival )
 .big {
     width: 100%;
     color: #fff !important;
-    font-family: 'Raleway';
     line-height: normal !important;
     /*background-color:rgba(0,0,0,0.4);*/
     background-color: transparent;
@@ -2330,7 +2310,6 @@ Portfoli Single ( da rival )
     line-height: normal !important;
     /*background-color:rgba(0,0,0,0.4);*/
     background-color: transparent;
-    font-family: 'Lato' !important;
     padding: 15px;
     font-size: 1.8rem !important;
     /*font-size: 3vw;*/
@@ -2360,9 +2339,6 @@ ol.flex-control-thumbs li {
 }
 /*Blog customizatio*/
 
-.h3-sidebar-title {
-    font-family: "Lato";
-}
 
 .sidebar-block {
     padding: 15px;
@@ -2972,15 +2948,11 @@ button.btn,
 }
 
 .lateral-bar {
-    font-family: "Lato";
     background-color: #f1f5f6;
-    /*background-color: #33332e;*/
     width: 100px;
     position: fixed;
     left: 0px;
     top: 0px;
-    /*height: auto;*/
-    /*top: 10%;*/
     height: 100%;
     z-index: 11000;
     border: 1px solid #ccc;
@@ -3042,7 +3014,6 @@ button.btn,
     .box-background h2 {
         color: #473a2f;
         font-size: 2.5em;
-        font-family: "Lato";
         font-weight: normal;
         margin: 20px 0;
     }
@@ -3050,7 +3021,6 @@ button.btn,
     .box-background .title-news {
         color: #473a2f;
         font-size: 22px;
-        font-family: "Lato";
         font-weight: normal;
         margin: 10px 0;
     }
@@ -3072,7 +3042,6 @@ button.btn,
 .box-background h3 {
     color: #473a2f;
     font-size: 23px;
-    font-family: 'Raleway', sans-serif;
     font-style: italic;
     font-weight: normal;
     margin: 20px 0;
@@ -3129,7 +3098,6 @@ button.btn,
         }
 
 .box-background .price {
-    font-family: "Lato";
     font-size: 25px;
     font-weight: 400;
     float: right;
@@ -3155,7 +3123,6 @@ button.btn,
 
 .box-background table {
     font-size: 1.2em;
-    font-family: "Lato";
     font-weight: 400;
     margin-top: 10px;
     width: 100%;
@@ -3167,7 +3134,6 @@ button.btn,
     }
 
         .box-background table tr td span {
-            font-family: "Lato";
             font-size: 19px;
             font-weight: 400;
         }
@@ -4035,7 +4001,6 @@ p.lead, .lead p {
 }
 
 .ecomctr .ecomctr-group-title {
-    /*font-family: "";*/
     color: #e7b315;
     font-size: 30px;
     line-height: 43px;
@@ -4374,6 +4339,7 @@ Modify  class per datepicker
 #collapse_faq p {
     margin-bottom: 0;
 }
+
 .body-banner-slider a p {
     font-size: 1.1rem;
 }

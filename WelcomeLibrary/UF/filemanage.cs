@@ -913,7 +913,7 @@ namespace WelcomeLibrary.UF
                     if (int.TryParse(viewportw, out actwidth))
                     {
                         string modifier = "";
-                        if (actwidth <= 576 && filemanage.reslevels >= 1)
+                        if (actwidth > 0 && actwidth <= 576 && filemanage.reslevels >= 1)
                             modifier = "-xs";
                         else if (actwidth > 576 && actwidth <= 768 && filemanage.reslevels >= 2)
                             modifier = "-sm";

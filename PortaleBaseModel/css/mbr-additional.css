@@ -1,82 +1,4 @@
-body,
-input,
-textarea,
-.mbr-company .list-group-text {
-    font-family: 'Lato', sans-serif;
-}
-
-.mbr-footer-content li,
-.mbr-footer .mbr-contacts li {
-    font-family: 'Lato', sans-serif;
-}
-
-.btn,
-.alert,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-.display-1,
-.display-2,
-.display-3,
-.display-4,
-.mbr-figure .mbr-figure-caption,
-.mbr-gallery-title,
-.mbr-map [data-state-details],
-.mbr-price {
-    font-family: 'Raleway', sans-serif;
-}
-
-.mbr-footer-content h1,
-.mbr-footer .mbr-contacts h1,
-.mbr-footer-content h2,
-.mbr-footer .mbr-contacts h2,
-.mbr-footer-content h3,
-.mbr-footer .mbr-contacts h3,
-.mbr-footer-content h4,
-.mbr-footer .mbr-contacts h4,
-.mbr-footer-content p strong,
-.mbr-footer .mbr-contacts p strong,
-.mbr-footer-content strong,
-.mbr-footer .mbr-contacts strong {
-    font-family: 'Raleway', sans-serif;
-}
-
-.btn-sm,
-.lead a,
-.lead blockquote,
-.mbr-section-subtitle,
-.mbr-section-hero .mbr-section-lead,
-.mbr-cards .card-subtitle,
-.mbr-testimonial .card-block {
-    font-family: 'Lato', serif;
-}
-
-.mbr-author-name {
-    font-family: 'Raleway', sans-serif;
-}
-
-.mbr-author-desc {
-    font-family: 'Lato', serif;
-}
-
-.mbr-plan-title {
-    font-family: 'Raleway', sans-serif;
-}
-
-.mbr-plan-subtitle,
-.mbr-plan-price-desc {
-    font-family: 'Lato', serif;
-}
-
+  
 .bg-primary {
     background-color: #c0a375 !important;
 }
@@ -417,7 +339,28 @@ h6,
         background: #c0a375;
     }
 
-.mbr-company .list-group-item.active .list-group-text {
+.lead a,
+.lead a:hover {
+    color: #c0a375;
+}
+
+.lead blockquote {
+    border-color: #c0a375;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*.mbr-company .list-group-item.active .list-group-text {
     color: #c0a375;
 }
 
@@ -434,15 +377,6 @@ h6,
 .mbr-footer-content li a:hover,
 .mbr-footer .mbr-contacts li a:hover {
     color: #c0a375;
-}
-
-.lead a,
-.lead a:hover {
-    color: #c0a375;
-}
-
-.lead blockquote {
-    border-color: #c0a375;
 }
 
 .mbr-plan-header.bg-primary .mbr-plan-subtitle,
@@ -739,16 +673,7 @@ h6,
     text-align: center;
 }
 
-#menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
-}
+
 
     #menu-x .hide-buttons .nav-btn {
         display: none !important;
@@ -849,7 +774,6 @@ h6,
 
 @media only screen and (min-width: 768px) {
     #header1-y {
-        /* desktop - tablets: */
     }
 
         #header1-y #clockdiv {
@@ -883,7 +807,6 @@ h6,
 
 @media only screen and (max-width: 768px) {
     #header1-y {
-        /* desktop - tablets: */
     }
 
         #header1-y #clockdiv {
@@ -904,7 +827,6 @@ h6,
 }
 
 #custom-html-4h {
-    /* Type valid CSS here */
 }
 
     #custom-html-4h .logo {
@@ -1085,14 +1007,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+ 
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -1188,7 +1103,6 @@ h6,
     }
 
 #custom-html-4i {
-    /* Type valid CSS here */
 }
 
     #custom-html-4i .logo {
@@ -1285,7 +1199,6 @@ h6,
 }
 
 #header3-2g SMALL {
-    /*font-size: 24px;*/
     color: #28262b;
 }
 
@@ -1303,7 +1216,6 @@ h6,
 }
 
 #header3-2k SMALL {
-    /*font-size: 24px;*/
     color: #5c5c5c;
 }
 
@@ -1316,14 +1228,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+ 
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -1419,7 +1324,6 @@ h6,
     }
 
 #custom-html-4j {
-    /* Type valid CSS here */
 }
 
     #custom-html-4j .logo {
@@ -1558,14 +1462,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+ 
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -1661,7 +1558,6 @@ h6,
     }
 
 #custom-html-4k {
-    /* Type valid CSS here */
 }
 
     #custom-html-4k .logo {
@@ -1763,14 +1659,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+     
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -1866,7 +1755,6 @@ h6,
     }
 
 #custom-html-4l {
-    /* Type valid CSS here */
 }
 
     #custom-html-4l .logo {
@@ -1945,14 +1833,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+ 
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -2112,14 +1993,7 @@ h6,
 }
 
 #menu-x {
-    /* #en {
-    background: url(http://www.agriturismopassalacqua.it/icone/bandiera_inglese.jpg) center no-repeat;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 -32px 0 -32px;
-    color: rgba(0, 0, 0, 0.);
-    padding: 9px 16px;
-    border-radius: 3px;
-} */
+
 }
 
     #menu-x .hide-buttons .nav-btn {
@@ -2216,4 +2090,4 @@ h6,
 
 #header2-4b .mbr-section-text {
     font-size: 24px;
-}
+}*/

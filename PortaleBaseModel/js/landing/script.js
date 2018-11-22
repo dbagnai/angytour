@@ -402,7 +402,7 @@
                 }).addClass('hidden animated');
 
                 function getElementOffset(element) {
-                    var top = 0
+                    var top = 0;
                     do {
                         top += element.offsetTop  || 0;
                         element = element.offsetParent;

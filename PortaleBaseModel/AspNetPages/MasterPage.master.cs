@@ -466,6 +466,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
         }
         prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         if (prodotti != null)
             foreach (Prodotto o in prodotti)
             {
