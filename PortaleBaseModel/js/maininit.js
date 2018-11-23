@@ -253,83 +253,9 @@ jQuery(document).ready(function ($) {
             }, 500);
         });
 
-        //setInterval(function () {
-        //    $('#masonry-elements,.portfolio-items').isotope('reLayout');
-        //}, 1000);
+     
     };
-
-    /*Addded for porfolio reinit after click on tabs */
-    //$('.tab-container').click(function () {
-    //    $('#masonry-elements,.portfolio-items').isotope('reLayout');
-    //    setTimeout(function () {
-    //        $('#masonry-elements,.portfolio-items').isotope('reLayout');
-    //    }, 500);
-
-    //});
-    //$(window).resize(function () {
-    //    centeringBullets();
-    //    $('.tab-container').trigger('easytabs:midTransition');
-    //    $('#masonry-elements,.portfolio-items').isotope('reLayout');
-    //    setTimeout(function () {
-    //        $('#masonry-elements,.portfolio-items').isotope('reLayout');
-    //    }, 500);
-    //});
-
-    //var $cont = $('.portfolio-items');
-
-    // IE 8
-    //if ($("html").hasClass("lt-ie9")) {
-    //    $cont.isotope({
-    //        itemSelector: '.portfolio-items .thumb-label-item',
-    //        masonry: { columnWidth: $('.isotope-item:first').width(), gutterWidth: 25 },
-    //        filter: '*',
-    //        transformsEnabled: false,
-    //        layoutMode: 'masonry',
-    //        animationEngine: 'css'
-    //    });
-    //}
-    //else {
-    //    $cont.isotope({
-    //        itemSelector: '.portfolio-items .thumb-label-item',
-    //        masonry: { columnWidth: $('.isotope-item:first').width(), gutterWidth: 25 },
-    //        filter: '*',
-    //        transformsEnabled: false,
-    //        layoutMode: 'masonry',
-    //        //  animationEngine: 'css'
-    //    });
-    //}
-
-    //$('.portfolio-filter-container a').click(function () {
-    //    $cont.isotope({
-    //        filter: this.getAttribute('data-filter')
-    //    });
-
-    //    return false;
-    //});
-
-    //var lastClickFilter = null;
-    //$('.portfolio-filter a').click(function () {
-    //    //first clicked we don't know which element is selected last time
-    //    if (lastClickFilter === null) {
-    //        $('.portfolio-filter a').removeClass('portfolio-selected');
-    //    }
-    //    else {
-    //        $(lastClickFilter).removeClass('portfolio-selected');
-    //    }
-
-    //    lastClickFilter = this;
-    //    $(this).addClass('portfolio-selected');
-    //});
-
-    ///* Tabs Init */
-    //easyTabsZeina('.tab-container', {
-    //    animationSpeed: 'fast',
-    //    defaultTab: 'li:first-child',
-    //    tabs: 'ul>li'
-    //});
-
-    /* Search Box Effect Handler */
-
+     
     //Click
     $('.searchbox .searchbox-icon,.searchbox .searchbox-inputtext').bind('click', function () {
         var $search_tbox = $('.searchbox .searchbox-inputtext');
@@ -344,52 +270,7 @@ jQuery(document).ready(function ($) {
         $search_tbox.css('width', '0px');
         $('.searchbox', this).removeClass('searchbox-focus');
     });
-
-    /*
-    // Clients Carousel
-    if ($(".clients-list") != null)
-        $(".clients-list").carouFredSel({
-            items: {
-                width: 170,
-                visible: {
-                    min: 1,
-                    max: 6
-                }
-            },
-            prev: {
-                button: function () {
-                    return jQuery(this).closest('.row-fluid').find('.carousel-prev');
-                },
-                key: "left"
-            },
-            next: {
-                button: function () {
-                    return jQuery(this).closest('.row-fluid').find('.carousel-next');
-                },
-                key: "right"
-            },
-            responsive: true,
-            auto: false,
-            scroll: {
-                onAfter: function () {
-                     //We have bug in chrome, and we need to force chrome to re-render specific portion of the page
-                     //after it's complete the scrolling animation so this is why we add these dumb lines.
-
-                    if (/chrome/.test(navigator.userAgent.toLowerCase())) {
-                        this.style.display = 'none';
-                        this.offsetHeight;
-                        this.style.display = 'block';
-                    }
-                },
-                items: 1
-            }
-        }, {
-            debug: false
-        });
-        */
-
-    // $('.accordion .accordion-row:first-child .title').trigger('click'); //Apre sempre il primo elemento dell'accordion
-
+     
     if (document.getElementById('contact_map')) {
         google.maps.event.addDomListener(window, 'load', contactusMap);
     }
@@ -401,197 +282,11 @@ jQuery(document).ready(function ($) {
         autoplay_slideshow: false, /* true/false */
         opacity: 0.80  /* Value between 0 and 1 */
     });
-
-    //$('.navigation').AXMenu({
-    //    showArrowIcon: true, // true for showing the menu arrow, false for hide them
-    //    firstLevelArrowIcon: '',
-    //    menuArrowIcon: ""
-    //});
-
-    /* Mobile Nav  ORIGINAL IN KANZI */
-
-    //$('.header .mobile-nav ').append($('.navigation').html());
-    //$('.header .mobile-nav li').bind('click', function(e) {
-    //    var $this = $(this);
-    //    var $ulKid = $this.find('>ul');
-    //    var $ulKidA = $this.find('>a');
-
-    //    if ($ulKid.length === 0 && $ulKidA[0].nodeName.toLowerCase() === 'a') {
-    //        window.location.href = $ulKidA.attr('href');
-    //    }
-    //    else {
-    //        $ulKid.toggle(0, function() {
-    //            if ($(this).css('display') === 'block') {
-    //                $ulKidA.find('.icon-chevron-down').removeClass('icon-chevron-down').addClass('icon-chevron-up');
-    //            }
-    //            else {
-    //                $ulKidA.find('.icon-chevron-up').removeClass('icon-chevron-up').addClass('icon-chevron-down');
-    //            }
-    //        });
-    //    }
-
-    //    e.stopPropagation();
-
-    //    return false;
-    //});
-
-    //$('.mobile-menu-button').click(function() {
-    //    $('.mobile-nav').toggle();
-    //});
-    //$('.header .mobile-nav .icon-chevron-right').each(function () {
-    //    $(this).removeClass('icon-chevron-right').addClass('icon-chevron-down');
-    //});
-
-    /* Revolution Slider */
-    //show until every thing loaded
-    //$('.rev-slider-fixed,.rev-slider-full').css('visibility', 'visible');
-
-    //Fixed Size
-    //$('.rev-slider-banner-fixed').revolution({
-    //    delay: 5000,
-    //    startwidth: 926,
-    //    startheight: 350,
-    //    onHoverStop: "on",
-    //    thumbWidth: 100,
-    //    thumbHeight: 50,
-    //    thumbAmount: 3,
-    //    hideThumbs: 0,
-    //    navigationType: "bullet",
-    //    navigationArrows: "solo",
-    //    navigationStyle: "round",
-    //    navigationHAlign: "center",
-    //    navigationVAlign: "bottom",
-    //    navigationHOffset: 30,
-    //    navigationVOffset: -40,
-    //    soloArrowLeftHalign: "left",
-    //    soloArrowLeftValign: "center",
-    //    soloArrowLeftHOffset: 5,
-    //    soloArrowLeftVOffset: 0,
-    //    soloArrowRightHalign: "right",
-    //    soloArrowRightValign: "center",
-    //    soloArrowRightHOffset: 5,
-    //    soloArrowRightVOffset: 0,
-    //    touchenabled: "on",
-    //    stopAtSlide: -1,
-    //    stopAfterLoops: -1,
-    //    hideCaptionAtLimit: 0,
-    //    hideAllCaptionAtLilmit: 0,
-    //    hideSliderAtLimit: 0,
-    //    fullWidth: "off",
-    //    fullScreen: "off",
-    //    fullScreenOffsetContainer: "#topheader-to-offset",
-    //    shadow: 0
-
-    //});
-
-    /* Full http://previous.themepunch.com/revolution4-jquery/liveguide/08.Sample-NavigationStyle.html */
-    /*
-    if (!makeRevLower)
-        $('.rev-slider-banner-full').revolution({
-            delay: 5000,
-            startwidth: 1920,
-            startheight: 800,
-            //startwidth: 1170,
-            //startheight: 550,
-            onHoverStop: "on",
-            thumbWidth: 100,
-            thumbHeight: 50,
-            thumbAmount: 3,
-            hideThumbs: 0,
-            navigationType: "none",// use none, bullet or thumb
-            navigationArrows: "nextto", // nextto, solo, none, nextto questo per le frecce laterali
-            navigationStyle: "square",  // round, square, navbar, round-old, square-old, navbar-old
-            navigationHAlign: "center",
-            navigationVAlign: "bottom",
-            navigationHOffset: 30,
-            navigationVOffset: 20,
-            soloArrowLeftHalign: "left",
-            soloArrowLeftValign: "center",
-            soloArrowLeftHOffset: 20,
-            soloArrowLeftVOffset: 0,
-            soloArrowRightHalign: "right",
-            soloArrowRightValign: "center",
-            soloArrowRightHOffset: 20,
-            soloArrowRightVOffset: 0,
-            touchenabled: "on",
-            stopAtSlide: -1,
-            stopAfterLoops: -1,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            hideSliderAtLimit: 0,
-            fullWidth: "on",
-            fullScreen: "off",
-            autoHeight: "off",
-            fullScreenOffsetContainer: "#topheader-to-offset",
-            lazyLoad: "on",
-            keyboardNavigation: "on",
-            shadow: 0
-        });
-    else
-        $('.rev-slider-banner-full').revolution({
-            delay: 5000,
-            //startwidth: 1170,
-            //startheight: 500,
-            startwidth: 1920,
-            startheight: 400,
-            onHoverStop: "on",
-            thumbWidth: 100,
-            thumbHeight: 50,
-            thumbAmount: 3,
-            hideThumbs: 0,
-            navigationType: "bullet",// use none, bullet or thumb
-            navigationArrows: "none", // nextto, solo, none, nextto questo per le frecce laterali
-            navigationStyle: "round-old",  // round, square, navbar, round-old, square-old, navbar-old
-            navigationHAlign: "center",
-            navigationVAlign: "bottom",
-            navigationHOffset: 30,
-            navigationVOffset: 20,
-            soloArrowLeftHalign: "left",
-            soloArrowLeftValign: "center",
-            soloArrowLeftHOffset: 20,
-            soloArrowLeftVOffset: 0,
-            soloArrowRightHalign: "right",
-            soloArrowRightValign: "center",
-            soloArrowRightHOffset: 20,
-            soloArrowRightVOffset: 0,
-            touchenabled: "on",
-            stopAtSlide: -1,
-            stopAfterLoops: -1,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            hideSliderAtLimit: 0,
-            fullWidth: "on",
-            autoHeight: "off",
-            fullScreen: "off",
-            fullScreenOffsetContainer: "#topheader-to-offset",
-            lazyLoad: "on",
-            keyboardNavigation: "on",
-            shadow: 0
-        });*/
-
+ 
     /* Accrodion */
-    zeinaAccordion('.accordion', true);
+    //zeinaAccordion('.accordion', true);
 
-    /* Init the plugin */
-    //form_validation('#contact-form');
-    //form_validation('#comment-form');
-
-    /* get in touch form valdiation
-    $('#footer-contact-form').validate({
-        rules: {
-            name: "required"
-        }
-    });
- */
-    /* to top button */
-    //$('body').append('<div id="to-top-button"> <i class="fa fa-angle-up"></i> </div>');
-
-    //$('#to-top-button').click(function () {
-    //    $('body,html').animate({
-    //        scrollTop: 0
-    //    });
-    //});
-
+    
     /* Info Box Listeners */
     $('.alert a.alert-remove').click(function () {
         $(this).parents('.alert').first().fadeOut();
@@ -642,31 +337,7 @@ $(window).load(function () {
             gutterWidth: 25
         }
     });
-
-    //$masonryElement.infinitescroll({
-    //    navSelector: '#masonry-elements-nav', // selector for the paged navigation
-    //    nextSelector: '#masonry-elements-nav a:first', // selector for the NEXT link (to page 2)
-    //    itemSelector: '.feature', // selector for all items you'll retrieve
-    //    loading: {
-    //        finishedMsg: 'No more pages to load.',
-    //        img: 'images/loading.gif',
-    //        selector: '#loading',
-    //        speed: 'normal'
-    //    },
-    //    maxPage: 3
-    //},
-    //// call Isotope as a callback
-    //function (newElements) {
-    //    embed_video_processing();
-    //    var $newElements = $(newElements);
-    //    $masonryElement.append($newElements);
-    //    $masonryElement.isotope('appended', $newElements);
-
-    //    $masonryElement.find('.cycle-slideshow').cycle({
-    //    });
-    //});
-
-    //$('#masonry-elements,.portfolio-items').isotope('reLayout');
+     
 });
 
 /*DropDown Menu Hover effect*/

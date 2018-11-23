@@ -1854,7 +1854,7 @@ button.js-roundedpush:hover {
 
 
 /* -------------------------
-  Stili from landing.css
+  Stili from landing.css ( da verificare utilizzo )
 --------------------------- */
 
 .mbr-section-full {
@@ -2020,7 +2020,6 @@ button.js-roundedpush:hover {
     min-height: 100vh;
 }
 
- 
 
 .mbr-overlay ~ * {
     z-index: 2;
@@ -2031,3 +2030,118 @@ button.js-roundedpush:hover {
     min-height: 100vh;
 }
 
+.mbr-table {
+    display: table;
+    width: 100%;
+}
+
+.mbr-table-full {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.mbr-table-cell {
+    display: table-cell;
+    float: none;
+    padding-bottom: 0;
+    padding-top: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+.mbr-table-md-up {
+    width: 100%;
+}
+
+.mbr-table-md-up .mbr-table-cell {
+    display: block;
+}
+
+.mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+    padding-top: 40px;
+}
+
+@media (min-width: 768px) {
+    .mbr-table-md-up {
+        display: table;
+    }
+
+    .mbr-table-md-up .mbr-table-cell {
+        display: table-cell;
+    }
+
+    .mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .mbr-right-padding-md-up {
+        padding-right: 60px;
+    }
+}
+
+@media (min-width: 768px) {
+    .mbr-left-padding-md-up {
+        padding-left: 60px;
+    }
+}
+
+.mbr-valign-top {
+    vertical-align: top;
+}
+
+
+.content-size {
+    width: auto;
+}
+
+.image-size {
+    vertical-align: middle;
+    margin: auto;
+    text-align: center;
+}
+
+.image-size .mbr-figure {
+    padding-top: 3px;
+}
+
+@media (max-width: 768px) {
+    .image-size {
+        width: 100% !important;
+    }
+}
+
+
+.mbr-figure {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.mbr-figure img, .mbr-figure iframe {
+    display: block;
+    width: 100%;
+}
+
+.mbr-figure .mbr-figure-caption {
+    background: #2e2e2e;
+    color: #fff;
+    font-family: 'Raleway';
+    padding: 1.5rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+.mbr-figure .mbr-figure-caption-over {
+    background: -moz-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -ms-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -o-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -webkit-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    bottom: 0;
+    position: absolute;
+}

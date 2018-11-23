@@ -545,10 +545,9 @@
             //"~/css/fontawesome541/js/v4-shims.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
-            "~/js/maininit.js",
-            //"~/js/maininit-pwa.js",
+            //"~/js/landing/script.js",
             "~/js/landing/jarallax.js",
-            "~/js/landing/script.js"
+            "~/js/maininit.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslibpwa2",
@@ -572,9 +571,9 @@
          "~/js/jquery.fitvids.js",
          "~/js/detect-zoom.min.js",
          //"~/js/maininit.js",
-         "~/js/maininit-pwa.js",
+         //"~/js/landing/script.js",
          "~/js/landing/jarallax.js",
-         "~/js/landing/script.js"
+         "~/js/maininit-pwa.js"
      );
 
         BundleEngine.AddBundleCSS("bundlecss1",
@@ -601,8 +600,8 @@
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
              //"~/css/opj/style-100.css",  
-             "~/css/mbr-faq.css",
-             "~/css/mbr-additional.css",
+             //"~/css/mbr-faq.css",
+             //"~/css/mbr-additional.css",
              //"~/css/landing.css",
              "~/css/custom1.css",
              "~/css/custom.css"
@@ -632,8 +631,8 @@
            "~/css/style1.css",
          "~/css/ui-personalization.css",
           //"~/css/opj/style-100.css",  
-          "~/css/mbr-faq.css",
-          "~/css/mbr-additional.css",
+          //"~/css/mbr-faq.css",
+          //"~/css/mbr-additional.css",
           //"~/css/landing.css",
           "~/css/custom1.css",
           "~/css/custom.css",
