@@ -2498,8 +2498,8 @@ namespace WelcomeLibrary.UF
                         if (controllo == "true")
                         {
                             if (valore[0] != "" && valore[0] != "0")
-                                //ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N0}", new object[] { valore[0] }) + ' ' + unit;
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:N0}", new object[] { valore[0] }) + ' ' + unit;
+                                
+                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
                         }
                     }
                     catch { }
@@ -2698,7 +2698,14 @@ namespace WelcomeLibrary.UF
                 case "formatvalue":
                     try
                     {
-                        string retstring = valore[0];
+                        if (!string.IsNullOrEmpty(valore[0]))
+                        {
+                            //ret = valore[0];
+                            string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
+                            double vd = 0;
+                            double.TryParse(valore[0], out vd);
+                            ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd }) + " " + unit;
+                        }
                     }
                     catch { }
                     break;

@@ -1,4 +1,4 @@
-﻿<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
+﻿<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
     <div class="container">
         <div class="row">
 
@@ -27,13 +27,13 @@
                         <div class="mb-4 w-100 faq-section">
                             <div class="card">
                                 <div id="toggle" class="card-header" role="tab">
-                                    <a id="chevron-toggle" role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-parent="#accordion" data-core="" href="#dettagli1" aria-expanded="false">
+                                    <a id="chevron-toggle" role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-parent="#accordion" data-core="" href="#dettagli" aria-expanded="false">
                                         <h4 class="mbr-fonts-style display-7 p-3">
                                             <i class="fa fa-chevron-down bind" aria-hidden="true" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></i>
                                         </h4>
                                     </a>
                                 </div>
-                                <div id="dettagli1" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div id="dettagli" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body p-3">
                                         <div class="blog-post-body itemprop=" description"">
 
@@ -69,6 +69,9 @@
                     ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
                     ----------------------------------------------->
                     <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3 border-top bd-primary-color" runat="server" id="divPostDetails">
+                        <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
+                        <meta itemprop="priceCurrency" content="EUR">
+                        <meta itemprop="availability" content="in_stock">
                         <div class="tx-primary-color" style="font-weight: 800; font-size: 1.9em; line-height: normal;">
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
@@ -99,7 +102,7 @@
                     ----------------------------->
                     <p>
                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                        <div class="addthis_inline_share_toolbox w-100 text-center text-md-left"></div>
+                        <div class="addthis_inline_share_toolbox"></div>
                     </p>
                     <div mybind="Id" class="bind files-list" style="display:none"></div>
 
