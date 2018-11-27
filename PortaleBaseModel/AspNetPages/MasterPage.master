@@ -89,9 +89,9 @@
 
                 <!-- LINGUE --->
                 <div runat="server" visible="true">
-                    <div class="float-right px-2 px-lg-4 bd-secondary-color" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                    <div class="float-right px-2 px-lg-4 bd-secondary-color font-primary" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                     </div>
-                    <div class="float-right px-2 px-lg-4 bd-secondary-color" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
+                    <div class="float-right px-2 px-lg-4 bd-secondary-color font-primary" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
                         <a style="color: White; padding: 0px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
                             <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
                     </div>
@@ -111,7 +111,7 @@
 
                     <%--CARRELLO--%>
                     <asp:PlaceHolder runat="server" Visible="true">
-                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-lg-4 pl-lg-3 py-0 d-sm-none">
+                        <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-lg-4 pl-lg-3 py-0 d-xl-none">
                             <a class="float-right" style="color: #fff !important; border: none"
                                 href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                 <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
@@ -173,10 +173,18 @@
                             </a>--%>
                 </div>
 
-                <%-- BLOG --%>
-                <div class="simplemenu float-left d-none d-sm-block">
+                <%-- MENU TOP LEFT (after social) --%>
+                <div class="simplemenu float-left d-block">
                     <ul>
-                        <li runat="server" class="dropdown px-2 px-lg-4">
+                        <!-- DOVE SIAMO --->
+                        <li runat="server" class="px-2 px-lg-4 d-block">
+                            <a id="googlemap" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
+                            <%--<a href="https://www.w3schools.com" target="_blank">--%>
+                                <i class="fa fa-map-marker mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoid5") %></span>
+                            </a>
+                        </li>
+                        <%-- BLOG --%>
+                        <li runat="server" class="dropdown px-2 px-lg-4 d-none d-sm-block">
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
                                 <i class="fa fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right px-3">
@@ -184,13 +192,13 @@
                             </ul>
                         </li>
                         <!-- CONTATTI --->
-                        <li runat="server" class="px-2 px-lg-4">
+                        <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                             <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                 <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
                             </a>
                         </li>
                         <!-- TELEFONO --->
-                        <li runat="server" class="px-2 px-lg-4">
+                        <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                             <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                                 <i class="fas fa-phone mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
                                 </span></a>
@@ -280,7 +288,7 @@
                     <li runat="server" visible="true">
 
                         <asp:PlaceHolder runat="server" Visible="true">
-                            <div class="carrellomaincontainer float-right d-none d-sm-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
+                            <div class="carrellomaincontainer float-right d-none d-xl-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                                 <%--<a class="float-right" style="color: #666 !important; border: none"
                                     href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
                                     <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems" />
@@ -744,13 +752,13 @@
                                 <%= references.ResMan("Common",Lingua,"testoid4") %>
                             </div>
                             <div class="footer-content">
-                                <ul class="footer-category-list">
+                                <ul class="footer-category-list catalogo-footer">
                                     <%= CreaLinkCategorie("rif000001") %>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col col-sm-2 footer-col">
-                            <%--BLOG--%>
+                        <%--BLOG--%>
+                        <div class="col col-sm-2 footer-col pt-3 pt-sm-0">                           
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter2") %>
                             </div>
@@ -762,7 +770,7 @@
                         </div>
 
                         <%--NEWS-LETTER--%>
-                        <div class="col-sm-2 footer-col">
+                        <div class="col-sm-2 footer-col pt-3 pt-sm-0">
                             <div class="footer-title">
                                 <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                             </div>
@@ -785,8 +793,8 @@
                 <div class="copyright">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12" style="text-align: center">
-                                <p style="font-size: 1.2em; padding: 30px 10px; line-height: 1.8rem !important;">
+                            <div class="col-lg-12 text-center">
+                                <p class="size-body-copyright body-copyright-lineh px-4 py-3">
                                     <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
                                     <a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>">(<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>- Project by Web Mouse Consulting srl -
                                     <a id="linkLogin" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"Linklogin") ) %>'>

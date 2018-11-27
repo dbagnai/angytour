@@ -130,14 +130,14 @@ function InitVideo(controlid, container)
     $(function () {
         var muteval = false;
         jQuery("#" + controlid + "togglevol").addClass('btn-vol-on');
-        var autoplay = true;
+        var autoplay = false;
         jQuery("#" + controlid + "toggleplay").addClass('btn-play-on');
 
         var volev = 50;
         var w = $(window).width();
         if (w <= 768) {
             muteval = true;
-            autoplay = true;
+            autoplay = false;
             volev = 0;
             jQuery("#" + controlid + "togglevol").toggleClass('btn-vol-on');
         }

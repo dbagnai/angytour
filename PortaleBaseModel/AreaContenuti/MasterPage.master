@@ -421,7 +421,7 @@
                     
                     <li id="tagPwa" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-desktop"></i>
+                            <i class="menu-icon fa fa-mobile"></i>
                             <span class="menu-text">Gestione Sezione APP
                             </span>
                             <b class="arrow fa fa-angle-down"></b>
@@ -460,7 +460,7 @@
 
                     <li id="tagCatalogo" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-desktop"></i>
+                            <i class="menu-icon fa fa-book"></i>
                             <span class="menu-text">Gestione Sezione Catalogo
                             </span>
                             <b class="arrow fa fa-angle-down"></b>
@@ -492,7 +492,7 @@
 
                     <li id="tagOfferteProdotti" runat="server" class="hover">
                         <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-desktop"></i>
+                            <i class="menu-icon fa fa-pencil"></i>
                             <span class="menu-text">Gestione Sezione Contenuti
                             </span>
 
