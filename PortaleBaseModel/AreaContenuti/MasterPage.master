@@ -545,7 +545,7 @@
 
                     <li id="tagPagineStatiche" runat="server" class="hover">
                         <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-list"></i>
+                            <i class="menu-icon fa fa-file-code-o"></i>
                             <span class="menu-text">Gestione Pagine Statiche </span>
 
                             <b class="arrow fa fa-angle-down"></b>
@@ -566,7 +566,7 @@
 
                     <li id="tagBanner" runat="server" class="hover">
                         <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-desktop"></i>
+                            <i class="menu-icon fa fa-picture-o"></i>
                             <span class="menu-text">Gestione Galleria e Banner
                             </span>
 

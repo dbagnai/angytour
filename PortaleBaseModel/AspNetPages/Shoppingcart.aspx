@@ -7,7 +7,7 @@
     <script type="text/javascript">
         var makeRevLower = true;
     </script>
-    <div class="container" style="text-align: center;" runat="server" id="divTitle">
+    <div class="container d-none" style="text-align: center;" runat="server" id="divTitle">
         <div class="row">
             <div class="col-md-1 col-sm-1">
             </div>
@@ -197,7 +197,7 @@
                         </div>
                     </div>--%>
                 <div class="widget">
-                    <h3 class="mbr-section-title display-5 bg-dark-color" style="padding: 0.8rem 0; font-size: 0.8rem; margin-top: 2px; color: #fff; letter-spacing: 2px;">
+                    <h3 class="mbr-section-title display-5 bg-dark-color noafter" style="padding: 0.8rem 0; font-size: 0.8rem; margin-top: 2px; color: #fff; letter-spacing: 2px;">
                         <%= references.ResMan("Common", Lingua,"CarrelloRiepilogo") %></h3>
                     <asp:Repeater runat="server" ID="rptTotali">
                         <ItemTemplate>

@@ -768,15 +768,15 @@ function InitIsotope() {
 
 //----- ruota carrello -----
 
-//$(function () {
-//    $(".button-carrello, .button-carrello1").click(function () {
-//        $('.button-carrello-animate').addClass('carrello-go-rotate');
-//        setTimeout(RemoveClass, 1000);
-//    });
-//    function RemoveClass() {
-//        $('.button-carrello-animate').removeClass("carrello-go-rotate");
-//    }
-//});
+$(function () {
+    $(".button-carrello, .button-carrello1").click(function () {
+        $('.button-carrello-animate').addClass('carrello-go-rotate');
+        setTimeout(RemoveClass, 1000);
+    });
+    function RemoveClass() {
+        $('.button-carrello-animate').removeClass("carrello-go-rotate");
+    }
+});
 
 ////----- aggiungi n° colli -----
 

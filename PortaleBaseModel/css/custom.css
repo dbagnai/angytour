@@ -452,6 +452,12 @@ a .mbr-section-title::after,
   left: 50%;
   margin-left: -67px;
 }
+.mbr-section-title.noafter::after,
+a .mbr-section-title.noafter::after,
+.title-block.noafter::after {
+  display: none;
+}
+/*Start svg decorazione banner-top-home*/
 .bigtext::after {
   margin-top: 150px;
   content: "";
@@ -462,6 +468,7 @@ a .mbr-section-title::after,
   left: 50%;
   margin-left: -67px;
 }
+/*End svg decorazione banner-top-home*/
 .title-block {
   padding-top: 20px;
   padding-bottom: 3rem;
