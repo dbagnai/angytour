@@ -403,7 +403,7 @@ namespace WelcomeLibrary.UF
                 if (!testounicolink.ToLower().Contains(tmps.ToLower()))
                     testomodificatore1 += tmps;
             }
-
+            //Modificatore testo in presenza del parametro di regione
             Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == regione); });
             if (item != null)
                 testomodificatore1 += CleanUrl(item.Regione.Trim());
