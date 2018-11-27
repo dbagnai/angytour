@@ -215,7 +215,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
     <div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
-    <div class="ui-15 bg-light-color" runat="server" id="divContactBelow" clientidmode="static" visible="false">
+    <div class="ui-15 bg-light-color" style="border-bottom: 10px dotted #fff;" runat="server" id="divContactBelow" clientidmode="static" visible="false">
         <div class="container">
             <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
                 <div class="container">
@@ -328,7 +328,7 @@
                             }
 
                         </script>
-                        <button id="Button1" type="button" class="btn btn-blue btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                        <button id="Button1" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                         <%-- <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />--%>
 
                         <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContactdiv">
@@ -343,9 +343,10 @@
         </div>
     </div>
     <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject pt-5 commenti-details-page" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        <div id="divCommenti" class="inject pt-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
     </asp:Panel>
-    <div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">
+    <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
+    <div class="bg-white" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
