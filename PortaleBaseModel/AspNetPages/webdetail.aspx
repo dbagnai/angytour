@@ -5,13 +5,15 @@
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-    <div class="row">
-        <div class="col-md-1 col-sm-1">
-        </div>
-        <div class="col-md-10 col-sm-10 col-xs-12">
-            <asp:Literal Text="" runat="server" ID="litSezione" />
-        </div>
-        <div class="col-md-1 col-sm-1">
+    <div id="divTitleContainer">
+        <div class="row">
+            <div class="col-md-1 col-sm-1">
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+                <asp:Literal Text="" runat="server" ID="litSezione" />
+            </div>
+            <div class="col-md-1 col-sm-1">
+            </div>
         </div>
     </div>
     <asp:Literal Text="" runat="server" ID="litTextHeadPage" />

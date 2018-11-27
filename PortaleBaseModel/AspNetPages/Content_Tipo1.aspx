@@ -9,6 +9,7 @@
     <script type="text/javascript">
         var makeRevLower = true;
     </script>
+    <div id="divTitleContainer">
     <div class="container" style="text-align: center;" runat="server" id="divTitle">
         <div class="row">
             <div class="col-md-1 col-sm-1">
@@ -20,6 +21,7 @@
             <div class="col-md-1 col-sm-1">
             </div>
         </div>
+    </div>
     </div>
     <asp:Literal ID="litMainContent" runat="server"></asp:Literal>
 
