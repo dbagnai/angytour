@@ -39,6 +39,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-color: @bg-manual-secondary-color-fade !important;
 }
 
+.bg-color-sottomeu {
+    background-color: @color-sottomeu
+}
+
 .tx-primary-color {
     color: @bg-primary-color !important;
 }
@@ -77,6 +81,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .secondary-color {
     color: @secondary-color !important;
+}
+
+.color-sottomeu {
+    color: @color-sottomeu
 }
 
 .black-color {
@@ -409,9 +417,9 @@ div#blocco-lgo-home {
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
 .mbr-section-title, a .mbr-section-title, .title-block {
-    color: @title-color;
-    font-family: @tite-font;
-    font-size: @tite-size;
+    color: @title-color !important;
+    font-family: @tite-font !important;
+    font-size: @tite-size !important;
     font-weight: @title-weight !important;
     text-transform: @title-text-transform;
     font-style: normal;
@@ -487,9 +495,9 @@ div#blocco-lgo-home {
 }
 
 .mbr-section-subtitle {
-    color: @subtitle-color;
-    font-family: @subtite-font;
-    font-size: @subtite-size;
+    color: @subtitle-color !important;
+    font-family: @subtite-font !important;
+    font-size: @subtite-size !important;
     font-weight: @subtitle-weight;
     font-style: normal;
     text-align: center;
@@ -539,7 +547,25 @@ body, html, button, input, select, textarea {
         overflow-x: hidden;
     }
 }
- 
+h1 span:nth-child(1) {
+    font-family: @tite-font !important;
+    color: @title-color !important;
+    font-size: 100% !important;
+}
+
+h1 span {
+    font-family: @subtite-font !important;
+    color: @subtitle-color !important;
+    font-size: 90% !important;
+}
+
+h1 span:nth-child(1).mbr-section-title {
+    &:extend(.mbr-section-title);
+}
+
+h1 span .mbr-section-subtitle {
+    &:extend(.mbr-section-subtitle);
+}
 /*----------------------------------
 -------------- PULSANTI --------------
 ----------------------------------*/
@@ -2267,19 +2293,19 @@ button.js-roundedpush:hover {
     padding: 0.5em;
 
     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-        color: @bg-secondary-color;
+        color: @placeholder-color;
     }
 
     &::-moz-placeholder { /* Firefox 19+ */
-        color: @bg-secondary-color;
+        color: @placeholder-color;
     }
 
     &:-ms-input-placeholder { /* IE 10+ */
-        color: @bg-secondary-color;
+        color: @placeholder-color;
     }
 
     &:-moz-placeholder { /* Firefox 18- */
-        color: @bg-secondary-color;
+        color: @placeholder-color;
     }
 }
 
