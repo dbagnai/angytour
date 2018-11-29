@@ -138,8 +138,8 @@
 
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a  onclick="JsSvuotaSession(this)"  target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
-                                            <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
+                                            <a onclick="JsSvuotaSession(this)" target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                                <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
 
                                         </div>
                                     </td>
@@ -154,10 +154,9 @@
                                             <asp:Literal ID="lit1" runat="server" Text='<%# Eval("DenominazioneI").ToString() %>'></asp:Literal>
                                         </div>
                                     </td>
-                                      <td style="border: Solid 1px #ccc;">
+                                    <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
-                                            view
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
                                         </div>
                                     </td>
                                     <%--<td style="border: Solid 1px Black;">
@@ -1064,6 +1063,15 @@
                                             <asp:Button ID="btnEliminaProdotto" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaProd_Click" /><br />
                                             <br />
                                             <asp:Label runat="server" ID="ErrorMsgNuovoProdotto" ForeColor="Red"></asp:Label>
+
+
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneI" runat="server" />
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneGB" runat="server" />
+                                            <br />
+                                            <asp:Literal Text="" ID="linksezioneRU" runat="server" />
+
                                             <div style="height: 50px;">
                                             </div>
                                         </td>
@@ -1135,6 +1143,14 @@
                                                 <asp:Button ID="btnModificaSottoProd" runat="server" CssClass="btn btn-primary btn-sm" Text="Modifica" OnClick="btnModificaSottProd_Click" />
                                                 <asp:Button ID="btnEliminaSottoProd" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaSottProd_Click" /><br />
                                                 <asp:Label runat="server" ID="ErrorMessage" ForeColor="Red"></asp:Label>
+
+                                                <br />
+                                                <asp:Literal Text="" ID="linksottosezioneI" runat="server" />
+                                                <br />
+                                                <asp:Literal Text="" ID="linksottosezioneGB" runat="server" />
+                                                <br />
+                                                <asp:Literal Text="" ID="linksottosezioneRU" runat="server" />
+
                                             </div>
                                             <div style="height: 50px;">
                                             </div>
