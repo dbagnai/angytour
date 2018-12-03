@@ -2001,6 +2001,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         //OkButton.Enabled = false;
         OkButton.Text = "Annulla";
         btnModificaProd.Text = "Salva";
+
+        linksezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "I");
+        linksezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "GB");
+        linksezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "RU");
     }
 
     protected void ddlProdottoNewProd_SelectedIndexChange(object sender, EventArgs e)
@@ -2008,7 +2012,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CodiceProdotto = ddlProdottoNewProd.SelectedValue;
         CaricaDatiDllSottoprodotto(ddlTipologiaNewSottProd.SelectedValue, ddlProdottoNewProd.SelectedValue, "");
         CaricaDatiFormInserimentoSott(ddlTipologiaNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue);
-
+        linksottosezioneI.Text = "";
+        linksottosezioneGB.Text = "";
+        linksottosezioneRU.Text = "";
     }
     protected void ddlProdottoNewSProd_SelectedIndexChange(object sender, EventArgs e)
     {
@@ -2021,12 +2027,20 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoSottRu.Enabled = true;
         OkButton2.Text = "Annulla";
         btnModificaSottoProd.Text = "Salva";
+
+        linksottosezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "I");
+        linksottosezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "GB");
+        linksottosezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "RU");
+
     }
     protected void TipologiaProd_SelectedIndexChanged(object sender, EventArgs e)
     {
         //Permette il cambio della tipologia di offerte OCCHIO!!!!
         TipologiaOfferte = ddlTipologiaNewProd.SelectedValue;
         CaricaDatiDdlRicerca("", "", "", "", "");
+        linksezioneI.Text = "";
+        linksezioneGB.Text = "";
+        linksezioneRU.Text = "";
     }
     #endregion
 
