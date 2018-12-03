@@ -614,7 +614,7 @@ public partial class _pwadetail : CommonPage
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-9";
+                column2.Attributes["class"] = "col-12 col-md-9";
                 column3.Visible = false;
                 divSearch.Visible = true;
                 ContaArticoliPerperiodo(CodiceTipologia);
@@ -629,7 +629,7 @@ public partial class _pwadetail : CommonPage
 
                     //SUGGERITI
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
+                    sb.Append("injectScrollerAndLoad,owlPWAscroller.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
 
@@ -649,7 +649,7 @@ public partial class _pwadetail : CommonPage
 
                     //BIND PER LA SCHEDA!!!!
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
+                    sb.Append("injectandloadgenericcontent,schedaPWAdetails.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
                 }
