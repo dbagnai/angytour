@@ -352,7 +352,7 @@ public partial class AspNetPages_pwalist : CommonPage
                     //placeholderrisultati
                     //sb.Append("<div>");
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePWASinglerowAnimated-no-button.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopePWASinglerowAnimated.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     //sb.Append("</div>");

@@ -36,15 +36,15 @@ $(function () {
 
 /*--- lo accendo se il path della pagina è quello delle NEWS --*/
 $(function () {
-    //if (window.location.pathname == "/I/comunicazioni/comunicazioni") {
-    //    $('ul#ulSubmenu.nav').css('display', 'flex');
-    //}
-    //else if ($('.submenutop')[0]) {
-    //    $('ul#ulSubmenu.nav').css('display', 'flex');
-    //}
-    //else {
-    //    $('ul#ulSubmenu.nav').css('display', 'none');
-    //}
+    if (window.location.pathname == "/I/comunicazioni/comunicazioni") {
+        $('ul#ulSubmenu.nav').css('display', 'flex');
+    }
+    else if ($('.submenutop')[0]) {
+        $('ul#ulSubmenu.nav').css('display', 'flex');
+    }
+    else {
+        $('ul#ulSubmenu.nav').css('display', 'none');
+    }
 });
 
 /*-------- incornicio il 1° <li> quando APRO le NEWS ------------*/

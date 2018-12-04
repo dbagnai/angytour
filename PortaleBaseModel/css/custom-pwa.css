@@ -158,6 +158,31 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 body {
   padding-bottom: 60px;
 }
+h1,
+.mbr-section-title,
+a .mbr-section-title,
+.title-block,
+h1 span:nth-child(1).mbr-section-title,
+.cart-product,
+.cart-quantity,
+.cart-total {
+  font-size: 1.5rem !important;
+  line-height: 1.8rem !important;
+  padding-bottom: 0 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+}
+h1::after,
+.mbr-section-title::after,
+a .mbr-section-title::after,
+.title-block::after,
+h1 span:nth-child(1).mbr-section-title::after,
+.cart-product::after,
+.cart-quantity::after,
+.cart-total::after {
+  background: none;
+}
 /*---------------------------------
 - NAVIGAZIONE - FIXED - TOP - PWA -
 ----------------------------------*/
@@ -486,7 +511,7 @@ ul.isotope-pwa > li:nth-last-child(1) {
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
   margin-bottom: 4px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 16.8px;
   letter-spacing: 0.2px;
   text-transform: uppercase;
@@ -494,14 +519,17 @@ ul.isotope-pwa > li:nth-last-child(1) {
 .banner-pwa .work-desc,
 .isotope-pwa .work-desc {
   line-height: 19px;
-  margin: 0;
-  font-size: 0.9rem;
+  margin: 3px 0 0 0;
+  font-size: 1rem;
   /*font-family: 'Fira Sans', sans-serif;
     font-weight: 400;*/
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   max-height: 54.4px;
   letter-spacing: 0.2px;
+}
+.badge {
+  font-size: 100%;
 }
 /*---------------------------------
 ----------- ISOTOPE PWA -----------
@@ -554,7 +582,7 @@ ul > li:first-of-type .pwa-txt-container {
   max-width: 66.666667%;
 }
 .pwa-txt-container {
-  max-height: 93px;
+  max-height: 98px;
 }
 .pwa-img-container {
   position: relative;
@@ -564,4 +592,34 @@ ul > li:first-of-type .pwa-txt-container {
   -ms-flex: 0 0 33.333333%;
   flex: 0 0 33.333333%;
   max-width: 33.333333%;
+}
+/*---------------------------------
+------ SCHEDA PWA DETAILS ---------
+----------------------------------*/
+/*IMMAGINE*/
+#divitem-gallery .flex-viewport {
+  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.25rem !important;
+}
+/*---------------------------------
+-------- PWA DETAILS aspx ---------
+----------------------------------*/
+/*FORM*/
+.ui-15 .ui-form .ui-input {
+  margin: 5px 0px;
+}
+.ui-15 .ui-form .ui-icon {
+  top: 20px;
+}
+.form-control {
+  background-color: white;
+  font-size: 1rem;
+  padding: 0.7em 0.5em;
+}
+/*Scroller*/
+.owl-controls {
+  margin-top: 0;
 }

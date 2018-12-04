@@ -190,7 +190,7 @@
                 </div>
             </nav>
             <!-- MENU - TOP - PWA - END -->
-            <ul id="ulSubmenu" class="nav nav-tabs px-3 mt-3" style="display:flex" role="tablist"><%= CreaLinkCategorie(CodiceTipologia) %></ul>
+            <ul id="ulSubmenu" class="nav nav-tabs px-3 mt-3" role="tablist"><%= CreaLinkCategorie(CodiceTipologia) %></ul>
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px;" runat="server" visible="false">

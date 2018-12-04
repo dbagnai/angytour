@@ -212,12 +212,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
     <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15" runat="server" id="divContactBelow" clientidmode="static" visible="false" style="background-color: #efefef">
+    <div class="ui-15 bg-light-color" runat="server" id="divContactBelow" clientidmode="static" visible="false">
         <div class="container">
             <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-12 col-sm-8 tx-dark-color">
+                        <div class="col-12 tx-dark-color">
                             <%--        <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"TestoDisponibilita") %></div>--%>
                             <div style="text-align: center; width: 100%"><%= references.ResMan("Common", Lingua,"testocontattadtl") %></div>
                         </div>
@@ -262,8 +262,8 @@
                             <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                         </div>
 
-                        <div class="checkbox">
-                            <label>
+                        <div class="checkbox my-3">
+                            <label class="my-0">
                                 <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                 <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
@@ -325,7 +325,9 @@
                             }
 
                         </script>
-                        <button id="Button1" type="button" class="btn btn-blue btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                        <div class="w-100 text-center">
+                        <button id="Button1" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                            </div>
                         <%-- <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />--%>
 
                         <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContactdiv">
@@ -342,14 +344,14 @@
     <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
         <div id="divCommenti" class="inject py-3" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
     </asp:Panel>
-    <div class="bg-light-color" style="position: relative" id="divSuggeritiContainer">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 40px 25px;">
-            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
+    <div class="" style="position: relative; background-color:white" id="divSuggeritiContainer">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 0 15px;">
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-3" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
                     <div class="col-sm-12 col-12">
                         <div class="subtitle-block clearfix">
 
-                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
+                            <div class="row pt-3" style="text-align: left; padding-bottom: 0px; margin-bottom: 0px; line-height: 40px;">
                                 <div class="pull-left lead">
                                     <h2 class="mbr-section-title" style="margin-bottom: 3px">
                                         <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
