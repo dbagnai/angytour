@@ -130,7 +130,7 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
 }
 
 /*---------------------------------
-- NAVIGAZIONE - FIXED - TOP - PWA -
+----- NAVIGAZIONE - TOP - PWA -----
 ----------------------------------*/
 /**{
   margin: 0;
@@ -242,10 +242,16 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
     opacity: 1;
 }
 
+.slidemenu-fixed {
+    top: 0;
+    position: fixed;
+    z-index: 999999999;
+    width: 100%;
+}
+
 /*---------------------------------------------
 - NAVIGAZIONE - FIXED - TOP - sottomenu - PWA -
 ---------------------------------------------*/
-
 ul#ulSubmenu.nav {
     display: none;
 }
@@ -617,6 +623,38 @@ ul > li:first-of-type .pwa-txt-container {
 ----------------------------------*/
 .swiper-pagination-bullet, .swiper-pagination-bullet-active {
     background: @bg-primary-color;
+}
+
+/*---------------------------------
+------------- CONTACT -------------
+----------------------------------*/
+.errore-contact {
+    background: lightyellow;
+    border: 1px solid red;
+    padding: 0.7em 0.5em;
+    border-radius: .25rem;
+    text-align: left;
+    width: 100%;
+}
+.errore-privacy-pwa-contact {
+    z-index: 999999;
+    width: 80%;
+    left: 50%;
+    margin-left: -40%;
+    border: 1px solid;
+    margin-bottom: 50px;
+}
+@media (min-width: 735px) {
+    .errore-privacy-pwa-contact {
+        margin-bottom: 15px;
+    }
+}
+
+/*---------------------------------
+------------- SEARCH -------------
+----------------------------------*/
+#searchpwa {
+    margin-bottom: -10px;
 }
 
 

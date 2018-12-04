@@ -1,14 +1,39 @@
 "use strict";
 jQuery(document).ready(function ($) {
-    /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 0) {
-            //$('#mainnav').addClass('bckColor1');        
+    /*-------------------------------------------------------------*/
+    /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO-----------*/
+    /*-------------------------------------------------------------*/
+    //$(window).scroll(function () {
+    //    if ($(window).scrollTop() > 61) {
+    //        $('.slidemenu').addClass('slidemenu-fixed');        
+    //    }
+    //    else {
+    //        $('.slidemenu').removeClass('slidemenu-fixed');            
+    //    }
+    //});
+
+    //var lastScrollTop = 0;
+    //$(window).on('scroll', function () {
+    //    st = $(this).scrollTop();
+    //    if (st < lastScrollTop) {
+    //        $('.slidemenu').addClass('slidemenu-fixed');
+    //    }
+    //    else {
+    //        $('.slidemenu').removeClass('slidemenu-fixed');
+    //    }
+    //    lastScrollTop = st;
+    //});
+
+    $('body').on('mousewheel', function (e) {
+        if ($(window).scrollTop() > 61)
+        if (e.originalEvent.wheelDelta > 0) {
+            $('.slidemenu').addClass('slidemenu-fixed');
         }
         else {
-            //$('#mainnav').removeClass('bckColor1');            
+            $('.slidemenu').removeClass('slidemenu-fixed');
         }
     });
+
 
 });
 
@@ -67,3 +92,20 @@ $(function () {
 //        $('ul#ulSubmenu > li:first-of-type a.submenutop').css('background-color', '#fff');
 //    }
 //});
+
+
+/*-------------------------------------------------------------*/
+/*-------------------- SEARCH ON / OFF ------------------------*/
+/*-------------------------------------------------------------*/
+$(function () {
+document.getElementById("iconSearchSwg").onclick = function () {
+    $('#searchpwa').animate({ marginBottom: '60px' }, 500);
+    };
+});
+
+$(function () {
+    document.querySelector(".closesearchpwa").onclick = function () {
+        $('#searchpwa').animate({ marginBottom: '-10px' }, 500);
+    };
+});
+

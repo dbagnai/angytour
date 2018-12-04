@@ -224,36 +224,41 @@
             </asp:PlaceHolder>
         </section>
         <!-- MENU - BOTTOM - PWA -->
-        <div class="fixedbottom" id="divBottom">
-
+        <div class="fixedbottom bg-white" id="divBottom" style="z-index:9999999">
+            <%--HOME--%>
             <ul class="nav nav-pills nav-fill">
                 <%--<li class="nav-item">
                     <a class="nav-link d-flex" href="#">
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-home-swg"></use></svg></a>
                 </li>--%>
+                <%--TELEFONO--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" href="#">
+                    <a class="nav-link d-flex" href='<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>'>
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-call-swg"></use></svg></a>
                 </li>
+                <%--NOTIFICHE--%>
                 <li class="nav-item">
                     <a class="nav-link d-flex" href="#">
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-notification-swg"></use></svg></a>
                 </li>
+                <%--GOOGLE MAP--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" href="#">
+                    <a class="nav-link d-flex" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-pin-swg"></use></svg></a>
                 </li>
+                <%--CONTATTI--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" href="#">
+                    <a class="nav-link d-flex" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkpwacontatti")) %>'>
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-mail-swg"></use></svg></a>
                 </li>
+                <%--CERCA--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" href="#">
+                    <a id="iconSearchSwg" class="nav-link d-flex" href="#">
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-search-swg"></use></svg></a>
                 </li>
@@ -265,6 +270,18 @@
                     <use xlink:href="#icon-write-swg"></use></svg></a>
         </div>--%>
         <!-- END - MENU - BOTTOM - PWA -->
+
+        <!-- START CERCA -->
+        <div id="searchpwa" class="fixedbottom bg-secondary-color border-0">
+                    <div class="input-group flex-nowrap bd-secondary-color w-100 p-2">
+                        <input enableviewstate="true" type="text" id="Text1" class="form-control" style="font-family: 'Fira Sans', sans-serif; font-size: 1rem;" runat="server" placeholder="Cerca ...." />
+                        <div class="input-group-append p-0">
+                            <button type="button" onserverclick="btnsearch1_Click" id="Button1" class="bg-primary-color border-0 py-0" style="width: 44px; font-size: 1.2rem;" runat="server"><i class="fa fa-paper-plane text-white"></i></button>
+                            <button type="button" class="bg-white closesearchpwa border-0 py-0 rounded-right" style="width: 44px; font-size: 1.2rem;" runat="server"><i class="fa fa-times tx-primary-color"></i></button>
+                        </div>
+                    </div>
+                </div>
+        <!-- END CERCA -->
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolderJs" runat="server">
         </asp:ContentPlaceHolder>
