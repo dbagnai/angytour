@@ -2698,13 +2698,17 @@ namespace WelcomeLibrary.UF
                 case "formatvalue":
                     try
                     {
-                        if (!string.IsNullOrEmpty(valore[0]))
+                       if (!string.IsNullOrEmpty(valore[0]))
                         {
                             //ret = valore[0];
                             string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
                             double vd = 0;
                             double.TryParse(valore[0], out vd);
-                            ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd }) + " " + unit;
+                            if (vd != 0)
+                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd }) + " " + unit;
+                            else
+                                ret = valore[0];
+
                         }
                     }
                     catch { }
