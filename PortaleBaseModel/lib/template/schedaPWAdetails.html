@@ -14,7 +14,7 @@
             <!-- Start PHOTO GALLERY Placeholder per la owl gallery -->
             <div id="plhGallery" class="bind col-12 float-none p-0 col-sm-12" mybind="Id" myvalue="video" format="frmvisibility"></div>
             <div class="responsive-video" style="display: none;">
-                <iframe frameborder="0" allowfullscreen class="bind rounded" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
+                <iframe frameborder="0" allowfullscreen class="bind rounded" mybind="Id" myvalue="video" src=""></iframe>
             </div>
 
             <!--CATEGORIA e DATA-->
@@ -35,25 +35,26 @@
         <!---------------------------------------------------
     ------ COMANDI NAVIGAZIONE ------
     ---------------------------------------------------->
-        <div class="w-100 px-0 my-0">
+        <div class="w-100 px-0 my-0 border-top-0">
 
-            <div class="float-none mr-0 mt-3 mb-2">
+            <div class="float-none mr-0 mt-3 mb-4 float-sm-left mr-sm-3">
                 <a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
             </div>
 
-            <div class="d-flex justify-content-between my-3 pb-2">
-                <div class="mr-3 float-sm-left">
-                    <a class="bind m" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+            <!--<div class="clearfix" style="margin:40px"></div>-->
+            <div class="d-flex justify-content-between mt-3 mb-4 float-none d-sm-block float-sm-right">
+                <div class="mr-0 float-sm-left mr-sm-3">
+                    <a class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
                         <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span>
-                        <!--<div class="d-inline-block">
-                        </div>-->
+                        <div class="d-inline-block">
+                        </div>
                     </a>
                 </div>
                 <div class="float-sm-right">
                     <a class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
                         <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span>
-                        <!--<div class="d-inline-block align-top">
-                        </div>-->
+                        <div class="d-inline-block align-top">
+                        </div>
                     </a>
                 </div>
             </div>

@@ -89,6 +89,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*titoli-principali*/
 /*sotto-titoli-principali*/
 /*menu - body*/
+/*----------------------------------
+///////| ALTRI ELEMENTI PWA |///////
+----------------------------------*/
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -598,11 +601,29 @@ ul > li:first-of-type .pwa-txt-container {
 ----------------------------------*/
 /*IMMAGINE*/
 #divitem-gallery .flex-viewport {
-  max-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 0.25rem !important;
+  max-height: 200px;
+  /*padding-top: calc(9 / 16 * 100%);
+    margin-top: calc(-9 / 16 * 100%);*/
+}
+@media (min-width: 735px) {
+  #divitem-gallery .flex-viewport {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.25rem !important;
+    max-height: calc(735 / 414 * 200px);
+  }
+}
+/*IMMAGINE news*/
+.pwa-details-info #plhGallery .flexslider {
+  margin-bottom: 0 !important;
+}
+.pwa-details-info #divitem-gallery .flex-viewport {
+  border-radius: 0.25rem 0.25rem 0 0 !important;
 }
 /*---------------------------------
 -------- PWA DETAILS aspx ---------
@@ -622,4 +643,11 @@ ul > li:first-of-type .pwa-txt-container {
 /*Scroller*/
 .owl-controls {
   margin-top: 0;
+}
+/*---------------------------------
+-------- swiperPWAscroller ---------
+----------------------------------*/
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+  background: #098f8f;
 }

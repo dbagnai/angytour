@@ -212,7 +212,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
     <div id="richiedilinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
-    <div class="ui-15 bg-light-color" runat="server" id="divContactBelow" clientidmode="static" visible="false">
+    
+
+    <%-- FORM COMMENTI --%>
+    <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+        <div id="divCommenti" class="inject py-3" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+    </asp:Panel>
+
+    <%--SCROLL ARTICOLI SIMILI--%>
+    <div class=" bg-light-color" style="position: relative;" id="divSuggeritiContainer">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 0 15px;">
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-3" style="display: none; margin-left: 30px; margin-right: 30px">
+                <div class="row">
+                    <div class="col-sm-12 col-12">
+                        <div class="subtitle-block clearfix">
+
+                            <div class="row pt-3" style="text-align: left; padding-bottom: 0px; margin-bottom: 0px; line-height: 40px;">
+                                <div class="pull-left lead">
+                                    <h2 class="mbr-section-title" style="margin-bottom: 3px">
+                                        <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
+                                        <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>     </h2>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
+        </div>
+
+        <%--FORM CONTATTI--%>
+<div class="ui-15 bg-white" runat="server" id="divContactBelow" clientidmode="static" visible="false">
         <div class="container">
             <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 20px; padding-bottom: 10px;">
                 <div class="container">
@@ -341,29 +372,7 @@
             </div>
         </div>
     </div>
-    <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject py-3" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-    </asp:Panel>
-    <div class="" style="position: relative; background-color:white" id="divSuggeritiContainer">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 0 15px;">
-            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-3" style="display: none; margin-left: 30px; margin-right: 30px">
-                <div class="row">
-                    <div class="col-sm-12 col-12">
-                        <div class="subtitle-block clearfix">
 
-                            <div class="row pt-3" style="text-align: left; padding-bottom: 0px; margin-bottom: 0px; line-height: 40px;">
-                                <div class="pull-left lead">
-                                    <h2 class="mbr-section-title" style="margin-bottom: 3px">
-                                        <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                        <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>     </h2>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
-        </div>
     </div>
 </asp:Content>

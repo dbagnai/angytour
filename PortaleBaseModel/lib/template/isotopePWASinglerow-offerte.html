@@ -1,0 +1,66 @@
+﻿ <div class="row m-0" style="display: none">
+    <div class="col-12 p-0">
+        <ul class="list-unstyled isotope-pwa m-0" id="replaceid">
+            <li class="work-item my-0 mx-3 py-3">
+                <div class="row m-0">
+                    <div class="pwa-img-container align-self-center">
+                        <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                            <div class="work-image-no-button rounded" style="background-color:transparent; max-height:200px; display: flex; flex-direction: column; justify-content: center;">
+                                <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="pwa-txt-container work-subcaption align-self-center">
+                        <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                            <div>
+                                <h3 class="work-title tx-primary-color">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                </h3>
+                                <h5 class="work-desc tx-primary-color">
+                                    <span class="bind" mybind="Id" myvalue="titolo" myvalue1="100" format="formatsubtitle"></span>
+                                </h5>
+                                <div class="work-desc tx-dark-color" style="height:auto;">
+                                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="2500" format="formatdescrizione"></span>
+                                    <!--<span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="250" format="formatdescrizione"></span>-->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!--<livello prezzo e condividi>-->
+
+                <div class="d-flex justify-content-end align-items-center float-right pt-2">
+                    <!--<prezzo offerta>-->
+                    <div class="tx-primary-color" style="font-weight: 800; font-size: 1.2em; line-height: normal;">
+                        <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                    </div>
+                    <div class="tx-secondary-color" style="font-weight: 200; font-size: 1.2em; text-decoration: line-through; line-height: normal; padding-left:10px;">
+                        <span class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                    </div>
+                    <!--<condividi>-->
+                    <!--<div>
+                        <i>
+                            <span class="bind tx-primary-color" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem">
+                            </span>
+                        </i><i class="fas fa-share-alt ml-2"></i>
+                    </div>-->
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center float-left pt-2">
+                    <!--<livello>-->
+                    <div class="bind linksmall" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
+                    <!--<condividi>-->
+                    <div>
+                        <i>
+                            <span class="bind tx-primary-color" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem">
+                            </span>
+                        </i><i class="fas fa-share-alt ml-2"></i>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>

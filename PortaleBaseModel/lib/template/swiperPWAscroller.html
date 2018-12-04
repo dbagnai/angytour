@@ -1,0 +1,74 @@
+﻿<!-- Slider main container -->
+<style>
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+    }
+    .swiper-text {
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.90);
+        bottom: 0;
+    }
+</style>
+
+<div class="swiper-container w-100 pt-3" style="padding-bottom:50px">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)">
+            <div class="swiper-text position-absolute w-100 p-3 border-0 text-left">
+                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">                  
+                        <span class="bind title-banner-slider" mybind="Id" myvalue="titolo" format="formattitle">Titolo</span>                   
+                    <p class="bind m-0" mybind="Id" myvalue="titolo" myvalue1="230" format="formatsubtitle" style="font-size:1.1rem;">Sottotitolo</p>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)">
+            <div class="swiper-text position-absolute w-100 p-3 border-0 text-left">
+                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                    <span class="bind title-banner-slider" mybind="Id" myvalue="titolo" format="formattitle">Titolo</span>
+                    <p class="bind m-0" mybind="Id" myvalue="titolo" myvalue1="230" format="formatsubtitle" style="font-size:1.1rem;">Sottotitolo</p>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)">
+            <div class="swiper-text position-absolute w-100 p-3 border-0 text-left">
+                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                    <span class="bind title-banner-slider" mybind="Id" myvalue="titolo" format="formattitle">Titolo</span>
+                    <p class="bind m-0" mybind="Id" myvalue="titolo" myvalue1="230" format="formatsubtitle" style="font-size:1.1rem;">Sottotitolo</p>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+        <div class="swiper-slide" style="background-image:url(/public/Files/rif000502/70/macbookpro3-xs.jpg)"></div>
+    </div>
+
+    <!-- Add Pagination -->
+    <div class="swiper-pagination mb-3" style="bottom: 0;"></div>
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+</script>
+

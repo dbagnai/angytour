@@ -331,7 +331,6 @@ public partial class AspNetPages_pwalist : CommonPage
                 break;
 
             case "rif000503":
-            case "rif000504":
                 AssociaDatiSocial();
 
                 column1.Visible = false;
@@ -353,6 +352,37 @@ public partial class AspNetPages_pwalist : CommonPage
                     //sb.Append("<div>");
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     sb.Append("injectPortfolioAndLoad,isotopePWASinglerowAnimated.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //sb.Append("</div>");
+                    placeholderrisultatinocontainer.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                }
+
+                //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
+                break;
+
+            case "rif000504":
+                AssociaDatiSocial();
+
+                column1.Visible = false;
+                column2.Visible = false;
+                column3.Visible = false;
+                columnsingle.Attributes["class"] = "col-12";
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                //column3.Attributes["class"] = "col-md-3 col-sm-3";
+                //ContaArticoliPerperiodo(Tipologia);
+                divSearch.Visible = false;
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeVini.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+                    //string controllist2 = "injectPortfolioAndLoad(\"isotopeOfferte1.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
+
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    //placeholderrisultati
+                    //sb.Append("<div>");
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePWASinglerow-offerte.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     //sb.Append("</div>");

@@ -21,6 +21,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 @subtitle: 1rem;
 @body-size: 1rem;
 
+/*----------------------------------
+///////| ALTRI ELEMENTI PWA |///////
+----------------------------------*/
+@dinamic-image-pwa: 200px;
+
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -562,11 +567,29 @@ ul > li:first-of-type .pwa-txt-container {
 ----------------------------------*/
 /*IMMAGINE*/
 #divitem-gallery .flex-viewport {
-    max-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-radius: .25rem !important;
+    max-height: @dinamic-image-pwa;
+    /*padding-top: calc(9 / 16 * 100%);
+    margin-top: calc(-9 / 16 * 100%);*/
+}
+@media (min-width: 735px) {
+    #divitem-gallery .flex-viewport {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: .25rem !important;
+        max-height: calc(735 / 414 * @dinamic-image-pwa);
+    }
+}
+/*IMMAGINE news*/
+.pwa-details-info #plhGallery .flexslider {
+    margin-bottom: 0 !important;
+}
+.pwa-details-info #divitem-gallery .flex-viewport {
+    border-radius: 0.25rem 0.25rem 0 0 !important;
 }
 
 /*---------------------------------
@@ -589,6 +612,12 @@ ul > li:first-of-type .pwa-txt-container {
     margin-top: 0;
 }
 
+/*---------------------------------
+-------- swiperPWAscroller ---------
+----------------------------------*/
+.swiper-pagination-bullet, .swiper-pagination-bullet-active {
+    background: @bg-primary-color;
+}
 
 
 

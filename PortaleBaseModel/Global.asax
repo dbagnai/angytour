@@ -573,7 +573,14 @@
          //"~/js/maininit.js",
          //"~/js/landing/script.js",
          "~/js/landing/jarallax.js",
-         "~/js/maininit-pwa.js"
+         "~/js/maininit-pwa.js",
+
+         //MIRCO SCROLLER SWIPER PWA js
+         //"~/js/swiper/swiper.min.js.map",
+         //"~/js/swiper/swiper.esm.bundle.js",
+         //"~/js/swiper/swiper.esm.js",
+         //"~/js/swiper/swiper.js",
+         "~/js/swiper/swiper.min.js"
      );
 
         BundleEngine.AddBundleCSS("bundlecss1",
@@ -634,6 +641,11 @@
           //"~/css/mbr-faq.css",
           //"~/css/mbr-additional.css",
           //"~/css/landing.css",
+
+         //MIRCO SCROLLER SWIPER PWA css
+         //"~/css/swiper/swiper.css",
+         "~/css/swiper/swiper.min.css",
+
           "~/css/custom1.css",
           "~/css/custom.css",
           "~/css/custom-pwa.css"
