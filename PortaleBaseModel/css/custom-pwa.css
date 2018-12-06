@@ -200,6 +200,7 @@ h1 span:nth-child(1).mbr-section-title::after,
   display: none;
 }
 .slidemenu {
+  position: relative;
   font-family: arial, sans-serif;
   /*max-width: 600px;*/
   margin: 0 auto 15px;
@@ -259,6 +260,7 @@ h1 span:nth-child(1).mbr-section-title::after,
   border-radius: 5px;
 }
 /*Animations*/
+.slidemenu,
 .slidemenu label,
 .slider .bar {
   transition: all 500ms ease-in-out;
@@ -299,16 +301,26 @@ h1 span:nth-child(1).mbr-section-title::after,
   opacity: 1;
 }
 .slidemenu-fixed {
-  top: 0;
+  top: -61px;
   position: fixed;
   z-index: 999999999;
   width: 100%;
+  margin-top: 61px;
 }
 /*---------------------------------------------
 - NAVIGAZIONE - FIXED - TOP - sottomenu - PWA -
 ---------------------------------------------*/
 ul#ulSubmenu.nav {
   display: none;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+ul#ulSubmenu.nav::-webkit-scrollbar {
+  display: none;
+}
+ul#ulSubmenu.nav li.nav-item {
+  flex: 0 0 auto !important;
 }
 #ulSubmenu li a {
   display: block;
@@ -394,6 +406,10 @@ ul#ulSubmenu.nav {
   background-color: #fff;
   border-color: #098f8f #098f8f #fff;
 }
+.nav-tabs .nav-link.active {
+  border-bottom: 5px solid #fff;
+  margin-bottom: -2px;
+}
 .nav-tabs .nav-link,
 #ulSubmenu li a {
   border-radius: 0.25rem 0.25rem 0 0 !important;
@@ -401,6 +417,9 @@ ul#ulSubmenu.nav {
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 0.2px;
+}
+#ulSubmenu li:nth-last-child(1) {
+  padding-right: 15px !important;
 }
 .fade {
   display: none !important;
@@ -656,6 +675,17 @@ ul > li:first-of-type .pwa-txt-container {
 .swiper-pagination-bullet,
 .swiper-pagination-bullet-active {
   background: #098f8f;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+.swiper-text {
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  bottom: 0;
 }
 /*---------------------------------
 ------------- CONTACT -------------

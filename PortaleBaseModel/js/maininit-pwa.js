@@ -12,27 +12,25 @@ jQuery(document).ready(function ($) {
     //    }
     //});
 
-    //var lastScrollTop = 0;
-    //$(window).on('scroll', function () {
-    //    st = $(this).scrollTop();
-    //    if (st < lastScrollTop) {
-    //        $('.slidemenu').addClass('slidemenu-fixed');
+    
+    /*-------- movimento scroll su e giù ---------------*/
+    //$('body').on("touchstart", function (e) {
+    //$('body').on('mousewheel', function (e) {
+    //    if (e.originalEvent.wheelDelta > 0)
+    //        if ($(window).scrollTop() > 122){
+    //            $('.slidemenu').addClass('slidemenu-fixed');
+    //            $('.slidemenu-fixed').css('transition', 'all 400ms ease-in-out');
+    //            $('.slidemenu-fixed').css('-webkit-transition', 'all 400ms ease-in-out');
+    //            $('.slidemenu-fixed').css('-moz-transition', 'all 400ms ease-in-out');
+    //        }
+    //        else {
+    //            $('.slidemenu-fixed').css('transition', 'none');
+    //            $('.slidemenu-fixed').css('-webkit-transition', 'none');
+    //            $('.slidemenu-fixed').css('-moz-transition', 'none');
+    //            $('.slidemenu').removeClass('slidemenu-fixed');              
     //    }
-    //    else {
-    //        $('.slidemenu').removeClass('slidemenu-fixed');
-    //    }
-    //    lastScrollTop = st;
     //});
 
-    $('body').on('mousewheel', function (e) {
-        if ($(window).scrollTop() > 61)
-        if (e.originalEvent.wheelDelta > 0) {
-            $('.slidemenu').addClass('slidemenu-fixed');
-        }
-        else {
-            $('.slidemenu').removeClass('slidemenu-fixed');
-        }
-    });
 
 
 });
@@ -62,6 +60,9 @@ $(function () {
 /*--- lo accendo se il path della pagina è quello delle NEWS --*/
 $(function () {
     if (window.location.pathname == "/I/comunicazioni/comunicazioni") {
+        $('ul#ulSubmenu.nav').css('display', 'flex');
+    }
+    else if (window.location.pathname == "/I/offerte/offerte") {
         $('ul#ulSubmenu.nav').css('display', 'flex');
     }
     else if ($('.submenutop')[0]) {
@@ -108,4 +109,6 @@ $(function () {
         $('#searchpwa').animate({ marginBottom: '-10px' }, 500);
     };
 });
+
+
 

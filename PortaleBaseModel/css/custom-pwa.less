@@ -146,6 +146,7 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
 }
 
 .slidemenu {
+    position:relative;
     font-family: arial, sans-serif;
     /*max-width: 600px;*/
     margin: 0 auto 15px;
@@ -209,10 +210,10 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
 }
 
 /*Animations*/
-.slidemenu label, .slider .bar {
-  transition: all 500ms ease-in-out;
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
+.slidemenu, .slidemenu label, .slider .bar {
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
 }
 
 /*Toggle*/
@@ -241,12 +242,12 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
 .slidemenu label span li.activeelemntli {
     opacity: 1;
 }
-
 .slidemenu-fixed {
-    top: 0;
+    top: -61px;
     position: fixed;
     z-index: 999999999;
     width: 100%;
+    margin-top: 61px;
 }
 
 /*---------------------------------------------
@@ -254,6 +255,18 @@ h1, .mbr-section-title, a .mbr-section-title, .title-block, h1 span:nth-child(1)
 ---------------------------------------------*/
 ul#ulSubmenu.nav {
     display: none;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+ul#ulSubmenu.nav li.nav-item {
+    flex: 0 0 auto !important;
 }
 
 #ulSubmenu li a {
@@ -344,12 +357,21 @@ ul#ulSubmenu.nav {
     border-color: @bg-primary-color @bg-primary-color #fff;
 }
 
+.nav-tabs .nav-link.active {
+    border-bottom: 5px solid #fff;
+    margin-bottom: -2px;
+}
+
 .nav-tabs .nav-link {
     border-radius: .25rem .25rem 0 0 !important;
     color: @body-color;
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 0.2px;
+}
+
+#ulSubmenu li:nth-last-child(1) {
+    padding-right: 15px !important;
 }
 
 .fade {
@@ -623,6 +645,19 @@ ul > li:first-of-type .pwa-txt-container {
 ----------------------------------*/
 .swiper-pagination-bullet, .swiper-pagination-bullet-active {
     background: @bg-primary-color;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.swiper-text {
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.90);
+    bottom: 0;
 }
 
 /*---------------------------------
