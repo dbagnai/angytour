@@ -815,6 +815,10 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     padding: 0px;
 }
 
+.card-img-overlay.card-gradient-overlay {
+    background-image: -webkit-linear-gradient(-270deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.009) 65%, rgba(0, 0, 0, 0.056) 72.9%, rgba(0, 0, 0, 0.023) 81.4%, rgba(0, 0, 0, 0.005) 90.6%, transparent 100%);
+    background-image: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.009) 65%, rgba(0, 0, 0, 0.056) 72.9%, rgba(0, 0, 0, 0.023) 81.4%, rgba(0, 0, 0, 0.005) 90.6%, transparent 100%);
+}
 .card-img-overlay:hover {
     /*background-color: rgba(0,0,0,0.5);
     background-position: center center !important;*/
@@ -1879,6 +1883,22 @@ b, strong {
     &:extend(.isotope-navigation .work-subcaption .work-desc);
     font-style: normal;
     font-weight: @body-weight;
+}
+
+
+.imgbackstyle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #333;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    overflow: hidden;
+    min-height: 370px;
 }
 
     /*----------------------------------

@@ -133,6 +133,7 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.106.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
@@ -232,6 +233,7 @@
     <Compile Include="UF\filemanage.cs" />
     <Compile Include="UF\GenericComparer.cs" />
     <Compile Include="UF\GenericFunc.cs" />
+    <Compile Include="UF\googlegeolocalization.cs" />
     <Compile Include="UF\HandlerHelper.cs" />
     <Compile Include="UF\HelperImage.cs" />
     <Compile Include="UF\htmlToText.cs" />

@@ -95,9 +95,9 @@ namespace WelcomeLibrary.UF
             //Al termine creo una lista delle funzioni javascript di inizializzazione da chiamare idcontenitore, idcontrollo,funzione init, parametri eventuali(da capire se si puo usare unfile.js standard di inizializzazione )!!!!!!!
             /////////////////////////////////////////////////////////////
             if (pars.Count > 0)
-                switch (pars[0])
+                switch (pars[0].ToLower())
                 {
-                    case "injectSliderAndLoadBanner":
+                    case "injectsliderandloadbanner":
                         // injectSliderAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola, width, height)
 
                         //node.InnerHtml; //qui devo inserire i dati col bind
@@ -224,7 +224,7 @@ namespace WelcomeLibrary.UF
                         }
 
                         break;
-                    case "injectFasciaAndLoadBanner":
+                    case "injectfasciaandloadbanner":
                         //injectFasciaAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola) 
 
                         //Caricamento parametri per la chiamata
@@ -347,7 +347,7 @@ namespace WelcomeLibrary.UF
                             }
                         }
                         break;
-                    case "injectPortfolioAndLoadBanner":
+                    case "injectportfolioandloadbanner":
                         //injectPortfolioAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola)
 
                         //Caricamento parametri per la chiamata
@@ -478,7 +478,7 @@ namespace WelcomeLibrary.UF
                             }
                         }
                         break;
-                    case "injectScrollerAndLoadBanner":
+                    case "injectscrollerandLoadbanner":
                         //injectScrollerAndLoadBanner(type, container, controlid, listShow, maxelement, scrollertype, tblsezione, filtrosezione, mescola)
 
                         //Caricamento parametri per la chiamata
@@ -610,7 +610,7 @@ namespace WelcomeLibrary.UF
                         }
 
                         break;
-                    case "injectScrollerAndLoad":
+                    case "injectscrollerandload":
                         //injectScrollerAndLoad(type, container, controlid, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, scrollertype, categoria2Liv, vetrina, promozioni) 
 
                         //Caricamento parametri per la chiamata
@@ -636,6 +636,32 @@ namespace WelcomeLibrary.UF
 
                         if (!dictpars.ContainsKey("container")) return;
                         if (!dictpars.ContainsKey("controlid")) return;
+
+
+                        //////////////////////////////////////////////////
+                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                        //////////////////////////////////////////////////
+#if true
+                        if (Session != null && Session["objfiltro"] != null)
+                        {
+                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                            if (retval != null && retval != "")
+                            {
+                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                if (dictparsfromsession != null)
+                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                    {
+                                        //if (kv.Key == ("page" + dictpars["controlid"]))
+                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                        //aggiungo i parametri dalla sessione se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                    }
+                            }
+                        }
+#endif
+
 
                         ///////////////////////////////////////////////////////////
                         //CARICAMENTO TEMPLATE  (owlscrollerOfferte.html)
@@ -788,6 +814,31 @@ namespace WelcomeLibrary.UF
                         if (!dictpars.ContainsKey("container")) return;
                         if (!dictpars.ContainsKey("controlid")) return;
                         if (!dictpars.ContainsKey("id")) return;
+
+                        //////////////////////////////////////////////////
+                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                        //////////////////////////////////////////////////
+#if true
+                        if (Session != null && Session["objfiltro"] != null)
+                        {
+                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                            if (retval != null && retval != "")
+                            {
+                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                if (dictparsfromsession != null)
+                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                    {
+                                        //if (kv.Key == ("page" + dictpars["controlid"]))
+                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                        //aggiungo i parametri dalla sessione se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                    }
+                            }
+                        }
+#endif
+
 
                         ///////////////////////////////////////////////////////////
                         //CARICAMENTO TEMPLATE  (schedadetails.html)
@@ -945,7 +996,7 @@ namespace WelcomeLibrary.UF
                             }
                         }
                         break;
-                    case "injectPortfolioAndLoad":
+                    case "injectportfolioandload":
                         // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) 
                         //return;
 
@@ -979,7 +1030,7 @@ namespace WelcomeLibrary.UF
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
 #if true
-                        if (Session != null)
+                        if (Session != null && Session["objfiltro"] != null)
                         {
                             string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
                             if (retval != null && retval != "")
@@ -1359,13 +1410,449 @@ namespace WelcomeLibrary.UF
                                     //Aggiorno le variaibli javascript globalObject[controlid + "params"] ( da dictpars) e globalObject[controlid + "pagerdata" ] ( da dictpagerpars ) per far funzionare il pager lato client !!!
                                     //La seguente prepara una chiamata a funzione javascript che inizializza le variabili js. ( SERVE SOLO PER UTILIZZO LATO CLIENT )
                                     if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpars) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     if (jscommands.ContainsKey(container + "-1")) jscommands.Remove(container + "-1");
                                     jscommands.Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+
+                                    //if (dictpagerpars["enablepager"] == "true")
+                                    //{
+                                    //jscommands.Add(container + "-2", "initHtmlPager('" + dictpars["controlid"] + "');");
+                                    // jscommands.Add(container + "-3", "renderPager('" + dictpars["controlid"] + "');"); //QESUTA LA DEVI REPLICARE LATO SERBE USA LE RISORSE!!!!!! o gli devi passare le risporse necessarie!!
+                                    //}
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////END BINDING //////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                }
+                            }
+                        }
+                        break;
+                    case "injectbootstrapportfolioandload":
+                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) 
+                        //return;
+
+                        if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
+                        //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
+                        //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", node.ParentNode.OuterHtml.Replace("\"", "\\\"").Replace("'", "|")); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
+                        //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", Newtonsoft.Json.JsonConvert.SerializeObject(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
+                        //Caricamento parametri per la chiamata
+                        if (pars.Count > 0 && !dictpars.ContainsKey("functionname")) dictpars.Add("functionname", pars[0]);
+                        if (pars.Count > 1 && !dictpars.ContainsKey("templateHtml")) dictpars.Add("templateHtml", pars[1]);
+                        if (pars.Count > 2 && !dictpars.ContainsKey("container")) dictpars.Add("container", pars[2]);
+                        if (pars.Count > 3 && !dictpars.ContainsKey("controlid")) dictpars.Add("controlid", pars[3]);
+                        if (pars.Count > 7 && !dictpars.ContainsKey("listShow")) dictpars.Add("listShow", pars[7]);
+                        if (pars.Count > 8 && !dictpars.ContainsKey("tipologia")) dictpars.Add("tipologia", pars[8]);
+                        if (pars.Count > 9 && !dictpars.ContainsKey("categoria")) dictpars.Add("categoria", pars[9]);
+                        if (pars.Count > 10 && !dictpars.ContainsKey("visualData")) dictpars.Add("visualData", pars[10]);
+                        if (pars.Count > 11 && !dictpars.ContainsKey("visualPrezzo")) dictpars.Add("visualPrezzo", pars[11]);
+                        if (pars.Count > 12 && !dictpars.ContainsKey("maxelement")) dictpars.Add("maxelement", pars[12]);
+                        if (pars.Count > 13 && !dictpars.ContainsKey("testoricerca")) dictpars.Add("testoricerca", pars[13]);
+                        if (pars.Count > 14 && !dictpars.ContainsKey("vetrina")) dictpars.Add("vetrina", pars[14]);
+                        if (pars.Count > 15 && !dictpars.ContainsKey("promozioni")) dictpars.Add("promozioni", pars[15]);
+                        if (pars.Count > 16 && !dictpars.ContainsKey("connectedid")) dictpars.Add("connectedid", pars[16]);
+                        if (pars.Count > 17 && !dictpars.ContainsKey("categoria2Liv")) dictpars.Add("categoria2Liv", pars[17]);
+                        if (pars.Count > 18 && !dictpars.ContainsKey("mostviewed")) dictpars.Add("mostviewed", pars[18]);
+                        ////////////////////////////(PAGINAZIONE ... )
+                        if (pars.Count > 4 && !dictpagerpars.ContainsKey("page")) dictpagerpars.Add("page", pars[4]);
+                        if (pars.Count > 5 && !dictpagerpars.ContainsKey("pagesize")) dictpagerpars.Add("pagesize", pars[5]);
+                        if (pars.Count > 6 && !dictpagerpars.ContainsKey("enablepager")) dictpagerpars.Add("enablepager", pars[6]);
+
+                        //////////////////////////////////////////////////
+                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                        //////////////////////////////////////////////////
+#if true
+                        if (Session != null && Session["objfiltro"] != null)
+                        {
+                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                            if (retval != null && retval != "")
+                            {
+                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                if (dictparsfromsession != null)
+                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                    {
+                                        //if (kv.Key == ("page" + dictpars["controlid"]))
+                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                        //aggiungo i parametri dalla sessione se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                    }
+                            }
+                        }
+#endif
+                        //////////////////////////////////////
+                        //Se presente la quesrystring pagino con quella (PRIORITARA)
+                        if (Richiesta != null)
+                        {
+                            if (Richiesta.QueryString.AllKeys.Contains("page"))
+                            {
+                                string pagina = Richiesta.QueryString.GetValues("page")[0];
+                                dictpagerpars["page"] = pagina;
+                            }
+                        }
+                        /////////////////////////////////////
+
+                        if (!dictpars.ContainsKey("container")) return;
+                        if (!dictpars.ContainsKey("controlid")) return;
+
+                        //Se non presente inserisco un nodo contenitore al quello passato
+                        //var newNode = HtmlNode.CreateNode(node.OuterHtml.Replace(node.OuterHtml, "<div class=\"containernode\">" + node.OuterHtml + "</div>"));
+                        //node.ParentNode.ReplaceChild(newNode, node);
+
+                        ///////////////////////////////////////////////////////////
+                        //CARICAMENTO TEMPLATE VISUALIZZAZIONE  (isotopeOfferte.html)
+                        ///////////////////////////////////////////////////////////
+                        if (!dictpars["templateHtml"].Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/lib/template/"))
+                            dictpars["templateHtml"] = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/lib/template/" + dictpars["templateHtml"]; //Memorizzo l'url per il caricamento del template
+                        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]))
+                            templatetext = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]);
+                        templatetext = templatetext.Replace("replaceid", dictpars["controlid"]);
+                        if (!string.IsNullOrEmpty(templatetext))
+                        {
+                            HtmlDocument template = new HtmlDocument();
+                            template.LoadHtml(templatetext); //Template per il bind
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //CARICAMENTO DATI PER BIND
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            if (dictdati != null && dictdati.Count > 0)
+                            {
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //LISTE DATI DA VISUALIZZARE
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<Offerte> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Offerte>>(dictdati["data"]);
+                                //Caratteristiche della lista ( totalrecords )
+                                Dictionary<string, string> resultinfo = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictdati["resultinfo"]);
+                                //Collezione chiave,valore per id elemento dei valori preparati per il binding link,titolo,image
+                                Dictionary<string, Dictionary<string, string>> linkloaded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(dictdati["linkloaded"]);
+                                if (resultinfo != null && resultinfo.ContainsKey("totalrecords"))
+                                    dictpagerpars.Add("totalrecords", resultinfo["totalrecords"]);
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                //////////////////////////////////////////////////////////////////////////////////////////////////// 
+                                //CARICAMENTO E INIZIALIZZAZIONE DELLA PAGINAZIONE SE RICHIESTO////////////////////////////
+                                //////////////////////////////////////////////////////////////////////////////////////////////////// 
+                                if (dictpagerpars["enablepager"] == "true")
+                                {
+
+                                    //Se non presente appendiamo il div per il pager
+                                    //"<div id=\"containeridListPager\"></div> //Inserisco questo elemento se non presente
+                                    var pagernode = node.ParentNode.SelectNodes("//*[contains(@id,'" + dictpars["container"] + "Pager')]");
+                                    if (pagernode == null || pagernode.Count == 0)
+                                    {
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporaneo
+                                        tmpdoc.LoadHtml("<div id=\"" + dictpars["container"] + "Pager\"></div>");
+                                        //node.ParentNode.InsertAfter(tmpdoc.DocumentNode.Clone(), node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']"));
+                                        //node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']").ParentNode.AppendChild(tmpdoc.DocumentNode.Clone());
+                                        //node.ParentNode.AppendChild(tmpdoc.DocumentNode.Clone()); //Modifica la collection padre del ciclo e va in errore
+                                        node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']").AppendChild(tmpdoc.DocumentNode.Clone());
+                                    }
+
+
+                                    string templatepager = "";
+                                    if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + "pagerIsotope.html"))
+                                        templatepager = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + "pagerIsotope.html");
+                                    if (!string.IsNullOrEmpty(templatepager))
+                                    {
+                                        templatepager = templatepager.Replace("replaceid", dictpars["controlid"]);
+                                        if (node.ParentNode != null)
+                                        {
+                                            var pagercontainer = node.ParentNode.Descendants().Where(c => c.Id == dictpars["container"] + "Pager");
+                                            if ((pagercontainer != null) && (pagercontainer.Count() > 0))
+                                            {
+                                                HtmlDocument tmpdoc = new HtmlDocument();//Documento temporaneo
+                                                tmpdoc.LoadHtml(templatepager);
+                                                pagercontainer.First().AppendChild(tmpdoc.DocumentNode.Clone());
+                                                ///////////////////////////////////////////////////////////////////////////////////
+                                                //Inizializziamo la visualizzazione del pager ( lato server ) sostituisce renderpager lato client
+                                                ///////////////////////////////////////////////////////////////////////////////////
+                                                int totalrecords = 0; int.TryParse(dictpagerpars["totalrecords"], out totalrecords);
+                                                int page = 1; int.TryParse(dictpagerpars["page"], out page);
+                                                int pagesize = 1; int.TryParse(dictpagerpars["pagesize"], out pagesize);
+                                                int pagesnumber = (int)System.Math.Ceiling((Double)totalrecords / (Double)pagesize);
+                                                if (page > pagesnumber) { page = pagesnumber; }
+                                                if (page < 1) { page = 1; }
+                                                dictpagerpars["page"] = page.ToString();
+
+                                                string prevpage = (page - 1 < 1) ? "1" : (page - 1).ToString();
+                                                string nextpage = (page + 1 > pagesnumber) ? pagesnumber.ToString() : (page + 1).ToString();
+
+                                                //Accendo o spengo il pager
+                                                if (pagesnumber > 1)
+                                                {
+                                                    if ((pagercontainer != null) && (pagercontainer.Count() > 0))
+                                                        if (pagercontainer.First().Attributes.Contains("style"))
+                                                        {
+                                                            pagercontainer.First().Attributes["style"].Value = pagercontainer.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                            pagercontainer.First().Attributes["style"].Value += ";display:block";
+                                                        }
+                                                        else
+                                                            pagercontainer.First().Attributes.Add("style", "display:block");
+                                                    var pagerinner = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "divPager");
+                                                    if ((pagerinner != null) && (pagerinner.Count() > 0))
+                                                        if (pagerinner.First().Attributes.Contains("style"))
+                                                        {
+                                                            pagerinner.First().Attributes["style"].Value = pagerinner.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                            pagerinner.First().Attributes["style"].Value += ";display:block";
+                                                        }
+                                                        else
+                                                            pagerinner.First().Attributes.Add("style", "display:block");
+                                                }
+                                                ///////////////////////////////////////////////////////////////////////////////////
+                                                //Inizializziamo i tasti avanti e indietro del pager e valorizziamo le etichette di testo   sostituisce renderpager lato client e anche inithtmlpager
+                                                ///////////////////////////////////////////////////////////////////////////////////
+                                                var btnadd = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnAddcontent");
+                                                if ((btnadd != null) && (btnadd.Count() > 0))
+                                                {
+                                                    btnadd.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore + " add";
+                                                    btnadd.First().SetAttributeValue("onClick", "javascript:addcontentbindonserver('" + dictpars["controlid"] + "')");
+
+                                                    if (btnadd.First().Attributes.Contains("style"))
+                                                    {
+                                                        btnadd.First().Attributes["style"].Value = btnadd.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        btnadd.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        btnadd.First().Attributes.Add("style", "display:block");
+                                                }
+
+                                                ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+#if true
+                                                var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
+                                                if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
+                                                {
+                                                    aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
+                                                    //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+                                                    aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
+
+                                                    if (aNextPage.First().Attributes.Contains("style"))
+                                                    {
+                                                        aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        aNextPage.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        aNextPage.First().Attributes.Add("style", "display:block");
+                                                }
+
+                                                var aPrevPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aPrevPage");
+                                                if ((aPrevPage != null) && (aPrevPage.Count() > 0) && Richiesta != null && page > 1)
+                                                {
+                                                    aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
+                                                    //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+                                                    aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+
+                                                    if (aPrevPage.First().Attributes.Contains("style"))
+                                                    {
+                                                        aPrevPage.First().Attributes["style"].Value = aPrevPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        aPrevPage.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        aPrevPage.First().Attributes.Add("style", "display:block");
+                                                }
+#endif
+                                                ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+
+                                                ///////////PAGINAZIONE CON FUNZIONI JAVASCRIPT E CARICAMENTO LATO SERVER
+#if false
+                                                var btnnext1 = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage1");
+                                                if ((btnnext1 != null) && (btnnext1.Count() > 0))
+                                                {
+                                                    btnnext1.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
+                                                    btnnext1.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+
+                                                    if (btnnext1.First().Attributes.Contains("style"))
+                                                    {
+                                                        btnnext1.First().Attributes["style"].Value = btnnext1.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        btnnext1.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        btnnext1.First().Attributes.Add("style", "display:block");
+                                                }
+
+                                                var btnprev1 = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnPrevPage1");
+                                                if ((btnprev1 != null) && (btnprev1.Count() > 0))
+                                                {
+                                                    btnprev1.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
+                                                    btnprev1.First().SetAttributeValue("onClick", "javascript:prevpagebindonserver('" + dictpars["controlid"] + "')");
+
+                                                    if (btnprev1.First().Attributes.Contains("style"))
+                                                    {
+                                                        btnprev1.First().Attributes["style"].Value = btnprev1.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        btnprev1.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        btnprev1.First().Attributes.Add("style", "display:block");
+                                                } 
+#endif
+                                                ///////////PAGINAZIONE CON FUNZIONI JAVASCRIPT E CARICAMENTO LATO SERVER
+
+                                                //Pulsanti per chiamate lato client!
+#if false
+                                                var btnnext = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnNextPage");
+                                                if ((btnnext != null) && (btnnext.Count() > 0))
+                                                {
+                                                    btnnext.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
+                                                    btnnext.First().SetAttributeValue("onClick", "javascript:nextpage('" + dictpars["controlid"] + "')");
+                                                }
+                                                var btnprev = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "btnPrevPage");
+                                                if ((btnprev != null) && (btnprev.Count() > 0))
+                                                {
+                                                    btnprev.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
+                                                    btnprev.First().SetAttributeValue("onClick", "javascript:prevpage('" + dictpars["controlid"] + "')");
+                                                } 
+                                                ////////////////////////////////////
+#endif
+                                                var lbltototali = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "spantotals");
+                                                if ((lbltototali != null) && (lbltototali.Count() > 0))
+                                                    lbltototali.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagertotale").Valore + " " + totalrecords.ToString() + "<br/>";
+                                                var lblactpage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "divactpage");
+                                                if ((lblactpage != null) && (lblactpage.Count() > 0))
+                                                    lblactpage.First().InnerHtml = page + "/" + pagesnumber;
+
+                                            }
+                                        }
+                                    }
+                                }
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]); //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                {
+
+                                    bool alternate = false;
+                                    if (elementtoappend.First().Attributes.Contains("class") && elementtoappend.First().Attributes["class"].Value.Contains("alternatecolor"))
+                                        alternate = true;
+
+                                    string innerelement = elementtoappend.First().InnerHtml;
+                                    if ((innerelement != ""))
+                                    {
+                                        //Creo una copia  del contenuto da ripetere creandoci un nuovo documento 
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporane per fre il binding ripetuto
+                                        tmpdoc.LoadHtml(innerelement);
+                                        HtmlNode cloneitemtemplate = tmpdoc.DocumentNode.Clone(); //elemento root matrice template da ripetere per fare il binding
+                                        elementtoappend.First().RemoveAllChildren(); //ATTENZIONE questa rimuove i child del ellemento primario del template
+                                        int j = 0;
+                                        foreach (Offerte item in data)
+                                        {
+                                            //Copio i dati dall'oggetto Banners in un dictionary property,value per evitare l'utilizzo pesante di reflection nel binding!!!!
+                                            Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection
+
+                                            HtmlNode cloneitem = cloneitemtemplate.Clone();
+                                            //PROCEDURA DI BIND DATI
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            if ((bindingnodes != null) && (bindingnodes.Count() > 0))
+                                                foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
+                                                {
+                                                    DataBindElement(nodetobind, itemdic, linkloaded, resultinfo);
+
+                                                }
+
+                                            ////////////////////ODD EVEN GESTIONE SFONDO
+                                            if (alternate)
+                                            {
+                                                if (IsEven(j))
+                                                {
+
+                                                    //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'odd')]");
+                                                    //if (nodes != null)
+                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
+                                                    //{
+                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("odd"))
+                                                    //        n.Remove();
+                                                    //}
+
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("odd"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                    {
+                                                        nodestoremove.First().Remove();
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'even')]");
+                                                    //if (nodes != null)
+                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
+                                                    //foreach (HtmlNode n in cloneitem.Descendants())
+                                                    //{
+                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("even"))
+                                                    //        n.Remove();
+                                                    //}
+
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("even"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        {
+                                                            nodestoremove.First().Remove();
+                                                        }
+                                                }
+
+                                            }
+                                            /////////////////////////////////////////////
+                                            elementtoappend.First().AppendChild(cloneitem.Clone());
+                                            j++;
+                                        }
+                                    }
+                                    //Rendiamo visibile il primo div contenitore del template
+                                    var firstnode = template.DocumentNode.Descendants("div");
+                                    if ((firstnode != null) && (firstnode.Count() > 0))
+                                    {
+                                        if (firstnode != null)
+                                            if (firstnode.First().Attributes.Contains("style"))
+                                            {
+                                                firstnode.First().Attributes["style"].Value = firstnode.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                firstnode.First().Attributes["style"].Value += ";display:block";
+                                            }
+                                            else
+                                                firstnode.First().Attributes.Add("style", "display:block");
+                                    }
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Appendiamo l'html al contenitore corretto dopo il binding!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //var nodeconteinerisotope = node.SelectSingleNode("//*[@id='" + dictpars["container"] + "']");
+                                    //nodeconteinerisotope.RemoveAllChildren();
+                                    //var clonedpager = node.SelectSingleNode("//*[@id='" + dictpars["container"] + "Pager']").Clone(); //Clono il pager per non cancellarlo
+                                    HtmlNode clonedpager = null; //Clono il pager per non cancellarlo
+                                    var childelems = node.ChildNodes.Descendants().Where(n => n.Id == (dictpars["container"] + "Pager"));
+                                    if ((childelems != null) && (childelems.Count() > 0))
+                                    {
+                                        //Clono il pager per non cancellarlo
+                                        clonedpager = childelems.First().Clone();
+                                    }
+                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
+                                    node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+                                    if (clonedpager != null && node.ParentNode.SelectSingleNode("//*[@id='" + dictpars["container"] + "Pager']") == null)
+                                        node.AppendChild(clonedpager); //Appendo il pager
+
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.Attributes["class"].Value = node.Attributes["class"].Value.Replace("inject", "");
+                                    node.Attributes["params"].Remove();
+                                    CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
+
+
+                                    //Aggiorno le variaibli javascript globalObject[controlid + "params"] ( da dictpars) e globalObject[controlid + "pagerdata" ] ( da dictpagerpars ) per far funzionare il pager lato client !!!
+                                    //La seguente prepara una chiamata a funzione javascript che inizializza le variabili js. ( SERVE SOLO PER UTILIZZO LATO CLIENT )
+                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //if (jscommands.ContainsKey(container + "-1")) jscommands.Remove(container + "-1");
+                                    //jscommands.Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
 
                                     //if (dictpagerpars["enablepager"] == "true")
                                     //{
@@ -1491,7 +1978,7 @@ namespace WelcomeLibrary.UF
                                     CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
 
                                     if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpars) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
@@ -1616,7 +2103,7 @@ namespace WelcomeLibrary.UF
                                     CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
 
                                     if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpars) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
@@ -1748,6 +2235,29 @@ namespace WelcomeLibrary.UF
                             if (nodetobind.Attributes.Contains("onclick")) nodetobind.Attributes.Remove("onclick");
                             nodetobind.Attributes.Add("onclick", "javascript:" + nodetobind.Attributes["myvalue"].Value + "('" + idscheda + "');");
                         }
+                    }
+                    else if (nodetobind.Name == "a" && nodetobind.Attributes["class"].Value.Contains("callbutton"))
+                    {
+                        string link = "";
+                        string testo = "";
+                        string bindprophref = "";
+                        string bindproptitle = "";
+
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                            idscheda = itemdic[property];
+
+                        if (nodetobind.Attributes.Contains("href"))
+                            bindprophref = nodetobind.Attributes["href"].Value;
+
+                        if (itemdic.ContainsKey(bindprophref))
+                        {
+                            link = itemdic[bindprophref];
+                            nodetobind.Attributes["href"].Value = "tel:" + link;
+                            nodetobind.InnerHtml += link;
+                        }
+
+
                     }
                     else if (nodetobind.Name == "a")
                     {
@@ -2171,10 +2681,10 @@ namespace WelcomeLibrary.UF
                             if (nodetobind != null && !string.IsNullOrEmpty(completepath))
                                 if (nodetobind.Attributes.Contains("style"))
                                 {
-                                    nodetobind.Attributes["style"].Value += ";url('" + completepath + "')";
+                                    nodetobind.Attributes["style"].Value += ";background-image:url('" + completepath + "')";
                                 }
                                 else
-                                    nodetobind.Attributes.Add("style", "url('" + completepath + "')");
+                                    nodetobind.Attributes.Add("style", "background-image:url('" + completepath + "')");
                         }
 
                     }
@@ -2196,49 +2706,7 @@ namespace WelcomeLibrary.UF
                                 nodetobind.Attributes["data-property"].Value = nodetobind.Attributes["data-property"].Value.Replace("videoplaceholder", link);
                         }
                     }
-                    else if (nodetobind.Name == "meta")
-                    {
-                        if (itemdic.ContainsKey(property))
-                        {
-                            string ret = "";
-                            List<string> valore = new List<string>();
-                            valore.Add(itemdic[property]);
-                            List<string> prop = new List<string>();
-                            string functiontocall = "";
-                            if (nodetobind.Attributes.Contains("format") && !string.IsNullOrEmpty(nodetobind.Attributes["format"].Value))
-                            {
-                                functiontocall = nodetobind.Attributes["format"].Value;
 
-                                if (nodetobind.Attributes.Contains("mybind1") && itemdic.ContainsKey(nodetobind.Attributes["mybind1"].Value))
-                                    valore.Add(itemdic[nodetobind.Attributes["mybind1"].Value]);
-                                else valore.Add("");
-                                if (nodetobind.Attributes.Contains("mybind2") && itemdic.ContainsKey(nodetobind.Attributes["mybind2"].Value))
-                                    valore.Add(itemdic[nodetobind.Attributes["mybind2"].Value]);
-                                else valore.Add("");
-                                if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
-                                    valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
-                                else valore.Add("");
-
-                                if (nodetobind.Attributes.Contains("myvalue"))
-                                    prop.Add(nodetobind.Attributes["myvalue"].Value);
-                                else prop.Add("");
-                                if (nodetobind.Attributes.Contains("myvalue1"))
-                                    prop.Add(nodetobind.Attributes["myvalue1"].Value);
-                                else prop.Add("");
-                                if (nodetobind.Attributes.Contains("myvalue2"))
-                                    prop.Add(nodetobind.Attributes["myvalue2"].Value);
-                                else prop.Add("");
-
-                                ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
-                                //if (ret != null && Array.isArray(ret) && ret.length > 0)
-                                //    valore = ret[0];
-                                //else
-                                //    valore = ret;
-                                nodetobind.SetAttributeValue("content", ret);
-                            }
-                        }
-
-                    }
                     else if (nodetobind.Name == "iframe")
                     {
                         if (itemdic.ContainsKey(property))
@@ -2318,6 +2786,95 @@ namespace WelcomeLibrary.UF
                                 jscommands.Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  //1 carrello con data range //2 carreelo standard //3 entrambi
                             }
                         }
+                    }
+                    else if (nodetobind.Name == "meta")
+                    {
+                        if (itemdic.ContainsKey(property))
+                        {
+                            string ret = "";
+                            List<string> valore = new List<string>();
+                            valore.Add(itemdic[property]);
+                            List<string> prop = new List<string>();
+                            string functiontocall = "";
+                            if (nodetobind.Attributes.Contains("format") && !string.IsNullOrEmpty(nodetobind.Attributes["format"].Value))
+                            {
+                                functiontocall = nodetobind.Attributes["format"].Value;
+
+                                if (nodetobind.Attributes.Contains("mybind1") && itemdic.ContainsKey(nodetobind.Attributes["mybind1"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind1"].Value]);
+                                else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind2") && itemdic.ContainsKey(nodetobind.Attributes["mybind2"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind2"].Value]);
+                                else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
+                                else valore.Add("");
+
+                                if (nodetobind.Attributes.Contains("myvalue"))
+                                    prop.Add(nodetobind.Attributes["myvalue"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue1"))
+                                    prop.Add(nodetobind.Attributes["myvalue1"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue2"))
+                                    prop.Add(nodetobind.Attributes["myvalue2"].Value);
+                                else prop.Add("");
+
+                                ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
+                                //if (ret != null && Array.isArray(ret) && ret.length > 0)
+                                //    valore = ret[0];
+                                //else
+                                //    valore = ret;
+                                nodetobind.SetAttributeValue("content", ret);
+                            }
+                        }
+
+                    }
+                    else if (nodetobind.Name == "script")
+                    {
+                        if (itemdic.ContainsKey(property))
+                        {
+                            string ret = "";
+                            List<string> valore = new List<string>();
+                            valore.Add(itemdic[property]); //valore iniziale su mybind
+                            List<string> prop = new List<string>();
+                            string functiontocall = "";
+                            if (nodetobind.Attributes.Contains("format") && !string.IsNullOrEmpty(nodetobind.Attributes["format"].Value))
+                            {
+                                functiontocall = nodetobind.Attributes["format"].Value;
+
+                                if (nodetobind.Attributes.Contains("mybind1") && itemdic.ContainsKey(nodetobind.Attributes["mybind1"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind1"].Value]);
+                                else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind2") && itemdic.ContainsKey(nodetobind.Attributes["mybind2"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind2"].Value]);
+                                else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
+                                else valore.Add("");
+
+                                if (nodetobind.Attributes.Contains("myvalue"))
+                                    prop.Add(nodetobind.Attributes["myvalue"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue1"))
+                                    prop.Add(nodetobind.Attributes["myvalue1"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue2"))
+                                    prop.Add(nodetobind.Attributes["myvalue2"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue3"))
+                                    prop.Add(nodetobind.Attributes["myvalue3"].Value);
+                                else prop.Add("");
+
+                                ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
+                                //if (ret != null && Array.isArray(ret) && ret.length > 0)
+                                //    valore = ret[0];
+                                //else
+                                //    valore = ret;
+                                nodetobind.InnerHtml = ret;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -2498,7 +3055,7 @@ namespace WelcomeLibrary.UF
                         if (controllo == "true")
                         {
                             if (valore[0] != "" && valore[0] != "0")
-                                
+
                                 ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
                         }
                     }
@@ -2698,7 +3255,7 @@ namespace WelcomeLibrary.UF
                 case "formatvalue":
                     try
                     {
-                       if (!string.IsNullOrEmpty(valore[0]))
+                        if (!string.IsNullOrEmpty(valore[0]))
                         {
                             //ret = valore[0];
                             string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
@@ -2709,6 +3266,19 @@ namespace WelcomeLibrary.UF
                             else
                                 ret = valore[0];
 
+                        }
+                    }
+                    catch { }
+                    break;
+                case "formatstringvalue":
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(valore[0]))
+                        {
+                            ret = valore[0];
+
+                            if (prop[0] != null && prop[0] == "replacebr")
+                                ret = ret.Replace("\n", "<br/>");
                         }
                     }
                     catch { }
@@ -2785,7 +3355,7 @@ namespace WelcomeLibrary.UF
                         provincelingua1.Sort(new GenericComparer2<WelcomeLibrary.DOM.Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
                         Province pr = provincelingua1.Find(p => p.Codice == valore[0]);
                         if (pr != null)
-                            ret = pr.Provincia.ToLower();
+                            ret = pr.Provincia;
                     }
                     catch { }
                     break;
@@ -2799,13 +3369,45 @@ namespace WelcomeLibrary.UF
                             foreach (WelcomeLibrary.DOM.Province item in provincelinguatmp)
                             {
                                 if (item.Lingua == Lingua)
-                                    if (item.Codice == valore[0]) { ret = item.Regione.ToLower(); break; }
+                                    if (item.Codice == valore[0]) { ret = item.Regione; break; }
                             }
                         }
                     }
                     catch { }
                     break;
+                case "frmscriptlocation":
+                    try
+                    {
+                        List<Dictionary<string, string>> arrayret = new List<Dictionary<string, string>>();
+                        Dictionary<string, string> elems = new Dictionary<string, string>();
 
+                        elems.Add(prop[0], "");
+                        if (itemdic.ContainsKey(prop[0]))
+                            elems[prop[0]] = itemdic[prop[0]];
+
+                        elems.Add(prop[1], "");
+                        if (itemdic.ContainsKey(prop[1]))
+                            elems[prop[1]] = itemdic[prop[1]].Replace(",", ".");
+
+                        elems.Add(prop[2], "");
+                        if (itemdic.ContainsKey(prop[2]))
+                            elems[prop[2]] = itemdic[prop[2]].Replace(",", ".");
+
+                        string titolo = "";
+                        if (linkloaded.ContainsKey(valore[0]) && linkloaded[valore[0]].ContainsKey(prop[3]))
+                        {
+                            titolo = linkloaded[valore[0]][prop[3]];
+                        }
+                        elems.Add(prop[3], titolo);
+                        elems.Add("url", "https://www.google.com/maps/search/?api=1&query=" + elems[prop[1]] + "," + elems[prop[2]]); //https://www.google.com/maps/search/?api=1&query=<lat>,<lng>
+
+
+
+                        arrayret.Add(elems);
+                        ret = ";\r\n" + string.Format("var gpositems = JSON.parse(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(arrayret))) + ";\r\n";
+                    }
+                    catch { }
+                    break;
                 default:
                     break;
             }
