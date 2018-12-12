@@ -951,7 +951,7 @@ function ShowList(templatename, container, controlid, data, callback) {
 function initGlobalVarsFromServer(controlid, dictpars, dictpagerpars) {
     //console.log('initGlobalVarsFromServer');
     if (dictpars != null && dictpars != '') {
-        globalObject[controlid + "params"] = JSON.parse(dictpars);
+        globalObject[controlid + "params"] = JSON.parse(b64ToUtf8(dictpars));
     }
     if (dictpagerpars != null && dictpagerpars != '') {
         globalObject[controlid + "pagerdata"] = JSON.parse(dictpagerpars);
