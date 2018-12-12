@@ -478,6 +478,145 @@ namespace WelcomeLibrary.UF
                             }
                         }
                         break;
+                    case "injectbootstrapportfolioandloadbanner":
+                        //injectPortfolioAndLoadBanner(type, container, controlid, page, pagesize, enablepager, listShow, maxelement, connectedid, tblsezione, filtrosezione, mescola)
+
+                        //Caricamento parametri per la chiamata
+                        if (pars.Count > 0 && !dictpars.ContainsKey("functionname")) dictpars.Add("functionname", pars[0]);
+                        if (pars.Count > 1 && !dictpars.ContainsKey("templateHtml")) dictpars.Add("templateHtml", pars[1]);
+                        if (pars.Count > 2 && !dictpars.ContainsKey("container")) dictpars.Add("container", pars[2]);
+                        if (pars.Count > 3 && !dictpars.ContainsKey("controlid")) dictpars.Add("controlid", pars[3]);
+
+                        if (pars.Count > 7 && !dictpars.ContainsKey("listShow")) dictpars.Add("listShow", pars[7]);
+                        if (pars.Count > 8 && !dictpars.ContainsKey("maxelement")) dictpars.Add("maxelement", pars[8]);
+                        if (pars.Count > 9 && !dictpars.ContainsKey("connectedid")) dictpars.Add("connectedid", pars[9]);
+                        if (pars.Count > 10 && !dictpars.ContainsKey("tblsezione")) dictpars.Add("tblsezione", pars[10]);
+                        if (pars.Count > 11 && !dictpars.ContainsKey("filtrosezione")) dictpars.Add("filtrosezione", pars[11]);
+                        if (pars.Count > 12 && !dictpars.ContainsKey("mescola")) dictpars.Add("mescola", pars[12]);
+                        ////////////////////////////(PAGINAZIONE ... )
+                        if (pars.Count > 4 && !dictpagerpars.ContainsKey("page")) dictpagerpars.Add("page", pars[4]);
+                        if (pars.Count > 5 && !dictpagerpars.ContainsKey("pagesize")) dictpagerpars.Add("pagesize", pars[5]);
+                        if (pars.Count > 6 && !dictpagerpars.ContainsKey("enablepager")) dictpagerpars.Add("enablepager", pars[6]);
+
+                        if (!dictpars.ContainsKey("container")) return;
+                        if (!dictpars.ContainsKey("controlid")) return;
+                        if (!dictpars.ContainsKey("tblsezione")) return;
+                        if (!dictpars.ContainsKey("filtrosezione")) return;
+
+                        ///////////////////////////////////////////////////////////
+                        //CARICAMENTO TEMPLATE  (IsotopeBanner.html)
+                        ///////////////////////////////////////////////////////////
+                        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]))
+                            templatetext = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + pars[1]);
+                        templatetext = templatetext.Replace("replaceid", dictpars["controlid"]);
+                        if (!string.IsNullOrEmpty(templatetext))
+                        {
+                            HtmlDocument template = new HtmlDocument();
+                            template.LoadHtml(templatetext); //Template per il bind
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //CARICAMENTO DATI PER BIND
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            if (dictdati != null && dictdati.Count > 0)
+                            {
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //LISTE DATI DA VISUALIZZARE
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<Banners> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Banners>>(dictdati["data"]);
+                                //Caratteristiche della lista ( totalrecords )
+                                Dictionary<string, string> resultinfo = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictdati["resultinfo"]);
+                                //Collezione chiave,valore per id elemento dei valori preparati per il binding link,titolo,image
+                                Dictionary<string, Dictionary<string, string>> linkloaded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(dictdati["linkloaded"]);
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]);  //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                {
+                                    string innerelement = elementtoappend.First().InnerHtml;
+                                    if ((innerelement != ""))
+                                    {
+                                        //Creo una copia  del contenuto da ripetere creandoci un nuovo documento 
+                                        HtmlDocument tmpdoc = new HtmlDocument();//Documento temporane per fre il binding ripetuto
+                                        tmpdoc.LoadHtml(innerelement);
+                                        HtmlNode cloneitemtemplate = tmpdoc.DocumentNode.Clone(); //elemento root matrice template da ripetere per fare il binding
+                                        elementtoappend.First().RemoveAllChildren(); //ATTENZIONE questa rimuove i child del ellemento primario del template
+                                        foreach (Banners item in data)
+                                        {
+                                            //Copio i dati dall'oggetto Banners in un dictionary property,value per evitare l'utilizzo pesante di reflection nel binding!!!!
+                                            Dictionary<string, string> itemdic = item.GetDictionaryElements(); //Questa prende le propieta di item e le mappa in un dictionary string,string per evitare la reflection
+
+                                            HtmlNode cloneitem = cloneitemtemplate.Clone();
+                                            //PROCEDURA DI BIND DATI
+                                            var bindingnodes = cloneitem.DescendantsAndSelf().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("bind") && d.Attributes.Contains("mybind") && !string.IsNullOrEmpty(d.Attributes["mybind"].Value));
+                                            if ((bindingnodes != null) && (bindingnodes.Count() > 0))
+                                                foreach (var nodetobind in bindingnodes) //scorro gli elementi taggati per il binding e crei i blocchi da appendere
+                                                {
+                                                    DataBindElement(nodetobind, itemdic, linkloaded, resultinfo);
+                                                }
+                                            elementtoappend.First().AppendChild(cloneitem.Clone());
+                                        }
+                                    }
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Appendiamo l'html al contenitore corretto dopo il binding!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.RemoveAllChildren();//Per svuotare il contenitore primario in pagina
+                                    if (elementtoappend != null)
+                                    {
+                                        //node.AppendChild(elementtoappend.First().Clone()); //Appendo il blocco bindato ai dati
+                                        node.AppendChild(template.DocumentNode); //Appendo il blocco bindato ai dati
+                                    }
+                                    if (node != null)
+                                        if (node.Attributes.Contains("style"))
+                                        {
+                                            node.Attributes["style"].Value = node.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.ParentNode.Attributes.Add("style", "display:block");
+                                    if (node.ParentNode != null)
+                                        if (node.ParentNode.Attributes.Contains("style"))
+                                        {
+                                            node.ParentNode.Attributes["style"].Value = node.ParentNode.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.ParentNode.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.ParentNode.Attributes.Add("style", "display:block");
+                                    if (node.ParentNode.ParentNode != null)
+                                        if (node.ParentNode.ParentNode.Attributes.Contains("style"))
+                                        {
+                                            node.ParentNode.ParentNode.Attributes["style"].Value = node.ParentNode.ParentNode.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.ParentNode.ParentNode.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.ParentNode.ParentNode.Attributes.Add("style", "display:block");
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    node.Attributes["class"].Value = node.Attributes["class"].Value.Replace("inject", "");
+                                    node.Attributes["params"].Remove();
+                                    CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    //if (jscommands.ContainsKey(container)) jscommands.Remove(container);
+                                    //jscommands.Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
+
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////END BINDING ////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                }
+                            }
+                        }
+                        break;
                     case "injectscrollerandLoadbanner":
                         //injectScrollerAndLoadBanner(type, container, controlid, listShow, maxelement, scrollertype, tblsezione, filtrosezione, mescola)
 
@@ -2094,6 +2233,15 @@ namespace WelcomeLibrary.UF
                                         else
                                             node.Attributes.Add("style", "display:block");
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (node.ParentNode != null)
+                                        if (node.ParentNode.Attributes.Contains("style"))
+                                        {
+                                            node.ParentNode.Attributes["style"].Value = node.ParentNode.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                            node.ParentNode.Attributes["style"].Value += ";display:block";
+                                        }
+                                        else
+                                            node.ParentNode.Attributes.Add("style", "display:block");
+
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Rimuoviamo il comando per evitare doppio bindig lato client da javascript ( basta rimuovere dal containe la classe inject o l'attributo params!!
@@ -2678,6 +2826,19 @@ namespace WelcomeLibrary.UF
                             idscheda = itemdic[property];
                             if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("image"))
                                 completepath = linkloaded[idscheda]["image"];
+
+                            if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("img-ant") && completepath.ToLower().LastIndexOf("dummylogo") == -1)
+                            {
+                                int position = completepath.LastIndexOf('/');
+                                var filename = completepath.Substring(position + 1);
+                                filename = filename.Replace("-xs.", ".");
+                                filename = filename.Replace("-sm.", ".");
+                                filename = filename.Replace("-md.", ".");
+                                filename = filename.Replace("-lg.", ".");
+                                completepath = completepath.Substring(0, position + 1) + "ant" + filename;
+                            }
+
+
                             if (nodetobind != null && !string.IsNullOrEmpty(completepath))
                                 if (nodetobind.Attributes.Contains("style"))
                                 {
