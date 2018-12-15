@@ -1267,6 +1267,7 @@ ul.footer-category-list {
   background-size: cover;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-bottom: 0 !important;
 }
 .bckvideostylefascia {
   width: 100%;
@@ -1280,6 +1281,7 @@ ul.footer-category-list {
   background-size: cover;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-bottom: 0 !important;
 }
 .overlayvideotext {
   position: absolute;
@@ -1309,6 +1311,7 @@ ul.footer-category-list {
     background-size: cover;
     overflow-x: hidden;
     overflow-y: hidden;
+    padding-bottom: 0 !important;
   }
   /*.bckvideostylefascia {
         width: 100%;
@@ -1320,6 +1323,7 @@ ul.footer-category-list {
         background-size: cover;
         overflow-x: hidden;
         overflow-y: hidden;
+                padding-bottom: 0 !important;
     }*/
   .overlayvideotext .bigtext {
     font-size: 4rem;
@@ -1345,6 +1349,7 @@ ul.footer-category-list {
     background-size: cover;
     overflow-x: hidden;
     overflow-y: hidden;
+    padding-bottom: 0 !important;
   }
   /*.bckvideostylefascia {
         width: 100%;
@@ -1356,6 +1361,7 @@ ul.footer-category-list {
         background-size: cover;
         overflow-x: hidden;
         overflow-y: hidden;
+                padding-bottom: 0 !important;
     }*/
   .overlayvideotext .bigtext {
     font-size: 3rem;
@@ -1381,6 +1387,7 @@ ul.footer-category-list {
     background-size: cover;
     overflow-x: hidden;
     overflow-y: hidden;
+    padding-bottom: 0 !important;
   }
   .overlayvideotext .bigtext {
     font-size: 2rem;

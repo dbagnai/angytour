@@ -539,7 +539,7 @@
             "~/js/back-to-top.js",
             "~/js/flexslider/jquery.flexslider-min.js",
             "~/js/it-cookies-policy.js",
-            "~/js/YTPlayer/jquery.mb.YTPlayer.js",
+            "~/js/YTPlayer328/jquery.mb.YTPlayer.js",
             "~/js/simplestarrating/SimpleStarRating.js",
             //"~/css/fontawesome541/js/all.js",
             //"~/css/fontawesome541/js/v4-shims.js",
