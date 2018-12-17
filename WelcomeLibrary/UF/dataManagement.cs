@@ -33,6 +33,50 @@ namespace WelcomeLibrary.UF
     public static class dataManagement
     {
         #region HASH METHODS
+
+
+        //public static string GetUniqueHashFromString(string s)
+        //{
+        //    //int hashcode = s.GetHashCode();
+        //    //return hashcode.ToString();
+        //    using (SHA1Managed sha1 = new SHA1Managed())
+        //    {
+        //        var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(s));
+        //        //make sure the hash is only alpha numeric to prevent charecters that may break the url
+        //        return string.Concat(Convert.ToBase64String(hash).ToCharArray().Where(x => char.IsLetterOrDigit(x)).Take(10));
+        //    }
+
+        //}
+        public static string CalculateMD5(string input)
+        {
+            // Create MD5 Hash from input
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            // Convert byte array to string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                sb.Append(hash[i].ToString("x2"));
+            return sb.ToString();
+        }
+
+        public static string CalculateSHA1(string text, Encoding enc)
+        {
+            byte[] buffer = enc.GetBytes(text);
+            SHA1CryptoServiceProvider crypto = new SHA1CryptoServiceProvider();
+            byte[] hash = crypto.ComputeHash(buffer);
+            // Convert byte array to string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                sb.Append(hash[i].ToString("x2"));
+            return sb.ToString();
+        }
+
+        //public static string Stringshortner(string text)
+        //{
+        //    return System.Text.RegularExpressions.Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "");
+        //}
+
         public static byte[] CalcMd5HashToByteArray(string filename)
         {
             byte[] md5Hash = new byte[0];

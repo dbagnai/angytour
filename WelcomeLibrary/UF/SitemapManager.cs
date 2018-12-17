@@ -413,7 +413,7 @@ namespace WelcomeLibrary.UF
             string testomodificatore2 = "";
             testomodificatore2 += codicecategoria.Replace("prod", "").TrimStart('0');
             testomodificatore2 += codicecat2liv.Replace("sprod", "").TrimStart('0');
-            testomodificatore2 += regione;
+            testomodificatore2 += regione.Replace("p", "").TrimStart('0');
             testomodificatore2 += annofiltro;
             testomodificatore2 += mesefiltro;
 
@@ -421,7 +421,7 @@ namespace WelcomeLibrary.UF
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
                     //testomodificatore1 += CleanUrl(kv.Key);
-                    testomodificatore2 += CleanUrl(kv.Value);
+                    testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); ;//sono i codici concatenati per differenziare l'url
                 }
 
             if (!string.IsNullOrEmpty(testomodificatore2))
@@ -466,7 +466,10 @@ namespace WelcomeLibrary.UF
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
-                    parameters.Add(kv.Key, kv.Value);
+                    if (!parameters.ContainsKey(kv.Key))
+                        parameters.Add(kv.Key, kv.Value);
+                    else
+                        parameters[kv.Key] = kv.Value;
                 }
 
             string cleantextmatch = ConteggioCaratteri(CleanUrl(textmatch.Trim().Replace(" ", "-")), 100).ToLower().Trim();

@@ -112,7 +112,7 @@ textarea.inputgray:focus {
     text-align: center;
     background-color: #888;
     border: none;
-    font-weight: 400;
+    font-weight: normal;
     /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
     border-top-left-radius: 2px;
@@ -128,7 +128,7 @@ textarea.inputgray:focus {
         text-align: center;
         border: none;
         background-color: #888;
-        font-weight: 400;
+        font-weight: normal;
         /*background-color: #4f4f4f;
     -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
@@ -145,7 +145,7 @@ textarea.inputgray:focus {
         text-align: center;
         border: none;
         background-color: #888;
-        font-weight: 400;
+        font-weight: normal;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -161,7 +161,7 @@ textarea.inputgray:focus {
         text-align: center;
         background-color: #888;
         border: 1px solid #888;
-        font-weight: 400;
+        font-weight: normal;
         /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
         border-top-left-radius: 2px;
@@ -173,13 +173,13 @@ textarea.inputgray:focus {
     .divbuttonstylegray a {
         color: #fff;
         font-size: 1.2em;
-        font-weight: 400;
+        font-weight: normal;
     }
 
         .divbuttonstylegray a:hover {
             color: #fff;
             font-size: 1.2em;
-            font-weight: 400;
+            font-weight: normal;
         }
 
 .divbuttonstylered {
@@ -482,12 +482,12 @@ a.buttonstyleoutline {
 
 .h2-body-title {
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: normal;
 }
 
 .h1-body-title {
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .content-box.content-style4 h4 i {
@@ -611,7 +611,7 @@ a.buttonstyleoutline {
     margin: 1px 0 0 1px;
     position: relative;
     font-size: 1em;
-    font-weight: 400;
+    font-weight: normal;
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -633,7 +633,7 @@ a.buttonstyleoutline {
         line-height: normal !important;
         font-size: 2rem;
         font-size: 1.2vw;
-        font-weight: 400;
+        font-weight: normal;
         margin-top: 0px;
         height: auto;
         color: #333;
@@ -648,7 +648,7 @@ a.buttonstyleoutline {
         line-height: normal !important;
         font-size: 1.2rem;
         font-size: 1.6vw;
-        font-weight: 400;
+        font-weight: normal;
     }
 
     .testimonial-big .testimonial-big-text:after {
@@ -677,7 +677,7 @@ a.buttonstyleoutline {
         line-height: normal !important;
         font-size: 1.4rem;
         font-size: 3vw;
-        font-weight: 400;
+        font-weight: normal;
         position: relative;
         text-align: center;
     }
@@ -778,7 +778,7 @@ a.buttonstyleoutline {
     vertical-align: middle;
     margin-top: 20px;
     line-height: normal;
-    font-weight: 400;
+    font-weight: normal;
     height: 100%;
     font-size: 1.1rem;
 }
@@ -1015,7 +1015,7 @@ a.buttonstyleoutline {
 .item-img-overlay .portfolio-zoom:hover,
 .tab a.active {
     color: #000000 !important;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .feature .feature-details {
@@ -1199,7 +1199,7 @@ Portfolio
     /*float: left;*/
     text-align: left;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: bold;
     margin: 10px 5px 15px 0px;
     padding-bottom: 10px;
     border-bottom: 3px solid #444;
@@ -1535,7 +1535,7 @@ Portfolio
     /*background-color: rgba(0, 0, 0,0.1);*/
     background-color: transparent;
     font-size: 1em;
-    font-weight: 400;
+    font-weight: normal;
     height: auto;
     color: #fff;
     line-height: 15px;
@@ -1551,7 +1551,7 @@ Portfolio
     width: 100%;
     background-color: rgba(31, 128, 159, 0.8);
     font-size: 1em;
-    font-weight: 400;
+    font-weight: normal;
     height: auto;
     color: #fff;
     line-height: 15px;
@@ -1568,7 +1568,7 @@ Portfolio
     background-color: none;
     /*background-color: rgba(100, 100, 100, 0.1);*/
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: normal;
     height: 100%;
     color: #fff;
     line-height: normal;
@@ -1582,7 +1582,7 @@ Portfolio
     .work-caption-over-center > h3 {
         background-color: rgba(31, 128, 159, 0.6);
         font-size: 1rem;
-        font-weight: 400;
+        font-weight: normal;
         color: #fff;
         position: absolute;
         bottom: 10%;
@@ -1596,7 +1596,7 @@ Portfolio
         .work-caption-over-center > h3.tipo2 {
             background-color: rgba(31, 128, 159, 0.8);
             font-size: 1.3rem;
-            font-weight: 400;
+            font-weight: normal;
             color: #fff;
             position: absolute;
             bottom: 45%;
@@ -1610,13 +1610,13 @@ Portfolio
 .work-caption-over h3 {
     color: #fff;
     font-size: 1em;
-    font-weight: 400;
+    font-weight: normal;
     margin-bottom: 2px;
 }
 
 .work-title {
     font-size: 1.3em;
-    font-weight: 400;
+    font-weight: normal;
     margin-bottom: 10px;
     color: #333;
 }
@@ -1720,14 +1720,14 @@ Portfoli Single ( da rival )
 .feature-content h3 {
     font-size: 0.9rem;
     line-height: 16px;
-    font-weight: 400;
+    font-weight: normal;
     margin-bottom: 0px;
     color: #33332e !important;
 }
 
 .feature-content {
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: normal;
     margin-bottom: 0px;
     border-top: none;
     height: 110px;
@@ -2237,7 +2237,7 @@ Portfoli Single ( da rival )
 .bigtextleft {
     color: #fff;
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: bold;
     text-align: left;
     line-height: normal;
     max-width: auto;
@@ -2249,7 +2249,7 @@ Portfoli Single ( da rival )
 .smalltextleft {
     color: #fff;
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: bold;
     text-align: left;
     line-height: normal;
     max-width: auto;
@@ -2265,7 +2265,7 @@ Portfoli Single ( da rival )
     background-color: transparent;
     padding: 10px;
     font-size: 3rem !important;
-    font-weight: 400;
+    font-weight: normal;
     max-width: auto;
     max-height: auto;
     white-space: nowrap;
@@ -2279,7 +2279,7 @@ Portfoli Single ( da rival )
     padding: 30px;
     font-size: 3rem;
     /*font-size: 5vw;*/
-    font-weight: 400;
+    font-weight: normal;
 }
 
 .big {
@@ -2291,7 +2291,7 @@ Portfoli Single ( da rival )
     padding: 10px;
     font-size: 3rem !important;
     /*font-size: 5vw;*/
-    font-weight: 400;
+    font-weight: normal;
 }
 
 .bigcolor {
@@ -2302,7 +2302,7 @@ Portfoli Single ( da rival )
     padding: 10px;
     font-size: 3rem;
     /*font-size: 5vw;*/
-    font-weight: 400;
+    font-weight: normal;
 }
 
 .small {
@@ -2383,13 +2383,13 @@ ol.flex-control-thumbs li {
     font-size: 1.4rem;
     width: 100%;
     border-bottom: 1px solid #666;
-    color: _#666;
+    color: #666;
     margin: 20px 0px 10px 0px;
 }
 
 .blog-price {
     font-size: 1.5em;
-    font-weight: 400;
+    font-weight: normal;
     margin-bottom: 0px;
     color: #33332e;
 }
@@ -2421,7 +2421,7 @@ button.btn,
 .btn-primary {
     display: inline-block;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: normal;
     font-size: 13px;
     position: relative;
     /*padding: 3px 5px 4px 5px !important;
@@ -2813,8 +2813,8 @@ button.btn,
     -moz-filter: drop-shadow(0 2px 5px .2px);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;*/
-/*-webkit-filter: drop-shadow(0 2px 5px .2px);*/
-}
+/*-webkit-filter: drop-shadow(0 2px 5px .2px);
+}*/
 
 .owl-carousel-v1 .item:hover {
     box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.1);
@@ -3027,7 +3027,7 @@ button.btn,
 
     .box-background .subtitle-news {
         font-size: 14px;
-        font-weight: 400;
+        font-weight: normal;
         padding: 10px 0px;
     }
 
@@ -3072,13 +3072,13 @@ button.btn,
 
 .box-background p {
     font-size: 15px;
-    font-weight: 400;
+    font-weight: normal;
     padding: 15px 0px;
 }
 
 .box-background .text-padding {
     font-size: 15px;
-    font-weight: 400;
+    font-weight: normal;
     padding: 0px 0px 15px;
 }
 
@@ -3099,7 +3099,7 @@ button.btn,
 
 .box-background .price {
     font-size: 25px;
-    font-weight: 400;
+    font-weight: normal;
     float: right;
     margin: 20px 0;
 }
@@ -3123,7 +3123,7 @@ button.btn,
 
 .box-background table {
     font-size: 1.2em;
-    font-weight: 400;
+    font-weight: normal;
     margin-top: 10px;
     width: 100%;
 }
@@ -3135,7 +3135,7 @@ button.btn,
 
         .box-background table tr td span {
             font-size: 19px;
-            font-weight: 400;
+            font-weight: normal;
         }
 
 .td-padding {
@@ -3587,7 +3587,7 @@ select.input-small {
 
     .product-details h3 {
         font-size: 0.9rem;
-        font-weight: 700;
+        font-weight: bold;
         line-height: 20px;
         margin: 0 0 5px 0;
         overflow: hidden;
@@ -3663,7 +3663,7 @@ select.input-small {
 
 .table-cart thead td {
     color: #999;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .table-cart tbody tr td {
@@ -3866,7 +3866,7 @@ p.lead, .lead p {
 }
 
 .title-block {
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .work-desc {
@@ -4192,7 +4192,7 @@ Breadcrumb
     float: left;
     padding-right: 5px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: normal;
     font-size: 9px;
     color: #666;
 }

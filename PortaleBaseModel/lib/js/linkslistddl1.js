@@ -37,12 +37,12 @@ function InjectCat1livLinksinner(type, container, controlid, listShow, tipologia
 
         globalObject[controlid + "params"] = params;
 
-        CaricaCategorieLinksData(controlid);
+        CaricaTipologieLinksData(controlid);
         //});
     });
-};
+}
 
-function CaricaCategorieLinksData(controlid) {
+function CaricaTipologieLinksData(controlid) {
 
     //per la lingua usare lng
     var objfiltrotmp = {};
@@ -56,7 +56,7 @@ function CaricaCategorieLinksData(controlid) {
     //    putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) { });
     //});
 
-    var functiontocallonend = BindCategorieLinks;
+    var functiontocallonend = BindTipologieLinks;
 
     caricaDatiServerLinksTipologie(lng, objfiltrotmp,
         function (result, callafterfilter) {
@@ -92,7 +92,7 @@ function CaricaCategorieLinksData(controlid) {
 //    BindIsotope(controlid, localObjects);//I dati sono già paginati all'origine
 //};
 
-function BindCategorieLinks(localObjects, el) {
+function BindTipologieLinks(localObjects, el) {
 
     var objcomplete = JSON.parse(localObjects["dataloaded"]);
     var data = objcomplete["datalist"]

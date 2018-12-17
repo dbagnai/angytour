@@ -100,6 +100,46 @@ namespace WelcomeLibrary.UF
             return ci;
         }
 
+
+        public static string CompressString(string text)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(text);
+            var memoryStream = new MemoryStream();
+            using (var gZipStream = new System.IO.Compression.GZipStream(memoryStream, System.IO.Compression.CompressionMode.Compress, true))
+            {
+                gZipStream.Write(buffer, 0, buffer.Length);
+            }
+
+            memoryStream.Position = 0;
+
+            var compressedData = new byte[memoryStream.Length];
+            memoryStream.Read(compressedData, 0, compressedData.Length);
+
+            var gZipBuffer = new byte[compressedData.Length + 4];
+            Buffer.BlockCopy(compressedData, 0, gZipBuffer, 4, compressedData.Length);
+            Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gZipBuffer, 0, 4);
+            return Convert.ToBase64String(gZipBuffer);
+        }
+
+        public static string DecompressString(string compressedText)
+        {
+            byte[] gZipBuffer = Convert.FromBase64String(compressedText);
+            using (var memoryStream = new MemoryStream())
+            {
+                int dataLength = BitConverter.ToInt32(gZipBuffer, 0);
+                memoryStream.Write(gZipBuffer, 4, gZipBuffer.Length - 4);
+
+                var buffer = new byte[dataLength];
+
+                memoryStream.Position = 0;
+                using (var gZipStream = new System.IO.Compression.GZipStream(memoryStream, System.IO.Compression.CompressionMode.Decompress))
+                {
+                    gZipStream.Read(buffer, 0, buffer.Length);
+                }
+
+                return Encoding.UTF8.GetString(buffer);
+            }
+        }
         // Compresses the files in the nominated folder, and creates a zip file on disk named as outPathname.
         //
         public static void ZipCompletefolder(string outFilePathname, string password, string sourcefolderPath)
@@ -1509,12 +1549,12 @@ namespace WelcomeLibrary.UF
                         idtoremove.Add(t.Codice);
                 foreach (string id in idtoremove) Caratteristiche[3].RemoveAll(c => c.Codice == id);
 
-                //idtoremove = new List<string>();
-                //idpresenti = offDM.CaricaListaIdCaratteristiche(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicetipologia, "Caratteristica5");
-                //foreach (WelcomeLibrary.DOM.Tabrif t in Caratteristiche[4])
-                //    if (!idpresenti.Exists(i => i == t.Codice))
-                //        idtoremove.Add(t.Codice);
-                //foreach (string id in idtoremove) Caratteristiche[4].RemoveAll(c => c.Codice == id);
+                idtoremove = new List<string>();
+                idpresenti = offDM.CaricaListaIdCaratteristiche(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicetipologia, "Caratteristica5");
+                foreach (WelcomeLibrary.DOM.Tabrif t in Caratteristiche[4])
+                    if (!idpresenti.Exists(i => i == t.Codice))
+                        idtoremove.Add(t.Codice);
+                foreach (string id in idtoremove) Caratteristiche[4].RemoveAll(c => c.Codice == id);
 
                 idtoremove = new List<string>();
                 idpresenti = offDM.CaricaListaIdCaratteristiche(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicetipologia, "Caratteristica6");

@@ -499,7 +499,8 @@
             "~/js/revolution464/jquery.themepunch.plugins.min.js",
             "~/js/revolution464/jquery.themepunch.tools.min.js",
             "~/js/revolution464/jquery.themepunch.revolution.min.js",
-             "~/lib/js/common.js"
+                "~/js/googleMaps.js",
+                "~/lib/js/common.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -519,14 +520,14 @@
             "~/lib/js/linkslistddl1.js",
             "~/lib/js/linkslistddl2.js",
             "~/js/lazyloadimg.js",
-            "~/lib/js/searchcontrol.js",
+              "~/lib/js/searchcontrolgeneric.js",
             "~/lib/js/carrello.js",
             "~/lib/js/bookingtool.js",
             "~/lib/js/videoBanner.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib2",
-            //~/js/jquery.validate.js,
+            //"~/js/jquery.validate.js",
             //~/js/defiant/defiant.min.js,
             //"https://www.google.com/recaptcha/api.js",
             "~/js/animationEnigne.js",
@@ -598,7 +599,7 @@
             "~/js/simplestarrating/SimpleStarRating.css",
               "~/css/style1.css",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
-            "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
+            "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css",
             "~/js/notifications/notification.css",
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
             "~/js/flexslider/flexslider.css",
@@ -628,7 +629,7 @@
          "~/css/animate.css",
          "~/js/simplestarrating/SimpleStarRating.css",
          "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
-         "~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css",
+            "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css",
          "~/js/notifications/notification.css",
          "~/js/owl-carousel/owl-carousel/owl.carousel.css",
          "~/js/flexslider/flexslider.css",

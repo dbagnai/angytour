@@ -62,6 +62,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
             long irecs = 0;
             string lingua = pars.ContainsKey("lng") ? pars["lng"] : "I";
             string progressivo = pars.ContainsKey("progressivo") ? pars["progressivo"] : "";
+            string tipologia = pars.ContainsKey("tipologia") ? pars["tipologia"] : "";
 
             string filter1 = pars.ContainsKey("filter1") ? pars["filter1"] : "";
             string filter2 = pars.ContainsKey("filter2") ? pars["filter2"] : "";
@@ -127,12 +128,33 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     }
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
                     break;
-
+                case "autocompletericerca":
+                    long.TryParse(Recs, out irecs);
+                    if (irecs == 0) irecs = 20;
+                    if (term != "null")
+                    {
+                        offerteDM offDM = new offerteDM();
+                        OfferteCollection coll = offDM.GetLista(term, irecs.ToString(), lingua, WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+                        long count = 0;
+                        ResultAutocomplete ra1 = new ResultAutocomplete() { id = "", label = "Deseleziona" };
+                        lra.Add(ra1);
+                        if (coll != null)
+                            foreach (Offerte r in coll)
+                            {
+                                ra1 = new ResultAutocomplete() { id = r.Id.ToString(), label = r.DenominazionebyLingua(lingua) };
+                                if (id == null || id == "") lra.Add(ra1);
+                                else if (id != "" && r.Id.ToString() == id) lra.Add(ra1);
+                                count++;
+                                if (count > irecs) break;
+                            }
+                    }
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
+                    break;
                 case "initreferencesdata":
 
                     result = references.initreferencesdataserialized(lingua, context.User.Identity.Name);
 
-                    
+
                     break;
                 case "inviamessaggiomail":
                     string smaildata = pars.ContainsKey("data") ? pars["data"] : "";
@@ -521,6 +543,70 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                         PreserveReferencesHandling = PreserveReferencesHandling.None,
                     });
+
+                    break;
+                case "getlinkbyfilters": //Mi crea un link con i custom filters ( da usare per la search personalizzata a catalogo )
+                    Dictionary<string, string> filtriadded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
+                    Dictionary<string, string> addpars = new Dictionary<string, string>();
+                    string tipologiatmp = "-";
+                    string testourl = "";
+                    if (filtriadded.ContainsKey("tipologia"))
+                    {
+                        tipologiatmp = filtriadded["tipologia"];
+                    }
+                    if (filtriadded.ContainsKey("caratteristica1"))
+                    {
+                        //testourl = references.TestoCaratteristica(0, filtriadded["caratteristica1"], lingua);
+                        Tabrif c = Utility.Caratteristiche[0].Find(p => p.Codice == filtriadded["caratteristica1"] && p.Lingua == lingua);
+                        if (c != null)
+                        {
+                            testourl = c.Campo1 + " ";
+                            addpars.Add("Caratteristica1", filtriadded["caratteristica1"]);
+                        }
+                    }
+                    if (filtriadded.ContainsKey("regione"))
+                    {
+                        string nomeregione = references.NomeRegione(filtriadded["regione"], lingua);
+                        if (!string.IsNullOrEmpty(nomeregione))
+                        {
+                            testourl += nomeregione + " ";
+                            addpars.Add("Regione", filtriadded["regione"]);
+                        }
+                    }
+                    if (filtriadded.ContainsKey("provincia"))
+                    {
+                        string nomeprovincia = references.NomeProvincia(filtriadded["provincia"], lingua);
+                        if (!string.IsNullOrEmpty(nomeprovincia))
+                        {
+                            testourl += nomeprovincia + " ";
+                            addpars.Add("Provincia", filtriadded["provincia"]);
+                        }
+                    }
+                    if (filtriadded.ContainsKey("comune"))
+                    {
+                        string nomecomune = filtriadded["comune"];
+                        if (!string.IsNullOrEmpty(nomecomune))
+                        {
+                            testourl += nomecomune + " ";
+                            addpars.Add("Comune", filtriadded["comune"]);
+                        }
+                    }
+                    //eventuale aggiunta di geolocation e hidricercaid // per la crezione di url
+                    //if (filtriadded.ContainsKey("geolocation"))
+                    //{
+                    //    string geolocation = filtriadded["geolocation"];
+                    //    if (!string.IsNullOrEmpty(geolocation))
+                    //    {
+                    //        testourl += "testodacalcolare in base alla poszione con un criterio" + " ";
+                    //        addpars.Add("Geolocation", filtriadded["geolocation"]);
+                    //    }
+                    //}
+
+
+                    testourl = testourl.Trim().Replace(" ", "-");
+                    string linkcustom = SitemapManager.CreaLinkRoutes(lingua, testourl, "", tipologiatmp, "", "", "", "", "", true, true, addpars);
+
+                    result = linkcustom;
 
                     break;
                 case "caricaMenuSezioni":

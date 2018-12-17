@@ -157,6 +157,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var tipologia = '" + CodiceTipologia + "'");
         scriptRegVariables += ";\r\n" + string.Format("var categoria = '" + Categoria + "'");
         scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var GoogleMapsKey = '" + WelcomeLibrary.UF.ConfigManagement.ReadKey("GoogleMapsKey") + "'");
+
         scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();
@@ -179,6 +181,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer = 'map'");
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer1 = 'map1'");
+        scriptRegVariables += ";\r\n" + string.Format("var idmapcontainerlocal = 'maplocal'");
         scriptRegVariables += ";\r\n" + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
@@ -371,7 +374,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
-    public string CreaLinkTipologie(int min, int max)
+    public string CreaLinkTipologie(int min, int max, string classoop = "")
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
@@ -388,6 +391,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
+                if (!string.IsNullOrEmpty(classoop))
+                    sb.Append(" class=\"" + classoop + "\"  ");
                 if (o.Codice == CodiceTipologia)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
@@ -397,6 +402,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         return sb.ToString();
     }
+
 
     /// <summary>
     /// Creazione lista li con sottolivelli per le tipologie indicate , depth=0 solo lista 1 primo livello categoria, depth=1 primo e secondo livello categoria e sottocategoria

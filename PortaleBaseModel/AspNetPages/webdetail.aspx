@@ -28,6 +28,8 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+            <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
+
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">

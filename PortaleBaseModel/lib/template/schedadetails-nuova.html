@@ -1,6 +1,6 @@
-﻿<div id="replaceid" class="blog-post mt-4 text-left" itemscope="" itemtype="http://schema.org/Article">
+﻿<div id="replaceid" class="blog-post mt-4 p-2 text-left" itemscope="" itemtype="http://schema.org/Article">
 
-    <div class="row mx-3 mx-sm-0">
+    <div class="row mx-1 mx-sm-0">
         <!------------------------------
         ------ COLONNA 1 IMMAGINE ------
         ------------------------------->
@@ -12,27 +12,7 @@
             </div>
             <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0 d-none d-md-block" style="line-height: 1.6rem;" itemprop="description">
 
-                <!--<nav id="navbar-example2" class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#fat">@fat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#mdo">@mdo</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#one">one</a>
-                                <a class="dropdown-item" href="#two">two</a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#three">three</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-
+                <!--
                 <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                 </div>-->
@@ -57,10 +37,11 @@
                 <!----------------------------------------------
                 ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
                 ----------------------------------------------->
-                <div class="blog-post-details d-none" runat="server" id="divPostDetails">
+                <div class="blog-post-details d-block" runat="server" id="divPostDetails">
 
                     <div class="blog-post-details-item  blog-post-details-item-right pl-0 pb-2">
-                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
+                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.5em; line-height: normal">
+                            <span class="bind" mybind="Id" myvalue="prezzo1" format="formatlabelresource"></span>
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                             <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
@@ -166,7 +147,7 @@
         <!---------------------------------------------------
         ------ COMANDI NAVIGAZIONE ------
         ---------------------------------------------------->
-        <div class="w-100 py-3 px-0 my-0 mx-3 border-top bd-secondary-color">
+        <div class="w-100 py-3 px-0 my-0 mx-1 border-top bd-secondary-color">
 
             <div class="clearfix"></div>
 

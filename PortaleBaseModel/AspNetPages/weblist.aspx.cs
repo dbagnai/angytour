@@ -300,6 +300,44 @@ public partial class AspNetPages_weblist : CommonPage
                 placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                 break;
+            case "rif000002":
+
+                column1.Visible = true;
+                column1.Attributes["class"] = "col-12";
+                column2.Visible = false;
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                column3.Attributes["class"] = "col-12 col-sm-3";
+                column3.Visible = false;
+                ContaArticoliPerperiodo(Tipologia);
+                //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
+                divSearch.Visible = true;
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //placeholderrisultati.Text = sb.ToString();
+
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+
+                    //sb.Clear();
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                }
+                break;
             case "rif000005":
 
 
@@ -320,7 +358,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     //placeholderrisultati
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopeOffertePortfolio.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopePortfolio4Card.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
@@ -861,6 +899,7 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["regione"] = Regione;
             objvalue["ddlRegione"] = Regione;
+            objvalue["ddlRegioneSearch"] = Regione;
         }
         else
         {
@@ -869,11 +908,59 @@ public partial class AspNetPages_weblist : CommonPage
                 objvalue["regione"] = objvalue["ddlRegione"];
                 Regione = objvalue["ddlRegione"];
             }
+            if (objvalue.ContainsKey("ddlRegioneSearch"))
+            {
+                objvalue["regione"] = objvalue["ddlRegioneSearch"];
+                Regione = objvalue["ddlRegioneSearch"];
+            }
         }
+        if (Provincia != "")
+        {
+            objvalue["provincia"] = Provincia;
+            objvalue["ddlProvincia"] = Provincia;
+            objvalue["ddlProvinciaSearch"] = Provincia;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlProvincia"))
+            {
+                objvalue["provincia"] = objvalue["ddlProvincia"];
+                Provincia = objvalue["ddlProvincia"];
+            }
+            if (objvalue.ContainsKey("ddlProvinciaSearch"))
+            {
+                objvalue["provincia"] = objvalue["ddlProvinciaSearch"];
+                Provincia = objvalue["ddlProvinciaSearch"];
+            }
+        }
+
+
+        if (Comune != "")
+        {
+            objvalue["comune"] = Comune;
+            objvalue["ddlComune"] = Comune;
+            objvalue["ddlComuneSearch"] = Comune;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlComune"))
+            {
+                objvalue["comune"] = objvalue["ddlComune"];
+                Comune = objvalue["ddlComune"];
+            }
+            if (objvalue.ContainsKey("ddlComuneSearch"))
+            {
+                objvalue["comune"] = objvalue["ddlComuneSearch"];
+                Comune = objvalue["ddlComuneSearch"];
+            }
+        }
+
+
         if (Caratteristica1 != "")
         {
             objvalue["caratteristica1"] = Caratteristica1;
             objvalue["hidCaratteristica1"] = Caratteristica1;
+            objvalue["ddlCaratteristica1"] = Caratteristica1;
         }
         else
         {
@@ -882,6 +969,12 @@ public partial class AspNetPages_weblist : CommonPage
                 objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
                 Caratteristica1 = objvalue["hidCaratteristica1"];
             }
+            if (objvalue.ContainsKey("ddlCaratteristica1"))
+            {
+                objvalue["caratteristica1"] = objvalue["ddlCaratteristica1"];
+                Caratteristica1 = objvalue["ddlCaratteristica1"];
+            }
+
         }
 
 
@@ -897,6 +990,13 @@ public partial class AspNetPages_weblist : CommonPage
                 objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
                 Caratteristica2 = objvalue["hidCaratteristica2"];
             }
+        }
+
+        //Id selection
+        //hidricercaid ( sleezione con id )
+        if (objvalue.ContainsKey("hidricercaid"))
+        {
+            objvalue["id"] = objvalue["hidricercaid"];
         }
 
         //if (Caratteristica6 != "") //ditta
@@ -921,6 +1021,41 @@ public partial class AspNetPages_weblist : CommonPage
         //    if (Caratteristica3.Length >= 4)
         //        objvalue["ddlAtcgmp3"] = Caratteristica3.Substring(0, 4);
         //}
+
+
+        if (objvalue.ContainsKey("geolocation"))
+        {
+            objvalue.Remove("latitudine");
+            objvalue.Remove("longitudine");
+            string latitudine = "";
+            string longitudine = "";
+            string[] latlng = objvalue["geolocation"].Split(',');
+            if (latlng != null && latlng.Length == 2)//&& !string.IsNullOrWhiteSpace(address.Value))
+            {
+                latitudine = latlng[0];
+                longitudine = latlng[1];
+            }
+
+            double lat = 0;
+            double.TryParse(latitudine.Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lat);
+            double lon = 0;
+            double.TryParse(longitudine.Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lon);
+            if (lat != 0 && lon != 0)
+            {
+                objvalue["latitudine"] = latitudine;
+                objvalue["longitudine"] = longitudine;
+                //Session.Add("Address", address.Value);
+            }
+            else
+                objvalue.Remove("geolocation");
+        }
+        else
+        {
+            objvalue.Remove("latitudine");
+            objvalue.Remove("longitudine");
+        }
+
+
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue);
     }

@@ -129,7 +129,7 @@ public class CommonPage : Page
         {
             sb.Append("<li>");
             sb.Append("<a");
-            sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
             sb.Append("   href=\"" + l.Campo1 + "\">");
             sb.Append(l.Campo2);
             sb.Append("</a> ");

@@ -373,14 +373,12 @@ Footer
         margin: 0 0 20px 0;
         text-transform: uppercase;
         color: #f2f2f2;
-        font-family: "Lato", sans-serif;
         font-weight: bold;
     }
 
     .footer .footer-col .footer-content {
         color: #d4d4d4;
         line-height: 20px;
-        font-family: "Lato", sans-serif;
         padding-bottom: 0px;
     }
 
@@ -430,7 +428,6 @@ Footer
 
         .footer .footer-col .footer-content .nice-time {
             font-size: 10px;
-            font-family: "Myriad Pro", sans-serif;
             font-weight: bold;
             color: #c9c9c9;
         }
@@ -506,7 +503,6 @@ Footer
         border-radius: 5px;
         color: #d2d2d2;
         font-size: 12px;
-        font-family: "Lato", sans-serif;
     }
 
         .footer .footer-col .footer-content input[type=submit]:hover {
@@ -521,7 +517,6 @@ Footer
         /*height: 40px;*/
         width: 100%;
         font-size: 11px;
-        font-family: "Lato", sans-serif;
         background-color: #303030;
     }
 
@@ -730,7 +725,6 @@ Search Box
     border: 0;
     width: 28px;
     text-align: center;
-    background: no-repeat -55px 0 url("../images/sprites.png");
     width: 27px;
     height: 17px;
 }

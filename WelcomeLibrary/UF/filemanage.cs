@@ -195,8 +195,6 @@ namespace WelcomeLibrary.UF
             }
             return ret;
         }
-
-
         public static string CaricaFile(HttpServerUtility Server, FileUpload UploadControl, string DescrizioneFile, string idrecord, string tipologia, string progressivofile)
         {
             string ret = "";
@@ -406,6 +404,88 @@ namespace WelcomeLibrary.UF
                     if (error.InnerException != null)
                         responsestr += error.InnerException.Message;
                 }
+            }
+            catch (Exception errorecaricamento)
+            {
+                responsestr += errorecaricamento.Message;
+                if (errorecaricamento.InnerException != null)
+                    responsestr += errorecaricamento.InnerException.Message;
+
+            }
+            return responsestr;
+        }
+        public static string CaricaFile(HttpServerUtility server, string phyorginalpath, string Nomefile, string codicetipologia, string idrecord, string progressivofile)
+        {
+            string responsestr = "";
+            try
+            {
+                //Controlliamo se ho selezionato un record
+                if (idrecord == null || idrecord == "")
+                {
+                    return "No id selected!";
+                }
+                long idSelected = 0;
+                if (!long.TryParse(idrecord, out idSelected))
+                {
+                    return "No id selected!";
+                }
+
+                //Verifichiamo la presenza del percorso di destinazione altrimenti lo creiamo
+                //Percorso files Offerte del tipo percorsobasecartellafiles/con000001/4
+                string pathDestinazione = server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + codicetipologia + "/" + idrecord);
+                if (!System.IO.Directory.Exists(pathDestinazione))
+                    System.IO.Directory.CreateDirectory(pathDestinazione);
+
+                //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
+                string NomeCorretto = Nomefile.Replace("+", "");
+                NomeCorretto = NomeCorretto.Replace("%", "");
+                NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
+                //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
+                if (System.IO.File.Exists(pathDestinazione))
+                {
+                    if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                }
+                FileInfo fiorig = new FileInfo(phyorginalpath + "\\" + Nomefile);
+                if (fiorig.Extension == ".jpeg" || fiorig.Extension == ".jpg" || fiorig.Extension == ".gif" || fiorig.Extension == ".png")
+                {
+                    using (StreamReader file = new StreamReader(phyorginalpath + "\\" + Nomefile))
+                    {
+                        int maxheight = 1000;
+                        int maxwidth = 1000;
+                        bool ridimensiona = true;
+                        //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
+                        if (ResizeAndSave(file.BaseStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
+                        {
+                            //Creiamo l'anteprima Piccola per usi in liste
+                            CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true);
+                            //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
+                            try
+                            {
+                                try
+                                {
+                                    offerteDM offDM = new offerteDM();
+                                    bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "", progressivofile);
+                                }
+                                catch (Exception errins)
+                                {
+                                    responsestr = errins.Message;
+                                }
+
+                            }
+                            catch (Exception error)
+                            {
+                                //CANCELLO LA FOTO UPLOADATA
+                                if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                                if (System.IO.File.Exists(pathDestinazione + "\\" + "Ant" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + "Ant" + NomeCorretto);
+                                responsestr = error.Message;
+                                if (error.InnerException != null)
+                                    responsestr += error.InnerException.Message;
+                            }
+                        }
+                        else { responsestr += ("La foto non è stata caricata! (Problema nel caricamento)"); }
+                    }
+                }
+
             }
             catch (Exception errorecaricamento)
             {

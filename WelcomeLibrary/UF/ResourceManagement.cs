@@ -111,11 +111,9 @@ namespace WelcomeLibrary.UF
 			DateTime st = DateTime.Now;
 
 			string connection = WelcomeLibrary.STATIC.Global.NomeConnessioneDb;
-			string query = "SELECT ID, Gruppo,Categoria,Lingua,Chiave,Valore,Comment FROM TBL_Risorse";
-
-			try
-			{
-
+            string query = "SELECT ID, Gruppo,Categoria,Lingua,Chiave,Valore,Comment FROM TBL_Risorse order by Chiave, Gruppo";
+            try
+            {
 				SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, null, connection);
 				using (reader)
 				{

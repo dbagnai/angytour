@@ -3,12 +3,31 @@ using System;
 using System.Web;
 using System.Drawing.Imaging;
 using WelcomeLibrary.UF;
+using System.Collections.Generic;
 
 public class FileUploadHandler : IHttpHandler
 {
 
     public static string output = "";
+    public Dictionary<string, string> parseparams(HttpContext context)
+    {
+        Dictionary<string, string> pars = new Dictionary<string, string>();
+        bool isPost = false;
+        isPost = context.Request.HttpMethod.ToUpper() == "POST";
+        bool ismultipart = false;
+        if (context.Request.ContentType.ToLower().Contains("multipart/form-data")) ismultipart = true;
 
+        if (isPost && !ismultipart)
+            pars = HandlerHelper.GetPostParams(context);
+        foreach (var item in context.Request.Params.Keys)
+        {
+            string szKey = item.ToString();
+            if (!pars.ContainsKey(szKey))
+                pars.Add(szKey, context.Request.Params[szKey].ToString());
+        }
+
+        return pars;
+    }
     public void ProcessRequest(HttpContext context)
     {
         string idrecord = "";

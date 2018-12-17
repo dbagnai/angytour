@@ -424,7 +424,51 @@ public partial class _webdetail : CommonPage
                 }
 
                 break;
+            case "rif000002":
+                column1.Visible = false;
+                column2.Visible = true;
+                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
+                column2.Attributes["class"] = "col-12 col-sm-9";
+                column3.Visible = false;
+                divSearch.Visible = true;
+                ContaArticoliPerperiodo(CodiceTipologia);
+                //  Caricalinksrubriche(CodiceTipologia);
+                divContact.Visible = false;
+                divContactBelow.Visible = false;
+                if (!JavaInjection)
+                {
+                    //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);";
+                    //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
+                    //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
 
+                    //SUGGERITI
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+
+                    sb.Clear();
+
+                    //ULTIMI ARTICOLI
+                    //sb.Append("<div class=\"sfondo-contenitore\">");
+                    //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                    //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+                    //sb.Append("</div>");
+                    //placeholderlateral.Text = sb.ToString();
+
+                    sb.Clear();
+
+                    //BIND PER LA SCHEDA!!!!
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                }
+
+                break;
             case "rif000008":
                 column1.Visible = false;
                 column2.Visible = true;

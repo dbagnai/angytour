@@ -3536,7 +3536,7 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
-                case "frmscriptlocation":
+                case "frmscriptlocation": //inietta delle varibili nel dom tramite script javascript iniettatta
                     try
                     {
                         List<Dictionary<string, string>> arrayret = new List<Dictionary<string, string>>();

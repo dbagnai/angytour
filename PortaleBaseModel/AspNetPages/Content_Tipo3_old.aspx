@@ -17,7 +17,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-    <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>
+  <%--  <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/googleMaps.js")%>"></script>--%>
     <script type="text/javascript">
         makeRevLower = true;
     </script>

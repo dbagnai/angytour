@@ -43,6 +43,7 @@ public class references
         public string percorsoimg { set; get; }
         public string percorsoexp { set; get; }
         public string percorsolistaimmobili { set; get; }
+        public string percorsolistaristoranti { set; get; }
         public string jsonlanguages { set; get; }
         public string baseresources { set; get; }
         public string versionforcache { set; get; }
@@ -645,7 +646,7 @@ public class references
         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaTipologieDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "tipologie.xml"));
         //GELibraryRemoto.UF.FunzioniUtilità.CreaListaStaticaProvinceDaFileXML(Server.MapPath("~" + ConfigManagement.ReadKey("DataDir"].ToString() + "/Common/" + "province.xml"));
 
-        WelcomeLibrary.DAL.bookingDM.InitVincoli(); //Vincoli per il book , usa quelli preimpostati!!!
+        //WelcomeLibrary.DAL.bookingDM.InitVincoli(); //Vincoli per il book , usa quelli preimpostati!!!
 
     }
 
@@ -712,6 +713,15 @@ public class references
         if (tipotmp != null)
             linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
         jpathcomplete.percorsolistaimmobili = linktmp;
+
+
+        /*Per ristoranti*/
+        linktmp = "";
+        WelcomeLibrary.DOM.TipologiaOfferte tipotmp1 = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000003"); });
+        if (tipotmp1 != null)
+            linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp1.Descrizione), "", tipotmp1.Codice);
+
+        jpathcomplete.percorsolistaristoranti = linktmp;
         /*Per catalogo*/
         linktmp = "";
         tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000001"); });

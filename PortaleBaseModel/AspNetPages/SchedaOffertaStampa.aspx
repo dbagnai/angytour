@@ -36,9 +36,9 @@
         <asp:Label ID="output" runat="server"></asp:Label>
         <%--<img id="Img1" style="border: none" alt="" runat="server"
         src='<%= references.ResMan("Common", Lingua,"imgLogo") %>" width="380" />--%>
-        <div style="width: 100%; height: 100px; padding-top: 30px; padding-bottom: 30px; margin-bottom: 10px; text-align: center; background: url(../images/SiteSpecific/sfondohead.jpg) repeat-x top left">
+       <div style="width: auto; height: 100px; padding-top: 30px; padding-bottom: 30px; margin-bottom: 10px; text-align: center; background: url(../images/SiteSpecific/sfondohead.jpg) repeat-x top left">
             <img src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png")%>'
-                style="height: 100%; max-width: 300px;" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
+                style="height: 100%;" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
         </div>
         <asp:UpdatePanel ID="UserPanel" runat="server" UpdateMode="Conditional">
             <ContentTemplate>

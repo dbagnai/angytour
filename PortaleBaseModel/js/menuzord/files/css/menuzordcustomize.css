@@ -12,7 +12,6 @@
     /*overflow: hidden;*/
     /*border-bottom:1px solid #abc5d9;*/
     font-size: 1rem;
-    font-weight: 400;
 }
 
 .freetop {
@@ -28,7 +27,6 @@
     /*overflow: hidden;*/
     /*border-bottom:1px solid #abc5d9;*/
     font-size: 1rem;
-    font-weight: 400;
 }
 
 .fixedtop .dropdown-menu, #menuzord .dropdown-menu {
@@ -134,13 +132,7 @@
     }
 }
 
-.menuzord,
-.menuzord * {
-    font-family: 'Raleway';
-    /*font-weight: 500;*/
-    font-size: 1rem;
-}
-
+ 
 .bckColor2 {
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -225,7 +217,7 @@
     .menuzord.orange .menuzord-menu ul.dropdown li:hover > a {
         background: none;
         color: #fff;
-        font-weight: 600;
+         
     }
 
     .menuzord.orange .showhide em {
@@ -301,7 +293,7 @@
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
     background: none;
     /*color: #fff;*/
-    font-weight: 600;
+ 
 }
 
 .menuzord.white .showhide em {
@@ -381,7 +373,7 @@
 
 .menuzord-menu > li > a {
     font-size: 1rem;
-    font-weight: 500;
+   
     text-transform: uppercase;
     color: #444;
     padding: 8px 16px;

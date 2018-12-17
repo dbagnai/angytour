@@ -68,15 +68,15 @@
                                         <!--<span style="font-size:0.8rem" class="bind" mybind="Caratteristica3" format="frmcaratteristica3"></span>--><br />
                                         <!--<div class="float-right bind" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello"></div>-->
                                         <!-- APRI LA SCHEDA -->
-                                        <div class="float-left my-0 mr-2">
+                                        <!--<div class="float-left my-0 mr-2">
                                             <a onclick="javascript:JsSvuotaSession(this)" class="bind" target="_self" href="link" title="titolo" mybind="Id">
                                                 <div class="float-right bind button-carrello" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
                                             </a>
-                                        </div>
+                                        </div>-->
 
                                         <!-- AGGIUNGI AL CARRELLO -->
-                                        <div id="carrello-click" class="float-left my-0 bind carrello-stop" style="z-index:1" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
-                                        </div>
+                                        <!--<div id="carrello-click" class="float-left my-0 bind carrello-stop" style="z-index:1" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
+                                        </div>-->
 
                                         <!--<div id="carrello-start" class="float-left bind button-carrello" style="opacity:0.5; display:block;"><i class="fa fa-cart-plus"></i></div>-->
                                         <!--<div class="float-left" style="padding-top:30px">
@@ -87,6 +87,7 @@
 
                                     <!-- PREZZO -->
                                     <div class="col-auto float-right text-right prezzo-responsive">
+                                        <span class="bind" mybind="Id" myvalue="prezzo" format="formatlabelresource"></span>
                                         <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                         <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                     </div>

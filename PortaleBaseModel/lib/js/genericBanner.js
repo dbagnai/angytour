@@ -115,7 +115,7 @@ function bindgenericbanner(el, localObjects) {
     InitGenericBanner(controlid, container);
 }; 
 
-function InitVideo(controlid, container) {
+function InitGenericBanner(controlid, container) {
     $('#' + container).show();
     $('#' + container + 'Title').show();
     $(function () {

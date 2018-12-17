@@ -27,15 +27,15 @@ function injcCategorieLinksinner(type, container, controlid, listShow, tipologia
         //        objfiltro = JSON.parse(retval);
         //    params = objfiltro;
 
-            params.tipologia = tipologia;
-            params.listShow = listShow;
-            params.categoria = categoria;
-            params.categoria2Liv = categoria2Liv;
-            params.container = container;
+        params.tipologia = tipologia;
+        params.listShow = listShow;
+        params.categoria = categoria;
+        params.categoria2Liv = categoria2Liv;
+        params.container = container;
 
-            globalObject[controlid + "params"] = params;
+        globalObject[controlid + "params"] = params;
 
-            CaricaCategorieLinksData(controlid);
+        CaricaCategorieLinksData(controlid);
         //});
     });
 };
@@ -93,7 +93,7 @@ function CaricaCategorieLinksData(controlid) {
 function BindCategorieLinks(localObjects, el) {
 
     var objcomplete = JSON.parse(localObjects["dataloaded"]);
-    var data = objcomplete["datalist"]
+    var data = objcomplete["datalist"];
     if (data == undefined || data == null) return;
 
     //console.log(data);

@@ -1,5 +1,4 @@
-﻿
-"use strict";
+﻿"use strict";
 var jsonlanguages = "";
 var versionforcache = "1";
 var percorsocontenuti = "";
@@ -24,6 +23,8 @@ var JSONcategorie = "";
 var JSONcategorie2liv = "";
 var jsontipologie = "";
 var percorsolistadati = "";
+var percorsolistaristoranti = "";
+
 var username = "";
 var JSONrefmetrature = "";
 var JSONrefprezzi = "";
@@ -303,6 +304,9 @@ function loadvariables(result) { //se precarichi questa roba chiamando la funzio
     //////////////////////// //Stringa json con le lingue
     jsonlanguages = jobj["jsonlanguages"];
     percorsolistadati = jobj["percorsolistadati"];
+    percorsolistaristoranti = jobj["percorsolistaristoranti"];
+
+
     ///////////////OGGETTO Json con le risorse
     baseresources = JSON.parse(jobj["baseresources"]);
     ///////////////OGGETTO Json con le regioni
@@ -951,7 +955,7 @@ function ShowList(templatename, container, controlid, data, callback) {
 function initGlobalVarsFromServer(controlid, dictpars, dictpagerpars) {
     //console.log('initGlobalVarsFromServer');
     if (dictpars != null && dictpars != '') {
-        globalObject[controlid + "params"] = JSON.parse(b64ToUtf8(dictpars));
+        globalObject[controlid + "params"] = JSON.parse(b64ToUtf8(dictpars));//JSON.parse(dictpars);
     }
     if (dictpagerpars != null && dictpagerpars != '') {
         globalObject[controlid + "pagerdata"] = JSON.parse(dictpagerpars);
@@ -2184,6 +2188,31 @@ function caricaDatiServerArchivio(lng, objfiltro, callback, functiontocallonend)
         }
     });
 }
+
+
+function caricaDatiServerLinkCustom(lng, objfiltro, callback, functiontocallonend) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'getlinkbyfilters', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
+        success: function (result) {
+            callback(result, functiontocallonend);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText, function () { });
+        }
+    });
+}
+
 function caricaDatiServerLinkscategorie(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";
@@ -2197,6 +2226,31 @@ function caricaDatiServerLinkscategorie(lng, objfiltro, callback, functiontocall
         type: "POST",
         //async: false,
         data: { 'q': 'caricaLinks2liv', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
+        success: function (result) {
+            callback(result, functiontocallonend);
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            callback(result.responseText, function () { });
+        }
+    });
+}
+
+
+
+function caricaDatiServerLinksTipologie(lng, objfiltro, callback, functiontocallonend) {
+    var lng = lng || "I";
+    var objfiltro = objfiltro || "";
+
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'caricaLinks1liv', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
         success: function (result) {
             callback(result, functiontocallonend);
         },
