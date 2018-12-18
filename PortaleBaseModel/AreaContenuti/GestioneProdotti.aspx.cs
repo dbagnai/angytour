@@ -864,12 +864,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     _tmpdbl = 0;
                     double.TryParse(txtLongitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
                     updrecord.Longitudine1_dts = _tmpdbl;
-
-                    //Questi li devi riempire con la lista delle foto
-                    //updrecord.FotoCollection_M.Schema = txtFotoSchema.Value;
-                    //updrecord.FotoCollection_M.Valori = txtFotoValori.Value;
+                    if (updrecord.Id_dts_collegato == 0)
+                        offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+                    else
+                        offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
                     offDM.UpdateOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
-                    offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+
 
                     btnAggiorna.Text = "Modifica";
                     btnAggiorna.ValidationGroup = "";

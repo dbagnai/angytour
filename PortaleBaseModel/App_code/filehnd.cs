@@ -79,6 +79,7 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         item.Telefono = html.Convert(jdata.telefono).Trim();
                         item.DataInserimento = System.DateTime.Now;
                         //INSERIAMO IL POST COME ARCHIVIATO ( DA VEDERE SE FARE PRIMA CONTROLLI E PULIZIA )
+                        offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item);
                         offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item);
                         string itemid = item.Id.ToString();
                         //Caricamento files in allegato se presenti nella reqeuest
