@@ -350,6 +350,8 @@ public class CommonPage : Page
         else if (sessione != null && sessione[chiave] != null && sessione[chiave].ToString() != "")
         { ret = sessione[chiave].ToString(); }
 
+        if (chiave.ToLower() == "lingua") ret = SitemapManager.getLinguafromculture(ret);//  per modifica codici culture lingua 19.12.18
+
         if (ret == "-") ret = "";
         if (sessione != null)
             sessione.Add(chiave, ret);//Metto in sessione il valore

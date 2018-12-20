@@ -84,12 +84,16 @@ public class GenericRouteHandler : IRouteHandler
         /*END REWRITING OLD URL **********************************************************************/
 
 
+        Lingua = SitemapManager.getCulturenamefromlingua(Lingua); // abilitare per modifica codici culture lingua 19.12.18
 
-        switch (Lingua.ToUpper())
+
+        switch (Lingua.ToLower())
         {
-            case "I":
-            case "GB":
-            case "RU":
+            case "i":
+            case "gb":
+            case "ru":
+            case "it":
+            case "en":
                 break;
             default:
                 HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
@@ -104,10 +108,11 @@ public class GenericRouteHandler : IRouteHandler
         if (textmatch == null || textmatch.ToLower() == "home") return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
 
         //Carichiamo la destinazione ed i paramentri in base al testmatch ....
-        string calledurl = textmatch;
-        if (!string.IsNullOrEmpty(destinationselector))
-            calledurl = calledurl.Insert(0, destinationselector + "/");
-        calledurl = Lingua + "/" + calledurl;
+        //string calledurl = textmatch;
+        //if (!string.IsNullOrEmpty(destinationselector))
+        //    calledurl = calledurl.Insert(0, destinationselector + "/");
+        //calledurl = Lingua + "/" + calledurl;
+        string calledurl = WelcomeLibrary.UF.SitemapManager.CostruisciRewritedUrl(Lingua, destinationselector, textmatch); //modifica codici culture lingua 19.12.18
 
         Tabrif itemurl = WelcomeLibrary.UF.SitemapManager.GetUrlRewriteaddress(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, calledurl);
         if (itemurl != null)

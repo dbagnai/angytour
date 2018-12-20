@@ -410,6 +410,9 @@ namespace WelcomeLibrary.UF
             testomodificatore1 += CleanUrl(annofiltro.Trim());
             testomodificatore1 += CleanUrl(mesefiltro.Trim());
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //aggiungo in coda ALL'URL la sequenza dei codici per rendere unica la stringa ( qui farebbe comodo uno shortner!!)
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string testomodificatore2 = "";
             testomodificatore2 += codicecategoria.Replace("prod", "").TrimStart('0');
             testomodificatore2 += codicecat2liv.Replace("sprod", "").TrimStart('0');
@@ -483,46 +486,54 @@ namespace WelcomeLibrary.UF
 
             return urlRewrited;
         }
-
-
-        //public static Tabrif GeneraRewritingElement(string Lingua, string Tipologia, string destinationselector, string textmatch, string id = "", string tipopagina = "lista", string Categoria = "", string Categoria2liv = "", string anno = "", string mese = "", string regione = "")
-        //{
-        //    Tabrif urlRewrited = new Tabrif();
-        //    Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-        //    parameters.Add("Lingua", Lingua.ToUpper());
-        //    if (Tipologia.ToLower().StartsWith("rif"))
-        //    {
-        //        parameters.Add("Tipologia", Tipologia);
-        //        parameters.Add("idOfferta", id);
-        //    }
-        //    else if (Tipologia.ToLower().StartsWith("con"))
-        //    {
-        //        parameters.Add("idContenuto", id);
-        //        parameters.Add("CodiceContenuto", Tipologia);
-        //    }
-        //    else
-        //    {
-        //        parameters.Add("Tipologia", Tipologia);
-        //        parameters.Add("idOfferta", id);
-        //    }
-
-
-        //    parameters.Add("Categoria", Categoria);
-        //    parameters.Add("Categoria2Liv", Categoria2liv);
-        //    parameters.Add("anno", anno);
-        //    parameters.Add("mese", mese);
-        //    parameters.Add("Regione", regione);
-        //    urlRewrited = CreaElementoRewriting(
-        //        CostruisciRewritedUrl(Lingua, destinationselector, textmatch, id)
-        //        , OriginalPathdestinazioneByTipologia(Tipologia, tipopagina), Creaparametersstring(parameters));
-
-        //    return urlRewrited;
-        //}
-
-
-
-
+        public static string getCulturenamefromlingua(string lng)
+        {
+            string culturename = "";
+            switch (lng)
+            {
+                case "I":
+                case "it":
+                    culturename = "it";
+                    break;
+                case "GB":
+                case "en":
+                    culturename = "en";
+                    break;
+                case "RU":
+                case "ru":
+                    culturename = "ru";
+                    break;
+                default:
+                    culturename = "it";
+                    break;
+            }
+            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
+            return culturename;
+        }
+        public static string getLinguafromculture(string lng)
+        {
+            string culturename = "";
+            switch (lng)
+            {
+                case "it":
+                case "I":
+                    culturename = "I";
+                    break;
+                case "en":
+                case "GB":
+                    culturename = "GB";
+                    break;
+                case "ru":
+                case "RU":
+                    culturename = "RU";
+                    break;
+                default:
+                    culturename = "I";
+                    break;
+            }
+            //System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
+            return culturename;
+        }
 
         public static string ConteggioCaratteri(string testo, int caratteri = 600, bool nolink = false, string testoAggiunto = "")
         {
@@ -676,7 +687,12 @@ namespace WelcomeLibrary.UF
         /// <returns></returns>
         public static string CostruisciRewritedUrl(string Lingua = "I", string destinationselector = "", string textmatch = "-", string id = "")
         {
-            string rewritedurl = Lingua;
+            //string rewritedurl = Lingua;
+            //Modifica per gestione link con lingua corretta // abilitare per modifica codici culture lingua 19.12.18
+#if true
+            string correctlingua = getCulturenamefromlingua(Lingua);
+            string rewritedurl = correctlingua;
+#endif
             if (!string.IsNullOrEmpty(destinationselector))
                 rewritedurl += "/" + destinationselector;
             rewritedurl += "/" + textmatch;

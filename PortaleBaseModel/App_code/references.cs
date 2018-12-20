@@ -386,18 +386,22 @@ public class references
 
     }
 
+
     public static System.Globalization.CultureInfo setCulture(string lng)
     {
         string culturename = "";
         switch (lng)
         {
             case "I":
+            case "it":
                 culturename = "it";
                 break;
             case "GB":
+            case "en":
                 culturename = "en";
                 break;
             case "RU":
+            case "ru":
                 culturename = "ru";
                 break;
             default:
@@ -600,6 +604,10 @@ public class references
         WelcomeLibrary.STATIC.Global.percorsoexp = ConfigManagement.ReadKey("percorsoexp");
         WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = Server.MapPath("~");
         WelcomeLibrary.STATIC.Global.versionforcache = ConfigManagement.ReadKey("versionforcache");
+
+        //System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_uploads");
+        //if (di.Exists)
+        //    di.Delete(true);
 
         bool upd = false;
         bool.TryParse(ConfigManagement.ReadKey("updateTableurlrewriting"), out upd);
