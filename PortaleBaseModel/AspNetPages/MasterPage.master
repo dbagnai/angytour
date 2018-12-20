@@ -406,9 +406,9 @@
             <%--            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>--%>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px">
+       <div style="max-width: 1400px; margin: 0 auto; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px; position: relative">
                 <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" style="line-height: 40px;">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb">
                     </ul>
                 </div>
             </div>
