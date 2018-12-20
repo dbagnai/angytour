@@ -1564,7 +1564,13 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
 /*--------------------------------------------------------------------------------------------------------
 //FUNZIONI AGGIUNTIVE USATE DA FILLBINDCONTROLS PER IL BIND --------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------*/
-
+function inizializzasimplestars() {
+    var ratings = document.getElementsByClassName('rating');
+    if (ratings != null)
+        for (var i = 0; i < ratings.length; i++) {
+            var r = new SimpleStarRating(ratings[i]); //Inizializza la visualizzazione delle stelline
+        }
+}
 function CompleteUrlPrimaryImg(localObjects, idallegati, anteprima, usecdn, callback) {
     var pathfile = "";
     try {

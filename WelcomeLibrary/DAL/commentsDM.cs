@@ -81,6 +81,69 @@ namespace WelcomeLibrary.DAL
             }
             return item;
         }
+        public static Dictionary<long, List<double>> Calcolamediastarsbyid(string connection, List<Offerte> list, long limitresults = 0)
+        {
+            //Reverse sort dictionary
+            //var retdict =  new SortedDictionary<long, long>(Comparer<long>.Create((x, y) => y.CompareTo(x)));
+            Dictionary<long, List<double>> retdict = new Dictionary<long, List<double>>();
+            StringBuilder sb = new StringBuilder();
+            string query = "";
+            if (connection == null || connection == "") return retdict;
+            try
+            {
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                query += ("SELECT sum(stelle) as totalestars, count(idpost) as nvotiperid, idpost  FROM TBL_comments ");
+                if (list != null && list.Count > 0)
+                {
+                    query += ("WHERE idpost in ( ");
+
+                    foreach (Offerte c in list)
+                    {
+                        query += (" " + c.Id + ",");
+                    }
+
+                    query = query.TrimEnd(',');
+                    query += " )   AND  (Approvato = 1) ";
+                }
+
+                query += " Group by idpost order by totalestars DESC  ";
+
+                if (limitresults != 0)
+                    query += " limit  " + limitresults;
+
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return retdict; };
+                    if (reader.HasRows == false)
+                        return retdict;
+
+                    while (reader.Read())
+                    {
+                        double totalestars = reader.GetDouble(reader.GetOrdinal("totalestars"));
+                        long nvotiperid = reader.GetInt64(reader.GetOrdinal("nvotiperid"));
+                        long idpost = reader.GetInt64(reader.GetOrdinal("idpost"));
+
+                        if (!retdict.ContainsKey(idpost))
+                        {
+                            //retdict.Add(idpost, Math.Round(((double)totalestars / nvotiperid), 1, MidpointRounding.ToEven));
+                            retdict.Add(idpost, new List<double>());
+                            retdict[idpost].Add(Math.Round(((double)totalestars / nvotiperid), 1, MidpointRounding.ToEven));
+                            retdict[idpost].Add(nvotiperid);
+                        }
+                    }
+                }
+                //Dictionary<long, long> sortedict = new Dictionary<long, long>();
+                var sortedDict = (from entry in retdict orderby entry.Value descending select entry);
+                retdict = sortedDict.ToDictionary(pair => pair.Key, pair => pair.Value);
+            }
+            catch (Exception error)
+            {
+                // throw new ApplicationException("Errore Conteggio totale stelle :" + error.Message, error);
+            }
+            return retdict;
+        }
+
 
         public CommentsCollection CaricaCommentiFiltratiScript(string connection, string idpost, bool? approvato = null, string maxrecord = "", long page = 0, long pagesize = 0)
         {

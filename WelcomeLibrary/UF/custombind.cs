@@ -2375,6 +2375,36 @@ namespace WelcomeLibrary.UF
                         if (nodetobind.Attributes.Contains("idbind"))
                             nodetobind.Attributes["idbind"].Value = itemdic[nodetobind.Attributes["idbind"].Value];
                     }
+                    else if ((nodetobind.Name == "span" || nodetobind.Name == "div") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("ratinginfo"))
+                    {
+                        if (nodetobind.Attributes.Contains("idbind"))
+                        {
+                            if (!string.IsNullOrEmpty(property))
+                            {
+                                string introtext = "";
+                                if (nodetobind.Attributes.Contains("myvalue"))
+                                {
+                                    introtext = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, nodetobind.Attributes["myvalue"].Value).Valore;
+                                }
+                                nodetobind.Attributes["idbind"].Value = itemdic[nodetobind.Attributes["idbind"].Value];
+                                if (linkloaded.ContainsKey(nodetobind.Attributes["idbind"].Value) && linkloaded[nodetobind.Attributes["idbind"].Value].ContainsKey(property) && linkloaded[nodetobind.Attributes["idbind"].Value][property] != "")
+                                    nodetobind.InnerHtml = introtext + "(" + linkloaded[nodetobind.Attributes["idbind"].Value][property] + ")";
+                                nodetobind.Attributes["class"].Value = nodetobind.Attributes["class"].Value.Replace("ratinginfo", "");
+                            }
+                        }
+                    }
+                    else if ((nodetobind.Name == "span" || nodetobind.Name == "div") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("rating"))
+                    {
+                        if (nodetobind.Attributes.Contains("idbind"))
+                        {
+                            if (nodetobind.Attributes.Contains("data-default-rating")) nodetobind.Attributes.Remove("data-default-rating");
+                            nodetobind.Attributes["idbind"].Value = itemdic[nodetobind.Attributes["idbind"].Value];
+                            if (linkloaded.ContainsKey(nodetobind.Attributes["idbind"].Value) && linkloaded[nodetobind.Attributes["idbind"].Value].ContainsKey(property) && linkloaded[nodetobind.Attributes["idbind"].Value][property] != "")
+                                nodetobind.Attributes.Add("data-default-rating", linkloaded[nodetobind.Attributes["idbind"].Value][property]);
+                            else
+                                nodetobind.Attributes["class"].Value = nodetobind.Attributes["class"].Value.Replace("rating", "");
+                        }
+                    }
                     else if (nodetobind.Name == "button" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("select"))
                     {
                         string idscheda = itemdic[property];

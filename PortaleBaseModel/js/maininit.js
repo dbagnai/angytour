@@ -101,6 +101,12 @@ jQuery(document).ready(function ($) {
     //$.datepicker.setDefaults($.datepicker.regional['']);
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
 
+
+    inizializzasimplestars(); /*inizio gli oggetti rating per la visualizzazione con le telle*/
+
+
+
+
     /*Jquery Carousel*/
     //jQuery('.carousel').carousel({
     //    interval: 3000,

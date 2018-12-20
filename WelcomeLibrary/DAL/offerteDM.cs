@@ -4915,6 +4915,14 @@ namespace WelcomeLibrary.DAL
             Dictionary<long, long> visite = new Dictionary<long, long>();
             if (filteredData != null && filteredData.Count > 0)
                 visite = statisticheDM.ContaTutteVisite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData);
+
+
+            //Carichiamo una lista con le medie delle votazioni feedback per ogni risultato da ritornare
+            Dictionary<long, List<double>> scores = new Dictionary<long, List<double>>();
+            if (filteredData != null && filteredData.Count > 0)
+                scores = commentsDM.Calcolamediastarsbyid(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, filteredData);
+
+
             Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
             foreach (Offerte _o in filteredData)
             {
@@ -5004,6 +5012,17 @@ namespace WelcomeLibrary.DAL
                 if (visite != null && visite.ContainsKey(_o.Id))
                     numeroviews = visite[_o.Id].ToString();
                 tmp.Add("views", numeroviews); //Numero di visualizzazioni della scheda
+
+
+                string mediastars = "";
+                if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 0)
+                    mediastars = scores[_o.Id][0].ToString();
+                tmp.Add("stars", mediastars); //media delle recensioni per la scheda
+                string nfeeds = "";
+                if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 1)
+                    nfeeds = scores[_o.Id][1].ToString();
+                tmp.Add("nfeeds", nfeeds); //numero delle recensioni per la scheda
+
 
                 tmp.Add("contactlink", contactlink);
                 tmp.Add("printlink", printlink);

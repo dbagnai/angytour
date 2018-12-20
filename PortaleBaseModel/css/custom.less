@@ -470,9 +470,9 @@ div#blocco-lgo-home {
 
 
 
-.title-block {
+.mbr-section-title, .title-block {
     padding-top: 20px;
-    padding-bottom: 3rem;
+    /*padding-bottom: 3rem;*/
     /*Svg decorazione sotto i titoli auto-generati*/
     &::after {
         top: 75px;
@@ -493,6 +493,10 @@ div#blocco-lgo-home {
 @media screen and (max-width: 415px) {
     .mbr-section-title, .title-block {
         font-size: 2rem;
+
+        &::after {
+            margin-top: 15px;
+        }
     }
 
     .mbr-section-subtitle {

@@ -36,21 +36,28 @@
                             <h3 class="card-title titolo-offerta mb-2">
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                             </h3>
-                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
+                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0">
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
                             </h4>
                         </a>
-                        <p class="card-text" style="font-size:1rem">
-                            <div class="pt-sm-1  tx-secondary-color" style="font-size:1.1rem">
-                                <span class="bind" mybind="Caratteristica1" format="frmcaratteristica1"></span>
-                                <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
-                                <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
-                            </div>
-                            <div>
-                                <div class="bind linksmall" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
-                            </div>
-                            <div>  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
-                        </p>
+                        <!--  <p class="card-text" style="font-size:1rem">
+                        <div class="pt-sm-1  tx-secondary-color" style="font-size:0.9rem">
+                             <span class="bind" mybind="Caratteristica1" format="frmcaratteristica1"></span>
+                             <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
+                             <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
+                         </div>
+                         </p>-->
+                        <div class="pt-0 pb-1 tx-secondary-color" style="font-size:0.9rem">
+                            <span class="bind text-center" mybind="Indirizzo" myvalue="replacebr" format="formatstringvalue"></span>
+                        </div>
+                        <div class="text-left">
+                            <div class="ratinginfo bind" mybind="nfeeds" myvalue="feedbacks1" idbind="Id"></div>
+                            <span class="rating bind" mybind="stars" mybind1="nfeeds" idbind="Id" disabled data-default-rating="2.5"></span>
+                        </div>
+                        <div>
+                            <div class="bind linksmall" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
+                        </div>
+                        <div> <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
 
 
                         <p class="card-text" style="font-size:1rem">
