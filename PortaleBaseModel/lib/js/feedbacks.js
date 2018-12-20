@@ -280,6 +280,7 @@ function commentclosure(varname) {
                     else {
                         mainscope.objfiltro['page'] = page;
                         mainscope.rendercomments(mainscope.idpost, mainscope.idcontainer);
+                        scrolltotop.scrollup();
                     }
                 }
             });
@@ -297,6 +298,7 @@ function commentclosure(varname) {
                     else {
                         mainscope.objfiltro['page'] = page;
                         mainscope.rendercomments(mainscope.idpost, mainscope.idcontainer);
+                        scrolltotop.scrollup();
                     }
                 }
             });

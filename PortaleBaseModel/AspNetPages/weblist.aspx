@@ -9,7 +9,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <script type="text/javascript">
         makeRevLower = true;
-        history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
+        //history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
     </script>
     <div class="container" style="text-align: center; margin-top: 10px"  id="divTitleContainer">
         <div class="row" runat="server" id="divTitle">

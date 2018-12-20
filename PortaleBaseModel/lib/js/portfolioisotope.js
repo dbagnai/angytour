@@ -294,10 +294,8 @@ function InitIsotopeLocal(controlid, container) {
     $grid.on('layoutComplete',
         function (event, laidOutItems) {
             lazyLoad();
-            // setTimeout(function () {
             console.log("layoutComplete doc act height: " + $(document).height());
-            reinitscrollpos(); //Return to previosus scrolltop pos of page
-            //   }, 500);
+           // reinitscrollpos(); //Return to previosus scrolltop pos of page
             setTimeout(function () { enablescrolltopmem = true; }, 3000);
         });
 

@@ -1333,6 +1333,7 @@ namespace WelcomeLibrary.UF
                                                     aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
                                                     //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
                                                     aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
+                                                    //aNextPage.First().SetAttributeValue("onClick", "scrolltotop.scrollup();");
 
                                                     if (aNextPage.First().Attributes.Contains("style"))
                                                     {
@@ -1349,6 +1350,7 @@ namespace WelcomeLibrary.UF
                                                     aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
                                                     //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
                                                     aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                    //aPrevPage.First().SetAttributeValue("onClick", "scrolltotop.scrollup();");
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
                                                     {
