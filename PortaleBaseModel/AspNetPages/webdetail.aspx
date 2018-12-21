@@ -347,7 +347,7 @@
         </div>
     </div>
     <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject pt-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        <div id="divCommenti" class="inject py-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
     </asp:Panel>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
     <div class="bg-white" id="divSuggeritiContainer">

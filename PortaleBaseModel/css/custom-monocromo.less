@@ -21,7 +21,8 @@
 @tonal-tertiary-color: mix(@bg-primary-color, lightseagreen);
 @tonal-quaternary-color: mix(@bg-primary-color, mintcream);
 
-@color-sottomeu: #f3c649;/* fascia catalogo */
+@color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
+@color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
@@ -40,8 +41,8 @@
 ----------------------------------*/
 @button-size: 0.8rem;
 @button-font: @base-font;
-@bg-button-color: @bg-primary-color;
-@bg-button-hover-color: lighten(@bg-primary-color, 45%);
+@bg-button-color: @color-sottomeu;
+@bg-button-hover-color: lighten(@bg-button-color, 45%);
 @button-color: @white-color;
 @button-hover-color: @black-color;
 /**/
@@ -137,6 +138,13 @@
 /**/
 @title-banner-navigazione-size: 1.4rem;
 @subtitle-banner-navigazione-size: 1.2rem;
+/**/
+@icon-nav-1: url(/images/icon-tubo.png);
+@icon-nav-2: url(/images/icon-paletta-dx.png);
+@icon-nav-3: url(/images/icon-vaso-fiore.png);
+@icon-nav-4: url(/images/icon-ingranaggio.png);
+@icon-nav-5: url(/images/icon-spina.png);
+@icon-nav-6: url(/images/icon-trattore.png);
 /*----------------------------------
 /////////| BANNER SLIDER |//////////
 ----------------------------------*/

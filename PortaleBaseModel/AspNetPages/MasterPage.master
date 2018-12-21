@@ -101,8 +101,8 @@
                 <div class="float-right">
                     <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
                         <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
-                        <div class="input-group-append" style="border: none; padding: 0px; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
-                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none" runat="server"><i class="fa fa-search"></i></button>
+                        <div class="input-group-append" style="border: none; padding: 0px;">
+                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none;background-color: rgba(255, 255, 255, 0.6);border-top-right-radius: 5px;border-bottom-right-radius: 5px;" runat="server"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -313,9 +313,9 @@
                                         <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                                     </a></li>
                                 </ul>
-                                <button type="button" class="button-carrello-animate float-right triggerdata" style="border: none" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
+                                <button type="button" class="button-carrello-animate float-right triggerdata" style="" data-toggle="dropdown" onclick="javascript:GetCarrelloList(this)" runat="server">
                                     <span class="caret" style="font-size: 20px; color: #666"></span>
-                                    <i class="fa fa-shopping-cart" style="font-size: 1rem; color: #fff"></i>
+                                    <i class="fa fa-shopping-cart" style="font-size: 1rem; color:"></i>
                                 </button>
                             </div>
                         </asp:PlaceHolder>
@@ -406,9 +406,9 @@
             <%--            <div id="divContainerBannerHead" class="heigth-header" style="display: none;"></div>--%>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-       <div style="max-width: 1400px; margin: 0 auto; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px; position: relative">
+       <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative">
                 <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" style="line-height: 40px;">
                     </ul>
                 </div>
             </div>
@@ -529,9 +529,9 @@
                     <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
                         <div class="row justify-content-end">
-                            <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="background: url('/public/Files/con001000/1/guarda-mail-2a-dx.png') no-repeat left bottom; background-size: 95% auto;">
+                            <div class="col-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url('/public/Files/con001000/1/guarda-mail-2a-dx.png') no-repeat left bottom; background-size: 95% auto;">
                             </div>
-                            <div class="col-sm-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
+                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
 
                                 <div class="big2 text-white">
                                     <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
@@ -641,15 +641,16 @@
         <footer>
             <div class="footer mt-0">
                 <div class="footerhead">
+                    <div class="container">
                     <div class="row justify-content-md-center">
-                        <div class="col-sm-4 align-self-center py-3 text-center text-md-left">
+                        <div class="col-sm-6 align-self-center py-3 text-center text-md-left">
                             <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
                                 <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
                             </a>
                         </div>
 
                         <%--SOCIAL--%>
-                        <div class="col-sm-4 align-self-center">
+                        <div class="col-sm-6 align-self-center">
                             <div class="d-table mx-auto d-sm-block col-sm-mx-right d-block social-icons animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
                                 <ul>
                                     <li style="float: right">
@@ -679,12 +680,13 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+                    </div>
 
                 <div class="footer-wrapper py-5">
-
+                    <div class="container">
                     <div class="row justify-content-center">
 
-                        <div class="col col-sm-2 footer-col">
+                        <div class="col col-sm-4 col-md-3 footer-col">
                             <%-- LINKS --%>
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter1") %>
@@ -737,7 +739,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col col-sm-2 footer-col">
+                        <div class="col col-sm-4 col-md-3 footer-col">
                             <%-- SERVIZI --%>
                             <%--<div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter4") %>
@@ -758,7 +760,7 @@
                             </div>
                         </div>
                         <%--BLOG--%>
-                        <div class="col col-sm-2 footer-col pt-3 pt-sm-0">                           
+                        <div class="col col-sm-4 col-md-3 footer-col pt-3 pt-sm-0">                           
                             <div class="footer-title">
                                 <%= references.ResMan("Common",Lingua,"testofooter2") %>
                             </div>
@@ -770,7 +772,7 @@
                         </div>
 
                         <%--NEWS-LETTER--%>
-                        <div class="col-sm-2 footer-col pt-3 pt-sm-0">
+                        <div class="col-12 col-md-3 footer-col pt-3 pt-sm-3 pt-md-0">
                             <div class="footer-title">
                                 <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                             </div>
@@ -783,13 +785,31 @@
                                         <br />
                                         <br />
                                 --%>
-                                <input type="text" style="width: 60%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
-                                <button class="divbuttonstyle px-2 border-0" style="width: 40%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
+                                <input type="text" style="width: 80%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
+                                <button class="divbuttonstyle px-2 border-0" style="width: 20%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
                                 <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
                             </asp:Panel>
                         </div>
                     </div>
                 </div>
+                    </div>
+
+                <%--CREDIT CARD BOX--%>
+                <div class="logos-payment">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <div class="logo-payment"></div>
+                                <%--<div class="logo-payment"></div>--%>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="copyright">
                     <div class="container">
                         <div class="row">

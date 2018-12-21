@@ -61,7 +61,7 @@
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-sm-6 p-0 pr-5 d-none d-sm-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 95%;">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 95%;">
 
                             <%--AVVISO ERRORE DATI NON INSERITI--%>
                             <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
@@ -70,7 +70,7 @@
                             <div id="recaptcharesponse" style="display: none;" class="errormessageformprivacy"></div>
                         </div>
                         <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                            <div class="col-sm-6 py-1 px-3 px-sm-4 pt-2 text-center bg-manual-secondary-color-fade">
+                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
                                 <div class="ui-15">
                                     <div class="ui-content">
                                         <div class="container-fluid">

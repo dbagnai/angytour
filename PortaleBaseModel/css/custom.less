@@ -44,7 +44,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 .bg-color-sottomeu {
-    background-color: @color-sottomeu
+    background-color: @color-sottomeu !important;
+}
+
+.bg-color-sottomeu-active {
+    background-color: @color-sottomeu-active !important;
 }
 
 .tx-primary-color {
@@ -181,6 +185,7 @@ select.form-control {
     .fulllogobckdark {
         width: 206px;
         height: 61px;
+        margin-left: calc(100% - 170px);
     }
 
     .shrinklogo {
@@ -210,6 +215,11 @@ select.form-control {
     height: calc(70vh - 141px) !important;
 }
 
+@media (max-width: 767px) {
+    #divContainerb1 {
+        height: calc(100vh - 90px) !important;
+    }
+}
 i .fa {
     font-weight: 900;
 }
@@ -312,7 +322,7 @@ i .fa {
         background-color: @color-sottomeu;
         opacity: 1 !important;
         border: none;
-        padding: 10px 55px;
+        padding: 0px 55px;
     }
 
     .menuzord-menu li.catalogo-menu ul li {
@@ -327,34 +337,111 @@ i .fa {
         padding: 14px 14px 14px 40px !important;
     }
 
-    .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
-        background: url(/images/icon-piatti.png) center left no-repeat !important;
+    .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
+        background: @icon-nav-1 10px center no-repeat !important;
         background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
-        background: url(/images/icon-tavoli.png) center left no-repeat !important;
+        background: @icon-nav-2 10px center no-repeat !important;
         background-size: 32px !important;
     }
 
-    .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
-        background: url(/images/icon-lampada.png) center left no-repeat !important;
-        background-size: 32px !important;
-    }
-
-    .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
-        background: url(/images/icon-vaso.png) center left no-repeat !important;
+    .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
+        background: @icon-nav-3 10px center no-repeat !important;
         background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
-        background: url(/images/icon-oggettistica.png) center left no-repeat !important;
+        background: @icon-nav-4 10px center no-repeat !important;
         background-size: 32px !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
-        background: url(/images/icon-natale.png) center left no-repeat !important;
+        background: @icon-nav-5 10px center no-repeat !important;
         background-size: 32px !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
+        background: @icon-nav-6 10px center no-repeat !important;
+        background-size: 32px !important;
+    }
+
+    /*sotto sotto menu catalogo*/
+    .menuzord-menu li.catalogo-menu ul.dropdown .fa {
+        display: block;
+        color: @primary-color;
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li .indicator {
+        top: 7px;
+        right: 0px;
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li .indicator:before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: "";
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li .indicator i.fa.fa-angle-right:before {
+        content: "\f107";
+    }
+
+    .menuzord-menu li.catalogo-menu ul {
+        border-bottom: 1px solid @bg-primary-color !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li {
+        position: unset !important;
+        padding: 22px 10px;
+        margin-left: 0;
+        margin-bottom: -1px;
+        border-bottom: 1px solid @bg-primary-color !important;
+        border-left: 1px solid transparent !important;
+        border-right: 1px solid transparent !important;
+
+        &:hover {
+            background-color: @color-sottomeu-active !important;
+            border-bottom: 1px solid transparent !important;
+            border-left: 1px solid @bg-primary-color !important;
+            border-right: 1px solid @bg-primary-color !important;
+        }
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown {
+        left: 0;
+        top: 63px;
+        width: 100%;
+        min-width: auto;
+        padding: 10px 55px;
+        display: none;
+        background: @color-sottomeu-active;
+        border: 0px;
+        border-bottom: none !important;
+        border-top: red !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li {
+        position: unset !important;
+        padding: 22px 10px;
+        margin-left: 0;
+
+        &:hover {
+            background-color: @bg-secondary-color !important;
+        }
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li {
+        padding: 0px;
+        margin: 2px 0;
+        float: right;
+        background: none !important;
+        border: none !important;
+    }
+
+    .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li a {
+        padding: 14px !important;
     }
 }
 
@@ -449,10 +536,10 @@ div#blocco-lgo-home {
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
 .mbr-section-title, a .mbr-section-title, .title-block {
-    color: @title-color !important;
-    font-family: @tite-font !important;
-    font-size: @tite-size !important;
-    font-weight: @title-weight !important;
+    color: @title-color;
+    font-family: @tite-font;
+    font-size: @tite-size;
+    font-weight: @title-weight;
     text-transform: @title-text-transform;
     font-style: normal;
     text-align: center;
@@ -566,9 +653,10 @@ p, p.lead, .lead p {
     z-index: 0;
     width: 100%;
     overflow-x: inherit;
+    /*overflow-x: hidden;*/
 }
 
-@media (max-width: 415px) {
+@media (max-width: 768px) {
     .body-wrapper {
         overflow-x: hidden;
     }
@@ -592,16 +680,6 @@ h1 span:nth-child(1).mbr-section-title {
 
 h1 span .mbr-section-subtitle {
     &:extend(.mbr-section-subtitle);
-}
-/*----------------------------------
--------------- PULSANTI --------------
-----------------------------------*/
-button:focus {
-    outline: none;
-}
-
-button:hover {
-    cursor: pointer;
 }
 
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
@@ -631,6 +709,36 @@ button:hover {
     font-weight: normal;
     font-size: 100px;
     color: @secondary-color;
+}
+
+@media (max-width: 767px) {
+    .quote-marks {
+        font-size: 1.4rem !important;
+        line-height: 2rem !important;
+
+        &::before {
+            margin-top: 10px;
+            margin-left: -35px;
+            font-size: 75px;
+        }
+
+        &::after {
+            margin-top: 30px;
+            margin-left: 5px;
+            font-size: 75px;
+        }
+    }
+}
+
+/*----------------------------------
+-------------- PULSANTI --------------
+----------------------------------*/
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 /*.divbuttonstyle a, */
@@ -690,7 +798,7 @@ a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.
 }
 
 footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer button.divbuttonstyle:active, footer button.divbuttonstyle:hover, footer .divbuttonstyle, footer .divbuttonstyle:visited, footer .divbuttonstyle:active, footer .divbuttonstyle:hover {
-    padding: .75rem 1rem !important;
+    padding: .72rem 0.5rem !important;
 }
 
 .btn-black-outline, .btn-black-outline:active, .btn-black-outline:visited, .btn-black-outline:focus .btn .btn-black, .btn .btn-black:active, .btn .btn-black:visited, .btn .btn-black:focus {
@@ -757,6 +865,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 }
 
 @media (min-width: 1025px) {
+
     .buttonmenu, a .buttonmenu {
         background: @bg-button-color !important;
         font-size: @menu-size !important;
@@ -771,13 +880,25 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         }
     }
 
-    .menuzord.white .menuzord-menu > li > a.buttonmenu span {
-        color: @white-color !important;
-    }
-
     .menuzord.white .menuzord-menu > li > a.buttonmenu {
         color: @white-color !important;
+        border-color: transparent !important;
+
+        &:hover {
+            color: @button-hover-color !important;
+            border-color: @button-hover-color !important;
+        }
     }
+
+    .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+        /*&:extend(.menuzord.white .menuzord-menu > li > a.buttonmenu);*/
+
+        &:hover {
+            &:extend(.menuzord.white .menuzord-menu > li > a.buttonmenu:hover);
+            border:none !important;
+        }
+    }
+
 }
 
 /*----------------------------------
@@ -965,6 +1086,55 @@ ul.footer-category-list {
     border-top: none;
 }
 
+
+.footer .logos-payment {
+    padding-top: 20px;
+    background-color: @bg-light-color;
+}
+
+.footer .logo-payment {
+    height: 60px;
+    width: 60px;
+    margin: 0 15px;
+}
+
+.logo-payment:nth-child(1) {
+    background: url(/images/logos-payment/visa.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(2) {
+    background: url(/images/logos-payment/maestro.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(3) {
+    background: url(/images/logos-payment/mastercard.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(4) {
+    background: url(/images/logos-payment/paypal.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(5) {
+    background: url(/images/logos-payment/discover.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(6) {
+    background: url(/images/logos-payment/americanexpress.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+.logo-payment:nth-child(7) {
+    background: url(/images/logos-payment/aura.png) center center no-repeat !important;
+    background-size: 60px !important;
+}
+
+
+
 .footer .copyright {
     font-family: @base-font;
     /* background-color: #33332e; */
@@ -1038,38 +1208,38 @@ ul.footer-category-list {
     }
 }
 
-.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(5) {
-    background: url(/images/icon-antipasti.png) top left no-repeat !important;
-    background-size: 20px !important;
-    padding-left: 42px;
-}
-
-.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(4) {
-    background: url(/images/icon-primi.png) top left no-repeat !important;
-    background-size: 20px !important;
-    padding-left: 42px;
-}
-
-.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(3) {
-    background: url(/images/icon-secondi.png) top left no-repeat !important;
+.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
+    background: @icon-nav-6 top left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(2) {
-    background: url(/images/icon-contorni.png) top left no-repeat !important;
+    background: @icon-nav-5 top left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
-.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
-    background: url(/images/icon-dolci.png) top left no-repeat !important;
+.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(3) {
+    background: @icon-nav-4 top left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
+}
+
+.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(4) {
+    background: @icon-nav-3 top left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
+}
+
+.footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(5) {
+    background: @icon-nav-2 top left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(6) {
-    background: url(/images/icon-natale.png) center left no-repeat !important;
+    background: @icon-nav-1 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
@@ -1143,7 +1313,7 @@ ul.footer-category-list {
 /*Start svg decorazione banner-top-home*/
 .bigtext {
     &::after {
-        margin-top: 150px;
+        /*margin-top: 150px;*/
         content: "";
         position: absolute;
         background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{white-color}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat;
@@ -1151,6 +1321,7 @@ ul.footer-category-list {
         width: 134px;
         left: 50%;
         margin-left: -67px;
+        bottom: -0.3rem;
     }
 }
 /*End svg decorazione banner-top-home*/
@@ -1513,6 +1684,10 @@ ul.footer-category-list {
     margin: 0 !important;
 }
 
+/*.isotope-navigation .work-subcaption .work-desc br {
+    line-height: 2.5rem;
+}*/
+
 /*----------------------------------
 ---------- BANNER FASCIA -----------
 ----------------------------------*/
@@ -1582,44 +1757,48 @@ ul.footer-category-list {
     margin-bottom: 0px;
 }
 
+.isotope-navigation .work-subcaption .work-desc br {
+    line-height: 2.5rem;
+}
+
 /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
-#isoBannav1 li:nth-child(n+1) .work-image:after {
+.navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after {
     background-position: center calc(~'(100% - 0px) / 2') !important;
     background-size: 10% !important;
 }
 
-#isoBannav1 li:nth-child(1) .work-image:hover:after {
-    background: url(/images/icon-lampada.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after {
+    background: @icon-nav-6 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#isoBannav1 li:nth-child(2) .work-image:hover:after {
-    background: url(/images/icon-vaso.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after {
+    background: @icon-nav-5 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#isoBannav1 li:nth-child(3) .work-image:hover:after {
-    background: url(/images/icon-oggettistica.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after {
+    background: @icon-nav-4 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#isoBannav1 li:nth-child(4) .work-image:hover:after {
-    background: url(/images/icon-piatti.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after {
+    background: @icon-nav-3 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#isoBannav1 li:nth-child(5) .work-image:hover:after {
-    background: url(/images/icon-tavoli.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after {
+    background: @icon-nav-2 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#isoBannav1 li:nth-child(6) .work-image:hover:after {
-    background: url(/images/icon-natale.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+.navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after {
+    background: @icon-nav-1 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
@@ -1655,7 +1834,7 @@ b, strong {
 }
 
 .button-carrello {
-    &:extend(.divbuttonstyle);
+    &:extend(.btn-primary);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
     line-height: 35.5px !important;
@@ -1665,7 +1844,7 @@ b, strong {
 }
 
 .button-carrello:hover {
-    &:extend(.divbuttonstyle:hover);
+    &:extend(.btn-primary:hover);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
     line-height: 35.5px !important;
@@ -1694,13 +1873,13 @@ b, strong {
 /*------------------------------------------------------*/
 
 .button-carrello1 {
-    &:extend(.divbuttonstyle);
+    &:extend(.btn-primary);
     min-width: 190px !important;
     margin: 5px;
 }
 
 .button-carrello1:hover {
-    &:extend(.divbuttonstyle:hover);
+    &:extend(.btn-primary:hover);
     min-width: 190px !important;
 }
 
@@ -1720,12 +1899,16 @@ b, strong {
 
 .button-carrello-animate {
     &:extend(.button-carrello);
+    color: @button-color !important;
+    border: 1px solid @bg-button-color !important;
     /*animation: rotateY 1s infinite;
     animation-timing-function: linear;*/
 }
 
 .button-carrello-animate:hover {
     &:extend(.button-carrello:hover);
+    color: @primary-color !important;
+    border: 1px solid @primary-color !important;
 }
 
 @-webkit-keyframes rotateY {
@@ -1871,6 +2054,15 @@ b, strong {
     font-size: 0.8rem;
     letter-spacing: 2px;
     font-family: @base-font;
+}
+
+.table-cart .cart-total {
+    min-width: 100px;
+}
+
+.table-cart .cart-product .product-thumb {
+    border: none;
+    margin: 0 10px 0 0;
 }
 
 .cart-total {
@@ -2100,6 +2292,14 @@ select.form-control:not([size]):not([multiple]) {
     border: none;
 }
 
+.owl-carousel-v1 .item:hover {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    /* -webkit-filter: drop-shadow(0 7px 14px .35px); */
+    -moz-filter: d none;
+}
+
 .body-banner-slider a p {
     font-size: 1.1rem;
 }
@@ -2186,6 +2386,7 @@ select.form-control:not([size]):not([multiple]) {
     .menuzord-menu a:hover {
         color: @secondary-color;
         font-weight: @menu-hover-weight !important;
+        padding: 8px 14px !important;
     }
 
     .menuzord.white .menuzord-menu > li.active > a,
