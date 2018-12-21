@@ -108,10 +108,6 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         result = "";
 
                         //INVIAMO LA MAIL DI AVVISO INSERIMENTO
-
-                        string testomail = "Verifica e controlla la richiesta di inserimento per il ristorante : " + itemid;
-
-                        //INVIAMO LA MAIL DI AVVISO INSERIMENTO
                         string testomail = "Verifica e controlla la richiesta di inserimento per il ristorante : " + itemid + "<br/>";
                         testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati per la pubblicazione sul portale<br/>";
                         if (jdata.consenso1 == "true")
