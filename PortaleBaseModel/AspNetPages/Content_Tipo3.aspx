@@ -401,7 +401,7 @@
                                                                 <br />
                                                                 <br />
                                                                 <div class="checkbox">
-                                                                    <label class="w-100 text-left" style="margin-left: 30px;">
+                                                                    <label class="w-100 text-left text-white" style="margin-left: 30px;">
                                                                         <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
                                                                         <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
                                                                         <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #ffd800" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
@@ -409,7 +409,7 @@
                                                                 </div>
 
                                                                 <div class="checkbox">
-                                                                    <label class="w-100 text-left" style="margin-left: 30px;">
+                                                                    <label class="w-100 text-left text-white" style="margin-left: 30px;">
                                                                         <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
                                                                         <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
                                                                         <%= references.ResMan("Common", Lingua,"titoloNewsletter1") %>
