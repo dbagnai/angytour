@@ -539,7 +539,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (!string.IsNullOrEmpty(sottomenu))
                 {
                     string ulstyle = "style =\"display: none;\"";
-                    if (ulvisibility) ulstyle = "";
+                    //if (ulvisibility) ulstyle = "";
+                    if (o.CodiceProdotto == Categoria) ulstyle = "";
                     sb.Append("<ul class=\"dropdown\" " + ulstyle + " >");
                     sb.Append(sottomenu);
                     sb.Append("</ul>");

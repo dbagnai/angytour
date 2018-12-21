@@ -1,4 +1,5 @@
-﻿/*----------------------------------
+﻿@import "custom.less";
+/*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
 @bg-primary-color: #098f8f; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
@@ -30,12 +31,16 @@
 @menu-font: @primary-font;
 @menu-color: @primary-color;
 @menu-hover-color: @secondary-color;
+@menu-weight: 600;
 @menu-hover-weight: 600;
 /**/
 @submenu-color: @primary-color;
 @submenu-hover-color: @secondary-color;
 @submenu-weight: 400;
-@menu-weight: 300;
+@submenu-hover-weight: 400;
+/**/
+@submenu-catalogo-color: @white-color;
+@submenu-catalogo-hover-color: @primary-color;
 /*----------------------------------
 /////////////| BUTTON |/////////////
 ----------------------------------*/
@@ -57,7 +62,8 @@
 @title-color: @primary-color;
 @tite-font: @primary-font;
 @title-weight: 300;
-@title-text-transform: uppercase;
+/*@title-text-transform: uppercase;*/
+@title-text-transform: none;
 /**/
 @subtite-size: 1.8rem;
 @subtitle-color: @secondary-color;
@@ -109,13 +115,17 @@
 //////| BANNER TESTATA HOME |///////
 ----------------------------------*/
 @bg-testata-opacity: fade(@black-color, 40%);
+@bg-color-top-opacity: fade(@color-sottomeu, 0%);
+@bg-color-bottom-opacity: fade(@primary-color, 75%);
 /**/
-@title-testata-home-size: 4rem;
-@title-testata-home-font: @primary-font;
+/*@title-testata-home-size: 4rem;*/
+@title-testata-home-size: calc(49px + (65 - 49) * ((100vw - 768px) / (1200 - 768)));
+@title-testata-home-font: @testata-font;
 @title-testata-home-color: @white-color;
 @title-testata-home-weight: 700;
 /**/
-@subtitle-testata-home-size: 2.5rem;
+/*@subtitle-testata-home-size: 2.5rem;*/
+@subtitle-testata-home-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768)));
 @subtitle-testata-home-font: @primary-font; /*@alternative-font;*/
 @subtitle-testata-home-color: @white-color;
 /*----------------------------------
@@ -155,7 +165,8 @@
 @padding-image-banner-slider: 0;
 /**/
 @height-body-banner-slider: 190px;
+@bg-white-opacity: fade(@white-color, 50%);
+@bg-black-opacity: fade(@black-color, 50%);
 /*----------------------------------
-///| BANNER news-letter e mail |////
+///////////| SVG ICON |/////////////
 ----------------------------------*/
-@bg-opacity: fade(@black-color, 50%);

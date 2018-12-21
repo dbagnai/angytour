@@ -1,4 +1,5 @@
-﻿/*----------------------------------
+﻿@import "custom.less";
+/*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
 @bg-base-color: #205499; /*logo - sfondo-pulsanti - link*/
@@ -24,12 +25,16 @@
 @menu-font: @base-font;
 @menu-color: @bg-base-color;
 @menu-hover-color: fade(@bg-base-color, 65%);
+@menu-weight: 600;
 @menu-hover-weight: 600;
 /**/
 @submenu-color: @bg-base-color;
 @submenu-hover-color: fade(@bg-base-color, 65%);
 @submenu-weight: 400;
-@menu-weight: 300;
+@submenu-hover-weight: 400;
+/**/
+@submenu-catalogo-color: @white-color;
+@submenu-catalogo-hover-color: @primary-color;
 /*----------------------------------
 /////////////| BUTTON |/////////////
 ----------------------------------*/
@@ -152,4 +157,5 @@
 /*----------------------------------
 ///| BANNER news-letter e mail |////
 ----------------------------------*/
-@bg-opacity: fade(@black-color, 30%);
+@bg-white-opacity: fade(@white-color, 50%);
+@bg-black-opacity: fade(@black-color, 50%);

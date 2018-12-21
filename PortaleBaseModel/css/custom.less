@@ -16,6 +16,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 @secondary-font: 'Raleway', sans-serif; /*sotto-titoli-principali*/
 @base-font: 'Roboto', sans-serif; /*menu - body*/
 @alternative-font: 'EBGaramond12-Regular', serif;
+@testata-font: 'Fira Sans', sans-serif; /*'Roboto Condensed', sans-serif;*/
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -49,6 +50,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .bg-color-sottomeu-active {
     background-color: @color-sottomeu-active !important;
+}
+
+.bg-transparent-white {
+    background-color: @bg-white-opacity !important;
+}
+
+.bg-transparent-black {
+    background-color: @bg-black-opacity !important;
 }
 
 .tx-primary-color {
@@ -119,6 +128,13 @@ select.form-control {
 /*---------------------------------
 --------------- FONT --------------
 ----------------------------------*/
+a {
+    color: @color-sottomeu;
+
+    &:hover {
+        color: @color-sottomeu-active
+    }
+}
 .font-primary, .font-primary a {
     font-family: @primary-font !important;
 }
@@ -234,7 +250,7 @@ i .fa {
     color: @menu-color;
     font-family: @menu-font;
     font-size: @menu-size;
-    font-weight: @menu-hover-weight;
+    font-weight: @menu-weight;
 }
 
 .menuzord.white .menuzord-menu > li.active > a,
@@ -316,13 +332,17 @@ i .fa {
     }
 
     .menuzord-menu li.catalogo-menu ul {
-        display: block !important;
+        /*display: block !important;*/
         width: calc(100% + 40px);
         left: -20px;
         background-color: @color-sottomeu;
         opacity: 1 !important;
         border: none;
         padding: 0px 55px;
+    }
+
+    .visible-ok {
+        display: block !important;
     }
 
     .menuzord-menu li.catalogo-menu ul li {
@@ -370,7 +390,7 @@ i .fa {
     /*sotto sotto menu catalogo*/
     .menuzord-menu li.catalogo-menu ul.dropdown .fa {
         display: block;
-        color: @primary-color;
+        /*color: @primary-color;*/
     }
 
     .menuzord-menu li.catalogo-menu ul.dropdown li .indicator {
@@ -400,12 +420,14 @@ i .fa {
         border-bottom: 1px solid @bg-primary-color !important;
         border-left: 1px solid transparent !important;
         border-right: 1px solid transparent !important;
+        font-weight: @submenu-weight !important;
 
         &:hover {
             background-color: @color-sottomeu-active !important;
             border-bottom: 1px solid transparent !important;
             border-left: 1px solid @bg-primary-color !important;
             border-right: 1px solid @bg-primary-color !important;
+            font-weight: @submenu-hover-weight !important;
         }
     }
 
@@ -422,24 +444,29 @@ i .fa {
         border-top: red !important;
     }
 
-    .menuzord-menu li.catalogo-menu ul.dropdown li {
-        position: unset !important;
-        padding: 22px 10px;
-        margin-left: 0;
-
-        &:hover {
-            background-color: @bg-secondary-color !important;
-        }
-    }
-
     .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li {
         padding: 0px;
         margin: 2px 0;
         float: right;
         background: none !important;
         border: none !important;
+        font-weight: @submenu-weight !important;
+
+        &:hover {
+            font-weight: @submenu-hover-weight !important;
+        }
+    }
+    .menuzord.white .menuzord-menu li.catalogo-menu ul.dropdown li:hover a {
+        color: @submenu-catalogo-hover-color !important;
     }
 
+    .menuzord.white .menuzord-menu li.catalogo-menu ul.dropdown li, .menuzord.white .menuzord-menu li.catalogo-menu ul.dropdown li a, .menuzord.white .menuzord-menu li.catalogo-menu ul.dropdown .fa, .menuzord.white .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li a {
+        color: @submenu-catalogo-color !important;
+
+        &:hover {
+            color: @submenu-catalogo-hover-color !important;
+        }
+    }   
     .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li a {
         padding: 14px !important;
     }
@@ -549,9 +576,15 @@ div#blocco-lgo-home {
     word-break: break-word;
     word-wrap: break-word;
     /*Start svg decorazione sotto il titolo*/
-    padding-bottom: 28px;
+    padding-bottom: 21px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background-size: 135px 21px;
 
-    &::after {
+    &.noafter {
+        background: none;
+        background-size: 0;
+    }
+    /*&::after {
         margin-top: 55px;
         content: "";
         position: absolute;
@@ -560,14 +593,19 @@ div#blocco-lgo-home {
         width: 134px;
         left: 50%;
         margin-left: -67px;
-    }
-
+    }*/
     &.noafter::after {
         display: none;
     }
     /*End svg decorazione sotto il titolo*/
 }
-
+h3.mbr-section-title.display-5.bg-dark-color.noafter {
+    letter-spacing: 1px !important;
+    font-weight: normal !important;
+    font-family: @base-font !important;
+    font-size: 1rem !important;
+    padding: 0.6rem 0 !important;
+}
 
 
 .mbr-section-title, .title-block {
@@ -637,6 +675,7 @@ body {
 body, html, button, input, select, textarea {
     &:extend(.base-set);
     font-size: 1em;
+    background-color: transparent;
 }
 
 p, p.lead, .lead p {
@@ -1036,6 +1075,16 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 }
 
 /*----------------------------------
+---------- PARALAX IMAGE -----------
+----------------------------------*/
+.mbr-parallax-background {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*----------------------------------
 -------------- FOOTER --------------
 ----------------------------------*/
 .footerhead {
@@ -1209,31 +1258,31 @@ ul.footer-category-list {
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
-    background: @icon-nav-6 top left no-repeat !important;
+    background: @icon-nav-6 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(2) {
-    background: @icon-nav-5 top left no-repeat !important;
+    background: @icon-nav-5 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(3) {
-    background: @icon-nav-4 top left no-repeat !important;
+    background: @icon-nav-4 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(4) {
-    background: @icon-nav-3 top left no-repeat !important;
+    background: @icon-nav-3 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
 
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(5) {
-    background: @icon-nav-2 top left no-repeat !important;
+    background: @icon-nav-2 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
 }
@@ -1296,7 +1345,8 @@ ul.footer-category-list {
 ------- BANNER TESTATA HOME -------
 ----------------------------------*/
 .tp-caption.very_big_white {
-    background-color: @bg-testata-opacity;
+    background: linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
+    /*background-color: @bg-testata-opacity;*/
     padding: 20px 20px;
 }
 
@@ -1309,11 +1359,14 @@ ul.footer-category-list {
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
     line-height: normal;
     white-space: nowrap;
+    margin-bottom: 10px !important;
+    padding-bottom: 35px !important;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background-size: 135px 21px;
 }
 /*Start svg decorazione banner-top-home*/
-.bigtext {
+/*.bigtext {
     &::after {
-        /*margin-top: 150px;*/
         content: "";
         position: absolute;
         background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{white-color}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat;
@@ -1323,7 +1376,7 @@ ul.footer-category-list {
         margin-left: -67px;
         bottom: -0.3rem;
     }
-}
+}*/
 /*End svg decorazione banner-top-home*/
 
 .smalltext {
@@ -2385,14 +2438,14 @@ select.form-control:not([size]):not([multiple]) {
 
     .menuzord-menu a:hover {
         color: @secondary-color;
-        font-weight: @menu-hover-weight !important;
+        /*font-weight: @menu-hover-weight !important;*/
         padding: 8px 14px !important;
     }
 
     .menuzord.white .menuzord-menu > li.active > a,
     .menuzord.white .menuzord-menu > li:hover > a,
     .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
-        font-weight: @menu-hover-weight !important;
+        /*font-weight: @menu-hover-weight !important;*/
     }
 
     .menuzord-menu ul.dropdown li a, .menuzord-menu ul.dropdown li a:before,

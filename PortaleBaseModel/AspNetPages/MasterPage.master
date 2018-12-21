@@ -253,11 +253,13 @@
                     <%= CreaLinkTipologie(3,3) %>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
-                        <ul class="dropdown">
+                        <%--<a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>--%>
+                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %> 
+                        <ul class="dropdown visible-ok">
                             <%--<%= CreaLinkPaginastatica(4) %>--%>
                             <%--<%= CreaLinkTipologie(1,1) %>--%>
-                            <%= CreaLinkCategorie("rif000001") %>
+                            <%--<%= CreaLinkCategorie("rif000001") %>--%>
+                            <%= CreaLinkCategorieNested("rif000001","",true) %>
                         </ul>
                     </li>
                     <%-- Staff --%>
