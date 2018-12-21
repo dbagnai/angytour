@@ -931,7 +931,7 @@ public partial class _webdetail : CommonPage
             {
                 if (item != null && !string.IsNullOrEmpty(item.Descrizione.ToLower().Trim()))
                 {
-                    Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "categorie " + item.Descrizione.ToLower().Trim());
+                    Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + item.Descrizione.ToLower().Trim());
                     if (contentpertipologia != null && contentpertipologia.Id != 0)
                     {
                         Tabrif laddink = new Tabrif();

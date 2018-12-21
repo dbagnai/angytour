@@ -453,7 +453,7 @@ function addcontentbindonserver(controlid) {
 
                             var newhtml = $(resparsed["html"]);
                             //Prendo il pager e lo appendo dopo il conteniteore generale
-                            var newpager = ((newhtml).wrap('<p>').parent().find("#" + containerid + "Pager")).outerHTML()
+                            var newpager = ((newhtml).wrap('<p>').parent().find("#" + containerid + "Pager")).outerHTML();
                             $("#" + containerid).after(newpager);
                             //inseriscso l'html renderizzato nella lista ul
                             var nuovili = ((newhtml).find("#" + controlid)).html();
