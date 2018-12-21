@@ -12,92 +12,87 @@
         </div>
     </div>
 </section>
-
 <div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
 <div class="ui-15 bg-light-color" runat="server" id="divContactForm" clientidmode="static" visible="false">
     <div class="container">
         <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-sm-8 tx-dark-color">
-                    </div>
+                    <div class="col-12 col-sm-8 tx-dark-color"></div>
                 </div>
             </div>
         </section>
         <!-- Ui Form -->
         <div class="ui-form">
             <!-- Heading -->
-            <div class="row justify-content-center" style="padding-right: inherit">
+            <div class="row justify-content-center" style="padding-right: inherit;">
                 <div class="col-md-8 col-md-offset-2" id="formbtniscrivi">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="ui-input">
-                                <!-- Input Box -->
-                                <input class="form-control" type="text" name="uname" placeholder="Nome ristorante" runat="server" id="nomebtniscrivi" />
-                                <label class="ui-icon"><i class="fa fa-user"></i></label>
-                            </div>
+                            <div class="ui-input"><!-- Input Box --> <input class="form-control" type="text" id="nomebtniscrivi" name="uname" placeholder="Nome ristorante" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="ui-input">
-                                <input class="form-control" type="text" name="unname" placeholder="Tipologia cucina .." runat="server" id="tipologiabtniscrivi" />
-                                <label class="ui-icon"><i class="fa fa-utensils"></i></label>
-                            </div>
+                            <div class="ui-input"><input class="form-control" type="text" id="tipologiabtniscrivi" name="unname" placeholder="Tipologia cucina .." /> <label class="ui-icon"><i class="fa fa-utensils"></i></label></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="ui-input">
-                                <input class="form-control" type="text" name="unname" placeholder="Telefono" runat="server" id="telefonobtniscrivi" />
-                                <label class="ui-icon"><i class="fa fa-phone"></i></label>
-                            </div>
+                            <div class="ui-input"><!-- Input Box --> <input class="form-control" type="text" id="prezzobtniscrivi" name="uname" placeholder="Prezzo medio" /> <label class="ui-icon"><i class="fa fa-money-bill"></i></label></div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="ui-input">
-                                <input type="text" class="form-control" name="unname" placeholder="Email" runat="server" id="emailbtniscrivi" />
-                                <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
-                            </div>
+                            <div class="ui-input"><input class="form-control" type="text" id="chiusurabtniscrivi" name="unname" placeholder="Giorno chiusura .." /> <label class="ui-icon"><i class="fa fa-calendar"></i></label></div>
                         </div>
                     </div>
-                    <div class="ui-input">
-                        <textarea class="form-control" rows="2" cols="5" name="q" placeholder="Indirizzo ristorante .." runat="server" id="indirizzobtniscrivi"></textarea>
-                        <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label>
-
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="telefonobtniscrivi" name="unname" placeholder="Telefono" /> <label class="ui-icon"><i class="fa fa-phone"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="emailbtniscrivi" name="unname" placeholder="Email" /> <label class="ui-icon"><i class="fa fa-envelope-o"></i></label></div>
+                        </div>
                     </div>
-                    <div class="ui-input">
-                        <textarea class="form-control" rows="4" cols="5" name="q" placeholder="Descrizione ristorante .." runat="server" id="descrizionebtniscrivi"></textarea>
-                        <label class="ui-icon"><i class="fa fa-comments"></i></label>
-                    </div>
+                    <div class="ui-input"><textarea class="form-control" rows="2" cols="5" name="q" placeholder="Indirizzo ristorante .." runat="server" id="indirizzobtniscrivi"></textarea> <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                    <div class="ui-input"><textarea class="form-control" rows="4" cols="5" name="q" placeholder="Descrizione ristorante .." runat="server" id="descrizionebtniscrivi"></textarea> <label class="ui-icon"><i class="fa fa-comments"></i></label></div>
                     <div class="ui-input text-center">
-                        <div class="btn btn-primary" style="width: 200px">
-                            <a style="color: #fff; font-size: 0.7rem;display:block" href="#divContactForm" id="uploaddoc" onclick="UploadFiles(this)">Allega Foto</a><br />
-                        </div><br />
-                        <div style="font-weight: 300; font-size: 1.4rem; color: red" class="w-100" ID="outputbtnuploaddoccontrol"></div><br />
-                        <input type="file" name="uploaddoccontrol" id="uploaddoccontrol" multiple="multiple" onchange="fileselected(this)" Style="visibility: hidden;" />
+                        <div class="ui-input text-center">
+                            <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
+                        </div>
+                        <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddoc" onclick="UploadFiles(this)">Allega Foto</a></div>
+                        <br />
+                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddoccontrol"></div>
+                        <br /> <input style="visibility: hidden;" type="file" id="uploaddoccontrol" name="uploaddoccontrol" multiple="multiple" onchange="fileselected(this)" />
+                    </div>
 
-                    </div>
-                    <div class="ui-input text-center">
-                        <button id="btniscrivi" type="button" class="btn btn-lg btn-block" style="width: 200px" onclick="ConfirmValidationForm(this);">Invia</button>
 
+
+                    <div class="row" style="text-align: left">
+                        <div class="col-sm-12">
+                            <div class="ui-input">
+                                <b>Formula di acquisizione del consenso dell'interessato</b><br>
+                                <a target="_blank" style="color:#09a8f6" href="/it/web/privacy-policy-6">Informativa Privacy ex art. 13 Reg. (UE) 2016/679</a><a>
+                                    <br />
+                                    L'interessato acquisite le  informazioni dal Titolare, presta il consenso per le finalità sotto riportate.<br>
+                                    <b>I campi contrassegnati con l'asterisco sono obbligatori.</b><br>
+                                </a>
+                            </div>
+                            <div class="checkbox" style="margin-bottom: 20px"><label> <input type="checkbox" id="chkprivacybtniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per accedere al servizio richiesto * </label></div>
+                            <div class="checkbox" style="margin-bottom: 20px"><label> <input type="checkbox" id="chkprivacy1btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attività di marketing diretto ed indiretto e ricerche di mercato </label></div>
+                            <div class="checkbox" style="margin-bottom: 20px"><label> <input type="checkbox" id="chkprivacy2btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attività di profilazione al fine di migliorare l'offerta di prodotti e servizi  </label></div>
+                        </div>
                     </div>
-                    <div class="checkbox text-center">
-                        <label>
-                            <input type="checkbox" ID="chkprivacybtniscrivi" />
-                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            Acconsento al trattamento dei miei dati personali <a target="_blank" href="/I/web/privacy-policy-6">(Leggi Informativa Privacy)</a>
-                        </label>
-                    </div>
-                    <div class="ui-input text-center">
-                        <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
-                    </div>
+
+                    <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationForm(this);" style="width: 200px;" type="button" id="btniscrivi">Invia</button></div>
+
+
+
                 </div>
-                <div style="font-weight: 300; font-size: 1.6rem; color: red" id="divoutputbtniscrivi">
-                    <span ID="outputbtniscrivi"></span>
-                </div>
+                <div style="font-weight: 300; font-size: 1.6rem; color: red;" id="divoutputbtniscrivi"></div>
             </div>
         </div>
     </div>
 </div>
 <script>
+    // <![CDATA[
     var localmessage = {};
     localmessage.privacy = 'Spuntare la casella per autorizzazione trattamento dati personali per procedere.';
     localmessage.captcha = "Selezionare la casella Captcha di verifica per procedere con l'inserimento.";
@@ -176,7 +171,12 @@
         contactdatas.telefono = $("[id$='telefono" + (btnid).id + "']").val();
         contactdatas.descrizione = $("[id$='descrizione" + (btnid).id + "']").val();
         contactdatas.indirizzo = $("[id$='indirizzo" + (btnid).id + "']").val();
+        contactdatas.prezzo = $("[id$='prezzo" + (btnid).id + "']").val();
+        contactdatas.chiusura = $("[id$='chiusura" + (btnid).id + "']").val();
         contactdatas.tipologia = localmessage.tipologia;
+        contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
+        contactdatas.consenso1 = $("[id$='chkprivacy1" + (btnid).id + "']")[0].checked;
+        contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
         contactdatas.lingua = lng;
         contactdatas.tipo = "post";
         if (contactdatas.titolo == '' || contactdatas.email == '' ||
@@ -385,6 +385,4 @@
     //        }
     //    });
     //}
-
-
-</script>
+// ]]></script>

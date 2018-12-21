@@ -19,6 +19,9 @@ public class jformdatapost
     public string indirizzo { set; get; }
     public string email { set; get; }
     public string telefono { set; get; }
+    public string consenso { set; get; }
+    public string consenso1 { set; get; }
+    public string consenso2 { set; get; }
 }
 
 public class Filehnd : IHttpHandler, IRequiresSessionState
@@ -105,7 +108,17 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         result = "";
 
                         //INVIAMO LA MAIL DI AVVISO INSERIMENTO
+
                         string testomail = "Verifica e controlla la richiesta di inserimento per il ristorante : " + itemid;
+
+                        //INVIAMO LA MAIL DI AVVISO INSERIMENTO
+                        string testomail = "Verifica e controlla la richiesta di inserimento per il ristorante : " + itemid + "<br/>";
+                        testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati per la pubblicazione sul portale<br/>";
+                        if (jdata.consenso1 == "true")
+                            testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati Per attività di marketing diretto ed indiretto e ricerche di mercato<br/>";
+                        if (jdata.consenso2 == "true")
+                            testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati Per attività di profilazione al fine di migliorare l'offerta di prodotti e servizi<br/>";
+
                         string soggetto = "Richiesta inserimento ristorante " + html.Convert(jdata.titolo);
                         string destinatario = ConfigManagement.ReadKey("Nome");
                         string destinatarioemail = ConfigManagement.ReadKey("Email");

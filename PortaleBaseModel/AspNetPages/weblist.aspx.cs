@@ -770,13 +770,13 @@ public partial class AspNetPages_weblist : CommonPage
         {
             htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
             //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
-            switch (Lingua)
+            switch (Lingua.ToLower())
             {
-                case "GB":
+                case "gb":
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
-                case "RU":
+                case "ru":
                     customdesc = content.CustomdescRU;
                     customtitle = content.CustomtitleRU;
                     break;
@@ -818,7 +818,7 @@ public partial class AspNetPages_weblist : CommonPage
         {
             if (sezione != null && !string.IsNullOrEmpty(sezione.Descrizione.ToLower().Trim()))
             {
-                Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "categorie " + sezione.Descrizione.ToLower().Trim());
+                Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + sezione.Descrizione.ToLower().Trim());
                 if (contentpertipologia != null && contentpertipologia.Id != 0)
                 {
                     Tabrif laddink = new Tabrif();
