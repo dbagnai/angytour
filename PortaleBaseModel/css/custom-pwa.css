@@ -512,6 +512,9 @@ h1 span:nth-child(1).mbr-section-title,
         left: 50%;
         margin-left: -67px;
     }*/
+  /*&.noafter::after {
+        display: none;
+    }*/
   /*End svg decorazione sotto il titolo*/
 }
 .mbr-section-title.noafter,
@@ -519,11 +522,6 @@ a .mbr-section-title.noafter,
 .title-block.noafter {
   background: none;
   background-size: 0;
-}
-.mbr-section-title.noafter::after,
-a .mbr-section-title.noafter::after,
-.title-block.noafter::after {
-  display: none;
 }
 h3.mbr-section-title.display-5.bg-dark-color.noafter {
   letter-spacing: 1px !important;
@@ -2708,6 +2706,9 @@ button.js-roundedpush:hover {
   background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
   bottom: 0;
   position: absolute;
+}
+.breadcrumbs > ul > li {
+  padding: 5px 0;
 }
 /*----------------------------------
 /////////| COLORI BLOCCHI |/////////
