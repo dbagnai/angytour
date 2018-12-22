@@ -814,45 +814,106 @@ public partial class AspNetPages_weblist : CommonPage
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         List<Tabrif> links = GeneraBreadcrumbPath(true);
-        if (Tipologia == "rif000001") //Pagina copertina presente
-        {
-            if (sezione != null && !string.IsNullOrEmpty(sezione.Descrizione.ToLower().Trim()))
-            {
-                Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + sezione.Descrizione.ToLower().Trim());
-                if (contentpertipologia != null && contentpertipologia.Id != 0)
-                {
-                    Tabrif laddink = new Tabrif();
-                    laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000");
-                    laddink.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
-                    links.Add(laddink);
-                }
-            }
+        //links.Add(actualpagelink); //aggiungo la pagina attuale
 
-            //Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
-            //if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
-            //{
-            //    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
-            //    if (contentpercategoria != null && contentpercategoria.Id != 0)
-            //    {
-            //        Tabrif laddink = new Tabrif();
-            //        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
-            //        laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
-            //        links.Add(laddink);
-            //    }
-            //}
-        }
-
-        links.Add(actualpagelink);
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
     }
     private List<Tabrif> GeneraBreadcrumbPath(bool usacategoria)
     {
         List<Tabrif> links = new List<Tabrif>();
-        Tabrif link = new Tabrif();
+        Tabrif link = null;
+        Tabrif link1 = null;
+        Tabrif link2 = null;
+        Tabrif link3 = null;
+        string linkurl = "";
+
+        link = new Tabrif();
         link.Campo1 = ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome"));
         link.Campo2 = references.ResMan("Common", Lingua, "testoHome");
         links.Add(link);
+        TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == Tipologia); });
+        if (item != null)
+        {
+            //1 livello tipologia
+            linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "");
+            link1 = new Tabrif();
+            link1.Campo1 = linkurl;
+            link1.Campo2 = item.Descrizione;
+
+            //2 livello categoria
+            if (!string.IsNullOrEmpty(Categoria))
+            {
+                Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
+                if (catselected != null)
+                {
+                    linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(catselected.Descrizione), "", Tipologia, Categoria, "");
+                    link2 = new Tabrif();
+                    link2.Campo1 = linkurl;
+                    link2.Campo2 = catselected.Descrizione;
+                }
+            }
+
+            //3 livello categoria 2 livello
+            if (!string.IsNullOrEmpty(Categoria2liv))
+            {
+                SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+                if (categoriasprodotto != null)
+                {
+                    linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(categoriasprodotto.Descrizione), "", Tipologia, Categoria, Categoria2liv);
+                    link3 = new Tabrif();
+                    link3.Campo1 = linkurl;
+                    link3.Campo2 = categoriasprodotto.Descrizione;
+                }
+            }
+
+            //Customizzazione pagina copertina di navigazione sezione con pagine statiche ( HOME DI SEZIONE PERSONALIZZATE )
+            if (Tipologia == "rif000001")
+            {
+                //1 livello
+                if (item != null && !string.IsNullOrEmpty(item.Descrizione.ToLower().Trim()))
+                {
+                    Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + item.Descrizione.ToLower().Trim());
+                    if (contentpertipologia != null && contentpertipologia.Id != 0)
+                    {
+                        link1 = new Tabrif();
+                        link1.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000"); ;
+                        link1.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
+                    }
+                }
+
+                //2livello
+                Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
+                if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
+                {
+                    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + catcopertina.Descrizione.ToLower().Trim());
+                    if (contentpercategoria != null && contentpercategoria.Id != 0)
+                    {
+                        link2 = new Tabrif();
+                        link2.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
+                        link2.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
+                    }
+                }
+
+
+                //3livello
+                SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+                if (categoriasprodotto != null && !string.IsNullOrEmpty((categoriasprodotto.Descrizione.ToLower().Trim())))
+                {
+                    Contenuti contentpersottocategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "home " + categoriasprodotto.Descrizione.ToLower().Trim());
+                    if (contentpersottocategoria != null && contentpersottocategoria.Id != 0)
+                    {
+                        link3 = new Tabrif();
+                        link3.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpersottocategoria.TitolobyLingua(Lingua)), contentpersottocategoria.Id.ToString(), "con001000");
+                        link3.Campo2 = contentpersottocategoria.TitolobyLingua(Lingua);
+                    }
+                }
+            }
+        }
+
+        if (link1 != null) links.Add(link1);
+        if (link2 != null) links.Add(link2);
+        if (link3 != null) links.Add(link3);
 
         return links;
     }
