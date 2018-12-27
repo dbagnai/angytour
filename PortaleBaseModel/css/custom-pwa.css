@@ -2710,6 +2710,28 @@ button.js-roundedpush:hover {
 .breadcrumbs > ul > li {
   padding: 5px 0;
 }
+/* ---------------------------------
+---- TEMPLATE - HOME FULLSCREEN ----
+--------------------------------- */
+/*.fixedtop {
+    display: none;
+}
+.fixednav {
+    top: 0;
+    background-color: transparent;
+}
+.bckColor2 {
+    -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+    -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+    box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+}
+.headerspacer {
+     padding-top: 0; 
+}
+#divContainerb1 {
+    background-color: #eee;
+    height: calc(100vh - 0px) !important;
+}*/
 /*----------------------------------
 /////////| COLORI BLOCCHI |/////////
 ----------------------------------*/
