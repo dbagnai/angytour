@@ -274,10 +274,10 @@ public partial class AspNetPages_weblist : CommonPage
         string cattipo = Tipologia;
         ClientScriptManager cs = Page.ClientScript;
         Literal lit = null;
-        ModificaFiltroJS();
+        //ModificaFiltroJS();
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         AssociaDatiSocial();
-
+        ModificaFiltroJS();
         switch (Tipologia)
         {
             case "rif000001": //Simil prodotti x app
@@ -813,7 +813,10 @@ public partial class AspNetPages_weblist : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-        List<Tabrif> links = GeneraBreadcrumbPath(true);
+        List<Tabrif> links = new List<Tabrif>();
+        bool usacategorie = true;
+        //if (Tipologia == "rif000001") usacategorie = false;
+        links = GeneraBreadcrumbPath(usacategorie);
         //links.Add(actualpagelink); //aggiungo la pagina attuale
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
@@ -842,7 +845,7 @@ public partial class AspNetPages_weblist : CommonPage
             link1.Campo2 = item.Descrizione;
 
             //2 livello categoria
-            if (!string.IsNullOrEmpty(Categoria))
+            if (!string.IsNullOrEmpty(Categoria) && usacategoria)
             {
                 Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
                 if (catselected != null)
@@ -855,7 +858,7 @@ public partial class AspNetPages_weblist : CommonPage
             }
 
             //3 livello categoria 2 livello
-            if (!string.IsNullOrEmpty(Categoria2liv))
+            if (!string.IsNullOrEmpty(Categoria2liv) && usacategoria)
             {
                 SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
                 if (categoriasprodotto != null)
@@ -868,7 +871,8 @@ public partial class AspNetPages_weblist : CommonPage
             }
 
             //Customizzazione pagina copertina di navigazione sezione con pagine statiche ( HOME DI SEZIONE PERSONALIZZATE )
-            if (Tipologia == "rif000001")
+            if (Tipologia == "rif000001" || Tipologia == "rif000002")
+            //if (Tipologia == "rif000003" || Tipologia == "rif000002")
             {
                 //1 livello
                 if (item != null && !string.IsNullOrEmpty(item.Descrizione.ToLower().Trim()))
@@ -949,10 +953,34 @@ public partial class AspNetPages_weblist : CommonPage
         }
         else
         {
+            //if (objvalue.ContainsKey("categoria"))
+            //{
+            //    Categoria = objvalue["categoria"];
+            //}
+
             if (objvalue.ContainsKey("ddlCategoria"))
             {
                 objvalue["categoria"] = objvalue["ddlCategoria"];
-                Categoria = objvalue["ddlCategoria"];
+                //Categoria = objvalue["ddlCategoria"];
+            }
+        }
+
+        if (Categoria2liv != "")
+        {
+            objvalue["categoria2Liv"] = Categoria2liv;
+            objvalue["ddlCategoria2liv"] = Categoria2liv;
+        }
+        else
+        {
+            //if (objvalue.ContainsKey("categoria2Liv"))
+            //{
+            //    Categoria2liv = objvalue["categoria2Liv"];
+            //}
+
+            if (objvalue.ContainsKey("ddlCategoria2liv"))
+            {
+                objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
+                // Categoria2liv = objvalue["ddlCategoria2liv"];
             }
         }
 

@@ -795,7 +795,7 @@ namespace WelcomeLibrary.UF
                                         //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
                                         //aggiungo i parametri dalla sessione se presenti
                                         if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
                                     }
                             }
                         }
@@ -1183,7 +1183,7 @@ namespace WelcomeLibrary.UF
                                         //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
                                         //aggiungo i parametri dalla sessione se presenti
                                         if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
                                     }
                             }
                         }
@@ -1621,7 +1621,7 @@ namespace WelcomeLibrary.UF
                                         //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
                                         //aggiungo i parametri dalla sessione se presenti
                                         if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
                                     }
                             }
                         }

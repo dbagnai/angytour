@@ -29,11 +29,5 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 </asp:Content>
-<asp:Content ID="Content8" ContentPlaceHolderID="ContentPlaceHolderJs" runat="Server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-        });
-    </script>
-</asp:Content>
-
+ 
 

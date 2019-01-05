@@ -159,20 +159,22 @@ public partial class _webdetail : CommonPage
             }
             if (item != null)
             {
-                Categoria = item.CodiceCategoria;
-                if (Categoria != "")
-                    Session["Categoria"] = Categoria;
-                Categoria2liv = item.CodiceCategoria2Liv;
-                if (Categoria2liv != "")
-                    Session["Categoria2liv"] = Categoria2liv;
                 CodiceTipologia = item.CodiceTipologia;
                 if (CodiceTipologia != "")
                     Session["Tipologia"] = CodiceTipologia;
+
+                Categoria = item.CodiceCategoria;
+                if (Categoria != "")// && CodiceTipologia != "rif000003")
+                    Session["Categoria"] = Categoria;
+                Categoria2liv = item.CodiceCategoria2Liv;
+                if (Categoria2liv != "")// && CodiceTipologia != "rif000003")
+                    Session["Categoria2liv"] = Categoria2liv;
+
                 AssociaDatiSocial(item);
+                SettaTestoIniziale();
+                SettaVisualizzazione(item);
             }
             //CaricaControlliJS();
-            SettaTestoIniziale();
-            SettaVisualizzazione(item);
         }
         catch (Exception err)
         {
@@ -180,54 +182,7 @@ public partial class _webdetail : CommonPage
         }
     }
 
-#if false
-    public void CaricaControlliJS()
-    {
-        ClientScriptManager cs = Page.ClientScript;
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-        //Carico la galleria in masterpage corretta
-        string controllistBanHead = "";
-        string sectionforbanner = CodiceTipologia;
-        if (!string.IsNullOrEmpty(Categoria))
-            sectionforbanner += "-" + Categoria;
-
-        if (string.IsNullOrEmpty(CodiceTipologia))
-        {
-            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,1000);";
-
-            sb.Clear();
-            sb.Append("(function wait() {");
-            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
-            sb.Append("    {");
-            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','header-home',false,2000,1000);");
-            sb.Append(" }");
-            sb.Append("   else  {");
-            sb.Append("  setTimeout(wait, 50);");
-            sb.Append("  }  })();");
-        }
-        else
-        {
-            //controllistBanHead = "injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + sectionforbanner + "',false,2000,1000);";
-
-            sb.Clear();
-            sb.Append("(function wait() {");
-            sb.Append("  if (typeof injectSliderAndLoadBanner === \"function\")");
-            sb.Append("    {");
-            sb.Append("injectSliderAndLoadBanner('sliderBanner.html','divSliderBanner', 'bannerslider1', 1, 2, false, '','','','TBL_BANNERS_GENERALE','" + sectionforbanner + "',false,2000,1000);");
-            sb.Append(" }");
-            sb.Append("   else  {");
-            sb.Append("  setTimeout(wait, 50);");
-            sb.Append("  }  })();");
-        }
-
-        if (!cs.IsStartupScriptRegistered(this.GetType(), ""))
-        {
-            cs.RegisterStartupScript(this.GetType(), "controllistBanHead", sb.ToString(), true);
-        }
-    }
-
-#endif
     private void RegistraStatistichePagina()
     {
         // throw new NotImplementedException();
@@ -319,26 +274,11 @@ public partial class _webdetail : CommonPage
             //}
 
             string htmlPage = "";
-            if (references.ResMan("Common", Lingua, "testo" + CodiceTipologia) != null)
+            if (references.ResMan("Common", Lingua, "testo" + item.CodiceTipologia) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + CodiceTipologia).ToString();
-            if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
-                htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
+            if (references.ResMan("Common", Lingua, "testo" + item.CodiceCategoria) != null)
+                htmlPage = references.ResMan("Common", Lingua, "testo" + item.CodiceCategoria).ToString();
 
-#if false
-            string strigaperricerca = "";
-            strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
-            Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            if (content == null && !string.IsNullOrEmpty(Categoria))
-            {
-                strigaperricerca = "/" + CodiceTipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
-                content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            }
-            if (content == null && !string.IsNullOrEmpty(titolopagina))
-            {
-                strigaperricerca = "/" + CodiceTipologia + "/" + CleanUrl(titolopagina); //Request.Url.AbsolutePath
-                content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            }
-#endif
             Contenuti content = null;
 
             string denominazione = item.DenominazionebyLingua(Lingua);
@@ -885,7 +825,11 @@ public partial class _webdetail : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-        List<Tabrif> links = GeneraBreadcrumbPath(true);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+        List<Tabrif> links = new List<Tabrif>();
+        bool usacategorie = true;
+        //if (CodiceTipologia == "rif000003") usacategorie = false;
+        links = GeneraBreadcrumbPath(usacategorie);
         links.Add(actualpagelink);
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
@@ -915,7 +859,7 @@ public partial class _webdetail : CommonPage
             link1.Campo2 = item.Descrizione;
 
             //2 livello categoria
-            if (!string.IsNullOrEmpty(Categoria))
+            if (!string.IsNullOrEmpty(Categoria) && usacategoria)
             {
                 Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == CodiceTipologia && tmp.CodiceProdotto == Categoria)); });
                 if (catselected != null)
@@ -928,7 +872,7 @@ public partial class _webdetail : CommonPage
             }
 
             //3 livello categoria 2 livello
-            if (!string.IsNullOrEmpty(Categoria2liv))
+            if (!string.IsNullOrEmpty(Categoria2liv) && usacategoria)
             {
                 SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
                 if (categoriasprodotto != null)
@@ -941,7 +885,8 @@ public partial class _webdetail : CommonPage
             }
 
             //Customizzazione pagina copertina di navigazione sezione con pagine statiche ( HOME DI SEZIONE PERSONALIZZATE )
-            if (CodiceTipologia == "rif000001")
+            //if (CodiceTipologia == "rif000003" || CodiceTipologia == "rif000002")
+            if (CodiceTipologia == "rif000001" || CodiceTipologia == "rif000002")
             {
                 //1 livello
                 if (item != null && !string.IsNullOrEmpty(item.Descrizione.ToLower().Trim()))
@@ -990,7 +935,6 @@ public partial class _webdetail : CommonPage
 
         return links;
     }
-
     private void Caricalinksrubriche(string cattipo)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -1054,5 +998,5 @@ public partial class _webdetail : CommonPage
 
 
 
- 
+
 }

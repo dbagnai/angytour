@@ -121,7 +121,7 @@ public class CommonPage : Page
         richiesta.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
 
     }
-    public static string BreadcrumbConstruction(List<Tabrif> links)
+    public static string BreadcrumbConstruction(List<Tabrif> links, bool resetsession = true)
     {
         //Creo la struttura annidata dei link
         StringBuilder sb = new StringBuilder();
@@ -129,7 +129,8 @@ public class CommonPage : Page
         {
             sb.Append("<li>");
             sb.Append("<a");
-            //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            if (resetsession)
+                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
             sb.Append("   href=\"" + l.Campo1 + "\">");
             sb.Append(l.Campo2);
             sb.Append("</a> ");
@@ -138,6 +139,8 @@ public class CommonPage : Page
         }
         return sb.ToString();
     }
+
+
 
 
     public static string ControlloDotDot(object NomeAnteprima, string classe)

@@ -142,7 +142,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 ResizeWidth = 800;
                 ResizeHeight = 800;
             }
-
+            if (Sezione.ToLower().Contains("banner-spot"))
+            {
+                ResizeWidth = 600;//360
+                ResizeHeight = 400;//280
+            }
 
             if (Sezione.ToLower().Contains("banner-halfstriscia-"))
             {

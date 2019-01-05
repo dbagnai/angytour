@@ -827,6 +827,144 @@ function GestioneDdlGeo(idcaller, lng, seln, selr, selp, selc, idddln, idddlr, i
 
 }
 /*-------------------fine gestione valori GEO --------------------------------------------------------*/
+/*-------------------Gestione valori RIFERIMENTO categorie/sottocategorie --------------------------------------------------------*/
+
+
+
+function combinedselect(callerid, command, lng, val1, val2, val3, val4, val5, id1, id2, id3, id4, id5) {
+    var id1 = id1 || "ddlAtcgmp1";
+    var id2 = id2 || "ddlAtcgmp2";
+    var id3 = id3 || "ddlAtcgmp3";
+    var id4 = id4 || "ddlAtcgmp4";
+    var id5 = id5 || "ddlAtcgmp5";
+
+    if (command == 'all') {
+        //Per startup set
+        if ($('#' + id1).length != 0)
+            FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind").toLowerCase()], '', val1, "");
+        if ($('#' + id2).length != 0)
+            FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind").toLowerCase()], '', val2, val1);
+        if ($('#' + id3).length != 0)
+            FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind").toLowerCase()], '', val3, val2);
+        if ($('#' + id4).length != 0)
+            FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind").toLowerCase()], '', val4, val3);
+        if ($('#' + id5).length != 0)
+            FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind").toLowerCase()], '', val5, val4);
+    }
+    else {
+        var flagcascade = false;
+        if ($('#' + id1) != null && $('#' + id1).length > 0)
+            if (callerid == id1) {
+                var actval = $('#' + id1)[0].value;
+                if (flagcascade) actval = '';
+                FillAndSelectRef($('#' + id1).attr("mybind"), lng, id1, baseresources[lng]["select" + $('#' + id1).attr("mybind").toLowerCase()], '', actval, "");
+                flagcascade = true;
+            }
+        if ($('#' + id2) != null && $('#' + id2).length > 0)
+            if (callerid == id2 || flagcascade) {
+                var actval = $('#' + id2)[0].value;
+                if (flagcascade) actval = '';
+                FillAndSelectRef($('#' + id2).attr("mybind"), lng, id2, baseresources[lng]["select" + $('#' + id2).attr("mybind").toLowerCase()], '', actval, $('#' + id1)[0].value);
+                flagcascade = true;
+            }
+        if ($('#' + id3) != null && $('#' + id3).length > 0)
+            if (callerid == id3 || flagcascade) {
+                var actval = $('#' + id3)[0].value;
+                if (flagcascade) actval = '';
+                FillAndSelectRef($('#' + id3).attr("mybind"), lng, id3, baseresources[lng]["select" + $('#' + id3).attr("mybind").toLowerCase()], '', actval, $('#' + id2)[0].value);
+                flagcascade = true;
+            }
+        if ($('#' + id4) != null && $('#' + id4).length > 0)
+            if (callerid == id4 || flagcascade) {
+                var actval = $('#' + id4)[0].value;
+                if (flagcascade) actval = '';
+                FillAndSelectRef($('#' + id4).attr("mybind"), lng, id4, baseresources[lng]["select" + $('#' + id4).attr("mybind").toLowerCase()], '', actval, $('#' + id3)[0].value);
+                flagcascade = true;
+            }
+        if ($('#' + id5) != null && $('#' + id5).length > 0)
+            if (callerid == id5 || flagcascade) {
+                var actval = $('#' + id5)[0].value;
+                if (flagcascade) actval = '';
+                FillAndSelectRef($('#' + id5).attr("mybind"), lng, id5, baseresources[lng]["select" + $('#' + id5).attr("mybind").toLowerCase()], '', actval, $('#' + id4)[0].value);
+                flagcascade = true;
+            }
+    }
+}
+
+function FillAndSelectRef(tableselector, lng, ddlid, selecttext, selectvalue, selectedvalue, filter) {
+    var tableselector = tableselector || "";
+    var result = "";
+    var levelfilter = 0;
+    switch (tableselector) {
+        case "Caratteristica1":
+            result = JSONcar1;
+            break;
+        case "Caratteristica2":
+            result = JSONcar2;
+            break;
+        case "Caratteristica3":
+            result = JSONcar3;
+            break;
+        case "categoria":
+            result = JSONcategorie;
+            break;
+        case "categoria2Liv":
+            result = JSONcategorie2liv;
+            break;
+        case "Regione":
+            result = JSONregioni;
+            break;
+        //case "dettaglimetrature":
+        //    result = JSONrefmetrature;
+        //    break;
+        //case "dettagliprezzi":
+        //    result = JSONrefprezzi;
+        //    break;
+        //case "dettaglicondizione":
+        //    result = JSONrefcondizione;
+        //    break;
+        //case "dettaglitipocontratto":
+        //    result = JSONreftipocontratto;
+        //    break;
+        //case "dettaglitiporisorse":
+        //    result = JSONreftiporisorse;
+        //    break;
+        case "":
+            break;
+    }
+    var converteddict = convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
+}
+
+function convertToDictionaryandFill(data, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter) {
+    var lng = lng || "I";
+    var levelfilter = levelfilter || 0;
+    //console.log(data);
+    var dictobjjs = {};
+
+    for (var j = 0; j < data.length; j++) {
+        var codice = data[j].Codice;
+        var descrizione = data[j].Campo1;
+
+        var filtercode = "";
+        if (data[j] != null && data[j].hasOwnProperty("Campo2"))
+            filtercode = data[j].Campo2;
+        if (filtercode != "" && filter != null) {
+            if (filtercode == filter)
+                dictobjjs[codice] = descrizione;
+        }
+        else
+            dictobjjs[codice] = descrizione;
+    }
+    //console.log(dictobjjs);
+    fillDDL(ddlid, JSON.stringify(dictobjjs), selecttext, selectvalue, selectedvalue);
+    return JSON.stringify(dictobjjs);
+}
+
+
+
+/*-------------------fine gestione valori RIFERIMENTO categorie/sottocategorie  --------------------------------------------------------*/
+
+/* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
 /* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
