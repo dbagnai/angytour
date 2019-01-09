@@ -316,7 +316,7 @@ public partial class _webdetail : CommonPage
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-9";
+                column2.Attributes["class"] = "col-12 col-xl-9";
                 column3.Visible = false;
                 divSearch.Visible = false;
                 //ContaArticoliPerperiodo(CodiceTipologia);

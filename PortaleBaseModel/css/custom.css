@@ -82,6 +82,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /**/
 /**/
 /*----------------------------------
+///////| PATTERN BACKGROUND |///////
+----------------------------------*/
+/**/
+/**/
+/*----------------------------------
 ///////////| SVG ICON |/////////////
 ----------------------------------*/
 /*@import "custom-bicromo.less";*/
@@ -108,6 +113,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-light-color {
   background-color: #ebf6f6 !important;
+  background-image: url(/images/pattern/ricicled5.png);
+  background-size: 15%;
 }
 .bg-medium-color {
   background-color: #333333 !important;
@@ -219,6 +226,8 @@ a:hover {
   width: 100%;
   font-size: 0.8rem;
   font-weight: normal;
+  background-image: url(/images/pattern/ricicled4.png);
+  background-size: 30%;
 }
 .fixedtop .form-control,
 .form-control:focus {
@@ -297,7 +306,7 @@ i .fa {
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
 .menuzord.white .menuzord-menu > li > a:active {
   color: #077777 !important;
-  font-weight: 600;
+  /*font-weight: @menu-hover-weight;*/
   background: none;
 }
 .menuzord.white .showhide em {
@@ -340,10 +349,10 @@ i .fa {
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
   .menuzord-menu li.catalogo-menu .indicator {
-    bottom: -28px;
+    bottom: -37px;
     position: absolute;
-    font-size: 25px !important;
-    margin-left: calc(-50% + 7px);
+    font-size: 35px !important;
+    margin-left: calc(-50% + 0px);
     color: #f3c649 !important;
   }
   .menuzord-menu li.catalogo-menu .indicator:before {
@@ -366,6 +375,8 @@ i .fa {
     opacity: 1 !important;
     border: none;
     padding: 0px 55px;
+    background-image: url(/images/pattern/ricicled4.png);
+    background-size: 20%;
   }
   .visible-ok {
     display: block !important;
@@ -422,28 +433,29 @@ i .fa {
     content: "\f107";
   }
   .menuzord-menu li.catalogo-menu ul {
+    /*SOTTO SOTTO MENU ON OFF*/
     border-bottom: 1px solid #098f8f !important;
   }
   .menuzord-menu li.catalogo-menu ul.dropdown li {
     position: unset !important;
     padding: 22px 10px;
     margin-left: 0;
+    font-weight: 400 !important;
+    /*SOTTO SOTTO MENU ON OFF*/
     margin-bottom: -1px;
     border-bottom: 1px solid #098f8f !important;
     border-left: 1px solid transparent !important;
     border-right: 1px solid transparent !important;
-    font-weight: 400 !important;
   }
   .menuzord-menu li.catalogo-menu ul.dropdown li:hover {
     background-color: #f5cf64 !important;
+    font-weight: 400 !important;
+    /*SOTTO SOTTO MENU ON OFF*/
     border-bottom: 1px solid transparent !important;
     border-left: 1px solid #098f8f !important;
     border-right: 1px solid #098f8f !important;
-    font-weight: 400 !important;
   }
   .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown {
-    left: 0;
-    top: 63px;
     width: 100%;
     min-width: auto;
     padding: 10px 55px;
@@ -451,7 +463,11 @@ i .fa {
     background: #f5cf64;
     border: 0px;
     border-bottom: none !important;
-    border-top: red !important;
+    left: 0;
+    /*SOTTO SOTTO MENU ON*/
+    top: 63px;
+    /*SOTTO SOTTO MENU OFF*/
+    /*top: 62px;*/
   }
   .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li {
     padding: 0px;
@@ -1224,6 +1240,8 @@ ul.footer-category-list {
   border-top: none;
   font-size: 1.1rem;
   padding: 25px 0px;
+  background-image: url(/images/pattern/ricicled4.png);
+  background-size: 30%;
 }
 .footer .copyright p {
   line-height: 1.8rem !important;
@@ -1339,6 +1357,8 @@ ul.footer-category-list {
 .footer-wrapper {
   padding: 20px 60px 50px 60px;
   background-color: #90cdcd;
+  background-image: url(/images/pattern/ricicled5.png);
+  background-size: 15%;
 }
 .footer .social-icons .social-media-icon {
   background-color: #f3c649;

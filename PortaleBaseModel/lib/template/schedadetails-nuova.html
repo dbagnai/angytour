@@ -37,11 +37,10 @@
                 <!----------------------------------------------
                 ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
                 ----------------------------------------------->
-                <div class="blog-post-details d-block" runat="server" id="divPostDetails">
+                <div class="blog-post-details d-none" runat="server" id="divPostDetails">
 
                     <div class="blog-post-details-item  blog-post-details-item-right pl-0 pb-2">
-                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.5em; line-height: normal">
-                            <span class="bind" mybind="Id" myvalue="prezzo1" format="formatlabelresource"></span>
+                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                             <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>

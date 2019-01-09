@@ -30,6 +30,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .bg-light-color {
     background-color: @bg-light-color !important;
+    background-image: @pattern-image-light;
+    background-size: @pattern-size-light;
 }
 
 .bg-medium-color {
@@ -170,6 +172,8 @@ a {
     width: 100%;
     font-size: 0.8rem;
     font-weight: normal;
+    background-image: @pattern-image;
+    background-size: @pattern-size;
 }
 
 .fixedtop .form-control, .form-control:focus {
@@ -258,7 +262,7 @@ i .fa {
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
 .menuzord.white .menuzord-menu > li > a:active {
     color: @menu-hover-color !important;
-    font-weight: @menu-hover-weight;
+    /*font-weight: @menu-hover-weight;*/
     background: none;
 }
 
@@ -309,10 +313,10 @@ i .fa {
 /*MENU PRODOTTI A VISTA*/
 @media (min-width: 1025px) {
     .menuzord-menu li.catalogo-menu .indicator {
-        bottom: -28px;
+        bottom: -37px;
         position: absolute;
-        font-size: 25px !important;
-        margin-left: calc(-50% + 7px);
+        font-size: 35px !important;
+        margin-left: calc(-50% + 0px);
         color: @color-sottomeu !important;
     }
 
@@ -339,6 +343,8 @@ i .fa {
         opacity: 1 !important;
         border: none;
         padding: 0px 55px;
+        background-image: @pattern-image;
+        background-size: @pattern-sottomenu-size;
     }
 
     .visible-ok {
@@ -409,6 +415,7 @@ i .fa {
     }
 
     .menuzord-menu li.catalogo-menu ul {
+        /*SOTTO SOTTO MENU ON OFF*/
         border-bottom: 1px solid @bg-primary-color !important;
     }
 
@@ -416,24 +423,24 @@ i .fa {
         position: unset !important;
         padding: 22px 10px;
         margin-left: 0;
+        font-weight: @submenu-weight !important;
+        /*SOTTO SOTTO MENU ON OFF*/
         margin-bottom: -1px;
         border-bottom: 1px solid @bg-primary-color !important;
         border-left: 1px solid transparent !important;
         border-right: 1px solid transparent !important;
-        font-weight: @submenu-weight !important;
 
         &:hover {
             background-color: @color-sottomeu-active !important;
+            font-weight: @submenu-hover-weight !important;
+            /*SOTTO SOTTO MENU ON OFF*/
             border-bottom: 1px solid transparent !important;
             border-left: 1px solid @bg-primary-color !important;
             border-right: 1px solid @bg-primary-color !important;
-            font-weight: @submenu-hover-weight !important;
         }
     }
 
     .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown {
-        left: 0;
-        top: 63px;
         width: 100%;
         min-width: auto;
         padding: 10px 55px;
@@ -441,7 +448,11 @@ i .fa {
         background: @color-sottomeu-active;
         border: 0px;
         border-bottom: none !important;
-        border-top: red !important;
+        left: 0;
+        /*SOTTO SOTTO MENU ON*/
+        top: 63px;
+        /*SOTTO SOTTO MENU OFF*/
+        /*top: 62px;*/
     }
 
     .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown li {
@@ -473,8 +484,6 @@ i .fa {
 }
 
 /*-------------- END menu prodotti a vista -------------*/
-
-
 .simplemenu, .simplemenu * ~ .simplemenu:not(i) {
     font-family: @menu-font;
     border-color: @bg-secondary-color !important;
@@ -934,7 +943,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 
         &:hover {
             &:extend(.menuzord.white .menuzord-menu > li > a.buttonmenu:hover);
-            border:none !important;
+            border: none !important;
         }
     }
 
@@ -1192,6 +1201,8 @@ ul.footer-category-list {
     border-top: none;
     font-size: @body-copyright-size;
     padding: 25px 0px;
+    background-image: @pattern-image;
+    background-size: @pattern-size;
 }
 
 .footer .copyright p {
@@ -1334,6 +1345,8 @@ ul.footer-category-list {
 .footer-wrapper {
     padding: 20px 60px 50px 60px;
     background-color: @bg-secondary-color;
+    background-image: @pattern-image-light;
+    background-size: @pattern-size-light;
 }
 
 .footer .social-icons .social-media-icon {
