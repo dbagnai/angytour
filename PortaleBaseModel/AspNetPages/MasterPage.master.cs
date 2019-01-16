@@ -323,7 +323,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == tipologia); });
         if (sezione == null) return "";
         string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, sezione.Descrizione, "", tipologia, "");
-        link += "?" + qstring;
+        if (!string.IsNullOrEmpty(qstring))
+            link += "?" + qstring;
         sb.Append("<a href=\"");
         sb.Append(link);
         sb.Append("\"");
