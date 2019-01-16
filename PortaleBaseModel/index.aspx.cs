@@ -46,9 +46,11 @@ public partial class index : CommonPage
     private void InizializzaSeo()
     {
         string linkcanonico = "~";
-        linkcanonico = "~/" + Lingua + "/Home";
+        linkcanonico = "~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/Home";
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == Lingua)
+
             linkcanonico = "~";
+        //CANONICAL DEFAULT
         Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
 
@@ -57,23 +59,34 @@ public partial class index : CommonPage
 
         //Italiano
         hreflang = " hreflang=\"it\" ";
-        string linkcanonicoalt = "~/" + "I" + "/Home";
+        string linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("I") + "/Home";
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
             linkcanonicoalt = "~";
+
         Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
         litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
         litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
 
-
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             //inglese
             hreflang = " hreflang=\"en\" ";
-            linkcanonicoalt = "~/" + "GB" + "/Home";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("GB") + "/Home";
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
                 linkcanonicoalt = "~";
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        }
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
+        {
+            //russo
+            hreflang = " hreflang=\"ru\" ";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("RU") + "/Home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "RU")
+                linkcanonicoalt = "~";
+            litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
             litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
         }
 
