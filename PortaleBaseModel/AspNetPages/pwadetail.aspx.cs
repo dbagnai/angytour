@@ -319,26 +319,11 @@ public partial class _pwadetail : CommonPage
             //}
 
             string htmlPage = "";
-            if (references.ResMan("Common", Lingua, "testo" + CodiceTipologia) != null)
+            if (references.ResMan("Common", Lingua, "testo" + item.CodiceTipologia) != null)
                 htmlPage = references.ResMan("Common", Lingua, "testo" + CodiceTipologia).ToString();
-            if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
-                htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
+            if (references.ResMan("Common", Lingua, "testo" + item.CodiceCategoria) != null)
+                htmlPage = references.ResMan("Common", Lingua, "testo" + item.CodiceCategoria).ToString();
 
-#if false
-            string strigaperricerca = "";
-            strigaperricerca = "/" + CodiceTipologia + "/" + idOfferta + "/";
-            Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            if (content == null && !string.IsNullOrEmpty(Categoria))
-            {
-                strigaperricerca = "/" + CodiceTipologia + "/" + Categoria + "/"; //Request.Url.AbsolutePath
-                content = content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            }
-            if (content == null && !string.IsNullOrEmpty(titolopagina))
-            {
-                strigaperricerca = "/" + CodiceTipologia + "/" + CleanUrl(titolopagina); //Request.Url.AbsolutePath
-                content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
-            }
-#endif
             Contenuti content = null;
 
             string denominazione = item.DenominazionebyLingua(Lingua);
@@ -354,7 +339,7 @@ public partial class _pwadetail : CommonPage
 
             if (content != null && content.Id != 0)
             {
-                htmlPage = content.DescrizionebyLingua(Lingua);
+                htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 //if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
             }
 

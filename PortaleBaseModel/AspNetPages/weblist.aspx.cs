@@ -768,7 +768,8 @@ public partial class AspNetPages_weblist : CommonPage
         string customdesc = "";
         if (content != null && content.Id != 0)
         {
-            htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
+            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+
             //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
             switch (Lingua.ToLower())
             {
@@ -790,7 +791,7 @@ public partial class AspNetPages_weblist : CommonPage
 
         string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
         string description = "";
-        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 150, true)).Replace("<br/>", "\r\n")).Trim();
+        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 300, true)).Replace("<br/>", "\r\n")).Trim();
 
         /////////////////////////////////////////////////////////////
         //MODIFICA PER TITLE E DESCRIPTION CUSTOM ( da sezione admin )
@@ -799,7 +800,7 @@ public partial class AspNetPages_weblist : CommonPage
             metametatitle = (customtitle).Replace("<br/>", "\r\n");
         if (!string.IsNullOrEmpty(customdesc))
             description = customdesc.Replace("<br/>", "\r\n");
-        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 150, true)).Replace("<br/>", "\r\n")).Trim();
+        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 300, true)).Replace("<br/>", "\r\n")).Trim();
         ////////////////////////////////////////////////////////////
         //Opengraph per facebook
         ((HtmlMeta)Master.FindControl("metafbTitle")).Content = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione)).Trim();

@@ -760,7 +760,9 @@ public partial class AspNetPages_pwalist : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////SEZIONE META TITLE E DESC E CONTENUTO HEADER PAGINA ///////////////////////
+
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
+
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
         string sezionedescrizione = "";
         if (!string.IsNullOrEmpty(Categoria2liv))
@@ -786,6 +788,7 @@ public partial class AspNetPages_pwalist : CommonPage
         {
             ////////EVIDENZIAZIONE MENU
             EvidenziaSelezione(sezione.Descrizione); // Server Solo per la voce al top dei dropdown ....
+
             ///////////////////////NOME PAGINA////////////////////////////////
             string titolopagina = sezione.Descrizione;
             litNomePagina.Text = titolopagina;
@@ -800,6 +803,8 @@ public partial class AspNetPages_pwalist : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
+
+
             ///////////////////////////////////////////////////////////////
         }
 
@@ -816,15 +821,16 @@ public partial class AspNetPages_pwalist : CommonPage
         string customdesc = "";
         if (content != null && content.Id != 0)
         {
-            htmlPage = ReplaceLinks(content.DescrizionebyLingua(Lingua));
+            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+
             //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
-            switch (Lingua)
+            switch (Lingua.ToLower())
             {
-                case "GB":
+                case "gb":
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
-                case "RU":
+                case "ru":
                     customdesc = content.CustomdescRU;
                     customtitle = content.CustomtitleRU;
                     break;
@@ -838,7 +844,7 @@ public partial class AspNetPages_pwalist : CommonPage
 
         string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
         string description = "";
-        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 150, true)).Replace("<br/>", "\r\n")).Trim();
+        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 300, true)).Replace("<br/>", "\r\n")).Trim();
 
         /////////////////////////////////////////////////////////////
         //MODIFICA PER TITLE E DESCRIPTION CUSTOM ( da sezione admin )
@@ -847,7 +853,7 @@ public partial class AspNetPages_pwalist : CommonPage
             metametatitle = (customtitle).Replace("<br/>", "\r\n");
         if (!string.IsNullOrEmpty(customdesc))
             description = customdesc.Replace("<br/>", "\r\n");
-        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 150, true)).Replace("<br/>", "\r\n")).Trim();
+        description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 300, true)).Replace("<br/>", "\r\n")).Trim();
         ////////////////////////////////////////////////////////////
         //Opengraph per facebook
         ((HtmlMeta)Master.FindControl("metafbTitle")).Content = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione)).Trim();
@@ -861,36 +867,12 @@ public partial class AspNetPages_pwalist : CommonPage
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////BREAD CRUMBS///////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-        List<Tabrif> links = GeneraBreadcrumbPath(true);
-        if (Tipologia == "rif000501") //Pagina copertina presente
-        {
-            if (sezione != null && !string.IsNullOrEmpty(sezione.Descrizione.ToLower().Trim()))
-            {
-                Contenuti contentpertipologia = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "categorie " + sezione.Descrizione.ToLower().Trim());
-                if (contentpertipologia != null && contentpertipologia.Id != 0)
-                {
-                    Tabrif laddink = new Tabrif();
-                    laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000");
-                    laddink.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
-                    links.Add(laddink);
-                }
-            }
+        List<Tabrif> links = new List<Tabrif>();
+        bool usacategorie = true;
+        //if (Tipologia == "rif000001") usacategorie = false;
+        links = GeneraBreadcrumbPath(usacategorie);
+        //links.Add(actualpagelink); //aggiungo la pagina attuale
 
-            //Prodotto catcopertina = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
-            //if (catcopertina != null && !string.IsNullOrEmpty((catcopertina.Descrizione.ToLower().Trim())))
-            //{
-            //    Contenuti contentpercategoria = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, catcopertina.Descrizione.ToLower().Trim());
-            //    if (contentpercategoria != null && contentpercategoria.Id != 0)
-            //    {
-            //        Tabrif laddink = new Tabrif();
-            //        laddink.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
-            //        laddink.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
-            //        links.Add(laddink);
-            //    }
-            //}
-        }
-
-        links.Add(actualpagelink);
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
     }

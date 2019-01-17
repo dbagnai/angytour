@@ -294,7 +294,7 @@ public partial class _webdetail : CommonPage
 
             if (content != null && content.Id != 0)
             {
-                htmlPage = content.DescrizionebyLingua(Lingua);
+                htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 //if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
             }
 
