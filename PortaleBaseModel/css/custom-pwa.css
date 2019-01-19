@@ -2138,6 +2138,12 @@ select.form-control:not([size]):not([multiple]) {
 .linksmall-blog a:hover {
   color: #ffffff;
 }
+.pagination {
+  display: inline-flex;
+}
+.pagination li {
+  margin-left: 5px;
+}
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/

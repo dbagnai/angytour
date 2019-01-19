@@ -1,9 +1,17 @@
 ﻿<div id="replaceiddivPager" style="display:none;text-align:center;margin-top:10px;margin-bottom:10px">
-    <div>
+    <div class="paginationcontainer" style="text-align:center">
         <ul class="pagination">
             <li>
                 <a id="replaceidaPrevPage" class="divbuttonstyle" target="_self" href="" style="display:none"></a>
             </li>
+            <li>
+                <a id="replaceidaNextPage" class="divbuttonstyle" target="_self" href="" style="display:none"></a>
+            </li>
+            <!--Eventuale modalita in aggiunta-->
+            <!--<li>
+                <button id="replaceidbtnAddcontent" type="button" class="divbuttonstyle" style="display:none"></button>
+            </li>-->
+
             <li>
                 <button id="replaceidbtnPrevPage1" type="button" class="divbuttonstyle" style="display:none"></button>
             </li>
@@ -21,15 +29,9 @@
             <li>
                 <button id="replaceidbtnNextPage1" type="button" class="divbuttonstyle" style="display:none"></button>
             </li>
-            <li>
-                <a id="replaceidaNextPage" class="divbuttonstyle" target="_self" href="" style="display:none"></a>
-            </li>
-            <!--Eventuale modalita in aggiunta-->
-            <!--<li>
-                <button id="replaceidbtnAddcontent" type="button" class="divbuttonstyle" style="display:none"></button>
-            </li>-->
         </ul>
     </div>
-    <div id="replaceiddivactpage" class="pull-left" style="padding-left:15px;text-align:left">1</div><div class="pull-left">&nbsp;-&nbsp;</div><div class="pull-left" id="replaceidspantotals" style="text-align:left"></div>
-    <div class="clearfix"></div>
+    <div style="display:inline-flex;text-align:center;margin-top:5px">
+        <div id="replaceiddivactpage">1</div><div>&nbsp;-&nbsp;</div><div id="replaceidspantotals"></div>
+    </div>
 </div> 
