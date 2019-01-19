@@ -780,7 +780,7 @@ namespace WelcomeLibrary.UF
                         //////////////////////////////////////////////////
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
-#if true
+#if false
                         if (Session != null && Session["objfiltro"] != null)
                         {
                             string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
@@ -957,7 +957,7 @@ namespace WelcomeLibrary.UF
                         //////////////////////////////////////////////////
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
-#if true
+#if false
                         if (Session != null && Session["objfiltro"] != null)
                         {
                             string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati

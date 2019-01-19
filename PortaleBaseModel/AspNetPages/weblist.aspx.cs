@@ -1154,7 +1154,7 @@ public partial class AspNetPages_weblist : CommonPage
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         divLinksrubriche.Visible = true;
         sb.Append("<div id=\"divLinksrubrichecontainer\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
-        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\"");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
     }
@@ -1164,7 +1164,7 @@ public partial class AspNetPages_weblist : CommonPage
         divArchivio.Visible = true;
         divLinksrubriche.Visible = true;
         sb.Append("<div id=\"divArchivioList\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
-        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\"");
         sb.Append("\"></div>");
         divArchivio.InnerHtml = (sb.ToString());
 

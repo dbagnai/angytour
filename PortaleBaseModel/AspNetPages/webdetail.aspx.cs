@@ -358,7 +358,7 @@ public partial class _webdetail : CommonPage
 
                     //BIND PER LA SCHEDA!!!!
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 }
@@ -472,13 +472,13 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerTestimonialsBt3.html,divScrollerSuggeritiJs, carouselInject1,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12, '3'\");");
+                    sb.Append("injectScrollerAndLoad,owlscrollerTestimonialsBt3.html,divScrollerSuggeritiJs, carouselInject1,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12, '3'\"");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-testimonials.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails-testimonials.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -507,7 +507,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -534,7 +534,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -561,7 +561,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -588,7 +588,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "\");");
+                    sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -940,7 +940,7 @@ public partial class _webdetail : CommonPage
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         divLinksrubriche.Visible = true;
         sb.Append("<div id=\"divLinksrubrichecontainer\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
-        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("injcCategorieLinks,'linkslistddl2.html','divLinksrubrichecontainer', 'linksrubriche1','','" + cattipo + "','" + Categoria + "',''" + "\"");
         sb.Append("\"></div>");
         divLinksrubriche.InnerHtml = (sb.ToString());
     }
@@ -950,7 +950,7 @@ public partial class _webdetail : CommonPage
         divArchivio.Visible = true;
         divLinksrubriche.Visible = true;
         sb.Append("<div id=\"divArchivioList\" style=\"overflow-y: auto\" class=\"inject\" params=\"");
-        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\");");
+        sb.Append("injectArchivioAndLoad,'listaarchivio.html','divArchivioList', 'archivio1','','" + cattipo + "','" + Categoria + "',''" + "\"");
         sb.Append("\"></div>");
         divArchivio.InnerHtml = (sb.ToString());
 
