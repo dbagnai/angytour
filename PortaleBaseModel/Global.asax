@@ -663,7 +663,7 @@
         routes.MapPageRoute(
             "HomeRoute",
             "",
-            "~/Index.aspx"
+            "~/index.aspx"
         );
 
         //Fall back per tutti i link in route che non hanno il . all'interno

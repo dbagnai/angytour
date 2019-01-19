@@ -15,6 +15,7 @@
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
     <meta id="metaKeyw" runat="server" name="Keywords" content="" />
+    <meta name="robots" id="metaRobots" content="index,follow" runat="Server" />
     <meta name="distribution" content="Global" />
     <meta name="classification" content="" />
     <meta id="metaAbstract" runat="server" name="abstract" content="" />
@@ -28,7 +29,6 @@
     <meta property="fb:admins" content="100000889151299" />
     <%--<meta property="fb:app_id" content="435846069925856" />--%>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <meta name="robots" id="metaRobots" content="index,follow" runat="Server" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <asp:Literal Text="" ID="litgeneric4" runat="server" />
     <asp:Literal Text="" ID="litgeneric3" runat="server" />
@@ -69,11 +69,15 @@
 
                 <!-- LINGUE --->
                 <div runat="server" visible="true">
-                    <div class="float-right px-2 px-lg-4 bd-secondary-color font-primary" id="divCambioLinguaen" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                    <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server" visible="false">
                     </div>
-                    <div class="float-right px-2 px-lg-4 bd-secondary-color font-primary" id="divCambioLinguadef" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
-                        <a style="color: White; padding: 0px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkHomeCambio")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio") %>'>
-                            <%= references.ResMan("Common", Lingua,"testoCambio").ToUpper() %></a>
+                    <div id="divCambioLinguadef1"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="true">
+                        <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
+                    </div>
+                    <div id="divCambioLingua2"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="false">
+                    </div>
+                    <div id="divCambioLinguadef2"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="false">
+                        <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
                     </div>
                 </div>
 
@@ -203,7 +207,7 @@
 
             <!-- ICONA CALL RESPONSIVE -->
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
-                <a style="padding-top: 0px;" class="float-right visible-xs" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
+                <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fas fas-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
             </div>
             <%--<div class="container" id="divImg">
@@ -259,7 +263,7 @@
                     <%--TESTIMONIALS--%>
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
-                    <%--<%= CreaLinkPaginastatica(3) %>--%>
+                    <%= CreaLinkPaginastatica(3) %>
                     <%--PRENOTA--%>
                     <li runat="server">
                         <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
@@ -394,7 +398,7 @@
                     <div class="container text-justify">
                         <nav id="navmenu-3" class="navbar navbar-default" role="navigation" style="background: none; border: none; margin-bottom: 0px; padding-top: 5px; min-height: 30px; top: 0px;">
                             <div class="navbar-header">
-                                <button type="button" class="navbar-toggle visible-md visible-sm visible-xs" id="mobile-menu-button-3" style="float: none; padding: 5px; margin: 0px auto; background-color: #33332e; color: #fff">
+                                <button type="button" class="navbar-toggle" id="mobile-menu-button-3" style="float: none; padding: 5px; margin: 0px auto; background-color: #33332e; color: #fff">
                                     <div style="margin: 0px auto">
                                         <i class="fa fa-list-ul" style="font-size: 0.8em;"></i>
                                         <span style="font-size: 1em;">SEZIONI CATALOGO</span>

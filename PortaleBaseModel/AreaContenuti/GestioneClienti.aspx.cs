@@ -391,7 +391,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
         string datanascita = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtDN"))).Value;
         DateTime _dt = DateTime.MinValue;
-        DateTime.TryParse(datanascita, out _dt);
+        //DateTime.TryParse(datanascita, out _dt);
+        DateTime.TryParseExact(datanascita, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt);
         cli.DataNascita = _dt;
         cli.Consenso1 = ((HtmlInputCheckBox)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtC1"))).Checked;
 
@@ -554,7 +555,9 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
 
         string datanascita = txtDN.Value.Trim();
         DateTime _dt = DateTime.MinValue;
-        DateTime.TryParse(datanascita, out _dt);
+        //DateTime.TryParse(datanascita, out _dt);
+        DateTime.TryParseExact(datanascita, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt);
+
         cli.DataNascita = _dt;
         cli.Consenso1 = txtC1.Checked;
 
@@ -1438,7 +1441,8 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
                     //    itemnew.PrezzoListino = _tmpdbl;
 
                     string datanascita = categoryRow.Cell(dna).GetString().Trim('\t').Trim('\\').Trim('\r').Trim('\n').ToLower();
-                    if (DateTime.TryParse(datanascita, out _date))
+                    //if (DateTime.TryParse(datanascita, out _date))
+                    if (DateTime.TryParseExact(datanascita, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _date))
                         clinew.DataNascita = _date;
 
                     clinew.Cognome = categoryRow.Cell(cog).GetString().Trim('\t').Trim('\\').Trim('\r').Trim('\n');

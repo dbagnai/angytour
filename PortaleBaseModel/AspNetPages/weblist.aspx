@@ -2,7 +2,7 @@
     CodeFile="weblist.aspx.cs" Inherits="AspNetPages_weblist" Title="" Culture="it-IT"
     MaintainScrollPositionOnPostback="false" EnableEventValidation="false" %>
 
-<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %> 
+<%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -11,11 +11,11 @@
         makeRevLower = true;
         //history.scrollRestoration = 'manual'; //Evito che il browser mi riporti automaticamente alla posizione verticale
     </script>
-    <div class="container" style="text-align: center; margin-top: 10px"  id="divTitleContainer">
-        <div class="row" runat="server" id="divTitle">
+    <div class="container" id="divTitleContainer" runat="server" clientidmode="static" visible="false">
+        <div class="row" runat="server" id="divTitle" style="text-align: center; margin-top: 10px">
             <div class="col-md-1 col-sm-1">
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-12">
                 <h1 class="title-block" style="line-height: normal;">
                     <asp:Literal Text="" runat="server" ID="litNomePagina" /></h1>
             </div>
@@ -30,7 +30,7 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
         <div class="" runat="server" id="columnsingle">
-            
+
             <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
         </div>
     </div>

@@ -19,7 +19,7 @@ using System.Data.SQLite;
 
 public partial class AreaContenuti_Default3 : CommonPage
 {
-   // offerteDM offDM = new offerteDM();
+    // offerteDM offDM = new offerteDM();
     public string ClientIDSelected
     {
         get { return ViewState["ClientIDSelected"] != null ? (string)(ViewState["ClientIDSelected"]) : ""; }
@@ -115,7 +115,7 @@ public partial class AreaContenuti_Default3 : CommonPage
             }
 
 
-            Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
+            Lingua = "I";
 
             PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
             PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
@@ -326,6 +326,19 @@ public partial class AreaContenuti_Default3 : CommonPage
 
             txtCampo1RU.Text = Details.Campo1RU;
             txtCampo2RU.Text = Details.Campo2RU;
+
+            litlinkI.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "I", Details.UrltextforlinkbyLingua("I"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link it</a>";
+            litlinkGB.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "GB", Details.UrltextforlinkbyLingua("GB"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link en</a>";
+            litlinkRU.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "RU", Details.UrltextforlinkbyLingua("RU"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link ru</a>";
+
+            txtCanonicalI.Text = Details.CanonicalI;
+            txtCanonicalGB.Text = Details.CanonicalGB;
+            txtCanonicalRU.Text = Details.CanonicalRU;
+            txtUrlI.Text = Details.UrlcustomI;
+            txtUrlGB.Text = Details.UrlcustomGB;
+            txtUrlRU.Text = Details.UrlcustomRU;
+            txtRobots.Text = Details.Robots;
+
 
             txtIdcollegato.Text = Details.Id_collegato.ToString();
 
@@ -829,8 +842,22 @@ public partial class AreaContenuti_Default3 : CommonPage
                     updrecord.Campo1RU = txtCampo1RU.Text;
                     updrecord.Campo2RU = txtCampo2RU.Text;
 
+                    updrecord.Robots = txtRobots.Text;
+
+                    updrecord.CanonicalI = txtCanonicalI.Text;
+                    updrecord.CanonicalGB = txtCanonicalGB.Text;
+                    updrecord.CanonicalRU = txtCanonicalRU.Text;
+
+                    updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlI.Text);
+                    updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlGB.Text);
+                    updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlRU.Text);
+                    if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneI.Text);
+                    if (string.IsNullOrEmpty(updrecord.UrlcustomGB.Trim())) updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneGB.Text);
+                    if (string.IsNullOrEmpty(updrecord.UrlcustomRU.Trim())) updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneRU.Text);
+
+
                     updrecord.DenominazioneI = txtDenominazioneI.Text;
-                    updrecord.DenominazioneGB = txtDenominazioneGB.Text;
+                    updrecord.DenominazioneGB = txtDenominazioneGB.Text; 
                     updrecord.DenominazioneRU = txtDenominazioneRU.Text;
                     updrecord.DescrizioneI = txtDescrizioneI.Text;
                     updrecord.DescrizioneGB = txtDescrizioneGB.Text;
@@ -874,7 +901,8 @@ public partial class AreaContenuti_Default3 : CommonPage
                         updrecord.Qta_vendita = null;
 
                     DateTime _tmpdate = System.DateTime.Now;
-                    if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                    //if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                    if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                         _tmpdate = System.DateTime.Now;
                     updrecord.DataInserimento = _tmpdate;
 
@@ -952,6 +980,18 @@ public partial class AreaContenuti_Default3 : CommonPage
                 updrecord.Campo1RU = txtCampo1RU.Text;
                 updrecord.Campo2RU = txtCampo2RU.Text;
 
+                updrecord.CanonicalI = txtCanonicalI.Text;
+                updrecord.CanonicalGB = txtCanonicalGB.Text;
+                updrecord.CanonicalRU = txtCanonicalRU.Text;
+                updrecord.UrlcustomI = txtUrlI.Text;
+                updrecord.UrlcustomGB = txtUrlGB.Text;
+                updrecord.UrlcustomRU = txtUrlRU.Text;
+                updrecord.Robots = txtRobots.Text;
+
+                if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl( txtDenominazioneI.Text);
+                if (string.IsNullOrEmpty(updrecord.UrlcustomGB.Trim())) updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneGB.Text);
+                if (string.IsNullOrEmpty(updrecord.UrlcustomRU.Trim())) updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneRU.Text);
+
                 updrecord.DenominazioneI = txtDenominazioneI.Text;
                 updrecord.DenominazioneGB = txtDenominazioneGB.Text;
                 updrecord.DenominazioneRU = txtDenominazioneRU.Text;
@@ -998,7 +1038,8 @@ public partial class AreaContenuti_Default3 : CommonPage
                     updrecord.Qta_vendita = null;
 
                 DateTime _tmpdate = System.DateTime.Now;
-                if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                //if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                     _tmpdate = System.DateTime.Now;
                 updrecord.DataInserimento = _tmpdate;
 
@@ -1044,11 +1085,12 @@ public partial class AreaContenuti_Default3 : CommonPage
             //Creo o aggiorno l'url per il rewriting in tutte le lingue ...
             ////////////////////////////////////////////////////////////////////
             Tabrif urlRewrited = new Tabrif();
-            WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
+            //Elimino gli url precendenti !!!!!  ( ma questo fa andare in home i vecchi url !!! non è il massimo)!!!!
+            //WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
 
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.DenominazionebyLingua("I"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.DenominazionebyLingua("GB"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.DenominazionebyLingua("RU"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.UrltextforlinkbyLingua("I"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.UrltextforlinkbyLingua("GB"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.UrltextforlinkbyLingua("RU"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
 
 
             /////////////////////////////////////
@@ -1205,6 +1247,15 @@ public partial class AreaContenuti_Default3 : CommonPage
         OffertaIDSelected = "";
         hidIdselected.Value = "";
 
+
+        txtCanonicalI.Text = "";
+        txtCanonicalGB.Text = "";
+        txtCanonicalRU.Text = "";
+        txtCanonicalI.Text = "";
+        txtUrlGB.Text = "";
+        txtUrlRU.Text = "";
+        txtRobots.Text = "";
+
         txtCampo1GB.Text = "";
         txtCampo1RU.Text = "";
         txtCampo2I.Text = "";
@@ -1270,6 +1321,16 @@ public partial class AreaContenuti_Default3 : CommonPage
         txtCampo2GB.ReadOnly = valore;
         txtCampo1RU.ReadOnly = valore;
         txtCampo2RU.ReadOnly = valore;
+
+        txtCanonicalI.ReadOnly = valore;
+        txtCanonicalGB.ReadOnly = valore;
+        txtCanonicalRU.ReadOnly = valore;
+        txtUrlI.ReadOnly = valore;
+        txtUrlGB.ReadOnly = valore;
+        txtUrlRU.ReadOnly = valore;
+        txtRobots.ReadOnly = valore;
+
+
         txtIdcollegato.ReadOnly = valore;
         txtDenominazioneI.ReadOnly = valore;
         txtDenominazioneGB.ReadOnly = valore;

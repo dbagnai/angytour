@@ -88,8 +88,7 @@ namespace WelcomeLibrary.UF
             Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
             foreach (TipologiaOfferte _o in sezioni)
             {
-                //string link = offerteDM.CreaLinkRoutes(null, false, lingua, CleanUrl(_o.Descrizione), "", _o.Codice);
-                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
+                 bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
                 string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
 
@@ -234,10 +233,7 @@ namespace WelcomeLibrary.UF
                 foreach (Offerte _o in Collection)
                 {
                     string UrlCompleto = "";
-                    string testoperindice = _o.DenominazionebyLingua(Lingua);
-
-                    UrlCompleto = CreaLinkRoutes(Lingua, testoperindice, _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", true, rigeneraUrlrewritetable);
-
+                    UrlCompleto = CreaLinkRoutes(Lingua, _o.UrltextforlinkbyLingua(Lingua), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", true, rigeneraUrlrewritetable);
                     ListaLink.Add(UrlCompleto);
                 }
             return ListaLink;
@@ -245,6 +241,7 @@ namespace WelcomeLibrary.UF
 
         public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "", string regione = "", string annofiltro = "", string mesefiltro = "", bool generaUrlrewrited = false, bool updateTableurlrewriting = false, Dictionary<string, string> addparms = null)
         {
+            if (denominazione == null) denominazione = "";
             string destinationselector = "";
             Lingua = Lingua.ToUpper();
             string link = "";
@@ -258,7 +255,7 @@ namespace WelcomeLibrary.UF
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
                 /////////////////////////////////////
-                destinationselector = "web";
+                destinationselector = "s"; //Può anche essere vuoto questo ed il tuttofunziona!!
                 urlRewrited = GeneraRewritingElement(Lingua, codicetipologia, destinationselector, cleandenominazione, id, "pagina", "", "", "", "", "", addparms);
             }
            else  if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001001")
@@ -357,7 +354,7 @@ namespace WelcomeLibrary.UF
                 //string destinationselector = "";
                 TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
                 if (item != null)
-                    destinationselector = ConteggioCaratteri(CleanUrl(item.Descrizione.Trim().Replace(" ", "-")), 20).ToLower().Trim();
+                    destinationselector = ConteggioCaratteri(CleanUrl(item.Descrizione.Trim().Replace(" ", "-")), 100).ToLower().Trim();
 
 
                 //Creiamo il link riscritto base
@@ -381,6 +378,47 @@ namespace WelcomeLibrary.UF
                 InserisciAggiornaUrlrewrite(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlRewrited);
             }
             return link;
+        }
+        public static Tabrif GeneraRewritingElement(string Lingua, string Tipologia, string destinationselector, string textmatch, string id = "", string tipopagina = "lista", string Categoria = "", string Categoria2liv = "", string anno = "", string mese = "", string regione = "", Dictionary<string, string> addparms = null)
+        {
+            Tabrif urlRewrited = new Tabrif();
+            var parameters = new Dictionary<string, string>();
+
+            parameters.Add("Lingua", Lingua.ToUpper());
+            if (Tipologia.ToLower().StartsWith("rif"))
+            {
+                parameters.Add("Tipologia", Tipologia);
+                parameters.Add("idOfferta", id);
+            }
+            else if (Tipologia.ToLower().StartsWith("con"))
+            {
+                parameters.Add("idContenuto", id);
+                parameters.Add("CodiceContenuto", Tipologia);
+            }
+            parameters.Add("Categoria", Categoria);
+            parameters.Add("Categoria2liv", Categoria2liv);
+            parameters.Add("anno", anno);
+            parameters.Add("mese", mese);
+            parameters.Add("Regione", regione);
+            if (addparms != null)
+                foreach (KeyValuePair<string, string> kv in addparms)
+                {
+                    if (!parameters.ContainsKey(kv.Key))
+                        parameters.Add(kv.Key, kv.Value);
+                    else
+                        parameters[kv.Key] = kv.Value;
+                }
+
+            string cleantextmatch =  CleanUrl(textmatch.Trim().Replace(" ", "-")).ToLower().Trim();
+            if (string.IsNullOrEmpty(cleantextmatch)) cleantextmatch = "-";
+
+            //Crea l'oggetto per la Memorizzazione in tabella il path per i rwwriting
+            urlRewrited = CreaElementoRewriting(
+                CostruisciRewritedUrl(Lingua, destinationselector, cleantextmatch, id),
+                OriginalPathdestinazioneByTipologia(Tipologia, tipopagina),
+                Creaparametersstring(parameters));
+
+            return urlRewrited;
         }
 
         public static Tabrif creaUrlListaModified(string destinationselector, string cleandenominazione, string codicetipologia, string codicecategoria, string Lingua, string codicecat2liv, string regione, string annofiltro, string mesefiltro, Dictionary<string, string> addparms = null)
@@ -433,7 +471,7 @@ namespace WelcomeLibrary.UF
                     //testounicolink += "-" + testomodificatore1;
                     testounicolink = (testomodificatore1 + "-" + testounicolink).Trim('-');
                 if (!string.IsNullOrEmpty(testomodificatore2))
-                    testounicolink += "-" + testomodificatore2;
+                    testounicolink += "-p" + testomodificatore2;
 
 
                 /////////////////////////////////////
@@ -445,47 +483,6 @@ namespace WelcomeLibrary.UF
         }
 
 
-        public static Tabrif GeneraRewritingElement(string Lingua, string Tipologia, string destinationselector, string textmatch, string id = "", string tipopagina = "lista", string Categoria = "", string Categoria2liv = "", string anno = "", string mese = "", string regione = "", Dictionary<string, string> addparms = null)
-        {
-            Tabrif urlRewrited = new Tabrif();
-            var parameters = new Dictionary<string, string>();
-
-            parameters.Add("Lingua", Lingua.ToUpper());
-            if (Tipologia.ToLower().StartsWith("rif"))
-            {
-                parameters.Add("Tipologia", Tipologia);
-                parameters.Add("idOfferta", id);
-            }
-            else if (Tipologia.ToLower().StartsWith("con"))
-            {
-                parameters.Add("idContenuto", id);
-                parameters.Add("CodiceContenuto", Tipologia);
-            }
-            parameters.Add("Categoria", Categoria);
-            parameters.Add("Categoria2liv", Categoria2liv);
-            parameters.Add("anno", anno);
-            parameters.Add("mese", mese);
-            parameters.Add("Regione", regione);
-            if (addparms != null)
-                foreach (KeyValuePair<string, string> kv in addparms)
-                {
-                    if (!parameters.ContainsKey(kv.Key))
-                        parameters.Add(kv.Key, kv.Value);
-                    else
-                        parameters[kv.Key] = kv.Value;
-                }
-
-            string cleantextmatch = ConteggioCaratteri(CleanUrl(textmatch.Trim().Replace(" ", "-")), 100).ToLower().Trim();
-            if (string.IsNullOrEmpty(cleantextmatch)) cleantextmatch = "-";
-
-            //Crea l'oggetto per la Memorizzazione in tabella il path per i rwwriting
-            urlRewrited = CreaElementoRewriting(
-                CostruisciRewritedUrl(Lingua, destinationselector, cleantextmatch, id),
-                OriginalPathdestinazioneByTipologia(Tipologia, tipopagina),
-                Creaparametersstring(parameters));
-
-            return urlRewrited;
-        }
         public static string getCulturenamefromlingua(string lng)
         {
             string culturename = "";
@@ -504,7 +501,7 @@ namespace WelcomeLibrary.UF
                     culturename = "ru";
                     break;
                 default:
-                    culturename = "it";
+                    culturename = "";
                     break;
             }
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
@@ -528,7 +525,7 @@ namespace WelcomeLibrary.UF
                     culturename = "RU";
                     break;
                 default:
-                    culturename = "I";
+                    culturename = "";
                     break;
             }
             //System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
@@ -693,7 +690,8 @@ namespace WelcomeLibrary.UF
             string correctlingua = getCulturenamefromlingua(Lingua);
             string rewritedurl = correctlingua;
 #endif
-            if (!string.IsNullOrEmpty(destinationselector))
+            //if (!string.IsNullOrEmpty(destinationselector))
+            if (!string.IsNullOrEmpty(destinationselector) && textmatch.ToLower()!=destinationselector.ToLower())
                 rewritedurl += "/" + destinationselector;
             rewritedurl += "/" + textmatch;
             if (!string.IsNullOrEmpty(id))

@@ -12,13 +12,15 @@
     </script>
 
     <%--:::: COMMENTO IL CAMPO H1 DEL TITOLO DELLA PAGINA :::::--%>
-    <div class="container" style="text-align: center; margin-top: 10px; display:none">
-        <div class="row" runat="server" id="divTitle">
-            <div class="col-md-1 col-sm-1">
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <h1 class="title-block" style="line-height: normal;">
-                    <asp:Literal Text="" runat="server" ID="litNomePagina" /></h1>
+    <div class="d-none">
+        <div class="container" id="divTitleContainer" runat="server" clientidmode="static" visible="false">
+            <div class="row" runat="server" id="divTitle" style="text-align: center; margin-top: 10px">
+                <div class="col-md-1 col-sm-1">
+                </div>
+                <div class="col-md-12 col-sm-12 col-12">
+                    <h1 class="title-block" style="line-height: normal;">
+                        <asp:Literal Text="" runat="server" ID="litNomePagina" /></h1>
+                </div>
             </div>
         </div>
     </div>

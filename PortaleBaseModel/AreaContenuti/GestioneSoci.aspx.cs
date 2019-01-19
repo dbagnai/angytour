@@ -21,7 +21,7 @@ using System.Web.Profile;
 public partial class AreaContenuti_GestioneSoci : CommonPage
 {
     bool debug = false;
-   // offerteDM offDM = new offerteDM();
+    // offerteDM offDM = new offerteDM();
 
     public string OffertaIDSelected
     {
@@ -96,14 +96,14 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         get { return ViewState["trattamenti"] != null ? (Dictionary<string, string>)(ViewState["trattamenti"]) : new Dictionary<string, string>(); }
         set { ViewState["trattamenti"] = value; }
     }
-   public string Lingua
-   {
-      get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
-      set { ViewState["Lingua"] = value; }
-   }
+    public string Lingua
+    {
+        get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
+        set { ViewState["Lingua"] = value; }
+    }
 
 
-   protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
@@ -117,7 +117,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 Response.Redirect("default.aspx?Errore=Selezionare Tipologia");
             //Carichiamo i dati relativi al contenuto specificato
             //Da fare repeater paginato con i risultati della query sul db
-            litTitolo.Text = (Utility.TipologieOfferte.Find(delegate(TipologiaOfferte tmp) { return tmp.Lingua == "I" && tmp.Codice == TipologiaOfferte; })).Descrizione;
+            litTitolo.Text = (Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return tmp.Lingua == "I" && tmp.Codice == TipologiaOfferte; })).Descrizione;
 
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
 
@@ -359,7 +359,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
     public string CategoriaSocio(string codicecategoria)
     {
         string ret = codicecategoria;
-        Tabrif cat3 = Utility.Caratteristiche[2].Find(delegate(Tabrif _t) { return _t.Lingua == "I" && _t.Codice == codicecategoria; });
+        Tabrif cat3 = Utility.Caratteristiche[2].Find(delegate (Tabrif _t) { return _t.Lingua == "I" && _t.Codice == codicecategoria; });
         if (cat3 != null)
             ret = cat3.Campo1;
         return ret;
@@ -1433,8 +1433,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                         if (updrecord.Caratteristica3 != tmpcoll)
                             datimodificati += "modificata caregoria socio<br/>";
                         updrecord.Caratteristica3 = tmpcoll;
-                    } 
-                    
+                    }
+
                     tmpcoll = 0;
                     if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
                         updrecord.Caratteristica4 = tmpcoll;
@@ -1531,7 +1531,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     updrecord.PrezzoListino = _tmpdbl;
 
                     DateTime _tmpdate = System.DateTime.Now;
-                    if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                    //if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                    if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                         _tmpdate = System.DateTime.Now;
                     updrecord.DataInserimento = _tmpdate;
 
@@ -1542,7 +1543,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                     updrecord.Cognome_dts = txtCognome_dts.Text;
 
                     _tmpdate = System.DateTime.MinValue;
-                    if (!DateTime.TryParse(txtDatanascita_dts.Text, out _tmpdate))
+                    // if (!DateTime.TryParse(txtDatanascita_dts.Text, out _tmpdate))
+                    if (!DateTime.TryParseExact(txtDatanascita_dts.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                         _tmpdate = System.DateTime.MinValue;
                     updrecord.Datanascita_dts = _tmpdate;
 
@@ -1694,24 +1696,24 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             }
             else
                 if (btnAggiorna.Text == "Inserisci")
-                {
-                    //if (string.IsNullOrEmpty(ddlProdotto.SelectedValue) || string.IsNullOrEmpty(ddlSottoProdotto.SelectedValue))
-                    //{
-                    //    output.Text = "Selezionare categoria di appartenenza prodotto/sottoprodotto";
-                    //    return;
-                    //}
+            {
+                //if (string.IsNullOrEmpty(ddlProdotto.SelectedValue) || string.IsNullOrEmpty(ddlSottoProdotto.SelectedValue))
+                //{
+                //    output.Text = "Selezionare categoria di appartenenza prodotto/sottoprodotto";
+                //    return;
+                //}
 
 
-                    updrecord = new Offerte();
-                    updrecord.CodiceTipologia = TipologiaOfferte;
+                updrecord = new Offerte();
+                updrecord.CodiceTipologia = TipologiaOfferte;
 
                 long tmpcoll = 0;
-                    if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
-                        updrecord.Id_collegato = tmpcoll;
+                if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
+                    updrecord.Id_collegato = tmpcoll;
 
-                    tmpcoll = 0;
-                    if (long.TryParse(txtAnno.Text, out tmpcoll))
-                        updrecord.Anno = tmpcoll;
+                tmpcoll = 0;
+                if (long.TryParse(txtAnno.Text, out tmpcoll))
+                    updrecord.Anno = tmpcoll;
                 //tmpcoll = 0;
                 //if (long.TryParse(ddlCaratteristica1.SelectedValue, out tmpcoll))
                 //    updrecord.Caratteristica1 = tmpcoll;
@@ -1720,216 +1722,218 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 //    updrecord.Caratteristica2 = tmpcoll;
 
                 tmpcoll = 0;
-                    if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
-                        updrecord.Caratteristica3 = tmpcoll;
-                    tmpcoll = 0;
-                    if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
-                        updrecord.Caratteristica4 = tmpcoll;
-                    tmpcoll = 0;
-                    if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
-                        updrecord.Caratteristica5 = tmpcoll;
-                    if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
-                        updrecord.Caratteristica6 = tmpcoll;
+                if (long.TryParse(ddlCaratteristica3.SelectedValue, out tmpcoll))
+                    updrecord.Caratteristica3 = tmpcoll;
+                tmpcoll = 0;
+                if (long.TryParse(ddlCaratteristica4.SelectedValue, out tmpcoll))
+                    updrecord.Caratteristica4 = tmpcoll;
+                tmpcoll = 0;
+                if (long.TryParse(ddlCaratteristica5.SelectedValue, out tmpcoll))
+                    updrecord.Caratteristica5 = tmpcoll;
+                if (long.TryParse(ddlCaratteristica6.SelectedValue, out tmpcoll))
+                    updrecord.Caratteristica6 = tmpcoll;
 
-                    updrecord.Campo1I = txtCampo1I.Text;
-                    updrecord.Campo2I = txtCampo2I.Text;
-                    updrecord.Campo1GB = txtCampo1GB.Text;
-                    updrecord.Campo2GB = txtCampo2GB.Text;
+                updrecord.Campo1I = txtCampo1I.Text;
+                updrecord.Campo2I = txtCampo2I.Text;
+                updrecord.Campo1GB = txtCampo1GB.Text;
+                updrecord.Campo2GB = txtCampo2GB.Text;
 
-                    updrecord.DenominazioneI = txtDenominazioneI.Text;
-                    updrecord.DenominazioneGB = txtDenominazioneGB.Text;
-                    updrecord.DescrizioneI = txtDescrizioneI.Text;
-                    updrecord.DescrizioneGB = txtDescrizioneGB.Text;
-                    updrecord.DatitecniciGB = txtDatitecniciGB.Text;
-                    updrecord.DatitecniciI = txtDatitecniciI.Text;
-                    updrecord.Indirizzo = txtIndirizzo.Text;
-                    updrecord.indirizzofatt_dts = txtindirizzofatt_dts.Text;
-                    updrecord.noteriservate_dts = txtnoteriservate_dts.Text;
-                    updrecord.ricfatt_dts = radricfatt_dts.SelectedValue;
+                updrecord.DenominazioneI = txtDenominazioneI.Text;
+                updrecord.DenominazioneGB = txtDenominazioneGB.Text;
+                updrecord.DescrizioneI = txtDescrizioneI.Text;
+                updrecord.DescrizioneGB = txtDescrizioneGB.Text;
+                updrecord.DatitecniciGB = txtDatitecniciGB.Text;
+                updrecord.DatitecniciI = txtDatitecniciI.Text;
+                updrecord.Indirizzo = txtIndirizzo.Text;
+                updrecord.indirizzofatt_dts = txtindirizzofatt_dts.Text;
+                updrecord.noteriservate_dts = txtnoteriservate_dts.Text;
+                updrecord.ricfatt_dts = radricfatt_dts.SelectedValue;
 
-                    updrecord.Email = txtEmail.Text;
-                    updrecord.Website = txtWebsite.Text;
-                    updrecord.Telefono = txtTelefono.Text;
-                    updrecord.Fax = txtFax.Text;
-                    updrecord.linkVideo = txtVideo.Text;
-                    updrecord.CodiceComune = ddlComune.SelectedValue;
-                    updrecord.CodiceProvincia = ddlProvincia.SelectedValue;
-                    updrecord.CodiceRegione = ddlRegione.SelectedValue;
-                    updrecord.CodiceProdotto = txtCodiceProd.Text;
+                updrecord.Email = txtEmail.Text;
+                updrecord.Website = txtWebsite.Text;
+                updrecord.Telefono = txtTelefono.Text;
+                updrecord.Fax = txtFax.Text;
+                updrecord.linkVideo = txtVideo.Text;
+                updrecord.CodiceComune = ddlComune.SelectedValue;
+                updrecord.CodiceProvincia = ddlProvincia.SelectedValue;
+                updrecord.CodiceRegione = ddlRegione.SelectedValue;
+                updrecord.CodiceProdotto = txtCodiceProd.Text;
 
-                    updrecord.CodiceCategoria = ddlProdotto.SelectedValue;
-                    updrecord.CodiceCategoria2Liv = ddlSottoProdotto.SelectedValue;
+                updrecord.CodiceCategoria = ddlProdotto.SelectedValue;
+                updrecord.CodiceCategoria2Liv = ddlSottoProdotto.SelectedValue;
 
-                    updrecord.Vetrina = chkVetrina.Checked;
-                    updrecord.Archiviato = chkArchiviato.Checked;
-                    updrecord.Abilitacontatto = chkContatto.Checked;
+                updrecord.Vetrina = chkVetrina.Checked;
+                updrecord.Archiviato = chkArchiviato.Checked;
+                updrecord.Abilitacontatto = chkContatto.Checked;
 
-                    double _tmpdbl = 0;
-                    double.TryParse(txtPrezzo.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Prezzo = _tmpdbl;
-                    _tmpdbl = 0;
-                    double.TryParse(txtPrezzoListino.Text, out _tmpdbl);//Mettere textbox per prezzo listino
-                    updrecord.PrezzoListino = _tmpdbl;
+                double _tmpdbl = 0;
+                double.TryParse(txtPrezzo.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Prezzo = _tmpdbl;
+                _tmpdbl = 0;
+                double.TryParse(txtPrezzoListino.Text, out _tmpdbl);//Mettere textbox per prezzo listino
+                updrecord.PrezzoListino = _tmpdbl;
 
-                    DateTime _tmpdate = System.DateTime.Now;
-                    if (!DateTime.TryParse(txtData.Text, out _tmpdate))
-                        _tmpdate = System.DateTime.Now;
-                    updrecord.DataInserimento = _tmpdate;
+                DateTime _tmpdate = System.DateTime.Now;
+                //if (!DateTime.TryParse(txtData.Text, out _tmpdate))
+                if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+                    _tmpdate = System.DateTime.Now;
+                updrecord.DataInserimento = _tmpdate;
 
 
-                    // ----------SEZIONE DETTAGLIO------------------------------
-                    updrecord.Nome_dts = txtNome_dts.Text;
-                    updrecord.Cognome_dts = txtCognome_dts.Text;
+                // ----------SEZIONE DETTAGLIO------------------------------
+                updrecord.Nome_dts = txtNome_dts.Text;
+                updrecord.Cognome_dts = txtCognome_dts.Text;
+                _tmpdate = System.DateTime.MinValue;
+                //if (!DateTime.TryParse(txtDatanascita_dts.Text, out _tmpdate))
+                if (!DateTime.TryParseExact(txtDatanascita_dts.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                     _tmpdate = System.DateTime.MinValue;
-                    if (!DateTime.TryParse(txtDatanascita_dts.Text, out _tmpdate))
-                        _tmpdate = System.DateTime.MinValue;
-                    updrecord.Datanascita_dts = _tmpdate;
+                updrecord.Datanascita_dts = _tmpdate;
 
 
-                    updrecord.Pivacf_dts = txtPivacf_dts.Text;
-                    //updrecord.Sociopresentatore1_dts = txtSociopresentatore1_dts.Text;
-                    //updrecord.Sociopresentatore2_dts = txtSociopresentatore2_dts.Text;
-                    updrecord.Telefonoprivato_dts = txtTelefonoprivato_dts.Text;
-                    //updrecord.Annolaurea_dts = txtAnnolaurea_dts.Text;
-                    //updrecord.Annospecializzazione_dts = txtAnnospecializzazione_dts.Text;
-                    //updrecord.Altrespecializzazioni_dts = txtAltrespecializzazioni_dts.Text;
-                    //updrecord.Socioaltraassociazione_dts = txtSocioaltraassociazione_dts.Text;
-                    updrecord.Emailriservata_dts = txtEmailriservata_dts.Text;
+                updrecord.Pivacf_dts = txtPivacf_dts.Text;
+                //updrecord.Sociopresentatore1_dts = txtSociopresentatore1_dts.Text;
+                //updrecord.Sociopresentatore2_dts = txtSociopresentatore2_dts.Text;
+                updrecord.Telefonoprivato_dts = txtTelefonoprivato_dts.Text;
+                //updrecord.Annolaurea_dts = txtAnnolaurea_dts.Text;
+                //updrecord.Annospecializzazione_dts = txtAnnospecializzazione_dts.Text;
+                //updrecord.Altrespecializzazioni_dts = txtAltrespecializzazioni_dts.Text;
+                //updrecord.Socioaltraassociazione_dts = txtSocioaltraassociazione_dts.Text;
+                updrecord.Emailriservata_dts = txtEmailriservata_dts.Text;
 
-                    //Boolean
+                //Boolean
 
-                    //bool _b = false;
-                    //bool.TryParse(radSocioSicpre_dts.SelectedValue, out _b);
-                    //updrecord.SocioSicpre_dts = _b; //chkSocioSicpre_dts.Checked;
-                    //_b = false;
-                    //bool.TryParse(radSocioIsaps_dts.SelectedValue, out _b);
-                    //updrecord.SocioIsaps_dts = _b;// chkSocioIsaps_dts.Checked;
+                //bool _b = false;
+                //bool.TryParse(radSocioSicpre_dts.SelectedValue, out _b);
+                //updrecord.SocioSicpre_dts = _b; //chkSocioSicpre_dts.Checked;
+                //_b = false;
+                //bool.TryParse(radSocioIsaps_dts.SelectedValue, out _b);
+                //updrecord.SocioIsaps_dts = _b;// chkSocioIsaps_dts.Checked;
 
-                    //updrecord.AccettazioneStatuto_dts = chkAccettazioneStatuto_dts.Checked;
-                    //updrecord.Certificazione_dts = chkCertificazione_dts.Checked;
-                    updrecord.Bloccoaccesso_dts = chkBloccoaccesso_dts.Checked;
-
-
-                    //updrecord.locordine_dts = txtLocordine_dts.Text;
-                    //updrecord.niscrordine_dts = txtNiscrordine_dts.Text;
-                    //updrecord.annofrequenza_dts = txtannofrequenza_dts.Text;
-                    //updrecord.nomeuniversita_dts = txtnomeuniversita_dts.Text;
-                    //updrecord.dettagliuniversita_dts = txtdettagliuniversita_dts.Text;
-
-                    //updrecord.Textfield1_dts = txtTextfield1_dts.Text;
-
-                    //updrecord.Boolfields_dts = CreastringaBoolfields();
-                    //updrecord.Interventieseguiti_dts = CreastringTblinterventi();
-
-                    //   funzioni split e reconstruct!!!!!!
-                    updrecord.Trattamenticollegati_dts = Creastringatrattamenti();
-                    updrecord.Pagamenti_dts = Creastringapagamenti();
-
-                    //Indirizzo1
-                    updrecord.Nomeposizione1_dts = txtNomeposizione1_dts.Text;
-                    updrecord.Via1_dts = txtVia1_dts.Value;
-                    updrecord.Cap1_dts = txtCap1_dts.Value;
-                    updrecord.Telefono1_dts = txtTelefono1_dts.Value;
-
-                    _tmpdbl = 0;
-                    double.TryParse(txtLatitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Latitudine1_dts = _tmpdbl;
-                    _tmpdbl = 0;
-                    double.TryParse(txtLongitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Longitudine1_dts = _tmpdbl;
-                    updrecord.CodiceNAZIONE1_dts = ddlCodiceNAZIONE1_dts.SelectedValue;
-                    updrecord.CodiceREGIONE1_dts = txtCodiceREGIONE1_dts.Value;
-                    updrecord.CodicePROVINCIA1_dts = txtCodicePROVINCIA1_dts.Value;
-                    updrecord.CodiceCOMUNE1_dts = txtCodiceCOMUNE1_dts.Value;
-
-                    //Indirizzo2
-                    updrecord.Nomeposizione2_dts = txtNomeposizione2_dts.Text;
-                    updrecord.Via2_dts = txtVia2_dts.Value;
-                    updrecord.Cap2_dts = txtCap2_dts.Value;
-                    updrecord.Telefono2_dts = txtTelefono2_dts.Value;
-
-                    _tmpdbl = 0;
-                    double.TryParse(txtLatitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Latitudine2_dts = _tmpdbl;
-                    _tmpdbl = 0;
-                    double.TryParse(txtLongitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Longitudine2_dts = _tmpdbl;
-                    updrecord.CodiceNAZIONE2_dts = ddlCodiceNAZIONE2_dts.SelectedValue;
-                    updrecord.CodiceREGIONE2_dts = txtCodiceREGIONE2_dts.Value;
-                    updrecord.CodicePROVINCIA2_dts = txtCodicePROVINCIA2_dts.Value;
-                    updrecord.CodiceCOMUNE2_dts = txtCodiceCOMUNE2_dts.Value;
-
-                    //Indirizzo3
-                    updrecord.Nomeposizione3_dts = txtNomeposizione3_dts.Text;
-                    updrecord.Via3_dts = txtVia3_dts.Value;
-                    updrecord.Cap3_dts = txtCap3_dts.Value;
-                    updrecord.Telefono3_dts = txtTelefono3_dts.Value;
-
-                    _tmpdbl = 0;
-                    double.TryParse(txtLatitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Latitudine3_dts = _tmpdbl;
-                    _tmpdbl = 0;
-                    double.TryParse(txtLongitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
-                    updrecord.Longitudine3_dts = _tmpdbl;
-                    updrecord.CodiceNAZIONE3_dts = ddlCodiceNAZIONE3_dts.SelectedValue;
-                    updrecord.CodiceREGIONE3_dts = txtCodiceREGIONE3_dts.Value;
-                    updrecord.CodicePROVINCIA3_dts = txtCodicePROVINCIA3_dts.Value;
-                    updrecord.CodiceCOMUNE3_dts = txtCodiceCOMUNE3_dts.Value;
+                //updrecord.AccettazioneStatuto_dts = chkAccettazioneStatuto_dts.Checked;
+                //updrecord.Certificazione_dts = chkCertificazione_dts.Checked;
+                updrecord.Bloccoaccesso_dts = chkBloccoaccesso_dts.Checked;
 
 
-                    //----------------------------------------------------------
-                    //VERIFICA PER LA CREAZIONE DELL'UTENTE
-                    //----------------------------------------------------------
+                //updrecord.locordine_dts = txtLocordine_dts.Text;
+                //updrecord.niscrordine_dts = txtNiscrordine_dts.Text;
+                //updrecord.annofrequenza_dts = txtannofrequenza_dts.Text;
+                //updrecord.nomeuniversita_dts = txtnomeuniversita_dts.Text;
+                //updrecord.dettagliuniversita_dts = txtdettagliuniversita_dts.Text;
 
-                    if (VerificaPresenzaUtente(updrecord.Cognome_dts.Replace(" ", "").Trim().ToLower() + updrecord.Nome_dts.Replace(" ", "").Trim().ToLower()))
-                    {
-                        output.Text = "Attenzione già presente utente con stesso Nome e Cognome. Verificare";
-                        return;
-                    }
-                    //DOvrei controllare anche le email per verificare la ripetizione utenti
+                //updrecord.Textfield1_dts = txtTextfield1_dts.Text;
 
-                    //----------------------------------------------------------
-                    offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
-                    offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
-                    //Seleziono l'elemento appena inserito e ci inserisco gli allegati necessari
-                    OffertaIDSelected = updrecord.Id.ToString();
+                //updrecord.Boolfields_dts = CreastringaBoolfields();
+                //updrecord.Interventieseguiti_dts = CreastringTblinterventi();
 
-                    //Creo l'utente del membership
-                    //string username = "";
-                    //string password = "";
-                    //CreaUtenteAssociato(updrecord, ref username, ref password);
+                //   funzioni split e reconstruct!!!!!!
+                updrecord.Trattamenticollegati_dts = Creastringatrattamenti();
+                updrecord.Pagamenti_dts = Creastringapagamenti();
 
-                    AggiornaAllegati(); //Inserisco i file che devo in allegato
+                //Indirizzo1
+                updrecord.Nomeposizione1_dts = txtNomeposizione1_dts.Text;
+                updrecord.Via1_dts = txtVia1_dts.Value;
+                updrecord.Cap1_dts = txtCap1_dts.Value;
+                updrecord.Telefono1_dts = txtTelefono1_dts.Value;
+
+                _tmpdbl = 0;
+                double.TryParse(txtLatitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Latitudine1_dts = _tmpdbl;
+                _tmpdbl = 0;
+                double.TryParse(txtLongitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Longitudine1_dts = _tmpdbl;
+                updrecord.CodiceNAZIONE1_dts = ddlCodiceNAZIONE1_dts.SelectedValue;
+                updrecord.CodiceREGIONE1_dts = txtCodiceREGIONE1_dts.Value;
+                updrecord.CodicePROVINCIA1_dts = txtCodicePROVINCIA1_dts.Value;
+                updrecord.CodiceCOMUNE1_dts = txtCodiceCOMUNE1_dts.Value;
+
+                //Indirizzo2
+                updrecord.Nomeposizione2_dts = txtNomeposizione2_dts.Text;
+                updrecord.Via2_dts = txtVia2_dts.Value;
+                updrecord.Cap2_dts = txtCap2_dts.Value;
+                updrecord.Telefono2_dts = txtTelefono2_dts.Value;
+
+                _tmpdbl = 0;
+                double.TryParse(txtLatitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Latitudine2_dts = _tmpdbl;
+                _tmpdbl = 0;
+                double.TryParse(txtLongitudine2_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Longitudine2_dts = _tmpdbl;
+                updrecord.CodiceNAZIONE2_dts = ddlCodiceNAZIONE2_dts.SelectedValue;
+                updrecord.CodiceREGIONE2_dts = txtCodiceREGIONE2_dts.Value;
+                updrecord.CodicePROVINCIA2_dts = txtCodicePROVINCIA2_dts.Value;
+                updrecord.CodiceCOMUNE2_dts = txtCodiceCOMUNE2_dts.Value;
+
+                //Indirizzo3
+                updrecord.Nomeposizione3_dts = txtNomeposizione3_dts.Text;
+                updrecord.Via3_dts = txtVia3_dts.Value;
+                updrecord.Cap3_dts = txtCap3_dts.Value;
+                updrecord.Telefono3_dts = txtTelefono3_dts.Value;
+
+                _tmpdbl = 0;
+                double.TryParse(txtLatitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Latitudine3_dts = _tmpdbl;
+                _tmpdbl = 0;
+                double.TryParse(txtLongitudine3_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
+                updrecord.Longitudine3_dts = _tmpdbl;
+                updrecord.CodiceNAZIONE3_dts = ddlCodiceNAZIONE3_dts.SelectedValue;
+                updrecord.CodiceREGIONE3_dts = txtCodiceREGIONE3_dts.Value;
+                updrecord.CodicePROVINCIA3_dts = txtCodicePROVINCIA3_dts.Value;
+                updrecord.CodiceCOMUNE3_dts = txtCodiceCOMUNE3_dts.Value;
 
 
-                    this.SvuotaDettaglio();
+                //----------------------------------------------------------
+                //VERIFICA PER LA CREAZIONE DELL'UTENTE
+                //----------------------------------------------------------
 
-                    btnAggiorna.Text = "Modifica";
-                    btnAggiorna.ValidationGroup = "";
-                    btnAnnulla.Visible = false;
-                    ImpostaDettaglioSolaLettura(true);
-                    btnCancella.Visible = true;
-                    btnCancella.Enabled = true;
-                    btnAggiorna.Enabled = true;
-
+                if (VerificaPresenzaUtente(updrecord.Cognome_dts.Replace(" ", "").Trim().ToLower() + updrecord.Nome_dts.Replace(" ", "").Trim().ToLower()))
+                {
+                    output.Text = "Attenzione già presente utente con stesso Nome e Cognome. Verificare";
+                    return;
                 }
+                //DOvrei controllare anche le email per verificare la ripetizione utenti
 
-				  ////////////////////////////////////////////////////////////////////
+                //----------------------------------------------------------
+                offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+                offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
+                //Seleziono l'elemento appena inserito e ci inserisco gli allegati necessari
+                OffertaIDSelected = updrecord.Id.ToString();
+
+                //Creo l'utente del membership
+                //string username = "";
+                //string password = "";
+                //CreaUtenteAssociato(updrecord, ref username, ref password);
+
+                AggiornaAllegati(); //Inserisco i file che devo in allegato
+
+
+                this.SvuotaDettaglio();
+
+                btnAggiorna.Text = "Modifica";
+                btnAggiorna.ValidationGroup = "";
+                btnAnnulla.Visible = false;
+                ImpostaDettaglioSolaLettura(true);
+                btnCancella.Visible = true;
+                btnCancella.Enabled = true;
+                btnAggiorna.Enabled = true;
+
+            }
+
+            ////////////////////////////////////////////////////////////////////
             //Creo o aggiorno l'url per il rewriting in tutte le lingue ...
             ////////////////////////////////////////////////////////////////////
             Tabrif urlRewrited = new Tabrif();
             WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
-           
 
-			   WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.DenominazionebyLingua("I"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.DenominazionebyLingua("GB"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.DenominazionebyLingua("RU"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.UrltextforlinkbyLingua("I"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.UrltextforlinkbyLingua("GB"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.UrltextforlinkbyLingua("RU"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
 
 
 
             /////////////////////////////////////
 
-			
+
             this.CaricaDati();
             //OfferteCollection list = offDM.CaricaOffertePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, TipologiaOfferte);
             //rptOfferte.DataSource = list;
@@ -2018,12 +2022,12 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
 #endif
-   /// <summary>
-   /// Cancella il record selezionato nell'elenco
-   /// </summary>
-   /// <param name="sender"></param>
-   /// <param name="e"></param>
-   protected void btnCancella_Click(object sender, EventArgs e)
+    /// <summary>
+    /// Cancella il record selezionato nell'elenco
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnCancella_Click(object sender, EventArgs e)
     {
         btnAggiorna.Text = "Modifica";
         btnAggiorna.ValidationGroup = "";
@@ -2060,7 +2064,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
                     //Cancello il record
                     offDM.DeleteOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
-					WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
+                    WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
 
                     //Eliminiamo l'utente del membership se presente
                     EliminaUtenteAssociato(item);
@@ -2324,7 +2328,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         chkBloccoaccesso_dts.Enabled = !valore;
 
 
-       
+
         //txtLocordine_dts.ReadOnly = valore;
         //txtNiscrordine_dts.ReadOnly = valore;
         //txtannofrequenza_dts.ReadOnly = valore;
@@ -2571,7 +2575,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                             if (filemanage.ResizeAndSave(UploadControl.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                if(!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto,450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto))
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto))
                                     output.Text = ("Anteprima Allegato non salvata correttamente!");
 
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
@@ -2676,7 +2680,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
         }
     }
-    
+
 
     protected string ComponiUrlAnteprima(object FotoColl, string id)
     {
@@ -2715,14 +2719,14 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
     {
         string SceltaTipologia = Tipologia;
         List<WelcomeLibrary.DOM.Prodotto> prodotti = new List<WelcomeLibrary.DOM.Prodotto>();
-        prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
+        prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
         if (!string.IsNullOrEmpty(SceltaTipologia))
-            prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == SceltaTipologia || SceltaTipologia == "")); });
+            prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == SceltaTipologia || SceltaTipologia == "")); });
 
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd1.Items.Clear();
-        ddlProdottoNewProd1.Items.Insert(0, references.ResMan("Common",Lingua,"selProdotti"));
+        ddlProdottoNewProd1.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdottoNewProd1.Items[0].Value = "";
         ddlProdottoNewProd1.DataSource = prodotti;
         ddlProdottoNewProd1.DataTextField = "Descrizione";
@@ -2734,10 +2738,10 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         }
         catch { }
 
-        List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate(WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
+        List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewProd.Items.Clear();
-        ddlTipologiaNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlTipologiaNewProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlTipologiaNewProd.Items[0].Value = "";
         ddlTipologiaNewProd.DataSource = Tipologie;
         ddlTipologiaNewProd.DataTextField = "Descrizione";
@@ -2761,12 +2765,12 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         string SceltaTipologia = Tipologia;
 
         List<WelcomeLibrary.DOM.Prodotto> prodotti = new List<WelcomeLibrary.DOM.Prodotto>();
-        prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
+        prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
 
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         /*Carico Anche la ddl dell'inserzione del nuovo sottoprodotto*/
         ddlProdottoNewProd.Items.Clear();
-        ddlProdottoNewProd.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlProdottoNewProd.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdottoNewProd.Items[0].Value = "";
         ddlProdottoNewProd.DataSource = prodotti;
         ddlProdottoNewProd.DataTextField = "Descrizione";
@@ -2781,11 +2785,11 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
         List<WelcomeLibrary.DOM.SProdotto> sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
 
-        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate(WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdottoNewProd.SelectedValue)); });
+        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdottoNewProd.SelectedValue)); });
 
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdottoNewSProd.Items.Clear();
-        ddlProdottoNewSProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlProdottoNewSProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlProdottoNewSProd.Items[0].Value = "";
         ddlProdottoNewSProd.DataSource = sprodotti;
         ddlProdottoNewSProd.DataTextField = "Descrizione";
@@ -2799,10 +2803,10 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
 
-        List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate(WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
+        List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "I"); });
 
         ddlTipologiaNewSottProd.Items.Clear();
-        ddlTipologiaNewSottProd.Items.Insert(0, references.ResMan("Common",Lingua, "selSProdotti"));
+        ddlTipologiaNewSottProd.Items.Insert(0, references.ResMan("Common", Lingua, "selSProdotti"));
         ddlTipologiaNewSottProd.Items[0].Value = "";
         ddlTipologiaNewSottProd.DataSource = Tipologie;
         ddlTipologiaNewSottProd.DataTextField = "Descrizione";
@@ -2822,8 +2826,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         WelcomeLibrary.DOM.Prodotto prodottoIta = new WelcomeLibrary.DOM.Prodotto();
         WelcomeLibrary.DOM.Prodotto prodottoEng = new WelcomeLibrary.DOM.Prodotto();
 
-        prodottoIta = Utility.ElencoProdotti.Find(delegate(WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceProdotto == Prodotto)); });
-        prodottoEng = Utility.ElencoProdotti.Find(delegate(WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceProdotto == Prodotto)); });
+        prodottoIta = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceProdotto == Prodotto)); });
+        prodottoEng = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceProdotto == Prodotto)); });
 
         //adesso che ho il mio prodotto, posso caricare i suoi valori per la modifica o l'inserimento
         if (prodottoIta != null)
@@ -2843,8 +2847,8 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         //carico nei form di inserimento e modifica i valori relativi al prodotto
         WelcomeLibrary.DOM.SProdotto SprodottoIta = new WelcomeLibrary.DOM.SProdotto();
         WelcomeLibrary.DOM.SProdotto SprodottoEng = new WelcomeLibrary.DOM.SProdotto();
-        SprodottoIta = Utility.ElencoSottoProdotti.Find(delegate(WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
-        SprodottoEng = Utility.ElencoSottoProdotti.Find(delegate(WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
+        SprodottoIta = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
+        SprodottoEng = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
 
         //adesso che ho il mio prodotto, posso caricare i suoi valori per la modifica o l'inseriment
         if (SprodottoIta != null)
@@ -3376,7 +3380,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
         //Riempio la ddl  
-        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica3.Items.Clear();
         ddlCaratteristica3.Items.Insert(0, "Seleziona car3");
         ddlCaratteristica3.Items[0].Value = "0";
@@ -3391,7 +3395,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         catch { }
 
         //Riempio la ddl  
-        Car3 = Utility.Caratteristiche[2].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica3_gest.Items.Clear();
         ddlCaratteristica3_gest.Items.Insert(0, "Seleziona car3");
         ddlCaratteristica3_gest.Items[0].Value = "0";
@@ -3437,7 +3441,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
         //Riempio la ddl  
-        List<Tabrif> Car5 = Utility.Caratteristiche[4].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        List<Tabrif> Car5 = Utility.Caratteristiche[4].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica5.Items.Clear();
         ddlCaratteristica5.Items.Insert(0, "Seleziona car5");
         ddlCaratteristica5.Items[0].Value = "0";
@@ -3452,7 +3456,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         catch { }
 
         //Riempio la ddl tipi clienti
-        Car5 = Utility.Caratteristiche[4].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        Car5 = Utility.Caratteristiche[4].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica5_gest.Items.Clear();
         ddlCaratteristica5_gest.Items.Insert(0, "Seleziona car5");
         ddlCaratteristica5_gest.Items[0].Value = "0";
@@ -3469,7 +3473,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
 
         //Riempio la ddl  
-        List<Tabrif> Car6 = Utility.Caratteristiche[5].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        List<Tabrif> Car6 = Utility.Caratteristiche[5].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica6.Items.Clear();
         ddlCaratteristica6.Items.Insert(0, "Seleziona car6");
         ddlCaratteristica6.Items[0].Value = "0";
@@ -3484,7 +3488,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         catch { }
 
         //Riempio la ddl tipi clienti
-        Car6 = Utility.Caratteristiche[5].FindAll(delegate(Tabrif _t) { return _t.Lingua == "I"; });
+        Car6 = Utility.Caratteristiche[5].FindAll(delegate (Tabrif _t) { return _t.Lingua == "I"; });
         ddlCaratteristica6_gest.Items.Clear();
         ddlCaratteristica6_gest.Items.Insert(0, "Seleziona car6");
         ddlCaratteristica6_gest.Items[0].Value = "0";
@@ -3891,20 +3895,20 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
     private void CaricaDatiDdlRicerca(string Regione, string Provincia, string Comune, string Categoria, string SottoCategoria)
     {
         WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
-        List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.Lingua == "I"); });
+        List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == "I"); });
         if (provincelingua != null)
         {
             provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
             foreach (Province item in provincelingua)
             {
                 if (item.Lingua == "I")
-                    if (!regioni.Exists(delegate(Province tmp) { return (tmp.Regione == item.Regione); }))
+                    if (!regioni.Exists(delegate (Province tmp) { return (tmp.Regione == item.Regione); }))
                         regioni.Add(item);
             }
         }
         //regioni.Sort(new GenericComparer<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending));
         ddlRegione.Items.Clear();
-        ddlRegione.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiregione"));
+        ddlRegione.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiregione"));
         ddlRegione.Items[0].Value = "";
         ddlRegione.DataSource = regioni;
         ddlRegione.DataTextField = "Regione";
@@ -3917,15 +3921,15 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         catch { }
         //Province
         ddlProvincia.Items.Clear();
-        ddlProvincia.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiprovincia"));
+        ddlProvincia.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiprovincia"));
         ddlProvincia.Items[0].Value = "";
         if (Regione != "")
         {
             provincelingua = null;
-            Province _tmp = Utility.ElencoProvince.Find(delegate(Province tmp) { return (tmp.Lingua == "I" && tmp.Codice == ddlRegione.SelectedValue); });
+            Province _tmp = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == "I" && tmp.Codice == ddlRegione.SelectedValue); });
             if (_tmp != null)
             {
-                provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.Lingua == "I" && tmp.CodiceRegione == _tmp.CodiceRegione); });
+                provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == "I" && tmp.CodiceRegione == _tmp.CodiceRegione); });
                 provincelingua.Sort(new GenericComparer<Province>("Provincia", System.ComponentModel.ListSortDirection.Ascending));
             }
             ddlProvincia.DataSource = provincelingua;
@@ -3940,11 +3944,11 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         }
         //Comuni
         ddlComune.Items.Clear();
-        ddlComune.Items.Insert(0, references.ResMan("Common",Lingua, "ddlTuttiComune"));
+        ddlComune.Items.Insert(0, references.ResMan("Common", Lingua, "ddlTuttiComune"));
         ddlComune.Items[0].Value = "";
         if (Provincia != "")
         {
-            List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate(WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == Provincia); });
+            List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == Provincia); });
             if (comunilingua != null)
                 comunilingua.Sort(new GenericComparer<Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
             ddlComune.DataSource = comunilingua;
@@ -3961,14 +3965,14 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
         string SceltaTipologia = TipologiaOfferte;
         List<WelcomeLibrary.DOM.Prodotto> prodotti = new List<WelcomeLibrary.DOM.Prodotto>();
-        prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
+        prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == TipologiaOfferte || TipologiaOfferte == "")); });
         if (!string.IsNullOrEmpty(SceltaTipologia))
         {
-            prodotti = Utility.ElencoProdotti.FindAll(delegate(WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == SceltaTipologia || SceltaTipologia == "")); });
+            prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceTipologia == SceltaTipologia || SceltaTipologia == "")); });
         }
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlProdotto.Items.Clear();
-        ddlProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlProdotto.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlProdotto.Items[0].Value = "";
         ddlProdotto.DataSource = prodotti;
         ddlProdotto.DataTextField = "Descrizione";
@@ -3981,10 +3985,10 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         catch { }
 
         List<WelcomeLibrary.DOM.SProdotto> sprodotti = new List<WelcomeLibrary.DOM.SProdotto>();
-        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate(WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdotto.SelectedValue)); });
+        sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "I" && (tmp.CodiceProdotto == ddlProdotto.SelectedValue)); });
         sprodotti.Sort(new GenericComparer<SProdotto>("CodiceSProdotto", System.ComponentModel.ListSortDirection.Ascending));
         ddlSottoProdotto.Items.Clear();
-        ddlSottoProdotto.Items.Insert(0, references.ResMan("Common",Lingua, "selProdotti"));
+        ddlSottoProdotto.Items.Insert(0, references.ResMan("Common", Lingua, "selProdotti"));
         ddlSottoProdotto.Items[0].Value = "";
         ddlSottoProdotto.DataSource = sprodotti;
         ddlSottoProdotto.DataTextField = "Descrizione";
@@ -4025,7 +4029,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
     private void RiempiDdlNazione(string valore, DropDownList dnaz)
     {
-        List<Tabrif> nazioni = Utility.Nazioni.FindAll(delegate(Tabrif _nz) { return _nz.Lingua == "I"; });
+        List<Tabrif> nazioni = Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == "I"; });
         nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
         dnaz.Items.Clear();
         foreach (Tabrif n in nazioni)
@@ -4049,7 +4053,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         if (dnaz.SelectedValue == "IT")
         {
             WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
-            List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
+            List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
             if (provincelingua != null)
             {
                 provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
@@ -4063,7 +4067,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
                 foreach (string c in codiciregione)
                 {
                     Province p = provincelingua.Find(_p => _p.Codice == c);
-                    if (!regioni.Exists(delegate(Province tmp) { return (tmp.Regione == p.Regione); }))
+                    if (!regioni.Exists(delegate (Province tmp) { return (tmp.Regione == p.Regione); }))
                         regioni.Add(p);
                 }
             }
@@ -4105,10 +4109,10 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         txtPR.Value = valore;
         if (dreg.SelectedValue != "" && dnaz.SelectedValue == "IT")
         {
-            Province _tmp = Utility.ElencoProvince.Find(delegate(Province tmp) { return (tmp.Lingua == "I" && tmp.Codice == dreg.SelectedValue); });
+            Province _tmp = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == "I" && tmp.Codice == dreg.SelectedValue); });
             if (_tmp != null)
             {
-                List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate(Province tmp) { return (tmp.Lingua == "I" && tmp.CodiceRegione == _tmp.CodiceRegione && _tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
+                List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == "I" && tmp.CodiceRegione == _tmp.CodiceRegione && _tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
                 provincelingua.Sort(new GenericComparer<Province>("Provincia", System.ComponentModel.ListSortDirection.Ascending));
                 foreach (Province r in provincelingua)
                 {
@@ -4146,7 +4150,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         txtCO.Value = valore;
         if (dpro.SelectedValue != "" && dnaz.SelectedValue == "IT")
         {
-            List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate(WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == dpro.SelectedValue); });
+            List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == dpro.SelectedValue); });
             if (comunilingua != null)
             {
                 comunilingua.Sort(new GenericComparer<Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
@@ -4377,7 +4381,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         string password = "";
         Offerte Details = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, OffertaIDSelected);
         if (Details != null)
-            if (CreaUtenteAssociato(Details, ref  NomeUtente, ref password))
+            if (CreaUtenteAssociato(Details, ref NomeUtente, ref password))
                 lblResultsPsw.Text = "Utente Creato! Nomeutente: " + NomeUtente + " Password: " + password;
             else
                 lblResultsPsw.Text = "Utente NON Creato! ";

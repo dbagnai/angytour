@@ -20,19 +20,16 @@ public partial class index : CommonPage
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
         try
         {
             if (!IsPostBack)
             {
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", true, deflanguage);
-                //  CaricaControlliServerside();
-                //CaricaControlliJS();
-                SettaTestoIniziale("Home");
-                InizializzaSeo();
-                //PulisciRegistrazionitemporanee();
+                InizializzaSeo("home");
 
+                //CaricaControlliServerside();
+                //CaricaControlliJS();
+                //PulisciRegistrazionitemporanee();
                 // se utilizzi le risorse abilita il databind
                 //DataBind();
             }
@@ -43,102 +40,43 @@ public partial class index : CommonPage
         }
     }
 
-    private void InizializzaSeo()
-    {
-        string linkcanonico = "~";
-        linkcanonico = "~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/Home";
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == Lingua)
-
-            linkcanonico = "~";
-        //CANONICAL DEFAULT
-        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
-        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
-
-        //METTIAMO GLI ALTERNATE
-        string hreflang = "";
-
-        //Italiano
-        hreflang = " hreflang=\"it\" ";
-        string linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("I") + "/Home";
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
-            linkcanonicoalt = "~";
-
-        Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-        litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
-        {
-            //inglese
-            hreflang = " hreflang=\"en\" ";
-            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("GB") + "/Home";
-            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
-                linkcanonicoalt = "~";
-            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        }
-
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
-        {
-            //russo
-            hreflang = " hreflang=\"ru\" ";
-            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("RU") + "/Home";
-            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "RU")
-                linkcanonicoalt = "~";
-            litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
-            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
-        }
-
-    }
-
-    private void SettaTestoIniziale(string sezione)
+    private void InizializzaSeo(string sezione)
     {
         string htmlPage = "";
         if (references.ResMan("Common", Lingua, "Content" + sezione) != null)
             htmlPage = ReplaceLinks(references.ResMan("Common", Lingua, "Content" + sezione).ToString());
         litTextHeadPage.Text = htmlPage;
         string strigaperricerca = sezione;
-        //strigaperricerca = Request.Url.AbsolutePath;
-        //strigaperricerca = strigaperricerca.ToLower().Replace("index.aspx", "home");
         Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
+        if (content == null) return;
 
         string customdesc = "";
         string customtitle = "";
         if (content != null && content.Id != 0)
         {
-
-            //System.Diagnostics.Stopwatch SP = new System.Diagnostics.Stopwatch();
-            //TimeSpan ts;
-            //SP.Start();
-
-
+            /////////////////////////////////////////////
+            //Inserisco i Contenuti di Pagina con prerender !!!
+            /////////////////////////////////////////////
             htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-            htmlPage = custombind.bind(htmlPage,Lingua, User.Identity.Name, HttpContext.Current.Session, null, null, Request); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
+            htmlPage = custombind.bind(htmlPage, Lingua, User.Identity.Name, HttpContext.Current.Session, null, null, Request); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
 
-            //    // Get the elapsed time as a TimeSpan value.
-            //    ts = SP.Elapsed;
-            //    // Format and display the TimeSpan value.
-            //    string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //        ts.Hours, ts.Minutes, ts.Seconds,
-            //ts.Milliseconds / 10);
-            //    System.Diagnostics.Debug.WriteLine(elapsedTime + " :Start stopwatch time");
-
-
-            string descrizione = content.DescrizioneI;
-            string titolopagina = content.TitoloI;
+            /////////////////////////////////////////////
+            ///META TITLE E DESCRIPTION
+            /////////////////////////////////////////////
+            //string descrizione = content.DescrizioneI;
+            //string titolopagina = content.TitoloI;
             switch (Lingua)
             {
                 case "GB":
-                    descrizione = content.DescrizioneGB;
-                    titolopagina = content.TitoloGB;
+                    //descrizione = content.DescrizioneGB;
+                    //titolopagina = content.TitoloGB;
                     customdesc = content.CustomdescGB;
                     customtitle = content.CustomtitleGB;
                     break;
                 case "RU":
-                    descrizione = content.DescrizioneRU;
-                    titolopagina = content.TitoloRU;
+                    //descrizione = content.DescrizioneRU;
+                    //titolopagina = content.TitoloRU;
                     customdesc = content.CustomdescRU;
                     customtitle = content.CustomtitleRU;
                     break;
@@ -152,10 +90,90 @@ public partial class index : CommonPage
                 ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
             if (!string.IsNullOrEmpty(customdesc))
                 ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
+
         }
 
+        /////////////////////////////////////////////
+        ///META ROBOTS custom
+        /////////////////////////////////////////////
+        HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+        if (!string.IsNullOrEmpty(content.Robots.Trim()))
+            metarobots.Attributes["Content"] = content.Robots.Trim();
 
+        /////////////////////////////////////////////
+        ///CANONICAL e ALTERNATE
+        /////////////////////////////////////////////
+        Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
+        string hreflang = "";
+
+        //CANONICAL DEFAULT
+        string linkcanonico = "~";
+        linkcanonico = "~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/home";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == Lingua)
+            linkcanonico = "~";
+        //FORZATURA CANONICAL
+        if (!string.IsNullOrEmpty(content.CanonicalbyLingua(Lingua).Trim()))
+            linkcanonico = (content.CanonicalbyLingua(Lingua).Trim());
+        litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
+
+        //METTIAMO GLI ALTERNATE
+        //Italiano
+        hreflang = " hreflang=\"it\" ";
+        string linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("I") + "/home";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
+            linkcanonicoalt = "~";
+        //Forzatura canonical alternate
+        if (!string.IsNullOrEmpty(content.CanonicalbyLingua("I").Trim()))
+            linkcanonicoalt = (content.CanonicalbyLingua("I").Trim());
+        //alternate
+        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+        litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
+        {
+            Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+            litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+        }
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
+        {
+            //inglese
+            hreflang = " hreflang=\"en\" ";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("GB") + "/home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
+                linkcanonicoalt = "~";
+            //Forzatura canonical alternate
+            if (!string.IsNullOrEmpty(content.CanonicalbyLingua("GB").Trim()))
+                linkcanonicoalt = (content.CanonicalbyLingua("GB").Trim());
+
+            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            }
+        }
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
+        {
+            //russo
+            hreflang = " hreflang=\"ru\" ";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("RU") + "/home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "RU")
+                linkcanonicoalt = "~";
+            //Forzatura canonical alternate
+            if (!string.IsNullOrEmpty(content.CanonicalbyLingua("RU").Trim()))
+                linkcanonicoalt = (content.CanonicalbyLingua("RU").Trim());
+            litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "RU")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            }
+        }
     }
+
 
 
     #region OLD CALLS

@@ -18,8 +18,10 @@ namespace WelcomeLibrary.DAL
         public static DateTime CorrectDatenow(DateTime dataorig)
         {
             DateTime _tmpdate = System.DateTime.Now;
-            if (!DateTime.TryParse(dataorig.ToString(), out _tmpdate))
-                DateTime.TryParse(System.DateTime.Now.ToString(), out _tmpdate);
+            if (!DateTime.TryParseExact(dataorig.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+                DateTime.TryParseExact(System.DateTime.Now.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
+            //if (!DateTime.TryParse(dataorig.ToString(), out _tmpdate))
+            //DateTime.TryParse(System.DateTime.Now.ToString(), out _tmpdate);
             return _tmpdate;
         }
 
@@ -122,7 +124,7 @@ namespace WelcomeLibrary.DAL
                     conn.Close();
                 }
             }
-            catch(Exception e) { ret = "Errore compressione archivio DB:" + e.Message; }
+            catch (Exception e) { ret = "Errore compressione archivio DB:" + e.Message; }
             return ret;
         }
 
@@ -429,7 +431,7 @@ namespace WelcomeLibrary.DAL
             return cmd.ExecuteReader(CommandBehavior.CloseConnection);
         }
 
-     
+
         /// <summary>
         /// Creiamo anche un metodo per eseguire query di aggiornamento usando una connessione sql
         /// </summary>
@@ -540,7 +542,7 @@ namespace WelcomeLibrary.DAL
             }
             return ritorno;
         }
-      
+
 
     }
 }

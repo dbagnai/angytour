@@ -6,22 +6,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-    <script type="text/javascript">
-        var makeRevLower = true;
-    </script>
+
     <div id="divTitleContainer">
-    <div class="container" style="text-align: center;" runat="server" id="divTitle">
-        <div class="row">
-            <div class="col-md-1 col-sm-1">
-            </div>
-            <div class="col-md-10 col-sm-10 col-xs-12">
-                <h1 class="title-block" style="line-height: normal;">
-                    <asp:Literal Text="" runat="server" ID="litNomeContenuti" /></h1>
-            </div>
-            <div class="col-md-1 col-sm-1">
+        <div class="container" style="text-align: center;" runat="server" id="divTitle" visible="false">
+            <div class="row">
+                <div class="col-md-1 col-sm-1">
+                </div>
+                <div class="col-md-10 col-sm-10 col-12">
+                    <h1 class="title-block" style="line-height: normal;">
+                        <asp:Literal Text="" runat="server" ID="litNomeContenuti" /></h1>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <asp:Literal ID="litMainContent" runat="server"></asp:Literal>
 
@@ -51,9 +49,6 @@
             <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
         </div>
     </asp:Panel>
-
-
-
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -109,9 +104,9 @@
                                 }
                                 $(this).css('visibility', 'visible').addClass('animated').addClass($(this).data('animate-in'));
                                 $(this).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-                                  function () {
-                                      $(this).removeClass($(this).data('animate-in'));
-                                  }
+                                    function () {
+                                        $(this).removeClass($(this).data('animate-in'));
+                                    }
                                 );
                             });
                         },
@@ -137,9 +132,9 @@
                                 }
                                 $(this).css('visibility', 'visible').addClass('animated').addClass($(this).data('animate-in'));
                                 $(this).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-                                  function () {
-                                      $(this).removeClass($(this).data('animate-in'));
-                                  }
+                                    function () {
+                                        $(this).removeClass($(this).data('animate-in'));
+                                    }
                                 );
                             });
                             /* auto-restart player if paused after action */
@@ -184,7 +179,7 @@
     <div class="row" runat="server" id="divGalleryDetail" visible="false">
         <div class="col-md-1 col-sm-1">
         </div>
-        <div class="col-md-10 col-sm-10 col-xs-12">
+        <div class="col-md-10 col-sm-10 col-12">
             <asp:Repeater ID="rptOfferteGalleryDetail" runat="server">
                 <ItemTemplate>
                     <div class="blog-post" style="text-align: justify; background-color: transparent; border: none">
@@ -213,6 +208,6 @@
         <div class="col-md-1 col-sm-1">
         </div>
     </div>
-    
+
 </asp:Content>
 

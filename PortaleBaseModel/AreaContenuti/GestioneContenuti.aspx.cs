@@ -124,17 +124,19 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         }
     }
 
-    public string CreaLinkPaginastatica(long idps, bool noli = false, string classe = "", string stile = "font-weight:600 !important")
+    public string CreaLinkPaginastatica(long idps, bool noli = false, string classe = "", string stile = "font-weight:600 !important", string lng = "")
     {
+        if (string.IsNullOrEmpty(lng)) lng = Lingua;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         contenutiDM conDM = new contenutiDM();
         Contenuti item = conDM.CaricaContenutiPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idps.ToString());
         //Creiamo i link
         if (item != null)
         {
-            string testo = item.TitolobyLingua(Lingua);
-            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), CodiceContenuto);
-            testo = "Vedi";
+
+            string testo = item.TitolobyLingua(lng);
+            string link = CommonPage.CreaLinkRoutes(Session, true, lng, CommonPage.CleanUrl(testo), idps.ToString(), CodiceContenuto);
+            testo = "Vedi"; //Forzo testo fisso
             if (!noli) sb.Append("<li>");
             sb.Append("<a  href=\"");
             sb.Append(link);
@@ -304,6 +306,9 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 }
             }
 
+            litlinkI.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "I");
+            litlinkGB.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "GB");
+            litlinkRU.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "RU");
 
             //Riempiamo i dati del dettaglio
             txtTitoloI.Text = Details.TitoloI;//(((Literal)e.Item.FindControl("lit1")).Text);
@@ -317,6 +322,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             txtCustomdescGB.Text = Details.CustomdescGB;
             txtCustomdescRU.Text = Details.CustomdescRU;
 
+            txtCanonicalI.Text = Details.CanonicalI;
+            txtCanonicalGB.Text = Details.CanonicalGB;
+            txtCanonicalRU.Text = Details.CanonicalRU;
+            txtRobots.Text = Details.Robots;
 
             if (CodiceContenuto == "con001000")
             {
@@ -324,7 +333,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 tinyhtmlEditGB.InnerText = Details.DescrizioneGB;
                 tinyhtmlEditI.InnerText = Details.DescrizioneI;
 
-                
+
             }
             else
             {
@@ -506,9 +515,9 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 {
                     updrecord.Id = tmp;
                     updrecord.CodiceContenuto = CodiceContenuto;
-                    updrecord.TitoloI = txtTitoloI.Text;
-                    updrecord.TitoloGB = txtTitoloGB.Text;
-                    updrecord.TitoloRU = txtTitoloRU.Text;
+                    updrecord.TitoloI = txtTitoloI.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloI.Text);
+                    updrecord.TitoloGB = txtTitoloGB.Text; // WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloGB.Text);
+                    updrecord.TitoloRU = txtTitoloRU.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloRU.Text);
 
                     updrecord.CustomtitleI = txtCustomtitleI.Text;
                     updrecord.CustomtitleGB = txtCustomtitleGB.Text;
@@ -517,13 +526,19 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     updrecord.CustomdescGB = txtCustomdescGB.Text;
                     updrecord.CustomdescRU = txtCustomdescRU.Text;
 
+
+                    updrecord.CanonicalI = txtCanonicalI.Text;
+                    updrecord.CanonicalGB = txtCanonicalGB.Text;
+                    updrecord.CanonicalRU = txtCanonicalRU.Text;
+                    updrecord.Robots = txtRobots.Text;
+
                     if (CodiceContenuto == "con001000")
                     {
                         updrecord.DescrizioneI = tinyhtmlEditI.InnerText;
                         updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                         updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
 
-                        
+
                     }
                     else
                     {
@@ -537,7 +552,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     }
 
                     DateTime _tmpdate = System.DateTime.Now;
-                    DateTime.TryParse(txtData.Text, out _tmpdate);
+                    //DateTime.TryParse(txtData.Text, out _tmpdate);
+                    DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
                     updrecord.DataInserimento = _tmpdate;
                     long _i = 0;
                     long.TryParse(ddlStruttura.SelectedValue, out _i);
@@ -555,9 +571,9 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             {
                 updrecord = new Contenuti();
                 updrecord.CodiceContenuto = CodiceContenuto;
-                updrecord.TitoloI = txtTitoloI.Text;
-                updrecord.TitoloGB = txtTitoloGB.Text;
-                updrecord.TitoloRU = txtTitoloRU.Text;
+                updrecord.TitoloI = txtTitoloI.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloI.Text);
+                updrecord.TitoloGB = txtTitoloGB.Text; // WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloGB.Text);
+                updrecord.TitoloRU = txtTitoloRU.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloRU.Text);
 
                 updrecord.CustomtitleI = txtCustomtitleI.Text;
                 updrecord.CustomtitleGB = txtCustomtitleGB.Text;
@@ -565,6 +581,12 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 updrecord.CustomdescI = txtCustomdescI.Text;
                 updrecord.CustomdescGB = txtCustomdescGB.Text;
                 updrecord.CustomdescRU = txtCustomdescRU.Text;
+
+
+                updrecord.CanonicalI = txtCanonicalI.Text;
+                updrecord.CanonicalGB = txtCanonicalGB.Text;
+                updrecord.CanonicalRU = txtCanonicalRU.Text;
+                updrecord.Robots = txtRobots.Text;
 
                 if (CodiceContenuto == "con001000")
                 {
@@ -589,7 +611,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 }
 
                 DateTime _tmpdate = System.DateTime.Now;
-                DateTime.TryParse(txtData.Text, out _tmpdate);
+                //DateTime.TryParse(txtData.Text, out _tmpdate);
+                DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
                 updrecord.DataInserimento = _tmpdate;
                 //Questi li devi riempire con la lista delle foto
                 //updrecord.FotoCollection_M.Schema = txtFotoSchema.Value;
@@ -612,7 +635,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             ////////////////////////////////////////////////////////////////////
             //Creo o aggiorno l'url per il rewriting in tutte le lingue ...
             ////////////////////////////////////////////////////////////////////
-            WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdContenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
+            //Elimino gli url precendenti !!!!!  ( ma questo fa andare in home i vecchi url !!! non è il massimo)!!!!
+            ///WelcomeLibrary.UF.SitemapManager.EliminaUrlrewritebyIdContenuto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord.Id.ToString());
 
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.TitolobyLingua("I"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.TitolobyLingua("GB"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
@@ -777,6 +801,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         txtCustomdescGB.Text = "";
         txtCustomdescRU.Text = "";
 
+        txtCanonicalI.Text = "";
+        txtCanonicalGB.Text = "";
+        txtCanonicalRU.Text = "";
+        txtRobots.Text = "";
 
         txtData.Text = string.Format("{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now);
         //txtFotoSchema.Value = "";
@@ -790,6 +818,12 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         txtCustomdescI.ReadOnly = valore;
         txtCustomdescGB.ReadOnly = valore;
         txtCustomdescRU.ReadOnly = valore;
+
+
+        txtCanonicalI.ReadOnly = valore;
+        txtCanonicalGB.ReadOnly = valore;
+        txtCanonicalRU.ReadOnly = valore;
+        txtRobots.ReadOnly = valore;
 
         txtTitoloI.ReadOnly = valore;
         txtTitoloGB.ReadOnly = valore;
@@ -1088,8 +1122,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                             if (filemanage.ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true))
-                                     output.Text = ("Anteprima Allegato non salvata correttamente!");
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true))
+                                    output.Text = ("Anteprima Allegato non salvata correttamente!");
 
                                 //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
                                 //I DATI PER RINTRACCIARE LA FOTO-->SCHEMA E VALORI
@@ -1196,8 +1230,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
     }
 
 
-   
-     
+
+
     #endregion
 
 

@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Register Src="~/AspNetPages/UC/PagerEx.ascx" TagName="PagerEx" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link rel="stylesheet"  href="/css/prettyPhoto.css" />
+    <link rel="stylesheet" href="/css/prettyPhoto.css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -35,9 +35,8 @@
                                 <th></th>
                                 <th>ID</th>
                                 <th>Link</th>
-                                <th>Titolo ITA</th>
-                                <%--  <th>Titolo ENG</th>
-                                <th>Titolo RU</th>--%>
+                                <th>Urltext / linkcollegato (ITA)</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +110,7 @@
                         pretty();
                         tinymceinit();
                     });
-                   function tinymceinit() {
+                    function tinymceinit() {
                         tinymce.init({
                             mode: "textareas",
                             editor_deselector: "mceNoEditor", // class="mceNoEditor" will not have tinyMCE
@@ -123,7 +122,7 @@
                             verify_html: false,
                             allow_html_in_named_anchor: true,
                             valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style],+div[ul]",
-                             plugins: [
+                            plugins: [
                                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                                 "save table directionality emoticons template paste textcolor"
@@ -200,273 +199,342 @@
                     }
                     /*-------------------FINE CARICAMENTO ASINCRONO-----------------------------*/
                 </script>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="nav nav-pills" style="margin-left: 0;">
-                            <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
-                            <li><a data-toggle="pill" href="#tabeng">Inglese</a></li>
-                            <li><a data-toggle="pill" href="#tabru">Russo</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="tabita" class="tab-pane fade in active">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="litTitoloI" runat="server" Text="Titolo Ita" /></strong>
+                <div style="background: #ccc; padding: 10px 30px 30px 30px;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="nav nav-pills" style="margin-left: 0;">
+                                <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
+                                <li><a data-toggle="pill" href="#tabeng">Inglese</a></li>
+                                <li><a data-toggle="pill" href="#tabru">Russo</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tabita" class="tab-pane fade in active">
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="litTitoloI" runat="server" Text="Urltext / linkcollegato (ITA)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"  ID="txtTitoloI" runat="server"></asp:TextBox>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtTitoloI" runat="server"></asp:TextBox>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label18" runat="server" Text="link page" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:Literal ID="litlinkI" runat="server"></asp:Literal>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label10" runat="server" Text="META title (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleI" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label5" runat="server" Text="META DESC (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescI" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <asp:Label ID="outupload" Text="" runat="server" ForeColor="red" Font-Bold="true" />
-                                        <div style="display: inline; width: 100%">
-                                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label10" runat="server" Text="META title (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" ID="txtCustomtitleI" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label5" runat="server" Text="META Desc (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%" TextMode="MultiLine" CssClass="mceNoEditor" Height="35" ID="txtCustomdescI" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label14" runat="server" Text="Canonical link (forzato)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%"  placeholder="(Opzionale) inserire solo per forzatura!" CssClass="mceNoEditor"  ID="txtCanonicalI" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-sm-12">
+                                            <asp:Label ID="outupload" Text="" runat="server" ForeColor="red" Font-Bold="true" />
+                                            <div style="display: inline; width: 100%">
+                                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                    <Triggers>
+                                                        <asp:PostBackTrigger ControlID="btncaricafile" />
+                                                    </Triggers>
+                                                    <ContentTemplate>
+                                                        <asp:Panel runat="server" ID="plhSimpleEditorI" Visible="false">
+                                                            <span><strong>
+                                                                <asp:Label Width="30%" ID="litDescrizioneI" runat="server" Text="Html Pagina(ita)" />
+                                                            </strong>
+                                                                <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
+                                                                    runat="server"></asp:TextBox>
+                                                            </span>
+                                                        </asp:Panel>
+                                                        <asp:Panel runat="server" ID="plhHtmlEditorI" Visible="false">
+                                                            <strong>
+                                                                <asp:Label ID="Label3" runat="server" Text="Html Pagina(ita)" /></strong><br />
+                                                            <div>
+                                                                <textarea class="tiny" id="tinyhtmlEditI" runat="server" style="width: 100%; height: 400px"></textarea>
+                                                            </div>
+
+                                                            Dimensione orizzontale(max) :
+                                       
+                                            <asp:TextBox runat="server" ID="resizeDimx" Text="300" Width="80px" />
+                                                            Dimensione verticale(max) :
+                                       
+                                            <asp:TextBox runat="server" ID="resizeDimy" Text="300" Width="80px" />
+                                                            <asp:FileUpload runat="server" ID="upFile" />
+
+
+                                                            <asp:Button ID="btncaricafile" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafile_Click" />
+                                                            <br />
+                                                        </asp:Panel>
+                                                        <div style="background-color: #99973f; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px; display: none">
+                                                            <a id="linkpp1" href="#inline1" rel="prettyPhoto" style="padding: 3px; color: white; text-decoration: none;">INSERISCI FOTO</a>
+                                                        </div>
+                                                        <div id="inline1" style="display: none; padding: 10px" runat="server">
+                                                            <div style="background-color: #f0f0f0; border: 1px solid black; border-radius: 4px; padding: 5px">
+                                                                INSERIMENTO FOTO<br />
+                                                            </div>
+                                                            <br />
+                                                            <div style="height: 100px; overflow: auto">
+                                                                Seleziona la foto per il caricamento<br />
+
+                                                                <br />
+                                                                <div style="display: none">
+                                                                    <span style="background-color: #0094ff; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px;">
+                                                                        <a href="javascript:SelezionaFile()" style="padding: 3px; color: white; text-decoration: none;">Seleziona File</a>
+                                                                    </span>
+                                                                    <span style="background-color: #0094ff; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px;">
+                                                                        <a href="javascript:CaricaFile()" style="padding: 3px; color: white; text-decoration: none;">Carica File</a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tabeng" class="tab-pane fade">
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label1" runat="server" Text="Urltext / linkcollegato (EN)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control"  placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"   ID="txtTitoloGB" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label19" runat="server" Text="link page" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:Literal ID="litlinkGB" runat="server"></asp:Literal>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label9" runat="server" Text="META title (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" ID="txtCustomtitleGB" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label11" runat="server" Text="META Desc (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%" TextMode="MultiLine" CssClass="mceNoEditor" Height="35" ID="txtCustomdescGB" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label15" runat="server" Text="Canonical link (forzato)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%"   CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!"   ID="txtCanonicalGB" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-sm-12">
+                                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                                 <Triggers>
-                                                    <asp:PostBackTrigger ControlID="btncaricafile" />
+                                                    <asp:PostBackTrigger ControlID="btncaricafileGB" />
                                                 </Triggers>
                                                 <ContentTemplate>
-                                                    <asp:Panel runat="server" ID="plhSimpleEditorI" Visible="false">
+                                                    <asp:Panel runat="server" ID="plhSimpleEditorGB" Visible="false">
                                                         <span><strong>
-                                                            <asp:Label Width="30%" ID="litDescrizioneI" runat="server" Text="Descrizione Ita" />
+                                                            <asp:Label Width="30%" ID="Label2" runat="server" Text="Html Pagina(eng)" />
                                                         </strong>
-                                                            <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
+                                                            <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
                                                                 runat="server"></asp:TextBox>
                                                         </span>
                                                     </asp:Panel>
-                                                    <asp:Panel runat="server" ID="plhHtmlEditorI" Visible="false">
+                                                    <asp:Panel runat="server" ID="plhHtmlEditorGB" Visible="false">
                                                         <strong>
-                                                            <asp:Label ID="Label3" runat="server" Text="Descrizione Ita" /></strong><br />
+                                                            <asp:Label ID="Label4" runat="server" Text="Html Pagina(eng)" /></strong><br />
                                                         <div>
-                                                            <textarea class="tiny" id="tinyhtmlEditI" runat="server" style="width: 100%; height: 400px"></textarea>
+                                                            <textarea id="tinyhtmlEditGB" class="tiny" runat="server" style="width: 100%; height: 400px"></textarea>
                                                         </div>
-
-                                                        Dimensione orizzontale(max) :
+                                                        Dimensione orizzontale :
                                        
-                                            <asp:TextBox runat="server" ID="resizeDimx" Text="300" Width="80px" />
+                                        <asp:TextBox runat="server" ID="resizeDimxGB" Text="300" Width="80px" />
                                                         Dimensione verticale(max) :
                                        
-                                            <asp:TextBox runat="server" ID="resizeDimy" Text="300" Width="80px" />
-                                                        <asp:FileUpload runat="server" ID="upFile" />
-
-
-                                                        <asp:Button ID="btncaricafile" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafile_Click" />
+                                        <asp:TextBox runat="server" ID="resizeDimyGB" Text="300" Width="80px" />
+                                                        <asp:FileUpload runat="server" ID="upFileGB" />
+                                                        <asp:Button ID="btncaricafileGB" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafileGB_Click" />
                                                         <br />
                                                     </asp:Panel>
-                                                    <div style="background-color: #99973f; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px; display: none">
-                                                        <a id="linkpp1" href="#inline1" rel="prettyPhoto" style="padding: 3px; color: white; text-decoration: none;">INSERISCI FOTO</a>
-                                                    </div>
-                                                    <div id="inline1" style="display: none; padding: 10px" runat="server">
-                                                        <div style="background-color: #f0f0f0; border: 1px solid black; border-radius: 4px; padding: 5px">
-                                                            INSERIMENTO FOTO<br />
-                                                        </div>
-                                                        <br />
-                                                        <div style="height: 100px; overflow: auto">
-                                                            Seleziona la foto per il caricamento<br />
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tabru" class="tab-pane fade">
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label6" runat="server" Text="Urltext / linkcollegato (RU)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"  ID="txtTitoloRU" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label20" runat="server" Text="link page" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:Literal ID="litlinkRU" runat="server"></asp:Literal>
+                                        </div>
+                                    </div>
 
-                                                            <br />
-                                                            <div style="display: none">
-                                                                <span style="background-color: #0094ff; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px;">
-                                                                    <a href="javascript:SelezionaFile()" style="padding: 3px; color: white; text-decoration: none;">Seleziona File</a>
-                                                                </span>
-                                                                <span style="background-color: #0094ff; border: 1px solid black; border-radius: 4px; margin-right: 5px; padding: 2px;">
-                                                                    <a href="javascript:CaricaFile()" style="padding: 3px; color: white; text-decoration: none;">Carica File</a>
-                                                                </span>
-                                                            </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label12" runat="server" Text="META title (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" ID="txtCustomtitleRU" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label13" runat="server" Text="META Desc (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%" TextMode="MultiLine" CssClass="mceNoEditor" Height="35" ID="txtCustomdescRU" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label16" runat="server" Text="Canonical link (forzato)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%"  CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!"  ID="txtCanonicalRU" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-sm-12">
+                                            <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                                <Triggers>
+                                                    <asp:PostBackTrigger ControlID="btncaricafileRU" />
+                                                </Triggers>
+                                                <ContentTemplate>
+                                                    <asp:Panel runat="server" ID="plhSimpleEditorRU" Visible="false">
+                                                        <span><strong>
+                                                            <asp:Label Width="30%" ID="Label7" runat="server" Text="Html Pagina(ru)" />
+                                                        </strong>
+                                                            <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
+                                                                runat="server"></asp:TextBox>
+                                                        </span>
+                                                    </asp:Panel>
+                                                    <asp:Panel runat="server" ID="plhHtmlEditorRU" Visible="false">
+                                                        <strong>
+                                                            <asp:Label ID="Label8" runat="server" Text="Html Pagina(ru)" /></strong><br />
+                                                        <div>
+                                                            <textarea id="tinyhtmlEditRU" class="tiny" runat="server" style="width: 100%; height: 400px"></textarea>
                                                         </div>
-                                                    </div>
+                                                        Dimensione orizzontale :
+                                       
+                                        <asp:TextBox runat="server" ID="resizeDimxRU" Text="300" Width="80px" />
+                                                        Dimensione verticale(max) :
+                                       
+                                        <asp:TextBox runat="server" ID="resizeDimyRU" Text="300" Width="80px" />
+                                                        <asp:FileUpload runat="server" ID="upFileRU" />
+                                                        <asp:Button ID="btncaricafileRU" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafileRU_Click" />
+                                                        <br />
+                                                    </asp:Panel>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="tabeng" class="tab-pane fade">
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label1" runat="server" Text="Titolo Eng" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtTitoloGB" runat="server"></asp:TextBox>
-                                    </div>
+                            <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+                                <div class="col-sm-2">
+                                    <strong>
+                                        <asp:Label ID="Label17" runat="server" Text="META robots (opzionale)" /></strong>
                                 </div>
-                                  <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label9" runat="server" Text="META title (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleGB" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label11" runat="server" Text="META DESC (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescGB" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                            <Triggers>
-                                                <asp:PostBackTrigger ControlID="btncaricafileGB" />
-                                            </Triggers>
-                                            <ContentTemplate>
-                                                <asp:Panel runat="server" ID="plhSimpleEditorGB" Visible="false">
-                                                    <span><strong>
-                                                        <asp:Label Width="30%" ID="Label2" runat="server" Text="Descrizione Eng" />
-                                                    </strong>
-                                                        <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
-                                                            runat="server"></asp:TextBox>
-                                                    </span>
-                                                </asp:Panel>
-                                                <asp:Panel runat="server" ID="plhHtmlEditorGB" Visible="false">
-                                                    <strong>
-                                                        <asp:Label ID="Label4" runat="server" Text="Descrizione En" /></strong><br />
-                                                    <div>
-                                                        <textarea id="tinyhtmlEditGB" class="tiny" runat="server" style="width: 100%; height: 400px"></textarea>
-                                                    </div>
-                                                    Dimensione orizzontale :
-                                       
-                                        <asp:TextBox runat="server" ID="resizeDimxGB" Text="300" Width="80px" />
-                                                    Dimensione verticale(max) :
-                                       
-                                        <asp:TextBox runat="server" ID="resizeDimyGB" Text="300" Width="80px" />
-                                                    <asp:FileUpload runat="server" ID="upFileGB" />
-                                                    <asp:Button ID="btncaricafileGB" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafileGB_Click" />
-                                                    <br />
-                                                </asp:Panel>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtRobots" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                            <div id="tabru" class="tab-pane fade">
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label6" runat="server" Text="Titolo Russo" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtTitoloRU" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label12" runat="server" Text="META title (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtCustomtitleRU" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <strong>
-                                            <asp:Label ID="Label13" runat="server" Text="META DESC (custom)" /></strong>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox Width="60%" TextMode="MultiLine" CssClass="mceNoEditor" Height="20" ID="txtCustomdescRU" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                            <Triggers>
-                                                <asp:PostBackTrigger ControlID="btncaricafileRU" />
-                                            </Triggers>
-                                            <ContentTemplate>
-                                                <asp:Panel runat="server" ID="plhSimpleEditorRU" Visible="false">
-                                                    <span><strong>
-                                                        <asp:Label Width="30%" ID="Label7" runat="server" Text="Descrizione RU" />
-                                                    </strong>
-                                                        <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
-                                                            runat="server"></asp:TextBox>
-                                                    </span>
-                                                </asp:Panel>
-                                                <asp:Panel runat="server" ID="plhHtmlEditorRU" Visible="false">
-                                                    <strong>
-                                                        <asp:Label ID="Label8" runat="server" Text="Descrizione Ru" /></strong><br />
-                                                    <div>
-                                                        <textarea id="tinyhtmlEditRU" class="tiny" runat="server" style="width: 100%; height: 400px"></textarea>
-                                                    </div>
-                                                    Dimensione orizzontale :
-                                       
-                                        <asp:TextBox runat="server" ID="resizeDimxRU" Text="300" Width="80px" />
-                                                    Dimensione verticale(max) :
-                                       
-                                        <asp:TextBox runat="server" ID="resizeDimyRU" Text="300" Width="80px" />
-                                                    <asp:FileUpload runat="server" ID="upFileRU" />
-                                                    <asp:Button ID="btncaricafileRU" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafileRU_Click" />
-                                                    <br />
-                                                </asp:Panel>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <div class="row">
-                                    <div class="col-sm-4"><strong>Imposta data (opzionale): </strong></div>
-                                    <div class="col-sm-8">
-                                        <asp:TextBox ID="txtData" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <Ajax:CalendarExtender ID="cal2" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtData">
-                                        </Ajax:CalendarExtender>
-                                    </div>
+
+
+                            <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>--%>
+                            <div class="row">
+                                <div class="col-sm-2"><strong>Imposta data (opzionale): </strong></div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtData" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <Ajax:CalendarExtender ID="cal2" runat="server" Format="dd/MM/yyyy HH:mm:ss" TargetControlID="txtData">
+                                    </Ajax:CalendarExtender>
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                        <div class="row">
-                            <div class="col-sm-4"><strong>Seleziona tipologia struttura (opzionale): </strong></div>
-                            <div class="col-sm-8">
-                                <asp:DropDownList runat="server" ID="ddlTipologie" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true"
-                                    OnSelectedIndexChanged="ddlTipologie_SelectedIndexChanged">
-                                    <asp:ListItem Text="Seleziona tipologia" Value="" />
-                                </asp:DropDownList>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4"><strong>Seleziona struttura offerente (opzionale): </strong></div>
-                            <div class="col-sm-8">
-                                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlStruttura" AppendDataBoundItems="true">
-                                    <asp:ListItem Text="Seleziona struttura" Value="0" />
-                                </asp:DropDownList>
+                            <%--      </ContentTemplate>
+                        </asp:UpdatePanel>--%>
+                            <div class="row" style="display: none">
+                                <div class="col-sm-4"><strong>Seleziona tipologia struttura (opzionale): </strong></div>
+                                <div class="col-sm-8">
+                                    <asp:DropDownList runat="server" ID="ddlTipologie" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true"
+                                        OnSelectedIndexChanged="ddlTipologie_SelectedIndexChanged">
+                                        <asp:ListItem Text="Seleziona tipologia" Value="" />
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row" style="display: none">
+                                <div class="col-sm-4"><strong>Seleziona struttura offerente (opzionale): </strong></div>
+                                <div class="col-sm-8">
+                                    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlStruttura" AppendDataBoundItems="true">
+                                        <asp:ListItem Text="Seleziona struttura" Value="0" />
+                                    </asp:DropDownList>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
 
         <div class="row">
             <div class="col-sm-12">
@@ -494,7 +562,7 @@
                                     <br />
 
                                 </div>
-                                <div style="width: 100%; height: 500px;max-width:500px">
+                                <div style="width: 100%; height: 500px; max-width: 500px">
                                     <asp:HiddenField ID="txtFotoSchema" runat="server" />
                                     <asp:HiddenField ID="txtFotoValori" runat="server" />
                                     <div style="width: 100%; float: left; height: 400px; padding: 10px">
@@ -524,6 +592,7 @@
 
 
         </div>
+
     </div>
 </asp:Content>
 

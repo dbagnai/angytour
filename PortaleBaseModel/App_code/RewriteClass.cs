@@ -39,7 +39,7 @@ public class GenericRouteHandler : IRouteHandler
     }
     public IHttpHandler GetHttpHandler(RequestContext requestContext)
     {
-        string Pathdestinazione = "~/Index.aspx";
+        string Pathdestinazione = "~/index.aspx";
         string textmatch = requestContext.RouteData.Values["textmatch"] as string;
         string destinationselector = requestContext.RouteData.Values["destinationselector"] as string;
         string Lingua = requestContext.RouteData.Values["Lingua"] as string;
@@ -74,20 +74,16 @@ public class GenericRouteHandler : IRouteHandler
                 Offerte item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idoldcontent);
                 if (item != null)
                 {
-                    string denominazione = item.DenominazionebyLingua(Lingua);
-                    string linkcanonico = CommonPage.CreaLinkRoutes(null, false, Lingua, (denominazione), item.Id.ToString(), item.CodiceTipologia);
+                    string linkcanonico = CommonPage.CreaLinkRoutes(null, false, Lingua, (CommonPage.CleanUrl(item.UrltextforlinkbyLingua(Lingua))), item.Id.ToString(), item.CodiceTipologia);
                     return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(linkcanonico));
                 }
             }
         } 
 #endif
         /*END REWRITING OLD URL **********************************************************************/
-
-
-        Lingua = SitemapManager.getCulturenamefromlingua(Lingua); // abilitare per modifica codici culture lingua 19.12.18
-
-
-        switch (Lingua.ToLower())
+        string culturename = SitemapManager.getCulturenamefromlingua(Lingua); // abilitare per modifica codici culture lingua 19.12.18
+        // il viceveresa è SitemapManager.getLinguafromculture(ret);
+        switch (culturename.ToLower())
         {
             case "i":
             case "gb":
@@ -97,22 +93,16 @@ public class GenericRouteHandler : IRouteHandler
                 break;
             default:
                 HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
-                Pathdestinazione = "~/Error.aspx";
-                return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
-                //return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
-                //break;
+                Pathdestinazione = "~/404.aspx";
+               // return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
+                return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
+                break;
         }
-
-
         if (destinationselector == null) destinationselector = "";
-        if (textmatch == null || textmatch.ToLower() == "home") return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
+        if (string.IsNullOrEmpty(textmatch) || textmatch.ToLower() == "home") return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
 
-        //Carichiamo la destinazione ed i paramentri in base al testmatch ....
-        //string calledurl = textmatch;
-        //if (!string.IsNullOrEmpty(destinationselector))
-        //    calledurl = calledurl.Insert(0, destinationselector + "/");
-        //calledurl = Lingua + "/" + calledurl;
-        string calledurl = WelcomeLibrary.UF.SitemapManager.CostruisciRewritedUrl(Lingua, destinationselector, textmatch); //modifica codici culture lingua 19.12.18
+        //Costruiamo il path di destinazione in base ai segments
+        string calledurl = WelcomeLibrary.UF.SitemapManager.CostruisciRewritedUrl(culturename, destinationselector, textmatch); //modifica codici culture lingua 19.12.18
 
         Tabrif itemurl = WelcomeLibrary.UF.SitemapManager.GetUrlRewriteaddress(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, calledurl);
         if (itemurl != null)
@@ -125,18 +115,19 @@ public class GenericRouteHandler : IRouteHandler
                 default:
                     foreach (KeyValuePair<string, string> kv in keyvalues)
                     {
-                        if (kv.Key != Lingua)
-                            HttpContext.Current.Items[kv.Key] = kv.Value;
+                        //if (kv.Key.ToLower() != "lingua")
+                        HttpContext.Current.Items[kv.Key] = kv.Value;
                     }
 
                     break;
             }
         }
-        //else
-        //{
-        //    Pathdestinazione = "~/Error.aspx";
-        //    return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
-        //}
+        else
+        {
+            Pathdestinazione = "~/404.aspx";
+            //return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
+            return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione)); //non va bene apre la pagina di default 404 di iis
+        }
 
         return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
     }
@@ -161,6 +152,8 @@ public class ErrorHandler : IHttpHandler
 
     public void ProcessRequest(HttpContext httpContext)
     {
+        //httpContext.Server.ClearError();
+        //httpContext.Response.TrySkipIisCustomErrors = true;
         httpContext.Response.Status = "404 Page not found";
         httpContext.Response.StatusCode = 404;
         httpContext.Response.AppendHeader("Location", newUrl);

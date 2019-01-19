@@ -149,12 +149,12 @@
                                     </td>
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a  onclick="JsSvuotaSession(this)"  target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                            <a onclick="JsSvuotaSession(this)" target="_blank" href="<%# CreaLinkRoutes(null,false,"I", ((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
                                                 <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
                                         </div>
                                     </td>
-                                    <td style="border: Solid 1px #ccc;">
-                                        <div style="height: 50px; overflow-y: auto">
+                                    <td style="border: Solid 1px #ccc; width: 60px; overflow-x: auto">
+                                        <div style="height: 50px; overflow-y: auto;">
                                             <asp:Literal ID="Literal1" runat="server" Text='<%# Eval("CodiceProdotto").ToString() %>'></asp:Literal>
                                         </div>
                                     </td>
@@ -169,7 +169,7 @@
                                     </td>
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",Eval("DenominazioneI").ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
+                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
                                         </div>
                                     </td>
                                     <%--<td style="border: Solid 1px Black;">
@@ -355,6 +355,18 @@
                         <asp:TextBox CssClass="mceNoEditor form-control" ReadOnly="true" ID="txtAutore" runat="server" value="" />
                     </div>
                 </div>
+
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label41" runat="server" Text="META robots (opzionale)" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtRobots" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <hr />
                     <ul class="nav nav-pills" style="margin-left: 0;">
@@ -385,7 +397,35 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="litDenominazioneI" runat="server" Text="Denominazione Ita" /></strong>
+                                        <asp:Label ID="Label42" runat="server" Text="Link Canonical (opzionale)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCanonicalI" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                                  <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label50" runat="server" Text="link page" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:Literal ID="litlinkI" runat="server"></asp:Literal>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label43" runat="server" Text="Url text (alternativo)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtUrlI" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="litDenominazioneI" runat="server" Text="Denominazione/h1 (Ita)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneI" runat="server"></asp:TextBox>
@@ -416,7 +456,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelpre" runat="server" Text="Meta Title Eng (opzionale)" /></strong>
+                                        <asp:Label ID="Labelpre" runat="server" Text="Meta Title (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1GB" runat="server"></asp:TextBox>
@@ -425,7 +465,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Labelprse" runat="server" Text="Meta Description Eng (opzionale)" /></strong>
+                                        <asp:Label ID="Labelprse" runat="server" Text="Meta Description (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2GB" runat="server"></asp:TextBox>
@@ -434,7 +474,34 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Literal2" runat="server" Text="Denominazione Eng" /></strong>
+                                        <asp:Label ID="Label44" runat="server" Text="Link Canonical (opzionale)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCanonicalGB" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                                  <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label48" runat="server" Text="link page" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:Literal ID="litlinkGB" runat="server"></asp:Literal>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label45" runat="server" Text="Url text (alternativo)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtUrlGB" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Literal2" runat="server" Text="Denominazione/h1 (Eng)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneGB" runat="server"></asp:TextBox>
@@ -469,7 +536,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label33" runat="server" Text="Testo promo Ru" /></strong>
+                                        <asp:Label ID="Label33" runat="server" Text="Meta Title(opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo1RU" runat="server"></asp:TextBox>
@@ -478,7 +545,7 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label34" runat="server" Text="Testo promo sconto Ru" /></strong>
+                                        <asp:Label ID="Label34" runat="server" Text="Meta Description (opzionale)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCampo2RU" runat="server"></asp:TextBox>
@@ -487,7 +554,34 @@
                             <div class="row">
                                 <div class="col-sm-2 item-text">
                                     <strong>
-                                        <asp:Label ID="Label35" runat="server" Text="Denominazione Ru" /></strong>
+                                        <asp:Label ID="Label46" runat="server" Text="Link Canonical (opzionale)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtCanonicalRU" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                                  <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label49" runat="server" Text="link page" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:Literal ID="litlinkRU" runat="server"></asp:Literal>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label47" runat="server" Text="Url text (alternativo)" /></strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="mceNoEditor form-control" ID="txtUrlRU" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 item-text">
+                                    <strong>
+                                        <asp:Label ID="Label35" runat="server" Text="Denominazione/h1 (Ru)" /></strong>
                                 </div>
                                 <div class="col-sm-10">
                                     <asp:TextBox CssClass="mceNoEditor form-control" TextMode="MultiLine" Height="50" ID="txtDenominazioneRU" runat="server"></asp:TextBox>
@@ -967,7 +1061,7 @@
                                             <asp:Button ID="btnEliminaProdotto" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaProd_Click" /><br />
                                             <br />
                                             <asp:Label runat="server" ID="ErrorMsgNuovoProdotto" ForeColor="Red"></asp:Label>
-                                                <br />
+                                            <br />
                                             <asp:Literal Text="" ID="linksezioneI" runat="server" />
                                             <br />
                                             <asp:Literal Text="" ID="linksezioneGB" runat="server" />
@@ -1045,7 +1139,7 @@
                                                 <asp:Button ID="btnEliminaSottoProd" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina" OnClick="btnEliminaSottProd_Click" /><br />
                                                 <asp:Label runat="server" ID="ErrorMessage" ForeColor="Red"></asp:Label>
 
-                                                 <br />
+                                                <br />
                                                 <asp:Literal Text="" ID="linksottosezioneI" runat="server" />
                                                 <br />
                                                 <asp:Literal Text="" ID="linksottosezioneGB" runat="server" />
