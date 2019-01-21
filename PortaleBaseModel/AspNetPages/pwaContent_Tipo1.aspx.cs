@@ -189,7 +189,7 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
         //System.Globalization.CultureInfo ci = setCulture("I");
         //string testourlpagina = references.ResMan("Common","I","testoidUrl" + idContenuto).ToString();
         string testourlpaginaI = item.TitolobyLingua("I");
-        linki = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "I", CommonPage.CleanUrl(testourlpaginaI), item.Id.ToString(), "con001000"));
+        linki = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "I", CommonPage.CleanUrl(testourlpaginaI), item.Id.ToString(), "con001001"));
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             linki = linki.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainit"));
 
@@ -223,7 +223,7 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
             hreflang = " hreflang=\"en\" ";
             //ci = setCulture("GB");
             string testourlpaginaGB = item.TitolobyLingua("GB");
-            linken = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpaginaGB), item.Id.ToString(), "con001000"));
+            linken = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpaginaGB), item.Id.ToString(), "con001001"));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linken = linken.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
 
@@ -256,7 +256,7 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
         {
             hreflang = " hreflang=\"ru\" ";
             string testourlpaginaRU = item.TitolobyLingua("RU");
-            linkru = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "RU", CommonPage.CleanUrl(testourlpaginaRU), item.Id.ToString(), "con001000"));
+            linkru = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "RU", CommonPage.CleanUrl(testourlpaginaRU), item.Id.ToString(), "con001001"));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkru = linkru.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
 
