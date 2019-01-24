@@ -57,14 +57,35 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /////////////| BANNER |/////////////
 ----------------------------------*/
 /**/
-/*----------------------------------
-//////| BANNER TESTATA HOME |///////
-----------------------------------*/
+/*------------------------------------
+////| BANNER TESTATA HOME - 100% |////
+------------------------------------*/
+/**/
 /**/
 /*@title-testata-home-size: 4rem;*/
 /**/
 /*@subtitle-testata-home-size: 2.5rem;*/
 /*@alternative-font;*/
+/*-----------------------------------
+////| BANNER TESTATA HOME - 55% |////
+-----------------------------------*/
+/*@bg-width: 55%;
+@bg-max-width: 55%;
+@bg-size: cover;
+@bg-path: polygon(0 0%, 99% 0%, 80% 101%, 0% 100%);
+
+@bg-testata-opacity: @bg-primary-color;
+@bg-color-top-opacity: lighten(@primary-color, 25%);
+@bg-color-bottom-opacity: @primary-color;
+
+@title-testata-home-size: 4rem;
+@title-testata-home-font: @testata-font;
+@title-testata-home-color: @white-color;
+@title-testata-home-weight: 700;
+
+@subtitle-testata-home-size: 2.5rem;
+@subtitle-testata-home-font: @primary-font;
+@subtitle-testata-home-color: @white-color;*/
 /*----------------------------------
 /////////| BANNER FASCIA |//////////
 ----------------------------------*/
@@ -269,7 +290,7 @@ a:hover {
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
 /*.headerspacer {
-    padding-top: calc(141px);
+    padding-top: calc(141px + 14px);
 }*/
 @media (max-width: 1179px) {
   .headerspacer {
@@ -377,6 +398,19 @@ i .fa {
     padding: 0px 55px;
     background-image: url(/images/pattern/ricicled4.png);
     background-size: 20%;
+    /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
+    /*-webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        column-rule: solid 1px @bg-primary-color;
+        webkit-column-fill: auto;
+        -moz-column-fill: auto;
+        column-fill: auto;
+        height: 164px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: calc((100% - 1110px) / 2);
+        padding-right: calc((100% - 1110px) / 2);*/
   }
   .visible-ok {
     display: block !important;
@@ -441,6 +475,9 @@ i .fa {
     padding: 22px 10px;
     margin-left: 0;
     font-weight: 400 !important;
+    /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
+    /*width: 100%;
+        padding: 10px 10px;*/
     /*SOTTO SOTTO MENU ON OFF*/
     margin-bottom: -1px;
     border-bottom: 1px solid #098f8f !important;
@@ -1368,7 +1405,13 @@ ul.footer-category-list {
 ------- BANNER TESTATA HOME -------
 ----------------------------------*/
 .tp-caption.very_big_white {
+  width: 100% !important;
+  max-width: 100% !important;
+  background-size: cover !important;
+  -webkit-clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
   background: linear-gradient(rgba(243, 198, 73, 0), rgba(3, 47, 47, 0.75));
+  background: -webkit-linear-gradient(rgba(243, 198, 73, 0), rgba(3, 47, 47, 0.75));
   /*background-color: @bg-testata-opacity;*/
   padding: 20px 20px;
 }
@@ -1788,6 +1831,14 @@ ul.footer-category-list {
 .isotope-navigation .work-subcaption .work-desc br {
   line-height: 2.5rem;
 }
+#isoBannav1 li .work-image:after {
+  background: url(/images/link1.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 10% !important;
+}
+#isoBannav1 li .work-image:hover:after {
+  background: url(/images/link1.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 20% !important;
+}
 /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
 .navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after {
   background-position: center calc((100% - 0px) / 2) !important;
@@ -1837,7 +1888,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
 .prezzo-responsive {
   font-size: 2vw;
-  line-height: 2vw !important;
+  line-height: 1vw !important;
 }
 @media (max-width: 1200px) {
   .prezzo-responsive {
@@ -2492,7 +2543,7 @@ li input[type="radio"] {
   color: #032f2f;
 }
 .commenti-details-page div#divCommenti-head-ctrl {
-  background-color: #ebf6f6 !important;
+  background-color: #fff !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
