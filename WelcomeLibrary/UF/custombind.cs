@@ -3394,10 +3394,20 @@ namespace WelcomeLibrary.UF
                     try
                     {
                         string testodarisorsa = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, prop[0]).Valore;
+                        bool attiva = true;
+                        if (prop.Count > 1)
+                        {
+                            var valorecontrollo = "";
+                            if (itemdic.ContainsKey(prop[1]))
+                            {
+                                valorecontrollo = itemdic[prop[1]];
+                                if (string.IsNullOrEmpty(valorecontrollo) || valorecontrollo == "0") attiva = false;
+                            }
+                        }
                         string controllo = null;
                         if (resultinfo.ContainsKey(prop[1]))
                             controllo = resultinfo[prop[1]];
-                        if (controllo == "true" || controllo == null)
+                        if ((controllo == "true" || controllo == null) && attiva)
                             ret = testodarisorsa;
                     }
                     catch { }

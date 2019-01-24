@@ -375,7 +375,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
-    public string CreaLinkTipologie(int min, int max, string classoop = "")
+    public string CreaLinkTipologie(int min, int max, string classoop = "", bool noli = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
@@ -388,7 +388,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                sb.Append("<li>");
+                if (!noli)
+                    sb.Append("<li>");
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
@@ -397,12 +398,17 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (o.Codice == CodiceTipologia)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+
+                string testoforced = references.ResMan("Common", Lingua, "testo" + o.Codice);
+                if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
                 sb.Append(testo);
                 sb.Append("</a>");
-                sb.Append("</li>");
+                if (!noli)
+                    sb.Append("</li>");
             }
         return sb.ToString();
     }
+
 
 
     /// <summary>

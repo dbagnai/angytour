@@ -271,7 +271,7 @@ namespace WelcomeLibrary.UF
                 //string destinationselector = "";
                 TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
                 if (item != null)
-                    destinationselector = ConteggioCaratteri(CleanUrl(item.Descrizione.Trim().Replace(" ", "-")), 20).ToLower().Trim();
+                    destinationselector = ConteggioCaratteri(CleanUrl(item.Descrizione.Trim().Replace(" ", "-")), 100).ToLower().Trim();
 
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
