@@ -405,6 +405,11 @@ namespace WelcomeLibrary.UF
                                 var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]);  //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
                                 if ((elementtoappend != null) && (elementtoappend.Count() > 0))
                                 {
+
+                                    bool alternate = false;
+                                    if (elementtoappend.First().Attributes.Contains("class") && elementtoappend.First().Attributes["class"].Value.Contains("alternatecolor"))
+                                        alternate = true;
+
                                     string innerelement = elementtoappend.First().InnerHtml;
                                     if ((innerelement != ""))
                                     {
@@ -413,6 +418,7 @@ namespace WelcomeLibrary.UF
                                         tmpdoc.LoadHtml(innerelement);
                                         HtmlNode cloneitemtemplate = tmpdoc.DocumentNode.Clone(); //elemento root matrice template da ripetere per fare il binding
                                         elementtoappend.First().RemoveAllChildren(); //ATTENZIONE questa rimuove i child del ellemento primario del template
+                                        int j = 0;
                                         foreach (Banners item in data)
                                         {
                                             //Copio i dati dall'oggetto Banners in un dictionary property,value per evitare l'utilizzo pesante di reflection nel binding!!!!
@@ -426,7 +432,34 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     DataBindElement(nodetobind, itemdic, linkloaded, resultinfo);
                                                 }
+
+                                            ////////////////////ODD EVEN GESTIONE SFONDO
+                                            if (alternate)
+                                            {
+                                                if (IsEven(j))
+                                                {
+
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("odd"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                    {
+                                                        nodestoremove.First().Remove();
+                                                    }
+                                                }
+                                                else
+                                                {
+
+                                                    var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("even"));
+                                                    if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        if ((nodestoremove != null) && (nodestoremove.Count() > 0))
+                                                        {
+                                                            nodestoremove.First().Remove();
+                                                        }
+                                                }
+
+                                            }
+                                            /////////////////////////////////////////////
                                             elementtoappend.First().AppendChild(cloneitem.Clone());
+                                            j++;
                                         }
                                     }
 
