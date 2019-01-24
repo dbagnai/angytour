@@ -5,11 +5,11 @@
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-    <div id="divTitleContainer">
+    <div id="divTitleContainer" style="display: none">
         <div class="row">
             <div class="col-md-1 col-sm-1">
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-12">
+            <div class="col-md-10 col-sm-10 col-12">
                 <asp:Literal Text="" runat="server" ID="litSezione" />
             </div>
             <div class="col-md-1 col-sm-1">
@@ -26,15 +26,11 @@
         });
     </script>
 </asp:Content>
-
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-            <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
-
+    <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
 </asp:Content>
-
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 
     <div class="row justify-content-center" id="divSezioneSchedaContenuto">
@@ -351,10 +347,10 @@
 
     <%--RECENSIONI CLIENTI--%>
     <div runat="server" visible="">
-    <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject py-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-    </asp:Panel>
-</div>
+        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+            <div id="divCommenti" class="inject py-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        </asp:Panel>
+    </div>
 
     <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>

@@ -688,7 +688,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 string testo = o.DenominazionebyLingua(Lingua);
 
-                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(testo), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 sb.Append("<li>");
                 sb.Append("<a href=\"");
@@ -928,7 +928,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
     //    //tmp_Cliente.Cognome = txtNome.Value;
     //    tmp_Cliente.Email = txtEmail.Value;
     //    //DateTime _d = DateTime.MinValue;
-    //    //if (DateTime.TryParse(txtDataNascita.Text, out _d))
+    //if (!DateTime.TryParseExact(txtDatanascita_dts.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _d))
     //    //    tmp_Cliente.DataNascita = _d;
     //    Session.Add("iscrivicliente", tmp_Cliente);
     //    string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;

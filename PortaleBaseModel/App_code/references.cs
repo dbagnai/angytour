@@ -722,7 +722,6 @@ public class references
             linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
         jpathcomplete.percorsolistaimmobili = linktmp;
 
-
         /*Per ristoranti*/
         linktmp = "";
         WelcomeLibrary.DOM.TipologiaOfferte tipotmp1 = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000003"); });

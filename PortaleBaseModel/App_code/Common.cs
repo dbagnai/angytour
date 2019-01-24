@@ -186,7 +186,7 @@ public class CommonPage : Page
         DateTime modification = System.IO.File.GetLastWriteTime(server.MapPath(filepath));
         return "?v=" + modification.ToString("ddMMyyHHmmss");
     }
-   
+
     /// <summary>
     /// SPOSTA IL VIEWSTATE IN FONDO ALLA PAGINA PER 
     /// </summary>
@@ -235,6 +235,16 @@ public class CommonPage : Page
         if (NomeAnteprima == null || NomeAnteprima.ToString() == "")
             ret = true;
         return ret;
+    }
+
+    public static void CheckCanonicalUrl(string calledurl, string canonicalurl, HttpResponse response, bool removeqstring = true)
+    {
+        //redirect al canonical se il canonical non coincide con l'url
+        if (calledurl.IndexOf("?") != -1 && removeqstring)
+            calledurl = calledurl.Substring(0, calledurl.IndexOf("?"));
+        if (calledurl != canonicalurl)
+            response.RedirectPermanent(canonicalurl);
+        //response.StatusCode = 301; // se il canonical è diverso dall'url ritorno moved permanently
     }
 
     public static string CreaLinkRoutes(System.Web.SessionState.HttpSessionState sessione = null, bool vuotasession = false, string Lingua = "I", string denominazione = "", string id = "", string codicetipologia = "", string codicecategoria = "", string codicecat2liv = "", string regione = "")
@@ -1152,7 +1162,7 @@ public class CommonPage : Page
 
     private static string GetLinguaFromActualCulture(CultureInfo currentCulture)
     {
-       return offerteDM.GetLinguaFromActualCulture(currentCulture);
+        return offerteDM.GetLinguaFromActualCulture(currentCulture);
 #if false
         string lingua = deflanguage;
         switch (currentCulture.TwoLetterISOLanguageName.ToLower())
@@ -1469,7 +1479,7 @@ public class CommonPage : Page
                     {
                         if (c.Offerta.DenominazioneI != null)
                         {
-                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.DenominazioneI), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
                             imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
                             titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
@@ -1818,7 +1828,7 @@ public class CommonPage : Page
         }
         return true;
     }
-  
+
     /// <summary>
     /// Calcola i totali del carrello con vari costi accessori per la procedura di ordine
     /// </summary>
@@ -2124,7 +2134,8 @@ public class CommonPage : Page
         if (!string.IsNullOrEmpty(datamin))
         {
             DateTime _dt;
-            if (DateTime.TryParse(datamin, out _dt))
+            //if (DateTime.TryParse(datamin, out _dt))
+            if (DateTime.TryParseExact(datamin, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
             {
                 SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmin);
@@ -2133,7 +2144,8 @@ public class CommonPage : Page
         if (!string.IsNullOrEmpty(datamax))
         {
             DateTime _dt;
-            if (DateTime.TryParse(datamax, out _dt))
+            //if (DateTime.TryParse(datamax, out _dt))
+            if (DateTime.TryParseExact(datamax, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
             {
                 SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmax);
@@ -2281,7 +2293,8 @@ public class CommonPage : Page
             o.DescrizioneI = item.Campo1; //viene dal valore
 
             item = ReadXmlSinglevalue(kv.Value, "dates", "date", "2");//Prendo solo la data di tipo 2 ( prima immatricolazione )
-            if (DateTime.TryParse(item.Campo1, out _Data))
+                                                                      //if (DateTime.TryParse(item.Campo1, out _Data))
+            if (DateTime.TryParseExact(item.Campo1, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _Data))
                 o.Data1 = _Data;//   CAMPO DATA SPECIFICO PER LA PRIMA IMMATRICOLAZIONE nella stuttura offerte, serve a filtrare!!!!!!!
 
             //metodo lettura del prezzo ( price type=2 -> grossprice ) prezzo all'utente finale in Campo1 ho il valore in Campo2 ho l'id del tipo di prezzo
@@ -2865,7 +2878,8 @@ public class CommonPage : Page
             //Prendiamo i valori di interess
             DateTime t = DateTime.MinValue;
             if (values.ContainsKey("pubDate"))
-                DateTime.TryParse(values["pubDate"], out t);
+                //DateTime.TryParse(values["pubDate"], out t);
+                DateTime.TryParseExact(values["pubDate"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out t);
             item.DataInserimento = t;
             if (values.ContainsKey("title"))
                 item.DenominazioneI = values["title"].ToLower();
@@ -3048,7 +3062,8 @@ public class CommonPage : Page
 
             DateTime t = DateTime.MinValue;
             if (values.ContainsKey("DataInserimento"))
-                DateTime.TryParse(values["DataInserimento"], out t);
+                //DateTime.TryParse(values["DataInserimento"], out t);
+            DateTime.TryParseExact(values["DataInserimento"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out t);
             c.DataInserimento = t;
 
             if (values.ContainsKey("DescrizioneGB"))

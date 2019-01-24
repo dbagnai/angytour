@@ -8,7 +8,6 @@ namespace WelcomeLibrary.DOM
     public class Offerte
     {
 
-
         public string Autorenome
         {
             get =>
@@ -125,8 +124,6 @@ namespace WelcomeLibrary.DOM
             set { _Campo2GB = value; }
         }
 
-
-
         private string _Campo1RU;
         public string Campo1RU
         {
@@ -140,6 +137,54 @@ namespace WelcomeLibrary.DOM
             set { _Campo2RU = value; }
 
         }
+
+
+        private string _UrlcustomI;
+        public string UrlcustomI
+        {
+            get { return _UrlcustomI; }
+            set { _UrlcustomI = value; }
+        }
+        private string _UrlcustomGB;
+        public string UrlcustomGB
+        {
+            get { return _UrlcustomGB; }
+            set { _UrlcustomGB = value; }
+        }
+        private string _UrlcustomRU;
+        public string UrlcustomRU
+        {
+            get { return _UrlcustomRU; }
+            set { _UrlcustomRU = value; }
+        }
+
+
+        private string _CanonicalI;
+        public string CanonicalI
+        {
+            get { return _CanonicalI; }
+            set { _CanonicalI = value; }
+        }
+        private string _CanonicalGB;
+        public string CanonicalGB
+        {
+            get { return _CanonicalGB; }
+            set { _CanonicalGB = value; }
+        }
+        private string _CanonicalRU;
+        public string CanonicalRU
+        {
+            get { return _CanonicalRU; }
+            set { _CanonicalRU = value; }
+        }
+        private string _robots;
+        public string Robots
+        {
+            get { return _robots; }
+            set { _robots = value; }
+        }
+
+
 
         private string _xmlvalue;
         public string Xmlvalue
@@ -772,6 +817,28 @@ namespace WelcomeLibrary.DOM
             get { return _Interventieseguiti_dts; }
             set { _Interventieseguiti_dts = value; }
         }
+        /// <summary>
+        /// Torna il testo da usare per l'url, se prensente valore urlcustom per lingua fornisce quello altrimenti la denominazione dell'offerta
+        /// </summary>
+        /// <param name="Lingua"></param>
+        /// <returns></returns>
+        public string UrltextforlinkbyLingua(string Lingua)
+        {
+            string ret = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = !string.IsNullOrEmpty(this.UrlcustomGB.Trim()) ? this.UrlcustomGB : (this.DenominazioneGB ?? string.Empty).ToString();
+                    break;
+                case "RU":
+                    ret = !string.IsNullOrEmpty(this.UrlcustomRU.Trim()) ? this.UrlcustomRU : (this.DenominazioneRU ?? string.Empty).ToString();
+                    break;
+                default:
+                    ret = !string.IsNullOrEmpty(this.UrlcustomI.Trim()) ? this.UrlcustomI : (this.DenominazioneI ?? string.Empty).ToString();
+                    break;
+            }
+            return ret;
+        }
 
 
         public string DenominazionebyLingua(string Lingua)
@@ -936,6 +1003,76 @@ namespace WelcomeLibrary.DOM
                     break;
             }
         }
+
+
+
+        public string CanonicalbyLingua(string Lingua)
+        {
+            string ret = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = this.CanonicalGB;
+                    break;
+                case "RU":
+                    ret = this.CanonicalRU;
+                    break;
+                default:
+                    ret = this.CanonicalI;
+                    break;
+            }
+            return ret;
+        }
+        public void CanonicalbyLingua(string Lingua, string value)
+        {
+            switch (Lingua)
+            {
+                case "GB":
+                    this.CanonicalGB = value;
+                    break;
+                case "RU":
+                    this.CanonicalRU = value;
+                    break;
+                default:
+                    this.CanonicalI = value;
+                    break;
+            }
+        }
+
+
+        public string UrlcustombyLingua(string Lingua)
+        {
+            string ret = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = this.UrlcustomGB;
+                    break;
+                case "RU":
+                    ret = this.UrlcustomRU;
+                    break;
+                default:
+                    ret = this.UrlcustomI;
+                    break;
+            }
+            return ret;
+        }
+        public void UrlcustombyLingua(string Lingua, string value)
+        {
+            switch (Lingua)
+            {
+                case "GB":
+                    this.UrlcustomGB = value;
+                    break;
+                case "RU":
+                    this.UrlcustomRU = value;
+                    break;
+                default:
+                    this.UrlcustomI = value;
+                    break;
+            }
+        }
+
         public Offerte()
         {
             this.Id = 0;
@@ -997,7 +1134,13 @@ namespace WelcomeLibrary.DOM
             this.Caratteristica5 = 0;
             this.Caratteristica6 = 0;
             this.Anno = 0;
-
+            this.CanonicalGB = "";
+            this.CanonicalRU = "";
+            this.CanonicalI = "";
+            this.Robots = "";
+            this.UrlcustomGB = "";
+            this.UrlcustomRU = "";
+            this.UrlcustomI = ""; 
 
             this.Pivacf_dts = string.Empty;
             this.Nome_dts = string.Empty;
@@ -1121,6 +1264,14 @@ namespace WelcomeLibrary.DOM
             this.Caratteristica6 = tmp.Caratteristica6;
             this.Anno = tmp.Anno;
 
+            this.CanonicalGB = tmp.CanonicalGB;
+            this.CanonicalRU = tmp.CanonicalRU;
+            this.CanonicalI = tmp.CanonicalI;
+            this.UrlcustomGB = tmp.UrlcustomGB;
+            this.UrlcustomRU = tmp.UrlcustomRU;
+            this.UrlcustomI = tmp.UrlcustomI;
+            this.Robots = tmp.Robots;
+
             Allegato _tmp;
             this.FotoCollection_M = new AllegatiCollection();
             foreach (Allegato tmplist in tmp.FotoCollection_M)
@@ -1207,11 +1358,21 @@ namespace WelcomeLibrary.DOM
             _tmp["Id_dts_collegato"] = this.Id_dts_collegato.ToString();
             _tmp["Campo1I"] = this.Campo1I.ToString();
             _tmp["Campo1GB"] = this.Campo1GB.ToString();
-
             _tmp["Campo1RU"] = this.Campo1RU.ToString();
             _tmp["Campo2I"] = this.Campo2I.ToString();
             _tmp["Campo2GB"] = this.Campo2GB.ToString();
             _tmp["Campo2RU"] = this.Campo2RU.ToString();
+
+
+            _tmp["CanonicalGB"] = this.CanonicalGB.ToString();
+            _tmp["CanonicalRU"] = this.CanonicalRU.ToString();
+            _tmp["CanonicalI"] = this.CanonicalI.ToString();
+            _tmp["UrlcustomGB"] = this.UrlcustomGB.ToString();
+            _tmp["UrlcustomRU"] = this.UrlcustomRU.ToString();
+            _tmp["UrlcustomI"] = this.UrlcustomI.ToString();
+            _tmp["Robots"] = this.Robots.ToString();
+
+
             _tmp["CodiceOfferta"] = this.CodiceOfferta.ToString();
             _tmp["CodiceOfferta"] = this.CodiceOfferta.ToString();
             _tmp["Prezzo"] = this.Prezzo.ToString();

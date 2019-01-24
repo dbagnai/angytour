@@ -323,7 +323,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == tipologia); });
         if (sezione == null) return "";
         string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, sezione.Descrizione, "", tipologia, "");
-        link += "?" + qstring;
+        if (!string.IsNullOrEmpty(qstring))
+            link += "?" + qstring;
         sb.Append("<a href=\"");
         sb.Append(link);
         sb.Append("\"");
@@ -712,7 +713,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             {
                 string testo = o.DenominazionebyLingua(Lingua);
 
-                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(testo), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 sb.Append("<li>");
                 sb.Append("<a href=\"");
@@ -1043,7 +1044,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //tmp_Cliente.Cognome = txtNome.Value;
         tmp_Cliente.Email = txtEmail.Value;
         //DateTime _d = DateTime.MinValue;
-        //if (DateTime.TryParse(txtDataNascita.Text, out _d))
+        //if (!DateTime.TryParseExact(txtDatanascita_dts.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _d))
         //    tmp_Cliente.DataNascita = _d;
         Session.Add("iscrivicliente", tmp_Cliente);
         string linkverifica = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti.aspx?ID_cliente=&Azione=iscrivinewsletter&Lingua=" + Lingua;
@@ -1349,7 +1350,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
 
                 string target = "_self";
-                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(_o.UrltextforlinkbyLingua(Lingua)), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
@@ -1671,7 +1672,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 string target = "_self";
-                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(_o.UrltextforlinkbyLingua(Lingua)), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
@@ -1748,7 +1749,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 string target = "_self";
-                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(_o.UrltextforlinkbyLingua(Lingua)), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
@@ -1857,7 +1858,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 string target = "_self";
-                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(_o.UrltextforlinkbyLingua(Lingua)), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
@@ -2092,7 +2093,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 string target = "_self";
-                string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
+                string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(_o.UrltextforlinkbyLingua(Lingua)), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria);
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {

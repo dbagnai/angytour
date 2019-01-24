@@ -738,7 +738,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             newsletter.SoggettoMail = txtSoggetto.Text; // da chidere all'utente mediante apposita box
             newsletter.Lingua = ddlLingua.SelectedValue; //Lingua della newsletter da prednere da apposita casella di selezione utente
             //DateTime _tmpdate = System.DateTime.Now;
-            //DateTime.TryParse(txtData.Text, out _tmpdate);
+            //DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
             //item.DataInserimento = _tmpdate;
 
             //Imposto l'id della newsletter selezionata se presente
@@ -776,7 +776,8 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             }
             //item.CodiceContenuto = CodiceContenuto;
             //DateTime _tmpdate = System.DateTime.Now;
-            //DateTime.TryParse(txtData.Text, out _tmpdate);
+        
+            // DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
             //item.DataInserimento = _tmpdate;
             //int _i = 0;
             //int.TryParse(ddlStruttura.SelectedValue, out _i);

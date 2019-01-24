@@ -64,13 +64,21 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleGB = reader.GetString(reader.GetOrdinal("customtitleGB"));
                         if (!(reader["customdescGB"]).Equals(DBNull.Value))
                             item.CustomdescGB = reader.GetString(reader.GetOrdinal("customdescGB"));
-
                         if (!(reader["customtitleRU"]).Equals(DBNull.Value))
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
 
 
+
+                        if (!(reader["canonicalGB"]).Equals(DBNull.Value))
+                            item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
+                        if (!(reader["canonicalI"]).Equals(DBNull.Value))
+                            item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
+                        if (!(reader["canonicalRU"]).Equals(DBNull.Value))
+                            item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["robots"]).Equals(DBNull.Value))
+                            item.Robots = reader.GetString(reader.GetOrdinal("robots"));
 
                         if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
@@ -115,7 +123,9 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT  A.ID as A_ID,A.ID_ATTIVITA,A.CodiceContenuto,A.DataInserimento as A_DataInserimento,A.DescrizioneI as A_DescrizioneI,A.TitoloI,A.DescrizioneGB as A_DescrizioneGB,A.TitoloGB,A.customtitleI,A.customdescI,A.customtitleGB,A.customdescGB,A.customtitleRU,A.customdescRU,A.DescrizioneRU as A_DescrizioneRU,A.TitoloRU,A.FotoSchema as  A_FotoSchema,A.FotoValori as A_FotoValori,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento as B_DataInserimento,B.DescrizioneI as B_DescrizioneI,B.DENOMINAZIONEI,B.CodiceCOMUNE,B.CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.DATITECNICII,B.DENOMINAZIONEGB,B.DescrizioneGB as B_DescrizioneGB,B.DATITECNICIGB,B.DescrizioneRU as B_DescrizioneRU,B.DENOMINAZIONERU,B.DATITECNICIRU,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo,B.FotoSchema as B_FotoSchema,B.FotoValori as B_FotoValori FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc limit " + maxrecord;
+                string query = "SELECT  A.ID as A_ID,A.ID_ATTIVITA,A.CodiceContenuto,A.DataInserimento as A_DataInserimento,A.DescrizioneI as A_DescrizioneI,A.TitoloI,A.DescrizioneGB as A_DescrizioneGB,A.TitoloGB,A.customtitleI,A.customdescI,A.customtitleGB,A.customdescGB,A.customtitleRU,A.customdescRU,A.DescrizioneRU as A_DescrizioneRU,A.TitoloRU,A.FotoSchema as  A_FotoSchema,A.FotoValori as A_FotoValori,A.canonicalI as A_canonicalI,A.canonicalGB as A_canonicalGB,A.canonicalRU as A_canonicalRU,A.robots as A_robots" +
+                    ",B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento as B_DataInserimento,B.DescrizioneI as B_DescrizioneI,B.DENOMINAZIONEI,B.CodiceCOMUNE,B.CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.DATITECNICII,B.DENOMINAZIONEGB,B.DescrizioneGB as B_DescrizioneGB,B.DATITECNICIGB,B.DescrizioneRU as B_DescrizioneRU,B.DENOMINAZIONERU,B.DATITECNICIRU,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo,B.FotoSchema as B_FotoSchema,B.FotoValori as B_FotoValori,B.canonicalI as B_canonicalI,B.canonicalGB as B_canonicalGB,B.canonicalRU as B_canonicalRU,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.robots as B_robots " +
+                    "FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc limit " + maxrecord;
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceContenuto", codicecontenuto);//OleDbType.VarChar
@@ -196,6 +206,27 @@ namespace WelcomeLibrary.DAL
                                 offerta.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("B_FotoValori"));
                             else
                                 offerta.FotoCollection_M.Valori = "";
+
+
+                            if (!reader["urlcustomI"].Equals(DBNull.Value))
+                                offerta.UrlcustomI = reader.GetString(reader.GetOrdinal("urlcustomI"));
+                            if (!reader["urlcustomRU"].Equals(DBNull.Value))
+                                offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
+                            if (!reader["urlcustomRU"].Equals(DBNull.Value))
+                                offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
+
+                            if (!reader["B_canonicalGB"].Equals(DBNull.Value))
+                                offerta.CanonicalGB = reader.GetString(reader.GetOrdinal("B_canonicalGB"));
+                            if (!reader["B_canonicalI"].Equals(DBNull.Value))
+                                offerta.CanonicalI = reader.GetString(reader.GetOrdinal("B_canonicalI"));
+                            if (!reader["B_canonicalRU"].Equals(DBNull.Value))
+                                offerta.CanonicalRU = reader.GetString(reader.GetOrdinal("B_canonicalRU"));
+
+                            if (!reader["B_robots"].Equals(DBNull.Value))
+                                offerta.Robots = reader.GetString(reader.GetOrdinal("B_robots"));
+
+
+
                             //Creo la lista delle foto
                             offerta.FotoCollection_M = this.CaricaAllegatiFoto(offerta.FotoCollection_M);
                             item.offertaassociata = offerta;
@@ -221,6 +252,19 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
+
+
+
+                        if (!reader["A_canonicalGB"].Equals(DBNull.Value))
+                            item.CanonicalGB = reader.GetString(reader.GetOrdinal("A_canonicalGB"));
+                        if (!reader["A_canonicalI"].Equals(DBNull.Value))
+                            item.CanonicalI = reader.GetString(reader.GetOrdinal("A_canonicalI"));
+                        if (!reader["A_canonicalRU"].Equals(DBNull.Value))
+                            item.CanonicalRU = reader.GetString(reader.GetOrdinal("A_canonicalRU"));
+                        if (!reader["A_canonicalGB"].Equals(DBNull.Value))
+                            item.Robots = reader.GetString(reader.GetOrdinal("A_canonicalGB"));
+
+
 
 
                         if (!(reader["A_DescrizioneRU"]).Equals(DBNull.Value))
@@ -302,6 +346,16 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
 
+
+                        if (!(reader["canonicalGB"]).Equals(DBNull.Value))
+                            item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
+                        if (!(reader["canonicalI"]).Equals(DBNull.Value))
+                            item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
+                        if (!(reader["canonicalRU"]).Equals(DBNull.Value))
+                            item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["robots"]).Equals(DBNull.Value))
+                            item.Robots = reader.GetString(reader.GetOrdinal("robots"));
+
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
 
@@ -349,7 +403,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo )";
+                string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo or TitoloRU like @Titolo )";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 //SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI + "%");//OleDbType.VarChar
                 SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI );//OleDbType.VarChar
@@ -396,6 +450,16 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
+
+
+                        if (!(reader["canonicalGB"]).Equals(DBNull.Value))
+                            item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
+                        if (!(reader["canonicalI"]).Equals(DBNull.Value))
+                            item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
+                        if (!(reader["canonicalRU"]).Equals(DBNull.Value))
+                            item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["robots"]).Equals(DBNull.Value))
+                            item.Robots = reader.GetString(reader.GetOrdinal("robots"));
 
                         if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
@@ -760,7 +824,17 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
 
-            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customdescI,customdescGB,customdescRU) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customdescI,@customdescGB,@customdescRU)";
+
+            SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
+            parColl.Add(pca1);
+            SQLiteParameter pca2 = new SQLiteParameter("@canonicalGB", item.CanonicalGB);
+            parColl.Add(pca2);
+            SQLiteParameter pca3 = new SQLiteParameter("@canonicalRU", item.CanonicalRU);
+            parColl.Add(pca3);
+            SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
+            parColl.Add(pr1);
+
+            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customdescI,customdescGB,customdescRU,canonicalI,canonicalGB,canonicalRU,robots) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customdescI,@customdescGB,@customdescRU,@canonicalI,@canonicalGB,@canonicalRU,@robots)";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -821,11 +895,24 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
 
+
+
+            SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
+            parColl.Add(pca1);
+            SQLiteParameter pca2 = new SQLiteParameter("@canonicalGB", item.CanonicalGB);
+            parColl.Add(pca2);
+            SQLiteParameter pca3 = new SQLiteParameter("@canonicalRU", item.CanonicalRU);
+            parColl.Add(pca3);
+            SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
+            parColl.Add(pr1);
+
+
+
             SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar
             parColl.Add(p1);
 
 
-            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,DataInserimento=@data,Id_attivita=@Id_attivita,customtitleI=@customtitleI,customtitleGB=@customtitleGB,customtitleRU=@customtitleRU,customdescI=@customdescI,customdescGB=@customdescGB,customdescRU=@customdescRU   WHERE ([Id]=@id)";
+            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,DataInserimento=@data,Id_attivita=@Id_attivita,customtitleI=@customtitleI,customtitleGB=@customtitleGB,customtitleRU=@customtitleRU,customdescI=@customdescI,customdescGB=@customdescGB,customdescRU=@customdescRU,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,robots=@robots   WHERE ([Id]=@id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

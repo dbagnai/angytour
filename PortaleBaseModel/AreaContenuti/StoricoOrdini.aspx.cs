@@ -50,7 +50,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             id_commerciale = CaricaValoreMaster(Request, Session, "id_commerciale", true, "");
             hididcommerciale.Value = id_commerciale;
             CommonPage CommonPage = new CommonPage();
-            Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+
+            //Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+            Lingua = "I";
 
             /////////////////////////////////////////////////////////////////////
             //Verifichiamo accesso socio e impostiamo la visualizzazione corretta

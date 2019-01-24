@@ -51,7 +51,7 @@ namespace WelcomeLibrary.DOM
             get { return _customdescI; }
             set { _customdescI = value; }
         }
-      
+
         private string _customdescGB;
         public string CustomdescGB
         {
@@ -101,6 +101,34 @@ namespace WelcomeLibrary.DOM
             get { return _DescrizioneRU; }
             set { _DescrizioneRU = value; }
         }
+
+
+
+        private string _CanonicalI;
+        public string CanonicalI
+        {
+            get { return _CanonicalI; }
+            set { _CanonicalI = value; }
+        }
+        private string _CanonicalGB;
+        public string CanonicalGB
+        {
+            get { return _CanonicalGB; }
+            set { _CanonicalGB = value; }
+        }
+        private string _CanonicalRU;
+        public string CanonicalRU
+        {
+            get { return _CanonicalRU; }
+            set { _CanonicalRU = value; }
+        }
+        private string _robots;
+        public string Robots
+        {
+            get { return _robots; }
+            set { _robots = value; }
+        }
+
         private DateTime _DataInserimento;
         public DateTime DataInserimento
         {
@@ -121,6 +149,41 @@ namespace WelcomeLibrary.DOM
             get { return _offertaassociata; }
             set { _offertaassociata = value; }
         }
+
+
+        public string CanonicalbyLingua(string Lingua)
+        {
+            string ret = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = this.CanonicalGB;
+                    break;
+                case "RU":
+                    ret = this.CanonicalRU;
+                    break;
+                default:
+                    ret = this.CanonicalI;
+                    break;
+            }
+            return ret;
+        }
+        public void CanonicalbyLingua(string Lingua, string value)
+        {
+            switch (Lingua)
+            {
+                case "GB":
+                    this.CanonicalGB = value;
+                    break;
+                case "RU":
+                    this.CanonicalRU = value;
+                    break;
+                default:
+                    this.CanonicalI = value;
+                    break;
+            }
+        }
+
         public string TitolobyLingua(string Lingua)
         {
             string ret = "";
@@ -199,6 +262,10 @@ namespace WelcomeLibrary.DOM
             this.TitoloRU = "";
             this.TitoloGB = "";
             this.TitoloI = "";
+            this.CanonicalGB = "";
+            this.CanonicalRU = "";
+            this.CanonicalI = "";
+            this.Robots = "";
             this.offertaassociata = new Offerte();
 
             this.CustomtitleI = "";
@@ -221,8 +288,6 @@ namespace WelcomeLibrary.DOM
             this.TitoloRU = tmp.TitoloRU;
             this.TitoloGB = tmp.TitoloGB;
             this.TitoloI = tmp.TitoloI;
-            this.TitoloGB = tmp.TitoloGB;
-            this.TitoloI = tmp.TitoloI;
             this.CustomtitleI = tmp.CustomtitleI;
             this.CustomdescI = tmp.CustomdescI;
 
@@ -231,6 +296,12 @@ namespace WelcomeLibrary.DOM
 
             this.CustomtitleRU = tmp.CustomtitleRU;
             this.CustomdescRU = tmp.CustomdescRU;
+
+
+            this.CanonicalGB = tmp.CanonicalGB;
+            this.CanonicalRU = tmp.CanonicalRU;
+            this.CanonicalI = tmp.CanonicalI;
+            this.Robots = tmp.Robots;
 
             this.offertaassociata = new Offerte(tmp.offertaassociata);
 
@@ -241,5 +312,10 @@ namespace WelcomeLibrary.DOM
                 this.FotoCollection_M.Add(_tmp);
             }
         }
+
+
+
+
+
     }
 }

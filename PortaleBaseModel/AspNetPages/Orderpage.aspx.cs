@@ -231,6 +231,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
         }
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
+        
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
 

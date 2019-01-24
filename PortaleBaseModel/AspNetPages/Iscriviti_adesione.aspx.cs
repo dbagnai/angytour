@@ -362,9 +362,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
         item.Indirizzo = txtIndirizzo.Text;
         item.Telefono = txtTelefono.Text;
         //item.Professione = txtProfessione.Text;
-        //DateTime tmp = DateTime.MinValue;
-        //DateTime.TryParse(txtNascita.Text, out tmp);
-        //item.DataNascita = tmp;
+ 
         item.ConsensoPrivacy = chkPrivacy.Checked;
         item.Consenso1 = chkConsensoMail.Checked;
         item.Spare1 = txtDescrizione.Text;

@@ -4,13 +4,15 @@
 
 <%@ MasterType VirtualPath="~/AspNetPages/pwaMasterPage.master" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
-    <div class="row">
-        <div class="col-md-1 col-sm-1">
-        </div>
-        <div class="col-md-10 col-sm-10 col-xs-12">
-            <asp:Literal Text="" runat="server" ID="litSezione" />
-        </div>
-        <div class="col-md-1 col-sm-1">
+    <div id="divTitleContainer" style="display: none">
+        <div class="row">
+            <div class="col-md-1 col-sm-1">
+            </div>
+            <div class="col-md-10 col-sm-10 col-12">
+                <asp:Literal Text="" runat="server" ID="litSezione" />
+            </div>
+            <div class="col-md-1 col-sm-1">
+            </div>
         </div>
     </div>
     <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
@@ -264,9 +266,9 @@
                                         <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName" />
                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
                                         <div class="position-absolute w-100" style="top: 0;">
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactName"
-                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
-                            </div>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactName"
+                                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -274,9 +276,9 @@
                                         <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Cognome" runat="server" id="txtContactCognome" />
                                         <label class="ui-icon"><i class="fa fa-user"></i></label>
                                         <div class="position-absolute w-100" style="top: 0;">
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactCognome"
-                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
-                            </div>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactCognome"
+                                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -292,9 +294,9 @@
                                         <input type="text" class="form-control" name="unname" validationgroup="contattilateral" placeholder="Email" runat="server" id="txtContactEmail" />
                                         <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
                                         <div class="position-absolute w-100" style="top: 0;">
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactEmail"
-                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
-                            </div>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtContactEmail"
+                                                ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTestoGenericErr") %>' Text="" ValidationGroup="contattilateral" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -313,14 +315,14 @@
                             <script>
                                 function ConfirmValidationForm(elembtn) {
                                     var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                var out1 = document.getElementById("outputContactdiv");
-                                if (!chk1.checked) {
-                                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                    return false;
-                                } else { out1.innerHTML = ''; }
-                                if (Page_ClientValidate("contattilateral")) {
-                                    /*do work and go for postback*/
-                                    console.log('ok validated');
+                                    var out1 = document.getElementById("outputContactdiv");
+                                    if (!chk1.checked) {
+                                        out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                        return false;
+                                    } else { out1.innerHTML = ''; }
+                                    if (Page_ClientValidate("contattilateral")) {
+                                        /*do work and go for postback*/
+                                        console.log('ok validated');
                     <%--                var buttpost = document.getElementById("<%= Button1srv.ClientID  %>");--%>
                                     $(elembtn).attr("disabled", "")
 

@@ -387,8 +387,7 @@ public partial class AreaRiservata_Default : CommonPage
 
 
             DateTime _tmpdate = System.DateTime.Now;
-            //if (!DateTime.TryParse(txtData.Text, out _tmpdate))
-            //    _tmpdate = System.DateTime.Now;
+     
             updrecord.DataInserimento = _tmpdate;
             offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
             //Inviamo una mailing a tutti i soci ...
@@ -797,7 +796,7 @@ public partial class AreaRiservata_Default : CommonPage
             string nomesocio = CercaNomeSociobyUsername(User.Identity.Name);
             string SoggettoMail = " Inserito nuovo argomento nel forum da parte del socio " + nomesocio;
 
-            string linkmodificato = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(item.DenominazioneI), idmodificato, Tipologia));
+            string linkmodificato = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(item.UrltextforlinkbyLingua("I")), idmodificato, Tipologia));
             string Descrizione = item.DenominazioneI + "<br/>";
               Descrizione += item.DescrizioneI + "<br/>";
 

@@ -71,7 +71,7 @@
                                         </td>
                                         <td>
                                             <a id="a3" runat="server"
-                                                href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                 target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                 class="pull-left m-0 ml-0 mr-sm-3">
                                                 <%--  <div class="work-image">--%>
@@ -84,7 +84,7 @@
                                             <div class="d-none d-sm-block product-details" style="padding-top:0;">
                                                 <h3 class="product-name tx-dark-color">
                                                     <a id="a1" runat="server"
-                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(Eval("Offerta.Denominazione" + Lingua).ToString()),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>
                                                         <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
                                                             runat="server"></asp:Literal>
