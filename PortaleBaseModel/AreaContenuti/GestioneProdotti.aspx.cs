@@ -1223,7 +1223,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtCanonicalI.Text = "";
         txtCanonicalGB.Text = "";
         txtCanonicalRU.Text = "";
-        txtCanonicalI.Text = "";
+        txtUrlI.Text = "";
         txtUrlGB.Text = "";
         txtUrlRU.Text = "";
         txtRobots.Text = "";

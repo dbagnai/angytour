@@ -752,6 +752,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, Response, false);
             }
         }
+        else linken = "";
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {
             hreflang = " hreflang=\"ru\" ";
@@ -783,6 +784,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, Response, false);
             }
         }
+        else linkru = "";
         //GESTIONE CAMBIO LINGUA PER PAGINA
         switch (Lingua.ToLower())
         {

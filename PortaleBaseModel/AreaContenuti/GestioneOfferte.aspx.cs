@@ -1251,7 +1251,7 @@ public partial class AreaContenuti_Default3 : CommonPage
         txtCanonicalI.Text = "";
         txtCanonicalGB.Text = "";
         txtCanonicalRU.Text = "";
-        txtCanonicalI.Text = "";
+        txtUrlI.Text = "";
         txtUrlGB.Text = "";
         txtUrlRU.Text = "";
         txtRobots.Text = "";
