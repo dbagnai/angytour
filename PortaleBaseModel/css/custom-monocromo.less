@@ -111,9 +111,14 @@
 /**/
 @subtitle-banner-font: @base-font;
 @subtitle-banner-color: @primary-color;
-/*----------------------------------
-//////| BANNER TESTATA HOME |///////
-----------------------------------*/
+/*------------------------------------
+////| BANNER TESTATA HOME - 100% |////
+------------------------------------*/
+@bg-width: 100%;
+@bg-max-width: 100%;
+@bg-size: cover;
+@bg-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
+/**/
 @bg-testata-opacity: fade(@black-color, 40%);
 @bg-color-top-opacity: fade(@color-sottomeu, 0%);
 @bg-color-bottom-opacity: fade(@primary-color, 75%);
@@ -128,6 +133,26 @@
 @subtitle-testata-home-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768)));
 @subtitle-testata-home-font: @primary-font; /*@alternative-font;*/
 @subtitle-testata-home-color: @white-color;
+/*-----------------------------------
+////| BANNER TESTATA HOME - 55% |////
+-----------------------------------*/
+/*@bg-width: 55%;
+@bg-max-width: 55%;
+@bg-size: cover;
+@bg-path: polygon(0 0%, 99% 0%, 80% 101%, 0% 100%);
+
+@bg-testata-opacity: @bg-primary-color;
+@bg-color-top-opacity: lighten(@primary-color, 25%);
+@bg-color-bottom-opacity: @primary-color;
+
+@title-testata-home-size: 4rem;
+@title-testata-home-font: @testata-font;
+@title-testata-home-color: @white-color;
+@title-testata-home-weight: 700;
+
+@subtitle-testata-home-size: 2.5rem;
+@subtitle-testata-home-font: @primary-font;
+@subtitle-testata-home-color: @white-color;*/
 /*----------------------------------
 /////////| BANNER FASCIA |//////////
 ----------------------------------*/

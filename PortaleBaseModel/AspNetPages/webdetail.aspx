@@ -345,23 +345,16 @@
         </div>
     </div>
 
-    <%--RECENSIONI CLIENTI--%>
-    <div runat="server" visible="">
-        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-            <div id="divCommenti" class="inject py-5 commenti-details-page bg-light-color" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-        </asp:Panel>
-    </div>
-
     <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
-    <div class="bg-white" id="divSuggeritiContainer">
+    <div class="bg-light-color" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">
                     <div class="col-sm-12 col-12">
                         <div class="subtitle-block clearfix">
 
-                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 30px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
+                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
                                 <div class="pull-left lead">
                                     <h2 class="mbr-section-title" style="margin-bottom: 3px">
                                         <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
@@ -376,4 +369,11 @@
             <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
         </div>
     </div>
+
+     <%--RECENSIONI CLIENTI--%>
+    <div runat="server" visible="">
+    <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+        <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+    </asp:Panel>
+</div>
 </asp:Content>

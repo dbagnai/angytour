@@ -222,7 +222,7 @@ a {
 
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
 /*.headerspacer {
-    padding-top: calc(141px);
+    padding-top: calc(141px + 14px);
 }*/
 
 @media (max-width:1179px) {
@@ -345,6 +345,19 @@ i .fa {
         padding: 0px 55px;
         background-image: @pattern-image;
         background-size: @pattern-sottomenu-size;
+        /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
+        /*-webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        column-rule: solid 1px @bg-primary-color;
+        webkit-column-fill: auto;
+        -moz-column-fill: auto;
+        column-fill: auto;
+        height: 164px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: calc((100% - 1110px) / 2);
+        padding-right: calc((100% - 1110px) / 2);*/
     }
 
     .visible-ok {
@@ -424,6 +437,9 @@ i .fa {
         padding: 22px 10px;
         margin-left: 0;
         font-weight: @submenu-weight !important;
+        /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
+        /*width: 100%;
+        padding: 10px 10px;*/
         /*SOTTO SOTTO MENU ON OFF*/
         margin-bottom: -1px;
         border-bottom: 1px solid @bg-primary-color !important;
@@ -1358,7 +1374,13 @@ ul.footer-category-list {
 ------- BANNER TESTATA HOME -------
 ----------------------------------*/
 .tp-caption.very_big_white {
+    width: @bg-width !important;
+    max-width: @bg-max-width !important;
+    background-size: @bg-size !important;
+    -webkit-clip-path: @bg-path;
+    clip-path: @bg-path;
     background: linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
+    background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
     /*background-color: @bg-testata-opacity;*/
     padding: 20px 20px;
 }
@@ -1827,6 +1849,16 @@ ul.footer-category-list {
     line-height: 2.5rem;
 }
 
+#isoBannav1 li .work-image:after {
+    background: url(/images/link1.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+    background-size: 10% !important;
+}
+
+#isoBannav1 li .work-image:hover:after {
+    background: url(/images/link1.png) center calc(~'(100% - 0px) / 2') no-repeat !important;
+    background-size: 20% !important;
+}
+
 /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
 .navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after {
     background-position: center calc(~'(100% - 0px) / 2') !important;
@@ -1885,7 +1917,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 ------------------------------------*/
 .prezzo-responsive {
     font-size: 2vw;
-    line-height: 2vw !important;
+    line-height: 1vw !important;
 }
 
 @media (max-width: 1200px) {
@@ -2630,7 +2662,7 @@ li input[type="radio"] {
 }
 
 .commenti-details-page div#divCommenti-head-ctrl {
-    background-color: @bg-light-color !important;
+    background-color: #fff !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
