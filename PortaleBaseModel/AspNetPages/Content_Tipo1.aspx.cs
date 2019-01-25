@@ -106,6 +106,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         string TestoContenuto = item.DescrizionebyLingua(Lingua);
         try
         {
+            //CommonPage.CustomContentInject(((HtmlGenericControl)Master.FindControl("divfooter1")), "customcontent1-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+
             litMainContent.Text = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
         }
         catch { }

@@ -141,7 +141,17 @@ public class CommonPage : Page
     }
 
 
+    public static void CustomContentInject(System.Web.UI.HtmlControls.HtmlGenericControl divcontainer, string filename, string Lingua, string username, System.Web.SessionState.HttpSessionState sessione = null)
+    {
 
+        if (divcontainer != null && System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + filename))
+        {
+
+            string bindedcustomcontent = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + filename);
+            divcontainer.InnerHtml = custombind.bind(bindedcustomcontent, Lingua, username, sessione, null, null, System.Web.HttpContext.Current.Request);// sb.ToString();
+            divcontainer.Visible = true;
+        }
+    }
 
     public static string ControlloDotDot(object NomeAnteprima, string classe)
     {
