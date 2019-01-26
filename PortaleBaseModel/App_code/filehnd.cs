@@ -22,6 +22,8 @@ public class jformdatapost
     public string consenso { set; get; }
     public string consenso1 { set; get; }
     public string consenso2 { set; get; }
+    public string recaptcharesponse { set; get; }
+
 }
 
 public class Filehnd : IHttpHandler, IRequiresSessionState
@@ -69,6 +71,18 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         string jformdatapost = pars.ContainsKey("formdata") ? pars["formdata"] : "";
                         if (jformdatapost != "")
                             jdata = Newtonsoft.Json.JsonConvert.DeserializeObject<jformdatapost>(jformdatapost);
+
+
+                        //Verifica server captcha
+                        //string recaptchasecret = "6Lfm5owUAAAAADZCXNTVspiY81pe3w6l_w1rmH3t";
+                        //string recaptcharesponse = jdata.recaptcharesponse;
+                        //if (!googleManage.RecaptchaServerValidation(recaptchasecret, recaptcharesponse))
+                        //{
+                        //    result  = "errore validazione captcha";
+                        //    return;
+                        //}
+
+
                         //Mappiamo i dati in un oggetto offerrte da inserire
                         Offerte item = new Offerte();
                         offerteDM offDM = new offerteDM();
@@ -145,6 +159,18 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         result = Newtonsoft.Json.JsonConvert.SerializeObject(valoriritorno1, Newtonsoft.Json.Formatting.Indented);
                         break;
                     case "uploadfileinfolder": //carico il file passatiin una directory temporanea in base alla sessione attuale
+
+                        //Verifica server captcha
+                        //if (pars.ContainsKey("captcharesp"))
+                        //{
+                        //    string recaptchasecret = "6Lfm5owUAAAAADZCXNTVspiY81pe3w6l_w1rmH3t";
+                        //    string recaptcharesponse = pars["captcharesp"];
+                        //    if (!googleManage.RecaptchaServerValidation(recaptchasecret, recaptcharesponse))
+                        //    {
+                        //        result = "errore validazione captcha";
+                        //        return;
+                        //    }
+                        //}
                         string folder = pars.ContainsKey("folder") ? pars["folder"] : "";
                         string vpercorsotemp = WelcomeLibrary.STATIC.Global.PercorsoComune + "/_uploads/" + context.Session.SessionID;
                         string percorsotemp = vpercorsotemp;

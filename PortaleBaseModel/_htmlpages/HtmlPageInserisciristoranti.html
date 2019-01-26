@@ -102,6 +102,7 @@
     localmessage.tipologia = "rif000003";
     localmessage.inputisvalid = false;
     localmessage.validatemsg = "";
+    localmessage.recaptcharesponse = "";
 
     function ConfirmValidationForm(btnid) {
 
@@ -129,6 +130,7 @@
         }
         else {
             if (true) { //fare controllo di validazione ...
+                localmessage.recaptcharesponse = response;
                 /*do work and go for postback*/
                 $(btnid).attr("disabled", "")
                 //invio nopostback con handler////////////////////////////////////////////////////
@@ -178,6 +180,7 @@
         contactdatas.consenso1 = $("[id$='chkprivacy1" + (btnid).id + "']")[0].checked;
         contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
         contactdatas.lingua = lng;
+        contactdatas.recaptcharesponse = localmessage.recaptcharesponse;
         contactdatas.tipo = "post";
         if (contactdatas.titolo == '' || contactdatas.email == '' ||
             contactdatas.telefono == '' || contactdatas.indirizzo == '' ||
@@ -198,6 +201,7 @@
             return false;
         }
         else {
+            localmessage.recaptcharesponse = response;
             $('#' + btnupload.id + 'control').click()
         }
     }
@@ -225,6 +229,7 @@
             data.append(files[i].name, files[i]);
         }
         data.append('q', 'uploadfileinfolder');
+        data.append('captcharesp', localmessage.recaptcharesponse);
         var tastotxt = $(startbtn).html();
         $(startbtn).html("ATTENDI ..");
         $.ajax({
