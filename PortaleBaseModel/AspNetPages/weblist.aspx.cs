@@ -560,14 +560,7 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue.Remove("anno");
             objvalue["anno"] = anno;
-        }
-
-        //Modifica tags per metarobots 
-        if (!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))
-        {
-            HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
-            metarobots.Attributes["Content"] = "noindex,follow";
-        }
+        } 
 
 
         if (Promozioni != "")
@@ -899,7 +892,15 @@ public partial class AspNetPages_weblist : CommonPage
             actualpagelink.Campo2 = CleanUrl(sezionedescrizioneI);
 
             //redirect al canonical se il canonical non coincide con l'url escudendo la querystring
-            CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, Response, false);
+            if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+            {
+                HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                metarobots.Attributes["Content"] = "noindex,follow";
+                if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                {
+                    Response.RedirectPermanent(modcanonical, true);
+                }
+            }
         }
 
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
@@ -930,7 +931,15 @@ public partial class AspNetPages_weblist : CommonPage
                 actualpagelink.Campo1 = (linken);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneGB);
                 //redirect al canonical se il canonical non coincide con l'url
-                CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, Response, false);
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                    metarobots.Attributes["Content"] = "noindex,follow";
+                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
+                }
             }
         }
         else linken = "";
@@ -962,7 +971,15 @@ public partial class AspNetPages_weblist : CommonPage
                 actualpagelink.Campo1 = (linkru);
                 actualpagelink.Campo2 = CleanUrl(sezionedescrizioneRU);
                 //redirect al canonical se il canonical non coincide con l'url
-                CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, Response, false);
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                    metarobots.Attributes["Content"] = "noindex,follow";
+                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
+                }
             }
         }
         else linkru = "";

@@ -247,13 +247,13 @@ public class CommonPage : Page
         return ret;
     }
 
-    public static void CheckCanonicalUrl(string calledurl, string canonicalurl, HttpResponse response, bool removeqstring = true)
+    public static bool CheckCanonicalUrl(string calledurl, string canonicalurl, bool removeqstring = true)
     {
         //redirect al canonical se il canonical non coincide con l'url
         if (calledurl.IndexOf("?") != -1 && removeqstring)
             calledurl = calledurl.Substring(0, calledurl.IndexOf("?"));
-        if (calledurl != canonicalurl)
-            response.RedirectPermanent(canonicalurl);
+        if (calledurl != canonicalurl) return false;
+        else return true;
         //response.StatusCode = 301; // se il canonical è diverso dall'url ritorno moved permanently
     }
 
