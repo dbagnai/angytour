@@ -426,7 +426,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
             if (chkNewsletter.Checked == true)
             {
-                Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
+                Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
 
                 //SoggettoMail = "Richiesta iscrizione newsletter da " + nomemittente + " tramite il sito " + Nome;
                 //------------------------------------------------

@@ -524,13 +524,27 @@
                                 <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                                 <br />
                                 <div style="clear: both"></div>
-                                <div class="checkbox">
-                                    <label style="color: #fff; text-align: left; padding-left: 30px;">
-                                        <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
-                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check" style="color: #000"></i></span>
-                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #fff;" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                                    </label>
+                             
+                                   <div class="row" style="text-align: left">
+                                    <div class="col-sm-12 text-white">
+                                        <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                        <div class="checkbox" style="margin-bottom: 20px">
+                                            <label>
+                                                <input id="chkContactPrivacy" runat="server" type="checkbox" />
+                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" style="margin-bottom: 20px">
+                                            <label>
+                                                <input type="checkbox" id="chkNewsletter" runat="server" />
+                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
+
+
+
                                 <div style="clear: both"></div>
                                 <div>
                                     <script>
@@ -548,7 +562,9 @@
 
                                                 //invio nopostback con handler////////////////////////////////////////////////////
                                                 var contactdatas = {};
-                                                contactdatas.chkprivacy = chk1.checked;
+                                               contactdatas.chkprivacy = chk1.checked;
+                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+
                                                 getcontactdata(contactdatas, function (contactdatas) {
                                                     var tastotxt = $(elembtn).html();
                                                     $(elembtn).html("Wait ..");

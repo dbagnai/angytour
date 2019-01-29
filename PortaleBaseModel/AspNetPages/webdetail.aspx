@@ -104,12 +104,22 @@
                                                 <div class="ui-input">
                                                     <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage1" />
                                                 </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <asp:CheckBox ID="chkContactPrivacy1" runat="server" Checked="false" />
-                                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                                                    </label>
+                                                <div class="row" style="text-align: left">
+                                                    <div class="col-sm-12">
+                                                        <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                            <label>
+                                                                <input id="chkContactPrivacy1" runat="server" type="checkbox" />
+                                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                                            </label>
+                                                        </div>
+                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                            <label>
+                                                                <input type="checkbox" id="chkNewsletter1" runat="server" />
+                                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <script>
                                                     function ConfirmValidationForm1(elembtn) {
@@ -128,6 +138,7 @@
                                                             //invio nopostback con handler////////////////////////////////////////////////////
                                                             var contactdatas = {};
                                                             contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy1.ClientID %>')[0].checked;
+                                                            contactdatas.chknewsletter = $('<%= "#" + chkNewsletter1.ClientID %>')[0].checked;
                                                             getcontactdata1(contactdatas, function (contactdatas) {
                                                                 var tastotxt = $(elembtn).html();
                                                                 $(elembtn).html("Wait ..");
@@ -266,15 +277,23 @@
                         <div class="ui-input">
                             <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                         </div>
-
-                        <div class="checkbox">
-                            <label>
-                                <asp:CheckBox ID="chkContactPrivacy" runat="server" Checked="false" />
-                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                            </label>
-                        </div>
-
+   <div class="row my-3" style="text-align: left">
+                                <div class="col-sm-12 text-white">
+                                    <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                    <div class="checkbox" style="margin-bottom: 20px">
+                                        <label>
+                                            <input id="chkContactPrivacy" runat="server" type="checkbox" />
+                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox" style="margin-bottom: 20px">
+                                        <label>
+                                            <input type="checkbox" id="chkNewsletter" runat="server" />
+                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         <script>
                             function ConfirmValidationForm(elembtn) {
                                 var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
@@ -292,6 +311,7 @@
                                     //invio nopostback con handler////////////////////////////////////////////////////
                                     var contactdatas = {};
                                     contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked;
+                                        contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
                                     getcontactdata2(contactdatas, function (contactdatas) {
                                         var tastotxt = $(elembtn).html();
                                         $(elembtn).html("Wait ..");

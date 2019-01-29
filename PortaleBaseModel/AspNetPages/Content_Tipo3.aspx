@@ -400,21 +400,24 @@
 
                                                                 <br />
                                                                 <br />
-                                                                <div class="checkbox">
-                                                                    <label class="w-100 text-left text-white" style="margin-left: 30px;">
-                                                                        <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
-                                                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
-                                                                        <%= references.ResMan("Common", Lingua,"chkprivacy") %><a style="color: #ffd800" target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                                                                    </label>
+                                                                <div class="row" style="text-align: left">
+                                                                    <div class="col-sm-12 text-white">
+                                                                        <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                                            <label>
+                                                                                <input id="chkPrivacy" runat="server" type="checkbox" />
+                                                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                                            <label>
+                                                                                <input type="checkbox" id="chkNewsletter" runat="server" />
+                                                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
 
-                                                                <div class="checkbox">
-                                                                    <label class="w-100 text-left text-white" style="margin-left: 30px;">
-                                                                        <asp:CheckBox ID="chkNewsletter" runat="server" Checked="false" />
-                                                                        <span class="cr" style="margin-left: -30px;"><i class="cr-icon fa fa-check"></i></span>
-                                                                        <%= references.ResMan("Common", Lingua,"titoloNewsletter1") %>
-                                                                    </label>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

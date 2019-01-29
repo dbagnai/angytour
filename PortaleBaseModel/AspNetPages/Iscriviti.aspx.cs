@@ -115,7 +115,7 @@ public partial class _Iscriviti : CommonPage
                         txtEmail.Text = cli.Email;
                         txtTelefono.Text = cli.Telefono;
                         chkPrivacy.Checked = true;
-                        chkConsensoMail.Checked = true;
+                        chkNewsletter.Checked = true;
                         litDescrizioneIscrivi.Text = references.ResMan("Common",Lingua,"TestoIscrivi1").ToString();
                     }
                 if (Azione.ToLower() == "iscrivinewsletter")
@@ -129,7 +129,7 @@ public partial class _Iscriviti : CommonPage
                         txtEmail.Text = cli.Email;
                         //  txtTelefono.Text = cli.Telefono;
                         chkPrivacy.Checked = true;
-                        chkConsensoMail.Checked = true;
+                        chkNewsletter.Checked = true;
                         cli.Lingua = Lingua;
                         RichiestaIscrizioneNewsletter(cli);
                     }
@@ -265,7 +265,7 @@ public partial class _Iscriviti : CommonPage
             Descrizione += references.ResMan("Common",Lingua,"FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             Descrizione += cliente.TestoFormConsensi + "<br/>";
 
-            if (chkConsensoMail.Checked == true)
+            if (chkNewsletter.Checked == true)
                 Descrizione += " <br/> Il cliente ha richiesto l'adesione all'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
 
 
@@ -527,7 +527,7 @@ public partial class _Iscriviti : CommonPage
         txtNascita.Text = "27/09/1984";
         txtDescrizione.Text = "Note al contatto di attivazione";
         chkPrivacy.Checked = true;
-        chkConsensoMail.Checked = true;
+        chkNewsletter.Checked = true;
     }
     protected Cliente CaricaDatiClienteDaForm()
     {
@@ -551,7 +551,7 @@ public partial class _Iscriviti : CommonPage
 
             item.DataNascita = tmp;
         item.ConsensoPrivacy = chkPrivacy.Checked;
-        item.Consenso1 = chkConsensoMail.Checked;
+        item.Consenso1 = chkNewsletter.Checked;
         item.Spare1 = txtDescrizione.Text;
         item.Pivacf = txtPiva.Text;
         item.Lingua = Lingua;
@@ -739,7 +739,7 @@ public partial class _Iscriviti : CommonPage
             Descrizione += references.ResMan("Common",Lingua,"FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
             Descrizione += cliente.TestoFormConsensi + "<br/>";
-            Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
+            Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
 
             //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + references.ResMan("Common",Lingua,"testoLinkValidazioneAttivazione").ToString() + "<br/>";
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);

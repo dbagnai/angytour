@@ -93,21 +93,24 @@
             <div class="row">
                 <div class="col-sm-3" style="text-align: right">&nbsp;</div>
                 <div class="col-sm-9">
-                    <div class="checkbox">
-                        <label>
-                            <asp:CheckBox ID="chkPrivacy" runat="server" Checked="false" />
-                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            <%= references.ResMan("Common", Lingua,"chkprivacy") %><a target="_blank" href="<%=CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua,"linkPrivacypolicy")) %>"> (<%= references.ResMan("Common", Lingua,"testoprivacyperlink") %>) </a>
-                        </label>
+                      <div class="row" style="text-align: left">
+                        <div class="col-sm-12 text-white">
+                            <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                            <div class="checkbox" style="margin-bottom: 20px">
+                                <label>
+                                    <input id="chkPrivacy" runat="server" type="checkbox" />
+                                    <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                </label>
+                            </div>
+                            <div class="checkbox" style="margin-bottom: 20px">
+                                <label>
+                                    <input type="checkbox" id="chkNewsletter" runat="server" />
+                                    <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <br />
-                    <div class="checkbox">
-                        <label>
-                            <asp:CheckBox ID="chkConsensoMail" runat="server" Checked="false" />
-                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            <%= references.ResMan("Common", Lingua,"testoConsenso1") %>
-                        </label>
-                    </div>
+
                     <br />
                     <br />
                     <button id="btnInvia" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoBtnNewsletter")  %> </button>

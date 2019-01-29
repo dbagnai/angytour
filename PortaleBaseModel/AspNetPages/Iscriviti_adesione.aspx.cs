@@ -158,7 +158,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                         txtEmail.Text = cli.Email;
                         txtTelefono.Text = cli.Telefono;
                         chkPrivacy.Checked = true;
-                        chkConsensoMail.Checked = true;
+                        chkNewsletter.Checked = true;
                         RptDescrizione.Text = references.ResMan("CommonBase",Lingua,"TestoIscrivi1").ToString();
                     }
 
@@ -169,7 +169,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
                     //i dati base
                     txtEmail.Text = email;
                     chkPrivacy.Checked = true;
-                    chkConsensoMail.Checked = true;
+                    chkNewsletter.Checked = true;
                     RptDescrizione.Text = "NEWSLETTER"; //references.ResMan("CommonBase",Lingua,"TestoIscrivinewsletter").ToString();
                     //Invio la mail per la validazione dell'email
                     btnInvia_Click(null, null);
@@ -343,7 +343,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
         //txtNascita.Text = "27/09/1984";
         txtDescrizione.Text = "Note al contatto";
         chkPrivacy.Checked = true;
-        chkConsensoMail.Checked = true;
+        chkNewsletter.Checked = true;
     }
 
     protected Cliente CaricaDatiClienteDaForm()
@@ -364,7 +364,7 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
         //item.Professione = txtProfessione.Text;
  
         item.ConsensoPrivacy = chkPrivacy.Checked;
-        item.Consenso1 = chkConsensoMail.Checked;
+        item.Consenso1 = chkNewsletter.Checked;
         item.Spare1 = txtDescrizione.Text;
         //item.Pivacf = txtPivacf.Text;
         item.Lingua = Lingua;

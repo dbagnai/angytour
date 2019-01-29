@@ -225,7 +225,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     if (spuntanewsletter == true)
                     {
-                        Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter : " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
+                        Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
 
                         //SoggettoMail = "Richiesta iscrizione newsletter da " + nomemittente + " tramite il sito " + Nome;
                         //------------------------------------------------
