@@ -650,7 +650,7 @@ namespace WelcomeLibrary.UF
                             }
                         }
                         break;
-                    case "injectscrollerandLoadbanner":
+                    case "injectscrollerandloadbanner":
                         //injectScrollerAndLoadBanner(type, container, controlid, listShow, maxelement, scrollertype, tblsezione, filtrosezione, mescola)
 
                         //Caricamento parametri per la chiamata
