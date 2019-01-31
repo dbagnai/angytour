@@ -487,7 +487,8 @@
             "~/js/notifications/notify.min.js",
             "~/js/notifications/notify-metro.js",
             "~/js/notifications/notifications.js",
-            "~/js/moment-with-locales.min.js", //big trova alternativa!!!
+        //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
+            "~/js/moment.min.js", //no locales!!!
             "~/js/imagesloaded.pkgd.js",
             "~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",

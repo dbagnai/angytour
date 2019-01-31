@@ -841,7 +841,9 @@
             var makeRevLower = false;
            <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
      <%--       initLingua('<%= Lingua %>');--%>
-            clearcache();
+          //  clearcache();
+            initimoment();
+
             jQuery(document).ready(function () {
                <%-- loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');--%>
                 <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>

@@ -48,10 +48,6 @@ var globalObject = {};
 
 var enablescrolltopmem = false;
 /*Memorizzo posizione scrolltop in session ----------------------------------------*/
-//history.scrollRestoration = 'manual';
-//$(window).on('unload', function () {
-//    $(window).scrollTop(0);
-//}); 
 $(window).scroll(function () {
     var pathName = document.location.pathname + document.location.search;
     var scrollPosition = $(window).scrollTop();
@@ -82,7 +78,6 @@ $(document).ready(function () {
     searchtaginjectandcall();
 });
 //searchtaginjectandcall();
-
 
 /*Seleziona i tag con classe inject e Chiama la funzione specificata nell'attributo params passando i parametri a seguire*/
 function searchtaginjectandcall() {
@@ -130,10 +125,126 @@ function searchtaginjectandcall() {
     });
 }
 
+function initimoment()
+{
+    moment.locale("it");
+}
+
+function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! ( DA FARE )
+
+    //PERCORSI APPLICAZIONE//////////////////////////////////////////////
+    var jobj = JSON.parse(result);
+    percorsoapp = jobj["percorsoapp"];
+    percorsocdn = jobj["percorsocdn"];
+    percorsoimg = jobj["percorsoimg"];
+    percorsoexp = jobj["percorsoexp"];
+    percorsolistaimmobili = jobj["percorsolistaimmobili"];
+    versionforcache = jobj["versionforcache"];
+    percorsocomune = jobj["percorsocomune"];
+    percorsocontenuti = jobj["percorsocontenuti"];
+    usecdn = jobj["usecdn"];
+    //////////////////////// //Stringa json con le lingue
+    jsonlanguages = jobj["jsonlanguages"];
+    percorsolistadati = jobj["percorsolistadati"];
+    percorsolistaristoranti = jobj["percorsolistaristoranti"];
 
 
+    ///////////////OGGETTO Json con le risorse
+    baseresources = JSON.parse(jobj["baseresources"]);
+    ///////////////OGGETTO Json con le regioni
+    JSONregioni = JSON.parse(jobj["jsonregioni"]);
+    ///////////OGGETTO Json con le province
+    JSONprovince = JSON.parse(jobj["jsonprovince"]);
+    JSONcategorie = JSON.parse(jobj["jsoncategorie"]);
+    JSONcategorie2liv = JSON.parse(jobj["jsoncategorie2liv"]);
+    jsontipologie = JSON.parse(jobj["jsontipologie"]);
+    username = jobj["username"];
+    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+    var dictresources = JSON.parse(jobj["dictreferences"]);
+    ////console.log(baseresources);
+    if (dictresources["JSONrefmetrature"] != null && dictresources["JSONrefmetrature"] != '')
+        JSONrefmetrature = JSON.parse(dictresources["JSONrefmetrature"]);
+    if (dictresources["JSONrefprezzi"] != null && dictresources["JSONrefprezzi"] != '')
+        JSONrefprezzi = JSON.parse(dictresources["JSONrefprezzi"]);
+    if (dictresources["JSONrefcondizione"] != null && dictresources["JSONrefcondizione"] != '')
+        JSONrefcondizione = JSON.parse(dictresources["JSONrefcondizione"]);
+    if (dictresources["JSONreftipocontratto"] != null && dictresources["JSONreftipocontratto"] != '')
+        JSONreftipocontratto = JSON.parse(dictresources["JSONreftipocontratto"]);
+    if (dictresources["JSONreftiporisorse"] != null && dictresources["JSONreftiporisorse"] != '')
+        JSONreftiporisorse = JSON.parse(dictresources["JSONreftiporisorse"]);
+    //JSONgeogenerale = JSON.parse(dictresources["JSONgeogenerale"]);
+    //JSONcar1 = JSON.parse(dictresources["JSONclasse"]);
+    if (dictresources["JSONcar1"] != null && dictresources["JSONcar1"] != '')
+        JSONcar1 = JSON.parse((dictresources["JSONcar1"]));
+    if (dictresources["JSONcar2"] != null && dictresources["JSONcar2"] != '')
+        JSONcar2 = JSON.parse((dictresources["JSONcar2"]));
+    if (dictresources["JSONcar3"] != null && dictresources["JSONcar3"] != '')
+        JSONcar3 = JSON.parse((dictresources["JSONcar3"]));
+    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+
+    referencesloaded = true;
+}
+
+
+//LOADREF FITTIZZIA CHE REPLICA SOLO LE CHIAMATE, LE VARIABILI JAVASCRIPT SONO INIETTATE DIRETTAMETNE IN PAGINA DURANTE IL RENDERING DI PAGINA LATO SERVER !!! ( potrebbe anche non essere chiamata)
+function loadref(functocall) {
+    var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
+    //MEMORIZZO I DATI DELLA CHIAMATA
+    var item = {};
+    item.name = functocall.name;
+    item.args = [];
+    if (item.name == '' || item.name == undefined) item.name = arguments[0];
+    //MEMORIZZO GLI ARGOMENTI DI CHIAMATA IN ARGS
+    var args = new Array();
+    for (var i = 1; i < arguments.length; i++) {
+        args.push(arguments[i]);
+        lingua = arguments[i];
+        item.args.push(arguments[i]);
+    }
+    /////////////////////////////////////////////////////
+    //Chiamiamo  direttamete la funzione se presente nel chiamante ( considerando la possibilità di funzioni in scope interni )
+    /////////////////////////////////////////////////////
+    if (!(item.name == '' || item.name == undefined))
+    //window[item.name].apply(this, args); 
+    {
+        if (item.name.indexOf('.') == -1)
+            (function wait() {
+                if (typeof window[item.name] === "function") {
+                    $(document).ready(function () { window[item.name].apply(this, args); });
+                } else {
+                    setTimeout(wait, 50);
+                }
+            })();
+        else {
+            var levelscopes1 = item.name.split('.');
+            (function wait() {
+                if (levelscopes1.length == 2)
+                    if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
+                        $(document).ready(function () { window[levelscopes1[0]][levelscopes1[1]].apply(this, args); });
+                    } else {
+                        setTimeout(wait, 50);
+                    }
+            })();
+        }
+    }
+}
 
 /*
+
+ 
+function initLingua(lingua) {
+    lng = lingua || "I";
+}
+function testCacheversion(serverversion) {
+    if (versionforcache != serverversion) manageclientstorage("clear");
+}
+function clearcache() {
+    moment.locale("it");
+    var clearlocalmem = $.getQueryString("clear");
+    if (clearlocalmem == 'true')
+        manageclientstorage("clear");
+}
+
 //QUESTA PERMETTE DI CHIAMARE LA FUNZIONE PASSATA NEI PARAMENTRI AL TERMINE DELLA FUNZIONE DI PROMISE QUI DEFINITA
 //AGGIUNGENDO I PARAMETRI DELLA FUNZIONE PRESENT NELLA LISTA DELLA CHIAMATA
 //Si chiama con loadref(nomefunzione,parametro1,parametro2, .... , lingua)
@@ -229,121 +340,8 @@ function loadref(functocall) {
         });
     }
 }
-*/
 
-//LOADREF FITTIZZIA CHE REPLICA SOLO LE CHIAMATE, SE LE VARIABILI JAVASCRIPT SONO INIETTATE DIRETTAMETNE IN PAGINA!!! ( potrebbe non essere chiamata senza problemi !!! serve solo per retrocompatibilità )
-function loadref(functocall) {
-    var lingua = 'I'; //QUesta la prendo sempre come ultimo argomento di chiamata
-    //MEMORIZZO I DATI DELLA CHIAMATA
-    var item = {};
-    item.name = functocall.name;
-    item.args = [];
-    if (item.name == '' || item.name == undefined) item.name = arguments[0];
-    //MEMORIZZO GLI ARGOMENTI DI CHIAMATA IN ARGS
-    var args = new Array();
-    for (var i = 1; i < arguments.length; i++) {
-        args.push(arguments[i]);
-        lingua = arguments[i];
-        item.args.push(arguments[i]);
-    }
-    /////////////////////////////////////////////////////
-    //Chiamiamo  direttamete la funzione se presente nel chiamante ( considerando la possibilità di funzioni in scope interni )
-    /////////////////////////////////////////////////////
-    if (!(item.name == '' || item.name == undefined))
-    //window[item.name].apply(this, args); 
-    {
-        if (item.name.indexOf('.') == -1)
-            (function wait() {
-                if (typeof window[item.name] === "function") {
-                    $(document).ready(function () { window[item.name].apply(this, args); });
-                } else {
-                    setTimeout(wait, 50);
-                }
-            })();
-        else {
-            var levelscopes1 = item.name.split('.');
-            (function wait() {
-                if (levelscopes1.length == 2)
-                    if (typeof window[levelscopes1[0]][levelscopes1[1]] === "function") {
-                        $(document).ready(function () { window[levelscopes1[0]][levelscopes1[1]].apply(this, args); });
-                    } else {
-                        setTimeout(wait, 50);
-                    }
-            })();
-        }
-    }
-}
-
-function initLingua(lingua) {
-    lng = lingua || "I";
-}
-function clearcache() {
-    moment.locale("it");
-    var clearlocalmem = $.getQueryString("clear");
-    if (clearlocalmem == 'true')
-        manageclientstorage("clear");
-}
-function testCacheversion(serverversion) {
-    if (versionforcache != serverversion) manageclientstorage("clear");
-}
-
-
-function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! ( DA FARE )
-
-    //PERCORSI APPLICAZIONE//////////////////////////////////////////////
-    var jobj = JSON.parse(result);
-    percorsoapp = jobj["percorsoapp"];
-    percorsocdn = jobj["percorsocdn"];
-    percorsoimg = jobj["percorsoimg"];
-    percorsoexp = jobj["percorsoexp"];
-    percorsolistaimmobili = jobj["percorsolistaimmobili"];
-    versionforcache = jobj["versionforcache"];
-    percorsocomune = jobj["percorsocomune"];
-    percorsocontenuti = jobj["percorsocontenuti"];
-    usecdn = jobj["usecdn"];
-    //////////////////////// //Stringa json con le lingue
-    jsonlanguages = jobj["jsonlanguages"];
-    percorsolistadati = jobj["percorsolistadati"];
-    percorsolistaristoranti = jobj["percorsolistaristoranti"];
-
-
-    ///////////////OGGETTO Json con le risorse
-    baseresources = JSON.parse(jobj["baseresources"]);
-    ///////////////OGGETTO Json con le regioni
-    JSONregioni = JSON.parse(jobj["jsonregioni"]);
-    ///////////OGGETTO Json con le province
-    JSONprovince = JSON.parse(jobj["jsonprovince"]);
-    JSONcategorie = JSON.parse(jobj["jsoncategorie"]);
-    JSONcategorie2liv = JSON.parse(jobj["jsoncategorie2liv"]);
-    jsontipologie = JSON.parse(jobj["jsontipologie"]);
-    username = jobj["username"];
-    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
-    var dictresources = JSON.parse(jobj["dictreferences"]);
-    ////console.log(baseresources);
-    if (dictresources["JSONrefmetrature"] != null && dictresources["JSONrefmetrature"] != '')
-        JSONrefmetrature = JSON.parse(dictresources["JSONrefmetrature"]);
-    if (dictresources["JSONrefprezzi"] != null && dictresources["JSONrefprezzi"] != '')
-        JSONrefprezzi = JSON.parse(dictresources["JSONrefprezzi"]);
-    if (dictresources["JSONrefcondizione"] != null && dictresources["JSONrefcondizione"] != '')
-        JSONrefcondizione = JSON.parse(dictresources["JSONrefcondizione"]);
-    if (dictresources["JSONreftipocontratto"] != null && dictresources["JSONreftipocontratto"] != '')
-        JSONreftipocontratto = JSON.parse(dictresources["JSONreftipocontratto"]);
-    if (dictresources["JSONreftiporisorse"] != null && dictresources["JSONreftiporisorse"] != '')
-        JSONreftiporisorse = JSON.parse(dictresources["JSONreftiporisorse"]);
-    //JSONgeogenerale = JSON.parse(dictresources["JSONgeogenerale"]);
-    //JSONcar1 = JSON.parse(dictresources["JSONclasse"]);
-    if (dictresources["JSONcar1"] != null && dictresources["JSONcar1"] != '')
-        JSONcar1 = JSON.parse((dictresources["JSONcar1"]));
-    if (dictresources["JSONcar2"] != null && dictresources["JSONcar2"] != '')
-        JSONcar2 = JSON.parse((dictresources["JSONcar2"]));
-    if (dictresources["JSONcar3"] != null && dictresources["JSONcar3"] != '')
-        JSONcar3 = JSON.parse((dictresources["JSONcar3"]));
-    ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
-
-    referencesloaded = true;
-}
-
-/*FUNZIONE PER CARICARE I DATI REFERENZA UNICA (VERSIONE localFORAGE con client memory)*/
+//FUNZIONE PER CARICARE I DATI REFERENZA UNICA (VERSIONE localFORAGE con client memory)
 function initreferencesdata(lingua) {
     lng = lingua || "I";
     var deferred = $.Deferred();
@@ -501,7 +499,8 @@ function manageclientstorage(action, key, value, durationhours) {
         });
     }
 }
-var randomValue = Math.floor((1 + Math.random()) * 0x10000);
+
+*/
 
 function CaricaListaLingue() {
     if (jsonlanguages === '')
@@ -520,7 +519,7 @@ function CaricaListaLingue() {
 
                 },
                 failure: function (result) {
-                    sendmessage('fail init languages')
+                    sendmessage('fail init languages');
                 }
             });
             return jsonlanguages;
@@ -2013,7 +2012,7 @@ function formatdata1(localObjects, valore, prop, callback) {
             var objData = new Date(tmpDate);
             //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
             //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY')
+            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY');
             //var d = formattedDate.getDate();
             //var m = formattedDate.getMonth();
             //m += 1;  // JavaScript months are 0-11
@@ -2038,7 +2037,7 @@ function formatdata(localObjects, valore, prop, callback) {
             //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
 
             //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY')
+            var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY');
 
             //var d = formattedDate.getDate();
             //var m = formattedDate.getMonth();
@@ -2855,6 +2854,7 @@ function validateEmail(value) {
 
     return typeof input.checkValidity == 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
 }
+var randomValue = Math.floor((1 + Math.random()) * 0x10000);
 
 
 // Polyfills for deprecated escape/unescape() functions
