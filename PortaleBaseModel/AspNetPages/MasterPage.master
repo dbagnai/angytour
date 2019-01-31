@@ -69,14 +69,14 @@
 
                 <!-- LINGUE --->
                 <div runat="server" visible="true">
-                    <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server" visible="false">
+                    <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                     </div>
-                    <div id="divCambioLinguadef1"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="true">
+                    <div id="divCambioLinguadef1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
                         <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
                     </div>
-                    <div id="divCambioLingua2"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="false">
+                    <div id="divCambioLingua2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                     </div>
-                    <div id="divCambioLinguadef2"  class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;"  runat="server"  visible="false">
+                    <div id="divCambioLinguadef2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
                     </div>
                 </div>
@@ -524,8 +524,8 @@
                                 <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                                 <br />
                                 <div style="clear: both"></div>
-                             
-                                   <div class="row" style="text-align: left">
+
+                                <div class="row" style="text-align: left">
                                     <div class="col-sm-12 text-white">
                                         <%= references.ResMan("basetext", Lingua,"privacytext") %>
                                         <div class="checkbox" style="margin-bottom: 20px">
@@ -562,7 +562,7 @@
 
                                                 //invio nopostback con handler////////////////////////////////////////////////////
                                                 var contactdatas = {};
-                                               contactdatas.chkprivacy = chk1.checked;
+                                                contactdatas.chkprivacy = chk1.checked;
                                                 contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
                                                 getcontactdata(contactdatas, function (contactdatas) {
@@ -586,6 +586,12 @@
                                                 buttpost.click();--%>
                                                 ////////////////////////////////////////////////////////////////////////
                                             } else {
+
+
+                                                $('html,body').animate({
+                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
+                                                }, 'fast');
+
                                                 console.log('not  validated');
                                                 return false;
                                             }
