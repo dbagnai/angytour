@@ -125,12 +125,11 @@ function searchtaginjectandcall() {
     });
 }
 
-function initimoment()
-{
+function initimoment() {
     moment.locale("it");
 }
 
-function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! ( DA FARE )
+function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! 
 
     //PERCORSI APPLICAZIONE//////////////////////////////////////////////
     var jobj = JSON.parse(result);
@@ -577,8 +576,6 @@ function CaricaGlobalResources(lng, searchtext) {
 
 }
 
-
-
 function GetResourcesValue(key, data, idcontrol) {
     var ret = "";
     var data = data || baseresources;
@@ -690,9 +687,7 @@ function fillDDL(ddlID, jsonDictionary, selectionText, selectionVaue, selectedva
 
         }
     }
-    catch (e) {
-
-    }
+    catch (e) { }
 }
 
 /*----------------------GESIONE VALORI GEO -------------------------------*/
@@ -826,9 +821,8 @@ function GestioneDdlGeo(idcaller, lng, seln, selr, selp, selc, idddln, idddlr, i
 
 }
 /*-------------------fine gestione valori GEO --------------------------------------------------------*/
+
 /*-------------------Gestione valori RIFERIMENTO categorie/sottocategorie --------------------------------------------------------*/
-
-
 
 function combinedselect(callerid, command, lng, val1, val2, val3, val4, val5, id1, id2, id3, id4, id5) {
     var id1 = id1 || "ddlAtcgmp1";
@@ -959,11 +953,7 @@ function convertToDictionaryandFill(data, levelfilter, lng, ddlid, selecttext, s
     return JSON.stringify(dictobjjs);
 }
 
-
-
 /*-------------------fine gestione valori RIFERIMENTO categorie/sottocategorie  --------------------------------------------------------*/
-
-/* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
 /* ---------- FUNZIONI GESTIONE DATI E BINDING -------------------------------------------------------*/
 
@@ -994,38 +984,36 @@ function CleanHtml(el) {
     el.removeClass("inject");
     el.removeAttr("params");
 
-
 }
-
 
 function recursiveEach($element, controlid) {
     $element.children().each(function () {
         var $currentElement = $(this);
-
+        var replacedattr = '';
         var currentattr = $(this).attr("href");
         if (currentattr != null && currentattr != undefined) {
-            var replacedattr = currentattr.replace('replaceid', controlid);
+            replacedattr = currentattr.replace('replaceid', controlid);
             $(this).attr("href", replacedattr);
         }
         currentattr = $(this).attr("data-parent");
         if (currentattr != null && currentattr != undefined) {
-            var replacedattr = currentattr.replace('replaceid', controlid);
+            replacedattr = currentattr.replace('replaceid', controlid);
             $(this).attr("data-parent", replacedattr);
         }
 
         currentattr = $(this).attr("data-target");
         if (currentattr != null && currentattr != undefined) {
-            var replacedattr = currentattr.replace('replaceid', controlid);
+            replacedattr = currentattr.replace('replaceid', controlid);
             $(this).attr("data-target", replacedattr);
         }
         currentattr = $(this).attr("aria-controls");
         if (currentattr != null && currentattr != undefined) {
-            var replacedattr = currentattr.replace('replaceid', controlid);
+            replacedattr = currentattr.replace('replaceid', controlid);
             $(this).attr("data-controls", replacedattr);
         }
         currentattr = $(this).attr("aria-labelledby");
         if (currentattr != null && currentattr != undefined) {
-            var replacedattr = currentattr.replace('replaceid', controlid);
+            replacedattr = currentattr.replace('replaceid', controlid);
             $(this).attr("aria-labelledby", replacedattr);
         }
 
@@ -1041,14 +1029,11 @@ function recursiveEach($element, controlid) {
 /*Visualizza un lista i dati passati col template indicato*/
 function ShowList(templatename, container, controlid, data, callback) {
     var localObjects = {};
-
     var templateHtml = pathAbs + "/lib/template/" + "genericlista.html";
     if (templatename != null && templatename != '')
         templateHtml = pathAbs + "/lib/template/" + templatename;
-
     //Vuoto i contenitore
     $('#' + container).html('');
-
     if (data != null && data.length > 0) {
         $('#' + container).load(templateHtml, function () {
             recursiveEach($('#' + container), controlid);
@@ -1063,24 +1048,17 @@ function ShowList(templatename, container, controlid, data, callback) {
             }
             else
                 str = globalObject[controlid + "template"];
-
             var jquery_obj = $(str);
-            //var outerhtml = jquery_obj.outerHTML();
-            //var innerHtml = jquery_obj.html();
-            //var containeritem = outerhtml.replace(innerHtml, '');/*Prendo l'elemento contenitore*/
             var htmlout = "";
             for (var j = 0; j < data.length; j++) {
                 FillBindControls(jquery_obj, data[j], localObjects, "",
                     function (ret) {
-                        //htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
                         htmlout += ret.html() + "\r\n";
                     });
             }
             //Inseriamo htmlout nel contenitore  $('#' + el).html 
             $('#' + controlid).html('');
             $('#' + controlid).html(htmlout);
-            //CleanHtml($('#' + controlid));
-            //CleanHtml($('#' + container)); 
             if (callback != null) callback();
 
         });
@@ -1697,7 +1675,6 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
     callback(jquery_obj);
 };
 
-
 /*--------------------------------------------------------------------------------------------------------
 //FUNZIONI AGGIUNTIVE USATE DA FILLBINDCONTROLS PER IL BIND --------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------*/
@@ -1728,8 +1705,7 @@ function CompleteUrlListImgs(localObjects, idallegati, anteprima, usecdn, callba
                 arrayimgs.push(completeimgs[j]);
             }
         }
-    } catch (e) {
-    };
+    } catch (e) { };
     callback(arrayimgs);
 }
 function CompleteUrlListImgsDesc(localObjects, idallegati, anteprima, usecdn, callback) {
@@ -1742,8 +1718,7 @@ function CompleteUrlListImgsDesc(localObjects, idallegati, anteprima, usecdn, ca
                 arrayimgs.push(completeimgs[j]);
             }
         }
-    } catch (e) {
-    };
+    } catch (e) { };
     callback(arrayimgs);
 }
 function CompleteUrlListImgsRatio(localObjects, idallegati, anteprima, usecdn, callback) {
@@ -1756,8 +1731,7 @@ function CompleteUrlListImgsRatio(localObjects, idallegati, anteprima, usecdn, c
                 arrayimgs.push(completeimgs[j]);
             }
         }
-    } catch (e) {
-    };
+    } catch (e) { };
     callback(arrayimgs);
 }
 function CompleteUrlListFiles(localObjects, idallegati, anteprima, usecdn, callback) {
@@ -1770,8 +1744,7 @@ function CompleteUrlListFiles(localObjects, idallegati, anteprima, usecdn, callb
                 arrayfiles.push(completefiles[j]);
             }
         }
-    } catch (e) {
-    };
+    } catch (e) { };
     callback(arrayfiles);
 }
 function CompleteUrlListFilesDesc(localObjects, idallegati, anteprima, usecdn, callback) {
@@ -1784,8 +1757,7 @@ function CompleteUrlListFilesDesc(localObjects, idallegati, anteprima, usecdn, c
                 arrayfiles.push(completefiles[j]);
             }
         }
-    } catch (e) {
-    };
+    } catch (e) { };
     callback(arrayfiles);
 }
 
@@ -1860,7 +1832,6 @@ function formatbtncarrello(localObjects, valore, prop, callback) {
     var testoCarelloesaurito = baseresources[lng]["testocarelloesaurito"];
     var testoInseriscicarrello = baseresources[lng]["testoinseriscicarrello"];
     var testoVedi = baseresources[lng]["vedi"];
-
     var id = valore[0];
     var qtavendita = valore[1];
     var xmlvalue = valore[2];
@@ -2033,12 +2004,9 @@ function formatdata(localObjects, valore, prop, callback) {
     if (controllo == "true" || controllo == '') {
         if (tmpDate && tmpDate != "") {
             var objData = new Date(tmpDate);
-
             //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
-
             //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
             var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY');
-
             //var d = formattedDate.getDate();
             //var m = formattedDate.getMonth();
             //m += 1;  // JavaScript months are 0-11
@@ -2051,11 +2019,10 @@ function formatdata(localObjects, valore, prop, callback) {
     callback(retstring);
 }
 function formatvalue(localObjects, valore, prop, callback) {
-
     var retstring = valore[0];
-
     callback(retstring);
 }
+
 function frmcategoria(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
     //dataroot += "}";
@@ -2229,7 +2196,7 @@ function frmregione(localObjects, valore, prop, callback) {
 }
 
 /*--------------------------------------------------------------------------------------------------------
-//CARICAMENTO DATI --------------------------------------------------------------------------------------
+//FUNZIONI CARICAMENTO DATI --------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------*/
 
 function inviamessaggiomail(lng, data, callback) {
@@ -2552,8 +2519,6 @@ function emptysession(link, callback) {
 /*--------------------------------------------------------------------------------------------------------
 //FINE CARICAMENTO DATI --------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------*/
-
-
 /* ****************************************************************************************************
 /*---FUNZIONI UTILITA'-----------------------------------------------------------------------------------
  *********************************************************************************************************/
@@ -2568,22 +2533,18 @@ var require = function (src, callback) {
         (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') && (callback());
     };
     firstScriptTag.parentNode.insertBefore(newScriptTag, firstScriptTag);
-}
-
-
+};
 function openLink(link) {
     //console.log('openlink:' + link);
     window.location.href = link;
     return false;
 }
-
 function sendmessage(title, text) {
-    $.Notification.autoHideNotify('success', 'top right', title, text)
+    $.Notification.autoHideNotify('success', 'top right', title, text);
 }
 function sendmessagefixed(title, text) {
     $.Notification.notify('warning', 'top center', title, text);
 }
-
 function isEven(n) {
     return n == parseFloat(n) ? !(n % 2) : void 0;
 }
@@ -2609,9 +2570,7 @@ function getTime(passdata) {
         var date_obj_second = date_obj.format("ss");
         date_obj = date_obj_time = date_obj_hours + ":" + date_obj_mins + ":" + date_obj_second;
     }
-    catch (e) {
-
-    }
+    catch (e) { }
     return date_obj_time;
 }
 function getDate(passdata) {
@@ -2626,9 +2585,8 @@ function getDate(passdata) {
         var date_obj_year = date_obj.format("yyyy");
         date_obj_date = date_obj_day + "/" + date_obj_month + "/" + date_obj_year;
     }
-    catch (e) {
-
-    } return date_obj_date;
+    catch (e) { }
+    return date_obj_date;
 }
 function DownloadFile(filetodownload) {
     $.get(
@@ -2697,6 +2655,7 @@ function registerListener(event, func) {
         }
     });
 })(jQuery);
+
 function getMeta(url) {
     $("<img/>").attr("src", url).load(function () {
         s = { w: this.width, h: this.height };
@@ -2752,28 +2711,6 @@ function getCopy(objectToCopy) {
     }
     return copy;
 }
-
-
-//if (typeof Array.prototype.contains !== 'function') {
-//    Array.prototype.contains = function (needle) {
-//        var i = null;
-//        for (i in this) {
-//            if (this[i] == needle) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//}
-//Array.prototype.remByName = function (val) {
-//    for (var i = 0; i < this.length; i++) {
-//        if (this[i].name === val) {
-//            this.splice(i, 1);
-//            i--;
-//        }
-//    }
-//    return this;
-//}
 
 String.prototype.capitalizeFirstLetter = function () {
     return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
@@ -2885,4 +2822,4 @@ var utf8ToB64 = function (s) {
 var b64ToUtf8 = function (s) {
     s = s.replace(/\s/g, '');
     return decodeURIComponent(escape(atob(s)));
-}; 
+};
