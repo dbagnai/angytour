@@ -547,7 +547,7 @@
             //"~/css/fontawesome541/js/v4-shims.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
-            //"~/js/landing/script.js",
+            "~/js/jarallaxinit.js",
             "~/js/landing/jarallax.js",
             "~/js/maininit.js"
         );
