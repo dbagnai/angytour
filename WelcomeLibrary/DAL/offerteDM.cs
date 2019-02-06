@@ -5359,6 +5359,7 @@ namespace WelcomeLibrary.DAL
             tags.Add("titl:(");
             tags.Add("vide:(");
             tags.Add("h2ti:(");
+            tags.Add("colo:(");
 
             string target = "_blank";
             string urlcorretto = "";
@@ -5625,6 +5626,67 @@ namespace WelcomeLibrary.DAL
                 a = strIn.ToLower().IndexOf("iden:(");
             }
             ret = strIn;
+
+
+            a = strIn.ToLower().IndexOf("colo:(");
+            while (a != -1)
+            {
+                string origtext = "";
+                int b = strIn.ToLower().IndexOf(")", a + 1);
+                if (b != -1)
+                {
+                    origtext = strIn.Substring(a, b - a + 1);
+
+                    string url = strIn.Substring(a + 6, b - (a + 6));
+                    tags.ForEach(t => url = url.Replace(t, "")); //Non devo avre tag annidati senno si incasina !!! -> li elimino se presenti
+                    string testourl = url;
+                    //Splitto supponendo di avere lo schema ulr|testourl
+                    string[] dati = url.Split('|');
+                    string color = "ccc";
+                    if (dati.Length == 3)
+                    {
+                        url = (dati[0]);
+                        testourl = dati[1];
+                        color = dati[2];
+
+                    }
+                    else
+                        url = "";
+                    urlcorretto = url;
+                    if (!url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https") && !url.ToLower().StartsWith("~"))
+                    {
+                        target = "_self";
+                        urlcorretto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + url;
+                    }
+                    if (url.ToLower().Contains(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) && !url.ToLower().StartsWith("http") && !url.ToLower().StartsWith("https"))
+                    {
+                        target = "_self";
+                        if (WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower().StartsWith("https"))
+                            urlcorretto = "https://" + url;
+                        else
+                            urlcorretto = "http://" + url;
+                    }
+                    urlcorretto = ReplaceAbsoluteLinks(urlcorretto);
+
+                    if (!nolink)
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                            strIn = strIn.Replace(origtext, "<span style=\"color:#" + color + "\" >" + testourl + "</span>");
+                        else
+                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"  style=\"font-size:100%color:#" + color + "\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                    }
+                    else
+                        strIn = strIn.Replace(origtext, testourl);
+                    target = "_blank";
+                }
+                else
+                {
+                    strIn = strIn.Remove(a, 6); //SE non trovo la parentesi di chiusura -> tolgo il  :( sennò si looppa
+                }
+                a = strIn.ToLower().IndexOf("colo:(");
+            }
+            ret = strIn;
+
 
             a = strIn.ToLower().IndexOf("butt:(");
             while (a != -1)
