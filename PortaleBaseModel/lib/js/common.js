@@ -575,12 +575,14 @@ function CaricaGlobalResources(lng, searchtext) {
         });
 
 }
-
 function GetResourcesValue(key, data, idcontrol) {
     var ret = "";
     var data = data || baseresources;
     if (data != null)
-        ret = data[lng][key];
+        if (data.hasOwnProperty(lng))
+            ret = data[lng][key];
+        else
+            ret = data["I"][key];
     $('#' + idcontrol).html(ret);
     return ret;
 

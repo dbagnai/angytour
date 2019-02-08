@@ -175,6 +175,7 @@ License: http://codecanyon.net/licenses
 
         // show the bar to show/hide menu items on mobile
         function showMobileBar() {
+            $(menu).removeClass('outofsight');
             $(menu).hide(0);
             $(showHideButton).show(0).click(function () {
                 if ($(menu).css("display") == "none")
@@ -186,6 +187,7 @@ License: http://codecanyon.net/licenses
 
         // hide the bar to show/hide menu items on mobile
         function hideMobileBar() {
+            $(menu).removeClass('outofsight');
             $(menu).show(0);
             $(showHideButton).hide(0);
         }
