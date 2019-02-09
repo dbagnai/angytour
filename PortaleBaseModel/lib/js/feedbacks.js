@@ -280,7 +280,6 @@ function commentclosure(varname) {
                     else {
                         mainscope.objfiltro['page'] = page;
                         mainscope.rendercomments(mainscope.idpost, mainscope.idcontainer);
-                        scrolltotop.scrollup();
                     }
                 }
             });
@@ -298,7 +297,6 @@ function commentclosure(varname) {
                     else {
                         mainscope.objfiltro['page'] = page;
                         mainscope.rendercomments(mainscope.idpost, mainscope.idcontainer);
-                        scrolltotop.scrollup();
                     }
                 }
             });
@@ -510,7 +508,7 @@ function commentclosure(varname) {
                 if (mainscope.localcontainer.list[j].Id == tmpId) {
                     found = true;
                     console.log('update');
-                    console.log(mainscope.localcontainer.list[j])
+                    console.log(mainscope.localcontainer.list[j]);
                     updatecomments(lng, mainscope.localcontainer.list[j], function (ret) {
                         console.log(ret);
                         if (ret == '' || ret == null)

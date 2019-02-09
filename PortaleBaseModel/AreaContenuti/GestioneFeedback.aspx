@@ -12,8 +12,33 @@
         jQuery(document).ready(function () {
             commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35');
             commenttool.initautocompleteclienti('searchcliente');
+            fillddllanguages();
         });
 
+        function fillddllanguages() {
+            var langdict = [];
+            var objlang = JSON.parse(jsonlanguages);
+            var i = 0;
+            for (var key in objlang) {
+                if (!langdict.hasOwnProperty(key)) {
+                    //console.log(key + ": " + obj[key]);
+                    langdict[i] = {};
+                    (langdict[i]).codice = key;
+                    (langdict[i]).valore = objlang[key];
+                    i++;
+                }
+            }
+            console.log(langdict);
+            fillDDLArraySimple($("#ddlLingue"), langdict, "lingua", "", "codice", "valore", lng);
+        }
+
+        function setlng(select)
+        {
+            console.log(select.value);
+            lng = select.value;
+            commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35');
+            commenttool.initautocompleteclienti('searchcliente');
+        }
         function visualizzacommenti() {
             var idpost = $("#txtsearch").val();
             if (idpost == "") idpost = "all";
@@ -89,6 +114,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6" style="border-right: 1px solid #888">
+
                 <h2>Gestione feedback</h2>
                 <%--<asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />--%>
                 <div>
@@ -108,9 +134,9 @@
             <div class="col-sm-6" style="border-left: 1px solid #888">
                 <h2>Gestione richieste feedback</h2>
                 <input type="hidden" id="searchclienteHidden" /><br />
-                <input type="text" id="searchcliente" placeholder="cerca cliente" style="min-width: 250px" /><br /> 
+                <input type="text" id="searchcliente" placeholder="cerca cliente" style="min-width: 250px" /><br />
                 <input type="text" id="txtidnewsletter" placeholder="id modello newsletter (opzionale)" style="min-width: 250px" value="" /><br />
-               <input type="text" id="txtdeltagiorniperinvio" placeholder="intervallo giorni (opzionale)" style="min-width: 250px" value="" /><br />
+                <input type="text" id="txtdeltagiorniperinvio" placeholder="intervallo giorni (opzionale)" style="min-width: 250px" value="" /><br />
                 <div style="display: none">
                     <input type="text" id="txtlinkfeedback" placeholder="link pagina feedback (opzionale)" style="min-width: 250px" value="" /><br />
                 </div>
@@ -121,6 +147,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
+                <select id="ddlLingue" onchange="setlng(this)">
+                    <option value=""></option>
+                </select>
                 <div id="divCommenti"></div>
 
             </div>
