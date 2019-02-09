@@ -2448,6 +2448,47 @@ function caricaDatiServerBanner(lng, objfiltro, page, pagesize, enablepager, cal
     });
 }
 
+function cerca(idtext, forcedtipo, skipcategorie) {
+    var data = {};
+    data["tipologia"] = tipologia;
+    if (tipologia == null || tipologia == '') data["tipologia"] = '-';
+    if (forcedtipo != null && forcedtipo != '')
+        data["tipologia"] = forcedtipo;
+    if (skipcategorie == null || skipcategorie == '') {
+        data["categoria"] = categoria;
+        data["categoria2liv"] = categoria2liv;
+    }
+
+    data["testoricerca"] = $('#' + idtext)[0].value;
+    cercacontenuti(lng, data);
+}
+
+function cercacontenuti(lng, data, callback) {
+    var lng = lng || "I";
+    var data = data || {};
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'cercacontenuti', 'data': JSON.stringify(data) },
+        success: function (result) {
+            //if (callback)
+            //    callback(result);
+            if (result != '')
+                location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+        },
+        error: function (result) {
+            if (callback)
+                callback(result.responseText);
+        }
+    });
+}
+
+
 function putinsession(key, value, callback) {
     //putinsession
     var key = key || "";

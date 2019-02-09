@@ -125,21 +125,32 @@ public class CommonPage : Page
     {
         //Creo la struttura annidata dei link
         StringBuilder sb = new StringBuilder();
+        int i = 1;
         foreach (Tabrif l in links)
         {
             sb.Append("<li>");
-            sb.Append("<a");
-            if (resetsession)
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-            sb.Append("   href=\"" + l.Campo1 + "\">");
-            sb.Append(l.Campo2);
-            sb.Append("</a> ");
+
+            if (links.Count != i)
+            {
+                sb.Append("<a");
+                //if (resetsession)
+                //    sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append("   href=\"" + l.Campo1 + "\">");
+                sb.Append(l.Campo2);
+                sb.Append("</a> ");
+            }
+            else
+            {
+                sb.Append(l.Campo2);
+            }
+
             sb.Append("</li>");
+
+            i++;
 
         }
         return sb.ToString();
     }
-
 
     public static void CustomContentInject(System.Web.UI.HtmlControls.HtmlGenericControl divcontainer, string filename, string Lingua, string username, System.Web.SessionState.HttpSessionState sessione = null)
     {
@@ -290,7 +301,8 @@ public class CommonPage : Page
             {
                 ret = "<a href=\"" + linkgenerato + "\" ";
                 if (!string.IsNullOrEmpty(cssclass))
-                    ret += "class=\"" + cssclass + "\"" + "  onclick=\"javascript:JsSvuotaSession(this)\"  ";
+                    ret += "class=\"" + cssclass + "\"";
+                //ret += "   onclick =\"javascript:JsSvuotaSession(this)\" " ;
                 ret += " >" + CleanInput(item.Descrizione) + "</a>";
             }
             else
@@ -314,7 +326,8 @@ public class CommonPage : Page
             {
                 ret = "<a href=\"" + linkgenerato + "\" ";
                 if (!string.IsNullOrEmpty(cssclass))
-                    ret += "class=\"" + cssclass + "\"" + "  onclick=\"javascript:JsSvuotaSession(this)\"  ";
+                    ret += "class=\"" + cssclass + "\"";
+                //ret += "   onclick =\"javascript:JsSvuotaSession(this)\" " ;
                 ret += " >" + CleanInput(item.Descrizione + " " + catselected.Descrizione) + "</a>";
             }
             else
@@ -376,8 +389,8 @@ public class CommonPage : Page
         if (chiave.ToLower() == "lingua") ret = SitemapManager.getLinguafromculture(ret);//  per modifica codici culture lingua 19.12.18
 
         if (ret == "-") ret = "";
-        if (sessione != null)
-            sessione.Add(chiave, ret);//Metto in sessione il valore
+        //if (sessione != null)
+        //    sessione.Add(chiave, ret);//Metto in sessione il valore
         return ret;
     }
 

@@ -5119,7 +5119,8 @@ namespace WelcomeLibrary.DAL
                 {
                     linksezione = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv, "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     //linksezione = CommonPage.CreaLinkRoutes(null, false, lingua, SitemapManager.CleanUrl(sottocategoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, _o.CodiceCategoria2Liv);
-                    linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+                    //linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
+                    linksezione = "<a   href='" + linksezione + "'>" + sottocategoria.Descrizione + "</a>";
                 }
 
                 if (string.IsNullOrEmpty(linksezione))
@@ -5129,7 +5130,8 @@ namespace WelcomeLibrary.DAL
                     {
                         linksezione = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, SitemapManager.CleanUrl(categoria.Descrizione), "", _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
-                        linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + categoria.Descrizione + "</a>";
+                        //linksezione = "<a  onclick='javascript: JsSvuotaSession(this)'  href='" + linksezione + "'>" + categoria.Descrizione + "</a>";
+                        linksezione = "<a   href='" + linksezione + "'>" + categoria.Descrizione + "</a>";
                     }
                 }
 
@@ -5413,7 +5415,8 @@ namespace WelcomeLibrary.DAL
 
                     if (!nolink && urlcorretto != "")
                     {
-                        strIn = strIn.Replace(origtext, "<a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:bold;background-color:#e0e0e0\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a>");
+                        //strIn = strIn.Replace(origtext, "<a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:bold;background-color:#e0e0e0\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a>");
+                        strIn = strIn.Replace(origtext, "<a  style=\"font-weight:bold;background-color:#e0e0e0\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -5481,7 +5484,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<div style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\">" + testourl + "</div>");
                         else
-                            strIn = strIn.Replace(origtext, "<div  style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+                            //strIn = strIn.Replace(origtext, "<div  style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+                            strIn = strIn.Replace(origtext, "<div  style=\"font-size:100%;padding:10px;margin:5px;background-color:#e0e0e0\"><a  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
 
                     }
                     else
@@ -5549,7 +5553,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<strong>" + testourl + "</strong>");
                         else
-                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            strIn = strIn.Replace(origtext, "<strong><a style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
 
 
 
@@ -5613,7 +5618,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<div class=\"lateralbar\">" + testourl + "</div>");
                         else
-                            strIn = strIn.Replace(origtext, "<div class=\"lateralbar\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+                            //strIn = strIn.Replace(origtext, "<div class=\"lateralbar\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
+                            strIn = strIn.Replace(origtext, "<div class=\"lateralbar\"><a style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></div>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -5673,7 +5679,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span style=\"color:#" + color + "\" >" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"  style=\"font-size:100%color:#" + color + "\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"  style=\"font-size:100%color:#" + color + "\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            strIn = strIn.Replace(origtext, "<strong><a  style=\"font-size:100%color:#" + color + "\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -5741,7 +5748,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline-block\" class=\"divbuttonstyle\">" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\"><a onclick=\"javascript:JsSvuotaSession(this)\" class=\"divbuttonstyle\" style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            //strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\"><a onclick=\"javascript:JsSvuotaSession(this)\" class=\"divbuttonstyle\" style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            strIn = strIn.Replace(origtext, "<span style=\"line-height:normal;display:inline\"><a class=\"divbuttonstyle\" style=\"line-height:normal;display:inline-block\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
 
 
 
@@ -5812,7 +5820,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\">" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            //strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\"><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
+                            strIn = strIn.Replace(origtext, "<span class=\"divbuttonstyleorange\"><a  style=\"font-size:100%\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></span>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -6096,7 +6105,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span style=\"font-weight:800;font-size:1.4em\" >" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            strIn = strIn.Replace(origtext, "<strong><a style=\"font-weight:800;font-size:1.4em\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -6160,7 +6170,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<h2 style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" >" + testourl + "</h2>");
                         else
-                            strIn = strIn.Replace(origtext, "<h2><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></h2>");
+                            //strIn = strIn.Replace(origtext, "<h2><a  onclick=\"javascript:JsSvuotaSession(this)\"  style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></h2>");
+                            strIn = strIn.Replace(origtext, "<h2><a style=\"font-weight:800;font-size:1.4em;margin-bottom:6px\" href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></h2>");
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
@@ -6216,7 +6227,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            strIn = strIn.Replace(origtext, "<strong><a  href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
 
                     }
                     else
@@ -6275,7 +6287,8 @@ namespace WelcomeLibrary.DAL
                         if (string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
                         else
-                            strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
+                            strIn = strIn.Replace(origtext, "<strong><a href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
 
                     }
                     else

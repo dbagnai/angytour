@@ -145,7 +145,7 @@
             <%--<div class="container" id="divImg">
                 <div class="row">
                     <div class="col-sm-6" style="line-height: 0; min-height: 0px; text-align: left">
-                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="javascript:JsSvuotaSession()">
+                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' >
                             <div id="divlogo" class="fulllogobckdark" style="margin: 0px 0px;"></div>
                         </a>
                     </div>
@@ -156,7 +156,7 @@
                     </div>
                 </div>
             </div>--%>
-            <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
+            <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' >
                 <div class="fulllogobckdark logo-top-pwa"></div>
             </a>
         </div>
@@ -252,13 +252,13 @@
                 </li>
                 <%--GOOGLE MAP--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
+                    <a class="nav-link d-flex"  href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-pin-swg"></use></svg></a>
                 </li>
                 <%--CONTATTI--%>
                 <li class="nav-item">
-                    <a class="nav-link d-flex" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkpwacontatti")) %>'>
+                    <a class="nav-link d-flex"  href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkpwacontatti")) %>'>
                         <svg class="menu-bottom-icon-swg">
                             <use xlink:href="#icon-mail-swg"></use></svg></a>
                 </li>

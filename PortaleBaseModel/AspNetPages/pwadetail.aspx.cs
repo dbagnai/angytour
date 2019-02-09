@@ -131,9 +131,9 @@ public partial class _pwadetail : CommonPage
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
                 idOfferta = CaricaValoreMaster(Request, Session, "idOfferta");
 
-                CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia");
-                Categoria = CaricaValoreMaster(Request, Session, "Categoria");
-                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
+                CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia", true);
+                Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
+                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
                 testoindice = CaricaValoreMaster(Request, Session, "testoindice");
 
                 Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
@@ -1130,14 +1130,14 @@ public partial class _pwadetail : CommonPage
         //    cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
         //}
     }
-    protected void Cerca_Click(object sender, EventArgs e)
-    {
-        HttpContext.Current.Session.Clear();
-        //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
-        string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void Cerca_Click(object sender, EventArgs e)
+    //{
+    //    HttpContext.Current.Session.Clear();
+    //    //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
+    //    string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
     protected void btnRegistrastatistiche_Click(object sender, EventArgs e)
     {
         string id = (((Button)sender).CommandArgument);

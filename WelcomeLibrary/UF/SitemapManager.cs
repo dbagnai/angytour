@@ -358,7 +358,7 @@ namespace WelcomeLibrary.UF
 
 
                 //Creiamo il link riscritto base
-                if (string.IsNullOrEmpty(cleandenominazione)) cleandenominazione = "-";
+                if (string.IsNullOrEmpty(cleandenominazione)) cleandenominazione = "-";// "-";
                 urlRewrited = GeneraRewritingElement(Lingua, codicetipologia, destinationselector, cleandenominazione, "", "lista", "", "", "", "", "", addparms);
                 //Modifico il link nel caso di link con categorie/sottocategorie o parametri per fare una personalizzazione del testo
                 Tabrif urlRewritedModified = creaUrlListaModified(destinationselector, cleandenominazione, codicetipologia, codicecategoria, Lingua, codicecat2liv, regione, annofiltro, mesefiltro, addparms);

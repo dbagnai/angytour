@@ -212,11 +212,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 Provincia = CaricaValoreMaster(Request, Session, "Provincia", false, "");
                 Comune = CaricaValoreMaster(Request, Session, "Comune", false);
                 Mesefiltro = CaricaValoreMaster(Request, Session, "Mesefiltro", false);
-                Categoria = CaricaValoreMaster(Request, Session, "Categoria", false);
                 Giornofiltro = CaricaValoreMaster(Request, Session, "Giornofiltro", false);
-                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
-                if (Categoria2liv == "all") Categoria2liv = "";
-
                 Annata = CaricaValoreMaster(Request, Session, "Annata", false);
                 Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
                 Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", false);
@@ -224,23 +220,27 @@ public partial class AspNetPages_pwalist : CommonPage
                 Caratteristica4 = CaricaValoreMaster(Request, Session, "Caratteristica4", false);
                 Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
                 FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
-
                 Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
                 Promozioni = CaricaValoreMaster(Request, Session, "promozioni");
 
+
+                Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
+                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
+                if (Categoria2liv == "all") Categoria2liv = "";
                 //Impostiamo anche gli altri parametri di ricerca
-                Tipologia = CaricaValoreMaster(Request, Session, "Tipologia", false, "");
+                Tipologia = CaricaValoreMaster(Request, Session, "Tipologia", true, "");
+
                 string tmp = "";
-                tmp = CaricaValoreMaster(Request, Session, "mese", false);
+                tmp = CaricaValoreMaster(Request, Session, "mese", true);
                 if (!string.IsNullOrEmpty(tmp)) mese = tmp;
-                tmp = CaricaValoreMaster(Request, Session, "anno", false);
+                tmp = CaricaValoreMaster(Request, Session, "anno", true);
                 if (!string.IsNullOrEmpty(tmp)) anno = tmp;
                 tmp = CaricaValoreMaster(Request, Session, "testoricerca", false);
                 if (!string.IsNullOrEmpty(tmp)) testoricerca = tmp;
-
+                Session.Remove("testoricerca");
 
                 LoadJavascriptVariables();
                 SettaVisualizzazione();
@@ -580,6 +580,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 }
                 break;
         }
+        Session.Remove("objfiltro");
     }
     protected void PreselezionaCategoria()
     {
@@ -723,9 +724,10 @@ public partial class AspNetPages_pwalist : CommonPage
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
                 if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+                    if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
         }
 
@@ -762,9 +764,10 @@ public partial class AspNetPages_pwalist : CommonPage
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
                     if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    {
-                        Response.RedirectPermanent(modcanonical, true);
-                    }
+                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        {
+                            Response.RedirectPermanent(modcanonical, true);
+                        }
                 }
             }
         }
@@ -802,9 +805,10 @@ public partial class AspNetPages_pwalist : CommonPage
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
                     if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    {
-                        Response.RedirectPermanent(modcanonical, true);
-                    }
+                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        {
+                            Response.RedirectPermanent(modcanonical, true);
+                        }
                 }
             }
         }
@@ -1164,10 +1168,15 @@ public partial class AspNetPages_pwalist : CommonPage
             objvalue.Remove("anno");
             objvalue["anno"] = anno;
         }
+
+
+#if true //Gestione modificatori firtro categoria
+
         if (Promozioni != "")
         {
             objvalue["promozioni"] = Promozioni;
         }
+
         if (Categoria != "")
         {
             objvalue["categoria"] = Categoria;
@@ -1178,14 +1187,28 @@ public partial class AspNetPages_pwalist : CommonPage
             if (objvalue.ContainsKey("ddlCategoria"))
             {
                 objvalue["categoria"] = objvalue["ddlCategoria"];
-                Categoria = objvalue["ddlCategoria"];
             }
         }
+        if (Categoria2liv != "")
+        {
+            objvalue["categoria2Liv"] = Categoria2liv;
+            objvalue["ddlCategoria2liv"] = Categoria2liv;
+        }
+        else
+        {
+
+            if (objvalue.ContainsKey("ddlCategoria2liv"))
+            {
+                objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
+            }
+        }
+
 
         if (Regione != "")
         {
             objvalue["regione"] = Regione;
             objvalue["ddlRegione"] = Regione;
+            objvalue["ddlRegioneSearch"] = Regione;
         }
         else
         {
@@ -1194,11 +1217,59 @@ public partial class AspNetPages_pwalist : CommonPage
                 objvalue["regione"] = objvalue["ddlRegione"];
                 Regione = objvalue["ddlRegione"];
             }
+            if (objvalue.ContainsKey("ddlRegioneSearch"))
+            {
+                objvalue["regione"] = objvalue["ddlRegioneSearch"];
+                Regione = objvalue["ddlRegioneSearch"];
+            }
         }
+        if (Provincia != "")
+        {
+            objvalue["provincia"] = Provincia;
+            objvalue["ddlProvincia"] = Provincia;
+            objvalue["ddlProvinciaSearch"] = Provincia;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlProvincia"))
+            {
+                objvalue["provincia"] = objvalue["ddlProvincia"];
+                Provincia = objvalue["ddlProvincia"];
+            }
+            if (objvalue.ContainsKey("ddlProvinciaSearch"))
+            {
+                objvalue["provincia"] = objvalue["ddlProvinciaSearch"];
+                Provincia = objvalue["ddlProvinciaSearch"];
+            }
+        }
+
+
+        if (Comune != "")
+        {
+            objvalue["comune"] = Comune;
+            objvalue["ddlComune"] = Comune;
+            objvalue["ddlComuneSearch"] = Comune;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlComune"))
+            {
+                objvalue["comune"] = objvalue["ddlComune"];
+                Comune = objvalue["ddlComune"];
+            }
+            if (objvalue.ContainsKey("ddlComuneSearch"))
+            {
+                objvalue["comune"] = objvalue["ddlComuneSearch"];
+                Comune = objvalue["ddlComuneSearch"];
+            }
+        }
+
+
         if (Caratteristica1 != "")
         {
             objvalue["caratteristica1"] = Caratteristica1;
             objvalue["hidCaratteristica1"] = Caratteristica1;
+            objvalue["ddlCaratteristica1"] = Caratteristica1;
         }
         else
         {
@@ -1207,6 +1278,12 @@ public partial class AspNetPages_pwalist : CommonPage
                 objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
                 Caratteristica1 = objvalue["hidCaratteristica1"];
             }
+            if (objvalue.ContainsKey("ddlCaratteristica1"))
+            {
+                objvalue["caratteristica1"] = objvalue["ddlCaratteristica1"];
+                Caratteristica1 = objvalue["ddlCaratteristica1"];
+            }
+
         }
 
 
@@ -1222,6 +1299,13 @@ public partial class AspNetPages_pwalist : CommonPage
                 objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
                 Caratteristica2 = objvalue["hidCaratteristica2"];
             }
+        }
+
+        //Id selection
+        //hidricercaid ( sleezione con id )
+        if (objvalue.ContainsKey("hidricercaid"))
+        {
+            objvalue["id"] = objvalue["hidricercaid"];
         }
 
         //if (Caratteristica6 != "") //ditta
@@ -1246,6 +1330,41 @@ public partial class AspNetPages_pwalist : CommonPage
         //    if (Caratteristica3.Length >= 4)
         //        objvalue["ddlAtcgmp3"] = Caratteristica3.Substring(0, 4);
         //}
+
+
+        if (objvalue.ContainsKey("geolocation"))
+        {
+            objvalue.Remove("latitudine");
+            objvalue.Remove("longitudine");
+            string latitudine = "";
+            string longitudine = "";
+            string[] latlng = objvalue["geolocation"].Split(',');
+            if (latlng != null && latlng.Length == 2)//&& !string.IsNullOrWhiteSpace(address.Value))
+            {
+                latitudine = latlng[0];
+                longitudine = latlng[1];
+            }
+
+            double lat = 0;
+            double.TryParse(latitudine.Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lat);
+            double lon = 0;
+            double.TryParse(longitudine.Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lon);
+            if (lat != 0 && lon != 0)
+            {
+                objvalue["latitudine"] = latitudine;
+                objvalue["longitudine"] = longitudine;
+                //Session.Add("Address", address.Value);
+            }
+            else
+                objvalue.Remove("geolocation");
+        }
+        else
+        {
+            objvalue.Remove("latitudine");
+            objvalue.Remove("longitudine");
+        }
+#endif
+
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue);
     }
@@ -1324,14 +1443,14 @@ public partial class AspNetPages_pwalist : CommonPage
         }
         catch { }
     }
-    protected void Cerca_Click(object sender, EventArgs e)
-    {
-        if (Server.HtmlEncode(inputCerca.Value).Trim() == "") return;
-        //testoricerca
-        string link = CreaLinkRicerca("", Tipologia, "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void Cerca_Click(object sender, EventArgs e)
+    //{
+    //    if (Server.HtmlEncode(inputCerca.Value).Trim() == "") return;
+    //    //testoricerca
+    //    string link = CreaLinkRicerca("", Tipologia, "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
 
 
 }

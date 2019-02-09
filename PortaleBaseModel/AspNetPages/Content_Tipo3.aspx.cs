@@ -78,11 +78,11 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 idOfferta = CaricaValoreMaster(Request, Session, "idOfferta");
                 Dettaglioselezione = CaricaValoreMaster(Request, Session, "Dettaglioselezione");
 
-                if (!string.IsNullOrEmpty(idOfferta))
-                {
+                //if (!string.IsNullOrEmpty(idOfferta))
+                //{
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                }
+                //}
 
               //  CaricaControlliJS();
 

@@ -34,9 +34,37 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermasternorow" runat="Server">
 
     <div class="row justify-content-center" id="divSezioneSchedaContenuto">
-        <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
+        <div class="col-12" runat="server" id="column1" visible="false">
         </div>
         <div class="col-md-9 col-sm-9" runat="server" id="column2">
+            <div class="clearfix" style="margin: 0px">
+                <div class="float-right" style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
+                    <div class="sidebar-content tags blog-search ">
+                        <div class="input-group flex-nowrap">
+                            <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
+                            <input class="form-control blog-search-input" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
+                            <span class="input-group-addon">
+                                <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search" />
+                                <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
+                                <script type="text/javascript">
+                                    function cerca(btn) {
+                                        var data = {};
+                                        data["tipologia"] = tipologia;
+                                        data["categoria"] = categoria;
+                                        data["categoria2liv"] = categoria2liv;
+                                        data["testoricerca"] = $('#searchtext')[0].value;
+                                        //console.log($('#searchtext')[0].value);
+                                        cercacontenuti(lng, data);
+                                    }
+                                </script>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="float-right pr-2" style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
+                </div>
+            </div>
             <div class="row">
                 <asp:Label ID="output" runat="server"></asp:Label>
             </div>
@@ -48,22 +76,11 @@
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
             <%--<div class="sticky-top" style="top: 120px" id="divColumnsticky">--%>
             <div class="position-sticky mb-5" style="top: 120px" id="divColumnsticky">
-                <!-- Sidebar Block -->
-                <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
-                    <div class="sidebar-content tags blog-search">
-                        <div class="input-group flex-nowrap">
-                            <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
-                            <span class="input-group-addon">
-                                <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- Sidebar Block -->
                 <div style="max-width: 350px; margin: 10px auto" runat="server" id="divLinksrubriche" visible="false">
                 </div>
-                <div style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
-                </div>
+
                 <asp:Literal Text="" ID="placeholderlateral" runat="server" />
                 <asp:Literal Text="" ID="placeholderlateral1" runat="server" />
                 <asp:Literal Text="" ID="placeholderlateral2" runat="server" />
@@ -277,23 +294,23 @@
                         <div class="ui-input">
                             <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage" />
                         </div>
-   <div class="row my-3" style="text-align: left">
-                                <div class="col-sm-12 text-white">
-                                    <%= references.ResMan("basetext", Lingua,"privacytext") %>
-                                    <div class="checkbox" style="margin-bottom: 20px">
-                                        <label>
-                                            <input id="chkContactPrivacy" runat="server" type="checkbox" />
-                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
-                                        </label>
-                                    </div>
-                                    <div class="checkbox" style="margin-bottom: 20px">
-                                        <label>
-                                            <input type="checkbox" id="chkNewsletter" runat="server" />
-                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
-                                        </label>
-                                    </div>
+                        <div class="row my-3" style="text-align: left">
+                            <div class="col-sm-12 text-white">
+                                <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                <div class="checkbox" style="margin-bottom: 20px">
+                                    <label>
+                                        <input id="chkContactPrivacy" runat="server" type="checkbox" />
+                                        <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                    </label>
+                                </div>
+                                <div class="checkbox" style="margin-bottom: 20px">
+                                    <label>
+                                        <input type="checkbox" id="chkNewsletter" runat="server" />
+                                        <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                    </label>
                                 </div>
                             </div>
+                        </div>
                         <script>
                             function ConfirmValidationForm(elembtn) {
                                 var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
@@ -311,7 +328,7 @@
                                     //invio nopostback con handler////////////////////////////////////////////////////
                                     var contactdatas = {};
                                     contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked;
-                                        contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                    contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
                                     getcontactdata2(contactdatas, function (contactdatas) {
                                         var tastotxt = $(elembtn).html();
                                         $(elembtn).html("Wait ..");
@@ -390,10 +407,10 @@
         </div>
     </div>
 
-     <%--RECENSIONI CLIENTI--%>
+    <%--RECENSIONI CLIENTI--%>
     <div runat="server" visible="">
-    <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-        <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-    </asp:Panel>
-</div>
+        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+            <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        </asp:Panel>
+    </div>
 </asp:Content>

@@ -1382,7 +1382,11 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
                                                     //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
-                                                    aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                    if (prevpage != "1")
+                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                    else
+                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath);
+
                                                     //aPrevPage.First().SetAttributeValue("onClick", "scrolltotop.scrollup();");
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
@@ -1819,7 +1823,11 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
                                                     //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
-                                                    aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                    if (prevpage != "1")
+                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                    else
+                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath);
+
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
                                                     {

@@ -46,11 +46,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
         set { ViewState["PercorsoAssolutoApplicazione"] = value; }
     }
-    public string TipologiaOfferte
-    {
-        get { return ViewState["TipologiaOfferte"] != null ? (string)(ViewState["TipologiaOfferte"]) : ""; }
-        set { ViewState["TipologiaOfferte"] = value; }
-    }
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -700,6 +696,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
                 if (idContenuto == "9")//Blog
                 {
+
                     lit = (Literal)Master.FindControl("litPortfolioBanners2");
                     Master.CaricaBannersPortfolioRival("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-sezioni", false, lit, Lingua);
                 }

@@ -84,10 +84,14 @@
                 <!-- CERCA --->
                 <div class="float-right">
                     <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
-                        <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
+                        <%-- <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
                         <div class="input-group-append" style="border: none; padding: 0px;">
                             <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;" runat="server"><i class="fa fa-search"></i></button>
-                        </div>
+                        </div>--%>
+                        <input class="form-control blog-search-input" name="txtSearchTop" id="txtSearchTop" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' style="height: 24px; font-size: 0.8rem;" />
+                        <span class="input-group-append" style="border: none; padding: 0px;">
+                            <button type="button" onclick="cerca('txtSearchTop','rif000001',true)" id="btncercatop1" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fa fa-search"></i></button>
+                        </span>
                     </div>
                 </div>
 
@@ -162,7 +166,7 @@
                     <ul>
                         <!-- DOVE SIAMO --->
                         <li runat="server" class="px-2 px-lg-4 d-block">
-                            <a id="googlemap" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
+                            <a id="googlemap" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
                                 <%--<a href="https://www.w3schools.com" target="_blank">--%>
                                 <i class="fa fa-map-marker mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoid5") %></span>
                             </a>
@@ -177,7 +181,7 @@
                         </li>
                         <!-- CONTATTI --->
                         <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
-                            <a id="linkContattiHigh" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                            <a id="linkContattiHigh" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                 <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
                             </a>
                         </li>
@@ -191,12 +195,12 @@
                 </div>
 
                 <div class="float-left" runat="server" visible="false">
-                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>'>
                         <img style="height: 60px" src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
                     </a>
                 </div>
                 <div class="float-left" runat="server" visible="false">
-                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                    <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>'>
                         <img style="max-height: 25px; width: auto" id="imgSmallLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/icon_logo.png")%>' alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />
                     </a>
                 </div>
@@ -213,7 +217,7 @@
             <%--<div class="container" id="divImg">
                 <div class="row">
                     <div class="col-sm-6" style="line-height: 0; min-height: 0px; text-align: left">
-                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="javascript:JsSvuotaSession()">
+                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>'  >
                             <div id="divlogo" class="fulllogobckdark" style="margin: 0px 0px;"></div>
                         </a>
                     </div>
@@ -226,7 +230,7 @@
             </div>--%>
 
             <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0">
-                <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>' onclick="JsSvuotaSession(this)">
+                <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>'>
                     <div id="divlogoBrand" class="fulllogobckdark"></div>
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
@@ -266,7 +270,7 @@
                     <%= CreaLinkPaginastatica(3) %>
                     <%--PRENOTA--%>
                     <li runat="server">
-                        <a id="linkPrenota2High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
+                        <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                         </a>
                     </li>
@@ -325,7 +329,7 @@
                     <%--<%= CreaLinkTipologie(4,5) %>--%>
 
                     <%--<li runat="server" id="liHome">
-                        <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' onclick="JsSvuotaSession(this)">
+                        <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' >
                             <div class="iconlogo"></div>
                         </a>
                     </li>--%>
@@ -362,15 +366,20 @@
 
                     <%-- Contatti --%>
                     <li runat="server" class="d-block d-md-none">
-                        <a id="linkContatti1High" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                        <a id="linkContatti1High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
                     </li>
 
                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
                         <div style="padding-top: 5px; padding-left: 10px">
-                            <input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
-                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />
+                            <%--<input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
+                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />--%>
+
+                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" />
+                            <button type="button"  onclick="cerca('searchboxinputtext','rif000001',true)" id="Button2" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
+
+
                         </div>
                     </li>
 
@@ -641,7 +650,7 @@
                     <div class="container">
                         <div class="row justify-content-md-center">
                             <div class="col-sm-6 align-self-center py-3 text-center text-md-left">
-                                <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>' onclick="JsSvuotaSession(this)">
+                                <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>'>
                                     <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
                                 </a>
                             </div>
@@ -692,7 +701,7 @@
                                     <ul class="footer-category-list">
                                         <%-- Home --%>
                                         <li runat="server">
-                                            <a id="linkHome" onclick="JsSvuotaSession(this)" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
+                                            <a id="linkHome" href='<%=  CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkhome") ) %>' title='<%= references.ResMan("Common", Lingua,"testohome") %>'>
                                                 <span class="label-nav">
                                                     <%= references.ResMan("Common", Lingua,"testohome") %>
                                                 </span>
@@ -726,7 +735,7 @@
                                         <%--<%= CreaLinkPaginastatica(3) %>--%>
                                         <%-- Contatti --%>
                                         <li>
-                                            <a id="linkContatti" onclick="JsSvuotaSession(this)" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
+                                            <a id="linkContatti" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
                                                 <span class="label-nav">
                                                     <%= references.ResMan("Common", Lingua,"testoContatti") %>
                                                 </span>
@@ -841,7 +850,7 @@
             var makeRevLower = false;
            <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
      <%--       initLingua('<%= Lingua %>');--%>
-          //  clearcache();
+            //  clearcache();
             initimoment();
 
             jQuery(document).ready(function () {

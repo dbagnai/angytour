@@ -2,6 +2,7 @@
 
 update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 
+https://dotnet.microsoft.com/download/dotnet-core/2.2
 
 
 

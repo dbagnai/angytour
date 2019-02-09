@@ -212,11 +212,7 @@ public partial class AspNetPages_weblist : CommonPage
                 Provincia = CaricaValoreMaster(Request, Session, "Provincia", false, "");
                 Comune = CaricaValoreMaster(Request, Session, "Comune", false);
                 Mesefiltro = CaricaValoreMaster(Request, Session, "Mesefiltro", false);
-                Categoria = CaricaValoreMaster(Request, Session, "Categoria", false);
                 Giornofiltro = CaricaValoreMaster(Request, Session, "Giornofiltro", false);
-                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
-                if (Categoria2liv == "all") Categoria2liv = "";
-
                 Annata = CaricaValoreMaster(Request, Session, "Annata", false);
                 Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
                 Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", false);
@@ -224,23 +220,27 @@ public partial class AspNetPages_weblist : CommonPage
                 Caratteristica4 = CaricaValoreMaster(Request, Session, "Caratteristica4", false);
                 Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
                 FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
-
                 Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
                 Promozioni = CaricaValoreMaster(Request, Session, "promozioni");
 
+
+                Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
+                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
+                if (Categoria2liv == "all") Categoria2liv = "";
                 //Impostiamo anche gli altri parametri di ricerca
-                Tipologia = CaricaValoreMaster(Request, Session, "Tipologia", false, "");
+                Tipologia = CaricaValoreMaster(Request, Session, "Tipologia", true, "");
+
                 string tmp = "";
-                tmp = CaricaValoreMaster(Request, Session, "mese", false);
+                tmp = CaricaValoreMaster(Request, Session, "mese", true);
                 if (!string.IsNullOrEmpty(tmp)) mese = tmp;
-                tmp = CaricaValoreMaster(Request, Session, "anno", false);
+                tmp = CaricaValoreMaster(Request, Session, "anno", true);
                 if (!string.IsNullOrEmpty(tmp)) anno = tmp;
                 tmp = CaricaValoreMaster(Request, Session, "testoricerca", false);
                 if (!string.IsNullOrEmpty(tmp)) testoricerca = tmp;
-
+                Session.Remove("testoricerca");
 
                 LoadJavascriptVariables();
                 SettaVisualizzazione();
@@ -539,6 +539,7 @@ public partial class AspNetPages_weblist : CommonPage
                 }
                 break;
         }
+        Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
     }
     private void ModificaFiltroJS()
     {
@@ -560,13 +561,16 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue.Remove("anno");
             objvalue["anno"] = anno;
-        } 
+        }
 
+
+#if true //Gestione modificatori firtro categoria
 
         if (Promozioni != "")
         {
             objvalue["promozioni"] = Promozioni;
         }
+
         if (Categoria != "")
         {
             objvalue["categoria"] = Categoria;
@@ -574,18 +578,11 @@ public partial class AspNetPages_weblist : CommonPage
         }
         else
         {
-            //if (objvalue.ContainsKey("categoria"))
-            //{
-            //    Categoria = objvalue["categoria"];
-            //}
-
             if (objvalue.ContainsKey("ddlCategoria"))
             {
                 objvalue["categoria"] = objvalue["ddlCategoria"];
-                //Categoria = objvalue["ddlCategoria"];
             }
         }
-
         if (Categoria2liv != "")
         {
             objvalue["categoria2Liv"] = Categoria2liv;
@@ -593,17 +590,13 @@ public partial class AspNetPages_weblist : CommonPage
         }
         else
         {
-            //if (objvalue.ContainsKey("categoria2Liv"))
-            //{
-            //    Categoria2liv = objvalue["categoria2Liv"];
-            //}
 
             if (objvalue.ContainsKey("ddlCategoria2liv"))
             {
                 objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
-                // Categoria2liv = objvalue["ddlCategoria2liv"];
             }
         }
+
 
         if (Regione != "")
         {
@@ -764,7 +757,7 @@ public partial class AspNetPages_weblist : CommonPage
             objvalue.Remove("latitudine");
             objvalue.Remove("longitudine");
         }
-
+#endif
 
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue);
@@ -897,9 +890,10 @@ public partial class AspNetPages_weblist : CommonPage
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
                 if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+                    if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
         }
 
@@ -936,9 +930,10 @@ public partial class AspNetPages_weblist : CommonPage
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
                     if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    {
-                        Response.RedirectPermanent(modcanonical, true);
-                    }
+                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        {
+                            Response.RedirectPermanent(modcanonical, true);
+                        }
                 }
             }
         }
@@ -976,9 +971,10 @@ public partial class AspNetPages_weblist : CommonPage
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
                     if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    {
-                        Response.RedirectPermanent(modcanonical, true);
-                    }
+                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        {
+                            Response.RedirectPermanent(modcanonical, true);
+                        }
                 }
             }
         }
@@ -1401,14 +1397,14 @@ public partial class AspNetPages_weblist : CommonPage
         }
         catch { }
     }
-    protected void Cerca_Click(object sender, EventArgs e)
-    {
-        if (Server.HtmlEncode(inputCerca.Value).Trim() == "") return;
-        //testoricerca
-        string link = CreaLinkRicerca("", Tipologia, "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void Cerca_Click(object sender, EventArgs e)
+    //{
+    //    if (Server.HtmlEncode(inputCerca.Value).Trim() == "") return;
+    //    //testoricerca
+    //    string link = CreaLinkRicerca("", Tipologia, "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
 
 
 }

@@ -130,10 +130,10 @@ public partial class _webdetail : CommonPage
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
                 idOfferta = CaricaValoreMaster(Request, Session, "idOfferta");
-                CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia", false);
-                Categoria = CaricaValoreMaster(Request, Session, "Categoria", false);
-                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", false);
-                testoindice = CaricaValoreMaster(Request, Session, "testoindice");
+                CodiceTipologia = CaricaValoreMaster(Request, Session, "Tipologia", true);
+                Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
+                Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
+                testoindice = CaricaValoreMaster(Request, Session, "testoindice", true);
                 Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
                 Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", false);
                 Caratteristica3 = CaricaValoreMaster(Request, Session, "Caratteristica3", false);
@@ -156,7 +156,7 @@ public partial class _webdetail : CommonPage
                 else if (item == null)
                     Response.RedirectPermanent("~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/home");
 
-                RegistraStatistichePagina();
+                //RegistraStatistichePagina();
 
                 DataBind();
             }
@@ -338,7 +338,7 @@ public partial class _webdetail : CommonPage
                 column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
                 column3.Visible = false;
                 divSearch.Visible = true;
-                ContaArticoliPerperiodo(CodiceTipologia);
+                //ContaArticoliPerperiodo(CodiceTipologia);
                 //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = false;
@@ -1114,14 +1114,14 @@ public partial class _webdetail : CommonPage
         //    cs.RegisterStartupScript(this.GetType(), "clistarchivio", sb.ToString(), true);
         //}
     }
-    protected void Cerca_Click(object sender, EventArgs e)
-    {
-        HttpContext.Current.Session.Clear();
-        //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
-        string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
-        Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
-        Response.Redirect(link);
-    }
+    //protected void Cerca_Click(object sender, EventArgs e)
+    //{
+    //    HttpContext.Current.Session.Clear();
+    //    //string link = CreaLinkRicerca("", CodiceTipologia, Categoria, "", "", "", "", "-", Lingua, Session, true);
+    //    string link = CreaLinkRicerca("", CodiceTipologia, "", "", "", "", "", "-", Lingua, Session, true);
+    //    Session.Add("testoricerca", Server.HtmlEncode(inputCerca.Value)); //carico in sessione il parametro da cercare
+    //    Response.Redirect(link);
+    //}
     protected void btnRegistrastatistiche_Click(object sender, EventArgs e)
     {
         string id = (((Button)sender).CommandArgument);

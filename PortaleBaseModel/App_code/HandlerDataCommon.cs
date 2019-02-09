@@ -156,6 +156,25 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
 
                     break;
+                case "cercacontenuti":
+                    string ssearchdata = pars.ContainsKey("data") ? pars["data"] : "";
+                    if (!string.IsNullOrEmpty(ssearchdata))
+                    {
+                        string par1 = "";
+                        string par2 = "";
+                        string par3 = "";
+                        string par4 = "";
+                        Dictionary<string, string> searchdata = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(ssearchdata);
+                        if (searchdata.ContainsKey("testoricerca"))
+                            context.Session.Add("testoricerca", searchdata["testoricerca"].ToString());
+                        if (searchdata.ContainsKey("categoria"))
+                            par1 = searchdata["categoria"].ToString();
+                        if (searchdata.ContainsKey("categoria2liv"))
+                            par2 = searchdata["categoria2liv"].ToString();
+                        string linkret = CommonPage.CreaLinkRicerca("", searchdata["tipologia"].ToString(), par1, par2, "", "", "", "-", lingua);
+                        result = CommonPage.ReplaceAbsoluteLinks(linkret);
+                    }
+                    break;
                 case "inviamessaggiomail":
                     string smaildata = pars.ContainsKey("data") ? pars["data"] : "";
                     Dictionary<string, string> maildata = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(smaildata);

@@ -284,7 +284,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         sb.Append("\"");
         if (CodiceTipologia == tipologia && Vetrina != "")
             sb.Append(" style=\"font-weight:500 !important\"  ");
-        sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+        //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+        sb.Append(" >");
         sb.Append("<span >" + testo.ToLower() + "</span>");
         sb.Append("</a>");
 
@@ -313,7 +314,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             sb.Append("\"");
             if (idps.ToString() == idContenuto)
                 sb.Append(" class=\"" + classe + "\" style=\"" + stile + "\"  ");
-            sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+            //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+            sb.Append(" >");
             sb.Append(testo);
             sb.Append("</a>");
             sb.Append("</li>");
@@ -363,7 +365,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.Codice == CodiceTipologia)
                     sb.Append("  class=\"activeelemnt\"   style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
 
@@ -405,7 +408,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.Codice == CodiceTipologia)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
 
@@ -463,7 +467,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.CodiceProdotto == Categoria)
                     sb.Append(" class=\"nav-link active submenutop\"  style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
                 sb.Append("</li>");
@@ -507,7 +512,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.CodiceProdotto == Categoria)
                     sb.Append(" style=\"font-weight:600 !important;display:block;\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
 
@@ -560,7 +566,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.CodiceSProdotto == Categoria2liv)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
                 sb.Append("</li>");
@@ -589,7 +596,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (tipologia == CodiceTipologia && t.Key == Categoria)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testolink);
                 sb.Append("</a>");
                 sb.Append("</li>");
@@ -622,7 +630,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 //if (idOfferta == )
                 //    sb.Append(" style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append("<span >" + testourl.ToLower() + "</span>");
                 sb.Append("</a>");
                 sb.Append("</li>");
@@ -696,7 +705,8 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (o.Id.ToString() == idOfferta)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
-                sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
                 sb.Append("</li>");
@@ -766,7 +776,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
     //            sb.Append("<div class=\"divbuttonstyle\" style=\"margin-right: 5px;  font-size: 0.8em; padding: 2px;\" >");
     //            sb.Append("<a href=\"");
     //            sb.Append(link);
-    //            sb.Append("\" onclick=\"javascript:JsSvuotaSession(this)\"  >");
+    //          //  sb.Append("\" onclick=\"javascript:JsSvuotaSession(this)\"  >");
     //            sb.Append("<span >" + testo + "</span>");
     //            sb.Append("</a>");
     //            sb.Append("</div>");

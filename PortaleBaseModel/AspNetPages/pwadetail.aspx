@@ -50,12 +50,18 @@
                 <!-- Sidebar Block -->
                 <div style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
                     <div class="sidebar-content tags blog-search">
+
+
                         <div class="input-group flex-nowrap">
-                            <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" />
+                            <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
+                            <input class="form-control blog-search-input" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
                             <span class="input-group-addon">
-                                <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" />
+                                <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search" />
+                                <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
                             </span>
                         </div>
+
+
                     </div>
                 </div>
                 <!-- Sidebar Block -->
@@ -103,7 +109,7 @@
                                                 <div class="ui-input">
                                                     <textarea class="form-control" rows="4" cols="5" name="q" validationgroup="contattilateral" placeholder="Messaggio .." runat="server" id="txtContactMessage1" />
                                                 </div>
-                                            <div class="row" style="text-align: left">
+                                                <div class="row" style="text-align: left">
                                                     <div class="col-sm-12">
                                                         <%= references.ResMan("basetext", Lingua,"privacytext") %>
                                                         <div class="checkbox" style="margin-bottom: 20px">
@@ -119,9 +125,9 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                <script>
-                                                    function ConfirmValidationForm1(elembtn) {
-                                                        var c = document.getElementById("<%= chkContactPrivacy1.ClientID  %>");
+                                                    <script>
+                                                        function ConfirmValidationForm1(elembtn) {
+                                                            var c = document.getElementById("<%= chkContactPrivacy1.ClientID  %>");
                                                         var out1 = document.getElementById("outputContact1div");
                                                         if (!chk1.checked) {
                                                             out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
@@ -156,35 +162,36 @@
                                                             <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
                                                             $(elembtn).html("Wait ..");
                                                             buttpost.click();--%>
-                                                            ////////////////////////////////////////////////////////////////////////
-                                                        } else {
-                                                            console.log('not  validated');
-                                                            return false;
+                                                                ////////////////////////////////////////////////////////////////////////
+                                                            } else {
+                                                                console.log('not  validated');
+                                                                return false;
+                                                            }
                                                         }
-                                                    }
-                                                    function getcontactdata1(contactdatas, callback) {
-                                                        var contactdatas = contactdatas || {};
-                                                        contactdatas.idofferta = '<%= idOfferta %>';
-                                                        contactdatas.name = $("[id$='txtContactName1']").val();
-                                                        contactdatas.cognome = $("[id$='txtContactCognome1']").val();
-                                                        contactdatas.email = $("[id$='txtContactEmail1']").val();
-                                                        contactdatas.telefono = $("[id$='txtContactPhone1']").val();
-                                                        contactdatas.message = $("[id$='txtContactMessage1']").val();
-                                                        contactdatas.tipo = "informazioni";
-                                                        callback(contactdatas);
-                                                    }
-                                                </script>
-                                                <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                                <%-- <asp:Button ID="btnFormContattoSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
+                                                        function getcontactdata1(contactdatas, callback) {
+                                                            var contactdatas = contactdatas || {};
+                                                            contactdatas.idofferta = '<%= idOfferta %>';
+                                                            contactdatas.name = $("[id$='txtContactName1']").val();
+                                                            contactdatas.cognome = $("[id$='txtContactCognome1']").val();
+                                                            contactdatas.email = $("[id$='txtContactEmail1']").val();
+                                                            contactdatas.telefono = $("[id$='txtContactPhone1']").val();
+                                                            contactdatas.message = $("[id$='txtContactMessage1']").val();
+                                                            contactdatas.tipo = "informazioni";
+                                                            callback(contactdatas);
+                                                        }
+                                                    </script>
+                                                    <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                                    <%-- <asp:Button ID="btnFormContattoSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
 
-                                                <div style="clear: both"></div>
-                                                <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContact1div">
-                                                    <asp:Literal Text="" ID="outputContact1" runat="server" />
+                                                    <div style="clear: both"></div>
+                                                    <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContact1div">
+                                                        <asp:Literal Text="" ID="outputContact1" runat="server" />
+                                                    </div>
+
+                                                    <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName1" runat="server" />
+                                                    <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome1" runat="server" />
+                                                    <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail1" runat="server" />
                                                 </div>
-
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome1" runat="server" />
-                                                <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail1" runat="server" />
                                             </div>
                                         </div>
                                     </div>
@@ -192,21 +199,20 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Sidebar Block -->
-                <div id="divContainerBannerslat1"></div>
-                <div class="sidebar-block" runat="server" id="div2" visible="false">
-                    <div class="row" style="margin-bottom: 10px; margin-top: 0px">
-                        <ul class="works-grid works-grid-gut works-grid-1 works-hover-lw">
-                            <asp:Literal ID="litBannersLaterali" runat="server"></asp:Literal>
-                        </ul>
+                    <!-- Sidebar Block -->
+                    <div id="divContainerBannerslat1"></div>
+                    <div class="sidebar-block" runat="server" id="div2" visible="false">
+                        <div class="row" style="margin-bottom: 10px; margin-top: 0px">
+                            <ul class="works-grid works-grid-gut works-grid-1 works-hover-lw">
+                                <asp:Literal ID="litBannersLaterali" runat="server"></asp:Literal>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <%-- <div class="row">
+        <%-- <div class="row">
             <div id="fb-root"></div>
             <script type="text/javascript">
                 (function (d, s, id) {
