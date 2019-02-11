@@ -4,8 +4,7 @@ using System.Drawing.Imaging;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
-using AForge.Imaging;
-using AForge;
+ 
 
 namespace WelcomeLibrary.UF
 {
@@ -30,6 +29,7 @@ namespace WelcomeLibrary.UF
     }
 
 
+#if false
     public class ImageProcessing
     {
 
@@ -401,5 +401,6 @@ namespace WelcomeLibrary.UF
             System.Drawing.Bitmap newImage = f1.Apply(image);
             return newImage;
         }
-    }
+    } 
+#endif
 }
