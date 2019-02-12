@@ -574,7 +574,9 @@
          "~/js/detect-zoom.min.js",
          //"~/js/maininit.js",
          //"~/js/landing/script.js",
+         "~/js/jarallaxinit.js",
          "~/js/landing/jarallax.js",
+         "~/js/odometer/odometer.js",
          "~/js/maininit-pwa.js",
 
          //MIRCO SCROLLER SWIPER PWA js
@@ -612,6 +614,7 @@
              //"~/css/mbr-faq.css",
              //"~/css/mbr-additional.css",
              //"~/css/landing.css",
+             "~/js/odometer/themes/odometer-theme-custom.css",
              "~/css/custom1.css",
              "~/css/custom.css"
           );

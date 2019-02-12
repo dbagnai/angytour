@@ -3132,7 +3132,7 @@ button.js-roundedpush:hover {
 
 
 /* ---------------------------------
----- TEMPLATE - HOME FULLSCREEN ----
+ TEMPLATE - TESTATA HOME FULLSCREEN
 --------------------------------- */
     /*.fixedtop {
     display: none;
@@ -3153,3 +3153,71 @@ button.js-roundedpush:hover {
     background-color: #eee;
     height: calc(100vh - 0px) !important;
 }*/
+
+
+
+/* ---------------------------------
+---------- SKILLS ANIMATE ----------
+--------------------------------- */
+
+.skills {
+    width: inherit;
+    position: relative;
+}
+
+.skills ul {
+    margin-top: 0px;
+    list-style: none;
+    padding-inline-start: 0;
+
+    & > li {
+        margin-bottom: 50px;
+        background: transparent;
+        overflow: hidden;
+        position: relative;
+
+        & div {
+            margin-top: 28px;
+            height: 6px;
+            border-radius: 3px;
+            background-color: @bg-secondary-color;
+        }
+
+        & em {
+            font-family: @menu-font;
+            color: @color-sottomeu;
+            font-size: 18px;
+            position: relative;
+            top: -30px;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        & span {
+            height: 6px;
+            border-radius: 3px;
+            background: @bg-primary-color;
+            position: absolute;
+        }
+    }
+
+    & > li:nth-last-child(1) {
+        margin-bottom: 0px;
+    }
+}
+
+.skills1 {
+    width: @skills1;
+}
+
+.skills2 {
+    width: @skills2;
+}
+
+.skills3 {
+    width: @skills3;
+}
+
+.skills4 {
+    width: @skills4;
+}
