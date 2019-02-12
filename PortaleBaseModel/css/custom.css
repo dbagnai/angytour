@@ -110,6 +110,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 ///////////| SVG ICON |/////////////
 ----------------------------------*/
+/**/
+/*----------------------------------
+///////| SKILL COMPONENET |/////////
+----------------------------------*/
 /*@import "custom-bicromo.less";*/
 /*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
@@ -375,6 +379,7 @@ i .fa {
     font-size: 35px !important;
     margin-left: calc(-50% + 0px);
     color: #f3c649 !important;
+    display: inline;
   }
   .menuzord-menu li.catalogo-menu .indicator:before {
     font-family: 'Font Awesome 5 Free';
@@ -1447,7 +1452,7 @@ ul.footer-category-list {
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
   font-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768))) !important;
-  font-weight: 700;
+  font-weight: 700 !important;
   text-align: center;
   line-height: normal;
   white-space: nowrap;
@@ -2943,22 +2948,127 @@ button.js-roundedpush:hover {
 /* ---------------------------------
 ---- TEMPLATE - HOME FULLSCREEN ----
 --------------------------------- */
-/*.fixedtop {
-    display: none;
-}
-.fixednav {
-    top: 0;
-    background-color: transparent;
-}
-.bckColor2 {
-    -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-    -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-    box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-}
-.headerspacer {
-     padding-top: 0; 
-}
-#divContainerb1 {
-    background-color: #eee;
-    height: calc(100vh - 0px) !important;
+/*@media screen and (min-width: 1025px) {
+    #divContainerb1 {
+        background-color: #eee;
+        height: calc(100vh - 81.6px) !important;
+    }
+
+    .fixedtop-home {
+        display: none !important;
+    }
+
+    .fixednav-home {
+        top: 0;
+        background-color: transparent;
+    }
+
+    .bckColor2-home {
+        -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+        -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+        box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+    }
+
+    .headerspacer-home {
+        padding-top: 0;
+    }
+
+    .fulllogobckdark-home {
+        width: 400px;
+        height: 119px;
+        padding: 5px;
+        background: url(/images/main_logo_d_b.png) center center;
+        background-size: 95% 95%;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+    }
+
+    .menu-home {
+        color: #fff !important;
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+
+        &:hover {
+            color: @color-sottomeu !important;
+        }
+
+        &:active {
+            color: @color-sottomeu !important;
+        }
+    }
+
+    .buttonmenu-home {
+        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .buttonmenu-span-home {
+        text-shadow: none !important;
+    }
+
+    .menu-home.buttonmenu-span-home {
+        color: @menu-color !important;
+    }
+
+    .catalogo-menu-ul-home {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .indicator-home {
+        display: none !important;
+    }
+
 }*/
+/* ---------------------------------
+---------- SKILLS ANIMATE ----------
+--------------------------------- */
+.skills {
+  width: inherit;
+  position: relative;
+}
+.skills ul {
+  margin-top: 0px;
+  list-style: none;
+  padding-inline-start: 0;
+}
+.skills ul > li {
+  margin-bottom: 50px;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+}
+.skills ul > li div {
+  margin-top: 28px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #90cdcd;
+}
+.skills ul > li em {
+  font-family: 'Fira Sans', sans-serif;
+  color: #f3c649;
+  font-size: 18px;
+  position: relative;
+  top: -30px;
+  font-style: normal;
+  font-weight: 600;
+}
+.skills ul > li span {
+  height: 6px;
+  border-radius: 3px;
+  background: #098f8f;
+  position: absolute;
+}
+.skills ul > li:nth-last-child(1) {
+  margin-bottom: 0px;
+}
+.skills1 {
+  width: 90%;
+}
+.skills2 {
+  width: 85%;
+}
+.skills3 {
+  width: 60%;
+}
+.skills4 {
+  width: 55%;
+}

@@ -97,6 +97,54 @@ jQuery(document).ready(function ($) {
             //        }
         }
     });
+
+
+    $('.loader').hide();
+
+    /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO Home fullscrean ---------------*/
+    var ishome = false;
+    if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
+        || window.location.pathname.toLowerCase() == "/it/home" ||
+        window.location.pathname.toLowerCase() == "/en/home" ||
+        window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
+    if (ishome) {
+        $('.fixedtop').addClass('fixedtop-home');
+        $('.fixednav').addClass('fixednav-home');
+        $('.fulllogobckdark').addClass('fulllogobckdark-home');
+        $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').addClass('menu-home');
+        $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').addClass('buttonmenu-span-home');
+        $('.buttonmenu, a .buttonmenu').addClass('buttonmenu-home');
+        $('.bckColor2').addClass('bckColor2-home');       
+        $('.catalogo-menu ul').addClass('catalogo-menu-ul-home');
+        $('.menuzord-menu li.catalogo-menu .indicator').addClass('indicator-home');
+        $('.headerspacer').addClass('headerspacer-home');
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 0) {
+                $('.fixedtop').removeClass('fixedtop-home');
+                $('.fixednav').removeClass('fixednav-home');
+                $('.fulllogobckdark').removeClass('fulllogobckdark-home');
+                $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').removeClass('menu-home');
+                $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').removeClass('buttonmenu-span-home');
+                $('.buttonmenu, a .buttonmenu').removeClass('buttonmenu-home');
+                $('.bckColor2').removeClass('bckColor2-home');
+                $('.catalogo-menu ul').removeClass('catalogo-menu-ul-home');
+                $('.menuzord-menu li.catalogo-menu .indicator').removeClass('indicator-home');
+            }
+            else {
+                $('.fixedtop').addClass('fixedtop-home');
+                $('.fixednav').addClass('fixednav-home');
+                $('.fulllogobckdark').addClass('fulllogobckdark-home');
+                $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').addClass('menu-home');
+                $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').addClass('buttonmenu-span-home');
+                $('.buttonmenu, a .buttonmenu').addClass('buttonmenu-home');
+                $('.bckColor2').addClass('bckColor2-home');
+                $('.catalogo-menu ul').addClass('catalogo-menu-ul-home');
+                $('.menuzord-menu li.catalogo-menu .indicator').addClass('indicator-home');
+            }
+        });
+    }
+
+
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });

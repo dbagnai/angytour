@@ -61,7 +61,7 @@
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 95%;">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 91%;">
 
                             <%--AVVISO ERRORE DATI NON INSERITI--%>
                             <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
@@ -70,7 +70,7 @@
                             <div id="recaptcharesponse" style="display: none;" class="errormessageformprivacy"></div>
                         </div>
                         <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
+                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-0 text-center bg-manual-secondary-color-fade">
                                 <div class="ui-15">
                                     <div class="ui-content">
                                         <div class="container-fluid">
@@ -175,7 +175,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-3 pr-1">
                                                                     <div class="ui-input mt-0">
                                                                         <%-- <Ajax:MaskedEditExtender runat="server" ID="MaskedEditExtender1" AcceptNegative="None"
                                                                 MaskType="Number" TargetControlID="txtAdulti" InputDirection="RightToLeft" Mask="99"
@@ -191,7 +191,7 @@
                                                                         <%--<label class="ui-icon"><i class="fa fa-group"></i></label>--%>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-3 pl-1">
                                                                     <div class="ui-input mt-0">
 
                                                                         <script>
@@ -288,7 +288,7 @@
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtDescrizione" Width="99%"
                                                                         TextMode="MultiLine" Font-Size="17px" Font-Names="Raleway"
-                                                                        Height="250px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
+                                                                        Height="150px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
                                                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtDescrizione"
                                                                         ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto17Err") %>' Text="*" ValidationGroup="MailInfo" />
                                                                 </div>
@@ -403,13 +403,13 @@
                                                                 <div class="row" style="text-align: left">
                                                                     <div class="col-sm-12 text-white">
                                                                         <%= references.ResMan("basetext", Lingua,"privacytext") %>
-                                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                                        <div class="checkbox" style="margin-bottom: 10px">
                                                                             <label>
                                                                                 <input id="chkPrivacy" runat="server" type="checkbox" />
                                                                                 <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
                                                                             </label>
                                                                         </div>
-                                                                        <div class="checkbox" style="margin-bottom: 20px">
+                                                                        <div class="checkbox" style="margin-bottom: 0px">
                                                                             <label>
                                                                                 <input type="checkbox" id="chkNewsletter" runat="server" />
                                                                                 <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>

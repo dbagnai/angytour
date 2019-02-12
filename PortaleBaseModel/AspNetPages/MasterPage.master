@@ -56,6 +56,9 @@
 </head>
 <%--<body class="bckGray">--%>
 <body>
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700" rel="stylesheet">
@@ -537,13 +540,13 @@
                                 <div class="row" style="text-align: left">
                                     <div class="col-sm-12 text-white">
                                         <%= references.ResMan("basetext", Lingua,"privacytext") %>
-                                        <div class="checkbox" style="margin-bottom: 20px">
+                                        <div class="checkbox mt-3 mb-2">
                                             <label>
                                                 <input id="chkContactPrivacy" runat="server" type="checkbox" />
                                                 <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
                                             </label>
                                         </div>
-                                        <div class="checkbox" style="margin-bottom: 20px">
+                                        <div class="checkbox" style="margin-bottom: 0px">
                                             <label>
                                                 <input type="checkbox" id="chkNewsletter" runat="server" />
                                                 <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
@@ -839,9 +842,9 @@
                 </div>
             </div>
         </footer>
-        <div class="loader" style="display: none">
+        <%--<div class="loader" style="display: none">
             <div class="spinner"></div>
-        </div>
+        </div>--%>
         <div id="divSearchBarPlaceholder">
         </div>
 
