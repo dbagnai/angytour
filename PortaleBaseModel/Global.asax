@@ -549,6 +549,7 @@
             "~/js/detect-zoom.min.js",
             "~/js/jarallaxinit.js",
             "~/js/landing/jarallax.js",
+            "~/js/odometer/odometer.js",
             "~/js/maininit.js"
         );
 
@@ -612,6 +613,7 @@
              //"~/css/mbr-faq.css",
              //"~/css/mbr-additional.css",
              //"~/css/landing.css",
+             "~/js/odometer/themes/odometer-theme-custom.css",
              "~/css/custom1.css",
              "~/css/custom.css"
           );
