@@ -1358,7 +1358,9 @@ namespace WelcomeLibrary.UF
                                                         btnadd.First().Attributes.Add("style", "display:block");
                                                 }
 
+                                                ///////////////////////////////////////////////////////////////////////////////////
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+                                                ///////////////////////////////////////////////////////////////////////////////////
 #if true
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
@@ -1505,14 +1507,6 @@ namespace WelcomeLibrary.UF
                                                 if (IsEven(j))
                                                 {
 
-                                                    //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'odd')]");
-                                                    //if (nodes != null)
-                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
-                                                    //{
-                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("odd"))
-                                                    //        n.Remove();
-                                                    //}
-
                                                     var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("odd"));
                                                     if ((nodestoremove != null) && (nodestoremove.Count() > 0))
                                                     {
@@ -1521,14 +1515,6 @@ namespace WelcomeLibrary.UF
                                                 }
                                                 else
                                                 {
-                                                    //var nodes = cloneitem.SelectNodes("//*[contains(@class, 'even')]");
-                                                    //if (nodes != null)
-                                                    //foreach (HtmlNode n in cloneitem.SelectNodes("*"))
-                                                    //foreach (HtmlNode n in cloneitem.Descendants())
-                                                    //{
-                                                    //    if (n.Attributes.Contains("class") && n.Attributes["class"].Value.Contains("even"))
-                                                    //        n.Remove();
-                                                    //}
 
                                                     var nodestoremove = cloneitem.Descendants().Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("even"));
                                                     if ((nodestoremove != null) && (nodestoremove.Count() > 0))
@@ -1540,6 +1526,7 @@ namespace WelcomeLibrary.UF
 
                                             }
                                             /////////////////////////////////////////////
+
                                             elementtoappend.First().AppendChild(cloneitem.Clone());
                                             j++;
                                         }
@@ -1827,7 +1814,6 @@ namespace WelcomeLibrary.UF
                                                         aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
                                                     else
                                                         aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath);
-
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
                                                     {
@@ -2473,9 +2459,26 @@ namespace WelcomeLibrary.UF
 
                         if (itemdic.ContainsKey(bindprophref))
                         {
+
+
                             link = itemdic[bindprophref];
-                            nodetobind.Attributes["href"].Value = "tel:" + link;
-                            nodetobind.InnerHtml += link;
+                            if (!string.IsNullOrEmpty(link))
+                            {
+                                nodetobind.Attributes["href"].Value = "tel:" + link;
+                                nodetobind.InnerHtml += link;
+                            }
+                            else
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
+                                    nodetobind.Attributes["style"].Value += ";display:none";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:none");
+                            }
+
+
                         }
 
 
@@ -2502,25 +2505,36 @@ namespace WelcomeLibrary.UF
                             {
                                 link = linkloaded[idscheda][bindprophref];
                                 nodetobind.Attributes["href"].Value = link;
-                                if (nodetobind.Attributes.Contains("style"))
-                                {
-                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
-                                    nodetobind.Attributes["style"].Value += ";display:block";
-                                }
+                                if (!string.IsNullOrEmpty(link))
+                                    if (nodetobind.Attributes.Contains("style"))
+                                    {
+                                        nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                        nodetobind.Attributes["style"].Value += ";display:block";
+                                    }
+                                    else
+                                        nodetobind.Attributes.Add("style", "display:block");
                                 else
-                                    nodetobind.Attributes.Add("style", "display:block");
+                                {
+                                    if (nodetobind.Attributes.Contains("style"))
+                                    {
+                                        nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
+                                        nodetobind.Attributes["style"].Value += ";display:none";
+                                    }
+                                    else
+                                        nodetobind.Attributes.Add("style", "display:none");
+                                }
                             }
                             if (linkloaded[idscheda].ContainsKey(bindproptitle))
                             {
                                 testo = linkloaded[idscheda][bindproptitle];
                                 nodetobind.Attributes["title"].Value = html.Convert(testo);
-                                if (nodetobind.Attributes.Contains("style"))
-                                {
-                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
-                                    nodetobind.Attributes["style"].Value += ";display:block";
-                                }
-                                else
-                                    nodetobind.Attributes.Add("style", "display:block");
+                                //if (nodetobind.Attributes.Contains("style"))
+                                //{
+                                //    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                //    nodetobind.Attributes["style"].Value += ";display:block";
+                                //}
+                                //else
+                                //    nodetobind.Attributes.Add("style", "display:block");
                             }
 
                             if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
@@ -2986,7 +3000,7 @@ namespace WelcomeLibrary.UF
                         {
                             string idelement = itemdic[property];
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
-                            {    //carrellotool.initcarrellotool(idelement,  ..... );
+                            {
                                 if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value)) jscommands.Remove(nodetobind.Attributes["id"].Value);
                                 jscommands.Add(nodetobind.Attributes["id"].Value, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + nodetobind.Attributes["id"].Value + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
                             }
@@ -2998,7 +3012,7 @@ namespace WelcomeLibrary.UF
                         {
                             string idelement = itemdic[property];
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
-                            {    //carrellotool.initcarrellotool(idelement,  ..... );
+                            {
                                 string onlytotals = "false";
                                 if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("onlytotals"))
                                     onlytotals = "true";
@@ -3321,6 +3335,7 @@ namespace WelcomeLibrary.UF
                                 if (ret.Length >= i + 1)
                                     ret = ret.Substring(i + 1);
                             }
+                            else ret = "";
                         }
                     }
                     catch { }
@@ -3393,6 +3408,7 @@ namespace WelcomeLibrary.UF
                             string descrizione = linkloaded[valore[0]][prop[0]];
                             if (prop[1] != null && prop[1] != "")
                             {
+
                                 int i = 0;
                                 int.TryParse(prop[1], out i);
                                 if (descrizione.Length >= i)
@@ -3405,6 +3421,7 @@ namespace WelcomeLibrary.UF
                                     }
                                     descrizione = descrizione.Substring(0, i + j) + " >>";
                                 }
+
                                 if (prop[2] != null && prop[2] == "nobreak")
                                     ret = descrizione.Replace("\n", "&nbsp;");
                                 else
