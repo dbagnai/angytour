@@ -3061,8 +3061,15 @@ button.js-roundedpush:hover {
 /* ---------------------------------
 ----- MENU MOBILE new template -----
 --------------------------------- */
-/*menu*/
+.outofsight {
+}
+
 @media (max-width: 1179px) {
+    .outofsight {
+        position: absolute;
+        top: -3000px;
+    }
+
     .menuzord-responsive .menuzord-menu.scrollable {
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -3072,24 +3079,29 @@ button.js-roundedpush:hover {
         margin-top: 5px;
         border: 1px solid;
     }
+
     .menuzord-responsive .menuzord-menu.scrollable > .scrollable-fix {
         height: 0 !important;
     }
+
     .menuzord.white .menuzord-menu > li > a {
         background-color: #fff;
         border-bottom: 1px solid;
         text-align: left;
         background-color: @bg-light-color;
     }
+
     .menuzord.white .menuzord-menu > li:nth-last-child(2) > a {
         border-bottom: none;
     }
+
     .menuzord-responsive .menuzord-menu li .indicator {
         position: absolute;
         right: 50px;
         top: 6px;
         transform: rotate(-90deg)
     }
+
     .menuzord-responsive .menuzord-menu li a:focus .indicator, .menuzord-responsive .menuzord-menu li a:focus .active {
         transform: rotate(0deg)
     }
@@ -3101,13 +3113,16 @@ button.js-roundedpush:hover {
         padding: 0;
         box-shadow: none;
     }
+
     .menuzord-responsive .menuzord-menu ul.dropdown li a {
         text-align: left;
         border-bottom: 1px solid;
     }
+
     .menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li:hover > a {
         padding-left: 20px !important;
     }
+
     .menuzord-responsive .menuzord-menu li ul.dropdown li .indicator {
         line-height: 22px;
         padding: 5px 12px;
