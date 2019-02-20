@@ -1362,6 +1362,33 @@ namespace WelcomeLibrary.UF
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
                                                 ///////////////////////////////////////////////////////////////////////////////////
 #if true
+                                                //Contenitore numeridi pagina
+                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
+                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
+                                                {
+                                                    //ellementi da creare da 1 a  pagesnumber da accorare a pnumbers
+                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
+                                                    StringBuilder htmltoappend = new StringBuilder();
+                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
+                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+                                                    for (int p = 1; p <= pagesnumber; p++)
+                                                    {
+                                                        string disabled = "";//disabled
+                                                        string active = ""; //active
+                                                        active = (p == page) ? active = "active" : active = "";
+                                                        htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                    }
+                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
+                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
+                                                    if (pnumbers.First().Attributes.Contains("style"))
+                                                    {
+                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        pnumbers.First().Attributes.Add("style", "display:block");
+                                                }
+
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
@@ -1789,6 +1816,33 @@ namespace WelcomeLibrary.UF
 
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
 #if true
+                                                //Contenitore numeridi pagina
+                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
+                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
+                                                {
+                                                    //ellementi da creare da 1 a  pagesnumber da accorare a pnumbers
+                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
+                                                    StringBuilder htmltoappend = new StringBuilder();
+                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
+                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+                                                    for (int p = 1; p <= pagesnumber; p++)
+                                                    {
+                                                        string disabled = "";//disabled
+                                                        string active = ""; //active
+                                                        active = (p == page) ? active = "active" : active = "";
+                                                        htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                    }
+                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
+                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
+                                                    if (pnumbers.First().Attributes.Contains("style"))
+                                                    {
+                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        pnumbers.First().Attributes.Add("style", "display:block");
+                                                }
+
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
