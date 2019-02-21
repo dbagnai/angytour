@@ -10,7 +10,7 @@
 <!--[if gt IE 8]><!-->
 
 <html runat="server" id="htmltag">
-<head runat="server">
+<head runat="server" id="masterHead">
     <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />

@@ -1363,6 +1363,14 @@ namespace WelcomeLibrary.UF
                                                 ///////////////////////////////////////////////////////////////////////////////////
 #if true
                                                 //Contenitore numeridi pagina
+                                                string linkprev = "";
+                                                string linknext = "";
+                                                if (Session != null)
+                                                {
+                                                    Session.Remove("linkprev"); //link pagina precendente
+                                                    Session.Remove("linknext"); //link pagina successiva
+                                                }
+
                                                 var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
                                                 if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
                                                 {
@@ -1388,15 +1396,13 @@ namespace WelcomeLibrary.UF
                                                     else
                                                         pnumbers.First().Attributes.Add("style", "display:block");
                                                 }
-
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
                                                     aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
                                                     //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
                                                     aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
-                                                    //aNextPage.First().SetAttributeValue("onClick", "scrolltotop.scrollup();");
-
+                                                    linknext = Richiesta.Url.LocalPath + "?" + "page=" + nextpage;//Imposto la next page per l'head
                                                     if (aNextPage.First().Attributes.Contains("style"))
                                                     {
                                                         aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
@@ -1411,12 +1417,12 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
                                                     //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
-                                                    if (prevpage != "1")
-                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
-                                                    else
-                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath);
 
-                                                    //aPrevPage.First().SetAttributeValue("onClick", "scrolltotop.scrollup();");
+                                                    if (prevpage != "1")
+                                                        linkprev = Richiesta.Url.LocalPath + "?" + "page=" + prevpage;//Imposto la next page per l'head
+                                                    else
+                                                        linkprev = Richiesta.Url.LocalPath;//Imposto la next page per l'head
+                                                    aPrevPage.First().SetAttributeValue("href", linkprev);
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
                                                     {
@@ -1425,6 +1431,14 @@ namespace WelcomeLibrary.UF
                                                     }
                                                     else
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
+                                                }
+                                                //Metto in sessione i link precedente e successivo
+                                                if (Session != null)
+                                                {
+                                                    if (!string.IsNullOrEmpty(linknext))
+                                                        Session["linknext"] = linknext;
+                                                    if (!string.IsNullOrEmpty(linkprev))
+                                                        Session["linkprev"] = linkprev;
                                                 }
 #endif
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
@@ -1814,9 +1828,19 @@ namespace WelcomeLibrary.UF
                                                         btnadd.First().Attributes.Add("style", "display:block");
                                                 }
 
+                                                ///////////////////////////////////////////////////////////////////////////////////
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
+                                                ///////////////////////////////////////////////////////////////////////////////////
 #if true
                                                 //Contenitore numeridi pagina
+                                                string linkprev = "";
+                                                string linknext = "";
+                                                if (Session != null)
+                                                {
+                                                    Session.Remove("linkprev"); //link pagina precendente
+                                                    Session.Remove("linknext"); //link pagina successiva
+                                                }
+
                                                 var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
                                                 if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
                                                 {
@@ -1842,14 +1866,13 @@ namespace WelcomeLibrary.UF
                                                     else
                                                         pnumbers.First().Attributes.Add("style", "display:block");
                                                 }
-
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
                                                     aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
                                                     //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
                                                     aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
-
+                                                    linknext = Richiesta.Url.LocalPath + "?" + "page=" + nextpage;//Imposto la next page per l'head
                                                     if (aNextPage.First().Attributes.Contains("style"))
                                                     {
                                                         aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
@@ -1864,10 +1887,12 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aPrevPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pagerindietro").Valore;
                                                     //aPrevPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
+
                                                     if (prevpage != "1")
-                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + prevpage);
+                                                        linkprev = Richiesta.Url.LocalPath + "?" + "page=" + prevpage;//Imposto la next page per l'head
                                                     else
-                                                        aPrevPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath);
+                                                        linkprev = Richiesta.Url.LocalPath;//Imposto la next page per l'head
+                                                    aPrevPage.First().SetAttributeValue("href", linkprev);
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
                                                     {
@@ -1876,6 +1901,14 @@ namespace WelcomeLibrary.UF
                                                     }
                                                     else
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
+                                                }
+                                                //Metto in sessione i link precedente e successivo
+                                                if (Session != null)
+                                                {
+                                                    if (!string.IsNullOrEmpty(linknext))
+                                                        Session["linknext"] = linknext;
+                                                    if (!string.IsNullOrEmpty(linkprev))
+                                                        Session["linkprev"] = linkprev;
                                                 }
 #endif
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING

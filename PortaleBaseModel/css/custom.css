@@ -121,7 +121,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ////////| IMPORTAZIONE FONT |/////// ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS L'IMPORT DEI FONT QUI NON FUNZIONA!!!!!!!!!! /////////// -> SPOSTATO IN MASTERPAGE
 ----------------------------------*/
 /*----------------------------------
-//////////////| FONT |/////////////////
+//////////////| FONT |//////////////
 ----------------------------------*/
 /*titoli-principali*/
 /*sotto-titoli-principali*/
@@ -2285,6 +2285,9 @@ select.form-control:not([size]):not([multiple]) {
 .pagination li {
   margin-left: 5px;
 }
+.page-item.active .page-link {
+  background-color: #f3c649;
+}
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/
@@ -2875,8 +2878,11 @@ button.js-roundedpush:hover {
 /* ---------------------------------
 ----- MENU MOBILE new template -----
 --------------------------------- */
-/*menu*/
 @media (max-width: 1179px) {
+  .outofsight {
+    position: absolute;
+    top: -3000px;
+  }
   .menuzord-responsive .menuzord-menu.scrollable {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;

@@ -539,6 +539,8 @@ public partial class AspNetPages_weblist : CommonPage
                 }
                 break;
         }
+        Setrelprevnext();
+
         Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
     }
     private void ModificaFiltroJS()
@@ -762,6 +764,38 @@ public partial class AspNetPages_weblist : CommonPage
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue);
     }
+
+    /// <summary>
+    /// Aggiunge i link rel prev e next nell'head della pagina se inseriti in sessione
+    /// </summary>
+    protected void Setrelprevnext()
+    {
+        //"<link rel=\"prev\" href=\"\" />";
+        //"<link rel=\"next\" href=\"\" />";
+
+        HtmlHead head = (HtmlHead)Master.FindControl("masterHead");
+        if (head != null)
+        {
+            HtmlLink linkctr = new HtmlLink();
+            if (Session["linkprev"] != null && Session["linkprev"].ToString() != "")
+            {
+                linkctr.Attributes.Add("rel", "prev");
+                linkctr.Attributes.Add("href", Session["linkprev"].ToString());
+                head.Controls.Add(linkctr);
+            }
+            linkctr = new HtmlLink();
+            if (Session["linknext"] != null && Session["linknext"].ToString() != "")
+            {
+                linkctr.Attributes.Add("rel", "next");
+                linkctr.Attributes.Add("href", Session["linknext"].ToString());
+                head.Controls.Add(linkctr);
+            }
+        }
+
+        Session.Remove("linkprev");
+        Session.Remove("linknext");
+    }
+
     protected void InizializzaSeo()
     {
         string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
