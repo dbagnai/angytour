@@ -2694,6 +2694,7 @@ namespace WelcomeLibrary.UF
                             idscheda = itemdic[property];
                             if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("image"))
                                 completepath = linkloaded[idscheda]["image"];
+
                             if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("img-ant") && completepath.ToLower().LastIndexOf("dummylogo") == -1)
                             {
                                 int position = completepath.LastIndexOf('/');

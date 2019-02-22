@@ -458,8 +458,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Mailcliente = cliente.Email;
                 totali.Dataordine = System.DateTime.Now;
                 totali.CodiceOrdine = CodiceOrdine;
-                totali.Indirizzofatturazione = cliente.Cap + " " + cliente.CodiceCOMUNE + "  " + cliente.CodicePROVINCIA + "<br/>";
-                totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
+                totali.Indirizzofatturazione = cliente.Indirizzo + "<br/>";
+                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + " (" + cliente.CodicePROVINCIA + ")<br/>";
                 totali.Indirizzofatturazione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
                 totali.Indirizzofatturazione += "Ph: " + cliente.Telefono + "<br/>";
                 totali.Indirizzofatturazione += "Vat: " + cliente.Pivacf + "<br/>";
@@ -468,8 +468,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
-                    indirizzospedizione = inpCaps.Value + " " + inpComuneS.Value + "  " + inpProvinciaS.Value + "<br/>";
-                    indirizzospedizione += inpIndirizzoS.Value + "<br/>";
+                    indirizzospedizione = inpIndirizzoS.Value + "<br/>";
+                    indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + " (" + inpProvinciaS.Value + ")<br/>";
                     indirizzospedizione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
                     indirizzospedizione += "Ph: " + inpTelS.Value + "<br/>";
                     totali.Indirizzospedizione = indirizzospedizione;
