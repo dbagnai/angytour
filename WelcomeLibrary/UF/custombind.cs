@@ -1365,37 +1365,7 @@ namespace WelcomeLibrary.UF
                                                 //Contenitore numeridi pagina
                                                 string linkprev = "";
                                                 string linknext = "";
-                                                if (Session != null)
-                                                {
-                                                    Session.Remove("linkprev"); //link pagina precendente
-                                                    Session.Remove("linknext"); //link pagina successiva
-                                                }
 
-                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
-                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
-                                                {
-                                                    //ellementi da creare da 1 a  pagesnumber da accorare a pnumbers
-                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
-                                                    StringBuilder htmltoappend = new StringBuilder();
-                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
-                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
-                                                    for (int p = 1; p <= pagesnumber; p++)
-                                                    {
-                                                        string disabled = "";//disabled
-                                                        string active = ""; //active
-                                                        active = (p == page) ? active = "active" : active = "";
-                                                        htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
-                                                    }
-                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
-                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
-                                                    if (pnumbers.First().Attributes.Contains("style"))
-                                                    {
-                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
-                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
-                                                    }
-                                                    else
-                                                        pnumbers.First().Attributes.Add("style", "display:block");
-                                                }
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
@@ -1432,6 +1402,54 @@ namespace WelcomeLibrary.UF
                                                     else
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
                                                 }
+
+
+
+                                                if (Session != null)
+                                                {
+                                                    Session.Remove("linkprev"); //link pagina precendente
+                                                    Session.Remove("linknext"); //link pagina successiva
+                                                }
+                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
+                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
+                                                {
+                                                    //elementi da creare da 1 a  pagesnumber da accorare a pnumbers
+                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
+                                                    StringBuilder htmltoappend = new StringBuilder();
+                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
+                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+                                                    if (page > 3)
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "\"><<</a></li> ");
+                                                    if (!string.IsNullOrEmpty(linkprev))
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linkprev + "\"><</a></li> ");
+                                                    for (int p = 1; p <= pagesnumber; p++)
+                                                    {
+                                                        if (((p >= page - 2 && p <= page + 2) && page > 2 && page < pagesnumber - 2) || (page <= 2 && (p <= 5)) || (page >= pagesnumber - 2 && (p > (pagesnumber - 5))))
+                                                        {
+                                                            string disabled = "";//disabled
+                                                            string active = ""; //active
+                                                            active = (p == page) ? active = "active" : active = "";
+                                                            htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                        }
+                                                    }
+                                                    if (linknext != "")
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
+                                                    if (page < pagesnumber - 3)
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
+
+                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
+                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
+                                                    if (pnumbers.First().Attributes.Contains("style"))
+                                                    {
+                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        pnumbers.First().Attributes.Add("style", "display:block");
+                                                }
+
+
+
                                                 //Metto in sessione i link precedente e successivo
                                                 if (Session != null)
                                                 {
@@ -1835,37 +1853,7 @@ namespace WelcomeLibrary.UF
                                                 //Contenitore numeridi pagina
                                                 string linkprev = "";
                                                 string linknext = "";
-                                                if (Session != null)
-                                                {
-                                                    Session.Remove("linkprev"); //link pagina precendente
-                                                    Session.Remove("linknext"); //link pagina successiva
-                                                }
 
-                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
-                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
-                                                {
-                                                    //ellementi da creare da 1 a  pagesnumber da accorare a pnumbers
-                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
-                                                    StringBuilder htmltoappend = new StringBuilder();
-                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
-                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
-                                                    for (int p = 1; p <= pagesnumber; p++)
-                                                    {
-                                                        string disabled = "";//disabled
-                                                        string active = ""; //active
-                                                        active = (p == page) ? active = "active" : active = "";
-                                                        htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
-                                                    }
-                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
-                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
-                                                    if (pnumbers.First().Attributes.Contains("style"))
-                                                    {
-                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
-                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
-                                                    }
-                                                    else
-                                                        pnumbers.First().Attributes.Add("style", "display:block");
-                                                }
                                                 var aNextPage = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "aNextPage");
                                                 if ((aNextPage != null) && (aNextPage.Count() > 0) && Richiesta != null && page < pagesnumber)
                                                 {
@@ -1902,6 +1890,54 @@ namespace WelcomeLibrary.UF
                                                     else
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
                                                 }
+
+
+
+                                                if (Session != null)
+                                                {
+                                                    Session.Remove("linkprev"); //link pagina precendente
+                                                    Session.Remove("linknext"); //link pagina successiva
+                                                }
+                                                var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
+                                                if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
+                                                {
+                                                    //elementi da creare da 1 a  pagesnumber da accorare a pnumbers
+                                                    HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
+                                                    StringBuilder htmltoappend = new StringBuilder();
+                                                    //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
+                                                    // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+                                                    if (page > 3)
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "\"><<</a></li> ");
+                                                    if (!string.IsNullOrEmpty(linkprev))
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linkprev + "\"><</a></li> ");
+                                                    for (int p = 1; p <= pagesnumber; p++)
+                                                    {
+                                                        if (((p >= page - 2 && p <= page + 2) && page > 2 && page < pagesnumber - 2) || (page <= 2 && (p <= 5)) || (page >= pagesnumber - 2 && (p > (pagesnumber - 5))))
+                                                        {
+                                                            string disabled = "";//disabled
+                                                            string active = ""; //active
+                                                            active = (p == page) ? active = "active" : active = "";
+                                                            htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                        }
+                                                    }
+                                                    if (linknext != "")
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
+                                                    if (page < pagesnumber - 3)
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
+
+                                                    tmpdoc1.LoadHtml(htmltoappend.ToString());
+                                                    pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
+                                                    if (pnumbers.First().Attributes.Contains("style"))
+                                                    {
+                                                        pnumbers.First().Attributes["style"].Value = pnumbers.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                                        pnumbers.First().Attributes["style"].Value += ";display:block";
+                                                    }
+                                                    else
+                                                        pnumbers.First().Attributes.Add("style", "display:block");
+                                                }
+
+
+
                                                 //Metto in sessione i link precedente e successivo
                                                 if (Session != null)
                                                 {
