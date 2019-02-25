@@ -99,11 +99,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
 
-            CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
-            Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", false);
-            Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", false);
-            idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto");
-            idOfferta = CommonPage.CaricaValoreMaster(Request, Session, "idOfferta");
+            CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", true, "");
+            Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", true);
+            Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", true);
+            idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
+            idOfferta = CommonPage.CaricaValoreMaster(Request, Session, "idOfferta", true);
             Vetrina = CommonPage.CaricaValoreMaster(Request, Session, "vetrina", true, "");
 
         }
