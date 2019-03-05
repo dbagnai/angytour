@@ -28,6 +28,26 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+    <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative">
+
+        <div class="d-flex flex-row-reverse">
+            <div class="px-2" style="max-width: 350px" runat="server" id="divSearch" visible="false">
+                <div class="sidebar-content tags blog-search ">
+                    <div class="input-group flex-nowrap">
+                        <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
+                        <input class="form-control blog-search-input" onkeydown="if (event.keyCode == 13)  document.getElementById('btncerca1').click()" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
+                        <span class="input-group-addon">
+                            <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search" />
+                            <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="px-2" style="max-width: 350px;" runat="server" id="divArchivio" visible="false">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="" runat="server" id="columnsingle">
 
@@ -39,23 +59,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
     <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
-        <div class="clearfix" style="margin: 0 10px 10px 0">
-            <div class="float-right" style="max-width: 350px; margin: 10px auto" runat="server" id="divSearch" visible="false">
-                <div class="sidebar-content tags blog-search ">
-                     <div class="input-group flex-nowrap">
-                     <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
-                        <input class="form-control blog-search-input" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>'  />
-                        <span class="input-group-addon">
-                            <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search"  />
-                            <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
-                             
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="float-right pr-2" style="max-width: 350px; margin: 10px auto" runat="server" id="divArchivio" visible="false">
-            </div>
-        </div>
+
         <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
     </div>
     <div class="col-md-9 col-sm-9" runat="server" id="column2">

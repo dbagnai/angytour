@@ -42,21 +42,11 @@
                     <div class="sidebar-content tags blog-search ">
                         <div class="input-group flex-nowrap">
                             <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
-                            <input class="form-control blog-search-input" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
+                            <input class="form-control blog-search-input"  onkeydown = "if (event.keyCode == 13)  document.getElementById('btncerca1').click()"  name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
                             <span class="input-group-addon">
                                 <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search" />
                                 <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
-                                <script type="text/javascript">
-                                    function cerca(btn) {
-                                        var data = {};
-                                        data["tipologia"] = tipologia;
-                                        data["categoria"] = categoria;
-                                        data["categoria2liv"] = categoria2liv;
-                                        data["testoricerca"] = $('#searchtext')[0].value;
-                                        //console.log($('#searchtext')[0].value);
-                                        cercacontenuti(lng, data);
-                                    }
-                                </script>
+                                
                             </span>
                         </div>
 

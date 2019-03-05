@@ -313,6 +313,13 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //placeholderrisultatinocontainer.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+
+
                     //sb.Clear();
                     //sb.Append("<div class=\"sfondo-contenitore\">");
                     //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
