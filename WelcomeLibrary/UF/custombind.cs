@@ -1428,13 +1428,20 @@ namespace WelcomeLibrary.UF
                                                         {
                                                             string disabled = "";//disabled
                                                             string active = ""; //active
+                                                            string linkpagina = Richiesta.Url.LocalPath + "?" + "page=" + p;
                                                             active = (p == page) ? active = "active" : active = "";
-                                                            htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                            if (active != "active")
+                                                                htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + linkpagina + "\">" + p + "</a></li> ");
+                                                            else
+                                                                htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><span class=\"page-link\" style=\"cursor:default\">" + p + "</span></li> ");
+
+
+
                                                         }
                                                     }
                                                     if (linknext != "")
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
-                                                    if (page < pagesnumber - 3)
+                                                    if (page < pagesnumber - 2)
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
 
                                                     tmpdoc1.LoadHtml(htmltoappend.ToString());
@@ -1916,13 +1923,20 @@ namespace WelcomeLibrary.UF
                                                         {
                                                             string disabled = "";//disabled
                                                             string active = ""; //active
+                                                            string linkpagina = Richiesta.Url.LocalPath + "?" + "page=" + p;
                                                             active = (p == page) ? active = "active" : active = "";
-                                                            htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + p + "\">" + p + "</a></li> ");
+                                                            if (active != "active")
+                                                                htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + linkpagina + "\">" + p + "</a></li> ");
+                                                            else
+                                                                htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><span class=\"page-link\" style=\"cursor:default\">" + p + "</span></li> ");
+
+
+
                                                         }
                                                     }
                                                     if (linknext != "")
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
-                                                    if (page < pagesnumber - 3)
+                                                    if (page < pagesnumber - 2)
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
 
                                                     tmpdoc1.LoadHtml(htmltoappend.ToString());
