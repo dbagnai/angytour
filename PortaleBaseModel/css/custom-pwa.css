@@ -42,6 +42,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-color-sottomeu {
   background-color: #f3c649 !important;
+  background: linear-gradient(45deg, #f4a300, #fc0) !important;
 }
 .bg-color-sottomeu-active {
   background-color: #f5cf64 !important;
@@ -63,6 +64,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .tx-dark-color {
   color: #032f2f !important;
+}
+.tx-sottomenu-color {
+  color: #f3c649 !important;
 }
 .bd-primary-color {
   border-color: #098f8f !important;
@@ -133,6 +137,9 @@ a:hover {
 ----------------------------------*/
 .fixedtop {
   background-color: #098f8f;
+  /*colore intero on*/
+  /*background: @bg-fixedtop-color-sfumato;*/
+  /*colore sfumato off*/
   position: fixed;
   height: 40px;
   top: 0px;
@@ -238,7 +245,7 @@ i .fa {
   padding: 10px 0 20px;
   display: none;
   position: absolute;
-  z-index: 99;
+  z-index: 99 !important;
   min-width: 180px;
   white-space: nowrap;
   background: #fff;
@@ -287,12 +294,14 @@ i .fa {
     /*display: block !important;*/
     width: calc(100% + 40px);
     left: -20px;
-    background-color: #f3c649;
     opacity: 1 !important;
     border: none;
     padding: 0px 55px;
     background-image: url(/images/pattern/ricicled4.png);
     background-size: 20%;
+    background-color: #f3c649;
+    /*background: @bg-primary-color-sfumato;*/
+    /*in caso di sfondo sfumto*/
     /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
     /*-webkit-column-count: 4;
         -moz-column-count: 4;
@@ -306,6 +315,9 @@ i .fa {
         padding-bottom: 10px;
         padding-left: calc((100% - 1110px) / 2);
         padding-right: calc((100% - 1110px) / 2);*/
+  }
+  .menuzord-menu ul.dropdown.visible-ok {
+    z-index: 98 !important;
   }
   .visible-ok {
     display: block !important;
@@ -361,8 +373,12 @@ i .fa {
   .menuzord-menu li.catalogo-menu ul.dropdown li .indicator i.fa.fa-angle-right:before {
     content: "\f107";
   }
+  /*SOTTO SOTTO MENU OFF*/
+  /*.menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown, .menuzord-menu li.catalogo-menu ul.dropdown li .indicator {
+        display: none !important;
+    }*/
+  /*SOTTO SOTTO MENU ON OFF*/
   .menuzord-menu li.catalogo-menu ul {
-    /*SOTTO SOTTO MENU ON OFF*/
     border-bottom: 1px solid #098f8f !important;
   }
   .menuzord-menu li.catalogo-menu ul.dropdown li {
@@ -774,7 +790,8 @@ input:hover[type="button"],
   font-weight: normal;
   position: relative;
   line-height: 1 !important;
-  padding: 0.75rem 2rem !important;
+  /*padding: .75rem 2rem !important;*/
+  padding: 1rem 2rem !important;
   display: inline-block;
   height: auto;
   -moz-box-shadow: none;
@@ -788,9 +805,15 @@ input:hover[type="button"],
   -o-transition: background 0.2s, opacity 0.2s;
   transition: background 0.2s, opacity 0.2s;
   background: #f3c649;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  /*-webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;*/
+  -webkit-border-radius: 1.4rem;
+  /*rotondo*/
+  -moz-border-radius: 1.4rem;
+  /*rotondo*/
+  border-radius: 1.4rem;
+  /*rotondo*/
   color: #fff !important;
   text-transform: uppercase !important;
   text-align: center;
@@ -866,7 +889,8 @@ footer .divbuttonstyle:hover {
   font-weight: normal;
   position: relative;
   line-height: 1 !important;
-  padding: 0.75rem 2rem !important;
+  /*padding: .75rem 2rem !important;*/
+  padding: 1rem 2rem !important;
   margin: 10px 5px;
   height: auto;
   -webkit-box-shadow: none;
@@ -882,9 +906,15 @@ footer .divbuttonstyle:hover {
   transition: background 0.2s, opacity 0.2s;
   margin: 0 0 0 0 !important;
   background: #fff !important;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  /*-webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;*/
+  -webkit-border-radius: 1.4rem;
+  /*rotondo*/
+  -moz-border-radius: 1.4rem;
+  /*rotondo*/
+  border-radius: 1.4rem;
+  /*rotondo*/
   border: 1px solid #032f2f;
   color: #032f2f !important;
   text-transform: uppercase;
@@ -913,7 +943,7 @@ footer .divbuttonstyle:hover {
 .btn-banner:hover,
 .btn .btn-banner:hover {
   background: #ffc107 !important;
-  font-size: 1.1vw !important;
+  font-size: 1vw !important;
   color: #fff !important;
 }
 .btn-banner:hover,
@@ -935,7 +965,7 @@ footer .divbuttonstyle:hover {
   }
   .buttonmenu:hover,
   a .buttonmenu:hover {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     color: #000 !important;
   }
   .menuzord.white .menuzord-menu > li > a.buttonmenu {
@@ -1312,7 +1342,7 @@ ul.footer-category-list {
 }
 .bigtext {
   color: #fff;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: calc(49px + (65 - 49) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 700;
   text-align: center;
@@ -1340,7 +1370,7 @@ ul.footer-category-list {
 /*End svg decorazione banner-top-home*/
 .smalltext {
   color: #fff;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 700 !important;
   text-align: center;
@@ -2158,6 +2188,16 @@ select.form-control:not([size]):not([multiple]) {
 .mbr-overlay-white {
   background-color: rgba(255, 255, 255, 0.6);
 }
+.mbr-overlay-sfumato {
+  opacity: 1;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, #ebf6f6, rgba(235, 246, 246, 0.5));
+}
 /*----------------------------------
 ----------- ISOTOPE BLOG -----------
 ----------------------------------*/
@@ -2328,8 +2368,8 @@ select.form-control:not([size]):not([multiple]) {
     transform: translate(-100%, -50%);
   }
   /*tolgo l'effetto al pulsante prenota*/
-  .menuzord-menu li:nth-child(6) a:before,
-  .menuzord-menu li:nth-child(6) a:after {
+  .menuzord-menu li:nth-child(7) a:before,
+  .menuzord-menu li:nth-child(7) a:after {
     border: none;
   }
   .menuzord-menu li a:hover:before,
@@ -2842,7 +2882,66 @@ button.js-roundedpush:hover {
   }
 }
 /* ---------------------------------
----- TEMPLATE - HOME FULLSCREEN ----
+---------- SKILLS ANIMATE ----------
+--------------------------------- */
+.skills {
+  width: inherit;
+  position: relative;
+}
+.skills ul {
+  margin-top: 0px;
+  list-style: none;
+  padding-inline-start: 0;
+}
+.skills ul > li {
+  margin-bottom: 50px;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+}
+.skills ul > li div {
+  margin-top: 28px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #90cdcd;
+}
+.skills ul > li em {
+  font-family: 'Fira Sans', sans-serif;
+  color: #f3c649;
+  font-size: 18px;
+  position: relative;
+  top: -30px;
+  font-style: normal;
+  font-weight: 600;
+}
+.skills ul > li span {
+  height: 6px;
+  border-radius: 3px;
+  background: #032f2f;
+  position: absolute;
+}
+.skills ul > li:nth-last-child(1) {
+  margin-bottom: 0px;
+}
+.skills1 {
+  width: 90%;
+}
+.skills2 {
+  width: 85%;
+}
+.skills3 {
+  width: 60%;
+}
+.skills4 {
+  width: 55%;
+}
+/*///////////////////////////////////
+:::::::::::::          ::::::::::::::
+::::::::::::: TEMPLATE ::::::::::::::
+:::::::::::::          ::::::::::::::
+///////////////////////////////////*/
+/* ---------------------------------
+ TEMPLATE - TESTATA HOME FULLSCREEN 
 --------------------------------- */
 /*@media screen and (min-width: 1025px) {
     #divContainerb1 {
@@ -2915,61 +3014,181 @@ button.js-roundedpush:hover {
 
 }*/
 /* ---------------------------------
----------- SKILLS ANIMATE ----------
+ --- END TESTATA HOME FULLSCREEN ---
 --------------------------------- */
-.skills {
-  width: inherit;
-  position: relative;
+/* ---------------------------------
+--------- TEMPLATE POLYGON ---------
+--------------------------------- */
+/*-- BANNER TESTATA HOME POLYGON -*/
+/*.tp-caption.very_big_white {
+    width: @bg-width !important;
+    max-width: @bg-max-width !important;
+    background-size: @bg-size !important;
+    -webkit-clip-path: @bg-path;
+    clip-path: @bg-path;
+    background: @bg-testata-color;
+    padding: 20px 20px;
+    padding-right: calc(14% - 3rem);
 }
-.skills ul {
-  margin-top: 0px;
-  list-style: none;
-  padding-inline-start: 0;
+@media (max-width: 768px) {
+    .tp-caption.very_big_white {
+        width: @bg-width-768 !important;
+        max-width: @bg-max-width-768 !important;
+        -webkit-clip-path: @bg-path-768;
+        clip-path: @bg-path-768;
+    }
 }
-.skills ul > li {
-  margin-bottom: 50px;
-  background: transparent;
-  overflow: hidden;
-  position: relative;
+.bigtext {
+    color: @title-testata-home-color;
+    font-family: @title-testata-home-font;
+    font-size: @title-testata-home-size !important;
+    font-weight: @title-testata-home-weight;
+    text-align: left;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    line-height: normal !important;
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
-.skills ul > li div {
-  margin-top: 28px;
-  height: 6px;
-  border-radius: 3px;
-  background-color: #90cdcd;
+.smalltext {
+    color: @subtitle-testata-home-color;
+    font-family: @subtitle-testata-home-font;
+    font-size: @subtitle-testata-home-size !important;
+    font-weight: @subtitle-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
-.skills ul > li em {
-  font-family: 'Fira Sans', sans-serif;
-  color: #f3c649;
-  font-size: 18px;
-  position: relative;
-  top: -30px;
-  font-style: normal;
-  font-weight: 600;
+.prezzotext {
+    color: @prezzo-testata-home-color;
+    font-family: @prezzo-testata-home-font;
+    font-size: @prezzo-testata-home-size !important;
+    font-weight: @prezzo-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}*/
+/*-- BANNER NAVIGAZIONE POLYGON --*/
+.card-shadow {
+  -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+  -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
 }
-.skills ul > li span {
-  height: 6px;
-  border-radius: 3px;
-  background: #032f2f;
+.image-polygon-b3 {
+  padding-left: 0;
+  padding-top: 50%;
+}
+.polygon-backdrop-b3 {
+  background-size: cover;
+  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
   position: absolute;
+  width: calc(100% + 2px);
+  height: auto;
+  min-height: 40%;
+  top: -1px;
 }
-.skills ul > li:nth-last-child(1) {
-  margin-bottom: 0px;
+.polygon-backdrop-b3 .titolo-offerta,
+.polygon-backdrop .sottotitolo-offerta,
+.polygon-backdrop .descrizione {
+  color: white !important;
 }
-.skills1 {
-  width: 90%;
+.polygon-backdrop-b3 .titolo-offerta {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 20px !important;
+  line-height: 2rem;
+  text-transform: uppercase;
 }
-.skills2 {
-  width: 85%;
+.polygon-backdrop-b3 .sottotitolo-offerta {
+  font-size: 1.3rem;
+  font-weight: 400 !important;
+  line-height: 1.6rem;
+  color: white;
 }
-.skills3 {
-  width: 60%;
+li:nth-child(2n) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #f4a300, #fc0);
 }
-.skills4 {
-  width: 55%;
+li:nth-child(2n+1) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #0081d1, #00aeef);
 }
+/*----ISOTOPE RISULTATI POLYGON ----*/
+.image-polygon {
+  padding-left: 0;
+  padding-top: 50%;
+}
+.polygon-backdrop {
+  background-size: cover;
+  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 40%;
+  top: 0px;
+}
+.polygon-backdrop .titolo-offerta,
+.polygon-backdrop .sottotitolo-offerta,
+.polygon-backdrop .descrizione {
+  color: white !important;
+}
+.polygon-backdrop .titolo-offerta {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 20px !important;
+}
+.polygon-backdrop .sottotitolo-offerta {
+  font-size: 1.3rem;
+  font-weight: 400 !important;
+  line-height: 2rem;
+}
+.polygon-backdrop .prezzo-responsive {
+  color: white;
+  font-size: 2rem;
+  font-weight: 900;
+}
+li:nth-child(2n) .polygon-backdrop {
+  background: linear-gradient(45deg, #f4a300, #fc0);
+}
+li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
+  content: "/KWh";
+  font-weight: 300;
+  float: right;
+}
+li:nth-child(2n+1) .polygon-backdrop {
+  background: linear-gradient(45deg, #0081d1, #00aeef);
+}
+li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
+  content: "/Smc";
+  font-weight: 300;
+  float: right;
+}
+@media screen and (min-width: 1024px) {
+  .image-polygon {
+    padding-left: 45%;
+    padding-top: 0;
+  }
+  .polygon-backdrop {
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+    clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    top: 0px;
+  }
+}
+/* ---------------------------------
+------- END TEMPLATE POLYGON -------
+--------------------------------- */
 /*----------------------------------
-/////////| COLORI BLOCCHI |/////////
+/////| COLORI BLOCCHI LINEARI |/////
 ----------------------------------*/
 /*logo - sfondo-pulsanti - fixed-top*/
 /*#9e532b*/
@@ -2994,6 +3213,11 @@ button.js-roundedpush:hover {
 /* fascia catalogo link active */
 /*#d8e056;*/
 /* fascia catalogo */
+/*----------------------------------
+////| COLORI BLOCCHI GRADIENTE |////
+----------------------------------*/
+/**/
+/**/
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
@@ -3029,32 +3253,34 @@ button.js-roundedpush:hover {
 /*------------------------------------
 ////| BANNER TESTATA HOME - 100% |////
 ------------------------------------*/
-/**/
-/**/
-/*@title-testata-home-size: 4rem;*/
-/**/
-/*@subtitle-testata-home-size: 2.5rem;*/
-/*@alternative-font;*/
 /*-----------------------------------
 ////| BANNER TESTATA HOME - 55% |////
 -----------------------------------*/
-/*@bg-width: 55%;
+/*@bg-width-768: 100%;
+@bg-max-width-768: 100%;
+@bg-path-768: polygon(0 0%, 99% 0%, 100% 101%, 0% 100%);
+
+@bg-width: 55%;
 @bg-max-width: 55%;
 @bg-size: cover;
 @bg-path: polygon(0 0%, 99% 0%, 80% 101%, 0% 100%);
 
 @bg-testata-opacity: @bg-primary-color;
-@bg-color-top-opacity: lighten(@primary-color, 25%);
-@bg-color-bottom-opacity: @primary-color;
-
-@title-testata-home-size: 4rem;
+@bg-testata-color: @bg-fixedtop-color-sfumato-alpha;
+@title-testata-home-size: calc(18px + (28 - 18) * ((100vw - 768px) / (1200 - 768)));
 @title-testata-home-font: @testata-font;
 @title-testata-home-color: @white-color;
 @title-testata-home-weight: 700;
 
-@subtitle-testata-home-size: 2.5rem;
-@subtitle-testata-home-font: @primary-font;
-@subtitle-testata-home-color: @white-color;*/
+@subtitle-testata-home-size: 1.5rem;
+@subtitle-testata-home-font: @testata-font;
+@subtitle-testata-home-color: @white-color;
+@subtitle-testata-home-weight: 400;
+
+@prezzo-testata-home-size: 2.5rem;
+@prezzo-testata-home-font: @testata-font;
+@prezzo-testata-home-color: @white-color;
+@prezzo-testata-home-weight: 400;*/
 /*----------------------------------
 /////////| BANNER FASCIA |//////////
 ----------------------------------*/

@@ -1,6 +1,6 @@
 ﻿@import "custom.less";
 /*----------------------------------
-/////////| COLORI BLOCCHI |/////////
+/////| COLORI BLOCCHI LINEARI |/////
 ----------------------------------*/
 @bg-primary-color: #098f8f; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
 @bg-secondary-color: mix(@bg-primary-color, #fff, 45%); /*footer-link*/ /*#dac8a0;*/
@@ -25,6 +25,22 @@
 @color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
 @color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
 @color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.99); /*#d8e056;*/ /* fascia catalogo */
+/*----------------------------------
+////| COLORI BLOCCHI GRADIENTE |////
+----------------------------------*/
+@bg-primary-gradient1: #0081d1;
+@bg-primary-gradient2: #00aeef;
+@bg-primary-color-sfumato: linear-gradient(45deg, @bg-primary-gradient1, @bg-primary-gradient2);
+/**/
+@color-fixedtop-gradient1: darken(@bg-dark-color, 40%);
+@color-fixedtop-gradient2: darken(@bg-dark-color, 20%);
+@color-fixedtop-gradient2-alpha: hsla(hue(@color-fixedtop-gradient2), 100%, 21%, 0.5);
+@bg-fixedtop-color-sfumato: linear-gradient(45deg, @color-fixedtop-gradient1, @color-fixedtop-gradient2);
+@bg-fixedtop-color-sfumato-alpha: linear-gradient(45deg, @color-fixedtop-gradient1, @color-fixedtop-gradient2-alpha);
+/**/
+@color-sottomeu-gradient1: #f4a300;
+@color-sottomeu-gradient2: #fc0;
+@bg-sottomenu-color-sfumato: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2);
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
@@ -119,42 +135,48 @@
 @bg-max-width: 100%;
 @bg-size: cover;
 @bg-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
-/**/
+
 @bg-testata-opacity: fade(@black-color, 40%);
 @bg-color-top-opacity: fade(@color-sottomeu, 0%);
 @bg-color-bottom-opacity: fade(@primary-color, 75%);
-/**/
-/*@title-testata-home-size: 4rem;*/
+
 @title-testata-home-size: calc(49px + (65 - 49) * ((100vw - 768px) / (1200 - 768)));
 @title-testata-home-font: @testata-font;
 @title-testata-home-color: @white-color;
 @title-testata-home-weight: 700;
-/**/
-/*@subtitle-testata-home-size: 2.5rem;*/
+
 @subtitle-testata-home-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768)));
-@subtitle-testata-home-font: @primary-font; /*@alternative-font;*/
+@subtitle-testata-home-font: @testata-font;
 @subtitle-testata-home-color: @white-color;
 @subtitle-testata-home-weight: 700;
 /*-----------------------------------
 ////| BANNER TESTATA HOME - 55% |////
 -----------------------------------*/
-/*@bg-width: 55%;
+/*@bg-width-768: 100%;
+@bg-max-width-768: 100%;
+@bg-path-768: polygon(0 0%, 99% 0%, 100% 101%, 0% 100%);
+
+@bg-width: 55%;
 @bg-max-width: 55%;
 @bg-size: cover;
 @bg-path: polygon(0 0%, 99% 0%, 80% 101%, 0% 100%);
 
 @bg-testata-opacity: @bg-primary-color;
-@bg-color-top-opacity: lighten(@primary-color, 25%);
-@bg-color-bottom-opacity: @primary-color;
-
-@title-testata-home-size: 4rem;
+@bg-testata-color: @bg-fixedtop-color-sfumato-alpha;
+@title-testata-home-size: calc(18px + (28 - 18) * ((100vw - 768px) / (1200 - 768)));
 @title-testata-home-font: @testata-font;
 @title-testata-home-color: @white-color;
 @title-testata-home-weight: 700;
 
-@subtitle-testata-home-size: 2.5rem;
-@subtitle-testata-home-font: @primary-font;
-@subtitle-testata-home-color: @white-color;*/
+@subtitle-testata-home-size: 1.5rem;
+@subtitle-testata-home-font: @testata-font;
+@subtitle-testata-home-color: @white-color;
+@subtitle-testata-home-weight: 400;
+
+@prezzo-testata-home-size: 2.5rem;
+@prezzo-testata-home-font: @testata-font;
+@prezzo-testata-home-color: @white-color;
+@prezzo-testata-home-weight: 400;*/
 /*----------------------------------
 /////////| BANNER FASCIA |//////////
 ----------------------------------*/

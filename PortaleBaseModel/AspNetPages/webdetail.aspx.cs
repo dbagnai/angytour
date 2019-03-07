@@ -283,7 +283,7 @@ public partial class _webdetail : CommonPage
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column3.Visible = false;
                 divSearch.Visible = false;
                 //ContaArticoliPerperiodo(CodiceTipologia);
@@ -335,7 +335,7 @@ public partial class _webdetail : CommonPage
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column3.Visible = false;
                 divSearch.Visible = true;
                 //ContaArticoliPerperiodo(CodiceTipologia);
@@ -380,7 +380,7 @@ public partial class _webdetail : CommonPage
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
 
                 column3.Visible = false;
 
@@ -427,7 +427,7 @@ public partial class _webdetail : CommonPage
             case "rif000009":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -458,7 +458,7 @@ public partial class _webdetail : CommonPage
             case "rif000004":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -485,7 +485,7 @@ public partial class _webdetail : CommonPage
             case "rif000005":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -512,7 +512,7 @@ public partial class _webdetail : CommonPage
             case "rif000006":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
@@ -539,7 +539,7 @@ public partial class _webdetail : CommonPage
             case "rif000007":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
+                column2.Attributes["class"] = "col-12 col-sm-10";
                 column2.Visible = true;
                 column3.Visible = false;
                 divSearch.Visible = false;
