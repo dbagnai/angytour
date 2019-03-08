@@ -3263,7 +3263,8 @@ button.js-roundedpush:hover {
 /* ---------------------------------
  TEMPLATE - TESTATA HOME FULLSCREEN 
 --------------------------------- */
-/*@media screen and (min-width: 1025px) {
+/*si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
+@media screen and (min-width: 1025px) {
     #divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 81.6px) !important;
@@ -3332,7 +3333,7 @@ button.js-roundedpush:hover {
         display: none !important;
     }
 
-}*/
+}
 /* ---------------------------------
  --- END TESTATA HOME FULLSCREEN ---
 --------------------------------- */
@@ -3341,6 +3342,7 @@ button.js-roundedpush:hover {
 /* ---------------------------------
 --------- TEMPLATE POLYGON ---------
 --------------------------------- */
+/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
 
 /*-- BANNER TESTATA HOME POLYGON -*/
 /*.tp-caption.very_big_white {
@@ -3439,6 +3441,20 @@ li:nth-child(2n) .polygon-backdrop-b3 {
 }
 li:nth-child(2n+1) .polygon-backdrop-b3 {
     background: @bg-primary-color-sfumato;
+}
+
+/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop {
+    /*background: @bg-sottomenu-color-sfumato;*/
+    background: @bg-primary-color-sfumato !important;
+}
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+    background: @bg-primary-color-sfumato !important;
+}
+@media screen and (max-width: 540px) {
+    .card.rounded-responsive {
+        border-radius: 0 !important;
+    }
 }
 
 /*----ISOTOPE RISULTATI POLYGON ----*/

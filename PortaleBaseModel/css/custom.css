@@ -3062,82 +3062,70 @@ button.js-roundedpush:hover {
 /* ---------------------------------
  TEMPLATE - TESTATA HOME FULLSCREEN 
 --------------------------------- */
-/*@media screen and (min-width: 1025px) {
-    #divContainerb1 {
-        background-color: #eee;
-        height: calc(100vh - 81.6px) !important;
-    }
-
-    .fixedtop-home {
-        display: none !important;
-    }
-
-    .fixednav-home {
-        top: 0;
-        background-color: transparent;
-    }
-
-    .bckColor2-home {
-        -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-        -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-        box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
-    }
-
-    .headerspacer-home {
-        padding-top: 0;
-    }
-
-    .fulllogobckdark-home {
-        width: 400px;
-        height: 119px;
-        padding: 5px;
-        background: url(/images/main_logo_d_b.png) center center;
-        background-size: 95% 95%;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-    }
-
-    .menu-home {
-        color: #fff !important;
-        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
-
-        &:hover {
-            color: @color-sottomeu !important;
-        }
-
-        &:active {
-            color: @color-sottomeu !important;
-        }
-    }
-
-    .buttonmenu-home {
-        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .buttonmenu-span-home {
-        text-shadow: none !important;
-    }
-
-    .menu-home.buttonmenu-span-home {
-        color: @menu-color !important;
-    }
-
-    .catalogo-menu-ul-home {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
-    .indicator-home {
-        display: none !important;
-    }
-
-}*/
+/*si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
+@media screen and (min-width: 1025px) {
+  #divContainerb1 {
+    background-color: #eee;
+    height: calc(100vh - 81.6px) !important;
+  }
+  .fixedtop-home {
+    display: none !important;
+  }
+  .fixednav-home {
+    top: 0;
+    background-color: transparent;
+  }
+  .bckColor2-home {
+    -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+    -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+    box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
+  }
+  .headerspacer-home {
+    padding-top: 0;
+  }
+  .fulllogobckdark-home {
+    width: 400px;
+    height: 119px;
+    padding: 5px;
+    background: url(/images/main_logo_d_b.png) center center;
+    background-size: 95% 95%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+  }
+  .menu-home {
+    color: #fff !important;
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  .menu-home:hover {
+    color: #f3c649 !important;
+  }
+  .menu-home:active {
+    color: #f3c649 !important;
+  }
+  .buttonmenu-home {
+    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  .buttonmenu-span-home {
+    text-shadow: none !important;
+  }
+  .menu-home.buttonmenu-span-home {
+    color: #032f2f !important;
+  }
+  .catalogo-menu-ul-home {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .indicator-home {
+    display: none !important;
+  }
+}
 /* ---------------------------------
  --- END TESTATA HOME FULLSCREEN ---
 --------------------------------- */
 /* ---------------------------------
 --------- TEMPLATE POLYGON ---------
 --------------------------------- */
+/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
 /*-- BANNER TESTATA HOME POLYGON -*/
 /*.tp-caption.very_big_white {
     width: @bg-width !important;
@@ -3236,6 +3224,19 @@ li:nth-child(2n) .polygon-backdrop-b3 {
 }
 li:nth-child(2n+1) .polygon-backdrop-b3 {
   background: linear-gradient(45deg, #0081d1, #00aeef);
+}
+/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop {
+  /*background: @bg-sottomenu-color-sfumato;*/
+  background: linear-gradient(45deg, #0081d1, #00aeef) !important;
+}
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+  background: linear-gradient(45deg, #0081d1, #00aeef) !important;
+}
+@media screen and (max-width: 540px) {
+  .card.rounded-responsive {
+    border-radius: 0 !important;
+  }
 }
 /*----ISOTOPE RISULTATI POLYGON ----*/
 .image-polygon {
