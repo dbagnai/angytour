@@ -22,16 +22,21 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*#555;*/
 /* sistema di colori a triade */
 /* sistema di colori tonali */
+/**/
 /*#d8e056;*/
 /* fascia catalogo */
 /* fascia catalogo link active */
-/*#d8e056;*/
-/* fascia catalogo */
+/* colore sotto-menu per decorazione titoli*/
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
 /**/
 /**/
+/*----------------------------------
+//////////////| LOGO |//////////////
+----------------------------------*/
+/*variabile*/
+/*fissa*/
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
@@ -284,7 +289,7 @@ a:hover {
   height: 119px;
 }
 .shrinklogo {
-  width: 206px;
+  width: calc((400px * 61) / 119);
   height: 61px;
 }
 .fulllogo {
@@ -293,12 +298,12 @@ a:hover {
 }
 @media (max-width: 1179px) {
   .fulllogobckdark {
-    width: 206px;
+    width: calc((400px * 61) / 119);
     height: 61px;
-    margin-left: calc(100% - 170px);
+    margin-left: calc(100% - ((170 * calc((400px * 61) / 119)) / 206));
   }
   .shrinklogo {
-    width: 206px;
+    width: calc((400px * 61) / 119);
     height: 61px;
   }
 }
@@ -2556,6 +2561,22 @@ select.form-control:not([size]):not([multiple]) {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   text-align: left;
 }
+.errormessageform::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.6em solid transparent;
+  border-right: 0.6em solid transparent;
+  border-bottom: 0.6em solid transparent;
+  border-left: 0.6em solid;
+  right: -1.2em;
+  bottom: 20px;
+  position: absolute;
+  color: #fff;
+}
 .errormessageformprivacy {
   color: red;
   width: 40%;
@@ -2567,7 +2588,22 @@ select.form-control:not([size]):not([multiple]) {
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   text-align: left;
-  bottom: 140px;
+  top: 190px;
+}
+.errormessageformprivacy::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.6em solid transparent;
+  border-right: 0.6em solid transparent;
+  border-bottom: 0.6em solid transparent;
+  border-left: 0.6em solid;
+  right: -1.2em;
+  position: absolute;
+  color: #fff;
 }
 .errormessageform ul {
   margin-bottom: 0.8rem !important;

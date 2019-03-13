@@ -21,10 +21,10 @@
 @tonal-secondary-color: mix(@bg-primary-color, mediumvioletred);
 @tonal-tertiary-color: mix(@bg-primary-color, lightseagreen);
 @tonal-quaternary-color: mix(@bg-primary-color, mintcream);
-
+/**/
 @color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
 @color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
-@color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.99); /*#d8e056;*/ /* fascia catalogo */
+@color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.99); /* colore sotto-menu per decorazione titoli*/
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
@@ -41,6 +41,11 @@
 @color-sottomeu-gradient1: #f4a300;
 @color-sottomeu-gradient2: #fc0;
 @bg-sottomenu-color-sfumato: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2);
+/*----------------------------------
+//////////////| LOGO |//////////////
+----------------------------------*/
+@larghezza-logo: 400px; /*variabile*/
+@larghezza-logo-smart: calc((@larghezza-logo * 61) / 119); /*fissa*/
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
