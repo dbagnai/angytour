@@ -88,7 +88,13 @@ namespace WelcomeLibrary.DOM
             get { return _Indirizzo; }
             set { _Indirizzo = value; }
         }
-     
+
+        private string _Emailpec;
+        public string Emailpec
+        {
+            get { return _Emailpec; }
+            set { _Emailpec = value; }
+        }
         private string _Email;
         public string Email
         {
@@ -240,6 +246,8 @@ namespace WelcomeLibrary.DOM
             this.CodiceREGIONE = string.Empty;
             this.Cognome = string.Empty;
             this.Email = string.Empty;
+            this.Emailpec = string.Empty;
+
             this.Consenso1 = false;
             this.Consenso2 = false;
             this.Consenso3 = false;
@@ -273,6 +281,8 @@ namespace WelcomeLibrary.DOM
             this.card = new Card(tmp.card);
             this.Cap = tmp.Cap;
             this.Email = tmp.Email;
+            this.Emailpec = tmp.Emailpec;
+
             this.Cellulare = tmp.Cellulare;
             this.CodiceNAZIONE = tmp.CodiceNAZIONE;
             this.CodiceCOMUNE =tmp.CodiceCOMUNE;

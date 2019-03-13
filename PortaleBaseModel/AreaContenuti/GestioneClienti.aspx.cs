@@ -382,6 +382,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Cap = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCA"))).Value;
         cli.Indirizzo = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtIN"))).Value;
         cli.Telefono = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtTE"))).Value;
+        cli.Emailpec = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtEMP"))).Value;
         cli.Cellulare = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCE"))).Value;
         cli.Spare2 = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtFA"))).Value;
         cli.Spare1 = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtWE"))).Value;
@@ -546,6 +547,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Cap = txtCA.Value.Trim();
         cli.Indirizzo = txtIN.Value.Trim();
         cli.Telefono = txtTE.Value.Trim();
+        cli.Emailpec = txtEMP.Value.Trim();
         cli.Cellulare = txtCE.Value.Trim();
         cli.Spare2 = txtFA.Value.Trim();
         cli.Spare1 = txtWE.Value.Trim();
@@ -645,6 +647,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         txtCA.Value = "";
         txtIN.Value = "";
         txtTE.Value = "";
+        txtEMP.Value = "";
         txtCE.Value = "";
         txtFA.Value = "";
         txtWE.Value = "";

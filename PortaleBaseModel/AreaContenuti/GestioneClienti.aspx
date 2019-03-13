@@ -360,13 +360,13 @@
                 </asp:UpdateProgress>
                 <table style="width: 100%; background-color: black; color: white">
                     <tr>
-                        <td style="width: 50px"> Id</td>
-                        <td style=""> Cognome o Rag.Soc.</td>
-                        <td style="width: 150px"> Nome</td>
-                        <td style="width: 160px"> Email</td>
-                        <td style="width: 100px"> Lingua</td>
-                        <td style="width: 150px"> Tipo cliente</td>
-                        <td style="width: 40px"> Valido</td>
+                        <td style="width: 50px">Id</td>
+                        <td style="">Cognome o Rag.Soc.</td>
+                        <td style="width: 150px">Nome</td>
+                        <td style="width: 160px">Email</td>
+                        <td style="width: 100px">Lingua</td>
+                        <td style="width: 150px">Tipo cliente</td>
+                        <td style="width: 40px">Valido</td>
                     </tr>
                 </table>
                 <asp:Repeater ID="rptClienti" runat="server" EnableViewState="true" OnItemDataBound="rptClienti_OnItemDataBound">
@@ -471,6 +471,19 @@
                                         <td>
                                             <div style="overflow: hidden; width: auto">
                                                 <input id="txtIN" maxlength="300" class="txtInputPopup" runat="server" value='<%# Eval("Indirizzo") %>' />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; background-color: Black; color: White;">
+                                            <div style="overflow: hidden; width: 80px">
+                                                C.D./Pec
+                                               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="overflow: hidden; width: auto">
+                                                <input id="txtEMP" maxlength="500" class="txtInputPopup" runat="server" value='<%# Eval("Emailpec") %>' />
                                             </div>
                                         </td>
                                     </tr>
@@ -682,7 +695,7 @@
                                         </div>
                                     </td>
                                     <td style="width: 40px">
-                                        <div style="overflow: hidden; width: 40px;text-align:center">
+                                        <div style="overflow: hidden; width: 40px; text-align: center">
                                             <asp:CheckBox ID="chkVD" runat="server" Checked='<%# Eval("Validato") %>' />
                                         </div>
                                     </td>
@@ -711,12 +724,13 @@
                         <table style="width: 100%; background-color: Black; color: White; font-size: 12pt">
                             <tr>
                                 <td style="width: 40px">
-                                    <div style="width: 40px"> Codice </div>
+                                    <div style="width: 40px">Codice </div>
                                 </td>
                                 <td>
-                                    <div> Cognome/RagSoc
+                                    <div>
+                                        Cognome/RagSoc
                                         <asp:RequiredFieldValidator ID="reqRagsoc" ErrorMessage="*" ValidationGroup="inserimento"
-                                                runat="server" ControlToValidate="txtCG"></asp:RequiredFieldValidator>
+                                            runat="server" ControlToValidate="txtCG"></asp:RequiredFieldValidator>
                                     </div>
                                 </td>
                                 <td style="width: 150px">
@@ -735,8 +749,9 @@
                                 </td>
                                 <td style="width: 70px">
                                     <div style="width: 70px">
-                                        Lingua <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ErrorMessage="*" ValidationGroup="inserimento"
-                                                runat="server" ControlToValidate="ddlLingua"></asp:RequiredFieldValidator>
+                                        Lingua
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ErrorMessage="*" ValidationGroup="inserimento"
+                                            runat="server" ControlToValidate="ddlLingua"></asp:RequiredFieldValidator>
                                     </div>
                                 </td>
                                 <td style="width: 80px">
@@ -797,7 +812,7 @@
                                     </div>
                                 </td>
                                 <td style="width: 40px">
-                                    <div style="overflow: hidden; width: 40px;text-align:center">
+                                    <div style="overflow: hidden; width: 40px; text-align: center">
                                         <asp:CheckBox ID="chkVD" runat="server" Checked='<%# Eval("Validato") %>' />
                                     </div>
                                 </td>
@@ -893,6 +908,19 @@
                                 <td>
                                     <div style="overflow: hidden; width: 100%">
                                         <input id="txtIN" maxlength="300" class="txtInputPopup" runat="server" value="" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 200px; background-color: Black; color: White;">
+                                    <div style="overflow: hidden; width: 100%">
+                                        C.D./Pec
+                                       
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="overflow: hidden; width: 100%">
+                                        <input id="txtEMP" maxlength="500" class="txtInputPopup" runat="server" value="" />
                                     </div>
                                 </td>
                             </tr>

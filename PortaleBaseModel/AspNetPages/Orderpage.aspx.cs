@@ -279,6 +279,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                 inpEmail.Value = c.Email;
             if (string.IsNullOrWhiteSpace(inpTel.Value))
                 inpTel.Value = c.Telefono;
+            if (string.IsNullOrWhiteSpace(inpPec.Value))
+                inpPec.Value = c.Emailpec;
         }
 
 
@@ -459,17 +461,18 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Dataordine = System.DateTime.Now;
                 totali.CodiceOrdine = CodiceOrdine;
                 totali.Indirizzofatturazione = cliente.Indirizzo + "<br/>";
-                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + " (" + cliente.CodicePROVINCIA + ")<br/>";
+                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + cliente.CodicePROVINCIA + ")<br/>";
                 totali.Indirizzofatturazione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
                 totali.Indirizzofatturazione += "Ph: " + cliente.Telefono + "<br/>";
                 totali.Indirizzofatturazione += "Vat: " + cliente.Pivacf + "<br/>";
+                totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
 
                 //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente )
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
                     indirizzospedizione = inpIndirizzoS.Value + "<br/>";
-                    indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + " (" + inpProvinciaS.Value + ")<br/>";
+                    indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + inpProvinciaS.Value + ")<br/>";
                     indirizzospedizione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
                     indirizzospedizione += "Ph: " + inpTelS.Value + "<br/>";
                     totali.Indirizzospedizione = indirizzospedizione;
@@ -1183,6 +1186,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             cli.ConsensoPrivacy = true;
             cli.Validato = true;
             cli.Email = cli.Email.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+            cli.Emailpec = cli.Emailpec.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
             Cliente _tmp = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email);
             if ((_tmp != null && _tmp.Id_cliente != 0))
                 cli.Id_cliente = _tmp.Id_cliente;
@@ -1205,6 +1209,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         }
         cliente.Email = inpEmail.Value;
+        cliente.Emailpec = inpPec.Value;
 
         cliente.Pivacf = inpPiva.Value;
         cliente.Indirizzo = inpIndirizzo.Value;
@@ -1228,6 +1233,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             ctmp.Nome = cliente.Nome;
             ctmp.Cognome = cliente.Cognome;
             ctmp.Email = cliente.Email;
+            ctmp.Emailpec = cliente.Emailpec;
             ctmp.Pivacf = cliente.Pivacf;
             ctmp.Indirizzo = cliente.Indirizzo;
 

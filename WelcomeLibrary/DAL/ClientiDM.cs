@@ -24,7 +24,7 @@ namespace WelcomeLibrary.DAL
             string query = "";
             //query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Email=@Email";
 
-            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email like @Email";
+            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email like @Email";
 
             //if (parColl == null || parColl.Count < 2) return list;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -86,6 +86,9 @@ namespace WelcomeLibrary.DAL
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));
+
+                        if (!reader["Emailpec"].Equals(DBNull.Value))
+                            item.Emailpec = reader.GetString(reader.GetOrdinal("Emailpec"));
                         if (!reader["Indirizzo"].Equals(DBNull.Value))
                             item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));
                         if (!reader["IPclient"].Equals(DBNull.Value))
@@ -213,6 +216,9 @@ namespace WelcomeLibrary.DAL
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));
+
+                        if (!reader["Emailpec"].Equals(DBNull.Value))
+                            item.Emailpec = reader.GetString(reader.GetOrdinal("Emailpec"));
                         if (!reader["Indirizzo"].Equals(DBNull.Value))
                             item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));
                         if (!reader["IPclient"].Equals(DBNull.Value))
@@ -301,7 +307,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -349,6 +355,8 @@ namespace WelcomeLibrary.DAL
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));
+                        if (!reader["Emailpec"].Equals(DBNull.Value))
+                            item.Emailpec = reader.GetString(reader.GetOrdinal("Emailpec"));
                         if (!reader["Indirizzo"].Equals(DBNull.Value))
                             item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));
                         if (!reader["IPclient"].Equals(DBNull.Value))
@@ -744,7 +752,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             try
             {
-                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
+                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Emailpec,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -794,6 +802,8 @@ namespace WelcomeLibrary.DAL
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));
+                        if (!reader["Emailpec"].Equals(DBNull.Value))
+                            item.Emailpec = reader.GetString(reader.GetOrdinal("Emailpec"));
                         if (!reader["Indirizzo"].Equals(DBNull.Value))
                             item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));
                         if (!reader["IPclient"].Equals(DBNull.Value))
@@ -928,6 +938,8 @@ namespace WelcomeLibrary.DAL
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("email"));
                     sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("emailpec"));
+                    sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("telefono"));
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("cellulare"));
@@ -986,6 +998,8 @@ namespace WelcomeLibrary.DAL
                         sb.Append(";");
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Email));
                         sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Emailpec));
+                        sb.Append(";");
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(c.Telefono));
                         sb.Append(";");
 
@@ -1042,7 +1056,7 @@ namespace WelcomeLibrary.DAL
                 //query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
                 //query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email ";
 
-                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard  FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD ";
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard  FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD ";
 
                 string queryfilter = " WHERE Email like @Email ";
 
@@ -1232,6 +1246,8 @@ namespace WelcomeLibrary.DAL
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));//
+                        if (!reader["Emailpec"].Equals(DBNull.Value))
+                            item.Emailpec = reader.GetString(reader.GetOrdinal("Emailpec"));
                         if (!reader["Indirizzo"].Equals(DBNull.Value))
                             item.Indirizzo = reader.GetString(reader.GetOrdinal("Indirizzo"));//
                         if (!reader["IPclient"].Equals(DBNull.Value))
@@ -1397,6 +1413,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p18);
             SQLiteParameter p17 = new SQLiteParameter("@Email", item.Email);
             parColl.Add(p17);
+            SQLiteParameter p17b = new SQLiteParameter("@Emailpec", item.Emailpec);
+            parColl.Add(p17b);
             SQLiteParameter p25 = new SQLiteParameter("@Telefono", item.Telefono);
             parColl.Add(p25);
             SQLiteParameter p3 = new SQLiteParameter("@Cellulare", item.Cellulare);//OleDbType.VarChar
@@ -1462,7 +1480,7 @@ namespace WelcomeLibrary.DAL
             {
                 //UPdate
                 query = "UPDATE [TBL_CLIENTI] SET Id_card=@Id_card,Nome=@Nome,Cognome=@Cognome,CodiceNAZIONE=@CodiceNAZIONE,CodiceREGIONE=@CodiceREGIONE,CodicePROVINCIA=@CodicePROVINCIA,CodiceCOMUNE=@CodiceCOMUNE";
-                query += ",Cap=@Cap,Indirizzo=@Indirizzo,Email=@Email,Telefono=@Telefono,Cellulare=@Cellulare,Professione=@Professione,IPclient=@IPclient,Validato=@Validato,TestoFormConsensi=@TestoFormConsensi";
+                query += ",Cap=@Cap,Indirizzo=@Indirizzo,Email=@Email,Emailpec=@Emailpec,Telefono=@Telefono,Cellulare=@Cellulare,Professione=@Professione,IPclient=@IPclient,Validato=@Validato,TestoFormConsensi=@TestoFormConsensi";
                 query += ",DataNascita=@DataNascita,DataInvioValidazione=@DataInvioValidazione,DataRicezioneValidazione=@DataRicezioneValidazione";
                 query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto,Serialized=@Serialized";
                 query += " WHERE [Id_cliente] = " + item.Id_cliente;
@@ -1471,11 +1489,11 @@ namespace WelcomeLibrary.DAL
             {
                 //Insert
                 query = "INSERT INTO TBL_CLIENTI (Id_card,Nome,Cognome,CodiceNAZIONE,CodiceREGIONE,CodicePROVINCIA,CodiceCOMUNE";
-                query += ",Cap,Indirizzo,Email,Telefono,Cellulare,Professione,IPclient,Validato,TestoFormConsensi,DataNascita,DataInvioValidazione,DataRicezioneValidazione";
+                query += ",Cap,Indirizzo,Email,Emailpec,Telefono,Cellulare,Professione,IPclient,Validato,TestoFormConsensi,DataNascita,DataInvioValidazione,DataRicezioneValidazione";
                 query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto,Serialized)";
                 query += " values ( ";
                 query += "@Id_card,@Nome,@Cognome,@CodiceNAZIONE,@CodiceREGIONE,@CodicePROVINCIA,@CodiceCOMUNE";
-                query += ",@Cap,@Indirizzo,@Email,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione";
+                query += ",@Cap,@Indirizzo,@Email,@Emailpec,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione";
                 query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto,@Serialized )";
             }
 

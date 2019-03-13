@@ -135,6 +135,14 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
                                     </div>
                                 </div>
+                                <div class="form-row row">
+                                    <div class="col-lg-12 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTestoPec") %>
+                                        </label>
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPec" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPec") %>' />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -303,7 +311,7 @@
                                                 </td>
                                                 <td class="cart-quantity">
                                                     <asp:Label runat="server"
-                                                        ID="lblQuantita" class="quantity-order" style="margin-left: calc(50% - 25px);" Text='<%# Eval("Numero") %>' />
+                                                        ID="lblQuantita" class="quantity-order" Style="margin-left: calc(50% - 25px);" Text='<%# Eval("Numero") %>' />
                                                 </td>
                                                 <td class="cart-total" style="text-align: right !important;">
                                                     <span><%# TotaleArticolo( Eval("Numero") ,Eval("Prezzo") )  + " €" %></span>
@@ -435,7 +443,7 @@
                                                 <div class="float-left mt-0 mr-2" style="width: 25px">
                                                     <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" autopostback="true" runat="server" id="inpBonifico" />
                                                 </div>
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top:6px;">
+                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
                                                     <b><%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
                                                     <%= references.ResMan("Common", Lingua,"chkbacs") %>
                                                 </div>
@@ -467,7 +475,7 @@
                                                     <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
                                                 </div>
 
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top:6px;">
+                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
                                                     <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b><br />
                                                     <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                 </div>
