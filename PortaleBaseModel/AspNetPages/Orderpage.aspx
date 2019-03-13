@@ -39,7 +39,7 @@
 
                 <div class="row">
 
-                    <div class="col-12 col-sm-7">
+                    <div class="col-12 col-lg-7">
                         <%-- FORM INDIRIZZO FATTURAZIONE --%>
                         <div class="widget bill-address">
                             <%--  <h3>
@@ -399,7 +399,7 @@
 
 
                     <%-- COLONNA METODO PAGAMENTO E ACQUISTO --%>
-                    <div class="col-12 col-sm-5">
+                    <div class="col-12 col-lg-5">
                         <div class="position-sticky" style="top: 120px" id="divColumnsticky">
                             <div class="mb-5 mb-sm-3 p-3 bg-light-color">
 
@@ -482,8 +482,9 @@
                                             </div>
                                         </li>
                                     </ul>
-
+                                    <div class="col-12 col-sm-8 mx-auto px-0">
                                     <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
+                                        </div>
                                 </div>
                             </div>
 

@@ -191,7 +191,7 @@
                         <!-- TELEFONO --->
                         <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                             <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
-                                <i class="fas fa-phone mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
+                                <i class="fas fa-phone fa-flip-horizontal mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
                                 </span></a>
                         </li>
                     </ul>

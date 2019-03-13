@@ -16,7 +16,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 @secondary-font: 'Raleway', sans-serif; /*sotto-titoli-principali*/
 @base-font: 'Roboto', sans-serif; /*menu - body*/
 @alternative-font: 'EBGaramond12-Regular', serif;
-@testata-font: 'Fira Sans', sans-serif; /*'Roboto Condensed', sans-serif;*/
+@testata-font: 'Montserrat', sans-serif; /*'Roboto Condensed', sans-serif;*/
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -48,6 +48,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .bg-color-sottomeu {
     background-color: @color-sottomeu !important;
+    background: @bg-sottomenu-color-sfumato !important;
 }
 
 .bg-color-sottomeu-active {
@@ -78,6 +79,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     color: @primary-color !important;
 }
 
+.tx-sottomenu-color {
+    color: @color-sottomeu !important;
+}
+
 .bd-primary-color {
     border-color: @bg-primary-color !important;
 }
@@ -103,7 +108,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 .color-sottomeu {
-    color: @color-sottomeu
+    color: @color-sottomeu;
 }
 
 .black-color {
@@ -161,7 +166,8 @@ a {
 ----------- FIXED - TOP -----------
 ----------------------------------*/
 .fixedtop {
-    background-color: @bg-primary-color;
+    background-color: @bg-primary-color; /*colore intero on*/
+    /*background: @bg-fixedtop-color-sfumato;*/ /*colore sfumato off*/
     position: fixed;
     top: 0px;
     height: 40px;
@@ -282,7 +288,7 @@ i .fa {
     padding: 10px 0 20px;
     display: none;
     position: absolute;
-    z-index: 99;
+    z-index: 99 !important;
     min-width: 180px;
     white-space: nowrap;
     background: #fff;
@@ -340,12 +346,13 @@ i .fa {
         /*display: block !important;*/
         width: calc(100% + 40px);
         left: -20px;
-        background-color: @color-sottomeu;
         opacity: 1 !important;
         border: none;
         padding: 0px 55px;
         background-image: @pattern-image;
         background-size: @pattern-sottomenu-size;
+        background-color: @color-sottomeu;
+        /*background: @bg-primary-color-sfumato;*/ /*in caso di sfondo sfumto*/
         /*SOTTO MENU A COLONNE ON/OFF (si può attivare soltanto con SOTTO SOTTO MENU OFF) */
         /*-webkit-column-count: 4;
         -moz-column-count: 4;
@@ -359,6 +366,10 @@ i .fa {
         padding-bottom: 10px;
         padding-left: calc((100% - 1110px) / 2);
         padding-right: calc((100% - 1110px) / 2);*/
+    }
+
+    .menuzord-menu ul.dropdown.visible-ok {
+        z-index: 98 !important;
     }
 
     .visible-ok {
@@ -428,8 +439,13 @@ i .fa {
         content: "\f107";
     }
 
-    .menuzord-menu li.catalogo-menu ul {
-        /*SOTTO SOTTO MENU ON OFF*/
+    /*SOTTO SOTTO MENU OFF*/
+    /*.menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown, .menuzord-menu li.catalogo-menu ul.dropdown li .indicator {
+        display: none !important;
+    }*/
+
+    /*SOTTO SOTTO MENU ON OFF*/
+    .menuzord-menu li.catalogo-menu ul {        
         border-bottom: 1px solid @bg-primary-color !important;
     }
 
@@ -603,7 +619,7 @@ div#blocco-lgo-home {
     word-wrap: break-word;
     /*Start svg decorazione sotto il titolo*/
     padding-bottom: 21px;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
     background-size: 135px 21px;
 
     &.noafter {
@@ -816,7 +832,8 @@ a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="butto
     font-weight: normal;
     position: relative;
     line-height: 1 !important;
-    padding: .75rem 2rem !important;
+    /*padding: .75rem 2rem !important;*/
+    padding: 1rem 2rem !important;
     display: inline-block;
     height: auto;
     -moz-box-shadow: none;
@@ -830,9 +847,12 @@ a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="butto
     -o-transition: background 0.2s, opacity 0.2s;
     transition: background 0.2s, opacity 0.2s;
     background: @bg-button-color;
-    -webkit-border-radius: 3px;
+    /*-webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 3px;*/
+    -webkit-border-radius: 1.4rem; /*rotondo*/
+    -moz-border-radius: 1.4rem; /*rotondo*/
+    border-radius: 1.4rem; /*rotondo*/
     color: @button-color !important;
     text-transform: uppercase !important;
     text-align: center;
@@ -873,7 +893,8 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     font-weight: normal;
     position: relative;
     line-height: 1 !important;
-    padding: .75rem 2rem !important;
+    /*padding: .75rem 2rem !important;*/
+    padding: 1rem 2rem !important;
     margin: 10px 5px;
     height: auto;
     -webkit-box-shadow: none;
@@ -890,9 +911,12 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     transition: background 0.2s, opacity 0.2s;
     margin: 0 0 0 0 !important;
     background: @white-color !important;
-    -webkit-border-radius: 3px;
+    /*-webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 3px;*/
+    -webkit-border-radius: 1.4rem; /*rotondo*/
+    -moz-border-radius: 1.4rem; /*rotondo*/
+    border-radius: 1.4rem; /*rotondo*/
     border: 1px solid @button-outline-color;
     color: @button-outline-color !important;
     text-align: center;
@@ -917,7 +941,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
 .btn-banner, .btn-banner:active, .btn-banner:visited, .btn-banner:focus .btn .btn-banner, .btn .btn-banner:active, .btn .btn-banner:visited, .btn .btn-banner:focus {
     &:extend(.btn-black-outline);
     background: #ffc107 !important;
-    font-size: 1.1vw !important;
+    font-size: 1.0vw !important;
     color: @button-outline-hover-color !important;
 }
 
@@ -940,7 +964,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         border-radius: 25px;
 
         &:hover {
-            background-color: @bg-button-hover-color !important;
+            background: @bg-button-hover-color !important;
             color: @button-hover-color !important;
         }
     }
@@ -1397,7 +1421,7 @@ ul.footer-category-list {
     white-space: nowrap;
     margin-bottom: 10px !important;
     padding-bottom: 35px !important;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
     background-size: 135px 21px;
 }
 /*Start svg decorazione banner-top-home*/
@@ -2352,6 +2376,17 @@ select.form-control:not([size]):not([multiple]) {
 .mbr-overlay-white {
     background-color: @bg-testata-opacity-white;
 }
+
+.mbr-overlay-sfumato {
+    opacity: 1;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, @bg-light-color, rgba(@bg-light-color, 0.50));
+}
 /*----------------------------------
 ----------- ISOTOPE BLOG -----------
 ----------------------------------*/
@@ -2542,7 +2577,7 @@ select.form-control:not([size]):not([multiple]) {
         transform: translate(-100%, -50%);
     }
     /*tolgo l'effetto al pulsante prenota*/
-    .menuzord-menu li:nth-child(6) a:before, .menuzord-menu li:nth-child(6) a:after {
+    .menuzord-menu li:nth-child(7) a:before, .menuzord-menu li:nth-child(7) a:after {
         border: none;
     }
 
@@ -3059,7 +3094,7 @@ button.js-roundedpush:hover {
 }
 
 .breadcrumbs > ul > li {
-    padding:5px 0;
+    padding: 5px 0;
 }
 
 
@@ -3151,11 +3186,85 @@ button.js-roundedpush:hover {
     }
 }
 
+/* ---------------------------------
+---------- SKILLS ANIMATE ----------
+--------------------------------- */
+
+.skills {
+    width: inherit;
+    position: relative;
+}
+
+.skills ul {
+    margin-top: 0px;
+    list-style: none;
+    padding-inline-start: 0;
+
+    & > li {
+        margin-bottom: 50px;
+        background: transparent;
+        overflow: hidden;
+        position: relative;
+
+        & div {
+            margin-top: 28px;
+            height: 6px;
+            border-radius: 3px;
+            background-color: @bg-secondary-color;
+        }
+
+        & em {
+            font-family: @menu-font;
+            color: @color-sottomeu;
+            font-size: 18px;
+            position: relative;
+            top: -30px;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        & span {
+            height: 6px;
+            border-radius: 3px;
+            background: @primary-color;
+            position: absolute;
+        }
+    }
+
+    & > li:nth-last-child(1) {
+        margin-bottom: 0px;
+    }
+}
+
+.skills1 {
+    width: @skills1;
+}
+
+.skills2 {
+    width: @skills2;
+}
+
+.skills3 {
+    width: @skills3;
+}
+
+.skills4 {
+    width: @skills4;
+}
+
+
+/*///////////////////////////////////
+:::::::::::::          ::::::::::::::
+::::::::::::: TEMPLATE ::::::::::::::
+:::::::::::::          ::::::::::::::
+///////////////////////////////////*/
+
 
 /* ---------------------------------
----- TEMPLATE - HOME FULLSCREEN ----
+ TEMPLATE - TESTATA HOME FULLSCREEN 
 --------------------------------- */
-/*@media screen and (min-width: 1025px) {
+/*si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
+@media screen and (min-width: 1025px) {
     #divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 81.6px) !important;
@@ -3224,70 +3333,196 @@ button.js-roundedpush:hover {
         display: none !important;
     }
 
-}*/
-
+}
 /* ---------------------------------
----------- SKILLS ANIMATE ----------
+ --- END TESTATA HOME FULLSCREEN ---
 --------------------------------- */
 
-.skills {
-    width: inherit;
-    position: relative;
+
+/* ---------------------------------
+--------- TEMPLATE POLYGON ---------
+--------------------------------- */
+/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
+
+/*-- BANNER TESTATA HOME POLYGON -*/
+/*.tp-caption.very_big_white {
+    width: @bg-width !important;
+    max-width: @bg-max-width !important;
+    background-size: @bg-size !important;
+    -webkit-clip-path: @bg-path;
+    clip-path: @bg-path;
+    background: @bg-testata-color;
+    padding: 20px 20px;
+    padding-right: calc(14% - 3rem);
 }
-
-.skills ul {
-    margin-top: 0px;
-    list-style: none;
-    padding-inline-start: 0;
-
-    & > li {
-        margin-bottom: 50px;
-        background: transparent;
-        overflow: hidden;
-        position: relative;
-
-        & div {
-            margin-top: 28px;
-            height: 6px;
-            border-radius: 3px;
-            background-color: @bg-secondary-color;
-        }
-
-        & em {
-            font-family: @menu-font;
-            color: @color-sottomeu;
-            font-size: 18px;
-            position: relative;
-            top: -30px;
-            font-style: normal;
-            font-weight: 600;
-        }
-
-        & span {
-            height: 6px;
-            border-radius: 3px;
-            background: @primary-color;
-            position: absolute;
-        }
-    }
-
-    & > li:nth-last-child(1) {
-        margin-bottom: 0px;
+@media (max-width: 768px) {
+    .tp-caption.very_big_white {
+        width: @bg-width-768 !important;
+        max-width: @bg-max-width-768 !important;
+        -webkit-clip-path: @bg-path-768;
+        clip-path: @bg-path-768;
     }
 }
+.bigtext {
+    color: @title-testata-home-color;
+    font-family: @title-testata-home-font;
+    font-size: @title-testata-home-size !important;
+    font-weight: @title-testata-home-weight;
+    text-align: left;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    line-height: normal !important;
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.smalltext {
+    color: @subtitle-testata-home-color;
+    font-family: @subtitle-testata-home-font;
+    font-size: @subtitle-testata-home-size !important;
+    font-weight: @subtitle-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.prezzotext {
+    color: @prezzo-testata-home-color;
+    font-family: @prezzo-testata-home-font;
+    font-size: @prezzo-testata-home-size !important;
+    font-weight: @prezzo-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}*/
 
-.skills1 {
-    width: @skills1;
+/*-- BANNER NAVIGAZIONE POLYGON --*/
+.card-shadow {
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+}
+.image-polygon-b3 {
+    padding-left: 0;
+    padding-top: 50%;
+}
+.polygon-backdrop-b3 {
+    background-size: cover;
+    -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    position: absolute;
+    width: calc(100% + 2px);
+    height: auto;
+    min-height: 40%;
+    top: -1px;
+}
+.polygon-backdrop-b3 .titolo-offerta, .polygon-backdrop .sottotitolo-offerta, .polygon-backdrop .descrizione {
+    color: white !important;
+}
+.polygon-backdrop-b3 .titolo-offerta {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 20px !important;
+    line-height: 2rem;
+    text-transform: uppercase;
+}
+.polygon-backdrop-b3 .sottotitolo-offerta {
+    font-size: 1.3rem;
+    font-weight: 400 !important;
+    line-height: 1.6rem;
+    color: white;
+}
+li:nth-child(2n) .polygon-backdrop-b3 {
+    background: @bg-sottomenu-color-sfumato;
+}
+li:nth-child(2n+1) .polygon-backdrop-b3 {
+    background: @bg-primary-color-sfumato;
 }
 
-.skills2 {
-    width: @skills2;
+/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop {
+    /*background: @bg-sottomenu-color-sfumato;*/
+    background: @bg-primary-color-sfumato !important;
+}
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+    background: @bg-primary-color-sfumato !important;
+}
+@media screen and (max-width: 540px) {
+    .card.rounded-responsive {
+        border-radius: 0 !important;
+    }
 }
 
-.skills3 {
-    width: @skills3;
+/*----ISOTOPE RISULTATI POLYGON ----*/
+.image-polygon {
+    padding-left: 0;
+    padding-top: 50%;
 }
+.polygon-backdrop {
+    background-size: cover;
+    -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    position: absolute;
+    width: 100%;
+    height: auto;
+    min-height: 40%;
+    top: 0px;
+}
+.polygon-backdrop .titolo-offerta, .polygon-backdrop .sottotitolo-offerta, .polygon-backdrop .descrizione {
+    color: white !important;
+}
+.polygon-backdrop .titolo-offerta {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 20px !important;
+}
+.polygon-backdrop .sottotitolo-offerta {
+    font-size: 1.3rem;
+    font-weight: 400 !important;
+    line-height: 2rem;
+}
+.polygon-backdrop .prezzo-responsive {
+    color: white;
+    font-size: 2rem;
+    font-weight: 900;
+}
+li:nth-child(2n) .polygon-backdrop {
+    background: @bg-sottomenu-color-sfumato;
+}
+li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
+    content: "/KWh";
+    font-weight: 300;
+    float: right
+}
+li:nth-child(2n+1) .polygon-backdrop {
+    background: @bg-primary-color-sfumato;
+}
+li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
+    content: "/Smc";
+    font-weight: 300;
+    float: right
+}
+@media screen and (min-width: 1024px) {
+    .image-polygon {
+        padding-left: 45%;
+        padding-top: 0;
+    }
+    .polygon-backdrop {
+        background-size: cover;
+        -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+        clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+        position: absolute;
+        width: 70%;
+        height: 100%;
+        top: 0px;
+    }
+}
+/* ---------------------------------
+------- END TEMPLATE POLYGON -------
+--------------------------------- */
 
-.skills4 {
-    width: @skills4;
-}
+
