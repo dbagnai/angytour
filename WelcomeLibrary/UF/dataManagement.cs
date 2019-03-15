@@ -550,49 +550,39 @@ namespace WelcomeLibrary.UF
     }
     public static class SharedStatic
     {
-        public static void MakeHttpPost(string PostURL, string PostContent)
-        {
-            try
-            {
-                //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(this.PostUrl);
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(PostURL);
+        //public static void MakeHttpPost(string PostURL, string PostContent)
+        //{
+        //    try
+        //    {
+        //        //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(this.PostUrl);
+        //        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(PostURL);
 
-                req.Method = "POST";
+        //        req.Method = "POST";
 
-                //req.ContentLength = this.RequestLength.Length + 21;
-                req.ContentLength = PostContent.Length;
-                req.ContentType = "application/x-www-form-urlencoded";
+        //        //req.ContentLength = this.RequestLength.Length + 21;
+        //        req.ContentLength = PostContent.Length;
+        //        req.ContentType = "application/x-www-form-urlencoded";
 
-                byte[] param = HttpContext.Current.Request.BinaryRead(HttpContext.Current.Request.ContentLength);
-                //this.RequestLength = Encoding.ASCII.GetString(param);
-                //this.RequestLength = Encoding.ASCII.GetString(param);
-                //this.RequestLength += "&cmd=_notify-validate";
-                //req.ContentLength = this.RequestLength.Length;
+        //        byte[] param = HttpContext.Current.Request.BinaryRead(HttpContext.Current.Request.ContentLength);
+                
 
-                //StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
-                //streamOut.Write(this.RequestLength);
-                //streamOut.Close();
-                //StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
-                //this.Response = streamIn.ReadToEnd();
-                //streamIn.Close();
+        //        req.ContentLength = PostContent.Length;
 
-                req.ContentLength = PostContent.Length;
+        //        StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
+        //        streamOut.Write(PostContent);
+        //        streamOut.Close();
+        //        StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
+        //        string response = streamIn.ReadToEnd();
+        //        streamIn.Close();
+        //        //output.Text = response;
 
-                StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
-                streamOut.Write(PostContent);
-                streamOut.Close();
-                StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
-                string response = streamIn.ReadToEnd();
-                streamIn.Close();
-                //output.Text = response;
+        //    }
+        //    catch
+        //    {
 
-            }
-            catch
-            {
+        //    }
 
-            }
-
-        }
+        //}
 
         public static string MakeHttpHtmlGet(string GetURL,int encodint)
         {
