@@ -22,6 +22,7 @@ public partial class AreaContenuti_GestionePushnotify : CommonPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
 
         PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
         PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;

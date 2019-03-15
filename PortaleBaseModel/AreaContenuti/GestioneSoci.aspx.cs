@@ -105,6 +105,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
         if (!IsPostBack)
         {
             Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);

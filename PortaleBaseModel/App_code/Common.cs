@@ -593,7 +593,13 @@ public class CommonPage : Page
             if (WelcomeLibrary.STATIC.Global.Millisecondsleeptimefortrial > 0)
                 System.Threading.Thread.Sleep(WelcomeLibrary.STATIC.Global.Millisecondsleeptimefortrial);
     }
-
+    protected void SetCulture(string culturename = "it")
+    {
+        System.Globalization.CultureInfo c;
+        c = System.Globalization.CultureInfo.CreateSpecificCulture(culturename);
+        System.Threading.Thread.CurrentThread.CurrentCulture = c;
+        System.Threading.Thread.CurrentThread.CurrentUICulture = c;
+    }
 
     /// <summary>
     /// Funzione per override per impostare la cultura in base alla lingua richiesta

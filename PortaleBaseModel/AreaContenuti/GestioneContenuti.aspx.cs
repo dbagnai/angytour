@@ -66,6 +66,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
         if (!IsPostBack)
         {
             PageGuid = System.Guid.NewGuid().ToString();

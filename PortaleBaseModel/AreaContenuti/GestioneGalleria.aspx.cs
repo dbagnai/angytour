@@ -36,6 +36,7 @@ public partial class AreaContenuti_GestioneGalleria : CommonPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
         if (!IsPostBack)
         {
 

@@ -9,7 +9,7 @@ public partial class AreaContenuti_GestioneFeedback : CommonPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        SetCulture("it"); //forzo la cultura italia
     }
 	 protected void reset_Click(object sender, EventArgs e)
 	 {

@@ -85,7 +85,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             if (string.IsNullOrWhiteSpace(metaDesc.Content))
                 metaDesc.Content += references.ResMan("Common", Lingua, "descMain").ToString().Replace("<br/>", " ").Trim();
             //Prendiamo i dati dalla querystring
-            Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
+            Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, CommonPage.deflanguage);
 
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() != "true")
             {

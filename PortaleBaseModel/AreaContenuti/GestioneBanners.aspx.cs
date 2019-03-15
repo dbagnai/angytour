@@ -54,6 +54,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
         if (!IsPostBack)
         {
             if (Request.QueryString["NomeTblBanners"] != null && Request.QueryString["NomeTblBanners"] != "")

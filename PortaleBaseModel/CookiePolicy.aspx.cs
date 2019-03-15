@@ -16,7 +16,7 @@ public partial class CookiePolicy : CommonPage
    protected void Page_Load(object sender, EventArgs e)
     {
       CommonPage CommonPage = new CommonPage();
-      Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
-      DataBind();
+      Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, CommonPage.deflanguage);
+        DataBind();
     }
 }

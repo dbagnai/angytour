@@ -9,9 +9,10 @@ public partial class AreaContenuti_ResourcePage : CommonPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        SetCulture("it"); //forzo la cultura italia
 
     }
-	 protected void reset_Click(object sender, EventArgs e)
+    protected void reset_Click(object sender, EventArgs e)
 	 {
 		 System.Web.HttpRuntime.UnloadAppDomain();
 	 }
