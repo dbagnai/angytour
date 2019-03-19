@@ -1417,7 +1417,7 @@ Portfolio
     /*height: 280px;*/
 }
 
-@media (min-width: 580px) and (max-width: 1000px) {
+@media (min-width: 960px) and (max-width: 1000px) {
     .work-image, .work-image-no-button {
         height: 200px;
     }
