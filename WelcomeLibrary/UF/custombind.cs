@@ -3205,7 +3205,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue2"))
                                     prop.Add(nodetobind.Attributes["myvalue2"].Value);
                                 else prop.Add("");
-
+                                if (nodetobind.Attributes.Contains("myvalue3"))
+                                    prop.Add(nodetobind.Attributes["myvalue3"].Value);
+                                else prop.Add("");
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
                                 //    valore = ret[0];
@@ -3294,7 +3296,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue2"))
                                     prop.Add(nodetobind.Attributes["myvalue2"].Value);
                                 else prop.Add("");
-
+                                if (nodetobind.Attributes.Contains("myvalue3"))
+                                    prop.Add(nodetobind.Attributes["myvalue3"].Value);
+                                else prop.Add("");
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 // da finire ....
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
@@ -3561,9 +3565,26 @@ namespace WelcomeLibrary.UF
                                 }
 
                                 if (prop[2] != null && prop[2] == "nobreak")
-                                    ret = descrizione.Replace("\n", "&nbsp;");
+                                    descrizione = descrizione.Replace("\n", "&nbsp;");
                                 else
-                                    ret = descrizione.Replace("\n", "<br/>");
+                                    descrizione = descrizione.Replace("\n", "<br/>");
+
+                                if (prop[3] != null && prop[3].ToLower().StartsWith("filtertags"))
+                                {
+
+                                    HtmlDocument doc = new HtmlDocument();
+                                    doc.LoadHtml(descrizione); //Template per il bind
+                                    HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a | //img"); //tologo i link e img
+                                    foreach (HtmlNode link in links)
+                                    {
+                                        link.Remove();
+                                    }
+                                    descrizione = doc.DocumentNode.OuterHtml;
+                                }
+
+
+                                ret = descrizione;
+
                             }
                         }
                     }
