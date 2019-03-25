@@ -2708,6 +2708,139 @@ namespace WelcomeLibrary.UF
                                 nodetobind.Attributes.Add("data-lazyload", pathImg);
                         }
                     }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("imagessequence"))
+                    {
+                        List<string> imgslist = new List<string>();
+                        List<string> imgslistdesc = new List<string>();
+                        List<string> imgslistratio = new List<string>();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imageslist") && !string.IsNullOrEmpty(linkloaded[idscheda]["imageslist"]))
+                                imgslist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imageslist"]);
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesdesc") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesdesc"]))
+                                imgslistdesc = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesdesc"]);
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesratio") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesratio"]))
+                                imgslistratio = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
+                            //foreach (string img in imgslist)
+
+                            bool skipfirst = false;
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                            {
+                                string myvalue = nodetobind.Attributes["myvalue"].Value;
+                                if (myvalue == "skip") skipfirst = true;
+                            }
+
+                            StringBuilder sb = new StringBuilder();
+                            string maxheight = "";
+                            for (int j = 0; j < imgslist.Count(); j++)
+                            {
+                                try
+                                {
+                                    if (skipfirst && j == 0)
+                                    {
+                                        continue; //salto la prima
+                                    }
+
+                                    /*
+                                    <div class="w-100" style="width: 100%; text-align: center; margin-top: 10px; margin-bottom: 10px">
+                                    <img class="img-responsive mx-auto" alt="" src="" style="margin:0px auto;background-color:#ffffff;padding: 20px">
+                                    </div>
+                                     */
+
+                                    string img = imgslist[j];
+
+                                    sb.Append("<div class=\"w-100 text-center\" >");
+
+                                    string imgstyle = "max-width:100%;height:auto;";
+                                    ////////////////////////////////////////////////////////
+                                    //Eventuale impostazione max height elementi
+                                    if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
+                                    {
+                                        string inlinestyle = nodetobind.Attributes["style"].Value;
+                                        //parse style to find an element
+                                        foreach (var entries in inlinestyle.Split(';'))
+                                        {
+                                            string[] values = entries.Split(':');
+                                            if (values != null && values.Count() == 2)
+                                            {
+                                                if (values[0].ToLower() == "max-height") maxheight = values[1];
+                                                //newStyles += values.Join(':') + ";";
+                                                nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("max-height:" + values[1], "");
+                                            }
+                                        }
+
+
+                                    }
+                                    if (maxheight != "")
+                                    {
+                                        maxheight = maxheight.Replace("px", "");
+                                        int calcheight = 0;
+                                        if (int.TryParse(maxheight, out calcheight))
+                                        {
+                                            int actwidth = 0;
+                                            if (int.TryParse(WelcomeLibrary.STATIC.Global.Viewportw, out actwidth))
+                                                if (calcheight > actwidth) calcheight = actwidth;
+                                            try
+                                            {
+                                                double ar = 1;
+                                                if (double.TryParse(imgslistratio[j], out ar))
+                                                    if (ar < 1)
+                                                    {
+                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                    }
+                                            }
+                                            catch
+                                            {
+                                            };
+                                        }
+                                    }
+                                    ////////////////////////////////////////////////////////
+
+                                    //  <img class="img-responsive mx-auto" alt="" src="" style="margin:0px auto;background-color:#ffffff;padding: 20px">
+
+                                    //  contenutoslide += "<a rel=\"prettyPhoto[pp_gal]\" href=\"" + imgslist[j] + "\">';
+                                    sb.Append("<img class=\"img-fluid\"   style=\"background-color:#ffffff;padding: 20px;border:none;" + imgstyle + "\" src=\"");
+                                    sb.Append(imgslist[j]);
+                                    sb.Append("\" ");
+
+                                    string descriptiontext = "";
+                                    if (imgslist[j].LastIndexOf("/") != -1)
+                                        descriptiontext = imgslist[j].Substring(imgslist[j].LastIndexOf("/") + 1);
+                                    if (imgslistdesc.Count > j && imgslistdesc[j].Trim() != "")
+                                        descriptiontext = imgslistdesc[j];
+                                    sb.Append(" alt=\"" + descriptiontext + "\" />");
+
+                                    if (!string.IsNullOrEmpty(descriptiontext) && nodetobind.Attributes["class"].Value.Contains("showdescription"))
+                                        sb.Append("<div class=\"lead img-desc pb-2\" >" + descriptiontext + "</div>");
+
+
+                                    sb.Append("</div>");
+                                }
+                                catch
+                                {
+                                }
+                            }
+
+
+
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml = contenutoslide;
+                            if (nodetobind != null && !string.IsNullOrEmpty(contenutoslide))
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:block");
+
+                        }
+                    }
+
+
                     else if (nodetobind.Name == "li" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("revolution"))
                     {
                         string idscheda = "";
@@ -2809,6 +2942,7 @@ namespace WelcomeLibrary.UF
                                 imgslistratio = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
                             //foreach (string img in imgslist)
                             StringBuilder sb = new StringBuilder();
+                            string maxheight = "";
                             for (int j = 0; j < imgslist.Count(); j++)
                             {
                                 try
@@ -2830,7 +2964,6 @@ namespace WelcomeLibrary.UF
                                     sb.Append("<div class=\"slide-content\"  style=\"position:relative;padding: 1px\">");
 
                                     string imgstyle = "max-width:100%;height:auto;";
-                                    string maxheight = "";
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
                                     {
                                         string inlinestyle = nodetobind.Attributes["style"].Value;

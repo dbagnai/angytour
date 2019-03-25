@@ -3570,6 +3570,7 @@ namespace WelcomeLibrary.DAL
             {
                 list.Sort(new GenericComparer2<Allegato>("Progressivo", System.ComponentModel.ListSortDirection.Ascending, "NomeFile", System.ComponentModel.ListSortDirection.Ascending));
                 list.FotoAnteprima = list[0].NomeAnteprima; //Setto la foto anteprima per tutta la collection
+                list.NomeImmobile = list[0].Descrizione; //Setto la descrizione per l'alt della foto anteprima
             }
 
             return list;
@@ -5148,6 +5149,9 @@ namespace WelcomeLibrary.DAL
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                string imagedesc = "";
+                if (_o.FotoCollection_M != null) imagedesc = _o.FotoCollection_M.NomeImmobile;
+
 
                 string target = "";
 
@@ -5204,6 +5208,7 @@ namespace WelcomeLibrary.DAL
                 tmp.Add("descrizione", descrizione);
                 tmp.Add("datitecnici", datitecnici);
                 tmp.Add("image", pathimmagine);
+                tmp.Add("imagedesc", imagedesc);
                 tmp.Add("avatar", pathavatar);
                 tmp.Add("video", _o.linkVideo);
 

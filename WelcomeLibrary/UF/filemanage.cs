@@ -898,6 +898,7 @@ namespace WelcomeLibrary.UF
 
                                 o.FotoCollection_M.Insert(0, agb);
                                 o.FotoCollection_M.FotoAnteprima = agb.NomeAnteprima;
+                                o.FotoCollection_M.NomeImmobile = agb.Descrizione;
                                 //o.FotoCollection_M.FotoAnteprima = agb.NomeFile;
                             }
                             break;
@@ -908,6 +909,7 @@ namespace WelcomeLibrary.UF
                                 o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-")); //elimino le foto anteprima per tutte le lingue
                                 o.FotoCollection_M.Insert(0, aru);
                                 o.FotoCollection_M.FotoAnteprima = aru.NomeAnteprima;
+                                o.FotoCollection_M.NomeImmobile = aru.Descrizione;
                                 //o.FotoCollection_M.FotoAnteprima = aru.NomeFile;
                             }
                             break;
@@ -919,6 +921,8 @@ namespace WelcomeLibrary.UF
                                 o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-"));//elimino le foto anteprima per tutte le lingue
                                 o.FotoCollection_M.Insert(0, ait);
                                 o.FotoCollection_M.FotoAnteprima = ait.NomeAnteprima;
+                                o.FotoCollection_M.NomeImmobile = ait.Descrizione;
+
                                 //o.FotoCollection_M.FotoAnteprima = ait.NomeFile;
                             }
                             break;

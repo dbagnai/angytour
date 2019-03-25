@@ -1192,7 +1192,9 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             }
                             if (localObjects["linkloaded"][idscheda].hasOwnProperty(bindproptitle)) {
                                 testo = localObjects["linkloaded"][idscheda][bindproptitle];
-                                $(this).attr("title", testo);
+
+                                //qui devi convertire il testo a plain html
+                                $(this).attr("title", $("<p>").html(testo).text());
                             }
                             if (link.toLowerCase().indexOf(pathAbs) != 0) $(this).attr("target", "_blank");
                             //if (!link.toLowerCase().startsWith(pathAbs)) $(this).attr("target", "_blank");
