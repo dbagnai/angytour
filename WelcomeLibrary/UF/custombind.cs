@@ -2871,12 +2871,15 @@ namespace WelcomeLibrary.UF
                     else if (nodetobind.Name == "img")
                     {
                         string completepath = "";
+                        string descfoto = "";
                         string idscheda = "";
                         if (itemdic.ContainsKey(property))
                         {
                             idscheda = itemdic[property];
                             if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("image"))
                                 completepath = linkloaded[idscheda]["image"];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagedesc"))
+                                descfoto = linkloaded[idscheda]["imagedesc"];
 
                             if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("img-ant") && completepath.ToLower().LastIndexOf("dummylogo") == -1)
                             {
@@ -2887,6 +2890,10 @@ namespace WelcomeLibrary.UF
                                 filename = filename.Replace("-md.", ".");
                                 filename = filename.Replace("-lg.", ".");
                                 completepath = completepath.Substring(0, position + 1) + "ant" + filename;
+                            }
+                            if (descfoto != null && descfoto != "")
+                            {
+                                nodetobind.SetAttributeValue("alt", descfoto);
                             }
                             if (completepath != null && completepath != "")
                             {

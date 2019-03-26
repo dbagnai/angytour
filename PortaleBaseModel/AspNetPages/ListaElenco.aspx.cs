@@ -175,7 +175,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
                 {
                     string link = PercorsoFiles + "/" + Tipologia + "/" + id.ToString() + "/" + a.NomeFile;
                     link = CommonPage.ReplaceAbsoluteLinks(link);
-                    string descrizione = a.Descrizione;
+                    string descrizione = a.DescrizionebyLingua(Lingua) ;
                     if (string.IsNullOrWhiteSpace(descrizione)) descrizione = a.NomeFile;
 
                     //sb.Append("<li>");

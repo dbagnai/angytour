@@ -1156,7 +1156,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             pnlRitratto.Visible = false;
             if (Details.FotoCollection_M != null)
             {
-                Allegato a = Details.FotoCollection_M.Find(o => o.Descrizione == "Ritratto");
+                Allegato a = Details.FotoCollection_M.Find(o => o.DescrizioneI == "Ritratto");
                 if (a != null)
                 {
                     string linkallegato = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + a.NomeFile;
@@ -1223,7 +1223,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             {
                 imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                 NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
-                txtDescrizione.Text = Details.FotoCollection_M[0].Descrizione;
+                txtDescrizione.Text = Details.FotoCollection_M[0].DescrizioneI;
             }
             else
                 imgFoto.ImageUrl = "";

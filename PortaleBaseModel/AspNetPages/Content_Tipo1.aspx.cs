@@ -589,11 +589,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 //    sb.Append("	       </a>\r\n");
 
                 //aggiungiamo i messaggi sopra
-                if (!string.IsNullOrEmpty(a.Descrizione))
+                if (!string.IsNullOrEmpty(a.DescrizionebyLingua(Lingua)))
                 {
                     sb.Append("<div   class=\"divbuttonstyle\"  style=\"position:absolute;left:30px;bottom:30px;padding:10px;text-align:left;color:#ffffff;\">");
                     sb.Append("	       <a style=\"color:#ffffff\" href=\"" + link + "\" target=\"" + target + "\" title=\"" + testotitolo + "\">\r\n");
-                    sb.Append(" " + a.Descrizione);
+                    sb.Append(" " + a.DescrizionebyLingua(Lingua));
                     sb.Append("	       </a>\r\n");
                     sb.Append("	       </div>\r\n");
                 }

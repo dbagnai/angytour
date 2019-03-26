@@ -99,8 +99,8 @@ public partial class AreaContenuti_Default3 : CommonPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         SetCulture("it"); //forzo la cultura italia
+
         if (!IsPostBack)
         {
 
@@ -393,14 +393,18 @@ public partial class AreaContenuti_Default3 : CommonPage
             {
                 imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                 NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
-                txtDescrizione.Text = Details.FotoCollection_M[0].Descrizione;
+                txtDescrizioneFotoI.Text = Details.FotoCollection_M[0].DescrizioneI;
+                txtDescrizioneFotoGB.Text = Details.FotoCollection_M[0].DescrizioneGB;
+                txtDescrizioneFotoRU.Text = Details.FotoCollection_M[0].DescrizioneRU;
                 txtProgressivo.Text = Details.FotoCollection_M[0].Progressivo.ToString();
             }
             else
             {
                 imgFoto.ImageUrl = "";
                 NomeFotoSelezionata = "";
-                txtDescrizione.Text = "";
+                txtDescrizioneFotoI.Text = "";
+                txtDescrizioneFotoGB.Text = "";
+                txtDescrizioneFotoRU.Text = "";
                 txtProgressivo.Text = "";
 
             }
@@ -763,7 +767,9 @@ public partial class AreaContenuti_Default3 : CommonPage
             linkFoto.HRef = "";
 
         //txtDescrizione.Text = ((ImageButton)(sender)).ToolTip;
-        txtDescrizione.Text = allegato.Descrizione;
+        txtDescrizioneFotoI.Text = allegato.DescrizioneI;
+        txtDescrizioneFotoGB.Text = allegato.DescrizioneGB;
+        txtDescrizioneFotoRU.Text = allegato.DescrizioneRU;
         txtProgressivo.Text = allegato.Progressivo.ToString();
     }
     protected void btnNuovo_Click(object sender, EventArgs e)
@@ -858,7 +864,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
 
                     updrecord.DenominazioneI = txtDenominazioneI.Text;
-                    updrecord.DenominazioneGB = txtDenominazioneGB.Text; 
+                    updrecord.DenominazioneGB = txtDenominazioneGB.Text;
                     updrecord.DenominazioneRU = txtDenominazioneRU.Text;
                     updrecord.DescrizioneI = txtDescrizioneI.Text;
                     updrecord.DescrizioneGB = txtDescrizioneGB.Text;
@@ -989,7 +995,7 @@ public partial class AreaContenuti_Default3 : CommonPage
                 updrecord.UrlcustomRU = txtUrlRU.Text;
                 updrecord.Robots = txtRobots.Text;
 
-                if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl( txtDenominazioneI.Text);
+                if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneI.Text);
                 if (string.IsNullOrEmpty(updrecord.UrlcustomGB.Trim())) updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneGB.Text);
                 if (string.IsNullOrEmpty(updrecord.UrlcustomRU.Trim())) updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneRU.Text);
 
@@ -1278,7 +1284,9 @@ public partial class AreaContenuti_Default3 : CommonPage
         chkContatto.Checked = false;
         chkPromozione.Checked = false;
 
-        txtDescrizione.Text = "";
+        txtDescrizioneFotoI.Text = "";
+        txtDescrizioneFotoGB.Text = "";
+        txtDescrizioneFotoRU.Text = "";
         txtProgressivo.Text = "";
         txtCodiceProd.Text = "";
         //txtFotoSchema.Value = "";
@@ -1666,7 +1674,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
     protected void btnModifica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizione.Text, txtProgressivo.Text);
+        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizioneFotoI.Text, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();
@@ -1676,7 +1684,7 @@ public partial class AreaContenuti_Default3 : CommonPage
     }
     protected void btnCarica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizione.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text);
+        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizioneFotoI.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();

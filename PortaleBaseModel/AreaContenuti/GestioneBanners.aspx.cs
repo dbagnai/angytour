@@ -227,6 +227,10 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneI.Text = "";
         imgI.ImageUrl = "";
         txtProgressivo.Text = "";
+
+        txtImgalttextI.Text = "";
+        txtImgalttextGB.Text = "";
+        txtImgalttextRU.Text = "";
     }
 
     protected void VisualizzaDettaglio()
@@ -248,6 +252,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneI.Text = BannerSelezionato.AlternateText;
         imgI.ImageUrl = BannerSelezionato.ImageUrl;
         txtProgressivo.Text = BannerSelezionato.progressivo.ToString();
+
+        txtImgalttextI.Text = BannerSelezionato.AltimgtextI;
+        txtImgalttextGB.Text = BannerSelezionato.AltimgtextGB;
+        txtImgalttextRU.Text = BannerSelezionato.AltimgtextRU;
+
     }
 
 
@@ -267,6 +276,12 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AlternateText = txtDescrizioneI.Text;
         BannerSelezionato.ImageUrl = imgI.ImageUrl;
         BannerSelezionato.sezione = Sezione;
+
+        BannerSelezionato.AltimgtextI = txtImgalttextI.Text;
+        BannerSelezionato.AltimgtextGB = txtImgalttextGB.Text;
+        BannerSelezionato.AltimgtextRU = txtImgalttextRU.Text;
+
+
         int _p = 0;
         int.TryParse(txtProgressivo.Text, out _p);
         BannerSelezionato.progressivo = _p;
@@ -463,7 +478,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                             if (filemanage.ResizeAndSave(UploadFoto.PostedFile.InputStream, maxwidth, maxheight, pathDestinazione + "\\" + NomeCorretto, ridimensiona))
                             {
                                 //Creiamo l'anteprima Piccola per usi in liste
-                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto,true,true))
+                                if (!filemanage.CreaAnteprima(pathDestinazione + "\\" + NomeCorretto, 450, 450, pathDestinazione + "\\", "Ant" + NomeCorretto, true, true))
                                     output.Text = "Anteprima non salvata correttamente";
 
                                 ret = true; //Se tutto ok imposto true il caricamento
@@ -563,6 +578,10 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.ImageUrl = PercorsoFiles + "/" + NomeCorretto;
                     ban.sezione = Sezione;
 
+                    ban.AltimgtextI = txtImgalttextI.Text;
+                    ban.AltimgtextGB = txtImgalttextGB.Text;
+                    ban.AltimgtextRU = txtImgalttextRU.Text;
+
                     banDM.InsertBanner(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ban);
                     BannerSelezionato = ban;
                     VisualizzaDettaglio();
@@ -625,10 +644,10 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     string pathfile = fi.DirectoryName;
                     string filenamenoext = fi.Name;
                     filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext));
-                    string filename_xs = pathfile + "\\" +filenamenoext + "-xs" + fileext;
-                    string filename_sm = pathfile + "\\" +filenamenoext + "-sm" + fileext;
+                    string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
                     string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
-                    string filename_lg = pathfile + "\\" +filenamenoext + "-lg" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
                     if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
                     if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
                     if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
@@ -694,8 +713,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         }
     }
 
- 
-     
+
+
     #endregion
 
 

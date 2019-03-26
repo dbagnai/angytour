@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AreaContenuti/MasterPage.master"   AutoEventWireup="true" ValidateRequest="false" CodeFile="GestioneBanners.aspx.cs" Inherits="AreaContenuti_GestioneBannersNew" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AreaContenuti/MasterPage.master" AutoEventWireup="true" ValidateRequest="false" CodeFile="GestioneBanners.aspx.cs" Inherits="AreaContenuti_GestioneBannersNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Banners</h2>
-          <%--          <asp:DropDownList runat="server" ID="ddlAreaAnnunci" AppendDataBoundItems="true"
+                    <%--          <asp:DropDownList runat="server" ID="ddlAreaAnnunci" AppendDataBoundItems="true"
                         AutoPostBack="true" OnSelectedIndexChanged="ddlAreaAnnunci_SelectedIndexChanged"
                         Visible="false">
                     </asp:DropDownList>--%>
@@ -43,7 +43,7 @@
                     <asp:Button ID="btnCarica" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Banner" OnClick="btnCarica_Click" />
                     <asp:Button ID="btnInserisciInglese" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Inglese"
                         OnClick="btnINserisciInglese_Click" />
-                     <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Russo"
+                    <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Russo"
                         OnClick="btnINserisciRusso_Click" />
 
                     <asp:Button ID="btnAggiorna" runat="server" CssClass="btn btn-primary btn-sm" Text="Aggiorna Banner" OnClick="btnAggiorna_Click" />
@@ -77,8 +77,8 @@
                         <div id="tabita" class="tab-pane fade in active">
                             <h4>BANNER ITALIANO</h4>
                             <asp:Image ID="imgI" Width="250" runat="server" ImageUrl="" />
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label ID="litNavigateUrl" runat="server" Text="Link Destinazione Ita" />
                                     </strong>
@@ -87,8 +87,8 @@
                                     <asp:TextBox CssClass="form-control" ID="txtNavigateUrl" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1  text-right">
                                     <strong>
                                         <asp:Label Width="30%" ID="litDescrizioneI" runat="server" Text="Descrizione Ita" />
                                     </strong>
@@ -98,12 +98,23 @@
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1  text-right">
+                                    <strong>
+                                        <asp:Label ID="Label2" runat="server" Text="Img Alt Text Ita" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextI" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="tebeng" class="tab-pane fade">
                             <h4>BANNER INGLESE</h4>
                             <asp:Image ID="imgGB" Width="250" runat="server" ImageUrl="" />
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label ID="litNavigateUrlGB" runat="server" Text="Link Destinazione Inglese" />
                                     </strong>
@@ -112,8 +123,8 @@
                                     <asp:TextBox CssClass="form-control" ID="txtNavigateUrlGB" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label Width="30%" ID="litDescrizioneGB" runat="server" Text="Descrizione Eng" />
                                     </strong>
@@ -123,13 +134,22 @@
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
-
+                            <div class="row" style="padding-bottom: 5px">
+                                 <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label3" runat="server" Text="Img Alt Text Eng" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextGB" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
                         <div id="tabru" class="tab-pane fade">
                             <h4>BANNER RUSSO</h4>
                             <asp:Image ID="imgRU" Width="250" runat="server" ImageUrl="" />
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                 <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label ID="litNavigateUrlRU" runat="server" Text="Link Destinazione Russo" />
                                     </strong>
@@ -138,8 +158,8 @@
                                     <asp:TextBox CssClass="form-control" ID="txtNavigateUrlRU" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row" style="padding-bottom: 5px">
+                                 <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label Width="30%" ID="litDescrizioneRU" runat="server" Text="Descrizione Russo" />
                                     </strong>
@@ -149,7 +169,16 @@
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
-
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label4" runat="server" Text="Img Alt Text Ru" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextRU" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

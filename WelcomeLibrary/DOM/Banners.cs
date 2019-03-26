@@ -95,6 +95,61 @@ namespace WelcomeLibrary.DOM
         }
 
 
+        private string _altimgtextI;
+        public string AltimgtextI
+        {
+            get { return _altimgtextI; }
+            set { _altimgtextI = value; }
+        }
+        private string _altimgtextGB;
+        public string AltimgtextGB
+        {
+            get { return _altimgtextGB; }
+            set { _altimgtextGB = value; }
+        }
+        private string _altimgtextRU;
+        public string AltimgtextRU
+        {
+            get { return _altimgtextRU; }
+            set { _altimgtextRU = value; }
+        }
+
+
+
+        public string altimgtextbyLingua(string Lingua)
+        {
+            string ret = "";
+
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextGB)) ? this._altimgtextGB : this._altimgtextI;
+                    break;
+                case "RU":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextRU)) ? this._altimgtextGB : this._altimgtextI;
+                    break;
+                default:
+                    ret = this._altimgtextI;
+                    break;
+            }
+            return ret;
+        }
+        public void altimgtexttbyLingua(string Lingua, string value)
+        {
+            switch (Lingua)
+            {
+                case "GB":
+                    this._altimgtextGB = value;
+                    break;
+                case "RU":
+                    this._altimgtextRU = value;
+                    break;
+                default:
+                    this._altimgtextI = value;
+                    break;
+            }
+        }
+
 
         public string AlternateTextbyLingua(string Lingua)
         {
@@ -209,6 +264,11 @@ namespace WelcomeLibrary.DOM
             this.ImageUrlRU = "";
             this.NavigateUrlRU = "";
 
+            this.AltimgtextI = string.Empty;
+            this.AltimgtextGB = string.Empty;
+            this.AltimgtextRU = string.Empty;
+
+
             this.sezione = "";
             this.DataInserimento = DateTime.MinValue;
 
@@ -227,6 +287,11 @@ namespace WelcomeLibrary.DOM
             this.AlternateTextRU = tmp.AlternateTextRU;
             this.ImageUrlRU = tmp.ImageUrlRU;
             this.NavigateUrlRU = tmp.NavigateUrlRU; ;
+
+            this.AltimgtextI = tmp.AltimgtextI;
+            this.AltimgtextGB = tmp.AltimgtextGB;
+            this.AltimgtextRU = tmp.AltimgtextRU;
+
 
 
             this.DataInserimento = tmp.DataInserimento;
@@ -249,6 +314,9 @@ namespace WelcomeLibrary.DOM
             _tmp["ImageUrlRU"] = this.ImageUrlRU;
             _tmp["NavigateUrlRU"] = this.NavigateUrlRU;
             _tmp["sezione"] = this.sezione;
+            _tmp["AltimgtextI"] = this.AltimgtextI;
+            _tmp["AltimgtextGB"] = this.AltimgtextGB;
+            _tmp["AltimgtextRU"] = this.AltimgtextRU;
             _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });
             return _tmp;
         }

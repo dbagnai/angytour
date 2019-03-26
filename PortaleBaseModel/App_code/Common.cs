@@ -2452,7 +2452,7 @@ public class CommonPage : Page
                         string descrizione = d.Trim().Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
                         if (string.IsNullOrEmpty(descrizione)) continue;
                         if (c.FotoCollection_M.Count > i)
-                            c.FotoCollection_M[i].Descrizione = descrizione;
+                            c.FotoCollection_M[i].DescrizioneI = descrizione;
                         i += 1;
                     }
             }

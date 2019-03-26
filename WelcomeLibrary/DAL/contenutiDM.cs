@@ -406,7 +406,7 @@ namespace WelcomeLibrary.DAL
                 string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo or TitoloRU like @Titolo )";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 //SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI + "%");//OleDbType.VarChar
-                SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI );//OleDbType.VarChar
+                SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI);//OleDbType.VarChar
                 parColl.Add(p1);
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -524,7 +524,7 @@ namespace WelcomeLibrary.DAL
                 j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
                 start = end + 1;
                 //LEGGIAMO IL VALORE (descrizione ALLEGATO)
-                item.Descrizione = Value.Substring(i, j);
+                item.DescrizioneI = Value.Substring(i, j);
                 //LA CARTELLA PER LE FOTO E' SEMPRE LA STESSA
                 item.Cartella = "";
                 //Inserisco il percorso per la foto di anteprima (Prendo sempre la prima)
@@ -565,11 +565,11 @@ namespace WelcomeLibrary.DAL
                 pos += len;
 
                 //INSERISCO DESCRIZIONE
-                len = item.Descrizione.Length;
-                item.Descrizione.Replace(":S:", "SSS");//Elimina eventuali presenze
+                len = item.DescrizioneI.Length;
+                item.DescrizioneI.Replace(":S:", "SSS");//Elimina eventuali presenze
                 //del carattere di separazione dalla descrizione
                 list.Schema += "Des" + n + ":S:" + pos + ":" + len + ":";
-                list.Valori += item.Descrizione;
+                list.Valori += item.DescrizioneI;
                 pos += len;
             }
 
@@ -593,7 +593,7 @@ namespace WelcomeLibrary.DAL
                 //AGGIUNGIAMO LA FOTO ALLA COLLECTION
                 Allegato tmp = new Allegato();
                 tmp.NomeFile = nomefile;
-                tmp.Descrizione = descrizione;
+                tmp.DescrizioneI = descrizione;
                 FotoColl.Add(tmp);
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
@@ -675,7 +675,7 @@ namespace WelcomeLibrary.DAL
                     }
                     if (System.IO.File.Exists(pathfile + "\\" + nomefile)) System.IO.File.Delete(pathfile + "\\" + nomefile);
                     if (System.IO.File.Exists(pathfile + "\\" + "Ant" + nomefile)) System.IO.File.Delete(pathfile + "\\" + "Ant" + nomefile);
-                    
+
 
                 }
                 catch (Exception error)
@@ -703,7 +703,7 @@ namespace WelcomeLibrary.DAL
                 //MODIFICHIAMO LA FOTO NELLA COLLECTION
 
                 F1.NomeFile = nomefile;
-                F1.Descrizione = descrizione;
+                F1.DescrizioneI = descrizione;
 
                 //RIFORMIAMO LE STRINGHE schema e valori
                 //PER IL SALVATAGGIO NEL DB
@@ -804,7 +804,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p7 = new SQLiteParameter("@fotovalori", "");//item.FotoCollection_M.Valori
             parColl.Add(p7);
 
-            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow(item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 
@@ -875,7 +875,7 @@ namespace WelcomeLibrary.DAL
             //SQLiteParameter p7 = new SQLiteParameter("@fotovalori", item.FotoCollection_M.Valori);
             //parColl.Add(p7);
 
-            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow( item.DataInserimento));
+            SQLiteParameter p8 = new SQLiteParameter("@data", dbDataAccess.CorrectDatenow(item.DataInserimento));
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 

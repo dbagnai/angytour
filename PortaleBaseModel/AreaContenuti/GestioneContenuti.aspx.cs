@@ -354,7 +354,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             {
                 imgFoto.ImageUrl = PercorsoFiles + "/" + CodiceContenuto + "/" + ContentIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                 NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
-                txtDescrizione.Text = Details.FotoCollection_M[0].Descrizione;
+                txtDescrizione.Text = Details.FotoCollection_M[0].DescrizioneI;
             }
             else
             {

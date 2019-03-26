@@ -215,10 +215,17 @@
                                 <asp:Literal ID="litFoto" runat="server" Text=""></asp:Literal></h3>
                             <div>
                                 <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default btn-sm" runat="server" />
+                                   <br />
+                                Descrizione img alt (it)
                                 <br />
-                                Descrizione
-                                    <br />
-                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtDescrizione" />
+                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtDescrizioneFotoI" />
+                                 Descrizione img alt(en)
+                                <br />
+                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtDescrizioneFotoGB" />
+                                <span style="display:none">  
+                                   Descrizione img alt(ru)
+                                <br />
+                                <asp:TextBox CssClass="mceNoEditor form-control" runat="server" ID="txtDescrizioneFotoRU"   /></span>
                                 <br />
                                 Progressivo
                                 <br />
@@ -244,7 +251,7 @@
                                             <ItemTemplate>
                                                 <li style="list-style: none; display: inline">
                                                     <%--   <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>' OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />--%>
-                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
+                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("DescrizioneI").ToString() %>' ID="imgAntFoto" CommandArgument='<%# 
                                                          Newtonsoft.Json.JsonConvert.SerializeObject((WelcomeLibrary.DOM.Allegato)Container.DataItem, Newtonsoft.Json.Formatting.Indented) %>'
                                                         OnClick="linkgalleria_click" runat="server" ImageUrl='<%# WelcomeLibrary.UF.filemanage.ComponiUrlAnteprima(Eval("NomeAnteprima").ToString(),TipologiaOfferte,OffertaIDSelected) %>' />
                                                 </li>

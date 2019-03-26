@@ -3496,6 +3496,8 @@ namespace WelcomeLibrary.DAL
                     {
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("all")) etype = "all";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("des")) etype = "des";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dgb")) etype = "dgb";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dru")) etype = "dru";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("pro")) etype = "pro";
                     }
                 }
@@ -3527,7 +3529,27 @@ namespace WelcomeLibrary.DAL
                         j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
                         start = end + 1;
                         //LEGGIAMO IL VALORE (descrizione ALLEGATO)
-                        item.Descrizione = Value.Substring(i, j);
+                        item.DescrizioneI = Value.Substring(i, j);
+                        break;
+                    case "dgb":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        item.DescrizioneGB = Value.Substring(i, j);
+                        break;
+                    case "dru":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        item.DescrizioneRU = Value.Substring(i, j);
                         break;
                     case "pro":
                         end = Schema.IndexOf(":", start);
@@ -3570,7 +3592,10 @@ namespace WelcomeLibrary.DAL
             {
                 list.Sort(new GenericComparer2<Allegato>("Progressivo", System.ComponentModel.ListSortDirection.Ascending, "NomeFile", System.ComponentModel.ListSortDirection.Ascending));
                 list.FotoAnteprima = list[0].NomeAnteprima; //Setto la foto anteprima per tutta la collection
-                list.NomeImmobile = list[0].Descrizione; //Setto la descrizione per l'alt della foto anteprima
+                //list.NomeImmobile = list[0].DescrizioneI; //Setto la descrizione per l'alt della foto anteprima
+                list.DescrizioneI = list[0].DescrizioneI; //Setto la descrizione per l'alt della foto anteprima
+                list.DescrizioneGB = list[0].DescrizioneGB; //Setto la descrizione per l'alt della foto anteprima
+                list.DescrizioneRU = list[0].DescrizioneRU; //Setto la descrizione per l'alt della foto anteprima
             }
 
             return list;
@@ -3602,14 +3627,35 @@ namespace WelcomeLibrary.DAL
                 list.Valori += item.NomeFile;
                 pos += len;
 
-                //INSERISCO DESCRIZIONE
-                len = item.Descrizione.Length;
-                item.Descrizione.Replace(":S:", "SSS");//Elimina eventuali presenze
-                                                       //del carattere di separazione dalla descrizione
+                //INSERISCO DESCRIZIONE ITALIA
+                len = item.DescrizioneI.Length;
+                item.DescrizioneI.Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                        //del carattere di separazione dalla descrizione
                 list.Schema += "Des" + n + ":S:" + pos + ":" + len + ":";
-                list.Valori += item.Descrizione;
+                list.Valori += item.DescrizioneI;
                 pos += len;
 
+                //INSERISCO DESCRIZIONE GB
+                len = item.DescrizioneGB.Length;
+                if (len > 0)
+                {
+                    item.DescrizioneI.Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                            //del carattere di separazione dalla descrizione
+                    list.Schema += "Dgb" + n + ":S:" + pos + ":" + len + ":";
+                    list.Valori += item.DescrizioneGB;
+                    pos += len;
+                }
+
+                //INSERISCO DESCRIZIONE RU
+                len = item.DescrizioneRU.Length;
+                if (len > 0)
+                {
+                    item.DescrizioneRU.Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                             //del carattere di separazione dalla descrizione
+                    list.Schema += "Dru" + n + ":S:" + pos + ":" + len + ":";
+                    list.Valori += item.DescrizioneRU;
+                    pos += len;
+                }
                 //INSERISCO Progressivo
                 len = item.Progressivo.ToString().Length;
                 item.Progressivo.ToString().Replace(":S:", "SSS");//Elimina eventuali presenze
@@ -3624,7 +3670,7 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
-        public bool modificaFoto(string connection, long idOfferta, string nomefile, string descrizione, string progressivo = "")
+        public bool modificaFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -3639,9 +3685,10 @@ namespace WelcomeLibrary.DAL
                     return false;
                 }
                 //MODIFICHIAMO LA FOTO NELLA COLLECTION
-
                 F1.NomeFile = nomefile;
-                F1.Descrizione = descrizione;
+                F1.DescrizioneI = descrizioneI;
+                F1.DescrizioneGB = (!string.IsNullOrEmpty(descrizioneGB)) ? descrizioneGB : descrizioneI;
+                F1.DescrizioneRU = (!string.IsNullOrEmpty(descrizioneRU)) ? descrizioneRU : descrizioneI;
                 int tmp = 0;
                 int.TryParse(progressivo, out tmp);
                 F1.Progressivo = tmp;
@@ -3673,7 +3720,7 @@ namespace WelcomeLibrary.DAL
             return true;
         }
 
-        public bool insertFoto(string connection, long idOfferta, string nomefile, string descrizione, string progressivo = "")
+        public bool insertFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -3690,7 +3737,10 @@ namespace WelcomeLibrary.DAL
                 //AGGIUNGIAMO LA FOTO ALLA COLLECTION
                 Allegato tmp = new Allegato();
                 tmp.NomeFile = nomefile;
-                tmp.Descrizione = descrizione;
+                tmp.DescrizioneI = descrizioneI;
+                tmp.DescrizioneGB = (!string.IsNullOrEmpty(descrizioneGB)) ? descrizioneGB : descrizioneI;
+                tmp.DescrizioneRU = (!string.IsNullOrEmpty(descrizioneRU)) ? descrizioneRU : descrizioneI;
+
                 int tmpint = 1;
                 if (!string.IsNullOrEmpty(progressivo))
                     int.TryParse(progressivo, out tmpint);
@@ -5150,7 +5200,7 @@ namespace WelcomeLibrary.DAL
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 string imagedesc = "";
-                if (_o.FotoCollection_M != null) imagedesc = _o.FotoCollection_M.NomeImmobile;
+                if (_o.FotoCollection_M != null) imagedesc = _o.FotoCollection_M.DescrizionebyLingua(lingua);
 
 
                 string target = "";
@@ -5298,7 +5348,7 @@ namespace WelcomeLibrary.DAL
 
                                 imagescomplete.Add(abspathimmagine);
                                 //a.Descrizione -> dove la mettiamo
-                                imagesdesc.Add(a.Descrizione);
+                                imagesdesc.Add(a.DescrizionebyLingua(lingua));
                                 try
                                 {
                                     //using (System.Drawing.Image tmpimg = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath(tmppathimmagine)))
@@ -5318,7 +5368,7 @@ namespace WelcomeLibrary.DAL
 
                                 tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                                 filescomplete.Add(tmppathimmagine);
-                                filesdesc.Add(a.Descrizione);
+                                filesdesc.Add(a.DescrizionebyLingua(lingua));
 
                             }
                         }

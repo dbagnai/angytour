@@ -114,7 +114,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
             if (Request.QueryString["CodiceProdotto"] != null && Request.QueryString["CodiceProdotto"] != "")
             { CodiceProdotto = Request.QueryString["CodiceProdotto"].ToString(); }
-           // LoadJavascriptVariables();
+            // LoadJavascriptVariables();
 
             //Carichiamo le ddl per la collocazione geografica senza selezioni
             // CaricaDatiDdlRicercaRepeater("", "");
@@ -136,7 +136,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         {
             if (Request["__EVENTTARGET"] == "aggiornatettaglio")
             {
-              //  string email = Request["__EVENTARGUMENT"];
+                //  string email = Request["__EVENTARGUMENT"];
                 CaricaDati();
             }
 
@@ -145,7 +145,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             ErrorMsgNuovoProdotto.Text = "";
 
         }
-       
+
         //CodiceProdottoRicerca = ddlProdottoRicerca.SelectedValue;
         //CodiceSottoProdottoRicerca = ddlSProdottoRicerca.SelectedValue;
     }
@@ -251,7 +251,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             //}
             //   if (!string.IsNullOrEmpty(CodiceProdottoRicerca) || !string.IsNullOrEmpty(CodiceSottoProdottoRicerca))
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", null, null, "", true, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
-          
+
 #endif
             #endregion
 
@@ -368,14 +368,18 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             {
                 imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                 NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
-                txtDescrizione.Text = Details.FotoCollection_M[0].Descrizione;
+                txtDescrizioneFotoI.Text = Details.FotoCollection_M[0].DescrizioneI;
+                txtDescrizioneFotoGB.Text = Details.FotoCollection_M[0].DescrizioneGB;
+                txtDescrizioneFotoRU.Text = Details.FotoCollection_M[0].DescrizioneRU;
                 txtProgressivo.Text = Details.FotoCollection_M[0].Progressivo.ToString();
             }
             else
             {
                 imgFoto.ImageUrl = "";
                 NomeFotoSelezionata = "";
-                txtDescrizione.Text = "";
+                txtDescrizioneFotoI.Text = "";
+                txtDescrizioneFotoGB.Text = "";
+                txtDescrizioneFotoRU.Text = "";
                 txtProgressivo.Text = "";
 
             }
@@ -738,7 +742,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             linkFoto.HRef = "";
 
         //txtDescrizione.Text = ((ImageButton)(sender)).ToolTip;
-        txtDescrizione.Text = allegato.Descrizione;
+        txtDescrizioneFotoI.Text = allegato.DescrizioneI;
+        txtDescrizioneFotoGB.Text = allegato.DescrizioneGB;
+        txtDescrizioneFotoRU.Text = allegato.DescrizioneRU;
         txtProgressivo.Text = allegato.Progressivo.ToString();
     }
     protected void btnNuovo_Click(object sender, EventArgs e)
@@ -879,7 +885,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                         updrecord.Qta_vendita = null;
 
                     DateTime _tmpdate = System.DateTime.Now;
-                    if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))  
+                    if (!DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
                         _tmpdate = System.DateTime.Now;
                     updrecord.DataInserimento = _tmpdate;
 
@@ -1092,7 +1098,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         try
         {
             //Carichiamo tutti i clienti destinatari ( prendo i clienti Validati, con consenso commrciale opzione 1, e con card attivata e non scaduta )
-        //    CardsDM cDM = new CardsDM();
+            //    CardsDM cDM = new CardsDM();
             ClientiDM cliDM = new ClientiDM();
             Cliente _clifiltro = new Cliente();
             _clifiltro.Validato = true;
@@ -1250,7 +1256,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         chkContatto.Checked = false;
         chkPromozione.Checked = false;
 
-        txtDescrizione.Text = "";
+        txtDescrizioneFotoI.Text = "";
+        txtDescrizioneFotoGB.Text = "";
+        txtDescrizioneFotoRU.Text = "";
         txtProgressivo.Text = "";
         txtCodiceProd.Text = "";
         //txtFotoSchema.Value = "";
@@ -1372,7 +1380,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
     protected void btnModifica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizione.Text, txtProgressivo.Text);
+        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizioneFotoI.Text, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();
@@ -1382,7 +1390,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnCarica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizione.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text);
+        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizioneFotoI.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();

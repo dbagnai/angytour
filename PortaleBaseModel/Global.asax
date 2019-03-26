@@ -669,11 +669,16 @@
             "~/index.aspx"
         );
 
+        //routes.Add(new Route(  "{textmatch}",
+        //new RouteValueDictionary { { "textmatch", "*.html" } }, 
+        //new GenericRouteHandler()  ));
+
+
         //Fall back per tutti i link in route che non hanno il . all'interno
-        routes.Add(new Route("{textmatch}",
+        routes.Add(new Route(  "{textmatch}",
         new RouteValueDictionary { { "textmatch", "default" } },
         new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
-        new GenericRouteHandler()));
+        new GenericRouteHandler()  ));
 
         RoutingForOldUrlRewrite(routes); //Da configurae con i vecchi valori di route da renindirizzare
     }

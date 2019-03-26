@@ -21,11 +21,33 @@ namespace WelcomeLibrary.DOM
             set { _NomeFile = value; }
         }
 
-        private string _Descrizione;
-        public string Descrizione
+        //private string _Descrizione;
+        //public string Descrizione
+        //{
+        //    get { return _Descrizione; }
+        //    set { _Descrizione = value; }
+        //}
+        private string _DescrizioneI;
+        public string DescrizioneI
         {
-            get { return _Descrizione; }
-            set { _Descrizione = value; }
+            get { return _DescrizioneI; }
+            set { _DescrizioneI = value; }
+
+        }
+
+        private string _DescrizioneGB;
+        public string DescrizioneGB
+        {
+            get { return _DescrizioneGB; }
+            set { _DescrizioneGB = value; }
+
+        }
+        private string _DescrizioneRU;
+        public string DescrizioneRU
+        {
+            get { return _DescrizioneRU; }
+            set { _DescrizioneRU = value; }
+
         }
         private string _Cartella;
         public string Cartella
@@ -59,7 +81,10 @@ namespace WelcomeLibrary.DOM
         {
             this.Acquisito = tmp.Acquisito;
             this.Cartella = tmp.Cartella;
-            this.Descrizione = tmp.Descrizione;
+            //this.Descrizione = tmp.Descrizione;
+            this.DescrizioneI = tmp.DescrizioneI;
+            this.DescrizioneGB = tmp.DescrizioneGB;
+            this.DescrizioneRU = tmp.DescrizioneRU;
             this.File = tmp.File;
             this.NomeAnteprima = tmp.NomeAnteprima;
             this.NomeFile = tmp.NomeFile;
@@ -69,12 +94,50 @@ namespace WelcomeLibrary.DOM
         {
             this.Acquisito = false;
             this.Cartella = "";
-            this.Descrizione = "";
+            //this.Descrizione = "";
+            this.DescrizioneI = string.Empty;
+            this.DescrizioneGB = string.Empty;
+            this.DescrizioneRU = string.Empty;
             this.File = null;
             this.NomeAnteprima = "";
             this.NomeFile = "";
             this.Progressivo = 1;
         }
+
+        public string DescrizionebyLingua(string Lingua)
+        {
+            string ret = "";
+            switch (Lingua)
+            {
+                case "GB":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneGB)) ? this.DescrizioneGB : this.DescrizioneI;
+                    break;
+                case "RU":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneRU)) ? this.DescrizioneRU : this.DescrizioneI;
+                    break;
+                default:
+                    ret = this.DescrizioneI;
+                    break;
+            }
+            return ret;
+        }
+        public void DescrizionebyLingua(string Lingua, string value)
+        {
+
+            switch (Lingua)
+            {
+                case "GB":
+                    this.DescrizioneGB = value;
+                    break;
+                case "RU":
+                    this.DescrizioneRU = value;
+                    break;
+                default:
+                    this.DescrizioneI = value;
+                    break;
+            }
+        }
+
         #region IDisposable Membri di
 
         //Implement IDisposable.

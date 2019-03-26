@@ -1467,7 +1467,7 @@
                                         <asp:Repeater runat="server" ID="rptImmagini">
                                             <ItemTemplate>
                                                 <li style="list-style: none; display: inline">
-                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("Descrizione").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>'
+                                                    <asp:ImageButton Width="80px" Height="80px" ToolTip='<%# Eval("DescrizioneI").ToString() %>' ID="imgAntFoto" CommandArgument='<%# Eval("NomeFile").ToString() %>'
                                                         OnClick="linkgalleria_click" runat="server" ImageUrl='<%# ComponiUrlGalleriaAnteprima(Eval("NomeAnteprima").ToString()) %>' />
                                                 </li>
                                             </ItemTemplate>

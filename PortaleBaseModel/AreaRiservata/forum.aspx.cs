@@ -637,7 +637,7 @@ public partial class AreaRiservata_Default : CommonPage
             {
                 string link = PercorsoFiles + "/" + Tipologia + "/" + id.ToString() + "/" + a.NomeFile;
                 link = CommonPage.ReplaceAbsoluteLinks(link);
-                string descrizione = a.Descrizione;
+                string descrizione = a.DescrizioneI;
                 if (string.IsNullOrWhiteSpace(descrizione)) descrizione = a.NomeFile;
                 sb.Append("<li>");
                 if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
@@ -678,7 +678,7 @@ public partial class AreaRiservata_Default : CommonPage
             {
                 string link = PercorsoFiles + "/" + Tipologia + "/" + id.ToString() + "/" + a.NomeFile;
                 link = CommonPage.ReplaceAbsoluteLinks(link);
-                string descrizione = a.Descrizione;
+                string descrizione = a.DescrizioneI;
                 if (string.IsNullOrWhiteSpace(descrizione)) descrizione = a.NomeFile;
                 if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
                 {
@@ -718,7 +718,7 @@ public partial class AreaRiservata_Default : CommonPage
                 //Caricare il ritratto dall'archivio soci --> da fare!!
                 if (Details.FotoCollection_M != null)
                 {
-                    Allegato a = Details.FotoCollection_M.Find(o => o.Descrizione == "Ritratto");
+                    Allegato a = Details.FotoCollection_M.Find(o => o.DescrizioneI == "Ritratto");
                     if (a != null)
                     {
                         urlimmagine = PercorsoFiles + "/" + Details.CodiceTipologia + "/" + Details.Id + "/" + a.NomeFile;
