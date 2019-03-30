@@ -58,7 +58,8 @@ public partial class index : CommonPage
             //Inserisco i Contenuti di Pagina con prerender !!!
             /////////////////////////////////////////////
             htmlPage = (ReplaceLinks(content.DescrizionebyLingua(Lingua)));
-            htmlPage = custombind.bind(htmlPage, Lingua, User.Identity.Name, HttpContext.Current.Session, null, null, Request); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
+            custombind cb = new custombind();
+            htmlPage = cb.bind(htmlPage, Lingua, User.Identity.Name, HttpContext.Current.Session, null, null, Request); //eseguiamo il bindig delle funzioni lato server per quelle identificabili
             litTextHeadPage.Text = ReplaceAbsoluteLinks(htmlPage);
 
             /////////////////////////////////////////////

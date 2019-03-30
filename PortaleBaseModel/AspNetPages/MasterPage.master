@@ -217,9 +217,9 @@
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fas fas-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
             </div>
-             <div class="d-block d-sm-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+            <div class="d-block d-sm-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconwhatsapp") %>'>
-                    <i class="fa fa-2x fa-whatsapp" style="color:#00e676;font-size: 30px;font-weight:900; margin-top: 5px;"></i></a>
+                    <i class="fa fa-2x fa-whatsapp" style="color: #00e676; font-size: 30px; font-weight: 900; margin-top: 5px;"></i></a>
             </div>
             <%--<div class="container" id="divImg">
                 <div class="row">
@@ -384,7 +384,7 @@
                             <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />--%>
 
                             <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" />
-                            <button type="button"  onclick="cerca('searchboxinputtext','rif000001',true)" id="Button2" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
+                            <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="Button2" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
 
 
                         </div>
@@ -493,8 +493,10 @@
             </asp:ContentPlaceHolder>
 
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
-                <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
-                </asp:ContentPlaceHolder>
+                <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
                 <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermastercenter" runat="server">
                     </asp:ContentPlaceHolder>
@@ -683,13 +685,13 @@
                                             <li>
                                                 <a href='<%# references.ResMan("Common", Lingua,"_linkpinterest") %>" runat="server" target="_blank" class="social-media-icon pininterest-icon" data-original-title="pininterest">pininterest</a>
                                             </li>--%>
-                                            <li style="float: right">
-                                                <a href='<%# references.ResMan("Common", Lingua,"_linktripadvisor") %>' target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
-                                            </li>
                                         <li style="float: right">
-                                                <a href='<%# references.ResMan("Common", Lingua,"_linkskype") %>' class="social-media-icon skype-icon" data-original-title="Skype">Skype</a>
-                                            </li>
-                                        
+                                            <a href='<%# references.ResMan("Common", Lingua,"_linktripadvisor") %>' target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
+                                        </li>
+                                        <li style="float: right">
+                                            <a href='<%# references.ResMan("Common", Lingua,"_linkskype") %>' class="social-media-icon skype-icon" data-original-title="Skype">Skype</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>

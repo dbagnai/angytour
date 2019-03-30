@@ -362,7 +362,7 @@ public partial class _executetasks : CommonPage
             //|feedbackimg| -> immagnie del prodotto alla form per inserimento del feedback  
             /////////////////////////////////////////////////////////////////////////////////////////////////////
             long idpost = m.Id_card; //CONTIENE L'ID del post cui fa riferimento il feedback dalla procedura handlernewsletter "inseriscimailrichiestafeedback":
-            Dictionary<string, string> links = offerteDM.getlinklist(m.Lingua, idpost.ToString());
+            Dictionary<string, string> links = offerteDM.getlinklist(m.Lingua, idpost.ToString(), Session.SessionID);
             if (links != null && links.ContainsKey(idpost.ToString()))
             {
                 Descrizione = Descrizione.Replace("|feedbacklnk|", links[idpost.ToString()]);

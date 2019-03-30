@@ -14,8 +14,9 @@ namespace WelcomeLibrary.STATIC
         }
 
 
-        private static string _viewportw = "";
-        public static string Viewportw
+
+        private static Dictionary<string, Dictionary<string, string>> _viewportw = new Dictionary<string, Dictionary<string, string>>();
+        public static Dictionary<string, Dictionary<string, string>> Viewportw
         {
             get { return _viewportw; }
             set { _viewportw = value; }

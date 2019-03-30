@@ -4749,8 +4749,9 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         /// <param name="lingua"></param>
         /// <param name="id"></param>
+        /// <param name="sessionid"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> getlinklist(string lingua, string id)
+        public static Dictionary<string, string> getlinklist(string lingua, string id, string sessionid = "")
         {
             Dictionary<string, string> linklist = new Dictionary<string, string>();
             offerteDM offDM = new offerteDM();
@@ -4778,7 +4779,7 @@ namespace WelcomeLibrary.DAL
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString());
-                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, Utility.ViewportwManagerGet(sessionid));
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 if (!linklist.ContainsKey(_o.Id.ToString()))
@@ -4791,7 +4792,6 @@ namespace WelcomeLibrary.DAL
             }
             return linklist;
         }
-
         public static List<string> GetIdinRange(string connection, double latitude, double longitude, double radius = 20000, bool includiarchiviati = false)
         {
 
@@ -4849,7 +4849,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="spagesize"></param>
         /// <param name="senablepager"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> filterData(string lingua, Dictionary<string, string> filtri, string spage, string spagesize, string senablepager)
+        public static Dictionary<string, string> filterData(string lingua, Dictionary<string, string> filtri, string spage, string spagesize, string senablepager, string sessionid = "")
         {
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
 
@@ -5195,7 +5195,7 @@ namespace WelcomeLibrary.DAL
 
                 string pathimmagine = filemanage.ComponiUrlAnteprima(_o.FotoCollection_M.FotoAnteprima, _o.CodiceTipologia, _o.Id.ToString(), true, true);
                 // (potrei decidere anche di passare ls versione dell'immagine in base alla rispolizione   WelcomeLibrary.STATIC.Global.Viewportw
-                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, Utility.ViewportwManagerGet(sessionid));
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
                     pathimmagine = "~/images/dummylogo.jpg".Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
@@ -5342,7 +5342,7 @@ namespace WelcomeLibrary.DAL
                             {
                                 //IMMAGINE
                                 string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
-                                tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                                tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, Utility.ViewportwManagerGet(sessionid));
 
                                 string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
@@ -5364,7 +5364,7 @@ namespace WelcomeLibrary.DAL
                             {
                                 //a.Descrizione -> dove la mettiamo
                                 string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
-                                //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                                //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine,  Utility.ViewportwManagerGet(sessionid));
 
                                 tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                                 filescomplete.Add(tmppathimmagine);

@@ -10,14 +10,50 @@ using System.Text.RegularExpressions;
 
 namespace WelcomeLibrary.UF
 {
-    public static class custombind
+    public class custombind
     {
-        private static string Lingua = "";
-        private static string Username = "";
-        private static System.Web.SessionState.HttpSessionState Session = null;
-        private static System.Web.HttpRequest Richiesta = null;
-        public static Dictionary<string, string> jscommands = new Dictionary<string, string>();
-        public static string bind(string text, string lingua, string username = "", System.Web.SessionState.HttpSessionState sessione = null, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null, System.Web.HttpRequest richiesta = null)
+
+        private string Lingua = "";
+        private string Username = "";
+        private System.Web.SessionState.HttpSessionState Session = null;
+        private System.Web.HttpRequest Richiesta = null;
+
+        public static Dictionary<string, Dictionary<string, string>> jscommands = new Dictionary<string, Dictionary<string, string>>();
+
+        //public static void cleanjscommands()
+        //{
+        //    try
+        //    {
+        //        //rimozione chiavi scadute
+        //        List<string> keytoremove = new List<string>();
+        //        long hourslease = 1;
+        //        //Svuotiamo le chiavi scadute da un certo lasso di tempo per ripulirle
+        //        foreach (KeyValuePair<string, Dictionary<string, string>> kv in jscommands)
+        //        {
+        //            if (kv.Value.ContainsKey("timeadded"))
+        //            {
+        //                DateTime timestored = DateTime.FromBinary(long.Parse(kv.Value["timeadded"]));
+        //                TimeSpan ts = (DateTime.Now - timestored);
+        //                if (ts.Hours > hourslease) keytoremove.Add(kv.Key);
+        //            }
+        //        }
+        //        keytoremove.ForEach(k => jscommands.Remove(k));
+        //    }
+        //    catch
+        //    { }
+        //}
+
+
+
+        //public custombind()
+        //{
+        //    Lingua = "";
+        //    Username = "";
+        //    Session = null;
+        //    Richiesta = null;
+        //}
+
+        public string bind(string text, string lingua, string username = "", System.Web.SessionState.HttpSessionState sessione = null, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null, System.Web.HttpRequest richiesta = null)
         {
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +68,10 @@ namespace WelcomeLibrary.UF
             Username = username;
             Session = sessione;
             Richiesta = richiesta;
+
+            if (Session == null) return text;
+
+
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(text);
             var findclasses = doc.DocumentNode.Descendants().Where(d =>
@@ -55,7 +95,7 @@ namespace WelcomeLibrary.UF
 
 
 
-        private static void BindElement(HtmlNode node, HtmlDocument doc, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null)
+        private void BindElement(HtmlNode node, HtmlDocument doc, Dictionary<string, string> filtri = null, Dictionary<string, string> filtripager = null)
         {
             try
             {
@@ -72,7 +112,7 @@ namespace WelcomeLibrary.UF
 
         }
 
-        private static void functioncallmapping(List<string> pars, HtmlNode node, HtmlDocument doc, Dictionary<string, string> dictpars = null, Dictionary<string, string> dictpagerpars = null)
+        private void functioncallmapping(List<string> pars, HtmlNode node, HtmlDocument doc, Dictionary<string, string> dictpars = null, Dictionary<string, string> dictpagerpars = null)
         {
             if (dictpars == null)
                 dictpars = new Dictionary<string, string>();
@@ -138,7 +178,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,8 +252,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "initSlider('" + dictpars["controlid"] + "','" + node.Id + "'," + dictpars["width"] + "," + dictpars["height"] + ")");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "initSlider('" + dictpars["controlid"] + "','" + node.Id + "'," + dictpars["width"] + "," + dictpars["height"] + ")");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -262,7 +304,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -336,8 +378,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "initcycleBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "initcycleBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -385,7 +429,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -500,8 +544,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -549,7 +595,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -639,8 +685,9 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    //if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    //jscommands.Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
+                                    //    if (jscommands.ContainsKey(Session.SessionID)){
+                                    //if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    //jscommands[Session.SessionID].Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -688,7 +735,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -770,8 +817,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "initScrollerBanner('" + dictpars["controlid"] + "','" + dictpars["scrollertype"] + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "initScrollerBanner('" + dictpars["controlid"] + "','" + dictpars["scrollertype"] + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -848,7 +897,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -959,8 +1008,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "initScrollertype('" + dictpars["controlid"] + "','" + dictpars["container"] + "','" + dictpars["scrollertype"] + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "initScrollertype('" + dictpars["controlid"] + "','" + dictpars["container"] + "','" + dictpars["scrollertype"] + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1046,7 +1097,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, "1", "1", "false");
+                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, "1", "1", "false", Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1157,8 +1208,10 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "inizializzaFlexsliderGallery('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "inizializzaFlexsliderGallery('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -1255,7 +1308,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1465,6 +1518,7 @@ namespace WelcomeLibrary.UF
                                                     if (!string.IsNullOrEmpty(linkprev))
                                                         Session["linkprev"] = linkprev;
                                                 }
+
 #endif
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
 
@@ -1640,19 +1694,21 @@ namespace WelcomeLibrary.UF
 
                                     //Aggiorno le variaibli javascript globalObject[controlid + "params"] ( da dictpars) e globalObject[controlid + "pagerdata" ] ( da dictpagerpars ) per far funzionare il pager lato client !!!
                                     //La seguente prepara una chiamata a funzione javascript che inizializza le variabili js. ( SERVE SOLO PER UTILIZZO LATO CLIENT )
-                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
+                                    jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container + "-1")) jscommands.Remove(container + "-1");
-                                    jscommands.Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                    if (jscommands[Session.SessionID].ContainsKey(container + "-1")) jscommands[Session.SessionID].Remove(container + "-1");
+                                    jscommands[Session.SessionID].Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
 
                                     //if (dictpagerpars["enablepager"] == "true")
                                     //{
-                                    //jscommands.Add(container + "-2", "initHtmlPager('" + dictpars["controlid"] + "');");
-                                    // jscommands.Add(container + "-3", "renderPager('" + dictpars["controlid"] + "');"); //QESUTA LA DEVI REPLICARE LATO SERBE USA LE RISORSE!!!!!! o gli devi passare le risporse necessarie!!
+                                    //jscommands[Session.SessionID].Add(container + "-2", "initHtmlPager('" + dictpars["controlid"] + "');");
+                                    // jscommands[Session.SessionID].Add(container + "-3", "renderPager('" + dictpars["controlid"] + "');"); //QESUTA LA DEVI REPLICARE LATO SERBE USA LE RISORSE!!!!!! o gli devi passare le risporse necessarie!!
                                     //}
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1750,7 +1806,7 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
+                            Dictionary<string, string> dictdati = offerteDM.filterData(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"], Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1960,6 +2016,7 @@ namespace WelcomeLibrary.UF
                                                     if (!string.IsNullOrEmpty(linkprev))
                                                         Session["linkprev"] = linkprev;
                                                 }
+
 #endif
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
 
@@ -2150,19 +2207,21 @@ namespace WelcomeLibrary.UF
 
                                     //Aggiorno le variaibli javascript globalObject[controlid + "params"] ( da dictpars) e globalObject[controlid + "pagerdata" ] ( da dictpagerpars ) per far funzionare il pager lato client !!!
                                     //La seguente prepara una chiamata a funzione javascript che inizializza le variabili js. ( SERVE SOLO PER UTILIZZO LATO CLIENT )
-                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
+                                    jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    //if (jscommands.ContainsKey(container + "-1")) jscommands.Remove(container + "-1");
-                                    //jscommands.Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                    //if (jscommands[Session.SessionID].ContainsKey(container + "-1")) jscommands[Session.SessionID].Remove(container + "-1");
+                                    //jscommands[Session.SessionID].Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
 
                                     //if (dictpagerpars["enablepager"] == "true")
                                     //{
-                                    //jscommands.Add(container + "-2", "initHtmlPager('" + dictpars["controlid"] + "');");
-                                    // jscommands.Add(container + "-3", "renderPager('" + dictpars["controlid"] + "');"); //QESUTA LA DEVI REPLICARE LATO SERBE USA LE RISORSE!!!!!! o gli devi passare le risporse necessarie!!
+                                    //jscommands[Session.SessionID].Add(container + "-2", "initHtmlPager('" + dictpars["controlid"] + "');");
+                                    // jscommands[Session.SessionID].Add(container + "-3", "renderPager('" + dictpars["controlid"] + "');"); //QESUTA LA DEVI REPLICARE LATO SERBE USA LE RISORSE!!!!!! o gli devi passare le risporse necessarie!!
                                     //}
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2213,8 +2272,8 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            //Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false");
+                            //Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"],Session.SessionID);
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false", Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2282,14 +2341,16 @@ namespace WelcomeLibrary.UF
                                     node.Attributes["params"].Remove();
                                     CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
 
-                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
+                                    jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -2339,7 +2400,7 @@ namespace WelcomeLibrary.UF
                             //CARICAMENTO DATI PER BIND
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, dictpagerpars["page"], dictpagerpars["pagesize"], dictpagerpars["enablepager"]);
-                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false");
+                            Dictionary<string, string> dictdati = bannersDM.filterDataBanner(Lingua, dictpars, "1", "1", "false", Session.SessionID);
                             if (dictdati != null && dictdati.Count > 0)
                             {
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2416,14 +2477,17 @@ namespace WelcomeLibrary.UF
                                     node.Attributes["params"].Remove();
                                     CleanHtml(node);//rimuovo gli attributi usati per il bind dagli elementi ( DA ULTIMARE )
 
-                                    if (jscommands.ContainsKey(container + "-2")) jscommands.Remove(container + "-2");
-                                    jscommands.Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                    if (!jscommands.ContainsKey(Session.SessionID))
+                                        jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                    if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
+                                    jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if (jscommands.ContainsKey(container)) jscommands.Remove(container);
-                                    jscommands.Add(container, "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                    if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
+                                    jscommands[Session.SessionID].Add(container, "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -2473,7 +2537,7 @@ namespace WelcomeLibrary.UF
             //el.find('*').removeAttr("params");
             //el.find('*').removeAttr("params");
         }
-        public static bool IsEven(int value)
+        private static bool IsEven(int value)
         {
             return value % 2 == 0;
         }
@@ -2484,7 +2548,7 @@ namespace WelcomeLibrary.UF
         /// <param name="item"></param>
         /// <param name="linkloaded"></param>
         /// <param name="resultinfo"></param>
-        private static void DataBindElement(HtmlNode nodetobind, Dictionary<string, string> itemdic, Dictionary<string, Dictionary<string, string>> linkloaded, Dictionary<string, string> resultinfo)
+        private void DataBindElement(HtmlNode nodetobind, Dictionary<string, string> itemdic, Dictionary<string, Dictionary<string, string>> linkloaded, Dictionary<string, string> resultinfo)
         {
             try
             {
@@ -2780,8 +2844,8 @@ namespace WelcomeLibrary.UF
                                         if (int.TryParse(maxheight, out calcheight))
                                         {
                                             int actwidth = 0;
-                                            if (int.TryParse(WelcomeLibrary.STATIC.Global.Viewportw, out actwidth))
-                                                if (calcheight > actwidth) calcheight = actwidth;
+                                            if (int.TryParse(Utility.ViewportwManagerGet(Session.SessionID), out actwidth))
+                                                if (calcheight > actwidth && actwidth != 0) calcheight = actwidth;
                                             try
                                             {
                                                 double ar = 1;
@@ -2789,7 +2853,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -2802,7 +2866,7 @@ namespace WelcomeLibrary.UF
                                     //  <img class="img-responsive mx-auto" alt="" src="" style="margin:0px auto;background-color:#ffffff;padding: 20px">
 
                                     //  contenutoslide += "<a rel=\"prettyPhoto[pp_gal]\" href=\"" + imgslist[j] + "\">';
-                                    sb.Append("<img class=\"img-fluid\"   style=\"background-color:#ffffff;padding: 20px;border:none;" + imgstyle + "\" src=\"");
+                                    sb.Append("<img class=\"img-fluid\"   style=\"background-color:#ffffff;padding: 10px;border:none;" + imgstyle + "\" src=\"");
                                     sb.Append(imgslist[j]);
                                     sb.Append("\" ");
 
@@ -2932,6 +2996,7 @@ namespace WelcomeLibrary.UF
                             nodetobind.SetAttributeValue("src", completepath);
                         }
                     }
+
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("flexmaincontainer"))
                     {
                         List<string> imgslist = new List<string>();
@@ -2992,7 +3057,7 @@ namespace WelcomeLibrary.UF
                                         if (int.TryParse(maxheight, out calcheight))
                                         {
                                             int actwidth = 0;
-                                            if (int.TryParse(WelcomeLibrary.STATIC.Global.Viewportw, out actwidth))
+                                            if (int.TryParse(Utility.ViewportwManagerGet(Session.SessionID), out actwidth))
                                                 if (calcheight > actwidth) calcheight = actwidth;
                                             try
                                             {
@@ -3001,7 +3066,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3267,8 +3332,11 @@ namespace WelcomeLibrary.UF
                             string idelement = itemdic[property];
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
                             {    //bookingtool.initbookingtool(idelement, nodetobind.Attributes["id"]);
-                                if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value)) jscommands.Remove(nodetobind.Attributes["id"].Value);
-                                jscommands.Add(nodetobind.Attributes["id"].Value, "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");"); //Imposto la chiamata da tornare
+                                if (!jscommands.ContainsKey(Session.SessionID))
+                                    jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                if (jscommands[Session.SessionID].ContainsKey(nodetobind.Attributes["id"].Value)) jscommands[Session.SessionID].Remove(nodetobind.Attributes["id"].Value);
+                                jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");"); //Imposto la chiamata da tornare
+
                             }
                         }
                     }
@@ -3279,11 +3347,59 @@ namespace WelcomeLibrary.UF
                             string idelement = itemdic[property];
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
                             {
-                                if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value)) jscommands.Remove(nodetobind.Attributes["id"].Value);
-                                jscommands.Add(nodetobind.Attributes["id"].Value, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + nodetobind.Attributes["id"].Value + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                                string idcontenitorecarrello = nodetobind.Attributes["id"].Value;
+
+                                //idcontenitorecarrello += "-" + idelement; //commetare per funzionamento standard
+                                //nodetobind.Attributes["id"].Value = idcontenitorecarrello;//commetare per funzionamento standard
+                                if (!jscommands.ContainsKey(Session.SessionID))
+                                    jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                if (jscommands[Session.SessionID].ContainsKey(idcontenitorecarrello)) jscommands[Session.SessionID].Remove(idcontenitorecarrello);
+                                jscommands[Session.SessionID].Add(idcontenitorecarrello, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + idcontenitorecarrello + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
+
+
+
                             }
                         }
                     }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("controlscarrello"))
+                    {
+                        /*
+                         * <div class=\"button-carrello trigcarrellosub\" style=\"padding-left: 2px !important;font-size: 2rem;\" >-</div>
+                         * <input style=\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\"  value=\"0\">
+                         * <div class="button-carrello trigcarrelloadd" style="padding-left: 2px !important;font-size: 2rem;" >+</div>
+                         */
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idelement = itemdic[property];
+
+                            sb.Append("<div><div class=\"button-carrello trigcarrellosub\" style=\"padding-left: 2px !important;font-size: 2rem;\"  ");
+                            sb.Append(" idbind=\"" + idelement + "\" ");
+                            sb.Append(" >-</div></div>");
+                            sb.Append(" <div class=\"px-1\"><input style=\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\"  value=\"0\" ");
+                            sb.Append(" id=\"qty-" + idelement + "\" ");
+                            sb.Append("< /></div>");
+                            sb.Append("<div><div class=\"button-carrello trigcarrelloadd\" style=\"padding-left: 2px !important;font-size: 2rem;\"  ");
+                            sb.Append(" idbind=\"" + idelement + "\" ");
+                            sb.Append(" >+</div></div>");
+
+                            //nodetobind.Attributes.Add("data-lazyload", pathImg);
+
+                            //if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
+                            //{
+                            //    string idcontenitorecarrello = nodetobind.Attributes["id"].Value;
+                            //    if (jscommands.ContainsKey(idcontenitorecarrello)) jscommands.Remove(idcontenitorecarrello);
+                            //    jscommands.Add(idcontenitorecarrello, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + idcontenitorecarrello + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                            //}
+
+                            string controlliaggiunti = sb.ToString();
+                            nodetobind.InnerHtml = controlliaggiunti;
+
+                        }
+                    }
+
+
+
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("commenttool"))
                     {
                         if (itemdic.ContainsKey(property))
@@ -3308,8 +3424,11 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("maxrecord") && !string.IsNullOrEmpty(nodetobind.Attributes["maxrecord"].Value))
                                     maxrecord = nodetobind.Attributes["maxrecord"].Value;
 
-                                if (jscommands.ContainsKey(nodetobind.Attributes["id"].Value + "commenttool")) jscommands.Remove(nodetobind.Attributes["id"].Value + "commenttool");
-                                jscommands.Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                                if (!jscommands.ContainsKey(Session.SessionID))
+                                    jscommands.Add(Session.SessionID, new Dictionary<string, string>());
+                                if (jscommands[Session.SessionID].ContainsKey(nodetobind.Attributes["id"].Value + "commenttool")) jscommands[Session.SessionID].Remove(nodetobind.Attributes["id"].Value + "commenttool");
+                                jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  //1 carrello con data range //2 carreelo standard //3 entrambi
+
                             }
                         }
                     }
@@ -3348,6 +3467,7 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue3"))
                                     prop.Add(nodetobind.Attributes["myvalue3"].Value);
                                 else prop.Add("");
+
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
                                 //    valore = ret[0];
@@ -3439,6 +3559,8 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue3"))
                                     prop.Add(nodetobind.Attributes["myvalue3"].Value);
                                 else prop.Add("");
+
+
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 // da finire ....
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
@@ -3548,7 +3670,7 @@ namespace WelcomeLibrary.UF
         /// <param name="linkloaded"></param>
         /// <param name="resultinfo"></param>
         /// <returns></returns>
-        private static string CallMappedFunction(string functiontocall, List<string> valore, List<string> prop, HtmlNode nodetobind, Dictionary<string, string> itemdic, Dictionary<string, Dictionary<string, string>> linkloaded, Dictionary<string, string> resultinfo)
+        private string CallMappedFunction(string functiontocall, List<string> valore, List<string> prop, HtmlNode nodetobind, Dictionary<string, string> itemdic, Dictionary<string, Dictionary<string, string>> linkloaded, Dictionary<string, string> resultinfo)
         {
             string ret = "";
 
@@ -4004,7 +4126,7 @@ namespace WelcomeLibrary.UF
             return jscode;
         }
 
-        public static string CreaInitStringJavascript(Dictionary<string, string> addelements = null)
+        public static string CreaInitStringJavascript(string sessionid, Dictionary<string, string> addelements = null)
         {
             string jscode = "<script>//![CDATA[\r\n";
             ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
@@ -4028,22 +4150,24 @@ namespace WelcomeLibrary.UF
                 }
 
 
-            if (jscommands != null)
-                foreach (KeyValuePair<string, string> kv in jscommands)
+            if (jscommands != null && jscommands.ContainsKey(sessionid))
+                foreach (KeyValuePair<string, string> kv in jscommands[sessionid])
                 {
                     jscode += kv.Value + ";\r\n";
                 }
 
             jscode += "//]]></script>\r\n";
-            jscommands = new Dictionary<string, string>(); //Svuoto la memoria dopo aver iniettato le inizializzazioni in pagina
+            //jscommands[sessionid] = new Dictionary<string, string>(); 
+            jscommands.Remove(sessionid);//Svuoto la memoria dopo aver iniettato le inizializzazioni in pagina
+
 
             return jscode;
         }
 
-        public static void AddInitjavascriptvariables(Dictionary<string, string> jscommands)
+        public static void AddInitjavascriptvariables(Dictionary<string, string> jscommandslocal)
         {
-            if (jscommands.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
-            jscommands.Add("NeededJSVars", "var cbindvapidPublicKey = '" + ConfigManagement.ReadKey("PublicKey") + "';\r\n");
+            if (jscommandslocal.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
+            jscommandslocal.Add("NeededJSVars", "var cbindvapidPublicKey = '" + ConfigManagement.ReadKey("PublicKey") + "';\r\n");
 
         }
     }

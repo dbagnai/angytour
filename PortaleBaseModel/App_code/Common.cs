@@ -159,7 +159,8 @@ public class CommonPage : Page
         {
 
             string bindedcustomcontent = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + filename);
-            divcontainer.InnerHtml = custombind.bind(bindedcustomcontent, Lingua, username, sessione, null, null, System.Web.HttpContext.Current.Request);// sb.ToString();
+            custombind cb = new custombind();
+            divcontainer.InnerHtml = cb.bind(bindedcustomcontent, Lingua, username, sessione, null, null, System.Web.HttpContext.Current.Request);// sb.ToString();
             divcontainer.Visible = true;
         }
     }

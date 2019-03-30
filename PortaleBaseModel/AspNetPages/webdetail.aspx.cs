@@ -271,6 +271,7 @@ public partial class _webdetail : CommonPage
     {
         InizializzaSeo(item);
 
+        custombind cb = new custombind();
         string controlsuggeriti = "";
         string cbandestra1 = "";
         ClientScriptManager cs = Page.ClientScript;
@@ -307,7 +308,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerProdotti1.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,'', '" + Categoria2liv + "'");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
 
                     sb.Clear();
 
@@ -327,7 +328,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 }
 
                 break;
@@ -352,7 +353,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
 
                     sb.Clear();
 
@@ -372,7 +373,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
                 }
 
                 break;
@@ -399,7 +400,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
 
@@ -419,7 +420,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog-no-image.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
                 }
 
                 break;
@@ -441,13 +442,13 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerTestimonialsBt3.html,divScrollerSuggeritiJs, carouselInject1,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12, '3'\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-testimonials.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
 
@@ -470,13 +471,13 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -497,13 +498,13 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -524,13 +525,13 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -551,13 +552,13 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
@@ -584,7 +585,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
                     sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
                     sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
 
                     sb.Clear();
 
@@ -604,7 +605,7 @@ public partial class _webdetail : CommonPage
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsBlog.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
                 }
 
                 break;
@@ -696,7 +697,8 @@ public partial class _webdetail : CommonPage
             }
             if (content != null && content.Id != 0)
             {
-                htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+                custombind cb = new custombind();
+                htmlPage = cb.bind(ReplaceAbsoluteLinks(ReplaceLinks(content.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 //if (htmlPage.Contains("injectandloadgenericcontent")) JavaInjection = true;
             }
             litTextHeadPage.Text = htmlPage;

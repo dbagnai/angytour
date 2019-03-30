@@ -164,7 +164,7 @@ public class feedbackHandler : IHttpHandler, IRequiresSessionState
                             if (mail.Sparedict.ContainsKey("Idpost"))
                             {
                                 string idposttmp = mail.Sparedict["Idpost"];
-                                Dictionary<string, string> links = offerteDM.getlinklist(lingua, idposttmp);
+                                Dictionary<string, string> links = offerteDM.getlinklist(lingua, idposttmp, context.Session.SessionID);
                                 if (links != null && links.ContainsKey(idposttmp))
                                     mail.TestoMail += "Link scheda recensione: " + links[idposttmp] + "<br/>";
                                 else

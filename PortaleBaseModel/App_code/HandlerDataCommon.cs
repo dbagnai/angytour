@@ -522,6 +522,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     ////////////////////////////////////////////////////////////////////////////
                     break;
                 case "caricahmtlbinded":
+                    custombind cb = new custombind();
                     string htmlout = "";
                     Dictionary<string, string> filtripager = new Dictionary<string, string>();
                     filtripager.Add("page", page);
@@ -535,10 +536,10 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     //if (filtri.ContainsKey("maincontainertext")) maincontainertext = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(filtri["maincontainertext"]);
                     if (!string.IsNullOrEmpty(maincontainertext))
                     {
-                        htmlout = custombind.bind(maincontainertext, lingua, context.User.Identity.Name, context.Session, filtri, filtripager);
+                        htmlout = cb.bind(maincontainertext, lingua, context.User.Identity.Name, context.Session, filtri, filtripager, context.Request);
                         jreturncontainerdata jr = new jreturncontainerdata();
                         jr.html = htmlout;
-                        jr.jscommands = custombind.jscommands;
+                        jr.jscommands = custombind.jscommands[context.Session.SessionID];
                         result = Newtonsoft.Json.JsonConvert.SerializeObject(jr, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                         {
                             NullValueHandling = NullValueHandling.Ignore,
@@ -547,14 +548,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             PreserveReferencesHandling = PreserveReferencesHandling.None,
                         });
                         //Svuoto jscommands in memoria
-                        custombind.jscommands = new Dictionary<string, string>();
+                        custombind.jscommands.Remove(context.Session.SessionID);
                     }
                     break;
                 case "getlinkbyid":
                     Dictionary<string, string> filtriid = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
                     Dictionary<string, string> valueRet1 = new Dictionary<string, string>();
                     if (filtriid.ContainsKey("id"))
-                        valueRet1 = offerteDM.getlinklist(lingua, filtriid["id"]);
+                        valueRet1 = offerteDM.getlinklist(lingua, filtriid["id"], context.Session.SessionID);
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(valueRet1, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -646,7 +647,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     Dictionary<string, string> filtriBanner = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
 
                     Dictionary<string, string> valueBan = new Dictionary<string, string>();
-                    valueBan = bannersDM.filterDataBanner(lingua, filtriBanner, page, pagesize, enablepager);
+                    valueBan = bannersDM.filterDataBanner(lingua, filtriBanner, page, pagesize, enablepager, context.Session.SessionID);
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(valueBan, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,

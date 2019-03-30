@@ -65,7 +65,58 @@ namespace WelcomeLibrary.UF
 
     public static class Utility
     {
- 
+
+
+        public static void ViewportwManagerSet(string sessionid, string Viewportwidth)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(sessionid)) return;
+                if (!WelcomeLibrary.STATIC.Global.Viewportw.ContainsKey(sessionid))
+                    WelcomeLibrary.STATIC.Global.Viewportw.Add(sessionid, new System.Collections.Generic.Dictionary<string, string>());
+
+                if (!WelcomeLibrary.STATIC.Global.Viewportw[sessionid].ContainsKey("width"))
+                    WelcomeLibrary.STATIC.Global.Viewportw[sessionid].Add("width", Viewportwidth);
+                else
+                    WelcomeLibrary.STATIC.Global.Viewportw[sessionid]["width"] = Viewportwidth;
+
+                if (!WelcomeLibrary.STATIC.Global.Viewportw[sessionid].ContainsKey("timeadded"))
+                    WelcomeLibrary.STATIC.Global.Viewportw[sessionid].Add("timeadded", System.DateTime.Now.ToBinary().ToString());
+                else
+                    WelcomeLibrary.STATIC.Global.Viewportw[sessionid]["timeadded"] = System.DateTime.Now.ToBinary().ToString();
+
+
+                //rimozione chiavi scadute
+                List<string> keytoremove = new List<string>();
+                long minuteslease = 5;
+                //Svuotiamo le chiavi scadute da un certo lasso di tempo per ripulirle
+                foreach (KeyValuePair<string, Dictionary<string, string>> kv in WelcomeLibrary.STATIC.Global.Viewportw)
+                {
+                    if (kv.Value.ContainsKey("timeadded"))
+                    {
+                        DateTime timestored = DateTime.FromBinary(long.Parse(kv.Value["timeadded"]));
+                        TimeSpan ts = (DateTime.Now - timestored);
+                        if (ts.Minutes > minuteslease) keytoremove.Add(kv.Key);
+                    }
+                }
+                keytoremove.ForEach(k => WelcomeLibrary.STATIC.Global.Viewportw.Remove(k));
+            }
+            catch
+            { }
+        }
+        public static string ViewportwManagerGet(string sessionid)
+        {
+            string ret = "";
+            try
+            {
+                if (WelcomeLibrary.STATIC.Global.Viewportw.ContainsKey(sessionid))
+                    if (WelcomeLibrary.STATIC.Global.Viewportw[sessionid].ContainsKey("width"))
+                        ret = WelcomeLibrary.STATIC.Global.Viewportw[sessionid]["width"];
+            }
+            catch
+            { }
+            return ret;
+        }
 
         // EDIT: one of many possible improved versions
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)

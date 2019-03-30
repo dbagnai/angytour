@@ -40,9 +40,13 @@ namespace WelcomeLibrary.UF
                 HttpContext.Current.Response.AppendHeader("Accept-CH", "DPR, Width, Viewport-Width");
                 HttpContext.Current.Response.AppendHeader("Vary", "Accept-Encoding");
             }
+
             String Viewportwidth = context.Request.Headers.Get("Viewport-Width"); //Questa è la viewport del CLIENT presa dalla richiesta !!!
-            if (!string.IsNullOrEmpty(Viewportwidth))
-                WelcomeLibrary.STATIC.Global.Viewportw = Viewportwidth;
+            if (!string.IsNullOrEmpty(Viewportwidth) && (HttpContext.Current.Session != null))
+            {
+                //WelcomeLibrary.STATIC.Global.Viewportw = Viewportwidth;
+                Utility.ViewportwManagerSet(HttpContext.Current.Session.SessionID, Viewportwidth);
+            }
         }
 
 

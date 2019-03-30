@@ -78,10 +78,10 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             //if (content.Id != 9 && content.Id != 10) //Non metto il titolo pagina in questo caso
             litNomeContenuti.Text = DescrizioneContenuto.ToString();
             //EvidenziaSelezione(content.TitoloI.Replace(" ", "").Replace("-", "").Replace("&", "e").Replace("'", "").Replace("?", ""));
-            try
-            {
+           try {
+                custombind cb = new custombind();
                 litMainContent.Text =
-                  custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
+                  cb.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
             }
             catch { }
 

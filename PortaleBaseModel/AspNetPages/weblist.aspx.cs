@@ -264,6 +264,7 @@ public partial class AspNetPages_weblist : CommonPage
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         InizializzaSeo();
         ModificaFiltroJS();
+        custombind cb = new custombind();
         switch (Tipologia)
         {
             case "rif000001": //Simil prodotti x app
@@ -283,7 +284,7 @@ public partial class AspNetPages_weblist : CommonPage
                 sb.Append("injectPortfolioAndLoad,isotopeProdotti1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
                 sb.Append("\"></div>");
                 sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                 break;
             case "rif000002":
@@ -311,13 +312,13 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                     //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     //sb.Append("\"></div>");
                     //sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    //placeholderrisultatinocontainer.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    //placeholderrisultatinocontainer.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
 
                     //sb.Clear();
@@ -328,7 +329,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //sb.Append("\"></div>");
                     //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
                     //sb.Append("</div>");
-                    //placeholderlateral.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                    //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
                 }
                 break;
             case "rif000005":
@@ -354,7 +355,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopePortfolio4Card.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
@@ -385,7 +386,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     //sb.Append("</div>");
-                    placeholderrisultatinocontainer.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultatinocontainer.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
@@ -411,7 +412,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopeGallery1.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
@@ -437,7 +438,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopeStaff.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
@@ -462,13 +463,13 @@ public partial class AspNetPages_weblist : CommonPage
                     //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
                     //sb.Append("\"></div>");
                     //sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    //placeholderrisultati.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                    //placeholderrisultati.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
 
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog-no-image.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                     //sb.Clear();
                     //sb.Append("<div class=\"sfondo-contenitore\">");
@@ -478,7 +479,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //sb.Append("\"></div>");
                     //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
                     //sb.Append("</div>");
-                    //placeholderlateral.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                    //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
                 }
                 break;
 
@@ -502,7 +503,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,IsotopeTestimonials.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
@@ -532,7 +533,7 @@ public partial class AspNetPages_weblist : CommonPage
                     sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3.html,divPortfolioList,portlist1, 1, 9,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
                     //sb.Clear();
                     //sb.Append("<div class=\"sfondo-contenitore\">");
@@ -542,7 +543,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //sb.Append("\"></div>");
                     //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
                     //sb.Append("</div>");
-                    //placeholderlateral.Text =  custombind.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                    //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
                 }
                 break;
         }
@@ -1172,7 +1173,8 @@ public partial class AspNetPages_weblist : CommonPage
         string customdesc = "";
         if (contentcollegato != null && contentcollegato.Id != 0)
         {
-            htmlPage = custombind.bind(ReplaceAbsoluteLinks(ReplaceLinks(contentcollegato.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+            custombind cb = new custombind();
+            htmlPage = cb.bind(ReplaceAbsoluteLinks(ReplaceLinks(contentcollegato.DescrizionebyLingua(Lingua)).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);
             //if (htmlPage.Contains("injectPortfolioAndLoad")) JavaInjection = true;
             switch (Lingua.ToLower())
             {

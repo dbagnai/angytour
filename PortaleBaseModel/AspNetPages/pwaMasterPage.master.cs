@@ -123,7 +123,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
     {
         Dictionary<string, string> addelements = new Dictionary<string, string>();
         LoadJavascriptVariablesEnd(addelements);
-        string ret = custombind.CreaInitStringJavascript(addelements);
+        string ret = custombind.CreaInitStringJavascript(Session.SessionID, addelements);
         return ret;
     }
     public string InjectedStartPageScripts()

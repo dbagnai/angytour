@@ -152,7 +152,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
     {
         Dictionary<string, string> addelements = new Dictionary<string, string>();
         LoadJavascriptVariablesEnd(addelements);
-        string ret = WelcomeLibrary.UF.custombind.CreaInitStringJavascript(addelements);
+        string ret = WelcomeLibrary.UF.custombind.CreaInitStringJavascript(Session.SessionID, addelements);
         return ret;
     }
     public string InjectedStartPageScripts()

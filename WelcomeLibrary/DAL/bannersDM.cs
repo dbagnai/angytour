@@ -51,7 +51,7 @@ namespace WelcomeLibrary.DAL
         /// <param name="spagesize"></param>
         /// <param name="senablepager"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> filterDataBanner(string lingua, Dictionary<string, string> filtriBanner, string spage, string spagesize, string senablepager)
+        public static Dictionary<string, string> filterDataBanner(string lingua, Dictionary<string, string> filtriBanner, string spage, string spagesize, string senablepager, string sessionid = "")
         {
             bool enabledpager = false;
             bool.TryParse(senablepager, out enabledpager);
@@ -127,7 +127,7 @@ namespace WelcomeLibrary.DAL
                 ///////////////////////////////////////
                 //Qui  posso decidere di passare le versioni in base alla risoluzione   WelcomeLibrary.STATIC.Global.Viewportw
                 //andatando a modificare il noem del file aggiungendo -xs -xs -md -lg  a seconda della risoluzione al nome del file
-                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, WelcomeLibrary.STATIC.Global.Viewportw);
+                pathimmagine = filemanage.SelectImageByResolution(pathimmagine, Utility.ViewportwManagerGet(sessionid));
 
                 pathimmagine = pathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (string.IsNullOrEmpty(pathimmagine))
