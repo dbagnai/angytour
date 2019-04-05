@@ -1354,6 +1354,7 @@ public partial class AspNetPages_weblist : CommonPage
 
         return links;
     }
+
     private void LoadJavascriptVariables()
     {
         ClientScriptManager cs = Page.ClientScript;
