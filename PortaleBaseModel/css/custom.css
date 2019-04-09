@@ -352,7 +352,7 @@ i .fa {
 .menuzord.white .menuzord-menu > li:hover > a span,
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
 .menuzord.white .menuzord-menu > li > a:active {
-  color: #077777 !important;
+  color: #f3c649 !important;
   /*font-weight: @menu-hover-weight;*/
   background: none;
 }
@@ -2504,7 +2504,7 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transform: translate(0%, 0%);
     transform: translate(0%, 0%);
     opacity: 1;
-    border-color: #077777;
+    border-color: #f3c649;
   }
   /*opzione 2*/
   /*.menuzord-menu a:before,

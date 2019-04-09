@@ -493,7 +493,8 @@
             </asp:ContentPlaceHolder>
 
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
-                <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
+                <%--<div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">--%>
+                    <div>
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
