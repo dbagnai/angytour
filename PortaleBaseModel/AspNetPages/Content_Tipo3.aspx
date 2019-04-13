@@ -279,7 +279,7 @@
                                                                         OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
                                                                     <asp:RequiredFieldValidator runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false"
                                                                         ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                                </div>chk
+                                                                </div> 
                                                             </div>
                                                         </div>
 

@@ -299,6 +299,12 @@ pre.prettyprint {
 .alert-block p + p {
   margin-top: 10px;
 }
+
+
+.pagination > li.current > a {
+    background-color: gray;
+}
+
 .pagination > li > span,
 .pager > li > span {
   border-width: 1px;

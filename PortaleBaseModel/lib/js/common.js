@@ -2214,7 +2214,7 @@ function inviamessaggiomail(lng, data, callback) {
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data) },
+        data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data), 'lng': lng},
         success: function (result) {
             //if (callback)
             //    callback(result);
@@ -2242,7 +2242,7 @@ function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallone
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro) },
+        data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng},
         success: function (result) {
             callback(result, functiontocallonend);
         },
