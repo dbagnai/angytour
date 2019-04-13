@@ -265,6 +265,7 @@ i .fa {
 
 .menuzord.white .menuzord-menu > li.active > a,
 .menuzord.white .menuzord-menu > li:hover > a,
+.menuzord.white .menuzord-menu > li:hover > a span,
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
 .menuzord.white .menuzord-menu > li > a:active {
     color: @menu-hover-color !important;
@@ -3297,10 +3298,10 @@ button.js-roundedpush:hover {
 --------------------------------- */
 /*si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
 @media screen and (min-width: 1025px) {
-    #divContainerb1 {
+    /*#divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 81.6px) !important;
-    }
+    }*/
 
     .fixedtop-home {
         display: none !important;
@@ -3322,7 +3323,7 @@ button.js-roundedpush:hover {
     }
 
     .fulllogobckdark-home {
-        width: 400px;
+        width: @larghezza-logo;
         height: 119px;
         padding: 5px;
         background: url(/images/main_logo_d_b.png) center center;
