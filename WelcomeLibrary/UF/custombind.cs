@@ -2870,15 +2870,20 @@ namespace WelcomeLibrary.UF
                                     sb.Append(imgslist[j]);
                                     sb.Append("\" ");
 
+                                    string altdescriptiontext = "";
                                     string descriptiontext = "";
                                     if (imgslist[j].LastIndexOf("/") != -1)
-                                        descriptiontext = imgslist[j].Substring(imgslist[j].LastIndexOf("/") + 1);
+                                        altdescriptiontext = imgslist[j].Substring(imgslist[j].LastIndexOf("/") + 1);
                                     if (imgslistdesc.Count > j && imgslistdesc[j].Trim() != "")
+                                    {
+                                        altdescriptiontext = imgslistdesc[j];
                                         descriptiontext = imgslistdesc[j];
-                                    sb.Append(" alt=\"" + descriptiontext + "\" />");
+                                    }
+                                    sb.Append(" alt=\"" + altdescriptiontext + "\" />");
 
                                     if (!string.IsNullOrEmpty(descriptiontext) && nodetobind.Attributes["class"].Value.Contains("showdescription"))
-                                        sb.Append("<div class=\"lead img-desc pb-2\" >" + descriptiontext + "</div>");
+                                        sb.Append("<div class=\"lead img-desc\" >" + descriptiontext + "</div>");
+
 
 
                                     sb.Append("</div>");

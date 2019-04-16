@@ -157,7 +157,7 @@ namespace WelcomeLibrary.UF
                 {
                     foreach (var m in bundleList)
                     {
-                        sb.AppendLine("<script type=\"text/javascript\">");
+                        sb.AppendLine("<script rel=\"preload\" type=\"text/javascript\">");
                         sb.AppendLine(File.ReadAllText(m.FileName));
                         sb.AppendLine("</script>");
                     }
@@ -167,7 +167,7 @@ namespace WelcomeLibrary.UF
                     string scriptType = BundleOptions.ScriptTypeAttribute ? " type=\"text/javascript\"" : "";
 
                     foreach (var m in bundleList)
-                        sb.AppendFormat("<script" + scriptType + " src=\"{0}\"></script>", m.FileNameHash);
+                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\" src=\"{0}\"></script>", m.FileNameHash);
 
                 }
                 else if (optionInjectmode == EnumInjectionMode.SingleCombinedScript)
@@ -175,9 +175,9 @@ namespace WelcomeLibrary.UF
                     string scriptType = BundleOptions.ScriptTypeAttribute ? " type=\"text/javascript\"" : "";
 
                     if (BundleOptions.UseFileExtension)
-                        sb.AppendFormat("<script" + scriptType + " src=\"/bdejs/{0}\"></script>", BundleName + ".jsx?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\" src=\"/bdejs/{0}\"></script>", BundleName + ".jsx?v=" + bundleList.HashHexString);
                     else
-                        sb.AppendFormat("<script" + scriptType + " src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<script" + scriptType + "rel=\"preload\"  src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
 
 
                 }

@@ -173,11 +173,18 @@ namespace WelcomeLibrary.DOM
             this.Lingua = tmp.Lingua;
         }
 
-        private string _testo;
         public string Testo
         {
             get { return TestobyLingua(this._lingua); }
         }
+
+        public string TestoHtml
+        {
+            get { return WelcomeLibrary.DAL.offerteDM.ReplaceLinks(TestobyLingua(this._lingua)); }
+        }
+
+
+
         private string _titolo;
         public string Titolo
         {
