@@ -298,7 +298,7 @@ public partial class AspNetPages_weblist : CommonPage
                 ContaArticoliPerperiodo(Tipologia);
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
                 divSearch.Visible = true;
-                if (!JavaInjection)
+                if (!string.IsNullOrEmpty(Categoria))
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
@@ -332,9 +332,8 @@ public partial class AspNetPages_weblist : CommonPage
                     //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
                 }
                 break;
+
             case "rif000005":
-
-
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
                 column2.Visible = false;
@@ -362,7 +361,6 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
 
             case "rif000003":
-            case "rif000004":
 
                 column1.Visible = false;
                 column2.Visible = false;
@@ -372,7 +370,8 @@ public partial class AspNetPages_weblist : CommonPage
                 //column3.Attributes["class"] = "col-md-3 col-sm-3";
                 //ContaArticoliPerperiodo(Tipologia);
                 divSearch.Visible = false;
-                if (!JavaInjection)
+                if (!string.IsNullOrEmpty(Categoria))
+
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
                     //string controllist2 = "injectPortfolioAndLoad(\"isotopeVini.html\",\"divPortfolioList1\", \"portlist1\", 1, 21, true, \"\", \"" + cattipo + "\", \"" + Categoria + "\", false, true, \"\",\"" + testoricerca + "\");";
@@ -382,7 +381,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //placeholderrisultati
                     //sb.Append("<div>");
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopeSinglerowAnimated-no-button.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectPortfolioAndLoad,isotopeSinglerowAnimated.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
                     //sb.Append("</div>");
@@ -444,7 +443,7 @@ public partial class AspNetPages_weblist : CommonPage
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
                 break;
 
-            case "rif000008":
+            case "rif000004":
 
                 column1.Visible = true;
                 column1.Attributes["class"] = "col-12";
@@ -452,10 +451,11 @@ public partial class AspNetPages_weblist : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = false;
-                ContaArticoliPerperiodo(Tipologia);
+                //ContaArticoliPerperiodo(Tipologia);
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
-                divSearch.Visible = true;
-                if (!JavaInjection)
+                divSearch.Visible = false;
+                if (!string.IsNullOrEmpty(Categoria))
+
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
