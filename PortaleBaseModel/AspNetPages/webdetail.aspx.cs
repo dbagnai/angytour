@@ -333,7 +333,6 @@ public partial class _webdetail : CommonPage
 
                 break;
             case "rif000002":
-            case "rif000004":
                 column1.Visible = false;
                 column2.Visible = true;
                 /*column3.Attributes["class"] = "col-12 col-sm-3";*/
@@ -457,6 +456,7 @@ public partial class _webdetail : CommonPage
                 break;
 
             case "rif000003":
+            case "rif000004":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";

@@ -314,17 +314,23 @@
             </script>
 
             <div class="navbar-container" id="navbar-container">
+
                 <div class="navbar-header pull-left">
                     <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome") ) %>' class="navbar-brand">
                         <img runat="server" id="imgLogo" src="Immagini/logowebmouse.png" height="50" />
                     </a>
+
                     <!-- /section:basics/navbar.layout.brand -->
                     <!-- #section:basics/navbar.toggle -->
                     <button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
                         <span class="sr-only">Toggle user menu</span>
+
+
                     </button>
+
                     <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">
                         <span class="sr-only">Toggle sidebar</span>
+
                         <span class="icon-bar"></span>
 
                         <span class="icon-bar"></span>
@@ -413,7 +419,7 @@
                         </ul>
                     </li>
                     
-                    <li id="tagPwa" runat="server" class="hover" style="display: none">
+                    <li id="tagPwa" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-mobile"></i>
                             <span class="menu-text">Gestione Sezione APP
@@ -452,7 +458,7 @@
                         </ul>
                     </li>
 
-                    <li id="tagCatalogo" runat="server" class="hover" style="display: none">
+                    <li id="tagCatalogo" runat="server" class="hover" style="display: block">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-book"></i>
                             <span class="menu-text">Gestione Sezione Catalogo
@@ -528,12 +534,12 @@
                                     </li>
                                 </ItemTemplate>
                             </asp:Repeater>
-                           <%--  <li class="hover">
+                             <li class="hover">
                                 <a href="GestioneFeedback.aspx ">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Gestione Feedbacks</span>
                                 <b class="arrow"></b></a>
-                            </li>--%>
+                            </li>
                         </ul>
                     </li>
 
@@ -610,7 +616,6 @@
                                             </li>
 
 
-
                                             <%-- <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000012">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -663,7 +668,7 @@
                                                     <span class="menu-text">Banner Navigazione Principale</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                        <%--    <li class="newLi hover">
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-pwa">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Navigazione Principale PWA</span></a>
@@ -673,12 +678,6 @@
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=icon-portfolio-sezioni-pwa">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Icone Navigazione Principale PWA</span></a>
-                                                <b class="arrow"></b>
-                                            </li>--%>
-                                             <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-servizi">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banners area servizi</span></a>
                                                 <b class="arrow"></b>
                                             </li>
 
@@ -770,7 +769,7 @@
                                     <span class="menu-text">Anagrafica Clienti</span></a>
                                 <b class="arrow"></b>
                             </li>
-                           <%-- <li class="hover">
+                            <li class="hover">
                                 <a href="StoricoOrdini.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Storico Ordini
@@ -782,7 +781,7 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Gestione notifiche</span></a>
                                 <b class="arrow"></b>
-                            </li>--%>
+                            </li>
                         </ul>
                     </li>
                     <li id="tagConfig" runat="server" class="hover">

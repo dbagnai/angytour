@@ -2,8 +2,8 @@
 /*----------------------------------
 /////| COLORI BLOCCHI LINEARI |/////
 ----------------------------------*/
-@bg-primary-color: #809193; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
-@bg-secondary-color: mix(@bg-primary-color, #fff, 80%); /*footer-link*/ /*#dac8a0;*/
+@bg-primary-color: #098f8f; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
+@bg-secondary-color: mix(@bg-primary-color, #fff, 45%); /*footer-link*/ /*#dac8a0;*/
 @bg-light-color: mix(@bg-primary-color, #fff, 8%); /*footer-social e banner*/ /*#f5f0e5;*/
 @bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/ /*#555;*/
 @bg-medium-color: mix(#000, #fff, 80%); 
@@ -22,13 +22,13 @@
 @tonal-tertiary-color: mix(@bg-primary-color, lightseagreen);
 @tonal-quaternary-color: mix(@bg-primary-color, mintcream);
 /**/
-@color-sottomeu: #51595a; /*#d8e056;*/ /* fascia catalogo */
+@color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
 @color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
 @color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.99); /* colore sotto-menu per decorazione titoli*/
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
-@bg-primary-gradient1: #c0a375;
+@bg-primary-gradient1: #0081d1;
 @bg-primary-gradient2: #00aeef;
 @bg-primary-color-sfumato: linear-gradient(45deg, @bg-primary-gradient1, @bg-primary-gradient2);
 /**/
@@ -83,14 +83,14 @@
 @tite-size: 3rem;
 @title-color: @primary-color;
 @tite-font: @primary-font;
-@title-weight: 500;
+@title-weight: 300;
 /*@title-text-transform: uppercase;*/
 @title-text-transform: none;
 /**/
 @subtite-size: 1.8rem;
 @subtitle-color: @secondary-color;
 @subtite-font: @primary-font;
-@subtitle-weight: 600;
+@subtitle-weight: 400;
 /**/
 @body-size: 1.35rem;
 @body-color: @primary-color;
@@ -111,7 +111,7 @@
 /*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
-@title-footer-color: @white-color;
+@title-footer-color: @bg-dark-color;
 @title-footer-color-hover: @white-color;
 @title-footer-border-color: @bg-primary-color;
 /**/
@@ -200,8 +200,8 @@
 @banner-navigazione-radius: .25rem;
 @banner-navigazione-background: @white-color;
 /**/
-@title-banner-navigazione-size: 1.5rem;
-@subtitle-banner-navigazione-size: 1.3rem;
+@title-banner-navigazione-size: 1.4rem;
+@subtitle-banner-navigazione-size: 1.2rem;
 /**/
 @icon-nav-1: url(/images/icon-tubo.png);
 @icon-nav-2: url(/images/icon-paletta-dx.png);
@@ -224,12 +224,12 @@
 /*----------------------------------
 ///////| PATTERN BACKGROUND |///////
 ----------------------------------*/
-@pattern-image: none ;//url(/images/pattern/ricicled4.png);
+@pattern-image: url(/images/pattern/ricicled4.png);
 @pattern-size: 30%;
 /**/
 @pattern-sottomenu-size: 20%;
 /**/
-@pattern-image-light: none;//url(/images/pattern/ricicled5.png);
+@pattern-image-light: url(/images/pattern/ricicled5.png);
 @pattern-size-light: 15%;
 /*----------------------------------
 ///////////| SVG ICON |/////////////

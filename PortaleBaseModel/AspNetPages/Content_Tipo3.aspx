@@ -60,10 +60,17 @@
                 <div class="mbr-overlay mbr-overlay-white"></div>
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 91%;">
 
+                            <%--AVVISO ERRORE DATI NON INSERITI--%>
+                            <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
+                                ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
+                            <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
+                            <div id="recaptcharesponse" style="display: none;" class="errormessageformprivacy"></div>
+                        </div>
                         <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                            <div class="col-12 col-sm-8 py-1 px-3 pt-0 text-center bg-manual-secondary-color-fade">
+                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-0 text-center bg-manual-secondary-color-fade">
                                 <div class="ui-15">
                                     <div class="ui-content">
                                         <div class="container-fluid">
@@ -272,7 +279,7 @@
                                                                         OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
                                                                     <asp:RequiredFieldValidator runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false"
                                                                         ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
-                                                                </div>
+                                                                </div> 
                                                             </div>
                                                         </div>
 
@@ -300,13 +307,6 @@
 
                                                                 <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
                                                                 <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
-
-                                                                <%--AVVISO ERRORE DATI NON INSERITI--%>
-                                                                <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"
-                                                                    ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
-                                                                <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
-                                                                <div id="recaptcharesponse" style="display: none;" class="errormessageformprivacy"></div>
-
                                                                 <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                                 <style>
                                                                     .g-recaptcha {
