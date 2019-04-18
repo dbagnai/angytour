@@ -29,7 +29,7 @@
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="pt-4 pb-2 pb-md-4 position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
+    <div class="position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
 
         <div class="d-flex flex-row-reverse">
             <div class="col-12 col-sm-3 pl-0 pl-sm-2 pr-0" runat="server" id="divSearch" visible="false">
