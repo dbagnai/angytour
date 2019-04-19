@@ -2476,7 +2476,7 @@ function cercacontenuti(lng, data, callback) {
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'cercacontenuti', 'data': JSON.stringify(data) },
+        data: { 'q': 'cercacontenuti', 'data': JSON.stringify(data), 'lng': lng},
         success: function (result) {
             //if (callback)
             //    callback(result);
