@@ -46,7 +46,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
         set { ViewState["PercorsoAssolutoApplicazione"] = value; }
     }
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -188,7 +188,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             modcanonical = (item.CanonicalbyLingua("I").Trim());
         //alternate
         Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+        if (!string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaI)))
+            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
         //x-default
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
         {
@@ -210,11 +211,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         }
 
         //CULTURA en ( set canonical eactualpage )
+        string testourlpaginaGB = item.TitolobyLingua("GB");
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
             //ci = setCulture("GB");
-            string testourlpaginaGB = item.TitolobyLingua("GB");
             linken = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "GB", CommonPage.CleanUrl(testourlpaginaGB), item.Id.ToString(), "con001000"));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linken = linken.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
@@ -225,7 +226,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 modcanonical = (item.CanonicalbyLingua("GB").Trim());
             //alternate
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
-            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+            if (!string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaGB)))
+                litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
             //x-default
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "GB")
             {
@@ -247,10 +249,10 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         }
 
         //CULTURA ru ( set canonical eactualpage )
+        string testourlpaginaRU = item.TitolobyLingua("RU");
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {
             hreflang = " hreflang=\"ru\" ";
-            string testourlpaginaRU = item.TitolobyLingua("RU");
             linkru = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "RU", CommonPage.CleanUrl(testourlpaginaRU), item.Id.ToString(), "con001000"));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkru = linkru.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
@@ -261,7 +263,8 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 linkru = (item.CanonicalbyLingua("RU").Trim());
             //alternate
             litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
-            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+            if (!string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaRU)))
+                litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
             //x-default
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "RU")
             {
@@ -284,7 +287,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         switch (Lingua.ToLower())
         {
             case "i":
-                if (!string.IsNullOrEmpty(linken))
+                if (!string.IsNullOrEmpty(linken) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaGB)))
                 {
                     HtmlGenericControl divCambioLingua1 = (HtmlGenericControl)Master.FindControl("divCambioLingua1");
                     divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
@@ -298,7 +301,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                     HtmlGenericControl divCambioLinguadef1 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef1");
                     divCambioLinguadef1.Visible = false;
                 }
-                if (!string.IsNullOrEmpty(linkru))
+                if (!string.IsNullOrEmpty(linkru) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaRU)))
                 {
                     HtmlGenericControl divCambioLingua2 = (HtmlGenericControl)Master.FindControl("divCambioLingua2");
                     divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
@@ -315,7 +318,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
 
                 break;
             case "gb":
-                if (!string.IsNullOrEmpty(linki))
+                if (!string.IsNullOrEmpty(linki) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaI)))
                 {
                     HtmlGenericControl divCambioLingua1 = (HtmlGenericControl)Master.FindControl("divCambioLingua1");
                     divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
@@ -329,7 +332,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                     HtmlGenericControl divCambioLinguadef1 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef1");
                     divCambioLinguadef1.Visible = false;
                 }
-                if (!string.IsNullOrEmpty(linkru))
+                if (!string.IsNullOrEmpty(linkru) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaRU)))
                 {
                     HtmlGenericControl divCambioLingua2 = (HtmlGenericControl)Master.FindControl("divCambioLingua2");
                     divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
@@ -345,7 +348,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 }
                 break;
             case "ru":
-                if (!string.IsNullOrEmpty(linken))
+                if (!string.IsNullOrEmpty(linken) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaGB)))
                 {
                     HtmlGenericControl divCambioLingua1 = (HtmlGenericControl)Master.FindControl("divCambioLingua1");
                     divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
@@ -359,7 +362,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                     HtmlGenericControl divCambioLinguadef1 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef1");
                     divCambioLinguadef1.Visible = false;
                 }
-                if (!string.IsNullOrEmpty(linki))
+                if (!string.IsNullOrEmpty(linki) && !string.IsNullOrEmpty(CommonPage.CleanUrl(testourlpaginaI)))
                 {
                     HtmlGenericControl divCambioLingua2 = (HtmlGenericControl)Master.FindControl("divCambioLingua2");
                     divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
