@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pr-2 my-3" style="max-width: 350px;" runat="server" id="divArchivio" visible="false">
+            <div class="d-none d-sm-block pr-2 my-3" style="max-width: 350px;" runat="server" id="divArchivio" visible="false">
             </div>
         </div>
     </div>
