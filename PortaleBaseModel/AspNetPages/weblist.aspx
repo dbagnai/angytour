@@ -29,7 +29,7 @@
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
+    <div id="searchblock" class="position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
 
         <div class="d-flex flex-row-reverse">
             <div class="col-12 col-sm-3 pl-0 pl-sm-2 pr-0" runat="server" id="divSearch" visible="false">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-none d-sm-block pr-2" style="max-width: 350px;" runat="server" id="divArchivio" visible="false">
+            <div class="pr-2 my-3" style="max-width: 350px;" runat="server" id="divArchivio" visible="false">
             </div>
         </div>
     </div>

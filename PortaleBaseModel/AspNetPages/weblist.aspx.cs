@@ -299,7 +299,8 @@ public partial class AspNetPages_weblist : CommonPage
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
                 divSearch.Visible = true;
                 if (!JavaInjection)
-                {
+                    if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)))
+                    {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
                     //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
