@@ -680,13 +680,18 @@
                                                     <span class="menu-text">Icone Navigazione Principale PWA</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Blog</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <%--<li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner area Blog</span></a>
                                                 <b class="arrow"></b>
-                                            </li>
+                                            </li>--%>
 
 
                                             <li>
