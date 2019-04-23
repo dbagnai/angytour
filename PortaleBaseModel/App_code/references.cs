@@ -411,6 +411,95 @@ public class references
         System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
         return ci;
     }
+
+
+    public static void updateredirecttable()
+    {
+        try
+        {
+
+            List<string> listainseriti = new List<string>();
+            string pathDestinazione = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp" + "\\redirect.xlsx";
+            ClosedXML.Excel.XLWorkbook wb = new ClosedXML.Excel.XLWorkbook(pathDestinazione);
+            var ws = wb.Worksheet("Foglio1");
+            //MAPPATURA DELLE POSIZIONE DELLE COLONNE NEL FILE EXCEL IN REALAZIONE AI CAMPI DEGLI OGGETTI DA CARICARE/AGGIORNARE
+            const int oul = 1;
+            const int dul = 2;
+
+            // Look for the first row used ( Muovo il cursore alla prima riga usata nel foglio excel
+            var firstRowUsed = ws.FirstRowUsed();
+            // Narrow down the row so that it only includes the used part
+            var categoryRow = firstRowUsed.RowUsed();
+            // Move to the next row (it now has the titles)
+            categoryRow = categoryRow.RowBelow();
+
+            string errorsforrecord = "";
+            string generalerror = "";
+            int rowscounter = 0;
+            Tabrif urlitem = new Tabrif();
+            Tabrif urlitemindb = new Tabrif();
+            string originalurl = "";
+            while (!categoryRow.Cell(oul).IsEmpty())
+            {
+                //Scorro finchè non trovo url origine vuoti
+                try
+                {
+                    urlitem = new Tabrif();
+
+                    originalurl = categoryRow.Cell(oul).GetString().Trim().Trim('\t').Trim('\r').Trim('\n');
+                    if (!string.IsNullOrEmpty(originalurl))
+                    {
+                        urlitem.Campo1 = originalurl;
+                        urlitem.Campo2 = categoryRow.Cell(dul).GetString().Trim('\t').Trim('\r').Trim('\n');
+
+
+                        //AGGIORNIAMO O INSERIAMO
+                        //Vediamo se esiste nel db un'cliente con quella mail e tipologia
+                        urlitemindb = new Tabrif();
+                        urlitemindb = SitemapManager.GetRedirecturl(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlitem.Campo1);
+                        if (urlitemindb != null && urlitemindb.Id != "0")
+                        {
+                            //E' un aggiornamento -> Aggiorniamo i campi importati
+                            if (!string.IsNullOrEmpty(urlitem.Campo1))
+                                urlitemindb.Campo1 = urlitem.Campo1;
+
+                            if (!string.IsNullOrEmpty(urlitem.Campo2))
+                                urlitemindb.Campo2 = urlitem.Campo2;
+
+                        }
+                        else
+                        {
+                            //E' un inserimento di un cliente non presente per la tipologia !! -> prendo i valori caricati in importazione
+                            urlitemindb = urlitem;
+                        }
+                        SitemapManager.InserisciAggiornaRedirecturl(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlitemindb);
+
+                        //Creo la lista finale per gli importati
+                        if (!listainseriti.Contains(urlitemindb.Id))
+                            listainseriti.Add(urlitemindb.Id);
+
+                    }
+                }
+                catch (Exception err)
+                {
+                    generalerror += "Errore importazione: " + err.Message + "<br/>";
+                    generalerror += "Errore importazione: " + err.Message + "<br/>";
+                }
+                categoryRow = categoryRow.RowBelow();
+                rowscounter++;
+            }
+
+
+            //Ripuliamo la tabella dai valori non presenti in lista importazione
+            SitemapManager.EliminRedirecturlNotInidlist(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, listainseriti);
+
+        }
+        catch { }
+    }
+
+
+
+
     public static Dictionary<string, Dictionary<string, string>> GetResourcesByLingua(string lingua = "I")
     {
         Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();

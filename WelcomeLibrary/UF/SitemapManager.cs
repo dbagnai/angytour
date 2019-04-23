@@ -917,5 +917,151 @@ namespace WelcomeLibrary.UF
             parametri = parametri.TrimEnd(';');
             return parametri;
         }
+
+
+
+
+        public static Tabrif GetRedirecturl(string connection, string originalurl)
+        {
+            if (connection == null || connection == "") return null;
+            if (originalurl == null || originalurl == "") return null;
+            Tabrif item = new Tabrif();
+
+            try
+            {
+                string query = "SELECT * FROM TBL_Redirect WHERE originalurl = @originalurl";
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                SQLiteParameter p1 = new SQLiteParameter("@originalurl", originalurl);//OleDbType.VarChar
+                parColl.Add(p1);
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+
+                    while (reader.Read())
+                    {
+                        Tabrif _item = new Tabrif();
+
+                        _item = new Tabrif();
+                        _item.Id = reader.GetInt64(reader.GetOrdinal("ID")).ToString();
+                        _item.Campo1 = reader.GetString(reader.GetOrdinal("originalurl")).ToString().Trim();
+                        _item.Campo2 = reader.GetString(reader.GetOrdinal("redirectedurl")).Trim();
+
+                        item = _item;
+                        break;//prendo il primo trovato
+                    }
+                }
+
+
+            }
+            catch
+            {
+                // throw new ApplicationException("Errore Caricamento tabella urlrewriting :" + error.Message, error);
+            }
+            return item;
+        }
+        public static void InserisciAggiornaRedirecturl(string connessione, Tabrif item)
+        {
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return;
+            if (string.IsNullOrEmpty(item.Campo1.Trim())) return;
+
+            //Se presente carico l'elemento nel db per l'aggiornamento
+            Tabrif itemindb = GetRedirecturl(connessione, item.Campo1);
+            if (itemindb != null)
+            {
+                item.Id = itemindb.Id;
+            }
+            SQLiteParameter p1 = new SQLiteParameter("@originalurl", item.Campo1);
+            parColl.Add(p1);
+            SQLiteParameter p2 = new SQLiteParameter("@redirectedurl", item.Campo2);
+            parColl.Add(p2);
+
+            string query = "";
+            if (item.Id != "")
+            {
+                //Update
+                query = "UPDATE [TBL_Redirect] SET originalurl=@originalurl,redirectedurl=@redirectedurl";
+                query += " WHERE [Id] = " + item.Id;
+            }
+            else
+            {
+                //Insert
+                query = "INSERT INTO TBL_Redirect (originalurl,redirectedurl";
+                query += " )";
+                query += " values ( ";
+                query += "@originalurl,@redirectedurl";
+                query += " )";
+            }
+
+            try
+            {
+                long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                if (item.Id == "") item.Id = retID.ToString(); // se era insert memorizzo l'id del cliente appena inserito
+            }
+            catch
+            {
+                //  throw new ApplicationException("Errore, inserimento/aggiornamento urlrewrite :" + error.Message, error);
+            }
+            return;
+        }
+        public static long EliminRedirecturl(string connessione, Tabrif item)
+        {
+            long idret = -1;
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return idret;
+
+            string query = "DELETE FROM TBL_Redirect WHERE ( originalurl = @originalurl ) ";
+            SQLiteParameter p1;
+            p1 = new SQLiteParameter("@originalurl", item.Campo1);
+            parColl.Add(p1);
+            try
+            {
+                idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch
+            {
+                //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
+            }
+            return idret;
+        }
+
+        public static long EliminRedirecturlNotInidlist(string connessione, List<string> idlist)
+        {
+            long idret = -1;
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return idret;
+
+            string query = "DELETE FROM TBL_Redirect  ";
+
+            string queryfilter = "";
+
+            if (idlist != null && idlist.Count > 0)
+            {
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE Id not in (    ";
+                else
+                    queryfilter += " AND  Id not in (      ";
+                foreach (string id in idlist)
+                {
+                    if (!string.IsNullOrEmpty(id.Trim()))
+                        queryfilter += " " + id + " ,";
+                }
+                queryfilter = queryfilter.TrimEnd(',') + " ) ";
+            }
+            query += queryfilter;
+
+            try
+            {
+                idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch
+            {
+                //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
+            }
+            return idret;
+        }
     }
 }

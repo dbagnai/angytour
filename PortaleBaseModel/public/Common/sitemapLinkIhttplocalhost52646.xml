@@ -1,236 +1,230 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:52646/I/blog/blog</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/notizie-18</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/notizie-p18</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/normative-19</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/normative-p19</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/video-25</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/video-p25</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/servizi</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/privati-26</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/privati-p26</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/aziende-27</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/aziende-p27</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/adr-29</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/alloggi</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/aziende-p21</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/aziende-21</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/privati-p22</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/privati-22</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/compravendita-immobiliare-assistenza-per-acquistare-casa-43</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/adr-23</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/tutela-della-persona-sottotitolo-42</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerte</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/tutela-del-disabile-dalla-parte-di-chi-spesso-vede-negati-i-propri-diritti-36</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/gallery</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/rapporti-di-locazione-sottotitolo-35</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-37</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/successioni-ereditarie-eredita-e-successioni-34</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-36</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/responsabilita-medica-risarcimento-danni-danni-medici-33</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-35</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/infortunistica-stradale-risarcimento-danni-da-incidenti-32</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-20</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/separazioni-e-divorzi-al-tuo-fianco-nella-crisi-familiare-28</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-34</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/tutela-del-minore-garantire-il-proprio-figlio-nel-miglior-modo-possibile-27</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-33</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/contenzioso-bancario-sottotitolo-45</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/offerte/offerta-test-sottotitolo-32</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/tutela-del-diritto-dautore-sottotitolo-44</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/la-pioppaia-sottotitolo-31</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/consulenza-legale-sottotitolo-41</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/notizia-1-sottotitolo-notizia-1-30</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/recupero-del-credito-sottotitolo-40</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-29</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/tutela-del-marchio-sottotitolo-39</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-28</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/gestione-rapporti-personale-rapporti-con-il-personale-38</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-27</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-31</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/servizi/servizio-sottotitolo-servizio-26</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/servizi/contrattualistica-contratti-per-tutti-i-tipi-29</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/belvedere-sottotitolo-25</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-25</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/alloggi/granaio-sottotitolo-24</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/consiglio-2-sottotitolo-24</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-23</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/ampio-parcheggio-sottotitolo-ampio-parcheggio-23</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/gallery/gallery-sottotitolo-gallery-22</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/hotel-sottotitolo-hotel-22</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/test-prod-1-sdsds-21</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/test-prod-1-sdsds-21</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-internet-news-sottotitolo-3</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/offerta-test-sottotitolo-20</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-2-sottotitolo-c-2</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/consigli/consiglio-1-sottotitolo-19</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-13-sottotitolo-16</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/prestito-inps-chi-puo-richiederlo-e-come-fare-per-ottenerlo-16</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-12-sottotitolo-15</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/smartphone-alla-guida-le-nuove-norme-15</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-11-sottotitolo-14</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/impugnare-il-matrimonio-del-padre-anziano-con-la-badante--possibile-cosa-si-puo-fare-14</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/I/blog/siti-interenet-10-sottotitolo-13</loc>
-    <lastmod>2018-06-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>http://localhost:52646/I/commenti/testo-commento-1-sottotitolo-1</loc>
-    <lastmod>2018-06-11</lastmod>
+    <loc>http://localhost:52646/it/blog/chi-puo-richiedere-le-detrazioni-per-il-mantenimento-dei-figli-nuove-norme-13</loc>
+    <lastmod>2019-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>

@@ -177,7 +177,7 @@ namespace WelcomeLibrary.UF
                     if (BundleOptions.UseFileExtension)
                         sb.AppendFormat("<script" + scriptType + " rel=\"preload\" src=\"/bdejs/{0}\"></script>", BundleName + ".jsx?v=" + bundleList.HashHexString);
                     else
-                        sb.AppendFormat("<script" + scriptType + "rel=\"preload\"  src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\"  src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
 
 
                 }

@@ -192,6 +192,13 @@
     </script>
     <h1>Parametri configurazione</h1>
     <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
+      <div  style="border:1px solid #ccc;margin:10px;padding:10px">
+        <h2>Gestione link redirect :</h2>
+        <asp:FileUpload runat="server" ID="uplFile" />
+        <asp:Button Text="Carica file redirect" runat="server" ID="Button2" OnClick="btnUploadFile_Click" CausesValidation="false" />
+        <asp:Button Text="redirect Update Table" ID="Button1" OnClick="redirect_Click" runat="server" />
+    </div>
+    <asp:Literal Text="" runat="server" id="output"/>    
     <span style="font-size: 1rem" id="results"></span>
     <%-- <h5>Codice Sconto</h5>
             <input class="form-control bind" mybind="prova" maxlength="20" style="width: 90px" />
