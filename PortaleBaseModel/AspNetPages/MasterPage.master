@@ -880,7 +880,7 @@
         <!--[if lt IE 9]>
         <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
         <![endif]-->
-        <asp:Panel runat="server" Visible="true">
+        <asp:Panel runat="server" Visible="false">
             <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
                 <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">
                     <i class="fa fa-2x fa-bell-slash"></i>

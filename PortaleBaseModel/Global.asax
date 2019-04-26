@@ -669,16 +669,19 @@
             "~/index.aspx"
         );
 
-        //routes.Add(new Route(  "{textmatch}",
-        //new RouteValueDictionary { { "textmatch", "*.html" } }, 
-        //new GenericRouteHandler()  ));
+#if true
+        // per le route delle home per lingua corrispondenti a /en /it /ru le passo all'handler nella lingua e non nel textmatch
+        routes.Add(new Route("{Lingua}",
+        new RouteValueDictionary { { "Lingua", "" } },
+        new RouteValueDictionary { { "Lingua", @"(^en$)|(^it$)|(^ru$)" } }, //condizioni di match solo per le route a singolo frammento corrispondenti a /it /en /ru
+        new GenericRouteHandler()));
 
-
-        //Fall back per tutti i link in route che non hanno il . all'interno
-        routes.Add(new Route(  "{textmatch}",
+#endif
+        //Fall back per tutti i link in route che non hanno il . all'interno verso il genericroutehandler
+        routes.Add(new Route("{textmatch}",
         new RouteValueDictionary { { "textmatch", "default" } },
         new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
-        new GenericRouteHandler()  ));
+        new GenericRouteHandler()));
 
         RoutingForOldUrlRewrite(routes); //Da configurae con i vecchi valori di route da renindirizzare
     }
