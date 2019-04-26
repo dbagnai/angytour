@@ -115,7 +115,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                     $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">
@@ -145,7 +145,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                     $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">
@@ -172,7 +172,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                    $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">
@@ -197,7 +197,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                    $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">
@@ -221,7 +221,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                    $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">
@@ -246,7 +246,7 @@
                                 <script>
                                     console.log("callin clear cache");
                                    $(document).ready(function () {
-                                        manageclientstorage("clear");
+                                      //manageclientstorage("clear");
                                     });
                                 </script>
                                 <div class="row  justify-content-center">

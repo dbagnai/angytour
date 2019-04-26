@@ -658,30 +658,29 @@
 
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)
     {
-        RegisterBundles(routes); // Bundles da iniettare css/js
+         RegisterBundles(routes); // Bundles da iniettare css/js
 
-        //routes.Add("Generic", new System.Web.Routing.Route("{textmatch}", new GenericRouteHandler()));
+        //routes.Add("Generic", new System.Web.Routing.Route("{Lingua}", new GenericRouteHandler()));
         routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
         routes.Add("Generic2", new System.Web.Routing.Route("{Lingua}/{destinationselector}/{textmatch}", new GenericRouteHandler()));
-        routes.MapPageRoute(
-            "HomeRoute",
-            "",
-            "~/index.aspx"
-        );
+        routes.MapPageRoute("HomeRoute", "", "~/index.aspx");
 
 #if true
         // per le route delle home per lingua corrispondenti a /en /it /ru le passo all'handler nella lingua e non nel textmatch
         routes.Add(new Route("{Lingua}",
-        new RouteValueDictionary { { "Lingua", "" } },
-        new RouteValueDictionary { { "Lingua", @"(^en$)|(^it$)|(^ru$)" } }, //condizioni di match solo per le route a singolo frammento corrispondenti a /it /en /ru
-        new GenericRouteHandler()));
+    new RouteValueDictionary { { "Lingua", "" } },
+     new RouteValueDictionary { { "Lingua", @"(^en$)|(^it$)|(^ru$)" } },
+     new GenericRouteHandler()));
 
 #endif
-        //Fall back per tutti i link in route che non hanno il . all'interno verso il genericroutehandler
+#if true
+        //Fall back su generichandler per tutti i link in route che non hanno il . all'interno
         routes.Add(new Route("{textmatch}",
-        new RouteValueDictionary { { "textmatch", "default" } },
+       new RouteValueDictionary { { "textmatch", "default" } },
         new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
         new GenericRouteHandler()));
+#endif
+
 
         RoutingForOldUrlRewrite(routes); //Da configurae con i vecchi valori di route da renindirizzare
     }
