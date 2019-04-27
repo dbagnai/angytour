@@ -114,18 +114,31 @@ public class GenericRouteHandler : IRouteHandler
         if (itemurl != null)
         {
             Pathdestinazione = itemurl.Campo1;
-            Dictionary<string, string> keyvalues = WelcomeLibrary.UF.SitemapManager.SplitParameters(itemurl.Campo2);
-            switch (destinationselector)
+            //querystringorigin
+            if (Pathdestinazione.Contains("?"))
             {
-
-                default:
-                    foreach (KeyValuePair<string, string> kv in keyvalues)
+                string querystringorigin = Pathdestinazione.Substring(Pathdestinazione.IndexOf("?"));
+                Pathdestinazione = Pathdestinazione.Replace(querystringorigin, "");
+                System.Collections.Specialized.NameValueCollection qsitems = HttpUtility.ParseQueryString(querystringorigin.Substring(1));
+                if (qsitems != null)
+                    foreach (string key in qsitems)
                     {
-                        //if (kv.Key.ToLower() != "lingua")
-                        HttpContext.Current.Items[kv.Key] = kv.Value;
+                        HttpContext.Current.Items[key] = qsitems[key];
                     }
-
-                    break;
+            }
+            else
+            {
+                Dictionary<string, string> keyvalues = WelcomeLibrary.UF.SitemapManager.SplitParameters(itemurl.Campo2);
+                switch (destinationselector)
+                {
+                    default:
+                        foreach (KeyValuePair<string, string> kv in keyvalues)
+                        {
+                            //if (kv.Key.ToLower() != "lingua")
+                            HttpContext.Current.Items[kv.Key] = kv.Value;
+                        }
+                        break;
+                }
             }
         }
         else
