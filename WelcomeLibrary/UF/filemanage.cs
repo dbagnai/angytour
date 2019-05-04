@@ -496,6 +496,9 @@ namespace WelcomeLibrary.UF
             }
             return responsestr;
         }
+
+
+
         public static string EliminaFile(HttpServerUtility Server, string idrecord, string tipologia, string nomefile)
         {
             string ret = "";

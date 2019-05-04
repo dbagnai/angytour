@@ -123,7 +123,6 @@ namespace WelcomeLibrary.UF
             lblResultsPsw.Text = "Password non resettata.  ";
         }
 #endif
-
             }
             catch (Exception errore)
             {

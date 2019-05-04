@@ -522,15 +522,12 @@ public class CommonPage : Page
 
     protected static string getidsocio(string utente)
     {
-
         return usermanager.getidsocio(utente);
-
     }
 
     public static string getFirstName(string utente)
     {
         return usermanager.getFirstName(utente);
-
     }
 
     public static string getidcliente(string utente)
