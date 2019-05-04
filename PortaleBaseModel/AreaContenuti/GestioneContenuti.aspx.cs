@@ -554,8 +554,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
                     DateTime _tmpdate = System.DateTime.Now;
                     txtData.Text = txtData.Text.Replace(".", ":");
-                    if (!txtData.Text.Contains(":")) txtData.Text += "00:00:00";
-                    //DateTime.TryParse(txtData.Text, out _tmpdate);
+                    if (!txtData.Text.Contains(":")) txtData.Text += " 00:00:00";                    //DateTime.TryParse(txtData.Text, out _tmpdate);
                     DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
                     updrecord.DataInserimento = _tmpdate;
                     long _i = 0;
@@ -615,7 +614,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
 
                 DateTime _tmpdate = System.DateTime.Now;
                 txtData.Text = txtData.Text.Replace(".", ":");
-                if (!txtData.Text.Contains(":")) txtData.Text += "00:00:00";
+                if (!txtData.Text.Contains(":")) txtData.Text += " 00:00:00";
                 //DateTime.TryParse(txtData.Text, out _tmpdate);
                 DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
                 updrecord.DataInserimento = _tmpdate;
