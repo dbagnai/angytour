@@ -215,10 +215,11 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
             actualpagelink.Campo1 = (linki);
             actualpagelink.Campo2 = (testourlpaginaI);
             //redirect al canonical se il canonical non coincide con l'url
-            if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-            {
-                Response.RedirectPermanent(modcanonical, true);
-            }
+            if (false)
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    Response.RedirectPermanent(modcanonical, true);
+                }
         }
 
         //CULTURA en ( set canonical eactualpage )
@@ -250,10 +251,11 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
                 actualpagelink.Campo1 = (linken);
                 actualpagelink.Campo2 = (testourlpaginaGB);
                 //redirect al canonical se il canonical non coincide con l'url
-                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+                if (false)
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
 
         }
@@ -286,7 +288,8 @@ public partial class AspNetPages_pwaContent_Tipo1 : CommonPage
                 actualpagelink.Campo1 = (linkru);
                 actualpagelink.Campo2 = (testourlpaginaRU);
                 //redirect al canonical se il canonical non coincide con l'url
-                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                if(false)
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
                 {
                     Response.RedirectPermanent(modcanonical, true);
                 }

@@ -301,37 +301,37 @@ public partial class AspNetPages_weblist : CommonPage
                 if (!JavaInjection)
                     if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)))
                     {
-                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+                        if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
-                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
-                    //sb.Append("\"></div>");
-                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    //placeholderrisultati.Text = sb.ToString();
+                        //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                        //sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog2.html,divPortfolioList, portlist1, 1, 24, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, \'\',\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                        //sb.Append("\"></div>");
+                        //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                        //placeholderrisultati.Text = sb.ToString();
 
-                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
-                    sb.Append("\"></div>");
-                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                        sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                        sb.Append("injectPortfolioAndLoad,isotopePortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                        sb.Append("\"></div>");
+                        sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                        placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
-                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
-                    //sb.Append("\"></div>");
-                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
-                    //placeholderrisultatinocontainer.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                        //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                        //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                        //sb.Append("\"></div>");
+                        //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                        //placeholderrisultatinocontainer.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
 
 
-                    //sb.Clear();
-                    //sb.Append("<div class=\"sfondo-contenitore\">");
-                    //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
-                    //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
-                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
-                    //sb.Append("\"></div>");
-                    //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
-                    //sb.Append("</div>");
-                    //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
-                }
+                        //sb.Clear();
+                        //sb.Append("<div class=\"sfondo-contenitore\">");
+                        //sb.Append("<div id=\"divPortfolioLateralTitle\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+                        //sb.Append("<div id=\"divPortfolioLateral\" class=\"inject\" params=\"");
+                        //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divPortfolioLateral, portlist2, 2, 24, 'skip', \'\', \'" + cattipo + "\', \'" + Categoria + "\', true, false, 8,\'" + testoricerca + "\', \'\', \'\', \'\', \'" + Categoria2liv + "\'");
+                        //sb.Append("\"></div>");
+                        //sb.Append("<div id=\"divPortfolioLateralPager\"></div>");
+                        //sb.Append("</div>");
+                        //placeholderlateral.Text =  cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session,null,null,Request);
+                    }
                 break;
             case "rif000005":
 
@@ -933,11 +933,12 @@ public partial class AspNetPages_weblist : CommonPage
             {
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
-                if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                    {
-                        Response.RedirectPermanent(modcanonical, true);
-                    }
+                if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        {
+                            Response.RedirectPermanent(modcanonical, true);
+                        }
             }
         }
 
@@ -974,11 +975,12 @@ public partial class AspNetPages_weblist : CommonPage
                 {
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                        {
-                            Response.RedirectPermanent(modcanonical, true);
-                        }
+                    if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                        if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                            if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                            {
+                                Response.RedirectPermanent(modcanonical, true);
+                            }
                 }
             }
         }
@@ -1016,11 +1018,12 @@ public partial class AspNetPages_weblist : CommonPage
                 {
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                        {
-                            Response.RedirectPermanent(modcanonical, true);
-                        }
+                    if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                        if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                            if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                            {
+                                Response.RedirectPermanent(modcanonical, true);
+                            }
                 }
             }
         }

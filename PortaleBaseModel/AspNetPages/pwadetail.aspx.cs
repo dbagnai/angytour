@@ -809,7 +809,8 @@ public partial class _pwadetail : CommonPage
             actualpagelink.Campo1 = (linki);
             actualpagelink.Campo2 = (data.DenominazionebyLingua("I"));
             //redirect al canonical se il canonical non coincide con l'url
-            if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+            if (string.IsNullOrEmpty(data.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
             {
                 Response.RedirectPermanent(modcanonical, true);
             }
@@ -844,7 +845,8 @@ public partial class _pwadetail : CommonPage
                 actualpagelink.Campo1 = (linken);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazionebyLingua("GB"));
                 //redirect al canonical se il canonical non coincide con l'url
-                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                if (string.IsNullOrEmpty(data.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
                 {
                     Response.RedirectPermanent(modcanonical, true);
                 }
@@ -879,7 +881,8 @@ public partial class _pwadetail : CommonPage
                 actualpagelink.Campo1 = (linkru);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazionebyLingua("RU"));
                 //redirect al canonical se il canonical non coincide con l'url
-                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                if (string.IsNullOrEmpty(data.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
                 {
                     Response.RedirectPermanent(modcanonical, true);
                 }
