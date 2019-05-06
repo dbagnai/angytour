@@ -3841,11 +3841,18 @@ namespace WelcomeLibrary.UF
 
                                     HtmlDocument doc = new HtmlDocument();
                                     doc.LoadHtml(descrizione); //Template per il bind
-                                    HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a | //img"); //tologo i link e img
+                                    HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a | //img"); //tolgo i link e img
                                     if (links != null)
                                         foreach (HtmlNode link in links)
                                         {
                                             link.Remove();
+                                        }
+                                    links = doc.DocumentNode.SelectNodes("//h2 | //h3 | //p | //b"); //rimpiazzo i tag h2 e h3
+                                    if (links != null)
+                                        foreach (HtmlNode link in links)
+                                        {
+                                            link.Name = "span";
+                                            link.RemoveClass();
                                         }
                                     descrizione = doc.DocumentNode.OuterHtml;
                                 }
@@ -3858,6 +3865,7 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
+
                 case "formatlabelsconto":
                     try
                     {
