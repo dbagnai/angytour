@@ -75,7 +75,7 @@ var reinitscrollpos = function () {
 
 
 $(document).ready(function () {
-    searchtaginjectandcall();
+   searchtaginjectandcall();
 });
 //searchtaginjectandcall();
 
