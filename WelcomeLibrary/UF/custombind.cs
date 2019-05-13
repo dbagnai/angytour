@@ -656,7 +656,7 @@ namespace WelcomeLibrary.UF
                                             node.Attributes["style"].Value += ";display:block";
                                         }
                                         else
-                                            node.ParentNode.Attributes.Add("style", "display:block");
+                                            node.Attributes.Add("style", "display:block");
                                     if (node.ParentNode != null)
                                         if (node.ParentNode.Attributes.Contains("style"))
                                         {
@@ -2853,7 +2853,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "max-width:100%;max-height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3071,7 +3071,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "max-width:100%;max-height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -4179,7 +4179,7 @@ namespace WelcomeLibrary.UF
 
         public static void AddInitjavascriptvariables(Dictionary<string, string> jscommandslocal)
         {
-            if (jscommandslocal.ContainsKey("NeededJSVars")) jscommands.Remove("NeededJSVars");
+            if (jscommandslocal.ContainsKey("NeededJSVars")) jscommandslocal.Remove("NeededJSVars");
             jscommandslocal.Add("NeededJSVars", "var cbindvapidPublicKey = '" + ConfigManagement.ReadKey("PublicKey") + "';\r\n");
 
         }

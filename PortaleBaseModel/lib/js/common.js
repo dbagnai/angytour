@@ -1985,14 +1985,10 @@ function formatdata1(localObjects, valore, prop, callback) {
     if (controllo == "true" || controllo == '') {
         if (tmpDate && tmpDate != "") {
             var objData = new Date(tmpDate);
-            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
             //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD MMM YYYY');
-            //var d = formattedDate.getDate();
-            //var m = formattedDate.getMonth();
-            //m += 1;  // JavaScript months are 0-11
-            //var y = formattedDate.getFullYear();
-            //return d + "/" + m + "/" + y;
+            //var dateFormattedwithtime = moment(objData).format('DD MMM YYYY');
+            var dateFormattedwithtime = getFormattedDate(objData, '-');
+
             retstring = dateFormattedwithtime;
         }
     }
@@ -2008,14 +2004,10 @@ function formatdata(localObjects, valore, prop, callback) {
     if (controllo == "true" || controllo == '') {
         if (tmpDate && tmpDate != "") {
             var objData = new Date(tmpDate);
-            //var dateFormattedwithtime = getDate(objData) + " " + getTime(objData);
             //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY HH:mm:ss')
-            var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY');
-            //var d = formattedDate.getDate();
-            //var m = formattedDate.getMonth();
-            //m += 1;  // JavaScript months are 0-11
-            //var y = formattedDate.getFullYear();
-            //return d + "/" + m + "/" + y;
+            //var dateFormattedwithtime = moment(objData).format('DD/MM/YYYY');
+            var dateFormattedwithtime = getFormattedDate(objData, '/');
+
             retstring = dateFormattedwithtime;
         }
     }
@@ -2617,6 +2609,19 @@ function getTime(passdata) {
     }
     catch (e) { }
     return date_obj_time;
+}
+function getFormattedDate(date, separator) {
+
+    var m_names = new Array("Gen", "Feb", "Mar",
+        "Apr", "Mag", "Giu", "Lug", "Ago", "Set",
+        "Ott", "nov", "Dec");
+
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month; //m_names[month];
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return day + separator + month + separator + year;
 }
 function getDate(passdata) {
 

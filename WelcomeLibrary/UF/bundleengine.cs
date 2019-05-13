@@ -139,10 +139,9 @@ namespace WelcomeLibrary.UF
 
         }
 
-        public static string RenderJS(string BundleName, EnumInjectionMode? injectionMode = null)
+        public static string RenderJS(string BundleName, EnumInjectionMode? injectionMode = null, string relmode = "")
         {
             string ret = "";
-
             EnumInjectionMode optionInjectmode = injectionMode.HasValue ? injectionMode.Value : BundleOptions.InjectionMode;
 
             if (BundleHashJS.ContainsKey(BundleName))
@@ -157,8 +156,15 @@ namespace WelcomeLibrary.UF
                 {
                     foreach (var m in bundleList)
                     {
-                        sb.AppendLine("<script rel=\"preload\" type=\"text/javascript\">");
-                        sb.AppendLine(File.ReadAllText(m.FileName));
+                        //sb.AppendLine("<script type=\"text/javascript\"  fn=\"" + m.FileName  + "\">");
+                        sb.AppendLine("<script " + relmode + " type=\"text/javascript\" >");
+
+                        string texttoappend = File.ReadAllText(m.FileName);
+                        texttoappend = System.Text.RegularExpressions.Regex.Replace(texttoappend, "</script>", "<\\/script>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                        if (BundleEngine.BundleOptions.minifyJs)
+                            texttoappend = minifyjs(texttoappend);
+                        sb.AppendLine(texttoappend);
+
                         sb.AppendLine("</script>");
                     }
                 }
@@ -167,7 +173,7 @@ namespace WelcomeLibrary.UF
                     string scriptType = BundleOptions.ScriptTypeAttribute ? " type=\"text/javascript\"" : "";
 
                     foreach (var m in bundleList)
-                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\" src=\"{0}\"></script>", m.FileNameHash);
+                        sb.AppendFormat("<script " + relmode + " " + scriptType + " src=\"{0}\"></script>", m.FileNameHash);
 
                 }
                 else if (optionInjectmode == EnumInjectionMode.SingleCombinedScript)
@@ -175,9 +181,9 @@ namespace WelcomeLibrary.UF
                     string scriptType = BundleOptions.ScriptTypeAttribute ? " type=\"text/javascript\"" : "";
 
                     if (BundleOptions.UseFileExtension)
-                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\" src=\"/bdejs/{0}\"></script>", BundleName + ".jsx?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<script " + relmode + " " + scriptType + " src=\"/bdejs/{0}\"></script>", BundleName + ".jsx?v=" + bundleList.HashHexString);
                     else
-                        sb.AppendFormat("<script" + scriptType + " rel=\"preload\"  src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<script " + relmode + " " + scriptType + " src=\"/bdejs/{0}\"></script>", BundleName + "?v=" + bundleList.HashHexString);
 
 
                 }
@@ -216,7 +222,7 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
-        public static string RenderCSS(string BundleName, EnumInjectionMode? injectionMode = null)
+        public static string RenderCSS(string BundleName, EnumInjectionMode? injectionMode = null, string relmode = "rel=\"stylesheet\"")
         {
             string ret = "";
 
@@ -235,8 +241,12 @@ namespace WelcomeLibrary.UF
                 {
                     foreach (var m in bundleList)
                     {
-                        sb.AppendLine("<style type=\"text/css\">");
-                        sb.AppendLine(File.ReadAllText(m.FileName));
+                        sb.AppendLine("<style " + relmode + " type=\"text/css\">");
+                        string texttoappend = File.ReadAllText(m.FileName);
+                        texttoappend = System.Text.RegularExpressions.Regex.Replace(texttoappend, "</style>", "<\\/style>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                        if (BundleEngine.BundleOptions.minifyCss)
+                            texttoappend = minifycss(texttoappend);
+                        sb.AppendLine(texttoappend);
                         sb.AppendLine("</style>");
                     }
                 }
@@ -244,15 +254,15 @@ namespace WelcomeLibrary.UF
                 {
 
                     foreach (var m in bundleList)
-                        sb.AppendFormat("<link rel=\"stylesheet\" href=\"{0}\" />", m.FileNameHash);
+                        sb.AppendFormat("<link  href=\"{0}\" " + relmode + " />", m.FileNameHash);
                 }
                 else if (optionInjectmode == EnumInjectionMode.SingleCombinedScript)
                 {
 
                     if (BundleOptions.UseFileExtension)
-                        sb.AppendFormat("<link rel=\"stylesheet\" href=\"/bdecss/{0}\" />", BundleName + ".csx?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<link  href=\"/bdecss/{0}\" " + relmode + " />", BundleName + ".csx?v=" + bundleList.HashHexString);
                     else
-                        sb.AppendFormat("<link rel=\"stylesheet\" href=\"/bdecss/{0}\" />", BundleName + "?v=" + bundleList.HashHexString);
+                        sb.AppendFormat("<link  href=\"/bdecss/{0}\" " + relmode + " />", BundleName + "?v=" + bundleList.HashHexString);
 
 
                 }
@@ -556,6 +566,27 @@ namespace WelcomeLibrary.UF
 
             return hex;
         }
+        public static string minifyjs(string text)
+        {
+            string ret = text;
+            NUglify.JavaScript.CodeSettings jsset = new NUglify.JavaScript.CodeSettings();
+            //jsset.OutputMode = OutputMode.MultipleLines;
+            jsset.PreserveImportantComments = false;
+            UglifyResult urjs = NUglify.Uglify.Js(ret, jsset);
+            ret = urjs.Code;
+            return ret;
+        }
+        public static string minifycss(string text)
+        {
+            string ret = text;
+            NUglify.Css.CssSettings cssset = new NUglify.Css.CssSettings();
+
+            //cssset.OutputMode = OutputMode.MultipleLines;
+            cssset.CommentMode = NUglify.Css.CssComment.None;
+            UglifyResult urcss = NUglify.Uglify.Css(ret, cssset);
+            ret = urcss.Code;
+            return ret;
+        }
 
 
     }
@@ -592,7 +623,7 @@ namespace WelcomeLibrary.UF
                     ret = BundleEngine.RenderFullBundleJS(bundleName, true);
                     CType = "application/javascript;charset=UTF-8";
                     if (BundleEngine.BundleOptions.minifyJs)
-                        ret = minifyjs(ret);
+                        ret = BundleEngine.minifyjs(ret);
 
 
                 }
@@ -601,7 +632,7 @@ namespace WelcomeLibrary.UF
                     ret = BundleEngine.RenderFullBundleCSS(bundleName, true);
                     CType = "text/css";
                     if (BundleEngine.BundleOptions.minifyCss)
-                        ret = minifycss(ret);
+                        ret = BundleEngine.minifycss(ret);
                 }
 
                 // gli handler rispondono xon cache-control : private , ma così il browser non fa cache
@@ -624,27 +655,6 @@ namespace WelcomeLibrary.UF
 
                 context.Response.Write(ret);
 
-            }
-            public string minifyjs(string text)
-            {
-                string ret = text;
-                NUglify.JavaScript.CodeSettings jsset = new NUglify.JavaScript.CodeSettings();
-                //jsset.OutputMode = OutputMode.MultipleLines;
-                jsset.PreserveImportantComments = false;
-                UglifyResult urjs = NUglify.Uglify.Js(ret, jsset);
-                ret = urjs.Code;
-                return ret;
-            }
-            public string minifycss(string text)
-            {
-                string ret = text;
-                NUglify.Css.CssSettings cssset = new NUglify.Css.CssSettings();
-
-                //cssset.OutputMode = OutputMode.MultipleLines;
-                cssset.CommentMode = NUglify.Css.CssComment.None;
-                UglifyResult urcss = NUglify.Uglify.Css(ret, cssset);
-                ret = urcss.Code;
-                return ret;
             }
 
             public bool IsReusable
