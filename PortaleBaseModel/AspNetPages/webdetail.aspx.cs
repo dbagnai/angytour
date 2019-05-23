@@ -152,9 +152,15 @@ public partial class _webdetail : CommonPage
                 //Redirect pagine archiviate o non trovate
                 //////////////////////////////////////////////
                 if (item != null && item.Id != 0 && item.Archiviato)
-                    Response.RedirectPermanent("~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/home"); //qui potresti rigirare alla sezione tipologia/categoria se vuoi o ad una particolare pagina ( essendo articolo archiviato )
+                {
+                    if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage").ToLower() == Lingua.ToLower())
+                        Response.RedirectPermanent("~"); //  caso defalut language 
+                    else
+                        Response.RedirectPermanent("~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/home"); //qui potresti rigirare alla sezione tipologia/categoria se vuoi o ad una particolare pagina ( essendo articolo archiviato )
+                }
                 else if (item == null)
                     Response.RedirectPermanent("~/" + SitemapManager.getCulturenamefromlingua(Lingua) + "/home");
+
 
                 //RegistraStatistichePagina();
 

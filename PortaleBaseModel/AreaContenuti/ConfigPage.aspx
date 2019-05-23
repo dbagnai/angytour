@@ -194,7 +194,7 @@
     <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" />
       <div  style="border:1px solid #ccc;margin:10px;padding:10px">
         <h2>Gestione link redirect :</h2>
-        File attuale : <a target="_blank" href="/public/common/_temp/redirect.xlsx">Scarica Redirect File attuale </a>
+         File attuale : <a target="_blank" href="<%= CommonPage.ReplaceAbsoluteLinks("~/public/common/_temp/redirect.xlsx")+ CommonPage.AppendModTime(Server,"~/public/common/_temp/redirect.xlsx")%>" >Scarica Redirect File attuale </a>
         <asp:FileUpload runat="server" ID="uplFile" />
         <asp:Button Text="Carica file redirect" runat="server" ID="Button2" OnClick="btnUploadFile_Click" CausesValidation="false" />
         <asp:Button Text="redirect Update Table" ID="Button1" OnClick="redirect_Click" runat="server" />

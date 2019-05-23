@@ -3817,25 +3817,6 @@ namespace WelcomeLibrary.UF
                             string descrizione = linkloaded[valore[0]][prop[0]];
                             if (prop[1] != null && prop[1] != "")
                             {
-
-                                int i = 0;
-                                int.TryParse(prop[1], out i);
-                                if (descrizione.Length >= i)
-                                {
-                                    int j = 1; bool stop = false;
-                                    while (j < 30 && !stop && i + j + 1 < descrizione.Length)
-                                    {
-                                        if (descrizione.Substring(i + j, 1) == " " || descrizione.Substring(i + j, 1) == "." || descrizione.Substring(i + j, 1) == "\n") stop = true;
-                                        j += 1;
-                                    }
-                                    descrizione = descrizione.Substring(0, i + j) + " >>";
-                                }
-
-                                if (prop[2] != null && prop[2] == "nobreak")
-                                    descrizione = descrizione.Replace("\n", "&nbsp;");
-                                else
-                                    descrizione = descrizione.Replace("\n", "<br/>");
-
                                 if (prop[3] != null && prop[3].ToLower().StartsWith("filtertags"))
                                 {
 
@@ -3857,6 +3838,23 @@ namespace WelcomeLibrary.UF
                                     descrizione = doc.DocumentNode.OuterHtml;
                                 }
 
+                                int i = 0;
+                                int.TryParse(prop[1], out i);
+                                if (descrizione.Length >= i)
+                                {
+                                    int j = 1; bool stop = false;
+                                    while (j < 30 && !stop && i + j + 1 < descrizione.Length)
+                                    {
+                                        if (descrizione.Substring(i + j, 1) == " " || descrizione.Substring(i + j, 1) == "." || descrizione.Substring(i + j, 1) == "\n") stop = true;
+                                        j += 1;
+                                    }
+                                    descrizione = descrizione.Substring(0, i + j) + " >>";
+                                }
+
+                                if (prop[2] != null && prop[2] == "nobreak")
+                                    descrizione = descrizione.Replace("\n", "&nbsp;");
+                                else
+                                    descrizione = descrizione.Replace("\n", "<br/>");
 
                                 ret = descrizione;
 
