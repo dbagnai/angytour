@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
     $('.loader').hide();
 
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO Home fullscrean ---------------*/
-    if (false) {
+    if (true) {
         var ishome = false;
         if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
             || window.location.pathname.toLowerCase() == "/it/home" ||
@@ -150,12 +150,7 @@ jQuery(document).ready(function ($) {
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
-
-
     inizializzasimplestars(); /*inizio gli oggetti rating per la visualizzazione con le telle*/
-
-
-
 
     /*Jquery Carousel*/
     //jQuery('.carousel').carousel({
@@ -173,99 +168,68 @@ jQuery(document).ready(function ($) {
     }
 
     /* Show testimonial after loading */
-    $('.testimonial-item').css('visibility', 'visible');
+    // $('.testimonial-item').css('visibility', 'visible');
 
     centeringBullets();
 
     /* ---------------------------------------------- /*
 		* Initialization General Scripts for all pages from rival
 	/* ---------------------------------------------- */
-
-    var homeSection = $('.home-section'),
-        // navbar = $('.navbar-custom'),
-        //navHeight = navbar.height(),
-        //   worksgrid = $('#works-grid'),
-        width = Math.max($(window).width(), window.innerWidth),
-        mobileTest;
-
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        mobileTest = true;
-    }
-
-    buildHomeSection(homeSection);
-    // navbarAnimation(navbar, homeSection, navHeight);
-    // navbarSubmenu(width);
-    // hoverDropdown(width, mobileTest);
-
-    $(window).resize(function () {
-        var width = Math.max($(window).width(), window.innerWidth);
-        buildHomeSection(homeSection);
-        //   hoverDropdown(width, mobileTest);
-    });
-
-    $(window).scroll(function () {
-        effectsHomeSection(homeSection, this);
-        //   navbarAnimation(navbar, homeSection, navHeight);
-    });
-
-    /* ---------------------------------------------- /*
-     * Home section height  from rival
-    /* ---------------------------------------------- */
-
-    function buildHomeSection(homeSection) {
-        if (homeSection.length > 0) {
-            if (homeSection.hasClass('home-full-height')) {
-                homeSection.height($(window).height());
-            } else {
-                homeSection.height($(window).height() * 0.85);
-            }
-        }
-    }
-
-    /* ---------------------------------------------- /*
-     * Home section effects  from rival
-    /* ---------------------------------------------- */
-
-    function effectsHomeSection(homeSection, scrollTopp) {
-        if (homeSection.length > 0) {
-            var homeSHeight = homeSection.height();
-            var topScroll = $(document).scrollTop();
-            if ((homeSection.hasClass('home-parallax')) && ($(scrollTopp).scrollTop() <= homeSHeight)) {
-                homeSection.css('top', (topScroll * 0.55));
-            }
-            if (homeSection.hasClass('home-fade') && ($(scrollTopp).scrollTop() <= homeSHeight)) {
-                var caption = $('.caption-content');
-                caption.css('opacity', (1 - topScroll / homeSection.height() * 1));
-            }
-        }
-    }
-
-    /* ---------------------------------------------- /*
-   * Set sections backgrounds
-  /* ---------------------------------------------- */
-
-    var module = $('.home-section, .module, .module-small, .side-image');
-    module.each(function (i) {
-        if ($(this).attr('data-background')) {
-            $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
-        }
-    });
+    //var homeSection = $('.home-section'),
+    //    width = Math.max($(window).width(), window.innerWidth),
+    //    mobileTest;
+    //if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    //    mobileTest = true;
+    //}
+    //buildHomeSection(homeSection);
+    //$(window).resize(function () {
+    //    var width = Math.max($(window).width(), window.innerWidth);
+    //    buildHomeSection(homeSection);
+    //});
+    //$(window).scroll(function () {
+    //    effectsHomeSection(homeSection, this);
+    //});
+    //function buildHomeSection(homeSection) {
+    //    if (homeSection.length > 0) {
+    //        if (homeSection.hasClass('home-full-height')) {
+    //            homeSection.height($(window).height());
+    //        } else {
+    //            homeSection.height($(window).height() * 0.85);
+    //        }
+    //    }
+    //}
+    //function effectsHomeSection(homeSection, scrollTopp) {
+    //    if (homeSection.length > 0) {
+    //        var homeSHeight = homeSection.height();
+    //        var topScroll = $(document).scrollTop();
+    //        if ((homeSection.hasClass('home-parallax')) && ($(scrollTopp).scrollTop() <= homeSHeight)) {
+    //            homeSection.css('top', (topScroll * 0.55));
+    //        }
+    //        if (homeSection.hasClass('home-fade') && ($(scrollTopp).scrollTop() <= homeSHeight)) {
+    //            var caption = $('.caption-content');
+    //            caption.css('opacity', (1 - topScroll / homeSection.height() * 1));
+    //        }
+    //    }
+    //}
+    //var module = $('.home-section, .module, .module-small, .side-image');
+    //module.each(function (i) {
+    //    if ($(this).attr('data-background')) {
+    //        $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
+    //    }
+    //});
 
     /* ---------------------------------------------- /*
 		 * Youtube video background from RIval
 	/* ---------------------------------------------- */
-
-    $(function () {
-        $(".video-player").mb_YTPlayer();
-    });
-
+    //$(function () {
+    //    $(".video-player").mb_YTPlayer();
+    //});
+    $(".video-player").mb_YTPlayer();
     //  'onStateChange': onPlayerStateChange
-
     setInterval(function () {
         testifvideoinview();
         loadifisinview();
     }, 1000);
-
     $('#video-play').click(function (event) {
         event.preventDefault();
         if ($(this).hasClass('fa-play')) {
@@ -276,20 +240,16 @@ jQuery(document).ready(function ($) {
         $(this).toggleClass('fa-play fa-pause');
         return false;
     });
-
     $('#video-volume').click(function (event) {
         event.preventDefault();
         $('.video-player').toggleVolume();
         $(this).toggleClass('fa-volume-off fa-volume-up');
         return false;
     });
-
     /* ---------------------------------------------- /*
      * A jQuery plugin for fluid width video embeds
     /* ---------------------------------------------- */
-
     $('body').fitVids();
-
     InitIsotope();
 
     if ($("html").hasClass("lt-ie9")) {
@@ -301,15 +261,12 @@ jQuery(document).ready(function ($) {
         $('.content-style3 ').css('width', '100%').css('width', '-=28px');
         $('.section-subscribe input[type=text]').css('width', '100%').css('width', '-=40px');
         $('.blog-search .blog-search-input').css('width', '100%').css('width', '-=40px');
-
         $('.tab').click(function () {
             setTimeout(function () {
                 $('.content-style3 ').css('width', '100%').css('width', '-=28px');
                 $('.section-subscribe input[type=text]').css('width', '100%').css('width', '-=40px');
             }, 500);
         });
-
-
     };
 
     //Click
@@ -327,9 +284,9 @@ jQuery(document).ready(function ($) {
         $('.searchbox', this).removeClass('searchbox-focus');
     });
 
-    if (document.getElementById('contact_map')) {
-        google.maps.event.addDomListener(window, 'load', contactusMap);
-    }
+    //if (document.getElementById('contact_map')) {
+    //    google.maps.event.addDomListener(window, 'load', contactusMap);
+    //}
 
     /* Portfolio PrettyPhoto */
     $("a[data-rel^='prettyPhoto']").prettyPhoto({
@@ -369,7 +326,7 @@ jQuery(document).ready(function ($) {
     });
 
     // stickyMenu();
-    //  addhovereffecttobootstrapnav();
+    // addhovereffecttobootstrapnav();
 });
 
 
