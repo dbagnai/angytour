@@ -2745,6 +2745,8 @@ namespace WelcomeLibrary.UF
                                     }
                                     else
                                         nodetobind.Attributes.Add("style", "display:block");
+                                if (nodetobind.Attributes.Contains("rel"))
+                                    nodetobind.Attributes["rel"].Value = "follow"; //imposto follow per il link
                                 else
                                 {
                                     if (nodetobind.Attributes.Contains("style"))
