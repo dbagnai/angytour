@@ -663,6 +663,27 @@
                                                 <hr style="margin: 2px 0" />
                                             </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-testata-funnel">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner testata funnel</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Funnel</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel-navigazione">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Funnel navigazione</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Navigazione Principale</span></a>

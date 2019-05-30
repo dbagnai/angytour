@@ -138,6 +138,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 ResizeWidth = 800;
                 ResizeHeight = 350;
             }
+            if (Sezione.ToLower().Contains("banners-testata-funnel"))
+            {
+                ResizeWidth = 800;
+                ResizeHeight = 350;
+            }
             if (Sezione.ToLower().Contains("banner-portfolio-sezioni"))
             {
                 ResizeWidth = 800;
