@@ -2738,6 +2738,7 @@ namespace WelcomeLibrary.UF
                                 link = linkloaded[idscheda][bindprophref];
                                 nodetobind.Attributes["href"].Value = link;
                                 if (!string.IsNullOrEmpty(link))
+                                {
                                     if (nodetobind.Attributes.Contains("style"))
                                     {
                                         nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
@@ -2745,8 +2746,9 @@ namespace WelcomeLibrary.UF
                                     }
                                     else
                                         nodetobind.Attributes.Add("style", "display:block");
-                                if (nodetobind.Attributes.Contains("rel"))
-                                    nodetobind.Attributes["rel"].Value = "follow"; //imposto follow per il link
+                                    if (nodetobind.Attributes.Contains("rel"))
+                                        nodetobind.Attributes["rel"].Value = "follow"; //imposto follow per il link
+                                }
                                 else
                                 {
                                     if (nodetobind.Attributes.Contains("style"))
