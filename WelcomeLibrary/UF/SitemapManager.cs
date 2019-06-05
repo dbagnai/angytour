@@ -642,9 +642,9 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/weblist.aspx";
                         //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 51 && Convert.ToInt32(codicetipologia.Substring(3)) <= 62) //
-                        Pathdestinazione = "~/AspNetPages/ListaElenco.aspx";
+                        Pathdestinazione = "~/AspNetPages/weblist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 101 && Convert.ToInt32(codicetipologia.Substring(3)) <= 101) //
-                        Pathdestinazione = "~/AspNetPages/ListaElenco.aspx";
+                        Pathdestinazione = "~/AspNetPages/weblist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 500 && Convert.ToInt32(codicetipologia.Substring(3)) <= 600) //
                         Pathdestinazione = "~/AspNetPages/pwalist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 199 && Convert.ToInt32(codicetipologia.Substring(3)) <= 199) //

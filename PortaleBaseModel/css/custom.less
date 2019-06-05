@@ -605,6 +605,25 @@ div#blocco-lgo-home {
 /*---------------------------------
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
+
+
+.card-block .numero-chiavi-in-mano-top {
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #666;
+    line-height: 75px;
+    margin: 10px auto;
+    font-size: 36px;
+}
+
+.card-block .numero-chiavi-in-mano-top, .card-block .numero-chiavi-in-mano-bottom {
+    background-color: #642a14 !important;
+    color: #fff !important;
+}
+
+
 .mbr-section-title, a .mbr-section-title, .title-block {
     color: @title-color;
     font-family: @tite-font;
@@ -660,6 +679,17 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
         margin-top: 0;
     }
 }
+
+
+.mbr-section-title.nocenter {
+    text-align: inherit;
+}
+
+.mbr-section-title.bigger {
+    font-size: @tite-bigger-size;
+    font-weight: 800 !important;
+}
+
 /*Svg decorazione sotto i titoli scroll schede*/
 #divScrollerSuggeritiJsTitle .mbr-section-title {
     &::after {
@@ -857,7 +887,7 @@ a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="butto
     color: @button-color !important;
     text-transform: uppercase !important;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
     /*vertical-align: middle !important;*/
     height: auto !important;
     border: 1px solid @bg-button-color;
@@ -1075,6 +1105,34 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -moz-border-radius: 0px;
 }
 
+.border-tipo2 {
+    border: none;
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    -webkit-transition: box-shadow .3s;
+    -moz-filter: drop-shadow(0 2px 5px .2px);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: box-shadow .3s;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -moz-filter: drop-shadow(0 2px 5px .2px);
+}
+
+.border-tipo2:hover {
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+    box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.4);
+    -webkit-transition: box-shadow .3s;
+    -moz-filter: drop-shadow(0 2px 5px .2px);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
 .work-item .card {
     margin: 10px;
     padding: 0px;
@@ -1085,7 +1143,10 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     background-image: -webkit-linear-gradient(-270deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.010) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0.0) 90.6%, transparent 100%);
     background-image: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%,rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.010) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0.0) 90.6%, transparent 100%);
 }
-
+.card-img-overlay.card-gradient-overlay-white {
+    background-image: -webkit-linear-gradient(-270deg, white 0%, rgba(255,255,255, 0.917) 5.3%, rgba(255,255,255, 0.834) 10.6%, rgba(255,255,255, 0.753) 15.9%, rgba(255,255,255, 0.672) 21.3%, rgba(255,255,255, 0.591) 26.8%, rgba(255,255,255, 0.411) 32.5%, rgba(255,255,255, 0.333) 38.4%, rgba(255,255,255, 0.257) 44.5%, rgba(255,255,255, 0.183) 50.9%, rgba(255,255,255, 0.013) 57.7%, rgba(255,255,255, 0.010) 65%, rgba(255,255,255, 0.008) 70%, rgba(255,255,255, 0) 81.4%, rgba(255,255,255, 0.0) 90.6%, transparent 100%);
+    background-image: linear-gradient(0deg, white 0%, rgba(255,255,255, 0.917) 5.3%, rgba(255,255,255, 0.834) 10.6%, rgba(255,255,255, 0.753) 15.9%, rgba(255,255,255, 0.672) 21.3%, rgba(255,255,255, 0.591) 26.8%, rgba(255,255,255, 0.411) 32.5%, rgba(255,255,255, 0.333) 38.4%, rgba(255,255,255, 0.257) 44.5%,rgba(255,255,255, 0.183) 50.9%, rgba(255,255,255, 0.013) 57.7%, rgba(255,255,255, 0.010) 65%, rgba(255,255,255, 0.008) 70%, rgba(255,255,255, 0) 81.4%, rgba(255,255,255, 0.0) 90.6%, transparent 100%);
+}
 .card-img-overlay:hover {
     /*background-color: rgba(0,0,0,0.5);
     background-position: center center !important;*/
@@ -2323,7 +2384,7 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 .owl-slider-v2 .box {
     margin: @margin-box-banner-slider;
-    background-color: @bg-box-banner-slider;
+    /*background-color: @bg-box-banner-slider;*/
 }
 
 .owl-slider-v2 .box .work-image, .owl-slider-v2 .box .work-image-no-button {

@@ -1,13 +1,13 @@
-﻿<!-- Isotope  -->
-<div style="margin-bottom: 35px; margin-top: 20px; display: none">
+﻿<div style="margin-bottom: 35px; margin-top: 20px; display: none">
     <div>
         <div class="row no-gutters" id="replaceid" style="margin-right:15px">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"> <!--il primo elemento dovrebbe essere col-12 col-lg-6-->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <!--il primo elemento dovrebbe essere col-12 col-lg-6-->
                 <div class="card m-2 border-tipo1" style="overflow:hidden">
 
                     <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
                         <div class="position-relative imgovercontainer">
-                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top" mybind="Id" />
+                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
                             <div class="card-img-overlay">
                             </div>
                         </div>
@@ -25,14 +25,15 @@
                                 <span class="bind" mybind="Autorenome"></span>
                             </div>
                         </div>-->
-                        <div class="float-left pt-sm-2" style="color:#ccc">
+                        <!--<div class="float-left pt-sm-2" style="color:#ccc">
                             <span class="fa fa-eye"></span><span class="bind" mybind="Id" myvalue="views" format="formatviews"></span>
-                        </div>
+                        </div>-->
+                        <div class="bind float-left linksmall py-1" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
                         <div class="float-right pt-sm-2">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
                     </div>
 
                     <div class="card-body text-left">
-                      
+
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h3 class="card-title titolo-offerta mb-2">
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
@@ -41,9 +42,8 @@
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
                             </h4>
                         </a>
-                        <div class="bind linksmall py-1" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
                         <div class="card-text">
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="130" myvalue2="nobreak"  myvalue3="filtertags"  format="formatdescrizione"></span><br />
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="130" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />
                         </div>
 
                         <!--<div class="">
@@ -72,4 +72,3 @@
         </div>
     </div>
 </div>
-<!-- Fine Isotope   -->
