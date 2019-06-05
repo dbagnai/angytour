@@ -586,20 +586,25 @@
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-testata">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Video Testata</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Testate Home ( per mobile )</span></a>
+                                                    <span class="menu-text">Testate Home mobile</span></a>
                                                 <b class="arrow"></b>
+                                            </li>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
                                             </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Pagina 1</span></a>
                                                 <b class="arrow"></b>
-                                            </li>
-
-                                            <li>
-                                                <hr style="margin: 2px 0" />
                                             </li>
                                             <%--       <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000001">
@@ -622,9 +627,6 @@
                                                     <span class="menu-text">Testate Gallery</span></a>
                                                 <b class="arrow"></b>
                                             </li>--%>
-                                            <li>
-                                                <hr style="margin: 2px 0" />
-                                            </li>
                                             <%--  <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-halfstriscia-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -649,6 +651,33 @@
                                                     <span class="menu-text">Testate Contatti</span></a>
                                                 <b class="arrow"></b>
                                             </li>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Principale</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-processo-acquisto">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Processo Acquisto</span></a>
+                                                <b class="arrow"></b>
+                                            </li>                                            
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Blog</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <%--<li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner area Blog</span></a>
+                                                <b class="arrow"></b>
+                                            </li>--%>
 
                                         </ul>
                                     </div>
@@ -663,37 +692,23 @@
                                                 <hr style="margin: 2px 0" />
                                             </li>
                                             <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-testata-funnel">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banner Navigazione Principale</span></a>
+                                                    <span class="menu-text">Banner testata funnel</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-pwa">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banner Navigazione Principale PWA</span></a>
+                                                    <span class="menu-text">Banner Funnel</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=icon-portfolio-sezioni-pwa">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel-navigazione">
                                                     <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Icone Navigazione Principale PWA</span></a>
+                                                    <span class="menu-text">Banner Funnel navigazione</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banner Navigazione Blog</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
-                                            <%--<li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Banner area Blog</span></a>
-                                                <b class="arrow"></b>
-                                            </li>--%>
-
-
                                             <li>
                                                 <hr style="margin: 2px 0" />
                                             </li>
@@ -729,19 +744,25 @@
                                                     <span class="menu-text">Banner Fascia 4</span></a>
                                                 <b class="arrow"></b>
                                             </li>
-                                            <li>
-                                                <hr style="margin: 2px 0" />
-                                            </li>
-                                            <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-testata">
-                                                    <i class="menu-icon fa fa-caret-right"></i>
-                                                    <span class="menu-text">Video Testata</span></a>
-                                                <b class="arrow"></b>
-                                            </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-banner1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Video Banner</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li>
+                                                <hr style="margin: 2px 0" />
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-pwa">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Principale PWA</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=icon-portfolio-sezioni-pwa">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Icone Navigazione Principale PWA</span></a>
                                                 <b class="arrow"></b>
                                             </li>
                                         </ul>

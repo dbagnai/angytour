@@ -1909,7 +1909,7 @@ ul.footer-category-list {
     font-family: @subtitle-banner-font;
     font-size: @subtitle-banner-fascia-size;
     font-weight: bold !important;
-    line-height: 1.5 !important;
+    line-height: 1.3 !important;
 }
 
 .small2, .body-isotope {
@@ -2015,6 +2015,205 @@ ul.footer-category-list {
 /*#menuzord ul .dropdown li:nth-child(1) {
     background: url(/images/icon-lampada.png) center calc(~'50% - 90px + 12.5%') no-repeat !important;
 }*/
+
+/*----------------------------------------------------------------------
+---- BANNER NAVIGAZIONE METODO LAVORO 1 -> 2 -> 3 tipo hospitality -----
+------------------------------------------------------------------------*/
+#divContainerNavCampionatura li:nth-child(-n+3)::after {
+    position: absolute;
+    top: 20px;
+    left: 75px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: @color-sottomeu;
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 4px 6px -6px #000;
+}
+#divContainerNavCampionatura li:nth-child(1)::after {
+    content: "1";
+}
+#divContainerNavCampionatura li:nth-child(2)::after {
+    content: "2";
+}
+#divContainerNavCampionatura li:nth-child(3)::after {
+    content: "3";
+}
+@media screen and (min-width: 1023px) {
+    #divContainerNavCampionatura li:nth-child(1) {
+        background-image: url(/images/freccia-sx.png);
+        background-position-x: right;
+        background-position-y: 75px;
+        background-size: 15%;
+        background-repeat: no-repeat;
+    }
+    #divContainerNavCampionatura li:nth-child(2) {
+        background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+        background-position: top 75px left 0, top 75px right 0px;
+        background-size: 15%;
+        background-repeat: no-repeat;
+    }
+    #divContainerNavCampionatura li:nth-child(3) {
+        background-image: url(/images/freccia-dx.png);
+        background-position-x: left;
+        background-position-y: 75px;
+        background-size: 15%;
+        background-repeat: no-repeat;
+    }
+}
+
+/*--------------------------------------------
+----------- BANNER TESTATA FUNNEL ------------
+----------------------------------------------*/
+.bigtext-funnel {
+    color: @title-testata-funnel-color;
+    font-family: @title-testata-funnel-font;
+    font-size: @title-testata-funnel-size !important;
+    font-weight: @title-testata-funnel-weight;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.2);
+    line-height: normal !important;
+    text-align: right;
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    letter-spacing: 1px !important;
+}
+.smalltext-funnel {
+    color: @subtitle-testata-funnel-color;
+    font-family: @subtitle-testata-funnel-font;
+    font-size: @subtitle-testata-funnel-size !important;
+    font-weight: @subtitle-testata-funnel-weight !important;
+    text-align: right;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.2);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 768px) {
+    .quote-marks-bigtext {
+        font-size: 2rem !important;
+    }
+
+    .smalltext-funnel {
+        font-size: 1.5rem !important;
+    }
+}
+/*------------------------------------------------------
+------ BANNER PROCESSO ACQUISTO & ISOTOPE FUNNEL -------
+------------------------------------------------------*/
+li:nth-child(1).work-item.funnel-fasce .work-div-noborder {
+    border-radius: 50px 50px 0 0;
+}
+
+li:nth-last-child(1).work-item.funnel-fasce .work-div-noborder {
+    border-radius: 0 0 50px 50px;
+}
+
+li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after {
+    position: absolute;
+    top: -10px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: @color-sottomeu;
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 4px 6px -6px #000;
+}
+
+li:nth-child(odd).work-item.funnel-fasce .title-isotope::after {
+    left: -25px;
+}
+
+li:nth-child(even).work-item.funnel-fasce .title-isotope::after {
+    right: -25px;
+}
+
+li:nth-child(1).work-item.funnel-fasce .title-isotope::after {
+    content: "1";
+}
+
+li:nth-child(2).work-item.funnel-fasce .title-isotope::after {
+    content: "2";
+}
+
+li:nth-child(3).work-item.funnel-fasce .title-isotope::after {
+    content: "3";
+}
+
+li:nth-child(4).work-item.funnel-fasce .title-isotope::after {
+    content: "4";
+}
+
+@media screen and (max-width: 768px) {
+    li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: inline-block;
+        margin-top: 15px;
+    }
+}
+
+/*------------------------------------------------
+----------- BANNER NAVIGAZIONE FUNNEL ------------
+--------------------------------------------------*/
+.works-grid-2 li:nth-child(1).work-item.funnel {
+    width: 99.999%;
+}
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+}
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+    width: 50% !important;
+}
+.works-grid-2 li.work-item.funnel .isotope-navigation a.funnel-buton {
+    width: 75% !important;
+}
+.work-item.funnel .isotope-navigation .work-subcaption .work-title {
+    font-size: 2.6rem;
+}
+@media (min-width: 580px) and (max-width: 768px) {
+    .works-grid-2 li:nth-child(1).work-item.funnel {
+        width: 99.999%;
+    }
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+        width: auto !important;
+    }
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+}
+@media (max-width: 579px) {
+    .works-grid-2 li:nth-child(1).work-item.funnel {
+        width: 99.999%;
+    }
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+        width: auto !important;
+    }
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+}
 
 /*------------------------------------
 -------- BANNER DICONO DI NOI --------
@@ -3385,10 +3584,10 @@ button.js-roundedpush:hover {
 --------------------------------- */
 /*si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
 @media screen and (min-width: 1025px) {
-    /*#divContainerb1 {
+    #divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 81.6px) !important;
-    }*/
+    }
 
     .fixedtop-home {
         display: none !important;
@@ -3453,6 +3652,45 @@ button.js-roundedpush:hover {
         display: none !important;
     }
 
+    .dropdown-home {
+        border-radius: 8px !important;
+        border: none !important;
+        box-shadow: 2px 4px 6px 3px rgba(34, 34, 34, 0.50) !important;
+        margin-left: 10px !important;
+        min-width: 270px !important;
+    }
+
+    .dropdown-home::before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 18px solid transparent;
+        border-right: 0px solid transparent;
+        border-bottom: 22px solid #FFFFFF;
+        top: -21px;
+        left: 17px;
+    }
+
+    .dropdown-home::after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: -21px;
+        left: 17px;
+        min-width: 270px !important;
+        height: 22px;
+    }
+
+    .menu-home:hover {
+        color: white !important;
+    }
+
+    /*.menuzord-menu ul.dropdown, .menuzord-menu ul.dropdown li ul.dropdown {
+        margin-left: 10px;
+        min-width: 270px;
+    }*/
 }
 /* ---------------------------------
  --- END TESTATA HOME FULLSCREEN ---
