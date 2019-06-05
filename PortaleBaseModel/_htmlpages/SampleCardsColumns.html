@@ -8,9 +8,16 @@
 <!--Esempio portfolio card con banner-->
 
 
-<div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3overlayneg.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-catalogo', false">&nbsp;</div>
-
-
+<div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
+    <script>
+        $(function () {
+            $("#portfolio1").children().first().removeClass();
+            $("#portfolio1").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del primo elemento del portfolio
+        });
+    </script>
+    <div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3overlayneg.html', 'divContainerNav1', 'portfolio1', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-catalogo', false">&nbsp;</div>
+    <div id="divContainerNav1Pager">&nbsp;</div>
+</div>
 
 
 
