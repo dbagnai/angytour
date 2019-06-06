@@ -508,6 +508,7 @@
             //"~/js/magnify/js/jquery.magnify.js",
             //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",
+            "~/js/masonry.pkgd.min.js",
             "~/lib/js/genericContent.js",
             "~/lib/js/genericBanner.js",
             "~/lib/js/sliderBanner.js",

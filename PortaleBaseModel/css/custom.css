@@ -651,6 +651,21 @@ div#blocco-lgo-home {
 /*---------------------------------
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
+.card-block .numero-chiavi-in-mano-top {
+  width: 75px;
+  height: 75px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #666;
+  line-height: 75px;
+  margin: 10px auto;
+  font-size: 36px;
+}
+.card-block .numero-chiavi-in-mano-top,
+.card-block .numero-chiavi-in-mano-bottom {
+  background-color: #642a14 !important;
+  color: #fff !important;
+}
 .mbr-section-title,
 a .mbr-section-title,
 .title-block,
@@ -945,7 +960,7 @@ input:hover[type="button"],
   color: #fff !important;
   text-transform: uppercase !important;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   /*vertical-align: middle !important;*/
   height: auto !important;
   border: 1px solid #f3c649;
@@ -1061,6 +1076,7 @@ footer .divbuttonstyle:hover {
   text-decoration: none !important;
   border: 1px solid #f3c649;
 }
+/*BOTTONE BANNER CLASSICO*/
 .btn-banner,
 .btn-banner:active,
 .btn-banner:visited,
@@ -1074,6 +1090,55 @@ footer .divbuttonstyle:hover {
   font-size: 1vw !important;
   color: #fff !important;
 }
+/*BOTTONE BANNER ROTONDO content FRECCIA CHE SI MUOVE*/
+/*.btn-banner, .btn-banner:active, .btn-banner:visited, .btn-banner:focus .btn .btn-banner, .btn .btn-banner:active, .btn .btn-banner:visited, .btn .btn-banner:focus {
+    &:extend(.btn-black-outline);
+    background: @color-sottomeu !important;
+    color: @button-outline-hover-color !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    letter-spacing: 0;
+    border-radius: 50%;
+    padding: 0 !important;
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    line-height: 60px !important;
+    margin: 0 !important;
+    font-size: 2rem !important;
+}
+.btn-banner i {
+    animation: arrowdown 1.7s ease-in-out infinite;
+}
+@keyframes arrowdown {
+    0% {
+        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+        -webkit-transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+    }
+}
+@-webkit-keyframes arrowdown {
+    0% {
+        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+        -webkit-transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+    }
+}*/
 .btn-banner:hover,
 .btn .btn-banner:hover {
   color: #032f2f !important;
@@ -1187,6 +1252,29 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
 }
+.border-tipo2 {
+  border: none;
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+  -moz-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+  box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: box-shadow 0.3s;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -moz-filter: drop-shadow(0 2px 5px 0.2px);
+}
+.border-tipo2:hover {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.4);
+  -moz-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.4);
+  box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.4);
+  -webkit-transition: box-shadow 0.3s;
+  -moz-filter: drop-shadow(0 2px 5px 0.2px);
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+}
 .work-item .card {
   margin: 10px;
   padding: 0px;
@@ -1194,6 +1282,10 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 .card-img-overlay.card-gradient-overlay {
   background-image: -webkit-linear-gradient(-270deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.01) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0) 90.6%, transparent 100%);
   background-image: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.01) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0) 90.6%, transparent 100%);
+}
+.card-img-overlay.card-gradient-overlay-white {
+  background-image: -webkit-linear-gradient(-270deg, white 0%, rgba(255, 255, 255, 0.917) 5.3%, rgba(255, 255, 255, 0.834) 10.6%, rgba(255, 255, 255, 0.753) 15.9%, rgba(255, 255, 255, 0.672) 21.3%, rgba(255, 255, 255, 0.591) 26.8%, rgba(255, 255, 255, 0.411) 32.5%, rgba(255, 255, 255, 0.333) 38.4%, rgba(255, 255, 255, 0.257) 44.5%, rgba(255, 255, 255, 0.183) 50.9%, rgba(255, 255, 255, 0.013) 57.7%, rgba(255, 255, 255, 0.01) 65%, rgba(255, 255, 255, 0.008) 70%, rgba(255, 255, 255, 0) 81.4%, rgba(255, 255, 255, 0) 90.6%, transparent 100%);
+  background-image: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0.917) 5.3%, rgba(255, 255, 255, 0.834) 10.6%, rgba(255, 255, 255, 0.753) 15.9%, rgba(255, 255, 255, 0.672) 21.3%, rgba(255, 255, 255, 0.591) 26.8%, rgba(255, 255, 255, 0.411) 32.5%, rgba(255, 255, 255, 0.333) 38.4%, rgba(255, 255, 255, 0.257) 44.5%, rgba(255, 255, 255, 0.183) 50.9%, rgba(255, 255, 255, 0.013) 57.7%, rgba(255, 255, 255, 0.01) 65%, rgba(255, 255, 255, 0.008) 70%, rgba(255, 255, 255, 0) 81.4%, rgba(255, 255, 255, 0) 90.6%, transparent 100%);
 }
 .card-img-overlay:hover {
   /*background-color: rgba(0,0,0,0.5);
@@ -1471,6 +1563,8 @@ ul.footer-category-list {
   /*BANNER TESTATA HOME - 55% ON*/
   /*background: @bg-testata-color;
     padding-right: calc(14% - 3rem);
+    padding: 16px !important;
+    background-color: rgba(0,0,0,0.0);
 
     @media (max-width: 768px) {
         .tp-caption.very_big_white {
@@ -1481,6 +1575,13 @@ ul.footer-category-list {
         }
     }*/
 }
+/*BANNER TESTATA HOME - 55% ON*/
+/*.tp-caption.sft.slidelink.hasclicklistener {
+    display: none;
+}
+.rev-slider-full .slotholder:after {
+    background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
+}*/
 .bigtext {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
@@ -1568,7 +1669,7 @@ ul.footer-category-list {
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 @keyframes titolo2 {
@@ -1582,7 +1683,7 @@ ul.footer-category-list {
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 @keyframes sfondo {
@@ -2464,7 +2565,7 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 .owl-slider-v2 .box {
   margin: 14px;
-  background-color: #fff;
+  /*background-color: @bg-box-banner-slider;*/
 }
 .owl-slider-v2 .box .work-image,
 .owl-slider-v2 .box .work-image-no-button {
@@ -3374,6 +3475,23 @@ button.js-roundedpush:hover {
     color: #032f2f !important;
   }
   .catalogo-menu-ul-home {
+    right: auto !important;
+    width: auto !important;
+    left: auto !important;
+    padding: 0 !important;
+  }
+  .catalogo-menu-ul-home::before {
+    border-bottom: 22px solid #f3c649 !important;
+  }
+  .catalogo-menu-ul-li-home {
+    clear: both !important;
+    float: left !important;
+    padding: 12px 15px !important;
+    border: none !important;
+    border-style: hidden !important;
+    width: 100% !important;
+  }
+  .catalogo-menu-ul-li-home ul {
     display: none !important;
     visibility: hidden !important;
   }
@@ -3408,13 +3526,13 @@ button.js-roundedpush:hover {
     min-width: 270px !important;
     height: 22px;
   }
+  li:nth-last-child(5) .dropdown-home::before {
+    right: 90px;
+    left: auto;
+  }
   .menu-home:hover {
     color: white !important;
   }
-  /*.menuzord-menu ul.dropdown, .menuzord-menu ul.dropdown li ul.dropdown {
-        margin-left: 10px;
-        min-width: 270px;
-    }*/
 }
 /* ---------------------------------
  --- END TESTATA HOME FULLSCREEN ---
@@ -3604,3 +3722,69 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 /* ---------------------------------
 ------- END TEMPLATE POLYGON -------
 --------------------------------- */
+/* ----------------------------------------------------
+- TEMPLATE BOOTSTRAP BANNER e PORTFOLIO MANSONRY CARD -
+---------------------------------------------------- */
+.firstbig li {
+  list-style-type: none;
+}
+/* fluid 4 columns */
+.grid-sizer,
+.grid-item {
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .grid-sizer,
+  .grid-item {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .grid-sizer,
+  .grid-item {
+    width: 25%;
+  }
+  .firstbig li:nth-of-type(1),
+  .firstbig li:nth-of-type(9n+1) {
+    width: 50%;
+  }
+  .firstbig li:nth-of-type(1) img,
+  .firstbig li:nth-of-type(9n+1) img {
+    padding-bottom: calc(228px - 0.5rem) !important;
+  }
+  .firstbigli li:nth-of-type(1) .card-img-overlay,
+  .firstbig li:nth-of-type(9n+1) .card-img-overlay {
+    bottom: 36px;
+  }
+}
+/* PERSONALIZZAZIONI SINGOLE BANNER CARD OVER CATALOGO */
+.firstbig-banner li:nth-of-type(n+1) .imgovercontainer.work-image:after {
+  background-position: center calc((100% - 0px) / 2) !important;
+  background-size: 10% !important;
+}
+.firstbig-banner li:nth-of-type(2) .imgovercontainer.work-image:hover:after {
+  background: url(/images/icon-trattore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.firstbig-banner li:nth-of-type(3) .imgovercontainer.work-image:hover:after {
+  background: url(/images/icon-spina.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.firstbig-banner li:nth-of-type(4) .imgovercontainer.work-image:hover:after {
+  background: url(/images/icon-ingranaggio.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.firstbig-banner li:nth-of-type(5) .imgovercontainer.work-image:hover:after {
+  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+/* SCHEDA DETAILS CATALOGO CATALOGO */
+.flexslider .slides img {
+  width: 100% !important;
+  max-height: 100% !important;
+  max-width: 100% !important;
+}

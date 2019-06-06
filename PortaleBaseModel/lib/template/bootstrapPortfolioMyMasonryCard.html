@@ -1,0 +1,39 @@
+﻿<!-- Isotope  -->
+<script>
+            $(function () {
+                var $grid =  $('.grid').masonry({
+                    // set itemSelector so .grid-sizer is not used in layout
+                    itemSelector: '.grid-item',
+                    // use element for option
+                    columnWidth: '.grid-sizer',
+                    percentPosition: true,
+                    //gutter: 20
+                })
+                $grid.imagesLoaded().progress(function () {
+                    $grid.masonry('layout');
+                });
+            });
+</script>
+<div class="grid firstbig mb-0 mb-md-5" id="replaceid">
+    <div class="grid-sizer"></div>
+    <li class="grid-item">
+        <div class="card m-2 bd-light-color">
+            <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                <div class="position-relative imgovercontainer work-image">
+                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top" mybind="Id" style="padding-bottom: 114px;" />
+                    <div class="card-img-overlay bg-white p-0" style="top:auto;">
+                        <div class="card-body text-center">
+                            <h3 class="card-title titolo-offerta mb-2">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            </h3>
+                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </li>
+</div>
+<!-- Fine Isotope   -->
