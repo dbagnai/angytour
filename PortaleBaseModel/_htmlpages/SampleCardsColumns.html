@@ -1,22 +1,30 @@
-﻿<!--Esempio portfolio card con contanuto-->
+﻿<!--Esempio portfolio card con banner-->
 
-<div id="divPortfolioList" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioBlog3Card.html', 'divPortfolioList', 'portlist1', 1, 44, true, '', 'rif000002', '',true,false">&nbsp;</div>
-
-
+<div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3overlayneg.html', 'divContainerNav1', 'portban', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-catalogo', false">&nbsp;</div>
 
 
-<!--Esempio portfolio card con banner-->
+<!--Esempio portfolio card con contenuti-->
 
 
-<div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
+<div  style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
     <script>
         $(function () {
-            $("#portfolio1").children().first().removeClass();
-            $("#portfolio1").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del primo elemento del portfolio
+            $("#portlist1").children().first().removeClass();
+            $("#portlist1").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del 1° elemento del portfolio
+          //  $("#portlist1:nth-child(2)").removeClass();  //Modifico la classe del 2° elemento del portfolio
+          //  $("#portlist1:nth-child(2)").addClass("col-12 col-lg-6");  //Modifico la classe del 2° elemento del portfolio
+
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item',
+                // use element for option
+                columnWidth: '.grid-sizer',
+                percentPosition: true
+            })
         });
     </script>
-    <div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3overlayneg.html', 'divContainerNav1', 'portfolio1', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-catalogo', false">&nbsp;</div>
-    <div id="divContainerNav1Pager">&nbsp;</div>
+    <div id="divPortfolioList"  style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioBlog3Card.html', 'divPortfolioList', 'portlist1', 1, 44, true, '', 'rif000002', '',true,false">&nbsp;</div>
+    <div id="divPortfolioListPager">&nbsp;</div>
 </div>
 
 
