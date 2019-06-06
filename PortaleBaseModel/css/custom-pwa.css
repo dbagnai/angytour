@@ -3364,6 +3364,12 @@ button.js-roundedpush:hover {
     border-style: hidden !important;
     width: 100% !important;
   }
+  .catalogo-menu-ul-li-home:first-child {
+    border-radius: 8px 8px 0 0 !important;
+  }
+  .catalogo-menu-ul-li-home:last-child {
+    border-radius: 0 0 8px 8px !important;
+  }
   .catalogo-menu-ul-li-home ul {
     display: none !important;
     visibility: hidden !important;
