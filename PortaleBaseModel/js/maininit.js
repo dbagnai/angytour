@@ -345,7 +345,7 @@ jQuery(document).ready(function ($) {
 });
 
 
-
+///////////////////////////FUNZIONI VARIE///////////////////////////////////////
 var loaded = false, timeout = 20000;//loaded flag for timeout
 setTimeout(function () {
     if (!loaded) {

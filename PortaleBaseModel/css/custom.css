@@ -325,6 +325,9 @@ a:hover {
     padding-top: 100px;
   }
 }
+.headerspacer-home {
+  padding-top: 0;
+}
 #divContainerb1 {
   height: calc(70vh - 141px) !important;
 }

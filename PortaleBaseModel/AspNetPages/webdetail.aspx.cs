@@ -575,7 +575,41 @@ public partial class _webdetail : CommonPage
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
                 break;
+            case "rif000012":
+                column1.Visible = false;
+                column2.Visible = true;
+                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
+                column2.Attributes["class"] = "col-12 col-sm-8";
+                column3.Visible = false;
+                divSearch.Visible = true;
+                //ContaArticoliPerperiodo(CodiceTipologia);
+                //  Caricalinksrubriche(CodiceTipologia);
+                divContact.Visible = false;
+                divContactBelow.Visible = false;
+                if (!JavaInjection)
+                {
 
+                    //SUGGERITI
+                    //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    //sb.Append("injectScrollerAndLoad,owlscrollerBlog2.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
+                    //sb.Append("\"></div>");
+
+                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3CardOverlay.html,divScrollerSuggeritiJs,portlist1, 1, 1,false,\'30\',\'" + CodiceTipologia + "\',\'" + Categoria + "\',false,false");
+                    sb.Append("\"></div>");
+                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+
+
+                    sb.Clear();
+
+                    //BIND PER LA SCHEDA!!!!
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,false, " + idOfferta + "\"");
+                    sb.Append("\"></div>");
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);//sb.ToString();
+                }
+
+                break;
             default:
                 column1.Visible = false;
                 column2.Visible = true;
