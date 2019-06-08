@@ -753,7 +753,7 @@ public class references
     /// <param name="lingua"></param>
     /// <param name="loggedusername"></param>
     /// <returns></returns>
-    public static string initreferencesdataserialized(string lingua,string loggedusername)
+    public static string initreferencesdataserialized(string lingua, string loggedusername)
     {
         var jpathcomplete = new references.jpath();
         var percorsoapptmp = WelcomeLibrary.STATIC.Global.percorsoapp;// CommonPage.ReplaceAbsoluteLinks("~");
@@ -770,10 +770,11 @@ public class references
         //LINGUE/////////////////////////////////////////////////////7
         var filejsonlanguages = "languages.json";
         //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
-        var reflanguages = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages).Replace("\r\n","").Replace("\n", "").Replace("\r", "");
+        var reflanguages = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages).Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
         jpathcomplete.jsonlanguages = reflanguages;// Newtonsoft.Json.JsonConvert.SerializeObject(reflanguages); 
         /////////////BASERESOURCES////////////////////////////////////////
         jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(references.GetResourcesByLingua(lingua));
+        //jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, Dictionary<string, string>>());
         ///////////////////////////////////////////////////////////////
         jpathcomplete.versionforcache = WelcomeLibrary.STATIC.Global.versionforcache;
         ////////////// REGIONI E PROIVINCE/////////////////////
@@ -881,7 +882,7 @@ public class references
             PreserveReferencesHandling = PreserveReferencesHandling.None,
         });
 
-        return  Newtonsoft.Json.JsonConvert.SerializeObject(jpathcomplete);
+        return Newtonsoft.Json.JsonConvert.SerializeObject(jpathcomplete);
 
     }
 
