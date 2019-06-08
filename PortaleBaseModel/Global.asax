@@ -495,13 +495,13 @@
             "~/js/jquery.cycle2.carousel.js",
              "~/js/owl-carousel.js",
             "~/js/owl-carousel/owl-carousel/owl.carousel.min.js",
-            "~/js/jquery-ui-1.12.1.custom/jquery-ui.js",
-            "~/js/jqueryui/jquery.maskedinput.js",
-            "~/js/revolution464/jquery.themepunch.plugins.min.js",
-            "~/js/revolution464/jquery.themepunch.tools.min.js",
-            "~/js/revolution464/jquery.themepunch.revolution.min.js",
-                "~/js/googleMaps.js",
-                "~/lib/js/common.js"
+            "~/js/jquery-ui-1.12.1.custom/jquery-ui.js", //ingomnrante
+            "~/js/jqueryui/jquery.maskedinput.js", //ingommbrante
+            "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
+            "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante
+            "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
+            "~/js/googleMaps.js",
+            "~/lib/js/common.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -548,9 +548,9 @@
             //"~/css/fontawesome541/js/v4-shims.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
+            "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
-            "~/js/landing/jarallax.js",
-            "~/js/odometer/odometer.js",
+            //"~/js/odometer/odometer.js",
             "~/js/maininit.js"
         );
 
@@ -610,13 +610,9 @@
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
-             //"~/css/opj/style-100.css",  
-             //"~/css/mbr-faq.css",
-             //"~/css/mbr-additional.css",
-             //"~/css/landing.css",
-             "~/js/odometer/themes/odometer-theme-custom.css",
+             //"~/js/odometer/themes/odometer-theme-custom.css",
              "~/css/custom1.css",
-             "~/css/custom.css"
+             "~/css/custom.min.css"
           );
 
         BundleEngine.AddBundleCSS("bundlecsspwa",
@@ -652,14 +648,14 @@
          "~/css/swiper/swiper.min.css",
 
           "~/css/custom1.css",
-          "~/css/custom.css",
+          "~/css/custom.min.css",
           "~/css/custom-pwa.css"
        );
     }
 
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)
     {
-         RegisterBundles(routes); // Bundles da iniettare css/js
+        RegisterBundles(routes); // Bundles da iniettare css/js
 
         //routes.Add("Generic", new System.Web.Routing.Route("{Lingua}", new GenericRouteHandler()));
         routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
