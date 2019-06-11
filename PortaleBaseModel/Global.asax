@@ -576,7 +576,6 @@
          "~/js/detect-zoom.min.js",
          //"~/js/maininit.js",
          //"~/js/landing/script.js",
-         "~/js/landing/jarallax.js",
          "~/js/maininit-pwa.js",
 
          //MIRCO SCROLLER SWIPER PWA js

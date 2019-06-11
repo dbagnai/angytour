@@ -126,7 +126,7 @@ function searchtaginjectandcall() {
 }
 
 function initimoment() {
-    moment.locale("it");
+   // moment.locale("it");
 }
 
 function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! 
@@ -518,7 +518,8 @@ function CaricaListaLingue() {
 
                 },
                 failure: function (result) {
-                    sendmessage('fail init languages');
+                    console.log('fail init languages');
+                    //sendmessage('fail init languages');
                 }
             });
             return jsonlanguages;
@@ -543,11 +544,13 @@ function InizializzaPercorsiApplicazione() {
 
                 }
                 catch (e) {
-                    sendmessage('fail init vars', e);
+                    console.log('fail init vars', e);
+                    //sendmessage('fail init vars', e);
                 }
             },
             failure: function (result) {
-                sendmessage('fail init vars', '');
+                    console.log('fail init vars', '');
+                //sendmessage('fail init vars', '');
             }
         });
 }
