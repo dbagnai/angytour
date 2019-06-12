@@ -433,12 +433,10 @@ function InitializeMap() {
     }
 
 
-    if (typeof gpositems != 'undefined' && typeof gpositems != 'undefined') {
+    if (typeof gpositems !== 'undefined' && gpositems != null) {
         var mapcnt = document.getElementById(idmapcontainerlocal);
         if (mapcnt != null) {
             var latlng = new google.maps.LatLng(googleposlat1, googleposlng1);
-
-
             var myOptions =
             {
                 zoom: 9,
@@ -480,34 +478,35 @@ function markiconslocal(maplocal) {
     var marker;
     var urlmarker = [];
     var testomarker = [];
-    for (var i = 0; i < gpositems.length; i++) {
+    if (typeof gpositems != undefined && gpositems != null)
+        for (var i = 0; i < gpositems.length; i++) {
 
 
-        urlmarker.push(gpositems[i]["url"]);
-        testomarker.push(gpositems[i]["titolo"] + '<br/><a target="_blank" href="' + urlmarker[i] + '">' +
-            'Vedi Mappa Completa/See complete map</a>');
-        ltlng.push(new google.maps.LatLng(gpositems[i]["Latitudine1_dts"], gpositems[i]["Longitudine1_dts"]));
-        var center = new google.maps.LatLng(gpositems[0]["Latitudine1_dts"], gpositems[0]["Longitudine1_dts"]);
-        maplocal.setCenter(center);
-        ///////////////////
-        //infowindow.setContent(testomarker);
-        infowindow = new google.maps.InfoWindow({});
-        marker = new google.maps.Marker({
-            map: maplocal,
-            position: ltlng[i]
-        });
-        (function (i, marker) {
-            google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent("<div>" + testomarker[i] + "</div>");
-                infowindow.open(maplocal, marker);
+            urlmarker.push(gpositems[i]["url"]);
+            testomarker.push(gpositems[i]["titolo"] + '<br/><a target="_blank" href="' + urlmarker[i] + '">' +
+                'Vedi Mappa Completa/See complete map</a>');
+            ltlng.push(new google.maps.LatLng(gpositems[i]["Latitudine1_dts"], gpositems[i]["Longitudine1_dts"]));
+            var center = new google.maps.LatLng(gpositems[0]["Latitudine1_dts"], gpositems[0]["Longitudine1_dts"]);
+            maplocal.setCenter(center);
+            ///////////////////
+            //infowindow.setContent(testomarker);
+            infowindow = new google.maps.InfoWindow({});
+            marker = new google.maps.Marker({
+                map: maplocal,
+                position: ltlng[i]
             });
-        })(i, marker);
-        ///////////////////
+            (function (i, marker) {
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent("<div>" + testomarker[i] + "</div>");
+                    infowindow.open(maplocal, marker);
+                });
+            })(i, marker);
+            ///////////////////
 
-        google.maps.event.addListenerOnce(maplocal, 'idle', function () {
-            google.maps.event.trigger(marker, 'click');
-        });
-    }
+            google.maps.event.addListenerOnce(maplocal, 'idle', function () {
+                google.maps.event.trigger(marker, 'click');
+            });
+        }
 
 }
 //funzione che mette il punto dell'attività sulla mappa

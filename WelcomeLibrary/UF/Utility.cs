@@ -66,7 +66,7 @@ namespace WelcomeLibrary.UF
     public static class Utility
     {
 
-        public static string waitwrappercall(string functionname, string functioncall)
+        public static string waitwrappercall(string functionname, string functioncall, string mseconds = "300")
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("(function wait() {");
@@ -83,14 +83,14 @@ namespace WelcomeLibrary.UF
                     functionitem1 = listaarray[0];
                     functionitem2 = listaarray[1];
                 }
-                sb.Append("  if ( typeof " + functionitem1 + " !== 'undefined' &&  " + functionitem1  + " != null  &&  typeof " + functionname + " === \"function\")");
+                sb.Append("  if ( typeof " + functionitem1 + " !== 'undefined' &&  " + functionitem1 + " != null  &&  typeof " + functionname + " === \"function\")");
 
             }
             sb.Append("    {");
             sb.Append(functioncall + ";");
             sb.Append(" }");
             sb.Append("   else  {");
-            sb.Append("  setTimeout(wait, 300);");
+            sb.Append("  setTimeout(wait, " + mseconds + ");");
             sb.Append("  }  })();");
             return sb.ToString();
 

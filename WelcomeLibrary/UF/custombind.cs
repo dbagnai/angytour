@@ -4193,7 +4193,7 @@ namespace WelcomeLibrary.UF
 
 
                         arrayret.Add(elems);
-                        ret = ";\r\n" + string.Format("var gpositems = JSON.parse(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(arrayret))) + ";\r\n";
+                        ret = "var gpositems = null;\r\n " + WelcomeLibrary.UF.Utility.waitwrappercall("b64ToUtf8", ";\r\n" + string.Format(" gpositems = JSON.parse(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(arrayret))) + ";\r\n");
                     }
                     catch { }
                     break;

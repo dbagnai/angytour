@@ -615,8 +615,9 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
         }
         Setrelprevnext();
-
-        Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
+       
+        //if (Tipologia != "rif000003")
+       // Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
     }
     private void ModificaFiltroJS()
     {

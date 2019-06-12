@@ -299,7 +299,7 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notifications.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/pako/pako.js")%>"></script>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/commonvars.js")+ CommonPage.AppendModTime(Server,"~/lib/js/common.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/commonvars.js")+ CommonPage.AppendModTime(Server,"~/lib/js/commonvars.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js")+ CommonPage.AppendModTime(Server,"~/lib/js/common.js")%>"></script>
 <%--        <script>
             var pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';

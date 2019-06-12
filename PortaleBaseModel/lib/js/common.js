@@ -2802,32 +2802,3 @@ function validateEmail(value) {
 var randomValue = Math.floor((1 + Math.random()) * 0x10000);
 
 
-// Polyfills for deprecated escape/unescape() functions
-if (!window.unescape) {
-    window.unescape = function (s) {
-        return s.replace(/%([0-9A-F]{2})/g, function (m, p) {
-            return String.fromCharCode('0x' + p);
-        });
-    };
-}
-if (!window.escape) {
-    window.escape = function (s) {
-        var chr, hex, i = 0, l = s.length, out = '';
-        for (; i < l; i++) {
-            chr = s.charAt(i);
-            if (chr.search(/[A-Za-z0-9\@\*\_\+\-\.\/]/) > -1) {
-                out += chr; continue;
-            }
-            hex = s.charCodeAt(i).toString(16);
-            out += '%' + (hex.length % 2 != 0 ? '0' : '') + hex;
-        }
-        return out;
-    };
-}
-var utf8ToB64 = function (s) {
-    return btoa(unescape(encodeURIComponent(s)));
-};
-var b64ToUtf8 = function (s) {
-    s = s.replace(/\s/g, '');
-    return decodeURIComponent(escape(atob(s)));
-};
