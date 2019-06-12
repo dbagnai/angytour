@@ -63,6 +63,7 @@
         <%= InjectedStartPageScripts() %>
         <link rel="preconnect" as="font" crossorigin="crossorigin"  href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700">
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
+ <%--            <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
@@ -858,13 +859,15 @@
         <div id="divSearchBarPlaceholder">
         </div>
 
-        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
+                <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1",null," async ") %>
+             <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2",null," async ") %>
+      <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2" ) %>--%>
         <script>
             var makeRevLower = false;
            <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
      <%--       initLingua('<%= Lingua %>');--%>
-            //  clearcache();
-            initimoment();
+            //initimoment();
 
             jQuery(document).ready(function () {
                <%-- loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');--%>
@@ -872,7 +875,6 @@
                 <%--  loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
             });
         </script>
-        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2") %>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
         <link rel="stylesheet" src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">

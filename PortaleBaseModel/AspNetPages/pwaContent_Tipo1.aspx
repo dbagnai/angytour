@@ -55,7 +55,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            inizializzaFlexsliderSchedaGallery();
+            (function wait() {
+                if (typeof $.flexslider == 'function') {
+                    inizializzaFlexsliderSchedaGallery();
+
+                } else {
+                    setTimeout(wait, 300);
+                }
+            })();
         });
         function inizializzaFlexsliderSchedaGallery() {
 

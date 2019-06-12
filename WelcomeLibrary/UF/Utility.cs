@@ -66,7 +66,35 @@ namespace WelcomeLibrary.UF
     public static class Utility
     {
 
+        public static string waitwrappercall(string functionname, string functioncall)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(function wait() {");
 
+            if (!functionname.Contains("."))
+                sb.Append("  if (typeof " + functionname + " === \"function\")");
+            else
+            {
+                string functionitem1 = functionname;
+                string functionitem2 = functionname;
+                string[] listaarray = functionname.Trim().Split('.');
+                if (listaarray != null && listaarray.Length > 1)
+                {
+                    functionitem1 = listaarray[0];
+                    functionitem2 = listaarray[1];
+                }
+                sb.Append("  if ( typeof " + functionitem1 + " !== 'undefined' &&  " + functionitem1  + " != null  &&  typeof " + functionname + " === \"function\")");
+
+            }
+            sb.Append("    {");
+            sb.Append(functioncall + ";");
+            sb.Append(" }");
+            sb.Append("   else  {");
+            sb.Append("  setTimeout(wait, 300);");
+            sb.Append("  }  })();");
+            return sb.ToString();
+
+        }
         public static void ViewportwManagerSet(string sessionid, string Viewportwidth)
         {
             try

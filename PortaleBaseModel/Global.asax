@@ -476,20 +476,25 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib0",
+            "~/lib/js/commonvars.js",
             "~/js/jquery321/jquery-3.2.1.min.js",
             "~/js/jquery321/jquery-migrate-3.0.1.min.js",
              "~/js/bootstrap400/popper.min.js",
             "~/js/bootstrap400/js/bootstrap.min.js",
+            "~/js/menuzord/files/js/menuzord.js",
             //"~/js/localforage.min.js",
             //"~/js/idkeyval/idb-keyval-iife.js",
-            "~/js/menuzord/files/js/menuzord.js",
             //"~/js/pako/pako.min.js",
-            "~/js/notifications/notify.min.js",
-            "~/js/notifications/notify-metro.js",
-            "~/js/notifications/notifications.js",
-        //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
-            "~/js/moment.min.js", //no locales!!!
-            "~/js/imagesloaded.pkgd.js",
+            //"~/js/notifications/notify.min.js",
+            //"~/js/notifications/notify-metro.js",
+            //"~/js/notifications/notifications.js",
+            //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
+            //"~/js/moment.min.js", //no locales!!!
+            "~/js/googleMaps.js"
+        );
+
+        BundleEngine.AddBundleJS("bundlejslib1",
+               "~/js/imagesloaded.pkgd.js",
             "~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",
             "~/js/jquery.cycle2.carousel.js",
@@ -500,36 +505,10 @@
             "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
-            "~/js/googleMaps.js",
-            "~/lib/js/common.js"
-        );
-
-        BundleEngine.AddBundleJS("bundlejslib1",
             //"~/js/magnify/js/jquery.magnify.js",
             //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",
-            "~/js/masonry.pkgd.min.js",
-            "~/lib/js/genericContent.js",
-            "~/lib/js/genericBanner.js",
-            "~/lib/js/sliderBanner.js",
-            "~/lib/js/scroller.js",
-            "~/lib/js/scrollerBanner.js",
-            "~/lib/js/portfolioisotope.js",
-            "~/lib/js/bannerFascia.js",
-            "~/lib/js/portfolioisotopeBanner.js",
-            "~/lib/js/archivio.js",
-            "~/lib/js/feedbacks.js",
-            "~/lib/js/linkslistddl1.js",
-            "~/lib/js/linkslistddl2.js",
-            "~/js/lazyloadimg.js",
-              "~/lib/js/searchcontrolgeneric.js",
-            "~/lib/js/carrello.js",
-            "~/lib/js/bookingtool.js",
-            "~/lib/js/videoBanner.js"
-        );
-
-        BundleEngine.AddBundleJS("bundlejslib2",
-            //"~/js/jquery.validate.js",
+              //"~/js/jquery.validate.js",
             //~/js/defiant/defiant.min.js,
             //"https://www.google.com/recaptcha/api.js",
             "~/js/animationEnigne.js",
@@ -551,7 +530,31 @@
             "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
             //"~/js/odometer/odometer.js",
+            "~/js/masonry.pkgd.min.js",
+            "~/lib/js/common.js",
+            "~/lib/js/genericContent.js",
+            "~/lib/js/genericBanner.js",
+            "~/lib/js/sliderBanner.js",
+            "~/lib/js/scroller.js",
+            "~/lib/js/scrollerBanner.js",
+            "~/lib/js/portfolioisotope.js",
+            "~/lib/js/bannerFascia.js",
+            "~/lib/js/portfolioisotopeBanner.js",
+            "~/lib/js/archivio.js",
+            "~/lib/js/linkslistddl1.js",
+            "~/lib/js/linkslistddl2.js",
+            "~/lib/js/searchcontrolgeneric.js",
+            "~/lib/js/carrello.js",
+            "~/lib/js/bookingtool.js",
+            "~/lib/js/videoBanner.js",
+            "~/lib/js/feedbacks.js",
             "~/js/maininit.js"
+        );
+
+        BundleEngine.AddBundleJS("bundlejslib2",
+          
+            "~/js/lazyloadimg.js"
+
         );
 
         BundleEngine.AddBundleJS("bundlejslibpwa2",
@@ -602,7 +605,7 @@
               "~/css/style1.css",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
             "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css",
-            "~/js/notifications/notification.css",
+            //"~/js/notifications/notification.css",
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
             "~/js/flexslider/flexslider.css",
             "~/js/magnify/css/magnify.css",
@@ -629,7 +632,7 @@
          "~/js/simplestarrating/SimpleStarRating.css",
          "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
             "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css",
-         "~/js/notifications/notification.css",
+         //"~/js/notifications/notification.css",
          "~/js/owl-carousel/owl-carousel/owl.carousel.css",
          "~/js/flexslider/flexslider.css",
          "~/js/magnify/css/magnify.css",

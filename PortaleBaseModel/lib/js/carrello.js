@@ -39,7 +39,7 @@ var carrellotool = new function () {
                 if ($("#" + controlid).length) {
                     initcalendarrange();
                 } else {
-                    setTimeout(wait, 80);
+                    setTimeout(wait, 200);
                 }
             })();
 

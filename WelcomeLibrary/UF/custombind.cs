@@ -257,7 +257,10 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "initSlider('" + dictpars["controlid"] + "','" + node.Id + "'," + dictpars["width"] + "," + dictpars["height"] + ")");
+
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("initSlider", "initSlider('" + dictpars["controlid"] + "','" + node.Id + "'," + dictpars["width"] + "," + dictpars["height"] + ")"));
+                                        //jscommands[Session.SessionID].Add(container, "initSlider('" + dictpars["controlid"] + "','" + node.Id + "'," + dictpars["width"] + "," + dictpars["height"] + ")");
+
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -385,7 +388,9 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "initcycleBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("initcycleBanner", "initcycleBanner('" + dictpars["controlid"] + "','" + node.Id + "')"));
+                                        //jscommands[Session.SessionID].Add(container, "initcycleBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -553,7 +558,9 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("InitIsotopeLocalBanner", "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');"));
+                                        //jscommands[Session.SessionID].Add(container, "InitIsotopeLocalBanner('" + dictpars["controlid"] + "');");
+
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -859,7 +866,9 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "initScrollerBanner('" + dictpars["controlid"] + "','" + dictpars["scrollertype"] + "');");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("initScrollerBanner", "initScrollerBanner('" + dictpars["controlid"] + "', '" + dictpars["scrollertype"] + "'); "));
+                                        //jscommands[Session.SessionID].Add(container, "initScrollerBanner('" + dictpars["controlid"] + "','" + dictpars["scrollertype"] + "');");
+
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -1051,8 +1060,8 @@ namespace WelcomeLibrary.UF
                                     {
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
-                                        if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "initScrollertype('" + dictpars["controlid"] + "','" + dictpars["container"] + "','" + dictpars["scrollertype"] + "');");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("initScrollertype", "initScrollertype('" + dictpars["controlid"] + "','" + dictpars["container"] + "','" + dictpars["scrollertype"] + "');"));
+                                        //jscommands[Session.SessionID].Add(container, "initScrollertype('" + dictpars["controlid"] + "','" + dictpars["container"] + "','" + dictpars["scrollertype"] + "');");
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1254,7 +1263,8 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "inizializzaFlexsliderGallery('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                        //jscommands[Session.SessionID].Add(container, "inizializzaFlexsliderGallery('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("inizializzaFlexsliderGallery", "inizializzaFlexsliderGallery('" + dictpars["controlid"] + "','" + dictpars["container"] + "');"));
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -1743,13 +1753,15 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
-                                        jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                        jscommands[Session.SessionID].Add(container + "-2", WelcomeLibrary.UF.Utility.waitwrappercall("initGlobalVarsFromServer", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');"));
+                                        //jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
 
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         if (jscommands[Session.SessionID].ContainsKey(container + "-1")) jscommands[Session.SessionID].Remove(container + "-1");
-                                        jscommands[Session.SessionID].Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                        //jscommands[Session.SessionID].Add(container + "-1", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');");
+                                        jscommands[Session.SessionID].Add(container + "-1", WelcomeLibrary.UF.Utility.waitwrappercall("InitIsotopeLocal", "InitIsotopeLocal('" + dictpars["controlid"] + "','" + dictpars["container"] + "');"));
 
                                         //if (dictpagerpars["enablepager"] == "true")
                                         //{
@@ -2257,7 +2269,10 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
-                                        jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                        //jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                        jscommands[Session.SessionID].Add(container + "-2", WelcomeLibrary.UF.Utility.waitwrappercall("initGlobalVarsFromServer", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');"));
+
 
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
@@ -2393,13 +2408,18 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
-                                        jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                        //jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+
+                                        jscommands[Session.SessionID].Add(container + "-2", WelcomeLibrary.UF.Utility.waitwrappercall("initGlobalVarsFromServer", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');"));
 
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                        //jscommands[Session.SessionID].Add(container, "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("InitVideo", "InitVideo('" + dictpars["controlid"] + "','" + node.Id + "')"));
+
                                     }
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////END BINDING ////////////////////////////////////////////////////////
@@ -2531,13 +2551,15 @@ namespace WelcomeLibrary.UF
                                         if (!jscommands.ContainsKey(Session.SessionID))
                                             jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                         if (jscommands[Session.SessionID].ContainsKey(container + "-2")) jscommands[Session.SessionID].Remove(container + "-2");
-                                        jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                        //jscommands[Session.SessionID].Add(container + "-2", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');");
+                                        jscommands[Session.SessionID].Add(container + "-2", WelcomeLibrary.UF.Utility.waitwrappercall("initGlobalVarsFromServer", "initGlobalVarsFromServer('" + dictpars["controlid"] + "','" + dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(dictpars)) + "','" + Newtonsoft.Json.JsonConvert.SerializeObject(dictpagerpars) + "');"));
 
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         //Aggiungo un comando javascript da eseguire dopo il binding per l'init del controllo
                                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         if (jscommands[Session.SessionID].ContainsKey(container)) jscommands[Session.SessionID].Remove(container);
-                                        jscommands[Session.SessionID].Add(container, "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                        //jscommands[Session.SessionID].Add(container, "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')");
+                                        jscommands[Session.SessionID].Add(container, WelcomeLibrary.UF.Utility.waitwrappercall("InitGenericBanner", "InitGenericBanner('" + dictpars["controlid"] + "','" + node.Id + "')"));
                                     }
 
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3400,7 +3422,9 @@ namespace WelcomeLibrary.UF
                                     if (!jscommands.ContainsKey(Session.SessionID))
                                         jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                     if (jscommands[Session.SessionID].ContainsKey(nodetobind.Attributes["id"].Value)) jscommands[Session.SessionID].Remove(nodetobind.Attributes["id"].Value);
-                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");"); //Imposto la chiamata da tornare
+                                    //jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");");
+                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, WelcomeLibrary.UF.Utility.waitwrappercall("bookingtool.initbookingtool", "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");"));
+                                    //Imposto la chiamata da tornare
                                 }
 
                             }
@@ -3421,7 +3445,10 @@ namespace WelcomeLibrary.UF
                                     if (!jscommands.ContainsKey(Session.SessionID))
                                         jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                     if (jscommands[Session.SessionID].ContainsKey(idcontenitorecarrello)) jscommands[Session.SessionID].Remove(idcontenitorecarrello);
-                                    jscommands[Session.SessionID].Add(idcontenitorecarrello, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + idcontenitorecarrello + "', 2);");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                                    jscommands[Session.SessionID].Add(idcontenitorecarrello, WelcomeLibrary.UF.Utility.waitwrappercall("carrellotool.initcarrellotool", "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + idcontenitorecarrello + "', 2);"));
+                                    //jscommands[Session.SessionID].Add(idcontenitorecarrello, "carrellotool.initcarrellotool(" + idelement + ",'','" + Username + "','" + idcontenitorecarrello + "', 2);");  
+                                    //1 carrello con data range //2 carreelo standard //3 entrambi
+
 
                                 }
 
@@ -3496,7 +3523,11 @@ namespace WelcomeLibrary.UF
                                     if (!jscommands.ContainsKey(Session.SessionID))
                                         jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                     if (jscommands[Session.SessionID].ContainsKey(nodetobind.Attributes["id"].Value + "commenttool")) jscommands[Session.SessionID].Remove(nodetobind.Attributes["id"].Value + "commenttool");
-                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  //1 carrello con data range //2 carreelo standard //3 entrambi
+                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value + "commenttool", WelcomeLibrary.UF.Utility.waitwrappercall(instancename + ".rendercommentsloadref", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");"));
+
+                                    //jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value + "commenttool", instancename + ".rendercommentsloadref(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "','','true','1','35','" + maxrecord + "'," + onlytotals + "," + viewmode + ");");  
+                                    //1 carrello con data range //2 carreelo standard //3 entrambi
+
                                 }
                             }
                         }

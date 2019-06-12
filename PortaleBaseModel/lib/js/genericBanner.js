@@ -110,17 +110,26 @@ function bindgenericbanner(el, localObjects) {
                 $('#' + container).append(ret.html()) + "\r\n";
             });
     }
-     console.log('banner jaralax inject');
+    console.log('banner jaralax inject');
     CleanHtml($('#' + container));
     InitGenericBanner(controlid, container);
-}; 
+};
 
 function InitGenericBanner(controlid, container) {
     $('#' + container).show();
     $('#' + container + 'Title').show();
     $(function () {
-        $('.mbr-parallax-background').jarallax({
-            speed: 0.2
-        });
+        //$('.mbr-parallax-background').jarallax({
+        //    speed: 0.2
+        //});
+        (function wait() {
+            if ($.fn.jarallax) {
+                $('.mbr-parallax-background').jarallax({
+                    speed: 0.2
+                });
+            } else {
+                setTimeout(wait, 500);
+            }
+        })();
     });
 };

@@ -157,7 +157,7 @@ namespace WelcomeLibrary.UF
                     foreach (var m in bundleList)
                     {
                         //sb.AppendLine("<script type=\"text/javascript\"  fn=\"" + m.FileName  + "\">");
-                        sb.AppendLine("<script " + relmode + " type=\"text/javascript\" >");
+                        sb.AppendLine("<script  type=\"text/javascript\" >");
 
                         string texttoappend = File.ReadAllText(m.FileName);
                         texttoappend = System.Text.RegularExpressions.Regex.Replace(texttoappend, "</script>", "<\\/script>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
@@ -173,7 +173,7 @@ namespace WelcomeLibrary.UF
                     string scriptType = BundleOptions.ScriptTypeAttribute ? " type=\"text/javascript\"" : "";
 
                     foreach (var m in bundleList)
-                        sb.AppendFormat("<script " + relmode + " " + scriptType + " src=\"{0}\"></script>", m.FileNameHash);
+                        sb.AppendFormat("<script  " + scriptType + " src=\"{0}\"></script>", m.FileNameHash);
 
                 }
                 else if (optionInjectmode == EnumInjectionMode.SingleCombinedScript)
