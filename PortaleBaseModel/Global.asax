@@ -505,12 +505,12 @@
             "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
-            //"~/js/magnify/js/jquery.magnify.js",
-            //"~/js/magnify/js/jquery.magnify-mobile.js"
-            //"~/lib/js/immobili2.js",
-              //"~/js/jquery.validate.js",
-            //~/js/defiant/defiant.min.js,
-            //"https://www.google.com/recaptcha/api.js",
+                                                                      //"~/js/magnify/js/jquery.magnify.js",
+                                                                      //"~/js/magnify/js/jquery.magnify-mobile.js"
+                                                                      //"~/lib/js/immobili2.js",
+                                                                      //"~/js/jquery.validate.js",
+                                                                      //~/js/defiant/defiant.min.js,
+                                                                      //"https://www.google.com/recaptcha/api.js",
             "~/js/animationEnigne.js",
             "~/js/jq.appear.js",
             "~/js/jquery.base64.js",
@@ -552,7 +552,7 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib2",
-          
+
             "~/js/lazyloadimg.js"
 
         );
@@ -602,13 +602,12 @@
             "~/css/isotop_animation.css",
             "~/css/animate.css",
             "~/js/simplestarrating/SimpleStarRating.css",
-              "~/css/style1.css",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
             "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css",
             //"~/js/notifications/notification.css",
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
             "~/js/flexslider/flexslider.css",
-            "~/js/magnify/css/magnify.css",
+            //"~/js/magnify/css/magnify.css",
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
@@ -635,10 +634,9 @@
          //"~/js/notifications/notification.css",
          "~/js/owl-carousel/owl-carousel/owl.carousel.css",
          "~/js/flexslider/flexslider.css",
-         "~/js/magnify/css/magnify.css",
+         //"~/js/magnify/css/magnify.css",
          "~/css/ashobiz/ashobiz.base.css",
          "~/css/ashobiz/ashobiz-176.css",
-           "~/css/style1.css",
          "~/css/ui-personalization.css",
          //"~/css/opj/style-100.css",  
          //"~/css/mbr-faq.css",
