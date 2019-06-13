@@ -724,12 +724,12 @@ public partial class AspNetPages_pwalist : CommonPage
             {
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
-                if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                        {
-                            Response.RedirectPermanent(modcanonical, true);
-                        }
+                //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                //        {
+                //            Response.RedirectPermanent(modcanonical, true);
+                //        }
             }
         }
 
@@ -766,11 +766,11 @@ public partial class AspNetPages_pwalist : CommonPage
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
                     if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                        if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                            if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                            {
-                                Response.RedirectPermanent(modcanonical, true);
-                            }
+                        //if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                        //    if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                        //    {
+                        //        Response.RedirectPermanent(modcanonical, true);
+                        //    }
                 }
             }
         }
@@ -807,12 +807,12 @@ public partial class AspNetPages_pwalist : CommonPage
                 {
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                    if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                        if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                            if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                            {
-                                Response.RedirectPermanent(modcanonical, true);
-                            }
+                    //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    //        {
+                    //            Response.RedirectPermanent(modcanonical, true);
+                    //        }
                 }
             }
         }

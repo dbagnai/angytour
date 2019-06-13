@@ -840,11 +840,11 @@ public partial class _webdetail : CommonPage
             actualpagelink.Campo2 = (data.DenominazionebyLingua("I"));
 
             //redirect al canonical se il canonical non coincide con l'url
-            if (string.IsNullOrEmpty(data.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+            //if (string.IsNullOrEmpty(data.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+            //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+            //    {
+            //        Response.RedirectPermanent(modcanonical, true);
+            //    }
         }
 
         //cultura en ( set canonical eactualpage )
@@ -877,11 +877,11 @@ public partial class _webdetail : CommonPage
                 actualpagelink.Campo1 = (linken);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazionebyLingua("GB"));
                 //redirect al canonical se il canonical non coincide con l'url
-                if (string.IsNullOrEmpty(data.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+                //if (string.IsNullOrEmpty(data.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                //    {
+                //        Response.RedirectPermanent(modcanonical, true);
+                //    }
             }
         }
         //CULTURA ru ( set canonical eactualpage )
@@ -914,11 +914,11 @@ public partial class _webdetail : CommonPage
                 actualpagelink.Campo1 = (linkru);
                 actualpagelink.Campo2 = CleanUrl(data.DenominazionebyLingua("RU"));
                 //redirect al canonical se il canonical non coincide con l'url
-                if (string.IsNullOrEmpty(data.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                {
-                    Response.RedirectPermanent(modcanonical, true);
-                }
+                //if (string.IsNullOrEmpty(data.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                //    {
+                //        Response.RedirectPermanent(modcanonical, true);
+                //    }
             }
         }
         switch (Lingua.ToLower())
