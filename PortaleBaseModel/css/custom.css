@@ -489,7 +489,7 @@ i .fa {
     bottom: -37px;
     position: absolute;
     font-size: 35px !important;
-    margin-left: calc(-50% + 0px);
+    margin-left: calc(-50% + 1px);
     color: #f3c649 !important;
     display: inline;
   }
