@@ -161,6 +161,30 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    /*----------------------- inizializzazione elementi  masonry.js   --------------- */
+    (function wait() {
+        if (typeof $.fn.masonry !== 'undefined'   ) {
+            //if (typeof $.masonry == 'function') {
+            var $grid = $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item',
+                // use element for option
+                columnWidth: '.grid-sizer',
+                percentPosition: true,
+                //gutter: 20
+            });
+            $grid.imagesLoaded().progress(function () {
+                $grid.masonry('layout');
+            });
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
+
+
+
+    /*------------------------------------------------------- */
 
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);

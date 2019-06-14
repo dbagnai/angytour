@@ -1,20 +1,4 @@
-﻿<!-- Isotope  -->
-<script>
-            $(function () {
-                var $grid =  $('.grid').masonry({
-                    // set itemSelector so .grid-sizer is not used in layout
-                    itemSelector: '.grid-item',
-                    // use element for option
-                    columnWidth: '.grid-sizer',
-                    percentPosition: true,
-                    //gutter: 20
-                })
-                $grid.imagesLoaded().progress(function () {
-                    $grid.masonry('layout');
-                });
-            });
-</script>
-<div class="grid firstbig mb-0 mb-md-5" id="replaceid">
+﻿<div class="grid firstbig mb-0 mb-md-5" id="replaceid">
     <div class="grid-sizer"></div>
     <li class="grid-item">
         <div class="card m-2 bd-light-color">
@@ -36,4 +20,3 @@
         </div>
     </li>
 </div>
-<!-- Fine Isotope   -->
