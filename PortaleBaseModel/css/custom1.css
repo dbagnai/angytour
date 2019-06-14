@@ -74,34 +74,13 @@
     transition: background 0.8s, color 0.2s;
 }
 
-.title-block {
-    font-size: 2.6rem;
-    color: #1d1b1e;
-}
-
-    .title-block a {
-        font-size: 3rem;
-        color: #1d1b1e;
-    }
-
-.subtitle-block a {
-    font-size: 1.4rem;
-    color: #1d1b1e;
-}
-
-.subtitle-block {
-    font-size: 1.4rem;
-    color: #1d1b1e;
-}
 
 .title-block .h2-body-title {
-    /*float: left;*/
     text-align: center;
     margin: 0px 5px 5px 0px;
 }
 
 .title-block .title-seperator {
-    /*background: url("../images/divider-stripe4-orange@2x.png");*/
     background: none;
     height: 13px;
     overflow: hidden;
@@ -111,7 +90,6 @@
 }
 
 .top-body.section-content {
-    /*background-color:#e7e7e8;*/
     background-color: transparent;
     border: none;
     font-size: 1.1em;
@@ -245,12 +223,7 @@
     border-bottom-right-radius: 0px;
 }
 
-.bckgrid {
-    /*background: url("../images/bg-container.jpg") repeat-x;*/
-    /*background-color: #fff;*/
-    background-color: transparent;
-    /*#eceded;*/
-}
+
 
 .rowcolor {
     background-color: #1f809f;
@@ -1241,8 +1214,7 @@ Portfoli Single ( da rival )
 .item-img-overlay:hover .portfolio-zoom,
 .item-img-overlay:hover i,
 .thumb-label-item:hover .portfolio-zoom,
-.feature-image:hover .portfolio-zoom,
-.blog-post-featured-img:hover .portfolio-zoom {
+.feature-image:hover .portfolio-zoom {
     opacity: 0.8;
     -webkit-animation-fill-mode: forwards;
     -webkit-animation-name: overlay-animation;
@@ -1606,9 +1578,7 @@ Portfoli Single ( da rival )
 }
 
 /* Banner cicle principale styles*/
-.heigth-header {
-    min-height: 400px;
-}
+
 
 .bnrBack2 {
     background-color: #eee;
@@ -1616,22 +1586,6 @@ Portfoli Single ( da rival )
     z-index: 100;
     width: auto;
     height: auto;
-}
-
-@media (max-width:768px) {
-    .big {
-        color: #141414 !important;
-        font-size: 2.5em;
-    }
-
-    .small {
-        color: #141414 !important;
-        font-size: 1.2em;
-    }
-
-    .heigth-header {
-        min-height: 200px;
-    }
 }
 
 /* ----------- Banner cicle principale styles -------------------- */
@@ -1647,62 +1601,6 @@ ol.flex-control-thumbs li {
 
 .flex-viewport {
     max-height: 800px;
-}
-/*Blog customizatio*/
-
-
-.sidebar-block {
-    padding: 15px;
-    background-color: transparent;
-    border: 2px solid #eee;
-    border-radius: 6px;
-    border: none;
-    margin-bottom: 0px;
-}
-
-.blog-post {
-    padding: 0px;
-    background-color: #fff;
-    border: 2px solid #eee;
-    border-radius: 6px;
-    border: none;
-    margin-bottom: 10px;
-}
-
-    .blog-post .blog-post-details {
-        border-top: none;
-        border-bottom: none;
-    }
-
-    .blog-post .blog-span {
-        margin-left: 0px;
-    }
-
-    .blog-post .blog-post-body {
-        font-size: 1.1rem;
-        border-top: 2px solid #f0f0f0;
-        border-bottom: 2px solid #f0f0f0;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-.blog-search .blog-search-button {
-    background-color: #4a4b4c;
-}
-
-.blog-sezione {
-    font-size: 1.4rem;
-    width: 100%;
-    border-bottom: 1px solid #666;
-    color: #666;
-    margin: 20px 0px 10px 0px;
-}
-
-.blog-price {
-    font-size: 1.5em;
-    font-weight: normal;
-    margin-bottom: 0px;
-    color: #33332e;
 }
 
  
@@ -3148,6 +3046,68 @@ p.lead, .lead p {
 
 /*END TRICK PER AVERE STRUTTURA BOOTSTRAP >xs con col tutte della stessa altezza*/
 
+
+/*Blog customizatio*/
+
+
+.sidebar-block {
+    padding: 15px;
+    background-color: transparent;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 0px;
+}
+
+.blog-post {
+    padding: 0px;
+    background-color: #fff;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+    .blog-post .blog-post-details {
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .blog-post .blog-span {
+        margin-left: 0px;
+    }
+
+    .blog-post .blog-post-body {
+        font-size: 1.1rem;
+        border-top: 2px solid #f0f0f0;
+        border-bottom: 2px solid #f0f0f0;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+.blog-search .blog-search-button {
+    background-color: #4a4b4c;
+}
+
+.blog-sezione {
+    font-size: 1.4rem;
+    width: 100%;
+    border-bottom: 1px solid #666;
+    color: #666;
+    margin: 20px 0px 10px 0px;
+}
+
+.blog-price {
+    font-size: 1.5em;
+    font-weight: normal;
+    margin-bottom: 0px;
+    color: #33332e;
+}
+.blog-post .blog-post-body {
+    border-bottom: 0px solid #f0f0f0;
+}
+
+
 /*-----------------------------------
 --------------- MIRCO ---------------
 -----------------------------------*/
@@ -3254,13 +3214,7 @@ p.lead, .lead p {
     border: none;
 }
 
-/*--------------------------------------
--------- pagina singola camera ---------
-----------------------------------------*/
-.blog-post .blog-post-body {
-    border-bottom: 0px solid #f0f0f0;
-}
-
+ 
 /*--------------------------------------
 -------- pagina ristorante menu --------
 ----------------------------------------*/

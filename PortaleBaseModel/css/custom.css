@@ -844,6 +844,14 @@ h1 span:nth-child(1).mbr-section-title,
     font-size: 1.5rem;
   }
 }
+.subtitle-block a {
+  font-size: 1.4rem;
+  color: #1d1b1e;
+}
+.subtitle-block {
+  font-size: 1.4rem;
+  color: #1d1b1e;
+}
 .mbr-section-subtitle,
 h1 span .mbr-section-subtitle {
   color: #077777 !important;

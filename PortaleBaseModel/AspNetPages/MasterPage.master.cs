@@ -117,7 +117,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         }
 
-        CaricaMenu();
+        //CaricaMenu();
         // VisualizzaTotaliCarrello();
         //  LoadJavascriptVariables();
         pnlRicerca.DataBind();
@@ -242,50 +242,49 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     #region GESTIONE MENU E LINKS
 
-    private void CaricaMenu()
-    {
-        //carichiamo i link per le pagine dinamiche in base al tbl rif attività
-        //CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
-        //CaricaMenuSezioniContenuto("rif000002", rptTipologieLink8High); //Inserisco il link  nel menu
-        //CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
-        //Carica i link menu per le pagine statiche in base all'id in tabella
-        //CaricaMenuLinkContenuti(1);
-        //CaricaMenuLinkContenuti(2);
-        //CaricaMenuLinkContenuti(4);
-        //CaricaMenuLinkContenuti(5);
+    //private void CaricaMenu()
+    //{
+    //    //carichiamo i link per le pagine dinamiche in base al tbl rif attività
+    //    //CaricaMenuContenuti(2, 2, rptTipologieLink2High); //Inserisco il link  nel menu
+    //    //CaricaMenuSezioniContenuto("rif000002", rptTipologieLink8High); //Inserisco il link  nel menu
+    //    //CaricaMenuSottoSezioniContenuto("rif000001", "prod000017", rptTipologieLink6High);
+    //    //Carica i link menu per le pagine statiche in base all'id in tabella
+    //    //CaricaMenuLinkContenuti(1);
+    //    //CaricaMenuLinkContenuti(2);
+    //    //CaricaMenuLinkContenuti(4);
+    //    //CaricaMenuLinkContenuti(5);
+    //}
+    //private void CaricaBannersAndControls()
+    //{
+    //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-    }
-    private void CaricaBannersAndControls()
-    {
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+    //    string sezionebannersnavigazione = "";
+    //    switch (CodiceTipologia)
+    //    {
 
-        string sezionebannersnavigazione = "";
-        switch (CodiceTipologia)
-        {
+    //        default:
+    //            sezionebannersnavigazione = "banner-portfolio-sezioni";
+    //            sb.Clear();
 
-            default:
-                sezionebannersnavigazione = "banner-portfolio-sezioni";
-                sb.Clear();
+    //            sb.Append("<section id=\"header3-2k\" class=\"mbr-section mbr-section__container article\" style=\"background-color: #ffffff; padding-top: 40px; padding-bottom: 20px;\">");
+    //            sb.Append("  <div class=\"container\">");
+    //            sb.Append("      <div class=\"row\">");
+    //            sb.Append("          <div class=\"col-xs-12\">");
+    //            sb.Append("             <h3 class=\"mbr-section-title display-2\">" + references.ResMan("basetext", Lingua, "testoCatalogonav1") + "</h3>");
+    //            sb.Append("             <small class=\"mbr-section-subtitle\">" + references.ResMan("basetext", Lingua, "testoCatalogonav2") + "</small>");
+    //            sb.Append("         </div>");
+    //            sb.Append("     </div>");
+    //            sb.Append(" </div>");
+    //            sb.Append("</section>");
+    //            sb.Append("<div id=\"divnavigazioneJs0\" class=\"inject\" params=\"");
+    //            sb.Append("injectPortfolioAndLoadBanner,'IsotopeBanner4.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','4','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false");
+    //            sb.Append("\"></div>");
+    //            plhNavigazione.Text = sb.ToString();
 
-                sb.Append("<section id=\"header3-2k\" class=\"mbr-section mbr-section__container article\" style=\"background-color: #ffffff; padding-top: 40px; padding-bottom: 20px;\">");
-                sb.Append("  <div class=\"container\">");
-                sb.Append("      <div class=\"row\">");
-                sb.Append("          <div class=\"col-xs-12\">");
-                sb.Append("             <h3 class=\"mbr-section-title display-2\">" + references.ResMan("basetext", Lingua, "testoCatalogonav1") + "</h3>");
-                sb.Append("             <small class=\"mbr-section-subtitle\">" + references.ResMan("basetext", Lingua, "testoCatalogonav2") + "</small>");
-                sb.Append("         </div>");
-                sb.Append("     </div>");
-                sb.Append(" </div>");
-                sb.Append("</section>");
-                sb.Append("<div id=\"divnavigazioneJs0\" class=\"inject\" params=\"");
-                sb.Append("injectPortfolioAndLoadBanner,'IsotopeBanner4.html','divnavigazioneJs0', 'isoBan1', 1, 1, false, '','4','','TBL_BANNERS_GENERALE','" + sezionebannersnavigazione + "',false");
-                sb.Append("\"></div>");
-                plhNavigazione.Text = sb.ToString();
+    //            break;
+    //    }
 
-                break;
-        }
-
-    }
+    //}
 
     protected void CaricaMenuLinkContenuti(long id)
     {

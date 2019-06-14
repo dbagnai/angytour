@@ -410,30 +410,7 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
 
-            <asp:Panel runat="server" ID="pnlCategorie" Visible="false">
-                <div class="bckgrid">
-                    <div class="container text-justify">
-                        <nav id="navmenu-3" class="navbar navbar-default" role="navigation" style="background: none; border: none; margin-bottom: 0px; padding-top: 5px; min-height: 30px; top: 0px;">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" id="mobile-menu-button-3" style="float: none; padding: 5px; margin: 0px auto; background-color: #33332e; color: #fff">
-                                    <div style="margin: 0px auto">
-                                        <i class="fa fa-list-ul" style="font-size: 0.8em;"></i>
-                                        <span style="font-size: 1em;">SEZIONI CATALOGO</span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="collapse navbar-collapse">
-                                <ul id="navigation-3" class="nav navbar-nav d-none" style="width: 100%">
-                                    <asp:Literal runat="server" ID="litLinksottosezioni"></asp:Literal>
-                                </ul>
-                            </div>
-                        </nav>
-                        <!-- Mobile Nav. Container -->
-                        <ul class="mobile-nav" id="mobilenav3" clientidmode="Static" runat="server">
-                        </ul>
-                    </div>
-                </div>
-            </asp:Panel>
+
             <div runat="server" id="divRicerca" visible="false">
                 <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
             </div>
@@ -485,14 +462,10 @@
                     <br />
                 </div>
             </asp:Panel>
-
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
             </asp:ContentPlaceHolder>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
                 <%--<div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">--%>
                     <div>
@@ -507,9 +480,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolderIndextext" runat="server">
             </asp:ContentPlaceHolder>
             <asp:Literal Text="" ID="literalVideoBanner" runat="server" />
-            <div style="position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 20px;">
-                <asp:Literal Text="" ID="plhNavigazione" runat="server" />
-            </div>
 
             <div style="max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
                 <div id="divnavigazioneJs1" style="background-color: transparent"></div>
