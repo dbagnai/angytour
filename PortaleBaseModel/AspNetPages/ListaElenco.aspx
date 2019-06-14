@@ -10,7 +10,7 @@
         makeRevLower = false;
     </script>
     <div class="row">
-        <div class="section-content top-body">
+        <div>
             <div class="container">
                 <div>
                     <div class="col-md-12 col-sm-12">

@@ -292,12 +292,6 @@ a {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.16);*/
 }
 
-.lateralbar {
-    border-left: 4px solid #bbb;
-    margin-left: 20px;
-    padding-left: 15px;
-    margin-top: 10px;
-}
 
 /*---------------------------------
 ----------- FIXED - TOP -----------
@@ -1675,6 +1669,12 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
         }
     }
 }
+
+.button-isotope {
+    font-size: 0.8rem !important
+}
+
+
 
 /*----------------------------------
 PULSANTE SCORRIMENTO BANNER E PAGINA
@@ -3197,8 +3197,13 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 /*----------------------------------
----------- ISOTOPE SLIDER ----------
+---------- OWL SLIDER ----------
 ----------------------------------*/
+.body-banner-slider a p {
+    font-size: 1.1rem;
+}
+
+
 .owl-slider-v2 .box {
     margin: @margin-box-banner-slider;
     /*background-color: @bg-box-banner-slider;*/
@@ -3369,6 +3374,10 @@ select.form-control:not([size]):not([multiple]) {
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
 ----------------------------------*/
+.blog-post .blog-post-details-item-left {
+    padding: 0 0 5px 0px;
+}
+
 .blog-post h1 a {
     color: @scheda-title-color;
 }
@@ -3410,6 +3419,11 @@ select.form-control:not([size]):not([multiple]) {
 /*----------------------------------
 ---------------- FAQ ---------------
 ----------------------------------*/
+
+#collapse_faq p {
+    margin-bottom: 0;
+}
+
 .faq-section {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -3582,8 +3596,7 @@ select.form-control:not([size]):not([multiple]) {
 --------------- FORM ---------------
 ----------------------------------*/
 
-
-
+ 
 .ui-15 .ui-form .form-control {
     background-color: #ffffff;
 }
@@ -3667,6 +3680,49 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 
 
+.checkbox label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+    background-color: #fff;
+}
+
+.checkbox .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 15%;
+}
+
+.checkbox label input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+    opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr {
+    opacity: .5;
+}
+
+
 label[class="checkbox"] input[type="checkbox"] {
     margin: 4px;
     width: 25px;
@@ -3679,6 +3735,79 @@ li input[type="radio"] {
     height: 25px;
 }
 
+/****************************
+Breadcrumb
+****************************/
+.breadcrumb-container {
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 9px;
+    display: inline-block;
+    background-color: transparent;
+}
+
+.breadcrumb-container span {
+    display: inline-block;
+    float: left;
+    font-size: 11px;
+    margin: 0 7px 0 0;
+}
+
+.breadcrumb li {
+    float: left;
+    padding-right: 5px;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 9px;
+    color: #666;
+}
+
+.breadcrumb > .active {
+    color: #888;
+}
+
+.breadcrumb li a {
+    color: #666;
+    text-decoration: none;
+}
+
+.breadcrumb li a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb li:last-child:after {
+    content: "";
+    width: 0px;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #666;
+    content: ">\00a0";
+}
+
+.breadcrumbs > ul > li {
+    padding: 5px 0;
+}
+
+.linksmall a {
+    color: #3594BA;
+    text-decoration: none;
+    font-size: 90%;
+}
+
+.linksmall-blog a {
+    color: #3594BA;
+    text-decoration: none;
+    font-size: 100%;
+}
 
 /*----------------------------------
 --------------- per feedbacks ---------------
@@ -4086,10 +4215,6 @@ button.js-roundedpush:hover {
     background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
     bottom: 0;
     position: absolute;
-}
-
-.breadcrumbs > ul > li {
-    padding: 5px 0;
 }
 
 
