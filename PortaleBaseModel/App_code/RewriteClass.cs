@@ -15,7 +15,7 @@ using WelcomeLibrary.UF;
 /// </summary>
 
 
-public class GenericRouteHandler : IRouteHandler
+public class GenericRouteHandler : IRouteHandler  //, IHttpHandler
 {
     public GenericRouteHandler()
     {

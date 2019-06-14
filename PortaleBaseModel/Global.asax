@@ -665,17 +665,26 @@
 #if true
         // per le route delle home per lingua corrispondenti a /en /it /ru le passo all'handler nella lingua e non nel textmatch
         routes.Add(new Route("{Lingua}",
-    new RouteValueDictionary { { "Lingua", "" } },
-     new RouteValueDictionary { { "Lingua", @"(^en$)|(^it$)|(^ru$)" } },
-     new GenericRouteHandler()));
+new RouteValueDictionary { { "Lingua", "" } },
+ new RouteValueDictionary { { "Lingua", @"(^en$)|(^it$)|(^ru$)" } },
+ new GenericRouteHandler()));
 
 #endif
 #if true
+        //match per agien.aspx non esistenti per permettere il redirect
+        routes.Add(new Route("{nonexistentaspx}",
+    new RouteValueDictionary { { "nonexistentaspx", "" } },
+     new RouteValueDictionary { { "nonexistentaspx", @"^.*.aspx$" } },
+     new GenericRouteHandler()));
+
+#endif
+
+#if true
         //Fall back su generichandler per tutti i link in route che non hanno il . all'interno
         routes.Add(new Route("{textmatch}",
-       new RouteValueDictionary { { "textmatch", "default" } },
-        new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
-        new GenericRouteHandler()));
+   new RouteValueDictionary { { "textmatch", "default" } },
+    new RouteValueDictionary { { "textmatch", @"^([^.]+)$" } },
+    new GenericRouteHandler()));
 #endif
 
 
