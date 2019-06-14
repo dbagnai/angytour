@@ -4640,8 +4640,20 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   .firstbig li:nth-of-type(9n+1) img {
     padding-bottom: calc(228px - 0.5rem) !important;
   }
-  .firstbigli li:nth-of-type(1) .card-img-overlay,
+  .firstbig li:nth-of-type(1) .card-img-overlay,
   .firstbig li:nth-of-type(9n+1) .card-img-overlay {
+    bottom: 36px;
+  }
+  .firstbig item:nth-of-type(1),
+  .firstbig item:nth-of-type(9n+1) {
+    width: 50%;
+  }
+  .firstbig item:nth-of-type(1) img,
+  .firstbig item:nth-of-type(9n+1) img {
+    padding-bottom: calc(228px - 0.5rem) !important;
+  }
+  .firstbig item:nth-of-type(1) .card-img-overlay,
+  .firstbig item:nth-of-type(9n+1) .card-img-overlay {
     bottom: 36px;
   }
 }
