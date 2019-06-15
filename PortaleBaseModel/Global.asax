@@ -494,7 +494,7 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
-               "~/js/imagesloaded.pkgd.js",
+            "~/js/imagesloaded.pkgd.js",
             "~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",
             "~/js/jquery.cycle2.carousel.js",
@@ -505,12 +505,11 @@
             "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
-                                                                      //"~/js/magnify/js/jquery.magnify.js",
-                                                                      //"~/js/magnify/js/jquery.magnify-mobile.js"
-                                                                      //"~/lib/js/immobili2.js",
-                                                                      //"~/js/jquery.validate.js",
-                                                                      //~/js/defiant/defiant.min.js,
-                                                                      //"https://www.google.com/recaptcha/api.js",
+            //"~/js/magnify/js/jquery.magnify.js",
+            //"~/js/magnify/js/jquery.magnify-mobile.js"
+            //"~/lib/js/immobili2.js",
+            //"~/js/jquery.validate.js",
+            //~/js/defiant/defiant.min.js,
             "~/js/animationEnigne.js",
             "~/js/jq.appear.js",
             "~/js/jquery.base64.js",
@@ -523,8 +522,6 @@
             "~/js/it-cookies-policy.js",
             "~/js/YTPlayer328/jquery.mb.YTPlayer.js",
             "~/js/simplestarrating/SimpleStarRating.js",
-            //"~/css/fontawesome541/js/all.js",
-            //"~/css/fontawesome541/js/v4-shims.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
             "~/js/landing/jarallax.min.js",
@@ -552,41 +549,18 @@
         );
 
         BundleEngine.AddBundleJS("bundlejslib2",
-
-            "~/js/lazyloadimg.js"
-
+           "~/js/lazyloadimg.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslibpwa2",
-         //~/js/jquery.validate.js,
-         //~/js/defiant/defiant.min.js,
-         //"https://www.google.com/recaptcha/api.js",
-         "~/js/animationEnigne.js",
-         "~/js/jq.appear.js",
-         "~/js/jquery.base64.js",
-         "~/js/jquery.easing.1.3.js",
-         "~/js/jquery.prettyPhoto.js",
-         "~/js/jquery.tipsy.js",
-         "~/js/jQuery.XDomainRequest.js",
-         "~/js/back-to-top.js",
-         "~/js/flexslider/jquery.flexslider-min.js",
-         "~/js/it-cookies-policy.js",
-         "~/js/YTPlayer/jquery.mb.YTPlayer.js",
-         "~/js/simplestarrating/SimpleStarRating.js",
-         //"~/css/fontawesome541/js/all.js",
-         //"~/css/fontawesome541/js/v4-shims.js",
-         "~/js/jquery.fitvids.js",
-         "~/js/detect-zoom.min.js",
-         //"~/js/maininit.js",
-         //"~/js/landing/script.js",
          "~/js/maininit-pwa.js",
-
          //MIRCO SCROLLER SWIPER PWA js
          //"~/js/swiper/swiper.min.js.map",
          //"~/js/swiper/swiper.esm.bundle.js",
          //"~/js/swiper/swiper.esm.js",
          //"~/js/swiper/swiper.js",
-         "~/js/swiper/swiper.min.js"
+         "~/js/swiper/swiper.min.js",
+            "~/js/lazyloadimg.js"
      );
 
         BundleEngine.AddBundleCSS("bundlecss1",
