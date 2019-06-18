@@ -393,7 +393,9 @@ a:hover {
 /*LOGO*/
 .fulllogobckdark {
   width: 400px;
-  height: 119px;
+  /*height: 119px;*/
+  /*in caso di menù tipo e-commerce*/
+  height: 94px;
 }
 .shrinklogo {
   width: calc((400px * 61) / 119);
