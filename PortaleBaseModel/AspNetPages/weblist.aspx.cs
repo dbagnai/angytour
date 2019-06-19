@@ -621,6 +621,7 @@ public partial class AspNetPages_weblist : CommonPage
     }
     private void ModificaFiltroJS()
     {
+
         //GESTIONE DEI FILTRI MEDIANTE LA SESSIONE
         Dictionary<string, string> objvalue = new Dictionary<string, string>();
         string sobjvalue = "";
@@ -630,19 +631,42 @@ public partial class AspNetPages_weblist : CommonPage
             objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
             if (objvalue == null) objvalue = new Dictionary<string, string>();
         }
+
+        ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
+        string prevtipologia = "";
+        if (objvalue.ContainsKey("tipologia"))
+        {
+            prevtipologia = objvalue["tipologia"];
+        }
+        if (prevtipologia != Tipologia)
+        {
+            Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
+            objvalue = new Dictionary<string, string>();
+        }
+        if (Tipologia != "")
+        {
+            objvalue["tipologia"] = Tipologia;
+        }
+        ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
+
         if (!string.IsNullOrEmpty(mese)) //
         {
             objvalue.Remove("mese");
             objvalue["mese"] = mese;
         }
+        else
+            objvalue.Remove("mese");
         if (!string.IsNullOrEmpty(anno)) //
         {
             objvalue.Remove("anno");
             objvalue["anno"] = anno;
         }
+        else
+            objvalue.Remove("anno");
 
 
 #if true //Gestione modificatori firtro categoria
+
 
         if (Promozioni != "")
         {

@@ -149,7 +149,7 @@ public partial class _pwadetail : CommonPage
 
 
                 item = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idOfferta);
-                RegistraStatistichePagina();
+               // RegistraStatistichePagina();
 
                 DataBind();
             }

@@ -108,6 +108,8 @@ function Visualizzalistadati() {
     var objfiltro = {};
     //  JsSvuotaSession(this);
     emptysession('', function (retval) {
+        objfiltro["tipologia"] = tipologia; //memorizzo in ogni caso la tipologia di ricerca 
+
         // console.log(retval);
         $(".searchdropdown").each(function () {
             var idsel = $(this).attr("id");
@@ -133,6 +135,7 @@ function Visualizzalistadati() {
             if (objfiltro != null)
                 objfiltro[idsel] = $(this)[0].value;
         });
+
 
 
         ///////////RICERCA Con link customizzato /DA TESTARE)

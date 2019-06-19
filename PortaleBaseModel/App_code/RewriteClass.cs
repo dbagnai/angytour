@@ -15,7 +15,7 @@ using WelcomeLibrary.UF;
 /// </summary>
 
 
-public class GenericRouteHandler : IRouteHandler  //, IHttpHandler
+public class GenericRouteHandler : IRouteHandler
 {
     public GenericRouteHandler()
     {
@@ -55,15 +55,9 @@ public class GenericRouteHandler : IRouteHandler  //, IHttpHandler
         //Query in tbl redirect
         //Se ho un match in tabella routing -> devo prendere il nuovo url da tabella e fare
         //Pathdestinazione = NUOVO URL DA TABELLA REDIRECT ; e da li fare redirect in base all'url
+#if false
         string originalrequesturl = requestContext.HttpContext.Request.Path;
         string urltoredir = "";
-        urltoredir = Testredirect(originalrequesturl);
-        if (!string.IsNullOrEmpty(urltoredir))
-        {
-            return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(urltoredir));
-        }
-#if false
-
         if (originalrequesturl.ToLower().Contains("Casadellabatteria/".ToLower()) || originalrequesturl.ToLower().Contains("catalogo-prodotti/".ToLower()))
             urltoredir = Testredirect(originalrequesturl);
         if (!string.IsNullOrEmpty(urltoredir))
@@ -100,7 +94,7 @@ public class GenericRouteHandler : IRouteHandler  //, IHttpHandler
             default:
                 HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");
                 Pathdestinazione = "~/404.aspx";
-               // return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
+                // return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
                 break;
         }
@@ -114,31 +108,18 @@ public class GenericRouteHandler : IRouteHandler  //, IHttpHandler
         if (itemurl != null)
         {
             Pathdestinazione = itemurl.Campo1;
-            //querystringorigin
-            if (Pathdestinazione.Contains("?"))
+            Dictionary<string, string> keyvalues = WelcomeLibrary.UF.SitemapManager.SplitParameters(itemurl.Campo2);
+            switch (destinationselector)
             {
-                string querystringorigin = Pathdestinazione.Substring(Pathdestinazione.IndexOf("?"));
-                Pathdestinazione = Pathdestinazione.Replace(querystringorigin, "");
-                System.Collections.Specialized.NameValueCollection qsitems = HttpUtility.ParseQueryString(querystringorigin.Substring(1));
-                if (qsitems != null)
-                    foreach (string key in qsitems)
+
+                default:
+                    foreach (KeyValuePair<string, string> kv in keyvalues)
                     {
-                        HttpContext.Current.Items[key] = qsitems[key];
+                        //if (kv.Key.ToLower() != "lingua")
+                        HttpContext.Current.Items[kv.Key] = kv.Value;
                     }
-            }
-            else
-            {
-                Dictionary<string, string> keyvalues = WelcomeLibrary.UF.SitemapManager.SplitParameters(itemurl.Campo2);
-                switch (destinationselector)
-                {
-                    default:
-                        foreach (KeyValuePair<string, string> kv in keyvalues)
-                        {
-                            //if (kv.Key.ToLower() != "lingua")
-                            HttpContext.Current.Items[kv.Key] = kv.Value;
-                        }
-                        break;
-                }
+
+                    break;
             }
         }
         else
