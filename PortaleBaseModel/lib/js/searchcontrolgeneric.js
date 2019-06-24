@@ -293,7 +293,14 @@ function FillSearchControls(objfiltro) {
         selp = objfiltro['provincia'];
     if (objfiltro != null && objfiltro.hasOwnProperty('comune'))
         selc = objfiltro['comune'];
-    GestioneDdlGeo('all', lng, seln, selr, selp, selc, 'nazione', 'regione', 'provincia', 'comune');
+    (function wait() {
+        if (typeof baseresources !== 'undefined' && baseresources != null) {
+            GestioneDdlGeo('all', lng, seln, selr, selp, selc, 'nazione', 'regione', 'provincia', 'comune');
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
     /*----------------------------------------------------------------------*/
     /*----------------------------------------------------------------------*/
     //FILL CATEGORIE E SOTTOCATEGORIE
@@ -303,7 +310,14 @@ function FillSearchControls(objfiltro) {
         cat1 = objfiltro['categoria'];
     if (objfiltro != null && objfiltro.hasOwnProperty('categoria2Liv'))
         cat2 = objfiltro['categoria2Liv'];
-    combinedselect('', 'all', lng, cat1, cat2, '', '', '', 'categoria', 'categoria2Liv', '', '', '');
+    (function wait() {
+        if (typeof baseresources !== 'undefined' && baseresources != null) {
+            combinedselect('', 'all', lng, cat1, cat2, '', '', '', 'categoria', 'categoria2Liv', '', '', '');
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
 
     /*----------------------------------------------------------------------*/
 
