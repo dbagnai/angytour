@@ -78,7 +78,15 @@ function commentclosure(varname) {
                 mainscope.objfiltro['maxrecord'] = maxrecord;
             }
         }
-        loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
+        //loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
+        (function wait() {
+            if (typeof baseresources !== 'undefined' && baseresources != null) {
+                loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
+            } else {
+                setTimeout(wait, 300);
+            }
+        })();
+
     };
     this.rendercomments = function (idpost, idcontainer) {
 

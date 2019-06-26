@@ -1,7 +1,13 @@
 ﻿"use strict";
 
 function injectArchivioAndLoad(type, container, controlid, listShow, tipologia, categoria, categoria2Liv) {
-    loadref(injectArchivioAndLoadinner, type, container, controlid, listShow, tipologia, categoria, categoria2Liv, lng);
+    (function wait() {
+        if (typeof baseresources !== 'undefined' && baseresources != null) {
+            loadref(injectArchivioAndLoadinner, type, container, controlid, listShow, tipologia, categoria, categoria2Liv, lng);
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
 }
 function injectArchivioAndLoadinner(type, container, controlid, listShow, tipologia, categoria, categoria2Liv) {
     //qui devo visualizzare il titolo

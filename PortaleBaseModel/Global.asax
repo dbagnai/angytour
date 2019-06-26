@@ -479,6 +479,7 @@
             "~/lib/js/commonvars.js",
             "~/js/jquery321/jquery-3.2.1.min.js",
             "~/js/jquery321/jquery-migrate-3.0.1.min.js",
+            "~/lib/js/commonfunct.js",
              "~/js/bootstrap400/popper.min.js",
             "~/js/bootstrap400/js/bootstrap.min.js",
             "~/js/menuzord/files/js/menuzord.js",

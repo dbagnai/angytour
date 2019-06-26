@@ -8,7 +8,13 @@ function InitSearchControls(idcontainer) {
     $("#" + idcontainer).load(pathAbs + "/lib/Template/" + "searchbar2.html", function () {
         //Qui puoi fare inizializzazione controlli su allegati
         //FillSearchControls(objfiltro);
-        VisualizzaSearchControls();
+        (function wait() {
+            if (typeof baseresources !== 'undefined' && baseresources != null) {
+                VisualizzaSearchControls();
+            } else {
+                setTimeout(wait, 300);
+            }
+        })();
         initAutocompleteRicercaCaratteristiche();
     });
 }
