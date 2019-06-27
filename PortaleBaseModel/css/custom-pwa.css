@@ -2910,6 +2910,9 @@ select.form-control:not([size]):not([multiple]) {
 /*----------------------------------
 ---------- OWL SLIDER ----------
 ----------------------------------*/
+.owl-carousel-v1.owl-work-v1.margin-bottom-40 {
+  margin-top: 20px;
+}
 .body-banner-slider a p {
   font-size: 1.1rem;
 }
@@ -2922,7 +2925,7 @@ select.form-control:not([size]):not([multiple]) {
   height: auto;
   padding: 0;
   width: 100%;
-  margin: 5%;
+  margin: 0 5% 5%;
   text-align: center;
   margin-left: 0;
   border-radius: 0;
@@ -3150,13 +3153,13 @@ select.form-control:not([size]):not([multiple]) {
 .faq-section .card .card-header a.panel-title h4 {
   font-family: 'Roboto', sans-serif;
   color: #032f2f;
-  padding: 1.3rem 2rem;
+  padding: 1.3rem 2rem !important;
   margin-bottom: 0;
   font-weight: bold;
   font-size: 1rem;
   line-height: 22px;
   text-indent: -9px;
-  padding-left: calc(2rem + 9px);
+  padding-left: calc(2rem + 9px) !important;
 }
 /*----------------------------------
 --------- EFFETTO PULSANTE ---------
