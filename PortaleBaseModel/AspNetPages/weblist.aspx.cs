@@ -260,7 +260,6 @@ public partial class AspNetPages_weblist : CommonPage
     {
         string cattipo = Tipologia;
         ClientScriptManager cs = Page.ClientScript;
-        //ModificaFiltroJS();
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         InizializzaSeo();
         ModificaFiltroJS();
@@ -647,6 +646,37 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["tipologia"] = Tipologia;
         }
+
+        //string prevcat = ""; 
+        //if (objvalue.ContainsKey("categoria"))
+        //{
+        //    prevcat = objvalue["categoria"];
+        //}
+        //if (prevcat != Categoria)
+        //{
+        //    Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
+        //    objvalue = new Dictionary<string, string>();
+        //}
+        //if (Categoria != "")
+        //{
+        //    objvalue["categoria"] = Categoria;
+        //}
+
+        //string prevcat2liv = "";
+        //if (objvalue.ContainsKey("categoria2Liv"))
+        //{
+        //    prevcat2liv = objvalue["categoria2Liv"];
+        //}
+        //if (prevcat2liv != Categoria2liv)
+        //{
+        //    Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
+        //    objvalue = new Dictionary<string, string>();
+        //}
+        //if (Categoria2liv != "")
+        //{
+        //    objvalue["categoria2Liv"] = Categoria2liv;
+        //}
+
         ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
 
         if (!string.IsNullOrEmpty(mese)) //
@@ -656,6 +686,7 @@ public partial class AspNetPages_weblist : CommonPage
         }
         else
             objvalue.Remove("mese");
+
         if (!string.IsNullOrEmpty(anno)) //
         {
             objvalue.Remove("anno");
@@ -685,6 +716,7 @@ public partial class AspNetPages_weblist : CommonPage
                 objvalue["categoria"] = objvalue["ddlCategoria"];
             }
         }
+
         if (Categoria2liv != "")
         {
             objvalue["categoria2Liv"] = Categoria2liv;

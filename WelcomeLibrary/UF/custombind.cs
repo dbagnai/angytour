@@ -911,7 +911,7 @@ namespace WelcomeLibrary.UF
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
 #if false
-                        if (Session != null && Session["objfiltro"] != null)
+                              if (Session != null && Session["objfiltro"] != null)
                         {
                             string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
                             if (retval != null && retval != "")
@@ -919,14 +919,25 @@ namespace WelcomeLibrary.UF
                                 Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
                                 dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
                                 if (dictparsfromsession != null)
-                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                    {
-                                        //if (kv.Key == ("page" + dictpars["controlid"]))
-                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                        //aggiungo i parametri dalla sessione se presenti
-                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                    }
+                                {
+                                    bool skipsessionfilters = false;
+                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                        skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                    //    skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                    //    skipsessionfilters = true;
+
+                                    if (!skipsessionfilters)
+                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                        {
+                                            //if (kv.Key == ("page" + dictpars["controlid"]))
+                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                            //aggiungo i parametri dalla sessione se presenti
+                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        }
+                                }
                             }
                         }
 #endif
@@ -1092,7 +1103,7 @@ namespace WelcomeLibrary.UF
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
                         //////////////////////////////////////////////////
 #if false
-                        if (Session != null && Session["objfiltro"] != null)
+                            if (Session != null && Session["objfiltro"] != null)
                         {
                             string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
                             if (retval != null && retval != "")
@@ -1100,14 +1111,25 @@ namespace WelcomeLibrary.UF
                                 Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
                                 dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
                                 if (dictparsfromsession != null)
-                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                    {
-                                        //if (kv.Key == ("page" + dictpars["controlid"]))
-                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                        //aggiungo i parametri dalla sessione se presenti
-                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        //else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                    }
+                                {
+                                    bool skipsessionfilters = false;
+                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                        skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                    //    skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                    //    skipsessionfilters = true;
+
+                                    if (!skipsessionfilters)
+                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                        {
+                                            //if (kv.Key == ("page" + dictpars["controlid"]))
+                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                            //aggiungo i parametri dalla sessione se presenti
+                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        }
+                                }
                             }
                         }
 #endif
@@ -1316,14 +1338,25 @@ namespace WelcomeLibrary.UF
                                 Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
                                 dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
                                 if (dictparsfromsession != null)
-                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                    {
-                                        //if (kv.Key == ("page" + dictpars["controlid"]))
-                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                        //aggiungo i parametri dalla sessione se presenti
-                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                    }
+                                {
+                                    bool skipsessionfilters = false;
+                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                        skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                    //    skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                    //    skipsessionfilters = true;
+
+                                    if (!skipsessionfilters)
+                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                        {
+                                            //if (kv.Key == ("page" + dictpars["controlid"]))
+                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                            //aggiungo i parametri dalla sessione se presenti
+                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        }
+                                }
                             }
                         }
 #endif
@@ -1819,14 +1852,25 @@ namespace WelcomeLibrary.UF
                                 Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
                                 dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
                                 if (dictparsfromsession != null)
-                                    foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                    {
-                                        //if (kv.Key == ("page" + dictpars["controlid"]))
-                                        //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                        //aggiungo i parametri dalla sessione se presenti
-                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                    }
+                                {
+                                    bool skipsessionfilters = false;
+                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                        skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                    //    skipsessionfilters = true;
+                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                    //    skipsessionfilters = true;
+
+                                    if (!skipsessionfilters)
+                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                        {
+                                            //if (kv.Key == ("page" + dictpars["controlid"]))
+                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                            //aggiungo i parametri dalla sessione se presenti
+                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
+                                        }
+                                }
                             }
                         }
 #endif
@@ -4189,8 +4233,6 @@ namespace WelcomeLibrary.UF
                         }
                         elems.Add(prop[3], titolo);
                         elems.Add("url", "https://www.google.com/maps/search/?api=1&query=" + elems[prop[1]] + "," + elems[prop[2]]); //https://www.google.com/maps/search/?api=1&query=<lat>,<lng>
-
-
 
                         arrayret.Add(elems);
                         ret = "var gpositems = null;\r\n " + WelcomeLibrary.UF.Utility.waitwrappercall("b64ToUtf8", ";\r\n" + string.Format(" gpositems = JSON.parse(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(Newtonsoft.Json.JsonConvert.SerializeObject(arrayret))) + ";\r\n");
