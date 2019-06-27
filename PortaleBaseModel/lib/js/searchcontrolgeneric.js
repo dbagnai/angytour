@@ -9,7 +9,7 @@ function InitSearchControls(idcontainer) {
         //Qui puoi fare inizializzazione controlli su allegati
         //FillSearchControls(objfiltro);
         (function wait() {
-            if (typeof baseresources !== 'undefined' && baseresources != null) {
+            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
                 VisualizzaSearchControls();
             } else {
                 setTimeout(wait, 300);
@@ -288,7 +288,7 @@ function FillSearchControls(objfiltro) {
     /*----------------------------------------------------------------------*/
     //FILL DELLE RICERCHE GEOGRAFICHE 
     var seln = "IT";
-    var selr = "p94"; //preselezione regione
+    var selr = "p94"; //preselezione regione  ....
     var selp = "";
     var selc = "";
     if (objfiltro != null && objfiltro.hasOwnProperty('nazione'))
@@ -300,7 +300,7 @@ function FillSearchControls(objfiltro) {
     if (objfiltro != null && objfiltro.hasOwnProperty('comune'))
         selc = objfiltro['comune'];
     (function wait() {
-        if (typeof baseresources !== 'undefined' && baseresources != null) {
+        if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
             GestioneDdlGeo('all', lng, seln, selr, selp, selc, 'nazione', 'regione', 'provincia', 'comune');
 
         } else {
@@ -317,7 +317,7 @@ function FillSearchControls(objfiltro) {
     if (objfiltro != null && objfiltro.hasOwnProperty('categoria2Liv'))
         cat2 = objfiltro['categoria2Liv'];
     (function wait() {
-        if (typeof baseresources !== 'undefined' && baseresources != null) {
+        if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
             combinedselect('', 'all', lng, cat1, cat2, '', '', '', 'categoria', 'categoria2Liv', '', '', '');
 
         } else {

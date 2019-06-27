@@ -80,7 +80,7 @@ function commentclosure(varname) {
         }
         //loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
         (function wait() {
-            if (typeof baseresources !== 'undefined' && baseresources != null) {
+            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
                 loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
             } else {
                 setTimeout(wait, 300);

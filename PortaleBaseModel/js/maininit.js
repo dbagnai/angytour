@@ -185,7 +185,7 @@ jQuery(document).ready(function ($) {
 
 
     /*------------------------------------------------------- */
-
+        //InitIsotope();
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
@@ -289,7 +289,7 @@ jQuery(document).ready(function ($) {
      * A jQuery plugin for fluid width video embeds
     /* ---------------------------------------------- */
     $('body').fitVids();
-    InitIsotope();
+
 
     if ($("html").hasClass("lt-ie9")) {
         //bread crumb last child fix for IE8

@@ -2,7 +2,7 @@
 
 function injectArchivioAndLoad(type, container, controlid, listShow, tipologia, categoria, categoria2Liv) {
     (function wait() {
-        if (typeof baseresources !== 'undefined' && baseresources != null) {
+        if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
             loadref(injectArchivioAndLoadinner, type, container, controlid, listShow, tipologia, categoria, categoria2Liv, lng);
         } else {
             setTimeout(wait, 300);
