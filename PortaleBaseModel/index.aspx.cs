@@ -24,6 +24,7 @@ public partial class index : CommonPage
         {
             if (!IsPostBack)
             {
+                Session.Remove("objfiltro"); //Elimino Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", true, deflanguage);
                 InizializzaSeo("home");
 

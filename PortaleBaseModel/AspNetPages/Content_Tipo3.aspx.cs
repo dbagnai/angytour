@@ -66,6 +66,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         {
             if (!IsPostBack)
             {
+                Session.Remove("objfiltro"); //Elimino Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
                 PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
 

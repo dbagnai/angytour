@@ -646,39 +646,7 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["tipologia"] = Tipologia;
         }
-
-        //string prevcat = ""; 
-        //if (objvalue.ContainsKey("categoria"))
-        //{
-        //    prevcat = objvalue["categoria"];
-        //}
-        //if (prevcat != Categoria)
-        //{
-        //    Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
-        //    objvalue = new Dictionary<string, string>();
-        //}
-        //if (Categoria != "")
-        //{
-        //    objvalue["categoria"] = Categoria;
-        //}
-
-        //string prevcat2liv = "";
-        //if (objvalue.ContainsKey("categoria2Liv"))
-        //{
-        //    prevcat2liv = objvalue["categoria2Liv"];
-        //}
-        //if (prevcat2liv != Categoria2liv)
-        //{
-        //    Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
-        //    objvalue = new Dictionary<string, string>();
-        //}
-        //if (Categoria2liv != "")
-        //{
-        //    objvalue["categoria2Liv"] = Categoria2liv;
-        //}
-
-        ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
-
+         
         if (!string.IsNullOrEmpty(mese)) //
         {
             objvalue.Remove("mese");
@@ -696,146 +664,147 @@ public partial class AspNetPages_weblist : CommonPage
             objvalue.Remove("anno");
 
 
-#if true //Gestione modificatori firtro categoria
+#if true //Gestione modificatori filtro categoria li setto solo per la categoria che è interessata ( c'è un problema di non suotamento dei parametri categoria,sottocategorie e gli atri  con tools iniettatti in pagine non lista se la tipologia non cambia nella navigazione !! !!!)
 
+        if (Tipologia == "rif00000x")
+        {
 
-        if (Promozioni != "")
-        {
-            objvalue["promozioni"] = Promozioni;
-        }
-
-        if (Categoria != "")
-        {
-            objvalue["categoria"] = Categoria;
-            objvalue["ddlCategoria"] = Categoria;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("ddlCategoria"))
+            if (Promozioni != "")
             {
-                objvalue["categoria"] = objvalue["ddlCategoria"];
-            }
-        }
-
-        if (Categoria2liv != "")
-        {
-            objvalue["categoria2Liv"] = Categoria2liv;
-            objvalue["ddlCategoria2liv"] = Categoria2liv;
-        }
-        else
-        {
-
-            if (objvalue.ContainsKey("ddlCategoria2liv"))
-            {
-                objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
-            }
-        }
-
-
-        if (Regione != "")
-        {
-            objvalue["regione"] = Regione;
-            objvalue["ddlRegione"] = Regione;
-            objvalue["ddlRegioneSearch"] = Regione;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("ddlRegione"))
-            {
-                objvalue["regione"] = objvalue["ddlRegione"];
-                Regione = objvalue["ddlRegione"];
-            }
-            if (objvalue.ContainsKey("ddlRegioneSearch"))
-            {
-                objvalue["regione"] = objvalue["ddlRegioneSearch"];
-                Regione = objvalue["ddlRegioneSearch"];
-            }
-        }
-        if (Provincia != "")
-        {
-            objvalue["provincia"] = Provincia;
-            objvalue["ddlProvincia"] = Provincia;
-            objvalue["ddlProvinciaSearch"] = Provincia;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("ddlProvincia"))
-            {
-                objvalue["provincia"] = objvalue["ddlProvincia"];
-                Provincia = objvalue["ddlProvincia"];
-            }
-            if (objvalue.ContainsKey("ddlProvinciaSearch"))
-            {
-                objvalue["provincia"] = objvalue["ddlProvinciaSearch"];
-                Provincia = objvalue["ddlProvinciaSearch"];
-            }
-        }
-
-
-        if (Comune != "")
-        {
-            objvalue["comune"] = Comune;
-            objvalue["ddlComune"] = Comune;
-            objvalue["ddlComuneSearch"] = Comune;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("ddlComune"))
-            {
-                objvalue["comune"] = objvalue["ddlComune"];
-                Comune = objvalue["ddlComune"];
-            }
-            if (objvalue.ContainsKey("ddlComuneSearch"))
-            {
-                objvalue["comune"] = objvalue["ddlComuneSearch"];
-                Comune = objvalue["ddlComuneSearch"];
-            }
-        }
-
-
-        if (Caratteristica1 != "")
-        {
-            objvalue["caratteristica1"] = Caratteristica1;
-            objvalue["hidCaratteristica1"] = Caratteristica1;
-            objvalue["ddlCaratteristica1"] = Caratteristica1;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("hidCaratteristica1"))
-            {
-                objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
-                Caratteristica1 = objvalue["hidCaratteristica1"];
-            }
-            if (objvalue.ContainsKey("ddlCaratteristica1"))
-            {
-                objvalue["caratteristica1"] = objvalue["ddlCaratteristica1"];
-                Caratteristica1 = objvalue["ddlCaratteristica1"];
+                objvalue["promozioni"] = Promozioni;
             }
 
-        }
-
-
-        if (Caratteristica2 != "")
-        {
-            objvalue["caratteristica2"] = Caratteristica2;
-            objvalue["hidCaratteristica2"] = Caratteristica2;
-        }
-        else
-        {
-            if (objvalue.ContainsKey("hidCaratteristica2"))
+            if (Categoria != "")
             {
-                objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
-                Caratteristica2 = objvalue["hidCaratteristica2"];
+                objvalue["categoria"] = Categoria;
+                objvalue["ddlCategoria"] = Categoria;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("ddlCategoria"))
+                {
+                    objvalue["categoria"] = objvalue["ddlCategoria"];
+                }
+            }
+
+            if (Categoria2liv != "")
+            {
+                objvalue["categoria2Liv"] = Categoria2liv;
+                objvalue["ddlCategoria2liv"] = Categoria2liv;
+            }
+            else
+            {
+
+                if (objvalue.ContainsKey("ddlCategoria2liv"))
+                {
+                    objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
+                }
+            }
+
+            if (Regione != "")
+            {
+                objvalue["regione"] = Regione;
+                objvalue["ddlRegione"] = Regione;
+                objvalue["ddlRegioneSearch"] = Regione;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("ddlRegione"))
+                {
+                    objvalue["regione"] = objvalue["ddlRegione"];
+                    Regione = objvalue["ddlRegione"];
+                }
+                if (objvalue.ContainsKey("ddlRegioneSearch"))
+                {
+                    objvalue["regione"] = objvalue["ddlRegioneSearch"];
+                    Regione = objvalue["ddlRegioneSearch"];
+                }
+            }
+            if (Provincia != "")
+            {
+                objvalue["provincia"] = Provincia;
+                objvalue["ddlProvincia"] = Provincia;
+                objvalue["ddlProvinciaSearch"] = Provincia;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("ddlProvincia"))
+                {
+                    objvalue["provincia"] = objvalue["ddlProvincia"];
+                    Provincia = objvalue["ddlProvincia"];
+                }
+                if (objvalue.ContainsKey("ddlProvinciaSearch"))
+                {
+                    objvalue["provincia"] = objvalue["ddlProvinciaSearch"];
+                    Provincia = objvalue["ddlProvinciaSearch"];
+                }
+            }
+
+
+            if (Comune != "")
+            {
+                objvalue["comune"] = Comune;
+                objvalue["ddlComune"] = Comune;
+                objvalue["ddlComuneSearch"] = Comune;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("ddlComune"))
+                {
+                    objvalue["comune"] = objvalue["ddlComune"];
+                    Comune = objvalue["ddlComune"];
+                }
+                if (objvalue.ContainsKey("ddlComuneSearch"))
+                {
+                    objvalue["comune"] = objvalue["ddlComuneSearch"];
+                    Comune = objvalue["ddlComuneSearch"];
+                }
+            }
+
+
+            if (Caratteristica1 != "")
+            {
+                objvalue["caratteristica1"] = Caratteristica1;
+                objvalue["hidCaratteristica1"] = Caratteristica1;
+                objvalue["ddlCaratteristica1"] = Caratteristica1;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("hidCaratteristica1"))
+                {
+                    objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
+                    Caratteristica1 = objvalue["hidCaratteristica1"];
+                }
+                if (objvalue.ContainsKey("ddlCaratteristica1"))
+                {
+                    objvalue["caratteristica1"] = objvalue["ddlCaratteristica1"];
+                    Caratteristica1 = objvalue["ddlCaratteristica1"];
+                }
+
+            }
+
+
+            if (Caratteristica2 != "")
+            {
+                objvalue["caratteristica2"] = Caratteristica2;
+                objvalue["hidCaratteristica2"] = Caratteristica2;
+            }
+            else
+            {
+                if (objvalue.ContainsKey("hidCaratteristica2"))
+                {
+                    objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
+                    Caratteristica2 = objvalue["hidCaratteristica2"];
+                }
+            }
+
+            //Id selection
+            //hidricercaid ( sleezione con id )
+            if (objvalue.ContainsKey("hidricercaid"))
+            {
+                objvalue["id"] = objvalue["hidricercaid"];
             }
         }
-
-        //Id selection
-        //hidricercaid ( sleezione con id )
-        if (objvalue.ContainsKey("hidricercaid"))
-        {
-            objvalue["id"] = objvalue["hidricercaid"];
-        }
-
         //if (Caratteristica6 != "") //ditta
         //{
         //    objvalue.Remove("hidCaratteristica6");
