@@ -433,7 +433,7 @@
                                         <asp:Label ID="litDescrizioneI" runat="server" Text="Descrizione Ita" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="  form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
+                                    <asp:TextBox CssClass=" mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneI"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -510,7 +510,7 @@
                                         <asp:Label ID="Literal3" runat="server" Text="Descrizione Eng" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="  form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
+                                    <asp:TextBox CssClass=" mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneGB"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -587,7 +587,7 @@
                                         <asp:Label ID="Label36" runat="server" Text="Descrizione Ru" /></strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="  form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
+                                    <asp:TextBox CssClass=" mceNoEditor form-control" Height="150px" TextMode="MultiLine" ID="txtDescrizioneRU"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
