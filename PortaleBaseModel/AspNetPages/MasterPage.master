@@ -190,6 +190,10 @@
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
                                 <i class="fa fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right px-3">
+                                  <%= CreaLinkTipologie(2,2) %>
+                                <li>
+                                    <hr />
+                                </li>
                                 <%= CreaLinkCategorie("rif000002") %>
                             </ul>
                         </li>
@@ -761,8 +765,9 @@
                             </div>
                             <%--BLOG--%>
                             <div class="col col-sm-4 col-md-3 footer-col pt-3 pt-sm-0">
-                                <div class="footer-title">
-                                    <%= references.ResMan("Common",Lingua,"testofooter2") %>
+                               <div class="footer-title">
+             <%--                       <%= references.ResMan("Common",Lingua,"testofooter2") %>--%>
+                                    <%= CreaLinkTipologie(2,2,"",true) %>
                                 </div>
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
