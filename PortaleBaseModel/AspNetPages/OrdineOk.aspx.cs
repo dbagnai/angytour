@@ -471,11 +471,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail += "<br/>I dati dell' utente sono indirizzo fatturazione : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
 
-        if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        {
+        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
+        //{
             TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
             TestoMail += totali.Indirizzospedizione;
-        }
+        //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
@@ -568,11 +568,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail += "<br/>Fatturazione : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
 
-        if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        {
+        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
+        //{
             TestoMail += "<br/>Spedizione : <br/> ";
             TestoMail += totali.Indirizzospedizione;
-        }
+        //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
