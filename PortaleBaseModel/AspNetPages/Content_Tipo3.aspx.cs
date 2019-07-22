@@ -262,7 +262,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
         if (content != null && content.Id != 0)
         {
-            htmlPage =  ReplaceAbsoluteLinks(ReplaceAbsoluteLinks(content.DescrizionebyLingua(Lingua)));
+            htmlPage =  ReplaceLinks(ReplaceAbsoluteLinks(content.DescrizionebyLingua(Lingua)));
 
         }
         custombind cb = new custombind();
