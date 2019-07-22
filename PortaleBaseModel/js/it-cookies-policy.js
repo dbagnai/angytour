@@ -17,8 +17,8 @@ var CookiesPolicy = {
 
         CookiesPolicy.id_attivita = id_attivita;
         CookiesPolicy.lang = lang;
-        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'I/web/politica-cookie-5';
-        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'GB/web/politica-cookie-5';
+        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'it/s/politica-cookie-5';
+        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'en/s/politica-cookie-5';
         CookiesPolicy.html_element = CookiesPolicy.CreateHtml();
         CookiesPolicy.css_element = CookiesPolicy.CreateCSS();
         CookiesPolicy.view_element = CookiesPolicy.IsRequiredView();
@@ -113,8 +113,8 @@ var CookiesPolicy = {
             hs.slideshows = ''; // fix perche va in conflitto
             return hs.htmlExpand(document.body, { objectType: 'iframe', src: CookiesPolicy.link_privacy });
         } else {
-            if (CookiesPolicy.lang == 'it') { window.open(CookiesPolicy.link_privacy, '', 'width=800,height=500,scrollbars=yes'); return false; }
-            else { window.open(CookiesPolicy.link_privacy_en, '', 'width=800,height=500,scrollbars=yes'); return false; }
+            if (CookiesPolicy.lang == 'it') { window.open(CookiesPolicy.link_privacy, '', ''); return false; }
+            else { window.open(CookiesPolicy.link_privacy_en, '', ''); return false; }
         }
 
     },
