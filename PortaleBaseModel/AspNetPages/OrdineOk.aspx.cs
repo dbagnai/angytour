@@ -461,7 +461,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
             }
         }
     }
-
     protected string CreaMailPerFornitore(TotaliCarrello totali, CarrelloCollection prodotti)
     {
         string TestoMail = "";
@@ -473,8 +472,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
         //{
-            TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
-            TestoMail += totali.Indirizzospedizione;
+        TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
+        TestoMail += totali.Indirizzospedizione;
         //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
@@ -493,10 +492,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-
-            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
-
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+            }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
             TestoMail += " ID PRODOTTO : " + item.Offerta.Id.ToString();
@@ -559,7 +559,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         //txtNome.Text- txtEmail.Text  - txtTelefono.Text -  txtIndirizzo.Text - lblPrezzoSpedizione.Text - lblTotaleSpese.Text
 
         //MAIL PER IL CLIENTE DI CONFERMA ORDINE
-        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"600\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
+        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
         TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
         //Testo mail
         TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
@@ -570,8 +570,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
         //{
-            TestoMail += "<br/>Spedizione : <br/> ";
-            TestoMail += totali.Indirizzospedizione;
+        TestoMail += "<br/>Spedizione : <br/> ";
+        TestoMail += totali.Indirizzospedizione;
         //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
@@ -598,10 +598,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-
-            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
-
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+            }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";
             TestoMail += "  Id Prodotto : " + item.Offerta.Id.ToString();

@@ -99,6 +99,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
             DateTime? dataend = null;
             DateTime tmp = DateTime.MinValue;
             //string codcaratt = scodiceCaratt;
+            offerteDM offDM = new offerteDM();
 
             switch (sazione)
             {
@@ -128,8 +129,36 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         }
                     }
 
+
                     returnedidcarrello = CommonPage.AggiornaProdottoCarrello(context.Request, context.Session, idprodotto, quantita, sUsername, sidcombined, idcarrello, 0, prezzo, datastart, dataend, jsonfield1, bforceidcarrello);
-                    context.Response.Write((returnedidcarrello));
+                    //Old simple idcarrello o vuoto o l'id in tabella carrello
+                    //context.Response.Write((returnedidcarrello));
+
+                    /////////////////////RITORNIAMO IDCARRELLO MODIFICATO/INSERITO ED EVENTUALE MESSAGGIO DI STATO 
+                    jreturnstatuscarrello jra = new jreturnstatuscarrello();
+                    jra.id = returnedidcarrello;
+                    jra.stato = references.ResMan("Common", Lingua, "carrelloaddsuccess"); //inserire messaggio da risorse
+                    if (context.Session != null && context.Session["superamentoquantita"] != null)
+                    {
+                        if (context.Session["superamentoquantita"] != null && context.Session["superamentoquantita"].ToString() != "0")
+                            jra.stato = references.ResMan("Common", Lingua, "testocarellosuperamentoquantita");
+                    }
+                    if (context.Session != null && context.Session["nontrovata"] != null)
+                        jra.stato = references.ResMan("Common", Lingua, "testocarellononesistente");
+                    if (context.Session != null && context.Session["selezionacaratteristiche"] != null)
+                        jra.stato = references.ResMan("Common", Lingua, "testocarrelloselcar");
+                    //////////////////////////////////////////////////////////////////////////
+                    ///
+                    string resulta = Newtonsoft.Json.JsonConvert.SerializeObject(jra, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    context.Response.Write((resulta));
+
+
 
                     //Calcolo il nuovo totale del carrello e lo ritorno per la visualizzazione
                     //WelcomeLibrary.DOM.TotaliCarrello totali = CommonPage.CalcolaTotaliCarrello(null, null, "", "");
@@ -163,7 +192,31 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     }
 
                     returnedidcarrello = CommonPage.AggiornaProdottoCarrello(context.Request, context.Session, idprodotto, quantita, sUsername, sidcombined, idcarrello, 0, prezzo, datastart, dataend, jsonfield1, b1forceidcarrello);
-                    context.Response.Write((returnedidcarrello));
+                    //context.Response.Write((returnedidcarrello));
+
+                    /////////////////////RITORNIAMO IDCARRELLO MODIFICATO/INSERITO ED EVENTUALE MESSAGGIO DI STATO 
+                    jreturnstatuscarrello jrs = new jreturnstatuscarrello();
+                    jrs.id = returnedidcarrello;
+                    jrs.stato = references.ResMan("Common", Lingua, "carrellosubsuccess"); //inserire messaggio da risorse
+
+                    if (context.Session != null && context.Session["superamentoquantita"] != null)
+                    {
+                        if (context.Session["superamentoquantita"].ToString() != "0")
+                            jrs.stato = references.ResMan("Common", Lingua, "testocarellosuperamentoquantita");
+                    }
+                    if (context.Session != null && context.Session["nontrovata"] != null)
+                        jrs.stato = references.ResMan("Common", Lingua, "testocarellononesistente");
+                    if (context.Session != null && context.Session["selezionacaratteristiche"] != null)
+                        jrs.stato = references.ResMan("Common", Lingua, "testocarrelloselcar"); //////////////////////////////////////////////////////////////////////////
+                    ///
+                    string results = Newtonsoft.Json.JsonConvert.SerializeObject(jrs, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    context.Response.Write((results));
                     break;
                 case "svuotacarrello":
                     CommonPage.SvuotaCarrello(context.Request, context.Session);
@@ -218,12 +271,63 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     context.Response.Write((output));
                     break;
                 case "getpriceforproduct":
-                    offerteDM offDM = new offerteDM();
                     Offerte off = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sidprodotto);
                     if (off != null)
                     {
                         output = off.Prezzo.ToString();
                     }
+                    context.Response.Write((output));
+                    break;
+                case "getxmlvalueforproduct":
+                    Offerte off1 = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sidprodotto);
+                    //creo le due liste delle caratteristiche per il prodotto specifico
+                    if (off1 != null && !string.IsNullOrEmpty(off1.Xmlvalue))
+                    {
+                        //output = (off1.Xmlvalue); //valore letto a dritto dal db senza elaborazione .....
+
+                        //Ricreo e formatto le due liste per passarle al client
+                        List<Tabrif> car1selected = new List<Tabrif>();
+                        List<Tabrif> car2selected = new List<Tabrif>();
+
+                        List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off1.Xmlvalue);
+                        List<ResultAutocomplete> listaTaglia = new List<ResultAutocomplete>();
+                        List<ResultAutocomplete> listaColore = new List<ResultAutocomplete>();
+                        if (listprod != null)
+                            foreach (ModelCarCombinate elem in listprod)
+                            {
+                                if (!string.IsNullOrEmpty(elem.caratteristica1.id) && elem.caratteristica1.id != "0")
+                                {
+                                    Tabrif selcar = Utility.Caratteristiche[0].Find(c => c.Lingua == Lingua && c.Codice == elem.caratteristica1.codice);
+                                    if (!car1selected.Exists(e => e.Id == elem.caratteristica1.id))
+                                        if (selcar == null || string.IsNullOrEmpty(selcar.Id))
+                                            car1selected.Add(new Tabrif(elem.caratteristica1.id, elem.caratteristica1.codice, Lingua, elem.caratteristica1.value));
+                                        else
+                                            car1selected.Add(new Tabrif(selcar.Id, selcar.Codice, Lingua, selcar.Campo1));
+                                }
+
+                                if (!string.IsNullOrEmpty(elem.caratteristica2.id) && elem.caratteristica2.id != "0")
+                                {
+                                    Tabrif selcar = Utility.Caratteristiche[1].Find(c => c.Lingua == Lingua && c.Codice == elem.caratteristica2.codice);
+                                    if (!car2selected.Exists(e => e.Id == elem.caratteristica2.id))
+                                        if (selcar == null || string.IsNullOrEmpty(selcar.Id))
+                                            car2selected.Add(new Tabrif(elem.caratteristica2.id, elem.caratteristica2.codice, Lingua, elem.caratteristica2.value));
+                                        else
+                                            car2selected.Add(new Tabrif(selcar.Id, selcar.Codice, Lingua, selcar.Campo1));
+                                }
+                            }
+
+                        Dictionary<string, string> retdict = new Dictionary<string, string>();
+                        retdict.Add("Caratteristica1", Newtonsoft.Json.JsonConvert.SerializeObject(car1selected));
+                        retdict.Add("Caratteristica2", Newtonsoft.Json.JsonConvert.SerializeObject(car2selected));
+                        output = Newtonsoft.Json.JsonConvert.SerializeObject(retdict, Newtonsoft.Json.Formatting.None, new JsonSerializerSettings()
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            MissingMemberHandling = MissingMemberHandling.Ignore,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            PreserveReferencesHandling = PreserveReferencesHandling.None,
+                        });
+                    }
+
                     context.Response.Write((output));
                     break;
 
@@ -238,7 +342,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
         }
     }
-   
+
 
 
     public bool IsReusable

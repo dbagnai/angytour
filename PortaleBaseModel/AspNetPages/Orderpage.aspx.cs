@@ -1313,8 +1313,8 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
         //{
-            TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
-            TestoMail += totali.Indirizzospedizione;
+        TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
+        TestoMail += totali.Indirizzospedizione;
         //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
@@ -1333,10 +1333,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/> ";
             }
-
-            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
-
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+            }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
             TestoMail += " ID PRODOTTO : " + item.Offerta.Id.ToString();
@@ -1410,8 +1411,8 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
         //{
-            TestoMail += "<br/>Spedizione : <br/> ";
-            TestoMail += totali.Indirizzospedizione;
+        TestoMail += "<br/>Spedizione : <br/> ";
+        TestoMail += totali.Indirizzospedizione;
         //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
@@ -1438,9 +1439,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-
-            TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-            TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
+                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+            }
 
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";

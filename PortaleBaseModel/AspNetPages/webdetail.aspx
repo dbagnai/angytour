@@ -371,7 +371,12 @@
             </div>
         </div>
     </div>
-
+     <%--RECENSIONI CLIENTI--%>
+    <div runat="server" visible="false">
+        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+            <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        </asp:Panel>
+    </div>
     <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
     <div class="bg-light-color" id="divSuggeritiContainer">
@@ -397,10 +402,5 @@
         </div>
     </div>
 
-    <%--RECENSIONI CLIENTI--%>
-    <div runat="server" visible="">
-        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-            <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-        </asp:Panel>
-    </div>
+   
 </asp:Content>

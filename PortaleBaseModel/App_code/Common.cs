@@ -975,6 +975,7 @@ public class CommonPage : Page
                     Session.Add("superamentoquantita", (long)off.Qta_vendita);
                     quantita = (long)off.Qta_vendita;
                 }
+                else Session.Remove("superamentoquantita");
                 if (off.Qta_vendita == 0) // se il prodotto non è più disponibile lo elimino dal carrello
                 {
                     if (Item != null && Item.id_prodotto != 0)
@@ -988,30 +989,39 @@ public class CommonPage : Page
             {
                 List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off.Xmlvalue);
                 bool exist = false;
-                foreach (ModelCarCombinate item in listprod)
+                if (!string.IsNullOrEmpty(idcombinato))
                 {
-                    if (item.id == idcombinato)
+                    Session.Remove("selezionacaratteristiche"); //testocarrelloselcar
+                    Session.Add("nontrovata", 0);  //testocarellononesistente
+                    foreach (ModelCarCombinate item in listprod)
                     {
-                        //Qui ho trovato la combinazione che mi serve
-                        exist = true;
-                        long qta = 0;
-                        long.TryParse(item.qta, out qta);
-                        //devo verificare se c'è quella disponibilita in base alle caratteristiche selezionate
-                        if (quantita > qta)
+                        if (item.id == idcombinato)
                         {
-                            Session.Add("superamentoquantita", (long)qta);
-                            quantita = qta;
-                        }
-                        if (qta == 0) // se il prodotto non è più disponibile lo elimino dal carrello
-                        {
-                            if (Item != null && Item.id_prodotto != 0)
-                                ecom.DeleteCarrelloPerIDCodCarr(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID, Item.Campo2);
-                            //prodottoeliminato = true;
-                            quantita = 0;
-                            return ret;
+                            Session.Remove("nontrovata");
+                            //Qui ho trovato la combinazione che mi serve
+                            exist = true;
+                            long qta = 0;
+                            long.TryParse(item.qta, out qta);
+                            //devo verificare se c'è quella disponibilita in base alle caratteristiche selezionate
+                            if (quantita > qta)
+                            {
+                                Session.Add("superamentoquantita", (long)qta);
+                                quantita = qta;
+                            }
+                            else Session.Remove("superamentoquantita");
+                            if (qta == 0) // se il prodotto non è più disponibile lo elimino dal carrello
+                            {
+                                if (Item != null && Item.id_prodotto != 0)
+                                    ecom.DeleteCarrelloPerIDCodCarr(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID, Item.Campo2);
+                                //prodottoeliminato = true;
+                                quantita = 0;
+                                return ret;
+                            }
+                            break;
                         }
                     }
                 }
+                else Session.Add("selezionacaratteristiche", 0);  //testocarrelloselcar
 
                 //controllo se non ho trovato elementi col filtro caratteristiche indicato
                 if (!exist)
@@ -1023,7 +1033,6 @@ public class CommonPage : Page
                         ecom.DeleteCarrelloPerIDCodCarr(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID, Item.Campo2);
                     //  prodottoeliminato = true;
                     Session.Add("superamentoquantita", 0);
-                    Session.Add("nontrovata", 0);
                     quantita = 0;
                     return ret;
                 }

@@ -10,8 +10,12 @@ namespace WelcomeLibrary.DOM
     {
         public string totale { set; get; }
         public string pezzi { set; get; }
+    }
 
-
+    public class jreturnstatuscarrello
+    {
+        public string id { set; get; }
+        public string stato { set; get; }
     }
     [Serializable]
     public class TotaliCarrello

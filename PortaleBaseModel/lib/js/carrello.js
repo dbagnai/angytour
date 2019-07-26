@@ -39,7 +39,7 @@ var carrellotool = new function () {
                 if ($("#" + controlid).length) {
                     initcalendarrange();
                 } else {
-                    setTimeout(wait, 200);
+                    setTimeout(wait, 80);
                 }
             })();
 
@@ -54,9 +54,16 @@ var carrellotool = new function () {
             var quantita = moment(end).diff(moment(start), 'days');
 
             //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', Startdate, Enddate, '', quantita + 1, true,
-                function (ret) {
+            AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, idcarrello, '', Startdate, Enddate, '', quantita + 1, true,
+                function (data) {
                     /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
+                    var ret = "";
+                    var parsedret = "";
+                    if (data != null && data != "")
+                        parsedret = JSON.parse(data);
+                    if (parsedret != null && parsedret.hasOwnProperty("id"))
+                        ret = parsedret.id;
+
                     idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
                     /***********************************************************************************************************************************************/
                     openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
@@ -64,39 +71,71 @@ var carrellotool = new function () {
 
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
             //AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '0', Startdate, Enddate, '', quantita + 1, false,
-            //    function (ret) {
+            //    function (data) {
             //       openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
             //    });
 
             return;
         },
-        aggiungiacarrello: function() {
+        aggiungiacarrello: function () {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', '', '', null, null, '', '', false, function (ret) {
+            AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, '', '', false, function (data) {
+
+                var ret = "";
+                var parsedret = "";
+                if (data != null && data != "")
+                    parsedret = JSON.parse(data);
+                if (parsedret != null && parsedret.hasOwnProperty("id"))
+                    ret = parsedret.id;
+
+                $('#' + controlid + "messages").html(parsedret.stato);
+
                 /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
                 // idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
                 /***********************************************************************************************************************************************/
                 carrellotool.caricaquantita();
             });
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (ret) {
+            //AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (data) {
+            //var ret = "";
+            //var parsedret = "";
+            //if (data != null && data != "")
+            //    parsedret = JSON.parse(data);
+            //if (parsedret != null && parsedret.hasOwnProperty("id"))
+            //    ret = parsedret.id;
             //    /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
-            //    idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
+
+            // idcarrello = ret;   //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
             //    /***********************************************************************************************************************************************/
             //    carrellotool.caricaquantita();
             //});
             return;
         },
-        sottradiacarrello: function() {
+        sottradiacarrello: function () {
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', '', '', null, null, '', '', false, function (ret) {
+            SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, '', '', false, function (data) {
+
+                var ret = "";
+                var parsedret = "";
+                if (data != null && data != "")
+                    parsedret = JSON.parse(data);
+                if (parsedret != null && parsedret.hasOwnProperty("id"))
+                    ret = parsedret.id;
+
+                $('#' + controlid + "messages").html(parsedret.stato);
                 /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
                 // idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
                 /***********************************************************************************************************************************************/
                 carrellotool.caricaquantita();
             });
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (ret) {
+            //SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (data) {
+            //var ret = "";
+            //var parsedret = "";
+            //if (data != null && data != "")
+            //    parsedret = JSON.parse(data);
+            //if (parsedret != null && parsedret.hasOwnProperty("id"))
+            //    ret = parsedret.id;
             //    /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
             //    idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
             //    /***********************************************************************************************************************************************/
@@ -104,25 +143,37 @@ var carrellotool = new function () {
             //});
             return;
         },
-        caricaquantita: function() {
+        caricaquantita: function () {
+
+            //Testiamo se presenti le caselle di specifica delle caratteristiche - devono esserci entrambe e valorizzate per funzinonare
+            if ($('#' + controlid + "Caratteristica1").length > 0 && $('#' + controlid + "Caratteristica2").length > 0) {
+                if ($('#' + controlid + "Caratteristica1")[0].value != '' && $('#' + controlid + "Caratteristica2")[0].value != '')
+                    idcombined = $('#' + controlid + "Caratteristica1")[0].value + "-" + $('#' + controlid + "Caratteristica2")[0].value;
+                else
+                    idcombined = ""; //svuoto se anche uno solo è vuoto !!!
+                //debugger;
+            }
+
+
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            GetCurrentCarrelloQty('', idprodotto, '', idcarrello, false, function (ret) {
+            GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, false, function (ret) {
                 var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
                 $('#' + controlid + "qty").html(casellaqty);
             });
             //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //GetCurrentCarrelloQty('', idprodotto, '', idcarrello, true, function (ret) {
+            //GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, true, function (ret) {
             //    var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
             //    $('#' + controlid + "qty").html(casellaqty);
             //});
         },
-        caricatotale: function() { //Carica il totale a carrello attuale per l'elemento passato  
+        caricatotale: function () { //Carica il totale a carrello attuale per l'elemento passato  
             GetCarrelloTotalForItem(idprodotto, idcombined, idcarrello, function (ret) {
                 $('#' + controlid + "price").val(ret);
             });
             return;
         },
-        calcolatotale: function() {
+        calcolatotale: function () {
+
             GetPriceForItem(idprodotto, function (ret) {
                 var prezzototaleitem = '';
                 if (prv != -1 && cur != -1) {
@@ -138,11 +189,11 @@ var carrellotool = new function () {
                     }
                 }
                 $('#' + controlid + "price").val(prezzototaleitem);
-
             });
+
             return;
         }
-    }
+    };
 
 
     function Visualizzatasti(abilita) {
@@ -168,6 +219,46 @@ var carrellotool = new function () {
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
             var btnsottrai = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 2rem;\" " + onclickevent2 + ">-</div>";
             $('#' + controlid + "minus").append(btnsottrai);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Riempio le selectbox con i valori delle caratteristiche ( i valori da bindare li devo predendere in base a idprodotto)
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            GetCarcombinedForItem(idprodotto, function (data) {
+                if (data != null && data != '') {
+                    var dataparsed = JSON.parse(data);
+                    $('#' + controlid + "cars").show();
+                    $(".ddlcaratteristiche").each(function () {
+                        var localidcontrol = controlid;
+                        var localidp = idprodotto;
+                        var localidcombine = idcombined;
+                        //console.log(localidp + localidcontrol + localidcombine);
+                        var idcontrollo = $(this).attr('id');
+                        $(this).change(carrellotool.caricaquantita);
+                        var proprarr = idcontrollo.replace(controlid, "");
+                        //debugger;
+                        var filter = "";//$(this).attr("myfilter");
+                        var selectedvalueact = "";
+                        /*Se passo il valore corretto -> presetto i valori idcombined*/
+                        //if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
+                        //    selectedvalueact = objfiltroint[idcontrollo];
+
+                        var selstring = '';
+                        if (baseresources != null && baseresources.hasOwnProperty(lng) && baseresources[lng].hasOwnProperty("select" + proprarr.toLowerCase()))
+                            selstring = baseresources[lng]["select" + proprarr.toLowerCase()];
+
+                        if (dataparsed != null && dataparsed.hasOwnProperty(proprarr) && dataparsed[proprarr] != null && dataparsed[proprarr] != '') {
+                            var parseddatas = JSON.parse(dataparsed[proprarr]);
+                            //Se la box contiene solo un valore lo presetto
+                            if (parseddatas.length == 1)
+                                selectedvalueact = parseddatas[0].Codice;
+                            convertToDictionaryandFill(parseddatas, 0, lng, idcontrollo, selstring, '', selectedvalueact, filter);
+                        }
+                        else $(this).hide();
+                    });
+                }
+                else $('#' + controlid + "cars").remove();
+            });
+            ///////////////////////////////////////////////////////////////////////////////////////////
 
             carrellotool.caricaquantita();
         }
@@ -581,6 +672,26 @@ function GetPriceForItem(idprodotto, callback) {
         }
     });
 }
+
+function GetCarcombinedForItem(idprodotto, callback) {
+    $.ajax({
+        url: pathAbs + carrellohandlerpath,
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        dataType: "text",
+        global: false,
+        cache: false,
+        data: { 'Azione': 'getxmlvalueforproduct', 'idprodotto': idprodotto, 'Lingua': lng },
+        success: function (result) {
+            callback(result);
+        },
+        error: function (result) {
+            //callback(result.responseText);
+            callback('');
+        }
+    });
+}
+
 
 
 
