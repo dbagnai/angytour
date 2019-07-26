@@ -252,8 +252,10 @@ var carrellotool = new function () {
                             if (parseddatas.length == 1)
                                 selectedvalueact = parseddatas[0].Codice;
                             convertToDictionaryandFill(parseddatas, 0, lng, idcontrollo, selstring, '', selectedvalueact, filter);
+                            carrellotool.caricaquantita();
                         }
                         else $(this).hide();
+
                     });
                 }
                 else $('#' + controlid + "cars").remove();
