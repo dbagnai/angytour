@@ -212,7 +212,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         tipo = "vendita usato ";
 
                     string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + " " + nomemittente + " tramite il sito " + ConfigManagement.ReadKey("Nome");
-                    string Descrizione = message.Replace("\r", "<br/>") + " <br/> ";
+                    HtmlToText htmltotext = new HtmlToText();
+                    string Descrizione = htmltotext.Convert(message).Replace("\r", "<br/>") + " <br/> ";
+                    //string Descrizione = (message).Replace("\r", "<br/>") + " <br/> ";
                     if (idofferta != "") //Inseriamo il dettaglio della scheda di provenienza
                     {
                         offerteDM offDM = new offerteDM();
