@@ -55,6 +55,13 @@ public class GenericRouteHandler : IRouteHandler
         //Query in tbl redirect
         //Se ho un match in tabella routing -> devo prendere il nuovo url da tabella e fare
         //Pathdestinazione = NUOVO URL DA TABELLA REDIRECT ; e da li fare redirect in base all'url
+        string originalrequesturl = requestContext.HttpContext.Request.Path;
+        string urltoredir = "";
+        urltoredir = Testredirect(originalrequesturl);
+        if (!string.IsNullOrEmpty(urltoredir))
+        {
+            return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(urltoredir));
+        }
 #if false
         string originalrequesturl = requestContext.HttpContext.Request.Path;
         string urltoredir = "";
