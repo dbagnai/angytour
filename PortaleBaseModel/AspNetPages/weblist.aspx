@@ -30,7 +30,6 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div id="searchblock" class="position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
-
         <div class="d-flex flex-row-reverse">
             <div class="col-12 col-sm-3 pl-0 pl-sm-2 pr-0 my-3" runat="server" id="divSearch" visible="false">
                 <div class="sidebar-content tags blog-search ">

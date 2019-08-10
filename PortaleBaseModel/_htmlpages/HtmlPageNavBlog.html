@@ -12,12 +12,7 @@
         </div>
     </div>
 </section>
-<!--  Navigazione blog -->
-<div>
-    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display: none;">
-        <div id="divContainerBlog1" class="inject mx-auto pb-5" style="max-width: calc(1600px + 2rem);" params="'injectPortfolioAndLoadBanner','IsotopeBanner3b.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog0', false">&nbsp;</div>
-    </div>
-</div>
+
 <!--BLOCCO BLOG NEWS-->
 <div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2">
     <div id="divContainerNewsTitle" style="display: none;">
@@ -27,6 +22,13 @@
     </div>
     <div class="position-relative my-0 mx-auto px-2" style="max-width: 1600px;">
         <div id="divContainerNews" class="inject" params="'injectScrollerAndLoad','owlscrollerOfferte-m.html', 'divContainerNews', 'carouselInject2', '', 'rif000002', '', true, false, 12">&nbsp;</div>
+    </div>
+</div>
+
+<!--  Navigazione blog -->
+<div>
+    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display: none;">
+        <div id="divContainerBlog1" class="inject mx-auto pb-5" style="max-width: calc(1600px + 2rem);" params="'injectPortfolioAndLoadBanner','IsotopeBanner3b.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog0', false">&nbsp;</div>
     </div>
 </div>
 <!-- BLOCCO NEWS LETTER titolo + testo -->
@@ -41,3 +43,11 @@
         <div class="text-center"><input class="btn btn-lg btn-primary mbr-editable-button my-0 mx-auto" onclick="javascript:newsubscribe(this,'inpEmail')" style="width: 150px;" type="button" value="Iscriviti" /></div>
     </div>
 </section>
+
+<script>
+    // <![CDATA[
+    function newsubscribe(btn, item) {
+        var ctrmail = $('#' + item);
+        __doPostBack('inseriscinewsletter', ctrmail[0].value);
+    }
+// ]]></script>

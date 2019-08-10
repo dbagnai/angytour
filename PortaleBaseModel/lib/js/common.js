@@ -514,7 +514,7 @@ function CaricaGlobalResources(lng, searchtext) {
     var lng = lng || "I";
     var searchtext = searchtext || "";
 
-    if (baseresources === '')
+    if (baseresources === '') 
         $.ajax({
             url: pathAbs + commonhandlerpath,
             contentType: "application/json; charset=utf-8",

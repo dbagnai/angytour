@@ -141,17 +141,14 @@ public partial class AreaContenuti_Default3 : CommonPage
             litTitolo.Text = (Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return tmp.Lingua == "I" && tmp.Codice == TipologiaOfferte; })).Descrizione;
 
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
-
-
             //Carichiamo le ddl per la collocazione geografica senza selezioni
             // CaricaDatiDdlRicercaRepeater("", "");
             this.CaricaDatiDdlRicerca("", "", "", "", "");
             CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
-
             this.CaricaDatiDllProdotto(TipologiaOfferte, "");
             this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
-
             this.CaricaDati();
+
             ImpostaDettaglioSolaLettura(true);
 
         }

@@ -105,6 +105,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
             idOfferta = CommonPage.CaricaValoreMaster(Request, Session, "idOfferta", true);
             Vetrina = CommonPage.CaricaValoreMaster(Request, Session, "vetrina", true, "");
+            Page.ClientScript.GetPostBackEventReference(this, string.Empty);
 
         }
         else
