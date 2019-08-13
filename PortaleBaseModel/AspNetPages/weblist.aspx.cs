@@ -275,22 +275,28 @@ public partial class AspNetPages_weblist : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
 
-                //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
-                string svetrina = "";
-                if (Vetrina) svetrina = "true";
-                sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                sb.Append("injectPortfolioAndLoad,isotopeProdotti1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
-                sb.Append("\"></div>");
-                sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                //if (!string.IsNullOrEmpty(Categoria2liv) || (!string.IsNullOrEmpty(testoricerca)))
+                if ((!string.IsNullOrEmpty(testoricerca)))
+                {
+                    if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
 
-                //CON BOTTSTRAP
-                //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti3Card-nocarrello.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
-                //sb.Append("\"></div>");
-                //sb.Append("<div id=\"divPortfolioListPager\"></div>");
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    string svetrina = "";
+                    if (Vetrina) svetrina = "true";
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectPortfolioAndLoad,isotopeProdotti1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+
+                    //CON BOTTSTRAP
+                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti3Card-nocarrello.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
+                    //sb.Append("\"></div>");
+                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
 
 
-                placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                }
 
                 break;
             case "rif000002":
@@ -305,8 +311,11 @@ public partial class AspNetPages_weblist : CommonPage
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
                 divSearch.Visible = true;
                 if (!JavaInjection)
-                    if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)))
+                    if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)))
                     {
+
+                        if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
+
                         if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
 
                         //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
@@ -321,7 +330,7 @@ public partial class AspNetPages_weblist : CommonPage
 
 
                         placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
- 
+
 
                         //sb.Clear();
                         //sb.Append("<div class=\"sfondo-contenitore\">");
@@ -377,9 +386,9 @@ public partial class AspNetPages_weblist : CommonPage
                 if (!JavaInjection)
                 {
                     if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
-                   
+
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
-        
+
                     //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                     //sb.Append("injectPortfolioAndLoad,isotopeSinglerowAnimated-no-button.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     //sb.Append("\"></div>");
@@ -614,9 +623,9 @@ public partial class AspNetPages_weblist : CommonPage
                 break;
         }
         Setrelprevnext();
-       
+
         //if (Tipologia != "rif000003")
-       // Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
+        // Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
     }
     private void ModificaFiltroJS()
     {
@@ -646,7 +655,7 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["tipologia"] = Tipologia;
         }
-         
+
         if (!string.IsNullOrEmpty(mese)) //
         {
             objvalue.Remove("mese");

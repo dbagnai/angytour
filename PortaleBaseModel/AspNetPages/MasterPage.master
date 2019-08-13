@@ -102,7 +102,7 @@
                         <div class="input-group-append" style="border: none; padding: 0px;">
                             <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;" runat="server"><i class="fa fa-search"></i></button>
                         </div>--%>
-                        <input class="form-control blog-search-input" name="txtSearchTop" id="txtSearchTop" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' style="height: 24px; font-size: 0.8rem;" />
+                        <input class="form-control blog-search-input" name="txtSearchTop" id="txtSearchTop" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' style="height: 24px; font-size: 0.8rem;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercatop1').click()" />
                         <span class="input-group-append" style="border: none; padding: 0px;">
                             <button type="button" onclick="cerca('txtSearchTop','rif000001',true)" id="btncercatop1" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fa fa-search"></i></button>
                         </span>
@@ -398,8 +398,8 @@
                             <%--<input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
                             <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />--%>
 
-                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" />
-                            <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="Button2" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
+                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;"   onkeydown="if (event.keyCode == 13)  document.getElementById('btncercamater1').click()" />
+                            <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="btncercamater1" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
 
 
                         </div>

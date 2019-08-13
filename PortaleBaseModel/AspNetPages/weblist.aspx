@@ -28,7 +28,6 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <div id="searchblock" class="position-relative my-0 mx-auto" style="max-width: 1400px; padding-right: 15px; padding-left: 15px;">
         <div class="d-flex flex-row-reverse">
             <div class="col-12 col-sm-3 pl-0 pl-sm-2 pr-0 my-3" runat="server" id="divSearch" visible="false">
@@ -49,7 +48,6 @@
     </div>
     <div class="row">
         <div class="" runat="server" id="columnsingle">
-
             <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
         </div>
     </div>
@@ -58,7 +56,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldermastercenter" runat="Server">
     <div class="col-md-1 col-sm-1" runat="server" id="column1" visible="false">
-
         <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
     </div>
     <div class="col-md-9 col-sm-9" runat="server" id="column2">
