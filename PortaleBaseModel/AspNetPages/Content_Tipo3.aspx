@@ -61,7 +61,7 @@
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat; background-position: left bottom; background-size: auto 91%;">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: auto 91% !important;">
 
                             <%--AVVISO ERRORE DATI NON INSERITI--%>
                             <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"

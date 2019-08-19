@@ -337,7 +337,7 @@ public partial class _webdetail : CommonPage
                     sb.Clear();
 
                     //BIND PER LA SCHEDA!!!!
-                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject no-plygon\" params=\"");
                     sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter2, divitem,true,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);

@@ -40,7 +40,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
         border-top: 40px solid transparent;
         border-bottom: 40px solid transparent;
     }
-    .bg-light-color.no-plygon {
+    .bg-light-color.no-plygon, .no-plygon .bg-light-color, .position-sticky .bg-light-color {
         clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%);
         border-top: 0px solid transparent;
         border-bottom: 0px solid transparent;
@@ -144,7 +144,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 .bg-figura-contatti {
-    background-color: @bg-figura-contatti !important;
+    background: @bg-figura-contatti !important;
 }
 
 .tx-primary-color {
@@ -4337,7 +4337,7 @@ button.js-roundedpush:hover {
         margin-bottom: 20px;
         margin-top: 5px;
         border: 1px solid;
-        background: @bg-figura-contatti;
+        background: @bg-figura-menu;
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: 70% auto;
