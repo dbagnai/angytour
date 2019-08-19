@@ -332,7 +332,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             sb.Append(" style=\"font-weight:500 !important\"  ");
         //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
         sb.Append(" >");
-        sb.Append("<span >" + testo.ToLower() + "</span>");
+        //sb.Append("<span >" + testo.ToLower() + "</span>");
+        sb.Append("<span >" + testo + "</span>");
         sb.Append("</a>");
 
         return sb.ToString();
@@ -482,8 +483,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
             prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
         }
-        prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
-        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        //prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+        prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
         if (prodotti != null)
             foreach (Prodotto o in prodotti)
             {
@@ -529,7 +530,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         if (prodotti != null)
         {
-            prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+            //prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+            prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
@@ -705,7 +707,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return ret;
     }
 
-    public string CaricaLinksPerTipologia(string tipologia, string Categoria = "", string maxlinks = "6", string ordinamento = "")
+    public string CaricaLinksPerTipologia(string tipologia, string Categoria = "", string maxlinks = "6", string ordinamento = "", string codicerisorsa = "")
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         //Filtriamo alcune categorie
@@ -727,7 +729,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (Offerte o in offerte)
             {
                 string testo = o.DenominazionebyLingua(Lingua);
-
+                string testofroresources = references.ResMan("Common", Lingua, codicerisorsa);
+                if (!string.IsNullOrEmpty(testofroresources))
+                    testo = testofroresources;
                 string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 sb.Append("<li>");

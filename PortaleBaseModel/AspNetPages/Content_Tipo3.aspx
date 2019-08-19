@@ -61,7 +61,7 @@
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url(&quot;/public/Files/con001000/1/guarda-mail-2.png&quot;) no-repeat left bottom; background-size: auto 91%;">
+                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat; background-position: left bottom; background-size: auto 91%;">
 
                             <%--AVVISO ERRORE DATI NON INSERITI--%>
                             <asp:ValidationSummary runat="server" ID="Summary" class="errormessageform" ValidationGroup="MailInfo" DisplayMode="BulletList"

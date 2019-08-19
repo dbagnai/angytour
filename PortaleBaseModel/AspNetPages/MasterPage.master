@@ -508,7 +508,7 @@
                     <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
                         <div class="row justify-content-end">
-                            <div class="col-6 p-0 pr-5 d-none d-lg-block text-center" style="background: url('/public/Files/con001000/1/guarda-mail-2.png') no-repeat left bottom; background-size: 95% auto;">
+                            <div class="col-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat; background-position: left bottom; background-size: 95% auto;">
                             </div>
                             <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
                                 <div class="big2 text-white">

@@ -33,6 +33,86 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-image: @pattern-image-light;
     background-size: @pattern-size-light;
 }
+/*START BORDI OBLIQUI ON / OFF*/
+@media screen and (min-width: 1024px) {
+    .bg-light-color {
+        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 40px solid transparent;
+        border-bottom: 40px solid transparent;
+    }
+    .bg-light-color.no-plygon {
+        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+    .bg-light-color.no-plygon-top {
+        clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 40px solid transparent;
+    }
+    .bg-light-color.no-plygon-bottom {
+        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+        border-top: 40px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+    .div-poligon, .mbr-overlay-sfumato {
+        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+    .alternatecolor .bg-light-color {
+        border-top: 0 solid transparent;
+        border-bottom: 0 solid transparent;
+    }
+    .alternatecolor .bg-light-color:before {
+        position: absolute;
+        width: 100%;
+        height: 20px;
+        content: "";
+        background: @bg-secondary-color;
+        right: 0;
+        left: 0;
+        transform-origin: top left;
+        transform: skewY(1.5deg);
+        z-index: 12;
+        top: unset;
+        margin-top: 0px;
+    }
+    .alternatecolor .bg-light-color:after {
+        &:extend(.alternatecolor .bg-light-color:before);
+        transform: skewY(-1.5deg);
+        margin-top: -20px;
+        top: unset;
+    }
+    ul.alternatecolor .bg-light-color:before {
+        &:extend(.alternatecolor .bg-light-color:before);
+        margin-top: -50px;
+    }
+    ul.alternatecolor .bg-light-color:after {
+        &:extend(.alternatecolor .bg-light-color:after);
+        margin-top: 27px;
+        top: unset;
+    }
+    .alternatecolor .bg-light-color .row {
+        border-top: 60px solid transparent;
+        border-bottom: 60px solid transparent;
+    }
+    .alternatecolor li:last-child .bg-light-color .row {
+        border-bottom: 0px solid transparent;
+    }
+    .alternatecolor li:last-child .bg-light-color, .alternatecolor div:last-child .bg-light-color {
+        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+    }
+    .alternatecolor li:last-child .bg-light-color:after, .alternatecolor div:last-child .bg-light-color:after {
+        display: none;
+    }
+    #divSuggeritiContainer.bg-light-color, .bg-light-color.position-sticky, #divCommentiscroll-ctrl .bg-light-color {
+        clip-path: none;
+        border-top: 0 solid transparent;
+        border-bottom: 0 solid transparent;
+    }
+}
+/*END BORDI OBLIQUI ON / OFF*/
 
 .bg-medium-color {
     background-color: @bg-medium-color !important;
@@ -61,6 +141,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .bg-transparent-black {
     background-color: @bg-black-opacity !important;
+}
+
+.bg-figura-contatti {
+    background-color: @bg-figura-contatti !important;
 }
 
 .tx-primary-color {
@@ -806,6 +890,7 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
 @media screen and (max-width: 415px) {
     .mbr-section-title, .title-block {
         font-size: 2rem;
+        font-weight: normal !important;
 
         &::after {
             margin-top: 15px;
@@ -1656,6 +1741,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     .menuzord.white .menuzord-menu > li > a.buttonmenu {
         color: @white-color !important;
         border-color: transparent !important;
+        margin-top: -2px;
 
         &:hover {
             color: @button-hover-color !important;
@@ -3556,6 +3642,12 @@ select.form-control:not([size]):not([multiple]) {
     /*tolgo l'effetto al pulsante prenota*/
     .menuzord-menu li:nth-child(7) a:before, .menuzord-menu li:nth-child(7) a:after {
         border: none;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+    }
+
+    .menuzord-menu li:nth-child(7) a {
+        padding: 8px 16px 6px !important;
     }
 
     .menuzord-menu li a:hover:before,
@@ -4243,6 +4335,10 @@ button.js-roundedpush:hover {
         margin-bottom: 20px;
         margin-top: 5px;
         border: 1px solid;
+        background: @bg-figura-contatti;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 70% auto;
     }
 
     .menuzord-responsive .menuzord-menu.scrollable > .scrollable-fix {
@@ -4308,6 +4404,34 @@ button.js-roundedpush:hover {
     /*sotto sotto menu*/
     .menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li > ul.dropdown > li > a {
         padding-left: 35px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background-size: 65% auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background-size: 72.5% auto;
+    }
+}
+
+@media (max-width: 376px) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background-size: 67.5% auto;
+    }
+}
+/*@media screen and (min-width: 992px), (orientation: landscape) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background-size: 32% auto;
+    }
+}*/
+@media screen and (orientation: landscape) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background: none;
     }
 }
 
@@ -4392,6 +4516,7 @@ button.js-roundedpush:hover {
 .headerspacer {
     /*padding-top: calc(141px + 48px);*/
     padding-top: calc(141px + 82px);
+    /*padding-top: 135px;*//*senza tottomenu a vista con icome*/
 }
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
@@ -4399,14 +4524,14 @@ button.js-roundedpush:hover {
     padding-top: calc(141px + 14px);
 }*/
 @media (max-width:1179px) {
-    .headerspacer {
+    .headerspacer, .headerspacer-home {
         padding-top: 100px;
     }
 }
 
-.headerspacer-home {
+/*.headerspacer-home {
     padding-top: 0;
-}
+}*/
 
 #divContainerb1 {
     height: calc(70vh - 141px) !important;
@@ -4951,6 +5076,10 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
     padding-left: 0;
     padding-top: 50%;
 }
+.image-polygon-fascia {
+    padding-left: 0;
+    padding-top: 75%;
+}
 
 .polygon-backdrop {
     background-size: cover;
@@ -5006,7 +5135,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 
 @media screen and (min-width: 1024px) {
-    .image-polygon {
+    .image-polygon, .image-polygon-fascia {
         padding-left: 45%;
         padding-top: 0;
     }
@@ -5050,18 +5179,6 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
         width: 25%;
     }
 
-    .firstbig li:nth-of-type(1), .firstbig li:nth-of-type(9n+1) {
-        width: 50%;
-    }
-
-    .firstbig li:nth-of-type(1) img, .firstbig li:nth-of-type(9n+1) img {
-        padding-bottom: calc(228px - 0.5rem) !important;
-    }
-
-    .firstbig li:nth-of-type(1) .card-img-overlay, .firstbig li:nth-of-type(9n+1) .card-img-overlay {
-        bottom: 36px;
-    }
-
     .firstbig item:nth-of-type(1), .firstbig item:nth-of-type(9n+1) {
         width: 50%;
     }
@@ -5077,30 +5194,30 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 
 }
 /* PERSONALIZZAZIONI SINGOLE BANNER CARD OVER CATALOGO */
-.firstbig-banner li:nth-of-type(n+1) .imgovercontainer.work-image:after {
+.firstbig-banner item:nth-of-type(n+1) .imgovercontainer.work-image:after {
     background-position: center calc(~'(100% - 0px) / 2') !important;
     background-size: 10% !important;
 }
 
-.firstbig-banner li:nth-of-type(2) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(2) .imgovercontainer.work-image:hover:after {
     background: @icon-nav-6 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-.firstbig-banner li:nth-of-type(3) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(3) .imgovercontainer.work-image:hover:after {
     background: @icon-nav-5 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-.firstbig-banner li:nth-of-type(4) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(4) .imgovercontainer.work-image:hover:after {
     background: @icon-nav-4 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
-.firstbig-banner li:nth-of-type(5) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(5) .imgovercontainer.work-image:hover:after {
     background: @icon-nav-3 center calc(~'(100% - 0px) / 2') no-repeat !important;
     background-size: 20% !important;
     background-color: rgba(0, 0, 0, 0.50) !important;

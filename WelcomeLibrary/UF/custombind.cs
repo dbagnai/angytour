@@ -3967,7 +3967,7 @@ namespace WelcomeLibrary.UF
                                         if (descrizione.Substring(i + j, 1) == " " || descrizione.Substring(i + j, 1) == "." || descrizione.Substring(i + j, 1) == "\n") stop = true;
                                         j += 1;
                                     }
-                                    descrizione = descrizione.Substring(0, i + j) + " >>";
+                                    descrizione = descrizione.Substring(0, i + j) + " &#10132;";
                                 }
 
                                 if (prop[2] != null && prop[2] == "nobreak")

@@ -28,8 +28,8 @@
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
-@bg-primary-gradient1: #0081d1;
-@bg-primary-gradient2: #00aeef;
+@bg-primary-gradient1: darken(@bg-primary-color, 8%);
+@bg-primary-gradient2: lighten(@bg-primary-color, 8%);
 @bg-primary-color-sfumato: linear-gradient(45deg, @bg-primary-gradient1, @bg-primary-gradient2);
 /**/
 @color-fixedtop-gradient1: darken(@bg-dark-color, 40%);
@@ -38,8 +38,8 @@
 @bg-fixedtop-color-sfumato: linear-gradient(45deg, @color-fixedtop-gradient1, @color-fixedtop-gradient2);
 @bg-fixedtop-color-sfumato-alpha: linear-gradient(45deg, @color-fixedtop-gradient1, @color-fixedtop-gradient2-alpha);
 /**/
-@color-sottomeu-gradient1: #f4a300;
-@color-sottomeu-gradient2: #fc0;
+@color-sottomeu-gradient1: darken(@color-sottomeu, 5%);
+@color-sottomeu-gradient2: lighten(@color-sottomeu, 8%);
 @bg-sottomenu-color-sfumato: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2);
 /*----------------------------------
 //////////////| LOGO |//////////////
@@ -108,6 +108,7 @@
 ----------------------------------*/
 @bg-testata-opacity-white: fade(@white-color, 60%);
 @placeholder-color: darken(@bg-secondary-color, 20%);
+@bg-figura-contatti: url('/public/Files/con001000/1/guarda-mail-2-smart.png');
 /*----------------------------------
 /////////////| FOOTER |/////////////
 ----------------------------------*/
@@ -141,9 +142,9 @@
 @bg-size: cover;
 @bg-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
 
-@bg-testata-opacity: fade(@black-color, 40%);
-@bg-color-top-opacity: fade(@color-sottomeu, 0%);
-@bg-color-bottom-opacity: fade(@primary-color, 75%);
+@bg-testata-opacity: fade(@black-color, 20%);
+@bg-color-top-opacity: fade(@black-color, 50%);
+@bg-color-bottom-opacity: fade(@black-color, 0%);
 
 @title-testata-home-size: calc(49px + (65 - 49) * ((100vw - 768px) / (1200 - 768)));
 @title-testata-home-font: @testata-font;
@@ -182,7 +183,6 @@
 @prezzo-testata-home-font: @testata-font;
 @prezzo-testata-home-color: @white-color;
 @prezzo-testata-home-weight: 400;*/
-
 /*----------------------------------
 /////| BANNER TESTATA FUNNEL |//////
 ----------------------------------*/
@@ -195,7 +195,6 @@
 @subtitle-testata-funnel-font: @testata-font;
 @subtitle-testata-funnel-color: @color-sottomeu-gradient2;
 @subtitle-testata-funnel-weight: 400;
-
 /*----------------------------------
 /////////| BANNER FASCIA |//////////
 ----------------------------------*/
