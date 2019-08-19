@@ -30,8 +30,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
+/*hue, saturation, lightness, alpha*/
 /**/
 /**/
+/*hue, saturation, lightness, alpha*/
 /*----------------------------------
 //////////////| LOGO |//////////////
 ----------------------------------*/
@@ -4664,18 +4666,22 @@ button.js-roundedpush:hover {
   line-height: 1.6rem;
   color: white;
 }
-li:nth-child(2n) .polygon-backdrop-b3 {
+li:nth-child(2n) .polygon-backdrop-b3,
+.polygonblock > div:nth-child(2n) .polygon-backdrop-b3 {
   background: linear-gradient(45deg, #f1bf31, #f6d26f);
 }
-li:nth-child(2n+1) .polygon-backdrop-b3 {
+li:nth-child(2n+1) .polygon-backdrop-b3,
+.polygonblock > div:nth-child(2n+1) .polygon-backdrop-b3 {
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 /*---- MULTIBANNER FASCIA HOME POLYGON ----*/
-li:nth-child(2n) .rounded-responsive .polygon-backdrop {
+li:nth-child(2n) .rounded-responsive .polygon-backdrop,
+.polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
   /*background: @bg-sottomenu-color-sfumato;*/
   background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
-li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
+.polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
   background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
 @media screen and (max-width: 540px) {
@@ -4722,7 +4728,8 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
   font-size: 2rem;
   font-weight: 900;
 }
-li:nth-child(2n) .polygon-backdrop {
+li:nth-child(2n) .polygon-backdrop,
+.polygonblock > div:nth-child(2n) .polygon-backdrop {
   background: linear-gradient(45deg, #f1bf31, #f6d26f);
 }
 li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
@@ -4730,7 +4737,8 @@ li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
   font-weight: 300;
   float: right;
 }
-li:nth-child(2n+1) .polygon-backdrop {
+li:nth-child(2n+1) .polygon-backdrop,
+.polygonblock > div:nth-child(2n+1) .polygon-backdrop {
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {

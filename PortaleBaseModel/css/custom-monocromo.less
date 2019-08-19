@@ -30,7 +30,10 @@
 ----------------------------------*/
 @bg-primary-gradient1: darken(@bg-primary-color, 8%);
 @bg-primary-gradient2: lighten(@bg-primary-color, 8%);
+@bg-primary-gradient2-alpha: hsla(hue(@bg-primary-gradient2), 100%, 15%, 0.5); /*hue, saturation, lightness, alpha*/
 @bg-primary-color-sfumato: linear-gradient(45deg, @bg-primary-gradient1, @bg-primary-gradient2);
+@bg-primary-color-sfumato-alpha: linear-gradient(45deg, @bg-primary-gradient1, @bg-primary-gradient2-alpha);
+@bg-primary-color-sfumato-alpha-bottom: linear-gradient(to bottom, @bg-primary-gradient1, @bg-primary-gradient2-alpha);
 /**/
 @color-fixedtop-gradient1: darken(@bg-dark-color, 40%);
 @color-fixedtop-gradient2: darken(@bg-dark-color, 20%);
@@ -40,7 +43,11 @@
 /**/
 @color-sottomeu-gradient1: darken(@color-sottomeu, 5%);
 @color-sottomeu-gradient2: lighten(@color-sottomeu, 8%);
+@color-sottomeu-gradient2-alpha: hsla(hue(@color-sottomeu-gradient2), 100%, 45%, 0.5); /*hue, saturation, lightness, alpha*/
 @bg-sottomenu-color-sfumato: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2);
+@bg-sottomenu-color-sfumato-alpha: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2-alpha);
+@bg-sottomenu-color-sfumato-alpha-bottom: linear-gradient(to bottom, @color-sottomeu-gradient1, @color-sottomeu-gradient2-alpha);
+
 /*----------------------------------
 //////////////| LOGO |//////////////
 ----------------------------------*/

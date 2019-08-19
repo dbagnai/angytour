@@ -1,4 +1,4 @@
-﻿"use strict";
+﻿//"use strict";
 var jsonlanguages = "";
 var versionforcache = "1";
 var percorsocontenuti = "";

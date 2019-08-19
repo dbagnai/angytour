@@ -1,0 +1,90 @@
+﻿<div style="margin-bottom: 35px; margin-top: 20px; display: none">
+    <div>
+        <div class="row no-gutters" id="replaceid" style="margin-right:15px">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <div class="card m-2 border-tipo2" style="overflow:hidden">
+                    <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                        <div class="position-relative imgovercontainer">
+                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                            <div class="card-img-overlay">
+                            </div>
+                        </div>
+                    </a>
+                    <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
+
+                    <div class="text-center" style="padding-left:10px;padding-right:20px;position:relative;">
+                        <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria" format="frmcategoria"></span>
+                        <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
+                        <!--<span class="bind linksmall py-1" mybind="Id" myvalue="linksezione" format="formatlinksezione"></span>-->
+                        <!--<div class="avatar avatar-large float-left">
+                            <div class="avatar-inner">
+                                <img class="bind avatar" mybind="Id" src="" />
+                            </div>
+                        </div>-->
+                        <!--<div class="float-left pt-sm-2">
+                            <div class="float-left" style="padding-right:10px;font-size:0.9rem; font-style:italic;text-align:right">
+                                <span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
+                                <span class="bind" mybind="Autorenome"></span>
+                            </div>
+                        </div>-->
+                        <!--<div class="float-left pt-sm-2" style="color:#ccc">
+                            <span class="fa fa-eye"></span><span class="bind" mybind="Id" myvalue="views" format="formatviews"></span>
+                        </div>-->
+                        <div class="float-right pt-sm-2">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
+                    </div>
+                    <div class="card-body text-center">
+                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                            <h3 class="card-title titolo-offerta mb-2">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            </h3>
+                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-1">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                            </h4>
+                        </a>
+                        <div class="card-text">
+                            <div class="ratinginfo bind" mybind="nfeeds" myvalue="feedbacks1" idbind="Id"></div>
+                            <span class="rating bind" mybind="stars" mybind1="nfeeds" idbind="Id" disabled data-default-rating="2.5"></span>
+                            <!--<span class="bind" mybind="Id" myvalue="descrizione" myvalue1="130" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />-->
+                        </div>
+                        <!--<div class="">
+        <div class="row align-items-right">
+            <div class="w-100 text-center prezzo-responsive">
+                <div style="font-size:1.7rem;margin-top:0px;text-align:center;color:#66483b">
+                    <span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="textprezzofornace" format="formatlabelresource"></span><br />
+                    <span class="bind" style="font-weight:400" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="txtprezzoiva" format="formatlabelresource"></span><br />
+                    <span style="font-size:0.6em;text-decoration:line-through;color:#ccc" class="bind" mybind="Id" myvalue="txtprezzolistino" format="formatlabelresource"></span>
+                    <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>-->
+                    </div>
+                    <div class="card-footer">
+                        <!--<div class="float-right">
+                            <a class="bind btn btn-primary" target="_self" href="link" title="titolo" mybind="Id">
+                                <div class="float-right bind" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                            </a>
+                        </div>-->
+                        <div class="col float-left text-left">
+                            <div class="float-left my-0 mr-2">
+                                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                    <div class="float-right bind button-carrello" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                                </a>
+                            </div>
+                            <div id="carrello-click" class="float-left my-0 bind carrello-stop" style="z-index:1" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
+                            </div>
+
+                            <!-- PREZZO -->
+                            <div class="float-right text-right prezzo-responsive pl-0">
+                                <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><br/>
+                                <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
