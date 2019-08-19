@@ -406,6 +406,16 @@ i .fa {
   /*font-weight: @menu-hover-weight;*/
   background: none;
 }
+@media (max-width: 1024px) {
+  .menuzord.white .menuzord-menu > li.active > a,
+  .menuzord.white .menuzord-menu > li:hover > a,
+  .menuzord.white .menuzord-menu > li:hover > a span,
+  .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
+  .menuzord.white .menuzord-menu > li > a:active {
+    color: #f3c649 !important;
+    background: #fff;
+  }
+}
 .menuzord.white .showhide em {
   background: #032f2f;
 }
