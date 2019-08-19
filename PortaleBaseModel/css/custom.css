@@ -532,7 +532,8 @@ i .fa {
 .menuzord.white .menuzord-menu > li > a:active {
   color: #f3c649 !important;
   /*font-weight: @menu-hover-weight;*/
-  background: none;
+  /*background: none;*/
+  background: #fff;
 }
 .menuzord.white .showhide em {
   background: #032f2f;
