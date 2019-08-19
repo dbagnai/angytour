@@ -275,8 +275,7 @@ public partial class AspNetPages_weblist : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
 
-                //if (!string.IsNullOrEmpty(Categoria2liv) || (!string.IsNullOrEmpty(testoricerca)))
-                if ((!string.IsNullOrEmpty(testoricerca)))
+                if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)))
                 {
                     if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
 
