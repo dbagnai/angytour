@@ -158,6 +158,92 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-image: url(/images/pattern/ricicled5.png);
   background-size: 15%;
 }
+/*START BORDI OBLIQUI ON / OFF*/
+@media screen and (min-width: 1024px) {
+  .bg-light-color {
+    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+  }
+  .bg-light-color.no-plygon {
+    clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%);
+    border-top: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+  }
+  .bg-light-color.no-plygon-top {
+    clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
+    border-top: 0px solid transparent;
+    border-bottom: 40px solid transparent;
+  }
+  .bg-light-color.no-plygon-bottom {
+    clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+    border-top: 40px solid transparent;
+    border-bottom: 0px solid transparent;
+  }
+  .div-poligon,
+  .mbr-overlay-sfumato {
+    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+    border-top: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+  }
+  .alternatecolor .bg-light-color {
+    border-top: 0 solid transparent;
+    border-bottom: 0 solid transparent;
+  }
+  .alternatecolor .bg-light-color:before,
+  .alternatecolor .bg-light-color:after,
+  ul.alternatecolor .bg-light-color:before,
+  ul.alternatecolor .bg-light-color:after {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    content: "";
+    background: #90cdcd;
+    right: 0;
+    left: 0;
+    transform-origin: top left;
+    transform: skewY(1.5deg);
+    z-index: 12;
+    top: unset;
+    margin-top: 0px;
+  }
+  .alternatecolor .bg-light-color:after,
+  ul.alternatecolor .bg-light-color:after {
+    transform: skewY(-1.5deg);
+    margin-top: -20px;
+    top: unset;
+  }
+  ul.alternatecolor .bg-light-color:before {
+    margin-top: -50px;
+  }
+  ul.alternatecolor .bg-light-color:after {
+    margin-top: 27px;
+    top: unset;
+  }
+  .alternatecolor .bg-light-color .row {
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+  }
+  .alternatecolor li:last-child .bg-light-color .row {
+    border-bottom: 0px solid transparent;
+  }
+  .alternatecolor li:last-child .bg-light-color,
+  .alternatecolor div:last-child .bg-light-color {
+    clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+  }
+  .alternatecolor li:last-child .bg-light-color:after,
+  .alternatecolor div:last-child .bg-light-color:after {
+    display: none;
+  }
+  #divSuggeritiContainer.bg-light-color,
+  .bg-light-color.position-sticky,
+  #divCommentiscroll-ctrl .bg-light-color {
+    clip-path: none;
+    border-top: 0 solid transparent;
+    border-bottom: 0 solid transparent;
+  }
+}
+/*END BORDI OBLIQUI ON / OFF*/
 .bg-medium-color {
   background-color: #333333 !important;
 }
@@ -169,7 +255,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-color-sottomeu {
   background-color: #f3c649 !important;
-  background: linear-gradient(45deg, #f4a300, #fc0) !important;
+  background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
 }
 .bg-color-sottomeu-active {
   background-color: #f5cf64 !important;
@@ -179,6 +265,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-transparent-black {
   background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.bg-figura-contatti {
+  background-color: url('/public/Files/con001000/1/guarda-mail-2-smart.png') !important;
 }
 .tx-primary-color {
   color: #098f8f !important;
@@ -830,6 +919,7 @@ h1 span:nth-child(1).mbr-section-title,
   .cart-quantity,
   .cart-total {
     font-size: 2rem;
+    font-weight: normal !important;
   }
   .mbr-section-title::after,
   .title-block::after {
@@ -1705,6 +1795,7 @@ footer .divbuttonstyle:hover {
   .menuzord.white .menuzord-menu > li > a.buttonmenu {
     color: #fff !important;
     border-color: transparent !important;
+    margin-top: -2px;
   }
   .menuzord.white .menuzord-menu > li > a.buttonmenu:hover,
   .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
@@ -2600,7 +2691,7 @@ ul.footer-category-list {
   letter-spacing: 1px !important;
 }
 .smalltext-funnel {
-  color: #fc0;
+  color: #f6d26f;
   font-family: 'Raleway', sans-serif;
   font-size: calc(18px + (24 - 18) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 400 !important;
@@ -3105,7 +3196,7 @@ select.form-control:not([size]):not([multiple]) {
 ---- ISOTOPE news-letter e mail ----
 ----------------------------------*/
 .mbr-overlay {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
   bottom: 0;
   left: 0;
@@ -3355,6 +3446,11 @@ select.form-control:not([size]):not([multiple]) {
   .menuzord-menu li:nth-child(7) a:before,
   .menuzord-menu li:nth-child(7) a:after {
     border: none;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  .menuzord-menu li:nth-child(7) a {
+    padding: 8px 16px 6px !important;
   }
   .menuzord-menu li a:hover:before,
   .menuzord-menu li .current a:before,
@@ -3568,14 +3664,20 @@ Breadcrumb
 .breadcrumbs > ul > li {
   padding: 5px 0;
 }
-.linksmall a {
-  color: #3594BA;
+.linksmall a,
+.linksmall-blog a,
+.linksmall-blog {
+  color: #f3c649;
   text-decoration: none;
   font-size: 90%;
 }
-.linksmall-blog a {
-  color: #3594BA;
-  text-decoration: none;
+.linksmall a:hover,
+.linksmall-blog a:hover,
+.linksmall-blog:hover {
+  color: #f6d26f;
+}
+.linksmall-blog a,
+.linksmall-blog {
   font-size: 100%;
 }
 /*----------------------------------
@@ -3930,6 +4032,10 @@ button.js-roundedpush:hover {
     margin-bottom: 20px;
     margin-top: 5px;
     border: 1px solid;
+    background: url('/public/Files/con001000/1/guarda-mail-2-smart.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 70% auto;
   }
   .menuzord-responsive .menuzord-menu.scrollable > .scrollable-fix {
     height: 0 !important;
@@ -3988,6 +4094,31 @@ button.js-roundedpush:hover {
   /*sotto sotto menu*/
   .menuzord-responsive .menuzord-menu.menuzord-indented > li > ul.dropdown > li > ul.dropdown > li > a {
     padding-left: 35px !important;
+  }
+}
+@media (max-width: 992px) {
+  .menuzord-responsive .menuzord-menu.scrollable {
+    background-size: 65% auto;
+  }
+}
+@media (max-width: 576px) {
+  .menuzord-responsive .menuzord-menu.scrollable {
+    background-size: 72.5% auto;
+  }
+}
+@media (max-width: 376px) {
+  .menuzord-responsive .menuzord-menu.scrollable {
+    background-size: 67.5% auto;
+  }
+}
+/*@media screen and (min-width: 992px), (orientation: landscape) {
+    .menuzord-responsive .menuzord-menu.scrollable {
+        background-size: 32% auto;
+    }
+}*/
+@media screen and (orientation: landscape) {
+  .menuzord-responsive .menuzord-menu.scrollable {
+    background: none;
   }
 }
 /* ---------------------------------
@@ -4056,6 +4187,8 @@ button.js-roundedpush:hover {
 .headerspacer {
   /*padding-top: calc(141px + 48px);*/
   padding-top: calc(141px + 82px);
+  /*padding-top: 135px;*/
+  /*senza tottomenu a vista con icome*/
 }
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
@@ -4063,13 +4196,14 @@ button.js-roundedpush:hover {
     padding-top: calc(141px + 14px);
 }*/
 @media (max-width: 1179px) {
-  .headerspacer {
+  .headerspacer,
+  .headerspacer-home {
     padding-top: 100px;
   }
 }
-.headerspacer-home {
-  padding-top: 0;
-}
+/*.headerspacer-home {
+    padding-top: 0;
+}*/
 #divContainerb1 {
   height: calc(70vh - 141px) !important;
   max-height: 480px;
@@ -4238,9 +4372,9 @@ button.js-roundedpush:hover {
   padding: 20px 20px;
   clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
   /*BANNER TESTATA HOME - 100% ON*/
-  background: linear-gradient(rgba(243, 198, 73, 0), rgba(3, 47, 47, 0.75));
-  background: -webkit-linear-gradient(rgba(243, 198, 73, 0), rgba(3, 47, 47, 0.75));
-  background-color: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-color: rgba(0, 0, 0, 0.2);
   /*BANNER TESTATA HOME - 55% ON*/
   /*background: @bg-testata-color;
     padding-right: calc(14% - 3rem);
@@ -4528,18 +4662,18 @@ button.js-roundedpush:hover {
   color: white;
 }
 li:nth-child(2n) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #f4a300, #fc0);
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
 }
 li:nth-child(2n+1) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #0081d1, #00aeef);
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 /*---- MULTIBANNER FASCIA HOME POLYGON ----*/
 li:nth-child(2n) .rounded-responsive .polygon-backdrop {
   /*background: @bg-sottomenu-color-sfumato;*/
-  background: linear-gradient(45deg, #0081d1, #00aeef) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
 li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #0081d1, #00aeef) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
 @media screen and (max-width: 540px) {
   .card.rounded-responsive {
@@ -4550,6 +4684,10 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
 .image-polygon {
   padding-left: 0;
   padding-top: 50%;
+}
+.image-polygon-fascia {
+  padding-left: 0;
+  padding-top: 75%;
 }
 .polygon-backdrop {
   background-size: cover;
@@ -4582,7 +4720,7 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
   font-weight: 900;
 }
 li:nth-child(2n) .polygon-backdrop {
-  background: linear-gradient(45deg, #f4a300, #fc0);
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
 }
 li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
   content: "/KWh";
@@ -4590,7 +4728,7 @@ li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
   float: right;
 }
 li:nth-child(2n+1) .polygon-backdrop {
-  background: linear-gradient(45deg, #0081d1, #00aeef);
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   content: "/Smc";
@@ -4598,7 +4736,8 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   float: right;
 }
 @media screen and (min-width: 1024px) {
-  .image-polygon {
+  .image-polygon,
+  .image-polygon-fascia {
     padding-left: 45%;
     padding-top: 0;
   }
@@ -4637,18 +4776,6 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   .grid-item {
     width: 25%;
   }
-  .firstbig li:nth-of-type(1),
-  .firstbig li:nth-of-type(9n+1) {
-    width: 50%;
-  }
-  .firstbig li:nth-of-type(1) img,
-  .firstbig li:nth-of-type(9n+1) img {
-    padding-bottom: calc(228px - 0.5rem) !important;
-  }
-  .firstbig li:nth-of-type(1) .card-img-overlay,
-  .firstbig li:nth-of-type(9n+1) .card-img-overlay {
-    bottom: 36px;
-  }
   .firstbig item:nth-of-type(1),
   .firstbig item:nth-of-type(9n+1) {
     width: 50%;
@@ -4663,26 +4790,26 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   }
 }
 /* PERSONALIZZAZIONI SINGOLE BANNER CARD OVER CATALOGO */
-.firstbig-banner li:nth-of-type(n+1) .imgovercontainer.work-image:after {
+.firstbig-banner item:nth-of-type(n+1) .imgovercontainer.work-image:after {
   background-position: center calc((100% - 0px) / 2) !important;
   background-size: 10% !important;
 }
-.firstbig-banner li:nth-of-type(2) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(2) .imgovercontainer.work-image:hover:after {
   background: url(/images/icon-trattore.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-.firstbig-banner li:nth-of-type(3) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(3) .imgovercontainer.work-image:hover:after {
   background: url(/images/icon-spina.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-.firstbig-banner li:nth-of-type(4) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(4) .imgovercontainer.work-image:hover:after {
   background: url(/images/icon-ingranaggio.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-.firstbig-banner li:nth-of-type(5) .imgovercontainer.work-image:hover:after {
+.firstbig-banner item:nth-of-type(5) .imgovercontainer.work-image:hover:after {
   background: url(/images/icon-vaso-fiore.png) center calc((100% - 0px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;

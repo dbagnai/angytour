@@ -2,7 +2,7 @@
 <div id="divContainerb1" class="d-none d-sm-block inject d-none my-0 mx-auto position-relative" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
 <div id="divContainerHeadmobile1" class="inject d-block d-sm-none d-none" params="injectFasciaAndLoadBanner,'bannerFascia3.html', 'divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia-home', false">&nbsp;</div>
 <!--<div id="divContainerHeadmobile1" class="inject d-block d-sm-none" style="display: none;" params="injectFasciaAndLoadBanner,'bannerFascia3.html', 'divContainerHeadmobile1', 'bannerfasciahome', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia-home', false">&nbsp;</div>--> <!-- BLOCCO INFO VENDITA E SPEDIZIONI -->
-<section class="d-none d-md-block py-4 bg-light-color">
+<section class="d-none d-md-block py-4 bg-light-color no-plygon">
     <div class="w-100">
         <div class="row justify-content-center mx-0">
             <div class="col-auto border-right bd-secondary-color d-flex align-items-center">
@@ -32,7 +32,28 @@
         </div>
     </div>
 </section>
-<div id="nav-home-top" style="padding-top:172px; margin-top:-172px"></div>
+<!-- BLOCCO VIDEO -->
+<div style="max-width: 1600px;" class="m-auto position-relative py-5">
+    <div class="w-100">
+        <div class="row align-items-center">
+            <div class="col-md-7 col-sm-7 col-12">
+                <div id="divContainerVideo1" class="inject  m-auto position-relative" params="injectandloadgenericvideo,'bannervideoFascia.html', 'divContainerVideo1', 'videoInject1', 1, 2, false, '', '1', '', 'TBL_BANNERS_GENERALE', 'video-banner1', false">&nbsp;</div>
+            </div>
+            <div class="col-sm-5 col-12 side-image-content text-left textBanner d-none d-sm-block animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
+                <div style="font-weight: 400;" class="divTesto">
+                    <div>
+                        <div class="big2 blackcolor">A tavola con Phil!</div>
+                        <br />
+                        <div class="small2 blackcolor">Mauris viverra dictum leo, vel ultrices turpis interdum at. Maecenas non odio vitae ipsum commodo cursus..</div>
+                        <br /> <br /> <a class="btn btn-lg btn-primary animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="min-width: 180px;" href="/I/web/locanda-7">LA LOCANDA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BLOCCO NAVIGAZIONE MyMasonry -->
+<div id="divContainerNav2" style="max-width: 1600px;" class="inject px-0 px-md-5 mx-auto" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerMyMasonryCardOverlay.html', 'divContainerNav2', 'portban2', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">&nbsp;</div>
 <!-- BLOCCO BRAND -->
 <div class="d-none d-sm-block bg-white py-5">
     <!-- since -->
@@ -84,25 +105,7 @@
             </div>
         </section>
         <div id="divContainerNav1" class="inject" params="injectPortfolioAndLoadBanner,'IsotopeBanner3b.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">&nbsp;</div>
-
-        <!-- BANNER BOOTSTRAP -->
         <!--<div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3simple.html', 'divContainerNav1', 'isoBannav1', 1, 1, false, '', '10', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">&nbsp;</div>-->
-
-        <!-- BANNER MASONRY -->
-        <!--<script>
-        $(function () {
-            var $grid = $('.grid').masonry({
-                itemSelector: '.grid-item',
-                columnWidth: '.grid-sizer',
-                percentPosition: true,
-            })
-            $grid.imagesLoaded().progress(function () {
-                $grid.masonry('layout');
-            });
-        });
-    </script>
-    <div id="divContainerNav1" style="max-width:1600px;" class="inject px-0 px-md-5 mx-auto" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerMyMasonryCardOverlay.html', 'divContainerNav1', 'portban1', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false">&nbsp;</div>-->
-
     </div>
 </div>
 <!--  BLOCCO PROCESSO ACQUISTO 1 -> 2 -> 3 -->
@@ -147,7 +150,6 @@
         <div id="divContainerTestimonials" class="inject" params="injectScrollerAndLoad,'owlscrollerTestimonialsBt3.html', 'divContainerTestimonials', 'carouselInject1', '', 'rif000009', '', true, false, 12, '3'">&nbsp;</div>
     </div>
 </div>
-
 <!--BLOCCO SKILLS BAR movie-->
 <div class="bg-white py-2">
     <div class="position-relative my-0 mx-auto pt-0 pb-5" style="max-width: 1600px; display: block;">
@@ -161,27 +163,32 @@
                 </div>
             </div>
         </section>
-
         <section class="pt-0 pb-3">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="skills">
                             <ul>
-                                <li><div><span class="skills1 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>GRAFICA 90%</em></div></li>
-                                <li><div><span class="skills2 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>STAMPA- 85%</em></div></li>
-                                <li><div><span class="skills3 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>WEB – 60%</em></div></li>
-                                <li><div><span class="skills4 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>GADGET- 55%</em></div></li>
+                                <li>
+                                    <div><span class="skills1 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>GRAFICA 90%</em></div>
+                                </li>
+                                <li>
+                                    <div><span class="skills2 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>STAMPA- 85%</em></div>
+                                </li>
+                                <li>
+                                    <div><span class="skills3 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>WEB &ndash; 60%</em></div>
+                                </li>
+                                <li>
+                                    <div><span class="skills4 animated" data-animtype="slideInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s"></span><em>GADGET- 55%</em></div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
 </div>
-
 <!--BLOCCO ODOMETRO-->
 <div class="bg-light-color py-2">
     <div class="position-relative my-0 mx-auto pt-0 pb-0" style="max-width: 1600px; display: block;">
@@ -195,33 +202,30 @@
                 </div>
             </div>
         </section>
-
         <section class="pt-0 pb-3">
             <div class="container">
                 <div class="row justify-content-center mx-0">
                     <div class="col-12 col-md-4 align-items-center text-center pb-4 pb-md-5">
                         <div class="float-none float-md-right">
-                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url(/images/luce.png); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
+                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url('/images/luce.png'); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
                             <div class="odometer">000</div>
                             <div>
                                 <p class="m-0 color-sottomeu" style="font-size: 1.5rem;">LUCE</p>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-md-4 align-items-center text-center pb-4 pb-md-5">
                         <div class="float-none">
-                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url(/images/gas.png); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
+                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url('/images/gas.png'); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
                             <div class="odometer odometer1">000</div>
                             <div>
                                 <p class="m-0 color-sottomeu" style="font-size: 1.5rem;">GAS</p>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-md-4 align-items-center text-center pb-4 pb-md-5">
                         <div class="float-none float-md-left">
-                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url(/images/lucegas.png); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
+                            <div class="mx-auto" style="width: 100px; height: 100px; background-image: url('/images/lucegas.png'); background-size: auto 100px; background-repeat: no-repeat; background-position: center;"></div>
                             <div class="odometer odometer2">000</div>
                             <div>
                                 <p class="m-0 color-sottomeu" style="font-size: 1.5rem;">LUCE + GAS</p>
@@ -242,11 +246,8 @@
                 </div>
             </div>
         </section>
-
     </div>
 </div>
-
-
 <!-- BLOCCO UN PULSANTE -->
 <!--<section id="content6-2l" class="mbr-section article mbr-section__container" style="padding-top: 0px; padding-bottom: 80px;">
     <div class="container">
@@ -284,8 +285,6 @@
 <!-- BLOCCO BANNER 1 -->
 <div class="py-0 py-sm-5 bg-light-color">
     <div id="divContainerBanner1" style="max-width: 1600px;" class="inject m-auto position-relative" params="injectFasciaAndLoadBanner,'bannerFascia3.html', 'divContainerBanner1', 'bannerfascia1', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia1', false">&nbsp;</div>
-
-
     <!--<div id="divContainerBanner1" style="max-width: 1600px;" class="inject m-auto position-relative" " params="injectbootstrapportfolioandloadbanner,'bootstrapBannerfascia3.html', 'divContainerBanner1', 'bannerfascia1', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia1', false">&nbsp;</div>-->
 </div>
 <!-- BLOCCO BANNER 2 -->
@@ -294,9 +293,8 @@
     <!--<div id="divContainerBanner2" style="max-width: 1600px;" class="inject m-auto position-relative" " params="injectbootstrapportfolioandloadbanner,'bootstrapBannerfascia2.html', 'divContainerBanner2', 'bannerfascia1', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia2', false">&nbsp;</div>-->
 </div>
 <!-- BLOCCO BANNER 3 -->
-<div class="py-0 py-sm-5 bg-light-color">
+<div class="py-0 py-sm-5 bg-light-color no-plygon-bottom">
     <div id="divContainerBanner3" style="max-width: 1600px;" class="inject m-auto position-relative" params="injectFasciaAndLoadBanner,'bannerFascia3.html', 'divContainerBanner3', 'bannerfascia3', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia3', false">&nbsp;</div>
-
     <!--<div id="divContainerBanner3" style="max-width: 1600px;" class="inject m-auto position-relative" " params="injectbootstrapportfolioandloadbanner,'bootstrapBannerfascia3.html', 'divContainerBanner3', 'bannerfascia3', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-fascia3', false">&nbsp;</div>-->
 </div>
 <!-- BLOCCO BANNER 4 -->
@@ -317,15 +315,14 @@
     </div>
 </section>
 <script>
-// <![CDATA[
+    // <![CDATA[
     function newsubscribe(btn, item) {
         var ctrmail = $('#' + item);
         __doPostBack('inseriscinewsletter', ctrmail[0].value);
     }
-// ]]>
-</script>
+// ]]></script>
 <!--BLOCCO BLOG NEWS-->
-<div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2">
+<div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2 no-plygon-top">
     <div id="divContainerNewsTitle" style="display: none;">
         <div class="col-sm-12">
             <div class="text-center py-4 mb-0"><a class="mbr-section-title" href="/it/blog/news-1" target="_self">&emsp;Blog&emsp;</a></div>

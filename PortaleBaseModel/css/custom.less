@@ -3894,15 +3894,17 @@ Breadcrumb
     padding: 5px 0;
 }
 
-.linksmall a {
-    color: #3594BA;
+.linksmall a, .linksmall-blog a, .linksmall-blog {
+    color: @bg-button-color;
     text-decoration: none;
     font-size: 90%;
+
+    &:hover {
+        color: lighten(@bg-button-color, 8%);
+    }
 }
 
-.linksmall-blog a {
-    color: #3594BA;
-    text-decoration: none;
+.linksmall-blog a, .linksmall-blog {
     font-size: 100%;
 }
 
