@@ -389,7 +389,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Spare1 = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtWE"))).Value;
         cli.Pivacf = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtPI"))).Value;
         cli.Professione = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtPF"))).Value;
-        cli.Codicisconto = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCS"))).Value;
+        cli.Codicisconto = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtCS"))).Value.ToLower();
 
         string datanascita = ((HtmlInputText)(((RepeaterItem)((System.Web.UI.WebControls.Button)sender).NamingContainer).FindControl("txtDN"))).Value;
         DateTime _dt = DateTime.MinValue;
@@ -554,7 +554,7 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         cli.Spare1 = txtWE.Value.Trim();
         cli.Pivacf = txtPI.Value.Trim();
         cli.Professione = txtPF.Value.Trim();
-        cli.Codicisconto = txtCS.Value.Trim();
+        cli.Codicisconto = txtCS.Value.Trim().ToLower();
 
         string datanascita = txtDN.Value.Trim();
         DateTime _dt = DateTime.MinValue;

@@ -104,7 +104,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
     protected void btnCodiceSconto_Click(object sender, EventArgs e)
     {
-        string insertedcode = txtCodiceSconto.Text.ToLower();
+        string insertedcode = txtCodiceSconto.Text;
         string validcode = ConfigManagement.ReadKey("codicesconto");
 
         ClientiDM cDM = new ClientiDM();

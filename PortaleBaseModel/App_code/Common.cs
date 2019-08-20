@@ -1302,7 +1302,7 @@ public class CommonPage : Page
         double valoresconto = 0;
         string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
         //Prendo la percentuale da quella in configurazione
-        if (Session["codicesconto"] != null && Session["codicesconto"].ToString() == ConfigManagement.ReadKey("codicesconto"))
+        if (Session["codicesconto"] != null && Session["codicesconto"].ToString().ToLower() == ConfigManagement.ReadKey("codicesconto").ToLower())
         {
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
@@ -1314,7 +1314,7 @@ public class CommonPage : Page
         {
             double percscontocommerciale = 0;
             //Se presente un codice sconto
-            string codicesconto = Session["codicesconto"].ToString();
+            string codicesconto = Session["codicesconto"].ToString().ToLower();
             //Promviamo a vedere se il codice sconto ha associato un0anagrafica commerciale
             //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
             if (cli != null && cli.Id_cliente != 0)
