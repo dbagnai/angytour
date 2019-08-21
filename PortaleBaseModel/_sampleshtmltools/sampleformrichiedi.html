@@ -1,0 +1,590 @@
+﻿<script>
+    // <![CDATA[
+    $('#divTitleContainer').html('');
+    jQuery(document).ready(function () {
+        $('#ctl00_divContattiMaster').html('');
+    });
+    // ]]></script>
+<section id="header3-2k" class="mbr-section mbr-section__container article" style="padding-top: 20px; padding-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mbr-section-title display-2">Richiedi la tua campionatura gratuita</h1>
+                <h2 class="mbr-section-subtitle">Sei un Bar, un Ristorante o una tabaccheria?</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mbr-section article mbr-section__container" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 lead" style="text-align: justify;">
+                <p><b>Prova il vero croccante artigianale Umbro</b> della Golose Tentazioni <b>gratuitamente</b> potrai scegliere di acquistarlo online ad un prezzo riservato solo ai rivenditori, <b>riempi il form</b> e registra la tua attivit&agrave; tramite il modulo in questa pagina.</p>
+            </div>
+            <div class="col-12 col-md-6 lead" style="text-align: justify;">
+                <p><b>Ti invieremo gratuitamente la campionatura</b> che potrai gustare ed offrire ai tuoi clienti, al termine della quale potrai scegliere <b>senza alcun vincolo</b> se diventare nostro cliente usufruendo di <b>prezzi fortemente scontati dedicati ai rivenditori autorizzati</b>.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 lead" style="text-align: justify;">Puoi contattarci telefonicamente al +39 075 5287238 per qualsiasi esigenza.</div>
+        </div>
+    </div>
+</section>
+<div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
+<div class="ui-15 bg-light-color" runat="server" id="divContactForm" clientidmode="static" visible="false">
+    <div class="container">
+        <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-8 tx-dark-color"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Ui Form -->
+        <div class="ui-form">
+            <!-- Heading -->
+            <div class="row justify-content-center pb-5" style="padding-right: inherit;">
+                <div class="col-md-8 col-md-offset-2" id="formbtniscrivi">
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <p class="mb-0  subtitle-isotope">Dati Azienda</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="ragsocbtniscrivi" name="uname" placeholder="Denominazione azienda" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="nomebtniscrivi" name="uname" placeholder="Cognome e Nome Responsabile" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="pivabtniscrivi" name="unname" placeholder="Partita iva azienda" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="sdibtniscrivi" name="unname" placeholder="Codice destinatario Sdi ( per emissione fattura )" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="telefonobtniscrivi" name="unname" placeholder="Telefono" /> <label class="ui-icon"><i class="fa fa-phone"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="emailbtniscrivi" name="unname" placeholder="Email" /> <label class="ui-icon"><i class="fa fa-envelope-o"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <p class="mb-0  subtitle-isotope">Indirizzo di Fatturazione</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="capbtniscrivi" name="unname" placeholder="Cap" /> <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="indirizzobtniscrivi" name="unname" placeholder="Indirizzo (Via/P.za ..)" /> <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                    </div>
+                    <script>
+                        // <![CDATA[
+                        /*----------------------------------------------------------------------*/
+                        //FILL DELLE CASELLE GEOGRAFICHE
+                        var seln1 = "IT";
+                        var selr1 = ""; //preselezione regione  ....
+                        var selp1 = "";
+                        var selc1 = "";
+                        (function wait() {
+                            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
+                                GestioneDdlGeo('all', lng, seln1, selr1, selp1, selc1, 'nazionebtniscrivi', 'regionebtniscrivi', 'provinciabtniscrivi', 'comunebtniscrivi');
+
+                            } else {
+                                setTimeout(wait, 300);
+                            }
+                        })();
+                        /*----------------------------------------------------------------------*/
+                        // ]]></script>
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input" style="display: none; width: 0px;"><select id="nazionebtniscrivi" name="nazionebtniscrivi" class="form-control searchgeo" onchange="javascript:GestioneDdlGeo('nazionebtniscrivi,cascade',lng,this.value,'','','','nazionebtniscrivi','btniscrivi','provinciabtniscrivi','comunebtniscrivi')"></select></div>
+                            <div class="ui-input"><select id="regionebtniscrivi" name="regionebtniscrivi" class="form-control searchgeo" onchange="javascript:GestioneDdlGeo('regionebtniscrivi,cascade',lng,$('#nazionebtniscrivi')[0].value,this.value,'','','nazionebtniscrivi','regionebtniscrivi','provinciabtniscrivi','comunebtniscrivi')"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input"><select id="provinciabtniscrivi" name="provinciabtniscrivi" class="form-control searchgeo" style="width: 100%;" onchange="javascript:GestioneDdlGeo('provinciabtniscrivi,cascade',lng,$('#nazionebtniscrivi')[0].value,$('#regionebtniscrivi')[0].value,this.value,'','nazionebtniscrivi','regionebtniscrivi','provinciabtniscrivi','comunebtniscrivi')"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input"><select id="comunebtniscrivi" name="comunebtniscrivi" class="form-control searchgeo" style="width: 100%;"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <p class="mb-0  subtitle-isotope">Indirizzo di Spedizione ( se diverso )</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="capsbtniscrivi" name="unname" placeholder="Cap" /> <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="indirizzosbtniscrivi" name="unname" placeholder="Indirizzo (Via/P.za ..)" /> <label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                    </div>
+                    <script>
+                        // <![CDATA[
+                        /*----------------------------------------------------------------------*/
+                        //FILL DELLE CASELLE GEOGRAFICHE
+                        var seln2 = "IT";
+                        var selr2 = ""; //preselezione regione  ....
+                        var selp2 = "";
+                        var selc2 = "";
+                        (function wait() {
+                            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
+                                GestioneDdlGeo('all', lng, seln2, selr2, selp2, selc2, 'nazionesbtniscrivi', 'regionesbtniscrivi', 'provinciasbtniscrivi', 'comunesbtniscrivi');
+
+                            } else {
+                                setTimeout(wait, 300);
+                            }
+                        })();
+                        /*----------------------------------------------------------------------*/
+                        // ]]></script>
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input" style="display: none; width: 0px;"><select id="nazionesbtniscrivi" name="nazionesbtniscrivi" class="form-control searchgeo" onchange="javascript:GestioneDdlGeo('nazionesbtniscrivi,cascade',lng,this.value,'','','','nazionesbtniscrivi','sbtniscrivi','provinciasbtniscrivi','comunesbtniscrivi')"></select></div>
+                            <div class="ui-input"><select id="regionesbtniscrivi" name="regionesbtniscrivi" class="form-control searchgeo" onchange="javascript:GestioneDdlGeo('regionesbtniscrivi,cascade',lng,$('#nazionesbtniscrivi')[0].value,this.value,'','','nazionesbtniscrivi','regionesbtniscrivi','provinciasbtniscrivi','comunesbtniscrivi')"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input"><select id="provinciasbtniscrivi" name="provinciasbtniscrivi" class="form-control searchgeo" style="width: 100%;" onchange="javascript:GestioneDdlGeo('provinciasbtniscrivi,cascade',lng,$('#nazionesbtniscrivi')[0].value,$('#regionesbtniscrivi')[0].value,this.value,'','nazionesbtniscrivi','regionesbtniscrivi','provinciasbtniscrivi','comunesbtniscrivi')"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="ui-input"><select id="comunesbtniscrivi" name="comunesbtniscrivi" class="form-control searchgeo" style="width: 100%;"></select><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <p class="mb-0  subtitle-isotope">Informazioni aggiuntive</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="chiusurabtniscrivi" name="unname" placeholder="Giorno Chiusura" /> <label class="ui-icon"><i class="fa fa fa-utensils"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="orariobtniscrivi" name="unname" placeholder="Orario Apertura" /> <label class="ui-icon"><i class="fa fa fa-utensils"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="ui-input"><input class="form-control" type="text" id="qcoffebtniscrivi" name="unname" placeholder="Quantit&agrave; giornaliera caff&egrave;" /> <label class="ui-icon"><i class="fa fa fa-utensils"></i></label></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!--<div class="ui-input"><input class="form-control" type="text" id="pvelocibtniscrivi" name="unname" placeholder="Fate Pranzi veloci" /> <label class="ui-icon"><i class="fa fa fa-utensils"></i></label></div>-->
+                            <div class="checkbox" style="margin-top: 25px;"><label> <input type="checkbox" id="chkpvelocibtniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Fate Pranzi Veloci ? </label></div>
+                        </div>
+                    </div>
+                    <div class="ui-input"><textarea class="form-control" rows="4" cols="5" name="q" placeholder="Note .." runat="server" id="descrizionebtniscrivi"></textarea> <label class="ui-icon"><i class="fa fa-comments"></i></label></div>
+                    <div class="row" style="text-align: left;">
+                        <div class="col-sm-12">
+                            <div class="ui-input"><b>Formula di acquisizione del consenso dell'interessato</b><br /> <a target="_blank" style="color: #fec15a;" href="/it/s/privacy-policy-6">Informativa Privacy ex art. 13 Reg. (UE) 2016/679</a><a> <br /> L'interessato acquisite le informazioni dal Titolare, presta il consenso per le finalit&agrave; sotto riportate.<br /> <b>I campi contrassegnati con l'asterisco sono obbligatori.</b><br /> </a></div>
+                            <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacybtniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per accedere al servizio richiesto * </label></div>
+                            <div class="checkbox d-none" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy1btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attivit&agrave; di marketing diretto ed indiretto e ricerche di mercato </label></div>
+                            <div class="checkbox d-none" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy2btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attivit&agrave; di profilazione al fine di migliorare l'offerta di prodotti e servizi </label></div>
+                        </div>
+                    </div>
+                    <div class="ui-input text-center">
+                        <div class="ui-input text-center">
+                            <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
+                        </div>
+                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddoccontrol"></div>
+                        <div class="d-none">
+                            <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddoc" onclick="UploadFiles(this)">Allega Foto</a></div>
+                            <br /> <br /> <input style="visibility: hidden;" type="file" id="uploaddoccontrol" name="uploaddoccontrol" multiple="multiple" onchange="fileselected(this)" />
+                        </div>
+                    </div>
+                    <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationForm(this);" style="width: 200px;" type="button" id="btniscrivi">Invia Richiesta</button></div>
+                </div>
+                <div style="font-weight: 300; font-size: 1.6rem; color: red;" id="divoutputbtniscrivi"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // <![CDATA[
+    var localmessage = {};
+    localmessage.privacy = 'Spuntare la casella per autorizzazione trattamento dati personali per procedere.';
+    localmessage.captcha = "Selezionare la casella Captcha di verifica per procedere con l'inserimento.";
+    localmessage.validation = "Riempire tutti i campi per procedere.!";
+    localmessage.successmsg = "Richiesta campionatura correttamente inviata.";
+    localmessage.errormsg = "Errore nell'inserimento della richiesta. Contattate il supporto per procedere.";
+    localmessage.tipologia = "";
+    localmessage.inputisvalid = false;
+    localmessage.validatemsg = "";
+
+    //precompilatest("btniscrivi");
+    //function precompilatest(btnid, callback) {
+    //    $("[id$='ragsoc" + btnid + "']").val('web mouse consulting srl');
+    //    $("[id$='nome" + btnid + "']").val('daniele bagnai');
+    //    $("[id$='piva" + btnid + "']").val('111111');
+    //    $("[id$='sdi" + btnid + "']").val('222222');
+    //    $("[id$='email" + btnid + "']").val('dbagnai@gmail.com');
+    //    $("[id$='telefono" + btnid + "']").val('333333');
+    //    $("[id$='cap" + btnid + "']").val('47891');
+    //    $("[id$='indirizzo" + btnid + "']").val('strada rovereta, 42');
+    //    $("[id$='caps" + btnid + "']").val('06062');
+    //    $("[id$='indirizzos" + btnid + "']").val('str.comunale di caioncola, 12');
+    //    $("[id$='descrizione" + btnid + "']").val('prova invio richiesta.');
+    //    $("[id$='orario" + btnid + "']").val('8/24');
+    //    $("[id$='chiusura" + btnid + "']").val('lunedì');
+    //    $("[id$='qcoffe" + btnid + "']").val('400');
+    //}
+
+    function ConfirmValidationForm(btnid) {
+
+        var out1 = document.getElementById("divoutput" + btnid.id);
+
+        //($("#aspnetForm").valid()); //Attivo il controllo per la validazione
+        //if (!localmessage.inputisvalid) {
+        //    out1.innerHTML = localmessage.validatemsg;
+        //    return;
+        //}
+        var chk1 = document.getElementById("chkprivacy" + btnid.id);
+        if (!chk1.checked) {
+            out1.innerHTML = localmessage.privacy;
+            return false;
+        } else {
+            out1.innerHTML = '';
+        }
+        var response = grecaptcha.getResponse();
+        if (response.length == 0)  //reCaptcha not verified
+        {
+            out1.innerHTML = localmessage.captcha;
+            return false;
+        }
+        else {
+            if (true) { //fare controllo di validazione ...
+                /*do work and go for postback*/
+                $(btnid).attr("disabled", "")
+                //invio nopostback con handler////////////////////////////////////////////////////
+                var contactdatas = {};
+                contactdatas.chkprivacy = chk1.checked;
+                contactdatas.lingua = lng;
+                var tastotxt = $(btnid).html();
+                getcontactdataform(contactdatas, btnid, function (contactdatas) {
+                    if (contactdatas != null) {
+
+                        $(btnid).html("Wait ..");
+                        inseriscianagraficaenotifica(lng, contactdatas, function (result) {
+
+
+                            if (result == "") {
+                                out1.innerHTML = (localmessage.successmsg);
+                                $("#form" + btnid.id).hide();
+                            }
+                            else
+                                out1.innerHTML = (result);
+
+                            $(btnid).removeAttr("disabled");
+                            $(btnid).html(tastotxt);
+
+                        }, tastotxt);
+
+
+                        //fare inserimento post attività e foto
+                        //preparedataandpost(contactdatas, btnid); //inserisce il pot e notifica il webmaster
+
+                        //var tastotxt = $(btnid).html();
+                        //$(btnid).html("Wait ..");
+                        //inviamessaggiomail(lng, contactdatas, function (result) {
+                        //    if (result) {
+                        //        out1.innerHTML = (result);
+                        //        $(btnid).removeAttr("disabled");
+                        //        $(btnid).html(tastotxt);
+                        //    }
+                        //}, tastotxt);
+
+                    } else {
+                        $(btnid).removeAttr("disabled");
+                        $(btnid).html(tastotxt);
+                        out1.innerHTML = localmessage.validation;
+                    }
+
+                }, $(btnid));
+
+
+            } else {
+                console.log('not  validated');
+                return false;
+            }
+        }
+    }
+
+
+
+
+    function getcontactdataform(contactdatas, btnid, callback) {
+        var contactdatas = contactdatas || {};
+        contactdatas.idofferta = '';
+        contactdatas.ragsoc = $("[id$='ragsoc" + (btnid).id + "']").val();
+        contactdatas.nome = $("[id$='nome" + (btnid).id + "']").val();
+        contactdatas.piva = $("[id$='piva" + (btnid).id + "']").val();
+        contactdatas.sdi = $("[id$='sdi" + (btnid).id + "']").val();
+        contactdatas.email = $("[id$='email" + (btnid).id + "']").val();
+        contactdatas.telefono = $("[id$='telefono" + (btnid).id + "']").val();
+        contactdatas.cap = $("[id$='cap" + (btnid).id + "']").val();
+        contactdatas.indirizzo = $("[id$='indirizzo" + (btnid).id + "']").val();
+        contactdatas.nazione = $("[id$='nazione" + (btnid).id + "']")[0].value;
+        contactdatas.regione = $("[id$='regione" + (btnid).id + "']")[0].value;
+        contactdatas.provincia = $("[id$='provincia" + (btnid).id + "']")[0].value;
+        contactdatas.comune = $("[id$='comune" + (btnid).id + "']")[0].value;
+
+        contactdatas.caps = $("[id$='caps" + (btnid).id + "']").val();
+        contactdatas.indirizzos = $("[id$='indirizzos" + (btnid).id + "']").val();
+        contactdatas.naziones = $("[id$='naziones" + (btnid).id + "']")[0].value;
+        contactdatas.regiones = $("[id$='regiones" + (btnid).id + "']")[0].value;
+        contactdatas.provincias = $("[id$='provincias" + (btnid).id + "']")[0].value;
+        contactdatas.comunes = $("[id$='comunes" + (btnid).id + "']")[0].value;
+
+        contactdatas.descrizione = $("[id$='descrizione" + (btnid).id + "']").val();
+
+
+        contactdatas.orario = $("[id$='orario" + (btnid).id + "']").val();
+        contactdatas.chiusura = $("[id$='chiusura" + (btnid).id + "']").val();
+        contactdatas.qcoffe = $("[id$='qcoffe" + (btnid).id + "']").val();
+        contactdatas.chkpveloci = $("[id$='chkpveloci" + (btnid).id + "']")[0].checked;
+
+        contactdatas.tipologia = localmessage.tipologia;
+        contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
+        contactdatas.consenso1 = $("[id$='chkprivacy1" + (btnid).id + "']")[0].checked;
+        contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
+        contactdatas.lingua = lng;
+        contactdatas.tipo = "post";
+        contactdatas.tipocontenuto = "campionatura";
+
+
+        var validated = true;
+        if (contactdatas.ragsoc == '') { validated = false;; $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.nome == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.piva == '') { validated = false; $("[id$='piva" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='piva" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.sdi == '') { validated = false; $("[id$='sdi" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='sdi" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.cap == '') { validated = false; $("[id$='cap" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='cap" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.regione == '') { validated = false; $("[id$='regione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='regione" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.provincia == '') { validated = false; $("[id$='provincia" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='provincia" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.comune == '') { validated = false; $("[id$='comune" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='comune" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.qcoffe == '') { validated = false; $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.orario == '') { validated = false; $("[id$='orario" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='orario" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.chiusura == '') { validated = false; $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "white"); };
+        if (!validated) contactdatas = null;
+
+        //Controllo obbligatori
+        //if (contactdatas.ragsoc == '' || contactdatas.nome == '' || contactdatas.piva == '' || contactdatas.sdi == '' || contactdatas.email == '' ||
+        //    contactdatas.telefono == '' || contactdatas.cap == '' || contactdatas.indirizzo == '' || contactdatas.regione == '' || contactdatas.provincia == '' || contactdatas.comune == '' ||
+        //    contactdatas.qcoffe == '' || contactdatas.chkpveloci == '' || contactdatas.orario == '' || contactdatas.chiusura == '') contactdatas = null;
+
+
+        callback(contactdatas);
+    }
+
+    //$("#lnkAttach").click(function () {
+    //    $("#uploaddoc").click();
+    //});
+    function UploadFiles(btnupload) {
+        var out1 = document.getElementById("outputbtn" + btnupload.id + "control");
+        var response = grecaptcha.getResponse();
+        if (response.length == 0)  //reCaptcha not verified
+        {
+            out1.innerHTML = localmessage.captcha;
+            return false;
+        }
+        else {
+            $('#' + btnupload.id + 'control').click()
+        }
+    }
+    function fileselected(uplcontrol) {
+
+        var out1 = document.getElementById("outputbtn" + uplcontrol.id);
+        var startbtn = document.getElementById(uplcontrol.id.replace('control', ''));
+        $(startbtn).attr("onclick", "")
+        out1.innerHTML = "";
+        console.log('changed selected files');
+        for (var i = 0; i < uplcontrol.files.length; i++) {
+            console.log(uplcontrol.files[i].name);
+            out1.innerHTML += (uplcontrol.files[i].name);
+        }
+        //Precarico i files in una directoory temporanea nel server!!!
+        uploadfileintmpdir(uplcontrol, startbtn, out1);
+    }
+
+    function uploadfileintmpdir(uplcontrol, startbtn, out1) {
+        var data = new FormData();
+        var fileUpload = uplcontrol;
+        var files = fileUpload.files;
+        for (var i = 0; i < files.length; i++) {
+            (files[i].name);
+            data.append(files[i].name, files[i]);
+        }
+        data.append('q', 'uploadfileinfolder');
+        var tastotxt = $(startbtn).html();
+        $(startbtn).html("ATTENDI ..");
+        $.ajax({
+            url: pathAbs + "/lib/hnd/filehnd.ashx",
+            global: false,
+            contentType: false,
+            processData: false,
+            cache: false,
+            type: "POST",
+            //async: false,
+            data: data,
+            success: function (result) {
+                var valoriritorno = JSON.parse(result);
+                var stringmsg = "";
+                if (valoriritorno.hasOwnProperty("messages")) {
+                    stringmsg = valoriritorno["messages"].join();
+                }
+                var filesimages = "";
+                if (valoriritorno.hasOwnProperty("files")) {
+                    for (var i = 0; i < valoriritorno["files"].length; i++) {
+                        filesimages += "<a style=\"cursor:cell\" link=\"" + valoriritorno["files"][i] + "\" onclick=\"imgdelete(this,'" + out1.id + "')\" ><img class=\"rounded img-thumbnail w-25\" src=\"" + valoriritorno["files"][i] + "\" ></a>";
+                    }
+                }
+                out1.innerHTML = filesimages + '<br/>' + stringmsg;
+                //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+                $(uplcontrol).val("");//Svuoto i files già caricati
+                $(startbtn).attr("onclick", "UploadFiles(this)")
+
+                $(startbtn).html(tastotxt);
+            },
+            error: function (result) {
+                out1.innerHTML = result.responseText;
+            }
+        }, tastotxt);
+    }
+    function imgdelete(file, out1) {
+        out1 = document.getElementById(out1);;
+        var deleeteconfirm = confirm('Vuoi eliminare la foto?');
+        if (deleeteconfirm)
+            $.ajax({
+                url: pathAbs + "/lib/hnd/filehnd.ashx",
+                contentType: "application/json; charset=utf-8",
+                global: false,
+                cache: false,
+                dataType: "text",
+                type: "POST",
+                //async: false,
+                data: { 'q': 'deletefilebypath', 'data': $(file).attr("link") },
+                success: function (result) {
+                    //if (callback)
+                    //    callback(result);
+                    var valoriritorno = JSON.parse(result);
+                    var stringmsg = "";
+                    if (valoriritorno.hasOwnProperty("messages")) {
+                        stringmsg = valoriritorno["messages"].join();
+                    }
+                    var filesimages = "";
+                    if (valoriritorno.hasOwnProperty("files")) {
+
+                        for (var i = 0; i < valoriritorno["files"].length; i++) {
+                            filesimages += "<a style=\"cursor:cell\" link=\"" + valoriritorno["files"][i] + "\" onclick=\"imgdelete(this,'" + out1.id + "')\" ><img class=\"rounded img-thumbnail w-25\" src=\"" + valoriritorno["files"][i] + "\" ></a>";
+                        }
+                    }
+                    out1.innerHTML = filesimages + '<br/>' + stringmsg;
+                },
+                error: function (result) {
+                    console.log(result.responseText);
+                }
+            });
+    }
+
+    function preparedataandpost(contactdatas, btnid) {
+        var data = new FormData();
+        data.append('q', 'insertpost');
+        data.append('formdata', JSON.stringify(contactdatas));
+        var fileUpload = document.getElementById("uploaddoccontrol");;
+        //var files = fileUpload.files;
+        var files = fileUpload.files;
+        for (var i = 0; i < files.length; i++) {
+            (files[i].name);
+            data.append(files[i].name, files[i]);
+        }
+        var tastotxt = $(btnid).html();
+        $(btnid).html("ATTENDI ..");
+        insertPostWithFiles(lng, data, function (result) {
+            //Meaaggio finale e svuotamento del FORM!!!
+            var out1 = document.getElementById("divoutput" + btnid.id);
+            if (result == "") {
+                out1.innerHTML = (localmessage.successmsg);
+                $("#form" + btnid.id).hide();
+            }
+            else
+                out1.innerHTML = (result);
+
+            $(btnid).removeAttr("disabled");
+            $(btnid).html(tastotxt);
+        }, tastotxt);
+    }
+    function insertPostWithFiles(lng, data, callback) {
+        var lng = lng || "I";
+        var data = data || {};
+
+        $.ajax({
+            url: pathAbs + "/lib/hnd/filehnd.ashx",
+            global: false,
+            contentType: false,
+            processData: false,
+            cache: false,
+            type: "POST",
+            //async: false,
+            data: data,
+            success: function (result) {
+                if (callback)
+                    callback(result);
+                //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+            },
+            error: function (result) {
+                if (callback)
+                    callback(result.responseText);
+            }
+        });
+    }
+
+
+    //$(document).ready(function () {
+    //    validateinit();
+    //});
+
+    //function validateinit() {
+    //    $("#aspnetForm").validate({
+    //        ignore: [], //Abilita il controllo dei campi Hidden!
+    //        rules: {
+    //            descrizionebtniscrivi: {
+    //                required: true,
+    //                minlength: 250,
+    //                noSpacesonlytext: true
+    //            }
+    //        },
+    //        messages: {
+    //            descrizionebtniscrivi: {
+    //                required: "Inserisci la descrizione del ristorante",
+    //                minlength: "Nome almeno 250 caratteri"
+    //            }
+    //        }, showErrors: function (errorMap, errorList) {
+    //            if (this.numberOfInvalids() == 0) {
+    //                localmessage.inputisvalid = true;
+    //                localmessage.validatemsg = "";
+    //            }
+    //            else {
+    //                localmessage.inputisvalid = false;
+    //                localmessage.validatemsg = "Impossibile inviare. Numero di errori relevati: " + this.numberOfInvalids();
+    //                if (errorList.length > 0) {
+    //                    for (var x = 0; x < errorList.length; x++) {
+    //                        localmessage.validatemsg += "<br/>\n\u25CF " + errorList[x].message;
+    //                    }
+    //                }
+    //            }
+    //            this.defaultShowErrors();
+    //        }
+    //    });
+    //}
+// ]]></script>

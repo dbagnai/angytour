@@ -1,0 +1,92 @@
+﻿<script>
+    // <![CDATA[
+    jQuery(document).ready(function () {
+        $('#divTitleContainer').html('');
+        $('#searchblock').html('');
+    });
+    // ]]></script>
+<section id="header3-2k" class="mbr-section mbr-section__container article" style="padding-top: 20px; padding-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mbr-section-title display-2">Il blog del Poggio</h1>
+                <h2 class="mbr-section-subtitle">Qui puoi scoprire novit&agrave;, attivit&agrave;, prodotti dell'azienda agricola il Poggio </h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--BLOCCO BLOG NEWS-->
+<div class="bg-light-color position-relative my-0 mx-auto pt-3 pb-4 px-2">
+    <div id="divContainerNewsTitle" style="display: none;">
+        <div class="col-sm-12">
+            <div class="text-center py-4 mb-0"><a class="mbr-section-title" href="/it/blog/blog" target="_self">Ultime novit&agrave;</a></div>
+        </div>
+    </div>
+    <div class="position-relative my-0 mx-auto px-2" style="max-width: 1600px;">
+        <div id="divContainerNews" class="inject" params="'injectScrollerAndLoad','owlscrollerOfferte-m.html', 'divContainerNews', 'carouselInject2', '', 'rif000002', '', true, false, 12">&nbsp;</div>
+    </div>
+</div>
+
+<!--  Navigazione blog con isotope banners -->
+<div class="bg-light-color">
+    <div>
+        <div class="col-sm-12">
+            <h3 class="text-center mbr-section-title display-2">Sfoglia tutte le rubriche</h3>
+            <p class="lead text-center">Scopri tutti i segreti per fare e mangiare un ottimo sushi.</p>
+        </div>
+    </div>
+    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display: none;">
+        <div id="divContainerBlog1" class="inject mx-auto pb-5" style="max-width: calc(1600px + 2rem);" params="'injectPortfolioAndLoadBanner','IsotopeBanner4b.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog', false">&nbsp;</div>
+    </div>
+</div>
+
+
+<!--  Navigazione blog con bootstrap cards banners -->
+<div class="bg-light-color">
+    <div>
+        <div class="col-sm-12">
+            <h3 class="text-center mbr-section-title display-2">Sfoglia tutte le rubriche</h3>
+            <p class="lead text-center">Scopri tutti i segreti per fare e mangiare un ottimo sushi.</p>
+        </div>
+    </div>
+    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display: none;">
+        <div id="divContainerBlog1" style="max-width: calc(2100px + 2rem);" class="inject  mx-auto pb-5" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner4.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '8', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog0', false">&nbsp;</div>
+    </div>
+</div>
+
+
+<!--  Navigazione blog -->
+<div class="bg-light-color">
+    <div>
+        <div class="col-sm-12">
+            <h3 class="text-center mbr-section-title display-2">Sfoglia tutte le rubriche</h3>
+            <p class="lead text-center">Scopri tutti i segreti per fare e mangiare un ottimo sushi.</p>
+        </div>
+    </div>
+    <div class="position-relative my-0 mx-auto p-0" style="max-width: 100%; display: none;">
+        <!--<div id="divContainerBlog1" class="inject mx-auto pb-5" style="max-width: calc(1600px + 2rem);" params="'injectPortfolioAndLoadBanner','IsotopeBanner4b.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog', false">&nbsp;</div>-->
+        <div id="divContainerBlog1" style="max-width: calc(2100px + 2rem);" class="inject  mx-auto pb-5" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner4.html', 'divContainerBlog1', 'isoBanblog1', 1, 1, false, '', '8', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-blog', false">&nbsp;</div>
+    </div>
+</div>
+
+
+<!-- BLOCCO NEWS LETTER titolo + testo -->
+<section id="content5-13" class="mbr-section mbr-parallax-background my-5" style="background-image: url('/public/Files/con001000/1/sfondo-newsletter.jpg'); padding-top: 140px; padding-bottom: 140px;">
+    <!--<div class="mbr-overlay"></div>-->
+    <div class="container">
+        <h3 class="text-center mbr-section-title display-2 white-color">Ricevi le nostre promozioni</h3>
+        <div class="text-center lead">
+            <p class="white-color"> Inserisci il tuo indirizzo email per ricevere le promozioni e le offerte di Dove Mangiare in Veneto, ti manderermo solo le nostre migliori selezioni e offerte di ristoranti.</p>
+        </div>
+        <input class="form-control my-1 mx-auto" style="width: 250px;" type="text" id="inpEmail" placeholder="indirizzo email" />
+        <div class="text-center"><input class="btn btn-lg btn-primary mbr-editable-button my-0 mx-auto" onclick="javascript:newsubscribe(this,'inpEmail')" style="width: 150px;" type="button" value="Iscriviti" /></div>
+    </div>
+</section>
+<script>
+    // <![CDATA[
+    function newsubscribe(btn, item) {
+        var ctrmail = $('#' + item);
+        __doPostBack('inseriscinewsletter', ctrmail[0].value);
+    }
+// ]]></script>
