@@ -28,7 +28,9 @@ function lazyLoad() {
     }
     cleanLazy();
 }
-
+$(document).ready(function () {
+    lazyLoad();
+});
 function cleanLazy() {
     lazy = Array.prototype.filter.call(lazy, function (l) { return l.getAttribute('data-src'); });
 }
