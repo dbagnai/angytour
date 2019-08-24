@@ -5240,7 +5240,10 @@ namespace WelcomeLibrary.DAL
 
                 string mediastars = "";
                 if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 0)
-                    mediastars = scores[_o.Id][0].ToString();
+                    //mediastars = scores[_o.Id][0].ToString();
+                    mediastars = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N1}", new object[] { scores[_o.Id][0] }).Replace(".", "").Replace(",", ".");// scores[_o.Id][0].ToString();
+
+
                 tmp.Add("stars", mediastars); //media delle recensioni per la scheda
                 string nfeeds = "";
                 if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 1)
