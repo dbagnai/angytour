@@ -231,6 +231,17 @@ public class CommonPage : Page
                 html = html.Insert(FormEndStart, "<div style=\"display:none\">" + viewstateInput + "</div>");
             }
         }
+
+#if false
+        //////////////////
+        //////MINIFICAZIONE HTML
+        //////////////////
+        //righe per minificare html in pagina ( problema funzionamento updatepanels nei porstback !!! )
+        if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
+            html = NUglify.Uglify.Html(html).Code; 
+#endif
+
+
         writer.Write(html);
     }
 
