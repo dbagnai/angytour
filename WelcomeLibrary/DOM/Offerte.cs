@@ -1407,6 +1407,7 @@ namespace WelcomeLibrary.DOM
             _tmp["Archiviato"] = this.Archiviato.ToString();
             _tmp["linkVideo"] = this.linkVideo.ToString();
             _tmp["Autore"] = this.Autore.ToString();
+            _tmp["Autorenome"] = this.Autorenome.ToString();
             _tmp["Xmlvalue"] = this.Xmlvalue.ToString();
 
             _tmp["Caratteristica1"] = this.Caratteristica1.ToString();

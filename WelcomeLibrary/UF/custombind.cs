@@ -3060,6 +3060,19 @@ namespace WelcomeLibrary.UF
                                 nodetobind.Attributes.Add("data-thumb", pathImg);
                         }
                     }
+                    else if (nodetobind.Name == "img" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("avatar"))
+                    {
+                        string completepath = "";
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            idscheda = itemdic[property];
+                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("avatar"))
+                                completepath = linkloaded[idscheda]["avatar"];
+
+                            nodetobind.SetAttributeValue("src", completepath);
+                        }
+                    }
                     else if (nodetobind.Name == "img")
                     {
                         string completepath = "";
@@ -3111,19 +3124,7 @@ namespace WelcomeLibrary.UF
 
                         }
                     }
-                    else if (nodetobind.Name == "img" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("avatar"))
-                    {
-                        string completepath = "";
-                        string idscheda = "";
-                        if (itemdic.ContainsKey(property))
-                        {
-                            idscheda = itemdic[property];
-                            if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("avatar"))
-                                completepath = linkloaded[idscheda]["avatar"];
-
-                            nodetobind.SetAttributeValue("src", completepath);
-                        }
-                    }
+                  
 
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("flexmaincontainer"))
                     {
@@ -3712,6 +3713,7 @@ namespace WelcomeLibrary.UF
                                 //else
                                 //    valore = ret;
                             }
+                            else ret = valore[0];
 
                             if (ret == "true" || ret == "false")
                             {
