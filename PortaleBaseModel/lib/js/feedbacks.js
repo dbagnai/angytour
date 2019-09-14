@@ -81,7 +81,7 @@ function commentclosure(varname) {
         //loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
         (function wait() {
             if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
-                loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento!
+                loadref(mainscope.varname + '.rendercomments', idpost, idcontainer, lng); //Faccio la chiamata inserendola nella coda di controllo per caricamento dati di riferimento(obsoleto, il loadref e solo fittizio)!
             } else {
                 setTimeout(wait, 300);
             }
@@ -128,6 +128,11 @@ function commentclosure(varname) {
                     $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks1'));
                     $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle1'));
                     inizializzastars();
+
+                    //inseriamo i microdati per aggregaterating  
+                    //<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="89" /> <meta itemprop="ratingValue" content="4.4" /></div>
+                    $("#" + mainscope.idcontainer + "-totals").prepend('<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="' + mainscope.localcontainer.totaleapprovati + '" /> <meta itemprop="ratingValue" content="' + mainscope.localcontainer.totalemediastars + '" /></div>');
+
                 }
             }
             else
