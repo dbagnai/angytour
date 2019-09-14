@@ -4,8 +4,8 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
                 <div class="card m-2 border-tipo2" style="overflow:hidden">
                     <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
-                        <div class="position-relative imgovercontainer">
-                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                        <div class="position-relative imgovercontainer" style="width:100%;height:270px">
+                            <img src="/images/dummylogo.png" alt="" class="bind imgcontained lazy" mybind="Id" />
                             <div class="card-img-overlay">
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         </div>-->
                         <div class="float-right pt-sm-2">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center pt-2" style="min-height:160px">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h3 class="card-title titolo-offerta mb-2">
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
@@ -76,9 +76,9 @@
                             </div>
 
                             <!-- PREZZO -->
-                            <div class="float-right text-right prezzo-responsive pl-0">
-                                <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><br/>
-                                <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                            <div class="float-right text-right  pl-0">
+                                <span class="bind tx-primary-color" style="font-size:1.9rem;line-height:25px" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><br/>
+                                <span style="font-size:1.1rem;text-decoration:line-through;line-height:25px" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                             </div>
 
                         </div>

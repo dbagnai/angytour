@@ -6,14 +6,19 @@
                 <div class="card m-2 border-tipo1" style="overflow:hidden">
 
                     <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
-                        <div class="position-relative imgovercontainer">
+                        <!--<div class="position-relative imgovercontainer">
                             <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
                             <div class="card-img-overlay">
+                            </div>
+                        </div>-->
+                        <div class="position-relative imgovercontainer mt-0" style="width:100%;height:250px">
+                            <img src="/images/dummylogo.png" alt="" class="bind imgcontained lazy" mybind="Id" />
+                            <div class="item-img-overlay">
                             </div>
                         </div>
                     </a>
 
-                    <div style="padding:0 1.25rem;position:relative;">
+                    <div style="padding-left:10px;padding-right:20px;position:relative;">
                         <!--<div class="avatar avatar-large float-left">
                             <div class="avatar-inner">
                                 <img class="bind avatar" mybind="Id" src="" />
@@ -28,22 +33,22 @@
                         <!--<div class="float-left pt-sm-2" style="color:#ccc">
                             <span class="fa fa-eye"></span><span class="bind" mybind="Id" myvalue="views" format="formatviews"></span>
                         </div>-->
-                        <div class="bind float-left linksmall py-1" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
-                        <div class="float-right py-1">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
+                        <div class="bind float-left py-1" style="font-size:0.8rem" mybind="Id" myvalue="linksezione" format="formatlinksezione"></div>
+                        <div class="float-right pt-sm-2">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
                     </div>
 
                     <div class="card-body text-left">
 
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                            <h3 class="card-title titolo-offerta mb-2">
-                                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            <h3 class="card-title titolo-offerta mb-2"  style="font-size:1.2rem">
+                                <span   class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                             </h3>
                             <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
-                                <span class="bind linksmall-blog" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
                             </h4>
                         </a>
                         <div class="card-text">
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="130" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />
                         </div>
 
                         <!--<div class="">

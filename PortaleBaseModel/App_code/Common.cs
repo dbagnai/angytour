@@ -128,22 +128,23 @@ public class CommonPage : Page
         int i = 1;
         foreach (Tabrif l in links)
         {
-            sb.Append("<li>");
+            sb.Append("<li itemprop=\"itemListElement\" itemscope itemtype=\"https://schema.org/ListItem\"> ");
 
-            if (links.Count != i)
-            {
-                sb.Append("<a");
-                //if (resetsession)
-                //    sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                sb.Append("   href=\"" + l.Campo1 + "\">");
-                sb.Append(l.Campo2);
-                sb.Append("</a> ");
-            }
-            else
-            {
-                sb.Append(l.Campo2);
-            }
+            //if (links.Count != i)
+            //{
+            sb.Append("<a itemtype=\"https://schema.org/Thing\" itemprop=\"item\"");
+            sb.Append(" href=\"" + l.Campo1 + "\">");
+            sb.Append("<span itemprop=\"name\">");
+            sb.Append(l.Campo2);
+            sb.Append("</span>");
+            sb.Append("</a> ");
+            //}
+            //else
+            //{
+            //    sb.Append(l.Campo2);
+            //}
 
+            sb.Append("<meta itemprop=\"position\" content=\"" + i + "\" />");
             sb.Append("</li>");
 
             i++;
@@ -151,6 +152,7 @@ public class CommonPage : Page
         }
         return sb.ToString();
     }
+
 
     public static void CustomContentInject(System.Web.UI.HtmlControls.HtmlGenericControl divcontainer, string filename, string Lingua, string username, System.Web.SessionState.HttpSessionState sessione = null)
     {

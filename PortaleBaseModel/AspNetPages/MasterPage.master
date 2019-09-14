@@ -417,7 +417,7 @@
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative">
                 <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb"  itemscope itemtype="https://schema.org/BreadcrumbList">
                     </ul>
                 </div>
             </div>
