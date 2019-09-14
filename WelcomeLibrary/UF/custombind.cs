@@ -3124,7 +3124,7 @@ namespace WelcomeLibrary.UF
 
                         }
                     }
-                  
+
 
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("flexmaincontainer"))
                     {
@@ -3838,6 +3838,35 @@ namespace WelcomeLibrary.UF
                             ret = linkloaded[valore[0]][prop[0]];
                         if (ret != null && ret.Trim() != "")
                             ret = "true";
+                        else
+                            ret = "false";
+                    }
+                    catch { }
+                    break;
+                case "formatvisibilitybyvalore":
+                    try
+                    {
+                        ret = "false";
+                        var valorenumerico = valore[1];
+                        double.TryParse(valorenumerico, out double p);
+                        if (p == 0)
+                        {
+                            ret = "true";
+                        }
+                        else
+                            ret = "false";
+                    }
+                    catch { }
+                    break;
+                case "formatvisibilitybystring":
+                    try
+                    {
+                        ret = "false";
+                        var valorestringa = valore[1];
+                        if (string.IsNullOrEmpty(valorestringa))
+                        {
+                            ret = "true";
+                        }
                         else
                             ret = "false";
                     }
