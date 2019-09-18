@@ -546,6 +546,7 @@
             "~/lib/js/bookingtool.js",
             "~/lib/js/videoBanner.js",
             "~/lib/js/feedbacks.js",
+            "~/lib/js/formmng.js",
             "~/js/maininit.js"
         );
 

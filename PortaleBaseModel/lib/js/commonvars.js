@@ -44,6 +44,8 @@ var promisecalling = false;
 var callqueque = [];
 var globalObject = {};
 var enablescrolltopmem = false;
+var localmessagegeneral = {};
+
 
 var utf8ToB64 = function (s) {
     return btoa(unescape(encodeURIComponent(s)));

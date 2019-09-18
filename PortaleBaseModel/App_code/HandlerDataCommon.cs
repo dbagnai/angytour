@@ -294,6 +294,105 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     }
 
                     break;
+                case "insertanagraficaeinviamail":
+                    string spasseddata = pars.ContainsKey("data") ? pars["data"] : "";
+                    Dictionary<string, string> data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(spasseddata);
+                    //string actlingua = (data.GetValueOrDefault("lingua") ?? ""); //viene gia passata
+
+                    Cliente cliente = new Cliente();
+                    //Dati Spedizione opzionali
+                    Cliente clispediz = new Cliente(cliente);
+                    clispediz.Cap = (data.GetValueOrDefault("caps") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    clispediz.Indirizzo = (data.GetValueOrDefault("indirizzos") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    clispediz.CodiceNAZIONE = (data.GetValueOrDefault("naziones") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    clispediz.CodiceREGIONE = (data.GetValueOrDefault("regiones") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    clispediz.CodicePROVINCIA = (data.GetValueOrDefault("provincias") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    clispediz.CodiceCOMUNE = (data.GetValueOrDefault("comunes") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
+                    cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                    cliente.Nome = (data.GetValueOrDefault("nome") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Cognome = (data.GetValueOrDefault("ragsoc") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Email = (data.GetValueOrDefault("email") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Telefono = (data.GetValueOrDefault("telefono") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Pivacf = (data.GetValueOrDefault("piva") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Emailpec = (data.GetValueOrDefault("sdi") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+
+                    //Fatturazione
+                    cliente.Cap = (data.GetValueOrDefault("cap") ?? "");
+                    cliente.Indirizzo = (data.GetValueOrDefault("indirizzo") ?? "");
+                    cliente.CodiceNAZIONE = (data.GetValueOrDefault("nazione") ?? "");
+                    cliente.CodiceREGIONE = (data.GetValueOrDefault("regione") ?? "");
+                    cliente.CodicePROVINCIA = (data.GetValueOrDefault("provincia") ?? "");
+                    cliente.CodiceCOMUNE = (data.GetValueOrDefault("comune") ?? "");
+
+                    string datiaggiuntivi = "";
+                    datiaggiuntivi += "Orario aperuta: " + (data.GetValueOrDefault("orario") ?? "");
+                    datiaggiuntivi += " Giorno chiusura: " + (data.GetValueOrDefault("chiusura") ?? "");
+                    datiaggiuntivi += " Quantità giornaliera caffè: " + (data.GetValueOrDefault("chiusura") ?? "");
+                    datiaggiuntivi += " Pranzi veloci: " + (data.GetValueOrDefault("chkpveloci") ?? "");
+
+
+                    string descrizione1 = (data.GetValueOrDefault("descrizione") ?? "");
+                    string tipocontenuto1 = (data.GetValueOrDefault("tipocontenuto") ?? "");
+                    string chkprivacy1 = (data.GetValueOrDefault("chkprivacy") ?? "");
+                    string chknewsletter1 = (data.GetValueOrDefault("chknewsletter") ?? "");
+                    bool spuntaprivacy1 = false;
+                    bool spuntanewsletter1 = false;
+                    bool.TryParse(chkprivacy1, out spuntaprivacy);
+                    bool.TryParse(chknewsletter1, out spuntanewsletter);
+                    string nomedestinatario1 = ConfigManagement.ReadKey("Nome");
+                    string maildestinatario1 = ConfigManagement.ReadKey("Email");
+
+
+                    //------------------------------------------------
+                    //Memorizzo i dati nel cliente in anagrafica
+                    //------------------------------------------------
+                    string tipocliente1 = "0"; //Cliente standard per newsletter
+                                               //  cliente.DataNascita = System.DateTime.Now.Date;
+                    cliente.Lingua = lingua;
+                    cliente.id_tipi_clienti = tipocliente1;
+                    cliente.Consenso1 = true;
+                    cliente.ConsensoPrivacy = true;
+                    cliente.Validato = true;
+                    ClientiDM clidm = new ClientiDM();
+                    Cliente _clitmp1 = clidm.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cliente.Email, tipocliente1);
+                    if ((_clitmp1 != null && _clitmp1.Id_cliente != 0))
+                        cliente.Id_cliente = _clitmp1.Id_cliente;
+                    clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
+
+                    //------------------------------------------------
+                    //Invio mail richiesta  ( inseriamo tutti i dati dei form )
+                    //------------------------------------------------
+                    string SoggettoMail1 = "Richiesta " + tipocontenuto1 + " da " + cliente.Cognome + " tramite il sito " + ConfigManagement.ReadKey("Nome");
+                    string Descrizione1 = descrizione1.Replace("\r", "<br/>") + " <br/> ";
+                    Descrizione1 += " <br/> Il cliente ha richiesto : " + tipocontenuto1;
+                    Descrizione1 += " <br/> Ragione sociale:" + cliente.Cognome + "<br/>Referente: " + cliente.Nome;
+                    Descrizione1 += " <br/> Id anagrafica:" + cliente.Id_cliente;
+                    Descrizione1 += " <br/> Telefono : " + cliente.Telefono + "  <br/>Email : " + cliente.Email;
+                    Descrizione1 += " <br/> Piva : " + cliente.Pivacf + "  <br/>SDI/Pec : " + cliente.Emailpec + " <br/>Lingua : " + lingua;
+
+                    string indirizzofatt = cliente.Indirizzo + "<br/>";
+                    indirizzofatt += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + references.NomeProvincia(cliente.CodicePROVINCIA, lingua) + ")<br/>";
+                    indirizzofatt += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+                    Descrizione1 += " <br/><br/>Dati Fatturazione: <br/>" + indirizzofatt;
+
+                    string indirizzosped = indirizzofatt;
+                    if (!string.IsNullOrEmpty(clispediz.Indirizzo))
+                    {
+                        indirizzosped = clispediz.Indirizzo + "<br/>";
+                        indirizzosped += clispediz.Cap + " " + clispediz.CodiceCOMUNE + "  (" + references.NomeProvincia(clispediz.CodicePROVINCIA, lingua) + ")<br/>";
+                        indirizzosped += "Nazione: " + clispediz.CodiceNAZIONE + "<br/>";
+                    }
+                    Descrizione1 += " <br/>Dati Spedizione: <br/>" + indirizzosped;
+
+                    Descrizione1 += " <br/> Info Aggiuntive:" + datiaggiuntivi;
+                    Descrizione1 += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
+
+                    Utility.invioMailGenerico(cliente.Cognome, cliente.Email, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+
+
+                    break;
                 case "putinsession":
                     context.Session.Add(Key, Value);
                     break;

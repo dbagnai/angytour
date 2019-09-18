@@ -195,10 +195,10 @@
                         <div class="ui-input text-center">
                             <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
                         </div>
-                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddoccontrol"></div>
+                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddocbtniscrivi"></div>
                         <div class="d-none">
-                            <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddoc" onclick="UploadFiles(this)">Allega Foto</a></div>
-                            <br /> <br /> <input style="visibility: hidden;" type="file" id="uploaddoccontrol" name="uploaddoccontrol" multiple="multiple" onchange="fileselected(this)" />
+                            <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddocbtniscrivi" onclick="UploadFiles(this)">Allega Foto</a></div>
+                            <br /> <br /> <input style="visibility: hidden;" type="file" id="controluploaddocbtniscrivi" name="controluploaddocbtniscrivi" multiple="multiple" onchange="fileselected(this)" />
                         </div>
                     </div>
                     <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationForm(this);" style="width: 200px;" type="button" id="btniscrivi">Invia Richiesta</button></div>
@@ -336,22 +336,17 @@
         contactdatas.regione = $("[id$='regione" + (btnid).id + "']")[0].value;
         contactdatas.provincia = $("[id$='provincia" + (btnid).id + "']")[0].value;
         contactdatas.comune = $("[id$='comune" + (btnid).id + "']")[0].value;
-
         contactdatas.caps = $("[id$='caps" + (btnid).id + "']").val();
         contactdatas.indirizzos = $("[id$='indirizzos" + (btnid).id + "']").val();
         contactdatas.naziones = $("[id$='naziones" + (btnid).id + "']")[0].value;
         contactdatas.regiones = $("[id$='regiones" + (btnid).id + "']")[0].value;
         contactdatas.provincias = $("[id$='provincias" + (btnid).id + "']")[0].value;
         contactdatas.comunes = $("[id$='comunes" + (btnid).id + "']")[0].value;
-
         contactdatas.descrizione = $("[id$='descrizione" + (btnid).id + "']").val();
-
-
         contactdatas.orario = $("[id$='orario" + (btnid).id + "']").val();
         contactdatas.chiusura = $("[id$='chiusura" + (btnid).id + "']").val();
         contactdatas.qcoffe = $("[id$='qcoffe" + (btnid).id + "']").val();
         contactdatas.chkpveloci = $("[id$='chkpveloci" + (btnid).id + "']")[0].checked;
-
         contactdatas.tipologia = localmessage.tipologia;
         contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
         contactdatas.consenso1 = $("[id$='chkprivacy1" + (btnid).id + "']")[0].checked;
@@ -391,7 +386,7 @@
     //    $("#uploaddoc").click();
     //});
     function UploadFiles(btnupload) {
-        var out1 = document.getElementById("outputbtn" + btnupload.id + "control");
+        var out1 = document.getElementById("outputbtn" + btnupload.id);
         var response = grecaptcha.getResponse();
         if (response.length == 0)  //reCaptcha not verified
         {
@@ -399,12 +394,12 @@
             return false;
         }
         else {
-            $('#' + btnupload.id + 'control').click()
+            $('#' + 'control' + btnupload.id).click()
         }
     }
     function fileselected(uplcontrol) {
 
-        var out1 = document.getElementById("outputbtn" + uplcontrol.id);
+        var out1 = document.getElementById("outputbtn" + uplcontrol.id.replace('control', ''));
         var startbtn = document.getElementById(uplcontrol.id.replace('control', ''));
         $(startbtn).attr("onclick", "")
         out1.innerHTML = "";
@@ -501,7 +496,7 @@
         var data = new FormData();
         data.append('q', 'insertpost');
         data.append('formdata', JSON.stringify(contactdatas));
-        var fileUpload = document.getElementById("uploaddoccontrol");;
+        var fileUpload = document.getElementById("controluploaddoc" + btnid.id);;
         //var files = fileUpload.files;
         var files = fileUpload.files;
         for (var i = 0; i < files.length; i++) {
@@ -519,11 +514,11 @@
             }
             else
                 out1.innerHTML = (result);
-
             $(btnid).removeAttr("disabled");
             $(btnid).html(tastotxt);
         }, tastotxt);
     }
+
     function insertPostWithFiles(lng, data, callback) {
         var lng = lng || "I";
         var data = data || {};

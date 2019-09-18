@@ -888,5 +888,6 @@
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
+    <%-- <script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </body>
 </html>

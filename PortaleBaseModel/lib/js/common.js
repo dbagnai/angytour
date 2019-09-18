@@ -2177,6 +2177,31 @@ function inviamessaggiomail(lng, data, callback) {
     });
 }
 
+
+function inseriscianagraficaenotifica(lng, data, callback) {
+    var lng = lng || "I";
+    var data = data || {};
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        cache: false,
+        dataType: "text",
+        type: "POST",
+        //async: false,
+        data: { 'q': 'insertanagraficaeinviamail', 'data': JSON.stringify(data), 'lng': lng },
+        success: function (result) {
+            if (callback)
+                callback(result);
+            //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+        },
+        error: function (result) {
+            if (callback)
+                callback(result.responseText);
+        }
+    });
+}
+
 function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallonend) {
     var lng = lng || "I";
     var objfiltro = objfiltro || "";

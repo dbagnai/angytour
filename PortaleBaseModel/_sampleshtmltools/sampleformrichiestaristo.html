@@ -49,10 +49,10 @@
                         <div class="ui-input text-center">
                             <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
                         </div>
-                        <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddoc" onclick="UploadFiles(this)">Allega Foto</a></div>
+                        <div class="btn btn-primary" style="width: 200px;"><a style="color: #fff; font-size: 0.7rem; display: block;" href="#divContactForm" id="uploaddocbtniscrivi" onclick="UploadFilesGeneral(this)">Allega Foto</a></div>
                         <br />
-                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddoccontrol"></div>
-                        <br /> <input style="visibility: hidden;" type="file" id="uploaddoccontrol" name="uploaddoccontrol" multiple="multiple" onchange="fileselected(this)" />
+                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddocbtniscrivi"></div>
+                        <br /> <input style="visibility: hidden;" type="file" id="controluploaddocbtniscrivi" name="controluploaddocbtniscrivi" multiple="multiple" onchange="fileselectedgeneral(this)" />
                     </div>
                     <div class="row" style="text-align: left;">
                         <div class="col-sm-12">
@@ -62,7 +62,7 @@
                             <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy2btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attivit&agrave; di profilazione al fine di migliorare l'offerta di prodotti e servizi </label></div>
                         </div>
                     </div>
-                    <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationForm(this);" style="width: 200px;" type="button" id="btniscrivi">Invia</button></div>
+                    <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationFormGeneral(this);" style="width: 200px;" type="button" id="btniscrivi">Invia</button></div>
                 </div>
                 <div style="font-weight: 300; font-size: 1.6rem; color: red;" id="divoutputbtniscrivi"></div>
             </div>
@@ -159,9 +159,10 @@
         contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
         contactdatas.lingua = lng;
         contactdatas.tipo = "post";
+
         if (contactdatas.titolo == '' || contactdatas.email == '' ||
             contactdatas.telefono == '' || contactdatas.indirizzo == '' ||
-            contactdatas.teletipologiafono == '' || contactdatas.descrizione == '') contactdatas = null;
+            contactdatas.tipologia == '' || contactdatas.descrizione == '') contactdatas = null;
 
         callback(contactdatas);
     }
@@ -170,7 +171,7 @@
     //    $("#uploaddoc").click();
     //});
     function UploadFiles(btnupload) {
-        var out1 = document.getElementById("outputbtn" + btnupload.id + "control");
+        var out1 = document.getElementById("outputbtn" + btnupload.id );
         var response = grecaptcha.getResponse();
         if (response.length == 0)  //reCaptcha not verified
         {
@@ -178,12 +179,12 @@
             return false;
         }
         else {
-            $('#' + btnupload.id + 'control').click()
+            $('#' + 'control'  + btnupload.id).click()
         }
     }
     function fileselected(uplcontrol) {
 
-        var out1 = document.getElementById("outputbtn" + uplcontrol.id);
+        var out1 = document.getElementById("outputbtn" + uplcontrol.id.replace('control', ''));
         var startbtn = document.getElementById(uplcontrol.id.replace('control', ''));
         $(startbtn).attr("onclick", "")
         out1.innerHTML = "";
@@ -280,7 +281,7 @@
         var data = new FormData();
         data.append('q', 'insertpost');
         data.append('formdata', JSON.stringify(contactdatas));
-        var fileUpload = document.getElementById("uploaddoccontrol");;
+        var fileUpload = document.getElementById("controluploaddoc" + btnid.id);;
         //var files = fileUpload.files;
         var files = fileUpload.files;
         for (var i = 0; i < files.length; i++) {
