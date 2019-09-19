@@ -4147,6 +4147,20 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
+                case "formatstringfromresource":
+                    try
+                    {
+                        string gruppo = "basetext";
+                        if (prop[0] != null && prop[0] != "")
+                        { gruppo = prop[0]; }
+                        if (!string.IsNullOrEmpty(valore[0]))
+                        {
+                            string testo = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, valore[0]).Valore;
+                            ret = testo;
+                        }
+                    }
+                    catch { }
+                    break;
                 case "frmcategoria":
                     try
                     {

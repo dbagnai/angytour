@@ -17,7 +17,9 @@
 //    $("[id$='qcoffe" + btnid + "']").val('400');
 //}
 
-function ConfirmValidationFormGeneral(btnid) {
+function ConfirmValidationFormGeneral(btnid, serveroperation) {
+    var serveroperation = serveroperation || '';
+
 
     var out1 = document.getElementById("divoutput" + btnid.id);
 
@@ -33,6 +35,10 @@ function ConfirmValidationFormGeneral(btnid) {
     } else {
         out1.innerHTML = '';
     }
+
+    ////////////////////////////////////////////////////////////////
+    /////ABILITARE PER CONTROLLO CAPTCHA
+    ////////////////////////////////////////////////////////////////
     //var response = grecaptcha.getResponse();
     //if (response.length == 0)  //reCaptcha not verified
     //{
@@ -42,38 +48,63 @@ function ConfirmValidationFormGeneral(btnid) {
     //else {
     if (true) { //fare controllo di validazione ...
         /*do work and go for postback*/
-        $(btnid).attr("disabled", "")
+        $(btnid).attr("disabled", "");
         //invio nopostback con handler////////////////////////////////////////////////////
         var contactdatas = {};
         contactdatas.chkprivacy = chk1.checked;
         contactdatas.lingua = lng;
         var tastotxt = $(btnid).html();
-        getcontactdataformgeneral(contactdatas, btnid, function (contactdatas) {
-            if (contactdatas != null) {
+        getcontactdataformgeneral(serveroperation, contactdatas, btnid, function (contactdatas) {
+            if (contactdatas != null && serveroperation != '') {
 
-                //Inserimento in anagrafica clienti ed invio mail al sito
-                //$(btnid).html("Wait ..");
-                //inseriscianagraficaenotifica(lng, contactdatas, function (result) {
-                //    if (result == "") {
-                //        out1.innerHTML = (localmessagegeneral.successmsg);
-                //        $("#form" + btnid.id).hide();
-                //    }
-                //    else
-                //        out1.innerHTML = (result);
-                //    $(btnid).removeAttr("disabled");
-                //    $(btnid).html(tastotxt);
-                //}, tastotxt);
-
-                //inserimento post attività e foto dei dati del form
-                preparedataandpostgeneral(contactdatas, btnid); //inserisce il pot e notifica il webmaster
-                $(btnid).html("Wait ..");
-                inviamessaggiomail(lng, contactdatas, function (result) {
-                    if (result) {
-                        out1.innerHTML = (result);
+                if (serveroperation == "inseriscianagraficaenotifica") {
+                    /////////////////////////////////////////////////////////////
+                    //Inserimento in anagrafica clienti ed invio mail al sito
+                    /////////////////////////////////////////////////////////////
+                    $(btnid).html("Wait ..");
+                    inseriscianagraficaenotifica(lng, contactdatas, function (result) {
+                        if (result == "") {
+                            out1.innerHTML = (localmessagegeneral.successmsg);
+                            $("#form" + btnid.id).hide();
+                        }
+                        else
+                            out1.innerHTML = (result);
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
-                    }
-                }, tastotxt);
+                    }, tastotxt);
+
+                }
+                else if (serveroperation == "inviamessaggiomail") {
+                    /////////////////////////////////////////////////////
+                    //Invio solo messaggio mail tramite procedura inviamessaggiomail ( da testare )
+                    /////////////////////////////////////////////////
+                    $(btnid).html("Wait ..");
+                    inviamessaggiomail(lng, contactdatas, function (result) {
+                        if (result == "") {
+                            out1.innerHTML = (result);
+                        }
+                        else
+                            out1.innerHTML = (result);
+                        $(btnid).removeAttr("disabled");
+                        $(btnid).html(tastotxt);
+                    }, tastotxt);
+
+                }
+                else if (serveroperation == "preparedataandpostgeneral") {
+                    /////////////////////////////////////////////////////////////
+                    //(ALTERNATIVA)inserimento post attività e foto dei dati del form
+                    /////////////////////////////////////////////////////////////
+                    preparedataandpostgeneral(contactdatas, btnid); //inserisce il pot e notifica il webmaster
+                    $(btnid).html("Wait ..");
+                    inviamessaggiomail(lng, contactdatas, function (result) {
+                        if (result) {
+                            out1.innerHTML = (result);
+                            $(btnid).removeAttr("disabled");
+                            $(btnid).html(tastotxt);
+                        }
+                    }, tastotxt);
+                }
+
 
             } else {
                 $(btnid).removeAttr("disabled");
@@ -88,9 +119,10 @@ function ConfirmValidationFormGeneral(btnid) {
     //}
 }
 
-function getcontactdataformgeneral(contactdatas, btnid, callback) {
+function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callback) {
     var contactdatas = contactdatas || {};
-    contactdatas.idofferta = '';
+    contactdatas.idofferta = idofferta;
+
     contactdatas.nome = $("[id$='nome" + (btnid).id + "']").val();
     contactdatas.ragsoc = $("[id$='ragsoc" + (btnid).id + "']").val();
     contactdatas.piva = $("[id$='piva" + (btnid).id + "']").val();
@@ -105,7 +137,6 @@ function getcontactdataformgeneral(contactdatas, btnid, callback) {
     contactdatas.orario = $("[id$='orario" + (btnid).id + "']").val();
     contactdatas.chiusura = $("[id$='chiusura" + (btnid).id + "']").val();
     contactdatas.qcoffe = $("[id$='qcoffe" + (btnid).id + "']").val();
-
     if ($("[id$='chkpveloci" + (btnid).id + "']").length != 0)
         contactdatas.chkpveloci = $("[id$='chkpveloci" + (btnid).id + "']")[0].checked;
     if ($("[id$='nazione" + (btnid).id + "']").length != 0)
@@ -124,7 +155,6 @@ function getcontactdataformgeneral(contactdatas, btnid, callback) {
         contactdatas.provincias = $("[id$='provincias" + (btnid).id + "']")[0].value;
     if ($("[id$='comunes" + (btnid).id + "']").length != 0)
         contactdatas.comunes = $("[id$='comunes" + (btnid).id + "']")[0].value;
-
     contactdatas.tipologia = localmessagegeneral.tipologia;
     if ($("[id$='chkprivacy" + (btnid).id + "']").length != 0)
         contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
@@ -133,53 +163,78 @@ function getcontactdataformgeneral(contactdatas, btnid, callback) {
     if ($("[id$='chkprivacy2" + (btnid).id + "']").length != 0)
         contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
     contactdatas.lingua = lng;
+    contactdatas.tipocontenuto = "campionatura"; //campionatura o altro che voglio specificare
     contactdatas.tipo = "post";
-    contactdatas.tipocontenuto = "campionatura";
-
-    //Campi Specifici schede
-    //contactdatas.titolo = $("[id$='nome" + (btnid).id + "']").val();
-    //contactdatas.sottotitolo = $("[id$='tipologia" + (btnid).id + "']").val();
-    //contactdatas.prezzo = $("[id$='prezzo" + (btnid).id + "']").val();
 
     var validated = true;
 
-    //validazione per iscrizione scheda
-    //if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
-    //if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
-    //if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
-    //if (contactdatas.titolo == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
-    //if (contactdatas.sottotitolo == '') { validated = false; $("[id$='tipologia" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='tipologia" + (btnid).id + "']").css("borderColor", "white"); };
-    //if (contactdatas.descrizione == '') { validated = false; $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "white"); };
+    if (serveroperation == "inseriscianagraficaenotifica") {
 
-    //Validazione per campionature
-    if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.ragsoc == '') { validated = false;; $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.nome == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.piva == '') { validated = false; $("[id$='piva" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='piva" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.sdi == '') { validated = false; $("[id$='sdi" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='sdi" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.cap == '') { validated = false; $("[id$='cap" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='cap" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.regione == '') { validated = false; $("[id$='regione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='regione" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.provincia == '') { validated = false; $("[id$='provincia" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='provincia" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.comune == '') { validated = false; $("[id$='comune" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='comune" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.qcoffe == '') { validated = false; $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.orario == '') { validated = false; $("[id$='orario" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='orario" + (btnid).id + "']").css("borderColor", "white"); };
-    if (contactdatas.chiusura == '') { validated = false; $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "white"); };
+        //Validazione per campionature
+        if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.ragsoc == '') { validated = false;; $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.nome == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.piva == '') { validated = false; $("[id$='piva" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='piva" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.sdi == '') { validated = false; $("[id$='sdi" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='sdi" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.cap == '') { validated = false; $("[id$='cap" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='cap" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.regione == '') { validated = false; $("[id$='regione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='regione" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.provincia == '') { validated = false; $("[id$='provincia" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='provincia" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.comune == '') { validated = false; $("[id$='comune" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='comune" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.qcoffe == '') { validated = false; $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='qcoffe" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.orario == '') { validated = false; $("[id$='orario" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='orario" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.chiusura == '') { validated = false; $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='chiusura" + (btnid).id + "']").css("borderColor", "white"); };
 
+    }
+    else if (serveroperation == "inviamessaggiomail") {
+        //Specifici per messaggio richiesta via mail
+        contactdatas.name = $("[id$='nome" + (btnid).id + "']").val(); 
+        contactdatas.cognome = $("[id$='cognome" + (btnid).id + "']").val(); 
+        contactdatas.message = $("[id$='descrizione" + (btnid).id + "']").val(); 
+        contactdatas.tipo = "informazioni";
+        contactdatas.tipocontenuto = "informazioni"; // prenota o altro che voglio specificare
+
+        //validazione per iscrizione scheda
+        if (contactdatas.name == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
+        //if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.message == '') { validated = false; $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "white"); };
+
+
+
+    }
+    else if (serveroperation == "preparedataandpostgeneral") {
+
+        //specifici per inserimento di un post
+        contactdatas.titolo = $("[id$='nome" + (btnid).id + "']").val();
+        contactdatas.sottotitolo = $("[id$='tipologia" + (btnid).id + "']").val();
+        contactdatas.prezzo = $("[id$='prezzo" + (btnid).id + "']").val();
+        contactdatas.tipocontenuto = "iscrizione"; //campionatura o altro che voglio specificare
+
+
+        //validazione per iscrizione scheda
+        if (contactdatas.email == '') { validated = false; $("[id$='email" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='email" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.telefono == '') { validated = false; $("[id$='telefono" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='telefono" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.titolo == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.sottotitolo == '') { validated = false; $("[id$='tipologia" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='tipologia" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.descrizione == '') { validated = false; $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='descrizione" + (btnid).id + "']").css("borderColor", "white"); };
+    }
 
     if (!validated) contactdatas = null;
 
     callback(contactdatas);
 }
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FUNZIONI CHE USANO L'HANDLER DEI FILE PER CARICARE I FILES ED INSERIRE UN POST NELLA TIPOLOGIA PASSATA
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function preparedataandpostgeneral(contactdatas, btnid) {
     var data = new FormData();
     data.append('q', 'insertpost');
     data.append('formdata', JSON.stringify(contactdatas));
-    var fileUpload = document.getElementById("controluploaddoc" + btnid.id);;
+    var fileUpload = document.getElementById("controluploaddoc" + btnid.id);
     //var files = fileUpload.files;
     var files = fileUpload.files;
     for (var i = 0; i < files.length; i++) {
@@ -232,6 +287,9 @@ function insertPostWithFilesGeneral(lng, data, callback) {
 //});
 function UploadFilesGeneral(btnupload) {
     var out1 = document.getElementById("outputbtn" + btnupload.id);
+    //////////////////////////////////////////////////////////////
+    /////ABILITARE PER CONTROLLO CAPTCHA
+    /////////////////////////////////////////////////////////
     //var response = grecaptcha.getResponse();
     //if (response.length == 0)  //reCaptcha not verified
     //{
@@ -240,14 +298,14 @@ function UploadFilesGeneral(btnupload) {
     //}
     //else
     {
-        $('#' + 'control' + btnupload.id).click()
+        $('#' + 'control' + btnupload.id).click();
     }
 }
 function fileselectedgeneral(uplcontrol) {
 
     var startbtn = document.getElementById(uplcontrol.id.replace('control', ''));//////
     var out1 = document.getElementById("outputbtn" + uplcontrol.id.replace('control', ''));
-    $(startbtn).attr("onclick", "")
+    $(startbtn).attr("onclick", "");
     out1.innerHTML = "";
     console.log('changed selected files');
     for (var i = 0; i < uplcontrol.files.length; i++) {
@@ -293,7 +351,7 @@ function uploadfileintmpdirgeneral(uplcontrol, startbtn, out1) {
             out1.innerHTML = filesimages + '<br/>' + stringmsg;
             //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
             $(uplcontrol).val("");//Svuoto i files già caricati
-            $(startbtn).attr("onclick", "UploadFilesGeneral(this)")
+            $(startbtn).attr("onclick", "UploadFilesGeneral(this)");
             $(startbtn).html(tastotxt);
         },
         error: function (result) {

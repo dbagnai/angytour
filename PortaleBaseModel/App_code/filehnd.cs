@@ -99,7 +99,7 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         offDM.InsertOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item);
                         offDM.InsertOfferta(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item);
                         string itemid = item.Id.ToString();
-                        //Caricamento files in allegato se presenti nella reqeuest
+                        //Caricamento files in allegato se presenti direttamente nella reqeuest
                         foreach (string s in context.Request.Files)
                         {
                             HttpPostedFile file = context.Request.Files[s];
@@ -122,7 +122,7 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         result = "";
 
                         //INVIAMO LA MAIL DI AVVISO INSERIMENTO
-                        string testomail = "Verifica e controlla la richiesta di inserimento per il ristorante : " + itemid + "<br/>";
+                        string testomail = "Verifica e controlla la richiesta di inserimento per la struttura : " + itemid + "<br/>";
                         testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati per la pubblicazione sul portale<br/>";
                         if (jdata.consenso1 == "true")
                             testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati Per attività di marketing diretto ed indiretto e ricerche di mercato<br/>";

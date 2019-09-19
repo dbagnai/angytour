@@ -1,0 +1,88 @@
+﻿<script>
+    // <![CDATA[
+    $('#divTitleContainer').html('');
+    jQuery(document).ready(function () {
+        $('#ctl00_divContattiMaster').html('');
+    });
+    // ]]></script>
+
+<div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
+<div class="ui-15 bg-light-color" id="divContactForm" clientidmode="static">
+    <div class="container">
+
+        <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-8 tx-dark-color">
+
+                        <div style="text-align: center; width: 100%">
+                            <span style="font-size:1.9rem;">Richiedi informazioni<br></span>
+                            <div style="font-size:1.2rem;line-height:normal">
+                                Ti interessa acquistare questo articolo ma vuoi delle informazioni più dettagliate? Contattaci adesso senza impegno sapremo fornirti le risposte che cerchi.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Ui Form -->
+        <div class="ui-form">
+            <!-- Heading -->
+            <div class="row justify-content-center pb-5" style="padding-right: inherit;">
+                <div class="col-12" id="formbtniscrivi"> <!--IMPORTANTE FORM CONTENITORE-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ui-input"><input class="form-control" type="text" id="nomebtniscrivi" name="uname" placeholder="Nome" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ui-input"><input class="form-control" type="text" id="cognomebtniscrivi" name="unname" placeholder="Cognome" /> <label class="ui-icon"><i class="fa fa-user"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ui-input"><input class="form-control" type="text" id="telefonobtniscrivi" name="unname" placeholder="Telefono" /> <label class="ui-icon"><i class="fa fa-phone"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ui-input"><input class="form-control" type="text" id="emailbtniscrivi" name="unname" placeholder="Email" /> <label class="ui-icon"><i class="fa fa-envelope-o"></i></label></div>
+                        </div>
+                    </div>
+                    <div class="ui-input"><textarea class="form-control" rows="4" cols="5" name="q" placeholder="Messaggio  .." id="descrizionebtniscrivi"></textarea> <label class="ui-icon"><i class="fa fa-comments"></i></label></div>
+                    <div class="row" style="text-align: left;">
+                        <div class="col-sm-12">
+                            <div class="ui-input">
+                                <b>Formula di acquisizione del consenso dell'interessato</b><br />
+                                <a target="_blank" style="color: #fec15a;" href="/it/s/privacy-policy-6">Informativa Privacy ex art. 13 Reg. (UE) 2016/679</a>
+                                <br /> L'interessato acquisite le informazioni dal Titolare, presta il consenso per le finalit&agrave; sotto riportate.<br /> <b>I campi contrassegnati con l'asterisco sono obbligatori.</b><br />
+                            </div>
+                            <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacybtniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per accedere al servizio richiesto * </label></div>
+                            <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy1btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attivit&agrave; di marketing diretto ed indiretto e ricerche di mercato </label></div>
+                            <div class="checkbox d-none" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy2btniscrivi" /> <span class="cr"><i class="cr-icon fa fa-check"></i></span> Per attivit&agrave; di profilazione al fine di migliorare l'offerta di prodotti e servizi </label></div>
+                        </div>
+                    </div>
+                    <div class="ui-input text-center"><button class="btn btn-lg btn-block" onclick="ConfirmValidationFormGeneral(this,'inviamessaggiomail');" style="width: 200px;" type="button" id="btniscrivi">Invia richiesta</button></div>
+                </div>
+                <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>
+                <div style="font-weight: 300; font-size: 1.6rem; color: red;" id="divoutputbtniscrivi"></div> <!--Spazio messaggio  ritorno-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // <![CDATA[
+    var localmessage = {};
+    localmessage.privacy = 'Impossibile inviare Email senza Autorizzazione per la Privacy, spuntare la casella privacy.';
+    localmessage.captcha = "Selezionare la casella Captcha di verifica per procedere con l'inserimento.";
+    localmessage.validation = "Riempire tutti i campi per procedere.!";
+    localmessage.successmsg = "Richiesta correttamente inviata.";
+    localmessage.errormsg = "Errore nell'inserimento della richiesta. Contattate il supporto per procedere.";
+    localmessage.tipologia = "";
+    localmessage.inputisvalid = false;
+    localmessage.validatemsg = "";
+    localmessagegeneral = localmessage;
+// ]]></script>

@@ -2177,7 +2177,7 @@ function inviamessaggiomail(lng, data, callback) {
     });
 }
 
-
+//INSERISCE IN ANAGRAFICA UN CLIENTE E NOTIFICA DELL'INSERIMENTO IL SITO
 function inseriscianagraficaenotifica(lng, data, callback) {
     var lng = lng || "I";
     var data = data || {};
