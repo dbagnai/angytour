@@ -71,43 +71,43 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   ul.alternatecolor .bg-light-color:after {
     position: absolute;
     width: 100%;
-    height: 20px;
     content: "";
     background: #90cdcd;
     right: 0;
     left: 0;
-    transform-origin: top left;
-    transform: skewY(1.5deg);
     z-index: 12;
     top: unset;
     margin-top: 0px;
+    height: 100px;
+    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% calc(100% - 80px));
   }
   .alternatecolor .bg-light-color:after,
   ul.alternatecolor .bg-light-color:after {
-    transform: skewY(-1.5deg);
-    margin-top: -20px;
     top: unset;
+    clip-path: polygon(0% 80px, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+    margin-top: -100px;
   }
   ul.alternatecolor .bg-light-color:before {
     margin-top: -50px;
   }
   ul.alternatecolor .bg-light-color:after {
-    margin-top: 27px;
+    margin-top: -50px;
     top: unset;
   }
   .alternatecolor .bg-light-color .row {
     border-top: 60px solid transparent;
     border-bottom: 60px solid transparent;
   }
-  .alternatecolor li:last-child .bg-light-color .row {
+  .alternatecolor li:last-child .bg-light-color .row,
+  .alternatecolor item:nth-last-child(2) .bg-light-color .row {
     border-bottom: 0px solid transparent;
   }
   .alternatecolor li:last-child .bg-light-color,
-  .alternatecolor div:last-child .bg-light-color {
+  .alternatecolor item:nth-last-child(2) .bg-light-color {
     clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
   }
   .alternatecolor li:last-child .bg-light-color:after,
-  .alternatecolor div:last-child .bg-light-color:after {
+  .alternatecolor item:nth-last-child(2) .bg-light-color:after {
     display: none;
   }
   #divSuggeritiContainer.bg-light-color,
@@ -142,7 +142,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .bg-figura-contatti {
-  background: url('/public/Files/con001000/1/guarda-mail-2.png') !important;
+  background-image: url('/public/Files/con001000/1/guarda-mail-2.png') !important;
 }
 .tx-primary-color {
   color: #098f8f !important;
@@ -406,16 +406,16 @@ i .fa {
   /*font-weight: @menu-hover-weight;*/
   background: none;
 }
-@media (max-width: 1024px) {
-  .menuzord.white .menuzord-menu > li.active > a,
-  .menuzord.white .menuzord-menu > li:hover > a,
-  .menuzord.white .menuzord-menu > li:hover > a span,
-  .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
-  .menuzord.white .menuzord-menu > li > a:active {
-    color: #f3c649 !important;
-    background: #fff;
-  }
-}
+/*@media (max-width: 1024px) {
+    .menuzord.white .menuzord-menu > li.active > a,
+    .menuzord.white .menuzord-menu > li:hover > a,
+    .menuzord.white .menuzord-menu > li:hover > a span,
+    .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
+    .menuzord.white .menuzord-menu > li > a:active {
+        color: @menu-hover-color !important;
+        background: @white-color;
+    }
+}*/
 .menuzord.white .showhide em {
   background: #032f2f;
 }
@@ -1540,7 +1540,16 @@ footer .divbuttonstyle:hover {
 .btn .btn-banner:active,
 .btn .btn-banner:visited,
 .btn .btn-banner:focus,
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
 .btn-banner:hover,
+.btn-banner:hover,
+.btn .btn-banner:hover,
 .btn .btn-banner:hover {
   font-family: 'Roboto', sans-serif;
   letter-spacing: 2px;
@@ -1607,54 +1616,62 @@ footer .divbuttonstyle:hover {
   color: #fff !important;
 }
 /*BOTTONE BANNER ROTONDO content FRECCIA CHE SI MUOVE*/
-/*.btn-banner, .btn-banner:active, .btn-banner:visited, .btn-banner:focus .btn .btn-banner, .btn .btn-banner:active, .btn .btn-banner:visited, .btn .btn-banner:focus {
-    &:extend(.btn-black-outline);
-    background: @color-sottomeu !important;
-    color: @button-outline-hover-color !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    letter-spacing: 0;
-    border-radius: 50%;
-    padding: 0 !important;
-    width: 60px !important;
-    height: 60px !important;
-    max-width: 60px !important;
-    max-height: 60px !important;
-    line-height: 60px !important;
-    margin: 0 !important;
-    font-size: 2rem !important;
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
+.btn-banner:hover,
+.btn .btn-banner:hover {
+  background: #f3c649 !important;
+  color: #fff !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  letter-spacing: 0;
+  border-radius: 50%;
+  padding: 0 !important;
+  width: 60px !important;
+  height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  line-height: 60px !important;
+  margin: 30px 0 0 -30px !important;
+  font-size: 2rem !important;
+  left: 50% !important;
 }
 .btn-banner i {
-    animation: arrowdown 1.7s ease-in-out infinite;
+  animation: arrowdown 1.7s ease-in-out infinite;
 }
 @keyframes arrowdown {
-    0% {
-        transform: translateY(0px);
-        -webkit-transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-        -webkit-transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0px);
-        -webkit-transform: translateY(0px);
-    }
+  0% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
 }
 @-webkit-keyframes arrowdown {
-    0% {
-        transform: translateY(0px);
-        -webkit-transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-        -webkit-transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0px);
-        -webkit-transform: translateY(0px);
-    }
-}*/
+  0% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+}
 .btn-banner:hover,
 .btn .btn-banner:hover {
   color: #032f2f !important;
@@ -3104,7 +3121,7 @@ select.form-control:not([size]):not([multiple]) {
   background: linear-gradient(180deg, #ebf6f6, rgba(235, 246, 246, 0.5));
 }
 /*-------LOADER-------*/
-/* ==========================================================================
+/* ========================================================
    Page Loader
 ============================================================================= */
 @keyframes page-loader {
@@ -3335,7 +3352,7 @@ select.form-control:not([size]):not([multiple]) {
     padding-bottom: 6px !important;
   }
   .menuzord-menu li:nth-child(7) a {
-    padding: 8px 16px 6px !important;
+    padding: 8px 16px 8px !important;
   }
   .menuzord-menu li a:hover:before,
   .menuzord-menu li .current a:before,
@@ -4245,6 +4262,9 @@ button.js-roundedpush:hover {
 /*---------------------------------
 ------- BANNER TESTATA HOME -------
 ----------------------------------*/
+.tp-caption.sft.slidelink.hasclicklistener {
+  display: none;
+}
 .tp-caption.very_big_white {
   max-width: 100% !important;
   width: 100% !important;
@@ -4564,6 +4584,20 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
 .polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
   background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
+li:nth-child(2n) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
+li:nth-child(2n+1) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
+}
+/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop {
+  /*background: @bg-sottomenu-color-sfumato;*/
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+}
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+}
 @media screen and (max-width: 540px) {
   .card.rounded-responsive {
     border-radius: 0 !important;
@@ -4603,22 +4637,28 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
   font-weight: 400 !important;
   line-height: 2rem;
 }
+li:nth-child(2n) .polygon-backdrop,
+.polygonblock > div:nth-child(2n) .polygon-backdrop {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
 .polygon-backdrop .prezzo-responsive {
   color: white;
   font-size: 2rem;
   font-weight: 900;
 }
-li:nth-child(2n) .polygon-backdrop,
-.polygonblock > div:nth-child(2n) .polygon-backdrop {
+li:nth-child(2n) .polygon-backdrop {
   background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
+li:nth-child(2n+1) .polygon-backdrop,
+.polygonblock > div:nth-child(2n+1) .polygon-backdrop {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
   content: "/KWh";
   font-weight: 300;
   float: right;
 }
-li:nth-child(2n+1) .polygon-backdrop,
-.polygonblock > div:nth-child(2n+1) .polygon-backdrop {
+li:nth-child(2n+1) .polygon-backdrop {
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
@@ -4651,6 +4691,56 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 .firstbig li {
   list-style-type: none;
 }
+.grid-shape-polygon .work-image {
+  border-radius: 5px;
+}
+.grid-shape-polygon .card-body {
+  /*background-color: rgba(0, 0, 0, 0.50);*/
+  background-color: rgba(9, 143, 143, 0.75);
+  clip-path: polygon(0% 40px, 101% 0%, 101% 101%, 0% 101%);
+  padding-top: 45px;
+}
+.grid-shape-polygon item:nth-of-type(odd) .card-body {
+  background-color: rgba(243, 198, 73, 0.75);
+}
+.grid-shape-polygon .card-body:after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: "";
+  /*background: @color-sottomeu;*/
+  background: #fff;
+  right: 0;
+  left: 0;
+  transform-origin: top left;
+  z-index: 12;
+  top: 0px;
+  clip-path: polygon(0% 0px, 101% 0%, 101% 6px, 0% calc(101% - 48px));
+}
+.grid-shape-polygon .work-image:after {
+  clip-path: polygon(0% 0%, 101% 0%, 101% calc(101% - 97px), 0% calc(101% - 56.6px));
+}
+.grid-shape-polygon .work-image span {
+  color: white;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+}
+.grid-shape-polygon .imgovercontainer:hover.work-image > img {
+  -webkit-transform: scale(1.2);
+  /*scale(1.3) rotate(2deg);*/
+  -moz-transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -ms-transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -o-transform: scale(1.2);
+  /*scale(1.3) rotate(2deg);*/
+  transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
 /* fluid 4 columns */
 .grid-sizer,
 .grid-item {
@@ -4682,26 +4772,26 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 /* PERSONALIZZAZIONI SINGOLE BANNER CARD OVER CATALOGO */
 .firstbig-banner item:nth-of-type(n+1) .imgovercontainer.work-image:after {
-  background-position: center calc((100% - 0px) / 2) !important;
+  background-position: center calc((100% - 0.1px) / 2) !important;
   background-size: 10% !important;
 }
 .firstbig-banner item:nth-of-type(2) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-trattore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-trattore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(3) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-spina.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-spina.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(4) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-ingranaggio.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-ingranaggio.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(5) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
