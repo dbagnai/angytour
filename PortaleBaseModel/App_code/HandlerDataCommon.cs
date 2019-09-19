@@ -195,6 +195,10 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     string partenza = (maildata.GetValueOrDefault("partenza") ?? "");
                     string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");
                     string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");
+                    if ((maildata.GetValueOrDefault("consenso1") != null))
+                     chknewsletter = (maildata.GetValueOrDefault("consenso1") ?? "");
+
+
                     bool spuntaprivacy = false;
                     bool spuntanewsletter = false;
                     bool.TryParse(chkprivacy, out spuntaprivacy);
