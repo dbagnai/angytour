@@ -287,6 +287,29 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     //}
 
+    private List<Prodotto> RiordinaSpeciale(List<Prodotto> prodotti, string orderedcodes)
+    {
+        List<Prodotto> orderedlist = new List<Prodotto>();
+        if (orderedcodes != "")
+        {
+            string[] codes = orderedcodes.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            if (list != null)
+            {
+                //list.ForEach(l => orderedlist.Add(prodotti.Find(i => i.CodiceProdotto == l)));
+                foreach (string l in list)
+                {
+                    Prodotto p = prodotti.Find(i => i.CodiceProdotto == l);
+                    if (p != null)
+                        orderedlist.Add(p);
+                }
+            }
+            else
+                orderedlist = prodotti;
+        }
+        return orderedlist;
+    }
     protected void CaricaMenuLinkContenuti(long id)
     {
 
@@ -485,6 +508,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         //prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
         prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+
+        //if (tipologia == "rif000001")
+        //    prodotti = RiordinaSpeciale(prodotti, "prod000020,prod000013,prod000014,prod000015,prod000017,prod000016,prod000021,prod000022,prod000023,prod000027,prod000024,prod000029,prod000026,prod000001");
+
         if (prodotti != null)
             foreach (Prodotto o in prodotti)
             {
@@ -532,6 +559,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         {
             //prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
             prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+
+            //if (tipologia == "rif000001")
+            //    prodotti = RiordinaSpeciale(prodotti, "prod000020,prod000013,prod000014,prod000015,prod000017,prod000016,prod000021,prod000022,prod000023,prod000027,prod000024,prod000029,prod000026,prod000001");
+
+
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
