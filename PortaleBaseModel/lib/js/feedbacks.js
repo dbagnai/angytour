@@ -572,7 +572,7 @@ function commentclosure(varname) {
         //Svuoto il contenitore dei commenti
         mainscope.localcontainer = {};
         mainscope.localcontainer["item"] = '';
-        mainscope.localcontainer["list"] = '';
+        mainscope.localcontainer["list"] = ''; 
         mainscope.localcontainer["objfiltro"] = '';
         mainscope.localcontainer["totaleapprovati"] = '';
         mainscope.localcontainer["totalemediastars"] = '';
