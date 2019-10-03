@@ -2168,7 +2168,8 @@ function inviamessaggiomail(lng, data, callback) {
         success: function (result) {
             //if (callback)
             //    callback(result);
-            location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+            //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+            location.assign(result);//reindirizzo alla destinazione indicata dall'handler
         },
         error: function (result) {
             if (callback)
