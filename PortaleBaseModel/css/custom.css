@@ -242,7 +242,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   }
   #divSuggeritiContainer.bg-light-color,
   .bg-light-color.position-sticky,
-  #divCommentiscroll-ctrl .bg-light-color {
+  #divCommentiscroll-ctrl .bg-light-color,
+  ul li .a-176.col-12.bg-light-color {
     clip-path: none;
     border-top: 0 solid transparent;
     border-bottom: 0 solid transparent;
