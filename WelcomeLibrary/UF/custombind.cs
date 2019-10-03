@@ -4153,9 +4153,9 @@ namespace WelcomeLibrary.UF
                         string gruppo = "basetext";
                         if (prop[0] != null && prop[0] != "")
                         { gruppo = prop[0]; }
-                        if (!string.IsNullOrEmpty(valore[0]))
+                        if (prop[1] != null && !string.IsNullOrEmpty(prop[1]))
                         {
-                            string testo = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, valore[0]).Valore;
+                            string testo = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, prop[1]).Valore;
                             ret = testo;
                         }
                     }

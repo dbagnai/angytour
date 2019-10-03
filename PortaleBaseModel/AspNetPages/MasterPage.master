@@ -61,8 +61,8 @@
     </div>
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
-        <link rel="stylesheet"   href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700">
-                <!--- Styles -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,300,400,500,600,700|Fira+Sans:100,300,400,500,600,700|Raleway:300,400|Roboto:100,300,400,600,700">
+        <!--- Styles -->
         <%-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>--%>
         <%-- <script type="text/javascript" src="<%= CommonPage.ReplaceCdnLinks( "~/js/webfont.js") %>"></script>
         <script>
@@ -71,9 +71,12 @@
                     families: ['Raleway:300,400,500,600,700', 'Open Sans:300,400,600,800', 'Lato:400,400i,700']
                 }
             });
-        </script>--%>
+            </script>
+
+         
+        --%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
- <%--            <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
+        <%--            <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
 
         <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
@@ -190,7 +193,7 @@
                             <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
                                 <i class="fa fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right px-3">
-                                  <%= CreaLinkTipologie(2,2) %>
+                                <%= CreaLinkTipologie(2,2) %>
                                 <li>
                                     <hr />
                                 </li>
@@ -250,6 +253,11 @@
                     </div>
                 </div>
             </div>--%>
+            <%--   <script>
+                if (lng == "GB") {
+                    $(".spegnigb").remove();
+                }
+            </script>--%>
 
             <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0">
                 <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>'>
@@ -398,7 +406,7 @@
                             <%--<input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
                             <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />--%>
 
-                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;"   onkeydown="if (event.keyCode == 13)  document.getElementById('btncercamater1').click()" />
+                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercamater1').click()" />
                             <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="btncercamater1" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
 
 
@@ -417,7 +425,7 @@
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative">
                 <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb"  itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
                     </ul>
                 </div>
             </div>
@@ -482,7 +490,7 @@
             </asp:ContentPlaceHolder>
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
                 <%--<div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">--%>
-                    <div>
+                <div>
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -554,20 +562,20 @@
                                     <script>
                                         function ConfirmValidationFormMaster(elembtn) {
                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                            var out1 = document.getElementById("outputContactMasterDiv");
-                                            if (!chk1.checked) {
-                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                return false;
-                                            } else { out1.innerHTML = ''; }
-                                            if (Page_ClientValidate("contattifooter")) {
-                                                /*do work and go for postback*/
-                                                console.log('ok validated');
-                                                $(elembtn).attr("disabled", "")
+                                                var out1 = document.getElementById("outputContactMasterDiv");
+                                                if (!chk1.checked) {
+                                                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                    return false;
+                                                } else { out1.innerHTML = ''; }
+                                                if (Page_ClientValidate("contattifooter")) {
+                                                    /*do work and go for postback*/
+                                                    console.log('ok validated');
+                                                    $(elembtn).attr("disabled", "")
 
-                                                //invio nopostback con handler////////////////////////////////////////////////////
-                                                var contactdatas = {};
-                                                contactdatas.chkprivacy = chk1.checked;
-                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                                    //invio nopostback con handler////////////////////////////////////////////////////
+                                                    var contactdatas = {};
+                                                    contactdatas.chkprivacy = chk1.checked;
+                                                    contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
                                                 getcontactdata(contactdatas, function (contactdatas) {
                                                     var tastotxt = $(elembtn).html();
@@ -765,8 +773,8 @@
                             </div>
                             <%--BLOG--%>
                             <div class="col col-sm-4 col-md-3 footer-col pt-3 pt-sm-0">
-                               <div class="footer-title">
-             <%--                       <%= references.ResMan("Common",Lingua,"testofooter2") %>--%>
+                                <div class="footer-title">
+                                    <%--                       <%= references.ResMan("Common",Lingua,"testofooter2") %>--%>
                                     <%= CreaLinkTipologie(2,2,"",true) %>
                                 </div>
                                 <div class="footer-content">
@@ -844,9 +852,9 @@
         <div id="divSearchBarPlaceholder">
         </div>
 
-                <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1",null," async ") %>
-             <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2",null," async ") %>
-      <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1",null," async ") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2",null," async ") %>
+        <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2" ) %>--%>
         <script>
             var makeRevLower = false;
