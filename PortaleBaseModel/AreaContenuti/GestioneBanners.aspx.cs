@@ -580,7 +580,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
 
                     ban.AlternateText = txtDescrizioneI.Text;
                     ban.NavigateUrl = txtNavigateUrl.Text;
+                    if(!string.IsNullOrWhiteSpace(NomeCorretto))
                     ban.ImageUrl = PercorsoFiles + "/" + NomeCorretto;
+                    else
+                        ban.ImageUrl = "/images/dummylogo.jpg";
+
                     ban.sezione = Sezione;
 
                     ban.AltimgtextI = txtImgalttextI.Text;
@@ -643,7 +647,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 // bool ret = offDM.CancellaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeFotoSelezionata, "", pathDestinazione);
                 //CANCELLO LA FOTO UPLOADATA
 
-                if (fi.Exists)
+                if (fi.Exists && !fi.FullName.Contains("/images/dummylogo.jpg"))
                 {
                     string fileext = fi.Extension;
                     string pathfile = fi.DirectoryName;
@@ -689,7 +693,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
                 }
 
-                if (fi.Exists) fi.Delete();
+                if (fi.Exists && !fi.FullName.Contains("/images/dummylogo.jpg")) fi.Delete();
                 if (System.IO.File.Exists(fi.DirectoryName + "\\ant" + fi.Name)) System.IO.File.Delete(fi.DirectoryName + "\\ant" + fi.Name);
                 if (fiGB.Exists) fiGB.Delete();
                 if (System.IO.File.Exists(fiGB.DirectoryName + "\\ant" + fiGB.Name)) System.IO.File.Delete(fiGB.DirectoryName + "\\ant" + fiGB.Name);
