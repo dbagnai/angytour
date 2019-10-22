@@ -460,25 +460,7 @@ public class CommonPage : Page
     private static string GetLinguaFromActualCulture(CultureInfo currentCulture)
     {
         return offerteDM.GetLinguaFromActualCulture(currentCulture);
-#if false
-        string lingua = deflanguage;
-        switch (currentCulture.TwoLetterISOLanguageName.ToLower())
-        {
-            case "it":
-                lingua = "I";
-                break;
-            case "en":
-                lingua = "GB";
-                break;
-            case "ru":
-                lingua = "RU";
-                break;
-            default:
-                lingua = "GB";
-                break;
-        }
-        return lingua; 
-#endif
+ 
     }
     public static System.Globalization.CultureInfo setCulture(string lng)
     {

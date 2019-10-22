@@ -276,7 +276,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     if (spuntaprivacy)
                     {
-                        Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        Utility.invioMailGenerico(cognomemittente + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
                         // Registro la statistica di contatto
                         Statistiche stat = new Statistiche();
                         stat.Data = DateTime.Now;
