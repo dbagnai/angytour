@@ -1540,8 +1540,11 @@ footer .divbuttonstyle:hover {
 .btn .btn-black:active,
 .btn .btn-black:visited,
 .btn .btn-black:focus,
+a.btn-black-outline:hover,
 .btn-black-outline:hover,
 .btn .btn-black:hover,
+a.btn-black-outline:active,
+a.btn-black-outline:focus,
 .btn-banner,
 .btn-banner:active,
 .btn-banner:visited,
@@ -1568,7 +1571,7 @@ footer .divbuttonstyle:hover {
   line-height: 1 !important;
   /*padding: .75rem 2rem !important;*/
   padding: 1rem 2rem !important;
-  margin: 10px 5px;
+  /*margin: 10px 5px;*/
   height: auto;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1581,7 +1584,7 @@ footer .divbuttonstyle:hover {
   -moz-transition: background 0.2s, opacity 0.2s;
   -o-transition: background 0.2s, opacity 0.2s;
   transition: background 0.2s, opacity 0.2s;
-  margin: 0 0 0 0 !important;
+  /*margin: 0 0 0 0 !important;*/
   background: #fff !important;
   /*-webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -1601,6 +1604,7 @@ footer .divbuttonstyle:hover {
   height: auto !important;
   cursor: pointer;
 }
+a.btn-black-outline:hover,
 .btn-black-outline:hover,
 .btn .btn-black:hover {
   color: #fff !important;
@@ -1609,6 +1613,120 @@ footer .divbuttonstyle:hover {
   opacity: 0.78;
   text-decoration: none !important;
   border: 1px solid #f3c649;
+}
+a.btn-black-outline:active,
+a.btn-black-outline:focus {
+  color: #fff !important;
+  background: #f3c649 !important;
+  border-color: #032f2f;
+  opacity: 1;
+  text-decoration: none !important;
+  border: 1px solid #f3c649;
+}
+/* BOTTONI SPECIALE menù RISTORANTI */
+a.btn-black-outline.restaurant-menu,
+a.divbuttonstyle.restaurant-menu,
+span.restaurant-menu {
+  font-size: 1em;
+  background-position: 1.5rem center !important;
+  background-size: 25px !important;
+  background-repeat: no-repeat !important;
+  padding-left: 60px !important;
+  background-image: url(/images/icon-generic-menu.png) !important;
+}
+a.btn-black-outline:hover.restaurant-menu,
+a.btn-black-outline:active.restaurant-menu,
+a.btn-black-outline:focus.restaurant-menu,
+a.divbuttonstyle:hover.restaurant-menu,
+a.divbuttonstyle:active.restaurant-menu,
+a.divbuttonstyle:focus.restaurant-menu {
+  background-image: url(/images/icon-generic-menu-black.png) !important;
+}
+span.restaurant-menu {
+  border: none;
+  padding-left: 0 !important;
+  background-color: transparent !important;
+  padding: 0.5rem 1.5rem 0.5rem 0 !important;
+  background-image: url(/images/icon-conto-black1.png) !important;
+}
+a.btn-black-outline.restaurant-menu:nth-child(1),
+span.restaurant-menu:nth-child(1) {
+  background-image: url(/images/icon-preparati-carne-black.png) !important;
+}
+a.btn-black-outline.restaurant-menu:nth-child(2),
+span.restaurant-menu:nth-child(2) {
+  background-image: url(/images/icon-primi-black.png) !important;
+}
+a.btn-black-outline.restaurant-menu:nth-child(3),
+span.restaurant-menu:nth-child(3) {
+  background-image: url(/images/icon-secondi-black.png) !important;
+}
+a.btn-black-outline.restaurant-menu:nth-child(4),
+span.restaurant-menu:nth-child(4) {
+  background-image: url(/images/icon-contorni-black.png) !important;
+}
+a.btn-black-outline.restaurant-menu:nth-child(5),
+span.restaurant-menu:nth-child(5) {
+  background-image: url(/images/icon-dolce-b-black.png) !important;
+}
+#menu-acqua span.restaurant-menu:nth-child(3) {
+  background-image: url(/images/icon-secondi-pesce-black.png) !important;
+}
+span.restaurant-menu:nth-child(5) {
+  border-bottom: 2px solid;
+  border-radius: unset;
+  padding-bottom: 2rem !important;
+  background-position: 1.5rem 0.5rem !important;
+}
+span.restaurant-menu:nth-child(6) {
+  padding-top: 1rem !important;
+  font-weight: bold !important;
+  font-size: 1.2em !important;
+}
+a.btn-black-outline:hover.restaurant-menu:nth-child(1),
+a.btn-black-outline:active.restaurant-menu:nth-child(1),
+a.btn-black-outline.restaurant-menu:nth-child(1):focus {
+  background-image: url(/images/icon-preparati-carne.png) !important;
+}
+a.btn-black-outline:hover.restaurant-menu:nth-child(2),
+a.btn-black-outline:active.restaurant-menu:nth-child(2),
+a.btn-black-outline.restaurant-menu:nth-child(2):focus {
+  background-image: url(/images/icon-primi.png) !important;
+}
+a.btn-black-outline:hover.restaurant-menu:nth-child(3),
+a.btn-black-outline:active.restaurant-menu:nth-child(3),
+a.btn-black-outline.restaurant-menu:nth-child(3):focus {
+  background-image: url(/images/icon-secondi.png) !important;
+}
+a.btn-black-outline:hover.restaurant-menu:nth-child(4),
+a.btn-black-outline:active.restaurant-menu:nth-child(4),
+a.btn-black-outline.restaurant-menu:nth-child(4):focus {
+  background-image: url(/images/icon-contorni.png) !important;
+}
+a.btn-black-outline:hover.restaurant-menu:nth-child(5),
+a.btn-black-outline:active.restaurant-menu:nth-child(5),
+a.btn-black-outline.restaurant-menu:nth-child(5):focus {
+  background-image: url(/images/icon-dolce-b.png) !important;
+}
+.icona-menu {
+  background-position: 40px 110px;
+  background-size: 50px;
+  background-repeat: no-repeat;
+}
+#divAntipasti .icona-menu {
+  background-image: url(/images/icon-preparati-carne.png) !important;
+}
+#divPrimi .icona-menu {
+  background-image: url(/images/icon-primi.png) !important;
+}
+#divSecondi .icona-menu {
+  background-image: url(/images/icon-secondi.png) !important;
+}
+#divContorni .icona-menu {
+  background-image: url(/images/icon-contorni.png) !important;
+}
+#divDolci .icona-menu {
+  background-image: url(/images/icon-dolce-b.png) !important;
 }
 /*BOTTONE BANNER CLASSICO*/
 .btn-banner,
@@ -2427,7 +2545,7 @@ ul.footer-category-list {
   font-size: 2.2rem;
   font-weight: bold;
   width: 100%;
-  line-height: 2.2rem !important;
+  line-height: 2.4rem !important;
   background-color: transparent;
 }
 .subtitle-isotope {
@@ -4595,11 +4713,11 @@ li:nth-child(2n+1) .polygon-backdrop-b3,
 li:nth-child(2n) .rounded-responsive .polygon-backdrop,
 .polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
   /*background: @bg-sottomenu-color-sfumato;*/
-  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
 .polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n) .polygon-backdrop-b3 {
   background: linear-gradient(45deg, #f1bf31, #f6d26f);
@@ -4610,10 +4728,10 @@ li:nth-child(2n+1) .polygon-backdrop-b3 {
 /*---- MULTIBANNER FASCIA HOME POLYGON ----*/
 li:nth-child(2n) .rounded-responsive .polygon-backdrop {
   /*background: @bg-sottomenu-color-sfumato;*/
-  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 @media screen and (max-width: 540px) {
   .card.rounded-responsive {
@@ -4688,6 +4806,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   .image-polygon,
   .image-polygon-fascia {
     padding-left: 45%;
+    /*padding-left: 0%;*/
     padding-top: 0;
   }
   .polygon-backdrop {
@@ -4696,6 +4815,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
     clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
     position: absolute;
     width: 70%;
+    /*width: 60%;*/
     height: 100%;
     top: 0px;
   }
