@@ -501,6 +501,12 @@ i .fa {
         box-shadow: 0 4px 6px -6px #222;
     }
 
+.menuzord-menu ul.dropdown li ul.dropdown {
+    margin-top: -20px !important;
+    border-top: 1px solid @secondary-color;
+    border-left: 1px dashed @secondary-color;
+}
+
     .menuzord-menu ul.dropdown li {
         font-size: 1rem;
         padding: 12px 0;
@@ -677,6 +683,10 @@ i .fa {
             }
         }
 
+        .menuzord-menu li ul.dropdown li ul.dropdown {
+            top: 62px;
+        }
+
         .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown {
             width: 100%;
             min-width: auto;
@@ -687,7 +697,7 @@ i .fa {
             border-bottom: none !important;
             left: 0;
             /*SOTTO SOTTO MENU ON*/
-            top: 63px;
+            top: 93px;
             /*SOTTO SOTTO MENU OFF*/
             /*top: 62px;*/
         }
@@ -3384,9 +3394,10 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
         z-index: 1;
     }
 
-    .mbr-overlay-white {
-        background-color: @bg-testata-opacity-white;
-    }
+.mbr-overlay-white {
+    background-color: @bg-testata-opacity-white;
+    /*background: @bg-testata-opacity-white-gradient;*/
+}
 
     .mbr-overlay-sfumato {
         opacity: 1;
@@ -4527,11 +4538,11 @@ Breadcrumb
 --------------------------------- */
 
     /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
-    .headerspacer {
-        /*padding-top: calc(141px + 48px);*/
-        padding-top: calc(141px + 82px);
-        /*padding-top: 135px;*/ /*senza tottomenu a vista con icome*/
-    }
+.headerspacer {
+    /*padding-top: calc(141px + 48px);*/
+    padding-top: calc(141px + 82px); /*con sottomenu a vista con icome*/
+    /*padding-top: 135px;*/ /*senza sottomenu a vista con icome*/
+}
     /*--------- END ---------*/
     /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
     /*.headerspacer {
@@ -4948,6 +4959,13 @@ Breadcrumb
             min-width: 270px !important;
             height: 22px;
         }
+        .menuzord-menu ul.dropdown-home li ul.dropdown-home {
+            margin-left: -50px !important;
+        }
+
+        .menuzord-menu ul.dropdown-home li ul.dropdown-home::before {
+            display: none;
+        }
 
         li:nth-last-child(5) .dropdown-home::before {
             right: 90px;
@@ -5032,7 +5050,7 @@ Breadcrumb
 
     .image-polygon-b3 {
         padding-left: 0;
-        padding-top: 50%;
+        padding-top: 25%;
     }
 
     .polygon-backdrop-b3 {
@@ -5108,7 +5126,7 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop, .polygonblock > div:nt
     /*----ISOTOPE RISULTATI POLYGON ----*/
     .image-polygon {
         padding-left: 0;
-        padding-top: 50%;
+        padding-top: 35%;
     }
 
     .image-polygon-fascia {
@@ -5131,11 +5149,12 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop, .polygonblock > div:nt
         color: white !important;
     }
 
-    .polygon-backdrop .titolo-offerta {
-        font-size: 1.8rem;
-        font-weight: 900;
-        margin-bottom: 20px !important;
-    }
+.polygon-backdrop .titolo-offerta {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 20px !important;
+    line-height: 2.1rem;
+}
 
     .polygon-backdrop .sottotitolo-offerta {
         font-size: 1.3rem;
