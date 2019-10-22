@@ -501,7 +501,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     }
                 }
             }
-            else { output.Text = "Selezionare il file da caricare"; }
+           // else { output.Text = "Selezionare il file da caricare"; } //blocco con caricamento files vuoti
         }
         catch (Exception errorecaricamento)
         {

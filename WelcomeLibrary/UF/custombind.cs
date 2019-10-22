@@ -3919,6 +3919,16 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
+                case "formatalttext":
+                    try
+                    {
+                        if (linkloaded.ContainsKey(valore[0]) && linkloaded[valore[0]].ContainsKey(prop[0]))
+                        {
+                            ret = linkloaded[valore[0]][prop[0]];
+                        }
+                    }
+                    catch { }
+                    break;
                 case "formatbtncarrello":
                     try
                     {
