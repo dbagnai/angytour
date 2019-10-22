@@ -298,6 +298,16 @@
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
                     <%= CreaLinkPaginastatica(3) %>
+                    <%-- MENU' RISTORANTE --%>
+                    <li runat="server">
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a>
+                        <%--<%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu5"),"rif000004","") %>--%>
+                        <ul class="dropdown">
+                            <%= CreaLinkPaginastatica(46) %>
+                            <%= CreaLinkPaginastatica(45) %>
+                            <%= CreaLinkPaginastatica(44) %>
+                        </ul>
+                    </li>
                     <%--PRENOTA--%>
                     <li runat="server">
                         <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">

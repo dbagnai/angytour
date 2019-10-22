@@ -563,7 +563,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         //}
 
 
-        if (CaricaFotoSuServer(ResizeHeight, ResizeWidth, true))
+        if (!(CaricaFotoSuServer(ResizeHeight, ResizeWidth, true)))
+        {
+            NomeCorretto = "";
+        }
+
         {
             //ESITO POSITIVO DELL'UPLOAD --> SCRIVO NEL DB
             //I DATI PER RINTRACCIARE LA FOTO
