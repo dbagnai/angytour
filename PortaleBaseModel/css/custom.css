@@ -935,25 +935,6 @@ h1 span:nth-child(1).mbr-section-title,
 .title-block {
   padding-top: 20px;
 }
-@media screen and (max-width: 415px) {
-  .mbr-section-title,
-  .title-block,
-  h1 span:nth-child(1).mbr-section-title,
-  .cart-product,
-  .cart-quantity,
-  .cart-total {
-    font-size: 2rem;
-    font-weight: normal !important;
-  }
-  .mbr-section-title::after,
-  .title-block::after {
-    margin-top: 15px;
-  }
-  .mbr-section-subtitle,
-  h1 span .mbr-section-subtitle {
-    font-size: 1.5rem;
-  }
-}
 .subtitle-block a {
   font-size: 1.4rem;
   color: #1d1b1e;
@@ -1017,6 +998,26 @@ textarea {
   width: 100%;
   overflow-x: inherit;
   /*overflow-x: hidden;*/
+}
+@media screen and (max-width: 415px) {
+  .mbr-section-title,
+  .title-block,
+  h1 span:nth-child(1).mbr-section-title,
+  .cart-product,
+  .cart-quantity,
+  .cart-total {
+    font-size: 2rem;
+    font-weight: normal !important;
+  }
+  .mbr-section-title::after,
+  .title-block::after {
+    margin-top: 15px;
+  }
+  .mbr-section-subtitle,
+  h1 span .mbr-section-subtitle {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
 }
 @media (max-width: 768px) {
   .body-wrapper {
@@ -2985,7 +2986,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
   line-height: 1.9rem;
 }
 .prezzo-responsive {
-  font-size: 2vw;
+  font-size: 1.8vw;
   line-height: 1vw !important;
 }
 @media (max-width: 1200px) {
