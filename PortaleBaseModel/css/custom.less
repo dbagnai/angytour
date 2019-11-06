@@ -908,21 +908,6 @@ i .fa {
         padding-top: 20px;
     }
 
-    @media screen and (max-width: 415px) {
-        .mbr-section-title, .title-block {
-            font-size: 2rem;
-            font-weight: normal !important;
-
-            &::after {
-                margin-top: 15px;
-            }
-        }
-
-        .mbr-section-subtitle {
-            font-size: 1.5rem;
-        }
-    }
-
     .subtitle-block a {
         font-size: 1.4rem;
         color: #1d1b1e;
@@ -985,6 +970,22 @@ i .fa {
         overflow-x: inherit;
         /*overflow-x: hidden;*/
     }
+
+@media screen and (max-width: 415px) {
+    .mbr-section-title, .title-block {
+        font-size: 2rem;
+        font-weight: normal !important;
+
+        &::after {
+            margin-top: 15px;
+        }
+    }
+
+    .mbr-section-subtitle {
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+    }
+}
 
     @media (max-width: 768px) {
         .body-wrapper {
@@ -3049,7 +3050,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 
 
     .prezzo-responsive {
-        font-size: 2vw;
+        font-size: 1.8vw;
         line-height: 1vw !important;
     }
 
