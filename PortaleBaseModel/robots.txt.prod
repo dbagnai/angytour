@@ -10,5 +10,3 @@ Disallow: /bin/
 Disallow: /App_data/
 Disallow: /Aspnetpages/Content_Tipo3.aspx?idOfferta=
 Allow: /AspNetPages/Content_Tipo3.aspx
-
-
