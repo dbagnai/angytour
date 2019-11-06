@@ -602,12 +602,24 @@
                                             <li>
                                                 <hr style="margin: 2px 0" />
                                             </li>
-                                            <li class="newLi hover">
+                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-popup">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Gestione Banner popup</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                          <%--       <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-popup-2">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Gestione Banner popup grande</span></a>
+                                                <b class="arrow"></b>
+                                            </li>--%>
+                                        <%--    <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Pagina 1</span></a>
                                                 <b class="arrow"></b>
-                                            </li>
+                                            </li>--%>
                                             <%--       <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=rif000001">
                                                     <i class="menu-icon fa fa-caret-right"></i>

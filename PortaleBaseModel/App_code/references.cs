@@ -778,6 +778,8 @@ public class references
         ///////////////////////////////////////////////////////////////
         jpathcomplete.versionforcache = WelcomeLibrary.STATIC.Global.versionforcache;
         ////////////// REGIONI E PROIVINCE/////////////////////
+
+#if false //da abilitare dove queste servono lato javascript
         WelcomeLibrary.DOM.TabrifCollection trifregioni = new TabrifCollection();
         WelcomeLibrary.DOM.TabrifCollection trifprovince = new TabrifCollection();
         WelcomeLibrary.DOM.ProvinceCollection regionitmp = new WelcomeLibrary.DOM.ProvinceCollection();
@@ -804,6 +806,8 @@ public class references
         }
         jpathcomplete.jsonregioni = Newtonsoft.Json.JsonConvert.SerializeObject(trifregioni);
         jpathcomplete.jsonprovince = Newtonsoft.Json.JsonConvert.SerializeObject(trifprovince);
+
+#endif
         //////////////////////////////////////////////////////////////
         /*Per immobili*/
         string linktmp = "";
@@ -862,13 +866,16 @@ public class references
         jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
         //Dictionary<string, WelcomeLibrary.DOM.TabrifCollection> retdict = new Dictionary<string, WelcomeLibrary.DOM.TabrifCollection>();
         Dictionary<string, string> retdict = new Dictionary<string, string>();
+
         ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+#if false
         retdict.Add("JSONrefmetrature", references.refmetrature);
         retdict.Add("JSONrefprezzi", references.refprezzi);
         retdict.Add("JSONrefcondizione", references.refcondizione);
         retdict.Add("JSONreftipocontratto", references.reftipocontratto);
         retdict.Add("JSONreftiporisorse", references.reftiporisorse);
-        //retdict.Add("JSONgeogenerale", references.refgeogenerale);
+        //retdict.Add("JSONgeogenerale", references.refgeogenerale);  
+#endif
         ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
 
         retdict.Add("JSONcar1", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[0]));

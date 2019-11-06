@@ -469,7 +469,7 @@ a:hover {
   position: fixed;
   height: 40px;
   top: 0px;
-  z-index: 9999;
+  z-index: 999;
   overflow: visible;
   width: 100%;
   font-size: 0.8rem;
@@ -994,7 +994,7 @@ textarea {
 .body-wrapper {
   padding: 0px 0px;
   position: relative;
-  z-index: 0;
+  /*z-index: 0;*/
   width: 100%;
   overflow-x: inherit;
   /*overflow-x: hidden;*/

@@ -506,6 +506,8 @@
             "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
+            "~/js/bootstrap-notify-master/js/bootstrap-notify.js",
+            "~/lib/js/notifypopup.js",
             //"~/js/magnify/js/jquery.magnify.js",
             //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",
@@ -584,6 +586,11 @@
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
             "~/js/flexslider/flexslider.css",
             //"~/js/magnify/css/magnify.css",
+             "~/js/bootstrap-notify-master/css/bootstrap-notify1.css",
+            "~/js/bootstrap-notify-master/css/styles/alert-bangtidy.css",
+            "~/js/bootstrap-notify-master/css/styles/alert-custom1.css",
+            "~/js/bootstrap-notify-master/css/styles/alert-custom2.css",
+          
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",

@@ -18,7 +18,9 @@
             <div class="col-12">
                 <div class="alert alert-block" style="color: #444">
                     <asp:Label Font-Size="Medium" ID="output" runat="server" Text=""></asp:Label>
-                    <asp:Label runat="server" ID="litDescrizioneIscrivi" Text="" Font-Size="Medium" />
+                    <p class="lead">
+                        <asp:Literal runat="server" ID="litDescrizioneIscrivi" />
+                    </p>
                 </div>
             </div>
         </div>
@@ -52,8 +54,9 @@
             <div class="row">
                 <div class="col-12 col-sm-3" style="text-align: left">
                     <asp:Literal ID="Literal5" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />*
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtEmail"
-                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
+                                   
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtEmail"
+                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
                 </div>
                 <div class="col-12 col-sm-9">
                     <asp:TextBox ID="txtEmail" Width="100%" Style="height: 25px; margin-bottom: 5px; border: 1px Solid Black; background-color: #f0f0f0" runat="server" />
@@ -254,7 +257,10 @@
             <div class="col-12">
                 <asp:PlaceHolder ID="plhRisposta" runat="server" Visible="false">
                     <div class="alert alert-block" style="color: #444">
-                        <asp:Label Font-Size="Medium" ID="lblRisposta" runat="server" Text=""></asp:Label>
+                          <p class="lead">
+                            <asp:Literal ID="lblRisposta" runat="server"></asp:Literal>
+                            <br />
+                        </p>
                         <br />
                     </div>
                 </asp:PlaceHolder>

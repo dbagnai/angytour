@@ -187,7 +187,16 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 ResizeWidth = 1920;//360
                 ResizeHeight = 1280;//280
             }
-
+            if (Sezione.ToLower().Contains("banner-popup"))
+            {
+                ResizeWidth = 600;//360
+                ResizeHeight = 600;//280
+            }
+            if (Sezione.ToLower().Contains("banner-popup-2"))
+            {
+                ResizeWidth = 800;//360
+                ResizeHeight = 800;//280
+            }
             lbldimBanner.Text = "Dimensioni finali del banner: " + ResizeWidth + "x" + ResizeHeight;
 
             this.CaricaDati(Sezione);
