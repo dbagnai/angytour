@@ -5196,32 +5196,55 @@ li:nth-child(2n+1) .polygon-backdrop-b3, .polygonblock > div:nth-child(2n+1) .po
     background: @bg-primary-color-sfumato;
 }
 
-/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE ----*/
 li:nth-child(2n) .rounded-responsive .polygon-backdrop, .polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
-    /*background: @bg-sottomenu-color-sfumato;*/
     background: @bg-primary-color-sfumato;
 }
 
 li:nth-child(2n+1) .rounded-responsive .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
     background: @bg-primary-color-sfumato;
 }
-    li:nth-child(2n) .polygon-backdrop-b3 {
-        background: @bg-sottomenu-color-sfumato;
-    }
 
-    li:nth-child(2n+1) .polygon-backdrop-b3 {
-        background: @bg-primary-color-sfumato;
-    }
+/*---- MULTIBANNER HOME POLYGON PARI MULTICOLORE  ----*/
+li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: @bg-primary-color-sfumato !important;
+}
 
-    /*---- MULTIBANNER FASCIA HOME POLYGON ----*/
-    li:nth-child(2n) .rounded-responsive .polygon-backdrop {
-        /*background: @bg-sottomenu-color-sfumato;*/
-        background: @bg-primary-color-sfumato;
-    }
+li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: @bg-sottomenu-color-sfumato !important;
+}
 
-    li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-        background: @bg-primary-color-sfumato;
-    } 
+li:nth-child(n) .rounded-responsive .btn.parimulticolore, .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore {
+    &:extend(.divbuttonstyle);
+}
+
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover, .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+    &:extend(.divbuttonstyle);
+    color: @button-hover-color !important;
+    opacity: 0.78;
+    background-color: @bg-button-hover-color;
+    text-decoration: none !important;
+}
+
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore {
+    &:extend(.btn-black-outline);
+}
+
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover, .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
+    &:extend(.btn-black-outline);
+    color: @button-outline-hover-color !important;
+    background: @bg-button-outline-hover-color !important;
+    border-color: @bg-button-outline-hover-color;
+    opacity: 0.78;
+    text-decoration: none !important;
+    border: 1px solid @bg-button-color;
+}
+
+@media screen and (max-width: 720px) {
+    li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+        background: @bg-primary-color-sfumato !important;
+    }
+}
     @media screen and (max-width: 540px) {
         .card.rounded-responsive {
             border-radius: 0 !important;
@@ -5290,11 +5313,6 @@ li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polyg
         content: "/KWh";
         font-weight: 300;
         float: right
-    }
- 
-
-    li:nth-child(2n+1) .polygon-backdrop {
-        background: @bg-primary-color-sfumato;
     }
 
     li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {

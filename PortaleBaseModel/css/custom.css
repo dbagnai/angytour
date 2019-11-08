@@ -1575,6 +1575,10 @@ input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello,
 .button-carrello1,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .button-carrello:hover,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
@@ -1690,6 +1694,10 @@ a.btn-black-outline:focus,
 .btn .btn-banner:active,
 .btn .btn-banner:visited,
 .btn .btn-banner:focus,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
 .btn-banner:hover,
 .btn-banner:hover,
 .btn .btn-banner:hover,
@@ -4848,29 +4856,45 @@ li:nth-child(2n+1) .polygon-backdrop-b3,
 .polygonblock > div:nth-child(2n+1) .polygon-backdrop-b3 {
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
-/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
+/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE ----*/
 li:nth-child(2n) .rounded-responsive .polygon-backdrop,
 .polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
-  /*background: @bg-sottomenu-color-sfumato;*/
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
 .polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
   background: linear-gradient(45deg, #076969, #0bb5b5);
 }
-li:nth-child(2n) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+/*---- MULTIBANNER HOME POLYGON PARI MULTICOLORE  ----*/
+li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
 }
-li:nth-child(2n+1) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
+li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
 }
-/*---- MULTIBANNER FASCIA HOME POLYGON ----*/
-li:nth-child(2n) .rounded-responsive .polygon-backdrop {
-  /*background: @bg-sottomenu-color-sfumato;*/
-  background: linear-gradient(45deg, #076969, #0bb5b5);
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+  color: #000 !important;
+  opacity: 0.78;
+  background-color: #ffffff;
+  text-decoration: none !important;
 }
-li:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
+  color: #fff !important;
+  background: #032f2f !important;
+  border-color: #032f2f;
+  opacity: 0.78;
+  text-decoration: none !important;
+  border: 1px solid #f3c649;
+}
+@media screen and (max-width: 720px) {
+  li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
+  .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  }
 }
 @media screen and (max-width: 540px) {
   .card.rounded-responsive {
@@ -4932,9 +4956,6 @@ li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
   content: "/KWh";
   font-weight: 300;
   float: right;
-}
-li:nth-child(2n+1) .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
 }
 li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   content: "/Smc";
