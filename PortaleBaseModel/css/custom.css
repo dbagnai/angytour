@@ -2116,6 +2116,14 @@ ul li .work-image:hover:after,
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
+.image-polygon-b3.imgovercontainer:hover:after {
+  z-index: 2 !important;
+  background: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  opacity: 1 !important;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
 .btn.btn-blue {
   border: 1px solid #098f8f;
   box-shadow: none;
@@ -4996,7 +5004,8 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   font-size: 1.2rem;
   letter-spacing: 4px;
 }
-.grid-shape-polygon .imgovercontainer:hover.work-image > img {
+.grid-shape-polygon .imgovercontainer:hover.work-image > img,
+.image-polygon-b3.imgovercontainer:hover > img {
   -webkit-transform: scale(1.2);
   /*scale(1.3) rotate(2deg);*/
   -moz-transform: scale(1.2);
