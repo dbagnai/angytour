@@ -184,6 +184,27 @@ jQuery(document).ready(function ($) {
 
 
 
+    /*HAMMER INIT TO AVOID VERTICAL SWIPE ON SCROLLERS*/
+    (function wait() {
+        if (typeof Hammer !== 'undefined') {
+            $('.item.box').each(function () {
+            //$('.owl-carousel-v1').each(function () {
+                var options = {
+                    preventDefault: true
+                };
+                var mc = new Hammer(this, options);
+                mc.on("panup pandown", function (e) {
+                    //mc.on("panup pandown swipeup swipedown", function (e) {
+                    //var id = e.target.id;
+                    //console.log('event vertical detecded');
+                });
+            });
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
+
     /*------------------------------------------------------- */
         //InitIsotope();
     /*-----------------------*/
