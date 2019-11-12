@@ -52,6 +52,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 ///////////| FONT PAGE |///////////
 ----------------------------------*/
+/**/
 /*@title-text-transform: uppercase;*/
 /**/
 /**/
@@ -1075,6 +1076,31 @@ h1 span {
     margin-left: 5px;
     font-size: 75px;
   }
+}
+/* testi su colonne */
+.testo-colonne {
+  columns: auto;
+  column-count: 2;
+  column-gap: 30px;
+  font-size: 1.35rem;
+}
+@media (max-width: 768px) {
+  .testo-colonne {
+    column-count: 1;
+  }
+}
+/* classi per scalatura forzata dei caratteri */
+.scalablefont-big {
+  font-size: calc(24px + 0.8vw + 0.8vh + 0.4vmin) !important;
+}
+.scalablefont-medium-big {
+  font-size: calc(20px + 0.5vw + 0.5vh + 0.25vmin) !important;
+}
+.scalablefont-medium {
+  font-size: calc(16px + 0.45vw + 0.45vh + 0.225vmin) !important;
+}
+.scalablefont-small {
+  font-size: calc(16px + 0.25vw + 0.25vh + 0.125vmin) !important;
 }
 /*----------------------------------
 ----------- ISOTOPE BLOG -----------
@@ -5099,17 +5125,4 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   width: 100% !important;
   max-height: 100% !important;
   max-width: 100% !important;
-}
-/* classi per scalatura forzata dei caratteri */
-.scalablefont-big {
-  font-size: calc(24px + 0.8vw + 0.8vh + 0.4vmin) !important;
-}
-.scalablefont-medium-big {
-  font-size: calc(20px + 0.5vw + 0.5vh + 0.25vmin) !important;
-}
-.scalablefont-medium {
-  font-size: calc(16px + 0.45vw + 0.45vh + 0.225vmin) !important;
-}
-.scalablefont-small {
-  font-size: calc(16px + 0.25vw + 0.25vh + 0.125vmin) !important;
 }
