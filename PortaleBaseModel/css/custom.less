@@ -134,6 +134,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .bg-color-sottomeu-active {
     background-color: @color-sottomeu-active !important;
 }
+.bg-color-sottomeu-rgba {
+    background-color: @color-sottomeu-rgba !important;
+}
 
 .bg-transparent-white {
     background-color: @bg-white-opacity !important;
@@ -203,6 +206,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     color: @white-color !important;
 }
 
+.gray-color {
+    color: @gray-color !important;
+}
 
 .bckGray {
     /*background-color: #f9f9f9;*/
@@ -240,32 +246,32 @@ h6 {
 
 h1 {
     font-size: 1.7rem;
-    line-height: 35px;
+    /*line-height: 35px;*/
 }
 
 h2 {
     font-size: 1.4rem;
-    line-height: 30px;
+    /*line-height: 30px;*/
 }
 
 h3 {
     font-size: 1.2rem;
-    line-height: 26px;
+    /*line-height: 26px;*/
 }
 
 h4 {
     font-size: 1rem;
-    line-height: 22px;
+    /*line-height: 22px;*/
 }
 
 h5 {
     font-size: 1rem;
-    line-height: 22px;
+    /*line-height: 22px;*/
 }
 
 h6 {
     font-size: 1rem;
-    line-height: 20px;
+    /*line-height: 20px;*/
 }
 
 
@@ -1075,22 +1081,7 @@ i .fa {
     }
 }
 
-/* classi per scalatura forzata dei caratteri */
-.scalablefont-big {
-    font-size: @scalable-big-font-size !important;
-}
-
-.scalablefont-medium-big {
-    font-size: @scalable-medium-big-font-size !important;
-}
-
-.scalablefont-medium {
-    font-size: @scalable-medium-font-size !important;
-}
-
-.scalablefont-small {
-    font-size: @scalable-small-font-size !important;
-}
+ 
     /*----------------------------------
 ----------- ISOTOPE BLOG -----------
 ----------------------------------*/
@@ -5504,3 +5495,169 @@ li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polyg
         max-width: 100% !important;
     }
 
+
+
+
+/*SEZIONE AGGIUNTA TRATTAMENTI ...*/
+
+/*BOX SEMITRAPARENTE*/
+
+.treatment-search {
+    border-radius: 10px;
+    box-shadow: 0 9px 10px rgba(0,0,0,.06);
+    padding: 30px 70px 30px 70px;
+    position: relative;
+    top: -30px;
+    z-index: 96;
+    background-color: rgba(255,255,255,0.6);
+    margin: 15px;
+}
+
+.tratment-selection-form {
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+
+@media (max-width: 501px) {
+    .treatment-search {
+        top: 0px;
+    }
+}
+
+/* Blocchi fondini  per schede*/
+
+
+.blocco-dati:first-child {
+    border-top: 1px solid #eee;
+}
+
+.blocco-dati {
+    background: #fff;
+    position: relative;
+    padding: 2em;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 501px) {
+    .blocco-dati {
+        padding: 2em;
+        margin-bottom: 2em;
+        border-radius: 10px;
+        border: none;
+    }
+}
+/*PULSANTE PRENOTA FLOTTANTE  */
+
+.lead-action {
+    position: fixed;
+    top: 110px;
+    right: 0px;
+    z-index: 96;
+    display: flex;
+    margin-bottom: 0;
+}
+
+.lead-action--content {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .lead-action {
+        width: 260px;
+        margin-bottom: 0;
+        right: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .lead-action {
+        width: 260px;
+        margin-bottom: 0;
+        right: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .lead-action {
+        width: 260px;
+        margin-bottom: 0;
+        right: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .lead-action {
+        top: -10px;
+        right: 20px;
+        z-index: 99;
+    }
+}
+
+.lead-action-link:hover {
+    color: #fff;
+    background-color: #e7637b;
+}
+
+
+
+.lead-action-link {
+    white-space: nowrap;
+    box-shadow: 0 6px 13px 0 rgba(239,86,113,.32);
+    bottom: 0;
+    text-decoration: none;
+    color: #fff;
+    background-color: #f45a99;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    margin: .7142857143em 1.4285714286em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all linear 250ms;
+}
+
+@media (min-width: 501px) {
+    .lead-action-link {
+        width: auto;
+        height: auto;
+        border-radius: 18px;
+        padding: .7142857143em 1.1428571429em;
+        display: inline-flex;
+        font-weight: 400;
+        transition: all linear 250ms;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 501px) {
+    .lead-action-link span {
+        display: none;
+    }
+}
+
+
+/* classi per scalatura forzata dei caratteri */
+.scalablefont-big {
+    font-size: @scalable-big-font-size !important;
+}
+
+.scalablefont-medium-big {
+    font-size: @scalable-medium-big-font-size !important;
+}
+
+.scalablefont-medium {
+    font-size: @scalable-medium-font-size !important;
+}
+
+.scalablefont-small {
+    font-size: @scalable-small-font-size !important;
+}
+
+.scalablefont-smallest {
+    font-size: @scalable-smallest-font-size !important;
+}
