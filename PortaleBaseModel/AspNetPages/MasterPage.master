@@ -271,9 +271,9 @@
                     <%= CreaLinkTipologie(3,3) %>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
-                        <%--<a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>--%>
-                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %>
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
                         <ul class="dropdown visible-ok">
+                            <li><%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %></li>
                             <%--<%= CreaLinkPaginastatica(4) %>--%>
                             <%--<%= CreaLinkTipologie(1,1) %>--%>
                             <%--<%= CreaLinkCategorie("rif000001") %>--%>
@@ -375,7 +375,24 @@
                     </li>--%>
 
                     <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
-
+                  <%--   <li runat="server">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000031",true,true) %> </a>
+                        <ul class="dropdown">
+                            <%= CreaLinkCategorie("rif000001","prod000031","",false) %>
+                            <li>
+                                <hr />
+                            </li>
+                            <%= CaricaLinksPerTipologia("rif000001","prod000031","20") %>
+                        </ul>
+                    </li>--%>
+                   <%--    <li runat="server" class="d-block">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000002",true,true) %> </a>
+                        <ul class="dropdown">
+                            <%= CreaLinkTipologie(2,2,"",false) %>
+                            <li><hr /></li>
+                            <%= CreaLinkCategorie("rif000002") %>
+                        </ul>
+                    </li>--%>
                     <%--  <li runat="server">
                         <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "9".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
                         <ul class="dropdown">
@@ -524,13 +541,16 @@
             <div class="col-12 p-0 d-block d-sm-none">
                 <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
                 <%--<div class="w-100 p-1 bg-white text-white text-center"></div>--%>
-                    <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size:1.5rem">
-                        <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
-                        <span>Chiamaci adesso al<br><b><%= references.ResMan("Common", Lingua,"testoTelfisso")%></b><br><br></span>
-                        <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
-                        <%--<div class="arrow-down-even d-block d-sm-none" style="top: 0.45rem;"></div>--%>
-                    </div>
+                <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
+                    <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
+                    <span>Chiamaci adesso al<br>
+                        <b><%= references.ResMan("Common", Lingua,"testoTelfisso")%></b><br>
+                        <br>
+                    </span>
+                    <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
+                    <%--<div class="arrow-down-even d-block d-sm-none" style="top: 0.45rem;"></div>--%>
                 </div>
+            </div>
 
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <div id="divContattiMaster" runat="server" visible="true">
@@ -593,33 +613,33 @@
                                     <script>
                                         function ConfirmValidationFormMaster(elembtn) {
                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                                var out1 = document.getElementById("outputContactMasterDiv");
-                                                if (!chk1.checked) {
-                                                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                    return false;
-                                                } else { out1.innerHTML = ''; }
-                                                if (Page_ClientValidate("contattifooter")) {
-                                                    /*do work and go for postback*/
-                                                    console.log('ok validated');
-                                                    $(elembtn).attr("disabled", "")
+                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                            if (!chk1.checked) {
+                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                return false;
+                                            } else { out1.innerHTML = ''; }
+                                            if (Page_ClientValidate("contattifooter")) {
+                                                /*do work and go for postback*/
+                                                console.log('ok validated');
+                                                $(elembtn).attr("disabled", "")
 
-                                                    //invio nopostback con handler////////////////////////////////////////////////////
-                                                    var contactdatas = {};
-                                                    contactdatas.chkprivacy = chk1.checked;
-                                                    contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                var contactdatas = {};
+                                                contactdatas.chkprivacy = chk1.checked;
+                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
-                                                getcontactdata(contactdatas, function (contactdatas) {
-                                                    var tastotxt = $(elembtn).html();
-                                                    $(elembtn).html("Wait ..");
-                                                    inviamessaggiomail(lng, contactdatas, function (result) {
-                                                        if (result) {
-                                                            //in caso di errore visualizzo
-                                                            out1.innerHTML = result;
-                                                            $(elembtn).removeAttr("disabled")
-                                                            $(elembtn).html(tastotxt);
-                                                        }
-                                                    }, tastotxt);
-                                                }, $(elembtn));
+                                                    getcontactdata(contactdatas, function (contactdatas) {
+                                                        var tastotxt = $(elembtn).html();
+                                                        $(elembtn).html("Wait ..");
+                                                        inviamessaggiomail(lng, contactdatas, function (result) {
+                                                            if (result) {
+                                                                //in caso di errore visualizzo
+                                                                out1.innerHTML = result;
+                                                                $(elembtn).removeAttr("disabled")
+                                                                $(elembtn).html(tastotxt);
+                                                            }
+                                                        }, tastotxt);
+                                                    }, $(elembtn));
                                                 ///////////////////////////////////////////////////////////////////////
 
                                                 ///////////////////////////////////////////////////////////////////////
