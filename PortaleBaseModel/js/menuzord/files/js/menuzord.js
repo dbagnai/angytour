@@ -173,9 +173,14 @@ License: http://codecanyon.net/licenses
             }
         }
 
+        function showulmenuzord() {
+            $(menu).removeClass('outofsight');
+            //menu_container.removeClass('outofsight');
+        }
+
         // show the bar to show/hide menu items on mobile
         function showMobileBar() {
-            $(menu).removeClass('outofsight');
+            //$(menu).removeClass('outofsight');
             $(menu).hide(0);
             $(showHideButton).show(0).click(function () {
                 if ($(menu).css("display") == "none")
@@ -187,7 +192,7 @@ License: http://codecanyon.net/licenses
 
         // hide the bar to show/hide menu items on mobile
         function hideMobileBar() {
-            $(menu).removeClass('outofsight');
+            //$(menu).removeClass('outofsight');
             $(menu).show(0);
             $(showHideButton).hide(0);
         }
@@ -222,11 +227,13 @@ License: http://codecanyon.net/licenses
 
         // return window's width
         function windowWidth() {
-            return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            //return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            return $(window).width();
         }
 
         // navigation start function
         function startMenu() {
+            showulmenuzord();
             fixSubmenuRight();
             if (windowWidth() <= mobileWidthBase && bigScreenFlag > mobileWidthBase) {
                 unbindEvents();
@@ -263,7 +270,7 @@ License: http://codecanyon.net/licenses
             startMenu();
             fixSubmenuRight();
         });
-    }
+    };
 }(jQuery));
 
 /**
