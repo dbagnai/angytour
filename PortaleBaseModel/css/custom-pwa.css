@@ -133,6 +133,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-color: #f3c649 !important;
   background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
 }
+.bg-color-sottomeu-sfumato-veryalpha {
+  background: linear-gradient(45deg, hsla(44.11764706, 100%, 45%, 0.5), hsla(44.11764706, 100%, 45%, 0.2));
+}
 .bg-color-sottomeu-active {
   background-color: #f5cf64 !important;
 }
@@ -893,6 +896,11 @@ textarea {
   h1 span .mbr-section-subtitle {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
+  }
+  .title-isotope,
+  .big2 {
+    font-size: 1.8rem !important;
+    line-height: 2.3rem !important;
   }
 }
 @media (max-width: 768px) {
@@ -2598,6 +2606,28 @@ ul.footer-category-list {
   font-weight: 300;
   background-color: transparent;
   line-height: 1.8rem !important;
+}
+.arrow-down-odd {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 20px solid #ebf6f6;
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  top: -1px;
+}
+.arrow-down-even {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 20px solid #fff;
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  top: -1px;
 }
 /*----------------------------------
 -------- BANNER NAVIGAZIONE --------

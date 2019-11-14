@@ -44,11 +44,12 @@
 /**/
 @color-sottomeu-gradient1: darken(@color-sottomeu, 5%);
 @color-sottomeu-gradient2: lighten(@color-sottomeu, 8%);
-@color-sottomeu-gradient2-alpha: hsla(hue(@color-sottomeu-gradient2), 100%, 45%, 0.5); /*hue, saturation, lightness, alpha*/
+@color-sottomeu-gradient2-alpha: hsla(hue(@color-sottomeu-gradient2), 100%, 45%, 0.5);
+@color-sottomeu-gradient3-alpha: hsla(hue(@color-sottomeu-gradient2), 100%, 45%, 0.2); /*hue, saturation, lightness, alpha*/
 @bg-sottomenu-color-sfumato: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2);
 @bg-sottomenu-color-sfumato-alpha: linear-gradient(45deg, @color-sottomeu-gradient1, @color-sottomeu-gradient2-alpha);
+@bg-sottomenu-color-sfumato-veryalpha: linear-gradient(45deg, @color-sottomeu-gradient2-alpha, @color-sottomeu-gradient3-alpha);
 @bg-sottomenu-color-sfumato-alpha-bottom: linear-gradient(to bottom, @color-sottomeu-gradient1, @color-sottomeu-gradient2-alpha);
-
 /*----------------------------------
 //////////////| LOGO |//////////////
 ----------------------------------*/
