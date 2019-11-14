@@ -98,7 +98,7 @@ License: http://codecanyon.net/licenses
             $(item).children(".dropdown, .megamenu").find(".dropdown, .megamenu").stop(true, true).delay(settings.hideDelay).fadeOut(settings.hideSpeed);
         }
 
-        // landscape mode
+        // landscape mode ( menu espanso normale )
         function landscapeMode() {
             $(menu).find(".dropdown, .megamenu").hide(0);
             if (navigator.userAgent.match(/Mobi/i) || window.navigator.msMaxTouchPoints > 0 || settings.trigger == "click") {
@@ -130,15 +130,32 @@ License: http://codecanyon.net/licenses
             }
         }
 
-        // portrait mode
+        // portrait mode ( menu comapattato con pulsante apertura )
         function portraitMode() {
             $(menu).find(".dropdown, .megamenu").hide(0);
             $(menu).find(".indicator").each(function () {
                 if ($(this).parent("a").siblings(".dropdown, .megamenu").length > 0) {
+
+                    /*AGGUNTO DA DANILE PER GESTIRE APERTURA MENU AL CLI SU LINK INVECE CHE NAVIGAZIONE*/
+                    $(this).parent("a").bind("click", function (e) {
+                        e.preventDefault();
+                        if ($(this).siblings(".dropdown, .megamenu").css("display") == "none") {
+                            $(this).siblings(".dropdown, .megamenu").delay(settings.showDelay).slideDown(settings.showSpeed);
+                            $(this).parent("li").siblings("li").find(".dropdown, .megamenu").slideUp(settings.hideSpeed);
+                        }
+                        else {
+                            $(this).siblings(".dropdown, .megamenu").slideUp(settings.hideSpeed);
+                        }
+                        window.location.href = $(this).attr("href");
+                    });
+                    /* fiNE AGGUNTO DA DANILE PER GESTIRE APERTURA MENU AL CLI SU LINK INVECE CHE NAVIGAZIONE*/
+
+
                     $(this).bind("click", function (e) {
                         $(menu).scrollTo({ top: 45, left: 0 }, 600);
                         if ($(this).parent().prop("tagName") == "A") {
                             e.preventDefault();
+                            e.stopPropagation();
                         }
                         if ($(this).parent("a").siblings(".dropdown, .megamenu").css("display") == "none") {
                             $(this).parent("a").siblings(".dropdown, .megamenu").delay(settings.showDelay).slideDown(settings.showSpeed);
@@ -148,8 +165,20 @@ License: http://codecanyon.net/licenses
                             $(this).parent("a").siblings(".dropdown, .megamenu").slideUp(settings.hideSpeed);
                         }
                     });
+
+
                 }
             });
+            /*Aggiuntadaniele per apertura menu invece di navigazione su click in modalita menu compatto*/
+            //if (navigator.userAgent.match(/Mobi/i) || window.navigator.msMaxTouchPoints > 0 || settings.trigger == "click") {
+            //    $(".menuzord-menu > li > a.a-dropdown, .menuzord-menu ul.dropdown li a.a-dropdown").bind("click touchstart", function (e) {
+            //        $(menu).scrollTo({ top: 45, left: 0 }, 600);
+            //        e.stopPropagation();
+            //        e.preventDefault();
+
+            //    });
+            //}
+
         }
 
         // Fix the submenu on the right side
