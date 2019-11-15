@@ -133,10 +133,17 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             }
 
             //NUOVO METODO A TABELLA UNICA
+            if (Sezione.ToLower().Contains("banner-portfolio-bg-"))
+            {
+                ResizeWidth = 1000;
+                ResizeHeight = 750;
+            }
+
+            //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("banner-portfolio-"))
             {
                 ResizeWidth = 800;
-                ResizeHeight = 350;
+                ResizeHeight = 800;
             }
             if (Sezione.ToLower().Contains("banners-testata-funnel"))
             {
