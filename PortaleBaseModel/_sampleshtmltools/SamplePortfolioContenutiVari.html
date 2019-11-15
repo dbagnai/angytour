@@ -1,8 +1,4 @@
-﻿<!--Esempio portfolio card con banner-->
-<div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBanner3overlayneg.html', 'divContainerNav1', 'portban', 1, 1, false, '', '12', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-catalogo', false">&nbsp;</div>
-
-
-<!--Esempio portfolio card con contenuti-->
+﻿<!--Esempio bootstrap portfolio card masonry con contenuti-->
 <div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
     <script>
         $(function () {
@@ -22,6 +18,25 @@
     </script>
     <div id="divPortfolioList" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioMyMasonryCard.html', 'divPortfolioList', 'portlist1', 1, 44, true, '', 'rif000002', '',true,false">&nbsp;</div>
     <div id="divPortfolioListPager">&nbsp;</div>
+</div>
+
+<!--VERSIONE SINGLE ROW CON PORTFOLIO CONTENUTI-->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioListpf" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioSinglerow-nobutton.html,divPortfolioListpf, portlistpf, 1, 42, false,'',rif000001,'',false,true,'','','','true'"></div>
+</div>
+
+
+<!--Esempio botstrap portfolio card con contenuti-->
+<div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
+    <script>
+        // <![CDATA[
+        $(function () {
+            $("#portfolioall").children().first().removeClass();
+            $("#portfolioall").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del primo elemento del portfolio
+        });
+                    // ]]></script>
+    <div id="divContainermix" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioBlog3CardTipo1.html', 'divContainermix', 'portfolioall', 1, 24, false, '', 'rif000002', '', true, false,'7'">&nbsp;</div>
+    <div id="divContainermixPager">&nbsp;</div>
 </div>
 
 
