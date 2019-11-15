@@ -4655,11 +4655,11 @@ button.js-roundedpush:hover {
   font-family: 'Raleway', sans-serif;
   font-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 700 !important;
-  line-height: normal;
+  line-height: calc(40px + (50 - 40) * ((100vw - 768px) / (1200 - 768))) !important;
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
   /*BANNER TESTATA HOME - 100% ON*/
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   /*BANNER TESTATA HOME - 55% ON*/
   /*text-align: left;
     white-space: pre-wrap;
