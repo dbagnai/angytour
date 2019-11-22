@@ -53,6 +53,7 @@
     <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png" />
     <meta name="msapplication-TileColor" content="#000000" />
     <link rel="manifest" href="~/manifest.json" runat="server">
+    
 </head>
 <%--<body class="bckGray">--%>
 <body>
@@ -537,11 +538,11 @@
             <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 0px;">
                 <div id="divnavigazioneJs0" style="background-color: transparent"></div>
             </div>
+            <div id="masterlow"></div>
 
             <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
-            <div class="col-12 p-0 d-block d-sm-none">
+         <%--   <div class="col-12 p-0 d-none">
                 <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
-                <%--<div class="w-100 p-1 bg-white text-white text-center"></div>--%>
                 <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
                     <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
                     <span>Chiamaci adesso al<br>
@@ -549,10 +550,8 @@
                         <br>
                     </span>
                     <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
-                    <%--<div class="arrow-down-even d-block d-sm-none" style="top: 0.45rem;"></div>--%>
                 </div>
-            </div>
-
+            </div>--%>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">

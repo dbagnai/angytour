@@ -575,8 +575,8 @@ namespace WelcomeLibrary.UF
             //return Regex.Replace(strIn, @"[^\w\.@-]", "");
             // strIn = Regex.Replace(strIn, @"[\W]", "");
             strIn = strIn.Replace(" ", "-");
-            strIn = strIn.Replace("\r", "-");
-            strIn = strIn.Replace("\n", "");
+            strIn = strIn.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "-");
+
             strIn = strIn.Replace("à", "a");
             strIn = strIn.Replace("è", "e");
             strIn = strIn.Replace("ì", "i");

@@ -217,7 +217,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + " " + nomemittente + " tramite il sito " + ConfigManagement.ReadKey("Nome");
                     HtmlToText htmltotext = new HtmlToText();
-                    string Descrizione = htmltotext.Convert(message).Replace("\r", "<br/>") + " <br/> ";
+                    string Descrizione = htmltotext.Convert(message).Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "<br/>") + " <br/> ";
                     //string Descrizione = (message).Replace("\r", "<br/>") + " <br/> ";
                     if (idofferta != "") //Inseriamo il dettaglio della scheda di provenienza
                     {
@@ -232,7 +232,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                                 maildestinatario = item.Email;
                             }
                             Descrizione += "<br/><br/>";
-                            Descrizione += "Pagina provenienza: " + item.DenominazioneI.Replace("\r", "<br/>") + " id:" + idperstatistiche;
+                            Descrizione += "Pagina provenienza: " + item.DenominazioneI.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "<br/>") + " id:" + idperstatistiche;
                             Descrizione += "<br/><br/>";
                         }
                     }
