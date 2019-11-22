@@ -303,7 +303,8 @@
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a>
                         <%--<%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu5"),"rif000004","") %>--%>
                         <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(46) %>
+                            <%= CreaLinkPaginastatica(53) %>
+                            <%= CreaLinkPaginastatica(52) %>
                             <%= CreaLinkPaginastatica(45) %>
                             <%= CreaLinkPaginastatica(44) %>
                         </ul>

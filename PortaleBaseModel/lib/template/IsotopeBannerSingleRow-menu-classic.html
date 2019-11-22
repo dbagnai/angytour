@@ -1,0 +1,160 @@
+﻿ <style>
+     :root { --main-wole-diameter: 77px }
+     :root { --main-border-depth: 1px }
+     :root { --main-outline-depth: 3px }
+     :root { --main-offset-depth: 3px }
+     :root { --main-border-color: #c7b06e }
+
+     .cornicione {
+        border-style: solid !important;
+        border-width: var(--main-border-depth) !important;
+        outline-style: solid !important;
+        outline-width: var(--main-outline-depth) !important;
+        outline-color: var(--main-border-color);
+        outline-offset: var(--main-offset-depth);
+     }
+     .circular-segment {
+         height:calc((var(--main-wole-diameter) / 2) + 7px);
+         width:calc((var(--main-wole-diameter) / 2) + 7px);
+         overflow:hidden;
+     }
+     .c-s-top-left {
+         left:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+         top:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+     }
+     .c-s-top-right {
+         right:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+         top:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+     }
+     .c-s-bottom-right {
+         right:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+         bottom:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+     }
+     .c-s-bottom-left {
+         left:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+         bottom:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+     }
+    .whole-circle {
+        width: var(--main-wole-diameter);
+        height:var(--main-wole-diameter);
+        line-height:var(--main-wole-diameter);
+        z-index: 1;
+        border-style: solid !important;
+        border-width: 3px !important;
+    }
+    .whole-circle:before {
+         background: none;
+         border: 3px solid var(--main-border-color);
+         content: "";
+         display: block;
+position: relative;
+         pointer-events: none;
+         border-radius: 100%;
+         margin-top: -3px;
+         margin-left: -3px;
+         padding: 50%;
+}
+    .whole-circle:after {
+         content: "";
+         background: none;
+         border: 1px solid var(--main-border-color);
+         display: block;
+         position: absolute;
+         margin-top: -7px;
+         margin-left: -7px;
+         padding: calc(50% + 6px);
+         top: 0;
+         border-radius: 100%;
+}
+    .w-c-top-left {
+        margin-top:calc(var(--main-wole-diameter) / -2);
+        margin-left:calc(var(--main-wole-diameter) / -2);
+    }
+    .w-c-top-right {
+        margin-top:calc(var(--main-wole-diameter) / -2);
+        margin-right:calc(var(--main-wole-diameter) / -2);
+        right:calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+    }
+    .w-c-bottom-right {
+        margin-bottom:calc(var(--main-wole-diameter) / -2);
+        margin-right:calc(var(--main-wole-diameter) / -2);
+        bottom: calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+        right: calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+    }
+    .w-c-bottom-left {
+        margin-bottom:calc(var(--main-wole-diameter) / -2);
+        margin-left:calc(var(--main-wole-diameter) / -2);
+        bottom: calc((var(--main-border-depth) + var(--main-outline-depth) + var(--main-offset-depth)) * -1);
+    }
+    .ornamento {
+        width: 12px;
+        height: 12px;
+        z-index: 3;
+        background-color: var(--main-border-color);
+    }
+ </style>
+    <!-- Isotope  -->
+ <div class="col-12 col-md-12 mx-auto p-0 pt-4 mt-4 pt-lg-0 mt-lg-0 bd-secondary-color cornicione">
+     <div class="d-block d-lg-none position-absolute bg-secondary-color rounded-circle icona-menu text-center" style="width:100px; height:100px;line-height:50px; left:50%; margin-left:-50px; top:-50px; background-position:center;"></div>
+     <div class="d-none d-lg-block position-absolute text-center circular-segment c-s-top-left">
+         <div class="position-relative bg-white icona-menu text-center rounded-circle whole-circle bd-sottomenu-color w-c-top-left"></div>
+         <div class="position-absolute rounded-circle ornamento" style="top: 0px;left: 0px;"></div>
+     </div>
+     <div class="d-none d-lg-block position-absolute text-center circular-segment c-s-top-right">
+         <div class="position-relative bg-white icona-menu text-center rounded-circle whole-circle bd-primary-color w-c-top-right"></div>
+         <div class="position-absolute rounded-circle ornamento" style="top: 0px; right: 0px;"></div>
+     </div>
+     <div class="d-none d-lg-block position-absolute text-center circular-segment c-s-bottom-right">
+         <div class="position-relative bg-white icona-menu text-center rounded-circle whole-circle bd-primary-color w-c-bottom-right"></div>
+         <div class="position-absolute rounded-circle ornamento" style="bottom: 0px; right: 0px;"></div>
+     </div>
+     <div class="d-none d-lg-block position-absolute text-center circular-segment c-s-bottom-left">
+         <div class="position-relative bg-white icona-menu text-center rounded-circle whole-circle bd-primary-color w-c-bottom-left"></div>
+         <div class="position-absolute rounded-circle ornamento" style="bottom: 0px; left: 0px;"></div>
+     </div>
+     <ul class="works-grid works-grid-gut works-grid-1 works-hover-lw alternatecolor" id="replaceid">
+         <li class="work-item mb-0">
+
+             <div class="work-div-noborder even m-0 px-3 py-4 px-md-5 py-md-5">
+                 <div class="row align-items-center my-0 mx-auto width-banner-fascia">
+                     <div class="col-12 px-0 my-2 px-md-3">
+                         <h3 class="mt-4 mt-md-0 mb-1 title-isotope text-center text-md-left" style="font-size: 2rem; font-weight:400;">
+                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                         </h3>
+                     </div>
+                     <div class="col-12 col-md-9 px-0 px-md-3">
+                         <div class="work-subcaption text-center text-md-left body-isotope my-2 px-0" style="height:auto;">
+                             <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                         </div>
+                     </div>
+                     <div class="col-12 col-md-3 px-3 align-self-end">
+                         <div class="work-subcaption body-isotope my-2 px-0 d-flex align-items-end" style="height:auto; font-size: 1.6rem;">
+                             <span class="bind text-center text-md-right w-100 font-weight-bold" mybind="Id" myvalue="imagedesc" format="formatalttext"></span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="work-div-noborder odd m-0 px-3 py-4 px-md-5 py-md-5 bg-light-color no-plygon">
+                 <div class="row align-items-center my-0 mx-auto width-banner-fascia" style="border:none;">
+                     <div class="col-12 my-2 px-0 px-md-3">
+                         <h3 class="mt-4 mt-md-0 mb-1 title-isotope text-center text-md-left" style="font-size: 2rem; font-weight:400;">
+                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                         </h3>
+                     </div>
+                     <div class="col-12 col-md-9 px-0 px-md-3">
+                         <div class="work-subcaption text-center text-md-left body-isotope my-2 px-0" style="height:auto;">
+                             <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                         </div>
+                     </div>
+                     <div class="col-12 col-md-3 px-3 align-self-end">
+                         <div class="work-subcaption body-isotope my-2 px-0 d-flex align-items-end" style="height:auto; font-size: 1.6rem;">
+                             <span class="bind text-center text-md-right w-100 font-weight-bold" mybind="Id" myvalue="imagedesc" format="formatalttext"></span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </li>
+     </ul>
+ </div>
+<!-- Fine Isotope   -->
