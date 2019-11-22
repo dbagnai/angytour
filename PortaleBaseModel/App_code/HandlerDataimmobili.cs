@@ -583,11 +583,10 @@ public class HandlerDataimmobili : IHttpHandler, IRequiresSessionState
 
     protected string SostituisciACapo(string testo)
     {
-        testo = testo.Replace("\r\n", "<br/>");
-        testo = testo.Replace("\n", "<br/>");
-        testo = testo.Replace("\r", "<br/>");
+        testo = testo.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "<br/>");
         return testo;
     }
+
 
     protected Dictionary<string, string> FiltraDatiById(HttpContext context, string id, string lingua, string tipologia, bool usecdn = false)
     {
