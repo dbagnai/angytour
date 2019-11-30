@@ -661,7 +661,13 @@
                             </ul>
                                  <div id="menu-fascia" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body" style="padding: 0 0 0 15px;">
-                                        <ul class="submenu display-active">           
+                                        <ul class="submenu display-active">
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-bg">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner fascia new-home background alternate</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
                                                     <i class="menu-icon fa fa-caret-right"></i>

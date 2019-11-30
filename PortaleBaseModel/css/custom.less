@@ -42,7 +42,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
         border-bottom: 40px solid transparent;
     }
     .bg-light-color.no-plygon, .no-plygon .bg-light-color, .position-sticky .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%);
+        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%) !important;
         border-top: 0px solid transparent;
         border-bottom: 0px solid transparent;
     }
@@ -58,6 +58,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     }
     .div-poligon, .mbr-overlay-sfumato {
         clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+    .div-poligon-alternate, .mbr-overlay-sfumato-alternate {
+        clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% calc(100% - 40px));
         border-top: 0px solid transparent;
         border-bottom: 0px solid transparent;
     }
@@ -93,6 +98,26 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
         margin-top: -50px;
         top: unset;
     }
+    .alternatecolor .bg-light-color.no-plygon:before, ul.alternatecolor .bg-light-color.no-plygon:before {
+        position: absolute;
+        width: 100%;
+        content: "";
+        background: @bg-secondary-color;
+        right: 0;
+        left: 0;
+        z-index: 12;
+        top: unset;
+        margin-top: 0px;
+        height: 0px;
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+    }
+
+    .alternatecolor .bg-light-color.no-plygon:after, ul.alternatecolor .bg-light-color.no-plygon:after {
+        &:extend(.alternatecolor .bg-light-color.no-plygon:before);
+        top: unset;
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+        margin-top: 0px;
+    }
     .alternatecolor .bg-light-color .row {
         border-top: 60px solid transparent;
         border-bottom: 60px solid transparent;
@@ -127,8 +152,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 
 .bg-color-sottomeu {
-    background-color: @color-sottomeu !important;
     background: @bg-sottomenu-color-sfumato !important;
+}
+
+.bg-color-sottomeu-normal {
+    background-color: @color-sottomeu !important;
 }
 
 .bg-color-sottomeu-sfumato-veryalpha {
@@ -188,6 +216,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 
 .bd-dark-color {
     border-color: @bg-dark-color !important;
+}
+
+bd-sottomenu-color {
+    border-color: @color-sottomeu !important;
 }
 
 .primary-color {
@@ -1813,8 +1845,8 @@ a.btn-black-outline:hover.restaurant-menu:nth-child(5), a.btn-black-outline:acti
     /*BOTTONE BANNER ROTONDO content FRECCIA CHE SI MUOVE*/
 .btn-banner, .btn-banner:active, .btn-banner:visited, .btn-banner:focus .btn .btn-banner, .btn .btn-banner:active, .btn .btn-banner:visited, .btn .btn-banner:focus {
     &:extend(.btn-black-outline);
-    background: @color-sottomeu !important;
-    color: @button-outline-hover-color !important;
+    /*background: @color-sottomeu !important;*/
+    /*color: @button-outline-hover-color !important;*/
     min-width: 0 !important;
     min-height: 0 !important;
     letter-spacing: 0;
@@ -1828,6 +1860,9 @@ a.btn-black-outline:hover.restaurant-menu:nth-child(5), a.btn-black-outline:acti
     margin: 30px 0 0 -30px !important;
     font-size: 2rem !important;
     left: 50% !important;
+    border: 2px solid rgba(255, 255, 255, 0.50) !important;
+    color: rgba(255, 255, 255, 0.50) !important;
+    background-color: transparent !important;
 }
 .btn-banner i {
     animation: arrowdown 1.7s ease-in-out infinite;
@@ -1861,13 +1896,15 @@ a.btn-black-outline:hover.restaurant-menu:nth-child(5), a.btn-black-outline:acti
     }
 }
 
-    .btn-banner:hover, .btn .btn-banner:hover {
-        &:extend(.btn-banner);
-        color: @button-outline-color !important;
+.btn-banner:hover, .btn .btn-banner:hover {
+    &:extend(.btn-banner);
+    /*color: @button-outline-color !important;
         border-color: @bg-button-outline-hover-color;
-        opacity: 0.78;
-        text-decoration: none !important;
-    }
+        opacity: 0.78;*/
+    text-decoration: none !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
 
     @media (min-width: 1025px) {
 
@@ -2075,6 +2112,15 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     }
 
 .image-polygon-b3.imgovercontainer:hover:after {
+    z-index: 2 !important;
+    background: none !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    opacity: 1 !important;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+.image-polygon-b3.imgovercontainer:hover:after, .zoomimg.imgovercontainer:hover:after {
     z-index: 2 !important;
     background: none !important;
     background-color: rgba(0, 0, 0, 0) !important;
@@ -5256,7 +5302,7 @@ li:nth-child(2n+1) .polygon-backdrop-b3, .polygonblock > div:nth-child(2n+1) .po
     background: @bg-primary-color-sfumato;
 }
 
-/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE ----*/
+/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE  ----*/
 li:nth-child(2n) .rounded-responsive .polygon-backdrop, .polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
     background: @bg-primary-color-sfumato;
 }
@@ -5265,7 +5311,7 @@ li:nth-child(2n+1) .rounded-responsive .polygon-backdrop, .polygonblock > div:nt
     background: @bg-primary-color-sfumato;
 }
 
-/*---- MULTIBANNER HOME POLYGON PARI MULTICOLORE  ----*/
+/*---- MULTIBANNER HOME POLYGON PARI MOULTICOLORE  ----*/
 li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
     background: @bg-primary-color-sfumato !important;
 }
@@ -5305,6 +5351,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover, .polygonblock
         background: @bg-primary-color-sfumato !important;
     }
 }
+
     @media screen and (max-width: 540px) {
         .card.rounded-responsive {
             border-radius: 0 !important;
@@ -5452,7 +5499,7 @@ li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polyg
     letter-spacing: 4px;
 }
 
-.grid-shape-polygon .imgovercontainer:hover.work-image > img, .image-polygon-b3.imgovercontainer:hover > img {
+.grid-shape-polygon .imgovercontainer:hover.work-image > img, .image-polygon-b3.imgovercontainer:hover > img, .zoomimg.imgovercontainer:hover > img {
     -webkit-transform: scale(1.2);
     /*scale(1.3) rotate(2deg);*/
     -moz-transform: scale(1.2);
