@@ -174,6 +174,17 @@ public partial class index : CommonPage
                 litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
             }
         }
+        HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
+        ulbr.Visible = false;
+
+        ////BREADCRUMBS
+        //Tabrif actualpagelink = new Tabrif();
+        //actualpagelink.Campo1 = (linkcanonicoalt);
+        //actualpagelink.Campo2 = ("home");
+        //List<Tabrif> links = new List<Tabrif>() ;
+        //links.Add(actualpagelink);
+        //HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
+        //ulbr.InnerHtml = BreadcrumbConstruction(links);
     }
 
 
