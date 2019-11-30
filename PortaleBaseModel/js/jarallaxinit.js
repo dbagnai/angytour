@@ -319,38 +319,61 @@ $(function () {
     $(window).resize().scroll();
 
     // smooth scroll
-    if (!$('html').hasClass('is-builder')) {
-        $(document).click(function (e) {
-            try {
-                var target = e.target;
+    $(document).click(function (e) {
+        try {
+            var target = e.target;
+            //if ($(target).parents().hasClass('extTestimonials1')) {
+            //    return;
+            //}
+            do {
+                if (target.hash) {
+                    var useBody = /#bottom|#top/g.test(target.hash);
+                    $(useBody ? 'body' : target.hash).each(function () {
+                        e.preventDefault();
+                        // in css sticky navbar has height 64px
+                        var stickyMenuHeight = $('.mbr-navbar--sticky').length ? 64 : 0;
+                        var goTo = target.hash == '#bottom'
+                            ? ($(this).height() - $(window).height())
+                            : ($(this).offset().top - stickyMenuHeight);
+                        //Disable Accordion's and Tab's scroll
+                        if ($(this).hasClass('panel-collapse') || $(this).hasClass('tab-pane')) { return };
+                        //$('html, body').stop().animate({
+                        //    scrollTop: goTo
+                        //}, 500, 'easeInOutCubic');
+                        // Animate the scroll to the destination...
+                        $('html, body').animate(
+                            {
+                                scrollTop: $(target.hash).offset().top // Scroll to this location.
+                            }, {
+                            // Set the duration long enough to allow time
+                            // to lazy load the elements.
+                            duration: 1000,
 
-                if ($(target).parents().hasClass('extTestimonials1')) {
-                    return;
+                            // At each animation step, check whether the target has moved.
+                            step: function (now, fx) {
+
+                                // Where is the target now located on the page?
+                                // i.e. its location will change as images etc. are lazy loaded
+                                var newOffset = $(target.hash).offset().top;
+
+                                // If where we were originally planning to scroll to is not
+                                // the same as the new offset (newOffset) then change where
+                                // the animation is scrolling to (fx.end).
+                                if (fx.end !== newOffset)
+                                    fx.end = newOffset;
+                            }
+                        }
+                        );
+
+                    });
+                    break;
                 }
-                do {
-                    if (target.hash) {
-                        var useBody = /#bottom|#top/g.test(target.hash);
-                        $(useBody ? 'body' : target.hash).each(function () {
-                            e.preventDefault();
-                            // in css sticky navbar has height 64px
-                            var stickyMenuHeight = $('.mbr-navbar--sticky').length ? 64 : 0;
-                            var goTo = target.hash == '#bottom'
-                                ? ($(this).height() - $(window).height())
-                                : ($(this).offset().top - stickyMenuHeight);
-                            //Disable Accordion's and Tab's scroll
-                            if ($(this).hasClass('panel-collapse') || $(this).hasClass('tab-pane')) { return };
-                            $('html, body').stop().animate({
-                                scrollTop: goTo
-                            }, 800, 'easeInOutCubic');
-                        });
-                        break;
-                    }
-                } while (target = target.parentNode);
-            } catch (e) {
-                // throw e;
-            }
-        });
-    }
+            } while (target = target.parentNode);
+        } catch (e) {
+            // throw e;
+        }
+    });
+
 
     // init the same height columns
     $('.cols-same-height .mbr-figure').each(function () {
@@ -372,6 +395,7 @@ $(function () {
 
                 $imageCont.addClass({
                     position: 'absolute',
+                    top: 0,
                     top: 0,
                     left: 0,
                     right: 0,
@@ -402,93 +426,6 @@ $(function () {
     })
 
 });
-
-
-    //if (!$('html').hasClass('is-builder')) {
-    //    $(document).ready(function() {
-    //        //disable animation on scroll on mobiles
-    //        if ($.isMobile()) {
-    //            return;
-    //          //enable animation on scroll
-    //        } else if ($('input[name=animation]').length) {
-    //            $('input[name=animation]').remove();
-
-    //            var $animatedElements = $('p, h1, h2, h3, h4, h5, a, button, small, img, li, blockquote, .mbr-author-name, em, label, input, textarea, .input-group, .iconbox, .btn-social, .mbr-figure, .mbr-map, .mbr-testimonial .card-block, .mbr-price-value, .mbr-price-figure, .dataTable, .dataTables_info').not(function() {
-    //                return $(this).parents().is('.navbar, .mbr-arrow, footer, .iconbox, .mbr-slider, .mbr-gallery, .mbr-testimonial .card-block, #cookiesdirective, .mbr-wowslider, .accordion, .tab-content, .engine, .extFooter1, #scrollToTop');
-    //            }).addClass('hidden animated');
-
-    //            function getElementOffset(element) {
-    //                var top = 0;
-    //                do {
-    //                    top += element.offsetTop  || 0;
-    //                    element = element.offsetParent;
-    //                } while(element);
-
-    //                return top;
-    //            };
-
-    //            function checkIfInView() {
-    //                var window_height = window.innerHeight;
-    //                var window_top_position = document.documentElement.scrollTop || document.body.scrollTop;
-    //                var window_bottom_position = window_top_position + window_height - 50;
-
-    //                $.each($animatedElements, function() {
-    //                    var $element = $(this);
-    //                    var element = $element[0];
-    //                    var element_height = element.offsetHeight;
-    //                    var element_top_position = getElementOffset(element);
-    //                    var element_bottom_position = (element_top_position + element_height);
-
-    //                    // check to see if this current element is within viewport
-    //                    if ((element_bottom_position >= window_top_position) &&
-    //                        (element_top_position <= window_bottom_position) &&
-    //                        ($element.hasClass('hidden'))) {
-    //                        $element.removeClass('hidden').addClass('fadeInUp')
-    //                        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-    //                            $element.removeClass('animated fadeInUp');
-    //                        });
-    //                    }
-    //                });
-    //            }
-
-    //            var $window = $(window);
-
-    //            $window.on('scroll resize', checkIfInView);
-    //            $window.trigger('scroll');
-    //        }
-    //    });
-
-    //    if ($('.navbar').length) {
-    //        $(".nav-dropdown").swipe({
-    //            swipeLeft:function(event, direction, distance, duration, fingerCount) {
-    //                $('.navbar-close').click();
-    //            }
-    //        });
-    //    }
-    //}
-
-
-    // Scroll to Top Button
-    //$(document).ready(function() {
-    //if ($('.mbr-arrow-up').length) {
-    //    var $scroller = $('#scrollToTop'),
-    //        $main = $('body,html'),
-    //        $window = $(window);
-    //    $scroller.css('display', 'none');
-    //    $window.scroll(function () {
-    //    if ($(this).scrollTop() > 0) {
-    //        $scroller.fadeIn();
-    //    } else {
-    //        $scroller.fadeOut();
-    //    }
-    //    });
-    //    $scroller.click(function() {
-    //        $main.animate({
-    //            scrollTop: 0
-    //        }, 400);
-    //        return false;
-    //    });
-    //}
-    //});
+ 
 
 
