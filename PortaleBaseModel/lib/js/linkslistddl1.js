@@ -119,16 +119,16 @@ function BindTipologieLinks(localObjects, el) {
     try {
         var jquery_obj = $(str);
         var outerhtml = $($('#' + el)[0]).outerHTML();  /*select*/
-        //var innerHtml = jquery_obj.html();
+
+
         var containeritem = jquery_obj.empty();/*optgroup*/
         var containerSelect = $(outerhtml).html(''); /*select vuota*/
         var sel = baseresources[lng]["selectgenericrubrica"];
-
         //appendo optgroup alla select
         var tempOptionGroup = containeritem.clone();
         tempOptionGroup.attr('label', sel);
         tempOptionGroup.append('<option style="cursor:pointer;" value="">' + sel + '</option>');
-        containerSelect.append(tempOptionGroup);
+        containerSelect.append(tempOptionGroup); //(non metto l'elemento aggiuntivo)
         //////////////////////////////////////
 
         /////////appendo gli optiongroup degli anni

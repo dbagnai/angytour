@@ -5194,16 +5194,19 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
 }
 .scalablefont-medium-big {
-  font-size: calc(20px + 0.4vw + 0.4vh + 0.2vmin) !important;
+  font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
 }
 .scalablefont-medium {
-  font-size: calc(16px + 0.35vw + 0.35vh + 0.175vmin) !important;
+  font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin) !important;
+}
+.scalablefont-small-medium {
+  font-size: calc(18px + 0.3vw + 0.3vh + 0.15vmin) !important;
 }
 .scalablefont-small {
-  font-size: calc(16px + 0.2vw + 0.2vh + 0.1vmin) !important;
+  font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
 }
 .scalablefont-smallest {
-  font-size: calc(12px + 0.12vw + 0.12vh + 0.06vmin) !important;
+  font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
 }
 /*----------------------------------
 /////| COLORI BLOCCHI LINEARI |/////

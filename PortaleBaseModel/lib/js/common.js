@@ -2660,6 +2660,7 @@ $.fn.extend({
     }
 });
 
+
 $.fn.outerHTML = function () {
     var $t = $(this);
     if ("outerHTML" in $t[0]) return $t[0].outerHTML;
@@ -2679,7 +2680,6 @@ $.fn.extend({
         });
     }
 });
-
 
 function getCopy(objectToCopy) {
     var copy = {};
