@@ -5728,6 +5728,54 @@ li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polyg
 }
 
 
+/* callout con bordi */
+.calloutitem {
+    position: relative;
+    display: table
+}
+
+.callout__corner--tl {
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.callout__corner--bl {
+    bottom: 0;
+    left: 0;
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+.callout__corner--tr {
+    top: 0;
+    right: 0;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.callout__corner--br {
+    bottom: 0;
+    right: 0;
+    -webkit-transform: scale(-1);
+    transform: scale(-1);
+}
+
+.callout__corner {
+    background: url(/images/SiteSpecific/corner.svg) 0 0 no-repeat;
+    position: absolute;
+    width: 65px;
+    height: 65px;
+}
+
+.callout__body {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 30px;
+}
+/* fine callout con bordi */
+
 /* classi per scalatura forzata dei caratteri */
 .scalablefont-big {
     font-size: @scalable-big-font-size !important;
