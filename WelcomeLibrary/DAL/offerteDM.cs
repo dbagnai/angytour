@@ -5224,7 +5224,9 @@ namespace WelcomeLibrary.DAL
                 //}
 
                 string contactlink = "";
-                if (_o.Abilitacontatto) contactlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/Content_Tipo3.aspx?TipoContenuto=Richiesta&Lingua=" + lingua + "&idOfferta=" + _o.Id;
+                if (_o.Abilitacontatto) contactlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/Content_Tipo3.aspx?Lingua=" + lingua + "&TipoContenuto=Richiesta&idOfferta=" + _o.Id;
+                string prenotalink = "";
+                if (_o.Abilitacontatto) prenotalink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/Content_Tipo3.aspx?Lingua=" + lingua + "&TipoContenuto=Prenota&idOfferta=" + _o.Id;
                 string printlink = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/aspnetpages/SchedaOffertaStampa.aspx?idOfferta=" + _o.Id + "&Lingua=" + lingua;
                 string bcklink = SitemapManager.GeneraBackLink(_o.CodiceTipologia, _o.CodiceCategoria, lingua);
 
@@ -5252,6 +5254,7 @@ namespace WelcomeLibrary.DAL
 
 
                 tmp.Add("contactlink", contactlink);
+                tmp.Add("prenotalink", prenotalink);
                 tmp.Add("printlink", printlink);
                 tmp.Add("bcklink", bcklink);
                 tmp.Add("link", link);
