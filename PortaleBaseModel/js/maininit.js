@@ -349,12 +349,15 @@ jQuery(document).ready(function ($) {
     //}
 
     /* Portfolio PrettyPhoto */
-    $("a[data-rel^='prettyPhoto']").prettyPhoto({
+    $("a[rel^='prettyPhoto']").prettyPhoto({
+        //theme: 'facebook',
         animation_speed: 'fast', /* fast/slow/normal */
         slideshow: 5000, /* false OR interval time in ms */
         autoplay_slideshow: false, /* true/false */
-        opacity: 0.80  /* Value between 0 and 1 */
+        opacity: 0.80,  /* Value between 0 and 1 */
+        social_tools: ''
     });
+
 
     /* Accrodion */
     //zeinaAccordion('.accordion', true);

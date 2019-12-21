@@ -2833,8 +2833,8 @@ namespace WelcomeLibrary.UF
                                     }
                                     else
                                         nodetobind.Attributes.Add("style", "display:inline-block");
-                                    if (nodetobind.Attributes.Contains("rel"))
-                                        nodetobind.Attributes["rel"].Value = "follow"; //imposto follow per il link
+                                    //if (nodetobind.Attributes.Contains("rel"))
+                                    //    nodetobind.Attributes["rel"].Value = "follow"; //imposto follow per il link
                                 }
                                 else
                                 {
