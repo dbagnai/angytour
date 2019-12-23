@@ -1,5 +1,6 @@
 "use strict";
 
+
 jQuery(document).ready(function ($) {
     //$(".sticker").sticky({ topSpacing: 120 });
     //setInterval(function () { if ($('#divnavigazioneJs0').isOnScreen()) { $(".sticker").unstick() } }, 1000);
@@ -163,7 +164,7 @@ jQuery(document).ready(function ($) {
 
     /*----------------------- inizializzazione elementi  masonry.js   --------------- */
     (function wait() {
-        if (typeof $.fn.masonry !== 'undefined'   ) {
+        if (typeof $.fn.masonry !== 'undefined') {
             //if (typeof $.masonry == 'function') {
             var $grid = $('.grid').masonry({
                 // set itemSelector so .grid-sizer is not used in layout
@@ -188,7 +189,7 @@ jQuery(document).ready(function ($) {
     (function wait() {
         if (typeof Hammer !== 'undefined') {
             $('.item.box').each(function () {
-            //$('.owl-carousel-v1').each(function () {
+                //$('.owl-carousel-v1').each(function () {
                 var options = {
                     preventDefault: true
                 };
@@ -206,7 +207,7 @@ jQuery(document).ready(function ($) {
     })();
 
     /*------------------------------------------------------- */
-        //InitIsotope();
+    //InitIsotope();
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);
     jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
@@ -231,6 +232,8 @@ jQuery(document).ready(function ($) {
     // $('.testimonial-item').css('visibility', 'visible');
 
     centeringBullets();
+
+
 
     /* ---------------------------------------------- /*
 		* Initialization General Scripts for all pages from rival
@@ -349,14 +352,15 @@ jQuery(document).ready(function ($) {
     //}
 
     /* Portfolio PrettyPhoto */
-    $("a[rel^='prettyPhoto']").prettyPhoto({
-        //theme: 'facebook',
-        animation_speed: 'fast', /* fast/slow/normal */
-        slideshow: 5000, /* false OR interval time in ms */
-        autoplay_slideshow: false, /* true/false */
-        opacity: 0.80,  /* Value between 0 and 1 */
-        social_tools: ''
-    });
+    if (!ismobileview)
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            //theme: 'facebook',
+            animation_speed: 'fast', /* fast/slow/normal */
+            slideshow: 5000, /* false OR interval time in ms */
+            autoplay_slideshow: false, /* true/false */
+            opacity: 0.80,  /* Value between 0 and 1 */
+            social_tools: ''
+        });
 
 
     /* Accrodion */
@@ -392,6 +396,17 @@ jQuery(document).ready(function ($) {
     // addhovereffecttobootstrapnav();
 });
 
+
+
+var agents = ['android', 'webos', 'iphone', 'ipad', 'blackberry', 'Android', 'webos', , 'iPod', 'iPhone', 'iPad', 'Blackberry', 'BlackBerry'];
+var ismobileview = false;
+for (var i in agents) {
+
+    if (navigator.userAgent.split(agents[i]).length > 1) {
+        ismobileview = true;
+
+    }
+}
 
 ///////////////////////////FUNZIONI VARIE///////////////////////////////////////
 var loaded = false, timeout = 20000;//loaded flag for timeout
