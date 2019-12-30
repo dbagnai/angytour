@@ -4755,7 +4755,9 @@ button.js-roundedpush:hover {
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
   /*BANNER TESTATA HOME - 100% ON*/
   text-align: center;
-  white-space: normal;
+  white-space: pre-wrap;
+  overflow: hidden;
+  overflow-wrap: break-word;
   /*BANNER TESTATA HOME - 55% ON*/
   /*text-align: left;
     white-space: pre-wrap;
