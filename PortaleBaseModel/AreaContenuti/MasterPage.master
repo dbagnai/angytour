@@ -718,7 +718,19 @@
                             </ul>
                                  <div id="menu-altri" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body" style="padding: 0 0 0 15px;">
-                                        <ul class="submenu display-active">           
+                                        <ul class="submenu display-active">
+                                            <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-presentazione">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Presentazione</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-image">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Sticky image</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-popup">
                                                     <i class="menu-icon fa fa-caret-right"></i>

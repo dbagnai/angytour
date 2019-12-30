@@ -17,6 +17,27 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 @base-font: 'Raleway', sans-serif; /*menu - body*/
 @alternative-font: 'Raleway', serif;
 @testata-font: 'Raleway', sans-serif; /*'Roboto Condensed', sans-serif;*/
+
+.primary-font {
+    font-family: @primary-font !important;
+}
+
+.secondary-font {
+    font-family: @secondary-font !important;
+}
+
+.base-font {
+    font-family: @base-font !important;
+}
+
+.alternative-font {
+    font-family: @alternative-font !important;
+}
+
+.testata-font {
+    font-family: @testata-font !important;
+}
+
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -2829,6 +2850,28 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     margin-left: -30px;
     top: -1px;
 }
+
+.cornice-immagine {
+    box-shadow: 40px 40px 0px 0px rgba(0, 0, 0, 0.20);
+    width: calc(100% - 40px) !important;
+    margin-bottom: 40px !important;
+}
+
+@media (max-width: 960px) {
+    .cornice-immagine {
+        box-shadow: 20px 20px 0px 0px rgba(0, 0, 0, 0.20);
+        width: calc(100% - 20px) !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .cornice-immagine {
+        box-shadow: none;
+        width: 100% !important;
+        margin-bottom: 0px !important;
+    }
+}
     /*----------------------------------
 -------- BANNER NAVIGAZIONE --------
 ----------------------------------*/
@@ -4215,6 +4258,23 @@ Breadcrumb
     .rating {
         color: @bg-primary-color !important;
     }
+
+/* -------------------------
+    INDICE ANIMETED CONTACT
+    ------------------*/
+.indice-movie {
+    animation: animation-indice-movie 1s ease-in-out infinite;
+}
+
+@keyframes animation-indice-movie {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10px, 0);
+    }
+}
 
     //-------------------------------
     //    SEARCH BAR
@@ -5777,6 +5837,10 @@ li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polyg
 /* fine callout con bordi */
 
 /* classi per scalatura forzata dei caratteri */
+.scalable-extrime {
+    font-size: @scalable-extrime-font-size
+}
+
 .scalablefont-big {
     font-size: @scalable-big-font-size !important;
 }

@@ -1,0 +1,82 @@
+﻿<!-- "http://michalsnik.github.io/aos/" -->
+<style>
+    .titolo-brand {
+        font-size: 1.8rem;
+        font-weight: 300;
+    }
+
+    .border-query img {
+        border-radius: calc(.25rem - 1px);
+    }
+
+
+    @media (min-width: 768px) {
+        .border-query {
+            border: none !important;
+            background-color: transparent;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .border-query img {
+            border-radius: calc(.25rem - 1px) 0 0;
+        }
+    }
+</style>
+
+<div class="container">
+    <div id="replaceid" class="row align-items-center even justify-content-center alternatecolor">
+
+        <!-- se sono più di due banner togliere le classi "order-last order-md-first" -->
+        <div class="col-12 col-md-6 even order-last order-md-first">
+            <div class="card m-2 border-query" style="overflow:hidden;">
+                <a class="bind primary-color" data-aos="fade-up" data-aos-duration="" preload target="_self" href="link" title="titolo" mybind="Id">
+                    <div class="position-relative imgovercontainer work-image">
+                        <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                        <div class="card-img-overlay">
+                        </div>
+                    </div>
+                </a>
+                <div class="card-body text-left px-md-0 pb-md-0" data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
+                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                        <h3 class="card-title titolo-offerta titolo-brand scalablefont-medium mb-2">
+                            <span class="bind alternative-font" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                        </h3>
+                        <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0 mb-md-3" style="font-size: 1.3rem; line-height: 1.8rem;">
+                            <span class="bind tx-dark-color" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                        </h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- se sono più di due banner togliere le classi "order-first order-md-last" -->
+        <div class="col-12 col-md-6 odd order-first order-md-last">
+            <div class="card m-2 border-query" style="overflow:hidden;">
+                <div class="row">
+                    <div class="col-12 order-first order-md-last" data-aos="fade-up" data-aos-duration="500">
+                        <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                            <div class="position-relative imgovercontainer work-image cornice-immagine">
+                                <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                                <div class="card-img-overlay">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 order-last order-md-first" data-aos="fade-left">
+                        <div class="card-body text-left px-md-0 pt-md-0">
+                            <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                <h3 class="card-title titolo-offerta titolo-brand scalablefont-medium mb-2">
+                                    <span class="bind alternative-font" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                </h3>
+                                <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0 mb-md-3" style="font-size: 1.3rem; line-height: 1.8rem;">
+                                    <span class="bind tx-dark-color" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
