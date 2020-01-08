@@ -275,9 +275,6 @@
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
                         <ul class="dropdown visible-ok">
                             <li><%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %></li>
-                            <%--<%= CreaLinkPaginastatica(4) %>--%>
-                            <%--<%= CreaLinkTipologie(1,1) %>--%>
-                            <%--<%= CreaLinkCategorie("rif000001") %>--%>
                             <%= CreaLinkCategorieNested("rif000001","",true) %>
                         </ul>
                     </li>

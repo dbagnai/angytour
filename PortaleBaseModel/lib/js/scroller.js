@@ -179,7 +179,7 @@ function ScrollerInit(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [4],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 3], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
@@ -205,7 +205,7 @@ function ScrollerInit1(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [2],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
@@ -231,7 +231,7 @@ function ScrollerInit2(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [3],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
@@ -255,7 +255,7 @@ function ScrollerInitSingolo(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [1],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 1], // i/tems between 1000px and 601px
             itemsTablet: [979, 1], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
