@@ -538,7 +538,7 @@
             <div id="masterlow"></div>
 
             <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
-         <%--   <div class="col-12 p-0 d-none">
+         <%--   <div class="col-12 p-0 d-block d-sm-none">
                 <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
                 <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
                     <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
@@ -557,20 +557,21 @@
                     <div class="container">
                         <div class="row justify-content-end">
                             <div class="col-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: 95% auto !important;">
+                                <!-- SCRITTA FORM A SINISTRA -->
+                                <%--<div class="big2 text-white pt-5 my-5 text-right position-sticky" style="font-size: 3rem; line-height: 4rem !important; top: 150px; margin-bottom: 240px; text-shadow: rgba(0, 0, 0, 0.5) -1px 2px 5px;">
+                                    <div><%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
+                                    <span class="d-block d-lg-none text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span></div>
+                                   <div class="w-100 mt-5 indice-movie" style="background: url('/images/indice.png');background-size: auto 90%;background-repeat: no-repeat;background-position-x: right;height: 170px;"></div>
+                                </div>--%>
+                                <!-- END SCRITTA FORM A SINISTRA -->
                             </div>
                             <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
-                                <!-- IMMAGINE FORM A SINISTRA -->
+                                <!-- SCRITTA FORM A DESTRA -->
                                 <div class="big2 text-white">
                                     <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
                                 </div>
                                 <span class="text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
-                                <!-- END IMMAGINE FORM A SINISTRA -->
-                                <!-- SCRITTA FORM A SINISTRA -->
-                                <%--<div class="big2 text-white pt-5 mt-5 text-right position-sticky" style="font-size: 3rem; line-height: 4rem !important; top: 150px; margin-bottom: 240px; text-shadow: rgba(0, 0, 0, 0.5) -1px 2px 5px;">
-                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                                    <span class="d-block d-lg-none text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
-                                </div>--%>
-                                <!-- END SCRITTA FORM A SINISTRA -->
+                                <!-- END SCRITTA FORM A DESTRA -->
                                 <%-- <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a> --%>
                                 <%-- <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a> --%>
                                 <br />

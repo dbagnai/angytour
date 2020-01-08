@@ -1,0 +1,120 @@
+﻿<style>
+    .doppio-sfondo {
+        display: none;
+        background-position: top calc((100vh + 100px - 72vh)/2) left calc((50vw - 400px)/2), top calc((100vh + 100px - 72vh)/2) right calc((50vw - 400px)/2);
+        background-size: auto 72vh;
+        background-repeat: no-repeat;
+        background-image: url(/images/forchetta.png), url(/images/coltello.png);
+        margin: -120px calc((((100vw - 750px)/2) - 0px) * -1) 120px;
+        height: 100vh;
+    }
+
+    #alternate1 section:nth-child(1) .doppio-sfondo {
+        display: block;
+    }
+
+
+    .stacking-slide {
+        width: 100%;
+        position: -webkit-sticky;
+        position: sticky;
+    }
+
+        .stacking-slide .card-container {
+            max-width: 750px;
+            margin: 0px auto 0;
+            position: relative;
+        }
+
+        .stacking-slide .card-img {
+            border-radius: 0;
+        }
+
+    .div-overlay {
+        background: linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.0));
+    }
+
+    .text-overlay {
+        background: linear-gradient(180deg,rgba(255,255,255,1)50%,rgba(255,255,255,.0));
+    }
+
+    .inline-photo {
+        top: 40px;
+        opacity: 1;
+        box-shadow: 4px 12px 40px 6px rgba(0,0,0,.3);
+        transition: transform 4s .25s cubic-bezier(0,1,.3,1), opacity .6s 1.25s ease-out, box-shadow 4s ease-in-out;
+        will-change: transform, opacity;
+        border-radius: 16px;
+    }
+
+        .inline-photo.is-visible {
+            opacity: 1;
+            transform: matrix(0.92, 0, 0, 0.92, 0, -60);
+            box-shadow: 4px 12px 40px 6px rgba(0,0,0,.005);
+        }
+
+    @media (max-width: 960px) {
+        section:nth-child(1) .doppio-sfondo {
+            display: none;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sticky-container {
+            margin-top: -1.5rem !important;
+        }
+
+        .card-img-overlay {
+            position: relative;
+        }
+
+        .inline-photo {
+            top: 0;
+            box-shadow: none;
+            transition: transform 0s .0s cubic-bezier(0,0,.0), opacity .0s 0s ease-out, box-shadow 0s ease-in-out;
+            will-change: transform, opacity;
+            border-radius: .25rem;
+        }
+
+            .inline-photo.is-visible {
+                opacity: 1;
+                transform: none;
+                box-shadow: none;
+            }
+    }
+</style>
+
+<div class="row">
+    <div class="w-100 position-sticky" style="top:100px;"></div>
+    <div id="replaceid" class="sticky-container mx-auto">
+        <section class="stacking-slide" style="top:120px;">
+            <div class="mbr-overlay-sfumato doppio-sfondo" style="position:absolute"></div>
+            <div class="card-container m-4 m-sm-0">
+                <div class="card text-white show-on-scroll inline-photo bd-secondary-color" style="overflow:hidden">
+                    <a class="bind d-block d-sm-none p-0 primary-color">
+                        <img class="card-img bind border-0 lazy" src="/images/dummylogo.png" alt="" mybind="Id" />
+                    </a>
+                    <img class="d-none d-sm-block card-img bind border-0" src="/images/dummylogo.png" alt="" mybind="Id" />
+                    <div class="card-img-overlay p-0 text-center div-overlay">
+                        <div class="text-overlay p-3 px-sm-5 pt-sm-5 pb-sm-0 pb-md-5">
+                            <!--<a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">-->
+                            <h3 class="card-title titolo-offerta titolo-brand">
+                                <span class="bind alternative-font" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            </h3>
+                            <h4 class="card-subtitle sottotitolo-offerta my-0 d-block d-md-block" style="font-size: 1.3rem; line-height: 1.8rem;">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                            </h4>
+                            <!--</a>-->
+                        </div>
+                        <!--<div class="bind d-none d-sm-block p-5">
+                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                            <button type="button" class="btn btn-primary button-isotope"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></button>
+                        </a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

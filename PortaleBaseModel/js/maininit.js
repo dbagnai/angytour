@@ -51,6 +51,17 @@ jQuery(document).ready(function ($) {
     //    mobilebuttontext:"CERCA"
     //});
 
+    /*-------- INIZIALIZZATORE AOS ---------------*/
+    //AOS.init({
+    //    disable: 'mobile'
+    //});
+    AOS.init({
+        disable: function () {
+            var maxWidth = 800;
+            return window.innerWidth < maxWidth;
+        }
+    });
+
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
     $(window).scroll(function () {
         if ($(window).scrollTop() > 0) {
@@ -904,3 +915,71 @@ $(function () {
     /* ---------------------------------------------- */
 
 //if ($('div.mydivclass').length) {}
+
+
+/* ---------------------------------------------- /*
+     * ANIMA ELEMENTO SCROLL CON ELEMENTSTOSHOW
+    /* ---------------------------------------------- */
+
+//// Detect request animation frame
+//var scroll = window.requestAnimationFrame ||
+//    // IE Fallback
+//    function (callback) { window.setTimeout(callback, 1000 / 60) };
+//var elementsToShow = document.querySelectorAll('.show-on-scroll');
+
+//function loop() {
+
+//    Array.prototype.forEach.call(elementsToShow, function (element) {
+//        if (isElementInViewport(element)) {
+//            element.classList.add('is-visible');
+//        } else {
+//            element.classList.remove('is-visible');
+//            }
+//    });
+
+//    scroll(loop);
+//}
+
+//// Call the loop for the first time
+//loop();
+
+//// Helper function from: http://stackoverflow.com/a/7557433/274826
+//function isElementInViewport(el) {
+//    // special bonus for those using jQuery
+//    if (typeof jQuery === "function" && el instanceof jQuery) {
+//        el = el[0];
+//    }
+//    var rect = el.getBoundingClientRect();
+//    return (
+//        (rect.top <= 0
+//            && rect.bottom >= 0)
+//        ||
+//        (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
+//            rect.top <= (window.innerHeight || document.documentElement.clientHeight))
+//        ||
+//        (rect.top >= 0 &&
+//            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+//    );
+//}
+
+/* ---------------------------------------------- /*
+     * ANIMA ELEMENTO SCROLL CON OBSERVER
+    /* ---------------------------------------------- */
+const sectionEls = document.querySelectorAll(".show-on-scroll");
+
+const options = {
+    rootMargin: "0% 0% -70% 0%"
+};
+
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+        } else {
+            entry.target.classList.remove("is-visible");
+        }
+    });
+}, options);
+
+sectionEls.forEach(el => observer.observe(el));

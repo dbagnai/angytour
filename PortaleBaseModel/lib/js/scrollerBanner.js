@@ -138,6 +138,9 @@ function initScrollerBanner(el, type)
             case "4":
                 ScrollerInitBanner4(el);
                 break;
+            case "5":
+                ScrollerInitBanner5(el);
+                break;
             default:
                 ScrollerInitBanner(el);
                 break;
@@ -234,6 +237,28 @@ function ScrollerInitBanner4(controlid) {
     });
 };
 
+
+function ScrollerInitBanner5(controlid) {
+    jQuery(document).ready(function () {
+        var owl = jQuery("#" + controlid);
+        owl.owlCarousel({
+            items: [5],
+            autoPlay: 5000,
+            itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
+            itemsTablet: [979, 2], // items between 600 and 0;
+            itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+            slideSpeed: 1000
+        });
+
+        // Custom Navigation Events
+        jQuery("#" + controlid + "next").click(function () {
+            owl.trigger('owl.next');
+        })
+        jQuery("#" + controlid + "prev").click(function () {
+            owl.trigger('owl.prev');
+        })
+    });
+};
 
 function ScrollerInitBanner3(controlid) {
     jQuery(document).ready(function () {

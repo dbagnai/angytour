@@ -148,6 +148,21 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*sotto-titoli-principali*/
 /*menu - body*/
 /*'Roboto Condensed', sans-serif;*/
+.primary-font {
+  font-family: 'Fira Sans', sans-serif !important;
+}
+.secondary-font {
+  font-family: 'Raleway', sans-serif !important;
+}
+.base-font {
+  font-family: 'Raleway', sans-serif !important;
+}
+.alternative-font {
+  font-family: 'Raleway', serif !important;
+}
+.testata-font {
+  font-family: 'Raleway', sans-serif !important;
+}
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
@@ -2807,6 +2822,25 @@ ul.footer-category-list {
   margin-left: -30px;
   top: -1px;
 }
+.cornice-immagine {
+  box-shadow: 40px 40px 0px 0px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 40px) !important;
+  margin-bottom: 40px !important;
+}
+@media (max-width: 960px) {
+  .cornice-immagine {
+    box-shadow: 20px 20px 0px 0px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 20px) !important;
+    margin-bottom: 20px !important;
+  }
+}
+@media (max-width: 576px) {
+  .cornice-immagine {
+    box-shadow: none;
+    width: 100% !important;
+    margin-bottom: 0px !important;
+  }
+}
 /*----------------------------------
 -------- BANNER NAVIGAZIONE --------
 ----------------------------------*/
@@ -4028,6 +4062,21 @@ button.js-roundedpush:hover {
 .rating {
   color: #098f8f !important;
 }
+/* -------------------------
+    INDICE ANIMETED CONTACT
+    ------------------*/
+.indice-movie {
+  animation: animation-indice-movie 1s ease-in-out infinite;
+}
+@keyframes animation-indice-movie {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0);
+  }
+}
 .searchbar-container {
   background-color: #098f8f;
 }
@@ -4706,7 +4755,9 @@ button.js-roundedpush:hover {
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
   /*BANNER TESTATA HOME - 100% ON*/
   text-align: center;
-  white-space: normal;
+  white-space: pre-wrap;
+  overflow: hidden;
+  overflow-wrap: break-word;
   /*BANNER TESTATA HOME - 55% ON*/
   /*text-align: left;
     white-space: pre-wrap;
@@ -5362,6 +5413,9 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 /* fine callout con bordi */
 /* classi per scalatura forzata dei caratteri */
+.scalable-extrime {
+  font-size: calc(30px + 2vw + 2vh + 2vmin);
+}
 .scalablefont-big {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
 }

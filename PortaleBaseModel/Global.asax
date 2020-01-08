@@ -550,6 +550,7 @@
             "~/lib/js/videoBanner.js",
             "~/lib/js/feedbacks.js",
             "~/lib/js/formmng.js",
+            "~/js/aos/aos.js",
             "~/js/maininit.js"
         );
 
@@ -596,6 +597,7 @@
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",
              //"~/js/odometer/themes/odometer-theme-custom.css",
+             "~/js/aos/aos.css",
              "~/css/custom1.css",
              "~/css/custom.min.css"
           );
