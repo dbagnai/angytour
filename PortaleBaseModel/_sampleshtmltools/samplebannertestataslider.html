@@ -2,3 +2,13 @@
 
 
 <div id="divContainerb1" class="d-none d-sm-block inject d-none my-0 mx-auto position-relative" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
+
+<!--OPZIONE PER MUOVERE ALTROVE I BREADCRUM DI NAVIGAZIONE-->
+<div id="breadcrumbmove"></div>
+<script>
+//Muoviamo i breadcrum spostandoli sotto il banner
+    jQuery(document).ready(function ($) {
+        $("#breadcrumbmove").html($("#breadcrumbContainer").html());
+        $("#breadcrumbContainer").html('')
+    });
+</script>

@@ -4534,8 +4534,13 @@ button.js-roundedpush:hover {
   height: calc(70vh - 141px) !important;
   max-height: 480px;
 }
+#divContainerb2 {
+  height: calc(70vh - 140px) !important;
+  /*max-height: 480px;*/
+}
 @media (max-width: 767px) {
-  #divContainerb1 {
+  #divContainerb1,
+  #divContainerb2 {
     height: calc(100vh - 90px) !important;
   }
 }
