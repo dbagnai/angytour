@@ -51,7 +51,11 @@ jQuery(document).ready(function ($) {
     //    mobilebuttontext:"CERCA"
     //});
 
+    /* ---------------------------------------------- /*
+  * SEZIONE AOS E SHOW ON SCROLL TOOL
+  /* ---------------------------------------------- */
     /*-------- INIZIALIZZATORE AOS ---------------*/
+    //AOS.init();
     //AOS.init({
     //    disable: 'mobile'
     //});
@@ -61,6 +65,24 @@ jQuery(document).ready(function ($) {
             return window.innerWidth < maxWidth;
         }
     });
+
+    const sectionEls = document.querySelectorAll(".show-on-scroll");
+    const options = {
+        rootMargin: "0% 0% -70% 0%"
+    };
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+            } else {
+                entry.target.classList.remove("is-visible");
+            }
+        });
+    }, options);
+    sectionEls.forEach(el => observer.observe(el));
+    /* ---------------------------------------------- /*
+* fine SEZIONE AOS E SHOW ON SCROLL TOOL
+/* ---------------------------------------------- */
 
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
     $(window).scroll(function () {
