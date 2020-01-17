@@ -669,6 +669,12 @@
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-fascia">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia sequenza</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Fascia 1</span></a>
@@ -723,6 +729,12 @@
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-presentazione">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Banner Presentazione</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                            <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-text">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Sticky text</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
