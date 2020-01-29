@@ -131,6 +131,13 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
+            if (Sezione.ToLower().Contains("header-bassa-"))
+            {
+                ResizeWidth = 1800;
+                ResizeHeight = 450;
+                //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
+                //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
+            }
 
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("banner-portfolio-bg"))

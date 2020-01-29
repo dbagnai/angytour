@@ -780,6 +780,12 @@
 									<div class="panel-body" style="padding: 0 0 0 15px;">
                                         <ul class="submenu display-active">
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-bassa-1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Pagina bassa</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Pagina 1</span></a>
