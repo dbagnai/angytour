@@ -1,0 +1,55 @@
+﻿<style>
+    .border-impagination img {
+        border-radius: calc(.25rem - 1px);
+    }
+
+    @media (max-width: 750px) {
+.bg-white-color-mobile {
+        background-color: #fff !important;
+}
+}
+
+    @media (max-width: 576px) {
+        .border-impagination {
+            overflow: hidden;
+            margin: 0 15px;
+            border-radius: .25rem !important;
+            border: 1px solid #dee2e6 !important;
+        }
+
+            .border-impagination img {
+                border-radius: calc(.25rem - 1px) 0 0;
+            }
+    }
+</style>
+        <div id="replaceid">
+            <item>
+                <div class="mx-0 mx-md-5 mx-md-0" style="background-color:transparent">
+                    <div class="position-relative my-0 mx-auto" style="max-width: 1600px;">
+                        <!--<div class="row no-gutters align-items-center even py-0 py-lg-5 justify-content-center border-impagination">-->
+                        <div class="row no-gutters align-items-center even py-0 py-lg-0 justify-content-center border-impagination" style="background-color: rgba(255, 255, 255, 0.5);">
+                            <!--<div class="col-12 col-lg-6 text-right pl-0 pl-lg-5">-->
+                            <div class="col-12 col-lg-6 text-right pl-0 pl-lg-0">
+                                <div class="w-100 text-right" style="overflow:hidden;">
+                                    <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100 lazy" mybind="Id" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 side-image-content text-left textBanner animated px-3 px-lg-5 py-4 py-lg-0 bg-white-color-mobile" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
+                                <h3 class="card-title title-isotope display-3 text-left mb-2">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                </h3>
+                                <p class="text-left my-0 mt-lg-3">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </item> 
+        </div>
+
+
+
+
+

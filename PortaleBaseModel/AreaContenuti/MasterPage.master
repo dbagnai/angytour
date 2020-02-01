@@ -669,6 +669,12 @@
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-fascia">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Fascia sequenza</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Fascia 1</span></a>
@@ -725,6 +731,12 @@
                                                                 <span class="menu-text">Banner Presentazione</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                            <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-text">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Sticky text</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
                                                         <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-image">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
@@ -767,6 +779,12 @@
 								<div id="menu-testate" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body" style="padding: 0 0 0 15px;">
                                         <ul class="submenu display-active">
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-bassa-1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Testate Pagina bassa</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
                                             <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
