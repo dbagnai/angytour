@@ -90,6 +90,10 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 if (Lingua.ToLower() == "ru") Response.RedirectPermanent("~");
             }
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "dk") Response.RedirectPermanent("~");
+            }
             //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
@@ -218,7 +222,9 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             case "RU":
                 if (!host.EndsWith(".ru")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru")), true);
                 break;
-
+            case "DK":
+                if (!host.EndsWith(".dk")) Response.Redirect(Request.Url.ToString().Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domaindk")), true);
+                break;
             default:
                 break;
         }

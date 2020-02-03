@@ -45,6 +45,13 @@ namespace WelcomeLibrary.DOM
             get { return _customtitleRU; }
             set { _customtitleRU = value; }
         }
+
+        private string _customtitleDK;
+        public string CustomtitleDK
+        {
+            get { return _customtitleDK; }
+            set { _customtitleDK = value; }
+        }
         private string _customdescI;
         public string CustomdescI
         {
@@ -65,6 +72,14 @@ namespace WelcomeLibrary.DOM
             set { _customdescRU = value; }
         }
 
+        private string _customdescDK;
+        public string CustomdescDK
+        {
+            get { return _customdescDK; }
+            set { _customdescDK = value; }
+        }
+
+
         private string _TitoloI;
         public string TitoloI
         {
@@ -82,6 +97,12 @@ namespace WelcomeLibrary.DOM
         {
             get { return _TitoloRU; }
             set { _TitoloRU = value; }
+        }
+        private string _TitoloDK;
+        public string TitoloDK
+        {
+            get { return _TitoloDK; }
+            set { _TitoloDK = value; }
         }
         private string _DescrizioneI;
         public string DescrizioneI
@@ -101,7 +122,12 @@ namespace WelcomeLibrary.DOM
             get { return _DescrizioneRU; }
             set { _DescrizioneRU = value; }
         }
-
+        private string _DescrizioneDK;
+        public string DescrizioneDK
+        {
+            get { return _DescrizioneDK; }
+            set { _DescrizioneDK = value; }
+        }
 
 
         private string _CanonicalI;
@@ -121,6 +147,13 @@ namespace WelcomeLibrary.DOM
         {
             get { return _CanonicalRU; }
             set { _CanonicalRU = value; }
+        }
+
+        private string _CanonicalDK;
+        public string CanonicalDK
+        {
+            get { return _CanonicalDK; }
+            set { _CanonicalDK = value; }
         }
         private string _robots;
         public string Robots
@@ -162,6 +195,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.CanonicalRU;
                     break;
+                case "DK":
+                    ret = this.CanonicalDK;
+                    break;
                 default:
                     ret = this.CanonicalI;
                     break;
@@ -177,6 +213,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.CanonicalRU = value;
+                    break;
+                case "DK":
+                    this.CanonicalDK = value;
                     break;
                 default:
                     this.CanonicalI = value;
@@ -195,6 +234,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.TitoloRU;
                     break;
+                case "DK":
+                    ret = this.TitoloDK;
+                    break;
                 default:
                     ret = this.TitoloI;
                     break;
@@ -210,6 +252,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.TitoloRU = value;
+                    break;
+                case "DK":
+                    this.TitoloDK = value;
                     break;
                 default:
                     this.TitoloI = value;
@@ -227,6 +272,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.DescrizioneRU;
                     break;
+                case "DK":
+                    ret = this.DescrizioneDK;
+                    break;
                 default:
                     ret = this.DescrizioneI;
                     break;
@@ -242,6 +290,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.DescrizioneRU = value;
+                    break;
+                case "DK":
+                    this.DescrizioneDK = value;
                     break;
                 default:
                     this.DescrizioneI = value;
@@ -259,11 +310,14 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneGB = "";
             this.DescrizioneI = "";
             this.DescrizioneRU = "";
+            this.DescrizioneDK = "";
             this.TitoloRU = "";
             this.TitoloGB = "";
+            this.TitoloDK = "";
             this.TitoloI = "";
             this.CanonicalGB = "";
             this.CanonicalRU = "";
+            this.CanonicalDK = "";
             this.CanonicalI = "";
             this.Robots = "";
             this.offertaassociata = new Offerte();
@@ -275,6 +329,9 @@ namespace WelcomeLibrary.DOM
             this.CustomtitleRU = "";
             this.CustomdescRU = "";
 
+            this.CustomtitleDK = "";
+            this.CustomdescDK = "";
+
         }
         public Contenuti(Contenuti tmp)
         {
@@ -283,10 +340,12 @@ namespace WelcomeLibrary.DOM
             this.CodiceContenuto = tmp.CodiceContenuto;
             this.DataInserimento = tmp.DataInserimento;
             this.DescrizioneGB = tmp.DescrizioneGB;
+            this.DescrizioneDK = tmp.DescrizioneDK;
             this.DescrizioneI = tmp.DescrizioneI;
             this.DescrizioneRU = tmp.DescrizioneRU;
             this.TitoloRU = tmp.TitoloRU;
             this.TitoloGB = tmp.TitoloGB;
+            this.TitoloDK = tmp.TitoloDK;
             this.TitoloI = tmp.TitoloI;
             this.CustomtitleI = tmp.CustomtitleI;
             this.CustomdescI = tmp.CustomdescI;
@@ -297,9 +356,12 @@ namespace WelcomeLibrary.DOM
             this.CustomtitleRU = tmp.CustomtitleRU;
             this.CustomdescRU = tmp.CustomdescRU;
 
+            this.CustomtitleDK = tmp.CustomtitleDK;
+            this.CustomdescDK = tmp.CustomdescDK;
 
             this.CanonicalGB = tmp.CanonicalGB;
             this.CanonicalRU = tmp.CanonicalRU;
+            this.CanonicalDK = tmp.CanonicalDK;
             this.CanonicalI = tmp.CanonicalI;
             this.Robots = tmp.Robots;
 

@@ -143,10 +143,7 @@ namespace WelcomeLibrary.UF
 						item.Valore = (item.Valore);
 						//item.Valore = HtmlEncode(item.Valore);
 
-						//if (item.Lingua == "GB")
-						//{
-						//   int a = 0;
-						//}
+					 
 						if (!Items.ContainsKey(item.Gruppo))
 						{
 
@@ -299,10 +296,7 @@ namespace WelcomeLibrary.UF
                         item.Valore = (item.Valore);
                         //item.Valore = HtmlEncode(item.Valore);
 
-                        //if (item.Lingua == "GB")
-                        //{
-                        //   int a = 0;
-                        //}
+                      
                         if (!Items.ContainsKey(item.Gruppo))
                         {
 

@@ -171,6 +171,9 @@ namespace WelcomeLibrary.UF
                 case "RU":
                     culturename = "ru";
                     break;
+                case "DK":
+                    culturename = "dk";
+                    break;
                 default:
                     culturename = "it";
                     break;
@@ -1774,6 +1777,12 @@ namespace WelcomeLibrary.UF
             _naz.Double1 = 0;
             _list.Add(_naz);
 
+            _naz = new Tabrif();
+            _naz.Codice = "XX";
+            _naz.Lingua = "DK";
+            _naz.Campo1 = "International";
+            _naz.Double1 = 0;
+            _list.Add(_naz);
 
             try
             {

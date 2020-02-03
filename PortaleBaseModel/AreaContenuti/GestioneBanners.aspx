@@ -45,7 +45,8 @@
                         OnClick="btnINserisciInglese_Click" />
                     <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Russo"
                         OnClick="btnINserisciRusso_Click" />
-
+                    <asp:Button ID="btnInserisciDK" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Danese"
+                        OnClick="btnINserisciDk_Click" />
                     <asp:Button ID="btnAggiorna" runat="server" CssClass="btn btn-primary btn-sm" Text="Aggiorna Banner" OnClick="btnAggiorna_Click" />
                     <asp:Button ID="btnElimina" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina Banner" OnClick="btnElimina_Click" />
                 </div>
@@ -72,6 +73,7 @@
                         <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
                         <li><a data-toggle="pill" href="#tebeng">Inglese</a></li>
                         <li><a data-toggle="pill" href="#tabru">Russo</a></li>
+                        <li><a data-toggle="pill" href="#tabdk">Danese</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tabita" class="tab-pane fade in active">
@@ -135,7 +137,7 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-bottom: 5px">
-                                 <div class="col-sm-1 text-right">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label ID="Label3" runat="server" Text="Img Alt Text Eng" />
                                     </strong>
@@ -149,7 +151,7 @@
                             <h4>BANNER RUSSO</h4>
                             <asp:Image ID="imgRU" Width="250" runat="server" ImageUrl="" />
                             <div class="row" style="padding-bottom: 5px">
-                                 <div class="col-sm-1 text-right">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label ID="litNavigateUrlRU" runat="server" Text="Link Destinazione Russo" />
                                     </strong>
@@ -159,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-bottom: 5px">
-                                 <div class="col-sm-1 text-right">
+                                <div class="col-sm-1 text-right">
                                     <strong>
                                         <asp:Label Width="30%" ID="litDescrizioneRU" runat="server" Text="Descrizione Russo" />
                                     </strong>
@@ -180,6 +182,42 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="tabdk" class="tab-pane fade">
+                            <h4>BANNER DANISH</h4>
+                            <asp:Image ID="imgDK" Width="250" runat="server" ImageUrl="" />
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label5" runat="server" Text="Link Destinazione Danese" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtNavigateUrlDK" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label Width="30%" ID="Label6" runat="server" Text="Descrizione Danese" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass=" form-control" Height="250px" TextMode="MultiLine" ID="txtDescrizioneDK"
+                                        runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label7" runat="server" Text="Img Alt Text Danese" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextDK" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

@@ -131,13 +131,6 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
-            if (Sezione.ToLower().Contains("header-bassa-"))
-            {
-                ResizeWidth = 1800;
-                ResizeHeight = 450;
-                //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
-                //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
-            }
 
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("banner-portfolio-bg"))
@@ -253,9 +246,15 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtNavigateUrlGB.Text = "";
         txtDescrizioneGB.Text = "";
         imgGB.ImageUrl = "";
+
         txtNavigateUrlRU.Text = "";
         txtDescrizioneRU.Text = "";
         imgRU.ImageUrl = "";
+
+        txtNavigateUrlDK.Text = "";
+        txtDescrizioneDK.Text = "";
+        imgDK.ImageUrl = "";
+
         txtNavigateUrl.Text = "";
         txtDescrizioneI.Text = "";
         imgI.ImageUrl = "";
@@ -264,6 +263,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtImgalttextI.Text = "";
         txtImgalttextGB.Text = "";
         txtImgalttextRU.Text = "";
+        txtImgalttextDK.Text = "";
     }
 
     protected void VisualizzaDettaglio()
@@ -281,6 +281,10 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneRU.Text = BannerSelezionato.AlternateTextRU;
         imgRU.ImageUrl = BannerSelezionato.ImageUrlRU;
 
+        txtNavigateUrlDK.Text = BannerSelezionato.NavigateUrlDK;
+        txtDescrizioneDK.Text = BannerSelezionato.AlternateTextDK;
+        imgDK.ImageUrl = BannerSelezionato.ImageUrlDK;
+
         txtNavigateUrl.Text = BannerSelezionato.NavigateUrl;
         txtDescrizioneI.Text = BannerSelezionato.AlternateText;
         imgI.ImageUrl = BannerSelezionato.ImageUrl;
@@ -288,6 +292,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
 
         txtImgalttextI.Text = BannerSelezionato.AltimgtextI;
         txtImgalttextGB.Text = BannerSelezionato.AltimgtextGB;
+        txtImgalttextDK.Text = BannerSelezionato.AltimgtextDK;
         txtImgalttextRU.Text = BannerSelezionato.AltimgtextRU;
 
     }
@@ -299,6 +304,10 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.NavigateUrlGB = txtNavigateUrlGB.Text;
         BannerSelezionato.AlternateTextGB = txtDescrizioneGB.Text;
         BannerSelezionato.ImageUrlGB = imgGB.ImageUrl;
+
+        BannerSelezionato.NavigateUrlDK = txtNavigateUrlDK.Text;
+        BannerSelezionato.AlternateTextDK = txtDescrizioneDK.Text;
+        BannerSelezionato.ImageUrlDK = imgDK.ImageUrl;
 
         BannerSelezionato.NavigateUrlRU = txtNavigateUrlRU.Text;
         BannerSelezionato.AlternateTextRU = txtDescrizioneRU.Text;
@@ -313,11 +322,67 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AltimgtextI = txtImgalttextI.Text;
         BannerSelezionato.AltimgtextGB = txtImgalttextGB.Text;
         BannerSelezionato.AltimgtextRU = txtImgalttextRU.Text;
+        BannerSelezionato.AltimgtextDK = txtImgalttextDK.Text;
 
 
         int _p = 0;
         int.TryParse(txtProgressivo.Text, out _p);
         BannerSelezionato.progressivo = _p;
+    }
+    protected void btnINserisciDk_Click(object sender, EventArgs e)
+    {
+        if (BannerSelezionato == null || BannerSelezionato.Id == 0)
+        {
+            output.Text = "Banner non selezionato";
+            return;
+        }
+
+        if (!UploadFoto.HasFile)
+        {
+            output.Text = "Foto per Banner in Danese non selezionata";
+            return;
+        }
+        //Se si tratta di cariacamento banners per homepage anniunci controllo che l'url sia correto
+        //if (ddlAreaAnnunci.Visible && ddlAreaAnnunci.SelectedValue != "")
+        //{
+        //    if (!txtNavigateUrl.Text.ToLower().Contains("tipologia=ann"))
+        //    {
+        //        output.Text = "Errore indicare il parametro Tipologia nell'url per l'homepage annunci";
+        //        return;
+        //    }
+        //    if (!txtNavigateUrlGB.Text.ToLower().Contains("tipologia=ann"))
+        //    {
+        //        output.Text = "Errore indicare il parametro Tipologia nell'url per l'homepage annunci sia per l'italiano che per l'inglese";
+        //        return;
+        //    }
+        //}
+
+        //Carico la foto in russo e aggiorno la visualizzazione (se uguali non la carico aggiorno solo il db )
+        BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+        if (BannerSelezionato.ImageUrl != BannerSelezionato.ImageUrlDK)
+        {
+            if (CaricaFotoSuServer(ResizeHeight, ResizeWidth, true))
+            {
+                //Aggiorno il db
+                BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+                bannersDM banDM = new bannersDM(NomeTblBanners);
+                banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+                //Aggiorno la visualizzazione
+                CaricaDati(Sezione);
+                VisualizzaDettaglio();
+            }
+        }
+        else
+        {
+            //Aggiorno il db
+            BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+            bannersDM banDM = new bannersDM(NomeTblBanners);
+            banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+            //Aggiorno la visualizzazione
+            CaricaDati(Sezione);
+            VisualizzaDettaglio();
+        }
+
     }
 
 
@@ -609,6 +674,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.NavigateUrlGB = txtNavigateUrlGB.Text;
                     ban.AlternateTextRU = txtDescrizioneRU.Text;
                     ban.NavigateUrlRU = txtNavigateUrlRU.Text;
+                    ban.AlternateTextDK = txtDescrizioneDK.Text;
+                    ban.NavigateUrlDK = txtNavigateUrlDK.Text;
 
                     ban.AlternateText = txtDescrizioneI.Text;
                     ban.NavigateUrl = txtNavigateUrl.Text;
@@ -622,6 +689,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.AltimgtextI = txtImgalttextI.Text;
                     ban.AltimgtextGB = txtImgalttextGB.Text;
                     ban.AltimgtextRU = txtImgalttextRU.Text;
+                    ban.AltimgtextDK = txtImgalttextDK.Text;
 
                     banDM.InsertBanner(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ban);
                     BannerSelezionato = ban;
@@ -668,6 +736,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         FileInfo fi = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrl));
         FileInfo fiGB = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlGB));
         FileInfo fiRU = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlRU));
+        FileInfo fiDK = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlDK));
 
         //-------------------------------------
         //Eliminiamo il file se presente
@@ -725,13 +794,29 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
                 }
 
+                if (fiDK.Exists)
+                {
+                    string fileext = fiDK.Extension;
+                    string pathfile = fiDK.DirectoryName;
+                    string filenamenoext = fiDK.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
                 if (fi.Exists && !fi.FullName.Contains("\\images\\dummylogo.jpg"))  fi.Delete();
                 if (System.IO.File.Exists(fi.DirectoryName + "\\ant" + fi.Name)) System.IO.File.Delete(fi.DirectoryName + "\\ant" + fi.Name);
                 if (fiGB.Exists) fiGB.Delete();
                 if (System.IO.File.Exists(fiGB.DirectoryName + "\\ant" + fiGB.Name)) System.IO.File.Delete(fiGB.DirectoryName + "\\ant" + fiGB.Name);
                 if (fiRU.Exists) fiRU.Delete();
                 if (System.IO.File.Exists(fiRU.DirectoryName + "\\ant" + fiRU.Name)) System.IO.File.Delete(fiRU.DirectoryName + "\\ant" + fiRU.Name);
-
+                if (fiDK.Exists) fiDK.Delete();
+                if (System.IO.File.Exists(fiDK.DirectoryName + "\\ant" + fiDK.Name)) System.IO.File.Delete(fiDK.DirectoryName + "\\ant" + fiDK.Name);
 
                 //Elimino il record e svuoto la visualizzazione
                 bannersDM banDM = new bannersDM(NomeTblBanners);

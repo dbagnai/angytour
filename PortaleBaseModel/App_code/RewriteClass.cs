@@ -95,6 +95,7 @@ public class GenericRouteHandler : IRouteHandler
             case "i":
             case "gb":
             case "ru":
+            case "dk":
             case "it":
             case "en":
                 break;

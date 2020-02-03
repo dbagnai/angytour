@@ -53,7 +53,6 @@
     <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png" />
     <meta name="msapplication-TileColor" content="#000000" />
     <link rel="manifest" href="~/manifest.json" runat="server">
-    
 </head>
 <%--<body class="bckGray">--%>
 <body>
@@ -89,13 +88,18 @@
                 <div runat="server" visible="true">
                     <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                     </div>
-                    <div id="divCambioLinguadef1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
+                    <div id="divCambioLinguadef1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
                     </div>
                     <div id="divCambioLingua2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                     </div>
                     <div id="divCambioLinguadef2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
+                    </div>
+                    <div id="divCambioLingua3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                    </div>
+                    <div id="divCambioLinguadef3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
+                        <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
                     </div>
                 </div>
 
@@ -374,7 +378,7 @@
                     </li>--%>
 
                     <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
-                  <%--   <li runat="server">
+                    <%--   <li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000031",true,true) %> </a>
                         <ul class="dropdown">
                             <%= CreaLinkCategorie("rif000001","prod000031","",false) %>
@@ -384,7 +388,7 @@
                             <%= CaricaLinksPerTipologia("rif000001","prod000031","20") %>
                         </ul>
                     </li>--%>
-                   <%--    <li runat="server" class="d-block">
+                    <%--    <li runat="server" class="d-block">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000002",true,true) %> </a>
                         <ul class="dropdown">
                             <%= CreaLinkTipologie(2,2,"",false) %>
@@ -449,7 +453,7 @@
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative"  id="breadcrumbContainer">
+            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative" id="breadcrumbContainer">
                 <div class="breadcrumbs clearfix">
                     <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
                     </ul>
@@ -538,7 +542,7 @@
             <div id="masterlow"></div>
 
             <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
-         <%--   <div class="col-12 p-0 d-block d-sm-none">
+            <%--   <div class="col-12 p-0 d-block d-sm-none">
                 <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
                 <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
                     <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
@@ -626,18 +630,18 @@
                                                 contactdatas.chkprivacy = chk1.checked;
                                                 contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
-                                                    getcontactdata(contactdatas, function (contactdatas) {
-                                                        var tastotxt = $(elembtn).html();
-                                                        $(elembtn).html("Wait ..");
-                                                        inviamessaggiomail(lng, contactdatas, function (result) {
-                                                            if (result) {
-                                                                //in caso di errore visualizzo
-                                                                out1.innerHTML = result;
-                                                                $(elembtn).removeAttr("disabled")
-                                                                $(elembtn).html(tastotxt);
-                                                            }
-                                                        }, tastotxt);
-                                                    }, $(elembtn));
+                                                getcontactdata(contactdatas, function (contactdatas) {
+                                                    var tastotxt = $(elembtn).html();
+                                                    $(elembtn).html("Wait ..");
+                                                    inviamessaggiomail(lng, contactdatas, function (result) {
+                                                        if (result) {
+                                                            //in caso di errore visualizzo
+                                                            out1.innerHTML = result;
+                                                            $(elembtn).removeAttr("disabled")
+                                                            $(elembtn).html(tastotxt);
+                                                        }
+                                                    }, tastotxt);
+                                                }, $(elembtn));
                                                 ///////////////////////////////////////////////////////////////////////
 
                                                 ///////////////////////////////////////////////////////////////////////
@@ -944,7 +948,7 @@
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
-      <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
+    <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
     <%-- <script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </body>
 </html>

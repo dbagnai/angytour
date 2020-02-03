@@ -49,6 +49,13 @@ namespace WelcomeLibrary.DOM
             set { _DescrizioneRU = value; }
 
         }
+        private string _DescrizioneDK;
+        public string DescrizioneDK
+        {
+            get { return _DescrizioneDK; }
+            set { _DescrizioneDK = value; }
+
+        }
         private string _Cartella;
         public string Cartella
         {
@@ -85,6 +92,7 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneI = tmp.DescrizioneI;
             this.DescrizioneGB = tmp.DescrizioneGB;
             this.DescrizioneRU = tmp.DescrizioneRU;
+            this.DescrizioneDK = tmp.DescrizioneDK;
             this.File = tmp.File;
             this.NomeAnteprima = tmp.NomeAnteprima;
             this.NomeFile = tmp.NomeFile;
@@ -98,6 +106,7 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneI = string.Empty;
             this.DescrizioneGB = string.Empty;
             this.DescrizioneRU = string.Empty;
+            this.DescrizioneDK = string.Empty;
             this.File = null;
             this.NomeAnteprima = "";
             this.NomeFile = "";
@@ -115,6 +124,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = (!string.IsNullOrEmpty(this.DescrizioneRU)) ? this.DescrizioneRU : this.DescrizioneI;
                     break;
+                case "DK":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneDK)) ? this.DescrizioneDK : this.DescrizioneI;
+                    break;
                 default:
                     ret = this.DescrizioneI;
                     break;
@@ -131,6 +143,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.DescrizioneRU = value;
+                    break;
+                case "DK":
+                    this.DescrizioneDK = value;
                     break;
                 default:
                     this.DescrizioneI = value;

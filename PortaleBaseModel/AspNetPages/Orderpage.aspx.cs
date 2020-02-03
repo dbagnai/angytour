@@ -100,6 +100,12 @@ public partial class AspNetPages_Orderpage : CommonPage
             case "GB":
                 output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
                 break;
+            case "RU":
+                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
+                break;
+            case "DK":
+                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
+                break;
         }
     }
     protected void btnCodiceSconto_Click(object sender, EventArgs e)
@@ -1298,6 +1304,12 @@ public partial class AspNetPages_Orderpage : CommonPage
                 case "GB":
                     output.Text = "Error save CodiceOrdine";
                     break;
+                case "RU":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
+                case "DK":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
             }
         }
     }
@@ -1426,11 +1438,17 @@ public partial class AspNetPages_Orderpage : CommonPage
             TestoMail += "<tr><td style=' font-size:14px;'>" + i.ToString() + " - ";
             switch (Lingua)
             {
+                case "I":
+                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
+                    break;
                 case "GB":
                     TestoMail += item.Offerta.DenominazioneGB + "<br/>";
                     break;
-                default:
-                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
+                case "RU":
+                    TestoMail += item.Offerta.DenominazioneRU + "<br/>";
+                    break;
+                case "DK":
+                    TestoMail += item.Offerta.DenominazioneDK + "<br/>";
                     break;
             }
 

@@ -50,6 +50,7 @@
                     <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                     <asp:ListItem Text="Inglese" Value="GB" />
                     <asp:ListItem Text="Russo" Value="RU" />
+                    <asp:ListItem Text="Danese" Value="DK" />
                 </asp:DropDownList>
             </div>
             <div style="clear: both">
@@ -247,7 +248,8 @@
                     OnSelectedIndexChanged="ddlLinguaFiltroClientiChange">
                     <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                     <asp:ListItem Text="Inglese" Value="GB" />
-                    <asp:ListItem Text="Inglese" Value="RU" />
+                    <asp:ListItem Text="Russo" Value="RU" />
+                    <asp:ListItem Text="Danese" Value="DK" />
                 </asp:DropDownList>
                 <br />
                 <asp:Literal ID="Literal10" Text="Seleziona Nazione Clienti anagrafica: " runat="server" />

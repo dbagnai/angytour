@@ -65,6 +65,11 @@ namespace WelcomeLibrary.DAL
                         if (!reader["titoloRU"].Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("titoloRU"));
 
+                        if (!reader["testoDK"].Equals(DBNull.Value))
+                            item.TestoDK = reader.GetString(reader.GetOrdinal("testoDK"));
+                        if (!reader["titoloDK"].Equals(DBNull.Value))
+                            item.TitoloDK = reader.GetString(reader.GetOrdinal("titoloDK"));
+
                         if (!reader["spare1"].Equals(DBNull.Value))
                             item.Spare1 = reader.GetString(reader.GetOrdinal("spare1"));
                         if (!reader["Approvato"].Equals(DBNull.Value))
@@ -269,18 +274,18 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter ptesto = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@testo"; });
                     _parUsed.Add(ptesto);
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE testoI like @testo or testoGB like @testo or testoRU like @testo ";
+                        queryfilter += " WHERE testoI like @testo or testoGB like @testo or testoRU like @testo  or testoDK like @testo ";
                     else
-                        queryfilter += " AND testoI like @testo  or testoGB like @testo or testoRU like @testo  ";
+                        queryfilter += " AND testoI like @testo  or testoGB like @testo or testoRU like @testo  or testoDK like @testo ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@titolo"; }))
                 {
                     SQLiteParameter ptitolo = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@titolo"; });
                     _parUsed.Add(ptitolo);
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE titoloI like @titolo  or titoloGB like @titolo  or titoloRU like @titolo ";
+                        queryfilter += " WHERE titoloI like @titolo  or titoloGB like @titolo  or titoloRU like @titolo  or titoloDK like @titolo ";
                     else
-                        queryfilter += " AND  titoloI like @titolo  or titoloGB like @titolo  or titoloRU like @titolo   ";
+                        queryfilter += " AND  titoloI like @titolo  or titoloGB like @titolo  or titoloRU like @titolo  or titoloDK like @titolo  ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@spare1"; }))
                 {
@@ -305,9 +310,9 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter testoricerca = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@testoricerca"; });
                     _parUsed.Add(testoricerca);
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE (  titoloI like @titolo or titoloGB like @titolo  or titoloRU like @titolo  or  testoI like @testo  or testoGB like @testo or testoRU like @testo  or spare1 like @spare1) ";
+                        queryfilter += " WHERE (  titoloI like @titolo or titoloGB like @titolo  or titoloRU like @titolo or titoloDK like @titolo  or  testoI like @testo  or testoGB like @testo or testoRU like @testo or testoDK like @testo  or spare1 like @spare1) ";
                     else
-                        queryfilter += " AND   (  titoloI like @titolo or titoloGB like @titolo  or titoloRU like @titolo  or  testoI like @testo  or testoGB like @testo or testoRU like @testo  or spare1 like @spare1) ";
+                        queryfilter += " AND (  titoloI like @titolo or titoloGB like @titolo  or titoloRU like @titolo or titoloDK like @titolo  or  testoI like @testo  or testoGB like @testo or testoRU like @testo or testoDK like @testo  or spare1 like @spare1) ";
                 }
 
                 query += queryfilter; //query da fare per i risultati
@@ -377,6 +382,10 @@ namespace WelcomeLibrary.DAL
                             item.TestoRU = reader.GetString(reader.GetOrdinal("testoRU"));
                         if (!reader["titoloRU"].Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("titoloRU"));
+                        if (!reader["testoDK"].Equals(DBNull.Value))
+                            item.TestoDK = reader.GetString(reader.GetOrdinal("testoDK"));
+                        if (!reader["titoloDK"].Equals(DBNull.Value))
+                            item.TitoloDK = reader.GetString(reader.GetOrdinal("titoloDK"));
 
                         if (!reader["Spare2"].Equals(DBNull.Value))
                             item.Spare2 = reader.GetString(reader.GetOrdinal("Spare2"));
@@ -490,6 +499,11 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p6c = new SQLiteParameter("@titoloRU", item.TitoloRU);//OleDbType.VarChar
             parColl.Add(p6c);
 
+            SQLiteParameter p5d = new SQLiteParameter("@testoDK", item.TestoDK);//OleDbType.VarChar
+            parColl.Add(p5d);
+            SQLiteParameter p6d = new SQLiteParameter("@titoloDK", item.TitoloDK);//OleDbType.VarChar
+            parColl.Add(p6d);
+
             SQLiteParameter p7 = new SQLiteParameter("@autore", item.Autore);//OleDbType.VarChar
             parColl.Add(p7);
             SQLiteParameter p9 = new SQLiteParameter("@Spare2", item.Spare2);//OleDbType.VarChar
@@ -513,17 +527,17 @@ namespace WelcomeLibrary.DAL
             if (item.Id != 0)
             {
                 //Update
-                query = "UPDATE [TBL_comments] SET idpost=@idpost,idcollegato=@idcollegato,stelle=@stelle,nome=@nome,testoI=@testoI,titoloI=@titoloI,testoGB=@testoGB,titoloGB=@titoloGB,testoRU=@testoRU,titoloRU=@titoloRU";
+                query = "UPDATE [TBL_comments] SET idpost=@idpost,idcollegato=@idcollegato,stelle=@stelle,nome=@nome,testoI=@testoI,titoloI=@titoloI,testoGB=@testoGB,titoloGB=@titoloGB,testoRU=@testoRU,titoloRU=@titoloRU,testoDK=@testoDK,titoloDK=@titoloDK";
                 query += ",autore=@autore,Spare2=@Spare2,email=@email,data=@data,spare1=@spare1,approvato=@approvato ";
                 query += " WHERE [Id] = " + item.Id;
             }
             else
             {
                 //Insert
-                query = "INSERT INTO TBL_comments (idpost,idcollegato,stelle,nome,testoI,titoloI,testoGB,titoloGB,testoRU,titoloRU";
+                query = "INSERT INTO TBL_comments (idpost,idcollegato,stelle,nome,testoI,titoloI,testoGB,titoloGB,testoRU,titoloRU,testoDK,titoloDK";
                 query += ",autore,Spare2,email,data,spare1,approvato )";
                 query += " values ( ";
-                query += "@idpost,@idcollegato,@stelle,@nome,@testoI,@titoloI,@testoGB,@titoloGB,@testoRU,@titoloRU,@autore";
+                query += "@idpost,@idcollegato,@stelle,@nome,@testoI,@titoloI,@testoGB,@titoloGB,@testoRU,@titoloRU,@testoDK,@titoloDK,@autore";
                 query += ",@Spare2,@email,@data,@spare1,@approvato )";
             }
 

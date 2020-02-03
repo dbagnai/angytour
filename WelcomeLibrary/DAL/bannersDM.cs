@@ -250,11 +250,11 @@ namespace WelcomeLibrary.DAL
                         item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         if (!(reader["Progressivo"]).Equals(DBNull.Value))
                             item.progressivo = reader.GetInt64(reader.GetOrdinal("Progressivo"));
+                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
 
                         item.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                         item.NavigateUrl = reader.GetString(reader.GetOrdinal("NavigateUrl"));
                         item.AlternateText = reader.GetString(reader.GetOrdinal("AlternateText"));
-                        item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
 
                         item.ImageUrlGB = reader.GetString(reader.GetOrdinal("ImageUrlGB"));
                         item.NavigateUrlGB = reader.GetString(reader.GetOrdinal("NavigateUrlGB"));
@@ -264,6 +264,23 @@ namespace WelcomeLibrary.DAL
                         else
                             item.AlternateTextGB = "";
 
+
+                        item.ImageUrlRU = reader.GetString(reader.GetOrdinal("ImageUrlRU"));
+                        item.NavigateUrlRU = reader.GetString(reader.GetOrdinal("NavigateUrlRU"));
+                        //Devi controllare SYstem.DBnull!!!
+                        if (!(reader["AlternateTextRU"]).Equals(DBNull.Value))
+                            item.AlternateTextRU = reader.GetString(reader.GetOrdinal("AlternateTextRU"));
+                        else
+                            item.AlternateTextRU = "";
+
+
+                        if (!(reader["ImageUrlDK"]).Equals(DBNull.Value)) item.ImageUrlDK = reader.GetString(reader.GetOrdinal("ImageUrlDK"));
+                        if (!(reader["NavigateUrlDK"]).Equals(DBNull.Value)) item.NavigateUrlDK = reader.GetString(reader.GetOrdinal("NavigateUrlDK"));
+                        //Devi controllare SYstem.DBnull!!!
+                        if (!(reader["AlternateTextDK"]).Equals(DBNull.Value))
+                            item.AlternateTextDK = reader.GetString(reader.GetOrdinal("AlternateTextDK"));
+                        else
+                            item.AlternateTextDK = "";
 
                         if (!(reader["altimgtextI"]).Equals(DBNull.Value))
                             item.AltimgtextI = reader.GetString(reader.GetOrdinal("altimgtextI"));
@@ -279,6 +296,11 @@ namespace WelcomeLibrary.DAL
                             item.AltimgtextRU = reader.GetString(reader.GetOrdinal("altimgtextRU"));
                         else
                             item.AltimgtextRU = "";
+
+                        if (!(reader["altimgtextDK"]).Equals(DBNull.Value))
+                            item.AltimgtextDK = reader.GetString(reader.GetOrdinal("altimgtextDK"));
+                        else
+                            item.AltimgtextDK = "";
 
                         list.Add(item);
                         if (maxbanners != 0 && list.Count >= maxbanners) break;
@@ -332,18 +354,22 @@ namespace WelcomeLibrary.DAL
                         //Devi controllare SYstem.DBnull!!!
                         if (!(reader["AlternateTextGB"]).Equals(DBNull.Value))
                             item.AlternateTextGB = reader.GetString(reader.GetOrdinal("AlternateTextGB"));
-
                         else
                             item.AlternateTextGB = "";
 
                         item.ImageUrlRU = reader.GetString(reader.GetOrdinal("ImageUrlRU"));
                         item.NavigateUrlRU = reader.GetString(reader.GetOrdinal("NavigateUrlRU"));
-                        //Devi controllare SYstem.DBnull!!!
                         if (!(reader["AlternateTextRU"]).Equals(DBNull.Value))
                             item.AlternateTextRU = reader.GetString(reader.GetOrdinal("AlternateTextRU"));
-
                         else
                             item.AlternateTextRU = "";
+
+                        if (!(reader["ImageUrlDK"]).Equals(DBNull.Value)) item.ImageUrlDK = reader.GetString(reader.GetOrdinal("ImageUrlDK"));
+                        if (!(reader["NavigateUrlDK"]).Equals(DBNull.Value)) item.NavigateUrlDK = reader.GetString(reader.GetOrdinal("NavigateUrlDK"));
+                        if (!(reader["AlternateTextDK"]).Equals(DBNull.Value))
+                            item.AlternateTextDK = reader.GetString(reader.GetOrdinal("AlternateTextDK"));
+                        else
+                            item.AlternateTextDK = "";
 
                         if (!(reader["altimgtextI"]).Equals(DBNull.Value))
                             item.AltimgtextI = reader.GetString(reader.GetOrdinal("altimgtextI"));
@@ -359,6 +385,11 @@ namespace WelcomeLibrary.DAL
                             item.AltimgtextRU = reader.GetString(reader.GetOrdinal("altimgtextRU"));
                         else
                             item.AltimgtextRU = "";
+
+                        if (!(reader["altimgtextDK"]).Equals(DBNull.Value))
+                            item.AltimgtextDK = reader.GetString(reader.GetOrdinal("altimgtextDK"));
+                        else
+                            item.AltimgtextDK = "";
 
 
                         return item;
@@ -400,6 +431,13 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p6r = new SQLiteParameter("@NavigateUrlRU", item.NavigateUrlRU);
             parColl.Add(p6r);
 
+            SQLiteParameter p4d = new SQLiteParameter("@AlternateTextDK", item.AlternateTextDK);
+            parColl.Add(p4d);
+            SQLiteParameter p5d = new SQLiteParameter("@ImageUrlDK", item.ImageUrlDK);//OleDbType.VarChar
+            parColl.Add(p5d);
+            SQLiteParameter p6d = new SQLiteParameter("@NavigateUrlDK", item.NavigateUrlDK);
+            parColl.Add(p6d);
+
             SQLiteParameter p7 = new SQLiteParameter("@Progressivo", item.progressivo);
             parColl.Add(p7);
 
@@ -409,15 +447,17 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p8b);
             SQLiteParameter p8c = new SQLiteParameter("@altimgtextRU", item.AltimgtextRU);
             parColl.Add(p8c);
+            SQLiteParameter p8d = new SQLiteParameter("@altimgtextDK", item.AltimgtextDK);
+            parColl.Add(p8d);
 
 
-            string query = "INSERT INTO " + nometabella + "([ImageUrl],[NavigateUrl],[AlternateText],[AlternateTextGB],[ImageUrlGB],[NavigateUrlGB],[AlternateTextRU],[ImageUrlRU],[NavigateUrlRU],Progressivo,altimgtextI,altimgtextGB,altimgtextRU) VALUES (@ImageUrl,@NavigateUrl,@AlternateText,@AlternateTextGB,@ImageUrlGB,@NavigateUrlGB,@AlternateTextRU,@ImageUrlRU,@NavigateUrlRU,@Progressivo,@altimgtextI,@altimgtextGB,@altimgtextRU)";
+            string query = "INSERT INTO " + nometabella + "([ImageUrl],[NavigateUrl],[AlternateText],[AlternateTextGB],[ImageUrlGB],[NavigateUrlGB],[AlternateTextRU],[ImageUrlRU],[NavigateUrlRU],[AlternateTextDK],[ImageUrlDK],[NavigateUrlDK],Progressivo,altimgtextI,altimgtextGB,altimgtextRU,altimgtextDK) VALUES (@ImageUrl,@NavigateUrl,@AlternateText,@AlternateTextGB,@ImageUrlGB,@NavigateUrlGB,@AlternateTextRU,@ImageUrlRU,@NavigateUrlRU,@AlternateTextDK,@ImageUrlDK,@NavigateUrlDK,@Progressivo,@altimgtextI,@altimgtextGB,@altimgtextRU,@altimgtextDK)";
 
             if (!string.IsNullOrWhiteSpace(item.sezione))
             {
                 SQLiteParameter p8 = new SQLiteParameter("@sezione", item.sezione);
                 parColl.Add(p8);
-                query = "INSERT INTO " + nometabella + "([ImageUrl],[NavigateUrl],[AlternateText],[AlternateTextGB],[ImageUrlGB],[NavigateUrlGB],[AlternateTextRU],[ImageUrlRU],[NavigateUrlRU],Progressivo,[Sezione],altimgtextI,altimgtextGB,altimgtextRU) VALUES (@ImageUrl,@NavigateUrl,@AlternateText,@AlternateTextGB,@ImageUrlGB,@NavigateUrlGB,@AlternateTextRU,@ImageUrlRU,@NavigateUrlRU,@Progressivo,@sezione,@altimgtextI,@altimgtextGB,@altimgtextRU)";
+                query = "INSERT INTO " + nometabella + "([ImageUrl],[NavigateUrl],[AlternateText],[AlternateTextGB],[ImageUrlGB],[NavigateUrlGB],[AlternateTextRU],[ImageUrlRU],[NavigateUrlRU],[AlternateTextDK],[ImageUrlDK],[NavigateUrlDK],Progressivo,[Sezione],altimgtextI,altimgtextGB,altimgtextRU,altimgtextDK) VALUES (@ImageUrl,@NavigateUrl,@AlternateText,@AlternateTextGB,@ImageUrlGB,@NavigateUrlGB,@AlternateTextRU,@ImageUrlRU,@NavigateUrlRU,@AlternateTextDK,@ImageUrlDK,@NavigateUrlDK,@Progressivo,@sezione,@altimgtextI,@altimgtextGB,@altimgtextRU,@altimgtextDK)";
             }
             try
             {
@@ -456,6 +496,15 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p7r = new SQLiteParameter("@NavigateUrlRU", item.NavigateUrlRU);
             parColl.Add(p7r);
 
+
+            SQLiteParameter p5d = new SQLiteParameter("@AlternateTextDK", item.AlternateTextDK);
+            parColl.Add(p5d);
+            SQLiteParameter p6d = new SQLiteParameter("@ImageUrlDK", item.ImageUrlDK);//OleDbType.VarChar
+            parColl.Add(p6d);
+            SQLiteParameter p7d = new SQLiteParameter("@NavigateUrlDK", item.NavigateUrlDK);
+            parColl.Add(p7d);
+
+
             SQLiteParameter p8 = new SQLiteParameter("@Progressivo", item.progressivo);
             parColl.Add(p8);
 
@@ -465,16 +514,17 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p8b);
             SQLiteParameter p8c = new SQLiteParameter("@altimgtextRU", item.AltimgtextRU);
             parColl.Add(p8c);
+            SQLiteParameter p8d = new SQLiteParameter("@altimgtextDK", item.AltimgtextDK);
+            parColl.Add(p8d);
 
 
-
-            string query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[Progressivo]=@Progressivo,[altimgtextI]=@altimgtextI,[altimgtextGB]=@altimgtextGB,[altimgtextRU]=@altimgtextRU WHERE ([Id]=@id)";
+            string query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[AlternateTextDK]=@AlternateTextDK,[ImageUrlDK]=@ImageUrlDK,[NavigateUrlDK]=@NavigateUrlDK,[Progressivo]=@Progressivo,[altimgtextI]=@altimgtextI,[altimgtextGB]=@altimgtextGB,[altimgtextRU]=@altimgtextRU,[altimgtextDK]=@altimgtextDK WHERE ([Id]=@id)";
 
             if (!string.IsNullOrWhiteSpace(item.sezione))
             {
                 SQLiteParameter p9 = new SQLiteParameter("@sezione", item.sezione);
                 parColl.Add(p9);
-                query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[Progressivo]=@Progressivo,[altimgtextI]=@altimgtextI,[altimgtextGB]=@altimgtextGB,[altimgtextRU]=@altimgtextRU,[sezione]=@sezione  WHERE ([Id]=@id)";
+                query = "UPDATE [" + nometabella + "] SET [ImageUrl]=@ImageUrl,[NavigateUrl]=@NavigateUrl,[AlternateText]=@AlternateText,[AlternateTextGB]=@AlternateTextGB,[ImageUrlGB]=@ImageUrlGB,[NavigateUrlGB]=@NavigateUrlGB,[AlternateTextRU]=@AlternateTextRU,[ImageUrlRU]=@ImageUrlRU,[NavigateUrlRU]=@NavigateUrlRU,[AlternateTextDK]=@AlternateTextDK,[ImageUrlDK]=@ImageUrlDK,[NavigateUrlDK]=@NavigateUrlDK,[Progressivo]=@Progressivo,[altimgtextI]=@altimgtextI,[altimgtextGB]=@altimgtextGB,[altimgtextRU]=@altimgtextRU,[altimgtextDK]=@altimgtextDK,[sezione]=@sezione  WHERE ([Id]=@id)";
             }
 
             SQLiteParameter p1 = new SQLiteParameter("@id", item.Id);//OleDbType.VarChar

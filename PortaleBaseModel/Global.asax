@@ -148,14 +148,21 @@
                 //CREAZIONE DEI FEED RSS-----------------------------------------------------------------
                 System.Threading.Thread trUpdaterssFeed_I = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_I);
                 trUpdaterssFeed_I.Start();
-
                 if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
                 {
                     System.Threading.Thread trUpdaterssFeed_GB = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_GB);
                     trUpdaterssFeed_GB.Start();
                 }
-                //System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
-                //trUpdaterssFeed_RU.Start();
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
+                {
+                    System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
+                    trUpdaterssFeed_RU.Start();
+                }
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() == "true")
+                {
+                    System.Threading.Thread trUpdaterssFeed_DK = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_DK);
+                    trUpdaterssFeed_DK.Start();
+                }
 
                 //---------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------
@@ -255,6 +262,15 @@
             Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 #endif
+#if false
+            Lingua = "DK";
+            Tmp_linksite = new List<string>();
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+#endif
+
 
             //references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
 
@@ -509,7 +525,7 @@
             "~/js/bootstrap-notify-master/js/bootstrap-notify.js",
             "~/lib/js/notifypopup.js",
                      "~/js/hammer/hammer-min.js",
-              //"~/js/magnify/js/jquery.magnify.js",
+            //"~/js/magnify/js/jquery.magnify.js",
             //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",
             //"~/js/jquery.validate.js",
@@ -587,12 +603,12 @@
             //"~/js/notifications/notification.css",
             "~/js/owl-carousel/owl-carousel/owl.carousel.css",
             "~/js/flexslider/flexslider.css",
-            //"~/js/magnify/css/magnify.css",
+             //"~/js/magnify/css/magnify.css",
              "~/js/bootstrap-notify-master/css/bootstrap-notify1.css",
             "~/js/bootstrap-notify-master/css/styles/alert-bangtidy.css",
             "~/js/bootstrap-notify-master/css/styles/alert-custom1.css",
             "~/js/bootstrap-notify-master/css/styles/alert-custom2.css",
-          
+
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
             "~/css/ui-personalization.css",

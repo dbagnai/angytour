@@ -50,9 +50,11 @@ namespace WelcomeLibrary.DAL
                         item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                         item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                        if (!(reader["DescrizioneDK"]).Equals(DBNull.Value)) item.DescrizioneDK = reader.GetString(reader.GetOrdinal("DescrizioneDK"));
                         item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
                         item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
+                        if (!(reader["TitoloDK"]).Equals(DBNull.Value)) item.TitoloDK = reader.GetString(reader.GetOrdinal("TitoloDK"));
                         item.TitoloI = reader.GetString(reader.GetOrdinal("TitoloI"));
 
 
@@ -68,7 +70,10 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
-
+                        if (!(reader["customtitleDK"]).Equals(DBNull.Value))
+                            item.CustomtitleDK = reader.GetString(reader.GetOrdinal("customtitleDK"));
+                        if (!(reader["customdescDK"]).Equals(DBNull.Value))
+                            item.CustomdescDK = reader.GetString(reader.GetOrdinal("customdescDK"));
 
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
@@ -77,6 +82,8 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
                         if (!(reader["canonicalRU"]).Equals(DBNull.Value))
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["canonicalDK"]).Equals(DBNull.Value))
+                            item.CanonicalDK = reader.GetString(reader.GetOrdinal("canonicalDK"));
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
 
@@ -123,8 +130,8 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT  A.ID as A_ID,A.ID_ATTIVITA,A.CodiceContenuto,A.DataInserimento as A_DataInserimento,A.DescrizioneI as A_DescrizioneI,A.TitoloI,A.DescrizioneGB as A_DescrizioneGB,A.TitoloGB,A.customtitleI,A.customdescI,A.customtitleGB,A.customdescGB,A.customtitleRU,A.customdescRU,A.DescrizioneRU as A_DescrizioneRU,A.TitoloRU,A.FotoSchema as  A_FotoSchema,A.FotoValori as A_FotoValori,A.canonicalI as A_canonicalI,A.canonicalGB as A_canonicalGB,A.canonicalRU as A_canonicalRU,A.robots as A_robots" +
-                    ",B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento as B_DataInserimento,B.DescrizioneI as B_DescrizioneI,B.DENOMINAZIONEI,B.CodiceCOMUNE,B.CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.DATITECNICII,B.DENOMINAZIONEGB,B.DescrizioneGB as B_DescrizioneGB,B.DATITECNICIGB,B.DescrizioneRU as B_DescrizioneRU,B.DENOMINAZIONERU,B.DATITECNICIRU,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo,B.FotoSchema as B_FotoSchema,B.FotoValori as B_FotoValori,B.canonicalI as B_canonicalI,B.canonicalGB as B_canonicalGB,B.canonicalRU as B_canonicalRU,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.robots as B_robots " +
+                string query = "SELECT  A.ID as A_ID,A.ID_ATTIVITA,A.CodiceContenuto,A.DataInserimento as A_DataInserimento,A.DescrizioneI as A_DescrizioneI,A.TitoloI,A.DescrizioneGB as A_DescrizioneGB,A.TitoloGB,A.customtitleI,A.customdescI,A.customtitleGB,A.customdescGB,A.customtitleRU,A.customtitleDK,A.customdescRU,A.DescrizioneRU as A_DescrizioneRU,A.TitoloRU ,A.customdescDK,A.DescrizioneDK as A_DescrizioneDK,A.TitoloDK ,A.FotoSchema as  A_FotoSchema,A.FotoValori as A_FotoValori,A.canonicalI as A_canonicalI,A.canonicalGB as A_canonicalGB,A.canonicalRU as A_canonicalRU,A.canonicalDK as A_canonicalDK,A.robots as A_robots" +
+                    ",B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento as B_DataInserimento,B.DescrizioneI as B_DescrizioneI,B.DENOMINAZIONEI,B.CodiceCOMUNE,B.CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.DATITECNICII,B.DENOMINAZIONEGB,B.DescrizioneGB as B_DescrizioneGB,B.DATITECNICIGB,B.DescrizioneRU as B_DescrizioneRU,B.DENOMINAZIONERU,B.DATITECNICIRU,B.DescrizioneDK as B_DescrizioneDK,B.DENOMINAZIONEDK,B.DATITECNICIDK,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo,B.FotoSchema as B_FotoSchema,B.FotoValori as B_FotoValori,B.canonicalI as B_canonicalI,B.canonicalGB as B_canonicalGB,B.canonicalRU as B_canonicalRU,B.canonicalDK as B_canonicalDK,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomDK,B.robots as B_robots " +
                     "FROM TBL_CONTENUTI A left join TBL_ATTIVITA B on A.ID_ATTIVITA=B.ID where CodiceContenuto=@CodiceContenuto order BY A.DataInserimento  Desc, A.ID Desc limit " + maxrecord;
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
@@ -153,8 +160,12 @@ namespace WelcomeLibrary.DAL
                             offerta.Id = reader.GetInt64(reader.GetOrdinal("B_ID"));
                             offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("B_DataInserimento"));
+
                             offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("B_DescrizioneI"));
                             offerta.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+                            if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                                offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
                                 offerta.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                             if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
@@ -169,9 +180,6 @@ namespace WelcomeLibrary.DAL
                             if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
                                 offerta.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
 
-                            if (!reader["DATITECNICII"].Equals(DBNull.Value))
-                                offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
-
 
                             offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("B_DescrizioneGB"));
@@ -185,6 +193,15 @@ namespace WelcomeLibrary.DAL
                                 offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
                             if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
                                 offerta.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+
+                            if (!reader["B_DescrizioneDK"].Equals(DBNull.Value))
+                                offerta.DescrizioneDK = reader.GetString(reader.GetOrdinal("B_DescrizioneDK"));
+                            if (!reader["DENOMINAZIONEDK"].Equals(DBNull.Value))
+                                offerta.DenominazioneDK = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDK"));
+                            if (!reader["DATITECNICIDK"].Equals(DBNull.Value))
+                                offerta.DatitecniciDK = reader.GetString(reader.GetOrdinal("DATITECNICIDK"));
+
+
 
                             if (!reader["EMAIL"].Equals(DBNull.Value))
                                 offerta.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
@@ -210,10 +227,12 @@ namespace WelcomeLibrary.DAL
 
                             if (!reader["urlcustomI"].Equals(DBNull.Value))
                                 offerta.UrlcustomI = reader.GetString(reader.GetOrdinal("urlcustomI"));
+                            if (!reader["urlcustomGB"].Equals(DBNull.Value))
+                                offerta.UrlcustomGB = reader.GetString(reader.GetOrdinal("urlcustomGB"));
                             if (!reader["urlcustomRU"].Equals(DBNull.Value))
                                 offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
-                            if (!reader["urlcustomRU"].Equals(DBNull.Value))
-                                offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
+                            if (!reader["urlcustomDK"].Equals(DBNull.Value))
+                                offerta.UrlcustomDK = reader.GetString(reader.GetOrdinal("urlcustomDK"));
 
                             if (!reader["B_canonicalGB"].Equals(DBNull.Value))
                                 offerta.CanonicalGB = reader.GetString(reader.GetOrdinal("B_canonicalGB"));
@@ -221,6 +240,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.CanonicalI = reader.GetString(reader.GetOrdinal("B_canonicalI"));
                             if (!reader["B_canonicalRU"].Equals(DBNull.Value))
                                 offerta.CanonicalRU = reader.GetString(reader.GetOrdinal("B_canonicalRU"));
+                            if (!reader["B_canonicalDK"].Equals(DBNull.Value))
+                                offerta.CanonicalDK = reader.GetString(reader.GetOrdinal("B_canonicalDK"));
 
                             if (!reader["B_robots"].Equals(DBNull.Value))
                                 offerta.Robots = reader.GetString(reader.GetOrdinal("B_robots"));
@@ -240,6 +261,16 @@ namespace WelcomeLibrary.DAL
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("A_DescrizioneGB"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
 
+                        if (!(reader["A_DescrizioneRU"]).Equals(DBNull.Value))
+                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("A_DescrizioneRU"));
+                        if (!(reader["TitoloRU"]).Equals(DBNull.Value))
+                            item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
+
+                        if (!(reader["A_DescrizioneDK"]).Equals(DBNull.Value))
+                            item.DescrizioneDK = reader.GetString(reader.GetOrdinal("A_DescrizioneDK"));
+                        if (!(reader["TitoloDK"]).Equals(DBNull.Value))
+                            item.TitoloDK = reader.GetString(reader.GetOrdinal("TitoloDK"));
+
                         if (!(reader["customtitleI"]).Equals(DBNull.Value))
                             item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
                         if (!(reader["customdescI"]).Equals(DBNull.Value))
@@ -252,6 +283,10 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
+                        if (!(reader["customtitleDK"]).Equals(DBNull.Value))
+                            item.CustomtitleDK = reader.GetString(reader.GetOrdinal("customtitleDK"));
+                        if (!(reader["customdescDK"]).Equals(DBNull.Value))
+                            item.CustomdescDK = reader.GetString(reader.GetOrdinal("customdescDK"));
 
 
 
@@ -261,16 +296,9 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalI = reader.GetString(reader.GetOrdinal("A_canonicalI"));
                         if (!reader["A_canonicalRU"].Equals(DBNull.Value))
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("A_canonicalRU"));
-                        if (!reader["A_canonicalGB"].Equals(DBNull.Value))
-                            item.Robots = reader.GetString(reader.GetOrdinal("A_canonicalGB"));
+                        if (!reader["A_canonicalDK"].Equals(DBNull.Value))
+                            item.CanonicalDK = reader.GetString(reader.GetOrdinal("A_canonicalDK"));
 
-
-
-
-                        if (!(reader["A_DescrizioneRU"]).Equals(DBNull.Value))
-                            item.DescrizioneRU = reader.GetString(reader.GetOrdinal("A_DescrizioneRU"));
-                        if (!(reader["TitoloRU"]).Equals(DBNull.Value))
-                            item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
 
                         if (!(reader["A_FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("A_FotoSchema"));
@@ -345,6 +373,10 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
+                        if (!(reader["customtitleDK"]).Equals(DBNull.Value))
+                            item.CustomtitleDK = reader.GetString(reader.GetOrdinal("customtitleDK"));
+                        if (!(reader["customdescDK"]).Equals(DBNull.Value))
+                            item.CustomdescDK = reader.GetString(reader.GetOrdinal("customdescDK"));
 
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
@@ -353,6 +385,8 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
                         if (!(reader["canonicalRU"]).Equals(DBNull.Value))
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["canonicalDK"]).Equals(DBNull.Value))
+                            item.CanonicalDK = reader.GetString(reader.GetOrdinal("canonicalDK"));
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
 
@@ -364,6 +398,11 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["TitoloRU"]).Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
 
+
+                        if (!(reader["DescrizioneDK"]).Equals(DBNull.Value))
+                            item.DescrizioneDK = reader.GetString(reader.GetOrdinal("DescrizioneDK"));
+                        if (!(reader["TitoloDK"]).Equals(DBNull.Value))
+                            item.TitoloDK = reader.GetString(reader.GetOrdinal("TitoloDK"));
 
                         if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                             item.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
@@ -403,7 +442,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo or TitoloRU like @Titolo )";
+                string query = "SELECT * FROM TBL_CONTENUTI where ( TitoloI like @Titolo or TitoloGB like @Titolo or TitoloRU like @Titolo or TitoloDK like @Titolo )";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 //SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI + "%");//OleDbType.VarChar
                 SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + URI);//OleDbType.VarChar
@@ -429,14 +468,18 @@ namespace WelcomeLibrary.DAL
 
                         item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                         item.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
-                        item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
                         item.TitoloGB = reader.GetString(reader.GetOrdinal("TitoloGB"));
+                        item.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
                         item.TitoloI = reader.GetString(reader.GetOrdinal("TitoloI"));
 
                         if (!(reader["DescrizioneRU"]).Equals(DBNull.Value))
                             item.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
                         if (!(reader["TitoloRU"]).Equals(DBNull.Value))
                             item.TitoloRU = reader.GetString(reader.GetOrdinal("TitoloRU"));
+                        if (!(reader["DescrizioneDK"]).Equals(DBNull.Value))
+                            item.DescrizioneDK = reader.GetString(reader.GetOrdinal("DescrizioneDK"));
+                        if (!(reader["TitoloDK"]).Equals(DBNull.Value))
+                            item.TitoloDK = reader.GetString(reader.GetOrdinal("TitoloDK"));
 
                         if (!(reader["customtitleI"]).Equals(DBNull.Value))
                             item.CustomtitleI = reader.GetString(reader.GetOrdinal("customtitleI"));
@@ -450,6 +493,10 @@ namespace WelcomeLibrary.DAL
                             item.CustomtitleRU = reader.GetString(reader.GetOrdinal("customtitleRU"));
                         if (!(reader["customdescRU"]).Equals(DBNull.Value))
                             item.CustomdescRU = reader.GetString(reader.GetOrdinal("customdescRU"));
+                        if (!(reader["customtitleDK"]).Equals(DBNull.Value))
+                            item.CustomtitleDK = reader.GetString(reader.GetOrdinal("customtitleDK"));
+                        if (!(reader["customdescDK"]).Equals(DBNull.Value))
+                            item.CustomdescDK = reader.GetString(reader.GetOrdinal("customdescDK"));
 
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
@@ -458,6 +505,8 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalI = reader.GetString(reader.GetOrdinal("canonicalI"));
                         if (!(reader["canonicalRU"]).Equals(DBNull.Value))
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
+                        if (!(reader["canonicalDK"]).Equals(DBNull.Value))
+                            item.CanonicalDK = reader.GetString(reader.GetOrdinal("canonicalDK"));
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
 
@@ -790,13 +839,16 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p3);
             SQLiteParameter p3r = new SQLiteParameter("@titoloru", item.TitoloRU);
             parColl.Add(p3r);
+            SQLiteParameter p3d = new SQLiteParameter("@titolodk", item.TitoloDK);
+            parColl.Add(p3d);
             SQLiteParameter p4 = new SQLiteParameter("@descrizionei", item.DescrizioneI);
             parColl.Add(p4);
             SQLiteParameter p5 = new SQLiteParameter("@descrizionegb", item.DescrizioneGB);
             parColl.Add(p5);
             SQLiteParameter p5r = new SQLiteParameter("@descrizioneru", item.DescrizioneRU);
             parColl.Add(p5r);
-
+            SQLiteParameter p5d = new SQLiteParameter("@descrizionedk", item.DescrizioneDK);
+            parColl.Add(p5d);
 
 
             SQLiteParameter p6 = new SQLiteParameter("@fotoschema", "");//item.FotoCollection_M.Schema
@@ -817,12 +869,16 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pct2);
             SQLiteParameter pct3 = new SQLiteParameter("@customtitleRU", item.CustomtitleRU);
             parColl.Add(pct3);
+            SQLiteParameter pct4 = new SQLiteParameter("@customtitleDK", item.CustomtitleDK);
+            parColl.Add(pct4);
             SQLiteParameter pcd1 = new SQLiteParameter("@customdescI", item.CustomdescI);
             parColl.Add(pcd1);
             SQLiteParameter pcd2 = new SQLiteParameter("@customdescGB", item.CustomdescGB);
             parColl.Add(pcd2);
             SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
+            SQLiteParameter pcd4 = new SQLiteParameter("@customdescDK", item.CustomdescDK);
+            parColl.Add(pcd4);
 
 
             SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
@@ -831,10 +887,12 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pca2);
             SQLiteParameter pca3 = new SQLiteParameter("@canonicalRU", item.CanonicalRU);
             parColl.Add(pca3);
+            SQLiteParameter pca4 = new SQLiteParameter("@canonicalDK", item.CanonicalDK);
+            parColl.Add(pca4);
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
-            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customdescI,customdescGB,customdescRU,canonicalI,canonicalGB,canonicalRU,robots) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@descrizionei,@descrizionegb,@descrizioneru,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customdescI,@customdescGB,@customdescRU,@canonicalI,@canonicalGB,@canonicalRU,@robots)";
+            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[TitoloDK],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[DescrizioneDK],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customtitleDK,customdescI,customdescGB,customdescRU,customdescDK,canonicalI,canonicalGB,canonicalRU,canonicalDK,robots) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@titolodk,@descrizionei,@descrizionegb,@descrizioneru,@descrizionedk,@fotoschema,@fotovalori,@Data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customtitleDK,@customdescI,@customdescGB,@customdescRU,@customdescDK,@canonicalI,@canonicalGB,@canonicalRU,@canonicalDK,@robots)";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -864,12 +922,16 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p3);
             SQLiteParameter p3r = new SQLiteParameter("@titoloru", item.TitoloRU);
             parColl.Add(p3r);
+            SQLiteParameter p3d = new SQLiteParameter("@titolodk", item.TitoloDK);
+            parColl.Add(p3d);
             SQLiteParameter p4 = new SQLiteParameter("@descrizionei", item.DescrizioneI);
             parColl.Add(p4);
             SQLiteParameter p5 = new SQLiteParameter("@descrizionegb", item.DescrizioneGB);
             parColl.Add(p5);
             SQLiteParameter p5r = new SQLiteParameter("@descrizioneru", item.DescrizioneRU);
             parColl.Add(p5r);
+            SQLiteParameter p5d = new SQLiteParameter("@descrizionedk", item.DescrizioneDK);
+            parColl.Add(p5d);
             //SQLiteParameter p6 = new SQLiteParameter("@fotoschema", item.FotoCollection_M.Schema);
             //parColl.Add(p6);
             //SQLiteParameter p7 = new SQLiteParameter("@fotovalori", item.FotoCollection_M.Valori);
@@ -888,13 +950,16 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pct2);
             SQLiteParameter pct3 = new SQLiteParameter("@customtitleRU", item.CustomtitleRU);
             parColl.Add(pct3);
+            SQLiteParameter pct4 = new SQLiteParameter("@customtitleDK", item.CustomtitleDK);
+            parColl.Add(pct4);
             SQLiteParameter pcd1 = new SQLiteParameter("@customdescI", item.CustomdescI);
             parColl.Add(pcd1);
             SQLiteParameter pcd2 = new SQLiteParameter("@customdescGB", item.CustomdescGB);
             parColl.Add(pcd2);
             SQLiteParameter pcd3 = new SQLiteParameter("@customdescRU", item.CustomdescRU);
             parColl.Add(pcd3);
-
+            SQLiteParameter pcd4 = new SQLiteParameter("@customdescDK", item.CustomdescDK);
+            parColl.Add(pcd4);
 
 
             SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
@@ -903,6 +968,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pca2);
             SQLiteParameter pca3 = new SQLiteParameter("@canonicalRU", item.CanonicalRU);
             parColl.Add(pca3);
+            SQLiteParameter pca4 = new SQLiteParameter("@canonicalDK", item.CanonicalDK);
+            parColl.Add(pca4);
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
@@ -912,7 +979,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
 
 
-            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,DataInserimento=@data,Id_attivita=@Id_attivita,customtitleI=@customtitleI,customtitleGB=@customtitleGB,customtitleRU=@customtitleRU,customdescI=@customdescI,customdescGB=@customdescGB,customdescRU=@customdescRU,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,robots=@robots   WHERE ([Id]=@id)";
+            string query = "UPDATE [TBL_CONTENUTI] SET [TitoloI]=@titoloi,[TitoloGB]=@titologb,[TitoloRU]=@titoloru,[TitoloDK]=@titolodk,[DescrizioneI]=@descrizionei,[DescrizioneGB]=@descrizionegb,[DescrizioneRU]=@descrizioneru,[DescrizioneDK]=@descrizionedk,DataInserimento=@data,Id_attivita=@Id_attivita,customtitleI=@customtitleI,customtitleGB=@customtitleGB,customtitleRU=@customtitleRU,customtitleDK=@customtitleDK,customdescI=@customdescI,customdescGB=@customdescGB,customdescRU=@customdescRU,customdescDK=@customdescDK,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalDK=@canonicalDK,robots=@robots   WHERE ([Id]=@id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);

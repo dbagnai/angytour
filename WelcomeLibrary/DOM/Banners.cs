@@ -27,18 +27,6 @@ namespace WelcomeLibrary.DOM
             get { return _AlternateText; }
             set { _AlternateText = value; }
         }
-        private string _AlternateTextGB;
-        public string AlternateTextGB
-        {
-            get { return _AlternateTextGB; }
-            set { _AlternateTextGB = value; }
-        }
-        private string _AlternateTextRU;
-        public string AlternateTextRU
-        {
-            get { return _AlternateTextRU; }
-            set { _AlternateTextRU = value; }
-        }
         private string _NavigateUrl;
         public string NavigateUrl
         {
@@ -46,6 +34,12 @@ namespace WelcomeLibrary.DOM
             set { _NavigateUrl = value; }
         }
 
+        private string _AlternateTextGB;
+        public string AlternateTextGB
+        {
+            get { return _AlternateTextGB; }
+            set { _AlternateTextGB = value; }
+        }
         private string _ImageUrlGB;
         public string ImageUrlGB
         {
@@ -60,6 +54,12 @@ namespace WelcomeLibrary.DOM
         }
 
 
+        private string _AlternateTextRU;
+        public string AlternateTextRU
+        {
+            get { return _AlternateTextRU; }
+            set { _AlternateTextRU = value; }
+        }
         private string _ImageUrlRU;
         public string ImageUrlRU
         {
@@ -71,6 +71,26 @@ namespace WelcomeLibrary.DOM
         {
             get { return _NavigateUrlRU; }
             set { _NavigateUrlRU = value; }
+        }
+
+
+        private string _AlternateTextDK;
+        public string AlternateTextDK
+        {
+            get { return _AlternateTextDK; }
+            set { _AlternateTextDK = value; }
+        }
+        private string _ImageUrlDK;
+        public string ImageUrlDK
+        {
+            get { return _ImageUrlDK; }
+            set { _ImageUrlDK = value; }
+        }
+        private string _NavigateUrlDK;
+        public string NavigateUrlDK
+        {
+            get { return _NavigateUrlDK; }
+            set { _NavigateUrlDK = value; }
         }
 
         private string _sezione;
@@ -113,6 +133,12 @@ namespace WelcomeLibrary.DOM
             get { return _altimgtextRU; }
             set { _altimgtextRU = value; }
         }
+        private string _altimgtextDK;
+        public string AltimgtextDK
+        {
+            get { return _altimgtextDK; }
+            set { _altimgtextDK = value; }
+        }
 
 
 
@@ -126,7 +152,10 @@ namespace WelcomeLibrary.DOM
                     ret = (!string.IsNullOrEmpty(this._altimgtextGB)) ? this._altimgtextGB : this._altimgtextI;
                     break;
                 case "RU":
-                    ret = (!string.IsNullOrEmpty(this._altimgtextRU)) ? this._altimgtextGB : this._altimgtextI;
+                    ret = (!string.IsNullOrEmpty(this._altimgtextRU)) ? this._altimgtextRU : this._altimgtextI;
+                    break;
+                case "DK":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextDK)) ? this._altimgtextDK : this._altimgtextI;
                     break;
                 default:
                     ret = this._altimgtextI;
@@ -143,6 +172,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this._altimgtextRU = value;
+                    break;
+                case "DK":
+                    this._altimgtextDK = value;
                     break;
                 default:
                     this._altimgtextI = value;
@@ -163,6 +195,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.AlternateTextRU;
                     break;
+                case "DK":
+                    ret = this.AlternateTextDK;
+                    break;
                 default:
                     ret = this._AlternateText;
                     break;
@@ -178,6 +213,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.AlternateTextRU = value;
+                    break;
+                case "DK":
+                    this.AlternateTextDK = value;
                     break;
                 default:
                     this._AlternateText = value;
@@ -195,6 +233,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.ImageUrlRU;
                     break;
+                case "DK":
+                    ret = this.ImageUrlDK;
+                    break;
                 default:
                     ret = this.ImageUrl;
                     break;
@@ -210,6 +251,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.ImageUrlRU = value;
+                    break;
+                case "DK":
+                    this.ImageUrlDK = value;
                     break;
                 default:
                     this.ImageUrl = value;
@@ -227,6 +271,9 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.NavigateUrlRU;
                     break;
+                case "DK":
+                    ret = this.NavigateUrlDK;
+                    break;
                 default:
                     ret = this.NavigateUrl;
                     break;
@@ -242,6 +289,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.NavigateUrlRU = value;
+                    break;
+                case "DK":
+                    this.NavigateUrlDK = value;
                     break;
                 default:
                     this.NavigateUrl = value;
@@ -264,9 +314,14 @@ namespace WelcomeLibrary.DOM
             this.ImageUrlRU = "";
             this.NavigateUrlRU = "";
 
+            this.AlternateTextDK = "";
+            this.ImageUrlDK = "";
+            this.NavigateUrlDK = "";
+
             this.AltimgtextI = string.Empty;
             this.AltimgtextGB = string.Empty;
             this.AltimgtextRU = string.Empty;
+            this.AltimgtextDK = string.Empty;
 
 
             this.sezione = "";
@@ -279,18 +334,24 @@ namespace WelcomeLibrary.DOM
             this.ImageUrl = tmp.ImageUrl;
             this.NavigateUrl = tmp.NavigateUrl;
             this.AlternateText = tmp.AlternateText;
+
             this.AlternateTextGB = tmp.AlternateTextGB;
             this.ImageUrlGB = tmp.ImageUrlGB;
-            this.NavigateUrlGB = tmp.NavigateUrlGB; ;
+            this.NavigateUrlGB = tmp.NavigateUrlGB; 
 
 
             this.AlternateTextRU = tmp.AlternateTextRU;
             this.ImageUrlRU = tmp.ImageUrlRU;
-            this.NavigateUrlRU = tmp.NavigateUrlRU; ;
+            this.NavigateUrlRU = tmp.NavigateUrlRU;
+
+            this.AlternateTextDK = tmp.AlternateTextDK;
+            this.ImageUrlDK = tmp.ImageUrlDK;
+            this.NavigateUrlDK = tmp.NavigateUrlDK; 
 
             this.AltimgtextI = tmp.AltimgtextI;
             this.AltimgtextGB = tmp.AltimgtextGB;
             this.AltimgtextRU = tmp.AltimgtextRU;
+            this.AltimgtextDK = tmp.AltimgtextDK;
 
 
 
@@ -310,13 +371,18 @@ namespace WelcomeLibrary.DOM
             _tmp["AlternateTextGB"] = this.AlternateTextGB;
             _tmp["ImageUrlGB"] = this.ImageUrlGB;
             _tmp["NavigateUrlGB"] = this.NavigateUrlGB;
-            _tmp["AlternateTextRU;"] = this.AlternateTextRU;
+            _tmp["AlternateTextRU"] = this.AlternateTextRU;
             _tmp["ImageUrlRU"] = this.ImageUrlRU;
             _tmp["NavigateUrlRU"] = this.NavigateUrlRU;
+            _tmp["AlternateTextDK"] = this.AlternateTextDK;
+            _tmp["ImageUrlDK"] = this.ImageUrlDK;
+            _tmp["NavigateUrlDK"] = this.NavigateUrlDK;
+
             _tmp["sezione"] = this.sezione;
             _tmp["AltimgtextI"] = this.AltimgtextI;
             _tmp["AltimgtextGB"] = this.AltimgtextGB;
             _tmp["AltimgtextRU"] = this.AltimgtextRU;
+            _tmp["AltimgtextDK"] = this.AltimgtextDK;
             _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });
             return _tmp;
         }

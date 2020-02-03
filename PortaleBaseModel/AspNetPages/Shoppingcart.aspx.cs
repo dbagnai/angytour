@@ -102,9 +102,13 @@ public partial class AspNetPages_Shoppingcart : CommonPage
                     customdesc = content.CustomdescRU;
                     customtitle = content.CustomtitleRU;
                     break;
-                default:
+                case "I":
                     customdesc = content.CustomdescI;
                     customtitle = content.CustomtitleI;
+                    break;
+                case "DK":
+                    customdesc = content.CustomdescDK;
+                    customtitle = content.CustomtitleDK;
                     break;
             }
 

@@ -283,6 +283,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 case "GB":
                     output.Text += "Error creating export order. Contact support.";
                     break;
+                case "RU":
+                    output.Text += "Error creating export order. Contact support.";
+                    break;
+                case "DK":
+                    output.Text += "Error creating export order. Contact support.";
+                    break;
             }
         }
 
@@ -458,6 +464,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 case "GB":
                     output.Text = "Error save CodiceOrdine";
                     break;
+                case "RU":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
+                case "DK":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
             }
         }
     }
@@ -585,12 +597,19 @@ public partial class AspNetPages_OrdineOk : CommonPage
             TestoMail += "<tr><td style=' font-size:14px;'>" + i.ToString() + " - ";
             switch (Lingua)
             {
+                case "I":
+                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
+                    break;
                 case "GB":
                     TestoMail += item.Offerta.DenominazioneGB + "<br/>";
                     break;
-                default:
-                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
+                case "RU":
+                    TestoMail += item.Offerta.DenominazioneRU + "<br/>";
                     break;
+                case "DK":
+                    TestoMail += item.Offerta.DenominazioneDK + "<br/>";
+                    break;
+
             }
 
             if (item.Dataend != null && item.Datastart != null)

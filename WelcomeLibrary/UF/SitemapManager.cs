@@ -255,7 +255,7 @@ namespace WelcomeLibrary.UF
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
                 /////////////////////////////////////
-                destinationselector = "s"; //Può anche essere vuoto questo ed il tuttofunziona!!
+                destinationselector = ""; //Può anche essere vuoto questo ed il tuttofunziona!!
                 urlRewrited = GeneraRewritingElement(Lingua, codicetipologia, destinationselector, cleandenominazione, id, "pagina", "", "", "", "", "", addparms);
             }
            else  if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001001")
@@ -500,6 +500,10 @@ namespace WelcomeLibrary.UF
                 case "ru":
                     culturename = "ru";
                     break;
+                case "DK":
+                case "dk":
+                    culturename = "dk";
+                    break;
                 default:
                     culturename = "";
                     break;
@@ -523,6 +527,10 @@ namespace WelcomeLibrary.UF
                 case "ru":
                 case "RU":
                     culturename = "RU";
+                    break;
+                case "dk":
+                case "DK":
+                    culturename = "DK";
                     break;
                 default:
                     culturename = "";

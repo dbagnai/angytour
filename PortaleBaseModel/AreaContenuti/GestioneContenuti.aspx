@@ -206,6 +206,7 @@
                                 <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
                                 <li><a data-toggle="pill" href="#tabeng">Inglese</a></li>
                                 <li><a data-toggle="pill" href="#tabru">Russo</a></li>
+                                <li><a data-toggle="pill" href="#tabdk">Danese</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tabita" class="tab-pane fade in active">
@@ -215,7 +216,7 @@
                                                 <asp:Label ID="litTitoloI" runat="server" Text="Urltext / linkcollegato (ITA)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"  ID="txtTitoloI" runat="server"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente" ID="txtTitoloI" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 20px;">
@@ -253,7 +254,7 @@
                                                 <asp:Label ID="Label14" runat="server" Text="Canonical link (forzato)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox Width="100%"  placeholder="(Opzionale) inserire solo per forzatura!" CssClass="mceNoEditor"  ID="txtCanonicalI" runat="server"></asp:TextBox>
+                                            <asp:TextBox Width="100%" placeholder="(Opzionale) inserire solo per forzatura!" CssClass="mceNoEditor" ID="txtCanonicalI" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -328,7 +329,7 @@
                                                 <asp:Label ID="Label1" runat="server" Text="Urltext / linkcollegato (EN)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox CssClass="form-control"  placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"   ID="txtTitoloGB" runat="server"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente" ID="txtTitoloGB" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 20px;">
@@ -365,7 +366,7 @@
                                                 <asp:Label ID="Label15" runat="server" Text="Canonical link (forzato)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox Width="100%"   CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!"   ID="txtCanonicalGB" runat="server"></asp:TextBox>
+                                            <asp:TextBox Width="100%" CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!" ID="txtCanonicalGB" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -412,7 +413,7 @@
                                                 <asp:Label ID="Label6" runat="server" Text="Urltext / linkcollegato (RU)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente"  ID="txtTitoloRU" runat="server"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente" ID="txtTitoloRU" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 20px;">
@@ -449,7 +450,7 @@
                                                 <asp:Label ID="Label16" runat="server" Text="Canonical link (forzato)" /></strong>
                                         </div>
                                         <div class="col-sm-10">
-                                            <asp:TextBox Width="100%"  CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!"  ID="txtCanonicalRU" runat="server"></asp:TextBox>
+                                            <asp:TextBox Width="100%" CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!" ID="txtCanonicalRU" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 20px">
@@ -481,6 +482,90 @@
                                         <asp:TextBox runat="server" ID="resizeDimyRU" Text="300" Width="80px" />
                                                         <asp:FileUpload runat="server" ID="upFileRU" />
                                                         <asp:Button ID="btncaricafileRU" UseSubmitBehavior="false" runat="server" Text="Inserisci Foto" OnClick="btnCaricafileRU_Click" />
+                                                        <br />
+                                                    </asp:Panel>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tabdk" class="tab-pane fade">
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label21" runat="server" Text="Urltext / linkcollegato (DK)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" placeholder="(Obbligatorio) testo url pagina o url di collegamento a pagina esistente" ID="txtTitoloDK" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label22" runat="server" Text="link page" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:Literal ID="litlinkDK" runat="server"></asp:Literal>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label23" runat="server" Text="META title (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox CssClass="form-control" ID="txtCustomtitleDK" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label24" runat="server" Text="META Desc (custom)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%" TextMode="MultiLine" CssClass="mceNoEditor" Height="35" ID="txtCustomdescDK" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <strong>
+                                                <asp:Label ID="Label25" runat="server" Text="Canonical link (forzato)" /></strong>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox Width="100%" CssClass="mceNoEditor" placeholder="(Opzionale) inserire solo per forzatura!" ID="txtCanonicalDK" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-sm-12">
+                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                <Triggers>
+                                                    <asp:PostBackTrigger ControlID="btncaricafileDK" />
+                                                </Triggers>
+                                                <ContentTemplate>
+                                                    <asp:Panel runat="server" ID="plhSimpleEditorDK" Visible="false">
+                                                        <span><strong>
+                                                            <asp:Label Width="30%" ID="Label26" runat="server" Text="Html Pagina(dk)" />
+                                                        </strong>
+                                                            <asp:TextBox Width="60%" Height="150px" TextMode="MultiLine" ID="txtDescrizioneDK"
+                                                                runat="server"></asp:TextBox>
+                                                        </span>
+                                                    </asp:Panel>
+                                                    <asp:Panel runat="server" ID="plhHtmlEditorDK" Visible="false">
+                                                        <strong>
+                                                            <asp:Label ID="Label27" runat="server" Text="Html Pagina(dk)" /></strong><br />
+                                                        <div>
+                                                            <textarea id="tinyhtmlEditDK" class="tiny" runat="server" style="width: 100%; height: 400px"></textarea>
+                                                        </div>
+                                                        Dimensione orizzontale :
+                                       
+                                        <asp:TextBox runat="server" ID="resizeDimxDK" Text="300" Width="80px" />
+                                                        Dimensione verticale(max) :
+                                       
+                                        <asp:TextBox runat="server" ID="resizeDimyDK" Text="300" Width="80px" />
+                                                        <asp:FileUpload runat="server" ID="upFileDK" />
+                                                        <asp:Button ID="btncaricafileDK" UseSubmitBehavior="false" runat="server" Text="Insert Photo" OnClick="btnCaricafileDK_Click" />
                                                         <br />
                                                     </asp:Panel>
                                                 </ContentTemplate>

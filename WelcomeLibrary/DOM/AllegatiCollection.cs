@@ -64,6 +64,13 @@ namespace WelcomeLibrary.DOM
             get { return _DecrizioneRU; }
             set { _DecrizioneRU = value; }
         }
+
+        private string _DecrizioneDK;
+        public string DescrizioneDK
+        {
+            get { return _DecrizioneDK; }
+            set { _DecrizioneDK = value; }
+        }
         public string DescrizionebyLingua(string Lingua)
         {
             string ret = "";
@@ -74,6 +81,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     ret = (!string.IsNullOrEmpty(this.DescrizioneRU)) ? this.DescrizioneRU : this.DescrizioneI;
+                    break;
+                case "DK":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneDK)) ? this.DescrizioneDK : this.DescrizioneI;
                     break;
                 default:
                     ret = this.DescrizioneI;
@@ -91,6 +101,9 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "RU":
                     this.DescrizioneRU = value;
+                    break;
+                case "DK":
+                    this.DescrizioneDK = value;
                     break;
                 default:
                     this.DescrizioneI = value;

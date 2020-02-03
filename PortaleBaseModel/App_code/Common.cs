@@ -476,6 +476,9 @@ public class CommonPage : Page
             case "RU":
                 culturename = "ru";
                 break;
+            case "DK":
+                culturename = "dk";
+                break;
             default:
                 culturename = "it";
                 break;
@@ -620,6 +623,11 @@ public class CommonPage : Page
                 break;
             case "RU":
                 c = System.Globalization.CultureInfo.CreateSpecificCulture("ru");
+                System.Threading.Thread.CurrentThread.CurrentCulture = c;
+                System.Threading.Thread.CurrentThread.CurrentUICulture = c;
+                break;
+            case "DK":
+                c = System.Globalization.CultureInfo.CreateSpecificCulture("dk");
                 System.Threading.Thread.CurrentThread.CurrentCulture = c;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = c;
                 break;
@@ -2359,12 +2367,12 @@ public class CommonPage : Page
 
             if (values.ContainsKey("DescrizioneGB"))
                 c.DescrizioneGB = values["DescrizioneGB"];
-
             if (values.ContainsKey("DescrizioneI"))
                 c.DescrizioneI = values["DescrizioneI"];
-
             if (values.ContainsKey("DescrizioneRU"))
                 c.DescrizioneI = values["DescrizioneRU"];
+            if (values.ContainsKey("DescrizioneDK"))
+                c.DescrizioneI = values["DescrizioneDK"];
 
             if (values.ContainsKey("DatitecniciGB"))
                 c.DescrizioneGB += values["DatitecniciGB"];
@@ -2372,13 +2380,17 @@ public class CommonPage : Page
                 c.DescrizioneI += values["DatitecniciI"];
             if (values.ContainsKey("DatitecniciRU"))
                 c.DescrizioneI += values["DatitecnicRU"];
+            if (values.ContainsKey("DatitecniciDK"))
+                c.DescrizioneI += values["DatitecnicDK"];
 
             if (values.ContainsKey("DenominazioneGB"))
                 c.TitoloGB = values["DenominazioneGB"];
             if (values.ContainsKey("DenominazioneI"))
                 c.TitoloI = values["DenominazioneI"];
             if (values.ContainsKey("DenominazioneRU"))
-                c.TitoloI = values["DenominazioneRU"];
+                c.TitoloRU = values["DenominazioneRU"];
+            if (values.ContainsKey("DenominazioneDK"))
+                c.TitoloDK = values["DenominazioneDK"];
             //if (values.ContainsKey("linkVideo"))
             //    c.linkVideo = values["linkVideo"];
 
