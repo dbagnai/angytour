@@ -415,7 +415,6 @@
         </div>
     </div>
 </section>
-
 <!-- BLOCCO BANNER 4 -->
 <!--<div style="py-0 py-sm-5 bg-white">
     <div id="divContainerBanner4"  style="max-width: 1600px;position: relative;" class="inject m-auto" params="injectFasciaAndLoadBanner,bannerFascia3grey.html, divContainerBanner4, bannerfascia4, 1, 2, false, '', '2', '', TBL_BANNERS_GENERALE, banners-fascia4, false"></div>
@@ -440,26 +439,40 @@
         __doPostBack('inseriscinewsletter', ctrmail[0].value);
     }
 // ]]></script>
+
+
 <!--BLOCCO BLOG NEWS-->
-<!--<section class="mbr-section mbr-parallax-background div-poligon py-0 pb-3 py-sm-5 px-3" style="background-image: url('/public/Files/con001000/31/sfondo-blog.jpg');">
-<div class="mbr-overlay-sfumato"></div>-->
-<section class="position-relative bg-light-color  no-plygon-top py-3 py-sm-5 px-3 my-0 mx-auto">
-    <h3 class="mbr-section-title mb-0"><a class="tx-dark-color" href="/it/blog/news-1" target="_self">Leggi il nostro blog</a></h3>
-    <small class="mbr-section-subtitle mb-3 mt-1">Le ricette, le primizie, gli eventi, le curiosit&agrave; del territorio</small> <!--<div class="text-center py-4 mb-0"><a class="mbr-section-title" href="/it/blog/news-1" target="_self">&emsp;Blog&emsp;</a></div>-->
-    <div class="position-relative my-0 mx-auto px-2 mt-0 mt-xl-4" style="max-width: 1600px;">
-        <div id="divContainerNews" class="inject mx-0 mx-xl-5" params="injectScrollerAndLoad,'owlscrollerOfferte-m.html', 'divContainerNews', 'carouselInject2', '', 'rif000002', '', true, false, 12">&nbsp;</div>
-    </div>
-    <!-- un pulsante -->
-    <section class="d-block pt-0 pb-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 btn-center py-0 pt-sm-3">
-                    <div class="text-center"><a class="btn btn-lg btn-primary animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="min-width: 180px;" href="/it/blog">LEGGI IL BLOG</a></div>
+<!--<section class="mbr-section mbr-parallax-background div-poligon py-0 py-sm-5" style="background-image: url('/public/Files/con001000/31/sfondo-newsletter.jpg');">
+    <div class="mbr-overlay-sfumato"></div>-->
+<section class="py-0 py-sm-5 bg-light-color no-plygon-top">
+    <div class="position-relative my-0 mx-auto p-0 py-3 pt-sm-0 pb-sm-5 navigazione-home" style="max-width: 100%;">
+        <section class="d-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 pt-4 pt-sm-5 pb-4 mb-0 mb-sm-2 mt-0">
+                        <h3 class="mbr-section-title mb-0 pt-0">Leggi il nostro Blog</h3>
+                        <small class="mbr-section-subtitle mb-0 mt-1">Resta aggiornato sugli eventi, le feste, i locali e gli artisti della riviera romagnola e marchigiana</small>
+                    </div>
+                    <div class="col-12">
+                        <div id="divContainerNews" class="inject" params="injectScrollerAndLoad,'owlscrollerOfferte-m-bordino.html', 'divContainerNews', 'carouselInject2', '', 'rif000002', '', true, false, 12,2">&nbsp;</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <!--un pulsante-->
+        <section class="d-block pt-0 mb-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 btn-center py-3 pb-sm-0 pt-sm-4">
+                        <div class="text-center"><a class="btn animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="min-width: 180px;" href="/it/blog">LEGGI TUTTI GLI ARTICOLI</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </section>
+
+
 <!--BLOCCO DICONO DI NOI-->
 <section class="d-block pt-5 pb-3">
     <div class="container">
@@ -485,3 +498,6 @@
         </div>
     </div>
 </section>
+
+<!--VERSIONE BOOTSTRAP BANNERS PER GALLERY MASONRY-->
+<div id="divContainerNav1" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerGallerySquareVariable.html', 'divContainerNav1', 'portban', 1, 1, false, '', '24', '', 'TBL_BANNERS_GENERALE', 'banner-gallery-1', false">&nbsp;</div>
