@@ -178,7 +178,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-size: 15%;
 }
 /*START BORDI OBLIQUI ON / OFF*/
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .bg-light-color {
     clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
     border-top: 40px solid transparent;
