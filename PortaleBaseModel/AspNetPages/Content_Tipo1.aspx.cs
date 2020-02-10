@@ -299,7 +299,7 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
         string testourlpaginaDK = item.TitolobyLingua("DK");
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() == "true")
         {
-            hreflang = " hreflang=\"dk\" ";
+            hreflang = " hreflang=\"da\" ";
             //ci = setCulture("DK");
             linkdk = ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(Session, true, "DK", CommonPage.CleanUrl(testourlpaginaDK), item.Id.ToString(), "con001000"));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")

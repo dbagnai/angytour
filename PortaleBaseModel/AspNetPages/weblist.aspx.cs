@@ -1162,7 +1162,7 @@ public partial class AspNetPages_weblist : CommonPage
 
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() == "true")
         {
-            hreflang = " hreflang=\"dk\" ";
+            hreflang = " hreflang=\"da\" ";
             //Leggiamo se presente un contenuto collegato nelle statiche
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkdk = linkdk.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domaindk"));

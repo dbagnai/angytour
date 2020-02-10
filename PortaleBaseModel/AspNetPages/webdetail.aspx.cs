@@ -931,7 +931,7 @@ public partial class _webdetail : CommonPage
         //CULTURA dk ( set canonical eactualpage )
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() == "true")
         {
-            hreflang = " hreflang=\"dk\" ";
+            hreflang = " hreflang=\"da\" ";
             linkdk = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "DK", CleanUrl(item.UrltextforlinkbyLingua("DK")), data.Id.ToString(), data.CodiceTipologia));
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkdk = linkdk.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domaindk"));

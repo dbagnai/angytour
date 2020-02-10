@@ -501,8 +501,8 @@ namespace WelcomeLibrary.UF
                     culturename = "ru";
                     break;
                 case "DK":
-                case "dk":
-                    culturename = "dk";
+                case "da":
+                    culturename = "da";
                     break;
                 default:
                     culturename = "";
@@ -528,7 +528,7 @@ namespace WelcomeLibrary.UF
                 case "RU":
                     culturename = "RU";
                     break;
-                case "dk":
+                case "da":
                 case "DK":
                     culturename = "DK";
                     break;

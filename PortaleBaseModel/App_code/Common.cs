@@ -477,7 +477,7 @@ public class CommonPage : Page
                 culturename = "ru";
                 break;
             case "DK":
-                culturename = "dk";
+                culturename = "da";
                 break;
             default:
                 culturename = "it";
@@ -627,7 +627,7 @@ public class CommonPage : Page
                 System.Threading.Thread.CurrentThread.CurrentUICulture = c;
                 break;
             case "DK":
-                c = System.Globalization.CultureInfo.CreateSpecificCulture("dk");
+                c = System.Globalization.CultureInfo.CreateSpecificCulture("da");
                 System.Threading.Thread.CurrentThread.CurrentCulture = c;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = c;
                 break;

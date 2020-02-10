@@ -6597,7 +6597,7 @@ namespace WelcomeLibrary.DAL
                 case "ru":
                     lingua = "RU";
                     break;
-                case "dk":
+                case "da":
                     lingua = "DK";
                     break;
                 default:

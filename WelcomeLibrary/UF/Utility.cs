@@ -172,7 +172,7 @@ namespace WelcomeLibrary.UF
                     culturename = "ru";
                     break;
                 case "DK":
-                    culturename = "dk";
+                    culturename = "da";
                     break;
                 default:
                     culturename = "it";
@@ -181,6 +181,7 @@ namespace WelcomeLibrary.UF
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
             return ci;
         }
+
 
 
         public static string CompressString(string text)
