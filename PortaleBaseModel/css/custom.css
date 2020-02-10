@@ -37,7 +37,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 //////////////| LOGO |//////////////
 ----------------------------------*/
-/*variabile*/
+/*variabile - va scalato in proporzione all'altezza fissa 119px */
 /*fissa*/
 /*----------------------------------
 //////////////| MENU |//////////////
@@ -178,7 +178,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-size: 15%;
 }
 /*START BORDI OBLIQUI ON / OFF*/
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .bg-light-color {
     clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
     border-top: 40px solid transparent;
@@ -5129,7 +5129,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
     -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
     clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
     position: absolute;
-    width: 70%;
+    width: 65%;
     /*width: 60%;*/
     height: 100%;
     top: 0px;
@@ -5418,11 +5418,16 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 /* fine callout con bordi */
 /* classi per scalatura forzata dei caratteri */
-.scalable-extrime {
+.scalable-extrime,
+.scalablefont-extrime {
   font-size: calc(30px + 2vw + 2vh + 2vmin);
+}
+.scalablefont-medium-extrime {
+  font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
 }
 .scalablefont-big {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-medium-big {
   font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;

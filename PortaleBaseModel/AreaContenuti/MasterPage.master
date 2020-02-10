@@ -744,6 +744,12 @@
                                                             <b class="arrow"></b>
                                                         </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-gallery-1">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Gallery</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-popup">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Gestione Banner popup</span></a>
