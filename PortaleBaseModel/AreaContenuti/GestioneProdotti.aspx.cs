@@ -306,24 +306,24 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtCampo1RU.Text = Details.Campo1RU;
             txtCampo2RU.Text = Details.Campo2RU;
 
-            txtCampo1DK.Text = Details.Campo1DK;
-            txtCampo2DK.Text = Details.Campo2DK;
+            txtCampo1FR.Text = Details.Campo1FR;
+            txtCampo2FR.Text = Details.Campo2FR;
 
 
             litlinkI.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "I", Details.UrltextforlinkbyLingua("I"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link it</a>";
             litlinkGB.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "GB", Details.UrltextforlinkbyLingua("GB"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link en</a>";
             litlinkRU.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "RU", Details.UrltextforlinkbyLingua("RU"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link ru</a>";
-            litlinkDK.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "DK", Details.UrltextforlinkbyLingua("DK"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link DK</a>";
+            litlinkFR.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "FR", Details.UrltextforlinkbyLingua("FR"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link FR</a>";
 
 
             txtCanonicalI.Text = Details.CanonicalI;
             txtCanonicalGB.Text = Details.CanonicalGB;
             txtCanonicalRU.Text = Details.CanonicalRU;
-            txtCanonicalDK.Text = Details.CanonicalDK;
+            txtCanonicalFR.Text = Details.CanonicalFR;
             txtUrlI.Text = Details.UrlcustomI;
             txtUrlGB.Text = Details.UrlcustomGB;
             txtUrlRU.Text = Details.UrlcustomRU;
-            txtUrlDK.Text = Details.UrlcustomDK;
+            txtUrlFR.Text = Details.UrlcustomFR;
             txtRobots.Text = Details.Robots;
 
             txtIdcollegato.Text = Details.Id_collegato.ToString();
@@ -332,15 +332,15 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtDenominazioneI.Text = Details.DenominazioneI;//(((Literal)e.Item.FindControl("lit1")).Text);
             txtDenominazioneGB.Text = Details.DenominazioneGB;//(((Literal)e.Item.FindControl("lit2")).Text);
             txtDenominazioneRU.Text = Details.DenominazioneRU;//(((Literal)e.Item.FindControl("lit2")).Text);
-            txtDenominazioneDK.Text = Details.DenominazioneDK;
+            txtDenominazioneFR.Text = Details.DenominazioneFR;
             txtDescrizioneI.Text = Details.DescrizioneI;//(((HiddenField)e.Item.FindControl("hid3")).Value);
             txtDescrizioneGB.Text = Details.DescrizioneGB;//(((HiddenField)e.Item.FindControl("hid4")).Value);
             txtDescrizioneRU.Text = Details.DescrizioneRU;//(((HiddenField)e.Item.FindControl("hid4")).Value);
-            txtDescrizioneDK.Text = Details.DescrizioneDK;
+            txtDescrizioneFR.Text = Details.DescrizioneFR;
             txtDatitecniciI.Text = Details.DatitecniciI;
             txtDatitecniciGB.Text = Details.DatitecniciGB;
             txtDatitecniciRU.Text = Details.DatitecniciRU;
-            txtDatitecniciDK.Text = Details.DatitecniciDK;
+            txtDatitecniciFR.Text = Details.DatitecniciFR;
             txtIndirizzo.Text = Details.Indirizzo;
             txtEmail.Text = Details.Email;
             txtWebsite.Text = Details.Website;
@@ -380,7 +380,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 txtDescrizioneFotoI.Text = Details.FotoCollection_M[0].DescrizioneI;
                 txtDescrizioneFotoGB.Text = Details.FotoCollection_M[0].DescrizioneGB;
                 txtDescrizioneFotoRU.Text = Details.FotoCollection_M[0].DescrizioneRU;
-                txtDescrizioneFotoDK.Text = Details.FotoCollection_M[0].DescrizioneDK;
+                txtDescrizioneFotoFR.Text = Details.FotoCollection_M[0].DescrizioneFR;
                 txtProgressivo.Text = Details.FotoCollection_M[0].Progressivo.ToString();
             }
             else
@@ -390,7 +390,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 txtDescrizioneFotoI.Text = "";
                 txtDescrizioneFotoGB.Text = "";
                 txtDescrizioneFotoRU.Text = "";
-                txtDescrizioneFotoDK.Text = "";
+                txtDescrizioneFotoFR.Text = "";
                 txtProgressivo.Text = "";
 
             }
@@ -756,7 +756,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtDescrizioneFotoI.Text = allegato.DescrizioneI;
         txtDescrizioneFotoGB.Text = allegato.DescrizioneGB;
         txtDescrizioneFotoRU.Text = allegato.DescrizioneRU;
-        txtDescrizioneFotoDK.Text = allegato.DescrizioneDK;
+        txtDescrizioneFotoFR.Text = allegato.DescrizioneFR;
         txtProgressivo.Text = allegato.Progressivo.ToString();
     }
     protected void btnNuovo_Click(object sender, EventArgs e)
@@ -840,35 +840,35 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     updrecord.Campo1RU = txtCampo1RU.Text;
                     updrecord.Campo2RU = txtCampo2RU.Text;
 
-                    updrecord.Campo1DK = txtCampo1DK.Text;
-                    updrecord.Campo2DK = txtCampo2DK.Text;
+                    updrecord.Campo1FR = txtCampo1FR.Text;
+                    updrecord.Campo2FR = txtCampo2FR.Text;
 
 
                     updrecord.CanonicalI = txtCanonicalI.Text;
                     updrecord.CanonicalGB = txtCanonicalGB.Text;
                     updrecord.CanonicalRU = txtCanonicalRU.Text;
-                    updrecord.CanonicalDK = txtCanonicalDK.Text;
+                    updrecord.CanonicalFR = txtCanonicalFR.Text;
                     updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlI.Text);
                     updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlGB.Text);
                     updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlRU.Text);
-                    updrecord.UrlcustomDK = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlDK.Text);
+                    updrecord.UrlcustomFR = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlFR.Text);
                     updrecord.Robots = txtRobots.Text;
                     if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneI.Text);
                     if (string.IsNullOrEmpty(updrecord.UrlcustomGB.Trim())) updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneGB.Text);
                     if (string.IsNullOrEmpty(updrecord.UrlcustomRU.Trim())) updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneRU.Text);
-                    if (string.IsNullOrEmpty(updrecord.UrlcustomDK.Trim())) updrecord.UrlcustomDK = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneDK.Text);
+                    if (string.IsNullOrEmpty(updrecord.UrlcustomFR.Trim())) updrecord.UrlcustomFR = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneFR.Text);
 
                     updrecord.DenominazioneI = txtDenominazioneI.Text;
                     updrecord.DenominazioneGB = txtDenominazioneGB.Text;
                     updrecord.DenominazioneRU = txtDenominazioneRU.Text;
-                    updrecord.DenominazioneDK = txtDenominazioneDK.Text;
+                    updrecord.DenominazioneFR = txtDenominazioneFR.Text;
                     updrecord.DescrizioneI = txtDescrizioneI.Text;
                     updrecord.DescrizioneGB = txtDescrizioneGB.Text;
                     updrecord.DescrizioneRU = txtDescrizioneRU.Text;
-                    updrecord.DescrizioneDK = txtDescrizioneDK.Text;
+                    updrecord.DescrizioneFR = txtDescrizioneFR.Text;
                     updrecord.DatitecniciGB = txtDatitecniciGB.Text;
                     updrecord.DatitecniciRU = txtDatitecniciRU.Text;
-                    updrecord.DatitecniciDK = txtDatitecniciDK.Text;
+                    updrecord.DatitecniciFR = txtDatitecniciFR.Text;
                     updrecord.DatitecniciI = txtDatitecniciI.Text;
 
                     updrecord.Indirizzo = txtIndirizzo.Text;
@@ -986,36 +986,36 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 updrecord.Campo2GB = txtCampo2GB.Text;
                 updrecord.Campo1RU = txtCampo1RU.Text;
                 updrecord.Campo2RU = txtCampo2RU.Text;
-                updrecord.Campo1DK = txtCampo1DK.Text;
-                updrecord.Campo2DK = txtCampo2DK.Text;
+                updrecord.Campo1FR = txtCampo1FR.Text;
+                updrecord.Campo2FR = txtCampo2FR.Text;
 
 
                 updrecord.CanonicalI = txtCanonicalI.Text;
                 updrecord.CanonicalGB = txtCanonicalGB.Text;
                 updrecord.CanonicalRU = txtCanonicalRU.Text;
-                updrecord.CanonicalDK = txtCanonicalDK.Text;
+                updrecord.CanonicalFR = txtCanonicalFR.Text;
                 updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlI.Text);
                 updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlGB.Text);
                 updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlRU.Text);
-                updrecord.UrlcustomDK = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlDK.Text);
+                updrecord.UrlcustomFR = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtUrlFR.Text);
                 updrecord.Robots = txtRobots.Text;
                 if (string.IsNullOrEmpty(updrecord.UrlcustomI.Trim())) updrecord.UrlcustomI = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneI.Text);
                 if (string.IsNullOrEmpty(updrecord.UrlcustomGB.Trim())) updrecord.UrlcustomGB = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneGB.Text);
                 if (string.IsNullOrEmpty(updrecord.UrlcustomRU.Trim())) updrecord.UrlcustomRU = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneRU.Text);
-                if (string.IsNullOrEmpty(updrecord.UrlcustomDK.Trim())) updrecord.UrlcustomDK = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneDK.Text);
+                if (string.IsNullOrEmpty(updrecord.UrlcustomFR.Trim())) updrecord.UrlcustomFR = WelcomeLibrary.UF.SitemapManager.CleanUrl(txtDenominazioneFR.Text);
 
 
                 updrecord.DenominazioneI = txtDenominazioneI.Text;
                 updrecord.DenominazioneGB = txtDenominazioneGB.Text;
                 updrecord.DenominazioneRU = txtDenominazioneRU.Text;
-                updrecord.DenominazioneDK = txtDenominazioneDK.Text;
+                updrecord.DenominazioneFR = txtDenominazioneFR.Text;
                 updrecord.DescrizioneI = txtDescrizioneI.Text;
                 updrecord.DescrizioneGB = txtDescrizioneGB.Text;
                 updrecord.DescrizioneRU = txtDescrizioneRU.Text;
-                updrecord.DescrizioneDK = txtDescrizioneDK.Text;
+                updrecord.DescrizioneFR = txtDescrizioneFR.Text;
                 updrecord.DatitecniciGB = txtDatitecniciGB.Text;
                 updrecord.DatitecniciRU = txtDatitecniciRU.Text;
-                updrecord.DatitecniciDK = txtDatitecniciDK.Text;
+                updrecord.DatitecniciFR = txtDatitecniciFR.Text;
                 updrecord.DatitecniciI = txtDatitecniciI.Text;
                 updrecord.Indirizzo = txtIndirizzo.Text;
                 updrecord.Email = txtEmail.Text;
@@ -1102,7 +1102,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", updrecord.UrltextforlinkbyLingua("I"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.UrltextforlinkbyLingua("GB"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.UrltextforlinkbyLingua("RU"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
-            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("DK", updrecord.UrltextforlinkbyLingua("DK"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", updrecord.UrltextforlinkbyLingua("FR"), updrecord.Id.ToString(), TipologiaOfferte, "", "", "", "", "", true, true);
 
 
             /////////////////////////////////////
@@ -1264,29 +1264,29 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtCanonicalI.Text = "";
         txtCanonicalGB.Text = "";
         txtCanonicalRU.Text = "";
-        txtCanonicalDK.Text = "";
+        txtCanonicalFR.Text = "";
         txtUrlI.Text = "";
         txtUrlGB.Text = "";
         txtUrlRU.Text = "";
-        txtUrlDK.Text = "";
+        txtUrlFR.Text = "";
         txtRobots.Text = "";
 
         txtCampo1GB.Text = "";
         txtCampo1RU.Text = "";
-        txtCampo1DK.Text = "";
+        txtCampo1FR.Text = "";
         txtCampo2I.Text = "";
         txtCampo1I.Text = "";
         txtCampo2GB.Text = "";
         txtCampo2RU.Text = "";
-        txtCampo2DK.Text = "";
+        txtCampo2FR.Text = "";
         txtIdcollegato.Text = "";
         txtDenominazioneI.Text = "";
         txtDenominazioneGB.Text = "";
         txtDenominazioneRU.Text = "";
-        txtDenominazioneDK.Text = "";
+        txtDenominazioneFR.Text = "";
         txtDescrizioneGB.Text = "";
         txtDescrizioneRU.Text = "";
-        txtDescrizioneDK.Text = "";
+        txtDescrizioneFR.Text = "";
         txtDescrizioneI.Text = "";
         txtPrezzo.Text = "";
         txtPrezzoListino.Text = "";
@@ -1299,14 +1299,14 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtDescrizioneFotoI.Text = "";
         txtDescrizioneFotoGB.Text = "";
         txtDescrizioneFotoRU.Text = "";
-        txtDescrizioneFotoDK.Text = "";
+        txtDescrizioneFotoFR.Text = "";
         txtProgressivo.Text = "";
         txtCodiceProd.Text = "";
         //txtFotoSchema.Value = "";
         //txtFotoValori.Value = "";
         txtDatitecniciGB.Text = "";
         txtDatitecniciRU.Text = "";
-        txtDatitecniciDK.Text = "";
+        txtDatitecniciFR.Text = "";
         txtDatitecniciI.Text = "";
         txtIndirizzo.Text = "";
         txtEmail.Text = "";
@@ -1340,11 +1340,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtCanonicalI.ReadOnly = valore;
         txtCanonicalGB.ReadOnly = valore;
         txtCanonicalRU.ReadOnly = valore;
-        txtCanonicalDK.ReadOnly = valore;
+        txtCanonicalFR.ReadOnly = valore;
         txtUrlI.ReadOnly = valore;
         txtUrlGB.ReadOnly = valore;
         txtUrlRU.ReadOnly = valore;
-        txtUrlDK.ReadOnly = valore;
+        txtUrlFR.ReadOnly = valore;
         txtRobots.ReadOnly = valore;
 
         txtCampo1I.ReadOnly = valore;
@@ -1353,16 +1353,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtCampo2GB.ReadOnly = valore;
         txtCampo1RU.ReadOnly = valore;
         txtCampo2RU.ReadOnly = valore;
-        txtCampo1DK.ReadOnly = valore;
-        txtCampo2DK.ReadOnly = valore;
+        txtCampo1FR.ReadOnly = valore;
+        txtCampo2FR.ReadOnly = valore;
         txtIdcollegato.ReadOnly = valore;
         txtDenominazioneI.ReadOnly = valore;
         txtDenominazioneGB.ReadOnly = valore;
         txtDenominazioneRU.ReadOnly = valore;
-        txtDenominazioneDK.ReadOnly = valore;
+        txtDenominazioneFR.ReadOnly = valore;
         txtDescrizioneGB.ReadOnly = valore;
         txtDescrizioneRU.ReadOnly = valore;
-        txtDescrizioneDK.ReadOnly = valore;
+        txtDescrizioneFR.ReadOnly = valore;
         txtDescrizioneI.ReadOnly = valore;
         txtPrezzo.ReadOnly = valore;
         txtPrezzoListino.ReadOnly = valore;
@@ -1375,7 +1375,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         //txtFotoValori.Value = "";
         txtDatitecniciGB.ReadOnly = valore;
         txtDatitecniciRU.ReadOnly = valore;
-        txtDatitecniciDK.ReadOnly = valore;
+        txtDatitecniciFR.ReadOnly = valore;
         txtDatitecniciI.ReadOnly = valore;
         txtIndirizzo.ReadOnly = valore;
         txtEmail.ReadOnly = valore;
@@ -1429,7 +1429,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
     protected void btnModifica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizioneFotoI.Text, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text, txtDescrizioneFotoDK.Text);
+        string retmsg = filemanage.ModificaFile(OffertaIDSelected, NomeFotoSelezionata, txtDescrizioneFotoI.Text, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text, txtDescrizioneFotoFR.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();
@@ -1439,7 +1439,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnCarica_Click(object sender, EventArgs e)
     {
-        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizioneFotoI.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text, txtDescrizioneFotoDK.Text);
+        string retmsg = filemanage.CaricaFile(Server, UploadFoto, txtDescrizioneFotoI.Text, OffertaIDSelected, TipologiaOfferte, txtProgressivo.Text, txtDescrizioneFotoGB.Text, txtDescrizioneFotoRU.Text, txtDescrizioneFotoFR.Text);
         if (string.IsNullOrEmpty(retmsg))
         {
             this.CaricaDati();
@@ -1591,12 +1591,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         WelcomeLibrary.DOM.Prodotto prodottoIta = new WelcomeLibrary.DOM.Prodotto();
         WelcomeLibrary.DOM.Prodotto prodottoEng = new WelcomeLibrary.DOM.Prodotto();
         WelcomeLibrary.DOM.Prodotto prodottoRu = new WelcomeLibrary.DOM.Prodotto();
-        WelcomeLibrary.DOM.Prodotto prodottoDk = new WelcomeLibrary.DOM.Prodotto();
+        WelcomeLibrary.DOM.Prodotto prodottoFR = new WelcomeLibrary.DOM.Prodotto();
 
         prodottoIta = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceProdotto == Prodotto)); });
         prodottoEng = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceProdotto == Prodotto)); });
         prodottoRu = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "RU" && (tmp_p.CodiceProdotto == Prodotto)); });
-        prodottoDk = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "DK" && (tmp_p.CodiceProdotto == Prodotto)); });
+        prodottoFR = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp_p) { return (tmp_p.Lingua == "FR" && (tmp_p.CodiceProdotto == Prodotto)); });
 
         //adesso che ho il mio prodotto, posso caricare i suoi valori per la modifica o l'inserimento
         if (prodottoIta != null)
@@ -1622,11 +1622,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         WelcomeLibrary.DOM.SProdotto SprodottoIta = new WelcomeLibrary.DOM.SProdotto();
         WelcomeLibrary.DOM.SProdotto SprodottoEng = new WelcomeLibrary.DOM.SProdotto();
         WelcomeLibrary.DOM.SProdotto SprodottoRu = new WelcomeLibrary.DOM.SProdotto();
-        WelcomeLibrary.DOM.SProdotto SprodottoDk = new WelcomeLibrary.DOM.SProdotto();
+        WelcomeLibrary.DOM.SProdotto SprodottoFR = new WelcomeLibrary.DOM.SProdotto();
         SprodottoIta = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
         SprodottoEng = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
         SprodottoRu = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "RU" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
-        SprodottoDk = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "DK" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
+        SprodottoFR = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "FR" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
 
         //adesso che ho il mio prodotto, posso caricare i suoi valori per la modifica o l'inseriment
         if (SprodottoIta != null)
@@ -1725,8 +1725,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 //Faccio l'inserimento in danese
                 updrecord = new Prodotto();
                 updrecord.CodiceTipologia = TipologiaOfferte;
-                updrecord.Descrizione = NomeNuovoProdDk.Text;
-                updrecord.Lingua = "DK";
+                updrecord.Descrizione = NomeNuovoProdFR.Text;
+                updrecord.Lingua = "FR";
                 updrecord.CodiceProdotto = CodiceProdotto;
                 offDM.UpdateProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
@@ -1832,8 +1832,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     //Faccio l'inserimento in danese 
                     updrecord = new Prodotto();
                     updrecord.CodiceTipologia = TipologiaOfferte;
-                    updrecord.Descrizione = NomeNuovoProdDk.Text;
-                    updrecord.Lingua = "DK";
+                    updrecord.Descrizione = NomeNuovoProdFR.Text;
+                    updrecord.Lingua = "FR";
                     offDM.InsertProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
 
@@ -1965,9 +1965,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 //Faccio l'inserimento in russo
                 updrecord = new SProdotto();
                 updrecord.CodiceProdotto = ddlProdottoNewProd.SelectedValue;
-                updrecord.Descrizione = NomeNuovoSottDk.Text;
+                updrecord.Descrizione = NomeNuovoSottFR.Text;
                 updrecord.CodiceSProdotto = ddlProdottoNewSProd.SelectedValue;
-                updrecord.Lingua = "DK";
+                updrecord.Lingua = "FR";
                 offDM.UpdateSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
                 this.SvuotaDettaglioSProd();
@@ -2073,8 +2073,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     //anese
                     updrecord = new SProdotto();
                     updrecord.CodiceProdotto = CodiceProdotto;
-                    updrecord.Descrizione = NomeNuovoSottDk.Text;
-                    updrecord.Lingua = "DK";
+                    updrecord.Descrizione = NomeNuovoSottFR.Text;
+                    updrecord.Lingua = "FR";
                     offDM.InsertSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
                     this.SvuotaDettaglioProd();
@@ -2153,7 +2153,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         linksezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "I");
         linksezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "GB");
         linksezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "RU");
-        linksezioneDK.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "DK");
+        linksezioneFR.Text = WelcomeLibrary.UF.SitemapManager.getlinksezione(TipologiaOfferte, ddlProdottoNewProd1.SelectedValue, "FR");
     }
 
     protected void ddlProdottoNewProd_SelectedIndexChange(object sender, EventArgs e)
@@ -2164,7 +2164,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         linksottosezioneI.Text = "";
         linksottosezioneGB.Text = "";
         linksottosezioneRU.Text = "";
-        linksottosezioneDK.Text = "";
+        linksottosezioneFR.Text = "";
     }
     protected void ddlProdottoNewSProd_SelectedIndexChange(object sender, EventArgs e)
     {
@@ -2181,7 +2181,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         linksottosezioneI.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "I");
         linksottosezioneGB.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "GB");
         linksottosezioneRU.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "RU");
-        linksottosezioneDK.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "DK");
+        linksottosezioneFR.Text = WelcomeLibrary.UF.SitemapManager.getlinksottosezione(TipologiaOfferte, ddlProdottoNewProd.SelectedValue, ddlProdottoNewSProd.SelectedValue, "FR");
 
     }
     protected void TipologiaProd_SelectedIndexChanged(object sender, EventArgs e)
@@ -2192,7 +2192,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         linksezioneI.Text = "";
         linksezioneGB.Text = "";
         linksezioneRU.Text = "";
-        linksezioneDK.Text = "";
+        linksezioneFR.Text = "";
     }
     #endregion
 
@@ -2402,9 +2402,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             if (t != null)
                 txtCar1RU.Text = t.Campo1;
 
-            t = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar1DK.Text = t.Campo1;
+                txtCar1FR.Text = t.Campo1;
 
             litCodp.Text = "cod: " + ddlCaratteristica1_gest.SelectedValue;
         }
@@ -2414,7 +2414,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtCar1I.Text = "";
             txtCar1GB.Text = "";
             txtCar1RU.Text = "";
-            txtCar1DK.Text = "";
+            txtCar1FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica1_Click(object sender, EventArgs e)
@@ -2467,17 +2467,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar1DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar1FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
 
 
         txtCar1I.Text = "";
         txtCar1GB.Text = "";
         txtCar1RU.Text = "";
-        txtCar1DK.Text = "";
+        txtCar1FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[0] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1");
@@ -2501,9 +2501,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             if (t != null)
                 txtCar2RU.Text = t.Campo1;
 
-            t = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar2DK.Text = t.Campo1;
+                txtCar2FR.Text = t.Campo1;
 
         }
         else
@@ -2511,7 +2511,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtCar2I.Text = "";
             txtCar2GB.Text = "";
             txtCar2RU.Text = "";
-            txtCar2DK.Text = "";
+            txtCar2FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica2_Click(object sender, EventArgs e)
@@ -2563,17 +2563,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar2DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar2FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica2");
 
 
         txtCar2I.Text = "";
         txtCar2GB.Text = "";
         txtCar2RU.Text = "";
-        txtCar2DK.Text = "";
+        txtCar2FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[1] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica2");
@@ -2599,16 +2599,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             if (t != null)
                 txtCar3RU.Text = t.Campo1;
 
-            t = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar3DK.Text = t.Campo1;
+                txtCar3FR.Text = t.Campo1;
         }
         else
         {
             txtCar3I.Text = "";
             txtCar3GB.Text = "";
             txtCar3RU.Text = "";
-            txtCar3DK.Text = "";
+            txtCar3FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica3_Click(object sender, EventArgs e)
@@ -2661,17 +2661,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar3DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar3FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica3");
 
 
         txtCar3I.Text = "";
         txtCar3GB.Text = "";
         txtCar3RU.Text = "";
-        txtCar3DK.Text = "";
+        txtCar3FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[2] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica3");
@@ -2700,16 +2700,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "RU");
             if (t != null)
                 txtCar4RU.Text = t.Campo1;
-            t = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar4DK.Text = t.Campo1;
+                txtCar4FR.Text = t.Campo1;
         }
         else
         {
             txtCar4I.Text = "";
             txtCar4GB.Text = "";
             txtCar4RU.Text = "";
-            txtCar4DK.Text = "";
+            txtCar4FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica4_Click(object sender, EventArgs e)
@@ -2761,17 +2761,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar4DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar4FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica4");
 
 
         txtCar4I.Text = "";
         txtCar4GB.Text = "";
         txtCar4RU.Text = "";
-        txtCar4DK.Text = "";
+        txtCar4FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[3] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica4");
@@ -2796,16 +2796,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "RU");
             if (t != null)
                 txtCar5RU.Text = t.Campo1;
-            t = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar5DK.Text = t.Campo1;
+                txtCar5FR.Text = t.Campo1;
         }
         else
         {
             txtCar5I.Text = "";
             txtCar5GB.Text = "";
             txtCar5RU.Text = "";
-            txtCar5DK.Text = "";
+            txtCar5FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica5_Click(object sender, EventArgs e)
@@ -2856,17 +2856,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar5DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar5FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica5");
 
 
         txtCar5I.Text = "";
         txtCar5GB.Text = "";
         txtCar5RU.Text = "";
-        txtCar5DK.Text = "";
+        txtCar5FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[4] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica5");
@@ -2892,16 +2892,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "RU");
             if (t != null)
                 txtCar6RU.Text = t.Campo1;
-            t = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "DK");
+            t = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
-                txtCar6DK.Text = t.Campo1;
+                txtCar6FR.Text = t.Campo1;
         }
         else
         {
             txtCar6I.Text = "";
             txtCar6GB.Text = "";
             txtCar6RU.Text = "";
-            txtCar6DK.Text = "";
+            txtCar6FR.Text = "";
         }
     }
     protected void btnAggiornaCaratteristica6_Click(object sender, EventArgs e)
@@ -2952,16 +2952,16 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             item.Codice = ultimoprogressivo.ToString();
         else
         {
-            item = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "DK");
+            item = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "FR");
         }
-        item.Campo1 = txtCar6DK.Text;
-        item.Lingua = "DK";
+        item.Campo1 = txtCar6FR.Text;
+        item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica6");
 
         txtCar6I.Text = "";
         txtCar6GB.Text = "";
         txtCar6RU.Text = "";
-        txtCar6DK.Text = "";
+        txtCar6FR.Text = "";
 
         //Aggiorno la visualizzazione
         WelcomeLibrary.UF.Utility.Caratteristiche[5] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica6");

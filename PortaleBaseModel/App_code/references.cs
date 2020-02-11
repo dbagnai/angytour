@@ -404,9 +404,9 @@ public class references
             case "ru":
                 culturename = "ru";
                 break;
-            case "DK":
-            case "da":
-                culturename = "da";
+            case "FR":
+            case "fr":
+                culturename = "fr";
                 break;
             default:
                 culturename = "it";

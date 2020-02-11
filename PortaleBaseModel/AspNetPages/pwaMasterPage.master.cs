@@ -90,9 +90,9 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 if (Lingua.ToLower() == "ru") Response.RedirectPermanent("~");
             }
-            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() != "true")
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() != "true")
             {
-                if (Lingua.ToLower() == "dk") Response.RedirectPermanent("~");
+                if (Lingua.ToLower() == "fr") Response.RedirectPermanent("~");
             }
             //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi

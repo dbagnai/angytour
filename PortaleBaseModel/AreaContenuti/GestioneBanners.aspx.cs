@@ -251,9 +251,9 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneRU.Text = "";
         imgRU.ImageUrl = "";
 
-        txtNavigateUrlDK.Text = "";
-        txtDescrizioneDK.Text = "";
-        imgDK.ImageUrl = "";
+        txtNavigateUrlFR.Text = "";
+        txtDescrizioneFR.Text = "";
+        imgFR.ImageUrl = "";
 
         txtNavigateUrl.Text = "";
         txtDescrizioneI.Text = "";
@@ -263,7 +263,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtImgalttextI.Text = "";
         txtImgalttextGB.Text = "";
         txtImgalttextRU.Text = "";
-        txtImgalttextDK.Text = "";
+        txtImgalttextFR.Text = "";
     }
 
     protected void VisualizzaDettaglio()
@@ -281,9 +281,9 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneRU.Text = BannerSelezionato.AlternateTextRU;
         imgRU.ImageUrl = BannerSelezionato.ImageUrlRU;
 
-        txtNavigateUrlDK.Text = BannerSelezionato.NavigateUrlDK;
-        txtDescrizioneDK.Text = BannerSelezionato.AlternateTextDK;
-        imgDK.ImageUrl = BannerSelezionato.ImageUrlDK;
+        txtNavigateUrlFR.Text = BannerSelezionato.NavigateUrlFR;
+        txtDescrizioneFR.Text = BannerSelezionato.AlternateTextFR;
+        imgFR.ImageUrl = BannerSelezionato.ImageUrlFR;
 
         txtNavigateUrl.Text = BannerSelezionato.NavigateUrl;
         txtDescrizioneI.Text = BannerSelezionato.AlternateText;
@@ -292,7 +292,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
 
         txtImgalttextI.Text = BannerSelezionato.AltimgtextI;
         txtImgalttextGB.Text = BannerSelezionato.AltimgtextGB;
-        txtImgalttextDK.Text = BannerSelezionato.AltimgtextDK;
+        txtImgalttextFR.Text = BannerSelezionato.AltimgtextFR;
         txtImgalttextRU.Text = BannerSelezionato.AltimgtextRU;
 
     }
@@ -305,9 +305,9 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AlternateTextGB = txtDescrizioneGB.Text;
         BannerSelezionato.ImageUrlGB = imgGB.ImageUrl;
 
-        BannerSelezionato.NavigateUrlDK = txtNavigateUrlDK.Text;
-        BannerSelezionato.AlternateTextDK = txtDescrizioneDK.Text;
-        BannerSelezionato.ImageUrlDK = imgDK.ImageUrl;
+        BannerSelezionato.NavigateUrlFR = txtNavigateUrlFR.Text;
+        BannerSelezionato.AlternateTextFR = txtDescrizioneFR.Text;
+        BannerSelezionato.ImageUrlFR = imgFR.ImageUrl;
 
         BannerSelezionato.NavigateUrlRU = txtNavigateUrlRU.Text;
         BannerSelezionato.AlternateTextRU = txtDescrizioneRU.Text;
@@ -322,14 +322,14 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AltimgtextI = txtImgalttextI.Text;
         BannerSelezionato.AltimgtextGB = txtImgalttextGB.Text;
         BannerSelezionato.AltimgtextRU = txtImgalttextRU.Text;
-        BannerSelezionato.AltimgtextDK = txtImgalttextDK.Text;
+        BannerSelezionato.AltimgtextFR = txtImgalttextFR.Text;
 
 
         int _p = 0;
         int.TryParse(txtProgressivo.Text, out _p);
         BannerSelezionato.progressivo = _p;
     }
-    protected void btnINserisciDk_Click(object sender, EventArgs e)
+    protected void btnINserisciFR_Click(object sender, EventArgs e)
     {
         if (BannerSelezionato == null || BannerSelezionato.Id == 0)
         {
@@ -358,13 +358,13 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         //}
 
         //Carico la foto in russo e aggiorno la visualizzazione (se uguali non la carico aggiorno solo il db )
-        BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
-        if (BannerSelezionato.ImageUrl != BannerSelezionato.ImageUrlDK)
+        BannerSelezionato.ImageUrlFR = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+        if (BannerSelezionato.ImageUrl != BannerSelezionato.ImageUrlFR)
         {
             if (CaricaFotoSuServer(ResizeHeight, ResizeWidth, true))
             {
                 //Aggiorno il db
-                BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+                BannerSelezionato.ImageUrlFR = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
                 bannersDM banDM = new bannersDM(NomeTblBanners);
                 banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
                 //Aggiorno la visualizzazione
@@ -375,7 +375,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         else
         {
             //Aggiorno il db
-            BannerSelezionato.ImageUrlDK = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+            BannerSelezionato.ImageUrlFR = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
             bannersDM banDM = new bannersDM(NomeTblBanners);
             banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
             //Aggiorno la visualizzazione
@@ -674,8 +674,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.NavigateUrlGB = txtNavigateUrlGB.Text;
                     ban.AlternateTextRU = txtDescrizioneRU.Text;
                     ban.NavigateUrlRU = txtNavigateUrlRU.Text;
-                    ban.AlternateTextDK = txtDescrizioneDK.Text;
-                    ban.NavigateUrlDK = txtNavigateUrlDK.Text;
+                    ban.AlternateTextFR = txtDescrizioneFR.Text;
+                    ban.NavigateUrlFR = txtNavigateUrlFR.Text;
 
                     ban.AlternateText = txtDescrizioneI.Text;
                     ban.NavigateUrl = txtNavigateUrl.Text;
@@ -689,7 +689,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.AltimgtextI = txtImgalttextI.Text;
                     ban.AltimgtextGB = txtImgalttextGB.Text;
                     ban.AltimgtextRU = txtImgalttextRU.Text;
-                    ban.AltimgtextDK = txtImgalttextDK.Text;
+                    ban.AltimgtextFR = txtImgalttextFR.Text;
 
                     banDM.InsertBanner(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ban);
                     BannerSelezionato = ban;
@@ -736,7 +736,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         FileInfo fi = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrl));
         FileInfo fiGB = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlGB));
         FileInfo fiRU = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlRU));
-        FileInfo fiDK = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlDK));
+        FileInfo fiFR = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlFR));
 
         //-------------------------------------
         //Eliminiamo il file se presente
@@ -794,11 +794,11 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
                 }
 
-                if (fiDK.Exists)
+                if (fiFR.Exists)
                 {
-                    string fileext = fiDK.Extension;
-                    string pathfile = fiDK.DirectoryName;
-                    string filenamenoext = fiDK.Name;
+                    string fileext = fiFR.Extension;
+                    string pathfile = fiFR.DirectoryName;
+                    string filenamenoext = fiFR.Name;
                     filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
                     string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
                     string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
@@ -815,8 +815,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 if (System.IO.File.Exists(fiGB.DirectoryName + "\\ant" + fiGB.Name)) System.IO.File.Delete(fiGB.DirectoryName + "\\ant" + fiGB.Name);
                 if (fiRU.Exists) fiRU.Delete();
                 if (System.IO.File.Exists(fiRU.DirectoryName + "\\ant" + fiRU.Name)) System.IO.File.Delete(fiRU.DirectoryName + "\\ant" + fiRU.Name);
-                if (fiDK.Exists) fiDK.Delete();
-                if (System.IO.File.Exists(fiDK.DirectoryName + "\\ant" + fiDK.Name)) System.IO.File.Delete(fiDK.DirectoryName + "\\ant" + fiDK.Name);
+                if (fiFR.Exists) fiFR.Delete();
+                if (System.IO.File.Exists(fiFR.DirectoryName + "\\ant" + fiFR.Name)) System.IO.File.Delete(fiFR.DirectoryName + "\\ant" + fiFR.Name);
 
                 //Elimino il record e svuoto la visualizzazione
                 bannersDM banDM = new bannersDM(NomeTblBanners);

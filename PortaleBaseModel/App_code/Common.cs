@@ -476,8 +476,8 @@ public class CommonPage : Page
             case "RU":
                 culturename = "ru";
                 break;
-            case "DK":
-                culturename = "da";
+            case "FR":
+                culturename = "fr";
                 break;
             default:
                 culturename = "it";
@@ -626,8 +626,8 @@ public class CommonPage : Page
                 System.Threading.Thread.CurrentThread.CurrentCulture = c;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = c;
                 break;
-            case "DK":
-                c = System.Globalization.CultureInfo.CreateSpecificCulture("da");
+            case "FR":
+                c = System.Globalization.CultureInfo.CreateSpecificCulture("fr");
                 System.Threading.Thread.CurrentThread.CurrentCulture = c;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = c;
                 break;
@@ -2371,8 +2371,8 @@ public class CommonPage : Page
                 c.DescrizioneI = values["DescrizioneI"];
             if (values.ContainsKey("DescrizioneRU"))
                 c.DescrizioneI = values["DescrizioneRU"];
-            if (values.ContainsKey("DescrizioneDK"))
-                c.DescrizioneI = values["DescrizioneDK"];
+            if (values.ContainsKey("DescrizioneFR"))
+                c.DescrizioneI = values["DescrizioneFR"];
 
             if (values.ContainsKey("DatitecniciGB"))
                 c.DescrizioneGB += values["DatitecniciGB"];
@@ -2380,8 +2380,8 @@ public class CommonPage : Page
                 c.DescrizioneI += values["DatitecniciI"];
             if (values.ContainsKey("DatitecniciRU"))
                 c.DescrizioneI += values["DatitecnicRU"];
-            if (values.ContainsKey("DatitecniciDK"))
-                c.DescrizioneI += values["DatitecnicDK"];
+            if (values.ContainsKey("DatitecniciFR"))
+                c.DescrizioneI += values["DatitecnicFR"];
 
             if (values.ContainsKey("DenominazioneGB"))
                 c.TitoloGB = values["DenominazioneGB"];
@@ -2389,8 +2389,8 @@ public class CommonPage : Page
                 c.TitoloI = values["DenominazioneI"];
             if (values.ContainsKey("DenominazioneRU"))
                 c.TitoloRU = values["DenominazioneRU"];
-            if (values.ContainsKey("DenominazioneDK"))
-                c.TitoloDK = values["DenominazioneDK"];
+            if (values.ContainsKey("DenominazioneFR"))
+                c.TitoloFR = values["DenominazioneFR"];
             //if (values.ContainsKey("linkVideo"))
             //    c.linkVideo = values["linkVideo"];
 

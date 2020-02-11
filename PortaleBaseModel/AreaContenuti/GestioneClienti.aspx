@@ -683,7 +683,7 @@
                                                 <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                                                 <asp:ListItem Text="Inglese" Value="GB" />
                                                 <asp:ListItem Text="Russo" Value="RU" />
-                                                <asp:ListItem Text="Danese" Value="DK" />
+                                                <asp:ListItem Text="Francese" Value="FR" />
                                             </asp:DropDownList>
                                             <%-- <asp:TextBox Width="100%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
                                                 Text='<%# Eval("Lingua") %>' />--%>
@@ -800,7 +800,7 @@
                                             <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                                             <asp:ListItem Text="Inglese" Value="GB" />
                                             <asp:ListItem Text="Russo" Value="RU" />
-                                            <asp:ListItem Text="Danese" Value="DK" />
+                                            <asp:ListItem Text="Francese" Value="FR" />
                                         </asp:DropDownList>
                                         <%--<asp:TextBox Width="100%" MaxLength="15" SkinID="Insert_txt" ID="txtLN" runat="server"
                                             Text="" CssClass="txtInputPopupUpper" />--%>
@@ -1107,7 +1107,7 @@
                 <asp:ListItem Text="Italiano" Value="I" Selected="True" />
                 <asp:ListItem Text="Inglese" Value="GB" />
                 <asp:ListItem Text="Russo" Value="RU" />
-                <asp:ListItem Text="Danese" Value="DK" />
+                <asp:ListItem Text="Francese" Value="FR" />
             </asp:DropDownList>
             <br />
 

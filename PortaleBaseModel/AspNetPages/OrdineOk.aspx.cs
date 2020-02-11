@@ -286,7 +286,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 case "RU":
                     output.Text += "Error creating export order. Contact support.";
                     break;
-                case "DK":
+                case "FR":
                     output.Text += "Error creating export order. Contact support.";
                     break;
             }
@@ -467,7 +467,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 case "RU":
                     output.Text = "Error save CodiceOrdine";
                     break;
-                case "DK":
+                case "FR":
                     output.Text = "Error save CodiceOrdine";
                     break;
             }
@@ -606,8 +606,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 case "RU":
                     TestoMail += item.Offerta.DenominazioneRU + "<br/>";
                     break;
-                case "DK":
-                    TestoMail += item.Offerta.DenominazioneDK + "<br/>";
+                case "FR":
+                    TestoMail += item.Offerta.DenominazioneFR + "<br/>";
                     break;
 
             }

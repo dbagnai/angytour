@@ -103,7 +103,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             case "RU":
                 output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
                 break;
-            case "DK":
+            case "FR":
                 output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
                 break;
         }
@@ -1307,7 +1307,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 case "RU":
                     output.Text = "Error save CodiceOrdine";
                     break;
-                case "DK":
+                case "FR":
                     output.Text = "Error save CodiceOrdine";
                     break;
             }
@@ -1447,8 +1447,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                 case "RU":
                     TestoMail += item.Offerta.DenominazioneRU + "<br/>";
                     break;
-                case "DK":
-                    TestoMail += item.Offerta.DenominazioneDK + "<br/>";
+                case "FR":
+                    TestoMail += item.Offerta.DenominazioneFR + "<br/>";
                     break;
             }
 

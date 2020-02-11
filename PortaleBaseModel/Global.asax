@@ -158,10 +158,10 @@
                     System.Threading.Thread trUpdaterssFeed_RU = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_RU);
                     trUpdaterssFeed_RU.Start();
                 }
-                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatedk").ToLower() == "true")
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true")
                 {
-                    System.Threading.Thread trUpdaterssFeed_DK = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_DK);
-                    trUpdaterssFeed_DK.Start();
+                    System.Threading.Thread trUpdaterssFeed_FR = new System.Threading.Thread(offDM.CreaRssFeedPerCategoria_FR);
+                    trUpdaterssFeed_FR.Start();
                 }
 
                 //---------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@
             references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
 #endif
 #if false
-            Lingua = "DK";
+            Lingua = "FR";
             Tmp_linksite = new List<string>();
             Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);

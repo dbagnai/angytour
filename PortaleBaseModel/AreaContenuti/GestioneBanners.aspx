@@ -45,8 +45,8 @@
                         OnClick="btnINserisciInglese_Click" />
                     <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Russo"
                         OnClick="btnINserisciRusso_Click" />
-                    <asp:Button ID="btnInserisciDK" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Danese"
-                        OnClick="btnINserisciDk_Click" />
+                    <asp:Button ID="btnInserisciFR" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Danese"
+                        OnClick="btnINserisciFR_Click" />
                     <asp:Button ID="btnAggiorna" runat="server" CssClass="btn btn-primary btn-sm" Text="Aggiorna Banner" OnClick="btnAggiorna_Click" />
                     <asp:Button ID="btnElimina" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina Banner" OnClick="btnElimina_Click" />
                 </div>
@@ -73,7 +73,7 @@
                         <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
                         <li><a data-toggle="pill" href="#tebeng">Inglese</a></li>
                         <li><a data-toggle="pill" href="#tabru">Russo</a></li>
-                        <li><a data-toggle="pill" href="#tabdk">Danese</a></li>
+                        <li><a data-toggle="pill" href="#tabfr">Francese</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tabita" class="tab-pane fade in active">
@@ -182,9 +182,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="tabdk" class="tab-pane fade">
+                        <div id="tabfr" class="tab-pane fade">
                             <h4>BANNER DANISH</h4>
-                            <asp:Image ID="imgDK" Width="250" runat="server" ImageUrl="" />
+                            <asp:Image ID="imgFR" Width="250" runat="server" ImageUrl="" />
                             <div class="row" style="padding-bottom: 5px">
                                 <div class="col-sm-1 text-right">
                                     <strong>
@@ -192,7 +192,7 @@
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtNavigateUrlDK" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="txtNavigateUrlFR" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row" style="padding-bottom: 5px">
@@ -202,7 +202,7 @@
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass=" form-control" Height="250px" TextMode="MultiLine" ID="txtDescrizioneDK"
+                                    <asp:TextBox CssClass=" form-control" Height="250px" TextMode="MultiLine" ID="txtDescrizioneFR"
                                         runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
-                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextDK" runat="server"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextFR" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
