@@ -125,17 +125,17 @@ namespace WelcomeLibrary.DOM
         }
 
 
-        private string _testoDK;
-        public string TestoDK
+        private string _testoFR;
+        public string TestoFR
         {
-            get { return _testoDK; }
-            set { _testoDK = value; }
+            get { return _testoFR; }
+            set { _testoFR = value; }
         }
-        private string _titoloDK;
-        public string TitoloDK
+        private string _titoloFR;
+        public string TitoloFR
         {
-            get { return _titoloDK; }
-            set { _titoloDK = value; }
+            get { return _titoloFR; }
+            set { _titoloFR = value; }
         }
 
         private string _spare1;
@@ -162,8 +162,8 @@ namespace WelcomeLibrary.DOM
             this._titoloGB = string.Empty;
             this._testoRU = string.Empty;
             this._titoloRU = string.Empty;
-            this._testoDK = string.Empty;
-            this._titoloDK = string.Empty;
+            this._testoFR = string.Empty;
+            this._titoloFR = string.Empty;
 
             this.Spare1 = string.Empty;
             this.Approvato = false;
@@ -187,8 +187,8 @@ namespace WelcomeLibrary.DOM
             this._testoRU = tmp.TestoRU;
             this._titoloRU = tmp.TitoloRU;
 
-            this._testoDK = tmp.TestoDK;
-            this._titoloDK = tmp.TitoloDK;
+            this._testoFR = tmp.TestoFR;
+            this._titoloFR = tmp.TitoloFR;
 
             this.Spare1 = tmp.Spare1;
             this.Approvato = tmp.Approvato;
@@ -224,8 +224,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.TitoloRU;
                     break;
-                case "DK":
-                    ret = this.TitoloDK;
+                case "FR":
+                    ret = this.TitoloFR;
                     break;
                 default:
                     ret = this.TitoloI;
@@ -245,8 +245,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.TitoloRU = value;
                     break;
-                case "DK":
-                    this.TitoloDK = value;
+                case "FR":
+                    this.TitoloFR = value;
                     break;
                 default:
                     this.TitoloI = value;
@@ -264,8 +264,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.TestoRU;
                     break;
-                case "DK":
-                    ret = this.TestoDK;
+                case "FR":
+                    ret = this.TestoFR;
                     break;
                 default:
                     ret = this.TestoI;
@@ -283,8 +283,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.TestoRU = value;
                     break;
-                case "DK":
-                    this.TestoDK = value;
+                case "FR":
+                    this.TestoFR = value;
                     break;
                 default:
                     this.TestoI = value;

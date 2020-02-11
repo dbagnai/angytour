@@ -74,23 +74,23 @@ namespace WelcomeLibrary.DOM
         }
 
 
-        private string _AlternateTextDK;
-        public string AlternateTextDK
+        private string _AlternateTextFR;
+        public string AlternateTextFR
         {
-            get { return _AlternateTextDK; }
-            set { _AlternateTextDK = value; }
+            get { return _AlternateTextFR; }
+            set { _AlternateTextFR = value; }
         }
-        private string _ImageUrlDK;
-        public string ImageUrlDK
+        private string _ImageUrlFR;
+        public string ImageUrlFR
         {
-            get { return _ImageUrlDK; }
-            set { _ImageUrlDK = value; }
+            get { return _ImageUrlFR; }
+            set { _ImageUrlFR = value; }
         }
-        private string _NavigateUrlDK;
-        public string NavigateUrlDK
+        private string _NavigateUrlFR;
+        public string NavigateUrlFR
         {
-            get { return _NavigateUrlDK; }
-            set { _NavigateUrlDK = value; }
+            get { return _NavigateUrlFR; }
+            set { _NavigateUrlFR = value; }
         }
 
         private string _sezione;
@@ -133,11 +133,11 @@ namespace WelcomeLibrary.DOM
             get { return _altimgtextRU; }
             set { _altimgtextRU = value; }
         }
-        private string _altimgtextDK;
-        public string AltimgtextDK
+        private string _altimgtextFR;
+        public string AltimgtextFR
         {
-            get { return _altimgtextDK; }
-            set { _altimgtextDK = value; }
+            get { return _altimgtextFR; }
+            set { _altimgtextFR = value; }
         }
 
 
@@ -154,8 +154,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = (!string.IsNullOrEmpty(this._altimgtextRU)) ? this._altimgtextRU : this._altimgtextI;
                     break;
-                case "DK":
-                    ret = (!string.IsNullOrEmpty(this._altimgtextDK)) ? this._altimgtextDK : this._altimgtextI;
+                case "FR":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextFR)) ? this._altimgtextFR : this._altimgtextI;
                     break;
                 default:
                     ret = this._altimgtextI;
@@ -173,8 +173,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this._altimgtextRU = value;
                     break;
-                case "DK":
-                    this._altimgtextDK = value;
+                case "FR":
+                    this._altimgtextFR = value;
                     break;
                 default:
                     this._altimgtextI = value;
@@ -195,8 +195,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.AlternateTextRU;
                     break;
-                case "DK":
-                    ret = this.AlternateTextDK;
+                case "FR":
+                    ret = this.AlternateTextFR;
                     break;
                 default:
                     ret = this._AlternateText;
@@ -214,8 +214,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.AlternateTextRU = value;
                     break;
-                case "DK":
-                    this.AlternateTextDK = value;
+                case "FR":
+                    this.AlternateTextFR = value;
                     break;
                 default:
                     this._AlternateText = value;
@@ -233,8 +233,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.ImageUrlRU;
                     break;
-                case "DK":
-                    ret = this.ImageUrlDK;
+                case "FR":
+                    ret = this.ImageUrlFR;
                     break;
                 default:
                     ret = this.ImageUrl;
@@ -252,8 +252,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.ImageUrlRU = value;
                     break;
-                case "DK":
-                    this.ImageUrlDK = value;
+                case "FR":
+                    this.ImageUrlFR = value;
                     break;
                 default:
                     this.ImageUrl = value;
@@ -271,8 +271,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.NavigateUrlRU;
                     break;
-                case "DK":
-                    ret = this.NavigateUrlDK;
+                case "FR":
+                    ret = this.NavigateUrlFR;
                     break;
                 default:
                     ret = this.NavigateUrl;
@@ -290,8 +290,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.NavigateUrlRU = value;
                     break;
-                case "DK":
-                    this.NavigateUrlDK = value;
+                case "FR":
+                    this.NavigateUrlFR = value;
                     break;
                 default:
                     this.NavigateUrl = value;
@@ -314,14 +314,14 @@ namespace WelcomeLibrary.DOM
             this.ImageUrlRU = "";
             this.NavigateUrlRU = "";
 
-            this.AlternateTextDK = "";
-            this.ImageUrlDK = "";
-            this.NavigateUrlDK = "";
+            this.AlternateTextFR = "";
+            this.ImageUrlFR = "";
+            this.NavigateUrlFR = "";
 
             this.AltimgtextI = string.Empty;
             this.AltimgtextGB = string.Empty;
             this.AltimgtextRU = string.Empty;
-            this.AltimgtextDK = string.Empty;
+            this.AltimgtextFR = string.Empty;
 
 
             this.sezione = "";
@@ -344,14 +344,14 @@ namespace WelcomeLibrary.DOM
             this.ImageUrlRU = tmp.ImageUrlRU;
             this.NavigateUrlRU = tmp.NavigateUrlRU;
 
-            this.AlternateTextDK = tmp.AlternateTextDK;
-            this.ImageUrlDK = tmp.ImageUrlDK;
-            this.NavigateUrlDK = tmp.NavigateUrlDK; 
+            this.AlternateTextFR = tmp.AlternateTextFR;
+            this.ImageUrlFR = tmp.ImageUrlFR;
+            this.NavigateUrlFR = tmp.NavigateUrlFR; 
 
             this.AltimgtextI = tmp.AltimgtextI;
             this.AltimgtextGB = tmp.AltimgtextGB;
             this.AltimgtextRU = tmp.AltimgtextRU;
-            this.AltimgtextDK = tmp.AltimgtextDK;
+            this.AltimgtextFR = tmp.AltimgtextFR;
 
 
 
@@ -374,15 +374,15 @@ namespace WelcomeLibrary.DOM
             _tmp["AlternateTextRU"] = this.AlternateTextRU;
             _tmp["ImageUrlRU"] = this.ImageUrlRU;
             _tmp["NavigateUrlRU"] = this.NavigateUrlRU;
-            _tmp["AlternateTextDK"] = this.AlternateTextDK;
-            _tmp["ImageUrlDK"] = this.ImageUrlDK;
-            _tmp["NavigateUrlDK"] = this.NavigateUrlDK;
+            _tmp["AlternateTextFR"] = this.AlternateTextFR;
+            _tmp["ImageUrlFR"] = this.ImageUrlFR;
+            _tmp["NavigateUrlFR"] = this.NavigateUrlFR;
 
             _tmp["sezione"] = this.sezione;
             _tmp["AltimgtextI"] = this.AltimgtextI;
             _tmp["AltimgtextGB"] = this.AltimgtextGB;
             _tmp["AltimgtextRU"] = this.AltimgtextRU;
-            _tmp["AltimgtextDK"] = this.AltimgtextDK;
+            _tmp["AltimgtextFR"] = this.AltimgtextFR;
             _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });
             return _tmp;
         }

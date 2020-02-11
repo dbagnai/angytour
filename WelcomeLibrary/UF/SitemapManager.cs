@@ -482,7 +482,6 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
-
         public static string getCulturenamefromlingua(string lng)
         {
             string culturename = "";
@@ -500,9 +499,9 @@ namespace WelcomeLibrary.UF
                 case "ru":
                     culturename = "ru";
                     break;
-                case "DK":
-                case "da":
-                    culturename = "da";
+                case "FR":
+                case "fr":
+                    culturename = "fr";
                     break;
                 default:
                     culturename = "";
@@ -528,9 +527,9 @@ namespace WelcomeLibrary.UF
                 case "RU":
                     culturename = "RU";
                     break;
-                case "da":
-                case "DK":
-                    culturename = "DK";
+                case "fr":
+                case "FR":
+                    culturename = "FR";
                     break;
                 default:
                     culturename = "";

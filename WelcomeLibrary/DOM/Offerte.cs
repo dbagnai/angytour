@@ -137,17 +137,17 @@ namespace WelcomeLibrary.DOM
             set { _Campo2RU = value; }
         }
 
-        private string _Campo1DK;
-        public string Campo1DK
+        private string _Campo1FR;
+        public string Campo1FR
         {
-            get { return _Campo1DK; }
-            set { _Campo1DK = value; }
+            get { return _Campo1FR; }
+            set { _Campo1FR = value; }
         }
-        private string _Campo2DK;
-        public string Campo2DK
+        private string _Campo2FR;
+        public string Campo2FR
         {
-            get { return _Campo2DK; }
-            set { _Campo2DK = value; }
+            get { return _Campo2FR; }
+            set { _Campo2FR = value; }
         }
 
         private string _UrlcustomI;
@@ -169,11 +169,11 @@ namespace WelcomeLibrary.DOM
             set { _UrlcustomRU = value; }
         }
 
-        private string _UrlcustomDK;
-        public string UrlcustomDK
+        private string _UrlcustomFR;
+        public string UrlcustomFR
         {
-            get { return _UrlcustomDK; }
-            set { _UrlcustomDK = value; }
+            get { return _UrlcustomFR; }
+            set { _UrlcustomFR = value; }
         }
 
 
@@ -196,11 +196,11 @@ namespace WelcomeLibrary.DOM
             get { return _CanonicalRU; }
             set { _CanonicalRU = value; }
         }
-        private string _CanonicalDK;
-        public string CanonicalDK
+        private string _CanonicalFR;
+        public string CanonicalFR
         {
-            get { return _CanonicalDK; }
-            set { _CanonicalDK = value; }
+            get { return _CanonicalFR; }
+            set { _CanonicalFR = value; }
         }
         private string _robots;
         public string Robots
@@ -235,11 +235,11 @@ namespace WelcomeLibrary.DOM
             get { return _DenominazioneRU; }
             set { _DenominazioneRU = value; }
         }
-        private string _DenominazioneDK;
-        public string DenominazioneDK
+        private string _DenominazioneFR;
+        public string DenominazioneFR
         {
-            get { return _DenominazioneDK; }
-            set { _DenominazioneDK = value; }
+            get { return _DenominazioneFR; }
+            set { _DenominazioneFR = value; }
         }
 
         private string _DescrizioneI;
@@ -260,11 +260,11 @@ namespace WelcomeLibrary.DOM
             get { return _DescrizioneRU; }
             set { _DescrizioneRU = value; }
         }
-        private string _DescrizioneDK;
-        public string DescrizioneDK
+        private string _DescrizioneFR;
+        public string DescrizioneFR
         {
-            get { return _DescrizioneDK; }
-            set { _DescrizioneDK = value; }
+            get { return _DescrizioneFR; }
+            set { _DescrizioneFR = value; }
         }
 
 
@@ -286,11 +286,11 @@ namespace WelcomeLibrary.DOM
             get { return _DatitecniciRU; }
             set { _DatitecniciRU = value; }
         }
-        private string _DatitecniciDK;
-        public string DatitecniciDK
+        private string _DatitecniciFR;
+        public string DatitecniciFR
         {
-            get { return _DatitecniciDK; }
-            set { _DatitecniciDK = value; }
+            get { return _DatitecniciFR; }
+            set { _DatitecniciFR = value; }
         }
 
         private AllegatiCollection _FotoCollection_M;
@@ -875,8 +875,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = !string.IsNullOrEmpty(this.UrlcustomRU.Trim()) ? this.UrlcustomRU : (this.DenominazioneRU ?? string.Empty).ToString();
                     break;
-                case "DK":
-                    ret = !string.IsNullOrEmpty(this.UrlcustomDK.Trim()) ? this.UrlcustomDK : (this.DenominazioneDK ?? string.Empty).ToString();
+                case "FR":
+                    ret = !string.IsNullOrEmpty(this.UrlcustomFR.Trim()) ? this.UrlcustomFR : (this.DenominazioneFR ?? string.Empty).ToString();
                     break;
                 default:
                     ret = !string.IsNullOrEmpty(this.UrlcustomI.Trim()) ? this.UrlcustomI : (this.DenominazioneI ?? string.Empty).ToString();
@@ -897,8 +897,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.DenominazioneRU;
                     break;
-                case "DK":
-                    ret = this.DenominazioneDK;
+                case "FR":
+                    ret = this.DenominazioneFR;
                     break;
                 default:
                     ret = this.DenominazioneI;
@@ -918,8 +918,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.DenominazioneRU = value;
                     break;
-                case "DK":
-                    this.DenominazioneDK = value;
+                case "FR":
+                    this.DenominazioneFR = value;
                     break;
                 default:
                     this.DenominazioneI = value;
@@ -937,8 +937,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.DescrizioneRU;
                     break;
-                case "DK":
-                    ret = this.DescrizioneDK;
+                case "FR":
+                    ret = this.DescrizioneFR;
                     break;
                 default:
                     ret = this.DescrizioneI;
@@ -956,8 +956,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.DescrizioneRU = value;
                     break;
-                case "DK":
-                    this.DescrizioneDK = value;
+                case "FR":
+                    this.DescrizioneFR = value;
                     break;
                 default:
                     this.DescrizioneI = value;
@@ -975,8 +975,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.DatitecniciRU;
                     break;
-                case "DK":
-                    ret = this.DatitecniciDK;
+                case "FR":
+                    ret = this.DatitecniciFR;
                     break;
                 default:
                     ret = this.DatitecniciI;
@@ -994,8 +994,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.DatitecniciRU = value;
                     break;
-                case "DK":
-                    this.DatitecniciDK = value;
+                case "FR":
+                    this.DatitecniciFR = value;
                     break;
                 default:
                     this.DatitecniciI = value;
@@ -1013,8 +1013,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.Campo1RU;
                     break;
-                case "DK":
-                    ret = this.Campo1DK;
+                case "FR":
+                    ret = this.Campo1FR;
                     break;
                 default:
                     ret = this.Campo1I;
@@ -1032,8 +1032,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.Campo1RU = value;
                     break;
-                case "DK":
-                    this.Campo1DK = value;
+                case "FR":
+                    this.Campo1FR = value;
                     break;
                 default:
                     this.Campo1I = value;
@@ -1051,8 +1051,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.Campo2RU;
                     break;
-                case "DK":
-                    ret = this.Campo2DK;
+                case "FR":
+                    ret = this.Campo2FR;
                     break;
                 default:
                     ret = this.Campo2I;
@@ -1070,8 +1070,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.Campo2RU = value;
                     break;
-                case "DK":
-                    this.Campo2DK = value;
+                case "FR":
+                    this.Campo2FR = value;
                     break;
                 default:
                     this.Campo2I = value;
@@ -1092,8 +1092,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.CanonicalRU;
                     break;
-                case "DK":
-                    ret = this.CanonicalDK;
+                case "FR":
+                    ret = this.CanonicalFR;
                     break;
                 default:
                     ret = this.CanonicalI;
@@ -1111,8 +1111,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.CanonicalRU = value;
                     break;
-                case "DK":
-                    this.CanonicalDK = value;
+                case "FR":
+                    this.CanonicalFR = value;
                     break;
                 default:
                     this.CanonicalI = value;
@@ -1132,8 +1132,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     ret = this.UrlcustomRU;
                     break;
-                case "DK":
-                    ret = this.UrlcustomDK;
+                case "FR":
+                    ret = this.UrlcustomFR;
                     break;
                 default:
                     ret = this.UrlcustomI;
@@ -1151,8 +1151,8 @@ namespace WelcomeLibrary.DOM
                 case "RU":
                     this.UrlcustomRU = value;
                     break;
-                case "DK":
-                    this.UrlcustomDK = value;
+                case "FR":
+                    this.UrlcustomFR = value;
                     break;
                 default:
                     this.UrlcustomI = value;
@@ -1173,8 +1173,8 @@ namespace WelcomeLibrary.DOM
             this._Campo1RU = string.Empty;
             this._Campo2RU = string.Empty;
 
-            this._Campo1DK = string.Empty;
-            this._Campo2DK = string.Empty;
+            this._Campo1FR = string.Empty;
+            this._Campo2FR = string.Empty;
 
 
             this.Autore = string.Empty;
@@ -1187,10 +1187,10 @@ namespace WelcomeLibrary.DOM
             this.CodiceCategoria = "";
             this.CodiceCategoria2Liv = "";
             this.DatitecniciGB = "";
-            this.DatitecniciDK = "";
+            this.DatitecniciFR = "";
             this.DatitecniciI = "";
             this.DenominazioneGB = "";
-            this.DenominazioneDK = "";
+            this.DenominazioneFR = "";
 
             this.DatitecniciRU = "";
             this.DenominazioneRU = "";
@@ -1207,7 +1207,7 @@ namespace WelcomeLibrary.DOM
             this.FotoCollection_M = new AllegatiCollection();
             this.DescrizioneGB = "";
             this.DescrizioneRU = "";
-            this.DescrizioneDK = "";
+            this.DescrizioneFR = "";
             this.DescrizioneI = "";
             this.Prezzo = 0;
             this.PrezzoListino = 0;
@@ -1228,12 +1228,12 @@ namespace WelcomeLibrary.DOM
             this.CanonicalGB = "";
             this.CanonicalRU = "";
             this.CanonicalI = "";
-            this.CanonicalDK = "";
+            this.CanonicalFR = "";
             this.Robots = "";
             this.UrlcustomGB = "";
             this.UrlcustomRU = "";
             this.UrlcustomI = "";
-            this.UrlcustomDK = "";
+            this.UrlcustomFR = "";
 
             this.Pivacf_dts = string.Empty;
             this.Nome_dts = string.Empty;
@@ -1311,11 +1311,11 @@ namespace WelcomeLibrary.DOM
             this.Campo1I = tmp.Campo1I;
             this.Campo1GB = tmp.Campo1GB;
             this.Campo1RU = tmp.Campo1RU;
-            this.Campo1DK = tmp.Campo1DK;
+            this.Campo1FR = tmp.Campo1FR;
             this.Campo2I = tmp.Campo2I;
             this.Campo2GB = tmp.Campo2GB;
             this.Campo2RU = tmp.Campo2RU;
-            this.Campo2DK = tmp.Campo2DK;
+            this.Campo2FR = tmp.Campo2FR;
             this.CodiceOfferta = tmp.CodiceOfferta;
             this.Prezzo = tmp.Prezzo;
             this.CodiceTipologia = tmp.CodiceTipologia;
@@ -1327,11 +1327,11 @@ namespace WelcomeLibrary.DOM
             this.CodiceProdotto = tmp.CodiceProdotto;
             this.DatitecniciGB = tmp.DatitecniciGB;
             this.DatitecniciRU = tmp.DatitecniciRU;
-            this.DatitecniciDK = tmp.DatitecniciDK;
+            this.DatitecniciFR = tmp.DatitecniciFR;
             this.DatitecniciI = tmp.DatitecniciI;
             this.DenominazioneGB = tmp.DenominazioneGB;
             this.DenominazioneRU = tmp.DenominazioneRU;
-            this.DenominazioneDK = tmp.DenominazioneDK;
+            this.DenominazioneFR = tmp.DenominazioneFR;
             this.DenominazioneI = tmp.DenominazioneI;
             this.Email = tmp.Email;
             this.Fax = tmp.Fax;
@@ -1342,7 +1342,7 @@ namespace WelcomeLibrary.DOM
             this.Data1 = tmp.Data1;
             this.DescrizioneGB = tmp.DescrizioneGB;
             this.DescrizioneRU = tmp.DescrizioneRU;
-            this.DescrizioneDK = tmp.DescrizioneDK;
+            this.DescrizioneFR = tmp.DescrizioneFR;
             this.DescrizioneI = tmp.DescrizioneI;
             this.PrezzoListino = tmp.PrezzoListino;
             this.Vetrina = tmp.Vetrina;
@@ -1364,11 +1364,11 @@ namespace WelcomeLibrary.DOM
 
             this.CanonicalGB = tmp.CanonicalGB;
             this.CanonicalRU = tmp.CanonicalRU;
-            this.CanonicalDK = tmp.CanonicalDK;
+            this.CanonicalFR = tmp.CanonicalFR;
             this.CanonicalI = tmp.CanonicalI;
             this.UrlcustomGB = tmp.UrlcustomGB;
             this.UrlcustomRU = tmp.UrlcustomRU;
-            this.UrlcustomDK = tmp.UrlcustomDK;
+            this.UrlcustomFR = tmp.UrlcustomFR;
             this.UrlcustomI = tmp.UrlcustomI;
             this.Robots = tmp.Robots;
 
@@ -1460,20 +1460,20 @@ namespace WelcomeLibrary.DOM
             _tmp["Campo1I"] = this.Campo1I.ToString();
             _tmp["Campo1GB"] = this.Campo1GB.ToString();
             _tmp["Campo1RU"] = this.Campo1RU.ToString();
-            _tmp["Campo1DK"] = this.Campo1DK.ToString();
+            _tmp["Campo1FR"] = this.Campo1FR.ToString();
             _tmp["Campo2I"] = this.Campo2I.ToString();
             _tmp["Campo2GB"] = this.Campo2GB.ToString();
             _tmp["Campo2RU"] = this.Campo2RU.ToString();
-            _tmp["Campo2DK"] = this.Campo2DK.ToString();
+            _tmp["Campo2FR"] = this.Campo2FR.ToString();
 
 
             _tmp["CanonicalGB"] = this.CanonicalGB.ToString();
             _tmp["CanonicalRU"] = this.CanonicalRU.ToString();
-            _tmp["CanonicalDK"] = this.CanonicalDK.ToString();
+            _tmp["CanonicalFR"] = this.CanonicalFR.ToString();
             _tmp["CanonicalI"] = this.CanonicalI.ToString();
             _tmp["UrlcustomGB"] = this.UrlcustomGB.ToString();
             _tmp["UrlcustomRU"] = this.UrlcustomRU.ToString();
-            _tmp["UrlcustomDK"] = this.UrlcustomDK.ToString();
+            _tmp["UrlcustomFR"] = this.UrlcustomFR.ToString();
             _tmp["UrlcustomI"] = this.UrlcustomI.ToString();
             _tmp["Robots"] = this.Robots.ToString();
 
@@ -1490,11 +1490,11 @@ namespace WelcomeLibrary.DOM
             _tmp["CodiceProdotto"] = this.CodiceProdotto.ToString();
             _tmp["DatitecniciGB"] = this.DatitecniciGB.ToString();
             _tmp["DatitecniciRU"] = this.DatitecniciRU.ToString();
-            _tmp["DatitecniciDK"] = this.DatitecniciDK.ToString();
+            _tmp["DatitecniciFR"] = this.DatitecniciFR.ToString();
             _tmp["DatitecniciI"] = this.DatitecniciI.ToString();
             _tmp["DenominazioneGB"] = this.DenominazioneGB.ToString();
             _tmp["DenominazioneRU"] = this.DenominazioneRU.ToString();
-            _tmp["DenominazioneDK"] = this.DenominazioneDK.ToString();
+            _tmp["DenominazioneFR"] = this.DenominazioneFR.ToString();
             _tmp["DenominazioneI"] = this.DenominazioneI.ToString();
             _tmp["Email"] = this.Email.ToString();
             _tmp["Fax"] = this.Fax.ToString();
@@ -1505,7 +1505,7 @@ namespace WelcomeLibrary.DOM
             _tmp["Data1"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.Data1 });
             _tmp["DescrizioneGB"] = this.DescrizioneGB.ToString();
             _tmp["DescrizioneRU"] = this.DescrizioneRU.ToString();
-            _tmp["DescrizioneDK"] = this.DescrizioneDK.ToString();
+            _tmp["DescrizioneFR"] = this.DescrizioneFR.ToString();
             _tmp["DescrizioneI"] = this.DescrizioneI.ToString();
             _tmp["PrezzoListino"] = this.PrezzoListino.ToString();
             _tmp["Vetrina"] = this.Vetrina.ToString();

@@ -39,7 +39,7 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.ID,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneDK,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEDK,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIDK,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomDK FROM TBL_CARRELLO as A left outer join TBL_ATTIVITA as B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
+                query = "SELECT A.ID,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO as A left outer join TBL_ATTIVITA as B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
 
                 if (idrecordcarrello != 0) { SessionId = "%"; ipClient = "%"; };
 
@@ -139,8 +139,8 @@ namespace WelcomeLibrary.DAL
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                             offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
-                            if (!(reader["DescrizioneDK"]).Equals(DBNull.Value))     offerta.DescrizioneDK = reader.GetString(reader.GetOrdinal("DescrizioneDK"));
-                            if (!(reader["DenominazioneDK"]).Equals(DBNull.Value))   offerta.DenominazioneDK = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDK"));
+                            if (!(reader["DescrizioneFR"]).Equals(DBNull.Value))     offerta.DescrizioneFR = reader.GetString(reader.GetOrdinal("DescrizioneFR"));
+                            if (!(reader["DenominazioneFR"]).Equals(DBNull.Value))   offerta.DenominazioneFR = reader.GetString(reader.GetOrdinal("DENOMINAZIONEFR"));
                             if (!(reader["DescrizioneRU"]).Equals(DBNull.Value)) offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
                               if (!(reader["DenominazioneRU"]).Equals(DBNull.Value))   offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
                             offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
@@ -155,8 +155,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.UrlcustomI = reader.GetString(reader.GetOrdinal("urlcustomI"));
                             if (!(reader["urlcustomRU"]).Equals(DBNull.Value))
                                 offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
-                            if (!(reader["urlcustomDK"]).Equals(DBNull.Value))
-                                offerta.UrlcustomDK = reader.GetString(reader.GetOrdinal("urlcustomDK"));
+                            if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
+                                offerta.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
 
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -192,8 +192,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
                             if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
                                 offerta.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
-                            if (!reader["DATITECNICIDK"].Equals(DBNull.Value))
-                                offerta.DatitecniciDK = reader.GetString(reader.GetOrdinal("DATITECNICIDK"));
+                            if (!reader["DATITECNICIFR"].Equals(DBNull.Value))
+                                offerta.DatitecniciFR = reader.GetString(reader.GetOrdinal("DATITECNICIFR"));
                             if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
                                 offerta.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
                             if (!reader["EMAIL"].Equals(DBNull.Value))
@@ -260,7 +260,7 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizionRU,B.DescrizioneDK,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONRUB,B.DENOMINAZIONEDK,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIDK,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomDK FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
+                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizionRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONRUB,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
 
                 SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -335,8 +335,8 @@ namespace WelcomeLibrary.DAL
                             offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
                             offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
-                            if (!(reader["DescrizioneDK"]).Equals(DBNull.Value)) offerta.DescrizioneDK = reader.GetString(reader.GetOrdinal("DescrizioneDK"));
-                            if (!(reader["DenominazioneDK"]).Equals(DBNull.Value)) offerta.DenominazioneDK = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDK"));
+                            if (!(reader["DescrizioneFR"]).Equals(DBNull.Value)) offerta.DescrizioneFR = reader.GetString(reader.GetOrdinal("DescrizioneFR"));
+                            if (!(reader["DenominazioneFR"]).Equals(DBNull.Value)) offerta.DenominazioneFR = reader.GetString(reader.GetOrdinal("DENOMINAZIONEFR"));
                             if (!(reader["DescrizioneRU"]).Equals(DBNull.Value)) offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
                             if (!(reader["DenominazioneRU"]).Equals(DBNull.Value)) offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
 
@@ -377,8 +377,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.UrlcustomI = reader.GetString(reader.GetOrdinal("urlcustomI"));
                             if (!(reader["urlcustomRU"]).Equals(DBNull.Value))
                                 offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
-                            if (!(reader["urlcustomDK"]).Equals(DBNull.Value))
-                                offerta.UrlcustomDK = reader.GetString(reader.GetOrdinal("urlcustomDK"));
+                            if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
+                                offerta.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
 
                             if (!reader["Xmlvalue"].Equals(DBNull.Value))
@@ -390,8 +390,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
                             if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
                                 offerta.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
-                            if (!reader["DATITECNICIDK"].Equals(DBNull.Value))
-                                offerta.DatitecniciDK = reader.GetString(reader.GetOrdinal("DATITECNICIDK"));
+                            if (!reader["DATITECNICIFR"].Equals(DBNull.Value))
+                                offerta.DatitecniciFR = reader.GetString(reader.GetOrdinal("DATITECNICIFR"));
 
                             if (!reader["EMAIL"].Equals(DBNull.Value))
                                 offerta.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
