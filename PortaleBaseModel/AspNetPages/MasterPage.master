@@ -38,8 +38,7 @@
     <asp:Literal Text="" ID="litgeneric" runat="server" />
     <link rel="shortcut icon" href="#" runat="server" id="linkFi1" />
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <%--META FOR PWA--%>
     <link rel="icon" href="/images/icons/icon-152x152.png">
     <!-- theme-color defines the top bar color (blue in my case)-->
@@ -72,8 +71,6 @@
                 }
             });
             </script>
-
-         
         --%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
         <%--            <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
@@ -240,7 +237,7 @@
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fas fas-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
             </div>
-            <div class="d-block d-sm-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+            <div class="d-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconwhatsapp") %>'>
                     <i class="fa fa-2x fa-whatsapp" style="color: #2f7b40; font-size: 30px; font-weight: 900; margin-top: 5px;"></i></a>
             </div>

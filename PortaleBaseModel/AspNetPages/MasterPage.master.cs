@@ -291,6 +291,31 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
     //}
 
+
+    private List<SProdotto> RiordinaSpecialeSottoprodotti(List<SProdotto> prodotti, string orderedcodes)
+    {
+        List<SProdotto> orderedlist = new List<SProdotto>();
+        if (orderedcodes != "")
+        {
+            string[] codes = orderedcodes.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            if (list != null)
+            {
+                //list.ForEach(l => orderedlist.Add(prodotti.Find(i => i.CodiceProdotto == l)));
+                foreach (string l in list)
+                {
+                    SProdotto p = prodotti.Find(i => i.CodiceSProdotto == l);
+                    if (p != null)
+                        orderedlist.Add(p);
+                }
+            }
+            else
+                orderedlist = prodotti;
+        }
+        return orderedlist;
+    }
+
     private List<Prodotto> RiordinaSpeciale(List<Prodotto> prodotti, string orderedcodes)
     {
         List<Prodotto> orderedlist = new List<Prodotto>();
@@ -628,6 +653,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
             sprodotti = sprodotti.FindAll(i => list.Exists(l => l == i.CodiceSProdotto));
         }
+      //  sprodotti = RiordinaSpecialeSottoprodotti(sprodotti, filtercode);
         if (sprodotti != null)
             foreach (SProdotto o in sprodotti)
             {
