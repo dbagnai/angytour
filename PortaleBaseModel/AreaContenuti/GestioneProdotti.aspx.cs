@@ -1418,8 +1418,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoProdIt.Enabled = false;
         NomeNuovoProdEng.Enabled = false;
         NomeNuovoProdRu.Enabled = false;
+        NomeNuovoProdFr.Enabled = false;
         NomeNuovoSottIt.Enabled = false;
         NomeNuovoSottRu.Enabled = false;
+        NomeNuovoSottFr.Enabled = false;
         chkContatto.Enabled = !valore;
 
 
@@ -1614,6 +1616,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
             NomeNuovoProdRu.Text = "";
 
+        if (prodottoEng != null)
+            NomeNuovoProdFr.Text = prodottoRu.Descrizione;
+        else
+            NomeNuovoProdFr.Text = "";
+
     }
 
     protected void CaricaDatiFormInserimentoSott(string Tipologia, string SottoProdotto)
@@ -1622,11 +1629,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         WelcomeLibrary.DOM.SProdotto SprodottoIta = new WelcomeLibrary.DOM.SProdotto();
         WelcomeLibrary.DOM.SProdotto SprodottoEng = new WelcomeLibrary.DOM.SProdotto();
         WelcomeLibrary.DOM.SProdotto SprodottoRu = new WelcomeLibrary.DOM.SProdotto();
-        WelcomeLibrary.DOM.SProdotto SprodottoFR = new WelcomeLibrary.DOM.SProdotto();
+        WelcomeLibrary.DOM.SProdotto SprodottoFr = new WelcomeLibrary.DOM.SProdotto();
         SprodottoIta = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "I" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
         SprodottoEng = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "GB" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
         SprodottoRu = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "RU" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
-        SprodottoFR = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "FR" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
+        SprodottoFr = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp_p) { return (tmp_p.Lingua == "FR" && (tmp_p.CodiceSProdotto == SottoProdotto)); });
 
         //adesso che ho il mio prodotto, posso caricare i suoi valori per la modifica o l'inseriment
         if (SprodottoIta != null)
@@ -1643,6 +1650,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             NomeNuovoSottRu.Text = SprodottoRu.Descrizione;
         else
             NomeNuovoSottRu.Text = "";
+
+        if (SprodottoFr != null)
+            NomeNuovoSottFr.Text = SprodottoFr.Descrizione;
+        else
+            NomeNuovoSottFr.Text = "";
     }
     protected void btnEliminaProd_Click(object sender, EventArgs e)
     {
@@ -1673,6 +1685,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             NomeNuovoProdIt.Text = "";
             NomeNuovoProdEng.Text = "";
             NomeNuovoProdRu.Text = "";
+            NomeNuovoProdFr.Text = "";
 
         }
         catch (Exception error)
@@ -1691,7 +1704,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         {
             if (btnModificaProd.Text == "Salva")
             {
-                if (string.IsNullOrEmpty(NomeNuovoProdIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdRu.Text.Trim()))
+                if (string.IsNullOrEmpty(NomeNuovoProdIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdRu.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdFr.Text.Trim()))
                 {
                     ErrorMsgNuovoProdotto.Text = "Inserire il nome categoria prodotto in italiano inglese e russo!";
                     return;
@@ -1725,7 +1738,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 //Faccio l'inserimento in danese
                 updrecord = new Prodotto();
                 updrecord.CodiceTipologia = TipologiaOfferte;
-                updrecord.Descrizione = NomeNuovoProdFR.Text;
+                updrecord.Descrizione = NomeNuovoProdFr.Text;
                 updrecord.Lingua = "FR";
                 updrecord.CodiceProdotto = CodiceProdotto;
                 offDM.UpdateProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
@@ -1745,6 +1758,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 NomeNuovoProdIt.Enabled = false;
                 NomeNuovoProdEng.Enabled = false;
                 NomeNuovoProdRu.Enabled = false;
+                NomeNuovoProdFr.Enabled = false;
 
                 WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();//rigenera i link per le tipologie/categorie e sottocategorie per url rewriting
                 ;
@@ -1762,7 +1776,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     btnModificaProd.Text = "Modifica";
                     NomeNuovoProdIt.Enabled = false;
                     NomeNuovoProdEng.Enabled = false;
-                    NomeNuovoProdRu.Enabled = false;
+                NomeNuovoProdRu.Enabled = false;
+                    NomeNuovoProdFr.Enabled = false;
                 }
             }
 
@@ -1791,10 +1806,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 btnModificaProd.Enabled = true;
                 NomeNuovoProdEng.Text = "";
                 NomeNuovoProdRu.Text = "";
+                NomeNuovoProdFr.Text = "";
                 NomeNuovoProdIt.Text = "";
                 NomeNuovoProdIt.Enabled = true;
                 NomeNuovoProdEng.Enabled = true;
                 NomeNuovoProdRu.Enabled = true;
+                NomeNuovoProdFr.Enabled = true;
                 //btnModificaProd.Enabled = false; ;
             }
             else
@@ -1802,7 +1819,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 if (OkButton.Text == "Inserisci")
                 {
 
-                    if (string.IsNullOrEmpty(NomeNuovoProdIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdRu.Text.Trim()))
+                    if (string.IsNullOrEmpty(NomeNuovoProdIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdRu.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoProdFr.Text.Trim()))
                     {
                         ErrorMsgNuovoProdotto.Text = "Inserire il nome prodotto in italiano inglese e russo!";
                         return;
@@ -1832,7 +1849,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     //Faccio l'inserimento in danese 
                     updrecord = new Prodotto();
                     updrecord.CodiceTipologia = TipologiaOfferte;
-                    updrecord.Descrizione = NomeNuovoProdFR.Text;
+                    updrecord.Descrizione = NomeNuovoProdFr.Text;
                     updrecord.Lingua = "FR";
                     offDM.InsertProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
@@ -1845,6 +1862,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     NomeNuovoProdIt.Enabled = false;
                     NomeNuovoProdEng.Enabled = false;
                     NomeNuovoProdRu.Enabled = false;
+                    NomeNuovoProdFr.Enabled = false;
                     OkButton.Text = "Nuovo";
                     this.CaricaDatiDllProdotto(TipologiaOfferte, "");
                     this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
@@ -1912,6 +1930,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             NomeNuovoSottIt.Text = "";
             NomeNuovoSottEng.Text = "";
             NomeNuovoSottRu.Text = "";
+            NomeNuovoSottFr.Text = "";
 
         }
         catch (Exception error)
@@ -1965,7 +1984,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 //Faccio l'inserimento in russo
                 updrecord = new SProdotto();
                 updrecord.CodiceProdotto = ddlProdottoNewProd.SelectedValue;
-                updrecord.Descrizione = NomeNuovoSottFR.Text;
+                updrecord.Descrizione = NomeNuovoSottFr.Text;
                 updrecord.CodiceSProdotto = ddlProdottoNewSProd.SelectedValue;
                 updrecord.Lingua = "FR";
                 offDM.UpdateSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
@@ -1999,6 +2018,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     NomeNuovoSottIt.Enabled = false;
                     NomeNuovoSottEng.Enabled = false;
                     NomeNuovoSottRu.Enabled = false;
+                    NomeNuovoSottFr.Enabled = false;
                 }
             }
 
@@ -2033,10 +2053,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 btnModificaSottoProd.Enabled = true;
                 NomeNuovoSottEng.Text = "";
                 NomeNuovoSottRu.Text = "";
+                NomeNuovoSottFr.Text = "";
                 NomeNuovoSottIt.Text = "";
                 NomeNuovoSottIt.Enabled = true;
                 NomeNuovoSottEng.Enabled = true;
                 NomeNuovoSottRu.Enabled = true;
+                NomeNuovoSottFr.Enabled = true;
                 //btnModificaSottoProd.Enabled = false; ;
             }
             else
@@ -2048,7 +2070,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     updrecord = new SProdotto();
                     updrecord.CodiceProdotto = CodiceProdotto;
 
-                    if (string.IsNullOrEmpty(NomeNuovoSottIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoSottEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoSottRu.Text.Trim()))
+                    if (string.IsNullOrEmpty(NomeNuovoSottIt.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoSottEng.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoSottRu.Text.Trim()) || string.IsNullOrEmpty(NomeNuovoSottFr.Text.Trim()))
                     {
                         ErrorMessage.Text = "inserire descrizioni sottoprodotto in italiano, inglese e russo";
                         return;
@@ -2073,7 +2095,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     //anese
                     updrecord = new SProdotto();
                     updrecord.CodiceProdotto = CodiceProdotto;
-                    updrecord.Descrizione = NomeNuovoSottFR.Text;
+                    updrecord.Descrizione = NomeNuovoSottFr.Text;
                     updrecord.Lingua = "FR";
                     offDM.InsertSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, updrecord);
 
@@ -2089,6 +2111,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     NomeNuovoSottIt.Text = "";
                     NomeNuovoSottEng.Text = "";
                     NomeNuovoSottRu.Text = "";
+                    NomeNuovoSottFr.Text = "";
                     WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();//rigenera i link per le tipologie/categorie e sottocategorie per url rewriting
                     ;
                 }
@@ -2109,6 +2132,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                         NomeNuovoSottIt.Text = "";
                         NomeNuovoSottEng.Text = "";
                         NomeNuovoSottRu.Text = "";
+                        NomeNuovoSottFr.Text = "";
                     }
                 }
             }
@@ -2128,6 +2152,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoProdIt.Text = "";
         NomeNuovoProdEng.Text = "";
         NomeNuovoProdRu.Text = "";
+        NomeNuovoProdFr.Text = "";
     }
 
     protected void SvuotaDettaglioSProd()
@@ -2135,6 +2160,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoSottIt.Text = "";
         NomeNuovoSottEng.Text = "";
         NomeNuovoSottRu.Text = "";
+        NomeNuovoSottFr.Text = "";
     }
     protected void ddlProdottoNewProd1_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -2146,6 +2172,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoProdIt.Enabled = true;
         NomeNuovoProdEng.Enabled = true;
         NomeNuovoProdRu.Enabled = true;
+        NomeNuovoProdFr.Enabled = true;
         //OkButton.Enabled = false;
         OkButton.Text = "Annulla";
         btnModificaProd.Text = "Salva";
@@ -2175,6 +2202,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         NomeNuovoSottIt.Enabled = true;
         NomeNuovoSottEng.Enabled = true;
         NomeNuovoSottRu.Enabled = true;
+        NomeNuovoSottFr.Enabled = true;
         OkButton2.Text = "Annulla";
         btnModificaSottoProd.Text = "Salva";
 

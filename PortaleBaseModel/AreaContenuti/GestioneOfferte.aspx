@@ -1141,7 +1141,7 @@
                                                         <asp:Label runat="server" ID="Label59" Text="Nome 1 Livello FR"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdFR" runat="server"></asp:TextBox>
+                                                        <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdFr" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1228,7 +1228,7 @@
                                                             <asp:Label runat="server" ID="Label60" Text="Nome 2 Livello FR"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottFR" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottFr" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
