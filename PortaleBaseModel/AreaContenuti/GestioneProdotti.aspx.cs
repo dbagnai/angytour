@@ -1611,13 +1611,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
             NomeNuovoProdEng.Text = "";
 
-        if (prodottoEng != null)
+        if (prodottoRu != null)
             NomeNuovoProdRu.Text = prodottoRu.Descrizione;
         else
             NomeNuovoProdRu.Text = "";
 
-        if (prodottoEng != null)
-            NomeNuovoProdFr.Text = prodottoRu.Descrizione;
+        if (prodottoFR != null)
+            NomeNuovoProdFr.Text = prodottoFR.Descrizione;
         else
             NomeNuovoProdFr.Text = "";
 
