@@ -292,6 +292,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     //}
 
 
+
     private List<SProdotto> RiordinaSpecialeSottoprodotti(List<SProdotto> prodotti, string orderedcodes)
     {
         List<SProdotto> orderedlist = new List<SProdotto>();
@@ -310,9 +311,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                         orderedlist.Add(p);
                 }
             }
-            else
-                orderedlist = prodotti;
+
         }
+        else
+            orderedlist = prodotti;
         return orderedlist;
     }
 
