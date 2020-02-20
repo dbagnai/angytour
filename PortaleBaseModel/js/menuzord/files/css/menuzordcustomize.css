@@ -21,7 +21,7 @@
     overflow: visible;
     width: 100%;
     top: 0px;
-    z-index: 999;
+    z-index: 97;
     background-color: #ccc;
     /*background-color: #eee
     /*overflow: hidden;*/
@@ -35,7 +35,7 @@
     /*background-color: #809193;*/
     padding: 5px;
     height: auto;
-    z-index: 1000;
+    z-index: 97;
 }
 
 .fixedtop .btn-default {
@@ -72,7 +72,7 @@
     position: fixed;
     width: 100%;
     top: 40px;
-    z-index: 998;
+    z-index: 97;
     background-color: #ffffff;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -91,7 +91,7 @@
     position: absolute;
     width: 100%;
     top: 60px;
-    z-index: 998;
+    z-index: 97;
     background-color: #1f809f;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -109,7 +109,7 @@
     position: fixed;
     width: 100%;
     top: 60px;
-    z-index: 998;
+    z-index: 97;
     background-color: #1f809f;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -132,7 +132,7 @@
     }
 }
 
- 
+
 .bckColor2 {
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -165,12 +165,11 @@
 }
 
 .fulllogobckdark {
- 
     /*width: 400px;
     height: 119px;*/
     padding: 5px;
     background: url(/images/main_logo_d.png) center center;
-    background-size: 95%;
+    background-size: 100%;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
@@ -216,7 +215,6 @@
     .menuzord.orange .menuzord-menu ul.dropdown li:hover > a {
         background: none;
         color: #fff;
-         
     }
 
     .menuzord.orange .showhide em {
@@ -292,7 +290,6 @@
 .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
     background: none;
     /*color: #fff;*/
- 
 }
 
 .menuzord.white .showhide em {
@@ -372,7 +369,6 @@
 
 .menuzord-menu > li > a {
     font-size: 1rem;
-   
     text-transform: uppercase;
     color: #444;
     padding: 8px 16px;
@@ -410,16 +406,6 @@
     height: auto;
 }
 
-@media (max-width: 1179px) {
-    .menuzord-menu > li {
-        padding: 4px 3px !important;
-    }
-
-        .menuzord-menu > li > a {
-            line-height: normal;
-            padding: 8px 5px !important;
-        }
-}
 
 @media (max-width: 1179px) {
     .fulllogobckdark {
@@ -437,6 +423,8 @@
         height: 61px;
     }
 
+
+
     .menuzord-menu > li {
         padding: 0 !important;
         margin-top: 0;
@@ -446,10 +434,12 @@
         margin-top: 0;
     }
 
-        .menuzord-menu > li > a {
-            line-height: normal;
-            padding: 8px 5px !important;
-        }
+    .menuzord-menu > li > a {
+        line-height: normal;
+        padding: 8px 5px !important;
+    }
+
+
 
     .menuzord {
         min-height: 60px;
