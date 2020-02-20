@@ -299,7 +299,7 @@ website:   	http://www.themepunch.com
     border-style: none;
     /*white-space: nowrap;*/
     padding: 20px 20px;
-    background-color: rgba(0,0,0,0.1);
+    /*background-color: rgba(0,0,0,0.1);*/
     height: 100%;
     max-width:600px;
     text-align:left;
