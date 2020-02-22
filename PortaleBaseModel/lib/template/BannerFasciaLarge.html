@@ -1,4 +1,14 @@
-﻿<div class="cycle-slideshow newslider" id="replaceid" data-cycle-timeout="3000" data-cycle-speed="2000" data-cycle-pause-on-hover="true" data-cycle-slides="> div" data-cycle-auto-height="container">
+﻿<style>
+    .slidercycle > div {
+        display: none
+    }
+
+        .slidercycle > div:nth-child(1) {
+            display: block
+        }
+</style>
+
+<div class="cycle-slideshow newslider" id="replaceid" data-cycle-timeout="3000" data-cycle-speed="2000" data-cycle-pause-on-hover="true" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95" class="slidercycle">
     <div class="section-content section-px">
         <div class="row bnrBack2  align-items-center">
             <div class="col-xs-12">
@@ -11,7 +21,7 @@
                     </div>
                 </a>
             </div>
-			
+
             <div class="col-xs-12 side-image-content textBanner d-xs-block d-sm-none">
                 <div style="text-align:center; top:20%; left:0; bottom:0; right:0; vertical-align:middle; width:100%; font-weight:400; min-height:100px;" class="pull-center">
                     <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>

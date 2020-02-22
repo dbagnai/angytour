@@ -136,8 +136,9 @@ public class GenericRouteHandler : IRouteHandler
             //return new RedirectHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione));
             return new ErrorHandler(CommonPage.ReplaceAbsoluteLinks(Pathdestinazione)); //non va bene apre la pagina di default 404 di iis
         }
-
-        return BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
+        Page renderedpage = BuildManager.CreateInstanceFromVirtualPath(Pathdestinazione, typeof(Page)) as Page;
+         
+        return renderedpage;
     }
 }
 

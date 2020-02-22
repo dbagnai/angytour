@@ -211,13 +211,21 @@ public class CommonPage : Page
         return "?v=" + modification.ToString("ddMMyyHHmmss");
     }
 
+    
+
     /// <summary>
     /// SPOSTA IL VIEWSTATE IN FONDO ALLA PAGINA PER 
     /// </summary>
     /// <param name="writer"></param>
     protected override void Render(System.Web.UI.HtmlTextWriter writer)
     {
-        System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+
+        //if (cachedurl)
+        //    writer( htmldachache)
+        //        else standard renderd
+
+
+            System.IO.StringWriter stringWriter = new System.IO.StringWriter();
         HtmlTextWriter htmlWriter = new HtmlTextWriter(stringWriter);
         base.Render(htmlWriter);
         string html = stringWriter.ToString();
@@ -242,7 +250,7 @@ public class CommonPage : Page
         if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
             html = NUglify.Uglify.Html(html).Code; 
 #endif
-
+        // da salvare l'html per la cache in corrispondenza dell' Request.RawUrl
 
         writer.Write(html);
     }
