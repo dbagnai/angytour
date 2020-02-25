@@ -1625,6 +1625,9 @@ a.btn-black-outline:hover,
 .btn .btn-black:hover,
 a.btn-black-outline:active,
 a.btn-black-outline:focus,
+a.btn-transparent-outline:hover,
+.btn-transparent-outline:hover,
+.btn .btn-transparent:hover,
 .btn-banner,
 .btn-banner:active,
 .btn-banner:visited,
@@ -1643,6 +1646,13 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
 .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
 li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
 .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.btn-transparent-outline,
+.btn-transparentoutline:active,
+.btn-transparent-outline:visited,
+.btn-transparent-outline:focus .btn .btn-transparent,
+.btn .btn-transparent:active,
+.btn .btn-transparentk:visited,
+.btn .btn-transparent:focus,
 .btn-banner:hover,
 .btn-banner:hover,
 .btn .btn-banner:hover,
@@ -1690,7 +1700,14 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
 }
 a.btn-black-outline:hover,
 .btn-black-outline:hover,
-.btn .btn-black:hover {
+.btn .btn-black:hover,
+.btn-transparent-outline,
+.btn-transparentoutline:active,
+.btn-transparent-outline:visited,
+.btn-transparent-outline:focus .btn .btn-transparent,
+.btn .btn-transparent:active,
+.btn .btn-transparentk:visited,
+.btn .btn-transparent:focus {
   color: #fff !important;
   background: #032f2f !important;
   border-color: #032f2f;
@@ -1706,6 +1723,21 @@ a.btn-black-outline:focus {
   opacity: 1;
   text-decoration: none !important;
   border: 1px solid #f3c649;
+}
+/* BOTTONE TRASPARENTE */
+.btn-transparent-outline,
+.btn-transparentoutline:active,
+.btn-transparent-outline:visited,
+.btn-transparent-outline:focus .btn .btn-transparent,
+.btn .btn-transparent:active,
+.btn .btn-transparentk:visited,
+.btn .btn-transparent:focus {
+  opacity: 1;
+}
+a.btn-transparent-outline:hover,
+.btn-transparent-outline:hover,
+.btn .btn-transparent:hover {
+  opacity: 1;
 }
 /* BOTTONI SPECIALE menù RISTORANTI */
 a.btn-black-outline.restaurant-menu,
@@ -3721,14 +3753,17 @@ select.form-control:not([size]):not([multiple]) {
     transform: translate(-100%, -50%);
   }
   /*tolgo l'effetto al pulsante prenota*/
-  .menuzord-menu li:nth-child(7) a:before,
-  .menuzord-menu li:nth-child(7) a:after {
+  .menuzord-menu li:nth-child(8) a:before,
+  .menuzord-menu li:nth-child(8) a:after {
     border: none;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
   }
-  .menuzord-menu li:nth-child(7) a {
+  .menuzord-menu li:nth-child(8) a {
     padding: 8px 16px 8px !important;
+  }
+  .menuzord-menu li:nth-child(8) a span {
+    color: #fff !important;
   }
   .menuzord-menu li a:hover:before,
   .menuzord-menu li .current a:before,

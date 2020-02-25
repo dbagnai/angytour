@@ -57,17 +57,16 @@
             ----------------------------->
             <div class="col-12 col-lg-4">
                 <div class="row d-flex justify-content-center d-lg-block mx-lg-0">
-                    <h1 itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
+                    <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                            <span class="bind tx-dark-color" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
-                            <span style="font-size: 70%" class="bind tx-dark-color" mybind="Id" myvalue="titolo" format="formatsubtitle">
-                            </span>
+                            <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                            <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
                         </a>
-                    </h1>
+                    </div>
 
                     <!----------------------------------------------
-    ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
-    ----------------------------------------------->
+                    ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
+                    ----------------------------------------------->
                     <!--<div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3 border-top bd-primary-color" >-->
                     <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3">
                         <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
@@ -81,19 +80,19 @@
                         </div>
 
                         <!--<div class="clearfix"></div>
-    <div class="blog-post-details-item blog-post-details-item-left" style="display:none;">
-        <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
-        <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
-        <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
-        <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
-        <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
-    </div>
+                        <div class="blog-post-details-item blog-post-details-item-left" style="display:none;">
+                            <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
+                            <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
+                            <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
+                            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
+                            <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
+                        </div>
 
-    <div class="blog-post-details-item blog-post-details-item-left">
-        <span class="bind" mybind="CodiceRegione" format="frmregione"></span>
-        <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
-        <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
-    </div>-->
+                        <div class="blog-post-details-item blog-post-details-item-left">
+                            <span class="bind" mybind="CodiceRegione" format="frmregione"></span>
+                            <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span>
+                            <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
+                        </div>-->
                     </div>
 
                     <!------------------ COLONNA RIGTH STELLINE --------------->
@@ -113,22 +112,22 @@
                     <div id="carrellos1" class="bind carellotool w-100 mt-3 mt-lg-0 px-3 px-lg-0" mybind="Id">
 
                         <!--<div class="float-right table-col ecomctr" id="carrellos1messages"></div>
-    <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
-        <div style="display:table;margin: 10px auto 0px auto;position:relative">
-            <div class="ecomctr-group">
-                <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
-                <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
-                <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:9999"></div>
-            </div>
-        </div>
-    </div>-->
+                        <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
+                            <div style="display:table;margin: 10px auto 0px auto;position:relative">
+                                <div class="ecomctr-group">
+                                    <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
+                                    <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
+                                    <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:9999"></div>
+                                </div>
+                            </div>
+                        </div>-->
                         <!--<div class="w-100">
-        <div class="float-left table-col" id="carrellos1minus"></div>
-        <div class="float-left table-col px-1" id="carrellos1qty"></div>
-        <div class="float-left table-col" id="carrellos1plus"></div>
+                            <div class="float-left table-col" id="carrellos1minus"></div>
+                            <div class="float-left table-col px-1" id="carrellos1qty"></div>
+                            <div class="float-left table-col" id="carrellos1plus"></div>
 
-        <div class="float-right table-col bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
-    </div>-->
+                            <div class="float-right table-col bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
+                        </div>-->
 
                         <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
                         <div class="w-100 px-2 py-3 bg-light-color border bd-primary-color">
@@ -158,29 +157,29 @@
                     </div>
                     <!-- FINE SEZIONE GESTIONE CARRELLO -->
                     <!---------------------------------
-    ------ COLONNA 2 DESCRIZIONE ------
-    ---------------------------------->
+                    ------ COLONNA 2 DESCRIZIONE ------
+                    ---------------------------------->
                     <!--<div class="blog-post-body text-center text-md-left my-4" style="line-height: 1.6rem;" itemprop="description">
-        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
-    </div>-->
+                        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                    </div>-->
                     <!------------------------------
-    ------ COLONNA 2 PULSANTI ------
-    ------------------------------->
+                    ------ COLONNA 2 PULSANTI ------
+                    ------------------------------->
                     <!--<div class="clearfix"></div>
-    <div class="col-12" style="margin: 5px auto;">
-        <div class="row">
-            <a rel="nofollow, noindex" class="bind btn" style="width: 100%;" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
-        </div>
-        <div class="col-sm-6" style="margin: 5px 0;">
-            <a rel="nofollow, noindex" class="bind btn" style="width: 100%;background-color: #e19f3f;border-color: #e19f3f;" target="_blank" href="prenotalink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoid2" format="formatlabelresource"></span><i class="fa fa-calendar"></i>Prenota</a>
-        </div>
-        <div class="col-sm-6">
-            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
-        </div>
-        <div class="col-sm-4">
-            <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
-        </div>
-    </div>-->
+                    <div class="col-12" style="margin: 5px auto;">
+                        <div class="row">
+                            <a rel="nofollow, noindex" class="bind btn" style="width: 100%;" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
+                        </div>
+                        <div class="col-sm-6" style="margin: 5px 0;">
+                            <a rel="nofollow, noindex" class="bind btn" style="width: 100%;background-color: #e19f3f;border-color: #e19f3f;" target="_blank" href="prenotalink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoid2" format="formatlabelresource"></span><i class="fa fa-calendar"></i>Prenota</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
+                        </div>
+                    </div>-->
 
                 </div>
             </div>
@@ -239,7 +238,7 @@
 
                             <div class="row">
                                 <div class="col mr-3">
-                                    <a  rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
                                         <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
                                         </div>
                                     </a>
@@ -248,7 +247,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a  rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
                                         <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
                                         </div>
                                     </a>

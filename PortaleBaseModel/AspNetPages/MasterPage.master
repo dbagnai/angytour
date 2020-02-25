@@ -284,16 +284,16 @@
                     <%--<%= CreaLinkTipologie(7,7) %>--%>
                     <%-- Servizi - Punti di forza - prodotti --%>
                     <%--<%= CreaLinkTipologie(3,3) %>--%>
-
+                    <%-- Portfolio --%>
+                    <%= CreaLinkTipologie(5,5) %>
                     <%-- Offerte --%>
-                    <%--<%= CreaLinkTipologie(5,5) %>--%>
                     <li runat="server">
                         <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
                     </li>
                     <%-- Gallery --%>
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
                     <%-- Esperienze --%>
-                    <%= CreaLinkTipologie(8,8) %>
+                    <%--<%= CreaLinkTipologie(8,8) %>--%>
                     <%--TESTIMONIALS--%>
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>

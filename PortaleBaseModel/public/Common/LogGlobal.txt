@@ -63,3 +63,31 @@
 <Messaggio>httplocalhost52646Generato sitemap  24/02/2020 19:14:59</Messaggio>
  <Data>24/02/2020 19:14:59</Data>
 <Messaggio>httplocalhost52646Generato sitemap  24/02/2020 19:14:59Terminato Aggiornamento  24/02/2020 19:14:59</Messaggio>
+ <Data>25/02/2020 09:07:44</Data>
+<Messaggio> Application start : 25/02/2020 09:07:41</Messaggio>
+ <Data>25/02/2020 09:07:44</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>25/02/2020 09:08:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:08:44</Messaggio>
+ <Data>25/02/2020 09:08:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:08:44Terminato Aggiornamento  25/02/2020 09:08:44</Messaggio>
+ <Data>25/02/2020 09:13:14</Data>
+<Messaggio> Application start : 25/02/2020 09:13:13</Messaggio>
+ <Data>25/02/2020 09:13:14</Data>
+<Messaggio> Global init original path: http://localhost:52646/WebResource.axd?d=YEU54wYdxkXqIfmchhKn9f8S0scvacvmL9mUtsfsDIcn4jl35oSnwAe75S-e9dXPqOPL3PSoyrlPqEybKBjaskbEtPCxMRWZjP4gDpGFUFg1&t=637100866300000000 Global init AbsolutePath : /WebResource.axd Global init ApplicationPath : / Global init Query : ?d=YEU54wYdxkXqIfmchhKn9f8S0scvacvmL9mUtsfsDIcn4jl35oSnwAe75S-e9dXPqOPL3PSoyrlPqEybKBjaskbEtPCxMRWZjP4gDpGFUFg1&t=637100866300000000 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>25/02/2020 09:13:27</Data>
+<Messaggio> Application start : 25/02/2020 09:13:27</Messaggio>
+ <Data>25/02/2020 09:13:27</Data>
+<Messaggio> Global init original path: http://localhost:52646/WebResource.axd?d=YEU54wYdxkXqIfmchhKn9f8S0scvacvmL9mUtsfsDIcn4jl35oSnwAe75S-e9dXPqOPL3PSoyrlPqEybKBjaskbEtPCxMRWZjP4gDpGFUFg1&t=637100866300000000 Global init AbsolutePath : /WebResource.axd Global init ApplicationPath : / Global init Query : ?d=YEU54wYdxkXqIfmchhKn9f8S0scvacvmL9mUtsfsDIcn4jl35oSnwAe75S-e9dXPqOPL3PSoyrlPqEybKBjaskbEtPCxMRWZjP4gDpGFUFg1&t=637100866300000000 Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>25/02/2020 09:14:27</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:14:27</Messaggio>
+ <Data>25/02/2020 09:14:27</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:14:27Terminato Aggiornamento  25/02/2020 09:14:27</Messaggio>
+ <Data>25/02/2020 09:50:45</Data>
+<Messaggio> Application start : 25/02/2020 09:50:45</Messaggio>
+ <Data>25/02/2020 09:50:45</Data>
+<Messaggio> Global init original path: http://localhost:52646/it/portfolio/lavoro-1-sottotitolo-37 Global init AbsolutePath : /it/portfolio/lavoro-1-sottotitolo-37 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>25/02/2020 09:51:45</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:51:45</Messaggio>
+ <Data>25/02/2020 09:51:45</Data>
+<Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:51:45Terminato Aggiornamento  25/02/2020 09:51:45</Messaggio>

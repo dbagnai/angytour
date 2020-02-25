@@ -1788,6 +1788,21 @@ a.btn-black-outline:active, a.btn-black-outline:focus {
     border: 1px solid @bg-button-color;
 }
 
+/* BOTTONE TRASPARENTE */
+.btn-transparent-outline, .btn-transparentoutline:active, .btn-transparent-outline:visited, .btn-transparent-outline:focus .btn .btn-transparent, .btn .btn-transparent:active, .btn .btn-transparentk:visited, .btn .btn-transparent:focus {
+    &:extend(.btn-black-outline:hover);
+    opacity: 1;
+}
+
+a.btn-transparent-outline:hover, .btn-transparent-outline:hover, .btn .btn-transparent:hover {
+    &:extend(.btn-black-outline);
+    opacity: 1;
+}
+
+a.btn-transparent-outline:active, a.btn-transparent-outline:focus {
+    &:extend(.ack-outline:hover);
+}
+
 /* BOTTONI SPECIALE menù RISTORANTI */
 a.btn-black-outline.restaurant-menu, a.divbuttonstyle.restaurant-menu {
     font-size: 1em;
@@ -4055,14 +4070,18 @@ select.form-control:not([size]):not([multiple]) {
         transform: translate(-100%, -50%);
     }
     /*tolgo l'effetto al pulsante prenota*/
-    .menuzord-menu li:nth-child(7) a:before, .menuzord-menu li:nth-child(7) a:after {
+    .menuzord-menu li:nth-child(8) a:before, .menuzord-menu li:nth-child(8) a:after {
         border: none;
         padding-top: 6px !important;
         padding-bottom: 6px !important;
     }
 
-    .menuzord-menu li:nth-child(7) a {
+    .menuzord-menu li:nth-child(8) a {
         padding: 8px 16px 8px !important;
+    }
+
+    .menuzord-menu li:nth-child(8) a span {
+        color: #fff !important;
     }
 
     .menuzord-menu li a:hover:before,
