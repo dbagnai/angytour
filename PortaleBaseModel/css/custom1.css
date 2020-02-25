@@ -2742,7 +2742,7 @@ select.input-small {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
-    z-index: 800;
+    z-index: 1;
 }
 
 .product-price {

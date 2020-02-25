@@ -4,10 +4,21 @@
     <title>Webmousers Blog Commenti</title>
     <link>http://localhost:52646</link>
     <description>Webmousers Blog</description>
-    <lastBuildDate>Wed, 17 Apr 2019 19:17:28 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 19:15:03 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2019-04-17T19:17+02:00</sy:updateBase>
+    <sy:updateBase>2020-02-24T19:15+01:00</sy:updateBase>
     <language>it-IT</language>
+    <item>
+      <title>testo commento 1
+sottotitolo</title>
+      <link>http://localhost:52646/it/commenti/testo-commento-1-sottotitolo-1</link>
+      <guid isPermaLink="true">http://localhost:52646/it/commenti/testo-commento-1-sottotitolo-1</guid>
+      <pubDate>Mon, 19 Dec 2016 00:00:00 +01:00</pubDate>
+      <category>Commenti</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="testo commento 1
+sottotitolo" width="350" /><p>Lorem ipsum ...</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/commenti/testo-commento-1-sottotitolo-1"><em>testo commento 1
+sottotitolo</em></a>.</p>]]></description>
+    </item>
   </channel>
 </rss>

@@ -1,56 +1,78 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Webmousers Blog Consigli</title>
+    <title>Webmousers Blog Ceramiche catalogo</title>
     <link>http://localhost:52646</link>
     <description>Webmousers Blog</description>
-    <lastBuildDate>Wed, 17 Apr 2019 19:17:28 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 19:15:03 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2019-04-17T19:17+02:00</sy:updateBase>
+    <sy:updateBase>2020-02-24T19:15+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>consiglio 3
+      <title>lampade
 sottotitolo</title>
-      <link>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-31</link>
-      <guid isPermaLink="true">http://localhost:52646/it/consigli/consiglio-3-sottotitolo-31</guid>
+      <link>http://localhost:52646/it/ceramiche-catalogo/lampade-sottotitolo-62</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/lampade-sottotitolo-62</guid>
+      <pubDate>Thu, 12 Jul 2018 12:20:42 +02:00</pubDate>
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="lampade
+sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/lampade-sottotitolo-62"><em>lampade
+sottotitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>vasi
+sototitolo</title>
+      <link>http://localhost:52646/it/ceramiche-catalogo/vasi-sototitolo-48</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/vasi-sototitolo-48</guid>
+      <pubDate>Mon, 11 Jun 2018 12:48:11 +02:00</pubDate>
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="vasi
+sototitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/vasi-sototitolo-48"><em>vasi
+sototitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>oggettistica
+sototitolo</title>
+      <link>http://localhost:52646/it/ceramiche-catalogo/oggettistica-sototitolo-47</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/oggettistica-sototitolo-47</guid>
+      <pubDate>Mon, 11 Jun 2018 12:48:00 +02:00</pubDate>
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="oggettistica
+sototitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/oggettistica-sototitolo-47"><em>oggettistica
+sototitolo</em></a>.</p>]]></description>
+    </item>
+    <item>
+      <title>piatti
+sottotitolo</title>
+      <link>http://localhost:52646/it/ceramiche-catalogo/piatti-sottotitolo-31</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/piatti-sottotitolo-31</guid>
       <pubDate>Wed, 30 May 2018 10:47:28 +02:00</pubDate>
-      <category>Consigli</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="consiglio 3
-sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan purus finibus non. Pellentesque molestie eros et turpis efficitur, non congue lectus sollicitudin. Vestibulum scelerisque justo dolor, eget sollicitudin elit pellentesque laoreet. Curabitur vel tellus eu est tempus ultrices commodo eget velit. Nunc interdum pretium turpis. Vivamus tristique dictum tempus. Ut euismod lectus eget tellus congue faucibus. Cras ullamcorper enim quis nisl condimentum, id porta nisl aliquam. Praesent a justo sit amet lectus dictum volutpat in vitae mauris. Vestibulum molestie, mi id dignissim fermentum, nibh quam vehicula lorem, vel iaculis sem tellus eu turpis.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/consigli/consiglio-3-sottotitolo-31"><em>consiglio 3
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/31/Antantsample-banner.jpg" alt="piatti
+sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/piatti-sottotitolo-31"><em>piatti
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>consiglio 3
+      <title>tavoli
 sottotitolo</title>
-      <link>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-25</link>
-      <guid isPermaLink="true">http://localhost:52646/it/consigli/consiglio-3-sottotitolo-25</guid>
+      <link>http://localhost:52646/it/ceramiche-catalogo/tavoli-sottotitolo-25</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/tavoli-sottotitolo-25</guid>
       <pubDate>Thu, 03 May 2018 11:58:02 +02:00</pubDate>
-      <category>Consigli</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="consiglio 3
-sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan purus finibus non. Pellentesque molestie eros et turpis efficitur, non congue lectus sollicitudin. Vestibulum scelerisque justo dolor, eget sollicitudin elit pellentesque laoreet. Curabitur vel tellus eu est tempus ultrices commodo eget velit. Nunc interdum pretium turpis. Vivamus tristique dictum tempus. Ut euismod lectus eget tellus congue faucibus. Cras ullamcorper enim quis nisl condimentum, id porta nisl aliquam. Praesent a justo sit amet lectus dictum volutpat in vitae mauris. Vestibulum molestie, mi id dignissim fermentum, nibh quam vehicula lorem, vel iaculis sem tellus eu turpis.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/consigli/consiglio-3-sottotitolo-25"><em>consiglio 3
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/25/Antantsample-banner.jpg" alt="tavoli
+sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/tavoli-sottotitolo-25"><em>tavoli
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title>consiglio 2
+      <title>natale
 sottotitolo</title>
-      <link>http://localhost:52646/it/consigli/consiglio-2-sottotitolo-24</link>
-      <guid isPermaLink="true">http://localhost:52646/it/consigli/consiglio-2-sottotitolo-24</guid>
+      <link>http://localhost:52646/it/ceramiche-catalogo/natale-sottotitolo-24</link>
+      <guid isPermaLink="true">http://localhost:52646/it/ceramiche-catalogo/natale-sottotitolo-24</guid>
       <pubDate>Thu, 03 May 2018 11:56:07 +02:00</pubDate>
-      <category>Consigli</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="consiglio 2
-sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan purus finibus non. Pellentesque molestie eros et turpis efficitur, non congue lectus sollicitudin. Vestibulum scelerisque justo dolor, eget sollicitudin elit pellentesque laoreet. Curabitur vel tellus eu est tempus ultrices commodo eget velit. Nunc interdum pretium turpis. Vivamus tristique dictum tempus. Ut euismod lectus eget tellus congue faucibus. Cras ullamcorper enim quis nisl condimentum, id porta nisl aliquam. Praesent a justo sit amet lectus dictum volutpat in vitae mauris. Vestibulum molestie, mi id dignissim fermentum, nibh quam vehicula lorem, vel iaculis sem tellus eu turpis.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/consigli/consiglio-2-sottotitolo-24"><em>consiglio 2
-sottotitolo</em></a>.</p>]]></description>
-    </item>
-    <item>
-      <title>consiglio 1
-sottotitolo</title>
-      <link>http://localhost:52646/it/consigli/consiglio-1-sottotitolo-19</link>
-      <guid isPermaLink="true">http://localhost:52646/it/consigli/consiglio-1-sottotitolo-19</guid>
-      <pubDate>Mon, 09 Apr 2018 15:47:12 +02:00</pubDate>
-      <category>Consigli</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="consiglio 1
-sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan purus finibus non. Pellentesque molestie eros et turpis efficitur, non congue lectus sollicitudin. Vestibulum scelerisque justo dolor, eget sollicitudin elit pellentesque laoreet. Curabitur vel tellus eu est tempus ultrices commodo eget velit. Nunc interdum pretium turpis. Vivamus tristique dictum tempus. Ut euismod lectus eget tellus congue faucibus. Cras ullamcorper enim quis nisl condimentum, id porta nisl aliquam. Praesent a justo sit amet lectus dictum volutpat in vitae mauris. Vestibulum molestie, mi id dignissim fermentum, nibh quam vehicula lorem, vel iaculis sem tellus eu turpis.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/consigli/consiglio-1-sottotitolo-19"><em>consiglio 1
+      <category>Ceramiche catalogo</category>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:52646/public/Files/rif000004/24/Antantsample-banner.jpg" alt="natale
+sottotitolo" width="350" /><p>Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.</p><p>Continua a leggere / Read More <a href="http://localhost:52646/it/ceramiche-catalogo/natale-sottotitolo-24"><em>natale
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

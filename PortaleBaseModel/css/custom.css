@@ -354,7 +354,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .bd-dark-color {
   border-color: #098f8f !important;
 }
-bd-sottomenu-color {
+.bd-sottomenu-color {
   border-color: #f3c649 !important;
 }
 .primary-color {
@@ -930,7 +930,7 @@ h1 span:nth-child(1).mbr-section-title,
   color: #032f2f;
   font-family: 'Fira Sans', sans-serif;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: none;
   font-style: normal;
   text-align: center;
@@ -939,6 +939,7 @@ h1 span:nth-child(1).mbr-section-title,
   margin: 0;
   word-break: break-word;
   word-wrap: break-word;
+  padding-bottom: 10px;
   /*Start svg decorazione sotto il titolo*/
   padding-bottom: 21px;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='rgba(243, 198, 73, 0.8)' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
@@ -2862,7 +2863,7 @@ ul.footer-category-list {
   color: #032f2f;
   font-family: 'Fira Sans', sans-serif;
   font-size: 1.4rem;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   margin-bottom: 0px;
 }
@@ -2878,53 +2879,53 @@ ul.footer-category-list {
   line-height: 2.5rem;
 }
 #isoBannav1 li .work-image:after {
-  background: url(/images/link1.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 10% !important;
 }
 #isoBannav1 li .work-image:hover:after,
 #isoBannav1 div .work-image:hover:after {
-  background: url(/images/link1.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
 }
 /* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
 .navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after,
 .navigazione-home #isoBannav1 div:nth-child(n+1) .work-image:after {
-  background-position: center calc((100% - 0px) / 2) !important;
+  background-position: center calc((100% - 0.1px) / 2) !important;
   background-size: 10% !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(1) .work-image:hover:after {
-  background: url(/images/icon-trattore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-trattore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(2) .work-image:hover:after {
-  background: url(/images/icon-spina.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-spina.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(3) .work-image:hover:after {
-  background: url(/images/icon-ingranaggio.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-ingranaggio.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(4) .work-image:hover:after {
-  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(5) .work-image:hover:after {
-  background: url(/images/icon-paletta-dx.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-paletta-dx.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(6) .work-image:hover:after {
-  background: url(/images/icon-tubo.png) center calc((100% - 0px) / 2) no-repeat !important;
+  background: url(/images/icon-tubo.png) center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -2934,50 +2935,151 @@ ul.footer-category-list {
 /*----------------------------------------------------------------------
 ---- BANNER NAVIGAZIONE METODO LAVORO 1 -> 2 -> 3 tipo hospitality -----
 ------------------------------------------------------------------------*/
-#divContainerNavCampionatura li:nth-child(-n+3)::after {
-  position: absolute;
-  top: 20px;
-  left: 75px;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 50%;
-  background-color: #f3c649;
-  color: white;
-  font-size: 2rem;
-  font-weight: 400;
-  text-align: center;
-  box-shadow: 0 4px 6px -6px #000;
+#divContainerNavCampionatura {
+  background-color: rgba(255, 255, 255, 0.5);
 }
-#divContainerNavCampionatura li:nth-child(1)::after {
-  content: "1";
+@media (max-width: 579px) {
+  #divContainerNavCampionatura .works-grid-4 .work-item,
+  #divContainerNavMetodo .works-grid-4 .work-item {
+    width: 49.999%;
+  }
+  .img-overlay,
+  #divContainerNavMetodo .img-overlay {
+    border: none !important;
+    border-radius: 0% !important;
+  }
+  #divContainerNavMetodo img {
+    padding: 5% !important;
+  }
+  #divContainerNavCampionatura li:nth-child(2),
+  #divContainerNavCampionatura li:nth-child(4),
+  #divContainerNavMetodo li:nth-child(2),
+  #divContainerNavMetodo li:nth-child(4) {
+    padding: 5px !important;
+  }
 }
-#divContainerNavCampionatura li:nth-child(2)::after {
-  content: "2";
+@media (min-width: 579px) {
+  #divContainerNavCampionatura li:nth-child(n+1)::after,
+  #divContainerNavMetodo li:nth-child(n+1)::after {
+    position: absolute;
+    top: 25px;
+    left: 75px;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    border-radius: 50%;
+    background-color: #f3c649;
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 4px 6px -6px #000;
+  }
+  #divContainerNavMetodo li:nth-child(n+1)::after {
+    top: 0px;
+  }
+  #divContainerNavCampionatura li:nth-child(1)::after,
+  #divContainerNavMetodo li:nth-child(1)::after {
+    content: "1";
+  }
+  #divContainerNavCampionatura li:nth-child(2)::after,
+  #divContainerNavMetodo li:nth-child(2)::after {
+    content: "2";
+  }
+  #divContainerNavCampionatura li:nth-child(3)::after,
+  #divContainerNavMetodo li:nth-child(3)::after {
+    content: "3";
+    line-height: 40px;
+  }
+  #divContainerNavCampionatura li:nth-child(4)::after,
+  #divContainerNavMetodo li:nth-child(4)::after {
+    content: "4";
+  }
 }
-#divContainerNavCampionatura li:nth-child(3)::after {
-  content: "3";
+@media (max-width: 1200px) and (min-width: 768px) {
+  #divContainerNavNavCampionatura .works-grid-4 .work-item,
+  #divContainerNavMetodo .works-grid-4 .work-item {
+    width: 24.999%;
+  }
 }
 @media screen and (min-width: 1023px) {
-  #divContainerNavCampionatura li:nth-child(1) {
-    background-image: url(/images/freccia-sx.png);
-    background-position-x: right;
-    background-position-y: 75px;
-    background-size: 15%;
+  #divContainerNavCampionatura li:nth-child(n+1) {
     background-repeat: no-repeat;
-  }
-  #divContainerNavCampionatura li:nth-child(2) {
+    /*usare con icona ->*/
     background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
     background-position: top 75px left 0, top 75px right 0px;
     background-size: 15%;
-    background-repeat: no-repeat;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);*/
+    /*background-size: 7.5%;
+        background-position: top 35% left 0, top 35% right 0px;*/
   }
-  #divContainerNavCampionatura li:nth-child(3) {
-    background-image: url(/images/freccia-dx.png);
-    background-position-x: left;
+  #divContainerNavCampionatura li:first-child {
+    background-position-x: right;
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    background-image: url(/images/freccia-sx.png);
     background-position-y: 75px;
     background-size: 15%;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-sx.png);*/
+    /*background-size: 7.5%;
+        background-position-y: 35%;*/
+  }
+  #divContainerNavCampionatura li:last-child {
+    background-position-x: left;
     background-repeat: no-repeat;
+    margin-left: -1px;
+    /*usare con icona ->*/
+    background-image: url(/images/freccia-dx.png);
+    background-position-y: 75px;
+    background-size: 15%;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-dx.png);*/
+    /*background-size: 7.5%;
+        background-position-y: 35%;*/
+  }
+}
+/* METODO 1 -> 2 -> 3 tipo colosseo */
+#divContainerNavMetodo .img-overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+@media screen and (min-width: 1023px) {
+  #divContainerNavMetodo li:nth-child(n+1) {
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+        background-position: top 75px left 0, top 75px right 0px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);
+    background-size: 7.5%;
+    background-position: top 35% left 0, top 35% right 0px;
+  }
+  #divContainerNavMetodo li:first-child {
+    background-position-x: right;
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-sx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-sx.png);
+    background-size: 7.5%;
+    background-position-y: 35%;
+  }
+  #divContainerNavMetodo li:last-child {
+    background-position-x: left;
+    background-repeat: no-repeat;
+    margin-left: -1px;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-dx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-dx.png);
+    background-size: 7.5%;
+    background-position-y: 35%;
   }
 }
 /*--------------------------------------------
@@ -4511,10 +4613,12 @@ button.js-roundedpush:hover {
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI E COMMERCE CON SOTTO MENU PRODOTTI A VISTA*/
 .headerspacer {
   /*padding-top: calc(141px + 48px);*/
-  padding-top: calc(141px + 82px);
-  /*con sottomenu a vista con icome*/
   /*padding-top: 135px;*/
-  /*senza sottomenu a vista con icome*/
+  /*senza sottomenu a vista con icone*/
+  /*padding-top: calc(141px + 82px);*/
+  /*con sottomenu a vista con icone*/
+  padding-top: calc(141px + 82px - 16px);
+  /*con sottomenu a vista con icone + testate pagine*/
 }
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
@@ -4524,7 +4628,7 @@ button.js-roundedpush:hover {
 @media (max-width: 1179px) {
   .headerspacer,
   .headerspacer-home {
-    padding-top: 100px;
+    padding-top: 100px !important;
   }
 }
 /*.headerspacer-home {
@@ -4539,9 +4643,12 @@ button.js-roundedpush:hover {
   /*max-height: 480px;*/
 }
 @media (max-width: 767px) {
-  #divContainerb1,
-  #divContainerb2 {
+  #divContainerb1 {
     height: calc(100vh - 90px) !important;
+  }
+  #divContainerb2 {
+    height: calc(50vh - 90px) !important;
+    /*testata pagine metà altezza*/
   }
 }
 .rev-slider-full {
@@ -4723,11 +4830,12 @@ button.js-roundedpush:hover {
         }
     }*/
   /* Versione con gradiente sfumato */
+  /*&:extend(.gradient-overlay-righttoleft);*/
   /*&:extend(.gradient-overlay-lefttoright);*/
 }
+/*SOLO TESTATA HOME*/
 @media (min-width: 789px) {
-  .gradient-overlay-righttoleft,
-  .tp-caption.very_big_white {
+  .gradient-overlay-righttoleft {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0+40,0+40,0+46,0.37+61,0.49+75,0.65+92 */
     background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 46%, rgba(0, 0, 0, 0.37) 61%, rgba(0, 0, 0, 0.49) 75%, rgba(0, 0, 0, 0.65) 92%, rgba(0, 0, 0, 0.65) 100%);
     /* FF3.6-15 */
@@ -4761,6 +4869,18 @@ button.js-roundedpush:hover {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=1);
     /* IE6-9 */
   }
+  .gradient-overlay-top-bottom,
+  #divContainerb1 .tp-caption.very_big_white {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+8,0.49+25,0.37+39,0+54,0+60,0+60 */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 8%, rgba(0, 0, 0, 0.49) 25%, rgba(0, 0, 0, 0.37) 39%, rgba(0, 0, 0, 0) 54%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 8%, rgba(0, 0, 0, 0.49) 25%, rgba(0, 0, 0, 0.37) 39%, rgba(0, 0, 0, 0) 54%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 8%, rgba(0, 0, 0, 0.49) 25%, rgba(0, 0, 0, 0.37) 39%, rgba(0, 0, 0, 0) 54%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=0);
+    /* IE6-9 */
+  }
 }
 /*BANNER TESTATA HOME - 55% ON*/
 /*.tp-caption.sft.slidelink.hasclicklistener {
@@ -4780,6 +4900,7 @@ button.js-roundedpush:hover {
   text-align: center;
   white-space: unset;
   margin-bottom: 10px !important;
+  /*inizio script icona svg*/
   padding-bottom: 35px !important;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='rgba(243, 198, 73, 0.8)' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
   background-size: 135px 21px;
@@ -4839,7 +4960,7 @@ button.js-roundedpush:hover {
     box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
   }
   .headerspacer-home {
-    padding-top: 0;
+    padding-top: 0 !important;
   }
   .fulllogobckdark-home {
     width: 400px;
@@ -5457,11 +5578,17 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 /* fine callout con bordi */
 /* classi per scalatura forzata dei caratteri */
 .scalable-extrime,
-.scalablefont-extrime {
-  font-size: calc(30px + 2vw + 2vh + 2vmin);
+.scalablefont-extrim {
+  font-size: calc(30px + 2vw + 2vh + 2vmin) !important;
+  line-height: normal !important;
+}
+.scalablefont-testata-extrime {
+  font-size: calc(30px + 2vw + 1vh + 1vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-medium-extrime {
   font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-big {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
@@ -5469,16 +5596,21 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 .scalablefont-medium-big {
   font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-medium {
   font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin) !important;
+  /*line-height: normal !important;*/
 }
 .scalablefont-small-medium {
   font-size: calc(18px + 0.3vw + 0.3vh + 0.15vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-small {
   font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
+  line-height: normal !important;
 }
 .scalablefont-smallest {
   font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
+  line-height: normal !important;
 }

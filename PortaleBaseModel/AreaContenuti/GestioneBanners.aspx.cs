@@ -105,33 +105,37 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("headhomegallery"))
             {
-                ResizeWidth = 1800;
-                ResizeHeight = 1200;
+                ResizeWidth = 1900;
+                ResizeHeight = 9300;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("header-"))
             {
-                ResizeWidth = 1800;
-                ResizeHeight = 1200;
+                ResizeWidth = 1900;
+                ResizeHeight = 9300;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("header-h"))
             {
-                ResizeWidth = 1800;
-                ResizeHeight = 1200;
+                ResizeWidth = 1900;
+                ResizeHeight = 9300;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("rif00"))
             {
-                ResizeWidth = 1800;
-                ResizeHeight = 1200;
+                ResizeWidth = 1900;
+                ResizeHeight = 9300;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
-
+            if (Sezione.ToLower().Contains("header2-"))
+            {
+                ResizeWidth = 1800;
+                ResizeHeight = 450;
+            }
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("banner-portfolio-bg"))
             {
@@ -149,6 +153,16 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             {
                 ResizeWidth = 1500;
                 ResizeHeight = 750;
+            }
+            if (Sezione.ToLower().Contains("banner-portfolio-sticky-mix"))
+            {
+                ResizeWidth = 1900;
+                ResizeHeight = 930;
+            }
+            if (Sezione.ToLower().Contains("banner-gallery-1"))
+            {
+                ResizeWidth = 1000;
+                ResizeHeight = 1000;
             }
             if (Sezione.ToLower().Contains("banners-testata-funnel"))
             {

@@ -630,6 +630,12 @@
                                                 <b class="arrow"></b>
                                             </li>
                                             <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-catalogo">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Navigazione Catalogo</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-ristorante">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Navigazione Ristorante</span></a>
@@ -744,6 +750,12 @@
                                                             <b class="arrow"></b>
                                                         </li>
                                             <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-mix">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Sticky image e text</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                            <li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-gallery-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Gallery</span></a>
@@ -759,6 +771,12 @@
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-processo-acquisto">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner Processo Acquisto</span></a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                            <li class="newLi hover">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-metodo-lavoro">
+                                                    <i class="menu-icon fa fa-caret-right"></i>
+                                                    <span class="menu-text">Banner Metodo lavoro</span></a>
                                                 <b class="arrow"></b>
                                             </li> 
                                             </ul>
@@ -786,7 +804,7 @@
 									<div class="panel-body" style="padding: 0 0 0 15px;">
                                         <ul class="submenu display-active">
                                             <li class="newLi hover">
-                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-bassa-1">
+                                                <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header2-bassa-1">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Testate Pagina bassa</span></a>
                                                 <b class="arrow"></b>

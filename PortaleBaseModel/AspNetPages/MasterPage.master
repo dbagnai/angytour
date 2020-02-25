@@ -270,7 +270,8 @@
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
 
                     <%-- Ceramiche Ficola --%>
-                    <%= CreaLinkTipologie(3,3) %>
+                    <%= CreaLinkPaginastatica(1) %>
+                    <%--<%= CreaLinkTipologie(3,3) %>--%>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>

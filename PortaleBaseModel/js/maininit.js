@@ -1052,3 +1052,28 @@ function io_callback2(entries, observer) {
         entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
     });
 }
+
+/* ---------------------------------------------- /*
+     * ANIMA ELEMENTO SCROLL TEXT/IMAGE CON OBSERVER ELEMENT 3 => ingrandimento banner
+    /* ---------------------------------------------- */
+const stickyContainers3 = document.querySelectorAll('.show-on-scroll3');
+const io_options3 = {
+    //root: document.body,
+    //root: null,
+    //root: example4.querySelector('#alternate3'),
+    rootMargin: '0px 0px -68% 0px',
+    threshold: 0
+    //intersectionRatio: 1
+
+};
+const io_observer3 = new IntersectionObserver(io_callback3, io_options3);
+
+stickyContainers3.forEach(element => {
+    io_observer3.observe(element);
+});
+
+function io_callback3(entries, observer) {
+    entries.forEach(entry => {
+        entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+    });
+}
