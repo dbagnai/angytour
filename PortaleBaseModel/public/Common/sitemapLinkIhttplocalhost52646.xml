@@ -1,230 +1,590 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://localhost:52646/it/catalogo</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/tavoli-p30</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampade-p31</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampade-sottocategoria-1a-p311</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampade-sottocategoria-1b-p312</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/vasi-p32</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/oggettistica-p33</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/piatti-p34</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/natale-p35</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
     <loc>http://localhost:52646/it/blog</loc>
-    <lastmod>2019-04-17</lastmod>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/it/blog/notizie-p18</loc>
-    <lastmod>2019-04-17</lastmod>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/it/blog/normative-p19</loc>
-    <lastmod>2019-04-17</lastmod>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>http://localhost:52646/it/blog/video-p25</loc>
-    <lastmod>2019-04-17</lastmod>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/ceramiche-ficola</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/privati-p26</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/ceramiche-catalogo</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/aziende-p27</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/aziende-p21</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/privati-p22</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/aziende-p21</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/adr-p23</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/privati-p22</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/portfolio</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/compravendita-immobiliare-assistenza-per-acquistare-casa-43</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/gallery</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/tutela-della-persona-sottotitolo-42</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/staff</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/tutela-del-disabile-dalla-parte-di-chi-spesso-vede-negati-i-propri-diritti-36</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/esperienze</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/rapporti-di-locazione-sottotitolo-35</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/opinioni</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/successioni-ereditarie-eredita-e-successioni-34</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/responsabilita-medica-risarcimento-danni-danni-medici-33</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/cronaca-p36</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/infortunistica-stradale-risarcimento-danni-da-incidenti-32</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/eventi-p37</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/separazioni-e-divorzi-al-tuo-fianco-nella-crisi-familiare-28</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/video-p38</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/tutela-del-minore-garantire-il-proprio-figlio-nel-miglior-modo-possibile-27</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/info</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/contenzioso-bancario-sottotitolo-45</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/tutela-del-diritto-dautore-sottotitolo-44</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/livello-prodotti-1-p39</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/consulenza-legale-sottotitolo-41</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/livello-prodotti-2-p40</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/recupero-del-credito-sottotitolo-40</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/livello-prodotti-3-p41</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/tutela-del-marchio-sottotitolo-39</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-oferta-sottotitolo-offerta-80</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/gestione-rapporti-personale-rapporti-con-il-personale-38</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerta-sottotitolo-offerta-79</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-31</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerta-sottotitolo-offerta-78</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/servizi/contrattualistica-contratti-per-tutti-i-tipi-29</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerte-sottotitolo-offerte-77</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/consiglio-3-sottotitolo-25</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerte-sottotitolo-offerte-76</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/consiglio-2-sottotitolo-24</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerte-sottotitolo-offerte-75</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/ampio-parcheggio-sottotitolo-ampio-parcheggio-23</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/offerte/titolo-offerte-sottotitolo-offerte-74</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/hotel-sottotitolo-hotel-22</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-video-sottotitolo-73</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/test-prod-1-sdsds-21</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-video-sottotitolo-72</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/offerta-test-sottotitolo-20</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-video-sottotitolo-71</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/consigli/consiglio-1-sottotitolo-19</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-cronaca-sottotitolo-70</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/blog/prestito-inps-chi-puo-richiederlo-e-come-fare-per-ottenerlo-16</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/info/titolo-informazioni-sottotitolo-69</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/blog/smartphone-alla-guida-le-nuove-norme-15</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/info/titolo-informazioni-sottotitolo-68</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/blog/impugnare-il-matrimonio-del-padre-anziano-con-la-badante--possibile-cosa-si-puo-fare-14</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/info/titolo-informazioni-sottotitolo-67</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://localhost:52646/it/blog/chi-puo-richiedere-le-detrazioni-per-il-mantenimento-dei-figli-nuove-norme-13</loc>
-    <lastmod>2019-04-17</lastmod>
+    <loc>http://localhost:52646/it/info/titolo-informazioni-sottotitolo-66</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-cronaca-sottotitolo-65</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-evento-sottotitolo-per-2-app-64</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/comunicazioni/titolo-evento-sottotitolo-test-per-app-63</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/lampade-sottotitolo-62</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/natale-sottotitolo-61</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/piatti-decorato-modello-giuditta-60</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/oggettistica-sottotitolo-59</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/vaso-sottotitolo-58</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampada-sottotitolo-56</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampada-sottotiolo-55</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampada-sottotitolo-54</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampada-sottotitolo-53</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/lampada-sottotitolo-52</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/opinioni/nome-e-cognome-professione-51</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/opinioni/nome-e-cognome-professione-50</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/catalogo/tavolo-1-sottotitolo-49</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/vasi-sototitolo-48</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/oggettistica-sototitolo-47</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/esperienze/esperienza-sottotitolo-46</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/esperienze/esperienza-sottotitolo-45</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/esperienze/esperienza-sottotitolo-44</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/esperienze/esperienza-sottotitolo-43</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/staff/staff-competenza-42</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/staff/staff-competenza-41</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/staff/staff-competenza-40</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/staff/staff-competenza-39</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/staff/staff-competenza-38</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/portfolio/lavoro-1-sottotitolo-37</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/gallery/gallery-sottotitolo-gallery-36</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/gallery/gallery-sottotitolo-gallery-35</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/portfolio/lavoro-2-sottotitolo-20</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/portfolio/lavoro-3-sottotitolo-34</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/portfolio/lavoro-4-sottotitolo-33</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/portfolio/lavoro-5-sottotitolo-32</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/piatti-sottotitolo-31</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/notizia-1-sottotitolo-notizia-1-30</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-ficola/servizio1-sottotitolo-servizio-29</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-ficola/servizio2-sottotitolo-servizio-28</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-ficola/servizio3-sottotitolo-servizio-27</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-ficola/servizio4-sottotitolo-servizio-26</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/tavoli-sottotitolo-25</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/ceramiche-catalogo/natale-sottotitolo-24</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/gallery/gallery-sottotitolo-gallery-23</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/gallery/gallery-sottotitolo-gallery-22</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-internet-news-sottotitolo-3</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-interenet-2-sottotitolo-c-2</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-interenet-13-sottotitolo-16</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-interenet-12-sottotitolo-15</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-interenet-11-sottotitolo-14</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/blog/siti-interenet-10-sottotitolo-13</loc>
+    <lastmod>2020-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>http://localhost:52646/it/commenti/testo-commento-1-sottotitolo-1</loc>
+    <lastmod>2020-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
