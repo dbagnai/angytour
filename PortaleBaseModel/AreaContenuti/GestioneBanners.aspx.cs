@@ -105,32 +105,34 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("headhomegallery"))
             {
-                ResizeWidth = 1900;
-                ResizeHeight = 9300;
+                ResizeWidth = 1800;
+                ResizeHeight = 1200;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("header-"))
             {
-                ResizeWidth = 1900;
-                ResizeHeight = 9300;
+                ResizeWidth = 1800;
+                ResizeHeight = 1200;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("header-h"))
             {
-                ResizeWidth = 1900;
-                ResizeHeight = 9300;
+                ResizeWidth = 1800;
+                ResizeHeight = 1200;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
             if (Sezione.ToLower().Contains("rif00"))
             {
-                ResizeWidth = 1900;
-                ResizeHeight = 9300;
+                ResizeWidth = 1800;
+                ResizeHeight = 1200;
                 //ResizeWidth = 1905;// SE E-COMMERCE - BANNER OFFERTE
                 //ResizeHeight = 506;// SE E-COMMERCE - BANNER OFFERTE
             }
+
+
             if (Sezione.ToLower().Contains("header2-"))
             {
                 ResizeWidth = 1800;
