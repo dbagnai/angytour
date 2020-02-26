@@ -183,7 +183,7 @@
                     }
                 }
             }
-            string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet("https://www.webmouse.sm?caller=" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, 1252); //call test site
+            string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet("https://www.webmouse.sm?callerbase=" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, 1252); //call test site
 
         }
         catch (Exception errore)
