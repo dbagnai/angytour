@@ -710,6 +710,7 @@ namespace WelcomeLibrary.UF
                 }
                 catch
                 { }
+
                 //Corpo e soggetto del messaggio 
                 string soggetto = SoggettoMail.Replace("\r\n", "");
                 soggetto = soggetto.Replace("\r", "");

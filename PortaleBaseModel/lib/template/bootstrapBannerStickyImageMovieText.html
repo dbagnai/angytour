@@ -28,7 +28,7 @@
 
     #alternate3 section:not(:first-child) img {
         content: url("") !Important;
-        display:none;
+        display: none;
     }
 
     .black-overlay {
@@ -48,13 +48,13 @@
         position: -webkit-sticky;
         position: sticky;
         clip-path: inset(10% 10% 10% 10%);
-        transition:  clip-path 0.3s 0.0s ease-out;
+        transition: clip-path 0.3s 0.0s ease-out;
         will-change: clip-path;
     }
 
-    .stacking-slide-text.is-visible-text {
-        clip-path: inset(0% 0% 0% 0%)
-    }
+        .stacking-slide-text.is-visible-text {
+            clip-path: inset(0% 0% 0% 0%)
+        }
 
         .stacking-slide-text .card-container {
             max-width: 100% !important;
@@ -64,7 +64,7 @@
 
     .inline-text {
         opacity: 1;
-        transition:  opacity 0.3s 0.2s ease-out;
+        transition: opacity 0.3s 0.2s ease-out;
         will-change: opacity;
     }
 
@@ -80,7 +80,7 @@
     @media (max-width: 1025px) {
         .show-on-scroll3 {
             min-height: calc(100vh - 100px);
-            top:100px;
+            top: 100px;
         }
     }
 
@@ -113,13 +113,11 @@
             width: auto;
         }
     }
-
 </style>
 
 <div class="row">
     <div id="replaceid" class="mx-auto w-100">
         <section class="show-on-scroll3 stacking-slide-text">
-                       
             <div class="card text-white" style="overflow:hidden;background: none; border: none;">
                 <img class="d-block card-img bind border-0" src="" alt="" mybind="Id" />
                 <div class="black-overlay" style="position:absolute"></div>
@@ -133,9 +131,7 @@
                         </h4>
                     </div>
                 </div>
-
             </div>
-            
         </section>
     </div>
 </div>
