@@ -186,7 +186,7 @@
                                                             </Ajax:MaskedEditExtender>--%>
                                                                         <script>
                                                                             jQuery(function ($) {
-                                                                                $("#ctl00_ContentPlaceHolder1_txtAdulti").mask("99", { placeholder: " " });
+                                                                                $("#ctl00_ContentPlaceHolder1_txtAdulti").mask("99", { placeholder: " ", autoclear: false });
                                                                             });
                                                                         </script>
                                                                         <asp:TextBox ID="txtAdulti" Width="99%" runat="server"
@@ -199,7 +199,7 @@
 
                                                                         <script>
                                                                             jQuery(function ($) {
-                                                                                $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " " });
+                                                                                $("#ctl00_ContentPlaceHolder1_txtBambini").mask("99", { placeholder: " ", autoclear: false });
                                                                             });
                                                                         </script>
                                                                         <asp:TextBox ID="txtBambini" Width="99%" runat="server"

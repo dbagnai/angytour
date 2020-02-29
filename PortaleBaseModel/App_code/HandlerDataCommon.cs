@@ -193,6 +193,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     string bambini = (maildata.GetValueOrDefault("bambini") ?? "");
                     string arrivo = (maildata.GetValueOrDefault("arrivo") ?? "");
                     string partenza = (maildata.GetValueOrDefault("partenza") ?? "");
+                    string orario = (maildata.GetValueOrDefault("orario") ?? "");
+                    string location1 = (maildata.GetValueOrDefault("location1") ?? "");
+                    string datarichiesta = (maildata.GetValueOrDefault("datarichiesta") ?? "");
                     string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");
                     string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");
                     if ((maildata.GetValueOrDefault("consenso1") != null))
@@ -243,6 +246,16 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     {
                         Descrizione += " <br/> Arrivo richiesto:" + arrivo + " Partenza Richiesta: " + partenza;
                         Descrizione += " <br/> Numero adulti:" + adulti + " <br/> Numero bambini:" + bambini + " Alloggio : " + location;
+                    }
+
+                    if (tipocontenuto == "Prenotawed")
+                    {
+                        Descrizione += " <br/> Data richiesta:" + datarichiesta + " Orario Richiesto: " + orario;
+                    }
+                    if (tipocontenuto == "Prenotaapt")
+                    {
+                        Descrizione += " <br/> Ristorante:" + location1;
+                        Descrizione += " <br/> Data richiesta:" + datarichiesta + " Orario Richiesto: " + orario;
                     }
                     Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
                     Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + lingua;
