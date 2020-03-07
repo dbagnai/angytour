@@ -5659,8 +5659,8 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 @media (max-width: 500px) {
   .lead-action {
-    top: -10px;
-    right: 20px;
+    top: 5px;
+    right: 40px;
     z-index: 99;
   }
 }
@@ -5679,7 +5679,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   height: 50px;
   border-radius: 50%;
   padding: 0;
-  margin: 0.71428571em 1.42857143em;
+  /*margin: .7142857143em 1.4285714286em;*/
   display: flex;
   align-items: center;
   justify-content: center;
