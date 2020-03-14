@@ -173,7 +173,7 @@
                                                                     <div class="ui-input mt-0">
                                                                         <%-- <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoLocations %>' />
                                                             <br />--%>
-                                                                        <asp:DropDownList runat="server" Width="100%" ID="ddlLocations" class="form-control">
+                                                                        <asp:DropDownList runat="server" Width="100%" ID="ddlLocations"  ClientIDMode="Static" class="form-control">
                                                                         </asp:DropDownList>
                                                                     </div>
                                                                 </div>
@@ -391,11 +391,14 @@
                                                                         contactdatas.bambini = $("[id$='txtBambini']").val();
                                                                         contactdatas.arrivo = $("[id$='txtArrivo']").val();
                                                                         contactdatas.partenza = $("[id$='txtPartenza']").val();
+                                                                        contactdatas.datarichiesta = $("[id$='txtData']").val();
+                                                                        contactdatas.orario = $("[id$='txtOrario']").val();
                                                                         contactdatas.name = $("[id$='txtNome']").val();
                                                                         contactdatas.cognome = $("[id$='txtSoc']").val();
                                                                         contactdatas.email = $("[id$='txtEmail']").val();
                                                                         contactdatas.telefono = $("[id$='txtTel']").val();
                                                                         contactdatas.message = $("[id$='txtDescrizione']").val();
+                                                                        //contactdatas.location1 = $("#ddlSedeContact option:selected").text();
                                                                         contactdatas.tipo = "informazioni";
                                                                         callback(contactdatas);
                                                                     }
