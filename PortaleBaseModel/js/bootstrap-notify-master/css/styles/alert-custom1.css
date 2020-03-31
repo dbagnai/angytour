@@ -55,4 +55,8 @@
     opacity:0.9;
     
 }
+
+.notifications > div, bottom-right > div {
+    margin: 0px;
+}
  
