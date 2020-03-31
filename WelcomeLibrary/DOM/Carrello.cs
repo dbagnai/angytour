@@ -58,7 +58,13 @@ namespace WelcomeLibrary.DOM
             get { return _TotaleSconto; }
             set { _TotaleSconto = value; }
         }
+        private double _Totalepeso;
+        public double TotalePeso
+        {
+            get { return _Totalepeso; }
+            set { _Totalepeso = value; }
 
+        }
         private double _precacconto;
         public double Percacconto
         {
@@ -142,6 +148,13 @@ namespace WelcomeLibrary.DOM
             set { _supplementospedizione = value; }
         }
 
+        private bool _supplementocontrassegno;
+        public bool Supplementocontrassegno
+        {
+            get { return _supplementocontrassegno; }
+            set { _supplementocontrassegno = value; }
+        }
+
         private long _id_commerciale;
         public long Id_commerciale
         {
@@ -164,6 +177,7 @@ namespace WelcomeLibrary.DOM
             Codicesconto = "";
             TotaleOrdine = 0;
             TotaleSconto = 0;
+            TotalePeso = 0;
             TotaleSpedizione = 0;
             Indirizzofatturazione = "";
             Indirizzospedizione = "";
@@ -176,6 +190,7 @@ namespace WelcomeLibrary.DOM
             Dataordine = null;
             CarrelloItems = new CarrelloCollection();
             Supplementospedizione = false;
+            Supplementocontrassegno = false;
             TotaleSmaltimento = 0;
             Percacconto = 0;
         }
@@ -187,6 +202,7 @@ namespace WelcomeLibrary.DOM
             CodiceOrdine = tmp.CodiceOrdine;
             TotaleOrdine = tmp.TotaleOrdine;
             TotaleSconto = tmp.TotaleSconto;
+            TotalePeso = tmp.TotalePeso;
             TotaleSpedizione = tmp.TotaleSpedizione;
             Indirizzofatturazione = tmp.Indirizzofatturazione;
             Indirizzospedizione = tmp.Indirizzospedizione;
@@ -201,6 +217,7 @@ namespace WelcomeLibrary.DOM
             CarrelloItems = new CarrelloCollection(tmp.CarrelloItems);
 
             Supplementospedizione = tmp.Supplementospedizione;
+            Supplementocontrassegno = tmp.Supplementocontrassegno;
             TotaleSmaltimento = tmp.TotaleSmaltimento;
             Percacconto = tmp.Percacconto;
 

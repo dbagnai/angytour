@@ -115,7 +115,7 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                        <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
+                                        <asp:DropDownList ID="ddlNazione" Enabled="false" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
@@ -469,7 +469,7 @@
                                             </div>
                                         </li>
 
-                                        <li style="display: block">
+                                        <li style="display: block" id="liPaypal" runat="server">
                                             <div class="clearfix" style="margin-bottom: 25px">
                                                 <div class="float-left mt-0 mr-2" style="width: 25px;">
                                                     <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
@@ -483,8 +483,11 @@
                                         </li>
                                     </ul>
                                     <div class="col-12 col-sm-8 mx-auto px-0">
-                                    <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
-                                        </div>
+                                        <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
+                                    </div>
+                                      <div>
+                                        <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
+                                    </div>
                                 </div>
                             </div>
 

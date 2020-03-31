@@ -360,6 +360,12 @@ namespace WelcomeLibrary.DOM
             set { _vetrina = value; }
         }
 
+        private double? _peso;
+        public double? Peso
+        {
+            get { return _peso; }
+            set { _peso = value; }
+        }
 
         private double? _qta_vendita;
         public double? Qta_vendita
@@ -1214,6 +1220,7 @@ namespace WelcomeLibrary.DOM
             this.Vetrina = false;
             this.Promozione = false;
             this.Qta_vendita = null;
+            this.Peso = null;
             this.Abilitacontatto = false;
             this.Archiviato = false;
             this.linkVideo = "";
@@ -1348,6 +1355,7 @@ namespace WelcomeLibrary.DOM
             this.Vetrina = tmp.Vetrina;
             this.Promozione = tmp.Promozione;
             this.Qta_vendita = tmp.Qta_vendita;
+            this.Peso = tmp.Peso;
             this.Abilitacontatto = tmp.Abilitacontatto;
             this.Archiviato = tmp.Archiviato;
             this.linkVideo = tmp.linkVideo;
@@ -1511,6 +1519,7 @@ namespace WelcomeLibrary.DOM
             _tmp["Vetrina"] = this.Vetrina.ToString();
             _tmp["Promozione"] = this.Promozione.ToString();
             _tmp["Qta_vendita"] = this.Qta_vendita.ToString();
+            _tmp["Peso"] = this.Peso.ToString();
             _tmp["Abilitacontatto"] = this.Abilitacontatto.ToString();
             _tmp["Archiviato"] = this.Archiviato.ToString();
             _tmp["linkVideo"] = this.linkVideo.ToString();

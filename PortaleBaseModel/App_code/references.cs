@@ -983,6 +983,15 @@ public class references
             ritorno = item.Double1;
         return ritorno;
     }
+    public static jsonspedizioni TrovaFascespedizioneNazione(string codice, string Lingua = "I")
+    {
+        jsonspedizioni ritorno = null;
+        if (string.IsNullOrEmpty(codice)) return null;
+        Tabrif item = WelcomeLibrary.UF.Utility.Nazioni.Find(n => n.Codice == codice && n.Lingua == Lingua);
+        if (item != null)
+            ritorno = Utility.Deserializzafascedipeso(item.Campo2);
+        return ritorno;
+    }
     public static string TestoTipologia(string codicetipologia, string Lingua)
     {
         string retstr = "";

@@ -183,6 +183,7 @@
     <Compile Include="DOM\ClienteCollection.cs" />
     <Compile Include="DOM\Annunci.cs" />
     <Compile Include="DOM\AnnunciCollection.cs" />
+    <Compile Include="DOM\FasceSpedizioni.cs" />
     <Compile Include="DOM\Listino.cs" />
     <Compile Include="DOM\Eventi.cs" />
     <Compile Include="DOM\ParametroGenericoCollection.cs" />

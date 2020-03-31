@@ -15,6 +15,7 @@ using System.Xml;
 using ActiveUp.Net;
 using ActiveUp.Net.Mail;
 using ActiveUp.Net.Security;
+using Newtonsoft.Json;
 
 namespace WelcomeLibrary.UF
 {
@@ -1759,6 +1760,12 @@ namespace WelcomeLibrary.UF
             TabrifCollection _list = new TabrifCollection();
             Nazioni = _list;
 
+
+            //GENERAZIONE DI FASCE DI PREZZO PER SPEDIZIONI DA INSERIRE NELLA COLONNA APPOSITA
+            //string jserialized = Serializzafascedipeso();
+            // System.Diagnostics.Debug.WriteLine(jserialized);
+
+
             Tabrif _naz = new Tabrif();
 
             //CREO UNA NAZIONE FITTIZIA CHE RAGGRUPPA TUTTE QUELLE FUORI ITALIA
@@ -1808,6 +1815,8 @@ namespace WelcomeLibrary.UF
                             _naz.Lingua = reader.GetString(reader.GetOrdinal("Lingua")).Trim();
                             if (!reader["Double1"].Equals(DBNull.Value))
                                 _naz.Double1 = reader.GetDouble(reader.GetOrdinal("Double1"));
+                            if (!reader["jsondata"].Equals(DBNull.Value))
+                                _naz.Campo2 = reader.GetString(reader.GetOrdinal("jsondata"));
 
                             _list.Add(_naz);
                         }
@@ -2076,6 +2085,51 @@ ZW	Zimbabwe
              */
 
 
+        }
+
+        private static string Serializzafascedipeso()
+        {
+            jsonspedizioni js = new jsonspedizioni();
+
+            List<fascespedizioni> fasce = new List<fascespedizioni>();
+            //fascedi
+            fascespedizioni fs = new fascespedizioni();
+            fs.PesoMin = 0;
+            fs.PesoMax = 5;
+            fs.Costo = 10;
+            fasce.Add(fs);
+            fs = new fascespedizioni();
+            fs.PesoMin = 5;
+            fs.PesoMax = 10;
+            fs.Costo = 20;
+            fasce.Add(fs);
+            fs = new fascespedizioni();
+            fs.PesoMin = 10;
+            fs.PesoMax = 20;
+            fs.Costo = 30;
+            fasce.Add(fs);
+            fs = new fascespedizioni();
+            fs.PesoMin = 20;
+            fs.PesoMax = 9999999;
+            fs.Costo = 40;
+            fasce.Add(fs);
+
+            js.fascespedizioni = fasce;
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(js, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+            });
+        }
+
+
+        public static jsonspedizioni Deserializzafascedipeso(string jsonstr)
+        {
+            jsonspedizioni returncoll = Newtonsoft.Json.JsonConvert.DeserializeObject<jsonspedizioni>(jsonstr);
+            return returncoll;
         }
 
 

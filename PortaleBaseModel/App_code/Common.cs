@@ -211,7 +211,7 @@ public class CommonPage : Page
         return "?v=" + modification.ToString("ddMMyyHHmmss");
     }
 
-    
+
 
     /// <summary>
     /// SPOSTA IL VIEWSTATE IN FONDO ALLA PAGINA PER 
@@ -225,7 +225,7 @@ public class CommonPage : Page
         //        else standard renderd
 
 
-            System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+        System.IO.StringWriter stringWriter = new System.IO.StringWriter();
         HtmlTextWriter htmlWriter = new HtmlTextWriter(stringWriter);
         base.Render(htmlWriter);
         string html = stringWriter.ToString();
@@ -468,7 +468,7 @@ public class CommonPage : Page
     private static string GetLinguaFromActualCulture(CultureInfo currentCulture)
     {
         return offerteDM.GetLinguaFromActualCulture(currentCulture);
- 
+
     }
     public static System.Globalization.CultureInfo setCulture(string lng)
     {
@@ -1157,11 +1157,13 @@ public class CommonPage : Page
         string codicesconto = "";
         TotaliCarrello totali = new TotaliCarrello();
         totali.Supplementospedizione = supplementospedizione;
+        totali.Supplementocontrassegno = supplementocontanti;
 
         List<long> idtodelete = new List<long>();
         long idclienteincarrello = 0;
         foreach (Carrello c in ColItem)
         {
+            //////////////////////////////////////////////////////////
             //controlli sulla disponibilità articolo/////////////////// ( QUI VA' MODIFICATO PER LA GESTIONE CON LEGAME A CARATTERISTICHE !!! DA FARE)
             if (c.Offerta.Qta_vendita != null)
             {
@@ -1175,6 +1177,17 @@ public class CommonPage : Page
                 }
             }
             //////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////
+            bool foundzeropeso = false;
+            if (c.Offerta.Peso != null && c.Offerta.Peso.Value != 0) //Calcolo il peso totale della merce.. da capire che succede quando hai dei pesi nullo o a zero ....
+            {
+                totali.TotalePeso += c.Offerta.Peso.Value * (double)c.Numero;
+            }
+            else foundzeropeso = true;
+            //////////////////////////////////////////////////////////
+
+
             totali.TotaleOrdine += c.Numero * (c.Prezzo + c.Iva);
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
@@ -1200,7 +1213,7 @@ public class CommonPage : Page
         if (cli != null && cli.Id_cliente != 0) totali.Id_commerciale = cli.Id_cliente;
 
         totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali.TotaleOrdine, cli);
-        totali.TotaleSpedizione = CalcolaSpeseSpedizione(ColItem, codicenazione, codiceprovincia, supplementospedizione, totali.TotaleOrdine, totali.TotaleSconto, supplementocontanti);
+        totali.TotaleSpedizione = CalcolaSpeseSpedizione(ColItem, codicenazione, codiceprovincia, totali);
 
         totali.Id_cliente = (long)idclienteincarrello;
         //Aggiono i codice della nazione di spedizione nel carrello
@@ -1340,54 +1353,90 @@ public class CommonPage : Page
         }
         return valoresconto;
     }
-    private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, bool supplementospedizione, double totaleordine, double totalesconto, bool contrassegno = false)
+    private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia,TotaliCarrello totali)
     {
+        double totaleordine = totali.TotaleOrdine;
+        double totalesconto = totali.TotaleSconto;
+        double totalipeso = totali.TotalePeso; // Peso totale spedizione ( da confrontare con 
         double spesespedizione = 0;
-        double tmpconv = 0;
-        double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out tmpconv);
+        double costofinalespedizione = 0;
 
+
+        ////////////////////////////////////////////
+        // CALCOLO COSTI SPEDIZIONE BASE PER NAZIONE
+        ////////////////////////////////////////////
+        double costodefaultitalia = 0;
+        double.TryParse(ConfigManagement.ReadKey("costobasespedizioni"), out costodefaultitalia);
+        double costodefaultestero = 0;
+        double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out costodefaultestero);
+        //Modificare per caricare il campo per gli scaglioni di peso dalla tabella nazioni per il conteggio 
         double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
-        if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = tmpconv; //Costostandard per l'estero
+        if (codicenazione.ToLower() == "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultitalia; //Costostandard per l'estero
+        if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultestero; //Costostandard per l'estero
+        costofinalespedizione = costospedizionenazione;
+        ////////////////////////////////////////////
+        //VARIAZIONE CALCOLO COSTI SPEDIZIONE A PESO 
+        //( per usare questo mettere a zero i costi default nella tbl_config ( costobasespedizioni, defaultesterospedizione ), impostare il json per i pesi nella tbl_nazioni per le nazioni di intersse, bloccare paypal dove non impostato il json e neppure il costo per nazione in tabella ddlnazioni. )
+        ////////////////////////////////////////////
+        jsonspedizioni js = references.TrovaFascespedizioneNazione(codicenazione);
+        double costoperpeso = 0;
+        if (js != null)
+        {
+            costoperpeso = CalcolaSpedizioneSuPeso(totalipeso, js);
+        }
+        costofinalespedizione += costoperpeso;// LE SPESE VARIABILI PER PESO LE AGGIUNGO A QUELLE BASE
+        ////////////////////////////////////////////
 
-        //Da calcolare in base ai parametri passati
+        //Da calcolare in base ai parametri passati EVENTUALI altri aspetti delle spedizioni
         //long totalearticoli = 0;
         //foreach (Carrello c in ColItem)
         //{
         //    totalearticoli += c.Numero;
         //}
 
-        tmpconv = 0;
+        double tmpconv = 0;
         double.TryParse(ConfigManagement.ReadKey("supplementoSpedizioni"), out tmpconv);
-        if (supplementospedizione) //Supplemento isole supplementoSpedizioni
+        if (totali.Supplementospedizione) //Supplemento isole supplementoSpedizioni
             spesespedizione += tmpconv;
 
         tmpconv = 0;
         double.TryParse(ConfigManagement.ReadKey("supplementoContrassegno"), out tmpconv);
-        if (contrassegno) //Supplemento contrassegno  
+        if (totali.Supplementocontrassegno) //Supplemento contrassegno  
             spesespedizione += tmpconv;
 
-        tmpconv = 0;
-        double.TryParse(ConfigManagement.ReadKey("sogliaSpedizioni"), out tmpconv);
-
+        double sogliaitalia = 0;
+        double.TryParse(ConfigManagement.ReadKey("sogliaSpedizioni"), out sogliaitalia);
+        double sogliaestero = 0;
+        double.TryParse(ConfigManagement.ReadKey("sogliaspedizioniestero"), out sogliaestero);
+        //
         switch (codicenazione)
         {
             case "IT":
-                if (totaleordine - totalesconto <= tmpconv)
+                if (totaleordine - totalesconto <= sogliaitalia)
                 {
-                    spesespedizione += costospedizionenazione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
+                    spesespedizione += costofinalespedizione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
                 }
                 break;
             default:
-                //if (totaleordine - totalesconto <= Convert.ToDouble(ConfigManagement.ReadKey("sogliaSpedizioni")))
-                //{
-                spesespedizione += costospedizionenazione;
-                //}
+                if (totaleordine - totalesconto <= sogliaestero)
+                {
+                    spesespedizione += costofinalespedizione;
+                }
                 break;
         }
         return spesespedizione;
     }
 
-
+    private static double CalcolaSpedizioneSuPeso(double peso, jsonspedizioni js)
+    {
+        double ret = 0;
+        if (js != null && js.fascespedizioni != null)
+        {
+            fascespedizioni fascia = js.fascespedizioni.Find(e => e.PesoMin <= peso && e.PesoMax > peso);
+            if (fascia != null) ret = fascia.Costo;
+        }
+        return ret;
+    }
     public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar, string idcarrello = "")
     {
         string ret = "0";
@@ -2370,7 +2419,7 @@ public class CommonPage : Page
             DateTime t = DateTime.MinValue;
             if (values.ContainsKey("DataInserimento"))
                 //DateTime.TryParse(values["DataInserimento"], out t);
-            DateTime.TryParseExact(values["DataInserimento"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out t);
+                DateTime.TryParseExact(values["DataInserimento"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out t);
             c.DataInserimento = t;
 
             if (values.ContainsKey("DescrizioneGB"))

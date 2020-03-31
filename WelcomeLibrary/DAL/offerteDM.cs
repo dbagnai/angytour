@@ -1165,6 +1165,10 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
+
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -1563,6 +1567,10 @@ namespace WelcomeLibrary.DAL
                             item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
+
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -1999,6 +2007,10 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
+
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -2338,6 +2350,10 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
+
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -2677,6 +2693,9 @@ namespace WelcomeLibrary.DAL
                             item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -3021,6 +3040,9 @@ namespace WelcomeLibrary.DAL
                             item.Archiviato = reader.GetBoolean(reader.GetOrdinal("Archiviato"));
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -3519,6 +3541,9 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Qta_vendita"].Equals(DBNull.Value))
                             item.Qta_vendita = reader.GetDouble(reader.GetOrdinal("Qta_vendita"));
+
+                        if (!reader["Peso"].Equals(DBNull.Value))
+                            item.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
                         if (!reader["Promozione"].Equals(DBNull.Value))
                             item.Promozione = reader.GetBoolean(reader.GetOrdinal("Promozione"));
 
@@ -4194,6 +4219,13 @@ namespace WelcomeLibrary.DAL
                 pqtavendita = new SQLiteParameter("@Qta_vendita", item.Qta_vendita.Value);
             parColl.Add(pqtavendita);
 
+            SQLiteParameter ppeso = new SQLiteParameter();
+            if (item.Peso == null)
+                ppeso = new SQLiteParameter("@Peso", DBNull.Value);
+            else
+                ppeso = new SQLiteParameter("@Peso", item.Peso.Value);
+            parColl.Add(ppeso);
+
             SQLiteParameter pPromozione = new SQLiteParameter("@Promozione", item.Promozione);
             parColl.Add(pPromozione);
 
@@ -4217,7 +4249,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
-            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,Qta_vendita,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,canonicalI,canonicalGB,canonicalRU,canonicalFR,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@Qta_vendita,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@robots )";
+            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,Qta_vendita,Peso,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,canonicalI,canonicalGB,canonicalRU,canonicalFR,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@Qta_vendita,@Peso,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@robots )";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -4538,6 +4570,14 @@ namespace WelcomeLibrary.DAL
                 pqtavendita = new SQLiteParameter("@Qta_vendita", item.Qta_vendita.Value);
             parColl.Add(pqtavendita);
 
+            SQLiteParameter ppeso = new SQLiteParameter();
+            if (item.Peso == null)
+                ppeso = new SQLiteParameter("@Peso", DBNull.Value);
+            else
+                ppeso = new SQLiteParameter("@Peso", item.Peso.Value);
+            parColl.Add(ppeso);
+
+
             SQLiteParameter pPromozione = new SQLiteParameter("@Promozione", item.Promozione);
             parColl.Add(pPromozione);
 
@@ -4564,7 +4604,7 @@ namespace WelcomeLibrary.DAL
 
             SQLiteParameter p16 = new SQLiteParameter("@Id", item.Id);
             parColl.Add(p16);
-            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori, [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR,  [Qta_vendita]=@Qta_vendita,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,robots=@robots   WHERE [Id]=@Id ";
+            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori, [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR,  [Qta_vendita]=@Qta_vendita,[Peso]=@Peso,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,robots=@robots   WHERE [Id]=@Id ";
 
             try
             {

@@ -351,6 +351,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtPrezzo.Text = Details.Prezzo.ToString();
             txtPrezzoListino.Text = Details.PrezzoListino.ToString();
             txtQta_vendita.Text = (Details.Qta_vendita != null) ? Details.Qta_vendita.ToString() : "";
+            txtPeso.Text = (Details.Peso != null) ? Details.Peso.ToString() : "";
 
 
             chkVetrina.Checked = Details.Vetrina;
@@ -905,6 +906,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     else
                         updrecord.Qta_vendita = null;
 
+                    _tmpdbl = 0;
+                    if (double.TryParse(txtPeso.Text, out _tmpdbl))
+                    { updrecord.Peso = _tmpdbl; }
+                    else
+                        updrecord.Peso = null;
+
                     DateTime _tmpdate = System.DateTime.Now;
                     txtData.Text = txtData.Text.Replace(".", ":");
                     if (!txtData.Text.Contains(":")) txtData.Text += " 00:00:00";
@@ -1047,6 +1054,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 { updrecord.Qta_vendita = _tmpdbl; }
                 else
                     updrecord.Qta_vendita = null;
+
+                _tmpdbl = 0;
+                if (double.TryParse(txtPeso.Text, out _tmpdbl))
+                { updrecord.Peso = _tmpdbl; }
+                else
+                    updrecord.Peso = null;
 
                 DateTime _tmpdate = System.DateTime.Now;
                 txtData.Text = txtData.Text.Replace(".", ":");
@@ -1291,6 +1304,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtPrezzo.Text = "";
         txtPrezzoListino.Text = "";
         txtQta_vendita.Text = "";
+        txtPeso.Text = "";
         chkVetrina.Checked = false;
         chkArchiviato.Checked = false;
         chkContatto.Checked = false;
@@ -1367,6 +1381,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtPrezzo.ReadOnly = valore;
         txtPrezzoListino.ReadOnly = valore;
         txtQta_vendita.ReadOnly = valore;
+        txtPeso.ReadOnly = valore;
         txtCodiceProd.ReadOnly = valore;
         chkVetrina.Enabled = !valore;
         chkArchiviato.Enabled = !valore;

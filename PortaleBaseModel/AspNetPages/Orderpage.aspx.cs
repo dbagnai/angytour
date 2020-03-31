@@ -221,6 +221,9 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
     private void CaricaCarrello()
     {
+        if (Session["codicesconto"] != null)
+            txtCodiceSconto.Text = Session["codicesconto"].ToString();
+        
         eCommerceDM ecmDM = new eCommerceDM();
         //////////////////////////////////////////////////////////////////////////////
         //Prendiamo l'ip del client
@@ -242,6 +245,21 @@ public partial class AspNetPages_Orderpage : CommonPage
         rptProdotti.DataBind();
 
         string codicenazione = SelezionaNazione(carrello, ddlNazione.SelectedValue);
+
+
+        //Spengo paypal se non riesco a calcolare le spese di spedizione
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Leggo presenza Costo spedizione per nazione
+        jsonspedizioni js = references.TrovaFascespedizioneNazione(codicenazione);
+        if (costospedizionenazione == 0 && (js == null || js.fascespedizioni == null)) liPaypal.Visible = false;
+        else liPaypal.Visible = true;
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //if (codicenazione.ToLower() != "it")
+        //    liPaypal.Visible = false;
+        //else
+        //    liPaypal.Visible = true;
+
+
         //SelezionaClientePerAffitti(carrello);//Dedicato alla gestione affitti
         AggiornaDatiUtenteSuCarrello(carrello); //Aggiorno code sconto e idcliente
         VisualizzaTotaliCarrello(codicenazione, "");
