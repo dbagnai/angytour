@@ -312,7 +312,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #666;
+    color: @primary-color;
     font-weight: 600;
     margin: 2px 0px;
     padding: 0px;
@@ -414,8 +414,7 @@ textarea.inputgray:focus {
 --------------- FONT --------------
 ----------------------------------*/
 a {
-    color: @color-sottomeu;
-
+    /*color: @color-sottomeu;*/
     &:hover {
         color: @color-sottomeu-active
     }
@@ -581,8 +580,9 @@ i .fa {
     box-shadow: 0 4px 6px -6px #222;
 }
 
-.menuzord-menu ul.dropdown li ul.dropdown {
-    margin-top: -20px !important;
+.menuzord-menu ul.dropdown li ul.dropdown { 
+    margin-top: -20px !important;   /*AGISCE SUL MENU DI SECONDO LIVELLO POSIZIONE VERTICALE*/
+    /*margin-top: 0px !important;*/
     border-top: 1px solid @secondary-color;
     border-left: 1px dashed @secondary-color;
 }
@@ -593,7 +593,7 @@ i .fa {
 }
 
 .menuzord-menu ul.dropdown li a {
-    font-weight: @submenu-weight;
+    /*font-weight: @submenu-weight;*/
     color: @submenu-color;
 }
 
@@ -606,8 +606,94 @@ i .fa {
     font-family: 'Font Awesome 5 Free';
 }
 
+/* modifica meuzord per megamenu grande con molti link*/
+.menuzord-menu > li > .megamenu {
+    padding: 30px 30px;
+    /*width:100%;*/
+    left: unset;
+    border: 1px solid @primary-color;
+}
+
+.megamenu-menulist {
+    line-height: normal;
+}
+
+.megamenu-menulist ul {
+    direction: rtl;
+    list-style-type: circle;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.megamenu-menulist li {
+    width: 100%;
+}
+
+.megamenu-menulist > a {
+    display: block;
+    box-sizing: border-box;
+    padding: 5px 20px !important;
+    width: 100%;
+}
+
+.megamenu-menulist li > a {
+    padding: 10px 5px !important;
+    line-height: 1.6rem;
+}
+
+.menutext-1 {
+    color: @subtitle-color;
+    font-size: @scalable-smallest-font-size !important;
+    font-family: @subtite-font !important;
+    font-weight: @subtitle-weight;
+    font-style: normal;
+}
+
+.menutext-1.menutext-bold {
+    font-weight: @submenu-weight-1;
+}
+
+@media (max-width: 1179px) {
+
+    .menuzord-menu ul.dropdown li ul.dropdown {
+        margin-top:0px !important;
+    }
+
+
+    .menuzord-responsive .menuzord-menu > li > .megamenu .megamenu-row [class*="col"] {
+        /*float: none;
+        display: block;
+        width: 100% !important;
+        margin-left: 0;*/
+        margin-top: 0px;
+    }
+
+    .menuzord-menu > li > .megamenu {
+        padding: 0px 0px;
+    }
+
+    .megamenu-menulist li > a {
+        padding: 12px 35px !important;
+        line-height: normal;
+    }
+
+    .megamenu-menulist a {
+        display: block;
+        box-sizing: border-box;
+        line-height: normal;
+        padding: 12px 20px !important;
+        width: 100%;
+        border-style: solid;
+        border-width: 1px;
+        border-collapse: collapse;
+        font-weight: @submenu-weight;
+        color: @submenu-color;
+    }
+}
+/* modifica meuzor per megamenu grande con molti link*/
 /*MENU PRODOTTI A VISTA*/
-@media (min-width: 1025px) {
+@media (min-width: 1179px) {
     .menuzord-menu li.catalogo-menu .indicator {
         bottom: -37px;
         position: absolute;
@@ -627,10 +713,10 @@ i .fa {
         display: none;
     }*/
 
-    .menuzord-menu ul.dropdown li a {
+    /*.menuzord-menu ul.dropdown li a {
         font-weight: @submenu-weight;
         color: @black-color;
-    }
+    }*/
 
     .menuzord-menu li.catalogo-menu ul {
         /*display: block !important;*/
@@ -764,7 +850,7 @@ i .fa {
     }
 
     .menuzord-menu li ul.dropdown li ul.dropdown {
-        top: 62px;
+        /*top: 62px;*/
     }
 
     .menuzord-menu li.catalogo-menu ul.dropdown li ul.dropdown {
@@ -1079,15 +1165,15 @@ p, p.lead, .lead p {
 }
 
 h1 span:nth-child(1) {
-    font-family: @tite-font !important;
+    /*font-family: @tite-font !important;
     color: @title-color !important;
-    font-size: 100% !important;
+    font-size: 100% !important;*/
 }
 
 h1 span {
-    font-family: @subtite-font !important;
+    /*font-family: @subtite-font !important;
     color: @subtitle-color !important;
-    font-size: 90% !important;
+    font-size: 90% !important;*/
 }
 
 h1 span:nth-child(1).mbr-section-title {
@@ -2141,7 +2227,9 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
 }
-
+.card-body {
+    padding: 5px;
+}
 .work-item .card {
     margin: 10px;
     padding: 0px;
@@ -2191,7 +2279,16 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
-
+.oversquare {
+    position: absolute;
+    display: block;
+    content: "";
+    margin: 20px;
+    border: 1px solid #fff;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    z-index: 3;
+}
 .image-polygon-b3.imgovercontainer:hover:after {
     z-index: 2 !important;
     background: none !important;
@@ -3692,6 +3789,7 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 .titolo-offerta {
     &:extend(.isotope-navigation .work-subcaption .work-title);
+    font-weight: @title-weight-1;
 }
 
 .sottotitolo-offerta {
@@ -4023,13 +4121,13 @@ select.form-control:not([size]):not([multiple]) {
     /*in caso dialog sottomenu prodotti a vista*/
     .menuzord-menu a {
         position: relative;
-        padding: 8px 14px !important;
+        padding: 8px 8px !important;
     }
 
     .menuzord-menu a:hover {
         color: @secondary-color;
         /*font-weight: @menu-hover-weight !important;*/
-        padding: 8px 14px !important;
+        /*padding: 8px 14px !important;*/
     }
 
     .menuzord.white .menuzord-menu > li.active > a,
@@ -5518,7 +5616,7 @@ button.js-roundedpush:hover {
     color: @subtitle-testata-home-color;
     font-family: @subtitle-testata-home-font;
     font-size: @subtitle-testata-home-size !important;
-    font-weight: @subtitle-testata-home-weight !important;
+    font-weight: @subtitle-testata-home-weight;
     line-height: @subtitle-testata-home-line-height !important;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
     /*BANNER TESTATA HOME - 100% ON*/
@@ -6149,6 +6247,41 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
         border: none;
     }
 }
+
+.anchorspacer {
+    padding-top: 60px;
+    margin-top: -60px;
+}
+
+.blocco-dati-1 p {
+    font-size: @scheda-size;
+}
+
+.blocco-dati-1 li {
+    font-size: @scheda-size;
+}
+
+.blocco-dati-1 {
+    background: #f0f0f0;
+    position: relative;
+    padding: 1em;
+    margin-bottom: 2em;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+@media (min-width: 501px) {
+    .blocco-dati-1 {
+        padding: 2em;
+        border-radius: 10px;
+        border: none;
+    }
+}
+
+
+
+
 /*PULSANTE PRENOTA FLOTTANTE  */
 
 .lead-action {

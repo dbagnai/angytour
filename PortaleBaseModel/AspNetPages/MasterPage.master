@@ -267,10 +267,71 @@
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
-                    <%--<%= CreaLinkTipologie(6,6) %>--%>
-
-                    <%-- Ceramiche Ficola --%>
                     <%= CreaLinkPaginastatica(1) %>
+
+
+                    <li runat="server">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
+                        <div class="megamenu megamenu-full-width">
+                            <div class="megamenu-row">
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000030,prod000031","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000032,prod000033","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000034,prod000035","menutext-1 menutext-bold",true) %>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+					
+
+                   <%-- <li runat="server">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
+                        <div class="megamenu megamenu-full-width">
+                            <div class="megamenu-row" style="border-bottom: 1px solid #CCC">
+                                <div class="col12  text-left text-md-right   megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001","prod000001","menutext-1 menutext-bold",true) %>
+                                </div>
+                            </div>
+                            <div class="megamenu-row">
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001","prod000030","menutext-1 menutext-bold",true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000030","","",false) %>
+                                    </ul>
+                                    <%= CreaLinkCategorie("rif000001","prod000031","menutext-1 menutext-bold",true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000031","","",false) %>
+                                    </ul>
+                                </div>
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001", "prod000032", "menutext-1 menutext-bold", true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000032","","",false) %>
+                                    </ul>
+                                    <%= CreaLinkCategorie("rif000001","prod000033","menutext-1 menutext-bold",true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000033","","",false) %>
+                                    </ul>
+                                </div>
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001","prod000034","menutext-1 menutext-bold",true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000034","","",false) %>
+                                    </ul>
+                                    <%= CreaLinkCategorie("rif000001","prod000035","menutext-1 menutext-bold",true) %>
+                                    <ul>
+                                        <%= CreaLinkSottoCategorie("rif000001","prod000035","","",false) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>--%>
+
+
                     <%--<%= CreaLinkTipologie(3,3) %>--%>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
@@ -298,7 +359,7 @@
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
                     <%= CreaLinkPaginastatica(3) %>
-                    <%-- MENU' RISTORANTE --%>
+
                     <li runat="server">
                         <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a>
                         <%--<%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu5"),"rif000004","") %>--%>

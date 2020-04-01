@@ -572,6 +572,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
 
+
     /// <summary>
     /// Creazione lista li delle categorie e sottocategorie per la tipologia indicata
     /// </summary>
@@ -610,6 +611,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append("<a  href=\"");
                 sb.Append(link);
                 sb.Append("\"");
+
                 if (o.CodiceProdotto == Categoria)
                     sb.Append(" style=\"font-weight:600 !important;display:block;\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
@@ -634,6 +636,67 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         return sb.ToString();
     }
+
+    public string CreaLinkCategorieNestedNodropdown(string tipologia, string filtercode = "", string classop = "", bool noli = true)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
+        }
+        if (prodotti != null)
+        {
+            //prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+            prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+
+            //if (tipologia == "rif000001")
+            //    prodotti = RiordinaSpeciale(prodotti, "prod000020,prod000013,prod000014,prod000015,prod000017,prod000016,prod000021,prod000022,prod000023,prod000027,prod000024,prod000029,prod000026,prod000001");
+
+
+            foreach (Prodotto o in prodotti)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                if (!noli)
+                    sb.Append("<li>");
+                sb.Append("<a  href=\"");
+                sb.Append(link);
+                sb.Append("\"");
+                if (!string.IsNullOrEmpty(classop))
+                    sb.Append(" class=\"" + classop + "\"  ");
+                if (o.CodiceProdotto == Categoria)
+                    sb.Append(" style=\"font-weight:600 !important;display:block;\"  ");
+                //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" >");
+                sb.Append(testo);
+                sb.Append("</a>");
+                if (!noli)
+                    sb.Append("</li>");
+
+                /*Nested level categoria 2 liv*/
+                string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto);
+                if (!string.IsNullOrEmpty(sottomenu))
+                {
+                   
+                    sb.Append("<ul>");
+                    sb.Append(sottomenu);
+                    sb.Append("</ul>");
+                }
+               
+            }
+        }
+
+        return sb.ToString();
+    }
+
+
     /// <summary>
     /// Creazione lista li delle sottocategorie ( 1livello ) per la tipologie e categoria indicata
     /// </summary>
@@ -641,7 +704,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     /// <param name="categoria"></param>
     /// <param name="filtercode"></param>
     /// <returns></returns>
-    public string CreaLinkSottoCategorie(string tipologia, string categoria, string filtercode = "")
+    public string CreaLinkSottoCategorie(string tipologia, string categoria, string filtercode = "", string classop = "", bool noli = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
@@ -655,27 +718,35 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
             sprodotti = sprodotti.FindAll(i => list.Exists(l => l == i.CodiceSProdotto));
         }
-      //  sprodotti = RiordinaSpecialeSottoprodotti(sprodotti, filtercode);
+        //  sprodotti = RiordinaSpecialeSottoprodotti(sprodotti, filtercode);
         if (sprodotti != null)
             foreach (SProdotto o in sprodotti)
             {
                 string testo = o.Descrizione;
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                sb.Append("<li>");
+                if (!noli)
+                    sb.Append("<li>");
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
+                if (!string.IsNullOrEmpty(classop))
+                    sb.Append(" class=\"" + classop + "\"  ");
                 if (o.CodiceSProdotto == Categoria2liv)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
-                sb.Append("</li>");
+                if (!noli)
+                    sb.Append("</li>");
             }
         return sb.ToString();
     }
+
+
+
+
     /*NEW CREAZIONE LINK MENU SUI 3 LIVELLI*/
 
     public string CaricaLinksPerTipologiaImmobili(string tipologia, string ordinamento = "")
@@ -776,7 +847,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return ret;
     }
 
-    public string CaricaLinksPerTipologia(string tipologia, string Categoria = "", string maxlinks = "6", string ordinamento = "", string codicerisorsa = "")
+    public string CaricaLinksPerTipologia(string tipologia, string Categoria = "", string maxlinks = "6", string ordinamento = "", string codicerisorsa = "", string classop = "", bool noli = false, string Sottocategoria = "", bool solotitolo = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         //Filtriamo alcune categorie
@@ -792,31 +863,48 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             SQLiteParameter p7 = new SQLiteParameter("@CodiceCategoria", Categoria);
             parColl.Add(p7);
         }
+        if (Sottocategoria.Trim() != "")
+        {
+            SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", Sottocategoria);
+            parColl.Add(p8);
+        }
 
         OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxlinks, Lingua, null, ordinamento);  //Creiamo i link
         if (offerte != null)
             foreach (Offerte o in offerte)
             {
                 string testo = o.DenominazionebyLingua(Lingua);
+
                 string testofroresources = references.ResMan("Common", Lingua, codicerisorsa);
                 if (!string.IsNullOrEmpty(testofroresources))
                     testo = testofroresources;
+
+                //aggunta per solo titoli
+                if (solotitolo)
+                    testo = offDM.estraititolo(o, Lingua);
+
+
                 string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                sb.Append("<li>");
+                if (!noli)
+                    sb.Append("<li>");
                 sb.Append("<a href=\"");
                 sb.Append(link);
                 sb.Append("\"");
+                if (!string.IsNullOrEmpty(classop))
+                    sb.Append(" class=\"" + classop + "\"  ");
                 if (o.Id.ToString() == idOfferta)
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
                 sb.Append(testo);
                 sb.Append("</a>");
-                sb.Append("</li>");
+                if (!noli)
+                    sb.Append("</li>");
             }
         return sb.ToString();
     }
+
 
     public void CaricaMenuContenuti(int min, int max, Repeater rptlist)
     {
@@ -1310,5 +1398,5 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     #endregion
 
 
- 
+
 }
