@@ -660,7 +660,19 @@ public partial class AspNetPages_Orderpage : CommonPage
 
                     //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
                     pnlFormOrdine.Visible = false;
+
+                    //Memoria ultimo ordine a buno fine .... pulisco
+                    //cliente = (Cliente)Session["cliente_" + CodiceOrdine];
+                    //totali = (TotaliCarrello)Session["totali_" + CodiceOrdine];
+                    //prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
+                    string jscodetoinject = Creaeventopurchaseagooglegtag((TotaliCarrello)Session["totali_" + CodiceOrdine], (CarrelloCollection)Session["prodotti_" + CodiceOrdine]);
+                    Session.Remove("cliente_" + CodiceOrdine);
+                    Session.Remove("totali_" + CodiceOrdine);
+                    Session.Remove("prodotti_" + CodiceOrdine);
+                    //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
+                    output.Text += jscodetoinject;
                     output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
+
                     switch (Lingua)
                     {
                         case "I":

@@ -7414,7 +7414,7 @@ namespace WelcomeLibrary.DAL
                                 if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
 
                                 if (end != -1)
-                                    prezzo = descrizioneitem.Substring(start + 7, end - (start + 7));
+                                    prezzo = descrizioneitem.Substring(start + 6, end - (start + 6));
                                 if (_new.Prezzo == 0)
                                 {
                                     double prezzodbo = 0;
@@ -7602,6 +7602,32 @@ namespace WelcomeLibrary.DAL
             }
             Messaggi["Messaggio"] = "Fine Creazione feed xml rss " + System.DateTime.Now.ToString() + " \r\n";
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+
+        }
+        public static string Getvaluebytag(string tag, string text)
+        {
+            string ret = "";
+            try
+            {
+                int skipc = tag.Length + 1;
+                int start = text.ToLower().IndexOf(tag);
+                if (start != -1 && text != string.Empty)
+                {
+                    int end1 = text.ToLower().IndexOf(" ", start + skipc);
+                    int end2 = text.ToLower().IndexOf("\r", start + skipc);
+                    int end3 = text.ToLower().IndexOf("\n", start + skipc);
+                    int end4 = text.ToLower().IndexOf("\r\n", start + skipc);
+                    //Prendiamo il minimo != -1
+                    int end = -1;
+                    if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                    if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+                    if (end != -1)
+                        ret = text.Substring(start + tag.Length, end - (start + tag.Length)).Trim();
+                }
+            }
+            catch { };
+            return ret;
+
 
         }
 

@@ -183,7 +183,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-            output.Text = references.ResMan("Common", Lingua, "risposta_5");
+
+            string jscodetoinject = Creaeventopurchaseagooglegtag(totali, prodotti);
+            output.Text = jscodetoinject;
+            output.Text += references.ResMan("Common", Lingua, "risposta_5");
             output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
         }
 

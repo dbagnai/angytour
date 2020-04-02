@@ -1353,6 +1353,62 @@ public class CommonPage : Page
         }
         return valoresconto;
     }
+
+
+    public static string Creaeventopurchaseagooglegtag(TotaliCarrello totali, CarrelloCollection prodotti)
+    {
+        string ret = "";
+        try
+        {
+            if (totali == null || prodotti == null) return string.Empty;
+            /////////////////////////////////////////////////////////////////////
+            //EVENTO PER GOOGLE GTAG PER L'ACQUISTO 
+            /////////////////////////////////////////////////////////////////////
+            String scriptRegVariables = "";
+            string jsoncarrelloordine = "";
+            //https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
+            // qui devo inserire i dati del carrello e dei prodotti e serializzari per gtag
+            // da fare con totali e prodotti DOM.jsongtagpurchase DOM.jsongtagitem //.....
+            WelcomeLibrary.DOM.jsongtagpurchase jtagpurchaseevent = new jsongtagpurchase();
+            WelcomeLibrary.DOM.jsongtagitem purchaseitem = new jsongtagitem();
+            jtagpurchaseevent.transaction_id = totali.CodiceOrdine;
+            jtagpurchaseevent.affiliation = ConfigManagement.ReadKey("Nome");
+            jtagpurchaseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
+            jtagpurchaseevent.tax = 0;// qui dovresti scorporare l'iva
+            jtagpurchaseevent.shipping = totali.TotaleSpedizione;
+            jtagpurchaseevent.items = new List<jsongtagitem>();
+            foreach (Carrello c in prodotti)
+            {
+                purchaseitem = new jsongtagitem();
+                purchaseitem.id = c.Offerta.Id.ToString(); //Id scheda prodott ( sarebbe meglio lo sku o ptn // da ricavare dalla descrzione se presente
+                //string skuprod = offerteDM.Getvaluebytag("ean:", c.Offerta.DescrizioneI);
+                //skuprod = offerteDM.Getvaluebytag("mpn:", c.Offerta.DescrizioneI);
+                purchaseitem.name = c.Offerta.DenominazioneI;
+                purchaseitem.list_name = "";//nome della lista filtro di ricerca risultati
+                string text = offerteDM.Getvaluebytag("brand:", c.Offerta.DescrizioneI);
+                if (string.IsNullOrEmpty(text)) text = offerteDM.Getvaluebytag("marchio:", c.Offerta.DescrizioneI);
+                purchaseitem.brand = text;
+                purchaseitem.category = references.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
+                purchaseitem.variant = ""; //eventuale caratteristica del prodotto
+                purchaseitem.price = c.Prezzo;
+                purchaseitem.quantity = c.Numero;
+                purchaseitem.coupon = c.Codicesconto;
+                purchaseitem.list_position = 0;
+                jtagpurchaseevent.items.Add(purchaseitem);
+            }
+            jsoncarrelloordine = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchaseevent);
+
+            scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called;');", jsoncarrelloordine);
+            scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
+            Dictionary<string, string> addelements = new Dictionary<string, string>();
+            addelements.Add("jsvarfrommasterstart", scriptRegVariables);
+            ret = custombind.CreaInitStringJavascriptOnly(addelements);
+            /////////////////////////////////////////////////////////////////////
+        }
+        catch { }
+        return ret;
+    }
+
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia,TotaliCarrello totali)
     {
         double totaleordine = totali.TotaleOrdine;
@@ -1412,13 +1468,13 @@ public class CommonPage : Page
         switch (codicenazione)
         {
             case "IT":
-                if (totaleordine - totalesconto <= sogliaitalia)
+                if (totaleordine - totalesconto < sogliaitalia)
                 {
                     spesespedizione += costofinalespedizione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
                 }
                 break;
             default:
-                if (totaleordine - totalesconto <= sogliaestero)
+                if (totaleordine - totalesconto < sogliaestero)
                 {
                     spesespedizione += costofinalespedizione;
                 }

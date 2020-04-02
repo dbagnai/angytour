@@ -17,6 +17,70 @@ namespace WelcomeLibrary.DOM
         public string id { set; get; }
         public string stato { set; get; }
     }
+
+    public class jsongtagitem
+    {
+        public string id { set; get; }
+        public string name { set; get; }
+        public string list_name { set; get; }
+        public string brand { set; get; }
+        public string category { set; get; }
+        public string variant { set; get; }
+        public int list_position { set; get; }
+        public long quantity { set; get; }
+        public double price { set; get; }
+        public string coupon { set; get; }
+
+    }
+    public class jsongtagpurchase
+    {
+        public string transaction_id { set; get; }
+        public string affiliation { set; get; }
+        public double value { set; get; }
+        public string currency { set; get; }
+        public double tax { set; get; }
+        public double shipping { set; get; }
+        public List<jsongtagitem> items { set; get; }
+
+        //https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
+        //        https://developers.google.com/analytics/devguides/collection/gtagjs/sending-data
+        //javascript function call!!
+
+        //gtag('event', 'purchase', {
+        //            "transaction_id": "24.031608523954162",
+        //  "affiliation": "Google online store",
+        //  "value": 23.07,
+        //  "currency": "USD",
+        //  "tax": 1.24,
+        //  "shipping": 0,
+        //  "items": [
+        //    {
+        //      "id": "P12345",
+        //      "name": "Android Warhol T-Shirt",
+        //      "list_name": "Search Results",
+        //      "brand": "Google",
+        //      "category": "Apparel/T-Shirts",
+        //      "variant": "Black",
+        //      "list_position": 1,
+        //      "quantity": 2,
+        //      "price": '2.0'
+        //    },
+        //    {
+        //      "id": "P67890",
+        //      "name": "Flame challenge TShirt",
+        //      "list_name": "Search Results",
+        //      "brand": "MyBrand",
+        //      "category": "Apparel/T-Shirts",
+        //      "variant": "Red",
+        //      "list_position": 2,
+        //      "quantity": 1,
+        //      "price": '3.0'
+        //    }
+        //  ]
+        //});
+
+    }
+
     [Serializable]
     public class TotaliCarrello
     {
