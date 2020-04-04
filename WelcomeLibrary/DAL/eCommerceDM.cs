@@ -213,7 +213,7 @@ namespace WelcomeLibrary.DAL
                                 offerta.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
                             if (!reader["Peso"].Equals(DBNull.Value))
                                 offerta.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
-                      
+
                             if (!reader["Peso"].Equals(DBNull.Value))
                                 offerta.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
                             if (!reader["Vetrina"].Equals(DBNull.Value))
@@ -267,7 +267,7 @@ namespace WelcomeLibrary.DAL
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
                 query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizionRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONRUB,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
- 
+
                 SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
                 query += " order by A.id desc ";
@@ -1580,8 +1580,9 @@ namespace WelcomeLibrary.DAL
             CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
             foreach (Carrello c in carrellolist)
             {
-                sb.Append(" Nome : ");
-                sb.Append(c.Offerta.DenominazioneI);
+
+                sb.Append(" Articolo : ");
+                sb.Append(c.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", ""));
                 #region MODIFIED CARATTERISTICHE CARRELLO
                 if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
                 {
@@ -1617,22 +1618,29 @@ namespace WelcomeLibrary.DAL
                 string ret = "";
                 Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(c.jsonfield1.ToString());
                 if (dic != null && dic.ContainsKey("adulti"))
+                {
                     ret += dic["adulti"];
+                    sb.Append("\r\n adulti:" + ret);
+                    sb.Append("\r\n");
+                }
                 else
                     ret = "";
-                sb.Append("\r\n adulti:" + ret);
+
                 ret = "";
                 if (dic != null && dic.ContainsKey("bambini"))
+                {
                     ret += dic["bambini"];
+                    sb.Append("\r\nbambini:" + ret);
+                    sb.Append("\r\n");
+
+                }
                 else
                     ret = "";
-                sb.Append("\r\nbambini:" + ret);
-                sb.Append("\r\n");
+
 
                 sb.Append(c.Numero + " x " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 sb.Append("\r\n");
 
-                sb.Append("\r\n");
             }
             return sb.ToString();
         }
