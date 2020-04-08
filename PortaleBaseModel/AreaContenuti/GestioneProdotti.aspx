@@ -827,7 +827,7 @@
                     </div>
                 </div>
                 
-                <div class="row" style="display:none">
+                <div class="row" style="display:block">
                     <div class="col-sm-2 item-text">
                         <strong>
                             <asp:Label Width="30%" ID="Label60" runat="server" Text="Peso (Opzionale)" /></strong>

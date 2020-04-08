@@ -249,10 +249,10 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         //Spengo paypal se non riesco a calcolare le spese di spedizione
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Leggo presenza Costo spedizione per nazione
-        jsonspedizioni js = references.TrovaFascespedizioneNazione(codicenazione);
-        if (costospedizionenazione == 0 && (js == null || js.fascespedizioni == null)) liPaypal.Visible = false;
-        else liPaypal.Visible = true;
+        //double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Leggo presenza Costo spedizione per nazione
+        //jsonspedizioni js = references.TrovaFascespedizioneNazione(codicenazione);
+        //if (costospedizionenazione == 0 && (js == null || js.fascespedizioni == null)) liPaypal.Visible = false;
+        //else liPaypal.Visible = true;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //if (codicenazione.ToLower() != "it")
         //    liPaypal.Visible = false;
@@ -361,6 +361,12 @@ public partial class AspNetPages_Orderpage : CommonPage
         bool supplementoisole = chkSupplemento.Checked;
         bool supplementocontrassegno = inpContanti.Checked;
         TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole, supplementocontrassegno);
+        //Dal calcolo dei totali e delle spedizioni viene indicato di bloccare l'acquisto diretto
+        if (totali.Bloccaacquisto)
+            liPaypal.Visible = false;
+        else
+            liPaypal.Visible = true;
+
         List<TotaliCarrello> list = new List<TotaliCarrello>();
         list.Add(totali);
         rptTotali.DataSource = list;

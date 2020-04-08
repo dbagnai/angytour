@@ -122,6 +122,16 @@ namespace WelcomeLibrary.DOM
             get { return _TotaleSconto; }
             set { _TotaleSconto = value; }
         }
+
+        private bool _bloccaacquisto;
+        public bool Bloccaacquisto
+        {
+            get { return _bloccaacquisto; }
+            set { _bloccaacquisto = value; }
+
+        }
+
+
         private double _Totalepeso;
         public double TotalePeso
         {
@@ -245,6 +255,7 @@ namespace WelcomeLibrary.DOM
             TotaleSpedizione = 0;
             Indirizzofatturazione = "";
             Indirizzospedizione = "";
+            Bloccaacquisto = false;
             Note = "";
             Pagato = false;
             Urlpagamento = "";
@@ -267,6 +278,7 @@ namespace WelcomeLibrary.DOM
             TotaleOrdine = tmp.TotaleOrdine;
             TotaleSconto = tmp.TotaleSconto;
             TotalePeso = tmp.TotalePeso;
+            Bloccaacquisto = tmp.Bloccaacquisto;
             TotaleSpedizione = tmp.TotaleSpedizione;
             Indirizzofatturazione = tmp.Indirizzofatturazione;
             Indirizzospedizione = tmp.Indirizzospedizione;

@@ -213,11 +213,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
             actualpagelink.Campo1 = (linki);
             actualpagelink.Campo2 = (testourlpaginaI);
             //redirect al canonical se il canonical non coincide con l'url
-            //if (string.IsNullOrEmpty(item.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-            //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-            //    {
-            //        Response.RedirectPermanent(modcanonical, true);
-            //    }
+            if (string.IsNullOrEmpty(item.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    Response.RedirectPermanent(modcanonical, true);
+                }
         }
 
         //CULTURA en ( set canonical eactualpage )
@@ -250,11 +250,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 actualpagelink.Campo1 = (linken);
                 actualpagelink.Campo2 = (testourlpaginaGB);
                 //redirect al canonical se il canonical non coincide con l'url
-                //if (string.IsNullOrEmpty(item.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                //    {
-                //        Response.RedirectPermanent(modcanonical, true);
-                //    }
+                if (string.IsNullOrEmpty(item.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
 
         }
@@ -288,11 +288,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 actualpagelink.Campo1 = (linkru);
                 actualpagelink.Campo2 = (testourlpaginaRU);
                 //redirect al canonical se il canonical non coincide con l'url
-                //if (string.IsNullOrEmpty(item.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                //    {
-                //        Response.RedirectPermanent(modcanonical, true);
-                //    }
+                if (string.IsNullOrEmpty(item.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
         }
 
@@ -328,11 +328,11 @@ public partial class AspNetPages_Content_Tipo1 : CommonPage
                 actualpagelink.Campo1 = (linkfr);
                 actualpagelink.Campo2 = (testourlpaginaFR);
                 //redirect al canonical se il canonical non coincide con l'url
-                //if (string.IsNullOrEmpty(item.CanonicalbyLingua("FR").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                //    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
-                //    {
-                //        Response.RedirectPermanent(modcanonical, true);
-                //    }
+                if (string.IsNullOrEmpty(item.CanonicalbyLingua("FR").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                    {
+                        Response.RedirectPermanent(modcanonical, true);
+                    }
             }
 
         }

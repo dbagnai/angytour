@@ -1760,11 +1760,8 @@ namespace WelcomeLibrary.UF
             TabrifCollection _list = new TabrifCollection();
             Nazioni = _list;
 
-
-            //GENERAZIONE DI FASCE DI PREZZO PER SPEDIZIONI DA INSERIRE NELLA COLONNA APPOSITA
             //string jserialized = Serializzafascedipeso();
-            // System.Diagnostics.Debug.WriteLine(jserialized);
-
+            //System.Diagnostics.Debug.WriteLine(jserialized);
 
             Tabrif _naz = new Tabrif();
 
@@ -2087,6 +2084,10 @@ ZW	Zimbabwe
 
         }
 
+        /// <summary>
+        /// Funzione di test per generazione stringa serializzata dati nazioni
+        /// </summary>
+        /// <returns></returns>
         private static string Serializzafascedipeso()
         {
             jsonspedizioni js = new jsonspedizioni();
@@ -2113,8 +2114,14 @@ ZW	Zimbabwe
             fs.PesoMax = 9999999;
             fs.Costo = 40;
             fasce.Add(fs);
-
             js.fascespedizioni = fasce;
+
+            js.keyValuePairs = new Dictionary<string, string>();
+
+            js.keyValuePairs.Add("sogliaazzeramento", "0");
+            js.keyValuePairs.Add("supplementosp", "0");
+            js.keyValuePairs.Add("sogliapeso", "0");
+
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(js, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
             {

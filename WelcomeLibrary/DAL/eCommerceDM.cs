@@ -1375,6 +1375,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
 
+            //valutare se aggiungere il peso
 
             SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
             parColl.Add(pptotsmaltimento);

@@ -8,7 +8,7 @@ namespace WelcomeLibrary.DOM
     public class jsonspedizioni
     {
         public List<fascespedizioni> fascespedizioni { set; get; }
-
+        public Dictionary<string, string> keyValuePairs { set; get; }
     }
 
     [Serializable()]
@@ -20,7 +20,7 @@ namespace WelcomeLibrary.DOM
             get { return _Codice; }
             set { _Codice = value; }
         }
-        
+
         private string _Descrizione;
         public string Descrizione
         {
