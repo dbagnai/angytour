@@ -91,6 +91,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.1.3\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\References\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -184,6 +187,7 @@
     <Compile Include="DOM\Annunci.cs" />
     <Compile Include="DOM\AnnunciCollection.cs" />
     <Compile Include="DOM\FasceSpedizioni.cs" />
+    <Compile Include="DOM\ivacategorie.cs" />
     <Compile Include="DOM\Listino.cs" />
     <Compile Include="DOM\Eventi.cs" />
     <Compile Include="DOM\ParametroGenericoCollection.cs" />

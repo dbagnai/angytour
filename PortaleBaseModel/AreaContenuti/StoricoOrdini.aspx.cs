@@ -244,7 +244,20 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         string retmessage = eDM.ExportOrdersToCsv(pathFile, csvName, listaordini);
         WelcomeLibrary.UF.SharedStatic.DownloadFile(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/" + csvName);
     }
-
+    protected void btnExport1_Click(object sender, EventArgs e)
+    {
+        string idforced = id_commerciale;
+        if (string.IsNullOrEmpty(idforced))
+            idforced = txtCommerciale.Text;
+        TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
+        string csvName = "export-ordini-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".xlsx";
+        string pathFile = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp\\";
+        if (!System.IO.Directory.Exists(pathFile))
+            System.IO.Directory.CreateDirectory(pathFile);
+        eCommerceDM eDM = new eCommerceDM();
+        string retmessage = eDM.CreateExcelOrdini(pathFile, csvName, listaordini, references.refivacategorie);
+        WelcomeLibrary.UF.SharedStatic.DownloadFile(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/" + csvName);
+    }
 
     //protected void btnStampa_Click(object sender, EventArgs e)
     //{

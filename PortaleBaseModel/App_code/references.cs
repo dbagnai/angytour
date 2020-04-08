@@ -32,6 +32,7 @@ public class references
     public static string refmetrature = "";
     public static string refcondizione = "";
     public static string reflanguages = "";
+    public static string refivacategorie = "";
 
 
     public class jpath
@@ -356,8 +357,9 @@ public class references
         {
             pathjsonfiles = Server.MapPath(pathexp);
         }
-
-        var filejsontipologie = "reftiporisorse.json";
+        try
+        {
+            var filejsontipologie = "reftiporisorse.json";
         if (System.IO.File.Exists(pathjsonfiles + filejsontipologie))
             reftiporisorse = System.IO.File.ReadAllText(pathjsonfiles + filejsontipologie);
         ///INTEGREARE LE ALTRE TABELLE REF A LINGUA COMUNE...................
@@ -377,6 +379,14 @@ public class references
         var filejsonrefcondizione = "refcondizione.json";
         if (System.IO.File.Exists(pathjsonfiles + filejsonrefcondizione))
             refcondizione = System.IO.File.ReadAllText(pathjsonfiles + filejsonrefcondizione);
+
+           }
+        catch { }
+
+        var filejsonrefivacategorie = "refivacategorie2liv.json";
+        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonrefivacategorie))
+            refivacategorie = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonrefivacategorie);
+        //jsonecommerce jsondatiecommerce = Newtonsoft.Json.JsonConvert.DeserializeObject<jsonecommerce>(refivacategorie);
 
         var filejsonlanguages = "languages.json";
         //reflanguages = System.IO.File.ReadAllText(Server.MapPath("~/lib/cfg/" + filejsonlanguages));
@@ -714,7 +724,7 @@ public class references
         WelcomeLibrary.STATIC.Global.usecdn = tmpcdn;
 
 
-        references.CaricaDatiReftablesDaJson(Server); //Tabelle di riferimento per l'immobiliare
+        references.CaricaDatiReftablesDaJson(Server);//Tabelle di riferimento caricate da files
 
         WelcomeLibrary.UF.Utility.CaricaListaStaticaNazioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, true);
         //WelcomeLibrary.UF.Utility.Nazioni.RemoveAll(n => !(n.Codice == "IT" || n.Codice == "XX"));

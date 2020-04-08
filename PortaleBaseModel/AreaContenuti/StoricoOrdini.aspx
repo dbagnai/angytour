@@ -250,8 +250,10 @@
         <div class="col-lg-9">
             <div class="widget">
                 <a class="btn btn-default btn-small pull-right" onclick="Preparadati()" href='<%= WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/AspNetPages/formStampa.aspx" %>'  target="_blank" style="text-decoration: underline;">Stampa Lista</a>
-            <%--    <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />--%>
-                <asp:Button class="btn btn-default btn-small pull-right" Text="Excel" ID="Button1" OnClick="btnExport_Click" runat="server" CommandArgument="" />
+            <%-- <asp:Button Style="display: none" Text="" ID="btnStampa" OnClick="btnStampa_Click" runat="server" CommandArgument="" />--%>
+              
+                <asp:Button class="btn btn-default btn-small pull-right" Text="Excel" ID="Button2" OnClick="btnExport_Click" runat="server" CommandArgument="" />
+                <asp:Button class="btn btn-default btn-small pull-right" Text="Excel Completo" ID="Button1" OnClick="btnExport1_Click" runat="server" CommandArgument="" />
 
                 <h3>Lista ordini</h3>
                 <table class="table table-order table-stripped">

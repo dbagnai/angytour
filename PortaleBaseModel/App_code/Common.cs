@@ -1071,6 +1071,7 @@ public class CommonPage : Page
                 Item.Datastart = datastart;
                 Item.Dataend = dataend;
                 Item.jsonfield1 = jsonfield1;
+                Item.Iva = (long)eCommerceDM.Getivabycodice2liv(off.CodiceCategoria2Liv, references.refivacategorie); //prendo l'iva dalla tabella categorie
             }
             else
             {
@@ -1085,6 +1086,7 @@ public class CommonPage : Page
                 if (dataend != null)
                     Item.Dataend = dataend;
                 Item.jsonfield1 = jsonfield1;
+                Item.Iva = (long)eCommerceDM.Getivabycodice2liv(off.CodiceCategoria2Liv, references.refivacategorie);//prendo l'iva dalla tabella categorie
             }
 
             //Memorizzo nel carrello il codice sconto se applicato
@@ -1188,7 +1190,8 @@ public class CommonPage : Page
             //////////////////////////////////////////////////////////
 
 
-            totali.TotaleOrdine += c.Numero * (c.Prezzo + c.Iva);
+            //totali.TotaleOrdine += c.Numero * (c.Prezzo * (1 + c.Iva/100)); //nel caso di prezzi imponibili
+            totali.TotaleOrdine += c.Numero * (c.Prezzo);
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
             codicesconto = c.Codicesconto;
@@ -1282,7 +1285,8 @@ public class CommonPage : Page
         double totale = 0;
         foreach (Carrello c in carrello)
         {
-            totale += c.Numero * (c.Prezzo + c.Iva);
+            //totale += c.Numero * (c.Prezzo * (1 + c.Iva/100)); //nel caso di prezi unitari imponibili
+            totale += c.Numero * (c.Prezzo);
         }
 
         return totale;

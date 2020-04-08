@@ -8,6 +8,8 @@ using System.Text;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.UF;
 using System.Data.SQLite;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace WelcomeLibrary.DAL
 {
@@ -266,7 +268,8 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizionRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONRUB,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
+                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
+
 
                 SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -707,6 +710,7 @@ namespace WelcomeLibrary.DAL
                     itemdb.CodiceProdotto = item.CodiceProdotto;
                     itemdb.id_prodotto = item.id_prodotto;
                     itemdb.Campo2 = item.Campo2;
+                    itemdb.Iva = item.Iva;
 
                     if (aggiungiavalori == true)
                         //aumento la quantità del valore passato a quella presente nel db 
@@ -729,6 +733,7 @@ namespace WelcomeLibrary.DAL
             }
 
         }
+
 
         /// <summary>
         /// Funzione che cancella tutti gli elementi che sono scaduti dal carrello
@@ -896,12 +901,15 @@ namespace WelcomeLibrary.DAL
 
                 SQLiteParameter pjsonfield1 = new SQLiteParameter("@jsonfield1", item.jsonfield1);// 
                 parColl.Add(pjsonfield1);
+                SQLiteParameter piva = new SQLiteParameter("@iva", item.Iva);// 
+                parColl.Add(piva);
 
                 SQLiteParameter p1 = new SQLiteParameter("@ID", item.ID);//OleDbType.VarChar
                 parColl.Add(p1);
 
 
-                string query = "UPDATE [TBL_CARRELLO] SET [Data]=@Data,Numero=@Numero,CodiceOrdine=@CodiceOrdine,Campo1=@Campo1,Campo2=@Campo2,Campo3=@Campo3,ID_cliente=@idcliente,Codicenazione=@Codicenazione,Codiceprovincia=@Codiceprovincia ,Codicesconto=@Codicesconto,Datastart=@Datastart,Dataend=@Dataend,Prezzo=@Prezzo,jsonfield1=@jsonfield1 WHERE ([ID]=@ID)";
+                string query = "UPDATE [TBL_CARRELLO] SET [Data]=@Data,Numero=@Numero,CodiceOrdine=@CodiceOrdine,Campo1=@Campo1,Campo2=@Campo2,Campo3=@Campo3,ID_cliente=@idcliente,Codicenazione=@Codicenazione,Codiceprovincia=@Codiceprovincia ,Codicesconto=@Codicesconto,Datastart=@Datastart,Dataend=@Dataend,Prezzo=@Prezzo,jsonfield1=@jsonfield1,iva=@iva WHERE ([ID]=@ID)";
+
                 try
                 {
                     dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -1498,6 +1506,7 @@ namespace WelcomeLibrary.DAL
         }
 
 
+
         public string ExportOrdersToCsv(string DestinationPath, string CsvFilename, TotaliCarrelloCollection list)
         {
             string retString = "";
@@ -1573,6 +1582,256 @@ namespace WelcomeLibrary.DAL
             return retString;
         }
 
+
+        public static double Getivabycodice2liv(string codice2liv, string refivacategorie)
+        {
+            double ret = 0;
+            try
+            {
+                jsonecommerce jsondatiecommerce = Newtonsoft.Json.JsonConvert.DeserializeObject<jsonecommerce>(refivacategorie);
+                if (jsondatiecommerce != null && jsondatiecommerce.ivacategorie2liv != null)
+                {
+                    ivacategorie itemiva = jsondatiecommerce.ivacategorie2liv.FirstOrDefault(i => i.Codice == codice2liv);
+                    if (itemiva != null)
+                        ret = itemiva.Ivaperc;
+                }
+            }
+            catch { }
+            return ret;
+        }
+
+
+        /// <summary>
+        /// export ordini in excel completo con scorporo iva da 
+        /// </summary>
+        /// <param name="DestinationPath"></param>
+        /// <param name="CsvFilename"></param>
+        /// <param name="list"></param>
+        /// <param name="refivacategorie"></param>
+        /// <returns></returns>
+        public string CreateExcelOrdini(string DestinationPath, string CsvFilename, TotaliCarrelloCollection list, string refivacategorie)
+        {
+            string retString = "";
+            try
+            {
+
+                MemoryStream ms = new MemoryStream();
+                if (list == null || list.Count == 0)
+                    return "";
+                var wb = new XLWorkbook();
+                var ws = wb.Worksheets.Add("Orders");
+
+                ////////////////////////
+                ///header 
+                ////////////////////////
+                int colTarget = 1;
+                ws.Cell(1, colTarget).Value = "Data"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Codice Ordine"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Id Cliente"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Email"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Nome"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Imp.Totale"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Iva Totale"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Sconto"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Spedizione"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Totale ordine"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Pagamento"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Pagato"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Idcommerciale"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Codice sconto"; colTarget++;
+                //dati specifici di prodotto ( collegati al catalogo sono dettagli,confezione che variano se si varia le descrizioni prodotto in catalogo )
+                ws.Cell(1, colTarget).Value = "Id Prodotto"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Codice Pr."; colTarget++;
+                ws.Cell(1, colTarget).Value = "Dettagli"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Confezione"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Qtà"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Prezzo U."; colTarget++;
+                ws.Cell(1, colTarget).Value = "Imp. Rigo"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Iva Rigo"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Iva %"; colTarget++;
+
+                /////////////////////////////
+                // format
+                var rngHeaders = ws.Range(1, 1, 1, colTarget); // The address is relative to rngTable (NOT the worksheet)
+                rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                rngHeaders.Style.Font.Bold = true;
+                rngHeaders.Style.Font.FontColor = XLColor.DarkBlue;
+                rngHeaders.Style.Fill.BackgroundColor = XLColor.FromHtml("#C6EFCE");// .from();// XLColor.Aqua;
+                var rngHTotale = ws.Range(1, 10, 1, 10); // The address is relative to rngTable (NOT the worksheet)
+                rngHTotale.Style.Font.FontColor = XLColor.Red;
+                ////////////////////////
+                ///
+                int j = 2;
+                foreach (TotaliCarrello t in list)
+                {
+
+                    //Totali carrello memorizzati nella tabella ordini
+                    string dataordine = string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Dataordine);
+                    string codiceordine = string.Format(t.CodiceOrdine);
+                    string idcliente = string.Format(t.Id_cliente.ToString());
+                    string mailcliente = string.Format(t.Mailcliente);
+                    string nomecliente = string.Format(t.Denominazionecliente.Replace("<br/>", " "));
+                    //string imponibileordine = string.Format("");  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
+                    //string ivaordine = string.Format("");  //iva totale odine ( da calcolare in base ai righi di ordine e iva )
+                    string scontoordine = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                      new object[] { t.TotaleSconto }));
+                    string costospedizione = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+             new object[] { t.TotaleSpedizione }));
+                    string totaleordine = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+          new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto }));
+                    string modalitapagamento = string.Format(t.Modalitapagamento);
+                    string pagato = string.Format(((t == null) ? false : t.Pagato).ToString());
+                    string idcommerciale = string.Format(t.Id_commerciale.ToString());
+                    string codicesconto = string.Format(t.Codicesconto);
+                    //Carico dal carrello gli articoli
+                    eCommerceDM ecmDM = new eCommerceDM();
+                    offerteDM offDM = new offerteDM();
+                    CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, t.CodiceOrdine);
+                    double _imponibileordine = 0;
+                    double _ivaordine = 0;
+                    List<int> listarighi = new List<int>();
+                    foreach (Carrello itemcarrello in carrellolist)
+                    {
+                        listarighi.Add(j);
+
+                        double percentualeiva = 0;
+                        //prendiamo l'aliquota iva per il prodotto in base alla categoria di 2 livello
+                        if (refivacategorie != "" && itemcarrello.Offerta != null)
+                        {
+                            percentualeiva = Getivabycodice2liv(itemcarrello.Offerta.CodiceCategoria2Liv, refivacategorie);
+                        }
+                        //prendo preferenzialmente l'aliquota iva memorizzata nel carrello componenti registrati al momento dell'ordine invece che quella nel file json ( che potrebbe cambiare )
+                        if (itemcarrello.Iva != 0)
+                            percentualeiva = itemcarrello.Iva; //aliquota iva da usare se memorizzata nel carrello al momento della registrazione del rigo di ordine ( DA FARE per evitare modifiche al variare della tabella caratterstiche / aliquote iva )
+
+                        ws.Cell(j, 15).Value = itemcarrello.id_prodotto;
+                        ws.Cell(j, 16).Value = itemcarrello.CodiceProdotto;
+                        /////////////////////////////////////////////////////////
+                        string nomearticolo = itemcarrello.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", "").Replace(";", "");
+                        int i = nomearticolo.IndexOf('\n');
+                        string titolo = nomearticolo;
+                        string sottotitolo = "";
+                        if (i > 0)
+                            titolo = nomearticolo.Substring(0, i);
+                        if (i > 0)
+                            if (nomearticolo.Length >= i + 1)
+                                sottotitolo = nomearticolo.Substring(i + 1);
+                        /////////////////////////////////////////////////////////
+                        ws.Cell(j, 17).Value = titolo; //dettagli
+                        ws.Cell(j, 18).Value = sottotitolo; //confezione
+                        ws.Cell(j, 19).Value = string.Format(itemcarrello.Numero.ToString());  //"Qtà"; 
+                        ws.Cell(j, 20).Value = string.Format(itemcarrello.Prezzo.ToString());  //"Prezzo Unitario ivato; 
+                        double valoreivarigo = itemcarrello.Numero * itemcarrello.Prezzo * (percentualeiva / 100);
+                        double imponibilerigo = (itemcarrello.Numero * itemcarrello.Prezzo) - valoreivarigo;
+                        _imponibileordine += imponibilerigo;
+                        _ivaordine += valoreivarigo;
+                        ws.Cell(j, 21).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                          new object[] { imponibilerigo }));  //Imponibile rigo; 
+                        ws.Cell(j, 22).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+       new object[] { valoreivarigo }));  //Iva riga ordine; 
+                        ws.Cell(j, 23).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+new object[] { percentualeiva }));  //% Iva; 
+
+                        //dati ripetuti per ogni rigo di ordine
+                        ws.Cell(j, 1).Value = dataordine;
+                        ws.Cell(j, 2).Value = codiceordine;
+                        ws.Cell(j, 3).Value = idcliente;
+                        ws.Cell(j, 4).Value = mailcliente;
+                        ws.Cell(j, 5).Value = nomecliente;
+                        //ws.Cell(j, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                        //  new object[] { _imponibileordine }));  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
+                        //ws.Cell(j, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                        //  new object[] { _ivaordine }));   //iva totale odine ( da calcolare in base ai righi di ordine e iva )
+                        ws.Cell(j, 8).Value = scontoordine;
+                        ws.Cell(j, 9).Value = costospedizione;
+                        ws.Cell(j, 10).Value = totaleordine;
+                        ws.Cell(j, 11).Value = modalitapagamento;
+                        ws.Cell(j, 12).Value = pagato;
+                        ws.Cell(j, 13).Value = idcommerciale;
+                        ws.Cell(j, 14).Value = codicesconto;
+
+                        #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
+                        //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
+                        //{
+                        //     
+                        //    //recupero le caratteristiche del prodotto
+                        //    List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(itemcarrello.Offerta.Xmlvalue);
+                        //    ModelCarCombinate item = listCar.Find(e => e.id == itemcarrello.Campo2);
+                        //    if (item != null)
+                        //        ws.Cell(j, 15).Value = (item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                        //    
+                        //}
+
+                        ////sb1.Append(" <div class=\"product-categories muted\">");
+                        ////sb1.Append(CommonPage.TestoCategoria(itemcarrello.Offerta.CodiceTipologia, itemcarrello.Offerta.CodiceCategoria, Lingua));
+                        ////sb1.Append(" </div>");
+                        ////sb1.Append(" <div class=\"product-categories muted\">");
+                        ////sb1.Append(CommonPage.TestoCaratteristica(0, itemcarrello.Offerta.Caratteristica1.ToString(), Lingua));
+                        ////sb1.Append(" </div>");
+                        ////sb1.Append(" <div class=\"product-categories muted\">");
+                        ////sb1.Append(CommonPage.TestoCaratteristica(1, itemcarrello.Offerta.Caratteristica2.ToString(), Lingua));
+                        ////sb1.Append(" </div>");
+                        ////sb1.Append(" <div class=\"product-categories muted\">");
+                        ////sb1.Append(TestoSezione(itemcarrello.Offerta.CodiceTipologia));
+                        ////sb1.Append(" </div>");
+
+                        //////////////////////////////////////////////////////
+
+                        //if (itemcarrello.Datastart != null && itemcarrello.Dataend != null)
+                        //{
+                        //    sb1.Append("Periodo dal " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Datastart) + "\r\n");
+                        //    sb1.Append(" al " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Dataend) + "\r\n");
+                        //}
+                        //string ret = "";
+                        //Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(itemcarrello.jsonfield1.ToString());
+                        //if (dic != null && diitemcarrello.ContainsKey("adulti"))
+                        //{
+                        //    ret += dic["adulti"];
+                        //    sb1.Append("\r\n adulti:" + ret);
+
+                        //}
+                        //else
+                        //    ret = "";
+                        //ret = "";
+                        //if (dic != null && diitemcarrello.ContainsKey("bambini"))
+                        //{
+                        //    ret += dic["bambini"];
+                        //    sb1.Append("\r\nbambini:" + ret);
+
+
+                        //}
+                        //else
+                        //    ret = "";
+                        ////////////////////////////////////////////////////
+                        #endregion
+
+                        j++;
+                    }
+
+                    //aggiorniamo i valori calcolati tramite gli elementi del carrello
+                    foreach (int i in listarighi)
+                    {
+                        ws.Cell(i, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                             new object[] { _imponibileordine }));  //imponibile totale ordine ( calcolato in base ai righi di ordine e iva )
+                        ws.Cell(i, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                          new object[] { _ivaordine }));   //iva totale odine ( calcolato in base ai righi di ordine e iva )
+                    }
+                }
+
+                ////////////////////////
+
+                wb.SaveAs(DestinationPath + CsvFilename);
+                retString = "";
+            }
+            catch (Exception err)
+            {
+                retString = err.Message;
+                if (err.InnerException != null)
+                    retString += err.InnerException.Message;
+            }
+            return retString;
+
+        }
         private string CreaDettaglioCarrello(string codiceordine)
         {
             StringBuilder sb = new StringBuilder();
@@ -1582,7 +1841,7 @@ namespace WelcomeLibrary.DAL
             {
 
                 sb.Append(" Articolo : ");
-                sb.Append(c.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", ""));
+                sb.Append(c.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", "").Replace(";", ""));
                 #region MODIFIED CARATTERISTICHE CARRELLO
                 if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
                 {
