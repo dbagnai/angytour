@@ -1691,123 +1691,124 @@ namespace WelcomeLibrary.DAL
                     double _imponibileordine = 0;
                     double _ivaordine = 0;
                     List<int> listarighi = new List<int>();
-                    foreach (Carrello itemcarrello in carrellolist)
-                    {
-                        listarighi.Add(j);
-
-                        double percentualeiva = 0;
-                        //prendiamo l'aliquota iva per il prodotto in base alla categoria di 2 livello
-                        if (refivacategorie != "" && itemcarrello.Offerta != null)
+                    if (carrellolist != null)
+                        foreach (Carrello itemcarrello in carrellolist)
                         {
-                            percentualeiva = Getivabycodice2liv(itemcarrello.Offerta.CodiceCategoria2Liv, refivacategorie);
+                            listarighi.Add(j);
+
+                            double percentualeiva = 0;
+                            //prendiamo l'aliquota iva per il prodotto in base alla categoria di 2 livello
+                            if (refivacategorie != "" && itemcarrello.Offerta != null)
+                            {
+                                percentualeiva = Getivabycodice2liv(itemcarrello.Offerta.CodiceCategoria2Liv, refivacategorie);
+                            }
+                            //prendo preferenzialmente l'aliquota iva memorizzata nel carrello componenti registrati al momento dell'ordine invece che quella nel file json ( che potrebbe cambiare )
+                            if (itemcarrello.Iva != 0)
+                                percentualeiva = itemcarrello.Iva; //aliquota iva da usare se memorizzata nel carrello al momento della registrazione del rigo di ordine ( DA FARE per evitare modifiche al variare della tabella caratterstiche / aliquote iva )
+
+                            ws.Cell(j, 15).Value = itemcarrello.id_prodotto;
+                            ws.Cell(j, 16).Value = itemcarrello.CodiceProdotto;
+                            /////////////////////////////////////////////////////////
+                            string nomearticolo = itemcarrello.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", "").Replace(";", "");
+                            int i = nomearticolo.IndexOf('\n');
+                            string titolo = nomearticolo;
+                            string sottotitolo = "";
+                            if (i > 0)
+                                titolo = nomearticolo.Substring(0, i);
+                            if (i > 0)
+                                if (nomearticolo.Length >= i + 1)
+                                    sottotitolo = nomearticolo.Substring(i + 1);
+                            /////////////////////////////////////////////////////////
+                            ws.Cell(j, 17).Value = titolo; //dettagli
+                            ws.Cell(j, 18).Value = sottotitolo; //confezione
+                            ws.Cell(j, 19).Value = string.Format(itemcarrello.Numero.ToString());  //"Qtà"; 
+                            ws.Cell(j, 20).Value = string.Format(itemcarrello.Prezzo.ToString());  //"Prezzo Unitario ivato; 
+                            double valoreivarigo = itemcarrello.Numero * itemcarrello.Prezzo * (percentualeiva / 100);
+                            double imponibilerigo = (itemcarrello.Numero * itemcarrello.Prezzo) - valoreivarigo;
+                            _imponibileordine += imponibilerigo;
+                            _ivaordine += valoreivarigo;
+                            ws.Cell(j, 21).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                              new object[] { imponibilerigo }));  //Imponibile rigo; 
+                            ws.Cell(j, 22).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+           new object[] { valoreivarigo }));  //Iva riga ordine; 
+                            ws.Cell(j, 23).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+    new object[] { percentualeiva }));  //% Iva; 
+
+                            //dati ripetuti per ogni rigo di ordine
+                            ws.Cell(j, 1).Value = dataordine;
+                            ws.Cell(j, 2).Value = codiceordine;
+                            ws.Cell(j, 3).Value = idcliente;
+                            ws.Cell(j, 4).Value = mailcliente;
+                            ws.Cell(j, 5).Value = nomecliente;
+                            //ws.Cell(j, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                            //  new object[] { _imponibileordine }));  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
+                            //ws.Cell(j, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                            //  new object[] { _ivaordine }));   //iva totale odine ( da calcolare in base ai righi di ordine e iva )
+                            ws.Cell(j, 8).Value = scontoordine;
+                            ws.Cell(j, 9).Value = costospedizione;
+                            ws.Cell(j, 10).Value = totaleordine;
+                            ws.Cell(j, 11).Value = modalitapagamento;
+                            ws.Cell(j, 12).Value = pagato;
+                            ws.Cell(j, 13).Value = idcommerciale;
+                            ws.Cell(j, 14).Value = codicesconto;
+
+                            #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
+                            //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
+                            //{
+                            //     
+                            //    //recupero le caratteristiche del prodotto
+                            //    List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(itemcarrello.Offerta.Xmlvalue);
+                            //    ModelCarCombinate item = listCar.Find(e => e.id == itemcarrello.Campo2);
+                            //    if (item != null)
+                            //        ws.Cell(j, 15).Value = (item.caratteristica1.value + "  -  " + item.caratteristica2.value);
+                            //    
+                            //}
+
+                            ////sb1.Append(" <div class=\"product-categories muted\">");
+                            ////sb1.Append(CommonPage.TestoCategoria(itemcarrello.Offerta.CodiceTipologia, itemcarrello.Offerta.CodiceCategoria, Lingua));
+                            ////sb1.Append(" </div>");
+                            ////sb1.Append(" <div class=\"product-categories muted\">");
+                            ////sb1.Append(CommonPage.TestoCaratteristica(0, itemcarrello.Offerta.Caratteristica1.ToString(), Lingua));
+                            ////sb1.Append(" </div>");
+                            ////sb1.Append(" <div class=\"product-categories muted\">");
+                            ////sb1.Append(CommonPage.TestoCaratteristica(1, itemcarrello.Offerta.Caratteristica2.ToString(), Lingua));
+                            ////sb1.Append(" </div>");
+                            ////sb1.Append(" <div class=\"product-categories muted\">");
+                            ////sb1.Append(TestoSezione(itemcarrello.Offerta.CodiceTipologia));
+                            ////sb1.Append(" </div>");
+
+                            //////////////////////////////////////////////////////
+
+                            //if (itemcarrello.Datastart != null && itemcarrello.Dataend != null)
+                            //{
+                            //    sb1.Append("Periodo dal " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Datastart) + "\r\n");
+                            //    sb1.Append(" al " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Dataend) + "\r\n");
+                            //}
+                            //string ret = "";
+                            //Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(itemcarrello.jsonfield1.ToString());
+                            //if (dic != null && diitemcarrello.ContainsKey("adulti"))
+                            //{
+                            //    ret += dic["adulti"];
+                            //    sb1.Append("\r\n adulti:" + ret);
+
+                            //}
+                            //else
+                            //    ret = "";
+                            //ret = "";
+                            //if (dic != null && diitemcarrello.ContainsKey("bambini"))
+                            //{
+                            //    ret += dic["bambini"];
+                            //    sb1.Append("\r\nbambini:" + ret);
+
+
+                            //}
+                            //else
+                            //    ret = "";
+                            ////////////////////////////////////////////////////
+                            #endregion
+
+                            j++;
                         }
-                        //prendo preferenzialmente l'aliquota iva memorizzata nel carrello componenti registrati al momento dell'ordine invece che quella nel file json ( che potrebbe cambiare )
-                        if (itemcarrello.Iva != 0)
-                            percentualeiva = itemcarrello.Iva; //aliquota iva da usare se memorizzata nel carrello al momento della registrazione del rigo di ordine ( DA FARE per evitare modifiche al variare della tabella caratterstiche / aliquote iva )
-
-                        ws.Cell(j, 15).Value = itemcarrello.id_prodotto;
-                        ws.Cell(j, 16).Value = itemcarrello.CodiceProdotto;
-                        /////////////////////////////////////////////////////////
-                        string nomearticolo = itemcarrello.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", "").Replace(";", "");
-                        int i = nomearticolo.IndexOf('\n');
-                        string titolo = nomearticolo;
-                        string sottotitolo = "";
-                        if (i > 0)
-                            titolo = nomearticolo.Substring(0, i);
-                        if (i > 0)
-                            if (nomearticolo.Length >= i + 1)
-                                sottotitolo = nomearticolo.Substring(i + 1);
-                        /////////////////////////////////////////////////////////
-                        ws.Cell(j, 17).Value = titolo; //dettagli
-                        ws.Cell(j, 18).Value = sottotitolo; //confezione
-                        ws.Cell(j, 19).Value = string.Format(itemcarrello.Numero.ToString());  //"Qtà"; 
-                        ws.Cell(j, 20).Value = string.Format(itemcarrello.Prezzo.ToString());  //"Prezzo Unitario ivato; 
-                        double valoreivarigo = itemcarrello.Numero * itemcarrello.Prezzo * (percentualeiva / 100);
-                        double imponibilerigo = (itemcarrello.Numero * itemcarrello.Prezzo) - valoreivarigo;
-                        _imponibileordine += imponibilerigo;
-                        _ivaordine += valoreivarigo;
-                        ws.Cell(j, 21).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                          new object[] { imponibilerigo }));  //Imponibile rigo; 
-                        ws.Cell(j, 22).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-       new object[] { valoreivarigo }));  //Iva riga ordine; 
-                        ws.Cell(j, 23).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-new object[] { percentualeiva }));  //% Iva; 
-
-                        //dati ripetuti per ogni rigo di ordine
-                        ws.Cell(j, 1).Value = dataordine;
-                        ws.Cell(j, 2).Value = codiceordine;
-                        ws.Cell(j, 3).Value = idcliente;
-                        ws.Cell(j, 4).Value = mailcliente;
-                        ws.Cell(j, 5).Value = nomecliente;
-                        //ws.Cell(j, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                        //  new object[] { _imponibileordine }));  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
-                        //ws.Cell(j, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                        //  new object[] { _ivaordine }));   //iva totale odine ( da calcolare in base ai righi di ordine e iva )
-                        ws.Cell(j, 8).Value = scontoordine;
-                        ws.Cell(j, 9).Value = costospedizione;
-                        ws.Cell(j, 10).Value = totaleordine;
-                        ws.Cell(j, 11).Value = modalitapagamento;
-                        ws.Cell(j, 12).Value = pagato;
-                        ws.Cell(j, 13).Value = idcommerciale;
-                        ws.Cell(j, 14).Value = codicesconto;
-
-                        #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
-                        //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
-                        //{
-                        //     
-                        //    //recupero le caratteristiche del prodotto
-                        //    List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(itemcarrello.Offerta.Xmlvalue);
-                        //    ModelCarCombinate item = listCar.Find(e => e.id == itemcarrello.Campo2);
-                        //    if (item != null)
-                        //        ws.Cell(j, 15).Value = (item.caratteristica1.value + "  -  " + item.caratteristica2.value);
-                        //    
-                        //}
-
-                        ////sb1.Append(" <div class=\"product-categories muted\">");
-                        ////sb1.Append(CommonPage.TestoCategoria(itemcarrello.Offerta.CodiceTipologia, itemcarrello.Offerta.CodiceCategoria, Lingua));
-                        ////sb1.Append(" </div>");
-                        ////sb1.Append(" <div class=\"product-categories muted\">");
-                        ////sb1.Append(CommonPage.TestoCaratteristica(0, itemcarrello.Offerta.Caratteristica1.ToString(), Lingua));
-                        ////sb1.Append(" </div>");
-                        ////sb1.Append(" <div class=\"product-categories muted\">");
-                        ////sb1.Append(CommonPage.TestoCaratteristica(1, itemcarrello.Offerta.Caratteristica2.ToString(), Lingua));
-                        ////sb1.Append(" </div>");
-                        ////sb1.Append(" <div class=\"product-categories muted\">");
-                        ////sb1.Append(TestoSezione(itemcarrello.Offerta.CodiceTipologia));
-                        ////sb1.Append(" </div>");
-
-                        //////////////////////////////////////////////////////
-
-                        //if (itemcarrello.Datastart != null && itemcarrello.Dataend != null)
-                        //{
-                        //    sb1.Append("Periodo dal " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Datastart) + "\r\n");
-                        //    sb1.Append(" al " + string.Format("{0:dd/MM/yyyy}", itemcarrello.Dataend) + "\r\n");
-                        //}
-                        //string ret = "";
-                        //Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(itemcarrello.jsonfield1.ToString());
-                        //if (dic != null && diitemcarrello.ContainsKey("adulti"))
-                        //{
-                        //    ret += dic["adulti"];
-                        //    sb1.Append("\r\n adulti:" + ret);
-
-                        //}
-                        //else
-                        //    ret = "";
-                        //ret = "";
-                        //if (dic != null && diitemcarrello.ContainsKey("bambini"))
-                        //{
-                        //    ret += dic["bambini"];
-                        //    sb1.Append("\r\nbambini:" + ret);
-
-
-                        //}
-                        //else
-                        //    ret = "";
-                        ////////////////////////////////////////////////////
-                        #endregion
-
-                        j++;
-                    }
 
                     //aggiorniamo i valori calcolati tramite gli elementi del carrello
                     foreach (int i in listarighi)
