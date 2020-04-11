@@ -1684,6 +1684,7 @@ namespace WelcomeLibrary.DAL
                     string pagato = string.Format(((t == null) ? false : t.Pagato).ToString());
                     string idcommerciale = string.Format(t.Id_commerciale.ToString());
                     string codicesconto = string.Format(t.Codicesconto);
+
                     //Carico dal carrello gli articoli
                     eCommerceDM ecmDM = new eCommerceDM();
                     offerteDM offDM = new offerteDM();
@@ -1733,24 +1734,6 @@ namespace WelcomeLibrary.DAL
            new object[] { valoreivarigo }));  //Iva riga ordine; 
                             ws.Cell(j, 23).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
     new object[] { percentualeiva }));  //% Iva; 
-
-                            //dati ripetuti per ogni rigo di ordine
-                            ws.Cell(j, 1).Value = dataordine;
-                            ws.Cell(j, 2).Value = codiceordine;
-                            ws.Cell(j, 3).Value = idcliente;
-                            ws.Cell(j, 4).Value = mailcliente;
-                            ws.Cell(j, 5).Value = nomecliente;
-                            //ws.Cell(j, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                            //  new object[] { _imponibileordine }));  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
-                            //ws.Cell(j, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                            //  new object[] { _ivaordine }));   //iva totale odine ( da calcolare in base ai righi di ordine e iva )
-                            ws.Cell(j, 8).Value = scontoordine;
-                            ws.Cell(j, 9).Value = costospedizione;
-                            ws.Cell(j, 10).Value = totaleordine;
-                            ws.Cell(j, 11).Value = modalitapagamento;
-                            ws.Cell(j, 12).Value = pagato;
-                            ws.Cell(j, 13).Value = idcommerciale;
-                            ws.Cell(j, 14).Value = codicesconto;
 
                             #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
                             //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
@@ -1807,16 +1790,52 @@ namespace WelcomeLibrary.DAL
                             ////////////////////////////////////////////////////
                             #endregion
 
+                            //Per avere i totali su ogni riga di ordine spostare qui la region sotto
+                            #region Valori totali relativi all'ordine dalla tabella carrello ordini
+                            //dati ripetuti per ogni rigo di ordine
+                            //ws.Cell(j, 1).Value = dataordine;
+                            //ws.Cell(j, 2).Value = codiceordine;
+                            //ws.Cell(j, 3).Value = idcliente;
+                            //ws.Cell(j, 4).Value = mailcliente;
+                            //ws.Cell(j, 5).Value = nomecliente;
+                            //ws.Cell(j, 8).Value = scontoordine;
+                            //ws.Cell(j, 9).Value = costospedizione;
+                            //ws.Cell(j, 10).Value = totaleordine;
+                            //ws.Cell(j, 11).Value = modalitapagamento;
+                            //ws.Cell(j, 12).Value = pagato;
+                            //ws.Cell(j, 13).Value = idcommerciale;
+                            //ws.Cell(j, 14).Value = codicesconto;
+                            #endregion
+
                             j++;
                         }
 
                     //aggiorniamo i valori calcolati tramite gli elementi del carrello
                     foreach (int i in listarighi)
                     {
+
+                        #region Valori totali relativi all'ordine dalla tabella carrello ordini
+                        //dati solo sulla prima riga di ordine
+                        ws.Cell(i, 1).Value = dataordine;
+                        ws.Cell(i, 2).Value = codiceordine;
+                        ws.Cell(i, 3).Value = idcliente;
+                        ws.Cell(i, 4).Value = mailcliente;
+                        ws.Cell(i, 5).Value = nomecliente;
+                        ws.Cell(i, 8).Value = scontoordine;
+                        ws.Cell(i, 9).Value = costospedizione;
+                        ws.Cell(i, 10).Value = totaleordine;
+                        ws.Cell(i, 11).Value = modalitapagamento;
+                        ws.Cell(i, 12).Value = pagato;
+                        ws.Cell(i, 13).Value = idcommerciale;
+                        ws.Cell(i, 14).Value = codicesconto;
+                        #endregion
+
+                        //Imponibile ed iva totale dell'ordine
                         ws.Cell(i, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
                              new object[] { _imponibileordine }));  //imponibile totale ordine ( calcolato in base ai righi di ordine e iva )
                         ws.Cell(i, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
                           new object[] { _ivaordine }));   //iva totale odine ( calcolato in base ai righi di ordine e iva )
+                        break; //Abilitare per avre i totali solo sulla 1 riga di ordine
                     }
                 }
 
