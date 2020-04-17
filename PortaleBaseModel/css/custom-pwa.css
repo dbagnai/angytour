@@ -8,7 +8,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
 /*----------------------------------
-////////| IMPORTAZIONE FONT |/////// ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS L'IMPORT DEI FONT QUI NON FUNZIONA!!!!!!!!!! /////////// -> SPOSTATO IN MASTERPAGE
+////////| IMPORTAZIONE FONT |/////// 
+    ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS
+    L'IMPORT DEI FONT QUI NON FUNZIONA!!!!!!!!!! 
+/////////// -> SPOSTATO IN MASTERPAGE
 ----------------------------------*/
 /*----------------------------------
 //////////////| FONT |//////////////
@@ -46,122 +49,129 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   background-image: url(/images/pattern/ricicled5.png);
   background-size: 15%;
 }
-/*START BORDI OBLIQUI ON / OFF*/
-@media screen and (min-width: 1280px) {
-  .bg-light-color {
-    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-  }
-  .bg-light-color.no-plygon,
-  .no-plygon .bg-light-color,
-  .position-sticky .bg-light-color {
-    clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%) !important;
-    border-top: 0px solid transparent;
-    border-bottom: 0px solid transparent;
-  }
-  .bg-light-color.no-plygon-top {
-    clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
-    border-top: 0px solid transparent;
-    border-bottom: 40px solid transparent;
-  }
-  .bg-light-color.no-plygon-bottom {
-    clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-    border-top: 40px solid transparent;
-    border-bottom: 0px solid transparent;
-  }
-  .div-poligon,
-  .mbr-overlay-sfumato {
-    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-    border-top: 0px solid transparent;
-    border-bottom: 0px solid transparent;
-  }
-  .div-poligon-alternate,
-  .mbr-overlay-sfumato-alternate {
-    clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% calc(100% - 40px));
-    border-top: 0px solid transparent;
-    border-bottom: 0px solid transparent;
-  }
-  .alternatecolor .bg-light-color {
-    border-top: 0 solid transparent;
-    border-bottom: 0 solid transparent;
-  }
-  .alternatecolor .bg-light-color:before,
-  .alternatecolor .bg-light-color:after,
-  ul.alternatecolor .bg-light-color:before,
-  ul.alternatecolor .bg-light-color:after {
-    position: absolute;
-    width: 100%;
-    content: "";
-    background: #90cdcd;
-    right: 0;
-    left: 0;
-    z-index: 12;
-    top: unset;
-    margin-top: 0px;
-    height: 100px;
-    clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% calc(100% - 80px));
-  }
-  .alternatecolor .bg-light-color:after,
-  ul.alternatecolor .bg-light-color:after {
-    top: unset;
-    clip-path: polygon(0% 80px, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-    margin-top: -100px;
-  }
-  ul.alternatecolor .bg-light-color:before {
-    margin-top: -50px;
-  }
-  ul.alternatecolor .bg-light-color:after {
-    margin-top: -50px;
-    top: unset;
-  }
-  .alternatecolor .bg-light-color.no-plygon:before,
-  ul.alternatecolor .bg-light-color.no-plygon:before,
-  .alternatecolor .bg-light-color.no-plygon:after,
-  ul.alternatecolor .bg-light-color.no-plygon:after {
-    position: absolute;
-    width: 100%;
-    content: "";
-    background: #90cdcd;
-    right: 0;
-    left: 0;
-    z-index: 12;
-    top: unset;
-    margin-top: 0px;
-    height: 0px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  }
-  .alternatecolor .bg-light-color.no-plygon:after,
-  ul.alternatecolor .bg-light-color.no-plygon:after {
-    top: unset;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    margin-top: 0px;
-  }
-  .alternatecolor .bg-light-color .row {
-    border-top: 60px solid transparent;
-    border-bottom: 60px solid transparent;
-  }
-  .alternatecolor li:last-child .bg-light-color .row,
-  .alternatecolor item:nth-last-child(2) .bg-light-color .row {
-    border-bottom: 0px solid transparent;
-  }
-  .alternatecolor li:last-child .bg-light-color,
-  .alternatecolor item:nth-last-child(2) .bg-light-color {
-    clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-  }
-  .alternatecolor li:last-child .bg-light-color:after,
-  .alternatecolor item:nth-last-child(2) .bg-light-color:after {
-    display: none;
-  }
-  #divSuggeritiContainer.bg-light-color,
-  .bg-light-color.position-sticky,
-  #divCommentiscroll-ctrl .bg-light-color,
-  ul li .a-176.col-12.bg-light-color {
-    clip-path: none;
-    border-top: 0 solid transparent;
-    border-bottom: 0 solid transparent;
-  }
+.bg-light-color-path {
+  fill: #ebf6f6;
+  stroke: #ebf6f6;
 }
+/*START BORDI OBLIQUI ON / OFF*/
+/*@media screen and (min-width: 1280px) {
+    .bg-light-color {
+        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 40px solid transparent;
+        border-bottom: 40px solid transparent;
+    }
+
+    .bg-light-color.no-plygon, .no-plygon .bg-light-color, .position-sticky .bg-light-color {
+        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%) !important;
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+
+    .bg-light-color.no-plygon-top {
+        clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 40px solid transparent;
+    }
+
+    .bg-light-color.no-plygon-bottom {
+        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+        border-top: 40px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+
+    .div-poligon, .mbr-overlay-sfumato {
+        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+
+    .div-poligon-alternate, .mbr-overlay-sfumato-alternate {
+        clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% calc(100% - 40px));
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+    }
+
+    .alternatecolor .bg-light-color {
+        border-top: 0 solid transparent;
+        border-bottom: 0 solid transparent;
+    }
+
+    .alternatecolor .bg-light-color:before {
+        position: absolute;
+        width: 100%;
+        content: "";
+        background: @bg-secondary-color;
+        right: 0;
+        left: 0;
+        z-index: 12;
+        top: unset;
+        margin-top: 0px;
+        height: 100px;
+        clip-path: polygon(0% 0%,100% 40px,100% calc(100% - 40px),0% calc(100% - 80px));
+    }
+
+    .alternatecolor .bg-light-color:after {
+        &:extend(.alternatecolor .bg-light-color:before);
+        top: unset;
+        clip-path: polygon(0% 80px,100% 40px,100% calc(100% - 40px),0% 100%);
+        margin-top: -100px;
+    }
+
+    ul.alternatecolor .bg-light-color:before {
+        &:extend(.alternatecolor .bg-light-color:before);
+        margin-top: -50px;
+    }
+
+    ul.alternatecolor .bg-light-color:after {
+        &:extend(.alternatecolor .bg-light-color:after);
+        margin-top: -50px;
+        top: unset;
+    }
+
+    .alternatecolor .bg-light-color.no-plygon:before, ul.alternatecolor .bg-light-color.no-plygon:before {
+        position: absolute;
+        width: 100%;
+        content: "";
+        background: @bg-secondary-color;
+        right: 0;
+        left: 0;
+        z-index: 12;
+        top: unset;
+        margin-top: 0px;
+        height: 0px;
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+    }
+
+    .alternatecolor .bg-light-color.no-plygon:after, ul.alternatecolor .bg-light-color.no-plygon:after {
+        &:extend(.alternatecolor .bg-light-color.no-plygon:before);
+        top: unset;
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+        margin-top: 0px;
+    }
+
+    .alternatecolor .bg-light-color .row {
+        border-top: 60px solid transparent;
+        border-bottom: 60px solid transparent;
+    }
+
+    .alternatecolor li:last-child .bg-light-color .row, .alternatecolor item:nth-last-child(2) .bg-light-color .row {
+        border-bottom: 0px solid transparent;
+    }
+
+    .alternatecolor li:last-child .bg-light-color, .alternatecolor item:nth-last-child(2) .bg-light-color {
+        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
+    }
+
+    .alternatecolor li:last-child .bg-light-color:after, .alternatecolor item:nth-last-child(2) .bg-light-color:after {
+        display: none;
+    }
+
+    #divSuggeritiContainer.bg-light-color, .bg-light-color.position-sticky, #divCommentiscroll-ctrl .bg-light-color, ul li .a-176.col-12.bg-light-color {
+        clip-path: none;
+        border-top: 0 solid transparent;
+        border-bottom: 0 solid transparent;
+    }
+}*/
 /*END BORDI OBLIQUI ON / OFF*/
 .bg-medium-color {
   background-color: #333333 !important;
@@ -347,6 +357,10 @@ textarea.inputgray:focus {
   color: #fff;
   border: none;
 }
+/*::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em
+}*/
 /*---------------------------------
 --------------- FONT --------------
 ----------------------------------*/
@@ -502,6 +516,13 @@ i .fa {
   /*margin-top: 0px !important;*/
   border-top: 1px solid #077777;
   border-left: 1px dashed #077777;
+}
+.menuzord-menu ul.dropdown ul {
+  list-style: none !important;
+  padding: 0 !important;
+}
+.menuzord-menu ul.dropdown ul > li {
+  padding-left: 15px !important;
 }
 .menuzord-menu ul.dropdown li {
   font-size: 1rem;
@@ -994,12 +1015,19 @@ textarea {
   position: relative;
 }
 .body-wrapper {
-  padding: 0px 0px;
+  padding: 0;
+  margin: 0;
   position: relative;
   /*z-index: 0;*/
   width: 100%;
-  overflow-x: inherit;
+  overflow-x: hidden;
+  overflow-y: hidden;
   /*overflow-x: hidden;*/
+}
+@media (max-width: 768px) {
+  /*.body-wrapper {
+        overflow-x: hidden;
+    }*/
 }
 @media screen and (max-width: 415px) {
   .mbr-section-title,
@@ -1024,11 +1052,6 @@ textarea {
   .big2 {
     font-size: 1.8rem !important;
     line-height: 2.3rem !important;
-  }
-}
-@media (max-width: 768px) {
-  .body-wrapper {
-    overflow-x: hidden;
   }
 }
 h1 span:nth-child(1) {
@@ -4628,7 +4651,7 @@ button.js-roundedpush:hover {
 /*.headerspacer-home {
     padding-top: 0;
 }*/
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   #divContainerb1 {
     height: calc(100vh - 90px) !important;
   }
@@ -4644,7 +4667,7 @@ button.js-roundedpush:hover {
   }
 }
 .rev-slider-full {
-  max-height: 480px;
+  /*max-height: 480px;*/
   /*height: calc(100vh - 225px) !important;*/
 }
 .rev-slider-full .slotholder:after {
@@ -5168,16 +5191,16 @@ button.js-roundedpush:hover {
   font-family: 'Raleway', sans-serif;
   font-size: calc(49px + (65 - 49) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 700;
-  text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
   line-height: normal !important;
   /*BANNER TESTATA HOME - 100% ON*/
   text-align: center;
   white-space: unset;
   margin-bottom: 10px !important;
   /*inizio script icona svg*/
-  padding-bottom: 35px !important;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='rgba(243, 198, 73, 0.8)' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
-  background-size: 135px 21px;
+  /*padding-bottom: 35px !important;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background-size: 135px 21px;*/
   /*BANNER TESTATA HOME - 55% ON*/
   /*text-align: left;
     white-space: pre-wrap;
@@ -5190,7 +5213,7 @@ button.js-roundedpush:hover {
   font-size: calc(30px + (40 - 30) * ((100vw - 768px) / (1200 - 768))) !important;
   font-weight: 700;
   line-height: calc(40px + (50 - 40) * ((100vw - 768px) / (1200 - 768))) !important;
-  text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
   /*BANNER TESTATA HOME - 100% ON*/
   text-align: center;
   white-space: pre-wrap;
@@ -5216,7 +5239,7 @@ button.js-roundedpush:hover {
     overflow-wrap: break-word;
 }*/
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 769px) {
   #divContainerb1 {
     background-color: #eee;
     height: calc(100vh - 81.6px) !important;
@@ -5925,6 +5948,153 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
   line-height: normal !important;
 }
+/*************************************************************************************************/
+/*section SEPARATORS*/
+/*https: //blog.prototypr.io/how-to-add-svg-waves-to-your-next-web-project-b720efe1c692*/
+/*https: //getwaves.io/*/
+/*************************************************************************************************/
+/* Common style for pseudo-elements */
+section::before,
+section::after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+}
+section {
+  position: relative;
+}
+.wave-container {
+  background: #EEE;
+}
+.wave-container > svg {
+  display: block;
+}
+svg {
+  display: block;
+}
+svg path {
+  /*fill: #efefef;
+    stroke: #efefef;*/
+}
+/* Half Circle */
+.ss-style-halfcircle::before,
+.ss-style-halfcircle::after {
+  left: 50%;
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: inherit;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.ss-style-halfcircle::before {
+  top: -50px;
+  background: inherit;
+}
+.ss-style-halfcircle::after {
+  /*bottom: -50px;*/
+  background: inherit;
+}
+/* Triangles */
+.ss-style-triangles::before,
+.ss-style-triangles::after {
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  -webkit-transform: translateX(-50%) rotate(45deg);
+  transform: translateX(-50%) rotate(45deg);
+}
+.ss-style-triangles::before {
+  top: -50px;
+  background: inherit;
+}
+.ss-style-triangles::after {
+  /*bottom: -50px;
+    z-index: 10;
+    background: inherit;*/
+}
+/* Rounded center split and bottom rounded */
+.ss-style-roundedsplit {
+  margin-top: 70px;
+}
+.ss-style-roundedsplit::before,
+.ss-style-roundedsplit::after {
+  top: -70px;
+  left: 0;
+  z-index: 10;
+  width: 50%;
+  height: 70px;
+  background: inherit;
+}
+.ss-style-roundedsplit::before {
+  border-radius: 0 80px 0 0;
+}
+.ss-style-roundedsplit::after {
+  left: 50%;
+  border-radius: 80px 0 0 0;
+}
+.ss-style-roundedsplit-inverse {
+  /*margin-bottom: 70px;*/
+}
+.ss-style-roundedsplit-inverse::before,
+.ss-style-roundedsplit-inverse::after {
+  bottom: -70px;
+  left: 0;
+  z-index: 10;
+  width: 50%;
+  height: 70px;
+  background: inherit;
+}
+.ss-style-roundedsplit-inverse::before {
+  border-radius: 0 80px 0 0;
+}
+.ss-style-roundedsplit-inverse::after {
+  left: 50%;
+  border-radius: 80px 0 0 0;
+}
+/*https: //codepen.io/webd3v/pen/JbJvMQ*/
+/* Inverted rounded corners */
+.ss-style-invertedrounded {
+  margin-bottom: 90px;
+  padding: 13em 10% 10em;
+  border-radius: 0 0 0 90px;
+}
+.ss-style-invertedrounded::before,
+.ss-style-invertedrounded::after {
+  left: 0;
+  z-index: -1;
+  height: 90px;
+  background: #3498db;
+}
+.ss-style-invertedrounded::before {
+  top: 100%;
+  width: 100%;
+  border-radius: 0 90px 0 0;
+}
+.ss-style-invertedrounded::after {
+  bottom: 0;
+  z-index: -1;
+  width: 50%;
+}
+.ss-style-halfcircle::before,
+.ss-style-halfcircle::after {
+  left: 50%;
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: inherit;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.ss-style-halfcircle::before {
+  top: -50px;
+}
+.ss-style-halfcircle::after {
+  bottom: -50px;
+}
+/*************************************************************************************************/
 /*----------------------------------
 /////| COLORI BLOCCHI LINEARI |/////
 ----------------------------------*/

@@ -489,7 +489,6 @@
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
                         </a>
                     </li>
-
                     <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
                         <div style="padding-top: 5px; padding-left: 10px">
                             <%--<input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
@@ -497,11 +496,8 @@
 
                             <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercamater1').click()" />
                             <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="btncercamater1" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
-
-
                         </div>
                     </li>
-
                     <li style="height: 1px" class="scrollable-fix"></li>
                 </ul>
             </div>
@@ -510,7 +506,6 @@
         <!--  MAIN CONTENT -->
         <section class="body-wrapper">
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
-            <asp:Literal Text="" ID="literalVideoHigh" runat="server" />
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
             <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative" id="breadcrumbContainer">
                 <div class="breadcrumbs clearfix">
@@ -520,8 +515,6 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
-
-
             <div runat="server" id="divRicerca" visible="false">
                 <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
             </div>
@@ -590,28 +583,13 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderIndextext" runat="server">
             </asp:ContentPlaceHolder>
-            <asp:Literal Text="" ID="literalVideoBanner" runat="server" />
-
-            <div style="max-width: 1800px; position: relative; margin: 20px auto 10px auto; display: none">
-                <div id="divnavigazioneJs1" style="background-color: transparent"></div>
+            <div style="max-width: 1800px; position: relative;  display: none;margin: 0px auto 0px auto;">
+                <div id="divnavigazioneJs1" style="background-color: transparent;"></div>
             </div>
-            <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none; padding-top: 40px; padding-bottom: 0px;">
-                <div id="divnavigazioneJs0" style="background-color: transparent"></div>
+            <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none;">
+                <div id="divnavigazioneJs0" style="background-color: transparent; padding-top: 40px; padding-bottom: 0px;"></div>
             </div>
             <div id="masterlow"></div>
-
-            <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
-            <%--   <div class="col-12 p-0 d-block d-sm-none">
-                <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
-                <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
-                    <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
-                    <span>Chiamaci adesso al<br>
-                        <b><%= references.ResMan("Common", Lingua,"testoTelfisso")%></b><br>
-                        <br>
-                    </span>
-                    <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
-                </div>
-            </div>--%>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
