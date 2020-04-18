@@ -56,6 +56,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background-image: @pattern-image-light;
     background-size: @pattern-size-light;
 }
+
 .bg-light-color-path {
     fill: @bg-light-color;
     stroke: @bg-light-color;
@@ -589,12 +590,13 @@ i .fa {
     box-shadow: 0 4px 6px -6px #222;
 }
 
-.menuzord-menu ul.dropdown li ul.dropdown { 
-    margin-top: -20px !important;   /*AGISCE SUL MENU DI SECONDO LIVELLO POSIZIONE VERTICALE*/
+.menuzord-menu ul.dropdown li ul.dropdown {
+    margin-top: -20px !important; /*AGISCE SUL MENU DI SECONDO LIVELLO POSIZIONE VERTICALE*/
     /*margin-top: 0px !important;*/
     border-top: 1px solid @secondary-color;
     border-left: 1px dashed @secondary-color;
 }
+
 .menuzord-menu ul.dropdown ul {
     list-style: none !important;
     padding: 0 !important;
@@ -674,7 +676,7 @@ i .fa {
 @media (max-width: 1179px) {
 
     .menuzord-menu ul.dropdown li ul.dropdown {
-        margin-top:0px !important;
+        margin-top: 0px !important;
     }
 
 
@@ -1151,15 +1153,14 @@ p, p.lead, .lead p {
     position: relative;
     /*z-index: 0;*/
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    /*overflow-x: hidden;*/
+    /*OCCHIO PER PER show ON SCROLL  SE CAMBI QUESTE NON FUNZiona DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:unset*/
+    overflow-x: inherit;
 }
-
+ 
 @media (max-width: 768px) {
-    /*.body-wrapper {
-        overflow-x: hidden;
-    }*/
+    .body-wrapper {
+        /*overflow-x: hidden;*/
+    }
 }
 
 @media screen and (max-width: 415px) {
@@ -2246,9 +2247,11 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
 }
+
 .card-body {
     padding: 5px;
 }
+
 .work-item .card {
     margin: 10px;
     padding: 0px;
@@ -2298,6 +2301,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
+
 .oversquare {
     position: absolute;
     display: block;
@@ -2308,6 +2312,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     height: calc(100% - 40px);
     z-index: 3;
 }
+
 .image-polygon-b3.imgovercontainer:hover:after {
     z-index: 2 !important;
     background: none !important;
@@ -6491,8 +6496,6 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
     font-size: @scalable-smallest-font-size !important;
     line-height: normal !important;
 }
-
-
 
 /*************************************************************************************************/
 /*section SEPARATORS*/

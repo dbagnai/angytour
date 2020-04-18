@@ -521,7 +521,7 @@ function contactusMap() {
     marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
-        title: 'Envato'
+        title: ''
     });
 }
 
@@ -1058,12 +1058,8 @@ function io_callback2(entries, observer) {
     /* ---------------------------------------------- */
 const stickyContainers3 = document.querySelectorAll('.show-on-scroll3');
 const io_options3 = {
-    //root: document.body,
-    //root: null,
-    //root: example4.querySelector('#alternate3'),
     rootMargin: '0px 0px -68% 0px',
     threshold: 0
-    //intersectionRatio: 1
 
 };
 const io_observer3 = new IntersectionObserver(io_callback3, io_options3);
