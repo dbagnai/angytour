@@ -1521,7 +1521,7 @@ public class CommonPage : Page
             double sogliazz = 0;
             if (js.keyValuePairs.ContainsKey("sogliaazzeramento"))
                 double.TryParse(js.keyValuePairs["sogliaazzeramento"].ToString(), out sogliazz);
-            if (totali.TotaleOrdine - totali.TotaleSconto >= sogliazz) ret = 0;
+            if (totali.TotaleOrdine - totali.TotaleSconto >= sogliazz && sogliazz != 0) ret = 0;
             // da aggiungere alle spese di spedizione ( ret se presente )
             double daziaggiunta = 0;
             if (js.keyValuePairs.ContainsKey("supplementosp"))
