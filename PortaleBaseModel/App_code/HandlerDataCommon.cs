@@ -199,7 +199,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");
                     string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");
                     if ((maildata.GetValueOrDefault("consenso1") != null))
-                     chknewsletter = (maildata.GetValueOrDefault("consenso1") ?? "");
+                        chknewsletter = (maildata.GetValueOrDefault("consenso1") ?? "");
 
 
                     bool spuntaprivacy = false;
@@ -289,7 +289,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     if (spuntaprivacy)
                     {
-                        Utility.invioMailGenerico(cognomemittente + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        //Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
                         // Registro la statistica di contatto
                         Statistiche stat = new Statistiche();
                         stat.Data = DateTime.Now;
@@ -498,7 +499,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
 
                 case "initresources":/*Caricamento delle risorse di testo per lingua*/
-                                     //System.Globalization.CultureInfo ci = references.setCulture(lingua);
+                    //System.Globalization.CultureInfo ci = references.setCulture(lingua);
                     Dictionary<string, Dictionary<string, string>> dict = references.GetResourcesByLingua(lingua);
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(dict);
                     break;

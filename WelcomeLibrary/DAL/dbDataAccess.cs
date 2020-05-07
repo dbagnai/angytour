@@ -18,10 +18,14 @@ namespace WelcomeLibrary.DAL
         public static DateTime CorrectDatenow(DateTime dataorig)
         {
             DateTime _tmpdate = System.DateTime.Now;
-            if (!DateTime.TryParseExact(dataorig.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
-                DateTime.TryParseExact(System.DateTime.Now.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
-            //if (!DateTime.TryParse(dataorig.ToString(), out _tmpdate))
-            //DateTime.TryParse(System.DateTime.Now.ToString(), out _tmpdate);
+
+            //VERSIONE CHE DAVA IL PROBLEMA NELLA CONVERSIONE DELLE DATE
+            //if (!DateTime.TryParseExact(dataorig.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+            //    DateTime.TryParseExact(System.DateTime.Now.ToString(), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
+
+            if (!DateTime.TryParseExact(dataorig.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+                DateTime.TryParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
+
             return _tmpdate;
         }
 

@@ -122,17 +122,19 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         result = "";
 
                         //INVIAMO LA MAIL DI AVVISO INSERIMENTO
-                        string testomail = "Verifica e controlla la richiesta di inserimento per la struttura : " + itemid + "<br/>";
+                        string testomail = "Verifica e controlla la richiesta di inserimento attività : " + itemid + "<br/>";
+                        testomail += "Email del richiedente: " + item.Email + "<br/>";
                         testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati per la pubblicazione sul portale<br/>";
                         if (jdata.consenso1 == "true")
                             testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati Per attività di marketing diretto ed indiretto e ricerche di mercato<br/>";
                         if (jdata.consenso2 == "true")
                             testomail += "L'utente in oggetto ha autorizzato al trattametno dei dati Per attività di profilazione al fine di migliorare l'offerta di prodotti e servizi<br/>";
 
-                        string soggetto = "Richiesta inserimento ristorante " + html.Convert(jdata.titolo);
-                        string destinatario = ConfigManagement.ReadKey("Nome");
-                        string destinatarioemail = ConfigManagement.ReadKey("Email");
-                        Utility.invioMailGenerico("Mittente", item.Email, soggetto, testomail, destinatarioemail, destinatario);
+                        string soggetto = "Richiesta inserimento attività " + html.Convert(jdata.titolo);
+                        string portale = ConfigManagement.ReadKey("Nome");
+                        string porteleemail = ConfigManagement.ReadKey("Email");
+                        Utility.invioMailGenerico("Mittente", porteleemail, soggetto, testomail, porteleemail, portale);
+                        //Utility.invioMailGenerico("Mittente", item.Email, soggetto, testomail, destinatarioemail, destinatario);
                         break;
                     case "deletefilebypath":
                         Dictionary<string, List<string>> valoriritorno1 = new Dictionary<string, List<string>>();

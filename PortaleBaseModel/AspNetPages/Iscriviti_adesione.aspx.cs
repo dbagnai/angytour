@@ -529,7 +529,8 @@ public partial class AspNetPages_Iscrivitiadesione : CommonPage
 
             //Invio della mail alla struttura emittente la newsletter -----------------------------------------------------------
             string SoggettoMailPerStruttura = "Mail di adesione a newsletter " + Nome + " dal cliente " + nomecliente;
-            Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMailPerStruttura, Descrizione, Email, Nome);
+            Utility.invioMailGenerico(Nome, Email, SoggettoMailPerStruttura, Descrizione, Email, Nome);
+            //Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMailPerStruttura, Descrizione, Email, Nome);
 
             //Invio della mail di conferma dell'adesione al cliente -----------------------------------------------------------
             string SoggettoMail = Nome + ", mail di conferma avvenuta adesione  / Confirmation e-mail for application";

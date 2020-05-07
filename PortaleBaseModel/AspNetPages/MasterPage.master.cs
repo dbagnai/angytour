@@ -1167,7 +1167,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
             if (chkContactPrivacy.Checked)
             {
-                Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                Utility.invioMailGenerico(CommonPage.Nome, CommonPage.Email, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                //Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
 
                 //Registro la statistica di contatto
                 Statistiche stat = new Statistiche();

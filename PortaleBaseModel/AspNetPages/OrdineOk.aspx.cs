@@ -302,7 +302,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Invio la mail per il fornitore
             string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
-            Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+            Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+            //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
             string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
@@ -432,7 +433,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Invio la mail per il fornitore
             string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti);
-            Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+            Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+            //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
             string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti);
@@ -482,6 +484,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         //Mi preparo il testo della mail (formattiamo in html)
         TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-size:14px;'><tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + Nome + "  <br/>";
+        TestoMail += "<br/>EMAIL CLIENTE : <br/> ";
+        TestoMail += totali.Mailcliente + "<br/>";
         TestoMail += "<br/>I dati dell' utente sono indirizzo fatturazione : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
 
