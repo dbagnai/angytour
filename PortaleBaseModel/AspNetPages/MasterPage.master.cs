@@ -129,6 +129,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         divContattiMaster.DataBind();
         req1.DataBind();
         lisearch.DataBind();
+
+
+        CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent2-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+
     }
 
     /// <summary>

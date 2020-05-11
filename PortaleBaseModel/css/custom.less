@@ -199,6 +199,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     background: @bg-sottomenu-color-sfumato !important;
 }
 
+.bg-color-sottomeu-tenue {
+    background: @color-sottomeu-tenue !important;
+}
+
 .bg-color-sottomeu-normal {
     background-color: @color-sottomeu !important;
 }
@@ -628,9 +632,59 @@ i .fa {
 /* modifica meuzord per megamenu grande con molti link*/
 .menuzord-menu > li > .megamenu {
     padding: 30px 30px;
-    /*width:100%;*/
     left: unset;
     border: 1px solid @primary-color;
+    margin: 10px -20px 0;
+    width: calc(100% + 40px);
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+/* modifica meuzord per megamenu grande con molti link*/
+.menuzord-menu > li > .megamenu.megamenu-full-text {
+    padding: 0 30px 30px;
+    left: unset !important;
+    right: 0 !important;
+    border: 1px dashed @primary-color;
+    margin: 10px 40px 0;
+    width: auto;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+.menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
+    margin-top: 30px;
+    /*padding-left: 50px !important;
+    background-color: aliceblue !important;*/
+}
+
+@media (max-width: 1179px) {
+    .menuzord-menu > li > .megamenu.megamenu-full-text {
+        border-top: none;
+        border-bottom: solid 1px #f0f0f0;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        border: none !important;
+    }
+
+    .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist {
+        padding: 0 !Important;
+    }
+
+    .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
+        border-width: 0 !important;
+        border-bottom-width: 1px !important;
+        margin: 0;
+    }
 }
 
 .megamenu-menulist {
@@ -643,10 +697,12 @@ i .fa {
     padding: 0px;
     margin: 0px;
     width: 100%;
+    min-height: 75px;
 }
 
 .megamenu-menulist li {
     width: 100%;
+    list-style-type: none;
 }
 
 .megamenu-menulist > a {
@@ -657,7 +713,7 @@ i .fa {
 }
 
 .megamenu-menulist li > a {
-    padding: 10px 5px !important;
+    padding: 10px 8px !important;
     line-height: 1.6rem;
 }
 
@@ -669,12 +725,24 @@ i .fa {
     font-style: normal;
 }
 
+/*tolgo l'effetto al sottomenù*/
+.megamenu-menulist > a:hover, .megamenu-menulist li > a:hover {
+    color: @color-sottomeu !important;
+}
+
+/*coloro il sottomenù hover*/
+.megamenu-menulist > a:before, .megamenu-menulist > a:after, .megamenu-menulist li > a:before, .megamenu-menulist li > a:after {
+    border: none !important;
+}
+
 .menutext-1.menutext-bold {
     font-weight: @submenu-weight-1;
 }
 
 @media (max-width: 1179px) {
-
+    .megamenu-menulist ul {
+        min-height: unset;
+    }
     .menuzord-menu ul.dropdown li ul.dropdown {
         margin-top: 0px !important;
     }
@@ -1070,6 +1138,15 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
     padding: 0.6rem 0 !important;
 }
 
+.title-block {
+    padding-bottom: 3rem !important
+}
+
+@media screen and (max-width: 720px) {
+    .title-block {
+        padding-bottom: 1rem !important;
+    }
+}
 
 .mbr-section-title, .title-block {
     padding-top: 20px;
@@ -3504,8 +3581,10 @@ b, strong {
     &:extend(.btn-primary);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
-    line-height: 35.5px !important;
-    width: 37.2px;
+    /*line-height: 35.5px !important;
+    width: 37.2px;*/
+    line-height: 31.5px !important;
+    width: 34.5px;
     border-radius: 50%;
     font-weight: lighter;
 }
@@ -3514,8 +3593,10 @@ b, strong {
     &:extend(.btn-primary:hover);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
-    line-height: 35.5px !important;
-    width: 37.2px;
+    /*line-height: 35.5px !important;
+    width: 37.2px;*/
+    line-height: 31.5px !important;
+    width: 34.5px;
     border-radius: 50%;
     font-weight: lighter;
 }
@@ -3610,7 +3691,7 @@ b, strong {
     background-color: @white-color;
     width: 25px;
     height: 25px;
-    line-height: 25px;
+    line-height: 24px;
     border-radius: 50%;
     right: -12.5px;
     top: -12.5px;
@@ -5109,6 +5190,9 @@ button.js-roundedpush:hover {
 /*.headerspacer {
     padding-top: calc(141px + 14px);
 }*/
+#divContainerb3 {
+    height: calc(80vh - 95px - 40px) !important;
+}
 @media (max-width:1179px) {
     .headerspacer, .headerspacer-home {
         padding-top: 100px !important;
@@ -5120,7 +5204,7 @@ button.js-roundedpush:hover {
 }*/
 
 @media (max-width: 768px) {
-    #divContainerb1 {
+    #divContainerb1, #divContainerb3 {
         height: calc(100vh - 90px) !important;
     }
 
@@ -5131,8 +5215,16 @@ button.js-roundedpush:hover {
 
 
 @media (max-width: 767px) {
-    #divContainerb1, #divContainerb2 {
+    #divContainerb1, #divContainerb2, #divContainerb3 {
         height: calc(100vh - 90px) !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #divContainerb3 .defaultimg {
+        transform: rotate(-90deg);
+        width: 100vh !important;
+        height: 100vh !important;
     }
 }
 
@@ -5483,6 +5575,17 @@ button.js-roundedpush:hover {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf9c8a60', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 }
 
+.gradient-overlay-my-bottomtop {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,d6bdd9+100&0+67,0.65+70,0.85+77,0.88+96 */
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(228,211,230,0) 67%, rgba(136,133,32,0.65) 70%, rgba(136,133,32,0.85) 77%, rgba(136,133,32,0.88) 96%, rgba(136,133,32,0.88) 100%); /* FF3.6-15 */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(67%,rgba(228,211,230,0)), color-stop(70%,rgba(136,133,32,0.65)), color-stop(77%,rgba(136,133,32,0.85)), color-stop(96%,rgba(136,133,32,0.88)), color-stop(100%,rgba(136,133,32,0.88))); /* Chrome4-9,Safari4-5 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(228,211,230,0) 67%,rgba(136,133,32,0.65) 70%,rgba(136,133,32,0.85) 77%,rgba(136,133,32,0.88) 96%,rgba(136,133,32,0.88) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(228,211,230,0) 67%,rgba(136,133,32,0.65) 70%,rgba(136,133,32,0.85) 77%,rgba(136,133,32,0.88) 96%,rgba(136,133,32,0.88) 100%); /* Opera 11.10-11.50 */
+    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(228,211,230,0) 67%,rgba(136,133,32,0.65) 70%,rgba(136,133,32,0.85) 77%,rgba(136,133,32,0.88) 96%,rgba(136,133,32,0.88) 100%); /* IE10 preview */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(228,211,230,0) 67%,rgba(136,133,32,0.65) 70%,rgba(136,133,32,0.85) 77%,rgba(136,133,32,0.88) 96%,rgba(136,133,32,0.88) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#e0d6bdd9',GradientType=0 ); /* IE6-9 */
+}
+
 .gradient-overlay-red-bottomtop {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+1,b2181c+100&0+67,0.65+70,0.85+77,0.88+96 */
     background: -moz-linear-gradient(top, rgba(255,255,255,0) 1%, rgba(204,101,104,0) 67%, rgba(202,94,97,0.65) 70%, rgba(196,78,81,0.85) 77%, rgba(181,33,37,0.88) 96%, rgba(178,24,28,0.88) 100%); /* FF3.6-15 */
@@ -5613,6 +5716,50 @@ button.js-roundedpush:hover {
 .rev-slider-full .slotholder:after {
     background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
 }*/
+
+
+/*BANNER TESTATA TOP - ECOMMERCE_ TIPO EDOARDO MONDI*/
+/*#divContainerb1 .rev-slider-full .slotholder:after {
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00ffffff',GradientType=1 );
+}
+@media (max-width: 540px) {
+    #divContainerb1 .rev-slider-full .slotholder:after {
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000b3', endColorstr='#00ffffff',GradientType=0 );
+    }
+}*/
+
+/*BANNER TESTATA BOTTOM - ECOMMERCE_ TIPO EDOARDO MONDI*/
+.banner-offerta {
+    width: 50%;
+    border-right: 8px solid #fff;
+    margin-right: -3rem;
+}
+
+.testo-banner-offerta {
+    letter-spacing: 2px;
+    line-height: 150% !important;
+}
+
+@media (max-width: 767px) {
+    #divContainerb3 .banner-offerta {
+        width: 60%;
+    }
+}
+
+@media (max-width: 540px) {
+    .banner-offerta, #divContainerb3 .banner-offerta {
+        width: 100%;
+        border-right: 0 solid rgba(255, 255, 255, 0);
+        margin-right: 0 !important;
+    }
+}
+/*END BANNER TESTATA BOTTOM - ECOMMERCE_ TIPO EDOARDO MONDI*/
 
 .bigtext {
     color: @title-testata-home-color;
@@ -6451,48 +6598,54 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 /* fine callout con bordi */
 
 /* classi per scalatura forzata dei caratteri */
-.scalable-extrime, .scalablefont-extrim {
+.scalable-extrime, .scalablefont-extrim, .scalable-extrime:hover, .scalablefont-extrim:hover {
     font-size: @scalable-extrime-font-size !important;
     line-height: normal !important;
 }
 
-.scalablefont-testata-extrime {
+.scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
     font-size: @scalable-testata-extrime-font-size !important;
     line-height: normal !important;
 }
 
-.scalablefont-medium-extrime {
+.scalablefont-medium-extrime, .scalablefont-medium-extrime:hover {
     font-size: @scalable-medium-extrime-font-size !important;
     line-height: normal !important;
 }
 
-.scalablefont-big {
+.scalablefont-big, .scalablefont-big:hover {
     font-size: @scalable-big-font-size !important;
     line-height: normal !important;
 }
 
-.scalablefont-medium-big {
+.scalablefont-big.testo-banner-offerta {
+    line-height: normal !important;
+    /*line-height: 150% !important;*/
+}
+
+.scalablefont-medium-big, .scalablefont-medium-big:hover {
     font-size: @scalable-medium-big-font-size !important;
     line-height: normal !important;
 }
 
-.scalablefont-medium {
+.scalablefont-medium, .scalablefont-medium:hover {
     font-size: @scalable-medium-font-size !important;
     /*line-height: normal !important;*/
 }
 
-.scalablefont-small-medium {
+.scalablefont-small-medium, .scalablefont-small-medium:hover {
     font-size: @scalable-small-medium-font-size !important;
     line-height: normal !important;
 }
 
 
-.scalablefont-small {
+.scalablefont-small, .scalablefont-small:hover {
     font-size: @scalable-small-font-size !important;
     line-height: normal !important;
+    line-height: 150% !important;
 }
 
-.scalablefont-smallest {
+.scalablefont-smallest, .scalablefont-smallest:hover {
     font-size: @scalable-smallest-font-size !important;
     line-height: normal !important;
 }
@@ -6676,4 +6829,5 @@ svg path {
 .ss-style-halfcircle::after {
     bottom: -50px;
 }
+/*************************************************************************************************/
 /*************************************************************************************************/

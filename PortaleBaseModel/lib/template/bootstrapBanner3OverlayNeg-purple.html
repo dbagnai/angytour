@@ -1,24 +1,62 @@
-﻿<div class="row no-gutters" id="replaceid">
+﻿<style>
+    .squarevariable .imgovercontainer, .gradient-overlay-my-bottomtop, .oversquare {
+        -webkit-transition: all .35s ease;
+        transition: all .35s ease;
+    }
+
+        .squarevariable .imgovercontainer:hover {
+            -webkit-transform: scale(1.2) rotate(5deg);
+            -moz-transform: scale(1.2) rotate(5deg);
+            -ms-transform: scale(1.2) rotate(5deg);
+            -o-transform: scale(1.2) rotate(5deg);
+            transform: scale(1.2) rotate(5deg);
+            -webkit-transition: all 1.0s ease;
+            transition: all 1.0s ease;
+        }
+
+            .squarevariable .imgovercontainer:hover .gradient-overlay-my-bottomtop, .squarevariable .imgovercontainer:hover .oversquare {
+                -webkit-transform: scale(0.833) rotate(-5deg);
+                -moz-transform: scale(0.833) rotate(-5deg);
+                -ms-transform: scale(0.833) rotate(-5deg);
+                -o-transform: scale(0.833) rotate(-5deg);
+                transform: scale(0.833) rotate(-5deg);
+                -webkit-transition: all 1.0s ease;
+                transition: all 1.0s ease;
+            }
+
+            .squarevariable .imgovercontainer:hover:after {
+                z-index: 2 !important;
+                background: url(/images/link1.png) center center no-repeat !important;
+                background-size: 80px 80px !important;
+                background-color: rgba(0,0,0,.0) !important;
+                opacity: 1 !important;
+                -webkit-transition: all .35s ease;
+                transition: all .35s ease;
+                background: none !important;
+            }
+</style>
+
+
+<div class="row no-gutters squarevariable" id="replaceid">
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
         <div class="card m-2 border-tipo1" style="overflow:hidden">
             <a class="bind d-block" preload target="_self" href="link" title="titolo" mybind="Id">
-            <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id" style="min-height:400px">
-                <div class="oversquare"></div>
-                <!--<div class="card-img-overlay card-gradient-overlay">-->
-                <div class="card-img-overlay gradient-overlay-purple-bottomtop">
-                    <div style="position:absolute;display:block;z-index:96;bottom:10px;width:90%;text-align:center">
-                        <h3 class="card-title titolo-offerta mb-1">
-                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                        </h3>
-                        <div class="w-50 mt-1 mx-auto mb-1" style="border-bottom: 3px solid;color:#ffffff"></div>
-                        <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-4">
-                            <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
-                        </h4>
+                <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id" style="min-height:400px">
+                    <div class="oversquare position-absolute"></div>
+                    <!--<div class="card-img-overlay card-gradient-overlay">-->
+                    <div class="card-img-overlay gradient-overlay-my-bottomtop">
+                        <div style="position:absolute;display:block;z-index:96;bottom:10px;width:90%;text-align:center">
+                            <h3 class="card-title titolo-offerta mb-1">
+                                <span class="bind text-white" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            </h3>
+                            <div class="w-50 mt-1 mx-auto mb-1" style="border-bottom: 3px solid;color:#ffffff"></div>
+                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-4">
+                                <span class="bind text-white" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                            </h4>
+                        </div>
                     </div>
                 </div>
-            </div>
             </a>
         </div>
     </div>
 </div>
-
