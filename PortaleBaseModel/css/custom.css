@@ -170,6 +170,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+path.bg-light-color-path {
+  fill: #fff;
+  stroke: #fff;
+}
 .bg-primary-color {
   background-color: #098f8f !important;
 }
@@ -1230,7 +1234,7 @@ textarea {
 }
 @media (max-width: 768px) {
   .body-wrapper {
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
   }
 }
 @media screen and (max-width: 415px) {
@@ -1356,6 +1360,7 @@ input[type="button"],
 button.btn,
 .btn-primary,
 .button-carrello,
+.button-carrello-vedi,
 .button-carrello1,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
@@ -1385,6 +1390,7 @@ input[type="button"]:hover,
 button.btn:hover,
 .btn-primary:hover,
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello1:hover,
 .button-carrello-animate:hover {
   text-decoration: none !important;
@@ -1820,12 +1826,14 @@ button.btn:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello,
+.button-carrello-vedi,
 .button-carrello1,
 li:nth-child(n) .rounded-responsive .btn.parimulticolore,
 .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
 li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
 .button-carrello1:hover,
@@ -1883,6 +1891,7 @@ button.btn:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello1:hover,
 .button-carrello-animate:hover {
   color: #000 !important;
@@ -3463,6 +3472,7 @@ strong {
   font-weight: bold;
 }
 .button-carrello,
+.button-carrello-vedi,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
 .button-carrello-animate {
@@ -3476,6 +3486,7 @@ strong {
   font-weight: lighter;
 }
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello-animate:hover {
   font-size: 1rem;
   padding: 0 0 0 2px !important;
@@ -4032,6 +4043,7 @@ select.form-control:not([size]):not([multiple]) {
   }
   .menuzord-menu a:hover {
     color: #077777;
+    padding: 8px 8px !important;
     /*font-weight: @menu-hover-weight !important;*/
     /*padding: 8px 14px !important;*/
   }
@@ -5515,7 +5527,7 @@ button.js-roundedpush:hover {
     overflow-wrap: break-word;
 }*/
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1025px) {
   #divContainerb1 {
     background-color: #eee;
     height: calc(100vh - 81.6px) !important;

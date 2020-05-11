@@ -43,6 +43,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+path.bg-light-color-path {
+    fill: #fff;
+    stroke: #fff;
+}
 .bg-primary-color {
     background-color: @bg-primary-color !important;
 }
@@ -1236,7 +1240,7 @@ p, p.lead, .lead p {
  
 @media (max-width: 768px) {
     .body-wrapper {
-        /*overflow-x: hidden;*/
+        overflow-x: hidden;
     }
 }
 
@@ -3577,7 +3581,7 @@ b, strong {
     font-weight: bold;
 }
 
-.button-carrello {
+.button-carrello, .button-carrello-vedi {
     &:extend(.btn-primary);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
@@ -3589,7 +3593,7 @@ b, strong {
     font-weight: lighter;
 }
 
-.button-carrello:hover {
+.button-carrello:hover, .button-carrello-vedi:hover {
     &:extend(.btn-primary:hover);
     font-size: 1rem;
     padding: 0 0 0 2px !important;
@@ -4231,6 +4235,7 @@ select.form-control:not([size]):not([multiple]) {
 
     .menuzord-menu a:hover {
         color: @secondary-color;
+        padding: 8px 8px !important;
         /*font-weight: @menu-hover-weight !important;*/
         /*padding: 8px 14px !important;*/
     }
@@ -5816,7 +5821,7 @@ button.js-roundedpush:hover {
 }*/
 
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1025px) {
     #divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 81.6px) !important;
