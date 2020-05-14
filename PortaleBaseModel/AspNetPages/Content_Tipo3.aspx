@@ -494,5 +494,9 @@
         jQuery(function ($) {
             $('#ctl00_divContattiMaster').css({ 'display': 'none' });
         });
+        <%--MODULO LINK VENDITA E_COMMERCE--%>
+        jQuery(function ($) {
+            $('#ctl00_masterlow1').html('');
+        });
     </script>
 </asp:Content>

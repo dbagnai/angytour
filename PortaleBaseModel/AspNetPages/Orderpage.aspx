@@ -229,7 +229,7 @@
                         </div>
 
                         <div class="widget shop-selections">
-                            <table class="table table-cart">
+                            <table class="table table-cart mb-1">
                                 <thead>
                                     <tr>
                                         <td class="cart-product">
@@ -386,6 +386,18 @@
                             </table>
                         </div>
 
+                        <%-- CODICE SCONTO --%>
+                        <div class="row">
+                            <div class="col-12">
+                        <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
+                                    <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
+                                    <div class="d-inline float-none float-sm-left my-2" style="width:calc(100% - 219px);background: white;"><asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" /></div>
+                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2"><asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" /></div>
+                                    <div style="color: red">
+                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" /></div>
+                                </div>
+                                </div>
+                            </div>
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
@@ -401,15 +413,15 @@
                     <%-- COLONNA METODO PAGAMENTO E ACQUISTO --%>
                     <div class="col-12 col-lg-5">
                         <div class="position-sticky" style="top: 120px" id="divColumnsticky">
-                            <div class="mb-5 mb-sm-3 p-3 bg-light-color">
+                            <div class="mb-0 mb-sm-3 px-3 py-4 bg-light-color">
 
-                                <div class="widget bill-payment" style="text-align: left; display: none">
+                                <%--<div class="widget bill-payment" style="text-align: left; display: none">
                                     <span class="TitlePrezzo"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></span>
                                     <asp:TextBox runat="server" ID="txtCodiceSconto" />
                                     <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" />
                                     <span style="color: red">
                                         <asp:Literal Text="" ID="lblCodiceSconto" runat="server" /></span>
-                                </div>
+                                </div>--%>
 
                                 <div class="widget bill-payment p-2">
                                     <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
@@ -476,7 +488,19 @@
                                                 </div>
 
                                                 <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
-                                                    <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b><br />
+                                                    <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b>
+                                                    <%--icone-carte di credito--%>
+                                                    <div class="container" style="">
+                        <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
+                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
+                        </div>
+                    </div>
                                                     <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                 </div>
                                             </div>

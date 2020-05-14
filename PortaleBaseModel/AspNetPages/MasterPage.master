@@ -269,8 +269,8 @@
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
                     <%= CreaLinkPaginastatica(1) %>
 
-
-                    <li runat="server">
+                    <%--MEGAMENU DANY--%>
+                    <%--<li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
                         <div class="megamenu megamenu-full-width">
                             <div class="megamenu-row">
@@ -285,8 +285,36 @@
                                 </div>
                             </div>
                         </div>
+                    </li>--%>
+
+                    <%--MEGAMENU MIRCO (EDOARDO MONDI)--%>
+					<li runat="server">
+                        <%--<a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>--%>
+                        <%--<a class="a-dropdown tx-sottomenu-color" href="/it/catalogo-2" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>--%>
+                        <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
+                        <div class="megamenu megamenu-full-text">
+                                <div class="row megamenu-row justify-content-center m-0">
+                                <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000030,prod000031,prod000032","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000033,prod000034,prod000035","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000045,prod000046,prod000047","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000048,prod000049,prod000052","menutext-1 menutext-bold",true) %>
+                                </div>
+                                    <%--<div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000047,prod000048","menutext-1 menutext-bold",true) %>
+                                </div>
+                                    <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000049,prod000052","menutext-1 menutext-bold",true) %>
+                                </div>--%>
+                            </div>
+                        </div>
                     </li>
-					
 
                    <%-- <li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
@@ -589,8 +617,23 @@
             <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none;">
                 <div id="divnavigazioneJs0" style="background-color: transparent; padding-top: 40px; padding-bottom: 0px;"></div>
             </div>
+            <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
+            <%--   <div class="col-12 p-0 d-block d-sm-none">
+                <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
+                <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
+                    <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
+                    <span>Chiamaci adesso al<br>
+                        <b><%= references.ResMan("Common", Lingua,"testoTelfisso")%></b><br>
+                        <br>
+                    </span>
+                    <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
+                </div>
+            </div>--%>
             <div id="masterlow"></div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
+            <%--START BANNER E_COMMERCE_ VENDITA IN BASSO--%>
+            <div id="masterlow1" runat="server" clientid="static"></div>
+            <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
                     <%--<section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">--%>

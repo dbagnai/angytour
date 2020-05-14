@@ -27,6 +27,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /* fascia catalogo */
 /* fascia catalogo link active */
 /* colore sotto-menu per decorazione titoli*/
+/* sottomenù molto tenue */
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
@@ -169,6 +170,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+path.bg-light-color-path {
+  fill: #fff;
+  stroke: #fff;
+}
 .bg-primary-color {
   background-color: #098f8f !important;
 }
@@ -315,6 +320,9 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-color-sottomeu {
   background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
+}
+.bg-color-sottomeu-tenue {
+  background: #fcefcc !important;
 }
 .bg-color-sottomeu-normal {
   background-color: #f3c649 !important;
@@ -673,9 +681,54 @@ i .fa {
 /* modifica meuzord per megamenu grande con molti link*/
 .menuzord-menu > li > .megamenu {
   padding: 30px 30px;
-  /*width:100%;*/
   left: unset;
   border: 1px solid #032f2f;
+  margin: 10px -20px 0;
+  width: calc(100% + 40px);
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+/* modifica meuzord per megamenu grande con molti link*/
+.menuzord-menu > li > .megamenu.megamenu-full-text {
+  padding: 0 30px 30px;
+  left: unset !important;
+  right: 0 !important;
+  border: 1px dashed #032f2f;
+  margin: 10px 40px 0;
+  width: auto;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+.menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
+  margin-top: 30px;
+  /*padding-left: 50px !important;
+    background-color: aliceblue !important;*/
+}
+@media (max-width: 1179px) {
+  .menuzord-menu > li > .megamenu.megamenu-full-text {
+    border-top: none;
+    border-bottom: solid 1px #f0f0f0;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    border: none !important;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist {
+    padding: 0 !Important;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
+    border-width: 0 !important;
+    border-bottom-width: 1px !important;
+    margin: 0;
+  }
 }
 .megamenu-menulist {
   line-height: normal;
@@ -686,9 +739,11 @@ i .fa {
   padding: 0px;
   margin: 0px;
   width: 100%;
+  min-height: 75px;
 }
 .megamenu-menulist li {
   width: 100%;
+  list-style-type: none;
 }
 .megamenu-menulist > a {
   display: block;
@@ -697,7 +752,7 @@ i .fa {
   width: 100%;
 }
 .megamenu-menulist li > a {
-  padding: 10px 5px !important;
+  padding: 10px 8px !important;
   line-height: 1.6rem;
 }
 .menutext-1 {
@@ -707,10 +762,25 @@ i .fa {
   font-weight: 400;
   font-style: normal;
 }
+/*tolgo l'effetto al sottomenù*/
+.megamenu-menulist > a:hover,
+.megamenu-menulist li > a:hover {
+  color: #f3c649 !important;
+}
+/*coloro il sottomenù hover*/
+.megamenu-menulist > a:before,
+.megamenu-menulist > a:after,
+.megamenu-menulist li > a:before,
+.megamenu-menulist li > a:after {
+  border: none !important;
+}
 .menutext-1.menutext-bold {
   font-weight: 600;
 }
 @media (max-width: 1179px) {
+  .megamenu-menulist ul {
+    min-height: unset;
+  }
   .menuzord-menu ul.dropdown li ul.dropdown {
     margin-top: 0px !important;
   }
@@ -1067,6 +1137,14 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
   font-size: 1rem !important;
   padding: 0.6rem 0 !important;
 }
+.title-block {
+  padding-bottom: 3rem !important;
+}
+@media screen and (max-width: 720px) {
+  .title-block {
+    padding-bottom: 1rem !important;
+  }
+}
 .mbr-section-title,
 .title-block,
 h1 span:nth-child(1).mbr-section-title,
@@ -1156,7 +1234,7 @@ textarea {
 }
 @media (max-width: 768px) {
   .body-wrapper {
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
   }
 }
 @media screen and (max-width: 415px) {
@@ -1282,6 +1360,7 @@ input[type="button"],
 button.btn,
 .btn-primary,
 .button-carrello,
+.button-carrello-vedi,
 .button-carrello1,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
@@ -1311,6 +1390,7 @@ input[type="button"]:hover,
 button.btn:hover,
 .btn-primary:hover,
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello1:hover,
 .button-carrello-animate:hover {
   text-decoration: none !important;
@@ -1746,12 +1826,14 @@ button.btn:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello,
+.button-carrello-vedi,
 .button-carrello1,
 li:nth-child(n) .rounded-responsive .btn.parimulticolore,
 .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
 li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
 .button-carrello1:hover,
@@ -1809,6 +1891,7 @@ button.btn:hover,
 input:hover[type="submit"],
 input:hover[type="button"],
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello1:hover,
 .button-carrello-animate:hover {
   color: #000 !important;
@@ -3389,22 +3472,28 @@ strong {
   font-weight: bold;
 }
 .button-carrello,
+.button-carrello-vedi,
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover,
 .button-carrello-animate {
   font-size: 1rem;
   padding: 0 0 0 2px !important;
-  line-height: 35.5px !important;
-  width: 37.2px;
+  /*line-height: 35.5px !important;
+    width: 37.2px;*/
+  line-height: 31.5px !important;
+  width: 34.5px;
   border-radius: 50%;
   font-weight: lighter;
 }
 .button-carrello:hover,
+.button-carrello-vedi:hover,
 .button-carrello-animate:hover {
   font-size: 1rem;
   padding: 0 0 0 2px !important;
-  line-height: 35.5px !important;
-  width: 37.2px;
+  /*line-height: 35.5px !important;
+    width: 37.2px;*/
+  line-height: 31.5px !important;
+  width: 34.5px;
   border-radius: 50%;
   font-weight: lighter;
 }
@@ -3481,7 +3570,7 @@ strong {
   background-color: #fff;
   width: 25px;
   height: 25px;
-  line-height: 25px;
+  line-height: 24px;
   border-radius: 50%;
   right: -12.5px;
   top: -12.5px;
@@ -3954,6 +4043,7 @@ select.form-control:not([size]):not([multiple]) {
   }
   .menuzord-menu a:hover {
     color: #077777;
+    padding: 8px 8px !important;
     /*font-weight: @menu-hover-weight !important;*/
     /*padding: 8px 14px !important;*/
   }
@@ -4772,6 +4862,9 @@ button.js-roundedpush:hover {
 /*.headerspacer {
     padding-top: calc(141px + 14px);
 }*/
+#divContainerb3 {
+  height: calc(80vh - 95px - 40px) !important;
+}
 @media (max-width: 1179px) {
   .headerspacer,
   .headerspacer-home {
@@ -4782,7 +4875,8 @@ button.js-roundedpush:hover {
     padding-top: 0;
 }*/
 @media (max-width: 768px) {
-  #divContainerb1 {
+  #divContainerb1,
+  #divContainerb3 {
     height: calc(100vh - 90px) !important;
   }
   #divContainerb2 {
@@ -4792,8 +4886,16 @@ button.js-roundedpush:hover {
 }
 @media (max-width: 767px) {
   #divContainerb1,
-  #divContainerb2 {
+  #divContainerb2,
+  #divContainerb3 {
     height: calc(100vh - 90px) !important;
+  }
+}
+@media (max-width: 576px) {
+  #divContainerb3 .defaultimg {
+    transform: rotate(-90deg);
+    width: 100vh !important;
+    height: 100vh !important;
   }
 }
 .rev-slider-full {
@@ -5172,6 +5274,23 @@ button.js-roundedpush:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cf9c8a60', endColorstr='#00ffffff', GradientType=1);
   /* IE6-9 */
 }
+.gradient-overlay-my-bottomtop {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,d6bdd9+100&0+67,0.65+70,0.85+77,0.88+96 */
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* FF3.6-15 */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(67%, rgba(228, 211, 230, 0)), color-stop(70%, rgba(136, 133, 32, 0.65)), color-stop(77%, rgba(136, 133, 32, 0.85)), color-stop(96%, rgba(136, 133, 32, 0.88)), color-stop(100%, rgba(136, 133, 32, 0.88)));
+  /* Chrome4-9,Safari4-5 */
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* Opera 11.10-11.50 */
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* IE10 preview */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#e0d6bdd9', GradientType=0);
+  /* IE6-9 */
+}
 .gradient-overlay-red-bottomtop,
 .multicolor > div:nth-child(6) .card-img-overlay,
 .multicolor-1 > div:nth-child(2) .card-img-overlay {
@@ -5316,6 +5435,45 @@ button.js-roundedpush:hover {
 .rev-slider-full .slotholder:after {
     background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
 }*/
+/*BANNER TESTATA TOP - ECOMMERCE_ TIPO EDOARDO MONDI*/
+/*#divContainerb1 .rev-slider-full .slotholder:after {
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00ffffff',GradientType=1 );
+}
+@media (max-width: 540px) {
+    #divContainerb1 .rev-slider-full .slotholder:after {
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.7) 50%, rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000b3', endColorstr='#00ffffff',GradientType=0 );
+    }
+}*/
+/*BANNER TESTATA BOTTOM - ECOMMERCE_ TIPO EDOARDO MONDI*/
+.banner-offerta {
+  width: 50%;
+  border-right: 8px solid #fff;
+  margin-right: -3rem;
+}
+.testo-banner-offerta {
+  letter-spacing: 2px;
+  line-height: 150% !important;
+}
+@media (max-width: 767px) {
+  #divContainerb3 .banner-offerta {
+    width: 60%;
+  }
+}
+@media (max-width: 540px) {
+  .banner-offerta,
+  #divContainerb3 .banner-offerta {
+    width: 100%;
+    border-right: 0 solid rgba(255, 255, 255, 0);
+    margin-right: 0 !important;
+  }
+}
+/*END BANNER TESTATA BOTTOM - ECOMMERCE_ TIPO EDOARDO MONDI*/
 .bigtext {
   color: #fff;
   font-family: 'Raleway', sans-serif;
@@ -5369,7 +5527,7 @@ button.js-roundedpush:hover {
     overflow-wrap: break-word;
 }*/
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1025px) {
   #divContainerb1 {
     background-color: #eee;
     height: calc(100vh - 81.6px) !important;
@@ -6042,39 +6200,54 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 /* fine callout con bordi */
 /* classi per scalatura forzata dei caratteri */
 .scalable-extrime,
-.scalablefont-extrim {
+.scalablefont-extrim,
+.scalable-extrime:hover,
+.scalablefont-extrim:hover {
   font-size: calc(30px + 2vw + 2vh + 2vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-testata-extrime {
+.scalablefont-testata-extrime,
+.scalablefont-testata-extrime:hover {
   font-size: calc(30px + 2vw + 1vh + 1vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-medium-extrime {
+.scalablefont-medium-extrime,
+.scalablefont-medium-extrime:hover {
   font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-big {
+.scalablefont-big,
+.scalablefont-big:hover {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-medium-big {
+.scalablefont-big.testo-banner-offerta {
+  line-height: normal !important;
+  /*line-height: 150% !important;*/
+}
+.scalablefont-medium-big,
+.scalablefont-medium-big:hover {
   font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-medium {
+.scalablefont-medium,
+.scalablefont-medium:hover {
   font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin) !important;
   /*line-height: normal !important;*/
 }
-.scalablefont-small-medium {
+.scalablefont-small-medium,
+.scalablefont-small-medium:hover {
   font-size: calc(18px + 0.3vw + 0.3vh + 0.15vmin) !important;
   line-height: normal !important;
 }
-.scalablefont-small {
+.scalablefont-small,
+.scalablefont-small:hover {
   font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
   line-height: normal !important;
+  line-height: 150% !important;
 }
-.scalablefont-smallest {
+.scalablefont-smallest,
+.scalablefont-smallest:hover {
   font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
   line-height: normal !important;
 }
@@ -6224,4 +6397,5 @@ svg path {
 .ss-style-halfcircle::after {
   bottom: -50px;
 }
+/*************************************************************************************************/
 /*************************************************************************************************/

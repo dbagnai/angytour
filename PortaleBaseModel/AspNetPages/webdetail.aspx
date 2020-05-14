@@ -235,7 +235,7 @@
     <div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
 
     <%--CONTATTI--%>
-    <div class="ui-15 bg-light-color no-plygon-bottom" style="border-bottom: 10px dotted #fff;" runat="server" id="divContactBelow" clientidmode="static" visible="false">
+    <div class="ui-15 bg-secondary-color no-plygon-bottom" runat="server" id="divContactBelow" clientidmode="static" visible="false">
         <div class="container">
             <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
                 <div class="container">
