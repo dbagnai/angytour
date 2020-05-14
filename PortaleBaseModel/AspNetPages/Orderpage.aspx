@@ -247,7 +247,7 @@
                                             <tr>
                                                 <td class="cart-product">
                                                     <%--       <a id="a3" runat="server"
-                                                href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                 target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                 class="product-thumb pull-left">
                                                 <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -257,7 +257,7 @@
                                             </a>--%>
 
                                                     <a id="a3" runat="server"
-                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                         class="product-thumb pull-left d-none d-sm-block m-0 ml-0 mr-sm-3">
                                                         <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -269,7 +269,7 @@
                                                     <div class="product-details" style="height: auto;">
                                                         <h3 class="product-name">
                                                             <%--  <a id="a1" runat="server"
-                                                        href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>--%>
                                                             <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
                                                                 runat="server"></asp:Literal>
@@ -389,15 +389,18 @@
                         <%-- CODICE SCONTO --%>
                         <div class="row">
                             <div class="col-12">
-                        <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
+                                <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
                                     <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
-                                    <div class="d-inline float-none float-sm-left my-2" style="width:calc(100% - 219px);background: white;"><asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" /></div>
-                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2"><asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" /></div>
+                                    <div class="d-inline float-none float-sm-left my-2" style="width: calc(100% - 219px); background: white;">
+                                        <asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" /></div>
+                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2">
+                                        <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" /></div>
                                     <div style="color: red">
-                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" /></div>
-                                </div>
+                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" />
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
@@ -437,7 +440,7 @@
                                         }
                                     </script>
                                     <ul class="unstyled m-0 p-0">
-                                        <li style="display: none">
+                                        <li style="display: block">
                                             <div class="clearfix" style="margin-bottom: 20px">
                                                 <div class="float-left mt-1 mr-2" style="width: 25px">
                                                     <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti" onclick="refreshcarrello(this, 'inpContanti')"
@@ -491,16 +494,16 @@
                                                     <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b>
                                                     <%--icone-carte di credito--%>
                                                     <div class="container" style="">
-                        <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
-                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                            <div class="logo-payment" style="width: 12.5%;background-size: 100% !important;"></div>
-                        </div>
-                    </div>
+                                                        <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                        </div>
+                                                    </div>
                                                     <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                 </div>
                                             </div>
@@ -509,7 +512,7 @@
                                     <div class="col-12 col-sm-8 mx-auto px-0">
                                         <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
                                     </div>
-                                      <div>
+                                    <div>
                                         <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
                                     </div>
                                 </div>

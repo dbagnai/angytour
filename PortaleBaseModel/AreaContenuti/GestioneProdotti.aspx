@@ -138,7 +138,7 @@
 
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a onclick="JsSvuotaSession(this)" target="_blank" href="<%# CreaLinkRoutes(null,false,"I",((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">
+                                            <a onclick="JsSvuotaSession(this)" target="_blank" href="<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I",((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())  %>">
                                                 <asp:Literal ID="Literal4" runat="server" Text='<%# Eval("Id").ToString() %>'></asp:Literal></a>
 
                                         </div>
@@ -156,7 +156,7 @@
                                     </td>
                                     <td style="border: Solid 1px #ccc;">
                                         <div style="height: 50px; overflow-y: auto">
-                                            <a target="_blank" href="<%# CreaLinkRoutes(null,false,"I",((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
+                                            <a target="_blank" href="<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I",((WelcomeLibrary.DOM.Offerte)Container.DataItem).UrltextforlinkbyLingua("I"),Eval("Id").ToString(),Eval("CodiceTipologia").ToString())    %>">view
                                         </div>
                                     </td>
                                     <%--<td style="border: Solid 1px Black;">
@@ -719,38 +719,38 @@
                     </div>
                 </div>
                 <hr />
+                <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label23" runat="server" Text="Caratteristica 1" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica1" runat="server" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label24" runat="server" Text="Caratteristica 2" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica2" runat="server" />
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label27" runat="server" Text="Caratteristica 3" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica3" runat="server" />
+                    </div>
+                </div>
 
                 <asp:Panel runat="server" Visible="false">
 
-                    <div class="row">
-                        <div class="col-sm-2 item-text">
-                            <strong>
-                                <asp:Label ID="Label23" runat="server" Text="Caratteristica 1" /></strong>
-                        </div>
-                        <div class="col-sm-10">
-                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica1" runat="server" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 item-text">
-                            <strong>
-                                <asp:Label ID="Label24" runat="server" Text="Caratteristica 2" /></strong>
-                        </div>
-                        <div class="col-sm-10">
-                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica2" runat="server" />
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-sm-2 item-text">
-                            <strong>
-                                <asp:Label ID="Label27" runat="server" Text="Caratteristica 3" /></strong>
-                        </div>
-                        <div class="col-sm-10">
-                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" ID="ddlCaratteristica3" runat="server" />
-                        </div>
-                    </div>
 
                     <div class="row">
                         <div class="col-sm-2 item-text">
@@ -826,8 +826,8 @@
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
                 </div>
-                
-                <div class="row" style="display:block">
+
+                <div class="row" style="display: block">
                     <div class="col-sm-2 item-text">
                         <strong>
                             <asp:Label Width="30%" ID="Label60" runat="server" Text="Peso (Opzionale)" /></strong>
@@ -1245,7 +1245,7 @@
                                                         <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoProdRu" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
-                                                   <tr>
+                                                <tr>
                                                     <td>
                                                         <asp:Label runat="server" ID="NomeFR" Text="Nome 1 Livello FR"></asp:Label>
                                                     </td>
@@ -1336,7 +1336,7 @@
                                                             <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
-                                                     <tr>
+                                                    <tr>
                                                         <td>
                                                             <asp:Label runat="server" ID="Label59" Text="Nome 2 Livello FR"></asp:Label>
                                                         </td>
@@ -1448,38 +1448,38 @@
                     <br />
                 </div>
 
-                <asp:Panel runat="server" ID="pnlGestioneCaratteristiche" Visible="false">
 
-
-
-                    <div style="background-color: #fafafa">
-                        <h3>Tabella Caratteristica 3</h3>
-                        <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
-                            AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
-                        </asp:DropDownList><br />
-                        Descrizione italiano:
+                <div style="background-color: #fafafa">
+                    <h3>Tabella Caratteristica 3</h3>
+                    <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
+                        AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
+                    </asp:DropDownList><br />
+                    Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3I" Text="" Width="300" /><br />
-                        Descrizione inglese:
+                    Descrizione inglese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3GB" Text="" Width="300" /><br />
-                        Descrizione Russo:
+                    Descrizione Russo:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3RU" Text="" Width="300" /><br />
-                        Descrizione Francese:
+                    Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3FR" Text="" Width="300" /><br />
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire Provenienza (Italiano)" TargetControlID="txtCar3I">
-                        </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire Provenienza (Inglese)" TargetControlID="txtCar3GB">
-                        </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire Provenienza (Russo)" TargetControlID="txtCar3RU">
-                        </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender2" WatermarkText="Inserire Provenienza (Francese)" TargetControlID="txtCar3FR">
-                        </Ajax:TextBoxWatermarkExtender>
-                        <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
-                        <br />
-                    </div>
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire Provenienza (Italiano)" TargetControlID="txtCar3I">
+                    </Ajax:TextBoxWatermarkExtender>
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire Provenienza (Inglese)" TargetControlID="txtCar3GB">
+                    </Ajax:TextBoxWatermarkExtender>
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire Provenienza (Russo)" TargetControlID="txtCar3RU">
+                    </Ajax:TextBoxWatermarkExtender>
+                    <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender2" WatermarkText="Inserire Provenienza (Francese)" TargetControlID="txtCar3FR">
+                    </Ajax:TextBoxWatermarkExtender>
+                    <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
+                    <br />
+                </div>
+
+
+                <asp:Panel runat="server" ID="pnlGestioneCaratteristiche" Visible="false">
 
 
                     <div style="background-color: #fafafa">
@@ -1554,7 +1554,7 @@
                         Descrizione russo:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
-                             Descrizione Francese:
+                        Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6FR" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
@@ -1563,7 +1563,7 @@
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender18" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6RU">
                         </Ajax:TextBoxWatermarkExtender>
-                                       <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender20" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar6FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender20" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar6FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button4" runat="server" OnClick="btnAggiornaCaratteristica6_Click" />
                         <br />

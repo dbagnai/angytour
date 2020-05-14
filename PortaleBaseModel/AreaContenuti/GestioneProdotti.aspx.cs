@@ -310,10 +310,10 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             txtCampo2FR.Text = Details.Campo2FR;
 
 
-            litlinkI.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "I", Details.UrltextforlinkbyLingua("I"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link it</a>";
-            litlinkGB.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "GB", Details.UrltextforlinkbyLingua("GB"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link en</a>";
-            litlinkRU.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "RU", Details.UrltextforlinkbyLingua("RU"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link ru</a>";
-            litlinkFR.Text = "<a target=\"_blank\" href =\"" + CreaLinkRoutes(null, false, "FR", Details.UrltextforlinkbyLingua("FR"), Details.Id.ToString(), Details.CodiceTipologia.ToString()) + "\" >link FR</a>";
+            litlinkI.Text = "<a target=\"_blank\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", Details.UrltextforlinkbyLingua("I"), Details.Id.ToString(), Details.CodiceTipologia.ToString(), "", "", "", "", "", true, true) + "\" >link it</a>";
+            litlinkGB.Text = "<a target=\"_blank\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", Details.UrltextforlinkbyLingua("GB"), Details.Id.ToString(), Details.CodiceTipologia.ToString(), "", "", "", "", "", true, true) + "\" >link en</a>";
+            litlinkRU.Text = "<a target=\"_blank\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", Details.UrltextforlinkbyLingua("RU"), Details.Id.ToString(), Details.CodiceTipologia.ToString(), "", "", "", "", "", true, true) + "\" >link ru</a>";
+            litlinkFR.Text = "<a target=\"_blank\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", Details.UrltextforlinkbyLingua("FR"), Details.Id.ToString(), Details.CodiceTipologia.ToString(), "", "", "", "", "", true, true) + "\" >link FR</a>";
 
 
             txtCanonicalI.Text = Details.CanonicalI;

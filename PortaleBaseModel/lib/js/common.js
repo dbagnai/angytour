@@ -2515,27 +2515,27 @@ function JsSvuotaSession(el) {
     return false;
 }
 function emptysession(link, callback) {
-    return;
-    //var link = link || "";
-    //$.ajax({
-    //    url: pathAbs + commonhandlerpath,
-    //    contentType: "application/json; charset=utf-8",
-    //    cache: false,
-    //    //async: false,
-    //    data: { 'q': 'emptysession', 'link': link },
-    //    success: function (result) {
-    //        if (callback != null && callback != undefined)
-    //            callback(result);
-    //        console.log('CLEAREDSESSION');
-    //        //if (link != '') openLink(link);
-    //        return false;
-    //    },
-    //    error: function (result) {
-    //        //sendmessage('fail creating link');
-    //        if (callback != null && callback != undefined)
-    //            callback('');
-    //    }
-    //});
+    //return;
+    var link = link || "";
+    $.ajax({
+        url: pathAbs + commonhandlerpath,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        //async: false,
+        data: { 'q': 'emptysession', 'link': link },
+        success: function (result) {
+            if (callback != null && callback != undefined)
+                callback(result);
+            console.log('CLEAREDSESSION');
+            //if (link != '') openLink(link);
+            return false;
+        },
+        error: function (result) {
+            //sendmessage('fail creating link');
+            if (callback != null && callback != undefined)
+                callback('');
+        }
+    });
 }
 /*--------------------------------------------------------------------------------------------------------
 //FINE CARICAMENTO DATI --------------------------------------------------------------------------------------

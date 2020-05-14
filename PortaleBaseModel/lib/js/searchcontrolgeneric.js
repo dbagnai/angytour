@@ -4,10 +4,12 @@
 
 function InitSearchControls(idcontainer) {
     var idcontainer = idcontainer || "divSearchBarPlaceholder1";
-    if (tipologia == "") tipologia = "rif000003";
+    if (tipologia == "") tipologia = "rif000001";
     $("#" + idcontainer).load(pathAbs + "/lib/Template/" + "searchbar2.html", function () {
         //Qui puoi fare inizializzazione controlli su allegati
         //FillSearchControls(objfiltro);
+
+
         (function wait() {
             if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
                 VisualizzaSearchControls();
@@ -112,61 +114,59 @@ function initAutocompleteRicercaCaratteristiche() {
 }
 function Visualizzalistadati() {
     var objfiltro = {};
-    //  JsSvuotaSession(this);
-    emptysession('', function (retval) {
-        objfiltro["tipologia"] = tipologia; //memorizzo in ogni caso la tipologia di ricerca 
-
-        // console.log(retval);
-        $(".searchdropdown").each(function () {
-            var idsel = $(this).attr("id");
-            // if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-            if (objfiltro != null)
-                objfiltro[idsel] = $(this)[0].value;
-        });
-        $(".searchpar").each(function () {
-            var idsel = $(this).attr("id");
-            //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-            if (objfiltro != null)
-                objfiltro[idsel] = $(this)[0].value;
-        });
-        $(".searchval").each(function () {
-            var idsel = $(this).attr("id");
-            //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-            if (objfiltro != null)
-                objfiltro[idsel] = $(this)[0].value;
-        });
-        $(".searchgeo").each(function () {
-            var idsel = $(this).attr("id");
-            //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-            if (objfiltro != null)
-                objfiltro[idsel] = $(this)[0].value;
-        });
+    //emptysession('', function (retval) {
 
 
-
-        ///////////RICERCA Con link customizzato /DA TESTARE)
-        //getlinkbyfilters da creare la call per avere il link per il redirect // passando un kbjfiltro serializzato con tipologia,regione,provincia,comune,carartteristica1 e fare il redirect!!!
-        //objfiltro["tipologia"] = tipologia; //serve alla creazione del link
-        //var functiontocallonend = makesearch;
-        //caricaDatiServerLinkCustom(lng, objfiltro,
-        //    function (result, callafterfilter) {
-        //        try {
-        //            if (result && result != '') {
-
-        //                callafterfilter(result);
-        //            }
-
-        //        }
-        //        catch (e) { console.log(e); console.log(result); }
-        //    },
-        //    functiontocallonend);
-
-        //ALETERNATIVA RICERCA CON SESSION
-        //ESEGUIAMO LA RICERCA E FILTRO USANDO LA SESSIONE PER PASSARE I PARAMETRI ALLA PAGINA QUERY
-        putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) {
-            openLink(percorsolistaristoranti);
-        });
+    // console.log(retval);
+    $(".searchdropdown").each(function () {
+        var idsel = $(this).attr("id");
+        // if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null)
+            objfiltro[idsel] = $(this)[0].value;
     });
+    $(".searchpar").each(function () {
+        var idsel = $(this).attr("id");
+        //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null)
+            objfiltro[idsel] = $(this)[0].value;
+    });
+    $(".searchval").each(function () {
+        var idsel = $(this).attr("id");
+        //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null)
+            objfiltro[idsel] = $(this)[0].value;
+    });
+    $(".searchgeo").each(function () {
+        var idsel = $(this).attr("id");
+        //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null)
+            objfiltro[idsel] = $(this)[0].value;
+    });
+
+
+    objfiltro["tipologia"] = tipologia; //memorizzo in ogni caso la tipologia di ricerca che serve anche alla creazione del link url di filtraggio 
+    ///////////RICERCA Con link customizzato /DA TESTARE)
+    //getlinkbyfilters restituisce il link urlrewrited per il redirect // passando un objfiltro serializzato con tipologia,regione,provincia,comune,carartteristica1 ... per fare il redirect all'url generato!!!
+    var functiontocallonend = makesearch;  //FUNZIIONE CHIAMATA ALLA FINE ....
+    caricaDatiServerLinkCustom(lng, objfiltro,
+        function (result, callafterfilter) {
+            try {
+                if (result && result != '') {
+                    callafterfilter(result);
+                }
+            }
+            catch (e) { console.log(e); console.log(result); }
+        },
+        functiontocallonend);
+
+    //ALETERNATIVA RICERCA CON SESSION 
+    //ESEGUIAMO LA RICERCA E FILTRO USANDO LA SESSIONE PER PASSARE I PARAMETRI ALLA PAGINA QUERY
+    //putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) {
+    //    openLink(percorsolistaristoranti);
+    //});
+
+
+    //});
 
 }
 function makesearch(link) {
@@ -187,13 +187,11 @@ function setclickfocus(idcontrollo) {
 function VisualizzaSearchControls() {
     var objfiltro = {};
     var retstring = "";
-    getfromsession('objfiltro', function (retval) {
-
+    getfromsession('objfiltro', function (retval) {  //ricarico dalla sessione i valori di preset delle caselle di filtro
         retstring = retval;
         if (retstring != null && retstring != '')
             objfiltro = JSON.parse(retstring);
         // console.log("VisualizzaSearchControls " + JSON.stringify(objfiltro));
-
         FillSearchControls(objfiltro);//RIcarico e riassegno i valori alle caselle di ricerca
         // $('#divSearchBar').modal('show'); 
     });
@@ -279,7 +277,10 @@ function FillSearchControls(objfiltro) {
                 frmcaratteristica2('', selectedvalueact, '', function (ret) {
                     $("#" + idcontrollotxt).val(ret);
                 });
-
+            if (idcontrollo.includes('Caratteristica3'))
+                frmcaratteristica3('', selectedvalueact, '', function (ret) {
+                    $("#" + idcontrollotxt).val(ret);
+                });
 
         } catch (e) { }
 

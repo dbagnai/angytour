@@ -239,6 +239,7 @@
     <Compile Include="UF\Log.cs" />
     <Compile Include="UF\PagerGeneric.cs" />
     <Compile Include="UF\paypalfunctions.cs" />
+    <Compile Include="UF\references.cs" />
     <Compile Include="UF\RemotePost.cs" />
     <Compile Include="UF\ResourceManagement.cs" />
     <Compile Include="UF\SitemapManager.cs" />

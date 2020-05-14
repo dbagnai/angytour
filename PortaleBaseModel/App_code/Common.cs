@@ -293,10 +293,9 @@ public class CommonPage : Page
     public static string CreaLinkRoutes(System.Web.SessionState.HttpSessionState sessione = null, bool vuotasession = false, string Lingua = "I", string denominazione = "", string id = "", string codicetipologia = "", string codicecategoria = "", string codicecat2liv = "", string regione = "")
     {
 
-        bool gen = false;
-        bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
-        string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
-
+        //bool gen = false;
+        //bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
+        string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, denominazione, id, codicetipologia, codicecategoria, codicecat2liv, regione, "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
         return link;//.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
     }
 
@@ -317,7 +316,7 @@ public class CommonPage : Page
         TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == CodiceTipologia); });
         if (item != null)
         {
-            string linkgenerato = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, item.Descrizione, "", CodiceTipologia);
+            string linkgenerato = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, item.Descrizione, "", CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
             if (!string.IsNullOrEmpty(qstring)) linkgenerato += "?" + qstring;
             if (!notag)
             {
@@ -777,7 +776,8 @@ public class CommonPage : Page
                     {
                         if (c.Offerta.DenominazioneI != null)
                         {
-                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            //linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            linkofferta = CommonPage.ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
                             imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
                             titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);

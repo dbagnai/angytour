@@ -250,7 +250,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
 
                 }
             }
-            ret = CommonPage.CreaLinkRoutes(Session, false, Lingua, testourl, "", CodiceTipologia, partipologia, "", parreegione);
+            ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testourl, "", CodiceTipologia, partipologia, "", parreegione, "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
 
             //Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == CodiceTipologia && tmp.CodiceProdotto == Categoria)); });
@@ -282,7 +282,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
         Contenuti content = null;
 
         string denominazione = item.DenominazionebyLingua(Lingua);
-        string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), item.Id.ToString(), item.CodiceTipologia);
+        string linkcanonico = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(denominazione), item.Id.ToString(), item.CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
         linkcanonico = linkcanonico.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");
         content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkcanonico);
         if (content == null || content.Id == 0)
@@ -411,7 +411,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
             ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
         ////////////////////////////////////////////////////////////
 
-        //string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), item.Id.ToString(), item.CodiceTipologia);
+        //string linkcanonico = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(  Lingua, CleanUrl(denominazione), item.Id.ToString(), item.CodiceTipologia,"","","","","",true,WelcomeLibrary.STATIC.Global.UpdateUrl);
         //Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         //litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";
         Tabrif actualpagelink = new Tabrif();
@@ -421,7 +421,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
         string hreflang = "";
         //METTIAMO GLI ALTERNATE
         hreflang = " hreflang=\"it\" ";
-        string linkcanonicoalt = CreaLinkRoutes(null, false, "I", CleanUrl(item.DenominazioneI), item.Id.ToString(), item.CodiceTipologia);
+        string linkcanonicoalt = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(item.DenominazioneI), item.Id.ToString(), item.CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
         linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
 
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
@@ -440,10 +440,10 @@ public partial class AspNetPages_SchedaResource : CommonPage
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
         {
             hreflang = " hreflang=\"en\" ";
-            linkcanonicoalt = CreaLinkRoutes(null, false, "GB", CleanUrl(item.DenominazioneGB), item.Id.ToString(), item.CodiceTipologia);
+            linkcanonicoalt = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(item.DenominazioneGB), item.Id.ToString(), item.CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainen"));
- 
+
             litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
             litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
             if (Lingua == "GB")
@@ -457,7 +457,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {
             hreflang = " hreflang=\"ru\" ";
-            linkcanonicoalt = CreaLinkRoutes(null, false, "RU", CleanUrl(item.DenominazioneRU), item.Id.ToString(), item.CodiceTipologia);
+            linkcanonicoalt = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(item.DenominazioneRU), item.Id.ToString(), item.CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
             linkcanonicoalt = ReplaceAbsoluteLinks(linkcanonicoalt);
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
                 linkcanonicoalt = linkcanonicoalt.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainru"));
@@ -526,7 +526,7 @@ public partial class AspNetPages_SchedaResource : CommonPage
                 }
             }
             //METTIAMO GLI ALTERNATE
-            string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(sezionedescrizione), "", CodiceTipologia, partipologia, "", parreegione);
+            string linkcanonico = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(sezionedescrizione), "", CodiceTipologia, partipologia, "", parreegione, "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
             linkcanonico = ReplaceAbsoluteLinks(linkcanonico);
             link = new Tabrif();
             link.Campo1 = linkcanonico;

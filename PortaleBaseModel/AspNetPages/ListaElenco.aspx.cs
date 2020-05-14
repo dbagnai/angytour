@@ -175,7 +175,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
                 {
                     string link = PercorsoFiles + "/" + Tipologia + "/" + id.ToString() + "/" + a.NomeFile;
                     link = CommonPage.ReplaceAbsoluteLinks(link);
-                    string descrizione = a.DescrizionebyLingua(Lingua) ;
+                    string descrizione = a.DescrizionebyLingua(Lingua);
                     if (string.IsNullOrWhiteSpace(descrizione)) descrizione = a.NomeFile;
 
                     //sb.Append("<li>");
@@ -755,7 +755,7 @@ public partial class AspNetPages_ListaElenco : CommonPage
         //else if (data.FotoCollection_M != null && !string.IsNullOrEmpty(data.linkVideo))
         //    ((HtmlMeta)Master.FindControl("metafbvideourl")).Content = data.linkVideo;
 
-        string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(denominazione), "", data.CodiceTipologia);
+        string linkcanonico = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(denominazione), "", data.CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
         Literal litgeneric = ((Literal)Master.FindControl("litgeneric"));
         litgeneric.Text = "<link rel=\"canonical\" href=\"" + ReplaceAbsoluteLinks(linkcanonico) + "\"/>";

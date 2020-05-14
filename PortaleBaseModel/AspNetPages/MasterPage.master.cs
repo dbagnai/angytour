@@ -362,14 +362,19 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             HtmlAnchor _tmp = null;
             _tmp = ((HtmlAnchor)Page.Master.FindControl("linkid" + id.ToString() + "High"));
             if (_tmp != null)
-                _tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                //_tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                _tmp.HRef = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+
             _tmp = ((HtmlAnchor)Page.Master.FindControl("linkid" + id.ToString() + "Lateral"));
             if (_tmp != null)
-                _tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                //_tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                _tmp.HRef = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
             _tmp = ((HtmlAnchor)Page.Master.FindControl("linkid" + id.ToString()));
             if (_tmp != null)
-                _tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                //_tmp.HRef = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000");
+                _tmp.HRef = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
         }
     }
@@ -380,7 +385,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         WelcomeLibrary.DOM.TipologiaOfferte sezione =
             WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == tipologia); });
         if (sezione == null) return "";
-        string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, sezione.Descrizione, "", tipologia, "");
+        //string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, sezione.Descrizione, "", tipologia, "");
+        string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, sezione.Descrizione, "", tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
         if (!string.IsNullOrEmpty(qstring))
             link += "?" + qstring;
         sb.Append("<a href=\"");
@@ -407,7 +414,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         if (item != null)
         {
             string testo = item.TitolobyLingua(Lingua);
-            string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000");
+            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), idps.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
             testo = references.ResMan("Common", Lingua, "testoid" + idps);
             if (!noli) sb.Append("<li>");
             sb.Append("<a  href=\"");
@@ -446,7 +455,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (TipologiaOfferte o in sezioni)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 if (!noli)
@@ -491,7 +502,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (TipologiaOfferte o in sezioni)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.Codice);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 sb.Append("<li>");
@@ -551,7 +565,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 if (!noli)
@@ -608,7 +623,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 sb.Append("<li>");
@@ -665,7 +682,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 if (!noli)
@@ -688,12 +707,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto);
                 if (!string.IsNullOrEmpty(sottomenu))
                 {
-                   
+
                     sb.Append("<ul>");
                     sb.Append(sottomenu);
                     sb.Append("</ul>");
                 }
-               
+
             }
         }
 
@@ -727,7 +746,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             foreach (SProdotto o in sprodotti)
             {
                 string testo = o.Descrizione;
-                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
+                //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (!noli)
                     sb.Append("<li>");
@@ -765,7 +786,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 string testourl = item.Descrizione + "-" + t.Value;
                 string testolink = t.Value;
 
-                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, testourl, "", tipologia, t.Key);
+                //string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, testourl, "", tipologia, t.Key);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testourl, "", tipologia, t.Key, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 sb.Append("<li>");
                 sb.Append("<a href=\"");
@@ -888,7 +911,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     testo = offDM.estraititolo(o, Lingua);
 
 
-                string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
+                //string link = CommonPage.CreaLinkRoutes(Session, false, Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(o.UrltextforlinkbyLingua(Lingua)), o.Id.ToString(), o.CodiceTipologia, o.CodiceCategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (!noli)
                     sb.Append("<li>");

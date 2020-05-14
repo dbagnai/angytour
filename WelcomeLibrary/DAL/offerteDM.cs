@@ -5197,19 +5197,19 @@ namespace WelcomeLibrary.DAL
                 SQLiteParameter p10 = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
                 parColl.Add(p10);
             }
-            if (filtri.ContainsKey("caratteristica1") && !string.IsNullOrEmpty(filtri["caratteristica1"]))
+            if (filtri.ContainsKey("Caratteristica1") && !string.IsNullOrEmpty(filtri["Caratteristica1"]))
             {
-                SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["caratteristica1"]);
+                SQLiteParameter pc1 = new SQLiteParameter("@Caratteristica1", filtri["Caratteristica1"]);
                 parColl.Add(pc1);
             }
-            if (filtri.ContainsKey("caratteristica2") && !string.IsNullOrEmpty(filtri["caratteristica2"]))
+            if (filtri.ContainsKey("Caratteristica2") && !string.IsNullOrEmpty(filtri["Caratteristica2"]))
             {
-                SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["caratteristica2"]);
+                SQLiteParameter pc2 = new SQLiteParameter("@Caratteristica2", filtri["Caratteristica2"]);
                 parColl.Add(pc2);
             }
-            if (filtri.ContainsKey("caratteristica3") && !string.IsNullOrEmpty(filtri["caratteristica3"]))
+            if (filtri.ContainsKey("Caratteristica3") && !string.IsNullOrEmpty(filtri["Caratteristica3"]))
             {
-                SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["caratteristica3"]);
+                SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["Caratteristica3"]);
                 parColl.Add(pc3);
             }
             if (filtri.ContainsKey("nazione") && !string.IsNullOrEmpty(filtri["nazione"]))
