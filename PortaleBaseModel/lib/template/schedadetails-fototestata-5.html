@@ -29,32 +29,22 @@
         </div>
     </div>
 
+
     <div class="container">
-        <div class="row ">
+        <div class="row">
             <!------------------------------
             ------ COLONNA 1 IMMAGINE ------
             ------------------------------->
             <!-- Placeholder per la owl gallery -->
             <div class="col-12 col-md-8">
-
-                <!--<h1 itemprop="name" class="text-left mb-2">
-                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
-                        <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
-                        </span>
-                    </a>
-                </h1>-->
                 <div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"></div>
                 <div class="responsive-video" style="display: none">
                     <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" src=""></iframe>
                 </div>
-                <div class="blog-post-body text-center text-md-left mt-0 py-0 border-0 d-none d-md-block" style="line-height: 1.6rem;" itemprop="description">
+            </div>
 
-                    <!--
-                    <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                    </div>-->
-
+            <div class="col-12 col-md-8  order-last order-md-1">
+                <div class="blog-post-body text-center text-md-left mt-0 py-0 border-0" style="line-height: 1.6rem;" itemprop="description">
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="35000" format="formatdescrizione"></span>
                 </div>
             </div>
@@ -62,15 +52,15 @@
             <!----------------------------
             ------ COLONNA 2 TITOLO ------
             ----------------------------->
-            <div class="col-12 col-md-4 mt-0">
+            <div class="col-12 col-md-4 mt-0 order-first order-md-9">
                 <!--<div class="w-100 px-3 py-4 bg-light-color position-sticky" style="top:120px;border-radius: 10px;border:1px solid #eee">-->
                 <div class="w-100" style="height:100%;border-radius: 10px;">
 
                     <div class="w-100 px-3 py-2  bg-light-color" style="border:1px solid #eee;border-radius: 10px;">
-                        <!----------------------------------------------
-    ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
-    ----------------------------------------------->
                         <div id="start-content" style="position:relative;z-index:-1;padding-top: 99px; margin-top: -99px;"></div>
+                        <!----------------------------------------------
+                        ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
+                        ----------------------------------------------->
                         <div class="blog-post-details d-none" runat="server" id="divPostDetails">
                             <div class="blog-post-details-item  blog-post-details-item-right pl-0 pb-2">
                                 <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
@@ -80,10 +70,10 @@
                             </div>
                         </div>
                         <!---------------------------------
-    ------ COLONNA 2 DESCRIZIONE ------
-    ---------------------------------->
+                        ------ COLONNA 2 DESCRIZIONE ------
+                        ---------------------------------->
                         <div class="blog-post-body text-center text-md-left py-3 border-top border-bottom-0 bd-secondary-color mt-2" style="line-height: 1.6rem;" itemprop="description">
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="15000" format="formatdescrizione"></span>
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="35000" format="formatdescrizione"></span>
                         </div>
                         <div mybind="Id" class="bind files-list" style="display:none"></div>
                     </div>
@@ -106,49 +96,17 @@
 
                 </div>
             </div>
-
             <!----------------------------------
             ------ COLONNA 1 DATI TECNICI ------
             ----------------------------------->
-            <div class="col12 col-md-8 d-block d-md-none">
+            <!--<div class="col12 col-md-8 d-block d-md-none">
                 <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0" style="line-height: 1.6rem;" itemprop="description">
-
-                    <!--<nav id="navbar-example2" class="navbar navbar-light bg-light">
-                        <a class="navbar-brand" href="#">Navbar</a>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#fat">@fat</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#mdo">@mdo</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#one">one</a>
-                                    <a class="dropdown-item" href="#two">two</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#three">three</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-
-                    <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                    </div>-->
-
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="35000" format="formatdescrizione"></span>
                 </div>
-            </div>
+            </div>-->
 
-            <!---------------------------------------------------
-            ------ COLONNA 1 SERVIZI (DOTAZIONI IN CAMERA) ------
-            ---------------------------------------------------->
-            <div class="col-12 mt-3 mt-md-4">
-                <span class="bind" mybind="Id" myvalue="bannerevidenza" format="formatlabelresource"></span>
-            </div>
-
+        </div>
+        <div class="row">
             <!---------------------------------------------------
             ------ COMANDI NAVIGAZIONE ------
             ---------------------------------------------------->

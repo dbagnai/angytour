@@ -262,7 +262,7 @@ public partial class AspNetPages_weblist : CommonPage
         ClientScriptManager cs = Page.ClientScript;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         InizializzaSeo();
-        ModificaFiltroJS();
+        ModificaFiltroJS(); //Preparo il filtor con i parametri aggiuntivi di filtro
         custombind cb = new custombind();
         switch (Tipologia)
         {
@@ -641,12 +641,15 @@ public partial class AspNetPages_weblist : CommonPage
         //GESTIONE DEI FILTRI MEDIANTE LA SESSIONE
         Dictionary<string, string> objvalue = new Dictionary<string, string>();
         string sobjvalue = "";
+
+#if false  //non ricarico i filtri dalla sessione ma solo dai parametri passati con il request context 
         if (Session["objfiltro"] != null)
         {
             sobjvalue = Session["objfiltro"].ToString();
             objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
             if (objvalue == null) objvalue = new Dictionary<string, string>();
-        }
+        } 
+#endif
 
         ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
         string prevtipologia = "";
@@ -663,7 +666,6 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["tipologia"] = Tipologia;
         }
-
         if (!string.IsNullOrEmpty(mese)) //
         {
             objvalue.Remove("mese");
@@ -671,7 +673,6 @@ public partial class AspNetPages_weblist : CommonPage
         }
         else
             objvalue.Remove("mese");
-
         if (!string.IsNullOrEmpty(anno)) //
         {
             objvalue.Remove("anno");
@@ -681,147 +682,151 @@ public partial class AspNetPages_weblist : CommonPage
             objvalue.Remove("anno");
 
 
-#if true //Gestione modificatori filtro categoria li setto solo per la categoria che è interessata ( c'è un problema di non suotamento dei parametri categoria,sottocategorie e gli atri  con tools iniettatti in pagine non lista se la tipologia non cambia nella navigazione !! !!!)
+#if true //Gestione modificatori filtro categoria 
+        //( c'è un problema di non suotamento dei parametri categoria,sottocategorie e gli atri con i tools iniettatti in pagine non lista se non viene svuotata la session dopo il filtraggio !! !!!)
+        //DOVREI AVER RISOLTO, azzeranso la variabile objfiltro in sessione subito dopo la ricerca ed inserendo i parametri aggiuntivi nella tabella di URLREWRITING in modo che siano nei contenuti della route ad ogni chiamata
+        //usando questo sistema gli else degli if sotto dovrebbero tutti essere eliminabili
 
-        if (Tipologia == "rif00000x")
+        //if (Tipologia == "rif000001")
+        //{
+        if (Promozioni != "")
         {
-
-            if (Promozioni != "")
+            objvalue["promozioni"] = Promozioni;
+        }
+        if (Categoria != "")
+        {
+            objvalue["categoria"] = Categoria;
+            objvalue["ddlCategoria"] = Categoria;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlCategoria"))
             {
-                objvalue["promozioni"] = Promozioni;
-            }
-
-            if (Categoria != "")
-            {
-                objvalue["categoria"] = Categoria;
-                objvalue["ddlCategoria"] = Categoria;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("ddlCategoria"))
-                {
-                    objvalue["categoria"] = objvalue["ddlCategoria"];
-                }
-            }
-
-            if (Categoria2liv != "")
-            {
-                objvalue["categoria2Liv"] = Categoria2liv;
-                objvalue["ddlCategoria2liv"] = Categoria2liv;
-            }
-            else
-            {
-
-                if (objvalue.ContainsKey("ddlCategoria2liv"))
-                {
-                    objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
-                }
-            }
-
-            if (Regione != "")
-            {
-                objvalue["regione"] = Regione;
-                objvalue["ddlRegione"] = Regione;
-                objvalue["ddlRegioneSearch"] = Regione;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("ddlRegione"))
-                {
-                    objvalue["regione"] = objvalue["ddlRegione"];
-                    Regione = objvalue["ddlRegione"];
-                }
-                if (objvalue.ContainsKey("ddlRegioneSearch"))
-                {
-                    objvalue["regione"] = objvalue["ddlRegioneSearch"];
-                    Regione = objvalue["ddlRegioneSearch"];
-                }
-            }
-            if (Provincia != "")
-            {
-                objvalue["provincia"] = Provincia;
-                objvalue["ddlProvincia"] = Provincia;
-                objvalue["ddlProvinciaSearch"] = Provincia;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("ddlProvincia"))
-                {
-                    objvalue["provincia"] = objvalue["ddlProvincia"];
-                    Provincia = objvalue["ddlProvincia"];
-                }
-                if (objvalue.ContainsKey("ddlProvinciaSearch"))
-                {
-                    objvalue["provincia"] = objvalue["ddlProvinciaSearch"];
-                    Provincia = objvalue["ddlProvinciaSearch"];
-                }
-            }
-
-
-            if (Comune != "")
-            {
-                objvalue["comune"] = Comune;
-                objvalue["ddlComune"] = Comune;
-                objvalue["ddlComuneSearch"] = Comune;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("ddlComune"))
-                {
-                    objvalue["comune"] = objvalue["ddlComune"];
-                    Comune = objvalue["ddlComune"];
-                }
-                if (objvalue.ContainsKey("ddlComuneSearch"))
-                {
-                    objvalue["comune"] = objvalue["ddlComuneSearch"];
-                    Comune = objvalue["ddlComuneSearch"];
-                }
-            }
-
-
-            if (Caratteristica1 != "")
-            {
-                objvalue["caratteristica1"] = Caratteristica1;
-                objvalue["hidCaratteristica1"] = Caratteristica1;
-                objvalue["ddlCaratteristica1"] = Caratteristica1;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("hidCaratteristica1"))
-                {
-                    objvalue["caratteristica1"] = objvalue["hidCaratteristica1"];
-                    Caratteristica1 = objvalue["hidCaratteristica1"];
-                }
-                if (objvalue.ContainsKey("ddlCaratteristica1"))
-                {
-                    objvalue["caratteristica1"] = objvalue["ddlCaratteristica1"];
-                    Caratteristica1 = objvalue["ddlCaratteristica1"];
-                }
-
-            }
-
-
-            if (Caratteristica2 != "")
-            {
-                objvalue["caratteristica2"] = Caratteristica2;
-                objvalue["hidCaratteristica2"] = Caratteristica2;
-            }
-            else
-            {
-                if (objvalue.ContainsKey("hidCaratteristica2"))
-                {
-                    objvalue["caratteristica2"] = objvalue["hidCaratteristica2"];
-                    Caratteristica2 = objvalue["hidCaratteristica2"];
-                }
-            }
-
-            //Id selection
-            //hidricercaid ( sleezione con id )
-            if (objvalue.ContainsKey("hidricercaid"))
-            {
-                objvalue["id"] = objvalue["hidricercaid"];
+                objvalue["categoria"] = objvalue["ddlCategoria"];
             }
         }
+        if (Categoria2liv != "")
+        {
+            objvalue["categoria2Liv"] = Categoria2liv;
+            objvalue["ddlCategoria2liv"] = Categoria2liv;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlCategoria2liv"))
+            {
+                objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
+            }
+        }
+        if (Regione != "")
+        {
+            objvalue["Regione"] = Regione;
+            objvalue["ddlRegione"] = Regione;
+            objvalue["ddlRegioneSearch"] = Regione;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlRegione"))
+            {
+                objvalue["Regione"] = objvalue["ddlRegione"];
+                Regione = objvalue["ddlRegione"];
+            }
+            if (objvalue.ContainsKey("ddlRegioneSearch"))
+            {
+                objvalue["Regione"] = objvalue["ddlRegioneSearch"];
+                Regione = objvalue["ddlRegioneSearch"];
+            }
+        }
+        if (Provincia != "")
+        {
+            objvalue["Provincia"] = Provincia;
+            objvalue["ddlProvincia"] = Provincia;
+            objvalue["ddlProvinciaSearch"] = Provincia;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlProvincia"))
+            {
+                objvalue["Provincia"] = objvalue["ddlProvincia"];
+                Provincia = objvalue["ddlProvincia"];
+            }
+            if (objvalue.ContainsKey("ddlProvinciaSearch"))
+            {
+                objvalue["Provincia"] = objvalue["ddlProvinciaSearch"];
+                Provincia = objvalue["ddlProvinciaSearch"];
+            }
+        }
+        if (Comune != "")
+        {
+            objvalue["Comune"] = Comune;
+            objvalue["ddlComune"] = Comune;
+            objvalue["ddlComuneSearch"] = Comune;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("ddlComune"))
+            {
+                objvalue["Comune"] = objvalue["ddlComune"];
+                Comune = objvalue["ddlComune"];
+            }
+            if (objvalue.ContainsKey("ddlComuneSearch"))
+            {
+                objvalue["Comune"] = objvalue["ddlComuneSearch"];
+                Comune = objvalue["ddlComuneSearch"];
+            }
+        }
+        if (Caratteristica1 != "")
+        {
+            objvalue["Caratteristica1"] = Caratteristica1;
+            objvalue["hidCaratteristica1"] = Caratteristica1;
+            objvalue["ddlCaratteristica1"] = Caratteristica1;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("hidCaratteristica1"))
+            {
+                objvalue["Caratteristica1"] = objvalue["hidCaratteristica1"];
+                Caratteristica1 = objvalue["hidCaratteristica1"];
+            }
+            if (objvalue.ContainsKey("ddlCaratteristica1"))
+            {
+                objvalue["Caratteristica1"] = objvalue["ddlCaratteristica1"];
+                Caratteristica1 = objvalue["ddlCaratteristica1"];
+            }
+
+        }
+        if (Caratteristica2 != "")
+        {
+            objvalue["Caratteristica2"] = Caratteristica2;
+            objvalue["hidCaratteristica2"] = Caratteristica2;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("hidCaratteristica2"))
+            {
+                objvalue["Caratteristica2"] = objvalue["hidCaratteristica2"];
+                Caratteristica2 = objvalue["hidCaratteristica2"];
+            }
+        }
+        if (Caratteristica3 != "")
+        {
+            objvalue["Caratteristica3"] = Caratteristica3;
+            objvalue["hidCaratteristica3"] = Caratteristica3;
+        }
+        else
+        {
+            if (objvalue.ContainsKey("hidCaratteristica3"))
+            {
+                objvalue["Caratteristica3"] = objvalue["hidCaratteristica3"];
+                Caratteristica3 = objvalue["hidCaratteristica3"];
+            }
+        }
+        //Id selection
+        //hidricercaid ( sleezione con id )
+        if (objvalue.ContainsKey("hidricercaid"))
+        {
+            objvalue["id"] = objvalue["hidricercaid"];
+        }
+        //}
         //if (Caratteristica6 != "") //ditta
         //{
         //    objvalue.Remove("hidCaratteristica6");
@@ -880,9 +885,8 @@ public partial class AspNetPages_weblist : CommonPage
 #endif
 
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
-        Session.Add("objfiltro", sobjvalue);
+        Session.Add("objfiltro", sobjvalue); //Metto i valori di filtraggio in sessione per usarli nel custombind delle liste risultati
     }
-
     /// <summary>
     /// Aggiunge i link rel prev e next nell'head della pagina se inseriti in sessione
     /// </summary>
@@ -1016,10 +1020,10 @@ public partial class AspNetPages_weblist : CommonPage
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// ALTERNATE E CANONICAL /////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        string linki = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv));
-        string linken = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv));
-        string linkru = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv));
-        string linkfr = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv));
+        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
 
         contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linki.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
@@ -1220,7 +1224,7 @@ public partial class AspNetPages_weblist : CommonPage
 
         //SET LINK PER CAMBIO LINGUA
         SettaLinkCambioLingua(linki, sezionedescrizioneI, linken, sezionedescrizioneGB, linkru, sezionedescrizioneRU, linkfr, sezionedescrizioneFR);
- 
+
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1551,7 +1555,7 @@ public partial class AspNetPages_weblist : CommonPage
         if (item != null)
         {
             //1 livello tipologia
-            linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "");
+            linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
             link1 = new Tabrif();
             link1.Campo1 = linkurl;
             link1.Campo2 = item.Descrizione;
@@ -1562,7 +1566,7 @@ public partial class AspNetPages_weblist : CommonPage
                 Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
                 if (catselected != null)
                 {
-                    linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(catselected.Descrizione), "", Tipologia, Categoria, "");
+                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(catselected.Descrizione), "", Tipologia, Categoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     link2 = new Tabrif();
                     link2.Campo1 = linkurl;
                     link2.Campo2 = catselected.Descrizione;
@@ -1575,7 +1579,7 @@ public partial class AspNetPages_weblist : CommonPage
                 SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
                 if (categoriasprodotto != null)
                 {
-                    linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(categoriasprodotto.Descrizione), "", Tipologia, Categoria, Categoria2liv);
+                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(categoriasprodotto.Descrizione), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                     link3 = new Tabrif();
                     link3.Campo1 = linkurl;
                     link3.Campo2 = categoriasprodotto.Descrizione;
@@ -1593,7 +1597,7 @@ public partial class AspNetPages_weblist : CommonPage
                     if (contentpertipologia != null && contentpertipologia.Id != 0)
                     {
                         link1 = new Tabrif();
-                        link1.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000"); ;
+                        link1.Campo1 = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(contentpertipologia.TitolobyLingua(Lingua)), contentpertipologia.Id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl); ;
                         link1.Campo2 = contentpertipologia.TitolobyLingua(Lingua);
                     }
                 }
@@ -1606,7 +1610,7 @@ public partial class AspNetPages_weblist : CommonPage
                     if (contentpercategoria != null && contentpercategoria.Id != 0)
                     {
                         link2 = new Tabrif();
-                        link2.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000");
+                        link2.Campo1 = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(contentpercategoria.TitolobyLingua(Lingua)), contentpercategoria.Id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                         link2.Campo2 = contentpercategoria.TitolobyLingua(Lingua);
                     }
                 }
@@ -1620,7 +1624,7 @@ public partial class AspNetPages_weblist : CommonPage
                     if (contentpersottocategoria != null && contentpersottocategoria.Id != 0)
                     {
                         link3 = new Tabrif();
-                        link3.Campo1 = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(contentpersottocategoria.TitolobyLingua(Lingua)), contentpersottocategoria.Id.ToString(), "con001000");
+                        link3.Campo1 = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(contentpersottocategoria.TitolobyLingua(Lingua)), contentpersottocategoria.Id.ToString(), "con001000", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                         link3.Campo2 = contentpersottocategoria.TitolobyLingua(Lingua);
                     }
                 }

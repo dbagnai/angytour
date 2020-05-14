@@ -59,9 +59,8 @@ namespace WelcomeLibrary.UF
                 string tmpcategoria = categoria;
                 if (!usacategoria) tmpcategoria = "";
 
-                // ret = CommonPage.CreaLinkRoutes(null, false, lingua, (testourl), "", tipologia, tmpcategoria);
-                bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
-                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, (testourl), "", tipologia, tmpcategoria, "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                //bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
+                ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, (testourl), "", tipologia, tmpcategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
             }
             return ret;
@@ -88,8 +87,8 @@ namespace WelcomeLibrary.UF
             Dictionary<string, Dictionary<string, string>> linksurl = new Dictionary<string, Dictionary<string, string>>();
             foreach (TipologiaOfferte _o in sezioni)
             {
-                 bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
-                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", gen, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                //bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
@@ -167,7 +166,7 @@ namespace WelcomeLibrary.UF
                     //        Dictionary<string, string> addparms = new Dictionary<string, string>();
                     //        addparms.Add("Caratteristica3", elem.Codice);
                     //        string testolink = "";
-                    //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 1, elem.Codice, elem.Lingua);
+                    //       testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 1, elem.Codice, elem.Lingua);
                     //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 2, elem.Codice, elem.Lingua);
                     //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 3, elem.Codice, elem.Lingua);
                     //         listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(elem.Lingua, testolink, "", "rif000100", "", "", "", "", "", true, true, addparms));
@@ -177,6 +176,48 @@ namespace WelcomeLibrary.UF
             }
             return listalinks;
         }
+
+        /// <summary>
+        /// Crea i link usando il dictionarty dei parametri aggiuntivi
+        /// </summary>
+        /// <param name="filtriadded"></param>
+        /// <param name="lingua"></param>
+        /// <param name="generalink">Se true aggiorna la tabella dei link urlrewriting</param>
+        /// <returns></returns>
+        public static string getlinkbyfiltri(Dictionary<string, string> filtriadded, string lingua, bool generalink = true)
+        {
+            string linkcostruito = "";
+            Dictionary<string, string> addpars = new Dictionary<string, string>();
+            string testourl = "";
+            string tipologiatmp = "-";
+            string categoria2Liv = "";
+            string categoria = "";
+            foreach (KeyValuePair<string, string> kv in filtriadded)
+            {
+                if (kv.Key.ToLower() == ("tipologia"))
+                {
+                    tipologiatmp = kv.Value;
+                    TipologiaOfferte tipologiafound = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(t => t.Codice == tipologiatmp && t.Lingua == lingua);
+                    testourl += tipologiafound.Descrizione;
+                }
+                else if (kv.Key.ToLower() == ("categoria"))
+                {
+                    categoria = kv.Value;
+                }
+                else if (kv.Key.ToLower() == ("categoria2liv"))
+                {
+                    categoria2Liv = kv.Value;
+                }
+                else
+                {
+                    addpars.Add(kv.Key, kv.Value);
+                }
+            }
+            testourl = testourl.Trim().Replace(" ", "-");
+            linkcostruito = SitemapManager.CreaLinkRoutes(lingua, testourl, "", tipologiatmp, categoria, categoria2Liv, "", "", "", true, generalink, addpars);
+            return linkcostruito;
+        }
+
 
         public static string getlinktipologia(string codicetipologia, string lingua)
         {
@@ -239,7 +280,8 @@ namespace WelcomeLibrary.UF
             return ListaLink;
         }
 
-        public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "", string regione = "", string annofiltro = "", string mesefiltro = "", bool generaUrlrewrited = false, bool updateTableurlrewriting = false, Dictionary<string, string> addparms = null)
+        public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "",
+            string regione = "", string annofiltro = "", string mesefiltro = "", bool generaUrlrewrited = true, bool updateTableurlrewriting = false, Dictionary<string, string> addparms = null)
         {
             if (denominazione == null) denominazione = "";
             string destinationselector = "";
@@ -258,7 +300,7 @@ namespace WelcomeLibrary.UF
                 destinationselector = ""; //Può anche essere vuoto questo ed il tuttofunziona!!
                 urlRewrited = GeneraRewritingElement(Lingua, codicetipologia, destinationselector, cleandenominazione, id, "pagina", "", "", "", "", "", addparms);
             }
-           else  if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001001")
+            else if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001001")
             {
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
@@ -372,6 +414,7 @@ namespace WelcomeLibrary.UF
             //{
             link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + urlRewrited.Codice;
             //}
+
             if (updateTableurlrewriting) //Se devo fare l'update della tabella di rewriting -> cancello i valori precedenti e riscrivo i nuovi
             {
                 //Aggiorno o inserisco nella tabella urlrwwriting
@@ -379,6 +422,24 @@ namespace WelcomeLibrary.UF
             }
             return link;
         }
+
+        /// <summary>
+        /// Prepara l'elemento di rewriting da scrivere in tabella
+        /// (non modifica il testo dell'url fà solo la preparazione per la scrittura nel db)
+        /// </summary>
+        /// <param name="Lingua"></param>
+        /// <param name="Tipologia"></param>
+        /// <param name="destinationselector"></param>
+        /// <param name="textmatch"></param>
+        /// <param name="id"></param>
+        /// <param name="tipopagina"></param>
+        /// <param name="Categoria"></param>
+        /// <param name="Categoria2liv"></param>
+        /// <param name="anno"></param>
+        /// <param name="mese"></param>
+        /// <param name="regione"></param>
+        /// <param name="addparms"></param>
+        /// <returns></returns>
         public static Tabrif GeneraRewritingElement(string Lingua, string Tipologia, string destinationselector, string textmatch, string id = "", string tipopagina = "lista", string Categoria = "", string Categoria2liv = "", string anno = "", string mese = "", string regione = "", Dictionary<string, string> addparms = null)
         {
             Tabrif urlRewrited = new Tabrif();
@@ -409,7 +470,7 @@ namespace WelcomeLibrary.UF
                         parameters[kv.Key] = kv.Value;
                 }
 
-            string cleantextmatch =  CleanUrl(textmatch.Trim().Replace(" ", "-")).ToLower().Trim();
+            string cleantextmatch = CleanUrl(textmatch.Trim().Replace(" ", "-").Replace("--", "-")).ToLower().Trim();
             if (string.IsNullOrEmpty(cleantextmatch)) cleantextmatch = "-";
 
             //Crea l'oggetto per la Memorizzazione in tabella il path per i rwwriting
@@ -421,32 +482,54 @@ namespace WelcomeLibrary.UF
             return urlRewrited;
         }
 
+        /// <summary>
+        /// Customizza il testo dell'url in base ai parametri aggiuntivi addparms e alle categorie 1 e 2 liv, regione, anno o mese
+        /// </summary>
+        /// <param name="destinationselector"></param>
+        /// <param name="cleandenominazione"></param>
+        /// <param name="codicetipologia"></param>
+        /// <param name="codicecategoria"></param>
+        /// <param name="Lingua"></param>
+        /// <param name="codicecat2liv"></param>
+        /// <param name="regione"></param>
+        /// <param name="annofiltro"></param>
+        /// <param name="mesefiltro"></param>
+        /// <param name="addparms"></param>
+        /// <returns></returns>
         public static Tabrif creaUrlListaModified(string destinationselector, string cleandenominazione, string codicetipologia, string codicecategoria, string Lingua, string codicecat2liv, string regione, string annofiltro, string mesefiltro, Dictionary<string, string> addparms = null)
         {
             Tabrif ret = null;
             string testounicolink = cleandenominazione;
+
+            //////////////////////////////////////////////////////////
+            /////testo principale dell'url costruito in base alle categorie se passate
+            //////////////////////////////////////////////////////////
             string testomodificatore1 = "";
             Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == codicetipologia && p.CodiceProdotto == codicecategoria && p.Lingua == Lingua);
             if (categoriaprodotto != null)
             {
+                testounicolink = "";
                 string tmps = CleanUrl(categoriaprodotto.Descrizione.Trim());
-                if (!testounicolink.ToLower().Contains(tmps.ToLower()))
-                    testomodificatore1 += tmps;
+                if (!testounicolink.ToLower().Contains(tmps.ToLower())) //se non gia presente nel testo passato
+                    testomodificatore1 += tmps + "-";
             }
 
             SProdotto categoria2liv = Utility.ElencoSottoProdotti.Find(delegate (SProdotto p) { return p.CodiceProdotto == codicecategoria && p.CodiceSProdotto == codicecat2liv && p.Lingua == Lingua; });
             if (categoria2liv != null)
             {
+                testounicolink = "";
                 string tmps = CleanUrl(categoria2liv.Descrizione.Trim());
-                if (!testounicolink.ToLower().Contains(tmps.ToLower()))
-                    testomodificatore1 += tmps;
+                if (!testounicolink.ToLower().Contains(tmps.ToLower())) //se non gia presente nel testo passato
+                    testomodificatore1 += tmps + "-";
             }
-            //Modificatore testo in presenza del parametro di regione
+            //Modificatore testo in presenza del parametro di regione, anno o mese
             Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == regione); });
             if (item != null)
-                testomodificatore1 += CleanUrl(item.Regione.Trim());
-            testomodificatore1 += CleanUrl(annofiltro.Trim());
-            testomodificatore1 += CleanUrl(mesefiltro.Trim());
+                testomodificatore1 += CleanUrl(item.Regione.Trim()) + "-";
+            if (!string.IsNullOrEmpty(CleanUrl(annofiltro.Trim())))
+                testomodificatore1 += CleanUrl(annofiltro.Trim()) + "-";
+            if (!string.IsNullOrEmpty(CleanUrl(mesefiltro.Trim())))
+                testomodificatore1 += CleanUrl(mesefiltro.Trim()) + "-";
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //aggiungo in coda ALL'URL la sequenza dei codici per rendere unica la stringa ( qui farebbe comodo uno shortner!!)
@@ -457,23 +540,22 @@ namespace WelcomeLibrary.UF
             testomodificatore2 += regione.Replace("p", "").TrimStart('0');
             testomodificatore2 += annofiltro;
             testomodificatore2 += mesefiltro;
-
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
-                    //testomodificatore1 += CleanUrl(kv.Key);
+                    testomodificatore1 += modificatestourlbyparameter(kv, Lingua) + "-"; //estendo l'url col testo in base al filtro dei parametri aggiuntivi passati
                     testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); ;//sono i codici concatenati per differenziare l'url
                 }
 
             if (!string.IsNullOrEmpty(testomodificatore2))
             {
                 if (!string.IsNullOrEmpty(testomodificatore1))
-                    //testounicolink += "-" + testomodificatore1;
-                    testounicolink = (testomodificatore1 + "-" + testounicolink).Trim('-');
+                    //testounicolink = (testomodificatore1 + testounicolink).Trim('-');
+                    testounicolink = (testomodificatore1).Trim('-');
                 if (!string.IsNullOrEmpty(testomodificatore2))
                     testounicolink += "-p" + testomodificatore2;
 
-
+                testounicolink = testounicolink.Trim('-');
                 /////////////////////////////////////
                 //Creo l'url per il rewriting ( nei vari casi per gli elenchi modifico il testo della chiamata a seconda dei parametri )
                 ///////////////////////////////////// 
@@ -481,6 +563,97 @@ namespace WelcomeLibrary.UF
             }
             return ret;
         }
+
+        /// <summary>
+        /// Modifica il testo dell'url in base al valore ed al testo relativo del panametro di filtraggio passato
+        /// </summary>
+        /// <param name="kv"></param>
+        /// <returns></returns>
+        public static string modificatestourlbyparameter(KeyValuePair<string, string> kv, string lingua)
+        {
+            string retxt = "";
+            if (kv.Key.ToLower() == ("caratteristica1"))
+            {
+                Tabrif c = Utility.Caratteristiche[0].Find(p => p.Codice == kv.Value && p.Lingua == lingua);
+                if (c != null)
+                {
+                    retxt = c.Campo1.Trim();
+                }
+            }
+            if (kv.Key.ToLower() == ("caratteristica2"))
+            {
+                Tabrif c = Utility.Caratteristiche[1].Find(p => p.Codice == kv.Value && p.Lingua == lingua);
+                if (c != null)
+                {
+                    retxt = c.Campo1.Trim();
+                }
+            }
+            if (kv.Key.ToLower() == ("caratteristica3"))
+            {
+                Tabrif c = Utility.Caratteristiche[2].Find(p => p.Codice == kv.Value && p.Lingua == lingua);
+                if (c != null)
+                {
+                    retxt = c.Campo1.Trim();
+                }
+            }
+            if (kv.Key.ToLower() == ("caratteristica4"))
+            {
+                Tabrif c = Utility.Caratteristiche[3].Find(p => p.Codice == kv.Value && p.Lingua == lingua);
+                if (c != null)
+                {
+                    retxt = c.Campo1.Trim();
+                }
+            }
+            if (kv.Key.ToLower() == ("caratteristica5"))
+            {
+                Tabrif c = Utility.Caratteristiche[4].Find(p => p.Codice == kv.Value && p.Lingua == lingua);
+                if (c != null)
+                {
+                    retxt = c.Campo1.Trim();
+                }
+            }
+
+            if (kv.Key.ToLower() == ("Regione"))
+            {
+                string nomeregione = references.NomeRegione(kv.Value, lingua);
+                if (!string.IsNullOrEmpty(nomeregione))
+                {
+                    retxt = nomeregione.Trim();
+                }
+            }
+
+            //if (filtriadded.ContainsKey("provincia"))
+            //{
+            //    string nomeprovincia = references.NomeProvincia(filtriadded["provincia"], lingua);
+            //    if (!string.IsNullOrEmpty(nomeprovincia))
+            //    {
+            //        testourl += nomeprovincia + " ";
+            //        addpars.Add("Provincia", filtriadded["provincia"]);
+            //    }
+            //}
+            //if (filtriadded.ContainsKey("comune"))
+            //{
+            //    string nomecomune = filtriadded["comune"];
+            //    if (!string.IsNullOrEmpty(nomecomune))
+            //    {
+            //        testourl += nomecomune + " ";
+            //        addpars.Add("Comune", filtriadded["comune"]);
+            //    }
+            //}
+            ////eventuale aggiunta di geolocation e hidricercaid // per la crezione di url
+            ////if (filtriadded.ContainsKey("geolocation"))
+            ////{
+            ////    string geolocation = filtriadded["geolocation"];
+            ////    if (!string.IsNullOrEmpty(geolocation))
+            ////    {
+            ////        testourl += "testodacalcolare in base alla poszione con un criterio" + " ";
+            ////        addpars.Add("Geolocation", filtriadded["geolocation"]);
+            ////    }
+            ////}
+
+            return CleanUrl(retxt);
+        }
+
 
         public static string getCulturenamefromlingua(string lng)
         {
@@ -614,22 +787,22 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/pwaContent_tipo1.aspx";
                     break;
                 case "scheda": //Route schede aritcoli
-                    //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
+                               //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
                     Pathdestinazione = "~/AspNetPages/webdetail.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) > 1 && Convert.ToInt32(codicetipologia.Substring(3)) <= 50)
                         Pathdestinazione = "~/AspNetPages/webdetail.aspx";
-                        //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
+                    //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1) //
                         Pathdestinazione = "~/AspNetPages/webdetail.aspx";
-                        //Pathdestinazione = "~/AspNetPages/SchedaProdotto.aspx";
+                    //Pathdestinazione = "~/AspNetPages/SchedaProdotto.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 51 && Convert.ToInt32(codicetipologia.Substring(3)) <= 60) //No Scheda apribile
                         Pathdestinazione = "";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 61 && Convert.ToInt32(codicetipologia.Substring(3)) <= 62)
                         Pathdestinazione = "~/AspNetPages/webdetail.aspx";
-                        //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
+                    //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 101 && Convert.ToInt32(codicetipologia.Substring(3)) <= 101) //
                         Pathdestinazione = "~/AspNetPages/webdetail.aspx";
-                        //Pathdestinazione = "~/AspNetPages/SchedaProdotto.aspx";
+                    //Pathdestinazione = "~/AspNetPages/SchedaProdotto.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 500 && Convert.ToInt32(codicetipologia.Substring(3)) <= 600) //
                         Pathdestinazione = "~/AspNetPages/pwadetail.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 199 && Convert.ToInt32(codicetipologia.Substring(3)) <= 199) //No Scheda apribile
@@ -640,14 +813,14 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/SchedaResource.aspx";
                     break;
                 case "lista": //Route liste ricerche
-                    //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
+                              //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
                     Pathdestinazione = "~/AspNetPages/weblist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1) //
                         Pathdestinazione = "~/AspNetPages/weblist.aspx";
-                        //Pathdestinazione = "~/AspNetPages/RisultatiProdotti.aspx";
+                    //Pathdestinazione = "~/AspNetPages/RisultatiProdotti.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) > 1 && Convert.ToInt32(codicetipologia.Substring(3)) <= 50)
                         Pathdestinazione = "~/AspNetPages/weblist.aspx";
-                        //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
+                    //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 51 && Convert.ToInt32(codicetipologia.Substring(3)) <= 62) //
                         Pathdestinazione = "~/AspNetPages/weblist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 101 && Convert.ToInt32(codicetipologia.Substring(3)) <= 101) //
@@ -656,7 +829,7 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/pwalist.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 199 && Convert.ToInt32(codicetipologia.Substring(3)) <= 199) //
                         Pathdestinazione = "~/AspNetPages/weblist.aspx";
-                        //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
+                    //Pathdestinazione = "~/AspNetPages/RisultatiRicerca.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1000 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1000) //
                         Pathdestinazione = "~/AreaRiservata/Forum.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 666 && Convert.ToInt32(codicetipologia.Substring(3)) <= 666)
@@ -698,7 +871,7 @@ namespace WelcomeLibrary.UF
             string rewritedurl = correctlingua;
 #endif
             //if (!string.IsNullOrEmpty(destinationselector))
-            if (!string.IsNullOrEmpty(destinationselector) && textmatch.ToLower()!=destinationselector.ToLower())
+            if (!string.IsNullOrEmpty(destinationselector) && textmatch.ToLower() != destinationselector.ToLower())
                 rewritedurl += "/" + destinationselector;
             rewritedurl += "/" + textmatch;
             if (!string.IsNullOrEmpty(id))
@@ -825,7 +998,7 @@ namespace WelcomeLibrary.UF
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch 
+            catch
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }
@@ -880,12 +1053,12 @@ namespace WelcomeLibrary.UF
             SQLiteParameter p2;
             p2 = new SQLiteParameter("@Parametroid", "%;idContenuto," + id + ";%");
             parColl.Add(p2);
-           
+
             try
             {
                 idret = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
             }
-            catch 
+            catch
             {
                 //throw new ApplicationException("Errore, eliminazione Mail da presa in carico:" + error.Message, error);
             }

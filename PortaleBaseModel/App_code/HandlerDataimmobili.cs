@@ -423,7 +423,8 @@ public class HandlerDataimmobili : IHttpHandler, IRequiresSessionState
             }
             tmp1.Add("video", videourl);
             tmp1.Add("descrizione", SostituisciACapo(descrizione));
-            string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), idact, "rif000666", "", "");
+            //string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), idact, "rif000666", "", "");
+            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CommonPage.CleanUrl(testotitolo), idact, "rif000666", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
             tmp1.Add("titolo", testotitolo);
             tmp1.Add("descrizionebreve", SostituisciACapo(descrizionebreve));
@@ -568,7 +569,8 @@ public class HandlerDataimmobili : IHttpHandler, IRequiresSessionState
 
 
             }
-            ret = CommonPage.CreaLinkRoutes(HttpContext.Current.Session, false, Lingua, testourl, "", CodiceTipologia, partipologia, "", parreegione);
+            //ret = CommonPage.CreaLinkRoutes(HttpContext.Current.Session, false, Lingua, testourl, "", CodiceTipologia, partipologia, "", parreegione);
+            ret = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, testourl, "", CodiceTipologia, partipologia, "", parreegione, "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
 
 
             //Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == CodiceTipologia && tmp.CodiceProdotto == Categoria)); });
@@ -640,7 +642,8 @@ public class HandlerDataimmobili : IHttpHandler, IRequiresSessionState
                 tmp.Add("video", videourl);
                 tmp.Add("descrizione", SostituisciACapo(descrizione));
 
-                string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), id, "rif000666", "", "");
+                //string link = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(testotitolo), id, "rif000666", "", "");
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CommonPage.CleanUrl(testotitolo), id, "rif000666", "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                 //res.Add(id, link);
                 tmp.Add("titolo", testotitolo);
                 tmp.Add("descrizionebreve", SostituisciACapo(descrizionebreve));

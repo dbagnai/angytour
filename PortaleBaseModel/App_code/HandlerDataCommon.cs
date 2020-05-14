@@ -686,67 +686,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
                 case "getlinkbyfilters": //Mi crea un link con i custom filters ( da usare per la search personalizzata a catalogo )
                     Dictionary<string, string> filtriadded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
-                    Dictionary<string, string> addpars = new Dictionary<string, string>();
-                    string tipologiatmp = "-";
-                    string testourl = "";
-                    if (filtriadded.ContainsKey("tipologia"))
-                    {
-                        tipologiatmp = filtriadded["tipologia"];
-                    }
-                    if (filtriadded.ContainsKey("caratteristica1"))
-                    {
-                        //testourl = references.TestoCaratteristica(0, filtriadded["caratteristica1"], lingua);
-                        Tabrif c = Utility.Caratteristiche[0].Find(p => p.Codice == filtriadded["caratteristica1"] && p.Lingua == lingua);
-                        if (c != null)
-                        {
-                            testourl = c.Campo1 + " ";
-                            addpars.Add("Caratteristica1", filtriadded["caratteristica1"]);
-                        }
-                    }
-                    if (filtriadded.ContainsKey("regione"))
-                    {
-                        string nomeregione = references.NomeRegione(filtriadded["regione"], lingua);
-                        if (!string.IsNullOrEmpty(nomeregione))
-                        {
-                            testourl += nomeregione + " ";
-                            addpars.Add("Regione", filtriadded["regione"]);
-                        }
-                    }
-                    if (filtriadded.ContainsKey("provincia"))
-                    {
-                        string nomeprovincia = references.NomeProvincia(filtriadded["provincia"], lingua);
-                        if (!string.IsNullOrEmpty(nomeprovincia))
-                        {
-                            testourl += nomeprovincia + " ";
-                            addpars.Add("Provincia", filtriadded["provincia"]);
-                        }
-                    }
-                    if (filtriadded.ContainsKey("comune"))
-                    {
-                        string nomecomune = filtriadded["comune"];
-                        if (!string.IsNullOrEmpty(nomecomune))
-                        {
-                            testourl += nomecomune + " ";
-                            addpars.Add("Comune", filtriadded["comune"]);
-                        }
-                    }
-                    //eventuale aggiunta di geolocation e hidricercaid // per la crezione di url
-                    //if (filtriadded.ContainsKey("geolocation"))
-                    //{
-                    //    string geolocation = filtriadded["geolocation"];
-                    //    if (!string.IsNullOrEmpty(geolocation))
-                    //    {
-                    //        testourl += "testodacalcolare in base alla poszione con un criterio" + " ";
-                    //        addpars.Add("Geolocation", filtriadded["geolocation"]);
-                    //    }
-                    //}
-
-
-                    testourl = testourl.Trim().Replace(" ", "-");
-                    string linkcustom = SitemapManager.CreaLinkRoutes(lingua, testourl, "", tipologiatmp, "", "", "", "", "", true, true, addpars);
-
+                    string linkcustom = WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(filtriadded, lingua);
                     result = linkcustom;
-
                     break;
                 case "caricaMenuSezioni":
                     Dictionary<string, string> filtriMenu = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
@@ -793,7 +734,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         foreach (Prodotto o in prodotti)
                         {
                             string testo = o.Descrizione;
-                            //string linkcategoria = CommonPage.CreaLinkRoutes(null, false, lingua, (testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                            //string linkcategoria = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, testo, "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                             //linkcategoria = linkcategoria.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                             List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == lingua && (tmp.CodiceProdotto == o.CodiceProdotto)); });
@@ -803,7 +744,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                                 foreach (SProdotto s in sprodotti)
                                 {
                                     string testosprod = s.Descrizione;
-                                    string linksprod = CommonPage.CreaLinkRoutes(null, false, lingua, (testosprod), "", filtriCategorie["tipologia"], s.CodiceProdotto, s.CodiceSProdotto);
+                                    //string linksprod = CommonPage.CreaLinkRoutes(null, false, lingua, (testosprod), "", filtriCategorie["tipologia"], s.CodiceProdotto, s.CodiceSProdotto);
+                                    string linksprod = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, testosprod, "", filtriCategorie["tipologia"], s.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
                                     linksprod = linksprod.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                                     elemlink = new Tabrif();
@@ -873,7 +815,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                                 foreach (Prodotto o in prodotti1)
                                 {
                                     string testoprodotto = o.Descrizione;
-                                    string linkcategoria = CommonPage.CreaLinkRoutes(null, false, lingua, (testoprodotto), "", o.CodiceTipologia, o.CodiceProdotto);
+                                    //string linkcategoria = CommonPage.CreaLinkRoutes(null, false, lingua, (testoprodotto), "", o.CodiceTipologia, o.CodiceProdotto);
+                                    string linkcategoria = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, testoprodotto, "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+
                                     linkcategoria = linkcategoria.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                                     elemlink1 = new Tabrif();
                                     elemlink1.Codice = o.CodiceProdotto;

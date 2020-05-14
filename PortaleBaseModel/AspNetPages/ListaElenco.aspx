@@ -192,7 +192,7 @@
             </div>
 
         </div>
-        <asp:Repeater ID="rptSoci" runat="server" ViewStateMode="Enabled" OnItemDataBound="rptSoci_ItemDataBound">
+     <asp:Repeater ID="rptSoci" runat="server" ViewStateMode="Enabled" OnItemDataBound="rptSoci_ItemDataBound">
             <ItemTemplate>
                 <div class="row" runat="server" id="divTitle"
                     style="font-size: 20px; color: #06558b; padding-bottom: 5px; margin-top: 25px; margin-bottom: 20px; border-bottom: 1px solid #06558b" visible="false">
@@ -202,14 +202,14 @@
                     <div class="col-lg-4">
                         <%--    <h5 style="text-transform: capitalize">
                             <a id="a1" runat="server"
-                                href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                                href='<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                 <asp:Literal ID="litTitolo" Text='<%# Eval("Cognome_dts").ToString() + " "  + Eval("Nome_dts").ToString()  %>'
                                     runat="server"></asp:Literal></a>
                         </h5>--%>
                         <h5 style="text-transform: capitalize; margin-bottom: 0px">
                             <a id="a4" runat="server"
-                                href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                                href='<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                 <asp:Literal ID="Literal1" Text='<%# Eval("Denominazione" + Lingua).ToString()  %>'
                                     runat="server"></asp:Literal></a>
@@ -217,7 +217,7 @@
                     </div>
                     <div class="col-lg-6">
                         <a id="a2" runat="server"
-                            href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                            href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="overflow: hidden; max-height: 100px; display: block; text-align: justify; font-size: 13px;">
                                 <asp:Literal ID="litPosizione" runat="server"
@@ -228,7 +228,7 @@
                     </div>
                     <div class="col-lg-2">
                         <a id="a3" runat="server" class="buttonstyle" style="padding-top: 5px; padding-bottom: 5px"
-                            href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                            href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="color: #fff; font-size: 13px; font-weight: bold">
                                 <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoVediScheda") %>' runat="server" />
@@ -249,14 +249,14 @@
                     <div class="col-lg-6">
                         <h5>
                             <a id="a1" runat="server"
-                                href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                                href='<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                                 target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                                 <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Denominazione" + Lingua).ToString() ) %>'
                                     runat="server"></asp:Literal></a>
                         </h5>
                     </div>
                     <div class="col-lg-4">
-                        <a id="a2" runat="server" href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                        <a id="a2" runat="server" href='<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="overflow: hidden; max-height: 100px; display: block; text-align: justify; font-size: 1.1em;">
                                 <asp:Literal ID="litPosizione" runat="server"
@@ -266,7 +266,7 @@
 
                     </div>
                     <div class="col-lg-2">
-                        <a id="a3" runat="server" href='<%# CreaLinkRoutes(Session,false,Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
+                        <a id="a3" runat="server" href='<%# WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,Eval("Denominazione" + Lingua).ToString(),Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString()) %>'
                             target="_self" title='<%# CleanInput(ConteggioCaratteri(  Eval("Denominazione" + Lingua).ToString(),300,true )) %>'>
                             <div style="color: #af1016; font-size: 1.2em; font-weight: 700">
                                 <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoVediScheda") %>' runat="server" />

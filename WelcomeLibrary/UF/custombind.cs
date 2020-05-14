@@ -898,6 +898,7 @@ namespace WelcomeLibrary.UF
                         if (pars.Count > 11) dictpars.Add("categoria2Liv", pars[11]);
                         if (pars.Count > 12) dictpars.Add("vetrina", pars[12]);
                         if (pars.Count > 13) dictpars.Add("promozioni", pars[13]);
+                        if (pars.Count > 14 && !string.IsNullOrWhiteSpace(pars[14]) && !dictpars.ContainsKey("objfiltro")) dictpars.Add("objfiltro", pars[14]);
                         ////////////////////////////(PAGINAZIONE ... )
                         if (pars.Count > 0) dictpagerpars.Add("page", "1");
                         if (pars.Count > 0) dictpagerpars.Add("pagesize", "1");
@@ -906,41 +907,66 @@ namespace WelcomeLibrary.UF
                         if (!dictpars.ContainsKey("container")) return;
                         if (!dictpars.ContainsKey("controlid")) return;
 
-
-                        //////////////////////////////////////////////////
-                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
-                        //////////////////////////////////////////////////
-#if false
-                              if (Session != null && Session["objfiltro"] != null)
+                        try
                         {
-                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
-                            if (retval != null && retval != "")
+                            ////////////////////////////////////////////////
+                            // Se ho passato dei parametri aggiuntivi alla funzione li sposto nella collection di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
+                            ////////////////////////////////////////////////
+                            bool flag_addedpars1 = false;
+                            if (dictpars.ContainsKey("objfiltro"))
                             {
-                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
-                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
-                                if (dictparsfromsession != null)
+                                //dataManagement.EncodeToBase64
+                                dictpars["objfiltro"] = dataManagement.DecodeFromBase64(dictpars["objfiltro"]);//mi aspetto i parametri con formato json serializzato e convertito base64
+                                Dictionary<string, string> dictparsadded = new Dictionary<string, string>();
+                                dictparsadded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictpars["objfiltro"]);
+                                if (dictparsadded != null)
                                 {
-                                    bool skipsessionfilters = false;
-                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
-                                        skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
-                                    //    skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
-                                    //    skipsessionfilters = true;
-
-                                    if (!skipsessionfilters)
-                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                        {
-                                            //if (kv.Key == ("page" + dictpars["controlid"]))
-                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                            //aggiungo i parametri dalla sessione se presenti
-                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                        }
+                                    foreach (KeyValuePair<string, string> kv in dictparsadded)
+                                    {
+                                        //aggiungo i parametri   se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                        flag_addedpars1 = true;
+                                    }
                                 }
                             }
-                        }
+#if false
+                            //////////////////////////////////////////////////
+                            //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                            //////////////////////////////////////////////////
+                            if (!flag_addedpars1)
+                                if (Session != null && Session["objfiltro"] != null)
+                                {
+                                    string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                                    if (retval != null && retval != "")
+                                    {
+                                        Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                        dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                        if (dictparsfromsession != null)
+                                        {
+                                            bool skipsessionfilters = false;
+                                            if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                                skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                            //    skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                            //    skipsessionfilters = true;
+
+                                            if (!skipsessionfilters)
+                                                foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                                {
+                                                    //if (kv.Key == ("page" + dictpars["controlid"]))
+                                                    //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                                    //aggiungo i parametri dalla sessione se presenti
+                                                    if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                                    else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                                }
+                                        }
+                                    }
+                                }
 #endif
+                        }
+                        catch { }
 
 
                         ///////////////////////////////////////////////////////////
@@ -1297,7 +1323,7 @@ namespace WelcomeLibrary.UF
                         }
                         break;
                     case "injectportfolioandload":
-                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) 
+                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro) 
                         //return;
 
                         if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
@@ -1321,45 +1347,72 @@ namespace WelcomeLibrary.UF
                         if (pars.Count > 16 && !dictpars.ContainsKey("connectedid")) dictpars.Add("connectedid", pars[16]);
                         if (pars.Count > 17 && !dictpars.ContainsKey("categoria2Liv")) dictpars.Add("categoria2Liv", pars[17]);
                         if (pars.Count > 18 && !dictpars.ContainsKey("mostviewed")) dictpars.Add("mostviewed", pars[18]);
+                        if (pars.Count > 19 && !string.IsNullOrWhiteSpace(pars[19]) && !dictpars.ContainsKey("objfiltro")) dictpars.Add("objfiltro", pars[19]);
                         ////////////////////////////(PAGINAZIONE ... )
                         if (pars.Count > 4 && !dictpagerpars.ContainsKey("page")) dictpagerpars.Add("page", pars[4]);
                         if (pars.Count > 5 && !dictpagerpars.ContainsKey("pagesize")) dictpagerpars.Add("pagesize", pars[5]);
                         if (pars.Count > 6 && !dictpagerpars.ContainsKey("enablepager")) dictpagerpars.Add("enablepager", pars[6]);
 
-                        //////////////////////////////////////////////////
-                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
-                        //////////////////////////////////////////////////
-#if true
-                        if (Session != null && Session["objfiltro"] != null)
+                        try
                         {
-                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
-                            if (retval != null && retval != "")
+                            ////////////////////////////////////////////////
+                            // Se ho passatto dei parametri aggiuntivi alla funzione li sposto nella collectio di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
+                            ////////////////////////////////////////////////
+                            bool flag_addedpars1 = false;
+                            if (dictpars.ContainsKey("objfiltro"))
                             {
-                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
-                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
-                                if (dictparsfromsession != null)
+                                //dataManagement.EncodeToBase64
+                                dictpars["objfiltro"] = dataManagement.DecodeFromBase64(dictpars["objfiltro"]);//mi aspetto i parametri con formato json serializzato e convertito base64
+                                Dictionary<string, string> dictparsadded = new Dictionary<string, string>();
+                                dictparsadded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictpars["objfiltro"]);
+                                if (dictparsadded != null)
                                 {
-                                    bool skipsessionfilters = false;
-                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
-                                        skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
-                                    //    skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
-                                    //    skipsessionfilters = true;
-
-                                    if (!skipsessionfilters)
-                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                        {
-                                            //if (kv.Key == ("page" + dictpars["controlid"]))
-                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                            //aggiungo i parametri dalla sessione se presenti
-                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                        }
+                                    foreach (KeyValuePair<string, string> kv in dictparsadded)
+                                    {
+                                        //aggiungo i parametri   se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                        flag_addedpars1 = true;
+                                    }
                                 }
                             }
-                        }
+#if true
+                            //////////////////////////////////////////////////
+                            //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                            //////////////////////////////////////////////////
+                            if (!flag_addedpars1)
+                                if (Session != null && Session["objfiltro"] != null)
+                                {
+                                    string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                                    if (retval != null && retval != "")
+                                    {
+                                        Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                        dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                        if (dictparsfromsession != null)
+                                        {
+                                            bool skipsessionfilters = false;
+                                            if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                                skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                            //    skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                            //    skipsessionfilters = true;
+
+                                            if (!skipsessionfilters)
+                                                foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                                {
+                                                    //if (kv.Key == ("page" + dictpars["controlid"]))
+                                                    //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                                    //aggiungo i parametri dalla sessione se presenti
+                                                    if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                                    else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                                }
+                                        }
+                                    }
+                                }
 #endif
+                        }
+                        catch { }
                         //////////////////////////////////////
                         //Se presente la quesrystring pagino con quella (PRIORITARA)
                         if (Richiesta != null)
@@ -1811,7 +1864,7 @@ namespace WelcomeLibrary.UF
                         }
                         break;
                     case "injectbootstrapportfolioandload":
-                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed) 
+                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro) 
                         //return;
 
                         if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
@@ -1835,45 +1888,72 @@ namespace WelcomeLibrary.UF
                         if (pars.Count > 16 && !dictpars.ContainsKey("connectedid")) dictpars.Add("connectedid", pars[16]);
                         if (pars.Count > 17 && !dictpars.ContainsKey("categoria2Liv")) dictpars.Add("categoria2Liv", pars[17]);
                         if (pars.Count > 18 && !dictpars.ContainsKey("mostviewed")) dictpars.Add("mostviewed", pars[18]);
+                        if (pars.Count > 19 && !string.IsNullOrWhiteSpace(pars[19]) && !dictpars.ContainsKey("objfiltro")) dictpars.Add("objfiltro", pars[19]);
                         ////////////////////////////(PAGINAZIONE ... )
                         if (pars.Count > 4 && !dictpagerpars.ContainsKey("page")) dictpagerpars.Add("page", pars[4]);
                         if (pars.Count > 5 && !dictpagerpars.ContainsKey("pagesize")) dictpagerpars.Add("pagesize", pars[5]);
                         if (pars.Count > 6 && !dictpagerpars.ContainsKey("enablepager")) dictpagerpars.Add("enablepager", pars[6]);
 
-                        //////////////////////////////////////////////////
-                        //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
-                        //////////////////////////////////////////////////
-#if true
-                        if (Session != null && Session["objfiltro"] != null)
+                        try
                         {
-                            string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
-                            if (retval != null && retval != "")
+                            ////////////////////////////////////////////////
+                            // Se ho passatto dei parametri aggiuntivi alla funzione li sposto nella collectio di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
+                            ////////////////////////////////////////////////
+                            bool flag_addedpars1 = false;
+                            if (dictpars.ContainsKey("objfiltro"))
                             {
-                                Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
-                                dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
-                                if (dictparsfromsession != null)
+                                //dataManagement.EncodeToBase64
+                                dictpars["objfiltro"] = dataManagement.DecodeFromBase64(dictpars["objfiltro"]);//mi aspetto i parametri con formato json serializzato e convertito base64
+                                Dictionary<string, string> dictparsadded = new Dictionary<string, string>();
+                                dictparsadded = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictpars["objfiltro"]);
+                                if (dictparsadded != null)
                                 {
-                                    bool skipsessionfilters = false;
-                                    if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
-                                        skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
-                                    //    skipsessionfilters = true;
-                                    //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
-                                    //    skipsessionfilters = true;
-
-                                    if (!skipsessionfilters)
-                                        foreach (KeyValuePair<string, string> kv in dictparsfromsession)
-                                        {
-                                            //if (kv.Key == ("page" + dictpars["controlid"]))
-                                            //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
-                                            //aggiungo i parametri dalla sessione se presenti
-                                            if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
-                                            else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato
-                                        }
+                                    foreach (KeyValuePair<string, string> kv in dictparsadded)
+                                    {
+                                        //aggiungo i parametri   se presenti
+                                        if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                        else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                        flag_addedpars1 = true;
+                                    }
                                 }
                             }
-                        }
+#if true
+                            //////////////////////////////////////////////////
+                            //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                            //////////////////////////////////////////////////
+                            if (!flag_addedpars1)
+                                if (Session != null && Session["objfiltro"] != null)
+                                {
+                                    string retval = Session["objfiltro"].ToString();//Prendo dalla sessione la chiave che contiene i parametri aggiuntivi serializzati
+                                    if (retval != null && retval != "")
+                                    {
+                                        Dictionary<string, string> dictparsfromsession = new Dictionary<string, string>();
+                                        dictparsfromsession = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(retval);
+                                        if (dictparsfromsession != null)
+                                        {
+                                            bool skipsessionfilters = false;
+                                            if (dictpars.ContainsKey("tipologia") && dictparsfromsession.ContainsKey("tipologia") && dictpars["tipologia"] != dictparsfromsession["tipologia"])
+                                                skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria") && dictparsfromsession.ContainsKey("categoria") && dictpars["categoria"] != dictparsfromsession["categoria"])
+                                            //    skipsessionfilters = true;
+                                            //if (dictpars.ContainsKey("categoria2Liv") && dictparsfromsession.ContainsKey("categoria2Liv") && dictpars["categoria2Liv"] != dictparsfromsession["categoria2Liv"])
+                                            //    skipsessionfilters = true;
+
+                                            if (!skipsessionfilters)
+                                                foreach (KeyValuePair<string, string> kv in dictparsfromsession)
+                                                {
+                                                    //if (kv.Key == ("page" + dictpars["controlid"]))
+                                                    //    dictpagerpars["page"] = kv.Value;//la pagina la prendo dalla sessione se presente!
+                                                    //aggiungo i parametri dalla sessione se presenti
+                                                    if (!dictpars.ContainsKey(kv.Key)) dictpars.Add(kv.Key, kv.Value);
+                                                    else dictpars[kv.Key] = kv.Value;//sovrascivo il valore passato dando la priorita a quello messo in sessione
+                                                }
+                                        }
+                                    }
+                                }
 #endif
+                        }
+                        catch { }
                         //////////////////////////////////////
                         //Se presente la quesrystring pagino con quella (PRIORITARA)
                         if (Richiesta != null)
@@ -2940,7 +3020,7 @@ namespace WelcomeLibrary.UF
 
                                     sb.Append("<div class=\"w-100 text-center\" >");
 
-                                    string imgstyle = "max-width:100% !important;height:auto !important;";
+                                    string imgstyle = "max-width:100%;height:auto;";
                                     ////////////////////////////////////////////////////////
                                     //Eventuale impostazione max height elementi
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
@@ -2975,8 +3055,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
-                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
+                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3088,7 +3168,7 @@ namespace WelcomeLibrary.UF
                                     string img = imgslist[j];
 
                                     sb.Append("<div class=\"text-center " + itemclass + "\" >");
-                                    string imgstyle = "max-width:100% !important;height:auto !important;";
+                                    string imgstyle = "max-width:100%;height:auto;";
 
                                     ////////////////////////////////////////////////////////
                                     //Eventuale impostazione max height elementi
@@ -3123,8 +3203,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
-                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
+                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3313,7 +3393,7 @@ namespace WelcomeLibrary.UF
                                     sb.Append("\">");
                                     sb.Append("<div class=\"slide-content\"  style=\"position:relative;padding: 1px\">");
 
-                                    string imgstyle = "max-width:100% !important;height:auto !important;";
+                                    string imgstyle = "max-width:100%;height:auto;";
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
                                     {
                                         string inlinestyle = nodetobind.Attributes["style"].Value;
@@ -3343,8 +3423,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
-                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
+                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
