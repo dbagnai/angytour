@@ -428,7 +428,7 @@
                                         <li style="display: none">
                                             <div class="clearfix" style="margin-bottom: 20px">
                                                 <div class="float-left mt-1 mr-2" style="width: 25px">
-                                                    <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="true" name="payment_method" value="contanti" onclick="refreshcarrello(this, 'inpContanti')"
+                                                    <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti" onclick="refreshcarrello(this, 'inpContanti')"
                                                         runat="server" id="inpContanti" />
                                                 </div>
                                                 <div class="float-left" style="width: calc(100% - 30px - .5rem);">

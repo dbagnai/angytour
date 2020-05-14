@@ -2940,7 +2940,7 @@ namespace WelcomeLibrary.UF
 
                                     sb.Append("<div class=\"w-100 text-center\" >");
 
-                                    string imgstyle = "max-width:100%;height:auto;";
+                                    string imgstyle = "max-width:100% !important;height:auto !important;";
                                     ////////////////////////////////////////////////////////
                                     //Eventuale impostazione max height elementi
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
@@ -2975,8 +2975,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
+                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
                                                     }
                                             }
                                             catch
@@ -3088,7 +3088,7 @@ namespace WelcomeLibrary.UF
                                     string img = imgslist[j];
 
                                     sb.Append("<div class=\"text-center " + itemclass + "\" >");
-                                    string imgstyle = "max-width:100%;height:auto;";
+                                    string imgstyle = "max-width:100% !important;height:auto !important;";
 
                                     ////////////////////////////////////////////////////////
                                     //Eventuale impostazione max height elementi
@@ -3123,8 +3123,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
+                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
                                                     }
                                             }
                                             catch
@@ -3313,7 +3313,7 @@ namespace WelcomeLibrary.UF
                                     sb.Append("\">");
                                     sb.Append("<div class=\"slide-content\"  style=\"position:relative;padding: 1px\">");
 
-                                    string imgstyle = "max-width:100%;height:auto;";
+                                    string imgstyle = "max-width:100% !important;height:auto !important;";
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
                                     {
                                         string inlinestyle = nodetobind.Attributes["style"].Value;
@@ -3343,8 +3343,8 @@ namespace WelcomeLibrary.UF
                                                 if (double.TryParse(imgslistratio[j], out ar))
                                                     if (ar < 1)
                                                     {
-                                                        //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        // imgstyle = "max-width:100% !important;width:auto !important;height:" + calcheight + "px  !important;";
+                                                        imgstyle = "width:auto  !important;max-width:100%  !important;max-height:" + calcheight + "px  !important;";
                                                     }
                                             }
                                             catch
