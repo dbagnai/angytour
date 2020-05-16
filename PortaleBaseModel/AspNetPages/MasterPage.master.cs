@@ -50,6 +50,33 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         get { return ViewState["Categoria2liv"] != null ? (string)(ViewState["Categoria2liv"]) : ""; }
         set { ViewState["Categoria2liv"] = value; }
     }
+
+    public string Caratteristica1
+    {
+        get { return ViewState["Caratteristica1"] != null ? (string)(ViewState["Caratteristica1"]) : ""; }
+        set { ViewState["Caratteristica1"] = value; }
+    }
+    public string Caratteristica2
+    {
+        get { return ViewState["Caratteristica2"] != null ? (string)(ViewState["Caratteristica2"]) : ""; }
+        set { ViewState["Caratteristica2"] = value; }
+    }
+
+    public string Caratteristica3
+    {
+        get { return ViewState["Caratteristica3"] != null ? (string)(ViewState["Caratteristica3"]) : ""; }
+        set { ViewState["Caratteristica3"] = value; }
+    }
+    public string Caratteristica4
+    {
+        get { return ViewState["Caratteristica4"] != null ? (string)(ViewState["Caratteristica4"]) : ""; }
+        set { ViewState["Caratteristica4"] = value; }
+    }
+    public string Caratteristica5
+    {
+        get { return ViewState["Caratteristica5"] != null ? (string)(ViewState["Caratteristica5"]) : ""; }
+        set { ViewState["Caratteristica5"] = value; }
+    }
     public string idOfferta
     {
         get { return ViewState["idOfferta"] != null ? (string)(ViewState["idOfferta"]) : ""; }
@@ -106,7 +133,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", true, CodiceTipologia);
             Categoria = CommonPage.CaricaValoreMaster(Request, Session, "Categoria", true, Categoria);
             Categoria2liv = CommonPage.CaricaValoreMaster(Request, Session, "Categoria2liv", true, Categoria2liv);
-            idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
+            Caratteristica1 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica1", false);
+            Caratteristica2 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica2", false);
+            Caratteristica3 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica3", false);
+            Caratteristica4 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica4", false);
+            Caratteristica5 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica5", false); idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
             idOfferta = CommonPage.CaricaValoreMaster(Request, Session, "idOfferta", true);
             Vetrina = CommonPage.CaricaValoreMaster(Request, Session, "vetrina", true, "");
             Page.ClientScript.GetPostBackEventReference(this, string.Empty);
@@ -439,6 +470,48 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
 
+
+    public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
+        sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
+        sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+        if (sezioni != null)
+            foreach (TipologiaOfferte o in sezioni)
+            {
+                if (progressivocaratteristica == 2)
+                    foreach (Tabrif elem in Utility.Caratteristiche[1])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            addpars.Add("Caratteristica2", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+            }
+        return sb.ToString();
+    }
     /// <summary>
     /// Creazione lista li per tipologie da min a max
     /// </summary>
@@ -658,8 +731,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return sb.ToString();
     }
 
-    public string CreaLinkCategorieNestedNodropdown(string tipologia, string filtercode = "", string classop = "", bool noli = true)
+
+    public string CreaLinkCategorieNestedNodropdown(string tipologia, string filtercode = "", string classop = "", bool noli = true, string localCaratteristica1 = "")
     {
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(localCaratteristica1)) addpars.Add("Caratteristica1", localCaratteristica1);
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
         //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
@@ -678,12 +754,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             //if (tipologia == "rif000001")
             //    prodotti = RiordinaSpeciale(prodotti, "prod000020,prod000013,prod000014,prod000015,prod000017,prod000016,prod000021,prod000022,prod000023,prod000027,prod000024,prod000029,prod000026,prod000001");
 
-
             foreach (Prodotto o in prodotti)
             {
                 string testo = o.Descrizione;
                 //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
-                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
 
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
@@ -694,7 +769,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (!string.IsNullOrEmpty(classop))
                     sb.Append(" class=\"" + classop + "\"  ");
-                if (o.CodiceProdotto == Categoria)
+                if ((o.CodiceProdotto == Categoria) && (localCaratteristica1 == Caratteristica1))
                     sb.Append(" style=\"font-weight:600 !important;display:block;\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
@@ -704,10 +779,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     sb.Append("</li>");
 
                 /*Nested level categoria 2 liv*/
-                string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto);
+                string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto, "", "", false, localCaratteristica1);
                 if (!string.IsNullOrEmpty(sottomenu))
                 {
-
                     sb.Append("<ul>");
                     sb.Append(sottomenu);
                     sb.Append("</ul>");
@@ -720,15 +794,21 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
 
-    /// <summary>
-    /// Creazione lista li delle sottocategorie ( 1livello ) per la tipologie e categoria indicata
+    // <summary>
+    /// 
     /// </summary>
     /// <param name="tipologia"></param>
     /// <param name="categoria"></param>
     /// <param name="filtercode"></param>
+    /// <param name="classop"></param>
+    /// <param name="noli"></param>
+    /// <param name="localCaratteristica1"></param>
     /// <returns></returns>
-    public string CreaLinkSottoCategorie(string tipologia, string categoria, string filtercode = "", string classop = "", bool noli = false)
+    public string CreaLinkSottoCategorie(string tipologia, string categoria, string filtercode = "", string classop = "", bool noli = false, string localCaratteristica1 = "")
     {
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(localCaratteristica1)) addpars.Add("Caratteristica1", localCaratteristica1);
+
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == categoria)); });
         //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
@@ -747,7 +827,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             {
                 string testo = o.Descrizione;
                 //string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto);
-                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", tipologia, o.CodiceProdotto, o.CodiceSProdotto, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
 
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                 if (!noli)
@@ -757,7 +837,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 sb.Append("\"");
                 if (!string.IsNullOrEmpty(classop))
                     sb.Append(" class=\"" + classop + "\"  ");
-                if (o.CodiceSProdotto == Categoria2liv)
+                if ((o.CodiceSProdotto == Categoria2liv) && (localCaratteristica1 == Caratteristica1))
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");

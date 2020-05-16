@@ -130,21 +130,17 @@ namespace WelcomeLibrary.UF
                 }
             }
 
-
             foreach (TipologiaOfferte tipologia in listfiltered)
             {
                 //WelcomeLibrary.DOM.TipologiaOfferte sezione =
                 //    WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == tipologia.Lingua && tmp.Codice == tipologia.Codice); });
                 //Genero il link per la tipologia
                 listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true));
-
                 List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
                 foreach (Prodotto p in prodotti)
                 {
                     //Genero il link per la categoria
                     listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true));
-
-
                     List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
                     foreach (SProdotto s in sprodotti)
                     {
@@ -153,29 +149,94 @@ namespace WelcomeLibrary.UF
                     }
                 }
             }
-            /*GENERAZIONE LINK PER CARATTERISTICHE*/
+#if true
+
+            /*GENERAZIONE LINK PER CARATTERISTICHE   ( da estendere la generazione per caratteristiche e combinazioni usate nei menu )*/
+            if (Utility.Caratteristiche.Count >= 1)
+                foreach (Tabrif elem in Utility.Caratteristiche[0])
+                {
+                    Dictionary<string, string> addpars = new Dictionary<string, string>();
+                    if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                    {
+                        addpars.Add("Caratteristica1", elem.Codice);
+                        foreach (TipologiaOfferte tipologia in listfiltered)
+                        {
+                            //Genero il link per la tipologia
+                            listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true, addpars));
+                            List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
+                            foreach (Prodotto p in prodotti)
+                            {
+                                //Genero il link per la categoria
+                                listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                foreach (SProdotto s in sprodotti)
+                                {
+                                    //Genero il link per la sotto categoria
+                                    listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+                                }
+                            }
+                        }
+                    }
+                }
+            if (Utility.Caratteristiche.Count >= 2)
+                foreach (Tabrif elem in Utility.Caratteristiche[1])
+                {
+                    Dictionary<string, string> addpars = new Dictionary<string, string>();
+                    if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                    {
+                        addpars.Add("Caratteristica2", elem.Codice);
+                        foreach (TipologiaOfferte tipologia in listfiltered)
+                        {
+                            //Genero il link per la tipologia
+                            listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true, addpars));
+                            List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
+                            foreach (Prodotto p in prodotti)
+                            {
+                                //Genero il link per la categoria
+                                listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                foreach (SProdotto s in sprodotti)
+                                {
+                                    //Genero il link per la sotto categoria
+                                    listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+                                }
+                            }
+                        }
+                    }
+                }
+#endif
+#if FALSE
             if (Utility.Caratteristiche.Count >= 3)
-            {
                 foreach (Tabrif elem in Utility.Caratteristiche[2])
                 {
-                    //switch (elem.Codice.Length)
-                    //{
-                    //    case 1:
-                    //    case 3:
-                    //    case 4:
-                    //        Dictionary<string, string> addparms = new Dictionary<string, string>();
-                    //        addparms.Add("Caratteristica3", elem.Codice);
-                    //        string testolink = "";
-                    //       testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 1, elem.Codice, elem.Lingua);
-                    //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 2, elem.Codice, elem.Lingua);
-                    //        testolink += " " + Utility.TestoCaratteristicaSublivelli(2, 3, elem.Codice, elem.Lingua);
-                    //         listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(elem.Lingua, testolink, "", "rif000100", "", "", "", "", "", true, true, addparms));
-                    //        break;
-                    //}
-                }
-            }
+                    Dictionary<string, string> addpars = new Dictionary<string, string>();
+                   if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                    {
+                        addpars.Add("Caratteristica3", elem.Codice);
+                        foreach (TipologiaOfferte tipologia in listfiltered)
+                        {
+                            //Genero il link per la tipologia
+                            listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true, addpars));
+                            List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
+                            foreach (Prodotto p in prodotti)
+                            {
+                                //Genero il link per la categoria
+                                listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                foreach (SProdotto s in sprodotti)
+                                {
+                                    //Genero il link per la sotto categoria
+                                    listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+                                }
+                            }
+                        }
+                    }
+                } 
+#endif
+
             return listalinks;
         }
+
 
         /// <summary>
         /// Crea i link usando il dictionarty dei parametri aggiuntivi
