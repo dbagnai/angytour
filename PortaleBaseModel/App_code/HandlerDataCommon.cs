@@ -407,7 +407,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     Descrizione1 += " <br/> Info Aggiuntive:" + datiaggiuntivi;
                     Descrizione1 += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
 
-                    Utility.invioMailGenerico(cliente.Cognome, cliente.Email, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+                    //Utility.invioMailGenerico(cliente.Cognome, cliente.Email, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+                    Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
 
 
                     break;
