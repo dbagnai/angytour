@@ -1,27 +1,6 @@
 ﻿
 /* ----------------------------------------------------------------fine stlye1-------------------------------------------------------------------------------------------- */
 
-
-/****************************
-Portfolio
-****************************/
-
-/**
-Portfolio Items
-*/
-/*.portfolio {
-    clear: both;
-    overflow: hidden;
-}
-
-.portfolio-items {
-    padding: 0px 0 0 0;
-    clear: both;
-    width: 100%;
-    margin: auto;
-}*/
-
-
 /****************************
 Img overlay
 ****************************/
@@ -311,13 +290,13 @@ a.portfolio-zoom icon-resize-full:hover {
     overflow: hidden;
 }
 
-    .img-overlay img {
-        -webkit-transition: all 0.6s;
-        -moz-transition: all 0.6s;
-        -ms-transition: all 0.6s;
-        -o-transition: all 0.6s;
-        transition: all 0.6s;
-    }
+.img-overlay img {
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    -ms-transition: all 0.6s;
+    -o-transition: all 0.6s;
+    transition: all 0.6s;
+}
 
 /*.img-overlay:hover img {
     -webkit-transform: translateY(-40px);

@@ -1,5 +1,16 @@
-﻿ <!-- Scroller  -->
-<div style="padding-bottom: 20px; display: none">
+﻿<style>
+    i.fa.fa-cart-plus, i.fa.fa-eye {
+        padding: 0.5rem;
+        line-height: 1.35rem;
+    }
+
+    .bg-color-sottomeu-tenue.no-image {
+        background-image: none !important;
+    }
+</style>
+
+<!-- Scroller  -->
+<div style="padding-bottom: 20px; display: none" class="squarevariable">
     <div class="row py-0 text-center" style="min-height: 400px;">
         <div class="col-md-12 col-sm-12 col-12 px-0">
 
@@ -14,67 +25,39 @@
                 <div class="owl-slider-v2" id="replaceid">
 
                     <!--<div class="item mb-4 border bd-primary-color">-->
-                    <div class="item box position-relative border bd-primary-color p-0 mb-4" style="overflow:hidden;">
+                    <div class="item box position-relative border bd-secondary-color p-0 mb-4 card border-tipo2 rounded" style="overflow:hidden;">
 
                         <!--RIBBON-->
                         <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
 
-                        <a  target="_self" href="link" class="bind" title="titolo" mybind="Id">
-                            <div class="work-image img-overlay mt-0">
+                        <a target="_self" href="link" class="bind mb-3" title="titolo" mybind="Id" style="overflow:hidden">
+                            <div class="work-image imgovercontainer m-0" style="max-height:300px; overflow:hidden">
                                 <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
-                                <div class="item-img-overlay">
-                                </div>
+                                <!--<div class="item-img-overlay">
+                                </div>-->
                             </div>
                         </a>
 
-                        <!--<div class="float-left" style="margin-left:10px">
-                            <p style="font-size:0.8rem;" class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" format="formatdescrizione"></p>
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="250" format="formatdescrizione"></span><br /
-                            <span class="bind" style="font-size:1.1rem;color:#809193" mybind="Caratteristica1" format="frmcaratteristica1"></span><br />
-                        <span class="bind" style="font-size:0.8rem;color:#809193" mybind="Caratteristica2" format="frmcaratteristica2"></span><br />
-                            <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria" format="frmcategoria"></span>
-                            <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
-                        </div>
-                        <div class="clearfix"></div>-->
 
-                        <div class="body-banner-slider px-3">
+                        <div class="body-banner-slider px-3" style="max-height:125px">
                             <h3 class="h3-body-title-1 mb-0">
-                                <a  class="bind title-banner-slider" target="_self" href="link" title="titolo" mybind="Id">
+                                <a class="bind title-banner-slider" target="_self" href="link" title="titolo" mybind="Id">
                                     <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                                 </a>
                             </h3>
-                            <a  class="bind subtitle-banner-slider" target="_self" href="link" title="titolo" mybind="Id">
+                            <a class="bind subtitle-banner-slider mt-2" target="_self" href="link" title="titolo" mybind="Id">
                                 <p class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></p>
                             </a>
-                            <p style="font-size:0.9rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="200" format="formatdescrizione"></p>
+                            <!--<p style="font-size:0.9rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="200" format="formatdescrizione"></p>-->
                         </div>
-                        <!--<div class="float-left" style="padding-top:30px">
-                            <span class="bind" style="font-size:0.8rem;color:#809193;font-style:italic" mybind="Caratteristica3" myvalue="Proprietario" format="formatlabelresource"></span>
-                            <span class="bind" style="font-size:0.8rem;color:#809193;font-style:italic" mybind="Caratteristica3" format="frmcaratteristica3"></span>&nbsp;
-                        </div>-->
-                        <!--<div class="clearfix"></div>
-                        <div class="bind" style="margin:10px auto" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" format="formatbtncarrello"></div>-->
-                        <!--<div class="container">
-                            <div class="row align-items-end mb-3">
-                                <div class=" col-6 float-left text-left">
-                                     PREZZO
-                                    <div class="col-auto float-right text-right prezzo-responsive">
-                            <span class="bind" mybind="Id" myvalue="prezzo" format="formatlabelresource"></span>
-                            <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                            <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                        </div>
-                                </div>
-                            </div>
-                        </div>-->
 
-
-                        <div class="container">
+                        <div class="container bg-color-sottomeu-tenue no-image mt-3">
                             <div class="row align-items-end py-3">
 
                                 <div class="col float-left text-left">
                                     <!-- DETTAGLI PRODOTTO -->
-                                    <div class="float-left my-0 mr-2">
-                                        <a  class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                    <div class="float-left my-0 mr-2 d-flex">
+                                        <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                                             <div class="float-right bind button-carrello" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
                                         </a>
                                     </div>

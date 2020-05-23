@@ -1,0 +1,70 @@
+﻿<style>
+    .quote-marks::before {
+        content: "“";
+        font-family: Georgia,serif;
+        margin-top: -100px;
+        position: absolute;
+        margin-left: -25px;
+        font-weight: normal;
+        font-size: 200px;
+        background: #fff;
+        height: 100px;
+        line-height: 200px;
+        padding: 0 10px;
+    }
+    .quote-marks::after {
+        content: "";
+    }
+    .arrow-1 {
+        height: 15px;
+        width: 15px;
+        border: 1px solid;
+        border-width: 1px 1px 0 0;
+        transform: rotate(135deg);
+        background-color: #fff;
+        margin-bottom:-9.55px;
+    }
+</style>
+
+
+<!-- Scroller  -->
+<div>
+    <div class="row py-0 text-center">
+        <div class="col-md-12 col-sm-12 col-12 px-0">
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+                <div class="owl-slider-v2" id="replaceid">
+                    <div class="item box mb-0" style="background-color: transparent !important;">
+                        <div class="px-3">
+                            <div class="a-176 bg-white text-center p-0 p-sm-5" style="min-height:300px">
+
+                                <div class="px-3 px-sm-5 py-4 py-sm-5 bd-color-sottomeu-tenue" style="border:8px solid">
+                                    <div class="quote-marks float-left primary-color d-none d-sm-block"></div>
+                                    <div class="pb-3">
+                                        <div class="rating bind pb-2" style="font-size:1.6rem; color: gold !important;" mybind="stelle" idbind="Id" disabled data-default-rating="2.5"></div><br />
+                                        <div class="bind pb-2" style="font-weight:400;font-size:1.6rem" mybind="Titolo" idbind="Id"></div>
+                                        <div class="bind noborders" style="overflow: visible; font-size:1.4rem" mybind="Testo" idbind="Id"></div>
+                                    </div>
+
+                                    <div class="w-50 pt-4 mb-4 bd-secondary-color mx-auto" style="border-bottom:1px solid;">
+                                        <div class="arrow-1 mx-auto bd-secondary-color"></div>
+                                    </div>
+
+                                    <div class="pt-3">
+                                        <h3 class="h3-body-title-1 mb-0 pb-2" style="font-size:1.6rem">
+                                            <span class="bind" mybind="Nome"></span>
+                                        </h3>
+                                        <div class="bind noborders tx-sottomenu-color" style="font-size:0.9rem;margin-bottom:3px" mybind="Data" myvalue="" format="formatdata" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
