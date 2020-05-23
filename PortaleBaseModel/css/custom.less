@@ -6,6 +6,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
 @import "custom-isotopeportfolio.less";
+@import "custom-owlscroller.less";
+@import "custom-carousel.less";
 @import "custom-carrello.less";
 
 /*----------------------------------
@@ -1881,11 +1883,6 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     padding: 5px;
 }
 
-.work-item .card {
-    margin: 10px;
-    padding: 0px;
-}
-
 
 .card-img-overlay.card-gradient-overlay {
     background-image: -webkit-linear-gradient(-270deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.010) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0.0) 90.6%, transparent 100%);
@@ -1920,8 +1917,8 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 
 .work-image:hover:after, ul li .work-image:hover:after, .imgovercontainer:hover:after {
     z-index: 2 !important;
-    /*background: url(/images/link.png) center center no-repeat !important;*/
     background: url(/images/link1.png) center center no-repeat !important;
+    /*background: url(/images/link.png) center center no-repeat !important;*/
     /*background: url(/images/link2.png) center center no-repeat !important;
     background: url(/images/link3.png) center center no-repeat !important;*/
     background-size: 80px 80px !important;
@@ -2605,10 +2602,7 @@ ul.footer-category-list {
     margin: 0 !important;
 }
 
-/*.isotope-navigation .work-subcaption .work-desc br {
-    line-height: 2.5rem;
-}*/
-
+ 
 /*----------------------------------
 ---------- BANNER FASCIA -----------
 ----------------------------------*/
@@ -4467,7 +4461,7 @@ button.js-roundedpush:hover {
 .mbr-figure .mbr-figure-caption {
     background: #2e2e2e;
     color: #fff;
-    font-family: 'Raleway';
+    font-family: @base-font;
     padding: 1.5rem 0;
     text-align: center;
     width: 100%;
@@ -6399,7 +6393,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 .grid-shape-polygon .work-image span {
     color: white;
     font-weight: bold;
-    font-family: 'Raleway',sans-serif;
+    font-family: @base-font,sans-serif;
     font-size: 1.2rem;
     letter-spacing: 4px;
 }

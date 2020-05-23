@@ -7,6 +7,504 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*@import "custom-bicromo.less";*/
 /*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
+/*------------------------------------*/
+/*Owl Carousel
+------------------------------------*/
+.imgcontained {
+  /*display: block;
+        overflow: hidden;
+        height: 100%;
+        width:auto;
+        max-width:100%;
+        margin:0px auto;*/
+  /* CSS Hack will make it width 100% and height 100% */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  /* Maintain aspect ratio */
+  max-height: 100%;
+  max-width: 100%;
+  width: auto !important;
+  height: auto !important;
+  margin: auto;
+}
+.owl-btn {
+  color: #777;
+  cursor: pointer;
+  font-size: 26px;
+  padding: 2px 9px;
+  text-align: center;
+  /*background: #fafafa;*/
+}
+.owl-btn:hover {
+  color: #fff;
+  /*background: #72c02c;*/
+}
+.owl-carousel-v1 .owl-navigation {
+  text-align: center;
+  margin-bottom: 20px;
+}
+/*.owl-carousel-v1 .item {
+    margin: 0 25px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.24);
+    -webkit-transition: box-shadow .3s;
+    -moz-filter: drop-shadow(0 2px 5px .2px);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;*/
+/*-webkit-filter: drop-shadow(0 2px 5px .2px);
+}*/
+.owl-carousel-v1 .item:hover {
+  box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+  /*-webkit-filter: drop-shadow(0 7px 14px .35px);*/
+  -moz-filter: drop-shadow(0 7px 14px 0.35px);
+}
+.owl-carousel-v1 .item img {
+  text-align: center;
+}
+.owl-carousel-v1 .owl-pagination {
+  /*display: none;*/
+}
+/*Owl Carousel v2*/
+.owl-carousel-v2 .owl-slider-v2 {
+  margin-bottom: 20px;
+}
+.owl-carousel-v2 .item {
+  margin: 0 25px;
+}
+.owl-carousel-v2 .item img {
+  text-align: center;
+}
+.owl-carousel-v2 .owl-navigation {
+  text-align: center;
+}
+.owl-carousel-v2 .owl-pagination {
+  /*display: none;*/
+}
+/*Owl Carousel v3*/
+.owl-carousel-v3 .item {
+  margin: 0 25px;
+}
+.owl-carousel-v3 .item img {
+  text-align: center;
+}
+.owl-carousel-v3 .owl-pagination {
+  /*display: none;*/
+}
+/*Owl Carousel v4*/
+.owl-carousel-v4 .owl-wrapper-outer {
+  margin-bottom: 20px;
+}
+.owl-carousel-v4 .item {
+  margin: 0 25px;
+}
+.owl-carousel-v4 .item img {
+  width: 100%;
+}
+/*Owl Pagination*/
+.owl-pagination {
+  text-align: center !important;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  /*IE7 fix*/
+}
+.owl-theme .owl-controls .owl-page {
+  zoom: 1;
+  display: inline-block;
+  *display: inline;
+  /*IE7 life-saver */
+}
+.owl-theme .owl-controls .owl-page span {
+  width: 12px;
+  height: 12px;
+  opacity: 0.3;
+  display: block;
+  margin: 5px 7px;
+  background: #bbb;
+  filter: alpha(opacity=50);
+  /*IE7 fix*/
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+/*Owl Carousel Style v1*/
+.owl-carousel-style-v1 img {
+  width: 120px;
+  height: auto;
+}
+/*Owl Carousel Style v2*/
+.owl-carousel-style-v2 .item {
+  margin: 0 3px;
+  background: #fafafa;
+  text-align: center;
+  border: solid 1px #e6e6e6;
+}
+.owl-carousel-style-v2 .item img {
+  padding: 0 3px;
+  display: inline-block;
+}
+.owl-carousel-style-v2 .item:hover {
+  background: #f7f7f7;
+  border-color: #e5e5e5;
+  transition: all 0.4s ease-in-out;
+}
+.owl-carousel-style-v2 .owl-pagination {
+  display: none;
+}
+/*END OWL CAROUSEL CSS  ****************************************/
+.owlscrollerTestimonials .work-subcaption {
+  height: 160px;
+}
+.owlscrollerTestimonials .work-subcaption p {
+  line-height: 1.8rem !important;
+  font-size: 1.4rem !important;
+}
+@media (max-width: 1025px) {
+  .owlscrollerTestimonials .work-subcaption {
+    height: 180px;
+  }
+}
+@media (max-width: 415px) {
+  .owlscrollerTestimonials .work-subcaption {
+    height: 210px;
+  }
+  .owlscrollerTestimonials .work-subcaption p {
+    line-height: 1.5rem !important;
+    font-size: 1rem !important;
+  }
+}
+/*----------------------------------------
+------ TESTIMONIALS NUOVA SEZIONE --------
+------------------------------------------*/
+.testimonial .testimonial-text-title {
+  background-color: #f5f5f5;
+  padding: 10px 15px 15px 75px;
+  margin: 1px 0 0 1px;
+  position: relative;
+  font-size: 1em;
+  font-weight: normal;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.testimonial .testimonial-person-pic {
+  bottom: 40px;
+}
+.testimonial-big {
+  margin-top: 1%;
+  text-align: center;
+  background: transparent;
+}
+.testimonial-big .testimonial-big-text {
+  background-color: rgba(242, 239, 237, 0.6);
+  line-height: normal !important;
+  font-size: 2rem;
+  font-size: 1.2vw;
+  font-weight: normal;
+  margin-top: 0px;
+  height: auto;
+  color: #333;
+  line-height: 20px;
+  padding: 20px 20px;
+  margin: 0 auto;
+  float: none;
+  word-wrap: break-word;
+}
+.testimonial-big a {
+  line-height: normal !important;
+  font-size: 1.2rem;
+  font-size: 1.6vw;
+  font-weight: normal;
+}
+.testimonial-big .testimonial-big-text:after {
+  content: "";
+}
+.testimonial-big .testimonial-big-text:before {
+  content: "";
+}
+.testimonial-big .testimonial-small-text {
+  float: left;
+  color: #fff;
+  line-height: normal !important;
+  font-size: 1.4rem;
+  font-size: 3vw;
+  font-weight: normal;
+  position: relative;
+  text-align: center;
+}
+.isotope-testimonials p {
+  font-size: 1rem !important;
+  /*line-height: 1.4rem !important;*/
+}
+.scheda-testimonials-img .slide-content {
+  background: #fff;
+  border-radius: 50%;
+  border: 2px dotted #606060;
+  padding: 3px !important;
+}
+.scheda-testimonials-img img {
+  border-radius: 50%;
+}
+img.aimg {
+  height: 19px;
+  width: auto;
+  margin: 0 5px;
+}
+.owlscrollerTestimonials .work-subcaption {
+  height: 160px;
+}
+.owlscrollerTestimonials .work-subcaption p {
+  line-height: 1.8rem !important;
+  font-size: 1.4rem !important;
+}
+@media (max-width: 1025px) {
+  .owlscrollerTestimonials .work-subcaption {
+    height: 180px;
+  }
+}
+@media (max-width: 415px) {
+  .owlscrollerTestimonials .work-subcaption {
+    height: 210px;
+  }
+  .owlscrollerTestimonials .work-subcaption p {
+    line-height: 1.5rem !important;
+    font-size: 1rem !important;
+  }
+}
+/*------------------------------------*/
+/*Carousel
+------------------------------------*/
+/*carousel-v1*/
+.carousel-v1 .carousel-caption {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 7px 15px;
+  background: rgba(0, 0, 0, 0.7);
+}
+.carousel-v1 .carousel-caption p {
+  color: #fff;
+  margin-bottom: 0;
+}
+.carousel-v1 .carousel-arrow a.carousel-control {
+  opacity: 1;
+  font-size: 40px;
+  height: inherit;
+  width: inherit;
+  background: none;
+  text-shadow: none;
+  position: inherit;
+}
+.carousel-v1 .carousel-arrow a i {
+  top: 50%;
+  opacity: 0.6;
+  /*background: #000;*/
+  margin-top: -18px;
+  padding: 2px 12px;
+  position: absolute;
+}
+.carousel-v1 .carousel-arrow a i:hover {
+  opacity: 0.8;
+}
+.carousel-v1 .carousel-arrow a.left i {
+  left: 0;
+}
+.carousel-v1 .carousel-arrow a.right i {
+  right: 0;
+}
+.carousel {
+  position: relative;
+}
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.carousel-inner > .item {
+  position: relative;
+  display: none;
+  -webkit-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  line-height: 1;
+}
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+.carousel-inner > .active {
+  left: 0;
+}
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.carousel-inner > .next {
+  left: 100%;
+}
+.carousel-inner > .prev {
+  left: -100%;
+}
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+.carousel-inner > .active.left {
+  left: -100%;
+}
+.carousel-inner > .active.right {
+  left: 100%;
+}
+.carousel-control {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0%), color-stop(rgba(0, 0, 0, 0.0001) 100%));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+.carousel-control.right {
+  right: 0;
+  left: auto;
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0%), color-stop(rgba(0, 0, 0, 0.5) 100%));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  filter: alpha(opacity=90);
+  outline: none;
+  opacity: 0.9;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  font-family: serif;
+}
+.carousel-control .icon-prev:before {
+  content: '\2039';
+}
+.carousel-control .icon-next:before {
+  content: '\203a';
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  padding-left: 0;
+  margin-left: -30%;
+  text-align: center;
+  list-style: none;
+}
+.carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.carousel-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #fff;
+}
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicons-chevron-left,
+  .carousel-control .glyphicons-chevron-right,
+  .carousel-control .icon-prev,
+  .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+  }
+  .carousel-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-indicators {
+    bottom: 20px;
+  }
+}
+/* END CAROUSEL CONTROL */
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// 
     ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS
@@ -1832,10 +2330,6 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 .card-body {
   padding: 5px;
 }
-.work-item .card {
-  margin: 10px;
-  padding: 0px;
-}
 .card-img-overlay.card-gradient-overlay {
   background-image: -webkit-linear-gradient(-270deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.01) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0) 90.6%, transparent 100%);
   background-image: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0.917) 5.3%, rgba(0, 0, 0, 0.834) 10.6%, rgba(0, 0, 0, 0.753) 15.9%, rgba(0, 0, 0, 0.672) 21.3%, rgba(0, 0, 0, 0.591) 26.8%, rgba(0, 0, 0, 0.411) 32.5%, rgba(0, 0, 0, 0.333) 38.4%, rgba(0, 0, 0, 0.257) 44.5%, rgba(0, 0, 0, 0.183) 50.9%, rgba(0, 0, 0, 0.013) 57.7%, rgba(0, 0, 0, 0.01) 65%, rgba(0, 0, 0, 0.008) 72.9%, rgba(0, 0, 0, 0) 81.4%, rgba(0, 0, 0, 0) 90.6%, transparent 100%);
@@ -1868,8 +2362,8 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 ul li .work-image:hover:after,
 .imgovercontainer:hover:after {
   z-index: 2 !important;
-  /*background: url(/images/link.png) center center no-repeat !important;*/
   background: url(/images/link1.png) center center no-repeat !important;
+  /*background: url(/images/link.png) center center no-repeat !important;*/
   /*background: url(/images/link2.png) center center no-repeat !important;
     background: url(/images/link3.png) center center no-repeat !important;*/
   background-size: 80px 80px !important;
@@ -2456,9 +2950,6 @@ ul.footer-category-list {
   background: rgba(0, 0, 0, 0.4) !important;
   margin: 0 !important;
 }
-/*.isotope-navigation .work-subcaption .work-desc br {
-    line-height: 2.5rem;
-}*/
 /*----------------------------------
 ---------- BANNER FASCIA -----------
 ----------------------------------*/
@@ -4073,7 +4564,7 @@ button.js-roundedpush:hover {
 .mbr-figure .mbr-figure-caption {
   background: #2e2e2e;
   color: #fff;
-  font-family: 'Raleway';
+  font-family: 'Roboto', sans-serif;
   padding: 1.5rem 0;
   text-align: center;
   width: 100%;
@@ -5870,7 +6361,7 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 .grid-shape-polygon .work-image span {
   color: white;
   font-weight: bold;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif, sans-serif;
   font-size: 1.2rem;
   letter-spacing: 4px;
 }
@@ -7403,6 +7894,9 @@ Portfoli Single ( da rival )
     margin: 0 auto;
   }
 }
+/*******************************************************************************************/
+/**************************FINE BASE PORTFOLIO***********************************/
+/*******************************************************************************************/
 /**************carrello e prodotti*******************************************/
 .prod_discount {
   padding: 0.3em 1em;
