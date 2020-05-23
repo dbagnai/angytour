@@ -739,15 +739,12 @@ public class CommonPage : Page
 
     public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false, bool perstampa = false)
     {
-
         string sessionid = "";
         string trueIP = "";
         CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
-
         StringBuilder sb = new StringBuilder();
         //sb.Append(codiceordine);
         eCommerceDM ecmDM = new eCommerceDM();
-
         CarrelloCollection carrello = new CarrelloCollection();
         if (codiceordine != "")
         {
@@ -761,11 +758,9 @@ public class CommonPage : Page
         {
             foreach (Carrello c in carrello)
             {
-
                 //Creiamo la visualizzione degli articoli in carrello
                 // da fare <li>  contenuto da prendere sotto  </li>
-                sb.Append("<li style=\"padding-top:2px;padding-right:5px;margin-top:5px;position:relative\">");
-
+                sb.Append("<li style=\"position:relative;border-bottom:1px solid #ddd\">");
                 string linkofferta = "";
                 string testoofferta = "";
                 string imgofferta = "";
@@ -776,8 +771,7 @@ public class CommonPage : Page
                     {
                         if (c.Offerta.DenominazioneI != null)
                         {
-                            //linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
-                            linkofferta = CommonPage.ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
                             imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
                             titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
@@ -793,7 +787,7 @@ public class CommonPage : Page
                         sb.Append("<a target=\"_blank\"   href=\"" +
                             linkofferta
                                + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
-                        sb.Append(" <div class=\"work-image\">");
+                        sb.Append(" <div class=\"cart-image\">");
                         sb.Append("<img alt=\"" + testoofferta + "\" Style=\"width: auto; height: auto; max-width: 100%; max-height: 100%;\" ");
                         sb.Append(" src=\"");
                         sb.Append(imgofferta + "\" ");
@@ -804,10 +798,10 @@ public class CommonPage : Page
                         sb.Append(" </a>");
                     }
                     sb.Append(" <div class=\"clearfix\"></div>");
-                    sb.Append(" <div class=\"product-details\" style=\"position:absolute; bottom:15px; width:calc(100% - 31px); background:rgba(0, 0, 0, 0.50); color:#fff; padding:8px; text-align:center;\">");
-                    sb.Append(" <span class=\"product-name\" style=\"display:none\"><b>");
+                    sb.Append(" <div class=\"product-details\" style=\"\">");
+                    sb.Append(" <p class=\"product-name\" style=\"display:none\"><b>");
                     sb.Append(titoloofferta);
-                    sb.Append(" </b></span>");
+                    sb.Append(" </b></p>");
                 }
                 else
                 {
@@ -827,35 +821,30 @@ public class CommonPage : Page
                     }
 
                     sb.Append(" <div class=\"product-details\">");
-                    sb.Append(" <h3 class=\"product-name\" style=\"font-size:14px\">");
+                    sb.Append(" <p class=\"product-name\" style=\"\">");
                     sb.Append(titoloofferta);
-                    sb.Append(" </h3>");
+                    sb.Append(" </p>");
 
                 }
-
 
                 //sb.Append(" <p class=\"product-calc muted\">");
                 //sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 //sb.Append(" </p>");
-
-
                 //sb.Append(" <div class=\"product-categories muted\">");
                 //sb.Append(CommonPage.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, Lingua));
                 //sb.Append(" </div>");
                 //sb.Append(" <div class=\"product-categories muted\">");
                 //sb.Append(CommonPage.TestoCaratteristica(0, c.Offerta.Caratteristica1.ToString(), Lingua));
                 //sb.Append(" </div>");
-                sb.Append(" <div class=\"product-categories muted\">");
-                if (c.Offerta.Caratteristica6 != 0)
-                    sb.Append(CommonPage.TestoCaratteristica(5, c.Offerta.Caratteristica6.ToString(), Lingua));
-                sb.Append(" </div>");
-
-
+                //sb.Append(" <div class=\"product-categories muted\">");
+                //if (c.Offerta.Caratteristica6 != 0)
+                //    sb.Append(CommonPage.TestoCaratteristica(5, c.Offerta.Caratteristica6.ToString(), Lingua));
+                //sb.Append(" </div>");
 
                 #region MODIFIED CARATTERISTICHE CARRELLO
                 if (!string.IsNullOrEmpty(c.Offerta.Xmlvalue))
                 {
-                    sb.Append(" <div class=\"product-categories muted\">");
+                    sb.Append(" <p class=\"product-categories muted\">");
                     //recupero le caratteristiche del prodotto
                     List<ModelCarCombinate> listCar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(c.Offerta.Xmlvalue);
                     ModelCarCombinate item = listCar.Find(e => e.id == c.Campo2);
@@ -874,41 +863,61 @@ public class CommonPage : Page
                         sb.Append(testoinlinguacar1 + "  -  " + testoinlinguacar2);
                     }
 
-                    sb.Append(" </div>");
+                    sb.Append(" </p>");
                 }
                 #endregion
 
-                //sb.Append(" <div class=\"product-categories muted\">");
-                //if (c.Datastart != null && c.Dataend != null)
-                //{
-                //    sb.Append(references.ResMan("Common", Lingua, "formtestoperiododa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Datastart) + "<br/>");
-                //    sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
-                //}
-                //sb.Append("<br/>" + Selezionadajson(c.jsonfield1, "adulti", Lingua));
-                //sb.Append(" " + Selezionadajson(c.jsonfield1, "bambini", Lingua) + "<br/>");
-                //sb.Append(" </div>");
+                //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
+                string valore1 = eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica1", Lingua);
+                string valore2 = eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica2", Lingua);
+                if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
+                {
+                    sb.Append(" <p class=\"product-categories muted\">");
+                    valore1 = references.TestoCaratteristica(0, valore1, Lingua);
+                    if (!string.IsNullOrEmpty(valore1))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" + valore1 + "<br/>");
+                    valore2 = references.TestoCaratteristica(1, valore2, Lingua);
+                    if (!string.IsNullOrEmpty(valore2))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" + valore2);
+                    sb.Append(" </p>");
+                }
 
+                if (c.Datastart != null && c.Dataend != null)
+                {
+                    sb.Append(" <p class=\"product-categories muted\">");
+                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiododa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Datastart) + "<br/>");
+                    sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
+                    sb.Append(" </p>");
+                }
+                string valore3 = eCommerceDM.Selezionadajson(c.jsonfield1, "adulti", Lingua);
+                string valore4 = eCommerceDM.Selezionadajson(c.jsonfield1, "bambini", Lingua);
+                if (!string.IsNullOrEmpty(valore3) || !string.IsNullOrEmpty(valore4))
+                {
+                    sb.Append(" <p class=\"product-categories muted\">");
+                    if (!string.IsNullOrEmpty(valore3))
+                        sb.Append("<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore3);
+                    if (!string.IsNullOrEmpty(valore3))
+                        sb.Append(" " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>");
+                    sb.Append(" </p>");
+                }
 
                 //sb.Append(" <div class=\"product-categories muted\">");
                 //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
                 //sb.Append(" </div>");
 
-                sb.Append(" <p class=\"product-calc muted\" ");
+                sb.Append(" <p class=\"product-categories muted product-price\" ");
                 if (!perstampa)
                     sb.Append(" style =\"font-size:1rem; color:#fff; padding:8px; text-align:center;\"");
                 sb.Append(">");
                 sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 sb.Append(" </p>");
 
+
+
                 sb.Append(" </div>");
                 sb.Append(" </li>");
 
             }
-
-
-
-
-
         }
         else
         {

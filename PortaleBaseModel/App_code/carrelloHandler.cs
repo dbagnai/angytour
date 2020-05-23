@@ -290,8 +290,8 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         List<Tabrif> car2selected = new List<Tabrif>();
 
                         List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off1.Xmlvalue);
-                        List<ResultAutocomplete> listaTaglia = new List<ResultAutocomplete>();
-                        List<ResultAutocomplete> listaColore = new List<ResultAutocomplete>();
+                        //List<ResultAutocomplete> listaTaglia = new List<ResultAutocomplete>();
+                        //List<ResultAutocomplete> listaColore = new List<ResultAutocomplete>();
                         if (listprod != null)
                             foreach (ModelCarCombinate elem in listprod)
                             {

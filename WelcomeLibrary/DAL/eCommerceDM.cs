@@ -1650,6 +1650,9 @@ namespace WelcomeLibrary.DAL
                 ws.Cell(1, colTarget).Value = "Imp. Rigo"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Iva Rigo"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Iva %"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Car 1"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Car 2"; colTarget++;
+
 
                 /////////////////////////////
                 // format
@@ -1736,6 +1739,13 @@ namespace WelcomeLibrary.DAL
     new object[] { percentualeiva }));  //% Iva; 
 
                             #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
+                            string valore1 = eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica1", "I");
+                            valore1 = references.TestoCaratteristica(0, valore1, "I");
+                            string valore2 = eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica2", "I");
+                            valore2 = references.TestoCaratteristica(1, valore2, "I");
+                            ws.Cell(j, 24).Value = valore1;
+                            ws.Cell(j, 25).Value = valore2;
+
                             //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
                             //{
                             //     
@@ -1852,6 +1862,25 @@ namespace WelcomeLibrary.DAL
             }
             return retString;
 
+        }
+
+        public static string Selezionadajson(object item, string key, string Lingua)
+        {
+            string ret = "";
+            if (item != null && item.ToString() != "")
+            {
+                try
+                {
+                    // ret = "<b>" + references.ResMan("basetext", Lingua, "formtesto" + key) + ": " + "</b>";
+                    Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(item.ToString());
+                    if (dic != null && dic.ContainsKey(key))
+                        ret += dic[key];
+                    else
+                        ret = "";
+                }
+                catch { }
+            }
+            return ret;
         }
         private string CreaDettaglioCarrello(string codiceordine)
         {

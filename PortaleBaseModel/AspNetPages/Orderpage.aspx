@@ -242,12 +242,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <asp:Repeater ID="rptProdotti" runat="server" ViewStateMode="Enabled">
+                                      <asp:Repeater ID="rptProdotti" runat="server" ViewStateMode="Enabled">
                                         <ItemTemplate>
                                             <tr>
                                                 <td class="cart-product">
                                                     <%--       <a id="a3" runat="server"
-                                                href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                 target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                 class="product-thumb pull-left">
                                                 <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -257,7 +257,7 @@
                                             </a>--%>
 
                                                     <a id="a3" runat="server"
-                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                         class="product-thumb pull-left d-none d-sm-block m-0 ml-0 mr-sm-3">
                                                         <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -266,10 +266,10 @@
                                                             Visible='<%#  !CommonPage.ControlloVideo ( Eval("Offerta.FotoCollection_M.FotoAnteprima") ) %>' />
                                                     </a>
 
-                                                    <div class="product-details" style="height: auto;">
+                                                    <div class="product-details  prod-tabella" style="height: auto;">
                                                         <h3 class="product-name">
                                                             <%--  <a id="a1" runat="server"
-                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes( Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>--%>
                                                             <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
                                                                 runat="server"></asp:Literal>
@@ -280,12 +280,20 @@
 
                                                             <%# Eval("Dataend") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", Eval("Dataend")) : "" %>
                                                         </div>
+
                                                         <div class="product-categories muted">
-                                                            <%#  Selezionadajson(Eval("jsonfield1") ,"adulti", Lingua) %>
+                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" +  references.TestoCaratteristica(0, WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua), Lingua)):"" %>
                                                         </div>
                                                         <div class="product-categories muted">
-                                                            <%#  Selezionadajson(Eval("jsonfield1") ,"bambini", Lingua) %>
+                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua)) ?("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" +  references.TestoCaratteristica(1,WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua), Lingua)) : "" %>
                                                         </div>
+                                                        <%--  
+                                                <div class="product-categories muted">
+                                                    <%#  "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"adulti", Lingua) %>
+                                                </div>
+                                                <div class="product-categories muted">
+                                                    <%#   "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"bambini", Lingua) %>
+                                                </div>--%>
                                                         <div class="product-categories muted">
                                                             <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) + "&nbsp;" %>
                                                             <%# CommonPage.TestoCategoria2liv(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Eval("Offerta.CodiceCategoria2Liv").ToString(),Lingua) %>
@@ -345,7 +353,7 @@
                                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("TotaleSmaltimento")}) + " €" %>'></asp:Literal></span>
                                                 </td>
                                             </tr>--%>
-                                            <tr style="display: none">
+                                            <tr>
                                                 <th class="cart-heading" colspan="2">
                                                     <span>
                                                         <%= references.ResMan("Common", Lingua,"testoSconto") %></span>

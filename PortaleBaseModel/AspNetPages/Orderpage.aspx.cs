@@ -1385,10 +1385,27 @@ public partial class AspNetPages_Orderpage : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/> ";
             }
+            //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
+            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
+            {
+                valore1 = references.TestoCaratteristica(0, valore1, Lingua);
+                if (!string.IsNullOrEmpty(valore1))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" + valore1;
+                valore2 = references.TestoCaratteristica(1, valore2, Lingua);
+                if (!string.IsNullOrEmpty(valore2))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" + valore2;
+            }
+
             if (!string.IsNullOrEmpty(item.jsonfield1))
             {
-                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                if (!string.IsNullOrEmpty(valore3))
+                    TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
+                if (!string.IsNullOrEmpty(valore4))
+                    TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
             }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
@@ -1492,17 +1509,33 @@ public partial class AspNetPages_Orderpage : CommonPage
                     break;
             }
 
+
             if (item.Dataend != null && item.Datastart != null)
             {
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-            if (!string.IsNullOrEmpty(item.jsonfield1))
+            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
             {
-                TestoMail += Selezionadajson(item.jsonfield1, "adulti", Lingua) + "<br/>";
-                TestoMail += Selezionadajson(item.jsonfield1, "bambini", Lingua) + "<br/>";
+                valore1 = references.TestoCaratteristica(0, valore1, Lingua);
+                if (!string.IsNullOrEmpty(valore1))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" + valore1;
+                valore2 = references.TestoCaratteristica(1, valore2, Lingua);
+                if (!string.IsNullOrEmpty(valore2))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" + valore2;
             }
 
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                if (!string.IsNullOrEmpty(valore3))
+                    TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
+                if (!string.IsNullOrEmpty(valore4))
+                    TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
+            }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
                 TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";
             TestoMail += "  Id Prodotto : " + item.Offerta.Id.ToString();

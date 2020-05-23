@@ -1,0 +1,265 @@
+﻿
+
+/**************carrello e prodotti*******************************************/
+
+.prod_discount {
+    position: absolute;
+    padding: 0.3em 1em;
+    left: 1em;
+    top: 1em;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+    background-color: rgb(120, 120, 120);
+}
+
+.prod_discount::before {
+    position: absolute;
+    border-top-color: rgb(138, 138, 138);
+    border-top-width: 1px;
+    border-top-style: dotted;
+    display: block;
+    content: "";
+}
+
+.prod_discount::after {
+    position: absolute;
+    border-top-color: rgb(138, 138, 138);
+    border-top-width: 1px;
+    border-top-style: dotted;
+    display: block;
+    content: "";
+}
+
+.prod_discount::before {
+    position: absolute;
+    left: 0px;
+    top: 3px;
+    right: 0px;
+    position: absolute;
+}
+
+.prod_discount::after {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 4px;
+    position: absolute;
+}
+
+.csstransforms.prod_discount {
+    position: absolute;
+    padding: 0.3em 3em;
+    left: -3em;
+    top: 2em;
+    position: absolute;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    z-index: 95;
+}
+
+
+.cart-quantity {
+    max-width: 130px;
+}
+
+.product-attribute {
+    margin: 0;
+}
+
+.product-attribute tbody tr td,
+.product-attribute tbody tr th {
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.product-details {
+    position: absolute;
+    bottom: 16px;
+    width: calc( 100% - 28px);
+    background: rgba(0, 0, 0, 0.30);
+    color: #fff !important;
+    padding: 8px;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.product-details.prod-tabella {
+    position: relative;
+    bottom: unset;
+    width: auto;
+    background-color: transparent;
+    color: inherit;
+    padding: 8px;
+    text-align: inherit;
+    padding-top: 8px;
+}
+
+.product-name, .product-name * {
+    font-size: 0.8rem !important;
+    margin-bottom: 2px;
+    color: #fff;
+}
+
+.product-categories, .product-categories * {
+    font-size: 0.7rem !important;
+    margin-bottom: 2px;
+    color: #fff;
+}
+
+
+.prod-tabella > .product-name, .prod-tabella > .product-name * {
+    font-size: inherit;
+    margin-bottom: 2px;
+    color: @body-color;
+}
+
+.prod-tabella > .product-categories, .prod-tabella > .product-categories * {
+    font-size: inherit;
+    margin-bottom: 2px;
+    color: @body-color;
+}
+
+
+.product-price {
+    padding-right: 10px;
+}
+
+.product-price em {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1em;
+}
+
+.prod-tabella > .product-price, .prod-tabella > .product-price em {
+    color: @body-color;
+}
+
+.dropdown-cart {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 0 10px;
+    width: 250px;
+}
+
+.dropdown-cart li a {
+    /*font-size: 0.9rem !important;*/
+}
+
+.dropdown-cart .products-list-mini {
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-cart .products-list-mini li {
+    padding: 10px !important;
+    margin: 0 !important;
+}
+
+.products-list-mini li {
+    overflow: hidden;
+}
+
+.products-list-mini li + li {
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.products-list-mini .product-thumb {
+    border: 1px solid #ccc;
+    margin: 0 15px 0 0;
+}
+
+.products-list-mini .product-thumb.pull-right {
+    margin: 0 0 0 15px;
+}
+
+.products-list-mini .product-details {
+    height: auto;
+    overflow: hidden;
+}
+
+.products-list-mini .product-details h3 {
+    margin: 0;
+}
+
+.table-cart td {
+    vertical-align: middle;
+    line-height: normal !important;
+}
+
+.table-cart thead td {
+    color: #999;
+    font-weight: bold;
+}
+
+.table-cart tbody tr td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.table-cart tbody tr:hover td {
+    background: #ffe;
+}
+
+.table-cart tbody tr:hover .cart-remove a {
+    color: #555;
+}
+
+.table-cart .cart-remove {
+    text-align: center;
+    vertical-align: middle;
+    width: 15px;
+}
+
+.table-cart .cart-remove a {
+    text-decoration: none !important;
+}
+
+.table-cart .cart-product .product-thumb {
+    border: 1px solid #ddd;
+    margin: 0 10px 0 0;
+}
+
+.table-cart .cart-product .product-details {
+    overflow: hidden;
+}
+
+.table-cart .cart-total {
+    /*width: 100px;*/
+}
+
+.table-cart .cart-total span,
+.table-cart .cart-heading span {
+    display: inline-block;
+    line-height: 30px;
+}
+
+.table-cart .cart-addto {
+    width: 100px;
+    text-align: right;
+}
+
+.table-cart .cart-heading {
+    background: #f5f5f5;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 15px;
+}
+
+ul.unstyled,
+ol.unstyled {
+    margin-left: 0;
+    list-style: none;
+}
+
+/*   FINE STILI CARRELLO E PRODOTTI */
