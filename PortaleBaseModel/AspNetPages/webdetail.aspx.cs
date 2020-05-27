@@ -1204,11 +1204,19 @@ public partial class _webdetail : CommonPage
         if (item != null)
         {
             //1 livello tipologia
-            linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(item.Descrizione), "", CodiceTipologia, "", "");
+            string testosezione = item.Descrizione;
+            if (!string.IsNullOrEmpty(Caratteristica1))
+                testosezione += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
+            if (!string.IsNullOrEmpty(Caratteristica2))
+                testosezione += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
+            if (!string.IsNullOrEmpty(Caratteristica3))
+                testosezione += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+
+            linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(testosezione), "", CodiceTipologia, "", "");
             linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
             link1 = new Tabrif();
             link1.Campo1 = linkurl;
-            link1.Campo2 = item.Descrizione;
+            link1.Campo2 = testosezione;
 
             //2 livello categoria
             if (!string.IsNullOrEmpty(Categoria) && usacategoria)
@@ -1217,7 +1225,7 @@ public partial class _webdetail : CommonPage
                 if (catselected != null)
                 {
                     //linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(catselected.Descrizione), "", CodiceTipologia, Categoria, "");
-                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, Lingua, CleanUrl(catselected.Descrizione), "", CodiceTipologia, Categoria, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(catselected.Descrizione), "", CodiceTipologia, Categoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
                     link2 = new Tabrif();
                     link2.Campo1 = linkurl;
                     link2.Campo2 = catselected.Descrizione;

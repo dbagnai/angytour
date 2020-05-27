@@ -1644,11 +1644,20 @@ public partial class AspNetPages_weblist : CommonPage
         TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == Tipologia); });
         if (item != null)
         {
-            //1 livello tipologia
-            linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+            //1 livello tipologia ( item.descrizione , andrebbe modificato se presenti addpars !!!! aggiungendo nel testo.... )
+            string testosezione = item.Descrizione;
+            if (!string.IsNullOrEmpty(Caratteristica1))
+                testosezione += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
+            if (!string.IsNullOrEmpty(Caratteristica2))
+                testosezione += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
+            if (!string.IsNullOrEmpty(Caratteristica3))
+                testosezione += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+            ///
+            linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(testosezione), "", Tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
             link1 = new Tabrif();
             link1.Campo1 = linkurl;
-            link1.Campo2 = item.Descrizione;
+            link1.Campo2 = testosezione;
+
 
             //2 livello categoria
             if (!string.IsNullOrEmpty(Categoria) && usacategoria)
