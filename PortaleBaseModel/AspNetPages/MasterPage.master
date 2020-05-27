@@ -1,4 +1,5 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -314,7 +315,26 @@
                             </div>
                         </div>
                     </li>
-
+                    <%-- <li runat="server">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu5")  %> </a>
+                        <div class="megamenu megamenu-full-text" style="min-width: 40%">
+                            <div class="megamenu-row row justify-content-center m-0">
+                                <%= CrealinkCaratteristicaAutocolumn(1,1,2,"",false) %>
+                            </div>
+                        </div>
+                    </li>
+                       <li runat="server">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu5")  %> </a>
+                        <div class="megamenu megamenu-full-text" style="min-width: 40%">
+                            <div class="megamenu-row row justify-content-center m-0">
+                                 <div class="col-auto text-left megamenu-menulist">
+                                    <ul>
+                                        <%= CrealinkCaratteristica(1,1,2,"",false) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>--%>
                     <%-- <li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
                          <div class="megamenu megamenu-full-text">
@@ -362,7 +382,8 @@
                     <%--<%= CreaLinkTipologie(3,3) %>--%>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>
+                        <%--<a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>--%>
+                        <%= CreaLinkTipologie(1,1,"a-dropdown",true) %>
                         <ul class="dropdown visible-ok">
                             <li><%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %></li>
                             <%= CreaLinkCategorieNested("rif000001","",true) %>
@@ -375,9 +396,8 @@
                     <%-- Portfolio --%>
                     <%= CreaLinkTipologie(5,5) %>
                     <%-- Offerte --%>
-                    <li runat="server">
-                        <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
-                    </li>
+                    <%= CreaLinkPaginastatica(4) %>
+
                     <%-- Gallery --%>
                     <%--<%= CreaLinkTipologie(6,6) %>--%>
                     <%-- Esperienze --%>
@@ -545,7 +565,7 @@
             <div runat="server" id="divRicerca" visible="false">
                 <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
             </div>
-            <asp:Panel runat="server" ID="pnlRicerca" Visible="false">
+            <%--   <asp:Panel runat="server" ID="pnlRicerca" Visible="false">
                 <div class="container" style="text-align: center">
                     <div class="row">
                         <div class="col-sm-12">
@@ -592,7 +612,7 @@
                     <br />
                     <br />
                 </div>
-            </asp:Panel>
+            </asp:Panel>--%>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -635,7 +655,6 @@
             <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
-                    <%--<section class="mbr-section mbr-parallax-background" style="margin-top: 20px; padding-top: 80px; padding-bottom: 80px; background: rgb(245,245,245)">--%>
                     <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
                         <div class="row justify-content-end">
@@ -859,10 +878,8 @@
                                         <%-- Turni --%>
                                         <%--<%= CreaLinkPaginastatica(3) %>--%>
                                         <%-- Offerte --%>
-                                        <%--<%= CreaLinkTipologie(5,5) %>--%>
-                                        <li runat="server">
-                                            <%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu1"),"rif000001","promozioni=true") %>
-                                        </li>
+                                         <%= CreaLinkPaginastatica(4) %>
+
                                         <%-- Gallery --%>
                                         <%--<%= CreaLinkTipologie(6,6) %>--%>
                                         <%-- Esperienze --%>
@@ -990,7 +1007,7 @@
             var makeRevLower = false;
            <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
      <%--       initLingua('<%= Lingua %>');--%>
-               //initimoment();
+            //initimoment();
             jQuery(document).ready(function () {
                <%-- loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');--%>
                 <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>

@@ -17,6 +17,7 @@ using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Data.SQLite;
+using Newtonsoft.Json;
 
 public partial class AspNetPages_weblist : CommonPage
 {
@@ -263,6 +264,34 @@ public partial class AspNetPages_weblist : CommonPage
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         InizializzaSeo();
         ModificaFiltroJS(); //Preparo il filtor con i parametri aggiuntivi di filtro
+
+#if FALSE
+
+        //////////////////////////////////////////////////////////////////////////////////////
+        //Preparo il filtro con i parametri aggiuntivi di filtro ( usabile nel caso di filtro per la preparazione dei parametri da passare agli snippet di inject )
+        //////////////////////////////////////////////////////////////////////////////////////
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(Tipologia)) addpars.Add("tipologia", Tipologia);
+        if (!string.IsNullOrEmpty(Categoria)) addpars.Add("categoria", Categoria);
+        if (!string.IsNullOrEmpty(Categoria2liv)) addpars.Add("categoria2Liv", Categoria2liv);
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
+        if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
+        string addparsserialized = Newtonsoft.Json.JsonConvert.SerializeObject(addpars, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = PreserveReferencesHandling.None,
+        });
+        string addpardsencoded = dataManagement.EncodeBase64String(addparsserialized);
+        //////////////////////////////////////////////////////////////////////////////////////
+
+#endif
+
+
         custombind cb = new custombind();
         switch (Tipologia)
         {
@@ -275,7 +304,7 @@ public partial class AspNetPages_weblist : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
 
-                if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)))
+                if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)) || (!string.IsNullOrEmpty(Caratteristica1)) || (!string.IsNullOrEmpty(Caratteristica2)) || (!string.IsNullOrEmpty(Caratteristica3)))
                 {
                     if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
 
@@ -635,6 +664,10 @@ public partial class AspNetPages_weblist : CommonPage
         //if (Tipologia != "rif000003")
         // Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
     }
+
+    /// <summary>
+    /// preparazione variabile  objvalue per i filtri aggiuntivi, potrebbe essere rimosso l0uso della sessione passando i parametri nella chiamata dell'inject del controllo, ma non valorizza le ddl di filtraggio
+    /// </summary>
     private void ModificaFiltroJS()
     {
 
@@ -642,7 +675,7 @@ public partial class AspNetPages_weblist : CommonPage
         Dictionary<string, string> objvalue = new Dictionary<string, string>();
         string sobjvalue = "";
 
-#if false  //non ricarico i filtri dalla sessione ma solo dai parametri passati con il request context 
+#if false  //non ricarico i filtri dalla sessione ma solo dai parametri passati con il request context TRAMITE URL ReWRITING
         if (Session["objfiltro"] != null)
         {
             sobjvalue = Session["objfiltro"].ToString();
@@ -651,7 +684,7 @@ public partial class AspNetPages_weblist : CommonPage
         } 
 #endif
 
-        ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO
+        ////CONTROLLO CAMBIO TIPOLOGIA - RESETTO IL FILTRO AZZERANDO LA SESSION
         string prevtipologia = "";
         if (objvalue.ContainsKey("tipologia"))
         {
@@ -887,6 +920,7 @@ public partial class AspNetPages_weblist : CommonPage
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue); //Metto i valori di filtraggio in sessione per usarli nel custombind delle liste risultati
     }
+
     /// <summary>
     /// Aggiunge i link rel prev e next nell'head della pagina se inseriti in sessione
     /// </summary>
@@ -923,6 +957,11 @@ public partial class AspNetPages_weblist : CommonPage
         string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         Tabrif actualpagelink = new Tabrif();
         Contenuti contentcollegato = null;
+        //Eventuali parametri filtro aggiuntivo caratteristiche
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
+        if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////  IMPOSTAZIONE LINK CANONICI E ALTERNATE ///////////////////////////////////////////////////////////////////////////////////
@@ -949,6 +988,13 @@ public partial class AspNetPages_weblist : CommonPage
                 sezionedescrizioneI = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+
 
         ///GB/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneGB = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "GB" & tmp.Codice == Tipologia); });
@@ -971,6 +1017,12 @@ public partial class AspNetPages_weblist : CommonPage
                 sezionedescrizioneGB = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(0, Caratteristica1, "GB");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(1, Caratteristica2, "GB");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(2, Caratteristica3, "GB");
 
         ///RU/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneRU = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "RU" & tmp.Codice == Tipologia); });
@@ -993,6 +1045,13 @@ public partial class AspNetPages_weblist : CommonPage
                 sezionedescrizioneRU = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(0, Caratteristica1, "RU");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(1, Caratteristica2, "RU");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(2, Caratteristica3, "RU");
+
         ///FR/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneFR = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "FR" & tmp.Codice == Tipologia); });
         string sezionedescrizioneFR = "";
@@ -1014,16 +1073,22 @@ public partial class AspNetPages_weblist : CommonPage
                 sezionedescrizioneFR = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(0, Caratteristica1, "FR");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(1, Caratteristica2, "FR");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(2, Caratteristica3, "FR");
 
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// ALTERNATE E CANONICAL /////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
-        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
-        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
-        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
 
         contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linki.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
@@ -1233,14 +1298,8 @@ public partial class AspNetPages_weblist : CommonPage
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
         string sezionedescrizione = "";
-        if (!string.IsNullOrEmpty(Categoria2liv))
-        {
-            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
-            if (categoriasprodotto != null)
-            {
-                sezionedescrizione += " " + categoriasprodotto.Descrizione;
-            }
-        }
+        if (sezione != null)
+            sezionedescrizione += " " + sezione.Descrizione;
         if (!string.IsNullOrEmpty(Categoria))
         {
             Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
@@ -1249,11 +1308,25 @@ public partial class AspNetPages_weblist : CommonPage
                 sezionedescrizione += " " + categoriaprodotto.Descrizione;
             }
         }
-        if (sezione != null)
-            sezionedescrizione += " " + sezione.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizione += " " + categoriasprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizione += " " + references.TestoCaratteristica(0, Caratteristica1, Lingua);
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizione += " " + references.TestoCaratteristica(1, Caratteristica2, Lingua);
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizione += " " + references.TestoCaratteristica(2, Caratteristica3, Lingua);
+
+
         ////////EVIDENZIAZIONE MENU//////////////////////////////////////////////////////////////
         if (sezione != null)
-            EvidenziaSelezione(sezione.Descrizione); // Serve Solo per la voce al top dei dropdown ....
+            EvidenziaSelezione(sezione.Descrizione); // Serve Solo per la voce al top dei dropdown n non per i link finali ....
 
 
         ////////////////////////////////////////////////////////////////
@@ -1319,6 +1392,13 @@ public partial class AspNetPages_weblist : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
+            if (!string.IsNullOrEmpty(Caratteristica1))
+                litNomePagina.Text += " " + references.TestoCaratteristica(0, Caratteristica1, Lingua);
+            if (!string.IsNullOrEmpty(Caratteristica2))
+                litNomePagina.Text += " " + references.TestoCaratteristica(1, Caratteristica2, Lingua);
+            if (!string.IsNullOrEmpty(Caratteristica3))
+                litNomePagina.Text += " " + references.TestoCaratteristica(2, Caratteristica3, Lingua);
+
             ///////////////////////////////////////////////////////////////
             divTitleContainer.Visible = true; //accendo il titolo
         }
@@ -1326,7 +1406,8 @@ public partial class AspNetPages_weblist : CommonPage
         //META TITLE E DESCRIPTION DEFAULT E CUSTOM ( da sezione admin )
         ////////////////////////////////////////////////////////////
         /////default meta
-        string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
+        //string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome); // agingo semrpre posizione e nome ....
+        string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione));
         string description = "";
         description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 300, true)).Replace("<br/>", "\r\n")).Trim();
         //custom meta
@@ -1335,6 +1416,9 @@ public partial class AspNetPages_weblist : CommonPage
         if (!string.IsNullOrEmpty(customdesc))
             description = customdesc.Replace("<br/>", "\r\n");
         description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 300, true)).Replace("<br/>", "\r\n")).Trim();
+        if (string.IsNullOrEmpty(description))
+            description = metametatitle + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome;
+
         ////////////////////////////////////////////////////////////
         //Opengraph per facebook
         ((HtmlMeta)Master.FindControl("metafbTitle")).Content = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione)).Trim();
@@ -1546,6 +1630,12 @@ public partial class AspNetPages_weblist : CommonPage
         Tabrif link2 = null;
         Tabrif link3 = null;
         string linkurl = "";
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
+        if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
+
+
 
         link = new Tabrif();
         link.Campo1 = ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome"));
@@ -1555,7 +1645,7 @@ public partial class AspNetPages_weblist : CommonPage
         if (item != null)
         {
             //1 livello tipologia
-            linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+            linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", Tipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
             link1 = new Tabrif();
             link1.Campo1 = linkurl;
             link1.Campo2 = item.Descrizione;
@@ -1566,7 +1656,7 @@ public partial class AspNetPages_weblist : CommonPage
                 Prodotto catselected = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == Tipologia && tmp.CodiceProdotto == Categoria)); });
                 if (catselected != null)
                 {
-                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(catselected.Descrizione), "", Tipologia, Categoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(catselected.Descrizione), "", Tipologia, Categoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
                     link2 = new Tabrif();
                     link2.Campo1 = linkurl;
                     link2.Campo2 = catselected.Descrizione;
@@ -1579,12 +1669,15 @@ public partial class AspNetPages_weblist : CommonPage
                 SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
                 if (categoriasprodotto != null)
                 {
-                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(categoriasprodotto.Descrizione), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
+                    linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(categoriasprodotto.Descrizione), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
                     link3 = new Tabrif();
                     link3.Campo1 = linkurl;
                     link3.Campo2 = categoriasprodotto.Descrizione;
                 }
             }
+
+
+
 
             //Customizzazione pagina copertina di navigazione sezione con pagine statiche ( HOME DI SEZIONE PERSONALIZZATE )
             if (Tipologia == "rif000001" || Tipologia == "rif000002")
@@ -1637,7 +1730,6 @@ public partial class AspNetPages_weblist : CommonPage
 
         return links;
     }
-
     private void LoadJavascriptVariables()
     {
         ClientScriptManager cs = Page.ClientScript;
