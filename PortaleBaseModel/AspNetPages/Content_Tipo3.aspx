@@ -60,20 +60,13 @@
                 <div class="mbr-overlay mbr-overlay-white"></div>
                 <%--<div class="w-100 bg-light-color">--%>
                 <div class="container">
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-center">
 
-                        <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: auto 91% !important;">
-                            <!-- SCRITTA FORM A SINISTRA -->
-                                <%--<div class="big2 text-white pt-5 my-5 text-right position-sticky" style="font-size: 3rem; line-height: 4rem !important; top: 150px; margin-bottom: 240px; text-shadow: rgba(0, 0, 0, 0.5) -1px 2px 5px;">
-                                    <div><%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                                    <span class="d-block d-lg-none text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span></div>
-                                   <div class="w-100 mt-5 indice-movie" style="background: url('/images/indice.png');background-size: auto 90%;background-repeat: no-repeat;background-position-x: right;height: 170px;"></div>
-                                </div>--%>
-                                <!-- END SCRITTA FORM A SINISTRA -->
-                        </div>
+                        <%--    <div class="col-sm-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: auto 91% !important;">
+                        </div>--%>
 
                         <asp:PlaceHolder runat="server" ID="plhForm" Visible="true">
-                            <div class="col-12 col-lg-6 py-1 px-3 px-sm-5 pt-0 text-center bg-manual-secondary-color-fade">
+                            <div class="col-12 col-lg-8 py-1 px-3 px-sm-5 pt-0 text-center bg-manual-secondary-color-fade">
                                 <div class="ui-15">
                                     <div class="ui-content">
                                         <div class="container-fluid">
@@ -173,7 +166,7 @@
                                                                     <div class="ui-input mt-0">
                                                                         <%-- <asp:Literal ID="Literal1" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTestoLocations %>' />
                                                             <br />--%>
-                                                                        <asp:DropDownList runat="server" Width="100%" ID="ddlLocations"  ClientIDMode="Static" class="form-control">
+                                                                        <asp:DropDownList runat="server" Width="100%" ID="ddlLocations" ClientIDMode="Static" class="form-control">
                                                                         </asp:DropDownList>
                                                                     </div>
                                                                 </div>

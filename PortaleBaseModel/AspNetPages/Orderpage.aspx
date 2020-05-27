@@ -247,7 +247,7 @@
                                             <tr>
                                                 <td class="cart-product">
                                                     <%--       <a id="a3" runat="server"
-                                                href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                 target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                 class="product-thumb pull-left">
                                                 <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -257,7 +257,7 @@
                                             </a>--%>
 
                                                     <a id="a3" runat="server"
-                                                        href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua,CleanUrl(((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua)),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
                                                         class="product-thumb pull-left d-none d-sm-block m-0 ml-0 mr-sm-3">
                                                         <asp:Image ID="Anteprima" AlternateText='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'
@@ -269,7 +269,7 @@
                                                     <div class="product-details  prod-tabella" style="height: auto;">
                                                         <h3 class="product-name">
                                                             <%--  <a id="a1" runat="server"
-                                                        href='<%# CommonPage.CreaLinkRoutes(Session,true,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
+                                                        href='<%#  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(,Lingua,CommonPage.CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),   Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
                                                         target="_self" title='<%# CommonPage.CleanInput(CommonPage.ConteggioCaratteri(  Eval("Offerta.Denominazione" + Lingua).ToString(),300,true )) %>'>--%>
                                                             <asp:Literal ID="litTitolo" Text='<%# WelcomeLibrary.UF.Utility.SostituisciTestoACapo(  Eval("Offerta.Denominazione" + Lingua).ToString() ) %>'
                                                                 runat="server"></asp:Literal>

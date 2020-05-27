@@ -771,7 +771,9 @@ public class CommonPage : Page
                     {
                         if (c.Offerta.DenominazioneI != null)
                         {
-                            linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            //linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
+                            linkofferta = CommonPage.ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
                             imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
                             titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);

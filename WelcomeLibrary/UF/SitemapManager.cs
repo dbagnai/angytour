@@ -12,7 +12,12 @@ namespace WelcomeLibrary.UF
 {
     public static class SitemapManager
     {
-
+        /// <summary>
+        /// Check nella tablella reindirizzamenti per presenza redirect
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="urltoredirect"></param>
+        /// <returns></returns>
         public static string TestRedirect(string connection, string urltoredirect)
         {
             string ret = "";
@@ -89,7 +94,6 @@ namespace WelcomeLibrary.UF
             {
                 //bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out bool gen);
                 string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, CleanUrl(_o.Descrizione), "", _o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl);
-
 
                 if (link.ToLower().IndexOf("https://") == -1 && link.ToLower().IndexOf("http://") == -1 && link.ToLower().IndexOf("~") == -1)
                 {
@@ -237,9 +241,8 @@ namespace WelcomeLibrary.UF
             return listalinks;
         }
 
-
         /// <summary>
-        /// Crea i link usando il dictionarty dei parametri aggiuntivi
+        /// Crea i link urlrewrited usando il dictionarty dei parametri aggiuntivi
         /// </summary>
         /// <param name="filtriadded"></param>
         /// <param name="lingua"></param>
@@ -302,7 +305,6 @@ namespace WelcomeLibrary.UF
             }
             return ret;
         }
-
 
         public static string getlinksottosezione(string codicetipologia, string codiceprodotto, string codicesottoprodotto, string lingua)
         {

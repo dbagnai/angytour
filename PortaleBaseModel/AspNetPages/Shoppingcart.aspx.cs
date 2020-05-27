@@ -182,7 +182,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         list.Add(totali);
         rptTotali.DataSource = list;
         rptTotali.DataBind();
-        this.Master.VisualizzaTotaliCarrello();
+      //  this.Master.VisualizzaTotaliCarrello();
 
     }
 

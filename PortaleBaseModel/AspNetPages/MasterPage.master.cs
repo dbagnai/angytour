@@ -153,14 +153,12 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         }
 
-        //CaricaMenu();
-        // VisualizzaTotaliCarrello();
-        //  LoadJavascriptVariables();
-        pnlRicerca.DataBind();
+
+        //pnlRicerca.DataBind();
+        //lisearch.DataBind();
+
         divContattiMaster.DataBind();
         req1.DataBind();
-        lisearch.DataBind();
-
 
         CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent2-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
 
@@ -468,9 +466,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         return sb.ToString();
     }
-
-
-
     public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -512,6 +507,78 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         return sb.ToString();
     }
+
+    public string CrealinkCaratteristicaAutocolumn(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
+        sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
+        sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+        if (sezioni != null)
+            foreach (TipologiaOfferte o in sezioni)
+            {
+                if (progressivocaratteristica == 2)
+                {
+
+                    List<Tabrif> gruppocompleto = Utility.Caratteristiche[1].FindAll(e => e.Lingua == Lingua);
+
+                    //Incolonniamo automaticamente
+                    int nlinkpercolonna = 3;
+                    int nlink = gruppocompleto.Count;
+                    int colonne = 0;
+                    int resto = Math.DivRem(nlink, nlinkpercolonna, out colonne);
+                    if (resto > 0) colonne += 1;
+
+                    for (int i = 1; i <= colonne; i++)
+                    {
+
+                        int elementrange = nlinkpercolonna;
+                        if (i == colonne && resto != 0) elementrange = resto;
+                        else if (i == colonne && resto == 0) continue;
+                        List<Tabrif> gruppoattuale = gruppocompleto.GetRange((i - 1) * nlinkpercolonna, elementrange);
+                        sb.Append("<div class=\"col-auto text-left megamenu-menulist\">");
+                        foreach (Tabrif elem in gruppoattuale)
+                        {
+                            Dictionary<string, string> addpars = new Dictionary<string, string>();
+                            if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                            {
+                                addpars.Add("Caratteristica2", elem.Codice);
+                                //Genero il link per la tipologia
+                                string testo = elem.Campo1;
+                                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                                sb.Append("<ul>");
+                                if (!noli)
+                                    sb.Append("<li>");
+                                sb.Append("<a href=\"");
+                                sb.Append(link);
+                                sb.Append("\"");
+                                if (!string.IsNullOrEmpty(classoop))
+                                    sb.Append(" class=\"" + classoop + "\"  ");
+                                if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
+                                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                                sb.Append(" >");
+                                string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                                if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                                sb.Append(testo);
+                                sb.Append("</a>");
+                                if (!noli)
+                                    sb.Append("</li>");
+                                sb.Append("</ul>");
+
+                            }
+                        }
+                        sb.Append("</div>");
+
+
+                    }
+                }
+            }
+        return sb.ToString();
+    }
+
+
     /// <summary>
     /// Creazione lista li per tipologie da min a max
     /// </summary>
@@ -658,8 +725,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (!noli)
                     sb.Append("</li>");
             }
-
-
         return sb.ToString();
     }
 
@@ -1365,147 +1430,138 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     //    Session.Add("testoricerca", Server.HtmlEncode(searchboxinputtext.Value)); //carico in sessione il parametro da cercare
     //    Response.Redirect(link);
     //}
-    protected void btnUsatoCerca_Click(object sender, EventArgs e)
-    {
-        Session["Caratteristica1"] = ddlCaratteristica1.SelectedValue;
-        Session["Caratteristica2"] = ddlCaratteristica2.SelectedValue;
-        Session["Caratteristica3"] = ddlCaratteristica3.SelectedValue;
-        Session["Caratteristica4"] = ddlCaratteristica4.SelectedValue;
-        Session["FasciaPrezzo"] = ddlFascePrezzo.SelectedValue;
-        Session["Vetrina"] = chkPromo.Checked;
-        Session["Ordinamento"] = ddlOrdinamento.SelectedValue;
-        //  Response.Redirect(references.ResMan("Common",Lingua,"linkUsato);
-    }
-    public void CaricaDdlOrdinamento(string value = "")
-    {
-        //string tipi = references.ResMan("Common",Lingua,"listaServizi;
-        Dictionary<string, string> dict = new Dictionary<string, string>();
-        //string[] tipiarray = tipi.Split(',');
-        //foreach (string s in tipiarray)
-        //{
-        //    dict.Add(s, s);
-        //}
-        dict.Add(references.ResMan("Common", Lingua, "FormOrdinamento"), "");
-        dict.Add("Data Inserimento", "DataInserimento");
-        dict.Add("Prezzo", "Prezzo");
-        dict.Add("Data Immatricolazione", "Data1");
+    //protected void btnUsatoCerca_Click(object sender, EventArgs e)
+    //{
+    //    Session["Caratteristica1"] = ddlCaratteristica1.SelectedValue;
+    //    Session["Caratteristica2"] = ddlCaratteristica2.SelectedValue;
+    //    Session["Caratteristica3"] = ddlCaratteristica3.SelectedValue;
+    //    Session["Caratteristica4"] = ddlCaratteristica4.SelectedValue;
+    //    Session["FasciaPrezzo"] = ddlFascePrezzo.SelectedValue;
+    //    Session["Vetrina"] = chkPromo.Checked;
+    //    Session["Ordinamento"] = ddlOrdinamento.SelectedValue;
+    //    //  Response.Redirect(references.ResMan("Common",Lingua,"linkUsato);
+    //}
+    //public void CaricaDdlOrdinamento(string value = "")
+    //{
+    //    //string tipi = references.ResMan("Common",Lingua,"listaServizi;
+    //    Dictionary<string, string> dict = new Dictionary<string, string>();
+    //    //string[] tipiarray = tipi.Split(',');
+    //    //foreach (string s in tipiarray)
+    //    //{
+    //    //    dict.Add(s, s);
+    //    //}
+    //    dict.Add(references.ResMan("Common", Lingua, "FormOrdinamento"), "");
+    //    dict.Add("Data Inserimento", "DataInserimento");
+    //    dict.Add("Prezzo", "Prezzo");
+    //    dict.Add("Data Immatricolazione", "Data1");
 
-        ddlOrdinamento.Items.Clear();
-        //ddlOrdinamento.AppendDataBoundItems = true;
-        //ddlOrdinamento.Items.Insert(0, references.ResMan("Common",Lingua,"FormOrdinamento.ToString());
-        //ddlOrdinamento.Items[0].Value = "";
-        ddlOrdinamento.DataSource = dict;
-        ddlOrdinamento.DataTextField = "Key";
-        ddlOrdinamento.DataValueField = "Value";
-        ddlOrdinamento.DataBind();
-        try
-        {
+    //    ddlOrdinamento.Items.Clear();
+    //    //ddlOrdinamento.AppendDataBoundItems = true;
+    //    //ddlOrdinamento.Items.Insert(0, references.ResMan("Common",Lingua,"FormOrdinamento.ToString());
+    //    //ddlOrdinamento.Items[0].Value = "";
+    //    ddlOrdinamento.DataSource = dict;
+    //    ddlOrdinamento.DataTextField = "Key";
+    //    ddlOrdinamento.DataValueField = "Value";
+    //    ddlOrdinamento.DataBind();
+    //    try
+    //    {
 
-            ddlOrdinamento.SelectedValue = value;
-        }
-        catch
-        { }
-
-
-
-    }
-    public void CaricaDatiDdlCaratteristiche(string Lingua = "I", string p1 = "0", string p2 = "0", string p3 = "0", string p4 = "0", string fasciaprezzo = "0", bool promozioni = false)
-    {
-
-        //Riempio la ddl 
-        List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica1.Items.Clear();
-        ddlCaratteristica1.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica1"));
-        ddlCaratteristica1.Items[0].Value = "0";
-        ddlCaratteristica1.DataSource = Car1;
-        ddlCaratteristica1.DataTextField = "Campo1";
-        ddlCaratteristica1.DataValueField = "Codice";
-        ddlCaratteristica1.DataBind();
-        try
-        {
-            ddlCaratteristica1.SelectedValue = p1.ToString();
-        }
-        catch { }
+    //        ddlOrdinamento.SelectedValue = value;
+    //    }
+    //    catch
+    //    { }
 
 
-        //Riempio la ddl  ( collegandola alla caratteristica 1 )
-        List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Campo2 == p1.ToString(); });
-        ddlCaratteristica2.Items.Clear();
-        ddlCaratteristica2.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica2"));
-        ddlCaratteristica2.Items[0].Value = "0";
-        ddlCaratteristica2.DataSource = Car2;
-        ddlCaratteristica2.DataTextField = "Campo1";
-        ddlCaratteristica2.DataValueField = "Codice";
-        ddlCaratteristica2.DataBind();
-        try
-        {
-            ddlCaratteristica2.SelectedValue = p2.ToString();
-        }
-        catch { }
+
+    //}
+    //public void CaricaDatiDdlCaratteristiche(string Lingua = "I", string p1 = "0", string p2 = "0", string p3 = "0", string p4 = "0", string fasciaprezzo = "0", bool promozioni = false)
+    //{
+
+    //    //Riempio la ddl 
+    //    List<Tabrif> Car1 = Utility.Caratteristiche[0].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+    //    ddlCaratteristica1.Items.Clear();
+    //    ddlCaratteristica1.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica1"));
+    //    ddlCaratteristica1.Items[0].Value = "0";
+    //    ddlCaratteristica1.DataSource = Car1;
+    //    ddlCaratteristica1.DataTextField = "Campo1";
+    //    ddlCaratteristica1.DataValueField = "Codice";
+    //    ddlCaratteristica1.DataBind();
+    //    try
+    //    {
+    //        ddlCaratteristica1.SelectedValue = p1.ToString();
+    //    }
+    //    catch { }
 
 
-        List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica3.Items.Clear();
-        ddlCaratteristica3.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica3"));
-        ddlCaratteristica3.Items[0].Value = "0";
-        ddlCaratteristica3.DataSource = Car3;
-        ddlCaratteristica3.DataTextField = "Campo1";
-        ddlCaratteristica3.DataValueField = "Codice";
-        ddlCaratteristica3.DataBind();
-        try
-        {
-            ddlCaratteristica3.SelectedValue = p3.ToString();
-        }
-        catch { }
+    //    //Riempio la ddl  ( collegandola alla caratteristica 1 )
+    //    List<Tabrif> Car2 = Utility.Caratteristiche[1].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua && _t.Campo2 == p1.ToString(); });
+    //    ddlCaratteristica2.Items.Clear();
+    //    ddlCaratteristica2.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica2"));
+    //    ddlCaratteristica2.Items[0].Value = "0";
+    //    ddlCaratteristica2.DataSource = Car2;
+    //    ddlCaratteristica2.DataTextField = "Campo1";
+    //    ddlCaratteristica2.DataValueField = "Codice";
+    //    ddlCaratteristica2.DataBind();
+    //    try
+    //    {
+    //        ddlCaratteristica2.SelectedValue = p2.ToString();
+    //    }
+    //    catch { }
 
 
-        //Riempio la ddl  
-        List<Tabrif> Car4 = Utility.Caratteristiche[3].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
-        ddlCaratteristica4.Items.Clear();
-        ddlCaratteristica4.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica4"));
-        ddlCaratteristica4.Items[0].Value = "0";
-        ddlCaratteristica4.DataSource = Car4;
-        ddlCaratteristica4.DataTextField = "Campo1";
-        ddlCaratteristica4.DataValueField = "Codice";
-        ddlCaratteristica4.DataBind();
-        try
-        {
-            ddlCaratteristica4.SelectedValue = p4.ToString();
-        }
-        catch { }
+    //    List<Tabrif> Car3 = Utility.Caratteristiche[2].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+    //    ddlCaratteristica3.Items.Clear();
+    //    ddlCaratteristica3.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica3"));
+    //    ddlCaratteristica3.Items[0].Value = "0";
+    //    ddlCaratteristica3.DataSource = Car3;
+    //    ddlCaratteristica3.DataTextField = "Campo1";
+    //    ddlCaratteristica3.DataValueField = "Codice";
+    //    ddlCaratteristica3.DataBind();
+    //    try
+    //    {
+    //        ddlCaratteristica3.SelectedValue = p3.ToString();
+    //    }
+    //    catch { }
 
 
-        List<Fascediprezzo> prezzi = Utility.Fascediprezzo.FindAll(fp => fp.Lingua == Lingua && fp.CodiceTipologiaCollegata == "rif000100");
-        ddlFascePrezzo.Items.Clear();
-        ddlFascePrezzo.Items.Insert(0, references.ResMan("Common", Lingua, "SelezionePrezzo"));
-        ddlFascePrezzo.Items[0].Value = "0";
-        ddlFascePrezzo.DataSource = prezzi;
-        ddlFascePrezzo.DataTextField = "Descrizione";
-        ddlFascePrezzo.DataValueField = "Codice";
-        ddlFascePrezzo.DataBind();
-        try
-        {
-            ddlFascePrezzo.SelectedValue = fasciaprezzo;
-        }
-        catch { }
-
-        chkPromo.Checked = promozioni;
-    }
-    protected void ddlCaratteristica1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);
-    }
-
-    #region FUNZIONI GESTIONE ECOMMERCE
-
-    public void VisualizzaTotaliCarrello()
-    {
-        // litTotalHigh.Text = CarrelloHandler.VisualizzaTotaliCarrello(Context);
+    //    //Riempio la ddl  
+    //    List<Tabrif> Car4 = Utility.Caratteristiche[3].FindAll(delegate (Tabrif _t) { return _t.Lingua == Lingua; });
+    //    ddlCaratteristica4.Items.Clear();
+    //    ddlCaratteristica4.Items.Insert(0, references.ResMan("Common", Lingua, "selCaratteristica4"));
+    //    ddlCaratteristica4.Items[0].Value = "0";
+    //    ddlCaratteristica4.DataSource = Car4;
+    //    ddlCaratteristica4.DataTextField = "Campo1";
+    //    ddlCaratteristica4.DataValueField = "Codice";
+    //    ddlCaratteristica4.DataBind();
+    //    try
+    //    {
+    //        ddlCaratteristica4.SelectedValue = p4.ToString();
+    //    }
+    //    catch { }
 
 
-    }
-    #endregion
+    //    List<Fascediprezzo> prezzi = Utility.Fascediprezzo.FindAll(fp => fp.Lingua == Lingua && fp.CodiceTipologiaCollegata == "rif000100");
+    //    ddlFascePrezzo.Items.Clear();
+    //    ddlFascePrezzo.Items.Insert(0, references.ResMan("Common", Lingua, "SelezionePrezzo"));
+    //    ddlFascePrezzo.Items[0].Value = "0";
+    //    ddlFascePrezzo.DataSource = prezzi;
+    //    ddlFascePrezzo.DataTextField = "Descrizione";
+    //    ddlFascePrezzo.DataValueField = "Codice";
+    //    ddlFascePrezzo.DataBind();
+    //    try
+    //    {
+    //        ddlFascePrezzo.SelectedValue = fasciaprezzo;
+    //    }
+    //    catch { }
 
+    //    chkPromo.Checked = promozioni;
+    //}
+    //protected void ddlCaratteristica1_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);
+    //}
+
+  
 
 
 }
