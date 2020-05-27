@@ -3056,7 +3056,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3204,7 +3204,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
@@ -3424,7 +3424,7 @@ namespace WelcomeLibrary.UF
                                                     if (ar < 1)
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
-                                                        imgstyle = "width:auto;max-width:100%;max-height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-width:100%;height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
