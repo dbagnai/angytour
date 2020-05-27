@@ -1,5 +1,4 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -926,8 +925,7 @@
                                     <p class="pb-2">
                                         <%= references.ResMan("Common", Lingua,"TestoNewsletterForm") %>
                                     </p>
-                                    <%--
-                                        <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
+                                    <%-- <input type="text" style="background-color: #ffffff" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
                                         <br />
                                         <br />
                                     --%>
@@ -984,7 +982,6 @@
         </div>--%>
         <div id="divSearchBarPlaceholder">
         </div>
-
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1",null," async ") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2",null," async ") %>
         <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
@@ -993,8 +990,7 @@
             var makeRevLower = false;
            <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
      <%--       initLingua('<%= Lingua %>');--%>
-            //initimoment();
-
+               //initimoment();
             jQuery(document).ready(function () {
                <%-- loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');--%>
                 <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
