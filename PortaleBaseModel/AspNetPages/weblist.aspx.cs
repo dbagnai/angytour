@@ -308,6 +308,11 @@ public partial class AspNetPages_weblist : CommonPage
                 {
                     if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
 
+
+                    //INSERISCO UN TEMPLATE IN TESTA NELLE PAGINE LISTA DEL CATALOGO
+                    //placeholderrisultatinocontainer.Text = CommonPage.HtmlfromteplateInject("customcontentsearchmodal-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+
+
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     string svetrina = "";
                     //if (Vetrina) svetrina = "true";

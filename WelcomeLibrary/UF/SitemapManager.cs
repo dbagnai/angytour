@@ -676,7 +676,7 @@ namespace WelcomeLibrary.UF
                 }
             }
 
-            if (kv.Key.ToLower() == ("Regione"))
+            if (kv.Key.ToLower() == ("regione"))
             {
                 string nomeregione = references.NomeRegione(kv.Value, lingua);
                 if (!string.IsNullOrEmpty(nomeregione))
@@ -684,6 +684,12 @@ namespace WelcomeLibrary.UF
                     retxt = nomeregione.Trim();
                 }
             }
+
+            //if (kv.Key.ToLower() == ("promozioni"))
+            //{
+            //        retxt = "promo";
+            //}
+
 
             //if (filtriadded.ContainsKey("provincia"))
             //{

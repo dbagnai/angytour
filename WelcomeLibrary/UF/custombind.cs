@@ -4173,11 +4173,11 @@ namespace WelcomeLibrary.UF
                         double q = 0;
                         double.TryParse(qtavendita, out q);
                         if (q == 0 && qtavendita != "")
-                            ret = "<div  class=\"button-carrello btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
+                            ret = "<div  class=\"button-carrello btn-carrello-esaurito  button-carrello-squared\"  >" + testoCarelloesaurito + "</div>";
                         else
                         {
                             var testocall = id + "," + Lingua + "," + Username;
-                            ret = "<button type=\"button\"  class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+                            ret = "<button type=\"button\"  class=\"button-carrello button-carrello-squared\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
                             if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || p == 0))
                             {
                                 var link = "";

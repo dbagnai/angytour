@@ -258,7 +258,7 @@ function ScrollerInit5(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [5],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option

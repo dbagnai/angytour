@@ -451,9 +451,9 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             sb.Append("<a  href=\"");
             sb.Append(link);
             sb.Append("\"");
+            sb.Append(" class=\"" + classe + "\"   ");
             if (idps.ToString() == idContenuto)
-                sb.Append(" class=\"" + classe + "\" style=\"" + stile + "\"  ");
-            //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
+                sb.Append(" style=\"" + stile + "\"  ");
             sb.Append(" >");
             sb.Append(testo);
             sb.Append("</a>");
@@ -466,21 +466,66 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         return sb.ToString();
     }
-    public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false)
+
+    public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false, string fileteredcarcodes = "")
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
         sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
         sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
+
+        List<string> list = new List<string>();
+        if (fileteredcarcodes != "")
+        {
+            string[] codes = fileteredcarcodes.Split(',');
+            list = codes.ToList<string>();
+        }
+
+
         if (sezioni != null)
             foreach (TipologiaOfferte o in sezioni)
             {
+                if (progressivocaratteristica == 1)
+                    foreach (Tabrif elem in Utility.Caratteristiche[0])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
+                            addpars.Add("Caratteristica1", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+
+
                 if (progressivocaratteristica == 2)
                     foreach (Tabrif elem in Utility.Caratteristiche[1])
                     {
                         Dictionary<string, string> addpars = new Dictionary<string, string>();
                         if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
                         {
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
                             addpars.Add("Caratteristica2", elem.Codice);
                             //Genero il link per la tipologia
                             string testo = elem.Campo1;

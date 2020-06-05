@@ -134,13 +134,13 @@ public partial class _webdetail : CommonPage
                 Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
                 Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
                 testoindice = CaricaValoreMaster(Request, Session, "testoindice", true);
-                Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", false);
-                Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", false);
-                Caratteristica3 = CaricaValoreMaster(Request, Session, "Caratteristica3", false);
-                Caratteristica4 = CaricaValoreMaster(Request, Session, "Caratteristica4", false);
-                Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", false);
-                FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", false);
-                Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", false, "");
+                Caratteristica1 = CaricaValoreMaster(Request, Session, "Caratteristica1", true);
+                Caratteristica2 = CaricaValoreMaster(Request, Session, "Caratteristica2", true);
+                Caratteristica3 = CaricaValoreMaster(Request, Session, "Caratteristica3", true);
+                Caratteristica4 = CaricaValoreMaster(Request, Session, "Caratteristica4", true);
+                Caratteristica5 = CaricaValoreMaster(Request, Session, "Caratteristica5", true);
+                FasciaPrezzo = CaricaValoreMaster(Request, Session, "FasciaPrezzo", true);
+                Ordinamento = CaricaValoreMaster(Request, Session, "Ordinamento", true, "");
                 bool tmpbool = false;
                 bool.TryParse(CaricaValoreMaster(Request, Session, "Vetrina"), out tmpbool);
                 Vetrina = tmpbool;
@@ -173,20 +173,23 @@ public partial class _webdetail : CommonPage
             if (item != null)
             {
                 CodiceTipologia = item.CodiceTipologia;
-                if (CodiceTipologia != "")
-                    Session["Tipologia"] = CodiceTipologia;
+                //if (CodiceTipologia != "")
+                //    Session["Tipologia"] = CodiceTipologia;
                 Categoria = item.CodiceCategoria;
-                if (Categoria != "")// && CodiceTipologia != "rif000003")
-                    Session["Categoria"] = Categoria;
+                //if (Categoria != "") 
+                //    Session["Categoria"] = Categoria;
                 Categoria2liv = item.CodiceCategoria2Liv;
-                if (Categoria2liv != "")// && CodiceTipologia != "rif000003")
-                    Session["Categoria2liv"] = Categoria2liv;
-                if (Caratteristica1 != "")// && CodiceTipologia != "rif000003")
-                    Caratteristica1 = item.Caratteristica1.ToString();
-                if (Caratteristica2 != "")// && CodiceTipologia != "rif000003")
-                    Caratteristica2 = item.Caratteristica2.ToString();
-                if (Caratteristica3 != "")// && CodiceTipologia != "rif000003")
-                    Caratteristica3 = item.Caratteristica3.ToString();
+                //if (Categoria2liv != "") 
+                //    Session["Categoria2liv"] = Categoria2liv;
+                Caratteristica1 = item.Caratteristica1.ToString();
+                //if (Caratteristica1 != "") 
+                //    Session["Caratteristica1"] = Caratteristica1;
+                Caratteristica2 = item.Caratteristica2.ToString();
+                //if (Caratteristica2 != "") 
+                //    Session["Caratteristica2"] = Caratteristica2;
+                Caratteristica3 = item.Caratteristica3.ToString();
+                //if (Caratteristica3 != "") 
+                //    Session["Caratteristica3"] = Caratteristica3;
 
                 //replicao i valori alla master per funzione ricerca
                 Master.CodiceTipologia = CodiceTipologia;

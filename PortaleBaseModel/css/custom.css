@@ -4769,6 +4769,29 @@ strong {
   border-radius: 50%;
   font-weight: lighter;
 }
+/*.button-carrello.button-carrello-squared {
+    font-size: @button-size;
+    padding: 0.7rem 1.7rem !important;
+    line-height: 1 !important;
+    width: auto;
+    border-radius: 0;
+    font-weight: unset;
+    -webkit-border-radius: 0.4rem;  
+    -moz-border-radius: 0.4rem; 
+    border-radius: 0.4rem; 
+}
+
+.button-carrello:hover.button-carrello-squared {
+    font-size: @button-size;
+    padding: 0.7rem 1.7rem !important;
+    line-height: 1 !important;
+    width: auto;
+    border-radius: 0;
+    font-weight: unset;
+    -webkit-border-radius: 0.4rem; 
+    -moz-border-radius: 0.4rem; 
+    border-radius: 0.4rem;  
+}*/
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover {
   /*background: url("/images/soldout1.png") center center no-repeat;*/

@@ -154,6 +154,34 @@ public class CommonPage : Page
     }
 
 
+    /// <summary>
+    ///  Ritorna un contenuto renderizzato da template come stringa html
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <param name="Lingua"></param>
+    /// <param name="username"></param>
+    /// <param name="sessione"></param>
+    /// <returns></returns>
+    public static string HtmlfromteplateInject(string filename, string Lingua, string username, System.Web.SessionState.HttpSessionState sessione = null)
+    {
+        string htmlret = "";
+        if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + filename))
+        {
+            string bindedcustomcontent = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + filename);
+            custombind cb = new custombind();
+            htmlret = cb.bind(bindedcustomcontent, Lingua, username, sessione, null, null, System.Web.HttpContext.Current.Request);// sb.ToString();
+        }
+        return htmlret;
+    }
+
+    /// <summary>
+    /// Aggiunge un contenuto renderizzato da template nel controllo specificato
+    /// </summary>
+    /// <param name="divcontainer"></param>
+    /// <param name="filename"></param>
+    /// <param name="Lingua"></param>
+    /// <param name="username"></param>
+    /// <param name="sessione"></param>
     public static void CustomContentInject(System.Web.UI.HtmlControls.HtmlGenericControl divcontainer, string filename, string Lingua, string username, System.Web.SessionState.HttpSessionState sessione = null)
     {
 
@@ -166,6 +194,7 @@ public class CommonPage : Page
             divcontainer.Visible = true;
         }
     }
+
 
     public static string ControlloDotDot(object NomeAnteprima, string classe)
     {
