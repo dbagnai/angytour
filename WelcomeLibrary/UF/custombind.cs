@@ -4283,9 +4283,9 @@ namespace WelcomeLibrary.UF
                         double.TryParse(prezzolistino, out double pl);
                         if (pl != 0 && p != 0 && (pl > p))
                         {
-                            ret = "<div class=\"csstransforms prod_discount\">" + testosconto + " ";
+                            ret = "<div class=\"csstransforms prod_discount\"><span>" + testosconto + " ";
                             ret += Math.Floor((pl - p) / pl * 100) + " %";
-                            ret += "</div>";
+                            ret += "</span></div>";
                         }
                     }
                     catch { }

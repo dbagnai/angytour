@@ -3330,15 +3330,85 @@ b, strong {
 }
 
 /*------------------------------------------------------*/
+
+
+
+.prod_discount::before {
+    position: absolute;
+    border-top-color: rgb(138, 138, 138);
+    border-top-width: 1px;
+    border-top-style: dotted;
+    display: block;
+    content: "";
+    left: 0px;
+    top: 3px;
+    right: 0px;
+}
+
+.prod_discount::after {
+    position: absolute;
+    border-top-color: rgb(138, 138, 138);
+    border-top-width: 1px;
+    border-top-style: dotted;
+    display: block;
+    content: "";
+    left: 0px;
+    right: 0px;
+    bottom: 4px;
+}
+
+.prod_discount {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    background-color: @bg-primary-color !important;
+}
+
+.csstransforms.prod_discount {
+    position: absolute;
+    padding: 0.3em 3em;
+    left: -3em;
+    top: 2em;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    z-index: 95;
+}
+
+/*.prod_discount {
+    position: absolute;
+    padding: 1.7em 1.1em;
+    left: 5px;
+    top: 5px;
+    background: url(../images/sitespecific/bollino-3.png) no-repeat center center;
+    width: 90px;
+    height: 90px;
+    background-size: 100% 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.1rem;
+    font-size: 0.9rem;
+    word-wrap: normal;
+}
+
+.prod_discount > span {
+    display: block;
+    transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+    -moz-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+}*/
+
 .carrello-go-launch {
     /*position:fixed !important;*/
     display: block !important;
     z-index: 999 !important;
 }
 
-.prod_discount {
-    background-color: @bg-primary-color !important;
-}
+
 
 #carrellos1qty input {
     width: 42px !important;

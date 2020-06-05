@@ -553,7 +553,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return sb.ToString();
     }
 
-    public string CrealinkCaratteristicaAutocolumn(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false)
+    public string CrealinkCaratteristicaAutocolumn(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false, int maxrighepercolonna = 10)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
@@ -568,19 +568,17 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     List<Tabrif> gruppocompleto = Utility.Caratteristiche[1].FindAll(e => e.Lingua == Lingua);
 
                     //Incolonniamo automaticamente
-                    int nlinkpercolonna = 3;
-                    int nlink = gruppocompleto.Count;
-                    int colonne = 0;
-                    int resto = Math.DivRem(nlink, nlinkpercolonna, out colonne);
+                     int nlink = gruppocompleto.Count;
+                    int resto = 0;
+                    int colonne = Math.DivRem(nlink, maxrighepercolonna, out resto);
                     if (resto > 0) colonne += 1;
 
                     for (int i = 1; i <= colonne; i++)
                     {
-
-                        int elementrange = nlinkpercolonna;
+                        int elementrange = maxrighepercolonna;
                         if (i == colonne && resto != 0) elementrange = resto;
                         else if (i == colonne && resto == 0) continue;
-                        List<Tabrif> gruppoattuale = gruppocompleto.GetRange((i - 1) * nlinkpercolonna, elementrange);
+                        List<Tabrif> gruppoattuale = gruppocompleto.GetRange((i - 1) * maxrighepercolonna, elementrange);
                         sb.Append("<div class=\"col-auto text-left megamenu-menulist\">");
                         foreach (Tabrif elem in gruppoattuale)
                         {
