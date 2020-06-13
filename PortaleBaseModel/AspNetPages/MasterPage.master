@@ -623,7 +623,7 @@
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
-                <div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">
+                <div class="row">
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermastercenter" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

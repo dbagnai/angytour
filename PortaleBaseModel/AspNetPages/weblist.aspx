@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin: 0px">
         <div class="" runat="server" id="columnsingle">
             <asp:Literal Text="" ID="placeholderrisultatinocontainer" runat="server" />
         </div>
