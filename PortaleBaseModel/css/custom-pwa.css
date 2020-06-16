@@ -5401,7 +5401,7 @@ button.js-roundedpush:hover {
         padding-right: calc((100% - 1110px) / 2);*/
   }
   .menuzord-menu ul.dropdown.visible-ok {
-    z-index: 98 !important;
+    z-index: 97 !important;
   }
   .visible-ok {
     display: block !important;
@@ -5582,14 +5582,14 @@ button.js-roundedpush:hover {
             padding: 8px 14px !important;
         }*/
   /*in caso dialog sottomenu prodotti a vista*/
-  /*.menuzord-menu a {
-        position: relative;
-        padding: 8px 8px !important;
-    }
-    .menuzord-menu a:hover {
-        color: @secondary-color;
-        padding: 8px 8px !important;
-    }*/
+  .menuzord-menu a {
+    position: relative;
+    padding: 8px 8px !important;
+  }
+  .menuzord-menu a:hover {
+    color: #077777;
+    padding: 8px 8px !important;
+  }
   .menuzord.white .menuzord-menu > li.active > a,
   .menuzord.white .menuzord-menu > li:hover > a,
   .menuzord.white .menuzord-menu ul.dropdown li:hover > a {
