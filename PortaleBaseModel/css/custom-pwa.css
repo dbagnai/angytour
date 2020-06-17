@@ -503,7 +503,7 @@ i .fa {
 .simplemenu > ul > li:nth-last-child(1) {
   border-right: none;
 }
-@media screen and (max-width: 961px) {
+@media screen and (max-width: 769px) {
   .simplemenu > ul > li {
     border-right: none;
   }

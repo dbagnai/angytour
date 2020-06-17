@@ -616,7 +616,7 @@
              //"~/js/odometer/themes/odometer-theme-custom.css",
              "~/js/aos/aos.css",
              "~/css/custom1.css",
-             "~/css/custom.min.css"
+             "~/css/custom.css"
           );
 
         BundleEngine.AddBundleCSS("bundlecsspwa",
