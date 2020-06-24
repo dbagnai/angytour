@@ -626,7 +626,7 @@ namespace WelcomeLibrary.UF
                                 /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]);  //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
-                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0) && ((data != null) && (data.Count() > 0)))
                                 {
                                     bool alternate = false;
                                     if (elementtoappend.First().Attributes.Contains("class") && elementtoappend.First().Attributes["class"].Value.Contains("alternatecolor"))
@@ -797,7 +797,7 @@ namespace WelcomeLibrary.UF
                                 /////BINDING DATI SU TEMPLATE /////////////////////////////////////////////////////////////////////////////////////////////
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 var elementtoappend = template.DocumentNode.Descendants().Where(c => c.Id == dictpars["controlid"]); //si presuppone che ci sia un elemento padre del template a cui appendere i singoli elementi bindtati
-                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0) && ((data != null) && (data.Count() > 0)))
                                 {
                                     string innerelement = elementtoappend.First().InnerHtml;
                                     if ((innerelement != ""))
