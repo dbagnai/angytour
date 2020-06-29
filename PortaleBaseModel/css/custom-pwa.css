@@ -38,15 +38,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
-path.bg-light-color-path {
-  fill: #fff;
-  stroke: #fff;
-}
 .bg-primary-color {
   background-color: #098f8f !important;
 }
 .bg-secondary-color {
   background-color: #90cdcd !important;
+}
+.bg-secondarylight-color {
+  background-color: #e6f4f4 !important;
 }
 .bg-light-color {
   background-color: #ebf6f6 !important;
@@ -56,6 +55,29 @@ path.bg-light-color-path {
 .bg-light-color-path {
   fill: #ebf6f6;
   stroke: #ebf6f6;
+}
+.bg-light-color-pattern-1 {
+  background-color: #ebf6f6 !important;
+  background-image: url(/images/pattern/pattern-8.jpg);
+  background-size: 564px;
+}
+/*.bg-light-color-pattern-1:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+    background-color: @bg-light-color !important;
+    background-image: @pattern-image-sfondo-1;
+    background-size: @pattern-size-sfondo-1;
+}*/
+.bg-white-color-path {
+  fill: #fff;
+  stroke: #fff;
 }
 /*START BORDI OBLIQUI ON / OFF*/
 /*@media screen and (min-width: 1280px) {
@@ -7065,6 +7087,8 @@ a.divbuttonstyle:hover:after, div.divbuttonstyle:hover:after, .divbuttonstyle:ho
 /*#dac8a0;*/
 /*footer-social e banner*/
 /*#f5f0e5;*/
+/*footer-link*/
+/*#dac8a0;*/
 /*footer-bottom*/
 /*#555;*/
 /**/
@@ -7183,6 +7207,11 @@ a.divbuttonstyle:hover:after, div.divbuttonstyle:hover:after, .divbuttonstyle:ho
 ----------------------------------*/
 /**/
 /**/
+/*https: //www.pinterest.it/pin/92534967330776535/*/
+/*https: //www.pinterest.it/pin/625226360758236243/*/
+/*@pattern-image-sfondo-1: url(/images/pattern/pattern-7b1.jpg);*/
+/*@pattern-image-sfondo-1: url(/images/pattern/pattern-9a.jpg);*/
+/*@pattern-image-sfondo-1: url(/images/pattern/pattern-10b.jpg);*/
 /*----------------------------------
 ///////////| SVG ICON |/////////////
 ----------------------------------*/

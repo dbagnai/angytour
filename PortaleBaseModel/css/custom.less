@@ -48,10 +48,6 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
-path.bg-light-color-path {
-    fill: #fff;
-    stroke: #fff;
-}
 .bg-primary-color {
     background-color: @bg-primary-color !important;
 }
@@ -59,6 +55,11 @@ path.bg-light-color-path {
 .bg-secondary-color {
     background-color: @bg-secondary-color !important;
 }
+
+.bg-secondarylight-color {
+    background-color: @bg-secondarylight-color !important;
+}
+
 
 .bg-light-color {
     background-color: @bg-light-color !important;
@@ -70,6 +71,33 @@ path.bg-light-color-path {
     fill: @bg-light-color;
     stroke: @bg-light-color;
 }
+
+.bg-light-color-pattern-1 {
+    background-color: @bg-light-color !important;
+    background-image: @pattern-image-sfondo-1;
+    background-size: @pattern-size-sfondo-1;
+}
+
+/*.bg-light-color-pattern-1:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+    background-color: @bg-light-color !important;
+    background-image: @pattern-image-sfondo-1;
+    background-size: @pattern-size-sfondo-1;
+}*/
+
+.bg-white-color-path {
+    fill: @white-color;
+    stroke: @white-color;
+}
+
 
 /*START BORDI OBLIQUI ON / OFF*/
 /*@media screen and (min-width: 1280px) {
