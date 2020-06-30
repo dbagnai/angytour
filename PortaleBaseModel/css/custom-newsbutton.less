@@ -9,8 +9,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ::::::::::::::::::---------------::::::::::::::::::*/
 @bd-bottom2-width: 1px;
 
-.btn:not(.btn-banner) {
-    border-radius: 0.0rem;
+.btn, .divbuttonstyle, input[type="submit"], input[type="button"] {
+    border-radius: 0.0rem !important;
 }
 
 a.divbuttonstyle, .divbuttonstyle, .btn, input[type="submit"], input[type="button"], button.btn, .btn-primary, div.divbuttonstyle, div.divbuttonstyle:visited, button.divbuttonstyle,
@@ -67,7 +67,8 @@ a.divbuttonstyle:hover, div.divbuttonstyle:hover, .divbuttonstyle:hover, button.
     color: @color-sottomeu !important;
     background-color: #ffffff !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu-tenue;
-    opacity:1;
+    opacity: 1;
+    border-radius: 0 !Important;
 }
 
 a.divbuttonstyle:hover::before, div.divbuttonstyle:hover::before, .divbuttonstyle:hover::before, button.divbuttonstyle:hover::before, button.btn:hover::before, .btn:hover::before, .btn-primary:hover::before, input:hover[type="submit"]::before, input:hover[type="button"]::before,
@@ -97,9 +98,10 @@ a.divbuttonstyle:hover::after, div.divbuttonstyle:hover::after, .divbuttonstyle:
         color: @button-hover-color !important;
     }
 
-    footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer button.divbuttonstyle:active, footer button.divbuttonstyle:hover, footer .divbuttonstyle, footer .divbuttonstyle:visited, footer .divbuttonstyle:active, footer .divbuttonstyle:hover {
-        padding: .63rem 0.5rem !important;
-    }
+footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer button.divbuttonstyle:active, footer button.divbuttonstyle:hover, footer .divbuttonstyle, footer .divbuttonstyle:visited, footer .divbuttonstyle:active, footer .divbuttonstyle:hover {
+    padding: .63rem 0.5rem !important;
+    border-radius: 0 !Important;
+}
 
 
 /*STILE PULSANTE color OUTLINE*/
@@ -189,7 +191,7 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     width: 100%;
 }
 
-.carrellocustom i.fa.fa-cart-plus {
+.carrellocustom i.fa.fa-cart-plus, .carrellocustom i.fa.fa-eye {
     padding: 0;
 }
 
@@ -335,6 +337,10 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
 }
 
 /*STILE PULSANTE CARRELLO*/
+.button-carrello-animate:hover, .button-carrello-vedi:hover, .btn-carrello-esaurito:hover, .button-carrello:hover, .btn-banner {
+    border-radius: 50% !Important;
+}
+
 .menuzord-menu li:nth-child(4) a:hover {
     background-color: #fff !important;
     color: @color-sottomeu !important;
@@ -368,13 +374,16 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     opacity: 1;
 }
 
+.menuzord-menu li:nth-child(5) a {
+    color: #fff !important;
+}
+
 .menuzord-menu .megamenu li:nth-child(4) a:hover {
     background-color: #fff !important;
     color: @color-sottomeu !important;
     box-shadow: none;
     opacity: 1;
 }
-
 
 .dropdown-cart .btn {
     font-size: 0.8rem !important;
@@ -399,8 +408,51 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     border-radius: 50%
 }
 
+.menuzord-menu ul.show li:nth-child(4) a {
+    &:extend(.divbuttonstyle);
+    font-size: .8rem !important;
+    border-radius: 0;
+}
+
+.menuzord-menu ul.show li:nth-child(4) a:hover {
+    background-color: #fff !important;
+    color: @color-sottomeu !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @bg-light-color;
+}
+
+/*PULSANTE AGGIUNGI SCHEDA ACQUISTO*/
+.carrellocustom .button-carrello.button-carrello-squared i:before {
+    content: '\f217';
+    text-transform: uppercase;
+}
+
+.carrellocustom .button-carrello.button-carrello-squared i:after {
+    content: '  AGGIUNGI';
+    font-family: @button-font !important;
+}
 
 
+.carrellocustom .button-carrello.btn-carrello-esaurito i {
+    opacity: 1 !important;
+}
+
+.carrellocustom .button-carrello.btn-carrello-esaurito i:before {
+    content: '';
+    font-family: @button-font !important;
+}
+
+.carrellocustom .button-carrello.btn-carrello-esaurito i:after {
+    content: 'ARTICOLO ESAURITO';
+    font-family: @button-font !important;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/*pulsante newsletter*/
+.fa-paper-plane {
+    line-height: 1.3;
+}
 
 /*::::::::::::::::---------------::::::::::::::::::
 :::::::::::::::::: BOTTON TIPO 2 ::::::::::::::::::
