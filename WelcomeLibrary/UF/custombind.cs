@@ -196,7 +196,7 @@ namespace WelcomeLibrary.UF
                                 /////BINDING DATI SU TEMPLATE
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 var elementtoappend = template.DocumentNode.Descendants("ul"); //elemento del template a cui appendere i singoli elementi
-                                if ((elementtoappend != null) && (elementtoappend.Count() > 0))
+                                if ((elementtoappend != null) && (elementtoappend.Count() > 0) && data != null && data.Count > 0)
                                 {
                                     var findelements = template.DocumentNode.Descendants("li"); //elemento da ripetere e bindare ai dati
                                     if ((findelements != null) && (findelements.Count() > 0))
@@ -267,6 +267,24 @@ namespace WelcomeLibrary.UF
                                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                                 }
+                                else
+                                {
+                                    //spengo il node se non ci sono elementi dentro
+                                    if (node != null)
+                                        if (node.Attributes.Contains("style"))
+                                        {
+                                            node.Attributes["class"].Value = "";
+                                            node.Attributes["style"].Value = node.Attributes["style"].Value.Replace(": ", ":").Replace("display:block", "");
+                                            node.Attributes["style"].Value += ";display:none !important;";
+                                        }
+                                        else
+                                        {
+                                            node.Attributes["class"].Value = "";
+                                            node.Attributes.Add("style", ";display:none !important;");
+                                        }
+                                }
+
+
                             }
                         }
 
