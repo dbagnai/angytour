@@ -366,14 +366,14 @@ hr {
 }
 a {
   text-decoration: none;
-  color: #666666;
+  color: #f3c649;
 }
 a:hover,
 a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #999;
+  color: #f5cf64;
 }
 input.inputnoback,
 textarea.inputnoback {
@@ -465,6 +465,8 @@ a:hover {
   /*height: 119px;*/
   /*in caso di menù tipo e-commerce*/
   height: 94px;
+  webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
 }
 .shrinklogo {
   width: calc((400px * 61) / 119);
@@ -757,7 +759,8 @@ p.lead,
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: 300;
-  line-height: 1.4 !important;
+  /* line-height: 1.4 !important;*/
+  line-height: 135% !important;
 }
 html {
   -webkit-text-size-adjust: 100%;
@@ -876,7 +879,9 @@ h1 span {
   columns: auto;
   column-count: 2;
   column-gap: 30px;
-  font-size: 1.35rem;
+  /*font-size: 1.35rem;*/
+  font-size: 1rem;
+  line-height: 135% !important;
 }
 @media (max-width: 768px) {
   .testo-colonne {
@@ -1078,6 +1083,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .carrellocustomoutline .button-carrello:active,
 .carrellocustomoutline .button-carrello:visited,
 .carrellocustomoutline .button-carrello:focus,
+.menuzord-menu ul.show li:nth-child(4) a,
 a.btn-black-outline:hover,
 .btn-black-outline:hover,
 .btn .btn-black:hover,
@@ -1680,6 +1686,14 @@ ul li .work-image:hover:after,
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
+.work-image.video:hover:after,
+ul li .work-image.video:hover:after,
+.imgovercontainer.video:hover:after {
+  /*background: url(/images/link-movie1.png) center center no-repeat !important;*/
+  background: url(/images/link-movie3.png) center center no-repeat !important;
+  /*background: url(/images/link-movie3.png) center center no-repeat !important;*/
+  background-size: 80px 80px !important;
+}
 .oversquare {
   position: absolute;
   display: block;
@@ -1855,9 +1869,11 @@ ul.footer-category-list {
   border-bottom: none;
   padding-left: 14px;
   text-indent: -14px;
+  /*display: inline !important*/
 }
 .footer .footer-col .footer-content .footer-category-list li a {
   margin-left: 0px;
+  color: #f3c649;
 }
 /*IN CASO dialog NUOVO FOOTER*/
 /*@media (max-width: 576px) {
@@ -4059,6 +4075,8 @@ button.js-roundedpush:hover {
   /*con sottomenu a vista con icone*/
   padding-top: calc(141px + 82px - 16px);
   /*con sottomenu a vista con icone + testate pagine*/
+  /*padding-top: 95px;*/
+  /*senza menù top, tipo dolore di achille*/
 }
 /*--------- END ---------*/
 /*DISTANZA DELLA PAGINA DAL MENU IN CASO DI SITO NORMALE*/
@@ -4074,6 +4092,10 @@ button.js-roundedpush:hover {
     padding-top: 100px !important;
   }
 }
+/*TESTATA CHE MANTIENE legend PROPORZIONI TIPO VIDEO*/
+/*#divContainerb1 {
+    height: calc(((100vw - 95px) * 9) / 19.5) !important;
+}*/
 /*.headerspacer-home {
     padding-top: 0;
 }*/
@@ -4478,20 +4500,25 @@ button.js-roundedpush:hover {
   /* IE6-9 */
 }
 .gradient-overlay-my-bottomtop {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,d6bdd9+100&0+67,0.65+70,0.85+77,0.88+96 */
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,757575+100&0+67,0.65+70,0.85+77,0.88+96 */
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 67%, rgba(0, 0, 0, 0.55) 70%, rgba(0, 0, 0, 0.75) 77%, rgba(0, 0, 0, 0.78) 96%, rgba(0, 0, 0, 0.78) 100%);
   /* FF3.6-15 */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(67%, rgba(228, 211, 230, 0)), color-stop(70%, rgba(136, 133, 32, 0.65)), color-stop(77%, rgba(136, 133, 32, 0.85)), color-stop(96%, rgba(136, 133, 32, 0.88)), color-stop(100%, rgba(136, 133, 32, 0.88)));
-  /* Chrome4-9,Safari4-5 */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 67%, rgba(0, 0, 0, 0.55) 70%, rgba(0, 0, 0, 0.75) 77%, rgba(0, 0, 0, 0.78) 96%, rgba(0, 0, 0, 0.78) 100%);
   /* Chrome10-25,Safari5.1-6 */
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
-  /* Opera 11.10-11.50 */
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
-  /* IE10 preview */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(228, 211, 230, 0) 67%, rgba(136, 133, 32, 0.65) 70%, rgba(136, 133, 32, 0.85) 77%, rgba(136, 133, 32, 0.88) 96%, rgba(136, 133, 32, 0.88) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 67%, rgba(0, 0, 0, 0.55) 70%, rgba(0, 0, 0, 0.75) 77%, rgba(0, 0, 0, 0.78) 96%, rgba(0, 0, 0, 0.78) 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#e0d6bdd9', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+  /* IE6-9 */
+}
+.gradient-overlay-my-bottomtop-text {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,757575+100&0+67,0.65+70,0.85+77,0.88+96 */
+  background: -moz-linear-gradient(top, gba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, gba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
   /* IE6-9 */
 }
 .gradient-overlay-red-bottomtop,
@@ -4860,30 +4887,31 @@ button.js-roundedpush:hover {
 /*---------------------------*/
 /*------gestione menu stili-------*/
 /*---------------------------*/
-.menuzord,
-.menuzord *,
-.menuzord:not(i) {
-  font-family: 'Fira Sans', sans-serif;
-  border-color: #90cdcd !important;
-  font-size: 1rem;
-}
-.menuzord.white .menuzord-menu > li > a,
-.menuzord.white .menuzord-menu > li > a span {
-  color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-}
-.menuzord.white .menuzord-menu > li.active > a,
-.menuzord.white .menuzord-menu > li:hover > a,
-.menuzord.white .menuzord-menu > li:hover > a span,
-.menuzord.white .menuzord-menu ul.dropdown li:hover > a,
-.menuzord.white .menuzord-menu > li > a:active {
-  color: #f3c649 !important;
-  /*font-weight: @menu-hover-weight;*/
-  background: none;
-}
-/*@media (max-width: 1024px) {
+@media (min-width: 1025px) {
+  .menuzord,
+  .menuzord *,
+  .menuzord:not(i) {
+    font-family: 'Fira Sans', sans-serif;
+    border-color: #90cdcd !important;
+    font-size: 1rem;
+  }
+  .menuzord.white .menuzord-menu > li > a,
+  .menuzord.white .menuzord-menu > li > a span {
+    color: #032f2f;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .menuzord.white .menuzord-menu > li.active > a,
+  .menuzord.white .menuzord-menu > li:hover > a,
+  .menuzord.white .menuzord-menu > li:hover > a span,
+  .menuzord.white .menuzord-menu ul.dropdown li:hover > a,
+  .menuzord.white .menuzord-menu > li > a:active {
+    color: #f3c649 !important;
+    /*font-weight: @menu-hover-weight;*/
+    background: none;
+  }
+  /*@media (max-width: 1024px) {
     .menuzord.white .menuzord-menu > li.active > a,
     .menuzord.white .menuzord-menu > li:hover > a,
     .menuzord.white .menuzord-menu > li:hover > a span,
@@ -4893,63 +4921,63 @@ button.js-roundedpush:hover {
         background: @white-color;
     }
 }*/
-.menuzord.white .showhide em {
-  background: #032f2f;
-}
-.menuzord-brand {
-  font-weight: 600;
-}
-.menuzord-menu ul.dropdown,
-.menuzord-menu ul.dropdown li ul.dropdown {
-  border-color: #077777 !important;
-  list-style: none;
-  margin: 10px 0 0 0;
-  padding: 10px 0 20px;
-  display: none;
-  position: absolute;
-  z-index: 99 !important;
-  min-width: 180px;
-  white-space: nowrap;
-  background: #fff;
-  border: 1px solid #077777;
-  border-top: 1px dashed #077777;
-  box-shadow: 0 4px 6px -6px #222;
-}
-.menuzord-menu ul.dropdown li ul.dropdown {
-  margin-top: -20px !important;
-  /*AGISCE SUL MENU DI SECONDO LIVELLO POSIZIONE VERTICALE*/
-  /*margin-top: 0px !important;*/
-  border-top: 1px solid #077777;
-  border-left: 1px dashed #077777;
-}
-.menuzord-menu ul.dropdown ul {
-  list-style: none !important;
-  padding: 0 !important;
-}
-.menuzord-menu ul.dropdown ul > li {
-  padding-left: 15px !important;
-}
-.menuzord-menu ul.dropdown li {
-  font-size: 1rem;
-  padding: 12px 0;
-}
-.menuzord-menu ul.dropdown li a {
-  /*font-weight: @submenu-weight;*/
-  color: #032f2f;
-}
-.menuzord-menu ul.dropdown li:hover > a {
-  font-weight: 400;
-  color: #f3c649;
-}
-.menuzord i {
-  font-family: 'Font Awesome 5 Free';
-}
-/* modifica meuzord per megamenu grande con molti link*/
-.menuzord-menu > li > .megamenu {
-  padding: 30px 30px;
-  left: unset;
-  border: 1px solid #032f2f;
-  /*margin: 10px -20px 0;
+  .menuzord.white .showhide em {
+    background: #032f2f;
+  }
+  .menuzord-brand {
+    font-weight: 600;
+  }
+  .menuzord-menu ul.dropdown,
+  .menuzord-menu ul.dropdown li ul.dropdown {
+    border-color: #077777 !important;
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 10px 0 20px;
+    display: none;
+    position: absolute;
+    z-index: 99 !important;
+    min-width: 180px;
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid #077777;
+    border-top: 1px dashed #077777;
+    box-shadow: 0 4px 6px -6px #222;
+  }
+  .menuzord-menu ul.dropdown li ul.dropdown {
+    margin-top: -20px !important;
+    /*AGISCE SUL MENU DI SECONDO LIVELLO POSIZIONE VERTICALE*/
+    /*margin-top: 0px !important;*/
+    border-top: 1px solid #077777;
+    border-left: 1px dashed #077777;
+  }
+  .menuzord-menu ul.dropdown ul {
+    list-style: none !important;
+    padding: 0 !important;
+  }
+  .menuzord-menu ul.dropdown ul > li {
+    padding-left: 15px !important;
+  }
+  .menuzord-menu ul.dropdown li {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  .menuzord-menu ul.dropdown li a {
+    /*font-weight: @submenu-weight;*/
+    color: #032f2f;
+  }
+  .menuzord-menu ul.dropdown li:hover > a {
+    font-weight: 400;
+    color: #f3c649;
+  }
+  .menuzord i {
+    font-family: 'Font Awesome 5 Free';
+  }
+  /* modifica meuzord per megamenu grande con molti link*/
+  .menuzord-menu > li > .megamenu {
+    padding: 30px 30px;
+    left: unset;
+    border: 1px solid #032f2f;
+    /*margin: 10px -20px 0;
     width: calc(100% + 40px);
     border-left: 0;
     border-right: 0;
@@ -4957,26 +4985,27 @@ button.js-roundedpush:hover {
     -webkit-box-shadow: 0 4px 6px -6px #222;
     -moz-box-shadow: 0 4px 6px -6px #222;
     box-shadow: 0 4px 6px -6px #222;*/
-}
-.menuzord-menu > li > .megamenu.megamenu-full-text {
-  padding: 0 30px 30px;
-  left: unset !important;
-  /*right: 0 !important;*/
-  right: unset;
-  border: 1px solid #032f2f;
-  margin: 10px 40px 0;
-  width: auto;
-  border-left-style: solid;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  -webkit-box-shadow: 0 4px 6px -6px #222;
-  -moz-box-shadow: 0 4px 6px -6px #222;
-  box-shadow: 0 4px 6px -6px #222;
-}
-.menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
-  margin-top: 30px;
-  /*padding-left: 50px !important;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text {
+    padding: 0 30px 30px;
+    left: unset !important;
+    /*right: 0 !important;*/
+    right: unset;
+    border: 1px solid #032f2f;
+    margin: 10px 40px 0;
+    width: auto;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
+    margin-top: 30px;
+    /*padding-left: 50px !important;
     background-color: aliceblue !important;*/
+  }
 }
 @media (max-width: 1179px) {
   .menuzord-menu > li > .megamenu.megamenu-full-text {
@@ -5249,38 +5278,6 @@ button.js-roundedpush:hover {
     padding: 14px !important;
   }
 }
-@media (min-width: 1025px) {
-  .buttonmenu,
-  a .buttonmenu {
-    background: #f3c649 !important;
-    font-size: 1rem !important;
-    border: 1px solid #f3c649;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
-  }
-  .buttonmenu:hover,
-  a .buttonmenu:hover {
-    background: #ffffff !important;
-    color: #000 !important;
-  }
-  .menuzord.white .menuzord-menu > li > a.buttonmenu {
-    color: #fff !important;
-    border-color: transparent !important;
-    margin-top: -2px;
-  }
-  .menuzord.white .menuzord-menu > li > a.buttonmenu:hover,
-  .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
-    color: #000 !important;
-    border-color: #000 !important;
-  }
-  .menuzord.white .menuzord-menu > li > a.buttonmenu span {
-    /*&:extend(.menuzord.white .menuzord-menu > li > a.buttonmenu);*/
-  }
-  .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
-    border: none !important;
-  }
-}
 /*----------------------------------
 --------- EFFETTO PULSANTE ---------
 ----------------------------------*/
@@ -5344,18 +5341,18 @@ button.js-roundedpush:hover {
     transform: translate(-100%, -50%);
   }
   /*tolgo l'effetto al pulsante prenota*/
-  /*.menuzord-menu li:nth-child(8) a:before, .menuzord-menu li:nth-child(8) a:after {
-        border: none;
-        padding-top: 6px !important;
-        padding-bottom: 6px !important;
-    }*/
-  /*.menuzord-menu li:nth-child(8) a {
-        padding: 8px 16px 8px !important;
-    }
-
-    .menuzord-menu li:nth-child(8) a span {
-        color: #fff !important;
-    }*/
+  .menuzord-menu li:nth-child(9) a:before,
+  .menuzord-menu li:nth-child(9) a:after {
+    border: none;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  .menuzord-menu li:nth-child(9) a {
+    padding: 8px 16px 8px !important;
+  }
+  .menuzord-menu li:nth-child(9) a span {
+    color: #fff !important;
+  }
   .menuzord-menu li a:hover:before,
   .menuzord-menu li .current a:before,
   .menuzord-menu li a:hover:after,
@@ -5397,6 +5394,38 @@ button.js-roundedpush:hover {
 /*----------------------------------
 --------------- FINE EFFETTO PULSANTE ---------------
 ----------------------------------*/
+@media (min-width: 1025px) {
+  .buttonmenu,
+  a .buttonmenu {
+    background: #f3c649 !important;
+    font-size: 1rem !important;
+    border: 1px solid #f3c649;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+  }
+  .buttonmenu:hover,
+  a .buttonmenu:hover {
+    background: #ffffff !important;
+    color: #000 !important;
+  }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu {
+    color: #fff !important;
+    border-color: transparent !important;
+    margin-top: -2px;
+  }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu:hover,
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
+    color: #000 !important;
+    border-color: #000 !important;
+  }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+    /*&:extend(.menuzord.white .menuzord-menu > li > a.buttonmenu);*/
+  }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
+    border: none !important;
+  }
+}
 /* ---------------------------------
 ----- MENU MOBILE new template -----
 --------------------------------- */
@@ -6336,8 +6365,103 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*::::::::::::::::---------------::::::::::::::::::
 :::::::::::::::::: BOTTON TIPO 1 ::::::::::::::::::
 ::::::::::::::::::---------------::::::::::::::::::*/
-.btn:not(.btn-banner) {
-  border-radius: 0rem;
+.btn,
+.divbuttonstyle,
+input[type="submit"],
+input[type="button"],
+a.divbuttonstyle:hover,
+div.divbuttonstyle:hover,
+.divbuttonstyle:hover,
+button.divbuttonstyle:hover,
+button.btn:hover,
+.btn:hover,
+.btn-primary:hover,
+input:hover[type="submit"],
+input:hover[type="button"],
+li:nth-child(n) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.carrellocustom .button-carrello,
+.carrellocustom .button-carrello:active,
+.carrellocustom .button-carrello:visited,
+.carrellocustom .button-carrello:focus,
+.btn-black-outline,
+.btn-black-outline:active,
+.btn-black-outline:visited,
+.btn-black-outline:focus .btn .btn-black,
+.btn .btn-black:active,
+.btn .btn-black:visited,
+.btn .btn-black:focus,
+.btn-white-outline,
+.btn-white-outline:active,
+.btn-white-outline:visited,
+.btn-white-outline:focus .btn .btn-white,
+.btn .btn-white:active,
+.btn .btn-white:visited,
+.btn .btn-white:focus,
+.carrellocustom .button-carrello,
+.carrellocustom .button-carrello:active,
+.carrellocustom .button-carrello:visited,
+.carrellocustom .button-carrello:focus,
+.carrellocustomoutline .button-carrello,
+.carrellocustomoutline .button-carrello:active,
+.carrellocustomoutline .button-carrello:visited,
+.carrellocustomoutline .button-carrello:focus,
+.menuzord-menu ul.show li:nth-child(4) a,
+a.btn-black-outline:hover,
+.btn-black-outline:hover,
+.btn .btn-black:hover,
+a.btn-black-outline:active,
+a.btn-black-outline:focus,
+a.btn-transparent-outline:hover,
+.btn-transparent-outline:hover,
+.btn .btn-transparent:hover,
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
+.btn-banner,
+.btn-banner:active,
+.btn-banner:visited,
+.btn-banner:focus .btn .btn-banner,
+.btn .btn-banner:active,
+.btn .btn-banner:visited,
+.btn .btn-banner:focus,
+.button-carrello:hover,
+.button-carrello-vedi:hover,
+.button-carrello1:hover,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.carrellocustom .button-carrello:hover,
+a.btn-black-outline:hover,
+.btn-black-outline:hover,
+.btn .btn-black:hover,
+.btn-transparent-outline,
+.btn-transparent-outline,
+.btn-transparentoutline:active,
+.btn-transparentoutline:active,
+.btn-transparent-outline:visited,
+.btn-transparent-outline:visited,
+.btn-transparent-outline:focus .btn .btn-transparent,
+.btn-transparent-outline:focus .btn .btn-transparent,
+.btn .btn-transparent:active,
+.btn .btn-transparent:active,
+.btn .btn-transparentk:visited,
+.btn .btn-transparentk:visited,
+.btn .btn-transparent:focus,
+.btn .btn-transparent:focus,
+.btn-banner:hover,
+.btn-banner:hover,
+.btn .btn-banner:hover,
+.btn .btn-banner:hover,
+.button-carrello-animate:hover {
+  border-radius: 0rem !important;
 }
 a.divbuttonstyle,
 .divbuttonstyle,
@@ -6409,6 +6533,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .carrellocustomoutline .button-carrello:active,
 .carrellocustomoutline .button-carrello:visited,
 .carrellocustomoutline .button-carrello:focus,
+.menuzord-menu ul.show li:nth-child(4) a,
 a.btn-black-outline:hover,
 .btn-black-outline:hover,
 .btn .btn-black:hover,
@@ -6605,6 +6730,7 @@ input:hover[type="button"],
   background-color: #ffffff !important;
   box-shadow: inset 0 0 0 1px #fcefcc;
   opacity: 1;
+  border-radius: 0 !Important;
 }
 a.divbuttonstyle:hover::before,
 div.divbuttonstyle:hover::before,
@@ -6675,6 +6801,7 @@ footer .divbuttonstyle:visited,
 footer .divbuttonstyle:active,
 footer .divbuttonstyle:hover {
   padding: 0.63rem 0.5rem !important;
+  border-radius: 0 !Important;
 }
 /*STILE PULSANTE color OUTLINE*/
 .carrellocustom .button-carrello,
@@ -6858,7 +6985,8 @@ button.btn-white-outline:hover::after {
 .carrellocustom .button-carrello {
   width: 100%;
 }
-.carrellocustom i.fa.fa-cart-plus {
+.carrellocustom i.fa.fa-cart-plus,
+.carrellocustom i.fa.fa-eye {
   padding: 0;
 }
 .carrellocustom .button-carrello,
@@ -7005,6 +7133,16 @@ button.btn-white-outline:hover::after {
   transition-delay: 0s, 0.25s, 0s;
 }
 /*STILE PULSANTE CARRELLO*/
+.button-carrello-animate:hover,
+.button-carrello-vedi:hover,
+.btn-carrello-esaurito:hover,
+.button-carrello:hover,
+.btn-banner,
+.btn-banner:hover,
+.btn .btn-banner:hover,
+.button-carrello-animate:hover {
+  border-radius: 50% !Important;
+}
 .menuzord-menu li:nth-child(4) a:hover {
   background-color: #fff !important;
   color: #f3c649 !important;
@@ -7037,6 +7175,9 @@ button.btn-white-outline:hover::after {
   box-shadow: inset 0 0 0 1px #f3c649;
   opacity: 1;
 }
+.menuzord-menu li:nth-child(5) a {
+  color: #fff !important;
+}
 .menuzord-menu .megamenu li:nth-child(4) a:hover {
   background-color: #fff !important;
   color: #f3c649 !important;
@@ -7065,6 +7206,42 @@ button.btn-white-outline:hover::after {
   box-shadow: inset 0 0 0 0 #f3c649;
   border: none;
   border-radius: 50%;
+}
+.menuzord-menu ul.show li:nth-child(4) a {
+  font-size: 0.8rem !important;
+  border-radius: 0;
+}
+.menuzord-menu ul.show li:nth-child(4) a:hover {
+  background-color: #fff !important;
+  color: #f3c649 !important;
+  box-shadow: inset 0 0 0 1px #ebf6f6;
+}
+/*PULSANTE AGGIUNGI SCHEDA ACQUISTO*/
+.carrellocustom .button-carrello.button-carrello-squared i:before {
+  content: '\f217';
+  text-transform: uppercase;
+}
+.carrellocustom .button-carrello.button-carrello-squared i:after {
+  content: '  AGGIUNGI';
+  font-family: 'Roboto', sans-serif !important;
+}
+.carrellocustom .button-carrello.btn-carrello-esaurito i {
+  opacity: 1 !important;
+}
+.carrellocustom .button-carrello.btn-carrello-esaurito i:before {
+  content: '';
+  font-family: 'Roboto', sans-serif !important;
+}
+.carrellocustom .button-carrello.btn-carrello-esaurito i:after {
+  content: 'ARTICOLO ESAURITO';
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+/*pulsante newsletter*/
+.fa-paper-plane {
+  line-height: 1.3;
 }
 /*::::::::::::::::---------------::::::::::::::::::
 :::::::::::::::::: BOTTON TIPO 2 ::::::::::::::::::
@@ -7177,6 +7354,7 @@ a.divbuttonstyle:hover:after, div.divbuttonstyle:hover:after, .divbuttonstyle:ho
 /*@title-text-transform: uppercase;*/
 /**/
 /**/
+/*@body-size: 1.35rem;*/
 /*@body-color: @secondary-color;*/
 /**/
 /*----------------------------------
