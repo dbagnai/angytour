@@ -4099,21 +4099,15 @@ button.js-roundedpush:hover {
 /*.headerspacer-home {
     padding-top: 0;
 }*/
-@media (max-width: 768px) {
+@media (max-width: 1179px) {
   #divContainerb1,
-  #divContainerb3 {
+  #divContainerb3,
+  #divContainermobile {
     height: calc(100vh - 90px) !important;
   }
   #divContainerb2 {
     height: calc(50vh - 90px) !important;
     /*testata pagine metà altezza*/
-  }
-}
-@media (max-width: 767px) {
-  #divContainerb1,
-  #divContainerb2,
-  #divContainerb3 {
-    height: calc(100vh - 90px) !important;
   }
 }
 @media (max-width: 576px) {
@@ -4122,6 +4116,10 @@ button.js-roundedpush:hover {
     width: 100vh !important;
     height: 100vh !important;
   }
+}
+/*SOLO TESTATA HOME*/
+#divContainerb1 .tp-caption.very_big_white {
+  /*&:extend(.gradient-overlay-top-bottom);*/
 }
 .rev-slider-full {
   /*max-height: 480px;*/
@@ -4304,10 +4302,6 @@ button.js-roundedpush:hover {
   /* Versione con gradiente sfumato */
   /*&:extend(.gradient-overlay-righttoleft);*/
   /*&:extend(.gradient-overlay-lefttoright);*/
-}
-/*SOLO TESTATA HOME*/
-#divContainerb1 .tp-caption.very_big_white {
-  /*&:extend(.gradient-overlay-top-bottom);*/
 }
 .gradient-overlay-righttoleft {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,000000+100&0+40,0+40,0+46,0.37+61,0.49+75,0.65+92 */
@@ -4757,7 +4751,7 @@ button.js-roundedpush:hover {
     overflow-wrap: break-word;
 }*/
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1179px) {
   #divContainerb1 {
     background-color: #eee;
     height: calc(100vh - 95px - 40px - 70px) !important;
@@ -4765,6 +4759,11 @@ button.js-roundedpush:hover {
   #divContainerb2 {
     background-color: #eee;
     height: calc(100vh - 95px - 40px - 70px) !important;
+    /* height: calc(((80vw)*105)/250) !important;*/
+  }
+  #divContainermobile {
+    background-color: transparent;
+    height: calc(100vh - 98px - 40px) !important;
   }
   .fixedtop-home {
     display: none !important;

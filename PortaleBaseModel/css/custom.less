@@ -4422,8 +4422,8 @@ button.js-roundedpush:hover {
     padding-top: 0;
 }*/
 
-@media (max-width: 768px) {
-    #divContainerb1, #divContainerb3 {
+@media (max-width: 1179px) {
+    #divContainerb1, #divContainerb3, #divContainermobile {
         height: calc(100vh - 90px) !important;
     }
 
@@ -4432,19 +4432,17 @@ button.js-roundedpush:hover {
     }
 }
 
-
-@media (max-width: 767px) {
-    #divContainerb1, #divContainerb2, #divContainerb3 {
-        height: calc(100vh - 90px) !important;
-    }
-}
-
+ 
 @media (max-width: 576px) {
     #divContainerb3 .defaultimg {
         transform: rotate(-90deg);
         width: 100vh !important;
         height: 100vh !important;
     }
+}
+/*SOLO TESTATA HOME*/
+#divContainerb1 .tp-caption.very_big_white {
+    /*&:extend(.gradient-overlay-top-bottom);*/
 }
 
 .rev-slider-full {
@@ -4653,10 +4651,6 @@ button.js-roundedpush:hover {
 }
 
 
-/*SOLO TESTATA HOME*/
-#divContainerb1 .tp-caption.very_big_white {
-    /*&:extend(.gradient-overlay-top-bottom);*/
-}
 
 @media (max-width: 789px) {
 }
@@ -5040,7 +5034,7 @@ button.js-roundedpush:hover {
 }*/
 
 /*Banner fullscreen slider con menu sopra si attiva sul maininit.js riga 105 if(TRUE/FALSE)*/
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1179px) {
     #divContainerb1 {
         background-color: #eee;
         height: calc(100vh - 95px - 40px - 70px) !important;
@@ -5049,6 +5043,11 @@ button.js-roundedpush:hover {
     #divContainerb2 {
         background-color: #eee;
         height: calc(100vh - 95px - 40px - 70px) !important;
+       /* height: calc(((80vw)*105)/250) !important;*/
+    }
+    #divContainermobile {
+        background-color: transparent;
+        height: calc(100vh - 98px - 40px) !important;
     }
 
     .fixedtop-home {
