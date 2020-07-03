@@ -190,6 +190,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     string location = (maildata.GetValueOrDefault("location") ?? "");
                     string regione = (maildata.GetValueOrDefault("regione") ?? "");
                     string adulti = (maildata.GetValueOrDefault("adulti") ?? "");
+                    string persone = (maildata.GetValueOrDefault("persone") ?? "");
                     string bambini = (maildata.GetValueOrDefault("bambini") ?? "");
                     string arrivo = (maildata.GetValueOrDefault("arrivo") ?? "");
                     string partenza = (maildata.GetValueOrDefault("partenza") ?? "");
@@ -255,6 +256,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     if (tipocontenuto == "Prenotaapt")
                     {
                         Descrizione += " <br/> Ristorante:" + location1;
+                        Descrizione += " <br/> Persone:" + persone;
                         Descrizione += " <br/> Data richiesta:" + datarichiesta + " Orario Richiesto: " + orario;
                     }
                     Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;

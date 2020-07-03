@@ -81,11 +81,11 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
                 //if (!string.IsNullOrEmpty(idOfferta))
                 //{
-                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
-                    metarobots.Attributes["Content"] = "noindex,follow";
+                HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                metarobots.Attributes["Content"] = "noindex,follow";
                 //}
 
-              //  CaricaControlliJS();
+                //  CaricaControlliJS();
 
 
                 string conversione = CaricaValoreMaster(Request, Session, "conversione");
@@ -230,8 +230,17 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 plhForm.Visible = true;
                 pnlPrenotazione.Visible = true; //Sezione per completamento form prenotazione
                 divRoutes.Visible = false;
-               // divTitlemail.Visible = false;
+                // divTitlemail.Visible = false;
 
+                //CaricaDdlsedi("");
+                break;
+            case "Prenotaapt":
+                plhDove.Visible = false;
+                plhForm.Visible = true;
+                divOrario.Visible = true;
+                pnlPrenotazione.Visible = false; //Sezione per completamento form prenotazione
+                divRoutes.Visible = false;
+                // divTitlemail.Visible = false;
                 //CaricaDdlsedi("");
                 break;
             //case "Acquistousato":
@@ -262,7 +271,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, strigaperricerca);
         if (content != null && content.Id != 0)
         {
-            htmlPage =  ReplaceLinks(ReplaceAbsoluteLinks(content.DescrizionebyLingua(Lingua)));
+            htmlPage = ReplaceLinks(ReplaceAbsoluteLinks(content.DescrizionebyLingua(Lingua)));
 
         }
         custombind cb = new custombind();

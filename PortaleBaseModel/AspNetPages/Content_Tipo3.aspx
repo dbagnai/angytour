@@ -81,8 +81,41 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div id="divOrario" runat="server" visible="false">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input mt-0">
+                                                                        <script>
+                                                                            jQuery(function ($) {
+                                                                                $("#ctl00_ContentPlaceHolder1_txtPersone").mask("99", { placeholder: " ", autoclear: false });
+                                                                            });
+                                                                        </script>
+                                                                        <asp:TextBox ID="txtPersone" Width="99%" runat="server"
+                                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPersone") %>' />
+                                                                        <label class="ui-icon"><i class="fa fa-group"></i></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input">
+                                                                        <asp:TextBox   autocomplete="off"  CssClass ="form-control" ID="txtData" Width="99%" runat="server"
+                                                                            placeholder='<%# references.ResMan("Common", Lingua,"FormData") %>' />
+                                                                        <label class="ui-icon"><i class="fa fa-calendar"></i></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="ui-input">
+                                                                        <asp:TextBox ID="txtOrario" Width="99%" runat="server"
+                                                                            class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormOrario") %>' />
+                                                                        <label class="ui-icon"><i class="fa fa-clock-o"></i></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <asp:Panel runat="server" ID="pnlPrenotazione" Visible="false">
+
                                                             <%--<div class="row" id="divSelezione1" runat="server" visible="false">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input" runat="server" id="divListaservizi">
@@ -105,25 +138,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row" id="divOrario" runat="server" visible="false">
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <Ajax:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
-                                                                TargetControlID="txtData">
-                                                            </Ajax:CalendarExtender>
-                                                            <asp:TextBox class="form-control" ID="txtData" Width="99%" runat="server"
-                                                                placeholder='<%# references.ResMan("Common", Lingua,"FormData %>' />
-                                                            <label class="ui-icon"><i class="fa fa-calendar"></i></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="ui-input">
-                                                            <asp:TextBox ID="txtOrario" Width="99%" runat="server"
-                                                                class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormOrario %>' />
-                                                            <label class="ui-icon"><i class="fa fa-clock-o"></i></label>
-                                                        </div>
-                                                    </div>
-                                                </div>--%>
+                                                            --%>
                                                             <%-- <div class="row" runat="server" visible="false">
                                                     <div class="col-sm-6">
                                                         <div class="ui-input">
@@ -384,6 +399,7 @@
                                                                         contactdatas.bambini = $("[id$='txtBambini']").val();
                                                                         contactdatas.arrivo = $("[id$='txtArrivo']").val();
                                                                         contactdatas.partenza = $("[id$='txtPartenza']").val();
+                                                                        contactdatas.persone = $("[id$='txtPersone']").val();
                                                                         contactdatas.datarichiesta = $("[id$='txtData']").val();
                                                                         contactdatas.orario = $("[id$='txtOrario']").val();
                                                                         contactdatas.name = $("[id$='txtNome']").val();
