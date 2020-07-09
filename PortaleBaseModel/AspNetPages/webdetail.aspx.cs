@@ -488,6 +488,7 @@ public partial class _webdetail : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
                 divContact.Visible = false;
+                divContactBelow.Visible = true;
 
                 if (!JavaInjection)
                 {
@@ -499,7 +500,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-calltoaction.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
@@ -515,6 +516,7 @@ public partial class _webdetail : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
                 divContact.Visible = false;
+                divContactBelow.Visible = true;
 
                 if (!JavaInjection)
                 {
@@ -526,7 +528,7 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-gallerymasonry.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-gallerymasonry1.html,divItemContainter2, divitem,false,true, " + idOfferta + "\"");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 

@@ -1,0 +1,135 @@
+﻿<style>
+    .imagesgalllerysimple div:nth-child(2) {
+        width: 100%;
+    }
+    .grid {
+        margin: -0.25rem;
+    }
+    .grid-sizer, .grid-item {
+        padding: 0.25rem;
+    }
+    @media (min-width: 992px) {
+        .grid-sizer, .grid-item {
+            width: 33.333%;
+        }
+    }
+</style>
+
+<div id="replaceid" class="blog-post mt-0 mt-lg-4 p-0 text-left" itemscope="" itemtype="http://schema.org/Article">
+    <div class="row mx-0 mx-sm-0">
+        <!------------------------------
+    ------ COLONNA 1 IMMAGINE ------
+    ------------------------------->
+        <!-- Placeholder per la owl gallery -->
+        <div class="col-12 col-lg-8 order-2 order-lg-first">
+            <div class="grid mb-0 imagesgalllerysimple bind" mybind="Id" myvalue="" myvalue1="grid-item" myvalue2="prettyphoto" style="max-height:1200px"></div>
+
+            <!------- DESCRIZIONE PRODOTTO ------>
+            <div id="accordion1" class="w-100 faq-section mt-3">
+                <div class="card">
+                    <div class="card-header" id="headingOne1">
+                        <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                            <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion1">
+                        <div class="card-body px-3 py-3" itemprop="description">
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--ULTERIORI INFORMAZIONI-->
+                <div class="card">
+                    <div class="card-header" id="headingTwo1">
+                        <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                            <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
+                        <div class="card-body px-3 py-3">
+                            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--INFORMAZIONI PER ACQUISTO-->
+                <!--<div class="card">
+            <div class="card-header" id="headingThree1">
+                <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
+                    <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                    </h4>
+                </a>
+            </div>
+            <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
+                <div class="card-body px-3 pt-3 pb-0">
+                    <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
+                </div>
+            </div>
+        </div>-->
+            </div>
+        </div>
+
+        <!---------------------------------------------
+    ------ COLONNA 2 TITOLO + CALL TO ACTION ------
+    ---------------------------------------------->
+
+        <div class="col-12 col-lg-4 mt-3 mb-0 mt-lg-0 order-first order-lg-2">
+            <div class="position-sticky" style="top:120px">
+                <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
+                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                        <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                        <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                    </a>
+                </div>
+
+                <!-- RIQUADRO INFO SOTTO TITOLO -->
+                <div class="w-100 mt-3"></div>
+                <!--riquadro hai bisogno di aiuto-->
+                <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
+                    <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                </div>
+                <!-- pulsanti info utili 1 -->
+                <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                <!-- pulsanti social -->
+                <p>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox pt-3 pt-md-0 mx-auto" style="width: fit-content;"></div>
+                </p>
+            </div>
+        </div>
+
+
+        
+
+        <!---------------------------------------------------
+    ------ COMANDI NAVIGAZIONE ------
+    ---------------------------------------------------->
+        <div class="col-12 pt-4 pb-0 pb-md-3 order-last">
+            <div class="w-100 border-top bd-secondary-color pt-4"></div>
+            <div class="d-none d-md-block float-none mr-0 mb-3 float-sm-left mr-sm-3 mb-sm-0">
+                <a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-0 float-none d-sm-block float-sm-right">
+                <div class="mr-0 float-sm-left mr-sm-3">
+                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                        <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"></span>
+                        <div class="d-inline-block">
+                        </div>
+                    </a>
+                </div>
+                <div class="float-sm-right">
+                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                        <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"></span>
+                        <div class="d-inline-block align-top">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>

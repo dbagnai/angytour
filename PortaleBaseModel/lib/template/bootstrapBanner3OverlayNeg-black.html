@@ -1,5 +1,5 @@
 ﻿<style>
-    .squarevariable .imgovercontainer, .gradient-overlay-my-bottomtop, .oversquare {
+    .squarevariable .imgovercontainer, .gradient-overlay-black-bottomtop, .oversquare {
         -webkit-transition: all .35s ease;
         transition: all .35s ease;
     }
@@ -14,7 +14,7 @@
             transition: all 1.0s ease;
         }
 
-            .squarevariable .imgovercontainer:hover .gradient-overlay-my-bottomtop, .squarevariable .imgovercontainer:hover .oversquare {
+            .squarevariable .imgovercontainer:hover .gradient-overlay-black-bottomtop, .squarevariable .imgovercontainer:hover .oversquare {
                 -webkit-transform: scale(0.833) rotate(-5deg);
                 -moz-transform: scale(0.833) rotate(-5deg);
                 -ms-transform: scale(0.833) rotate(-5deg);
@@ -35,7 +35,7 @@
                 background: none !important;
             }
 
-    /*IN CASO DI BANNER N° 4 a TUTTA LUNGHEZZA*/
+            /*IN CASO DI BANNER N° 4 a TUTTA LUNGHEZZA*/
     /*div.elemento-catalogo:nth-child(4) {
         flex: 0 0 100% !Important;
         max-width: 100% !important;
@@ -49,7 +49,7 @@
             transform: scale(1.5) rotate(5deg);
         }
 
-            div.elemento-catalogo:nth-child(4) .imgovercontainer:hover .gradient-overlay-my-bottomtop, div.elemento-catalogo:nth-child(4) .imgovercontainer:hover .oversquare {
+            div.elemento-catalogo:nth-child(4) .imgovercontainer:hover .gradient-overlay-black-bottomtop, div.elemento-catalogo:nth-child(4) .imgovercontainer:hover .oversquare {
                 -webkit-transform: scale(0.667) rotate(-5deg);
                 scale(0.66) rotate(-5deg);
                 scale(0.670) rotate(-5deg);
@@ -66,18 +66,18 @@
 
 <div class="row no-gutters squarevariable" id="replaceid">
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <div class="card m-2 border-tipo1" style="overflow:hidden">
+        <div class="card m-2 border-tipo2 p-0" style="overflow: hidden; border-radius: .25rem !important;">
             <a class="bind d-block" preload target="_self" href="link" title="titolo" mybind="Id">
                 <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id" style="padding-bottom: 100%;">
                     <div class="oversquare position-absolute"></div>
                     <!--<div class="card-img-overlay card-gradient-overlay">-->
-                    <div class="card-img-overlay gradient-overlay-my-bottomtop">
-                        <div style="position:absolute;display:block;z-index:96;bottom:10px;width:90%;text-align:center">
-                            <h3 class="card-title titolo-offerta mb-1">
+                    <div class="card-img-overlay gradient-overlay-black-bottomtop">
+                        <div style="position:absolute;display:block;z-index:96;bottom:20px;width: calc(100% - 40px);text-align:center">
+                            <h3 class="card-title titolo-offerta scalablefont-medium-big">
                                 <span class="bind text-white" mybind="Id" myvalue="titolo" format="formattitle"></span>
                             </h3>
-                            <div class="w-50 mt-1 mx-auto mb-1" style="border-bottom: 3px solid;color:#ffffff"></div>
-                            <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-4">
+                            <div class="w-50 mx-auto my-2" style="border-bottom: 2px solid;color:#ffffff"></div>
+                            <h4 class="card-subtitle sottotitolo-offerta scalablefont-small mt-0 mb-4 mb-sm-5">
                                 <span class="bind text-white" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             </h4>
                         </div>
