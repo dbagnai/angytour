@@ -242,6 +242,8 @@ path.bg-light-color-path {
 
 .bg-color-sottomeu-tenue {
     background: @color-sottomeu-tenue !important;
+    background-image: @pattern-image-sottomenu-tenue !important;
+    background-size: @pattern-size-sottomenu-tenue !important;
 }
 
 .bg-color-sottomeu-normal {
@@ -3423,7 +3425,16 @@ select.form-control:not([size]):not([multiple]) {
     z-index: 0;
     background: linear-gradient(180deg, @bg-light-color, rgba(@bg-light-color, 0.50));
 }
-
+.mbr-overlay-sfumato2 {
+    opacity: 1;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, rgba(@bg-light-color, 0.50), rgba(@bg-light-color, 0.50));
+}
 /*-------LOADER-------*/
 /* ==========================================================================
    Page Loader
@@ -5174,6 +5185,18 @@ button.js-roundedpush:hover {
         left: 17px;
     }
 
+    .megamenu.dropdown-home::before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 18px solid transparent;
+        border-right: 0px solid transparent;
+        border-bottom: 22px solid #FFFFFF;
+        top: -21px;
+        left: calc(50% - 40px);
+    }
+
     .dropdown-home::after {
         content: "";
         width: 0;
@@ -5310,26 +5333,27 @@ button.js-roundedpush:hover {
     /* modifica meuzord per megamenu grande con molti link*/
 
     .menuzord-menu > li > .megamenu {
-        padding: 30px 30px;
+        padding: 30px 50px;
         left: unset;
         border: 1px solid @primary-color;
-        /*margin: 10px -20px 0;
+        /*-----*/
+        margin: 10px -20px 0;
     width: calc(100% + 40px);
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
     -webkit-box-shadow: 0 4px 6px -6px #222;
     -moz-box-shadow: 0 4px 6px -6px #222;
-    box-shadow: 0 4px 6px -6px #222;*/
+    box-shadow: 0 4px 6px -6px #222;
     }
 
-
+    /* modifica meuzord per megamenu grande con molti link*/
     .menuzord-menu > li > .megamenu.megamenu-full-text {
         padding: 0 30px 30px;
         left: unset !important;
-        /*right: 0 !important;*/
-        right: unset;
-        border: 1px solid @primary-color;
+        right: 0 !important;
+        /*right: unset;*/
+        border: 1px dashed @primary-color;
         margin: 10px 40px 0;
         width: auto;
         border-left-style: solid;
@@ -5344,6 +5368,19 @@ button.js-roundedpush:hover {
         margin-top: 30px;
         /*padding-left: 50px !important;
     background-color: aliceblue !important;*/
+    }
+
+    .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li a {
+        color: @submenu-color;
+    }
+
+    .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li:hover a {
+        color: @submenu-hover-color;
+        border: none;
+    }
+
+    .menuzord-menu > li > .megamenu.megamenu-full-text a:before, .menuzord-menu > li > .megamenu.megamenu-full-text a:after {
+        border: none;
     }
 }
     @media (max-width: 1179px) {
@@ -5382,9 +5419,10 @@ button.js-roundedpush:hover {
         width: 100%;
     }
 
-    .megamenu-menulist li {
-        width: 100%;
-    }
+.megamenu-menulist li {
+    width: 100%;
+    list-style-type: none;
+}
 
     .megamenu-menulist > a {
         display: block;
@@ -5394,7 +5432,7 @@ button.js-roundedpush:hover {
     }
 
     .megamenu-menulist li > a {
-        padding: 10px 5px !important;
+        padding: 10px 8px !important;
         line-height: 1.6rem;
     }
 
