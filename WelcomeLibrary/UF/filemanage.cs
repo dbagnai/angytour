@@ -89,7 +89,8 @@ namespace WelcomeLibrary.UF
                         else
                         {
                             Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                            if (file.ContentType == "image/jpeg" || file.ContentType == "image/pjpeg" || file.ContentType == "image/gif" || file.ContentType == "image/png")
+                            if (file.ContentType == "image/jpeg" || file.ContentType == "image/pjpeg" || file.ContentType == "image/png")
+                            //if (file.ContentType == "image/jpeg" || file.ContentType == "image/pjpeg" || file.ContentType == "image/gif" || file.ContentType == "image/png")
                             {
                                 int maxheight = 1000;
                                 int maxwidth = 1000;
@@ -244,7 +245,8 @@ namespace WelcomeLibrary.UF
                         else
                         {
                             Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                            if (UploadControl.PostedFile.ContentType == "image/jpeg" || UploadControl.PostedFile.ContentType == "image/pjpeg" || UploadControl.PostedFile.ContentType == "image/gif")
+                            //if (UploadControl.PostedFile.ContentType == "image/jpeg" || UploadControl.PostedFile.ContentType == "image/pjpeg" || UploadControl.PostedFile.ContentType == "image/gif")
+                            if (UploadControl.PostedFile.ContentType == "image/jpeg" || UploadControl.PostedFile.ContentType == "image/pjpeg" || UploadControl.PostedFile.ContentType == "image/png")
                             {
                                 int maxheight = 1000;
                                 int maxwidth = 1000;
@@ -446,7 +448,8 @@ namespace WelcomeLibrary.UF
                     if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
                 }
                 FileInfo fiorig = new FileInfo(phyorginalpath + "\\" + Nomefile);
-                if (fiorig.Extension == ".jpeg" || fiorig.Extension == ".jpg" || fiorig.Extension == ".gif" || fiorig.Extension == ".png")
+                //if (fiorig.Extension == ".jpeg" || fiorig.Extension == ".jpg" || fiorig.Extension == ".gif" || fiorig.Extension == ".png")
+                if (fiorig.Extension == ".jpeg" || fiorig.Extension == ".jpg" || fiorig.Extension == ".png")
                 {
                     using (StreamReader file = new StreamReader(phyorginalpath + "\\" + Nomefile))
                     {
@@ -485,7 +488,33 @@ namespace WelcomeLibrary.UF
                         else { responsestr += ("La foto non è stata caricata! (Problema nel caricamento)"); }
                     }
                 }
+                else
+                {
+                    //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
+                    fiorig.CopyTo(pathDestinazione + "\\" + NomeCorretto);
+                    try
+                    {
+                        try
+                        {
+                            offerteDM offDM = new offerteDM();
+                            bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, "", progressivofile);
+                        }
+                        catch (Exception errins)
+                        {
+                            responsestr = errins.Message;
+                        }
 
+                        //    output.Text += "Documento Inserito Correttamente<br/>";
+
+                    }
+                    catch (Exception error)
+                    {
+                        //CANCELLO IL FILE UPLOADATO
+                        if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
+                        //AGGIORNO IL DETAILSVIEW
+                        responsestr = error.Message;
+                    }
+                }
             }
             catch (Exception errorecaricamento)
             {
@@ -710,7 +739,8 @@ namespace WelcomeLibrary.UF
                 if (!System.IO.File.Exists(fileorigine))
                     return false;
 
-                if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("gif") || fileorigine.ToString().ToLower().EndsWith("png")))
+                //if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("gif") || fileorigine.ToString().ToLower().EndsWith("png")))
+                if (!(fileorigine.ToString().ToLower().EndsWith("jpg") ||   fileorigine.ToString().ToLower().EndsWith("png")))
                     return false;
 
                 bool existsanteprima = false;
@@ -1017,7 +1047,8 @@ namespace WelcomeLibrary.UF
                 if (!NomeAnteprima.ToString().ToLower().StartsWith("http://") && !NomeAnteprima.ToString().ToLower().StartsWith("https://"))
                 {
                     if (CodiceTipologia != "" && idOfferta != "")
-                        if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
+                        //if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
+                        if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") ||  NomeAnteprima.ToString().ToLower().EndsWith("png")))
                         {
                             ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
                             physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
@@ -1072,7 +1103,8 @@ namespace WelcomeLibrary.UF
             string retname = pathimmagine;
             int actwidth = 0;
             if (!string.IsNullOrEmpty(pathimmagine) && pathimmagine.LastIndexOf('.') != -1)
-                if ((pathimmagine.ToString().ToLower().EndsWith("jpg") || pathimmagine.ToString().ToLower().EndsWith("gif") || pathimmagine.ToString().ToLower().EndsWith("png")))
+                //if ((pathimmagine.ToString().ToLower().EndsWith("jpg") || pathimmagine.ToString().ToLower().EndsWith("gif") || pathimmagine.ToString().ToLower().EndsWith("png")))
+                if ((pathimmagine.ToString().ToLower().EndsWith("jpg") ||  pathimmagine.ToString().ToLower().EndsWith("png")))
                     if (int.TryParse(viewportw, out actwidth))
                     {
                         string modifier = "";
