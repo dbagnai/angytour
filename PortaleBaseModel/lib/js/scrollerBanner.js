@@ -23,7 +23,7 @@ function injectScrollerAndLoadBannerinner(type, container, controlid, listShow, 
 
         var params = {};
         params.container = container;/*Inserisco il nome dle container nei parametri per uso successivo nel binding*/
-         params.maxelement = maxelement;
+        params.maxelement = maxelement;
         params.listShow = listShow;
         params.scrollertype = scrollertype;
         params.tblsezione = tblsezione;
@@ -106,9 +106,9 @@ function BindScrollerBanner(el, localObjects) {
         //htmlitem = FillBindControls(jquery_obj, data[j]);
         //htmlout += $(containeritem).html(htmlitem.html()).outerHTML() + "\r\n";
         FillBindControls(jquery_obj, data[j], localObjects, "",
-                    function (ret) {
-                        htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
-                    });
+            function (ret) {
+                htmlout += $(containeritem).html(ret.html()).outerHTML() + "\r\n";
+            });
     }
     //$('#' + el).parent().parent().parent().parent().parent().show();
     //Inseriamo htmlout nel contenitore  $('#' + el).html e inizializziamo lo scroller
@@ -120,8 +120,7 @@ function BindScrollerBanner(el, localObjects) {
     initScrollerBanner(el, globalObject[el + "params"].scrollertype);
 };
 
-function initScrollerBanner(el, type)
-{
+function initScrollerBanner(el, type) {
     setTimeout(function () {
         var scrollertype = type;
         //console.log(scrollertype);
@@ -153,11 +152,13 @@ function ScrollerInitBanner(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [4],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 3], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
@@ -175,11 +176,13 @@ function ScrollerInitBanner1(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [2],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
@@ -197,11 +200,13 @@ function ScrollerInitBanner2(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [3],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
@@ -220,11 +225,13 @@ function ScrollerInitBanner4(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [6],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
@@ -243,11 +250,13 @@ function ScrollerInitBanner5(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [5],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
@@ -265,11 +274,13 @@ function ScrollerInitBanner3(controlid) {
         var owl = jQuery("#" + controlid);
         owl.owlCarousel({
             items: [8],
-            autoPlay: 5000,
+            //autoPlay: 5000,
             itemsDesktop: [1199, 2], // i/tems between 1000px and 601px
             itemsTablet: [979, 2], // items between 600 and 0;
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-            slideSpeed: 1000
+            slideSpeed: 1000,
+            afterInit: lazyLoad,
+            afterMove: lazyLoad
         });
 
         // Custom Navigation Events
