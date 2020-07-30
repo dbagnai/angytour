@@ -17,13 +17,29 @@ var CookiesPolicy = {
 
         CookiesPolicy.id_attivita = id_attivita;
         CookiesPolicy.lang = lang;
-        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'it/s/politica-cookie-5';
-        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'en/s/politica-cookie-5';
+        CookiesPolicy.link_privacy = 'http://' + document.domain + '/' + 'it/politica-cookie-5';
+        CookiesPolicy.link_privacy_en = 'http://' + document.domain + '/' + 'en/politica-cookie-5';
         CookiesPolicy.html_element = CookiesPolicy.CreateHtml();
         CookiesPolicy.css_element = CookiesPolicy.CreateCSS();
         CookiesPolicy.view_element = CookiesPolicy.IsRequiredView();
 
         if (CookiesPolicy.view_element) CookiesPolicy.ViewCookiesPolicy();
+
+        //////////////////////////////////////////////////////////
+        //Spengo i cookies su scroll
+        if (CookiesPolicy.isjQuery())
+            jQuery(window).scroll(function () {
+                if (jQuery(window).scrollTop() > 200) {
+                    if (CookiesPolicy.isjQuery()) {
+                        jQuery('#cookies_policy').remove();
+                    } else {
+                        var el = document.getElementById('cookies_policy');
+                        el.parentNode.removeChild(el);
+                    }
+                }
+            });
+        //////////////////////////////////////////////////////////
+
 
     },
 
