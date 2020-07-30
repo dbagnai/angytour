@@ -35,7 +35,15 @@ function injcCategorieLinksinner(type, container, controlid, listShow, tipologia
 
         globalObject[controlid + "params"] = params;
 
-        CaricaCategorieLinksData(controlid);
+      
+        (function wait() {
+            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
+                CaricaCategorieLinksData(controlid);
+            } else {
+                setTimeout(wait, 300);
+            }
+        })();
+
         //});
     });
 };

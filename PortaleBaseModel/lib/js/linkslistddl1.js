@@ -37,7 +37,17 @@ function InjectCat1livLinksinner(type, container, controlid, listShow, tipologia
 
         globalObject[controlid + "params"] = params;
 
-        CaricaTipologieLinksData(controlid);
+        (function wait() {
+            if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
+
+                CaricaTipologieLinksData(controlid);
+            } else {
+                setTimeout(wait, 300);
+            }
+        })();
+
+
+   
         //});
     });
 }
