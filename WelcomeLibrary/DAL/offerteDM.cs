@@ -3663,7 +3663,7 @@ namespace WelcomeLibrary.DAL
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("des")) etype = "des";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dgb")) etype = "dgb";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dru")) etype = "dru";
-                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dFR")) etype = "dFR";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dfr")) etype = "dfr";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("pro")) etype = "pro";
                     }
                 }
@@ -3717,7 +3717,7 @@ namespace WelcomeLibrary.DAL
                         //LEGGIAMO IL VALORE (descrizione ALLEGATO)
                         item.DescrizioneRU = Value.Substring(i, j);
                         break;
-                    case "dFR":
+                    case "dfr":
                         end = Schema.IndexOf(":", start);
                         i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
                         start = end + 1;
@@ -3840,7 +3840,7 @@ namespace WelcomeLibrary.DAL
                 {
                     item.DescrizioneFR.Replace(":S:", "SSS");//Elimina eventuali presenze
                                                              //del carattere di separazione dalla descrizione
-                    list.Schema += "DFR" + n + ":S:" + pos + ":" + len + ":";
+                    list.Schema += "Dfr" + n + ":S:" + pos + ":" + len + ":";
                     list.Valori += item.DescrizioneFR;
                     pos += len;
                 }
