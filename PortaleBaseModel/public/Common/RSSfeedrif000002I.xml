@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Webmousers Blog Blog</title>
+    <title>Nome Sito Blog</title>
     <link>http://localhost:52646</link>
-    <description>Webmousers Blog</description>
-    <lastBuildDate>Tue, 25 Feb 2020 09:51:48 GMT</lastBuildDate>
+    <description>Nome Sito</description>
+    <lastBuildDate>Wed, 12 Aug 2020 17:40:45 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2020-02-25T09:51+01:00</sy:updateBase>
+    <sy:updateBase>2020-08-12T17:40+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title>notizia 1

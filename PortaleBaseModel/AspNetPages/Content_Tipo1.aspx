@@ -26,33 +26,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <asp:Panel runat="server" ID="pnlNewsletter" Visible="false">
-        <br />
-        <h2 class="h2-section-title animated" data-animtype="flipInY"
-            data-animrepeat="0"
-            data-speed="1s"
-            data-delay="0.2s">
-            <asp:Literal Text='<%# references.ResMan("Common", Lingua,"titoloNewsletterc") %>' runat="server" />
-        </h2>
-        <div class="section-subscribe animated" data-animtype="flipInX"
-            data-animrepeat="0"
-            data-speed="1s"
-            data-delay="0.5s">
-            <p>
-                <asp:Literal Text='<%# references.ResMan("Common", Lingua,"TestoNewsletterForm") %>' runat="server" />
-            </p>
-            <input type="text" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Name .." runat="server" id="txtNome" />
-            <br />
-            <br />
-            <input type="text" name="q" class="subscribe-input text-input" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
-            <button class="subscribe-button icon-email-plane" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter_Click"></button>
-            <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
-        </div>
-    </asp:Panel>
 
+
+    <%--    INIZIALIZZAZIONE GALLERY IN PAGINA CONTENT TIPO1--%>
     <script type="text/javascript">
         $(document).ready(function () {
-         (function wait() {
+            (function wait() {
                 if (typeof $.flexslider == 'function') {
                     inizializzaFlexsliderSchedaGallery();
 
@@ -62,8 +41,6 @@
             })();
         });
         function inizializzaFlexsliderSchedaGallery() {
-
-
             //Plugin: flexslider con funzione di animazione dei messaggi o oggetti sopra
             // ------------------------------------------------------------------
             if ($('#gallery-slider') != null)
@@ -165,8 +142,6 @@
                     $(this).flexslider(sliderSettings);
                 });
             // $('#scheda-slider').resize(); //make sure height is right load assets loaded
-
-
             if ($('#carousel-gallery-slider') != null)
                 $('#carousel-gallery-slider').flexslider({
                     animation: "slide",
@@ -179,10 +154,7 @@
                     asNavFor: '#gallery-slider'
                 });
         }
-
-
     </script>
-
     <div class="row" runat="server" id="divGalleryDetail" visible="false">
         <div class="col-md-1 col-sm-1">
         </div>
@@ -215,6 +187,5 @@
         <div class="col-md-1 col-sm-1">
         </div>
     </div>
-
 </asp:Content>
 

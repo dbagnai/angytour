@@ -38,6 +38,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+path.bg-light-color-path {
+  fill: #fff;
+  stroke: #fff;
+}
 .bg-primary-color {
   background-color: #098f8f !important;
 }
@@ -213,6 +217,8 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .bg-color-sottomeu-tenue {
   background: #fcefcc !important;
+  background-image: url(/images/pattern-bianca1.png) !important;
+  background-size: 25% !important;
 }
 .bg-color-sottomeu-normal {
   background-color: #f3c649 !important;
@@ -1303,7 +1309,7 @@ a.btn-black-outline:hover,
   color: #032f2f !important;
   /*    text-transform: uppercase;*/
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   /*vertical-align: middle !important;*/
   height: auto !important;
   cursor: pointer;
@@ -3252,6 +3258,16 @@ select.form-control:not([size]):not([multiple]) {
   z-index: 0;
   background: linear-gradient(180deg, #ebf6f6, rgba(235, 246, 246, 0.5));
 }
+.mbr-overlay-sfumato2 {
+  opacity: 1;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(235, 246, 246, 0.5), rgba(235, 246, 246, 0.5));
+}
 /*-------LOADER-------*/
 /* ==========================================================================
    Page Loader
@@ -4493,6 +4509,17 @@ button.js-roundedpush:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cf9c8a60', endColorstr='#00ffffff', GradientType=1);
   /* IE6-9 */
 }
+.gradient-overlay-black-bottomtop {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,757575+100&0+67,0.65+70,0.85+77,0.88+96 */
+  background: -moz-linear-gradient(top, gba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, gba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+  /* IE6-9 */
+}
 .gradient-overlay-my-bottomtop {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,757575+100&0+67,0.65+70,0.85+77,0.88+96 */
   background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 67%, rgba(0, 0, 0, 0.55) 70%, rgba(0, 0, 0, 0.75) 77%, rgba(0, 0, 0, 0.78) 96%, rgba(0, 0, 0, 0.78) 100%);
@@ -4856,6 +4883,17 @@ button.js-roundedpush:hover {
     top: -21px;
     left: 17px;
   }
+  .megamenu.dropdown-home::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 18px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 22px solid #FFFFFF;
+    top: -21px;
+    left: calc(50% - 40px);
+  }
   .dropdown-home::after {
     content: "";
     width: 0;
@@ -4973,24 +5011,26 @@ button.js-roundedpush:hover {
   }
   /* modifica meuzord per megamenu grande con molti link*/
   .menuzord-menu > li > .megamenu {
-    padding: 30px 30px;
+    padding: 30px 50px;
     left: unset;
     border: 1px solid #032f2f;
-    /*margin: 10px -20px 0;
+    /*-----*/
+    margin: 10px -20px 0;
     width: calc(100% + 40px);
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
     -webkit-box-shadow: 0 4px 6px -6px #222;
     -moz-box-shadow: 0 4px 6px -6px #222;
-    box-shadow: 0 4px 6px -6px #222;*/
+    box-shadow: 0 4px 6px -6px #222;
   }
+  /* modifica meuzord per megamenu grande con molti link*/
   .menuzord-menu > li > .megamenu.megamenu-full-text {
     padding: 0 30px 30px;
     left: unset !important;
-    /*right: 0 !important;*/
-    right: unset;
-    border: 1px solid #032f2f;
+    right: 0 !important;
+    /*right: unset;*/
+    border: 1px dashed #032f2f;
     margin: 10px 40px 0;
     width: auto;
     border-left-style: solid;
@@ -5004,6 +5044,17 @@ button.js-roundedpush:hover {
     margin-top: 30px;
     /*padding-left: 50px !important;
     background-color: aliceblue !important;*/
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li a {
+    color: #032f2f;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li:hover a {
+    color: #f3c649;
+    border: none;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-text a:before,
+  .menuzord-menu > li > .megamenu.megamenu-full-text a:after {
+    border: none;
   }
 }
 @media (max-width: 1179px) {
@@ -5037,6 +5088,7 @@ button.js-roundedpush:hover {
 }
 .megamenu-menulist li {
   width: 100%;
+  list-style-type: none;
 }
 .megamenu-menulist > a {
   display: block;
@@ -5045,7 +5097,7 @@ button.js-roundedpush:hover {
   width: 100%;
 }
 .megamenu-menulist li > a {
-  padding: 10px 5px !important;
+  padding: 10px 8px !important;
   line-height: 1.6rem;
 }
 .menutext-1 {
@@ -7174,9 +7226,9 @@ button.btn-white-outline:hover::after {
   box-shadow: inset 0 0 0 1px #f3c649;
   opacity: 1;
 }
-.menuzord-menu li:nth-child(5) a {
-  color: #fff !important;
-}
+/*.menuzord-menu li:nth-child(5) a {
+    color: #fff !important;
+}*/
 .menuzord-menu .megamenu li:nth-child(4) a:hover {
   background-color: #fff !important;
   color: #f3c649 !important;
@@ -7220,10 +7272,10 @@ button.btn-white-outline:hover::after {
   content: '\f217';
   text-transform: uppercase;
 }
-.carrellocustom .button-carrello.button-carrello-squared i:after {
-  content: '  AGGIUNGI';
-  font-family: 'Roboto', sans-serif !important;
-}
+/*.carrellocustom .button-carrello.button-carrello-squared i:after {
+    content: '  AGGIUNGI';
+    font-family: @button-font !important;
+}*/
 .carrellocustom .button-carrello.btn-carrello-esaurito i {
   opacity: 1 !important;
 }
@@ -7425,6 +7477,10 @@ a.divbuttonstyle:hover:after, div.divbuttonstyle:hover:after, .divbuttonstyle:ho
 ///////| PATTERN BACKGROUND |///////
 ----------------------------------*/
 /**/
+/**/
+/**/
+/*@pattern-image-sottomenu-tenue: url(/images/pattern-bianca.png);
+@pattern-size-sottomenu-tenue: 50%;*/
 /**/
 /*https: //www.pinterest.it/pin/92534967330776535/*/
 /*https: //www.pinterest.it/pin/625226360758236243/*/

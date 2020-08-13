@@ -91,3 +91,35 @@
 <Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:51:45</Messaggio>
  <Data>25/02/2020 09:51:45</Data>
 <Messaggio>httplocalhost52646Generato sitemap  25/02/2020 09:51:45Terminato Aggiornamento  25/02/2020 09:51:45</Messaggio>
+ <Data>10/08/2020 14:15:50</Data>
+<Messaggio> Application start : 10/08/2020 14:15:48</Messaggio>
+ <Data>10/08/2020 14:15:50</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>10/08/2020 14:16:52</Data>
+<Messaggio>httplocalhost52646Generato sitemap  10/08/2020 14:16:52</Messaggio>
+ <Data>10/08/2020 14:16:52</Data>
+<Messaggio>httplocalhost52646Generato sitemap  10/08/2020 14:16:52Terminato Aggiornamento  10/08/2020 14:16:52</Messaggio>
+ <Data>10/08/2020 14:34:13</Data>
+<Messaggio> Application start : 10/08/2020 14:34:12</Messaggio>
+ <Data>10/08/2020 14:34:13</Data>
+<Messaggio> Global init original path: http://localhost:52646/login.aspx Global init AbsolutePath : /login.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>10/08/2020 14:35:15</Data>
+<Messaggio>httplocalhost52646Generato sitemap  10/08/2020 14:35:15</Messaggio>
+ <Data>10/08/2020 14:35:15</Data>
+<Messaggio>httplocalhost52646Generato sitemap  10/08/2020 14:35:15Terminato Aggiornamento  10/08/2020 14:35:15</Messaggio>
+ <Data>12/08/2020 16:16:10</Data>
+<Messaggio> Application start : 12/08/2020 16:16:07</Messaggio>
+ <Data>12/08/2020 16:16:10</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/08/2020 16:17:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  12/08/2020 16:17:12</Messaggio>
+ <Data>12/08/2020 16:17:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  12/08/2020 16:17:12Terminato Aggiornamento  12/08/2020 16:17:12</Messaggio>
+ <Data>12/08/2020 17:39:42</Data>
+<Messaggio> Application start : 12/08/2020 17:39:40</Messaggio>
+ <Data>12/08/2020 17:39:42</Data>
+<Messaggio> Global init original path: http://localhost:52646/it/esempio-home-banners-alternati-105 Global init AbsolutePath : /it/esempio-home-banners-alternati-105 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>12/08/2020 17:40:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  12/08/2020 17:40:44</Messaggio>
+ <Data>12/08/2020 17:40:44</Data>
+<Messaggio>httplocalhost52646Generato sitemap  12/08/2020 17:40:44Terminato Aggiornamento  12/08/2020 17:40:44</Messaggio>
