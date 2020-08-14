@@ -1,14 +1,15 @@
-﻿
-
-
-<div id="divContainerb1" class="d-none d-sm-block inject d-none my-0 mx-auto position-relative" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
-
-<!--OPZIONE PER MUOVERE ALTROVE I BREADCRUM DI NAVIGAZIONE-->
+﻿<!--OPZIONE PER MUOVERE ALTROVE I BREADCRUM DI NAVIGAZIONE-->
 <div id="breadcrumbmove"></div>
 <script>
-//Muoviamo i breadcrum spostandoli sotto il banner
+    //Muoviamo i breadcrum spostandoli sotto il banner
     jQuery(document).ready(function ($) {
         $("#breadcrumbmove").html($("#breadcrumbContainer").html());
         $("#breadcrumbContainer").html('')
     });
 </script>
+<div id="divContainerb1" class="d-none d-md-block inject d-none my-0 mx-auto position-relative" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-home, false, 1600, 530"></div>
+
+
+<div class="d-block d-md-none inject  my-0 mx-auto position-relative" id="divContainermobile" params="injectSliderAndLoadBanner,sliderBanner1.html, divContainermobile, bannerslidermobile, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, banners-fascia-home, false, 600, 800"></div>
+
+<div id="nav-home-top" style="padding-top: 45.2px; margin-top: -45.2px;"></div>

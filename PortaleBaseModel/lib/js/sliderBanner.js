@@ -185,12 +185,12 @@ function initSlider(idDiv, idContainer, width, height) {
         delay: 5000,
         startwidth: width,
         startheight: height,
-        onHoverStop: "on",
+        onHoverStop: "off",
         thumbWidth: 80,
         thumbHeight: 50,
         thumbAmount: 3,
         hideThumbs: 200,
-        navigationType: "thumb",// use none, bullet or thumb
+        navigationType: "bullet",// use none, bullet or thumb
         navigationArrows: "solo", // nextto, solo, none, nextto questo per le frecce laterali
         navigationStyle: "square",  // round, square, navbar, round-old, square-old, navbar-old 
         navigationHAlign: "center",

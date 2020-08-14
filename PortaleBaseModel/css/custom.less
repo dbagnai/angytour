@@ -5194,7 +5194,7 @@ button.js-roundedpush:hover {
         border-right: 0px solid transparent;
         border-bottom: 22px solid #FFFFFF;
         top: -21px;
-        left: calc(50% - 40px);
+        left: calc(10% - 40px);
     }
 
     .dropdown-home::after {
@@ -5235,7 +5235,7 @@ button.js-roundedpush:hover {
 /*---------------------------*/
 /*------gestione menu stili-------*/
 /*---------------------------*/
-@media (min-width: 1025px) {
+@media (min-width: 1179px) {
     .menuzord, .menuzord *, .menuzord:not(i) {
         font-family: @menu-font;
         border-color: @bg-secondary-color !important;
@@ -5338,23 +5338,23 @@ button.js-roundedpush:hover {
         border: 1px solid @primary-color;
         /*-----*/
         margin: 10px -20px 0;
-    width: calc(100% + 40px);
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    -webkit-box-shadow: 0 4px 6px -6px #222;
-    -moz-box-shadow: 0 4px 6px -6px #222;
-    box-shadow: 0 4px 6px -6px #222;
+        width: calc(100% + 40px);
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        -webkit-box-shadow: 0 4px 6px -6px #222;
+        -moz-box-shadow: 0 4px 6px -6px #222;
+        box-shadow: 0 4px 6px -6px #222;
     }
 
     /* modifica meuzord per megamenu grande con molti link*/
     .menuzord-menu > li > .megamenu.megamenu-full-text {
         padding: 0 30px 30px;
         left: unset !important;
-        right: 0 !important;
-        /*right: unset;*/
+      /*  right: 0px !important;*/
+        right: unset !important;
         border: 1px dashed @primary-color;
-        margin: 10px 40px 0;
+        margin: 10px 0px 0px 0px;
         width: auto;
         border-left-style: solid;
         border-right-style: solid;
@@ -5365,9 +5365,7 @@ button.js-roundedpush:hover {
     }
 
     .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
-        margin-top: 30px;
-        /*padding-left: 50px !important;
-    background-color: aliceblue !important;*/
+        margin-top: 30px; 
     }
 
     .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li a {
