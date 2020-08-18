@@ -355,7 +355,7 @@ namespace WelcomeLibrary.UF
             string cleandenominazione = ConteggioCaratteri(CleanUrl(denominazione.Trim().Replace(" ", "-")), 100).ToLower().Trim();
             // if (string.IsNullOrEmpty(cleandenominazione)) cleandenominazione = "-";
 
-            if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001000")
+            if (!string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001000" || !string.IsNullOrEmpty(codicetipologia) && codicetipologia == "con001002")
             {
                 /////////////////////////////////////
                 //Creo l'url per il rewriting
@@ -854,6 +854,8 @@ namespace WelcomeLibrary.UF
                         Pathdestinazione = "~/AspNetPages/Content_tipo1.aspx";
                     if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1001 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1001)
                         Pathdestinazione = "~/AspNetPages/pwaContent_tipo1.aspx";
+                    if (codicetipologia.Length > 3 && Convert.ToInt32(codicetipologia.Substring(3)) >= 1002 && Convert.ToInt32(codicetipologia.Substring(3)) <= 1002)
+                        Pathdestinazione = "~/AspNetPages/Content_tipo1.aspx";
                     break;
                 case "scheda": //Route schede aritcoli
                                //Pathdestinazione = "~/AspNetPages/SchedaOffertaMaster.aspx";

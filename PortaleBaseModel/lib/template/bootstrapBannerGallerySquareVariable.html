@@ -1,6 +1,5 @@
 ﻿<style>
 
-
     .squarevariable .card {
         border: none !important;
         border-radius: 0 !important;
@@ -9,18 +8,15 @@
         padding-top: 2px;
         padding-bottom: 2px;
     }
-
     /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
     .squarevariable item:nth-of-type(1) .work-image img {
         height: calc(100vh - 100px) !important;
         width: auto !important;
     }
-
     .squarevariable item:not(:nth-of-type(1)) .work-image img {
         height: calc(50vh - 52px) !important;
         width: auto !important;
     }
-
     @media screen and (min-width: 992px) and (max-width: 1200px) {
         .squarevariable item:nth-of-type(1) .work-image img {
             height: calc(50vh) !important;
@@ -38,7 +34,6 @@
         -webkit-transition: all .35s ease;
         transition: all .35s ease;
     }
-
     .squarevariable .imgovercontainer:hover.work-image > img, squarevariable .imgovercontainer:hover > img {
         -webkit-transform: scale(1.2) rotate(5deg);
         -moz-transform: scale(1.2) rotate(5deg);
@@ -48,7 +43,6 @@
         -webkit-transition: all 1.0s ease;
         transition: all 1.0s ease;
     }
-
     .squarevariable .work-image:hover:after, .squarevariable .imgovercontainer:hover:after {
         z-index: 2 !important;
         background: url(/images/link1.png) center center no-repeat !important;
@@ -59,13 +53,11 @@
         transition: all .35s ease;
         background: none !important;
     }
-
     /* fluid 4 columns */
     .grid-sizer,
     .grid-item {
         width: 100%;
     }
-
     @media (max-width: 576px) {
         .squarevariable .work-image img {
             height: calc(100vh - 100px) !important;

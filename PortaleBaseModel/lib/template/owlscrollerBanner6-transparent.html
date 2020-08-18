@@ -1,0 +1,46 @@
+﻿<style>
+    .work-image.noafter:hover::after {
+        z-index: 0 !important;
+        opacity: 0 !important;
+        transition: all 0s ease 0s;
+        background: none !important;
+    }
+</style>
+<div>
+    <a class="owl-btn prev-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; left: 20px;background-color:rgba(200, 200, 200,0.8)" id="replaceidprev"><i class="fa fa-chevron-left white-color"></i></a>
+    <a class="owl-btn next-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; right: 20px;background-color:rgba(200, 200, 200,0.8) " id="replaceidnext"><i class="fa fa-chevron-right white-color"></i></a>
+    <div class="row py-0 text-center">
+        <div class="col-md-12 col-sm-12 col-12 px-0">
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-20">
+                <div class="owl-slider-v2" id="replaceid">
+                    <div class="item box" style="background-color:transparent !important">
+                        <div class="card m-2" style="overflow:hidden;border:none;background-color:transparent !important">
+                            <!--<div class="card m-2 border-tipo2 rounded" style="overflow:hidden">-->
+                            <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                                <div class="position-relative imgovercontainer work-image">
+                                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                                    <div class="card-img-overlay">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="card-body text-center position-relative ">
+                                <!--<div class="work-subcaption text-center position-absolute p-0 w-auto" style="z-index: 9999999; bottom: 0; height: auto; overflow: visible; margin-bottom:50px !important">-->
+                                <div class="work-subcaption text-center position-relative p-2 mx-auto bg-white border-tipo2 rounded" style="width:90%;z-index: 10; bottom: 50px; height: auto; overflow: visible; margin-bottom:0px !important">
+                                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                        <h3 class="card-title titolo-offerta mb-2">
+                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                        </h3>
+                                    </a>
+                                    <!--<div class="w-25 pt-2 mx-auto mb-2 bd-primary-color" style="border-bottom: 2px solid;"></div>-->
+                                    <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
+                                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

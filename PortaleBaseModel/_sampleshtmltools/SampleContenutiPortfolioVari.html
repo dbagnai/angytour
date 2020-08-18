@@ -1,0 +1,80 @@
+﻿<!--Esempio bootstrap portfolio card masonry con contenuti-->
+<div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
+    <script>
+        $(function () {
+            $("#portlist1").children().first().removeClass();
+            $("#portlist1").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del 1° elemento del portfolio
+            //  $("#portlist1:nth-child(2)").removeClass();  //Modifico la classe del 2° elemento del portfolio
+            //  $("#portlist1:nth-child(2)").addClass("col-12 col-lg-6");  //Modifico la classe del 2° elemento del portfolio
+
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item',
+                // use element for option
+                columnWidth: '.grid-sizer',
+                percentPosition: true
+            })
+        });
+    </script>
+    <div id="divPortfolioList" style="background-color: transparent;" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioMyMasonryCard.html', 'divPortfolioList', 'portlist1', 1, 44, true, '', 'rif000002', '',true,false">&nbsp;</div>
+    <div id="divPortfolioListPager">&nbsp;</div>
+</div>
+
+<!--VERSIONE SINGLE ROW CON PORTFOLIO CONTENUTI-->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioListpf" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioSinglerow-nobutton.html,divPortfolioListpf, portlistpf, 1, 42, false,'',rif000001,'',false,true,'','','','true'"></div>
+</div>
+
+
+<!--Esempio botstrap portfolio card con contenuti-->
+<div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
+    <script>
+        // <![CDATA[
+        $(function () {
+            $("#portfolioall").children().first().removeClass();
+            $("#portfolioall").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del primo elemento del portfolio
+
+            elemento del portfolio
+          //  $("#portlist1:nth-child(2)").removeClass();  //Modifico la classe del 2° elemento del portfolio
+          //  $("#portlist1:nth-child(2)").addClass("col-12 col-lg-6");  //Modifico la classe del 2° elemento del portfolio
+
+        });
+        // ]]></script>
+    <div id="divContainermix" class="inject" params="injectbootstrapportfolioandload,'bootstrapPortfolioBlog3CardTipo1.html', 'divContainermix', 'portfolioall', 1, 24, false, '', 'rif000002', '', true, false,'7'">&nbsp;</div>
+    <div id="divContainermixPager">&nbsp;</div>
+</div>
+
+
+<!-- esempio portfolio card contenuti non masonry  -->
+<div id="divPortfolioList" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 44,true,'','rif000002','',true,false,'','','','','',''"></div>
+<div id="divPortfolioListPager"></div>
+
+<!-- esempio portfolio card contenuti PRODOTTO non masonry  -->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioList" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioProdotti3Card.html,divPortfolioList, portlist, 1, 42, true,'',rif000001,'',false,true,'','','','true'"></div>
+    <div id="divPortfolioListPager"></div>
+</div>
+
+
+<!-- esempio portfolio card contenuti PRODOTTO non masonry (CON FILTRO AGGIUNTO CARATTERISTICHE che vengono passate in un json serializzato lista chiave valore convertito base64) -->
+<!--injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro)-->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioList" class="inject" params='injectbootstrapportfolioandload,bootstrapPortfolioProdotti3Card.html,divPortfolioList, portlist, 1, 42,true,,rif000001,,false,true,,,,,,,,eyAidGlwb2xvZ2lhIjogInJpZjAwMDAwMSIsICJjYXRlZ29yaWEiOiAicHJvZDAwMDAzMSIsICJjYXRlZ29yaWEyTGl2IjogInNwcm9kMDAwMDAyIiwgIkNhcmF0dGVyaXN0aWNhMSI6ICIzIiwgIkNhcmF0dGVyaXN0aWNhMiI6ICIxIiB9'></div>
+    <div id="divPortfolioListPager"></div>
+</div>
+<script>
+     //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
+   console.log(utf8ToB64('{ "tipologia": "rif000001", "categoria": "prod000031", "categoria2Liv": "sprod000002", "Caratteristica1": "3", "Caratteristica2": "1" }'));
+</script>
+
+
+<!-- (ALTERNATIVA analoga con categorie dirette ) esempio portfolio card contenuti PRODOTTO non masonry (CON FILTRO AGGIUNTO CARATTERISTICHE che vengono passate in un json serializzato lista chiave valore) -->
+<!--injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro)-->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioList" class="inject" params='injectbootstrapportfolioandload,bootstrapPortfolioProdotti3Card.html,divPortfolioList, portlist, 1, 42,true,,rif000001,prod000031,false,true,,,,,,sprod000002,,eyAiQ2FyYXR0ZXJpc3RpY2ExIjogIjMiLCAiQ2FyYXR0ZXJpc3RpY2EyIjogIjEiIH0='></div>
+    <div id="divPortfolioListPager"></div>
+</div>
+<script>
+     //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
+    console.log(utf8ToB64('{ "Caratteristica1": "3", "Caratteristica2": "1" }'); console.log(b64string));
+</script>

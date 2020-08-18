@@ -123,3 +123,39 @@
 <Messaggio>httplocalhost52646Generato sitemap  12/08/2020 17:40:44</Messaggio>
  <Data>12/08/2020 17:40:44</Data>
 <Messaggio>httplocalhost52646Generato sitemap  12/08/2020 17:40:44Terminato Aggiornamento  12/08/2020 17:40:44</Messaggio>
+ <Data>18/08/2020 09:01:10</Data>
+<Messaggio> Application start : 18/08/2020 09:01:07</Messaggio>
+ <Data>18/08/2020 09:01:11</Data>
+<Messaggio> Global init original path: http://localhost:52646/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>18/08/2020 09:02:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 09:02:12</Messaggio>
+ <Data>18/08/2020 09:02:12</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 09:02:12Terminato Aggiornamento  18/08/2020 09:02:12</Messaggio>
+ <Data>18/08/2020 09:34:45</Data>
+<Messaggio> Application start : 18/08/2020 09:34:43</Messaggio>
+ <Data>18/08/2020 09:35:45</Data>
+<Messaggio> Errore aggiornamento in app start: Riferimento a un oggetto non impostato su un'istanza di oggetto. 18/08/2020 09:35:45</Messaggio>
+ <Data>18/08/2020 09:35:45</Data>
+<Messaggio> Errore aggiornamento in app start: Riferimento a un oggetto non impostato su un'istanza di oggetto. 18/08/2020 09:35:45Terminato Aggiornamento  18/08/2020 09:35:45</Messaggio>
+ <Data>18/08/2020 09:37:25</Data>
+<Messaggio> Global init original path: http://localhost:52646/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>18/08/2020 15:30:38</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 15:30:38</Messaggio>
+ <Data>18/08/2020 15:30:38</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 15:30:38Terminato Aggiornamento  18/08/2020 15:30:38</Messaggio>
+ <Data>18/08/2020 17:28:28</Data>
+<Messaggio> Application start : 18/08/2020 17:28:27</Messaggio>
+ <Data>18/08/2020 17:28:29</Data>
+<Messaggio> Global init original path: http://localhost:52646/it/home-1 Global init AbsolutePath : /it/home-1 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>18/08/2020 17:29:31</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:29:31</Messaggio>
+ <Data>18/08/2020 17:29:31</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:29:31Terminato Aggiornamento  18/08/2020 17:29:31</Messaggio>
+ <Data>18/08/2020 17:47:44</Data>
+<Messaggio> Application start : 18/08/2020 17:47:43</Messaggio>
+ <Data>18/08/2020 17:47:44</Data>
+<Messaggio> Global init original path: http://localhost:52646/it/catalogo/tavolo-mod-sottotitolo-49 Global init AbsolutePath : /it/catalogo/tavolo-mod-sottotitolo-49 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:52646</Messaggio>
+ <Data>18/08/2020 17:48:46</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:48:46</Messaggio>
+ <Data>18/08/2020 17:48:46</Data>
+<Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:48:46Terminato Aggiornamento  18/08/2020 17:48:46</Messaggio>

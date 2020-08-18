@@ -525,7 +525,7 @@
             "~/js/revolution464/jquery.themepunch.revolution.min.js", //ingomnrante
             "~/js/bootstrap-notify-master/js/bootstrap-notify.js",
             "~/lib/js/notifypopup.js",
-            "~/js/hammer/hammer-min.js",
+            //"~/js/hammer/hammer-min.js",
             //"~/js/magnify/js/jquery.magnify.js",
             //"~/js/magnify/js/jquery.magnify-mobile.js"
             //"~/lib/js/immobili2.js",

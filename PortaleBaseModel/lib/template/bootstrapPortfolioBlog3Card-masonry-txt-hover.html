@@ -2,33 +2,30 @@
     <div class="px-3">
         <div class="card-columns" id="replaceid">
             <div class="card border-tipo2 rounded" style="overflow:hidden">
-
                 <a class="bind primary-color m-0 p-0 d-block" preload target="_self" href="link" title="titolo" mybind="Id">
                     <div class="position-relative work-image video p-0">
                         <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy m-0 p-0" mybind="Id" />
                         <!--<div class="card-img-overlay gradient-overlay-my-bottomtop d-block d-sm-none d-lg-block"></div>-->
+                        <!--DATI AGGIUNTIVI-->
+                        <div class="text-right position-absolute m-3 d-block d-sm-none d-lg-block" style="left:0; top:0; z-index:96;">
+                            <i><span class="bind d-inline-block mr-2 text-white" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i>
+                            <span class="bind text-center d-inline-block px-2 py-1 bg-dark text-white" style="bottom:0; right:0;" mybind="Indirizzo" myvalue="replacebr" format="formatstringvalue"></span>
+                        </div>
 
-                            <!--DATI AGGIUNTIVI-->
-                            <div class="text-right position-absolute m-3 d-block d-sm-none d-lg-block" style="left:0; top:0; z-index:96;">
-                                <i><span class="bind d-inline-block mr-2 text-white" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i>
-                                <span class="bind text-center d-inline-block px-2 py-1 bg-dark text-white" style="bottom:0; right:0;" mybind="Indirizzo" myvalue="replacebr" format="formatstringvalue"></span>
-                            </div>
-
-                            <!--TESTI-->
-                            <div class="card-body text-left m-0 p-3 d-block d-sm-none d-lg-block gradient-overlay-my-bottomtop-text" style="position:absolute;display:block;z-index:96;bottom:0; left:0">
-                                <h3 class="card-title titolo-offerta m-0 text-white" style="">
-                                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle" style="font-size:1.35rem"></span>
-                                </h3>
-                                <!--<h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
-                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
-                    </h4>-->
-                                <!--<div class="card-text">
-                        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />
-                    </div>-->
-                            </div>
+                        <!--TESTI-->
+                        <div class="card-body text-left m-0 p-3 d-block d-sm-none d-lg-block gradient-overlay-my-bottomtop-text" style="position:absolute;display:block;z-index:96;bottom:0; left:0">
+                            <h3 class="card-title titolo-offerta m-0 text-white" style="">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle" style="font-size:1.35rem"></span>
+                            </h3>
+                            <!--<h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                            </h4>-->
+                            <!--<div class="card-text">
+                                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="150" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></span><br />
+                            </div>-->
+                        </div>
                     </div>
                 </a>
-
                 <!--TESTI versione 3 colonne -->
                 <div class="card-body text-left m-0 p-3 d-none d-sm-block d-lg-none" style="position:relative;display:block;z-index:96;bottom:0; left:0">
                     <h3 class="card-title titolo-offerta m-0 tx-primary-color">
@@ -37,6 +34,6 @@
                 </div>
 
             </div>
-         </div>
+        </div>
     </div>
 </div>

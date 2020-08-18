@@ -89,6 +89,14 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 Titolopaginestatichepwa.Text = paginestatichepwa.Descrizione;
 
 
+
+                WelcomeLibrary.DOM.TipologiaContenuti paginestaticheesempi = WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate (WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con001002"); });
+                linkPaginestaticheesempi.HRef = "GestioneContenuti.aspx?CodiceContenuto=" + paginestaticheesempi.Codice;
+                Titolopaginestaticheesempi.Text = paginestaticheesempi.Descrizione;
+
+
+                
+
                 //attivo l'hover del menu
                 if (Request.FilePath.ToLower().Trim().Contains("gestioneofferte") || Request.FilePath.ToLower().Trim().Contains("gestionerodotti"))
                 {

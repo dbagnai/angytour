@@ -80,27 +80,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             //    ddlAreaAnnunci.DataBind();
             //    lblAnnunci.Visible = true;
             //}
-
-            //NUOVO METODO A TABELLA UNICA
-            if (Sezione.ToLower().Contains("banner-destra"))
-            {
-                ResizeWidth = 470;//360
-                ResizeHeight = 360;//280
-            }
-
-            //NUOVO METODO A TABELLA UNICA
-            if (Sezione.ToLower().Contains("banner-centro"))
-            {
-                ResizeWidth = 470;//360
-                ResizeHeight = 360;//280
-            }
-            //NUOVO METODO A TABELLA UNICA
-            if (Sezione.ToLower().Contains("banner-basso"))
-            {
-                ResizeWidth = 1200;//
-                ResizeHeight = 300;//
-            }
-
+ 
 
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("headhomegallery"))

@@ -257,7 +257,7 @@
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
-                    <%= CreaLinkPaginastatica(1) %>
+                    <%= CreaLinkPaginastatica(2) %>
 
                     <%--MEGAMENU DANY--%>
                     <%--<li runat="server">
@@ -396,17 +396,15 @@
                     <%= CreaLinkTipologie(9,9) %>
                     <%-- Faq --%>
                     <%= CreaLinkPaginastatica(3) %>
-
-                    <li runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a>
-                        <%--<%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu5"),"rif000004","") %>--%>
+                    <%--TIMI MENU--%>
+<%--                    <li runat="server">
+                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a> ("Common",Lingua,"testomenu5"),"rif000004","") %>--%>
                         <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(53) %>
-                            <%= CreaLinkPaginastatica(52) %>
-                            <%= CreaLinkPaginastatica(45) %>
-                            <%= CreaLinkPaginastatica(44) %>
+                            <%= CreaLinkPaginastatica(100) %>
+                            <%= CreaLinkPaginastatica(101) %>
+                            <%= CreaLinkPaginastatica(102) %>
                         </ul>
-                    </li>
+                    </li>--%>
                     <%--PRENOTA--%>
                     <li runat="server">
                         <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
@@ -854,8 +852,8 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        <%-- Ceramiche Ficola --%>
-                                        <%--<%= CreaLinkPaginastatica(1) %>--%>
+                                        
+                                        <%= CreaLinkPaginastatica(2) %>
                                         <%= CreaLinkTipologie(3,3) %>
                                         <%-- Pagina Catalogo --%>
                                         <%--<%= CreaLinkPaginastatica(4) %>--%>

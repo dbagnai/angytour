@@ -454,7 +454,6 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <asp:Label ID="Titolopaginestatichepwa" CssClass="menu-text" runat="server" Text=""></asp:Label>
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
                         </ul>
@@ -559,7 +558,13 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <asp:Label ID="Titolopaginestatiche" CssClass="menu-text" runat="server" Text=""></asp:Label>
                                 </a>
-
+                                <b class="arrow"></b>
+                            </li>
+                             <li class="hover">
+                                <a id="linkPaginestaticheesempi" href="#" runat="server">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <asp:Label ID="Titolopaginestaticheesempi" CssClass="menu-text" runat="server" Text=""></asp:Label>
+                                </a>
                                 <b class="arrow"></b>
                             </li>
                         </ul>
@@ -639,6 +644,12 @@
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-1">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Banner Navigazione Sezioni</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                         <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-2">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Banner Navigazione Sezioni 2</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
@@ -1060,7 +1071,7 @@
                     <div class="footer-content">
                         <span class="bigger-120">
                             <span class="blue bolder">WebMouse</span>
-                            Consulting &copy; 2016
+                            Consulting &copy; <%= System.DateTime.Now.Year.ToString() %>
                         </span>
                     </div>
                 </div>

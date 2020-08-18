@@ -1,0 +1,38 @@
+﻿
+<h3 class="py-4">
+    Esempio visualizzazioine lista commenti
+</h3>
+<div class="container">
+    <div class="inject d-sm-block" id="divCommentislist" params="commenttool.rendercommentsloadref,'all','divCommentislist','feedbacklist2.html','true','1','35','',false,'',true">
+    </div>
+</div>
+
+
+<h3 class="py-4">
+    Esempio inserimento commenti + lista commenti sotto
+</h3>
+<section class="mbr-section mbr-section__container article" id="header3-a" style="background-color: #ffffff; padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mbr-section-title display-2">
+                    Inviaci la tua opinione
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="divsmallscheda" params="injectandloadgenericcontent,'schedadetailssmall.html','divsmallscheda', 'divitem1',false,false">
+</div>
+<script>
+    // <![CDATA[
+var currentparams = $('#divsmallscheda').attr("params");
+    var idposttmp = $.getQueryString("idpost");
+    if (idposttmp != null && idposttmp != undefined && idposttmp.length != 0) {
+        $('#divsmallscheda').attr('params', currentparams + ',' + idposttmp);
+        $('#divsmallscheda').attr('class', 'inject');
+    }
+// ]]>
+</script>
+<div class="inject" id="divCommenti" params="commenttool.rendercommentsloadref,'','divCommenti','','true','1','35','',false,'',false,true">
+</div>
