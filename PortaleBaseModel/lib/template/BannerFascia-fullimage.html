@@ -3,9 +3,10 @@
         display: none
     }
 
-    .slidercycle > div:nth-child(1) {
-        display: block
-    }
+        .slidercycle > div:nth-child(1) {
+            display: block
+        }
+
     div.cycle-pager {
         position: absolute;
         display: inline-block;
@@ -13,6 +14,7 @@
         z-index: 101;
         bottom: 10px;
     }
+
     .cycle-pager span {
         display: block;
         float: left;
@@ -27,26 +29,26 @@
         margin-right: 10px;
         cursor: pointer;
     }
+
     .cycle-pager-active {
         background: #000 !important;
     }
 </style>
-<div id="replaceid" data-prev="+ div > div.cycle-prev" data-next="+ div > div.cycle-next" data-pager="+ div > div.cycle-pager" data-cycle-log="false" data-cycle-timeout="3000" data-cycle-speed="1000" data-cycle-pause-on-hover="false" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95" class="slidercycle">
+
+<div id="replaceid" data-prev="+ div > div.cycle-prev" data-next="+ div > div.cycle-next" data-pager="+ div > div.cycle-pager" data-cycle-log="false" data-cycle-timeout="2000" data-cycle-speed="1000" data-cycle-pause-on-hover="false" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95" class="slidercycle">
     <div class="w-100">
-        <!-- ~ Contenitore con w-100 tiene a tutta larghezza ic ontenui della slide-->
+        <!--Contenitore con w-100 tiene a tutta larghezza ic ontenui della slide-->
         <div class="row align-items-center">
-            <div class="col-md-5 col-sm-5 col-12 order-last order-sm-first text-right textBanner animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
-                <div style="color:#303030 !important; font-weight:400" class="pull-center divTesto">
-                    <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
-                </div>
+            <div class="col-12 text-center position-absolute" style="z-index:96">
+                <div class="bind px-3" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
             </div>
-            <div class="col-md-7 col-sm-7 col-12 order-first order-sm-last">
+            <div class="col-12">
                 <div class="mbr-overlay-gradient"></div>
                 <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
                 <div class="w-100 text-right" style="overflow:hidden;">
                     <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100" mybind="Id" />
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

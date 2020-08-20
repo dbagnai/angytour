@@ -693,7 +693,7 @@
     "use strict";
 
     $.extend($.fn.cycle.defaults, {
-        autoHeight: 0, // setting this option to false disables autoHeight logic
+        autoHeight: false, // setting this option to false disables autoHeight logic / to 0 restat autoheight
         autoHeightSpeed: 250,
         autoHeightEasing: null
     });
@@ -1214,7 +1214,7 @@
     "use strict";
 
     $.extend($.fn.cycle.defaults, {
-        pager: '> .cycle-pager',
+        pager: '> .cycle-pager:first-child',
         pagerActiveClass: 'cycle-pager-active',
         pagerEvent: 'click.cycle',
         pagerEventBubble: undefined,
@@ -1268,6 +1268,7 @@
     function buildPagerLink(opts, slideOpts, slide) {
         var pagerLink;
         var pagers = opts.API.getComponent('pager');
+       
         pagers.each(function () {
             var pager = $(this);
             if (slideOpts.pagerTemplate) {
@@ -1282,6 +1283,7 @@
                     e.preventDefault();
                 opts.API.page(pager, e.currentTarget);
             });
+            if (opts.slideCount > 1) { pager.show(); } else pager.hide(); //aggiunta per spegnimeto slides <2
         });
     }
 
@@ -1315,7 +1317,7 @@
         disabledClass: 'disabled',
         prev: '> .cycle-prev',
         prevEvent: 'click.cycle',
-        swipe: false
+        swipe: true
     });
 
     $(document).on('cycle-initialized', function (e, opts) {
@@ -1341,6 +1343,8 @@
                 opts.API.prev();
             });
         }
+
+        if (opts.slideCount > 1) { opts.API.getComponent('next').show(); opts.API.getComponent('prev').show(); } else { opts.API.getComponent('next').hide(); opts.API.getComponent('prev').hide(); } //aggiunta per spegnimeto slides <2
     });
 
     $(document).on('cycle-update-view', function (e, opts, slideOpts, currSlide) {
@@ -1362,6 +1366,9 @@
             prev.addClass(cls).prop('disabled', true);
         else
             prev.removeClass(cls).prop('disabled', false);
+
+        if (opts.slideCount > 1) { opts.API.getComponent('next').show(); opts.API.getComponent('prev').show(); } else { opts.API.getComponent('next').hide(); opts.API.getComponent('prev').hide(); } //aggiunta per spegnimeto slides <2
+
     });
 
 

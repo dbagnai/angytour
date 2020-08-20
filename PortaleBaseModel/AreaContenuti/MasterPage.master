@@ -662,7 +662,7 @@
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner area Blog</span></a>
-                                                <b class="arrow"></b>
+                                                <b class="arrow"></b>fci
                                             </li>--%>
                                                     </ul>
                                                 </div>
@@ -688,7 +688,7 @@
                                                         <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-fascia">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fascia sequenza</span></a>
+                                                                <span class="menu-text">Banner Fasce alternate</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
@@ -701,18 +701,6 @@
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia2">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Banner Fascia 2</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia3">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fascia 3</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia4">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fascia 4</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">

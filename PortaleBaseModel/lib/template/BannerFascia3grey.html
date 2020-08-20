@@ -2,28 +2,22 @@
     .slidercycle > div {
         display: none
     }
-
-        .slidercycle > div:nth-child(1) {
-            display: block
-        }
+    .slidercycle > div:nth-child(1) {
+        display: block
+    }
 </style>
 
-<div id="replaceid" data-cycle-timeout="2000" data-cycle-speed="1000" data-cycle-pause-on-hover="true" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95" class="slidercycle">
+<div id="replaceid" data-cycle-log="false" data-cycle-timeout="2000" data-cycle-speed="1000" data-cycle-pause-on-hover="false" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95" class="slidercycle">
     <div class="w-100">
         <div class="row  align-items-center" style="background-color:#efefef;">
-            <div class="col-md-5 col-sm-5 col- col-xs-12 side-image-content text-right textBanner d-none d-sm-block">
+            <div class="col-md-5 col-sm-5 col-12  order-last order-sm-first side-image-content text-right textBannerk">
                 <div style="color:#303030 !important; font-weight:400" class="pull-center divTesto">
                     <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
                 </div>
             </div>
-            <div class="col-md-7 col-sm-7 col-xs-12">
+            <div class="col-md-7 col-sm-7 col-12 order-first order-sm-last">
                 <div style="width:100%; overflow:hidden; text-align:center;">
                     <img src="/images/dummylogo.png" alt="" class="bind imgBanner" mybind="Id" style="width:100%; text-align:center;" />
-                </div>
-            </div>
-            <div class="col-xs-12 side-image-content text-center  textBanner  d-xs-block d-sm-none">
-                <div style="color:#303030 !important; font-weight:400" class="pull-center divTesto2">
-                    <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
                 </div>
             </div>
         </div>
