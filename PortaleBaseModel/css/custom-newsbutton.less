@@ -118,7 +118,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     width: 100%;
 }
 
-.carrellocustom .button-carrello:hover, a.btn-black-outline:hover, .btn-black-outline:hover, .btn .btn-black:hover {
+.carrellocustom .button-carrello:hover:not(.btn-carrello-esaurito), a.btn-black-outline:hover, .btn-black-outline:hover, .btn .btn-black:hover {
     &:extend(.btn-black-outline);
     color: @color-sottomeu !important;
     border-radius: 0px;
@@ -185,6 +185,181 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     transition-delay: 0s, 0.25s, 0s;
 }
 
+
+/*STILE PULSANTE CARRELLOC*/
+
+
+.prezzo-responsive {
+    font-size: 1.8vw;
+    line-height: 1vw !important;
+}
+
+@media (max-width: 1200px) {
+    .prezzo-responsive {
+        font-size: 2rem;
+        line-height: 2rem !important;
+    }
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+.totalItems { //per carrello
+    line-height: 1.9rem;
+}
+
+@media screen and (min-width: 1025px) {
+    .menuzord-menu .carrellomaincontainer a:before, .menuzord-menu .carrellomaincontainer a:after {
+        display: none;
+    }
+}
+
+.count {
+    font-family: @menu-font !important;
+    color: @menu-color;
+    border: 1px solid @bg-primary-color;
+    position: absolute;
+    float: right;
+    background-color: @white-color;
+    width: 25px;
+    height: 25px;
+    line-height: 24px;
+    border-radius: 50%;
+    right: -12.5px;
+    top: -12.5px;
+    z-index: 1;
+    -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    font-size: 0.8rem;
+}
+
+.count:hover {
+    font-family: @menu-font !important;
+}
+
+.carrello-go-launch {
+    /*position:fixed !important;*/
+    display: block !important;
+    z-index: 999 !important;
+}
+
+/*CARRELLO - MENU - MENUZORD*/
+.menuzord-menu li #containerCarrello a, .menuzord-menu li .carrellomaincontainer a:before, .menuzord-menu li .carrellomaincontainer a:after {
+    border: none;
+    padding: 14px !important;
+}
+
+.menuzord-menu li #containerCarrello a .totalItems {
+    color: @primary-color;
+}
+
+#carrellos1qty input {
+    width: 42px !important;
+    height: 37.2px !important;
+    margin-top: 0 !important;
+}
+
+.button-carrello, .button-carrello-vedi {
+    &:extend(.btn-primary);
+    font-size: 1rem;
+    padding: 0 0 0 2px !important;
+    line-height: 31.5px !important;
+    width: 34.5px;
+    border-radius: 50%;
+    font-weight: @font-weight-medium;
+}
+
+.button-carrello:hover, .button-carrello-vedi:hover {
+    &:extend(.btn-primary:hover);
+    font-size: 1rem;
+    padding: 0 0 0 2px !important;
+    line-height: 31.5px !important;
+    width: 34.5px;
+    border-radius: 50%;
+    font-weight: @font-weight-medium;
+}
+
+
+.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
+  /*  &:extend(.button-carrello);*/
+    /*background: url("/images/soldout1.png") center center no-repeat;*/
+    background-size: 25px;
+    cursor: unset;
+    background-color: transparent !important;
+    color: @button-hover-color !important;
+    border: none !important;
+    letter-spacing: 0 !important;
+    font-size: 0.8rem;
+    cursor: unset;
+    box-shadow:none;
+    opacity:0;
+}
+
+
+
+/*  .btn-carrello-esaurito .fa,   .btn-carrello-esaurito1 .fa {
+    opacity: 0;
+}
+*/
+/*------------------------------------------------------*/
+
+.button-carrello1 {
+    &:extend(.btn-primary);
+    min-width: 190px !important;
+    margin: 5px;
+}
+
+.button-carrello1:hover {
+    &:extend(.btn-primary:hover);
+    min-width: 190px !important;
+}
+
+.btn-carrello-esaurito1, .btn-carrello-esaurito1:hover {
+    &:extend(.button-carrello1);
+    cursor: unset;
+    min-width: 190px !important;
+    background-color: transparent !important;
+    color: @button-hover-color !important;
+    letter-spacing: 0 !important;
+    font-size: 0.8rem;
+    cursor: unset;
+    min-width: 190px !important;
+}
+
+/*------------------------------------------------------*/
+
+.button-carrello-animate {
+    &:extend(.button-carrello);
+    color: @button-color !important;
+    border: 1px solid @bg-button-color !important;
+    /*animation: rotateY 1s infinite;
+    animation-timing-function: linear;*/
+}
+
+.button-carrello-animate:hover {
+    &:extend(.button-carrello:hover);
+    color: @primary-color !important;
+    border: 1px solid @primary-color !important;
+}
+
+@-webkit-keyframes rotateY {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.carrello-go-rotate {
+    animation: rotateY 1s 1;
+    animation-timing-function: linear;
+}
+
+/*------------------------------------------------------*/
 
 /*STILE PULSANTE CARRELLOCUSTOM*/
 .carrellocustom .button-carrello {
@@ -309,7 +484,7 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     border-left-width: @bd-bottom2-width !important;
 }
 
-.carrellocustomoutline .button-carrello:hover {
+.carrellocustomoutline .button-carrello:not(.btn-carrello-esaurito):hover {
     color: @color-sottomeu !important;
     background-color: rgba(255, 255, 255, 0) !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width transparent !important;
@@ -336,10 +511,11 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     transition-delay: 0s, 0.25s, 0s;
 }
 
+
 /*STILE PULSANTE CARRELLO*/
-.button-carrello-animate:hover, .button-carrello-vedi:hover, .btn-carrello-esaurito:hover, .button-carrello:hover, .btn-banner {
+/*.button-carrello-animate:hover, .button-carrello-vedi:hover, .btn-carrello-esaurito:hover, .button-carrello:hover, .btn-banner {
     border-radius: 50% !Important;
-}
+}*/
 
 /*.menuzord-menu li:nth-child(4) a:hover {
     background-color: #fff !important;
@@ -368,12 +544,12 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
     line-height: 2.1rem !important;
 }
 
-.button-carrello:hover {
+/*.button-carrello:hover {
     line-height: 2.1rem !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu;
     opacity: 1;
 }
-
+*/
 /*.menuzord-menu li:nth-child(5) a {
     color: #fff !important;
 }*/

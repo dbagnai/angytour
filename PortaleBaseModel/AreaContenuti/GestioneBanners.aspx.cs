@@ -141,7 +141,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 ResizeWidth = 1900;
                 ResizeHeight = 930;
             }
-            if (Sezione.ToLower().Contains("banner-gallery-1"))
+            if (Sezione.ToLower().Contains("banner-gallery-"))
             {
                 ResizeWidth = 1000;
                 ResizeHeight = 1000;

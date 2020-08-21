@@ -198,7 +198,7 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    /*----------------------- inizializzazione elementi  masonry.js   --------------- */
+    /*----------------------- inizializzazione elementi portfolio con masonry.js   --------------- */
     (function wait() {
         if (typeof $.fn.masonry !== 'undefined') {
             //if (typeof $.masonry == 'function') {

@@ -39,15 +39,17 @@
     <div class="w-100">
         <!--Contenitore con w-100 tiene a tutta larghezza ic ontenui della slide-->
         <div class="row align-items-center">
-            <div class="col-12 text-center position-absolute" style="z-index:96">
-                <div class="bind px-3" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
-            </div>
             <div class="col-12">
                 <div class="mbr-overlay-gradient"></div>
-                <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
-                <div class="w-100 text-right" style="overflow:hidden;">
+                 <div class="w-100 text-right" style="overflow:hidden;">
                     <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100" mybind="Id" />
                 </div>
+            </div>
+            <div class="col-12 text-center position-absolute d-none d-md-block" style="z-index:96">
+                <div class="bind px-3" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
+            </div>
+            <div class="col-12 text-center d-block d-md-none">
+                <div class="bind px-3" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
             </div>
         </div>
     </div>

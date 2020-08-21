@@ -1,4 +1,15 @@
-﻿<!--Esempio bootstrap portfolio card masonry con contenuti-->
+﻿<!--VERSIONE SINGLE ROW CON PORTFOLIO CONTENUTI-->
+<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
+    <div id="divPortfolioListpf" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioSinglerow-nobutton.html,divPortfolioListpf, portlistpf, 1, 42, false,'',rif000001,'',false,true,'','','','true'"></div>
+</div>
+
+
+
+
+
+
+
+<!--Esempio bootstrap portfolio card masonry con contenuti-->
 <div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
     <script>
         $(function () {
@@ -20,12 +31,6 @@
     <div id="divPortfolioListPager">&nbsp;</div>
 </div>
 
-<!--VERSIONE SINGLE ROW CON PORTFOLIO CONTENUTI-->
-<div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
-    <div id="divPortfolioListpf" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioSinglerow-nobutton.html,divPortfolioListpf, portlistpf, 1, 42, false,'',rif000001,'',false,true,'','','','true'"></div>
-</div>
-
-
 <!--Esempio botstrap portfolio card con contenuti-->
 <div style="max-width: 1400px; margin: 0px auto; padding: 0px; position: relative;">
     <script>
@@ -35,8 +40,8 @@
             $("#portfolioall").children().first().addClass("col-12 col-lg-6"); //Modifico la classe del primo elemento del portfolio
 
             elemento del portfolio
-          //  $("#portlist1:nth-child(2)").removeClass();  //Modifico la classe del 2° elemento del portfolio
-          //  $("#portlist1:nth-child(2)").addClass("col-12 col-lg-6");  //Modifico la classe del 2° elemento del portfolio
+            //  $("#portlist1:nth-child(2)").removeClass();  //Modifico la classe del 2° elemento del portfolio
+            //  $("#portlist1:nth-child(2)").addClass("col-12 col-lg-6");  //Modifico la classe del 2° elemento del portfolio
 
         });
         // ]]></script>
@@ -44,8 +49,7 @@
     <div id="divContainermixPager">&nbsp;</div>
 </div>
 
-
-<!-- esempio portfolio card contenuti non masonry  -->
+<!-- esempio portfolio card contenuti bootstrap 4 colonne  -->
 <div id="divPortfolioList" class="inject" params="injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 44,true,'','rif000002','',true,false,'','','','','',''"></div>
 <div id="divPortfolioListPager"></div>
 
@@ -56,6 +60,9 @@
 </div>
 
 
+
+
+
 <!-- esempio portfolio card contenuti PRODOTTO non masonry (CON FILTRO AGGIUNTO CARATTERISTICHE che vengono passate in un json serializzato lista chiave valore convertito base64) -->
 <!--injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro)-->
 <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px; padding-bottom: 25px;">
@@ -63,8 +70,8 @@
     <div id="divPortfolioListPager"></div>
 </div>
 <script>
-     //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
-   console.log(utf8ToB64('{ "tipologia": "rif000001", "categoria": "prod000031", "categoria2Liv": "sprod000002", "Caratteristica1": "3", "Caratteristica2": "1" }'));
+    //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
+    console.log(utf8ToB64('{ "tipologia": "rif000001", "categoria": "prod000031", "categoria2Liv": "sprod000002", "Caratteristica1": "3", "Caratteristica2": "1" }'));
 </script>
 
 
@@ -75,6 +82,6 @@
     <div id="divPortfolioListPager"></div>
 </div>
 <script>
-     //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
+    //valore dei filtro da usare per la chiamata, va customizzato in base ai parametri di filtraggio da usare
     console.log(utf8ToB64('{ "Caratteristica1": "3", "Caratteristica2": "1" }'); console.log(b64string));
 </script>
