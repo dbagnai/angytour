@@ -915,7 +915,7 @@ table td {
 .chartbox .percent::after {
   content: '%';
   margin-left: 0.1em;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 .edubox {
   width: auto;

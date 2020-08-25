@@ -1,7 +1,357 @@
 ﻿
 
+/*----------------------------------
+IMPORTAZ. STILI COMBINAZIONI COLORI
+----------------------------------*/
+@import "custom-monocromo.less";
+
+
+@media screen and (min-width: 1025px) {
+    .menuzord-menu .carrellomaincontainer a:before, .menuzord-menu .carrellomaincontainer a:after {
+        display: none;
+    }
+}
+
+.menuzord-menu li #containerCarrello a, .menuzord-menu li .carrellomaincontainer a:before, .menuzord-menu li .carrellomaincontainer a:after {
+    border: none;
+    padding: 14px !important;
+}
+
+.menuzord-menu li #containerCarrello a .totalItems {
+    color: @primary-color;
+}
+
+.count {
+    font-family: @menu-font !important;
+    color: @menu-color;
+    border: 1px solid @bg-primary-color;
+    position: absolute;
+    float: right;
+    background-color: @white-color;
+    width: 25px;
+    height: 25px;
+    line-height: 24px;
+    border-radius: 50%;
+    right: -12.5px;
+    top: -12.5px;
+    z-index: 1;
+    -webkit-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 8px 8px -2px rgba(0, 0, 0, 0.25);
+    font-size: 0.8rem;
+}
+
+.count:hover {
+    font-family: @menu-font !important;
+}
+
+.prezzo-responsive {
+    font-size: 1.8vw;
+    line-height: 1vw !important;
+}
+
+@media (max-width: 1200px) {
+    .prezzo-responsive {
+        font-size: 2rem;
+        line-height: 2rem !important;
+    }
+}
+
+.totalItems { //per carrello
+    line-height: 1.9rem;
+}
+
+
+.dropdown-cart .btn {
+    font-size: 0.8rem !important;
+    padding: 1rem 2rem !important;
+    border: 1px solid #fff !important;
+}
+
+.dropdown-cart .btn:hover {
+    font-size: 0.8rem !important;
+    padding: 1rem 2rem !important;
+    border: 1px solid @color-sottomeu !important;
+}
+
+/*CARRELLO - MENU - MENUZORD*/
+
+
+#carrellos1qty input {
+    width: 42px !important;
+    height: 37.2px !important;
+    margin-top: 0 !important;
+}
+
+.button-carrello, .button-carrello-vedi {
+    /*&:extend(.btn-primary);*/
+    font-family: @button-font;
+    font-size: @button-size;
+    font-weight: @font-weight-medium;
+    color: @button-color !important;
+    background-color: @bg-button-color;
+    font-size: 1rem;
+    margin: 0px !important;
+    padding: 1px 0 0 0;
+    line-height: 31.5px;
+    width: 34.5px;
+    height: 34.5px;
+    border-radius: 50%;
+    border-color: transparent;
+    border-image: none;
+    border-style: none;
+    text-align: center;
+    display: inline-block;
+    
+}
+
+.button-carrello:hover, .button-carrello-vedi:hover {
+    /*&:extend(.btn-primary:hover);*/
+    color: @button-hover-color !important;
+    /* background-color: @bg-button-hover-color;*/
+    box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu-tenue;
+    cursor:pointer;
+    opacity: 1;
+}
+
+.btn-carrello-esaurito, .btn-carrello-esaurito:hover {
+    opacity: 0;
+}
+
+.button-carrello-animate {
+    &:extend(.button-carrello);
+    color: @button-color !important;
+    /*color: #fff !important;*/
+    border: 1px solid @bg-button-color !important;
+    /*animation: rotateY 1s infinite;
+    animation-timing-function: linear;*/
+    box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu;
+    background-color: @color-sottomeu !important;
+}
+
+.button-carrello-animate:hover {
+    &:extend(.button-carrello:hover);
+    color: @primary-color !important;
+    border: 1px solid @primary-color !important;
+}
+
+@-webkit-keyframes rotateY {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.button-carrello-animate, .button-carrello-animate:hover {
+    border-width: 0px !important;
+    border-color: transparent !important;
+    line-height: 2.1rem !important;
+}
+
+.button-carrello-animate:hover {
+    opacity: 1;
+}
+
+
+
+.carrello-go-launch {
+    /*position:fixed !important;*/
+    display: block !important;
+    z-index: 999 !important;
+}
+
+.carrello-go-rotate {
+    animation: rotateY 1s 1;
+    animation-timing-function: linear;
+}
+
+
+/*------------------------------------------------------*/
+
+/*STILE PULSANTE CARRELLOCUSTOM*/
+.carrellocustom .button-carrello {
+    width: 100%;
+    height: 100% !important;
+    padding: 0.9rem 2rem !important;
+}
+
+.carrellocustom i.fa.fa-cart-plus, .carrellocustom i.fa.fa-eye {
+    padding: 0;
+}
+
+.carrellocustom .button-carrello, .carrellocustom .button-carrello:active, .carrellocustom .button-carrello:visited, .carrellocustom .button-carrello:focus {
+    /*    &:extend(.divbuttonstyle);*/
+    color: #fff !important;
+    background-color: @color-sottomeu !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu;
+    border: none;
+    border-radius: 0px;
+    white-space: normal;
+    border-color: @color-sottomeu !important;
+}
+
+.carrellocustom .button-carrello::after, .carrellocustom .button-carrello:active::after, .carrellocustom .button-carrello:visited::after, .carrellocustom .button-carrello:focus::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-color: @color-sottomeu !important;
+    border-top-width: @bd-bottom2-width !important;
+    border-right-width: @bd-bottom2-width !important;
+}
+
+.carrellocustom .button-carrello::before, .carrellocustom .button-carrello:active::before, .carrellocustom .button-carrello:visited::before, .carrellocustom .button-carrello:focus::before {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom-width: @bd-bottom2-width !important;
+    border-left-width: @bd-bottom2-width !important;
+}
+
+.carrellocustom .button-carrello:hover:not(.btn-carrello-esaurito) {
+    color: @color-sottomeu !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width transparent !important;
+    opacity: 1;
+}
+
+.carrellocustom .button-carrello:hover::before, .carrellocustom .button-carrello:hover::after {
+    border-color: @color-sottomeu !important;
+    -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+  
+}
+.carrellocustom .button-carrello:hover::before {
+    -webkit-transition-delay: 0s, 0s, 0.25s;
+    transition-delay: 0s, 0s, 0.25s;
+}
+.carrellocustom .button-carrello:hover::after {
+    -webkit-transition-delay: 0s, 0.25s, 0s;
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+/*STILE PULSANTE color OUTLINE CARRELLOCUSTOM OUTLINE*/
+.carrellocustomoutline .button-carrello {
+    width: 100%;
+    height: 100% !important;
+    padding: 0.9rem 2rem !important;
+}
+
+.carrellocustomoutline i.fa.fa-cart-plus {
+    padding: 0;
+}
+
+.carrellocustomoutline .button-carrello, .carrellocustomoutline .button-carrello:active, .carrellocustomoutline .button-carrello:visited, .carrellocustomoutline .button-carrello:focus {
+    /*  &:extend(.divbuttonstyle);*/
+    color: @button-outline-color !important;
+    background-color: rgba(255, 255, 255, 1) !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @primary-color;
+    border: none;
+    border-radius: 0px;
+    white-space: normal;
+    border-color: @primary-color !important;
+}
+
+.carrellocustomoutline .button-carrello::after, .carrellocustomoutline .button-carrello:active::after, .carrellocustomoutline .button-carrello:visited::after, .carrellocustomoutline .button-carrello:focus::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-color: @primary-color !important;
+    border-top-width: @bd-bottom2-width !important;
+    border-right-width: @bd-bottom2-width !important;
+}
+
+
+.carrellocustomoutline .button-carrello::before, .carrellocustomoutline .button-carrello:active::before, .carrellocustomoutline .button-carrello:visited::before, .carrellocustomoutline .button-carrello:focus::before {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom-width: @bd-bottom2-width !important;
+    border-left-width: @bd-bottom2-width !important;
+}
+
+.carrellocustomoutline .button-carrello:not(.btn-carrello-esaurito):hover {
+    color: @color-sottomeu !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width transparent !important;
+    opacity: 1;
+    padding: 1rem 2rem !important;
+    line-height: 1 !important;
+}
+
+.carrellocustomoutline .button-carrello:hover::before, .carrellocustomoutline .button-carrello:hover::after {
+    border-color: @color-sottomeu !important;
+    -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carrellocustomoutline .button-carrello:hover::before {
+    -webkit-transition-delay: 0s, 0s, 0.25s;
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.carrellocustomoutline .button-carrello:hover::after {
+    -webkit-transition-delay: 0s, 0.25s, 0s;
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+
+/*PULSANTE AGGIUNGI SCHEDA ACQUISTO*/
+/*.carrellocustom .button-carrello.button-carrello-squared i:before {
+    content: '\f217';
+    text-transform: uppercase;
+}*/
+
+/*.carrellocustom .button-carrello.btn-carrello-esaurito i {
+    opacity: 1 !important;
+}*/
+
+/*.carrellocustom .button-carrello.btn-carrello-esaurito i:before {
+    content: '';
+    font-family: @button-font !important;
+}
+*/
+/*.carrellocustom .button-carrello.btn-carrello-esaurito i:after {
+    content: 'ARTICOLO ESAURITO';
+    font-family: @button-font !important;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}*/
+
+
+/*******************************************************************************/
 /**************carrello e prodotti*******************************************/
- 
+/*******************************************************************************/
+
 
 .cart-quantity {
     max-width: 130px;
