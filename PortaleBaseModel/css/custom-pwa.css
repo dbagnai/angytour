@@ -1201,7 +1201,7 @@ i .fa {
 }
 .simplemenu,
 .simplemenu * ~ .simplemenu:not(i) {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   border-color: #90cdcd !important;
 }
 .simplemenu .fa,
@@ -3943,7 +3943,7 @@ button.js-roundedpush:hover {
   background-color: #90cdcd;
 }
 .skills ul > li em {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #f3c649;
   font-size: 18px;
   position: relative;
@@ -4811,14 +4811,14 @@ button.js-roundedpush:hover {
   .menuzord,
   .menuzord *,
   .menuzord:not(i) {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-color: #90cdcd !important;
     font-size: 1rem;
   }
   .menuzord.white .menuzord-menu > li > a,
   .menuzord.white .menuzord-menu > li > a span {
     color: #032f2f;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -7870,7 +7870,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   color: #032f2f;
 }
 .count {
-  font-family: 'Fira Sans', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #032f2f;
   border: 1px solid #098f8f;
   position: absolute;
@@ -7889,7 +7889,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-size: 0.8rem;
 }
 .count:hover {
-  font-family: 'Fira Sans', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 .prezzo-responsive {
   font-size: 1.8vw;

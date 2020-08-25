@@ -1511,7 +1511,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   color: #032f2f;
 }
 .count {
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Raleway', sans-serif !important;
   color: #032f2f;
   border: 1px solid #098f8f;
   position: absolute;
@@ -1530,7 +1530,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-size: 0.8rem;
 }
 .count:hover {
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Raleway', sans-serif !important;
 }
 .prezzo-responsive {
   font-size: 1.8vw;
@@ -2677,10 +2677,10 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 /*menu - body*/
 /*'Roboto Condensed', sans-serif;*/
 .primary-font {
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Lora', serif !important;
 }
 .secondary-font {
-  font-family: 'Raleway', sans-serif !important;
+  font-family: 'Lora', sans-serif !important;
 }
 .base-font {
   font-family: 'Raleway', sans-serif !important;
@@ -3067,10 +3067,10 @@ a:hover {
 }
 .font-primary,
 .font-primary a {
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Lora', serif !important;
 }
 .font-secondary {
-  font-family: 'Raleway', sans-serif !important;
+  font-family: 'Lora', sans-serif !important;
 }
 .font-base,
 .font-base a {
@@ -3175,7 +3175,7 @@ i .fa {
 }
 .simplemenu,
 .simplemenu * ~ .simplemenu:not(i) {
-  font-family: 'Fira Sans', serif;
+  font-family: 'Raleway', sans-serif;
   border-color: #90cdcd !important;
 }
 .simplemenu .fa,
@@ -3238,7 +3238,7 @@ i .fa {
 .section-title * {
   position: relative;
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 3rem;
   font-weight: 400;
   text-transform: none;
@@ -3284,7 +3284,7 @@ h1 span:nth-child(1).mbr-section-title,
 .cart-quantity,
 .cart-total {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 3rem;
   font-weight: 400;
   text-transform: none;
@@ -3366,7 +3366,7 @@ h1 span:nth-child(1).mbr-section-title,
 .mbr-section-subtitle,
 h1 span .mbr-section-subtitle {
   color: #077777 !important;
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Lora', serif !important;
   font-size: 1.8rem !important;
   font-weight: 400;
   font-style: normal;
@@ -3787,7 +3787,7 @@ ul li .work-image.video:hover:after,
 }
 .motto-footer {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
 }
 .footerhead .footerheadcontainer:after,
 .footerhead .footerheadcontainer:before {
@@ -3968,7 +3968,7 @@ ul.footer-category-list {
 /*FOOTER ICON CATALOGO END*/
 .footer .footer-col .footer-title {
   color: #098f8f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-weight: bold;
   border-bottom: 1px solid #098f8f;
 }
@@ -4354,7 +4354,7 @@ ul.footer-category-list {
 .title-isotope,
 .big2 {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 2.2rem;
   font-weight: bold;
   width: 100%;
@@ -4437,7 +4437,7 @@ ul.footer-category-list {
 .isotope-navigation .work-subcaption .work-title,
 .titolo-offerta {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 1.4rem;
   font-weight: 400;
   font-style: normal;
@@ -4999,7 +4999,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .isotope-staff .work-subcaption .work-title {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 1.4rem;
   font-weight: bold;
   font-style: normal;
@@ -5063,7 +5063,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .title-banner-slider {
   color: #032f2f;
-  font-family: 'Fira Sans', serif;
+  font-family: 'Lora', serif;
   font-size: 1.4rem;
   font-weight: bold;
   font-style: normal;
@@ -5917,7 +5917,7 @@ button.js-roundedpush:hover {
   background-color: #90cdcd;
 }
 .skills ul > li em {
-  font-family: 'Fira Sans', serif;
+  font-family: 'Raleway', sans-serif;
   color: #f3c649;
   font-size: 18px;
   position: relative;
@@ -6785,14 +6785,14 @@ button.js-roundedpush:hover {
   .menuzord,
   .menuzord *,
   .menuzord:not(i) {
-    font-family: 'Fira Sans', serif;
+    font-family: 'Raleway', sans-serif;
     border-color: #90cdcd !important;
     font-size: 1rem;
   }
   .menuzord.white .menuzord-menu > li > a,
   .menuzord.white .menuzord-menu > li > a span {
     color: #032f2f;
-    font-family: 'Fira Sans', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -6958,7 +6958,7 @@ button.js-roundedpush:hover {
 .menutext-1 {
   color: #077777;
   font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
-  font-family: 'Fira Sans', serif !important;
+  font-family: 'Lora', serif !important;
   font-weight: 400;
   font-style: normal;
 }
