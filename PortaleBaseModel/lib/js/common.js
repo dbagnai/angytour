@@ -1508,7 +1508,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     else if ($(this).is("div")
                         && ($(this).hasClass('bookingtool'))
                     ) {
-                        var idrisorsa = dataitem[proprarr[0]];
+                        var idrisorsa = dataitem[proprarr[0]]; 
                         bookingtool.initbookingtool(idrisorsa, $(this).attr("id"));
                     }
                     else if ($(this).is("div")

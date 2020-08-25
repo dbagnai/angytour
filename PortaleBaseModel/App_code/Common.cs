@@ -271,11 +271,11 @@ public class CommonPage : Page
             }
         }
 
-#if false
-        //////////////////
+#if true
+        /////////////////////////
         //////MINIFICAZIONE HTML
-        //////////////////
-        //righe per minificare html in pagina ( problema funzionamento updatepanels nei porstback !!! )
+        /////////////////////////
+        //righe per minificare html in pagina ( problema funzionamento updatepanels nei postback !!! )
         if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
             html = NUglify.Uglify.Html(html).Code; 
 #endif

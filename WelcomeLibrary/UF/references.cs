@@ -761,7 +761,7 @@ public class references
     }
 
     /// <summary>
-    /// Serializza un oggetto con tutte le variabili base ad uso del javascript
+    /// Serializza un oggetto con tutte le variabili base ad uso del javascript, viene aggiornato ad ogni chiamata con i contenuti da usare nel javascript in pagina
     /// </summary>
     /// <param name="lingua"></param>
     /// <param name="loggedusername"></param>
@@ -786,8 +786,8 @@ public class references
         var reflanguages = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\cfg\\" + filejsonlanguages).Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
         jpathcomplete.jsonlanguages = reflanguages;// Newtonsoft.Json.JsonConvert.SerializeObject(reflanguages); 
         /////////////BASERESOURCES////////////////////////////////////////
+        jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, Dictionary<string, string>>());
         jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(references.GetResourcesByLingua(lingua));
-        //jpathcomplete.baseresources = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, Dictionary<string, string>>());
         ///////////////////////////////////////////////////////////////
         jpathcomplete.versionforcache = WelcomeLibrary.STATIC.Global.versionforcache;
         ////////////// REGIONI E PROIVINCE/////////////////////
@@ -828,7 +828,6 @@ public class references
         if (tipotmp != null)
             //linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
             linktmp = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, WelcomeLibrary.UF.SitemapManager.CleanUrl(tipotmp.Descrizione), "", tipotmp.Codice);
-
         jpathcomplete.percorsolistaimmobili = linktmp;
 
         /*Per ristoranti*/
@@ -837,8 +836,8 @@ public class references
         if (tipotmp1 != null)
             //linktmp = CommonPage.CreaLinkRoutes(null, false, lingua, CommonPage.CleanUrl(tipotmp1.Descrizione), "", tipotmp1.Codice);
             linktmp = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, WelcomeLibrary.UF.SitemapManager.CleanUrl(tipotmp1.Descrizione), "", tipotmp1.Codice);
-
         jpathcomplete.percorsolistaristoranti = linktmp;
+
         /*Per catalogo*/
         linktmp = "";
         tipotmp = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == lingua && tmp.Codice == "rif000001"); });

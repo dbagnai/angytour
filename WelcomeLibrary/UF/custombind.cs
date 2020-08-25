@@ -3715,7 +3715,7 @@ namespace WelcomeLibrary.UF
                                         jscommands.Add(Session.SessionID, new Dictionary<string, string>());
                                     if (jscommands[Session.SessionID].ContainsKey(nodetobind.Attributes["id"].Value)) jscommands[Session.SessionID].Remove(nodetobind.Attributes["id"].Value);
                                     //jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");");
-                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, WelcomeLibrary.UF.Utility.waitwrappercall("bookingtool.initbookingtool", "bookingtool.initbookingtool(" + idelement + "," + nodetobind.Attributes["id"].Value + ");"));
+                                    jscommands[Session.SessionID].Add(nodetobind.Attributes["id"].Value, WelcomeLibrary.UF.Utility.waitwrappercall("bookingtool.initbookingtool", "bookingtool.initbookingtool(" + idelement + ",'" + nodetobind.Attributes["id"].Value + "');"));
                                     //Imposto la chiamata da tornare
                                 }
 
