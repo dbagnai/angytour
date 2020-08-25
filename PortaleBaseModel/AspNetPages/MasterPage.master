@@ -1,14 +1,6 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-
 <html runat="server" id="htmltag">
 <head runat="server" id="masterHead">
     <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
@@ -367,9 +359,6 @@
                             </div>
                         </div>
                     </li>--%>
-
-
-                    <%--<%= CreaLinkTipologie(3,3) %>--%>
                     <%-- Catalogo --%>
                     <li class="catalogo-menu" runat="server">
                         <%--<a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>--%>
@@ -379,33 +368,11 @@
                             <%= CreaLinkCategorieNested("rif000001","",true) %>
                         </ul>
                     </li>
-                    <%-- Staff --%>
-                    <%--<%= CreaLinkTipologie(7,7) %>--%>
-                    <%-- Servizi - Punti di forza - prodotti --%>
-                    <%--<%= CreaLinkTipologie(3,3) %>--%>
-                    <%-- Portfolio --%>
                     <%= CreaLinkTipologie(5,5) %>
-                    <%-- Offerte --%>
                     <%= CreaLinkPaginastatica(4) %>
-
-                    <%-- Gallery --%>
-                    <%--<%= CreaLinkTipologie(6,6) %>--%>
-                    <%-- Esperienze --%>
-                    <%--<%= CreaLinkTipologie(8,8) %>--%>
-                    <%--TESTIMONIALS--%>
                     <%= CreaLinkTipologie(9,9) %>
-                    <%-- Faq --%>
                     <%= CreaLinkPaginastatica(3) %>
-                    <%--TIMI MENU--%>
-<%--                    <li runat="server">
-                        <a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu5") %></a> ("Common",Lingua,"testomenu5"),"rif000004","") %>--%>
-                        <ul class="dropdown">
-                            <%= CreaLinkPaginastatica(100) %>
-                            <%= CreaLinkPaginastatica(101) %>
-                            <%= CreaLinkPaginastatica(102) %>
-                        </ul>
-                    </li>--%>
-                    <%--PRENOTA--%>
+                     <%--PRENOTA--%>
                     <li runat="server">
                         <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
@@ -413,7 +380,6 @@
                     </li>
                     <%--CARRELLO--%>
                     <li runat="server" visible="true">
-
                         <asp:PlaceHolder runat="server" Visible="true">
                             <div class="carrellomaincontainer float-right d-none d-xl-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                                 <%--<a class="float-right" style="color: #666 !important; border: none"
@@ -553,54 +519,6 @@
             <div runat="server" id="divRicerca" visible="false">
                 <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
             </div>
-            <%--   <asp:Panel runat="server" ID="pnlRicerca" Visible="false">
-                <div class="container" style="text-align: center">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <br />
-                            <h2><%= references.ResMan("Common", Lingua,"testoRicercaCatalogo") %></h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica3" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica1" AppendDataBoundItems="true" Style="width: 100%" OnSelectedIndexChanged="ddlCaratteristica1_SelectedIndexChanged" AutoPostBack="true">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica2" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlCaratteristica4" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" ID="ddlFascePrezzo" AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:CheckBox Text='<%# references.ResMan("Common", Lingua,"TestoMenu1") %>' runat="server" Checked="false" ID="chkPromo" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <asp:DropDownList CssClass="form-control" runat="server" Width="99%" ID="ddlOrdinamento"
-                                AppendDataBoundItems="true" Style="width: 100%">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <br />
-                        <asp:Button class="divbuttonstyle" runat="server" OnClick="btnUsatoCerca_Click" ID="btnUsatoCerca" Text='<%# references.ResMan("Common", Lingua,"testoCerca") %>' />
-                    </div>
-                    <br />
-                    <br />
-                </div>
-            </asp:Panel>--%>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubhead" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -624,18 +542,6 @@
             <div style="max-width: 1600px; position: relative; margin: 0px auto; display: none;">
                 <div id="divnavigazioneJs0" style="background-color: transparent; padding-top: 40px; padding-bottom: 0px;"></div>
             </div>
-            <!-- HAI BISOGNO DI AIUTO? CHIAMACI ADESSO -->
-            <%--   <div class="col-12 p-0 d-block d-sm-none">
-                <div class="w-100 p-1 bg-primary-color text-white text-center"></div>
-                <div class="bind px-3 py-5 text-center bg-color-sottomeu-sfumato-veryalpha" style="font-size: 1.5rem">
-                    <span><%= references.ResMan("basetext", Lingua,"testocal1")%></span>
-                    <span>Chiamaci adesso al<br>
-                        <b><%= references.ResMan("Common", Lingua,"testoTelfisso")%></b><br>
-                        <br>
-                    </span>
-                    <a class="btn" href='<%=references.ResMan("Common", Lingua,"iconcelltext") %>'><%= references.ResMan("basetext", Lingua,"testocal2")%></a>
-                </div>
-            </div>--%>
             <div id="masterlow"></div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <%--START BANNER E_COMMERCE_ VENDITA IN BASSO--%>
@@ -693,9 +599,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
                                 <div style="clear: both"></div>
                                 <div>
                                     <script>
@@ -855,27 +758,9 @@
                                         
                                         <%= CreaLinkPaginastatica(2) %>
                                         <%= CreaLinkTipologie(3,3) %>
-                                        <%-- Pagina Catalogo --%>
-                                        <%--<%= CreaLinkPaginastatica(4) %>--%>
-                                        <%-- Shop --%>
-                                        <%--<%= CreaLinkTipologie(1,1) %>--%>
-                                        <%-- Staff --%>
-                                        <%--<%= CreaLinkTipologie(7,7) %>--%>
-                                        <%-- Servizi - Punti di forza - prodotti --%>
-                                        <%--<%= CreaLinkTipologie(3,3) %>--%>
-                                        <%-- Turni --%>
-                                        <%--<%= CreaLinkPaginastatica(3) %>--%>
-                                        <%-- Offerte --%>
                                          <%= CreaLinkPaginastatica(4) %>
-
-                                        <%-- Gallery --%>
-                                        <%--<%= CreaLinkTipologie(6,6) %>--%>
-                                        <%-- Esperienze --%>
                                         <%= CreaLinkTipologie(8,8) %>
-                                        <%--TESTIMONIALS--%>
                                         <%= CreaLinkTipologie(9,9) %>
-                                        <%-- Faq --%>
-                                        <%--<%= CreaLinkPaginastatica(3) %>--%>
                                         <%-- Contatti --%>
                                         <li>
                                             <a id="linkContatti" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
@@ -992,23 +877,9 @@
         <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib2" ) %>--%>
         <script>
-            var makeRevLower = false;
-           <%-- pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';  --%>
-     <%--       initLingua('<%= Lingua %>');--%>
-            //initimoment();
             jQuery(document).ready(function () {
-               <%-- loadref(testCacheversion, '<%=   WelcomeLibrary.STATIC.Global.versionforcache %>', '<%= Lingua %>');--%>
-                <%--  loadref(InitSearchControls, '<%= Lingua %>'); --%>
-                <%--  loadref(UpdateImmobiliJs, '<%= Lingua %>');--%>
             });
         </script>
-        <!--[if lt IE 9]>
-        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/ie-fixes.js")%>" ></script>
-        <link rel="stylesheet" src="<%= CommonPage.ReplaceAbsoluteLinks("~/css/ie-fixes.css")%>">
-        <![endif]-->
-        <!--[if lt IE 9]>
-        <script src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/respond.js")%>"  ></script>
-        <![endif]-->
         <asp:Panel runat="server" Visible="false">
             <div id="divforpush" style="overflow: auto; position: fixed; z-index: 999; bottom: 60px; left: 10px;" class="d-block">
                 <button type="button" class="js-push-btn js-roundedpush  btn btn-primary">

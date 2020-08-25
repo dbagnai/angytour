@@ -615,7 +615,6 @@
             "~/css/ui-personalization.css",
              //"~/js/odometer/themes/odometer-theme-custom.css",
              "~/js/aos/aos.css",
-             "~/css/custom1.css",
              "~/css/custom.css"
           );
 
@@ -650,7 +649,6 @@
          //"~/css/swiper/swiper.css",
          "~/css/swiper/swiper.min.css",
 
-          "~/css/custom1.css",
           "~/css/custom.min.css",
           "~/css/custom-pwa.css"
        );
