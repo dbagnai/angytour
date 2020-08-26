@@ -24,22 +24,18 @@
                         <!----------------------------------
                         ------ COLONNA LEFT DATI TECNICI ------
                         ----------------------------------->
-                        <div class="mb-4 w-100 faq-section">
+                        <div id="accordion1" class="mb-4 w-100 faq-section">
                             <div class="card">
-                                <div id="toggle" class="card-header" role="tab">
-                                    <a id="chevron-toggle" role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-parent="#accordion" data-core="" href="#dettagli" aria-expanded="false">
-                                        <h4 class="mbr-fonts-style display-7 p-3">
-                                            <i class="fa fa-chevron-down bind" aria-hidden="true" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></i>
+                                <div class="card-header" id="headingTwo1">
+                                    <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                        <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                            <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
                                         </h4>
                                     </a>
                                 </div>
-                                <div id="dettagli" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body p-3">
-                                        <div class="blog-post-body" itemprop="description">
-
-                                            <!--<div class="blog-post-body mb-4" itemprop="description">-->
-                                            <span class="bind" style="font-size:90%" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                                        </div>
+                                <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
+                                    <div class="card-body px-3 py-3">
+                                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                                     </div>
                                 </div>
                             </div>
@@ -162,25 +158,24 @@
                     <!----------------------------------
                     ------ COLONNA 1 DATI TECNICI ------
                     ----------------------------------->
-                    <div class="mb-4 w-100 faq-section">
+                    <div id="accordion2" class="mb-4 w-100 faq-section">
                         <div class="card">
-                            <div id="toggle" class="card-header" role="tab">
-                                <a id="chevron-toggle" role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-parent="#accordion" data-core="" href="#dettagli1" aria-expanded="false">
-                                    <h4 class="mbr-fonts-style display-7 p-3">
-                                        <i class="fa fa-chevron-down bind" aria-hidden="true" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></i>
+                            <div class="card-header" id="headingTwo2">
+                                <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                    <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
                                     </h4>
                                 </a>
                             </div>
-                            <div id="dettagli1" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body p-3">
-                                    <div class="blog-post-body" itemprop="description">
-
-                                        <span class="bind" style="font-size:90%" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                                    </div>
+                            <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordion2">
+                                <div class="card-body px-3 py-3">
+                                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
@@ -201,7 +196,7 @@
 
                             <div class="row">
                                 <div class="col mr-3">
-                                    <a  rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
                                         <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
                                         </div>
                                     </a>
@@ -210,7 +205,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a  rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
                                         <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
                                         </div>
                                     </a>

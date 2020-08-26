@@ -8,19 +8,17 @@
                         <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
                     </a>
                 </div>
-
-
                 <!----------------------------------------------
-                ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
+                ------ RIGA PREZZO E DATI AGGIUNTIVI ------
                 ----------------------------------------------->
-                <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3">
+                <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0">
                     <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
                     <meta itemprop="priceCurrency" content="EUR">
                     <meta itemprop="availability" content="https://schema.org/InStock">
                     <div class="tx-primary-color" style="font-weight: 500; font-size: 2rem; line-height: normal;">
                         <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                     </div>
-                    <div class="px-2 tx-secondary-color" style="font-weight: 300; font-size: 1.4rem; text-decoration: line-through; line-height: normal">
+                    <div class="px-2 tx-secondary-color" style="font-weight: 300; font-size: 1.4rem; text-decoration: line-through;">
                         <span style="padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                     </div>
                     <!--<div class="clearfix"></div>
@@ -34,7 +32,7 @@
                         <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
                     </div> -->
                 </div>
-                <!------------------ COLONNA RIGTH STELLINE --------------->
+                <!------------------ RIGA RECENZIONI STELLINE --------------->
                 <div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-3 px-lg-0" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
                 </div>
             </div>
@@ -55,6 +53,7 @@
                 ------ COLONNA 2 LEFT DESCRIZIONE ------
                 ---------------------------------->
                 <div class="mx-0 text-left" style="line-height: 1.6rem;">
+
                     <div class="blog-post-body mb-3" itemprop="description">
                         <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
                     </div>
@@ -81,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-lg-start">
+                    <div>
                         <div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
                     </div>
                 </div>

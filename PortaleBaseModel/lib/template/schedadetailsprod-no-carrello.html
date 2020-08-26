@@ -16,29 +16,25 @@
                 ------ COLONNA 2 LEFT DESCRIZIONE ------
                 ---------------------------------->
                 <div class="mx-0 text-left" style="line-height: 1.6rem;">
+
                     <div class="blog-post-body mb-3" itemprop="description">
                         <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
                     </div>
                     <!----------------------------------
                     ------ COLONNA LEFT DATI TECNICI ------
                     ----------------------------------->
-                    <div class="mb-4 w-100 faq-section">
+                    <div id="accordion1" class="mb-4 w-100 faq-section">
                         <div class="card">
-                            <div id="toggle" class="card-header" role="tab">
-                                <a id="chevron-toggle" role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-parent="#accordion" data-core="" href="#dettagli" aria-expanded="false">
-                                    <h4 class="mbr-fonts-style display-7 p-3">
-                                        <i class="fa fa-chevron-down bind" aria-hidden="true" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></i>
+                            <div class="card-header" id="headingTwo1">
+                                <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                    <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
                                     </h4>
                                 </a>
                             </div>
-                            <div id="dettagli" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body p-3">
-                                    <div class="blog-post-body" itemprop="description">
-
-                                        <!--<div class="blog-post-body mb-4" itemprop="description">-->
-                                        <span class="bind" style="font-size:90%" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                                    </div>
-
+                            <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
+                                <div class="card-body px-3 py-3">
+                                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                                 </div>
                             </div>
                         </div>
