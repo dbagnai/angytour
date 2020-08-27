@@ -276,8 +276,12 @@ public class CommonPage : Page
         //////MINIFICAZIONE HTML
         /////////////////////////
         //righe per minificare html in pagina ( problema funzionamento updatepanels nei postback !!! )
+        NUglify.Html.HtmlSettings nfset = new NUglify.Html.HtmlSettings(
+            );
+        nfset.RemoveEmptyAttributes = false;
+        nfset.ShortBooleanAttribute = false;
         if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
-            html = NUglify.Uglify.Html(html).Code; 
+            html = NUglify.Uglify.Html(html, nfset).Code; 
 #endif
         // da salvare l'html per la cache in corrispondenza dell' Request.RawUrl
 

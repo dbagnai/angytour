@@ -1,5 +1,4 @@
-﻿
-"use strict";
+﻿"use strict";
 
 $(document).ready(function () {
     connectCarrelloEvents();
@@ -70,82 +69,117 @@ var carrellotool = new function () {
                 });
 
             //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '0', Startdate, Enddate, '', quantita + 1, false,
+            //AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, idcarrello, '0', Startdate, Enddate, '', quantita + 1, false,
             //    function (data) {
-            //       openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
+            //        /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
+            //        var ret = "";
+            //        var parsedret = "";
+            //        if (data != null && data != "")
+            //            parsedret = JSON.parse(data);
+            //        if (parsedret != null && parsedret.hasOwnProperty("id"))
+            //            ret = parsedret.id;
+
+            //        //idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
+            //        /***********************************************************************************************************************************************/
+            //        openLink('/AspnetPages/Shoppingcart.aspx?Lingua=' + lng);//da verificare se redirect da funzione è ok
             //    });
 
             return;
         },
-        aggiungiacarrello: function () {
-            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, '', '', false, function (data) {
+        aggiungiacarrello: function (operatingtype) {
+            var operatingtype = operatingtype || '';
 
-                var ret = "";
-                var parsedret = "";
-                if (data != null && data != "")
-                    parsedret = JSON.parse(data);
-                if (parsedret != null && parsedret.hasOwnProperty("id"))
-                    ret = parsedret.id;
 
-                $('#' + controlid + "messages").html(parsedret.stato);
+            getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
 
-                /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
-                // idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
-                /***********************************************************************************************************************************************/
-                carrellotool.caricaquantita();
+                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) {
+                    $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
+                    return;
+                }
+                var Jsonfield1 = JSON.stringify(jsondetails);
+
+                if (operatingtype == '') {
+                    //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, Jsonfield1, '', false, function (data) {
+                        var ret = "";
+                        var parsedret = "";
+                        if (data != null && data != "")
+                            parsedret = JSON.parse(data);
+                        if (parsedret != null && parsedret.hasOwnProperty("id"))
+                            ret = parsedret.id;
+                        $('#' + controlid + "messages").html(parsedret.stato);
+                        carrellotool.caricaquantita();
+                    });
+                }
+                else if (operatingtype == 'multiplo') {
+                    //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHI CARRELLO CON STESSO PRODOTTO
+                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, Jsonfield1, '', true, function (data) {
+                        var ret = "";
+                        var parsedret = "";
+                        if (data != null && data != "")
+                            parsedret = JSON.parse(data);
+                        if (parsedret != null && parsedret.hasOwnProperty("id"))
+                            ret = parsedret.id;
+                        $('#' + controlid + "messages").html(parsedret.stato);
+                        /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
+                        idcarrello = ret;   //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
+                        /***********************************************************************************************************************************************/
+                        carrellotool.caricaquantita(operatingtype);
+                    });
+                }
+
             });
-            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (data) {
-            //var ret = "";
-            //var parsedret = "";
-            //if (data != null && data != "")
-            //    parsedret = JSON.parse(data);
-            //if (parsedret != null && parsedret.hasOwnProperty("id"))
-            //    ret = parsedret.id;
-            //    /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
 
-            // idcarrello = ret;   //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
-            //    /***********************************************************************************************************************************************/
-            //    carrellotool.caricaquantita();
-            //});
             return;
         },
-        sottradiacarrello: function () {
-            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, '', '', false, function (data) {
+        sottradiacarrello: function (operatingtype) {
+            var operatingtype = operatingtype || '';
+            getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
 
-                var ret = "";
-                var parsedret = "";
-                if (data != null && data != "")
-                    parsedret = JSON.parse(data);
-                if (parsedret != null && parsedret.hasOwnProperty("id"))
-                    ret = parsedret.id;
+                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) {
+                    $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
+                    return;
+                }
+                var Jsonfield1 = JSON.stringify(jsondetails);
 
-                $('#' + controlid + "messages").html(parsedret.stato);
-                /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
-                // idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
-                /***********************************************************************************************************************************************/
-                carrellotool.caricaquantita();
+
+                if (operatingtype == '') {
+                    //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, Jsonfield1, '', false, function (data) {
+                        var ret = "";
+                        var parsedret = "";
+                        if (data != null && data != "")
+                            parsedret = JSON.parse(data);
+                        if (parsedret != null && parsedret.hasOwnProperty("id"))
+                            ret = parsedret.id;
+                        $('#' + controlid + "messages").html(parsedret.stato);
+                        carrellotool.caricaquantita();
+                    });
+                }
+                else if (operatingtype == 'multiplo') {
+                    //VERSIONE CHE  PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, Jsonfield1, '', true, function (data) {
+                        var ret = "";
+                        var parsedret = "";
+                        if (data != null && data != "")
+                            parsedret = JSON.parse(data);
+                        if (parsedret != null && parsedret.hasOwnProperty("id"))
+                            ret = parsedret.id;
+                        $('#' + controlid + "messages").html(parsedret.stato);
+                        /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
+                        idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
+                        /***********************************************************************************************************************************************/
+                        carrellotool.caricaquantita(operatingtype);
+                    });
+                }
+
             });
-            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, '', '', true, function (data) {
-            //var ret = "";
-            //var parsedret = "";
-            //if (data != null && data != "")
-            //    parsedret = JSON.parse(data);
-            //if (parsedret != null && parsedret.hasOwnProperty("id"))
-            //    ret = parsedret.id;
-            //    /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO e  modificare parametro ************************************************************/
-            //    idcarrello = ret; //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
-            //    /***********************************************************************************************************************************************/
-            //    carrellotool.caricaquantita();
-            //});
             return;
         },
-        caricaquantita: function () {
+        caricaquantita: function (operatingtype) {
+            var operatingtype = operatingtype || '';
 
-            //Testiamo se presenti le caselle di specifica delle caratteristiche - devono esserci entrambe e valorizzate per funzinonare
+            //Testiamo se presenti le caselle di specifica delle caratteristiche relative al controllo quantità - devono esserci entrambe e valorizzate per funzinonare
             if ($('#' + controlid + "Caratteristica1").length > 0 && $('#' + controlid + "Caratteristica2").length > 0) {
                 if ($('#' + controlid + "Caratteristica1")[0].value != '' && $('#' + controlid + "Caratteristica2")[0].value != '')
                     idcombined = $('#' + controlid + "Caratteristica1")[0].value + "-" + $('#' + controlid + "Caratteristica2")[0].value;
@@ -154,17 +188,21 @@ var carrellotool = new function () {
                 //debugger;
             }
 
+            if (operatingtype == '') {
+                //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, false, function (ret) {
+                    var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
+                    $('#' + controlid + "qty").html(casellaqty);
+                });
+            }
+            else if (operatingtype == 'multiplo') {
+                //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, true, function (ret) {
+                    var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
+                    $('#' + controlid + "qty").html(casellaqty);
+                });
+            }
 
-            //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, false, function (ret) {
-                var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
-                $('#' + controlid + "qty").html(casellaqty);
-            });
-            //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-            //GetCurrentCarrelloQty('', idprodotto, idcombined, idcarrello, true, function (ret) {
-            //    var casellaqty = "<input style =\"width:40px;margin-top:10px;text-align:center\" class=\"form-control\" id='" + controlid + "qtyi' value='" + ret + "' />";
-            //    $('#' + controlid + "qty").html(casellaqty);
-            //});
         },
         caricatotale: function () { //Carica il totale a carrello attuale per l'elemento passato  
             GetCarrelloTotalForItem(idprodotto, idcombined, idcarrello, function (ret) {
@@ -196,14 +234,44 @@ var carrellotool = new function () {
     };
 
 
+    function getjsonfield(callback) {
+        var jsondetails = {};
+        var mustvalidate = false;
+        $(".ddlproperties").each(function () {
+            var idelem = $(this).attr('id');
+            var proprarr = $(this).attr('bindingprop');
+            //////
+            var needed = $(this).attr('needed');
+            if (needed != null && needed != "" && needed == "true")
+                mustvalidate = true;
+            else
+                mustvalidate = false;
+            //////
+            if ((idelem != null && idelem != "") && (proprarr != null && proprarr != "")) {
+                var valore = $("#" + idelem + " option:selected").val();
+                jsondetails[proprarr] = valore;
+                //check per valore necessario
+                if (mustvalidate)
+                    if (valore == null || valore == "") {
+                        if (jsondetails["notvalidmsg"] == null) jsondetails["notvalidmsg"] = (GetResourcesValue("msgcarrellovalido") + "<br/>");
+                        jsondetails["notvalidmsg"] += (GetResourcesValue("select" + proprarr.toLowerCase()) + "<br/>");
+                    }
+            }
+        });
+        callback(jsondetails);
+    }
+
+
+
     function Visualizzatasti(abilita) {
         var abilita = abilita || false;
+        var optiontype = $('#' + controlid + "qty").attr('optiontype');
 
         if (configview == 1 || configview == 3) {
             $('#' + controlid + "messages").html('');
             var onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\" onclick =\"carrellotool.inserisciacarrelloquantita()\"";
             if (!abilita) onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\"";
-            var btninserisci = "<div class=\"divbuttonstyle\"  " + onclickevent + ">" + GetResourcesValue("testoinseriscicarrellostd") + "</div>";
+            var btninserisci = "<div class=\"divbuttonstyle\"  " + onclickevent + ">" + GetResourcesValue("testoinseriscicarrello") + "</div>";
             $('#' + controlid + "messages").append(btninserisci);
             carrellotool.calcolatotale();
         }
@@ -211,18 +279,56 @@ var carrellotool = new function () {
             $('#' + controlid + "addsingle").html('');
             $('#' + controlid + "plus").html('');
             $('#' + controlid + "minus").html('');
-            var onclickevent1 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.aggiungiacarrello()\"";
+
+            var onclickevent1 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.aggiungiacarrello('" + optiontype + "')\"";
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
-            var btnaggiungi = "<div class=\"button-carrello\" style=\"font-size: 2rem;\" " + onclickevent1 + ">+</div>";
+            var btnaggiungi = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 1.4rem;\" " + onclickevent1 + ">+</div>";
             $('#' + controlid + "plus").append(btnaggiungi);
+
 
             var btnaggiungisingle = "<div class=\"divbuttonstyle\"  onclick =\"carrellotool.aggiungiacarrello()\">" + GetResourcesValue("testoinseriscicarrellostd") + "</div>";
             $('#' + controlid + "addsingle").append(btnaggiungisingle);
 
-            var onclickevent2 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.sottradiacarrello()\"";
+
+            var onclickevent2 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.sottradiacarrello('" + optiontype + "')\"";
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
-            var btnsottrai = "<div class=\"button-carrello\" style=\"font-size: 2rem;\" " + onclickevent2 + ">-</div>";
+            var btnsottrai = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 2rem;\" " + onclickevent2 + ">-</div>";
             $('#' + controlid + "minus").append(btnsottrai);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ////GESTIONE PROPRIETA' CARATTERISTICHE DEL PRODOTTO NON COMBINATE COME PROPRIETA DEL CARRELLO DA INSERIRE IN jsonfield1 alla selezione
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            $(".ddlproperties").each(function () {
+                $('#' + controlid + "addproperties").show();
+                var proprarr = $(this).attr('bindingprop');
+                var selectedlist = "";
+                switch (proprarr) {
+                    case "Caratteristica1":
+                        selectedlist = JSONcar1;
+                        break;
+                    case "Caratteristica2":
+                        selectedlist = JSONcar2;
+                        break;
+                    case "Caratteristica3":
+                        selectedlist = JSONcar3;
+                        break;
+                    case "":
+                        break;
+                }
+                $(this).change(setviewfield);//visualizziamo in valore correlato alla selezione
+
+                // per riempire la ddl
+                var idcontrollo = $(this).attr('id');
+                var selstring = '';
+                if (baseresources != null && baseresources.hasOwnProperty(lng) && baseresources[lng].hasOwnProperty("select" + proprarr.toLowerCase()))
+                    selstring = baseresources[lng]["select" + proprarr.toLowerCase()];
+                //Se la box contiene solo un valore lo presetto
+                var selectedvalueact = "";
+                if (selectedlist != null && selectedlist.length == 1)
+                    selectedvalueact = parseddatas[0].Codice;
+                convertToDictionaryandFill(selectedlist, 0, lng, idcontrollo, selstring, '', selectedvalueact, "");
+            });
+
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Riempio le selectbox con i valori delle caratteristiche ( i valori da bindare li devo predendere in base a idprodotto)
@@ -236,39 +342,54 @@ var carrellotool = new function () {
                         var localidp = idprodotto;
                         var localidcombine = idcombined;
                         //console.log(localidp + localidcontrol + localidcombine);
+
                         var idcontrollo = $(this).attr('id');
+                        //var proprarr = idcontrollo.replace(controlid, "");
+
                         $(this).change(carrellotool.caricaquantita);
-                        var proprarr = idcontrollo.replace(controlid, "");
-                        //debugger;
+                        var proprarr = $(this).attr('bindingprop');
                         var filter = "";//$(this).attr("myfilter");
                         var selectedvalueact = "";
                         /*Se passo il valore corretto -> presetto i valori idcombined*/
-                        //if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
-                        //    selectedvalueact = objfiltroint[idcontrollo];
+                        //if (objfiltroint != null && objfiltroint.hasOwnProperty(proprarr))
+                        //    selectedvalueact = objfiltroint[proprarr];
 
                         var selstring = '';
                         if (baseresources != null && baseresources.hasOwnProperty(lng) && baseresources[lng].hasOwnProperty("select" + proprarr.toLowerCase()))
                             selstring = baseresources[lng]["select" + proprarr.toLowerCase()];
-
                         if (dataparsed != null && dataparsed.hasOwnProperty(proprarr) && dataparsed[proprarr] != null && dataparsed[proprarr] != '') {
                             var parseddatas = JSON.parse(dataparsed[proprarr]);
                             //Se la box contiene solo un valore lo presetto
                             if (parseddatas.length == 1)
                                 selectedvalueact = parseddatas[0].Codice;
                             convertToDictionaryandFill(parseddatas, 0, lng, idcontrollo, selstring, '', selectedvalueact, filter);
-                            carrellotool.caricaquantita();
+                            carrellotool.caricaquantita(optiontype);
                         }
                         else $(this).hide();
-
                     });
                 }
                 else $('#' + controlid + "cars").remove();
             });
             ///////////////////////////////////////////////////////////////////////////////////////////
 
-            carrellotool.caricaquantita();
+            carrellotool.caricaquantita(optiontype);
         }
 
+    }
+
+
+    function setviewfield() {
+        var idcontrollo = $(event.target).attr('id');
+        var valore = $("#" + idcontrollo + " option:selected").val();
+        var testo = $("#" + idcontrollo + " option:selected").text();
+        var destinationid = idcontrollo + "view";
+        if ($("#" + destinationid).length > 0) {
+            $("#" + destinationid).html(testo);
+            var imgprefix = $("#" + destinationid).attr("imgprefix");
+            var pathimgselected = percorsocontenuti + "/con001000/1/" + imgprefix + "-" + valore + ".jpg";
+            var ccsvalue = 'background-image:url(' + pathimgselected + ');  background-position: center center  !important;  background-repeat:no-repeat;background-size: cover !important; width: 100%;height:60px';
+            $("#" + destinationid).attr("style", ccsvalue);
+        }
     }
 
 
@@ -346,6 +467,8 @@ var carrellotool = new function () {
         }
 
     }
+
+
 }
 
 
@@ -497,10 +620,6 @@ function InserisciCarrelloNopostback(testo) {
     var username = res[2];
     var contenitoredestinazione = '';
     AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username);
-    //AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, '', '', '', null, null, '', '', false, function (data) {
-    //    carrellotool.caricaquantita();
-    //});
-
 }
 
 function AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, idcombined, idcarrello, prezzo, datastart, dataend, Jsonfield1, mode, forceidcarrello, callback) {

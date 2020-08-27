@@ -1199,7 +1199,19 @@ namespace WelcomeLibrary.UF
                             if (!string.IsNullOrEmpty(templategallery))
                             {
                                 templategallery = templategallery.Replace("replaceid", dictpars["controlid"]);
-                                var flexgallerycontainer = template.DocumentNode.Descendants().Where(c => c.Id == "plhGallery");
+                                var flexgallerycontainer = template.DocumentNode.Descendants().Where(c => c.Id.ToLower() == "plhgallery");
+
+                                //agiunta funzione skip prima foto
+                                if ((flexgallerycontainer != null) && (flexgallerycontainer.Count() > 0))
+                                {
+                                    if (flexgallerycontainer.First().Attributes.Contains("myvalue1"))
+                                    {
+
+                                        if (flexgallerycontainer.First().Attributes["myvalue1"].Value.ToLower() == "skip")
+                                            templategallery = templategallery.Replace("skip=\"\"", "skip=\"true\"");
+                                    }
+                                }
+
                                 if ((flexgallerycontainer != null) && (flexgallerycontainer.Count() > 0))
                                 {
                                     HtmlDocument tmpdoc = new HtmlDocument();//Documento temporane per fre il binding ripetuto
@@ -2946,6 +2958,18 @@ namespace WelcomeLibrary.UF
                                         nodetobind.Attributes.Add("style", "display:none");
                                 }
                             }
+                            else
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
+                                    nodetobind.Attributes["style"].Value += ";display:none";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:none");
+                            }
+
+
                             if (linkloaded[idscheda].ContainsKey(bindproptitle))
                             {
                                 testo = linkloaded[idscheda][bindproptitle];
@@ -3388,6 +3412,16 @@ namespace WelcomeLibrary.UF
                                 imgslistdesc = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesdesc"]);
                             if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesratio") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesratio"]))
                                 imgslistratio = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
+
+
+
+                            bool skipfirst = false;
+                            if (nodetobind.Attributes.Contains("skip"))
+                            {
+                                string myvalue = nodetobind.Attributes["skip"].Value;
+                                if (myvalue == "true") skipfirst = true;
+                            }
+
                             //foreach (string img in imgslist)
                             StringBuilder sb = new StringBuilder();
                             string maxheight = "";
@@ -3395,6 +3429,14 @@ namespace WelcomeLibrary.UF
                             {
                                 try
                                 {
+
+
+                                    if (skipfirst && j == 0)
+                                    {
+                                        continue; //salto la prima
+                                    }
+
+
                                     /*<div class="slide" data-thumb="" >
                                    <div class="slide-content" style="position:relative;padding:1px">
                                        <img itemprop="image" style="border:none" src="" alt="" />
@@ -3512,12 +3554,27 @@ namespace WelcomeLibrary.UF
                                 imgslistdesc = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesdesc"]);
                             //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("imagesratio") && !string.IsNullOrEmpty(linkloaded[idscheda]["imagesratio"]))
                             //    imgslistratio = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(linkloaded[idscheda]["imagesratio"]);
+
+
+                            bool skipfirst = false;
+                            if (nodetobind.Attributes.Contains("skip"))
+                            {
+                                string myvalue = nodetobind.Attributes["skip"].Value;
+                                if (myvalue == "true") skipfirst = true;
+                            }
+
                             StringBuilder sb = new StringBuilder();
                             if (imgslist.Count() > 1)
                                 for (int j = 0; j < imgslist.Count(); j++)
                                 {
                                     try
                                     {
+                                        if (skipfirst && j == 0)
+                                        {
+                                            continue; //salto la prima
+                                        }
+
+
                                         sb.Append("<li> <img style=\"padding:5px\" src=\"");
 
                                         int position = imgslist[j].LastIndexOf('/');
