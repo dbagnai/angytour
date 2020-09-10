@@ -5210,7 +5210,7 @@ button.js-roundedpush:hover {
 /*----------------------------------
 --------- EFFETTO PULSANTE ---------
 ----------------------------------*/
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1179px) {
   .menuzord-menu *:not(.dropdown-menu) {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -5321,11 +5321,6 @@ button.js-roundedpush:hover {
     .menuzord-menu .current a:after {
         width: 100%;
     }*/
-}
-/*----------------------------------
---------------- FINE EFFETTO PULSANTE ---------------
-----------------------------------*/
-@media (min-width: 1025px) {
   .buttonmenu,
   a .buttonmenu {
     background: #f3c649 !important;
@@ -5357,6 +5352,9 @@ button.js-roundedpush:hover {
     border: none !important;
   }
 }
+/*----------------------------------
+--------------- FINE EFFETTO PULSANTE ---------------
+----------------------------------*/
 /* ---------------------------------
 ----- MENU MOBILE new template -----
 --------------------------------- */
