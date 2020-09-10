@@ -3,7 +3,7 @@ Item name: Menuzord - Responsive Megamenu
 Item Url: http://codecanyon.net/item/menuzord-responsive-megamenu/8536398
 Author: marcoarib - marco.arib@gmail.com
 License: http://codecanyon.net/licenses
-*/
+*/ 
 
 (function ($) {
     jQuery.fn.menuzord = function (options) {
@@ -256,9 +256,15 @@ License: http://codecanyon.net/licenses
 
         // return window's width
         function windowWidth() {
-            //return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            return $(window).width();
+            var viewportwidth =  window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            //var viewportheight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            // var viewportwidth = ($(window).width());//occhio include eventuali scrollbars del browser quindi se posso evito
+            if (viewportwidth == 0 || viewportwidth === undefined) viewportwidth = ($(window).width());
+            console.log('viewport: ' + viewportwidth);
+            return viewportwidth;
         }
+
+       
 
         // navigation start function
         function startMenu() {
