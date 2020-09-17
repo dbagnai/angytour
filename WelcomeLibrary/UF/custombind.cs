@@ -3000,6 +3000,37 @@ namespace WelcomeLibrary.UF
                                 nodetobind.Attributes.Add("style", "display:none");
                         }
                     }
+                    else if (nodetobind.Name == "img" && nodetobind.Attributes["class"].Value.Contains("imgfromresource"))
+                    {
+                        //<img src="keyfromresource" class="bind imgfromresource" mybind="Id" attrdest="src"  />
+                        string reskey = "";
+
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                            idscheda = itemdic[property];
+                        string attrbind = "src";
+                        if (nodetobind.Attributes.Contains("attrdest"))
+                            attrbind = nodetobind.Attributes["attrdest"].Value;
+
+                        if (nodetobind.Attributes.Contains(attrbind))
+                            reskey = nodetobind.Attributes[attrbind].Value;
+                        string imgsrc = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, reskey).Valore;
+                        if (!string.IsNullOrEmpty(imgsrc))
+                        {
+                            nodetobind.Attributes[attrbind].Value = imgsrc;
+                        }
+                        else
+                        {
+                            if (nodetobind.Attributes.Contains("style"))
+                            {
+                                nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:inline-block", "");
+                                nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
+                                nodetobind.Attributes["style"].Value += ";display:none";
+                            }
+                            else
+                                nodetobind.Attributes.Add("style", "display:none");
+                        }
+                    }
                     else if (nodetobind.Name == "img" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("revolution"))
                     {
                         string idscheda = "";
