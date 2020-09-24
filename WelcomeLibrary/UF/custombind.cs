@@ -3815,6 +3815,33 @@ namespace WelcomeLibrary.UF
                         if (itemdic.ContainsKey(property))
                         {
                             string idelement = itemdic[property];
+
+                            ///////////////////////////////
+                            // controllo verifica prezzo diverso zero per spengimento totale carrello
+                            //Il controllo vienee fatto solo se presente myvalue su carrello tool
+                            ///////////////////////////////
+                            string prop = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                            {
+                                prop = (nodetobind.Attributes["myvalue"].Value);
+                                string prezzo = itemdic[prop];
+                                double p = 0;
+                                double.TryParse(prezzo, out p);
+                                if ((prezzo == null || prezzo == "" || p == 0))
+                                {
+                                    if (nodetobind.Attributes.Contains("style"))
+                                    {
+                                        nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:inline-block", "");
+                                        nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
+                                        nodetobind.Attributes["style"].Value += ";display:none";
+                                    }
+                                    else
+                                        nodetobind.Attributes.Add("style", "display:none");
+                                    return;
+                                }
+                            }
+                            ///////////////////////////////
+
                             if (nodetobind.Attributes.Contains("id") && !string.IsNullOrEmpty(nodetobind.Attributes["id"].Value))
                             {
                                 string idcontenitorecarrello = nodetobind.Attributes["id"].Value;

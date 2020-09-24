@@ -38,22 +38,16 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         try
         {
-
             if (!IsPostBack)
             {
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
                 PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
                 PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
-
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
                 string registrazione = CaricaValoreMaster(Request, Session, "reg");
-                //Carico la galleria in masterpage corretta
-                //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "vuoto", false, Lingua);
-                //HtmlGenericControl divmaster = (HtmlGenericControl)Master.FindControl("SezioneContenutiHome");
-                //divmaster.Visible = false;
-                //Literal lit = (Literal)Master.FindControl("litPortfolioLow");
-                //Master.CaricaBannersPortfolio("TBL_BANNERS_GENERALE", 0, 0, "banner-portfolio-low", false, lit, Lingua);
+                HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                metarobots.Attributes["Content"] = "noindex,follow";
                 DataBind();
 
                 string conversione = CaricaValoreMaster(Request, Session, "conversione");
@@ -63,9 +57,9 @@ public partial class AspNetPages_Orderpage : CommonPage
                     return;
                 }
 
+
                 if (registrazione != "false")
                     VerificaStatoLoginUtente();
-
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
             }
@@ -88,6 +82,9 @@ public partial class AspNetPages_Orderpage : CommonPage
             output.Text = err.Message;
         }
     }
+
+
+
     protected void Visualizzarisposta()
     {
         pnlFormOrdine.Visible = false;
@@ -133,7 +130,6 @@ public partial class AspNetPages_Orderpage : CommonPage
             lblCodiceSconto.Text = "";
         }
         //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
-
         else
         {
             Session.Remove("codicesconto");
@@ -153,10 +149,19 @@ public partial class AspNetPages_Orderpage : CommonPage
             Session.Add("Errororder", references.ResMan("Common", Lingua, "testoRichiestalogin").ToString());
             Response.Redirect(references.ResMan("Common", Lingua, "linkLogin").ToString());
         }
+        ///////////////////////VERIFICA PER DISTRIBUTORI OBBLIGO DI LOGIN E PRESENZA ID CLIENTE ANAGRAFICA
+        usermanager USM = new usermanager();
+        string idcliente = getidcliente(User.Identity.Name); //id cliente associato all'utente
+        if (string.IsNullOrEmpty(idcliente) && !(USM.ControllaRuolo(Page.User.Identity.Name, "GestorePortale")) && !(USM.ControllaRuolo(Page.User.Identity.Name, "WebMaster")))
+        {
+            Response.Redirect("~/Error.aspx?Error=Utente non registrato, contattare il supporto per iscriversi al sistema di acquisto.");
+        }
+        else CaricaDatiCliente();
+
     }
 
     /// <summary>
-    /// Aggiorna l'associazione del carrello ai dati dell'utente loggato!!
+    /// Aggiorna l'associazione del carrello ai dati dell'utente loggato ed eventuale codice sconto in sessione!!
     /// </summary>
     /// <param name="carrello"></param>
     private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, long idcliente = 0)
@@ -223,7 +228,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         if (Session["codicesconto"] != null)
             txtCodiceSconto.Text = Session["codicesconto"].ToString();
-        
+
         eCommerceDM ecmDM = new eCommerceDM();
         //////////////////////////////////////////////////////////////////////////////
         //Prendiamo l'ip del client
@@ -240,7 +245,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
         }
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
-        
+
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
 
@@ -261,21 +266,40 @@ public partial class AspNetPages_Orderpage : CommonPage
 
 
         //SelezionaClientePerAffitti(carrello);//Dedicato alla gestione affitti
-        AggiornaDatiUtenteSuCarrello(carrello); //Aggiorno code sconto e idcliente
+        AggiornaDatiUtenteSuCarrello(carrello); //Aggiorno code sconto e idcliente attuale
         VisualizzaTotaliCarrello(codicenazione, "");
         CaricaDatiCliente();
 
     }
 
+    /// <summary>
+    /// Aggiorna i dati del cliente nel form visualizzato in base ai dati presenti nell'archivio clienti
+    /// ( Per i clienti loggati che quindi hanno un utente associato per lo login )
+    /// </summary>
     private void CaricaDatiCliente()
     {
-        string idcliente = getidcliente(User.Identity.Name);
+        string idcliente = getidcliente(User.Identity.Name); //prendo l'id associato al cliente loggato
         ClientiDM cliDM = new ClientiDM();
         Cliente c = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);
-        //Riempiamo il form di fatturazione ....
-
+        //Riempiamo il form dei dati cliente dal database
         if (c != null && c.Id_cliente != 0)
         {
+            //////////////////////////////////////////////////////////////////////////////////
+            //se presente sul cliente setto il codice sconto ( il primo che trovo ) e lo applico
+            Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(c.Codicisconto);
+            if (dict != null && dict.Count > 0)
+            {
+                foreach (KeyValuePair<string, double> kv in dict)
+                {
+                    txtCodiceSconto.Text = kv.Key;
+                    Session.Add("codicesconto", kv.Key);
+                    txtCodiceSconto.Enabled = false;
+                    break;
+                }
+            }
+            //////////////////////////////////////////////////////////////////////////////////
+            //VISUALIZZO I DATI DEL CLIENTE LETTI DAL DB
+            ///////////////////////////////////////////////////////////
             try
             {
                 if (!string.IsNullOrWhiteSpace(c.CodiceNAZIONE))
@@ -283,12 +307,16 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
             catch
             { }
+
             if (string.IsNullOrWhiteSpace(inpNome.Value))
                 inpNome.Value = c.Nome;
             if (string.IsNullOrWhiteSpace(inpCognome.Value))
                 inpCognome.Value = c.Cognome;
             if (string.IsNullOrWhiteSpace(inpRagsoc.Value))
+            {
                 inpRagsoc.Value = c.Cognome;
+            }
+
             if (string.IsNullOrWhiteSpace(inpPiva.Value))
                 inpPiva.Value = c.Pivacf;
             if (string.IsNullOrWhiteSpace(inpIndirizzo.Value))
@@ -305,11 +333,25 @@ public partial class AspNetPages_Orderpage : CommonPage
                 inpTel.Value = c.Telefono;
             if (string.IsNullOrWhiteSpace(inpPec.Value))
                 inpPec.Value = c.Emailpec;
+
+            //Precaricare dal db anche i campi per la spedizione da .serialized
+            Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
+            if (clispediz != null)
+            {
+                if (string.IsNullOrWhiteSpace(inpCaps.Value))
+                    inpCaps.Value = clispediz.Cap;
+                if (string.IsNullOrWhiteSpace(inpComuneS.Value))
+                    inpComuneS.Value = clispediz.CodiceCOMUNE;
+                //if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
+                //    inpProvinciaS.Value = clispediz.CodicePROVINCIA;
+                if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
+                    inpProvinciaS.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(clispediz.CodicePROVINCIA, Lingua)))) ? NomeProvincia(clispediz.CodicePROVINCIA, Lingua) : clispediz.CodicePROVINCIA;
+                if (string.IsNullOrWhiteSpace(inpIndirizzoS.Value))
+                    inpIndirizzoS.Value = clispediz.Indirizzo;
+                if (string.IsNullOrWhiteSpace(inpTelS.Value))
+                    inpTelS.Value = clispediz.Telefono;
+            }
         }
-
-
-        //Qui potrei aggiornare i dati del cliente in TBL_CLIENTI!!!!-> 
-        //da valutare se farlo o meno!!!
 
     }
 
@@ -407,24 +449,10 @@ public partial class AspNetPages_Orderpage : CommonPage
                 trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
             }
             eCommerceDM ecom = new eCommerceDM();
+
             //DATI DEL CLIENTE PRESI DAL FORM
             Cliente cliente = new Cliente();
-            //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTEcmd
-            Cliente clispediz = new Cliente(cliente);
-            if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
-                clispediz.Cap = inpCaps.Value;
-            if (!string.IsNullOrEmpty(inpComuneS.Value.Trim()))
-                clispediz.CodiceCOMUNE = inpComuneS.Value;
-            if (!string.IsNullOrEmpty(inpProvinciaS.Value.Trim()))
-                clispediz.CodicePROVINCIA = inpProvinciaS.Value;
-            if (!string.IsNullOrEmpty(inpIndirizzoS.Value.Trim()))
-                clispediz.Indirizzo = inpIndirizzoS.Value;
-            if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
-                clispediz.Telefono = inpTelS.Value;
-            string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
-            cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             CaricaDatiClienteDaForm(cliente);
-
             if (!(User.Identity != null && !string.IsNullOrWhiteSpace(User.Identity.Name))) // Se non loggato metto il cliente tra quelli newsletter
                 MemorizzaClientePerNewsletter(cliente);
 
@@ -435,8 +463,6 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             if (prodotti != null && prodotti.Count > 0)
             {
-
-
                 //vERIFICA finale PER IL BOOKING PRIMA DI ORDINARE!!!
                 if (!VerificaDisponibilitaEventoBooking(prodotti, "rif000001"))
                 {
@@ -646,6 +672,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //Prepariamo le richieste di feeback per gli articoli in ordine!!
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#if true
                         try
                         {
                             Mail mailfeedback = new Mail();
@@ -659,6 +686,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
                         }
                         catch { }
+#endif
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         item.CodiceOrdine = CodiceOrdine;
                         SalvaCodiceOrdine(item);
@@ -685,7 +713,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     {
                         case "I":
                             output.Text += "<div><br/>Ordine inviato correttamente. <br/>Sarete contattati a breve dal nostro personale.</div>";
-                           
+
                             break;
                         default:
                             output.Text += "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible.";
@@ -1240,21 +1268,41 @@ public partial class AspNetPages_Orderpage : CommonPage
         { }
     }
 
+    /// <summary>
+    /// carica i dati dal form cliente e aggiona il database clienti se presenti clienti corrispondenti in anagrafica con mail coincidente
+    /// </summary>
+    /// <param name="cliente"></param>
     private void CaricaDatiClienteDaForm(Cliente cliente)
     {
+        //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTEcmd
+        Cliente clispediz = new Cliente(cliente);
+        if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
+            clispediz.Cap = inpCaps.Value;
+        if (!string.IsNullOrEmpty(inpComuneS.Value.Trim()))
+            clispediz.CodiceCOMUNE = inpComuneS.Value;
+        if (!string.IsNullOrEmpty(inpProvinciaS.Value.Trim()))
+            clispediz.CodicePROVINCIA = inpProvinciaS.Value;
+        if (!string.IsNullOrEmpty(inpIndirizzoS.Value.Trim()))
+            clispediz.Indirizzo = inpIndirizzoS.Value;
+        if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
+            clispediz.Telefono = inpTelS.Value;
+        string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
+        cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //dati base cliente
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         cliente.CodiceNAZIONE = ddlNazione.SelectedValue;
         cliente.Cognome = inpCognome.Value;
         cliente.Nome = inpNome.Value;
         if (inpRagsoc.Value != "")
         {
+            if (inpCognome.Value != inpRagsoc.Value)
+                cliente.Nome += " " + cliente.Cognome;
             cliente.Cognome = inpRagsoc.Value;
-            cliente.Nome = "";
-
         }
         cliente.Email = inpEmail.Value;
         cliente.Emailpec = inpPec.Value;
-
         cliente.Pivacf = inpPiva.Value;
         cliente.Indirizzo = inpIndirizzo.Value;
         cliente.CodiceCOMUNE = inpComune.Value;
@@ -1262,14 +1310,15 @@ public partial class AspNetPages_Orderpage : CommonPage
         cliente.Cap = inpCap.Value;
         cliente.Telefono = inpTel.Value;
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Qui procedo ad aggiornare i dati in TBL_CLIENTI con quelli inseriti nel form ( facendo un match sulla mail del cliente in tabella!! )
         ClientiDM cliDM = new ClientiDM();
         Cliente clitmp = new Cliente();
         clitmp.Email = cliente.Email;
+        clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
         ClienteCollection clifiltrati = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp, true);
-        //clifiltrati = cliDM.GetLista(clitmp.Email, ""); ;
+        //clifiltrati = cliDM.GetLista(clitmp.Email, ""); 
+        //aggiornamento dati per clienti in archivio
         foreach (Cliente c in clifiltrati)
         {
             Cliente ctmp = new Cliente(c);
@@ -1280,16 +1329,14 @@ public partial class AspNetPages_Orderpage : CommonPage
             ctmp.Emailpec = cliente.Emailpec;
             ctmp.Pivacf = cliente.Pivacf;
             ctmp.Indirizzo = cliente.Indirizzo;
-
             ctmp.CodiceCOMUNE = cliente.CodiceCOMUNE;
             ctmp.CodicePROVINCIA = cliente.CodicePROVINCIA;
-
             ctmp.Cap = cliente.Cap;
             ctmp.Telefono = cliente.Telefono;
             ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
 
-            cliDM.InserisciAggiornaCliente("", ref ctmp);
-            cliente.Id_cliente = clitmp.Id_cliente;
+            cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref ctmp);
+            cliente.Id_cliente = ctmp.Id_cliente;
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
