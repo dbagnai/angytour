@@ -519,11 +519,17 @@ namespace WelcomeLibrary.UF
                 parameters.Add("idContenuto", id);
                 parameters.Add("CodiceContenuto", Tipologia);
             }
-            parameters.Add("Categoria", Categoria);
-            parameters.Add("Categoria2liv", Categoria2liv);
-            parameters.Add("anno", anno);
-            parameters.Add("mese", mese);
-            parameters.Add("Regione", regione);
+            if (!string.IsNullOrEmpty(Categoria))
+                parameters.Add("Categoria", Categoria);
+            if (!string.IsNullOrEmpty(Categoria2liv))
+                parameters.Add("Categoria2liv", Categoria2liv);
+            if (!string.IsNullOrEmpty(anno))
+                parameters.Add("anno", anno);
+            if (!string.IsNullOrEmpty(mese))
+                parameters.Add("mese", mese);
+            if (!string.IsNullOrEmpty(regione))
+                parameters.Add("Regione", regione);
+
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
