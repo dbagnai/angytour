@@ -3961,6 +3961,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
                                     valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
                                 else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind4") && itemdic.ContainsKey(nodetobind.Attributes["mybind4"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind4"].Value]);
+                                else valore.Add("");
 
                                 if (nodetobind.Attributes.Contains("myvalue"))
                                     prop.Add(nodetobind.Attributes["myvalue"].Value);
@@ -3973,6 +3976,9 @@ namespace WelcomeLibrary.UF
                                 else prop.Add("");
                                 if (nodetobind.Attributes.Contains("myvalue3"))
                                     prop.Add(nodetobind.Attributes["myvalue3"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue4"))
+                                    prop.Add(nodetobind.Attributes["myvalue4"].Value);
                                 else prop.Add("");
 
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
@@ -4007,6 +4013,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
                                     valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
                                 else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind4") && itemdic.ContainsKey(nodetobind.Attributes["mybind4"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind4"].Value]);
+                                else valore.Add("");
 
                                 if (nodetobind.Attributes.Contains("myvalue"))
                                     prop.Add(nodetobind.Attributes["myvalue"].Value);
@@ -4019,6 +4028,9 @@ namespace WelcomeLibrary.UF
                                 else prop.Add("");
                                 if (nodetobind.Attributes.Contains("myvalue3"))
                                     prop.Add(nodetobind.Attributes["myvalue3"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue4"))
+                                    prop.Add(nodetobind.Attributes["myvalue4"].Value);
                                 else prop.Add("");
 
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
@@ -4053,6 +4065,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("mybind3") && itemdic.ContainsKey(nodetobind.Attributes["mybind3"].Value))
                                     valore.Add(itemdic[nodetobind.Attributes["mybind3"].Value]);
                                 else valore.Add("");
+                                if (nodetobind.Attributes.Contains("mybind4") && itemdic.ContainsKey(nodetobind.Attributes["mybind4"].Value))
+                                    valore.Add(itemdic[nodetobind.Attributes["mybind4"].Value]);
+                                else valore.Add("");
 
                                 if (nodetobind.Attributes.Contains("myvalue"))
                                     prop.Add(nodetobind.Attributes["myvalue"].Value);
@@ -4066,7 +4081,9 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue3"))
                                     prop.Add(nodetobind.Attributes["myvalue3"].Value);
                                 else prop.Add("");
-
+                                if (nodetobind.Attributes.Contains("myvalue4"))
+                                    prop.Add(nodetobind.Attributes["myvalue4"].Value);
+                                else prop.Add("");
 
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 // da finire ....
@@ -4301,23 +4318,24 @@ namespace WelcomeLibrary.UF
                         string qtavendita = valore[1];
                         string xmlvalue = valore[2];
                         string prezzo = valore[3];
+                        string modclass = prop[0];
                         double p = 0;
                         double.TryParse(prezzo, out p);
                         double q = 0;
                         double.TryParse(qtavendita, out q);
                         if (q == 0 && qtavendita != "")
-                            ret = "<div  class=\"button-carrello btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
+                            ret = "<div  class=\"" + modclass + " button-carrello btn-carrello-esaurito\"  >" + testoCarelloesaurito + "</div>";
                         else
                         {
                             var testocall = id + "," + Lingua + "," + Username;
-                            ret = "<button type=\"button\"  class=\"button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
+                            ret = "<button type=\"button\"  class=\"" + modclass + " button-carrello\" onclick=\"javascript:InserisciCarrelloNopostback('" + testocall + "')\"  >" + testoInseriscicarrello + "</button>";
                             if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || p == 0))
                             {
                                 var link = "";
                                 if (linkloaded.ContainsKey(id) && linkloaded[id].ContainsKey("link"))
                                     link = linkloaded[id]["link"];
                                 ret = "<a href=\"" + link + "\" target=\"_self\" >";
-                                ret += "<div  class=\"button-carrello btn-carrello-esaurito\" >" + testoVedi + "</div>";
+                                ret += "<div  class=\" " + modclass + " button-carrello btn-carrello-esaurito\" >" + testoVedi + "</div>";
                                 ret += "</a>";
                             }
                         }
