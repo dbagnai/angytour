@@ -52,11 +52,12 @@
     </div>
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
-<%--        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700,800" />--%>
+        <%--        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700,800" />--%>
         <%--<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />--%>
 
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
         <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
@@ -375,7 +376,7 @@
                     <%= CreaLinkPaginastatica(4) %>
                     <%= CreaLinkTipologie(9,9) %>
                     <%= CreaLinkPaginastatica(3) %>
-                     <%--PRENOTA--%>
+                    <%--PRENOTA--%>
                     <li runat="server">
                         <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
@@ -555,7 +556,7 @@
                     <div class="mbr-overlay mbr-overlay-white"></div>
                     <div class="container">
                         <div class="row justify-content-center">
-                        <%--    <div class="col-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: 95% auto !important;">
+                            <%--    <div class="col-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: 95% auto !important;">
                                <div class="big2 text-white pt-5 my-5 text-right position-sticky" style="font-size: 3rem; line-height: 4rem !important; top: 150px; margin-bottom: 240px; text-shadow: rgba(0, 0, 0, 0.5) -1px 2px 5px;">
                                     <div><%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
                                     <span class="d-block d-lg-none text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span></div>
@@ -756,10 +757,10 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        
+
                                         <%= CreaLinkPaginastatica(2) %>
                                         <%= CreaLinkTipologie(3,3) %>
-                                         <%= CreaLinkPaginastatica(4) %>
+                                        <%= CreaLinkPaginastatica(4) %>
                                         <%= CreaLinkTipologie(8,8) %>
                                         <%= CreaLinkTipologie(9,9) %>
                                         <%-- Contatti --%>
@@ -772,7 +773,6 @@
                                         </li>
                                         <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                         <%= CreaLinkPaginastatica(100) %>
-
                                     </ul>
                                 </div>
                             </div>
