@@ -20,7 +20,7 @@ namespace WelcomeLibrary.UF
                 if (!string.IsNullOrEmpty(idclente))
                 {
                     WelcomeLibrary.DOM.Cliente c = WelcomeLibrary.DAL.ClientiDM.GetNomeClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idclente);
-                    nomecliente = c.Cognome + " " + c.Nome;
+                    nomecliente = (c.Cognome + " " + c.Nome).Trim();
                 }
 
                 if (!_users.ContainsKey(user.UserName))

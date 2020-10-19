@@ -2,11 +2,25 @@
     <div class="mx-3 mx-sm-0">
         <h1 itemprop="name" style="margin-bottom:4px">
             <a class="bind primary-color" target="_self" href="link" title="titolo" mybind="Id">
-                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                <span itemprop="headline" class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
                 <span style="font-size: 0.7em;line-height: 0.1;" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
                 </span>
             </a>
         </h1>
+        <!--VALORI PER LO SCHEMA-->
+        <meta itemprop="datePublished" class="bind" mybind="DataInserimento" format="formatdata" />
+        <!--<span itemprop="author" class="bind" mybind="Autorenome" style="display:none"></span>-->
+        <span itemprop="author"><span class="bind" mybind="Id" myvalue="common" myvalue1="ragsoc" format="formatstringfromresource"></span></span>
+        <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization" style="display:none">
+            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <img src="/images/main_logo_d.png" />
+                <meta itemprop="url" content="/images/main_logo_d.png">
+                <meta itemprop="width" content="1000">
+                <meta itemprop="height" content="925">
+            </div>
+            <span itemprop="name"><span class="bind" mybind="Id" myvalue="common" myvalue1="ragsoc" format="formatstringfromresource"></span></span>
+        </div>
+        <!-- fine VALORI PER LO SCHEMA-->
         <div class="text-left" style="padding-right:10px;font-size:1rem; font-style:italic;text-align:right;padding-bottom:0px;">
             <span class="bind linksmall-blog" mybind="Id" myvalue="linksezione" format="formatlinksezione" style="margin-right:10px; font-style:normal;"></span>
             <!--<span class="bind" mybind="Id" myvalue="selectcaratteristica1" format="formatlabelresource"></span>
@@ -71,7 +85,7 @@
 
                         <div class="row">
                             <div class="col mr-3">
-                                <a rel="nofollow" class="bind"  target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                <a rel="nofollow" class="bind" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
                                     <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
                                     </div>
                                 </a>
@@ -80,7 +94,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <a rel="nofollow" class="bind"   target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                <a rel="nofollow" class="bind" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
                                     <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
                                     </div>
                                 </a>

@@ -280,6 +280,8 @@ public class CommonPage : Page
             );
         nfset.RemoveEmptyAttributes = false;
         nfset.ShortBooleanAttribute = false;
+        nfset.RemoveInvalidClosingTags = false;
+        nfset.RemoveQuotedAttributes = false;
         if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
             html = NUglify.Uglify.Html(html, nfset).Code; 
 #endif

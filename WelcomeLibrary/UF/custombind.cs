@@ -4472,7 +4472,7 @@ namespace WelcomeLibrary.UF
                         string controllo = null;
                         if (resultinfo.ContainsKey(prop[0]))
                             controllo = resultinfo[prop[0]];
-                        if (controllo == "true")
+                        if (controllo == null || controllo == "true")
                         {
                             if (tmpDate != null && tmpDate != "")
                             {
@@ -4493,7 +4493,7 @@ namespace WelcomeLibrary.UF
                         string controllo = null;
                         if (resultinfo.ContainsKey(prop[0]))
                             controllo = resultinfo[prop[0]];
-                        if (controllo == "true")
+                        if (controllo == null || controllo == "true")
                         {
                             if (tmpDate != null && tmpDate != "")
                             {
