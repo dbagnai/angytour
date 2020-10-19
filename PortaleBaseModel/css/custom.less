@@ -864,15 +864,17 @@ p, p.lead, .lead p {
     /*z-index: 0;*/
     width: 100%;
     /*OCCHIO PER PER show ON SCROLL  SE CAMBI QUESTE NON FUNZiona DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:unset*/
-    overflow-x: inherit;
+    /*overflow-x: inherit;*/
+    overflow-x: hidden;
+    overflow-y: unset;
 }
-
+/*
 @media (max-width: 768px) {
     .body-wrapper {
         overflow-x: hidden;
     }
 }
-
+*/
 @media screen and (max-width: 415px) {
     .mbr-section-title, .title-block {
         font-size: 2rem;

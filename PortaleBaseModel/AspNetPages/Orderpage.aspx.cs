@@ -675,15 +675,19 @@ public partial class AspNetPages_Orderpage : CommonPage
 #if true
                         try
                         {
-                            Mail mailfeedback = new Mail();
+                            int J = 0;
+                            J++;
+                            if (J <= 2)
+                            {
+                                Mail mailfeedback = new Mail();
 
-                            mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
-                            mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
-                            mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
-                            mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
-                            mailfeedback.Id_card = item.id_prodotto;
-                            HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
-
+                                mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                                mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                                mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                                mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                                mailfeedback.Id_card = item.id_prodotto;
+                                HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+                            }
                         }
                         catch { }
 #endif

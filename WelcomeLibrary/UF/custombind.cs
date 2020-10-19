@@ -4254,7 +4254,7 @@ namespace WelcomeLibrary.UF
                 case "formatprezzoofferta":
                     try
                     {
-                        string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
+                          string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
                         var controllo = "";
                         if (resultinfo.ContainsKey(prop[0]))
                             controllo = resultinfo[prop[0]];
@@ -4262,7 +4262,7 @@ namespace WelcomeLibrary.UF
                         {
                             if (valore[0] != "" && valore[0] != "0")
 
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
+                                ret =  String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
                         }
                     }
                     catch { }
@@ -4319,6 +4319,8 @@ namespace WelcomeLibrary.UF
                         string xmlvalue = valore[2];
                         string prezzo = valore[3];
                         string modclass = prop[0];
+                        string modtext = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, prop[1]).Valore;
+                        if (!string.IsNullOrEmpty(modtext)) testoInseriscicarrello = modtext;
                         double p = 0;
                         double.TryParse(prezzo, out p);
                         double q = 0;

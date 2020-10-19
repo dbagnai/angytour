@@ -213,15 +213,18 @@ public partial class AspNetPages_OrdineOk : CommonPage
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             try
             {
+                int J = 0;
                 Mail mailfeedback = new Mail();
-
-                mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
-                mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
-                mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
-                mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
-                mailfeedback.Id_card = item.id_prodotto;
-                HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
-
+                J++;
+                if (J <= 2)
+                {
+                    mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                    mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                    mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                    mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                    mailfeedback.Id_card = item.id_prodotto;
+                    HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+                }
             }
             catch { }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
