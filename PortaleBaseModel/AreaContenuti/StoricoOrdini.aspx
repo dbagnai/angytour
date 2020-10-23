@@ -154,6 +154,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:HiddenField runat="server" ID="hididcommerciale" />
+    <asp:HiddenField runat="server" ID="hididcliente" />
 
     <div class="row">
         <div class="col-lg-3">

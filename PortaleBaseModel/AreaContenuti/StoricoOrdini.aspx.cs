@@ -33,6 +33,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         get { return Session["id_commerciale"] != null ? (string)(Session["id_commerciale"]) : ""; }
         set { Session["id_commerciale"] = value; }
     }
+
+
+
     public string Lingua
     {
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : CommonPage.deflanguage; }
@@ -50,18 +53,13 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
             id_cliente = CaricaValoreMaster(Request, Session, "id_cliente", true, "");
             id_commerciale = CaricaValoreMaster(Request, Session, "id_commerciale", true, "");
             hididcommerciale.Value = id_commerciale;
+            hididcliente.Value = id_cliente;
             CommonPage CommonPage = new CommonPage();
 
             //Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, "I");
             Lingua = "I";
 
-            /////////////////////////////////////////////////////////////////////
-            //Verifichiamo accesso socio e impostiamo la visualizzazione corretta
-            //Spegnendo le cose che non devono essere visibili ai soci!!!
-            /////////////////////////////////////////////////////////////////////
-            usermanager USM = new usermanager();
-            if (USM.ControllaRuolo(User.Identity.Name, "Commerciale"))
-                ImpostaVisualizzazione();
+            ImpostaVisualizzazione();
 
 
             CaricaOrdini();
@@ -69,20 +67,48 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
     }
     private void ImpostaVisualizzazione()
     {
-        string idcliente = getidcliente(User.Identity.Name);
-        if (!string.IsNullOrEmpty(idcliente))
+        /////////////////////////////////////////////////////////////////////
+        //Verifichiamo accesso socio e impostiamo la visualizzazione corretta
+        //Spegnendo le cose che non devono essere visibili ai soci!!!
+        /////////////////////////////////////////////////////////////////////
+        usermanager USM = new usermanager();
+        if (USM.ControllaRuolo(User.Identity.Name, "Commerciale"))
         {
-            id_commerciale = idcliente;
-            txtCommerciale.Text = idcliente;
-            hididcommerciale.Value = id_commerciale;
-            txtCommerciale.Enabled = false;
-            ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
+            string idcliente = getidcliente(User.Identity.Name);
+            if (!string.IsNullOrEmpty(idcliente))
+            {
+                id_commerciale = idcliente;
+                txtCommerciale.Text = idcliente;
+                hididcommerciale.Value = id_commerciale;
+                txtCommerciale.Enabled = false;
+                txtCommerciale.ReadOnly = true;
+                ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
+            }
+            else
+            {
+                Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+            }
         }
-        else
+        if (USM.ControllaRuolo(User.Identity.Name, "Distributore"))
         {
-            Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+            string idcliente = getidcliente(User.Identity.Name);
+            if (!string.IsNullOrEmpty(idcliente))
+            {
+                //txtCLIENTE.Text = "";
+                id_cliente = idcliente;
+                hididcliente.Value = id_cliente;
+                txtCLIENTE.Text = id_cliente;
+                txtCLIENTE.Enabled = false;
+                txtCLIENTE.ReadOnly = true;
+                txtCommerciale.Enabled = false;
+                txtCommerciale.ReadOnly = true;
+                ((HtmlGenericControl)Master.FindControl("ulMainbar")).Visible = false; //Spengo la barra navigazione
+            }
+            else
+            {
+                Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+            }
         }
-
     }
 
     protected static string TipopagaDisplay(object item)
@@ -235,6 +261,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         string idforced = id_commerciale;
         if (string.IsNullOrEmpty(idforced))
             idforced = txtCommerciale.Text;
+
         TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
         string csvName = "export-ordini-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".csv";
         string pathFile = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp\\";
@@ -249,6 +276,7 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         string idforced = id_commerciale;
         if (string.IsNullOrEmpty(idforced))
             idforced = txtCommerciale.Text;
+
         TotaliCarrelloCollection listaordini = CaricaDatiOrdini(txtCLIENTE.Text, txtCodiceordine.Text, txtdatamin.Text, txtdatamax.Text, idforced);
         string csvName = "export-ordini-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".xlsx";
         string pathFile = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp\\";

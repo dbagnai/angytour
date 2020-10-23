@@ -59,7 +59,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
 
                 if (registrazione != "false")
-                    VerificaStatoLoginUtente();
+                VerificaStatoLoginUtente();
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
             }
@@ -157,7 +157,6 @@ public partial class AspNetPages_Orderpage : CommonPage
             Response.Redirect("~/Error.aspx?Error=Utente non registrato, contattare il supporto per iscriversi al sistema di acquisto.");
         }
         else CaricaDatiCliente();
-
     }
 
     /// <summary>
@@ -350,7 +349,17 @@ public partial class AspNetPages_Orderpage : CommonPage
                     inpIndirizzoS.Value = clispediz.Indirizzo;
                 if (string.IsNullOrWhiteSpace(inpTelS.Value))
                     inpTelS.Value = clispediz.Telefono;
+
             }
+
+            //Abilita i dati spedizione se presenti
+            if (!string.IsNullOrEmpty(inpCaps.Value) || !string.IsNullOrEmpty(inpComuneS.Value) || !string.IsNullOrEmpty(inpProvinciaS.Value)
+            || !string.IsNullOrEmpty(inpIndirizzoS.Value) || !string.IsNullOrEmpty(inpTelS.Value))
+            {
+                chkSpedizione.Checked = false; plhShipping.Visible = true;
+            }
+
+
         }
 
     }
@@ -716,11 +725,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                     switch (Lingua)
                     {
                         case "I":
-                            output.Text += "<div><br/>Ordine inviato correttamente. <br/>Sarete contattati a breve dal nostro personale.</div>";
+                            output.Text += references.ResMan("Common", Lingua, "risposta_5");
 
                             break;
                         default:
-                            output.Text += "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible.";
+                            output.Text += references.ResMan("Common", Lingua, "risposta_5");
                             break;
                     }
 

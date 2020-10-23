@@ -863,18 +863,22 @@ p, p.lead, .lead p {
     position: relative;
     /*z-index: 0;*/
     width: 100%;
-    /*OCCHIO PER PER show ON SCROLL  SE CAMBI QUESTE NON FUNZiona DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:unset*/
-    /*overflow-x: inherit;*/
-    overflow-x: hidden;
-    overflow-y: unset;
+    /*OCCHIO PER PER TUTTI I COMPONENTI POSITION:STICKY  SE CAMBI QUESTE NON FUNZiona DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:visible
+        TUTTI GLI ANCESTOR DELL'ELEMENTO STICKY NON POSSONO AVERE OVERFLO HIDDEN...
+    */
+      /*overflow-x: hidden;*/
+    overflow-x: inherit;
+   /* overflow-y: unset;*/
 }
-/*
-@media (max-width: 768px) {
+
+@media (max-width: 1179px) {
     .body-wrapper {
-        overflow-x: hidden;
+        overflow-x: hidden; //serve a bloccare la visualizzazione per tablet e mobile senno balla a destra e sinistra
     }
 }
-*/
+
+
+
 @media screen and (max-width: 415px) {
     .mbr-section-title, .title-block {
         font-size: 2rem;
@@ -947,7 +951,7 @@ h1 span .mbr-section-subtitle {
 .section-content.section-px.sfondo3-bg {
     background-image: url(../images/sitespecific/sfondo-3.jpg);
 }
- 
+
 
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
 .quote-marks {
@@ -1442,7 +1446,7 @@ ul.footer-category-list {
 
 .footer .footer-col .footer-content .footer-category-list li a {
     margin-left: 0px;
-   /* color: @color-sottomeu;*/
+    /* color: @color-sottomeu;*/
 }
 
 
@@ -5234,7 +5238,7 @@ button.js-roundedpush:hover {
 /*----------------------------------
 --------------- FINE EFFETTO PULSANTE ---------------
 ----------------------------------*/
- 
+
 
 /* ---------------------------------
 ----- MENU MOBILE new template -----
@@ -5249,7 +5253,7 @@ button.js-roundedpush:hover {
         margin-bottom: 20px;
         margin-top: 5px;
         border: 1px solid;
-/*        background: @bg-figura-menu;*/
+        /*        background: @bg-figura-menu;*/
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: 70% auto;
