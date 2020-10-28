@@ -1991,6 +1991,9 @@ button:focus {
 button:hover {
   cursor: pointer;
 }
+.buttonmenu {
+  border-radius: 0 !important;
+}
 a.divbuttonstyle,
 .divbuttonstyle,
 .btn,
@@ -3993,6 +3996,7 @@ ul.footer-category-list {
   color: #fff;
   font-family: 'Raleway', sans-serif;
   font-size: 0.9em;
+  /*color: @link-footer-color;*/
 }
 .footer .footer-col .footer-content .footer-category-list li a:hover {
   /*color: #33332e;*/
@@ -4334,6 +4338,10 @@ ul.footer-category-list {
 .overlayvideobuttonsbottomright div {
   background: rgba(0, 0, 0, 0.4) !important;
   margin: 0 !important;
+}
+.cookies_policy input[type=button] {
+  padding: 8px !important;
+  margin: 8px 8px 8px 0 !important;
 }
 /*----------------------------------
 ---------- BANNER FASCIA -----------
@@ -6609,7 +6617,7 @@ button.js-roundedpush:hover {
   color: #fff;
   font-family: 'Raleway', sans-serif;
   font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin);
-  font-weight: 700;
+  font-weight: 700 !important;
   line-height: calc(40px + (50 - 40) * ((100vw - 768px) / (1200 - 768))) !important;
   text-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
   /*BANNER TESTATA HOME - 100% ON*/
@@ -6644,8 +6652,9 @@ button.js-roundedpush:hover {
   }
   #divContainerb2 {
     background-color: #eee;
-    height: calc(100vh - 95px - 40px - 70px) !important;
-    /* height: calc(((80vw)*105)/250) !important;*/
+    /*height: calc(100vh - 95px - 40px - 70px) !important;
+        height: calc(80vh - 141px) !important;*/
+    height: calc((80vw*105)/250) !important;
   }
   #divContainermobile {
     background-color: transparent;

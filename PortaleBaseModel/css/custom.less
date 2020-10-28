@@ -1550,6 +1550,7 @@ ul.footer-category-list {
     color: @body-footer-color;
     font-family: @base-font;
     font-size: @link-footer-size;
+    /*color: @link-footer-color;*/
 }
 
 .footer .footer-col .footer-content .footer-category-list li a:hover {
@@ -1939,6 +1940,10 @@ ul.footer-category-list {
     margin: 0 !important;
 }
 
+.cookies_policy input[type=button] {
+    padding: 8px !important;
+    margin: 8px 8px 8px 0 !important;
+}
 
 /*----------------------------------
 ---------- BANNER FASCIA -----------
@@ -4406,7 +4411,7 @@ button.js-roundedpush:hover {
     color: @subtitle-testata-home-color;
     font-family: @subtitle-testata-home-font;
     font-size: @scalable-medium-font-size;
-    font-weight: @subtitle-testata-home-weight;
+    font-weight: @subtitle-testata-home-weight !important;
     line-height: @subtitle-testata-home-line-height !important;
     text-shadow: -1px 2px 2px rgba(0,0,0,0.2);
     /*BANNER TESTATA HOME - 100% ON*/
@@ -4443,8 +4448,9 @@ button.js-roundedpush:hover {
 
     #divContainerb2 {
         background-color: #eee;
-        height: calc(100vh - 95px - 40px - 70px) !important;
-        /* height: calc(((80vw)*105)/250) !important;*/
+        /*height: calc(100vh - 95px - 40px - 70px) !important;
+        height: calc(80vh - 141px) !important;*/
+         height: calc(((80vw)*105)/250) !important;
     }
 
     #divContainermobile {
