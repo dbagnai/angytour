@@ -3682,9 +3682,9 @@ namespace WelcomeLibrary.DAL
                         start = end + 1;
                         //LEGGIAMO IL VALORE (NOMEALLEGATO)
                         item.NomeFile = Value.Substring(i, j);
-                        if (!Value.Substring(i, j).ToLower().StartsWith("http://") && !Value.Substring(i, j).ToLower().StartsWith("https://"))
-                            item.NomeAnteprima = "Ant" + Value.Substring(i, j);
-                        else
+                        //if (!Value.Substring(i, j).ToLower().StartsWith("http://") && !Value.Substring(i, j).ToLower().StartsWith("https://"))
+                        //    item.NomeAnteprima = "Ant" + Value.Substring(i, j);
+                        //else
                             item.NomeAnteprima = Value.Substring(i, j);
                         break;
                     case "des":

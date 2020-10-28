@@ -2982,11 +2982,11 @@ namespace WelcomeLibrary.UF
                                 //else
                                 //    nodetobind.Attributes.Add("style", "display:block");
                             }
-
-                            if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
-                                nodetobind.SetAttributeValue("target", "_self");
-                            else
-                                nodetobind.SetAttributeValue("target", "_blank");
+                            if (!(nodetobind.Attributes.Contains("target")))
+                                if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
+                                    nodetobind.SetAttributeValue("target", "_self");
+                                else
+                                    nodetobind.SetAttributeValue("target", "_blank");
 
                         }
                         else
@@ -4254,7 +4254,7 @@ namespace WelcomeLibrary.UF
                 case "formatprezzoofferta":
                     try
                     {
-                          string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
+                        string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
                         var controllo = "";
                         if (resultinfo.ContainsKey(prop[0]))
                             controllo = resultinfo[prop[0]];
@@ -4262,7 +4262,7 @@ namespace WelcomeLibrary.UF
                         {
                             if (valore[0] != "" && valore[0] != "0")
 
-                                ret =  String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
+                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
                         }
                     }
                     catch { }
