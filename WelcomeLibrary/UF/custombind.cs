@@ -4685,7 +4685,7 @@ namespace WelcomeLibrary.UF
 
         public static string CreaInitStringJavascriptOnly(Dictionary<string, string> addelements = null)
         {
-            string jscode = "<script>//![CDATA[\r\n";
+            string jscode = "<script>//<![CDATA[\r\n";
             ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands
@@ -4713,7 +4713,7 @@ namespace WelcomeLibrary.UF
 
         public static string CreaInitStringJavascript(string sessionid, Dictionary<string, string> addelements = null)
         {
-            string jscode = "<script>//![CDATA[\r\n";
+            string jscode = "<script>//<![CDATA[\r\n";
             ///*document.addEventListener("DOMContentLoaded", function(event) { //Do work });*/
             //String jqueryready = string.Format("$(function(){0});","console.log('ready from code binder')");
             //jscommands

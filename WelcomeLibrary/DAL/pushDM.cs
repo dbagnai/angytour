@@ -337,7 +337,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
-                item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db   
+                if (item.Id == 0) item.Id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db   
             }
             catch (Exception error)
             {
