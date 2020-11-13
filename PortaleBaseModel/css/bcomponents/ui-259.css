@@ -1,0 +1,102 @@
+
+
+/* Background color classes */
+.ui-259 .bg-white {
+    background-color: #ffffff !important;
+}
+
+.ui-259 .bg-grey {
+    background-color: #eeeeee !important;
+}
+
+.ui-259 .bg-black {
+    background-color: #555555 !important;
+}
+
+.ui-259 .bg-red {
+    background-color: #f75353 !important;
+}
+
+.ui-259 .bg-green {
+    background-color: #51d466 !important;
+}
+
+.ui-259 .bg-lblue {
+    background-color: #32c8de !important;
+}
+
+.ui-259 .bg-blue {
+    background-color: #609cec !important;
+}
+
+.ui-259 .bg-orange {
+    background-color: #f78153 !important;
+}
+
+.ui-259 .bg-yellow {
+    background-color: #fcd419 !important;
+}
+
+.ui-259 .bg-purple {
+    background-color: #cb79e6 !important;
+}
+
+.ui-259 .bg-rose {
+    background-color: #ff61e7 !important;
+}
+
+.ui-259 .bg-brown {
+    background-color: #d08166 !important;
+}
+
+/* General CSS */
+.ui-259 {
+    position: fixed;
+    bottom: 10px;
+    right: 80px;
+    z-index: 99;
+}
+    /* List */
+    .ui-259 .ui-list {
+        position: absolute;
+        bottom: 39px;
+        right: 45px;
+        height: 0px;
+        opacity: 0;
+    }
+        /* Icons */
+        .ui-259 .ui-list a {
+            display: block;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            font-size: 13px;
+            border-radius: 100%;
+            text-align: center;
+            color: #fff;
+            margin: 8px auto;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+        }
+    /* Button */
+    .ui-259 a.ui-btn {
+        position: absolute;
+        bottom: 27px;
+        right: 35px;
+        width: 53px;
+        height: 53px;
+        line-height: 53px;
+        border-radius: 100%;
+        text-align: center;
+        font-size: 32px;
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+
+    .ui-259 a.active {
+        transform: rotate(45deg);
+    }

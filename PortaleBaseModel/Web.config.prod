@@ -30,7 +30,7 @@
     <!-- Directory locale dei Log Files per il portale   
     <add key="PhyLogDir" value="d:\\Logs"/>   -->
     <!-- Importante Usato per l'archiviazione in remoto e la gestione dei mail -->
-    <add key="Nome" value="Locanda dei Tintori"/>
+    <add key="Nome" value="Nome del sito"/>
     <add key="Email" value="info@webmouse.sm"/>
     <!-- Bots Agents BLoccati -->
     <add key="bots" value="teleport;ripper;wget"/>

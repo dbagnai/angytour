@@ -4678,7 +4678,7 @@ ul.footer-category-list {
   text-align: right;
   white-space: pre-wrap;
   overflow: hidden;
-  overflow-wrap: break-word;
+  /*    overflow-wrap: break-word;*/
   letter-spacing: 1px !important;
 }
 .smalltext-funnel {
@@ -4691,7 +4691,7 @@ ul.footer-category-list {
   text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.2);
   white-space: pre-wrap;
   overflow: hidden;
-  overflow-wrap: break-word;
+  /*    overflow-wrap: break-word;*/
 }
 @media screen and (max-width: 768px) {
   .quote-marks-bigtext {
@@ -6624,7 +6624,7 @@ button.js-roundedpush:hover {
   text-align: center;
   white-space: pre-wrap;
   overflow: hidden;
-  overflow-wrap: break-word;
+  /*    overflow-wrap: break-word;*/
   /*BANNER TESTATA HOME - 55% ON*/
   /*text-align: left;
     white-space: pre-wrap;

@@ -547,6 +547,8 @@
             "~/js/detect-zoom.min.js",
             "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
+            "~/css/bcomponents/ui-259.js",
+
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
             "~/lib/js/common.js",
@@ -616,6 +618,7 @@
             "~/js/bootstrap-notify-master/css/styles/alert-custom2.css",
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
+            "~/css/bcomponents/ui-259.css",
                  "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
             "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css"
      );
