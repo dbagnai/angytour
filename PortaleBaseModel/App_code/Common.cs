@@ -1116,7 +1116,7 @@ public class CommonPage : Page
                 Item.Campo2 = idcombinato;
                 Item.Datastart = datastart;
                 Item.Dataend = dataend;
-                Item.jsonfield1 = jsonfield1;
+                Item.jsonfield1 = (!string.IsNullOrEmpty(jsonfield1)) ? jsonfield1 : Item.jsonfield1;
                 Item.Iva = (long)eCommerceDM.Getivabycodice2liv(off.CodiceCategoria2Liv, references.refivacategorie); //prendo l'iva dalla tabella categorie
             }
             else
@@ -1131,7 +1131,7 @@ public class CommonPage : Page
                     Item.Datastart = datastart;
                 if (dataend != null)
                     Item.Dataend = dataend;
-                Item.jsonfield1 = jsonfield1;
+                Item.jsonfield1 = (!string.IsNullOrEmpty(jsonfield1)) ? jsonfield1 : Item.jsonfield1;
                 Item.Iva = (long)eCommerceDM.Getivabycodice2liv(off.CodiceCategoria2Liv, references.refivacategorie);//prendo l'iva dalla tabella categorie
             }
 
