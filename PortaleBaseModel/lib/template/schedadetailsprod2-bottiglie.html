@@ -1,0 +1,405 @@
+﻿<style>
+    .haibisognodiaiuto {
+        display: block;
+    }
+
+    .titolo-condizioni-ordini {
+        display: none;
+    }
+
+    .collapsed.panel-title h4 {
+        font-weight: normal;
+        font-size: 1rem !important;
+        font-weight: 400;
+    }
+
+    .slides {
+        width: 100% !important;
+    }
+
+    .flexslider {
+        margin: 0 !important;
+    }
+
+    .slide-content {
+        padding: 0 !important;
+    }
+
+    .flexslider .slides img {
+        width: 100% !important;
+        max-height: 100% !important;
+        max-width: 100% !important;
+        height: auto !important
+    }
+
+    /*CARD*/
+    .scheda-bottiglie .faq-section b {
+        font-weight: 800 !Important;
+    }
+
+    .scheda-bottiglie .faq-section .card {
+        border: none;
+    }
+
+        .scheda-bottiglie .faq-section .card .card-header {
+            background-color: transparent !Important;
+        }
+
+            .scheda-bottiglie .faq-section .card .card-header a.panel-title h4 {
+                padding-top: 0.5rem !Important;
+                padding-bottom: 0.5rem !Important;
+                padding-left: 2.15rem !Important;
+            }
+
+    /*CARRELLO*/
+    #carrellos1plus .button-carrello {
+        /*padding-right: 2px !Important;*/
+        font-size: 1.8rem !Important;
+        line-height: 130% !Important;
+    }
+
+    #carrellos1minus .button-carrello {
+        /*padding-right: 2px !Important;*/
+        font-size: 1.8rem !Important;
+        line-height: 120% !Important;
+    }
+
+    #carrellos1addsingle .divbuttonstyle {
+        width: 100%;
+    }
+
+    #carrellos1messages .btn-black-outline {
+        line-height: 120% !Important;
+    }
+
+    a.btn.vaialcarrello-ok {
+        background-color: #41ad49 !important;
+        color: #fff !important;
+    }
+
+    .carrellos1messages-visible {
+        display: block !important;
+    }
+
+    /*breadcrumbs*/
+    .breadcrumbs {
+        max-width: calc(58.333333% + 25%) !important;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(58.333333% + 25%) !important;
+        flex: 0 0 calc(58.333333% + 25%) !important;
+        margin: 0 auto;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+        .breadcrumbs ul {
+            float: left !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important
+        }
+
+        .breadcrumbs li:last-child {
+            display: none;
+        }
+
+    @media screen and (max-width: 1366px) {
+        .breadcrumbs {
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        .breadcrumbs {
+            max-width: 100% !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100% !important;
+            flex: 0 0 100% !important;
+            margin: 0 auto;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+</style>
+
+
+<div id="replaceid" class="scheda-bottiglie" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
+    <div class="container pt-0 pt-sm-4 no-plygon">
+        <div class="row">
+
+            <!---------------------------------------------
+    ------ COLONNA 1 IMMAGINE ------
+    ---------------------------------------------->
+            <div class="col-12 col-lg-2 mt-0 mb-4 mt-lg-0 mb-lg-4 order-first">
+                <div class="position-sticky d-flex" style="top:120px;">
+                    <div id="plhGallery" class="bind col-4 col-lg-10 float-none p-0 float-lg-left mx-auto" mybind="Id" myvalue="video" format="frmvisibility"></div>
+                </div>
+            </div>
+
+            <!------------------------------
+    ------ COLONNA 2 CENTER TITOLO E DESCRIZIONE   ------
+    ------------------------------->
+            <div class="col-12 col-lg-6 order-last order-lg-1">
+                <!------- TITOLO ------>
+                <div itemprop="name" class="w-100 text-center text-lg-left mb-4 mx-0 mx-sm-3 d-none d-lg-block">
+                    <h1 itemprop="name" class="bind mb-2 tx-primary-color mt-0" style="line-height: 1.2;" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                    <h2 class="bind tx-sottomenu-color" style="font-weight:300" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox pb-0 pt-3"></div>
+                </div>
+
+                <div class="d-block mx-0 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
+                    <!------- DESCRIZIONE PRODOTTO ------>
+                    <div id="accordion" class="mb-0 mb-lg-4 w-100 faq-section">
+                        <!--<div class="card" style="border:none;">
+                    <div class="card-header" id="headingOne">
+                        <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body px-3 pb-3 pt-2" itemprop="description">
+                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                        </div>
+                    </div>
+                </div>-->
+                        <div class="card" style="border:none;">
+                            <div class="card-header" id="headingOne">
+                                <a class="collapsed panel-title text-black">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer; padding-left:1.55rem !important;">
+                                        <i class=""></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show">
+                                <div class="card-body px-3 pb-3 pt-2" itemprop="description">
+                                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ULTERIORI INFORMAZIONI-->
+                        <div class="card" style="border:none;">
+                            <div class="card-header" id="headingTwo">
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body px-3 pb-3 pt-2">
+                                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--SCHEDA TECNICA-->
+                        <div class="card" style="border:none;">
+                            <div class="card-header" id="headingThree">
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-up pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="schedatecnica" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body px-3 pb-3 pt-2">
+                                    <span class="bind" mybind="Indirizzo" myvalue="replacebr" myvalue1="6000" format="formatstringvalue"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--INFORMAZIONI PER ACQUISTO-->
+                        <div class="card" style="border:none;">
+                    <div class="card-header" id="headingFour">
+                        <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                <i class="fa fa-chevron-up pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="card-body px-3 pt-2 pb-0">
+                            <span class="bind" mybind="Id" myvalue="testoordine4" format="formatlabelresource"></span>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---------------------------------------------
+            ------ COLONNA 3 CALL TO ACTION ------
+            ---------------------------------------------->
+            <div class="col-12 col-lg-4 mt-3 mt-lg-0 mb-2 mb-lg-4 pb-1 pb-lg-2 order-lg-last">
+                <div class="position-sticky" style="top:120px">
+                    <!------- TITOLO ------>
+                    <div itemprop="name" class="w-100 text-center text-lg-left mb-4 mx-0 mx-sm-3 btn-block d-lg-none">
+                        <h1 itemprop="name" class="bind mb-2 tx-primary-color mt-0" style="line-height: 1.2;" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                        <h2 class="bind tx-sottomenu-color" style="font-weight:300" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_inline_share_toolbox pb-0 pt-3"></div>
+                    </div>
+                    <!--acquisto-->
+                    <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 pb-3">
+                        <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
+                        <meta itemprop="priceCurrency" content="EUR">
+                        <meta itemprop="availability" content="https://schema.org/InStock">
+                        <div class="tx-primary-color" style="font-weight: 800; font-size: 1.9em; line-height: normal;">
+                            <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                        </div>
+                        <div class="px-2 tx-secondary-color" style="font-weight: 200; font-size: 1.4em; text-decoration: line-through; line-height: normal">
+                            <span style="text-decoration: line-through; font-size: 1.3em; padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                        </div>
+                    </div>
+
+                    <!------------------ COLONNA RIGTH STELLINE --------------->
+                    <div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-3 px-lg-0" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
+                    </div>
+
+                    <!------------------ COLONNA RIGTH SOCIAL ----------------->
+                    <div mybind="Id" class="bind files-list" style="display:none"></div>
+
+                    <!-- SEZIONE GESTIONE CARRELLO -->
+                    <div id="carrellos1" class="bind carellotool w-100 mt-3 mt-lg-0 px-0" mybind="Id" myvalue="Prezzo">
+
+                        <!--SEZIONE AGGIUNGI AL CARRELLO-->
+                        <!--<div class="w-100 p-1 bg-primary-color text-white text-center"></div>-->
+                        <!--<div class="w-100 px-2 py-3 bg-light-color border bd-primary-color">-->
+                        <div class="w-100 d-flex d-lg-block d-xl-flex justify-content-between justify-content-sm-center justify-content-xl-between align-items-center">
+                            <div class="w-100 d-flex justify-content-center align-items-center ">
+                                <div id="carrellos1minus"></div>
+                                <div class="px-1" id="carrellos1qty" optiontype=""></div>
+                                <div id="carrellos1plus"></div>
+                                <div class="pl-2 w-100" id="carrellos1addsingle"></div>
+                                <div class="clearfix position-absolute d-none" style="right: 2rem;" id="carrellos1messages"></div>
+                            </div>
+                            <!--<div class="ml-3 ml-lg-0 mt-0 mt-lg-3 mt-xl-0 text-center bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>-->
+                        </div>
+                        <!--<div class="w-100 d-flex justify-content-center align-items-center ">
+            <div class="clearfix" id="carrellos1messages"></div>
+        </div>-->
+                    </div>
+                    <!--SEZIONE PER LA GESTIONE CARATTERISTICHE CON RIFERIMENTO ALLE QUANITA' -->
+                    <div id="carrellos1cars" class="px-2 py-3 bg-light-color border bd-primary-color" style="display:none">
+                        <div class="w-100 d-flex justify-content-center align-items-center ">
+                            <select id="carrellos1Caratteristica1" bindingprop="carrellos1Caratteristica1" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
+                            <select id="carrellos1Caratteristica2" bindingprop="carrellos1Caratteristica2" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
+                        </div>
+                    </div>
+
+                    <!--RIQUADRO INFO SOTTO AGGIUNGI AL CARRELLO-->
+                    <!--<div class="w-100 mt-3 p-1 bg-primary-color text-white text-center"></div>-->
+                    <div class="w-100 mt-3"></div>
+                    <!--pulsante apri il carrello-->
+                    <div class="pt-0 pb-3 w-100 px-0 bind vaialcarrello" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
+                    <!--riquadro hai bisogno di aiuto-->
+                    <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                        <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                    </div>
+                    <!-- pulsanti info utili 1 -->
+                    <div class="bind w-100 mx-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                    <!-- pulsanti social -->
+                </div>
+            </div>
+        </div>
+
+                <!---------------------------------------------------
+         ------ LONNA 4 100% - COMANDI NAVIGAZIONE ------
+         ---------------------------------------------------->
+                <div class="w-100">
+                    <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                        <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                            <div class="row">
+                                <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                            <div class="row justify-content-between">
+
+                                <div class="row">
+                                    <div class="col mr-3">
+                                        <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                            <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                            <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script>
+    // <![CDATA[
+    $("a[role=button]").click(function () {
+        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    });
+    $("#headingTwo a[role=button]").click(function () {
+        $('#headingThree').find('i').removeClass('fa-chevron-down')
+        $('#headingThree').find('i').addClass('fa-chevron-up')
+        $('#headingFour').find('i').removeClass('fa-chevron-down')
+        $('#headingFour').find('i').addClass('fa-chevron-up')
+    });
+    $("#headingThree a[role=button]").click(function () {
+        $('#headingTwo').find('i').removeClass('fa-chevron-down')
+        $('#headingTwo').find('i').addClass('fa-chevron-up')
+        $('#headingFour').find('i').removeClass('fa-chevron-down')
+        $('#headingFour').find('i').addClass('fa-chevron-up')
+    });
+    $("#headingFour a[role=button]").click(function () {
+        $('#headingTwo').find('i').removeClass('fa-chevron-down')
+        $('#headingTwo').find('i').addClass('fa-chevron-up')
+        $('#headingThree').find('i').removeClass('fa-chevron-down')
+        $('#headingThree').find('i').addClass('fa-chevron-up')
+    });
+    //$('a').click(function () {
+    //    $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    //});
+    //$("#chevron-toggle").click(function () {
+    //    $(this).find("i").toggleClass("fa-chevron-up");
+    //});
+// ]]></script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        //controllo pulsante aggiungi
+        $('#carrellos1addsingle .divbuttonstyle').addClass('button-carrello')
+        $('#carrellos1addsingle .divbuttonstyle').addClass('btn-primary-color')
+        $('#carrellos1minus .button-carrello').addClass('carrello-primary-color')
+        $('#carrellos1plus .button-carrello').addClass('carrello-primary-color')
+        //controllo pulsante apri il carrello
+        //var length = document.getElementById("carrellos1qtyi").value;
+        //if (typeof length > 0) {
+        $(".button-carrello:not(#carrellos1minus .button-carrello), .button-carrello1").click(function () {
+            $('.vaialcarrello a').addClass('vaialcarrello-ok');
+            setTimeout(RemoveClass, 3000);
+            $('#carrellos1messages').addClass('carrellos1messages-visible');
+            setTimeout(RemoveClass1, 1000);
+        });
+        function RemoveClass() {
+            $('.vaialcarrello a').removeClass('vaialcarrello-ok');
+        }
+        function RemoveClass1() {
+            $('#carrellos1messages').removeClass('carrellos1messages-visible');
+        }
+        //}
+    });
+</script>
+
