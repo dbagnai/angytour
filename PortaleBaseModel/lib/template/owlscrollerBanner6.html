@@ -7,11 +7,20 @@
     }
 </style>
 <div>
-    <a class="owl-btn prev-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; left: 20px;background-color:rgba(200, 200, 200,0.8)" id="replaceidprev"><i class="fa fa-chevron-left white-color"></i></a>
-    <a class="owl-btn next-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; right: 20px;background-color:rgba(200, 200, 200,0.8) " id="replaceidnext"><i class="fa fa-chevron-right white-color"></i></a>
+    <a class="owl-btn prev-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: 15px; left: 1.5rem;background-color:rgba(200, 200, 200,0.8)" id="replaceidprev"><i class="fa fa-chevron-left white-color"></i></a>
+    <a class="owl-btn next-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: 15px; right: 1.5rem;background-color:rgba(200, 200, 200,0.8) " id="replaceidnext"><i class="fa fa-chevron-right white-color"></i></a>
     <div class="row py-0 text-center">
         <div class="col-md-12 col-sm-12 col-12 px-0">
-            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-20">
+            <style>
+                .catalogo-sezioni .owl-controls {
+                    margin-top: -50px !important;
+                    padding-top: 1rem !important;
+                }
+                    .catalogo-sezioni .owl-controls .owl-page {
+                        position:relative
+                    }
+            </style>
+            <div class="owl-carousel-v1 catalogo-sezioni owl-work-v1 margin-bottom-20">
                 <div class="owl-slider-v2" id="replaceid">
                     <div class="item box">
                         <div class="card m-2" style="overflow:hidden;border:none">
@@ -27,7 +36,7 @@
                                 <!--<div class="work-subcaption text-center position-absolute p-0 w-auto" style="z-index: 9999999; bottom: 0; height: auto; overflow: visible; margin-bottom:50px !important">-->
                                 <div class="work-subcaption text-center position-relative p-2 mx-auto bg-white border-tipo2 rounded" style="width:90%;z-index: 10; bottom: 50px; height: auto; overflow: visible; margin-bottom:0px !important">
                                     <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                                        <h3 class="card-title titolo-offerta mb-2">
+                                        <h3 class="card-title titolo-offerta mb-2 mt-3">
                                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                                         </h3>
                                     </a>

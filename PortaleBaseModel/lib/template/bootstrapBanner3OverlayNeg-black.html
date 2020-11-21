@@ -1,5 +1,5 @@
 ﻿<style>
-    .squarevariable .imgovercontainer, .gradient-overlay-black-bottomtop, .oversquare {
+    /*.squarevariable .imgovercontainer, .gradient-overlay-black-bottomtop, .oversquare {
         -webkit-transition: all .35s ease;
         transition: all .35s ease;
     }
@@ -33,7 +33,7 @@
                 -webkit-transition: all .35s ease;
                 transition: all .35s ease;
                 background: none !important;
-            }
+            }*/
 
             /*IN CASO DI BANNER N° 4 a TUTTA LUNGHEZZA*/
     /*div.elemento-catalogo:nth-child(4) {
@@ -61,23 +61,30 @@
                 -o-transform: scale(0.667) rotate(-5deg);
                 transform: scale(0.667) rotate(-5deg);
             }*/
+
+
+
+    .squarevariable .imgovercontainer:after, .squarevariable .imgovercontainer:hover:after {
+        background: url(/images/link1.png) center calc(((100% - 170px - 40px) /2) + 25px) no-repeat !important;
+        background-size: 50px 50px !important;
+    }
 </style>
 
 
-<div class="row no-gutters squarevariable" id="replaceid">
-    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+<div class="row no-gutters squarevariable" id="replaceid" style="margin:-0.5rem !important;">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
         <div class="card m-2 border-tipo2 p-0" style="overflow: hidden; border-radius: .25rem !important;">
             <a class="bind d-block" preload target="_self" href="link" title="titolo" mybind="Id">
-                <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id" style="padding-bottom: 100%;">
+                <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id" style="padding-bottom: 100%;min-height: auto;">
                     <div class="oversquare position-absolute"></div>
                     <!--<div class="card-img-overlay card-gradient-overlay">-->
                     <div class="card-img-overlay gradient-overlay-black-bottomtop">
-                        <div style="position:absolute;display:block;z-index:96;bottom:20px;width: calc(100% - 40px);text-align:center">
+                        <div class="px-4" style="position:absolute;display:block;z-index:96;bottom:20px;width: calc(100% - 40px);text-align:center">
                             <h3 class="card-title titolo-offerta scalablefont-medium-big">
                                 <span class="bind text-white" mybind="Id" myvalue="titolo" format="formattitle"></span>
                             </h3>
-                            <div class="w-50 mx-auto my-2" style="border-bottom: 2px solid;color:#ffffff"></div>
-                            <h4 class="card-subtitle sottotitolo-offerta scalablefont-small mt-0 mb-4 mb-sm-5">
+                            <div class="w-50 mx-auto mt-3 mb-4" style="border-bottom: 2px solid;color:#ffffff"></div>
+                            <h4 class="card-subtitle sottotitolo-offerta scalablefont-small mt-0 mb-4 mb-sm-4">
                                 <span class="bind text-white" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             </h4>
                         </div>

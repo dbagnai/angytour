@@ -1,12 +1,46 @@
 ﻿@import "custom-monocromo.less";
 
+@media screen and (min-width: 1179px) {
+    /*PULSANTI menu STILE PULSANTE BACKGROUND*/
+    /*.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span {
+        background-color: #ca9e67;
+        min-width: 180px !important;
+        border-radius: 2px !important;
+    }
+    #menuzord.menuzord.white .menuzord-menu > li > a, #menuzord.menuzord.white .menuzord-menu > li > a span {
+        color: #fff;
+    }
+    #menuzord.menuzord.white .menuzord-menu > li > a:active, .menuzord.white .menuzord-menu > li > a:active span, .menuzord.white .menuzord-menu > li > a:hover, .menuzord.white .menuzord-menu > li > a:hover span, #menuzord.menuzord.white .menuzord-menu ul.dropdown li:hover > a, #menuzord.menuzord.white .menuzord-menu ul.dropdown li:hover > a:active {
+        background-color: #fff !important;
+    }*/
+    /*PULSANTI menu STILE PULSANTE BORDER*/
+    .menuzord.white .menuzord-menu > li > a {
+        min-width: 150px !important;
+        height: 37px !important;
+        line-height: 20px;
+        border-radius: 2px !important;
+        font-size: 0.8rem !important;
+        background-color: rgba(255, 255, 255, 0.5)
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a {
+        border: 1px solid rgba(0, 0, 0, 0.32) !important;
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a:not(:hover) {
+        color: @primary-color !important;
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a:active, #menuzord.menuzord.white .menuzord-menu > li > a:active span, #menuzord.menuzord.white .menuzord-menu > li > a:hover, #menuzord.menuzord.white .menuzord-menu > li > a:hover span {
+        background-color: rgba(255, 255, 255, 0.0) !important;
+        border: 1px solid rgba(0, 0, 0, 0.0) !important;
+    }
+}
 
 /*----------------------------------
 -------------- PULSANTI --------------
 ----------------------------------*/
-
-
-
 button:focus {
     outline: none;
 }
@@ -38,7 +72,6 @@ a.divbuttonstyle:visited, .divbuttonstyle:visited, btn:visited, input:visited[ty
     text-align: center;
     white-space: normal;
     height: auto !important;
-
     /*border: 1px solid @bg-button-color;*/
     border: none;
     cursor: pointer;
@@ -49,6 +82,7 @@ a.divbuttonstyle:visited, .divbuttonstyle:visited, btn:visited, input:visited[ty
     box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu;
     -webkit-transition: color 0.25s 0.0833333333s;
     transition: color 0.25s 0.0833333333s;
+    border-radius: 0;
 }
 
 
@@ -169,36 +203,109 @@ a.btn-black-outline:active, a.btn-black-outline:focus {
 }
 
 
+/*STILE PULSANTE color OUTLINE*/
+.carrellocustom .button-carrello, .carrellocustom .button-carrello:active, .carrellocustom .button-carrello:visited, .carrellocustom .button-carrello:focus,
+.btn .btn-black, .btn .btn-black:active, .btn .btn-black:visited, .btn .btn-black:focus,
+.btn-black-outline, .btn-black-outline:active, .btn-black-outline:visited, .btn-black-outline:focus,
+a.btn-black-outline, a.btn-black-outline:active, a.btn-black-outline:visited, a.btn-black-outline:focus {
+    box-shadow: inset 0 0 0 @bd-bottom2-width @bg-primary-color;
+    color: @button-outline-color !important;
+    -webkit-transition: color 0.25s 0.0833333333s;
+    transition: color 0.25s 0.0833333333s;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    border: none;
+    cursor: pointer;
+    line-height: 1.3;
+    font-family: @button-font;
+    letter-spacing: 2px;
+    font-size: @button-size;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 1rem 2rem;
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    text-transform: lowercase !important;
+    white-space: normal;
+    border-radius: 0px;
+}
+
+.carrellocustom .button-carrello::after, .carrellocustom .button-carrello:active::after, .carrellocustom .button-carrello:visited::after, .carrellocustom .button-carrello:focus::after,
+.btn .btn-black::after, .btn .btn-black:active::after, .btn .btn-black:visited::after, .btn .btn-black:focus::after, .btn .btn-black:focus::after,
+.btn-black-outline::after, .btn-black-outline:active::after, .btn-black-outline:visited::after, .btn-black-outline:focus::after, .btn-black-outline:focus::after,
+a.btn-black-outline::after, a.btn-black-outline:active::after, a.btn-black-outline:visited::after, a.btn-black-outline:focus::after, a.btn-black-outline:focus::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-top-width: @bd-bottom2-width !important;
+    border-right-width: @bd-bottom2-width !important;
+}
+
+.carrellocustom .button-carrello::before, .carrellocustom .button-carrello:active::before, .carrellocustom .button-carrello:visited::before, .carrellocustom .button-carrello:focus::before,
+.btn-black-outline::before, .btn-black-outline:active::before, .btn-black-outline:visited::before, .btn-black-outline:focus::before,
+.btn .btn-black::before, .btn .btn-black:active::before, .btn .btn-black:visited::before, .btn .btn-black:focus::before,
+a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-outline:visited::before, a.btn-black-outline:focus::before {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom-width: @bd-bottom2-width !important;
+    border-left-width: @bd-bottom2-width !important;
+}
+
+.carrellocustom .button-carrello:hover, .btn-black-outline:hover, .btn .btn-black:hover, a.btn-black-outline:hover {
+    color: @color-sottomeu !important;
+    background-color: #fff !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu-tenue;
+    opacity: 1;
+    border-radius: 0 !Important;
+}
+
+.carrellocustom .button-carrello:hover::before, .btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before,
+.carrellocustom .button-carrello:hover::after, .btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
+    border-color: @color-sottomeu !important;
+    -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carrellocustom .button-carrello:hover::before, .btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before {
+    -webkit-transition-delay: 0s, 0s, 0.25s;
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.carrellocustom .button-carrello:hover::after, .btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
+    -webkit-transition-delay: 0s, 0.25s, 0s;
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+
+.carrellocustom .button-carrello {
+    width: 100%;
+}
 
 /*STILE PULSANTE white OUTLINE*/
 .btn-white-outline, .btn-white-outline:active, .btn-white-outline:visited, .btn-white-outline:focus .btn .btn-white, .btn .btn-white:active, .btn .btn-white:visited, .btn .btn-white:focus {
-    font-family: @button-font;
-    font-size: @button-size;
-    font-weight: @font-weight-medium;
-    position: relative;
-    line-height: 1.3;
-    letter-spacing: 2px;
-    padding: 1rem 2rem;
-    margin: 0 auto;
-    display: inline-block;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    text-shadow: none;
-    text-align: center;
-    white-space: normal;
-    height: auto !important;
-    border: none;
-    border-radius: 0px;
-    cursor: pointer;
-    /*    text-transform: uppercase !important;*/
-    /* -webkit-border-radius: 1.4rem;
-    -moz-border-radius: 1.4rem; 
-    border-radius: 1.4rem;  */
-    -webkit-transition: color 0.25s 0.0833333333s;
-    transition: color 0.25s 0.0833333333s;
+    &:extend(.divbuttonstyle);
     color: @button-outline-color !important;
     background-color: rgba(255, 255, 255, 1) !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width #fff;
+    border: none;
+    border-radius: 0px;
+    white-space: normal;
 }
 
 .btn-white-outline::after, .btn-white-outline:active::after, .btn-white-outline:visited::after, .btn-white-outline:focus .btn .btn-white::after, .btn .btn-white:active::after, .btn .btn-white:visited::after, .btn .btn-white:focus::after {
@@ -250,6 +357,92 @@ a.btn-white-outline:hover::after, div.btn-white-outline:hover::after, .btn-white
 }
 
 
+/*STILE PULSANTE DARK (@primary-color)*/
+.btn-primary-color, .btn-primary-color:active, .btn-primary-color:visited, .btn-primary-color:focus .btn .btn-primary-color, .btn .btn-primary-color:active, .btn .btn-primary-color:visited, .btn .btn-primary-color:focus {
+    &:extend(.divbuttonstyle);
+    color: @button-outline-color !important;
+    background-color: @primary-color !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @primary-color !important;
+    border: none;
+    border-radius: 0px;
+    white-space: normal;
+}
+
+.btn-primary-color::after, .btn-primary-color:active::after, .btn-primary-color:visited::after, .btn-primary-color:focus .btn .btn-primary-color::after, .btn .btn-primary-color:active::after, .btn .btn-primary-color:visited::after, .btn .btn-primary-color:focus::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-top-width: @bd-bottom2-width !important;
+    border-right-width: @bd-bottom2-width !important;
+}
+
+.btn-primary-color::before, .btn-primary-color:active::before, .btn-primary-color:visited::before, .btn-primary-color:focus .btn .btn-primary-color::before, .btn .btn-primary-color:active::before, .btn .btn-primary-color:visited::before, .btn .btn-primary-color:focus::before {
+    &:extend(.btn-white-outline::after);
+    border-top-width: 0px !important;
+    border-right-width: 0px !important;
+    border-bottom-width: @bd-bottom2-width !important;
+    border-left-width: @bd-bottom2-width !important;
+}
+
+a.btn-primary-color:hover, .btn-primary-color:hover, .btn .btn-primary-color:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width rgba(255, 255, 255, 0) !important;
+    opacity: 1;
+}
+
+a.btn-primary-color:hover::before, div.btn-primary-color:hover::before, .btn-primary-color:hover::before, button.btn-primary-color:hover::before, button.btn-primary-color:hover::before,
+a.btn-primary-color:hover::after, div.btn-primary-color:hover::after, .btn-primary-color:hover::after, button.btn-primary-color:hover::after, button.btn-primary-color:hover::after {
+    border-color: @primary-color !important;
+    -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+a.btn-primary-color:hover::before, div.btn-primary-color:hover::before, .btn-primary-color:hover::before, button.btn-primary-color:hover::before, button.btn-primary-color:hover::before {
+    -webkit-transition-delay: 0s, 0s, 0.25s;
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+a.btn-primary-color:hover::after, div.btn-primary-color:hover::after, .btn-primary-color:hover::after, button.btn-primary-color:hover::after, button.btn-primary-color:hover::after {
+    -webkit-transition-delay: 0s, 0.25s, 0s;
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+/* PULSANTI TONDI CARRELLO DARK (@primary-color)*/
+.carrello-primary-color {
+    background-color: @primary-color !important;
+}
+
+.carrello-primary-color:hover {
+    background-color: @white-color !important;
+    border-color: @primary-color !important;
+    color: @black-color !important;
+}
+
+.button-carrello-animate {
+    border: 0px solid @primary-color !important;
+    background-color: @primary-color !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @primary-color;
+}
+
+.button-carrello-animate:hover {
+    background-color: @white-color !important;
+    border-color: @primary-color !important;
+    color: @black-color !important;
+    box-shadow: inset 0 0 0 @bd-bottom2-width @primary-color;
+}
+
+.count {
+    border: 1px solid @primary-color !important;
+}
 
 
 /* BOTTONE TRASPARENTE */

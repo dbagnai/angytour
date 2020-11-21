@@ -85,25 +85,25 @@
             ---------------------------------------------->
             <div class="col-12 col-lg-4 mt-3 mb-0 mt-lg-0 mb-lg-3">
                 <div class="position-sticky" style="top:120px">
-                    <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
+                    <div itemprop="name" class="w-100 text-center text-lg-left mb-0 mb-lg-3">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
                             <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
                         </a>
                     </div>
-                    <!-- RIQUADRO INFO SOTTO TITOLO -->
-                    <div class="w-100 mt-3"></div>
-                    <!--riquadro hai bisogno di aiuto-->
-                    <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
-                        <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                    <div class="d-none d-lg-block mb-4">
+                        <!-- RIQUADRO INFO SOTTO TITOLO -->
+                        <div class="w-100 mt-3"></div>
+                        <!--riquadro hai bisogno di aiuto-->
+                        <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                            <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                        </div>
+                        <!-- pulsanti info utili 1 -->
+                        <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
                     </div>
-                    <!-- pulsanti info utili 1 -->
-                    <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
                     <!-- pulsanti social -->
-                    <p>
                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                        <div class="addthis_inline_share_toolbox py-3 py-md-0 mx-auto"></div>
-                    </p>
+                        <div class="addthis_inline_share_toolbox py-3 py-md-0 mx-auto text-center text-lg-left"></div>
                 </div>
             </div>
         </div>
@@ -146,21 +146,35 @@
                     </div>
                     <!--INFORMAZIONI PER ACQUISTO-->
                     <!--<div class="card">
-                        <div class="card-header" id="headingThree1">
-                            <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
-                                <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                                    <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
-                                </h4>
-                            </a>
-                        </div>
-                        <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
-                            <div class="card-body px-3 pt-3 pb-0">
-                                <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
-                            </div>
-                        </div>
-                    </div>-->
+            <div class="card-header" id="headingThree1">
+                <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
+                    <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                    </h4>
+                </a>
+            </div>
+            <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
+                <div class="card-body px-3 pt-3 pb-0">
+                    <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
+                </div>
+            </div>
+        </div>-->
                 </div>
 
+
+                <!---------------------------------------------
+                ------ COLONNA 2 TITOLO + CALL TO ACTION MOBILE ------
+                ---------------------------------------------->
+                <div class="col-12 d-block d-lg-none px-0 mb-4 mt-0">
+                        <!-- RIQUADRO INFO SOTTO TITOLO -->
+                        <div class="w-100"></div>
+                        <!--riquadro hai bisogno di aiuto-->
+                        <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                            <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                        </div>
+                        <!-- pulsanti info utili 1 -->
+                        <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                </div>
 
             </div>
         </div>
