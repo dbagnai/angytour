@@ -1401,6 +1401,9 @@ public class CommonPage : Page
                 }
             }
         }
+
+
+
         return valoresconto;
     }
 
